@@ -1,0 +1,162 @@
+[
+  {
+    "id": "sta_yamanote_tokyo",
+    "name": "東京",
+    "latitude": 35.681382,
+    "longitude": 139.766084,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_yamanote_shinjuku",
+    "name": "新宿",
+    "latitude": 35.689487,
+    "longitude": 139.700565,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_yamanote_shibuya",
+    "name": "渋谷",
+    "latitude": 35.658517,
+    "longitude": 139.701334,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_yamanote_ikebukuro",
+    "name": "池袋",
+    "latitude": 35.728926,
+    "longitude": 139.71038,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_yamanote_ueno",
+    "name": "上野",
+    "latitude": 35.713765,
+    "longitude": 139.777254,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_yamanote_akihabara",
+    "name": "秋葉原",
+    "latitude": 35.698683,
+    "longitude": 139.774219,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_yamanote_shinagawa",
+    "name": "品川",
+    "latitude": 35.628616,
+    "longitude": 139.73891,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_yamanote_harajuku",
+    "name": "原宿",
+    "latitude": 35.670646,
+    "longitude": 139.702687,
+    "line_name": "山手線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_chuo_kichijoji",
+    "name": "吉祥寺",
+    "latitude": 35.702564,
+    "longitude": 139.580136,
+    "line_name": "中央線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_chuo_nakano",
+    "name": "中野",
+    "latitude": 35.705763,
+    "longitude": 139.665861,
+    "line_name": "中央線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_chuo_kokubunji",
+    "name": "国分寺",
+    "latitude": 35.710021,
+    "longitude": 139.462302,
+    "line_name": "中央線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_tozai_otemachi",
+    "name": "大手町",
+    "latitude": 35.686011,
+    "longitude": 139.766115,
+    "line_name": "東西線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_tozai_nakano",
+    "name": "中野（東西線）",
+    "latitude": 35.707063,
+    "longitude": 139.66522,
+    "line_name": "東西線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_ginza_asakusa",
+    "name": "浅草",
+    "latitude": 35.710637,
+    "longitude": 139.797748,
+    "line_name": "銀座線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_ginza_ueno",
+    "name": "上野（銀座線）",
+    "latitude": 35.711385,
+    "longitude": 139.776038,
+    "line_name": "銀座線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_ginza_ginza",
+    "name": "銀座",
+    "latitude": 35.671625,
+    "longitude": 139.764479,
+    "line_name": "銀座線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_hibiya_roppongi",
+    "name": "六本木",
+    "latitude": 35.663321,
+    "longitude": 139.729382,
+    "line_name": "日比谷線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_hibiya_ebisu",
+    "name": "恵比寿",
+    "latitude": 35.646622,
+    "longitude": 139.710084,
+    "line_name": "日比谷線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_hanzomon_omotesando",
+    "name": "表参道",
+    "latitude": 35.665245,
+    "longitude": 139.712471,
+    "line_name": "半蔵門線",
+    "prefecture": "東京都"
+  },
+  {
+    "id": "sta_fukutoshin_meijishingumae",
+    "name": "明治神宮前",
+    "latitude": 35.669932,
+    "longitude": 139.702919,
+    "line_name": "副都心線",
+    "prefecture": "東京都"
+  }
+]

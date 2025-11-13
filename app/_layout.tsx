@@ -1,0 +1,64 @@
+import { useEffect, useState } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import 'react-native-reanimated';
+import '../global.css';
+
+import { AppProviders } from '@/shared/lib/providers';
+import { initDatabase } from '@/shared/lib/init';
+
+export default function RootLayout() {
+  const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    // データベース初期化
+    initDatabase()
+      .then(() => setIsReady(true))
+      .catch((err) => {
+        console.error('初期化エラー:', err);
+        setError(err);
+      });
+  }, []);
+
+  // 初期化中
+  if (!isReady && !error) {
+    return (
+      <View className="flex-1 justify-center items-center bg-white">
+        <ActivityIndicator size="large" color="#007AFF" />
+        <Text className="mt-4 text-base text-gray-600">初期化中...</Text>
+      </View>
+    );
+  }
+
+  // エラー
+  if (error) {
+    return (
+      <View className="flex-1 justify-center items-center bg-white p-5">
+        <Text className="text-xl font-bold text-red-500 mb-2">初期化エラー</Text>
+        <Text className="text-sm text-gray-600 text-center">{error.message}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <AppProviders>
+      <ThemeProvider value={DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="auth/auth-required"
+            options={{
+              presentation: 'modal',
+              headerShown: false,
+            }}
+          />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </AppProviders>
+  );
+}
+

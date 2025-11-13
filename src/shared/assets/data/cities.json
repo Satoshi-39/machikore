@@ -1,0 +1,233 @@
+[
+  {
+    "id": "chiyoda",
+    "prefecture_id": "tokyo",
+    "name": "千代田区",
+    "name_kana": "ちよだく",
+    "type": "区"
+  },
+  {
+    "id": "chuo",
+    "prefecture_id": "tokyo",
+    "name": "中央区",
+    "name_kana": "ちゅうおうく",
+    "type": "区"
+  },
+  {
+    "id": "minato",
+    "prefecture_id": "tokyo",
+    "name": "港区",
+    "name_kana": "みなとく",
+    "type": "区"
+  },
+  {
+    "id": "shinjuku",
+    "prefecture_id": "tokyo",
+    "name": "新宿区",
+    "name_kana": "しんじゅくく",
+    "type": "区"
+  },
+  {
+    "id": "bunkyo",
+    "prefecture_id": "tokyo",
+    "name": "文京区",
+    "name_kana": "ぶんきょうく",
+    "type": "区"
+  },
+  {
+    "id": "taito",
+    "prefecture_id": "tokyo",
+    "name": "台東区",
+    "name_kana": "たいとうく",
+    "type": "区"
+  },
+  {
+    "id": "sumida",
+    "prefecture_id": "tokyo",
+    "name": "墨田区",
+    "name_kana": "すみだく",
+    "type": "区"
+  },
+  {
+    "id": "koto",
+    "prefecture_id": "tokyo",
+    "name": "江東区",
+    "name_kana": "こうとうく",
+    "type": "区"
+  },
+  {
+    "id": "shinagawa",
+    "prefecture_id": "tokyo",
+    "name": "品川区",
+    "name_kana": "しながわく",
+    "type": "区"
+  },
+  {
+    "id": "meguro",
+    "prefecture_id": "tokyo",
+    "name": "目黒区",
+    "name_kana": "めぐろく",
+    "type": "区"
+  },
+  {
+    "id": "ota",
+    "prefecture_id": "tokyo",
+    "name": "大田区",
+    "name_kana": "おおたく",
+    "type": "区"
+  },
+  {
+    "id": "setagaya",
+    "prefecture_id": "tokyo",
+    "name": "世田谷区",
+    "name_kana": "せたがやく",
+    "type": "区"
+  },
+  {
+    "id": "shibuya",
+    "prefecture_id": "tokyo",
+    "name": "渋谷区",
+    "name_kana": "しぶやく",
+    "type": "区"
+  },
+  {
+    "id": "nakano",
+    "prefecture_id": "tokyo",
+    "name": "中野区",
+    "name_kana": "なかのく",
+    "type": "区"
+  },
+  {
+    "id": "suginami",
+    "prefecture_id": "tokyo",
+    "name": "杉並区",
+    "name_kana": "すぎなみく",
+    "type": "区"
+  },
+  {
+    "id": "toshima",
+    "prefecture_id": "tokyo",
+    "name": "豊島区",
+    "name_kana": "としまく",
+    "type": "区"
+  },
+  {
+    "id": "kita",
+    "prefecture_id": "tokyo",
+    "name": "北区",
+    "name_kana": "きたく",
+    "type": "区"
+  },
+  {
+    "id": "arakawa",
+    "prefecture_id": "tokyo",
+    "name": "荒川区",
+    "name_kana": "あらかわく",
+    "type": "区"
+  },
+  {
+    "id": "itabashi",
+    "prefecture_id": "tokyo",
+    "name": "板橋区",
+    "name_kana": "いたばしく",
+    "type": "区"
+  },
+  {
+    "id": "nerima",
+    "prefecture_id": "tokyo",
+    "name": "練馬区",
+    "name_kana": "ねりまく",
+    "type": "区"
+  },
+  {
+    "id": "adachi",
+    "prefecture_id": "tokyo",
+    "name": "足立区",
+    "name_kana": "あだちく",
+    "type": "区"
+  },
+  {
+    "id": "katsushika",
+    "prefecture_id": "tokyo",
+    "name": "葛飾区",
+    "name_kana": "かつしかく",
+    "type": "区"
+  },
+  {
+    "id": "edogawa",
+    "prefecture_id": "tokyo",
+    "name": "江戸川区",
+    "name_kana": "えどがわく",
+    "type": "区"
+  },
+  {
+    "id": "yokohama",
+    "prefecture_id": "kanagawa",
+    "name": "横浜市",
+    "name_kana": "よこはまし",
+    "type": "市"
+  },
+  {
+    "id": "kawasaki",
+    "prefecture_id": "kanagawa",
+    "name": "川崎市",
+    "name_kana": "かわさきし",
+    "type": "市"
+  },
+  {
+    "id": "saitama",
+    "prefecture_id": "saitama",
+    "name": "さいたま市",
+    "name_kana": "さいたまし",
+    "type": "市"
+  },
+  {
+    "id": "chiba",
+    "prefecture_id": "chiba",
+    "name": "千葉市",
+    "name_kana": "ちばし",
+    "type": "市"
+  },
+  {
+    "id": "osaka",
+    "prefecture_id": "osaka",
+    "name": "大阪市",
+    "name_kana": "おおさかし",
+    "type": "市"
+  },
+  {
+    "id": "kyoto",
+    "prefecture_id": "kyoto",
+    "name": "京都市",
+    "name_kana": "きょうとし",
+    "type": "市"
+  },
+  {
+    "id": "kobe",
+    "prefecture_id": "hyogo",
+    "name": "神戸市",
+    "name_kana": "こうべし",
+    "type": "市"
+  },
+  {
+    "id": "nagoya",
+    "prefecture_id": "aichi",
+    "name": "名古屋市",
+    "name_kana": "なごやし",
+    "type": "市"
+  },
+  {
+    "id": "fukuoka",
+    "prefecture_id": "fukuoka",
+    "name": "福岡市",
+    "name_kana": "ふくおかし",
+    "type": "市"
+  },
+  {
+    "id": "sapporo",
+    "prefecture_id": "hokkaido",
+    "name": "札幌市",
+    "name_kana": "さっぽろし",
+    "type": "市"
+  }
+]

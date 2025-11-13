@@ -1,0 +1,252 @@
+[
+  {
+    "id": "machi_chiyoda_kayabacho",
+    "name": "茅場町",
+    "latitude": 35.68055,
+    "longitude": 139.77694,
+    "line_name": "東京メトロ日比谷線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "chuo"
+  },
+  {
+    "id": "machi_kita_higashijujo",
+    "name": "東十条",
+    "latitude": 35.75333,
+    "longitude": 139.72583,
+    "line_name": "JR京浜東北線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "kita"
+  },
+  {
+    "id": "machi_shibuya_ebisu",
+    "name": "恵比寿",
+    "latitude": 35.64669,
+    "longitude": 139.71028,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "shibuya"
+  },
+  {
+    "id": "machi_shibuya_daikanyama",
+    "name": "代官山",
+    "latitude": 35.64972,
+    "longitude": 139.70389,
+    "line_name": "東急東横線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "shibuya"
+  },
+  {
+    "id": "machi_setagaya_shimokitazawa",
+    "name": "下北沢",
+    "latitude": 35.66111,
+    "longitude": 139.66861,
+    "line_name": "小田急小田原線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "setagaya"
+  },
+  {
+    "id": "machi_setagaya_sangenjaya",
+    "name": "三軒茶屋",
+    "latitude": 35.64361,
+    "longitude": 139.66944,
+    "line_name": "東急田園都市線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "setagaya"
+  },
+  {
+    "id": "machi_meguro_nakameguro",
+    "name": "中目黒",
+    "latitude": 35.64444,
+    "longitude": 139.69889,
+    "line_name": "東急東横線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "meguro"
+  },
+  {
+    "id": "machi_meguro_jiyugaoka",
+    "name": "自由が丘",
+    "latitude": 35.60778,
+    "longitude": 139.66861,
+    "line_name": "東急東横線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "meguro"
+  },
+  {
+    "id": "machi_taito_asakusa",
+    "name": "浅草",
+    "latitude": 35.71167,
+    "longitude": 139.79667,
+    "line_name": "東京メトロ銀座線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "taito"
+  },
+  {
+    "id": "machi_taito_ueno",
+    "name": "上野",
+    "latitude": 35.71389,
+    "longitude": 139.77722,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "taito"
+  },
+  {
+    "id": "machi_sumida_oshiage",
+    "name": "押上",
+    "latitude": 35.71028,
+    "longitude": 139.8125,
+    "line_name": "東京メトロ半蔵門線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "sumida"
+  },
+  {
+    "id": "machi_koto_kiba",
+    "name": "木場",
+    "latitude": 35.67028,
+    "longitude": 139.80556,
+    "line_name": "東京メトロ東西線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "koto"
+  },
+  {
+    "id": "machi_nakano_nakano",
+    "name": "中野",
+    "latitude": 35.70583,
+    "longitude": 139.66556,
+    "line_name": "JR中央線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "nakano"
+  },
+  {
+    "id": "machi_suginami_koenji",
+    "name": "高円寺",
+    "latitude": 35.70528,
+    "longitude": 139.64917,
+    "line_name": "JR中央線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "suginami"
+  },
+  {
+    "id": "machi_suginami_ogikubo",
+    "name": "荻窪",
+    "latitude": 35.70472,
+    "longitude": 139.61972,
+    "line_name": "JR中央線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "suginami"
+  },
+  {
+    "id": "machi_toshima_ikebukuro",
+    "name": "池袋",
+    "latitude": 35.73028,
+    "longitude": 139.71083,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "toshima"
+  },
+  {
+    "id": "machi_toshima_otsuka",
+    "name": "大塚",
+    "latitude": 35.73111,
+    "longitude": 139.72861,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "toshima"
+  },
+  {
+    "id": "machi_adachi_kitasenju",
+    "name": "北千住",
+    "latitude": 35.74889,
+    "longitude": 139.80472,
+    "line_name": "東京メトロ千代田線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "adachi"
+  },
+  {
+    "id": "machi_katsushika_kameari",
+    "name": "亀有",
+    "latitude": 35.76111,
+    "longitude": 139.84833,
+    "line_name": "JR常磐線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "katsushika"
+  },
+  {
+    "id": "machi_chiyoda_tokyo",
+    "name": "東京",
+    "latitude": 35.68139,
+    "longitude": 139.76611,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "chiyoda"
+  },
+  {
+    "id": "machi_shinjuku_shinjuku",
+    "name": "新宿",
+    "latitude": 35.68944,
+    "longitude": 139.70056,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "shinjuku"
+  },
+  {
+    "id": "machi_shibuya_shibuya",
+    "name": "渋谷",
+    "latitude": 35.65861,
+    "longitude": 139.70139,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "shibuya"
+  },
+  {
+    "id": "machi_shibuya_harajuku",
+    "name": "原宿",
+    "latitude": 35.67056,
+    "longitude": 139.70278,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "shibuya"
+  },
+  {
+    "id": "machi_shinagawa_shinagawa",
+    "name": "品川",
+    "latitude": 35.62889,
+    "longitude": 139.74028,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "shinagawa"
+  },
+  {
+    "id": "machi_shinagawa_gotanda",
+    "name": "五反田",
+    "latitude": 35.62583,
+    "longitude": 139.72361,
+    "line_name": "JR山手線",
+    "prefecture": "東京都",
+    "prefecture_id": "tokyo",
+    "city_id": "shinagawa"
+  }
+]
