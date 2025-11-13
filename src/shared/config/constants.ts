@@ -6,7 +6,7 @@
 // アプリ情報
 // ===============================
 
-export const APP_NAME = '街ログ';
+export const APP_NAME = '街コレ';
 export const APP_VERSION = '1.0.0';
 
 // ===============================

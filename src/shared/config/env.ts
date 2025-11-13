@@ -45,7 +45,7 @@ export const ENV = {
   // API
   API_BASE_URL: getEnvVar(
     'EXPO_PUBLIC_API_BASE_URL',
-    'https://api.machilog.app'
+    'https://api.machikore.app'
   ),
 
   // 環境

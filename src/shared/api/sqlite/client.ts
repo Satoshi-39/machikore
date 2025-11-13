@@ -8,7 +8,7 @@ import * as SQLite from 'expo-sqlite';
 // データベース接続
 // ===============================
 
-const DB_NAME = 'machilog.db';
+const DB_NAME = 'machikore.db';
 
 let db: SQLite.SQLiteDatabase | null = null;
 

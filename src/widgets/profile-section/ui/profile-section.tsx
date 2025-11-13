@@ -22,8 +22,8 @@ export function ProfileSection({ userId }: ProfileSectionProps) {
   const { data: recentVisits = [] } = useRecentVisits(userId ?? '', 10);
 
   // 型安全な値の抽出
-  const username: string = (user?.username as string | undefined) ?? 'machilog_user';
-  const displayName: string = (user?.display_name as string | null | undefined) ?? 'まちログユーザー';
+  const username: string = (user?.username as string | undefined) ?? 'machikore_user';
+  const displayName: string = (user?.display_name as string | null | undefined) ?? 'まちコレユーザー';
   const bio: string = (user?.bio as string | null | undefined) ?? '街を巡るのが好きです。色々な場所を訪れて、思い出を記録しています。';
   const avatarUrl: string | undefined = (user?.avatar_url as string | null | undefined) ?? undefined;
 

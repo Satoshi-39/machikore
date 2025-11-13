@@ -1,4 +1,4 @@
-# 街ログ - ストレージ戦略ガイド
+# 街コレ - ストレージ戦略ガイド
 
 ## 目次
 - [1. ストレージ選択フローチャート](#1-ストレージ選択フローチャート)
@@ -108,7 +108,7 @@ async function clearSession() {
 ```typescript
 import * as SQLite from 'expo-sqlite';
 
-const db = await SQLite.openDatabaseAsync('machilog.db');
+const db = await SQLite.openDatabaseAsync('machikore.db');
 
 // テーブル作成
 await db.execAsync(`

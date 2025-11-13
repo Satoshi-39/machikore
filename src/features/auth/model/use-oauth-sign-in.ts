@@ -53,7 +53,7 @@ export function useOAuthSignIn(): UseOAuthSignInReturn {
       // 2. ブラウザでOAuthページを開く
       const authResult = await WebBrowser.openAuthSessionAsync(
         result.data.url,
-        'machilog://auth/callback'
+        'machikore://auth/callback'
       );
 
       if (authResult.type === 'success') {

@@ -355,7 +355,7 @@ export async function signInWithGoogle(): Promise<Result<{ url: string }>> {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'machilog://auth/callback',
+        redirectTo: 'machikore://auth/callback',
         skipBrowserRedirect: true,
       },
     });
@@ -391,7 +391,7 @@ export async function signInWithApple(): Promise<Result<{ url: string }>> {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'apple',
       options: {
-        redirectTo: 'machilog://auth/callback',
+        redirectTo: 'machikore://auth/callback',
         skipBrowserRedirect: true,
       },
     });

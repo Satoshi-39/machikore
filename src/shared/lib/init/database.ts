@@ -27,7 +27,7 @@ export async function initDatabase(): Promise<void> {
 
     // データベースパスをログ出力
     if (FileSystem.documentDirectory) {
-      const dbPath = `${FileSystem.documentDirectory}SQLite/machilog.db`;
+      const dbPath = `${FileSystem.documentDirectory}SQLite/machikore.db`;
       console.log('📂 データベースパス:', dbPath);
     }
 

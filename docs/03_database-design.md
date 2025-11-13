@@ -1,4 +1,4 @@
-# 街ログ - データベース設計書
+# 街コレ - データベース設計書
 
 ## 目次
 - [1. データベース構成概要](#1-データベース構成概要)
@@ -905,7 +905,7 @@ async function exportDatabase(): Promise<string> {
 // SQLCipherを使用した暗号化
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabase('machilog.db', {
+const db = SQLite.openDatabase('machikore.db', {
   encryption: true,
   key: await getEncryptionKey(),
 });
