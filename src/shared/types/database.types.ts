@@ -103,6 +103,8 @@ export interface MapRow {
   category: string | null;
   tags: string | null; // JSON string array
   is_public: 0 | 1;
+  is_default: 0 | 1;
+  is_official: 0 | 1;
   thumbnail_url: string | null;
   spots_count: number;
   likes_count: number;
@@ -119,6 +121,7 @@ export interface SpotRow {
   id: string;
   map_id: string;
   user_id: string;
+  machi_id: string;
   name: string;
   address: string | null;
   latitude: number;
@@ -133,7 +136,7 @@ export interface SpotRow {
   synced_at: string | null;
   is_synced: 0 | 1;
 }
-export type SpotInsert = Partial<SpotRow> & Pick<SpotRow, 'id' | 'map_id' | 'user_id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
+export type SpotInsert = Partial<SpotRow> & Pick<SpotRow, 'id' | 'map_id' | 'user_id' | 'machi_id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
 export type SpotUpdate = Partial<Omit<SpotRow, 'id' | 'created_at'>>;
 
 // Visits (マップ訪問記録)
@@ -227,13 +230,29 @@ export type BookmarkUpdate = Partial<Omit<BookmarkRow, 'id' | 'created_at'>>;
 // ===============================
 
 /**
+ * Region (地方マスター)
+ */
+export interface RegionRow {
+  id: string;              // "hokkaido", "tohoku", "kanto"
+  name: string;            // "北海道", "東北", "関東"
+  name_kana: string;       // "ほっかいどう", "とうほく"
+  name_translations: string | null; // JSON: {"en": "Hokkaido", "zh": "北海道"}
+  country_code: string;    // "jp"
+  display_order: number;   // 1, 2, 3...
+  created_at: string;
+  updated_at: string;
+}
+
+/**
  * Prefecture (都道府県マスター)
  */
 export interface PrefectureRow {
-  id: string;          // "tokyo", "kanagawa"
-  name: string;        // "東京都", "神奈川県"
-  name_kana: string;   // "とうきょうと"
-  region: string;      // "関東", "近畿"
+  id: string;              // "tokyo", "kanagawa"
+  name: string;            // "東京都", "神奈川県"
+  name_kana: string;       // "とうきょうと"
+  name_translations: string | null; // JSON: {"en": "Tokyo", "zh": "东京"}
+  region_id: string | null; // "kanto", "kinki" (外部キー → regions.id) - Optional for countries without region concept
+  country_code: string;    // "jp"
   created_at: string;
   updated_at: string;
 }
@@ -242,11 +261,13 @@ export interface PrefectureRow {
  * City (市区町村マスター)
  */
 export interface CityRow {
-  id: string;            // "shibuya", "minato"
-  prefecture_id: string; // "tokyo"
-  name: string;          // "渋谷区", "港区"
-  name_kana: string;     // "しぶやく"
-  type: string;          // "区", "市", "町", "村"
+  id: string;              // "shibuya", "minato"
+  prefecture_id: string;   // "tokyo"
+  name: string;            // "渋谷区", "港区"
+  name_kana: string;       // "しぶやく"
+  name_translations: string | null; // JSON: {"en": "Shibuya", "zh": "涩谷"}
+  type: string;            // "区", "市", "町", "村"
+  country_code: string;    // "jp"
   created_at: string;
   updated_at: string;
 }
@@ -258,12 +279,20 @@ export interface CityRow {
 export interface MachiRow {
   id: string;
   name: string;
+  name_kana: string;
+  name_translations: string | null; // JSON: {"en": "Shibuya", "zh": "涩谷"}
   latitude: number;
   longitude: number;
-  line_name: string;
-  prefecture_id: string;     // 追加: "tokyo", "kanagawa"
-  city_id: string | null;    // 追加: "shibuya", "minato"
-  prefecture: string;        // 後方互換: "東京都"（将来削除予定）
+  lines: string | null;      // JSON array: [{"ja": "JR山手線", "en": "JR Yamanote Line"}, ...]
+  prefecture_id: string;     // "tokyo", "kanagawa"
+  city_id: string | null;    // "shibuya", "minato"
+  country_code: string;      // "jp"
+  prefecture_name: string;   // "東京都" (denormalized for performance)
+  prefecture_name_translations: string | null; // JSON: {"en": "Tokyo", "zh": "东京"}
+  city_name: string | null;  // "渋谷区" (denormalized for performance)
+  city_name_translations: string | null; // JSON: {"en": "Shibuya", "zh": "涩谷"}
+  created_at: string;
+  updated_at: string;
 }
 
 /**

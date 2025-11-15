@@ -19,13 +19,15 @@ export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
     for (const prefecture of prefectures) {
       db.runSync(
         `INSERT OR REPLACE INTO prefectures (
-          id, name, name_kana, region, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?)`,
+          id, name, name_kana, name_translations, region_id, country_code, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           prefecture.id,
           prefecture.name,
           prefecture.name_kana,
-          prefecture.region,
+          prefecture.name_translations,
+          prefecture.region_id,
+          prefecture.country_code,
           prefecture.created_at,
           prefecture.updated_at,
         ]
@@ -72,23 +74,12 @@ export function getAllPrefectures(): PrefectureRow[] {
 }
 
 /**
- * 地方別に都道府県を取得
+ * 地方別に都道府県を取得（region_idで）
  */
-export function getPrefecturesByRegion(region: string): PrefectureRow[] {
+export function getPrefecturesByRegionId(regionId: string): PrefectureRow[] {
   const db = getDatabase();
   return db.getAllSync<PrefectureRow>(
-    'SELECT * FROM prefectures WHERE region = ? ORDER BY id',
-    [region]
+    'SELECT * FROM prefectures WHERE region_id = ? ORDER BY id',
+    [regionId]
   );
-}
-
-/**
- * 全地方を取得（重複なし）
- */
-export function getAllRegions(): string[] {
-  const db = getDatabase();
-  const results = db.getAllSync<{ region: string }>(
-    'SELECT DISTINCT region FROM prefectures ORDER BY region'
-  );
-  return results.map((r) => r.region);
 }

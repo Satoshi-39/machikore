@@ -19,14 +19,16 @@ export function bulkInsertCities(cities: CityRow[]): void {
     for (const city of cities) {
       db.runSync(
         `INSERT OR REPLACE INTO cities (
-          id, prefecture_id, name, name_kana, type, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          id, prefecture_id, name, name_kana, name_translations, type, country_code, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           city.id,
           city.prefecture_id,
           city.name,
           city.name_kana,
+          city.name_translations,
           city.type,
+          city.country_code,
           city.created_at,
           city.updated_at,
         ]

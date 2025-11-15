@@ -24,20 +24,37 @@ CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 
 -- ===============================
--- 2. 都道府県テーブル（マスターデータ）
+-- 2. 地方テーブル（マスターデータ）
+-- ===============================
+
+CREATE TABLE IF NOT EXISTS regions (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  name_kana TEXT NOT NULL,
+  name_translations JSONB,
+  country_code TEXT NOT NULL DEFAULT 'jp',
+  display_order INTEGER NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- ===============================
+-- 3. 都道府県テーブル（マスターデータ）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS prefectures (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL UNIQUE,
   name_kana TEXT NOT NULL,
-  region TEXT NOT NULL,
+  name_translations JSONB,
+  region_id TEXT REFERENCES regions(id),
+  country_code TEXT NOT NULL DEFAULT 'jp',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- ===============================
--- 3. 市区町村テーブル（マスターデータ）
+-- 4. 市区町村テーブル（マスターデータ）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS cities (
@@ -45,7 +62,9 @@ CREATE TABLE IF NOT EXISTS cities (
   prefecture_id TEXT NOT NULL REFERENCES prefectures(id),
   name TEXT NOT NULL,
   name_kana TEXT NOT NULL,
-  type TEXT NOT NULL CHECK (type IN ('区', '市', '町', '村')),
+  name_translations JSONB,
+  type TEXT NOT NULL,
+  country_code TEXT NOT NULL DEFAULT 'jp',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -54,28 +73,36 @@ CREATE TABLE IF NOT EXISTS cities (
 CREATE INDEX IF NOT EXISTS idx_cities_prefecture_id ON cities(prefecture_id);
 
 -- ===============================
--- 4. 街テーブル（マスターデータ）
+-- 5. 街テーブル（マスターデータ）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS machi (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
+  name_kana TEXT NOT NULL,
+  name_translations JSONB,
   latitude DOUBLE PRECISION NOT NULL,
   longitude DOUBLE PRECISION NOT NULL,
-  line_name TEXT NOT NULL,
+  lines JSONB,
   prefecture_id TEXT NOT NULL REFERENCES prefectures(id),
   city_id TEXT REFERENCES cities(id),
-  prefecture TEXT NOT NULL
+  country_code TEXT NOT NULL DEFAULT 'jp',
+  prefecture_name TEXT NOT NULL,
+  prefecture_name_translations JSONB,
+  city_name TEXT,
+  city_name_translations JSONB,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- インデックス作成
 CREATE INDEX IF NOT EXISTS idx_machi_name ON machi(name);
-CREATE INDEX IF NOT EXISTS idx_machi_line ON machi(line_name);
 CREATE INDEX IF NOT EXISTS idx_machi_prefecture_id ON machi(prefecture_id);
 CREATE INDEX IF NOT EXISTS idx_machi_city_id ON machi(city_id);
+CREATE INDEX IF NOT EXISTS idx_machi_country_code ON machi(country_code);
 
 -- ===============================
--- 5. マップテーブル
+-- 6. マップテーブル
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS maps (
@@ -86,6 +113,8 @@ CREATE TABLE IF NOT EXISTS maps (
   category TEXT,
   tags JSONB, -- JSON array of tags
   is_public BOOLEAN DEFAULT FALSE,
+  is_default BOOLEAN DEFAULT FALSE,
+  is_official BOOLEAN DEFAULT FALSE,
   thumbnail_url TEXT,
   spots_count INTEGER DEFAULT 0,
   likes_count INTEGER DEFAULT 0,
@@ -100,13 +129,14 @@ CREATE INDEX IF NOT EXISTS idx_maps_created_at ON maps(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_maps_tags ON maps USING GIN(tags);
 
 -- ===============================
--- 6. スポットテーブル
+-- 7. スポットテーブル
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS spots (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   map_id UUID NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES users(id),
+  machi_id TEXT NOT NULL REFERENCES machi(id),
   name TEXT NOT NULL,
   address TEXT,
   latitude DOUBLE PRECISION NOT NULL,
@@ -123,10 +153,11 @@ CREATE TABLE IF NOT EXISTS spots (
 -- インデックス作成
 CREATE INDEX IF NOT EXISTS idx_spots_map_id ON spots(map_id);
 CREATE INDEX IF NOT EXISTS idx_spots_user_id ON spots(user_id);
+CREATE INDEX IF NOT EXISTS idx_spots_machi_id ON spots(machi_id);
 CREATE INDEX IF NOT EXISTS idx_spots_created_at ON spots(created_at DESC);
 
 -- ===============================
--- 7. 訪問記録テーブル（マップ訪問）
+-- 8. 訪問記録テーブル（マップ訪問）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS visits (
@@ -145,7 +176,7 @@ CREATE INDEX IF NOT EXISTS idx_visits_map_id ON visits(map_id);
 CREATE INDEX IF NOT EXISTS idx_visits_visited_at ON visits(visited_at);
 
 -- ===============================
--- 8. フォローテーブル
+-- 9. フォローテーブル
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS follows (
@@ -161,7 +192,7 @@ CREATE INDEX IF NOT EXISTS idx_follows_follower_id ON follows(follower_id);
 CREATE INDEX IF NOT EXISTS idx_follows_followee_id ON follows(followee_id);
 
 -- ===============================
--- 9. コメントテーブル（マップとスポット用）
+-- 10. コメントテーブル（マップとスポット用）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS comments (
@@ -185,7 +216,7 @@ CREATE INDEX IF NOT EXISTS idx_comments_spot_id ON comments(spot_id);
 CREATE INDEX IF NOT EXISTS idx_comments_created_at ON comments(created_at DESC);
 
 -- ===============================
--- 10. ブックマークテーブル（マップとスポット用）
+-- 11. ブックマークテーブル（マップとスポット用）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS bookmarks (
@@ -207,7 +238,7 @@ CREATE INDEX IF NOT EXISTS idx_bookmarks_map_id ON bookmarks(map_id);
 CREATE INDEX IF NOT EXISTS idx_bookmarks_spot_id ON bookmarks(spot_id);
 
 -- ===============================
--- 11. 画像テーブル（スポット用）
+-- 12. 画像テーブル（スポット用）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS images (
@@ -227,7 +258,7 @@ CREATE TABLE IF NOT EXISTS images (
 CREATE INDEX IF NOT EXISTS idx_images_spot_id ON images(spot_id);
 
 -- ===============================
--- 12. いいねテーブル（マップとスポット用）
+-- 13. いいねテーブル（マップとスポット用）
 -- ===============================
 
 CREATE TABLE IF NOT EXISTS likes (

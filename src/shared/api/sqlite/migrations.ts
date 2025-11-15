@@ -33,6 +33,7 @@ export function initializeDatabase(): void {
     db.execSync('DROP TABLE IF EXISTS machi;');
     db.execSync('DROP TABLE IF EXISTS cities;');
     db.execSync('DROP TABLE IF EXISTS prefectures;');
+    db.execSync('DROP TABLE IF EXISTS regions;');
     // 削除された古いテーブル
     db.execSync('DROP TABLE IF EXISTS posts;');
     db.execSync('DROP TABLE IF EXISTS schedules;');
@@ -72,26 +73,45 @@ export function initializeDatabase(): void {
       ON users(is_synced);
     `);
 
-    // 2. 都道府県テーブル（マスターデータ）
+    // 2. 地方テーブル（マスターデータ）
     db.execSync(`
-      CREATE TABLE IF NOT EXISTS prefectures (
+      CREATE TABLE IF NOT EXISTS regions (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL UNIQUE,
         name_kana TEXT NOT NULL,
-        region TEXT NOT NULL,
+        name_translations TEXT,
+        country_code TEXT NOT NULL DEFAULT 'jp',
+        display_order INTEGER NOT NULL,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL
       );
     `);
 
-    // 3. 市区町村テーブル（マスターデータ）
+    // 3. 都道府県テーブル（マスターデータ）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS prefectures (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL UNIQUE,
+        name_kana TEXT NOT NULL,
+        name_translations TEXT,
+        region_id TEXT,
+        country_code TEXT NOT NULL DEFAULT 'jp',
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        FOREIGN KEY (region_id) REFERENCES regions(id)
+      );
+    `);
+
+    // 4. 市区町村テーブル（マスターデータ）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS cities (
         id TEXT PRIMARY KEY,
         prefecture_id TEXT NOT NULL,
         name TEXT NOT NULL,
         name_kana TEXT NOT NULL,
-        type TEXT NOT NULL CHECK (type IN ('区', '市', '町', '村')),
+        name_translations TEXT,
+        type TEXT NOT NULL,
+        country_code TEXT NOT NULL DEFAULT 'jp',
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         FOREIGN KEY (prefecture_id) REFERENCES prefectures(id)
@@ -104,17 +124,25 @@ export function initializeDatabase(): void {
       ON cities(prefecture_id);
     `);
 
-    // 4. 街テーブル（マスターデータ）
+    // 5. 街テーブル（マスターデータ）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS machi (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
+        name_kana TEXT NOT NULL,
+        name_translations TEXT,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,
-        line_name TEXT NOT NULL,
+        lines TEXT,
         prefecture_id TEXT NOT NULL,
         city_id TEXT,
-        prefecture TEXT NOT NULL,
+        country_code TEXT NOT NULL DEFAULT 'jp',
+        prefecture_name TEXT NOT NULL,
+        prefecture_name_translations TEXT,
+        city_name TEXT,
+        city_name_translations TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
         FOREIGN KEY (prefecture_id) REFERENCES prefectures(id),
         FOREIGN KEY (city_id) REFERENCES cities(id)
       );
@@ -126,10 +154,6 @@ export function initializeDatabase(): void {
       ON machi(name);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_machi_line
-      ON machi(line_name);
-    `);
-    db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_machi_prefecture_id
       ON machi(prefecture_id);
     `);
@@ -137,8 +161,12 @@ export function initializeDatabase(): void {
       CREATE INDEX IF NOT EXISTS idx_machi_city_id
       ON machi(city_id);
     `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_machi_country_code
+      ON machi(country_code);
+    `);
 
-    // 5. マップテーブル
+    // 6. マップテーブル
     db.execSync(`
       CREATE TABLE IF NOT EXISTS maps (
         id TEXT PRIMARY KEY,
@@ -148,6 +176,8 @@ export function initializeDatabase(): void {
         category TEXT,
         tags TEXT,
         is_public INTEGER DEFAULT 0,
+        is_default INTEGER DEFAULT 0,
+        is_official INTEGER DEFAULT 0,
         thumbnail_url TEXT,
         spots_count INTEGER DEFAULT 0,
         likes_count INTEGER DEFAULT 0,
@@ -176,12 +206,13 @@ export function initializeDatabase(): void {
       ON maps(is_synced);
     `);
 
-    // 6. スポットテーブル
+    // 7. スポットテーブル
     db.execSync(`
       CREATE TABLE IF NOT EXISTS spots (
         id TEXT PRIMARY KEY,
         map_id TEXT NOT NULL,
         user_id TEXT NOT NULL,
+        machi_id TEXT NOT NULL,
         name TEXT NOT NULL,
         address TEXT,
         latitude REAL NOT NULL,
@@ -195,7 +226,8 @@ export function initializeDatabase(): void {
         updated_at TEXT NOT NULL,
         synced_at TEXT,
         is_synced INTEGER DEFAULT 0,
-        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+        FOREIGN KEY (machi_id) REFERENCES machi(id)
       );
     `);
 
@@ -209,6 +241,10 @@ export function initializeDatabase(): void {
       ON spots(user_id);
     `);
     db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_spots_machi_id
+      ON spots(machi_id);
+    `);
+    db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_spots_created_at
       ON spots(created_at DESC);
     `);
@@ -217,7 +253,7 @@ export function initializeDatabase(): void {
       ON spots(is_synced);
     `);
 
-    // 7. 訪問記録テーブル（マップ訪問）
+    // 8. 訪問記録テーブル（マップ訪問）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS visits (
         id TEXT PRIMARY KEY,
@@ -251,7 +287,7 @@ export function initializeDatabase(): void {
       ON visits(is_synced);
     `);
 
-    // 8. フォローテーブル
+    // 9. フォローテーブル
     db.execSync(`
       CREATE TABLE IF NOT EXISTS follows (
         id TEXT PRIMARY KEY,
@@ -278,7 +314,7 @@ export function initializeDatabase(): void {
       ON follows(is_synced);
     `);
 
-    // 9. コメントテーブル（マップとスポット用）
+    // 10. コメントテーブル（マップとスポット用）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS comments (
         id TEXT PRIMARY KEY,
@@ -318,7 +354,7 @@ export function initializeDatabase(): void {
       ON comments(is_synced);
     `);
 
-    // 10. ブックマークテーブル（マップとスポット用）
+    // 11. ブックマークテーブル（マップとスポット用）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS bookmarks (
         id TEXT PRIMARY KEY,
@@ -353,7 +389,7 @@ export function initializeDatabase(): void {
       ON bookmarks(is_synced);
     `);
 
-    // 11. 画像テーブル（スポット用）
+    // 12. 画像テーブル（スポット用）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS images (
         id TEXT PRIMARY KEY,
@@ -382,7 +418,7 @@ export function initializeDatabase(): void {
       ON images(is_synced);
     `);
 
-    // 12. いいねテーブル（マップとスポット用）
+    // 13. いいねテーブル（マップとスポット用）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS likes (
         id TEXT PRIMARY KEY,
@@ -417,7 +453,7 @@ export function initializeDatabase(): void {
       ON likes(is_synced);
     `);
 
-    // 13. 同期キューテーブル
+    // 14. 同期キューテーブル
     db.execSync(`
       CREATE TABLE IF NOT EXISTS sync_queue (
         id TEXT PRIMARY KEY,

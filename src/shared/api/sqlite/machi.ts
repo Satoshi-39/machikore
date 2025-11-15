@@ -34,22 +34,38 @@ export function searchMachiByName(searchTerm: string): MachiRow[] {
 }
 
 /**
- * 路線で絞り込み
+ * 路線で絞り込み (Deprecated)
+ * @deprecated Lines are now stored as JSON array. Use client-side filtering instead.
+ *
+ * 路線データはJSON配列として保存されています。
+ * アプリ側でJSON.parseして絞り込みを行ってください。
  */
 export function getMachiByLine(lineName: string): MachiRow[] {
+  // Use LIKE to search within JSON text (less efficient, but works)
   return queryAll<MachiRow>(
-    'SELECT * FROM machi WHERE line_name = ? ORDER BY name;',
-    [lineName]
+    'SELECT * FROM machi WHERE lines LIKE ? ORDER BY name;',
+    [`%${lineName}%`]
+  );
+}
+
+/**
+ * 都道府県IDで絞り込み
+ */
+export function getMachiByPrefectureId(prefectureId: string): MachiRow[] {
+  return queryAll<MachiRow>(
+    'SELECT * FROM machi WHERE prefecture_id = ? ORDER BY name;',
+    [prefectureId]
   );
 }
 
 /**
  * 都道府県で絞り込み
+ * @deprecated Use getMachiByPrefectureId instead
  */
-export function getMachiByPrefecture(prefecture: string): MachiRow[] {
+export function getMachiByPrefecture(prefectureName: string): MachiRow[] {
   return queryAll<MachiRow>(
-    'SELECT * FROM machi WHERE prefecture = ? ORDER BY name;',
-    [prefecture]
+    'SELECT * FROM machi WHERE prefecture_name = ? ORDER BY name;',
+    [prefectureName]
   );
 }
 
@@ -85,16 +101,30 @@ export function getNearbyMachi(
 export function insertMachi(machi: MachiRow): void {
   execute(
     `
-    INSERT INTO machi (id, name, latitude, longitude, line_name, prefecture)
-    VALUES (?, ?, ?, ?, ?, ?);
+    INSERT INTO machi (
+      id, name, name_kana, name_translations, latitude, longitude, lines,
+      prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations,
+      city_name, city_name_translations, created_at, updated_at
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       machi.id,
       machi.name,
+      machi.name_kana,
+      machi.name_translations,
       machi.latitude,
       machi.longitude,
-      machi.line_name,
-      machi.prefecture,
+      machi.lines,
+      machi.prefecture_id,
+      machi.city_id,
+      machi.country_code,
+      machi.prefecture_name,
+      machi.prefecture_name_translations,
+      machi.city_name,
+      machi.city_name_translations,
+      machi.created_at,
+      machi.updated_at,
     ]
   );
 }
@@ -105,18 +135,30 @@ export function insertMachi(machi: MachiRow): void {
 export function bulkInsertMachi(machiList: MachiRow[]): void {
   const statements = machiList.map((machi) => ({
     sql: `
-      INSERT OR REPLACE INTO machi (id, name, latitude, longitude, line_name, prefecture_id, city_id, prefecture)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+      INSERT OR REPLACE INTO machi (
+        id, name, name_kana, name_translations, latitude, longitude, lines,
+        prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations,
+        city_name, city_name_translations, created_at, updated_at
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     params: [
       machi.id,
       machi.name,
+      machi.name_kana,
+      machi.name_translations,
       machi.latitude,
       machi.longitude,
-      machi.line_name,
+      machi.lines,
       machi.prefecture_id,
       machi.city_id,
-      machi.prefecture,
+      machi.country_code,
+      machi.prefecture_name,
+      machi.prefecture_name_translations,
+      machi.city_name,
+      machi.city_name_translations,
+      machi.created_at,
+      machi.updated_at,
     ],
   }));
 
@@ -145,13 +187,15 @@ export function getMachiCount(): number {
 }
 
 /**
- * 全路線名を取得
+ * 全路線名を取得 (Deprecated)
+ * @deprecated Lines are now stored as JSON array. Use client-side processing instead.
+ *
+ * 路線データはJSON配列として保存されています。
+ * getAllMachi()でデータを取得してアプリ側でJSON.parseして処理してください。
  */
 export function getAllLineNames(): string[] {
-  const results = queryAll<{ line_name: string }>(
-    'SELECT DISTINCT line_name FROM machi ORDER BY line_name;'
-  );
-  return results.map((r) => r.line_name);
+  console.warn('getAllLineNames is deprecated. Use client-side processing instead.');
+  return [];
 }
 
 /**
@@ -159,10 +203,10 @@ export function getAllLineNames(): string[] {
  * @deprecated Use getAllPrefectures from prefectures.ts instead
  */
 export function getAllPrefectureNames(): string[] {
-  const results = queryAll<{ prefecture: string }>(
-    'SELECT DISTINCT prefecture FROM machi ORDER BY prefecture;'
+  const results = queryAll<{ prefecture_name: string }>(
+    'SELECT DISTINCT prefecture_name FROM machi ORDER BY prefecture_name;'
   );
-  return results.map((r) => r.prefecture);
+  return results.map((r) => r.prefecture_name);
 }
 
 // ===============================

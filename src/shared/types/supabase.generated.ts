@@ -333,6 +333,8 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          is_default: boolean | null
+          is_official: boolean | null
           is_public: boolean | null
           likes_count: number | null
           name: string
@@ -347,6 +349,8 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_default?: boolean | null
+          is_official?: boolean | null
           is_public?: boolean | null
           likes_count?: number | null
           name: string
@@ -361,6 +365,8 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_default?: boolean | null
+          is_official?: boolean | null
           is_public?: boolean | null
           likes_count?: number | null
           name?: string

@@ -16,6 +16,7 @@ export function getPrefecturesData(): PrefectureRow[] {
 
   return prefecturesData.map((p) => ({
     ...p,
+    name_translations: null, // TODO: Add translations when available
     created_at: now,
     updated_at: now,
   })) as PrefectureRow[];

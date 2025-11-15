@@ -1,0 +1,65 @@
+[
+  {
+    "id": "hokkaido",
+    "name": "北海道",
+    "name_kana": "ほっかいどう",
+    "country_code": "jp",
+    "display_order": 1
+  },
+  {
+    "id": "tohoku",
+    "name": "東北",
+    "name_kana": "とうほく",
+    "country_code": "jp",
+    "display_order": 2
+  },
+  {
+    "id": "kanto",
+    "name": "関東",
+    "name_kana": "かんとう",
+    "country_code": "jp",
+    "display_order": 3
+  },
+  {
+    "id": "chubu",
+    "name": "中部",
+    "name_kana": "ちゅうぶ",
+    "country_code": "jp",
+    "display_order": 4
+  },
+  {
+    "id": "kinki",
+    "name": "近畿",
+    "name_kana": "きんき",
+    "country_code": "jp",
+    "display_order": 5
+  },
+  {
+    "id": "chugoku",
+    "name": "中国",
+    "name_kana": "ちゅうごく",
+    "country_code": "jp",
+    "display_order": 6
+  },
+  {
+    "id": "shikoku",
+    "name": "四国",
+    "name_kana": "しこく",
+    "country_code": "jp",
+    "display_order": 7
+  },
+  {
+    "id": "kyushu",
+    "name": "九州",
+    "name_kana": "きゅうしゅう",
+    "country_code": "jp",
+    "display_order": 8
+  },
+  {
+    "id": "okinawa",
+    "name": "沖縄",
+    "name_kana": "おきなわ",
+    "country_code": "jp",
+    "display_order": 9
+  }
+]

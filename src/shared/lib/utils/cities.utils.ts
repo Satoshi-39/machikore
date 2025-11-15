@@ -16,6 +16,7 @@ export function getCitiesData(): CityRow[] {
 
   return citiesData.map((c) => ({
     ...c,
+    name_translations: null, // TODO: Add translations when available
     created_at: now,
     updated_at: now,
   })) as CityRow[];

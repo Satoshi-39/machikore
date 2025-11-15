@@ -5,14 +5,16 @@
 import * as FileSystem from 'expo-file-system/legacy';
 import {
   initializeDatabase,
+  bulkInsertRegions,
   bulkInsertPrefectures,
   bulkInsertCities,
   bulkInsertMachi,
+  getRegionCount,
   getPrefectureCount,
   getCityCount,
   getMachiCount,
 } from '@/shared/api/sqlite';
-import { getPrefecturesData, getCitiesData, getMachiData } from '@/shared/lib';
+import { getRegionsData, getPrefecturesData, getCitiesData, getMachiData } from '@/shared/lib';
 import { seedSampleData } from './seed-data';
 import { cleanupSampleData } from './cleanup-data';
 
@@ -34,6 +36,18 @@ export async function initDatabase(): Promise<void> {
     console.log('🔄 データベースを再作成中...');
     initializeDatabase();
     console.log('✅ テーブル作成完了');
+
+    // 地方データをチェック
+    const regionCount = getRegionCount();
+
+    if (regionCount === 0) {
+      console.log('🌏 地方データを読み込み中...');
+      const regionsData = getRegionsData();
+      bulkInsertRegions(regionsData);
+      console.log(`✅ ${regionsData.length}件の地方データを読み込み完了`);
+    } else {
+      console.log(`✅ 地方データはすでに存在 (${regionCount}件)`);
+    }
 
     // 都道府県データをチェック
     const prefectureCount = getPrefectureCount();

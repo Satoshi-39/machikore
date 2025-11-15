@@ -2,251 +2,426 @@
   {
     "id": "machi_chiyoda_kayabacho",
     "name": "茅場町",
+    "name_kana": "",
     "latitude": 35.68055,
     "longitude": 139.77694,
-    "line_name": "東京メトロ日比谷線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東京メトロ日比谷線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "chuo"
+    "city_id": "chuo",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "中央区"
   },
   {
     "id": "machi_kita_higashijujo",
     "name": "東十条",
+    "name_kana": "",
     "latitude": 35.75333,
     "longitude": 139.72583,
-    "line_name": "JR京浜東北線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR京浜東北線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "kita"
+    "city_id": "kita",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "北区"
   },
   {
     "id": "machi_shibuya_ebisu",
     "name": "恵比寿",
+    "name_kana": "",
     "latitude": 35.64669,
     "longitude": 139.71028,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "shibuya"
+    "city_id": "shibuya",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "渋谷区"
   },
   {
     "id": "machi_shibuya_daikanyama",
     "name": "代官山",
+    "name_kana": "",
     "latitude": 35.64972,
     "longitude": 139.70389,
-    "line_name": "東急東横線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東急東横線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "shibuya"
+    "city_id": "shibuya",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "渋谷区"
   },
   {
     "id": "machi_setagaya_shimokitazawa",
     "name": "下北沢",
+    "name_kana": "",
     "latitude": 35.66111,
     "longitude": 139.66861,
-    "line_name": "小田急小田原線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "小田急小田原線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "setagaya"
+    "city_id": "setagaya",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "世田谷区"
   },
   {
     "id": "machi_setagaya_sangenjaya",
     "name": "三軒茶屋",
+    "name_kana": "",
     "latitude": 35.64361,
     "longitude": 139.66944,
-    "line_name": "東急田園都市線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東急田園都市線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "setagaya"
+    "city_id": "setagaya",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "世田谷区"
   },
   {
     "id": "machi_meguro_nakameguro",
     "name": "中目黒",
+    "name_kana": "",
     "latitude": 35.64444,
     "longitude": 139.69889,
-    "line_name": "東急東横線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東急東横線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "meguro"
+    "city_id": "meguro",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "目黒区"
   },
   {
     "id": "machi_meguro_jiyugaoka",
     "name": "自由が丘",
+    "name_kana": "",
     "latitude": 35.60778,
     "longitude": 139.66861,
-    "line_name": "東急東横線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東急東横線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "meguro"
+    "city_id": "meguro",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "目黒区"
   },
   {
     "id": "machi_taito_asakusa",
     "name": "浅草",
+    "name_kana": "",
     "latitude": 35.71167,
     "longitude": 139.79667,
-    "line_name": "東京メトロ銀座線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東京メトロ銀座線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "taito"
+    "city_id": "taito",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "台東区"
   },
   {
     "id": "machi_taito_ueno",
     "name": "上野",
+    "name_kana": "",
     "latitude": 35.71389,
     "longitude": 139.77722,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "taito"
+    "city_id": "taito",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "台東区"
   },
   {
     "id": "machi_sumida_oshiage",
     "name": "押上",
+    "name_kana": "",
     "latitude": 35.71028,
     "longitude": 139.8125,
-    "line_name": "東京メトロ半蔵門線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東京メトロ半蔵門線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "sumida"
+    "city_id": "sumida",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "墨田区"
   },
   {
     "id": "machi_koto_kiba",
     "name": "木場",
+    "name_kana": "",
     "latitude": 35.67028,
     "longitude": 139.80556,
-    "line_name": "東京メトロ東西線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東京メトロ東西線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "koto"
+    "city_id": "koto",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "江東区"
   },
   {
     "id": "machi_nakano_nakano",
     "name": "中野",
+    "name_kana": "",
     "latitude": 35.70583,
     "longitude": 139.66556,
-    "line_name": "JR中央線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR中央線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "nakano"
+    "city_id": "nakano",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "中野区"
   },
   {
     "id": "machi_suginami_koenji",
     "name": "高円寺",
+    "name_kana": "",
     "latitude": 35.70528,
     "longitude": 139.64917,
-    "line_name": "JR中央線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR中央線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "suginami"
+    "city_id": "suginami",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "杉並区"
   },
   {
     "id": "machi_suginami_ogikubo",
     "name": "荻窪",
+    "name_kana": "",
     "latitude": 35.70472,
     "longitude": 139.61972,
-    "line_name": "JR中央線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR中央線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "suginami"
+    "city_id": "suginami",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "杉並区"
   },
   {
     "id": "machi_toshima_ikebukuro",
     "name": "池袋",
+    "name_kana": "",
     "latitude": 35.73028,
     "longitude": 139.71083,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "toshima"
+    "city_id": "toshima",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "豊島区"
   },
   {
     "id": "machi_toshima_otsuka",
     "name": "大塚",
+    "name_kana": "",
     "latitude": 35.73111,
     "longitude": 139.72861,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "toshima"
+    "city_id": "toshima",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "豊島区"
   },
   {
     "id": "machi_adachi_kitasenju",
     "name": "北千住",
+    "name_kana": "",
     "latitude": 35.74889,
     "longitude": 139.80472,
-    "line_name": "東京メトロ千代田線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "東京メトロ千代田線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "adachi"
+    "city_id": "adachi",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "足立区"
   },
   {
     "id": "machi_katsushika_kameari",
     "name": "亀有",
+    "name_kana": "",
     "latitude": 35.76111,
     "longitude": 139.84833,
-    "line_name": "JR常磐線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR常磐線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "katsushika"
+    "city_id": "katsushika",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "葛飾区"
   },
   {
     "id": "machi_chiyoda_tokyo",
     "name": "東京",
+    "name_kana": "",
     "latitude": 35.68139,
     "longitude": 139.76611,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "chiyoda"
+    "city_id": "chiyoda",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "千代田区"
   },
   {
     "id": "machi_shinjuku_shinjuku",
     "name": "新宿",
+    "name_kana": "",
     "latitude": 35.68944,
     "longitude": 139.70056,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "shinjuku"
+    "city_id": "shinjuku",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "新宿区"
   },
   {
     "id": "machi_shibuya_shibuya",
     "name": "渋谷",
+    "name_kana": "",
     "latitude": 35.65861,
     "longitude": 139.70139,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "shibuya"
+    "city_id": "shibuya",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "渋谷区"
   },
   {
     "id": "machi_shibuya_harajuku",
     "name": "原宿",
+    "name_kana": "",
     "latitude": 35.67056,
     "longitude": 139.70278,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "shibuya"
+    "city_id": "shibuya",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "渋谷区"
   },
   {
     "id": "machi_shinagawa_shinagawa",
     "name": "品川",
+    "name_kana": "",
     "latitude": 35.62889,
     "longitude": 139.74028,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "shinagawa"
+    "city_id": "shinagawa",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "品川区"
   },
   {
     "id": "machi_shinagawa_gotanda",
     "name": "五反田",
+    "name_kana": "",
     "latitude": 35.62583,
     "longitude": 139.72361,
-    "line_name": "JR山手線",
-    "prefecture": "東京都",
+    "lines": [
+      {
+        "ja": "JR山手線"
+      }
+    ],
     "prefecture_id": "tokyo",
-    "city_id": "shinagawa"
+    "city_id": "shinagawa",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "品川区"
   }
 ]
