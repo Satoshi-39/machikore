@@ -5,10 +5,10 @@
  * サインアップ・サインインへの誘導を行う
  */
 
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface AuthInvitationPageProps {
   onSignInPress?: () => void;
@@ -29,7 +29,7 @@ export function AuthInvitationPage({
 
         {/* タイトル */}
         <Text className="text-3xl font-bold text-gray-900 mb-4 text-center">
-          まちログへようこそ
+          街コレへようこそ
         </Text>
 
         {/* 説明 */}

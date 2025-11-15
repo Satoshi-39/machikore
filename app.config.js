@@ -52,6 +52,7 @@ module.exports = {
           },
         },
       ],
+      '@rnmapbox/maps',
     ],
     experiments: {
       typedRoutes: true,
@@ -59,9 +60,9 @@ module.exports = {
     },
     extra: {
       router: {},
-      // eas: {
-      //   projectId: 'TODO: eas build:configure で新規作成',
-      // },
+      eas: {
+        projectId: 'cb48ad39-0471-44b4-9c61-30e75c8339aa',
+      },
     },
   },
 };

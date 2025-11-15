@@ -14,6 +14,7 @@ interface Env {
   EXPO_PUBLIC_SUPABASE_ANON_KEY: string;
   EXPO_PUBLIC_API_BASE_URL?: string;
   EXPO_PUBLIC_ENV?: 'development' | 'staging' | 'production';
+  EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN?: string;
 }
 
 // ===============================
@@ -47,6 +48,9 @@ export const ENV = {
     'EXPO_PUBLIC_API_BASE_URL',
     'https://api.machikore.app'
   ),
+
+  // Mapbox
+  MAPBOX_ACCESS_TOKEN: getEnvVar('EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN', ''),
 
   // 環境
   ENV: getEnvVar('EXPO_PUBLIC_ENV', 'development') as

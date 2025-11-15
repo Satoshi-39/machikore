@@ -1,7 +1,8 @@
+import { useUserStore } from '@/entities/user';
+import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { useUserStore } from '@/entities/user';
+import { View } from 'react-native';
 
 export default function TabLayout() {
   const router = useRouter();
@@ -13,31 +14,64 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#007AFF',
-      }}>
+      }}
+    >
       <Tabs.Screen
-        name="machi"
+        name="map"
         options={{
-          title: '街',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <View style={{ marginTop: 2 }}>
+              <Ionicons name="map-outline" size={26} color={color} />
+            </View>
           ),
         }}
       />
       <Tabs.Screen
         name="posts"
         options={{
-          title: 'ログ',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="newspaper-outline" size={size} color={color} />
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <View style={{ marginTop: 2 }}>
+              <Ionicons name="search-outline" size={26} color={color} />
+            </View>
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="create"
+        options={{
+          title: '',
+          tabBarIcon: () => (
+            <View style={{ marginTop: 2 }}>
+              <View className="w-9 h-9 rounded-full bg-blue-500 items-center justify-center">
+                <Ionicons name="add" size={22} color="#FFFFFF" />
+              </View>
+            </View>
+          ),
+        }}
+        listeners={{
+          tabPress: (e) => {
+            if (isAnonymous) {
+              // 未ログインの場合はタブ遷移をキャンセルしてモーダルを開く
+              e.preventDefault();
+              router.push('/auth/auth-required');
+            } else {
+              // ログイン済みの場合はタブ遷移をキャンセルして作成モーダルを開く
+              e.preventDefault();
+              router.push('/create');
+            }
+          },
         }}
       />
       <Tabs.Screen
         name="schedule"
         options={{
-          title: 'スケジュール',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="calendar-outline" size={size} color={color} />
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <View style={{ marginTop: 2 }}>
+              <Ionicons name="notifications-outline" size={26} color={color} />
+            </View>
           ),
         }}
         listeners={{
@@ -53,9 +87,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="mypage"
         options={{
-          title: 'マイページ',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <View style={{ marginTop: 2 }}>
+              <Ionicons name="person-outline" size={26} color={color} />
+            </View>
           ),
         }}
       />

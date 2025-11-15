@@ -7,14 +7,17 @@ import 'react-native-reanimated';
 import '../global.css';
 
 import { AppProviders } from '@/shared/lib/providers';
-import { initDatabase } from '@/shared/lib/init';
+import { initDatabase, initMapbox } from '@/shared/lib/init';
 
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    // データベース初期化
+    // Mapbox初期化（同期処理）
+    initMapbox();
+
+    // データベース初期化（非同期処理）
     initDatabase()
       .then(() => setIsReady(true))
       .catch((err) => {
@@ -50,6 +53,13 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
             name="auth/auth-required"
+            options={{
+              presentation: 'modal',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="create"
             options={{
               presentation: 'modal',
               headerShown: false,

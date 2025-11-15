@@ -5,7 +5,6 @@
 import * as FileSystem from 'expo-file-system/legacy';
 import {
   initializeDatabase,
-  checkTableExists,
   bulkInsertPrefectures,
   bulkInsertCities,
   bulkInsertMachi,
@@ -31,24 +30,10 @@ export async function initDatabase(): Promise<void> {
       console.log('📂 データベースパス:', dbPath);
     }
 
-    // テーブルが存在しない場合は作成
-    const prefecturesTableExists = checkTableExists('prefectures');
-    const citiesTableExists = checkTableExists('cities');
-    const machiTableExists = checkTableExists('machi');
-    const likesTableExists = checkTableExists('likes');
-    const usersTableExists = checkTableExists('users');
-
-    if (
-      !prefecturesTableExists ||
-      !citiesTableExists ||
-      !machiTableExists ||
-      !likesTableExists ||
-      !usersTableExists
-    ) {
-      console.log('📦 テーブルを作成中...');
-      initializeDatabase();
-      console.log('✅ テーブル作成完了');
-    }
+    // 開発環境では常にデータベースを再作成（スキーマ変更に対応）
+    console.log('🔄 データベースを再作成中...');
+    initializeDatabase();
+    console.log('✅ テーブル作成完了');
 
     // 都道府県データをチェック
     const prefectureCount = getPrefectureCount();

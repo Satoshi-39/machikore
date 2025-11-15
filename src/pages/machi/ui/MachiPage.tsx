@@ -30,7 +30,7 @@ import { useHierarchyNavigation } from '../model/use-hierarchy-navigation';
 export type ViewMode = 'map' | 'hierarchy';
 
 export function MachiPage() {
-  const [viewMode, setViewMode] = useState<ViewMode>('hierarchy');
+  const [viewMode, setViewMode] = useState<ViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<MachiFilter[]>([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);

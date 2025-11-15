@@ -4,23 +4,23 @@
  * ソート順とフィルターモードを切り替えるUI
  */
 
-import React, { useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import {
   usePostStore,
-  type PostSortOrder,
   type PostFilterMode,
+  type PostSortOrder,
 } from '@/entities/post/model';
+import { colors } from '@/shared/config';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
 
 export function PostFilterHeader() {
   const { sortOrder, filterMode, setSortOrder, setFilterMode } = usePostStore();
   const [showSortMenu, setShowSortMenu] = useState(false);
 
   const filterTabs: { mode: PostFilterMode; label: string }[] = [
-    { mode: 'all', label: 'すべて' },
-    { mode: 'my-posts', label: '自分の投稿' },
+    { mode: 'all', label: 'スポット' },
+    { mode: 'my-posts', label: 'マップ' },
   ];
 
   const sortOptions: { order: PostSortOrder; label: string; icon: string }[] = [
@@ -65,7 +65,11 @@ export function PostFilterHeader() {
           onPress={() => setShowSortMenu(!showSortMenu)}
           className="flex-row items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100"
         >
-          <Ionicons name="swap-vertical" size={16} color={colors.text.secondary} />
+          <Ionicons
+            name="swap-vertical"
+            size={16}
+            color={colors.text.secondary}
+          />
           <Text className="text-xs text-gray-600">{currentSortLabel}</Text>
         </Pressable>
 
@@ -94,7 +98,9 @@ export function PostFilterHeader() {
                 />
                 <Text
                   className={`text-sm ${
-                    sortOrder === option.order ? 'text-blue-600 font-semibold' : 'text-gray-700'
+                    sortOrder === option.order
+                      ? 'text-blue-600 font-semibold'
+                      : 'text-gray-700'
                   }`}
                 >
                   {option.label}

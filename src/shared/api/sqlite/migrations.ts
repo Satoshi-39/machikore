@@ -340,11 +340,11 @@ export function initializeDatabase(): void {
     db.execSync(`
       CREATE TABLE IF NOT EXISTS sync_queue (
         id TEXT PRIMARY KEY,
-        user_id TEXT NOT NULL,
-        table_name TEXT NOT NULL,
-        record_id TEXT NOT NULL,
+        entity_type TEXT NOT NULL,
+        entity_id TEXT NOT NULL,
         operation TEXT NOT NULL CHECK (operation IN ('INSERT', 'UPDATE', 'DELETE')),
-        payload TEXT,
+        data TEXT,
+        status TEXT NOT NULL CHECK (status IN ('pending', 'completed', 'failed')) DEFAULT 'pending',
         retry_count INTEGER DEFAULT 0,
         last_error TEXT,
         created_at TEXT NOT NULL,
@@ -354,16 +354,16 @@ export function initializeDatabase(): void {
 
     // インデックス作成
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_sync_queue_user_id
-      ON sync_queue(user_id);
+      CREATE INDEX IF NOT EXISTS idx_sync_queue_entity_type
+      ON sync_queue(entity_type);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_sync_queue_status
+      ON sync_queue(status);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_sync_queue_created_at
       ON sync_queue(created_at);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_sync_queue_table_name
-      ON sync_queue(table_name);
     `);
 
     // コミット
