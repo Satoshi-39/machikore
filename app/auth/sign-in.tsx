@@ -12,7 +12,7 @@ export default function SignInScreen() {
 
   const handleSuccess = () => {
     // サインイン成功後、メイン画面に遷移
-    router.replace('/(tabs)/machi');
+    router.replace('/(tabs)/map');
   };
 
   const handleNavigateToSignUp = () => {

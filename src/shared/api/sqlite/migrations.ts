@@ -18,17 +18,25 @@ export function initializeDatabase(): void {
   db.execSync('BEGIN TRANSACTION;');
 
   try {
-    // 古いスキーマのテーブルをドロップ（station_id → machi_id への移行）
+    // 古いスキーマのテーブルをドロップ（街ログ → 街コレへの移行）
     // TODO: 本番環境では、データを保持したままALTER TABLEでマイグレーションする
     // 現在は開発環境のため、既存データを破棄して新スキーマで再作成
     db.execSync('DROP TABLE IF EXISTS sync_queue;');
-    db.execSync('DROP TABLE IF EXISTS friends;');
-    db.execSync('DROP TABLE IF EXISTS posts;');
-    db.execSync('DROP TABLE IF EXISTS schedules;');
+    db.execSync('DROP TABLE IF EXISTS bookmarks;');
+    db.execSync('DROP TABLE IF EXISTS comments;');
+    db.execSync('DROP TABLE IF EXISTS follows;');
+    db.execSync('DROP TABLE IF EXISTS likes;');
+    db.execSync('DROP TABLE IF EXISTS images;');
+    db.execSync('DROP TABLE IF EXISTS spots;');
+    db.execSync('DROP TABLE IF EXISTS maps;');
     db.execSync('DROP TABLE IF EXISTS visits;');
     db.execSync('DROP TABLE IF EXISTS machi;');
     db.execSync('DROP TABLE IF EXISTS cities;');
     db.execSync('DROP TABLE IF EXISTS prefectures;');
+    // 削除された古いテーブル
+    db.execSync('DROP TABLE IF EXISTS posts;');
+    db.execSync('DROP TABLE IF EXISTS schedules;');
+    db.execSync('DROP TABLE IF EXISTS friends;');
     db.execSync('DROP TABLE IF EXISTS stations;');
 
     // 1. ユーザーテーブル
@@ -130,15 +138,19 @@ export function initializeDatabase(): void {
       ON machi(city_id);
     `);
 
-    // 5. 訪問記録テーブル
+    // 5. マップテーブル
     db.execSync(`
-      CREATE TABLE IF NOT EXISTS visits (
+      CREATE TABLE IF NOT EXISTS maps (
         id TEXT PRIMARY KEY,
         user_id TEXT NOT NULL,
-        machi_id TEXT NOT NULL,
-        visit_count INTEGER NOT NULL DEFAULT 1,
-        visited_at TEXT NOT NULL,
-        memo TEXT,
+        name TEXT NOT NULL,
+        description TEXT,
+        category TEXT,
+        tags TEXT,
+        is_public INTEGER DEFAULT 0,
+        thumbnail_url TEXT,
+        spots_count INTEGER DEFAULT 0,
+        likes_count INTEGER DEFAULT 0,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         synced_at TEXT,
@@ -148,73 +160,204 @@ export function initializeDatabase(): void {
 
     // インデックス作成
     db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_maps_user_id
+      ON maps(user_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_maps_is_public
+      ON maps(is_public);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_maps_created_at
+      ON maps(created_at DESC);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_maps_is_synced
+      ON maps(is_synced);
+    `);
+
+    // 6. スポットテーブル
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS spots (
+        id TEXT PRIMARY KEY,
+        map_id TEXT NOT NULL,
+        user_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        address TEXT,
+        latitude REAL NOT NULL,
+        longitude REAL NOT NULL,
+        memo TEXT,
+        images_count INTEGER DEFAULT 0,
+        likes_count INTEGER DEFAULT 0,
+        comments_count INTEGER DEFAULT 0,
+        order_index INTEGER DEFAULT 0,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0,
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_spots_map_id
+      ON spots(map_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_spots_user_id
+      ON spots(user_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_spots_created_at
+      ON spots(created_at DESC);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_spots_is_synced
+      ON spots(is_synced);
+    `);
+
+    // 7. 訪問記録テーブル（マップ訪問）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS visits (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        map_id TEXT NOT NULL,
+        visited_at TEXT NOT NULL,
+        memo TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0,
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_visits_user_id
       ON visits(user_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_visits_machi_id
-      ON visits(machi_id);
+      CREATE INDEX IF NOT EXISTS idx_visits_map_id
+      ON visits(map_id);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_visits_visited_at
       ON visits(visited_at);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_visits_user_machi
-      ON visits(user_id, machi_id);
-    `);
-    db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_visits_is_synced
       ON visits(is_synced);
     `);
 
-    // 6. 投稿テーブル
+    // 8. フォローテーブル
     db.execSync(`
-      CREATE TABLE IF NOT EXISTS posts (
+      CREATE TABLE IF NOT EXISTS follows (
         id TEXT PRIMARY KEY,
-        user_id TEXT NOT NULL,
-        content TEXT NOT NULL,
-        machi_id TEXT,
-        visit_id TEXT,
-        is_auto_generated INTEGER DEFAULT 0,
-        is_draft INTEGER DEFAULT 0,
-        likes_count INTEGER DEFAULT 0,
-        comments_count INTEGER DEFAULT 0,
+        follower_id TEXT NOT NULL,
+        followee_id TEXT NOT NULL,
         created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
         synced_at TEXT,
         is_synced INTEGER DEFAULT 0,
-        FOREIGN KEY (visit_id) REFERENCES visits(id) ON DELETE CASCADE
+        UNIQUE(follower_id, followee_id)
       );
     `);
 
     // インデックス作成
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_posts_user_id
-      ON posts(user_id);
+      CREATE INDEX IF NOT EXISTS idx_follows_follower_id
+      ON follows(follower_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_posts_machi_id
-      ON posts(machi_id);
+      CREATE INDEX IF NOT EXISTS idx_follows_followee_id
+      ON follows(followee_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_posts_created_at
-      ON posts(created_at DESC);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_posts_is_draft
-      ON posts(is_draft);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_posts_is_synced
-      ON posts(is_synced);
+      CREATE INDEX IF NOT EXISTS idx_follows_is_synced
+      ON follows(is_synced);
     `);
 
-    // 7. 画像テーブル
+    // 9. コメントテーブル（マップとスポット用）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS comments (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        map_id TEXT,
+        spot_id TEXT,
+        content TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0,
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+        FOREIGN KEY (spot_id) REFERENCES spots(id) ON DELETE CASCADE,
+        CHECK ((map_id IS NOT NULL AND spot_id IS NULL) OR (map_id IS NULL AND spot_id IS NOT NULL))
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_comments_user_id
+      ON comments(user_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_comments_map_id
+      ON comments(map_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_comments_spot_id
+      ON comments(spot_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_comments_created_at
+      ON comments(created_at DESC);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_comments_is_synced
+      ON comments(is_synced);
+    `);
+
+    // 10. ブックマークテーブル（マップとスポット用）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS bookmarks (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        map_id TEXT,
+        spot_id TEXT,
+        created_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0,
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+        FOREIGN KEY (spot_id) REFERENCES spots(id) ON DELETE CASCADE,
+        UNIQUE(user_id, map_id, spot_id),
+        CHECK ((map_id IS NOT NULL AND spot_id IS NULL) OR (map_id IS NULL AND spot_id IS NOT NULL))
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_bookmarks_user_id
+      ON bookmarks(user_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_bookmarks_map_id
+      ON bookmarks(map_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_bookmarks_spot_id
+      ON bookmarks(spot_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_bookmarks_is_synced
+      ON bookmarks(is_synced);
+    `);
+
+    // 11. 画像テーブル（スポット用）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS images (
         id TEXT PRIMARY KEY,
-        post_id TEXT NOT NULL,
+        spot_id TEXT NOT NULL,
         local_path TEXT,
         cloud_path TEXT,
         width INTEGER,
@@ -225,31 +368,34 @@ export function initializeDatabase(): void {
         updated_at TEXT NOT NULL,
         synced_at TEXT,
         is_synced INTEGER DEFAULT 0,
-        FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+        FOREIGN KEY (spot_id) REFERENCES spots(id) ON DELETE CASCADE
       );
     `);
 
     // インデックス作成
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_images_post_id
-      ON images(post_id);
+      CREATE INDEX IF NOT EXISTS idx_images_spot_id
+      ON images(spot_id);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_images_is_synced
       ON images(is_synced);
     `);
 
-    // 8. いいねテーブル
+    // 12. いいねテーブル（マップとスポット用）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS likes (
         id TEXT PRIMARY KEY,
         user_id TEXT NOT NULL,
-        post_id TEXT NOT NULL,
+        map_id TEXT,
+        spot_id TEXT,
         created_at TEXT NOT NULL,
         synced_at TEXT,
         is_synced INTEGER DEFAULT 0,
-        FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
-        UNIQUE(user_id, post_id)
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+        FOREIGN KEY (spot_id) REFERENCES spots(id) ON DELETE CASCADE,
+        UNIQUE(user_id, map_id, spot_id),
+        CHECK ((map_id IS NOT NULL AND spot_id IS NULL) OR (map_id IS NULL AND spot_id IS NOT NULL))
       );
     `);
 
@@ -259,84 +405,19 @@ export function initializeDatabase(): void {
       ON likes(user_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_likes_post_id
-      ON likes(post_id);
+      CREATE INDEX IF NOT EXISTS idx_likes_map_id
+      ON likes(map_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_likes_spot_id
+      ON likes(spot_id);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_likes_is_synced
       ON likes(is_synced);
     `);
 
-    // 9. 予定テーブル
-    db.execSync(`
-      CREATE TABLE IF NOT EXISTS schedules (
-        id TEXT PRIMARY KEY,
-        user_id TEXT NOT NULL,
-        machi_id TEXT NOT NULL,
-        scheduled_at TEXT NOT NULL,
-        title TEXT NOT NULL,
-        memo TEXT,
-        is_completed INTEGER DEFAULT 0,
-        completed_at TEXT,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
-        synced_at TEXT,
-        is_synced INTEGER DEFAULT 0
-      );
-    `);
-
-    // インデックス作成
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_schedules_user_id
-      ON schedules(user_id);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_schedules_scheduled_at
-      ON schedules(scheduled_at);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_schedules_is_completed
-      ON schedules(is_completed);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_schedules_is_synced
-      ON schedules(is_synced);
-    `);
-
-    // 10. 友達テーブル
-    db.execSync(`
-      CREATE TABLE IF NOT EXISTS friends (
-        id TEXT PRIMARY KEY,
-        user_id TEXT NOT NULL,
-        friend_id TEXT NOT NULL,
-        status TEXT NOT NULL CHECK (status IN ('pending', 'accepted', 'rejected')),
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
-        synced_at TEXT,
-        is_synced INTEGER DEFAULT 0,
-        UNIQUE(user_id, friend_id)
-      );
-    `);
-
-    // インデックス作成
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_friends_user_id
-      ON friends(user_id);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_friends_friend_id
-      ON friends(friend_id);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_friends_status
-      ON friends(status);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_friends_is_synced
-      ON friends(is_synced);
-    `);
-
-    // 11. 同期キューテーブル
+    // 13. 同期キューテーブル
     db.execSync(`
       CREATE TABLE IF NOT EXISTS sync_queue (
         id TEXT PRIMARY KEY,
@@ -388,11 +469,13 @@ export function dropAllTables(): void {
 
   try {
     db.execSync('DROP TABLE IF EXISTS sync_queue;');
-    db.execSync('DROP TABLE IF EXISTS friends;');
-    db.execSync('DROP TABLE IF EXISTS schedules;');
+    db.execSync('DROP TABLE IF EXISTS bookmarks;');
+    db.execSync('DROP TABLE IF EXISTS comments;');
+    db.execSync('DROP TABLE IF EXISTS follows;');
     db.execSync('DROP TABLE IF EXISTS likes;');
     db.execSync('DROP TABLE IF EXISTS images;');
-    db.execSync('DROP TABLE IF EXISTS posts;');
+    db.execSync('DROP TABLE IF EXISTS spots;');
+    db.execSync('DROP TABLE IF EXISTS maps;');
     db.execSync('DROP TABLE IF EXISTS visits;');
     db.execSync('DROP TABLE IF EXISTS machi;');
     db.execSync('DROP TABLE IF EXISTS cities;');

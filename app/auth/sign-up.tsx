@@ -12,11 +12,11 @@ export default function SignUpScreen() {
 
   const handleSuccess = () => {
     // サインアップ成功後、メイン画面に遷移
-    router.replace('/(tabs)/machi');
+    router.replace('/(tabs)/map');
   };
 
   const handleNavigateToSignIn = () => {
-    router.back();
+    router.push('/auth/sign-in');
   };
 
   return (

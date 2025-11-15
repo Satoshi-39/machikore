@@ -65,7 +65,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="schedule"
+        name="notifications"
         options={{
           title: '',
           tabBarIcon: ({ color }) => (

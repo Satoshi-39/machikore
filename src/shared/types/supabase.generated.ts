@@ -14,48 +14,172 @@ export type Database = {
   }
   public: {
     Tables: {
-      friends: {
+      bookmarks: {
         Row: {
           created_at: string
-          friend_id: string
           id: string
-          is_synced: boolean | null
-          status: string
-          synced_at: string | null
-          updated_at: string
+          map_id: string | null
+          spot_id: string | null
           user_id: string
         }
         Insert: {
           created_at?: string
-          friend_id: string
           id?: string
-          is_synced?: boolean | null
-          status: string
-          synced_at?: string | null
-          updated_at?: string
+          map_id?: string | null
+          spot_id?: string | null
           user_id: string
         }
         Update: {
           created_at?: string
-          friend_id?: string
           id?: string
-          is_synced?: boolean | null
-          status?: string
-          synced_at?: string | null
+          map_id?: string | null
+          spot_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookmarks_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookmarks_spot_id_fkey"
+            columns: ["spot_id"]
+            isOneToOne: false
+            referencedRelation: "spots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookmarks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cities: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          name_kana: string
+          prefecture_id: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          name: string
+          name_kana: string
+          prefecture_id: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          name_kana?: string
+          prefecture_id?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cities_prefecture_id_fkey"
+            columns: ["prefecture_id"]
+            isOneToOne: false
+            referencedRelation: "prefectures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      comments: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          map_id: string | null
+          spot_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          map_id?: string | null
+          spot_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          map_id?: string | null
+          spot_id?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "friends_friend_id_fkey"
-            columns: ["friend_id"]
+            foreignKeyName: "comments_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_spot_id_fkey"
+            columns: ["spot_id"]
+            isOneToOne: false
+            referencedRelation: "spots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      follows: {
+        Row: {
+          created_at: string
+          followee_id: string
+          follower_id: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          followee_id: string
+          follower_id: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          followee_id?: string
+          follower_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "follows_followee_id_fkey"
+            columns: ["followee_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "friends_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: "follows_follower_id_fkey"
+            columns: ["follower_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -69,11 +193,9 @@ export type Database = {
           file_size: number | null
           height: number | null
           id: string
-          is_synced: boolean | null
           local_path: string | null
-          order_index: number
-          post_id: string | null
-          synced_at: string | null
+          order_index: number | null
+          spot_id: string
           updated_at: string
           width: number | null
         }
@@ -83,11 +205,9 @@ export type Database = {
           file_size?: number | null
           height?: number | null
           id?: string
-          is_synced?: boolean | null
           local_path?: string | null
-          order_index?: number
-          post_id?: string | null
-          synced_at?: string | null
+          order_index?: number | null
+          spot_id: string
           updated_at?: string
           width?: number | null
         }
@@ -97,20 +217,18 @@ export type Database = {
           file_size?: number | null
           height?: number | null
           id?: string
-          is_synced?: boolean | null
           local_path?: string | null
-          order_index?: number
-          post_id?: string | null
-          synced_at?: string | null
+          order_index?: number | null
+          spot_id?: string
           updated_at?: string
           width?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "images_post_id_fkey"
-            columns: ["post_id"]
+            foreignKeyName: "images_spot_id_fkey"
+            columns: ["spot_id"]
             isOneToOne: false
-            referencedRelation: "posts"
+            referencedRelation: "spots"
             referencedColumns: ["id"]
           },
         ]
@@ -119,33 +237,37 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          is_synced: boolean | null
-          post_id: string
-          synced_at: string | null
+          map_id: string | null
+          spot_id: string | null
           user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
-          is_synced?: boolean | null
-          post_id: string
-          synced_at?: string | null
+          map_id?: string | null
+          spot_id?: string | null
           user_id: string
         }
         Update: {
           created_at?: string
           id?: string
-          is_synced?: boolean | null
-          post_id?: string
-          synced_at?: string | null
+          map_id?: string | null
+          spot_id?: string | null
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "likes_post_id_fkey"
-            columns: ["post_id"]
+            foreignKeyName: "likes_map_id_fkey"
+            columns: ["map_id"]
             isOneToOne: false
-            referencedRelation: "posts"
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "likes_spot_id_fkey"
+            columns: ["spot_id"]
+            isOneToOne: false
+            referencedRelation: "spots"
             referencedColumns: ["id"]
           },
           {
@@ -159,178 +281,191 @@ export type Database = {
       }
       machi: {
         Row: {
-          created_at: string
+          city_id: string | null
           id: string
           latitude: number
           line_name: string
           longitude: number
           name: string
           prefecture: string
+          prefecture_id: string
         }
         Insert: {
-          created_at?: string
+          city_id?: string | null
           id: string
           latitude: number
           line_name: string
           longitude: number
           name: string
           prefecture: string
+          prefecture_id: string
         }
         Update: {
-          created_at?: string
+          city_id?: string | null
           id?: string
           latitude?: number
           line_name?: string
           longitude?: number
           name?: string
           prefecture?: string
+          prefecture_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "machi_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "machi_prefecture_id_fkey"
+            columns: ["prefecture_id"]
+            isOneToOne: false
+            referencedRelation: "prefectures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      maps: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_public: boolean | null
+          likes_count: number | null
+          name: string
+          spots_count: number | null
+          tags: Json | null
+          thumbnail_url: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          likes_count?: number | null
+          name: string
+          spots_count?: number | null
+          tags?: Json | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          likes_count?: number | null
+          name?: string
+          spots_count?: number | null
+          tags?: Json | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "maps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prefectures: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          name_kana: string
+          region: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          name: string
+          name_kana: string
+          region: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          name_kana?: string
+          region?: string
+          updated_at?: string
         }
         Relationships: []
       }
-      posts: {
+      spots: {
         Row: {
-          content: string
+          address: string | null
+          comments_count: number | null
           created_at: string
           id: string
-          is_auto_generated: boolean | null
-          is_draft: boolean | null
-          is_synced: boolean | null
-          synced_at: string | null
-          updated_at: string
-          user_id: string
-          visit_id: string | null
-        }
-        Insert: {
-          content: string
-          created_at?: string
-          id?: string
-          is_auto_generated?: boolean | null
-          is_draft?: boolean | null
-          is_synced?: boolean | null
-          synced_at?: string | null
-          updated_at?: string
-          user_id: string
-          visit_id?: string | null
-        }
-        Update: {
-          content?: string
-          created_at?: string
-          id?: string
-          is_auto_generated?: boolean | null
-          is_draft?: boolean | null
-          is_synced?: boolean | null
-          synced_at?: string | null
-          updated_at?: string
-          user_id?: string
-          visit_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "posts_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "posts_visit_id_fkey"
-            columns: ["visit_id"]
-            isOneToOne: false
-            referencedRelation: "visits"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      schedules: {
-        Row: {
-          created_at: string
-          id: string
-          is_completed: boolean | null
-          is_synced: boolean | null
-          machi_id: string
+          images_count: number | null
+          latitude: number
+          likes_count: number | null
+          longitude: number
+          map_id: string
           memo: string | null
-          scheduled_at: string
-          synced_at: string | null
-          title: string
+          name: string
+          order_index: number | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          address?: string | null
+          comments_count?: number | null
           created_at?: string
           id?: string
-          is_completed?: boolean | null
-          is_synced?: boolean | null
-          machi_id: string
+          images_count?: number | null
+          latitude: number
+          likes_count?: number | null
+          longitude: number
+          map_id: string
           memo?: string | null
-          scheduled_at: string
-          synced_at?: string | null
-          title: string
+          name: string
+          order_index?: number | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          address?: string | null
+          comments_count?: number | null
           created_at?: string
           id?: string
-          is_completed?: boolean | null
-          is_synced?: boolean | null
-          machi_id?: string
+          images_count?: number | null
+          latitude?: number
+          likes_count?: number | null
+          longitude?: number
+          map_id?: string
           memo?: string | null
-          scheduled_at?: string
-          synced_at?: string | null
-          title?: string
+          name?: string
+          order_index?: number | null
           updated_at?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "schedules_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: "spots_map_id_fkey"
+            columns: ["map_id"]
             isOneToOne: false
-            referencedRelation: "users"
+            referencedRelation: "maps"
             referencedColumns: ["id"]
           },
-        ]
-      }
-      sync_queue: {
-        Row: {
-          created_at: string
-          id: string
-          last_error: string | null
-          operation: string
-          payload: Json | null
-          record_id: string
-          retry_count: number | null
-          table_name: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          last_error?: string | null
-          operation: string
-          payload?: Json | null
-          record_id: string
-          retry_count?: number | null
-          table_name: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          last_error?: string | null
-          operation?: string
-          payload?: Json | null
-          record_id?: string
-          retry_count?: number | null
-          table_name?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
           {
-            foreignKeyName: "sync_queue_user_id_fkey"
+            foreignKeyName: "spots_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
@@ -344,13 +479,11 @@ export type Database = {
           bio: string | null
           created_at: string
           display_name: string | null
-          email: string | null
+          email: string
           id: string
           is_subscribed: boolean | null
-          is_synced: boolean | null
           subscription_expires_at: string | null
           subscription_started_at: string | null
-          synced_at: string | null
           updated_at: string
           username: string
         }
@@ -359,13 +492,11 @@ export type Database = {
           bio?: string | null
           created_at?: string
           display_name?: string | null
-          email?: string | null
+          email: string
           id?: string
           is_subscribed?: boolean | null
-          is_synced?: boolean | null
           subscription_expires_at?: string | null
           subscription_started_at?: string | null
-          synced_at?: string | null
           updated_at?: string
           username: string
         }
@@ -374,13 +505,11 @@ export type Database = {
           bio?: string | null
           created_at?: string
           display_name?: string | null
-          email?: string | null
+          email?: string
           id?: string
           is_subscribed?: boolean | null
-          is_synced?: boolean | null
           subscription_expires_at?: string | null
           subscription_started_at?: string | null
-          synced_at?: string | null
           updated_at?: string
           username?: string
         }
@@ -390,40 +519,38 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          is_synced: boolean | null
-          machi_id: string
+          map_id: string
           memo: string | null
-          synced_at: string | null
           updated_at: string
           user_id: string
-          visit_count: number | null
           visited_at: string
         }
         Insert: {
           created_at?: string
           id?: string
-          is_synced?: boolean | null
-          machi_id: string
+          map_id: string
           memo?: string | null
-          synced_at?: string | null
           updated_at?: string
           user_id: string
-          visit_count?: number | null
-          visited_at?: string
+          visited_at: string
         }
         Update: {
           created_at?: string
           id?: string
-          is_synced?: boolean | null
-          machi_id?: string
+          map_id?: string
           memo?: string | null
-          synced_at?: string | null
           updated_at?: string
           user_id?: string
-          visit_count?: number | null
           visited_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "visits_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "visits_user_id_fkey"
             columns: ["user_id"]

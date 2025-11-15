@@ -39,37 +39,49 @@ export type SupabaseUserRow = SupabaseTables['users']['Row'];
 export type SupabaseUserInsert = SupabaseTables['users']['Insert'];
 export type SupabaseUserUpdate = SupabaseTables['users']['Update'];
 
-// Visits
-export type SupabaseVisitRow = SupabaseTables['visits']['Row'];
-export type SupabaseVisitInsert = SupabaseTables['visits']['Insert'];
-export type SupabaseVisitUpdate = SupabaseTables['visits']['Update'];
+// NOTE: 以下は将来的にSupabaseから生成される型
+// 現在は街コレ用のSupabaseプロジェクトを作成していないため、一時的にコメントアウト
+// 新しいSupabaseプロジェクト作成後、これらの型を有効化する
 
-// Posts
-export type SupabasePostRow = SupabaseTables['posts']['Row'];
-export type SupabasePostInsert = SupabaseTables['posts']['Insert'];
-export type SupabasePostUpdate = SupabaseTables['posts']['Update'];
+// // Visits
+// export type SupabaseVisitRow = SupabaseTables['visits']['Row'];
+// export type SupabaseVisitInsert = SupabaseTables['visits']['Insert'];
+// export type SupabaseVisitUpdate = SupabaseTables['visits']['Update'];
 
-// Images
-export type SupabaseImageRow = SupabaseTables['images']['Row'];
-export type SupabaseImageInsert = SupabaseTables['images']['Insert'];
-export type SupabaseImageUpdate = SupabaseTables['images']['Update'];
+// // Maps
+// export type SupabaseMapRow = SupabaseTables['maps']['Row'];
+// export type SupabaseMapInsert = SupabaseTables['maps']['Insert'];
+// export type SupabaseMapUpdate = SupabaseTables['maps']['Update'];
 
-// Schedules
-export type SupabaseScheduleRow = SupabaseTables['schedules']['Row'];
-export type SupabaseScheduleInsert = SupabaseTables['schedules']['Insert'];
-export type SupabaseScheduleUpdate = SupabaseTables['schedules']['Update'];
+// // Spots
+// export type SupabaseSpotRow = SupabaseTables['spots']['Row'];
+// export type SupabaseSpotInsert = SupabaseTables['spots']['Insert'];
+// export type SupabaseSpotUpdate = SupabaseTables['spots']['Update'];
 
-// Friends
-export type SupabaseFriendRow = SupabaseTables['friends']['Row'];
-export type SupabaseFriendInsert = SupabaseTables['friends']['Insert'];
-export type SupabaseFriendUpdate = SupabaseTables['friends']['Update'];
+// // Images
+// export type SupabaseImageRow = SupabaseTables['images']['Row'];
+// export type SupabaseImageInsert = SupabaseTables['images']['Insert'];
+// export type SupabaseImageUpdate = SupabaseTables['images']['Update'];
 
-// Likes
-export type SupabaseLikeRow = SupabaseTables['likes']['Row'];
-export type SupabaseLikeInsert = SupabaseTables['likes']['Insert'];
-export type SupabaseLikeUpdate = SupabaseTables['likes']['Update'];
+// // Follows
+// export type SupabaseFollowRow = SupabaseTables['follows']['Row'];
+// export type SupabaseFollowInsert = SupabaseTables['follows']['Insert'];
+// export type SupabaseFollowUpdate = SupabaseTables['follows']['Update'];
 
-// Comments (ローカルのみ - Supabaseには存在しない)
+// // Likes
+// export type SupabaseLikeRow = SupabaseTables['likes']['Row'];
+// export type SupabaseLikeInsert = SupabaseTables['likes']['Insert'];
+// export type SupabaseLikeUpdate = SupabaseTables['likes']['Update'];
+
+// // Comments
+// export type SupabaseCommentRow = SupabaseTables['comments']['Row'];
+// export type SupabaseCommentInsert = SupabaseTables['comments']['Insert'];
+// export type SupabaseCommentUpdate = SupabaseTables['comments']['Update'];
+
+// // Bookmarks
+// export type SupabaseBookmarkRow = SupabaseTables['bookmarks']['Row'];
+// export type SupabaseBookmarkInsert = SupabaseTables['bookmarks']['Insert'];
+// export type SupabaseBookmarkUpdate = SupabaseTables['bookmarks']['Update'];
 
 // ===============================
 // SQLite Tables (converted)
@@ -80,65 +92,135 @@ export type UserRow = ToSQLite<SupabaseUserRow>;
 export type UserInsert = ToSQLite<SupabaseUserInsert>;
 export type UserUpdate = ToSQLite<SupabaseUserUpdate>;
 
-// Visits
-export type VisitRow = ToSQLite<SupabaseVisitRow>;
-export type VisitInsert = ToSQLite<SupabaseVisitInsert>;
-export type VisitUpdate = ToSQLite<SupabaseVisitUpdate>;
+// NOTE: 以下は一時的にローカル定義。Supabaseプロジェクト作成後、上記のSupabase型から生成する
 
-// Posts (ローカル拡張フィールド追加)
-export type PostRow = ToSQLite<SupabasePostRow> & {
-  machi_id: string | null;
+// Maps
+export interface MapRow {
+  id: string;
+  user_id: string;
+  name: string;
+  description: string | null;
+  category: string | null;
+  tags: string | null; // JSON string array
+  is_public: 0 | 1;
+  thumbnail_url: string | null;
+  spots_count: number;
+  likes_count: number;
+  created_at: string;
+  updated_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type MapInsert = Partial<MapRow> & Pick<MapRow, 'id' | 'user_id' | 'name' | 'created_at' | 'updated_at'>;
+export type MapUpdate = Partial<Omit<MapRow, 'id' | 'created_at'>>;
+
+// Spots
+export interface SpotRow {
+  id: string;
+  map_id: string;
+  user_id: string;
+  name: string;
+  address: string | null;
+  latitude: number;
+  longitude: number;
+  memo: string | null;
+  images_count: number;
   likes_count: number;
   comments_count: number;
-};
-export type PostInsert = ToSQLite<SupabasePostInsert> & {
-  machi_id?: string | null;
-  likes_count?: number;
-  comments_count?: number;
-};
-export type PostUpdate = ToSQLite<SupabasePostUpdate> & {
-  machi_id?: string | null;
-  likes_count?: number;
-  comments_count?: number;
-};
+  order_index: number;
+  created_at: string;
+  updated_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type SpotInsert = Partial<SpotRow> & Pick<SpotRow, 'id' | 'map_id' | 'user_id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
+export type SpotUpdate = Partial<Omit<SpotRow, 'id' | 'created_at'>>;
 
-// Images
-export type ImageRow = ToSQLite<SupabaseImageRow>;
-export type ImageInsert = ToSQLite<SupabaseImageInsert>;
-export type ImageUpdate = ToSQLite<SupabaseImageUpdate>;
+// Visits (マップ訪問記録)
+export interface VisitRow {
+  id: string;
+  user_id: string;
+  map_id: string;
+  visited_at: string;
+  memo: string | null;
+  created_at: string;
+  updated_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type VisitInsert = Partial<VisitRow> & Pick<VisitRow, 'id' | 'user_id' | 'map_id' | 'visited_at' | 'created_at' | 'updated_at'>;
+export type VisitUpdate = Partial<Omit<VisitRow, 'id' | 'created_at'>>;
 
-// Schedules (ローカル拡張フィールド追加)
-export type ScheduleRow = ToSQLite<SupabaseScheduleRow> & {
-  completed_at: string | null;
-};
-export type ScheduleInsert = ToSQLite<SupabaseScheduleInsert> & {
-  completed_at?: string | null;
-};
-export type ScheduleUpdate = ToSQLite<SupabaseScheduleUpdate> & {
-  completed_at?: string | null;
-};
+// Images (スポット画像)
+export interface ImageRow {
+  id: string;
+  spot_id: string;
+  local_path: string | null;
+  cloud_path: string | null;
+  width: number | null;
+  height: number | null;
+  file_size: number | null;
+  order_index: number;
+  created_at: string;
+  updated_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type ImageInsert = Partial<ImageRow> & Pick<ImageRow, 'id' | 'spot_id' | 'created_at' | 'updated_at'>;
+export type ImageUpdate = Partial<Omit<ImageRow, 'id' | 'created_at'>>;
 
-// Friends
-export type FriendRow = ToSQLite<SupabaseFriendRow>;
-export type FriendInsert = ToSQLite<SupabaseFriendInsert>;
-export type FriendUpdate = ToSQLite<SupabaseFriendUpdate>;
+// Follows (フォロー関係)
+export interface FollowRow {
+  id: string;
+  follower_id: string; // フォローする人
+  followee_id: string; // フォローされる人
+  created_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type FollowInsert = Partial<FollowRow> & Pick<FollowRow, 'id' | 'follower_id' | 'followee_id' | 'created_at'>;
+export type FollowUpdate = Partial<Omit<FollowRow, 'id' | 'created_at'>>;
 
-// Likes
-export type LikeRow = ToSQLite<SupabaseLikeRow>;
-export type LikeInsert = ToSQLite<SupabaseLikeInsert>;
-export type LikeUpdate = ToSQLite<SupabaseLikeUpdate>;
+// Likes (マップ・スポットへのいいね)
+export interface LikeRow {
+  id: string;
+  user_id: string;
+  map_id: string | null;
+  spot_id: string | null;
+  created_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type LikeInsert = Partial<LikeRow> & Pick<LikeRow, 'id' | 'user_id' | 'created_at'>;
+export type LikeUpdate = Partial<Omit<LikeRow, 'id' | 'created_at'>>;
 
-// Comments (ローカルのみ)
+// Comments (マップ・スポットへのコメント)
 export interface CommentRow {
   id: string;
-  post_id: string;
   user_id: string;
+  map_id: string | null;
+  spot_id: string | null;
   content: string;
   created_at: string;
   updated_at: string;
   synced_at: string | null;
   is_synced: 0 | 1;
 }
+export type CommentInsert = Partial<CommentRow> & Pick<CommentRow, 'id' | 'user_id' | 'content' | 'created_at' | 'updated_at'>;
+export type CommentUpdate = Partial<Omit<CommentRow, 'id' | 'created_at'>>;
+
+// Bookmarks (マップ・スポットのブックマーク)
+export interface BookmarkRow {
+  id: string;
+  user_id: string;
+  map_id: string | null;
+  spot_id: string | null;
+  created_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type BookmarkInsert = Partial<BookmarkRow> & Pick<BookmarkRow, 'id' | 'user_id' | 'created_at'>;
+export type BookmarkUpdate = Partial<Omit<BookmarkRow, 'id' | 'created_at'>>;
 
 // ===============================
 // Local-only Tables
@@ -219,17 +301,10 @@ export function booleanToSQLiteBoolean(value: boolean | null): 0 | 1 | null {
 }
 
 /**
- * Convert Supabase Visit Row to SQLite Visit Row
+ * Convert Supabase Row to SQLite Row
  * Supabase: boolean | null → SQLite: 0 | 1 | null
+ * NOTE: 新しいSupabaseプロジェクト作成後、必要に応じて変換関数を追加
  */
-export function convertSupabaseVisitToSQLite(
-  supabaseVisit: SupabaseVisitRow
-): VisitRow {
-  return {
-    ...supabaseVisit,
-    is_synced: booleanToSQLiteBoolean(supabaseVisit.is_synced),
-  };
-}
 
 // ===============================
 // Re-export common types
