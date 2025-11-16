@@ -52,14 +52,15 @@ export default function TabLayout() {
         }}
         listeners={{
           tabPress: (e) => {
+            // タブ遷移を常にキャンセル
+            e.preventDefault();
+
             if (isAnonymous) {
-              // 未ログインの場合はタブ遷移をキャンセルしてモーダルを開く
-              e.preventDefault();
+              // 未ログインの場合は認証モーダルを開く
               router.push('/auth/auth-required');
             } else {
-              // ログイン済みの場合はタブ遷移をキャンセルして作成モーダルを開く
-              e.preventDefault();
-              router.push('/create');
+              // ログイン済みの場合は作成モーダルを開く
+              router.push('/create-menu');
             }
           },
         }}

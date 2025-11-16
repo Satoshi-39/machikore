@@ -1,26 +1,15 @@
 /**
- * 作成タブ
+ * 作成タブ（ダミー）
  *
- * 認証が必要な機能
- * タブレイアウトで未ログイン時のアクセスは制御される
+ * このページは実際には表示されません
+ * タブレイアウトの listeners.tabPress で
+ * モーダル (/create-menu) に遷移します
  */
 
-import { useRouter } from 'expo-router';
-import { CreateMenuPage } from '@/pages/create';
+import { View } from 'react-native';
 
 export default function CreateTab() {
-  const router = useRouter();
-
-  const handleCreateMap = () => {
-    // TODO: マップ作成画面への遷移を実装
-    console.log('マップ作成');
-  };
-
-  const handleClose = () => {
-    // タブなので閉じる動作は不要（何もしない）
-  };
-
-  return (
-    <CreateMenuPage onCreateMap={handleCreateMap} onClose={handleClose} />
-  );
+  // タブアイコンを表示するためだけのダミーページ
+  // 実際の処理は app/create-menu.tsx で行われる
+  return <View className="flex-1 bg-white" />;
 }

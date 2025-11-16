@@ -54,15 +54,17 @@ export default function RootLayout() {
           <Stack.Screen
             name="auth/auth-required"
             options={{
-              presentation: 'modal',
+              presentation: 'transparentModal',
               headerShown: false,
+              animation: 'fade',
             }}
           />
           <Stack.Screen
-            name="create"
+            name="create-menu"
             options={{
-              presentation: 'modal',
+              presentation: 'transparentModal',
               headerShown: false,
+              animation: 'fade',
             }}
           />
         </Stack>

@@ -24,10 +24,16 @@ export default function AuthRequiredScreen() {
     router.push('/auth/sign-in');
   };
 
+  const handleClose = () => {
+    // モーダルを閉じる
+    router.dismiss();
+  };
+
   return (
     <AuthRequiredPage
       onSignUpPress={handleSignUpPress}
       onSignInPress={handleSignInPress}
+      onClose={handleClose}
     />
   );
 }

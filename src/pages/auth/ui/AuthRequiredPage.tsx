@@ -6,56 +6,99 @@
  */
 
 import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Text, TouchableOpacity, View, Animated } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface AuthRequiredPageProps {
   onSignUpPress?: () => void;
   onSignInPress?: () => void;
+  onClose?: () => void;
   message?: string;
 }
 
 export function AuthRequiredPage({
   onSignUpPress,
   onSignInPress,
+  onClose,
   message = 'この機能を利用するにはログインが必要です',
 }: AuthRequiredPageProps) {
+  const slideAnim = useRef(new Animated.Value(300)).current; // 初期位置: 画面外
+
+  useEffect(() => {
+    // マウント時にスライドアップアニメーション
+    Animated.spring(slideAnim, {
+      toValue: 0,
+      useNativeDriver: true,
+      tension: 65,
+      friction: 11,
+    }).start();
+  }, []);
+
   return (
-    <View className="flex-1 justify-center items-center px-6 bg-white">
-      {/* アイコン */}
-      <View className="mb-6">
-        <Ionicons name="lock-closed-outline" size={64} color="#9ca3af" />
+    <View className="flex-1 justify-end bg-black/50">
+      {/* 背景タップで閉じる */}
+      <TouchableOpacity
+        className="flex-1"
+        activeOpacity={1}
+        onPress={onClose}
+      />
+
+      {/* モーダルコンテンツ（アニメーション） */}
+      <Animated.View
+        style={{
+          transform: [{ translateY: slideAnim }],
+        }}
+      >
+        <SafeAreaView className="bg-white rounded-t-3xl shadow-2xl px-6 py-8" edges={['bottom']}>
+      {/* ヘッダー */}
+      <View className="flex-row items-center justify-center mb-2 relative">
+        <View className="flex-row items-center">
+          <Ionicons name="map" size={28} color="#007AFF" style={{ marginRight: 8 }} />
+          <Text className="text-2xl font-bold text-gray-900">
+            街コレへようこそ！
+          </Text>
+        </View>
+        {/* 閉じるボタン */}
+        <TouchableOpacity
+          onPress={onClose}
+          className="absolute right-0"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <Ionicons name="close" size={28} color="#374151" />
+        </TouchableOpacity>
       </View>
 
       {/* メッセージ */}
-      <Text className="text-xl font-bold text-gray-900 mb-2 text-center">
-        ログインが必要です
-      </Text>
       <Text className="text-base text-gray-600 mb-8 text-center">
         {message}
       </Text>
 
       {/* アカウント作成ボタン */}
-      <TouchableOpacity
-        onPress={onSignUpPress}
-        className="bg-blue-600 py-4 px-8 rounded-lg w-full max-w-sm mb-3"
-        activeOpacity={0.8}
-      >
-        <Text className="text-white text-center font-semibold text-base">
-          アカウントを作成
-        </Text>
-      </TouchableOpacity>
+      <View className="items-center">
+        <TouchableOpacity
+          onPress={onSignUpPress}
+          className="bg-blue-600 py-4 px-8 rounded-lg w-full max-w-sm mb-3"
+          activeOpacity={0.8}
+        >
+          <Text className="text-white text-center font-semibold text-base">
+            アカウントを作成
+          </Text>
+        </TouchableOpacity>
 
-      {/* ログインボタン */}
-      <TouchableOpacity
-        onPress={onSignInPress}
-        className="bg-white border border-gray-300 py-4 px-8 rounded-lg w-full max-w-sm"
-        activeOpacity={0.8}
-      >
-        <Text className="text-gray-700 text-center font-semibold text-base">
-          ログイン
-        </Text>
-      </TouchableOpacity>
+        {/* ログインボタン */}
+        <TouchableOpacity
+          onPress={onSignInPress}
+          className="bg-white border border-gray-300 py-4 px-8 rounded-lg w-full max-w-sm"
+          activeOpacity={0.8}
+        >
+          <Text className="text-gray-700 text-center font-semibold text-base">
+            ログイン
+          </Text>
+        </TouchableOpacity>
+      </View>
+      </SafeAreaView>
+      </Animated.View>
     </View>
   );
 }

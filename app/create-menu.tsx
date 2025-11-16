@@ -17,11 +17,28 @@ export default function CreateScreen() {
     router.back();
   };
 
+  const handleCreateSpot = () => {
+    // TODO: スポット作成画面への遷移を実装
+    console.log('スポット作成');
+    router.back();
+  };
+
+  const handleCreatePost = () => {
+    // TODO: 投稿作成画面への遷移を実装
+    console.log('投稿作成');
+    router.back();
+  };
+
   const handleClose = () => {
     router.back();
   };
 
   return (
-    <CreateMenuPage onCreateMap={handleCreateMap} onClose={handleClose} />
+    <CreateMenuPage
+      onCreateMap={handleCreateMap}
+      onCreateSpot={handleCreateSpot}
+      onCreatePost={handleCreatePost}
+      onClose={handleClose}
+    />
   );
 }
