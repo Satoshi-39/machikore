@@ -12,15 +12,16 @@ import { AsyncBoundary } from '@/shared/ui';
 import type { PostRow } from '@/shared/types/database.types';
 
 interface PostListProps {
-  userId: string;
+  userId?: string;
   onPostPress?: (post: PostRow) => void;
 }
 
 export function PostList({ userId, onPostPress }: PostListProps) {
-  const { data: posts, isLoading, error } = usePosts(userId);
+  const effectiveUserId = userId ?? '';
+  const { data: posts, isLoading, error } = usePosts(effectiveUserId);
 
   // フィルタリング・ソート処理
-  const filteredPosts = usePostFiltering(posts, userId);
+  const filteredPosts = usePostFiltering(posts, effectiveUserId);
 
   return (
     <AsyncBoundary
@@ -38,7 +39,7 @@ export function PostList({ userId, onPostPress }: PostListProps) {
           renderItem={({ item }) => (
             <PostCard
               post={item}
-              userId={userId}
+              userId={effectiveUserId}
               onPress={() => onPostPress?.(item)}
             />
           )}

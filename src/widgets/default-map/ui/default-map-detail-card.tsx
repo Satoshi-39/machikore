@@ -1,5 +1,5 @@
 /**
- * マップ上で選択された街の詳細情報カード
+ * デフォルトマップ上で選択された街の詳細情報カード
  */
 
 import React from 'react';
@@ -11,12 +11,12 @@ import { useVisitByMachi } from '@/entities/visit/api';
 import { useCurrentUserId } from '@/entities/user';
 import type { MachiRow } from '@/shared/types/database.types';
 
-interface MachiDetailCardProps {
+interface DefaultMapDetailCardProps {
   machi: MachiRow;
   onClose: () => void;
 }
 
-export function MachiDetailCard({ machi, onClose }: MachiDetailCardProps) {
+export function DefaultMapDetailCard({ machi, onClose }: DefaultMapDetailCardProps) {
   const currentUserId = useCurrentUserId();
   const { data: visit } = useVisitByMachi(currentUserId, machi.id);
 

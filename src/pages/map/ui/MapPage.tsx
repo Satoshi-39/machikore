@@ -2,39 +2,36 @@
  * マップページ
  *
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
- * ユーザーマップを表示する
+ * デフォルトマップまたはカスタムマップを表示
  */
 
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 import { useUserStore } from '@/entities/user';
+import { useMapStore } from '@/entities/map';
+import { DefaultMap } from '@/widgets/default-map';
+import { MapHierarchy } from '@/widgets/map-hierarchy';
 import { UserMap } from '@/widgets/user-map';
 import { MapList } from '@/widgets/map-list';
 import { MapSearchFullscreen } from '@/widgets/map-search';
-import {
-  MapSearchBar,
-  ViewModeToggle,
-  MapFilterButtons,
-  type ViewMode,
-  type MapFilter,
-} from '@/features/map';
+import { MapHeader } from '@/widgets/map-header';
+import { MapControls } from '@/widgets/map-controls';
+import { CreatePostModal } from '@/widgets/create-post';
+import { type ViewMode } from '@/features/map';
+import { FAB } from '@/shared/ui';
+import { colors } from '@/shared/config';
 
 export function MapPage() {
   const user = useUserStore((state) => state.user);
+  const selectedMapId = useMapStore((state) => state.selectedMapId);
+  const resetToDefault = useMapStore((state) => state.resetToDefault);
   const [viewMode, setViewMode] = useState<ViewMode>('map');
-  const [selectedFilters, setSelectedFilters] = useState<MapFilter[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleFilterToggle = (filter: MapFilter) => {
-    setSelectedFilters((prev) =>
-      prev.includes(filter)
-        ? prev.filter((f) => f !== filter)
-        : [...prev, filter]
-    );
-  };
+  const isCustomMap = selectedMapId !== null;
 
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
@@ -46,39 +43,13 @@ export function MapPage() {
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100" edges={['top']}>
-      {/* ヘッダー：ロゴ（左）、マップ名（中央）、ユーザーアイコン（右） */}
-      <View className="bg-white px-5 py-4">
-        <View className="flex-row items-center">
-          {/* ロゴ（左端・固定幅） */}
-          <View className="flex-row items-center" style={{ width: 80 }}>
-            <Ionicons name="map" size={20} color="#007AFF" />
-            <Text className="ml-1 text-base font-bold text-blue-500">街コレ</Text>
-          </View>
-
-          {/* マップ名（中央） */}
-          <View className="flex-1 items-center">
-            <Text className="text-xl font-bold text-gray-800">
-              {user?.display_name || 'ゲスト'}のマップ
-            </Text>
-          </View>
-
-          {/* ユーザーアイコン（右端・固定幅） */}
-          <View style={{ width: 80 }} className="items-end">
-            {user?.avatar_url ? (
-              <Image
-                source={{ uri: user.avatar_url }}
-                className="w-12 h-12 rounded-full"
-              />
-            ) : (
-              <View className="w-12 h-12 rounded-full bg-gray-300 items-center justify-center">
-                <Text className="text-lg font-bold text-gray-600">
-                  {user?.display_name?.[0]?.toUpperCase() || '?'}
-                </Text>
-              </View>
-            )}
-          </View>
-        </View>
-      </View>
+      {/* ヘッダー */}
+      <MapHeader
+        isCustomMap={isCustomMap}
+        userName={user?.display_name ?? undefined}
+        userAvatarUrl={user?.avatar_url ?? undefined}
+        onLogoPress={resetToDefault}
+      />
 
       {viewMode === 'map' ? (
         // マップ表示
@@ -92,27 +63,17 @@ export function MapPage() {
             />
           ) : (
             <>
-              <UserMap />
+              {/* デフォルトマップ or カスタムマップ */}
+              {isCustomMap ? <UserMap /> : <DefaultMap />}
 
-              {/* 検索バー + ViewModeToggle + フィルターをマップの上に表示 */}
+              {/* 検索バー + ViewModeToggle をマップの上に表示 */}
               <View className="absolute top-0 left-0 right-0">
-                {/* 検索バー + ViewModeToggle */}
-                <View className="px-5 pt-5">
-                  <View className="flex-row items-start gap-3">
-                    <View className="flex-1">
-                      <MapSearchBar variant="map" onFocus={handleSearchFocus} />
-                    </View>
-                    <ViewModeToggle viewMode={viewMode} onViewModeChange={setViewMode} />
-                  </View>
-                </View>
-
-                {/* フィルターボタン */}
-                <View className="px-5 pt-3">
-                  <MapFilterButtons
-                    selectedFilters={selectedFilters}
-                    onFilterToggle={handleFilterToggle}
-                  />
-                </View>
+                <MapControls
+                  variant="map"
+                  viewMode={viewMode}
+                  onViewModeChange={setViewMode}
+                  onSearchFocus={handleSearchFocus}
+                />
               </View>
             </>
           )}
@@ -130,20 +91,33 @@ export function MapPage() {
           ) : (
             <>
               {/* 検索バー + ViewModeToggle */}
-              <View className="px-5 pt-5 pb-3">
-                <View className="flex-row items-start gap-3">
-                  <View className="flex-1">
-                    <MapSearchBar variant="list" onFocus={handleSearchFocus} />
-                  </View>
-                  <ViewModeToggle viewMode={viewMode} onViewModeChange={setViewMode} />
-                </View>
-              </View>
+              <MapControls
+                variant="list"
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
+                onSearchFocus={handleSearchFocus}
+                className="px-5 pt-5 pb-3"
+              />
 
-              <MapList />
+              {/* デフォルトマップの階層リスト or カスタムマップのフラットリスト */}
+              {isCustomMap ? <MapList /> : <MapHierarchy />}
             </>
           )}
         </View>
       )}
+
+      {/* 投稿ボタン */}
+      <FAB
+        onPress={() => setIsModalVisible(true)}
+        icon="create-outline"
+        color={colors.primary.DEFAULT}
+      />
+
+      {/* 投稿作成モーダル */}
+      <CreatePostModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      />
     </SafeAreaView>
   );
 }
