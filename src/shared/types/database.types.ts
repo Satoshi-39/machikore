@@ -139,6 +139,25 @@ export interface SpotRow {
 export type SpotInsert = Partial<SpotRow> & Pick<SpotRow, 'id' | 'map_id' | 'user_id' | 'machi_id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
 export type SpotUpdate = Partial<Omit<SpotRow, 'id' | 'created_at'>>;
 
+// Posts (投稿)
+export interface PostRow {
+  id: string;
+  user_id: string;
+  content: string;
+  station_id: string | null;
+  visit_id: string | null;
+  is_auto_generated: 0 | 1;
+  is_draft: 0 | 1;
+  likes_count: number;
+  comments_count: number;
+  created_at: string;
+  updated_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type PostInsert = Partial<PostRow> & Pick<PostRow, 'id' | 'user_id' | 'content' | 'created_at' | 'updated_at'>;
+export type PostUpdate = Partial<Omit<PostRow, 'id' | 'created_at'>>;
+
 // Visits (マップ訪問記録)
 export interface VisitRow {
   id: string;
