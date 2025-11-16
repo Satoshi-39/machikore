@@ -35,13 +35,25 @@ export function AuthRequiredPage({
     }).start();
   }, []);
 
+  const handleClose = () => {
+    // 閉じるアニメーション（下にスライド）
+    Animated.timing(slideAnim, {
+      toValue: 300,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      // アニメーション完了後にモーダルを閉じる
+      onClose?.();
+    });
+  };
+
   return (
     <View className="flex-1 justify-end bg-black/50">
       {/* 背景タップで閉じる */}
       <TouchableOpacity
         className="flex-1"
         activeOpacity={1}
-        onPress={onClose}
+        onPress={handleClose}
       />
 
       {/* モーダルコンテンツ（アニメーション） */}
@@ -51,22 +63,12 @@ export function AuthRequiredPage({
         }}
       >
         <SafeAreaView className="bg-white rounded-t-3xl shadow-2xl px-6 py-8" edges={['bottom']}>
-      {/* ヘッダー */}
-      <View className="flex-row items-center justify-center mb-2 relative">
-        <View className="flex-row items-center">
-          <Ionicons name="map" size={28} color="#007AFF" style={{ marginRight: 8 }} />
-          <Text className="text-2xl font-bold text-gray-900">
-            街コレへようこそ！
-          </Text>
-        </View>
-        {/* 閉じるボタン */}
-        <TouchableOpacity
-          onPress={onClose}
-          className="absolute right-0"
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Ionicons name="close" size={28} color="#374151" />
-        </TouchableOpacity>
+      {/* タイトル */}
+      <View className="flex-row items-center justify-center mb-2">
+        <Ionicons name="map" size={28} color="#007AFF" style={{ marginRight: 8 }} />
+        <Text className="text-2xl font-bold text-gray-900">
+          街コレへようこそ！
+        </Text>
       </View>
 
       {/* メッセージ */}

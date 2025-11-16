@@ -11,26 +11,26 @@ import { CreateMenuPage } from '@/pages/create';
 export default function CreateScreen() {
   const router = useRouter();
 
+  const handleClose = () => {
+    router.dismiss();
+  };
+
   const handleCreateMap = () => {
     // TODO: マップ作成画面への遷移を実装
     console.log('マップ作成');
-    router.back();
+    // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
   };
 
   const handleCreateSpot = () => {
     // TODO: スポット作成画面への遷移を実装
     console.log('スポット作成');
-    router.back();
+    // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
   };
 
   const handleCreatePost = () => {
     // TODO: 投稿作成画面への遷移を実装
     console.log('投稿作成');
-    router.back();
-  };
-
-  const handleClose = () => {
-    router.back();
+    // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
   };
 
   return (

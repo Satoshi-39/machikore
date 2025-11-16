@@ -7,7 +7,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useRef } from 'react';
 import { Text, TouchableOpacity, View, Animated } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface CreateMenuPageProps {
   onCreateMap?: () => void;
@@ -29,13 +28,25 @@ export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreatePost, onClos
     }).start();
   }, []);
 
+  const handleClose = () => {
+    // 閉じるアニメーション（下にスライド）
+    Animated.timing(slideAnim, {
+      toValue: 300,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      // アニメーション完了後にモーダルを閉じる
+      onClose?.();
+    });
+  };
+
   return (
     <View className="flex-1 justify-end bg-black/50">
       {/* 背景タップで閉じる */}
       <TouchableOpacity
         className="flex-1"
         activeOpacity={1}
-        onPress={onClose}
+        onPress={handleClose}
       />
 
       {/* モーダルコンテンツ（アニメーション） */}
@@ -44,24 +55,15 @@ export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreatePost, onClos
           transform: [{ translateY: slideAnim }],
         }}
       >
-        <SafeAreaView className="bg-white rounded-t-3xl shadow-2xl" edges={['bottom']}>
-        {/* ヘッダー */}
-        <View className="flex-row justify-between items-center px-5 py-4 border-b border-gray-200">
-          <Text className="text-xl font-bold text-gray-800">作成</Text>
-          <TouchableOpacity
-            onPress={onClose}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Ionicons name="close" size={28} color="#374151" />
-          </TouchableOpacity>
-        </View>
-
-        {/* メニュー */}
-        <View className="px-5 py-8">
+        <View className="bg-white rounded-t-3xl shadow-2xl px-5 pt-8 pb-10">
+          {/* メニュー */}
           <View className="flex-row justify-center gap-12">
             {/* マップ作成 */}
             <TouchableOpacity
-              onPress={onCreateMap}
+              onPress={() => {
+                onCreateMap?.();
+                handleClose();
+              }}
               className="items-center"
               activeOpacity={0.7}
             >
@@ -75,7 +77,10 @@ export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreatePost, onClos
 
             {/* スポット作成 */}
             <TouchableOpacity
-              onPress={onCreateSpot}
+              onPress={() => {
+                onCreateSpot?.();
+                handleClose();
+              }}
               className="items-center"
               activeOpacity={0.7}
             >
@@ -89,7 +94,10 @@ export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreatePost, onClos
 
             {/* 投稿作成 */}
             <TouchableOpacity
-              onPress={onCreatePost}
+              onPress={() => {
+                onCreatePost?.();
+                handleClose();
+              }}
               className="items-center"
               activeOpacity={0.7}
             >
@@ -101,8 +109,7 @@ export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreatePost, onClos
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </SafeAreaView>
+      </View>
       </Animated.View>
     </View>
   );
