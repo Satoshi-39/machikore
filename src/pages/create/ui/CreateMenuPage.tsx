@@ -11,11 +11,11 @@ import { Text, TouchableOpacity, View, Animated } from 'react-native';
 interface CreateMenuPageProps {
   onCreateMap?: () => void;
   onCreateSpot?: () => void;
-  onCreatePost?: () => void;
+  onCreateBlog?: () => void;
   onClose?: () => void;
 }
 
-export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreatePost, onClose }: CreateMenuPageProps) {
+export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreateBlog, onClose }: CreateMenuPageProps) {
   const slideAnim = useRef(new Animated.Value(300)).current; // 初期位置: 画面外
 
   useEffect(() => {
@@ -92,20 +92,20 @@ export function CreateMenuPage({ onCreateMap, onCreateSpot, onCreatePost, onClos
               </Text>
             </TouchableOpacity>
 
-            {/* 投稿作成 */}
+            {/* ブログ作成 */}
             <TouchableOpacity
               onPress={() => {
-                onCreatePost?.();
+                onCreateBlog?.();
                 handleClose();
               }}
               className="items-center"
               activeOpacity={0.7}
             >
               <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
-                <Ionicons name="create-outline" size={32} color="#FFFFFF" />
+                <Ionicons name="reader-outline" size={32} color="#FFFFFF" />
               </View>
               <Text className="text-base font-semibold text-gray-800">
-                投稿
+                ブログ
               </Text>
             </TouchableOpacity>
           </View>

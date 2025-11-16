@@ -22,7 +22,7 @@ export function MyPageTabFilter({
 }: MyPageTabFilterProps) {
   const tabs: { mode: MyPageTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [
     { mode: 'maps', icon: 'map' },
-    { mode: 'visits', icon: 'location' },
+    { mode: 'visits', icon: 'reader' },
     { mode: 'likes', icon: 'heart' },
     { mode: 'bookmarks', icon: 'bookmark' },
   ];

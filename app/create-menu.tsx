@@ -27,9 +27,9 @@ export default function CreateScreen() {
     // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
   };
 
-  const handleCreatePost = () => {
-    // TODO: 投稿作成画面への遷移を実装
-    console.log('投稿作成');
+  const handleCreateBlog = () => {
+    // TODO: ブログ作成画面への遷移を実装
+    console.log('ブログ作成');
     // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
   };
 
@@ -37,7 +37,7 @@ export default function CreateScreen() {
     <CreateMenuPage
       onCreateMap={handleCreateMap}
       onCreateSpot={handleCreateSpot}
-      onCreatePost={handleCreatePost}
+      onCreateBlog={handleCreateBlog}
       onClose={handleClose}
     />
   );
