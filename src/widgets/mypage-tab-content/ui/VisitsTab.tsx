@@ -1,5 +1,5 @@
 /**
- * 最近訪問した街ウィジェット
+ * マイページ 訪問履歴タブ
  *
  * 最近訪問した街を縦一覧で表示
  */
@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import type { VisitRow, MachiRow } from '@/shared/types/database.types';
 
-interface RecentVisitsProps {
+interface VisitsTabProps {
   visits: (VisitRow & { machi: MachiRow })[];
   onVisitPress?: (visit: VisitRow & { machi: MachiRow }) => void;
 }
@@ -49,7 +49,7 @@ function VisitCard({ visit, onPress }: VisitCardProps) {
   );
 }
 
-export function RecentVisits({ visits, onVisitPress }: RecentVisitsProps) {
+export function VisitsTab({ visits, onVisitPress }: VisitsTabProps) {
   return (
     <View className="bg-white border-b border-gray-200 mt-2">
       <Text className="text-base font-semibold text-gray-900 px-4 py-3 border-b border-gray-100">

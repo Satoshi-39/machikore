@@ -1,5 +1,5 @@
 /**
- * ユーザーマップ一覧Widget
+ * マイページ マップタブ
  *
  * ユーザーが作成したカスタムマップの一覧を表示
  */
@@ -12,7 +12,7 @@ import { useUserMaps } from '@/entities/map';
 import { AsyncBoundary } from '@/shared/ui';
 import type { MapRow } from '@/shared/types/database.types';
 
-interface UserMapListProps {
+interface MapsTabProps {
   userId: string | null;
   onMapPress?: (map: MapRow) => void;
 }
@@ -77,7 +77,7 @@ function MapCard({ map, onPress }: MapCardProps) {
   );
 }
 
-export function UserMapList({ userId, onMapPress }: UserMapListProps) {
+export function MapsTab({ userId, onMapPress }: MapsTabProps) {
   const { data: maps, isLoading, error } = useUserMaps(userId);
 
   return (

@@ -12,10 +12,7 @@ import { useRouter } from 'expo-router';
 import { ProfileSection } from '@/widgets/profile-section';
 import { MyPageHeader } from '@/widgets/mypage-header';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
-import { UserMapList } from '@/widgets/user-map-list';
-import { UserLikes } from '@/widgets/user-likes';
-import { UserBookmarks } from '@/widgets/user-bookmarks';
-import { RecentVisits } from '@/widgets/recent-visits';
+import { MapsTab, LikesTab, BookmarksTab, VisitsTab } from '@/widgets/mypage-tab-content';
 import { useSignOut } from '@/features/auth';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentVisits } from '@/entities/visit/api';
@@ -70,10 +67,10 @@ export function MyPage() {
 
         {/* タブコンテンツ */}
         <View className="flex-1">
-          {tabMode === 'maps' && <UserMapList userId={currentUserId} />}
-          {tabMode === 'visits' && <RecentVisits visits={recentVisits} />}
-          {tabMode === 'likes' && <UserLikes userId={currentUserId} />}
-          {tabMode === 'bookmarks' && <UserBookmarks userId={currentUserId} />}
+          {tabMode === 'maps' && <MapsTab userId={currentUserId} />}
+          {tabMode === 'visits' && <VisitsTab visits={recentVisits} />}
+          {tabMode === 'likes' && <LikesTab userId={currentUserId} />}
+          {tabMode === 'bookmarks' && <BookmarksTab userId={currentUserId} />}
         </View>
 
         {/* サインアウトセクション */}
