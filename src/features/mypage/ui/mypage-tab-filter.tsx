@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 
 export type MyPageTabMode = 'maps' | 'visits' | 'likes' | 'bookmarks' | 'schedule';
@@ -19,39 +20,40 @@ export function MyPageTabFilter({
   tabMode,
   onTabModeChange,
 }: MyPageTabFilterProps) {
-  const tabs: { mode: MyPageTabMode; label: string }[] = [
-    { mode: 'maps', label: 'マップ' },
-    { mode: 'visits', label: '訪問した街' },
-    { mode: 'likes', label: 'いいね' },
-    { mode: 'bookmarks', label: 'ブックマーク' },
-    { mode: 'schedule', label: 'スケジュール' },
+  const tabs: { mode: MyPageTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [
+    { mode: 'maps', icon: 'map' },
+    { mode: 'visits', icon: 'location' },
+    { mode: 'likes', icon: 'heart' },
+    { mode: 'bookmarks', icon: 'bookmark' },
+    { mode: 'schedule', icon: 'calendar' },
   ];
 
   return (
     <View className="bg-white border-b border-gray-200">
       {/* タブ */}
       <View className="flex-row">
-        {tabs.map((tab) => (
-          <Pressable
-            key={tab.mode}
-            onPress={() => onTabModeChange(tab.mode)}
-            className="flex-1 py-4 items-center"
-          >
-            <Text
-              className={`text-sm font-semibold ${
-                tabMode === tab.mode ? 'text-gray-900' : 'text-gray-500'
-              }`}
+        {tabs.map((tab) => {
+          const isActive = tabMode === tab.mode;
+          return (
+            <Pressable
+              key={tab.mode}
+              onPress={() => onTabModeChange(tab.mode)}
+              className="flex-1 py-3 items-center justify-center"
             >
-              {tab.label}
-            </Text>
-            {tabMode === tab.mode && (
-              <View
-                className="absolute bottom-0 left-0 right-0 h-1 rounded-t-full"
-                style={{ backgroundColor: colors.primary.DEFAULT }}
+              <Ionicons
+                name={tab.icon}
+                size={24}
+                color={isActive ? colors.primary.DEFAULT : colors.text.secondary}
               />
-            )}
-          </Pressable>
-        ))}
+              {isActive && (
+                <View
+                  className="absolute bottom-0 left-0 right-0 h-1 rounded-t-full"
+                  style={{ backgroundColor: colors.primary.DEFAULT }}
+                />
+              )}
+            </Pressable>
+          );
+        })}
       </View>
     </View>
   );
