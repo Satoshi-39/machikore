@@ -4,6 +4,9 @@
  * Expo Router: /schedule
  */
 
+import React from 'react';
 import { SchedulePage } from '@/pages/schedule';
 
-export default SchedulePage;
+export default function Schedule() {
+  return <SchedulePage />;
+}
