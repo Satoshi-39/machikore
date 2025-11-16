@@ -18,7 +18,7 @@ import { MapSearchFullscreen } from '@/widgets/map-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
 import { CreatePostModal } from '@/widgets/create-post';
-import { type ViewMode } from '@/shared/ui';
+import { type MapListViewMode } from '@/features/toggle-view-mode';
 import { FAB } from '@/shared/ui';
 import { colors } from '@/shared/config';
 
@@ -26,7 +26,7 @@ export function MapPage() {
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const resetToDefault = useMapStore((state) => state.resetToDefault);
-  const [viewMode, setViewMode] = useState<ViewMode>('map');
+  const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);

@@ -8,14 +8,13 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Breadcrumb, type BreadcrumbItem } from '@/shared/ui';
 import {
-  Breadcrumb,
-  type BreadcrumbItem,
   HierarchyListItem,
   type HierarchyItem,
   type HierarchyLevel,
-} from '@/features/map';
-import { MachiCard } from '@/features/machi';
+} from './HierarchyListItem';
+import { MachiCard } from '@/entities/machi';
 import { useMapHierarchy } from '@/entities/machi';
 import { AsyncBoundary } from '@/shared/ui';
 
@@ -199,7 +198,10 @@ export function MapHierarchy() {
             if (level === 'city' && item.machi) {
               return (
                 <View className="px-4">
-                  <MachiCard machi={item.machi} />
+                  <MachiCard
+                    machi={item.machi}
+                    onPress={() => router.push(`/machi/${item.machi!.id}`)}
+                  />
                 </View>
               );
             }

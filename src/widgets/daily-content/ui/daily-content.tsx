@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { MachiVisitInfo } from '@/features/machi';
+import { MachiVisitInfo } from '@/widgets/machi-visit-info';
 import { useCurrentUserId } from '@/entities/user';
 import type { ScheduleRow, PostRow } from '@/shared/types/database.types';
 

@@ -8,7 +8,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PostList } from '@/widgets/post-list';
-import { PostFilterHeader } from '@/features/post';
+import { PostFilterHeader } from '@/features/filter-post';
 import { useCurrentUserId } from '@/entities/user';
 
 export function PostPage() {

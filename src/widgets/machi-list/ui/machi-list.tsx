@@ -4,13 +4,15 @@
 
 import React, { useMemo } from 'react';
 import { FlatList } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit/api';
 import { useCurrentUserId } from '@/entities/user';
-import { MachiCard } from '@/features/machi';
+import { MachiCard } from '@/entities/machi';
 import { AsyncBoundary } from '@/shared/ui';
 
 export function MachiList() {
+  const router = useRouter();
   const currentUserId = useCurrentUserId();
   const { data: stations, isLoading, error } = useMachi();
   const { data: visits } = useVisits(currentUserId);
@@ -42,9 +44,10 @@ export function MachiList() {
             const visit = visitMap.get(item.id);
             return (
               <MachiCard
-                station={item}
+                machi={item}
                 isVisited={!!visit}
                 visitCount={visit?.visit_count || 0}
+                onPress={() => router.push(`/machi/${item.id}`)}
               />
             );
           }}

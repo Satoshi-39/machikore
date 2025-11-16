@@ -10,8 +10,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import {
   NotificationFilterHeader,
-  type NotificationFilterMode,
-} from '@/features/notifications';
+  type NotificationFilter,
+} from '@/features/filter-notification';
+
+type NotificationFilterMode = NotificationFilter;
 
 export function NotificationsPage() {
   const [filterMode, setFilterMode] =

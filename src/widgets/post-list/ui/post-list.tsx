@@ -7,7 +7,8 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import { usePosts } from '@/entities/post/api';
-import { PostCard, usePostFiltering } from '@/features/post';
+import { PostCard } from '@/entities/post';
+import { usePostFiltering } from '@/features/filter-post';
 import { AsyncBoundary } from '@/shared/ui';
 import type { PostRow } from '@/shared/types/database.types';
 

@@ -7,12 +7,17 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { MapSearchBar, ViewModeToggle, type ViewMode } from '@/features/map';
+import { MapSearchBar } from '@/features/search-map';
+import {
+  ViewModeToggle,
+  mapListConfig,
+  type MapListViewMode,
+} from '@/features/toggle-view-mode';
 
 interface MapControlsProps {
   variant: 'map' | 'list';
-  viewMode: ViewMode;
-  onViewModeChange: (mode: ViewMode) => void;
+  viewMode: MapListViewMode;
+  onViewModeChange: (mode: MapListViewMode) => void;
   onSearchFocus: () => void;
   className?: string;
 }
@@ -30,7 +35,11 @@ export function MapControls({
         <View className="flex-1">
           <MapSearchBar variant={variant} onFocus={onSearchFocus} />
         </View>
-        <ViewModeToggle viewMode={viewMode} onViewModeChange={onViewModeChange} />
+        <ViewModeToggle
+          viewMode={viewMode}
+          onViewModeChange={onViewModeChange}
+          config={mapListConfig}
+        />
       </View>
     </View>
   );

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Modal } from 'react-native';
-import { CreateScheduleForm } from '@/features/schedule';
+import { CreateScheduleForm } from '@/features/create-schedule';
 import { useCreateSchedule } from '@/entities/schedule';
 import { useCurrentUserId } from '@/entities/user';
 

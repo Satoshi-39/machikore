@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Modal } from 'react-native';
-import { CreatePostForm } from '@/features/post';
+import { CreatePostForm } from '@/features/create-post';
 import { useCreatePost } from '@/entities/post';
 import { useCurrentUserId } from '@/entities/user';
 
