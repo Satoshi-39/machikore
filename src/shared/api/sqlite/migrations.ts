@@ -253,19 +253,21 @@ export function initializeDatabase(): void {
       ON spots(is_synced);
     `);
 
-    // 8. 訪問記録テーブル（マップ訪問）
+    // 8. 訪問記録テーブル（街訪問）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS visits (
         id TEXT PRIMARY KEY,
         user_id TEXT NOT NULL,
-        map_id TEXT NOT NULL,
+        machi_id TEXT NOT NULL,
+        visit_count INTEGER DEFAULT 1,
         visited_at TEXT NOT NULL,
         memo TEXT,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         synced_at TEXT,
         is_synced INTEGER DEFAULT 0,
-        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE
+        FOREIGN KEY (machi_id) REFERENCES machi(id),
+        UNIQUE(user_id, machi_id)
       );
     `);
 
@@ -275,12 +277,16 @@ export function initializeDatabase(): void {
       ON visits(user_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_visits_map_id
-      ON visits(map_id);
+      CREATE INDEX IF NOT EXISTS idx_visits_machi_id
+      ON visits(machi_id);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_visits_visited_at
       ON visits(visited_at);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_visits_user_machi
+      ON visits(user_id, machi_id);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_visits_is_synced
