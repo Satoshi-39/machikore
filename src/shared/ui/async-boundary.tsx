@@ -64,5 +64,5 @@ export function AsyncBoundary<T>({
   }
 
   // データ存在：子コンポーネントをレンダリング
-  return <>{children(data)}</>;
+  return children(data) as React.ReactElement;
 }

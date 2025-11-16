@@ -10,8 +10,10 @@ import {
   getAllPrefectures,
   getAllCities,
   getAllMachi,
+  getAllRegions,
 } from '@/shared/api/sqlite';
 import type {
+  RegionRow,
   PrefectureRow,
   CityRow,
   MachiRow,
@@ -37,6 +39,16 @@ export interface CityHierarchy {
  * 地方→都道府県→市区町村→街の階層構造を取得
  */
 export function useMachiHierarchy() {
+  // 地方データ取得
+  const {
+    data: regions,
+    isLoading: isRegionsLoading,
+    error: regionsError,
+  } = useQuery({
+    queryKey: ['regions'],
+    queryFn: () => getAllRegions(),
+  });
+
   // 都道府県データ取得
   const {
     data: prefectures,
@@ -69,7 +81,7 @@ export function useMachiHierarchy() {
 
   // 階層構造を構築
   const hierarchy = useMemo(() => {
-    if (!prefectures || !cities || !machis) return [];
+    if (!regions || !prefectures || !cities || !machis) return [];
 
     // 地方でグループ化
     const regionMap = new Map<string, PrefectureHierarchy[]>();
@@ -127,19 +139,25 @@ export function useMachiHierarchy() {
         totalMachiCount: prefectureMachis.length,
       };
 
-      // 地方別にグループ化
-      const region = prefecture.region;
-      if (!regionMap.has(region)) {
-        regionMap.set(region, []);
+      // 地方別にグループ化（region_idを使用）
+      const regionId = prefecture.region_id;
+      if (!regionId) return; // region_idがnullの場合はスキップ
+
+      if (!regionMap.has(regionId)) {
+        regionMap.set(regionId, []);
       }
-      regionMap.get(region)!.push(prefectureHierarchy);
+      regionMap.get(regionId)!.push(prefectureHierarchy);
     });
 
-    // 地方の配列に変換
+    // 地方の配列に変換（IDから名前に変換）
     const result: MachiHierarchy[] = [];
-    regionMap.forEach((prefectures, region) => {
+    regionMap.forEach((prefectures, regionId) => {
+      // region_idから地方名を取得
+      const regionRow = regions.find((r) => r.id === regionId);
+      const regionName = regionRow?.name || regionId; // 見つからない場合はIDを使用
+
       result.push({
-        region,
+        region: regionName,
         prefectures,
       });
     });
@@ -163,10 +181,10 @@ export function useMachiHierarchy() {
     });
 
     return result;
-  }, [prefectures, cities, machis]);
+  }, [regions, prefectures, cities, machis]);
 
-  const isLoading = isPrefecturesLoading || isCitiesLoading || isMachisLoading;
-  const error = prefecturesError || citiesError || machisError;
+  const isLoading = isRegionsLoading || isPrefecturesLoading || isCitiesLoading || isMachisLoading;
+  const error = regionsError || prefecturesError || citiesError || machisError;
 
   return {
     data: hierarchy,

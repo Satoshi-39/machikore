@@ -80,30 +80,28 @@ export function MapPage() {
         </View>
       ) : (
         // リスト表示
-        <View className="flex-1 bg-white">
-          {isSearchFocused ? (
-            // 検索フォーカス時：全画面検索UI
-            <MapSearchFullscreen
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              onClose={handleSearchClose}
+        isSearchFocused ? (
+          // 検索フォーカス時：全画面検索UI
+          <MapSearchFullscreen
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClose={handleSearchClose}
+          />
+        ) : (
+          <View className="flex-1 bg-white">
+            {/* 検索バー + ViewModeToggle */}
+            <MapControls
+              variant="list"
+              viewMode={viewMode}
+              onViewModeChange={setViewMode}
+              onSearchFocus={handleSearchFocus}
+              className="px-5 pt-5 pb-3"
             />
-          ) : (
-            <>
-              {/* 検索バー + ViewModeToggle */}
-              <MapControls
-                variant="list"
-                viewMode={viewMode}
-                onViewModeChange={setViewMode}
-                onSearchFocus={handleSearchFocus}
-                className="px-5 pt-5 pb-3"
-              />
 
-              {/* デフォルトマップの階層リスト or カスタムマップのフラットリスト */}
-              {isCustomMap ? <MapList /> : <MapHierarchy />}
-            </>
-          )}
-        </View>
+            {/* デフォルトマップの階層リスト or カスタムマップのフラットリスト */}
+            {isCustomMap ? <MapList /> : <MapHierarchy />}
+          </View>
+        )
       )}
 
       {/* 投稿ボタン */}

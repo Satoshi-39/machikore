@@ -1,0 +1,49 @@
+/**
+ * 階層リストアイテムコンポーネント
+ *
+ * 階層ナビゲーションで使用するリストアイテム
+ */
+
+import React from 'react';
+import { View, Text, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+// 階層レベルの型定義
+export type HierarchyLevel = 'home' | 'region' | 'prefecture' | 'city' | 'machi';
+
+// 階層アイテムの型定義
+export interface HierarchyItem {
+  id: string;
+  name: string;
+  count?: number; // 配下のアイテム数
+}
+
+interface HierarchyListItemProps {
+  item: HierarchyItem;
+  level: HierarchyLevel;
+  onPress: (item: HierarchyItem) => void;
+}
+
+export function HierarchyListItem({ item, level, onPress }: HierarchyListItemProps) {
+  return (
+    <Pressable
+      onPress={() => onPress(item)}
+      className="px-5 py-4 border-b border-gray-100 bg-white active:bg-gray-50"
+    >
+      <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center flex-1">
+          <Ionicons
+            name={level === 'city' ? 'location' : 'chevron-forward'}
+            size={20}
+            color="#6B7280"
+            style={{ marginRight: 12 }}
+          />
+          <Text className="text-base text-gray-900 font-medium">{item.name}</Text>
+        </View>
+        {item.count !== undefined && (
+          <Text className="text-sm text-gray-500 ml-2">{item.count}件</Text>
+        )}
+      </View>
+    </Pressable>
+  );
+}
