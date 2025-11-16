@@ -8,10 +8,10 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { ProfileSection } from '@/widgets/profile-section';
 import { MyPageHeader, MyPageTabFilter, type MyPageTabMode } from '@/features/mypage';
 import { UserMapList } from '@/widgets/user-map-list';
-import { UserSchedule } from '@/widgets/user-schedule';
 import { UserLikes } from '@/widgets/user-likes';
 import { UserBookmarks } from '@/widgets/user-bookmarks';
 import { RecentVisits } from '@/widgets/recent-visits';
@@ -21,6 +21,7 @@ import { useRecentVisits } from '@/entities/visit/api';
 import { TouchableOpacity } from 'react-native';
 
 export function MyPage() {
+  const router = useRouter();
   const currentUserId = useCurrentUserId();
   const { signOut, isLoading } = useSignOut();
   const [tabMode, setTabMode] = useState<MyPageTabMode>('maps');
@@ -30,6 +31,10 @@ export function MyPage() {
 
   const handleSettingsPress = () => {
     Alert.alert('設定', '設定画面は今後実装予定です');
+  };
+
+  const handleSchedulePress = () => {
+    router.push('/schedule');
   };
 
   const handleSignOutPress = () => {
@@ -50,7 +55,10 @@ export function MyPage() {
   return (
     <SafeAreaView className="flex-1 bg-gray-50" edges={['top']}>
       {/* ヘッダーバー */}
-      <MyPageHeader onSettingsPress={handleSettingsPress} />
+      <MyPageHeader
+        onSettingsPress={handleSettingsPress}
+        onSchedulePress={handleSchedulePress}
+      />
 
       <ScrollView className="flex-1">
         {/* プロフィールセクション */}
@@ -65,7 +73,6 @@ export function MyPage() {
           {tabMode === 'visits' && <RecentVisits visits={recentVisits} />}
           {tabMode === 'likes' && <UserLikes userId={currentUserId} />}
           {tabMode === 'bookmarks' && <UserBookmarks userId={currentUserId} />}
-          {tabMode === 'schedule' && <UserSchedule userId={currentUserId} />}
         </View>
 
         {/* サインアウトセクション */}

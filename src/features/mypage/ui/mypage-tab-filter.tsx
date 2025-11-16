@@ -1,7 +1,7 @@
 /**
  * マイページタブフィルター
  *
- * マップ、訪問した街、いいね、ブックマーク、スケジュールを切り替えるタブUI
+ * マップ、訪問した街、いいね、ブックマークを切り替えるタブUI
  */
 
 import React from 'react';
@@ -9,7 +9,7 @@ import { Pressable, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 
-export type MyPageTabMode = 'maps' | 'visits' | 'likes' | 'bookmarks' | 'schedule';
+export type MyPageTabMode = 'maps' | 'visits' | 'likes' | 'bookmarks';
 
 interface MyPageTabFilterProps {
   tabMode: MyPageTabMode;
@@ -25,7 +25,6 @@ export function MyPageTabFilter({
     { mode: 'visits', icon: 'location' },
     { mode: 'likes', icon: 'heart' },
     { mode: 'bookmarks', icon: 'bookmark' },
-    { mode: 'schedule', icon: 'calendar' },
   ];
 
   return (
