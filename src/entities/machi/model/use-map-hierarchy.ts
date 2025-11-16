@@ -1,7 +1,7 @@
 /**
- * Machi階層データフック
+ * Map階層データフック
  *
- * prefecture → city → machiの3階層構造を提供
+ * region → prefecture → city → machiの4階層構造を提供
  */
 
 import { useMemo } from 'react';
@@ -19,7 +19,7 @@ import type {
   MachiRow,
 } from '@/shared/types/database.types';
 
-export interface MachiHierarchy {
+export interface MapHierarchy {
   region: string;
   prefectures: PrefectureHierarchy[];
 }
@@ -38,7 +38,7 @@ export interface CityHierarchy {
 /**
  * 地方→都道府県→市区町村→街の階層構造を取得
  */
-export function useMachiHierarchy() {
+export function useMapHierarchy() {
   // 地方データ取得
   const {
     data: regions,
@@ -150,7 +150,7 @@ export function useMachiHierarchy() {
     });
 
     // 地方の配列に変換（IDから名前に変換）
-    const result: MachiHierarchy[] = [];
+    const result: MapHierarchy[] = [];
     regionMap.forEach((prefectures, regionId) => {
       // region_idから地方名を取得
       const regionRow = regions.find((r) => r.id === regionId);

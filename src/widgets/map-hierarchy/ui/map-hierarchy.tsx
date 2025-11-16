@@ -14,7 +14,7 @@ import {
   type HierarchyItem,
   type HierarchyLevel,
 } from '@/features/map';
-import { useMachiHierarchy } from '@/entities/machi';
+import { useMapHierarchy } from '@/entities/machi';
 import { AsyncBoundary } from '@/shared/ui';
 
 export function MapHierarchy() {
@@ -24,7 +24,7 @@ export function MapHierarchy() {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
   // データベースから階層データを取得
-  const { data: hierarchyData, isLoading, error } = useMachiHierarchy();
+  const { data: hierarchyData, isLoading, error } = useMapHierarchy();
 
   // 現在表示するデータを取得（useMemoでパフォーマンス最適化）
   const getCurrentData = useMemo((): HierarchyItem[] => {
