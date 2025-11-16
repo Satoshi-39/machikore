@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { ProfileHeader } from '@/widgets/profile-header';
+import { ProfileHeader } from './ProfileHeader';
 import { ProfileStats } from '@/widgets/profile-stats';
 import { useUser, useUserStats } from '@/entities/user/api';
 
