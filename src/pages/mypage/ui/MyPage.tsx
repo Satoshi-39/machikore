@@ -6,48 +6,30 @@
  */
 
 import React, { useState } from 'react';
-import { ScrollView, View, Text, Alert } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { ProfileSection } from '@/widgets/profile-section';
 import { MyPageHeader } from '@/widgets/mypage-header';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
 import { MapsTab, LikesTab, BookmarksTab, VisitsTab } from '@/widgets/mypage-tab-content';
-import { useSignOut } from '@/features/auth';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentVisits } from '@/entities/visit/api';
-import { TouchableOpacity } from 'react-native';
 
 export function MyPage() {
   const router = useRouter();
   const currentUserId = useCurrentUserId();
-  const { signOut, isLoading } = useSignOut();
   const [tabMode, setTabMode] = useState<MyPageTabMode>('maps');
 
   // 訪問した街データ取得
   const { data: recentVisits = [] } = useRecentVisits(currentUserId ?? '', 20);
 
   const handleSettingsPress = () => {
-    Alert.alert('設定', '設定画面は今後実装予定です');
+    router.push('/settings');
   };
 
   const handleSchedulePress = () => {
     router.push('/schedule');
-  };
-
-  const handleSignOutPress = () => {
-    Alert.alert(
-      'サインアウト',
-      'サインアウトしてもよろしいですか？',
-      [
-        { text: 'キャンセル', style: 'cancel' },
-        {
-          text: 'サインアウト',
-          style: 'destructive',
-          onPress: () => signOut(),
-        },
-      ]
-    );
   };
 
   return (
@@ -58,35 +40,19 @@ export function MyPage() {
         onSchedulePress={handleSchedulePress}
       />
 
-      <ScrollView className="flex-1">
-        {/* プロフィールセクション */}
-        <ProfileSection userId={currentUserId} />
+      {/* プロフィールセクション */}
+      <ProfileSection userId={currentUserId} />
 
-        {/* タブフィルター */}
-        <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} />
+      {/* タブフィルター */}
+      <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} />
 
-        {/* タブコンテンツ */}
-        <View className="flex-1">
-          {tabMode === 'maps' && <MapsTab userId={currentUserId} />}
-          {tabMode === 'visits' && <VisitsTab visits={recentVisits} />}
-          {tabMode === 'likes' && <LikesTab userId={currentUserId} />}
-          {tabMode === 'bookmarks' && <BookmarksTab userId={currentUserId} />}
-        </View>
-
-        {/* サインアウトセクション */}
-        <View className="bg-white py-6 px-4 mt-2">
-          <TouchableOpacity
-            onPress={handleSignOutPress}
-            disabled={isLoading}
-            className="bg-red-600 py-3 px-4 rounded-lg"
-            activeOpacity={0.8}
-          >
-            <Text className="text-white text-center font-semibold">
-              {isLoading ? 'サインアウト中...' : 'サインアウト'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+      {/* タブコンテンツ（各タブが独自にスクロール） */}
+      <View className="flex-1">
+        {tabMode === 'maps' && <MapsTab userId={currentUserId} />}
+        {tabMode === 'visits' && <VisitsTab visits={recentVisits} />}
+        {tabMode === 'likes' && <LikesTab userId={currentUserId} />}
+        {tabMode === 'bookmarks' && <BookmarksTab userId={currentUserId} />}
+      </View>
     </SafeAreaView>
   );
 }

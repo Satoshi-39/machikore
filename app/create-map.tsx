@@ -14,6 +14,7 @@ export default function CreateMapScreen() {
         options={{
           title: 'マップ作成',
           headerShown: true,
+          headerBackTitle: '戻る',
         }}
       />
       <CreateMapPage />

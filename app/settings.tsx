@@ -1,23 +1,21 @@
 /**
- * スケジュール画面
- *
- * Expo Router: /schedule
+ * 設定画面ルート
  */
 
 import { Stack } from 'expo-router';
-import { SchedulePage } from '@/pages/schedule';
+import { SettingsPage } from '@/pages/settings';
 
-export default function Schedule() {
+export default function SettingsScreen() {
   return (
     <>
       <Stack.Screen
         options={{
-          title: 'スケジュール',
+          title: '設定',
           headerShown: true,
           headerBackTitle: '戻る',
         }}
       />
-      <SchedulePage />
+      <SettingsPage />
     </>
   );
 }
