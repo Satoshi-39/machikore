@@ -1,0 +1,190 @@
+/**
+ * Maps テーブル操作
+ */
+
+import { getDatabase } from './client';
+import type { MapRow, MapInsert, MapUpdate } from '@/shared/types/database.types';
+
+// ===============================
+// 作成
+// ===============================
+
+/**
+ * マップを挿入
+ */
+export function insertMap(map: MapInsert): void {
+  const db = getDatabase();
+  const now = new Date().toISOString();
+
+  db.runSync(
+    `INSERT INTO maps (
+      id, user_id, name, description, category, tags,
+      is_public, is_default, is_official, thumbnail_url,
+      spots_count, likes_count,
+      created_at, updated_at, synced_at, is_synced
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+    [
+      map.id,
+      map.user_id,
+      map.name,
+      map.description ?? null,
+      map.category ?? null,
+      map.tags ?? null,
+      map.is_public ?? 1,
+      map.is_default ?? 0,
+      map.is_official ?? 0,
+      map.thumbnail_url ?? null,
+      map.spots_count ?? 0,
+      map.likes_count ?? 0,
+      map.created_at ?? now,
+      map.updated_at ?? now,
+      map.synced_at ?? null,
+      map.is_synced ?? 0,
+    ]
+  );
+}
+
+// ===============================
+// 取得
+// ===============================
+
+/**
+ * IDでマップを取得
+ */
+export function getMapById(mapId: string): MapRow | null {
+  const db = getDatabase();
+  return db.getFirstSync<MapRow>(
+    'SELECT * FROM maps WHERE id = ?;',
+    [mapId]
+  );
+}
+
+/**
+ * ユーザーIDでマップを取得（作成日時降順）
+ */
+export function getMapsByUserId(userId: string): MapRow[] {
+  const db = getDatabase();
+  return db.getAllSync<MapRow>(
+    'SELECT * FROM maps WHERE user_id = ? ORDER BY created_at DESC;',
+    [userId]
+  );
+}
+
+/**
+ * 公開マップを取得
+ */
+export function getPublicMaps(): MapRow[] {
+  const db = getDatabase();
+  return db.getAllSync<MapRow>(
+    'SELECT * FROM maps WHERE is_public = 1 ORDER BY created_at DESC;'
+  );
+}
+
+/**
+ * 全マップを取得
+ */
+export function getAllMaps(): MapRow[] {
+  const db = getDatabase();
+  return db.getAllSync<MapRow>(
+    'SELECT * FROM maps ORDER BY created_at DESC;'
+  );
+}
+
+// ===============================
+// 更新
+// ===============================
+
+/**
+ * マップ情報を更新
+ */
+export function updateMap(
+  mapId: string,
+  updates: MapUpdate
+): void {
+  const db = getDatabase();
+  const fields: string[] = [];
+  const values: any[] = [];
+
+  // 更新フィールドを動的に構築
+  if (updates.name !== undefined) {
+    fields.push('name = ?');
+    values.push(updates.name);
+  }
+  if (updates.description !== undefined) {
+    fields.push('description = ?');
+    values.push(updates.description);
+  }
+  if (updates.category !== undefined) {
+    fields.push('category = ?');
+    values.push(updates.category);
+  }
+  if (updates.tags !== undefined) {
+    fields.push('tags = ?');
+    values.push(updates.tags);
+  }
+  if (updates.is_public !== undefined) {
+    fields.push('is_public = ?');
+    values.push(updates.is_public);
+  }
+  if (updates.is_default !== undefined) {
+    fields.push('is_default = ?');
+    values.push(updates.is_default);
+  }
+  if (updates.is_official !== undefined) {
+    fields.push('is_official = ?');
+    values.push(updates.is_official);
+  }
+  if (updates.thumbnail_url !== undefined) {
+    fields.push('thumbnail_url = ?');
+    values.push(updates.thumbnail_url);
+  }
+  if (updates.spots_count !== undefined) {
+    fields.push('spots_count = ?');
+    values.push(updates.spots_count);
+  }
+  if (updates.likes_count !== undefined) {
+    fields.push('likes_count = ?');
+    values.push(updates.likes_count);
+  }
+  if (updates.updated_at !== undefined) {
+    fields.push('updated_at = ?');
+    values.push(updates.updated_at);
+  }
+  if (updates.synced_at !== undefined) {
+    fields.push('synced_at = ?');
+    values.push(updates.synced_at);
+  }
+  if (updates.is_synced !== undefined) {
+    fields.push('is_synced = ?');
+    values.push(updates.is_synced);
+  }
+
+  if (fields.length === 0) return;
+
+  values.push(mapId);
+
+  db.runSync(
+    `UPDATE maps SET ${fields.join(', ')} WHERE id = ?;`,
+    values
+  );
+}
+
+// ===============================
+// 削除
+// ===============================
+
+/**
+ * マップを削除
+ */
+export function deleteMap(mapId: string): void {
+  const db = getDatabase();
+  db.runSync('DELETE FROM maps WHERE id = ?;', [mapId]);
+}
+
+/**
+ * 全マップを削除
+ */
+export function deleteAllMaps(): void {
+  const db = getDatabase();
+  db.runSync('DELETE FROM maps;');
+}

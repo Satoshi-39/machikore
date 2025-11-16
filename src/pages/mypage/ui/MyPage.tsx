@@ -5,18 +5,26 @@
  * 認証済みユーザーのプロフィール、統計、友達などを表示
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View, Text, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ProfileSection } from '@/widgets/profile-section';
-import { MyPageHeader } from '@/features/mypage';
+import { MyPageHeader, MyPageTabFilter, type MyPageTabMode } from '@/features/mypage';
+import { UserMapList } from '@/widgets/user-map-list';
+import { UserSchedule } from '@/widgets/user-schedule';
+import { RecentVisits } from '@/widgets/recent-visits';
 import { useSignOut } from '@/features/auth';
 import { useCurrentUserId } from '@/entities/user';
+import { useRecentVisits } from '@/entities/visit/api';
 import { TouchableOpacity } from 'react-native';
 
 export function MyPage() {
   const currentUserId = useCurrentUserId();
   const { signOut, isLoading } = useSignOut();
+  const [tabMode, setTabMode] = useState<MyPageTabMode>('maps');
+
+  // 訪問した街データ取得
+  const { data: recentVisits = [] } = useRecentVisits(currentUserId ?? '', 20);
 
   const handleSettingsPress = () => {
     Alert.alert('設定', '設定画面は今後実装予定です');
@@ -46,6 +54,16 @@ export function MyPage() {
         {/* プロフィールセクション */}
         <ProfileSection userId={currentUserId} />
 
+        {/* タブフィルター */}
+        <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} />
+
+        {/* タブコンテンツ */}
+        <View className="flex-1">
+          {tabMode === 'maps' && <UserMapList userId={currentUserId} />}
+          {tabMode === 'schedule' && <UserSchedule userId={currentUserId} />}
+          {tabMode === 'visits' && <RecentVisits visits={recentVisits} />}
+        </View>
+
         {/* サインアウトセクション */}
         <View className="bg-white py-6 px-4 mt-2">
           <TouchableOpacity
@@ -58,16 +76,6 @@ export function MyPage() {
               {isLoading ? 'サインアウト中...' : 'サインアウト'}
             </Text>
           </TouchableOpacity>
-        </View>
-
-        {/* 友達（将来実装） */}
-        <View className="bg-white py-6 px-4 mt-2">
-          <Text className="text-base font-semibold text-gray-900 mb-2">
-            友達
-          </Text>
-          <Text className="text-sm text-gray-500">
-            友達機能は今後実装予定です
-          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>

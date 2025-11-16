@@ -5,6 +5,7 @@
 export * from './client';
 export * from './migrations';
 export * from './users';
+export * from './maps';
 export * from './regions';
 export * from './prefectures';
 export * from './cities';
