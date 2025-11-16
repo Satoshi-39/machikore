@@ -25,6 +25,16 @@ interface HierarchyListItemProps {
 }
 
 export function HierarchyListItem({ item, level, onPress }: HierarchyListItemProps) {
+  // 階層レベルに応じたアイコンを選択
+  const getIcon = (): keyof typeof Ionicons.glyphMap => {
+    if (level === 'city') {
+      // 街レベル - 商店街・街を表すアイコン
+      return 'storefront';
+    }
+    // その他の階層 - 進むアイコン
+    return 'chevron-forward';
+  };
+
   return (
     <Pressable
       onPress={() => onPress(item)}
@@ -33,7 +43,7 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
       <View className="flex-row items-center justify-between">
         <View className="flex-row items-center flex-1">
           <Ionicons
-            name={level === 'city' ? 'location' : 'chevron-forward'}
+            name={getIcon()}
             size={20}
             color="#6B7280"
             style={{ marginRight: 12 }}

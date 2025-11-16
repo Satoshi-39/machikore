@@ -7,6 +7,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { View, Text, FlatList } from 'react-native';
+import { useRouter } from 'expo-router';
 import {
   Breadcrumb,
   type BreadcrumbItem,
@@ -18,6 +19,7 @@ import { useMapHierarchy } from '@/entities/machi';
 import { AsyncBoundary } from '@/shared/ui';
 
 export function MapHierarchy() {
+  const router = useRouter();
   const [level, setLevel] = useState<HierarchyLevel>('home');
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
@@ -165,8 +167,8 @@ export function MapHierarchy() {
         setLevel('city');
         break;
       case 'city':
-        // 街が選択された（最下層）
-        console.log('Selected machi:', item.id);
+        // 街が選択された（最下層） - 街詳細ページに遷移
+        router.push(`/machi/${item.id}`);
         break;
     }
   };
