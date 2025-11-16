@@ -7,3 +7,6 @@ export * from './model';
 
 // API (React Query hooks)
 export * from './api';
+
+// UI
+export { PostCard } from './ui/PostCard';

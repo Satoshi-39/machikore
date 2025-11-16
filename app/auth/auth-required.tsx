@@ -7,7 +7,7 @@
  */
 
 import { useRouter } from 'expo-router';
-import { AuthRequiredPage } from '@/pages/auth';
+import { AuthRequiredPage } from '@/pages/auth-required';
 
 export default function AuthRequiredScreen() {
   const router = useRouter();

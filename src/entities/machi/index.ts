@@ -10,3 +10,4 @@ export * from './api';
 
 // UI
 export { Machi } from './ui/Machi';
+export { MachiCard } from './ui/MachiCard';

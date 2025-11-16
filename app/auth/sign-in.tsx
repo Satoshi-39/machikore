@@ -5,7 +5,7 @@
  */
 
 import { Stack, useRouter } from 'expo-router';
-import { SignInPage } from '@/pages/auth';
+import { SignInPage } from '@/pages/sign-in';
 
 export default function SignInScreen() {
   const router = useRouter();

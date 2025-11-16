@@ -3,3 +3,4 @@
  */
 
 export { useUserMaps } from './useUserMaps';
+export { createMap } from './createMap';

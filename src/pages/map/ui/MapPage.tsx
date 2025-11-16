@@ -18,7 +18,7 @@ import { MapSearchFullscreen } from '@/widgets/map-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
 import { CreatePostModal } from '@/widgets/create-post';
-import { type ViewMode } from '@/features/map';
+import { type ViewMode } from '@/shared/ui';
 import { FAB } from '@/shared/ui';
 import { colors } from '@/shared/config';
 

@@ -6,7 +6,7 @@
  */
 
 import { useRouter } from 'expo-router';
-import { CreateMenuPage } from '@/pages/create';
+import { CreateMenuPage } from '@/pages/create-menu';
 
 export default function CreateScreen() {
   const router = useRouter();
@@ -16,9 +16,7 @@ export default function CreateScreen() {
   };
 
   const handleCreateMap = () => {
-    // TODO: マップ作成画面への遷移を実装
-    console.log('マップ作成');
-    // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
+    router.push('/create-map');
   };
 
   const handleCreateSpot = () => {
