@@ -10,10 +10,10 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useUserStore } from '@/entities/user';
 import { useMapStore } from '@/entities/map';
-import { DefaultMap } from '@/widgets/default-map';
-import { MapHierarchy } from '@/widgets/map-hierarchy';
-import { UserMap } from '@/widgets/user-map';
-import { MapList } from '@/widgets/map-list';
+import { DefaultMapView } from '@/widgets/default-map-view';
+import { DefaultMapHierarchy } from '@/widgets/default-map-hierarchy';
+import { CustomMapView } from '@/widgets/custom-map-view';
+import { CustomMapList } from '@/widgets/custom-map-list';
 import { MapSearchFullscreen } from '@/widgets/map-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
@@ -64,7 +64,7 @@ export function MapPage() {
           ) : (
             <>
               {/* デフォルトマップ or カスタムマップ */}
-              {isCustomMap ? <UserMap /> : <DefaultMap />}
+              {isCustomMap ? <CustomMapView /> : <DefaultMapView />}
 
               {/* 検索バー + ViewModeToggle をマップの上に表示 */}
               <View className="absolute top-0 left-0 right-0">
@@ -99,7 +99,7 @@ export function MapPage() {
             />
 
             {/* デフォルトマップの階層リスト or カスタムマップのフラットリスト */}
-            {isCustomMap ? <MapList /> : <MapHierarchy />}
+            {isCustomMap ? <CustomMapList /> : <DefaultMapHierarchy />}
           </View>
         )
       )}

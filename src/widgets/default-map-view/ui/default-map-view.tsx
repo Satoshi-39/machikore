@@ -1,5 +1,5 @@
 /**
- * デフォルトマップWidget - マスターデータのmachi表示
+ * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import { AsyncBoundary } from '@/shared/ui';
 import { DefaultMapDetailCard } from './default-map-detail-card';
 import type { MachiRow } from '@/shared/types/database.types';
 
-export function DefaultMap() {
+export function DefaultMapView() {
   const { data: stations, isLoading, error } = useMachi();
   const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
 

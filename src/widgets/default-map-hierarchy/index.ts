@@ -1,8 +1,8 @@
 /**
- * Map階層表示 Widget エクスポート
+ * DefaultMapHierarchy Widget エクスポート
  */
 
-export { MapHierarchy } from './ui/map-hierarchy';
+export { DefaultMapHierarchy } from './ui/default-map-hierarchy';
 export {
   HierarchyListItem,
   type HierarchyItem,

@@ -7,7 +7,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { MachiVisitInfo } from '@/widgets/machi-visit-info';
-import { MachiPostList } from '@/widgets/machi-post-list';
+import { MachiPostList } from './MachiPostList';
 import { useVisitByMachi } from '@/entities/visit/api';
 import { useCurrentUserId } from '@/entities/user';
 import type { MachiRow } from '@/shared/types/database.types';

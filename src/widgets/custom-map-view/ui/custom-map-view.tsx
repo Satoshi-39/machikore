@@ -1,5 +1,5 @@
 /**
- * ユーザーマップWidget - Mapbox地図表示
+ * カスタムマップビューWidget - Mapbox地図表示
  *
  * FSDの原則：Widget層は複合的なUIコンポーネント
  */
@@ -8,7 +8,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 
-export function UserMap() {
+export function CustomMapView() {
   return (
     <View className="flex-1">
       <Mapbox.MapView

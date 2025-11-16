@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { Calendar } from '@/widgets/calendar';
+import { Calendar } from './Calendar';
 
 interface UserScheduleProps {
   userId: string | null;
