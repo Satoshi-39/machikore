@@ -1,5 +1,5 @@
 /**
- * 全画面検索UI（Google Map風）
+ * マップ全画面検索Widget
  */
 
 import React from 'react';
@@ -7,17 +7,17 @@ import { View, TextInput, Pressable, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 
-interface MachiSearchFullscreenProps {
+interface MapFullscreenSearchProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClose: () => void;
 }
 
-export function MachiSearchFullscreen({
+export function MapFullscreenSearch({
   searchQuery,
   onSearchChange,
   onClose,
-}: MachiSearchFullscreenProps) {
+}: MapFullscreenSearchProps) {
 
   return (
     <View className="flex-1 bg-white">
@@ -28,7 +28,7 @@ export function MachiSearchFullscreen({
             <Ionicons name="search" size={20} color={colors.gray[400]} />
             <TextInput
               className="flex-1 ml-2 text-base text-gray-800"
-              placeholder="街を検索"
+              placeholder="スポットを検索"
               placeholderTextColor={colors.gray[400]}
               value={searchQuery}
               onChangeText={onSearchChange}
@@ -54,7 +54,7 @@ export function MachiSearchFullscreen({
             <Text className="text-lg font-semibold text-gray-800 mb-3">最近の検索</Text>
 
             {/* サンプル履歴項目 */}
-            {['渋谷', '新宿', '原宿'].map((item, index) => (
+            {['東京観光マップ', 'カフェ巡りマップ', '紅葉スポット'].map((item, index) => (
               <Pressable
                 key={index}
                 className="flex-row items-center py-3 border-b border-gray-100"
@@ -73,17 +73,17 @@ export function MachiSearchFullscreen({
             </Text>
 
             {/* サンプル検索結果 */}
-            {['渋谷駅周辺', '渋谷センター街', '渋谷ヒカリエ'].map((item, index) => (
+            {['東京タワー周辺マップ', '渋谷グルメマップ', '新宿散策マップ'].map((item, index) => (
               <Pressable
                 key={index}
                 className="flex-row items-center py-3 border-b border-gray-100"
               >
                 <View className="w-10 h-10 rounded-full bg-gray-100 items-center justify-center">
-                  <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
+                  <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
                 </View>
                 <View className="flex-1 ml-3">
                   <Text className="text-base text-gray-800 font-medium">{item}</Text>
-                  <Text className="text-sm text-gray-500 mt-0.5">東京都 • 山手線</Text>
+                  <Text className="text-sm text-gray-500 mt-0.5">25件のスポット</Text>
                 </View>
               </Pressable>
             ))}

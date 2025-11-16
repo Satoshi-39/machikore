@@ -14,7 +14,7 @@ import { DefaultMapView } from '@/widgets/default-map-view';
 import { DefaultMapHierarchy } from '@/widgets/default-map-hierarchy';
 import { CustomMapView } from '@/widgets/custom-map-view';
 import { CustomMapList } from '@/widgets/custom-map-list';
-import { MapSearchFullscreen } from '@/widgets/map-search';
+import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
 import { CreatePostModal } from '@/widgets/post-creation-modal';
@@ -56,7 +56,7 @@ export function MapPage() {
         <View className="flex-1">
           {isSearchFocused ? (
             // 検索フォーカス時：全画面検索UI
-            <MapSearchFullscreen
+            <MapFullscreenSearch
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               onClose={handleSearchClose}
@@ -82,7 +82,7 @@ export function MapPage() {
         // リスト表示
         isSearchFocused ? (
           // 検索フォーカス時：全画面検索UI
-          <MapSearchFullscreen
+          <MapFullscreenSearch
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             onClose={handleSearchClose}
