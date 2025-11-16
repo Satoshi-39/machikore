@@ -7,6 +7,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import type { MachiRow } from '@/shared/types/database.types';
 
 // 階層レベルの型定義
 export type HierarchyLevel = 'home' | 'region' | 'prefecture' | 'city' | 'machi';
@@ -16,6 +17,7 @@ export interface HierarchyItem {
   id: string;
   name: string;
   count?: number; // 配下のアイテム数
+  machi?: MachiRow; // 街データ（街レベルの時のみ）
 }
 
 interface HierarchyListItemProps {

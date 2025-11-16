@@ -12,12 +12,23 @@ import { colors } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
 
 interface MachiProps {
-  station: MachiRow;
+  machi: MachiRow;
   isVisited?: boolean;
   visitCount?: number;
 }
 
-export function Machi({ station, isVisited = false, visitCount = 0 }: MachiProps) {
+export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) {
+  // lines JSONを解析して最初の路線名を取得
+  let lineNames: string[] = [];
+  if (machi.lines) {
+    try {
+      const linesArray = JSON.parse(machi.lines);
+      lineNames = linesArray.map((line: { ja: string }) => line.ja);
+    } catch (e) {
+      console.error('Failed to parse lines JSON:', e);
+    }
+  }
+
   return (
     <View
       className={`flex-row items-center p-4 mb-2 rounded-xl shadow-sm ${
@@ -38,7 +49,7 @@ export function Machi({ station, isVisited = false, visitCount = 0 }: MachiProps
           <Text className={`text-base font-semibold ${
             isVisited ? 'text-gray-900' : 'text-gray-500'
           }`}>
-            {station.name}
+            {machi.name}
           </Text>
           {isVisited && (
             <View className="ml-2">
@@ -46,16 +57,18 @@ export function Machi({ station, isVisited = false, visitCount = 0 }: MachiProps
             </View>
           )}
         </View>
-        <Text className={`text-sm ${isVisited ? 'text-gray-600' : 'text-gray-400'}`}>
-          {station.line_name}
-        </Text>
+        {lineNames.length > 0 && (
+          <Text className={`text-sm ${isVisited ? 'text-gray-600' : 'text-gray-400'}`}>
+            {lineNames.join('・')}
+          </Text>
+        )}
         {isVisited && visitCount > 0 && (
           <Text className="text-xs text-blue-600 mt-0.5 font-medium">
             {visitCount}回訪問
           </Text>
         )}
       </View>
-      <Text className="text-xs text-gray-400">{station.prefecture}</Text>
+      <Text className="text-xs text-gray-400">{machi.prefecture_name}</Text>
     </View>
   );
 }

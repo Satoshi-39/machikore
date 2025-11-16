@@ -9,20 +9,22 @@
 
 import React from 'react';
 import { Pressable } from 'react-native';
+import { useRouter } from 'expo-router';
 import type { MachiRow } from '@/shared/types/database.types';
 import { Machi } from '@/entities/machi';
 
 interface MachiCardProps {
-  station: MachiRow;
+  machi: MachiRow;
   isVisited?: boolean;
   visitCount?: number;
 }
 
-export function MachiCard({ station, isVisited = false, visitCount = 0 }: MachiCardProps) {
+export function MachiCard({ machi, isVisited = false, visitCount = 0 }: MachiCardProps) {
+  const router = useRouter();
+
   const handlePress = () => {
-    // TODO: 街詳細ページへ遷移（将来実装）
-    console.log(`Machi selected: ${station.name}`);
-    // router.push(`/machi/${station.id}`);
+    // 街詳細ページへ遷移
+    router.push(`/machi/${machi.id}`);
   };
 
   return (
@@ -30,9 +32,9 @@ export function MachiCard({ station, isVisited = false, visitCount = 0 }: MachiC
       onPress={handlePress}
       className="active:opacity-70"
       accessibilityRole="button"
-      accessibilityLabel={`${station.name}の詳細を表示`}
+      accessibilityLabel={`${machi.name}の詳細を表示`}
     >
-      <Machi station={station} isVisited={isVisited} visitCount={visitCount} />
+      <Machi machi={machi} isVisited={isVisited} visitCount={visitCount} />
     </Pressable>
   );
 }

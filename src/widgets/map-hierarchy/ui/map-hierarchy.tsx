@@ -15,6 +15,7 @@ import {
   type HierarchyItem,
   type HierarchyLevel,
 } from '@/features/map';
+import { MachiCard } from '@/features/machi';
 import { useMapHierarchy } from '@/entities/machi';
 import { AsyncBoundary } from '@/shared/ui';
 
@@ -87,6 +88,7 @@ export function MapHierarchy() {
         return cityData.machis.map((machi) => ({
           id: machi.id,
           name: machi.name,
+          machi: machi, // MachiCardで使用する完全なデータ
         }));
       }
       default:
@@ -192,9 +194,18 @@ export function MapHierarchy() {
               </View>
             ) : null
           }
-          renderItem={({ item }) => (
-            <HierarchyListItem item={item} level={level} onPress={handleItemPress} />
-          )}
+          renderItem={({ item }) => {
+            // 街レベルの場合はMachiCardを使用
+            if (level === 'city' && item.machi) {
+              return (
+                <View className="px-4">
+                  <MachiCard machi={item.machi} />
+                </View>
+              );
+            }
+            // それ以外の階層はHierarchyListItemを使用
+            return <HierarchyListItem item={item} level={level} onPress={handleItemPress} />;
+          }}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center py-20">
               <Text className="text-gray-500">データがありません</Text>
