@@ -14,3 +14,4 @@ export * from './visits';
 export * from './spots';
 export * from './likes';
 export * from './schedules';
+export * from './follows';

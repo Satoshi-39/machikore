@@ -9,20 +9,16 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { ProfileSection } from '@/widgets/profile-section';
+import { MyPageProfile } from '@/widgets/mypage-profile';
 import { MyPageHeader } from '@/widgets/mypage-header';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
-import { MapsTab, LikesTab, BookmarksTab, VisitsTab } from '@/widgets/mypage-tab-content';
+import { MapsTab, BlogTab, LikesTab, BookmarksTab } from '@/widgets/mypage-tab-content';
 import { useCurrentUserId } from '@/entities/user';
-import { useRecentVisits } from '@/entities/visit/api';
 
 export function MyPage() {
   const router = useRouter();
   const currentUserId = useCurrentUserId();
   const [tabMode, setTabMode] = useState<MyPageTabMode>('maps');
-
-  // 訪問した街データ取得
-  const { data: recentVisits = [] } = useRecentVisits(currentUserId ?? '', 20);
 
   const handleSettingsPress = () => {
     router.push('/settings');
@@ -41,7 +37,7 @@ export function MyPage() {
       />
 
       {/* プロフィールセクション */}
-      <ProfileSection userId={currentUserId} />
+      <MyPageProfile userId={currentUserId} />
 
       {/* タブフィルター */}
       <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} />
@@ -49,7 +45,7 @@ export function MyPage() {
       {/* タブコンテンツ（各タブが独自にスクロール） */}
       <View className="flex-1">
         {tabMode === 'maps' && <MapsTab userId={currentUserId} />}
-        {tabMode === 'visits' && <VisitsTab visits={recentVisits} />}
+        {tabMode === 'blog' && <BlogTab userId={currentUserId} />}
         {tabMode === 'likes' && <LikesTab userId={currentUserId} />}
         {tabMode === 'bookmarks' && <BookmarksTab userId={currentUserId} />}
       </View>
