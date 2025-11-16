@@ -150,7 +150,7 @@ export function logMachi(limit: number = 10) {
     );
     console.log(`Found ${machi.length} machi:`);
     machi.forEach((m: MachiRow, index: number) => {
-      console.log(`\n[${index + 1}] ${m.name} (${m.line_name})`);
+      console.log(`\n[${index + 1}] ${m.name} (${m.lines || 'no lines'})`);
       console.log(`  ID: ${m.id}`);
       console.log(`  Location: ${m.latitude}, ${m.longitude}`);
     });

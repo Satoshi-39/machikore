@@ -228,14 +228,14 @@ export function insertPostImage(image: ImageRow): void {
   execute(
     `
     INSERT INTO images (
-      id, post_id, local_path, cloud_path, width, height,
+      id, spot_id, local_path, cloud_path, width, height,
       file_size, order_index, created_at, synced_at, is_synced
     )
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       image.id,
-      image.post_id,
+      image.spot_id,
       image.local_path,
       image.cloud_path,
       image.width,
@@ -256,14 +256,14 @@ export function bulkInsertPostImages(images: ImageRow[]): void {
   const statements = images.map((image) => ({
     sql: `
       INSERT INTO images (
-        id, post_id, local_path, cloud_path, width, height,
+        id, spot_id, local_path, cloud_path, width, height,
         file_size, order_index, created_at, synced_at, is_synced
       )
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     params: [
       image.id,
-      image.post_id,
+      image.spot_id,
       image.local_path,
       image.cloud_path,
       image.width,

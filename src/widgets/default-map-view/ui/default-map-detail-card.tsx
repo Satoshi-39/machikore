@@ -19,7 +19,7 @@ interface DefaultMapDetailCardProps {
 
 export function DefaultMapDetailCard({ machi, onClose }: DefaultMapDetailCardProps) {
   const currentUserId = useCurrentUserId();
-  const { data: visit } = useVisitByMachi(currentUserId, machi.id);
+  const { data: visit } = useVisitByMachi(currentUserId || '', machi.id);
 
   return (
     <View className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-lg">
@@ -30,7 +30,7 @@ export function DefaultMapDetailCard({ machi, onClose }: DefaultMapDetailCardPro
             <Text className="text-2xl font-bold text-gray-900 mb-1">
               {machi.name}
             </Text>
-            <Text className="text-sm text-gray-600">{machi.line_name}</Text>
+            <Text className="text-sm text-gray-600">{machi.lines || ''}</Text>
           </View>
           <Pressable
             onPress={onClose}
@@ -53,13 +53,15 @@ export function DefaultMapDetailCard({ machi, onClose }: DefaultMapDetailCardPro
           </Text>
         </View>
 
-        {/* 訪問記録 */}
-        <View className="mb-3">
-          <MachiVisitInfo userId={currentUserId} machiId={machi.id} />
-        </View>
+        {/* 訪問記録（ログイン時のみ） */}
+        {currentUserId && (
+          <View className="mb-3">
+            <MachiVisitInfo userId={currentUserId} machiId={machi.id} />
+          </View>
+        )}
 
-        {/* 投稿リスト */}
-        {visit && (
+        {/* 投稿リスト（ログイン時のみ） */}
+        {currentUserId && visit && (
           <View className="mb-3">
             <MachiPostList visitId={visit.id} />
           </View>

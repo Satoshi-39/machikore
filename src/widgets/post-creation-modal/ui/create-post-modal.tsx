@@ -20,6 +20,8 @@ export function CreatePostModal({ visible, onClose }: CreatePostModalProps) {
   const { mutate: createPost, isPending } = useCreatePost();
 
   const handleSubmit = (content: string, machiId?: string) => {
+    if (!currentUserId) return; // 未ログインの場合は何もしない
+
     createPost(
       {
         userId: currentUserId,

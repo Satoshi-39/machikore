@@ -5,6 +5,7 @@
  * プラスボタンから開かれる作成メニュー
  */
 
+import React from 'react';
 import { useRouter } from 'expo-router';
 import { CreateMenuPage } from '@/pages/create-menu';
 
@@ -16,7 +17,11 @@ export default function CreateScreen() {
   };
 
   const handleCreateMap = () => {
-    router.push('/create-map');
+    // CreateMenuPage側でアニメーションが完了してからこのコールバックが呼ばれる
+    // アニメーション完了後にマップ作成ページを開く
+    setTimeout(() => {
+      router.push('/create-map');
+    }, 350); // アニメーション250ms + モーダル閉じる100ms
   };
 
   const handleCreateSpot = () => {

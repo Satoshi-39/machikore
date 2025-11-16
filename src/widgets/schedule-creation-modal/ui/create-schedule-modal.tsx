@@ -25,6 +25,8 @@ export function CreateScheduleModal({ visible, onClose }: CreateScheduleModalPro
     memo?: string,
     machiId?: string
   ) => {
+    if (!currentUserId) return; // 未ログインの場合は何もしない
+
     createSchedule(
       {
         userId: currentUserId,

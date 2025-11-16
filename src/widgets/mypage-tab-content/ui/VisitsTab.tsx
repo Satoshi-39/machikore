@@ -38,7 +38,7 @@ function VisitCard({ visit, onPress }: VisitCardProps) {
           {visit.machi.name}
         </Text>
         <Text className="text-sm text-gray-500">
-          {visit.machi.line_name}
+          {visit.machi.lines || ''}
         </Text>
       </View>
 

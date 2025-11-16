@@ -1,1 +1,1 @@
-export { NotificationFilterHeader, type NotificationFilter } from './ui/NotificationFilterHeader';
+export { NotificationFilterHeader, type NotificationFilterMode } from './ui/NotificationFilterHeader';

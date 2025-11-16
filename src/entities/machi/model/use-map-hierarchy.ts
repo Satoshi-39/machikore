@@ -13,7 +13,6 @@ import {
   getAllRegions,
 } from '@/shared/api/sqlite';
 import type {
-  RegionRow,
   PrefectureRow,
   CityRow,
   MachiRow,

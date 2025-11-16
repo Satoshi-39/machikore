@@ -15,7 +15,7 @@ export function MachiList() {
   const router = useRouter();
   const currentUserId = useCurrentUserId();
   const { data: stations, isLoading, error } = useMachi();
-  const { data: visits } = useVisits(currentUserId);
+  const { data: visits } = useVisits(currentUserId || '');
 
   // 街IDから訪問情報へのマップを作成
   const visitMap = useMemo(() => {

@@ -88,9 +88,18 @@ export type SupabaseUserUpdate = SupabaseTables['users']['Update'];
 // ===============================
 
 // Users
-export type UserRow = ToSQLite<SupabaseUserRow>;
-export type UserInsert = ToSQLite<SupabaseUserInsert>;
-export type UserUpdate = ToSQLite<SupabaseUserUpdate>;
+export type UserRow = ToSQLite<SupabaseUserRow> & {
+  synced_at: string | null;
+  is_synced: 0 | 1;
+};
+export type UserInsert = ToSQLite<SupabaseUserInsert> & {
+  synced_at?: string | null;
+  is_synced?: 0 | 1;
+};
+export type UserUpdate = ToSQLite<SupabaseUserUpdate> & {
+  synced_at?: string | null;
+  is_synced?: 0 | 1;
+};
 
 // NOTE: 以下は一時的にローカル定義。Supabaseプロジェクト作成後、上記のSupabase型から生成する
 
@@ -158,11 +167,12 @@ export interface PostRow {
 export type PostInsert = Partial<PostRow> & Pick<PostRow, 'id' | 'user_id' | 'content' | 'created_at' | 'updated_at'>;
 export type PostUpdate = Partial<Omit<PostRow, 'id' | 'created_at'>>;
 
-// Visits (マップ訪問記録)
+// Visits (街訪問記録)
 export interface VisitRow {
   id: string;
   user_id: string;
-  map_id: string;
+  machi_id: string;
+  visit_count: number;
   visited_at: string;
   memo: string | null;
   created_at: string;
@@ -170,7 +180,7 @@ export interface VisitRow {
   synced_at: string | null;
   is_synced: 0 | 1;
 }
-export type VisitInsert = Partial<VisitRow> & Pick<VisitRow, 'id' | 'user_id' | 'map_id' | 'visited_at' | 'created_at' | 'updated_at'>;
+export type VisitInsert = Partial<VisitRow> & Pick<VisitRow, 'id' | 'user_id' | 'machi_id' | 'visited_at' | 'created_at' | 'updated_at'>;
 export type VisitUpdate = Partial<Omit<VisitRow, 'id' | 'created_at'>>;
 
 // Images (スポット画像)
@@ -371,6 +381,14 @@ export function booleanToSQLiteBoolean(value: boolean | null): 0 | 1 | null {
  * Supabase: boolean | null → SQLite: 0 | 1 | null
  * NOTE: 新しいSupabaseプロジェクト作成後、必要に応じて変換関数を追加
  */
+
+/**
+ * Supabase VisitRow → SQLite VisitRow
+ * TODO: 現在は変換不要。Supabaseプロジェクト作成後、型変換ロジックを実装
+ */
+export function convertSupabaseVisitToSQLite(visit: any): VisitRow {
+  return visit as VisitRow;
+}
 
 // ===============================
 // Re-export common types
