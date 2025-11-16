@@ -3,7 +3,7 @@
  */
 
 import {
-  deleteAllPostsByUser,
+  deleteAllSpotsByUser,
   deleteAllSchedulesByUser,
   deleteAllVisitsByUser,
   deleteUser,
@@ -26,8 +26,8 @@ export function cleanupSampleData(): void {
   }
 
   // 各テーブルが存在する場合のみ削除
-  if (checkTableExists('posts')) {
-    deleteAllPostsByUser(userId);
+  if (checkTableExists('spots')) {
+    deleteAllSpotsByUser(userId);
   }
 
   if (checkTableExists('schedules')) {

@@ -11,6 +11,6 @@ export * from './prefectures';
 export * from './cities';
 export * from './machi';
 export * from './visits';
-export * from './posts';
+export * from './spots';
 export * from './likes';
 export * from './schedules';

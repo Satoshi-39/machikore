@@ -1,5 +1,5 @@
 /**
- * Post モデル エクスポート
+ * Spot モデル エクスポート
  */
 
 export * from './types';

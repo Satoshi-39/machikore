@@ -5,7 +5,7 @@
  */
 
 import { queryAll, queryOne } from './client';
-import type { PostRow, VisitRow, ScheduleRow, MachiRow } from '@/shared/types/database.types';
+import type { SpotRow, VisitRow, ScheduleRow, MachiRow } from '@/shared/types/database.types';
 
 /**
  * 全テーブルのデータ件数を表示
@@ -16,7 +16,8 @@ export function logAllTableCounts() {
   const tables = [
     'users',
     'visits',
-    'posts',
+    'maps',
+    'spots',
     'images',
     'schedules',
     'machi',
@@ -60,28 +61,29 @@ export function logTableData(tableName: string, limit: number = 10) {
 }
 
 /**
- * 投稿データを表示
+ * スポットデータを表示
  */
-export function logPosts(userId?: string, limit: number = 10) {
-  console.log('=== Posts ===');
+export function logSpots(mapId?: string, limit: number = 10) {
+  console.log('=== Spots ===');
   try {
-    const sql = userId
-      ? 'SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC LIMIT ?;'
-      : 'SELECT * FROM posts ORDER BY created_at DESC LIMIT ?;';
-    const params = userId ? [userId, limit] : [limit];
+    const sql = mapId
+      ? 'SELECT * FROM spots WHERE map_id = ? ORDER BY order_index ASC, created_at DESC LIMIT ?;'
+      : 'SELECT * FROM spots ORDER BY created_at DESC LIMIT ?;';
+    const params = mapId ? [mapId, limit] : [limit];
 
-    const posts = queryAll<PostRow>(sql, params);
-    console.log(`Found ${posts.length} posts:`);
-    posts.forEach((post: PostRow, index: number) => {
-      console.log(`\n[${index + 1}] Post ID: ${post.id}`);
-      console.log(`  Content: ${post.content}`);
-      console.log(`  Machi ID: ${post.machi_id || 'None'}`);
-      console.log(`  Visit ID: ${post.visit_id || 'None'}`);
-      console.log(`  Auto-generated: ${post.is_auto_generated === 1 ? 'Yes' : 'No'}`);
-      console.log(`  Created at: ${post.created_at}`);
+    const spots = queryAll<SpotRow>(sql, params);
+    console.log(`Found ${spots.length} spots:`);
+    spots.forEach((spot: SpotRow, index: number) => {
+      console.log(`\n[${index + 1}] Spot ID: ${spot.id}`);
+      console.log(`  Name: ${spot.name}`);
+      console.log(`  Address: ${spot.address || 'None'}`);
+      console.log(`  Map ID: ${spot.map_id}`);
+      console.log(`  Machi ID: ${spot.machi_id || 'None'}`);
+      console.log(`  Location: ${spot.latitude}, ${spot.longitude}`);
+      console.log(`  Created at: ${spot.created_at}`);
     });
   } catch (error) {
-    console.error('Error reading posts:', error);
+    console.error('Error reading spots:', error);
   }
   console.log('=============');
 }
@@ -189,7 +191,7 @@ export function logDatabaseSummary(userId?: string) {
     console.log(`User ID: ${userId}\n`);
     logVisits(userId, 5);
     console.log('\n');
-    logPosts(userId, 5);
+    logSpots(undefined, 5);
     console.log('\n');
     logSchedules(userId, 5);
   }

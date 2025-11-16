@@ -1,7 +1,7 @@
 /**
  * プロフィール統計情報ウィジェット
  *
- * 訪問した街数、投稿数、友達数を表示
+ * 訪問した街数、スポット数、友達数を表示
  */
 
 import React from 'react';
@@ -9,7 +9,7 @@ import { View, Text } from 'react-native';
 
 interface ProfileStatsProps {
   visitedMachiCount: number;
-  postsCount: number;
+  spotsCount: number;
   friendsCount: number;
 }
 
@@ -31,14 +31,14 @@ function StatItem({ label, value }: StatItemProps) {
 
 export function ProfileStats({
   visitedMachiCount,
-  postsCount,
+  spotsCount,
   friendsCount,
 }: ProfileStatsProps) {
   return (
     <View className="bg-white border-b border-gray-200">
       <View className="flex-row divide-x divide-gray-200">
         <StatItem label="訪問した街" value={visitedMachiCount} />
-        <StatItem label="投稿" value={postsCount} />
+        <StatItem label="スポット" value={spotsCount} />
         <StatItem label="友達" value={friendsCount} />
       </View>
     </View>

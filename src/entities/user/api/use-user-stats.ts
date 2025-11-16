@@ -4,14 +4,13 @@
 
 import { useQuery } from '@tanstack/react-query';
 import {
-  getTotalPostCount,
   getVisitsByUserId,
 } from '@/shared/api/sqlite';
 import type { UUID } from '@/shared/types';
 
 interface UserStats {
   visitedMachiCount: number; // 訪問した街の数（重複なし）
-  postsCount: number; // 投稿数
+  spotsCount: number; // スポット数（全マップの合計）
   friendsCount: number; // 友達の数
 }
 
@@ -22,8 +21,8 @@ export function useUserStats(userId: UUID) {
   return useQuery<UserStats, Error>({
     queryKey: ['userStats', userId],
     queryFn: () => {
-      // 投稿数
-      const postsCount = getTotalPostCount(userId);
+      // スポット数（将来実装: 全マップのスポット数を合計）
+      const spotsCount = 0; // TODO: Implement getTotalSpotsByUser
 
       // 訪問記録を取得して、ユニークな街の数を計算
       const visits = getVisitsByUserId(userId);
@@ -35,7 +34,7 @@ export function useUserStats(userId: UUID) {
 
       return {
         visitedMachiCount,
-        postsCount,
+        spotsCount,
         friendsCount,
       };
     },

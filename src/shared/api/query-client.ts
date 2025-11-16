@@ -62,10 +62,20 @@ export const QUERY_KEYS = {
   postDetail: (postId: string) => [...QUERY_KEYS.posts, 'detail', postId] as const,
   postsVisit: (visitId: string) => [...QUERY_KEYS.posts, 'visit', visitId] as const,
 
+  // マップ
+  maps: ['maps'] as const,
+  mapsList: (userId: string) => [...QUERY_KEYS.maps, 'list', userId] as const,
+  mapsDetail: (mapId: string) => [...QUERY_KEYS.maps, 'detail', mapId] as const,
+
+  // スポット
+  spots: ['spots'] as const,
+  spotsList: (mapId: string) => [...QUERY_KEYS.spots, 'list', mapId] as const,
+  spotsDetail: (spotId: string) => [...QUERY_KEYS.spots, 'detail', spotId] as const,
+
   // いいね
   likes: ['likes'] as const,
-  likeStatus: (userId: string, postId: string) =>
-    [...QUERY_KEYS.likes, 'status', userId, postId] as const,
+  likeStatus: (userId: string, targetId: string) =>
+    [...QUERY_KEYS.likes, 'status', userId, targetId] as const,
 
   // 街
   machi: ['machi'] as const,
@@ -117,6 +127,20 @@ export function invalidateVisits() {
  */
 export function invalidatePosts() {
   queryClient.invalidateQueries({ queryKey: QUERY_KEYS.posts });
+}
+
+/**
+ * マップ関連のクエリを無効化
+ */
+export function invalidateMaps() {
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
+}
+
+/**
+ * スポット関連のクエリを無効化
+ */
+export function invalidateSpots() {
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spots });
 }
 
 /**

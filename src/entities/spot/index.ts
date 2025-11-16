@@ -1,5 +1,5 @@
 /**
- * Post エンティティ エクスポート
+ * Spot エンティティ エクスポート
  */
 
 // Model
@@ -9,4 +9,4 @@ export * from './model';
 export * from './api';
 
 // UI
-export { PostCard } from './ui/PostCard';
+export { SpotCard } from './ui/SpotCard';

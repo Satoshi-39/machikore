@@ -7,8 +7,8 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { MachiVisitInfo } from '@/widgets/machi-visit-info';
-import { MachiPostList } from './MachiPostList';
-import { useVisitByMachi } from '@/entities/visit/api';
+// import { MachiSpotList } from './MachiSpotList'; // TODO: 街とマップの関係を再設計後に実装
+// import { useVisitByMachi } from '@/entities/visit/api'; // TODO: 将来使用予定
 import { useCurrentUserId } from '@/entities/user';
 import type { MachiRow } from '@/shared/types/database.types';
 
@@ -19,7 +19,7 @@ interface DefaultMapDetailCardProps {
 
 export function DefaultMapDetailCard({ machi, onClose }: DefaultMapDetailCardProps) {
   const currentUserId = useCurrentUserId();
-  const { data: visit } = useVisitByMachi(currentUserId || '', machi.id);
+  // const { data: visit } = useVisitByMachi(currentUserId || '', machi.id); // TODO: 将来使用予定
 
   return (
     <View className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-lg">
@@ -60,12 +60,13 @@ export function DefaultMapDetailCard({ machi, onClose }: DefaultMapDetailCardPro
           </View>
         )}
 
-        {/* 投稿リスト（ログイン時のみ） */}
-        {currentUserId && visit && (
+        {/* スポットリスト（将来実装予定） */}
+        {/* TODO: マップとスポットの関係を実装後に有効化 */}
+        {/* {currentUserId && visit && (
           <View className="mb-3">
-            <MachiPostList visitId={visit.id} />
+            <MachiSpotList mapId={???} />
           </View>
-        )}
+        )} */}
 
         {/* アクションボタン（将来実装予定） */}
         <View className="mt-2 pt-3 border-t border-gray-200">

@@ -1,37 +1,37 @@
 /**
- * PostCard コンポーネント
+ * SpotCard コンポーネント
  *
- * 投稿を表示するカード型コンポーネント
+ * スポットを表示するカード型コンポーネント
  */
 
 import React from 'react';
 import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import type { PostRow } from '@/shared/types/database.types';
+import type { SpotRow } from '@/shared/types/database.types';
 import type { UUID } from '@/shared/types';
-import { getRelativePostTime } from '@/entities/post/model/helpers';
-import { useToggleLike, useCheckUserLiked } from '@/entities/post/api';
+import { getRelativeSpotTime } from '@/entities/spot/model/helpers';
+import { useToggleLike, useCheckUserLiked } from '@/entities/spot/api';
 import { useUser } from '@/entities/user';
 
-interface PostCardProps {
-  post: PostRow;
+interface SpotCardProps {
+  spot: SpotRow;
   userId: UUID;
-  stationName?: string;
+  machiName?: string;
   onPress?: () => void;
 }
 
-export function PostCard({ post, userId, stationName, onPress }: PostCardProps) {
-  const { data: isLiked = false } = useCheckUserLiked(userId, post.id);
+export function SpotCard({ spot, userId, machiName, onPress }: SpotCardProps) {
+  const { data: isLiked = false } = useCheckUserLiked(userId, spot.id);
   const { mutate: toggleLike } = useToggleLike();
-  const { data: user } = useUser(post.user_id);
+  const { data: user } = useUser(spot.user_id);
 
   // データベースのavatar_urlにはファイルシステムのURIが保存されている
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
 
   const handleLikePress = (e: any) => {
     e.stopPropagation();
-    toggleLike({ userId, postId: post.id });
+    toggleLike({ userId, spotId: spot.id });
   };
 
   return (
@@ -56,22 +56,28 @@ export function PostCard({ post, userId, stationName, onPress }: PostCardProps) 
             {user?.display_name || user?.username || 'ユーザー'}
           </Text>
           <Text className="text-xs text-gray-500">
-            {getRelativePostTime(post.created_at)}
+            {getRelativeSpotTime(spot.created_at)}
           </Text>
         </View>
       </View>
 
-      {/* 投稿内容 */}
-      <Text className="text-base text-gray-900 mb-2">
-        {post.is_auto_generated === 1 && '📍 '}
-        {post.content}
+      {/* スポット名 */}
+      <Text className="text-base font-semibold text-gray-900 mb-2">
+        📍 {spot.name}
       </Text>
 
+      {/* メモ */}
+      {spot.memo && (
+        <Text className="text-sm text-gray-700 mb-2">
+          {spot.memo}
+        </Text>
+      )}
+
       {/* 街情報 */}
-      {stationName && (
+      {machiName && (
         <View className="flex-row items-center mb-2">
           <Ionicons name="location-outline" size={16} color={colors.text.secondary} />
-          <Text className="text-sm text-gray-600 ml-1">{stationName}</Text>
+          <Text className="text-sm text-gray-600 ml-1">{machiName}</Text>
         </View>
       )}
 
@@ -87,7 +93,7 @@ export function PostCard({ post, userId, stationName, onPress }: PostCardProps) 
               color={isLiked ? colors.danger : colors.text.secondary}
             />
             <Text className="text-sm text-gray-600 ml-1">
-              {post.likes_count}
+              {spot.likes_count}
             </Text>
           </Pressable>
 
@@ -95,20 +101,11 @@ export function PostCard({ post, userId, stationName, onPress }: PostCardProps) 
           <View className="flex-row items-center">
             <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
             <Text className="text-sm text-gray-600 ml-1">
-              {post.comments_count}
+              {spot.comments_count}
             </Text>
           </View>
         </View>
       </View>
-
-      {/* 下書きバッジ */}
-      {post.is_draft === 1 && (
-        <View className="absolute top-4 right-4">
-          <View className="bg-yellow-100 px-2 py-1 rounded">
-            <Text className="text-xs text-yellow-800 font-medium">下書き</Text>
-          </View>
-        </View>
-      )}
     </Pressable>
   );
 }

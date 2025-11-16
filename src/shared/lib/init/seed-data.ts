@@ -4,20 +4,18 @@
 
 import * as Crypto from 'expo-crypto';
 import {
-  insertPost,
   insertSchedule,
   insertVisit,
   insertUser,
   getUserById,
   getUserByUsername,
   updateUser,
-  getTotalPostCount,
   getTotalScheduleCount,
   getTotalVisitedMachiCount,
 } from '@/shared/api/sqlite';
 import { copyAssetToFileSystem } from '@/shared/lib';
 import { getCurrentUserId } from '@/entities/user/model';
-import type { PostRow, ScheduleRow, VisitRow, UserRow } from '@/shared/types/database.types';
+import type { ScheduleRow, VisitRow, UserRow } from '@/shared/types/database.types';
 
 // 訪問記録のID（投稿との紐付け用）
 // 固定値にすることで、再起動時の重複を防ぐ
@@ -47,11 +45,10 @@ export async function seedSampleData(): Promise<void> {
     await createSampleUser(userId);
 
     // 現在のデータ数を確認
-    const currentPostCount = getTotalPostCount(userId);
     const currentScheduleCount = getTotalScheduleCount(userId);
     const currentVisitCount = getTotalVisitedMachiCount(userId);
     console.log(
-      `📊 現在の投稿数: ${currentPostCount}, 予定数: ${currentScheduleCount}, 訪問数: ${currentVisitCount}`
+      `📊 現在の予定数: ${currentScheduleCount}, 訪問数: ${currentVisitCount}`
     );
 
     // 訪問記録データ作成
@@ -60,15 +57,14 @@ export async function seedSampleData(): Promise<void> {
     // 予定データ作成
     createSampleSchedules(userId);
 
-    // 投稿データ作成
-    createSamplePosts(userId);
+    // 投稿データ作成（スポットアーキテクチャに移行したためコメントアウト）
+    // createSamplePosts(userId);
 
     // 投入後のデータ数を確認
-    const afterPostCount = getTotalPostCount(userId);
     const afterScheduleCount = getTotalScheduleCount(userId);
     const afterVisitCount = getTotalVisitedMachiCount(userId);
     console.log(
-      `📊 投入後の投稿数: ${afterPostCount}, 予定数: ${afterScheduleCount}, 訪問数: ${afterVisitCount}`
+      `📊 投入後の予定数: ${afterScheduleCount}, 訪問数: ${afterVisitCount}`
     );
 
     console.log('🎉 サンプルデータ投入完了');
@@ -226,12 +222,14 @@ function createSampleSchedules(userId: string): void {
 
 /**
  * サンプル投稿を作成
+ * NOTE: Post → Spot アーキテクチャに移行したため、この関数は使用されていません
  */
+/*
 function createSamplePosts(userId: string): void {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  const posts: PostRow[] = [
+  const posts: any[] = [
     // 渋谷訪問の自動生成投稿
     {
       id: Crypto.randomUUID(),
@@ -390,9 +388,12 @@ function createSamplePosts(userId: string): void {
     },
   ];
 
-  posts.forEach((post) => insertPost(post));
+  posts.forEach((post) => {
+    // insertPost(post); // コメントアウト
+  });
   console.log(`📝 ${posts.length}件の投稿を作成`);
 }
+*/
 
 /**
  * サンプル訪問記録を作成

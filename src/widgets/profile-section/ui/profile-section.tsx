@@ -38,7 +38,7 @@ export function ProfileSection({ userId }: ProfileSectionProps) {
       {stats && (
         <ProfileStats
           visitedMachiCount={stats.visitedMachiCount}
-          postsCount={stats.postsCount}
+          spotsCount={stats.spotsCount}
           friendsCount={stats.friendsCount}
         />
       )}

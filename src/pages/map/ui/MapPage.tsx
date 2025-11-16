@@ -17,10 +17,10 @@ import { CustomMapList } from '@/widgets/custom-map-list';
 import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
-import { CreatePostModal } from '@/widgets/post-creation-modal';
+// import { CreatePostModal } from '@/widgets/post-creation-modal'; // TODO: Spot作成モーダルに変更予定
 import { type MapListViewMode } from '@/features/toggle-view-mode';
-import { FAB } from '@/shared/ui';
-import { colors } from '@/shared/config';
+// import { FAB } from '@/shared/ui'; // TODO: Spot作成ボタン実装時に使用
+// import { colors } from '@/shared/config'; // TODO: Spot作成ボタン実装時に使用
 
 export function MapPage() {
   const user = useUserStore((state) => state.user);
@@ -29,7 +29,7 @@ export function MapPage() {
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false); // TODO: Spot作成モーダル実装時に復活
 
   const isCustomMap = selectedMapId !== null;
 
@@ -104,18 +104,20 @@ export function MapPage() {
         )
       )}
 
-      {/* 投稿ボタン */}
-      <FAB
+      {/* スポット作成ボタン（将来実装予定） */}
+      {/* TODO: Spot作成モーダル実装時に有効化 */}
+      {/* <FAB
         onPress={() => setIsModalVisible(true)}
         icon="create-outline"
         color={colors.primary.DEFAULT}
-      />
+      /> */}
 
-      {/* 投稿作成モーダル */}
-      <CreatePostModal
+      {/* スポット作成モーダル（将来実装予定） */}
+      {/* TODO: CreateSpotModalに変更 */}
+      {/* <CreatePostModal
         visible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
-      />
+      /> */}
     </SafeAreaView>
   );
 }
