@@ -1,14 +1,14 @@
 /**
  * マイページタブフィルター
  *
- * マップ、スケジュール、訪問した街を切り替えるタブUI
+ * マップ、訪問した街、いいね、ブックマーク、スケジュールを切り替えるタブUI
  */
 
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { colors } from '@/shared/config';
 
-export type MyPageTabMode = 'maps' | 'schedule' | 'visits';
+export type MyPageTabMode = 'maps' | 'visits' | 'likes' | 'bookmarks' | 'schedule';
 
 interface MyPageTabFilterProps {
   tabMode: MyPageTabMode;
@@ -21,8 +21,10 @@ export function MyPageTabFilter({
 }: MyPageTabFilterProps) {
   const tabs: { mode: MyPageTabMode; label: string }[] = [
     { mode: 'maps', label: 'マップ' },
-    { mode: 'schedule', label: 'スケジュール' },
     { mode: 'visits', label: '訪問した街' },
+    { mode: 'likes', label: 'いいね' },
+    { mode: 'bookmarks', label: 'ブックマーク' },
+    { mode: 'schedule', label: 'スケジュール' },
   ];
 
   return (

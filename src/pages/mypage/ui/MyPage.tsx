@@ -12,6 +12,8 @@ import { ProfileSection } from '@/widgets/profile-section';
 import { MyPageHeader, MyPageTabFilter, type MyPageTabMode } from '@/features/mypage';
 import { UserMapList } from '@/widgets/user-map-list';
 import { UserSchedule } from '@/widgets/user-schedule';
+import { UserLikes } from '@/widgets/user-likes';
+import { UserBookmarks } from '@/widgets/user-bookmarks';
 import { RecentVisits } from '@/widgets/recent-visits';
 import { useSignOut } from '@/features/auth';
 import { useCurrentUserId } from '@/entities/user';
@@ -60,8 +62,10 @@ export function MyPage() {
         {/* タブコンテンツ */}
         <View className="flex-1">
           {tabMode === 'maps' && <UserMapList userId={currentUserId} />}
-          {tabMode === 'schedule' && <UserSchedule userId={currentUserId} />}
           {tabMode === 'visits' && <RecentVisits visits={recentVisits} />}
+          {tabMode === 'likes' && <UserLikes userId={currentUserId} />}
+          {tabMode === 'bookmarks' && <UserBookmarks userId={currentUserId} />}
+          {tabMode === 'schedule' && <UserSchedule userId={currentUserId} />}
         </View>
 
         {/* サインアウトセクション */}
