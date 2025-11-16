@@ -32,30 +32,57 @@ const CATEGORIES: MapCategory[] = [
 
 export function CreateMapPage() {
   const router = useRouter();
+  const user = useUserStore((state) => state.user);
   const [mapName, setMapName] = useState('');
   const [description, setDescription] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(null);
   const [tags, setTags] = useState('');
   const [isPublic, setIsPublic] = useState(true);
+  const [isCreating, setIsCreating] = useState(false);
 
   const handleCreate = async () => {
     if (!mapName.trim()) {
-      // TODO: エラー表示を追加
-      alert('マップ名を入力してください');
+      Alert.alert('エラー', 'マップ名を入力してください');
       return;
     }
 
-    // TODO: マップ作成APIを実装
-    console.log({
-      mapName,
-      description,
-      category: selectedCategory,
-      tags: tags.split(',').map(t => t.trim()).filter(Boolean),
-      isPublic,
-    });
+    if (!user?.id) {
+      Alert.alert('エラー', 'ユーザー情報が取得できません');
+      return;
+    }
 
-    // 作成後、マイページのマップタブへ遷移
-    router.push('/(tabs)/mypage');
+    setIsCreating(true);
+
+    try {
+      // マップ作成
+      createMap({
+        userId: user.id,
+        name: mapName.trim(),
+        description: description.trim() || undefined,
+        category: selectedCategory || undefined,
+        tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+        isPublic,
+      });
+
+      Alert.alert(
+        '作成完了',
+        'マップを作成しました',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              // マイページのマップタブへ遷移
+              router.push('/(tabs)/mypage');
+            },
+          },
+        ]
+      );
+    } catch (error) {
+      console.error('マップ作成エラー:', error);
+      Alert.alert('エラー', 'マップの作成に失敗しました');
+    } finally {
+      setIsCreating(false);
+    }
   };
 
   return (
@@ -170,11 +197,14 @@ export function CreateMapPage() {
         {/* 作成ボタン */}
         <TouchableOpacity
           onPress={handleCreate}
-          className="bg-blue-500 py-4 rounded-lg items-center mb-4"
+          disabled={isCreating}
+          className={`py-4 rounded-lg items-center mb-4 ${
+            isCreating ? 'bg-blue-300' : 'bg-blue-500'
+          }`}
           activeOpacity={0.8}
         >
           <Text className="text-white text-base font-semibold">
-            マップを作成
+            {isCreating ? '作成中...' : 'マップを作成'}
           </Text>
         </TouchableOpacity>
       </View>
