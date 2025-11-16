@@ -19,11 +19,6 @@ export function NotificationsPage() {
 
   return (
     <SafeAreaView className="flex-1 bg-white" edges={['top']}>
-      {/* ヘッダー */}
-      <View className="px-5 py-4 border-b border-gray-200">
-        <Text className="text-2xl font-bold text-gray-900">通知</Text>
-      </View>
-
       {/* フィルタータブ */}
       <NotificationFilterHeader
         filterMode={filterMode}
