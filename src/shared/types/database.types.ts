@@ -144,7 +144,7 @@ export interface PostRow {
   id: string;
   user_id: string;
   content: string;
-  station_id: string | null;
+  machi_id: string | null;
   visit_id: string | null;
   is_auto_generated: 0 | 1;
   is_draft: 0 | 1;
@@ -230,6 +230,24 @@ export interface CommentRow {
 }
 export type CommentInsert = Partial<CommentRow> & Pick<CommentRow, 'id' | 'user_id' | 'content' | 'created_at' | 'updated_at'>;
 export type CommentUpdate = Partial<Omit<CommentRow, 'id' | 'created_at'>>;
+
+// Schedules (予定)
+export interface ScheduleRow {
+  id: string;
+  user_id: string;
+  machi_id: string;
+  scheduled_at: string;
+  title: string;
+  memo: string | null;
+  is_completed: 0 | 1;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type ScheduleInsert = Partial<ScheduleRow> & Pick<ScheduleRow, 'id' | 'user_id' | 'machi_id' | 'scheduled_at' | 'title' | 'created_at' | 'updated_at'>;
+export type ScheduleUpdate = Partial<Omit<ScheduleRow, 'id' | 'created_at'>>;
 
 // Bookmarks (マップ・スポットのブックマーク)
 export interface BookmarkRow {

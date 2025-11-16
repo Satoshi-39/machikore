@@ -14,8 +14,9 @@ export function useLineNames() {
   const lineNames = useMemo<string[]>(() => {
     if (!machiList) return [];
 
-    const lines = new Set(machiList.map((machi) => machi.line_name));
-    return Array.from(lines).sort((a, b) => a.localeCompare(b, 'ja'));
+    // TODO: lines JSONフィールドをパースして路線名リストを抽出
+    // 現在は空配列を返す
+    return [];
   }, [machiList]);
 
   return {

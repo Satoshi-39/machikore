@@ -131,7 +131,10 @@ export function filterMachiByLine(
   lineName: string
 ): MachiRow[] {
   if (!lineName) return machiList;
-  return machiList.filter((machi) => machi.line_name === lineName);
+  // Note: linesはJSON配列のため、文字列検索で対応
+  return machiList.filter((machi) =>
+    machi.lines?.includes(lineName) ?? false
+  );
 }
 
 /**
@@ -139,10 +142,10 @@ export function filterMachiByLine(
  */
 export function filterMachiByPrefecture(
   machiList: MachiRow[],
-  prefecture: string
+  prefectureId: string
 ): MachiRow[] {
-  if (!prefecture) return machiList;
-  return machiList.filter((machi) => machi.prefecture === prefecture);
+  if (!prefectureId) return machiList;
+  return machiList.filter((machi) => machi.prefecture_id === prefectureId);
 }
 
 // ===============================
@@ -158,11 +161,14 @@ export function sortMachiByName(machiList: MachiRow[]): MachiRow[] {
 
 /**
  * 路線名でソート
+ * Note: linesはJSON配列のため、最初の路線でソート
  */
 export function sortMachiByLine(machiList: MachiRow[]): MachiRow[] {
-  return [...machiList].sort((a, b) =>
-    a.line_name.localeCompare(b.line_name, 'ja')
-  );
+  return [...machiList].sort((a, b) => {
+    const aLine = a.lines || '';
+    const bLine = b.lines || '';
+    return aLine.localeCompare(bLine, 'ja');
+  });
 }
 
 // ===============================
@@ -178,9 +184,11 @@ export function getMachiDisplayName(machi: MachiRow): string {
 
 /**
  * 街の完全な名称を取得（路線名 + 街名）
+ * Note: linesはJSON配列のため、最初の路線を使用
  */
 export function getMachiFullName(machi: MachiRow): string {
-  return `${machi.line_name} ${machi.name}`;
+  // TODO: lines JSONをパースして最初の路線名を取得
+  return machi.name;
 }
 
 /**
