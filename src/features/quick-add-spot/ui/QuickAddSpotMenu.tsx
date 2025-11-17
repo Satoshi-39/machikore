@@ -45,7 +45,7 @@ export function QuickAddSpotMenu({
               <Ionicons name="navigate" size={18} color="white" />
             </View>
             <Text className="text-base font-semibold text-gray-900">
-              今ここを登録
+              現在地を登録
             </Text>
           </Pressable>
 

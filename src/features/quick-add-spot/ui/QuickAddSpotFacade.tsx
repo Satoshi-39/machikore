@@ -1,7 +1,8 @@
 /**
- * クイックスポット追加 統合コンポーネント
+ * クイックスポット追加 Facadeコンポーネント
  *
- * MenuとModalを統合し、MapPageから簡単に使えるようにする
+ * Menu、Modal、useQuickAddSpotロジックを統合する窓口
+ * MapPageから簡単に使えるようにする
  */
 
 import React, { useEffect } from 'react';
@@ -10,7 +11,7 @@ import { QuickAddSpotModal } from './QuickAddSpotModal';
 import { useQuickAddSpot } from '../model/useQuickAddSpot';
 import type { LocationCoords } from '@/shared/lib/map/use-location';
 
-interface QuickAddSpotFeatureProps {
+interface QuickAddSpotFacadeProps {
   visible: boolean;
   userId: string | null;
   selectedMapId: string | null;
@@ -19,9 +20,10 @@ interface QuickAddSpotFeatureProps {
   onClose: () => void;
   onPinModeChange: (isPinMode: boolean) => void;
   onMapTap: (handler: ((latitude: number, longitude: number) => void) | null) => void;
+  onCancelPinMode: (handler: (() => void) | null) => void;
 }
 
-export function QuickAddSpotFeature({
+export function QuickAddSpotFacade({
   visible,
   userId,
   selectedMapId,
@@ -30,7 +32,8 @@ export function QuickAddSpotFeature({
   onClose,
   onPinModeChange,
   onMapTap,
-}: QuickAddSpotFeatureProps) {
+  onCancelPinMode,
+}: QuickAddSpotFacadeProps) {
   const {
     isModalOpen,
     isPinMode,
@@ -38,13 +41,15 @@ export function QuickAddSpotFeature({
     closeModal,
     handleCurrentLocation,
     handleMapPin,
-    handleMapPress,
+    handleConfirmPin,
+    cancelPinMode,
     handleSubmit,
   } = useQuickAddSpot({
     userId,
     selectedMapId,
     defaultMapId,
     currentLocation,
+    onMenuClose: onClose, // メニューを閉じるコールバックを渡す
   });
 
   // ピンモードの変更を親に通知
@@ -52,14 +57,24 @@ export function QuickAddSpotFeature({
     onPinModeChange(isPinMode);
   }, [isPinMode, onPinModeChange]);
 
-  // マップタップハンドラーを親に渡す
+  // 確定ハンドラーを親に渡す
   useEffect(() => {
     if (isPinMode) {
-      onMapTap(handleMapPress);
+      // 座標を受け取ってLocationCoords形式に変換
+      onMapTap((latitude, longitude) => handleConfirmPin({ latitude, longitude }));
     } else {
       onMapTap(null);
     }
-  }, [isPinMode, handleMapPress, onMapTap]);
+  }, [isPinMode, handleConfirmPin, onMapTap]);
+
+  // キャンセルハンドラーを親に渡す
+  useEffect(() => {
+    if (isPinMode) {
+      onCancelPinMode(cancelPinMode);
+    } else {
+      onCancelPinMode(null);
+    }
+  }, [isPinMode, cancelPinMode, onCancelPinMode]);
 
   return (
     <>

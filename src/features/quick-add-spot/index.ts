@@ -4,5 +4,5 @@
 
 export { QuickAddSpotMenu } from './ui/QuickAddSpotMenu';
 export { QuickAddSpotModal } from './ui/QuickAddSpotModal';
-export { QuickAddSpotFeature } from './ui/QuickAddSpotFeature';
+export { QuickAddSpotFacade } from './ui/QuickAddSpotFacade';
 export { useQuickAddSpot } from './model/useQuickAddSpot';

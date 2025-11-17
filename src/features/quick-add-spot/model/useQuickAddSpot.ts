@@ -13,6 +13,7 @@ interface UseQuickAddSpotParams {
   selectedMapId: string | null;
   defaultMapId: string | null;
   currentLocation: LocationCoords | null;
+  onMenuClose: () => void;
 }
 
 export function useQuickAddSpot({
@@ -20,8 +21,8 @@ export function useQuickAddSpot({
   selectedMapId,
   defaultMapId,
   currentLocation,
+  onMenuClose,
 }: UseQuickAddSpotParams) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPinMode, setIsPinMode] = useState(false);
   const [spotLocation, setSpotLocation] = useState<LocationCoords | null>(null);
@@ -34,10 +35,6 @@ export function useQuickAddSpot({
     }
   }, [isError, error]);
 
-  // メニューを開く/閉じる
-  const openMenu = () => setIsMenuOpen(true);
-  const closeMenu = () => setIsMenuOpen(false);
-
   // モーダルを閉じる
   const closeModal = () => {
     setIsModalOpen(false);
@@ -46,7 +43,7 @@ export function useQuickAddSpot({
 
   // 現在地でスポット追加
   const handleCurrentLocation = () => {
-    closeMenu();
+    onMenuClose(); // メニューを閉じる
 
     if (!currentLocation) {
       console.warn('現在地が取得できていません');
@@ -58,21 +55,19 @@ export function useQuickAddSpot({
     setIsModalOpen(true);
   };
 
-  // ピン刺しモード
+  // ピン刺しモード開始
   const handleMapPin = () => {
-    closeMenu();
+    onMenuClose(); // メニューを閉じる
     setIsPinMode(true);
     console.log('ピン刺しモード開始');
   };
 
-  // マップタップでピン配置
-  const handleMapPress = (latitude: number, longitude: number) => {
-    if (isPinMode) {
-      console.log('📍 ピン配置:', { latitude, longitude });
-      setSpotLocation({ latitude, longitude });
-      setIsModalOpen(true);
-      setIsPinMode(false); // モーダルが開いたらピンモード終了
-    }
+  // 中央の座標で確定
+  const handleConfirmPin = (centerCoords: LocationCoords) => {
+    console.log('📍 ピン確定:', centerCoords);
+    setSpotLocation(centerCoords);
+    setIsModalOpen(true);
+    setIsPinMode(false); // モーダルが開いたらピンモード終了
   };
 
   // ピンモードキャンセル
@@ -128,16 +123,13 @@ export function useQuickAddSpot({
   };
 
   return {
-    isMenuOpen,
     isModalOpen,
     isPinMode,
     spotLocation,
-    openMenu,
-    closeMenu,
     closeModal,
     handleCurrentLocation,
     handleMapPin,
-    handleMapPress,
+    handleConfirmPin,
     cancelPinMode,
     handleSubmit,
   };

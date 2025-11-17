@@ -19,7 +19,7 @@ import { CustomMapList } from '@/widgets/custom-map-list';
 import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
-import { QuickAddSpotFeature } from '@/features/quick-add-spot';
+import { QuickAddSpotFacade } from '@/features/quick-add-spot';
 import { FAB, LocationButton } from '@/shared/ui';
 import { useLocation } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
@@ -39,6 +39,7 @@ export function MapPage() {
   const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
   const [isPinMode, setIsPinMode] = useState(false);
   const [mapTapHandler, setMapTapHandler] = useState<((lat: number, lng: number) => void) | null>(null);
+  const [cancelPinHandler, setCancelPinHandler] = useState<(() => void) | null>(null);
   const { location, error: locationError, loading: locationLoading } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -132,6 +133,7 @@ export function MapPage() {
                   mapId={selectedMapId}
                   isPinMode={isPinMode}
                   onMapPress={mapTapHandler}
+                  onCancelPinMode={cancelPinHandler}
                 />
               ) : (
                 <DefaultMapView ref={mapViewRef} />
@@ -198,7 +200,7 @@ export function MapPage() {
       )}
 
       {/* クイック追加機能 */}
-      <QuickAddSpotFeature
+      <QuickAddSpotFacade
         visible={isQuickAddMenuOpen}
         userId={user?.id ?? null}
         selectedMapId={selectedMapId}
@@ -207,6 +209,7 @@ export function MapPage() {
         onClose={() => setIsQuickAddMenuOpen(false)}
         onPinModeChange={setIsPinMode}
         onMapTap={(handler) => setMapTapHandler(() => handler)}
+        onCancelPinMode={(handler) => setCancelPinHandler(() => handler)}
       />
     </SafeAreaView>
   );
