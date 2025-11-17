@@ -19,7 +19,7 @@ import { CustomMapList } from '@/widgets/custom-map-list';
 import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
-import { QuickAddSpotMenu } from '@/features/quick-add-spot';
+import { QuickAddSpotFeature } from '@/features/quick-add-spot';
 import { FAB, LocationButton } from '@/shared/ui';
 import { useLocation } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
@@ -36,7 +36,7 @@ export function MapPage() {
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isQuickAddModalOpen, setIsQuickAddModalOpen] = useState(false);
+  const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
   const { location, error: locationError, loading: locationLoading } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -79,19 +79,7 @@ export function MapPage() {
   };
 
   const handleFABPress = () => {
-    setIsQuickAddModalOpen((prev) => !prev);
-  };
-
-  const handleCurrentLocationAdd = () => {
-    setIsQuickAddModalOpen(false);
-    // TODO: 現在地登録の実装
-    console.log('現在地を登録');
-  };
-
-  const handleMapPinAdd = () => {
-    setIsQuickAddModalOpen(false);
-    // TODO: ピン刺しモードの実装
-    console.log('ピン刺しモード');
+    setIsQuickAddMenuOpen((prev) => !prev);
   };
 
   const handleLocationPress = () => {
@@ -137,7 +125,7 @@ export function MapPage() {
             <>
               {/* デフォルトマップ or カスタムマップ */}
               {isCustomMap ? (
-                <CustomMapView ref={mapViewRef} />
+                <CustomMapView ref={mapViewRef} mapId={selectedMapId} />
               ) : (
                 <DefaultMapView ref={mapViewRef} />
               )}
@@ -202,12 +190,14 @@ export function MapPage() {
         </View>
       )}
 
-      {/* クイック追加メニュー */}
-      <QuickAddSpotMenu
-        visible={isQuickAddModalOpen}
-        onClose={() => setIsQuickAddModalOpen(false)}
-        onCurrentLocation={handleCurrentLocationAdd}
-        onMapPin={handleMapPinAdd}
+      {/* クイック追加機能 */}
+      <QuickAddSpotFeature
+        visible={isQuickAddMenuOpen}
+        userId={user?.id ?? null}
+        selectedMapId={selectedMapId}
+        defaultMapId={userMaps?.[0]?.id ?? null}
+        currentLocation={location}
+        onClose={() => setIsQuickAddMenuOpen(false)}
       />
     </SafeAreaView>
   );

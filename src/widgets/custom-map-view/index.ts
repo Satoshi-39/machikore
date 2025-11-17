@@ -2,4 +2,4 @@
  * CustomMapView Widget エクスポート
  */
 
-export { CustomMapView } from './ui/custom-map-view';
+export { CustomMapView, type MapViewHandle } from './ui/custom-map-view';
