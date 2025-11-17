@@ -33,10 +33,14 @@ export function useLocation() {
           accuracy: Location.Accuracy.Balanced,
         });
 
-        setLocation({
+        const coords = {
           latitude: currentLocation.coords.latitude,
           longitude: currentLocation.coords.longitude,
-        });
+        };
+
+        console.log('📍 現在地を取得:', coords);
+
+        setLocation(coords);
         setLoading(false);
       } catch (err) {
         setError(err instanceof Error ? err.message : '位置情報の取得に失敗しました');
@@ -57,6 +61,8 @@ export function useLocation() {
         latitude: currentLocation.coords.latitude,
         longitude: currentLocation.coords.longitude,
       };
+
+      console.log('📍 現在地を再取得:', coords);
 
       setLocation(coords);
       setLoading(false);
