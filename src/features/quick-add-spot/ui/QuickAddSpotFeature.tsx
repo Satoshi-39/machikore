@@ -4,7 +4,7 @@
  * MenuとModalを統合し、MapPageから簡単に使えるようにする
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { QuickAddSpotMenu } from './QuickAddSpotMenu';
 import { QuickAddSpotModal } from './QuickAddSpotModal';
 import { useQuickAddSpot } from '../model/useQuickAddSpot';
@@ -17,6 +17,8 @@ interface QuickAddSpotFeatureProps {
   defaultMapId: string | null;
   currentLocation: LocationCoords | null;
   onClose: () => void;
+  onPinModeChange: (isPinMode: boolean) => void;
+  onMapTap: (handler: ((latitude: number, longitude: number) => void) | null) => void;
 }
 
 export function QuickAddSpotFeature({
@@ -26,13 +28,17 @@ export function QuickAddSpotFeature({
   defaultMapId,
   currentLocation,
   onClose,
+  onPinModeChange,
+  onMapTap,
 }: QuickAddSpotFeatureProps) {
   const {
     isModalOpen,
+    isPinMode,
     spotLocation,
     closeModal,
     handleCurrentLocation,
     handleMapPin,
+    handleMapPress,
     handleSubmit,
   } = useQuickAddSpot({
     userId,
@@ -40,6 +46,20 @@ export function QuickAddSpotFeature({
     defaultMapId,
     currentLocation,
   });
+
+  // ピンモードの変更を親に通知
+  useEffect(() => {
+    onPinModeChange(isPinMode);
+  }, [isPinMode, onPinModeChange]);
+
+  // マップタップハンドラーを親に渡す
+  useEffect(() => {
+    if (isPinMode) {
+      onMapTap(handleMapPress);
+    } else {
+      onMapTap(null);
+    }
+  }, [isPinMode, handleMapPress, onMapTap]);
 
   return (
     <>

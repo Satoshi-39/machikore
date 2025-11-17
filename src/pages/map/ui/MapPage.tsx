@@ -37,6 +37,8 @@ export function MapPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
+  const [isPinMode, setIsPinMode] = useState(false);
+  const [mapTapHandler, setMapTapHandler] = useState<((lat: number, lng: number) => void) | null>(null);
   const { location, error: locationError, loading: locationLoading } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -125,7 +127,12 @@ export function MapPage() {
             <>
               {/* デフォルトマップ or カスタムマップ */}
               {isCustomMap ? (
-                <CustomMapView ref={mapViewRef} mapId={selectedMapId} />
+                <CustomMapView
+                  ref={mapViewRef}
+                  mapId={selectedMapId}
+                  isPinMode={isPinMode}
+                  onMapPress={mapTapHandler}
+                />
               ) : (
                 <DefaultMapView ref={mapViewRef} />
               )}
@@ -198,6 +205,8 @@ export function MapPage() {
         defaultMapId={userMaps?.[0]?.id ?? null}
         currentLocation={location}
         onClose={() => setIsQuickAddMenuOpen(false)}
+        onPinModeChange={setIsPinMode}
+        onMapTap={(handler) => setMapTapHandler(() => handler)}
       />
     </SafeAreaView>
   );

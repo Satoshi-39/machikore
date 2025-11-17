@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useImperativeHandle, forwardRef } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { Ionicons } from '@expo/vector-icons';
 import { useSpots } from '@/entities/spot';
@@ -16,12 +16,24 @@ export interface MapViewHandle {
 
 interface CustomMapViewProps {
   mapId: string | null;
+  isPinMode?: boolean;
+  onMapPress?: ((latitude: number, longitude: number) => void) | null;
 }
 
 export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
-  ({ mapId }, ref) => {
+  ({ mapId, isPinMode = false, onMapPress = null }, ref) => {
     const cameraRef = useRef<Mapbox.Camera>(null);
     const { data: spots = [] } = useSpots(mapId ?? '');
+
+    // マップタップハンドラー
+    const handleMapPress = (event: any) => {
+      if (isPinMode && onMapPress) {
+        const { geometry } = event;
+        const [longitude, latitude] = geometry.coordinates;
+        console.log('🗺️ マップタップ:', { latitude, longitude });
+        onMapPress(latitude, longitude);
+      }
+    };
 
   // 外部から呼び出せるメソッドを公開
   useImperativeHandle(ref, () => ({
@@ -41,6 +53,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       <Mapbox.MapView
         style={{ flex: 1 }}
         styleURL={Mapbox.StyleURL.Street}
+        onPress={handleMapPress}
       >
         <Mapbox.Camera
           ref={cameraRef}
@@ -67,6 +80,22 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
           );
         })}
       </Mapbox.MapView>
+
+      {/* ピンモード時のオーバーレイ */}
+      {isPinMode && (
+        <View className="absolute inset-0 pointer-events-none items-center justify-center">
+          {/* 中央の十字線 */}
+          <View className="items-center">
+            <Ionicons name="add" size={48} color="#3B82F6" />
+          </View>
+          {/* 上部の説明テキスト */}
+          <View className="absolute top-4 bg-blue-500 px-4 py-2 rounded-full">
+            <Text className="text-white font-semibold">
+              マップをタップしてピンを配置
+            </Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 });

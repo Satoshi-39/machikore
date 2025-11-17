@@ -23,6 +23,7 @@ export function useQuickAddSpot({
 }: UseQuickAddSpotParams) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPinMode, setIsPinMode] = useState(false);
   const [spotLocation, setSpotLocation] = useState<LocationCoords | null>(null);
   const { mutate: createSpot, isPending, isError, error } = useCreateSpot();
 
@@ -60,8 +61,24 @@ export function useQuickAddSpot({
   // ピン刺しモード
   const handleMapPin = () => {
     closeMenu();
-    // TODO: ピン刺しモードの実装
-    console.log('ピン刺しモード');
+    setIsPinMode(true);
+    console.log('ピン刺しモード開始');
+  };
+
+  // マップタップでピン配置
+  const handleMapPress = (latitude: number, longitude: number) => {
+    if (isPinMode) {
+      console.log('📍 ピン配置:', { latitude, longitude });
+      setSpotLocation({ latitude, longitude });
+      setIsModalOpen(true);
+      setIsPinMode(false); // モーダルが開いたらピンモード終了
+    }
+  };
+
+  // ピンモードキャンセル
+  const cancelPinMode = () => {
+    setIsPinMode(false);
+    console.log('ピン刺しモードキャンセル');
   };
 
   // スポット作成
@@ -113,12 +130,15 @@ export function useQuickAddSpot({
   return {
     isMenuOpen,
     isModalOpen,
+    isPinMode,
     spotLocation,
     openMenu,
     closeMenu,
     closeModal,
     handleCurrentLocation,
     handleMapPin,
+    handleMapPress,
+    cancelPinMode,
     handleSubmit,
   };
 }
