@@ -4,7 +4,7 @@
  * FSDの原則：Widget層は複合的なUIコンポーネント
  */
 
-import React, { useRef, useImperativeHandle, forwardRef, useState } from 'react';
+import React, { useRef, useImperativeHandle, forwardRef, useState, useEffect } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { Ionicons } from '@expo/vector-icons';
@@ -31,6 +31,28 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       latitude: 35.6812,
       longitude: 139.7671,
     });
+
+    // スポットが読み込まれたら全スポットを表示
+    useEffect(() => {
+      if (spots.length > 0 && cameraRef.current) {
+        // 全スポットの座標から境界を計算
+        const lngs = spots.map(s => s.longitude);
+        const lats = spots.map(s => s.latitude);
+
+        const minLng = Math.min(...lngs);
+        const maxLng = Math.max(...lngs);
+        const minLat = Math.min(...lats);
+        const maxLat = Math.max(...lats);
+
+        // パディングを追加して表示
+        cameraRef.current.fitBounds(
+          [minLng, minLat], // 南西の座標
+          [maxLng, maxLat], // 北東の座標
+          [50, 50, 50, 50], // パディング [上, 右, 下, 左]
+          1000 // アニメーション時間
+        );
+      }
+    }, [spots]);
 
     // カメラ変更時に中心座標を更新
     const handleCameraChanged = async (state: any) => {

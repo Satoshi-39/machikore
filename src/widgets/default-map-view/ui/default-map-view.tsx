@@ -14,10 +14,20 @@ export interface MapViewHandle {
   flyToLocation: (longitude: number, latitude: number) => void;
 }
 
-export const DefaultMapView = forwardRef<MapViewHandle, {}>((props, ref) => {
-  const { data: stations, isLoading, error } = useMachi();
-  const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
-  const cameraRef = useRef<Mapbox.Camera>(null);
+interface DefaultMapViewProps {
+  currentLocation?: { latitude: number; longitude: number } | null;
+}
+
+export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
+  ({ currentLocation = null }, ref) => {
+    const { data: stations, isLoading, error } = useMachi();
+    const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
+    const cameraRef = useRef<Mapbox.Camera>(null);
+
+    // 初期カメラ位置を計算
+    const initialCenter = currentLocation
+      ? [currentLocation.longitude, currentLocation.latitude]
+      : [139.7671, 35.6812]; // フォールバック: 東京
 
   // 外部から呼び出せるメソッドを公開
   useImperativeHandle(ref, () => ({
@@ -49,8 +59,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, {}>((props, ref) => {
           >
             <Mapbox.Camera
               ref={cameraRef}
-              zoomLevel={10}
-              centerCoordinate={[139.7671, 35.6812]} // 東京
+              zoomLevel={currentLocation ? 14 : 10} // 現在地があれば詳細レベル
+              centerCoordinate={initialCenter as [number, number]}
               animationDuration={0}
             />
 
@@ -86,5 +96,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, {}>((props, ref) => {
         </View>
       )}
     </AsyncBoundary>
-  );
-});
+    );
+  }
+);

@@ -136,7 +136,7 @@ export function MapPage() {
                   onCancelPinMode={cancelPinHandler}
                 />
               ) : (
-                <DefaultMapView ref={mapViewRef} />
+                <DefaultMapView ref={mapViewRef} currentLocation={location} />
               )}
 
               {/* 検索バー + ViewModeToggle をマップの上に表示 */}
