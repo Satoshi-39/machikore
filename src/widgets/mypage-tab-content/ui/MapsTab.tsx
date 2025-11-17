@@ -7,14 +7,14 @@
 import React from 'react';
 import { View, Text, Pressable, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useUserMaps } from '@/entities/map';
+import { useUserMaps, useMapStore } from '@/entities/map';
 import { AsyncBoundary } from '@/shared/ui';
 import type { MapRow } from '@/shared/types/database.types';
 
 interface MapsTabProps {
   userId: string | null;
-  onMapPress?: (map: MapRow) => void;
 }
 
 interface MapCardProps {
@@ -77,8 +77,15 @@ function MapCard({ map, onPress }: MapCardProps) {
   );
 }
 
-export function MapsTab({ userId, onMapPress }: MapsTabProps) {
+export function MapsTab({ userId }: MapsTabProps) {
+  const router = useRouter();
   const { data: maps, isLoading, error } = useUserMaps(userId);
+  const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
+
+  const handleMapPress = (map: MapRow) => {
+    setSelectedMapId(map.id);
+    router.push(`/(tabs)/map?id=${map.id}`);
+  };
 
   return (
     <AsyncBoundary
@@ -95,7 +102,7 @@ export function MapsTab({ userId, onMapPress }: MapsTabProps) {
           renderItem={({ item }) => (
             <MapCard
               map={item}
-              onPress={() => onMapPress?.(item)}
+              onPress={() => handleMapPress(item)}
             />
           )}
           contentContainerClassName="bg-white"

@@ -15,11 +15,12 @@ import type { Database } from './supabase.generated';
  * - boolean → 0 | 1
  * - その他はそのまま
  */
-type ToSQLiteType<T> = T extends boolean
-  ? 0 | 1
-  : T extends boolean | null
-    ? 0 | 1 | null
-    : T;
+type ToSQLiteType<T> =
+  T extends string | null ? T :
+  T extends number | null ? T :
+  T extends boolean ? 0 | 1 :
+  T extends boolean | null ? 0 | 1 | null :
+  T;
 
 /**
  * オブジェクト全体をSQLite型に変換

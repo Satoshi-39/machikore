@@ -9,10 +9,11 @@ import type { UserRow } from '@/shared/types/database.types';
 /**
  * ユーザー情報を取得
  */
-export function useUser(userId: string) {
+export function useUser(userId: string | null) {
   return useQuery<UserRow | null, Error>({
-    queryKey: ['user', userId],
+    queryKey: ['user', userId || ''],
     queryFn: () => {
+      if (!userId) return null;
       return getUserById(userId);
     },
     enabled: !!userId,

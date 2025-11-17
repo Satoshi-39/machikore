@@ -2,14 +2,16 @@
  * マップページ
  *
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
- * デフォルトマップまたはカスタムマップを表示
+ * selectedMapIdの有無でデフォルトマップ/カスタムマップを切り替え
+ * URLクエリパラメータ (?id=xxx) でマップ指定可能（共有用）
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useUserStore } from '@/entities/user';
-import { useMapStore } from '@/entities/map';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useUserStore, useUser } from '@/entities/user';
+import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { DefaultMapView } from '@/widgets/default-map-view';
 import { DefaultMapHierarchy } from '@/widgets/default-map-hierarchy';
 import { CustomMapView } from '@/widgets/custom-map-view';
@@ -17,21 +19,29 @@ import { CustomMapList } from '@/widgets/custom-map-list';
 import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
-// import { CreatePostModal } from '@/widgets/post-creation-modal'; // TODO: Spot作成モーダルに変更予定
 import { type MapListViewMode } from '@/features/toggle-view-mode';
-// import { FAB } from '@/shared/ui'; // TODO: Spot作成ボタン実装時に使用
-// import { colors } from '@/shared/config'; // TODO: Spot作成ボタン実装時に使用
 
 export function MapPage() {
+  const { id } = useLocalSearchParams<{ id?: string }>();
+  const router = useRouter();
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
-  const resetToDefault = useMapStore((state) => state.resetToDefault);
+  const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
+  const { data: selectedMap } = useMap(selectedMapId);
+  const { data: userMaps } = useUserMaps(user?.id ?? null);
+  const { data: mapOwner } = useUser(selectedMap?.user_id ?? null);
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  // const [isModalVisible, setIsModalVisible] = useState(false); // TODO: Spot作成モーダル実装時に復活
 
-  const isCustomMap = selectedMapId !== null;
+  // URLクエリパラメータからマップIDを読み取り、グローバルステートに設定
+  useEffect(() => {
+    if (id) {
+      setSelectedMapId(id);
+    }
+  }, [id, setSelectedMapId]);
+
+  const isCustomMap = !!selectedMapId;
 
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
@@ -41,14 +51,43 @@ export function MapPage() {
     setIsSearchFocused(false);
   };
 
+  const handleCloseCustomMap = () => {
+    setSelectedMapId(null);
+    router.push('/(tabs)/map');
+  };
+
+  const handleMapSelect = (mapId: string) => {
+    setSelectedMapId(mapId);
+    router.push(`/(tabs)/map?id=${mapId}`);
+  };
+
+  const handleUserPress = () => {
+    if (selectedMap?.user_id) {
+      router.push(`/user/${selectedMap.user_id}`);
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100" edges={['top']}>
       {/* ヘッダー */}
       <MapHeader
         isCustomMap={isCustomMap}
-        userName={user?.display_name ?? undefined}
-        userAvatarUrl={user?.avatar_url ?? undefined}
-        onLogoPress={resetToDefault}
+        mapTitle={selectedMap?.name}
+        userName={
+          (isCustomMap
+            ? mapOwner?.display_name
+            : user?.display_name) || undefined
+        }
+        userAvatarUrl={
+          (isCustomMap
+            ? mapOwner?.avatar_url
+            : user?.avatar_url) || undefined
+        }
+        userId={(isCustomMap ? mapOwner?.id : user?.id) ?? undefined}
+        userMaps={userMaps}
+        onClose={handleCloseCustomMap}
+        onMapSelect={handleMapSelect}
+        onUserPress={handleUserPress}
       />
 
       {viewMode === 'map' ? (
@@ -103,21 +142,6 @@ export function MapPage() {
           </View>
         )
       )}
-
-      {/* スポット作成ボタン（将来実装予定） */}
-      {/* TODO: Spot作成モーダル実装時に有効化 */}
-      {/* <FAB
-        onPress={() => setIsModalVisible(true)}
-        icon="create-outline"
-        color={colors.primary.DEFAULT}
-      /> */}
-
-      {/* スポット作成モーダル（将来実装予定） */}
-      {/* TODO: CreateSpotModalに変更 */}
-      {/* <CreatePostModal
-        visible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
-      /> */}
     </SafeAreaView>
   );
 }
