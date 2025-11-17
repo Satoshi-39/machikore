@@ -5,10 +5,11 @@
  * FSDの原則：Widget層は複数の要素を組み合わせた複合コンポーネント
  */
 
-import React, { useState } from 'react';
-import { View, Text, Image, Pressable, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import type { MapRow } from '@/shared/types/database.types';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState, useEffect, useRef } from 'react';
+import { Image, Pressable, ScrollView, Text, View, Modal, Animated } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface MapHeaderProps {
   isCustomMap: boolean;
@@ -33,7 +34,28 @@ export function MapHeader({
   onMapSelect,
   onUserPress,
 }: MapHeaderProps) {
+  const insets = useSafeAreaInsets();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const slideAnim = useRef(new Animated.Value(-500)).current; // 初期位置: 画面上部の外側
+
+  // モーダルの開閉に応じてアニメーション
+  useEffect(() => {
+    if (isDropdownOpen) {
+      // 上からスライドダウン
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      // 上にスライドアップして消える
+      Animated.timing(slideAnim, {
+        toValue: -500,
+        duration: 250,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [isDropdownOpen, slideAnim]);
 
   const handleMapTitlePress = () => {
     if (userMaps.length > 0) {
@@ -49,87 +71,70 @@ export function MapHeader({
   return (
     <View className="bg-white px-5 py-4">
       {isCustomMap ? (
-        // カスタムマップ：✕ボタン（左）、マップ名（中央）、ユーザーアイコン（右）
-        <View className="flex-row items-center">
-          {/* ✕ボタン（左端・固定幅）- クリックでデフォルトマップに戻る */}
-          <Pressable
-            onPress={onClose}
-            className="items-center justify-center"
-            style={{ width: 40 }}
-          >
-            <Ionicons name="close-circle-outline" size={32} color="#007AFF" />
-          </Pressable>
-
-          {/* マップ名（中央）- クリックでドロップダウン表示 */}
-          <View className="flex-1 items-center">
-            <Pressable
-              onPress={handleMapTitlePress}
-              className="flex-row items-center"
-            >
-              <Text className="text-xl font-bold text-gray-800">
-                {mapTitle || `${userName || 'ゲスト'}のマップ`}
-              </Text>
-              {userMaps.length > 0 && (
-                <Ionicons
-                  name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
-                  size={20}
-                  color="#6B7280"
-                  style={{ marginLeft: 8 }}
+        // カスタムマップ：ユーザーアイコン + マップ名（左）、アクションボタン群（右）
+        <View className="flex-row items-center justify-between">
+          {/* 左側：ユーザーアイコン + マップ名 */}
+          <View className="flex-row items-center" style={{ flex: 0.8 }}>
+            {/* ユーザーアイコン */}
+            <Pressable onPress={onUserPress} className="mr-6">
+              {userAvatarUrl ? (
+                <Image
+                  source={{ uri: userAvatarUrl }}
+                  className="w-10 h-10 rounded-full"
                 />
+              ) : (
+                <View className="w-10 h-10 rounded-full bg-gray-300 items-center justify-center">
+                  <Text className="text-base font-bold text-gray-600">
+                    {userName?.[0]?.toUpperCase() || '?'}
+                  </Text>
+                </View>
               )}
             </Pressable>
 
-            {/* ドロップダウンメニュー */}
-            {isDropdownOpen && userMaps.length > 0 && (
-              <View
-                className="absolute top-10 bg-white rounded-lg shadow-lg border border-gray-200"
-                style={{
-                  width: 280,
-                  maxHeight: 300,
-                  zIndex: 1000,
-                }}
+            {/* マップ名 - クリックでドロップダウン表示 */}
+            <View className="flex-shrink">
+              <Pressable
+                onPress={handleMapTitlePress}
+                className="flex-row items-center"
               >
-                <ScrollView>
-                  {userMaps.map((map) => (
-                    <Pressable
-                      key={map.id}
-                      onPress={() => handleMapItemPress(map.id)}
-                      className="px-4 py-3 border-b border-gray-100"
-                    >
-                      <Text className="text-base font-semibold text-gray-800">
-                        {map.name}
-                      </Text>
-                      {map.description && (
-                        <Text className="text-sm text-gray-600 mt-1" numberOfLines={1}>
-                          {map.description}
-                        </Text>
-                      )}
-                    </Pressable>
-                  ))}
-                </ScrollView>
-              </View>
-            )}
+                <Text
+                  className="text-xl font-bold text-gray-800"
+                  numberOfLines={1}
+                >
+                  {mapTitle || `${userName || 'ゲスト'}のマップ`}
+                </Text>
+                {userMaps.length > 0 && (
+                  <Ionicons
+                    name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
+                    size={20}
+                    color="#6B7280"
+                    style={{ marginLeft: 8 }}
+                  />
+                )}
+              </Pressable>
+            </View>
           </View>
 
-          {/* ユーザーアイコン（右端・固定幅） */}
-          <Pressable
-            style={{ width: 40 }}
-            className="items-end"
-            onPress={onUserPress}
-          >
-            {userAvatarUrl ? (
-              <Image
-                source={{ uri: userAvatarUrl }}
-                className="w-10 h-10 rounded-full"
-              />
-            ) : (
-              <View className="w-10 h-10 rounded-full bg-gray-300 items-center justify-center">
-                <Text className="text-base font-bold text-gray-600">
-                  {userName?.[0]?.toUpperCase() || '?'}
-                </Text>
-              </View>
-            )}
-          </Pressable>
+          {/* 右側：アクションボタン群 */}
+          <View className="flex-row items-center gap-4">
+            {/* ブックマークボタン */}
+            <Pressable className="items-center justify-center">
+              <Ionicons name="bookmark-outline" size={24} color="#007AFF" />
+            </Pressable>
+
+            {/* 共有ボタン */}
+            <Pressable className="items-center justify-center">
+              <Ionicons name="share-outline" size={24} color="#007AFF" />
+            </Pressable>
+
+            {/* ✕ボタン - クリックでデフォルトマップに戻る */}
+            <Pressable
+              onPress={onClose}
+              className="items-center justify-center"
+            >
+              <Ionicons name="close" size={24} color="#007AFF" />
+            </Pressable>
+          </View>
         </View>
       ) : (
         // デフォルトマップ：ロゴ（左）+ キャッチフレーズ（中央）
@@ -137,7 +142,9 @@ export function MapHeader({
           {/* ロゴ（左端） */}
           <View className="flex-row items-center">
             <Ionicons name="map" size={20} color="#007AFF" />
-            <Text className="ml-1 text-base font-bold text-blue-500">街コレ</Text>
+            <Text className="ml-1 text-base font-bold text-blue-500">
+              街コレ
+            </Text>
           </View>
 
           {/* キャッチフレーズ（中央） */}
@@ -151,6 +158,64 @@ export function MapHeader({
           <View style={{ width: 60 }} />
         </View>
       )}
+
+      {/* マップ選択モーダル */}
+      <Modal
+        visible={isDropdownOpen}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setIsDropdownOpen(false)}
+      >
+        <View className="flex-1 bg-black/50">
+          {/* モーダルコンテンツ（上からスライド） */}
+          <Animated.View
+            className="bg-white rounded-b-3xl shadow-2xl"
+            style={{
+              maxHeight: '70%',
+              paddingTop: insets.top,
+              transform: [{ translateY: slideAnim }],
+            }}
+          >
+            {/* ヘッダー */}
+            <View className="flex-row items-center justify-between px-6 py-4 border-b border-gray-100">
+              <Text className="text-lg font-bold text-gray-900">マップを選択</Text>
+              <Pressable onPress={() => setIsDropdownOpen(false)}>
+                <Ionicons name="close" size={28} color="#6B7280" />
+              </Pressable>
+            </View>
+
+            {/* マップリスト */}
+            <ScrollView className="px-6">
+              {userMaps.map((map, index) => (
+                <Pressable
+                  key={map.id}
+                  onPress={() => handleMapItemPress(map.id)}
+                  className="py-4 active:bg-gray-50"
+                  style={{
+                    borderBottomWidth: index < userMaps.length - 1 ? 1 : 0,
+                    borderBottomColor: '#F3F4F6',
+                  }}
+                >
+                  <Text className="text-lg font-semibold text-gray-900">
+                    {map.name}
+                  </Text>
+                  {map.description && (
+                    <Text className="text-sm text-gray-600 mt-1" numberOfLines={2}>
+                      {map.description}
+                    </Text>
+                  )}
+                </Pressable>
+              ))}
+            </ScrollView>
+          </Animated.View>
+
+          {/* 背景タップで閉じる */}
+          <Pressable
+            className="flex-1"
+            onPress={() => setIsDropdownOpen(false)}
+          />
+        </View>
+      </Modal>
     </View>
   );
 }
