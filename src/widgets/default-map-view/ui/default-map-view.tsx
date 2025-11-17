@@ -2,7 +2,7 @@
  * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef } from 'react';
 import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
@@ -10,9 +10,27 @@ import { AsyncBoundary } from '@/shared/ui';
 import { DefaultMapDetailCard } from './default-map-detail-card';
 import type { MachiRow } from '@/shared/types/database.types';
 
-export function DefaultMapView() {
+export interface MapViewHandle {
+  flyToLocation: (longitude: number, latitude: number) => void;
+}
+
+export const DefaultMapView = forwardRef<MapViewHandle, {}>((props, ref) => {
   const { data: stations, isLoading, error } = useMachi();
   const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
+  const cameraRef = useRef<Mapbox.Camera>(null);
+
+  // 外部から呼び出せるメソッドを公開
+  useImperativeHandle(ref, () => ({
+    flyToLocation: (longitude: number, latitude: number) => {
+      if (cameraRef.current) {
+        cameraRef.current.setCamera({
+          centerCoordinate: [longitude, latitude],
+          zoomLevel: 14,
+          animationDuration: 1000,
+        });
+      }
+    },
+  }));
 
   return (
     <AsyncBoundary
@@ -30,6 +48,7 @@ export function DefaultMapView() {
             styleURL={Mapbox.StyleURL.Street}
           >
             <Mapbox.Camera
+              ref={cameraRef}
               zoomLevel={10}
               centerCoordinate={[139.7671, 35.6812]} // 東京
               animationDuration={0}
@@ -68,4 +87,4 @@ export function DefaultMapView() {
       )}
     </AsyncBoundary>
   );
-}
+});

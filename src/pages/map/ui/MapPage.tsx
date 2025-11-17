@@ -6,19 +6,22 @@
  * URLクエリパラメータ (?id=xxx) でマップ指定可能（共有用）
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useUserStore, useUser } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
-import { DefaultMapView } from '@/widgets/default-map-view';
+import { DefaultMapView, type MapViewHandle } from '@/widgets/default-map-view';
 import { DefaultMapHierarchy } from '@/widgets/default-map-hierarchy';
 import { CustomMapView } from '@/widgets/custom-map-view';
 import { CustomMapList } from '@/widgets/custom-map-list';
 import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
+import { QuickAddSpotMenu } from '@/features/quick-add-spot';
+import { FAB, LocationButton } from '@/shared/ui';
+import { useLocation } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
 
 export function MapPage() {
@@ -33,6 +36,14 @@ export function MapPage() {
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isQuickAddModalOpen, setIsQuickAddModalOpen] = useState(false);
+  const { location, error: locationError, loading: locationLoading } = useLocation();
+  const mapViewRef = useRef<MapViewHandle>(null);
+
+  // デバッグ: 位置情報の状態を確認
+  useEffect(() => {
+    console.log('Location state:', { location, locationError, locationLoading });
+  }, [location, locationError, locationLoading]);
 
   // URLクエリパラメータからマップIDを読み取り、グローバルステートに設定
   useEffect(() => {
@@ -64,6 +75,28 @@ export function MapPage() {
   const handleUserPress = () => {
     if (selectedMap?.user_id) {
       router.push(`/user/${selectedMap.user_id}`);
+    }
+  };
+
+  const handleFABPress = () => {
+    setIsQuickAddModalOpen((prev) => !prev);
+  };
+
+  const handleCurrentLocationAdd = () => {
+    setIsQuickAddModalOpen(false);
+    // TODO: 現在地登録の実装
+    console.log('現在地を登録');
+  };
+
+  const handleMapPinAdd = () => {
+    setIsQuickAddModalOpen(false);
+    // TODO: ピン刺しモードの実装
+    console.log('ピン刺しモード');
+  };
+
+  const handleLocationPress = () => {
+    if (location && mapViewRef.current) {
+      mapViewRef.current.flyToLocation(location.longitude, location.latitude);
     }
   };
 
@@ -103,7 +136,11 @@ export function MapPage() {
           ) : (
             <>
               {/* デフォルトマップ or カスタムマップ */}
-              {isCustomMap ? <CustomMapView /> : <DefaultMapView />}
+              {isCustomMap ? (
+                <CustomMapView ref={mapViewRef} />
+              ) : (
+                <DefaultMapView ref={mapViewRef} />
+              )}
 
               {/* 検索バー + ViewModeToggle をマップの上に表示 */}
               <View className="absolute top-0 left-0 right-0">
@@ -142,6 +179,36 @@ export function MapPage() {
           </View>
         )
       )}
+
+      {/* マップコントロールボタン群: マップ表示時のみ表示 */}
+      {viewMode === 'map' && !isSearchFocused && (
+        <View className="absolute bottom-12 right-6 z-50">
+          <View className="flex-col items-end gap-4">
+            {/* 現在地ボタン */}
+            {location && (
+              <LocationButton
+                onPress={handleLocationPress}
+                testID="location-button"
+              />
+            )}
+            {/* FAB */}
+            <FAB
+              onPress={handleFABPress}
+              icon="pushpin"
+              iconLibrary="antdesign"
+              testID="spot-create-fab"
+            />
+          </View>
+        </View>
+      )}
+
+      {/* クイック追加メニュー */}
+      <QuickAddSpotMenu
+        visible={isQuickAddModalOpen}
+        onClose={() => setIsQuickAddModalOpen(false)}
+        onCurrentLocation={handleCurrentLocationAdd}
+        onMapPin={handleMapPinAdd}
+      />
     </SafeAreaView>
   );
 }
