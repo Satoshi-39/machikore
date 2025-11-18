@@ -66,7 +66,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
       onAnimate={handleSheetAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
-      animateOnMount={false}
+      animateOnMount={true}
       backgroundStyle={{ backgroundColor: 'white' }}
       handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
     >

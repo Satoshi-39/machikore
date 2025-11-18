@@ -60,7 +60,7 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
       onAnimate={handleSheetAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
-      animateOnMount={false}
+      animateOnMount={true}
       backgroundStyle={{ backgroundColor: 'white' }}
       handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
     >
