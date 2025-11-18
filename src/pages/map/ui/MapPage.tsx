@@ -42,14 +42,9 @@ export function MapPage() {
   const [cancelPinHandler, setCancelPinHandler] = useState<(() => void) | null>(null);
   const [isMachiDetailVisible, setIsMachiDetailVisible] = useState(false);
   const [isSpotDetailVisible, setIsSpotDetailVisible] = useState(false);
-  const [isSpotDetailExpanded, setIsSpotDetailExpanded] = useState(false);
-  const { location, error: locationError, loading: locationLoading } = useLocation();
+  const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
+  const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
-
-  // デバッグ: 位置情報の状態を確認
-  useEffect(() => {
-    console.log('Location state:', { location, locationError, locationLoading });
-  }, [location, locationError, locationLoading]);
 
   // URLクエリパラメータからマップIDを読み取り、グローバルステートに設定
   useEffect(() => {
@@ -138,7 +133,7 @@ export function MapPage() {
                   onMapPress={mapTapHandler}
                   onCancelPinMode={cancelPinHandler}
                   onSpotSelect={(spot) => setIsSpotDetailVisible(!!spot)}
-                  onSpotDetailExpand={(isExpanded) => setIsSpotDetailExpanded(isExpanded)}
+                  onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
                 />
               ) : (
                 <DefaultMapView
@@ -149,8 +144,14 @@ export function MapPage() {
                 />
               )}
 
-              {/* 検索バー + ViewModeToggle をマップの上に表示 */}
-              <View className="absolute top-0 left-0 right-0">
+              {/* 検索バー + ViewModeToggle をマップの上に表示（拡大時は非表示） */}
+              <View
+                className="absolute top-0 left-0 right-0"
+                style={{
+                  opacity: spotDetailSnapIndex === 2 ? 0 : 1,
+                }}
+                pointerEvents={spotDetailSnapIndex === 2 ? 'none' : 'auto'}
+              >
                 <MapControls
                   variant="map"
                   viewMode={viewMode}
@@ -187,24 +188,36 @@ export function MapPage() {
         )
       )}
 
-      {/* マップコントロールボタン群: マップ表示時のみ表示（詳細カード拡大時は非表示） */}
-      {viewMode === 'map' && !isSearchFocused && !isMachiDetailVisible && !(isSpotDetailVisible && isSpotDetailExpanded) && (
+      {/* マップコントロールボタン群 */}
+      {viewMode === 'map' && !isSearchFocused && !isMachiDetailVisible && location && (
         <View className="absolute bottom-12 right-6 z-50">
           <View className="flex-col items-end gap-4">
-            {/* 現在地ボタン */}
-            {location && (
+            {/* 現在地ボタン: 縮小時（index 0）または詳細カード非表示時に表示 */}
+            <View
+              style={{
+                opacity: spotDetailSnapIndex === 0 || !isSpotDetailVisible ? 1 : 0,
+              }}
+              pointerEvents={spotDetailSnapIndex === 0 || !isSpotDetailVisible ? 'auto' : 'none'}
+            >
               <LocationButton
                 onPress={handleLocationPress}
                 testID="location-button"
               />
-            )}
-            {/* FAB */}
-            <FAB
-              onPress={handleFABPress}
-              icon="pushpin"
-              iconLibrary="antdesign"
-              testID="spot-create-fab"
-            />
+            </View>
+            {/* FAB: 常にレンダリングするが、詳細カード表示時は透明化 */}
+            <View
+              style={{
+                opacity: isSpotDetailVisible ? 0 : 1,
+              }}
+              pointerEvents={isSpotDetailVisible ? 'none' : 'auto'}
+            >
+              <FAB
+                onPress={handleFABPress}
+                icon="pushpin"
+                iconLibrary="antdesign"
+                testID="spot-create-fab"
+              />
+            </View>
           </View>
         </View>
       )}

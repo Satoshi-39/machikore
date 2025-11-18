@@ -22,11 +22,11 @@ interface CustomMapViewProps {
   onMapPress?: ((latitude: number, longitude: number) => void) | null;
   onCancelPinMode?: (() => void) | null;
   onSpotSelect?: (spot: SpotRow | null) => void;
-  onSpotDetailExpand?: (isExpanded: boolean) => void;
+  onSpotDetailSnapChange?: (snapIndex: number) => void;
 }
 
 export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
-  ({ mapId, isPinMode = false, onMapPress = null, onCancelPinMode = null, onSpotSelect, onSpotDetailExpand }, ref) => {
+  ({ mapId, isPinMode = false, onMapPress = null, onCancelPinMode = null, onSpotSelect, onSpotDetailSnapChange }, ref) => {
     const cameraRef = useRef<Mapbox.Camera>(null);
     const { data: spots = [] } = useSpots(mapId ?? '');
     const [selectedSpot, setSelectedSpot] = useState<SpotRow | null>(null);
@@ -178,7 +178,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
         <SpotDetailCard
           spot={selectedSpot}
           onClose={() => handleSpotSelect(null)}
-          onSnapChange={onSpotDetailExpand}
+          onSnapChange={onSpotDetailSnapChange}
         />
       )}
     </View>

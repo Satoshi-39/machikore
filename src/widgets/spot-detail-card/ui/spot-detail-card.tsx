@@ -5,6 +5,7 @@
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import type { SpotRow } from '@/shared/types/database.types';
@@ -12,41 +13,58 @@ import type { SpotRow } from '@/shared/types/database.types';
 interface SpotDetailCardProps {
   spot: SpotRow;
   onClose: () => void;
-  onSnapChange?: (isExpanded: boolean) => void;
+  onSnapChange?: (snapIndex: number) => void;
 }
 
 export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const insets = useSafeAreaInsets();
 
-  // スナップポイント: 35%（小さく表示）、80%（大きく表示）
-  const snapPoints = useMemo(() => ['35%', '80%'], []);
+  // タブバーの高さを考慮したスナップポイント（3段階固定）
+  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
+  const snapPoints = useMemo(() => ['15%', '45%', '95%'], []);
 
-  // 初回マウント時に初期状態（縮小状態）を通知
+  // 初回マウント時に初期状態（デフォルト状態）を通知
+  // Bottom Sheetの初期index=1の場合、onChangeは呼ばれないため手動で通知
   useEffect(() => {
-    // index 0 = 35%（小さく表示）→ isExpanded = false
-    onSnapChange?.(false);
-  }, [onSnapChange]);
+    onSnapChange?.(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // スナップ変更時のハンドラー
   const handleSheetChanges = useCallback((index: number) => {
-    console.log('Bottom Sheet index:', index);
-    // index 0: 35%（小さく表示）→ ボタン表示
-    // index 1: 80%（大きく表示）→ ボタン非表示
-    onSnapChange?.(index === 1);
+    onSnapChange?.(index);
+    // index -1 = 閉じた状態 → 親に通知してコンポーネント削除
+    if (index === -1) {
+      onClose();
+    }
+  }, [onSnapChange, onClose]);
+
+  // アニメーション中のハンドラー（リアルタイムで状態を通知）
+  const handleSheetAnimate = useCallback((_fromIndex: number, toIndex: number) => {
+    onSnapChange?.(toIndex);
   }, [onSnapChange]);
+
+  // 閉じるボタンのハンドラー
+  const handleClose = useCallback(() => {
+    // 直接onCloseを呼ぶのではなく、BottomSheetをアニメーションで閉じる
+    bottomSheetRef.current?.close();
+  }, []);
 
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      index={0}
+      index={1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
-      onClose={onClose}
-      enablePanDownToClose={true}
+      onAnimate={handleSheetAnimate}
+      enablePanDownToClose={false}
+      enableDynamicSizing={false}
+      animateOnMount={false}
       backgroundStyle={{ backgroundColor: 'white' }}
       handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
     >
-      <BottomSheetScrollView className="px-4"  contentContainerStyle={{ paddingBottom: 20 }}>
+      <BottomSheetScrollView className="px-4"  contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
@@ -58,7 +76,8 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
             )}
           </View>
           <Pressable
-            onPress={onClose}
+            onPress={handleClose}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             className="w-8 h-8 items-center justify-center rounded-full bg-gray-100"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
