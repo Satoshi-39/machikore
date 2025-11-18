@@ -2,21 +2,45 @@
  * カスタムマップ上で選択されたスポットの詳細情報カード
  */
 
-import React from 'react';
-import { View, Text, Pressable, ScrollView } from 'react-native';
+import React, { useRef, useMemo, useCallback } from 'react';
+import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import type { SpotRow } from '@/shared/types/database.types';
 
 interface SpotDetailCardProps {
   spot: SpotRow;
   onClose: () => void;
+  onSnapChange?: (isExpanded: boolean) => void;
 }
 
-export function SpotDetailCard({ spot, onClose }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardProps) {
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  // スナップポイント: 25%（小さく表示）、75%（大きく表示）
+  const snapPoints = useMemo(() => ['25%', '75%'], []);
+
+  // スナップ変更時のハンドラー
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('Bottom Sheet index:', index);
+    // index 0: 25%（小さく表示）→ ボタン表示
+    // index 1: 75%（大きく表示）→ ボタン非表示
+    onSnapChange?.(index === 1);
+  }, [onSnapChange]);
+
   return (
-    <View className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-lg">
-      <ScrollView className="px-4 py-4" style={{ maxHeight: 400 }}>
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={0}
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
+      onClose={onClose}
+      enablePanDownToClose={true}
+      backgroundStyle={{ backgroundColor: 'white' }}
+      handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
+    >
+      <BottomSheetScrollView className="px-4"  contentContainerStyle={{ paddingBottom: 20 }}>
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
@@ -104,7 +128,7 @@ export function SpotDetailCard({ spot, onClose }: SpotDetailCardProps) {
             画像追加、いいね、コメント機能は今後実装予定です
           </Text>
         </View>
-      </ScrollView>
-    </View>
+      </BottomSheetScrollView>
+    </BottomSheet>
   );
 }

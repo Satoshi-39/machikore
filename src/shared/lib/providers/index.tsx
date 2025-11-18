@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { QueryProvider } from './query-provider';
 import { AuthProvider } from './auth-provider';
 import { RepositoryProvider } from './repository-provider';
@@ -16,20 +17,23 @@ interface AppProvidersProps {
  * すべてのプロバイダーを統合
  *
  * 順序が重要：
- * 1. AuthProvider - 認証状態の初期化
- * 2. RepositoryProvider - データアクセス
- * 3. SyncProvider - データ同期
- * 4. QueryProvider - React Query
+ * 1. GestureHandlerRootView - ジェスチャー処理（Bottom Sheetなど）
+ * 2. AuthProvider - 認証状態の初期化
+ * 3. RepositoryProvider - データアクセス
+ * 4. SyncProvider - データ同期
+ * 5. QueryProvider - React Query
  */
 export function AppProviders({ children }: AppProvidersProps) {
   return (
-    <AuthProvider>
-      <RepositoryProvider>
-        <SyncProvider enabled={true} syncIntervalMs={0}>
-          <QueryProvider>{children}</QueryProvider>
-        </SyncProvider>
-      </RepositoryProvider>
-    </AuthProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <AuthProvider>
+        <RepositoryProvider>
+          <SyncProvider enabled={true} syncIntervalMs={0}>
+            <QueryProvider>{children}</QueryProvider>
+          </SyncProvider>
+        </RepositoryProvider>
+      </AuthProvider>
+    </GestureHandlerRootView>
   );
 }
 
