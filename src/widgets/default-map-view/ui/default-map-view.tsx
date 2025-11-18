@@ -20,10 +20,11 @@ interface DefaultMapViewProps {
   userId?: string | null;
   currentLocation?: { latitude: number; longitude: number } | null;
   onMachiSelect?: (machi: MachiRow | null) => void;
+  onMachiDetailSnapChange?: (snapIndex: number) => void;
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiSelect }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiSelect, onMachiDetailSnapChange }, ref) => {
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
     const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
@@ -192,6 +193,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             <MachiDetailCard
               machi={selectedMachi}
               onClose={() => handleMachiSelect(null)}
+              onSnapChange={onMachiDetailSnapChange}
             />
           )}
         </View>

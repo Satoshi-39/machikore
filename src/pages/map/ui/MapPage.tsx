@@ -43,6 +43,7 @@ export function MapPage() {
   const [isMachiDetailVisible, setIsMachiDetailVisible] = useState(false);
   const [isSpotDetailVisible, setIsSpotDetailVisible] = useState(false);
   const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
+  const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -141,6 +142,7 @@ export function MapPage() {
                   userId={user?.id ?? null}
                   currentLocation={location}
                   onMachiSelect={(machi) => setIsMachiDetailVisible(!!machi)}
+                  onMachiDetailSnapChange={(snapIndex) => setMachiDetailSnapIndex(snapIndex)}
                 />
               )}
 
@@ -148,9 +150,9 @@ export function MapPage() {
               <View
                 className="absolute top-0 left-0 right-0"
                 style={{
-                  opacity: spotDetailSnapIndex === 2 ? 0 : 1,
+                  opacity: spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 0 : 1,
                 }}
-                pointerEvents={spotDetailSnapIndex === 2 ? 'none' : 'auto'}
+                pointerEvents={spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 'none' : 'auto'}
               >
                 <MapControls
                   variant="map"
@@ -189,15 +191,15 @@ export function MapPage() {
       )}
 
       {/* マップコントロールボタン群 */}
-      {viewMode === 'map' && !isSearchFocused && !isMachiDetailVisible && location && (
+      {viewMode === 'map' && !isSearchFocused && location && (
         <View className="absolute bottom-12 right-6 z-50">
           <View className="flex-col items-end gap-4">
             {/* 現在地ボタン: 縮小時（index 0）または詳細カード非表示時に表示 */}
             <View
               style={{
-                opacity: spotDetailSnapIndex === 0 || !isSpotDetailVisible ? 1 : 0,
+                opacity: (spotDetailSnapIndex === 0 && isSpotDetailVisible) || (machiDetailSnapIndex === 0 && isMachiDetailVisible) || (!isSpotDetailVisible && !isMachiDetailVisible) ? 1 : 0,
               }}
-              pointerEvents={spotDetailSnapIndex === 0 || !isSpotDetailVisible ? 'auto' : 'none'}
+              pointerEvents={(spotDetailSnapIndex === 0 && isSpotDetailVisible) || (machiDetailSnapIndex === 0 && isMachiDetailVisible) || (!isSpotDetailVisible && !isMachiDetailVisible) ? 'auto' : 'none'}
             >
               <LocationButton
                 onPress={handleLocationPress}
@@ -207,9 +209,9 @@ export function MapPage() {
             {/* FAB: 常にレンダリングするが、詳細カード表示時は透明化 */}
             <View
               style={{
-                opacity: isSpotDetailVisible ? 0 : 1,
+                opacity: isSpotDetailVisible || isMachiDetailVisible ? 0 : 1,
               }}
-              pointerEvents={isSpotDetailVisible ? 'none' : 'auto'}
+              pointerEvents={isSpotDetailVisible || isMachiDetailVisible ? 'none' : 'auto'}
             >
               <FAB
                 onPress={handleFABPress}

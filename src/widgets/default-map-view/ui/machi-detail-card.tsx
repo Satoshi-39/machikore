@@ -2,9 +2,11 @@
  * デフォルトマップ上で選択された街の詳細情報カード
  */
 
-import React from 'react';
+import React, { useRef, useMemo, useCallback, useEffect } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { MachiVisitInfo } from '@/widgets/machi-visit-info';
 // import { MachiSpotList } from './machi-spot-list'; // TODO: 街とマップの関係を再設計後に実装
@@ -15,15 +17,60 @@ import type { MachiRow } from '@/shared/types/database.types';
 interface MachiDetailCardProps {
   machi: MachiRow;
   onClose: () => void;
+  onSnapChange?: (snapIndex: number) => void;
 }
 
-export function MachiDetailCard({ machi, onClose }: MachiDetailCardProps) {
+export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCardProps) {
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
   // const { data: visit } = useVisitByMachi(currentUserId || '', machi.id); // TODO: 将来使用予定
 
+  // タブバーの高さを考慮したスナップポイント（3段階固定）
+  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
+  const snapPoints = useMemo(() => ['15%', '45%', '95%'], []);
+
+  // 初回マウント時に初期状態（デフォルト状態）を通知
+  // Bottom Sheetの初期index=1の場合、onChangeは呼ばれないため手動で通知
+  useEffect(() => {
+    onSnapChange?.(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // スナップ変更時のハンドラー
+  const handleSheetChanges = useCallback((index: number) => {
+    onSnapChange?.(index);
+    // index -1 = 閉じた状態 → 親に通知してコンポーネント削除
+    if (index === -1) {
+      onClose();
+    }
+  }, [onSnapChange, onClose]);
+
+  // アニメーション中のハンドラー（リアルタイムで状態を通知）
+  const handleSheetAnimate = useCallback((_fromIndex: number, toIndex: number) => {
+    onSnapChange?.(toIndex);
+  }, [onSnapChange]);
+
+  // 閉じるボタンのハンドラー
+  const handleClose = useCallback(() => {
+    // 直接onCloseを呼ぶのではなく、BottomSheetをアニメーションで閉じる
+    bottomSheetRef.current?.close();
+  }, []);
+
   return (
-    <View className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-lg">
-      <View className="px-4 py-4">
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={1}
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
+      onAnimate={handleSheetAnimate}
+      enablePanDownToClose={false}
+      enableDynamicSizing={false}
+      animateOnMount={false}
+      backgroundStyle={{ backgroundColor: 'white' }}
+      handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
+    >
+      <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
@@ -33,7 +80,8 @@ export function MachiDetailCard({ machi, onClose }: MachiDetailCardProps) {
             <Text className="text-sm text-gray-600">{machi.lines || ''}</Text>
           </View>
           <Pressable
-            onPress={onClose}
+            onPress={handleClose}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             className="w-8 h-8 items-center justify-center rounded-full bg-gray-100"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
@@ -74,7 +122,7 @@ export function MachiDetailCard({ machi, onClose }: MachiDetailCardProps) {
             詳細ページや訪問記録追加機能は今後実装予定です
           </Text>
         </View>
-      </View>
-    </View>
+      </BottomSheetScrollView>
+    </BottomSheet>
   );
 }
