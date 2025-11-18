@@ -41,6 +41,7 @@ export function MapPage() {
   const [mapTapHandler, setMapTapHandler] = useState<((lat: number, lng: number) => void) | null>(null);
   const [cancelPinHandler, setCancelPinHandler] = useState<(() => void) | null>(null);
   const [isMachiDetailVisible, setIsMachiDetailVisible] = useState(false);
+  const [isSpotDetailVisible, setIsSpotDetailVisible] = useState(false);
   const { location, error: locationError, loading: locationLoading } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -135,6 +136,7 @@ export function MapPage() {
                   isPinMode={isPinMode}
                   onMapPress={mapTapHandler}
                   onCancelPinMode={cancelPinHandler}
+                  onSpotSelect={(spot) => setIsSpotDetailVisible(!!spot)}
                 />
               ) : (
                 <DefaultMapView
@@ -183,8 +185,8 @@ export function MapPage() {
         )
       )}
 
-      {/* マップコントロールボタン群: マップ表示時のみ表示（街詳細表示中は非表示） */}
-      {viewMode === 'map' && !isSearchFocused && !isMachiDetailVisible && (
+      {/* マップコントロールボタン群: マップ表示時のみ表示（詳細カード表示中は非表示） */}
+      {viewMode === 'map' && !isSearchFocused && !isMachiDetailVisible && !isSpotDetailVisible && (
         <View className="absolute bottom-12 right-6 z-50">
           <View className="flex-col items-end gap-4">
             {/* 現在地ボタン */}

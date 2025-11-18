@@ -9,6 +9,8 @@ import { View, Text, Pressable } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { Ionicons } from '@expo/vector-icons';
 import { useSpots } from '@/entities/spot';
+import { SpotDetailCard } from '@/widgets/spot-detail-card';
+import type { SpotRow } from '@/shared/types/database.types';
 
 export interface MapViewHandle {
   flyToLocation: (longitude: number, latitude: number) => void;
@@ -19,18 +21,26 @@ interface CustomMapViewProps {
   isPinMode?: boolean;
   onMapPress?: ((latitude: number, longitude: number) => void) | null;
   onCancelPinMode?: (() => void) | null;
+  onSpotSelect?: (spot: SpotRow | null) => void;
 }
 
 export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
-  ({ mapId, isPinMode = false, onMapPress = null, onCancelPinMode = null }, ref) => {
+  ({ mapId, isPinMode = false, onMapPress = null, onCancelPinMode = null, onSpotSelect }, ref) => {
     const cameraRef = useRef<Mapbox.Camera>(null);
     const { data: spots = [] } = useSpots(mapId ?? '');
+    const [selectedSpot, setSelectedSpot] = useState<SpotRow | null>(null);
 
     // マップの中心座標を保持
     const [centerCoords, setCenterCoords] = useState<{ latitude: number; longitude: number }>({
       latitude: 35.6812,
       longitude: 139.7671,
     });
+
+    // 選択状態を親に通知
+    const handleSpotSelect = (spot: SpotRow | null) => {
+      setSelectedSpot(spot);
+      onSpotSelect?.(spot);
+    };
 
     // スポットが読み込まれたら全スポットを表示
     useEffect(() => {
@@ -115,6 +125,10 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
             key={spot.id}
             id={spot.id}
             coordinate={[spot.longitude, spot.latitude]}
+            onSelected={() => {
+              console.log('📍 スポット選択:', spot.name);
+              handleSpotSelect(spot);
+            }}
           >
             <Ionicons name="location" size={40} color="#EF4444" />
           </Mapbox.PointAnnotation>
@@ -156,6 +170,14 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
             </View>
           </View>
         </View>
+      )}
+
+      {/* 選択されたスポットの詳細カード */}
+      {selectedSpot && (
+        <SpotDetailCard
+          spot={selectedSpot}
+          onClose={() => handleSpotSelect(null)}
+        />
       )}
     </View>
   );
