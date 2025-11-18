@@ -8,7 +8,7 @@ import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { AsyncBoundary } from '@/shared/ui';
-import { DefaultMapDetailCard } from './default-map-detail-card';
+import { MachiDetailCard } from './machi-detail-card';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { FeatureCollection, Point } from 'geojson';
 
@@ -189,7 +189,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
 
           {/* 選択された街の詳細カード */}
           {selectedMachi && (
-            <DefaultMapDetailCard
+            <MachiDetailCard
               machi={selectedMachi}
               onClose={() => handleMachiSelect(null)}
             />

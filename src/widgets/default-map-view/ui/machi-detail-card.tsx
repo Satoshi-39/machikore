@@ -7,17 +7,17 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { MachiVisitInfo } from '@/widgets/machi-visit-info';
-// import { MachiSpotList } from './MachiSpotList'; // TODO: 街とマップの関係を再設計後に実装
+// import { MachiSpotList } from './machi-spot-list'; // TODO: 街とマップの関係を再設計後に実装
 // import { useVisitByMachi } from '@/entities/visit/api'; // TODO: 将来使用予定
 import { useCurrentUserId } from '@/entities/user';
 import type { MachiRow } from '@/shared/types/database.types';
 
-interface DefaultMapDetailCardProps {
+interface MachiDetailCardProps {
   machi: MachiRow;
   onClose: () => void;
 }
 
-export function DefaultMapDetailCard({ machi, onClose }: DefaultMapDetailCardProps) {
+export function MachiDetailCard({ machi, onClose }: MachiDetailCardProps) {
   const currentUserId = useCurrentUserId();
   // const { data: visit } = useVisitByMachi(currentUserId || '', machi.id); // TODO: 将来使用予定
 
