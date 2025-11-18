@@ -4,7 +4,7 @@
  * Expo Router: /auth/sign-in
  */
 
-import { Stack, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { SignInPage } from '@/pages/sign-in';
 
 export default function SignInScreen() {
@@ -20,17 +20,9 @@ export default function SignInScreen() {
   };
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          headerTitle: 'ログイン',
-          headerBackTitle: '戻る',
-        }}
-      />
-      <SignInPage
-        onSuccess={handleSuccess}
-        onNavigateToSignUp={handleNavigateToSignUp}
-      />
-    </>
+    <SignInPage
+      onSuccess={handleSuccess}
+      onNavigateToSignUp={handleNavigateToSignUp}
+    />
   );
 }

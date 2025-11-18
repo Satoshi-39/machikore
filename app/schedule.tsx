@@ -4,20 +4,8 @@
  * Expo Router: /schedule
  */
 
-import { Stack } from 'expo-router';
 import { SchedulePage } from '@/pages/schedule';
 
 export default function Schedule() {
-  return (
-    <>
-      <Stack.Screen
-        options={{
-          title: 'スケジュール',
-          headerShown: true,
-          headerBackTitle: '戻る',
-        }}
-      />
-      <SchedulePage />
-    </>
-  );
+  return <SchedulePage />;
 }

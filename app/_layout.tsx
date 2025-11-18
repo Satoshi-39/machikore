@@ -52,6 +52,65 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
+            name="settings"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: '設定',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="schedule"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'スケジュール',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="create-map"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'マップ作成',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="user/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="machi/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="auth/sign-in"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'ログイン',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="auth/sign-up"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'アカウント作成',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
             name="auth/auth-required"
             options={{
               presentation: 'transparentModal',

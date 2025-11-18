@@ -6,16 +6,11 @@
  */
 
 import { MachiDetailPage } from '@/pages/machi-detail';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 
 export default function MachiDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  return (
-    <>
-      <Stack.Screen options={{ headerShown: false }} />
-      <MachiDetailPage machiId={id} />
-    </>
-  );
+  return <MachiDetailPage machiId={id} />;
 }
