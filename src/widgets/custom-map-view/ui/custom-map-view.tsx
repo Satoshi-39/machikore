@@ -44,15 +44,19 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
         const minLat = Math.min(...lats);
         const maxLat = Math.max(...lats);
 
-        // パディングを追加して表示
-        cameraRef.current.fitBounds(
-          [minLng, minLat], // 南西の座標
-          [maxLng, maxLat], // 北東の座標
-          [50, 50, 50, 50], // パディング [上, 右, 下, 左]
-          1000 // アニメーション時間
-        );
+        // 少し遅延させてカメラが準備されるのを待つ
+        setTimeout(() => {
+          if (cameraRef.current) {
+            cameraRef.current.fitBounds(
+              [minLng, minLat], // 南西の座標
+              [maxLng, maxLat], // 北東の座標
+              [50, 50, 50, 50], // パディング [上, 右, 下, 左]
+              1000 // アニメーション時間
+            );
+          }
+        }, 100);
       }
-    }, [spots]);
+    }, [spots, mapId]);
 
     // カメラ変更時に中心座標を更新
     const handleCameraChanged = async (state: any) => {
@@ -106,22 +110,15 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
         />
 
         {/* スポットマーカー表示 */}
-        {spots.map((spot) => {
-          // TODO: 訪問済みかどうかで色を変更
-          // const isVisited = spot.visited_at !== null;
-          // const color = isVisited ? '#10B981' : '#EF4444'; // 緑 or 赤
-          const color = '#EF4444'; // 現在は全て赤
-
-          return (
-            <Mapbox.PointAnnotation
-              key={spot.id}
-              id={spot.id}
-              coordinate={[spot.longitude, spot.latitude]}
-            >
-              <Ionicons name="location" size={40} color={color} />
-            </Mapbox.PointAnnotation>
-          );
-        })}
+        {spots.map((spot) => (
+          <Mapbox.PointAnnotation
+            key={spot.id}
+            id={spot.id}
+            coordinate={[spot.longitude, spot.latitude]}
+          >
+            <Ionicons name="location" size={40} color="#EF4444" />
+          </Mapbox.PointAnnotation>
+        ))}
       </Mapbox.MapView>
 
       {/* ピンモード時のオーバーレイ */}
