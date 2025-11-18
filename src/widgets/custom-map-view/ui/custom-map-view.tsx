@@ -49,11 +49,6 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       setIsMapReady(true);
     };
 
-    // mapIdが変更されたらマップの準備状態をリセット
-    useEffect(() => {
-      setIsMapReady(false);
-    }, [mapId]);
-
     // スポットが読み込まれ、マップの準備ができたら全スポットを表示
     useEffect(() => {
       if (spots.length > 0 && cameraRef.current && isMapReady) {
