@@ -2,7 +2,7 @@
  * カスタムマップ上で選択されたスポットの詳細情報カード
  */
 
-import React, { useRef, useMemo, useCallback } from 'react';
+import React, { useRef, useMemo, useCallback, useEffect } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -18,14 +18,20 @@ interface SpotDetailCardProps {
 export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  // スナップポイント: 25%（小さく表示）、75%（大きく表示）
-  const snapPoints = useMemo(() => ['25%', '75%'], []);
+  // スナップポイント: 35%（小さく表示）、80%（大きく表示）
+  const snapPoints = useMemo(() => ['35%', '80%'], []);
+
+  // 初回マウント時に初期状態（縮小状態）を通知
+  useEffect(() => {
+    // index 0 = 35%（小さく表示）→ isExpanded = false
+    onSnapChange?.(false);
+  }, [onSnapChange]);
 
   // スナップ変更時のハンドラー
   const handleSheetChanges = useCallback((index: number) => {
     console.log('Bottom Sheet index:', index);
-    // index 0: 25%（小さく表示）→ ボタン表示
-    // index 1: 75%（大きく表示）→ ボタン非表示
+    // index 0: 35%（小さく表示）→ ボタン表示
+    // index 1: 80%（大きく表示）→ ボタン非表示
     onSnapChange?.(index === 1);
   }, [onSnapChange]);
 

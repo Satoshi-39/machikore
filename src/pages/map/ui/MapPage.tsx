@@ -188,7 +188,7 @@ export function MapPage() {
       )}
 
       {/* マップコントロールボタン群: マップ表示時のみ表示（詳細カード拡大時は非表示） */}
-      {viewMode === 'map' && !isSearchFocused && !isMachiDetailVisible && (!isSpotDetailVisible || !isSpotDetailExpanded) && (
+      {viewMode === 'map' && !isSearchFocused && !isMachiDetailVisible && !(isSpotDetailVisible && isSpotDetailExpanded) && (
         <View className="absolute bottom-12 right-6 z-50">
           <View className="flex-col items-end gap-4">
             {/* 現在地ボタン */}
