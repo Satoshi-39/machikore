@@ -30,6 +30,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
     const cameraRef = useRef<Mapbox.Camera>(null);
     const { data: spots = [] } = useSpots(mapId ?? '');
     const [selectedSpot, setSelectedSpot] = useState<SpotRow | null>(null);
+    const [isMapReady, setIsMapReady] = useState(false);
 
     // マップの中心座標を保持
     const [centerCoords, setCenterCoords] = useState<{ latitude: number; longitude: number }>({
@@ -43,9 +44,19 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       onSpotSelect?.(spot);
     };
 
-    // スポットが読み込まれたら全スポットを表示
+    // マップのロード完了ハンドラー
+    const handleMapReady = () => {
+      setIsMapReady(true);
+    };
+
+    // mapIdが変更されたらマップの準備状態をリセット
     useEffect(() => {
-      if (spots.length > 0 && cameraRef.current) {
+      setIsMapReady(false);
+    }, [mapId]);
+
+    // スポットが読み込まれ、マップの準備ができたら全スポットを表示
+    useEffect(() => {
+      if (spots.length > 0 && cameraRef.current && isMapReady) {
         // 全スポットの座標から境界を計算
         const lngs = spots.map(s => s.longitude);
         const lats = spots.map(s => s.latitude);
@@ -67,7 +78,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
           }
         }, 100);
       }
-    }, [spots, mapId]);
+    }, [spots, mapId, isMapReady]);
 
     // カメラ変更時に中心座標を更新
     const handleCameraChanged = async (state: any) => {
@@ -112,6 +123,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
         style={{ flex: 1 }}
         styleURL={Mapbox.StyleURL.Street}
         onCameraChanged={handleCameraChanged}
+        onDidFinishLoadingMap={handleMapReady}
       >
         <Mapbox.Camera
           ref={cameraRef}
