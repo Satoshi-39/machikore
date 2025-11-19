@@ -7,10 +7,11 @@ import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
-import { AsyncBoundary } from '@/shared/ui';
+import { AsyncBoundary, LocationButton } from '@/shared/ui';
 import { MachiDetailCard } from './machi-detail-card';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { FeatureCollection, Point } from 'geojson';
+import type { MapListViewMode } from '@/features/toggle-view-mode';
 
 export interface MapViewHandle {
   flyToLocation: (longitude: number, latitude: number) => void;
@@ -21,19 +22,39 @@ interface DefaultMapViewProps {
   currentLocation?: { latitude: number; longitude: number } | null;
   onMachiSelect?: (machi: MachiRow | null) => void;
   onMachiDetailSnapChange?: (snapIndex: number) => void;
+  viewMode?: MapListViewMode;
+  isSearchFocused?: boolean;
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiSelect, onMachiDetailSnapChange }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiSelect, onMachiDetailSnapChange, viewMode = 'map', isSearchFocused = false }, ref) => {
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
     const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
+    const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
     // 選択状態を親に通知
     const handleMachiSelect = (machi: MachiRow | null) => {
       setSelectedMachi(machi);
       onMachiSelect?.(machi);
+    };
+
+    // スナップ変更を親に通知して、ローカルstateも更新
+    const handleSnapChange = (snapIndex: number) => {
+      setMachiDetailSnapIndex(snapIndex);
+      onMachiDetailSnapChange?.(snapIndex);
+    };
+
+    // 現在地ボタンハンドラー
+    const handleLocationPress = () => {
+      if (currentLocation && cameraRef.current) {
+        cameraRef.current.setCamera({
+          centerCoordinate: [currentLocation.longitude, currentLocation.latitude],
+          zoomLevel: 14,
+          animationDuration: 1000,
+        });
+      }
     };
 
     // 訪問済みmachiのIDセットを作成
@@ -188,12 +209,35 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             </Mapbox.ShapeSource>
           </Mapbox.MapView>
 
+          {/* マップコントロールボタン（現在地ボタン） */}
+          {viewMode === 'map' && !isSearchFocused && currentLocation && (
+            <View
+              className="absolute right-6 z-50"
+              style={{
+                // 街カード縮小版（15%）の時は16%の位置に、それ以外は48px
+                bottom: (machiDetailSnapIndex === 0 && selectedMachi) ? '16%' : 48,
+              }}
+            >
+              <View
+                style={{
+                  opacity: (machiDetailSnapIndex === 0 && selectedMachi) || !selectedMachi ? 1 : 0,
+                }}
+                pointerEvents={(machiDetailSnapIndex === 0 && selectedMachi) || !selectedMachi ? 'auto' : 'none'}
+              >
+                <LocationButton
+                  onPress={handleLocationPress}
+                  testID="location-button"
+                />
+              </View>
+            </View>
+          )}
+
           {/* 選択された街の詳細カード */}
           {selectedMachi && (
             <MachiDetailCard
               machi={selectedMachi}
               onClose={() => handleMachiSelect(null)}
-              onSnapChange={onMachiDetailSnapChange}
+              onSnapChange={handleSnapChange}
             />
           )}
         </View>

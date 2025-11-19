@@ -8,6 +8,7 @@
 import React, { useEffect } from 'react';
 import { QuickAddSpotMenu } from './QuickAddSpotMenu';
 import { QuickAddSpotModal } from './QuickAddSpotModal';
+import { PinModeOverlay } from './PinModeOverlay';
 import { useQuickAddSpot } from '../model/useQuickAddSpot';
 import type { LocationCoords } from '@/shared/lib/map/use-location';
 
@@ -17,6 +18,7 @@ interface QuickAddSpotFacadeProps {
   selectedMapId: string | null;
   defaultMapId: string | null;
   currentLocation: LocationCoords | null;
+  centerCoords: { latitude: number; longitude: number };
   onClose: () => void;
   onPinModeChange: (isPinMode: boolean) => void;
   onMapTap: (handler: ((latitude: number, longitude: number) => void) | null) => void;
@@ -29,6 +31,7 @@ export function QuickAddSpotFacade({
   selectedMapId,
   defaultMapId,
   currentLocation,
+  centerCoords,
   onClose,
   onPinModeChange,
   onMapTap,
@@ -76,6 +79,14 @@ export function QuickAddSpotFacade({
     }
   }, [isPinMode, cancelPinMode, onCancelPinMode]);
 
+  // ピンモード確定ハンドラー（centerCoordsを使用）
+  const handlePinModeConfirm = () => {
+    if (isPinMode) {
+      console.log('📍 中央座標で確定:', centerCoords);
+      handleConfirmPin(centerCoords);
+    }
+  };
+
   return (
     <>
       {/* メニュー */}
@@ -84,6 +95,13 @@ export function QuickAddSpotFacade({
         onClose={onClose}
         onCurrentLocation={handleCurrentLocation}
         onMapPin={handleMapPin}
+      />
+
+      {/* ピンモードオーバーレイ */}
+      <PinModeOverlay
+        visible={isPinMode}
+        onConfirm={handlePinModeConfirm}
+        onCancel={cancelPinMode}
       />
 
       {/* スポット作成モーダル */}

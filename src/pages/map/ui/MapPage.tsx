@@ -19,8 +19,6 @@ import { CustomMapList } from '@/widgets/custom-map-list';
 import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
-import { QuickAddSpotFacade } from '@/features/quick-add-spot';
-import { FAB, LocationButton } from '@/shared/ui';
 import { useLocation } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
 
@@ -36,10 +34,6 @@ export function MapPage() {
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
-  const [isPinMode, setIsPinMode] = useState(false);
-  const [mapTapHandler, setMapTapHandler] = useState<((lat: number, lng: number) => void) | null>(null);
-  const [cancelPinHandler, setCancelPinHandler] = useState<(() => void) | null>(null);
   const [isMachiDetailVisible, setIsMachiDetailVisible] = useState(false);
   const [isSpotDetailVisible, setIsSpotDetailVisible] = useState(false);
   const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
@@ -80,16 +74,6 @@ export function MapPage() {
     }
   };
 
-  const handleFABPress = () => {
-    setIsQuickAddMenuOpen((prev) => !prev);
-  };
-
-  const handleLocationPress = () => {
-    if (location && mapViewRef.current) {
-      mapViewRef.current.flyToLocation(location.longitude, location.latitude);
-    }
-  };
-
   return (
     <SafeAreaView className="flex-1 bg-gray-100" edges={['top']}>
       {/* ヘッダー */}
@@ -120,11 +104,13 @@ export function MapPage() {
           <CustomMapView
             ref={mapViewRef}
             mapId={selectedMapId}
-            isPinMode={isPinMode}
-            onMapPress={mapTapHandler}
-            onCancelPinMode={cancelPinHandler}
+            userId={user?.id ?? null}
+            defaultMapId={userMaps?.[0]?.id ?? null}
             onSpotSelect={(spot) => setIsSpotDetailVisible(!!spot)}
             onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
+            currentLocation={location}
+            viewMode={viewMode}
+            isSearchFocused={isSearchFocused}
           />
         ) : (
           <DefaultMapView
@@ -133,6 +119,8 @@ export function MapPage() {
             currentLocation={location}
             onMachiSelect={(machi) => setIsMachiDetailVisible(!!machi)}
             onMachiDetailSnapChange={(snapIndex) => setMachiDetailSnapIndex(snapIndex)}
+            viewMode={viewMode}
+            isSearchFocused={isSearchFocused}
           />
         )}
 
@@ -182,53 +170,6 @@ export function MapPage() {
           </View>
         )}
       </View>
-
-      {/* マップコントロールボタン群 */}
-      {viewMode === 'map' && !isSearchFocused && location && (
-        <View className="absolute bottom-12 right-6 z-50">
-          <View className="flex-col items-end gap-4">
-            {/* 現在地ボタン: 縮小時（index 0）または詳細カード非表示時に表示 */}
-            <View
-              style={{
-                opacity: (spotDetailSnapIndex === 0 && isSpotDetailVisible) || (machiDetailSnapIndex === 0 && isMachiDetailVisible) || (!isSpotDetailVisible && !isMachiDetailVisible) ? 1 : 0,
-              }}
-              pointerEvents={(spotDetailSnapIndex === 0 && isSpotDetailVisible) || (machiDetailSnapIndex === 0 && isMachiDetailVisible) || (!isSpotDetailVisible && !isMachiDetailVisible) ? 'auto' : 'none'}
-            >
-              <LocationButton
-                onPress={handleLocationPress}
-                testID="location-button"
-              />
-            </View>
-            {/* FAB: 常にレンダリングするが、詳細カード表示時は透明化 */}
-            <View
-              style={{
-                opacity: isSpotDetailVisible || isMachiDetailVisible ? 0 : 1,
-              }}
-              pointerEvents={isSpotDetailVisible || isMachiDetailVisible ? 'none' : 'auto'}
-            >
-              <FAB
-                onPress={handleFABPress}
-                icon="pushpin"
-                iconLibrary="antdesign"
-                testID="spot-create-fab"
-              />
-            </View>
-          </View>
-        </View>
-      )}
-
-      {/* クイック追加機能 */}
-      <QuickAddSpotFacade
-        visible={isQuickAddMenuOpen}
-        userId={user?.id ?? null}
-        selectedMapId={selectedMapId}
-        defaultMapId={userMaps?.[0]?.id ?? null}
-        currentLocation={location}
-        onClose={() => setIsQuickAddMenuOpen(false)}
-        onPinModeChange={setIsPinMode}
-        onMapTap={(handler) => setMapTapHandler(() => handler)}
-        onCancelPinMode={(handler) => setCancelPinHandler(() => handler)}
-      />
     </SafeAreaView>
   );
 }

@@ -5,4 +5,5 @@
 export { QuickAddSpotMenu } from './ui/QuickAddSpotMenu';
 export { QuickAddSpotModal } from './ui/QuickAddSpotModal';
 export { QuickAddSpotFacade } from './ui/QuickAddSpotFacade';
+export { PinModeOverlay } from './ui/PinModeOverlay';
 export { useQuickAddSpot } from './model/useQuickAddSpot';
