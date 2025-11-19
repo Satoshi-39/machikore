@@ -44,8 +44,8 @@ export function CreateMapPage() {
             {
               text: 'OK',
               onPress: () => {
-                // マイページのマップタブへ遷移
-                router.push('/(tabs)/mypage');
+                // マップ作成画面を閉じて前のページに戻る
+                router.back();
               },
             },
           ]);

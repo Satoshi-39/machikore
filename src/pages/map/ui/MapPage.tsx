@@ -116,52 +116,54 @@ export function MapPage() {
       {viewMode === 'map' ? (
         // マップ表示
         <View className="flex-1">
-          {isSearchFocused ? (
-            // 検索フォーカス時：全画面検索UI
-            <MapFullscreenSearch
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              onClose={handleSearchClose}
+          {/* デフォルトマップ or カスタムマップ（常にレンダリング） */}
+          {isCustomMap ? (
+            <CustomMapView
+              ref={mapViewRef}
+              mapId={selectedMapId}
+              isPinMode={isPinMode}
+              onMapPress={mapTapHandler}
+              onCancelPinMode={cancelPinHandler}
+              onSpotSelect={(spot) => setIsSpotDetailVisible(!!spot)}
+              onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
             />
           ) : (
-            <>
-              {/* デフォルトマップ or カスタムマップ */}
-              {isCustomMap ? (
-                <CustomMapView
-                  ref={mapViewRef}
-                  mapId={selectedMapId}
-                  isPinMode={isPinMode}
-                  onMapPress={mapTapHandler}
-                  onCancelPinMode={cancelPinHandler}
-                  onSpotSelect={(spot) => setIsSpotDetailVisible(!!spot)}
-                  onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
-                />
-              ) : (
-                <DefaultMapView
-                  ref={mapViewRef}
-                  userId={user?.id ?? null}
-                  currentLocation={location}
-                  onMachiSelect={(machi) => setIsMachiDetailVisible(!!machi)}
-                  onMachiDetailSnapChange={(snapIndex) => setMachiDetailSnapIndex(snapIndex)}
-                />
-              )}
+            <DefaultMapView
+              ref={mapViewRef}
+              userId={user?.id ?? null}
+              currentLocation={location}
+              onMachiSelect={(machi) => setIsMachiDetailVisible(!!machi)}
+              onMachiDetailSnapChange={(snapIndex) => setMachiDetailSnapIndex(snapIndex)}
+            />
+          )}
 
-              {/* 検索バー + ViewModeToggle をマップの上に表示（拡大時は非表示） */}
-              <View
-                className="absolute top-0 left-0 right-0"
-                style={{
-                  opacity: spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 0 : 1,
-                }}
-                pointerEvents={spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 'none' : 'auto'}
-              >
-                <MapControls
-                  variant="map"
-                  viewMode={viewMode}
-                  onViewModeChange={setViewMode}
-                  onSearchFocus={handleSearchFocus}
-                />
-              </View>
-            </>
+          {/* 検索フォーカス時：全画面検索UI（マップの上に重ねる） */}
+          {isSearchFocused && (
+            <View className="absolute inset-0 z-50">
+              <MapFullscreenSearch
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                onClose={handleSearchClose}
+              />
+            </View>
+          )}
+
+          {/* 検索バー + ViewModeToggle をマップの上に表示（検索時と拡大時は非表示） */}
+          {!isSearchFocused && (
+            <View
+              className="absolute top-0 left-0 right-0"
+              style={{
+                opacity: spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 0 : 1,
+              }}
+              pointerEvents={spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 'none' : 'auto'}
+            >
+              <MapControls
+                variant="map"
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
+                onSearchFocus={handleSearchFocus}
+              />
+            </View>
           )}
         </View>
       ) : (
