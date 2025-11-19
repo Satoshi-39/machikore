@@ -1,9 +1,11 @@
 /**
  * 環境変数の型安全なアクセス
  *
- * Expoでは環境変数は process.env.EXPO_PUBLIC_* でアクセス可能
- * ビルド時に埋め込まれるため、実行時変更不可
+ * Release ビルドでも動作するように、expo-constants 経由で環境変数を取得
+ * フォールバックとして process.env も使用（開発時）
  */
+
+import Constants from 'expo-constants';
 
 // ===============================
 // 環境変数の型定義
@@ -24,9 +26,15 @@ interface Env {
 // ===============================
 
 function getEnvVar(key: keyof Env, fallback?: string): string {
-  const value = process.env[key];
+  // 1. Constants.expoConfig?.extra から取得（Release ビルドで使用）
+  const extraValue = Constants.expoConfig?.extra?.[key];
 
-  if (! value && !fallback) {
+  // 2. process.env から取得（開発時のフォールバック）
+  const processValue = process.env[key];
+
+  const value = extraValue || processValue;
+
+  if (!value && !fallback) {
     throw new Error(
       `Environment variable ${key} is not defined. ` +
         `Please add it to your .env file.`

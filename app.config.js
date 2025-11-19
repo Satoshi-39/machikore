@@ -1,16 +1,16 @@
 module.exports = {
   expo: {
-    name: 'machikore',
+    name: '街コレ',
     slug: 'machikore',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/images/icon.png',
+    icon: './assets/images/machikore.png',
     scheme: 'machikore',
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.satoshi3104.machikore',
+      bundleIdentifier: 'com.tyatsushi.machikore',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
         NSLocationWhenInUseUsageDescription: 'このアプリでは、現在地を地図に表示したり、近くのスポットを登録するために位置情報を使用します。',
@@ -20,7 +20,7 @@ module.exports = {
       },
     },
     android: {
-      package: 'com.satoshi3104.machikore',
+      package: 'com.tyatsushi.machikore',
       adaptiveIcon: {
         backgroundColor: '#E6F4FE',
         foregroundImage: './assets/images/android-icon-foreground.png',
@@ -64,6 +64,14 @@ module.exports = {
       eas: {
         projectId: 'cb48ad39-0471-44b4-9c61-30e75c8339aa',
       },
+      // 環境変数をビルドに埋め込む（Release ビルドでも利用可能）
+      EXPO_PUBLIC_SUPABASE_URL: process.env.EXPO_PUBLIC_SUPABASE_URL,
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
+      EXPO_PUBLIC_API_BASE_URL: process.env.EXPO_PUBLIC_API_BASE_URL,
+      EXPO_PUBLIC_ENV: process.env.EXPO_PUBLIC_ENV,
+      EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN: process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN,
+      EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID: process.env.EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID,
+      EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID: process.env.EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID,
     },
   },
 };
