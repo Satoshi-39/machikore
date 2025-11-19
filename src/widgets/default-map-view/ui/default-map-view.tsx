@@ -3,7 +3,7 @@
  */
 
 import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
@@ -48,7 +48,16 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
 
     // 現在地ボタンハンドラー
     const handleLocationPress = () => {
-      if (currentLocation && cameraRef.current) {
+      if (!currentLocation) {
+        Alert.alert(
+          '位置情報を取得できません',
+          '位置情報サービスをオンにして、アプリに位置情報の使用を許可してください。',
+          [{ text: 'OK' }]
+        );
+        return;
+      }
+
+      if (cameraRef.current) {
         cameraRef.current.setCamera({
           centerCoordinate: [currentLocation.longitude, currentLocation.latitude],
           zoomLevel: 14,
@@ -210,7 +219,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           </Mapbox.MapView>
 
           {/* マップコントロールボタン（現在地ボタン） */}
-          {viewMode === 'map' && !isSearchFocused && currentLocation && (
+          {viewMode === 'map' && !isSearchFocused && (
             <View
               className="absolute right-6 z-50"
               style={{

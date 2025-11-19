@@ -19,7 +19,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 
 export interface MapViewHandle {
   flyToLocation: (longitude: number, latitude: number) => void;
@@ -87,7 +87,16 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
 
     // 現在地ボタンハンドラー
     const handleLocationPress = () => {
-      if (currentLocation && cameraRef.current) {
+      if (!currentLocation) {
+        Alert.alert(
+          '位置情報を取得できません',
+          '位置情報サービスをオンにして、アプリに位置情報の使用を許可してください。',
+          [{ text: 'OK' }]
+        );
+        return;
+      }
+
+      if (cameraRef.current) {
         cameraRef.current.setCamera({
           centerCoordinate: [
             currentLocation.longitude,
@@ -139,6 +148,11 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
         1000 // アニメーション時間
       );
     };
+
+    // mapIdが変更されたらスポット詳細カードを閉じる
+    useEffect(() => {
+      setSelectedSpot(null);
+    }, [mapId]);
 
     // スポットが読み込まれ、マップの準備ができたら全スポットを表示
     useEffect(() => {
@@ -210,7 +224,6 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
         {/* マップコントロールボタン（現在地ボタン） - 縮小版またはカードなしの時表示 */}
         {viewMode === 'map' &&
           !isSearchFocused &&
-          currentLocation &&
           (!selectedSpot || spotDetailSnapIndex === 0) && (
             <View className="absolute bottom-32 right-6 z-50">
               <LocationButton
