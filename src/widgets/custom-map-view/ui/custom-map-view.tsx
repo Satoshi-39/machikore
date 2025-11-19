@@ -49,30 +49,50 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       setIsMapReady(true);
     };
 
+    // カメラを単一スポットに移動
+    const moveCameraToSingleSpot = (spot: SpotRow) => {
+      if (!cameraRef.current) return;
+
+      cameraRef.current.setCamera({
+        centerCoordinate: [spot.longitude, spot.latitude],
+        zoomLevel: 14, // 適度なズームレベル
+        animationDuration: 1000,
+      });
+    };
+
+    // カメラを全スポットが入る範囲に移動
+    const fitCameraToAllSpots = (spots: SpotRow[]) => {
+      if (!cameraRef.current) return;
+
+      const lngs = spots.map(s => s.longitude);
+      const lats = spots.map(s => s.latitude);
+
+      const minLng = Math.min(...lngs);
+      const maxLng = Math.max(...lngs);
+      const minLat = Math.min(...lats);
+      const maxLat = Math.max(...lats);
+
+      cameraRef.current.fitBounds(
+        [minLng, minLat], // 南西の座標
+        [maxLng, maxLat], // 北東の座標
+        [50, 50, 50, 50], // パディング [上, 右, 下, 左]
+        1000 // アニメーション時間
+      );
+    };
+
     // スポットが読み込まれ、マップの準備ができたら全スポットを表示
     useEffect(() => {
-      if (spots.length > 0 && cameraRef.current && isMapReady) {
-        // 全スポットの座標から境界を計算
-        const lngs = spots.map(s => s.longitude);
-        const lats = spots.map(s => s.latitude);
+      // 早期リターンでネストを削減
+      if (spots.length === 0 || !isMapReady) return;
 
-        const minLng = Math.min(...lngs);
-        const maxLng = Math.max(...lngs);
-        const minLat = Math.min(...lats);
-        const maxLat = Math.max(...lats);
-
-        // 少し遅延させてカメラが準備されるのを待つ
-        setTimeout(() => {
-          if (cameraRef.current) {
-            cameraRef.current.fitBounds(
-              [minLng, minLat], // 南西の座標
-              [maxLng, maxLat], // 北東の座標
-              [50, 50, 50, 50], // パディング [上, 右, 下, 左]
-              1000 // アニメーション時間
-            );
-          }
-        }, 100);
-      }
+      // 少し遅延させてカメラが準備されるのを待つ
+      setTimeout(() => {
+        if (spots.length === 1) {
+          moveCameraToSingleSpot(spots[0]);
+        } else {
+          fitCameraToAllSpots(spots);
+        }
+      }, 100);
     }, [spots, mapId, isMapReady]);
 
     // カメラ変更時に中心座標を更新
