@@ -8,7 +8,11 @@ import React from 'react';
 import { View, Text, ScrollView, Pressable, Alert } from 'react-native';
 import { useSignOut } from '@/features/auth';
 
-export function SettingsPage() {
+interface SettingsPageProps {
+  onSignOutSuccess?: () => void;
+}
+
+export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   const { signOut, isLoading } = useSignOut();
 
   const handleSignOutPress = () => {
@@ -20,7 +24,14 @@ export function SettingsPage() {
         {
           text: 'サインアウト',
           style: 'destructive',
-          onPress: () => signOut(),
+          onPress: async () => {
+            try {
+              await signOut();
+              onSignOutSuccess?.();
+            } catch (error) {
+              // エラーはuseSignOutで処理済み
+            }
+          },
         },
       ]
     );

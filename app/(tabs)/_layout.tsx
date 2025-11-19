@@ -16,6 +16,13 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#007AFF',
       }}
     >
+      {/* index ルートをタブバーから非表示 */}
+      <Tabs.Screen
+        name="index"
+        options={{
+          href: null,
+        }}
+      />
       <Tabs.Screen
         name="map"
         options={{

@@ -11,8 +11,8 @@ export default function SignInScreen() {
   const router = useRouter();
 
   const handleSuccess = () => {
-    // サインイン成功後、メイン画面に遷移
-    router.replace('/(tabs)/map');
+    // サインイン成功後、認証画面を閉じて元の画面に戻る
+    router.back();
   };
 
   const handleNavigateToSignUp = () => {
