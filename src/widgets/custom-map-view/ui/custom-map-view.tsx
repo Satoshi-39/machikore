@@ -35,6 +35,8 @@ interface CustomMapViewProps {
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
   autoOpenQuickAdd?: boolean;
+  quickAddTrigger?: number;
+  onSearchRequest?: () => void;
 }
 
 export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
@@ -49,6 +51,8 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       viewMode = 'map',
       isSearchFocused = false,
       autoOpenQuickAdd = false,
+      quickAddTrigger = 0,
+      onSearchRequest,
     },
     ref
   ) => {
@@ -164,7 +168,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
           setIsQuickAddMenuOpen(true);
         }, 300);
       }
-    }, [autoOpenQuickAdd, mapId]);
+    }, [autoOpenQuickAdd, mapId, quickAddTrigger]);
 
     // スポットが読み込まれ、マップの準備ができたら全スポットを表示
     useEffect(() => {
@@ -278,6 +282,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
           onPinModeChange={setIsPinMode}
           onMapTap={(handler) => setMapTapHandler(() => handler)}
           onCancelPinMode={(handler) => setCancelPinHandler(() => handler)}
+          onSearchRequest={onSearchRequest}
         />
       </View>
     );

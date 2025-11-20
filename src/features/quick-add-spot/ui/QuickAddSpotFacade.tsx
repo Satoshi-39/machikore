@@ -23,6 +23,7 @@ interface QuickAddSpotFacadeProps {
   onPinModeChange: (isPinMode: boolean) => void;
   onMapTap: (handler: ((latitude: number, longitude: number) => void) | null) => void;
   onCancelPinMode: (handler: (() => void) | null) => void;
+  onSearchRequest?: () => void;
 }
 
 export function QuickAddSpotFacade({
@@ -36,6 +37,7 @@ export function QuickAddSpotFacade({
   onPinModeChange,
   onMapTap,
   onCancelPinMode,
+  onSearchRequest,
 }: QuickAddSpotFacadeProps) {
   const {
     isModalOpen,
@@ -87,6 +89,12 @@ export function QuickAddSpotFacade({
     }
   };
 
+  // 検索ハンドラー
+  const handleSearch = () => {
+    onClose(); // メニューを閉じる
+    onSearchRequest?.(); // 親に検索リクエストを通知
+  };
+
   return (
     <>
       {/* メニュー */}
@@ -95,6 +103,7 @@ export function QuickAddSpotFacade({
         onClose={onClose}
         onCurrentLocation={handleCurrentLocation}
         onMapPin={handleMapPin}
+        onSearch={handleSearch}
       />
 
       {/* ピンモードオーバーレイ */}

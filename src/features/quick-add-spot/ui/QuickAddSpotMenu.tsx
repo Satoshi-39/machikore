@@ -4,6 +4,7 @@
  * FABの近くに表示されるスポット追加メニュー
  * - 現在地を登録
  * - 地図でピン刺し
+ * - 検索して登録
  */
 
 import React from 'react';
@@ -15,6 +16,7 @@ interface QuickAddSpotMenuProps {
   onClose: () => void;
   onCurrentLocation: () => void;
   onMapPin: () => void;
+  onSearch: () => void;
 }
 
 export function QuickAddSpotMenu({
@@ -22,6 +24,7 @@ export function QuickAddSpotMenu({
   onClose,
   onCurrentLocation,
   onMapPin,
+  onSearch,
 }: QuickAddSpotMenuProps) {
   if (!visible) return null;
 
@@ -34,7 +37,7 @@ export function QuickAddSpotMenu({
       />
 
       {/* メニュー（FABの上に表示） */}
-      <View className="absolute bottom-24 right-6 z-50">
+      <View className="absolute bottom-28 right-6 z-50">
         <View className="bg-white rounded-2xl shadow-2xl overflow-hidden" style={{ minWidth: 200 }}>
           {/* 現在地を登録 */}
           <Pressable
@@ -52,13 +55,26 @@ export function QuickAddSpotMenu({
           {/* 地図でピン刺し */}
           <Pressable
             onPress={onMapPin}
-            className="flex-row items-center px-4 py-3 active:bg-gray-50"
+            className="flex-row items-center px-4 py-3 border-b border-gray-100 active:bg-gray-50"
           >
             <View className="w-8 h-8 rounded-full bg-gray-700 items-center justify-center mr-3">
               <Ionicons name="pin" size={18} color="white" />
             </View>
             <Text className="text-base font-semibold text-gray-900">
               地図でピン刺し
+            </Text>
+          </Pressable>
+
+          {/* 検索して登録 */}
+          <Pressable
+            onPress={onSearch}
+            className="flex-row items-center px-4 py-3 active:bg-gray-50"
+          >
+            <View className="w-8 h-8 rounded-full bg-green-500 items-center justify-center mr-3">
+              <Ionicons name="search" size={18} color="white" />
+            </View>
+            <Text className="text-base font-semibold text-gray-900">
+              検索して登録
             </Text>
           </Pressable>
         </View>

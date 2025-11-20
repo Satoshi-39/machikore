@@ -19,8 +19,8 @@ export default function SelectMapScreen() {
 
   const handleSelectMap = (mapId: string) => {
     console.log('マップ選択完了:', mapId);
-    // スポット追加モードでマップページに遷移
-    router.push(`/(tabs)/map?id=${mapId}&addSpot=true`);
+    // スポット追加モードでマップページに遷移（一意なタイムスタンプを使用）
+    router.push(`/(tabs)/map?id=${mapId}&addSpot=${Date.now()}`);
   };
 
   const handleCreateNewMap = () => {

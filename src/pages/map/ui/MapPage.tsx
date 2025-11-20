@@ -40,6 +40,7 @@ export function MapPage() {
   const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
+  const [quickAddTrigger, setQuickAddTrigger] = useState(0);
 
   // URLクエリパラメータからマップIDを読み取り、グローバルステートに設定
   useEffect(() => {
@@ -47,6 +48,15 @@ export function MapPage() {
       setSelectedMapId(id);
     }
   }, [id, setSelectedMapId]);
+
+  // addSpotパラメータを監視して、QuickAddMenuを開くトリガーを発火
+  useEffect(() => {
+    if (addSpot) {
+      setQuickAddTrigger((prev) => prev + 1);
+      // パラメータをクリーンアップ（一度メニューを開いたら削除）
+      router.replace(selectedMapId ? `/(tabs)/map?id=${selectedMapId}` : '/(tabs)/map');
+    }
+  }, [addSpot, selectedMapId, router]);
 
   const isCustomMap = !!selectedMapId;
 
@@ -56,6 +66,10 @@ export function MapPage() {
 
   const handleSearchClose = () => {
     setIsSearchFocused(false);
+  };
+
+  const handleSearchRequest = () => {
+    setIsSearchFocused(true);
   };
 
   const handleCloseCustomMap = () => {
@@ -111,7 +125,9 @@ export function MapPage() {
             currentLocation={location}
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
-            autoOpenQuickAdd={addSpot === 'true'}
+            autoOpenQuickAdd={addSpot != null}
+            quickAddTrigger={quickAddTrigger}
+            onSearchRequest={handleSearchRequest}
           />
         ) : (
           <DefaultMapView
