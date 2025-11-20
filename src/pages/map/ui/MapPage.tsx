@@ -23,7 +23,7 @@ import { useLocation } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
 
 export function MapPage() {
-  const { id } = useLocalSearchParams<{ id?: string }>();
+  const { id, addSpot } = useLocalSearchParams<{ id?: string; addSpot?: string }>();
   const router = useRouter();
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
@@ -111,6 +111,7 @@ export function MapPage() {
             currentLocation={location}
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
+            autoOpenQuickAdd={addSpot === 'true'}
           />
         ) : (
           <DefaultMapView

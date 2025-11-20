@@ -34,6 +34,7 @@ interface CustomMapViewProps {
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
+  autoOpenQuickAdd?: boolean;
 }
 
 export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
@@ -47,6 +48,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       currentLocation = null,
       viewMode = 'map',
       isSearchFocused = false,
+      autoOpenQuickAdd = false,
     },
     ref
   ) => {
@@ -154,6 +156,16 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       setSelectedSpot(null);
     }, [mapId]);
 
+    // autoOpenQuickAddがtrueの場合、マウント時にQuickAddSpotMenuを開く
+    useEffect(() => {
+      if (autoOpenQuickAdd && mapId) {
+        // 少し遅延させてマップが準備されるのを待つ
+        setTimeout(() => {
+          setIsQuickAddMenuOpen(true);
+        }, 300);
+      }
+    }, [autoOpenQuickAdd, mapId]);
+
     // スポットが読み込まれ、マップの準備ができたら全スポットを表示
     useEffect(() => {
       // 早期リターンでネストを削減
@@ -162,7 +174,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
       // 少し遅延させてカメラが準備されるのを待つ
       setTimeout(() => {
         if (spots.length === 1) {
-          moveCameraToSingleSpot(spots[0]);
+          moveCameraToSingleSpot(spots[0]!);
         } else {
           fitCameraToAllSpots(spots);
         }

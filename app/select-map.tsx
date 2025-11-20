@@ -18,9 +18,9 @@ export default function SelectMapScreen() {
   };
 
   const handleSelectMap = (mapId: string) => {
-    // TODO: マップ選択後、QuickAddSpotModalを表示（ステップ3で実装予定）
     console.log('マップ選択完了:', mapId);
-    // 現在地を使ってスポット作成モーダルを表示
+    // スポット追加モードでマップページに遷移
+    router.push(`/(tabs)/map?id=${mapId}&addSpot=true`);
   };
 
   const handleCreateNewMap = () => {
