@@ -123,7 +123,15 @@ export default function RootLayout() {
             options={{
               presentation: 'transparentModal',
               headerShown: false,
-              animation: 'fade',
+              animation: 'none',
+            }}
+          />
+          <Stack.Screen
+            name="select-map"
+            options={{
+              presentation: 'transparentModal',
+              headerShown: false,
+              animation: 'none',
             }}
           />
         </Stack>

@@ -13,27 +13,23 @@ export default function CreateScreen() {
   const router = useRouter();
 
   const handleClose = () => {
+    // BottomSheetがアニメーション完了後にこのコールバックを呼ぶ
     router.dismiss();
   };
 
   const handleCreateMap = () => {
-    // CreateMenuPage側でアニメーションが完了してからこのコールバックが呼ばれる
-    // アニメーション完了後にマップ作成ページを開く
-    setTimeout(() => {
-      router.push('/create-map');
-    }, 350); // アニメーション250ms + モーダル閉じる100ms
+    // BottomSheetが閉じてから（close()内で処理）マップ作成ページを開く
+    router.push('/create-map');
   };
 
   const handleCreateSpot = () => {
-    // TODO: スポット作成画面への遷移を実装
-    console.log('スポット作成');
-    // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
+    // BottomSheetが閉じてから（close()内で処理）マップ選択ページを開く
+    router.push('/select-map');
   };
 
   const handleCreateBlog = () => {
     // TODO: ブログ作成画面への遷移を実装
     console.log('ブログ作成');
-    // アニメーション完了後に閉じるため、CreateMenuPage側のhandleCloseを使う
   };
 
   return (
