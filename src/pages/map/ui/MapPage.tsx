@@ -54,11 +54,13 @@ export function MapPage() {
     if (addSpot) {
       setQuickAddTrigger((prev) => prev + 1);
       // パラメータをクリーンアップ（一度メニューを開いたら削除）
-      router.replace(selectedMapId ? `/(tabs)/map?id=${selectedMapId}` : '/(tabs)/map');
+      // 注: storeのselectedMapIdではなく、URLパラメータのidを使用（タイミング問題回避）
+      router.replace(id ? `/(tabs)/map?id=${id}` : '/(tabs)/map');
     }
-  }, [addSpot, selectedMapId, router]);
+  }, [addSpot, id, router]);
 
-  const isCustomMap = !!selectedMapId;
+  // URLパラメータのidもチェック（storeが更新される前でもカスタムマップとして扱う）
+  const isCustomMap = selectedMapId != null || id != null;
 
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
@@ -117,7 +119,7 @@ export function MapPage() {
         {isCustomMap ? (
           <CustomMapView
             ref={mapViewRef}
-            mapId={selectedMapId}
+            mapId={selectedMapId || id || null}
             userId={user?.id ?? null}
             defaultMapId={userMaps?.[0]?.id ?? null}
             onSpotSelect={(spot) => setIsSpotDetailVisible(!!spot)}
