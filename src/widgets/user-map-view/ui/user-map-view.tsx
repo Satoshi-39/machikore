@@ -9,6 +9,8 @@ import { QuickAddSpotFacade } from '@/features/quick-add-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import { FAB, LocationButton } from '@/shared/ui';
+import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
+import { useSpotCamera } from '../model';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
@@ -19,11 +21,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Alert, View } from 'react-native';
-
-export interface MapViewHandle {
-  flyToLocation: (longitude: number, latitude: number) => void;
-}
+import { View } from 'react-native';
 
 interface UserMapViewProps {
   mapId: string | null;
@@ -70,6 +68,17 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       longitude: 139.7671,
     });
 
+    // マップ操作用フック
+    const { flyToLocation, handleLocationPress } = useMapLocation({
+      cameraRef,
+      currentLocation,
+    });
+
+    // スポットカメラ操作用フック
+    const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
+      cameraRef,
+    });
+
     // 選択状態を管理
     const handleSpotSelect = (spot: SpotWithMasterSpot | null) => {
       setSelectedSpot(spot);
@@ -81,29 +90,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       onSpotDetailSnapChange?.(snapIndex);
     };
 
-    // 現在地ボタンハンドラー
-    const handleLocationPress = () => {
-      if (!currentLocation) {
-        Alert.alert(
-          '位置情報を取得できません',
-          '位置情報サービスをオンにして、アプリに位置情報の使用を許可してください。',
-          [{ text: 'OK' }]
-        );
-        return;
-      }
-
-      if (cameraRef.current) {
-        cameraRef.current.setCamera({
-          centerCoordinate: [
-            currentLocation.longitude,
-            currentLocation.latitude,
-          ],
-          zoomLevel: 14,
-          animationDuration: 1000,
-        });
-      }
-    };
-
     // FABボタンハンドラー
     const handleFABPress = () => {
       setIsQuickAddMenuOpen((prev) => !prev);
@@ -112,37 +98,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     // マップのロード完了ハンドラー
     const handleMapReady = () => {
       setIsMapReady(true);
-    };
-
-    // カメラを単一スポットに移動
-    const moveCameraToSingleSpot = (spot: SpotWithMasterSpot) => {
-      if (!cameraRef.current) return;
-
-      cameraRef.current.setCamera({
-        centerCoordinate: [spot.longitude, spot.latitude],
-        zoomLevel: 14, // 適度なズームレベル
-        animationDuration: 1000,
-      });
-    };
-
-    // カメラを全スポットが入る範囲に移動
-    const fitCameraToAllSpots = (spots: SpotWithMasterSpot[]) => {
-      if (!cameraRef.current) return;
-
-      const lngs = spots.map((s) => s.longitude);
-      const lats = spots.map((s) => s.latitude);
-
-      const minLng = Math.min(...lngs);
-      const maxLng = Math.max(...lngs);
-      const minLat = Math.min(...lats);
-      const maxLat = Math.max(...lats);
-
-      cameraRef.current.fitBounds(
-        [minLng, minLat], // 南西の座標
-        [maxLng, maxLat], // 北東の座標
-        [50, 50, 50, 50], // パディング [上, 右, 下, 左]
-        1000 // アニメーション時間
-      );
     };
 
     // mapIdが変更されたらスポット詳細カードを閉じる
@@ -185,15 +140,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // 外部から呼び出せるメソッドを公開
     useImperativeHandle(ref, () => ({
-      flyToLocation: (longitude: number, latitude: number) => {
-        if (cameraRef.current) {
-          cameraRef.current.setCamera({
-            centerCoordinate: [longitude, latitude],
-            zoomLevel: 14,
-            animationDuration: 1000,
-          });
-        }
-      },
+      flyToLocation,
     }));
 
     return (

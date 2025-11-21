@@ -3,19 +3,16 @@
  */
 
 import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo } from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
+import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { MachiDetailCard } from './machi-detail-card';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { FeatureCollection, Point } from 'geojson';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
-
-export interface MapViewHandle {
-  flyToLocation: (longitude: number, latitude: number) => void;
-}
 
 interface DefaultMapViewProps {
   userId?: string | null;
@@ -33,6 +30,12 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
+    // マップ操作用フック
+    const { flyToLocation, handleLocationPress } = useMapLocation({
+      cameraRef,
+      currentLocation,
+    });
+
     // 選択状態を管理
     const handleMachiSelect = (machi: MachiRow | null) => {
       setSelectedMachi(machi);
@@ -42,26 +45,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const handleSnapChange = (snapIndex: number) => {
       setMachiDetailSnapIndex(snapIndex);
       onMachiDetailSnapChange?.(snapIndex);
-    };
-
-    // 現在地ボタンハンドラー
-    const handleLocationPress = () => {
-      if (!currentLocation) {
-        Alert.alert(
-          '位置情報を取得できません',
-          '位置情報サービスをオンにして、アプリに位置情報の使用を許可してください。',
-          [{ text: 'OK' }]
-        );
-        return;
-      }
-
-      if (cameraRef.current) {
-        cameraRef.current.setCamera({
-          centerCoordinate: [currentLocation.longitude, currentLocation.latitude],
-          zoomLevel: 14,
-          animationDuration: 1000,
-        });
-      }
     };
 
     // 訪問済みmachiのIDセットを作成
@@ -123,15 +106,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
 
   // 外部から呼び出せるメソッドを公開
   useImperativeHandle(ref, () => ({
-    flyToLocation: (longitude: number, latitude: number) => {
-      if (cameraRef.current) {
-        cameraRef.current.setCamera({
-          centerCoordinate: [longitude, latitude],
-          zoomLevel: 14,
-          animationDuration: 1000,
-        });
-      }
-    },
+    flyToLocation,
   }));
 
   return (
