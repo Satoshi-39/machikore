@@ -132,11 +132,13 @@ export interface MasterSpotRow {
   name: string;
   latitude: number;
   longitude: number;
-  mapbox_place_id: string | null; // Mapboxの一意ID
-  mapbox_place_name: string | null; // Mapbox正式名称
-  mapbox_category: string | null; // JSON string array: ["poi", "restaurant"]
-  mapbox_address: string | null; // 住所
-  mapbox_context: string | null; // JSON: その他のMapbox情報
+  google_place_id: string | null; // Google Place ID
+  google_formatted_address: string | null; // フォーマット済み住所
+  google_types: string | null; // JSON string array: ["restaurant", "food"]
+  google_phone_number: string | null; // 国際電話番号
+  google_website_uri: string | null; // ウェブサイトURL
+  google_rating: number | null; // 評価（1-5）
+  google_user_rating_count: number | null; // レビュー数
   created_at: string;
   updated_at: string;
   synced_at: string | null;
@@ -173,11 +175,13 @@ export interface SpotWithMasterSpot extends SpotRow {
   name: string; // master_spots.name (基本名称)
   latitude: number; // master_spots.latitude
   longitude: number; // master_spots.longitude
-  address: string | null; // master_spots.mapbox_address
-  mapbox_place_id: string | null; // master_spots.mapbox_place_id
-  mapbox_place_name: string | null; // master_spots.mapbox_place_name
-  mapbox_category: string | null; // master_spots.mapbox_category
-  mapbox_context: string | null; // master_spots.mapbox_context
+  address: string | null; // master_spots.google_formatted_address
+  google_place_id: string | null; // master_spots.google_place_id
+  google_types: string | null; // master_spots.google_types
+  google_phone_number: string | null; // master_spots.google_phone_number
+  google_website_uri: string | null; // master_spots.google_website_uri
+  google_rating: number | null; // master_spots.google_rating
+  google_user_rating_count: number | null; // master_spots.google_user_rating_count
 }
 
 // Visits (街訪問記録)

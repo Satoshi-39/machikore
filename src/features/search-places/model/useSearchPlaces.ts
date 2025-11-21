@@ -3,8 +3,8 @@
  */
 
 import { useState, useCallback, useRef } from 'react';
-import { searchPlaces } from '../api/mapboxGeocoding';
-import type { PlaceSearchResult, GeocodingSearchOptions } from '../api/types';
+import { searchPlaces } from '../api/googlePlaces';
+import type { PlaceSearchResult, PlacesSearchOptions } from '../api/types';
 
 interface UseSearchPlacesOptions {
   currentLocation?: { latitude: number; longitude: number } | null;
@@ -57,23 +57,26 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
       setError(null);
 
       try {
-        const searchOptions: GeocodingSearchOptions = {
+        const searchOptions: PlacesSearchOptions = {
           query: trimmedQuery,
-          language: 'ja',
-          limit: 10,
-          country: ['jp'],
-          types: ['poi', 'address', 'place'], // POIを優先的に検索
+          languageCode: 'ja',
+          includedRegionCodes: ['jp'],
         };
 
-        // 現在地が利用可能な場合、proximityパラメータを追加
+        // 現在地が利用可能な場合、locationBiasパラメータを追加
         if (currentLocation) {
-          searchOptions.proximity = [
-            currentLocation.longitude,
-            currentLocation.latitude,
-          ];
+          searchOptions.locationBias = {
+            circle: {
+              center: {
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+              },
+              radius: 50000, // 50km圏内を優先
+            },
+          };
         }
 
-        console.log(`🔍 [Mapbox API] 検索実行: "${trimmedQuery}"`);
+        console.log(`🔍 [Google Places API] 検索実行: "${trimmedQuery}"`);
         const searchResults = await searchPlaces(searchOptions);
 
         // 結果をキャッシュに保存（最大100件まで）

@@ -1,81 +1,119 @@
 /**
- * Mapbox Geocoding API v6 型定義
- * https://docs.mapbox.com/api/search/geocoding/
+ * Google Places API (New) 型定義
+ * https://developers.google.com/maps/documentation/places/web-service/op-overview
  */
 
 /**
- * Mapbox Geocoding API v6 検索結果（Feature）
+ * Google Places Autocomplete Prediction
  */
-export interface MapboxFeature {
-  type: 'Feature';
-  id: string;
-  geometry: {
-    type: 'Point';
-    coordinates: [number, number]; // [longitude, latitude]
-  };
-  properties: {
-    mapbox_id: string; // Mapboxの一意ID（permanent=trueの時に使用）
-    name: string; // 場所の名前
-    name_preferred?: string; // 優先される名前（ローカライズ対応）
-    place_formatted?: string; // フォーマット済み住所
-    full_address?: string; // 完全な住所
-    coordinates?: {
-      longitude: number;
-      latitude: number;
+export interface GooglePlaceAutocomplete {
+  placePrediction: {
+    place: string; // Place ID
+    placeId: string;
+    text: {
+      text: string; // 表示テキスト
+      matches: Array<{ endOffset: number }>;
     };
-    context?: {
-      // コンテキスト情報（地域、国など）
-      country?: { name: string; country_code: string };
-      region?: { name: string; region_code: string };
-      place?: { name: string };
-      postcode?: { name: string };
-      locality?: { name: string };
-      neighborhood?: { name: string };
-      street?: { name: string };
+    structuredFormat: {
+      mainText: {
+        text: string; // メインテキスト（施設名など）
+        matches: Array<{ endOffset: number }>;
+      };
+      secondaryText: {
+        text: string; // サブテキスト（住所など）
+      };
     };
-    feature_type?: string; // "poi", "address", "street", "neighborhood", "locality", "place", "district", "postcode", "region", "country"
-    maki?: string; // アイコン識別子
-    metadata?: Record<string, any>; // その他のメタデータ
+    types: string[]; // ["restaurant", "food", "point_of_interest"]
   };
 }
 
 /**
- * Mapbox Geocoding API v6 レスポンス
+ * Google Places Autocomplete Response
  */
-export interface MapboxGeocodingResponse {
-  type: 'FeatureCollection';
-  features: MapboxFeature[];
-  attribution: string;
+export interface GooglePlacesAutocompleteResponse {
+  suggestions: GooglePlaceAutocomplete[];
 }
 
 /**
- * Mapbox Geocoding API v6 検索オプション
+ * Google Place Details - Location
  */
-export interface GeocodingSearchOptions {
+export interface GooglePlaceLocation {
+  latitude: number;
+  longitude: number;
+}
+
+/**
+ * Google Place Details - Address Component
+ */
+export interface GoogleAddressComponent {
+  longText: string;
+  shortText: string;
+  types: string[];
+  languageCode: string;
+}
+
+/**
+ * Google Place Details Response
+ */
+export interface GooglePlaceDetails {
+  id: string; // Place ID
+  displayName: {
+    text: string;
+    languageCode: string;
+  };
+  formattedAddress: string;
+  location: GooglePlaceLocation;
+  types: string[]; // ["restaurant", "food", "point_of_interest"]
+  addressComponents?: GoogleAddressComponent[];
+  internationalPhoneNumber?: string;
+  nationalPhoneNumber?: string;
+  websiteUri?: string;
+  rating?: number;
+  userRatingCount?: number;
+  priceLevel?: string; // "PRICE_LEVEL_FREE" | "PRICE_LEVEL_INEXPENSIVE" | etc.
+  businessStatus?: string; // "OPERATIONAL" | "CLOSED_TEMPORARILY" | etc.
+  googleMapsUri?: string;
+  photos?: Array<{
+    name: string;
+    widthPx: number;
+    heightPx: number;
+  }>;
+}
+
+/**
+ * Google Places検索オプション
+ */
+export interface PlacesSearchOptions {
   query: string;
-  proximity?: [number, number]; // [longitude, latitude] - ユーザーの現在地など
-  bbox?: [number, number, number, number]; // [minLng, minLat, maxLng, maxLat]
-  language?: string; // "ja", "en" など
-  limit?: number; // 結果の最大件数（デフォルト: 5）
-  types?: string[]; // フィルタリング用: ["poi", "address", "place"]
-  country?: string[]; // 国コード: ["jp"]
+  locationBias?: {
+    circle?: {
+      center: { latitude: number; longitude: number };
+      radius: number; // メートル単位
+    };
+  };
+  languageCode?: string; // "ja", "en" など
+  includedRegionCodes?: string[]; // ["jp"]
 }
 
 /**
- * アプリ内で使用する場所データ（シンプル化）
+ * アプリ内で使用する場所データ（統一インターフェース）
  */
 export interface PlaceSearchResult {
-  id: string; // mapbox_id
+  id: string; // Google Place ID
   name: string;
   address: string | null;
   latitude: number;
   longitude: number;
-  category: string[]; // feature_type等をカテゴリーとして保存
-  mapboxData: {
-    placeId: string; // mapbox_id
-    placeName: string; // name_preferred || name
-    category: string[]; // [feature_type]
-    address: string | null; // place_formatted
-    context: MapboxFeature['properties']['context']; // context情報を丸ごと保存
+  category: string[]; // types
+  googleData: {
+    placeId: string;
+    placeName: string;
+    category: string[]; // types
+    address: string | null;
+    formattedAddress?: string;
+    internationalPhoneNumber?: string;
+    websiteUri?: string;
+    rating?: number;
+    userRatingCount?: number;
   };
 }

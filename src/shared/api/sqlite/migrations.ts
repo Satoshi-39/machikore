@@ -27,6 +27,8 @@ export function initializeDatabase(): void {
     db.execSync('DROP TABLE IF EXISTS follows;');
     db.execSync('DROP TABLE IF EXISTS likes;');
     db.execSync('DROP TABLE IF EXISTS images;');
+    db.execSync('DROP TABLE IF EXISTS user_spots;');
+    db.execSync('DROP TABLE IF EXISTS master_spots;');
     db.execSync('DROP TABLE IF EXISTS spots;');
     db.execSync('DROP TABLE IF EXISTS maps;');
     db.execSync('DROP TABLE IF EXISTS visits;');
@@ -213,11 +215,13 @@ export function initializeDatabase(): void {
         name TEXT NOT NULL,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,
-        mapbox_place_id TEXT,
-        mapbox_place_name TEXT,
-        mapbox_category TEXT,
-        mapbox_address TEXT,
-        mapbox_context TEXT,
+        google_place_id TEXT,
+        google_formatted_address TEXT,
+        google_types TEXT,
+        google_phone_number TEXT,
+        google_website_uri TEXT,
+        google_rating REAL,
+        google_user_rating_count INTEGER,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         synced_at TEXT,
@@ -227,8 +231,8 @@ export function initializeDatabase(): void {
 
     // インデックス作成
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_master_spots_mapbox_place_id
-      ON master_spots(mapbox_place_id);
+      CREATE INDEX IF NOT EXISTS idx_master_spots_google_place_id
+      ON master_spots(google_place_id);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_master_spots_name
@@ -646,11 +650,13 @@ export function migration005_AddMasterSpots(): void {
         name TEXT NOT NULL,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,
-        mapbox_place_id TEXT,
-        mapbox_place_name TEXT,
-        mapbox_category TEXT,
-        mapbox_address TEXT,
-        mapbox_context TEXT,
+        google_place_id TEXT,
+        google_formatted_address TEXT,
+        google_types TEXT,
+        google_phone_number TEXT,
+        google_website_uri TEXT,
+        google_rating REAL,
+        google_user_rating_count INTEGER,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         synced_at TEXT,
@@ -659,7 +665,7 @@ export function migration005_AddMasterSpots(): void {
     `);
 
     // インデックス作成
-    db.execSync('CREATE INDEX IF NOT EXISTS idx_master_spots_mapbox_place_id ON master_spots(mapbox_place_id);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_master_spots_google_place_id ON master_spots(google_place_id);');
     db.execSync('CREATE INDEX IF NOT EXISTS idx_master_spots_name ON master_spots(name);');
     db.execSync('CREATE INDEX IF NOT EXISTS idx_master_spots_location ON master_spots(latitude, longitude);');
 

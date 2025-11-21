@@ -68,12 +68,12 @@ export function logSpots(mapId?: string, limit: number = 10) {
   console.log('=== User Spots ===');
   try {
     const sql = mapId
-      ? `SELECT s.*, ms.name, ms.latitude, ms.longitude, ms.mapbox_address as address
+      ? `SELECT s.*, ms.name, ms.latitude, ms.longitude, ms.google_formatted_address as address
          FROM user_spots s
          JOIN master_spots ms ON s.master_spot_id = ms.id
          WHERE s.map_id = ?
          ORDER BY s.order_index ASC, s.created_at DESC LIMIT ?;`
-      : `SELECT s.*, ms.name, ms.latitude, ms.longitude, ms.mapbox_address as address
+      : `SELECT s.*, ms.name, ms.latitude, ms.longitude, ms.google_formatted_address as address
          FROM user_spots s
          JOIN master_spots ms ON s.master_spot_id = ms.id
          ORDER BY s.created_at DESC LIMIT ?;`;

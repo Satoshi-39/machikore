@@ -30,11 +30,13 @@ export interface CreateSpotParams {
   customName?: string | null; // ユーザー独自の名前
   tags?: string[]; // タグ配列
   images?: string[]; // 画像URI配列
-  // Mapboxデータ（検索から選択した場合）
-  mapboxPlaceId?: string | null;
-  mapboxPlaceName?: string | null;
-  mapboxCategory?: string[] | null;
-  mapboxContext?: any | null;
+  // Google Placesデータ（検索から選択した場合）
+  googlePlaceId?: string | null;
+  googleTypes?: string[] | null;
+  googlePhoneNumber?: string | null;
+  googleWebsiteUri?: string | null;
+  googleRating?: number | null;
+  googleUserRatingCount?: number | null;
 }
 
 /**

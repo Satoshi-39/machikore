@@ -10,8 +10,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import type { SpotRow } from '@/shared/types/database.types';
 import type { UUID } from '@/shared/types';
-import { getRelativeSpotTime } from '@/entities/spot/model/helpers';
-import { useToggleLike, useCheckUserLiked } from '@/entities/spot/api';
+import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
+import { useToggleLike, useCheckUserLiked } from '@/entities/user-spot/api';
 import { useUser } from '@/entities/user';
 
 interface SpotCardProps {

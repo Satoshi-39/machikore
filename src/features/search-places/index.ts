@@ -7,7 +7,8 @@ export { useSearchPlaces } from './model/useSearchPlaces';
 // API Types
 export type {
   PlaceSearchResult,
-  MapboxFeature,
-  MapboxGeocodingResponse,
-  GeocodingSearchOptions,
+  PlacesSearchOptions,
+  GooglePlaceAutocomplete,
+  GooglePlaceDetails,
+  GooglePlacesAutocompleteResponse,
 } from './api/types';

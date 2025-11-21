@@ -18,11 +18,13 @@ export interface CreateMasterSpotParams {
   name: string;
   latitude: number;
   longitude: number;
-  mapboxPlaceId?: string | null;
-  mapboxPlaceName?: string | null;
-  mapboxCategory?: string[] | null;
-  mapboxAddress?: string | null;
-  mapboxContext?: any | null;
+  googlePlaceId?: string | null;
+  googleFormattedAddress?: string | null;
+  googleTypes?: string[] | null;
+  googlePhoneNumber?: string | null;
+  googleWebsiteUri?: string | null;
+  googleRating?: number | null;
+  googleUserRatingCount?: number | null;
 }
 
 /**

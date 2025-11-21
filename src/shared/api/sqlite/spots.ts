@@ -21,11 +21,13 @@ export function getSpotById(spotId: UUID): SpotWithMasterSpot | null {
       ms.name,
       ms.latitude,
       ms.longitude,
-      ms.mapbox_place_id,
-      ms.mapbox_place_name,
-      ms.mapbox_category,
-      ms.mapbox_address as address,
-      ms.mapbox_context
+      ms.google_formatted_address as address,
+      ms.google_place_id,
+      ms.google_types,
+      ms.google_phone_number,
+      ms.google_website_uri,
+      ms.google_rating,
+      ms.google_user_rating_count
     FROM user_spots s
     JOIN master_spots ms ON s.master_spot_id = ms.id
     WHERE s.id = ?;
@@ -45,11 +47,13 @@ export function getSpotsByMapId(mapId: UUID): SpotWithMasterSpot[] {
       ms.name,
       ms.latitude,
       ms.longitude,
-      ms.mapbox_place_id,
-      ms.mapbox_place_name,
-      ms.mapbox_category,
-      ms.mapbox_address as address,
-      ms.mapbox_context
+      ms.google_formatted_address as address,
+      ms.google_place_id,
+      ms.google_types,
+      ms.google_phone_number,
+      ms.google_website_uri,
+      ms.google_rating,
+      ms.google_user_rating_count
     FROM user_spots s
     JOIN master_spots ms ON s.master_spot_id = ms.id
     WHERE s.map_id = ?
@@ -70,11 +74,13 @@ export function getSpotsByUserId(userId: UUID): SpotWithMasterSpot[] {
       ms.name,
       ms.latitude,
       ms.longitude,
-      ms.mapbox_place_id,
-      ms.mapbox_place_name,
-      ms.mapbox_category,
-      ms.mapbox_address as address,
-      ms.mapbox_context
+      ms.google_formatted_address as address,
+      ms.google_place_id,
+      ms.google_types,
+      ms.google_phone_number,
+      ms.google_website_uri,
+      ms.google_rating,
+      ms.google_user_rating_count
     FROM user_spots s
     JOIN master_spots ms ON s.master_spot_id = ms.id
     WHERE s.user_id = ?
@@ -95,11 +101,13 @@ export function getSpotsByMachiId(machiId: string): SpotWithMasterSpot[] {
       ms.name,
       ms.latitude,
       ms.longitude,
-      ms.mapbox_place_id,
-      ms.mapbox_place_name,
-      ms.mapbox_category,
-      ms.mapbox_address as address,
-      ms.mapbox_context
+      ms.google_formatted_address as address,
+      ms.google_place_id,
+      ms.google_types,
+      ms.google_phone_number,
+      ms.google_website_uri,
+      ms.google_rating,
+      ms.google_user_rating_count
     FROM user_spots s
     JOIN master_spots ms ON s.master_spot_id = ms.id
     WHERE s.machi_id = ?
@@ -122,11 +130,13 @@ export function insertOrGetMasterSpot(masterSpot: {
   name: string;
   latitude: number;
   longitude: number;
-  mapbox_place_id?: string | null;
-  mapbox_place_name?: string | null;
-  mapbox_category?: string | null;
-  mapbox_address?: string | null;
-  mapbox_context?: string | null;
+  google_place_id?: string | null;
+  google_formatted_address?: string | null;
+  google_types?: string | null;
+  google_phone_number?: string | null;
+  google_website_uri?: string | null;
+  google_rating?: number | null;
+  google_user_rating_count?: number | null;
   created_at: string;
   updated_at: string;
 }): string {
@@ -148,22 +158,26 @@ export function insertOrGetMasterSpot(masterSpot: {
   execute(
     `
     INSERT INTO master_spots (
-      id, name, latitude, longitude, mapbox_place_id, mapbox_place_name,
-      mapbox_category, mapbox_address, mapbox_context,
+      id, name, latitude, longitude,
+      google_place_id, google_formatted_address, google_types,
+      google_phone_number, google_website_uri,
+      google_rating, google_user_rating_count,
       created_at, updated_at, synced_at, is_synced
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 0);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 0);
     `,
     [
       masterSpot.id,
       masterSpot.name,
       masterSpot.latitude,
       masterSpot.longitude,
-      masterSpot.mapbox_place_id ?? null,
-      masterSpot.mapbox_place_name ?? null,
-      masterSpot.mapbox_category ?? null,
-      masterSpot.mapbox_address ?? null,
-      masterSpot.mapbox_context ?? null,
+      masterSpot.google_place_id ?? null,
+      masterSpot.google_formatted_address ?? null,
+      masterSpot.google_types ?? null,
+      masterSpot.google_phone_number ?? null,
+      masterSpot.google_website_uri ?? null,
+      masterSpot.google_rating ?? null,
+      masterSpot.google_user_rating_count ?? null,
       masterSpot.created_at,
       masterSpot.updated_at,
     ]
@@ -187,11 +201,13 @@ export function insertSpot(params: {
     name: string;
     latitude: number;
     longitude: number;
-    mapbox_place_id?: string | null;
-    mapbox_place_name?: string | null;
-    mapbox_category?: string | null;
-    mapbox_address?: string | null;
-    mapbox_context?: string | null;
+    google_place_id?: string | null;
+    google_formatted_address?: string | null;
+    google_types?: string | null;
+    google_phone_number?: string | null;
+    google_website_uri?: string | null;
+    google_rating?: number | null;
+    google_user_rating_count?: number | null;
   };
 }): void {
   const { spot, masterSpot } = params;
