@@ -34,6 +34,7 @@ export async function searchPlaces(
     locationBias,
     languageCode = 'ja',
     includedRegionCodes = ['jp'],
+    sessionToken,
   } = options;
 
   if (!GOOGLE_PLACES_API_KEY) {
@@ -49,6 +50,7 @@ export async function searchPlaces(
       languageCode,
       includedRegionCodes,
       ...(locationBias && { locationBias }),
+      ...(sessionToken && { sessionToken }), // Autocomplete Sessionトークン
     };
 
     const autocompleteResponse = await fetch(AUTOCOMPLETE_URL, {
@@ -84,7 +86,7 @@ export async function searchPlaces(
     const detailsPromises = autocompleteData.suggestions
       .slice(0, 10)
       .map((suggestion) =>
-        fetchPlaceDetails(suggestion.placePrediction.placeId, languageCode)
+        fetchPlaceDetails(suggestion.placePrediction.placeId, languageCode, sessionToken)
       );
 
     const detailsResults = await Promise.allSettled(detailsPromises);
@@ -114,7 +116,8 @@ export async function searchPlaces(
  */
 async function fetchPlaceDetails(
   placeId: string,
-  languageCode: string = 'ja'
+  languageCode: string = 'ja',
+  sessionToken?: string
 ): Promise<GooglePlaceDetails> {
   if (!GOOGLE_PLACES_API_KEY) {
     throw new Error('Google Places API key is not configured');
@@ -136,7 +139,11 @@ async function fetchPlaceDetails(
     'googleMapsUri',
   ].join(',');
 
-  const url = `${PLACE_DETAILS_URL}/${placeId}?fields=${fields}&languageCode=${languageCode}`;
+  // sessionTokenがある場合はURLパラメータに追加（セッション終了）
+  let url = `${PLACE_DETAILS_URL}/${placeId}?fields=${fields}&languageCode=${languageCode}`;
+  if (sessionToken) {
+    url += `&sessionToken=${sessionToken}`;
+  }
 
   const response = await fetch(url, {
     method: 'GET',

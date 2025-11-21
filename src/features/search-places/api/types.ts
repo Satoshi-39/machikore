@@ -93,6 +93,7 @@ export interface PlacesSearchOptions {
   };
   languageCode?: string; // "ja", "en" など
   includedRegionCodes?: string[]; // ["jp"]
+  sessionToken?: string; // Autocomplete Session用トークン（コスト最適化）
 }
 
 /**

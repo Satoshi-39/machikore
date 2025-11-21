@@ -2,6 +2,8 @@
  * 場所検索hook
  */
 
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 import { useState, useCallback, useRef } from 'react';
 import { searchPlaces } from '../api/googlePlaces';
 import type { PlaceSearchResult, PlacesSearchOptions } from '../api/types';
@@ -26,6 +28,9 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
   // 簡易キャッシュ（同じクエリの重複リクエストを防ぐ）
   const cacheRef = useRef<Map<string, PlaceSearchResult[]>>(new Map());
 
+  // Autocomplete Sessionトークン（コスト最適化のため）
+  const sessionTokenRef = useRef<string | null>(null);
+
   const search = useCallback(
     async (query: string) => {
       const trimmedQuery = query.trim();
@@ -34,6 +39,8 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
       if (!trimmedQuery) {
         setResults([]);
         setIsLoading(false);
+        // セッションもクリア
+        sessionTokenRef.current = null;
         return;
       }
 
@@ -53,6 +60,12 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
         return;
       }
 
+      // セッショントークンを生成（検索セッション開始）
+      if (!sessionTokenRef.current) {
+        sessionTokenRef.current = uuidv4();
+        console.log(`🎫 [Autocomplete Session] 新規セッション開始: ${sessionTokenRef.current}`);
+      }
+
       setIsLoading(true);
       setError(null);
 
@@ -61,6 +74,7 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
           query: trimmedQuery,
           languageCode: 'ja',
           includedRegionCodes: ['jp'],
+          sessionToken: sessionTokenRef.current, // セッショントークンを追加
         };
 
         // 現在地が利用可能な場合、locationBiasパラメータを追加
@@ -76,7 +90,7 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
           };
         }
 
-        console.log(`🔍 [Google Places API] 検索実行: "${trimmedQuery}"`);
+        console.log(`🔍 [Google Places API] 検索実行: "${trimmedQuery}" (Session: ${sessionTokenRef.current})`);
         const searchResults = await searchPlaces(searchOptions);
 
         // 結果をキャッシュに保存（最大100件まで）
@@ -111,6 +125,16 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
     console.log('🗑️ [検索キャッシュ] クリア完了');
   }, []);
 
+  /**
+   * セッションを終了（場所選択後またはキャンセル時に呼ぶ）
+   */
+  const endSession = useCallback(() => {
+    if (sessionTokenRef.current) {
+      console.log(`✅ [Autocomplete Session] セッション終了: ${sessionTokenRef.current}`);
+      sessionTokenRef.current = null;
+    }
+  }, []);
+
   return {
     results,
     isLoading,
@@ -118,6 +142,7 @@ export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
     search,
     clearResults,
     clearCache,
+    endSession, // セッション終了関数を公開
     config: { minQueryLength, debounceMs }, // 設定値を公開
   };
 }

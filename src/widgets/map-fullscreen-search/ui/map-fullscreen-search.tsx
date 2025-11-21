@@ -24,7 +24,7 @@ export function MapFullscreenSearch({
   onPlaceSelect,
   currentLocation = null,
 }: MapFullscreenSearchProps) {
-  const { results, isLoading, error, search, config } = useSearchPlaces({
+  const { results, isLoading, error, search, endSession, config } = useSearchPlaces({
     currentLocation,
     minQueryLength: 1, // 1文字から検索可能
     debounceMs: 600, // 600msのデバウンス
@@ -40,7 +40,13 @@ export function MapFullscreenSearch({
   }, [searchQuery, search, config.debounceMs]);
 
   const handlePlaceSelect = (place: PlaceSearchResult) => {
+    endSession(); // セッション終了（コスト最適化）
     onPlaceSelect?.(place);
+    onClose();
+  };
+
+  const handleClose = () => {
+    endSession(); // キャンセル時もセッション終了
     onClose();
   };
 
@@ -65,7 +71,7 @@ export function MapFullscreenSearch({
               </Pressable>
             )}
           </View>
-          <Pressable onPress={onClose}>
+          <Pressable onPress={handleClose}>
             <Text className="text-base text-blue-600 font-medium">キャンセル</Text>
           </Pressable>
         </View>
