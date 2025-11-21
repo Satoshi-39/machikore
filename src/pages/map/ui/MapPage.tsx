@@ -73,6 +73,7 @@ export function MapPage() {
 
   const handleSearchClose = () => {
     setIsSearchFocused(false);
+    setSearchQuery(''); // 検索画面を閉じた時にクリア
   };
 
   const handleSearchRequest = () => {

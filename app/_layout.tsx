@@ -79,6 +79,15 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
+            name="create-spot"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'スポット登録',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
             name="user/[id]"
             options={{
               presentation: 'card',
