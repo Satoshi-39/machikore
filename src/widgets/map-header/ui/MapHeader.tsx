@@ -16,7 +16,6 @@ interface MapHeaderProps {
   mapTitle?: string;
   userName?: string;
   userAvatarUrl?: string;
-  userId?: string;
   userMaps?: MapRow[];
   onClose?: () => void;
   onMapSelect?: (mapId: string) => void;
@@ -28,7 +27,6 @@ export function MapHeader({
   mapTitle,
   userName,
   userAvatarUrl,
-  userId,
   userMaps = [],
   onClose,
   onMapSelect,

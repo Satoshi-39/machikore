@@ -5,7 +5,7 @@
  */
 
 import { queryAll, queryOne } from './client';
-import type { SpotRow, VisitRow, ScheduleRow, MachiRow } from '@/shared/types/database.types';
+import type { VisitRow, ScheduleRow, MachiRow } from '@/shared/types/database.types';
 
 /**
  * 全テーブルのデータ件数を表示

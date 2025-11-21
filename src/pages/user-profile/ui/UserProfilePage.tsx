@@ -29,7 +29,7 @@ export function UserProfilePage() {
           onPress={() => router.back()}
           className="flex-row items-center"
         >
-          <Ionicons name="arrow-back" size={24} color={colors.text.DEFAULT} />
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
           <Text className="ml-2 text-base font-semibold text-gray-900">
             戻る
           </Text>

@@ -64,11 +64,11 @@ export function MachiSpotList({ mapId }: MachiSpotListProps) {
             className="bg-white rounded-lg p-2 mb-2 border border-gray-200"
           >
             <Text className="text-sm font-semibold text-gray-900 mb-1">
-              📍 {spot.name}
+              📍 {spot.custom_name || spot.name}
             </Text>
-            {spot.memo && (
+            {spot.description && (
               <Text className="text-xs text-gray-700 mb-1" numberOfLines={2}>
-                {spot.memo}
+                {spot.description}
               </Text>
             )}
             {spot.address && (

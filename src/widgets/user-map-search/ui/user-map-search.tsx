@@ -1,5 +1,7 @@
 /**
- * マップ全画面検索Widget
+ * ユーザーマップ全画面検索Widget
+ * 自分のマップ: Google Places APIで新規登録可能
+ * 他人のマップ: そのユーザーのspotsのみ検索
  */
 
 import React, { useEffect } from 'react';
@@ -7,28 +9,53 @@ import { View, TextInput, Pressable, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, EmptyState, ErrorView } from '@/shared/ui';
-import { useSearchPlaces, type PlaceSearchResult } from '@/features/search-places';
+import {
+  useSearchPlaces,
+  useSearchMachikorePlaces,
+  type PlaceSearchResult,
+  type MachikorePlaceSearchResult,
+} from '@/features/search-places';
 
-interface MapFullscreenSearchProps {
+interface UserMapSearchProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClose: () => void;
-  onPlaceSelect?: (place: PlaceSearchResult) => void;
+  onPlaceSelect?: (place: PlaceSearchResult | MachikorePlaceSearchResult) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
+  mapUserId?: string | null; // マップの所有者ID
+  currentUserId?: string | null; // 現在のユーザーID
 }
 
-export function MapFullscreenSearch({
+export function UserMapSearch({
   searchQuery,
   onSearchChange,
   onClose,
   onPlaceSelect,
   currentLocation = null,
-}: MapFullscreenSearchProps) {
-  const { results, isLoading, error, search, endSession, config } = useSearchPlaces({
+  mapUserId = null,
+  currentUserId = null,
+}: UserMapSearchProps) {
+  // 自分のマップかどうか判定
+  const isOwnMap = mapUserId === currentUserId;
+
+  // 自分のマップ: Google Places API（新規登録可能）
+  const googlePlacesSearch = useSearchPlaces({
     currentLocation,
-    minQueryLength: 1, // 1文字から検索可能
-    debounceMs: 600, // 600msのデバウンス
+    minQueryLength: 1,
+    debounceMs: 600,
   });
+
+  // 他人のマップ: 街コレデータ（そのユーザーのspotsのみ）
+  const machikorePlacesSearch = useSearchMachikorePlaces({
+    userId: mapUserId,
+    includeAllSpots: false, // 指定ユーザーのspotsのみ
+    minQueryLength: 1,
+    debounceMs: 300,
+  });
+
+  // 使用する検索hookを選択
+  const searchHook = isOwnMap ? googlePlacesSearch : machikorePlacesSearch;
+  const { results, isLoading, error, search, config } = searchHook;
 
   // 検索クエリが変更されたら検索を実行（デバウンス付き）
   useEffect(() => {
@@ -39,14 +66,20 @@ export function MapFullscreenSearch({
     return () => clearTimeout(timeoutId);
   }, [searchQuery, search, config.debounceMs]);
 
-  const handlePlaceSelect = (place: PlaceSearchResult) => {
-    endSession(); // セッション終了（コスト最適化）
+  const handlePlaceSelect = (place: PlaceSearchResult | MachikorePlaceSearchResult) => {
+    // 自分のマップ（Google Places API使用時）のみセッション終了
+    if (isOwnMap && 'endSession' in googlePlacesSearch) {
+      googlePlacesSearch.endSession();
+    }
     onPlaceSelect?.(place);
     onClose();
   };
 
   const handleClose = () => {
-    endSession(); // キャンセル時もセッション終了
+    // 自分のマップ（Google Places API使用時）のみセッション終了
+    if (isOwnMap && 'endSession' in googlePlacesSearch) {
+      googlePlacesSearch.endSession();
+    }
     onClose();
   };
 
@@ -59,7 +92,7 @@ export function MapFullscreenSearch({
             <Ionicons name="search" size={20} color={colors.gray[400]} />
             <TextInput
               className="flex-1 ml-2 text-base text-gray-800"
-              placeholder="スポットを検索"
+              placeholder={isOwnMap ? 'スポットを検索' : 'このマップのスポットを検索'}
               placeholderTextColor={colors.gray[400]}
               value={searchQuery}
               onChangeText={onSearchChange}
@@ -82,9 +115,13 @@ export function MapFullscreenSearch({
         {searchQuery.length === 0 ? (
           // 検索プレースホルダー
           <View className="p-4">
-            <Text className="text-lg font-semibold text-gray-800 mb-3">場所を検索</Text>
+            <Text className="text-lg font-semibold text-gray-800 mb-3">
+              {isOwnMap ? '場所を検索' : 'このマップのスポットを検索'}
+            </Text>
             <Text className="text-sm text-gray-500">
-              レストラン、カフェ、観光スポットなどを検索できます
+              {isOwnMap
+                ? 'レストラン、カフェ、観光スポットなどを検索して追加できます'
+                : 'このマップに登録されているスポットを検索できます'}
             </Text>
           </View>
         ) : (

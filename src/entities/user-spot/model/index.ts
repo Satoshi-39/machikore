@@ -4,4 +4,4 @@
 
 export * from './types';
 export * from './helpers';
-export * from './store';
+export * from './use-spot-store';

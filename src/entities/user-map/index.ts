@@ -2,5 +2,5 @@
  * Map Entity エクスポート
  */
 
-export { useMapStore } from './model/useMapStore';
+export { useMapStore } from './model/use-map-store';
 export * from './api';

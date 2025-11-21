@@ -20,24 +20,22 @@ export interface MapViewHandle {
 interface DefaultMapViewProps {
   userId?: string | null;
   currentLocation?: { latitude: number; longitude: number } | null;
-  onMachiSelect?: (machi: MachiRow | null) => void;
   onMachiDetailSnapChange?: (snapIndex: number) => void;
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiSelect, onMachiDetailSnapChange, viewMode = 'map', isSearchFocused = false }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, viewMode = 'map', isSearchFocused = false }, ref) => {
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
     const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
     const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
-    // 選択状態を親に通知
+    // 選択状態を管理
     const handleMachiSelect = (machi: MachiRow | null) => {
       setSelectedMachi(machi);
-      onMachiSelect?.(machi);
     };
 
     // スナップ変更を親に通知して、ローカルstateも更新

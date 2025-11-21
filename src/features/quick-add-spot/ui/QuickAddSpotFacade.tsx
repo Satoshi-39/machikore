@@ -5,7 +5,7 @@
  * MapPageから簡単に使えるようにする
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { QuickAddSpotMenu } from './QuickAddSpotMenu';
 import { QuickAddSpotModal } from './QuickAddSpotModal';
 import { PinModeOverlay } from './PinModeOverlay';
@@ -20,9 +20,6 @@ interface QuickAddSpotFacadeProps {
   currentLocation: LocationCoords | null;
   centerCoords: { latitude: number; longitude: number };
   onClose: () => void;
-  onPinModeChange: (isPinMode: boolean) => void;
-  onMapTap: (handler: ((latitude: number, longitude: number) => void) | null) => void;
-  onCancelPinMode: (handler: (() => void) | null) => void;
   onSearchRequest?: () => void;
 }
 
@@ -34,9 +31,6 @@ export function QuickAddSpotFacade({
   currentLocation,
   centerCoords,
   onClose,
-  onPinModeChange,
-  onMapTap,
-  onCancelPinMode,
   onSearchRequest,
 }: QuickAddSpotFacadeProps) {
   const {
@@ -56,30 +50,6 @@ export function QuickAddSpotFacade({
     currentLocation,
     onMenuClose: onClose, // メニューを閉じるコールバックを渡す
   });
-
-  // ピンモードの変更を親に通知
-  useEffect(() => {
-    onPinModeChange(isPinMode);
-  }, [isPinMode, onPinModeChange]);
-
-  // 確定ハンドラーを親に渡す
-  useEffect(() => {
-    if (isPinMode) {
-      // 座標を受け取ってLocationCoords形式に変換
-      onMapTap((latitude, longitude) => handleConfirmPin({ latitude, longitude }));
-    } else {
-      onMapTap(null);
-    }
-  }, [isPinMode, handleConfirmPin, onMapTap]);
-
-  // キャンセルハンドラーを親に渡す
-  useEffect(() => {
-    if (isPinMode) {
-      onCancelPinMode(cancelPinMode);
-    } else {
-      onCancelPinMode(null);
-    }
-  }, [isPinMode, cancelPinMode, onCancelPinMode]);
 
   // ピンモード確定ハンドラー（centerCoordsを使用）
   const handlePinModeConfirm = () => {

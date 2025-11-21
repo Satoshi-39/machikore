@@ -3,13 +3,11 @@
  * https://developers.google.com/maps/documentation/places/web-service/op-overview
  */
 
-import { ENV } from '@/shared/config';
 import type {
   GooglePlacesAutocompleteResponse,
   GooglePlaceDetails,
   PlacesSearchOptions,
   PlaceSearchResult,
-  GooglePlaceAutocomplete,
 } from './types';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;

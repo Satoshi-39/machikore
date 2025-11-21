@@ -16,7 +16,8 @@ import { DefaultMapView, type MapViewHandle } from '@/widgets/default-map-view';
 import { DefaultMapHierarchy } from '@/widgets/default-map-hierarchy';
 import { UserMapView } from '@/widgets/user-map-view';
 import { UserMapList } from '@/widgets/user-map-list';
-import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
+import { DefaultMapSearch } from '@/widgets/default-map-search';
+import { UserMapSearch } from '@/widgets/user-map-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
 import { useLocation } from '@/shared/lib';
@@ -34,8 +35,6 @@ export function MapPage() {
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isMachiDetailVisible, setIsMachiDetailVisible] = useState(false);
-  const [isSpotDetailVisible, setIsSpotDetailVisible] = useState(false);
   const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
   const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
   const { location } = useLocation();
@@ -106,7 +105,6 @@ export function MapPage() {
             ? mapOwner?.avatar_url
             : user?.avatar_url) || undefined
         }
-        userId={(isUserMap ? mapOwner?.id : user?.id) ?? undefined}
         userMaps={userMaps}
         onClose={handleCloseUserMap}
         onMapSelect={handleMapSelect}
@@ -122,7 +120,6 @@ export function MapPage() {
             mapId={selectedMapId || id || null}
             userId={user?.id ?? null}
             defaultMapId={userMaps?.[0]?.id ?? null}
-            onSpotSelect={(spot) => setIsSpotDetailVisible(!!spot)}
             onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
             currentLocation={location}
             viewMode={viewMode}
@@ -136,7 +133,6 @@ export function MapPage() {
             ref={mapViewRef}
             userId={user?.id ?? null}
             currentLocation={location}
-            onMachiSelect={(machi) => setIsMachiDetailVisible(!!machi)}
             onMachiDetailSnapChange={(snapIndex) => setMachiDetailSnapIndex(snapIndex)}
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
@@ -163,16 +159,32 @@ export function MapPage() {
         {/* 検索フォーカス時：全画面検索UI（マップの上に重ねる） */}
         {isSearchFocused && (
           <View className="absolute inset-0 z-50">
-            <MapFullscreenSearch
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              onClose={handleSearchClose}
-              currentLocation={location}
-              onPlaceSelect={(place) => {
-                console.log('場所選択:', place);
-                // TODO: 場所選択後の処理（QuickAddSpotModalを開くなど）
-              }}
-            />
+            {isUserMap ? (
+              // ユーザーマップ: 自分のマップならGoogle Places API、他人のマップなら街コレデータ
+              <UserMapSearch
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                onClose={handleSearchClose}
+                currentLocation={location}
+                mapUserId={selectedMap?.user_id ?? null}
+                currentUserId={user?.id ?? null}
+                onPlaceSelect={(place) => {
+                  console.log('場所選択:', place);
+                  // TODO: 場所選択後の処理（QuickAddSpotModalを開くなど）
+                }}
+              />
+            ) : (
+              // デフォルトマップ: 街コレデータ（machis + 全spots）を検索
+              <DefaultMapSearch
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                onClose={handleSearchClose}
+                onPlaceSelect={(place) => {
+                  console.log('場所選択:', place);
+                  // TODO: 場所選択後の処理
+                }}
+              />
+            )}
           </View>
         )}
 

@@ -29,7 +29,6 @@ interface UserMapViewProps {
   mapId: string | null;
   userId?: string | null;
   defaultMapId?: string | null;
-  onSpotSelect?: (spot: SpotWithMasterSpot | null) => void;
   onSpotDetailSnapChange?: (snapIndex: number) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
@@ -45,7 +44,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       mapId,
       userId = null,
       defaultMapId = null,
-      onSpotSelect,
       onSpotDetailSnapChange,
       currentLocation = null,
       viewMode = 'map',
@@ -62,13 +60,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
-    const [isPinMode, setIsPinMode] = useState(false);
-    const [mapTapHandler, setMapTapHandler] = useState<
-      ((lat: number, lng: number) => void) | null
-    >(null);
-    const [cancelPinHandler, setCancelPinHandler] = useState<
-      (() => void) | null
-    >(null);
 
     // マップの中心座標を保持
     const [centerCoords, setCenterCoords] = useState<{
@@ -79,10 +70,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       longitude: 139.7671,
     });
 
-    // 選択状態を親に通知
+    // 選択状態を管理
     const handleSpotSelect = (spot: SpotWithMasterSpot | null) => {
       setSelectedSpot(spot);
-      onSpotSelect?.(spot);
     };
 
     // スナップ変更を親に通知して、ローカルstateも更新
@@ -280,9 +270,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           currentLocation={currentLocation}
           centerCoords={centerCoords}
           onClose={() => setIsQuickAddMenuOpen(false)}
-          onPinModeChange={setIsPinMode}
-          onMapTap={(handler) => setMapTapHandler(() => handler)}
-          onCancelPinMode={(handler) => setCancelPinHandler(() => handler)}
           onSearchRequest={onSearchRequest}
         />
       </View>

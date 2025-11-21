@@ -26,7 +26,7 @@ export function useQuickAddSpot({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPinMode, setIsPinMode] = useState(false);
   const [spotLocation, setSpotLocation] = useState<LocationCoords | null>(null);
-  const { mutate: createSpot, isPending, isError, error } = useCreateSpot();
+  const { mutate: createSpot, isError, error } = useCreateSpot();
 
   // エラーログ出力
   useEffect(() => {

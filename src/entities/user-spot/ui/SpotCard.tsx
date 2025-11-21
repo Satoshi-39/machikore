@@ -8,14 +8,14 @@ import React from 'react';
 import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import type { SpotRow } from '@/shared/types/database.types';
+import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { UUID } from '@/shared/types';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useToggleLike, useCheckUserLiked } from '@/entities/user-spot/api';
 import { useUser } from '@/entities/user';
 
 interface SpotCardProps {
-  spot: SpotRow;
+  spot: SpotWithMasterSpot;
   userId: UUID;
   machiName?: string;
   onPress?: () => void;
@@ -63,13 +63,13 @@ export function SpotCard({ spot, userId, machiName, onPress }: SpotCardProps) {
 
       {/* スポット名 */}
       <Text className="text-base font-semibold text-gray-900 mb-2">
-        📍 {spot.name}
+        📍 {spot.custom_name || spot.name}
       </Text>
 
-      {/* メモ */}
-      {spot.memo && (
+      {/* 説明 */}
+      {spot.description && (
         <Text className="text-sm text-gray-700 mb-2">
-          {spot.memo}
+          {spot.description}
         </Text>
       )}
 
