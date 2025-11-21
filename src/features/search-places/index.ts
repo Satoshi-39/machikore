@@ -4,6 +4,7 @@ export { MapSearchBar } from './ui/MapSearchBar';
 // Model (hooks)
 export { useSearchPlaces } from './model/useSearchPlaces';
 export { useSearchMachikorePlaces } from './model/useSearchMachikorePlaces';
+export { useSelectedPlaceStore } from './model/use-selected-place-store';
 
 // API Types
 export type {

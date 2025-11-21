@@ -23,6 +23,11 @@ import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
 import { useLocation } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
+import {
+  useSelectedPlaceStore,
+  type PlaceSearchResult,
+  type MachikorePlaceSearchResult,
+} from '@/features/search-places';
 
 export function MapPage() {
   const { id, addSpot } = useLocalSearchParams<{ id?: string; addSpot?: string }>();
@@ -77,6 +82,23 @@ export function MapPage() {
   const handleCloseUserMap = () => {
     setSelectedMapId(null);
     router.push('/(tabs)/map');
+  };
+
+  // 検索結果タップ時の処理
+  const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
+  const handlePlaceSelect = (place: PlaceSearchResult | MachikorePlaceSearchResult) => {
+    // 型ガード：PlaceSearchResult（Google Places API）かどうか判定
+    const isGooglePlace = 'googleData' in place;
+
+    if (isGooglePlace) {
+      // Google Places APIの結果 → スポット作成画面へ遷移
+      setSelectedPlace(place as PlaceSearchResult);
+      router.push('/create-spot');
+    } else {
+      // ローカルDBの結果 → 既存スポットなので詳細表示
+      // TODO: スポット詳細表示の実装（後で）
+      console.log('既存スポット選択:', place);
+    }
   };
 
   const handleMapSelect = (mapId: string) => {
@@ -169,10 +191,7 @@ export function MapPage() {
                 currentLocation={location}
                 mapUserId={selectedMap?.user_id ?? null}
                 currentUserId={user?.id ?? null}
-                onPlaceSelect={(place) => {
-                  console.log('場所選択:', place);
-                  // TODO: 場所選択後の処理（QuickAddSpotModalを開くなど）
-                }}
+                onPlaceSelect={handlePlaceSelect}
               />
             ) : (
               // デフォルトマップ: 街コレデータ（machis + 全spots）を検索
