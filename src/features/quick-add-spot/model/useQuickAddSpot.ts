@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { useCreateSpot } from '@/entities/spot';
+import { useCreateSpot } from '@/entities/user-spot';
 import type { LocationCoords } from '@/shared/lib/map/use-location';
 
 interface UseQuickAddSpotParams {

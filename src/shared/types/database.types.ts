@@ -126,17 +126,35 @@ export interface MapRow {
 export type MapInsert = Partial<MapRow> & Pick<MapRow, 'id' | 'user_id' | 'name' | 'created_at' | 'updated_at'>;
 export type MapUpdate = Partial<Omit<MapRow, 'id' | 'created_at'>>;
 
-// Spots
-export interface SpotRow {
+// Master Spots (マスタースポット - 正規化された場所データ)
+export interface MasterSpotRow {
   id: string;
-  map_id: string;
-  user_id: string;
-  machi_id: string;
   name: string;
-  address: string | null;
   latitude: number;
   longitude: number;
-  memo: string | null;
+  mapbox_place_id: string | null; // Mapboxの一意ID
+  mapbox_place_name: string | null; // Mapbox正式名称
+  mapbox_category: string | null; // JSON string array: ["poi", "restaurant"]
+  mapbox_address: string | null; // 住所
+  mapbox_context: string | null; // JSON: その他のMapbox情報
+  created_at: string;
+  updated_at: string;
+  synced_at: string | null;
+  is_synced: 0 | 1;
+}
+export type MasterSpotInsert = Partial<MasterSpotRow> & Pick<MasterSpotRow, 'id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
+export type MasterSpotUpdate = Partial<Omit<MasterSpotRow, 'id' | 'created_at'>>;
+
+// Spots (ユーザースポット - master_spotsへの参照 + ユーザーカスタマイズ)
+export interface SpotRow {
+  id: string;
+  user_id: string;
+  map_id: string;
+  master_spot_id: string; // master_spotsテーブルへの参照
+  machi_id: string;
+  custom_name: string | null; // ユーザー独自の名前（任意）
+  description: string | null; // 旧memoカラム
+  tags: string | null; // JSON string array: ["tag1", "tag2"]
   images_count: number;
   likes_count: number;
   comments_count: number;
@@ -146,8 +164,21 @@ export interface SpotRow {
   synced_at: string | null;
   is_synced: 0 | 1;
 }
-export type SpotInsert = Partial<SpotRow> & Pick<SpotRow, 'id' | 'map_id' | 'user_id' | 'machi_id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
+export type SpotInsert = Partial<SpotRow> & Pick<SpotRow, 'id' | 'user_id' | 'map_id' | 'master_spot_id' | 'machi_id' | 'created_at' | 'updated_at'>;
 export type SpotUpdate = Partial<Omit<SpotRow, 'id' | 'created_at'>>;
+
+// SpotWithMasterSpot (JOINクエリ用 - spotsとmaster_spotsを結合したデータ)
+export interface SpotWithMasterSpot extends SpotRow {
+  // master_spotsからの追加フィールド
+  name: string; // master_spots.name (基本名称)
+  latitude: number; // master_spots.latitude
+  longitude: number; // master_spots.longitude
+  address: string | null; // master_spots.mapbox_address
+  mapbox_place_id: string | null; // master_spots.mapbox_place_id
+  mapbox_place_name: string | null; // master_spots.mapbox_place_name
+  mapbox_category: string | null; // master_spots.mapbox_category
+  mapbox_context: string | null; // master_spots.mapbox_context
+}
 
 // Visits (街訪問記録)
 export interface VisitRow {

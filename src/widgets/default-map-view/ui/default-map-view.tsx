@@ -150,6 +150,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           <Mapbox.MapView
             style={{ flex: 1 }}
             styleURL={Mapbox.StyleURL.Street}
+            localizeLabels={true}
           >
             <Mapbox.Camera
               ref={cameraRef}

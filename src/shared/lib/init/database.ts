@@ -5,6 +5,7 @@
 import * as FileSystem from 'expo-file-system/legacy';
 import {
   initializeDatabase,
+  runMigrations,
   bulkInsertRegions,
   bulkInsertPrefectures,
   bulkInsertCities,
@@ -36,6 +37,11 @@ export async function initDatabase(): Promise<void> {
     console.log('🔄 データベースを再作成中...');
     initializeDatabase();
     console.log('✅ テーブル作成完了');
+
+    // マイグレーション実行
+    console.log('🔄 マイグレーション実行中...');
+    runMigrations();
+    console.log('✅ マイグレーション完了');
 
     // 地方データをチェック
     const regionCount = getRegionCount();

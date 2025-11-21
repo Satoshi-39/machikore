@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { MapSearchBar } from '@/features/search-map';
+import { MapSearchBar } from '@/features/search-places';
 import {
   ViewModeToggle,
   mapListConfig,

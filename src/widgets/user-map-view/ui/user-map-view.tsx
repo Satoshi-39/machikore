@@ -1,13 +1,13 @@
 /**
- * カスタムマップビューWidget - Mapbox地図表示
+ * ユーザーマップビューWidget - Mapbox地図表示
  *
  * FSDの原則：Widget層は複合的なUIコンポーネント
  */
 
-import { useSpots } from '@/entities/spot';
+import { useSpots } from '@/entities/user-spot';
 import { QuickAddSpotFacade } from '@/features/quick-add-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
-import type { SpotRow } from '@/shared/types/database.types';
+import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import { FAB, LocationButton } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
@@ -25,11 +25,11 @@ export interface MapViewHandle {
   flyToLocation: (longitude: number, latitude: number) => void;
 }
 
-interface CustomMapViewProps {
+interface UserMapViewProps {
   mapId: string | null;
   userId?: string | null;
   defaultMapId?: string | null;
-  onSpotSelect?: (spot: SpotRow | null) => void;
+  onSpotSelect?: (spot: SpotWithMasterSpot | null) => void;
   onSpotDetailSnapChange?: (snapIndex: number) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
@@ -39,7 +39,7 @@ interface CustomMapViewProps {
   onSearchRequest?: () => void;
 }
 
-export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
+export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
   (
     {
       mapId,
@@ -58,7 +58,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
   ) => {
     const cameraRef = useRef<Mapbox.Camera>(null);
     const { data: spots = [] } = useSpots(mapId ?? '');
-    const [selectedSpot, setSelectedSpot] = useState<SpotRow | null>(null);
+    const [selectedSpot, setSelectedSpot] = useState<SpotWithMasterSpot | null>(null);
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
@@ -80,7 +80,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
     });
 
     // 選択状態を親に通知
-    const handleSpotSelect = (spot: SpotRow | null) => {
+    const handleSpotSelect = (spot: SpotWithMasterSpot | null) => {
       setSelectedSpot(spot);
       onSpotSelect?.(spot);
     };
@@ -125,7 +125,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
     };
 
     // カメラを単一スポットに移動
-    const moveCameraToSingleSpot = (spot: SpotRow) => {
+    const moveCameraToSingleSpot = (spot: SpotWithMasterSpot) => {
       if (!cameraRef.current) return;
 
       cameraRef.current.setCamera({
@@ -136,7 +136,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
     };
 
     // カメラを全スポットが入る範囲に移動
-    const fitCameraToAllSpots = (spots: SpotRow[]) => {
+    const fitCameraToAllSpots = (spots: SpotWithMasterSpot[]) => {
       if (!cameraRef.current) return;
 
       const lngs = spots.map((s) => s.longitude);
@@ -211,6 +211,7 @@ export const CustomMapView = forwardRef<MapViewHandle, CustomMapViewProps>(
         <Mapbox.MapView
           style={{ flex: 1 }}
           styleURL={Mapbox.StyleURL.Street}
+          localizeLabels={true}
           onCameraChanged={handleCameraChanged}
           onDidFinishLoadingMap={handleMapReady}
         >

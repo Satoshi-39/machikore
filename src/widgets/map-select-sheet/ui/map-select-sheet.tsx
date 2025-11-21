@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 import { useUserStore } from '@/entities/user';
-import { useUserMaps } from '@/entities/map';
+import { useUserMaps } from '@/entities/user-map';
 
 interface MapSelectSheetProps {
   onSelectMap: (mapId: string) => void;

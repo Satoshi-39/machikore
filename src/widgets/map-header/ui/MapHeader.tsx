@@ -1,7 +1,7 @@
 /**
  * マップヘッダーWidget
  *
- * デフォルトマップとカスタムマップのヘッダー表示を切り替える
+ * デフォルトマップとユーザーマップのヘッダー表示を切り替える
  * FSDの原則：Widget層は複数の要素を組み合わせた複合コンポーネント
  */
 
@@ -12,7 +12,7 @@ import { Image, Pressable, ScrollView, Text, View, Modal, Animated } from 'react
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface MapHeaderProps {
-  isCustomMap: boolean;
+  isUserMap: boolean;
   mapTitle?: string;
   userName?: string;
   userAvatarUrl?: string;
@@ -24,7 +24,7 @@ interface MapHeaderProps {
 }
 
 export function MapHeader({
-  isCustomMap,
+  isUserMap,
   mapTitle,
   userName,
   userAvatarUrl,
@@ -70,8 +70,8 @@ export function MapHeader({
 
   return (
     <View className="bg-white px-5 py-4">
-      {isCustomMap ? (
-        // カスタムマップ：ユーザーアイコン + マップ名（左）、アクションボタン群（右）
+      {isUserMap ? (
+        // ユーザーマップ：ユーザーアイコン + マップ名（左）、アクションボタン群（右）
         <View className="flex-row items-center justify-between">
           {/* 左側：ユーザーアイコン + マップ名 */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>

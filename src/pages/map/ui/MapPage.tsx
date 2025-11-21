@@ -2,7 +2,7 @@
  * マップページ
  *
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
- * selectedMapIdの有無でデフォルトマップ/カスタムマップを切り替え
+ * selectedMapIdの有無でデフォルトマップ/ユーザーマップを切り替え
  * URLクエリパラメータ (?id=xxx) でマップ指定可能（共有用）
  */
 
@@ -11,11 +11,11 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useUserStore, useUser } from '@/entities/user';
-import { useMapStore, useMap, useUserMaps } from '@/entities/map';
+import { useMapStore, useMap, useUserMaps } from '@/entities/user-map';
 import { DefaultMapView, type MapViewHandle } from '@/widgets/default-map-view';
 import { DefaultMapHierarchy } from '@/widgets/default-map-hierarchy';
-import { CustomMapView } from '@/widgets/custom-map-view';
-import { CustomMapList } from '@/widgets/custom-map-list';
+import { UserMapView } from '@/widgets/user-map-view';
+import { UserMapList } from '@/widgets/user-map-list';
 import { MapFullscreenSearch } from '@/widgets/map-fullscreen-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
@@ -59,8 +59,8 @@ export function MapPage() {
     }
   }, [addSpot, id, router]);
 
-  // URLパラメータのidもチェック（storeが更新される前でもカスタムマップとして扱う）
-  const isCustomMap = selectedMapId != null || id != null;
+  // URLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
+  const isUserMap = selectedMapId != null || id != null;
 
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
@@ -74,7 +74,7 @@ export function MapPage() {
     setIsSearchFocused(true);
   };
 
-  const handleCloseCustomMap = () => {
+  const handleCloseUserMap = () => {
     setSelectedMapId(null);
     router.push('/(tabs)/map');
   };
@@ -94,30 +94,30 @@ export function MapPage() {
     <SafeAreaView className="flex-1 bg-gray-100" edges={['top']}>
       {/* ヘッダー */}
       <MapHeader
-        isCustomMap={isCustomMap}
+        isUserMap={isUserMap}
         mapTitle={selectedMap?.name}
         userName={
-          (isCustomMap
+          (isUserMap
             ? mapOwner?.display_name
             : user?.display_name) || undefined
         }
         userAvatarUrl={
-          (isCustomMap
+          (isUserMap
             ? mapOwner?.avatar_url
             : user?.avatar_url) || undefined
         }
-        userId={(isCustomMap ? mapOwner?.id : user?.id) ?? undefined}
+        userId={(isUserMap ? mapOwner?.id : user?.id) ?? undefined}
         userMaps={userMaps}
-        onClose={handleCloseCustomMap}
+        onClose={handleCloseUserMap}
         onMapSelect={handleMapSelect}
         onUserPress={handleUserPress}
       />
 
       {/* マップ表示（常にレンダリング） */}
       <View className="flex-1">
-        {/* デフォルトマップ or カスタムマップ */}
-        {isCustomMap ? (
-          <CustomMapView
+        {/* デフォルトマップ or ユーザーマップ */}
+        {isUserMap ? (
+          <UserMapView
             ref={mapViewRef}
             mapId={selectedMapId || id || null}
             userId={user?.id ?? null}
@@ -155,8 +155,8 @@ export function MapPage() {
               className="px-5 pt-5 pb-3"
             />
 
-            {/* デフォルトマップの階層リスト or カスタムマップのフラットリスト */}
-            {isCustomMap ? <CustomMapList /> : <DefaultMapHierarchy />}
+            {/* デフォルトマップの階層リスト or ユーザーマップのフラットリスト */}
+            {isUserMap ? <UserMapList /> : <DefaultMapHierarchy />}
           </View>
         )}
 
@@ -167,6 +167,11 @@ export function MapPage() {
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               onClose={handleSearchClose}
+              currentLocation={location}
+              onPlaceSelect={(place) => {
+                console.log('場所選択:', place);
+                // TODO: 場所選択後の処理（QuickAddSpotModalを開くなど）
+              }}
             />
           </View>
         )}

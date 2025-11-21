@@ -12,29 +12,57 @@ import type { CreateSpotParams } from './types';
 // ===============================
 
 /**
- * 新規スポットデータを作成
+ * 新規スポットデータを作成（新スキーマ対応）
+ * spotとmasterSpotの両方のデータを返す
  */
-export function createSpotData(params: CreateSpotParams): SpotRow {
+export function createSpotData(params: CreateSpotParams): {
+  spot: SpotRow;
+  masterSpot: {
+    id: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+    mapbox_place_id: string | null;
+    mapbox_place_name: string | null;
+    mapbox_category: string | null;
+    mapbox_address: string | null;
+    mapbox_context: string | null;
+  };
+} {
   const now = new Date().toISOString();
+  const spotId = uuidv4();
+  const masterSpotId = uuidv4();
 
   return {
-    id: uuidv4(),
-    map_id: params.mapId,
-    user_id: params.userId,
-    machi_id: params.machiId,
-    name: params.name,
-    address: params.address || null,
-    latitude: params.latitude,
-    longitude: params.longitude,
-    memo: params.memo || null,
-    images_count: 0,
-    likes_count: 0,
-    comments_count: 0,
-    order_index: 0,
-    created_at: now,
-    updated_at: now,
-    synced_at: null,
-    is_synced: 0,
+    spot: {
+      id: spotId,
+      map_id: params.mapId,
+      user_id: params.userId,
+      machi_id: params.machiId,
+      master_spot_id: masterSpotId, // 後で insertOrGetMasterSpot で置き換えられる
+      custom_name: params.customName || null,
+      description: params.description || null,
+      tags: params.tags ? JSON.stringify(params.tags) : null,
+      images_count: 0,
+      likes_count: 0,
+      comments_count: 0,
+      order_index: 0,
+      created_at: now,
+      updated_at: now,
+      synced_at: null,
+      is_synced: 0,
+    },
+    masterSpot: {
+      id: masterSpotId,
+      name: params.name,
+      latitude: params.latitude,
+      longitude: params.longitude,
+      mapbox_place_id: params.mapboxPlaceId || null,
+      mapbox_place_name: params.mapboxPlaceName || null,
+      mapbox_category: params.mapboxCategory ? JSON.stringify(params.mapboxCategory) : null,
+      mapbox_address: params.address || null,
+      mapbox_context: params.mapboxContext ? JSON.stringify(params.mapboxContext) : null,
+    },
   };
 }
 
@@ -60,8 +88,8 @@ export function validateCreateSpotParams(
     return { valid: false, error: 'スポット名は100文字以内にしてください' };
   }
 
-  if (params.memo && params.memo.length > 2000) {
-    return { valid: false, error: 'メモは2000文字以内にしてください' };
+  if (params.description && params.description.length > 2000) {
+    return { valid: false, error: '説明は2000文字以内にしてください' };
   }
 
   if (params.images && params.images.length > 10) {

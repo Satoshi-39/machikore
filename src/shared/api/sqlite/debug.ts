@@ -17,7 +17,8 @@ export function logAllTableCounts() {
     'users',
     'visits',
     'maps',
-    'spots',
+    'user_spots',
+    'master_spots',
     'images',
     'schedules',
     'machi',
@@ -61,23 +62,31 @@ export function logTableData(tableName: string, limit: number = 10) {
 }
 
 /**
- * スポットデータを表示
+ * スポットデータを表示（master_spotsと結合）
  */
 export function logSpots(mapId?: string, limit: number = 10) {
-  console.log('=== Spots ===');
+  console.log('=== User Spots ===');
   try {
     const sql = mapId
-      ? 'SELECT * FROM spots WHERE map_id = ? ORDER BY order_index ASC, created_at DESC LIMIT ?;'
-      : 'SELECT * FROM spots ORDER BY created_at DESC LIMIT ?;';
+      ? `SELECT s.*, ms.name, ms.latitude, ms.longitude, ms.mapbox_address as address
+         FROM user_spots s
+         JOIN master_spots ms ON s.master_spot_id = ms.id
+         WHERE s.map_id = ?
+         ORDER BY s.order_index ASC, s.created_at DESC LIMIT ?;`
+      : `SELECT s.*, ms.name, ms.latitude, ms.longitude, ms.mapbox_address as address
+         FROM user_spots s
+         JOIN master_spots ms ON s.master_spot_id = ms.id
+         ORDER BY s.created_at DESC LIMIT ?;`;
     const params = mapId ? [mapId, limit] : [limit];
 
-    const spots = queryAll<SpotRow>(sql, params);
+    const spots = queryAll<any>(sql, params);
     console.log(`Found ${spots.length} spots:`);
-    spots.forEach((spot: SpotRow, index: number) => {
+    spots.forEach((spot: any, index: number) => {
       console.log(`\n[${index + 1}] Spot ID: ${spot.id}`);
-      console.log(`  Name: ${spot.name}`);
+      console.log(`  Name: ${spot.custom_name || spot.name}`);
       console.log(`  Address: ${spot.address || 'None'}`);
       console.log(`  Map ID: ${spot.map_id}`);
+      console.log(`  Master Spot ID: ${spot.master_spot_id}`);
       console.log(`  Machi ID: ${spot.machi_id || 'None'}`);
       console.log(`  Location: ${spot.latitude}, ${spot.longitude}`);
       console.log(`  Created at: ${spot.created_at}`);
@@ -85,7 +94,7 @@ export function logSpots(mapId?: string, limit: number = 10) {
   } catch (error) {
     console.error('Error reading spots:', error);
   }
-  console.log('=============');
+  console.log('==================');
 }
 
 /**

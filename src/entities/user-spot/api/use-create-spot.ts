@@ -25,19 +25,19 @@ export function useCreateSpot() {
 
       console.log('✅ useCreateSpot: バリデーション成功');
 
-      // スポットを作成
-      const newSpot = createSpotData(params);
-      console.log('📝 useCreateSpot: スポットデータ作成完了', newSpot);
+      // スポットを作成（新スキーマ対応：spotとmasterSpotの両方を作成）
+      const spotData = createSpotData(params);
+      console.log('📝 useCreateSpot: スポットデータ作成完了', spotData);
 
       try {
-        insertSpot(newSpot);
+        insertSpot(spotData);
         console.log('💾 useCreateSpot: DB挿入完了');
       } catch (error) {
         console.error('❌ useCreateSpot: DB挿入エラー', error);
         throw error;
       }
 
-      return newSpot.id;
+      return spotData.spot.id;
     },
     onSuccess: (spotId) => {
       console.log('🎊 useCreateSpot: 成功コールバック実行', spotId);

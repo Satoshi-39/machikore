@@ -8,10 +8,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
-import type { SpotRow } from '@/shared/types/database.types';
+import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 
 interface SpotDetailCardProps {
-  spot: SpotRow;
+  spot: SpotWithMasterSpot;
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
 }
@@ -97,8 +97,8 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
           </Text>
         </View>
 
-        {/* メモ */}
-        {spot.memo && (
+        {/* 説明 */}
+        {spot.description && (
           <View className="mb-3">
             <View className="flex-row items-center mb-1">
               <Ionicons
@@ -107,10 +107,10 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
                 color={colors.text.secondary}
               />
               <Text className="text-sm font-semibold text-gray-700 ml-1">
-                メモ
+                説明
               </Text>
             </View>
-            <Text className="text-sm text-gray-600 pl-5">{spot.memo}</Text>
+            <Text className="text-sm text-gray-600 pl-5">{spot.description}</Text>
           </View>
         )}
 

@@ -206,18 +206,50 @@ export function initializeDatabase(): void {
       ON maps(is_synced);
     `);
 
-    // 7. スポットテーブル
+    // 7. マスタースポットテーブル（共有スポットデータ）
     db.execSync(`
-      CREATE TABLE IF NOT EXISTS spots (
+      CREATE TABLE IF NOT EXISTS master_spots (
         id TEXT PRIMARY KEY,
-        map_id TEXT NOT NULL,
-        user_id TEXT NOT NULL,
-        machi_id TEXT NOT NULL,
         name TEXT NOT NULL,
-        address TEXT,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,
-        memo TEXT,
+        mapbox_place_id TEXT,
+        mapbox_place_name TEXT,
+        mapbox_category TEXT,
+        mapbox_address TEXT,
+        mapbox_context TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_master_spots_mapbox_place_id
+      ON master_spots(mapbox_place_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_master_spots_name
+      ON master_spots(name);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_master_spots_location
+      ON master_spots(latitude, longitude);
+    `);
+
+    // 8. ユーザースポットテーブル（ユーザーごとのスポット）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS user_spots (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        map_id TEXT NOT NULL,
+        master_spot_id TEXT NOT NULL,
+        machi_id TEXT NOT NULL,
+        custom_name TEXT,
+        description TEXT,
+        tags TEXT,
         images_count INTEGER DEFAULT 0,
         likes_count INTEGER DEFAULT 0,
         comments_count INTEGER DEFAULT 0,
@@ -227,33 +259,39 @@ export function initializeDatabase(): void {
         synced_at TEXT,
         is_synced INTEGER DEFAULT 0,
         FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
-        FOREIGN KEY (machi_id) REFERENCES machi(id)
+        FOREIGN KEY (master_spot_id) REFERENCES master_spots(id) ON DELETE CASCADE,
+        FOREIGN KEY (machi_id) REFERENCES machi(id),
+        UNIQUE(user_id, map_id, master_spot_id)
       );
     `);
 
     // インデックス作成
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_spots_map_id
-      ON spots(map_id);
+      CREATE INDEX IF NOT EXISTS idx_user_spots_user_id
+      ON user_spots(user_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_spots_user_id
-      ON spots(user_id);
+      CREATE INDEX IF NOT EXISTS idx_user_spots_map_id
+      ON user_spots(map_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_spots_machi_id
-      ON spots(machi_id);
+      CREATE INDEX IF NOT EXISTS idx_user_spots_master_spot_id
+      ON user_spots(master_spot_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_spots_created_at
-      ON spots(created_at DESC);
+      CREATE INDEX IF NOT EXISTS idx_user_spots_machi_id
+      ON user_spots(machi_id);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_spots_is_synced
-      ON spots(is_synced);
+      CREATE INDEX IF NOT EXISTS idx_user_spots_created_at
+      ON user_spots(created_at DESC);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_user_spots_is_synced
+      ON user_spots(is_synced);
     `);
 
-    // 8. 訪問記録テーブル（街訪問）
+    // 9. 訪問記録テーブル（街訪問）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS visits (
         id TEXT PRIMARY KEY,
@@ -588,4 +626,167 @@ export function recordVersion(version: number): void {
     'INSERT INTO db_version (version, applied_at) VALUES (?, ?);',
     [version, new Date().toISOString()]
   );
+}
+
+/**
+ * マイグレーション5: master_spotsテーブル追加と2テーブル構成への移行
+ */
+export function migration005_AddMasterSpots(): void {
+  const db = getDatabase();
+
+  console.log('[Migration 005] Starting: Add master_spots and refactor spots...');
+
+  db.execSync('BEGIN TRANSACTION;');
+
+  try {
+    // 1. master_spotsテーブル作成
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS master_spots (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        latitude REAL NOT NULL,
+        longitude REAL NOT NULL,
+        mapbox_place_id TEXT,
+        mapbox_place_name TEXT,
+        mapbox_category TEXT,
+        mapbox_address TEXT,
+        mapbox_context TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0
+      );
+    `);
+
+    // インデックス作成
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_master_spots_mapbox_place_id ON master_spots(mapbox_place_id);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_master_spots_name ON master_spots(name);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_master_spots_location ON master_spots(latitude, longitude);');
+
+    // 2. 既存spotsデータをバックアップ（もしspotsテーブルが存在する場合）
+    const tableExists = db.getAllSync<{ count: number }>(
+      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='spots';"
+    )[0];
+
+    if (tableExists && tableExists.count > 0) {
+      db.execSync('CREATE TABLE spots_backup AS SELECT * FROM spots;');
+    }
+
+    // 3. 既存spotsからmaster_spotsを作成（重複除外）
+    if (tableExists && tableExists.count > 0) {
+      db.execSync(`
+        INSERT INTO master_spots (id, name, latitude, longitude, created_at, updated_at)
+        SELECT
+          lower(hex(randomblob(16))) as id,
+          name,
+          latitude,
+          longitude,
+          MIN(created_at) as created_at,
+          MIN(created_at) as updated_at
+        FROM spots_backup
+        GROUP BY name, ROUND(latitude, 6), ROUND(longitude, 6);
+      `);
+    }
+
+    // 4. spotsテーブルを削除（外部キー制約も削除）
+    db.execSync('DROP TABLE IF EXISTS spots;');
+
+    // 5. 新しいuser_spotsテーブルを作成
+    db.execSync(`
+      CREATE TABLE user_spots (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        map_id TEXT NOT NULL,
+        master_spot_id TEXT NOT NULL,
+        machi_id TEXT NOT NULL,
+        custom_name TEXT,
+        description TEXT,
+        tags TEXT,
+        images_count INTEGER DEFAULT 0,
+        likes_count INTEGER DEFAULT 0,
+        comments_count INTEGER DEFAULT 0,
+        order_index INTEGER DEFAULT 0,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0,
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+        FOREIGN KEY (master_spot_id) REFERENCES master_spots(id) ON DELETE CASCADE,
+        FOREIGN KEY (machi_id) REFERENCES machi(id),
+        UNIQUE(user_id, map_id, master_spot_id)
+      );
+    `);
+
+    // インデックス作成
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_user_id ON user_spots(user_id);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_map_id ON user_spots(map_id);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_master_spot_id ON user_spots(master_spot_id);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_machi_id ON user_spots(machi_id);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_created_at ON user_spots(created_at DESC);');
+    db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_is_synced ON user_spots(is_synced);');
+
+    // 6. バックアップデータを新構造に移行
+    if (tableExists && tableExists.count > 0) {
+      db.execSync(`
+        INSERT INTO user_spots (
+        id, user_id, map_id, master_spot_id, machi_id,
+        description, images_count, likes_count, comments_count,
+        order_index, created_at, updated_at, synced_at, is_synced
+      )
+      SELECT
+        sb.id,
+        sb.user_id,
+        sb.map_id,
+        ms.id as master_spot_id,
+        sb.machi_id,
+        sb.memo as description,
+        sb.images_count,
+        sb.likes_count,
+        sb.comments_count,
+        sb.order_index,
+        sb.created_at,
+        sb.updated_at,
+        sb.synced_at,
+        sb.is_synced
+        FROM spots_backup sb
+        JOIN master_spots ms ON (
+          ms.name = sb.name
+          AND ROUND(ms.latitude, 6) = ROUND(sb.latitude, 6)
+          AND ROUND(ms.longitude, 6) = ROUND(sb.longitude, 6)
+        );
+      `);
+
+      // 7. バックアップテーブルを削除
+      db.execSync('DROP TABLE spots_backup;');
+    }
+
+    // コミット
+    db.execSync('COMMIT;');
+
+    console.log('[Migration 005] Completed successfully');
+  } catch (error) {
+    db.execSync('ROLLBACK;');
+    console.error('[Migration 005] Failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * 全マイグレーションを実行
+ */
+export function runMigrations(): void {
+  // バージョンテーブル初期化
+  initVersionTable();
+
+  const currentVersion = getCurrentVersion();
+  console.log(`[Migrations] Current database version: ${currentVersion}`);
+
+  // マイグレーション5: master_spots追加
+  if (currentVersion < 5) {
+    migration005_AddMasterSpots();
+    recordVersion(5);
+    console.log('[Migrations] Applied version 5');
+  }
+
+  console.log('[Migrations] All migrations completed');
 }

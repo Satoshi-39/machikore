@@ -8,7 +8,7 @@ import React from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { CreateMapForm } from '@/features/create-map';
-import { useCreateMap } from '@/entities/map';
+import { useCreateMap } from '@/entities/user-map';
 import { useUserStore } from '@/entities/user';
 
 export function CreateMapPage() {

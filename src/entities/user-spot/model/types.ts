@@ -16,30 +16,37 @@ export interface SpotWithImages extends SpotRow {
 }
 
 /**
- * スポット作成パラメータ
+ * スポット作成パラメータ（新スキーマ対応）
  */
 export interface CreateSpotParams {
   userId: string;
   mapId: string;
   machiId: string;
   name: string;
-  address?: string;
+  address?: string | null;
   latitude: number;
   longitude: number;
-  memo?: string;
+  description?: string | null; // 旧memo
+  customName?: string | null; // ユーザー独自の名前
+  tags?: string[]; // タグ配列
   images?: string[]; // 画像URI配列
+  // Mapboxデータ（検索から選択した場合）
+  mapboxPlaceId?: string | null;
+  mapboxPlaceName?: string | null;
+  mapboxCategory?: string[] | null;
+  mapboxContext?: any | null;
 }
 
 /**
- * スポット更新パラメータ
+ * スポット更新パラメータ（新スキーマ対応）
+ * ユーザーカスタマイズ可能なフィールドのみ
  */
 export interface UpdateSpotParams {
   spotId: string;
-  name?: string;
-  address?: string;
-  latitude?: number;
-  longitude?: number;
-  memo?: string;
+  customName?: string | null;
+  description?: string | null; // 旧memo
+  tags?: string[] | null;
+  orderIndex?: number;
 }
 
 /**

@@ -5,13 +5,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getSpotById } from '@/shared/api/sqlite';
-import type { SpotRow } from '@/shared/types/database.types';
+import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 
 /**
- * IDでスポットを取得
+ * IDでスポットを取得（master_spotsと結合）
  */
 export function useSpotById(spotId: string) {
-  return useQuery<SpotRow | null, Error>({
+  return useQuery<SpotWithMasterSpot | null, Error>({
     queryKey: QUERY_KEYS.spotsDetail(spotId),
     queryFn: () => {
       return getSpotById(spotId);
