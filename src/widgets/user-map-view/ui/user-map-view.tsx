@@ -7,6 +7,7 @@
 import { useSpots } from '@/entities/user-spot';
 import { QuickAddSpotFacade } from '@/features/quick-add-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
+import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import { FAB, LocationButton } from '@/shared/ui';
@@ -62,6 +63,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
 
+    const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
+    const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
+
+    // 初回カメラ移動済みフラグ（マップごとにリセット）
+    const hasInitialCameraMoved = useRef(false);
+
     // マップの中心座標を保持
     const [centerCoords, setCenterCoords] = useState<{
       latitude: number;
@@ -106,10 +113,29 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       setIsMapReady(true);
     };
 
-    // mapIdが変更されたらスポット詳細カードを閉じる
+    // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット
     useEffect(() => {
       setSelectedSpot(null);
+      hasInitialCameraMoved.current = false;
     }, [mapId]);
+
+    // 新規登録したスポットへジャンプ
+    useEffect(() => {
+      console.log('🔍 [Jump useEffect] jumpToSpotId:', jumpToSpotId, 'spots:', spots.length);
+      if (!jumpToSpotId) return;
+
+      const spot = spots.find((s) => s.id === jumpToSpotId);
+      if (spot) {
+        console.log('📍 [Jump] スポットにジャンプ:', spot.name);
+        setTimeout(() => {
+          moveCameraToSingleSpot(spot);
+          setSelectedSpot(spot);
+        }, 100);
+        setJumpToSpotId(null);
+      } else {
+        console.log('⚠️ [Jump] スポットが見つかりません');
+      }
+    }, [jumpToSpotId, spots, moveCameraToSingleSpot, setJumpToSpotId]);
 
     // autoOpenQuickAddがtrueの場合、マウント時にQuickAddSpotMenuを開く
     useEffect(() => {
@@ -121,18 +147,29 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       }
     }, [autoOpenQuickAdd, mapId, quickAddTrigger]);
 
-    // スポットが読み込まれたら全スポットを表示
+    // 全スポット表示（マップごとに初回のみ）
     useEffect(() => {
-      if (spots.length === 0 || !isMapReady) return;
+      console.log('🔍 [All Spots useEffect]', {
+        spotsLength: spots.length,
+        isMapReady,
+        hasInitialCameraMoved: hasInitialCameraMoved.current,
+        jumpToSpotId,
+      });
+
+      if (spots.length === 0 || !isMapReady || hasInitialCameraMoved.current || jumpToSpotId) {
+        return;
+      }
 
       setTimeout(() => {
+        console.log('📸 [All Spots] 全スポット表示');
         if (spots.length === 1) {
           moveCameraToSingleSpot(spots[0]!);
         } else {
           fitCameraToAllSpots(spots);
         }
+        hasInitialCameraMoved.current = true;
       }, 100);
-    }, [spots, mapId, isMapReady]);
+    }, [spots, isMapReady, jumpToSpotId, moveCameraToSingleSpot, fitCameraToAllSpots]);
 
     // カメラ変更時に中心座標を更新
     const handleCameraChanged = async (state: any) => {

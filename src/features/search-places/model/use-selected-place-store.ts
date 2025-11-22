@@ -11,10 +11,15 @@ interface SelectedPlaceStore {
   selectedPlace: PlaceSearchResult | null;
   setSelectedPlace: (place: PlaceSearchResult | null) => void;
   clearSelectedPlace: () => void;
+  // 登録したスポットへのジャンプ用
+  jumpToSpotId: string | null;
+  setJumpToSpotId: (spotId: string | null) => void;
 }
 
 export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
   selectedPlace: null,
   setSelectedPlace: (place) => set({ selectedPlace: place }),
   clearSelectedPlace: () => set({ selectedPlace: null }),
+  jumpToSpotId: null,
+  setJumpToSpotId: (spotId) => set({ jumpToSpotId: spotId }),
 }));

@@ -16,6 +16,7 @@ export function useSpotForm() {
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
+  const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const { mutate: createSpot, isPending } = useCreateSpot();
 
   // データが存在しない場合は静かにnullを返す
@@ -64,11 +65,13 @@ export function useSpotForm() {
         googleUserRatingCount: selectedPlace.googleData.userRatingCount,
       },
       {
-        onSuccess: () => {
+        onSuccess: (spotId) => {
           Alert.alert('登録完了', 'スポットを登録しました', [
             {
               text: 'OK',
               onPress: () => {
+                console.log('🎯 [useSpotForm] setJumpToSpotId呼び出し:', spotId);
+                setJumpToSpotId(spotId);
                 router.back();
               },
             },

@@ -16,13 +16,24 @@ export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
   // カメラを単一スポットに移動
   const moveCameraToSingleSpot = useCallback(
     (spot: SpotWithMasterSpot) => {
-      if (!cameraRef.current) return;
+      console.log('🎥 [moveCameraToSingleSpot] 呼び出し:', {
+        spot: spot.name,
+        coords: [spot.longitude, spot.latitude],
+        cameraRefExists: !!cameraRef.current,
+      });
+
+      if (!cameraRef.current) {
+        console.warn('⚠️ [moveCameraToSingleSpot] cameraRef.current is null');
+        return;
+      }
 
       cameraRef.current.setCamera({
         centerCoordinate: [spot.longitude, spot.latitude],
         zoomLevel: 14,
         animationDuration: 1000,
       });
+
+      console.log('✅ [moveCameraToSingleSpot] setCamera実行完了');
     },
     [cameraRef]
   );
