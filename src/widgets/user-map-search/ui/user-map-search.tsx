@@ -13,20 +13,22 @@ import {
   useSearchPlaces,
   useSearchMachikorePlaces,
   type PlaceSearchResult,
-  type MachikorePlaceSearchResult,
 } from '@/features/search-places';
+import { usePlaceSelectHandler } from '../model';
 
 interface UserMapSearchProps {
+  mapId: string | null;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClose: () => void;
-  onPlaceSelect?: (place: PlaceSearchResult | MachikorePlaceSearchResult) => void;
-  currentLocation?: { latitude: number; longitude: number } | null;
+  onPlaceSelect?: (place: PlaceSearchResult) => void; // 新規スポットのみ
+  currentLocation?: { latitude: number; longitude: number} | null;
   mapUserId?: string | null; // マップの所有者ID
   currentUserId?: string | null; // 現在のユーザーID
 }
 
 export function UserMapSearch({
+  mapId,
   searchQuery,
   onSearchChange,
   onClose,
@@ -57,6 +59,14 @@ export function UserMapSearch({
   const searchHook = isOwnMap ? googlePlacesSearch : machikorePlacesSearch;
   const { results, isLoading, error, search, config } = searchHook;
 
+  // 検索結果選択ハンドラー（Model層）
+  const { handlePlaceSelect } = usePlaceSelectHandler({
+    mapId,
+    onPlaceSelect,
+    onClose,
+    endSession: isOwnMap && 'endSession' in googlePlacesSearch ? googlePlacesSearch.endSession : undefined,
+  });
+
   // 検索クエリが変更されたら検索を実行（デバウンス付き）
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -65,15 +75,6 @@ export function UserMapSearch({
 
     return () => clearTimeout(timeoutId);
   }, [searchQuery, search, config.debounceMs]);
-
-  const handlePlaceSelect = (place: PlaceSearchResult | MachikorePlaceSearchResult) => {
-    // 自分のマップ（Google Places API使用時）のみセッション終了
-    if (isOwnMap && 'endSession' in googlePlacesSearch) {
-      googlePlacesSearch.endSession();
-    }
-    onPlaceSelect?.(place);
-    onClose();
-  };
 
   const handleClose = () => {
     // 自分のマップ（Google Places API使用時）のみセッション終了

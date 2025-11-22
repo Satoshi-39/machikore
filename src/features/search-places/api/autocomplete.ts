@@ -1,21 +1,18 @@
 /**
- * Google Places API (New)
- * https://developers.google.com/maps/documentation/places/web-service/op-overview
+ * Google Places Autocomplete API
+ *
+ * 検索クエリから場所の候補リストを取得
  */
 
 import type {
   GooglePlacesAutocompleteResponse,
-  GooglePlaceDetails,
   PlacesSearchOptions,
   PlaceSearchResult,
 } from './types';
+import { fetchPlaceDetails, convertToPlaceResult } from './placeDetails';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
-
-// Google Places API (New) のエンドポイント
-const AUTOCOMPLETE_URL =
-  'https://places.googleapis.com/v1/places:autocomplete';
-const PLACE_DETAILS_URL = 'https://places.googleapis.com/v1/places';
+const AUTOCOMPLETE_URL = 'https://places.googleapis.com/v1/places:autocomplete';
 
 /**
  * Google Places Autocomplete APIで場所を検索
@@ -107,79 +104,4 @@ export async function searchPlaces(
     console.error('❌ Google Places検索エラー:', error);
     throw error;
   }
-}
-
-/**
- * Place IDから詳細情報を取得
- */
-async function fetchPlaceDetails(
-  placeId: string,
-  languageCode: string = 'ja',
-  sessionToken?: string
-): Promise<GooglePlaceDetails> {
-  if (!GOOGLE_PLACES_API_KEY) {
-    throw new Error('Google Places API key is not configured');
-  }
-
-  // 取得するフィールドを指定（料金最適化のため）
-  const fields = [
-    'id',
-    'displayName',
-    'formattedAddress',
-    'location',
-    'types',
-    'addressComponents',
-    'internationalPhoneNumber',
-    'nationalPhoneNumber',
-    'websiteUri',
-    'rating',
-    'userRatingCount',
-    'googleMapsUri',
-  ].join(',');
-
-  // sessionTokenがある場合はURLパラメータに追加（セッション終了）
-  let url = `${PLACE_DETAILS_URL}/${placeId}?fields=${fields}&languageCode=${languageCode}`;
-  if (sessionToken) {
-    url += `&sessionToken=${sessionToken}`;
-  }
-
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'X-Goog-Api-Key': GOOGLE_PLACES_API_KEY,
-    },
-  });
-
-  if (!response.ok) {
-    const errorBody = await response.text();
-    console.error(`❌ [Place Details] エラー (${placeId}):`, errorBody);
-    throw new Error(`Place Details error: ${response.status}`);
-  }
-
-  return await response.json();
-}
-
-/**
- * Google Place DetailsをアプリのPlaceSearchResultに変換
- */
-function convertToPlaceResult(details: GooglePlaceDetails): PlaceSearchResult {
-  return {
-    id: details.id,
-    name: details.displayName.text,
-    address: details.formattedAddress || null,
-    latitude: details.location.latitude,
-    longitude: details.location.longitude,
-    category: details.types || [],
-    googleData: {
-      placeId: details.id,
-      placeName: details.displayName.text,
-      category: details.types || [],
-      address: details.formattedAddress || null,
-      formattedAddress: details.formattedAddress,
-      internationalPhoneNumber: details.internationalPhoneNumber,
-      websiteUri: details.websiteUri,
-      rating: details.rating,
-      userRatingCount: details.userRatingCount,
-    },
-  };
 }

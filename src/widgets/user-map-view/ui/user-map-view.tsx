@@ -7,10 +7,9 @@
 import { useSpots } from '@/entities/user-spot';
 import { QuickAddSpotFacade } from '@/features/quick-add-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
+import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import { FAB, LocationButton } from '@/shared/ui';
-import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
-import { useSpotCamera } from '../model';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
@@ -22,6 +21,7 @@ import React, {
   useState,
 } from 'react';
 import { View } from 'react-native';
+import { usePOIHandler, useSpotCamera } from '../model';
 
 interface UserMapViewProps {
   mapId: string | null;
@@ -52,9 +52,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     },
     ref
   ) => {
+    const mapViewRef = useRef<Mapbox.MapView>(null);
     const cameraRef = useRef<Mapbox.Camera>(null);
     const { data: spots = [] } = useSpots(mapId ?? '');
-    const [selectedSpot, setSelectedSpot] = useState<SpotWithMasterSpot | null>(null);
+    const [selectedSpot, setSelectedSpot] = useState<SpotWithMasterSpot | null>(
+      null
+    );
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
@@ -78,6 +81,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
       cameraRef,
     });
+
+    // POIタップハンドラー
+    const { handlePOITap } = usePOIHandler({ mapViewRef });
 
     // 選択状態を管理
     const handleSpotSelect = (spot: SpotWithMasterSpot | null) => {
@@ -115,12 +121,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       }
     }, [autoOpenQuickAdd, mapId, quickAddTrigger]);
 
-    // スポットが読み込まれ、マップの準備ができたら全スポットを表示
+    // スポットが読み込まれたら全スポットを表示
     useEffect(() => {
-      // 早期リターンでネストを削減
       if (spots.length === 0 || !isMapReady) return;
 
-      // 少し遅延させてカメラが準備されるのを待つ
       setTimeout(() => {
         if (spots.length === 1) {
           moveCameraToSingleSpot(spots[0]!);
@@ -146,11 +150,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     return (
       <View className="flex-1">
         <Mapbox.MapView
+          ref={mapViewRef}
           style={{ flex: 1 }}
           styleURL={Mapbox.StyleURL.Street}
           localizeLabels={true}
           onCameraChanged={handleCameraChanged}
           onDidFinishLoadingMap={handleMapReady}
+          onPress={handlePOITap}
         >
           <Mapbox.Camera
             ref={cameraRef}

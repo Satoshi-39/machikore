@@ -6,6 +6,9 @@ export { useSearchPlaces } from './model/useSearchPlaces';
 export { useSearchMachikorePlaces } from './model/useSearchMachikorePlaces';
 export { useSelectedPlaceStore } from './model/use-selected-place-store';
 
+// API
+export { reverseGeocode } from './api/reverseGeocode';
+
 // API Types
 export type {
   PlaceSearchResult,

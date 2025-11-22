@@ -16,17 +16,11 @@ export function useSpotForm() {
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
-  const clearSelectedPlace = useSelectedPlaceStore((state) => state.clearSelectedPlace);
   const { mutate: createSpot, isPending } = useCreateSpot();
 
-  // データが存在しない場合はエラー
+  // データが存在しない場合は静かにnullを返す
+  // （画面遷移途中の再レンダリングでアラートが表示されないようにする）
   if (!selectedPlace) {
-    Alert.alert('エラー', 'スポット情報が見つかりません', [
-      {
-        text: 'OK',
-        onPress: () => router.back(),
-      },
-    ]);
     return { placeData: null, handleSubmit: () => {}, isLoading: false };
   }
 
@@ -75,7 +69,6 @@ export function useSpotForm() {
             {
               text: 'OK',
               onPress: () => {
-                clearSelectedPlace();
                 router.back();
               },
             },

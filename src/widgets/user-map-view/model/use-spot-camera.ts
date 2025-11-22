@@ -20,7 +20,7 @@ export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
 
       cameraRef.current.setCamera({
         centerCoordinate: [spot.longitude, spot.latitude],
-        zoomLevel: 14, // 適度なズームレベル
+        zoomLevel: 14,
         animationDuration: 1000,
       });
     },
