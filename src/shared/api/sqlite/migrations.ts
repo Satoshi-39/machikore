@@ -699,7 +699,7 @@ export function migration005_AddMasterSpots(): void {
 
     // 5. 新しいuser_spotsテーブルを作成
     db.execSync(`
-      CREATE TABLE user_spots (
+      CREATE TABLE IF NOT EXISTS user_spots (
         id TEXT PRIMARY KEY,
         user_id TEXT NOT NULL,
         map_id TEXT NOT NULL,
