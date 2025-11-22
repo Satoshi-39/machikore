@@ -1,7 +1,7 @@
 /**
  * Google Place Details API 共通関数
  *
- * autocomplete.tsとreverseGeocode.tsから共通利用
+ * autocomplete.tsから利用
  */
 
 import type { GooglePlaceDetails, PlaceSearchResult } from './types';

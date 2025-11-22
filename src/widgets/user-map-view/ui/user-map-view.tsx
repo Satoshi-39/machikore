@@ -22,7 +22,7 @@ import React, {
   useState,
 } from 'react';
 import { View } from 'react-native';
-import { usePOIHandler, useSpotCamera } from '../model';
+import { useSpotCamera } from '../model';
 
 interface UserMapViewProps {
   mapId: string | null;
@@ -88,9 +88,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
       cameraRef,
     });
-
-    // POIタップハンドラー
-    const { handlePOITap } = usePOIHandler({ mapViewRef });
 
     // 選択状態を管理
     const handleSpotSelect = (spot: SpotWithMasterSpot | null) => {
@@ -193,7 +190,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           localizeLabels={true}
           onCameraChanged={handleCameraChanged}
           onDidFinishLoadingMap={handleMapReady}
-          onPress={handlePOITap}
         >
           <Mapbox.Camera
             ref={cameraRef}
