@@ -122,6 +122,44 @@ export function getSpotsByMachiId(machiId: string): SpotWithMasterSpot[] {
 // ===============================
 
 /**
+ * ビューポート範囲内のマスタースポットを取得
+ */
+export function getMasterSpotsByBounds(
+  minLat: number,
+  maxLat: number,
+  minLng: number,
+  maxLng: number,
+  limit: number = 1000
+) {
+  return queryAll<{
+    id: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+    google_place_id: string | null;
+    google_formatted_address: string | null;
+    google_types: string | null;
+    google_phone_number: string | null;
+    google_website_uri: string | null;
+    google_rating: number | null;
+    google_user_rating_count: number | null;
+  }>(
+    `
+    SELECT
+      id, name, latitude, longitude,
+      google_place_id, google_formatted_address, google_types,
+      google_phone_number, google_website_uri,
+      google_rating, google_user_rating_count
+    FROM master_spots
+    WHERE latitude BETWEEN ? AND ?
+      AND longitude BETWEEN ? AND ?
+    LIMIT ?;
+    `,
+    [minLat, maxLat, minLng, maxLng, limit]
+  );
+}
+
+/**
  * マスタースポットを挿入または既存のものを取得
  * 同じ名前・位置のマスタースポットが存在する場合はそのIDを返す
  */

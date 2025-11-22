@@ -7,6 +7,7 @@ import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
+import { useMasterSpotsByBounds } from '@/entities/master-spot';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { MachiDetailCard } from './machi-detail-card';
@@ -29,6 +30,17 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
     const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
+
+    // カメラのビューポート範囲を管理
+    const [bounds, setBounds] = useState<{
+      minLat: number;
+      maxLat: number;
+      minLng: number;
+      maxLng: number;
+    } | null>(null);
+
+    // ビューポート範囲内のmaster_spotsを取得
+    const { data: masterSpots = [] } = useMasterSpotsByBounds(bounds);
 
     // マップ操作用フック
     const { flyToLocation, handleLocationPress } = useMapLocation({
@@ -78,6 +90,38 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       };
     }, [machiData, visitedMachiIds]);
 
+    // master_spotsデータをGeoJSON形式に変換
+    const masterSpotsGeoJson: FeatureCollection<Point> = useMemo(() => {
+      if (!masterSpots || masterSpots.length === 0) {
+        return { type: 'FeatureCollection', features: [] };
+      }
+
+      return {
+        type: 'FeatureCollection',
+        features: masterSpots.map((spot) => ({
+          type: 'Feature',
+          id: spot.id,
+          geometry: {
+            type: 'Point',
+            coordinates: [spot.longitude, spot.latitude],
+          },
+          properties: {
+            id: spot.id,
+            name: spot.name,
+          },
+        })),
+      };
+    }, [masterSpots]);
+
+    // カメラ移動時にビューポート範囲を更新
+    const handleCameraChanged = async (state: any) => {
+      const bounds = await state.properties.visibleBounds;
+      if (bounds) {
+        const [[minLng, minLat], [maxLng, maxLat]] = bounds;
+        setBounds({ minLat, maxLat, minLng, maxLng });
+      }
+    };
+
     // マーカータップ時のハンドラー
     const handleMarkerPress = (event: any) => {
       const feature = event.features?.[0];
@@ -124,6 +168,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             style={{ flex: 1 }}
             styleURL={Mapbox.StyleURL.Street}
             localizeLabels={true}
+            onCameraChanged={handleCameraChanged}
           >
             <Mapbox.Camera
               ref={cameraRef}
@@ -185,6 +230,50 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                 style={{
                   circleColor: '#3B82F6',
                   circleRadius: 10,
+                  circleStrokeWidth: 2,
+                  circleStrokeColor: '#FFFFFF',
+                }}
+              />
+            </Mapbox.ShapeSource>
+
+            {/* master_spotsマーカー表示（オレンジ色） */}
+            <Mapbox.ShapeSource
+              id="master-spots-source"
+              shape={masterSpotsGeoJson}
+              cluster
+              clusterRadius={50}
+              clusterMaxZoomLevel={14}
+            >
+              {/* クラスター表示（複数マーカーがまとまった円） */}
+              <Mapbox.CircleLayer
+                id="master-spots-clusters"
+                filter={['has', 'point_count']}
+                style={{
+                  circleColor: '#F97316',
+                  circleRadius: 20,
+                  circleOpacity: 0.8,
+                }}
+              />
+
+              {/* クラスター内の数字 */}
+              <Mapbox.SymbolLayer
+                id="master-spots-cluster-count"
+                filter={['has', 'point_count']}
+                style={{
+                  textField: ['get', 'point_count_abbreviated'],
+                  textSize: 14,
+                  textColor: '#FFFFFF',
+                  textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                }}
+              />
+
+              {/* 個別マーカー（オレンジの円） */}
+              <Mapbox.CircleLayer
+                id="master-spots-unclustered"
+                filter={['!', ['has', 'point_count']]}
+                style={{
+                  circleColor: '#F97316',
+                  circleRadius: 8,
                   circleStrokeWidth: 2,
                   circleStrokeColor: '#FFFFFF',
                 }}
