@@ -20,11 +20,28 @@
     "id": "machi_kita_higashijujo",
     "name": "東十条",
     "name_kana": "",
-    "latitude": 35.75333,
-    "longitude": 139.72583,
+    "latitude": 35.76390538,
+    "longitude": 139.72685756,
     "lines": [
       {
         "ja": "JR京浜東北線"
+      }
+    ],
+    "prefecture_id": "tokyo",
+    "city_id": "kita",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "北区"
+  },
+  {
+    "id": "machi_kita_nakajujo",
+    "name": "中十条",
+    "name_kana": "なかじゅうじょう",
+    "latitude": 35.7586,
+    "longitude": 139.7241,
+    "lines": [
+      {
+        "ja": "JR埼京線"
       }
     ],
     "prefecture_id": "tokyo",

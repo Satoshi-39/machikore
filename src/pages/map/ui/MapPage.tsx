@@ -42,6 +42,7 @@ export function MapPage() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
   const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
+  const [cityDetailSnapIndex, setCityDetailSnapIndex] = useState<number>(1);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
   const [quickAddTrigger, setQuickAddTrigger] = useState(0);
@@ -148,6 +149,8 @@ export function MapPage() {
             userId={user?.id ?? null}
             currentLocation={location}
             onMachiDetailSnapChange={(snapIndex) => setMachiDetailSnapIndex(snapIndex)}
+            onCityDetailSnapChange={(snapIndex) => setCityDetailSnapIndex(snapIndex)}
+            onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
           />
@@ -205,9 +208,9 @@ export function MapPage() {
           <View
             className="absolute top-0 left-0 right-0"
             style={{
-              opacity: spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 0 : 1,
+              opacity: spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 ? 0 : 1,
             }}
-            pointerEvents={spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 ? 'none' : 'auto'}
+            pointerEvents={spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 ? 'none' : 'auto'}
           >
             <MapControls
               variant="map"

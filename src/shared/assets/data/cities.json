@@ -143,6 +143,8 @@
     "name": "北区",
     "name_kana": "きたく",
     "type": "区",
+    "latitude": 35.7536,
+    "longitude": 139.7340,
     "country_code": "jp"
   },
   {

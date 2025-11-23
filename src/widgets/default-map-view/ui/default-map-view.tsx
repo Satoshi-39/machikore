@@ -5,35 +5,43 @@
 import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo } from 'react';
 import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
-import { useMachi } from '@/entities/machi';
+import { useMachi, useMachiGeoJson } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
-import { useMasterSpotsByBounds } from '@/entities/master-spot';
-import { usePrefectures } from '@/entities/prefecture';
-import { useCities } from '@/entities/city';
+import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
+import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
+import { useCities, useCitiesGeoJson } from '@/entities/city';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { MachiDetailCard } from './machi-detail-card';
+import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels } from './layers';
 import { useBoundsManagement } from '../model';
-import type { MachiRow } from '@/shared/types/database.types';
-import type { FeatureCollection, Point } from 'geojson';
+import type { MachiRow, MasterSpotRow, CityRow } from '@/shared/types/database.types';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
+import { MasterSpotDetailCard } from '@/widgets/master-spot-detail-card';
+import { CityDetailCard } from '@/widgets/city-detail-card';
 
 interface DefaultMapViewProps {
   userId?: string | null;
   currentLocation?: { latitude: number; longitude: number } | null;
   onMachiDetailSnapChange?: (snapIndex: number) => void;
+  onCityDetailSnapChange?: (snapIndex: number) => void;
+  onSpotDetailSnapChange?: (snapIndex: number) => void;
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, viewMode = 'map', isSearchFocused = false }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', isSearchFocused = false }, ref) => {
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
     const { data: cities = [] } = useCities();
     const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
     const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
+    const [selectedCity, setSelectedCity] = useState<CityRow | null>(null);
+    const [cityDetailSnapIndex, setCityDetailSnapIndex] = useState<number>(1);
+    const [selectedSpot, setSelectedSpot] = useState<MasterSpotRow | null>(null);
+    const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
     // ビューポート範囲管理
@@ -51,6 +59,31 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // 選択状態を管理
     const handleMachiSelect = (machi: MachiRow | null) => {
       setSelectedMachi(machi);
+      // 街を選択したら他の選択を解除
+      if (machi) {
+        setSelectedCity(null);
+        setSelectedSpot(null);
+      }
+    };
+
+    // 市区選択状態を管理
+    const handleCitySelect = (city: CityRow | null) => {
+      setSelectedCity(city);
+      // 市区を選択したら他の選択を解除
+      if (city) {
+        setSelectedMachi(null);
+        setSelectedSpot(null);
+      }
+    };
+
+    // スポット選択状態を管理
+    const handleSpotSelect = (spot: MasterSpotRow | null) => {
+      setSelectedSpot(spot);
+      // スポットを選択したら他の選択を解除
+      if (spot) {
+        setSelectedMachi(null);
+        setSelectedCity(null);
+      }
     };
 
     // スナップ変更を親に通知して、ローカルstateも更新
@@ -59,8 +92,23 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       onMachiDetailSnapChange?.(snapIndex);
     };
 
+    // 市区カードのスナップ変更
+    const handleCitySnapChange = (snapIndex: number) => {
+      setCityDetailSnapIndex(snapIndex);
+      onCityDetailSnapChange?.(snapIndex);
+    };
+
+    // スポットカードのスナップ変更
+    const handleSpotSnapChange = (snapIndex: number) => {
+      setSpotDetailSnapIndex(snapIndex);
+      onSpotDetailSnapChange?.(snapIndex);
+    };
+
     // 訪問済みmachiのIDセットを作成
-    const visitedMachiIds = new Set(visits.map((visit) => visit.machi_id));
+    const visitedMachiIds = useMemo(
+      () => new Set(visits.map((visit) => visit.machi_id)),
+      [visits]
+    );
 
     // MachiRowのマップを作成（IDからMachiRowへの変換用）
     const machiMap = useMemo(() => {
@@ -68,99 +116,25 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       return new Map(machiData.map((machi) => [machi.id, machi]));
     }, [machiData]);
 
-    // machiデータをGeoJSON形式に変換
-    const geoJsonData: FeatureCollection<Point> = useMemo(() => {
-      if (!machiData) return { type: 'FeatureCollection', features: [] };
-
-      return {
-        type: 'FeatureCollection',
-        features: machiData.map((machi) => ({
-          type: 'Feature',
-          id: machi.id,
-          geometry: {
-            type: 'Point',
-            coordinates: [machi.longitude, machi.latitude],
-          },
-          properties: {
-            id: machi.id,
-            name: machi.name,
-            isVisited: visitedMachiIds.has(machi.id),
-          },
-        })),
-      };
-    }, [machiData, visitedMachiIds]);
-
-    // master_spotsデータをGeoJSON形式に変換
-    const masterSpotsGeoJson: FeatureCollection<Point> = useMemo(() => {
-      if (!masterSpots || masterSpots.length === 0) {
-        return { type: 'FeatureCollection', features: [] };
-      }
-
-      return {
-        type: 'FeatureCollection',
-        features: masterSpots.map((spot) => ({
-          type: 'Feature',
-          id: spot.id,
-          geometry: {
-            type: 'Point',
-            coordinates: [spot.longitude, spot.latitude],
-          },
-          properties: {
-            id: spot.id,
-            name: spot.name,
-          },
-        })),
-      };
-    }, [masterSpots]);
-
-    // 都道府県データをGeoJSON形式に変換（座標を持つもののみ）
-    const prefecturesGeoJson: FeatureCollection<Point> = useMemo(() => {
-      const prefecturesWithCoords = prefectures.filter(
-        (pref) => pref.latitude !== null && pref.longitude !== null
-      );
-
-      return {
-        type: 'FeatureCollection',
-        features: prefecturesWithCoords.map((pref) => ({
-          type: 'Feature',
-          id: pref.id,
-          geometry: {
-            type: 'Point',
-            coordinates: [pref.longitude!, pref.latitude!],
-          },
-          properties: {
-            id: pref.id,
-            name: pref.name,
-          },
-        })),
-      };
-    }, [prefectures]);
-
-    // 市区町村データをGeoJSON形式に変換（座標を持つもののみ）
-    const citiesGeoJson: FeatureCollection<Point> = useMemo(() => {
-      const citiesWithCoords = cities.filter(
-        (city) => city.latitude !== null && city.longitude !== null
-      );
-
-      return {
-        type: 'FeatureCollection',
-        features: citiesWithCoords.map((city) => ({
-          type: 'Feature',
-          id: city.id,
-          geometry: {
-            type: 'Point',
-            coordinates: [city.longitude!, city.latitude!],
-          },
-          properties: {
-            id: city.id,
-            name: city.name,
-          },
-        })),
-      };
+    // CityRowのマップを作成（IDからCityRowへの変換用）
+    const cityMap = useMemo(() => {
+      return new Map(cities.map((city) => [city.id, city]));
     }, [cities]);
 
+    // MasterSpotRowのマップを作成（IDからMasterSpotRowへの変換用）
+    const masterSpotMap = useMemo(() => {
+      if (!masterSpots) return new Map<string, MasterSpotRow>();
+      return new Map(masterSpots.map((spot) => [spot.id, spot]));
+    }, [masterSpots]);
 
-    // マーカータップ時のハンドラー
+    // GeoJSON データ生成
+    const machiGeoJson = useMachiGeoJson(machiData, visitedMachiIds);
+    const masterSpotsGeoJson = useMasterSpotsGeoJson(masterSpots);
+    const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
+    const citiesGeoJson = useCitiesGeoJson(cities);
+
+
+    // 街マーカータップ時のハンドラー
     const handleMarkerPress = (event: any) => {
       const feature = event.features?.[0];
       if (!feature) return;
@@ -170,6 +144,34 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         const machi = machiMap.get(machiId);
         if (machi) {
           handleMachiSelect(machi);
+        }
+      }
+    };
+
+    // 市区マーカータップ時のハンドラー
+    const handleCityPress = (event: any) => {
+      const feature = event.features?.[0];
+      if (!feature) return;
+
+      const cityId = feature.properties?.id;
+      if (cityId) {
+        const city = cityMap.get(cityId);
+        if (city) {
+          handleCitySelect(city);
+        }
+      }
+    };
+
+    // スポットマーカータップ時のハンドラー
+    const handleSpotPress = (event: any) => {
+      const feature = event.features?.[0];
+      if (!feature) return;
+
+      const spotId = feature.properties?.id;
+      if (spotId) {
+        const spot = masterSpotMap.get(spotId);
+        if (spot) {
+          handleSpotSelect(spot);
         }
       }
     };
@@ -197,7 +199,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         <View style={{ flex: 1 }}>
           <Mapbox.MapView
             style={{ flex: 1 }}
-            styleURL={Mapbox.StyleURL.Light}
+            styleURL="mapbox://styles/tyatsushi/cmib9h22p003x01snfpcmd1wn"
             onCameraChanged={handleCameraChanged}
           >
             <Mapbox.Camera
@@ -208,126 +210,16 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             />
 
             {/* 都道府県ラベル表示（テキストのみ）- ズーム0-10で表示 */}
-            <Mapbox.ShapeSource
-              id="prefectures-source"
-              shape={prefecturesGeoJson}
-            >
-              <Mapbox.SymbolLayer
-                id="prefectures-labels"
-                maxZoomLevel={11}
-                style={{
-                  textField: ['get', 'name'],
-                  textSize: 16,
-                  textColor: '#9333EA',
-                  textHaloColor: '#FFFFFF',
-                  textHaloWidth: 2,
-                  textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
-                }}
-              />
-            </Mapbox.ShapeSource>
+            <PrefectureLabels geoJson={prefecturesGeoJson} />
 
-            {/* 市区町村ラベル表示（テキストのみ）- ズーム11-13で表示 */}
-            <Mapbox.ShapeSource
-              id="cities-source"
-              shape={citiesGeoJson}
-            >
-              <Mapbox.SymbolLayer
-                id="cities-labels"
-                minZoomLevel={11}
-                maxZoomLevel={14}
-                style={{
-                  textField: ['get', 'name'],
-                  textSize: 14,
-                  textColor: '#EC4899',
-                  textHaloColor: '#FFFFFF',
-                  textHaloWidth: 2,
-                  textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
-                }}
-              />
-            </Mapbox.ShapeSource>
+            {/* 市区ラベル表示（テキストのみ）- ズーム11-13で表示 */}
+            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
 
             {/* 街マーカー表示（アイコン + ラベル）- ズーム14以上で表示 */}
-            <Mapbox.ShapeSource
-              id="machi-source"
-              shape={geoJsonData}
-              onPress={handleMarkerPress}
-            >
-              {/* 訪問済み街アイコン（緑の家）*/}
-              <Mapbox.SymbolLayer
-                id="visited-machi-icon"
-                filter={['==', ['get', 'isVisited'], true]}
-                minZoomLevel={14}
-                style={{
-                  textField: '🏠',
-                  textSize: 24,
-                  textAnchor: 'bottom',
-                  textOffset: [0, 0.5],
-                }}
-              />
+            <MachiLabels geoJson={machiGeoJson} onPress={handleMarkerPress} />
 
-              {/* 未訪問街アイコン（青の建物）*/}
-              <Mapbox.SymbolLayer
-                id="unvisited-machi-icon"
-                filter={['==', ['get', 'isVisited'], false]}
-                minZoomLevel={14}
-                style={{
-                  textField: '🏘️',
-                  textSize: 24,
-                  textAnchor: 'bottom',
-                  textOffset: [0, 0.5],
-                }}
-              />
-
-              {/* 街名テキスト表示（太字）*/}
-              <Mapbox.SymbolLayer
-                id="machi-labels"
-                minZoomLevel={14}
-                style={{
-                  textField: ['get', 'name'],
-                  textSize: 12,
-                  textColor: '#000000',
-                  textHaloColor: '#FFFFFF',
-                  textHaloWidth: 2,
-                  textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
-                  textAnchor: 'top',
-                  textOffset: [0, 1.5],
-                }}
-              />
-            </Mapbox.ShapeSource>
-
-            {/* スポットマーカー表示（アイコン + ラベル）- ズーム15以上で表示 */}
-            <Mapbox.ShapeSource
-              id="master-spots-source"
-              shape={masterSpotsGeoJson}
-            >
-              {/* スポットアイコン（ピン）*/}
-              <Mapbox.SymbolLayer
-                id="master-spots-icon"
-                minZoomLevel={15}
-                style={{
-                  textField: '📍',
-                  textSize: 20,
-                  textAnchor: 'bottom',
-                  textOffset: [0, 0.5],
-                }}
-              />
-
-              {/* スポット名テキスト表示 */}
-              <Mapbox.SymbolLayer
-                id="master-spots-labels"
-                minZoomLevel={15}
-                style={{
-                  textField: ['get', 'name'],
-                  textSize: 11,
-                  textColor: '#F97316',
-                  textHaloColor: '#FFFFFF',
-                  textHaloWidth: 2,
-                  textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                  textAnchor: 'top',
-                  textOffset: [0, 1.3],
-                }}
-              />
-            </Mapbox.ShapeSource>
+            {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム15以上で表示 */}
+            <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
           </Mapbox.MapView>
 
           {/* マップコントロールボタン（現在地ボタン） */}
@@ -335,15 +227,29 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             <View
               className="absolute right-6 z-50"
               style={{
-                // 街カード縮小版（15%）の時は16%の位置に、それ以外は48px
-                bottom: (machiDetailSnapIndex === 0 && selectedMachi) ? '16%' : 48,
+                // カード縮小版（15%）の時は16%の位置に、それ以外は48px
+                bottom: (
+                  (machiDetailSnapIndex === 0 && selectedMachi) ||
+                  (cityDetailSnapIndex === 0 && selectedCity) ||
+                  (spotDetailSnapIndex === 0 && selectedSpot)
+                ) ? '16%' : 48,
               }}
             >
               <View
                 style={{
-                  opacity: (machiDetailSnapIndex === 0 && selectedMachi) || !selectedMachi ? 1 : 0,
+                  opacity: (
+                    (machiDetailSnapIndex === 0 && selectedMachi) ||
+                    (cityDetailSnapIndex === 0 && selectedCity) ||
+                    (spotDetailSnapIndex === 0 && selectedSpot) ||
+                    (!selectedMachi && !selectedCity && !selectedSpot)
+                  ) ? 1 : 0,
                 }}
-                pointerEvents={(machiDetailSnapIndex === 0 && selectedMachi) || !selectedMachi ? 'auto' : 'none'}
+                pointerEvents={(
+                  (machiDetailSnapIndex === 0 && selectedMachi) ||
+                  (cityDetailSnapIndex === 0 && selectedCity) ||
+                  (spotDetailSnapIndex === 0 && selectedSpot) ||
+                  (!selectedMachi && !selectedCity && !selectedSpot)
+                ) ? 'auto' : 'none'}
               >
                 <LocationButton
                   onPress={handleLocationPress}
@@ -359,6 +265,24 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               machi={selectedMachi}
               onClose={() => handleMachiSelect(null)}
               onSnapChange={handleSnapChange}
+            />
+          )}
+
+          {/* 選択された市区の詳細カード */}
+          {selectedCity && (
+            <CityDetailCard
+              city={selectedCity}
+              onClose={() => handleCitySelect(null)}
+              onSnapChange={handleCitySnapChange}
+            />
+          )}
+
+          {/* 選択されたスポットの詳細カード */}
+          {selectedSpot && (
+            <MasterSpotDetailCard
+              spot={selectedSpot}
+              onClose={() => handleSpotSelect(null)}
+              onSnapChange={handleSpotSnapChange}
             />
           )}
         </View>
