@@ -115,13 +115,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       const feature = event.features?.[0];
       if (!feature) return;
 
-      // クラスターの場合は拡大
-      if (feature.properties?.cluster) {
-        // クラスターをタップした場合は何もしない（自動的に拡大される）
-        return;
-      }
-
-      // 個別マーカーの場合は詳細表示
       const machiId = feature.properties?.id;
       if (machiId) {
         const machi = machiMap.get(machiId);
@@ -154,7 +147,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         <View style={{ flex: 1 }}>
           <Mapbox.MapView
             style={{ flex: 1 }}
-            styleURL={Mapbox.StyleURL.Street}
+            styleURL={Mapbox.StyleURL.Light}
             localizeLabels={true}
             onCameraChanged={handleCameraChanged}
           >
@@ -165,43 +158,18 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               animationDuration={0}
             />
 
-            {/* クラスタリング対応マーカー表示 */}
+            {/* 街マーカー表示 */}
             <Mapbox.ShapeSource
               id="machi-source"
               shape={geoJsonData}
-              cluster
-              clusterRadius={50}
-              clusterMaxZoomLevel={14}
               onPress={handleMarkerPress}
             >
-              {/* クラスター表示（複数マーカーがまとまった円） */}
-              <Mapbox.CircleLayer
-                id="clusters"
-                filter={['has', 'point_count']}
-                style={{
-                  circleColor: '#3B82F6',
-                  circleRadius: 20,
-                  circleOpacity: 0.8,
-                }}
-              />
-
-              {/* クラスター内の数字 */}
-              <Mapbox.SymbolLayer
-                id="cluster-count"
-                filter={['has', 'point_count']}
-                style={{
-                  textField: ['get', 'point_count_abbreviated'],
-                  textSize: 14,
-                  textColor: '#FFFFFF',
-                  textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                }}
-              />
-
-              {/* 訪問済み個別マーカー（緑の円） */}
+              {/* 訪問済みマーカー（緑の円）- ズーム11以上で表示 */}
               {/* 将来の拡張: お気に入りの場合は金色に変更可能 */}
               <Mapbox.CircleLayer
-                id="unclustered-visited"
-                filter={['all', ['!', ['has', 'point_count']], ['==', ['get', 'isVisited'], true]]}
+                id="visited-machi"
+                filter={['==', ['get', 'isVisited'], true]}
+                minZoomLevel={11}
                 style={{
                   circleColor: '#10B981',
                   circleRadius: 10,
@@ -210,11 +178,12 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                 }}
               />
 
-              {/* 未訪問個別マーカー（青の円） */}
+              {/* 未訪問マーカー（青の円）- ズーム11以上で表示 */}
               {/* 将来の拡張: 行きたい度合いで色を変更可能（例: 赤色で優先度高） */}
               <Mapbox.CircleLayer
-                id="unclustered-unvisited"
-                filter={['all', ['!', ['has', 'point_count']], ['==', ['get', 'isVisited'], false]]}
+                id="unvisited-machi"
+                filter={['==', ['get', 'isVisited'], false]}
+                minZoomLevel={11}
                 style={{
                   circleColor: '#3B82F6',
                   circleRadius: 10,
@@ -222,48 +191,54 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                   circleStrokeColor: '#FFFFFF',
                 }}
               />
+
+              {/* 街名テキスト表示（太字）- ズーム13以上で表示 */}
+              <Mapbox.SymbolLayer
+                id="machi-labels"
+                minZoomLevel={13}
+                style={{
+                  textField: ['get', 'name'],
+                  textSize: 12,
+                  textColor: '#000000',
+                  textHaloColor: '#FFFFFF',
+                  textHaloWidth: 2,
+                  textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+                  textAnchor: 'top',
+                  textOffset: [0, 1.2],
+                }}
+              />
             </Mapbox.ShapeSource>
 
-            {/* master_spotsマーカー表示（オレンジ色） */}
+            {/* スポットマーカー表示（オレンジ色） */}
             <Mapbox.ShapeSource
               id="master-spots-source"
               shape={masterSpotsGeoJson}
-              cluster
-              clusterRadius={50}
-              clusterMaxZoomLevel={14}
             >
-              {/* クラスター表示（複数マーカーがまとまった円） */}
+              {/* スポットマーカー（オレンジの円）- ズーム15以上で表示 */}
               <Mapbox.CircleLayer
-                id="master-spots-clusters"
-                filter={['has', 'point_count']}
-                style={{
-                  circleColor: '#F97316',
-                  circleRadius: 20,
-                  circleOpacity: 0.8,
-                }}
-              />
-
-              {/* クラスター内の数字 */}
-              <Mapbox.SymbolLayer
-                id="master-spots-cluster-count"
-                filter={['has', 'point_count']}
-                style={{
-                  textField: ['get', 'point_count_abbreviated'],
-                  textSize: 14,
-                  textColor: '#FFFFFF',
-                  textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                }}
-              />
-
-              {/* 個別マーカー（オレンジの円） */}
-              <Mapbox.CircleLayer
-                id="master-spots-unclustered"
-                filter={['!', ['has', 'point_count']]}
+                id="master-spots"
+                minZoomLevel={15}
                 style={{
                   circleColor: '#F97316',
                   circleRadius: 8,
                   circleStrokeWidth: 2,
                   circleStrokeColor: '#FFFFFF',
+                }}
+              />
+
+              {/* スポット名テキスト表示 - ズーム15以上で表示 */}
+              <Mapbox.SymbolLayer
+                id="master-spots-labels"
+                minZoomLevel={15}
+                style={{
+                  textField: ['get', 'name'],
+                  textSize: 11,
+                  textColor: '#F97316',
+                  textHaloColor: '#FFFFFF',
+                  textHaloWidth: 2,
+                  textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                  textAnchor: 'top',
+                  textOffset: [0, 1],
                 }}
               />
             </Mapbox.ShapeSource>
