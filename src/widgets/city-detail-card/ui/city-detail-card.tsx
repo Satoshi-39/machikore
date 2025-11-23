@@ -22,8 +22,8 @@ export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardPr
   const insets = useSafeAreaInsets();
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
-  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
-  const snapPoints = useMemo(() => ['15%', '45%', '95%'], []);
+  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
+  const snapPoints = useMemo(() => ['15%', '45%', '90%'], []);
 
   // 仮データ: おすすめスポット（実際のデータは後で実装）
   const recommendedSpots = [

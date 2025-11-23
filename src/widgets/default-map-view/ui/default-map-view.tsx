@@ -201,6 +201,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             style={{ flex: 1 }}
             styleURL="mapbox://styles/tyatsushi/cmib9h22p003x01snfpcmd1wn"
             onCameraChanged={handleCameraChanged}
+            scaleBarEnabled={false}
           >
             <Mapbox.Camera
               ref={cameraRef}

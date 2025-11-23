@@ -27,8 +27,8 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
   // const { data: visit } = useVisitByMachi(currentUserId || '', machi.id); // TODO: 将来使用予定
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
-  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
-  const snapPoints = useMemo(() => ['15%', '45%', '95%'], []);
+  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
+  const snapPoints = useMemo(() => ['15%', '45%', '90%'], []);
 
   // 初回マウント時に初期状態（デフォルト状態）を通知
   // Bottom Sheetの初期index=1の場合、onChangeは呼ばれないため手動で通知

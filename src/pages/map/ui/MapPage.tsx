@@ -8,7 +8,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useUserStore, useUser } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/user-map';
@@ -31,6 +31,7 @@ import {
 export function MapPage() {
   const { id, addSpot } = useLocalSearchParams<{ id?: string; addSpot?: string }>();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
@@ -105,26 +106,28 @@ export function MapPage() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100" edges={['top']}>
-      {/* ヘッダー */}
-      <MapHeader
-        isUserMap={isUserMap}
-        mapTitle={selectedMap?.name}
-        userName={
-          (isUserMap
-            ? mapOwner?.display_name
-            : user?.display_name) || undefined
-        }
-        userAvatarUrl={
-          (isUserMap
-            ? mapOwner?.avatar_url
-            : user?.avatar_url) || undefined
-        }
-        userMaps={userMaps}
-        onClose={handleCloseUserMap}
-        onMapSelect={handleMapSelect}
-        onUserPress={handleUserPress}
-      />
+    <SafeAreaView className="flex-1 bg-gray-100" edges={isUserMap ? ['top'] : []}>
+      {/* ヘッダー（ユーザーマップの時のみ表示） */}
+      {isUserMap && (
+        <MapHeader
+          isUserMap={isUserMap}
+          mapTitle={selectedMap?.name}
+          userName={
+            (isUserMap
+              ? mapOwner?.display_name
+              : user?.display_name) || undefined
+          }
+          userAvatarUrl={
+            (isUserMap
+              ? mapOwner?.avatar_url
+              : user?.avatar_url) || undefined
+          }
+          userMaps={userMaps}
+          onClose={handleCloseUserMap}
+          onMapSelect={handleMapSelect}
+          onUserPress={handleUserPress}
+        />
+      )}
 
       {/* マップ表示（常にレンダリング） */}
       <View className="flex-1">
@@ -158,7 +161,7 @@ export function MapPage() {
 
         {/* リスト表示時：マップの上にリストUIをオーバーレイ */}
         {viewMode === 'list' && !isSearchFocused && (
-          <View className="absolute inset-0 bg-white">
+          <View className="absolute inset-0 bg-white" style={{ paddingTop: isUserMap ? 0 : insets.top }}>
             {/* 検索バー + ViewModeToggle */}
             <MapControls
               variant="list"
@@ -166,6 +169,7 @@ export function MapPage() {
               onViewModeChange={setViewMode}
               onSearchFocus={handleSearchFocus}
               className="px-5 pt-5 pb-3"
+              showLogo={!isUserMap}
             />
 
             {/* デフォルトマップの階層リスト or ユーザーマップのフラットリスト */}
@@ -175,7 +179,13 @@ export function MapPage() {
 
         {/* 検索フォーカス時：全画面検索UI（マップの上に重ねる） */}
         {isSearchFocused && (
-          <View className="absolute inset-0 z-50">
+          <View
+            className="absolute inset-0 z-50"
+            style={{
+              paddingTop: isUserMap ? 0 : insets.top,
+              backgroundColor: 'white',
+            }}
+          >
             {isUserMap ? (
               // ユーザーマップ: 自分のマップならGoogle Places API、他人のマップなら街コレデータ
               <UserMapSearch
@@ -208,6 +218,7 @@ export function MapPage() {
           <View
             className="absolute top-0 left-0 right-0"
             style={{
+              paddingTop: isUserMap ? 0 : insets.top,
               opacity: spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 ? 0 : 1,
             }}
             pointerEvents={spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 ? 'none' : 'auto'}
@@ -217,6 +228,7 @@ export function MapPage() {
               viewMode={viewMode}
               onViewModeChange={setViewMode}
               onSearchFocus={handleSearchFocus}
+              showLogo={!isUserMap}
             />
           </View>
         )}
