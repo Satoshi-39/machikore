@@ -2,15 +2,16 @@
  * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
-import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo } from 'react';
 import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds } from '@/entities/master-spot';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
-import { useMapLocation, calculateBoundsFromCamera, type MapViewHandle } from '@/shared/lib/map';
+import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { MachiDetailCard } from './machi-detail-card';
+import { useBoundsManagement } from '../model';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { FeatureCollection, Point } from 'geojson';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
@@ -31,13 +32,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
-    // カメラのビューポート範囲を管理
-    const [bounds, setBounds] = useState<{
-      minLat: number;
-      maxLat: number;
-      minLng: number;
-      maxLng: number;
-    } | null>(null);
+    // ビューポート範囲管理
+    const { bounds, handleCameraChanged } = useBoundsManagement({ currentLocation });
 
     // ビューポート範囲内のmaster_spotsを取得
     const { data: masterSpots = [] } = useMasterSpotsByBounds(bounds);
@@ -113,25 +109,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       };
     }, [masterSpots]);
 
-    // 初期カメラ位置から大まかなboundsを計算
-    useEffect(() => {
-      const center = currentLocation
-        ? { lat: currentLocation.latitude, lng: currentLocation.longitude }
-        : { lat: 35.6812, lng: 139.7671 };
-      const zoom = currentLocation ? 14 : 10;
-
-      const initialBounds = calculateBoundsFromCamera(center, zoom);
-      setBounds(initialBounds);
-    }, [currentLocation]);
-
-    // カメラ移動時にビューポート範囲を更新
-    const handleCameraChanged = async (state: any) => {
-      const bounds = await state.properties.visibleBounds;
-      if (bounds) {
-        const [[minLng, minLat], [maxLng, maxLat]] = bounds;
-        setBounds({ minLat, maxLat, minLng, maxLng });
-      }
-    };
 
     // マーカータップ時のハンドラー
     const handleMarkerPress = (event: any) => {
@@ -157,7 +134,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // 初期カメラ位置を計算
     const initialCenter = currentLocation
       ? [currentLocation.longitude, currentLocation.latitude]
-      : [139.7671, 35.6812]; // フォールバック: 東京
+      : [139.7671, 35.6812]; // フォールバック: 東京駅付近
 
   // 外部から呼び出せるメソッドを公開
   useImperativeHandle(ref, () => ({

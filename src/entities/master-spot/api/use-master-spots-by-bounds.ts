@@ -14,7 +14,9 @@ interface Bounds {
 
 export function useMasterSpotsByBounds(bounds: Bounds | null) {
   return useQuery({
-    queryKey: ['master-spots', 'bounds', bounds],
+    queryKey: bounds
+      ? ['master-spots', 'bounds', bounds.minLat, bounds.maxLat, bounds.minLng, bounds.maxLng]
+      : ['master-spots', 'bounds', null],
     queryFn: () => {
       if (!bounds) return [];
       return getMasterSpotsByBounds(
@@ -25,6 +27,5 @@ export function useMasterSpotsByBounds(bounds: Bounds | null) {
       );
     },
     enabled: !!bounds,
-    staleTime: 5 * 60 * 1000, // 5分間キャッシュ
   });
 }
