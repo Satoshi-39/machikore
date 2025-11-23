@@ -198,7 +198,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           <Mapbox.MapView
             style={{ flex: 1 }}
             styleURL={Mapbox.StyleURL.Light}
-            localizeLabels={true}
             onCameraChanged={handleCameraChanged}
           >
             <Mapbox.Camera
@@ -208,105 +207,78 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               animationDuration={0}
             />
 
-            {/* 都道府県マーカー表示（紫の円）- ズーム0-10で表示 */}
+            {/* 都道府県ラベル表示（テキストのみ）- ズーム0-10で表示 */}
             <Mapbox.ShapeSource
               id="prefectures-source"
               shape={prefecturesGeoJson}
             >
-              <Mapbox.CircleLayer
-                id="prefectures"
-                maxZoomLevel={11}
-                style={{
-                  circleColor: '#9333EA',
-                  circleRadius: 12,
-                  circleStrokeWidth: 2,
-                  circleStrokeColor: '#FFFFFF',
-                }}
-              />
               <Mapbox.SymbolLayer
                 id="prefectures-labels"
                 maxZoomLevel={11}
                 style={{
                   textField: ['get', 'name'],
-                  textSize: 14,
+                  textSize: 16,
                   textColor: '#9333EA',
                   textHaloColor: '#FFFFFF',
                   textHaloWidth: 2,
                   textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
-                  textAnchor: 'top',
-                  textOffset: [0, 1.5],
                 }}
               />
             </Mapbox.ShapeSource>
 
-            {/* 市区町村マーカー表示（ピンクの円）- ズーム11-13で表示 */}
+            {/* 市区町村ラベル表示（テキストのみ）- ズーム11-13で表示 */}
             <Mapbox.ShapeSource
               id="cities-source"
               shape={citiesGeoJson}
             >
-              <Mapbox.CircleLayer
-                id="cities"
-                minZoomLevel={11}
-                maxZoomLevel={14}
-                style={{
-                  circleColor: '#EC4899',
-                  circleRadius: 10,
-                  circleStrokeWidth: 2,
-                  circleStrokeColor: '#FFFFFF',
-                }}
-              />
               <Mapbox.SymbolLayer
                 id="cities-labels"
                 minZoomLevel={11}
                 maxZoomLevel={14}
                 style={{
                   textField: ['get', 'name'],
-                  textSize: 12,
+                  textSize: 14,
                   textColor: '#EC4899',
                   textHaloColor: '#FFFFFF',
                   textHaloWidth: 2,
-                  textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                  textAnchor: 'top',
-                  textOffset: [0, 1.2],
+                  textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
                 }}
               />
             </Mapbox.ShapeSource>
 
-            {/* 街マーカー表示 */}
+            {/* 街マーカー表示（アイコン + ラベル）- ズーム14以上で表示 */}
             <Mapbox.ShapeSource
               id="machi-source"
               shape={geoJsonData}
               onPress={handleMarkerPress}
             >
-              {/* 訪問済みマーカー（緑の円）- ズーム14以上で表示 */}
-              {/* 将来の拡張: お気に入りの場合は金色に変更可能 */}
-              <Mapbox.CircleLayer
-                id="visited-machi"
+              {/* 訪問済み街アイコン（緑の家）*/}
+              <Mapbox.SymbolLayer
+                id="visited-machi-icon"
                 filter={['==', ['get', 'isVisited'], true]}
                 minZoomLevel={14}
                 style={{
-                  circleColor: '#10B981',
-                  circleRadius: 10,
-                  circleStrokeWidth: 2,
-                  circleStrokeColor: '#FFFFFF',
+                  textField: '🏠',
+                  textSize: 24,
+                  textAnchor: 'bottom',
+                  textOffset: [0, 0.5],
                 }}
               />
 
-              {/* 未訪問マーカー（青の円）- ズーム14以上で表示 */}
-              {/* 将来の拡張: 行きたい度合いで色を変更可能（例: 赤色で優先度高） */}
-              <Mapbox.CircleLayer
-                id="unvisited-machi"
+              {/* 未訪問街アイコン（青の建物）*/}
+              <Mapbox.SymbolLayer
+                id="unvisited-machi-icon"
                 filter={['==', ['get', 'isVisited'], false]}
                 minZoomLevel={14}
                 style={{
-                  circleColor: '#3B82F6',
-                  circleRadius: 10,
-                  circleStrokeWidth: 2,
-                  circleStrokeColor: '#FFFFFF',
+                  textField: '🏘️',
+                  textSize: 24,
+                  textAnchor: 'bottom',
+                  textOffset: [0, 0.5],
                 }}
               />
 
-              {/* 街名テキスト表示（太字）- ズーム14以上で表示 */}
+              {/* 街名テキスト表示（太字）*/}
               <Mapbox.SymbolLayer
                 id="machi-labels"
                 minZoomLevel={14}
@@ -318,29 +290,29 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                   textHaloWidth: 2,
                   textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
                   textAnchor: 'top',
-                  textOffset: [0, 1.2],
+                  textOffset: [0, 1.5],
                 }}
               />
             </Mapbox.ShapeSource>
 
-            {/* スポットマーカー表示（オレンジ色） */}
+            {/* スポットマーカー表示（アイコン + ラベル）- ズーム15以上で表示 */}
             <Mapbox.ShapeSource
               id="master-spots-source"
               shape={masterSpotsGeoJson}
             >
-              {/* スポットマーカー（オレンジの円）- ズーム15以上で表示 */}
-              <Mapbox.CircleLayer
-                id="master-spots"
+              {/* スポットアイコン（ピン）*/}
+              <Mapbox.SymbolLayer
+                id="master-spots-icon"
                 minZoomLevel={15}
                 style={{
-                  circleColor: '#F97316',
-                  circleRadius: 8,
-                  circleStrokeWidth: 2,
-                  circleStrokeColor: '#FFFFFF',
+                  textField: '📍',
+                  textSize: 20,
+                  textAnchor: 'bottom',
+                  textOffset: [0, 0.5],
                 }}
               />
 
-              {/* スポット名テキスト表示 - ズーム15以上で表示 */}
+              {/* スポット名テキスト表示 */}
               <Mapbox.SymbolLayer
                 id="master-spots-labels"
                 minZoomLevel={15}
@@ -352,7 +324,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                   textHaloWidth: 2,
                   textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
                   textAnchor: 'top',
-                  textOffset: [0, 1],
+                  textOffset: [0, 1.3],
                 }}
               />
             </Mapbox.ShapeSource>
