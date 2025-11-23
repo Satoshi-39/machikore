@@ -77,6 +77,12 @@ export const QUERY_KEYS = {
   likeStatus: (userId: string, targetId: string) =>
     [...QUERY_KEYS.likes, 'status', userId, targetId] as const,
 
+  // 都道府県
+  prefectures: () => ['prefectures'] as const,
+
+  // 市区町村
+  cities: () => ['cities'] as const,
+
   // 街
   machi: ['machi'] as const,
   machiList: () => [...QUERY_KEYS.machi, 'list'] as const,

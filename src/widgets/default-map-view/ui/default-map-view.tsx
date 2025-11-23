@@ -8,6 +8,8 @@ import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds } from '@/entities/master-spot';
+import { usePrefectures } from '@/entities/prefecture';
+import { useCities } from '@/entities/city';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { MachiDetailCard } from './machi-detail-card';
@@ -28,6 +30,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
   ({ userId = null, currentLocation = null, onMachiDetailSnapChange, viewMode = 'map', isSearchFocused = false }, ref) => {
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
+    const { data: prefectures = [] } = usePrefectures();
+    const { data: cities = [] } = useCities();
     const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
     const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
@@ -109,6 +113,52 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       };
     }, [masterSpots]);
 
+    // 都道府県データをGeoJSON形式に変換（座標を持つもののみ）
+    const prefecturesGeoJson: FeatureCollection<Point> = useMemo(() => {
+      const prefecturesWithCoords = prefectures.filter(
+        (pref) => pref.latitude !== null && pref.longitude !== null
+      );
+
+      return {
+        type: 'FeatureCollection',
+        features: prefecturesWithCoords.map((pref) => ({
+          type: 'Feature',
+          id: pref.id,
+          geometry: {
+            type: 'Point',
+            coordinates: [pref.longitude!, pref.latitude!],
+          },
+          properties: {
+            id: pref.id,
+            name: pref.name,
+          },
+        })),
+      };
+    }, [prefectures]);
+
+    // 市区町村データをGeoJSON形式に変換（座標を持つもののみ）
+    const citiesGeoJson: FeatureCollection<Point> = useMemo(() => {
+      const citiesWithCoords = cities.filter(
+        (city) => city.latitude !== null && city.longitude !== null
+      );
+
+      return {
+        type: 'FeatureCollection',
+        features: citiesWithCoords.map((city) => ({
+          type: 'Feature',
+          id: city.id,
+          geometry: {
+            type: 'Point',
+            coordinates: [city.longitude!, city.latitude!],
+          },
+          properties: {
+            id: city.id,
+            name: city.name,
+          },
+        })),
+      };
+    }, [cities]);
+
 
     // マーカータップ時のハンドラー
     const handleMarkerPress = (event: any) => {
@@ -158,18 +208,82 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               animationDuration={0}
             />
 
+            {/* 都道府県マーカー表示（紫の円）- ズーム0-10で表示 */}
+            <Mapbox.ShapeSource
+              id="prefectures-source"
+              shape={prefecturesGeoJson}
+            >
+              <Mapbox.CircleLayer
+                id="prefectures"
+                maxZoomLevel={11}
+                style={{
+                  circleColor: '#9333EA',
+                  circleRadius: 12,
+                  circleStrokeWidth: 2,
+                  circleStrokeColor: '#FFFFFF',
+                }}
+              />
+              <Mapbox.SymbolLayer
+                id="prefectures-labels"
+                maxZoomLevel={11}
+                style={{
+                  textField: ['get', 'name'],
+                  textSize: 14,
+                  textColor: '#9333EA',
+                  textHaloColor: '#FFFFFF',
+                  textHaloWidth: 2,
+                  textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+                  textAnchor: 'top',
+                  textOffset: [0, 1.5],
+                }}
+              />
+            </Mapbox.ShapeSource>
+
+            {/* 市区町村マーカー表示（ピンクの円）- ズーム11-13で表示 */}
+            <Mapbox.ShapeSource
+              id="cities-source"
+              shape={citiesGeoJson}
+            >
+              <Mapbox.CircleLayer
+                id="cities"
+                minZoomLevel={11}
+                maxZoomLevel={14}
+                style={{
+                  circleColor: '#EC4899',
+                  circleRadius: 10,
+                  circleStrokeWidth: 2,
+                  circleStrokeColor: '#FFFFFF',
+                }}
+              />
+              <Mapbox.SymbolLayer
+                id="cities-labels"
+                minZoomLevel={11}
+                maxZoomLevel={14}
+                style={{
+                  textField: ['get', 'name'],
+                  textSize: 12,
+                  textColor: '#EC4899',
+                  textHaloColor: '#FFFFFF',
+                  textHaloWidth: 2,
+                  textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                  textAnchor: 'top',
+                  textOffset: [0, 1.2],
+                }}
+              />
+            </Mapbox.ShapeSource>
+
             {/* 街マーカー表示 */}
             <Mapbox.ShapeSource
               id="machi-source"
               shape={geoJsonData}
               onPress={handleMarkerPress}
             >
-              {/* 訪問済みマーカー（緑の円）- ズーム11以上で表示 */}
+              {/* 訪問済みマーカー（緑の円）- ズーム14以上で表示 */}
               {/* 将来の拡張: お気に入りの場合は金色に変更可能 */}
               <Mapbox.CircleLayer
                 id="visited-machi"
                 filter={['==', ['get', 'isVisited'], true]}
-                minZoomLevel={11}
+                minZoomLevel={14}
                 style={{
                   circleColor: '#10B981',
                   circleRadius: 10,
@@ -178,12 +292,12 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                 }}
               />
 
-              {/* 未訪問マーカー（青の円）- ズーム11以上で表示 */}
+              {/* 未訪問マーカー（青の円）- ズーム14以上で表示 */}
               {/* 将来の拡張: 行きたい度合いで色を変更可能（例: 赤色で優先度高） */}
               <Mapbox.CircleLayer
                 id="unvisited-machi"
                 filter={['==', ['get', 'isVisited'], false]}
-                minZoomLevel={11}
+                minZoomLevel={14}
                 style={{
                   circleColor: '#3B82F6',
                   circleRadius: 10,
@@ -192,10 +306,10 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                 }}
               />
 
-              {/* 街名テキスト表示（太字）- ズーム13以上で表示 */}
+              {/* 街名テキスト表示（太字）- ズーム14以上で表示 */}
               <Mapbox.SymbolLayer
                 id="machi-labels"
-                minZoomLevel={13}
+                minZoomLevel={14}
                 style={{
                   textField: ['get', 'name'],
                   textSize: 12,
