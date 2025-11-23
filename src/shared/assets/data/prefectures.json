@@ -4,6 +4,8 @@
     "name": "北海道",
     "name_kana": "ほっかいどう",
     "region_id": "hokkaido",
+    "latitude": 43.0642,
+    "longitude": 141.3469,
     "country_code": "jp"
   },
   {
@@ -88,6 +90,8 @@
     "name": "東京都",
     "name_kana": "とうきょうと",
     "region_id": "kanto",
+    "latitude": 35.6812,
+    "longitude": 139.6503,
     "country_code": "jp"
   },
   {
@@ -95,6 +99,8 @@
     "name": "神奈川県",
     "name_kana": "かながわけん",
     "region_id": "kanto",
+    "latitude": 35.4478,
+    "longitude": 139.6425,
     "country_code": "jp"
   },
   {
@@ -158,6 +164,8 @@
     "name": "愛知県",
     "name_kana": "あいちけん",
     "region_id": "chubu",
+    "latitude": 35.1802,
+    "longitude": 136.9066,
     "country_code": "jp"
   },
   {
@@ -179,6 +187,8 @@
     "name": "京都府",
     "name_kana": "きょうとふ",
     "region_id": "kinki",
+    "latitude": 35.0116,
+    "longitude": 135.7681,
     "country_code": "jp"
   },
   {
@@ -186,6 +196,8 @@
     "name": "大阪府",
     "name_kana": "おおさかふ",
     "region_id": "kinki",
+    "latitude": 34.6937,
+    "longitude": 135.5023,
     "country_code": "jp"
   },
   {
@@ -193,6 +205,8 @@
     "name": "兵庫県",
     "name_kana": "ひょうごけん",
     "region_id": "kinki",
+    "latitude": 34.6913,
+    "longitude": 135.1830,
     "country_code": "jp"
   },
   {
@@ -277,6 +291,8 @@
     "name": "福岡県",
     "name_kana": "ふくおかけん",
     "region_id": "kyushu",
+    "latitude": 33.5904,
+    "longitude": 130.4017,
     "country_code": "jp"
   },
   {

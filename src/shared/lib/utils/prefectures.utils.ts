@@ -16,6 +16,8 @@ export function getPrefecturesData(): PrefectureRow[] {
 
   return prefecturesData.map((p) => ({
     ...p,
+    latitude: 'latitude' in p ? p.latitude : null,
+    longitude: 'longitude' in p ? p.longitude : null,
     name_translations: null, // TODO: Add translations when available
     created_at: now,
     updated_at: now,

@@ -16,6 +16,8 @@ export function getCitiesData(): CityRow[] {
 
   return citiesData.map((c) => ({
     ...c,
+    latitude: 'latitude' in c ? c.latitude : null,
+    longitude: 'longitude' in c ? c.longitude : null,
     name_translations: null, // TODO: Add translations when available
     created_at: now,
     updated_at: now,
