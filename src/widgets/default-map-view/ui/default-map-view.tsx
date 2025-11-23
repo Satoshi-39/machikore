@@ -2,14 +2,14 @@
  * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
-import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo, useEffect } from 'react';
 import { View } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds } from '@/entities/master-spot';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
-import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
+import { useMapLocation, calculateBoundsFromCamera, type MapViewHandle } from '@/shared/lib/map';
 import { MachiDetailCard } from './machi-detail-card';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { FeatureCollection, Point } from 'geojson';
@@ -112,6 +112,17 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         })),
       };
     }, [masterSpots]);
+
+    // 初期カメラ位置から大まかなboundsを計算
+    useEffect(() => {
+      const center = currentLocation
+        ? { lat: currentLocation.latitude, lng: currentLocation.longitude }
+        : { lat: 35.6812, lng: 139.7671 };
+      const zoom = currentLocation ? 14 : 10;
+
+      const initialBounds = calculateBoundsFromCamera(center, zoom);
+      setBounds(initialBounds);
+    }, [currentLocation]);
 
     // カメラ移動時にビューポート範囲を更新
     const handleCameraChanged = async (state: any) => {
