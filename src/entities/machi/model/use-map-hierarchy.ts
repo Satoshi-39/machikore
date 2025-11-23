@@ -125,6 +125,8 @@ export function useMapHierarchy() {
             name_kana: 'そのた',
             name_translations: null,
             type: '',
+            latitude: null,
+            longitude: null,
             country_code: 'jp',
             created_at: '',
             updated_at: '',

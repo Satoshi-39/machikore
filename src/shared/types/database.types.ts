@@ -316,6 +316,8 @@ export interface PrefectureRow {
   name_kana: string;       // "とうきょうと"
   name_translations: string | null; // JSON: {"en": "Tokyo", "zh": "东京"}
   region_id: string | null; // "kanto", "kinki" (外部キー → regions.id) - Optional for countries without region concept
+  latitude: number | null; // 中心座標の緯度
+  longitude: number | null; // 中心座標の経度
   country_code: string;    // "jp"
   created_at: string;
   updated_at: string;
@@ -331,6 +333,8 @@ export interface CityRow {
   name_kana: string;       // "しぶやく"
   name_translations: string | null; // JSON: {"en": "Shibuya", "zh": "涩谷"}
   type: string;            // "区", "市", "町", "村"
+  latitude: number | null; // 中心座標の緯度
+  longitude: number | null; // 中心座標の経度
   country_code: string;    // "jp"
   created_at: string;
   updated_at: string;
