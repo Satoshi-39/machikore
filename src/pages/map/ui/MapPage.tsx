@@ -169,7 +169,6 @@ export function MapPage() {
               onViewModeChange={setViewMode}
               onSearchFocus={handleSearchFocus}
               className="px-5 pt-5 pb-3"
-              showLogo={!isUserMap}
             />
 
             {/* デフォルトマップの階層リスト or ユーザーマップのフラットリスト */}
@@ -228,7 +227,6 @@ export function MapPage() {
               viewMode={viewMode}
               onViewModeChange={setViewMode}
               onSearchFocus={handleSearchFocus}
-              showLogo={!isUserMap}
             />
           </View>
         )}

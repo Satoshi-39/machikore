@@ -5,8 +5,7 @@
  */
 
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, Pressable, Image } from 'react-native';
 
 interface MapSearchBarProps {
   onFocus?: () => void;
@@ -21,7 +20,11 @@ export function MapSearchBar({ onFocus, variant = 'map' }: MapSearchBarProps) {
           variant === 'map' ? 'bg-white shadow-md' : 'bg-gray-100'
         }`}
       >
-        <Ionicons name="search" size={20} color="#9CA3AF" />
+        <Image
+          source={require('../../../../assets/images/machikore7.png')}
+          style={{ width: 24, height: 24 }}
+          resizeMode="contain"
+        />
         <Text className="flex-1 ml-2 text-base text-gray-400">
           スポットを検索
         </Text>

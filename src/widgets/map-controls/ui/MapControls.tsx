@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { MapSearchBar } from '@/features/search-places';
 import {
   ViewModeToggle,
@@ -21,7 +20,6 @@ interface MapControlsProps {
   onViewModeChange: (mode: MapListViewMode) => void;
   onSearchFocus: () => void;
   className?: string;
-  showLogo?: boolean;
 }
 
 export function MapControls({
@@ -30,18 +28,10 @@ export function MapControls({
   onViewModeChange,
   onSearchFocus,
   className = 'px-5 pt-5',
-  showLogo = false,
 }: MapControlsProps) {
   return (
     <View className={className}>
       <View className="flex-row items-start gap-3">
-        {/* 街コレアイコン（デフォルトマップのみ） */}
-        {showLogo && (
-          <View className="items-center justify-center mt-3">
-            <Ionicons name="map" size={24} color="#007AFF" />
-          </View>
-        )}
-
         <View className="flex-1">
           <MapSearchBar variant={variant} onFocus={onSearchFocus} />
         </View>
