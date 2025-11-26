@@ -21,7 +21,6 @@ import { DefaultMapSearch } from '@/widgets/default-map-search';
 import { OwnMapSearch } from '@/widgets/own-map-search';
 import { OtherMapSearch } from '@/widgets/other-map-search';
 import { MapHeader } from '@/widgets/map-header';
-import { MapControls } from '@/widgets/map-controls';
 import { useLocation } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
 import {
@@ -42,9 +41,6 @@ export function MapPage() {
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
-  const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
-  const [cityDetailSnapIndex, setCityDetailSnapIndex] = useState<number>(1);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
   const [quickAddTrigger, setQuickAddTrigger] = useState(0);
@@ -139,9 +135,10 @@ export function MapPage() {
             mapId={selectedMapId || id || null}
             userId={user?.id ?? null}
             defaultMapId={userMaps?.[0]?.id ?? null}
-            onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
             currentLocation={location}
             viewMode={viewMode}
+            onViewModeChange={setViewMode}
+            onSearchFocus={handleSearchFocus}
             isSearchFocused={isSearchFocused}
             autoOpenQuickAdd={addSpot != null}
             quickAddTrigger={quickAddTrigger}
@@ -152,10 +149,9 @@ export function MapPage() {
             ref={mapViewRef}
             userId={user?.id ?? null}
             currentLocation={location}
-            onMachiDetailSnapChange={(snapIndex) => setMachiDetailSnapIndex(snapIndex)}
-            onCityDetailSnapChange={(snapIndex) => setCityDetailSnapIndex(snapIndex)}
-            onSpotDetailSnapChange={(snapIndex) => setSpotDetailSnapIndex(snapIndex)}
             viewMode={viewMode}
+            onViewModeChange={setViewMode}
+            onSearchFocus={handleSearchFocus}
             isSearchFocused={isSearchFocused}
           />
         )}
@@ -163,17 +159,19 @@ export function MapPage() {
         {/* リスト表示時：マップの上にリストUIをオーバーレイ */}
         {viewMode === 'list' && !isSearchFocused && (
           <View className="absolute inset-0 bg-white" style={{ paddingTop: isUserMap ? 0 : insets.top }}>
-            {/* 検索バー + ViewModeToggle */}
-            <MapControls
-              variant="list"
-              viewMode={viewMode}
-              onViewModeChange={setViewMode}
-              onSearchFocus={handleSearchFocus}
-              className="px-5 pt-5 pb-3"
-            />
-
-            {/* デフォルトマップの階層リスト or ユーザーマップのフラットリスト */}
-            {isUserMap ? <UserMapList /> : <DefaultMapHierarchy />}
+            {isUserMap ? (
+              <UserMapList
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
+                onSearchFocus={handleSearchFocus}
+              />
+            ) : (
+              <DefaultMapHierarchy
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
+                onSearchFocus={handleSearchFocus}
+              />
+            )}
           </View>
         )}
 
@@ -222,24 +220,6 @@ export function MapPage() {
           </View>
         )}
 
-        {/* 検索バー + ViewModeToggle をマップの上に表示（マップモード時かつ検索時と拡大時は非表示） */}
-        {viewMode === 'map' && !isSearchFocused && (
-          <View
-            className="absolute top-0 left-0 right-0"
-            style={{
-              paddingTop: isUserMap ? 0 : insets.top,
-              opacity: spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 ? 0 : 1,
-            }}
-            pointerEvents={spotDetailSnapIndex === 2 || machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 ? 'none' : 'auto'}
-          >
-            <MapControls
-              variant="map"
-              viewMode={viewMode}
-              onViewModeChange={setViewMode}
-              onSearchFocus={handleSearchFocus}
-            />
-          </View>
-        )}
       </View>
     </SafeAreaView>
   );

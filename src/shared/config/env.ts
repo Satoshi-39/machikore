@@ -17,6 +17,7 @@ interface Env {
   EXPO_PUBLIC_API_BASE_URL?: string;
   EXPO_PUBLIC_ENV?: 'development' | 'staging' | 'production';
   EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN?: string;
+  EXPO_PUBLIC_MAPBOX_STYLE_URL?: string;
   EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID?: string;
   EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID?: string;
 }
@@ -61,6 +62,7 @@ export const ENV = {
 
   // Mapbox
   MAPBOX_ACCESS_TOKEN: getEnvVar('EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN', ''),
+  MAPBOX_STYLE_URL: getEnvVar('EXPO_PUBLIC_MAPBOX_STYLE_URL', 'mapbox://styles/mapbox/streets-v12'),
 
   // Google OAuth
   GOOGLE_OAUTH_IOS_CLIENT_ID: getEnvVar('EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID', ''),

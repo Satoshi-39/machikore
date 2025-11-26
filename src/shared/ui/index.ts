@@ -11,3 +11,4 @@ export { LocationButton } from './location-button';
 export { Breadcrumb } from './breadcrumb';
 export type { BreadcrumbItem } from './breadcrumb';
 export { SearchBar } from './search-bar';
+export { MapControls } from './map-controls';

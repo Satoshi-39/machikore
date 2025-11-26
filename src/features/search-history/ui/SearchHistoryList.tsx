@@ -14,7 +14,6 @@ interface SearchHistoryListProps {
   onRemove: (id: string) => void;
   onClearAll?: () => void;
   title?: string;
-  emptyMessage?: string;
 }
 
 export function SearchHistoryList({
@@ -23,7 +22,6 @@ export function SearchHistoryList({
   onRemove,
   onClearAll,
   title = '検索履歴',
-  emptyMessage = '検索履歴がありません',
 }: SearchHistoryListProps) {
   if (history.length === 0) {
     return null; // 履歴がない場合は何も表示しない

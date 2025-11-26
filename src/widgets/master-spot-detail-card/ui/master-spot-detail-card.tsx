@@ -8,10 +8,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
-import type { MasterSpotRow } from '@/shared/types/database.types';
+import type { MasterSpotDisplay } from '@/shared/types/database.types';
 
 interface MasterSpotDetailCardProps {
-  spot: MasterSpotRow;
+  spot: MasterSpotDisplay;
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
 }

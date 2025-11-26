@@ -1,8 +1,8 @@
 /**
- * マップコントロールWidget
+ * マップコントロール
  *
- * 検索バーと表示モード切り替えボタンを組み合わせたコンポーネント
- * FSDの原則：Widget層は複数のFeatureを組み合わせた複合コンポーネント
+ * 検索バーと表示モード切り替えボタンを組み合わせた共通UIコンポーネント
+ * FSDの原則：Shared層の汎用UIコンポーネント
  */
 
 import React from 'react';
@@ -19,6 +19,8 @@ interface MapControlsProps {
   viewMode: MapListViewMode;
   onViewModeChange: (mode: MapListViewMode) => void;
   onSearchFocus: () => void;
+  showIcon?: boolean;
+  placeholder?: string;
   className?: string;
 }
 
@@ -27,13 +29,20 @@ export function MapControls({
   viewMode,
   onViewModeChange,
   onSearchFocus,
+  showIcon = true,
+  placeholder = 'スポットを検索',
   className = 'px-5 pt-5',
 }: MapControlsProps) {
   return (
     <View className={className}>
       <View className="flex-row items-start gap-3">
         <View className="flex-1">
-          <MapSearchBar variant={variant} onFocus={onSearchFocus} />
+          <MapSearchBar
+            variant={variant}
+            onFocus={onSearchFocus}
+            showIcon={showIcon}
+            placeholder={placeholder}
+          />
         </View>
         <ViewModeToggle
           viewMode={viewMode}

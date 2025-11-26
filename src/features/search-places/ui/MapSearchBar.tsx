@@ -6,13 +6,22 @@
 
 import React from 'react';
 import { View, Text, Pressable, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
 
 interface MapSearchBarProps {
   onFocus?: () => void;
   variant?: 'map' | 'list';
+  showIcon?: boolean;
+  placeholder?: string;
 }
 
-export function MapSearchBar({ onFocus, variant = 'map' }: MapSearchBarProps) {
+export function MapSearchBar({
+  onFocus,
+  variant = 'map',
+  showIcon = true,
+  placeholder = 'スポットを検索',
+}: MapSearchBarProps) {
   return (
     <Pressable onPress={onFocus}>
       <View
@@ -20,13 +29,17 @@ export function MapSearchBar({ onFocus, variant = 'map' }: MapSearchBarProps) {
           variant === 'map' ? 'bg-white shadow-md' : 'bg-gray-100'
         }`}
       >
-        <Image
-          source={require('../../../../assets/images/machikore7.png')}
-          style={{ width: 24, height: 24 }}
-          resizeMode="contain"
-        />
+        {showIcon ? (
+          <Image
+            source={require('../../../../assets/images/machikore7.png')}
+            style={{ width: 24, height: 24 }}
+            resizeMode="contain"
+          />
+        ) : (
+          <Ionicons name="search" size={20} color={colors.gray[400]} />
+        )}
         <Text className="flex-1 ml-2 text-base text-gray-400">
-          スポットを検索
+          {placeholder}
         </Text>
       </View>
     </Pressable>

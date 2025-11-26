@@ -4,8 +4,16 @@
 
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
-import type { MasterSpotRow } from '@/shared/types/database.types';
 import { determineSpotCategory, type SpotCategory } from './categories';
+
+// GeoJSON変換に必要な最小限のフィールド
+interface MasterSpotForGeoJson {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  google_types: string | null;
+}
 
 interface MasterSpotFeatureProperties {
   id: string;
@@ -17,7 +25,7 @@ interface MasterSpotFeatureProperties {
  * Master SpotsデータをGeoJSON形式に変換
  */
 export function useMasterSpotsGeoJson(
-  masterSpots: MasterSpotRow[] | undefined
+  masterSpots: MasterSpotForGeoJson[] | undefined
 ): FeatureCollection<Point, MasterSpotFeatureProperties> {
   return useMemo(() => {
     if (!masterSpots || masterSpots.length === 0) {

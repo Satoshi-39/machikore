@@ -10,15 +10,16 @@ import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCities, useCitiesGeoJson } from '@/entities/city';
-import { AsyncBoundary, LocationButton } from '@/shared/ui';
+import { AsyncBoundary, LocationButton, MapControls } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
+import { ENV } from '@/shared/config';
 import { MachiDetailCard } from './machi-detail-card';
 import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
 import { useCountriesGeoJson } from '@/entities/country/model';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import { useBoundsManagement } from '../model';
-import type { MachiRow, MasterSpotRow, CityRow } from '@/shared/types/database.types';
+import type { MachiRow, MasterSpotDisplay, CityRow } from '@/shared/types/database.types';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { MasterSpotDetailCard } from '@/widgets/master-spot-detail-card';
 import { CityDetailCard } from '@/widgets/city-detail-card';
@@ -30,11 +31,13 @@ interface DefaultMapViewProps {
   onCityDetailSnapChange?: (snapIndex: number) => void;
   onSpotDetailSnapChange?: (snapIndex: number) => void;
   viewMode?: MapListViewMode;
+  onViewModeChange?: (mode: MapListViewMode) => void;
+  onSearchFocus?: () => void;
   isSearchFocused?: boolean;
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', isSearchFocused = false }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange, onSearchFocus, isSearchFocused = false }, ref) => {
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
@@ -43,7 +46,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [machiDetailSnapIndex, setMachiDetailSnapIndex] = useState<number>(1);
     const [selectedCity, setSelectedCity] = useState<CityRow | null>(null);
     const [cityDetailSnapIndex, setCityDetailSnapIndex] = useState<number>(1);
-    const [selectedSpot, setSelectedSpot] = useState<MasterSpotRow | null>(null);
+    const [selectedSpot, setSelectedSpot] = useState<MasterSpotDisplay | null>(null);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
@@ -80,7 +83,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     };
 
     // スポット選択状態を管理
-    const handleSpotSelect = (spot: MasterSpotRow | null) => {
+    const handleSpotSelect = (spot: MasterSpotDisplay | null) => {
       setSelectedSpot(spot);
       // スポットを選択したら他の選択を解除
       if (spot) {
@@ -124,9 +127,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       return new Map(cities.map((city) => [city.id, city]));
     }, [cities]);
 
-    // MasterSpotRowのマップを作成（IDからMasterSpotRowへの変換用）
+    // MasterSpotDisplayのマップを作成（IDからMasterSpotDisplayへの変換用）
     const masterSpotMap = useMemo(() => {
-      if (!masterSpots) return new Map<string, MasterSpotRow>();
+      if (!masterSpots) return new Map<string, MasterSpotDisplay>();
       return new Map(masterSpots.map((spot) => [spot.id, spot]));
     }, [masterSpots]);
 
@@ -206,7 +209,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         <View style={{ flex: 1 }}>
           <Mapbox.MapView
             style={{ flex: 1 }}
-            styleURL="mapbox://styles/tyatsushi/cmib9h22p003x01snfpcmd1wn"
+            styleURL={ENV.MAPBOX_STYLE_URL}
             onCameraChanged={handleCameraChanged}
             scaleBarEnabled={false}
           >
@@ -232,6 +235,26 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
             <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
           </Mapbox.MapView>
+
+          {/* 検索バー + ViewModeToggle */}
+          {viewMode === 'map' && !isSearchFocused && onViewModeChange && onSearchFocus && (
+            <View
+              className="absolute top-0 left-0 right-0"
+              style={{
+                opacity: machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 || spotDetailSnapIndex === 2 ? 0 : 1,
+              }}
+              pointerEvents={machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 || spotDetailSnapIndex === 2 ? 'none' : 'auto'}
+            >
+              <MapControls
+                variant="map"
+                viewMode={viewMode}
+                onViewModeChange={onViewModeChange}
+                onSearchFocus={onSearchFocus}
+                showIcon={true}
+                placeholder="スポットを検索"
+              />
+            </View>
+          )}
 
           {/* マップコントロールボタン（現在地ボタン） */}
           {viewMode === 'map' && !isSearchFocused && (

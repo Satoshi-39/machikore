@@ -10,7 +10,7 @@ import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
-import { FAB, LocationButton } from '@/shared/ui';
+import { FAB, LocationButton, MapControls } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
@@ -31,6 +31,8 @@ interface UserMapViewProps {
   onSpotDetailSnapChange?: (snapIndex: number) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
+  onViewModeChange?: (mode: MapListViewMode) => void;
+  onSearchFocus?: () => void;
   isSearchFocused?: boolean;
   autoOpenQuickAdd?: boolean;
   quickAddTrigger?: number;
@@ -46,6 +48,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       onSpotDetailSnapChange,
       currentLocation = null,
       viewMode = 'map',
+      onViewModeChange,
+      onSearchFocus,
       isSearchFocused = false,
       autoOpenQuickAdd = false,
       quickAddTrigger = 0,
@@ -213,6 +217,26 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             </Mapbox.PointAnnotation>
           ))}
         </Mapbox.MapView>
+
+        {/* 検索バー + ViewModeToggle */}
+        {viewMode === 'map' && !isSearchFocused && onViewModeChange && onSearchFocus && (
+          <View
+            className="absolute top-0 left-0 right-0"
+            style={{
+              opacity: spotDetailSnapIndex === 2 ? 0 : 1,
+            }}
+            pointerEvents={spotDetailSnapIndex === 2 ? 'none' : 'auto'}
+          >
+            <MapControls
+              variant="map"
+              viewMode={viewMode}
+              onViewModeChange={onViewModeChange}
+              onSearchFocus={onSearchFocus}
+              showIcon={false}
+              placeholder="このマップを検索"
+            />
+          </View>
+        )}
 
         {/* マップコントロールボタン（現在地ボタン） - 縮小版またはカードなしの時表示 */}
         {viewMode === 'map' &&

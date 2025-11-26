@@ -8,7 +8,7 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Breadcrumb, type BreadcrumbItem } from '@/shared/ui';
+import { Breadcrumb, MapControls, type BreadcrumbItem } from '@/shared/ui';
 import {
   HierarchyListItem,
   type HierarchyItem,
@@ -17,8 +17,19 @@ import {
 import { MachiCard } from '@/entities/machi';
 import { useMapHierarchy } from '@/entities/machi';
 import { AsyncBoundary } from '@/shared/ui';
+import type { MapListViewMode } from '@/features/toggle-view-mode';
 
-export function DefaultMapHierarchy() {
+interface DefaultMapHierarchyProps {
+  viewMode: MapListViewMode;
+  onViewModeChange: (mode: MapListViewMode) => void;
+  onSearchFocus: () => void;
+}
+
+export function DefaultMapHierarchy({
+  viewMode,
+  onViewModeChange,
+  onSearchFocus,
+}: DefaultMapHierarchyProps) {
   const router = useRouter();
   const [level, setLevel] = useState<HierarchyLevel>('home');
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -187,11 +198,22 @@ export function DefaultMapHierarchy() {
           data={getCurrentData}
           keyExtractor={(item) => item.id}
           ListHeaderComponent={
-            level !== 'home' ? (
-              <View className="bg-white border-b border-gray-200 px-5 py-3">
-                <Breadcrumb items={getBreadcrumbs} />
-              </View>
-            ) : null
+            <View>
+              <MapControls
+                variant="list"
+                viewMode={viewMode}
+                onViewModeChange={onViewModeChange}
+                onSearchFocus={onSearchFocus}
+                showIcon={true}
+                placeholder="スポットを検索"
+                className="px-5 pt-5 pb-3"
+              />
+              {level !== 'home' && (
+                <View className="bg-white border-b border-gray-200 px-5 py-3">
+                  <Breadcrumb items={getBreadcrumbs} />
+                </View>
+              )}
+            </View>
           }
           renderItem={({ item }) => {
             // 街レベルの場合はMachiCardを使用
