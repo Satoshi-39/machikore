@@ -22,7 +22,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
       {/* 飲食店系 - オレンジ */}
       <Mapbox.SymbolLayer
         id="master-spots-food"
-        minZoomLevel={15}
+        minZoomLevel={13}
         filter={['==', ['get', 'category'], 'food']}
         style={{
           textField: ['get', 'name'],
@@ -37,7 +37,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
       {/* ショッピング系 - 紫 */}
       <Mapbox.SymbolLayer
         id="master-spots-shopping"
-        minZoomLevel={15}
+        minZoomLevel={13}
         filter={['==', ['get', 'category'], 'shopping']}
         style={{
           textField: ['get', 'name'],
@@ -52,7 +52,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
       {/* 公園・観光地系 - 緑 */}
       <Mapbox.SymbolLayer
         id="master-spots-tourism"
-        minZoomLevel={15}
+        minZoomLevel={13}
         filter={['==', ['get', 'category'], 'tourism']}
         style={{
           textField: ['get', 'name'],
@@ -67,7 +67,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
       {/* 交通系 - 青 */}
       <Mapbox.SymbolLayer
         id="master-spots-transit"
-        minZoomLevel={15}
+        minZoomLevel={13}
         filter={['==', ['get', 'category'], 'transit']}
         style={{
           textField: ['get', 'name'],
@@ -82,7 +82,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
       {/* その他 - グレー（デフォルト） */}
       <Mapbox.SymbolLayer
         id="master-spots-other"
-        minZoomLevel={15}
+        minZoomLevel={13}
         filter={['==', ['get', 'category'], 'other']}
         style={{
           textField: ['get', 'name'],

@@ -14,6 +14,9 @@ import { AsyncBoundary, LocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { MachiDetailCard } from './machi-detail-card';
 import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels } from './layers';
+import { CountryLabels } from './layers/country-labels';
+import { useCountriesGeoJson } from '@/entities/country/model';
+import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import { useBoundsManagement } from '../model';
 import type { MachiRow, MasterSpotRow, CityRow } from '@/shared/types/database.types';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
@@ -127,11 +130,15 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       return new Map(masterSpots.map((spot) => [spot.id, spot]));
     }, [masterSpots]);
 
+    // 国データを取得
+    const countries = useMemo(() => getCountriesData(), []);
+
     // GeoJSON データ生成
     const machiGeoJson = useMachiGeoJson(machiData, visitedMachiIds);
     const masterSpotsGeoJson = useMasterSpotsGeoJson(masterSpots);
     const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
     const citiesGeoJson = useCitiesGeoJson(cities);
+    const countriesGeoJson = useCountriesGeoJson(countries);
 
 
     // 街マーカータップ時のハンドラー
@@ -210,16 +217,19 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               animationDuration={0}
             />
 
-            {/* 都道府県ラベル表示（テキストのみ）- ズーム0-10で表示 */}
+            {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
+            <CountryLabels geoJson={countriesGeoJson} />
+
+            {/* 都道府県ラベル表示（テキストのみ）- ズーム5-9で表示 */}
             <PrefectureLabels geoJson={prefecturesGeoJson} />
 
-            {/* 市区ラベル表示（テキストのみ）- ズーム11-13で表示 */}
+            {/* 市区ラベル表示（テキストのみ）- ズーム9-12で表示 */}
             <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
 
-            {/* 街マーカー表示（アイコン + ラベル）- ズーム14以上で表示 */}
+            {/* 街マーカー表示（アイコン + ラベル）- ズーム12以上で表示 */}
             <MachiLabels geoJson={machiGeoJson} onPress={handleMarkerPress} />
 
-            {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム15以上で表示 */}
+            {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
             <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
           </Mapbox.MapView>
 

@@ -22,7 +22,7 @@ export function MachiLabels({ geoJson, onPress }: MachiLabelsProps) {
       <Mapbox.SymbolLayer
         id="visited-machi-icon"
         filter={['==', ['get', 'isVisited'], true]}
-        minZoomLevel={14}
+        minZoomLevel={12}
         style={{
           textField: '🏠',
           textSize: 24,
@@ -35,7 +35,7 @@ export function MachiLabels({ geoJson, onPress }: MachiLabelsProps) {
       <Mapbox.SymbolLayer
         id="unvisited-machi-icon"
         filter={['==', ['get', 'isVisited'], false]}
-        minZoomLevel={14}
+        minZoomLevel={12}
         style={{
           textField: '🏘️',
           textSize: 24,
@@ -47,7 +47,7 @@ export function MachiLabels({ geoJson, onPress }: MachiLabelsProps) {
       {/* 街名テキスト表示（太字）*/}
       <Mapbox.SymbolLayer
         id="machi-labels"
-        minZoomLevel={14}
+        minZoomLevel={12}
         style={{
           textField: ['get', 'name'],
           textSize: 16,

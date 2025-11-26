@@ -1,30 +1,27 @@
 /**
- * 市区ラベルレイヤー（テキストのみ）
+ * 国ラベルレイヤー（テキストのみ）
  */
 
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 
-interface CityLabelsProps {
+interface CountryLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string }>;
-  onPress: (event: any) => void;
 }
 
-export function CityLabels({ geoJson, onPress }: CityLabelsProps) {
+export function CountryLabels({ geoJson }: CountryLabelsProps) {
   return (
     <Mapbox.ShapeSource
-      id="cities-source"
+      id="countries-source"
       shape={geoJson}
-      onPress={onPress}
     >
       <Mapbox.SymbolLayer
-        id="cities-labels"
-        minZoomLevel={9}
-        maxZoomLevel={12}
+        id="countries-labels"
+        maxZoomLevel={5}
         style={{
           textField: ['get', 'name'],
-          textSize: 16,
+          textSize: 18,
           textColor: '#000000',
           textHaloColor: '#FFFFFF',
           textHaloWidth: 2,

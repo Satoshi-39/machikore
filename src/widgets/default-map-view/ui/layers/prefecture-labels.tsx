@@ -18,7 +18,8 @@ export function PrefectureLabels({ geoJson }: PrefectureLabelsProps) {
     >
       <Mapbox.SymbolLayer
         id="prefectures-labels"
-        maxZoomLevel={11}
+        minZoomLevel={5}
+        maxZoomLevel={9}
         style={{
           textField: ['get', 'name'],
           textSize: 16,
