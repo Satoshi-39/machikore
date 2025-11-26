@@ -15,6 +15,7 @@ import {
   type PlaceSearchResult,
 } from '@/features/search-places';
 import { usePlaceSelectHandler } from '../model';
+import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 
 interface UserMapSearchProps {
   mapId: string | null;
@@ -59,13 +60,32 @@ export function UserMapSearch({
   const searchHook = isOwnMap ? googlePlacesSearch : machikorePlacesSearch;
   const { results, isLoading, error, search, config } = searchHook;
 
+  // 検索履歴フック
+  const {
+    history,
+    addHistory,
+    removeHistory,
+    clearHistory,
+  } = useSearchHistory({ type: 'userMap' });
+
   // 検索結果選択ハンドラー（Model層）
-  const { handlePlaceSelect } = usePlaceSelectHandler({
+  const { handlePlaceSelect: basePlaceSelect } = usePlaceSelectHandler({
     mapId,
     onPlaceSelect,
     onClose,
     endSession: isOwnMap && 'endSession' in googlePlacesSearch ? googlePlacesSearch.endSession : undefined,
   });
+
+  // 検索結果選択時に履歴も追加
+  const handlePlaceSelect = (place: PlaceSearchResult | Parameters<typeof basePlaceSelect>[0]) => {
+    addHistory(searchQuery, 'place');
+    basePlaceSelect(place as PlaceSearchResult);
+  };
+
+  // 履歴から検索
+  const handleHistorySelect = (query: string) => {
+    onSearchChange(query);
+  };
 
   // 検索クエリが変更されたら検索を実行（デバウンス付き）
   useEffect(() => {
@@ -114,16 +134,23 @@ export function UserMapSearch({
       {/* 検索結果・履歴エリア */}
       <ScrollView className="flex-1">
         {searchQuery.length === 0 ? (
-          // 検索プレースホルダー
+          // 検索プレースホルダー + 履歴
           <View className="p-4">
             <Text className="text-lg font-semibold text-gray-800 mb-3">
               {isOwnMap ? '場所を検索' : 'このマップのスポットを検索'}
             </Text>
-            <Text className="text-sm text-gray-500">
+            <Text className="text-sm text-gray-500 mb-4">
               {isOwnMap
                 ? 'レストラン、カフェ、観光スポットなどを検索して追加できます'
                 : 'このマップに登録されているスポットを検索できます'}
             </Text>
+            {/* 検索履歴 */}
+            <SearchHistoryList
+              history={history}
+              onSelect={handleHistorySelect}
+              onRemove={removeHistory}
+              onClearAll={clearHistory}
+            />
           </View>
         ) : (
           // 検索結果

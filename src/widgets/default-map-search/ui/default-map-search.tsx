@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, EmptyState, ErrorView } from '@/shared/ui';
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
+import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 
 interface DefaultMapSearchProps {
   searchQuery: string;
@@ -29,6 +30,14 @@ export function DefaultMapSearch({
     debounceMs: 300,
   });
 
+  // 検索履歴フック
+  const {
+    history,
+    addHistory,
+    removeHistory,
+    clearHistory,
+  } = useSearchHistory({ type: 'defaultMap' });
+
   // 検索クエリが変更されたら検索を実行（デバウンス付き）
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -39,8 +48,15 @@ export function DefaultMapSearch({
   }, [searchQuery, search, config.debounceMs]);
 
   const handlePlaceSelect = (place: MachikorePlaceSearchResult) => {
+    // 検索履歴に追加
+    addHistory(searchQuery, place.type);
     onPlaceSelect?.(place);
     onClose();
+  };
+
+  // 履歴から検索
+  const handleHistorySelect = (query: string) => {
+    onSearchChange(query);
   };
 
   return (
@@ -73,12 +89,19 @@ export function DefaultMapSearch({
       {/* 検索結果エリア */}
       <ScrollView className="flex-1">
         {searchQuery.length === 0 ? (
-          // 検索プレースホルダー
+          // 検索プレースホルダー + 履歴
           <View className="p-4">
             <Text className="text-lg font-semibold text-gray-800 mb-3">街・スポットを検索</Text>
-            <Text className="text-sm text-gray-500">
+            <Text className="text-sm text-gray-500 mb-4">
               登録されている街や、みんなが投稿したスポットを検索できます
             </Text>
+            {/* 検索履歴 */}
+            <SearchHistoryList
+              history={history}
+              onSelect={handleHistorySelect}
+              onRemove={removeHistory}
+              onClearAll={clearHistory}
+            />
           </View>
         ) : (
           // 検索結果
