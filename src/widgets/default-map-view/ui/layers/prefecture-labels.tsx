@@ -22,7 +22,7 @@ export function PrefectureLabels({ geoJson }: PrefectureLabelsProps) {
         style={{
           textField: ['get', 'name'],
           textSize: 16,
-          textColor: '#9333EA',
+          textColor: '#000000',
           textHaloColor: '#FFFFFF',
           textHaloWidth: 2,
           textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
