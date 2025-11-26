@@ -29,7 +29,7 @@ import {
 } from '@/features/search-places';
 
 export function MapPage() {
-  const { id, addSpot } = useLocalSearchParams<{ id?: string; addSpot?: string }>();
+  const { id } = useLocalSearchParams<{ id?: string }>();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const user = useUserStore((state) => state.user);
@@ -43,7 +43,6 @@ export function MapPage() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
-  const [quickAddTrigger, setQuickAddTrigger] = useState(0);
 
   // URLクエリパラメータからマップIDを読み取り、グローバルステートに設定
   useEffect(() => {
@@ -51,16 +50,6 @@ export function MapPage() {
       setSelectedMapId(id);
     }
   }, [id, setSelectedMapId]);
-
-  // addSpotパラメータを監視して、QuickAddMenuを開くトリガーを発火
-  useEffect(() => {
-    if (addSpot) {
-      setQuickAddTrigger((prev) => prev + 1);
-      // パラメータをクリーンアップ（一度メニューを開いたら削除）
-      // 注: storeのselectedMapIdではなく、URLパラメータのidを使用（タイミング問題回避）
-      router.replace(id ? `/(tabs)/map?id=${id}` : '/(tabs)/map');
-    }
-  }, [addSpot, id, router]);
 
   // URLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
   const isUserMap = selectedMapId != null || id != null;
@@ -72,10 +61,6 @@ export function MapPage() {
   const handleSearchClose = () => {
     setIsSearchFocused(false);
     setSearchQuery(''); // 検索画面を閉じた時にクリア
-  };
-
-  const handleSearchRequest = () => {
-    setIsSearchFocused(true);
   };
 
   const handleCloseUserMap = () => {
@@ -100,6 +85,13 @@ export function MapPage() {
     if (selectedMap?.user_id) {
       router.push(`/user/${selectedMap.user_id}`);
     }
+  };
+
+  // 地図上でピン刺しモード開始
+  const handleMapPinSelect = () => {
+    // TODO: ピン刺しモードを実装
+    // 現状は検索画面が閉じるだけ（OwnMapSearch側でonCloseを呼んでいる）
+    console.log('📍 ピン刺しモード開始');
   };
 
   return (
@@ -140,9 +132,6 @@ export function MapPage() {
             onViewModeChange={setViewMode}
             onSearchFocus={handleSearchFocus}
             isSearchFocused={isSearchFocused}
-            autoOpenQuickAdd={addSpot != null}
-            quickAddTrigger={quickAddTrigger}
-            onSearchRequest={handleSearchRequest}
           />
         ) : (
           <DefaultMapView
@@ -195,6 +184,7 @@ export function MapPage() {
                   onClose={handleSearchClose}
                   currentLocation={location}
                   onPlaceSelect={handlePlaceSelect}
+                  onMapPinSelect={handleMapPinSelect}
                 />
               ) : (
                 // 他人のマップ: そのユーザーのスポットを検索

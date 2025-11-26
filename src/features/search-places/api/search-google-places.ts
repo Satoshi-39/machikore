@@ -1,15 +1,15 @@
 /**
- * Google Places Autocomplete API
+ * Google Places API検索
  *
- * 検索クエリから場所の候補リストを取得
+ * 検索クエリから場所の候補リストを取得（Autocomplete + Place Details）
  */
 
 import type {
   GooglePlacesAutocompleteResponse,
   PlacesSearchOptions,
-  PlaceSearchResult,
-} from './types';
-import { fetchPlaceDetails, convertToPlaceResult } from './placeDetails';
+} from './google-places.types';
+import { fetchPlaceDetails } from './google-place-details';
+import { convertToPlaceResult, type PlaceSearchResult } from '../model/types';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const AUTOCOMPLETE_URL = 'https://places.googleapis.com/v1/places:autocomplete';

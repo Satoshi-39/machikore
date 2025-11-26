@@ -4,13 +4,20 @@
  */
 
 import React, { useEffect } from 'react';
-import { View, TextInput, Pressable, Text, ScrollView } from 'react-native';
+import { View, TextInput, Pressable, Text, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, EmptyState, ErrorView } from '@/shared/ui';
-import { useSearchPlaces, type PlaceSearchResult } from '@/features/search-places';
+import {
+  useSearchGooglePlaces,
+  useSelectedPlaceStore,
+  type PlaceSearchResult,
+  type ManualLocationInput,
+} from '@/features/search-places';
 import { usePlaceSelectHandler } from '../model';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
+import { useRouter } from 'expo-router';
+import * as Crypto from 'expo-crypto';
 
 interface OwnMapSearchProps {
   mapId: string | null;
@@ -19,6 +26,7 @@ interface OwnMapSearchProps {
   onClose: () => void;
   onPlaceSelect?: (place: PlaceSearchResult) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
+  onMapPinSelect?: () => void; // 地図上でピン刺しモード開始
 }
 
 export function OwnMapSearch({
@@ -28,9 +36,12 @@ export function OwnMapSearch({
   onClose,
   onPlaceSelect,
   currentLocation = null,
+  onMapPinSelect,
 }: OwnMapSearchProps) {
+  const router = useRouter();
+  const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   // Google Places API検索
-  const { results, isLoading, error, search, config, endSession } = useSearchPlaces({
+  const { results, isLoading, error, search, config, endSession } = useSearchGooglePlaces({
     currentLocation,
     minQueryLength: 1,
     debounceMs: 600,
@@ -61,6 +72,35 @@ export function OwnMapSearch({
   // 履歴から検索
   const handleHistorySelect = (query: string) => {
     onSearchChange(query);
+  };
+
+  // 現在地を登録
+  const handleCurrentLocationRegister = () => {
+    if (!currentLocation) {
+      Alert.alert('位置情報が取得できません', '位置情報の許可を確認してください');
+      return;
+    }
+
+    const manualInput: ManualLocationInput = {
+      id: Crypto.randomUUID(),
+      name: null,
+      address: null,
+      latitude: currentLocation.latitude,
+      longitude: currentLocation.longitude,
+      category: [],
+      source: 'current_location',
+    };
+
+    endSession();
+    setSelectedPlace(manualInput);
+    router.push('/create-spot');
+  };
+
+  // 地図上でピン刺し
+  const handleMapPinRegister = () => {
+    endSession();
+    onClose();
+    onMapPinSelect?.();
   };
 
   // 検索クエリが変更されたら検索を実行（デバウンス付き）
@@ -107,12 +147,13 @@ export function OwnMapSearch({
       {/* 検索結果・履歴エリア */}
       <ScrollView className="flex-1">
         {searchQuery.length === 0 ? (
-          // 検索プレースホルダー + 履歴
+          // 検索プレースホルダー + 履歴 + 登録オプション
           <View className="p-4">
             <Text className="text-lg font-semibold text-gray-800 mb-3">場所を検索</Text>
             <Text className="text-sm text-gray-500 mb-4">
               レストラン、カフェ、観光スポットなどを検索して追加できます
             </Text>
+
             {/* 検索履歴 */}
             <SearchHistoryList
               history={history}
@@ -120,6 +161,17 @@ export function OwnMapSearch({
               onRemove={removeHistory}
               onClearAll={clearHistory}
             />
+
+            {/* 登録オプション（リンク風テキスト） */}
+            <View className="mt-6 flex-row items-center justify-center gap-4">
+              <Pressable onPress={handleCurrentLocationRegister}>
+                <Text className="text-blue-600 text-sm">現在地を登録</Text>
+              </Pressable>
+              <Text className="text-gray-300">|</Text>
+              <Pressable onPress={handleMapPinRegister}>
+                <Text className="text-blue-600 text-sm">地図上でピン刺し</Text>
+              </Pressable>
+            </View>
           </View>
         ) : (
           // 検索結果

@@ -1,20 +1,21 @@
 /**
- * 場所検索hook
+ * Google Places API検索hook
  */
 
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { useState, useCallback, useRef } from 'react';
-import { searchPlaces } from '../api/autocomplete';
-import type { PlaceSearchResult, PlacesSearchOptions } from '../api/types';
+import { searchPlaces } from '../api/search-google-places';
+import type { PlacesSearchOptions } from '../api/google-places.types';
+import type { PlaceSearchResult } from './types';
 
-interface UseSearchPlacesOptions {
+interface UseSearchGooglePlacesOptions {
   currentLocation?: { latitude: number; longitude: number } | null;
   minQueryLength?: number; // 最小文字数（デフォルト: 1）
   debounceMs?: number; // デバウンス時間（デフォルト: 600ms）
 }
 
-export function useSearchPlaces(options: UseSearchPlacesOptions = {}) {
+export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}) {
   const {
     currentLocation,
     minQueryLength = 1,

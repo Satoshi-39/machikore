@@ -5,12 +5,11 @@
  */
 
 import { useSpots } from '@/entities/user-spot';
-import { QuickAddSpotFacade } from '@/features/quick-add-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
-import { FAB, LocationButton, MapControls } from '@/shared/ui';
+import { LocationButton, MapControls } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
@@ -34,26 +33,20 @@ interface UserMapViewProps {
   onViewModeChange?: (mode: MapListViewMode) => void;
   onSearchFocus?: () => void;
   isSearchFocused?: boolean;
-  autoOpenQuickAdd?: boolean;
-  quickAddTrigger?: number;
-  onSearchRequest?: () => void;
 }
 
 export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
   (
     {
       mapId,
-      userId = null,
-      defaultMapId = null,
+      userId: _userId = null, // 将来のピン刺し機能で使用予定
+      defaultMapId: _defaultMapId = null, // 将来のピン刺し機能で使用予定
       onSpotDetailSnapChange,
       currentLocation = null,
       viewMode = 'map',
       onViewModeChange,
       onSearchFocus,
       isSearchFocused = false,
-      autoOpenQuickAdd = false,
-      quickAddTrigger = 0,
-      onSearchRequest,
     },
     ref
   ) => {
@@ -65,7 +58,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     );
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
-    const [isQuickAddMenuOpen, setIsQuickAddMenuOpen] = useState(false);
 
     const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
     const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
@@ -73,8 +65,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     // 初回カメラ移動済みフラグ（マップごとにリセット）
     const hasInitialCameraMoved = useRef(false);
 
-    // マップの中心座標を保持
-    const [centerCoords, setCenterCoords] = useState<{
+    // マップの中心座標を保持（将来のピン刺し機能で使用予定）
+    const [_centerCoords, setCenterCoords] = useState<{
       latitude: number;
       longitude: number;
     }>({
@@ -102,11 +94,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const handleSnapChange = (snapIndex: number) => {
       setSpotDetailSnapIndex(snapIndex);
       onSpotDetailSnapChange?.(snapIndex);
-    };
-
-    // FABボタンハンドラー
-    const handleFABPress = () => {
-      setIsQuickAddMenuOpen((prev) => !prev);
     };
 
     // マップのロード完了ハンドラー
@@ -137,16 +124,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         console.log('⚠️ [Jump] スポットが見つかりません');
       }
     }, [jumpToSpotId, spots, moveCameraToSingleSpot, setJumpToSpotId]);
-
-    // autoOpenQuickAddがtrueの場合、マウント時にQuickAddSpotMenuを開く
-    useEffect(() => {
-      if (autoOpenQuickAdd && mapId) {
-        // 少し遅延させてマップが準備されるのを待つ
-        setTimeout(() => {
-          setIsQuickAddMenuOpen(true);
-        }, 300);
-      }
-    }, [autoOpenQuickAdd, mapId, quickAddTrigger]);
 
     // 全スポット表示（マップごとに初回のみ）
     useEffect(() => {
@@ -233,7 +210,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
               onViewModeChange={onViewModeChange}
               onSearchFocus={onSearchFocus}
               showIcon={false}
-              placeholder="このマップを検索"
+              placeholder="検索して登録"
             />
           </View>
         )}
@@ -250,18 +227,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             </View>
           )}
 
-        {/* 地図上でピン刺しボタン（FAB） - スポット詳細カードがない時だけ表示 */}
-        {viewMode === 'map' && !isSearchFocused && !selectedSpot && (
-          <View className="absolute bottom-14 right-6 z-50">
-            <FAB
-              icon="pushpin"
-              iconLibrary="antdesign"
-              onPress={handleFABPress}
-              testID="add-spot-fab"
-            />
-          </View>
-        )}
-
         {/* 選択されたスポットの詳細カード */}
         {selectedSpot && (
           <SpotDetailCard
@@ -271,17 +236,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           />
         )}
 
-        {/* クイック追加機能 */}
-        <QuickAddSpotFacade
-          visible={isQuickAddMenuOpen}
-          userId={userId}
-          selectedMapId={mapId}
-          defaultMapId={defaultMapId}
-          currentLocation={currentLocation}
-          centerCoords={centerCoords}
-          onClose={() => setIsQuickAddMenuOpen(false)}
-          onSearchRequest={onSearchRequest}
-        />
       </View>
     );
   }

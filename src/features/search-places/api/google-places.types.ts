@@ -1,6 +1,8 @@
 /**
  * Google Places API (New) 型定義
  * https://developers.google.com/maps/documentation/places/web-service/op-overview
+ *
+ * 外部APIのレスポンス型のみを定義（アプリ内部型はmodel/types.tsに分離）
  */
 
 /**
@@ -94,27 +96,4 @@ export interface PlacesSearchOptions {
   languageCode?: string; // "ja", "en" など
   includedRegionCodes?: string[]; // ["jp"]
   sessionToken?: string; // Autocomplete Session用トークン（コスト最適化）
-}
-
-/**
- * アプリ内で使用する場所データ（統一インターフェース）
- */
-export interface PlaceSearchResult {
-  id: string; // Google Place ID
-  name: string;
-  address: string | null;
-  latitude: number;
-  longitude: number;
-  category: string[]; // types
-  googleData: {
-    placeId: string;
-    placeName: string;
-    category: string[]; // types
-    address: string | null;
-    formattedAddress?: string;
-    internationalPhoneNumber?: string;
-    websiteUri?: string;
-    rating?: number;
-    userRatingCount?: number;
-  };
 }

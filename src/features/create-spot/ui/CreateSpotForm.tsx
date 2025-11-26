@@ -2,6 +2,7 @@
  * スポット作成フォーム Feature
  *
  * FSDの原則：Featureはユーザーのアクション・インタラクション
+ * Google Places検索結果 または 手動登録（現在地/ピン刺し）の両方に対応
  */
 
 import React, { useState } from 'react';
@@ -15,10 +16,13 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import type { PlaceSearchResult } from '@/features/search-places';
+import {
+  type SpotLocationInput,
+  isPlaceSearchResult,
+} from '@/features/search-places';
 
 interface CreateSpotFormProps {
-  placeData: PlaceSearchResult; // Google Places APIから取得した情報
+  placeData: SpotLocationInput; // Google Places検索結果 または 手動登録
   onSubmit: (data: {
     customName: string;
     description?: string;
@@ -28,8 +32,11 @@ interface CreateSpotFormProps {
 }
 
 export function CreateSpotForm({ placeData, onSubmit, isLoading = false }: CreateSpotFormProps) {
-  // カスタム名の初期値はGoogle元の名前
-  const [customName, setCustomName] = useState(placeData.name);
+  // Google検索結果か手動登録かを判定
+  const isGooglePlace = isPlaceSearchResult(placeData);
+
+  // カスタム名の初期値（Google検索結果の場合は元の名前、手動の場合は空）
+  const [customName, setCustomName] = useState(placeData.name ?? '');
   const [description, setDescription] = useState('');
   const [tags, setTags] = useState('');
 
@@ -49,20 +56,30 @@ export function CreateSpotForm({ placeData, onSubmit, isLoading = false }: Creat
   return (
     <ScrollView className="flex-1 bg-gray-50">
       <View className="p-4">
-        {/* Google元の情報（読み取り専用） */}
+        {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="information-circle" size={20} color={colors.primary.DEFAULT} />
+            <Ionicons
+              name={isGooglePlace ? 'information-circle' : 'location'}
+              size={20}
+              color={colors.primary.DEFAULT}
+            />
             <Text className="ml-2 text-sm font-semibold text-gray-700">
-              Google Placesから取得した情報
+              {isGooglePlace
+                ? 'Google Placesから取得した情報'
+                : !isGooglePlace && 'source' in placeData && placeData.source === 'current_location'
+                ? '現在地から登録'
+                : '地図上で選択した位置'}
             </Text>
           </View>
 
-          {/* Google元の名前 */}
-          <View className="mb-3">
-            <Text className="text-xs text-gray-500 mb-1">スポット名（元）</Text>
-            <Text className="text-base text-gray-800 font-medium">{placeData.name}</Text>
-          </View>
+          {/* Google検索の場合: 元の名前を表示 */}
+          {isGooglePlace && placeData.name && (
+            <View className="mb-3">
+              <Text className="text-xs text-gray-500 mb-1">スポット名（元）</Text>
+              <Text className="text-base text-gray-800 font-medium">{placeData.name}</Text>
+            </View>
+          )}
 
           {/* 住所 */}
           {placeData.address && (

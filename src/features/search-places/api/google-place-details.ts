@@ -4,7 +4,7 @@
  * autocomplete.tsから利用
  */
 
-import type { GooglePlaceDetails, PlaceSearchResult } from './types';
+import type { GooglePlaceDetails } from './google-places.types';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const PLACE_DETAILS_URL = 'https://places.googleapis.com/v1/places';
@@ -57,29 +57,4 @@ export async function fetchPlaceDetails(
   }
 
   return await response.json();
-}
-
-/**
- * Google Place DetailsをアプリのPlaceSearchResultに変換
- */
-export function convertToPlaceResult(details: GooglePlaceDetails): PlaceSearchResult {
-  return {
-    id: details.id,
-    name: details.displayName.text,
-    address: details.formattedAddress || null,
-    latitude: details.location.latitude,
-    longitude: details.location.longitude,
-    category: details.types || [],
-    googleData: {
-      placeId: details.id,
-      placeName: details.displayName.text,
-      category: details.types || [],
-      address: details.formattedAddress || null,
-      formattedAddress: details.formattedAddress,
-      internationalPhoneNumber: details.internationalPhoneNumber,
-      websiteUri: details.websiteUri,
-      rating: details.rating,
-      userRatingCount: details.userRatingCount,
-    },
-  };
 }

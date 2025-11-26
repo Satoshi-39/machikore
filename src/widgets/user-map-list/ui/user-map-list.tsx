@@ -28,7 +28,7 @@ export function UserMapList({
         onViewModeChange={onViewModeChange}
         onSearchFocus={onSearchFocus}
         showIcon={false}
-        placeholder="このマップを検索"
+        placeholder="検索して登録"
         className="px-5 pt-5 pb-3"
       />
       <View className="flex-1 items-center justify-center">
