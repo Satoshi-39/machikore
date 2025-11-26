@@ -20,7 +20,7 @@ export function CityLabels({ geoJson, onPress }: CityLabelsProps) {
     >
       <Mapbox.SymbolLayer
         id="cities-labels"
-        minZoomLevel={9}
+        minZoomLevel={10}
         maxZoomLevel={12}
         style={{
           textField: ['get', 'name'],

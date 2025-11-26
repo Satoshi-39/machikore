@@ -220,10 +220,10 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
             <CountryLabels geoJson={countriesGeoJson} />
 
-            {/* 都道府県ラベル表示（テキストのみ）- ズーム5-9で表示 */}
+            {/* 都道府県ラベル表示（テキストのみ）- ズーム5-10で表示 */}
             <PrefectureLabels geoJson={prefecturesGeoJson} />
 
-            {/* 市区ラベル表示（テキストのみ）- ズーム9-12で表示 */}
+            {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
             <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
 
             {/* 街マーカー表示（アイコン + ラベル）- ズーム12以上で表示 */}
