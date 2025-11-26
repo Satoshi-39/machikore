@@ -4,6 +4,7 @@
 
 import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo } from 'react';
 import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi, useMachiGeoJson } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
@@ -38,6 +39,7 @@ interface DefaultMapViewProps {
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
   ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange, onSearchFocus, isSearchFocused = false }, ref) => {
+    const insets = useSafeAreaInsets();
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
@@ -241,6 +243,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             <View
               className="absolute top-0 left-0 right-0"
               style={{
+                paddingTop: insets.top,
                 opacity: machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 || spotDetailSnapIndex === 2 ? 0 : 1,
               }}
               pointerEvents={machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 || spotDetailSnapIndex === 2 ? 'none' : 'auto'}
