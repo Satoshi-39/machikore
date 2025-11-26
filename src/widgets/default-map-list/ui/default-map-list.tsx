@@ -1,5 +1,5 @@
 /**
- * デフォルトマップ階層表示Widget
+ * デフォルトマップリスト表示Widget
  *
  * ドリルダウン方式で階層を掘り下げる
  * ホーム → 地方 → 都道府県 → 市区町村 → 街
@@ -19,17 +19,17 @@ import { useMapHierarchy } from '@/entities/machi';
 import { AsyncBoundary } from '@/shared/ui';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 
-interface DefaultMapHierarchyProps {
+interface DefaultMapListProps {
   viewMode: MapListViewMode;
   onViewModeChange: (mode: MapListViewMode) => void;
   onSearchFocus: () => void;
 }
 
-export function DefaultMapHierarchy({
+export function DefaultMapList({
   viewMode,
   onViewModeChange,
   onSearchFocus,
-}: DefaultMapHierarchyProps) {
+}: DefaultMapListProps) {
   const router = useRouter();
   const [level, setLevel] = useState<HierarchyLevel>('home');
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);

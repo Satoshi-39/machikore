@@ -13,7 +13,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useUserStore, useUser } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/user-map';
 import { DefaultMapView } from '@/widgets/default-map-view';
-import { DefaultMapHierarchy } from '@/widgets/default-map-hierarchy';
+import { DefaultMapList } from '@/widgets/default-map-list';
 import { UserMapView } from '@/widgets/user-map-view';
 import type { MapViewHandle } from '@/shared/lib/map';
 import { UserMapList } from '@/widgets/user-map-list';
@@ -166,7 +166,7 @@ export function MapPage() {
                 onSearchFocus={handleSearchFocus}
               />
             ) : (
-              <DefaultMapHierarchy
+              <DefaultMapList
                 viewMode={viewMode}
                 onViewModeChange={setViewMode}
                 onSearchFocus={handleSearchFocus}
