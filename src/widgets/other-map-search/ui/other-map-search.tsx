@@ -1,7 +1,6 @@
 /**
- * ユーザーマップ全画面検索Widget
- * 自分のマップ: Google Places APIで新規登録可能
- * 他人のマップ: そのユーザーのspotsのみ検索
+ * 他人のマップ全画面検索Widget
+ * そのユーザーのスポットのみを検索
  */
 
 import React, { useEffect } from 'react';
@@ -9,56 +8,32 @@ import { View, TextInput, Pressable, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, EmptyState, ErrorView } from '@/shared/ui';
-import {
-  useSearchPlaces,
-  useSearchMachikorePlaces,
-  type PlaceSearchResult,
-} from '@/features/search-places';
-import { usePlaceSelectHandler } from '../model';
+import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
+import { useSpotSelectHandler } from '../model';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 
-interface UserMapSearchProps {
-  mapId: string | null;
+interface OtherMapSearchProps {
+  mapUserId: string | null;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClose: () => void;
-  onPlaceSelect?: (place: PlaceSearchResult) => void; // 新規スポットのみ
-  currentLocation?: { latitude: number; longitude: number} | null;
-  mapUserId?: string | null; // マップの所有者ID
-  currentUserId?: string | null; // 現在のユーザーID
+  onSpotSelect?: (spot: MachikorePlaceSearchResult) => void;
 }
 
-export function UserMapSearch({
-  mapId,
+export function OtherMapSearch({
+  mapUserId,
   searchQuery,
   onSearchChange,
   onClose,
-  onPlaceSelect,
-  currentLocation = null,
-  mapUserId = null,
-  currentUserId = null,
-}: UserMapSearchProps) {
-  // 自分のマップかどうか判定
-  const isOwnMap = mapUserId === currentUserId;
-
-  // 自分のマップ: Google Places API（新規登録可能）
-  const googlePlacesSearch = useSearchPlaces({
-    currentLocation,
-    minQueryLength: 1,
-    debounceMs: 600,
-  });
-
-  // 他人のマップ: 街コレデータ（そのユーザーのspotsのみ）
-  const machikorePlacesSearch = useSearchMachikorePlaces({
+  onSpotSelect,
+}: OtherMapSearchProps) {
+  // 街コレデータ検索（そのユーザーのスポットのみ）
+  const { results, isLoading, error, search, config } = useSearchMachikorePlaces({
     userId: mapUserId,
-    includeAllSpots: false, // 指定ユーザーのspotsのみ
+    includeAllSpots: false,
     minQueryLength: 1,
     debounceMs: 300,
   });
-
-  // 使用する検索hookを選択
-  const searchHook = isOwnMap ? googlePlacesSearch : machikorePlacesSearch;
-  const { results, isLoading, error, search, config } = searchHook;
 
   // 検索履歴フック
   const {
@@ -68,18 +43,16 @@ export function UserMapSearch({
     clearHistory,
   } = useSearchHistory({ type: 'userMap' });
 
-  // 検索結果選択ハンドラー（Model層）
-  const { handlePlaceSelect: basePlaceSelect } = usePlaceSelectHandler({
-    mapId,
-    onPlaceSelect,
+  // 検索結果選択ハンドラー
+  const { handleSpotSelect: baseSpotSelect } = useSpotSelectHandler({
+    onSpotSelect,
     onClose,
-    endSession: isOwnMap && 'endSession' in googlePlacesSearch ? googlePlacesSearch.endSession : undefined,
   });
 
   // 検索結果選択時に履歴も追加
-  const handlePlaceSelect = (place: PlaceSearchResult | Parameters<typeof basePlaceSelect>[0]) => {
-    addHistory(searchQuery, 'place');
-    basePlaceSelect(place as PlaceSearchResult);
+  const handleSpotSelect = (spot: MachikorePlaceSearchResult) => {
+    addHistory(searchQuery, 'spot');
+    baseSpotSelect(spot);
   };
 
   // 履歴から検索
@@ -96,14 +69,6 @@ export function UserMapSearch({
     return () => clearTimeout(timeoutId);
   }, [searchQuery, search, config.debounceMs]);
 
-  const handleClose = () => {
-    // 自分のマップ（Google Places API使用時）のみセッション終了
-    if (isOwnMap && 'endSession' in googlePlacesSearch) {
-      googlePlacesSearch.endSession();
-    }
-    onClose();
-  };
-
   return (
     <View className="flex-1 bg-white">
       {/* 検索バー */}
@@ -113,7 +78,7 @@ export function UserMapSearch({
             <Ionicons name="search" size={20} color={colors.gray[400]} />
             <TextInput
               className="flex-1 ml-2 text-base text-gray-800"
-              placeholder={isOwnMap ? 'スポットを検索' : 'このマップのスポットを検索'}
+              placeholder="このマップのスポットを検索"
               placeholderTextColor={colors.gray[400]}
               value={searchQuery}
               onChangeText={onSearchChange}
@@ -125,7 +90,7 @@ export function UserMapSearch({
               </Pressable>
             )}
           </View>
-          <Pressable onPress={handleClose}>
+          <Pressable onPress={onClose}>
             <Text className="text-base text-blue-600 font-medium">キャンセル</Text>
           </Pressable>
         </View>
@@ -136,13 +101,9 @@ export function UserMapSearch({
         {searchQuery.length === 0 ? (
           // 検索プレースホルダー + 履歴
           <View className="p-4">
-            <Text className="text-lg font-semibold text-gray-800 mb-3">
-              {isOwnMap ? '場所を検索' : 'このマップのスポットを検索'}
-            </Text>
+            <Text className="text-lg font-semibold text-gray-800 mb-3">このマップのスポットを検索</Text>
             <Text className="text-sm text-gray-500 mb-4">
-              {isOwnMap
-                ? 'レストラン、カフェ、観光スポットなどを検索して追加できます'
-                : 'このマップに登録されているスポットを検索できます'}
+              このマップに登録されているスポットを検索できます
             </Text>
             {/* 検索履歴 */}
             <SearchHistoryList
@@ -174,20 +135,33 @@ export function UserMapSearch({
                 <Text className="text-sm text-gray-500 mb-3">
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
-                {results.map((place) => (
+                {results.map((spot) => (
                   <Pressable
-                    key={place.id}
-                    onPress={() => handlePlaceSelect(place)}
+                    key={spot.id}
+                    onPress={() => handleSpotSelect(spot)}
                     className="flex-row items-center py-3 border-b border-gray-100 active:bg-gray-50"
                   >
-                    <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
-                      <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
+                    <View className={`w-10 h-10 rounded-full items-center justify-center ${
+                      spot.type === 'machi' ? 'bg-green-100' : 'bg-blue-100'
+                    }`}>
+                      <Ionicons
+                        name={spot.type === 'machi' ? 'map' : 'location'}
+                        size={20}
+                        color={spot.type === 'machi' ? colors.secondary.DEFAULT : colors.primary.DEFAULT}
+                      />
                     </View>
                     <View className="flex-1 ml-3">
-                      <Text className="text-base text-gray-800 font-medium">{place.name}</Text>
-                      {place.address && (
+                      <View className="flex-row items-center gap-2">
+                        <Text className="text-base text-gray-800 font-medium">{spot.name}</Text>
+                        {spot.type === 'machi' && (
+                          <View className="bg-green-100 px-2 py-0.5 rounded">
+                            <Text className="text-xs text-green-700 font-medium">街</Text>
+                          </View>
+                        )}
+                      </View>
+                      {spot.address && (
                         <Text className="text-sm text-gray-500 mt-0.5" numberOfLines={1}>
-                          {place.address}
+                          {spot.address}
                         </Text>
                       )}
                     </View>

@@ -18,7 +18,8 @@ import { UserMapView } from '@/widgets/user-map-view';
 import type { MapViewHandle } from '@/shared/lib/map';
 import { UserMapList } from '@/widgets/user-map-list';
 import { DefaultMapSearch } from '@/widgets/default-map-search';
-import { UserMapSearch } from '@/widgets/user-map-search';
+import { OwnMapSearch } from '@/widgets/own-map-search';
+import { OtherMapSearch } from '@/widgets/other-map-search';
 import { MapHeader } from '@/widgets/map-header';
 import { MapControls } from '@/widgets/map-controls';
 import { useLocation } from '@/shared/lib';
@@ -186,17 +187,26 @@ export function MapPage() {
             }}
           >
             {isUserMap ? (
-              // ユーザーマップ: 自分のマップならGoogle Places API、他人のマップなら街コレデータ
-              <UserMapSearch
-                mapId={selectedMapId || id || null}
-                searchQuery={searchQuery}
-                onSearchChange={setSearchQuery}
-                onClose={handleSearchClose}
-                currentLocation={location}
-                mapUserId={selectedMap?.user_id ?? null}
-                currentUserId={user?.id ?? null}
-                onPlaceSelect={handlePlaceSelect}
-              />
+              // ユーザーマップ: 自分のマップか他人のマップかで分岐
+              selectedMap?.user_id === user?.id ? (
+                // 自分のマップ: Google Places APIで新規スポット検索
+                <OwnMapSearch
+                  mapId={selectedMapId || id || null}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                  onClose={handleSearchClose}
+                  currentLocation={location}
+                  onPlaceSelect={handlePlaceSelect}
+                />
+              ) : (
+                // 他人のマップ: そのユーザーのスポットを検索
+                <OtherMapSearch
+                  mapUserId={selectedMap?.user_id ?? null}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                  onClose={handleSearchClose}
+                />
+              )
             ) : (
               // デフォルトマップ: 街コレデータ（machis + 全spots）を検索
               <DefaultMapSearch
