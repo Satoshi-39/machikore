@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { DiscoverTabFilter, type DiscoverTabMode } from '@/features/filter-discover-tab';
+import { DiscoverTabs, type DiscoverTabMode } from '@/widgets/discover-tabs';
 import { DiscoverSearch } from '@/widgets/discover-search';
 import { SpotFeed } from '@/widgets/spot-feed';
 import { MapFeed } from '@/widgets/map-feed';
@@ -37,8 +37,8 @@ export function DiscoverPage() {
       {/* 検索がフォーカスされていない時はフィードを表示 */}
       {!isSearchFocused && (
         <>
-          {/* タブフィルター */}
-          <DiscoverTabFilter tabMode={tabMode} onTabModeChange={setTabMode} />
+          {/* タブ */}
+          <DiscoverTabs tabMode={tabMode} onTabModeChange={setTabMode} />
 
           {/* タブコンテンツ */}
           <View className="flex-1">

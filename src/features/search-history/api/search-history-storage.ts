@@ -8,9 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const STORAGE_KEYS = {
   defaultMap: 'search_history_default_map',
   userMap: 'search_history_user_map',
+  discover: 'search_history_discover',
 } as const;
 
-export type SearchHistoryType = 'defaultMap' | 'userMap';
+export type SearchHistoryType = 'defaultMap' | 'userMap' | 'discover';
 
 export interface SearchHistoryItem {
   id: string;
