@@ -8,7 +8,7 @@
 import React, { useCallback } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useFeedMaps, MapCard } from '@/entities/user-map';
+import { useFeedMaps, MapCard } from '@/entities/map';
 import { AsyncBoundary } from '@/shared/ui';
 
 export function MapFeed() {

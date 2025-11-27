@@ -11,7 +11,7 @@ import { View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useUserStore, useUser } from '@/entities/user';
-import { useMapStore, useMap, useUserMaps } from '@/entities/user-map';
+import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { DefaultMapView } from '@/widgets/default-map-view';
 import { DefaultMapList } from '@/widgets/default-map-list';
 import { UserMapView } from '@/widgets/user-map-view';

@@ -9,7 +9,7 @@ import { View, Text, Pressable, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useUserMaps, useMapStore } from '@/entities/user-map';
+import { useUserMaps, useMapStore } from '@/entities/map';
 import { AsyncBoundary } from '@/shared/ui';
 import type { MapRow } from '@/shared/types/database.types';
 

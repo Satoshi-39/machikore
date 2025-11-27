@@ -6,7 +6,7 @@
 
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useCreateMap } from '@/entities/user-map';
+import { useCreateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 
 export function useMapForm() {

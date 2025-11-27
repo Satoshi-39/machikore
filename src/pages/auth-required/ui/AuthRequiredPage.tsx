@@ -24,37 +24,61 @@ export function AuthRequiredPage({
   message = 'この機能を利用するにはログインが必要です',
 }: AuthRequiredPageProps) {
   const slideAnim = useRef(new Animated.Value(300)).current; // 初期位置: 画面外
+  const overlayAnim = useRef(new Animated.Value(0)).current; // 背景の透明度
 
   useEffect(() => {
-    // マウント時にスライドアップアニメーション
-    Animated.spring(slideAnim, {
-      toValue: 0,
-      useNativeDriver: true,
-      tension: 65,
-      friction: 11,
-    }).start();
+    // マウント時にアニメーション
+    Animated.parallel([
+      // シートをスライドアップ
+      Animated.spring(slideAnim, {
+        toValue: 0,
+        useNativeDriver: true,
+        tension: 65,
+        friction: 11,
+      }),
+      // 背景をフェードイン
+      Animated.timing(overlayAnim, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
   }, []);
 
   const handleClose = () => {
-    // 閉じるアニメーション（下にスライド）
-    Animated.timing(slideAnim, {
-      toValue: 300,
-      duration: 250,
-      useNativeDriver: true,
-    }).start(() => {
+    // 閉じるアニメーション（シートと背景を同時に）
+    Animated.parallel([
+      // シートをスライドダウン
+      Animated.timing(slideAnim, {
+        toValue: 300,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+      // 背景をフェードアウト
+      Animated.timing(overlayAnim, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
       // アニメーション完了後にモーダルを閉じる
       onClose?.();
     });
   };
 
   return (
-    <View className="flex-1 justify-end bg-black/50">
-      {/* 背景タップで閉じる */}
-      <TouchableOpacity
-        className="flex-1"
-        activeOpacity={1}
-        onPress={handleClose}
-      />
+    <View className="flex-1 justify-end">
+      {/* 背景オーバーレイ（アニメーション） */}
+      <Animated.View
+        className="absolute inset-0 bg-black/50"
+        style={{ opacity: overlayAnim }}
+      >
+        <TouchableOpacity
+          className="flex-1"
+          activeOpacity={1}
+          onPress={handleClose}
+        />
+      </Animated.View>
 
       {/* モーダルコンテンツ（アニメーション） */}
       <Animated.View

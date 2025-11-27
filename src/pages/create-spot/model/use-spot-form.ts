@@ -11,9 +11,9 @@ import {
   useSelectedPlaceStore,
   isPlaceSearchResult,
 } from '@/features/search-places';
-import { useCreateSpot } from '@/entities/user-spot';
+import { useCreateSpot } from '@/entities/spot';
 import { useUserStore } from '@/entities/user';
-import { useMapStore } from '@/entities/user-map';
+import { useMapStore } from '@/entities/map';
 
 export function useSpotForm() {
   const router = useRouter();
