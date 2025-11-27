@@ -2,10 +2,10 @@
  * 検索履歴リストUI
  */
 
-import React, { useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
 import type { SearchHistoryItem } from '../api/search-history-storage';
 
 const INITIAL_DISPLAY_COUNT = 8; // 初期表示件数
@@ -17,6 +17,8 @@ interface SearchHistoryListProps {
   onRemove: (id: string) => void;
   onClearAll?: () => void;
   title?: string;
+  showEmptyMessage?: boolean;
+  emptyMessage?: string;
 }
 
 export function SearchHistoryList({
@@ -25,11 +27,23 @@ export function SearchHistoryList({
   onRemove,
   onClearAll,
   title = '検索履歴',
+  showEmptyMessage = true,
+  emptyMessage = '検索履歴がありません',
 }: SearchHistoryListProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (history.length === 0) {
-    return null; // 履歴がない場合は何も表示しない
+    if (!showEmptyMessage) {
+      return null;
+    }
+    return (
+      <View className="flex-1 justify-center items-center py-12">
+        <Ionicons name="time-outline" size={80} color="#D1D5DB" />
+        <Text className="text-lg font-medium text-gray-500 mt-6">
+          {emptyMessage}
+        </Text>
+      </View>
+    );
   }
 
   // 表示する履歴を制限
@@ -60,9 +74,16 @@ export function SearchHistoryList({
             className="flex-1 flex-row items-center active:opacity-70"
           >
             <View className="w-8 h-8 rounded-full bg-gray-100 items-center justify-center">
-              <Ionicons name="time-outline" size={18} color={colors.gray[500]} />
+              <Ionicons
+                name="time-outline"
+                size={18}
+                color={colors.gray[500]}
+              />
             </View>
-            <Text className="flex-1 ml-3 text-base text-gray-800" numberOfLines={1}>
+            <Text
+              className="flex-1 ml-3 text-base text-gray-800"
+              numberOfLines={1}
+            >
               {item.query}
             </Text>
           </Pressable>

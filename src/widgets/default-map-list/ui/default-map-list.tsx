@@ -8,7 +8,8 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Breadcrumb, MapControls, type BreadcrumbItem } from '@/shared/ui';
+import { Breadcrumb, type BreadcrumbItem } from '@/shared/ui';
+import { MapSearchBar } from '@/features/search-places';
 import {
   HierarchyListItem,
   type HierarchyItem,
@@ -199,11 +200,11 @@ export function DefaultMapList({
           keyExtractor={(item) => item.id}
           ListHeaderComponent={
             <View>
-              <MapControls
+              <MapSearchBar
                 variant="list"
                 viewMode={viewMode}
                 onViewModeChange={onViewModeChange}
-                onSearchFocus={onSearchFocus}
+                onFocus={onSearchFocus}
                 showIcon={true}
                 placeholder="スポットを検索"
                 className="px-5 pt-5 pb-3"

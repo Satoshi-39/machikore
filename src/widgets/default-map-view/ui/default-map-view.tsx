@@ -11,7 +11,8 @@ import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCities, useCitiesGeoJson } from '@/entities/city';
-import { AsyncBoundary, LocationButton, MapControls } from '@/shared/ui';
+import { AsyncBoundary, LocationButton } from '@/shared/ui';
+import { MapSearchBar } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV } from '@/shared/config';
 import { MachiDetailCard } from './machi-detail-card';
@@ -250,17 +251,17 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               }}
               pointerEvents={machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 || spotDetailSnapIndex === 2 ? 'none' : 'auto'}
             >
-              <MapControls
+              <MapSearchBar
                 variant="map"
                 viewMode={viewMode}
                 onViewModeChange={onViewModeChange}
-                onSearchFocus={onSearchFocus}
+                onFocus={onSearchFocus}
                 showIcon={true}
                 placeholder="スポットを検索"
               />
               {/* クイック検索ボタン */}
               {onQuickSearch && (
-                <View className="mt-2">
+                <View className="mt-4">
                   <QuickSearchButtons onCategoryPress={onQuickSearch} />
                 </View>
               )}

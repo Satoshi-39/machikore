@@ -6,10 +6,10 @@
 
 import { useSpots } from '@/entities/spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
-import { useSelectedPlaceStore } from '@/features/search-places';
+import { useSelectedPlaceStore, MapSearchBar } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
-import { LocationButton, MapControls } from '@/shared/ui';
+import { LocationButton } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
@@ -171,6 +171,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           localizeLabels={true}
           onCameraChanged={handleCameraChanged}
           onDidFinishLoadingMap={handleMapReady}
+          scaleBarEnabled={false}
         >
           <Mapbox.Camera
             ref={cameraRef}
@@ -204,11 +205,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             }}
             pointerEvents={spotDetailSnapIndex === 2 ? 'none' : 'auto'}
           >
-            <MapControls
+            <MapSearchBar
               variant="map"
               viewMode={viewMode}
               onViewModeChange={onViewModeChange}
-              onSearchFocus={onSearchFocus}
+              onFocus={onSearchFocus}
               showIcon={false}
               placeholder="検索して登録"
             />

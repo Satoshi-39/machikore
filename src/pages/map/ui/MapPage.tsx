@@ -101,7 +101,7 @@ export function MapPage() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100" edges={isUserMap ? ['top'] : []}>
+    <SafeAreaView className="flex-1 bg-white" edges={isUserMap ? ['top'] : []}>
       {/* ヘッダー（ユーザーマップの時のみ表示） */}
       {isUserMap && (
         <MapHeader

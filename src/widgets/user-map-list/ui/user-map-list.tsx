@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
-import { MapControls } from '@/shared/ui';
+import { MapSearchBar } from '@/features/search-places';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 
 interface UserMapListProps {
@@ -22,11 +22,11 @@ export function UserMapList({
 }: UserMapListProps) {
   return (
     <View className="flex-1">
-      <MapControls
+      <MapSearchBar
         variant="list"
         viewMode={viewMode}
         onViewModeChange={onViewModeChange}
-        onSearchFocus={onSearchFocus}
+        onFocus={onSearchFocus}
         showIcon={false}
         placeholder="検索して登録"
         className="px-5 pt-5 pb-3"

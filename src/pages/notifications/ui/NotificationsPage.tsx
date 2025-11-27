@@ -32,15 +32,10 @@ export function NotificationsPage() {
           size={80}
           color="#D1D5DB"
         />
-        <Text className="text-xl font-semibold text-gray-900 mt-6 mb-2">
+        <Text className="text-lg font-medium text-gray-500 mt-6">
           {tabMode === 'notifications'
             ? '通知はありません'
             : 'お知らせはありません'}
-        </Text>
-        <Text className="text-base text-gray-500 text-center">
-          {tabMode === 'notifications'
-            ? 'いいねやコメント、フォローなどの通知がここに表示されます'
-            : 'アプリからの重要なお知らせがここに表示されます'}
         </Text>
       </View>
     </SafeAreaView>

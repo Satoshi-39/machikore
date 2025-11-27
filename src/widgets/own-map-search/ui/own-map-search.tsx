@@ -4,10 +4,10 @@
  */
 
 import React, { useEffect } from 'react';
-import { View, TextInput, Pressable, Text, ScrollView, Alert } from 'react-native';
+import { View, Text, Pressable, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { Loading, EmptyState, ErrorView } from '@/shared/ui';
+import { Loading, EmptyState, ErrorView, SearchBar } from '@/shared/ui';
 import {
   useSearchGooglePlaces,
   useSelectedPlaceStore,
@@ -120,29 +120,14 @@ export function OwnMapSearch({
   return (
     <View className="flex-1 bg-white">
       {/* 検索バー */}
-      <View className="bg-white border-b border-gray-200 px-5 py-3">
-        <View className="flex-row items-center gap-3">
-          <View className="flex-1 flex-row items-center bg-gray-100 rounded-lg px-3 py-2">
-            <Ionicons name="search" size={20} color={colors.gray[400]} />
-            <TextInput
-              className="flex-1 ml-2 text-base text-gray-800"
-              placeholder="検索して登録"
-              placeholderTextColor={colors.gray[400]}
-              value={searchQuery}
-              onChangeText={onSearchChange}
-              autoFocus
-            />
-            {searchQuery.length > 0 && (
-              <Pressable onPress={() => onSearchChange('')} className="p-1">
-                <Ionicons name="close-circle" size={20} color={colors.gray[400]} />
-              </Pressable>
-            )}
-          </View>
-          <Pressable onPress={handleClose}>
-            <Text className="text-base text-blue-600 font-medium">キャンセル</Text>
-          </Pressable>
-        </View>
-      </View>
+      <SearchBar
+        value={searchQuery}
+        onChangeText={onSearchChange}
+        onCancel={handleClose}
+        placeholder="検索して登録"
+        autoFocus
+        showCancelButton
+      />
 
       {/* 検索結果・履歴エリア */}
       <ScrollView className="flex-1">
