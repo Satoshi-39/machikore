@@ -21,8 +21,10 @@ interface AsyncBoundaryProps<T> {
   loadingMessage?: string;
   /** カスタム空状態メッセージ */
   emptyMessage?: string;
-  /** カスタム空状態アイコン */
+  /** カスタム空状態アイコン（絵文字） */
   emptyIcon?: string;
+  /** カスタム空状態アイコン（Ionicons） - emptyIconより優先 */
+  emptyIonIcon?: string;
   /** データが空かどうかを判定する関数（デフォルト: 配列の長さチェック） */
   isEmpty?: (data: T) => boolean;
   /** データが存在する場合にレンダリングする関数 */
@@ -35,7 +37,8 @@ export function AsyncBoundary<T>({
   data,
   loadingMessage = '読み込み中...',
   emptyMessage = 'データがありません',
-  emptyIcon = '📭',
+  emptyIcon,
+  emptyIonIcon = 'search-outline',
   isEmpty,
   children,
 }: AsyncBoundaryProps<T>) {
@@ -51,7 +54,7 @@ export function AsyncBoundary<T>({
 
   // データなし
   if (!data) {
-    return <EmptyState message={emptyMessage} icon={emptyIcon} />;
+    return <EmptyState message={emptyMessage} icon={emptyIcon} ionIcon={emptyIonIcon as any} />;
   }
 
   // カスタム空判定またはデフォルト（配列の長さチェック）
@@ -60,7 +63,7 @@ export function AsyncBoundary<T>({
     : Array.isArray(data) && data.length === 0;
 
   if (isDataEmpty) {
-    return <EmptyState message={emptyMessage} icon={emptyIcon} />;
+    return <EmptyState message={emptyMessage} icon={emptyIcon} ionIcon={emptyIonIcon as any} />;
   }
 
   // データ存在：子コンポーネントをレンダリング

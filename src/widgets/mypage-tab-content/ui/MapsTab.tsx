@@ -94,6 +94,7 @@ export function MapsTab({ userId }: MapsTabProps) {
       data={maps}
       loadingMessage="マップを読み込み中..."
       emptyMessage="まだマップを作成していません"
+      emptyIonIcon="map"
     >
       {(data) => (
         <FlatList
