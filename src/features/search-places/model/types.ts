@@ -77,7 +77,7 @@ export function convertToPlaceResult(
   // 住所コンポーネントから短縮住所を生成
   const addressComponents = details.addressComponents || [];
   const getComponent = (type: string) =>
-    addressComponents.find((c) => c.types.includes(type))?.longText || '';
+    addressComponents.find((c) => c.types?.includes(type))?.longText || '';
 
   // 都道府県 + 市区町村 + 地域名 の短縮住所を構築
   const prefecture = getComponent('administrative_area_level_1');

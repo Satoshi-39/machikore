@@ -4,4 +4,4 @@ export {
   mapListConfig,
   type MapHierarchyViewMode,
   type MapListViewMode,
-} from './ViewModeToggle';
+} from './ui/ViewModeToggle';

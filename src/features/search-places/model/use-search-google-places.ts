@@ -25,6 +25,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
   const [results, setResults] = useState<PlaceSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const [hasSearched, setHasSearched] = useState(false); // 検索実行済みフラグ
 
   // 簡易キャッシュ（同じクエリの重複リクエストを防ぐ）
   const cacheRef = useRef<Map<string, PlaceSearchResult[]>>(new Map());
@@ -40,6 +41,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
       if (!trimmedQuery) {
         setResults([]);
         setIsLoading(false);
+        setHasSearched(false); // 検索リセット
         // セッションもクリア
         sessionTokenRef.current = null;
         return;
@@ -58,6 +60,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
         console.log(`✅ [検索キャッシュ] "${trimmedQuery}" (API呼び出しスキップ)`);
         setResults(cached);
         setIsLoading(false);
+        setHasSearched(true);
         return;
       }
 
@@ -105,6 +108,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
         cacheRef.current.set(trimmedQuery, searchResults);
 
         setResults(searchResults);
+        setHasSearched(true);
       } catch (err) {
         const error = err instanceof Error ? err : new Error('検索に失敗しました');
         setError(error);
@@ -140,6 +144,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
     results,
     isLoading,
     error,
+    hasSearched, // 検索実行済みフラグ（結果表示の判定に使用）
     search,
     clearResults,
     clearCache,

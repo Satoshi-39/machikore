@@ -2,11 +2,14 @@
  * 検索履歴リストUI
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import type { SearchHistoryItem } from '../api/search-history-storage';
+
+const INITIAL_DISPLAY_COUNT = 8; // 初期表示件数
+const MAX_DISPLAY_COUNT = 20; // 最大表示件数
 
 interface SearchHistoryListProps {
   history: SearchHistoryItem[];
@@ -23,9 +26,16 @@ export function SearchHistoryList({
   onClearAll,
   title = '検索履歴',
 }: SearchHistoryListProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   if (history.length === 0) {
     return null; // 履歴がない場合は何も表示しない
   }
+
+  // 表示する履歴を制限
+  const displayCount = isExpanded ? MAX_DISPLAY_COUNT : INITIAL_DISPLAY_COUNT;
+  const displayHistory = history.slice(0, displayCount);
+  const hasMore = history.length > INITIAL_DISPLAY_COUNT && !isExpanded;
 
   return (
     <View>
@@ -40,7 +50,7 @@ export function SearchHistoryList({
       </View>
 
       {/* 履歴リスト */}
-      {history.map((item) => (
+      {displayHistory.map((item) => (
         <View
           key={item.id}
           className="flex-row items-center py-3 border-b border-gray-100"
@@ -65,6 +75,16 @@ export function SearchHistoryList({
           </Pressable>
         </View>
       ))}
+
+      {/* もっと見るボタン */}
+      {hasMore && (
+        <Pressable
+          onPress={() => setIsExpanded(true)}
+          className="py-3 items-center"
+        >
+          <Text className="text-sm text-blue-600">履歴をもっと見る</Text>
+        </Pressable>
+      )}
     </View>
   );
 }

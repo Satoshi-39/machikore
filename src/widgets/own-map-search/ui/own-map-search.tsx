@@ -41,7 +41,7 @@ export function OwnMapSearch({
   const router = useRouter();
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   // Google Places API検索
-  const { results, isLoading, error, search, config, endSession } = useSearchGooglePlaces({
+  const { results, isLoading, error, hasSearched, search, config, endSession } = useSearchGooglePlaces({
     currentLocation,
     minQueryLength: 1,
     debounceMs: 600,
@@ -126,7 +126,7 @@ export function OwnMapSearch({
             <Ionicons name="search" size={20} color={colors.gray[400]} />
             <TextInput
               className="flex-1 ml-2 text-base text-gray-800"
-              placeholder="スポットを検索"
+              placeholder="検索して登録"
               placeholderTextColor={colors.gray[400]}
               value={searchQuery}
               onChangeText={onSearchChange}
@@ -147,13 +147,8 @@ export function OwnMapSearch({
       {/* 検索結果・履歴エリア */}
       <ScrollView className="flex-1">
         {searchQuery.length === 0 ? (
-          // 検索プレースホルダー + 履歴 + 登録オプション
+          // 検索履歴 + 登録オプション
           <View className="p-4">
-            <Text className="text-lg font-semibold text-gray-800 mb-3">場所を検索</Text>
-            <Text className="text-sm text-gray-500 mb-4">
-              レストラン、カフェ、観光スポットなどを検索して追加できます
-            </Text>
-
             {/* 検索履歴 */}
             <SearchHistoryList
               history={history}
@@ -183,12 +178,15 @@ export function OwnMapSearch({
                 variant="inline"
                 error="検索に失敗しました。もう一度お試しください。"
               />
-            ) : results.length === 0 ? (
+            ) : hasSearched && results.length === 0 ? (
               <EmptyState
                 variant="inline"
                 icon="🔍"
                 message={`"${searchQuery}" の検索結果が見つかりませんでした`}
               />
+            ) : !hasSearched ? (
+              // 検索中（デバウンス待ち）
+              <Loading variant="inline" message="検索中..." />
             ) : (
               // 検索結果リスト
               <>

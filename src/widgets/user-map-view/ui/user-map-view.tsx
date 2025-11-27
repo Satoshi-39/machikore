@@ -215,17 +215,28 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           </View>
         )}
 
-        {/* マップコントロールボタン（現在地ボタン） - 縮小版またはカードなしの時表示 */}
-        {viewMode === 'map' &&
-          !isSearchFocused &&
-          (!selectedSpot || spotDetailSnapIndex === 0) && (
-            <View className="absolute bottom-32 right-6 z-50">
+        {/* マップコントロールボタン（現在地ボタン） */}
+        {viewMode === 'map' && !isSearchFocused && (
+          <View
+            className="absolute right-6 z-50"
+            style={{
+              // カード縮小版（15%）の時は16%の位置に、それ以外は48px
+              bottom: spotDetailSnapIndex === 0 && selectedSpot ? '16%' : 48,
+            }}
+          >
+            <View
+              style={{
+                opacity: (spotDetailSnapIndex === 0 && selectedSpot) || !selectedSpot ? 1 : 0,
+              }}
+              pointerEvents={(spotDetailSnapIndex === 0 && selectedSpot) || !selectedSpot ? 'auto' : 'none'}
+            >
               <LocationButton
                 onPress={handleLocationPress}
                 testID="location-button"
               />
             </View>
-          )}
+          </View>
+        )}
 
         {/* 選択されたスポットの詳細カード */}
         {selectedSpot && (
