@@ -9,3 +9,5 @@ export * from './use-update-spot';
 export * from './use-delete-spot';
 export * from './use-toggle-like';
 export * from './use-check-user-liked';
+export * from './use-feed-spots';
+export * from './use-spot-search';

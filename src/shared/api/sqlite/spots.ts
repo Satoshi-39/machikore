@@ -486,3 +486,68 @@ export function updateMapSpotCount(mapId: UUID): void {
     [count, new Date().toISOString(), mapId]
   );
 }
+
+// ===============================
+// 発見タブ用
+// ===============================
+
+/**
+ * 全公開スポットを取得（新着順）
+ */
+export function getAllPublicSpots(limit: number = 50): SpotWithMasterSpot[] {
+  return queryAll<SpotWithMasterSpot>(
+    `
+    SELECT
+      s.*,
+      ms.name,
+      ms.latitude,
+      ms.longitude,
+      ms.google_formatted_address as address,
+      ms.google_place_id,
+      ms.google_types,
+      ms.google_phone_number,
+      ms.google_website_uri,
+      ms.google_rating,
+      ms.google_user_rating_count
+    FROM user_spots s
+    JOIN master_spots ms ON s.master_spot_id = ms.id
+    JOIN maps m ON s.map_id = m.id
+    WHERE m.is_public = 1
+    ORDER BY s.created_at DESC
+    LIMIT ?;
+    `,
+    [limit]
+  );
+}
+
+/**
+ * キーワードでスポットを検索
+ */
+export function searchSpots(query: string, limit: number = 30): SpotWithMasterSpot[] {
+  if (!query.trim()) return [];
+  const searchPattern = `%${query}%`;
+  return queryAll<SpotWithMasterSpot>(
+    `
+    SELECT
+      s.*,
+      ms.name,
+      ms.latitude,
+      ms.longitude,
+      ms.google_formatted_address as address,
+      ms.google_place_id,
+      ms.google_types,
+      ms.google_phone_number,
+      ms.google_website_uri,
+      ms.google_rating,
+      ms.google_user_rating_count
+    FROM user_spots s
+    JOIN master_spots ms ON s.master_spot_id = ms.id
+    JOIN maps m ON s.map_id = m.id
+    WHERE m.is_public = 1
+      AND (ms.name LIKE ? OR s.custom_name LIKE ? OR s.description LIKE ?)
+    ORDER BY s.created_at DESC
+    LIMIT ?;
+    `,
+    [searchPattern, searchPattern, searchPattern, limit]
+  );
+}

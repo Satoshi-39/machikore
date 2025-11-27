@@ -188,3 +188,24 @@ export function deleteAllMaps(): void {
   const db = getDatabase();
   db.runSync('DELETE FROM maps;');
 }
+
+// ===============================
+// 発見タブ用
+// ===============================
+
+/**
+ * キーワードでマップを検索
+ */
+export function searchMaps(query: string, limit: number = 30): MapRow[] {
+  if (!query.trim()) return [];
+  const db = getDatabase();
+  const searchPattern = `%${query}%`;
+  return db.getAllSync<MapRow>(
+    `SELECT * FROM maps
+     WHERE is_public = 1
+       AND (name LIKE ? OR description LIKE ?)
+     ORDER BY created_at DESC
+     LIMIT ?;`,
+    [searchPattern, searchPattern, limit]
+  );
+}

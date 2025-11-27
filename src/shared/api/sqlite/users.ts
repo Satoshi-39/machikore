@@ -173,3 +173,23 @@ export function deleteAllUsers(): void {
   const db = getDatabase();
   db.runSync('DELETE FROM users;');
 }
+
+// ===============================
+// 発見タブ用
+// ===============================
+
+/**
+ * キーワードでユーザーを検索
+ */
+export function searchUsers(query: string, limit: number = 30): UserRow[] {
+  if (!query.trim()) return [];
+  const db = getDatabase();
+  const searchPattern = `%${query}%`;
+  return db.getAllSync<UserRow>(
+    `SELECT * FROM users
+     WHERE username LIKE ? OR display_name LIKE ?
+     ORDER BY created_at DESC
+     LIMIT ?;`,
+    [searchPattern, searchPattern, limit]
+  );
+}

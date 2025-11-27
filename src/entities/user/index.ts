@@ -4,3 +4,4 @@
 
 export * from './api';
 export * from './model';
+export { UserListItem } from './ui/UserListItem';

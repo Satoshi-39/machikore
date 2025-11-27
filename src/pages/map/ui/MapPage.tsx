@@ -89,7 +89,7 @@ export function MapPage() {
 
   const handleUserPress = () => {
     if (selectedMap?.user_id) {
-      router.push(`/user/${selectedMap.user_id}`);
+      router.push(`/users/${selectedMap.user_id}`);
     }
   };
 
