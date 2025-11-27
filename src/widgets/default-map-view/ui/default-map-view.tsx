@@ -22,6 +22,7 @@ import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import { useBoundsManagement } from '../model';
 import type { MachiRow, MasterSpotDisplay, CityRow } from '@/shared/types/database.types';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
+import { QuickSearchButtons } from '@/features/quick-search-buttons';
 import { MasterSpotDetailCard } from '@/widgets/master-spot-detail-card';
 import { CityDetailCard } from '@/widgets/city-detail-card';
 
@@ -34,11 +35,12 @@ interface DefaultMapViewProps {
   viewMode?: MapListViewMode;
   onViewModeChange?: (mode: MapListViewMode) => void;
   onSearchFocus?: () => void;
+  onQuickSearch?: (query: string) => void; // クイック検索
   isSearchFocused?: boolean;
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange, onSearchFocus, isSearchFocused = false }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false }, ref) => {
     const insets = useSafeAreaInsets();
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
@@ -256,6 +258,12 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                 showIcon={true}
                 placeholder="スポットを検索"
               />
+              {/* クイック検索ボタン */}
+              {onQuickSearch && (
+                <View className="mt-2">
+                  <QuickSearchButtons onCategoryPress={onQuickSearch} />
+                </View>
+              )}
             </View>
           )}
 

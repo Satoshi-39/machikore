@@ -28,10 +28,10 @@ export function formatLocalDateKey(date: Date): string {
 }
 
 /**
- * 2つの日付が同じ日かどうかを判定
+ * 2つの日付が同じ日かどうかを判定（ローカルタイムゾーン）
  */
 export function isSameDay(date1: Date, date2: Date): boolean {
-  return formatDateKey(date1) === formatDateKey(date2);
+  return formatLocalDateKey(date1) === formatLocalDateKey(date2);
 }
 
 /**

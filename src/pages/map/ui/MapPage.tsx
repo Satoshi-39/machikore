@@ -63,6 +63,12 @@ export function MapPage() {
     setSearchQuery(''); // 検索画面を閉じた時にクリア
   };
 
+  // クイック検索（カテゴリボタン押下時）
+  const handleQuickSearch = (query: string) => {
+    setSearchQuery(query);
+    setIsSearchFocused(true);
+  };
+
   const handleCloseUserMap = () => {
     setSelectedMapId(null);
     router.push('/(tabs)/map');
@@ -141,6 +147,7 @@ export function MapPage() {
             viewMode={viewMode}
             onViewModeChange={setViewMode}
             onSearchFocus={handleSearchFocus}
+            onQuickSearch={handleQuickSearch}
             isSearchFocused={isSearchFocused}
           />
         )}

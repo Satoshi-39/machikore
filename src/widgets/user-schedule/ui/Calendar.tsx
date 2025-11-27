@@ -9,7 +9,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import {
-  formatDateKey,
+  formatLocalDateKey,
   isSameDay,
   getDaysInMonth,
   getFirstDayOfMonth,
@@ -54,7 +54,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
   // マークされた日付かどうかを判定
   const isMarkedDate = (day: number): boolean => {
     const date = new Date(year, month, day);
-    const dateKey = formatDateKey(date);
+    const dateKey = formatLocalDateKey(date);
     return markedDates.includes(dateKey);
   };
 

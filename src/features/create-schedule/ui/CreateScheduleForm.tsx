@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { formatLocalDateKey } from '@/shared/lib';
 
 interface CreateScheduleFormProps {
   onSubmit: (title: string, scheduledAt: string, memo?: string, machiId?: string) => void;
@@ -23,7 +24,7 @@ export function CreateScheduleForm({
   const [title, setTitle] = useState('');
   const [memo, setMemo] = useState('');
   const [scheduledDate, setScheduledDate] = useState(
-    new Date().toISOString().split('T')[0]
+    formatLocalDateKey(new Date())
   );
   const [selectedMachiId] = useState<string | undefined>(); // TODO: 街選択機能実装時に使用
 
