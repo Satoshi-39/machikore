@@ -21,6 +21,8 @@ interface MapHeaderProps {
   onClose?: () => void;
   onMapSelect?: (mapId: string) => void;
   onUserPress?: () => void;
+  onSearchPress?: () => void;
+  onMenuPress?: () => void;
 }
 
 export function MapHeader({
@@ -33,6 +35,8 @@ export function MapHeader({
   onClose,
   onMapSelect,
   onUserPress,
+  onSearchPress,
+  onMenuPress,
 }: MapHeaderProps) {
   const insets = useSafeAreaInsets();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -136,14 +140,14 @@ export function MapHeader({
 
           {/* 右側：アクションボタン群 */}
           <View className="flex-row items-center gap-4">
-            {/* ブックマークボタン */}
-            <Pressable className="items-center justify-center">
-              <Ionicons name="bookmark-outline" size={24} color="#007AFF" />
+            {/* 三点リーダメニュー */}
+            <Pressable onPress={onMenuPress} className="items-center justify-center">
+              <Ionicons name="ellipsis-horizontal" size={24} color="#007AFF" />
             </Pressable>
 
-            {/* 共有ボタン */}
-            <Pressable className="items-center justify-center">
-              <Ionicons name="share-outline" size={24} color="#007AFF" />
+            {/* 検索ボタン */}
+            <Pressable onPress={onSearchPress} className="items-center justify-center">
+              <Ionicons name="search-outline" size={24} color="#007AFF" />
             </Pressable>
 
             {/* ✕ボタン - クリックでデフォルトマップに戻る */}

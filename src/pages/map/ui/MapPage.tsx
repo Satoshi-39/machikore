@@ -6,8 +6,8 @@
  * URLクエリパラメータ (?id=xxx) でマップ指定可能（共有用）
  */
 
-import React, { useState, useEffect, useRef } from 'react';
-import { View } from 'react-native';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { View, Share } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useUserStore } from '@/entities/user';
@@ -27,6 +27,7 @@ import {
   useSelectedPlaceStore,
   type PlaceSearchResult,
 } from '@/features/search-places';
+import { ActionSheet, type ActionSheetItem } from '@/shared/ui';
 
 export function MapPage() {
   const { id } = useLocalSearchParams<{ id?: string }>();
@@ -36,12 +37,23 @@ export function MapPage() {
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const { data: selectedMap, isLoading: isMapLoading } = useMap(selectedMapId);
-  const { data: userMaps } = useUserMaps(user?.id ?? null);
   // UserMap型にはuser情報が含まれているので、直接使用
   const mapOwner = selectedMap?.user ?? null;
+
+  // ログインユーザー自身のマップ一覧（デフォルトマップIDの取得用）
+  const { data: myMaps } = useUserMaps(user?.id ?? null, { currentUserId: user?.id });
+
+  // マップ所有者のマップ一覧を取得（ヘッダーのドロップダウン用）
+  // - 自分のマップ: 公開・非公開両方
+  // - 他ユーザのマップ: 公開のみ
+  const mapOwnerId = selectedMap?.user_id ?? null;
+  const { data: ownerMaps } = useUserMaps(mapOwnerId, { currentUserId: user?.id });
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -104,22 +116,85 @@ export function MapPage() {
     console.log('📍 ピン刺しモード開始');
   };
 
+  // 三点リーダメニューを開く
+  const handleMenuPress = () => {
+    setIsMenuOpen(true);
+  };
+
+  // いいね処理
+  const handleLikePress = () => {
+    setIsLiked(!isLiked);
+    // TODO: API呼び出し
+  };
+
+  // ブックマーク処理
+  const handleBookmarkPress = () => {
+    setIsBookmarked(!isBookmarked);
+    // TODO: API呼び出し
+  };
+
+  // 共有処理
+  const handleSharePress = async () => {
+    try {
+      await Share.share({
+        message: `${selectedMap?.name || 'マップ'}をチェック！`,
+        url: `https://machikore.app/map/${selectedMapId}`,
+      });
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  };
+
+  // アクションシートのメニュー項目
+  const menuItems: ActionSheetItem[] = useMemo(() => [
+    {
+      id: 'like',
+      label: isLiked ? 'いいね済み' : 'いいね',
+      icon: isLiked ? 'heart' : 'heart-outline',
+      iconColor: isLiked ? '#EF4444' : undefined,
+      onPress: handleLikePress,
+    },
+    {
+      id: 'bookmark',
+      label: isBookmarked ? '保存済み' : '保存',
+      icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
+      iconColor: isBookmarked ? '#F59E0B' : undefined,
+      onPress: handleBookmarkPress,
+    },
+    {
+      id: 'share',
+      label: '共有',
+      icon: 'share-outline',
+      onPress: handleSharePress,
+    },
+  ], [isLiked, isBookmarked]);
+
   return (
     <SafeAreaView className="flex-1 bg-white" edges={isUserMap ? ['top'] : []}>
-      {/* ヘッダー（ユーザーマップの時のみ表示） */}
-      {isUserMap && (
+      {/* ヘッダー（ユーザーマップの時のみ表示、検索中は非表示） */}
+      {isUserMap && !isSearchFocused && (
         <MapHeader
           isUserMap={isUserMap}
           isLoading={isLoadingUserMap}
           mapTitle={selectedMap?.name}
           userName={mapOwner?.display_name || undefined}
           userAvatarUrl={mapOwner?.avatar_url || undefined}
-          userMaps={userMaps}
+          userMaps={ownerMaps}
           onClose={handleCloseUserMap}
           onMapSelect={handleMapSelect}
           onUserPress={handleUserPress}
+          onSearchPress={handleSearchFocus}
+          onMenuPress={handleMenuPress}
         />
       )}
+
+      {/* マップアクションシート */}
+      <ActionSheet
+        visible={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        items={menuItems}
+        title={selectedMap?.name}
+      />
 
       {/* マップ表示（常にレンダリング） */}
       <View className="flex-1">
@@ -129,11 +204,9 @@ export function MapPage() {
             ref={mapViewRef}
             mapId={selectedMapId || id || null}
             userId={user?.id ?? null}
-            defaultMapId={userMaps?.[0]?.id ?? null}
+            defaultMapId={myMaps?.[0]?.id ?? null}
             currentLocation={location}
             viewMode={viewMode}
-            onViewModeChange={setViewMode}
-            onSearchFocus={handleSearchFocus}
             isSearchFocused={isSearchFocused}
           />
         ) : (

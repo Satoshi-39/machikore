@@ -11,3 +11,5 @@ export { LocationButton } from './location-button';
 export { Breadcrumb } from './breadcrumb';
 export type { BreadcrumbItem } from './breadcrumb';
 export { SearchBar } from './search-bar';
+export { ActionSheet } from './action-sheet';
+export type { ActionSheetItem } from './action-sheet';

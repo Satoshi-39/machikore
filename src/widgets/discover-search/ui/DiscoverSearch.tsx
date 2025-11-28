@@ -139,12 +139,6 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
             onRemove={removeHistory}
             onClearAll={clearHistory}
           />
-          {history.length === 0 && (
-            <View className="flex-1 justify-center items-center">
-              <Ionicons name="search-outline" size={48} color={colors.text.tertiary} />
-              <Text className="text-gray-400 mt-4">検索キーワードを入力</Text>
-            </View>
-          )}
         </View>
       )}
     </View>

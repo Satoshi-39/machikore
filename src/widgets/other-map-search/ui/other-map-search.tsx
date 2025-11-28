@@ -84,13 +84,8 @@ export function OtherMapSearch({
       {/* 検索結果・履歴エリア */}
       <ScrollView className="flex-1">
         {searchQuery.length === 0 ? (
-          // 検索プレースホルダー + 履歴
+          // 検索履歴
           <View className="p-4">
-            <Text className="text-lg font-semibold text-gray-800 mb-3">このマップのスポットを検索</Text>
-            <Text className="text-sm text-gray-500 mb-4">
-              このマップに登録されているスポットを検索できます
-            </Text>
-            {/* 検索履歴 */}
             <SearchHistoryList
               history={history}
               onSelect={handleHistorySelect}

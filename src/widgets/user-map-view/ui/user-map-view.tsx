@@ -6,7 +6,7 @@
 
 import { useSpots } from '@/entities/spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
-import { useSelectedPlaceStore, MapSearchBar } from '@/features/search-places';
+import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import type { SpotWithDetails } from '@/shared/types';
 import { LocationButton } from '@/shared/ui';
@@ -30,8 +30,6 @@ interface UserMapViewProps {
   onSpotDetailSnapChange?: (snapIndex: number) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
-  onViewModeChange?: (mode: MapListViewMode) => void;
-  onSearchFocus?: () => void;
   isSearchFocused?: boolean;
 }
 
@@ -44,8 +42,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       onSpotDetailSnapChange,
       currentLocation = null,
       viewMode = 'map',
-      onViewModeChange,
-      onSearchFocus,
       isSearchFocused = false,
     },
     ref
@@ -201,26 +197,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             );
           })}
         </Mapbox.MapView>
-
-        {/* 検索バー + ViewModeToggle */}
-        {viewMode === 'map' && !isSearchFocused && onViewModeChange && onSearchFocus && (
-          <View
-            className="absolute top-0 left-0 right-0"
-            style={{
-              opacity: spotDetailSnapIndex === 2 ? 0 : 1,
-            }}
-            pointerEvents={spotDetailSnapIndex === 2 ? 'none' : 'auto'}
-          >
-            <MapSearchBar
-              variant="map"
-              viewMode={viewMode}
-              onViewModeChange={onViewModeChange}
-              onFocus={onSearchFocus}
-              showIcon={false}
-              placeholder="検索して登録"
-            />
-          </View>
-        )}
 
         {/* マップコントロールボタン（現在地ボタン） */}
         {viewMode === 'map' && !isSearchFocused && (
