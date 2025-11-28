@@ -6,7 +6,7 @@
 
 import { useCallback } from 'react';
 import type Mapbox from '@rnmapbox/maps';
-import type { SpotWithMasterSpot } from '@/shared/types/database.types';
+import type { SpotWithDetails } from '@/shared/types';
 
 interface UseSpotCameraParams {
   cameraRef: React.RefObject<Mapbox.Camera | null>;
@@ -15,10 +15,13 @@ interface UseSpotCameraParams {
 export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
   // カメラを単一スポットに移動
   const moveCameraToSingleSpot = useCallback(
-    (spot: SpotWithMasterSpot) => {
+    (spot: SpotWithDetails) => {
+      if (!spot.master_spot) return;
+
+      const spotName = spot.custom_name || spot.master_spot.name;
       console.log('🎥 [moveCameraToSingleSpot] 呼び出し:', {
-        spot: spot.name,
-        coords: [spot.longitude, spot.latitude],
+        spot: spotName,
+        coords: [spot.master_spot.longitude, spot.master_spot.latitude],
         cameraRefExists: !!cameraRef.current,
       });
 
@@ -28,7 +31,7 @@ export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
       }
 
       cameraRef.current.setCamera({
-        centerCoordinate: [spot.longitude, spot.latitude],
+        centerCoordinate: [spot.master_spot.longitude, spot.master_spot.latitude],
         zoomLevel: 14,
         animationDuration: 1000,
       });
@@ -40,11 +43,14 @@ export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
 
   // カメラを全スポットが入る範囲に移動
   const fitCameraToAllSpots = useCallback(
-    (spots: SpotWithMasterSpot[]) => {
+    (spots: SpotWithDetails[]) => {
       if (!cameraRef.current || spots.length === 0) return;
 
-      const lngs = spots.map((s) => s.longitude);
-      const lats = spots.map((s) => s.latitude);
+      const validSpots = spots.filter((s) => s.master_spot !== null);
+      if (validSpots.length === 0) return;
+
+      const lngs = validSpots.map((s) => s.master_spot!.longitude);
+      const lats = validSpots.map((s) => s.master_spot!.latitude);
 
       const minLng = Math.min(...lngs);
       const maxLng = Math.max(...lngs);

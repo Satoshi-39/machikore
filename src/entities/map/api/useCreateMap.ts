@@ -1,11 +1,14 @@
 /**
  * マップ作成mutation hook
+ *
+ * Supabaseにマップを作成（UUID使用）
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { v4 as uuidv4 } from 'uuid';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { insertMap } from '@/shared/api/sqlite/maps';
-import type { MapInsert, MapRow } from '@/shared/types/database.types';
+import { createMap } from '@/shared/api/supabase';
+import type { MapWithUser } from '@/shared/types';
 
 interface CreateMapParams {
   userId: string;
@@ -22,45 +25,28 @@ interface CreateMapParams {
 export function useCreateMap() {
   const queryClient = useQueryClient();
 
-  return useMutation<MapRow, Error, CreateMapParams>({
+  return useMutation<MapWithUser, Error, CreateMapParams>({
     mutationFn: async (params) => {
-      const now = new Date().toISOString();
-      const mapId = `map_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+      const mapId = uuidv4();
 
-      const mapData: MapInsert = {
+      return createMap({
         id: mapId,
         user_id: params.userId,
         name: params.name,
         description: params.description || null,
         category: params.category || null,
-        tags: params.tags && params.tags.length > 0 ? JSON.stringify(params.tags) : null,
-        is_public: params.isPublic ? 1 : 0,
-        is_default: 0,
-        is_official: 0,
-        thumbnail_url: null,
-        spots_count: 0,
-        likes_count: 0,
-        created_at: now,
-        updated_at: now,
-        synced_at: null,
-        is_synced: 0,
-      };
-
-      insertMap(mapData);
-
-      return {
-        ...mapData,
-        is_public: mapData.is_public!,
-        is_default: mapData.is_default!,
-        is_official: mapData.is_official!,
-        spots_count: mapData.spots_count!,
-        likes_count: mapData.likes_count!,
-      } as MapRow;
+        tags: params.tags && params.tags.length > 0 ? params.tags : null,
+        is_public: params.isPublic,
+      });
     },
     onSuccess: (_data, variables) => {
       // ユーザーのマップ一覧キャッシュを無効化
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.mapsList(variables.userId),
+      });
+      // フィードも更新
+      queryClient.invalidateQueries({
+        queryKey: [...QUERY_KEYS.maps, 'feed'],
       });
     },
   });

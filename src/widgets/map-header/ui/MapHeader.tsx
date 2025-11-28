@@ -5,18 +5,19 @@
  * FSDの原則：Widget層は複数の要素を組み合わせた複合コンポーネント
  */
 
-import type { MapRow } from '@/shared/types/database.types';
+import type { MapWithUser } from '@/shared/types';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useEffect, useRef } from 'react';
-import { Image, Pressable, ScrollView, Text, View, Modal, Animated } from 'react-native';
+import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface MapHeaderProps {
   isUserMap: boolean;
+  isLoading?: boolean;
   mapTitle?: string;
   userName?: string;
   userAvatarUrl?: string;
-  userMaps?: MapRow[];
+  userMaps?: MapWithUser[];
   onClose?: () => void;
   onMapSelect?: (mapId: string) => void;
   onUserPress?: () => void;
@@ -24,6 +25,7 @@ interface MapHeaderProps {
 
 export function MapHeader({
   isUserMap,
+  isLoading = false,
   mapTitle,
   userName,
   userAvatarUrl,
@@ -65,6 +67,25 @@ export function MapHeader({
     onMapSelect?.(mapId);
     setIsDropdownOpen(false);
   };
+
+  // ローディング時の表示
+  if (isUserMap && isLoading) {
+    return (
+      <View className="bg-white px-5 py-4">
+        <View className="flex-row items-center justify-between">
+          {/* 左側：ローディング */}
+          <View className="flex-row items-center" style={{ flex: 0.8 }}>
+            <ActivityIndicator size="small" color="#007AFF" />
+            <Text className="text-gray-500 ml-3">読み込み中...</Text>
+          </View>
+          {/* 右側：✕ボタンのみ表示 */}
+          <Pressable onPress={onClose} className="items-center justify-center">
+            <Ionicons name="close" size={24} color="#007AFF" />
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View className="bg-white px-5 py-4">

@@ -209,6 +209,65 @@ export async function getCurrentUser() {
 }
 
 /**
+ * Supabase public.users テーブルにユーザーをupsert
+ *
+ * 認証時に呼び出し、maps等の外部キー制約を満たす
+ * SQLiteへの保存は別途syncUserToSQLiteで行う
+ */
+export async function upsertUserToSupabase(authUser: {
+  id: string;
+  email?: string;
+  user_metadata?: Record<string, any>;
+}): Promise<void> {
+  const metadata = authUser.user_metadata || {};
+
+  // username取得ロジック
+  let username = metadata.username;
+  if (!username) {
+    username = metadata.preferred_username
+      || metadata.email?.split('@')[0]
+      || authUser.email?.split('@')[0]
+      || `user_${authUser.id.slice(0, 8)}`;
+  }
+
+  // Display name取得
+  const displayName =
+    metadata.display_name ||
+    metadata.full_name ||
+    metadata.name ||
+    username;
+
+  // Avatar URL取得
+  const avatarUrl =
+    metadata.avatar_url ||
+    metadata.picture ||
+    null;
+
+  const now = new Date().toISOString();
+
+  const { error } = await supabase
+    .from('users')
+    .upsert({
+      id: authUser.id,
+      email: authUser.email || '',
+      username,
+      display_name: displayName,
+      avatar_url: avatarUrl,
+      updated_at: now,
+    }, {
+      onConflict: 'id',
+      ignoreDuplicates: false,
+    });
+
+  if (error) {
+    console.error('[upsertUserToSupabase] Error:', error);
+    throw error;
+  }
+
+  console.log('[upsertUserToSupabase] User upserted successfully:', authUser.id);
+}
+
+/**
  * パスワードリセットメール送信
  */
 export async function sendPasswordResetEmail(

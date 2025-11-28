@@ -16,6 +16,7 @@ import { supabase } from '@/shared/api/supabase/client';
 import {
   restoreSession,
   saveSession,
+  upsertUserToSupabase,
 } from '@/shared/api/supabase/auth';
 import { syncUserToSQLite } from '@/shared/lib/sync';
 import { getUserById } from '@/shared/api/sqlite';
@@ -54,7 +55,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           const { data: { session } } = await supabase.auth.getSession();
 
           if (session?.user && isMounted) {
-            // Supabase Auth → SQLite 同期（session.userを直接渡す）
+            // Supabase public.users にupsert（外部キー制約を満たすため）
+            await upsertUserToSupabase(session.user);
+
+            // SQLiteにもキャッシュとして同期
             await syncUserToSQLite(session.user);
 
             // SQLiteからユーザー情報を取得してストアに保存
@@ -77,7 +81,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
             if (event === 'SIGNED_IN' && session?.user) {
               // サインイン時（Email/Password、OAuth）
-              // Supabase Auth → SQLite 同期（session.userを直接渡す）
+              // Supabase public.users にupsert（外部キー制約を満たすため）
+              await upsertUserToSupabase(session.user);
+
+              // SQLiteにもキャッシュとして同期
               await syncUserToSQLite(session.user);
 
               // SQLiteからユーザー情報を取得してストアに保存

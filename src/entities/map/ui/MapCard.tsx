@@ -9,15 +9,19 @@ import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import type { MapRow } from '@/shared/types/database.types';
+import type { MapWithUser } from '@/shared/types';
 import { useUser } from '@/entities/user';
 
 interface MapCardProps {
-  map: MapRow;
+  map: MapRow | MapWithUser;
   onPress?: () => void;
 }
 
 export function MapCard({ map, onPress }: MapCardProps) {
-  const { data: user } = useUser(map.user_id);
+  // JOINで取得済みのuser情報があれば使う、なければAPIから取得
+  const embeddedUser = 'user' in map ? map.user : null;
+  const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
+  const user = embeddedUser || fetchedUser;
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
 
   return (

@@ -10,7 +10,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useUserStore, useUser } from '@/entities/user';
+import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { DefaultMapView } from '@/widgets/default-map-view';
 import { DefaultMapList } from '@/widgets/default-map-list';
@@ -35,9 +35,10 @@ export function MapPage() {
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
-  const { data: selectedMap } = useMap(selectedMapId);
+  const { data: selectedMap, isLoading: isMapLoading } = useMap(selectedMapId);
   const { data: userMaps } = useUserMaps(user?.id ?? null);
-  const { data: mapOwner } = useUser(selectedMap?.user_id ?? null);
+  // UserMap型にはuser情報が含まれているので、直接使用
+  const mapOwner = selectedMap?.user ?? null;
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -53,6 +54,9 @@ export function MapPage() {
 
   // URLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
   const isUserMap = selectedMapId != null || id != null;
+
+  // マップ読み込み中かどうか（ユーザーマップの場合のみ）
+  const isLoadingUserMap = isUserMap && isMapLoading;
 
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
@@ -106,17 +110,10 @@ export function MapPage() {
       {isUserMap && (
         <MapHeader
           isUserMap={isUserMap}
+          isLoading={isLoadingUserMap}
           mapTitle={selectedMap?.name}
-          userName={
-            (isUserMap
-              ? mapOwner?.display_name
-              : user?.display_name) || undefined
-          }
-          userAvatarUrl={
-            (isUserMap
-              ? mapOwner?.avatar_url
-              : user?.avatar_url) || undefined
-          }
+          userName={mapOwner?.display_name || undefined}
+          userAvatarUrl={mapOwner?.avatar_url || undefined}
           userMaps={userMaps}
           onClose={handleCloseUserMap}
           onMapSelect={handleMapSelect}

@@ -16,7 +16,7 @@ export function MapFeed() {
   const { data: maps, isLoading, error, refetch, isRefetching } = useFeedMaps();
 
   const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/maps/${mapId}`);
+    router.push(`/(tabs)/map?id=${mapId}`);
   }, [router]);
 
   return (

@@ -8,10 +8,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
-import type { SpotWithMasterSpot } from '@/shared/types/database.types';
+import type { SpotWithDetails } from '@/shared/types';
 
 interface SpotDetailCardProps {
-  spot: SpotWithMasterSpot;
+  spot: SpotWithDetails;
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
 }
@@ -19,6 +19,12 @@ interface SpotDetailCardProps {
 export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
+
+  // SpotWithDetailsから表示用データを抽出
+  const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+  const spotAddress = spot.master_spot?.google_formatted_address;
+  const latitude = spot.master_spot?.latitude ?? 0;
+  const longitude = spot.master_spot?.longitude ?? 0;
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
@@ -69,10 +75,10 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
             <Text className="text-2xl font-bold text-gray-900 mb-1">
-              {spot.name}
+              {spotName}
             </Text>
-            {spot.address && (
-              <Text className="text-sm text-gray-600">{spot.address}</Text>
+            {spotAddress && (
+              <Text className="text-sm text-gray-600">{spotAddress}</Text>
             )}
           </View>
           <Pressable
@@ -92,8 +98,7 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
             color={colors.text.secondary}
           />
           <Text className="text-sm text-gray-600 ml-1">
-            緯度: {spot.latitude.toFixed(4)}, 経度:{' '}
-            {spot.longitude.toFixed(4)}
+            緯度: {latitude.toFixed(4)}, 経度: {longitude.toFixed(4)}
           </Text>
         </View>
 

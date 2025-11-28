@@ -8,7 +8,7 @@ import { useSpots } from '@/entities/spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore, MapSearchBar } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
-import type { SpotWithMasterSpot } from '@/shared/types/database.types';
+import type { SpotWithDetails } from '@/shared/types';
 import { LocationButton } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
@@ -53,9 +53,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const mapViewRef = useRef<Mapbox.MapView>(null);
     const cameraRef = useRef<Mapbox.Camera>(null);
     const { data: spots = [] } = useSpots(mapId ?? '');
-    const [selectedSpot, setSelectedSpot] = useState<SpotWithMasterSpot | null>(
-      null
-    );
+    const [selectedSpot, setSelectedSpot] = useState<SpotWithDetails | null>(null);
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
 
@@ -86,7 +84,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     });
 
     // 選択状態を管理
-    const handleSpotSelect = (spot: SpotWithMasterSpot | null) => {
+    const handleSpotSelect = (spot: SpotWithDetails | null) => {
       setSelectedSpot(spot);
     };
 
@@ -107,25 +105,28 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       hasInitialCameraMoved.current = false;
     }, [mapId]);
 
-    // 新規登録したスポットへジャンプ
+    // 新規登録したスポット or 発見タブからのジャンプ
     useEffect(() => {
-      console.log('🔍 [Jump useEffect] jumpToSpotId:', jumpToSpotId, 'spots:', spots.length);
-      if (!jumpToSpotId) return;
+      console.log('🔍 [Jump useEffect] jumpToSpotId:', jumpToSpotId, 'spots:', spots.length, 'isMapReady:', isMapReady);
+      if (!jumpToSpotId || !isMapReady) return;
 
       const spot = spots.find((s) => s.id === jumpToSpotId);
       if (spot) {
-        console.log('📍 [Jump] スポットにジャンプ:', spot.name);
+        const spotName = spot.custom_name || spot.master_spot?.name || '不明';
+        console.log('📍 [Jump] スポットにジャンプ:', spotName);
+        // 初回カメラ移動済みフラグを立てて全スポット表示をスキップ
+        hasInitialCameraMoved.current = true;
         setTimeout(() => {
           moveCameraToSingleSpot(spot);
           setSelectedSpot(spot);
         }, 100);
         setJumpToSpotId(null);
       } else {
-        console.log('⚠️ [Jump] スポットが見つかりません');
+        console.log('⚠️ [Jump] スポットが見つかりません（spotsロード待ち）');
       }
-    }, [jumpToSpotId, spots, moveCameraToSingleSpot, setJumpToSpotId]);
+    }, [jumpToSpotId, spots, isMapReady, moveCameraToSingleSpot, setJumpToSpotId]);
 
-    // 全スポット表示（マップごとに初回のみ）
+    // 全スポット表示（マップごとに初回のみ、jumpToSpotIdがない場合）
     useEffect(() => {
       console.log('🔍 [All Spots useEffect]', {
         spotsLength: spots.length,
@@ -134,6 +135,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         jumpToSpotId,
       });
 
+      // jumpToSpotIdがある場合はジャンプ処理に任せる
       if (spots.length === 0 || !isMapReady || hasInitialCameraMoved.current || jumpToSpotId) {
         return;
       }
@@ -181,19 +183,23 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           />
 
           {/* スポットマーカー表示 */}
-          {spots.map((spot) => (
-            <Mapbox.PointAnnotation
-              key={spot.id}
-              id={spot.id}
-              coordinate={[spot.longitude, spot.latitude]}
-              onSelected={() => {
-                console.log('📍 スポット選択:', spot.name);
-                handleSpotSelect(spot);
-              }}
-            >
-              <Ionicons name="location" size={40} color="#EF4444" />
-            </Mapbox.PointAnnotation>
-          ))}
+          {spots.map((spot) => {
+            if (!spot.master_spot) return null;
+            const spotName = spot.custom_name || spot.master_spot.name;
+            return (
+              <Mapbox.PointAnnotation
+                key={spot.id}
+                id={spot.id}
+                coordinate={[spot.master_spot.longitude, spot.master_spot.latitude]}
+                onSelected={() => {
+                  console.log('📍 スポット選択:', spotName);
+                  handleSpotSelect(spot);
+                }}
+              >
+                <Ionicons name="location" size={40} color="#EF4444" />
+              </Mapbox.PointAnnotation>
+            );
+          })}
         </Mapbox.MapView>
 
         {/* 検索バー + ViewModeToggle */}

@@ -2,32 +2,98 @@
  * SpotCard コンポーネント
  *
  * スポットを表示するカード型コンポーネント
+ * ローカルSQLiteデータとSupabase JOINデータの両方に対応
  */
 
 import React from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
-import type { UUID } from '@/shared/types';
+import type { SpotWithDetails, UUID } from '@/shared/types';
 import { getRelativeSpotTime } from '@/entities/spot/model/helpers';
-import { useToggleLike, useCheckUserLiked } from '@/entities/spot/api';
+import { useToggleLike, useCheckUserLiked, useSpotImages } from '@/entities/spot/api';
 import { useUser } from '@/entities/user';
 
+// Supabase JOINで取得済みのユーザー情報
+interface EmbeddedUser {
+  id: string;
+  username: string;
+  display_name: string | null;
+  avatar_url: string | null;
+}
+
+// Supabase JOINで取得済みのmaster_spot情報
+interface EmbeddedMasterSpot {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  google_place_id: string | null;
+  google_formatted_address: string | null;
+  google_types: string[] | null;
+}
+
 interface SpotCardProps {
-  spot: SpotWithMasterSpot;
+  // ローカルSQLiteデータまたはSupabase SpotWithDetailsデータ
+  spot: SpotWithMasterSpot | SpotWithDetails;
   userId: UUID;
   machiName?: string;
   onPress?: () => void;
+  // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
+  embeddedUser?: EmbeddedUser | null;
+  embeddedMasterSpot?: EmbeddedMasterSpot | null;
 }
 
-export function SpotCard({ spot, userId, machiName, onPress }: SpotCardProps) {
+export function SpotCard({
+  spot,
+  userId,
+  machiName,
+  onPress,
+  embeddedUser,
+  embeddedMasterSpot,
+}: SpotCardProps) {
+  // embeddedUserがあればuseUserをスキップ
+  const { data: fetchedUser } = useUser(embeddedUser ? null : spot.user_id);
+  const user = embeddedUser || fetchedUser;
+
   const { data: isLiked = false } = useCheckUserLiked(userId, spot.id);
   const { mutate: toggleLike } = useToggleLike();
-  const { data: user } = useUser(spot.user_id);
+  const { data: images = [] } = useSpotImages(spot.id);
 
-  // データベースのavatar_urlにはファイルシステムのURIが保存されている
-  const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
+  const avatarUri = user?.avatar_url ?? undefined;
+
+  // スポット名の取得（SpotWithDetailsとSpotWithMasterSpotで構造が異なる）
+  const getSpotName = (): string => {
+    if (spot.custom_name) return spot.custom_name;
+    // SpotWithDetails型の場合
+    if ('master_spot' in spot && spot.master_spot?.name) {
+      return spot.master_spot.name;
+    }
+    // SpotWithMasterSpot型の場合
+    if ('name' in spot && spot.name) {
+      return spot.name;
+    }
+    // embeddedMasterSpotがある場合
+    if (embeddedMasterSpot?.name) {
+      return embeddedMasterSpot.name;
+    }
+    return '不明なスポット';
+  };
+
+  // 住所の取得
+  const getAddress = (): string | null => {
+    if ('master_spot' in spot && spot.master_spot?.google_formatted_address) {
+      return spot.master_spot.google_formatted_address;
+    }
+    if (embeddedMasterSpot?.google_formatted_address) {
+      return embeddedMasterSpot.google_formatted_address;
+    }
+    return null;
+  };
+
+  const spotName = getSpotName();
+  const address = getAddress();
 
   const handleLikePress = (e: any) => {
     e.stopPropagation();
@@ -63,7 +129,7 @@ export function SpotCard({ spot, userId, machiName, onPress }: SpotCardProps) {
 
       {/* スポット名 */}
       <Text className="text-base font-semibold text-gray-900 mb-2">
-        📍 {spot.custom_name || spot.name}
+        📍 {spotName}
       </Text>
 
       {/* 説明 */}
@@ -73,11 +139,31 @@ export function SpotCard({ spot, userId, machiName, onPress }: SpotCardProps) {
         </Text>
       )}
 
-      {/* 街情報 */}
-      {machiName && (
+      {/* 画像 */}
+      {images.length > 0 && (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          className="mb-2 -mx-1"
+        >
+          {images.map((image) => (
+            <Image
+              key={image.id}
+              source={{ uri: image.cloud_path || image.local_path || '' }}
+              className="w-24 h-24 rounded-lg mx-1"
+              resizeMode="cover"
+            />
+          ))}
+        </ScrollView>
+      )}
+
+      {/* 住所または街情報 */}
+      {(address || machiName) && (
         <View className="flex-row items-center mb-2">
           <Ionicons name="location-outline" size={16} color={colors.text.secondary} />
-          <Text className="text-sm text-gray-600 ml-1">{machiName}</Text>
+          <Text className="text-sm text-gray-600 ml-1" numberOfLines={1}>
+            {address || machiName}
+          </Text>
         </View>
       )}
 
