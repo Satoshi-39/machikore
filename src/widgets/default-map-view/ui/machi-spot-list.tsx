@@ -58,29 +58,33 @@ export function MachiSpotList({ mapId }: MachiSpotListProps) {
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled
       >
-        {spots.map((spot) => (
-          <View
-            key={spot.id}
-            className="bg-white rounded-lg p-2 mb-2 border border-gray-200"
-          >
-            <Text className="text-sm font-semibold text-gray-900 mb-1">
-              📍 {spot.custom_name || spot.name}
-            </Text>
-            {spot.description && (
-              <Text className="text-xs text-gray-700 mb-1" numberOfLines={2}>
-                {spot.description}
+        {spots.map((spot) => {
+          const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+          const spotAddress = spot.master_spot?.google_formatted_address;
+          return (
+            <View
+              key={spot.id}
+              className="bg-white rounded-lg p-2 mb-2 border border-gray-200"
+            >
+              <Text className="text-sm font-semibold text-gray-900 mb-1">
+                📍 {spotName}
               </Text>
-            )}
-            {spot.address && (
-              <Text className="text-xs text-gray-500 mb-1" numberOfLines={1}>
-                {spot.address}
+              {spot.description && (
+                <Text className="text-xs text-gray-700 mb-1" numberOfLines={2}>
+                  {spot.description}
+                </Text>
+              )}
+              {spotAddress && (
+                <Text className="text-xs text-gray-500 mb-1" numberOfLines={1}>
+                  {spotAddress}
+                </Text>
+              )}
+              <Text className="text-xs text-gray-500">
+                {getRelativeSpotTime(spot.created_at)}
               </Text>
-            )}
-            <Text className="text-xs text-gray-500">
-              {getRelativeSpotTime(spot.created_at)}
-            </Text>
-          </View>
-        ))}
+            </View>
+          );
+        })}
       </ScrollView>
     </View>
   );

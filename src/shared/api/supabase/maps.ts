@@ -138,18 +138,10 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
  */
 export async function getMapSpots(mapId: string): Promise<SpotWithDetails[]> {
   const { data, error } = await supabase
-    .from('spots')
+    .from('user_spots')
     .select(`
       *,
-      master_spots (
-        id,
-        name,
-        latitude,
-        longitude,
-        google_place_id,
-        google_formatted_address,
-        google_types
-      ),
+      master_spots (*),
       users (
         id,
         username,

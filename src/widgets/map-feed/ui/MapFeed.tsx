@@ -19,6 +19,10 @@ export function MapFeed() {
     router.push(`/(tabs)/map?id=${mapId}`);
   }, [router]);
 
+  const handleUserPress = useCallback((userId: string) => {
+    router.push(`/users/${userId}`);
+  }, [router]);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
@@ -32,7 +36,11 @@ export function MapFeed() {
           data={data}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <MapCard map={item} onPress={() => handleMapPress(item.id)} />
+            <MapCard
+              map={item}
+              onPress={() => handleMapPress(item.id)}
+              onUserPress={handleUserPress}
+            />
           )}
           refreshControl={
             <RefreshControl refreshing={isRefetching} onRefresh={refetch} />

@@ -124,6 +124,7 @@ export function getPublicUrl(bucket: string, path: string): string {
 // ===============================
 
 export const STORAGE_BUCKETS = {
-  POST_IMAGES: 'post-images',
   AVATARS: 'avatars',
+  SPOT_IMAGES: 'spot-images',
+  MAP_THUMBNAILS: 'map-thumbnails',
 } as const;

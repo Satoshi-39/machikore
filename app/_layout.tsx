@@ -143,6 +143,13 @@ export default function RootLayout() {
               animation: 'none',
             }}
           />
+          <Stack.Screen
+            name="users/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

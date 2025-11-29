@@ -15,9 +15,10 @@ import { useUser } from '@/entities/user';
 interface MapCardProps {
   map: MapRow | MapWithUser;
   onPress?: () => void;
+  onUserPress?: (userId: string) => void;
 }
 
-export function MapCard({ map, onPress }: MapCardProps) {
+export function MapCard({ map, onPress, onUserPress }: MapCardProps) {
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
@@ -31,21 +32,26 @@ export function MapCard({ map, onPress }: MapCardProps) {
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
-        {avatarUri ? (
-          <Image
-            source={{ uri: avatarUri }}
-            className="w-10 h-10 rounded-full mr-3"
-          />
-        ) : (
-          <View className="w-10 h-10 rounded-full bg-gray-200 justify-center items-center mr-3">
-            <Ionicons name="person" size={20} color={colors.gray[500]} />
+        <Pressable
+          onPress={() => onUserPress?.(map.user_id)}
+          className="flex-row items-center flex-1"
+        >
+          {avatarUri ? (
+            <Image
+              source={{ uri: avatarUri }}
+              className="w-10 h-10 rounded-full mr-3"
+            />
+          ) : (
+            <View className="w-10 h-10 rounded-full bg-gray-200 justify-center items-center mr-3">
+              <Ionicons name="person" size={20} color={colors.gray[500]} />
+            </View>
+          )}
+          <View className="flex-1">
+            <Text className="text-sm font-semibold text-gray-800">
+              {user?.display_name || user?.username || 'ユーザー'}
+            </Text>
           </View>
-        )}
-        <View className="flex-1">
-          <Text className="text-sm font-semibold text-gray-800">
-            {user?.display_name || user?.username || 'ユーザー'}
-          </Text>
-        </View>
+        </Pressable>
       </View>
 
       {/* マップ名 */}

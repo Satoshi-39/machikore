@@ -196,6 +196,16 @@
     "country_code": "jp"
   },
   {
+    "id": "musashino",
+    "prefecture_id": "tokyo",
+    "name": "武蔵野市",
+    "name_kana": "むさしのし",
+    "type": "市",
+    "latitude": 35.7063,
+    "longitude": 139.5594,
+    "country_code": "jp"
+  },
+  {
     "id": "yokohama",
     "prefecture_id": "kanagawa",
     "name": "横浜市",

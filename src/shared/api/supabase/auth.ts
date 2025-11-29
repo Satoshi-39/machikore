@@ -209,6 +209,28 @@ export async function getCurrentUser() {
 }
 
 /**
+ * public.usersテーブルからユーザー情報を取得
+ */
+export async function getUserById(userId: string) {
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      // Not found
+      return null;
+    }
+    console.error('[getUserById] Error:', error);
+    throw error;
+  }
+
+  return data;
+}
+
+/**
  * Supabase public.users テーブルにユーザーをupsert
  *
  * 認証時に呼び出し、maps等の外部キー制約を満たす

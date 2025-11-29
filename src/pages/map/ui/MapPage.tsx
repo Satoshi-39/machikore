@@ -30,7 +30,7 @@ import {
 import { ActionSheet, type ActionSheetItem } from '@/shared/ui';
 
 export function MapPage() {
-  const { id } = useLocalSearchParams<{ id?: string }>();
+  const { id, addSpot } = useLocalSearchParams<{ id?: string; addSpot?: string }>();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const user = useUserStore((state) => state.user);
@@ -63,6 +63,13 @@ export function MapPage() {
       setSelectedMapId(id);
     }
   }, [id, setSelectedMapId]);
+
+  // addSpotパラメータがある場合は検索画面を自動的に開く（スポット追加モード）
+  useEffect(() => {
+    if (addSpot) {
+      setIsSearchFocused(true);
+    }
+  }, [addSpot]);
 
   // URLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
   const isUserMap = selectedMapId != null || id != null;

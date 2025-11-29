@@ -20,6 +20,7 @@ import {
   type SpotLocationInput,
   isPlaceSearchResult,
 } from '@/features/search-places';
+import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 
 interface CreateSpotFormProps {
   placeData: SpotLocationInput; // Google Places検索結果 または 手動登録
@@ -27,6 +28,7 @@ interface CreateSpotFormProps {
     customName: string;
     description?: string;
     tags: string[];
+    images: SelectedImage[];
   }) => void;
   isLoading?: boolean;
 }
@@ -39,6 +41,7 @@ export function CreateSpotForm({ placeData, onSubmit, isLoading = false }: Creat
   const [customName, setCustomName] = useState(placeData.name ?? '');
   const [description, setDescription] = useState('');
   const [tags, setTags] = useState('');
+  const [images, setImages] = useState<SelectedImage[]>([]);
 
   const handleSubmit = () => {
     if (!customName.trim()) {
@@ -50,6 +53,7 @@ export function CreateSpotForm({ placeData, onSubmit, isLoading = false }: Creat
       customName: customName.trim(),
       description: description.trim() || undefined,
       tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+      images,
     });
   };
 
@@ -143,6 +147,16 @@ export function CreateSpotForm({ placeData, onSubmit, isLoading = false }: Creat
           <Text className="text-xs text-gray-500 mt-1">
             カンマ区切りで入力してください
           </Text>
+        </View>
+
+        {/* 写真 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-gray-800 mb-2">写真</Text>
+          <ImagePickerButton
+            images={images}
+            onImagesChange={setImages}
+            maxImages={5}
+          />
         </View>
 
         {/* 登録ボタン */}

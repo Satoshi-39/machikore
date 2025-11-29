@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { Loading } from '@/shared/ui';
 import { useUser, useUserStats } from '@/entities/user/api';
 
 interface MyPageProfileProps {
@@ -15,15 +16,17 @@ interface MyPageProfileProps {
 }
 
 export function MyPageProfile({ userId }: MyPageProfileProps) {
-  // userIdがnullの場合は空の状態を表示
-  const { data: user } = useUser(userId ?? '');
+  const { data: user, isLoading } = useUser(userId ?? '');
   const { data: stats } = useUserStats(userId ?? '');
 
-  // 型安全な値の抽出
-  const username: string = (user?.username as string | undefined) ?? 'machikore_user';
-  const displayName: string = (user?.display_name as string | null | undefined) ?? 'まちコレユーザー';
-  const bio: string = (user?.bio as string | null | undefined) ?? '街を巡るのが好きです。色々な場所を訪れて、思い出を記録しています。';
-  const avatarUrl: string | undefined = (user?.avatar_url as string | null | undefined) ?? undefined;
+  // ローディング中
+  if (isLoading) {
+    return (
+      <View className="bg-white px-4 py-6 border-b border-gray-200">
+        <Loading variant="inline" />
+      </View>
+    );
+  }
 
   const visitedMachiCount = stats?.visitedMachiCount ?? 0;
   const followingCount = stats?.followingCount ?? 0;
@@ -32,9 +35,9 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
   return (
     <View className="bg-white px-4 py-6 border-b border-gray-200">
       {/* アバター */}
-      {avatarUrl ? (
+      {user?.avatar_url ? (
         <Image
-          source={{ uri: avatarUrl }}
+          source={{ uri: user.avatar_url }}
           className="w-20 h-20 rounded-full mb-4"
         />
       ) : (
@@ -45,13 +48,15 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
 
       {/* ユーザー名 */}
       <Text className="text-xl font-bold text-gray-900 mb-1">
-        {displayName || username}
+        {user?.display_name || user?.username || 'ユーザー'}
       </Text>
-      <Text className="text-sm text-gray-500 mb-3">@{username}</Text>
+      {user?.username && (
+        <Text className="text-sm text-gray-500 mb-3">@{user.username}</Text>
+      )}
 
       {/* 自己紹介 */}
-      {bio && (
-        <Text className="text-base text-gray-700 leading-5 mb-3">{bio}</Text>
+      {user?.bio && (
+        <Text className="text-base text-gray-700 leading-5 mb-3">{user.bio}</Text>
       )}
 
       {/* 統計情報（Instagram/noteスタイル） */}

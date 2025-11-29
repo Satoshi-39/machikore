@@ -40,6 +40,7 @@ interface SpotCardProps {
   userId: UUID;
   machiName?: string;
   onPress?: () => void;
+  onUserPress?: (userId: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
@@ -50,6 +51,7 @@ export function SpotCard({
   userId,
   machiName,
   onPress,
+  onUserPress,
   embeddedUser,
   embeddedMasterSpot,
 }: SpotCardProps) {
@@ -107,24 +109,29 @@ export function SpotCard({
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
-        {avatarUri ? (
-          <Image
-            source={{ uri: avatarUri }}
-            className="w-10 h-10 rounded-full mr-3"
-          />
-        ) : (
-          <View className="w-10 h-10 rounded-full bg-gray-200 justify-center items-center mr-3">
-            <Ionicons name="person" size={20} color={colors.gray[500]} />
+        <Pressable
+          onPress={() => onUserPress?.(spot.user_id)}
+          className="flex-row items-center flex-1"
+        >
+          {avatarUri ? (
+            <Image
+              source={{ uri: avatarUri }}
+              className="w-10 h-10 rounded-full mr-3"
+            />
+          ) : (
+            <View className="w-10 h-10 rounded-full bg-gray-200 justify-center items-center mr-3">
+              <Ionicons name="person" size={20} color={colors.gray[500]} />
+            </View>
+          )}
+          <View className="flex-1">
+            <Text className="text-sm font-semibold text-gray-800">
+              {user?.display_name || user?.username || 'ユーザー'}
+            </Text>
+            <Text className="text-xs text-gray-500">
+              {getRelativeSpotTime(spot.created_at)}
+            </Text>
           </View>
-        )}
-        <View className="flex-1">
-          <Text className="text-sm font-semibold text-gray-800">
-            {user?.display_name || user?.username || 'ユーザー'}
-          </Text>
-          <Text className="text-xs text-gray-500">
-            {getRelativeSpotTime(spot.created_at)}
-          </Text>
-        </View>
+        </Pressable>
       </View>
 
       {/* スポット名 */}

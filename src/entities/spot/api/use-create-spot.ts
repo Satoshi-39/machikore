@@ -1,43 +1,43 @@
 /**
- * スポットを作成するhook
+ * スポットを作成するhook（Supabase版）
  */
 
 import { useMutation } from '@tanstack/react-query';
 import { invalidateSpots } from '@/shared/api/query-client';
-import { insertSpot } from '@/shared/api/sqlite';
-import { createSpotData, validateCreateSpotParams } from '../model';
-import type { CreateSpotParams } from '../model/types';
+import { createSpot, type CreateSpotInput } from '@/shared/api/supabase/spots';
 
 /**
  * スポットを作成
  */
 export function useCreateSpot() {
   return useMutation({
-    mutationFn: async (params: CreateSpotParams) => {
-      console.log('🔍 useCreateSpot: バリデーション開始', params);
+    mutationFn: async (params: CreateSpotInput) => {
+      console.log('🔍 useCreateSpot: 作成開始', params);
 
       // バリデーション
-      const validation = validateCreateSpotParams(params);
-      if (!validation.valid) {
-        console.error('❌ useCreateSpot: バリデーションエラー', validation.error);
-        throw new Error(validation.error);
+      if (!params.userId) {
+        throw new Error('ユーザーIDが必要です');
+      }
+      if (!params.mapId) {
+        throw new Error('マップIDが必要です');
+      }
+      if (!params.machiId) {
+        throw new Error('街IDが必要です');
+      }
+      if (!params.name) {
+        throw new Error('スポット名が必要です');
+      }
+      if (!params.googlePlaceId) {
+        throw new Error('Google Place IDが必要です');
       }
 
       console.log('✅ useCreateSpot: バリデーション成功');
 
-      // スポットを作成（新スキーマ対応：spotとmasterSpotの両方を作成）
-      const spotData = createSpotData(params);
-      console.log('📝 useCreateSpot: スポットデータ作成完了', spotData);
+      // Supabaseにスポットを作成
+      const spotId = await createSpot(params);
+      console.log('💾 useCreateSpot: Supabase挿入完了', spotId);
 
-      try {
-        insertSpot(spotData);
-        console.log('💾 useCreateSpot: DB挿入完了');
-      } catch (error) {
-        console.error('❌ useCreateSpot: DB挿入エラー', error);
-        throw error;
-      }
-
-      return spotData.spot.id;
+      return spotId;
     },
     onSuccess: (spotId) => {
       console.log('🎊 useCreateSpot: 成功コールバック実行', spotId);

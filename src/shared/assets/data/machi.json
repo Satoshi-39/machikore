@@ -440,5 +440,108 @@
     "country_code": "jp",
     "prefecture_name": "東京都",
     "city_name": "品川区"
+  },
+  {
+    "id": "machi_musashino_kichijoji",
+    "name": "吉祥寺",
+    "name_kana": "きちじょうじ",
+    "latitude": 35.7024,
+    "longitude": 139.5795,
+    "lines": [
+      {
+        "ja": "JR中央線"
+      },
+      {
+        "ja": "京王井の頭線"
+      }
+    ],
+    "prefecture_id": "tokyo",
+    "city_id": "musashino",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "武蔵野市"
+  },
+  {
+    "id": "machi_koto_kiyosumishirakawa",
+    "name": "清澄白河",
+    "name_kana": "きよすみしらかわ",
+    "latitude": 35.6808,
+    "longitude": 139.8011,
+    "lines": [
+      {
+        "ja": "東京メトロ半蔵門線"
+      },
+      {
+        "ja": "都営大江戸線"
+      }
+    ],
+    "prefecture_id": "tokyo",
+    "city_id": "koto",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "江東区"
+  },
+  {
+    "id": "machi_minato_hamamatsucho",
+    "name": "浜松町",
+    "name_kana": "はままつちょう",
+    "latitude": 35.6555,
+    "longitude": 139.7572,
+    "lines": [
+      {
+        "ja": "JR山手線"
+      },
+      {
+        "ja": "東京モノレール"
+      }
+    ],
+    "prefecture_id": "tokyo",
+    "city_id": "minato",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "港区"
+  },
+  {
+    "id": "machi_chiyoda_otemachi",
+    "name": "大手町",
+    "name_kana": "おおてまち",
+    "latitude": 35.6867,
+    "longitude": 139.7639,
+    "lines": [
+      {
+        "ja": "東京メトロ丸ノ内線"
+      },
+      {
+        "ja": "東京メトロ東西線"
+      },
+      {
+        "ja": "東京メトロ千代田線"
+      }
+    ],
+    "prefecture_id": "tokyo",
+    "city_id": "chiyoda",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "千代田区"
+  },
+  {
+    "id": "machi_shibuya_yoyogiuehara",
+    "name": "代々木上原",
+    "name_kana": "よよぎうえはら",
+    "latitude": 35.6693,
+    "longitude": 139.6789,
+    "lines": [
+      {
+        "ja": "小田急小田原線"
+      },
+      {
+        "ja": "東京メトロ千代田線"
+      }
+    ],
+    "prefecture_id": "tokyo",
+    "city_id": "shibuya",
+    "country_code": "jp",
+    "prefecture_name": "東京都",
+    "city_name": "渋谷区"
   }
 ]

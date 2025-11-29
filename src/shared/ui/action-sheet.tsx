@@ -4,10 +4,12 @@
  * 三点リーダなどからアクションメニューを表示する
  */
 
-import React from 'react';
-import { View, Text, Pressable, Modal } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Text, Pressable, Modal, Animated, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export interface ActionSheetItem {
   id: string;
@@ -27,22 +29,64 @@ interface ActionSheetProps {
 
 export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps) {
   const insets = useSafeAreaInsets();
+  const slideAnim = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      // 表示時：下からスライドアップ
+      Animated.parallel([
+        Animated.timing(slideAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    } else {
+      // 非表示時：下にスライドダウン
+      Animated.parallel([
+        Animated.timing(slideAnim, {
+          toValue: SCREEN_HEIGHT,
+          duration: 250,
+          useNativeDriver: true,
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 250,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [visible, slideAnim, fadeAnim]);
 
   return (
     <Modal
       visible={visible}
-      animationType="fade"
+      animationType="none"
       transparent={true}
       onRequestClose={onClose}
     >
-      <View className="flex-1 bg-black/50 justify-end">
-        {/* 背景タップで閉じる */}
-        <Pressable className="flex-1" onPress={onClose} />
+      <View className="flex-1 justify-end">
+        {/* 背景オーバーレイ（フェード） */}
+        <Animated.View
+          className="absolute inset-0 bg-black/50"
+          style={{ opacity: fadeAnim }}
+        >
+          <Pressable className="flex-1" onPress={onClose} />
+        </Animated.View>
 
-        {/* メニューコンテンツ */}
-        <View
+        {/* メニューコンテンツ（スライドアップ） */}
+        <Animated.View
           className="bg-white rounded-t-3xl"
-          style={{ paddingBottom: insets.bottom + 16 }}
+          style={{
+            paddingBottom: insets.bottom + 16,
+            transform: [{ translateY: slideAnim }],
+          }}
         >
           {/* タイトル（オプション） */}
           {title && (
@@ -93,7 +137,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
               </Text>
             </Pressable>
           </View>
-        </View>
+        </Animated.View>
       </View>
     </Modal>
   );

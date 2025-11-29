@@ -30,7 +30,7 @@ export function usePlaceSelectHandler({
     (place: PlaceSearchResult) => {
       // 既存スポットかチェック（Google Place IDで比較）
       const existingSpot = spots.find(
-        (spot) => spot.google_place_id === place.googleData.placeId
+        (spot) => spot.master_spot?.google_place_id === place.googleData.placeId
       );
 
       if (existingSpot) {

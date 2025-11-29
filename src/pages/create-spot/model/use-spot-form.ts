@@ -2,7 +2,7 @@
  * スポット作成フォームのビジネスロジック
  *
  * エラーハンドリング、データ送信、画面遷移を管理
- * Google Places検索結果 と 手動登録（現在地/ピン刺し）の両方に対応
+ * Google Places検索結果からのみスポット追加可能
  */
 
 import { Alert } from 'react-native';
@@ -11,9 +11,11 @@ import {
   useSelectedPlaceStore,
   isPlaceSearchResult,
 } from '@/features/search-places';
-import { useCreateSpot } from '@/entities/spot';
+import { useCreateSpot, useUploadSpotImages } from '@/entities/spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore } from '@/entities/map';
+import { getNearbyMachi } from '@/shared/api/sqlite';
+import type { SelectedImage } from '@/features/pick-images';
 
 export function useSpotForm() {
   const router = useRouter();
@@ -21,7 +23,8 @@ export function useSpotForm() {
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
-  const { mutate: createSpot, isPending } = useCreateSpot();
+  const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
+  const { mutateAsync: uploadImages, isPending: isUploading } = useUploadSpotImages();
 
   // データが存在しない場合は静かにnullを返す
   // （画面遷移途中の再レンダリングでアラートが表示されないようにする）
@@ -29,10 +32,16 @@ export function useSpotForm() {
     return { placeData: null, handleSubmit: () => {}, isLoading: false };
   }
 
+  // Google Places検索結果でない場合はエラー
+  if (!isPlaceSearchResult(selectedPlace)) {
+    return { placeData: null, handleSubmit: () => {}, isLoading: false };
+  }
+
   const handleSubmit = (data: {
     customName: string;
     description?: string;
     tags: string[];
+    images: SelectedImage[];
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
@@ -44,12 +53,14 @@ export function useSpotForm() {
       return;
     }
 
-    // TODO: 座標からmachiIdを取得する処理が必要
-    // 仮実装：固定値を使用（後で修正）
-    const machiId = 'temp-machi-id';
-
-    // Google Places検索結果かどうかで分岐
-    const isGooglePlace = isPlaceSearchResult(selectedPlace);
+    // 座標から最寄りのmachiを取得（SQLiteから）
+    const nearbyMachi = getNearbyMachi(selectedPlace.latitude, selectedPlace.longitude, 1);
+    const nearestMachi = nearbyMachi[0];
+    if (!nearestMachi) {
+      Alert.alert('エラー', '近くの街が見つかりません');
+      return;
+    }
+    const machiId = nearestMachi.id;
 
     // スポット作成
     createSpot(
@@ -57,23 +68,33 @@ export function useSpotForm() {
         userId: user.id,
         mapId: selectedMapId,
         machiId,
-        name: selectedPlace.name ?? data.customName, // 手動登録の場合はcustomNameを使用
-        address: selectedPlace.address,
+        name: selectedPlace.name,
         latitude: selectedPlace.latitude,
         longitude: selectedPlace.longitude,
+        googlePlaceId: selectedPlace.googleData.placeId,
+        googleFormattedAddress: selectedPlace.address,
+        googleTypes: selectedPlace.category,
+        googlePhoneNumber: selectedPlace.googleData.internationalPhoneNumber,
+        googleWebsiteUri: selectedPlace.googleData.websiteUri,
+        googleRating: selectedPlace.googleData.rating,
+        googleUserRatingCount: selectedPlace.googleData.userRatingCount,
         customName: data.customName,
         description: data.description,
         tags: data.tags,
-        // Google Places情報（手動登録の場合はundefined）
-        googlePlaceId: isGooglePlace ? selectedPlace.googleData.placeId : undefined,
-        googleTypes: isGooglePlace ? selectedPlace.category : undefined,
-        googlePhoneNumber: isGooglePlace ? selectedPlace.googleData.internationalPhoneNumber : undefined,
-        googleWebsiteUri: isGooglePlace ? selectedPlace.googleData.websiteUri : undefined,
-        googleRating: isGooglePlace ? selectedPlace.googleData.rating : undefined,
-        googleUserRatingCount: isGooglePlace ? selectedPlace.googleData.userRatingCount : undefined,
       },
       {
-        onSuccess: (spotId) => {
+        onSuccess: async (spotId) => {
+          // 画像がある場合はアップロード
+          if (data.images.length > 0) {
+            try {
+              const result = await uploadImages({ spotId, images: data.images });
+              console.log(`📸 画像アップロード完了: ${result.uploaded}枚成功, ${result.failed}枚失敗`);
+            } catch (error) {
+              console.error('画像アップロードエラー:', error);
+              // 画像アップロード失敗してもスポット自体は作成済み
+            }
+          }
+
           Alert.alert('登録完了', 'スポットを登録しました', [
             {
               text: 'OK',
@@ -96,6 +117,6 @@ export function useSpotForm() {
   return {
     placeData: selectedPlace,
     handleSubmit,
-    isLoading: isPending,
+    isLoading: isCreating || isUploading,
   };
 }

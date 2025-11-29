@@ -11,14 +11,14 @@ import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
 import { useUserMaps, useMapStore } from '@/entities/map';
 import { AsyncBoundary } from '@/shared/ui';
-import type { MapRow } from '@/shared/types/database.types';
+import type { MapWithUser } from '@/shared/types';
 
 interface MapsTabProps {
   userId: string | null;
 }
 
 interface MapCardProps {
-  map: MapRow;
+  map: MapWithUser;
   onPress?: () => void;
 }
 
@@ -67,7 +67,7 @@ function MapCard({ map, onPress }: MapCardProps) {
         </View>
 
         {/* 公開/非公開アイコン */}
-        {map.is_public === 0 && (
+        {!map.is_public && (
           <View className="ml-2">
             <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
           </View>
@@ -82,7 +82,7 @@ export function MapsTab({ userId }: MapsTabProps) {
   const { data: maps, isLoading, error } = useUserMaps(userId);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
 
-  const handleMapPress = (map: MapRow) => {
+  const handleMapPress = (map: MapWithUser) => {
     setSelectedMapId(map.id);
     router.push(`/(tabs)/map?id=${map.id}`);
   };
