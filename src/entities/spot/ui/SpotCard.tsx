@@ -5,11 +5,11 @@
  * ローカルSQLiteデータとSupabase JOINデータの両方に対応
  */
 
-import React from 'react';
-import { View, Text, Pressable, Image, ScrollView } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, Pressable, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { showEditDeleteMenu, showDeleteConfirmation } from '@/shared/lib/utils';
+import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { getRelativeSpotTime } from '@/entities/spot/model/helpers';
@@ -109,22 +109,36 @@ export function SpotCard({
     toggleLike({ userId, spotId: spot.id });
   };
 
-  const handleMenuPress = (e: any) => {
-    e.stopPropagation();
-    showEditDeleteMenu({
-      title: 'スポットメニュー',
-      onEdit: () => onEdit?.(spot.id),
-      onDelete: handleDelete,
-    });
+  const handleDelete = () => {
+    Alert.alert(
+      'スポットを削除',
+      'このスポットを削除しますか？この操作は取り消せません。',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => deleteSpot(spot.id),
+        },
+      ]
+    );
   };
 
-  const handleDelete = () => {
-    showDeleteConfirmation({
-      title: 'スポットを削除',
-      message: 'このスポットを削除しますか？この操作は取り消せません。',
-      onConfirm: () => deleteSpot(spot.id),
-    });
-  };
+  const menuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'edit',
+      label: '編集',
+      icon: 'create-outline',
+      onPress: () => onEdit?.(spot.id),
+    },
+    {
+      id: 'delete',
+      label: '削除',
+      icon: 'trash-outline',
+      destructive: true,
+      onPress: handleDelete,
+    },
+  ], [spot.id, onEdit]);
 
   return (
     <Pressable
@@ -158,19 +172,8 @@ export function SpotCard({
         </Pressable>
 
         {/* 三点リーダーメニュー（自分のスポットのみ） */}
-        {isOwner && (
-          <Pressable
-            onPress={handleMenuPress}
-            disabled={isDeleting}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            className="p-2"
-          >
-            <Ionicons
-              name="ellipsis-horizontal"
-              size={20}
-              color={colors.text.secondary}
-            />
-          </Pressable>
+        {isOwner && !isDeleting && (
+          <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
         )}
       </View>
 

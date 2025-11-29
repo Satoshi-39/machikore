@@ -3,17 +3,16 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEYS } from '@/shared/api/query-client';
-import { getSpotById } from '@/shared/api/sqlite';
-import type { SpotWithMasterSpot } from '@/shared/types/database.types';
+import { getSpotById, type UserSpotWithMasterSpot } from '@/shared/api/supabase/spots';
 
 /**
  * IDでスポットを取得（master_spotsと結合）
  */
-export function useSpotById(spotId: string) {
-  return useQuery<SpotWithMasterSpot | null, Error>({
-    queryKey: QUERY_KEYS.spotsDetail(spotId),
+export function useSpotById(spotId: string | null) {
+  return useQuery<UserSpotWithMasterSpot | null, Error>({
+    queryKey: ['spot', spotId],
     queryFn: () => {
+      if (!spotId) return null;
       return getSpotById(spotId);
     },
     enabled: !!spotId,

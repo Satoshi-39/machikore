@@ -3,12 +3,12 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Pressable, Image, ScrollView } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
-import { showEditDeleteMenu, showDeleteConfirmation } from '@/shared/lib/utils';
+import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useSpotImages, useDeleteSpot } from '@/entities/spot/api';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
@@ -66,25 +66,41 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     bottomSheetRef.current?.close();
   }, []);
 
-  // 三点リーダーメニュー
-  const handleMenuPress = useCallback(() => {
-    showEditDeleteMenu({
-      title: 'スポットメニュー',
-      onEdit: () => onEdit?.(spot.id),
-      onDelete: handleDelete,
-    });
-  }, [spot.id, onEdit]);
-
+  // 削除確認ダイアログ
   const handleDelete = useCallback(() => {
-    showDeleteConfirmation({
-      title: 'スポットを削除',
-      message: 'このスポットを削除しますか？この操作は取り消せません。',
-      onConfirm: () => {
-        deleteSpot(spot.id);
-        onClose();
-      },
-    });
+    Alert.alert(
+      'スポットを削除',
+      'このスポットを削除しますか？この操作は取り消せません。',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => {
+            deleteSpot(spot.id);
+            onClose();
+          },
+        },
+      ]
+    );
   }, [spot.id, deleteSpot, onClose]);
+
+  // 三点リーダーメニュー項目
+  const menuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'edit',
+      label: '編集',
+      icon: 'create-outline',
+      onPress: () => onEdit?.(spot.id),
+    },
+    {
+      id: 'delete',
+      label: '削除',
+      icon: 'trash-outline',
+      destructive: true,
+      onPress: handleDelete,
+    },
+  ], [spot.id, onEdit, handleDelete]);
 
   return (
     <BottomSheet
@@ -112,15 +128,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
           <View className="flex-row items-center">
             {/* 三点リーダーメニュー（自分のスポットのみ） */}
-            {isOwner && (
-              <Pressable
-                onPress={handleMenuPress}
-                disabled={isDeleting}
-                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                className="w-8 h-8 items-center justify-center rounded-full bg-gray-100 mr-2"
-              >
-                <Ionicons name="ellipsis-horizontal" size={20} color={colors.text.secondary} />
-              </Pressable>
+            {isOwner && !isDeleting && (
+              <View className="mr-2">
+                <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+              </View>
             )}
             <Pressable
               onPress={handleClose}

@@ -9,7 +9,7 @@ import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import type { SpotWithDetails } from '@/shared/types';
-import { LocationButton } from '@/shared/ui';
+import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
@@ -202,7 +202,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           })}
         </Mapbox.MapView>
 
-        {/* マップコントロールボタン（現在地ボタン） */}
+        {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン） */}
         {viewMode === 'map' && !isSearchFocused && (
           <View
             className="absolute right-6 z-50"
@@ -221,6 +221,20 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                 onPress={handleLocationPress}
                 testID="location-button"
               />
+              {/* 全スポット表示ボタン */}
+              <View className="mt-3">
+                <FitAllButton
+                  onPress={() => {
+                    if (spots.length === 0) return;
+                    if (spots.length === 1) {
+                      moveCameraToSingleSpot(spots[0]!);
+                    } else {
+                      fitCameraToAllSpots(spots);
+                    }
+                  }}
+                  testID="fit-all-button"
+                />
+              </View>
             </View>
           </View>
         )}

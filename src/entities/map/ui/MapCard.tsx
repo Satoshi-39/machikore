@@ -4,11 +4,11 @@
  * マップを表示するカード型コンポーネント
  */
 
-import React from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, Pressable, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { showEditDeleteMenu, showDeleteConfirmation } from '@/shared/lib/utils';
+import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
@@ -32,22 +32,36 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
   const { mutate: deleteMap, isPending: isDeleting } = useDeleteMap();
   const isOwner = currentUserId && map.user_id === currentUserId;
 
-  const handleMenuPress = (e: any) => {
-    e.stopPropagation();
-    showEditDeleteMenu({
-      title: 'マップメニュー',
-      onEdit: () => onEdit?.(map.id),
-      onDelete: handleDelete,
-    });
+  const handleDelete = () => {
+    Alert.alert(
+      'マップを削除',
+      'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => deleteMap(map.id),
+        },
+      ]
+    );
   };
 
-  const handleDelete = () => {
-    showDeleteConfirmation({
-      title: 'マップを削除',
-      message: 'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
-      onConfirm: () => deleteMap(map.id),
-    });
-  };
+  const menuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'edit',
+      label: '編集',
+      icon: 'create-outline',
+      onPress: () => onEdit?.(map.id),
+    },
+    {
+      id: 'delete',
+      label: '削除',
+      icon: 'trash-outline',
+      destructive: true,
+      onPress: handleDelete,
+    },
+  ], [map.id, onEdit]);
 
   return (
     <Pressable
@@ -78,19 +92,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
         </Pressable>
 
         {/* 三点リーダーメニュー（自分のマップのみ） */}
-        {isOwner && (
-          <Pressable
-            onPress={handleMenuPress}
-            disabled={isDeleting}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            className="p-2"
-          >
-            <Ionicons
-              name="ellipsis-horizontal"
-              size={20}
-              color={colors.text.secondary}
-            />
-          </Pressable>
+        {isOwner && !isDeleting && (
+          <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
         )}
       </View>
 

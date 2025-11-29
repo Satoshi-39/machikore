@@ -123,6 +123,11 @@ export function MapPage() {
     console.log('📍 ピン刺しモード開始');
   };
 
+  // スポット編集
+  const handleEditSpot = (spotId: string) => {
+    router.push(`/edit-spot?id=${spotId}`);
+  };
+
   // 三点リーダメニューを開く
   const handleMenuPress = () => {
     setIsMenuOpen(true);
@@ -211,10 +216,12 @@ export function MapPage() {
             ref={mapViewRef}
             mapId={selectedMapId || id || null}
             userId={user?.id ?? null}
+            currentUserId={user?.id ?? null}
             defaultMapId={myMaps?.[0]?.id ?? null}
             currentLocation={location}
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
+            onEditSpot={handleEditSpot}
           />
         ) : (
           <DefaultMapView

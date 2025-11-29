@@ -231,6 +231,38 @@ export async function deleteSpot(spotId: string): Promise<void> {
 }
 
 // ===============================
+// スポットをIDで取得
+// ===============================
+
+/**
+ * IDでスポットを取得（master_spotを結合）
+ */
+export async function getSpotById(spotId: string): Promise<UserSpotWithMasterSpot | null> {
+  const { data, error } = await supabase
+    .from('user_spots')
+    .select(`
+      *,
+      master_spots (*)
+    `)
+    .eq('id', spotId)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      // Not found
+      return null;
+    }
+    console.error('[getSpotById] Error:', error);
+    throw error;
+  }
+
+  return {
+    ...data,
+    master_spot: (data as any).master_spots || null,
+  };
+}
+
+// ===============================
 // 公開スポット取得
 // ===============================
 

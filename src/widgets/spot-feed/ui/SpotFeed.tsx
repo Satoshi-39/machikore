@@ -30,6 +30,11 @@ export function SpotFeed() {
     router.push(`/users/${userId}`);
   }, [router]);
 
+  // スポット編集
+  const handleEditSpot = useCallback((spotId: string) => {
+    router.push(`/edit-spot?id=${spotId}`);
+  }, [router]);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
@@ -46,8 +51,10 @@ export function SpotFeed() {
             <SpotCard
               spot={item}
               userId={currentUser?.id ?? ''}
+              currentUserId={currentUser?.id}
               onPress={() => handleSpotPress(item.map_id, item.id)}
               onUserPress={handleUserPress}
+              onEdit={handleEditSpot}
               // Supabase JOINで取得済みのデータを渡す
               embeddedUser={item.user}
               embeddedMasterSpot={item.master_spot}

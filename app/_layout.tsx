@@ -150,6 +150,24 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="edit-spot"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'スポットを編集',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="edit-map"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'マップを編集',
+              headerBackTitle: '戻る',
+            }}
+          />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

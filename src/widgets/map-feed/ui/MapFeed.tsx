@@ -9,10 +9,12 @@ import React, { useCallback } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFeedMaps, MapCard } from '@/entities/map';
+import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
 
 export function MapFeed() {
   const router = useRouter();
+  const currentUser = useUserStore((state) => state.user);
   const { data: maps, isLoading, error, refetch, isRefetching } = useFeedMaps();
 
   const handleMapPress = useCallback((mapId: string) => {
@@ -21,6 +23,10 @@ export function MapFeed() {
 
   const handleUserPress = useCallback((userId: string) => {
     router.push(`/users/${userId}`);
+  }, [router]);
+
+  const handleEditMap = useCallback((mapId: string) => {
+    router.push(`/edit-map?id=${mapId}`);
   }, [router]);
 
   return (
@@ -38,8 +44,10 @@ export function MapFeed() {
           renderItem={({ item }) => (
             <MapCard
               map={item}
+              currentUserId={currentUser?.id}
               onPress={() => handleMapPress(item.id)}
               onUserPress={handleUserPress}
+              onEdit={handleEditMap}
             />
           )}
           refreshControl={

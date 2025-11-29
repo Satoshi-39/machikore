@@ -16,7 +16,7 @@ interface AsyncBoundaryProps<T> {
   /** エラー */
   error: Error | null;
   /** データ */
-  data: T | undefined;
+  data: T | undefined | null;
   /** カスタムローディングメッセージ */
   loadingMessage?: string;
   /** カスタム空状態メッセージ */
@@ -26,9 +26,9 @@ interface AsyncBoundaryProps<T> {
   /** カスタム空状態アイコン（Ionicons） - emptyIconより優先 */
   emptyIonIcon?: string;
   /** データが空かどうかを判定する関数（デフォルト: 配列の長さチェック） */
-  isEmpty?: (data: T) => boolean;
+  isEmpty?: (data: NonNullable<T>) => boolean;
   /** データが存在する場合にレンダリングする関数 */
-  children: (data: T) => React.ReactNode;
+  children: (data: NonNullable<T>) => React.ReactNode;
 }
 
 export function AsyncBoundary<T>({
