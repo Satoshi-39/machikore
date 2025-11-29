@@ -2,8 +2,6 @@
  * Supabase Storage関連の関数
  */
 
-import { File } from 'expo-file-system/next';
-import { decode } from 'base64-arraybuffer';
 import { supabase } from './client';
 import type { Result } from '@/shared/types';
 
@@ -20,6 +18,7 @@ export interface UploadImageParams {
 
 /**
  * 画像をSupabase Storageにアップロード
+ * Edge Function経由でアップロード（サーバーサイドで処理）
  */
 export async function uploadImage({
   uri,
@@ -27,44 +26,77 @@ export async function uploadImage({
   path,
   contentType = 'image/jpeg',
 }: UploadImageParams): Promise<Result<{ url: string; path: string }>> {
-  try {
-    // expo-file-system/next の新しいFile APIを使用
-    const file = new File(uri);
-    const base64 = await file.base64();
+  const maxRetries = 3;
+  let lastError: Error | null = null;
 
-    // Base64をArrayBufferに変換
-    const arrayBuffer = decode(base64);
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(`[uploadImage] 開始 (試行${attempt}/${maxRetries}):`, { uri, bucket, path });
 
-    // アップロード
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(path, arrayBuffer, {
-        contentType,
-        upsert: false,
+      // セッション取得
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token;
+      if (!accessToken) {
+        return { success: false, error: new Error('認証されていません') };
+      }
+
+      // Edge Function URL
+      const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
+      const functionUrl = `${supabaseUrl}/functions/v1/upload-image`;
+
+      // FormDataを作成
+      const formData = new FormData();
+      formData.append('file', {
+        uri,
+        type: contentType,
+        name: path.split('/').pop() || 'image.jpg',
+      } as any);
+      formData.append('bucket', bucket);
+      formData.append('path', path);
+
+      // Edge Functionにアップロード
+      const response = await fetch(functionUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: formData,
       });
 
-    if (error) {
-      return { success: false, error };
+      console.log('[uploadImage] Edge Function結果:', response.status);
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        console.log('[uploadImage] アップロード失敗:', result.error);
+        lastError = new Error(result.error || 'アップロード失敗');
+        continue; // リトライ
+      }
+
+      console.log('[uploadImage] 成功:', result.url);
+
+      return {
+        success: true,
+        data: {
+          url: result.url,
+          path: result.path,
+        },
+      };
+    } catch (error) {
+      console.log(`[uploadImage] 例外発生 (試行${attempt}):`, error);
+      lastError = error instanceof Error ? error : new Error('Unknown error');
+
+      // リトライ前に少し待機
+      if (attempt < maxRetries) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+      }
     }
-
-    // 公開URLを取得
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from(bucket).getPublicUrl(data.path);
-
-    return {
-      success: true,
-      data: {
-        url: publicUrl,
-        path: data.path,
-      },
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: error instanceof Error ? error : new Error('Unknown error'),
-    };
   }
+
+  return {
+    success: false,
+    error: lastError || new Error('アップロードに失敗しました'),
+  };
 }
 
 /**

@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Alert, ActionSheetIOS, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import * as ImageManipulator from 'expo-image-manipulator';
 import { colors } from '@/shared/config';
 
 export interface SelectedImage {
@@ -21,6 +22,31 @@ interface ImagePickerButtonProps {
   images: SelectedImage[];
   onImagesChange: (images: SelectedImage[]) => void;
   maxImages?: number;
+}
+
+// 画像をJPEGに変換・圧縮・リサイズするヘルパー
+const MAX_IMAGE_DIMENSION = 1920; // 最大幅/高さ
+
+async function convertToJpeg(uri: string): Promise<{ uri: string; width: number; height: number }> {
+  // まず元画像の情報を取得するため一度処理
+  const info = await ImageManipulator.manipulateAsync(uri, [], {});
+
+  // リサイズが必要かチェック
+  const actions: ImageManipulator.Action[] = [];
+  if (info.width > MAX_IMAGE_DIMENSION || info.height > MAX_IMAGE_DIMENSION) {
+    if (info.width > info.height) {
+      actions.push({ resize: { width: MAX_IMAGE_DIMENSION } });
+    } else {
+      actions.push({ resize: { height: MAX_IMAGE_DIMENSION } });
+    }
+  }
+
+  const result = await ImageManipulator.manipulateAsync(uri, actions, {
+    compress: 0.6, // 圧縮率を上げてファイルサイズを削減
+    format: ImageManipulator.SaveFormat.JPEG,
+  });
+  console.log(`[ImagePicker] JPEG変換完了: ${result.width}x${result.height}`);
+  return { uri: result.uri, width: result.width, height: result.height };
 }
 
 export function ImagePickerButton({
@@ -59,9 +85,13 @@ export function ImagePickerButton({
 
     setIsLoading(true);
     try {
+      const remainingSlots = maxImages - images.length;
+      const allowMultiple = !useCamera && remainingSlots > 1;
+
       const options: ImagePicker.ImagePickerOptions = {
         mediaTypes: ['images'],
-        allowsMultipleSelection: !useCamera && images.length < maxImages - 1,
+        allowsMultipleSelection: allowMultiple,
+        selectionLimit: remainingSlots, // 残り枠数を上限に
         quality: 0.8,
         exif: false,
       };
@@ -71,14 +101,35 @@ export function ImagePickerButton({
         : await ImagePicker.launchImageLibraryAsync(options);
 
       if (!result.canceled && result.assets.length > 0) {
-        const newImages = result.assets.slice(0, maxImages - images.length).map((asset) => ({
-          uri: asset.uri,
-          width: asset.width,
-          height: asset.height,
-          fileSize: asset.fileSize,
-        }));
+        // 選択された各画像をJPEGに変換
+        const convertedImages: SelectedImage[] = [];
+        let conversionErrors = 0;
 
-        onImagesChange([...images, ...newImages]);
+        for (const asset of result.assets.slice(0, remainingSlots)) {
+          try {
+            const converted = await convertToJpeg(asset.uri);
+            convertedImages.push({
+              uri: converted.uri,
+              width: converted.width,
+              height: converted.height,
+              fileSize: asset.fileSize,
+            });
+          } catch (error) {
+            console.error('画像変換エラー:', error);
+            conversionErrors++;
+          }
+        }
+
+        if (convertedImages.length > 0) {
+          onImagesChange([...images, ...convertedImages]);
+        }
+
+        if (conversionErrors > 0) {
+          Alert.alert(
+            '画像変換エラー',
+            `${conversionErrors}枚の画像を処理できませんでした。別の画像を選択してください。`
+          );
+        }
       }
     } catch (error: any) {
       console.error('画像選択エラー:', error);

@@ -5,16 +5,18 @@
  * Google Places検索結果からのみスポット追加可能
  */
 
+import { useState } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import {
   useSelectedPlaceStore,
   isPlaceSearchResult,
 } from '@/features/search-places';
-import { useCreateSpot, useUploadSpotImages } from '@/entities/spot';
+import { useCreateSpot } from '@/entities/spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore } from '@/entities/map';
 import { getNearbyMachi } from '@/shared/api/sqlite';
+import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import type { SelectedImage } from '@/features/pick-images';
 
 export function useSpotForm() {
@@ -24,7 +26,7 @@ export function useSpotForm() {
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
-  const { mutateAsync: uploadImages, isPending: isUploading } = useUploadSpotImages();
+  const [isUploading, setIsUploading] = useState(false);
 
   // データが存在しない場合は静かにnullを返す
   // （画面遷移途中の再レンダリングでアラートが表示されないようにする）
@@ -37,7 +39,51 @@ export function useSpotForm() {
     return { placeData: null, handleSubmit: () => {}, isLoading: false };
   }
 
-  const handleSubmit = (data: {
+  // 画像をアップロードするヘルパー関数（マップサムネイルと同じパターン）
+  const uploadSpotImages = async (spotId: string, images: SelectedImage[]) => {
+    let uploaded = 0;
+    let failed = 0;
+
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i]!;
+      const extension = image.uri.split('.').pop() || 'jpg';
+      const fileName = `${Date.now()}_${i}.${extension}`;
+      const path = `${spotId}/${fileName}`;
+
+      try {
+        const result = await uploadImage({
+          uri: image.uri,
+          bucket: STORAGE_BUCKETS.SPOT_IMAGES,
+          path,
+          contentType: `image/${extension === 'png' ? 'png' : 'jpeg'}`,
+        });
+
+        if (result.success) {
+          // imagesテーブルに保存
+          await insertSpotImage({
+            spot_id: spotId,
+            cloud_path: result.data.url,
+            local_path: image.uri,
+            width: image.width,
+            height: image.height,
+            file_size: image.fileSize ?? null,
+            order_index: i,
+          });
+          uploaded++;
+        } else {
+          console.error('画像アップロード失敗:', result.error);
+          failed++;
+        }
+      } catch (error) {
+        console.error('画像処理エラー:', error);
+        failed++;
+      }
+    }
+
+    return { uploaded, failed };
+  };
+
+  const handleSubmit = async (data: {
     customName: string;
     description?: string;
     tags: string[];
@@ -84,15 +130,17 @@ export function useSpotForm() {
       },
       {
         onSuccess: async (spotId) => {
-          // 画像がある場合はアップロード
+          // 画像がある場合はアップロード（マップサムネイルと同じパターン）
           if (data.images.length > 0) {
+            setIsUploading(true);
             try {
-              const result = await uploadImages({ spotId, images: data.images });
+              const result = await uploadSpotImages(spotId, data.images);
               console.log(`📸 画像アップロード完了: ${result.uploaded}枚成功, ${result.failed}枚失敗`);
             } catch (error) {
               console.error('画像アップロードエラー:', error);
               // 画像アップロード失敗してもスポット自体は作成済み
             }
+            setIsUploading(false);
           }
 
           Alert.alert('登録完了', 'スポットを登録しました', [

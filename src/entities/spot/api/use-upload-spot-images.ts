@@ -2,7 +2,7 @@
  * スポット画像をアップロードするhook（Supabase版）
  */
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import type { SelectedImage } from '@/features/pick-images';
 import type { Database } from '@/shared/types/supabase.generated';
@@ -18,22 +18,30 @@ interface UploadResult {
   uploaded: number;
   failed: number;
   imageRows: ImageRow[];
+  spotId: string;
 }
 
 /**
  * スポット画像をSupabase Storageにアップロードし、imagesテーブルに保存
  */
 export function useUploadSpotImages() {
+  const queryClient = useQueryClient();
+
   return useMutation<UploadResult, Error, UploadSpotImagesParams>({
     mutationFn: async ({ spotId, images }) => {
+      console.log(`[useUploadSpotImages] 開始: spotId=${spotId}, images=${images.length}`);
+
       const uploadedImages: ImageRow[] = [];
       let failed = 0;
 
       for (let i = 0; i < images.length; i++) {
         const image = images[i]!;
+        console.log(`[useUploadSpotImages] 画像${i}: URI=${image.uri}`);
+
         const extension = image.uri.split('.').pop() || 'jpg';
         const fileName = `${Date.now()}_${i}.${extension}`;
         const path = `${spotId}/${fileName}`;
+        console.log(`[useUploadSpotImages] path=${path}`);
 
         try {
           // Supabase Storageにアップロード
@@ -72,7 +80,12 @@ export function useUploadSpotImages() {
         uploaded: uploadedImages.length,
         failed,
         imageRows: uploadedImages,
+        spotId,
       };
+    },
+    onSuccess: (result) => {
+      // 画像キャッシュを無効化して再取得
+      queryClient.invalidateQueries({ queryKey: ['spot-images', result.spotId] });
     },
   });
 }
