@@ -337,3 +337,84 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     user: data.users || null,
   };
 }
+
+// ===============================
+// マップ更新
+// ===============================
+
+export interface UpdateMapParams {
+  id: string;
+  name?: string;
+  description?: string | null;
+  category?: string | null;
+  tags?: string[] | null;
+  is_public?: boolean;
+  thumbnail_url?: string | null;
+}
+
+/**
+ * マップを更新
+ */
+export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
+  const { id, ...updateData } = params;
+
+  const { data, error } = await supabase
+    .from('maps')
+    .update({
+      ...updateData,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', id)
+    .select(`
+      *,
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      )
+    `)
+    .single();
+
+  if (error) {
+    console.error('[updateMap] Error:', error);
+    throw error;
+  }
+
+  return {
+    id: data.id,
+    user_id: data.user_id,
+    name: data.name,
+    description: data.description,
+    category: data.category,
+    tags: data.tags,
+    is_public: data.is_public,
+    is_default: data.is_default,
+    is_official: data.is_official,
+    thumbnail_url: data.thumbnail_url,
+    spots_count: data.spots_count,
+    likes_count: data.likes_count,
+    created_at: data.created_at,
+    updated_at: data.updated_at,
+    user: data.users || null,
+  };
+}
+
+// ===============================
+// マップ削除
+// ===============================
+
+/**
+ * マップを削除（関連するスポットも自動削除される）
+ */
+export async function deleteMap(mapId: string): Promise<void> {
+  const { error } = await supabase
+    .from('maps')
+    .delete()
+    .eq('id', mapId);
+
+  if (error) {
+    console.error('[deleteMap] Error:', error);
+    throw error;
+  }
+}

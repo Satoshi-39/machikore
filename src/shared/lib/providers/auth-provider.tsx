@@ -78,21 +78,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         // 3. 認証完了後にSupabase Authイベントを監視開始
         if (isMounted) {
-          const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+          const { data } = supabase.auth.onAuthStateChange((event, session) => {
+            // 非同期処理はコールバック外で実行（setSessionのブロッキングを防ぐ）
             if (event === 'SIGNED_IN' && session?.user) {
               // サインイン時（Email/Password、OAuth）
-              // Supabase public.users にupsert（外部キー制約を満たすため）
-              await upsertUserToSupabase(session.user);
+              const user = session.user;
+              (async () => {
+                try {
+                  // Supabase public.users にupsert（外部キー制約を満たすため）
+                  await upsertUserToSupabase(user);
 
-              // SQLiteにもキャッシュとして同期
-              await syncUserToSQLite(session.user);
+                  // SQLiteにもキャッシュとして同期
+                  await syncUserToSQLite(user);
 
-              // SQLiteからユーザー情報を取得してストアに保存
-              const userData = getUserById(session.user.id);
-              if (userData && isMounted) {
-                setUser(userData as User);
-                setAuthState('authenticated');
-              }
+                  // SQLiteからユーザー情報を取得してストアに保存
+                  const userData = getUserById(user.id);
+                  if (userData && isMounted) {
+                    setUser(userData as User);
+                    setAuthState('authenticated');
+                  }
+                } catch (err) {
+                  console.error('[AuthProvider] SIGNED_IN処理エラー:', err);
+                }
+              })();
             } else if (event === 'SIGNED_OUT') {
               // サインアウト時
               if (isMounted) {
@@ -103,11 +111,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
               // トークンリフレッシュ時
               // 新しいトークンをSecureStoreに保存
               if (session.access_token && session.refresh_token) {
-                await saveSession(
+                saveSession(
                   session.access_token,
                   session.refresh_token,
                   session.expires_at || 0
-                );
+                ).catch(err => console.error('[AuthProvider] TOKEN_REFRESHED保存エラー:', err));
               }
             }
           });

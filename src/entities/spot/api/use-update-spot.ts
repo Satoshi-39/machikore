@@ -4,7 +4,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { invalidateSpots } from '@/shared/api/query-client';
-import { updateSpot } from '@/shared/api/sqlite';
+import { updateSpot } from '@/shared/api/supabase/spots';
 import type { UpdateSpotParams } from '../model/types';
 
 /**
@@ -14,10 +14,11 @@ import type { UpdateSpotParams } from '../model/types';
 export function useUpdateSpot() {
   return useMutation({
     mutationFn: async (params: UpdateSpotParams) => {
-      updateSpot(params.spotId, {
+      await updateSpot({
+        id: params.spotId,
         custom_name: params.customName,
         description: params.description,
-        tags: params.tags ? JSON.stringify(params.tags) : undefined,
+        tags: params.tags,
         order_index: params.orderIndex,
       });
 

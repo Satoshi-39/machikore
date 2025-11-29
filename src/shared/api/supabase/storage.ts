@@ -2,6 +2,8 @@
  * Supabase Storage関連の関数
  */
 
+import { File } from 'expo-file-system/next';
+import { decode } from 'base64-arraybuffer';
 import { supabase } from './client';
 import type { Result } from '@/shared/types';
 
@@ -26,14 +28,17 @@ export async function uploadImage({
   contentType = 'image/jpeg',
 }: UploadImageParams): Promise<Result<{ url: string; path: string }>> {
   try {
-    // URIからBlob作成（React Nativeの場合）
-    const response = await fetch(uri);
-    const blob = await response.blob();
+    // expo-file-system/next の新しいFile APIを使用
+    const file = new File(uri);
+    const base64 = await file.base64();
+
+    // Base64をArrayBufferに変換
+    const arrayBuffer = decode(base64);
 
     // アップロード
     const { data, error } = await supabase.storage
       .from(bucket)
-      .upload(path, blob, {
+      .upload(path, arrayBuffer, {
         contentType,
         upsert: false,
       });

@@ -26,11 +26,13 @@ import { useSpotCamera } from '../model';
 interface UserMapViewProps {
   mapId: string | null;
   userId?: string | null;
+  currentUserId?: string | null;
   defaultMapId?: string | null;
   onSpotDetailSnapChange?: (snapIndex: number) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
+  onEditSpot?: (spotId: string) => void;
 }
 
 export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
@@ -38,11 +40,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     {
       mapId,
       userId: _userId = null, // 将来のピン刺し機能で使用予定
+      currentUserId = null,
       defaultMapId: _defaultMapId = null, // 将来のピン刺し機能で使用予定
       onSpotDetailSnapChange,
       currentLocation = null,
       viewMode = 'map',
       isSearchFocused = false,
+      onEditSpot,
     },
     ref
   ) => {
@@ -225,8 +229,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         {selectedSpot && (
           <SpotDetailCard
             spot={selectedSpot}
+            currentUserId={currentUserId}
             onClose={() => handleSpotSelect(null)}
             onSnapChange={handleSnapChange}
+            onEdit={onEditSpot}
           />
         )}
 

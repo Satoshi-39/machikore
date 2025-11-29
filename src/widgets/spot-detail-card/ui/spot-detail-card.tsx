@@ -3,28 +3,37 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
-import type { SpotWithDetails } from '@/shared/types';
+import { showEditDeleteMenu, showDeleteConfirmation } from '@/shared/lib/utils';
+import { useSpotImages, useDeleteSpot } from '@/entities/spot/api';
+import type { SpotWithDetails, UUID } from '@/shared/types';
 
 interface SpotDetailCardProps {
   spot: SpotWithDetails;
+  currentUserId?: UUID | null;
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
+  onEdit?: (spotId: string) => void;
 }
 
-export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onEdit }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
+  const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
+  const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // SpotWithDetailsから表示用データを抽出
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
   const spotAddress = spot.master_spot?.google_formatted_address;
   const latitude = spot.master_spot?.latitude ?? 0;
   const longitude = spot.master_spot?.longitude ?? 0;
+
+  // スポットの画像を取得
+  const { data: images = [] } = useSpotImages(spot.id);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
@@ -57,6 +66,26 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
     bottomSheetRef.current?.close();
   }, []);
 
+  // 三点リーダーメニュー
+  const handleMenuPress = useCallback(() => {
+    showEditDeleteMenu({
+      title: 'スポットメニュー',
+      onEdit: () => onEdit?.(spot.id),
+      onDelete: handleDelete,
+    });
+  }, [spot.id, onEdit]);
+
+  const handleDelete = useCallback(() => {
+    showDeleteConfirmation({
+      title: 'スポットを削除',
+      message: 'このスポットを削除しますか？この操作は取り消せません。',
+      onConfirm: () => {
+        deleteSpot(spot.id);
+        onClose();
+      },
+    });
+  }, [spot.id, deleteSpot, onClose]);
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -81,13 +110,26 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
               <Text className="text-sm text-gray-600">{spotAddress}</Text>
             )}
           </View>
-          <Pressable
-            onPress={handleClose}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-gray-100"
-          >
-            <Ionicons name="close" size={20} color={colors.text.secondary} />
-          </Pressable>
+          <View className="flex-row items-center">
+            {/* 三点リーダーメニュー（自分のスポットのみ） */}
+            {isOwner && (
+              <Pressable
+                onPress={handleMenuPress}
+                disabled={isDeleting}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                className="w-8 h-8 items-center justify-center rounded-full bg-gray-100 mr-2"
+              >
+                <Ionicons name="ellipsis-horizontal" size={20} color={colors.text.secondary} />
+              </Pressable>
+            )}
+            <Pressable
+              onPress={handleClose}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              className="w-8 h-8 items-center justify-center rounded-full bg-gray-100"
+            >
+              <Ionicons name="close" size={20} color={colors.text.secondary} />
+            </Pressable>
+          </View>
         </View>
 
         {/* 位置情報 */}
@@ -101,6 +143,26 @@ export function SpotDetailCard({ spot, onClose, onSnapChange }: SpotDetailCardPr
             緯度: {latitude.toFixed(4)}, 経度: {longitude.toFixed(4)}
           </Text>
         </View>
+
+        {/* 画像 */}
+        {images.length > 0 && (
+          <View className="mb-3">
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              className="-mx-4 px-4"
+            >
+              {images.map((image) => (
+                <Image
+                  key={image.id}
+                  source={{ uri: image.cloud_path || '' }}
+                  className="w-32 h-32 rounded-lg mr-2"
+                  resizeMode="cover"
+                />
+              ))}
+            </ScrollView>
+          </View>
+        )}
 
         {/* 説明 */}
         {spot.description && (

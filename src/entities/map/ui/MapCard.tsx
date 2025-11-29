@@ -8,22 +8,46 @@ import React from 'react';
 import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { showEditDeleteMenu, showDeleteConfirmation } from '@/shared/lib/utils';
 import type { MapRow } from '@/shared/types/database.types';
-import type { MapWithUser } from '@/shared/types';
+import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
+import { useDeleteMap } from '@/entities/map/api';
 
 interface MapCardProps {
   map: MapRow | MapWithUser;
+  currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のマップか判定用）
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
+  onEdit?: (mapId: string) => void;
 }
 
-export function MapCard({ map, onPress, onUserPress }: MapCardProps) {
+export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: MapCardProps) {
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
   const user = embeddedUser || fetchedUser;
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
+
+  const { mutate: deleteMap, isPending: isDeleting } = useDeleteMap();
+  const isOwner = currentUserId && map.user_id === currentUserId;
+
+  const handleMenuPress = (e: any) => {
+    e.stopPropagation();
+    showEditDeleteMenu({
+      title: 'マップメニュー',
+      onEdit: () => onEdit?.(map.id),
+      onDelete: handleDelete,
+    });
+  };
+
+  const handleDelete = () => {
+    showDeleteConfirmation({
+      title: 'マップを削除',
+      message: 'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
+      onConfirm: () => deleteMap(map.id),
+    });
+  };
 
   return (
     <Pressable
@@ -52,7 +76,32 @@ export function MapCard({ map, onPress, onUserPress }: MapCardProps) {
             </Text>
           </View>
         </Pressable>
+
+        {/* 三点リーダーメニュー（自分のマップのみ） */}
+        {isOwner && (
+          <Pressable
+            onPress={handleMenuPress}
+            disabled={isDeleting}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            className="p-2"
+          >
+            <Ionicons
+              name="ellipsis-horizontal"
+              size={20}
+              color={colors.text.secondary}
+            />
+          </Pressable>
+        )}
       </View>
+
+      {/* サムネイル画像 */}
+      {map.thumbnail_url && (
+        <Image
+          source={{ uri: map.thumbnail_url }}
+          className="w-full h-40 rounded-lg mb-3"
+          resizeMode="cover"
+        />
+      )}
 
       {/* マップ名 */}
       <View className="flex-row items-center mb-2">

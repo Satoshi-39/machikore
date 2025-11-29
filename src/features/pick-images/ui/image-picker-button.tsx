@@ -80,9 +80,14 @@ export function ImagePickerButton({
 
         onImagesChange([...images, ...newImages]);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('画像選択エラー:', error);
-      Alert.alert('エラー', '画像の選択に失敗しました');
+      // シミュレータでカメラが使えない場合
+      if (error?.message?.includes('Camera not available')) {
+        Alert.alert('カメラが利用できません', 'シミュレータではカメラを使用できません。ライブラリから選択してください。');
+      } else {
+        Alert.alert('エラー', '画像の選択に失敗しました');
+      }
     } finally {
       setIsLoading(false);
     }

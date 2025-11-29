@@ -176,12 +176,64 @@ export async function getSpotsByMapId(mapId: string): Promise<UserSpotWithMaster
 }
 
 // ===============================
-// 公開スポット取得
+// スポット更新
+// ===============================
+
+export interface UpdateSpotInput {
+  id: string;
+  custom_name?: string | null;
+  description?: string | null;
+  tags?: string[] | null;
+  order_index?: number;
+}
+
+/**
+ * スポットを更新（user_spotのカスタマイズ可能フィールドのみ）
+ */
+export async function updateSpot(input: UpdateSpotInput): Promise<UserSpotRow> {
+  const { id, ...updateData } = input;
+
+  const { data, error } = await supabase
+    .from('user_spots')
+    .update({
+      ...updateData,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('[updateSpot] Error:', error);
+    throw error;
+  }
+
+  return data;
+}
+
+// ===============================
+// スポット削除
 // ===============================
 
 /**
- * 公開スポット一覧を取得（フィード用）
+ * スポットを削除（関連する画像も自動削除される）
  */
+export async function deleteSpot(spotId: string): Promise<void> {
+  const { error } = await supabase
+    .from('user_spots')
+    .delete()
+    .eq('id', spotId);
+
+  if (error) {
+    console.error('[deleteSpot] Error:', error);
+    throw error;
+  }
+}
+
+// ===============================
+// 公開スポット取得
+// ===============================
+
 export async function getPublicSpots(limit: number = 50, offset: number = 0) {
   const { data, error } = await supabase
     .from('user_spots')

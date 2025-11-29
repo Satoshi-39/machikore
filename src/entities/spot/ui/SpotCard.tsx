@@ -9,10 +9,11 @@ import React from 'react';
 import { View, Text, Pressable, Image, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { showEditDeleteMenu, showDeleteConfirmation } from '@/shared/lib/utils';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { getRelativeSpotTime } from '@/entities/spot/model/helpers';
-import { useToggleLike, useCheckUserLiked, useSpotImages } from '@/entities/spot/api';
+import { useToggleLike, useCheckUserLiked, useSpotImages, useDeleteSpot } from '@/entities/spot/api';
 import { useUser } from '@/entities/user';
 
 // Supabase JOINで取得済みのユーザー情報
@@ -38,9 +39,11 @@ interface SpotCardProps {
   // ローカルSQLiteデータまたはSupabase SpotWithDetailsデータ
   spot: SpotWithMasterSpot | SpotWithDetails;
   userId: UUID;
+  currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用）
   machiName?: string;
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
+  onEdit?: (spotId: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
@@ -49,9 +52,11 @@ interface SpotCardProps {
 export function SpotCard({
   spot,
   userId,
+  currentUserId,
   machiName,
   onPress,
   onUserPress,
+  onEdit,
   embeddedUser,
   embeddedMasterSpot,
 }: SpotCardProps) {
@@ -61,9 +66,11 @@ export function SpotCard({
 
   const { data: isLiked = false } = useCheckUserLiked(userId, spot.id);
   const { mutate: toggleLike } = useToggleLike();
+  const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { data: images = [] } = useSpotImages(spot.id);
 
   const avatarUri = user?.avatar_url ?? undefined;
+  const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // スポット名の取得（SpotWithDetailsとSpotWithMasterSpotで構造が異なる）
   const getSpotName = (): string => {
@@ -102,6 +109,23 @@ export function SpotCard({
     toggleLike({ userId, spotId: spot.id });
   };
 
+  const handleMenuPress = (e: any) => {
+    e.stopPropagation();
+    showEditDeleteMenu({
+      title: 'スポットメニュー',
+      onEdit: () => onEdit?.(spot.id),
+      onDelete: handleDelete,
+    });
+  };
+
+  const handleDelete = () => {
+    showDeleteConfirmation({
+      title: 'スポットを削除',
+      message: 'このスポットを削除しますか？この操作は取り消せません。',
+      onConfirm: () => deleteSpot(spot.id),
+    });
+  };
+
   return (
     <Pressable
       onPress={onPress}
@@ -132,6 +156,22 @@ export function SpotCard({
             </Text>
           </View>
         </Pressable>
+
+        {/* 三点リーダーメニュー（自分のスポットのみ） */}
+        {isOwner && (
+          <Pressable
+            onPress={handleMenuPress}
+            disabled={isDeleting}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            className="p-2"
+          >
+            <Ionicons
+              name="ellipsis-horizontal"
+              size={20}
+              color={colors.text.secondary}
+            />
+          </Pressable>
+        )}
       </View>
 
       {/* スポット名 */}

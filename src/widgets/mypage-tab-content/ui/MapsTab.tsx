@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { View, Text, Pressable, FlatList } from 'react-native';
+import { View, Text, Pressable, FlatList, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
@@ -33,9 +33,17 @@ function MapCard({ map, onPress }: MapCardProps) {
     >
       <View className="flex-row items-start">
         {/* サムネイル or アイコン */}
-        <View className="w-16 h-16 rounded-lg bg-gray-100 items-center justify-center mr-3">
-          <Ionicons name="map" size={24} color={colors.primary.DEFAULT} />
-        </View>
+        {map.thumbnail_url ? (
+          <Image
+            source={{ uri: map.thumbnail_url }}
+            className="w-16 h-16 rounded-lg mr-3"
+            resizeMode="cover"
+          />
+        ) : (
+          <View className="w-16 h-16 rounded-lg bg-gray-100 items-center justify-center mr-3">
+            <Ionicons name="map" size={24} color={colors.primary.DEFAULT} />
+          </View>
+        )}
 
         {/* マップ情報 */}
         <View className="flex-1">

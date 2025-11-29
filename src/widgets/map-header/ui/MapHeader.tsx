@@ -99,7 +99,7 @@ export function MapHeader({
           {/* 左側：ユーザーアイコン + マップ名 */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
             {/* ユーザーアイコン */}
-            <Pressable onPress={onUserPress} className="mr-6">
+            <Pressable onPress={onUserPress} className="mr-3">
               {userAvatarUrl ? (
                 <Image
                   source={{ uri: userAvatarUrl }}

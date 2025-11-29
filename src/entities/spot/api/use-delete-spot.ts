@@ -4,7 +4,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { invalidateSpots } from '@/shared/api/query-client';
-import { deleteSpot } from '@/shared/api/sqlite';
+import { deleteSpot } from '@/shared/api/supabase/spots';
 
 /**
  * スポットを削除（関連する画像も連鎖削除される）
@@ -12,7 +12,7 @@ import { deleteSpot } from '@/shared/api/sqlite';
 export function useDeleteSpot() {
   return useMutation({
     mutationFn: async (spotId: string) => {
-      deleteSpot(spotId);
+      await deleteSpot(spotId);
       return spotId;
     },
     onSuccess: () => {
