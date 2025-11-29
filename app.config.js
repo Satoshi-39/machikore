@@ -53,6 +53,13 @@ module.exports = {
           },
         },
       ],
+      [
+        'expo-image-picker',
+        {
+          cameraPermission: 'スポットの写真を撮影するためにカメラを使用します。',
+          photosPermission: 'スポットに写真を追加するためにフォトライブラリにアクセスします。',
+        },
+      ],
       '@rnmapbox/maps',
     ],
     experiments: {

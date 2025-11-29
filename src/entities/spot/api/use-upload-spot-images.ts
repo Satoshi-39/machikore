@@ -1,13 +1,13 @@
 /**
- * スポット画像をアップロードするhook
+ * スポット画像をアップロードするhook（Supabase版）
  */
 
 import { useMutation } from '@tanstack/react-query';
-import { v4 as uuidv4 } from 'uuid';
-import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase';
-import { insertSpotImage } from '@/shared/api/sqlite';
+import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import type { SelectedImage } from '@/features/pick-images';
-import type { ImageRow } from '@/shared/types/database.types';
+import type { Database } from '@/shared/types/supabase.generated';
+
+type ImageRow = Database['public']['Tables']['images']['Row'];
 
 interface UploadSpotImagesParams {
   spotId: string;
@@ -21,20 +21,19 @@ interface UploadResult {
 }
 
 /**
- * スポット画像をSupabase Storageにアップロードし、ローカルDBに保存
+ * スポット画像をSupabase Storageにアップロードし、imagesテーブルに保存
  */
 export function useUploadSpotImages() {
   return useMutation<UploadResult, Error, UploadSpotImagesParams>({
     mutationFn: async ({ spotId, images }) => {
-      const now = new Date().toISOString();
       const uploadedImages: ImageRow[] = [];
       let failed = 0;
 
       for (let i = 0; i < images.length; i++) {
         const image = images[i]!;
-        const imageId = uuidv4();
         const extension = image.uri.split('.').pop() || 'jpg';
-        const path = `${spotId}/${imageId}.${extension}`;
+        const fileName = `${Date.now()}_${i}.${extension}`;
+        const path = `${spotId}/${fileName}`;
 
         try {
           // Supabase Storageにアップロード
@@ -51,23 +50,17 @@ export function useUploadSpotImages() {
             continue;
           }
 
-          // ローカルDBに保存
-          const imageRow: ImageRow = {
-            id: imageId,
+          // Supabaseのimagesテーブルに保存
+          const imageRow = await insertSpotImage({
             spot_id: spotId,
-            local_path: image.uri,
             cloud_path: result.data.url,
+            local_path: image.uri,
             width: image.width,
             height: image.height,
             file_size: image.fileSize ?? null,
             order_index: i,
-            created_at: now,
-            updated_at: now,
-            synced_at: now,
-            is_synced: 1,
-          };
+          });
 
-          insertSpotImage(imageRow);
           uploadedImages.push(imageRow);
         } catch (error) {
           console.error('画像処理エラー:', error);

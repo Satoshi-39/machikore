@@ -7,3 +7,4 @@ export * from './auth';
 export * from './storage';
 export * from './maps';
 export * from './spots';
+export * from './images';

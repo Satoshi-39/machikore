@@ -225,6 +225,13 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               animationDuration={0}
             />
 
+            {/* 現在地マーカー（青い点） */}
+            <Mapbox.UserLocation
+              visible={true}
+              showsUserHeadingIndicator={true}
+              animated={true}
+            />
+
             {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
             <CountryLabels geoJson={countriesGeoJson} />
 
