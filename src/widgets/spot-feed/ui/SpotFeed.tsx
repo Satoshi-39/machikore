@@ -10,7 +10,6 @@ import { FlatList, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
-import { useSelectedPlaceStore } from '@/features/search-places';
 import { AsyncBoundary } from '@/shared/ui';
 
 export function SpotFeed() {
@@ -18,13 +17,11 @@ export function SpotFeed() {
   const currentUser = useUserStore((state) => state.user);
   // currentUserId を渡していいね状態も含めて取得
   const { data: spots, isLoading, error, refetch, isRefetching } = useFeedSpots(currentUser?.id);
-  const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
 
-  // スポットタップ時: そのスポットが所属するマップページに遷移し、該当スポットにフォーカス
-  const handleSpotPress = useCallback((mapId: string, spotId: string) => {
-    setJumpToSpotId(spotId);
-    router.push(`/(tabs)/map?id=${mapId}`);
-  }, [router, setJumpToSpotId]);
+  // スポットタップ時: スポット詳細ページに遷移
+  const handleSpotPress = useCallback((_mapId: string, spotId: string) => {
+    router.push(`/spots/${spotId}`);
+  }, [router]);
 
   // ユーザーアイコンタップ時: ユーザープロフィールページに遷移
   const handleUserPress = useCallback((userId: string) => {

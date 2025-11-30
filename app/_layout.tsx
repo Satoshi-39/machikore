@@ -89,13 +89,6 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="user/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
             name="machi/[id]"
             options={{
               presentation: 'card',
@@ -167,6 +160,38 @@ export default function RootLayout() {
               headerShown: true,
               title: 'マップを編集',
               headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="bookmarks"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'ブックマーク',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="likes"
+            options={{
+              presentation: 'card',
+              headerShown: true,
+              title: 'いいね',
+              headerBackTitle: '戻る',
+            }}
+          />
+          <Stack.Screen
+            name="spots/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="maps/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
             }}
           />
         </Stack>

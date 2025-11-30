@@ -9,3 +9,4 @@ export * from './maps';
 export * from './spots';
 export * from './images';
 export * from './likes';
+export * from './bookmarks';

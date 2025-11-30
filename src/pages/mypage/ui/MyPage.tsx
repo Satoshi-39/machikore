@@ -12,7 +12,7 @@ import { useRouter } from 'expo-router';
 import { MyPageProfile } from '@/widgets/mypage-profile';
 import { MyPageHeader } from '@/widgets/mypage-header';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
-import { MapsTab, BlogTab, LikesTab, BookmarksTab } from '@/widgets/mypage-tab-content';
+import { MapsTab, BlogTab } from '@/widgets/mypage-tab-content';
 import { useCurrentUserId } from '@/entities/user';
 
 export function MyPage() {
@@ -46,8 +46,6 @@ export function MyPage() {
       <View className="flex-1">
         {tabMode === 'maps' && <MapsTab userId={currentUserId} />}
         {tabMode === 'blog' && <BlogTab userId={currentUserId} />}
-        {tabMode === 'likes' && <LikesTab userId={currentUserId} />}
-        {tabMode === 'bookmarks' && <BookmarksTab userId={currentUserId} />}
       </View>
     </SafeAreaView>
   );

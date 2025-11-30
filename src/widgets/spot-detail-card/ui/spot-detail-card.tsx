@@ -11,7 +11,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import { useSpotImages, useDeleteSpot, useToggleSpotLike } from '@/entities/user-spot/api';
+import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
+import { useToggleSpotLike } from '@/entities/like';
+import { useCheckSpotBookmarked, useToggleSpotBookmark } from '@/entities/bookmark';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
 interface SpotDetailCardProps {
@@ -27,6 +29,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const insets = useSafeAreaInsets();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
+  const { data: isBookmarked = false } = useCheckSpotBookmarked(currentUserId, spot.id);
+  const { mutate: toggleBookmark, isPending: isTogglingBookmark } = useToggleSpotBookmark();
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
@@ -77,6 +81,12 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     if (!currentUserId || isTogglingLike) return;
     toggleLike({ userId: currentUserId, spotId: spot.id });
   }, [currentUserId, spot.id, toggleLike, isTogglingLike]);
+
+  // ブックマークトグル
+  const handleBookmarkPress = useCallback(() => {
+    if (!currentUserId || isTogglingBookmark) return;
+    toggleBookmark({ userId: currentUserId, spotId: spot.id });
+  }, [currentUserId, spot.id, toggleBookmark, isTogglingBookmark]);
 
   // 削除確認ダイアログ
   const handleDelete = useCallback(() => {
@@ -244,6 +254,22 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </View>
             <Text className="text-xs text-gray-500">コメント</Text>
           </View>
+
+          {/* ブックマークボタン */}
+          <Pressable
+            className="items-center"
+            onPress={handleBookmarkPress}
+            disabled={!currentUserId || isTogglingBookmark}
+          >
+            <View className="flex-row items-center">
+              <Ionicons
+                name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+                size={18}
+                color={isBookmarked ? '#F97316' : colors.text.secondary}
+              />
+            </View>
+            <Text className="text-xs text-gray-500">保存</Text>
+          </Pressable>
         </View>
       </BottomSheetScrollView>
     </BottomSheet>

@@ -18,7 +18,7 @@ interface MapHeaderProps {
   userName?: string;
   userAvatarUrl?: string;
   userMaps?: MapWithUser[];
-  onClose?: () => void;
+  onBack?: () => void;
   onMapSelect?: (mapId: string) => void;
   onUserPress?: () => void;
   onSearchPress?: () => void;
@@ -32,7 +32,7 @@ export function MapHeader({
   userName,
   userAvatarUrl,
   userMaps = [],
-  onClose,
+  onBack,
   onMapSelect,
   onUserPress,
   onSearchPress,
@@ -77,15 +77,14 @@ export function MapHeader({
     return (
       <View className="bg-white px-5 py-4">
         <View className="flex-row items-center justify-between">
-          {/* 左側：ローディング */}
+          {/* 左側：戻るボタン + ローディング */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
+            <Pressable onPress={onBack} className="mr-3">
+              <Ionicons name="arrow-back" size={24} color="#007AFF" />
+            </Pressable>
             <ActivityIndicator size="small" color="#007AFF" />
             <Text className="text-gray-500 ml-3">読み込み中...</Text>
           </View>
-          {/* 右側：✕ボタンのみ表示 */}
-          <Pressable onPress={onClose} className="items-center justify-center">
-            <Ionicons name="close" size={24} color="#007AFF" />
-          </Pressable>
         </View>
       </View>
     );
@@ -94,10 +93,15 @@ export function MapHeader({
   return (
     <View className="bg-white px-5 py-4">
       {isUserMap ? (
-        // ユーザーマップ：ユーザーアイコン + マップ名（左）、アクションボタン群（右）
+        // ユーザーマップ：戻るボタン + ユーザーアイコン + マップ名（左）、アクションボタン群（右）
         <View className="flex-row items-center justify-between">
-          {/* 左側：ユーザーアイコン + マップ名 */}
+          {/* 左側：戻るボタン + ユーザーアイコン + マップ名 */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
+            {/* 戻るボタン */}
+            <Pressable onPress={onBack} className="mr-3">
+              <Ionicons name="arrow-back" size={24} color="#007AFF" />
+            </Pressable>
+
             {/* ユーザーアイコン */}
             <Pressable onPress={onUserPress} className="mr-3">
               {userAvatarUrl ? (
@@ -140,22 +144,14 @@ export function MapHeader({
 
           {/* 右側：アクションボタン群 */}
           <View className="flex-row items-center gap-4">
-            {/* 三点リーダメニュー */}
-            <Pressable onPress={onMenuPress} className="items-center justify-center">
-              <Ionicons name="ellipsis-horizontal" size={24} color="#007AFF" />
-            </Pressable>
-
             {/* 検索ボタン */}
             <Pressable onPress={onSearchPress} className="items-center justify-center">
               <Ionicons name="search-outline" size={24} color="#007AFF" />
             </Pressable>
 
-            {/* ✕ボタン - クリックでデフォルトマップに戻る */}
-            <Pressable
-              onPress={onClose}
-              className="items-center justify-center"
-            >
-              <Ionicons name="close" size={24} color="#007AFF" />
+            {/* 三点リーダメニュー */}
+            <Pressable onPress={onMenuPress} className="items-center justify-center">
+              <Ionicons name="ellipsis-horizontal" size={24} color="#007AFF" />
             </Pressable>
           </View>
         </View>
@@ -190,7 +186,6 @@ export function MapHeader({
         onRequestClose={() => setIsDropdownOpen(false)}
       >
         <View className="flex-1 bg-black/50">
-          {/* モーダルコンテンツ（上からスライド） */}
           <Animated.View
             className="bg-white rounded-b-3xl shadow-2xl"
             style={{
@@ -199,7 +194,6 @@ export function MapHeader({
               transform: [{ translateY: slideAnim }],
             }}
           >
-            {/* ヘッダー */}
             <View className="flex-row items-center justify-between px-6 py-4 border-b border-gray-100">
               <Text className="text-lg font-bold text-gray-900">マップを選択</Text>
               <Pressable onPress={() => setIsDropdownOpen(false)}>
@@ -207,7 +201,6 @@ export function MapHeader({
               </Pressable>
             </View>
 
-            {/* マップリスト */}
             <ScrollView className="px-6">
               {userMaps.map((map, index) => (
                 <Pressable
@@ -232,7 +225,6 @@ export function MapHeader({
             </ScrollView>
           </Animated.View>
 
-          {/* 背景タップで閉じる */}
           <Pressable
             className="flex-1"
             onPress={() => setIsDropdownOpen(false)}

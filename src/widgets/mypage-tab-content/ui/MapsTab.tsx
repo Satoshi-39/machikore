@@ -4,13 +4,13 @@
  * ユーザーが作成したカスタムマップの一覧を表示
  */
 
-import React from 'react';
-import { View, Text, Pressable, FlatList, Image } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useUserMaps, useMapStore } from '@/entities/map';
-import { AsyncBoundary } from '@/shared/ui';
+import { useUserMaps, useDeleteMap } from '@/entities/map';
+import { AsyncBoundary, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 
 interface MapsTabProps {
@@ -20,11 +20,29 @@ interface MapsTabProps {
 interface MapCardProps {
   map: MapWithUser;
   onPress?: () => void;
+  onEdit?: (mapId: string) => void;
+  onDelete?: (mapId: string) => void;
 }
 
-function MapCard({ map, onPress }: MapCardProps) {
+function MapCard({ map, onPress, onEdit, onDelete }: MapCardProps) {
   const createdDate = new Date(map.created_at);
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
+
+  const menuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'edit',
+      label: '編集',
+      icon: 'create-outline',
+      onPress: () => onEdit?.(map.id),
+    },
+    {
+      id: 'delete',
+      label: '削除',
+      icon: 'trash-outline',
+      destructive: true,
+      onPress: () => onDelete?.(map.id),
+    },
+  ], [map.id, onEdit, onDelete]);
 
   return (
     <Pressable
@@ -74,12 +92,15 @@ function MapCard({ map, onPress }: MapCardProps) {
           </View>
         </View>
 
-        {/* 公開/非公開アイコン */}
-        {!map.is_public && (
-          <View className="ml-2">
-            <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
-          </View>
-        )}
+        {/* 公開/非公開アイコン + メニュー */}
+        <View className="flex-row items-center">
+          {!map.is_public && (
+            <View className="mr-2">
+              <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
+            </View>
+          )}
+          <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+        </View>
       </View>
     </Pressable>
   );
@@ -88,11 +109,29 @@ function MapCard({ map, onPress }: MapCardProps) {
 export function MapsTab({ userId }: MapsTabProps) {
   const router = useRouter();
   const { data: maps, isLoading, error } = useUserMaps(userId);
-  const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
+  const { mutate: deleteMap } = useDeleteMap();
 
   const handleMapPress = (map: MapWithUser) => {
-    setSelectedMapId(map.id);
-    router.push(`/(tabs)/map?id=${map.id}`);
+    router.push(`/maps/${map.id}`);
+  };
+
+  const handleEdit = (mapId: string) => {
+    router.push(`/edit-map?id=${mapId}`);
+  };
+
+  const handleDelete = (mapId: string) => {
+    Alert.alert(
+      'マップを削除',
+      'このマップを削除しますか？関連するスポットも全て削除されます。この操作は取り消せません。',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => deleteMap(mapId),
+        },
+      ]
+    );
   };
 
   return (
@@ -112,6 +151,8 @@ export function MapsTab({ userId }: MapsTabProps) {
             <MapCard
               map={item}
               onPress={() => handleMapPress(item)}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
             />
           )}
           contentContainerClassName="bg-white"

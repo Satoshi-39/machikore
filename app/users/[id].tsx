@@ -2,7 +2,7 @@
  * ユーザープロフィール画面
  *
  * URL: /users/:id
- * 他のユーザーのプロフィールを表示
+ * ユーザーのプロフィールを表示
  */
 
 import { UserProfilePage } from '@/pages/user-profile';

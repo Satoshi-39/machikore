@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import type { MapWithUser } from '@/shared/types';
 
 interface EditMapFormProps {
@@ -25,6 +26,8 @@ interface EditMapFormProps {
     category?: string;
     tags: string[];
     isPublic: boolean;
+    thumbnailImage?: ThumbnailImage;
+    removeThumbnail?: boolean;
   }) => void;
   isLoading?: boolean;
 }
@@ -36,10 +39,20 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
   const [tags, setTags] = useState((map.tags || []).join(', '));
   const [isPublic, setIsPublic] = useState(map.is_public);
 
+  // サムネイル関連
+  const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
+    map.thumbnail_url ? { uri: map.thumbnail_url, width: 0, height: 0 } : null
+  );
+  const [originalThumbnailUrl] = useState(map.thumbnail_url);
+
   const handleSubmit = () => {
     if (!name.trim()) {
       return;
     }
+
+    // サムネイルの変更を判定
+    const thumbnailChanged = thumbnailImage?.uri !== originalThumbnailUrl;
+    const thumbnailRemoved = !thumbnailImage && Boolean(originalThumbnailUrl);
 
     onSubmit({
       name: name.trim(),
@@ -47,6 +60,11 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
       category: category.trim() || undefined,
       tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
       isPublic,
+      // 新しい画像が選択された場合のみ送信（既存URLの場合は送らない）
+      thumbnailImage: thumbnailChanged && thumbnailImage && !thumbnailImage.uri.startsWith('http')
+        ? thumbnailImage
+        : undefined,
+      removeThumbnail: thumbnailRemoved,
     });
   };
 
@@ -138,6 +156,17 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
           <Text className="text-xs text-gray-500 mt-1">
             カンマ区切りで入力してください
           </Text>
+        </View>
+
+        {/* サムネイル */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-gray-800 mb-2">
+            サムネイル
+          </Text>
+          <ThumbnailPicker
+            image={thumbnailImage}
+            onImageChange={setThumbnailImage}
+          />
         </View>
 
         {/* 公開設定 */}

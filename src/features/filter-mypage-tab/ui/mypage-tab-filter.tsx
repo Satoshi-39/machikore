@@ -1,15 +1,17 @@
 /**
  * マイページタブフィルター
  *
- * マップ、ブログ、いいね、ブックマークを切り替えるタブUI
+ * マップ、ブログを切り替えるタブUI
+ * いいね、ブックマークは別ページへ遷移するボタン
  */
 
 import React from 'react';
 import { Pressable, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 
-export type MyPageTabMode = 'maps' | 'blog' | 'likes' | 'bookmarks';
+export type MyPageTabMode = 'maps' | 'blog';
 
 interface MyPageTabFilterProps {
   tabMode: MyPageTabMode;
@@ -20,11 +22,11 @@ export function MyPageTabFilter({
   tabMode,
   onTabModeChange,
 }: MyPageTabFilterProps) {
+  const router = useRouter();
+
   const tabs: { mode: MyPageTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [
     { mode: 'maps', icon: 'map' },
     { mode: 'blog', icon: 'reader' },
-    { mode: 'likes', icon: 'heart' },
-    { mode: 'bookmarks', icon: 'bookmark' },
   ];
 
   return (
@@ -53,6 +55,28 @@ export function MyPageTabFilter({
             </Pressable>
           );
         })}
+        {/* いいねボタン（別ページへ遷移） */}
+        <Pressable
+          onPress={() => router.push('/likes')}
+          className="flex-1 py-3 items-center justify-center"
+        >
+          <Ionicons
+            name="heart"
+            size={24}
+            color={colors.text.secondary}
+          />
+        </Pressable>
+        {/* ブックマークボタン（別ページへ遷移） */}
+        <Pressable
+          onPress={() => router.push('/bookmarks')}
+          className="flex-1 py-3 items-center justify-center"
+        >
+          <Ionicons
+            name="bookmark"
+            size={24}
+            color={colors.text.secondary}
+          />
+        </Pressable>
       </View>
     </View>
   );

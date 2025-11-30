@@ -192,9 +192,9 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
                   key={userSpot.id}
                   className="bg-gray-50 rounded-lg p-3 active:bg-gray-100"
                   onPress={() => {
-                    // マップのスポット詳細に遷移
+                    // スポット詳細ページに遷移
                     onClose();
-                    router.push(`/(tabs)/map?id=${userSpot.map_id}&spotId=${userSpot.id}`);
+                    router.push(`/spots/${userSpot.id}`);
                   }}
                 >
                   {/* ユーザー情報とマップ名 */}

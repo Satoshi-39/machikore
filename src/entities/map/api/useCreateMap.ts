@@ -17,6 +17,7 @@ interface CreateMapParams {
   category?: string;
   tags?: string[];
   isPublic: boolean;
+  thumbnailUrl?: string;
 }
 
 /**
@@ -37,6 +38,7 @@ export function useCreateMap() {
         category: params.category || null,
         tags: params.tags && params.tags.length > 0 ? params.tags : null,
         is_public: params.isPublic,
+        thumbnail_url: params.thumbnailUrl || null,
       });
     },
     onSuccess: (_data, variables) => {

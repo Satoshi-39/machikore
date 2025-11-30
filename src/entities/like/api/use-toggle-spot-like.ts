@@ -1,5 +1,5 @@
 /**
- * いいねをトグルするmutation（Supabase版）
+ * スポットいいねをトグルするmutation
  *
  * スポットデータに含まれる is_liked と likes_count を楽観的更新する
  */
@@ -128,6 +128,3 @@ export function useToggleSpotLike() {
     },
   });
 }
-
-// 後方互換性のためのエイリアス
-export const useToggleLike = useToggleSpotLike;

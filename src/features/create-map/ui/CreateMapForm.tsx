@@ -15,6 +15,7 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 
 type MapCategory = '旅行' | 'グルメ' | '観光' | 'ショッピング' | 'アクティビティ' | 'その他';
 
@@ -34,6 +35,7 @@ interface CreateMapFormProps {
     category?: MapCategory;
     tags: string[];
     isPublic: boolean;
+    thumbnailImage?: ThumbnailImage;
   }) => void;
   isLoading?: boolean;
 }
@@ -44,6 +46,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
   const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(null);
   const [tags, setTags] = useState('');
   const [isPublic, setIsPublic] = useState(true);
+  const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(null);
 
   const handleSubmit = () => {
     if (!mapName.trim()) {
@@ -57,6 +60,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
       category: selectedCategory || undefined,
       tags: tags.split(',').map(t => t.trim()).filter(Boolean),
       isPublic,
+      thumbnailImage: thumbnailImage || undefined,
     });
   };
 
@@ -141,6 +145,17 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
           <Text className="text-xs text-gray-500 mt-1">
             カンマ区切りで入力してください
           </Text>
+        </View>
+
+        {/* サムネイル画像 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-gray-800 mb-2">
+            サムネイル
+          </Text>
+          <ThumbnailPicker
+            image={thumbnailImage}
+            onImageChange={setThumbnailImage}
+          />
         </View>
 
         {/* 公開設定 */}

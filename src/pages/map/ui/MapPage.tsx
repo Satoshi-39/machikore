@@ -29,14 +29,28 @@ import {
 } from '@/features/search-places';
 import { ActionSheet, type ActionSheetItem } from '@/shared/ui';
 
-export function MapPage() {
+interface MapPageProps {
+  /** propsで渡されるマップID（URLパラメータより優先） */
+  mapId?: string;
+  /** propsで渡されるスポットID（URLパラメータより優先） */
+  initialSpotId?: string;
+}
+
+export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPageProps = {}) {
   const { id, addSpot, spotId } = useLocalSearchParams<{ id?: string; addSpot?: string; spotId?: string }>();
+
+  // propsがあればpropsを優先、なければURLパラメータを使用
+  const effectiveMapId = propMapId ?? id;
+  const effectiveSpotId = propSpotId ?? spotId;
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const user = useUserStore((state) => state.user);
   const selectedMapId = useMapStore((state) => state.selectedMapId);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
-  const { data: selectedMap, isLoading: isMapLoading } = useMap(selectedMapId);
+
+  // propMapIdがある場合はそれを使い、なければグローバルステートを使う
+  const currentMapId = propMapId ?? selectedMapId;
+  const { data: selectedMap, isLoading: isMapLoading } = useMap(currentMapId);
   // UserMap型にはuser情報が含まれているので、直接使用
   const mapOwner = selectedMap?.user ?? null;
 
@@ -60,12 +74,13 @@ export function MapPage() {
   // スポットジャンプ用のstoreアクション
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
 
-  // URLクエリパラメータからマップIDを読み取り、グローバルステートに設定
+  // マップIDをグローバルステートに設定
+  // propsでmapIdが渡されている場合はグローバルステートを変更しない
   useEffect(() => {
-    if (id) {
-      setSelectedMapId(id);
+    if (effectiveMapId && !propMapId) {
+      setSelectedMapId(effectiveMapId);
     }
-  }, [id, setSelectedMapId]);
+  }, [effectiveMapId, propMapId, setSelectedMapId]);
 
   // addSpotパラメータがある場合は検索画面を自動的に開く（スポット追加モード）
   useEffect(() => {
@@ -74,15 +89,15 @@ export function MapPage() {
     }
   }, [addSpot]);
 
-  // spotIdパラメータがある場合はスポットにジャンプ
+  // スポットIDがある場合はスポットにジャンプ
   useEffect(() => {
-    if (spotId) {
-      setJumpToSpotId(spotId);
+    if (effectiveSpotId) {
+      setJumpToSpotId(effectiveSpotId);
     }
-  }, [spotId, setJumpToSpotId]);
+  }, [effectiveSpotId, setJumpToSpotId]);
 
-  // URLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
-  const isUserMap = selectedMapId != null || id != null;
+  // propsまたはURLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
+  const isUserMap = currentMapId != null || effectiveMapId != null;
 
   // マップ読み込み中かどうか（ユーザーマップの場合のみ）
   const isLoadingUserMap = isUserMap && isMapLoading;
@@ -102,9 +117,14 @@ export function MapPage() {
     setIsSearchFocused(true);
   };
 
-  const handleCloseUserMap = () => {
-    setSelectedMapId(null);
-    router.push('/(tabs)/map');
+  const handleBack = () => {
+    // propsでmapIdが渡されている場合（/spots/[id]や/maps/[id]から呼ばれた場合）は
+    // グローバルステートをクリアしない（元の画面に戻るだけ）
+    // タブ内でのデフォルトマップへの戻りの場合のみクリアする
+    if (!propMapId) {
+      setSelectedMapId(null);
+    }
+    router.back();
   };
 
   // 検索結果タップ時の処理（新規スポットのみ）
@@ -160,7 +180,7 @@ export function MapPage() {
     try {
       await Share.share({
         message: `${selectedMap?.name || 'マップ'}をチェック！`,
-        url: `https://machikore.app/map/${selectedMapId}`,
+        url: `https://machikore.app/map/${currentMapId}`,
       });
     } catch (error) {
       console.error('Share error:', error);
@@ -202,7 +222,7 @@ export function MapPage() {
           userName={mapOwner?.display_name || undefined}
           userAvatarUrl={mapOwner?.avatar_url || undefined}
           userMaps={ownerMaps}
-          onClose={handleCloseUserMap}
+          onBack={handleBack}
           onMapSelect={handleMapSelect}
           onUserPress={handleUserPress}
           onSearchPress={handleSearchFocus}
@@ -224,7 +244,7 @@ export function MapPage() {
         {isUserMap ? (
           <UserMapView
             ref={mapViewRef}
-            mapId={selectedMapId || id || null}
+            mapId={currentMapId || effectiveMapId || null}
             userId={user?.id ?? null}
             currentUserId={user?.id ?? null}
             defaultMapId={myMaps?.[0]?.id ?? null}
@@ -279,7 +299,7 @@ export function MapPage() {
               selectedMap?.user_id === user?.id ? (
                 // 自分のマップ: Google Places APIで新規スポット検索
                 <OwnMapSearch
-                  mapId={selectedMapId || id || null}
+                  mapId={currentMapId || effectiveMapId || null}
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
                   onClose={handleSearchClose}

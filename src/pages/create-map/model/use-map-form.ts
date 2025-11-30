@@ -4,26 +4,62 @@
  * エラーハンドリング、データ送信、画面遷移を管理
  */
 
+import { useState } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCreateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
+import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import type { ThumbnailImage } from '@/features/pick-images';
 
 export function useMapForm() {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
-  const { mutate: createMap, isPending } = useCreateMap();
+  const { mutate: createMap, isPending: isCreating } = useCreateMap();
+  const [isUploading, setIsUploading] = useState(false);
 
-  const handleSubmit = (data: {
+  const handleSubmit = async (data: {
     name: string;
     description?: string;
     category?: string;
     tags: string[];
     isPublic: boolean;
+    thumbnailImage?: ThumbnailImage;
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
       return;
+    }
+
+    let thumbnailUrl: string | undefined;
+
+    // サムネイル画像のアップロード
+    if (data.thumbnailImage) {
+      setIsUploading(true);
+      try {
+        const timestamp = Date.now();
+        const path = `${user.id}/${timestamp}.jpg`;
+        const result = await uploadImage({
+          uri: data.thumbnailImage.uri,
+          bucket: STORAGE_BUCKETS.MAP_THUMBNAILS,
+          path,
+        });
+
+        if (result.success) {
+          thumbnailUrl = result.data.url;
+        } else {
+          console.error('サムネイルアップロードエラー:', result.error);
+          Alert.alert('エラー', 'サムネイルのアップロードに失敗しました');
+          setIsUploading(false);
+          return;
+        }
+      } catch (error) {
+        console.error('サムネイルアップロードエラー:', error);
+        Alert.alert('エラー', 'サムネイルのアップロードに失敗しました');
+        setIsUploading(false);
+        return;
+      }
+      setIsUploading(false);
     }
 
     // マップ作成
@@ -35,6 +71,7 @@ export function useMapForm() {
         category: data.category,
         tags: data.tags,
         isPublic: data.isPublic,
+        thumbnailUrl,
       },
       {
         onSuccess: () => {
@@ -58,6 +95,6 @@ export function useMapForm() {
 
   return {
     handleSubmit,
-    isLoading: isPending,
+    isLoading: isCreating || isUploading,
   };
 }

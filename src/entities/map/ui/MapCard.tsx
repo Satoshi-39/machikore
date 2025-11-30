@@ -13,6 +13,7 @@ import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
 import { useDeleteMap } from '@/entities/map/api';
+import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 
 interface MapCardProps {
   map: MapRow | MapWithUser;
@@ -30,7 +31,15 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
 
   const { mutate: deleteMap, isPending: isDeleting } = useDeleteMap();
+  const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
   const isOwner = currentUserId && map.user_id === currentUserId;
+
+  const handleLikePress = (e: any) => {
+    e.stopPropagation();
+    if (!currentUserId || isTogglingLike) return;
+    toggleLike({ userId: currentUserId, mapId: map.id });
+  };
 
   const handleDelete = () => {
     Alert.alert(
@@ -70,10 +79,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
-        <Pressable
-          onPress={() => onUserPress?.(map.user_id)}
-          className="flex-row items-center flex-1"
-        >
+        {/* アイコン（タップでプロフィールへ） */}
+        <Pressable onPress={() => onUserPress?.(map.user_id)}>
           {avatarUri ? (
             <Image
               source={{ uri: avatarUri }}
@@ -84,12 +91,16 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
               <Ionicons name="person" size={20} color={colors.gray[500]} />
             </View>
           )}
-          <View className="flex-1">
+        </Pressable>
+
+        {/* ユーザー名（タップでプロフィールへ） */}
+        <View className="flex-1">
+          <Pressable onPress={() => onUserPress?.(map.user_id)} className="self-start">
             <Text className="text-sm font-semibold text-gray-800">
               {user?.display_name || user?.username || 'ユーザー'}
             </Text>
-          </View>
-        </Pressable>
+          </Pressable>
+        </View>
 
         {/* 三点リーダーメニュー（自分のマップのみ） */}
         {isOwner && !isDeleting && (
@@ -131,13 +142,21 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
           </Text>
         </View>
 
-        {/* いいね数 */}
-        <View className="flex-row items-center">
-          <Ionicons name="heart-outline" size={16} color={colors.text.secondary} />
+        {/* いいねボタン */}
+        <Pressable
+          onPress={handleLikePress}
+          className="flex-row items-center"
+          disabled={!currentUserId || isTogglingLike}
+        >
+          <Ionicons
+            name={isLiked ? 'heart' : 'heart-outline'}
+            size={16}
+            color={isLiked ? '#EF4444' : colors.text.secondary}
+          />
           <Text className="text-sm text-gray-500 ml-1">
             {map.likes_count ?? 0}
           </Text>
-        </View>
+        </Pressable>
       </View>
     </Pressable>
   );

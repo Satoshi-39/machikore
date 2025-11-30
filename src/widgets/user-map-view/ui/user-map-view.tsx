@@ -115,13 +115,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // 新規登録したスポット or 発見タブからのジャンプ
     useEffect(() => {
-      console.log('🔍 [Jump useEffect] jumpToSpotId:', jumpToSpotId, 'spots:', spots.length, 'isMapReady:', isMapReady);
+      // console.log('🔍 [Jump useEffect] jumpToSpotId:', jumpToSpotId, 'spots:', spots.length, 'isMapReady:', isMapReady);
       if (!jumpToSpotId || !isMapReady) return;
 
       const spot = spots.find((s) => s.id === jumpToSpotId);
       if (spot) {
         const spotName = spot.custom_name || spot.master_spot?.name || '不明';
-        console.log('📍 [Jump] スポットにジャンプ:', spotName);
+        // console.log('📍 [Jump] スポットにジャンプ:', spotName);
         // 初回カメラ移動済みフラグを立てて全スポット表示をスキップ
         hasInitialCameraMoved.current = true;
         setTimeout(() => {
@@ -130,18 +130,18 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         }, 100);
         setJumpToSpotId(null);
       } else {
-        console.log('⚠️ [Jump] スポットが見つかりません（spotsロード待ち）');
+        // console.log('⚠️ [Jump] スポットが見つかりません（spotsロード待ち）');
       }
     }, [jumpToSpotId, spots, isMapReady, moveCameraToSingleSpot, setJumpToSpotId]);
 
     // 全スポット表示（マップごとに初回のみ、jumpToSpotIdがない場合）
     useEffect(() => {
-      console.log('🔍 [All Spots useEffect]', {
-        spotsLength: spots.length,
-        isMapReady,
-        hasInitialCameraMoved: hasInitialCameraMoved.current,
-        jumpToSpotId,
-      });
+      // console.log('🔍 [All Spots useEffect]', {
+      //   spotsLength: spots.length,
+      //   isMapReady,
+      //   hasInitialCameraMoved: hasInitialCameraMoved.current,
+      //   jumpToSpotId,
+      // });
 
       // jumpToSpotIdがある場合はジャンプ処理に任せる
       if (spots.length === 0 || !isMapReady || hasInitialCameraMoved.current || jumpToSpotId) {
@@ -149,7 +149,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       }
 
       setTimeout(() => {
-        console.log('📸 [All Spots] 全スポット表示');
+        // console.log('📸 [All Spots] 全スポット表示');
         if (spots.length === 1) {
           moveCameraToSingleSpot(spots[0]!);
         } else {

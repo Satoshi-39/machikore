@@ -232,18 +232,27 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
       created_at,
       user_spots (
         id,
+        user_id,
+        map_id,
+        master_spot_id,
+        machi_id,
         custom_name,
         description,
+        tags,
         images_count,
         likes_count,
         comments_count,
+        order_index,
         created_at,
+        updated_at,
         master_spots (
           id,
           name,
           latitude,
           longitude,
-          google_formatted_address
+          google_place_id,
+          google_formatted_address,
+          google_types
         ),
         users (
           id,
@@ -269,9 +278,23 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
       likeId: like.id,
       likedAt: like.created_at,
       spot: {
-        ...like.user_spots,
+        id: like.user_spots.id,
+        user_id: like.user_spots.user_id,
+        map_id: like.user_spots.map_id,
+        master_spot_id: like.user_spots.master_spot_id,
+        machi_id: like.user_spots.machi_id || '',
+        custom_name: like.user_spots.custom_name,
+        description: like.user_spots.description,
+        tags: like.user_spots.tags,
+        images_count: like.user_spots.images_count,
+        likes_count: like.user_spots.likes_count,
+        comments_count: like.user_spots.comments_count,
+        order_index: like.user_spots.order_index || 0,
+        created_at: like.user_spots.created_at,
+        updated_at: like.user_spots.updated_at,
         master_spot: like.user_spots.master_spots,
         user: like.user_spots.users,
+        is_liked: true, // いいね一覧なので必ずtrue
       },
     }));
 }

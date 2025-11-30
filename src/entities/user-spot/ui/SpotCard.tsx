@@ -15,7 +15,8 @@ import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
-import { useToggleSpotLike, useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
+import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
+import { useToggleSpotLike } from '@/entities/like';
 import { useUser } from '@/entities/user';
 
 // Supabase JOINで取得済みのユーザー情報
@@ -156,10 +157,8 @@ export function SpotCard({
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
-        <Pressable
-          onPress={() => onUserPress?.(spot.user_id)}
-          className="flex-row items-center flex-1"
-        >
+        {/* アイコン（タップでプロフィールへ） */}
+        <Pressable onPress={() => onUserPress?.(spot.user_id)}>
           {avatarUri ? (
             <Image
               source={{ uri: avatarUri }}
@@ -170,15 +169,19 @@ export function SpotCard({
               <Ionicons name="person" size={20} color={colors.gray[500]} />
             </View>
           )}
-          <View className="flex-1">
+        </Pressable>
+
+        {/* ユーザー名と時間 */}
+        <View className="flex-1">
+          <Pressable onPress={() => onUserPress?.(spot.user_id)} className="self-start">
             <Text className="text-sm font-semibold text-gray-800">
               {user?.display_name || user?.username || 'ユーザー'}
             </Text>
-            <Text className="text-xs text-gray-500">
-              {getRelativeSpotTime(spot.created_at)}
-            </Text>
-          </View>
-        </Pressable>
+          </Pressable>
+          <Text className="text-xs text-gray-500">
+            {getRelativeSpotTime(spot.created_at)}
+          </Text>
+        </View>
 
         {/* 三点リーダーメニュー（自分のスポットのみ） */}
         {isOwner && !isDeleting && (

@@ -92,12 +92,12 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
             return (
               <SpotCard
                 spot={item.item}
-                userId={currentUser?.id ?? ''}
+                currentUserId={currentUser?.id}
                 onPress={() => handleSpotPress(item.item.id)}
               />
             );
           }
-          return <MapCard map={item.item} onPress={() => handleMapPress(item.item.id)} />;
+          return <MapCard map={item.item} currentUserId={currentUser?.id} onPress={() => handleMapPress(item.item.id)} />;
         }}
         showsVerticalScrollIndicator={false}
       />
@@ -129,12 +129,12 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
             return (
               <SpotCard
                 spot={item.item}
-                userId={currentUser?.id ?? ''}
+                currentUserId={currentUser?.id}
                 onPress={() => handleSpotPress(item.item.id)}
               />
             );
           }
-          return <MapCard map={item.item} onPress={() => handleMapPress(item.item.id)} />;
+          return <MapCard map={item.item} currentUserId={currentUser?.id} onPress={() => handleMapPress(item.item.id)} />;
         }}
         showsVerticalScrollIndicator={false}
       />
@@ -174,7 +174,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
           renderItem={({ item }) => (
             <SpotCard
               spot={item}
-              userId={currentUser?.id ?? ''}
+              currentUserId={currentUser?.id}
               onPress={() => handleSpotPress(item.id)}
             />
           )}
@@ -197,7 +197,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
           data={maps}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <MapCard map={item} onPress={() => handleMapPress(item.id)} />
+            <MapCard map={item} currentUserId={currentUser?.id} onPress={() => handleMapPress(item.id)} />
           )}
           showsVerticalScrollIndicator={false}
         />

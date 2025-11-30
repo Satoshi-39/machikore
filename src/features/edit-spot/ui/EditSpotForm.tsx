@@ -11,33 +11,59 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/spots';
+import type { Database } from '@/shared/types/supabase.generated';
+
+type ImageRow = Database['public']['Tables']['images']['Row'];
 
 interface EditSpotFormProps {
   spot: UserSpotWithMasterSpot;
+  existingImages?: ImageRow[];
   onSubmit: (data: {
     customName: string;
     description?: string;
     tags: string[];
+    newImages?: SelectedImage[];
+    deletedImageIds?: string[];
   }) => void;
   isLoading?: boolean;
 }
 
-export function EditSpotForm({ spot, onSubmit, isLoading = false }: EditSpotFormProps) {
+export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = false }: EditSpotFormProps) {
   const spotName = spot.custom_name || spot.master_spot?.name || '';
 
   const [customName, setCustomName] = useState(spotName);
   const [description, setDescription] = useState(spot.description || '');
   const [tags, setTags] = useState((spot.tags || []).join(', '));
 
+  // 画像関連
+  const [newImages, setNewImages] = useState<SelectedImage[]>([]);
+  const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
+
+  // 削除されていない既存画像
+  const displayedExistingImages = existingImages.filter(
+    (img) => !deletedImageIds.includes(img.id)
+  );
+
+  // 新しい画像を追加できる残り枚数
+  const maxNewImages = Math.max(0, 5 - displayedExistingImages.length);
+
+  const handleDeleteExistingImage = (imageId: string) => {
+    setDeletedImageIds([...deletedImageIds, imageId]);
+  };
+
   const handleSubmit = () => {
     onSubmit({
       customName: customName.trim(),
       description: description.trim() || undefined,
       tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+      newImages: newImages.length > 0 ? newImages : undefined,
+      deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
     });
   };
 
@@ -128,6 +154,53 @@ export function EditSpotForm({ spot, onSubmit, isLoading = false }: EditSpotForm
           />
           <Text className="text-xs text-gray-500 mt-1">
             カンマ区切りで入力してください
+          </Text>
+        </View>
+
+        {/* 写真 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-gray-800 mb-2">写真</Text>
+
+          {/* 既存の画像 */}
+          {displayedExistingImages.length > 0 && (
+            <View className="mb-3">
+              <Text className="text-xs text-gray-500 mb-2">登録済みの写真</Text>
+              <View className="flex-row flex-wrap gap-2">
+                {displayedExistingImages.map((image) => (
+                  <View key={image.id} className="relative">
+                    <Image
+                      source={{ uri: image.cloud_path || '' }}
+                      className="w-20 h-20 rounded-lg"
+                      resizeMode="cover"
+                    />
+                    <TouchableOpacity
+                      onPress={() => handleDeleteExistingImage(image.id)}
+                      className="absolute -top-2 -right-2 bg-red-500 rounded-full w-6 h-6 items-center justify-center"
+                    >
+                      <Ionicons name="close" size={16} color="white" />
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/* 新しい画像の追加 */}
+          {maxNewImages > 0 && (
+            <View>
+              {newImages.length > 0 && (
+                <Text className="text-xs text-gray-500 mb-2">新しく追加する写真</Text>
+              )}
+              <ImagePickerButton
+                images={newImages}
+                onImagesChange={setNewImages}
+                maxImages={maxNewImages}
+              />
+            </View>
+          )}
+
+          <Text className="text-xs text-gray-500 mt-2">
+            合計 {displayedExistingImages.length + newImages.length}/5枚
           </Text>
         </View>
 
