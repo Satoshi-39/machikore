@@ -182,6 +182,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             animationDuration={0}
           />
 
+          {/* 現在地マーカー（青い点） */}
+          <Mapbox.UserLocation
+            visible={true}
+            showsUserHeadingIndicator={true}
+            animated={true}
+          />
+
           {/* スポットマーカー表示 */}
           {spots.map((spot) => {
             if (!spot.master_spot) return null;

@@ -13,6 +13,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  Modal,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
@@ -21,6 +23,12 @@ import {
   isPlaceSearchResult,
 } from '@/features/search-places';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
+
+interface UploadProgress {
+  current: number;
+  total: number;
+  status: 'idle' | 'creating' | 'uploading' | 'done';
+}
 
 interface CreateSpotFormProps {
   placeData: SpotLocationInput; // Google Places検索結果 または 手動登録
@@ -31,9 +39,15 @@ interface CreateSpotFormProps {
     images: SelectedImage[];
   }) => void;
   isLoading?: boolean;
+  uploadProgress?: UploadProgress;
 }
 
-export function CreateSpotForm({ placeData, onSubmit, isLoading = false }: CreateSpotFormProps) {
+export function CreateSpotForm({
+  placeData,
+  onSubmit,
+  isLoading = false,
+  uploadProgress,
+}: CreateSpotFormProps) {
   // Google検索結果か手動登録かを判定
   const isGooglePlace = isPlaceSearchResult(placeData);
 
@@ -57,8 +71,41 @@ export function CreateSpotForm({ placeData, onSubmit, isLoading = false }: Creat
     });
   };
 
+  // ローディング表示のテキストを決定
+  const getLoadingText = () => {
+    if (!uploadProgress || uploadProgress.status === 'idle') {
+      return 'スポットを作成中...';
+    }
+    if (uploadProgress.status === 'uploading') {
+      return `画像をアップロード中... (${uploadProgress.current}/${uploadProgress.total})`;
+    }
+    return '完了処理中...';
+  };
+
   return (
     <ScrollView className="flex-1 bg-gray-50">
+      {/* ローディングオーバーレイ */}
+      <Modal visible={isLoading} transparent animationType="fade">
+        <View className="flex-1 bg-black/50 items-center justify-center">
+          <View className="bg-white rounded-2xl p-6 mx-8 items-center">
+            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            <Text className="text-base text-gray-700 mt-4 text-center">
+              {getLoadingText()}
+            </Text>
+            {uploadProgress && uploadProgress.status === 'uploading' && (
+              <View className="w-48 h-2 bg-gray-200 rounded-full mt-3 overflow-hidden">
+                <View
+                  className="h-full bg-primary rounded-full"
+                  style={{
+                    width: `${(uploadProgress.current / uploadProgress.total) * 100}%`,
+                  }}
+                />
+              </View>
+            )}
+          </View>
+        </View>
+      </Modal>
+
       <View className="p-4">
         {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">

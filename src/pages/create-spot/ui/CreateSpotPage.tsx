@@ -9,10 +9,17 @@ import { CreateSpotForm } from '@/features/create-spot';
 import { useSpotForm } from '../model';
 
 export function CreateSpotPage() {
-  const { placeData, handleSubmit, isLoading } = useSpotForm();
+  const { placeData, handleSubmit, isLoading, uploadProgress } = useSpotForm();
 
   // データが存在しない場合はnull（エラーハンドリングはhook内で実施済み）
   if (!placeData) return null;
 
-  return <CreateSpotForm placeData={placeData} onSubmit={handleSubmit} isLoading={isLoading} />;
+  return (
+    <CreateSpotForm
+      placeData={placeData}
+      onSubmit={handleSubmit}
+      isLoading={isLoading}
+      uploadProgress={uploadProgress}
+    />
+  );
 }

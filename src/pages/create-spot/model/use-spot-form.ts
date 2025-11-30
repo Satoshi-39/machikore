@@ -19,6 +19,12 @@ import { getNearbyMachi } from '@/shared/api/sqlite';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import type { SelectedImage } from '@/features/pick-images';
 
+export interface UploadProgress {
+  current: number;
+  total: number;
+  status: 'idle' | 'creating' | 'uploading' | 'done';
+}
+
 export function useSpotForm() {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
@@ -26,23 +32,34 @@ export function useSpotForm() {
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
-  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
+    current: 0,
+    total: 0,
+    status: 'idle',
+  });
+
+  const defaultProgress: UploadProgress = { current: 0, total: 0, status: 'idle' };
 
   // データが存在しない場合は静かにnullを返す
   // （画面遷移途中の再レンダリングでアラートが表示されないようにする）
   if (!selectedPlace) {
-    return { placeData: null, handleSubmit: () => {}, isLoading: false };
+    return { placeData: null, handleSubmit: () => {}, isLoading: false, uploadProgress: defaultProgress };
   }
 
   // Google Places検索結果でない場合はエラー
   if (!isPlaceSearchResult(selectedPlace)) {
-    return { placeData: null, handleSubmit: () => {}, isLoading: false };
+    return { placeData: null, handleSubmit: () => {}, isLoading: false, uploadProgress: defaultProgress };
   }
 
-  // 画像をアップロードするヘルパー関数（マップサムネイルと同じパターン）
+  // 画像をアップロードするヘルパー関数（進捗状況を更新しながら）
   const uploadSpotImages = async (spotId: string, images: SelectedImage[]) => {
     let uploaded = 0;
     let failed = 0;
+
+    setUploadProgress({ current: 0, total: images.length, status: 'uploading' });
+
+    // 最初のリクエスト前に少し待機（ネットワーク初期化のタイミング問題を回避）
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     for (let i = 0; i < images.length; i++) {
       const image = images[i]!;
@@ -78,8 +95,12 @@ export function useSpotForm() {
         console.error('画像処理エラー:', error);
         failed++;
       }
+
+      // 進捗を更新
+      setUploadProgress({ current: i + 1, total: images.length, status: 'uploading' });
     }
 
+    setUploadProgress({ current: images.length, total: images.length, status: 'done' });
     return { uploaded, failed };
   };
 
@@ -130,9 +151,8 @@ export function useSpotForm() {
       },
       {
         onSuccess: async (spotId) => {
-          // 画像がある場合はアップロード（マップサムネイルと同じパターン）
+          // 画像がある場合はアップロード
           if (data.images.length > 0) {
-            setIsUploading(true);
             try {
               const result = await uploadSpotImages(spotId, data.images);
               console.log(`📸 画像アップロード完了: ${result.uploaded}枚成功, ${result.failed}枚失敗`);
@@ -140,7 +160,6 @@ export function useSpotForm() {
               console.error('画像アップロードエラー:', error);
               // 画像アップロード失敗してもスポット自体は作成済み
             }
-            setIsUploading(false);
           }
 
           Alert.alert('登録完了', 'スポットを登録しました', [
@@ -165,6 +184,7 @@ export function useSpotForm() {
   return {
     placeData: selectedPlace,
     handleSubmit,
-    isLoading: isCreating || isUploading,
+    isLoading: isCreating || uploadProgress.status === 'uploading',
+    uploadProgress,
   };
 }

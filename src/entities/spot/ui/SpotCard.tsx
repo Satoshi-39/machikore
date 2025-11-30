@@ -5,8 +5,8 @@
  * ローカルSQLiteデータとSupabase JOINデータの両方に対応
  */
 
-import React, { useMemo } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { View, Text, Pressable, Image, Alert, Modal, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
@@ -67,7 +67,14 @@ export function SpotCard({
   const { data: isLiked = false } = useCheckUserLiked(userId, spot.id);
   const { mutate: toggleLike } = useToggleLike();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
-  const { data: images = [] } = useSpotImages(spot.id);
+  const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
+
+  // 画像拡大表示用のstate
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const screenWidth = Dimensions.get('window').width;
+
+  // デバッグログ
+  console.log(`[SpotCard] spot.id: ${spot.id}, images: ${images.length}, loading: ${imagesLoading}`);
 
   const avatarUri = user?.avatar_url ?? undefined;
   const isOwner = currentUserId && spot.user_id === currentUserId;
@@ -189,23 +196,110 @@ export function SpotCard({
         </Text>
       )}
 
-      {/* 画像 */}
+      {/* 画像（2x2グリッド、最大4枚表示） */}
       {images.length > 0 && (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          className="mb-2 -mx-1"
-        >
-          {images.map((image) => (
-            <Image
-              key={image.id}
-              source={{ uri: image.cloud_path || image.local_path || '' }}
-              className="w-24 h-24 rounded-lg mx-1"
-              resizeMode="cover"
-            />
-          ))}
-        </ScrollView>
+        <View className="mb-2">
+          <View className="flex-row flex-wrap" style={{ gap: 4 }}>
+            {images.slice(0, 4).map((image, index) => {
+              const isLastWithMore = index === 3 && images.length > 4;
+              const halfSize = (screenWidth - 32 - 4) / 2; // 2列用サイズ
+              const fullWidth = screenWidth - 32; // 1列用サイズ（横幅いっぱい）
+
+              // 3枚の場合の3枚目は横幅いっぱい
+              const isThirdOfThree = images.length === 3 && index === 2;
+              const imageWidth = isThirdOfThree ? fullWidth : halfSize;
+              const imageHeight = isThirdOfThree ? halfSize : halfSize; // 高さは同じ
+
+              return (
+                <Pressable
+                  key={image.id}
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    setSelectedImageIndex(index);
+                  }}
+                >
+                  <View style={{ width: imageWidth, height: imageHeight, position: 'relative' }}>
+                    <Image
+                      source={{ uri: image.cloud_path || image.local_path || '' }}
+                      style={{ width: imageWidth, height: imageHeight, borderRadius: 8 }}
+                      resizeMode="cover"
+                    />
+                    {isLastWithMore && (
+                      <View
+                        className="absolute inset-0 bg-black/50 rounded-lg items-center justify-center"
+                        style={{ borderRadius: 8 }}
+                      >
+                        <Text className="text-white text-lg font-bold">
+                          +{images.length - 4}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
       )}
+
+      {/* 画像拡大モーダル */}
+      <Modal
+        visible={selectedImageIndex !== null}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setSelectedImageIndex(null)}
+      >
+        <Pressable
+          className="flex-1 bg-black/90 items-center justify-center"
+          onPress={() => setSelectedImageIndex(null)}
+        >
+          {selectedImageIndex !== null && images[selectedImageIndex] && (
+            <>
+              <Image
+                source={{ uri: images[selectedImageIndex].cloud_path || images[selectedImageIndex].local_path || '' }}
+                style={{ width: screenWidth, height: screenWidth }}
+                resizeMode="contain"
+              />
+              {/* 閉じるボタン */}
+              <Pressable
+                onPress={() => setSelectedImageIndex(null)}
+                className="absolute top-12 right-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
+              >
+                <Ionicons name="close" size={24} color="white" />
+              </Pressable>
+              {/* 画像カウンター */}
+              <View className="absolute bottom-12 bg-black/50 px-4 py-2 rounded-full">
+                <Text className="text-white text-sm">
+                  {selectedImageIndex + 1} / {images.length}
+                </Text>
+              </View>
+              {/* 前へ/次へボタン */}
+              {selectedImageIndex > 0 && (
+                <Pressable
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    setSelectedImageIndex(selectedImageIndex - 1);
+                  }}
+                  className="absolute left-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
+                >
+                  <Ionicons name="chevron-back" size={24} color="white" />
+                </Pressable>
+              )}
+              {selectedImageIndex < images.length - 1 && (
+                <Pressable
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    setSelectedImageIndex(selectedImageIndex + 1);
+                  }}
+                  className="absolute right-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
+                >
+                  <Ionicons name="chevron-forward" size={24} color="white" />
+                </Pressable>
+              )}
+            </>
+          )}
+        </Pressable>
+      </Modal>
 
       {/* 住所または街情報 */}
       {(address || machiName) && (
