@@ -16,7 +16,8 @@ import { AsyncBoundary } from '@/shared/ui';
 export function SpotFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
-  const { data: spots, isLoading, error, refetch, isRefetching } = useFeedSpots();
+  // currentUserId を渡していいね状態も含めて取得
+  const { data: spots, isLoading, error, refetch, isRefetching } = useFeedSpots(currentUser?.id);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
 
   // スポットタップ時: そのスポットが所属するマップページに遷移し、該当スポットにフォーカス
@@ -50,7 +51,6 @@ export function SpotFeed() {
           renderItem={({ item }) => (
             <SpotCard
               spot={item}
-              userId={currentUser?.id ?? ''}
               currentUserId={currentUser?.id}
               onPress={() => handleSpotPress(item.map_id, item.id)}
               onUserPress={handleUserPress}

@@ -68,9 +68,10 @@ export interface MasterSpotBasicInfo {
 // ===============================
 
 /**
- * SpotWithDetails - スポット + マスタースポット + ユーザー情報
+ * SpotWithDetails - スポット + マスタースポット + ユーザー情報 + いいね状態
  *
  * spots JOIN master_spots JOIN users の結果
+ * is_liked は現在のユーザーがいいねしているかを示す
  */
 export interface SpotWithDetails {
   id: string;
@@ -89,4 +90,6 @@ export interface SpotWithDetails {
   updated_at: string;
   master_spot: MasterSpotBasicInfo | null;
   user: UserBasicInfo | null;
+  /** 現在のユーザーがこのスポットにいいねしているか */
+  is_liked?: boolean;
 }

@@ -17,6 +17,7 @@ import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -52,8 +53,15 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
   ) => {
     const mapViewRef = useRef<Mapbox.MapView>(null);
     const cameraRef = useRef<Mapbox.Camera>(null);
-    const { data: spots = [] } = useSpots(mapId ?? '');
-    const [selectedSpot, setSelectedSpot] = useState<SpotWithDetails | null>(null);
+    // currentUserId を渡していいね状態も含めて取得
+    const { data: spots = [] } = useSpots(mapId ?? '', currentUserId);
+    // selectedSpotId を管理し、selectedSpot は spots から導出
+    // これによりキャッシュの楽観的更新が自動的に反映される
+    const [selectedSpotId, setSelectedSpotId] = useState<string | null>(null);
+    const selectedSpot = useMemo(
+      () => spots.find((s) => s.id === selectedSpotId) ?? null,
+      [spots, selectedSpotId]
+    );
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
 
@@ -85,7 +93,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // 選択状態を管理
     const handleSpotSelect = (spot: SpotWithDetails | null) => {
-      setSelectedSpot(spot);
+      setSelectedSpotId(spot?.id ?? null);
     };
 
     // スナップ変更を親に通知して、ローカルstateも更新
@@ -101,7 +109,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット
     useEffect(() => {
-      setSelectedSpot(null);
+      setSelectedSpotId(null);
       hasInitialCameraMoved.current = false;
     }, [mapId]);
 
@@ -118,7 +126,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         hasInitialCameraMoved.current = true;
         setTimeout(() => {
           moveCameraToSingleSpot(spot);
-          setSelectedSpot(spot);
+          setSelectedSpotId(spot.id);
         }, 100);
         setJumpToSpotId(null);
       } else {

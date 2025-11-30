@@ -1,5 +1,7 @@
 /**
  * カスタムマップ上で選択されたスポットの詳細情報カード
+ *
+ * いいね状態は spot.is_liked を使用（取得時にJOINで取得）
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
@@ -9,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
+import { useSpotImages, useDeleteSpot, useToggleSpotLike } from '@/entities/user-spot/api';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
 interface SpotDetailCardProps {
@@ -24,7 +26,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
   const isOwner = currentUserId && spot.user_id === currentUserId;
+
+  // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
+  const isLiked = spot.is_liked ?? false;
 
   // SpotWithDetailsから表示用データを抽出
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
@@ -33,13 +39,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const longitude = spot.master_spot?.longitude ?? 0;
 
   // スポットの画像を取得
-  const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
-
-  // デバッグログ
-  console.log(`[SpotDetailCard] spot.id: ${spot.id}, images: ${images.length}, loading: ${imagesLoading}`);
-  if (images.length > 0) {
-    console.log(`[SpotDetailCard] 画像URL:`, images.map(img => img.cloud_path));
-  }
+  const { data: images = [] } = useSpotImages(spot.id);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
@@ -71,6 +71,12 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     // 直接onCloseを呼ぶのではなく、BottomSheetをアニメーションで閉じる
     bottomSheetRef.current?.close();
   }, []);
+
+  // いいねトグル
+  const handleLikePress = useCallback(() => {
+    if (!currentUserId || isTogglingLike) return;
+    toggleLike({ userId: currentUserId, spotId: spot.id });
+  }, [currentUserId, spot.id, toggleLike, isTogglingLike]);
 
   // 削除確認ダイアログ
   const handleDelete = useCallback(() => {
@@ -198,7 +204,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
         )}
 
-        {/* 統計情報（将来実装予定） */}
+        {/* 統計情報とアクション */}
         <View className="flex-row items-center justify-around pt-3 border-t border-gray-200 mb-2">
           <View className="items-center">
             <View className="flex-row items-center">
@@ -210,15 +216,24 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Text className="text-xs text-gray-500">画像</Text>
           </View>
 
-          <View className="items-center">
+          {/* いいねボタン */}
+          <Pressable
+            className="items-center"
+            onPress={handleLikePress}
+            disabled={!currentUserId || isTogglingLike}
+          >
             <View className="flex-row items-center">
-              <Ionicons name="heart-outline" size={18} color={colors.text.secondary} />
+              <Ionicons
+                name={isLiked ? 'heart' : 'heart-outline'}
+                size={18}
+                color={isLiked ? '#EF4444' : colors.text.secondary}
+              />
               <Text className="text-lg font-bold text-gray-900 ml-1">
                 {spot.likes_count}
               </Text>
             </View>
             <Text className="text-xs text-gray-500">いいね</Text>
-          </View>
+          </Pressable>
 
           <View className="items-center">
             <View className="flex-row items-center">
@@ -229,13 +244,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </View>
             <Text className="text-xs text-gray-500">コメント</Text>
           </View>
-        </View>
-
-        {/* アクションボタン（将来実装予定） */}
-        <View className="mt-2 pt-3 border-t border-gray-200">
-          <Text className="text-xs text-gray-500 text-center">
-            画像追加、いいね、コメント機能は今後実装予定です
-          </Text>
         </View>
       </BottomSheetScrollView>
     </BottomSheet>

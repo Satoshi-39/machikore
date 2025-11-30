@@ -3,6 +3,8 @@
  *
  * スポットを表示するカード型コンポーネント
  * ローカルSQLiteデータとSupabase JOINデータの両方に対応
+ *
+ * いいね状態は spot.is_liked を使用（取得時にJOINで取得）
  */
 
 import React, { useMemo, useState } from 'react';
@@ -13,7 +15,7 @@ import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
-import { useToggleLike, useCheckUserLiked, useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
+import { useToggleSpotLike, useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useUser } from '@/entities/user';
 
 // Supabase JOINで取得済みのユーザー情報
@@ -38,8 +40,7 @@ interface EmbeddedMasterSpot {
 interface SpotCardProps {
   // ローカルSQLiteデータまたはSupabase SpotWithDetailsデータ
   spot: SpotWithMasterSpot | SpotWithDetails;
-  userId: UUID;
-  currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用）
+  currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用、いいね機能にも使用）
   machiName?: string;
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
@@ -51,7 +52,6 @@ interface SpotCardProps {
 
 export function SpotCard({
   spot,
-  userId,
   currentUserId,
   machiName,
   onPress,
@@ -64,8 +64,9 @@ export function SpotCard({
   const { data: fetchedUser } = useUser(embeddedUser ? null : spot.user_id);
   const user = embeddedUser || fetchedUser;
 
-  const { data: isLiked = false } = useCheckUserLiked(userId, spot.id);
-  const { mutate: toggleLike } = useToggleLike();
+  // いいね状態は spot.is_liked を使用（SpotWithDetails の場合）
+  const isLiked = 'is_liked' in spot ? (spot.is_liked ?? false) : false;
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
 
@@ -113,7 +114,8 @@ export function SpotCard({
 
   const handleLikePress = (e: any) => {
     e.stopPropagation();
-    toggleLike({ userId, spotId: spot.id });
+    if (!currentUserId || isTogglingLike) return;
+    toggleLike({ userId: currentUserId, spotId: spot.id });
   };
 
   const handleDelete = () => {
@@ -316,11 +318,15 @@ export function SpotCard({
         {/* いいね・コメント数 */}
         <View className="flex-row items-center gap-4">
           {/* いいね */}
-          <Pressable onPress={handleLikePress} className="flex-row items-center">
+          <Pressable
+            onPress={handleLikePress}
+            className="flex-row items-center"
+            disabled={!currentUserId || isTogglingLike}
+          >
             <Ionicons
               name={isLiked ? 'heart' : 'heart-outline'}
               size={18}
-              color={isLiked ? colors.danger : colors.text.secondary}
+              color={isLiked ? '#EF4444' : colors.text.secondary}
             />
             <Text className="text-sm text-gray-600 ml-1">
               {spot.likes_count}

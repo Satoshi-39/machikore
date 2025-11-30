@@ -266,7 +266,15 @@ export async function getSpotById(spotId: string): Promise<UserSpotWithMasterSpo
 // 公開スポット取得
 // ===============================
 
-export async function getPublicSpots(limit: number = 50, offset: number = 0) {
+/**
+ * 公開スポット一覧を取得
+ * @param currentUserId - 現在のユーザーID（いいね状態を取得するため）
+ */
+export async function getPublicSpots(
+  limit: number = 50,
+  offset: number = 0,
+  currentUserId?: string | null
+) {
   const { data, error } = await supabase
     .from('user_spots')
     .select(`
@@ -280,6 +288,10 @@ export async function getPublicSpots(limit: number = 50, offset: number = 0) {
       ),
       maps!inner (
         is_public
+      ),
+      likes (
+        id,
+        user_id
       )
     `)
     .eq('maps.is_public', true)
@@ -291,24 +303,32 @@ export async function getPublicSpots(limit: number = 50, offset: number = 0) {
     throw error;
   }
 
-  return (data || []).map((spot: any) => ({
-    id: spot.id,
-    user_id: spot.user_id,
-    map_id: spot.map_id,
-    master_spot_id: spot.master_spot_id,
-    machi_id: spot.machi_id,
-    custom_name: spot.custom_name,
-    description: spot.description,
-    tags: spot.tags,
-    images_count: spot.images_count,
-    likes_count: spot.likes_count,
-    comments_count: spot.comments_count,
-    order_index: spot.order_index,
-    created_at: spot.created_at,
-    updated_at: spot.updated_at,
-    master_spot: spot.master_spots || null,
-    user: spot.users || null,
-  }));
+  return (data || []).map((spot: any) => {
+    // 現在のユーザーがいいねしているかチェック
+    const isLiked = currentUserId
+      ? (spot.likes || []).some((like: any) => like.user_id === currentUserId)
+      : false;
+
+    return {
+      id: spot.id,
+      user_id: spot.user_id,
+      map_id: spot.map_id,
+      master_spot_id: spot.master_spot_id,
+      machi_id: spot.machi_id,
+      custom_name: spot.custom_name,
+      description: spot.description,
+      tags: spot.tags,
+      images_count: spot.images_count,
+      likes_count: spot.likes_count,
+      comments_count: spot.comments_count,
+      order_index: spot.order_index,
+      created_at: spot.created_at,
+      updated_at: spot.updated_at,
+      master_spot: spot.master_spots || null,
+      user: spot.users || null,
+      is_liked: isLiked,
+    };
+  });
 }
 
 // ===============================

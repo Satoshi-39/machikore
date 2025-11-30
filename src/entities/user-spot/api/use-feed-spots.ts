@@ -12,11 +12,12 @@ import type { SpotWithDetails } from '@/shared/types';
 
 /**
  * フィード用スポットを取得（Supabaseから）
+ * @param currentUserId - 現在のユーザーID（いいね状態を取得するため）
  */
-export function useFeedSpots(limit: number = 50) {
+export function useFeedSpots(currentUserId?: string | null, limit: number = 50) {
   return useQuery<SpotWithDetails[], Error>({
-    queryKey: [...QUERY_KEYS.spots, 'feed', limit],
-    queryFn: () => getPublicSpots(limit),
+    queryKey: [...QUERY_KEYS.spots, 'feed', currentUserId, limit],
+    queryFn: () => getPublicSpots(limit, 0, currentUserId),
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });
 }
