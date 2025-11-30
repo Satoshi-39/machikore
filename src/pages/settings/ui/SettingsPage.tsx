@@ -7,6 +7,7 @@
 import React from 'react';
 import { View, Text, ScrollView, Pressable, Alert } from 'react-native';
 import { useSignOut } from '@/features/auth';
+import { PageHeader } from '@/shared/ui';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
@@ -39,6 +40,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
 
   return (
     <View className="flex-1 bg-gray-50">
+      <PageHeader title="設定" />
       <ScrollView className="flex-1">
         {/* プレースホルダーセクション */}
         <View className="bg-white mt-4 px-4 py-6">

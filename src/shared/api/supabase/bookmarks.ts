@@ -9,12 +9,15 @@ import { supabase } from './client';
 // 型定義
 // ===============================
 
+export type BookmarkFolderType = 'spots' | 'maps';
+
 export interface BookmarkFolder {
   id: string;
   user_id: string;
   name: string;
   color: string | null;
   order_index: number;
+  folder_type: BookmarkFolderType;
   created_at: string;
   updated_at: string;
 }
@@ -68,13 +71,22 @@ export interface BookmarkWithDetails extends Bookmark {
 
 /**
  * ユーザーのブックマークフォルダ一覧を取得
+ * @param folderType 'spots' | 'maps' でフィルタ（省略時は全件）
  */
-export async function getBookmarkFolders(userId: string): Promise<BookmarkFolder[]> {
-  const { data, error } = await supabase
+export async function getBookmarkFolders(
+  userId: string,
+  folderType?: BookmarkFolderType
+): Promise<BookmarkFolder[]> {
+  let query = supabase
     .from('bookmark_folders')
     .select('*')
-    .eq('user_id', userId)
-    .order('order_index', { ascending: true });
+    .eq('user_id', userId);
+
+  if (folderType) {
+    query = query.eq('folder_type', folderType);
+  }
+
+  const { data, error } = await query.order('order_index', { ascending: true });
 
   if (error) {
     console.error('[getBookmarkFolders] Error:', error);
@@ -90,13 +102,15 @@ export async function getBookmarkFolders(userId: string): Promise<BookmarkFolder
 export async function createBookmarkFolder(
   userId: string,
   name: string,
+  folderType: BookmarkFolderType,
   color?: string
 ): Promise<BookmarkFolder> {
-  // 最大のorder_indexを取得
+  // 同じタイプのフォルダ内で最大のorder_indexを取得
   const { data: existing } = await supabase
     .from('bookmark_folders')
     .select('order_index')
     .eq('user_id', userId)
+    .eq('folder_type', folderType)
     .order('order_index', { ascending: false })
     .limit(1);
 
@@ -108,6 +122,7 @@ export async function createBookmarkFolder(
     .insert({
       user_id: userId,
       name,
+      folder_type: folderType,
       color: color || null,
       order_index: nextOrderIndex,
     })

@@ -9,6 +9,7 @@ import { useCurrentUserId } from '@/entities/user';
 import { LikeTabFilter, type LikeTabMode } from '@/features/filter-like-tab';
 import { LikeSpotList, LikeMapList } from '@/widgets/like-item-list';
 import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
+import { PageHeader } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
 
 export function LikesPage() {
@@ -31,6 +32,7 @@ export function LikesPage() {
 
   return (
     <View className="flex-1 bg-gray-50">
+      <PageHeader title="いいね" />
       {/* タブフィルター */}
       <LikeTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />
 

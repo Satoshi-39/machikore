@@ -9,7 +9,7 @@ import { ScrollView, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 
-export type QuickSearchCategory = 'restaurant' | 'cafe' | 'tourism' | 'shopping' | 'station';
+export type QuickSearchCategory = 'visited' | 'not_visited' | 'tourism' | 'shopping' | 'station';
 
 const CATEGORY_OPTIONS: {
   id: QuickSearchCategory;
@@ -17,8 +17,8 @@ const CATEGORY_OPTIONS: {
   icon: keyof typeof Ionicons.glyphMap;
   searchQuery: string;
 }[] = [
-  { id: 'restaurant', label: 'レストラン', icon: 'restaurant', searchQuery: 'レストラン' },
-  { id: 'cafe', label: 'カフェ', icon: 'cafe', searchQuery: 'カフェ' },
+  { id: 'visited', label: '訪問済み', icon: 'checkmark-circle', searchQuery: '訪問済み' },
+  { id: 'not_visited', label: '未訪問', icon: 'ellipse-outline', searchQuery: '未訪問' },
   { id: 'tourism', label: '観光', icon: 'camera', searchQuery: '観光' },
   { id: 'shopping', label: 'ショッピング', icon: 'bag', searchQuery: 'ショッピング' },
   { id: 'station', label: '駅', icon: 'train', searchQuery: '駅' },

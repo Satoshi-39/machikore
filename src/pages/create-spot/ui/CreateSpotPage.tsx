@@ -5,7 +5,9 @@
  */
 
 import React from 'react';
+import { View } from 'react-native';
 import { CreateSpotForm } from '@/features/create-spot';
+import { PageHeader } from '@/shared/ui';
 import { useSpotForm } from '../model';
 
 export function CreateSpotPage() {
@@ -15,11 +17,14 @@ export function CreateSpotPage() {
   if (!placeData) return null;
 
   return (
-    <CreateSpotForm
-      placeData={placeData}
-      onSubmit={handleSubmit}
-      isLoading={isLoading}
-      uploadProgress={uploadProgress}
-    />
+    <View className="flex-1 bg-gray-50">
+      <PageHeader title="スポット登録" />
+      <CreateSpotForm
+        placeData={placeData}
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+        uploadProgress={uploadProgress}
+      />
+    </View>
   );
 }

@@ -7,7 +7,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { EditSpotForm } from '@/features/edit-spot';
-import { SingleDataBoundary } from '@/shared/ui';
+import { SingleDataBoundary, PageHeader } from '@/shared/ui';
 import { useEditSpotForm } from '../model';
 
 export function EditSpotPage() {
@@ -15,6 +15,7 @@ export function EditSpotPage() {
 
   return (
     <View className="flex-1 bg-gray-50">
+      <PageHeader title="スポットを編集" />
       <SingleDataBoundary
         isLoading={isLoading}
         error={null}

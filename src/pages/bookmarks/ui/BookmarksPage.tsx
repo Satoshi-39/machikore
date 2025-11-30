@@ -13,6 +13,7 @@ import { CreateFolderModal } from '@/features/create-bookmark-folder';
 import { BookmarkFolderList, BookmarkItemList } from '@/widgets/bookmark-folder-list';
 import { useCurrentUserId } from '@/entities/user';
 import { useBookmarkFolders, useBookmarks } from '@/entities/bookmark';
+import { PageHeader } from '@/shared/ui';
 
 export function BookmarksPage() {
   const userId = useCurrentUserId();
@@ -33,14 +34,18 @@ export function BookmarksPage() {
 
   if (!userId) {
     return (
-      <View className="flex-1 bg-gray-50 items-center justify-center">
-        <Text className="text-gray-500">ログインしてください</Text>
+      <View className="flex-1 bg-gray-50">
+        <PageHeader title="ブックマーク" />
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-gray-500">ログインしてください</Text>
+        </View>
       </View>
     );
   }
 
   return (
     <View className="flex-1 bg-gray-50">
+      <PageHeader title="ブックマーク" />
       {/* スポット/マップ タブ */}
       <BookmarkTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />
 
@@ -69,6 +74,7 @@ export function BookmarksPage() {
       <CreateFolderModal
         visible={isCreateFolderModalVisible}
         userId={userId}
+        folderType={activeTab}
         onClose={() => setIsCreateFolderModalVisible(false)}
       />
     </View>

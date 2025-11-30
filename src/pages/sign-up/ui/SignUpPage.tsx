@@ -7,6 +7,7 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { SignUpForm, OAuthButtons } from '@/features/auth';
+import { PageHeader } from '@/shared/ui';
 
 interface SignUpPageProps {
   onSuccess?: () => void;
@@ -19,7 +20,9 @@ interface SignUpPageProps {
  */
 export function SignUpPage({ onSuccess, onNavigateToSignIn }: SignUpPageProps) {
   return (
-    <ScrollView className="flex-1 bg-white" contentContainerStyle={{ paddingVertical: 48 }}>
+    <View className="flex-1 bg-white">
+      <PageHeader title="アカウント作成" />
+      <ScrollView className="flex-1" contentContainerStyle={{ paddingVertical: 24 }}>
       {/* OAuth認証ボタン */}
       <OAuthButtons onSuccess={onSuccess} />
 
@@ -46,6 +49,7 @@ export function SignUpPage({ onSuccess, onNavigateToSignIn }: SignUpPageProps) {
           </TouchableOpacity>
         </View>
       )}
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }

@@ -8,19 +8,17 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 import { MyPageProfile } from '@/widgets/mypage-profile';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
 import { UserProfileTabFilter, type UserProfileTabMode } from '@/features/filter-user-profile-tab';
 import { MapsTab, BlogTab } from '@/widgets/mypage-tab-content';
 import { useCurrentUserId } from '@/entities/user';
+import { PageHeader } from '@/shared/ui';
 
 export function UserProfilePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const router = useRouter();
   const currentUserId = useCurrentUserId();
   const isOwner = currentUserId === id;
 
@@ -28,14 +26,8 @@ export function UserProfilePage() {
   const [tabMode, setTabMode] = useState<MyPageTabMode | UserProfileTabMode>('maps');
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50" edges={['top']}>
-      {/* カスタムヘッダー */}
-      <View className="flex-row items-center px-4 py-3 bg-white border-b border-gray-100">
-        <Pressable onPress={() => router.back()} className="mr-3">
-          <Ionicons name="chevron-back" size={28} color="#007AFF" />
-        </Pressable>
-        <Text className="text-lg font-semibold text-gray-900">プロフィール</Text>
-      </View>
+    <View className="flex-1 bg-gray-50">
+      <PageHeader title="プロフィール" />
 
       {/* プロフィールセクション */}
       <MyPageProfile userId={id} />
@@ -58,6 +50,6 @@ export function UserProfilePage() {
         {tabMode === 'maps' && <MapsTab userId={id} />}
         {tabMode === 'blog' && <BlogTab userId={id} />}
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

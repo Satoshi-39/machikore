@@ -29,7 +29,8 @@ export function BookmarkFolderList({
   onFolderSelect,
   onCreateFolder,
 }: BookmarkFolderListProps) {
-  const { data: folders = [] } = useBookmarkFolders(userId);
+  // activeTabに応じたフォルダのみ取得
+  const { data: folders = [] } = useBookmarkFolders(userId, activeTab);
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
   const { mutate: deleteFolder } = useDeleteBookmarkFolder();
 
@@ -102,9 +103,9 @@ export function BookmarkFolderList({
         >
           <View className="w-10 h-10 rounded-lg bg-gray-100 items-center justify-center mr-3">
             <Ionicons
-              name={isUncategorized ? 'folder-outline' : 'folder'}
+              name="folder"
               size={24}
-              color={isUncategorized ? colors.text.secondary : colors.primary.DEFAULT}
+              color={colors.primary.DEFAULT}
             />
           </View>
           <View className="flex-1">

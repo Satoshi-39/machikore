@@ -17,3 +17,4 @@ export { ActionSheet } from './action-sheet';
 export type { ActionSheetItem } from './action-sheet';
 export { PopupMenu } from './popup-menu';
 export type { PopupMenuItem } from './popup-menu';
+export { PageHeader } from './page-header';

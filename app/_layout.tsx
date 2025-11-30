@@ -56,36 +56,28 @@ export default function RootLayout() {
             name="settings"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: '設定',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="schedule"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'スケジュール',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="create-map"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'マップ作成',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="create-spot"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'スポット登録',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
@@ -99,18 +91,14 @@ export default function RootLayout() {
             name="auth/sign-in"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'ログイン',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="auth/sign-up"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'アカウント作成',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
@@ -148,36 +136,28 @@ export default function RootLayout() {
             name="edit-spot"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'スポットを編集',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="edit-map"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'マップを編集',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="bookmarks"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'ブックマーク',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="likes"
             options={{
               presentation: 'card',
-              headerShown: true,
-              title: 'いいね',
-              headerBackTitle: '戻る',
+              headerShown: false,
             }}
           />
           <Stack.Screen

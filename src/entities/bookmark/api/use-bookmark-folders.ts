@@ -9,19 +9,24 @@ import {
   updateBookmarkFolder,
   deleteBookmarkFolder,
   type BookmarkFolder,
+  type BookmarkFolderType,
 } from '@/shared/api/supabase/bookmarks';
 
 const QUERY_KEY = ['bookmark-folders'];
 
 /**
  * ユーザーのブックマークフォルダ一覧を取得
+ * @param folderType 'spots' | 'maps' でフィルタ（省略時は全件）
  */
-export function useBookmarkFolders(userId: string | null | undefined) {
+export function useBookmarkFolders(
+  userId: string | null | undefined,
+  folderType?: BookmarkFolderType
+) {
   return useQuery<BookmarkFolder[], Error>({
-    queryKey: [...QUERY_KEY, userId],
+    queryKey: [...QUERY_KEY, userId, folderType],
     queryFn: () => {
       if (!userId) return [];
-      return getBookmarkFolders(userId);
+      return getBookmarkFolders(userId, folderType);
     },
     enabled: !!userId,
   });
@@ -37,14 +42,16 @@ export function useCreateBookmarkFolder() {
     mutationFn: ({
       userId,
       name,
+      folderType,
       color,
     }: {
       userId: string;
       name: string;
+      folderType: BookmarkFolderType;
       color?: string;
-    }) => createBookmarkFolder(userId, name, color),
-    onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: [...QUERY_KEY, userId] });
+    }) => createBookmarkFolder(userId, name, folderType, color),
+    onSuccess: (_, { userId, folderType }) => {
+      queryClient.invalidateQueries({ queryKey: [...QUERY_KEY, userId, folderType] });
     },
   });
 }

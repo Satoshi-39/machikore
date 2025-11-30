@@ -7,7 +7,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { EditMapForm } from '@/features/edit-map';
-import { SingleDataBoundary } from '@/shared/ui';
+import { SingleDataBoundary, PageHeader } from '@/shared/ui';
 import { useEditMapForm } from '../model';
 
 export function EditMapPage() {
@@ -15,6 +15,7 @@ export function EditMapPage() {
 
   return (
     <View className="flex-1 bg-gray-50">
+      <PageHeader title="マップを編集" />
       <SingleDataBoundary
         isLoading={isLoading}
         error={null}

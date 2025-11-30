@@ -5,21 +5,23 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, Pressable, TextInput, Modal } from 'react-native';
 import { useCreateBookmarkFolder } from '@/entities/bookmark';
+import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
 
 interface CreateFolderModalProps {
   visible: boolean;
   userId: string;
+  folderType: BookmarkFolderType;
   onClose: () => void;
 }
 
-export function CreateFolderModal({ visible, userId, onClose }: CreateFolderModalProps) {
+export function CreateFolderModal({ visible, userId, folderType, onClose }: CreateFolderModalProps) {
   const [folderName, setFolderName] = useState('');
   const { mutate: createFolder, isPending } = useCreateBookmarkFolder();
 
   const handleCreate = useCallback(() => {
     if (!folderName.trim()) return;
     createFolder(
-      { userId, name: folderName.trim() },
+      { userId, name: folderName.trim(), folderType },
       {
         onSuccess: () => {
           setFolderName('');
@@ -27,7 +29,7 @@ export function CreateFolderModal({ visible, userId, onClose }: CreateFolderModa
         },
       }
     );
-  }, [userId, folderName, createFolder, onClose]);
+  }, [userId, folderName, folderType, createFolder, onClose]);
 
   const handleClose = useCallback(() => {
     setFolderName('');
