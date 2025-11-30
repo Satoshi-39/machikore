@@ -12,7 +12,7 @@ import {
   useSelectedPlaceStore,
   isPlaceSearchResult,
 } from '@/features/search-places';
-import { useCreateSpot } from '@/entities/spot';
+import { useCreateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore } from '@/entities/map';
 import { getNearbyMachi } from '@/shared/api/sqlite';

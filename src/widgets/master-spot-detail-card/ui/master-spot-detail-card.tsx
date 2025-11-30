@@ -3,12 +3,15 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Pressable, Linking } from 'react-native';
+import { View, Text, Pressable, Linking, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
-import type { MasterSpotDisplay } from '@/shared/types/database.types';
+import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
+import { useSpotsByMasterSpot } from '@/entities/user-spot';
+import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 
 interface MasterSpotDetailCardProps {
   spot: MasterSpotDisplay;
@@ -19,6 +22,10 @@ interface MasterSpotDetailCardProps {
 export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
+  const router = useRouter();
+
+  // このマスタースポットに紐づくユーザー投稿を取得
+  const { data: userSpots = [], isLoading: isLoadingUserSpots } = useSpotsByMasterSpot(spot.id);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
@@ -159,14 +166,119 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
           )}
         </View>
 
-        {/* Google Place ID */}
-        {spot.google_place_id && (
-          <View className="mt-3 pt-3 border-t border-gray-200">
-            <Text className="text-xs text-gray-400">
-              Google Place ID: {spot.google_place_id}
+        {/* ユーザー投稿一覧 */}
+        <View className="mt-4 pt-4 border-t border-gray-200">
+          <View className="flex-row items-center mb-3">
+            <Ionicons name="people-outline" size={18} color={colors.text.secondary} />
+            <Text className="text-base font-semibold text-gray-900 ml-2">
+              みんなの投稿 ({spot.user_spots_count}件)
             </Text>
           </View>
-        )}
+
+          {isLoadingUserSpots ? (
+            <View className="py-4 items-center">
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            </View>
+          ) : userSpots.length === 0 ? (
+            <View className="py-4 items-center">
+              <Text className="text-sm text-gray-500">
+                まだ投稿がありません
+              </Text>
+            </View>
+          ) : (
+            <View className="gap-3">
+              {userSpots.map((userSpot) => (
+                <Pressable
+                  key={userSpot.id}
+                  className="bg-gray-50 rounded-lg p-3 active:bg-gray-100"
+                  onPress={() => {
+                    // マップのスポット詳細に遷移
+                    onClose();
+                    router.push(`/(tabs)/map?id=${userSpot.map_id}&spotId=${userSpot.id}`);
+                  }}
+                >
+                  {/* ユーザー情報とマップ名 */}
+                  <View className="flex-row items-center mb-2">
+                    {userSpot.user?.avatar_url ? (
+                      <Image
+                        source={{ uri: userSpot.user.avatar_url }}
+                        className="w-8 h-8 rounded-full"
+                      />
+                    ) : (
+                      <View className="w-8 h-8 rounded-full bg-gray-300 items-center justify-center">
+                        <Ionicons name="person" size={16} color={colors.gray[500]} />
+                      </View>
+                    )}
+                    <View className="ml-2 flex-1">
+                      <View className="flex-row items-center">
+                        <Text className="text-sm font-medium text-gray-900">
+                          {userSpot.user?.display_name || userSpot.user?.username || 'ユーザー'}
+                        </Text>
+                        {userSpot.map && (
+                          <View className="flex-row items-center ml-2">
+                            <Ionicons name="map-outline" size={12} color={colors.primary.DEFAULT} />
+                            <Text className="text-xs text-primary-600 ml-1" numberOfLines={1}>
+                              {userSpot.map.name}
+                            </Text>
+                          </View>
+                        )}
+                      </View>
+                      <Text className="text-xs text-gray-500">
+                        {getRelativeSpotTime(userSpot.created_at)}
+                      </Text>
+                    </View>
+                    <Ionicons name="chevron-forward" size={16} color={colors.text.secondary} />
+                  </View>
+
+                  {/* カスタム名 */}
+                  {userSpot.custom_name && (
+                    <Text className="text-sm font-medium text-gray-800 mb-1">
+                      {userSpot.custom_name}
+                    </Text>
+                  )}
+
+                  {/* 説明 */}
+                  {userSpot.description && (
+                    <Text className="text-sm text-gray-700" numberOfLines={3}>
+                      {userSpot.description}
+                    </Text>
+                  )}
+
+                  {/* 画像 */}
+                  {userSpot.images && userSpot.images.length > 0 && (
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      className="mt-2 -mx-3"
+                      contentContainerStyle={{ paddingHorizontal: 12 }}
+                    >
+                      {userSpot.images.map((image) => (
+                        <Image
+                          key={image.id}
+                          source={{ uri: image.cloud_path || '' }}
+                          className="w-24 h-24 rounded-lg mr-2"
+                          resizeMode="cover"
+                        />
+                      ))}
+                    </ScrollView>
+                  )}
+
+                  {/* いいね・コメント数 */}
+                  <View className="flex-row items-center mt-2 gap-3">
+                    <View className="flex-row items-center">
+                      <Ionicons name="heart-outline" size={14} color={colors.text.secondary} />
+                      <Text className="text-xs text-gray-500 ml-1">{userSpot.likes_count}</Text>
+                    </View>
+                    <View className="flex-row items-center">
+                      <Ionicons name="chatbubble-outline" size={14} color={colors.text.secondary} />
+                      <Text className="text-xs text-gray-500 ml-1">{userSpot.comments_count}</Text>
+                    </View>
+                  </View>
+                </Pressable>
+              ))}
+            </View>
+          )}
+        </View>
       </BottomSheetScrollView>
     </BottomSheet>
   );

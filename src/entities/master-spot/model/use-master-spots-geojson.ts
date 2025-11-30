@@ -12,7 +12,7 @@ interface MasterSpotForGeoJson {
   name: string;
   latitude: number;
   longitude: number;
-  google_types: string | null;
+  google_types: string[] | null;
 }
 
 interface MasterSpotFeatureProperties {

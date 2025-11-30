@@ -147,8 +147,6 @@ export interface MasterSpotRow {
 export type MasterSpotInsert = Partial<MasterSpotRow> & Pick<MasterSpotRow, 'id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
 export type MasterSpotUpdate = Partial<Omit<MasterSpotRow, 'id' | 'created_at'>>;
 
-// マスタースポットの表示用（sync関連フィールドを除外）
-export type MasterSpotDisplay = Omit<MasterSpotRow, 'created_at' | 'updated_at' | 'synced_at' | 'is_synced'>;
 
 // Spots (ユーザースポット - master_spotsへの参照 + ユーザーカスタマイズ)
 export interface SpotRow {

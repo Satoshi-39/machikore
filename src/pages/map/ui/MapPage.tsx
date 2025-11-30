@@ -30,7 +30,7 @@ import {
 import { ActionSheet, type ActionSheetItem } from '@/shared/ui';
 
 export function MapPage() {
-  const { id, addSpot } = useLocalSearchParams<{ id?: string; addSpot?: string }>();
+  const { id, addSpot, spotId } = useLocalSearchParams<{ id?: string; addSpot?: string; spotId?: string }>();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const user = useUserStore((state) => state.user);
@@ -57,6 +57,9 @@ export function MapPage() {
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
+  // スポットジャンプ用のstoreアクション
+  const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
+
   // URLクエリパラメータからマップIDを読み取り、グローバルステートに設定
   useEffect(() => {
     if (id) {
@@ -70,6 +73,13 @@ export function MapPage() {
       setIsSearchFocused(true);
     }
   }, [addSpot]);
+
+  // spotIdパラメータがある場合はスポットにジャンプ
+  useEffect(() => {
+    if (spotId) {
+      setJumpToSpotId(spotId);
+    }
+  }, [spotId, setJumpToSpotId]);
 
   // URLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
   const isUserMap = selectedMapId != null || id != null;

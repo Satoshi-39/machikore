@@ -6,15 +6,25 @@ export type SpotCategory = 'food' | 'shopping' | 'tourism' | 'transit' | 'other'
 
 /**
  * Google Places APIのtypesからカテゴリを判定
+ * @param googleTypes - 配列またはJSON文字列
  */
-export function determineSpotCategory(googleTypes: string | null): SpotCategory {
+export function determineSpotCategory(googleTypes: string[] | string | null): SpotCategory {
   if (!googleTypes) return 'other';
 
-  try {
-    const types = JSON.parse(googleTypes) as string[];
-    if (types.length === 0) return 'other';
+  let types: string[];
+  if (typeof googleTypes === 'string') {
+    try {
+      types = JSON.parse(googleTypes) as string[];
+    } catch {
+      return 'other';
+    }
+  } else {
+    types = googleTypes;
+  }
 
-    const typeString = types.join(',').toLowerCase();
+  if (types.length === 0) return 'other';
+
+  const typeString = types.join(',').toLowerCase();
 
     // 飲食店系
     if (
@@ -56,10 +66,7 @@ export function determineSpotCategory(googleTypes: string | null): SpotCategory 
       return 'transit';
     }
 
-    return 'other';
-  } catch {
-    return 'other';
-  }
+  return 'other';
 }
 
 /**

@@ -8,8 +8,8 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { useSpots } from '@/entities/spot/api';
-import { getRelativeSpotTime } from '@/entities/spot/model';
+import { useSpots } from '@/entities/user-spot/api';
+import { getRelativeSpotTime } from '@/entities/user-spot/model';
 import type { UUID } from '@/shared/types';
 
 interface MachiSpotListProps {

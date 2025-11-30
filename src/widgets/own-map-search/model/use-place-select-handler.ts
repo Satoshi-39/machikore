@@ -8,7 +8,7 @@
 
 import { useCallback } from 'react';
 import { Alert } from 'react-native';
-import { useSpots } from '@/entities/spot';
+import { useSpots } from '@/entities/user-spot';
 import type { PlaceSearchResult } from '@/features/search-places';
 
 interface UsePlaceSelectHandlerProps {

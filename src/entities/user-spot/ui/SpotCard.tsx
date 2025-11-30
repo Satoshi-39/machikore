@@ -12,8 +12,8 @@ import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
-import { getRelativeSpotTime } from '@/entities/spot/model/helpers';
-import { useToggleLike, useCheckUserLiked, useSpotImages, useDeleteSpot } from '@/entities/spot/api';
+import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
+import { useToggleLike, useCheckUserLiked, useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useUser } from '@/entities/user';
 
 // Supabase JOINで取得済みのユーザー情報

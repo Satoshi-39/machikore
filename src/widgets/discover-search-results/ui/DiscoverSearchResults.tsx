@@ -11,7 +11,7 @@ import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, ScrollView }
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useSpotSearch, SpotCard } from '@/entities/spot';
+import { useSpotSearch, SpotCard } from '@/entities/user-spot';
 import { useMapSearch, MapCard } from '@/entities/map';
 import { useUserSearch, UserListItem, useUserStore } from '@/entities/user';
 

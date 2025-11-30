@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import { useSpotImages, useDeleteSpot } from '@/entities/spot/api';
+import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
 interface SpotDetailCardProps {
@@ -33,7 +33,13 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const longitude = spot.master_spot?.longitude ?? 0;
 
   // スポットの画像を取得
-  const { data: images = [] } = useSpotImages(spot.id);
+  const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
+
+  // デバッグログ
+  console.log(`[SpotDetailCard] spot.id: ${spot.id}, images: ${images.length}, loading: ${imagesLoading}`);
+  if (images.length > 0) {
+    console.log(`[SpotDetailCard] 画像URL:`, images.map(img => img.cloud_path));
+  }
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）

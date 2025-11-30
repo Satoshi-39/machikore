@@ -310,3 +310,179 @@ export async function getPublicSpots(limit: number = 50, offset: number = 0) {
     user: spot.users || null,
   }));
 }
+
+// ===============================
+// マスタースポット取得（デフォルトマップ用）
+// ===============================
+
+export interface MasterSpotDisplay {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  google_place_id: string | null;
+  google_formatted_address: string | null;
+  google_types: string[] | null;
+  google_phone_number: string | null;
+  google_website_uri: string | null;
+  google_rating: number | null;
+  google_user_rating_count: number | null;
+  user_spots_count: number;
+}
+
+/**
+ * ビューポート範囲内のマスタースポットを取得（Supabase版）
+ * ユーザー投稿があるマスタースポットのみ返す
+ */
+export async function getMasterSpotsByBounds(
+  minLat: number,
+  maxLat: number,
+  minLng: number,
+  maxLng: number,
+  limit: number = 500
+): Promise<MasterSpotDisplay[]> {
+  const { data, error } = await supabase
+    .from('master_spots')
+    .select(`
+      id,
+      name,
+      latitude,
+      longitude,
+      google_place_id,
+      google_formatted_address,
+      google_types,
+      google_phone_number,
+      google_website_uri,
+      google_rating,
+      google_user_rating_count,
+      user_spots!inner (id)
+    `)
+    .gte('latitude', minLat)
+    .lte('latitude', maxLat)
+    .gte('longitude', minLng)
+    .lte('longitude', maxLng)
+    .limit(limit);
+
+  if (error) {
+    console.error('[getMasterSpotsByBounds] Error:', error);
+    throw error;
+  }
+
+  return (data || []).map((spot: any) => ({
+    id: spot.id,
+    name: spot.name,
+    latitude: spot.latitude,
+    longitude: spot.longitude,
+    google_place_id: spot.google_place_id,
+    google_formatted_address: spot.google_formatted_address,
+    google_types: spot.google_types,
+    google_phone_number: spot.google_phone_number,
+    google_website_uri: spot.google_website_uri,
+    google_rating: spot.google_rating,
+    google_user_rating_count: spot.google_user_rating_count,
+    user_spots_count: spot.user_spots?.length || 0,
+  }));
+}
+
+// ===============================
+// master_spot_idからユーザー投稿を取得
+// ===============================
+
+/**
+ * ユーザー投稿の画像情報
+ */
+export interface UserSpotImage {
+  id: string;
+  cloud_path: string | null;
+  order_index: number;
+}
+
+/**
+ * ユーザー投稿（画像付き）
+ */
+export interface UserSpotWithImages {
+  id: string;
+  user_id: string;
+  map_id: string;
+  master_spot_id: string;
+  machi_id: string | null;
+  custom_name: string | null;
+  description: string | null;
+  tags: string[] | null;
+  images_count: number;
+  likes_count: number;
+  comments_count: number;
+  order_index: number;
+  created_at: string;
+  updated_at: string;
+  master_spot: any;
+  user: {
+    id: string;
+    username: string | null;
+    display_name: string | null;
+    avatar_url: string | null;
+  } | null;
+  map: {
+    id: string;
+    name: string;
+  } | null;
+  images: UserSpotImage[];
+}
+
+/**
+ * master_spot_idに紐づく公開ユーザー投稿を取得（画像付き）
+ */
+export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: number = 20): Promise<UserSpotWithImages[]> {
+  const { data, error } = await supabase
+    .from('user_spots')
+    .select(`
+      *,
+      master_spots (*),
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      ),
+      maps!inner (
+        id,
+        name,
+        is_public
+      ),
+      images (
+        id,
+        cloud_path,
+        order_index
+      )
+    `)
+    .eq('master_spot_id', masterSpotId)
+    .eq('maps.is_public', true)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error('Failed to fetch user spots by master_spot_id:', error);
+    throw error;
+  }
+
+  return (data || []).map((spot: any) => ({
+    id: spot.id,
+    user_id: spot.user_id,
+    map_id: spot.map_id,
+    master_spot_id: spot.master_spot_id,
+    machi_id: spot.machi_id,
+    custom_name: spot.custom_name,
+    description: spot.description,
+    tags: spot.tags,
+    images_count: spot.images_count,
+    likes_count: spot.likes_count,
+    comments_count: spot.comments_count,
+    order_index: spot.order_index,
+    created_at: spot.created_at,
+    updated_at: spot.updated_at,
+    master_spot: spot.master_spots || null,
+    user: spot.users || null,
+    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    images: (spot.images || []).sort((a: any, b: any) => a.order_index - b.order_index),
+  }));
+}

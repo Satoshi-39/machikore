@@ -11,7 +11,7 @@ import { SingleDataBoundary } from '@/shared/ui';
 import { useEditSpotForm } from '../model';
 
 export function EditSpotPage() {
-  const { spot, isLoading, isUpdating, handleSubmit } = useEditSpotForm();
+  const { spot, existingImages, isLoading, isUpdating, handleSubmit } = useEditSpotForm();
 
   return (
     <View className="flex-1 bg-gray-50">
@@ -25,6 +25,7 @@ export function EditSpotPage() {
         {(spotData) => (
           <EditSpotForm
             spot={spotData}
+            existingImages={existingImages}
             onSubmit={handleSubmit}
             isLoading={isUpdating}
           />

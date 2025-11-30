@@ -1,9 +1,10 @@
 /**
  * ビューポート範囲内のマスタースポットを取得するhook
+ * Supabaseから全ユーザーのマスタースポットを取得
  */
 
 import { useQuery } from '@tanstack/react-query';
-import { getMasterSpotsByBounds } from '@/shared/api/sqlite/spots';
+import { getMasterSpotsByBounds } from '@/shared/api/supabase/spots';
 
 interface Bounds {
   minLat: number;
@@ -27,5 +28,9 @@ export function useMasterSpotsByBounds(bounds: Bounds | null) {
       );
     },
     enabled: !!bounds,
+    // ちらつき防止: 新しいデータ取得中も前のデータを表示し続ける
+    placeholderData: (previousData) => previousData,
+    // キャッシュを5分間保持
+    staleTime: 5 * 60 * 1000,
   });
 }

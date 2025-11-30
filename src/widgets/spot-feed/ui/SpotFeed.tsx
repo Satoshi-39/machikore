@@ -8,7 +8,7 @@
 import React, { useCallback } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useFeedSpots, SpotCard } from '@/entities/spot';
+import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { AsyncBoundary } from '@/shared/ui';

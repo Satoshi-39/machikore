@@ -4,7 +4,7 @@
  * FSDの原則：Widget層は複合的なUIコンポーネント
  */
 
-import { useSpots } from '@/entities/spot';
+import { useSpots } from '@/entities/user-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
