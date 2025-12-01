@@ -87,22 +87,22 @@ function getNotificationMessage(notification: NotificationWithDetails): string {
 
 interface NotificationItemProps {
   notification: NotificationWithDetails;
-  onPress: () => void;
+  onAvatarPress: () => void;
+  onContentPress: () => void;
 }
 
-function NotificationItem({ notification, onPress }: NotificationItemProps) {
+function NotificationItem({ notification, onAvatarPress, onContentPress }: NotificationItemProps) {
   const config = NOTIFICATION_TYPE_CONFIG[notification.type];
   const message = getNotificationMessage(notification);
 
   return (
-    <Pressable
-      onPress={onPress}
+    <View
       className={`flex-row p-4 border-b border-gray-100 ${
         !notification.is_read ? 'bg-blue-50' : 'bg-white'
       }`}
     >
-      {/* アイコンまたはアバター */}
-      <View className="mr-3">
+      {/* アイコンまたはアバター（タップでユーザープロフィールへ） */}
+      <Pressable onPress={onAvatarPress} className="mr-3">
         {notification.actor?.avatar_url ? (
           <View className="relative">
             <Image
@@ -125,10 +125,10 @@ function NotificationItem({ notification, onPress }: NotificationItemProps) {
             <Ionicons name={config.icon} size={24} color="white" />
           </View>
         )}
-      </View>
+      </Pressable>
 
-      {/* 通知内容 */}
-      <View className="flex-1">
+      {/* 通知内容（タップでスポット/マップ詳細へ） */}
+      <Pressable onPress={onContentPress} className="flex-1">
         <Text
           className={`text-sm ${
             !notification.is_read ? 'font-semibold text-gray-900' : 'text-gray-700'
@@ -149,13 +149,13 @@ function NotificationItem({ notification, onPress }: NotificationItemProps) {
         <Text className="text-xs text-gray-400 mt-1">
           {getRelativeTime(notification.created_at)}
         </Text>
-      </View>
+      </Pressable>
 
       {/* 未読インジケーター */}
       {!notification.is_read && (
         <View className="w-2 h-2 rounded-full bg-blue-500 ml-2 self-center" />
       )}
-    </Pressable>
+    </View>
   );
 }
 
@@ -166,20 +166,38 @@ export function NotificationList() {
   const { mutate: markAsRead } = useMarkNotificationAsRead();
   const { mutate: markAllAsRead } = useMarkAllNotificationsAsRead();
 
-  const handleNotificationPress = useCallback(
+  // アバタータップ: いいねした人のプロフィールへ遷移
+  const handleAvatarPress = useCallback(
     (notification: NotificationWithDetails) => {
       // 既読にする
       if (!notification.is_read && user?.id) {
         markAsRead({ notificationId: notification.id, userId: user.id });
       }
 
-      // 遷移先を決定
+      // actorのプロフィールへ遷移
+      if (notification.actor_id) {
+        router.push(`/(tabs)/notifications/users/${notification.actor_id}`);
+      }
+    },
+    [router, markAsRead, user?.id]
+  );
+
+  // コンテンツタップ: いいねされたスポット/マップへ遷移
+  const handleContentPress = useCallback(
+    (notification: NotificationWithDetails) => {
+      // 既読にする
+      if (!notification.is_read && user?.id) {
+        markAsRead({ notificationId: notification.id, userId: user.id });
+      }
+
+      // 遷移先を決定（notificationsタブ内のスタックナビゲーション）
+      // フォロー通知の場合はコンテンツタップでもユーザープロフィールへ
       if (notification.type === 'follow' && notification.actor_id) {
-        router.push(`/users/${notification.actor_id}`);
+        router.push(`/(tabs)/notifications/users/${notification.actor_id}`);
       } else if (notification.spot_id) {
-        router.push(`/spots/${notification.spot_id}`);
+        router.push(`/(tabs)/notifications/spots/${notification.spot_id}`);
       } else if (notification.map_id) {
-        router.push(`/maps/${notification.map_id}`);
+        router.push(`/(tabs)/notifications/maps/${notification.map_id}`);
       }
     },
     [router, markAsRead, user?.id]
@@ -231,7 +249,8 @@ export function NotificationList() {
         renderItem={({ item }) => (
           <NotificationItem
             notification={item}
-            onPress={() => handleNotificationPress(item)}
+            onAvatarPress={() => handleAvatarPress(item)}
+            onContentPress={() => handleContentPress(item)}
           />
         )}
         refreshControl={

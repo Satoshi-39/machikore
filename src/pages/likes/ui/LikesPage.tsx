@@ -27,6 +27,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
   const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
   const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
 
   const { data: likedSpots = [], isLoading: spotsLoading } = useUserLikedSpots(userId);
   const { data: likedMaps = [], isLoading: mapsLoading } = useUserLikedMaps(userId);
@@ -39,10 +40,12 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       router.push(`/(tabs)/map/spots/${spot.id}`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/spots/${spot.id}`);
+    } else if (isInNotificationsTab) {
+      router.push(`/(tabs)/notifications/spots/${spot.id}`);
     } else {
       router.push(`/spots/${spot.id}`);
     }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
 
   // マップタップ: マップ詳細画面に遷移（戻るでいいね一覧に戻れる）
   const handleMapPress = useCallback((mapId: string) => {
@@ -52,10 +55,12 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       router.push(`/(tabs)/map/${mapId}`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/maps/${mapId}`);
+    } else if (isInNotificationsTab) {
+      router.push(`/(tabs)/notifications/maps/${mapId}`);
     } else {
       router.push(`/maps/${mapId}`);
     }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
 
   return (
     <View className="flex-1 bg-gray-50">

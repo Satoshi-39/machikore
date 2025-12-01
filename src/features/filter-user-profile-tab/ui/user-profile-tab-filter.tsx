@@ -32,6 +32,7 @@ export function UserProfileTabFilter({
   const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
   const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
   const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
 
   const handleLikesPress = () => {
     if (isInDiscoverTab) {
@@ -40,6 +41,8 @@ export function UserProfileTabFilter({
       router.push(`/(tabs)/map/users/${userId}/likes`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/users/${userId}/likes`);
+    } else if (isInNotificationsTab) {
+      router.push(`/(tabs)/notifications/users/${userId}/likes`);
     } else {
       router.push(`/users/${userId}/likes`);
     }
