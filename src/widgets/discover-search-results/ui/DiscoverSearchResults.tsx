@@ -56,15 +56,18 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
     ((resultTab === 'latest' || resultTab === 'trending') && (spotsLoading || mapsLoading));
 
   const handleSpotPress = (spotId: string) => {
-    router.push(`/spots/${spotId}`);
+    // 発見タブ内スタックに遷移（タブバーを維持）
+    router.push(`/(tabs)/discover/spots/${spotId}`);
   };
 
   const handleMapPress = (mapId: string) => {
-    router.push(`/maps/${mapId}`);
+    // 発見タブ内スタックに遷移（タブバーを維持）
+    router.push(`/(tabs)/discover/maps/${mapId}`);
   };
 
   const handleUserPress = (userId: string) => {
-    router.push(`/users/${userId}`);
+    // 発見タブ内スタックに遷移（タブバーを維持）
+    router.push(`/(tabs)/discover/users/${userId}`);
   };
 
   // 最新タブ: スポットとマップを混合して新着順

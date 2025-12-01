@@ -2,8 +2,9 @@
  * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
-import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo, useCallback } from 'react';
 import { View } from 'react-native';
+import { useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Mapbox from '@rnmapbox/maps';
 import { useMachi, useMachiGeoJson } from '@/entities/machi';
@@ -55,6 +56,21 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [selectedSpot, setSelectedSpot] = useState<MasterSpotDisplay | null>(null);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const cameraRef = useRef<Mapbox.Camera>(null);
+
+    // 画面がフォーカスされた時に選択状態をリセット
+    // スタックナビゲーションで戻ってきた時に、詳細カードが最大化されたままにならないようにする
+    useFocusEffect(
+      useCallback(() => {
+        // 選択状態をリセット
+        setSelectedMachi(null);
+        setSelectedCity(null);
+        setSelectedSpot(null);
+        // snapIndexもリセット
+        setMachiDetailSnapIndex(1);
+        setCityDetailSnapIndex(1);
+        setSpotDetailSnapIndex(1);
+      }, [])
+    );
 
     // ビューポート範囲管理
     const { bounds, handleCameraChanged } = useBoundsManagement({ currentLocation });

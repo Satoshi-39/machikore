@@ -4,7 +4,7 @@
  * いいね状態は spot.is_liked を使用（取得時にJOINで取得）
  */
 
-import React, { useRef, useMemo, useCallback, useEffect } from 'react';
+import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
 import { View, Text, Pressable, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -13,7 +13,8 @@ import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
-import { useCheckSpotBookmarked, useToggleSpotBookmark } from '@/entities/bookmark';
+import { useCheckSpotBookmarked, useBookmarkSpot, useUnbookmarkSpot } from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
 interface SpotDetailCardProps {
@@ -30,7 +31,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
   const { data: isBookmarked = false } = useCheckSpotBookmarked(currentUserId, spot.id);
-  const { mutate: toggleBookmark, isPending: isTogglingBookmark } = useToggleSpotBookmark();
+  const { mutate: addBookmark, isPending: isAddingBookmark } = useBookmarkSpot();
+  const { mutate: removeBookmark, isPending: isRemovingBookmark } = useUnbookmarkSpot();
+  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
@@ -82,11 +85,31 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     toggleLike({ userId: currentUserId, spotId: spot.id });
   }, [currentUserId, spot.id, toggleLike, isTogglingLike]);
 
-  // ブックマークトグル
+  // ブックマークボタン押下 → フォルダ選択モーダルを開く
   const handleBookmarkPress = useCallback(() => {
-    if (!currentUserId || isTogglingBookmark) return;
-    toggleBookmark({ userId: currentUserId, spotId: spot.id });
-  }, [currentUserId, spot.id, toggleBookmark, isTogglingBookmark]);
+    console.log('📚 [SpotDetailCard] handleBookmarkPress called, currentUserId:', currentUserId);
+    if (!currentUserId) {
+      console.log('📚 [SpotDetailCard] No currentUserId, returning');
+      return;
+    }
+    console.log('📚 [SpotDetailCard] Opening folder modal');
+    setIsFolderModalVisible(true);
+  }, [currentUserId]);
+
+  // フォルダ選択完了時のハンドラー
+  const handleFolderSelect = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+
+    if (isBookmarked && folderId === null) {
+      // 既にブックマーク済みで、「保存を解除」が選択された場合
+      removeBookmark({ userId: currentUserId, spotId: spot.id });
+    } else if (!isBookmarked) {
+      // 未ブックマークの場合、選択したフォルダに追加
+      addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
+    }
+    // 既にブックマーク済みでフォルダが選択された場合は、フォルダ移動が必要
+    // TODO: 既存ブックマークのフォルダ変更機能
+  }, [currentUserId, spot.id, isBookmarked, addBookmark, removeBookmark]);
 
   // 削除確認ダイアログ
   const handleDelete = useCallback(() => {
@@ -125,6 +148,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   ], [spot.id, onEdit, handleDelete]);
 
   return (
+    <>
     <BottomSheet
       ref={bottomSheetRef}
       index={1}
@@ -259,7 +283,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <Pressable
             className="items-center"
             onPress={handleBookmarkPress}
-            disabled={!currentUserId || isTogglingBookmark}
+            disabled={!currentUserId || isAddingBookmark || isRemovingBookmark}
           >
             <View className="flex-row items-center">
               <Ionicons
@@ -273,5 +297,18 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         </View>
       </BottomSheetScrollView>
     </BottomSheet>
+
+    {/* フォルダ選択モーダル（BottomSheetの外に配置） */}
+    {currentUserId && (
+      <SelectFolderModal
+        visible={isFolderModalVisible}
+        userId={currentUserId}
+        folderType="spots"
+        onClose={() => setIsFolderModalVisible(false)}
+        onSelect={handleFolderSelect}
+        isBookmarked={isBookmarked}
+      />
+    )}
+    </>
   );
 }

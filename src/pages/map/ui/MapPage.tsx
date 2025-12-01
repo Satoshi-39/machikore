@@ -6,10 +6,10 @@
  * URLクエリパラメータ (?id=xxx) でマップ指定可能（共有用）
  */
 
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { View, Share } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter, useSegments } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { DefaultMapView } from '@/widgets/default-map-view';
@@ -27,7 +27,6 @@ import {
   useSelectedPlaceStore,
   type PlaceSearchResult,
 } from '@/features/search-places';
-import { ActionSheet, type ActionSheetItem } from '@/shared/ui';
 
 interface MapPageProps {
   /** propsで渡されるマップID（URLパラメータより優先） */
@@ -43,13 +42,21 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const effectiveMapId = propMapId ?? id;
   const effectiveSpotId = propSpotId ?? spotId;
   const router = useRouter();
+  const segments = useSegments();
   const insets = useSafeAreaInsets();
+
+  // タブ内かどうかを判定（segments: ['(tabs)', 'discover' or 'map' or 'mypage', ...]）
+  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
+  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
+  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
   const user = useUserStore((state) => state.user);
-  const selectedMapId = useMapStore((state) => state.selectedMapId);
+  // スポット作成時などでマップIDを共有するためにsetSelectedMapIdは維持
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
 
-  // propMapIdがある場合はそれを使い、なければグローバルステートを使う
-  const currentMapId = propMapId ?? selectedMapId;
+  // propMapIdがある場合はそれを使う
+  // マップタブのindex（propMapIdなし）ではデフォルトマップを表示（currentMapId = null）
+  // グローバルステートのselectedMapIdは参照しない（タブ間の状態共有を避ける）
+  const currentMapId = propMapId ?? null;
   const { data: selectedMap, isLoading: isMapLoading } = useMap(currentMapId);
   // UserMap型にはuser情報が含まれているので、直接使用
   const mapOwner = selectedMap?.user ?? null;
@@ -65,9 +72,6 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -96,8 +100,10 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
     }
   }, [effectiveSpotId, setJumpToSpotId]);
 
-  // propsまたはURLパラメータのidもチェック（storeが更新される前でもユーザーマップとして扱う）
-  const isUserMap = currentMapId != null || effectiveMapId != null;
+  // propMapIdがある場合のみユーザーマップとして扱う
+  // effectiveMapIdはURLパラメータも含むため、スタックナビゲーションで戻った時に
+  // 前のURLパラメータが残る可能性があるので使用しない
+  const isUserMap = propMapId != null;
 
   // マップ読み込み中かどうか（ユーザーマップの場合のみ）
   const isLoadingUserMap = isUserMap && isMapLoading;
@@ -124,7 +130,12 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
     if (propMapId) {
       setSelectedMapId(null);
     }
-    router.back();
+    // 戻れる場合は戻る、戻れない場合は dismiss でスタックを閉じる
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.dismiss();
+    }
   };
 
   // 検索結果タップ時の処理（新規スポットのみ）
@@ -137,12 +148,35 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
 
   const handleMapSelect = (mapId: string) => {
     setSelectedMapId(mapId);
-    router.push(`/(tabs)/map?id=${mapId}`);
+    // タブ内の場合は各タブ内のルートを使用
+    if (isInDiscoverTab) {
+      router.replace(`/(tabs)/discover/maps/${mapId}`);
+    } else if (isInMapTab) {
+      router.replace(`/(tabs)/map/${mapId}`);
+    } else if (isInMypageTab) {
+      router.replace(`/(tabs)/mypage/maps/${mapId}`);
+    } else if (propMapId) {
+      // propsでmapIdが渡されている場合（/maps/[id]からアクセス）は
+      // 現在の画面を置き換えて、ナビゲーション履歴を維持
+      router.replace(`/maps/${mapId}`);
+    } else {
+      // フォールバック: マップタブ内に遷移
+      router.push(`/(tabs)/map/${mapId}`);
+    }
   };
 
   const handleUserPress = () => {
     if (selectedMap?.user_id) {
-      router.push(`/users/${selectedMap.user_id}`);
+      // タブ内の場合は各タブ内のルートを使用
+      if (isInDiscoverTab) {
+        router.push(`/(tabs)/discover/users/${selectedMap.user_id}`);
+      } else if (isInMapTab) {
+        router.push(`/(tabs)/map/users/${selectedMap.user_id}`);
+      } else if (isInMypageTab) {
+        router.push(`/(tabs)/mypage/users/${selectedMap.user_id}`);
+      } else {
+        router.push(`/users/${selectedMap.user_id}`);
+      }
     }
   };
 
@@ -158,59 +192,6 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
     router.push(`/edit-spot?id=${spotId}`);
   };
 
-  // 三点リーダメニューを開く
-  const handleMenuPress = () => {
-    setIsMenuOpen(true);
-  };
-
-  // いいね処理
-  const handleLikePress = () => {
-    setIsLiked(!isLiked);
-    // TODO: API呼び出し
-  };
-
-  // ブックマーク処理
-  const handleBookmarkPress = () => {
-    setIsBookmarked(!isBookmarked);
-    // TODO: API呼び出し
-  };
-
-  // 共有処理
-  const handleSharePress = async () => {
-    try {
-      await Share.share({
-        message: `${selectedMap?.name || 'マップ'}をチェック！`,
-        url: `https://machikore.app/map/${currentMapId}`,
-      });
-    } catch (error) {
-      console.error('Share error:', error);
-    }
-  };
-
-  // アクションシートのメニュー項目
-  const menuItems: ActionSheetItem[] = useMemo(() => [
-    {
-      id: 'like',
-      label: isLiked ? 'いいね済み' : 'いいね',
-      icon: isLiked ? 'heart' : 'heart-outline',
-      iconColor: isLiked ? '#EF4444' : undefined,
-      onPress: handleLikePress,
-    },
-    {
-      id: 'bookmark',
-      label: isBookmarked ? '保存済み' : '保存',
-      icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
-      iconColor: isBookmarked ? '#F59E0B' : undefined,
-      onPress: handleBookmarkPress,
-    },
-    {
-      id: 'share',
-      label: '共有',
-      icon: 'share-outline',
-      onPress: handleSharePress,
-    },
-  ], [isLiked, isBookmarked]);
-
   return (
     <SafeAreaView className="flex-1 bg-white" edges={isUserMap ? ['top'] : []}>
       {/* ヘッダー（ユーザーマップの時のみ表示、検索中は非表示） */}
@@ -218,7 +199,9 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
         <MapHeader
           isUserMap={isUserMap}
           isLoading={isLoadingUserMap}
+          mapId={currentMapId}
           mapTitle={selectedMap?.name}
+          userId={user?.id}
           userName={mapOwner?.display_name || undefined}
           userAvatarUrl={mapOwner?.avatar_url || undefined}
           userMaps={ownerMaps}
@@ -226,17 +209,8 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
           onMapSelect={handleMapSelect}
           onUserPress={handleUserPress}
           onSearchPress={handleSearchFocus}
-          onMenuPress={handleMenuPress}
         />
       )}
-
-      {/* マップアクションシート */}
-      <ActionSheet
-        visible={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        items={menuItems}
-        title={selectedMap?.name}
-      />
 
       {/* マップ表示（常にレンダリング） */}
       <View className="flex-1">

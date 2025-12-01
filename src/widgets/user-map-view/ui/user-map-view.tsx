@@ -225,12 +225,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
               // カード縮小版（15%）の時は16%の位置に、それ以外は48px
               bottom: spotDetailSnapIndex === 0 && selectedSpot ? '16%' : 48,
             }}
+            pointerEvents={(spotDetailSnapIndex === 0 && selectedSpot) || !selectedSpot ? 'auto' : 'none'}
           >
             <View
               style={{
                 opacity: (spotDetailSnapIndex === 0 && selectedSpot) || !selectedSpot ? 1 : 0,
               }}
-              pointerEvents={(spotDetailSnapIndex === 0 && selectedSpot) || !selectedSpot ? 'auto' : 'none'}
             >
               <LocationButton
                 onPress={handleLocationPress}

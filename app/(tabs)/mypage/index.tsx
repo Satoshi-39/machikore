@@ -1,5 +1,5 @@
 /**
- * マイページタブ
+ * マイページタブ - インデックス
  *
  * 認証状態に応じて適切なページを表示
  * - 匿名ユーザー: AuthInvitationPage（サインイン/サインアップ誘導）
@@ -11,7 +11,7 @@ import { useRouter } from 'expo-router';
 import { MyPage, AuthInvitationPage } from '@/pages/mypage';
 import { useUserStore } from '@/entities/user';
 
-export default function MyPageTab() {
+export default function MyPageIndex() {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
 

@@ -55,9 +55,9 @@ export function MyPageTabFilter({
             </Pressable>
           );
         })}
-        {/* いいねボタン（別ページへ遷移） */}
+        {/* いいねボタン（マイページタブ内スタック） */}
         <Pressable
-          onPress={() => router.push('/likes')}
+          onPress={() => router.push('/(tabs)/mypage/likes')}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons
@@ -66,9 +66,9 @@ export function MyPageTabFilter({
             color={colors.text.secondary}
           />
         </Pressable>
-        {/* ブックマークボタン（別ページへ遷移） */}
+        {/* ブックマークボタン（マイページタブ内スタック） */}
         <Pressable
-          onPress={() => router.push('/bookmarks')}
+          onPress={() => router.push('/(tabs)/mypage/bookmarks')}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons

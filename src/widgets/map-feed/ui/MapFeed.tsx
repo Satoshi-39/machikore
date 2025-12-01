@@ -18,11 +18,13 @@ export function MapFeed() {
   const { data: maps, isLoading, error, refetch, isRefetching } = useFeedMaps();
 
   const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/maps/${mapId}`);
+    // 発見タブ内スタックに遷移（タブバーを維持）
+    router.push(`/(tabs)/discover/maps/${mapId}`);
   }, [router]);
 
   const handleUserPress = useCallback((userId: string) => {
-    router.push(`/users/${userId}`);
+    // 発見タブ内スタックに遷移（タブバーを維持）
+    router.push(`/(tabs)/discover/users/${userId}`);
   }, [router]);
 
   const handleEditMap = useCallback((mapId: string) => {

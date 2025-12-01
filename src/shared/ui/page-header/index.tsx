@@ -36,8 +36,11 @@ export function PageHeader({
   const handleBack = () => {
     if (onBack) {
       onBack();
-    } else {
+    } else if (router.canGoBack()) {
       router.back();
+    } else {
+      // 戻れない場合はスタックを閉じる（タブ内スタックの場合）
+      router.dismiss();
     }
   };
 

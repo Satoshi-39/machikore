@@ -18,14 +18,14 @@ export function SpotFeed() {
   // currentUserId を渡していいね状態も含めて取得
   const { data: spots, isLoading, error, refetch, isRefetching } = useFeedSpots(currentUser?.id);
 
-  // スポットタップ時: スポット詳細ページに遷移
+  // スポットタップ時: スポット詳細ページに遷移（発見タブ内スタック）
   const handleSpotPress = useCallback((_mapId: string, spotId: string) => {
-    router.push(`/spots/${spotId}`);
+    router.push(`/(tabs)/discover/spots/${spotId}`);
   }, [router]);
 
-  // ユーザーアイコンタップ時: ユーザープロフィールページに遷移
+  // ユーザーアイコンタップ時: ユーザープロフィールページに遷移（発見タブ内スタック）
   const handleUserPress = useCallback((userId: string) => {
-    router.push(`/users/${userId}`);
+    router.push(`/(tabs)/discover/users/${userId}`);
   }, [router]);
 
   // スポット編集

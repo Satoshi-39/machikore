@@ -7,7 +7,7 @@
 import React, { useMemo } from 'react';
 import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 import { colors } from '@/shared/config';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
 import { AsyncBoundary, PopupMenu, type PopupMenuItem } from '@/shared/ui';
@@ -108,11 +108,26 @@ function MapCard({ map, onPress, onEdit, onDelete }: MapCardProps) {
 
 export function MapsTab({ userId }: MapsTabProps) {
   const router = useRouter();
+  const segments = useSegments();
   const { data: maps, isLoading, error } = useUserMaps(userId);
   const { mutate: deleteMap } = useDeleteMap();
 
+  // タブ内かどうかを判定
+  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
+  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
+  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+
   const handleMapPress = (map: MapWithUser) => {
-    router.push(`/maps/${map.id}`);
+    // タブ内の場合は各タブ内のルートを使用
+    if (isInDiscoverTab) {
+      router.push(`/(tabs)/discover/maps/${map.id}`);
+    } else if (isInMapTab) {
+      router.push(`/(tabs)/map/${map.id}`);
+    } else if (isInMypageTab) {
+      router.push(`/(tabs)/mypage/maps/${map.id}`);
+    } else {
+      router.push(`/maps/${map.id}`);
+    }
   };
 
   const handleEdit = (mapId: string) => {

@@ -6,7 +6,7 @@
 
 import React, { useCallback, useMemo } from 'react';
 import { View, Text, Pressable, FlatList } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useBookmarks, useBookmarkFolders } from '@/entities/bookmark';
@@ -27,6 +27,13 @@ export function BookmarkItemList({
   onBack,
 }: BookmarkItemListProps) {
   const router = useRouter();
+  const segments = useSegments();
+
+  // タブ内かどうかを判定
+  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
+  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
+  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+
   const { data: folders = [] } = useBookmarkFolders(userId);
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
 
@@ -47,12 +54,38 @@ export function BookmarkItemList({
     });
   }, [allBookmarks, folderId, activeTab]);
 
+  // スポットへの遷移（タブ内ルートを使用）
+  const navigateToSpot = useCallback((spotId: string) => {
+    if (isInDiscoverTab) {
+      router.push(`/(tabs)/discover/spots/${spotId}`);
+    } else if (isInMapTab) {
+      router.push(`/(tabs)/map/spots/${spotId}`);
+    } else if (isInMypageTab) {
+      router.push(`/(tabs)/mypage/spots/${spotId}`);
+    } else {
+      router.push(`/spots/${spotId}`);
+    }
+  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+
+  // マップへの遷移（タブ内ルートを使用）
+  const navigateToMap = useCallback((mapId: string) => {
+    if (isInDiscoverTab) {
+      router.push(`/(tabs)/discover/maps/${mapId}`);
+    } else if (isInMapTab) {
+      router.push(`/(tabs)/map/${mapId}`);
+    } else if (isInMypageTab) {
+      router.push(`/(tabs)/mypage/maps/${mapId}`);
+    } else {
+      router.push(`/maps/${mapId}`);
+    }
+  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+
   const renderBookmarkItem = useCallback(
     ({ item }: { item: BookmarkWithDetails }) => {
       if (item.spot) {
         return (
           <Pressable
-            onPress={() => router.push(`/spots/${item.spot!.id}`)}
+            onPress={() => navigateToSpot(item.spot!.id)}
             className="bg-white px-4 py-4 border-b border-gray-100"
           >
             <View className="flex-row items-center">
@@ -78,7 +111,7 @@ export function BookmarkItemList({
       if (item.map) {
         return (
           <Pressable
-            onPress={() => router.push(`/maps/${item.map!.id}`)}
+            onPress={() => navigateToMap(item.map!.id)}
             className="bg-white px-4 py-4 border-b border-gray-100"
           >
             <View className="flex-row items-center">
@@ -101,7 +134,7 @@ export function BookmarkItemList({
 
       return null;
     },
-    [router]
+    [navigateToSpot, navigateToMap]
   );
 
   return (

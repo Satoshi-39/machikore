@@ -6,7 +6,7 @@ import React, { useRef, useMemo, useCallback, useEffect } from 'react';
 import { View, Text, Pressable, Linking, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
@@ -23,6 +23,12 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const segments = useSegments();
+
+  // タブ内かどうかを判定
+  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
+  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
+  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
 
   // このマスタースポットに紐づくユーザー投稿を取得
   const { data: userSpots = [], isLoading: isLoadingUserSpots } = useSpotsByMasterSpot(spot.id);
@@ -192,9 +198,17 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
                   key={userSpot.id}
                   className="bg-gray-50 rounded-lg p-3 active:bg-gray-100"
                   onPress={() => {
-                    // スポット詳細ページに遷移
+                    // スポット詳細ページに遷移（タブ内ルートを使用）
                     onClose();
-                    router.push(`/spots/${userSpot.id}`);
+                    if (isInDiscoverTab) {
+                      router.push(`/(tabs)/discover/spots/${userSpot.id}`);
+                    } else if (isInMapTab) {
+                      router.push(`/(tabs)/map/spots/${userSpot.id}`);
+                    } else if (isInMypageTab) {
+                      router.push(`/(tabs)/mypage/spots/${userSpot.id}`);
+                    } else {
+                      router.push(`/spots/${userSpot.id}`);
+                    }
                   }}
                 >
                   {/* ユーザー情報とマップ名 */}

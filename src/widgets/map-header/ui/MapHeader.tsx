@@ -7,14 +7,19 @@
 
 import type { MapWithUser } from '@/shared/types';
 import { Ionicons } from '@expo/vector-icons';
-import React, { useState, useEffect, useRef } from 'react';
-import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator, Share } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useCheckMapBookmarked, useBookmarkMap, useUnbookmarkMap } from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 
 interface MapHeaderProps {
   isUserMap: boolean;
   isLoading?: boolean;
+  mapId?: string | null;
   mapTitle?: string;
+  userId?: string | null;
   userName?: string;
   userAvatarUrl?: string;
   userMaps?: MapWithUser[];
@@ -22,13 +27,14 @@ interface MapHeaderProps {
   onMapSelect?: (mapId: string) => void;
   onUserPress?: () => void;
   onSearchPress?: () => void;
-  onMenuPress?: () => void;
 }
 
 export function MapHeader({
   isUserMap,
   isLoading = false,
+  mapId,
   mapTitle,
+  userId,
   userName,
   userAvatarUrl,
   userMaps = [],
@@ -36,11 +42,78 @@ export function MapHeader({
   onMapSelect,
   onUserPress,
   onSearchPress,
-  onMenuPress,
 }: MapHeaderProps) {
   const insets = useSafeAreaInsets();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const slideAnim = useRef(new Animated.Value(-500)).current; // 初期位置: 画面上部の外側
+
+  // マップブックマーク状態を取得
+  const { data: isBookmarked = false } = useCheckMapBookmarked(userId, mapId);
+  const { mutate: addBookmark } = useBookmarkMap();
+  const { mutate: removeBookmark } = useUnbookmarkMap();
+
+  // いいね処理
+  const handleLikePress = useCallback(() => {
+    setIsLiked(!isLiked);
+    // TODO: マップいいねのAPI呼び出し
+  }, [isLiked]);
+
+  // ブックマーク処理（フォルダ選択モーダルを開く）
+  const handleBookmarkPress = useCallback(() => {
+    if (!userId) return;
+    setIsFolderModalVisible(true);
+  }, [userId]);
+
+  // フォルダ選択完了時のハンドラー
+  const handleFolderSelect = useCallback((folderId: string | null) => {
+    if (!userId || !mapId) return;
+
+    if (isBookmarked && folderId === null) {
+      // 既にブックマーク済みで、「保存を解除」が選択された場合
+      removeBookmark({ userId, mapId });
+    } else if (!isBookmarked) {
+      // 未ブックマークの場合、選択したフォルダに追加
+      addBookmark({ userId, mapId, folderId });
+    }
+  }, [userId, mapId, isBookmarked, addBookmark, removeBookmark]);
+
+  // 共有処理
+  const handleSharePress = useCallback(async () => {
+    try {
+      await Share.share({
+        message: `${mapTitle || 'マップ'}をチェック！`,
+        url: `https://machikore.app/map/${mapId}`,
+      });
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  }, [mapTitle, mapId]);
+
+  // ポップアップメニュー項目
+  const menuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'like',
+      label: isLiked ? 'いいね済み' : 'いいね',
+      icon: isLiked ? 'heart' : 'heart-outline',
+      iconColor: isLiked ? '#EF4444' : undefined,
+      onPress: handleLikePress,
+    },
+    {
+      id: 'bookmark',
+      label: isBookmarked ? '保存済み' : '保存',
+      icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
+      iconColor: isBookmarked ? '#F59E0B' : undefined,
+      onPress: handleBookmarkPress,
+    },
+    {
+      id: 'share',
+      label: '共有',
+      icon: 'share-outline',
+      onPress: handleSharePress,
+    },
+  ], [isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress]);
 
   // モーダルの開閉に応じてアニメーション
   useEffect(() => {
@@ -150,9 +223,11 @@ export function MapHeader({
             </Pressable>
 
             {/* 三点リーダメニュー */}
-            <Pressable onPress={onMenuPress} className="items-center justify-center">
-              <Ionicons name="ellipsis-horizontal" size={24} color="#007AFF" />
-            </Pressable>
+            <PopupMenu
+              items={menuItems}
+              triggerSize={24}
+              triggerColor="#007AFF"
+            />
           </View>
         </View>
       ) : (
@@ -231,6 +306,18 @@ export function MapHeader({
           />
         </View>
       </Modal>
+
+      {/* フォルダ選択モーダル */}
+      {userId && (
+        <SelectFolderModal
+          visible={isFolderModalVisible}
+          userId={userId}
+          folderType="maps"
+          onClose={() => setIsFolderModalVisible(false)}
+          onSelect={handleFolderSelect}
+          isBookmarked={isBookmarked}
+        />
+      )}
     </View>
   );
 }

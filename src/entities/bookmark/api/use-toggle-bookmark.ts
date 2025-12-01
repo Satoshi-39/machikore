@@ -8,6 +8,10 @@ import {
   toggleSpotBookmark,
   toggleMapBookmark,
   moveBookmarkToFolder,
+  bookmarkSpot,
+  unbookmarkSpot,
+  bookmarkMap,
+  unbookmarkMap,
 } from '@/shared/api/supabase/bookmarks';
 
 /**
@@ -151,6 +155,206 @@ export function useMoveBookmarkToFolder() {
         text1: 'フォルダの移動に失敗しました',
         visibilityTime: 3000,
       });
+    },
+  });
+}
+
+/**
+ * スポットをブックマークに追加（フォルダ指定可能）
+ */
+export function useBookmarkSpot() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      userId,
+      spotId,
+      folderId,
+    }: {
+      userId: string;
+      spotId: string;
+      folderId?: string | null;
+    }) => bookmarkSpot(userId, spotId, folderId),
+    onMutate: async ({ userId, spotId }) => {
+      // 楽観的更新
+      await queryClient.cancelQueries({
+        queryKey: ['bookmark-status', 'spot', userId, spotId],
+      });
+
+      queryClient.setQueryData(
+        ['bookmark-status', 'spot', userId, spotId],
+        true
+      );
+    },
+    onError: (error, { userId, spotId }) => {
+      console.error('[useBookmarkSpot] Error:', error);
+      Toast.show({
+        type: 'error',
+        text1: '保存に失敗しました',
+        visibilityTime: 3000,
+      });
+      // ロールバック
+      queryClient.setQueryData(
+        ['bookmark-status', 'spot', userId, spotId],
+        false
+      );
+    },
+    onSuccess: (_, { userId }) => {
+      Toast.show({
+        type: 'success',
+        text1: '保存しました',
+        visibilityTime: 2000,
+      });
+      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+    },
+  });
+}
+
+/**
+ * スポットのブックマークを解除
+ */
+export function useUnbookmarkSpot() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      userId,
+      spotId,
+    }: {
+      userId: string;
+      spotId: string;
+    }) => unbookmarkSpot(userId, spotId),
+    onMutate: async ({ userId, spotId }) => {
+      // 楽観的更新
+      await queryClient.cancelQueries({
+        queryKey: ['bookmark-status', 'spot', userId, spotId],
+      });
+
+      queryClient.setQueryData(
+        ['bookmark-status', 'spot', userId, spotId],
+        false
+      );
+    },
+    onError: (error, { userId, spotId }) => {
+      console.error('[useUnbookmarkSpot] Error:', error);
+      Toast.show({
+        type: 'error',
+        text1: '保存の解除に失敗しました',
+        visibilityTime: 3000,
+      });
+      // ロールバック
+      queryClient.setQueryData(
+        ['bookmark-status', 'spot', userId, spotId],
+        true
+      );
+    },
+    onSuccess: (_, { userId }) => {
+      Toast.show({
+        type: 'success',
+        text1: '保存を解除しました',
+        visibilityTime: 2000,
+      });
+      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+    },
+  });
+}
+
+/**
+ * マップをブックマークに追加（フォルダ指定可能）
+ */
+export function useBookmarkMap() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      userId,
+      mapId,
+      folderId,
+    }: {
+      userId: string;
+      mapId: string;
+      folderId?: string | null;
+    }) => bookmarkMap(userId, mapId, folderId),
+    onMutate: async ({ userId, mapId }) => {
+      // 楽観的更新
+      await queryClient.cancelQueries({
+        queryKey: ['bookmark-status', 'map', userId, mapId],
+      });
+
+      queryClient.setQueryData(
+        ['bookmark-status', 'map', userId, mapId],
+        true
+      );
+    },
+    onError: (error, { userId, mapId }) => {
+      console.error('[useBookmarkMap] Error:', error);
+      Toast.show({
+        type: 'error',
+        text1: '保存に失敗しました',
+        visibilityTime: 3000,
+      });
+      // ロールバック
+      queryClient.setQueryData(
+        ['bookmark-status', 'map', userId, mapId],
+        false
+      );
+    },
+    onSuccess: (_, { userId }) => {
+      Toast.show({
+        type: 'success',
+        text1: '保存しました',
+        visibilityTime: 2000,
+      });
+      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+    },
+  });
+}
+
+/**
+ * マップのブックマークを解除
+ */
+export function useUnbookmarkMap() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      userId,
+      mapId,
+    }: {
+      userId: string;
+      mapId: string;
+    }) => unbookmarkMap(userId, mapId),
+    onMutate: async ({ userId, mapId }) => {
+      // 楽観的更新
+      await queryClient.cancelQueries({
+        queryKey: ['bookmark-status', 'map', userId, mapId],
+      });
+
+      queryClient.setQueryData(
+        ['bookmark-status', 'map', userId, mapId],
+        false
+      );
+    },
+    onError: (error, { userId, mapId }) => {
+      console.error('[useUnbookmarkMap] Error:', error);
+      Toast.show({
+        type: 'error',
+        text1: '保存の解除に失敗しました',
+        visibilityTime: 3000,
+      });
+      // ロールバック
+      queryClient.setQueryData(
+        ['bookmark-status', 'map', userId, mapId],
+        true
+      );
+    },
+    onSuccess: (_, { userId }) => {
+      Toast.show({
+        type: 'success',
+        text1: '保存を解除しました',
+        visibilityTime: 2000,
+      });
+      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
     },
   });
 }

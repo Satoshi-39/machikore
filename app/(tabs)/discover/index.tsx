@@ -1,10 +1,9 @@
 /**
- * 発見タブ
+ * 発見タブ - インデックス
  */
 
-import React from 'react';
 import { DiscoverPage } from '@/pages/discover';
 
-export default function DiscoverTab() {
+export default function DiscoverIndex() {
   return <DiscoverPage />;
 }
