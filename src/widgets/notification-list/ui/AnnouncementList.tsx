@@ -4,7 +4,7 @@
  * システムからのお知らせ一覧を表示
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   Text,
@@ -15,7 +15,13 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { useSystemAnnouncements } from '@/entities/notification';
+import {
+  useSystemAnnouncements,
+  useReadAnnouncementIds,
+  useMarkAnnouncementAsRead,
+  useMarkAllAnnouncementsAsRead,
+} from '@/entities/notification';
+import { useUserStore } from '@/entities/user';
 import type { SystemAnnouncement } from '@/shared/api/supabase/notifications';
 
 // お知らせタイプごとのアイコンと色
@@ -41,17 +47,18 @@ function formatDate(dateString: string): string {
 
 interface AnnouncementItemProps {
   announcement: SystemAnnouncement;
+  isRead: boolean;
   onPress?: () => void;
 }
 
-function AnnouncementItem({ announcement, onPress }: AnnouncementItemProps) {
+function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemProps) {
   const defaultConfig = { icon: 'information-circle' as const, color: '#3B82F6' };
   const config = ANNOUNCEMENT_TYPE_CONFIG[announcement.type] || defaultConfig;
 
   return (
     <Pressable
       onPress={onPress}
-      className="bg-white p-4 border-b border-gray-100"
+      className={`p-4 border-b border-gray-100 ${!isRead ? 'bg-blue-50' : 'bg-white'}`}
     >
       <View className="flex-row items-start">
         {/* アイコン */}
@@ -64,7 +71,9 @@ function AnnouncementItem({ announcement, onPress }: AnnouncementItemProps) {
 
         {/* 内容 */}
         <View className="flex-1">
-          <Text className="text-base font-semibold text-gray-900 mb-1">
+          <Text
+            className={`text-base mb-1 ${!isRead ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'}`}
+          >
             {announcement.title}
           </Text>
           <Text className="text-sm text-gray-600" numberOfLines={3}>
@@ -74,13 +83,41 @@ function AnnouncementItem({ announcement, onPress }: AnnouncementItemProps) {
             {formatDate(announcement.published_at)}
           </Text>
         </View>
+
+        {/* 未読インジケーター */}
+        {!isRead && (
+          <View className="w-2 h-2 rounded-full bg-blue-500 ml-2 self-center" />
+        )}
       </View>
     </Pressable>
   );
 }
 
 export function AnnouncementList() {
+  const user = useUserStore((state) => state.user);
   const { data: announcements = [], isLoading, refetch, isRefetching } = useSystemAnnouncements();
+  const { data: readIds = new Set<string>() } = useReadAnnouncementIds(user?.id);
+  const { mutate: markAsRead } = useMarkAnnouncementAsRead();
+  const { mutate: markAllAsRead } = useMarkAllAnnouncementsAsRead();
+
+  const handleAnnouncementPress = useCallback(
+    (announcement: SystemAnnouncement) => {
+      // 既読にする
+      const isRead = readIds.has(announcement.id);
+      if (!isRead && user?.id) {
+        markAsRead({ userId: user.id, announcementId: announcement.id });
+      }
+    },
+    [readIds, markAsRead, user?.id]
+  );
+
+  const handleMarkAllAsRead = useCallback(() => {
+    if (user?.id) {
+      markAllAsRead({ userId: user.id });
+    }
+  }, [user?.id, markAllAsRead]);
+
+  const hasUnread = announcements.some((a) => !readIds.has(a.id));
 
   if (isLoading) {
     return (
@@ -102,19 +139,36 @@ export function AnnouncementList() {
   }
 
   return (
-    <FlatList
-      data={announcements}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <AnnouncementItem announcement={item} />
+    <View className="flex-1">
+      {/* 全て既読ボタン */}
+      {hasUnread && (
+        <View className="px-4 py-2 border-b border-gray-100 bg-white">
+          <Pressable onPress={handleMarkAllAsRead}>
+            <Text className="text-sm text-blue-500 font-medium text-right">
+              すべて既読にする
+            </Text>
+          </Pressable>
+        </View>
       )}
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefetching}
-          onRefresh={refetch}
-          colors={[colors.primary.DEFAULT]}
-        />
-      }
-    />
+
+      <FlatList
+        data={announcements}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <AnnouncementItem
+            announcement={item}
+            isRead={readIds.has(item.id)}
+            onPress={() => handleAnnouncementPress(item)}
+          />
+        )}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetching}
+            onRefresh={refetch}
+            colors={[colors.primary.DEFAULT]}
+          />
+        }
+      />
+    </View>
   );
 }

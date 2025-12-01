@@ -1,13 +1,15 @@
 import { useUserStore } from '@/entities/user';
+import { useTotalUnreadCount } from '@/entities/notification';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 export default function TabLayout() {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
   const isAnonymous = !user?.email;
+  const unreadCount = useTotalUnreadCount(user?.id);
 
   return (
     <Tabs
@@ -79,6 +81,26 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <View style={{ marginTop: 2 }}>
               <Ionicons name="notifications-outline" size={26} color={color} />
+              {unreadCount > 0 ? (
+                <View
+                  style={{
+                    position: 'absolute',
+                    right: -6,
+                    top: -3,
+                    backgroundColor: '#007AFF',
+                    borderRadius: 9,
+                    minWidth: 18,
+                    height: 18,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingHorizontal: 4,
+                  }}
+                >
+                  <Text style={{ color: '#FFFFFF', fontSize: 11, fontWeight: '600' }}>
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </Text>
+                </View>
+              ) : null}
             </View>
           ),
         }}

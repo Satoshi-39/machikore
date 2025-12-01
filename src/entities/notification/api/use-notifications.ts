@@ -11,6 +11,10 @@ import {
   deleteNotification,
   deleteAllNotifications,
   getSystemAnnouncements,
+  getUnreadAnnouncementCount,
+  markAnnouncementAsRead,
+  markAllAnnouncementsAsRead,
+  getReadAnnouncementIds,
   type NotificationWithDetails,
   type SystemAnnouncement,
 } from '@/shared/api/supabase/notifications';
@@ -204,5 +208,120 @@ export function useSystemAnnouncements() {
     queryFn: getSystemAnnouncements,
     // 5分ごとに更新
     refetchInterval: 5 * 60 * 1000,
+  });
+}
+
+/**
+ * 未読お知らせ数を取得
+ */
+export function useUnreadAnnouncementCount(userId: string | null | undefined) {
+  return useQuery<number, Error>({
+    queryKey: ['announcements', 'unread-count', userId],
+    queryFn: () => {
+      if (!userId) return 0;
+      return getUnreadAnnouncementCount(userId);
+    },
+    enabled: !!userId,
+    // 30秒ごとに更新
+    refetchInterval: 30000,
+  });
+}
+
+/**
+ * 通知とお知らせの合計未読数を取得
+ */
+export function useTotalUnreadCount(userId: string | null | undefined) {
+  const { data: notificationCount = 0 } = useUnreadNotificationCount(userId);
+  const { data: announcementCount = 0 } = useUnreadAnnouncementCount(userId);
+
+  return notificationCount + announcementCount;
+}
+
+/**
+ * お知らせを既読にする
+ */
+export function useMarkAnnouncementAsRead() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ userId, announcementId }: { userId: string; announcementId: string }) =>
+      markAnnouncementAsRead(userId, announcementId),
+    onMutate: async ({ userId, announcementId }) => {
+      // 楽観的更新
+      await queryClient.cancelQueries({ queryKey: ['announcements', 'read-ids', userId] });
+
+      const previousReadIds = queryClient.getQueryData<Set<string>>([
+        'announcements',
+        'read-ids',
+        userId,
+      ]);
+
+      if (previousReadIds) {
+        const newReadIds = new Set(previousReadIds);
+        newReadIds.add(announcementId);
+        queryClient.setQueryData(['announcements', 'read-ids', userId], newReadIds);
+      }
+
+      // 未読カウントを更新
+      const previousCount = queryClient.getQueryData<number>([
+        'announcements',
+        'unread-count',
+        userId,
+      ]);
+      if (previousCount !== undefined) {
+        queryClient.setQueryData(
+          ['announcements', 'unread-count', userId],
+          Math.max(0, previousCount - 1)
+        );
+      }
+
+      return { previousReadIds, previousCount };
+    },
+    onError: (error, { userId }, context) => {
+      console.error('[useMarkAnnouncementAsRead] Error:', error);
+      if (context?.previousReadIds) {
+        queryClient.setQueryData(['announcements', 'read-ids', userId], context.previousReadIds);
+      }
+      if (context?.previousCount !== undefined) {
+        queryClient.setQueryData(['announcements', 'unread-count', userId], context.previousCount);
+      }
+    },
+    onSettled: (_, __, { userId }) => {
+      queryClient.invalidateQueries({ queryKey: ['announcements', 'unread-count', userId] });
+      queryClient.invalidateQueries({ queryKey: ['announcements', 'read-ids', userId] });
+    },
+  });
+}
+
+/**
+ * 全てのお知らせを既読にする
+ */
+export function useMarkAllAnnouncementsAsRead() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ userId }: { userId: string }) =>
+      markAllAnnouncementsAsRead(userId),
+    onSuccess: (_, { userId }) => {
+      queryClient.invalidateQueries({ queryKey: ['announcements', 'unread-count', userId] });
+      queryClient.invalidateQueries({ queryKey: ['announcements', 'read-ids', userId] });
+    },
+    onError: (error) => {
+      console.error('[useMarkAllAnnouncementsAsRead] Error:', error);
+    },
+  });
+}
+
+/**
+ * ユーザーが既読にしたお知らせIDを取得
+ */
+export function useReadAnnouncementIds(userId: string | null | undefined) {
+  return useQuery<Set<string>, Error>({
+    queryKey: ['announcements', 'read-ids', userId],
+    queryFn: () => {
+      if (!userId) return new Set<string>();
+      return getReadAnnouncementIds(userId);
+    },
+    enabled: !!userId,
   });
 }
