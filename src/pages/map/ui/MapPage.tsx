@@ -75,12 +75,12 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
 
   // マップIDをグローバルステートに設定
-  // propsでmapIdが渡されている場合はグローバルステートを変更しない
+  // スポット作成時などで使用するため、常にセットする
   useEffect(() => {
-    if (effectiveMapId && !propMapId) {
+    if (effectiveMapId) {
       setSelectedMapId(effectiveMapId);
     }
-  }, [effectiveMapId, propMapId, setSelectedMapId]);
+  }, [effectiveMapId, setSelectedMapId]);
 
   // addSpotパラメータがある場合は検索画面を自動的に開く（スポット追加モード）
   useEffect(() => {
@@ -118,10 +118,10 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   };
 
   const handleBack = () => {
-    // propsでmapIdが渡されている場合（/spots/[id]や/maps/[id]から呼ばれた場合）は
-    // グローバルステートをクリアしない（元の画面に戻るだけ）
-    // タブ内でのデフォルトマップへの戻りの場合のみクリアする
-    if (!propMapId) {
+    // propsでmapIdが渡されている場合（/maps/[id]や/spots/[id]から呼ばれた場合）は
+    // グローバルステートをクリアして、タブのマップ画面がデフォルトマップに戻るようにする
+    // タブ内での遷移（マップ選択→スポット追加モード等）ではクリアしない
+    if (propMapId) {
       setSelectedMapId(null);
     }
     router.back();

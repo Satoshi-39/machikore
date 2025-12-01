@@ -17,6 +17,7 @@ import { useUserStore } from '@/entities/user';
 import { useMapStore } from '@/entities/map';
 import { getNearbyMachi } from '@/shared/api/sqlite';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
+import { queryClient } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 
 export interface UploadProgress {
@@ -156,6 +157,8 @@ export function useSpotForm() {
             try {
               const result = await uploadSpotImages(spotId, data.images);
               console.log(`📸 画像アップロード完了: ${result.uploaded}枚成功, ${result.failed}枚失敗`);
+              // 画像キャッシュを無効化して再取得
+              queryClient.invalidateQueries({ queryKey: ['spot-images', spotId] });
             } catch (error) {
               console.error('画像アップロードエラー:', error);
               // 画像アップロード失敗してもスポット自体は作成済み
