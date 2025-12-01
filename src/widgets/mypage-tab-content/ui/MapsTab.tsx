@@ -116,6 +116,7 @@ export function MapsTab({ userId }: MapsTabProps) {
   const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
   const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
   const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
 
   const handleMapPress = (map: MapWithUser) => {
     // タブ内の場合は各タブ内のルートを使用
@@ -125,6 +126,8 @@ export function MapsTab({ userId }: MapsTabProps) {
       router.push(`/(tabs)/map/${map.id}`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/maps/${map.id}`);
+    } else if (isInNotificationsTab) {
+      router.push(`/(tabs)/notifications/maps/${map.id}`);
     } else {
       router.push(`/maps/${map.id}`);
     }

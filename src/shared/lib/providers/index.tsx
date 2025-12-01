@@ -9,6 +9,7 @@ import { QueryProvider } from './query-provider';
 import { AuthProvider } from './auth-provider';
 import { RepositoryProvider } from './repository-provider';
 import { SyncProvider } from '@/shared/lib/sync';
+import { PushNotificationInitializer } from '@/features/push-notifications';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ interface AppProvidersProps {
  * 4. RepositoryProvider - データアクセス
  * 5. SyncProvider - データ同期
  * 6. QueryProvider - React Query
+ * 7. PushNotificationInitializer - プッシュ通知初期化
  */
 export function AppProviders({ children }: AppProvidersProps) {
   return (
@@ -32,7 +34,10 @@ export function AppProviders({ children }: AppProvidersProps) {
         <AuthProvider>
           <RepositoryProvider>
             <SyncProvider enabled={true} syncIntervalMs={0}>
-              <QueryProvider>{children}</QueryProvider>
+              <QueryProvider>
+                <PushNotificationInitializer />
+                {children}
+              </QueryProvider>
             </SyncProvider>
           </RepositoryProvider>
         </AuthProvider>
