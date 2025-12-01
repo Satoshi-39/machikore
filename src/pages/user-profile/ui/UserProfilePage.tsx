@@ -42,6 +42,7 @@ export function UserProfilePage() {
         <UserProfileTabFilter
           tabMode={tabMode as UserProfileTabMode}
           onTabModeChange={setTabMode}
+          userId={id}
         />
       )}
 

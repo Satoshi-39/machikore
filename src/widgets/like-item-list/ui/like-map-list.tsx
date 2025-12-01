@@ -6,7 +6,7 @@ import React, { useCallback } from 'react';
 import { View, Text, Pressable, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { Loading } from '@/shared/ui';
+import { Loading, EmptyState } from '@/shared/ui';
 
 interface LikedMap {
   likeId: string;
@@ -67,12 +67,10 @@ export function LikeMapList({ data, isLoading, onMapPress }: LikeMapListProps) {
 
   if (data.length === 0) {
     return (
-      <View className="flex-1 items-center justify-center py-12">
-        <Ionicons name="heart-outline" size={48} color={colors.text.secondary} />
-        <Text className="text-gray-500 mt-4">
-          いいねしたマップがありません
-        </Text>
-      </View>
+      <EmptyState
+        ionIcon="heart-outline"
+        message="いいねしたマップがありません"
+      />
     );
   }
 

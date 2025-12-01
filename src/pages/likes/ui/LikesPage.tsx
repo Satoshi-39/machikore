@@ -12,10 +12,15 @@ import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-use
 import { PageHeader } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
 
-export function LikesPage() {
+interface LikesPageProps {
+  userId?: string;
+}
+
+export function LikesPage({ userId: propUserId }: LikesPageProps) {
   const router = useRouter();
   const segments = useSegments();
-  const userId = useCurrentUserId();
+  const currentUserId = useCurrentUserId();
+  const userId = propUserId || currentUserId;
   const [activeTab, setActiveTab] = useState<LikeTabMode>('spots');
 
   // タブ内かどうかを判定
