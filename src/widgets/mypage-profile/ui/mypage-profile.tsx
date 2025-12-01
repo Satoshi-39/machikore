@@ -5,19 +5,34 @@
  */
 
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading } from '@/shared/ui';
 import { useUser, useUserStats } from '@/entities/user/api';
+import { FollowButton } from '@/features/follow-user';
 
 interface MyPageProfileProps {
   userId: string | null;
 }
 
 export function MyPageProfile({ userId }: MyPageProfileProps) {
+  const router = useRouter();
   const { data: user, isLoading } = useUser(userId ?? '');
   const { data: stats } = useUserStats(userId ?? '');
+
+  const handleFollowingPress = () => {
+    if (userId) {
+      router.push(`/(tabs)/mypage/users/${userId}/following`);
+    }
+  };
+
+  const handleFollowersPress = () => {
+    if (userId) {
+      router.push(`/(tabs)/mypage/users/${userId}/followers`);
+    }
+  };
 
   // ローディング中
   if (isLoading) {
@@ -34,17 +49,23 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
 
   return (
     <View className="bg-white px-4 py-6 border-b border-gray-200">
-      {/* アバター */}
-      {user?.avatar_url ? (
-        <Image
-          source={{ uri: user.avatar_url }}
-          className="w-20 h-20 rounded-full mb-4"
-        />
-      ) : (
-        <View className="w-20 h-20 rounded-full bg-gray-200 items-center justify-center mb-4">
-          <Ionicons name="person" size={40} color={colors.gray[400]} />
-        </View>
-      )}
+      {/* アバターとフォローボタン */}
+      <View className="flex-row items-center justify-between mb-4">
+        {/* アバター */}
+        {user?.avatar_url ? (
+          <Image
+            source={{ uri: user.avatar_url }}
+            className="w-20 h-20 rounded-full"
+          />
+        ) : (
+          <View className="w-20 h-20 rounded-full bg-gray-200 items-center justify-center">
+            <Ionicons name="person" size={40} color={colors.gray[400]} />
+          </View>
+        )}
+
+        {/* フォローボタン */}
+        <FollowButton targetUserId={userId} />
+      </View>
 
       {/* ユーザー名 */}
       <Text className="text-xl font-bold text-gray-900 mb-1">
@@ -64,10 +85,18 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
         <Text className="text-sm text-gray-600">
           訪問した街 <Text className="font-bold text-gray-900">{visitedMachiCount}</Text>
           {'  '}·{'  '}
-          フォロー <Text className="font-bold text-gray-900">{followingCount}</Text>
-          {'  '}·{'  '}
-          フォロワー <Text className="font-bold text-gray-900">{followersCount}</Text>
         </Text>
+        <TouchableOpacity onPress={handleFollowingPress}>
+          <Text className="text-sm text-gray-600">
+            フォロー <Text className="font-bold text-gray-900">{followingCount}</Text>
+          </Text>
+        </TouchableOpacity>
+        <Text className="text-sm text-gray-600">{'  '}·{'  '}</Text>
+        <TouchableOpacity onPress={handleFollowersPress}>
+          <Text className="text-sm text-gray-600">
+            フォロワー <Text className="font-bold text-gray-900">{followersCount}</Text>
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

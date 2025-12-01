@@ -3,11 +3,8 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
-import {
-  getVisitsByUserId,
-  getFollowingCount,
-  getFollowersCount,
-} from '@/shared/api/sqlite';
+import { getVisitsByUserId } from '@/shared/api/sqlite';
+import { getFollowCounts } from '@/shared/api/supabase/follows';
 import type { UUID } from '@/shared/types';
 
 interface UserStats {
@@ -22,20 +19,19 @@ interface UserStats {
 export function useUserStats(userId: UUID) {
   return useQuery<UserStats, Error>({
     queryKey: ['userStats', userId],
-    queryFn: () => {
+    queryFn: async () => {
       // 訪問記録を取得して、ユニークな街の数を計算
       const visits = getVisitsByUserId(userId);
       const uniqueMachiIds = new Set(visits.map((v) => v.machi_id));
       const visitedMachiCount = uniqueMachiIds.size;
 
-      // フォロー数・フォロワー数を取得
-      const followingCount = getFollowingCount(userId);
-      const followersCount = getFollowersCount(userId);
+      // フォロー数・フォロワー数をSupabaseから取得
+      const followCounts = await getFollowCounts(userId);
 
       return {
         visitedMachiCount,
-        followingCount,
-        followersCount,
+        followingCount: followCounts.following,
+        followersCount: followCounts.followers,
       };
     },
     enabled: !!userId,

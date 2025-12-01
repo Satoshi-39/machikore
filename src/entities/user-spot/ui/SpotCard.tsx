@@ -7,7 +7,7 @@
  * いいね状態は spot.is_liked を使用（取得時にJOINで取得）
  */
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Modal, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
@@ -18,6 +18,8 @@ import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useUser } from '@/entities/user';
+import { useCheckSpotBookmarked, useBookmarkSpot, useUnbookmarkSpot } from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
 
 // Supabase JOINで取得済みのユーザー情報
 interface EmbeddedUser {
@@ -71,6 +73,12 @@ export function SpotCard({
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
 
+  // ブックマーク状態
+  const { data: isBookmarked = false } = useCheckSpotBookmarked(currentUserId, spot.id);
+  const { mutate: addBookmark } = useBookmarkSpot();
+  const { mutate: removeBookmark } = useUnbookmarkSpot();
+  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+
   // 画像拡大表示用のstate
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const screenWidth = Dimensions.get('window').width;
@@ -118,6 +126,26 @@ export function SpotCard({
     if (!currentUserId || isTogglingLike) return;
     toggleLike({ userId: currentUserId, spotId: spot.id });
   };
+
+  // ブックマーク処理（フォルダ選択モーダルを開く）
+  const handleBookmarkPress = useCallback((e: any) => {
+    e.stopPropagation();
+    if (!currentUserId) return;
+    setIsFolderModalVisible(true);
+  }, [currentUserId]);
+
+  // フォルダ選択完了時のハンドラー
+  const handleFolderSelect = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+
+    if (isBookmarked && folderId === null) {
+      // 既にブックマーク済みで、「保存を解除」が選択された場合
+      removeBookmark({ userId: currentUserId, spotId: spot.id });
+    } else if (!isBookmarked) {
+      // 未ブックマークの場合、選択したフォルダに追加
+      addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
+    }
+  }, [currentUserId, spot.id, isBookmarked, addBookmark, removeBookmark]);
 
   const handleDelete = () => {
     Alert.alert(
@@ -318,7 +346,7 @@ export function SpotCard({
 
       {/* フッター情報 */}
       <View className="flex-row items-center justify-end mt-2">
-        {/* いいね・コメント数 */}
+        {/* いいね・コメント・ブックマーク */}
         <View className="flex-row items-center gap-4">
           {/* いいね */}
           <Pressable
@@ -343,8 +371,33 @@ export function SpotCard({
               {spot.comments_count}
             </Text>
           </View>
+
+          {/* ブックマーク */}
+          <Pressable
+            onPress={handleBookmarkPress}
+            className="flex-row items-center"
+            disabled={!currentUserId}
+          >
+            <Ionicons
+              name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+              size={18}
+              color={isBookmarked ? '#F59E0B' : colors.text.secondary}
+            />
+          </Pressable>
         </View>
       </View>
+
+      {/* フォルダ選択モーダル */}
+      {currentUserId && (
+        <SelectFolderModal
+          visible={isFolderModalVisible}
+          userId={currentUserId}
+          folderType="spots"
+          onClose={() => setIsFolderModalVisible(false)}
+          onSelect={handleFolderSelect}
+          isBookmarked={isBookmarked}
+        />
+      )}
     </Pressable>
   );
 }

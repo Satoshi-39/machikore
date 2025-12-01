@@ -14,9 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookmark_folders: {
+        Row: {
+          color: string | null
+          created_at: string
+          folder_type: string
+          id: string
+          name: string
+          order_index: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          folder_type?: string
+          id?: string
+          name: string
+          order_index?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          folder_type?: string
+          id?: string
+          name?: string
+          order_index?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookmark_folders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bookmarks: {
         Row: {
           created_at: string
+          folder_id: string | null
           id: string
           map_id: string | null
           spot_id: string | null
@@ -24,6 +66,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          folder_id?: string | null
           id?: string
           map_id?: string | null
           spot_id?: string | null
@@ -31,12 +74,20 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          folder_id?: string | null
           id?: string
           map_id?: string | null
           spot_id?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "bookmarks_folder_id_fkey"
+            columns: ["folder_id"]
+            isOneToOne: false
+            referencedRelation: "bookmark_folders"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "bookmarks_map_id_fkey"
             columns: ["map_id"]
@@ -470,6 +521,81 @@ export type Database = {
         }
         Relationships: []
       }
+      notifications: {
+        Row: {
+          actor_id: string | null
+          comment_id: string | null
+          content: string | null
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          map_id: string | null
+          spot_id: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          comment_id?: string | null
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          map_id?: string | null
+          spot_id?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          comment_id?: string | null
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          map_id?: string | null
+          spot_id?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_spot_id_fkey"
+            columns: ["spot_id"]
+            isOneToOne: false
+            referencedRelation: "user_spots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       prefectures: {
         Row: {
           created_at: string
@@ -529,6 +655,42 @@ export type Database = {
           name?: string
           name_kana?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      system_announcements: {
+        Row: {
+          content: string
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          is_active: boolean | null
+          published_at: string | null
+          title: string
+          type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          published_at?: string | null
+          title: string
+          type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          published_at?: string | null
+          title?: string
+          type?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -707,7 +869,22 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      decrement_map_likes_count: {
+        Args: { map_id: string }
+        Returns: undefined
+      }
+      decrement_spot_likes_count: {
+        Args: { spot_id: string }
+        Returns: undefined
+      }
+      increment_map_likes_count: {
+        Args: { map_id: string }
+        Returns: undefined
+      }
+      increment_spot_likes_count: {
+        Args: { spot_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
