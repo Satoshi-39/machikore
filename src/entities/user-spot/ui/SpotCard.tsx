@@ -290,10 +290,12 @@ export function SpotCard({
               const halfSize = (screenWidth - 32 - 4) / 2; // 2列用サイズ
               const fullWidth = screenWidth - 32; // 1列用サイズ（横幅いっぱい）
 
-              // 3枚の場合の3枚目は横幅いっぱい
+              // 1枚の場合は横幅いっぱい、3枚の場合の3枚目も横幅いっぱい
+              const isSingleImage = images.length === 1;
               const isThirdOfThree = images.length === 3 && index === 2;
-              const imageWidth = isThirdOfThree ? fullWidth : halfSize;
-              const imageHeight = isThirdOfThree ? halfSize : halfSize; // 高さは同じ
+              const isFullWidth = isSingleImage || isThirdOfThree;
+              const imageWidth = isFullWidth ? fullWidth : halfSize;
+              const imageHeight = isSingleImage ? fullWidth * 0.6 : halfSize; // 1枚の時は少し低めに
 
               return (
                 <Pressable
