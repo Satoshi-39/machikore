@@ -10,7 +10,7 @@ import { getSpotById, type UserSpotWithMasterSpot } from '@/shared/api/supabase/
  */
 export function useSpotById(spotId: string | null) {
   return useQuery<UserSpotWithMasterSpot | null, Error>({
-    queryKey: ['spot', spotId],
+    queryKey: ['spots', 'detail', spotId],
     queryFn: () => {
       if (!spotId) return null;
       return getSpotById(spotId);

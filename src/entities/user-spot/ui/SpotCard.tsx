@@ -8,10 +8,10 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Modal, Dimensions, Share } from 'react-native';
+import { View, Text, Pressable, Image, Alert, Dimensions, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer } from '@/shared/ui';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
@@ -48,7 +48,9 @@ interface SpotCardProps {
   machiName?: string;
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
+  onMapPress?: (mapId: string) => void;
   onEdit?: (spotId: string) => void;
+  onCommentPress?: (spotId: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
@@ -60,7 +62,9 @@ export function SpotCard({
   machiName,
   onPress,
   onUserPress,
+  onMapPress,
   onEdit,
+  onCommentPress,
   embeddedUser,
   embeddedMasterSpot,
 }: SpotCardProps) {
@@ -86,8 +90,8 @@ export function SpotCard({
   const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
-  // 画像拡大表示用のstate
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  // 画像拡大表示用
+  const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImages, closeImage } = useImageViewer();
   const screenWidth = Dimensions.get('window').width;
 
   // デバッグログ
@@ -125,8 +129,17 @@ export function SpotCard({
     return null;
   };
 
+  // マップ名の取得（SpotWithDetails型の場合のみ）
+  const getMapName = (): string | null => {
+    if ('map' in spot && spot.map?.name) {
+      return spot.map.name;
+    }
+    return null;
+  };
+
   const spotName = getSpotName();
   const address = getAddress();
+  const mapName = getMapName();
 
   const handleLikePress = (e: any) => {
     e.stopPropagation();
@@ -244,9 +257,22 @@ export function SpotCard({
       </View>
 
       {/* スポット名 */}
-      <Text className="text-base font-semibold text-gray-900 mb-2">
+      <Text className="text-base font-semibold text-gray-900 mb-1">
         📍 {spotName}
       </Text>
+
+      {/* マップ名 */}
+      {mapName && (
+        <Pressable
+          onPress={() => onMapPress?.(spot.map_id)}
+          className="flex-row items-center mb-2 self-start"
+        >
+          <Ionicons name="map-outline" size={14} color={colors.primary.DEFAULT} />
+          <Text className="text-xs ml-1" style={{ color: colors.primary.DEFAULT }}>
+            {mapName}
+          </Text>
+        </Pressable>
+      )}
 
       {/* 説明 */}
       {spot.description && (
@@ -274,7 +300,8 @@ export function SpotCard({
                   key={image.id}
                   onPress={(e) => {
                     e.stopPropagation();
-                    setSelectedImageIndex(index);
+                    const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
+                    openImages(imageUrls, index);
                   }}
                 >
                   <View style={{ width: imageWidth, height: imageHeight, position: 'relative' }}>
@@ -302,63 +329,12 @@ export function SpotCard({
       )}
 
       {/* 画像拡大モーダル */}
-      <Modal
-        visible={selectedImageIndex !== null}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setSelectedImageIndex(null)}
-      >
-        <Pressable
-          className="flex-1 bg-black/90 items-center justify-center"
-          onPress={() => setSelectedImageIndex(null)}
-        >
-          {selectedImageIndex !== null && images[selectedImageIndex] && (
-            <>
-              <Image
-                source={{ uri: images[selectedImageIndex].cloud_path || images[selectedImageIndex].local_path || '' }}
-                style={{ width: screenWidth, height: screenWidth }}
-                resizeMode="contain"
-              />
-              {/* 閉じるボタン */}
-              <Pressable
-                onPress={() => setSelectedImageIndex(null)}
-                className="absolute top-12 right-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
-              >
-                <Ionicons name="close" size={24} color="white" />
-              </Pressable>
-              {/* 画像カウンター */}
-              <View className="absolute bottom-12 bg-black/50 px-4 py-2 rounded-full">
-                <Text className="text-white text-sm">
-                  {selectedImageIndex + 1} / {images.length}
-                </Text>
-              </View>
-              {/* 前へ/次へボタン */}
-              {selectedImageIndex > 0 && (
-                <Pressable
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    setSelectedImageIndex(selectedImageIndex - 1);
-                  }}
-                  className="absolute left-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
-                >
-                  <Ionicons name="chevron-back" size={24} color="white" />
-                </Pressable>
-              )}
-              {selectedImageIndex < images.length - 1 && (
-                <Pressable
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    setSelectedImageIndex(selectedImageIndex + 1);
-                  }}
-                  className="absolute right-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
-                >
-                  <Ionicons name="chevron-forward" size={24} color="white" />
-                </Pressable>
-              )}
-            </>
-          )}
-        </Pressable>
-      </Modal>
+      <ImageViewerModal
+        visible={isImageViewerOpen}
+        images={viewerImages}
+        initialIndex={initialIndex}
+        onClose={closeImage}
+      />
 
       {/* 住所または街情報 */}
       {(address || machiName) && (
@@ -373,12 +349,18 @@ export function SpotCard({
       {/* フッター情報 - 均等配置 */}
       <View className="flex-row items-center justify-around mt-2">
         {/* コメント */}
-        <View className="flex-row items-center">
+        <Pressable
+          onPress={(e) => {
+            e.stopPropagation();
+            onCommentPress?.(spot.id);
+          }}
+          className="flex-row items-center"
+        >
           <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
           <Text className="text-sm text-gray-600 ml-1">
             {spot.comments_count}
           </Text>
-        </View>
+        </Pressable>
 
         {/* いいね */}
         <Pressable

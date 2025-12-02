@@ -49,6 +49,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
   const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
   const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
   const user = useUserStore((state) => state.user);
   // スポット作成時などでマップIDを共有するためにsetSelectedMapIdは維持
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
@@ -192,6 +193,22 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
     router.push(`/edit-spot?id=${spotId}`);
   };
 
+  // 記事ページへ遷移
+  const handleArticlePress = () => {
+    if (!currentMapId) return;
+    if (isInDiscoverTab) {
+      router.push(`/(tabs)/discover/articles/maps/${currentMapId}`);
+    } else if (isInMapTab) {
+      router.push(`/(tabs)/map/articles/maps/${currentMapId}`);
+    } else if (isInMypageTab) {
+      router.push(`/(tabs)/mypage/articles/maps/${currentMapId}`);
+    } else if (isInNotificationsTab) {
+      router.push(`/(tabs)/notifications/articles/maps/${currentMapId}`);
+    } else {
+      router.push(`/(tabs)/discover/articles/maps/${currentMapId}`);
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white" edges={isUserMap ? ['top'] : []}>
       {/* ヘッダー（ユーザーマップの時のみ表示、検索中は非表示） */}
@@ -209,6 +226,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
           onMapSelect={handleMapSelect}
           onUserPress={handleUserPress}
           onSearchPress={handleSearchFocus}
+          onArticlePress={handleArticlePress}
         />
       )}
 

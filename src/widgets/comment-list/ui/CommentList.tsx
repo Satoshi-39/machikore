@@ -154,7 +154,6 @@ export function CommentList({
     <View className="flex-1 justify-center items-center py-20">
       <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
       <Text className="text-gray-400 mt-4">まだコメントがありません</Text>
-      <Text className="text-gray-400 text-sm mt-1">最初のコメントを投稿しましょう</Text>
     </View>
   ), []);
 

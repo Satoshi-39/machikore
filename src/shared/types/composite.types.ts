@@ -74,6 +74,14 @@ export interface MasterSpotBasicInfo {
  * spots JOIN master_spots JOIN users の結果
  * is_liked は現在のユーザーがいいねしているかを示す
  */
+/**
+ * JOINで取得するマップ基本情報
+ */
+export interface MapBasicInfo {
+  id: string;
+  name: string;
+}
+
 export interface SpotWithDetails {
   id: string;
   user_id: string;
@@ -91,6 +99,33 @@ export interface SpotWithDetails {
   updated_at: string;
   master_spot: MasterSpotBasicInfo | null;
   user: UserBasicInfo | null;
+  /** 所属するマップの情報 */
+  map?: MapBasicInfo | null;
   /** 現在のユーザーがこのスポットにいいねしているか */
   is_liked?: boolean;
+  /** マップ記事用の紹介文 */
+  article_content?: string | null;
+}
+
+// ===============================
+// マップ記事用複合型
+// ===============================
+
+/**
+ * スポット + 画像（記事表示用）
+ */
+export interface SpotWithImages extends SpotWithDetails {
+  images: {
+    id: string;
+    cloud_path: string | null;
+    order_index: number;
+  }[];
+}
+
+/**
+ * マップ記事データ（マップ + スポット一覧 + 画像）
+ */
+export interface MapArticleData {
+  map: MapWithUser;
+  spots: SpotWithImages[];
 }

@@ -22,13 +22,20 @@ interface MapCardProps {
   onPress?: () => void;
   onEdit?: (mapId: string) => void;
   onDelete?: (mapId: string) => void;
+  onArticlePress?: (mapId: string) => void;
 }
 
-function MapCard({ map, onPress, onEdit, onDelete }: MapCardProps) {
+function MapCard({ map, onPress, onEdit, onDelete, onArticlePress }: MapCardProps) {
   const createdDate = new Date(map.created_at);
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
   const menuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'article',
+      label: '記事を見る',
+      icon: 'document-text-outline',
+      onPress: () => onArticlePress?.(map.id),
+    },
     {
       id: 'edit',
       label: '編集',
@@ -42,7 +49,7 @@ function MapCard({ map, onPress, onEdit, onDelete }: MapCardProps) {
       destructive: true,
       onPress: () => onDelete?.(map.id),
     },
-  ], [map.id, onEdit, onDelete]);
+  ], [map.id, onEdit, onDelete, onArticlePress]);
 
   return (
     <Pressable
@@ -152,6 +159,20 @@ export function MapsTab({ userId }: MapsTabProps) {
     );
   };
 
+  const handleArticlePress = (mapId: string) => {
+    if (isInDiscoverTab) {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}`);
+    } else if (isInMapTab) {
+      router.push(`/(tabs)/map/articles/maps/${mapId}`);
+    } else if (isInMypageTab) {
+      router.push(`/(tabs)/mypage/articles/maps/${mapId}`);
+    } else if (isInNotificationsTab) {
+      router.push(`/(tabs)/notifications/articles/maps/${mapId}`);
+    } else {
+      router.push(`/(tabs)/mypage/articles/maps/${mapId}`);
+    }
+  };
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
@@ -171,6 +192,7 @@ export function MapsTab({ userId }: MapsTabProps) {
               onPress={() => handleMapPress(item)}
               onEdit={handleEdit}
               onDelete={handleDelete}
+              onArticlePress={handleArticlePress}
             />
           )}
           contentContainerClassName="bg-white"

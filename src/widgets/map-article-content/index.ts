@@ -1,0 +1,1 @@
+export { MapArticleContent } from './ui';

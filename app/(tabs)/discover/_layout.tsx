@@ -15,6 +15,7 @@ export default function DiscoverLayout() {
       <Stack.Screen name="users/[id]" />
       <Stack.Screen name="comments/spots/[id]" />
       <Stack.Screen name="comments/maps/[id]" />
+      <Stack.Screen name="articles/maps/[id]" />
     </Stack>
   );
 }

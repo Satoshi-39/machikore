@@ -189,6 +189,20 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="comments/spots/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="comments/maps/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
         </Stack>
         <StatusBar style="auto" />
         <Toast config={toastConfig} />

@@ -21,7 +21,7 @@ export function useCommentReplies(
   enabled: boolean = true
 ) {
   return useQuery({
-    queryKey: ['replies', parentId, currentUserId],
+    queryKey: ['comments', 'replies', parentId, currentUserId],
     queryFn: () => getCommentReplies(parentId!, 50, 0, currentUserId),
     enabled: !!parentId && enabled,
   });
@@ -43,16 +43,14 @@ export function useAddReplyComment() {
     mutationFn: ({ userId, parentComment, content }) =>
       addReplyComment(userId, parentComment, content),
     onSuccess: (_, { parentComment }) => {
-      // 返信一覧を再取得
-      queryClient.invalidateQueries({ queryKey: ['replies', parentComment.id] });
+      // 返信一覧を再取得（プレフィックスで全てのcurrentUserIdパターンをinvalidate）
+      queryClient.invalidateQueries({ queryKey: ['comments', 'replies', parentComment.id] });
       // 親コメントの返信数を更新するためコメント一覧も再取得
       if (parentComment.spot_id) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'spot', parentComment.spot_id] });
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spots });
       }
       if (parentComment.map_id) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'map', parentComment.map_id] });
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
       }
 
       Toast.show({

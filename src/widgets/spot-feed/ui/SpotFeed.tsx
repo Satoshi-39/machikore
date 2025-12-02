@@ -33,6 +33,16 @@ export function SpotFeed() {
     router.push(`/edit-spot?id=${spotId}`);
   }, [router]);
 
+  // コメント詳細ページへ遷移（発見タブ内スタック）
+  const handleCommentPress = useCallback((spotId: string) => {
+    router.push(`/(tabs)/discover/comments/spots/${spotId}`);
+  }, [router]);
+
+  // マップ詳細ページへ遷移（発見タブ内スタック）
+  const handleMapPress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/discover/maps/${mapId}`);
+  }, [router]);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
@@ -51,7 +61,9 @@ export function SpotFeed() {
               currentUserId={currentUser?.id}
               onPress={() => handleSpotPress(item.map_id, item.id)}
               onUserPress={handleUserPress}
+              onMapPress={handleMapPress}
               onEdit={handleEditSpot}
+              onCommentPress={handleCommentPress}
               // Supabase JOINで取得済みのデータを渡す
               embeddedUser={item.user}
               embeddedMasterSpot={item.master_spot}

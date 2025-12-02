@@ -73,6 +73,7 @@ interface UpdateCommentParams {
   content: string;
   spotId?: UUID | null;
   mapId?: UUID | null;
+  parentId?: UUID | null;
 }
 
 /**
@@ -84,13 +85,17 @@ export function useUpdateComment() {
   return useMutation<CommentWithUser, Error, UpdateCommentParams>({
     mutationFn: ({ commentId, content }) =>
       updateComment(commentId, content),
-    onSuccess: (_, { spotId, mapId }) => {
+    onSuccess: (_, { spotId, mapId, parentId }) => {
       // コメント一覧を再取得
       if (spotId) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
       }
       if (mapId) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
+      }
+      // 返信コメントの場合は親コメントの返信一覧も再取得
+      if (parentId) {
+        queryClient.invalidateQueries({ queryKey: ['comments', 'replies', parentId] });
       }
 
       Toast.show({

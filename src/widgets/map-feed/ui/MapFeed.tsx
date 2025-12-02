@@ -31,6 +31,16 @@ export function MapFeed() {
     router.push(`/edit-map?id=${mapId}`);
   }, [router]);
 
+  // コメント詳細ページへ遷移（発見タブ内スタック）
+  const handleCommentPress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/discover/comments/maps/${mapId}`);
+  }, [router]);
+
+  // 記事ページへ遷移
+  const handleArticlePress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/discover/articles/maps/${mapId}`);
+  }, [router]);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
@@ -50,6 +60,8 @@ export function MapFeed() {
               onPress={() => handleMapPress(item.id)}
               onUserPress={handleUserPress}
               onEdit={handleEditMap}
+              onCommentPress={handleCommentPress}
+              onArticlePress={handleArticlePress}
             />
           )}
           refreshControl={

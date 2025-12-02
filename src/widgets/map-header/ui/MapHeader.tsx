@@ -11,7 +11,9 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator, Share } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
 
 interface MapHeaderProps {
@@ -27,6 +29,7 @@ interface MapHeaderProps {
   onMapSelect?: (mapId: string) => void;
   onUserPress?: () => void;
   onSearchPress?: () => void;
+  onArticlePress?: () => void;
 }
 
 export function MapHeader({
@@ -42,12 +45,16 @@ export function MapHeader({
   onMapSelect,
   onUserPress,
   onSearchPress,
+  onArticlePress,
 }: MapHeaderProps) {
   const insets = useSafeAreaInsets();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
+
+  // いいね状態を取得
+  const { data: isLiked = false } = useCheckMapLiked(userId, mapId);
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
   const slideAnim = useRef(new Animated.Value(-500)).current; // 初期位置: 画面上部の外側
 
   // マップブックマーク状態を取得
@@ -63,9 +70,13 @@ export function MapHeader({
 
   // いいね処理
   const handleLikePress = useCallback(() => {
-    setIsLiked(!isLiked);
-    // TODO: マップいいねのAPI呼び出し
-  }, [isLiked]);
+    if (!userId) {
+      showLoginRequiredAlert('いいね');
+      return;
+    }
+    if (!mapId || isTogglingLike) return;
+    toggleLike({ userId, mapId });
+  }, [userId, mapId, isTogglingLike, toggleLike]);
 
   // ブックマーク処理（フォルダ選択モーダルを開く）
   const handleBookmarkPress = useCallback(() => {
@@ -100,6 +111,12 @@ export function MapHeader({
   // ポップアップメニュー項目
   const menuItems: PopupMenuItem[] = useMemo(() => [
     {
+      id: 'article',
+      label: '記事を見る',
+      icon: 'document-text-outline',
+      onPress: () => onArticlePress?.(),
+    },
+    {
       id: 'like',
       label: isLiked ? 'いいね済み' : 'いいね',
       icon: isLiked ? 'heart' : 'heart-outline',
@@ -119,7 +136,7 @@ export function MapHeader({
       icon: 'share-outline',
       onPress: handleSharePress,
     },
-  ], [isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress]);
+  ], [isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress]);
 
   // モーダルの開閉に応じてアニメーション
   useEffect(() => {
@@ -334,7 +351,7 @@ export function MapHeader({
       {userAvatarUrl && (
         <ImageViewerModal
           visible={isAvatarModalVisible}
-          imageUri={userAvatarUrl}
+          images={[userAvatarUrl]}
           onClose={() => setIsAvatarModalVisible(false)}
         />
       )}

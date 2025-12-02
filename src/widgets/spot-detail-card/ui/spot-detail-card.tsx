@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert, Share } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -15,7 +15,11 @@ import { showLoginRequiredAlert } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
+import { useSpotComments, CommentItem } from '@/entities/comment';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { CommentInputModal } from '@/features/add-comment';
+import { EditCommentModal } from '@/features/edit-comment';
+import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
 interface SpotDetailCardProps {
@@ -24,9 +28,10 @@ interface SpotDetailCardProps {
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
   onEdit?: (spotId: string) => void;
+  onUserPress?: (userId: string) => void;
 }
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onEdit }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onEdit, onUserPress }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
@@ -42,6 +47,27 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
+
+  // コメント関連
+  const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 50, 0, currentUserId);
+
+  // コメント操作フック
+  const {
+    editingComment,
+    editText,
+    replyingTo,
+    isInputModalVisible,
+    setEditText,
+    closeInputModal,
+    handleAddComment,
+    handleEdit,
+    handleEditSubmit,
+    handleEditCancel,
+    handleDelete,
+    handleLike: handleCommentLike,
+    handleReply,
+    isUpdatingComment,
+  } = useCommentActions({ spotId: spot.id, currentUserId });
 
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
@@ -86,6 +112,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     bottomSheetRef.current?.close();
   }, []);
 
+  // ユーザープレスハンドラー
+  const handleUserPressInternal = useCallback((userId: string) => {
+    onUserPress?.(userId);
+  }, [onUserPress]);
+
   // いいねトグル
   const handleLikePress = useCallback(() => {
     if (!currentUserId) {
@@ -98,13 +129,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // ブックマークボタン押下 → フォルダ選択モーダルを開く
   const handleBookmarkPress = useCallback(() => {
-    console.log('📚 [SpotDetailCard] handleBookmarkPress called, currentUserId:', currentUserId);
     if (!currentUserId) {
-      console.log('📚 [SpotDetailCard] No currentUserId, showing login alert');
       showLoginRequiredAlert('保存');
       return;
     }
-    console.log('📚 [SpotDetailCard] Opening folder modal');
     setIsFolderModalVisible(true);
   }, [currentUserId]);
 
@@ -133,7 +161,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   }, [spotName, spot.id]);
 
   // 削除確認ダイアログ
-  const handleDelete = useCallback(() => {
+  const handleDeleteSpot = useCallback(() => {
     Alert.alert(
       'スポットを削除',
       'このスポットを削除しますか？この操作は取り消せません。',
@@ -164,9 +192,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       label: '削除',
       icon: 'trash-outline',
       destructive: true,
-      onPress: handleDelete,
+      onPress: handleDeleteSpot,
     },
-  ], [spot.id, onEdit, handleDelete]);
+  ], [spot.id, onEdit, handleDeleteSpot]);
 
   return (
     <>
@@ -261,8 +289,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
         {/* 統計情報とアクション */}
         <View className="flex-row items-center justify-around pt-3 border-t border-gray-200 mb-2">
-          {/* コメント */}
-          <View className="items-center">
+          {/* コメント - タップでシートを拡大 */}
+          <Pressable
+            className="items-center"
+            onPress={() => bottomSheetRef.current?.snapToIndex(2)}
+          >
             <View className="flex-row items-center">
               <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
               <Text className="text-lg font-bold text-gray-900 ml-1">
@@ -270,7 +301,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               </Text>
             </View>
             <Text className="text-xs text-gray-500">コメント</Text>
-          </View>
+          </Pressable>
 
           {/* いいねボタン */}
           <Pressable
@@ -322,6 +353,52 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Text className="text-xs text-gray-500">共有</Text>
           </Pressable>
         </View>
+
+        {/* コメントセクション */}
+        <View className="mt-4 pt-3 border-t border-gray-200">
+          <View className="flex-row items-center mb-3">
+            <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
+            <Text className="text-base font-semibold text-gray-800 ml-2">
+              コメント
+            </Text>
+          </View>
+
+          {/* コメント追加ボタン */}
+          <Pressable
+            onPress={handleAddComment}
+            className="mb-4 bg-gray-100 rounded-xl px-4 py-3"
+          >
+            <Text className="text-sm text-gray-400">
+              コメントを追加...
+            </Text>
+          </Pressable>
+
+          {/* コメント一覧 */}
+          {isLoadingComments ? (
+            <View className="py-4 items-center">
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            </View>
+          ) : comments.length === 0 ? (
+            <View className="py-4 items-center">
+              <Text className="text-sm text-gray-500">まだコメントはありません</Text>
+            </View>
+          ) : (
+            <View className="-mx-4">
+              {comments.map((comment) => (
+                <CommentItem
+                  key={comment.id}
+                  comment={comment}
+                  currentUserId={currentUserId}
+                  onUserPress={handleUserPressInternal}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                  onLike={handleCommentLike}
+                  onReply={handleReply}
+                />
+              ))}
+            </View>
+          )}
+        </View>
       </BottomSheetScrollView>
     </BottomSheet>
 
@@ -337,6 +414,25 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         bookmarkedFolderIds={bookmarkedFolderIds}
       />
     )}
+
+    {/* コメント入力モーダル */}
+    <CommentInputModal
+      visible={isInputModalVisible}
+      onClose={closeInputModal}
+      spotId={spot.id}
+      currentUserId={currentUserId}
+      replyingTo={replyingTo}
+    />
+
+    {/* コメント編集モーダル */}
+    <EditCommentModal
+      visible={!!editingComment}
+      editText={editText}
+      onChangeText={setEditText}
+      onSubmit={handleEditSubmit}
+      onCancel={handleEditCancel}
+      isUpdating={isUpdatingComment}
+    />
     </>
   );
 }

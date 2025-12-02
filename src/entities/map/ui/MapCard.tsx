@@ -24,16 +24,18 @@ interface MapCardProps {
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
   onEdit?: (mapId: string) => void;
+  onCommentPress?: (mapId: string) => void;
+  onArticlePress?: (mapId: string) => void;
 }
 
-export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: MapCardProps) {
+export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress }: MapCardProps) {
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
   const user = embeddedUser || fetchedUser;
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
 
-  const { mutate: deleteMap, isPending: isDeleting } = useDeleteMap();
+  const { mutate: deleteMap } = useDeleteMap();
   const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
 
@@ -108,21 +110,37 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
     );
   };
 
-  const menuItems: PopupMenuItem[] = useMemo(() => [
-    {
-      id: 'edit',
-      label: '編集',
-      icon: 'create-outline',
-      onPress: () => onEdit?.(map.id),
-    },
-    {
-      id: 'delete',
-      label: '削除',
-      icon: 'trash-outline',
-      destructive: true,
-      onPress: handleDelete,
-    },
-  ], [map.id, onEdit]);
+  const menuItems: PopupMenuItem[] = useMemo(() => {
+    const items: PopupMenuItem[] = [
+      {
+        id: 'article',
+        label: '記事を見る',
+        icon: 'document-text-outline',
+        onPress: () => onArticlePress?.(map.id),
+      },
+    ];
+
+    // オーナーのみ編集・削除を表示
+    if (isOwner) {
+      items.push(
+        {
+          id: 'edit',
+          label: '編集',
+          icon: 'create-outline',
+          onPress: () => onEdit?.(map.id),
+        },
+        {
+          id: 'delete',
+          label: '削除',
+          icon: 'trash-outline',
+          destructive: true,
+          onPress: handleDelete,
+        }
+      );
+    }
+
+    return items;
+  }, [map.id, onEdit, onArticlePress, isOwner]);
 
   return (
     <Pressable
@@ -154,10 +172,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
           </Pressable>
         </View>
 
-        {/* 三点リーダーメニュー（自分のマップのみ） */}
-        {isOwner && !isDeleting && (
-          <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
-        )}
+        {/* 三点リーダーメニュー */}
+        <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
       </View>
 
       {/* サムネイル画像 */}
@@ -187,12 +203,18 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
       {/* フッター情報 - 均等配置 */}
       <View className="flex-row items-center justify-around mt-2">
         {/* コメント */}
-        <View className="flex-row items-center">
+        <Pressable
+          onPress={(e) => {
+            e.stopPropagation();
+            onCommentPress?.(map.id);
+          }}
+          className="flex-row items-center"
+        >
           <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
           <Text className="text-sm text-gray-600 ml-1">
             {map.comments_count ?? 0}
           </Text>
-        </View>
+        </Pressable>
 
         {/* いいね */}
         <Pressable

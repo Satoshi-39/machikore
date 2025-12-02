@@ -21,6 +21,8 @@ export function useUpdateMap() {
       queryClient.invalidateQueries({ queryKey: ['map', data.id] });
       queryClient.invalidateQueries({ queryKey: ['userMaps', data.user_id] });
       queryClient.invalidateQueries({ queryKey: ['feed-maps'] });
+      // 記事キャッシュも無効化
+      queryClient.invalidateQueries({ queryKey: ['map-article', data.id] });
     },
   });
 }

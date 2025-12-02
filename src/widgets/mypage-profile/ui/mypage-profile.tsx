@@ -74,7 +74,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       {user?.avatar_url && (
         <ImageViewerModal
           visible={isAvatarModalVisible}
-          imageUri={user.avatar_url}
+          images={[user.avatar_url]}
           onClose={() => setIsAvatarModalVisible(false)}
         />
       )}

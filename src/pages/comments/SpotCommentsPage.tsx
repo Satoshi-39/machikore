@@ -4,26 +4,20 @@
  * FSDの原則：Pagesはルーティング可能な画面。Widgetの組み合わせのみ
  */
 
-import React, { useState, useCallback } from 'react';
-import { View, Text, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, Text, ActivityIndicator, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  useSpotComments,
-  useUpdateComment,
-  useDeleteComment,
-  useLikeComment,
-  useUnlikeComment,
-} from '@/entities/comment';
+import { useSpotComments } from '@/entities/comment';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotWithDetails, SpotCard } from '@/entities/user-spot';
 import { EditCommentModal } from '@/features/edit-comment';
+import { CommentInputModal } from '@/features/add-comment';
+import { useCommentActions } from '@/features/comment-actions';
 import { CommentList } from '@/widgets/comment-list';
-import { CommentInput } from '@/widgets/comment-input';
 import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
-import { showLoginRequiredAlert, useCurrentTab } from '@/shared/lib';
-import type { CommentWithUser } from '@/shared/api/supabase/comments';
+import { useCurrentTab } from '@/shared/lib';
 
 interface SpotCommentsPageProps {
   spotId: string;
@@ -34,19 +28,29 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
 
-  const [editingComment, setEditingComment] = useState<CommentWithUser | null>(null);
-  const [editText, setEditText] = useState('');
-  const [replyingTo, setReplyingTo] = useState<CommentWithUser | null>(null);
-
   // データ取得
   const { data: spot, isLoading: isLoadingSpot } = useSpotWithDetails(spotId, currentUserId);
   const { data: comments, isLoading: isLoadingComments, refetch } = useSpotComments(spotId, 50, 0, currentUserId);
-  const { mutate: updateComment, isPending: isUpdatingComment } = useUpdateComment();
-  const { mutate: deleteComment } = useDeleteComment();
-  const { mutate: likeComment } = useLikeComment();
-  const { mutate: unlikeComment } = useUnlikeComment();
 
   const isLoading = isLoadingSpot || isLoadingComments;
+
+  // コメント操作フック
+  const {
+    editingComment,
+    editText,
+    replyingTo,
+    isInputModalVisible,
+    setEditText,
+    closeInputModal,
+    handleAddComment,
+    handleEdit,
+    handleEditSubmit,
+    handleEditCancel,
+    handleDeleteConfirm,
+    handleLike,
+    handleReply,
+    isUpdatingComment,
+  } = useCommentActions({ spotId, currentUserId });
 
   // ナビゲーションハンドラー
   const handleUserPress = useCallback((userId: string) => {
@@ -64,71 +68,6 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
   const handleSpotEdit = useCallback((id: string) => {
     router.push(`/edit-spot?id=${id}`);
   }, [router]);
-
-  // コメント編集ハンドラー
-  const handleEdit = useCallback((comment: CommentWithUser) => {
-    setEditingComment(comment);
-    setEditText(comment.content);
-  }, []);
-
-  const handleEditSubmit = useCallback(() => {
-    if (!editingComment || !editText.trim() || isUpdatingComment) return;
-
-    updateComment(
-      {
-        commentId: editingComment.id,
-        content: editText.trim(),
-        spotId: editingComment.spot_id,
-        mapId: editingComment.map_id,
-      },
-      {
-        onSuccess: () => {
-          setEditingComment(null);
-          setEditText('');
-        },
-      }
-    );
-  }, [editingComment, editText, isUpdatingComment, updateComment]);
-
-  const handleEditCancel = useCallback(() => {
-    setEditingComment(null);
-    setEditText('');
-  }, []);
-
-  // コメント削除ハンドラー
-  const handleDeleteConfirm = useCallback((comment: CommentWithUser) => {
-    deleteComment({
-      commentId: comment.id,
-      spotId: comment.spot_id,
-      parentId: comment.parent_id,
-    });
-  }, [deleteComment]);
-
-  // いいねハンドラー
-  const handleLike = useCallback((comment: CommentWithUser) => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
-      return;
-    }
-    if (comment.is_liked) {
-      unlikeComment({ userId: currentUserId, commentId: comment.id, spotId: comment.spot_id });
-    } else {
-      likeComment({ userId: currentUserId, commentId: comment.id, spotId: comment.spot_id });
-    }
-  }, [currentUserId, likeComment, unlikeComment]);
-
-  // 返信ハンドラー
-  const handleReply = useCallback((comment: CommentWithUser) => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('返信');
-      return;
-    }
-    setReplyingTo(comment);
-  }, [currentUserId]);
-
-  const handleCancelReply = useCallback(() => {
-    setReplyingTo(null);
-  }, []);
 
   // スポットヘッダー
   const renderSpotHeader = useCallback(() => {
@@ -167,31 +106,37 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
     <SafeAreaView className="flex-1 bg-white" edges={['bottom']}>
       <PageHeader title="コメント" />
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        className="flex-1"
-        keyboardVerticalOffset={0}
-      >
-        <CommentList
-          comments={comments || []}
-          currentUserId={currentUserId}
-          onUserPress={handleUserPress}
-          onEdit={handleEdit}
-          onDeleteConfirm={handleDeleteConfirm}
-          onLike={handleLike}
-          onReply={handleReply}
-          onRefresh={refetch}
-          isRefreshing={isLoading}
-          ListHeaderComponent={renderSpotHeader}
-        />
+      <CommentList
+        comments={comments || []}
+        currentUserId={currentUserId}
+        onUserPress={handleUserPress}
+        onEdit={handleEdit}
+        onDeleteConfirm={handleDeleteConfirm}
+        onLike={handleLike}
+        onReply={handleReply}
+        onRefresh={refetch}
+        isRefreshing={isLoading}
+        ListHeaderComponent={renderSpotHeader}
+      />
 
-        <CommentInput
-          spotId={spotId}
-          currentUserId={currentUserId}
-          replyingTo={replyingTo}
-          onCancelReply={handleCancelReply}
-        />
-      </KeyboardAvoidingView>
+      {/* コメント追加ボタン */}
+      <View className="border-t border-gray-200 px-4 py-3">
+        <Pressable
+          onPress={handleAddComment}
+          className="bg-gray-100 rounded-xl px-4 py-3"
+        >
+          <Text className="text-gray-400">コメントを追加...</Text>
+        </Pressable>
+      </View>
+
+      {/* コメント入力モーダル */}
+      <CommentInputModal
+        visible={isInputModalVisible}
+        onClose={closeInputModal}
+        spotId={spotId}
+        currentUserId={currentUserId}
+        replyingTo={replyingTo}
+      />
 
       <EditCommentModal
         visible={!!editingComment}

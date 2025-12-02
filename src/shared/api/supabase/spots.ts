@@ -262,6 +262,72 @@ export async function getSpotById(spotId: string): Promise<UserSpotWithMasterSpo
   };
 }
 
+/**
+ * IDでスポットを詳細情報付きで取得（user, master_spot, is_liked含む）
+ * SpotWithDetails型を返す（SpotCardで使用可能）
+ */
+export async function getSpotWithDetails(
+  spotId: string,
+  currentUserId?: string | null
+): Promise<import('@/shared/types').SpotWithDetails | null> {
+  const { data, error } = await supabase
+    .from('user_spots')
+    .select(`
+      *,
+      master_spots (*),
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      ),
+      maps (
+        id,
+        name
+      ),
+      likes (
+        id,
+        user_id
+      )
+    `)
+    .eq('id', spotId)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      return null;
+    }
+    console.error('[getSpotWithDetails] Error:', error);
+    throw error;
+  }
+
+  const spot = data as any;
+  const isLiked = currentUserId
+    ? (spot.likes || []).some((like: any) => like.user_id === currentUserId)
+    : false;
+
+  return {
+    id: spot.id,
+    user_id: spot.user_id,
+    map_id: spot.map_id,
+    master_spot_id: spot.master_spot_id,
+    machi_id: spot.machi_id,
+    custom_name: spot.custom_name,
+    description: spot.description,
+    tags: spot.tags,
+    images_count: spot.images_count,
+    likes_count: spot.likes_count,
+    comments_count: spot.comments_count,
+    order_index: spot.order_index,
+    created_at: spot.created_at,
+    updated_at: spot.updated_at,
+    master_spot: spot.master_spots || null,
+    user: spot.users || null,
+    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    is_liked: isLiked,
+  };
+}
+
 // ===============================
 // 公開スポット取得
 // ===============================
@@ -287,6 +353,8 @@ export async function getPublicSpots(
         avatar_url
       ),
       maps!inner (
+        id,
+        name,
         is_public
       ),
       likes (
@@ -326,6 +394,7 @@ export async function getPublicSpots(
       updated_at: spot.updated_at,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
+      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
       is_liked: isLiked,
     };
   });

@@ -74,6 +74,7 @@ export function useCheckMapLiked(userId: UUID | null | undefined, mapId: UUID | 
       return checkMapLiked(userId, mapId);
     },
     enabled: !!userId && !!mapId,
+    staleTime: 1000 * 60 * 5, // 5分間キャッシュ（楽観的更新が優先される）
   });
 }
 

@@ -9,3 +9,4 @@ export { useUpdateMap } from './use-update-map';
 export { useDeleteMap } from './use-delete-map';
 export { useFeedMaps } from './use-feed-maps';
 export { useMapSearch } from './use-map-search';
+export { useMapArticle, useUpdateSpotArticle } from './use-map-article';
