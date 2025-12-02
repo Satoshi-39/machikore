@@ -1,20 +1,35 @@
 /**
  * ブックマークフォルダ一覧Widget
  *
- * フォルダ一覧を表示し、選択・削除機能を提供
+ * フォルダ一覧を表示し、選択・編集・削除機能を提供
  */
 
-import React, { useCallback, useMemo } from 'react';
-import { View, Text, Pressable, FlatList, Alert } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import {
   useBookmarkFolders,
   useBookmarks,
   useDeleteBookmarkFolder,
+  useUpdateBookmarkFolder,
 } from '@/entities/bookmark';
-import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
+import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
+import { colors } from '@/shared/config';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useCallback, useMemo, useState } from 'react';
+import {
+  Alert,
+  FlatList,
+  Modal,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import {
+  Menu,
+  MenuOption,
+  MenuOptions,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 
 interface BookmarkFolderListProps {
   userId: string;
@@ -33,6 +48,13 @@ export function BookmarkFolderList({
   const { data: folders = [] } = useBookmarkFolders(userId, activeTab);
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
   const { mutate: deleteFolder } = useDeleteBookmarkFolder();
+  const { mutate: updateFolder } = useUpdateBookmarkFolder();
+
+  // 編集モーダルの状態
+  const [editingFolder, setEditingFolder] = useState<BookmarkFolder | null>(
+    null
+  );
+  const [editingName, setEditingName] = useState('');
 
   // フォルダごとのブックマーク数を計算
   const folderCounts = useMemo(() => {
@@ -60,12 +82,31 @@ export function BookmarkFolderList({
     return counts;
   }, [allBookmarks, folders]);
 
+  // フォルダ編集を開始
+  const handleEditFolder = useCallback((folder: BookmarkFolder) => {
+    setEditingFolder(folder);
+    setEditingName(folder.name);
+  }, []);
+
+  // フォルダ編集を保存
+  const handleSaveEdit = useCallback(() => {
+    if (!editingFolder || !editingName.trim()) return;
+
+    updateFolder({
+      folderId: editingFolder.id,
+      updates: { name: editingName.trim() },
+      userId,
+    });
+    setEditingFolder(null);
+    setEditingName('');
+  }, [editingFolder, editingName, updateFolder, userId]);
+
   // フォルダ削除
   const handleDeleteFolder = useCallback(
     (folder: BookmarkFolder) => {
       Alert.alert(
         'フォルダを削除',
-        `「${folder.name}」を削除しますか？\nフォルダ内のブックマークは未分類に移動します。`,
+        `「${folder.name}」を削除しますか？\nフォルダ内のブックマークは「後で見る」に移動します。`,
         [
           { text: 'キャンセル', style: 'cancel' },
           {
@@ -81,32 +122,32 @@ export function BookmarkFolderList({
     [userId, deleteFolder]
   );
 
-  const foldersWithDefault = useMemo(() => [
-    { id: 'uncategorized', name: '後で見る', user_id: userId, order_index: -1, created_at: '' },
-    ...folders,
-  ], [folders, userId]);
+  const foldersWithDefault = useMemo(
+    () => [
+      {
+        id: 'uncategorized',
+        name: '後で見る',
+        user_id: userId,
+        order_index: -1,
+        created_at: '',
+      },
+      ...folders,
+    ],
+    [folders, userId]
+  );
 
   const renderFolderItem = useCallback(
-    ({ item }: { item: typeof foldersWithDefault[0] }) => {
+    ({ item }: { item: (typeof foldersWithDefault)[0] }) => {
       const count = folderCounts[item.id]?.[activeTab] || 0;
       const isUncategorized = item.id === 'uncategorized';
 
       return (
         <Pressable
           onPress={() => onFolderSelect(item.id)}
-          onLongPress={() => {
-            if (!isUncategorized) {
-              handleDeleteFolder(item as BookmarkFolder);
-            }
-          }}
           className="bg-white px-4 py-4 border-b border-gray-100 flex-row items-center"
         >
           <View className="w-10 h-10 rounded-lg bg-gray-100 items-center justify-center mr-3">
-            <Ionicons
-              name="folder"
-              size={24}
-              color={colors.primary.DEFAULT}
-            />
+            <Ionicons name="folder" size={24} color={colors.primary.DEFAULT} />
           </View>
           <View className="flex-1">
             <Text className="text-base font-medium text-gray-900">
@@ -114,31 +155,122 @@ export function BookmarkFolderList({
             </Text>
             <Text className="text-sm text-gray-500">{count}件</Text>
           </View>
-          <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+
+          {/* 3点リーダーメニュー（後で見る以外） */}
+          {!isUncategorized && (
+            <Menu>
+              <MenuTrigger>
+                <View className="p-2">
+                  <Ionicons
+                    name="ellipsis-horizontal"
+                    size={20}
+                    color={colors.text.secondary}
+                  />
+                </View>
+              </MenuTrigger>
+              <MenuOptions
+                customStyles={{
+                  optionsContainer: {
+                    borderRadius: 8,
+                    padding: 4,
+                    width: 140,
+                  },
+                }}
+              >
+                <MenuOption
+                  onSelect={() => handleEditFolder(item as BookmarkFolder)}
+                >
+                  <View className="flex-row items-center px-3 py-2">
+                    <Ionicons
+                      name="pencil"
+                      size={18}
+                      color={colors.text.primary}
+                    />
+                    <Text className="ml-2 text-gray-900">編集</Text>
+                  </View>
+                </MenuOption>
+                <MenuOption
+                  onSelect={() => handleDeleteFolder(item as BookmarkFolder)}
+                >
+                  <View className="flex-row items-center px-3 py-2">
+                    <Ionicons name="trash" size={18} color="#EF4444" />
+                    <Text className="ml-2 text-red-500">削除</Text>
+                  </View>
+                </MenuOption>
+              </MenuOptions>
+            </Menu>
+          )}
         </Pressable>
       );
     },
-    [folderCounts, activeTab, onFolderSelect, handleDeleteFolder]
+    [
+      folderCounts,
+      activeTab,
+      onFolderSelect,
+      handleEditFolder,
+      handleDeleteFolder,
+    ]
   );
 
   return (
-    <FlatList
-      data={foldersWithDefault}
-      keyExtractor={(item) => item.id}
-      renderItem={renderFolderItem}
-      ListFooterComponent={
-        <Pressable
-          onPress={onCreateFolder}
-          className="bg-white px-4 py-4 border-b border-gray-100 flex-row items-center"
-        >
-          <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
-            <Ionicons name="add" size={24} color={colors.primary.DEFAULT} />
+    <>
+      <FlatList
+        data={foldersWithDefault}
+        keyExtractor={(item) => item.id}
+        renderItem={renderFolderItem}
+        ListFooterComponent={
+          <Pressable
+            onPress={onCreateFolder}
+            className="bg-white px-4 py-4 border-b border-gray-100 flex-row items-center"
+          >
+            <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
+              <Ionicons name="add" size={24} color={colors.primary.DEFAULT} />
+            </View>
+            <Text className="text-base font-medium text-blue-500">
+              新しいフォルダを作成
+            </Text>
+          </Pressable>
+        }
+      />
+
+      {/* フォルダ名編集モーダル */}
+      <Modal
+        visible={!!editingFolder}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setEditingFolder(null)}
+      >
+        <View className="flex-1 bg-black/50 justify-center items-center px-6">
+          <View className="bg-white rounded-2xl w-full max-w-sm p-6">
+            <Text className="text-lg font-semibold text-gray-900 mb-4">
+              フォルダ名を編集
+            </Text>
+            <TextInput
+              value={editingName}
+              onChangeText={setEditingName}
+              placeholder="フォルダ名"
+              className="bg-gray-100 rounded-lg px-4 py-3 text-base mb-4"
+              autoFocus
+            />
+            <View className="flex-row justify-end">
+              <Pressable
+                onPress={() => setEditingFolder(null)}
+                className="px-4 py-2 mr-2"
+              >
+                <Text className="text-gray-500 font-medium">キャンセル</Text>
+              </Pressable>
+              <Pressable
+                onPress={handleSaveEdit}
+                disabled={!editingName.trim()}
+                className="px-4 py-2 bg-blue-500 rounded-lg"
+                style={{ opacity: editingName.trim() ? 1 : 0.5 }}
+              >
+                <Text className="text-white font-medium">保存</Text>
+              </Pressable>
+            </View>
           </View>
-          <Text className="text-base font-medium text-blue-500">
-            新しいフォルダを作成
-          </Text>
-        </Pressable>
-      }
-    />
+        </View>
+      </Modal>
+    </>
   );
 }
