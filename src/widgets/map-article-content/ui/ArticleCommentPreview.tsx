@@ -2,50 +2,125 @@
  * 記事コメントプレビュー
  *
  * コメントを数件プレビュー表示し、全件表示へのリンクを提供
- * コメント追加、いいね、返信、編集機能を含む
+ * note風：「コメントを追加...」タップでキーボード一体化モーダルが表示
  */
 
-import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, Text, Pressable, Keyboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { CommentItem } from '@/entities/comment';
+import { showLoginRequiredAlert } from '@/shared/lib';
+import { CommentInputModal } from '@/shared/ui';
+import { CommentItem, useAddMapComment, useAddReplyComment } from '@/entities/comment';
+import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface ArticleCommentPreviewProps {
   comments: CommentWithUser[];
   totalCount: number;
+  mapId: string;
   currentUserId?: string | null;
   onViewAllPress: () => void;
-  onAddComment: () => void;
   onUserPress: (userId: string) => void;
   onEdit: (comment: CommentWithUser) => void;
   onDelete: (comment: CommentWithUser) => void;
   onLike: (comment: CommentWithUser) => void;
-  onReply: (comment: CommentWithUser) => void;
 }
 
 export function ArticleCommentPreview({
   comments,
   totalCount,
+  mapId,
   currentUserId,
   onViewAllPress,
-  onAddComment,
   onUserPress,
   onEdit,
   onDelete,
   onLike,
-  onReply,
 }: ArticleCommentPreviewProps) {
+  // モーダル状態
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const [replyingTo, setReplyingTo] = useState<CommentWithUser | null>(null);
+
+  // 現在のユーザー情報
+  const { data: currentUser } = useUser(currentUserId ?? null);
+
+  // コメント投稿
+  const { mutate: addComment, isPending: isAddingComment } = useAddMapComment();
+  const { mutate: addReply, isPending: isAddingReply } = useAddReplyComment();
+  const isSubmitting = isAddingComment || isAddingReply;
+
+  // モーダルを開く
+  const openModal = useCallback(() => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('コメント');
+      return;
+    }
+    setIsModalVisible(true);
+  }, [currentUserId]);
+
+  // モーダルを閉じる
+  const closeModal = useCallback(() => {
+    setIsModalVisible(false);
+    setReplyingTo(null);
+  }, []);
+
+  // 返信ボタン押下
+  const handleReply = useCallback((comment: CommentWithUser) => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('返信');
+      return;
+    }
+    setReplyingTo(comment);
+    setIsModalVisible(true);
+  }, [currentUserId]);
+
+  // 返信キャンセル
+  const cancelReply = useCallback(() => {
+    setReplyingTo(null);
+  }, []);
+
+  // 送信ハンドラー
+  const handleSubmit = useCallback(() => {
+    if (!currentUserId || !inputText.trim() || isSubmitting) return;
+
+    const content = inputText.trim();
+
+    const onSuccess = () => {
+      setInputText('');
+      setReplyingTo(null);
+      setIsModalVisible(false);
+      Keyboard.dismiss();
+    };
+
+    if (replyingTo) {
+      addReply(
+        { userId: currentUserId, parentComment: replyingTo, content },
+        { onSuccess }
+      );
+    } else {
+      addComment(
+        { userId: currentUserId, mapId, content },
+        { onSuccess }
+      );
+    }
+  }, [currentUserId, inputText, replyingTo, mapId, addReply, addComment, isSubmitting]);
+
+  // 返信先の表示名
+  const replyTarget = replyingTo
+    ? { displayName: replyingTo.user?.display_name || replyingTo.user?.username || '' }
+    : null;
+
   return (
     <View className="mt-6">
       <Text className="text-base font-semibold text-gray-800 mb-3">
         コメント
       </Text>
 
-      {/* コメント追加ボタン */}
+      {/* コメント追加ボタン（タップでモーダル表示） */}
       <Pressable
-        onPress={onAddComment}
+        onPress={openModal}
         className="mb-4 bg-gray-100 rounded-xl px-4 py-3"
       >
         <Text className="text-sm text-gray-400">
@@ -66,7 +141,7 @@ export function ArticleCommentPreview({
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onLike={onLike}
-                onReply={onReply}
+                onReply={handleReply}
               />
             ))}
           </View>
@@ -88,6 +163,19 @@ export function ArticleCommentPreview({
           </Text>
         </View>
       )}
+
+      {/* コメント入力モーダル */}
+      <CommentInputModal
+        visible={isModalVisible}
+        onClose={closeModal}
+        avatarUrl={currentUser?.avatar_url}
+        inputText={inputText}
+        onChangeText={setInputText}
+        onSubmit={handleSubmit}
+        isSubmitting={isSubmitting}
+        replyingTo={replyTarget}
+        onCancelReply={cancelReply}
+      />
     </View>
   );
 }

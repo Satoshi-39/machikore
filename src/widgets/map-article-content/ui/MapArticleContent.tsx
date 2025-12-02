@@ -18,14 +18,13 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
-import { ImageViewerModal, useImageViewer } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, CommentInputModal } from '@/shared/ui';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { useUserMaps } from '@/entities/map';
+import { useUser } from '@/entities/user';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { CommentInputModal } from '@/features/add-comment';
-import { EditCommentModal } from '@/features/edit-comment';
 import { useCommentActions } from '@/features/comment-actions';
 import type { MapArticleData } from '@/shared/types';
 import { ArticleSpotSection } from './ArticleSpotSection';
@@ -75,21 +74,19 @@ export function MapArticleContent({
   // コメント取得（プレビュー用に3件）
   const { data: comments = [] } = useMapComments(map.id, 3, 0, currentUserId);
 
-  // コメント操作フック
+  // 現在のユーザー情報（編集モーダル用）
+  const { data: currentUser } = useUser(currentUserId ?? null);
+
+  // コメント操作フック（編集・削除・いいね用）
   const {
     editingComment,
     editText,
-    replyingTo,
-    isInputModalVisible,
     setEditText,
-    closeInputModal,
-    handleAddComment,
     handleEdit,
     handleEditSubmit,
     handleEditCancel,
     handleDelete,
     handleLike: handleCommentLike,
-    handleReply,
     isUpdatingComment,
   } = useCommentActions({ mapId: map.id, currentUserId });
 
@@ -264,7 +261,7 @@ export function MapArticleContent({
           )}
 
           {/* フッターアクション（note風） */}
-          <View className="py-6 mt-6 border-t border-gray-200">
+          <View className="py-6 mt-6">
             {/* アクションボタン */}
             <View className="mb-6">
               <ArticleFooterActions
@@ -298,14 +295,13 @@ export function MapArticleContent({
             <ArticleCommentPreview
               comments={comments}
               totalCount={map.comments_count}
+              mapId={map.id}
               currentUserId={currentUserId}
               onViewAllPress={onCommentsPress}
-              onAddComment={handleAddComment}
               onUserPress={onUserPress}
               onEdit={handleEdit}
               onDelete={handleDelete}
               onLike={handleCommentLike}
-              onReply={handleReply}
             />
           </View>
         </View>
@@ -324,23 +320,16 @@ export function MapArticleContent({
         />
       )}
 
-      {/* コメント入力モーダル */}
-      <CommentInputModal
-        visible={isInputModalVisible}
-        onClose={closeInputModal}
-        mapId={map.id}
-        currentUserId={currentUserId}
-        replyingTo={replyingTo}
-      />
-
       {/* コメント編集モーダル */}
-      <EditCommentModal
+      <CommentInputModal
         visible={!!editingComment}
-        editText={editText}
+        onClose={handleEditCancel}
+        avatarUrl={currentUser?.avatar_url}
+        inputText={editText}
         onChangeText={setEditText}
         onSubmit={handleEditSubmit}
-        onCancel={handleEditCancel}
-        isUpdating={isUpdatingComment}
+        isSubmitting={isUpdatingComment}
+        isEditing
       />
 
       {/* 画像ビューアーモーダル */}

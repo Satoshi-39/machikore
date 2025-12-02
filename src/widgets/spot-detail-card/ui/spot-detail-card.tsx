@@ -5,22 +5,22 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicator, Platform } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicator, Platform, Keyboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, CommentInputModal } from '@/shared/ui';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
-import { useSpotComments, CommentItem } from '@/entities/comment';
+import { useSpotComments, useAddSpotComment, useAddReplyComment, CommentItem } from '@/entities/comment';
+import { useUser } from '@/entities/user';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { CommentInputModal } from '@/features/add-comment';
-import { EditCommentModal } from '@/features/edit-comment';
 import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
+import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface SpotDetailCardProps {
   spot: SpotWithDetails;
@@ -50,24 +50,89 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // コメント関連
   const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 50, 0, currentUserId);
+  const { data: currentUser } = useUser(currentUserId ?? null);
+  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const [replyingTo, setReplyingTo] = useState<CommentWithUser | null>(null);
 
-  // コメント操作フック
+  // コメント投稿
+  const { mutate: addComment, isPending: isAddingComment } = useAddSpotComment();
+  const { mutate: addReply, isPending: isAddingReply } = useAddReplyComment();
+  const isSubmitting = isAddingComment || isAddingReply;
+
+  // コメント操作フック（編集・削除・いいね用）
   const {
     editingComment,
     editText,
-    replyingTo,
-    isInputModalVisible,
     setEditText,
-    closeInputModal,
-    handleAddComment,
     handleEdit,
     handleEditSubmit,
     handleEditCancel,
     handleDelete,
     handleLike: handleCommentLike,
-    handleReply,
     isUpdatingComment,
   } = useCommentActions({ spotId: spot.id, currentUserId });
+
+  // コメントモーダルを開く
+  const openCommentModal = useCallback(() => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('コメント');
+      return;
+    }
+    setIsCommentModalVisible(true);
+  }, [currentUserId]);
+
+  // コメントモーダルを閉じる
+  const closeCommentModal = useCallback(() => {
+    setIsCommentModalVisible(false);
+    setReplyingTo(null);
+  }, []);
+
+  // 返信ハンドラー
+  const handleReply = useCallback((comment: CommentWithUser) => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('返信');
+      return;
+    }
+    setReplyingTo(comment);
+    setIsCommentModalVisible(true);
+  }, [currentUserId]);
+
+  // 返信キャンセル
+  const cancelReply = useCallback(() => {
+    setReplyingTo(null);
+  }, []);
+
+  // コメント送信
+  const handleCommentSubmit = useCallback(() => {
+    if (!currentUserId || !inputText.trim() || isSubmitting) return;
+
+    const content = inputText.trim();
+
+    const onSuccess = () => {
+      setInputText('');
+      setReplyingTo(null);
+      setIsCommentModalVisible(false);
+      Keyboard.dismiss();
+    };
+
+    if (replyingTo) {
+      addReply(
+        { userId: currentUserId, parentComment: replyingTo, content },
+        { onSuccess }
+      );
+    } else {
+      addComment(
+        { userId: currentUserId, spotId: spot.id, content },
+        { onSuccess }
+      );
+    }
+  }, [currentUserId, inputText, replyingTo, spot.id, addReply, addComment, isSubmitting]);
+
+  // 返信先の表示名
+  const replyTarget = replyingTo
+    ? { displayName: replyingTo.user?.display_name || replyingTo.user?.username || '' }
+    : null;
 
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
@@ -364,9 +429,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </Text>
           </View>
 
-          {/* コメント追加ボタン */}
+          {/* コメント追加ボタン（タップでモーダル表示） */}
           <Pressable
-            onPress={handleAddComment}
+            onPress={openCommentModal}
             className="mb-4 bg-gray-100 rounded-xl px-4 py-3"
           >
             <Text className="text-sm text-gray-400">
@@ -418,21 +483,27 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
     {/* コメント入力モーダル */}
     <CommentInputModal
-      visible={isInputModalVisible}
-      onClose={closeInputModal}
-      spotId={spot.id}
-      currentUserId={currentUserId}
-      replyingTo={replyingTo}
+      visible={isCommentModalVisible}
+      onClose={closeCommentModal}
+      avatarUrl={currentUser?.avatar_url}
+      inputText={inputText}
+      onChangeText={setInputText}
+      onSubmit={handleCommentSubmit}
+      isSubmitting={isSubmitting}
+      replyingTo={replyTarget}
+      onCancelReply={cancelReply}
     />
 
     {/* コメント編集モーダル */}
-    <EditCommentModal
+    <CommentInputModal
       visible={!!editingComment}
-      editText={editText}
+      onClose={handleEditCancel}
+      avatarUrl={currentUser?.avatar_url}
+      inputText={editText}
       onChangeText={setEditText}
       onSubmit={handleEditSubmit}
-      onCancel={handleEditCancel}
-      isUpdating={isUpdatingComment}
+      isSubmitting={isUpdatingComment}
+      isEditing
     />
     </>
   );
