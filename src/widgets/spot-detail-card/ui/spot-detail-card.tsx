@@ -14,7 +14,7 @@ import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
-import { useCheckSpotBookmarked, useBookmarkSpot, useUnbookmarkSpot } from '@/entities/bookmark';
+import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
@@ -31,9 +31,15 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const insets = useSafeAreaInsets();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
-  const { data: isBookmarked = false } = useCheckSpotBookmarked(currentUserId, spot.id);
+  const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
+  const isBookmarked = bookmarkInfo.length > 0;
+  // ブックマーク済みフォルダIDのSetを作成
+  const bookmarkedFolderIds = useMemo(
+    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
+    [bookmarkInfo]
+  );
   const { mutate: addBookmark, isPending: isAddingBookmark } = useBookmarkSpot();
-  const { mutate: removeBookmark, isPending: isRemovingBookmark } = useUnbookmarkSpot();
+  const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
@@ -102,20 +108,17 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     setIsFolderModalVisible(true);
   }, [currentUserId]);
 
-  // フォルダ選択完了時のハンドラー
-  const handleFolderSelect = useCallback((folderId: string | null) => {
+  // フォルダに追加
+  const handleAddToFolder = useCallback((folderId: string | null) => {
     if (!currentUserId) return;
+    addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
+  }, [currentUserId, spot.id, addBookmark]);
 
-    if (isBookmarked && folderId === null) {
-      // 既にブックマーク済みで、「保存を解除」が選択された場合
-      removeBookmark({ userId: currentUserId, spotId: spot.id });
-    } else if (!isBookmarked) {
-      // 未ブックマークの場合、選択したフォルダに追加
-      addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
-    }
-    // 既にブックマーク済みでフォルダが選択された場合は、フォルダ移動が必要
-    // TODO: 既存ブックマークのフォルダ変更機能
-  }, [currentUserId, spot.id, isBookmarked, addBookmark, removeBookmark]);
+  // フォルダから削除
+  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+    removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
+  }, [currentUserId, spot.id, removeFromFolder]);
 
   // 削除確認ダイアログ
   const handleDelete = useCallback(() => {
@@ -289,13 +292,13 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <Pressable
             className="items-center"
             onPress={handleBookmarkPress}
-            disabled={isAddingBookmark || isRemovingBookmark}
+            disabled={isAddingBookmark || isRemovingFromFolder}
           >
             <View className="flex-row items-center">
               <Ionicons
                 name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
                 size={18}
-                color={isBookmarked ? '#F97316' : colors.text.secondary}
+                color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
               />
             </View>
             <Text className="text-xs text-gray-500">保存</Text>
@@ -311,8 +314,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         userId={currentUserId}
         folderType="spots"
         onClose={() => setIsFolderModalVisible(false)}
-        onSelect={handleFolderSelect}
-        isBookmarked={isBookmarked}
+        onAddToFolder={handleAddToFolder}
+        onRemoveFromFolder={handleRemoveFromFolder}
+        bookmarkedFolderIds={bookmarkedFolderIds}
       />
     )}
     </>

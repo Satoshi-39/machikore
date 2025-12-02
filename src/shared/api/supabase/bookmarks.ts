@@ -345,6 +345,106 @@ export async function checkMapBookmarked(
 }
 
 /**
+ * スポットがどのフォルダにブックマークされているか取得（複数フォルダ対応）
+ * @returns ブックマーク情報の配列（各フォルダへのブックマーク）
+ */
+export async function getSpotBookmarkInfo(
+  userId: string,
+  spotId: string
+): Promise<{ id: string; folder_id: string | null }[]> {
+  const { data, error } = await supabase
+    .from('bookmarks')
+    .select('id, folder_id')
+    .eq('user_id', userId)
+    .eq('spot_id', spotId);
+
+  if (error) {
+    console.error('[getSpotBookmarkInfo] Error:', error);
+    throw error;
+  }
+
+  return data || [];
+}
+
+/**
+ * マップがどのフォルダにブックマークされているか取得（複数フォルダ対応）
+ * @returns ブックマーク情報の配列（各フォルダへのブックマーク）
+ */
+export async function getMapBookmarkInfo(
+  userId: string,
+  mapId: string
+): Promise<{ id: string; folder_id: string | null }[]> {
+  const { data, error } = await supabase
+    .from('bookmarks')
+    .select('id, folder_id')
+    .eq('user_id', userId)
+    .eq('map_id', mapId);
+
+  if (error) {
+    console.error('[getMapBookmarkInfo] Error:', error);
+    throw error;
+  }
+
+  return data || [];
+}
+
+/**
+ * スポットを特定フォルダから削除
+ */
+export async function unbookmarkSpotFromFolder(
+  userId: string,
+  spotId: string,
+  folderId: string | null
+): Promise<void> {
+  let query = supabase
+    .from('bookmarks')
+    .delete()
+    .eq('user_id', userId)
+    .eq('spot_id', spotId);
+
+  if (folderId === null) {
+    query = query.is('folder_id', null);
+  } else {
+    query = query.eq('folder_id', folderId);
+  }
+
+  const { error } = await query;
+
+  if (error) {
+    console.error('[unbookmarkSpotFromFolder] Error:', error);
+    throw error;
+  }
+}
+
+/**
+ * マップを特定フォルダから削除
+ */
+export async function unbookmarkMapFromFolder(
+  userId: string,
+  mapId: string,
+  folderId: string | null
+): Promise<void> {
+  let query = supabase
+    .from('bookmarks')
+    .delete()
+    .eq('user_id', userId)
+    .eq('map_id', mapId);
+
+  if (folderId === null) {
+    query = query.is('folder_id', null);
+  } else {
+    query = query.eq('folder_id', folderId);
+  }
+
+  const { error } = await query;
+
+  if (error) {
+    console.error('[unbookmarkMapFromFolder] Error:', error);
+    throw error;
+  }
+}
+
+/**
  * ユーザーのブックマーク一覧を取得（フォルダでフィルタ可能）
  */
 export async function getUserBookmarks(

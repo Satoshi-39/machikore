@@ -3,12 +3,27 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import Toast from 'react-native-toast-message';
+import Toast, { BaseToast, type BaseToastProps } from 'react-native-toast-message';
 import 'react-native-reanimated';
 import '../global.css';
 
 import { AppProviders } from '@/shared/lib/providers';
 import { initDatabase, initMapbox } from '@/shared/lib/init';
+
+// カスタムToast設定（successを青に統一）
+const toastConfig = {
+  success: (props: BaseToastProps) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#007AFF' }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 14,
+        fontWeight: '600',
+      }}
+    />
+  ),
+};
 
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
@@ -176,7 +191,7 @@ export default function RootLayout() {
           />
         </Stack>
         <StatusBar style="auto" />
-        <Toast />
+        <Toast config={toastConfig} />
       </ThemeProvider>
     </AppProviders>
   );

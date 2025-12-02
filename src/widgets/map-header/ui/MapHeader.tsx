@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator, Share } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useCheckMapBookmarked, useBookmarkMap, useUnbookmarkMap } from '@/entities/bookmark';
+import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 
@@ -50,9 +50,15 @@ export function MapHeader({
   const slideAnim = useRef(new Animated.Value(-500)).current; // 初期位置: 画面上部の外側
 
   // マップブックマーク状態を取得
-  const { data: isBookmarked = false } = useCheckMapBookmarked(userId, mapId);
+  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(userId, mapId);
+  const isBookmarked = bookmarkInfo.length > 0;
+  // ブックマーク済みフォルダIDのSetを作成
+  const bookmarkedFolderIds = useMemo(
+    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
+    [bookmarkInfo]
+  );
   const { mutate: addBookmark } = useBookmarkMap();
-  const { mutate: removeBookmark } = useUnbookmarkMap();
+  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
 
   // いいね処理
   const handleLikePress = useCallback(() => {
@@ -66,18 +72,17 @@ export function MapHeader({
     setIsFolderModalVisible(true);
   }, [userId]);
 
-  // フォルダ選択完了時のハンドラー
-  const handleFolderSelect = useCallback((folderId: string | null) => {
+  // フォルダに追加
+  const handleAddToFolder = useCallback((folderId: string | null) => {
     if (!userId || !mapId) return;
+    addBookmark({ userId, mapId, folderId });
+  }, [userId, mapId, addBookmark]);
 
-    if (isBookmarked && folderId === null) {
-      // 既にブックマーク済みで、「保存を解除」が選択された場合
-      removeBookmark({ userId, mapId });
-    } else if (!isBookmarked) {
-      // 未ブックマークの場合、選択したフォルダに追加
-      addBookmark({ userId, mapId, folderId });
-    }
-  }, [userId, mapId, isBookmarked, addBookmark, removeBookmark]);
+  // フォルダから削除
+  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
+    if (!userId || !mapId) return;
+    removeFromFolder({ userId, mapId, folderId });
+  }, [userId, mapId, removeFromFolder]);
 
   // 共有処理
   const handleSharePress = useCallback(async () => {
@@ -104,7 +109,7 @@ export function MapHeader({
       id: 'bookmark',
       label: isBookmarked ? '保存済み' : '保存',
       icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
-      iconColor: isBookmarked ? '#F59E0B' : undefined,
+      iconColor: isBookmarked ? '#007AFF' : undefined,
       onPress: handleBookmarkPress,
     },
     {
@@ -314,8 +319,9 @@ export function MapHeader({
           userId={userId}
           folderType="maps"
           onClose={() => setIsFolderModalVisible(false)}
-          onSelect={handleFolderSelect}
-          isBookmarked={isBookmarked}
+          onAddToFolder={handleAddToFolder}
+          onRemoveFromFolder={handleRemoveFromFolder}
+          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
     </View>

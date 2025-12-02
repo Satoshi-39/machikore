@@ -3,9 +3,10 @@
  *
  * スポット/マップを保存する際にフォルダを選択するためのモーダル
  * 画面中央にダイアログとして表示
+ * 複数フォルダへの追加に対応
  */
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
@@ -24,9 +25,12 @@ interface SelectFolderModalProps {
   userId: string;
   folderType: BookmarkFolderType;
   onClose: () => void;
-  onSelect: (folderId: string | null) => void;
-  /** 既にブックマーク済みの場合true（解除モード） */
-  isBookmarked?: boolean;
+  /** フォルダに追加する時に呼ばれる */
+  onAddToFolder: (folderId: string | null) => void;
+  /** フォルダから削除する時に呼ばれる */
+  onRemoveFromFolder: (folderId: string | null) => void;
+  /** 現在ブックマークされているフォルダIDのセット */
+  bookmarkedFolderIds: Set<string | null>;
 }
 
 export function SelectFolderModal({
@@ -34,14 +38,27 @@ export function SelectFolderModal({
   userId,
   folderType,
   onClose,
-  onSelect,
-  isBookmarked = false,
+  onAddToFolder,
+  onRemoveFromFolder,
+  bookmarkedFolderIds,
 }: SelectFolderModalProps) {
   const { data: folders = [] } = useBookmarkFolders(userId, folderType);
   const { mutate: createFolder, isPending: isCreating } = useCreateBookmarkFolder();
 
   const [showCreateInput, setShowCreateInput] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
+
+  // ローカルで選択状態を管理（モーダル内での即時反映用）
+  const [localBookmarkedFolderIds, setLocalBookmarkedFolderIds] = useState<Set<string | null>>(
+    new Set(bookmarkedFolderIds)
+  );
+
+  // モーダルが開いた時に親の状態で初期化
+  useEffect(() => {
+    if (visible) {
+      setLocalBookmarkedFolderIds(new Set(bookmarkedFolderIds));
+    }
+  }, [visible, bookmarkedFolderIds]);
 
   // モーダルを閉じた時にリセット
   useEffect(() => {
@@ -51,12 +68,32 @@ export function SelectFolderModal({
     }
   }, [visible]);
 
-  const handleFolderSelect = useCallback(
+  // フォルダに追加
+  const handleAddToFolder = useCallback(
     (folderId: string | null) => {
-      onSelect(folderId);
-      onClose();
+      onAddToFolder(folderId);
+      // ローカル状態を更新（モーダルは閉じない）
+      setLocalBookmarkedFolderIds((prev) => {
+        const next = new Set(prev);
+        next.add(folderId);
+        return next;
+      });
     },
-    [onSelect, onClose]
+    [onAddToFolder]
+  );
+
+  // フォルダから削除
+  const handleRemoveFromFolder = useCallback(
+    (folderId: string | null) => {
+      onRemoveFromFolder(folderId);
+      // ローカル状態を更新（モーダルは閉じない）
+      setLocalBookmarkedFolderIds((prev) => {
+        const next = new Set(prev);
+        next.delete(folderId);
+        return next;
+      });
+    },
+    [onRemoveFromFolder]
   );
 
   const handleCreateFolder = useCallback(() => {
@@ -67,25 +104,18 @@ export function SelectFolderModal({
         onSuccess: (newFolder) => {
           setNewFolderName('');
           setShowCreateInput(false);
-          // 作成したフォルダを選択
-          onSelect(newFolder.id);
-          onClose();
+          // 作成したフォルダに追加
+          handleAddToFolder(newFolder.id);
         },
       }
     );
-  }, [userId, newFolderName, folderType, createFolder, onSelect, onClose, isCreating]);
-
-  const handleRemoveBookmark = useCallback(() => {
-    // nullを渡してブックマーク解除を示す
-    onSelect(null);
-    onClose();
-  }, [onSelect, onClose]);
+  }, [userId, newFolderName, folderType, createFolder, handleAddToFolder, isCreating]);
 
   // デフォルト + ユーザー作成フォルダのリスト
-  const foldersWithDefault = [
-    { id: null, name: '後で見る', isDefault: true },
+  const foldersWithDefault = useMemo(() => [
+    { id: null as string | null, name: '後で見る', isDefault: true },
     ...folders.map((f) => ({ ...f, isDefault: false })),
-  ];
+  ], [folders]);
 
   return (
     <Modal
@@ -105,28 +135,47 @@ export function SelectFolderModal({
           {/* ヘッダー */}
           <View className="px-6 py-4 border-b border-gray-100">
             <Text className="text-center text-lg font-bold text-gray-900">
-              保存先を選択
+              {folderType === 'spots' ? 'スポット' : 'マップ'}の保存先を選択
             </Text>
           </View>
 
           {/* フォルダリスト */}
           <ScrollView className="max-h-64">
-            {foldersWithDefault.map((item) => (
-              <Pressable
-                key={item.id ?? 'default'}
-                onPress={() => handleFolderSelect(item.id)}
-                className="flex-row items-center px-4 py-3 active:bg-gray-50 border-b border-gray-100"
-              >
-                <View className="w-9 h-9 rounded-lg bg-gray-100 items-center justify-center mr-3">
-                  <Ionicons
-                    name="folder"
-                    size={20}
-                    color={colors.primary.DEFAULT}
-                  />
+            {foldersWithDefault.map((item) => {
+              const isInFolder = localBookmarkedFolderIds.has(item.id);
+              return (
+                <View
+                  key={item.id ?? 'default'}
+                  className="flex-row items-center px-4 py-3 border-b border-gray-100"
+                >
+                  <View className="w-9 h-9 rounded-lg bg-gray-100 items-center justify-center mr-3">
+                    <Ionicons
+                      name="folder"
+                      size={20}
+                      color={colors.primary.DEFAULT}
+                    />
+                  </View>
+                  <Text className="flex-1 text-base text-gray-900">
+                    {item.name}
+                  </Text>
+                  {isInFolder ? (
+                    <Pressable
+                      onPress={() => handleRemoveFromFolder(item.id)}
+                      className="bg-blue-500 px-4 py-1.5 rounded-full active:bg-blue-600"
+                    >
+                      <Text className="text-sm text-white font-medium">追加済</Text>
+                    </Pressable>
+                  ) : (
+                    <Pressable
+                      onPress={() => handleAddToFolder(item.id)}
+                      className="bg-white border border-blue-500 px-4 py-1.5 rounded-full active:bg-blue-50"
+                    >
+                      <Text className="text-sm text-blue-500 font-medium">追加</Text>
+                    </Pressable>
+                  )}
                 </View>
-                <Text className="flex-1 text-base text-gray-900">{item.name}</Text>
-              </Pressable>
-            ))}
+              );
+            })}
           </ScrollView>
 
           {/* 新規フォルダ作成 */}
@@ -173,24 +222,13 @@ export function SelectFolderModal({
           )}
 
           {/* アクションボタン */}
-          <View className="px-4 py-3 border-t border-gray-200 flex-row gap-2">
-            {/* ブックマーク解除ボタン（既にブックマーク済みの場合） */}
-            {isBookmarked && (
-              <Pressable
-                onPress={handleRemoveBookmark}
-                className="flex-1 py-3 bg-red-50 rounded-lg active:bg-red-100"
-              >
-                <Text className="text-center text-sm font-medium text-red-500">
-                  保存を解除
-                </Text>
-              </Pressable>
-            )}
+          <View className="px-4 py-3 border-t border-gray-200">
             <Pressable
               onPress={onClose}
-              className="flex-1 py-3 bg-gray-100 rounded-lg active:bg-gray-200"
+              className="py-3 bg-gray-100 rounded-lg active:bg-gray-200"
             >
               <Text className="text-center text-sm font-medium text-gray-600">
-                キャンセル
+                閉じる
               </Text>
             </Pressable>
           </View>

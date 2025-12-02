@@ -19,7 +19,7 @@ import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useUser } from '@/entities/user';
-import { useCheckSpotBookmarked, useBookmarkSpot, useUnbookmarkSpot } from '@/entities/bookmark';
+import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 
 // Supabase JOINで取得済みのユーザー情報
@@ -75,9 +75,15 @@ export function SpotCard({
   const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
 
   // ブックマーク状態
-  const { data: isBookmarked = false } = useCheckSpotBookmarked(currentUserId, spot.id);
+  const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
+  const isBookmarked = bookmarkInfo.length > 0;
+  // ブックマーク済みフォルダIDのSetを作成
+  const bookmarkedFolderIds = useMemo(
+    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
+    [bookmarkInfo]
+  );
   const { mutate: addBookmark } = useBookmarkSpot();
-  const { mutate: removeBookmark } = useUnbookmarkSpot();
+  const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
   // 画像拡大表示用のstate
@@ -142,18 +148,17 @@ export function SpotCard({
     setIsFolderModalVisible(true);
   }, [currentUserId]);
 
-  // フォルダ選択完了時のハンドラー
-  const handleFolderSelect = useCallback((folderId: string | null) => {
+  // フォルダに追加
+  const handleAddToFolder = useCallback((folderId: string | null) => {
     if (!currentUserId) return;
+    addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
+  }, [currentUserId, spot.id, addBookmark]);
 
-    if (isBookmarked && folderId === null) {
-      // 既にブックマーク済みで、「保存を解除」が選択された場合
-      removeBookmark({ userId: currentUserId, spotId: spot.id });
-    } else if (!isBookmarked) {
-      // 未ブックマークの場合、選択したフォルダに追加
-      addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
-    }
-  }, [currentUserId, spot.id, isBookmarked, addBookmark, removeBookmark]);
+  // フォルダから削除
+  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+    removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
+  }, [currentUserId, spot.id, removeFromFolder]);
 
   const handleDelete = () => {
     Alert.alert(
@@ -388,7 +393,7 @@ export function SpotCard({
             <Ionicons
               name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
               size={18}
-              color={isBookmarked ? '#F59E0B' : colors.text.secondary}
+              color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
             />
           </Pressable>
         </View>
@@ -401,8 +406,9 @@ export function SpotCard({
           userId={currentUserId}
           folderType="spots"
           onClose={() => setIsFolderModalVisible(false)}
-          onSelect={handleFolderSelect}
-          isBookmarked={isBookmarked}
+          onAddToFolder={handleAddToFolder}
+          onRemoveFromFolder={handleRemoveFromFolder}
+          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
     </Pressable>
