@@ -3,5 +3,5 @@
  */
 
 export { MapsTab } from './ui/MapsTab';
-export { BlogTab } from './ui/BlogTab';
+export { CollectionsTab } from './ui/CollectionsTab';
 export { LikesTab } from './ui/LikesTab';

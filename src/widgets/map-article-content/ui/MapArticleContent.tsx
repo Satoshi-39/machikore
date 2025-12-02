@@ -294,7 +294,6 @@ export function MapArticleContent({
             {/* コメントセクション */}
             <ArticleCommentPreview
               comments={comments}
-              totalCount={map.comments_count}
               mapId={map.id}
               currentUserId={currentUserId}
               onViewAllPress={onCommentsPress}

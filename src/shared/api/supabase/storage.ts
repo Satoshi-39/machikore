@@ -164,4 +164,5 @@ export const STORAGE_BUCKETS = {
   AVATARS: 'avatars',
   SPOT_IMAGES: 'spot-images',
   MAP_THUMBNAILS: 'map-thumbnails',
+  COLLECTION_THUMBNAILS: 'collection-thumbnails',
 } as const;

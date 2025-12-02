@@ -1,8 +1,7 @@
 /**
  * マイページタブフィルター
  *
- * マップ、ブログを切り替えるタブUI
- * いいね、ブックマークは別ページへ遷移するボタン
+ * マップはタブ内で表示、コレクション・いいね・ブックマークは別ページへ遷移
  */
 
 import React from 'react';
@@ -11,7 +10,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 
-export type MyPageTabMode = 'maps' | 'blog';
+export type MyPageTabMode = 'maps';
 
 interface MyPageTabFilterProps {
   tabMode: MyPageTabMode;
@@ -24,38 +23,39 @@ export function MyPageTabFilter({
 }: MyPageTabFilterProps) {
   const router = useRouter();
 
-  const tabs: { mode: MyPageTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [
-    { mode: 'maps', icon: 'map' },
-    { mode: 'blog', icon: 'reader' },
-  ];
-
   return (
     <View className="bg-white border-b border-gray-200">
       {/* タブ */}
       <View className="flex-row">
-        {tabs.map((tab) => {
-          const isActive = tabMode === tab.mode;
-          return (
-            <Pressable
-              key={tab.mode}
-              onPress={() => onTabModeChange(tab.mode)}
-              className="flex-1 py-3 items-center justify-center"
-            >
-              <Ionicons
-                name={tab.icon}
-                size={24}
-                color={isActive ? colors.primary.DEFAULT : colors.text.secondary}
-              />
-              {isActive && (
-                <View
-                  className="absolute bottom-0 left-0 right-0 h-1 rounded-t-full"
-                  style={{ backgroundColor: colors.primary.DEFAULT }}
-                />
-              )}
-            </Pressable>
-          );
-        })}
-        {/* いいねボタン（マイページタブ内スタック） */}
+        {/* マップタブ（タブ切り替え） */}
+        <Pressable
+          onPress={() => onTabModeChange('maps')}
+          className="flex-1 py-3 items-center justify-center"
+        >
+          <Ionicons
+            name="map"
+            size={24}
+            color={tabMode === 'maps' ? colors.primary.DEFAULT : colors.text.secondary}
+          />
+          {tabMode === 'maps' && (
+            <View
+              className="absolute bottom-0 left-0 right-0 h-1 rounded-t-full"
+              style={{ backgroundColor: colors.primary.DEFAULT }}
+            />
+          )}
+        </Pressable>
+        {/* コレクションボタン（別ページへ遷移） */}
+        <Pressable
+          onPress={() => router.push('/(tabs)/mypage/collections' as any)}
+          className="flex-1 py-3 items-center justify-center"
+        >
+          <Ionicons
+            name="library"
+            size={24}
+            color={colors.text.secondary}
+          />
+        </Pressable>
+        {/* いいねボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push('/(tabs)/mypage/likes')}
           className="flex-1 py-3 items-center justify-center"
@@ -66,7 +66,7 @@ export function MyPageTabFilter({
             color={colors.text.secondary}
           />
         </Pressable>
-        {/* ブックマークボタン（マイページタブ内スタック） */}
+        {/* ブックマークボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push('/(tabs)/mypage/bookmarks')}
           className="flex-1 py-3 items-center justify-center"

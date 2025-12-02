@@ -12,7 +12,7 @@ import { useRouter } from 'expo-router';
 import { MyPageProfile } from '@/widgets/mypage-profile';
 import { MyPageHeader } from '@/widgets/mypage-header';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
-import { MapsTab, BlogTab } from '@/widgets/mypage-tab-content';
+import { MapsTab } from '@/widgets/mypage-tab-content';
 import { useCurrentUserId } from '@/entities/user';
 
 export function MyPage() {
@@ -42,10 +42,9 @@ export function MyPage() {
       {/* タブフィルター */}
       <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} />
 
-      {/* タブコンテンツ（各タブが独自にスクロール） */}
+      {/* タブコンテンツ（マップ一覧） */}
       <View className="flex-1">
-        {tabMode === 'maps' && <MapsTab userId={currentUserId} />}
-        {tabMode === 'blog' && <BlogTab userId={currentUserId} />}
+        <MapsTab userId={currentUserId} />
       </View>
     </SafeAreaView>
   );

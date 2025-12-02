@@ -13,7 +13,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { MyPageProfile } from '@/widgets/mypage-profile';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
 import { UserProfileTabFilter, type UserProfileTabMode } from '@/features/filter-user-profile-tab';
-import { MapsTab, BlogTab } from '@/widgets/mypage-tab-content';
+import { MapsTab, CollectionsTab } from '@/widgets/mypage-tab-content';
 import { useCurrentUserId } from '@/entities/user';
 import { PageHeader } from '@/shared/ui';
 
@@ -49,7 +49,7 @@ export function UserProfilePage() {
       {/* タブコンテンツ（各タブが独自にスクロール） */}
       <View className="flex-1">
         {tabMode === 'maps' && <MapsTab userId={id} />}
-        {tabMode === 'blog' && <BlogTab userId={id} />}
+        {tabMode === 'collections' && <CollectionsTab userId={id} />}
       </View>
     </View>
   );

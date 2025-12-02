@@ -62,8 +62,8 @@ export function PageHeader({
         </Text>
       </View>
 
-      {/* 右側：カスタムコンポーネント（固定幅） */}
-      <View className="w-10 items-end">
+      {/* 右側：カスタムコンポーネント */}
+      <View className="min-w-10 items-end">
         {rightComponent}
       </View>
     </View>

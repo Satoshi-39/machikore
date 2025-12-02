@@ -203,6 +203,27 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="create-collection"
+            options={{
+              presentation: 'fullScreenModal',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="edit-collection"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="add-maps-to-collection"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
         </Stack>
         <StatusBar style="auto" />
         <Toast config={toastConfig} />

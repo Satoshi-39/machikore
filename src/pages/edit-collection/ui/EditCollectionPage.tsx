@@ -1,0 +1,235 @@
+/**
+ * コレクション編集ページ
+ */
+
+import React, { useState, useCallback, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+  Pressable,
+  Switch,
+  ActivityIndicator,
+} from 'react-native';
+import { useRouter, useLocalSearchParams } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useCollection, useUpdateCollection } from '@/entities/collection';
+import { useCurrentUserId } from '@/entities/user';
+import { PageHeader } from '@/shared/ui';
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
+import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+
+export function EditCollectionPage() {
+  const router = useRouter();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const currentUserId = useCurrentUserId();
+
+  const { data: collection, isLoading } = useCollection(id);
+  const { mutate: updateCollection, isPending: isUpdating } = useUpdateCollection();
+
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [isPublic, setIsPublic] = useState(false);
+  const [thumbnail, setThumbnail] = useState<ThumbnailImage | null>(null);
+  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  // コレクションデータをフォームに反映
+  useEffect(() => {
+    if (collection) {
+      setName(collection.name);
+      setDescription(collection.description || '');
+      setIsPublic(collection.is_public);
+      if (collection.thumbnail_url) {
+        setThumbnail({ uri: collection.thumbnail_url, width: 0, height: 0 });
+        setOriginalThumbnailUrl(collection.thumbnail_url);
+      }
+    }
+  }, [collection]);
+
+  const isValid = name.trim().length > 0;
+  const isSubmitting = isUpdating || isUploading;
+
+  const handleSubmit = useCallback(async () => {
+    if (!id || !currentUserId || !name.trim() || isSubmitting) return;
+
+    let thumbnailUrl: string | null | undefined;
+
+    // サムネイルが変更された場合
+    if (thumbnail?.uri !== originalThumbnailUrl) {
+      if (thumbnail) {
+        // 新しい画像をアップロード
+        setIsUploading(true);
+        try {
+          const timestamp = Date.now();
+          const path = `${currentUserId}/${timestamp}.jpg`;
+          const result = await uploadImage({
+            uri: thumbnail.uri,
+            bucket: STORAGE_BUCKETS.COLLECTION_THUMBNAILS,
+            path,
+          });
+          if (result.success) {
+            thumbnailUrl = result.data.url;
+          }
+        } catch (error) {
+          console.error('サムネイルアップロードエラー:', error);
+        } finally {
+          setIsUploading(false);
+        }
+      } else {
+        // 画像が削除された
+        thumbnailUrl = null;
+      }
+    }
+
+    updateCollection(
+      {
+        collectionId: id,
+        userId: currentUserId,
+        updates: {
+          name: name.trim(),
+          description: description.trim() || null,
+          is_public: isPublic,
+          ...(thumbnailUrl !== undefined && { thumbnail_url: thumbnailUrl }),
+        },
+      },
+      {
+        onSuccess: () => router.back(),
+      }
+    );
+  }, [id, currentUserId, name, description, isPublic, thumbnail, originalThumbnailUrl, updateCollection, isSubmitting, router]);
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 bg-gray-50">
+        <PageHeader title="コレクションを編集" />
+        <View className="flex-1 justify-center items-center">
+          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        </View>
+      </View>
+    );
+  }
+
+  if (!collection) {
+    return (
+      <View className="flex-1 bg-gray-50">
+        <PageHeader title="コレクションを編集" />
+        <View className="flex-1 justify-center items-center px-6">
+          <Ionicons name="alert-circle-outline" size={48} color={colors.gray[400]} />
+          <Text className="text-gray-500 mt-4">コレクションが見つかりません</Text>
+        </View>
+      </View>
+    );
+  }
+
+  return (
+    <View className="flex-1 bg-gray-50">
+      <PageHeader
+        title="コレクションを編集"
+        rightComponent={
+          <Pressable
+            onPress={handleSubmit}
+            disabled={!isValid || isSubmitting}
+            className="py-2"
+          >
+            {isSubmitting ? (
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            ) : (
+              <Text
+                className={`text-base ${isValid ? 'text-primary-600 font-semibold' : 'text-gray-300'}`}
+              >
+                保存
+              </Text>
+            )}
+          </Pressable>
+        }
+      />
+
+      <ScrollView className="flex-1" contentContainerClassName="p-4">
+        {/* 名前入力 */}
+        <View className="mb-4">
+          <Text className="text-sm font-medium text-gray-700 mb-2">
+            コレクション名 <Text className="text-red-500">*</Text>
+          </Text>
+          <TextInput
+            value={name}
+            onChangeText={setName}
+            placeholder="例: 東京カフェコレクション"
+            placeholderTextColor={colors.gray[400]}
+            className="bg-white rounded-xl px-4 py-3 text-base text-gray-900 border border-gray-200"
+          />
+        </View>
+
+        {/* 説明入力 */}
+        <View className="mb-6">
+          <Text className="text-sm font-medium text-gray-700 mb-2">
+            説明（任意）
+          </Text>
+          <TextInput
+            value={description}
+            onChangeText={setDescription}
+            placeholder="コレクションの説明を入力..."
+            placeholderTextColor={colors.gray[400]}
+            className="bg-white rounded-xl px-4 py-3 text-base text-gray-900 border border-gray-200"
+            multiline
+            numberOfLines={4}
+            textAlignVertical="top"
+            style={{ minHeight: 100 }}
+          />
+        </View>
+
+        {/* サムネイル */}
+        <View className="mb-6">
+          <Text className="text-sm font-medium text-gray-700 mb-2">
+            サムネイル
+          </Text>
+          <ThumbnailPicker
+            image={thumbnail}
+            onImageChange={setThumbnail}
+          />
+        </View>
+
+        {/* 公開設定 */}
+        <View className="bg-white rounded-xl px-4 py-4 border border-gray-200">
+          <View className="flex-row items-center justify-between">
+            <View className="flex-1 mr-4">
+              <Text className="text-base font-medium text-gray-900 mb-1">
+                公開する
+              </Text>
+              <Text className="text-sm text-gray-500">
+                オンにすると、他のユーザーがこのコレクションを閲覧できます
+              </Text>
+            </View>
+            <Switch
+              value={isPublic}
+              onValueChange={setIsPublic}
+              trackColor={{ false: colors.gray[200], true: colors.primary.DEFAULT }}
+              thumbColor="#fff"
+            />
+          </View>
+        </View>
+
+        {/* マップを管理 */}
+        <Pressable
+          onPress={() => router.push(`/add-maps-to-collection?id=${id}` as any)}
+          className="bg-white rounded-xl px-4 py-4 border border-gray-200 mt-4 flex-row items-center justify-between"
+        >
+          <View className="flex-row items-center">
+            <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
+            <Text className="text-base font-medium text-gray-900 ml-3">
+              マップを管理
+            </Text>
+          </View>
+          <View className="flex-row items-center">
+            <Text className="text-sm text-gray-500 mr-2">
+              {collection.maps_count}件
+            </Text>
+            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+          </View>
+        </Pressable>
+      </ScrollView>
+    </View>
+  );
+}

@@ -6,6 +6,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import {
   getMapComments,
+  getMapCommentsCount,
   addMapComment,
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
@@ -22,8 +23,19 @@ export function useMapComments(
   currentUserId?: string | null
 ) {
   return useQuery({
-    queryKey: ['comments', 'map', mapId, currentUserId],
+    queryKey: ['comments', 'map', mapId, { limit, offset }, currentUserId],
     queryFn: () => getMapComments(mapId!, limit, offset, currentUserId),
+    enabled: !!mapId,
+  });
+}
+
+/**
+ * マップのトップレベルコメント総数を取得
+ */
+export function useMapCommentsCount(mapId: string | null) {
+  return useQuery({
+    queryKey: ['comments', 'map', mapId, 'count'],
+    queryFn: () => getMapCommentsCount(mapId!),
     enabled: !!mapId,
   });
 }
@@ -46,8 +58,11 @@ export function useAddMapComment() {
     onSuccess: (_newComment, { mapId }) => {
       // コメント一覧を再取得
       queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
-      // マップのコメント数を更新
+      // コメント総数を再取得
+      queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId, 'count'] });
+      // マップのコメント数を更新（一覧と個別詳細の両方）
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId) });
 
       Toast.show({
         type: 'success',

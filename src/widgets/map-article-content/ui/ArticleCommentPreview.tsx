@@ -11,13 +11,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { CommentInputModal } from '@/shared/ui';
-import { CommentItem, useAddMapComment, useAddReplyComment } from '@/entities/comment';
+import { CommentItem, useAddMapComment, useAddReplyComment, useMapCommentsCount } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface ArticleCommentPreviewProps {
   comments: CommentWithUser[];
-  totalCount: number;
   mapId: string;
   currentUserId?: string | null;
   onViewAllPress: () => void;
@@ -29,7 +28,6 @@ interface ArticleCommentPreviewProps {
 
 export function ArticleCommentPreview({
   comments,
-  totalCount,
   mapId,
   currentUserId,
   onViewAllPress,
@@ -38,6 +36,9 @@ export function ArticleCommentPreview({
   onDelete,
   onLike,
 }: ArticleCommentPreviewProps) {
+  // トップレベルコメントの総数を取得
+  const { data: totalCount = 0 } = useMapCommentsCount(mapId);
+
   // モーダル状態
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [inputText, setInputText] = useState('');

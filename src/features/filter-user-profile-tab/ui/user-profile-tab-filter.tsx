@@ -1,7 +1,7 @@
 /**
  * ユーザープロフィールページ用タブフィルター
  *
- * マップ、ブログを切り替えるタブUI
+ * マップ、コレクションを切り替えるタブUI
  * いいねは別ページへ遷移するボタン
  * （他のユーザーのブックマークは表示しない）
  */
@@ -12,7 +12,7 @@ import { useRouter, useSegments } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 
-export type UserProfileTabMode = 'maps' | 'blog';
+export type UserProfileTabMode = 'maps' | 'collections';
 
 interface UserProfileTabFilterProps {
   tabMode: UserProfileTabMode;
@@ -50,7 +50,7 @@ export function UserProfileTabFilter({
 
   const tabs: { mode: UserProfileTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [
     { mode: 'maps', icon: 'map' },
-    { mode: 'blog', icon: 'reader' },
+    { mode: 'collections', icon: 'library' },
   ];
 
   return (
