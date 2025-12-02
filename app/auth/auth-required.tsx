@@ -6,11 +6,12 @@
  * モーダル設定は _layout.tsx で行われる
  */
 
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AuthRequiredPage } from '@/pages/auth-required';
 
 export default function AuthRequiredScreen() {
   const router = useRouter();
+  const { message } = useLocalSearchParams<{ message?: string }>();
 
   const handleSignUpPress = () => {
     // モーダルを閉じてからサインアップページへ
@@ -34,6 +35,7 @@ export default function AuthRequiredScreen() {
       onSignUpPress={handleSignUpPress}
       onSignInPress={handleSignInPress}
       onClose={handleClose}
+      message={message}
     />
   );
 }

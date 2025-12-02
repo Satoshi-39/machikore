@@ -9,3 +9,4 @@ export * from './prefectures.utils';
 export * from './cities.utils';
 export * from './machi.utils';
 export * from './action-sheet.utils';
+export * from './auth.utils';

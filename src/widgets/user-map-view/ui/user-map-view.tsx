@@ -120,7 +120,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
       const spot = spots.find((s) => s.id === jumpToSpotId);
       if (spot) {
-        const spotName = spot.custom_name || spot.master_spot?.name || '不明';
+        // const spotName = spot.custom_name || spot.master_spot?.name || '不明';
         // console.log('📍 [Jump] スポットにジャンプ:', spotName);
         // 初回カメラ移動済みフラグを立てて全スポット表示をスキップ
         hasInitialCameraMoved.current = true;

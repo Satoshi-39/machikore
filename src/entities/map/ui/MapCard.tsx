@@ -9,6 +9,7 @@ import { View, Text, Pressable, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
@@ -37,7 +38,11 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
 
   const handleLikePress = (e: any) => {
     e.stopPropagation();
-    if (!currentUserId || isTogglingLike) return;
+    if (!currentUserId) {
+      showLoginRequiredAlert('いいね');
+      return;
+    }
+    if (isTogglingLike) return;
     toggleLike({ userId: currentUserId, mapId: map.id });
   };
 
@@ -146,7 +151,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
         <Pressable
           onPress={handleLikePress}
           className="flex-row items-center"
-          disabled={!currentUserId || isTogglingLike}
+          disabled={isTogglingLike}
         >
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}

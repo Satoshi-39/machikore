@@ -32,8 +32,8 @@ interface NotificationData {
 export function usePushNotifications() {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
-  const notificationListener = useRef<Notifications.EventSubscription>();
-  const responseListener = useRef<Notifications.EventSubscription>();
+  const notificationListener = useRef<Notifications.EventSubscription | null>(null);
+  const responseListener = useRef<Notifications.EventSubscription | null>(null);
 
   // プッシュトークンをSupabaseに保存
   const savePushToken = useCallback(async (token: string) => {

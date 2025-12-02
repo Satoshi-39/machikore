@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useCheckSpotBookmarked, useBookmarkSpot, useUnbookmarkSpot } from '@/entities/bookmark';
@@ -81,7 +82,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // いいねトグル
   const handleLikePress = useCallback(() => {
-    if (!currentUserId || isTogglingLike) return;
+    if (!currentUserId) {
+      showLoginRequiredAlert('いいね');
+      return;
+    }
+    if (isTogglingLike) return;
     toggleLike({ userId: currentUserId, spotId: spot.id });
   }, [currentUserId, spot.id, toggleLike, isTogglingLike]);
 
@@ -89,7 +94,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const handleBookmarkPress = useCallback(() => {
     console.log('📚 [SpotDetailCard] handleBookmarkPress called, currentUserId:', currentUserId);
     if (!currentUserId) {
-      console.log('📚 [SpotDetailCard] No currentUserId, returning');
+      console.log('📚 [SpotDetailCard] No currentUserId, showing login alert');
+      showLoginRequiredAlert('保存');
       return;
     }
     console.log('📚 [SpotDetailCard] Opening folder modal');
@@ -254,7 +260,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <Pressable
             className="items-center"
             onPress={handleLikePress}
-            disabled={!currentUserId || isTogglingLike}
+            disabled={isTogglingLike}
           >
             <View className="flex-row items-center">
               <Ionicons
@@ -283,7 +289,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <Pressable
             className="items-center"
             onPress={handleBookmarkPress}
-            disabled={!currentUserId || isAddingBookmark || isRemovingBookmark}
+            disabled={isAddingBookmark || isRemovingBookmark}
           >
             <View className="flex-row items-center">
               <Ionicons

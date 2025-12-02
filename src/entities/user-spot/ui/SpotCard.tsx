@@ -12,6 +12,7 @@ import { View, Text, Pressable, Image, Alert, Modal, Dimensions } from 'react-na
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
@@ -123,14 +124,21 @@ export function SpotCard({
 
   const handleLikePress = (e: any) => {
     e.stopPropagation();
-    if (!currentUserId || isTogglingLike) return;
+    if (!currentUserId) {
+      showLoginRequiredAlert('いいね');
+      return;
+    }
+    if (isTogglingLike) return;
     toggleLike({ userId: currentUserId, spotId: spot.id });
   };
 
   // ブックマーク処理（フォルダ選択モーダルを開く）
   const handleBookmarkPress = useCallback((e: any) => {
     e.stopPropagation();
-    if (!currentUserId) return;
+    if (!currentUserId) {
+      showLoginRequiredAlert('保存');
+      return;
+    }
     setIsFolderModalVisible(true);
   }, [currentUserId]);
 
@@ -352,7 +360,7 @@ export function SpotCard({
           <Pressable
             onPress={handleLikePress}
             className="flex-row items-center"
-            disabled={!currentUserId || isTogglingLike}
+            disabled={isTogglingLike}
           >
             <Ionicons
               name={isLiked ? 'heart' : 'heart-outline'}
@@ -376,7 +384,6 @@ export function SpotCard({
           <Pressable
             onPress={handleBookmarkPress}
             className="flex-row items-center"
-            disabled={!currentUserId}
           >
             <Ionicons
               name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
