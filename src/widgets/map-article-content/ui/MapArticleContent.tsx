@@ -13,6 +13,7 @@ import {
   Image,
   Pressable,
   Share,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
@@ -146,9 +147,11 @@ export function MapArticleContent({
   // 共有処理
   const handleSharePress = useCallback(async () => {
     try {
-      await Share.share({
-        message: `${map.name || 'マップ'}をチェック！ machikore://maps/${map.id}`,
-      });
+      const url = `machikore://maps/${map.id}`;
+      await Share.share(Platform.select({
+        ios: { message: `${map.name || 'マップ'}をチェック！`, url },
+        default: { message: `${map.name || 'マップ'}をチェック！\n${url}` },
+      })!);
     } catch (error) {
       console.error('Share error:', error);
     }

@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicator } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicator, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -151,9 +151,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // 共有処理
   const handleSharePress = useCallback(async () => {
     try {
-      await Share.share({
-        message: `${spotName}をチェック！ machikore://spots/${spot.id}`,
-      });
+      const url = `machikore://spots/${spot.id}`;
+      await Share.share(Platform.select({
+        ios: { message: `${spotName}をチェック！`, url },
+        default: { message: `${spotName}をチェック！\n${url}` },
+      })!);
     } catch (error) {
       console.error('Share error:', error);
     }

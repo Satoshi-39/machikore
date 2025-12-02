@@ -8,7 +8,7 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Dimensions, Share } from 'react-native';
+import { View, Text, Pressable, Image, Alert, Dimensions, Share, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer } from '@/shared/ui';
@@ -177,9 +177,11 @@ export function SpotCard({
   const handleSharePress = useCallback(async (e: any) => {
     e.stopPropagation();
     try {
-      await Share.share({
-        message: `${spotName}をチェック！ machikore://spots/${spot.id}`,
-      });
+      const url = `machikore://spots/${spot.id}`;
+      await Share.share(Platform.select({
+        ios: { message: `${spotName}をチェック！`, url },
+        default: { message: `${spotName}をチェック！\n${url}` },
+      })!);
     } catch (error) {
       console.error('Share error:', error);
     }

@@ -5,7 +5,7 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Share } from 'react-native';
+import { View, Text, Pressable, Image, Alert, Share, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
@@ -86,9 +86,11 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   const handleSharePress = useCallback(async (e: any) => {
     e.stopPropagation();
     try {
-      await Share.share({
-        message: `${map.name}をチェック！ machikore://maps/${map.id}`,
-      });
+      const url = `machikore://maps/${map.id}`;
+      await Share.share(Platform.select({
+        ios: { message: `${map.name}をチェック！`, url },
+        default: { message: `${map.name}をチェック！\n${url}` },
+      })!);
     } catch (error) {
       console.error('Share error:', error);
     }

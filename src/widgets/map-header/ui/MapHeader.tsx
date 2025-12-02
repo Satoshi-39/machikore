@@ -8,7 +8,7 @@
 import type { MapWithUser } from '@/shared/types';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator, Share } from 'react-native';
+import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator, Share, Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
@@ -99,9 +99,11 @@ export function MapHeader({
   // 共有処理
   const handleSharePress = useCallback(async () => {
     try {
-      await Share.share({
-        message: `${mapTitle || 'マップ'}をチェック！ machikore://maps/${mapId}`,
-      });
+      const url = `machikore://maps/${mapId}`;
+      await Share.share(Platform.select({
+        ios: { message: `${mapTitle || 'マップ'}をチェック！`, url },
+        default: { message: `${mapTitle || 'マップ'}をチェック！\n${url}` },
+      })!);
     } catch (error) {
       console.error('Share error:', error);
     }
