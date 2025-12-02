@@ -4,8 +4,8 @@
  * マップを表示するカード型コンポーネント
  */
 
-import React, { useMemo } from 'react';
-import { View, Text, Pressable, Image, Alert } from 'react-native';
+import React, { useMemo, useState, useCallback } from 'react';
+import { View, Text, Pressable, Image, Alert, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
@@ -15,6 +15,8 @@ import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
 import { useDeleteMap } from '@/entities/map/api';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
+import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
 
 interface MapCardProps {
   map: MapRow | MapWithUser;
@@ -34,6 +36,18 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
   const { mutate: deleteMap, isPending: isDeleting } = useDeleteMap();
   const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
+
+  // ブックマーク状態
+  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
+  const isBookmarked = bookmarkInfo.length > 0;
+  const bookmarkedFolderIds = useMemo(
+    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
+    [bookmarkInfo]
+  );
+  const { mutate: addBookmark } = useBookmarkMap();
+  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
+  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+
   const isOwner = currentUserId && map.user_id === currentUserId;
 
   const handleLikePress = (e: any) => {
@@ -45,6 +59,39 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
     if (isTogglingLike) return;
     toggleLike({ userId: currentUserId, mapId: map.id });
   };
+
+  // ブックマーク処理
+  const handleBookmarkPress = useCallback((e: any) => {
+    e.stopPropagation();
+    if (!currentUserId) {
+      showLoginRequiredAlert('保存');
+      return;
+    }
+    setIsFolderModalVisible(true);
+  }, [currentUserId]);
+
+  const handleAddToFolder = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+    addBookmark({ userId: currentUserId, mapId: map.id, folderId });
+  }, [currentUserId, map.id, addBookmark]);
+
+  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+    removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
+  }, [currentUserId, map.id, removeFromFolder]);
+
+  // 共有処理
+  const handleSharePress = useCallback(async (e: any) => {
+    e.stopPropagation();
+    try {
+      await Share.share({
+        message: `${map.name}をチェック！`,
+        url: `https://machikore.app/maps/${map.id}`,
+      });
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  }, [map.name, map.id]);
 
   const handleDelete = () => {
     Alert.alert(
@@ -137,17 +184,17 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
         </Text>
       )}
 
-      {/* フッター情報 */}
-      <View className="flex-row items-center justify-between mt-2">
-        {/* スポット数 */}
+      {/* フッター情報 - 均等配置 */}
+      <View className="flex-row items-center justify-around mt-2">
+        {/* コメント */}
         <View className="flex-row items-center">
-          <Ionicons name="location-outline" size={16} color={colors.text.secondary} />
-          <Text className="text-sm text-gray-500 ml-1">
-            {map.spots_count ?? 0} スポット
+          <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
+          <Text className="text-sm text-gray-600 ml-1">
+            {map.comments_count ?? 0}
           </Text>
         </View>
 
-        {/* いいねボタン */}
+        {/* いいね */}
         <Pressable
           onPress={handleLikePress}
           className="flex-row items-center"
@@ -155,14 +202,51 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit }: Ma
         >
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}
-            size={16}
+            size={18}
             color={isLiked ? '#EF4444' : colors.text.secondary}
           />
-          <Text className="text-sm text-gray-500 ml-1">
+          <Text className="text-sm text-gray-600 ml-1">
             {map.likes_count ?? 0}
           </Text>
         </Pressable>
+
+        {/* ブックマーク */}
+        <Pressable
+          onPress={handleBookmarkPress}
+          className="flex-row items-center"
+        >
+          <Ionicons
+            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+            size={18}
+            color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
+          />
+        </Pressable>
+
+        {/* 共有 */}
+        <Pressable
+          onPress={handleSharePress}
+          className="flex-row items-center"
+        >
+          <Ionicons
+            name="share-outline"
+            size={18}
+            color={colors.text.secondary}
+          />
+        </Pressable>
       </View>
+
+      {/* フォルダ選択モーダル */}
+      {currentUserId && (
+        <SelectFolderModal
+          visible={isFolderModalVisible}
+          userId={currentUserId}
+          folderType="maps"
+          onClose={() => setIsFolderModalVisible(false)}
+          onAddToFolder={handleAddToFolder}
+          onRemoveFromFolder={handleRemoveFromFolder}
+          bookmarkedFolderIds={bookmarkedFolderIds}
+        />
+      )}
     </Pressable>
   );
 }

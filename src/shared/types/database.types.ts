@@ -118,6 +118,7 @@ export interface MapRow {
   thumbnail_url: string | null;
   spots_count: number;
   likes_count: number;
+  comments_count: number;
   created_at: string;
   updated_at: string;
   synced_at: string | null;

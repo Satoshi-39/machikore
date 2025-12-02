@@ -23,6 +23,7 @@ interface SupabaseMapResponse {
   thumbnail_url: string | null;
   spots_count: number;
   likes_count: number;
+  comments_count: number | null;
   created_at: string;
   updated_at: string;
   users?: {
@@ -79,6 +80,7 @@ export async function getPublicMaps(
     thumbnail_url: map.thumbnail_url,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
@@ -127,6 +129,7 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
     thumbnail_url: data.thumbnail_url,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
+    comments_count: data.comments_count ?? 0,
     created_at: data.created_at,
     updated_at: data.updated_at,
     user: data.users || null,
@@ -230,6 +233,7 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
     thumbnail_url: map.thumbnail_url,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
@@ -272,6 +276,7 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
     thumbnail_url: map.thumbnail_url,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
@@ -348,6 +353,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     thumbnail_url: data.thumbnail_url,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
+    comments_count: data.comments_count ?? 0,
     created_at: data.created_at,
     updated_at: data.updated_at,
     user: data.users || null,
@@ -410,6 +416,7 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
     thumbnail_url: data.thumbnail_url,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
+    comments_count: data.comments_count ?? 0,
     created_at: data.created_at,
     updated_at: data.updated_at,
     user: data.users || null,

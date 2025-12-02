@@ -41,6 +41,7 @@ export interface MapWithUser {
   thumbnail_url: string | null;
   spots_count: number;
   likes_count: number;
+  comments_count: number;
   created_at: string;
   updated_at: string;
   user: UserBasicInfo | null;

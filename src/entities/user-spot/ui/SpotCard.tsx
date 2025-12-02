@@ -8,7 +8,7 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Modal, Dimensions } from 'react-native';
+import { View, Text, Pressable, Image, Alert, Modal, Dimensions, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
@@ -159,6 +159,19 @@ export function SpotCard({
     if (!currentUserId) return;
     removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
   }, [currentUserId, spot.id, removeFromFolder]);
+
+  // 共有処理
+  const handleSharePress = useCallback(async (e: any) => {
+    e.stopPropagation();
+    try {
+      await Share.share({
+        message: `${spotName}をチェック！`,
+        url: `https://machikore.app/spots/${spot.id}`,
+      });
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  }, [spotName, spot.id]);
 
   const handleDelete = () => {
     Alert.alert(
@@ -357,46 +370,55 @@ export function SpotCard({
         </View>
       )}
 
-      {/* フッター情報 */}
-      <View className="flex-row items-center justify-end mt-2">
-        {/* いいね・コメント・ブックマーク */}
-        <View className="flex-row items-center gap-4">
-          {/* いいね */}
-          <Pressable
-            onPress={handleLikePress}
-            className="flex-row items-center"
-            disabled={isTogglingLike}
-          >
-            <Ionicons
-              name={isLiked ? 'heart' : 'heart-outline'}
-              size={18}
-              color={isLiked ? '#EF4444' : colors.text.secondary}
-            />
-            <Text className="text-sm text-gray-600 ml-1">
-              {spot.likes_count}
-            </Text>
-          </Pressable>
-
-          {/* コメント */}
-          <View className="flex-row items-center">
-            <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-            <Text className="text-sm text-gray-600 ml-1">
-              {spot.comments_count}
-            </Text>
-          </View>
-
-          {/* ブックマーク */}
-          <Pressable
-            onPress={handleBookmarkPress}
-            className="flex-row items-center"
-          >
-            <Ionicons
-              name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-              size={18}
-              color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
-            />
-          </Pressable>
+      {/* フッター情報 - 均等配置 */}
+      <View className="flex-row items-center justify-around mt-2">
+        {/* コメント */}
+        <View className="flex-row items-center">
+          <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
+          <Text className="text-sm text-gray-600 ml-1">
+            {spot.comments_count}
+          </Text>
         </View>
+
+        {/* いいね */}
+        <Pressable
+          onPress={handleLikePress}
+          className="flex-row items-center"
+          disabled={isTogglingLike}
+        >
+          <Ionicons
+            name={isLiked ? 'heart' : 'heart-outline'}
+            size={18}
+            color={isLiked ? '#EF4444' : colors.text.secondary}
+          />
+          <Text className="text-sm text-gray-600 ml-1">
+            {spot.likes_count}
+          </Text>
+        </Pressable>
+
+        {/* ブックマーク */}
+        <Pressable
+          onPress={handleBookmarkPress}
+          className="flex-row items-center"
+        >
+          <Ionicons
+            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+            size={18}
+            color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
+          />
+        </Pressable>
+
+        {/* 共有 */}
+        <Pressable
+          onPress={handleSharePress}
+          className="flex-row items-center"
+        >
+          <Ionicons
+            name="share-outline"
+            size={18}
+            color={colors.text.secondary}
+          />
+        </Pressable>
       </View>
 
       {/* フォルダ選択モーダル */}

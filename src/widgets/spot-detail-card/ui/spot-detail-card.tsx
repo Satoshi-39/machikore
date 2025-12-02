@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -119,6 +119,18 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     if (!currentUserId) return;
     removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
   }, [currentUserId, spot.id, removeFromFolder]);
+
+  // 共有処理
+  const handleSharePress = useCallback(async () => {
+    try {
+      await Share.share({
+        message: `${spotName}をチェック！`,
+        url: `https://machikore.app/spots/${spot.id}`,
+      });
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  }, [spotName, spot.id]);
 
   // 削除確認ダイアログ
   const handleDelete = useCallback(() => {
@@ -249,14 +261,15 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
         {/* 統計情報とアクション */}
         <View className="flex-row items-center justify-around pt-3 border-t border-gray-200 mb-2">
+          {/* コメント */}
           <View className="items-center">
             <View className="flex-row items-center">
-              <Ionicons name="image-outline" size={18} color={colors.text.secondary} />
+              <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
               <Text className="text-lg font-bold text-gray-900 ml-1">
-                {spot.images_count}
+                {spot.comments_count}
               </Text>
             </View>
-            <Text className="text-xs text-gray-500">画像</Text>
+            <Text className="text-xs text-gray-500">コメント</Text>
           </View>
 
           {/* いいねボタン */}
@@ -278,16 +291,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Text className="text-xs text-gray-500">いいね</Text>
           </Pressable>
 
-          <View className="items-center">
-            <View className="flex-row items-center">
-              <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-              <Text className="text-lg font-bold text-gray-900 ml-1">
-                {spot.comments_count}
-              </Text>
-            </View>
-            <Text className="text-xs text-gray-500">コメント</Text>
-          </View>
-
           {/* ブックマークボタン */}
           <Pressable
             className="items-center"
@@ -302,6 +305,21 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               />
             </View>
             <Text className="text-xs text-gray-500">保存</Text>
+          </Pressable>
+
+          {/* 共有ボタン */}
+          <Pressable
+            className="items-center"
+            onPress={handleSharePress}
+          >
+            <View className="flex-row items-center">
+              <Ionicons
+                name="share-outline"
+                size={18}
+                color={colors.text.secondary}
+              />
+            </View>
+            <Text className="text-xs text-gray-500">共有</Text>
           </Pressable>
         </View>
       </BottomSheetScrollView>
