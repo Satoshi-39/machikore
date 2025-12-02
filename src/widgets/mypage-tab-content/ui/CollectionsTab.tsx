@@ -13,6 +13,7 @@ import {
   useUserCollections,
   useDeleteCollection,
 } from '@/entities/collection';
+import { useCurrentUserId } from '@/entities/user';
 import { Loading, ErrorView, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { Collection } from '@/shared/api/supabase/collections';
 
@@ -22,30 +23,34 @@ interface CollectionsTabProps {
 
 interface CollectionCardProps {
   collection: Collection;
+  isOwner: boolean;
   onPress?: () => void;
   onEdit?: (collectionId: string) => void;
   onDelete?: (collectionId: string) => void;
 }
 
-function CollectionCard({ collection, onPress, onEdit, onDelete }: CollectionCardProps) {
+function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: CollectionCardProps) {
   const createdDate = new Date(collection.created_at);
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
-  const menuItems: PopupMenuItem[] = useMemo(() => [
-    {
-      id: 'edit',
-      label: '編集',
-      icon: 'create-outline',
-      onPress: () => onEdit?.(collection.id),
-    },
-    {
-      id: 'delete',
-      label: '削除',
-      icon: 'trash-outline',
-      destructive: true,
-      onPress: () => onDelete?.(collection.id),
-    },
-  ], [collection.id, onEdit, onDelete]);
+  const menuItems: PopupMenuItem[] = useMemo(() => {
+    if (!isOwner) return [];
+    return [
+      {
+        id: 'edit',
+        label: '編集',
+        icon: 'create-outline',
+        onPress: () => onEdit?.(collection.id),
+      },
+      {
+        id: 'delete',
+        label: '削除',
+        icon: 'trash-outline',
+        destructive: true,
+        onPress: () => onDelete?.(collection.id),
+      },
+    ];
+  }, [collection.id, isOwner, onEdit, onDelete]);
 
   return (
     <Pressable
@@ -95,11 +100,13 @@ function CollectionCard({ collection, onPress, onEdit, onDelete }: CollectionCar
         {/* 公開/非公開アイコン + メニュー */}
         <View className="flex-row items-center">
           {!collection.is_public && (
-            <View className="mr-2">
+            <View className={isOwner ? "mr-2" : ""}>
               <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
             </View>
           )}
-          <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+          {isOwner && menuItems.length > 0 && (
+            <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+          )}
         </View>
       </View>
     </Pressable>
@@ -109,8 +116,12 @@ function CollectionCard({ collection, onPress, onEdit, onDelete }: CollectionCar
 export function CollectionsTab({ userId }: CollectionsTabProps) {
   const router = useRouter();
   const segments = useSegments();
+  const currentUserId = useCurrentUserId();
   const { data: collections, isLoading, error } = useUserCollections(userId);
   const { mutate: deleteCollection } = useDeleteCollection();
+
+  // 自分のコレクションかどうか
+  const isOwner = userId === currentUserId;
 
   // タブ内かどうかを判定
   const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
@@ -184,6 +195,7 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
       renderItem={({ item }) => (
         <CollectionCard
           collection={item}
+          isOwner={isOwner}
           onPress={() => handleCollectionPress(item)}
           onEdit={handleEdit}
           onDelete={handleDelete}
