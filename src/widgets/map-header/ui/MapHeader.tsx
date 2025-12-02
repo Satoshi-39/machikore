@@ -12,7 +12,7 @@ import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndi
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
 
 interface MapHeaderProps {
   isUserMap: boolean;
@@ -47,6 +47,7 @@ export function MapHeader({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(-500)).current; // 初期位置: 画面上部の外側
 
   // マップブックマーク状態を取得
@@ -181,7 +182,11 @@ export function MapHeader({
             </Pressable>
 
             {/* ユーザーアイコン */}
-            <Pressable onPress={onUserPress} className="mr-3">
+            <Pressable
+              onPress={onUserPress}
+              onLongPress={() => userAvatarUrl && setIsAvatarModalVisible(true)}
+              className="mr-3"
+            >
               {userAvatarUrl ? (
                 <Image
                   source={{ uri: userAvatarUrl }}
@@ -322,6 +327,15 @@ export function MapHeader({
           onAddToFolder={handleAddToFolder}
           onRemoveFromFolder={handleRemoveFromFolder}
           bookmarkedFolderIds={bookmarkedFolderIds}
+        />
+      )}
+
+      {/* アバター拡大モーダル */}
+      {userAvatarUrl && (
+        <ImageViewerModal
+          visible={isAvatarModalVisible}
+          imageUri={userAvatarUrl}
+          onClose={() => setIsAvatarModalVisible(false)}
         />
       )}
     </View>

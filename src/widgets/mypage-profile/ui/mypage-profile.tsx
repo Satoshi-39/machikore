@@ -4,12 +4,12 @@
  * ユーザーのプロフィール情報と統計を表示
  */
 
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { Loading } from '@/shared/ui';
+import { Loading, ImageViewerModal } from '@/shared/ui';
 import { useUser, useUserStats } from '@/entities/user/api';
 import { FollowButton } from '@/features/follow-user';
 
@@ -21,6 +21,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
   const router = useRouter();
   const { data: user, isLoading } = useUser(userId ?? '');
   const { data: stats } = useUserStats(userId ?? '');
+  const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
 
   const handleFollowingPress = () => {
     if (userId) {
@@ -53,10 +54,12 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       <View className="flex-row items-center justify-between mb-4">
         {/* アバター */}
         {user?.avatar_url ? (
-          <Image
-            source={{ uri: user.avatar_url }}
-            className="w-20 h-20 rounded-full"
-          />
+          <Pressable onPress={() => setIsAvatarModalVisible(true)}>
+            <Image
+              source={{ uri: user.avatar_url }}
+              className="w-20 h-20 rounded-full"
+            />
+          </Pressable>
         ) : (
           <View className="w-20 h-20 rounded-full bg-gray-200 items-center justify-center">
             <Ionicons name="person" size={40} color={colors.gray[400]} />
@@ -66,6 +69,15 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
         {/* フォローボタン */}
         <FollowButton targetUserId={userId} />
       </View>
+
+      {/* アバター拡大モーダル */}
+      {user?.avatar_url && (
+        <ImageViewerModal
+          visible={isAvatarModalVisible}
+          imageUri={user.avatar_url}
+          onClose={() => setIsAvatarModalVisible(false)}
+        />
+      )}
 
       {/* ユーザー名 */}
       <Text className="text-xl font-bold text-gray-900 mb-1">
