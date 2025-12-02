@@ -152,8 +152,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const handleSharePress = useCallback(async () => {
     try {
       await Share.share({
-        message: `${spotName}をチェック！`,
-        url: `https://machikore.app/spots/${spot.id}`,
+        message: `${spotName}をチェック！ machikore://spots/${spot.id}`,
       });
     } catch (error) {
       console.error('Share error:', error);

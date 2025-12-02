@@ -100,8 +100,7 @@ export function MapHeader({
   const handleSharePress = useCallback(async () => {
     try {
       await Share.share({
-        message: `${mapTitle || 'マップ'}をチェック！`,
-        url: `https://machikore.app/map/${mapId}`,
+        message: `${mapTitle || 'マップ'}をチェック！ machikore://maps/${mapId}`,
       });
     } catch (error) {
       console.error('Share error:', error);

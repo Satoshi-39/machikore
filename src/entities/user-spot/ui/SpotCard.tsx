@@ -178,8 +178,7 @@ export function SpotCard({
     e.stopPropagation();
     try {
       await Share.share({
-        message: `${spotName}をチェック！`,
-        url: `https://machikore.app/spots/${spot.id}`,
+        message: `${spotName}をチェック！ machikore://spots/${spot.id}`,
       });
     } catch (error) {
       console.error('Share error:', error);

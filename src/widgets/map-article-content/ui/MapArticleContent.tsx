@@ -147,8 +147,7 @@ export function MapArticleContent({
   const handleSharePress = useCallback(async () => {
     try {
       await Share.share({
-        message: `${map.name || 'マップ'}をチェック！`,
-        url: `https://machikore.app/maps/${map.id}`,
+        message: `${map.name || 'マップ'}をチェック！ machikore://maps/${map.id}`,
       });
     } catch (error) {
       console.error('Share error:', error);

@@ -87,8 +87,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
     e.stopPropagation();
     try {
       await Share.share({
-        message: `${map.name}をチェック！`,
-        url: `https://machikore.app/maps/${map.id}`,
+        message: `${map.name}をチェック！ machikore://maps/${map.id}`,
       });
     } catch (error) {
       console.error('Share error:', error);
