@@ -9,7 +9,10 @@ import { useRouter } from 'expo-router';
 import { AppState, AppStateStatus } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import { supabase } from '@/shared/api/supabase';
-import { markNotificationAsRead } from '@/shared/api/supabase/notifications';
+import {
+  markNotificationAsRead,
+  getUnreadNotificationCount,
+} from '@/shared/api/supabase/notifications';
 import { useUserStore } from '@/entities/user';
 import {
   getExpoPushToken,
@@ -69,13 +72,8 @@ export function usePushNotifications() {
     if (!user?.id) return;
 
     try {
-      const { count } = await supabase
-        .from('notifications')
-        .select('*', { count: 'exact', head: true })
-        .eq('user_id', user.id)
-        .eq('is_read', false);
-
-      await setBadgeCount(count ?? 0);
+      const count = await getUnreadNotificationCount(user.id);
+      await setBadgeCount(count);
     } catch (error) {
       console.error('Failed to update badge count:', error);
     }
