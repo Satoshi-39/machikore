@@ -77,9 +77,9 @@ export function usePushNotifications() {
 
   // 通知タップ時のナビゲーション
   const handleNotificationResponse = useCallback(
-    async (response: Notifications.NotificationResponse) => {
+    async (response: Notifications.NotificationResponse, isFromColdStart = false) => {
       const data = response.notification.request.content.data as NotificationData;
-      console.log('Notification tapped:', data);
+      console.log('Notification tapped:', data, { isFromColdStart });
 
       // 通知を既読にしてバッジを更新
       if (data.notificationId) {
@@ -91,16 +91,26 @@ export function usePushNotifications() {
         }
       }
 
-      // 通知タイプに応じて遷移
-      if (data.type === 'follow' && data.userId) {
-        router.push(`/(tabs)/notifications/users/${data.userId}`);
-      } else if (data.spotId) {
-        router.push(`/(tabs)/notifications/spots/${data.spotId}`);
-      } else if (data.mapId) {
-        router.push(`/(tabs)/notifications/maps/${data.mapId}`);
+      // ナビゲーション実行関数
+      const navigate = () => {
+        // 通知タイプに応じて遷移
+        if (data.type === 'follow' && data.userId) {
+          router.push(`/(tabs)/notifications/users/${data.userId}`);
+        } else if (data.spotId) {
+          router.push(`/(tabs)/notifications/spots/${data.spotId}`);
+        } else if (data.mapId) {
+          router.push(`/(tabs)/notifications/maps/${data.mapId}`);
+        } else {
+          // デフォルトは通知タブへ
+          router.push('/(tabs)/notifications');
+        }
+      };
+
+      // コールドスタートの場合はナビゲーション初期化を待つ
+      if (isFromColdStart) {
+        setTimeout(navigate, 500);
       } else {
-        // デフォルトは通知タブへ
-        router.push('/(tabs)/notifications');
+        navigate();
       }
     },
     [router, updateBadgeCount]
@@ -123,11 +133,11 @@ export function usePushNotifications() {
       // アプリ起動時にバッジを更新
       await updateBadgeCount();
 
-      // アプリが通知から起動された場合の処理
+      // アプリが通知から起動された場合の処理（コールドスタート）
       const lastNotificationResponse = await Notifications.getLastNotificationResponseAsync();
       if (lastNotificationResponse) {
         console.log('App launched from notification:', lastNotificationResponse);
-        handleNotificationResponse(lastNotificationResponse);
+        handleNotificationResponse(lastNotificationResponse, true);
       }
     };
 
