@@ -9,7 +9,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useLocalSearchParams, useRouter, useSegments } from 'expo-router';
+import { useLocalSearchParams, useRouter, useSegments, type Href } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { DefaultMapView } from '@/widgets/default-map-view';
@@ -190,7 +190,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
 
   // スポット編集
   const handleEditSpot = (spotId: string) => {
-    router.push(`/edit-spot?id=${spotId}`);
+    router.push(`/edit-spot/${spotId}` as Href);
   };
 
   // 記事ページへ遷移

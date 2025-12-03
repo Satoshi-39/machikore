@@ -7,7 +7,7 @@
 
 import React, { useCallback } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, type Href } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
@@ -30,7 +30,7 @@ export function SpotFeed() {
 
   // スポット編集
   const handleEditSpot = useCallback((spotId: string) => {
-    router.push(`/edit-spot?id=${spotId}`);
+    router.push(`/edit-spot/${spotId}` as Href);
   }, [router]);
 
   // コメント詳細ページへ遷移（発見タブ内スタック）

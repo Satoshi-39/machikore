@@ -80,7 +80,7 @@ export function EditSpotForm({
   );
 
   // 新しい画像を追加できる残り枚数
-  const maxNewImages = Math.max(0, 5 - displayedExistingImages.length);
+  const maxNewImages = Math.max(0, 4 - displayedExistingImages.length);
 
   const handleDeleteExistingImage = (imageId: string) => {
     setDeletedImageIds([...deletedImageIds, imageId]);
@@ -287,7 +287,7 @@ export function EditSpotForm({
           )}
 
           <Text className="text-xs text-gray-500 mt-2">
-            合計 {displayedExistingImages.length + newImages.length}/5枚
+            合計 {displayedExistingImages.length + newImages.length}/4枚
           </Text>
         </View>
 

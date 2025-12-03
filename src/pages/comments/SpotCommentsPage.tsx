@@ -14,7 +14,7 @@ import {
   Platform,
   Keyboard,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, type Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSpotComments, useAddSpotComment, useAddReplyComment } from '@/entities/comment';
 import { useCurrentUserId, useUser } from '@/entities/user';
@@ -121,7 +121,7 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
   }, [router, currentTab]);
 
   const handleSpotEdit = useCallback((id: string) => {
-    router.push(`/edit-spot?id=${id}`);
+    router.push(`/edit-spot/${id}` as Href);
   }, [router]);
 
   // スポットヘッダー

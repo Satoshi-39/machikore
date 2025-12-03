@@ -16,7 +16,7 @@ import {
 } from '@/features/search-places';
 import { usePlaceSelectHandler } from '../model';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
-import { useRouter } from 'expo-router';
+import { useRouter, type Href } from 'expo-router';
 import * as Crypto from 'expo-crypto';
 
 interface OwnMapSearchProps {
@@ -55,10 +55,16 @@ export function OwnMapSearch({
     clearHistory,
   } = useSearchHistory({ type: 'userMap' });
 
+  // 既存スポット編集へ遷移
+  const handleExistingSpotEdit = (spotId: string) => {
+    router.push(`/edit-spot/${spotId}` as Href);
+  };
+
   // 検索結果選択ハンドラー
   const { handlePlaceSelect: basePlaceSelect } = usePlaceSelectHandler({
     mapId,
     onPlaceSelect,
+    onExistingSpotEdit: handleExistingSpotEdit,
     onClose,
     endSession,
   });

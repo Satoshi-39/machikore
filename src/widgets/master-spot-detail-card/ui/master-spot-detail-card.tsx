@@ -6,7 +6,7 @@ import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react'
 import { View, Text, Pressable, Linking, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter, useSegments, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
 import { colors } from '@/shared/config';
@@ -115,7 +115,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
       // 既に追加されている場合は編集画面に遷移
       setShowMapSelectSheet(false);
       onClose();
-      router.push(`/edit-spot?id=${existingSpot.id}`);
+      router.push(`/edit-spot/${existingSpot.id}` as Href);
       return;
     }
 

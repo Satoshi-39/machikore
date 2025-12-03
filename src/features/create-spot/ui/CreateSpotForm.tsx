@@ -243,7 +243,7 @@ export function CreateSpotForm({
           <ImagePickerButton
             images={images}
             onImagesChange={setImages}
-            maxImages={5}
+            maxImages={4}
           />
         </View>
 

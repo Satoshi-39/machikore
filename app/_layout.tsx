@@ -148,7 +148,7 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="edit-spot"
+            name="edit-spot/[id]"
             options={{
               presentation: 'card',
               headerShown: false,
