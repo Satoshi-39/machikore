@@ -127,5 +127,9 @@ export function useToggleMapLike() {
         updateMapLikesCountInCache(queryClient, mapId, delta);
       }
     },
+    onSuccess: (_, { userId }) => {
+      // いいね一覧のキャッシュを無効化して再取得
+      queryClient.invalidateQueries({ queryKey: ['user-liked-maps', userId] });
+    },
   });
 }

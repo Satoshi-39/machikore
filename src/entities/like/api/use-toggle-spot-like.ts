@@ -126,5 +126,9 @@ export function useToggleSpotLike() {
         updateSpotInCache(queryClient, spotId, context.previousIsLiked);
       }
     },
+    onSuccess: (_, { userId }) => {
+      // いいね一覧のキャッシュを無効化して再取得
+      queryClient.invalidateQueries({ queryKey: ['user-liked-spots', userId] });
+    },
   });
 }

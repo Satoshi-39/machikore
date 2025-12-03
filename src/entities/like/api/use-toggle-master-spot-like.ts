@@ -70,5 +70,9 @@ export function useToggleMasterSpotLike() {
         );
       }
     },
+    onSuccess: (_, { userId }) => {
+      // いいね一覧のキャッシュを無効化して再取得
+      queryClient.invalidateQueries({ queryKey: ['user-liked-master-spots', userId] });
+    },
   });
 }
