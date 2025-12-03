@@ -4,7 +4,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { invalidateVisits } from '@/shared/api/query-client';
-import { updateVisit } from '@/shared/api/sqlite';
+import { supabase } from '@/shared/api/supabase/client';
 import type { UpdateVisitParams } from '../model/types';
 
 /**
@@ -13,13 +13,21 @@ import type { UpdateVisitParams } from '../model/types';
 export function useUpdateVisit() {
   return useMutation({
     mutationFn: async (params: UpdateVisitParams) => {
-      const now = new Date().toISOString();
+      const updateData: { visited_at?: string } = {};
 
-      updateVisit(params.visitId, {
-        memo: params.memo,
-        visited_at: params.visitedAt,
-        updated_at: now,
-      });
+      if (params.visitedAt) {
+        updateData.visited_at = params.visitedAt;
+      }
+
+      const { error } = await supabase
+        .from('visits')
+        .update(updateData)
+        .eq('id', params.visitId);
+
+      if (error) {
+        console.error('Error updating visit:', error);
+        throw error;
+      }
 
       return params.visitId;
     },

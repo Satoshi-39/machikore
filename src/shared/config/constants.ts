@@ -72,6 +72,30 @@ export const VISIT_ICONS = {
 } as const;
 
 // ===============================
+// マップマーカー設定
+// ===============================
+
+export const MAP_MARKER = {
+  // 街マーカーアイコン（絵文字）
+  MACHI: {
+    VISITED: '🏠',
+    UNVISITED: '🏘️',
+    VISITED_HIGHLIGHT: '⭐',
+  },
+  // マーカーサイズ
+  SIZE: {
+    DEFAULT: 24,
+    HIGHLIGHT: 32,
+  },
+  // マーカー色
+  COLOR: {
+    DEFAULT: '#000000',
+    VISITED_HIGHLIGHT: '#3B82F6',    // blue-500
+    UNVISITED_HIGHLIGHT: '#6B7280',  // gray-500
+  },
+} as const;
+
+// ===============================
 // タブ名
 // ===============================
 

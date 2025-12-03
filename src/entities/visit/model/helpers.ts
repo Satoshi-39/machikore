@@ -20,30 +20,11 @@ export function createVisitData(params: CreateVisitParams): VisitRow {
     id: uuidv4(),
     user_id: params.userId,
     machi_id: params.stationId,
-    visit_count: 1,
     visited_at: params.visitedAt || now,
-    memo: params.memo || null,
     created_at: now,
     updated_at: now,
     synced_at: null,
     is_synced: 0,
-  };
-}
-
-/**
- * 既存の訪問記録の訪問回数をインクリメント
- */
-export function incrementVisitData(
-  existingVisit: VisitRow,
-  visitedAt?: string
-): Partial<VisitRow> {
-  const now = new Date().toISOString();
-
-  return {
-    visit_count: (existingVisit.visit_count ?? 0) + 1,
-    visited_at: visitedAt || now,
-    updated_at: now,
-    is_synced: 0, // 未同期にマーク
   };
 }
 
@@ -128,11 +109,3 @@ export function sortVisitsByDate(visits: VisitRow[]): VisitRow[] {
   );
 }
 
-/**
- * 訪問記録を訪問回数でソート（多い順）
- */
-export function sortVisitsByCount(visits: VisitRow[]): VisitRow[] {
-  return [...visits].sort(
-    (a, b) => (b.visit_count ?? 0) - (a.visit_count ?? 0)
-  );
-}

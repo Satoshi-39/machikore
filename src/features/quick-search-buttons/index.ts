@@ -1,1 +1,1 @@
-export { QuickSearchButtons, type QuickSearchCategory } from './ui/QuickSearchButtons';
+export { QuickSearchButtons, type QuickSearchCategory, type VisitFilter } from './ui/QuickSearchButtons';

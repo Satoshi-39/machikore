@@ -60,14 +60,14 @@ export function getVisitsPaginated(
 }
 
 /**
- * 街の訪問回数を取得
+ * 街の訪問済み状態をチェック
  */
-export function getVisitCount(userId: UUID, machiId: string): number {
-  const result = queryOne<{ visit_count: number }>(
-    'SELECT visit_count FROM visits WHERE user_id = ? AND machi_id = ?;',
+export function checkMachiVisited(userId: UUID, machiId: string): boolean {
+  const result = queryOne<{ id: string }>(
+    'SELECT id FROM visits WHERE user_id = ? AND machi_id = ?;',
     [userId, machiId]
   );
-  return result?.visit_count ?? 0;
+  return !!result;
 }
 
 /**
@@ -95,18 +95,16 @@ export function insertVisit(visit: VisitRow): void {
   execute(
     `
     INSERT INTO visits (
-      id, user_id, machi_id, visit_count, visited_at,
-      memo, created_at, updated_at, synced_at, is_synced
+      id, user_id, machi_id, visited_at,
+      created_at, updated_at, synced_at, is_synced
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       visit.id,
       visit.user_id,
       visit.machi_id,
-      visit.visit_count,
       visit.visited_at,
-      visit.memo,
       visit.created_at,
       visit.updated_at,
       visit.synced_at,
@@ -122,8 +120,6 @@ export function updateVisit(
   visitId: UUID,
   data: {
     visited_at?: string;
-    visit_count?: number;
-    memo?: string | null;
     synced_at?: string | null;
     is_synced?: 0 | 1;
     updated_at: string;
@@ -135,16 +131,6 @@ export function updateVisit(
   if (data.visited_at !== undefined) {
     fields.push('visited_at = ?');
     values.push(data.visited_at);
-  }
-
-  if (data.visit_count !== undefined) {
-    fields.push('visit_count = ?');
-    values.push(data.visit_count);
-  }
-
-  if (data.memo !== undefined) {
-    fields.push('memo = ?');
-    values.push(data.memo);
   }
 
   if (data.synced_at !== undefined) {
@@ -165,26 +151,6 @@ export function updateVisit(
   execute(`UPDATE visits SET ${fields.join(', ')} WHERE id = ?;`, values);
 }
 
-/**
- * 訪問回数をインクリメント
- */
-export function incrementVisitCount(
-  visitId: UUID,
-  newVisitedAt: string
-): void {
-  const now = new Date().toISOString();
-
-  execute(
-    `
-    UPDATE visits
-    SET visit_count = visit_count + 1,
-        visited_at = ?,
-        updated_at = ?
-    WHERE id = ?;
-    `,
-    [newVisitedAt, now, visitId]
-  );
-}
 
 // ===============================
 // 訪問記録削除

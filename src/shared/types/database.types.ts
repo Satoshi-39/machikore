@@ -186,14 +186,12 @@ export interface SpotWithMasterSpot extends SpotRow {
   google_user_rating_count: number | null; // master_spots.google_user_rating_count
 }
 
-// Visits (街訪問記録)
+// Visits (街訪問記録 - シンプルな訪問済み/未訪問管理)
 export interface VisitRow {
   id: string;
   user_id: string;
   machi_id: string;
-  visit_count: number;
   visited_at: string;
-  memo: string | null;
   created_at: string;
   updated_at: string;
   synced_at: string | null;

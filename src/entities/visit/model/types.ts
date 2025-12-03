@@ -22,7 +22,6 @@ export interface CreateVisitParams {
   userId: string;
   stationId: string;
   visitedAt?: string; // デフォルトは現在時刻
-  memo?: string;
 }
 
 /**
@@ -30,8 +29,16 @@ export interface CreateVisitParams {
  */
 export interface UpdateVisitParams {
   visitId: string;
-  memo?: string;
   visitedAt?: string;
+}
+
+/**
+ * 訪問トグルパラメータ
+ */
+export interface ToggleVisitParams {
+  userId: string;
+  machiId: string;
+  visitedAt?: string; // デフォルトは現在時刻
 }
 
 /**
@@ -39,7 +46,6 @@ export interface UpdateVisitParams {
  */
 export interface VisitStats {
   totalStations: number; // 総訪問街数
-  totalVisits: number; // 総訪問回数
   thisMonthVisits: number; // 今月の訪問街数
   recentVisits: VisitRow[]; // 最近の訪問記録
 }

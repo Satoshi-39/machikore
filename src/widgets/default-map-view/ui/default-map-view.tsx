@@ -26,7 +26,7 @@ import { useBoundsManagement } from '../model';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
-import { QuickSearchButtons } from '@/features/quick-search-buttons';
+import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
 import { MasterSpotDetailCard } from '@/widgets/master-spot-detail-card';
 import { CityDetailCard } from '@/widgets/city-detail-card';
 
@@ -56,6 +56,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [cityDetailSnapIndex, setCityDetailSnapIndex] = useState<number>(1);
     const [selectedSpot, setSelectedSpot] = useState<MasterSpotDisplay | null>(null);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
+    const [visitFilter, setVisitFilter] = useState<VisitFilter>('all');
     const cameraRef = useRef<Mapbox.Camera>(null);
 
     // ジャンプ完了後のリセット抑制用タイムスタンプ
@@ -198,8 +199,21 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // 国データを取得
     const countries = useMemo(() => getCountriesData(), []);
 
+    // フィルタリングされたmachiDataを生成
+    const filteredMachiData = useMemo(() => {
+      if (!machiData) return null;
+      if (visitFilter === 'all') return machiData;
+      if (visitFilter === 'visited') {
+        return machiData.filter((machi) => visitedMachiIds.has(machi.id));
+      }
+      if (visitFilter === 'not_visited') {
+        return machiData.filter((machi) => !visitedMachiIds.has(machi.id));
+      }
+      return machiData;
+    }, [machiData, visitFilter, visitedMachiIds]);
+
     // GeoJSON データ生成
-    const machiGeoJson = useMachiGeoJson(machiData, visitedMachiIds);
+    const machiGeoJson = useMachiGeoJson(filteredMachiData ?? undefined, visitedMachiIds);
     const masterSpotsGeoJson = useMasterSpotsGeoJson(masterSpots);
     const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
     const citiesGeoJson = useCitiesGeoJson(cities);
@@ -289,20 +303,29 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               animated={true}
             />
 
-            {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
-            <CountryLabels geoJson={countriesGeoJson} />
+            {/* フィルター中は他のレイヤーを非表示 */}
+            {visitFilter === 'all' && (
+              <>
+                {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
+                <CountryLabels geoJson={countriesGeoJson} />
 
-            {/* 都道府県ラベル表示（テキストのみ）- ズーム5-10で表示 */}
-            <PrefectureLabels geoJson={prefecturesGeoJson} />
+                {/* 都道府県ラベル表示（テキストのみ）- ズーム5-10で表示 */}
+                <PrefectureLabels geoJson={prefecturesGeoJson} />
 
-            {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
-            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
+                {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
+                <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
+
+                {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
+                <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
+              </>
+            )}
 
             {/* 街マーカー表示（アイコン + ラベル）- ズーム12以上で表示 */}
-            <MachiLabels geoJson={machiGeoJson} onPress={handleMarkerPress} />
-
-            {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
-            <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
+            <MachiLabels
+              geoJson={machiGeoJson}
+              onPress={handleMarkerPress}
+              visitFilter={visitFilter}
+            />
           </Mapbox.MapView>
 
           {/* 検索バー + ViewModeToggle */}
@@ -323,12 +346,14 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                 showIcon={true}
                 placeholder="スポットを検索"
               />
-              {/* クイック検索ボタン */}
-              {onQuickSearch && (
-                <View className="mt-4">
-                  <QuickSearchButtons onCategoryPress={onQuickSearch} />
-                </View>
-              )}
+              {/* クイック検索/フィルタリングボタン */}
+              <View className="mt-4">
+                <QuickSearchButtons
+                  activeFilter={visitFilter}
+                  onFilterChange={setVisitFilter}
+                  onCategoryPress={onQuickSearch}
+                />
+              </View>
             </View>
           )}
 

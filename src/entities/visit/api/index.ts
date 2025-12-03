@@ -9,3 +9,4 @@ export * from './use-update-visit';
 export * from './use-delete-visit';
 export * from './use-visit-stats';
 export * from './use-recent-visits';
+export * from './use-toggle-visit';

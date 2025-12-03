@@ -299,15 +299,13 @@ export function initializeDatabase(): void {
       ON user_spots(is_synced);
     `);
 
-    // 9. 訪問記録テーブル（街訪問）
+    // 9. 訪問記録テーブル（街訪問 - シンプルな訪問済み/未訪問管理）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS visits (
         id TEXT PRIMARY KEY,
         user_id TEXT NOT NULL,
         machi_id TEXT NOT NULL,
-        visit_count INTEGER DEFAULT 1,
         visited_at TEXT NOT NULL,
-        memo TEXT,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         synced_at TEXT,
