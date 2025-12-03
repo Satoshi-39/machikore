@@ -5,16 +5,127 @@
  */
 
 import React from 'react';
-import { View, Text, ScrollView, Pressable, Alert } from 'react-native';
+import { View, Text, ScrollView, Pressable, Switch, Alert } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { useSignOut } from '@/features/auth';
 import { PageHeader } from '@/shared/ui';
+import { colors } from '@/shared/config';
+import { useAppSettingsStore } from '@/shared/lib/store';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
 }
 
+// 設定セクションヘッダー
+interface SettingsSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+function SettingsSection({ title, children }: SettingsSectionProps) {
+  return (
+    <View className="bg-white mt-4">
+      <Text className="text-xs font-medium text-gray-500 uppercase px-4 pt-4 pb-2">
+        {title}
+      </Text>
+      {children}
+    </View>
+  );
+}
+
+// 設定アイテム（タップで遷移）
+interface SettingsItemProps {
+  icon: keyof typeof Ionicons.glyphMap;
+  label: string;
+  value?: string;
+  onPress: () => void;
+  showArrow?: boolean;
+  destructive?: boolean;
+}
+
+function SettingsItem({
+  icon,
+  label,
+  value,
+  onPress,
+  showArrow = true,
+  destructive = false,
+}: SettingsItemProps) {
+  return (
+    <Pressable
+      onPress={onPress}
+      className="flex-row items-center px-4 py-3.5 border-b border-gray-100 active:bg-gray-50"
+    >
+      <Ionicons
+        name={icon}
+        size={22}
+        color={destructive ? '#EF4444' : colors.text.secondary}
+      />
+      <Text
+        className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-gray-900'}`}
+      >
+        {label}
+      </Text>
+      {value && (
+        <Text className="text-sm text-gray-400 mr-2">{value}</Text>
+      )}
+      {showArrow && (
+        <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+      )}
+    </Pressable>
+  );
+}
+
+// 設定アイテム（トグルスイッチ）
+interface SettingsToggleProps {
+  icon: keyof typeof Ionicons.glyphMap;
+  label: string;
+  value: boolean;
+  onValueChange: (value: boolean) => void;
+  disabled?: boolean;
+}
+
+function SettingsToggle({
+  icon,
+  label,
+  value,
+  onValueChange,
+  disabled = false,
+}: SettingsToggleProps) {
+  return (
+    <View className="flex-row items-center px-4 py-3.5 border-b border-gray-100">
+      <Ionicons name={icon} size={22} color={colors.text.secondary} />
+      <Text className="flex-1 text-base text-gray-900 ml-3">{label}</Text>
+      <Switch
+        value={value}
+        onValueChange={onValueChange}
+        disabled={disabled}
+        trackColor={{ false: colors.gray[300], true: colors.primary.DEFAULT }}
+        thumbColor="white"
+      />
+    </View>
+  );
+}
+
 export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
-  const { signOut, isLoading } = useSignOut();
+  const router = useRouter();
+  const { signOut } = useSignOut();
+
+  // ストアから設定値を取得
+  const themeMode = useAppSettingsStore((state) => state.themeMode);
+  const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
+  const pushNotificationsEnabled = useAppSettingsStore(
+    (state) => state.pushNotificationsEnabled
+  );
+  const setPushNotificationsEnabled = useAppSettingsStore(
+    (state) => state.setPushNotificationsEnabled
+  );
+
+  const isDarkMode = themeMode === 'dark';
+  const handleDarkModeChange = (value: boolean) => {
+    setThemeMode(value ? 'dark' : 'light');
+  };
 
   const handleSignOutPress = () => {
     Alert.alert(
@@ -38,35 +149,117 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
     );
   };
 
+  const showComingSoon = () => {
+    Alert.alert('準備中', 'この機能は準備中です。');
+  };
+
   return (
     <View className="flex-1 bg-gray-50">
       <PageHeader title="設定" />
       <ScrollView className="flex-1">
-        {/* プレースホルダーセクション */}
-        <View className="bg-white mt-4 px-4 py-6">
-          <Text className="text-base font-semibold text-gray-900 mb-2">
-            今後実装予定の機能
-          </Text>
-          <Text className="text-sm text-gray-500">
-            {'\u2022'} プロフィール編集{'\n'}
-            {'\u2022'} 通知設定{'\n'}
-            {'\u2022'} プライバシー設定{'\n'}
-            {'\u2022'} アカウント管理
-          </Text>
-        </View>
+        {/* アカウント */}
+        <SettingsSection title="アカウント">
+          <SettingsItem
+            icon="person-outline"
+            label="プロフィール編集"
+            onPress={() => router.push('/edit-profile')}
+          />
+          <SettingsItem
+            icon="mail-outline"
+            label="メールアドレス変更"
+            onPress={showComingSoon}
+          />
+          <SettingsItem
+            icon="lock-closed-outline"
+            label="パスワード変更"
+            onPress={showComingSoon}
+          />
+        </SettingsSection>
 
-        {/* サインアウトセクション */}
-        <View className="bg-white mt-4 px-4 py-6">
-          <Pressable
+        {/* 表示 */}
+        <SettingsSection title="表示">
+          <SettingsToggle
+            icon="moon-outline"
+            label="ダークモード"
+            value={isDarkMode}
+            onValueChange={handleDarkModeChange}
+          />
+        </SettingsSection>
+
+        {/* 通知 */}
+        <SettingsSection title="通知">
+          <SettingsToggle
+            icon="notifications-outline"
+            label="プッシュ通知"
+            value={pushNotificationsEnabled}
+            onValueChange={setPushNotificationsEnabled}
+          />
+          <SettingsItem
+            icon="options-outline"
+            label="通知の詳細設定"
+            onPress={showComingSoon}
+          />
+        </SettingsSection>
+
+        {/* プライバシー */}
+        <SettingsSection title="プライバシー">
+          <SettingsItem
+            icon="eye-outline"
+            label="公開範囲"
+            onPress={showComingSoon}
+          />
+          <SettingsItem
+            icon="ban-outline"
+            label="ブロックしたユーザー"
+            onPress={showComingSoon}
+          />
+        </SettingsSection>
+
+        {/* その他 */}
+        <SettingsSection title="その他">
+          <SettingsItem
+            icon="help-circle-outline"
+            label="ヘルプ"
+            onPress={showComingSoon}
+          />
+          <SettingsItem
+            icon="document-text-outline"
+            label="利用規約"
+            onPress={showComingSoon}
+          />
+          <SettingsItem
+            icon="shield-outline"
+            label="プライバシーポリシー"
+            onPress={showComingSoon}
+          />
+          <SettingsItem
+            icon="information-circle-outline"
+            label="アプリについて"
+            value="v1.0.0"
+            onPress={showComingSoon}
+          />
+        </SettingsSection>
+
+        {/* 危険なアクション */}
+        <SettingsSection title="アカウント操作">
+          <SettingsItem
+            icon="log-out-outline"
+            label="サインアウト"
             onPress={handleSignOutPress}
-            disabled={isLoading}
-            className="bg-red-600 py-3 px-4 rounded-lg"
-          >
-            <Text className="text-white text-center font-semibold">
-              {isLoading ? 'サインアウト中...' : 'サインアウト'}
-            </Text>
-          </Pressable>
-        </View>
+            showArrow={false}
+            destructive
+          />
+          <SettingsItem
+            icon="trash-outline"
+            label="アカウント削除"
+            onPress={showComingSoon}
+            showArrow={false}
+            destructive
+          />
+        </SettingsSection>
+
+        {/* 下部余白 */}
+        <View className="h-8" />
       </ScrollView>
     </View>
   );
