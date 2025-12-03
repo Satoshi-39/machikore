@@ -67,7 +67,7 @@ export function BookmarkItemList({
     if (isInDiscoverTab) {
       router.push(`/(tabs)/discover/maps/${mapId}`);
     } else if (isInMapTab) {
-      router.push(`/(tabs)/map/${mapId}`);
+      router.push(`/(tabs)/map/maps/${mapId}`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/maps/${mapId}`);
     } else {

@@ -153,7 +153,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
     if (isInDiscoverTab) {
       router.replace(`/(tabs)/discover/maps/${mapId}`);
     } else if (isInMapTab) {
-      router.replace(`/(tabs)/map/${mapId}`);
+      router.replace(`/(tabs)/map/maps/${mapId}`);
     } else if (isInMypageTab) {
       router.replace(`/(tabs)/mypage/maps/${mapId}`);
     } else if (propMapId) {
@@ -162,7 +162,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
       router.replace(`/maps/${mapId}`);
     } else {
       // フォールバック: マップタブ内に遷移
-      router.push(`/(tabs)/map/${mapId}`);
+      router.push(`/(tabs)/map/maps/${mapId}`);
     }
   };
 

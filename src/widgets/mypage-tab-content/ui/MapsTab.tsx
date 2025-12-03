@@ -130,7 +130,7 @@ export function MapsTab({ userId }: MapsTabProps) {
     if (isInDiscoverTab) {
       router.push(`/(tabs)/discover/maps/${map.id}`);
     } else if (isInMapTab) {
-      router.push(`/(tabs)/map/${map.id}`);
+      router.push(`/(tabs)/map/maps/${map.id}`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/maps/${map.id}`);
     } else if (isInNotificationsTab) {
