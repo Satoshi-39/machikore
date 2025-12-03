@@ -158,7 +158,7 @@ export function CommentInputModal({
 
         {/* ボトムシート */}
         <Animated.View
-          className="bg-white rounded-t-3xl"
+          className="bg-surface dark:bg-dark-surface rounded-t-3xl"
           style={{
             paddingBottom: insets.bottom,
             transform: [{ translateY: slideAnim }],
@@ -170,14 +170,14 @@ export function CommentInputModal({
           </View>
 
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-gray-100">
+          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-border-light dark:border-dark-border-light">
             <Pressable
               onPress={handleClose}
               className="w-8 h-8 items-center justify-center"
             >
               <Ionicons name="close" size={24} color={colors.gray[600]} />
             </Pressable>
-            <Text className="text-base font-semibold text-gray-800">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
               {isReplyMode ? '返信' : 'コメント'}
             </Text>
             <Pressable
@@ -210,7 +210,7 @@ export function CommentInputModal({
 
           {/* 返信先表示 */}
           {isReplyMode && replyingTo && (
-            <View className="px-4 py-3 border-b border-gray-100">
+            <View className="px-4 py-3 border-b border-border-light dark:border-dark-border-light">
               <View className="flex-row">
                 {/* 返信先ユーザーアバター */}
                 {replyingTo.user?.avatar_url ? (
@@ -224,10 +224,10 @@ export function CommentInputModal({
                   </View>
                 )}
                 <View className="flex-1 ml-3">
-                  <Text className="text-sm font-semibold text-gray-800">
+                  <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
                     {replyingTo.user?.display_name || replyingTo.user?.username || 'ユーザー'}
                   </Text>
-                  <Text className="text-sm text-gray-600 mt-0.5" numberOfLines={2}>
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={2}>
                     {replyingTo.content}
                   </Text>
                 </View>
@@ -261,14 +261,14 @@ export function CommentInputModal({
                 placeholderTextColor={colors.gray[400]}
                 multiline
                 maxLength={500}
-                className="text-base text-gray-800 min-h-[120px] max-h-[200px]"
+                className="text-base text-foreground dark:text-dark-foreground min-h-[120px] max-h-[200px]"
                 textAlignVertical="top"
               />
             </View>
           </View>
 
           {/* フッター */}
-          <View className="flex-row items-center justify-between px-4 py-3 border-t border-gray-100 mt-2">
+          <View className="flex-row items-center justify-between px-4 py-3 border-t border-border-light dark:border-dark-border-light mt-2">
             {/* 左側：将来的にメディア追加ボタンなど */}
             <View className="flex-row items-center gap-4">
               {/* 将来的に画像添付などのアイコンを追加可能 */}
@@ -276,10 +276,10 @@ export function CommentInputModal({
 
             {/* 右側：文字数カウンター */}
             <View className="flex-row items-center">
-              <Text className={`text-xs ${text.length > 450 ? 'text-orange-500' : 'text-gray-400'}`}>
+              <Text className={`text-xs ${text.length > 450 ? 'text-orange-500' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}>
                 {text.length}
               </Text>
-              <Text className="text-xs text-gray-400">/500</Text>
+              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">/500</Text>
             </View>
           </View>
         </Animated.View>

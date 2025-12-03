@@ -206,7 +206,7 @@ export function ImagePickerButton({
         onPress={showActionSheet}
         disabled={isLoading || images.length >= maxImages}
         className={`flex-row items-center justify-center py-3 px-4 rounded-lg border border-dashed ${
-          images.length >= maxImages ? 'border-gray-200 bg-gray-50' : 'border-gray-300'
+          images.length >= maxImages ? 'border-border dark:border-dark-border bg-background-secondary dark:bg-dark-background-secondary' : 'border-border dark:border-dark-border'
         }`}
       >
         <Ionicons
@@ -216,7 +216,7 @@ export function ImagePickerButton({
         />
         <Text
           className={`ml-2 text-base ${
-            images.length >= maxImages ? 'text-gray-400' : 'text-primary'
+            images.length >= maxImages ? 'text-foreground-muted dark:text-dark-foreground-muted' : 'text-primary'
           }`}
         >
           {isLoading
@@ -227,7 +227,7 @@ export function ImagePickerButton({
         </Text>
       </TouchableOpacity>
 
-      <Text className="text-xs text-gray-500 mt-1">
+      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
         {images.length}/{maxImages}枚
       </Text>
     </View>

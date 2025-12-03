@@ -58,7 +58,7 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
   return (
     <Pressable
       onPress={onPress}
-      className={`p-4 border-b border-gray-100 ${!isRead ? 'bg-blue-50' : 'bg-white'}`}
+      className={`p-4 border-b border-border-light dark:border-dark-border-light ${!isRead ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-surface dark:bg-dark-surface'}`}
     >
       <View className="flex-row items-start">
         {/* アイコン */}
@@ -72,14 +72,14 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
         {/* 内容 */}
         <View className="flex-1">
           <Text
-            className={`text-base mb-1 ${!isRead ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'}`}
+            className={`text-base mb-1 ${!isRead ? 'font-semibold text-foreground dark:text-dark-foreground' : 'font-medium text-foreground-secondary dark:text-dark-foreground-secondary'}`}
           >
             {announcement.title}
           </Text>
-          <Text className="text-sm text-gray-600" numberOfLines={3}>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={3}>
             {announcement.content}
           </Text>
-          <Text className="text-xs text-gray-400 mt-2">
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-2">
             {formatDate(announcement.published_at)}
           </Text>
         </View>
@@ -121,7 +121,7 @@ export function AnnouncementList() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center">
+      <View className="flex-1 items-center justify-center bg-surface dark:bg-dark-surface">
         <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
       </View>
     );
@@ -129,9 +129,9 @@ export function AnnouncementList() {
 
   if (announcements.length === 0) {
     return (
-      <View className="flex-1 items-center justify-center px-6">
+      <View className="flex-1 items-center justify-center px-6 bg-surface dark:bg-dark-surface">
         <Ionicons name="megaphone-outline" size={80} color="#D1D5DB" />
-        <Text className="text-lg font-medium text-gray-500 mt-6">
+        <Text className="text-lg font-medium text-foreground-secondary dark:text-dark-foreground-secondary mt-6">
           お知らせはありません
         </Text>
       </View>
@@ -139,10 +139,10 @@ export function AnnouncementList() {
   }
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* 全て既読ボタン */}
       {hasUnread && (
-        <View className="px-4 py-2 border-b border-gray-100 bg-white">
+        <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface">
           <Pressable onPress={handleMarkAllAsRead}>
             <Text className="text-sm text-blue-500 font-medium text-right">
               すべて既読にする

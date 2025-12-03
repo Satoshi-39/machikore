@@ -55,7 +55,7 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-4 bg-white border-b border-gray-100"
+      className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
     >
       <View className="flex-row items-start">
         {/* サムネイル or アイコン */}
@@ -76,22 +76,22 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
 
         {/* コレクション情報 */}
         <View className="flex-1">
-          <Text className="text-base font-semibold text-gray-900 mb-1">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
             {collection.name}
           </Text>
           {collection.description && (
-            <Text className="text-sm text-gray-600 mb-2" numberOfLines={2}>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
               {collection.description}
             </Text>
           )}
           <View className="flex-row items-center gap-3">
             <View className="flex-row items-center gap-1">
               <Ionicons name="map" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-gray-500">
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                 {collection.maps_count}マップ
               </Text>
             </View>
-            <Text className="text-xs text-gray-400">
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
               {formattedDate}
             </Text>
           </View>
@@ -166,13 +166,13 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
 
   const renderEmptyState = useCallback(() => (
     <View className="items-center py-12">
-      <View className="w-20 h-20 rounded-full bg-gray-100 items-center justify-center mb-4">
+      <View className="w-20 h-20 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-4">
         <Ionicons name="library" size={40} color={colors.text.secondary} />
       </View>
-      <Text className="text-base font-semibold text-gray-900 mb-2">
+      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
         コレクション
       </Text>
-      <Text className="text-sm text-gray-500 text-center">
+      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
         マップをテーマ別にまとめましょう
       </Text>
     </View>
@@ -201,7 +201,7 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
           onDelete={handleDelete}
         />
       )}
-      contentContainerClassName="bg-white flex-grow"
+      contentContainerClassName="bg-surface dark:bg-dark-surface flex-grow"
       ListEmptyComponent={renderEmptyState}
     />
   );

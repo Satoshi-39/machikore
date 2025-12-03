@@ -54,7 +54,7 @@ function MapCard({ map, onPress, onEdit, onDelete, onArticlePress }: MapCardProp
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-4 bg-white border-b border-gray-100"
+      className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
     >
       <View className="flex-row items-start">
         {/* サムネイル or アイコン */}
@@ -65,35 +65,35 @@ function MapCard({ map, onPress, onEdit, onDelete, onArticlePress }: MapCardProp
             resizeMode="cover"
           />
         ) : (
-          <View className="w-16 h-16 rounded-lg bg-gray-100 items-center justify-center mr-3">
+          <View className="w-16 h-16 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
             <Ionicons name="map" size={24} color={colors.primary.DEFAULT} />
           </View>
         )}
 
         {/* マップ情報 */}
         <View className="flex-1">
-          <Text className="text-base font-semibold text-gray-900 mb-1">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
             {map.name}
           </Text>
           {map.description && (
-            <Text className="text-sm text-gray-600 mb-2" numberOfLines={2}>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
               {map.description}
             </Text>
           )}
           <View className="flex-row items-center gap-3">
             <View className="flex-row items-center gap-1">
               <Ionicons name="location" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-gray-500">
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                 {map.spots_count}スポット
               </Text>
             </View>
             <View className="flex-row items-center gap-1">
               <Ionicons name="heart" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-gray-500">
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                 {map.likes_count}
               </Text>
             </View>
-            <Text className="text-xs text-gray-400">
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
               {formattedDate}
             </Text>
           </View>
@@ -195,7 +195,7 @@ export function MapsTab({ userId }: MapsTabProps) {
               onArticlePress={handleArticlePress}
             />
           )}
-          contentContainerClassName="bg-white"
+          contentContainerClassName="bg-surface dark:bg-dark-surface"
         />
       )}
     </AsyncBoundary>

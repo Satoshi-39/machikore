@@ -100,11 +100,11 @@ export function CommentInput({
   }, [onCancelReply]);
 
   return (
-    <View className="border-t border-gray-200">
+    <View className="border-t border-border dark:border-dark-border">
       {/* 返信モード表示 */}
       {isReplyMode && (
-        <View className="flex-row items-center justify-between px-4 py-2 bg-gray-50">
-          <Text className="text-sm text-gray-600">返信を作成中</Text>
+        <View className="flex-row items-center justify-between px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">返信を作成中</Text>
           <Pressable onPress={handleCancelReply} hitSlop={8}>
             <Ionicons name="close" size={20} color={colors.gray[500]} />
           </Pressable>
@@ -119,7 +119,7 @@ export function CommentInput({
           placeholderTextColor={colors.gray[400]}
           multiline
           maxLength={500}
-          className="flex-1 bg-gray-100 rounded-2xl px-4 py-2 max-h-24 text-base"
+          className="flex-1 bg-muted dark:bg-dark-muted rounded-2xl px-4 py-2 max-h-24 text-base"
           style={{ minHeight: 40 }}
         />
         <Pressable

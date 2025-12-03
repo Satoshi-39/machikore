@@ -59,7 +59,7 @@ export function CommentItem({
   ], [comment, onEdit, onDelete]);
 
   return (
-    <View className={`flex-row p-4 border-b border-gray-100 ${isReply ? 'pl-12 bg-gray-50' : ''}`}>
+    <View className={`flex-row p-4 border-b border-border-light dark:border-dark-border-light ${isReply ? 'pl-12 bg-background-secondary dark:bg-dark-background-secondary' : ''}`}>
       {/* アバター */}
       <Pressable onPress={() => onUserPress(comment.user_id)}>
         {comment.user?.avatar_url ? (
@@ -78,12 +78,12 @@ export function CommentItem({
       <View className="flex-1 ml-3">
         <View className="flex-row items-center justify-between">
           <Pressable onPress={() => onUserPress(comment.user_id)}>
-            <Text className={`font-semibold text-gray-800 ${isReply ? 'text-sm' : ''}`}>
+            <Text className={`font-semibold text-foreground dark:text-dark-foreground ${isReply ? 'text-sm' : ''}`}>
               {comment.user?.display_name || comment.user?.username || 'ユーザー'}
             </Text>
           </Pressable>
           <View className="flex-row items-center">
-            <Text className="text-xs text-gray-400">{formatRelativeTime(comment.created_at)}</Text>
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{formatRelativeTime(comment.created_at)}</Text>
             {isOwner && (
               <PopupMenu
                 items={menuItems}
@@ -93,7 +93,7 @@ export function CommentItem({
             )}
           </View>
         </View>
-        <Text className={`text-gray-700 mt-1 ${isReply ? 'text-sm' : ''}`}>{comment.content}</Text>
+        <Text className={`text-foreground-secondary dark:text-dark-foreground-secondary mt-1 ${isReply ? 'text-sm' : ''}`}>{comment.content}</Text>
 
         {/* アクションボタン */}
         <View className="flex-row items-center mt-2 gap-4">
@@ -110,7 +110,7 @@ export function CommentItem({
                 color={comment.is_liked ? colors.danger : colors.gray[400]}
               />
               {comment.likes_count > 0 && (
-                <Text className={`ml-1 text-xs ${comment.is_liked ? 'text-red-500' : 'text-gray-400'}`}>
+                <Text className={`ml-1 text-xs ${comment.is_liked ? 'text-red-500' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}>
                   {comment.likes_count}
                 </Text>
               )}
@@ -125,7 +125,7 @@ export function CommentItem({
               hitSlop={8}
             >
               <Ionicons name="chatbubble-outline" size={16} color={colors.gray[400]} />
-              <Text className="ml-1 text-xs text-gray-400">返信</Text>
+              <Text className="ml-1 text-xs text-foreground-muted dark:text-dark-foreground-muted">返信</Text>
             </Pressable>
           )}
         </View>
@@ -137,7 +137,7 @@ export function CommentItem({
             className="mt-2"
             hitSlop={8}
           >
-            <Text className="text-xs text-primary-600">
+            <Text className="text-xs text-blue-500">
               {isRepliesExpanded
                 ? '返信を非表示'
                 : `${comment.replies_count}件の返信を表示`}

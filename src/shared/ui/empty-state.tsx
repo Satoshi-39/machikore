@@ -20,7 +20,7 @@ export function EmptyState({ message, icon, ionIcon = 'search-outline', variant 
   const renderIcon = () => {
     if (ionIcon) {
       return (
-        <View className="w-20 h-20 rounded-full bg-gray-100 items-center justify-center mb-4">
+        <View className="w-20 h-20 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-4">
           <Ionicons name={ionIcon} size={40} color={colors.text.secondary} />
         </View>
       );
@@ -32,15 +32,15 @@ export function EmptyState({ message, icon, ionIcon = 'search-outline', variant 
     return (
       <View className="py-8 items-center">
         {renderIcon()}
-        <Text className="text-sm text-gray-500 text-center">{message}</Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">{message}</Text>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 justify-center items-center bg-white">
+    <View className="flex-1 justify-center items-center bg-surface dark:bg-dark-surface">
       {renderIcon()}
-      <Text className="text-base text-gray-600">{message}</Text>
+      <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">{message}</Text>
     </View>
   );
 }

@@ -106,11 +106,11 @@ export function CommentInputModal({
         />
 
         {/* 入力エリア（キーボードの上に固定） */}
-        <View className="bg-white">
+        <View className="bg-surface dark:bg-dark-surface">
           {/* 編集モードヘッダー */}
           {isEditing && (
-            <View className="flex-row items-center justify-between px-4 py-2 border-b border-gray-100">
-              <Text className="text-sm font-semibold text-gray-600">
+            <View className="flex-row items-center justify-between px-4 py-2 border-b border-border-light dark:border-dark-border-light">
+              <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
                 コメントを編集
               </Text>
               <Pressable onPress={onClose} className="p-1">

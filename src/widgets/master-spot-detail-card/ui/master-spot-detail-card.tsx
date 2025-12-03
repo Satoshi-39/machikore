@@ -184,38 +184,38 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
-            <Text className="text-2xl font-bold text-gray-900 mb-1">
+            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-1">
               {spot.name}
             </Text>
             {spot.google_formatted_address && (
-              <Text className="text-sm text-gray-600">{spot.google_formatted_address}</Text>
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{spot.google_formatted_address}</Text>
             )}
           </View>
           <Pressable
             onPress={handleClose}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-gray-100"
+            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
           </Pressable>
         </View>
 
         {/* アクションボタン - 横並び4つ均等配置 */}
-        <View className="flex-row py-3 border-t border-b border-gray-200">
+        <View className="flex-row py-3 border-t border-b border-border dark:border-dark-border">
           {/* いいね */}
           <Pressable
             onPress={handleLikePress}
             disabled={isTogglingLike}
             className="flex-1 items-center py-2"
           >
-            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
               <Ionicons
                 name={isLiked ? 'heart' : 'heart-outline'}
                 size={24}
                 color={isLiked ? '#EF4444' : colors.text.secondary}
               />
             </View>
-            <Text className="text-xs text-gray-600">いいね</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">いいね</Text>
           </Pressable>
 
           {/* 投稿 */}
@@ -223,10 +223,10 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
             onPress={handlePostPress}
             className="flex-1 items-center py-2"
           >
-            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
               <Ionicons name="add-circle-outline" size={24} color={colors.primary.DEFAULT} />
             </View>
-            <Text className="text-xs text-gray-600">投稿</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">投稿</Text>
           </Pressable>
 
           {/* 経路案内 */}
@@ -234,10 +234,10 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
             onPress={handleDirectionsPress}
             className="flex-1 items-center py-2"
           >
-            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
               <Ionicons name="navigate" size={24} color={colors.primary.DEFAULT} />
             </View>
-            <Text className="text-xs text-gray-600">経路</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">経路</Text>
           </Pressable>
 
           {/* ウェブサイト（常に表示、ない場合はグレーアウト） */}
@@ -245,24 +245,24 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
             onPress={handleWebsitePress}
             className="flex-1 items-center py-2"
           >
-            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
               <Ionicons
                 name="globe-outline"
                 size={24}
                 color={spot.google_website_uri ? colors.primary.DEFAULT : colors.gray[300]}
               />
             </View>
-            <Text className={`text-xs ${spot.google_website_uri ? 'text-gray-600' : 'text-gray-300'}`}>
+            <Text className={`text-xs ${spot.google_website_uri ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-gray-300'}`}>
               Web
             </Text>
           </Pressable>
         </View>
 
         {/* ユーザー投稿一覧 */}
-        <View className="mt-4 pt-4 border-t border-gray-200">
+        <View className="mt-4 pt-4 border-t border-border dark:border-dark-border">
           <View className="flex-row items-center mb-3">
             <Ionicons name="people-outline" size={18} color={colors.text.secondary} />
-            <Text className="text-base font-semibold text-gray-900 ml-2">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
               みんなの投稿 ({spot.user_spots_count}件)
             </Text>
           </View>
@@ -273,7 +273,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
             </View>
           ) : userSpots.length === 0 ? (
             <View className="py-4 items-center">
-              <Text className="text-sm text-gray-500">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                 まだ投稿がありません
               </Text>
             </View>
@@ -282,7 +282,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
               {userSpots.map((userSpot) => (
                 <Pressable
                   key={userSpot.id}
-                  className="bg-gray-50 rounded-lg p-3 active:bg-gray-100"
+                  className="bg-background-secondary dark:bg-dark-background-secondary rounded-lg p-3 active:bg-muted dark:bg-dark-muted"
                   onPress={() => {
                     // スポット詳細ページに遷移（タブ内ルートを使用）
                     onClose();
@@ -311,19 +311,19 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
                     )}
                     <View className="ml-2 flex-1">
                       <View className="flex-row items-center">
-                        <Text className="text-sm font-medium text-gray-900">
+                        <Text className="text-sm font-medium text-foreground dark:text-dark-foreground">
                           {userSpot.user?.display_name || userSpot.user?.username || 'ユーザー'}
                         </Text>
                         {userSpot.map && (
                           <View className="flex-row items-center ml-2">
                             <Ionicons name="map-outline" size={12} color={colors.primary.DEFAULT} />
-                            <Text className="text-xs text-primary-600 ml-1" numberOfLines={1}>
+                            <Text className="text-xs text-blue-500 ml-1" numberOfLines={1}>
                               {userSpot.map.name}
                             </Text>
                           </View>
                         )}
                       </View>
-                      <Text className="text-xs text-gray-500">
+                      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                         {getRelativeSpotTime(userSpot.created_at)}
                       </Text>
                     </View>
@@ -332,14 +332,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
 
                   {/* カスタム名 */}
                   {userSpot.custom_name && (
-                    <Text className="text-sm font-medium text-gray-800 mb-1">
+                    <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
                       {userSpot.custom_name}
                     </Text>
                   )}
 
                   {/* 説明 */}
                   {userSpot.description && (
-                    <Text className="text-sm text-gray-700" numberOfLines={3}>
+                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={3}>
                       {userSpot.description}
                     </Text>
                   )}
@@ -367,11 +367,11 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
                   <View className="flex-row items-center mt-2 gap-3">
                     <View className="flex-row items-center">
                       <Ionicons name="heart-outline" size={14} color={colors.text.secondary} />
-                      <Text className="text-xs text-gray-500 ml-1">{userSpot.likes_count}</Text>
+                      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{userSpot.likes_count}</Text>
                     </View>
                     <View className="flex-row items-center">
                       <Ionicons name="chatbubble-outline" size={14} color={colors.text.secondary} />
-                      <Text className="text-xs text-gray-500 ml-1">{userSpot.comments_count}</Text>
+                      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{userSpot.comments_count}</Text>
                     </View>
                   </View>
                 </Pressable>

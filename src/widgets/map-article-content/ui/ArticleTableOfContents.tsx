@@ -17,8 +17,8 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
   if (spots.length === 0) return null;
 
   return (
-    <View className="mb-6 py-4 px-4 bg-gray-50 rounded-lg">
-      <Text className="text-base font-semibold text-gray-800 mb-3">
+    <View className="mb-6 py-4 px-4 bg-background-secondary dark:bg-dark-background-secondary rounded-lg">
+      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
         目次
       </Text>
       {spots.map((spot, index) => {
@@ -32,7 +32,7 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
             <Text className="text-sm text-primary-500 font-medium mr-2">
               {index + 1}.
             </Text>
-            <Text className="text-sm text-gray-700 flex-1" numberOfLines={1}>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1" numberOfLines={1}>
               {spotName}
             </Text>
           </Pressable>

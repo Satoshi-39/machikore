@@ -115,16 +115,16 @@ export function ArticleCommentPreview({
 
   return (
     <View className="mt-6">
-      <Text className="text-base font-semibold text-gray-800 mb-3">
+      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
         コメント
       </Text>
 
       {/* コメント追加ボタン（タップでモーダル表示） */}
       <Pressable
         onPress={openModal}
-        className="mb-4 bg-gray-100 rounded-xl px-4 py-3"
+        className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
       >
-        <Text className="text-sm text-gray-400">
+        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
           コメントを追加...
         </Text>
       </Pressable>
@@ -150,7 +150,7 @@ export function ArticleCommentPreview({
           {/* もっと見る */}
           {totalCount > comments.length && (
             <Pressable onPress={onViewAllPress} className="mt-2">
-              <Text className="text-sm text-primary-600">
+              <Text className="text-sm text-blue-500">
                 コメント{totalCount}件すべてを見る
               </Text>
             </Pressable>
@@ -159,7 +159,7 @@ export function ArticleCommentPreview({
       ) : (
         <View className="py-4 items-center">
           <Ionicons name="chatbubble-outline" size={32} color={colors.gray[300]} />
-          <Text className="text-sm text-gray-400 mt-2">
+          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mt-2">
             まだコメントがありません
           </Text>
         </View>

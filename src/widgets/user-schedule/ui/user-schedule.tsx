@@ -27,7 +27,7 @@ export function UserSchedule({ userId }: UserScheduleProps) {
   console.log('UserSchedule for userId:', userId);
 
   return (
-    <ScrollView className="flex-1 bg-gray-50">
+    <ScrollView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       {/* カレンダー */}
       <Calendar
         selectedDate={selectedDate}
@@ -36,20 +36,20 @@ export function UserSchedule({ userId }: UserScheduleProps) {
       />
 
       {/* 選択日の予定リスト */}
-      <View className="bg-white mt-2 px-4 py-4">
-        <Text className="text-base font-semibold text-gray-900 mb-3">
+      <View className="bg-surface dark:bg-dark-surface mt-2 px-4 py-4">
+        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
           {selectedDate.getMonth() + 1}月{selectedDate.getDate()}日の予定
         </Text>
 
         {/* プレースホルダー */}
         <View className="items-center py-8">
-          <View className="w-16 h-16 rounded-full bg-gray-100 items-center justify-center mb-3">
+          <View className="w-16 h-16 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-3">
             <Ionicons name="calendar-outline" size={32} color={colors.text.secondary} />
           </View>
-          <Text className="text-sm text-gray-500 text-center">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
             予定はありません
           </Text>
-          <Text className="text-xs text-gray-400 text-center mt-2">
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted text-center mt-2">
             スケジュール機能は今後実装予定です
           </Text>
         </View>

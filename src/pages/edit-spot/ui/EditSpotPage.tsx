@@ -24,7 +24,7 @@ export function EditSpotPage() {
   } = useEditSpotForm();
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title="スポットを編集" />
       <SingleDataBoundary
         isLoading={isLoading}

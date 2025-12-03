@@ -92,7 +92,7 @@ export function LikeSpotList({
         const content = (
           <Pressable
             onPress={() => onSpotPress(item.spot)}
-            className="bg-white px-4 py-4 border-b border-gray-100"
+            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
           >
             <View className="flex-row items-center">
               {/* ユーザーアバター（タップでプロフィールへ） */}
@@ -117,16 +117,16 @@ export function LikeSpotList({
                 )}
               </Pressable>
               <View className="flex-1">
-                <Text className="text-base font-semibold text-gray-900">
+                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                   {spotName}
                 </Text>
                 {address && (
-                  <Text className="text-sm text-gray-500" numberOfLines={1}>
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
                     {address}
                   </Text>
                 )}
                 {user && (
-                  <Text className="text-xs text-gray-400 mt-0.5">
+                  <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
                     {user.display_name || user.username || 'ユーザー'}の投稿
                   </Text>
                 )}
@@ -148,7 +148,7 @@ export function LikeSpotList({
         const content = (
           <Pressable
             onPress={() => onMasterSpotPress?.(masterSpot.id)}
-            className="bg-white px-4 py-4 border-b border-gray-100"
+            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
           >
             <View className="flex-row items-center">
               {/* 青いスポットアイコン */}
@@ -156,15 +156,15 @@ export function LikeSpotList({
                 <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
               </View>
               <View className="flex-1">
-                <Text className="text-base font-semibold text-gray-900">
+                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                   {masterSpot.name}
                 </Text>
                 {masterSpot.google_formatted_address && (
-                  <Text className="text-sm text-gray-500" numberOfLines={1}>
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
                     {masterSpot.google_formatted_address}
                   </Text>
                 )}
-                <Text className="text-xs text-gray-400 mt-0.5">
+                <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
                   スポット
                 </Text>
               </View>

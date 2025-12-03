@@ -25,8 +25,8 @@ interface SettingsSectionProps {
 
 function SettingsSection({ title, children }: SettingsSectionProps) {
   return (
-    <View className="bg-white mt-4">
-      <Text className="text-xs font-medium text-gray-500 uppercase px-4 pt-4 pb-2">
+    <View className="bg-surface dark:bg-dark-surface mt-4">
+      <Text className="text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase px-4 pt-4 pb-2">
         {title}
       </Text>
       {children}
@@ -55,7 +55,7 @@ function SettingsItem({
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center px-4 py-3.5 border-b border-gray-100 active:bg-gray-50"
+      className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:bg-dark-muted"
     >
       <Ionicons
         name={icon}
@@ -63,12 +63,12 @@ function SettingsItem({
         color={destructive ? '#EF4444' : colors.text.secondary}
       />
       <Text
-        className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-gray-900'}`}
+        className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-foreground dark:text-dark-foreground'}`}
       >
         {label}
       </Text>
       {value && (
-        <Text className="text-sm text-gray-400 mr-2">{value}</Text>
+        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mr-2">{value}</Text>
       )}
       {showArrow && (
         <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
@@ -94,9 +94,9 @@ function SettingsToggle({
   disabled = false,
 }: SettingsToggleProps) {
   return (
-    <View className="flex-row items-center px-4 py-3.5 border-b border-gray-100">
+    <View className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light">
       <Ionicons name={icon} size={22} color={colors.text.secondary} />
-      <Text className="flex-1 text-base text-gray-900 ml-3">{label}</Text>
+      <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">{label}</Text>
       <Switch
         value={value}
         onValueChange={onValueChange}
@@ -154,7 +154,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   };
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title="設定" />
       <ScrollView className="flex-1">
         {/* アカウント */}

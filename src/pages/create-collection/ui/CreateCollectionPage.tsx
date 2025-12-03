@@ -86,17 +86,17 @@ export function CreateCollectionPage() {
   }, [name, description, isPublic, thumbnail, currentUserId, createCollection, isSubmitting, router]);
 
   return (
-    <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
+    <View className="flex-1 bg-surface dark:bg-dark-surface" style={{ paddingTop: insets.top }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1"
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b border-gray-100">
+        <View className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
           <Pressable onPress={handleCancel} className="py-2 w-20">
-            <Text className="text-gray-600 text-base">キャンセル</Text>
+            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base">キャンセル</Text>
           </Pressable>
-          <Text className="flex-1 text-lg font-semibold text-gray-900 text-center">
+          <Text className="flex-1 text-lg font-semibold text-foreground dark:text-dark-foreground text-center">
             新しいコレクション
           </Text>
           <Pressable
@@ -106,7 +106,7 @@ export function CreateCollectionPage() {
           >
             <Text
               className={`text-base font-semibold ${
-                isValid && !isSubmitting ? 'text-primary-600' : 'text-gray-300'
+                isValid && !isSubmitting ? 'text-blue-500' : 'text-gray-300'
               }`}
             >
               {isSubmitting ? '作成中...' : '作成'}
@@ -119,7 +119,7 @@ export function CreateCollectionPage() {
           <View className="px-4 py-6">
             {/* 名前入力 */}
             <View className="mb-5">
-              <Text className="text-sm font-medium text-gray-700 mb-2">
+              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
                 コレクション名 <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
@@ -127,7 +127,7 @@ export function CreateCollectionPage() {
                 onChangeText={setName}
                 placeholder="例: 東京カフェコレクション"
                 placeholderTextColor={colors.gray[400]}
-                className="bg-gray-50 rounded-xl px-4 py-3.5 text-base text-gray-900"
+                className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3.5 text-base text-foreground dark:text-dark-foreground"
                 autoFocus
                 returnKeyType="next"
                 editable={!isSubmitting}
@@ -136,7 +136,7 @@ export function CreateCollectionPage() {
 
             {/* 説明入力 */}
             <View className="mb-6">
-              <Text className="text-sm font-medium text-gray-700 mb-2">
+              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
                 説明（任意）
               </Text>
               <TextInput
@@ -144,7 +144,7 @@ export function CreateCollectionPage() {
                 onChangeText={setDescription}
                 placeholder="コレクションの説明を入力..."
                 placeholderTextColor={colors.gray[400]}
-                className="bg-gray-50 rounded-xl px-4 py-3.5 text-base text-gray-900"
+                className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3.5 text-base text-foreground dark:text-dark-foreground"
                 multiline
                 numberOfLines={4}
                 textAlignVertical="top"
@@ -155,7 +155,7 @@ export function CreateCollectionPage() {
 
             {/* サムネイル */}
             <View className="mb-6">
-              <Text className="text-sm font-medium text-gray-700 mb-2">
+              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
                 サムネイル
               </Text>
               <ThumbnailPicker
@@ -165,13 +165,13 @@ export function CreateCollectionPage() {
             </View>
 
             {/* 公開設定 */}
-            <View className="bg-gray-50 rounded-xl px-4 py-4 mb-6">
+            <View className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-4 mb-6">
               <View className="flex-row items-center justify-between">
                 <View className="flex-1 mr-4">
-                  <Text className="text-base font-medium text-gray-900 mb-1">
+                  <Text className="text-base font-medium text-foreground dark:text-dark-foreground mb-1">
                     公開する
                   </Text>
-                  <Text className="text-sm text-gray-500">
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                     オンにすると、他のユーザーがこのコレクションを閲覧できます
                   </Text>
                 </View>
@@ -188,7 +188,7 @@ export function CreateCollectionPage() {
             {/* ヒント */}
             <View className="flex-row items-start bg-blue-50 rounded-xl p-4">
               <Ionicons name="information-circle" size={20} color={colors.primary.DEFAULT} />
-              <Text className="text-sm text-gray-600 ml-2 flex-1">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2 flex-1">
                 コレクションを作成後、マップを追加できます
               </Text>
             </View>

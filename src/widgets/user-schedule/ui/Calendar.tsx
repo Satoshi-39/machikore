@@ -72,14 +72,14 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
   }
 
   return (
-    <View className="bg-white border-b border-gray-200">
+    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
       {/* ヘッダー: 年月と前月・次月ボタン */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-gray-100">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light">
         <Pressable onPress={goToPreviousMonth} className="p-2 active:opacity-50">
           <Ionicons name="chevron-back" size={24} color={colors.text.secondary} />
         </Pressable>
 
-        <Text className="text-lg font-semibold text-gray-900">
+        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
           {year}年 {month + 1}月
         </Text>
 
@@ -89,12 +89,12 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
       </View>
 
       {/* 曜日ヘッダー */}
-      <View className="flex-row px-2 py-2 bg-gray-50">
+      <View className="flex-row px-2 py-2 bg-background-secondary dark:bg-dark-background-secondary">
         {WEEKDAYS.map((weekday, index) => (
           <View key={weekday} className="flex-1 items-center">
             <Text
               className={`text-xs font-medium ${
-                index === 0 ? 'text-red-600' : index === 6 ? 'text-blue-600' : 'text-gray-600'
+                index === 0 ? 'text-red-600' : index === 6 ? 'text-blue-600' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
               }`}
             >
               {weekday}
@@ -138,7 +138,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
                         ? 'text-red-600'
                         : isSaturday
                         ? 'text-blue-600'
-                        : 'text-gray-900'
+                        : 'text-foreground dark:text-dark-foreground'
                     }`}
                   >
                     {day}

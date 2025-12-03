@@ -23,7 +23,7 @@ const TAB_OPTIONS: { mode: DiscoverTabMode; label: string }[] = [
 
 export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
   return (
-    <View className="bg-white border-b border-gray-200">
+    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
       <View className="flex-row">
         {TAB_OPTIONS.map((option) => {
           const isActive = tabMode === option.mode;
@@ -35,7 +35,7 @@ export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
             >
               <Text
                 className={`text-sm font-semibold ${
-                  isActive ? 'text-gray-900' : 'text-gray-500'
+                  isActive ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                 }`}
               >
                 {option.label}

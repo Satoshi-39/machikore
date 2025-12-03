@@ -110,7 +110,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
 
   if (isLoadingUser || !isInitialized) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <PageHeader title="プロフィール編集" />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -120,7 +120,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
         title="プロフィール編集"
         rightElement={
@@ -149,7 +149,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
       >
         <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
           {/* アバター画像 */}
-          <View className="items-center py-6 bg-white">
+          <View className="items-center py-6 bg-surface dark:bg-dark-surface">
             <Pressable onPress={handlePickImage} className="relative">
               {avatarUri ? (
                 <Image
@@ -168,16 +168,16 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
                 <Ionicons name="camera" size={16} color="white" />
               </View>
             </Pressable>
-            <Text className="text-sm text-gray-500 mt-2">
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
               タップして写真を変更
             </Text>
           </View>
 
           {/* フォーム */}
-          <View className="bg-white mt-4 px-4 py-4">
+          <View className="bg-surface dark:bg-dark-surface mt-4 px-4 py-4">
             {/* 表示名 */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 mb-1">
+              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
                 表示名
               </Text>
               <TextInput
@@ -185,30 +185,30 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
                 onChangeText={setDisplayName}
                 placeholder="表示名を入力"
                 placeholderTextColor={colors.text.secondary}
-                className="border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-900"
+                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
                 maxLength={50}
               />
-              <Text className="text-xs text-gray-400 mt-1 text-right">
+              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
                 {displayName.length}/50
               </Text>
             </View>
 
             {/* ユーザー名（変更不可） */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 mb-1">
+              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
                 ユーザー名
               </Text>
-              <View className="border border-gray-200 rounded-lg px-4 py-3 bg-gray-50">
-                <Text className="text-base text-gray-500">@{user?.username}</Text>
+              <View className="border border-border dark:border-dark-border rounded-lg px-4 py-3 bg-background-secondary dark:bg-dark-background-secondary">
+                <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">@{user?.username}</Text>
               </View>
-              <Text className="text-xs text-gray-400 mt-1">
+              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
                 ユーザー名は変更できません
               </Text>
             </View>
 
             {/* 自己紹介 */}
             <View>
-              <Text className="text-sm font-medium text-gray-700 mb-1">
+              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
                 自己紹介
               </Text>
               <TextInput
@@ -216,14 +216,14 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
                 onChangeText={setBio}
                 placeholder="自己紹介を入力"
                 placeholderTextColor={colors.text.secondary}
-                className="border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-900"
+                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
                 multiline
                 numberOfLines={4}
                 textAlignVertical="top"
                 style={{ minHeight: 100 }}
                 maxLength={200}
               />
-              <Text className="text-xs text-gray-400 mt-1 text-right">
+              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
                 {bio.length}/200
               </Text>
             </View>

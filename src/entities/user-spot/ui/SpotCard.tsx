@@ -221,7 +221,7 @@ export function SpotCard({
   return (
     <Pressable
       onPress={onPress}
-      className="bg-white border-b border-gray-200 p-4"
+      className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border p-4"
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
@@ -233,7 +233,7 @@ export function SpotCard({
               className="w-10 h-10 rounded-full mr-3"
             />
           ) : (
-            <View className="w-10 h-10 rounded-full bg-gray-200 justify-center items-center mr-3">
+            <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-muted justify-center items-center mr-3">
               <Ionicons name="person" size={20} color={colors.gray[500]} />
             </View>
           )}
@@ -242,11 +242,11 @@ export function SpotCard({
         {/* ユーザー名と時間 */}
         <View className="flex-1">
           <Pressable onPress={() => onUserPress?.(spot.user_id)} className="self-start">
-            <Text className="text-sm font-semibold text-gray-800">
+            <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
               {user?.display_name || user?.username || 'ユーザー'}
             </Text>
           </Pressable>
-          <Text className="text-xs text-gray-500">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
             {getRelativeSpotTime(spot.created_at)}
           </Text>
         </View>
@@ -258,7 +258,7 @@ export function SpotCard({
       </View>
 
       {/* スポット名 */}
-      <Text className="text-base font-semibold text-gray-900 mb-1">
+      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
         📍 {spotName}
       </Text>
 
@@ -277,7 +277,7 @@ export function SpotCard({
 
       {/* 説明 */}
       {spot.description && (
-        <Text className="text-sm text-gray-700 mb-2">
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
           {spot.description}
         </Text>
       )}
@@ -343,7 +343,7 @@ export function SpotCard({
       {(address || machiName) && (
         <View className="flex-row items-center mb-2">
           <Ionicons name="location-outline" size={16} color={colors.text.secondary} />
-          <Text className="text-sm text-gray-600 ml-1" numberOfLines={1}>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
             {address || machiName}
           </Text>
         </View>
@@ -357,10 +357,11 @@ export function SpotCard({
             e.stopPropagation();
             onCommentPress?.(spot.id);
           }}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-          <Text className="text-sm text-gray-600 ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {spot.comments_count}
           </Text>
         </Pressable>
@@ -368,7 +369,8 @@ export function SpotCard({
         {/* いいね */}
         <Pressable
           onPress={handleLikePress}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           disabled={isTogglingLike}
         >
           <Ionicons
@@ -376,7 +378,7 @@ export function SpotCard({
             size={18}
             color={isLiked ? '#EF4444' : colors.text.secondary}
           />
-          <Text className="text-sm text-gray-600 ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {spot.likes_count}
           </Text>
         </Pressable>
@@ -384,7 +386,8 @@ export function SpotCard({
         {/* ブックマーク */}
         <Pressable
           onPress={handleBookmarkPress}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons
             name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
@@ -396,7 +399,8 @@ export function SpotCard({
         {/* 共有 */}
         <Pressable
           onPress={handleSharePress}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons
             name="share-outline"

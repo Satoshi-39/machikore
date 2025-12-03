@@ -44,7 +44,7 @@ export function MapSearchBar({
       <Pressable onPress={onFocus}>
         <View
           className={`flex-row items-center rounded-full px-4 py-3 ${
-            variant === 'map' ? 'bg-white shadow-md' : 'bg-gray-100'
+            variant === 'map' ? 'bg-surface dark:bg-dark-surface shadow-md' : 'bg-muted dark:bg-dark-muted'
           }`}
         >
           {showIcon ? (
@@ -56,7 +56,7 @@ export function MapSearchBar({
           ) : (
             <Ionicons name="search" size={20} color={colors.gray[400]} />
           )}
-          <Text className="flex-1 ml-2 text-base text-gray-400">
+          <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground-muted">
             {placeholder}
           </Text>
           {viewModeIcon && onViewModeChange && (

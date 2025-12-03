@@ -19,7 +19,7 @@ export default function SpotDetailScreen() {
 
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-white justify-center items-center">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface justify-center items-center">
         <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
       </SafeAreaView>
     );
@@ -27,8 +27,8 @@ export default function SpotDetailScreen() {
 
   if (!spot) {
     return (
-      <SafeAreaView className="flex-1 bg-white justify-center items-center">
-        <Text className="text-gray-500">スポットが見つかりません</Text>
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface justify-center items-center">
+        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">スポットが見つかりません</Text>
         <Pressable onPress={() => router.back()} className="mt-4">
           <Text className="text-blue-500">戻る</Text>
         </Pressable>

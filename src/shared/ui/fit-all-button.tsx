@@ -18,7 +18,7 @@ export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
     <Pressable
       onPress={onPress}
       testID={testID}
-      className="w-14 h-14 rounded-full bg-white shadow-lg active:opacity-80"
+      className="w-14 h-14 rounded-full bg-surface dark:bg-dark-surface shadow-lg active:opacity-80"
       style={{
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },

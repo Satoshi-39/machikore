@@ -23,12 +23,12 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
   };
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
         title="コレクション"
         rightComponent={
           <Pressable onPress={handleCreate} className="py-2">
-            <Text className="text-base font-semibold text-primary-600">新規作成</Text>
+            <Text className="text-base font-semibold text-blue-500">新規作成</Text>
           </Pressable>
         }
       />

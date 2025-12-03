@@ -153,7 +153,7 @@ export function CommentList({
   const renderEmpty = useCallback(() => (
     <View className="flex-1 justify-center items-center py-20">
       <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
-      <Text className="text-gray-400 mt-4">まだコメントがありません</Text>
+      <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">まだコメントがありません</Text>
     </View>
   ), []);
 

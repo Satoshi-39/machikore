@@ -27,12 +27,12 @@ export function SearchBar({
   showCancelButton = false,
 }: SearchBarProps) {
   return (
-    <View className="bg-white border-b border-gray-200 px-5 py-3">
+    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-5 py-3">
       <View className="flex-row items-center gap-3">
-        <View className="flex-1 flex-row items-center bg-gray-100 rounded-full px-4 py-3">
+        <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-3">
           <Ionicons name="search" size={20} color={colors.gray[400]} />
           <TextInput
-            className="flex-1 ml-2 text-base text-gray-800"
+            className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground"
             placeholder={placeholder}
             placeholderTextColor={colors.gray[400]}
             value={value}

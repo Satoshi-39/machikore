@@ -26,7 +26,7 @@ export function UserProfilePage() {
   const [tabMode, setTabMode] = useState<MyPageTabMode | UserProfileTabMode>('maps');
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title="プロフィール" />
 
       {/* プロフィールセクション */}

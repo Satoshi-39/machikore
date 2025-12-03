@@ -49,11 +49,11 @@ export function ArticleAuthorSection({
             <Ionicons name="person" size={iconSize} color={colors.gray[500]} />
           </View>
         )}
-        <Text className={`${textSize} text-gray-800`}>
+        <Text className={`${textSize} text-foreground dark:text-dark-foreground`}>
           {user?.display_name || user?.username || 'ユーザー'}
         </Text>
         {createdAt && (
-          <Text className="text-sm text-gray-400 ml-2">
+          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted ml-2">
             · {createdAt}
           </Text>
         )}

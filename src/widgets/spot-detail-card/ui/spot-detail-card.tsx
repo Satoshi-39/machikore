@@ -280,11 +280,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
-            <Text className="text-2xl font-bold text-gray-900 mb-1">
+            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-1">
               {spotName}
             </Text>
             {spotAddress && (
-              <Text className="text-sm text-gray-600">{spotAddress}</Text>
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{spotAddress}</Text>
             )}
           </View>
           <View className="flex-row items-center">
@@ -297,7 +297,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Pressable
               onPress={handleClose}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              className="w-8 h-8 items-center justify-center rounded-full bg-gray-100"
+              className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
             >
               <Ionicons name="close" size={20} color={colors.text.secondary} />
             </Pressable>
@@ -311,7 +311,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             size={16}
             color={colors.text.secondary}
           />
-          <Text className="text-sm text-gray-600 ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             緯度: {latitude.toFixed(4)}, 経度: {longitude.toFixed(4)}
           </Text>
         </View>
@@ -345,16 +345,16 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 size={16}
                 color={colors.text.secondary}
               />
-              <Text className="text-sm font-semibold text-gray-700 ml-1">
+              <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                 説明
               </Text>
             </View>
-            <Text className="text-sm text-gray-600 pl-5">{spot.description}</Text>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary pl-5">{spot.description}</Text>
           </View>
         )}
 
         {/* 統計情報とアクション */}
-        <View className="flex-row items-center justify-around pt-3 border-t border-gray-200 mb-2">
+        <View className="flex-row items-center justify-around pt-3 border-t border-border dark:border-dark-border mb-2">
           {/* コメント - タップでシートを拡大 */}
           <Pressable
             className="items-center"
@@ -362,11 +362,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           >
             <View className="flex-row items-center">
               <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-              <Text className="text-lg font-bold text-gray-900 ml-1">
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
                 {spot.comments_count}
               </Text>
             </View>
-            <Text className="text-xs text-gray-500">コメント</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">コメント</Text>
           </Pressable>
 
           {/* いいねボタン */}
@@ -381,11 +381,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 size={18}
                 color={isLiked ? '#EF4444' : colors.text.secondary}
               />
-              <Text className="text-lg font-bold text-gray-900 ml-1">
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
                 {spot.likes_count}
               </Text>
             </View>
-            <Text className="text-xs text-gray-500">いいね</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">いいね</Text>
           </Pressable>
 
           {/* ブックマークボタン */}
@@ -401,7 +401,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
               />
             </View>
-            <Text className="text-xs text-gray-500">保存</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">保存</Text>
           </Pressable>
 
           {/* 共有ボタン */}
@@ -416,15 +416,15 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 color={colors.text.secondary}
               />
             </View>
-            <Text className="text-xs text-gray-500">共有</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">共有</Text>
           </Pressable>
         </View>
 
         {/* コメントセクション */}
-        <View className="mt-4 pt-3 border-t border-gray-200">
+        <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
           <View className="flex-row items-center mb-3">
             <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-            <Text className="text-base font-semibold text-gray-800 ml-2">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
               コメント
             </Text>
           </View>
@@ -432,9 +432,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           {/* コメント追加ボタン（タップでモーダル表示） */}
           <Pressable
             onPress={openCommentModal}
-            className="mb-4 bg-gray-100 rounded-xl px-4 py-3"
+            className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
           >
-            <Text className="text-sm text-gray-400">
+            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
               コメントを追加...
             </Text>
           </Pressable>
@@ -446,7 +446,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </View>
           ) : comments.length === 0 ? (
             <View className="py-4 items-center">
-              <Text className="text-sm text-gray-500">まだコメントはありません</Text>
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">まだコメントはありません</Text>
             </View>
           ) : (
             <View className="-mx-4">

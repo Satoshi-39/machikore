@@ -70,7 +70,7 @@ export function OtherMapSearch({
   }, [searchQuery, search, config.debounceMs]);
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* 検索バー */}
       <SearchBar
         value={searchQuery}
@@ -112,14 +112,14 @@ export function OtherMapSearch({
             ) : (
               // 検索結果リスト
               <>
-                <Text className="text-sm text-gray-500 mb-3">
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
                 {results.map((spot) => (
                   <Pressable
                     key={spot.id}
                     onPress={() => handleSpotSelect(spot)}
-                    className="flex-row items-center py-3 border-b border-gray-100 active:bg-gray-50"
+                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:bg-dark-background-secondary"
                   >
                     <View className={`w-10 h-10 rounded-full items-center justify-center ${
                       spot.type === 'machi' ? 'bg-green-100' : 'bg-blue-100'
@@ -132,7 +132,7 @@ export function OtherMapSearch({
                     </View>
                     <View className="flex-1 ml-3">
                       <View className="flex-row items-center gap-2">
-                        <Text className="text-base text-gray-800 font-medium">{spot.name}</Text>
+                        <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{spot.name}</Text>
                         {spot.type === 'machi' && (
                           <View className="bg-green-100 px-2 py-0.5 rounded">
                             <Text className="text-xs text-green-700 font-medium">街</Text>
@@ -140,7 +140,7 @@ export function OtherMapSearch({
                         )}
                       </View>
                       {spot.address && (
-                        <Text className="text-sm text-gray-500 mt-0.5" numberOfLines={1}>
+                        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
                           {spot.address}
                         </Text>
                       )}

@@ -99,7 +99,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   // ローディング状態
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-white">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
         <PageHeader title="記事" />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -111,11 +111,11 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   // データなし
   if (!articleData) {
     return (
-      <SafeAreaView className="flex-1 bg-white">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
         <PageHeader title="記事" />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="document-text-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-gray-400 mt-4">記事が見つかりません</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">記事が見つかりません</Text>
         </View>
       </SafeAreaView>
     );
@@ -125,18 +125,18 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   const isArticlePublic = articleData.map.is_article_public ?? false;
   if (!isArticlePublic && !isOwner) {
     return (
-      <SafeAreaView className="flex-1 bg-white" edges={['bottom']}>
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
         <PageHeader title="記事" />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="lock-closed-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-gray-400 mt-4">この記事は非公開です</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">この記事は非公開です</Text>
         </View>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['bottom']}>
+    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
       <PageHeader
         title="記事"
         rightComponent={

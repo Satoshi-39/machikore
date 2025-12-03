@@ -33,19 +33,19 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
 
   if (!userId) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <View className="flex-1 items-center justify-center">
-          <Text className="text-gray-500">ログインしてください</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">ログインしてください</Text>
         </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       {/* ヘッダー */}
       <View
-        className="bg-white border-b border-gray-200 px-4 py-3"
+        className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3"
         style={{ paddingTop: insets.top + 8 }}
       >
         <View className="flex-row items-center justify-center relative">
@@ -56,7 +56,7 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
           >
             <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
           </Pressable>
-          <Text className="text-lg font-semibold text-gray-900">
+          <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
             {folderName}
           </Text>
         </View>

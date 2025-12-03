@@ -19,14 +19,14 @@ export function LikeTabFilter({
   onTabModeChange,
 }: LikeTabFilterProps) {
   return (
-    <View className="bg-white border-b border-gray-200 flex-row">
+    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border flex-row">
       <Pressable
         onPress={() => onTabModeChange('spots')}
         className="flex-1 py-3 items-center"
       >
         <Text
           className={`text-base font-medium ${
-            tabMode === 'spots' ? 'text-blue-500' : 'text-gray-500'
+            tabMode === 'spots' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
           }`}
         >
           スポット
@@ -41,7 +41,7 @@ export function LikeTabFilter({
       >
         <Text
           className={`text-base font-medium ${
-            tabMode === 'maps' ? 'text-blue-500' : 'text-gray-500'
+            tabMode === 'maps' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
           }`}
         >
           マップ

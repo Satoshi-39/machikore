@@ -41,11 +41,11 @@ export function CreateScheduleForm({
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-gray-200">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b border-border dark:border-dark-border">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
-          <Text className="text-base text-gray-600">キャンセル</Text>
+          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
         </Pressable>
         <Text className="text-lg font-semibold">新規予定</Text>
         <Pressable
@@ -56,7 +56,7 @@ export function CreateScheduleForm({
           }`}
         >
           <Text className={`text-sm font-semibold ${
-            isValid && !isSubmitting ? 'text-white' : 'text-gray-500'
+            isValid && !isSubmitting ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
           }`}>
             {isSubmitting ? '作成中...' : '作成'}
           </Text>
@@ -67,7 +67,7 @@ export function CreateScheduleForm({
       <View className="p-4">
         {/* タイトル */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-gray-700 mb-2">
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
             タイトル <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
@@ -77,17 +77,17 @@ export function CreateScheduleForm({
             placeholderTextColor={colors.text.placeholder}
             maxLength={maxTitleLength}
             editable={!isSubmitting}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-base text-gray-900"
+            className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
             autoFocus
           />
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             {title.length} / {maxTitleLength}
           </Text>
         </View>
 
         {/* 日付 */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-gray-700 mb-2">
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
             予定日 <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
@@ -96,16 +96,16 @@ export function CreateScheduleForm({
             placeholder="YYYY-MM-DD"
             placeholderTextColor={colors.text.placeholder}
             editable={!isSubmitting}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-base text-gray-900"
+            className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
           />
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             形式：YYYY-MM-DD（例：2024-12-31）
           </Text>
         </View>
 
         {/* メモ */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-gray-700 mb-2">メモ（任意）</Text>
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">メモ（任意）</Text>
           <TextInput
             value={memo}
             onChangeText={setMemo}
@@ -115,21 +115,21 @@ export function CreateScheduleForm({
             numberOfLines={4}
             maxLength={maxMemoLength}
             editable={!isSubmitting}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-base text-gray-900"
+            className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
             style={{ textAlignVertical: 'top', minHeight: 100 }}
           />
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             {memo.length} / {maxMemoLength}
           </Text>
         </View>
 
         {/* 街選択ボタン（将来実装） */}
         <Pressable
-          className="flex-row items-center py-3 border-t border-gray-100"
+          className="flex-row items-center py-3 border-t border-border-light dark:border-dark-border-light"
           disabled={isSubmitting}
         >
           <Ionicons name="location-outline" size={20} color={colors.text.secondary} />
-          <Text className="ml-2 text-sm text-gray-600">
+          <Text className="ml-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
             {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
           </Text>
         </Pressable>

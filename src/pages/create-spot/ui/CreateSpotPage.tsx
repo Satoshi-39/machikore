@@ -25,7 +25,7 @@ export function CreateSpotPage() {
   if (!placeData) return null;
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title="スポット登録" />
       <CreateSpotForm
         placeData={placeData}

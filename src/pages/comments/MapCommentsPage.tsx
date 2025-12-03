@@ -137,8 +137,8 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
           onEdit={handleMapEdit}
           onArticlePress={handleArticlePress}
         />
-        <View className="px-4 py-2 bg-gray-50 border-b border-gray-200">
-          <Text className="text-sm font-semibold text-gray-600">コメント</Text>
+        <View className="px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-b border-border dark:border-dark-border">
+          <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">コメント</Text>
         </View>
       </View>
     );
@@ -151,7 +151,7 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
 
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-white">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
         <PageHeader title="コメント" />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -161,7 +161,7 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['bottom']}>
+    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
       <PageHeader title="コメント" />
 
       <KeyboardAvoidingView

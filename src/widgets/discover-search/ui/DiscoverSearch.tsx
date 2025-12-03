@@ -66,13 +66,13 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
   // 通常時: タップでオーバーレイを開くダミー検索バー
   if (!isSearchFocused) {
     return (
-      <View className="px-4 py-2 bg-white">
+      <View className="px-4 py-2 bg-surface dark:bg-dark-surface">
         <Pressable
           onPress={onFocus}
-          className="flex-row items-center bg-gray-100 rounded-full px-4 py-3"
+          className="flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-3"
         >
           <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
-          <Text className="flex-1 ml-2 text-base text-gray-400">
+          <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground-muted">
             スポット、マップ、ユーザーを検索
           </Text>
         </Pressable>
@@ -85,14 +85,14 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
     <View className="flex-1">
       {/* 検索結果がある場合は編集不可のヘッダー */}
       {submittedQuery ? (
-        <View className="bg-white border-b border-gray-200 px-4 py-3">
+        <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3">
           <View className="flex-row items-center gap-3">
             <TouchableOpacity onPress={handleClose} className="p-1">
               <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
             </TouchableOpacity>
-            <View className="flex-1 flex-row items-center bg-gray-100 rounded-full px-4 py-2">
+            <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">
               <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
-              <Text className="flex-1 ml-2 text-base text-gray-800" numberOfLines={1}>
+              <Text className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground" numberOfLines={1}>
                 {submittedQuery}
               </Text>
             </View>
@@ -100,9 +100,9 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
         </View>
       ) : (
         /* 検索バー（入力可能） */
-        <View className="bg-white border-b border-gray-200 px-4 py-3">
+        <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3">
           <View className="flex-row items-center gap-3">
-            <View className="flex-1 flex-row items-center bg-gray-100 rounded-full px-4 py-2">
+            <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">
               <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
               <TextInput
                 ref={inputRef}
@@ -132,7 +132,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
       {submittedQuery ? (
         <DiscoverSearchResults query={submittedQuery} />
       ) : (
-        <View className="flex-1 bg-white px-4 pt-4">
+        <View className="flex-1 bg-surface dark:bg-dark-surface px-4 pt-4">
           <SearchHistoryList
             history={history}
             onSelect={handleHistorySelect}

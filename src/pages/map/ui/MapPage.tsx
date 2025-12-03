@@ -210,7 +210,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={isUserMap ? ['top'] : []}>
+    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={isUserMap ? ['top'] : []}>
       {/* ヘッダー（ユーザーマップの時のみ表示、検索中は非表示） */}
       {isUserMap && !isSearchFocused && (
         <MapHeader
@@ -260,7 +260,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
 
         {/* リスト表示時：マップの上にリストUIをオーバーレイ */}
         {viewMode === 'list' && !isSearchFocused && (
-          <View className="absolute inset-0 bg-white" style={{ paddingTop: isUserMap ? 0 : insets.top }}>
+          <View className="absolute inset-0 bg-surface dark:bg-dark-surface" style={{ paddingTop: isUserMap ? 0 : insets.top }}>
             {isUserMap ? (
               <UserMapList
                 viewMode={viewMode}
@@ -280,10 +280,9 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
         {/* 検索フォーカス時：全画面検索UI（マップの上に重ねる） */}
         {isSearchFocused && (
           <View
-            className="absolute inset-0 z-50"
+            className="absolute inset-0 z-50 bg-surface dark:bg-dark-surface"
             style={{
               paddingTop: isUserMap ? 0 : insets.top,
-              backgroundColor: 'white',
             }}
           >
             {isUserMap ? (

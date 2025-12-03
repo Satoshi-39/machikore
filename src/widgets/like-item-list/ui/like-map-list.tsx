@@ -43,7 +43,7 @@ export function LikeMapList({ data, isLoading, onMapPress, onUserPress, onDelete
       const content = (
         <Pressable
           onPress={() => onMapPress(item.map.id)}
-          className="bg-white px-4 py-4 border-b border-gray-100"
+          className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
         >
           <View className="flex-row items-center">
             {/* ユーザーアバター（タップでプロフィールへ） */}
@@ -68,14 +68,14 @@ export function LikeMapList({ data, isLoading, onMapPress, onUserPress, onDelete
               )}
             </Pressable>
             <View className="flex-1">
-              <Text className="text-base font-semibold text-gray-900">
+              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                 {item.map.name}
               </Text>
-              <Text className="text-sm text-gray-500">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                 {item.map.spots_count}スポット
               </Text>
               {user && (
-                <Text className="text-xs text-gray-400 mt-0.5">
+                <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
                   {user.display_name || user.username || 'ユーザー'}のマップ
                 </Text>
               )}

@@ -124,7 +124,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   }, [userId, queryClient]);
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title="いいね" />
       {/* タブフィルター */}
       <LikeTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />

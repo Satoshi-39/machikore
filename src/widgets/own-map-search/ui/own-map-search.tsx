@@ -124,7 +124,7 @@ export function OwnMapSearch({
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* 検索バー */}
       <SearchBar
         value={searchQuery}
@@ -181,22 +181,22 @@ export function OwnMapSearch({
             ) : (
               // 検索結果リスト
               <>
-                <Text className="text-sm text-gray-500 mb-3">
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
                 {results.map((place) => (
                   <Pressable
                     key={place.id}
                     onPress={() => handlePlaceSelect(place)}
-                    className="flex-row items-center py-3 border-b border-gray-100 active:bg-gray-50"
+                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:bg-dark-background-secondary"
                   >
                     <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
                       <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
                     </View>
                     <View className="flex-1 ml-3">
-                      <Text className="text-base text-gray-800 font-medium">{place.name}</Text>
+                      <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>
                       {place.address && (
-                        <Text className="text-sm text-gray-500 mt-0.5" numberOfLines={1}>
+                        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
                           {place.address}
                         </Text>
                       )}

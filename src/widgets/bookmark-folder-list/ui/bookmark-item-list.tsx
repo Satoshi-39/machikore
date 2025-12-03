@@ -105,7 +105,7 @@ export function BookmarkItemList({
         const content = (
           <Pressable
             onPress={() => navigateToSpot(item.spot!.id)}
-            className="bg-white px-4 py-4 border-b border-gray-100"
+            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
           >
             <View className="flex-row items-center">
               {/* ユーザーアバター（タップでプロフィールへ） */}
@@ -130,16 +130,16 @@ export function BookmarkItemList({
                 )}
               </Pressable>
               <View className="flex-1">
-                <Text className="text-base font-semibold text-gray-900">
+                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                   {item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット'}
                 </Text>
                 {item.spot.master_spot?.google_formatted_address && (
-                  <Text className="text-sm text-gray-500" numberOfLines={1}>
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
                     {item.spot.master_spot.google_formatted_address}
                   </Text>
                 )}
                 {user && (
-                  <Text className="text-xs text-gray-400 mt-0.5">
+                  <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
                     {user.display_name || user.username || 'ユーザー'}の投稿
                   </Text>
                 )}
@@ -161,7 +161,7 @@ export function BookmarkItemList({
         const content = (
           <Pressable
             onPress={() => navigateToMap(item.map!.id)}
-            className="bg-white px-4 py-4 border-b border-gray-100"
+            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
           >
             <View className="flex-row items-center">
               {/* ユーザーアバター（タップでプロフィールへ） */}
@@ -186,14 +186,14 @@ export function BookmarkItemList({
                 )}
               </Pressable>
               <View className="flex-1">
-                <Text className="text-base font-semibold text-gray-900">
+                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                   {item.map.name}
                 </Text>
-                <Text className="text-sm text-gray-500">
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                   {item.map.spots_count}スポット
                 </Text>
                 {user && (
-                  <Text className="text-xs text-gray-400 mt-0.5">
+                  <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
                     {user.display_name || user.username || 'ユーザー'}のマップ
                   </Text>
                 )}
@@ -219,7 +219,7 @@ export function BookmarkItemList({
     return (
       <View className="flex-1 items-center justify-center py-12">
         <Ionicons name="bookmark-outline" size={48} color={colors.text.secondary} />
-        <Text className="text-gray-500 mt-4">
+        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
           {activeTab === 'spots' ? 'スポット' : 'マップ'}のブックマークがありません
         </Text>
       </View>

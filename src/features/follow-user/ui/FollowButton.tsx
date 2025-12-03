@@ -58,7 +58,7 @@ export function FollowButton({ targetUserId }: FollowButtonProps) {
       ) : (
         <Text
           className={`font-semibold ${
-            isFollowing ? 'text-gray-700' : 'text-white'
+            isFollowing ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-white'
           }`}
         >
           {isFollowing ? 'フォロー中' : 'フォローする'}

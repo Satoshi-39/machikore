@@ -20,7 +20,7 @@ interface SignInPageProps {
  */
 export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader title="ログイン" />
       <ScrollView className="flex-1" contentContainerStyle={{ paddingVertical: 24 }}>
       {/* OAuth認証ボタン */}
@@ -29,7 +29,7 @@ export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
       {/* 区切り線 */}
       <View className="flex-row items-center my-6 px-6">
         <View className="flex-1 h-px bg-gray-300" />
-        <Text className="mx-4 text-sm text-gray-500">または</Text>
+        <Text className="mx-4 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">または</Text>
         <View className="flex-1 h-px bg-gray-300" />
       </View>
 
@@ -39,7 +39,7 @@ export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
       {/* サインアップへの誘導 */}
       {onNavigateToSignUp && (
         <View className="flex-row justify-center items-center mt-6 px-6">
-          <Text className="text-gray-600 text-sm">
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-sm">
             アカウントをお持ちでないですか？
           </Text>
           <TouchableOpacity onPress={onNavigateToSignUp}>

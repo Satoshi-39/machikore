@@ -39,7 +39,7 @@ function CreateMenuContent({
   };
 
   return (
-    <View className="bg-white rounded-t-3xl shadow-2xl px-5 pt-8 pb-10">
+    <View className="bg-surface dark:bg-dark-surface rounded-t-3xl shadow-2xl px-5 pt-8 pb-10">
       {/* メニュー */}
       <View className="flex-row justify-center gap-12">
         {/* マップ作成 */}
@@ -51,7 +51,7 @@ function CreateMenuContent({
           <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
             <Ionicons name="map" size={32} color="#FFFFFF" />
           </View>
-          <Text className="text-base font-semibold text-gray-800">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
             マップ
           </Text>
         </TouchableOpacity>
@@ -65,7 +65,7 @@ function CreateMenuContent({
           <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
             <Ionicons name="location" size={32} color="#FFFFFF" />
           </View>
-          <Text className="text-base font-semibold text-gray-800">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
             スポット
           </Text>
         </TouchableOpacity>
@@ -79,7 +79,7 @@ function CreateMenuContent({
           <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
             <Ionicons name="reader-outline" size={32} color="#FFFFFF" />
           </View>
-          <Text className="text-base font-semibold text-gray-800">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
             ブログ
           </Text>
         </TouchableOpacity>

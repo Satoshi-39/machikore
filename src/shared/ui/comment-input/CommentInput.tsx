@@ -73,15 +73,15 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
     const isInline = variant === 'inline';
 
     return (
-      <View className={isInline ? '' : 'border-t border-gray-200 bg-white'}>
+      <View className={isInline ? '' : 'border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface'}>
         {/* 返信先表示 */}
         {replyingTo && (
           <View
-            className={`flex-row items-center px-4 py-2 bg-gray-50 border-b border-gray-100 ${
+            className={`flex-row items-center px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-b border-border-light dark:border-dark-border-light ${
               isInline ? 'rounded-t-xl' : ''
             }`}
           >
-            <Text className="flex-1 text-sm text-gray-500" numberOfLines={1}>
+            <Text className="flex-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
               <Text className="font-semibold">{replyingTo.displayName}</Text>
               さんに返信
             </Text>
@@ -132,11 +132,11 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
               placeholderTextColor={colors.gray[400]}
               multiline
               maxLength={500}
-              className="flex-1 text-base text-gray-800 max-h-24"
+              className="flex-1 text-base text-foreground dark:text-dark-foreground max-h-24"
               style={{ minHeight: 24 }}
             />
           ) : (
-            <View className="flex-1 flex-row items-end bg-gray-100 rounded-2xl px-4 py-2">
+            <View className="flex-1 flex-row items-end bg-muted dark:bg-dark-muted rounded-2xl px-4 py-2">
               <TextInput
                 ref={inputRef}
                 value={inputText}
@@ -145,7 +145,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
                 placeholderTextColor={colors.gray[400]}
                 multiline
                 maxLength={500}
-                className="flex-1 text-base text-gray-800 max-h-24"
+                className="flex-1 text-base text-foreground dark:text-dark-foreground max-h-24"
                 style={{ minHeight: 24 }}
               />
             </View>

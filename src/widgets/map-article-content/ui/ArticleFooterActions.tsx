@@ -46,7 +46,7 @@ export function ArticleFooterActions({
           color={isLiked ? '#EF4444' : colors.gray[400]}
         />
         {likesCount > 0 && (
-          <Text className="text-sm text-gray-500 ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {likesCount}
           </Text>
         )}
@@ -59,7 +59,7 @@ export function ArticleFooterActions({
       >
         <Ionicons name="chatbubble-outline" size={24} color={colors.gray[400]} />
         {commentsCount > 0 && (
-          <Text className="text-sm text-gray-500 ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {commentsCount}
           </Text>
         )}

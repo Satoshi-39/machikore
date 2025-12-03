@@ -59,11 +59,11 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
       {/* 開閉トグルボタン */}
       <TouchableOpacity
         onPress={() => setIsExpanded(!isExpanded)}
-        className="w-full py-4 px-6 rounded-lg border border-gray-300 bg-white flex-row items-center justify-center"
+        className="w-full py-4 px-6 rounded-lg border border-border dark:border-dark-border bg-surface dark:bg-dark-surface flex-row items-center justify-center"
         activeOpacity={0.8}
       >
         <Ionicons name="mail-outline" size={20} color="#6B7280" />
-        <Text className="text-gray-700 text-base font-semibold ml-3">
+        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base font-semibold ml-3">
           メールアドレスで続ける
         </Text>
         <Ionicons
@@ -86,11 +86,11 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
 
           {/* ユーザー名入力 */}
           <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-700 mb-2">
+            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
               ユーザー名
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base"
+              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
               placeholder="username"
               value={username}
               onChangeText={setUsername}
@@ -102,11 +102,11 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
 
           {/* メールアドレス入力 */}
           <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-700 mb-2">
+            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
               メールアドレス
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base"
+              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
               placeholder="your@email.com"
               value={email}
               onChangeText={setEmail}
@@ -119,30 +119,30 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
 
           {/* パスワード入力 */}
           <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-700 mb-2">
+            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
               パスワード
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base"
+              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
               placeholder="••••••••"
               value={password}
               onChangeText={setPassword}
               secureTextEntry
               editable={!isLoading}
             />
-            <Text className="text-xs text-gray-500 mt-1">
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
               6文字以上で入力してください
             </Text>
           </View>
 
           {/* パスワード確認入力 */}
           <View className="mb-6">
-            <Text className="text-sm font-medium text-gray-700 mb-2">
+            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
               パスワード（確認）
             </Text>
             <TextInput
-              className={`w-full px-4 py-3 border rounded-lg bg-white text-base ${
-                passwordMismatch ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-3 border rounded-lg bg-surface dark:bg-dark-surface text-base ${
+                passwordMismatch ? 'border-red-500' : 'border-border dark:border-dark-border'
               }`}
               placeholder="••••••••"
               value={confirmPassword}

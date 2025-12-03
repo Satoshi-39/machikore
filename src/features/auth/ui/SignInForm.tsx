@@ -45,11 +45,11 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
       {/* 開閉トグルボタン */}
       <TouchableOpacity
         onPress={() => setIsExpanded(!isExpanded)}
-        className="w-full py-4 px-6 rounded-lg border border-gray-300 bg-white flex-row items-center justify-center"
+        className="w-full py-4 px-6 rounded-lg border border-border dark:border-dark-border bg-surface dark:bg-dark-surface flex-row items-center justify-center"
         activeOpacity={0.8}
       >
         <Ionicons name="mail-outline" size={20} color="#6B7280" />
-        <Text className="text-gray-700 text-base font-semibold ml-3">
+        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base font-semibold ml-3">
           メールアドレスで続ける
         </Text>
         <Ionicons
@@ -72,11 +72,11 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
 
           {/* メールアドレス入力 */}
           <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-700 mb-2">
+            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
               メールアドレス
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base"
+              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
               placeholder="your@email.com"
               value={email}
               onChangeText={setEmail}
@@ -89,11 +89,11 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
 
           {/* パスワード入力 */}
           <View className="mb-6">
-            <Text className="text-sm font-medium text-gray-700 mb-2">
+            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
               パスワード
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base"
+              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
               placeholder="••••••••"
               value={password}
               onChangeText={setPassword}

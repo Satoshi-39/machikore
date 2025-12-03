@@ -39,7 +39,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
   const renderItem = ({ item }: { item: FollowWithUser }) => (
     <TouchableOpacity
       onPress={() => handleUserPress(item.user.id)}
-      className="flex-row items-center px-4 py-3 bg-white border-b border-gray-100"
+      className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
     >
       {/* アバター */}
       {item.user.avatar_url ? (
@@ -55,14 +55,14 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
 
       {/* ユーザー情報 */}
       <View className="flex-1 ml-3">
-        <Text className="text-base font-semibold text-gray-900">
+        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
           {item.user.display_name || item.user.username}
         </Text>
         {item.user.username && (
-          <Text className="text-sm text-gray-500">@{item.user.username}</Text>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">@{item.user.username}</Text>
         )}
         {item.user.bio && (
-          <Text className="text-sm text-gray-600 mt-1" numberOfLines={1}>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1" numberOfLines={1}>
             {item.user.bio}
           </Text>
         )}
@@ -75,7 +75,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <PageHeader title={isFollowers ? 'フォロワー' : 'フォロー中'} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -85,7 +85,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title={isFollowers ? 'フォロワー' : 'フォロー中'} />
 
       {data && data.length > 0 ? (

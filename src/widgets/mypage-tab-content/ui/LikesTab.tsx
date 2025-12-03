@@ -65,14 +65,14 @@ export function LikesTab({ userId }: LikesTabProps) {
   }
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* サブタブ */}
-      <View className="flex-row border-b border-gray-200">
+      <View className="flex-row border-b border-border dark:border-dark-border">
         <Pressable
           onPress={() => setSubTab('spots')}
           className={`flex-1 py-3 items-center ${subTab === 'spots' ? 'border-b-2 border-blue-500' : ''}`}
         >
-          <Text className={`text-sm font-medium ${subTab === 'spots' ? 'text-blue-500' : 'text-gray-500'}`}>
+          <Text className={`text-sm font-medium ${subTab === 'spots' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'}`}>
             スポット
           </Text>
         </Pressable>
@@ -80,7 +80,7 @@ export function LikesTab({ userId }: LikesTabProps) {
           onPress={() => setSubTab('maps')}
           className={`flex-1 py-3 items-center ${subTab === 'maps' ? 'border-b-2 border-blue-500' : ''}`}
         >
-          <Text className={`text-sm font-medium ${subTab === 'maps' ? 'text-blue-500' : 'text-gray-500'}`}>
+          <Text className={`text-sm font-medium ${subTab === 'maps' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'}`}>
             マップ
           </Text>
         </Pressable>
@@ -91,7 +91,7 @@ export function LikesTab({ userId }: LikesTabProps) {
         likedSpots.length === 0 ? (
           <View className="flex-1 items-center justify-center py-12">
             <Ionicons name="heart-outline" size={48} color={colors.text.secondary} />
-            <Text className="text-gray-500 mt-4">
+            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
               いいねしたスポットがありません
             </Text>
           </View>
@@ -106,18 +106,18 @@ export function LikesTab({ userId }: LikesTabProps) {
               return (
                 <Pressable
                   onPress={() => navigateToSpot(item.spot)}
-                  className="bg-white px-4 py-4 border-b border-gray-100"
+                  className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
                 >
                   <View className="flex-row items-center">
                     <View className="w-10 h-10 rounded-full bg-orange-100 items-center justify-center mr-3">
                       <Ionicons name="location" size={20} color="#F97316" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-base font-semibold text-gray-900">
+                      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                         {spotName}
                       </Text>
                       {address && (
-                        <Text className="text-sm text-gray-500" numberOfLines={1}>
+                        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
                           {address}
                         </Text>
                       )}
@@ -134,7 +134,7 @@ export function LikesTab({ userId }: LikesTabProps) {
         likedMaps.length === 0 ? (
           <View className="flex-1 items-center justify-center py-12">
             <Ionicons name="heart-outline" size={48} color={colors.text.secondary} />
-            <Text className="text-gray-500 mt-4">
+            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
               いいねしたマップがありません
             </Text>
           </View>
@@ -145,17 +145,17 @@ export function LikesTab({ userId }: LikesTabProps) {
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => navigateToMap(item.map.id)}
-                className="bg-white px-4 py-4 border-b border-gray-100"
+                className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
               >
                 <View className="flex-row items-center">
                   <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center mr-3">
                     <Ionicons name="map" size={20} color="#3B82F6" />
                   </View>
                   <View className="flex-1">
-                    <Text className="text-base font-semibold text-gray-900">
+                    <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                       {item.map.name}
                     </Text>
-                    <Text className="text-sm text-gray-500">
+                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                       {item.map.spots_count}スポット
                     </Text>
                   </View>

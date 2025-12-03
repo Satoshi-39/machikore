@@ -104,14 +104,14 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
-            <Text className="text-2xl font-bold text-gray-900 mb-1">
+            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-1">
               {machi.name}
             </Text>
             {/* 所在地 */}
             {(machi.prefecture_name || machi.city_name) && (
               <View className="flex-row items-center">
                 <Ionicons name="location-outline" size={14} color={colors.text.secondary} />
-                <Text className="text-sm text-gray-500 ml-1">
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                   {[machi.prefecture_name, machi.city_name].filter(Boolean).join(' ')}
                 </Text>
               </View>
@@ -121,7 +121,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
           <Pressable
             onPress={handleClose}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-gray-100"
+            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
           </Pressable>
@@ -134,15 +134,15 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
             <View className="flex-1 mr-3">
               <View className="flex-row items-center mb-2">
                 <Ionicons name="train-outline" size={16} color={colors.text.secondary} />
-                <Text className="text-sm font-medium text-gray-700 ml-1">路線</Text>
+                <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary ml-1">路線</Text>
               </View>
               <View className="flex-row flex-wrap gap-1.5">
                 {lines.map((line, index) => (
                   <View
                     key={index}
-                    className="px-2.5 py-1 bg-gray-100 rounded-full"
+                    className="px-2.5 py-1 bg-muted dark:bg-dark-muted rounded-full"
                   >
-                    <Text className="text-xs text-gray-700">{line}</Text>
+                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{line}</Text>
                   </View>
                 ))}
               </View>
@@ -157,7 +157,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
               onPress={handleToggleVisit}
               disabled={isCheckingVisit || toggleVisitMutation.isPending}
               className={`flex-row items-center px-4 py-2.5 rounded-full ${
-                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-white border border-blue-500 active:bg-blue-50'
+                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface dark:bg-dark-surface border border-blue-500 active:bg-blue-50'
               }`}
             >
               {(isCheckingVisit || toggleVisitMutation.isPending) ? (

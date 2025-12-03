@@ -69,33 +69,33 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
   };
 
   return (
-    <ScrollView className="flex-1 bg-gray-50">
+    <ScrollView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <View className="p-4">
         {/* マップ統計情報（読み取り専用） */}
-        <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
+        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
           <View className="flex-row items-center mb-3">
             <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
-            <Text className="ml-2 text-sm font-semibold text-gray-700">
+            <Text className="ml-2 text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
               マップ情報
             </Text>
           </View>
 
           <View className="flex-row justify-between">
             <View className="items-center">
-              <Text className="text-xl font-bold text-gray-800">
+              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
                 {map.spots_count}
               </Text>
-              <Text className="text-xs text-gray-500">スポット</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">スポット</Text>
             </View>
             <View className="items-center">
-              <Text className="text-xl font-bold text-gray-800">
+              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
                 {map.likes_count}
               </Text>
-              <Text className="text-xs text-gray-500">いいね</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">いいね</Text>
             </View>
             <View className="items-center">
-              <Text className="text-xs text-gray-500 mb-1">作成日</Text>
-              <Text className="text-sm text-gray-700">
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">作成日</Text>
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                 {new Date(map.created_at).toLocaleDateString('ja-JP')}
               </Text>
             </View>
@@ -104,28 +104,28 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
 
         {/* マップ名（必須） */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             マップ名 <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
             value={name}
             onChangeText={setName}
             placeholder="例：東京カフェ巡り"
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
           />
         </View>
 
         {/* 説明 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">説明</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">説明</Text>
           <TextInput
             value={description}
             onChangeText={setDescription}
             placeholder="このマップについての説明を入力してください"
             multiline
             numberOfLines={4}
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
@@ -133,34 +133,34 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
 
         {/* カテゴリ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">カテゴリ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">カテゴリ</Text>
           <TextInput
             value={category}
             onChangeText={setCategory}
             placeholder="例：グルメ, 旅行, ショッピング"
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
           />
         </View>
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">タグ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
           <TextInput
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
           />
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             カンマ区切りで入力してください
           </Text>
         </View>
 
         {/* サムネイル */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             サムネイル
           </Text>
           <ThumbnailPicker
@@ -170,13 +170,13 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
         </View>
 
         {/* 公開設定 */}
-        <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
+        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
           <View className="flex-row items-center justify-between">
             <View className="flex-1 mr-4">
-              <Text className="text-base font-semibold text-gray-800">
+              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                 公開設定
               </Text>
-              <Text className="text-sm text-gray-500 mt-1">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
                 {isPublic
                   ? '誰でもこのマップを見ることができます'
                   : '自分だけがこのマップを見ることができます'}

@@ -82,7 +82,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
 
         {/* メニューコンテンツ（スライドアップ） */}
         <Animated.View
-          className="bg-white rounded-t-3xl"
+          className="bg-surface dark:bg-dark-surface rounded-t-3xl"
           style={{
             paddingBottom: insets.bottom + 16,
             transform: [{ translateY: slideAnim }],
@@ -90,8 +90,8 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
         >
           {/* タイトル（オプション） */}
           {title && (
-            <View className="px-6 py-4 border-b border-gray-100">
-              <Text className="text-center text-base text-gray-500">{title}</Text>
+            <View className="px-6 py-4 border-b border-border-light dark:border-dark-border-light">
+              <Text className="text-center text-base text-foreground-secondary dark:text-dark-foreground-secondary">{title}</Text>
             </View>
           )}
 
@@ -104,8 +104,8 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
                   item.onPress();
                   onClose();
                 }}
-                className={`flex-row items-center px-4 py-4 active:bg-gray-50 ${
-                  index < items.length - 1 ? 'border-b border-gray-100' : ''
+                className={`flex-row items-center px-4 py-4 active:bg-background-secondary dark:bg-dark-background-secondary ${
+                  index < items.length - 1 ? 'border-b border-border-light dark:border-dark-border-light' : ''
                 }`}
               >
                 <View className="w-10 items-center">
@@ -117,7 +117,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
                 </View>
                 <Text
                   className={`flex-1 text-base ml-3 ${
-                    item.destructive ? 'text-red-500' : 'text-gray-800'
+                    item.destructive ? 'text-red-500' : 'text-foreground dark:text-dark-foreground'
                   }`}
                 >
                   {item.label}
@@ -130,9 +130,9 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
           <View className="px-4 pt-2">
             <Pressable
               onPress={onClose}
-              className="bg-gray-100 rounded-xl py-4 active:bg-gray-200"
+              className="bg-muted dark:bg-dark-muted rounded-xl py-4 active:bg-gray-200"
             >
-              <Text className="text-center text-base font-medium text-gray-800">
+              <Text className="text-center text-base font-medium text-foreground dark:text-dark-foreground">
                 キャンセル
               </Text>
             </Pressable>

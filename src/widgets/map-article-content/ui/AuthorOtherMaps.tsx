@@ -20,7 +20,7 @@ export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
 
   return (
     <View className="mt-8">
-      <Text className="text-base font-semibold text-gray-800 mb-4">
+      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-4">
         この著者の他のマップ
       </Text>
       <ScrollView
@@ -42,11 +42,11 @@ export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
                 resizeMode="cover"
               />
             ) : (
-              <View className="w-full h-24 rounded-lg bg-gray-100 items-center justify-center mb-2">
+              <View className="w-full h-24 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mb-2">
                 <Ionicons name="map" size={32} color={colors.gray[300]} />
               </View>
             )}
-            <Text className="text-sm font-medium text-gray-800" numberOfLines={2}>
+            <Text className="text-sm font-medium text-foreground dark:text-dark-foreground" numberOfLines={2}>
               {map.name}
             </Text>
           </Pressable>

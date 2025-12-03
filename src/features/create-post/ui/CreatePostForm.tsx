@@ -33,11 +33,11 @@ export function CreatePostForm({
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-gray-200">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b border-border dark:border-dark-border">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
-          <Text className="text-base text-gray-600">キャンセル</Text>
+          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
         </Pressable>
         <Text className="text-lg font-semibold">新規投稿</Text>
         <Pressable
@@ -48,7 +48,7 @@ export function CreatePostForm({
           }`}
         >
           <Text className={`text-sm font-semibold ${
-            isValid && !isSubmitting ? 'text-white' : 'text-gray-500'
+            isValid && !isSubmitting ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
           }`}>
             {isSubmitting ? '投稿中...' : '投稿'}
           </Text>
@@ -65,17 +65,17 @@ export function CreatePostForm({
           multiline
           maxLength={maxLength}
           editable={!isSubmitting}
-          className="flex-1 text-base text-gray-900"
+          className="flex-1 text-base text-foreground dark:text-dark-foreground"
           style={{ textAlignVertical: 'top' }}
           autoFocus
         />
       </View>
 
       {/* フッター */}
-      <View className="px-4 py-3 border-t border-gray-200">
+      <View className="px-4 py-3 border-t border-border dark:border-dark-border">
         {/* 文字数カウンター */}
         <View className="flex-row items-center justify-between mb-3">
-          <Text className="text-sm text-gray-500">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
             {content.length} / {maxLength}
           </Text>
           {content.length > maxLength * 0.9 && (
@@ -87,11 +87,11 @@ export function CreatePostForm({
 
         {/* 街選択ボタン（将来実装） */}
         <Pressable
-          className="flex-row items-center py-3 border-t border-gray-100"
+          className="flex-row items-center py-3 border-t border-border-light dark:border-dark-border-light"
           disabled={isSubmitting}
         >
           <Ionicons name="location-outline" size={20} color={colors.text.secondary} />
-          <Text className="ml-2 text-sm text-gray-600">
+          <Text className="ml-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
             {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
           </Text>
         </Pressable>

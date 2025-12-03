@@ -106,7 +106,7 @@ export function ImageViewerModal({
             {currentIndex > 0 && (
               <Pressable
                 onPress={handlePrev}
-                className="absolute left-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
+                className="absolute left-4 w-10 h-10 bg-surface dark:bg-dark-surface/20 rounded-full items-center justify-center"
                 style={{ top: '50%', marginTop: -20 }}
               >
                 <Ionicons name="chevron-back" size={24} color="white" />
@@ -117,7 +117,7 @@ export function ImageViewerModal({
             {currentIndex < images.length - 1 && (
               <Pressable
                 onPress={handleNext}
-                className="absolute right-4 w-10 h-10 bg-white/20 rounded-full items-center justify-center"
+                className="absolute right-4 w-10 h-10 bg-surface dark:bg-dark-surface/20 rounded-full items-center justify-center"
                 style={{ top: '50%', marginTop: -20 }}
               >
                 <Ionicons name="chevron-forward" size={24} color="white" />

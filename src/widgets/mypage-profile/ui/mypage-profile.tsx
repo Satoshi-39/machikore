@@ -44,7 +44,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
   // ローディング中
   if (isLoading) {
     return (
-      <View className="bg-white px-4 py-6 border-b border-gray-200">
+      <View className="bg-surface dark:bg-dark-surface px-4 py-6 border-b border-border dark:border-dark-border">
         <Loading variant="inline" />
       </View>
     );
@@ -55,7 +55,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
   const followersCount = stats?.followersCount ?? 0;
 
   return (
-    <View className="bg-white px-4 py-6 border-b border-gray-200">
+    <View className="bg-surface dark:bg-dark-surface px-4 py-6 border-b border-border dark:border-dark-border">
       {/* アバターとフォローボタン */}
       <View className="flex-row items-center justify-between mb-4">
         {/* アバター */}
@@ -90,33 +90,33 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       )}
 
       {/* ユーザー名 */}
-      <Text className="text-xl font-bold text-gray-900 mb-1">
+      <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-1">
         {user?.display_name || user?.username || 'ユーザー'}
       </Text>
       {user?.username && (
-        <Text className="text-sm text-gray-500 mb-3">@{user.username}</Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">@{user.username}</Text>
       )}
 
       {/* 自己紹介 */}
       {user?.bio && (
-        <Text className="text-base text-gray-700 leading-5 mb-3">{user.bio}</Text>
+        <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-5 mb-3">{user.bio}</Text>
       )}
 
       {/* 統計情報（Instagram/noteスタイル） */}
       <View className="flex-row items-center">
-        <Text className="text-sm text-gray-600">
-          訪問した街 <Text className="font-bold text-gray-900">{visitedMachiCount}</Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+          訪問した街 <Text className="font-bold text-foreground dark:text-dark-foreground">{visitedMachiCount}</Text>
           {'  '}·{'  '}
         </Text>
         <TouchableOpacity onPress={handleFollowingPress}>
-          <Text className="text-sm text-gray-600">
-            フォロー <Text className="font-bold text-gray-900">{followingCount}</Text>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+            フォロー <Text className="font-bold text-foreground dark:text-dark-foreground">{followingCount}</Text>
           </Text>
         </TouchableOpacity>
-        <Text className="text-sm text-gray-600">{'  '}·{'  '}</Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{'  '}·{'  '}</Text>
         <TouchableOpacity onPress={handleFollowersPress}>
-          <Text className="text-sm text-gray-600">
-            フォロワー <Text className="font-bold text-gray-900">{followersCount}</Text>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+            フォロワー <Text className="font-bold text-foreground dark:text-dark-foreground">{followersCount}</Text>
           </Text>
         </TouchableOpacity>
       </View>

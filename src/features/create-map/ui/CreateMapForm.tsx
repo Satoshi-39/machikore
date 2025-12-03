@@ -65,25 +65,25 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
   };
 
   return (
-    <ScrollView className="flex-1 bg-gray-50">
+    <ScrollView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <View className="p-4">
         {/* マップ名 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             マップ名 <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
             value={mapName}
             onChangeText={setMapName}
             placeholder="例：東京カフェ巡り"
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
           />
         </View>
 
         {/* 説明 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             説明
           </Text>
           <TextInput
@@ -92,7 +92,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
             placeholder="マップの説明を入力してください"
             multiline
             numberOfLines={4}
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
@@ -100,7 +100,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
 
         {/* カテゴリー */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             カテゴリー
           </Text>
           <View className="flex-row flex-wrap gap-2">
@@ -113,13 +113,13 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
                   className={`px-4 py-2 rounded-full border ${
                     isSelected
                       ? 'bg-blue-500 border-blue-500'
-                      : 'bg-white border-gray-300'
+                      : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
                   }`}
                   activeOpacity={0.7}
                 >
                   <Text
                     className={`text-sm font-medium ${
-                      isSelected ? 'text-white' : 'text-gray-700'
+                      isSelected ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
                     {category}
@@ -132,24 +132,24 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             タグ
           </Text>
           <TextInput
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, スイーツ, デート"
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
           />
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             カンマ区切りで入力してください
           </Text>
         </View>
 
         {/* サムネイル画像 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             サムネイル
           </Text>
           <ThumbnailPicker
@@ -160,7 +160,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
 
         {/* 公開設定 */}
         <View className="mb-6">
-          <View className="flex-row items-center justify-between bg-white border border-gray-300 rounded-lg px-4 py-3">
+          <View className="flex-row items-center justify-between bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3">
             <View className="flex-row items-center">
               <Ionicons
                 name={isPublic ? 'earth' : 'lock-closed'}
@@ -168,7 +168,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
                 color={isPublic ? '#3B82F6' : '#6B7280'}
                 style={{ marginRight: 8 }}
               />
-              <Text className="text-base font-medium text-gray-800">
+              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
                 {isPublic ? '公開' : '非公開'}
               </Text>
             </View>
@@ -179,7 +179,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
               thumbColor={isPublic ? '#3B82F6' : '#F3F4F6'}
             />
           </View>
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             公開すると他のユーザーもこのマップを見ることができます
           </Text>
         </View>

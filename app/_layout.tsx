@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
-import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DefaultTheme, DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import Toast, { BaseToast, type BaseToastProps } from 'react-native-toast-message';
 import 'react-native-reanimated';
 import '../global.css';
 
-import { AppProviders } from '@/shared/lib/providers';
+import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox } from '@/shared/lib/init';
 
 // カスタムToast設定（successを青に統一）
@@ -25,47 +25,13 @@ const toastConfig = {
   ),
 };
 
-export default function RootLayout() {
-  const [isReady, setIsReady] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    // Mapbox初期化（同期処理）
-    initMapbox();
-
-    // データベース初期化（非同期処理）
-    initDatabase()
-      .then(() => setIsReady(true))
-      .catch((err) => {
-        console.error('初期化エラー:', err);
-        setError(err);
-      });
-  }, []);
-
-  // 初期化中
-  if (!isReady && !error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#007AFF" />
-        <Text className="mt-4 text-base text-gray-600">初期化中...</Text>
-      </View>
-    );
-  }
-
-  // エラー
-  if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white p-5">
-        <Text className="text-xl font-bold text-red-500 mb-2">初期化エラー</Text>
-        <Text className="text-sm text-gray-600 text-center">{error.message}</Text>
-      </View>
-    );
-  }
+// AppProvidersの内側で使うためのコンポーネント
+function RootNavigator() {
+  const isDarkMode = useIsDarkMode();
 
   return (
-    <AppProviders>
-      <ThemeProvider value={DefaultTheme}>
-        <Stack>
+    <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
+      <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
             name="settings"
@@ -239,9 +205,52 @@ export default function RootLayout() {
             }}
           />
         </Stack>
-        <StatusBar style="auto" />
+        <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         <Toast config={toastConfig} />
       </ThemeProvider>
+    );
+  }
+
+export default function RootLayout() {
+  const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    // Mapbox初期化（同期処理）
+    initMapbox();
+
+    // データベース初期化（非同期処理）
+    initDatabase()
+      .then(() => setIsReady(true))
+      .catch((err) => {
+        console.error('初期化エラー:', err);
+        setError(err);
+      });
+  }, []);
+
+  // 初期化中
+  if (!isReady && !error) {
+    return (
+      <View className="flex-1 justify-center items-center bg-background dark:bg-dark-background">
+        <ActivityIndicator size="large" color="#007AFF" />
+        <Text className="mt-4 text-base text-foreground-secondary dark:text-dark-foreground-secondary">初期化中...</Text>
+      </View>
+    );
+  }
+
+  // エラー
+  if (error) {
+    return (
+      <View className="flex-1 justify-center items-center bg-background dark:bg-dark-background p-5">
+        <Text className="text-xl font-bold text-red-500 mb-2">初期化エラー</Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">{error.message}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <AppProviders>
+      <RootNavigator />
     </AppProviders>
   );
 }

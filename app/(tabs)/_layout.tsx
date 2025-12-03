@@ -1,5 +1,6 @@
 import { useUserStore } from '@/entities/user';
 import { useTotalUnreadCount } from '@/entities/notification';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
@@ -10,12 +11,18 @@ export default function TabLayout() {
   const user = useUserStore((state) => state.user);
   const isAnonymous = !user?.email;
   const unreadCount = useTotalUnreadCount(user?.id);
+  const isDarkMode = useIsDarkMode();
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: isDarkMode ? '#9CA3AF' : '#6B7280',
+        tabBarStyle: {
+          backgroundColor: isDarkMode ? '#1F2937' : '#FFFFFF', // dark: surface (#1F2937)
+          borderTopColor: isDarkMode ? '#374151' : '#E5E7EB',  // dark: border (#374151)
+        },
       }}
     >
       {/* index ルートをタブバーから非表示 */}

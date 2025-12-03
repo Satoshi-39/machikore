@@ -22,29 +22,29 @@ export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
   // const { data: machi } = useMachi(machiId);
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
       {/* ヘッダー */}
-      <View className="flex-row items-center px-4 py-3 border-b border-gray-200">
+      <View className="flex-row items-center px-4 py-3 border-b border-border dark:border-dark-border">
         <Pressable
           onPress={() => router.back()}
-          className="w-10 h-10 items-center justify-center rounded-full bg-gray-100 mr-3"
+          className="w-10 h-10 items-center justify-center rounded-full bg-muted dark:bg-dark-muted mr-3"
         >
           <Ionicons name="arrow-back" size={24} color="#6B7280" />
         </Pressable>
-        <Text className="text-xl font-bold text-gray-900 flex-1">街詳細</Text>
+        <Text className="text-xl font-bold text-foreground dark:text-dark-foreground flex-1">街詳細</Text>
       </View>
 
       <ScrollView className="flex-1">
         {/* プレースホルダー */}
         <View className="p-6">
           <View className="items-center py-12">
-            <View className="w-20 h-20 rounded-full bg-gray-100 items-center justify-center mb-4">
+            <View className="w-20 h-20 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-4">
               <Ionicons name="storefront" size={40} color="#6B7280" />
             </View>
-            <Text className="text-xl font-bold text-gray-900 mb-2">
+            <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-2">
               {machiId}
             </Text>
-            <Text className="text-sm text-gray-500 text-center">
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
               街の詳細情報は今後実装予定です
             </Text>
           </View>

@@ -14,6 +14,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 export interface PopupMenuItem {
   id: string;
@@ -37,6 +38,25 @@ export function PopupMenu({
   triggerSize = 20,
   triggerColor = colors.gray[600],
 }: PopupMenuProps) {
+  const isDarkMode = useIsDarkMode();
+
+  // ダークモード対応のスタイル
+  const dynamicStyles = {
+    optionsContainer: {
+      ...styles.optionsContainer,
+      backgroundColor: isDarkMode ? '#374151' : 'white', // gray-700 / white
+    },
+    menuItemBorder: {
+      ...styles.menuItemBorder,
+      borderBottomColor: isDarkMode ? '#4B5563' : colors.gray[200], // gray-600 / gray-200
+    },
+    menuLabel: {
+      ...styles.menuLabel,
+      color: isDarkMode ? '#F9FAFB' : colors.gray[800], // gray-50 / gray-800
+    },
+    iconColor: isDarkMode ? '#D1D5DB' : colors.gray[700], // gray-300 / gray-700
+  };
+
   return (
     <Menu>
       <MenuTrigger
@@ -52,13 +72,13 @@ export function PopupMenu({
         </View>
       </MenuTrigger>
 
-      <MenuOptions customStyles={{ optionsContainer: styles.optionsContainer }}>
+      <MenuOptions customStyles={{ optionsContainer: dynamicStyles.optionsContainer }}>
         {items.map((item, index) => (
           <MenuOption key={item.id} onSelect={item.onPress}>
             <View
               style={[
                 styles.menuItem,
-                index < items.length - 1 && styles.menuItemBorder,
+                index < items.length - 1 && dynamicStyles.menuItemBorder,
               ]}
             >
               {item.icon && (
@@ -68,14 +88,14 @@ export function PopupMenu({
                   color={
                     item.destructive
                       ? colors.danger
-                      : item.iconColor || colors.gray[700]
+                      : item.iconColor || dynamicStyles.iconColor
                   }
                   style={styles.menuIcon}
                 />
               )}
               <Text
                 style={[
-                  styles.menuLabel,
+                  dynamicStyles.menuLabel,
                   item.destructive && styles.destructiveLabel,
                 ]}
               >

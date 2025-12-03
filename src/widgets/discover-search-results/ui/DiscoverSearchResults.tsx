@@ -81,7 +81,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="search-outline" size={48} color={colors.text.tertiary} />
-          <Text className="text-gray-400 mt-4">検索結果がありません</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">検索結果がありません</Text>
         </View>
       );
     }
@@ -118,7 +118,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="trending-up-outline" size={48} color={colors.text.tertiary} />
-          <Text className="text-gray-400 mt-4">話題の投稿がありません</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">話題の投稿がありません</Text>
         </View>
       );
     }
@@ -166,7 +166,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="location-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-gray-400 mt-4">スポットが見つかりませんでした</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">スポットが見つかりませんでした</Text>
           </View>
         );
       }
@@ -191,7 +191,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="map-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-gray-400 mt-4">マップが見つかりませんでした</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">マップが見つかりませんでした</Text>
           </View>
         );
       }
@@ -212,7 +212,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="people-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-gray-400 mt-4">ユーザーが見つかりませんでした</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">ユーザーが見つかりませんでした</Text>
           </View>
         );
       }
@@ -234,7 +234,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
   return (
     <View className="flex-1">
       {/* タブ */}
-      <View className="bg-white border-b border-gray-100">
+      <View className="bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -270,7 +270,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       </View>
 
       {/* 検索結果 */}
-      <View className="flex-1 bg-white">
+      <View className="flex-1 bg-surface dark:bg-dark-surface">
         {renderSearchResults()}
       </View>
     </View>

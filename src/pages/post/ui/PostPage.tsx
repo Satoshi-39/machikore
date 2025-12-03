@@ -16,9 +16,9 @@ export function PostPage() {
   // const currentUserId = useCurrentUserId(); // TODO: Spot実装時に使用
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary" edges={['top']}>
       <View className="flex-1 items-center justify-center p-6">
-        <Text className="text-lg text-gray-600 text-center">
+        <Text className="text-lg text-foreground-secondary dark:text-dark-foreground-secondary text-center">
           このページは現在開発中です。{'\n'}
           Spotアーキテクチャへの移行後に実装予定です。
         </Text>

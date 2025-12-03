@@ -60,7 +60,7 @@ export function DefaultMapSearch({
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* 検索バー */}
       <SearchBar
         value={searchQuery}
@@ -76,8 +76,8 @@ export function DefaultMapSearch({
         {searchQuery.length === 0 ? (
           // 検索プレースホルダー + 履歴
           <View className="p-4">
-            <Text className="text-lg font-semibold text-gray-800 mb-3">街・スポットを検索</Text>
-            <Text className="text-sm text-gray-500 mb-4">
+            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground mb-3">街・スポットを検索</Text>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-4">
               登録されている街や、みんなが投稿したスポットを検索できます
             </Text>
             {/* 検索履歴 */}
@@ -107,14 +107,14 @@ export function DefaultMapSearch({
             ) : (
               // 検索結果リスト
               <>
-                <Text className="text-sm text-gray-500 mb-3">
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
                 {results.map((place) => (
                   <Pressable
                     key={place.id}
                     onPress={() => handlePlaceSelect(place)}
-                    className="flex-row items-center py-3 border-b border-gray-100 active:bg-gray-50"
+                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:bg-dark-background-secondary"
                   >
                     <View className={`w-10 h-10 rounded-full items-center justify-center ${
                       place.type === 'machi' ? 'bg-green-100' : 'bg-blue-100'
@@ -127,7 +127,7 @@ export function DefaultMapSearch({
                     </View>
                     <View className="flex-1 ml-3">
                       <View className="flex-row items-center gap-2">
-                        <Text className="text-base text-gray-800 font-medium">{place.name}</Text>
+                        <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>
                         {place.type === 'machi' && (
                           <View className="bg-green-100 px-2 py-0.5 rounded">
                             <Text className="text-xs text-green-700 font-medium">街</Text>
@@ -135,7 +135,7 @@ export function DefaultMapSearch({
                         )}
                       </View>
                       {place.address && (
-                        <Text className="text-sm text-gray-500 mt-0.5" numberOfLines={1}>
+                        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
                           {place.address}
                         </Text>
                       )}

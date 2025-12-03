@@ -48,22 +48,22 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
         onPress={handleClose}
       >
         <Pressable
-          className="bg-white rounded-2xl p-6 mx-6 w-full max-w-sm"
+          className="bg-surface dark:bg-dark-surface rounded-2xl p-6 mx-6 w-full max-w-sm"
           onPress={(e) => e.stopPropagation()}
         >
-          <Text className="text-lg font-bold text-gray-900 mb-4">
+          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-4">
             新しいフォルダ
           </Text>
           <TextInput
             value={folderName}
             onChangeText={setFolderName}
             placeholder="フォルダ名"
-            className="border border-gray-300 rounded-lg px-4 py-3 text-base mb-4"
+            className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base mb-4"
             autoFocus
           />
           <View className="flex-row justify-end gap-3">
             <Pressable onPress={handleClose} className="px-4 py-2">
-              <Text className="text-gray-600">キャンセル</Text>
+              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
             </Pressable>
             <Pressable
               onPress={handleCreate}

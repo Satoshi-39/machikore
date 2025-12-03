@@ -32,7 +32,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
   return (
     <View
       className={`flex-row items-center p-4 mb-2 rounded-xl shadow-sm ${
-        isVisited ? 'bg-white' : 'bg-gray-50'
+        isVisited ? 'bg-surface dark:bg-dark-surface' : 'bg-background-secondary dark:bg-dark-background-secondary'
       }`}
       style={{
         borderWidth: isVisited ? 2 : 1,
@@ -40,14 +40,14 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
       }}
     >
       <View className={`w-10 h-10 rounded-full justify-center items-center mr-3 ${
-        isVisited ? 'bg-blue-50' : 'bg-gray-100'
+        isVisited ? 'bg-blue-50' : 'bg-muted dark:bg-dark-muted'
       }`}>
         <Text className="text-xl">🏘️</Text>
       </View>
       <View className="flex-1">
         <View className="flex-row items-center mb-1">
           <Text className={`text-base font-semibold ${
-            isVisited ? 'text-gray-900' : 'text-gray-500'
+            isVisited ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
           }`}>
             {machi.name}
           </Text>
@@ -58,7 +58,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
           )}
         </View>
         {lineNames.length > 0 && (
-          <Text className={`text-sm ${isVisited ? 'text-gray-600' : 'text-gray-400'}`}>
+          <Text className={`text-sm ${isVisited ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}>
             {lineNames.join('・')}
           </Text>
         )}
@@ -68,7 +68,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
           </Text>
         )}
       </View>
-      <Text className="text-xs text-gray-400">{machi.prefecture_name}</Text>
+      <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{machi.prefecture_name}</Text>
     </View>
   );
 }

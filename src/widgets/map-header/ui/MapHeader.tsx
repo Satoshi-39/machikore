@@ -172,7 +172,7 @@ export function MapHeader({
   // ローディング時の表示
   if (isUserMap && isLoading) {
     return (
-      <View className="bg-white px-5 py-4">
+      <View className="bg-surface dark:bg-dark-surface px-5 py-4">
         <View className="flex-row items-center justify-between">
           {/* 左側：戻るボタン + ローディング */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
@@ -180,7 +180,7 @@ export function MapHeader({
               <Ionicons name="arrow-back" size={24} color="#007AFF" />
             </Pressable>
             <ActivityIndicator size="small" color="#007AFF" />
-            <Text className="text-gray-500 ml-3">読み込み中...</Text>
+            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary ml-3">読み込み中...</Text>
           </View>
         </View>
       </View>
@@ -188,7 +188,7 @@ export function MapHeader({
   }
 
   return (
-    <View className="bg-white px-5 py-4">
+    <View className="bg-surface dark:bg-dark-surface px-5 py-4">
       {isUserMap ? (
         // ユーザーマップ：戻るボタン + ユーザーアイコン + マップ名（左）、アクションボタン群（右）
         <View className="flex-row items-center justify-between">
@@ -212,7 +212,7 @@ export function MapHeader({
                 />
               ) : (
                 <View className="w-10 h-10 rounded-full bg-gray-300 items-center justify-center">
-                  <Text className="text-base font-bold text-gray-600">
+                  <Text className="text-base font-bold text-foreground-secondary dark:text-dark-foreground-secondary">
                     {userName?.[0]?.toUpperCase() || '?'}
                   </Text>
                 </View>
@@ -226,7 +226,7 @@ export function MapHeader({
                 className="flex-row items-center"
               >
                 <Text
-                  className="text-xl font-bold text-gray-800"
+                  className="text-xl font-bold text-foreground dark:text-dark-foreground"
                   numberOfLines={1}
                 >
                   {mapTitle || `${userName || 'ゲスト'}のマップ`}
@@ -271,7 +271,7 @@ export function MapHeader({
 
           {/* キャッチフレーズ（中央） */}
           <View className="flex-1 items-center">
-            <Text className="text-lg font-semibold text-gray-700">
+            <Text className="text-lg font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
               日本の街を再発見しよう
             </Text>
           </View>
@@ -290,15 +290,15 @@ export function MapHeader({
       >
         <View className="flex-1 bg-black/50">
           <Animated.View
-            className="bg-white rounded-b-3xl shadow-2xl"
+            className="bg-surface dark:bg-dark-surface rounded-b-3xl shadow-2xl"
             style={{
               maxHeight: '70%',
               paddingTop: insets.top,
               transform: [{ translateY: slideAnim }],
             }}
           >
-            <View className="flex-row items-center justify-between px-6 py-4 border-b border-gray-100">
-              <Text className="text-lg font-bold text-gray-900">マップを選択</Text>
+            <View className="flex-row items-center justify-between px-6 py-4 border-b border-border-light dark:border-dark-border-light">
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">マップを選択</Text>
               <Pressable onPress={() => setIsDropdownOpen(false)}>
                 <Ionicons name="close" size={28} color="#6B7280" />
               </Pressable>
@@ -309,17 +309,17 @@ export function MapHeader({
                 <Pressable
                   key={map.id}
                   onPress={() => handleMapItemPress(map.id)}
-                  className="py-4 active:bg-gray-50"
+                  className="py-4 active:bg-background-secondary dark:bg-dark-background-secondary"
                   style={{
                     borderBottomWidth: index < userMaps.length - 1 ? 1 : 0,
                     borderBottomColor: '#F3F4F6',
                   }}
                 >
-                  <Text className="text-lg font-semibold text-gray-900">
+                  <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
                     {map.name}
                   </Text>
                   {map.description && (
-                    <Text className="text-sm text-gray-600 mt-1" numberOfLines={2}>
+                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1" numberOfLines={2}>
                       {map.description}
                     </Text>
                   )}

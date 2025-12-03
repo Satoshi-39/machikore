@@ -27,17 +27,17 @@ export function BookmarksPage() {
 
   if (!userId) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <PageHeader title="ブックマーク" />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-gray-500">ログインしてください</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">ログインしてください</Text>
         </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title="ブックマーク" />
       {/* スポット/マップ タブ */}
       <BookmarkTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />
@@ -45,7 +45,7 @@ export function BookmarksPage() {
       {/* コンテンツ */}
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <Text className="text-gray-500">読み込み中...</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">読み込み中...</Text>
         </View>
       ) : (
         <BookmarkFolderList

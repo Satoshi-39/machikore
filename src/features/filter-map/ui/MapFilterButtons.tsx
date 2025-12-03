@@ -49,7 +49,7 @@ export function MapFilterButtons({
           >
             <Pressable
               onPress={() => handleFilterPress(option.id)}
-              className="flex-row items-center px-4 py-2 rounded-full bg-white"
+              className="flex-row items-center px-4 py-2 rounded-full bg-surface dark:bg-dark-surface"
               style={{
                 borderWidth: selected ? 2 : 1,
                 borderColor: selected ? colors.primary.DEFAULT : colors.gray[300],
@@ -62,7 +62,7 @@ export function MapFilterButtons({
               />
               <Text
                 className={`ml-1.5 text-sm ${
-                  selected ? 'text-blue-700 font-semibold' : 'text-gray-700'
+                  selected ? 'text-blue-700 font-semibold' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                 }`}
               >
                 {option.label}

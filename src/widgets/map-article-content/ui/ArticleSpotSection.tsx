@@ -22,17 +22,17 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
   const address = spot.master_spot?.google_formatted_address;
 
   return (
-    <View className="mb-6 pb-6 border-b border-gray-100">
+    <View className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light">
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-center mb-2">
         <Text className="text-primary-500 font-bold text-base mr-2">{index}.</Text>
-        <Text className="text-lg font-bold text-gray-900 flex-1">{spotName}</Text>
+        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">{spotName}</Text>
         <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
       </Pressable>
 
       {/* 一言メモ（スポット名のすぐ下） */}
       {spot.description && (
-        <Text className="text-sm text-gray-600 mb-3">
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
           {spot.description}
         </Text>
       )}
@@ -66,7 +66,7 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
       {address && (
         <View className="flex-row items-center mb-3">
           <Ionicons name="location-outline" size={14} color={colors.gray[400]} />
-          <Text className="text-sm text-gray-500 ml-1" numberOfLines={1}>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
             {address}
           </Text>
         </View>
@@ -74,12 +74,12 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
 
       {/* 記事内容 */}
       {spot.article_content ? (
-        <Text className="text-base text-gray-700 leading-6">
+        <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
           {spot.article_content}
         </Text>
       ) : (
-        <View className="py-4 px-3 bg-gray-50 rounded-lg">
-          <Text className="text-sm text-gray-400 text-center">
+        <View className="py-4 px-3 bg-background-secondary dark:bg-dark-background-secondary rounded-lg">
+          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
             まだ紹介文がありません
           </Text>
         </View>

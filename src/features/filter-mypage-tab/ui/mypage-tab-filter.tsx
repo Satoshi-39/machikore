@@ -24,7 +24,7 @@ export function MyPageTabFilter({
   const router = useRouter();
 
   return (
-    <View className="bg-white border-b border-gray-200">
+    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
       {/* タブ */}
       <View className="flex-row">
         {/* マップタブ（タブ切り替え） */}

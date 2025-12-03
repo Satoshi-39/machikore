@@ -129,12 +129,12 @@ export function SelectFolderModal({
         onPress={onClose}
       >
         <Pressable
-          className="bg-white rounded-2xl mx-6 w-full max-w-sm overflow-hidden"
+          className="bg-surface dark:bg-dark-surface rounded-2xl mx-6 w-full max-w-sm overflow-hidden"
           onPress={(e) => e.stopPropagation()}
         >
           {/* ヘッダー */}
-          <View className="px-6 py-4 border-b border-gray-100">
-            <Text className="text-center text-lg font-bold text-gray-900">
+          <View className="px-6 py-4 border-b border-border-light dark:border-dark-border-light">
+            <Text className="text-center text-lg font-bold text-foreground dark:text-dark-foreground">
               {folderType === 'spots' ? 'スポット' : 'マップ'}の保存先を選択
             </Text>
           </View>
@@ -146,16 +146,16 @@ export function SelectFolderModal({
               return (
                 <View
                   key={item.id ?? 'default'}
-                  className="flex-row items-center px-4 py-3 border-b border-gray-100"
+                  className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light"
                 >
-                  <View className="w-9 h-9 rounded-lg bg-gray-100 items-center justify-center mr-3">
+                  <View className="w-9 h-9 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
                     <Ionicons
                       name="folder"
                       size={20}
                       color={colors.primary.DEFAULT}
                     />
                   </View>
-                  <Text className="flex-1 text-base text-gray-900">
+                  <Text className="flex-1 text-base text-foreground dark:text-dark-foreground">
                     {item.name}
                   </Text>
                   {isInFolder ? (
@@ -168,7 +168,7 @@ export function SelectFolderModal({
                   ) : (
                     <Pressable
                       onPress={() => handleAddToFolder(item.id)}
-                      className="bg-white border border-blue-500 px-4 py-1.5 rounded-full active:bg-blue-50"
+                      className="bg-surface dark:bg-dark-surface border border-blue-500 px-4 py-1.5 rounded-full active:bg-blue-50"
                     >
                       <Text className="text-sm text-blue-500 font-medium">追加</Text>
                     </Pressable>
@@ -180,13 +180,13 @@ export function SelectFolderModal({
 
           {/* 新規フォルダ作成 */}
           {showCreateInput ? (
-            <View className="px-4 py-3 border-t border-gray-100">
+            <View className="px-4 py-3 border-t border-border-light dark:border-dark-border-light">
               <View className="flex-row items-center">
                 <TextInput
                   value={newFolderName}
                   onChangeText={setNewFolderName}
                   placeholder="フォルダ名"
-                  className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-base mr-2"
+                  className="flex-1 border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base mr-2"
                   autoFocus
                   onSubmitEditing={handleCreateFolder}
                 />
@@ -204,13 +204,13 @@ export function SelectFolderModal({
                 onPress={() => setShowCreateInput(false)}
                 className="mt-2"
               >
-                <Text className="text-center text-gray-500 text-sm">キャンセル</Text>
+                <Text className="text-center text-foreground-secondary dark:text-dark-foreground-secondary text-sm">キャンセル</Text>
               </Pressable>
             </View>
           ) : (
             <Pressable
               onPress={() => setShowCreateInput(true)}
-              className="flex-row items-center px-4 py-3 border-t border-gray-100 active:bg-gray-50"
+              className="flex-row items-center px-4 py-3 border-t border-border-light dark:border-dark-border-light active:bg-background-secondary dark:bg-dark-background-secondary"
             >
               <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
                 <Ionicons name="add" size={20} color={colors.primary.DEFAULT} />
@@ -222,12 +222,12 @@ export function SelectFolderModal({
           )}
 
           {/* アクションボタン */}
-          <View className="px-4 py-3 border-t border-gray-200">
+          <View className="px-4 py-3 border-t border-border dark:border-dark-border">
             <Pressable
               onPress={onClose}
-              className="py-3 bg-gray-100 rounded-lg active:bg-gray-200"
+              className="py-3 bg-muted dark:bg-dark-muted rounded-lg active:bg-gray-200"
             >
-              <Text className="text-center text-sm font-medium text-gray-600">
+              <Text className="text-center text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
                 閉じる
               </Text>
             </Pressable>

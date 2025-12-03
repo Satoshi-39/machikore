@@ -103,7 +103,7 @@ export function EditCollectionPage() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <PageHeader title="コレクションを編集" />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -114,18 +114,18 @@ export function EditCollectionPage() {
 
   if (!collection) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <PageHeader title="コレクションを編集" />
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="alert-circle-outline" size={48} color={colors.gray[400]} />
-          <Text className="text-gray-500 mt-4">コレクションが見つかりません</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">コレクションが見つかりません</Text>
         </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
         title="コレクションを編集"
         rightComponent={
@@ -138,7 +138,7 @@ export function EditCollectionPage() {
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : (
               <Text
-                className={`text-base ${isValid ? 'text-primary-600 font-semibold' : 'text-gray-300'}`}
+                className={`text-base ${isValid ? 'text-blue-500 font-semibold' : 'text-gray-300'}`}
               >
                 保存
               </Text>
@@ -150,7 +150,7 @@ export function EditCollectionPage() {
       <ScrollView className="flex-1" contentContainerClassName="p-4">
         {/* 名前入力 */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-gray-700 mb-2">
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
             コレクション名 <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
@@ -158,13 +158,13 @@ export function EditCollectionPage() {
             onChangeText={setName}
             placeholder="例: 東京カフェコレクション"
             placeholderTextColor={colors.gray[400]}
-            className="bg-white rounded-xl px-4 py-3 text-base text-gray-900 border border-gray-200"
+            className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground border border-border dark:border-dark-border"
           />
         </View>
 
         {/* 説明入力 */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-gray-700 mb-2">
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
             説明（任意）
           </Text>
           <TextInput
@@ -172,7 +172,7 @@ export function EditCollectionPage() {
             onChangeText={setDescription}
             placeholder="コレクションの説明を入力..."
             placeholderTextColor={colors.gray[400]}
-            className="bg-white rounded-xl px-4 py-3 text-base text-gray-900 border border-gray-200"
+            className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground border border-border dark:border-dark-border"
             multiline
             numberOfLines={4}
             textAlignVertical="top"
@@ -182,7 +182,7 @@ export function EditCollectionPage() {
 
         {/* サムネイル */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-gray-700 mb-2">
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
             サムネイル
           </Text>
           <ThumbnailPicker
@@ -192,13 +192,13 @@ export function EditCollectionPage() {
         </View>
 
         {/* 公開設定 */}
-        <View className="bg-white rounded-xl px-4 py-4 border border-gray-200">
+        <View className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-4 border border-border dark:border-dark-border">
           <View className="flex-row items-center justify-between">
             <View className="flex-1 mr-4">
-              <Text className="text-base font-medium text-gray-900 mb-1">
+              <Text className="text-base font-medium text-foreground dark:text-dark-foreground mb-1">
                 公開する
               </Text>
-              <Text className="text-sm text-gray-500">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                 オンにすると、他のユーザーがこのコレクションを閲覧できます
               </Text>
             </View>
@@ -214,16 +214,16 @@ export function EditCollectionPage() {
         {/* マップを管理 */}
         <Pressable
           onPress={() => router.push(`/add-maps-to-collection?id=${id}` as any)}
-          className="bg-white rounded-xl px-4 py-4 border border-gray-200 mt-4 flex-row items-center justify-between"
+          className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-4 border border-border dark:border-dark-border mt-4 flex-row items-center justify-between"
         >
           <View className="flex-row items-center">
             <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
-            <Text className="text-base font-medium text-gray-900 ml-3">
+            <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
               マップを管理
             </Text>
           </View>
           <View className="flex-row items-center">
-            <Text className="text-sm text-gray-500 mr-2">
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mr-2">
               {collection.maps_count}件
             </Text>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />

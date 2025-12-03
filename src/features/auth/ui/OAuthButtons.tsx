@@ -46,7 +46,7 @@ export function OAuthButtons({ onSuccess }: OAuthButtonsProps) {
       {/* Googleボタン */}
       <TouchableOpacity
         onPress={handleGooglePress}
-        className="w-full py-4 px-6 rounded-lg border border-gray-300 bg-white mb-3 flex-row items-center justify-center"
+        className="w-full py-4 px-6 rounded-lg border border-border dark:border-dark-border bg-surface dark:bg-dark-surface mb-3 flex-row items-center justify-center"
         activeOpacity={0.8}
       >
         {loadingProvider === 'google' ? (
@@ -54,7 +54,7 @@ export function OAuthButtons({ onSuccess }: OAuthButtonsProps) {
         ) : (
           <>
             <Ionicons name="logo-google" size={20} color="#4285F4" />
-            <Text className="text-gray-700 text-base font-semibold ml-3">
+            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base font-semibold ml-3">
               Googleで続ける
             </Text>
           </>
@@ -65,7 +65,7 @@ export function OAuthButtons({ onSuccess }: OAuthButtonsProps) {
       {Platform.OS === 'ios' && (
         <TouchableOpacity
           onPress={handleApplePress}
-          className="w-full py-4 px-6 rounded-lg border border-gray-300 bg-white flex-row items-center justify-center"
+          className="w-full py-4 px-6 rounded-lg border border-border dark:border-dark-border bg-surface dark:bg-dark-surface flex-row items-center justify-center"
           activeOpacity={0.8}
         >
           {loadingProvider === 'apple' ? (
@@ -73,7 +73,7 @@ export function OAuthButtons({ onSuccess }: OAuthButtonsProps) {
           ) : (
             <>
               <Ionicons name="logo-apple" size={20} color="#000000" />
-              <Text className="text-gray-700 text-base font-semibold ml-3">
+              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base font-semibold ml-3">
                 Appleで続ける
               </Text>
             </>

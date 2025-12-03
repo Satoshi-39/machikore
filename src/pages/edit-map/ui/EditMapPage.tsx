@@ -14,7 +14,7 @@ export function EditMapPage() {
   const { map, isLoading, isUpdating, handleSubmit } = useEditMapForm();
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader title="マップを編集" />
       <SingleDataBoundary
         isLoading={isLoading}

@@ -103,13 +103,13 @@ export function CreateSpotForm({
   };
 
   return (
-    <ScrollView className="flex-1 bg-gray-50">
+    <ScrollView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       {/* ローディングオーバーレイ */}
       <Modal visible={isLoading} transparent animationType="fade">
         <View className="flex-1 bg-black/50 items-center justify-center">
-          <View className="bg-white rounded-2xl p-6 mx-8 items-center">
+          <View className="bg-surface dark:bg-dark-surface rounded-2xl p-6 mx-8 items-center">
             <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-            <Text className="text-base text-gray-700 mt-4 text-center">
+            <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-4 text-center">
               {getLoadingText()}
             </Text>
             {uploadProgress && uploadProgress.status === 'uploading' && (
@@ -128,14 +128,14 @@ export function CreateSpotForm({
 
       <View className="p-4">
         {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">
+        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
           <View className="flex-row items-center mb-3">
             <Ionicons
               name={isGooglePlace ? 'information-circle' : 'location'}
               size={20}
               color={colors.primary.DEFAULT}
             />
-            <Text className="ml-2 text-sm font-semibold text-gray-700">
+            <Text className="ml-2 text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
               {isGooglePlace
                 ? 'Google Placesから取得した情報'
                 : !isGooglePlace && 'source' in placeData && placeData.source === 'current_location'
@@ -147,23 +147,23 @@ export function CreateSpotForm({
           {/* Google検索の場合: 元の名前を表示 */}
           {isGooglePlace && placeData.name && (
             <View className="mb-3">
-              <Text className="text-xs text-gray-500 mb-1">スポット名（元）</Text>
-              <Text className="text-base text-gray-800 font-medium">{placeData.name}</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">スポット名（元）</Text>
+              <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{placeData.name}</Text>
             </View>
           )}
 
           {/* 住所 */}
           {placeData.address && (
             <View className="mb-3">
-              <Text className="text-xs text-gray-500 mb-1">住所</Text>
-              <Text className="text-sm text-gray-700">{placeData.address}</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">住所</Text>
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{placeData.address}</Text>
             </View>
           )}
 
           {/* 座標 */}
           <View className="flex-row items-center">
             <Ionicons name="location" size={16} color={colors.gray[500]} />
-            <Text className="ml-1 text-xs text-gray-500">
+            <Text className="ml-1 text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
               {placeData.latitude.toFixed(6)}, {placeData.longitude.toFixed(6)}
             </Text>
           </View>
@@ -171,10 +171,10 @@ export function CreateSpotForm({
 
         {/* マップ（表示のみ） */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             追加するマップ
           </Text>
-          <View className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 flex-row items-center">
+          <View className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : selectedMap ? (
@@ -182,41 +182,41 @@ export function CreateSpotForm({
                 <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
                   <Ionicons name="map" size={12} color="#FFFFFF" />
                 </View>
-                <Text className="text-base text-gray-800">{selectedMap.name}</Text>
+                <Text className="text-base text-foreground dark:text-dark-foreground">{selectedMap.name}</Text>
               </View>
             ) : (
-              <Text className="text-base text-gray-400">マップが選択されていません</Text>
+              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">マップが選択されていません</Text>
             )}
           </View>
         </View>
 
         {/* カスタム名（編集可能） */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             スポット名 <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
             value={customName}
             onChangeText={setCustomName}
             placeholder="例：お気に入りのカフェ"
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
           />
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             自分だけのわかりやすい名前をつけられます
           </Text>
         </View>
 
         {/* メモ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">メモ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">メモ</Text>
           <TextInput
             value={description}
             onChangeText={setDescription}
             placeholder="このスポットについてのメモを入力してください"
             multiline
             numberOfLines={4}
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
@@ -224,22 +224,22 @@ export function CreateSpotForm({
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">タグ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
           <TextInput
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-white border border-gray-300 rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             placeholderTextColor="#9CA3AF"
           />
-          <Text className="text-xs text-gray-500 mt-1">
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             カンマ区切りで入力してください
           </Text>
         </View>
 
         {/* 写真 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-gray-800 mb-2">写真</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">写真</Text>
           <ImagePickerButton
             images={images}
             onImagesChange={setImages}

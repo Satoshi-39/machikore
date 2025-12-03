@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+ * NativeWindではdark:プレフィックス方式でダークモードを実装
+ * 色の定義は tailwind.config.js を参照
+ *
+ * ライトモード: bg-background, text-foreground など
+ * ダークモード: dark:bg-dark-background, dark:text-dark-foreground など
+ */

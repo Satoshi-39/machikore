@@ -147,7 +147,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   return (
     <Pressable
       onPress={onPress}
-      className="bg-white border-b border-gray-200 p-4"
+      className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border p-4"
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
@@ -159,7 +159,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
               className="w-10 h-10 rounded-full mr-3"
             />
           ) : (
-            <View className="w-10 h-10 rounded-full bg-gray-200 justify-center items-center mr-3">
+            <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-muted justify-center items-center mr-3">
               <Ionicons name="person" size={20} color={colors.gray[500]} />
             </View>
           )}
@@ -168,7 +168,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         {/* ユーザー名（タップでプロフィールへ） */}
         <View className="flex-1">
           <Pressable onPress={() => onUserPress?.(map.user_id)} className="self-start">
-            <Text className="text-sm font-semibold text-gray-800">
+            <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
               {user?.display_name || user?.username || 'ユーザー'}
             </Text>
           </Pressable>
@@ -190,14 +190,14 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
       {/* マップ名 */}
       <View className="flex-row items-center mb-2">
         <Ionicons name="map" size={18} color={colors.primary.DEFAULT} />
-        <Text className="text-base font-semibold text-gray-900 ml-2">
+        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
           {map.name}
         </Text>
       </View>
 
       {/* 説明 */}
       {map.description && (
-        <Text className="text-sm text-gray-700 mb-2" numberOfLines={2}>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
           {map.description}
         </Text>
       )}
@@ -210,10 +210,11 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
             e.stopPropagation();
             onCommentPress?.(map.id);
           }}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-          <Text className="text-sm text-gray-600 ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {map.comments_count ?? 0}
           </Text>
         </Pressable>
@@ -221,7 +222,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         {/* いいね */}
         <Pressable
           onPress={handleLikePress}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           disabled={isTogglingLike}
         >
           <Ionicons
@@ -229,7 +231,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
             size={18}
             color={isLiked ? '#EF4444' : colors.text.secondary}
           />
-          <Text className="text-sm text-gray-600 ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {map.likes_count ?? 0}
           </Text>
         </Pressable>
@@ -237,7 +239,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         {/* ブックマーク */}
         <Pressable
           onPress={handleBookmarkPress}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons
             name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
@@ -249,7 +252,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         {/* 共有 */}
         <Pressable
           onPress={handleSharePress}
-          className="flex-row items-center"
+          className="flex-row items-center py-2 px-3"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons
             name="share-outline"

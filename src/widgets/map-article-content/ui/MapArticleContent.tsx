@@ -173,7 +173,7 @@ export function MapArticleContent({
           </Pressable>
         ) : (
           <View
-            className="w-full h-56 items-center justify-center bg-gray-100"
+            className="w-full h-56 items-center justify-center bg-muted dark:bg-dark-muted"
             onLayout={(e) => {
               heroImageHeight.current = e.nativeEvent.layout.height;
             }}
@@ -184,7 +184,7 @@ export function MapArticleContent({
 
         <View className="px-4 py-4">
           {/* マップタイトル */}
-          <Text className="text-2xl font-bold text-gray-900 mb-2">
+          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-2">
             {map.name}
           </Text>
 
@@ -203,7 +203,7 @@ export function MapArticleContent({
           <View className="flex-row items-center gap-4 mb-4">
             <View className="flex-row items-center">
               <Ionicons name="location" size={18} color={colors.text.secondary} />
-              <Text className="text-sm text-gray-500 ml-1">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                 {map.spots_count}スポット
               </Text>
             </View>
@@ -218,7 +218,7 @@ export function MapArticleContent({
                 size={18}
                 color={isLiked ? '#EF4444' : colors.text.secondary}
               />
-              <Text className="text-sm text-gray-500 ml-1">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                 {map.likes_count}
               </Text>
             </Pressable>
@@ -227,7 +227,7 @@ export function MapArticleContent({
           {/* マップ説明（導入文） */}
           {map.description && (
             <View className="mb-6 py-4">
-              <Text className="text-base text-gray-700 leading-6">
+              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
                 {map.description}
               </Text>
             </View>
@@ -265,7 +265,7 @@ export function MapArticleContent({
           ) : (
             <View className="py-8 items-center">
               <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
-              <Text className="text-gray-400 mt-4">まだスポットがありません</Text>
+              <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">まだスポットがありません</Text>
             </View>
           )}
 

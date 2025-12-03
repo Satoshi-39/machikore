@@ -34,7 +34,7 @@ function MapItem({
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-4 bg-white border-b border-gray-100"
+      className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
     >
       <View className="flex-row items-start">
         {/* サムネイル */}
@@ -45,31 +45,31 @@ function MapItem({
             resizeMode="cover"
           />
         ) : (
-          <View className="w-16 h-16 rounded-lg bg-gray-100 items-center justify-center mr-3">
+          <View className="w-16 h-16 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
             <Ionicons name="map" size={24} color={colors.primary.DEFAULT} />
           </View>
         )}
 
         {/* マップ情報 */}
         <View className="flex-1">
-          <Text className="text-base font-semibold text-gray-900 mb-1">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
             {map.name}
           </Text>
           {map.description && (
-            <Text className="text-sm text-gray-600 mb-2" numberOfLines={2}>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
               {map.description}
             </Text>
           )}
           <View className="flex-row items-center gap-3">
             <View className="flex-row items-center gap-1">
               <Ionicons name="location" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-gray-500">
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                 {map.spots_count}スポット
               </Text>
             </View>
             <View className="flex-row items-center gap-1">
               <Ionicons name="heart" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-gray-500">
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                 {map.likes_count}
               </Text>
             </View>
@@ -129,7 +129,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   const renderHeader = useCallback(() => {
     if (!collection) return null;
     return (
-      <View className="bg-white border-b border-gray-100">
+      <View className="bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light">
         {/* コレクション情報 */}
         <View className="px-4 py-4">
           <View className="flex-row items-start">
@@ -155,25 +155,25 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
             {/* テキスト情報 */}
             <View className="flex-1">
-              <Text className="text-xl font-bold text-gray-900 mb-1">
+              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-1">
                 {collection.name}
               </Text>
               {collection.description && (
-                <Text className="text-sm text-gray-600 mb-2" numberOfLines={3}>
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={3}>
                   {collection.description}
                 </Text>
               )}
               <View className="flex-row items-center gap-3">
                 <View className="flex-row items-center gap-1">
                   <Ionicons name="map" size={14} color={colors.text.secondary} />
-                  <Text className="text-xs text-gray-500">
+                  <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                     {collection.maps_count}マップ
                   </Text>
                 </View>
                 {!collection.is_public && (
                   <View className="flex-row items-center gap-1">
                     <Ionicons name="lock-closed" size={14} color={colors.text.secondary} />
-                    <Text className="text-xs text-gray-500">非公開</Text>
+                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">非公開</Text>
                   </View>
                 )}
               </View>
@@ -184,7 +184,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
           {collection.user && (
             <Pressable
               onPress={() => handleUserPress(collection.user_id)}
-              className="flex-row items-center mt-4 pt-4 border-t border-gray-100"
+              className="flex-row items-center mt-4"
             >
               {collection.user.avatar_url ? (
                 <Image
@@ -196,7 +196,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
                   <Ionicons name="person" size={16} color={colors.gray[400]} />
                 </View>
               )}
-              <Text className="text-sm text-gray-700">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                 {collection.user.display_name || collection.user.username || '名無しさん'}
               </Text>
             </Pressable>
@@ -204,8 +204,8 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         </View>
 
         {/* セクションヘッダー */}
-        <View className="px-4 py-2 bg-gray-50 border-t border-gray-100">
-          <Text className="text-sm font-semibold text-gray-600">
+        <View className="px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-t border-border-light dark:border-dark-border-light">
+          <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
             マップ一覧
           </Text>
         </View>
@@ -215,7 +215,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <PageHeader title="コレクション" />
         <Loading message="読み込み中..." />
       </View>
@@ -224,7 +224,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
   if (error) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
         <PageHeader title="コレクション" />
         <ErrorView error={error} />
       </View>
@@ -236,13 +236,13 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   }, [router, collectionId]);
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
         title="コレクション"
         rightComponent={
           isOwner ? (
             <Pressable onPress={handleAddMaps} className="py-2">
-              <Text className="text-base font-semibold text-primary-600">編集</Text>
+              <Text className="text-base font-semibold text-blue-500">編集</Text>
             </Pressable>
           ) : undefined
         }
@@ -258,11 +258,11 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             onPress={() => item.map && handleMapPress(item.map.id)}
           />
         )}
-        contentContainerClassName="bg-white flex-grow"
+        contentContainerClassName="bg-surface dark:bg-dark-surface flex-grow"
         ListEmptyComponent={
           <View className="py-12 items-center">
             <Ionicons name="map-outline" size={48} color={colors.gray[300]} />
-            <Text className="text-gray-400 mt-4">まだマップがありません</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">まだマップがありません</Text>
           </View>
         }
       />

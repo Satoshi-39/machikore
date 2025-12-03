@@ -157,16 +157,16 @@ export function BookmarkFolderList({
       return (
         <Pressable
           onPress={() => handleFolderPress(item.id)}
-          className="bg-white px-4 py-4 border-b border-gray-100 flex-row items-center"
+          className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light flex-row items-center"
         >
-          <View className="w-10 h-10 rounded-lg bg-gray-100 items-center justify-center mr-3">
+          <View className="w-10 h-10 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
             <Ionicons name="folder" size={24} color={colors.primary.DEFAULT} />
           </View>
           <View className="flex-1">
-            <Text className="text-base font-medium text-gray-900">
+            <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
               {item.name}
             </Text>
-            <Text className="text-sm text-gray-500">{count}件</Text>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{count}件</Text>
           </View>
 
           {/* 3点リーダーメニュー（後で見る以外） */}
@@ -199,7 +199,7 @@ export function BookmarkFolderList({
                       size={18}
                       color={colors.text.primary}
                     />
-                    <Text className="ml-2 text-gray-900">編集</Text>
+                    <Text className="ml-2 text-foreground dark:text-dark-foreground">編集</Text>
                   </View>
                 </MenuOption>
                 <MenuOption
@@ -234,7 +234,7 @@ export function BookmarkFolderList({
         ListFooterComponent={
           <Pressable
             onPress={onCreateFolder}
-            className="bg-white px-4 py-4 border-b border-gray-100 flex-row items-center"
+            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light flex-row items-center"
           >
             <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
               <Ionicons name="add" size={24} color={colors.primary.DEFAULT} />
@@ -254,15 +254,15 @@ export function BookmarkFolderList({
         onRequestClose={() => setEditingFolder(null)}
       >
         <View className="flex-1 bg-black/50 justify-center items-center px-6">
-          <View className="bg-white rounded-2xl w-full max-w-sm p-6">
-            <Text className="text-lg font-semibold text-gray-900 mb-4">
+          <View className="bg-surface dark:bg-dark-surface rounded-2xl w-full max-w-sm p-6">
+            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground mb-4">
               フォルダ名を編集
             </Text>
             <TextInput
               value={editingName}
               onChangeText={setEditingName}
               placeholder="フォルダ名"
-              className="bg-gray-100 rounded-lg px-4 py-3 text-base mb-4"
+              className="bg-muted dark:bg-dark-muted rounded-lg px-4 py-3 text-base mb-4"
               autoFocus
             />
             <View className="flex-row justify-end">
@@ -270,7 +270,7 @@ export function BookmarkFolderList({
                 onPress={() => setEditingFolder(null)}
                 className="px-4 py-2 mr-2"
               >
-                <Text className="text-gray-500 font-medium">キャンセル</Text>
+                <Text className="text-foreground-secondary dark:text-dark-foreground-secondary font-medium">キャンセル</Text>
               </Pressable>
               <Pressable
                 onPress={handleSaveEdit}

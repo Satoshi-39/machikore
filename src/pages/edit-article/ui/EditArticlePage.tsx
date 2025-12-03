@@ -141,7 +141,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   // ローディング状態
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-white">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
         <PageHeader title="記事を編集" onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -153,11 +153,11 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   // データなし or 権限なし
   if (!articleData || !isOwner) {
     return (
-      <SafeAreaView className="flex-1 bg-white">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
         <PageHeader title="記事を編集" onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="lock-closed-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-gray-400 mt-4">
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
             {!articleData ? '記事が見つかりません' : '編集権限がありません'}
           </Text>
         </View>
@@ -166,22 +166,22 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['bottom']}>
+    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
       <PageHeader title="記事を編集" onBack={handleBack} />
 
       <ScrollView className="flex-1">
         {/* マップ情報 */}
-        <View className="px-4 py-4 border-b border-gray-200">
-          <Text className="text-lg font-bold text-gray-900">
+        <View className="px-4 py-4 border-b border-border dark:border-dark-border">
+          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
             {articleData.map.name}
           </Text>
-          <Text className="text-sm text-gray-500 mt-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             {articleData.spots.length}スポット
           </Text>
         </View>
 
         {/* 記事公開設定 */}
-        <View className="px-4 py-4 border-b border-gray-200">
+        <View className="px-4 py-4 border-b border-border dark:border-dark-border">
           <View className="flex-row items-center justify-between">
             <View className="flex-1 mr-4">
               <View className="flex-row items-center">
@@ -190,11 +190,11 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                   size={20}
                   color={isArticlePublic ? colors.primary.DEFAULT : colors.gray[500]}
                 />
-                <Text className="text-base font-semibold text-gray-800 ml-2">
+                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
                   記事を公開
                 </Text>
               </View>
-              <Text className="text-sm text-gray-500 mt-1">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
                 {isArticlePublic
                   ? 'この記事は他のユーザーに公開されています'
                   : 'この記事は非公開です（マップの公開とは別）'}
@@ -220,7 +220,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           const firstImage = spot.images?.[0]?.cloud_path;
 
           return (
-            <View key={spot.id} className="border-b border-gray-200">
+            <View key={spot.id} className="border-b border-border dark:border-dark-border">
               {/* スポットヘッダー（タップで展開） */}
               <Pressable
                 onPress={() => handleToggleExpand(spot.id)}
@@ -246,10 +246,10 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
 
                 {/* スポット名 */}
                 <View className="flex-1">
-                  <Text className="text-base font-semibold text-gray-800">
+                  <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                     {spotName}
                   </Text>
-                  <Text className="text-xs text-gray-500 mt-0.5">
+                  <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5">
                     {currentContent ? `${currentContent.length}文字` : '紹介文なし'}
                   </Text>
                 </View>
@@ -276,7 +276,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     placeholder="このスポットの紹介文を入力..."
                     placeholderTextColor={colors.gray[400]}
                     multiline
-                    className="bg-gray-50 rounded-xl px-4 py-3 text-base text-gray-800 min-h-[150px]"
+                    className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground min-h-[150px]"
                     textAlignVertical="top"
                   />
 
@@ -316,8 +316,8 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
         {articleData.spots.length === 0 && (
           <View className="py-12 items-center">
             <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
-            <Text className="text-gray-400 mt-4">スポットがありません</Text>
-            <Text className="text-sm text-gray-400 mt-1">
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">スポットがありません</Text>
+            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mt-1">
               マップにスポットを追加してください
             </Text>
           </View>

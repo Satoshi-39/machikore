@@ -40,7 +40,7 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
   return (
     <Pressable
       onPress={() => onPress(item)}
-      className="px-5 py-4 border-b border-gray-100 bg-white active:bg-gray-50"
+      className="px-5 py-4 border-b border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface active:bg-background-secondary dark:bg-dark-background-secondary"
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-row items-center flex-1">
@@ -50,10 +50,10 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
             color="#6B7280"
             style={{ marginRight: 12 }}
           />
-          <Text className="text-base text-gray-900 font-medium">{item.name}</Text>
+          <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{item.name}</Text>
         </View>
         {item.count !== undefined && (
-          <Text className="text-sm text-gray-500 ml-2">{item.count}件</Text>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">{item.count}件</Text>
         )}
       </View>
     </Pressable>

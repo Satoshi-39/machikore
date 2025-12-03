@@ -29,7 +29,7 @@ export function MyPage() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
       {/* ヘッダーバー */}
       <MyPageHeader
         onSettingsPress={handleSettingsPress}

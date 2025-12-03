@@ -44,10 +44,10 @@ export function EditCommentModal({
         onPress={onCancel}
       >
         <Pressable
-          className="bg-white rounded-2xl p-4"
+          className="bg-surface dark:bg-dark-surface rounded-2xl p-4"
           onPress={(e) => e.stopPropagation()}
         >
-          <Text className="text-lg font-bold text-gray-800 mb-4">コメントを編集</Text>
+          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-4">コメントを編集</Text>
           <TextInput
             value={editText}
             onChangeText={onChangeText}
@@ -55,7 +55,7 @@ export function EditCommentModal({
             placeholderTextColor={colors.gray[400]}
             multiline
             maxLength={500}
-            className="bg-gray-100 rounded-xl px-4 py-3 text-base min-h-[100px]"
+            className="bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 text-base min-h-[100px]"
             style={{ textAlignVertical: 'top' }}
             autoFocus
           />
@@ -64,7 +64,7 @@ export function EditCommentModal({
               onPress={onCancel}
               className="px-4 py-2 rounded-lg"
             >
-              <Text className="text-gray-600 font-semibold">キャンセル</Text>
+              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary font-semibold">キャンセル</Text>
             </Pressable>
             <Pressable
               onPress={onSubmit}
