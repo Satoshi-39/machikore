@@ -75,7 +75,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface dark:bg-dark-surface">
         <PageHeader title={isFollowers ? 'フォロワー' : 'フォロー中'} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -85,7 +85,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
   }
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader title={isFollowers ? 'フォロワー' : 'フォロー中'} />
 
       {data && data.length > 0 ? (
@@ -94,6 +94,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
           contentContainerStyle={{ paddingBottom: 20 }}
+          className="bg-surface dark:bg-dark-surface"
         />
       ) : (
         <EmptyState

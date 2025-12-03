@@ -137,7 +137,7 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
           onEdit={handleMapEdit}
           onArticlePress={handleArticlePress}
         />
-        <View className="px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-b border-border dark:border-dark-border">
+        <View className="px-4 py-2 bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
           <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">コメント</Text>
         </View>
       </View>

@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, CommentInputModal } from '@/shared/ui';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
@@ -34,6 +35,7 @@ interface SpotDetailCardProps {
 export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onEdit, onUserPress }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
+  const isDarkMode = useIsDarkMode();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
   const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
@@ -273,8 +275,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={true}
-      backgroundStyle={{ backgroundColor: 'white' }}
-      handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
+      backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
       <BottomSheetScrollView className="px-4"  contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}

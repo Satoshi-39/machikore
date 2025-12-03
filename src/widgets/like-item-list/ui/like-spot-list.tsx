@@ -202,6 +202,7 @@ export function LikeSpotList({
       keyExtractor={(item) => `${item.type}-${item.likeId}`}
       renderItem={renderItem}
       contentContainerStyle={{ flexGrow: 1 }}
+      className="bg-surface dark:bg-dark-surface"
     />
   );
 }

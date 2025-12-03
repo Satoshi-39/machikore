@@ -89,7 +89,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
       </View>
 
       {/* 曜日ヘッダー */}
-      <View className="flex-row px-2 py-2 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-row px-2 py-2 bg-surface dark:bg-dark-surface">
         {WEEKDAYS.map((weekday, index) => (
           <View key={weekday} className="flex-1 items-center">
             <Text

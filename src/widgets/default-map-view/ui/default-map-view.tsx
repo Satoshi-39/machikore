@@ -17,6 +17,7 @@ import { AsyncBoundary, LocationButton } from '@/shared/ui';
 import { MapSearchBar, useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
 import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
@@ -46,6 +47,7 @@ interface DefaultMapViewProps {
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
   ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false }, ref) => {
     const insets = useSafeAreaInsets();
+    const isDarkMode = useIsDarkMode();
     const { data: machiData, isLoading, error } = useMachi();
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
@@ -285,7 +287,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         <View style={{ flex: 1 }}>
           <Mapbox.MapView
             style={{ flex: 1 }}
-            styleURL={ENV.MAPBOX_STYLE_URL}
+            styleURL={isDarkMode ? ENV.MAPBOX_STYLE_URL_DARK : ENV.MAPBOX_STYLE_URL}
             onCameraChanged={handleCameraChanged}
             scaleBarEnabled={false}
           >

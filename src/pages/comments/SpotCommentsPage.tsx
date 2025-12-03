@@ -139,7 +139,7 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
           embeddedUser={spot.user}
           embeddedMasterSpot={spot.master_spot}
         />
-        <View className="px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-b border-border dark:border-dark-border">
+        <View className="px-4 py-2 bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
           <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">コメント</Text>
         </View>
       </View>

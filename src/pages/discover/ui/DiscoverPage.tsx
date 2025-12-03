@@ -26,7 +26,7 @@ export function DiscoverPage() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
       {/* 検索バー（常に表示） */}
       <DiscoverSearch
         onFocus={handleSearchFocus}

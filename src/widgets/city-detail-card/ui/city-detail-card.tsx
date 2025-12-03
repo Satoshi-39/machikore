@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import type { CityRow } from '@/shared/types/database.types';
 
 interface CityDetailCardProps {
@@ -20,6 +21,7 @@ interface CityDetailCardProps {
 export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
+  const isDarkMode = useIsDarkMode();
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
@@ -67,8 +69,8 @@ export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardPr
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={true}
-      backgroundStyle={{ backgroundColor: 'white' }}
-      handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
+      backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}

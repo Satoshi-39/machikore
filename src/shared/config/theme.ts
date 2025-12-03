@@ -52,7 +52,7 @@ export const colors = {
     inverse: '#FFFFFF',
   },
 
-  // Background Colors
+  // Background Colors (deprecated - use semantic colors below)
   background: {
     primary: '#FFFFFF',
     secondary: '#F9FAFB', // Gray-50
@@ -64,6 +64,42 @@ export const colors = {
     light: '#E5E7EB', // Gray-200
     DEFAULT: '#D1D5DB', // Gray-300
     dark: '#9CA3AF', // Gray-400
+  },
+
+  /**
+   * セマンティックカラー - Light Theme
+   * 注意: tailwind.config.js にも同じ値が定義されています
+   * 変更時は両方を更新してください
+   */
+  light: {
+    background: '#F0F9FF', // blue-50 (とても薄い青)
+    backgroundSecondary: '#E0F2FE', // blue-100
+    surface: '#F0F9FF', // blue-50 (とても薄い青)
+    surfaceSecondary: '#E0F2FE', // blue-100
+    border: '#E5E7EB', // gray-200
+    borderLight: '#F3F4F6', // gray-100
+    foreground: '#111827', // gray-900
+    foregroundSecondary: '#6B7280', // gray-500
+    foregroundMuted: '#9CA3AF', // gray-400
+    muted: '#F3F4F6', // gray-100
+  },
+
+  /**
+   * セマンティックカラー - Dark Theme
+   * 注意: tailwind.config.js にも同じ値が定義されています
+   * 変更時は両方を更新してください
+   */
+  dark: {
+    background: '#111827', // gray-900
+    backgroundSecondary: '#1F2937', // gray-800
+    surface: '#1F2937', // gray-800
+    surfaceSecondary: '#374151', // gray-700
+    border: '#4B5563', // gray-600
+    borderLight: '#374151', // gray-700
+    foreground: '#F9FAFB', // gray-50
+    foregroundSecondary: '#9CA3AF', // gray-400
+    foregroundMuted: '#6B7280', // gray-500
+    muted: '#374151', // gray-700
   },
 
   // Special Colors

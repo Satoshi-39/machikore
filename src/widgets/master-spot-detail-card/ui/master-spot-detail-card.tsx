@@ -11,6 +11,7 @@ import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
@@ -32,6 +33,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
   const router = useRouter();
   const segments = useSegments();
   const currentUserId = useCurrentUserId();
+  const isDarkMode = useIsDarkMode();
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const [showMapSelectSheet, setShowMapSelectSheet] = useState(false);
@@ -177,8 +179,8 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={true}
-      backgroundStyle={{ backgroundColor: 'white' }}
-      handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
+      backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
       <BottomSheetScrollView className="px-4"  contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}
@@ -282,7 +284,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
               {userSpots.map((userSpot) => (
                 <Pressable
                   key={userSpot.id}
-                  className="bg-background-secondary dark:bg-dark-background-secondary rounded-lg p-3 active:bg-muted dark:bg-dark-muted"
+                  className="bg-surface dark:bg-dark-surface rounded-lg p-3 border border-border dark:border-dark-border active:bg-muted dark:active:bg-dark-muted"
                   onPress={() => {
                     // スポット詳細ページに遷移（タブ内ルートを使用）
                     onClose();

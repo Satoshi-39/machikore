@@ -14,7 +14,7 @@ export function SchedulePage() {
   const currentUserId = useCurrentUserId();
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader title="スケジュール" />
       <UserSchedule userId={currentUserId} />
     </View>

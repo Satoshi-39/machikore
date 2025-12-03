@@ -1,3 +1,36 @@
+/**
+ * セマンティックカラー定義
+ * theme.tsと同期を保つ必要があります
+ */
+const semanticColors = {
+  // Light Theme
+  light: {
+    background: '#F0F9FF', // blue-50 (とても薄い青)
+    backgroundSecondary: '#E0F2FE', // blue-100
+    surface: '#F0F9FF', // blue-50 (とても薄い青)
+    surfaceSecondary: '#E0F2FE', // blue-100
+    border: '#E5E7EB', // gray-200
+    borderLight: '#F3F4F6', // gray-100
+    foreground: '#111827', // gray-900
+    foregroundSecondary: '#6B7280', // gray-500
+    foregroundMuted: '#9CA3AF', // gray-400
+    muted: '#F3F4F6', // gray-100
+  },
+  // Dark Theme
+  dark: {
+    background: '#111827', // gray-900
+    backgroundSecondary: '#1F2937', // gray-800
+    surface: '#1F2937', // gray-800
+    surfaceSecondary: '#374151', // gray-700
+    border: '#4B5563', // gray-600
+    borderLight: '#374151', // gray-700
+    foreground: '#F9FAFB', // gray-50
+    foregroundSecondary: '#9CA3AF', // gray-400
+    foregroundMuted: '#6B7280', // gray-500
+    muted: '#374151', // gray-700
+  },
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -24,46 +57,46 @@ module.exports = {
         // セマンティックカラー（NativeWindではdark:プレフィックス方式で使用）
         // Light theme values
         background: {
-          DEFAULT: '#FFFFFF',
-          secondary: '#F9FAFB', // gray-50
+          DEFAULT: semanticColors.light.background,
+          secondary: semanticColors.light.backgroundSecondary,
         },
         surface: {
-          DEFAULT: '#FFFFFF',
-          secondary: '#F9FAFB', // gray-50
+          DEFAULT: semanticColors.light.surface,
+          secondary: semanticColors.light.surfaceSecondary,
         },
         border: {
-          DEFAULT: '#E5E7EB', // gray-200
-          light: '#F3F4F6',   // gray-100
+          DEFAULT: semanticColors.light.border,
+          light: semanticColors.light.borderLight,
         },
         foreground: {
-          DEFAULT: '#111827', // gray-900
-          secondary: '#6B7280', // gray-500
-          muted: '#9CA3AF',   // gray-400
+          DEFAULT: semanticColors.light.foreground,
+          secondary: semanticColors.light.foregroundSecondary,
+          muted: semanticColors.light.foregroundMuted,
         },
         muted: {
-          DEFAULT: '#F3F4F6', // gray-100
+          DEFAULT: semanticColors.light.muted,
         },
 
         // Dark theme values (dark-* prefix)
         'dark-background': {
-          DEFAULT: '#111827', // gray-900
-          secondary: '#1F2937', // gray-800
+          DEFAULT: semanticColors.dark.background,
+          secondary: semanticColors.dark.backgroundSecondary,
         },
         'dark-surface': {
-          DEFAULT: '#1F2937', // gray-800
-          secondary: '#374151', // gray-700
+          DEFAULT: semanticColors.dark.surface,
+          secondary: semanticColors.dark.surfaceSecondary,
         },
         'dark-border': {
-          DEFAULT: '#4B5563', // gray-600 (より明るく見やすい仕切り)
-          light: '#374151',   // gray-700
+          DEFAULT: semanticColors.dark.border,
+          light: semanticColors.dark.borderLight,
         },
         'dark-foreground': {
-          DEFAULT: '#F9FAFB', // gray-50
-          secondary: '#9CA3AF', // gray-400
-          muted: '#6B7280',   // gray-500
+          DEFAULT: semanticColors.dark.foreground,
+          secondary: semanticColors.dark.foregroundSecondary,
+          muted: semanticColors.dark.foregroundMuted,
         },
         'dark-muted': {
-          DEFAULT: '#374151', // gray-700
+          DEFAULT: semanticColors.dark.muted,
         },
       },
     },

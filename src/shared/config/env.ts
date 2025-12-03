@@ -63,6 +63,7 @@ export const ENV = {
   // Mapbox
   MAPBOX_ACCESS_TOKEN: getEnvVar('EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN', ''),
   MAPBOX_STYLE_URL: getEnvVar('EXPO_PUBLIC_MAPBOX_STYLE_URL', 'mapbox://styles/mapbox/streets-v12'),
+  MAPBOX_STYLE_URL_DARK: 'mapbox://styles/tyatsushi/cmiq3bvq800os01r98ki7bk0f',
 
   // Google OAuth
   GOOGLE_OAUTH_IOS_CLIENT_ID: getEnvVar('EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID', ''),

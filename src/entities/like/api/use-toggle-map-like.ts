@@ -8,7 +8,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { checkMapLiked, toggleMapLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import type { UUID } from '@/shared/types';
+import type { UUID, MapArticleData } from '@/shared/types';
 
 interface ToggleMapLikeParams {
   userId: UUID;
@@ -58,6 +58,21 @@ function updateMapLikesCountInCache(
       return {
         ...oldData,
         likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
+      };
+    }
+  );
+
+  // 記事ページ用キャッシュ ['map-article', mapId, ...] を更新
+  queryClient.setQueriesData<MapArticleData>(
+    { queryKey: ['map-article', mapId] },
+    (oldData) => {
+      if (!oldData) return oldData;
+      return {
+        ...oldData,
+        map: {
+          ...oldData.map,
+          likes_count: Math.max(0, (oldData.map.likes_count || 0) + delta),
+        },
       };
     }
   );

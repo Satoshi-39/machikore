@@ -27,7 +27,7 @@ export function UserSchedule({ userId }: UserScheduleProps) {
   console.log('UserSchedule for userId:', userId);
 
   return (
-    <ScrollView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <ScrollView className="flex-1 bg-surface dark:bg-dark-surface">
       {/* カレンダー */}
       <Calendar
         selectedDate={selectedDate}

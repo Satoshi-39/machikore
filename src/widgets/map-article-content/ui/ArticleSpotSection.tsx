@@ -25,7 +25,7 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
     <View className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light">
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-center mb-2">
-        <Text className="text-primary-500 font-bold text-base mr-2">{index}.</Text>
+        <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">{index}.</Text>
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">{spotName}</Text>
         <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
       </Pressable>
@@ -78,7 +78,7 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
           {spot.article_content}
         </Text>
       ) : (
-        <View className="py-4 px-3 bg-background-secondary dark:bg-dark-background-secondary rounded-lg">
+        <View className="py-4 px-3 bg-surface dark:bg-dark-surface rounded-lg border border-border dark:border-dark-border">
           <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
             まだ紹介文がありません
           </Text>

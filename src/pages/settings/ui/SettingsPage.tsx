@@ -154,7 +154,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   };
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader title="設定" />
       <ScrollView className="flex-1">
         {/* アカウント */}

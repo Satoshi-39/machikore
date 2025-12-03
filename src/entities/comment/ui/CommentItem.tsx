@@ -59,7 +59,7 @@ export function CommentItem({
   ], [comment, onEdit, onDelete]);
 
   return (
-    <View className={`flex-row p-4 border-b border-border-light dark:border-dark-border-light ${isReply ? 'pl-12 bg-background-secondary dark:bg-dark-background-secondary' : ''}`}>
+    <View className={`flex-row p-4 border-b border-border-light dark:border-dark-border-light ${isReply ? 'pl-12 bg-surface-secondary dark:bg-dark-surface-secondary' : ''}`}>
       {/* アバター */}
       <Pressable onPress={() => onUserPress(comment.user_id)}>
         {comment.user?.avatar_url ? (

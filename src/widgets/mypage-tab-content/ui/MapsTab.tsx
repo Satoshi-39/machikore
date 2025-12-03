@@ -195,7 +195,8 @@ export function MapsTab({ userId }: MapsTabProps) {
               onArticlePress={handleArticlePress}
             />
           )}
-          contentContainerClassName="bg-surface dark:bg-dark-surface"
+          className="bg-surface dark:bg-dark-surface"
+          contentContainerClassName="flex-grow"
         />
       )}
     </AsyncBoundary>

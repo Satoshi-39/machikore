@@ -33,7 +33,7 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
 
   if (!userId) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface dark:bg-dark-surface">
         <View className="flex-1 items-center justify-center">
           <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">ログインしてください</Text>
         </View>
@@ -42,7 +42,7 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
   }
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* ヘッダー */}
       <View
         className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3"

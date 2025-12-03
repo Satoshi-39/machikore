@@ -8,6 +8,8 @@ import { useSpots } from '@/entities/user-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { ENV } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
@@ -53,6 +55,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
   ) => {
     const mapViewRef = useRef<Mapbox.MapView>(null);
     const cameraRef = useRef<Mapbox.Camera>(null);
+    const isDarkMode = useIsDarkMode();
     // currentUserId を渡していいね状態も含めて取得
     const { data: spots = [] } = useSpots(mapId ?? '', currentUserId);
     // selectedSpotId を管理し、selectedSpot は spots から導出
@@ -177,7 +180,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         <Mapbox.MapView
           ref={mapViewRef}
           style={{ flex: 1 }}
-          styleURL={Mapbox.StyleURL.Street}
+          styleURL={isDarkMode ? ENV.MAPBOX_STYLE_URL_DARK : ENV.MAPBOX_STYLE_URL}
           localizeLabels={true}
           onCameraChanged={handleCameraChanged}
           onDidFinishLoadingMap={handleMapReady}
@@ -211,7 +214,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                   handleSpotSelect(spot);
                 }}
               >
-                <Ionicons name="location" size={40} color="#EF4444" />
+                <Ionicons name="location" size={40} color="#3B82F6" />
               </Mapbox.PointAnnotation>
             );
           })}

@@ -10,6 +10,7 @@ import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MachiRow } from '@/shared/types/database.types';
 
 interface MachiDetailCardProps {
@@ -43,6 +44,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
+  const isDarkMode = useIsDarkMode();
 
   // 訪問状態
   const { data: isVisited, isLoading: isCheckingVisit } = useCheckMachiVisited(currentUserId, machi.id);
@@ -97,8 +99,8 @@ export function MachiDetailCard({ machi, onClose, onSnapChange }: MachiDetailCar
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={true}
-      backgroundStyle={{ backgroundColor: 'white' }}
-      handleIndicatorStyle={{ backgroundColor: colors.text.secondary }}
+      backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}

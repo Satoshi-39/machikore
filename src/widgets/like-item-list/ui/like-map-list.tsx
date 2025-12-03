@@ -113,6 +113,7 @@ export function LikeMapList({ data, isLoading, onMapPress, onUserPress, onDelete
       keyExtractor={(item) => item.likeId}
       renderItem={renderItem}
       contentContainerStyle={{ flexGrow: 1 }}
+      className="bg-surface dark:bg-dark-surface"
     />
   );
 }

@@ -17,7 +17,7 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
   if (spots.length === 0) return null;
 
   return (
-    <View className="mb-6 py-4 px-4 bg-background-secondary dark:bg-dark-background-secondary rounded-lg">
+    <View className="mb-6 py-4 px-4 bg-surface dark:bg-dark-surface rounded-lg border border-border dark:border-dark-border">
       <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
         目次
       </Text>
@@ -29,7 +29,7 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
             onPress={() => onSpotPress(spot.id)}
             className="flex-row items-center py-2"
           >
-            <Text className="text-sm text-primary-500 font-medium mr-2">
+            <Text className="text-sm text-foreground dark:text-dark-foreground font-medium mr-2">
               {index + 1}.
             </Text>
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1" numberOfLines={1}>

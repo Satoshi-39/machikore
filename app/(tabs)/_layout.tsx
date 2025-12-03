@@ -1,6 +1,7 @@
 import { useUserStore } from '@/entities/user';
 import { useTotalUnreadCount } from '@/entities/notification';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { colors } from '@/shared/config';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
@@ -20,8 +21,8 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#007AFF',
         tabBarInactiveTintColor: isDarkMode ? '#9CA3AF' : '#6B7280',
         tabBarStyle: {
-          backgroundColor: isDarkMode ? '#1F2937' : '#FFFFFF', // dark: surface (#1F2937)
-          borderTopColor: isDarkMode ? '#374151' : '#E5E7EB',  // dark: border (#374151)
+          backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+          borderTopColor: isDarkMode ? colors.dark.borderLight : colors.light.border,
         },
       }}
     >

@@ -201,7 +201,8 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
           onDelete={handleDelete}
         />
       )}
-      contentContainerClassName="bg-surface dark:bg-dark-surface flex-grow"
+      className="bg-surface dark:bg-dark-surface"
+      contentContainerClassName="flex-grow"
       ListEmptyComponent={renderEmptyState}
     />
   );
