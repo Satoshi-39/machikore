@@ -1,9 +1,10 @@
 /**
  * いいねしたスポット一覧Widget
+ * ユーザースポットといいね（ユーザーアイコン）とマスタースポットいいね（青スポットアイコン）を統合表示
  */
 
-import React, { useCallback } from 'react';
-import { View, Text, Pressable, FlatList } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { View, Text, Pressable, FlatList, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, EmptyState } from '@/shared/ui';
@@ -15,50 +16,150 @@ export interface LikedSpotItem {
   spot: SpotWithDetails;
 }
 
-interface LikeSpotListProps {
-  data: LikedSpotItem[];
-  isLoading: boolean;
-  onSpotPress: (spot: SpotWithDetails) => void;
+export interface LikedMasterSpotItem {
+  likeId: string;
+  likedAt: string;
+  masterSpot: {
+    id: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+    google_place_id: string | null;
+    google_formatted_address: string | null;
+    google_types: string[] | null;
+    google_rating: number | null;
+    google_user_rating_count: number | null;
+    likes_count: number;
+  };
 }
 
-export function LikeSpotList({ data, isLoading, onSpotPress }: LikeSpotListProps) {
-  const renderItem = useCallback(
-    ({ item }: { item: LikedSpotItem }) => {
-      const spotName = item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット';
-      const address = item.spot.master_spot?.google_formatted_address;
+// 統合型：ユーザースポットまたはマスタースポット
+type UnifiedLikeItem =
+  | { type: 'userSpot'; likeId: string; likedAt: string; spot: SpotWithDetails }
+  | { type: 'masterSpot'; likeId: string; likedAt: string; masterSpot: LikedMasterSpotItem['masterSpot'] };
 
-      return (
-        <Pressable
-          onPress={() => onSpotPress(item.spot)}
-          className="bg-white px-4 py-4 border-b border-gray-100"
-        >
-          <View className="flex-row items-center">
-            <View className="w-10 h-10 rounded-full bg-orange-100 items-center justify-center mr-3">
-              <Ionicons name="location" size={20} color="#F97316" />
-            </View>
-            <View className="flex-1">
-              <Text className="text-base font-semibold text-gray-900">
-                {spotName}
-              </Text>
-              {address && (
-                <Text className="text-sm text-gray-500" numberOfLines={1}>
-                  {address}
-                </Text>
+interface LikeSpotListProps {
+  data: LikedSpotItem[];
+  masterSpotData?: LikedMasterSpotItem[];
+  isLoading: boolean;
+  onSpotPress: (spot: SpotWithDetails) => void;
+  onMasterSpotPress?: (masterSpotId: string) => void;
+}
+
+export function LikeSpotList({
+  data,
+  masterSpotData = [],
+  isLoading,
+  onSpotPress,
+  onMasterSpotPress,
+}: LikeSpotListProps) {
+  // 両方のいいねを統合して日時順にソート
+  const unifiedData = useMemo(() => {
+    const userSpotItems: UnifiedLikeItem[] = data.map(item => ({
+      type: 'userSpot' as const,
+      likeId: item.likeId,
+      likedAt: item.likedAt,
+      spot: item.spot,
+    }));
+
+    const masterSpotItems: UnifiedLikeItem[] = masterSpotData.map(item => ({
+      type: 'masterSpot' as const,
+      likeId: item.likeId,
+      likedAt: item.likedAt,
+      masterSpot: item.masterSpot,
+    }));
+
+    // 日時で降順ソート
+    return [...userSpotItems, ...masterSpotItems].sort(
+      (a, b) => new Date(b.likedAt).getTime() - new Date(a.likedAt).getTime()
+    );
+  }, [data, masterSpotData]);
+
+  const renderItem = useCallback(
+    ({ item }: { item: UnifiedLikeItem }) => {
+      if (item.type === 'userSpot') {
+        // ユーザースポット：ユーザーのアバターを表示
+        const spotName = item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット';
+        const address = item.spot.master_spot?.google_formatted_address;
+        const user = item.spot.user;
+
+        return (
+          <Pressable
+            onPress={() => onSpotPress(item.spot)}
+            className="bg-white px-4 py-4 border-b border-gray-100"
+          >
+            <View className="flex-row items-center">
+              {/* ユーザーアバター */}
+              {user?.avatar_url ? (
+                <Image
+                  source={{ uri: user.avatar_url }}
+                  className="w-10 h-10 rounded-full mr-3"
+                />
+              ) : (
+                <View className="w-10 h-10 rounded-full bg-gray-200 items-center justify-center mr-3">
+                  <Ionicons name="person" size={20} color={colors.gray[500]} />
+                </View>
               )}
+              <View className="flex-1">
+                <Text className="text-base font-semibold text-gray-900">
+                  {spotName}
+                </Text>
+                {address && (
+                  <Text className="text-sm text-gray-500" numberOfLines={1}>
+                    {address}
+                  </Text>
+                )}
+                {user && (
+                  <Text className="text-xs text-gray-400 mt-0.5">
+                    {user.display_name || user.username || 'ユーザー'}の投稿
+                  </Text>
+                )}
+              </View>
+              <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
             </View>
-            <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
-          </View>
-        </Pressable>
-      );
+          </Pressable>
+        );
+      } else {
+        // マスタースポット：青いスポットアイコンを表示
+        const { masterSpot } = item;
+
+        return (
+          <Pressable
+            onPress={() => onMasterSpotPress?.(masterSpot.id)}
+            className="bg-white px-4 py-4 border-b border-gray-100"
+          >
+            <View className="flex-row items-center">
+              {/* 青いスポットアイコン */}
+              <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center mr-3">
+                <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
+              </View>
+              <View className="flex-1">
+                <Text className="text-base font-semibold text-gray-900">
+                  {masterSpot.name}
+                </Text>
+                {masterSpot.google_formatted_address && (
+                  <Text className="text-sm text-gray-500" numberOfLines={1}>
+                    {masterSpot.google_formatted_address}
+                  </Text>
+                )}
+                <Text className="text-xs text-gray-400 mt-0.5">
+                  スポット
+                </Text>
+              </View>
+              <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+            </View>
+          </Pressable>
+        );
+      }
     },
-    [onSpotPress]
+    [onSpotPress, onMasterSpotPress]
   );
 
   if (isLoading) {
     return <Loading variant="inline" />;
   }
 
-  if (data.length === 0) {
+  if (unifiedData.length === 0) {
     return (
       <EmptyState
         ionIcon="heart-outline"
@@ -69,8 +170,8 @@ export function LikeSpotList({ data, isLoading, onSpotPress }: LikeSpotListProps
 
   return (
     <FlatList
-      data={data}
-      keyExtractor={(item) => item.likeId}
+      data={unifiedData}
+      keyExtractor={(item) => `${item.type}-${item.likeId}`}
       renderItem={renderItem}
       contentContainerStyle={{ flexGrow: 1 }}
     />

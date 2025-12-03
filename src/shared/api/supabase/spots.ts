@@ -477,6 +477,54 @@ export async function getMasterSpotsByBounds(
   }));
 }
 
+/**
+ * マスタースポットをIDで取得
+ */
+export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpotDisplay | null> {
+  const { data, error } = await supabase
+    .from('master_spots')
+    .select(`
+      id,
+      name,
+      latitude,
+      longitude,
+      google_place_id,
+      google_formatted_address,
+      google_types,
+      google_phone_number,
+      google_website_uri,
+      google_rating,
+      google_user_rating_count,
+      likes_count,
+      user_spots (id)
+    `)
+    .eq('id', masterSpotId)
+    .maybeSingle();
+
+  if (error) {
+    console.error('[getMasterSpotById] Error:', error);
+    throw error;
+  }
+
+  if (!data) return null;
+
+  return {
+    id: data.id,
+    name: data.name,
+    latitude: data.latitude,
+    longitude: data.longitude,
+    google_place_id: data.google_place_id,
+    google_formatted_address: data.google_formatted_address,
+    google_types: data.google_types,
+    google_phone_number: data.google_phone_number,
+    google_website_uri: data.google_website_uri,
+    google_rating: data.google_rating,
+    google_user_rating_count: data.google_user_rating_count,
+    likes_count: data.likes_count ?? 0,
+    user_spots_count: (data.user_spots as any[])?.length || 0,
+  };
+}
+
 // ===============================
 // master_spot_idからユーザー投稿を取得
 // ===============================

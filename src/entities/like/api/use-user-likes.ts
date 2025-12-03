@@ -3,7 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
-import { getUserLikedSpots, getUserLikedMaps } from '@/shared/api/supabase/likes';
+import { getUserLikedSpots, getUserLikedMaps, getUserLikedMasterSpots } from '@/shared/api/supabase/likes';
 
 /**
  * ユーザーがいいねしたスポット一覧を取得
@@ -28,6 +28,20 @@ export function useUserLikedMaps(userId: string | null | undefined) {
     queryFn: () => {
       if (!userId) return [];
       return getUserLikedMaps(userId);
+    },
+    enabled: !!userId,
+  });
+}
+
+/**
+ * ユーザーがいいねしたマスタースポット一覧を取得
+ */
+export function useUserLikedMasterSpots(userId: string | null | undefined) {
+  return useQuery({
+    queryKey: ['user-liked-master-spots', userId],
+    queryFn: () => {
+      if (!userId) return [];
+      return getUserLikedMasterSpots(userId);
     },
     enabled: !!userId,
   });

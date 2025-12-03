@@ -8,7 +8,8 @@ import { useRouter, useSegments } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { LikeTabFilter, type LikeTabMode } from '@/features/filter-like-tab';
 import { LikeSpotList, LikeMapList } from '@/widgets/like-item-list';
-import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
+import { useUserLikedSpots, useUserLikedMaps, useUserLikedMasterSpots } from '@/entities/like/api/use-user-likes';
+import { useSelectedPlaceStore } from '@/features/search-places';
 import { PageHeader } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
 
@@ -30,6 +31,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
 
   const { data: likedSpots = [], isLoading: spotsLoading } = useUserLikedSpots(userId);
+  const { data: likedMasterSpots = [], isLoading: masterSpotsLoading } = useUserLikedMasterSpots(userId);
   const { data: likedMaps = [], isLoading: mapsLoading } = useUserLikedMaps(userId);
 
   // スポットタップ: スポット詳細画面に遷移（戻るでいいね一覧に戻れる）
@@ -46,6 +48,14 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       router.push(`/spots/${spot.id}`);
     }
   }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
+
+  // マスタースポットタップ: デフォルトマップに遷移してスポットを表示
+  const setJumpToMasterSpotId = useSelectedPlaceStore((state) => state.setJumpToMasterSpotId);
+  const handleMasterSpotPress = useCallback((masterSpotId: string) => {
+    // グローバルステートにジャンプ先を設定してからマップタブに遷移
+    setJumpToMasterSpotId(masterSpotId);
+    router.push('/(tabs)/map');
+  }, [router, setJumpToMasterSpotId]);
 
   // マップタップ: マップ詳細画面に遷移（戻るでいいね一覧に戻れる）
   const handleMapPress = useCallback((mapId: string) => {
@@ -72,8 +82,10 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       {activeTab === 'spots' ? (
         <LikeSpotList
           data={likedSpots}
-          isLoading={spotsLoading}
+          masterSpotData={likedMasterSpots}
+          isLoading={spotsLoading || masterSpotsLoading}
           onSpotPress={handleSpotPress}
+          onMasterSpotPress={handleMasterSpotPress}
         />
       ) : (
         <LikeMapList

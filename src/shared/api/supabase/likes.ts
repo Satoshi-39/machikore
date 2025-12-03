@@ -384,6 +384,47 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
 }
 
 /**
+ * ユーザーがいいねしたマスタースポット一覧を取得
+ */
+export async function getUserLikedMasterSpots(userId: string, limit: number = 50) {
+  const { data, error } = await supabase
+    .from('likes')
+    .select(`
+      id,
+      created_at,
+      master_spots (
+        id,
+        name,
+        latitude,
+        longitude,
+        google_place_id,
+        google_formatted_address,
+        google_types,
+        google_rating,
+        google_user_rating_count,
+        likes_count
+      )
+    `)
+    .eq('user_id', userId)
+    .not('master_spot_id', 'is', null)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error('[getUserLikedMasterSpots] Error:', error);
+    throw error;
+  }
+
+  return (data || [])
+    .filter((like: any) => like.master_spots !== null)
+    .map((like: any) => ({
+      likeId: like.id,
+      likedAt: like.created_at,
+      masterSpot: like.master_spots,
+    }));
+}
+
+/**
  * ユーザーがいいねしたマップ一覧を取得
  */
 export async function getUserLikedMaps(userId: string, limit: number = 50) {

@@ -15,6 +15,9 @@ interface SelectedPlaceStore {
   // 登録したスポットへのジャンプ用
   jumpToSpotId: string | null;
   setJumpToSpotId: (spotId: string | null) => void;
+  // マスタースポットへのジャンプ用（いいね一覧からの遷移時）
+  jumpToMasterSpotId: string | null;
+  setJumpToMasterSpotId: (masterSpotId: string | null) => void;
 }
 
 export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
@@ -23,4 +26,6 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
   clearSelectedPlace: () => set({ selectedPlace: null }),
   jumpToSpotId: null,
   setJumpToSpotId: (spotId) => set({ jumpToSpotId: spotId }),
+  jumpToMasterSpotId: null,
+  setJumpToMasterSpotId: (masterSpotId) => set({ jumpToMasterSpotId: masterSpotId }),
 }));
