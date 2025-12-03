@@ -145,7 +145,7 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
   }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
 
   const handleEdit = useCallback((collectionId: string) => {
-    router.push(`/edit-collection?id=${collectionId}` as any);
+    router.push(`/edit-collection/${collectionId}`);
   }, [router]);
 
   const handleDelete = useCallback((collectionId: string) => {

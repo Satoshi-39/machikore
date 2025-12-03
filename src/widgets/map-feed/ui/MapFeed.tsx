@@ -28,7 +28,7 @@ export function MapFeed() {
   }, [router]);
 
   const handleEditMap = useCallback((mapId: string) => {
-    router.push(`/edit-map?id=${mapId}`);
+    router.push(`/edit-map/${mapId}`);
   }, [router]);
 
   // コメント詳細ページへ遷移（発見タブ内スタック）

@@ -141,7 +141,7 @@ export function MapsTab({ userId }: MapsTabProps) {
   };
 
   const handleEdit = (mapId: string) => {
-    router.push(`/edit-map?id=${mapId}`);
+    router.push(`/edit-map/${mapId}`);
   };
 
   const handleDelete = (mapId: string) => {

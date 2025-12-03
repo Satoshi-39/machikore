@@ -117,7 +117,7 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
   }, [router, mapId, currentTab]);
 
   const handleMapEdit = useCallback((id: string) => {
-    router.push(`/edit-map?id=${id}`);
+    router.push(`/edit-map/${id}`);
   }, [router]);
 
   const handleArticlePress = useCallback((id: string) => {

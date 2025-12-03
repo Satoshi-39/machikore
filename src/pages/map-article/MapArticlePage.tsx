@@ -32,7 +32,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // マップ編集へ遷移
   const handleEditMapPress = useCallback(() => {
-    router.push(`/edit-map?id=${mapId}`);
+    router.push(`/edit-map/${mapId}`);
   }, [router, mapId]);
 
   // 記事編集へ遷移

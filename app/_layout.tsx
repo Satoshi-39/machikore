@@ -155,7 +155,7 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="edit-map"
+            name="edit-map/[id]"
             options={{
               presentation: 'card',
               headerShown: false,
@@ -211,7 +211,7 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="edit-collection"
+            name="edit-collection/[id]"
             options={{
               presentation: 'card',
               headerShown: false,
