@@ -20,3 +20,4 @@ export type { PopupMenuItem } from './popup-menu';
 export { PageHeader } from './page-header';
 export { ImageViewerModal, useImageViewer } from './image-viewer';
 export { CommentInput, type CommentInputRef, CommentInputModal } from './comment-input';
+export { SwipeableRow } from './swipeable-row';

@@ -1,0 +1,73 @@
+/**
+ * ブックマークフォルダ詳細ページ
+ *
+ * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
+ */
+
+import React from 'react';
+import { View, Text, Pressable } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
+import { BookmarkItemList } from '@/widgets/bookmark-folder-list';
+import { useCurrentUserId } from '@/entities/user';
+import { useBookmarkFolders } from '@/entities/bookmark';
+import { colors } from '@/shared/config';
+
+interface BookmarkFolderPageProps {
+  folderId: string;
+  tabMode?: BookmarkTabMode;
+}
+
+export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFolderPageProps) {
+  const router = useRouter();
+  const userId = useCurrentUserId();
+  const insets = useSafeAreaInsets();
+
+  // フォルダ名を取得
+  const { data: folders = [] } = useBookmarkFolders(userId);
+  const folderName = folderId === 'uncategorized'
+    ? '後で見る'
+    : folders.find((f) => f.id === folderId)?.name || 'フォルダ';
+
+  if (!userId) {
+    return (
+      <View className="flex-1 bg-gray-50">
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-gray-500">ログインしてください</Text>
+        </View>
+      </View>
+    );
+  }
+
+  return (
+    <View className="flex-1 bg-gray-50">
+      {/* ヘッダー */}
+      <View
+        className="bg-white border-b border-gray-200 px-4 py-3"
+        style={{ paddingTop: insets.top + 8 }}
+      >
+        <View className="flex-row items-center justify-center relative">
+          <Pressable
+            onPress={() => router.back()}
+            className="absolute left-0"
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
+          </Pressable>
+          <Text className="text-lg font-semibold text-gray-900">
+            {folderName}
+          </Text>
+        </View>
+      </View>
+
+      {/* コンテンツ */}
+      <BookmarkItemList
+        userId={userId}
+        folderId={folderId}
+        activeTab={tabMode}
+      />
+    </View>
+  );
+}

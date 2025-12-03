@@ -14,7 +14,6 @@ import {
   Image,
   Modal,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
@@ -84,18 +83,7 @@ export function EditSpotForm({
   const maxNewImages = Math.max(0, 5 - displayedExistingImages.length);
 
   const handleDeleteExistingImage = (imageId: string) => {
-    Alert.alert(
-      '写真を削除',
-      'この写真を削除しますか？',
-      [
-        { text: 'キャンセル', style: 'cancel' },
-        {
-          text: '削除',
-          style: 'destructive',
-          onPress: () => setDeletedImageIds([...deletedImageIds, imageId]),
-        },
-      ]
-    );
+    setDeletedImageIds([...deletedImageIds, imageId]);
   };
 
   const handleSubmit = () => {

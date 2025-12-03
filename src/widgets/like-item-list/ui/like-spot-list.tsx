@@ -7,7 +7,7 @@ import React, { useCallback, useMemo } from 'react';
 import { View, Text, Pressable, FlatList, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { Loading, EmptyState } from '@/shared/ui';
+import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
 
 export interface LikedSpotItem {
@@ -44,6 +44,9 @@ interface LikeSpotListProps {
   isLoading: boolean;
   onSpotPress: (spot: SpotWithDetails) => void;
   onMasterSpotPress?: (masterSpotId: string) => void;
+  onUserPress?: (userId: string) => void;
+  onDeleteSpotLike?: (spotId: string) => void;
+  onDeleteMasterSpotLike?: (masterSpotId: string) => void;
 }
 
 export function LikeSpotList({
@@ -52,6 +55,9 @@ export function LikeSpotList({
   isLoading,
   onSpotPress,
   onMasterSpotPress,
+  onUserPress,
+  onDeleteSpotLike,
+  onDeleteMasterSpotLike,
 }: LikeSpotListProps) {
   // 両方のいいねを統合して日時順にソート
   const unifiedData = useMemo(() => {
@@ -83,23 +89,33 @@ export function LikeSpotList({
         const address = item.spot.master_spot?.google_formatted_address;
         const user = item.spot.user;
 
-        return (
+        const content = (
           <Pressable
             onPress={() => onSpotPress(item.spot)}
             className="bg-white px-4 py-4 border-b border-gray-100"
           >
             <View className="flex-row items-center">
-              {/* ユーザーアバター */}
-              {user?.avatar_url ? (
-                <Image
-                  source={{ uri: user.avatar_url }}
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-              ) : (
-                <View className="w-10 h-10 rounded-full bg-gray-200 items-center justify-center mr-3">
-                  <Ionicons name="person" size={20} color={colors.gray[500]} />
-                </View>
-              )}
+              {/* ユーザーアバター（タップでプロフィールへ） */}
+              <Pressable
+                onPress={(e) => {
+                  e.stopPropagation();
+                  if (user?.id && onUserPress) {
+                    onUserPress(user.id);
+                  }
+                }}
+                disabled={!user?.id || !onUserPress}
+              >
+                {user?.avatar_url ? (
+                  <Image
+                    source={{ uri: user.avatar_url }}
+                    className="w-10 h-10 rounded-full mr-3"
+                  />
+                ) : (
+                  <View className="w-10 h-10 rounded-full bg-gray-200 items-center justify-center mr-3">
+                    <Ionicons name="person" size={20} color={colors.gray[500]} />
+                  </View>
+                )}
+              </Pressable>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-gray-900">
                   {spotName}
@@ -119,11 +135,17 @@ export function LikeSpotList({
             </View>
           </Pressable>
         );
+
+        return onDeleteSpotLike ? (
+          <SwipeableRow onDelete={() => onDeleteSpotLike(item.spot.id)}>
+            {content}
+          </SwipeableRow>
+        ) : content;
       } else {
         // マスタースポット：青いスポットアイコンを表示
         const { masterSpot } = item;
 
-        return (
+        const content = (
           <Pressable
             onPress={() => onMasterSpotPress?.(masterSpot.id)}
             className="bg-white px-4 py-4 border-b border-gray-100"
@@ -150,9 +172,15 @@ export function LikeSpotList({
             </View>
           </Pressable>
         );
+
+        return onDeleteMasterSpotLike ? (
+          <SwipeableRow onDelete={() => onDeleteMasterSpotLike(masterSpot.id)}>
+            {content}
+          </SwipeableRow>
+        ) : content;
       }
     },
-    [onSpotPress, onMasterSpotPress]
+    [onSpotPress, onMasterSpotPress, onUserPress, onDeleteSpotLike, onDeleteMasterSpotLike]
   );
 
   if (isLoading) {

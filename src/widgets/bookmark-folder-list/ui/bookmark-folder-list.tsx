@@ -14,6 +14,7 @@ import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
 import { colors } from '@/shared/config';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter, useSegments, type Href } from 'expo-router';
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   Alert,
@@ -34,16 +35,28 @@ import {
 interface BookmarkFolderListProps {
   userId: string;
   activeTab: BookmarkTabMode;
-  onFolderSelect: (folderId: string) => void;
   onCreateFolder: () => void;
 }
 
 export function BookmarkFolderList({
   userId,
   activeTab,
-  onFolderSelect,
   onCreateFolder,
 }: BookmarkFolderListProps) {
+  const router = useRouter();
+  const segments = useSegments();
+
+  // タブ内かどうかを判定
+  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+
+  // フォルダタップ時の遷移
+  const handleFolderPress = useCallback((folderId: string) => {
+    const path = isInMypageTab
+      ? `/(tabs)/mypage/bookmarks/${folderId}?tab=${activeTab}`
+      : `/bookmarks/${folderId}?tab=${activeTab}`;
+    router.push(path as Href);
+  }, [router, isInMypageTab, activeTab]);
+
   // activeTabに応じたフォルダのみ取得
   const { data: folders = [] } = useBookmarkFolders(userId, activeTab);
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
@@ -143,7 +156,7 @@ export function BookmarkFolderList({
 
       return (
         <Pressable
-          onPress={() => onFolderSelect(item.id)}
+          onPress={() => handleFolderPress(item.id)}
           className="bg-white px-4 py-4 border-b border-gray-100 flex-row items-center"
         >
           <View className="w-10 h-10 rounded-lg bg-gray-100 items-center justify-center mr-3">
@@ -206,7 +219,7 @@ export function BookmarkFolderList({
     [
       folderCounts,
       activeTab,
-      onFolderSelect,
+      handleFolderPress,
       handleEditFolder,
       handleDeleteFolder,
     ]
