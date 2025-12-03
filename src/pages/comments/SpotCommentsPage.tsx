@@ -117,7 +117,12 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
   }, [router, spotId, currentTab]);
 
   const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
+    // mapタブは /(tabs)/map/[id]、他は /(tabs)/xxx/maps/[id]
+    if (currentTab === 'map') {
+      router.push(`/(tabs)/map/${mapId}`);
+    } else {
+      router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
+    }
   }, [router, currentTab]);
 
   const handleSpotEdit = useCallback((id: string) => {

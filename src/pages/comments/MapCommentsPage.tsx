@@ -113,7 +113,12 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
   }, [router, currentTab]);
 
   const handleMapPress = useCallback(() => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
+    // mapタブは /(tabs)/map/[id]、他は /(tabs)/xxx/maps/[id]
+    if (currentTab === 'map') {
+      router.push(`/(tabs)/map/${mapId}`);
+    } else {
+      router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
+    }
   }, [router, mapId, currentTab]);
 
   const handleMapEdit = useCallback((id: string) => {

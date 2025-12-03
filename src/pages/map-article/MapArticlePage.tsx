@@ -42,7 +42,12 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // このマップのマップ画面へ遷移
   const handleGoToMapPress = useCallback(() => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
+    // mapタブは /(tabs)/map/[id]、他は /(tabs)/xxx/maps/[id]
+    if (currentTab === 'map') {
+      router.push(`/(tabs)/map/${mapId}`);
+    } else {
+      router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
+    }
   }, [router, currentTab, mapId]);
 
   // ユーザープロフィールへ遷移
@@ -62,7 +67,12 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // 他のマップ詳細へ遷移
   const handleMapPress = useCallback((targetMapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${targetMapId}`);
+    // mapタブは /(tabs)/map/[id]、他は /(tabs)/xxx/maps/[id]
+    if (currentTab === 'map') {
+      router.push(`/(tabs)/map/${targetMapId}`);
+    } else {
+      router.push(`/(tabs)/${currentTab}/maps/${targetMapId}`);
+    }
   }, [router, currentTab]);
 
   // ヘッダーメニュー項目
