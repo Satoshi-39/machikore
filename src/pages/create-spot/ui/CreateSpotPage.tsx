@@ -11,7 +11,15 @@ import { PageHeader } from '@/shared/ui';
 import { useSpotForm } from '../model';
 
 export function CreateSpotPage() {
-  const { placeData, handleSubmit, isLoading, uploadProgress } = useSpotForm();
+  const {
+    placeData,
+    handleSubmit,
+    isLoading,
+    uploadProgress,
+    userMaps,
+    isMapsLoading,
+    selectedMapId,
+  } = useSpotForm();
 
   // データが存在しない場合はnull（エラーハンドリングはhook内で実施済み）
   if (!placeData) return null;
@@ -24,6 +32,9 @@ export function CreateSpotPage() {
         onSubmit={handleSubmit}
         isLoading={isLoading}
         uploadProgress={uploadProgress}
+        userMaps={userMaps}
+        isMapsLoading={isMapsLoading}
+        selectedMapId={selectedMapId}
       />
     </View>
   );

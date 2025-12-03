@@ -301,6 +301,7 @@ export type Database = {
           created_at: string
           id: string
           map_id: string | null
+          master_spot_id: string | null
           spot_id: string | null
           user_id: string
         }
@@ -308,6 +309,7 @@ export type Database = {
           created_at?: string
           id?: string
           map_id?: string | null
+          master_spot_id?: string | null
           spot_id?: string | null
           user_id: string
         }
@@ -315,6 +317,7 @@ export type Database = {
           created_at?: string
           id?: string
           map_id?: string | null
+          master_spot_id?: string | null
           spot_id?: string | null
           user_id?: string
         }
@@ -324,6 +327,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "likes_master_spot_id_fkey"
+            columns: ["master_spot_id"]
+            isOneToOne: false
+            referencedRelation: "master_spots"
             referencedColumns: ["id"]
           },
           {
@@ -420,6 +430,7 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          is_article_public: boolean | null
           is_default: boolean | null
           is_official: boolean | null
           is_public: boolean | null
@@ -436,6 +447,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_article_public?: boolean | null
           is_default?: boolean | null
           is_official?: boolean | null
           is_public?: boolean | null
@@ -452,6 +464,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_article_public?: boolean | null
           is_default?: boolean | null
           is_official?: boolean | null
           is_public?: boolean | null
@@ -485,6 +498,7 @@ export type Database = {
           google_website_uri: string | null
           id: string
           latitude: number
+          likes_count: number
           longitude: number
           name: string
           updated_at: string
@@ -500,6 +514,7 @@ export type Database = {
           google_website_uri?: string | null
           id?: string
           latitude: number
+          likes_count?: number
           longitude: number
           name: string
           updated_at?: string
@@ -515,6 +530,7 @@ export type Database = {
           google_website_uri?: string | null
           id?: string
           latitude?: number
+          likes_count?: number
           longitude?: number
           name?: string
           updated_at?: string

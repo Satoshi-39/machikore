@@ -2,10 +2,11 @@
  * 共通ボトムシートWidget
  *
  * 下からスライドアップするモーダルの共通実装
+ * Modalを使用して確実に全画面オーバーレイを表示
  */
 
 import React, { useEffect, useRef, ReactNode, createContext, useContext } from 'react';
-import { TouchableOpacity, View, Animated } from 'react-native';
+import { TouchableOpacity, View, Animated, Modal } from 'react-native';
 
 interface BottomSheetProps {
   children: ReactNode;
@@ -75,29 +76,37 @@ export function BottomSheet({ children, onClose }: BottomSheetProps) {
   };
 
   return (
-    <BottomSheetContext.Provider value={contextValue}>
-      <View className="flex-1 justify-end">
-        {/* 背景オーバーレイ（アニメーション） */}
-        <Animated.View
-          className="absolute inset-0 bg-black/50"
-          style={{ opacity: overlayAnim }}
-        >
-          <TouchableOpacity
-            className="flex-1"
-            activeOpacity={1}
-            onPress={handleClose}
-          />
-        </Animated.View>
+    <Modal
+      visible={true}
+      transparent
+      animationType="none"
+      statusBarTranslucent
+      onRequestClose={handleClose}
+    >
+      <BottomSheetContext.Provider value={contextValue}>
+        <View className="flex-1 justify-end">
+          {/* 背景オーバーレイ（アニメーション） */}
+          <Animated.View
+            className="absolute inset-0 bg-black/50"
+            style={{ opacity: overlayAnim }}
+          >
+            <TouchableOpacity
+              className="flex-1"
+              activeOpacity={1}
+              onPress={handleClose}
+            />
+          </Animated.View>
 
-        {/* モーダルコンテンツ（アニメーション） */}
-        <Animated.View
-          style={{
-            transform: [{ translateY: slideAnim }],
-          }}
-        >
-          {children}
-        </Animated.View>
-      </View>
-    </BottomSheetContext.Provider>
+          {/* モーダルコンテンツ（アニメーション） */}
+          <Animated.View
+            style={{
+              transform: [{ translateY: slideAnim }],
+            }}
+          >
+            {children}
+          </Animated.View>
+        </View>
+      </BottomSheetContext.Provider>
+    </Modal>
   );
 }

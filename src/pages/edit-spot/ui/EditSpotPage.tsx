@@ -11,7 +11,17 @@ import { SingleDataBoundary, PageHeader } from '@/shared/ui';
 import { useEditSpotForm } from '../model';
 
 export function EditSpotPage() {
-  const { spot, existingImages, isLoading, isUpdating, uploadProgress, handleSubmit } = useEditSpotForm();
+  const {
+    spot,
+    existingImages,
+    isLoading,
+    isUpdating,
+    uploadProgress,
+    handleSubmit,
+    userMaps,
+    isMapsLoading,
+    selectedMapId,
+  } = useEditSpotForm();
 
   return (
     <View className="flex-1 bg-gray-50">
@@ -30,6 +40,9 @@ export function EditSpotPage() {
             onSubmit={handleSubmit}
             isLoading={isUpdating}
             uploadProgress={uploadProgress}
+            userMaps={userMaps}
+            isMapsLoading={isMapsLoading}
+            selectedMapId={selectedMapId}
           />
         )}
       </SingleDataBoundary>

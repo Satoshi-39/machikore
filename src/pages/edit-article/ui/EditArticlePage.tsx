@@ -14,13 +14,14 @@ import {
   Image,
   ActivityIndicator,
   Alert,
+  Switch,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
-import { useMapArticle, useUpdateSpotArticle } from '@/entities/map';
+import { useMapArticle, useUpdateSpotArticle, useUpdateMap } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import type { SpotWithImages } from '@/shared/types';
 
@@ -33,11 +34,14 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
   const { mutate: updateSpotArticle, isPending: isSaving } = useUpdateSpotArticle();
+  const { mutate: updateMap, isPending: isUpdatingMap } = useUpdateMap();
 
   // 各スポットの編集中の紹介文を管理
   const [editedContents, setEditedContents] = useState<Record<string, string>>({});
   // 現在展開中のスポットID
   const [expandedSpotId, setExpandedSpotId] = useState<string | null>(null);
+  // 記事の公開状態
+  const [isArticlePublic, setIsArticlePublic] = useState(false);
 
   // 初期データをセット
   useEffect(() => {
@@ -48,7 +52,10 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
       });
       setEditedContents(initialContents);
     }
-  }, [articleData?.spots]);
+    if (articleData?.map) {
+      setIsArticlePublic(articleData.map.is_article_public ?? false);
+    }
+  }, [articleData?.spots, articleData?.map]);
 
   // 変更があるかどうか（実際のデータと比較）
   const hasChanges = useMemo(() => {
@@ -70,6 +77,24 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
       [spotId]: text,
     }));
   }, []);
+
+  // 記事公開設定の変更ハンドラー
+  const handleToggleArticlePublic = useCallback((value: boolean) => {
+    setIsArticlePublic(value);
+    updateMap(
+      { id: mapId, is_article_public: value },
+      {
+        onSuccess: () => {
+          // 成功時は何もしない（UIは既に更新されている）
+        },
+        onError: () => {
+          // エラー時は元に戻す
+          setIsArticlePublic(!value);
+          Alert.alert('エラー', '公開設定の変更に失敗しました');
+        },
+      }
+    );
+  }, [mapId, updateMap]);
 
   // スポットの展開/折りたたみ
   const handleToggleExpand = useCallback((spotId: string) => {
@@ -153,6 +178,36 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           <Text className="text-sm text-gray-500 mt-1">
             {articleData.spots.length}スポット
           </Text>
+        </View>
+
+        {/* 記事公開設定 */}
+        <View className="px-4 py-4 border-b border-gray-200">
+          <View className="flex-row items-center justify-between">
+            <View className="flex-1 mr-4">
+              <View className="flex-row items-center">
+                <Ionicons
+                  name={isArticlePublic ? 'eye-outline' : 'eye-off-outline'}
+                  size={20}
+                  color={isArticlePublic ? colors.primary.DEFAULT : colors.gray[500]}
+                />
+                <Text className="text-base font-semibold text-gray-800 ml-2">
+                  記事を公開
+                </Text>
+              </View>
+              <Text className="text-sm text-gray-500 mt-1">
+                {isArticlePublic
+                  ? 'この記事は他のユーザーに公開されています'
+                  : 'この記事は非公開です（マップの公開とは別）'}
+              </Text>
+            </View>
+            <Switch
+              value={isArticlePublic}
+              onValueChange={handleToggleArticlePublic}
+              trackColor={{ false: colors.gray[200], true: colors.primary.light }}
+              thumbColor={isArticlePublic ? colors.primary.DEFAULT : '#f4f3f4'}
+              disabled={isUpdatingMap}
+            />
+          </View>
         </View>
 
         {/* スポット一覧 */}

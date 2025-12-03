@@ -185,6 +185,7 @@ export interface UpdateSpotInput {
   description?: string | null;
   tags?: string[] | null;
   order_index?: number;
+  map_id?: string;
 }
 
 /**
@@ -416,6 +417,7 @@ export interface MasterSpotDisplay {
   google_website_uri: string | null;
   google_rating: number | null;
   google_user_rating_count: number | null;
+  likes_count: number;
   user_spots_count: number;
 }
 
@@ -444,6 +446,7 @@ export async function getMasterSpotsByBounds(
       google_website_uri,
       google_rating,
       google_user_rating_count,
+      likes_count,
       user_spots!inner (id)
     `)
     .gte('latitude', minLat)
@@ -469,6 +472,7 @@ export async function getMasterSpotsByBounds(
     google_website_uri: spot.google_website_uri,
     google_rating: spot.google_rating,
     google_user_rating_count: spot.google_user_rating_count,
+    likes_count: spot.likes_count ?? 0,
     user_spots_count: spot.user_spots?.length || 0,
   }));
 }

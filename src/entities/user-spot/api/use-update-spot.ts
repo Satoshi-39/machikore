@@ -20,6 +20,7 @@ export function useUpdateSpot() {
         description: params.description,
         tags: params.tags,
         order_index: params.orderIndex,
+        map_id: params.mapId,
       });
 
       return params.spotId;

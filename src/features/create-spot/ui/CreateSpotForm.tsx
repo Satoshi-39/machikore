@@ -23,6 +23,7 @@ import {
   isPlaceSearchResult,
 } from '@/features/search-places';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
+import type { MapWithUser } from '@/shared/types';
 
 interface UploadProgress {
   current: number;
@@ -37,9 +38,16 @@ interface CreateSpotFormProps {
     description?: string;
     tags: string[];
     images: SelectedImage[];
+    mapId: string;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
+  /** ユーザーのマップ一覧 */
+  userMaps?: MapWithUser[];
+  /** マップ読み込み中 */
+  isMapsLoading?: boolean;
+  /** 選択されたマップID */
+  selectedMapId?: string | null;
 }
 
 export function CreateSpotForm({
@@ -47,6 +55,9 @@ export function CreateSpotForm({
   onSubmit,
   isLoading = false,
   uploadProgress,
+  userMaps = [],
+  isMapsLoading = false,
+  selectedMapId,
 }: CreateSpotFormProps) {
   // Google検索結果か手動登録かを判定
   const isGooglePlace = isPlaceSearchResult(placeData);
@@ -57,9 +68,17 @@ export function CreateSpotForm({
   const [tags, setTags] = useState('');
   const [images, setImages] = useState<SelectedImage[]>([]);
 
+  // 選択中のマップを取得
+  const selectedMap = userMaps.find(m => m.id === selectedMapId);
+
   const handleSubmit = () => {
     if (!customName.trim()) {
       Alert.alert('エラー', 'スポット名を入力してください');
+      return;
+    }
+
+    if (!selectedMapId) {
+      Alert.alert('エラー', 'マップを選択してください');
       return;
     }
 
@@ -68,6 +87,7 @@ export function CreateSpotForm({
       description: description.trim() || undefined,
       tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
       images,
+      mapId: selectedMapId,
     });
   };
 
@@ -146,6 +166,27 @@ export function CreateSpotForm({
             <Text className="ml-1 text-xs text-gray-500">
               {placeData.latitude.toFixed(6)}, {placeData.longitude.toFixed(6)}
             </Text>
+          </View>
+        </View>
+
+        {/* マップ（表示のみ） */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-gray-800 mb-2">
+            追加するマップ
+          </Text>
+          <View className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 flex-row items-center">
+            {isMapsLoading ? (
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            ) : selectedMap ? (
+              <View className="flex-row items-center flex-1">
+                <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
+                  <Ionicons name="map" size={12} color="#FFFFFF" />
+                </View>
+                <Text className="text-base text-gray-800">{selectedMap.name}</Text>
+              </View>
+            ) : (
+              <Text className="text-base text-gray-400">マップが選択されていません</Text>
+            )}
           </View>
         </View>
 

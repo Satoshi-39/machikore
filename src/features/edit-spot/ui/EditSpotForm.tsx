@@ -21,6 +21,7 @@ import { colors } from '@/shared/config';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/spots';
 import type { Database } from '@/shared/types/supabase.generated';
+import type { MapWithUser } from '@/shared/types';
 
 type ImageRow = Database['public']['Tables']['images']['Row'];
 
@@ -39,13 +40,32 @@ interface EditSpotFormProps {
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
+    mapId?: string;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
+  /** ユーザーのマップ一覧 */
+  userMaps?: MapWithUser[];
+  /** 選択されたマップID */
+  selectedMapId?: string | null;
+  /** マップ読み込み中 */
+  isMapsLoading?: boolean;
 }
 
-export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = false, uploadProgress }: EditSpotFormProps) {
+export function EditSpotForm({
+  spot,
+  existingImages = [],
+  onSubmit,
+  isLoading = false,
+  uploadProgress,
+  userMaps = [],
+  selectedMapId,
+  isMapsLoading = false,
+}: EditSpotFormProps) {
   const spotName = spot.custom_name || spot.master_spot?.name || '';
+
+  // 選択中のマップを取得
+  const selectedMap = userMaps.find(m => m.id === selectedMapId);
 
   const [customName, setCustomName] = useState(spotName);
   const [description, setDescription] = useState(spot.description || '');
@@ -85,6 +105,7 @@ export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = 
       tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
+      mapId: selectedMapId || undefined,
     });
   };
 
@@ -165,6 +186,27 @@ export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = 
               </Text>
             </View>
           )}
+        </View>
+
+        {/* マップ（表示のみ） */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-gray-800 mb-2">
+            所属するマップ
+          </Text>
+          <View className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 flex-row items-center">
+            {isMapsLoading ? (
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            ) : selectedMap ? (
+              <View className="flex-row items-center flex-1">
+                <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
+                  <Ionicons name="map" size={12} color="#FFFFFF" />
+                </View>
+                <Text className="text-base text-gray-800">{selectedMap.name}</Text>
+              </View>
+            ) : (
+              <Text className="text-base text-gray-400">マップが選択されていません</Text>
+            )}
+          </View>
         </View>
 
         {/* カスタム名（編集可能） */}

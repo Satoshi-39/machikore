@@ -2,11 +2,13 @@
  * スポット編集フォームのビジネスロジック
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSpotById, useUpdateSpot, useSpotImages, useUploadSpotImages } from '@/entities/user-spot/api';
+import { useUserMaps } from '@/entities/map';
+import { useUserStore } from '@/entities/user';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
 import type { SelectedImage } from '@/features/pick-images';
 
@@ -20,6 +22,7 @@ export function useEditSpotForm() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const user = useUserStore((state) => state.user);
   const { data: spot, isLoading: isLoadingSpot } = useSpotById(id ?? null);
   const { data: existingImages, isLoading: isLoadingImages } = useSpotImages(id ?? null);
   const { mutate: updateSpot, isPending: isUpdating } = useUpdateSpot();
@@ -31,12 +34,28 @@ export function useEditSpotForm() {
     status: 'idle',
   });
 
+  // ユーザーのマップ一覧を取得
+  const { data: userMaps = [], isLoading: isMapsLoading } = useUserMaps(user?.id ?? null, {
+    currentUserId: user?.id,
+  });
+
+  // 選択中のマップID（スポットの現在のマップIDで初期化）
+  const [selectedMapId, setSelectedMapId] = useState<string | null>(null);
+
+  // スポットデータが読み込まれたら、現在のマップIDで初期化
+  useEffect(() => {
+    if (spot && selectedMapId === null) {
+      setSelectedMapId(spot.map_id);
+    }
+  }, [spot, selectedMapId]);
+
   const handleSubmit = async (data: {
     customName: string;
     description?: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
+    mapId?: string;
   }) => {
     if (!id) {
       Alert.alert('エラー', 'スポットIDが見つかりません');
@@ -88,6 +107,7 @@ export function useEditSpotForm() {
           customName: data.customName || null,
           description: data.description || null,
           tags: data.tags.length > 0 ? data.tags : null,
+          mapId: data.mapId,
         },
         {
           onSuccess: () => {
@@ -123,5 +143,9 @@ export function useEditSpotForm() {
     isUpdating: isUpdating || isProcessing,
     uploadProgress,
     handleSubmit,
+    userMaps,
+    isMapsLoading,
+    selectedMapId,
+    setSelectedMapId,
   };
 }

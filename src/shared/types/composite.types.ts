@@ -45,6 +45,8 @@ export interface MapWithUser {
   created_at: string;
   updated_at: string;
   user: UserBasicInfo | null;
+  /** 記事の公開設定（マップの公開とは独立） */
+  is_article_public?: boolean;
 }
 
 // ===============================

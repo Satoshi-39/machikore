@@ -49,6 +49,7 @@ export interface UpdateSpotParams {
   description?: string | null; // 旧memo
   tags?: string[] | null;
   orderIndex?: number;
+  mapId?: string;
 }
 
 /**

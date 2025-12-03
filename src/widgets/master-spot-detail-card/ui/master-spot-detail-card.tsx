@@ -2,16 +2,23 @@
  * デフォルトマップ上で選択されたマスタースポットの詳細情報カード
  */
 
-import React, { useRef, useMemo, useCallback, useEffect } from 'react';
+import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
 import { View, Text, Pressable, Linking, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, useSegments } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import Toast from 'react-native-toast-message';
 import { colors } from '@/shared/config';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
+import { useCurrentUserId } from '@/entities/user';
+import { useCheckMasterSpotLiked, useToggleMasterSpotLike } from '@/entities/like';
+import { useSelectedPlaceStore } from '@/features/search-places';
+import { useMapStore } from '@/entities/map';
+import { MapSelectSheet } from '@/widgets/map-select-sheet';
 
 interface MasterSpotDetailCardProps {
   spot: MasterSpotDisplay;
@@ -24,6 +31,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const segments = useSegments();
+  const currentUserId = useCurrentUserId();
+  const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
+  const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
+  const [showMapSelectSheet, setShowMapSelectSheet] = useState(false);
+
+  // いいね状態
+  const { data: isLiked = false } = useCheckMasterSpotLiked(currentUserId, spot.id);
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMasterSpotLike();
 
   // タブ内かどうかを判定
   const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
@@ -64,21 +79,95 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
     bottomSheetRef.current?.close();
   }, []);
 
+  // いいねボタン
+  const handleLikePress = useCallback(() => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('いいね');
+      return;
+    }
+    if (isTogglingLike) return;
+    toggleLike({ userId: currentUserId, masterSpotId: spot.id });
+  }, [currentUserId, isTogglingLike, toggleLike, spot.id]);
+
+  // Google Mapsで経路を開く
+  const handleDirectionsPress = useCallback(() => {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`;
+    Linking.openURL(url);
+  }, [spot.latitude, spot.longitude]);
+
+  // 投稿ボタン - マップ選択シートを表示
+  const handlePostPress = useCallback(() => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('投稿');
+      return;
+    }
+    setShowMapSelectSheet(true);
+  }, [currentUserId]);
+
+  // マップ選択後の処理
+  const handleMapSelect = useCallback((mapId: string) => {
+    // 選択したマップに、現在のユーザーが既にこのマスタースポットを追加しているかチェック
+    const existingSpot = userSpots.find(
+      (s) => s.user_id === currentUserId && s.map_id === mapId
+    );
+
+    if (existingSpot) {
+      // 既に追加されている場合は編集画面に遷移
+      setShowMapSelectSheet(false);
+      onClose();
+      router.push(`/edit-spot?id=${existingSpot.id}`);
+      return;
+    }
+
+    // 新規追加の場合
+    // マップIDを設定
+    setSelectedMapId(mapId);
+    // MasterSpotDisplayからPlaceSearchResultを作成
+    setSelectedPlace({
+      id: spot.google_place_id || spot.id,
+      name: spot.name,
+      address: spot.google_formatted_address,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+      category: spot.google_types || [],
+      googleData: {
+        placeId: spot.google_place_id || spot.id,
+        placeName: spot.name,
+        category: spot.google_types || [],
+        address: spot.google_formatted_address,
+        formattedAddress: spot.google_formatted_address || undefined,
+        internationalPhoneNumber: spot.google_phone_number || undefined,
+        websiteUri: spot.google_website_uri || undefined,
+        rating: spot.google_rating || undefined,
+        userRatingCount: spot.google_user_rating_count || undefined,
+      },
+    });
+    setShowMapSelectSheet(false);
+    onClose();
+    router.push('/create-spot');
+  }, [spot, setSelectedMapId, setSelectedPlace, onClose, router, userSpots, currentUserId]);
+
+  // 新規マップ作成
+  const handleCreateNewMap = useCallback(() => {
+    setShowMapSelectSheet(false);
+    router.push('/create-map');
+  }, [router]);
+
   // ウェブサイトを開く
   const handleWebsitePress = useCallback(() => {
     if (spot.google_website_uri) {
       Linking.openURL(spot.google_website_uri);
+    } else {
+      Toast.show({
+        type: 'info',
+        text1: 'Webサイトがありません',
+        visibilityTime: 2000,
+      });
     }
   }, [spot.google_website_uri]);
 
-  // 電話をかける
-  const handlePhonePress = useCallback(() => {
-    if (spot.google_phone_number) {
-      Linking.openURL(`tel:${spot.google_phone_number}`);
-    }
-  }, [spot.google_phone_number]);
-
   return (
+    <>
     <BottomSheet
       ref={bottomSheetRef}
       index={1}
@@ -111,65 +200,62 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
           </Pressable>
         </View>
 
-        {/* 位置情報 */}
-        <View className="flex-row items-center mb-3">
-          <Ionicons
-            name="location-outline"
-            size={16}
-            color={colors.text.secondary}
-          />
-          <Text className="text-sm text-gray-600 ml-1">
-            緯度: {spot.latitude.toFixed(4)}, 経度:{' '}
-            {spot.longitude.toFixed(4)}
-          </Text>
-        </View>
+        {/* アクションボタン - 横並び4つ均等配置 */}
+        <View className="flex-row py-3 border-t border-b border-gray-200">
+          {/* いいね */}
+          <Pressable
+            onPress={handleLikePress}
+            disabled={isTogglingLike}
+            className="flex-1 items-center py-2"
+          >
+            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+              <Ionicons
+                name={isLiked ? 'heart' : 'heart-outline'}
+                size={24}
+                color={isLiked ? '#EF4444' : colors.text.secondary}
+              />
+            </View>
+            <Text className="text-xs text-gray-600">いいね</Text>
+          </Pressable>
 
-        {/* 評価 */}
-        {spot.google_rating && (
-          <View className="flex-row items-center mb-3">
-            <Ionicons
-              name="star"
-              size={16}
-              color="#F59E0B"
-            />
-            <Text className="text-sm text-gray-900 ml-1 font-semibold">
-              {spot.google_rating.toFixed(1)}
+          {/* 投稿 */}
+          <Pressable
+            onPress={handlePostPress}
+            className="flex-1 items-center py-2"
+          >
+            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+              <Ionicons name="add-circle-outline" size={24} color={colors.primary.DEFAULT} />
+            </View>
+            <Text className="text-xs text-gray-600">投稿</Text>
+          </Pressable>
+
+          {/* 経路案内 */}
+          <Pressable
+            onPress={handleDirectionsPress}
+            className="flex-1 items-center py-2"
+          >
+            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+              <Ionicons name="navigate" size={24} color={colors.primary.DEFAULT} />
+            </View>
+            <Text className="text-xs text-gray-600">経路</Text>
+          </Pressable>
+
+          {/* ウェブサイト（常に表示、ない場合はグレーアウト） */}
+          <Pressable
+            onPress={handleWebsitePress}
+            className="flex-1 items-center py-2"
+          >
+            <View className="w-12 h-12 rounded-full bg-gray-100 items-center justify-center mb-1">
+              <Ionicons
+                name="globe-outline"
+                size={24}
+                color={spot.google_website_uri ? colors.primary.DEFAULT : colors.gray[300]}
+              />
+            </View>
+            <Text className={`text-xs ${spot.google_website_uri ? 'text-gray-600' : 'text-gray-300'}`}>
+              Web
             </Text>
-            {spot.google_user_rating_count && (
-              <Text className="text-sm text-gray-600 ml-1">
-                ({spot.google_user_rating_count}件の評価)
-              </Text>
-            )}
-          </View>
-        )}
-
-        {/* アクションボタン */}
-        <View className="mt-2 pt-3 border-t border-gray-200">
-          {/* 電話番号 */}
-          {spot.google_phone_number && (
-            <Pressable
-              onPress={handlePhonePress}
-              className="flex-row items-center py-3 border-b border-gray-100"
-            >
-              <Ionicons name="call-outline" size={20} color={colors.primary.DEFAULT} />
-              <Text className="text-base text-gray-900 ml-3">
-                {spot.google_phone_number}
-              </Text>
-            </Pressable>
-          )}
-
-          {/* ウェブサイト */}
-          {spot.google_website_uri && (
-            <Pressable
-              onPress={handleWebsitePress}
-              className="flex-row items-center py-3 border-b border-gray-100"
-            >
-              <Ionicons name="globe-outline" size={20} color={colors.primary.DEFAULT} />
-              <Text className="text-base text-gray-900 ml-3" numberOfLines={1}>
-                ウェブサイトを開く
-              </Text>
-            </Pressable>
-          )}
+          </Pressable>
         </View>
 
         {/* ユーザー投稿一覧 */}
@@ -295,5 +381,15 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
         </View>
       </BottomSheetScrollView>
     </BottomSheet>
+
+    {/* マップ選択シート */}
+    {showMapSelectSheet && (
+      <MapSelectSheet
+        onSelectMap={handleMapSelect}
+        onCreateNewMap={handleCreateNewMap}
+        onClose={() => setShowMapSelectSheet(false)}
+      />
+    )}
+    </>
   );
 }

@@ -26,6 +26,7 @@ interface SupabaseMapResponse {
   comments_count: number | null;
   created_at: string;
   updated_at: string;
+  is_article_public: boolean | null;
   users?: {
     id: string;
     username: string;
@@ -84,6 +85,7 @@ export async function getPublicMaps(
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
+    is_article_public: map.is_article_public ?? false,
   }));
 }
 
@@ -133,6 +135,7 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
     created_at: data.created_at,
     updated_at: data.updated_at,
     user: data.users || null,
+    is_article_public: data.is_article_public ?? false,
   };
 }
 
@@ -237,6 +240,7 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
+    is_article_public: map.is_article_public ?? false,
   }));
 }
 
@@ -280,6 +284,7 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
+    is_article_public: map.is_article_public ?? false,
   }));
 }
 
@@ -357,6 +362,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     created_at: data.created_at,
     updated_at: data.updated_at,
     user: data.users || null,
+    is_article_public: data.is_article_public ?? false,
   };
 }
 
@@ -371,6 +377,7 @@ export interface UpdateMapParams {
   category?: string | null;
   tags?: string[] | null;
   is_public?: boolean;
+  is_article_public?: boolean;
   thumbnail_url?: string | null;
 }
 
@@ -420,6 +427,7 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
     created_at: data.created_at,
     updated_at: data.updated_at,
     user: data.users || null,
+    is_article_public: data.is_article_public ?? false,
   };
 }
 

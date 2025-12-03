@@ -111,15 +111,21 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
     );
   };
 
+  // 記事が公開されているか（オーナーは常に見れる）
+  const isArticleVisible = isOwner || ('is_article_public' in map && map.is_article_public === true);
+
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    const items: PopupMenuItem[] = [
-      {
+    const items: PopupMenuItem[] = [];
+
+    // 記事を見る（公開されている場合、またはオーナーの場合のみ表示）
+    if (isArticleVisible) {
+      items.push({
         id: 'article',
         label: '記事を見る',
         icon: 'document-text-outline',
         onPress: () => onArticlePress?.(map.id),
-      },
-    ];
+      });
+    }
 
     // オーナーのみ編集・削除を表示
     if (isOwner) {
@@ -141,7 +147,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
     }
 
     return items;
-  }, [map.id, onEdit, onArticlePress, isOwner]);
+  }, [map.id, onEdit, onArticlePress, isOwner, isArticleVisible]);
 
   return (
     <Pressable

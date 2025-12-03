@@ -14,7 +14,7 @@ import {
 } from '@/features/search-places';
 import { useCreateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
-import { useMapStore } from '@/entities/map';
+import { useMapStore, useUserMaps } from '@/entities/map';
 import { getNearbyMachi } from '@/shared/api/sqlite';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import { queryClient } from '@/shared/api/query-client';
@@ -29,7 +29,7 @@ export interface UploadProgress {
 export function useSpotForm() {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
-  const selectedMapId = useMapStore((state) => state.selectedMapId);
+  const storeMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
@@ -39,17 +39,35 @@ export function useSpotForm() {
     status: 'idle',
   });
 
+  // ユーザーのマップ一覧を取得
+  const { data: userMaps = [], isLoading: isMapsLoading } = useUserMaps(user?.id ?? null, {
+    currentUserId: user?.id,
+  });
+
+  // 選択中のマップID（ローカルstate）
+  const [selectedMapId, setSelectedMapId] = useState<string | null>(storeMapId);
+
   const defaultProgress: UploadProgress = { current: 0, total: 0, status: 'idle' };
+  const defaultReturn = {
+    placeData: null,
+    handleSubmit: () => {},
+    isLoading: false,
+    uploadProgress: defaultProgress,
+    userMaps: [] as typeof userMaps,
+    isMapsLoading: false,
+    selectedMapId: null as string | null,
+    setSelectedMapId: () => {},
+  };
 
   // データが存在しない場合は静かにnullを返す
   // （画面遷移途中の再レンダリングでアラートが表示されないようにする）
   if (!selectedPlace) {
-    return { placeData: null, handleSubmit: () => {}, isLoading: false, uploadProgress: defaultProgress };
+    return defaultReturn;
   }
 
   // Google Places検索結果でない場合はエラー
   if (!isPlaceSearchResult(selectedPlace)) {
-    return { placeData: null, handleSubmit: () => {}, isLoading: false, uploadProgress: defaultProgress };
+    return defaultReturn;
   }
 
   // 画像をアップロードするヘルパー関数（進捗状況を更新しながら）
@@ -110,13 +128,14 @@ export function useSpotForm() {
     description?: string;
     tags: string[];
     images: SelectedImage[];
+    mapId: string;
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
       return;
     }
 
-    if (!selectedMapId) {
+    if (!data.mapId) {
       Alert.alert('エラー', 'マップが選択されていません');
       return;
     }
@@ -134,7 +153,7 @@ export function useSpotForm() {
     createSpot(
       {
         userId: user.id,
-        mapId: selectedMapId,
+        mapId: data.mapId,
         machiId,
         name: selectedPlace.name,
         latitude: selectedPlace.latitude,
@@ -189,5 +208,9 @@ export function useSpotForm() {
     handleSubmit,
     isLoading: isCreating || uploadProgress.status === 'uploading',
     uploadProgress,
+    userMaps,
+    isMapsLoading,
+    selectedMapId,
+    setSelectedMapId,
   };
 }

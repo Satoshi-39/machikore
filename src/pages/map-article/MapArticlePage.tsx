@@ -121,6 +121,20 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     );
   }
 
+  // 記事が非公開で、オーナーでもない場合はアクセス拒否
+  const isArticlePublic = articleData.map.is_article_public ?? false;
+  if (!isArticlePublic && !isOwner) {
+    return (
+      <SafeAreaView className="flex-1 bg-white" edges={['bottom']}>
+        <PageHeader title="記事" />
+        <View className="flex-1 justify-center items-center">
+          <Ionicons name="lock-closed-outline" size={48} color={colors.gray[300]} />
+          <Text className="text-gray-400 mt-4">この記事は非公開です</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-white" edges={['bottom']}>
       <PageHeader
