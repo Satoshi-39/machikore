@@ -8,11 +8,14 @@ import { useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { AppState, AppStateStatus } from 'react-native';
 import * as Notifications from 'expo-notifications';
-import { supabase } from '@/shared/api/supabase';
 import {
   markNotificationAsRead,
   getUnreadNotificationCount,
 } from '@/shared/api/supabase/notifications';
+import {
+  updatePushToken,
+  clearPushToken as clearPushTokenApi,
+} from '@/shared/api/supabase/users';
 import { useUserStore } from '@/entities/user';
 import {
   getExpoPushToken,
@@ -44,12 +47,8 @@ export function usePushNotifications() {
     if (!user?.id) return;
 
     try {
-      const { error } = await supabase.rpc('update_push_token', { token });
-      if (error) {
-        console.error('Failed to save push token:', error);
-      } else {
-        console.log('Push token saved successfully');
-      }
+      await updatePushToken(token);
+      console.log('Push token saved successfully');
     } catch (error) {
       console.error('Failed to save push token:', error);
     }
@@ -58,10 +57,7 @@ export function usePushNotifications() {
   // プッシュトークンをクリア（ログアウト時用）
   const clearPushToken = useCallback(async () => {
     try {
-      const { error } = await supabase.rpc('clear_push_token');
-      if (error) {
-        console.error('Failed to clear push token:', error);
-      }
+      await clearPushTokenApi();
     } catch (error) {
       console.error('Failed to clear push token:', error);
     }

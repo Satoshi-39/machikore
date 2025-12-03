@@ -14,3 +14,4 @@ export * from './notifications';
 export * from './follows';
 export * from './comments';
 export * from './collections';
+export * from './users';
