@@ -218,7 +218,21 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
+            name="edit-article/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
             name="add-maps-to-collection"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="edit-profile"
             options={{
               presentation: 'card',
               headerShown: false,

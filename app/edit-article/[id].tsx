@@ -2,7 +2,7 @@
  * 記事編集画面のルート
  */
 
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { EditArticlePage } from '@/pages/edit-article';
 
 export default function EditArticleScreen() {
@@ -12,10 +12,5 @@ export default function EditArticleScreen() {
     return null;
   }
 
-  return (
-    <>
-      <Stack.Screen options={{ headerShown: false }} />
-      <EditArticlePage mapId={id} />
-    </>
-  );
+  return <EditArticlePage mapId={id} />;
 }

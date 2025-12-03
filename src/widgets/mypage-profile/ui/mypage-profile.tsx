@@ -10,8 +10,9 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, ImageViewerModal } from '@/shared/ui';
-import { useUser, useUserStats } from '@/entities/user/api';
+import { useUser, useUserStats, useCurrentUserId } from '@/entities/user';
 import { FollowButton } from '@/features/follow-user';
+import { EditProfileButton } from '@/features/edit-profile';
 
 interface MyPageProfileProps {
   userId: string | null;
@@ -19,9 +20,13 @@ interface MyPageProfileProps {
 
 export function MyPageProfile({ userId }: MyPageProfileProps) {
   const router = useRouter();
+  const currentUserId = useCurrentUserId();
   const { data: user, isLoading } = useUser(userId ?? '');
   const { data: stats } = useUserStats(userId ?? '');
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
+
+  // 自分のプロフィールかどうか
+  const isOwnProfile = currentUserId && userId && currentUserId === userId;
 
   const handleFollowingPress = () => {
     if (userId) {
@@ -34,6 +39,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       router.push(`/(tabs)/mypage/users/${userId}/followers`);
     }
   };
+
 
   // ローディング中
   if (isLoading) {
@@ -66,8 +72,12 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
           </View>
         )}
 
-        {/* フォローボタン */}
-        <FollowButton targetUserId={userId} />
+        {/* プロフィール編集 or フォローボタン */}
+        {isOwnProfile ? (
+          <EditProfileButton />
+        ) : (
+          <FollowButton targetUserId={userId} />
+        )}
       </View>
 
       {/* アバター拡大モーダル */}

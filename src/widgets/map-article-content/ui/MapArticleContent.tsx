@@ -158,7 +158,7 @@ export function MapArticleContent({
     <>
       <ScrollView ref={scrollViewRef} className="flex-1">
         {/* ヒーロー画像 */}
-        {map.thumbnail_url && (
+        {map.thumbnail_url ? (
           <Pressable
             onPress={() => openImage(map.thumbnail_url!)}
             onLayout={(e) => {
@@ -171,6 +171,15 @@ export function MapArticleContent({
               resizeMode="cover"
             />
           </Pressable>
+        ) : (
+          <View
+            className="w-full h-56 items-center justify-center bg-gray-100"
+            onLayout={(e) => {
+              heroImageHeight.current = e.nativeEvent.layout.height;
+            }}
+          >
+            <Ionicons name="map" size={64} color={colors.primary.DEFAULT} />
+          </View>
         )}
 
         <View className="px-4 py-4">

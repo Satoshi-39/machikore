@@ -37,7 +37,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // 記事編集へ遷移
   const handleEditArticlePress = useCallback(() => {
-    router.push(`/edit-article?id=${mapId}`);
+    router.push(`/edit-article/${mapId}`);
   }, [router, mapId]);
 
   // このマップのマップ画面へ遷移
