@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router';
 import { AppState, AppStateStatus } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import { supabase } from '@/shared/api/supabase';
+import { markNotificationAsRead } from '@/shared/api/supabase/notifications';
 import { useUserStore } from '@/entities/user';
 import {
   getExpoPushToken,
@@ -82,9 +83,19 @@ export function usePushNotifications() {
 
   // 通知タップ時のナビゲーション
   const handleNotificationResponse = useCallback(
-    (response: Notifications.NotificationResponse) => {
+    async (response: Notifications.NotificationResponse) => {
       const data = response.notification.request.content.data as NotificationData;
       console.log('Notification tapped:', data);
+
+      // 通知を既読にしてバッジを更新
+      if (data.notificationId) {
+        try {
+          await markNotificationAsRead(data.notificationId);
+          await updateBadgeCount();
+        } catch (error) {
+          console.error('Failed to mark notification as read:', error);
+        }
+      }
 
       // 通知タイプに応じて遷移
       if (data.type === 'follow' && data.userId) {
@@ -98,7 +109,7 @@ export function usePushNotifications() {
         router.push('/(tabs)/notifications');
       }
     },
-    [router]
+    [router, updateBadgeCount]
   );
 
   // 初期化
