@@ -12,6 +12,9 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Modal,
+  ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
@@ -20,6 +23,12 @@ import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/spots';
 import type { Database } from '@/shared/types/supabase.generated';
 
 type ImageRow = Database['public']['Tables']['images']['Row'];
+
+interface UploadProgress {
+  current: number;
+  total: number;
+  status: 'idle' | 'updating' | 'uploading' | 'deleting' | 'done';
+}
 
 interface EditSpotFormProps {
   spot: UserSpotWithMasterSpot;
@@ -32,9 +41,10 @@ interface EditSpotFormProps {
     deletedImageIds?: string[];
   }) => void;
   isLoading?: boolean;
+  uploadProgress?: UploadProgress;
 }
 
-export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = false }: EditSpotFormProps) {
+export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = false, uploadProgress }: EditSpotFormProps) {
   const spotName = spot.custom_name || spot.master_spot?.name || '';
 
   const [customName, setCustomName] = useState(spotName);
@@ -54,7 +64,18 @@ export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = 
   const maxNewImages = Math.max(0, 5 - displayedExistingImages.length);
 
   const handleDeleteExistingImage = (imageId: string) => {
-    setDeletedImageIds([...deletedImageIds, imageId]);
+    Alert.alert(
+      '写真を削除',
+      'この写真を削除しますか？',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => setDeletedImageIds([...deletedImageIds, imageId]),
+        },
+      ]
+    );
   };
 
   const handleSubmit = () => {
@@ -67,8 +88,44 @@ export function EditSpotForm({ spot, existingImages = [], onSubmit, isLoading = 
     });
   };
 
+  // ローディング表示のテキストを決定
+  const getLoadingText = () => {
+    if (!uploadProgress || uploadProgress.status === 'idle') {
+      return 'スポットを更新中...';
+    }
+    if (uploadProgress.status === 'deleting') {
+      return '画像を削除中...';
+    }
+    if (uploadProgress.status === 'uploading') {
+      return `画像をアップロード中... (${uploadProgress.current}/${uploadProgress.total})`;
+    }
+    return '完了処理中...';
+  };
+
   return (
     <ScrollView className="flex-1 bg-gray-50">
+      {/* ローディングオーバーレイ */}
+      <Modal visible={isLoading} transparent animationType="fade">
+        <View className="flex-1 bg-black/50 items-center justify-center">
+          <View className="bg-white rounded-2xl p-6 mx-8 items-center">
+            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            <Text className="text-base text-gray-700 mt-4 text-center">
+              {getLoadingText()}
+            </Text>
+            {uploadProgress && uploadProgress.status === 'uploading' && uploadProgress.total > 0 && (
+              <View className="w-48 h-2 bg-gray-200 rounded-full mt-3 overflow-hidden">
+                <View
+                  className="h-full bg-primary rounded-full"
+                  style={{
+                    width: `${(uploadProgress.current / uploadProgress.total) * 100}%`,
+                  }}
+                />
+              </View>
+            )}
+          </View>
+        </View>
+      </Modal>
+
       <View className="p-4">
         {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-white rounded-lg p-4 border border-gray-200">

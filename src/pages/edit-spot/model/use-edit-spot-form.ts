@@ -10,6 +10,12 @@ import { useSpotById, useUpdateSpot, useSpotImages, useUploadSpotImages } from '
 import { deleteSpotImage } from '@/shared/api/supabase/images';
 import type { SelectedImage } from '@/features/pick-images';
 
+interface UploadProgress {
+  current: number;
+  total: number;
+  status: 'idle' | 'updating' | 'uploading' | 'deleting' | 'done';
+}
+
 export function useEditSpotForm() {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -19,6 +25,11 @@ export function useEditSpotForm() {
   const { mutate: updateSpot, isPending: isUpdating } = useUpdateSpot();
   const { mutateAsync: uploadImages } = useUploadSpotImages();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
+    current: 0,
+    total: 0,
+    status: 'idle',
+  });
 
   const handleSubmit = async (data: {
     customName: string;
@@ -33,10 +44,12 @@ export function useEditSpotForm() {
     }
 
     setIsProcessing(true);
+    setUploadProgress({ current: 0, total: 0, status: 'updating' });
 
     try {
       // 1. 削除する画像を処理
       if (data.deletedImageIds && data.deletedImageIds.length > 0) {
+        setUploadProgress({ current: 0, total: data.deletedImageIds.length, status: 'deleting' });
         for (const imageId of data.deletedImageIds) {
           try {
             await deleteSpotImage(imageId);
@@ -49,10 +62,14 @@ export function useEditSpotForm() {
 
       // 2. 新しい画像をアップロード
       if (data.newImages && data.newImages.length > 0) {
+        setUploadProgress({ current: 0, total: data.newImages.length, status: 'uploading' });
         try {
           const result = await uploadImages({
             spotId: id,
             images: data.newImages,
+            onProgress: (current, total) => {
+              setUploadProgress({ current, total, status: 'uploading' });
+            },
           });
 
           if (result.failed > 0) {
@@ -95,6 +112,7 @@ export function useEditSpotForm() {
       Alert.alert('エラー', '処理中にエラーが発生しました');
     } finally {
       setIsProcessing(false);
+      setUploadProgress({ current: 0, total: 0, status: 'idle' });
     }
   };
 
@@ -103,6 +121,7 @@ export function useEditSpotForm() {
     existingImages: existingImages ?? [],
     isLoading: isLoadingSpot || isLoadingImages,
     isUpdating: isUpdating || isProcessing,
+    uploadProgress,
     handleSubmit,
   };
 }

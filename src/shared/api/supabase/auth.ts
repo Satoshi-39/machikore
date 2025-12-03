@@ -33,6 +33,7 @@ export async function saveSession(
 
 /**
  * セッションをSecureStoreから復元
+ * アクセストークンが期限切れでもリフレッシュトークンで復元を試みる
  */
 export async function restoreSession(): Promise<boolean> {
   try {
@@ -41,29 +42,78 @@ export async function restoreSession(): Promise<boolean> {
     );
 
     if (!sessionStr) {
+      console.log('[restoreSession] セッションが保存されていません');
       return false;
     }
 
     const session = JSON.parse(sessionStr);
-    const now = Math.floor(Date.now() / 1000);
 
-    // セッションの有効期限チェック
-    if (session.expires_at && session.expires_at > now) {
-      const { error } = await supabase.auth.setSession({
-        access_token: session.access_token,
+    // refresh_token がなければ復元不可
+    if (!session.refresh_token) {
+      console.log('[restoreSession] リフレッシュトークンがありません');
+      await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
+      return false;
+    }
+
+    const now = Math.floor(Date.now() / 1000);
+    const isExpired = session.expires_at && session.expires_at <= now;
+
+    if (isExpired) {
+      // アクセストークンが期限切れの場合、リフレッシュトークンで更新を試みる
+      console.log('[restoreSession] アクセストークン期限切れ、リフレッシュを試行');
+      const { data, error } = await supabase.auth.refreshSession({
         refresh_token: session.refresh_token,
       });
 
-      if (!error) {
-        return true;
+      if (error || !data.session) {
+        console.log('[restoreSession] リフレッシュ失敗:', error?.message);
+        await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
+        return false;
       }
+
+      // 新しいセッションを保存
+      await saveSession(
+        data.session.access_token,
+        data.session.refresh_token,
+        data.session.expires_at || 0
+      );
+      console.log('[restoreSession] リフレッシュ成功、新しいセッションを保存');
+      return true;
     }
 
-    // 期限切れまたはエラーの場合はセッションを削除
-    await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
-    return false;
+    // 期限内の場合、そのままセッションを設定
+    const { error } = await supabase.auth.setSession({
+      access_token: session.access_token,
+      refresh_token: session.refresh_token,
+    });
+
+    if (error) {
+      console.log('[restoreSession] セッション設定失敗:', error.message);
+      // 設定に失敗した場合、リフレッシュを試みる
+      const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession({
+        refresh_token: session.refresh_token,
+      });
+
+      if (refreshError || !refreshData.session) {
+        console.log('[restoreSession] リフレッシュも失敗:', refreshError?.message);
+        await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
+        return false;
+      }
+
+      // 新しいセッションを保存
+      await saveSession(
+        refreshData.session.access_token,
+        refreshData.session.refresh_token,
+        refreshData.session.expires_at || 0
+      );
+      console.log('[restoreSession] リフレッシュ成功');
+      return true;
+    }
+
+    console.log('[restoreSession] セッション復元成功');
+    return true;
   } catch (error) {
-    console.error('Failed to restore session:', error);
+    console.error('[restoreSession] エラー:', error);
     await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
     return false;
   }

@@ -194,6 +194,7 @@ export async function createCollection(
  */
 export async function updateCollection(
   collectionId: string,
+  userId: string,
   updates: {
     name?: string;
     description?: string | null;
@@ -207,6 +208,7 @@ export async function updateCollection(
     .from('collections')
     .update(updates)
     .eq('id', collectionId)
+    .eq('user_id', userId)
     .select()
     .single();
 
@@ -221,11 +223,12 @@ export async function updateCollection(
 /**
  * コレクションを削除
  */
-export async function deleteCollection(collectionId: string): Promise<void> {
+export async function deleteCollection(collectionId: string, userId: string): Promise<void> {
   const { error } = await supabase
     .from('collections')
     .delete()
-    .eq('id', collectionId);
+    .eq('id', collectionId)
+    .eq('user_id', userId);
 
   if (error) {
     console.error('[deleteCollection] Error:', error);

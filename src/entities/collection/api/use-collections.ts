@@ -118,8 +118,8 @@ export function useUpdateCollection() {
       };
     }
   >({
-    mutationFn: ({ collectionId, updates }) =>
-      updateCollection(collectionId, updates),
+    mutationFn: ({ collectionId, userId, updates }) =>
+      updateCollection(collectionId, userId, updates),
     onSuccess: (_, { collectionId, userId }) => {
       queryClient.invalidateQueries({ queryKey: COLLECTION_KEYS.list(userId) });
       queryClient.invalidateQueries({ queryKey: COLLECTION_KEYS.detail(collectionId) });
@@ -147,7 +147,7 @@ export function useDeleteCollection() {
   const queryClient = useQueryClient();
 
   return useMutation<void, Error, { collectionId: string; userId: string }>({
-    mutationFn: ({ collectionId }) => deleteCollection(collectionId),
+    mutationFn: ({ collectionId, userId }) => deleteCollection(collectionId, userId),
     onSuccess: (_, { userId }) => {
       queryClient.invalidateQueries({ queryKey: COLLECTION_KEYS.list(userId) });
       Toast.show({

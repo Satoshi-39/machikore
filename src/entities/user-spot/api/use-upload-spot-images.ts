@@ -12,6 +12,7 @@ type ImageRow = Database['public']['Tables']['images']['Row'];
 interface UploadSpotImagesParams {
   spotId: string;
   images: SelectedImage[];
+  onProgress?: (current: number, total: number) => void;
 }
 
 interface UploadResult {
@@ -28,7 +29,7 @@ export function useUploadSpotImages() {
   const queryClient = useQueryClient();
 
   return useMutation<UploadResult, Error, UploadSpotImagesParams>({
-    mutationFn: async ({ spotId, images }) => {
+    mutationFn: async ({ spotId, images, onProgress }) => {
       console.log(`[useUploadSpotImages] 開始: spotId=${spotId}, images=${images.length}`);
 
       const uploadedImages: ImageRow[] = [];
@@ -37,6 +38,9 @@ export function useUploadSpotImages() {
       for (let i = 0; i < images.length; i++) {
         const image = images[i]!;
         console.log(`[useUploadSpotImages] 画像${i}: URI=${image.uri}`);
+
+        // 進捗を報告
+        onProgress?.(i + 1, images.length);
 
         const extension = image.uri.split('.').pop() || 'jpg';
         const fileName = `${Date.now()}_${i}.${extension}`;

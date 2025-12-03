@@ -16,7 +16,7 @@ import {
   Switch,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCreateCollection } from '@/entities/collection';
@@ -26,6 +26,7 @@ import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 
 export function CreateCollectionPage() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
   const { mutate: createCollection, isPending } = useCreateCollection();
 
@@ -85,7 +86,7 @@ export function CreateCollectionPage() {
   }, [name, description, isPublic, thumbnail, currentUserId, createCollection, isSubmitting, router]);
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
+    <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1"
@@ -194,6 +195,6 @@ export function CreateCollectionPage() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
