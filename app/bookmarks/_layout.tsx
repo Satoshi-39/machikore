@@ -1,0 +1,14 @@
+/**
+ * ブックマーク画面のレイアウト
+ */
+
+import { Stack } from 'expo-router';
+
+export default function BookmarksLayout() {
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="[folderId]" />
+    </Stack>
+  );
+}
