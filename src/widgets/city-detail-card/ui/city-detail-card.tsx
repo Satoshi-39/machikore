@@ -10,15 +10,36 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useSearchBarSync } from '@/shared/lib';
 import type { CityRow } from '@/shared/types/database.types';
 
 interface CityDetailCardProps {
   city: CityRow;
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
+  onSearchBarVisibilityChange?: (isHidden: boolean) => void;
 }
 
-export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardProps) {
+/** 検索バー同期を行う内部コンテンツコンポーネント */
+function CityDetailCardContent({
+  searchBarBottomY,
+  onSearchBarVisibilityChange,
+}: {
+  searchBarBottomY: number;
+  onSearchBarVisibilityChange?: (isHidden: boolean) => void;
+}) {
+  useSearchBarSync({
+    searchBarBottomY,
+    onVisibilityChange: onSearchBarVisibilityChange ?? (() => {}),
+  });
+
+  return null;
+}
+
+// 検索バー領域の下端Y座標（固定値）
+const SEARCH_BAR_BOTTOM_Y = 180;
+
+export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibilityChange }: CityDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -40,7 +61,7 @@ export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardPr
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // スナップ変更時のハンドラー
+  // スナップ変更時のハンドラー（スナップ確定時のみ呼ばれる）
   const handleSheetChanges = useCallback((index: number) => {
     // index -1 = 閉じた状態 → デフォルト状態(1)にリセットして親に通知
     if (index === -1) {
@@ -50,14 +71,6 @@ export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardPr
       onSnapChange?.(index);
     }
   }, [onSnapChange, onClose]);
-
-  // アニメーション中のハンドラー（リアルタイムで状態を通知）
-  const handleSheetAnimate = useCallback((_fromIndex: number, toIndex: number) => {
-    // 閉じる方向のアニメーション時はsnapIndexを維持（handleSheetChangesでリセット）
-    if (toIndex !== -1) {
-      onSnapChange?.(toIndex);
-    }
-  }, [onSnapChange]);
 
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
@@ -70,13 +83,18 @@ export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardPr
       index={1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
-      onAnimate={handleSheetAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={true}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
       handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
+      {/* 検索バー同期用の内部コンポーネント */}
+      <CityDetailCardContent
+        searchBarBottomY={SEARCH_BAR_BOTTOM_Y}
+        onSearchBarVisibilityChange={onSearchBarVisibilityChange}
+      />
+
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">

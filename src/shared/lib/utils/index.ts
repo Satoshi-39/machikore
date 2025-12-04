@@ -10,3 +10,4 @@ export * from './cities.utils';
 export * from './machi.utils';
 export * from './action-sheet.utils';
 export * from './auth.utils';
+export * from './bottom-sheet.utils';

@@ -12,7 +12,7 @@ import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, CommentInputModal } from '@/shared/ui';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, useSearchBarSync } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
@@ -28,11 +28,33 @@ interface SpotDetailCardProps {
   currentUserId?: UUID | null;
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
+  /** 拡大状態（ヘッダー非表示）への遷移通知 - snapIndex=2で拡大状態 */
+  onExpandedChange?: (isExpanded: boolean) => void;
   onEdit?: (spotId: string) => void;
   onUserPress?: (userId: string) => void;
+  onSearchBarVisibilityChange?: (isHidden: boolean) => void;
 }
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onEdit, onUserPress }: SpotDetailCardProps) {
+/** 検索バー同期を行う内部コンテンツコンポーネント */
+function SpotDetailCardContent({
+  searchBarBottomY,
+  onSearchBarVisibilityChange,
+}: {
+  searchBarBottomY: number;
+  onSearchBarVisibilityChange?: (isHidden: boolean) => void;
+}) {
+  useSearchBarSync({
+    searchBarBottomY,
+    onVisibilityChange: onSearchBarVisibilityChange ?? (() => {}),
+  });
+
+  return null;
+}
+
+// 検索バー領域の下端Y座標（固定値）
+const SEARCH_BAR_BOTTOM_Y = 140;
+
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -154,27 +176,22 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // Bottom Sheetの初期index=1の場合、onChangeは呼ばれないため手動で通知
   useEffect(() => {
     onSnapChange?.(1);
+    onExpandedChange?.(false); // 初期状態は拡大ではない
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // スナップ変更時のハンドラー
+  // スナップ変更時のハンドラー（スナップ確定時のみ呼ばれる）
   const handleSheetChanges = useCallback((index: number) => {
     // index -1 = 閉じた状態 → デフォルト状態(1)にリセットして親に通知
     if (index === -1) {
       onSnapChange?.(1);
+      onExpandedChange?.(false); // 閉じた時は拡大ではない
       onClose();
     } else {
       onSnapChange?.(index);
+      onExpandedChange?.(index === 2); // index=2の時のみ拡大状態
     }
-  }, [onSnapChange, onClose]);
-
-  // アニメーション中のハンドラー（リアルタイムで状態を通知）
-  const handleSheetAnimate = useCallback((_fromIndex: number, toIndex: number) => {
-    // 閉じる方向のアニメーション時はsnapIndexを維持（handleSheetChangesでリセット）
-    if (toIndex !== -1) {
-      onSnapChange?.(toIndex);
-    }
-  }, [onSnapChange]);
+  }, [onSnapChange, onExpandedChange, onClose]);
 
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
@@ -274,14 +291,19 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       index={1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
-      onAnimate={handleSheetAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={true}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
       handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
-      <BottomSheetScrollView className="px-4"  contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
+      {/* 検索バー同期用の内部コンポーネント */}
+      <SpotDetailCardContent
+        searchBarBottomY={SEARCH_BAR_BOTTOM_Y}
+        onSearchBarVisibilityChange={onSearchBarVisibilityChange}
+      />
+
+      <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">

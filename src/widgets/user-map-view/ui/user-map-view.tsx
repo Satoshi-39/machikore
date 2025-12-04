@@ -34,7 +34,8 @@ interface UserMapViewProps {
   defaultMapId?: string | null;
   /** 初期表示するスポットID（指定時はカルーセルを非表示にして詳細カードを開く） */
   initialSpotId?: string | null;
-  onSpotDetailSnapChange?: (snapIndex: number) => void;
+  /** 詳細カードが最大化されている時に呼ばれる（ヘッダー非表示用） */
+  onDetailCardMaximized?: (isMaximized: boolean) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
@@ -49,7 +50,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       currentUserId = null,
       defaultMapId: _defaultMapId = null, // 将来のピン刺し機能で使用予定
       initialSpotId = null,
-      onSpotDetailSnapChange,
+      onDetailCardMaximized,
       currentLocation = null,
       viewMode = 'map',
       isSearchFocused = false,
@@ -70,7 +71,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       [spots, selectedSpotId]
     );
     const [isMapReady, setIsMapReady] = useState(false);
-    const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     // initialSpotIdがある場合は最初から詳細カードを開く
     const [isDetailCardOpen, setIsDetailCardOpen] = useState(!!initialSpotId);
     // カルーセルの表示状態（initialSpotIdがある場合は非表示）
@@ -134,12 +134,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const handleDetailCardClose = () => {
       setSelectedSpotId(null);
       setIsDetailCardOpen(false);
+      // ヘッダーを表示状態に戻す
+      onDetailCardMaximized?.(false);
     };
 
-    // スナップ変更を親に通知して、ローカルstateも更新
+    // スナップ変更時のハンドラー（snapIndex=2で最大化）
     const handleSnapChange = (snapIndex: number) => {
-      setSpotDetailSnapIndex(snapIndex);
-      onSpotDetailSnapChange?.(snapIndex);
+      onDetailCardMaximized?.(snapIndex === 2);
     };
 
     // マップのロード完了ハンドラー
@@ -311,7 +312,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             currentUserId={currentUserId}
             onClose={handleDetailCardClose}
             onSnapChange={handleSnapChange}
+            onExpandedChange={onDetailCardMaximized}
             onEdit={onEditSpot}
+            onSearchBarVisibilityChange={onDetailCardMaximized}
           />
         )}
 

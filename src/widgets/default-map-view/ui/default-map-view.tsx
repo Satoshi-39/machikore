@@ -59,6 +59,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [selectedSpot, setSelectedSpot] = useState<MasterSpotDisplay | null>(null);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
     const [visitFilter, setVisitFilter] = useState<VisitFilter>('all');
+    const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
     // ジャンプ完了後のリセット抑制用タイムスタンプ
@@ -134,6 +135,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       if (machi) {
         setSelectedCity(null);
         setSelectedSpot(null);
+      } else {
+        // 閉じる時は検索バーを表示
+        setIsSearchBarHidden(false);
       }
     };
 
@@ -144,6 +148,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       if (city) {
         setSelectedMachi(null);
         setSelectedSpot(null);
+      } else {
+        // 閉じる時は検索バーを表示
+        setIsSearchBarHidden(false);
       }
     };
 
@@ -154,6 +161,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       if (spot) {
         setSelectedMachi(null);
         setSelectedCity(null);
+      } else {
+        // 閉じる時は検索バーを表示
+        setIsSearchBarHidden(false);
       }
     };
 
@@ -336,12 +346,11 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               className="absolute top-0 left-0 right-0"
               style={{
                 paddingTop: insets.top,
-                opacity: machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 || spotDetailSnapIndex === 2 ? 0 : 1,
+                opacity: isSearchBarHidden ? 0 : 1,
               }}
-              pointerEvents={machiDetailSnapIndex === 2 || cityDetailSnapIndex === 2 || spotDetailSnapIndex === 2 ? 'none' : 'auto'}
+              pointerEvents={isSearchBarHidden ? 'none' : 'auto'}
             >
               <MapSearchBar
-                variant="map"
                 viewMode={viewMode}
                 onViewModeChange={onViewModeChange}
                 onFocus={onSearchFocus}
@@ -402,6 +411,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               machi={selectedMachi}
               onClose={() => handleMachiSelect(null)}
               onSnapChange={handleSnapChange}
+              onSearchBarVisibilityChange={setIsSearchBarHidden}
             />
           )}
 
@@ -411,6 +421,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               city={selectedCity}
               onClose={() => handleCitySelect(null)}
               onSnapChange={handleCitySnapChange}
+              onSearchBarVisibilityChange={setIsSearchBarHidden}
             />
           )}
 
@@ -420,6 +431,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               spot={selectedSpot}
               onClose={() => handleSpotSelect(null)}
               onSnapChange={handleSpotSnapChange}
+              onSearchBarVisibilityChange={setIsSearchBarHidden}
             />
           )}
         </View>
