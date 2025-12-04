@@ -29,7 +29,7 @@ export function MapSearchBar({
   placeholder = 'スポットを検索',
   viewMode,
   onViewModeChange,
-  className = 'px-5 pt-5',
+  className = 'px-5 pt-3',
 }: MapSearchBarProps) {
   const isDarkMode = useIsDarkMode();
   const viewModeIcon = viewMode ? mapListConfig.icons[viewMode] : undefined;
