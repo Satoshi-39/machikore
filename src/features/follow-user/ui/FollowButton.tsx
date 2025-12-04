@@ -39,10 +39,26 @@ export function FollowButton({ targetUserId }: FollowButtonProps) {
     }
   };
 
+  // ローディング中はボタンを表示しない（ちらつき防止）
+  if (isFollowingLoading) {
+    return (
+      <TouchableOpacity
+        disabled
+        className="px-6 py-2 rounded-full"
+        style={{
+          backgroundColor: colors.gray[200],
+          minWidth: 100,
+        }}
+      >
+        <ActivityIndicator size="small" color={colors.gray[400]} />
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <TouchableOpacity
       onPress={handlePress}
-      disabled={isActionPending || isFollowingLoading}
+      disabled={isActionPending}
       className="px-6 py-2 rounded-full"
       style={{
         backgroundColor: isFollowing ? colors.gray[200] : colors.primary.DEFAULT,

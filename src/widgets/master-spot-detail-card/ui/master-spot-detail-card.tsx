@@ -6,11 +6,11 @@ import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react'
 import { View, Text, Pressable, Linking, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter, useSegments, type Href } from 'expo-router';
+import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
 import { colors } from '@/shared/config';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, useCurrentTab } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
@@ -31,7 +31,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
@@ -41,11 +41,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
   // いいね状態
   const { data: isLiked = false } = useCheckMasterSpotLiked(currentUserId, spot.id);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMasterSpotLike();
-
-  // タブ内かどうかを判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
 
   // このマスタースポットに紐づくユーザー投稿を取得
   const { data: userSpots = [], isLoading: isLoadingUserSpots } = useSpotsByMasterSpot(spot.id);
@@ -288,15 +283,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange }: MasterSpot
                   onPress={() => {
                     // スポット詳細ページに遷移（タブ内ルートを使用）
                     onClose();
-                    if (isInDiscoverTab) {
-                      router.push(`/(tabs)/discover/spots/${userSpot.id}`);
-                    } else if (isInMapTab) {
-                      router.push(`/(tabs)/map/spots/${userSpot.id}`);
-                    } else if (isInMypageTab) {
-                      router.push(`/(tabs)/mypage/spots/${userSpot.id}`);
-                    } else {
-                      router.push(`/spots/${userSpot.id}`);
-                    }
+                    router.push(`/(tabs)/${currentTab}/spots/${userSpot.id}` as any);
                   }}
                 >
                   {/* ユーザー情報とマップ名 */}

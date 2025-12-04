@@ -7,8 +7,9 @@
 import React, { useMemo, useCallback } from 'react';
 import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 import {
   useUserCollections,
   useDeleteCollection,
@@ -115,7 +116,7 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
 
 export function CollectionsTab({ userId }: CollectionsTabProps) {
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const { data: collections, isLoading, error } = useUserCollections(userId);
   const { mutate: deleteCollection } = useDeleteCollection();
@@ -123,26 +124,9 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
   // 自分のコレクションかどうか
   const isOwner = userId === currentUserId;
 
-  // タブ内かどうかを判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
-  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
-
   const handleCollectionPress = useCallback((collection: Collection) => {
-    // コレクション詳細ページへ遷移
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/collections/${collection.id}` as any);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/collections/${collection.id}` as any);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/collections/${collection.id}` as any);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/collections/${collection.id}` as any);
-    } else {
-      router.push(`/(tabs)/mypage/collections/${collection.id}` as any);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
+    router.push(`/(tabs)/${currentTab}/collections/${collection.id}` as any);
+  }, [router, currentTab]);
 
   const handleEdit = useCallback((collectionId: string) => {
     router.push(`/edit-collection/${collectionId}`);

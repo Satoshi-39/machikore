@@ -61,14 +61,14 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
             key={option.id}
             onPress={() => handlePress(option)}
             className={`flex-row items-center px-3 py-2 rounded-full active:opacity-80 ${
-              isActive ? 'bg-primary' : 'bg-muted dark:bg-dark-muted'
+              isActive ? 'bg-primary' : 'bg-surface dark:bg-dark-surface-elevated'
             }`}
             style={{
               shadowColor: '#000',
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.1,
-              shadowRadius: 2,
-              elevation: 2,
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: isDarkMode ? 0.4 : 0.15,
+              shadowRadius: isDarkMode ? 6 : 4,
+              elevation: isDarkMode ? 6 : 3,
             }}
           >
             <Ionicons

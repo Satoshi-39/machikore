@@ -6,9 +6,10 @@
 
 import React, { useState, useCallback } from 'react';
 import { View, Text, Pressable, FlatList } from 'react-native';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 import { Loading } from '@/shared/ui';
 import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
 import type { SpotWithDetails } from '@/shared/types';
@@ -21,42 +22,21 @@ interface LikesTabProps {
 
 export function LikesTab({ userId }: LikesTabProps) {
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const [subTab, setSubTab] = useState<LikeSubTab>('spots');
-
-  // タブ内かどうかを判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
 
   const { data: likedSpots = [], isLoading: spotsLoading } = useUserLikedSpots(userId);
   const { data: likedMaps = [], isLoading: mapsLoading } = useUserLikedMaps(userId);
 
   // スポットへの遷移
   const navigateToSpot = useCallback((spot: SpotWithDetails) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/spots/${spot.id}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/spots/${spot.id}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/spots/${spot.id}`);
-    } else {
-      router.push(`/spots/${spot.id}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+    router.push(`/(tabs)/${currentTab}/spots/${spot.id}` as any);
+  }, [router, currentTab]);
 
   // マップへの遷移
   const navigateToMap = useCallback((mapId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/maps/${mapId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/maps/${mapId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/maps/${mapId}`);
-    } else {
-      router.push(`/maps/${mapId}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+  }, [router, currentTab]);
 
   const isLoading = subTab === 'spots' ? spotsLoading : mapsLoading;
 

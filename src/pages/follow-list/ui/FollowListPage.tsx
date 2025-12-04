@@ -10,6 +10,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { PageHeader, EmptyState } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 import { useFollowers, useFollowing, type FollowWithUser } from '@/entities/follow';
 import { FollowButton } from '@/features/follow-user';
 
@@ -20,6 +21,7 @@ interface FollowListPageProps {
 
 export function FollowListPage({ userId, type }: FollowListPageProps) {
   const router = useRouter();
+  const currentTab = useCurrentTab();
   const isFollowers = type === 'followers';
 
   const { data: followers, isLoading: isLoadingFollowers } = useFollowers(
@@ -33,7 +35,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
   const isLoading = isFollowers ? isLoadingFollowers : isLoadingFollowing;
 
   const handleUserPress = (targetUserId: string) => {
-    router.push(`/(tabs)/mypage/users/${targetUserId}`);
+    router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as any);
   };
 
   const renderItem = ({ item }: { item: FollowWithUser }) => (

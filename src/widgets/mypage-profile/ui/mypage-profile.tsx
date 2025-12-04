@@ -9,6 +9,7 @@ import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 import { Loading, ImageViewerModal } from '@/shared/ui';
 import { useUser, useUserStats, useCurrentUserId } from '@/entities/user';
 import { FollowButton } from '@/features/follow-user';
@@ -20,6 +21,7 @@ interface MyPageProfileProps {
 
 export function MyPageProfile({ userId }: MyPageProfileProps) {
   const router = useRouter();
+  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const { data: user, isLoading } = useUser(userId ?? '');
   const { data: stats } = useUserStats(userId ?? '');
@@ -30,13 +32,13 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
 
   const handleFollowingPress = () => {
     if (userId) {
-      router.push(`/(tabs)/mypage/users/${userId}/following`);
+      router.push(`/(tabs)/${currentTab}/users/${userId}/following` as any);
     }
   };
 
   const handleFollowersPress = () => {
     if (userId) {
-      router.push(`/(tabs)/mypage/users/${userId}/followers`);
+      router.push(`/(tabs)/${currentTab}/users/${userId}/followers` as any);
     }
   };
 

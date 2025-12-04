@@ -8,9 +8,10 @@
 
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 
 export type UserProfileTabMode = 'maps' | 'collections';
 
@@ -26,26 +27,10 @@ export function UserProfileTabFilter({
   userId,
 }: UserProfileTabFilterProps) {
   const router = useRouter();
-  const segments = useSegments();
-
-  // タブ内かどうかを判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
-  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
+  const currentTab = useCurrentTab();
 
   const handleLikesPress = () => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/users/${userId}/likes`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/users/${userId}/likes`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/users/${userId}/likes`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/users/${userId}/likes`);
-    } else {
-      router.push(`/users/${userId}/likes`);
-    }
+    router.push(`/(tabs)/${currentTab}/users/${userId}/likes` as any);
   };
 
   const tabs: { mode: UserProfileTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [

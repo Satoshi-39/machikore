@@ -6,10 +6,11 @@
 
 import React, { useCallback, useMemo } from 'react';
 import { View, Text, Pressable, FlatList, Image } from 'react-native';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 import { useBookmarks } from '@/entities/bookmark';
 import { removeBookmark } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkWithDetails } from '@/shared/api/supabase/bookmarks';
@@ -28,13 +29,8 @@ export function BookmarkItemList({
   activeTab,
 }: BookmarkItemListProps) {
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
-
-  // タブ内かどうかを判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
 
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
 
@@ -49,44 +45,20 @@ export function BookmarkItemList({
     });
   }, [allBookmarks, folderId, activeTab]);
 
-  // スポットへの遷移（タブ内ルートを使用）
+  // スポットへの遷移
   const navigateToSpot = useCallback((spotId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/spots/${spotId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/spots/${spotId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/spots/${spotId}`);
-    } else {
-      router.push(`/spots/${spotId}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as any);
+  }, [router, currentTab]);
 
-  // マップへの遷移（タブ内ルートを使用）
+  // マップへの遷移
   const navigateToMap = useCallback((mapId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/maps/${mapId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/maps/${mapId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/maps/${mapId}`);
-    } else {
-      router.push(`/maps/${mapId}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+  }, [router, currentTab]);
 
   // ユーザープロフィールへの遷移
   const navigateToUser = useCallback((navUserId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/users/${navUserId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/users/${navUserId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/users/${navUserId}`);
-    } else {
-      router.push(`/users/${navUserId}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab]);
+    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as any);
+  }, [router, currentTab]);
 
   // ブックマーク削除
   const handleDeleteBookmark = useCallback(async (bookmarkId: string) => {

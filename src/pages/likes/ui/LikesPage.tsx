@@ -4,7 +4,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { View } from 'react-native';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentUserId } from '@/entities/user';
 import { LikeTabFilter, type LikeTabMode } from '@/features/filter-like-tab';
@@ -13,6 +13,7 @@ import { useUserLikedSpots, useUserLikedMaps, useUserLikedMasterSpots } from '@/
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { removeSpotLike, removeMapLike, removeMasterSpotLike } from '@/shared/api/supabase/likes';
 import { PageHeader } from '@/shared/ui';
+import { useCurrentTab } from '@/shared/lib';
 import type { SpotWithDetails } from '@/shared/types';
 
 interface LikesPageProps {
@@ -21,17 +22,11 @@ interface LikesPageProps {
 
 export function LikesPage({ userId: propUserId }: LikesPageProps) {
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
   const currentUserId = useCurrentUserId();
   const userId = propUserId || currentUserId;
   const [activeTab, setActiveTab] = useState<LikeTabMode>('spots');
-
-  // タブ内かどうかを判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
-  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
 
   const { data: likedSpots = [], isLoading: spotsLoading } = useUserLikedSpots(userId);
   const { data: likedMasterSpots = [], isLoading: masterSpotsLoading } = useUserLikedMasterSpots(userId);
@@ -39,18 +34,8 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
 
   // スポットタップ: スポット詳細画面に遷移（戻るでいいね一覧に戻れる）
   const handleSpotPress = useCallback((spot: SpotWithDetails) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/spots/${spot.id}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/spots/${spot.id}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/spots/${spot.id}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/spots/${spot.id}`);
-    } else {
-      router.push(`/spots/${spot.id}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
+    router.push(`/(tabs)/${currentTab}/spots/${spot.id}` as any);
+  }, [router, currentTab]);
 
   // マスタースポットタップ: デフォルトマップに遷移してスポットを表示
   const setJumpToMasterSpotId = useSelectedPlaceStore((state) => state.setJumpToMasterSpotId);
@@ -61,34 +46,14 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   }, [router, setJumpToMasterSpotId]);
 
   // ユーザータップ: プロフィール画面に遷移
-  const handleUserPress = useCallback((userId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/users/${userId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/users/${userId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/users/${userId}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/users/${userId}`);
-    } else {
-      router.push(`/users/${userId}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
+  const handleUserPress = useCallback((navUserId: string) => {
+    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as any);
+  }, [router, currentTab]);
 
   // マップタップ: マップ詳細画面に遷移（戻るでいいね一覧に戻れる）
   const handleMapPress = useCallback((mapId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/maps/${mapId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/maps/${mapId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/maps/${mapId}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/maps/${mapId}`);
-    } else {
-      router.push(`/maps/${mapId}`);
-    }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+  }, [router, currentTab]);
 
   // スポットいいね削除
   const handleDeleteSpotLike = useCallback(async (spotId: string) => {

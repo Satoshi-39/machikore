@@ -9,7 +9,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useLocalSearchParams, useRouter, useSegments, type Href } from 'expo-router';
+import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { DefaultMapView } from '@/widgets/default-map-view';
@@ -21,7 +21,7 @@ import { DefaultMapSearch } from '@/widgets/default-map-search';
 import { OwnMapSearch } from '@/widgets/own-map-search';
 import { OtherMapSearch } from '@/widgets/other-map-search';
 import { MapHeader } from '@/widgets/map-header';
-import { useLocation } from '@/shared/lib';
+import { useLocation, useCurrentTab } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
 import {
   useSelectedPlaceStore,
@@ -42,14 +42,9 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const effectiveMapId = propMapId ?? id;
   const effectiveSpotId = propSpotId ?? spotId;
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const insets = useSafeAreaInsets();
 
-  // タブ内かどうかを判定（segments: ['(tabs)', 'discover' or 'map' or 'mypage', ...]）
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
-  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
   const user = useUserStore((state) => state.user);
   // スポット作成時などでマップIDを共有するためにsetSelectedMapIdは維持
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
@@ -150,35 +145,12 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
 
   const handleMapSelect = (mapId: string) => {
     setSelectedMapId(mapId);
-    // タブ内の場合は各タブ内のルートを使用
-    if (isInDiscoverTab) {
-      router.replace(`/(tabs)/discover/maps/${mapId}`);
-    } else if (isInMapTab) {
-      router.replace(`/(tabs)/map/maps/${mapId}`);
-    } else if (isInMypageTab) {
-      router.replace(`/(tabs)/mypage/maps/${mapId}`);
-    } else if (propMapId) {
-      // propsでmapIdが渡されている場合（/maps/[id]からアクセス）は
-      // 現在の画面を置き換えて、ナビゲーション履歴を維持
-      router.replace(`/maps/${mapId}`);
-    } else {
-      // フォールバック: マップタブ内に遷移
-      router.push(`/(tabs)/map/maps/${mapId}`);
-    }
+    router.replace(`/(tabs)/${currentTab}/maps/${mapId}` as any);
   };
 
   const handleUserPress = () => {
     if (selectedMap?.user_id) {
-      // タブ内の場合は各タブ内のルートを使用
-      if (isInDiscoverTab) {
-        router.push(`/(tabs)/discover/users/${selectedMap.user_id}`);
-      } else if (isInMapTab) {
-        router.push(`/(tabs)/map/users/${selectedMap.user_id}`);
-      } else if (isInMypageTab) {
-        router.push(`/(tabs)/mypage/users/${selectedMap.user_id}`);
-      } else {
-        router.push(`/users/${selectedMap.user_id}`);
-      }
+      router.push(`/(tabs)/${currentTab}/users/${selectedMap.user_id}` as any);
     }
   };
 
@@ -197,17 +169,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   // 記事ページへ遷移
   const handleArticlePress = () => {
     if (!currentMapId) return;
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/articles/maps/${currentMapId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/articles/maps/${currentMapId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/articles/maps/${currentMapId}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/articles/maps/${currentMapId}`);
-    } else {
-      router.push(`/(tabs)/discover/articles/maps/${currentMapId}`);
-    }
+    router.push(`/(tabs)/${currentTab}/articles/maps/${currentMapId}` as any);
   };
 
   return (

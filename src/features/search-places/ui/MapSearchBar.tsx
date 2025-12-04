@@ -14,7 +14,6 @@ import { mapListConfig, type MapListViewMode } from '@/features/toggle-view-mode
 
 interface MapSearchBarProps {
   onFocus?: () => void;
-  variant?: 'map' | 'list';
   showIcon?: boolean;
   placeholder?: string;
   viewMode?: MapListViewMode;
@@ -24,7 +23,6 @@ interface MapSearchBarProps {
 
 export function MapSearchBar({
   onFocus,
-  variant = 'map',
   showIcon = true,
   placeholder = 'スポットを検索',
   viewMode,
@@ -45,9 +43,14 @@ export function MapSearchBar({
     <View className={className}>
       <Pressable onPress={onFocus}>
         <View
-          className={`flex-row items-center rounded-full px-4 py-3 ${
-            variant === 'map' ? 'bg-muted dark:bg-dark-muted shadow-md' : 'bg-muted dark:bg-dark-muted'
-          }`}
+          className="flex-row items-center rounded-full px-4 py-3 bg-surface dark:bg-dark-surface-elevated"
+          style={{
+            shadowColor: isDarkMode ? '#000' : '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: isDarkMode ? 0.4 : 0.15,
+            shadowRadius: isDarkMode ? 8 : 6,
+            elevation: isDarkMode ? 8 : 4,
+          }}
         >
           {showIcon ? (
             <Image

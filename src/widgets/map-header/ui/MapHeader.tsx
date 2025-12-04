@@ -14,6 +14,7 @@ import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
 
 interface MapHeaderProps {
@@ -48,6 +49,7 @@ export function MapHeader({
   onArticlePress,
 }: MapHeaderProps) {
   const insets = useSafeAreaInsets();
+  const isDarkMode = useIsDarkMode();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
@@ -173,13 +175,13 @@ export function MapHeader({
   if (isUserMap && isLoading) {
     return (
       <View
-        className="bg-surface dark:bg-dark-muted px-4 py-3 rounded-full"
+        className="bg-surface dark:bg-dark-surface-elevated px-4 py-3 rounded-full"
         style={{
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.15,
-          shadowRadius: 4,
-          elevation: 4,
+          shadowOpacity: isDarkMode ? 0.4 : 0.15,
+          shadowRadius: isDarkMode ? 8 : 4,
+          elevation: isDarkMode ? 8 : 4,
         }}
       >
         <View className="flex-row items-center justify-between">
@@ -198,14 +200,14 @@ export function MapHeader({
 
   return (
     <View
-      className={isUserMap ? "bg-surface dark:bg-dark-muted px-4 py-3 rounded-full" : "bg-surface dark:bg-dark-surface px-5 py-4"}
-      style={isUserMap ? {
+      className={isUserMap ? "bg-surface dark:bg-dark-surface-elevated px-4 py-3 rounded-full" : "bg-surface dark:bg-dark-surface-elevated px-5 py-4"}
+      style={{
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.15,
-        shadowRadius: 4,
-        elevation: 4,
-      } : undefined}
+        shadowOpacity: isDarkMode ? 0.4 : 0.15,
+        shadowRadius: isDarkMode ? 8 : (isUserMap ? 4 : 6),
+        elevation: isDarkMode ? 8 : 4,
+      }}
     >
       {isUserMap ? (
         // ユーザーマップ：戻るボタン + ユーザーアイコン + マップ名（左）、アクションボタン群（右）
@@ -327,11 +329,9 @@ export function MapHeader({
                 <Pressable
                   key={map.id}
                   onPress={() => handleMapItemPress(map.id)}
-                  className="py-4 active:bg-background-secondary dark:bg-dark-background-secondary"
-                  style={{
-                    borderBottomWidth: index < userMaps.length - 1 ? 1 : 0,
-                    borderBottomColor: '#F3F4F6',
-                  }}
+                  className={`py-4 active:bg-background-secondary dark:active:bg-dark-background-secondary ${
+                    index < userMaps.length - 1 ? 'border-b border-border-light dark:border-dark-border-light' : ''
+                  }`}
                 >
                   <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
                     {map.name}

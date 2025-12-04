@@ -7,8 +7,9 @@
 import React, { useMemo } from 'react';
 import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
 import { AsyncBoundary, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
@@ -115,29 +116,12 @@ function MapCard({ map, onPress, onEdit, onDelete, onArticlePress }: MapCardProp
 
 export function MapsTab({ userId }: MapsTabProps) {
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const { data: maps, isLoading, error } = useUserMaps(userId);
   const { mutate: deleteMap } = useDeleteMap();
 
-  // タブ内かどうかを判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
-  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
-
   const handleMapPress = (map: MapWithUser) => {
-    // タブ内の場合は各タブ内のルートを使用
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/maps/${map.id}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/maps/${map.id}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/maps/${map.id}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/maps/${map.id}`);
-    } else {
-      router.push(`/maps/${map.id}`);
-    }
+    router.push(`/(tabs)/${currentTab}/maps/${map.id}` as any);
   };
 
   const handleEdit = (mapId: string) => {
@@ -160,17 +144,7 @@ export function MapsTab({ userId }: MapsTabProps) {
   };
 
   const handleArticlePress = (mapId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/articles/maps/${mapId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/articles/maps/${mapId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/articles/maps/${mapId}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/articles/maps/${mapId}`);
-    } else {
-      router.push(`/(tabs)/mypage/articles/maps/${mapId}`);
-    }
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
   };
 
   return (

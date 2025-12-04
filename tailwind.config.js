@@ -22,6 +22,7 @@ const semanticColors = {
     backgroundSecondary: '#1F2937', // gray-800
     surface: '#1F2937', // gray-800
     surfaceSecondary: '#374151', // gray-700
+    surfaceElevated: '#2D3748', // 浮いている要素用（少し明るめ）
     border: '#4B5563', // gray-600
     borderLight: '#374151', // gray-700
     foreground: '#F9FAFB', // gray-50
@@ -85,6 +86,7 @@ module.exports = {
         'dark-surface': {
           DEFAULT: semanticColors.dark.surface,
           secondary: semanticColors.dark.surfaceSecondary,
+          elevated: semanticColors.dark.surfaceElevated,
         },
         'dark-border': {
           DEFAULT: semanticColors.dark.border,
