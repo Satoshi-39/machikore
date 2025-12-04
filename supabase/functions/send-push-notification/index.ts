@@ -134,6 +134,65 @@ Deno.serve(async (req) => {
       );
     }
 
+    // 通知設定を取得
+    const { data: notificationSettings } = await supabase
+      .from("user_notification_settings")
+      .select("push_enabled, like_enabled, comment_enabled, follow_enabled, system_enabled")
+      .eq("user_id", payload.user_id)
+      .single();
+
+    // 設定がない場合はデフォルトで全てON
+    const settings = notificationSettings || {
+      push_enabled: true,
+      like_enabled: true,
+      comment_enabled: true,
+      follow_enabled: true,
+      system_enabled: true,
+    };
+
+    console.log("[send-push-notification] Notification settings:", settings);
+
+    // マスター設定がOFFなら送信しない
+    if (!settings.push_enabled) {
+      console.log("[send-push-notification] Push notifications disabled for user");
+      return new Response(
+        JSON.stringify({ success: false, reason: "push_disabled" }),
+        {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // 通知タイプ別の設定をチェック
+    const isNotificationEnabled = (() => {
+      switch (payload.type) {
+        case "like_spot":
+        case "like_map":
+          return settings.like_enabled;
+        case "comment_spot":
+        case "comment_map":
+          return settings.comment_enabled;
+        case "follow":
+          return settings.follow_enabled;
+        case "system":
+          return settings.system_enabled;
+        default:
+          return true; // 不明なタイプはデフォルトで送信
+      }
+    })();
+
+    if (!isNotificationEnabled) {
+      console.log(`[send-push-notification] ${payload.type} notifications disabled for user`);
+      return new Response(
+        JSON.stringify({ success: false, reason: "notification_type_disabled" }),
+        {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
     // アクターの情報を取得（システム通知以外）
     let actorName = "誰か";
     if (payload.actor_id) {

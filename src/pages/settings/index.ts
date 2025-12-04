@@ -3,3 +3,4 @@
  */
 
 export { SettingsPage } from './ui/SettingsPage';
+export { NotificationSettingsPage } from './ui/NotificationSettingsPage';

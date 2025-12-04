@@ -20,6 +20,14 @@ interface MutationContext {
 }
 
 /**
+ * InfiniteQueryのページ構造
+ */
+interface InfiniteData {
+  pages: SpotWithDetails[][];
+  pageParams: number[];
+}
+
+/**
  * キャッシュ内のスポットの is_liked と likes_count を更新するヘルパー関数
  */
 function updateSpotInCache(
@@ -30,10 +38,13 @@ function updateSpotInCache(
   const delta = isLiked ? 1 : -1;
 
   // ['spots', ...] プレフィックスを持つすべてのキャッシュを更新
+  // 通常の配列形式（SpotWithDetails[]）
   queryClient.setQueriesData<SpotWithDetails[]>(
     { queryKey: QUERY_KEYS.spots },
     (oldData) => {
       if (!oldData || !Array.isArray(oldData)) return oldData;
+      // InfiniteQueryの場合はpagesプロパティがある
+      if ('pages' in oldData) return oldData;
       return oldData.map((spot) => {
         if (spot.id === spotId) {
           return {
@@ -44,6 +55,29 @@ function updateSpotInCache(
         }
         return spot;
       });
+    }
+  );
+
+  // InfiniteQuery形式（{ pages: SpotWithDetails[][], pageParams: number[] }）
+  queryClient.setQueriesData<InfiniteData>(
+    { queryKey: QUERY_KEYS.spots },
+    (oldData) => {
+      if (!oldData || !('pages' in oldData)) return oldData;
+      return {
+        ...oldData,
+        pages: oldData.pages.map((page) =>
+          page.map((spot) => {
+            if (spot.id === spotId) {
+              return {
+                ...spot,
+                is_liked: isLiked,
+                likes_count: Math.max(0, (spot.likes_count || 0) + delta),
+              };
+            }
+            return spot;
+          })
+        ),
+      };
     }
   );
 
@@ -69,13 +103,25 @@ function getSpotIsLiked(
   spotId: UUID
 ): boolean {
   // ['spots', ...] キャッシュから検索
-  const allSpotsQueries = queryClient.getQueriesData<SpotWithDetails[]>({
+  const allSpotsQueries = queryClient.getQueriesData<SpotWithDetails[] | InfiniteData>({
     queryKey: QUERY_KEYS.spots,
   });
 
-  for (const [, spots] of allSpotsQueries) {
-    if (spots && Array.isArray(spots)) {
-      const found = spots.find((s) => s.id === spotId);
+  for (const [, data] of allSpotsQueries) {
+    if (!data) continue;
+
+    // InfiniteQuery形式の場合
+    if ('pages' in data) {
+      for (const page of data.pages) {
+        const found = page.find((s) => s.id === spotId);
+        if (found) {
+          return found.is_liked ?? false;
+        }
+      }
+    }
+    // 通常の配列形式の場合
+    else if (Array.isArray(data)) {
+      const found = data.find((s) => s.id === spotId);
       if (found) {
         return found.is_liked ?? false;
       }

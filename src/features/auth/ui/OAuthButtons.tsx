@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useOAuthSignIn } from '../model/use-oauth-sign-in';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface OAuthButtonsProps {
   onSuccess?: () => void;
@@ -15,6 +16,8 @@ interface OAuthButtonsProps {
 
 export function OAuthButtons({ onSuccess }: OAuthButtonsProps) {
   const { signInWithOAuth, loadingProvider, error } = useOAuthSignIn();
+  const isDarkMode = useIsDarkMode();
+  const appleIconColor = isDarkMode ? '#FFFFFF' : '#000000';
 
   const handleGooglePress = async () => {
     const result = await signInWithOAuth('google');
@@ -69,10 +72,10 @@ export function OAuthButtons({ onSuccess }: OAuthButtonsProps) {
           activeOpacity={0.8}
         >
           {loadingProvider === 'apple' ? (
-            <ActivityIndicator color="#000000" />
+            <ActivityIndicator color={appleIconColor} />
           ) : (
             <>
-              <Ionicons name="logo-apple" size={20} color="#000000" />
+              <Ionicons name="logo-apple" size={20} color={appleIconColor} />
               <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base font-semibold ml-3">
                 Appleで続ける
               </Text>

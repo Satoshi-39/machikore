@@ -116,12 +116,6 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   // ストアから設定値を取得
   const themeMode = useAppSettingsStore((state) => state.themeMode);
   const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
-  const pushNotificationsEnabled = useAppSettingsStore(
-    (state) => state.pushNotificationsEnabled
-  );
-  const setPushNotificationsEnabled = useAppSettingsStore(
-    (state) => state.setPushNotificationsEnabled
-  );
 
   const isDarkMode = themeMode === 'dark';
   const handleDarkModeChange = (value: boolean) => {
@@ -189,16 +183,10 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
 
         {/* 通知 */}
         <SettingsSection title="通知">
-          <SettingsToggle
-            icon="notifications-outline"
-            label="プッシュ通知"
-            value={pushNotificationsEnabled}
-            onValueChange={setPushNotificationsEnabled}
-          />
           <SettingsItem
-            icon="options-outline"
-            label="通知の詳細設定"
-            onPress={showComingSoon}
+            icon="notifications-outline"
+            label="通知設定"
+            onPress={() => router.push('/settings/notifications')}
           />
         </SettingsSection>
 

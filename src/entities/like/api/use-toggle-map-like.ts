@@ -25,6 +25,12 @@ interface MapWithLikesCount {
   likes_count?: number | null;
 }
 
+// InfiniteQueryのページ構造
+interface InfiniteData<T> {
+  pages: T[][];
+  pageParams: number[];
+}
+
 /**
  * キャッシュ内のマップのlikes_countを更新するヘルパー関数
  */
@@ -34,10 +40,13 @@ function updateMapLikesCountInCache(
   delta: number
 ) {
   // ['maps', ...] プレフィックスを持つすべてのキャッシュを更新
+  // 通常の配列形式
   queryClient.setQueriesData<MapWithLikesCount[]>(
     { queryKey: QUERY_KEYS.maps },
     (oldData) => {
       if (!oldData || !Array.isArray(oldData)) return oldData;
+      // InfiniteQueryの場合はpagesプロパティがある
+      if ('pages' in oldData) return oldData;
       return oldData.map((map) => {
         if (map.id === mapId) {
           return {
@@ -47,6 +56,28 @@ function updateMapLikesCountInCache(
         }
         return map;
       });
+    }
+  );
+
+  // InfiniteQuery形式
+  queryClient.setQueriesData<InfiniteData<MapWithLikesCount>>(
+    { queryKey: QUERY_KEYS.maps },
+    (oldData) => {
+      if (!oldData || !('pages' in oldData)) return oldData;
+      return {
+        ...oldData,
+        pages: oldData.pages.map((page) =>
+          page.map((map) => {
+            if (map.id === mapId) {
+              return {
+                ...map,
+                likes_count: Math.max(0, (map.likes_count || 0) + delta),
+              };
+            }
+            return map;
+          })
+        ),
+      };
     }
   );
 

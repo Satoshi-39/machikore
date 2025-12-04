@@ -1,7 +1,8 @@
 /**
  * アプリ設定 Store (Zustand)
  *
- * ダークモード、通知設定などアプリ全体の設定を管理
+ * ダークモードなどアプリ全体のローカル設定を管理
+ * 注意: 通知設定はサーバー側（user_notification_settings テーブル）で管理
  */
 
 import { create } from 'zustand';
@@ -19,18 +20,8 @@ interface AppSettingsState {
   // 表示設定
   themeMode: ThemeMode;
 
-  // 通知設定
-  pushNotificationsEnabled: boolean;
-  likeNotificationsEnabled: boolean;
-  commentNotificationsEnabled: boolean;
-  followNotificationsEnabled: boolean;
-
   // Actions
   setThemeMode: (mode: ThemeMode) => void;
-  setPushNotificationsEnabled: (enabled: boolean) => void;
-  setLikeNotificationsEnabled: (enabled: boolean) => void;
-  setCommentNotificationsEnabled: (enabled: boolean) => void;
-  setFollowNotificationsEnabled: (enabled: boolean) => void;
   resetSettings: () => void;
 }
 
@@ -40,10 +31,6 @@ interface AppSettingsState {
 
 const initialState = {
   themeMode: 'light' as ThemeMode,
-  pushNotificationsEnabled: true,
-  likeNotificationsEnabled: true,
-  commentNotificationsEnabled: true,
-  followNotificationsEnabled: true,
 };
 
 // ===============================
@@ -56,18 +43,6 @@ export const useAppSettingsStore = create<AppSettingsState>()(
       ...initialState,
 
       setThemeMode: (themeMode) => set({ themeMode }),
-
-      setPushNotificationsEnabled: (pushNotificationsEnabled) =>
-        set({ pushNotificationsEnabled }),
-
-      setLikeNotificationsEnabled: (likeNotificationsEnabled) =>
-        set({ likeNotificationsEnabled }),
-
-      setCommentNotificationsEnabled: (commentNotificationsEnabled) =>
-        set({ commentNotificationsEnabled }),
-
-      setFollowNotificationsEnabled: (followNotificationsEnabled) =>
-        set({ followNotificationsEnabled }),
 
       resetSettings: () => set(initialState),
     }),
@@ -85,5 +60,3 @@ export const useAppSettingsStore = create<AppSettingsState>()(
 export const useThemeMode = () => useAppSettingsStore((state) => state.themeMode);
 export const useIsDarkMode = () =>
   useAppSettingsStore((state) => state.themeMode === 'dark');
-export const usePushNotificationsEnabled = () =>
-  useAppSettingsStore((state) => state.pushNotificationsEnabled);
