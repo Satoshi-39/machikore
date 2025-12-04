@@ -16,19 +16,20 @@ const semanticColors = {
     foregroundMuted: '#9CA3AF', // gray-400
     muted: '#F3F4F6', // gray-100
   },
-  // Dark Theme
+  // Dark Theme - 光沢のある黒（Threads/AbemaTV風）
+  // 3段階: surface(カード) < surfaceSecondary(PopupMenu) < surfaceElevated(検索バー)
   dark: {
-    background: '#111827', // gray-900
-    backgroundSecondary: '#1F2937', // gray-800
-    surface: '#1F2937', // gray-800
-    surfaceSecondary: '#374151', // gray-700
-    surfaceElevated: '#2D3748', // 浮いている要素用（少し明るめ）
-    border: '#4B5563', // gray-600
-    borderLight: '#374151', // gray-700
-    foreground: '#F9FAFB', // gray-50
-    foregroundSecondary: '#9CA3AF', // gray-400
-    foregroundMuted: '#6B7280', // gray-500
-    muted: '#374151', // gray-700
+    background: '#000000', // 純粋な黒
+    backgroundSecondary: '#0A0A0A', // ほぼ黒
+    surface: '#101010', // 少し明るい黒（カード等）
+    surfaceSecondary: '#1A1A1A', // さらに明るい（PopupMenu等）
+    surfaceElevated: '#262626', // 浮いている要素用（検索バー/ヘッダー）
+    border: '#2A2A2A', // 暗めのボーダー
+    borderLight: '#1A1A1A', // より暗いボーダー
+    foreground: '#FFFFFF', // 純白
+    foregroundSecondary: '#A0A0A0', // グレー
+    foregroundMuted: '#666666', // 暗めのグレー
+    muted: '#1A1A1A', // ミュート背景
   },
 };
 

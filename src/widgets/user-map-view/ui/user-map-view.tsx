@@ -32,6 +32,8 @@ interface UserMapViewProps {
   userId?: string | null;
   currentUserId?: string | null;
   defaultMapId?: string | null;
+  /** 初期表示するスポットID（指定時はカルーセルを非表示にして詳細カードを開く） */
+  initialSpotId?: string | null;
   onSpotDetailSnapChange?: (snapIndex: number) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
@@ -46,6 +48,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       userId: _userId = null, // 将来のピン刺し機能で使用予定
       currentUserId = null,
       defaultMapId: _defaultMapId = null, // 将来のピン刺し機能で使用予定
+      initialSpotId = null,
       onSpotDetailSnapChange,
       currentLocation = null,
       viewMode = 'map',
@@ -68,9 +71,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     );
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
-    const [isDetailCardOpen, setIsDetailCardOpen] = useState(false);
-    // カルーセルの表示状態
-    const [isCarouselVisible, setIsCarouselVisible] = useState(true);
+    // initialSpotIdがある場合は最初から詳細カードを開く
+    const [isDetailCardOpen, setIsDetailCardOpen] = useState(!!initialSpotId);
+    // カルーセルの表示状態（initialSpotIdがある場合は非表示）
+    const [isCarouselVisible, setIsCarouselVisible] = useState(!initialSpotId);
     // カルーセルで現在フォーカスされているスポットID
     const [focusedSpotId, setFocusedSpotId] = useState<string | null>(null);
 
@@ -163,7 +167,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         hasInitialCameraMoved.current = true;
         setTimeout(() => {
           moveCameraToSingleSpot(spot);
+          // 詳細カードを開く（カルーセルは非表示）
           setSelectedSpotId(spot.id);
+          setIsDetailCardOpen(true);
+          setIsCarouselVisible(false);
         }, 100);
         setJumpToSpotId(null);
       } else {

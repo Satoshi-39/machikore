@@ -40,21 +40,21 @@ export function PopupMenu({
 }: PopupMenuProps) {
   const isDarkMode = useIsDarkMode();
 
-  // ダークモード対応のスタイル
+  // ダークモード対応のスタイル（光沢のある黒テーマに合わせた色）
   const dynamicStyles = {
     optionsContainer: {
       ...styles.optionsContainer,
-      backgroundColor: isDarkMode ? '#374151' : 'white', // gray-700 / white
+      backgroundColor: isDarkMode ? '#1A1A1A' : 'white', // 暗めの背景
     },
     menuItemBorder: {
       ...styles.menuItemBorder,
-      borderBottomColor: isDarkMode ? '#4B5563' : colors.gray[200], // gray-600 / gray-200
+      borderBottomColor: isDarkMode ? '#2A2A2A' : colors.gray[200], // 暗めのボーダー
     },
     menuLabel: {
       ...styles.menuLabel,
-      color: isDarkMode ? '#F9FAFB' : colors.gray[800], // gray-50 / gray-800
+      color: isDarkMode ? '#FFFFFF' : colors.gray[800], // 純白テキスト
     },
-    iconColor: isDarkMode ? '#D1D5DB' : colors.gray[700], // gray-300 / gray-700
+    iconColor: isDarkMode ? '#A0A0A0' : colors.gray[700], // グレーアイコン
   };
 
   return (

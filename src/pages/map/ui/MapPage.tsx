@@ -184,6 +184,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
             userId={user?.id ?? null}
             currentUserId={user?.id ?? null}
             defaultMapId={myMaps?.[0]?.id ?? null}
+            initialSpotId={effectiveSpotId}
             currentLocation={location}
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
