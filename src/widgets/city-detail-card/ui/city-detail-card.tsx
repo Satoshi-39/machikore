@@ -42,16 +42,21 @@ export function CityDetailCard({ city, onClose, onSnapChange }: CityDetailCardPr
 
   // スナップ変更時のハンドラー
   const handleSheetChanges = useCallback((index: number) => {
-    onSnapChange?.(index);
-    // index -1 = 閉じた状態 → 親に通知してコンポーネント削除
+    // index -1 = 閉じた状態 → デフォルト状態(1)にリセットして親に通知
     if (index === -1) {
+      onSnapChange?.(1);
       onClose();
+    } else {
+      onSnapChange?.(index);
     }
   }, [onSnapChange, onClose]);
 
   // アニメーション中のハンドラー（リアルタイムで状態を通知）
   const handleSheetAnimate = useCallback((_fromIndex: number, toIndex: number) => {
-    onSnapChange?.(toIndex);
+    // 閉じる方向のアニメーション時はsnapIndexを維持（handleSheetChangesでリセット）
+    if (toIndex !== -1) {
+      onSnapChange?.(toIndex);
+    }
   }, [onSnapChange]);
 
   // 閉じるボタンのハンドラー
