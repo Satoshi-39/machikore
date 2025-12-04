@@ -8,7 +8,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter, useSegments, type Href } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
@@ -73,6 +73,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -210,27 +211,8 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={isUserMap ? ['top'] : []}>
-      {/* ヘッダー（ユーザーマップの時のみ表示、検索中は非表示） */}
-      {isUserMap && !isSearchFocused && (
-        <MapHeader
-          isUserMap={isUserMap}
-          isLoading={isLoadingUserMap}
-          mapId={currentMapId}
-          mapTitle={selectedMap?.name}
-          userId={user?.id}
-          userName={mapOwner?.display_name || undefined}
-          userAvatarUrl={mapOwner?.avatar_url || undefined}
-          userMaps={ownerMaps}
-          onBack={handleBack}
-          onMapSelect={handleMapSelect}
-          onUserPress={handleUserPress}
-          onSearchPress={handleSearchFocus}
-          onArticlePress={handleArticlePress}
-        />
-      )}
-
-      {/* マップ表示（常にレンダリング） */}
+    <View className="flex-1">
+      {/* マップ表示（常にレンダリング・全画面） */}
       <View className="flex-1">
         {/* デフォルトマップ or ユーザーマップ */}
         {isUserMap ? (
@@ -244,6 +226,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
             onEditSpot={handleEditSpot}
+            onSpotDetailSnapChange={setSpotDetailSnapIndex}
           />
         ) : (
           <DefaultMapView
@@ -282,7 +265,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
           <View
             className="absolute inset-0 z-50 bg-surface dark:bg-dark-surface"
             style={{
-              paddingTop: isUserMap ? 0 : insets.top,
+              paddingTop: insets.top,
             }}
           >
             {isUserMap ? (
@@ -323,6 +306,36 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
         )}
 
       </View>
-    </SafeAreaView>
+
+      {/* ヘッダー（ユーザーマップの時のみ表示、検索中・スポットカード最大時は非表示） - マップ上にオーバーレイ */}
+      {isUserMap && !isSearchFocused && (
+        <View
+          className="absolute top-0 left-0 right-0"
+          style={{
+            paddingTop: insets.top,
+            opacity: spotDetailSnapIndex === 2 ? 0 : 1,
+          }}
+          pointerEvents={spotDetailSnapIndex === 2 ? 'none' : 'box-none'}
+        >
+          <View className="mx-4 mt-2" pointerEvents="box-none">
+            <MapHeader
+              isUserMap={isUserMap}
+              isLoading={isLoadingUserMap}
+              mapId={currentMapId}
+              mapTitle={selectedMap?.name}
+              userId={user?.id}
+              userName={mapOwner?.display_name || undefined}
+              userAvatarUrl={mapOwner?.avatar_url || undefined}
+              userMaps={ownerMaps}
+              onBack={handleBack}
+              onMapSelect={handleMapSelect}
+              onUserPress={handleUserPress}
+              onSearchPress={handleSearchFocus}
+              onArticlePress={handleArticlePress}
+            />
+          </View>
+        </View>
+      )}
+    </View>
   );
 }

@@ -172,15 +172,24 @@ export function MapHeader({
   // ローディング時の表示
   if (isUserMap && isLoading) {
     return (
-      <View className="bg-surface dark:bg-dark-surface px-5 py-4">
+      <View
+        className="bg-surface dark:bg-dark-muted px-4 py-3 rounded-full"
+        style={{
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.15,
+          shadowRadius: 4,
+          elevation: 4,
+        }}
+      >
         <View className="flex-row items-center justify-between">
           {/* 左側：戻るボタン + ローディング */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
-            <Pressable onPress={onBack} className="mr-3">
-              <Ionicons name="arrow-back" size={24} color="#007AFF" />
+            <Pressable onPress={onBack} className="mr-2.5">
+              <Ionicons name="arrow-back" size={23} color="#007AFF" />
             </Pressable>
             <ActivityIndicator size="small" color="#007AFF" />
-            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary ml-3">読み込み中...</Text>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">読み込み中...</Text>
           </View>
         </View>
       </View>
@@ -188,22 +197,31 @@ export function MapHeader({
   }
 
   return (
-    <View className="bg-surface dark:bg-dark-surface px-5 py-4">
+    <View
+      className={isUserMap ? "bg-surface dark:bg-dark-muted px-4 py-3 rounded-full" : "bg-surface dark:bg-dark-surface px-5 py-4"}
+      style={isUserMap ? {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
+        elevation: 4,
+      } : undefined}
+    >
       {isUserMap ? (
         // ユーザーマップ：戻るボタン + ユーザーアイコン + マップ名（左）、アクションボタン群（右）
         <View className="flex-row items-center justify-between">
           {/* 左側：戻るボタン + ユーザーアイコン + マップ名 */}
-          <View className="flex-row items-center" style={{ flex: 0.8 }}>
+          <View className="flex-row items-center flex-1 mr-2">
             {/* 戻るボタン */}
-            <Pressable onPress={onBack} className="mr-3">
-              <Ionicons name="arrow-back" size={24} color="#007AFF" />
+            <Pressable onPress={onBack} className="mr-2.5">
+              <Ionicons name="arrow-back" size={23} color="#007AFF" />
             </Pressable>
 
             {/* ユーザーアイコン */}
             <Pressable
               onPress={onUserPress}
               onLongPress={() => userAvatarUrl && setIsAvatarModalVisible(true)}
-              className="mr-3"
+              className="mr-2.5"
             >
               {userAvatarUrl ? (
                 <Image
@@ -212,7 +230,7 @@ export function MapHeader({
                 />
               ) : (
                 <View className="w-10 h-10 rounded-full bg-gray-300 items-center justify-center">
-                  <Text className="text-base font-bold text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="text-sm font-bold text-foreground-secondary dark:text-dark-foreground-secondary">
                     {userName?.[0]?.toUpperCase() || '?'}
                   </Text>
                 </View>
@@ -220,13 +238,13 @@ export function MapHeader({
             </Pressable>
 
             {/* マップ名 - クリックでドロップダウン表示 */}
-            <View className="flex-shrink">
+            <View className="flex-1 flex-shrink">
               <Pressable
                 onPress={handleMapTitlePress}
                 className="flex-row items-center"
               >
                 <Text
-                  className="text-xl font-bold text-foreground dark:text-dark-foreground"
+                  className="text-base font-bold text-foreground dark:text-dark-foreground flex-shrink"
                   numberOfLines={1}
                 >
                   {mapTitle || `${userName || 'ゲスト'}のマップ`}
@@ -234,9 +252,9 @@ export function MapHeader({
                 {userMaps.length > 0 && (
                   <Ionicons
                     name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
-                    size={20}
+                    size={19}
                     color="#6B7280"
-                    style={{ marginLeft: 8 }}
+                    style={{ marginLeft: 4 }}
                   />
                 )}
               </Pressable>
@@ -244,16 +262,16 @@ export function MapHeader({
           </View>
 
           {/* 右側：アクションボタン群 */}
-          <View className="flex-row items-center gap-4">
+          <View className="flex-row items-center gap-3">
             {/* 検索ボタン */}
             <Pressable onPress={onSearchPress} className="items-center justify-center">
-              <Ionicons name="search-outline" size={24} color="#007AFF" />
+              <Ionicons name="search-outline" size={23} color="#007AFF" />
             </Pressable>
 
             {/* 三点リーダメニュー */}
             <PopupMenu
               items={menuItems}
-              triggerSize={24}
+              triggerSize={23}
               triggerColor="#007AFF"
             />
           </View>

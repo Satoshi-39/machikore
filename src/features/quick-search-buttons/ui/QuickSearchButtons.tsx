@@ -9,6 +9,7 @@ import React from 'react';
 import { ScrollView, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 export type QuickSearchCategory = 'visited' | 'not_visited' | 'tourism' | 'shopping' | 'station';
 export type VisitFilter = 'all' | 'visited' | 'not_visited';
@@ -35,6 +36,8 @@ interface QuickSearchButtonsProps {
 }
 
 export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCategoryPress }: QuickSearchButtonsProps) {
+  const isDarkMode = useIsDarkMode();
+
   const handlePress = (option: typeof FILTER_OPTIONS[number]) => {
     if (option.isFilter && option.filterValue && onFilterChange) {
       // トグル動作: 同じフィルタを再度押すと解除（allに戻す）
@@ -49,7 +52,7 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 16, gap: 8 }}
+      contentContainerStyle={{ paddingHorizontal: 20, gap: 8 }}
     >
       {FILTER_OPTIONS.map((option) => {
         const isActive = option.isFilter && activeFilter === option.filterValue;
@@ -58,11 +61,9 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
             key={option.id}
             onPress={() => handlePress(option)}
             className={`flex-row items-center px-3 py-2 rounded-full active:opacity-80 ${
-              isActive ? 'bg-primary' : 'bg-surface dark:bg-dark-surface'
+              isActive ? 'bg-primary' : 'bg-muted dark:bg-dark-muted'
             }`}
             style={{
-              borderWidth: 1,
-              borderColor: isActive ? colors.primary.DEFAULT : colors.gray[300],
               shadowColor: '#000',
               shadowOffset: { width: 0, height: 1 },
               shadowOpacity: 0.1,
@@ -73,9 +74,9 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
             <Ionicons
               name={option.icon}
               size={16}
-              color={isActive ? 'white' : colors.gray[600]}
+              color={isActive ? 'white' : (isDarkMode ? colors.gray[300] : colors.gray[600])}
             />
-            <Text className={`ml-1.5 text-sm font-medium ${isActive ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground-secondary'}`}>
+            <Text className={`ml-1.5 text-sm font-medium ${isActive ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground'}`}>
               {option.label}
             </Text>
           </Pressable>

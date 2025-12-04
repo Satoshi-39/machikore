@@ -9,6 +9,7 @@ import React from 'react';
 import { View, Text, Pressable, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { mapListConfig, type MapListViewMode } from '@/features/toggle-view-mode';
 
 interface MapSearchBarProps {
@@ -30,6 +31,7 @@ export function MapSearchBar({
   onViewModeChange,
   className = 'px-5 pt-5',
 }: MapSearchBarProps) {
+  const isDarkMode = useIsDarkMode();
   const viewModeIcon = viewMode ? mapListConfig.icons[viewMode] : undefined;
 
   const handleViewModeToggle = () => {
@@ -44,7 +46,7 @@ export function MapSearchBar({
       <Pressable onPress={onFocus}>
         <View
           className={`flex-row items-center rounded-full px-4 py-3 ${
-            variant === 'map' ? 'bg-surface dark:bg-dark-surface shadow-md' : 'bg-muted dark:bg-dark-muted'
+            variant === 'map' ? 'bg-muted dark:bg-dark-muted shadow-md' : 'bg-muted dark:bg-dark-muted'
           }`}
         >
           {showIcon ? (
@@ -56,7 +58,7 @@ export function MapSearchBar({
           ) : (
             <Ionicons name="search" size={20} color={colors.gray[400]} />
           )}
-          <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground">
             {placeholder}
           </Text>
           {viewModeIcon && onViewModeChange && (
@@ -67,7 +69,7 @@ export function MapSearchBar({
               }}
               className="ml-2 p-1"
             >
-              <Ionicons name={viewModeIcon} size={22} color={colors.gray[600]} />
+              <Ionicons name={viewModeIcon} size={22} color={isDarkMode ? colors.gray[300] : colors.gray[600]} />
             </TouchableOpacity>
           )}
         </View>

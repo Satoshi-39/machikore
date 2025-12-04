@@ -13,7 +13,7 @@ import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import { BookmarkItemList } from '@/widgets/bookmark-folder-list';
 import { useCurrentUserId } from '@/entities/user';
 import { useBookmarkFolders } from '@/entities/bookmark';
-import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface BookmarkFolderPageProps {
   folderId: string;
@@ -24,6 +24,7 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
   const router = useRouter();
   const userId = useCurrentUserId();
   const insets = useSafeAreaInsets();
+  const isDarkMode = useIsDarkMode();
 
   // フォルダ名を取得
   const { data: folders = [] } = useBookmarkFolders(userId);
@@ -54,7 +55,7 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
             className="absolute left-0"
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
-            <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
+            <Ionicons name="arrow-back" size={24} color={isDarkMode ? '#F9FAFB' : '#111827'} />
           </Pressable>
           <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
             {folderName}

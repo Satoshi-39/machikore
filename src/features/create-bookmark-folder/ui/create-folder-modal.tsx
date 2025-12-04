@@ -58,7 +58,8 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
             value={folderName}
             onChangeText={setFolderName}
             placeholder="フォルダ名"
-            className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base mb-4"
+            placeholderTextColor="#9CA3AF"
+            className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground mb-4"
             autoFocus
           />
           <View className="flex-row justify-end gap-3">

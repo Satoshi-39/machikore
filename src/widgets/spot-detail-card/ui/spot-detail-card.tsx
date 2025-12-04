@@ -142,15 +142,13 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // SpotWithDetailsから表示用データを抽出
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
   const spotAddress = spot.master_spot?.google_formatted_address;
-  const latitude = spot.master_spot?.latitude ?? 0;
-  const longitude = spot.master_spot?.longitude ?? 0;
 
   // スポットの画像を取得
   const { data: images = [] } = useSpotImages(spot.id);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
-  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 95%（検索バー非表示）
-  const snapPoints = useMemo(() => ['15%', '45%', '95%'], []);
+  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
+  const snapPoints = useMemo(() => ['15%', '45%', '90%'], []);
 
   // 初回マウント時に初期状態（デフォルト状態）を通知
   // Bottom Sheetの初期index=1の場合、onChangeは呼ばれないため手動で通知
@@ -304,18 +302,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               <Ionicons name="close" size={20} color={colors.text.secondary} />
             </Pressable>
           </View>
-        </View>
-
-        {/* 位置情報 */}
-        <View className="flex-row items-center mb-3">
-          <Ionicons
-            name="location-outline"
-            size={16}
-            color={colors.text.secondary}
-          />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-            緯度: {latitude.toFixed(4)}, 経度: {longitude.toFixed(4)}
-          </Text>
         </View>
 
         {/* 画像 */}

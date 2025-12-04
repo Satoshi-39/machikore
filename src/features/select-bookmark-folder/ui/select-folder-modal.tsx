@@ -186,7 +186,8 @@ export function SelectFolderModal({
                   value={newFolderName}
                   onChangeText={setNewFolderName}
                   placeholder="フォルダ名"
-                  className="flex-1 border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base mr-2"
+                  placeholderTextColor="#9CA3AF"
+                  className="flex-1 border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground mr-2"
                   autoFocus
                   onSubmitEditing={handleCreateFolder}
                 />

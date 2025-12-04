@@ -76,7 +76,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
             value={mapName}
             onChangeText={setMapName}
             placeholder="例：東京カフェ巡り"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
         </View>
@@ -92,7 +92,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
             placeholder="マップの説明を入力してください"
             multiline
             numberOfLines={4}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
@@ -139,7 +139,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, スイーツ, デート"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">

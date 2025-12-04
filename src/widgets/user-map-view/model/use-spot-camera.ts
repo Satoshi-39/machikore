@@ -60,7 +60,7 @@ export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
       cameraRef.current.fitBounds(
         [minLng, minLat], // 南西の座標
         [maxLng, maxLat], // 北東の座標
-        [50, 50, 50, 50], // パディング [上, 右, 下, 左]
+        [170, 50, 50, 50], // パディング [上, 右, 下, 左] - 上部はヘッダー分を考慮
         1000 // アニメーション時間
       );
     },

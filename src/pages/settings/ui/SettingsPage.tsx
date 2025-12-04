@@ -21,12 +21,13 @@ interface SettingsPageProps {
 interface SettingsSectionProps {
   title: string;
   children: React.ReactNode;
+  isFirst?: boolean;
 }
 
-function SettingsSection({ title, children }: SettingsSectionProps) {
+function SettingsSection({ title, children, isFirst = false }: SettingsSectionProps) {
   return (
-    <View className="bg-surface dark:bg-dark-surface mt-4">
-      <Text className="text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase px-4 pt-4 pb-2">
+    <View className="bg-surface dark:bg-dark-surface">
+      <Text className={`text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
         {title}
       </Text>
       {children}
@@ -55,7 +56,7 @@ function SettingsItem({
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:bg-dark-muted"
+      className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
     >
       <Ionicons
         name={icon}
@@ -158,7 +159,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
       <PageHeader title="設定" />
       <ScrollView className="flex-1">
         {/* アカウント */}
-        <SettingsSection title="アカウント">
+        <SettingsSection title="アカウント" isFirst>
           <SettingsItem
             icon="person-outline"
             label="プロフィール編集"

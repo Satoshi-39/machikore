@@ -111,7 +111,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
             value={name}
             onChangeText={setName}
             placeholder="例：東京カフェ巡り"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
         </View>
@@ -125,7 +125,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
             placeholder="このマップについての説明を入力してください"
             multiline
             numberOfLines={4}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
@@ -138,7 +138,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
             value={category}
             onChangeText={setCategory}
             placeholder="例：グルメ, 旅行, ショッピング"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
         </View>
@@ -150,7 +150,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">

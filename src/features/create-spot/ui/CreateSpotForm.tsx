@@ -199,7 +199,7 @@ export function CreateSpotForm({
             value={customName}
             onChangeText={setCustomName}
             placeholder="例：お気に入りのカフェ"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
@@ -216,7 +216,7 @@ export function CreateSpotForm({
             placeholder="このスポットについてのメモを入力してください"
             multiline
             numberOfLines={4}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
@@ -229,7 +229,7 @@ export function CreateSpotForm({
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">

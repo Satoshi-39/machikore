@@ -72,10 +72,10 @@ export const colors = {
    * 変更時は両方を更新してください
    */
   light: {
-    background: '#F0F9FF', // blue-50 (とても薄い青)
-    backgroundSecondary: '#E0F2FE', // blue-100
-    surface: '#F0F9FF', // blue-50 (とても薄い青)
-    surfaceSecondary: '#E0F2FE', // blue-100
+    background: '#FFFFFF', // white
+    backgroundSecondary: '#F9FAFB', // gray-50
+    surface: '#FFFFFF', // white
+    surfaceSecondary: '#F9FAFB', // gray-50
     border: '#E5E7EB', // gray-200
     borderLight: '#F3F4F6', // gray-100
     foreground: '#111827', // gray-900

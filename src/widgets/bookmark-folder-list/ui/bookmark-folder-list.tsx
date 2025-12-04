@@ -13,6 +13,7 @@ import {
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
 import { colors } from '@/shared/config';
+import { PopupMenu } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter, useSegments, type Href } from 'expo-router';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -25,12 +26,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {
-  Menu,
-  MenuOption,
-  MenuOptions,
-  MenuTrigger,
-} from 'react-native-popup-menu';
 
 interface BookmarkFolderListProps {
   userId: string;
@@ -171,47 +166,24 @@ export function BookmarkFolderList({
 
           {/* 3点リーダーメニュー（後で見る以外） */}
           {!isUncategorized && (
-            <Menu>
-              <MenuTrigger>
-                <View className="p-2">
-                  <Ionicons
-                    name="ellipsis-horizontal"
-                    size={20}
-                    color={colors.text.secondary}
-                  />
-                </View>
-              </MenuTrigger>
-              <MenuOptions
-                customStyles={{
-                  optionsContainer: {
-                    borderRadius: 8,
-                    padding: 4,
-                    width: 140,
-                  },
-                }}
-              >
-                <MenuOption
-                  onSelect={() => handleEditFolder(item as BookmarkFolder)}
-                >
-                  <View className="flex-row items-center px-3 py-2">
-                    <Ionicons
-                      name="pencil"
-                      size={18}
-                      color={colors.text.primary}
-                    />
-                    <Text className="ml-2 text-foreground dark:text-dark-foreground">編集</Text>
-                  </View>
-                </MenuOption>
-                <MenuOption
-                  onSelect={() => handleDeleteFolder(item as BookmarkFolder)}
-                >
-                  <View className="flex-row items-center px-3 py-2">
-                    <Ionicons name="trash" size={18} color="#EF4444" />
-                    <Text className="ml-2 text-red-500">削除</Text>
-                  </View>
-                </MenuOption>
-              </MenuOptions>
-            </Menu>
+            <PopupMenu
+              items={[
+                {
+                  id: 'edit',
+                  label: '編集',
+                  icon: 'pencil',
+                  onPress: () => handleEditFolder(item as BookmarkFolder),
+                },
+                {
+                  id: 'delete',
+                  label: '削除',
+                  icon: 'trash',
+                  destructive: true,
+                  onPress: () => handleDeleteFolder(item as BookmarkFolder),
+                },
+              ]}
+              triggerColor={colors.text.secondary}
+            />
           )}
         </Pressable>
       );
@@ -262,7 +234,8 @@ export function BookmarkFolderList({
               value={editingName}
               onChangeText={setEditingName}
               placeholder="フォルダ名"
-              className="bg-muted dark:bg-dark-muted rounded-lg px-4 py-3 text-base mb-4"
+              placeholderTextColor="#9CA3AF"
+              className="bg-muted dark:bg-dark-muted rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground mb-4"
               autoFocus
             />
             <View className="flex-row justify-end">
