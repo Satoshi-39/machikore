@@ -13,6 +13,7 @@ import { ENV } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
+import { SpotCarousel } from '@/widgets/spot-carousel';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
 import React, {
@@ -67,6 +68,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     );
     const [isMapReady, setIsMapReady] = useState(false);
     const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
+    const [isDetailCardOpen, setIsDetailCardOpen] = useState(false);
+    // カルーセルの表示状態
+    const [isCarouselVisible, setIsCarouselVisible] = useState(true);
+    // カルーセルで現在フォーカスされているスポットID
+    const [focusedSpotId, setFocusedSpotId] = useState<string | null>(null);
 
     const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
     const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
@@ -94,9 +100,36 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       cameraRef,
     });
 
-    // 選択状態を管理
+    // マーカータップ時：カルーセルを表示してそのスポットにフォーカス
     const handleSpotSelect = (spot: SpotWithDetails | null) => {
-      setSelectedSpotId(spot?.id ?? null);
+      if (spot) {
+        setFocusedSpotId(spot.id);
+        setIsCarouselVisible(true);
+        setIsDetailCardOpen(false);
+        moveCameraToSingleSpot(spot);
+      } else {
+        setFocusedSpotId(null);
+      }
+    };
+
+    // カルーセルでスワイプしてスポットにフォーカス（カメラ移動のみ）
+    const handleCarouselSpotFocus = (spot: SpotWithDetails) => {
+      setFocusedSpotId(spot.id);
+      moveCameraToSingleSpot(spot);
+    };
+
+    // カルーセルでスポットカードをタップ（詳細カードを開く）
+    const handleCarouselSpotPress = (spot: SpotWithDetails) => {
+      setSelectedSpotId(spot.id);
+      setFocusedSpotId(spot.id);
+      setIsDetailCardOpen(true);
+      moveCameraToSingleSpot(spot);
+    };
+
+    // 詳細カードを閉じる
+    const handleDetailCardClose = () => {
+      setSelectedSpotId(null);
+      setIsDetailCardOpen(false);
     };
 
     // スナップ変更を親に通知して、ローカルstateも更新
@@ -110,9 +143,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       setIsMapReady(true);
     };
 
-    // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット
+    // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット + カルーセル表示をリセット
     useEffect(() => {
       setSelectedSpotId(null);
+      setIsCarouselVisible(true);
       hasInitialCameraMoved.current = false;
     }, [mapId]);
 
@@ -220,30 +254,24 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           })}
         </Mapbox.MapView>
 
-        {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン） */}
-        {viewMode === 'map' && !isSearchFocused && (
+        {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン）
+            カルーセルと詳細カードが両方非表示の時に表示 */}
+        {viewMode === 'map' && !isSearchFocused && (!isCarouselVisible || spots.length === 0) && !isDetailCardOpen && (
           <View
             className="absolute right-6 z-50"
             style={{
-              // カード縮小版（15%）の時は16%の位置に、それ以外は48px
-              bottom: spotDetailSnapIndex === 0 && selectedSpot ? '16%' : 48,
+              bottom: 48,
             }}
-            pointerEvents={(spotDetailSnapIndex === 0 && selectedSpot) || !selectedSpot ? 'auto' : 'none'}
           >
-            <View
-              style={{
-                opacity: (spotDetailSnapIndex === 0 && selectedSpot) || !selectedSpot ? 1 : 0,
-              }}
-            >
-              <LocationButton
-                onPress={handleLocationPress}
-                testID="location-button"
-              />
-              {/* 全スポット表示ボタン */}
+            <LocationButton
+              onPress={handleLocationPress}
+              testID="location-button"
+            />
+            {/* 全スポット表示ボタン */}
+            {spots.length > 0 && (
               <View className="mt-3">
                 <FitAllButton
                   onPress={() => {
-                    if (spots.length === 0) return;
                     if (spots.length === 1) {
                       moveCameraToSingleSpot(spots[0]!);
                     } else {
@@ -253,16 +281,28 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                   testID="fit-all-button"
                 />
               </View>
-            </View>
+            )}
           </View>
         )}
 
+        {/* スポットカルーセル（詳細カードが開いていない時のみ表示） */}
+        {viewMode === 'map' && !isSearchFocused && !isDetailCardOpen && isCarouselVisible && spots.length > 0 && (
+          <SpotCarousel
+            spots={spots}
+            selectedSpotId={focusedSpotId}
+            currentUserId={currentUserId}
+            onSpotSelect={handleCarouselSpotFocus}
+            onSpotPress={handleCarouselSpotPress}
+            onClose={() => setIsCarouselVisible(false)}
+          />
+        )}
+
         {/* 選択されたスポットの詳細カード */}
-        {selectedSpot && (
+        {selectedSpot && isDetailCardOpen && (
           <SpotDetailCard
             spot={selectedSpot}
             currentUserId={currentUserId}
-            onClose={() => handleSpotSelect(null)}
+            onClose={handleDetailCardClose}
             onSnapChange={handleSnapChange}
             onEdit={onEditSpot}
           />

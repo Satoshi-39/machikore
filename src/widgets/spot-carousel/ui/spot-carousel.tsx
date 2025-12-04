@@ -1,0 +1,380 @@
+/**
+ * スポットカルーセルWidget
+ *
+ * マップ下部に表示される横スワイプ式のスポットカード
+ * FSDの原則：Widget層は複合的なUIコンポーネント
+ */
+
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+import {
+  View,
+  Text,
+  Pressable,
+  FlatList,
+  Dimensions,
+  Share,
+  Platform,
+  type NativeSyntheticEvent,
+  type NativeScrollEvent,
+  type ListRenderItemInfo,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { showLoginRequiredAlert } from '@/shared/lib';
+import { useToggleSpotLike } from '@/entities/like';
+import {
+  useSpotBookmarkInfo,
+  useBookmarkSpot,
+  useUnbookmarkSpotFromFolder,
+} from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import type { SpotWithDetails, UUID } from '@/shared/types';
+
+// レイアウト定数
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const CARD_WIDTH = SCREEN_WIDTH * 0.82;
+const CARD_GAP = 10;
+const CARD_HEIGHT = SCREEN_HEIGHT * 0.22;
+const SIDE_SPACING = (SCREEN_WIDTH - CARD_WIDTH) / 2;
+// 1アイテムの幅（カード + 片側のギャップ）
+const ITEM_WIDTH = CARD_WIDTH + CARD_GAP;
+
+// ========== SpotCard コンポーネント ==========
+
+interface SpotCardProps {
+  spot: SpotWithDetails;
+  isSelected: boolean;
+  isFirst: boolean;
+  isLast: boolean;
+  currentUserId?: UUID | null;
+  onPress: () => void;
+}
+
+function SpotCard({
+  spot,
+  isSelected,
+  isFirst,
+  isLast,
+  currentUserId,
+  onPress,
+}: SpotCardProps) {
+  const isDarkMode = useIsDarkMode();
+  const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+  const description = spot.description;
+
+  // いいね
+  const isLiked = spot.is_liked ?? false;
+  const likeCount = spot.likes_count ?? 0;
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
+
+  // ブックマーク
+  const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
+  const isBookmarked = bookmarkInfo.length > 0;
+  const bookmarkedFolderIds = new Set(bookmarkInfo.map((b) => b.folder_id));
+  const { mutate: addBookmark } = useBookmarkSpot();
+  const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
+  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+
+  const handleLike = () => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('いいね');
+      return;
+    }
+    if (isTogglingLike) return;
+    toggleLike({ spotId: spot.id, userId: currentUserId });
+  };
+
+  const handleBookmark = () => {
+    if (!currentUserId) {
+      showLoginRequiredAlert('保存');
+      return;
+    }
+    setIsFolderModalVisible(true);
+  };
+
+  const handleShare = async () => {
+    try {
+      const url = `machikore://spots/${spot.id}`;
+      await Share.share(
+        Platform.select({
+          ios: { message: `${spotName}をチェック！`, url },
+          default: { message: `${spotName}をチェック！\n${url}` },
+        })!
+      );
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  };
+
+  return (
+    <Pressable
+      onPress={onPress}
+      style={{
+        width: CARD_WIDTH,
+        height: CARD_HEIGHT,
+        marginLeft: isFirst ? SIDE_SPACING : CARD_GAP / 2,
+        marginRight: isLast ? SIDE_SPACING : CARD_GAP / 2,
+      }}
+    >
+      <View
+        className={`flex-1 bg-surface dark:bg-dark-surface rounded-2xl overflow-hidden ${
+          isSelected ? 'border-2 border-primary' : ''
+        }`}
+        style={{
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.2,
+          shadowRadius: 12,
+          elevation: 8,
+        }}
+      >
+        <View className="flex-1 p-4">
+          {/* タイトル */}
+          <Text
+            className="text-xl font-bold text-foreground dark:text-dark-foreground"
+            numberOfLines={2}
+          >
+            {spotName}
+          </Text>
+
+          {/* 住所 */}
+          {spot.master_spot?.google_formatted_address && (
+            <View className="flex-row items-center mt-2">
+              <Ionicons name="location-outline" size={14} color="#6B7280" />
+              <Text
+                className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 flex-1"
+                numberOfLines={1}
+              >
+                {spot.master_spot.google_formatted_address}
+              </Text>
+            </View>
+          )}
+
+          {/* 説明文 */}
+          {description && (
+            <Text
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-3"
+              numberOfLines={3}
+            >
+              {description}
+            </Text>
+          )}
+
+          <View className="flex-1" />
+
+          {/* アクションボタン */}
+          <View className="flex-row items-center justify-between pt-3 border-t border-border-light dark:border-dark-border-light">
+            <Pressable onPress={onPress} className="flex-row items-center active:opacity-70">
+              <Ionicons
+                name="chatbubble-outline"
+                size={22}
+                color={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                コメント
+              </Text>
+            </Pressable>
+
+            <Pressable onPress={handleLike} className="flex-row items-center active:opacity-70">
+              <Ionicons
+                name={isLiked ? 'heart' : 'heart-outline'}
+                size={22}
+                color={isLiked ? '#EF4444' : isDarkMode ? '#9CA3AF' : '#6B7280'}
+              />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                {likeCount > 0 ? likeCount : 'いいね'}
+              </Text>
+            </Pressable>
+
+            <Pressable onPress={handleBookmark} className="flex-row items-center active:opacity-70">
+              <Ionicons
+                name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+                size={22}
+                color={isBookmarked ? '#007AFF' : isDarkMode ? '#9CA3AF' : '#6B7280'}
+              />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                保存
+              </Text>
+            </Pressable>
+
+            <Pressable onPress={handleShare} className="flex-row items-center active:opacity-70">
+              <Ionicons
+                name="share-outline"
+                size={22}
+                color={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                共有
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+
+      {/* フォルダ選択モーダル */}
+      {currentUserId && (
+        <SelectFolderModal
+          visible={isFolderModalVisible}
+          userId={currentUserId}
+          folderType="spots"
+          onClose={() => setIsFolderModalVisible(false)}
+          onAddToFolder={(folderId) =>
+            addBookmark({ userId: currentUserId, spotId: spot.id, folderId })
+          }
+          onRemoveFromFolder={(folderId) =>
+            removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId })
+          }
+          bookmarkedFolderIds={bookmarkedFolderIds}
+        />
+      )}
+    </Pressable>
+  );
+}
+
+// ========== SpotCarousel コンポーネント ==========
+
+interface SpotCarouselProps {
+  spots: SpotWithDetails[];
+  selectedSpotId?: string | null;
+  currentUserId?: UUID | null;
+  onSpotSelect: (spot: SpotWithDetails) => void;
+  onSpotPress: (spot: SpotWithDetails) => void;
+  onClose: () => void;
+}
+
+export function SpotCarousel({
+  spots,
+  selectedSpotId,
+  currentUserId,
+  onSpotSelect,
+  onSpotPress,
+  onClose,
+}: SpotCarouselProps) {
+  const isDarkMode = useIsDarkMode();
+  const insets = useSafeAreaInsets();
+  const flatListRef = useRef<FlatList<SpotWithDetails>>(null);
+
+  // スポットが選択された時にそのカードまでスクロール
+  useEffect(() => {
+    if (selectedSpotId && flatListRef.current) {
+      const index = spots.findIndex((s) => s.id === selectedSpotId);
+      if (index >= 0) {
+        flatListRef.current.scrollToIndex({
+          index,
+          animated: true,
+          viewPosition: 0.5,
+        });
+      }
+    }
+  }, [selectedSpotId, spots]);
+
+  // スクロール終了時に中央のカードを選択
+  const handleScrollEnd = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const offsetX = event.nativeEvent.contentOffset.x;
+      const index = Math.round(offsetX / ITEM_WIDTH);
+      const spot = spots[index];
+      if (spot && spot.id !== selectedSpotId) {
+        onSpotSelect(spot);
+      }
+    },
+    [spots, selectedSpotId, onSpotSelect]
+  );
+
+  // カードタップ時の処理（フォーカス状態で分岐）
+  const handleCardPress = useCallback(
+    (spot: SpotWithDetails) => {
+      if (spot.id === selectedSpotId) {
+        // 既にフォーカス中 → 詳細カードを開く
+        onSpotPress(spot);
+      } else {
+        // フォーカスを当てる
+        onSpotSelect(spot);
+      }
+    },
+    [selectedSpotId, onSpotPress, onSpotSelect]
+  );
+
+  // アイテムのレンダリング
+  const renderItem = useCallback(
+    ({ item, index }: ListRenderItemInfo<SpotWithDetails>) => (
+      <SpotCard
+        spot={item}
+        isSelected={item.id === selectedSpotId}
+        isFirst={index === 0}
+        isLast={index === spots.length - 1}
+        currentUserId={currentUserId}
+        onPress={() => handleCardPress(item)}
+      />
+    ),
+    [selectedSpotId, currentUserId, handleCardPress, spots.length]
+  );
+
+  // キー抽出
+  const keyExtractor = useCallback((item: SpotWithDetails) => item.id, []);
+
+  // スクロール失敗時のフォールバック
+  const handleScrollToIndexFailed = useCallback(
+    (info: { index: number }) => {
+      setTimeout(() => {
+        flatListRef.current?.scrollToIndex({
+          index: info.index,
+          animated: true,
+          viewPosition: 0.5,
+        });
+      }, 100);
+    },
+    []
+  );
+
+  if (spots.length === 0) {
+    return null;
+  }
+
+  return (
+    <View
+      className="absolute left-0 right-0"
+      style={{ bottom: insets.bottom + 8 }}
+    >
+      {/* 閉じるボタン */}
+      <View className="flex-row justify-end px-4 mb-2">
+        <Pressable
+          onPress={onClose}
+          className="w-10 h-10 rounded-full items-center justify-center bg-surface dark:bg-dark-muted"
+          style={{
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.15,
+            shadowRadius: 4,
+            elevation: 4,
+          }}
+        >
+          <Ionicons
+            name="close"
+            size={24}
+            color={isDarkMode ? '#9CA3AF' : '#6B7280'}
+          />
+        </Pressable>
+      </View>
+
+      <FlatList
+        ref={flatListRef}
+        data={spots}
+        keyExtractor={keyExtractor}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        snapToInterval={ITEM_WIDTH}
+        decelerationRate="fast"
+        onMomentumScrollEnd={handleScrollEnd}
+        renderItem={renderItem}
+        onScrollToIndexFailed={handleScrollToIndexFailed}
+        // パフォーマンス最適化
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={5}
+        windowSize={5}
+        initialNumToRender={3}
+      />
+    </View>
+  );
+}
