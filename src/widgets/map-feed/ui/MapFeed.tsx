@@ -3,19 +3,36 @@
  *
  * FSDの原則：Widget層 - 複数のFeature/Entityを組み合わせた複合コンポーネント
  * - 公開マップのフィード表示
+ * - 無限スクロール対応
  */
 
-import React, { useCallback } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFeedMaps, MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
+import { colors } from '@/shared/config';
 
 export function MapFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
-  const { data: maps, isLoading, error, refetch, isRefetching } = useFeedMaps();
+  // 無限スクロール対応のフック
+  const {
+    data,
+    isLoading,
+    error,
+    refetch,
+    isRefetching,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useFeedMaps();
+
+  // ページデータをフラット化
+  const maps = useMemo(() => {
+    return data?.pages.flatMap((page) => page) ?? [];
+  }, [data]);
 
   const handleMapPress = useCallback((mapId: string) => {
     // 発見タブ内スタックに遷移（タブバーを維持）
@@ -41,11 +58,28 @@ export function MapFeed() {
     router.push(`/(tabs)/discover/articles/maps/${mapId}`);
   }, [router]);
 
+  // 下端に近づいたら次のページを取得
+  const handleEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  // ローディングフッター
+  const renderFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View className="py-4 items-center">
+        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }, [isFetchingNextPage]);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
       error={error}
-      data={maps}
+      data={maps.length > 0 ? maps : null}
       emptyMessage="マップがまだありません"
       emptyIonIcon="map-outline"
     >
@@ -67,6 +101,9 @@ export function MapFeed() {
           refreshControl={
             <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
           }
+          onEndReached={handleEndReached}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={renderFooter}
           showsVerticalScrollIndicator={false}
         />
       )}

@@ -94,9 +94,6 @@ export function SpotCard({
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImages, closeImage } = useImageViewer();
   const screenWidth = Dimensions.get('window').width;
 
-  // デバッグログ
-  console.log(`[SpotCard] spot.id: ${spot.id}, images: ${images.length}, loading: ${imagesLoading}`);
-
   const avatarUri = user?.avatar_url ?? undefined;
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
@@ -283,51 +280,60 @@ export function SpotCard({
       )}
 
       {/* 画像（2x2グリッド、最大4枚表示） */}
-      {images.length > 0 && (
+      {/* 画像がない場合は何も表示しない、ローディング中はプレースホルダー表示 */}
+      {(images.length > 0 || imagesLoading) && (
         <View className="mb-2">
-          <View className="flex-row flex-wrap" style={{ gap: 4 }}>
-            {images.slice(0, 4).map((image, index) => {
-              const isLastWithMore = index === 3 && images.length > 4;
-              const halfSize = (screenWidth - 32 - 4) / 2; // 2列用サイズ
-              const fullWidth = screenWidth - 32; // 1列用サイズ（横幅いっぱい）
+          {imagesLoading ? (
+            // ローディング中はプレースホルダーを表示（高さを確保してちらつき防止）
+            <View
+              className="bg-muted dark:bg-dark-muted rounded-lg"
+              style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.6 }}
+            />
+          ) : (
+            <View className="flex-row flex-wrap" style={{ gap: 4 }}>
+              {images.slice(0, 4).map((image, index) => {
+                const isLastWithMore = index === 3 && images.length > 4;
+                const halfSize = (screenWidth - 32 - 4) / 2; // 2列用サイズ
+                const fullWidth = screenWidth - 32; // 1列用サイズ（横幅いっぱい）
 
-              // 1枚の場合は横幅いっぱい、3枚の場合の3枚目も横幅いっぱい
-              const isSingleImage = images.length === 1;
-              const isThirdOfThree = images.length === 3 && index === 2;
-              const isFullWidth = isSingleImage || isThirdOfThree;
-              const imageWidth = isFullWidth ? fullWidth : halfSize;
-              const imageHeight = isSingleImage ? fullWidth * 0.6 : halfSize; // 1枚の時は少し低めに
+                // 1枚の場合は横幅いっぱい、3枚の場合の3枚目も横幅いっぱい
+                const isSingleImage = images.length === 1;
+                const isThirdOfThree = images.length === 3 && index === 2;
+                const isFullWidth = isSingleImage || isThirdOfThree;
+                const imageWidth = isFullWidth ? fullWidth : halfSize;
+                const imageHeight = isSingleImage ? fullWidth * 0.6 : halfSize; // 1枚の時は少し低めに
 
-              return (
-                <Pressable
-                  key={image.id}
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
-                    openImages(imageUrls, index);
-                  }}
-                >
-                  <View style={{ width: imageWidth, height: imageHeight, position: 'relative' }}>
-                    <Image
-                      source={{ uri: image.cloud_path || image.local_path || '' }}
-                      style={{ width: imageWidth, height: imageHeight, borderRadius: 8 }}
-                      resizeMode="cover"
-                    />
-                    {isLastWithMore && (
-                      <View
-                        className="absolute inset-0 bg-black/50 rounded-lg items-center justify-center"
-                        style={{ borderRadius: 8 }}
-                      >
-                        <Text className="text-white text-lg font-bold">
-                          +{images.length - 4}
-                        </Text>
-                      </View>
-                    )}
-                  </View>
-                </Pressable>
-              );
-            })}
-          </View>
+                return (
+                  <Pressable
+                    key={image.id}
+                    onPress={(e) => {
+                      e.stopPropagation();
+                      const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
+                      openImages(imageUrls, index);
+                    }}
+                  >
+                    <View style={{ width: imageWidth, height: imageHeight, position: 'relative' }}>
+                      <Image
+                        source={{ uri: image.cloud_path || image.local_path || '' }}
+                        style={{ width: imageWidth, height: imageHeight, borderRadius: 8 }}
+                        resizeMode="cover"
+                      />
+                      {isLastWithMore && (
+                        <View
+                          className="absolute inset-0 bg-black/50 rounded-lg items-center justify-center"
+                          style={{ borderRadius: 8 }}
+                        >
+                          <Text className="text-white text-lg font-bold">
+                            +{images.length - 4}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
+                  </Pressable>
+                );
+              })}
+            </View>
+          )}
         </View>
       )}
 

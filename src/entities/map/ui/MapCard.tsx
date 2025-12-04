@@ -5,7 +5,7 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Share, Platform } from 'react-native';
+import { View, Text, Pressable, Image, Alert, Share, Platform, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
@@ -34,6 +34,10 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
   const user = embeddedUser || fetchedUser;
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
+
+  // サムネイル画像のローディング状態
+  const [isThumbnailLoading, setIsThumbnailLoading] = useState(!!map.thumbnail_url);
+  const screenWidth = Dimensions.get('window').width;
 
   const { mutate: deleteMap } = useDeleteMap();
   const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
@@ -178,13 +182,23 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
       </View>
 
-      {/* サムネイル画像 */}
+      {/* サムネイル画像（ローディング中はプレースホルダー表示でちらつき防止） */}
       {map.thumbnail_url && (
-        <Image
-          source={{ uri: map.thumbnail_url }}
-          className="w-full h-40 rounded-lg mb-3"
-          resizeMode="cover"
-        />
+        <View className="mb-3" style={{ width: screenWidth - 32, height: 160 }}>
+          {isThumbnailLoading && (
+            <View
+              className="absolute inset-0 bg-muted dark:bg-dark-muted rounded-lg"
+              style={{ width: screenWidth - 32, height: 160 }}
+            />
+          )}
+          <Image
+            source={{ uri: map.thumbnail_url }}
+            className="w-full h-full rounded-lg"
+            style={{ width: screenWidth - 32, height: 160 }}
+            resizeMode="cover"
+            onLoad={() => setIsThumbnailLoading(false)}
+          />
+        </View>
       )}
 
       {/* マップ名 */}

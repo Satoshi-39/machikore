@@ -3,20 +3,36 @@
  *
  * FSDの原則：Widget層 - 複数のFeature/Entityを組み合わせた複合コンポーネント
  * - 公開スポットのフィード表示（Supabaseから取得）
+ * - 無限スクロール対応
  */
 
-import React, { useCallback } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
 import { useRouter, type Href } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
+import { colors } from '@/shared/config';
 
 export function SpotFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
-  // currentUserId を渡していいね状態も含めて取得
-  const { data: spots, isLoading, error, refetch, isRefetching } = useFeedSpots(currentUser?.id);
+  // 無限スクロール対応のフック
+  const {
+    data,
+    isLoading,
+    error,
+    refetch,
+    isRefetching,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useFeedSpots(currentUser?.id);
+
+  // ページデータをフラット化
+  const spots = useMemo(() => {
+    return data?.pages.flatMap((page) => page) ?? [];
+  }, [data]);
 
   // スポットタップ時: スポット詳細ページに遷移（発見タブ内スタック）
   const handleSpotPress = useCallback((_mapId: string, spotId: string) => {
@@ -43,11 +59,28 @@ export function SpotFeed() {
     router.push(`/(tabs)/discover/maps/${mapId}`);
   }, [router]);
 
+  // 下端に近づいたら次のページを取得
+  const handleEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  // ローディングフッター
+  const renderFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View className="py-4 items-center">
+        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }, [isFetchingNextPage]);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
       error={error}
-      data={spots}
+      data={spots.length > 0 ? spots : null}
       emptyMessage="スポットがまだありません"
       emptyIonIcon="location-outline"
     >
@@ -72,6 +105,9 @@ export function SpotFeed() {
           refreshControl={
             <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
           }
+          onEndReached={handleEndReached}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={renderFooter}
           showsVerticalScrollIndicator={false}
         />
       )}
