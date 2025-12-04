@@ -13,9 +13,10 @@ export type TabName = 'discover' | 'map' | 'mypage' | 'notifications';
 export function useCurrentTab(): TabName {
   const pathname = usePathname();
 
-  if (pathname.includes('/discover/')) return 'discover';
-  if (pathname.includes('/map/')) return 'map';
-  if (pathname.includes('/mypage/')) return 'mypage';
-  if (pathname.includes('/notifications/')) return 'notifications';
+  // /mypage または /mypage/xxx にマッチ
+  if (pathname === '/mypage' || pathname.startsWith('/mypage/')) return 'mypage';
+  if (pathname === '/notifications' || pathname.startsWith('/notifications/')) return 'notifications';
+  if (pathname === '/map' || pathname.startsWith('/map/')) return 'map';
+  if (pathname === '/discover' || pathname.startsWith('/discover/')) return 'discover';
   return 'discover'; // デフォルト
 }
