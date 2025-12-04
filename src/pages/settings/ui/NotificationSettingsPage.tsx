@@ -1,7 +1,7 @@
 /**
  * 通知設定ページ
  *
- * プッシュ通知の詳細設定を管理
+ * プッシュ通知・メール通知の詳細設定を管理
  */
 
 import React from 'react';
@@ -85,8 +85,13 @@ export function NotificationSettingsPage() {
   const { data: settings, isLoading, error } = useNotificationSettings();
   const { mutate: updateSettings, isPending } = useUpdateNotificationSettings();
 
+  // プッシュ通知設定のキー
+  type PushSettingsKey = 'push_enabled' | 'like_enabled' | 'comment_enabled' | 'follow_enabled' | 'system_enabled';
+  // メール通知設定のキー
+  type EmailSettingsKey = 'email_enabled' | 'email_like_enabled' | 'email_comment_enabled' | 'email_follow_enabled' | 'email_system_enabled';
+
   // 設定更新ハンドラー
-  const handleToggle = (key: 'push_enabled' | 'like_enabled' | 'comment_enabled' | 'follow_enabled' | 'system_enabled', value: boolean) => {
+  const handleToggle = (key: PushSettingsKey | EmailSettingsKey, value: boolean) => {
     if (!settings) return;
     updateSettings({ [key]: value });
   };
@@ -116,7 +121,8 @@ export function NotificationSettingsPage() {
     );
   }
 
-  const isAllDisabled = !settings.push_enabled || isPending;
+  const isPushDisabled = !settings.push_enabled || isPending;
+  const isEmailDisabled = !settings.email_enabled || isPending;
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
@@ -137,9 +143,9 @@ export function NotificationSettingsPage() {
           />
         </SettingsSection>
 
-        {/* 通知タイプ別設定 */}
+        {/* プッシュ通知タイプ別設定 */}
         <SettingsSection
-          title="通知の種類"
+          title="プッシュ通知の種類"
           description={!settings.push_enabled ? 'プッシュ通知がオフのため変更できません' : undefined}
         >
           <SettingsToggle
@@ -148,7 +154,7 @@ export function NotificationSettingsPage() {
             description="あなたの投稿にいいねされた時"
             value={settings.like_enabled}
             onValueChange={(value) => handleToggle('like_enabled', value)}
-            disabled={isAllDisabled}
+            disabled={isPushDisabled}
           />
           <SettingsToggle
             icon="chatbubble"
@@ -156,7 +162,7 @@ export function NotificationSettingsPage() {
             description="あなたの投稿にコメントされた時"
             value={settings.comment_enabled}
             onValueChange={(value) => handleToggle('comment_enabled', value)}
-            disabled={isAllDisabled}
+            disabled={isPushDisabled}
           />
           <SettingsToggle
             icon="person-add"
@@ -164,7 +170,7 @@ export function NotificationSettingsPage() {
             description="新しいフォロワーができた時"
             value={settings.follow_enabled}
             onValueChange={(value) => handleToggle('follow_enabled', value)}
-            disabled={isAllDisabled}
+            disabled={isPushDisabled}
           />
           <SettingsToggle
             icon="megaphone"
@@ -172,7 +178,60 @@ export function NotificationSettingsPage() {
             description="運営からのお知らせ"
             value={settings.system_enabled}
             onValueChange={(value) => handleToggle('system_enabled', value)}
-            disabled={isAllDisabled}
+            disabled={isPushDisabled}
+          />
+        </SettingsSection>
+
+        {/* メール通知マスター設定 */}
+        <SettingsSection
+          title="メール通知"
+          description="オフにすると全てのメール通知が届かなくなります"
+        >
+          <SettingsToggle
+            icon="mail"
+            label="メール通知を受け取る"
+            value={settings.email_enabled}
+            onValueChange={(value) => handleToggle('email_enabled', value)}
+            disabled={isPending}
+          />
+        </SettingsSection>
+
+        {/* メール通知タイプ別設定 */}
+        <SettingsSection
+          title="メール通知の種類"
+          description={!settings.email_enabled ? 'メール通知がオフのため変更できません' : undefined}
+        >
+          <SettingsToggle
+            icon="heart"
+            label="いいね"
+            description="あなたの投稿にいいねされた時"
+            value={settings.email_like_enabled}
+            onValueChange={(value) => handleToggle('email_like_enabled', value)}
+            disabled={isEmailDisabled}
+          />
+          <SettingsToggle
+            icon="chatbubble"
+            label="コメント"
+            description="あなたの投稿にコメントされた時"
+            value={settings.email_comment_enabled}
+            onValueChange={(value) => handleToggle('email_comment_enabled', value)}
+            disabled={isEmailDisabled}
+          />
+          <SettingsToggle
+            icon="person-add"
+            label="フォロー"
+            description="新しいフォロワーができた時"
+            value={settings.email_follow_enabled}
+            onValueChange={(value) => handleToggle('email_follow_enabled', value)}
+            disabled={isEmailDisabled}
+          />
+          <SettingsToggle
+            icon="megaphone"
+            label="お知らせ"
+            description="運営からのお知らせ"
+            value={settings.email_system_enabled}
+            onValueChange={(value) => handleToggle('email_system_enabled', value)}
+            disabled={isEmailDisabled}
           />
         </SettingsSection>
 
