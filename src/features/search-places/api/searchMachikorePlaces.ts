@@ -1,9 +1,13 @@
 /**
  * 街コレデータ検索API
- * machis + user_spots (master_spots JOIN) + cities + prefectures を検索
+ * machis + master_spots + cities + prefectures を検索
+ *
+ * - 都道府県、市区、街: SQLiteから検索（マスターデータ）
+ * - マスタースポット: Supabaseから検索（動的データ）
  */
 
 import { queryAll } from '@/shared/api/sqlite/client';
+import { supabase } from '@/shared/api/supabase/client';
 import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
 
 export interface MachikorePlaceSearchResult {
@@ -103,15 +107,52 @@ function searchMachis(query: string, limit: number): MachikorePlaceSearchResult[
 }
 
 /**
- * user_spots (+ master_spots) を検索
+ * master_spots を Supabase から検索（デフォルトマップ用）
  */
-function searchSpots(
+async function searchMasterSpots(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
+  console.log('🔍 [master_spots検索] query:', query, 'limit:', limit);
+
+  const { data: spots, error } = await supabase
+    .from('master_spots')
+    .select('id, name, latitude, longitude, google_formatted_address')
+    .or(`name.ilike.%${query}%,google_formatted_address.ilike.%${query}%`)
+    .limit(limit);
+
+  if (error) {
+    console.error('🔍 [master_spots検索] エラー:', error);
+    return [];
+  }
+
+  console.log('🔍 [master_spots検索] 結果件数:', spots?.length ?? 0);
+
+  return (spots ?? []).map((spot) => ({
+    id: spot.id,
+    name: spot.name,
+    address: spot.google_formatted_address,
+    latitude: spot.latitude,
+    longitude: spot.longitude,
+    type: 'spot' as const,
+  }));
+}
+
+/**
+ * user_spots (+ master_spots) を検索（ユーザーマップ用）
+ */
+function searchUserSpots(
   query: string,
-  userId: string | null | undefined,
-  includeAllSpots: boolean,
+  userId: string,
   limit: number
 ): MachikorePlaceSearchResult[] {
-  let sql = `
+  const spots = queryAll<{
+    id: string;
+    user_id: string;
+    map_id: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+    address: string | null;
+  }>(
+    `
     SELECT
       s.id,
       s.user_id,
@@ -123,28 +164,12 @@ function searchSpots(
     FROM user_spots s
     JOIN master_spots ms ON s.master_spot_id = ms.id
     WHERE (COALESCE(s.custom_name, ms.name) LIKE ? OR ms.google_formatted_address LIKE ?)
-  `;
-
-  const params: any[] = [`%${query}%`, `%${query}%`];
-
-  // ユーザーIDが指定されている場合、そのユーザーのspotsのみ
-  if (userId && !includeAllSpots) {
-    sql += ` AND s.user_id = ?`;
-    params.push(userId);
-  }
-
-  sql += ` ORDER BY name LIMIT ?;`;
-  params.push(limit);
-
-  const spots = queryAll<{
-    id: string;
-    user_id: string;
-    map_id: string;
-    name: string;
-    latitude: number;
-    longitude: number;
-    address: string | null;
-  }>(sql, params);
+      AND s.user_id = ?
+    ORDER BY name
+    LIMIT ?;
+    `,
+    [`%${query}%`, `%${query}%`, userId, limit]
+  );
 
   return spots.map((spot) => ({
     id: spot.id,
@@ -177,12 +202,16 @@ export async function searchMachikorePlaces(
   const machiLimit = Math.floor(limit / 3);
   const spotLimit = Math.floor(limit / 3);
 
-  // 全カテゴリを並行検索
+  // 全カテゴリを並行検索（スポット検索：デフォルトマップはmaster_spots、ユーザーマップはuser_spots）
   const [prefResults, cityResults, machiResults, spotResults] = await Promise.all([
     Promise.resolve(searchPrefectures(trimmedQuery, prefLimit)),
     Promise.resolve(searchCities(trimmedQuery, cityLimit)),
     Promise.resolve(searchMachis(trimmedQuery, machiLimit)),
-    Promise.resolve(searchSpots(trimmedQuery, userId, includeAllSpots, spotLimit)),
+    includeAllSpots
+      ? searchMasterSpots(trimmedQuery, spotLimit)
+      : userId
+        ? Promise.resolve(searchUserSpots(trimmedQuery, userId, spotLimit))
+        : Promise.resolve([]),
   ]);
 
   // 結果をマージしてlimit件まで返す（優先順: 都道府県 → 市区 → 街 → スポット）

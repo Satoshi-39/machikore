@@ -103,7 +103,9 @@ export function useMapJump({
       const newCityId = state.jumpToCityId;
       const prevCityId = prevState.jumpToCityId;
       if (newCityId && newCityId !== prevCityId) {
+        console.log('🏙️ City jump requested:', newCityId);
         getCityById(newCityId).then((city) => {
+          console.log('🏙️ City data from Supabase:', city);
           if (city && city.latitude && city.longitude) {
             lastJumpTimeRef.current = Date.now();
             onCitySelect(city);
@@ -116,7 +118,12 @@ export function useMapJump({
                 });
               }
             }, 100);
+          } else {
+            console.warn('🏙️ City not found or missing coordinates:', newCityId);
           }
+          state.setJumpToCityId(null);
+        }).catch((error) => {
+          console.error('🏙️ City fetch error:', error);
           state.setJumpToCityId(null);
         });
       }
@@ -176,10 +183,8 @@ export function useSearchResultJump() {
         setJumpToMachiId(place.id);
         break;
       case 'spot':
-        // spotの場合、検索結果のIDはuser_spot_id
-        // master_spot_idを含めるように検索APIを改修する必要があるが、
-        // 現状はuser_spot_idをそのまま使用（エラーになる可能性あり）
-        // TODO: 検索結果にmaster_spot_idを含める
+        // デフォルトマップ: master_spot_id
+        // ユーザーマップ: user_spot_id（現状はジャンプ非対応）
         setJumpToMasterSpotId(place.id);
         break;
     }
