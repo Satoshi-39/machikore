@@ -110,8 +110,6 @@ function searchMachis(query: string, limit: number): MachikorePlaceSearchResult[
  * master_spots を Supabase から検索（デフォルトマップ用）
  */
 async function searchMasterSpots(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
-  console.log('🔍 [master_spots検索] query:', query, 'limit:', limit);
-
   const { data: spots, error } = await supabase
     .from('master_spots')
     .select('id, name, latitude, longitude, google_formatted_address')
@@ -119,11 +117,8 @@ async function searchMasterSpots(query: string, limit: number): Promise<Machikor
     .limit(limit);
 
   if (error) {
-    console.error('🔍 [master_spots検索] エラー:', error);
     return [];
   }
-
-  console.log('🔍 [master_spots検索] 結果件数:', spots?.length ?? 0);
 
   return (spots ?? []).map((spot) => ({
     id: spot.id,

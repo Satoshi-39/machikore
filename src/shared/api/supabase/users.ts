@@ -154,7 +154,6 @@ export async function searchUsers(
     .limit(limit);
 
   if (error) {
-    console.error('[searchUsers] Error:', error);
     return [];
   }
 

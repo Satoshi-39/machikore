@@ -149,7 +149,6 @@ async function getOrCreateMasterSpot(input: {
     .single();
 
   if (existing) {
-    console.log('[getOrCreateMasterSpot] Found existing:', existing.id);
     return existing.id;
   }
 
@@ -177,7 +176,6 @@ async function getOrCreateMasterSpot(input: {
     handleSupabaseError('getOrCreateMasterSpot', error);
   }
 
-  console.log('[getOrCreateMasterSpot] Created new:', data.id);
   return data.id;
 }
 
@@ -220,7 +218,6 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     handleSupabaseError('createSpot', error);
   }
 
-  console.log('[createSpot] Created user_spot:', data.id);
   return data.id;
 }
 
@@ -472,7 +469,7 @@ export async function searchPublicUserSpots(
   limit: number = 30
 ): Promise<UserSpotSearchResult[]> {
   // 1. user_spotsのcustom_name, descriptionで検索
-  const { data: userSpotResults, error: userSpotError } = await supabase
+  const { data: userSpotResults } = await supabase
     .from('user_spots')
     .select(`
       *,
@@ -500,12 +497,9 @@ export async function searchPublicUserSpots(
     .order('created_at', { ascending: false })
     .limit(limit);
 
-  if (userSpotError) {
-    console.error('[searchPublicUserSpots] Error:', userSpotError);
-  }
 
   // 2. master_spotsの名前で検索し、紐づくuser_spotsを取得
-  const { data: masterSpotResults, error: masterSpotError } = await supabase
+  const { data: masterSpotResults } = await supabase
     .from('master_spots')
     .select(`
       id,
@@ -531,9 +525,6 @@ export async function searchPublicUserSpots(
     .ilike('name', `%${query}%`)
     .limit(limit);
 
-  if (masterSpotError) {
-    console.error('[searchPublicUserSpots] masterSpot Error:', masterSpotError);
-  }
 
   // 結果をマージ（重複排除）
   const resultMap = new Map<string, UserSpotSearchResult>();

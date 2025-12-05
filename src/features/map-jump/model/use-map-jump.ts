@@ -103,9 +103,7 @@ export function useMapJump({
       const newCityId = state.jumpToCityId;
       const prevCityId = prevState.jumpToCityId;
       if (newCityId && newCityId !== prevCityId) {
-        console.log('🏙️ City jump requested:', newCityId);
         getCityById(newCityId).then((city) => {
-          console.log('🏙️ City data from Supabase:', city);
           if (city && city.latitude && city.longitude) {
             lastJumpTimeRef.current = Date.now();
             onCitySelect(city);
@@ -118,12 +116,9 @@ export function useMapJump({
                 });
               }
             }, 100);
-          } else {
-            console.warn('🏙️ City not found or missing coordinates:', newCityId);
           }
           state.setJumpToCityId(null);
-        }).catch((error) => {
-          console.error('🏙️ City fetch error:', error);
+        }).catch(() => {
           state.setJumpToCityId(null);
         });
       }
