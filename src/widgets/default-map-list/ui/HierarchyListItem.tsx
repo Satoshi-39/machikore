@@ -40,7 +40,7 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
   return (
     <Pressable
       onPress={() => onPress(item)}
-      className="px-5 py-4 border-b border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface active:bg-background-secondary dark:bg-dark-background-secondary"
+      className="px-5 py-4 border-b border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface active:bg-background-secondary dark:active:bg-dark-background-secondary"
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-row items-center flex-1">

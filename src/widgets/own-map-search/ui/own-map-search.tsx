@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { Loading, EmptyState, ErrorView, SearchBar } from '@/shared/ui';
 import {
   useSearchGooglePlaces,
@@ -39,6 +40,7 @@ export function OwnMapSearch({
   onMapPinSelect,
 }: OwnMapSearchProps) {
   const router = useRouter();
+  const isDarkMode = useIsDarkMode();
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   // Google Places API検索
   const { results, isLoading, error, hasSearched, search, config, endSession } = useSearchGooglePlaces({
@@ -151,11 +153,21 @@ export function OwnMapSearch({
             {/* 登録オプション（リンク風テキスト） */}
             <View className="mt-6 flex-row items-center justify-center gap-4">
               <Pressable onPress={handleCurrentLocationRegister}>
-                <Text className="text-blue-600 text-sm">現在地を登録</Text>
+                <Text
+                  className="text-sm"
+                  style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
+                >
+                  現在地を登録
+                </Text>
               </Pressable>
-              <Text className="text-gray-300">|</Text>
+              <Text className="text-gray-300 dark:text-gray-600">|</Text>
               <Pressable onPress={handleMapPinRegister}>
-                <Text className="text-blue-600 text-sm">地図上でピン刺し</Text>
+                <Text
+                  className="text-sm"
+                  style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
+                >
+                  地図上でピン刺し
+                </Text>
               </Pressable>
             </View>
           </View>
@@ -188,7 +200,7 @@ export function OwnMapSearch({
                   <Pressable
                     key={place.id}
                     onPress={() => handlePlaceSelect(place)}
-                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:bg-dark-background-secondary"
+                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                   >
                     <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
                       <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />

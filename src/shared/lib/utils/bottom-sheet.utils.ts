@@ -3,8 +3,9 @@
  */
 
 import { useBottomSheet } from '@gorhom/bottom-sheet';
-import { useAnimatedReaction, runOnJS } from 'react-native-reanimated';
-import { useCallback, useRef } from 'react';
+import { useAnimatedReaction, useSharedValue } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
+import { useCallback } from 'react';
 
 interface UseSearchBarSyncOptions {
   /** 検索バー領域の下端Y座標（この位置より上にカードが来たら検索バーを非表示） */
@@ -26,25 +27,31 @@ export function useSearchBarSync({
   onVisibilityChange,
 }: UseSearchBarSyncOptions) {
   const { animatedPosition } = useBottomSheet();
-  const lastHiddenRef = useRef<boolean | null>(null);
+  // UIスレッドで前回の状態を保持（-1: 未初期化, 0: false, 1: true）
+  const lastHiddenShared = useSharedValue(-1);
 
   // JS側で呼び出すための安定した関数
   const notifyChange = useCallback((isHidden: boolean) => {
-    // 前回と同じ値の場合は通知しない（無駄なレンダリング防止）
-    if (lastHiddenRef.current === isHidden) return;
-    lastHiddenRef.current = isHidden;
     onVisibilityChange(isHidden);
   }, [onVisibilityChange]);
 
   // animatedPositionの変化をUIスレッドで監視
+  // 状態が変化した時だけrunOnJSを呼ぶ（パフォーマンス最適化）
   useAnimatedReaction(
     () => animatedPosition.value,
     (position) => {
+      'worklet';
       // positionは画面上端からカード上端までの距離（Y座標）
       // searchBarBottomYより小さい = カードが検索バー領域に入っている
       const shouldHide = position < searchBarBottomY;
-      runOnJS(notifyChange)(shouldHide);
+      const shouldHideNum = shouldHide ? 1 : 0;
+
+      // 状態が変化した時だけJSスレッドに通知
+      if (lastHiddenShared.value !== shouldHideNum) {
+        lastHiddenShared.value = shouldHideNum;
+        scheduleOnRN(notifyChange, shouldHide);
+      }
     },
-    [searchBarBottomY]
+    [searchBarBottomY, notifyChange]
   );
 }

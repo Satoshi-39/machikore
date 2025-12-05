@@ -104,7 +104,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
                   item.onPress();
                   onClose();
                 }}
-                className={`flex-row items-center px-4 py-4 active:bg-background-secondary dark:bg-dark-background-secondary ${
+                className={`flex-row items-center px-4 py-4 active:bg-background-secondary dark:active:bg-dark-background-secondary ${
                   index < items.length - 1 ? 'border-b border-border-light dark:border-dark-border-light' : ''
                 }`}
               >

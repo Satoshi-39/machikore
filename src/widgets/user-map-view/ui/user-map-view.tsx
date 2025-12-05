@@ -9,7 +9,7 @@ import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ENV } from '@/shared/config';
+import { ENV, colors } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from '@/widgets/spot-detail-card';
@@ -24,7 +24,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { View } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { useSpotCamera } from '../model';
 
 interface UserMapViewProps {
@@ -246,18 +246,36 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           {spots.map((spot) => {
             if (!spot.master_spot) return null;
             const spotName = spot.custom_name || spot.master_spot.name;
+            const markerColor = isDarkMode ? colors.dark.foreground : colors.primary.light;
+            const shadowColor = isDarkMode ? colors.black : colors.white;
             return (
-              <Mapbox.PointAnnotation
+              <Mapbox.MarkerView
                 key={spot.id}
                 id={spot.id}
                 coordinate={[spot.master_spot.longitude, spot.master_spot.latitude]}
-                onSelected={() => {
-                  console.log('📍 スポット選択:', spotName);
-                  handleSpotSelect(spot);
-                }}
               >
-                <Ionicons name="location" size={40} color="#3B82F6" />
-              </Mapbox.PointAnnotation>
+                <Pressable
+                  onPress={() => {
+                    console.log('📍 スポット選択:', spotName);
+                    handleSpotSelect(spot);
+                  }}
+                  className="flex-row items-center"
+                >
+                  <Ionicons name="location" size={32} color={markerColor} />
+                  <Text
+                    className="text-xs font-semibold"
+                    style={{
+                      color: markerColor,
+                      textShadowColor: shadowColor,
+                      textShadowOffset: { width: 1, height: 1 },
+                      textShadowRadius: 2,
+                    }}
+                    numberOfLines={1}
+                  >
+                    {spotName}
+                  </Text>
+                </Pressable>
+              </Mapbox.MarkerView>
             );
           })}
         </Mapbox.MapView>

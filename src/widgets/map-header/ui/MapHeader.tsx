@@ -15,6 +15,7 @@ import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
 
 interface MapHeaderProps {
@@ -188,9 +189,9 @@ export function MapHeader({
           {/* 左側：戻るボタン + ローディング */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
             <Pressable onPress={onBack} className="mr-2.5">
-              <Ionicons name="arrow-back" size={23} color="#007AFF" />
+              <Ionicons name="arrow-back" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
             </Pressable>
-            <ActivityIndicator size="small" color="#007AFF" />
+            <ActivityIndicator size="small" color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">読み込み中...</Text>
           </View>
         </View>
@@ -216,7 +217,7 @@ export function MapHeader({
           <View className="flex-row items-center flex-1 mr-2">
             {/* 戻るボタン */}
             <Pressable onPress={onBack} className="mr-2.5">
-              <Ionicons name="arrow-back" size={23} color="#007AFF" />
+              <Ionicons name="arrow-back" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
             </Pressable>
 
             {/* ユーザーアイコン */}
@@ -267,14 +268,14 @@ export function MapHeader({
           <View className="flex-row items-center gap-3">
             {/* 検索ボタン */}
             <Pressable onPress={onSearchPress} className="items-center justify-center">
-              <Ionicons name="search-outline" size={23} color="#007AFF" />
+              <Ionicons name="search-outline" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
             </Pressable>
 
             {/* 三点リーダメニュー */}
             <PopupMenu
               items={menuItems}
               triggerSize={23}
-              triggerColor="#007AFF"
+              triggerColor={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT}
             />
           </View>
         </View>

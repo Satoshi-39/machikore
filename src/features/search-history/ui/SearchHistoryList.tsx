@@ -3,6 +3,7 @@
  */
 
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
@@ -31,6 +32,8 @@ export function SearchHistoryList({
   emptyMessage = '検索履歴がありません',
 }: SearchHistoryListProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const isDarkMode = useIsDarkMode();
+  const linkColor = isDarkMode ? colors.dark.foreground : colors.primary.dark;
 
   if (history.length === 0) {
     if (!showEmptyMessage) {
@@ -58,7 +61,7 @@ export function SearchHistoryList({
         <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">{title}</Text>
         {onClearAll && history.length > 0 && (
           <Pressable onPress={onClearAll} hitSlop={8}>
-            <Text className="text-sm text-blue-600">すべて削除</Text>
+            <Text className="text-sm" style={{ color: linkColor }}>すべて削除</Text>
           </Pressable>
         )}
       </View>
@@ -103,7 +106,7 @@ export function SearchHistoryList({
           onPress={() => setIsExpanded(true)}
           className="py-3 items-center"
         >
-          <Text className="text-sm text-blue-600">履歴をもっと見る</Text>
+          <Text className="text-sm" style={{ color: linkColor }}>履歴をもっと見る</Text>
         </Pressable>
       )}
     </View>

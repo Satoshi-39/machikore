@@ -114,7 +114,7 @@ export function DefaultMapSearch({
                   <Pressable
                     key={place.id}
                     onPress={() => handlePlaceSelect(place)}
-                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:bg-dark-background-secondary"
+                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                   >
                     <View className={`w-10 h-10 rounded-full items-center justify-center ${
                       place.type === 'machi' ? 'bg-green-100' : 'bg-blue-100'

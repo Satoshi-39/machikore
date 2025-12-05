@@ -211,7 +211,7 @@ export function SelectFolderModal({
           ) : (
             <Pressable
               onPress={() => setShowCreateInput(true)}
-              className="flex-row items-center px-4 py-3 border-t border-border-light dark:border-dark-border-light active:bg-background-secondary dark:bg-dark-background-secondary"
+              className="flex-row items-center px-4 py-3 border-t border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
             >
               <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
                 <Ionicons name="add" size={20} color={colors.primary.DEFAULT} />

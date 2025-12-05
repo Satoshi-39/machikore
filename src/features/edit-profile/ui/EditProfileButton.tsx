@@ -18,7 +18,7 @@ export function EditProfileButton() {
   return (
     <Pressable
       onPress={handlePress}
-      className="px-4 py-2 rounded-full border border-border dark:border-dark-border active:bg-background-secondary dark:bg-dark-background-secondary"
+      className="px-4 py-2 rounded-full border border-border dark:border-dark-border active:bg-background-secondary dark:active:bg-dark-background-secondary"
     >
       <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
         プロフィール編集

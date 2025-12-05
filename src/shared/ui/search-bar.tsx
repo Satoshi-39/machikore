@@ -5,9 +5,11 @@
  */
 
 import React from 'react';
-import { View, TextInput, Pressable, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { StyledTextInput } from './styled-text-input';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -26,15 +28,16 @@ export function SearchBar({
   autoFocus = false,
   showCancelButton = false,
 }: SearchBarProps) {
+  const isDarkMode = useIsDarkMode();
+
   return (
     <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-5 py-3">
       <View className="flex-row items-center gap-3">
         <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-3">
           <Ionicons name="search" size={20} color={colors.gray[400]} />
-          <TextInput
-            className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground"
+          <StyledTextInput
+            className="flex-1 ml-2 text-base"
             placeholder={placeholder}
-            placeholderTextColor={colors.gray[400]}
             value={value}
             onChangeText={onChangeText}
             autoFocus={autoFocus}
@@ -47,7 +50,12 @@ export function SearchBar({
         </View>
         {showCancelButton && onCancel && (
           <Pressable onPress={onCancel}>
-            <Text className="text-base text-blue-600 font-medium">キャンセル</Text>
+            <Text
+              className="text-base font-medium"
+              style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
+            >
+              キャンセル
+            </Text>
           </Pressable>
         )}
       </View>

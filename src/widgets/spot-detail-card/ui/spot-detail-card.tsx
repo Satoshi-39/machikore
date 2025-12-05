@@ -293,7 +293,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       onChange={handleSheetChanges}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
-      animateOnMount={true}
+      animateOnMount={false}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
       handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
