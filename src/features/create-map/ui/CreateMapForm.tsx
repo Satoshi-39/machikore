@@ -8,13 +8,13 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   ScrollView,
   Switch,
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { StyledTextInput } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 
 type MapCategory = '旅行' | 'グルメ' | '観光' | 'ショッピング' | 'アクティビティ' | 'その他';
@@ -72,12 +72,11 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             マップ名 <Text className="text-red-500">*</Text>
           </Text>
-          <TextInput
+          <StyledTextInput
             value={mapName}
             onChangeText={setMapName}
             placeholder="例：東京カフェ巡り"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
         </View>
 
@@ -86,14 +85,13 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             説明
           </Text>
-          <TextInput
+          <StyledTextInput
             value={description}
             onChangeText={setDescription}
             placeholder="マップの説明を入力してください"
             multiline
             numberOfLines={4}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             textAlignVertical="top"
           />
         </View>
@@ -135,12 +133,11 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             タグ
           </Text>
-          <TextInput
+          <StyledTextInput
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, スイーツ, デート"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             カンマ区切りで入力してください

@@ -75,9 +75,9 @@ export function useUpdateNotificationSettings() {
         queryClient.setQueryData(QUERY_KEY, ctx.previousSettings);
       }
     },
-    onSettled: () => {
-      // 完了後にキャッシュを無効化して再取得
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+    onSuccess: (data) => {
+      // 成功時はサーバーから返ってきたデータでキャッシュを更新
+      queryClient.setQueryData(QUERY_KEY, data);
     },
   });
 }

@@ -9,7 +9,6 @@ import {
   View,
   Text,
   ScrollView,
-  TextInput,
   Pressable,
   Image,
   Alert,
@@ -19,7 +18,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, StyledTextInput } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { useUser, useUpdateProfileWithAvatar } from '@/entities/user/api';
@@ -180,12 +179,11 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
               <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
                 表示名
               </Text>
-              <TextInput
+              <StyledTextInput
                 value={displayName}
                 onChangeText={setDisplayName}
                 placeholder="表示名を入力"
-                placeholderTextColor={colors.text.secondary}
-                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
+                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
                 maxLength={50}
               />
               <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
@@ -211,12 +209,11 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
               <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
                 自己紹介
               </Text>
-              <TextInput
+              <StyledTextInput
                 value={bio}
                 onChangeText={setBio}
                 placeholder="自己紹介を入力"
-                placeholderTextColor={colors.text.secondary}
-                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
+                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
                 multiline
                 numberOfLines={4}
                 textAlignVertical="top"

@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   ScrollView,
   Image,
@@ -17,6 +16,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { StyledTextInput } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/spots';
 import type { Database } from '@/shared/types/supabase.generated';
@@ -202,12 +202,11 @@ export function EditSpotForm({
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             スポット名
           </Text>
-          <TextInput
+          <StyledTextInput
             value={customName}
             onChangeText={setCustomName}
             placeholder="例：お気に入りのカフェ"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             自分だけのわかりやすい名前をつけられます
@@ -217,14 +216,13 @@ export function EditSpotForm({
         {/* メモ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">メモ</Text>
-          <TextInput
+          <StyledTextInput
             value={description}
             onChangeText={setDescription}
             placeholder="このスポットについてのメモを入力してください"
             multiline
             numberOfLines={4}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             textAlignVertical="top"
           />
         </View>
@@ -232,12 +230,11 @@ export function EditSpotForm({
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
-          <TextInput
+          <StyledTextInput
             value={tags}
             onChangeText={setTags}
             placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
             カンマ区切りで入力してください

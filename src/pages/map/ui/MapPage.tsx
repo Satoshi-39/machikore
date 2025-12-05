@@ -68,7 +68,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [spotDetailSnapIndex, setSpotDetailSnapIndex] = useState<number>(1);
+  const [isDetailCardMaximized, setIsDetailCardMaximized] = useState(false);
   const { location } = useLocation();
   const mapViewRef = useRef<MapViewHandle>(null);
 
@@ -189,7 +189,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
             viewMode={viewMode}
             isSearchFocused={isSearchFocused}
             onEditSpot={handleEditSpot}
-            onSpotDetailSnapChange={setSpotDetailSnapIndex}
+            onDetailCardMaximized={setIsDetailCardMaximized}
           />
         ) : (
           <DefaultMapView
@@ -270,17 +270,13 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
 
       </View>
 
-      {/* ヘッダー（ユーザーマップの時のみ表示、検索中・スポットカード最大時は非表示） - マップ上にオーバーレイ */}
-      {isUserMap && !isSearchFocused && (
+      {/* ヘッダー（ユーザーマップの時のみ表示、検索中・カード最大時は非表示） - マップ上にオーバーレイ */}
+      {isUserMap && !isSearchFocused && !isDetailCardMaximized && (
         <View
           className="absolute top-0 left-0 right-0"
-          style={{
-            paddingTop: insets.top,
-            opacity: spotDetailSnapIndex === 2 ? 0 : 1,
-          }}
-          pointerEvents={spotDetailSnapIndex === 2 ? 'none' : 'box-none'}
+          style={{ paddingTop: insets.top }}
         >
-          <View className="mx-4 mt-2" pointerEvents="box-none">
+          <View className="mx-4 mt-2">
             <MapHeader
               isUserMap={isUserMap}
               isLoading={isLoadingUserMap}

@@ -133,7 +133,7 @@ function SettingsToggle({
 export function NotificationSettingsPage() {
   const [activeTab, setActiveTab] = useState<TabType>('push');
   const { data: settings, isLoading, error } = useNotificationSettings();
-  const { mutate: updateSettings, isPending } = useUpdateNotificationSettings();
+  const { mutate: updateSettings } = useUpdateNotificationSettings();
 
   // プッシュ通知設定のキー
   type PushSettingsKey = 'push_enabled' | 'like_enabled' | 'comment_enabled' | 'follow_enabled' | 'system_enabled';
@@ -171,8 +171,8 @@ export function NotificationSettingsPage() {
     );
   }
 
-  const isPushDisabled = !settings.push_enabled || isPending;
-  const isEmailDisabled = !settings.email_enabled || isPending;
+  const isPushDisabled = !settings.push_enabled;
+  const isEmailDisabled = !settings.email_enabled;
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
@@ -195,7 +195,6 @@ export function NotificationSettingsPage() {
                 label="プッシュ通知を受け取る"
                 value={settings.push_enabled}
                 onValueChange={(value) => handleToggle('push_enabled', value)}
-                disabled={isPending}
               />
             </SettingsSection>
 
@@ -251,7 +250,6 @@ export function NotificationSettingsPage() {
                 label="メール通知を受け取る"
                 value={settings.email_enabled}
                 onValueChange={(value) => handleToggle('email_enabled', value)}
-                disabled={isPending}
               />
             </SettingsSection>
 
