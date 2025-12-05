@@ -14,6 +14,8 @@ export * from './notifications';
 export * from './follows';
 export * from './comments';
 export * from './collections';
-export * from './users';
+// users.tsからはgetUserByIdを除外（auth.tsと重複するため）
+export { updateUserProfile, type ProfileUpdateData } from './users';
 export * from './visits';
 export * from './notification-settings';
+export * from './places';

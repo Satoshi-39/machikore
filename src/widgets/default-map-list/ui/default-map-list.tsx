@@ -201,7 +201,6 @@ export function DefaultMapList({
           ListHeaderComponent={
             <View>
               <MapSearchBar
-                variant="list"
                 viewMode={viewMode}
                 onViewModeChange={onViewModeChange}
                 onFocus={onSearchFocus}

@@ -9,7 +9,6 @@ import {
   addReplyComment,
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
-import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
 
 /**

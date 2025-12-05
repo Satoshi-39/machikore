@@ -110,39 +110,46 @@ export function DefaultMapSearch({
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
-                {results.map((place) => (
-                  <Pressable
-                    key={place.id}
-                    onPress={() => handlePlaceSelect(place)}
-                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
-                  >
-                    <View className={`w-10 h-10 rounded-full items-center justify-center ${
-                      place.type === 'machi' ? 'bg-green-100' : 'bg-blue-100'
-                    }`}>
-                      <Ionicons
-                        name={place.type === 'machi' ? 'map' : 'location'}
-                        size={20}
-                        color={place.type === 'machi' ? colors.secondary.DEFAULT : colors.primary.DEFAULT}
-                      />
-                    </View>
-                    <View className="flex-1 ml-3">
-                      <View className="flex-row items-center gap-2">
-                        <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>
-                        {place.type === 'machi' && (
-                          <View className="bg-green-100 px-2 py-0.5 rounded">
-                            <Text className="text-xs text-green-700 font-medium">街</Text>
+                {results.map((place) => {
+                  // タイプ別のスタイル設定
+                  const typeConfig = {
+                    prefecture: { bgColor: 'bg-purple-100', iconName: 'earth' as const, iconColor: '#9333ea', label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
+                    city: { bgColor: 'bg-orange-100', iconName: 'business' as const, iconColor: '#ea580c', label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
+                    machi: { bgColor: 'bg-green-100', iconName: 'map' as const, iconColor: colors.secondary.DEFAULT, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
+                    spot: { bgColor: 'bg-blue-100', iconName: 'location' as const, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
+                  };
+                  const config = typeConfig[place.type];
+
+                  return (
+                    <Pressable
+                      key={place.id}
+                      onPress={() => handlePlaceSelect(place)}
+                      className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
+                    >
+                      <View className={`w-10 h-10 rounded-full items-center justify-center ${config.bgColor}`}>
+                        <Ionicons
+                          name={config.iconName}
+                          size={20}
+                          color={config.iconColor}
+                        />
+                      </View>
+                      <View className="flex-1 ml-3">
+                        <View className="flex-row items-center gap-2">
+                          <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>
+                          <View className={`${config.labelBg} px-2 py-0.5 rounded`}>
+                            <Text className={`text-xs ${config.labelColor} font-medium`}>{config.label}</Text>
                           </View>
+                        </View>
+                        {place.address && (
+                          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
+                            {place.address}
+                          </Text>
                         )}
                       </View>
-                      {place.address && (
-                        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
-                          {place.address}
-                        </Text>
-                      )}
-                    </View>
-                    <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
-                  </Pressable>
-                ))}
+                      <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+                    </Pressable>
+                  );
+                })}
               </>
             )}
           </View>

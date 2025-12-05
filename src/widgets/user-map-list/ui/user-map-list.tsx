@@ -23,7 +23,6 @@ export function UserMapList({
   return (
     <View className="flex-1">
       <MapSearchBar
-        variant="list"
         viewMode={viewMode}
         onViewModeChange={onViewModeChange}
         onFocus={onSearchFocus}

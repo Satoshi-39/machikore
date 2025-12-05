@@ -1,10 +1,10 @@
 /**
  * 街コレデータ検索API
- * machis + user_spots (master_spots JOIN) を検索
+ * machis + user_spots (master_spots JOIN) + cities + prefectures を検索
  */
 
 import { queryAll } from '@/shared/api/sqlite/client';
-import type { MachiRow } from '@/shared/types/database.types';
+import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
 
 export interface MachikorePlaceSearchResult {
   id: string;
@@ -12,7 +12,7 @@ export interface MachikorePlaceSearchResult {
   address: string | null;
   latitude: number;
   longitude: number;
-  type: 'machi' | 'spot';
+  type: 'machi' | 'spot' | 'city' | 'prefecture';
   // spotの場合の追加情報
   userId?: string;
   mapId?: string;
@@ -23,6 +23,59 @@ export interface MachikorePlaceSearchOptions {
   userId?: string | null; // 指定した場合、そのユーザーのspotsのみ検索
   includeAllSpots?: boolean; // trueの場合、全ユーザーのspotsを検索（デフォルトマップ用）
   limit?: number;
+}
+
+/**
+ * prefecturesテーブルを検索
+ */
+function searchPrefectures(query: string, limit: number): MachikorePlaceSearchResult[] {
+  const prefectures = queryAll<PrefectureRow>(
+    `
+    SELECT * FROM prefectures
+    WHERE name LIKE ? AND latitude IS NOT NULL AND longitude IS NOT NULL
+    ORDER BY name
+    LIMIT ?;
+    `,
+    [`%${query}%`, limit]
+  );
+
+  return prefectures
+    .filter((pref) => pref.latitude !== null && pref.longitude !== null)
+    .map((pref) => ({
+      id: pref.id,
+      name: pref.name,
+      address: null,
+      latitude: pref.latitude!,
+      longitude: pref.longitude!,
+      type: 'prefecture' as const,
+    }));
+}
+
+/**
+ * citiesテーブルを検索
+ */
+function searchCities(query: string, limit: number): MachikorePlaceSearchResult[] {
+  const cities = queryAll<CityRow & { prefecture_name?: string }>(
+    `
+    SELECT c.*, p.name as prefecture_name FROM cities c
+    LEFT JOIN prefectures p ON c.prefecture_id = p.id
+    WHERE c.name LIKE ? AND c.latitude IS NOT NULL AND c.longitude IS NOT NULL
+    ORDER BY c.name
+    LIMIT ?;
+    `,
+    [`%${query}%`, limit]
+  );
+
+  return cities
+    .filter((city) => city.latitude !== null && city.longitude !== null)
+    .map((city) => ({
+      id: city.id,
+      name: city.name,
+      address: city.prefecture_name || null,
+      latitude: city.latitude!,
+      longitude: city.longitude!,
+      type: 'city' as const,
+    }));
 }
 
 /**
@@ -106,7 +159,7 @@ function searchSpots(
 }
 
 /**
- * 街コレデータを検索（machis + spots）
+ * 街コレデータを検索（prefectures + cities + machis + spots）
  */
 export async function searchMachikorePlaces(
   options: MachikorePlaceSearchOptions
@@ -118,12 +171,20 @@ export async function searchMachikorePlaces(
     return [];
   }
 
-  // machisとspotsを並行検索
-  const [machiResults, spotResults] = await Promise.all([
-    Promise.resolve(searchMachis(trimmedQuery, Math.floor(limit / 2))),
-    Promise.resolve(searchSpots(trimmedQuery, userId, includeAllSpots, Math.floor(limit / 2))),
+  // 各カテゴリの取得件数を調整（都道府県・市区は少なめ、街・スポットは多め）
+  const prefLimit = Math.max(2, Math.floor(limit / 10));
+  const cityLimit = Math.max(3, Math.floor(limit / 6));
+  const machiLimit = Math.floor(limit / 3);
+  const spotLimit = Math.floor(limit / 3);
+
+  // 全カテゴリを並行検索
+  const [prefResults, cityResults, machiResults, spotResults] = await Promise.all([
+    Promise.resolve(searchPrefectures(trimmedQuery, prefLimit)),
+    Promise.resolve(searchCities(trimmedQuery, cityLimit)),
+    Promise.resolve(searchMachis(trimmedQuery, machiLimit)),
+    Promise.resolve(searchSpots(trimmedQuery, userId, includeAllSpots, spotLimit)),
   ]);
 
-  // 結果をマージしてlimit件まで返す
-  return [...machiResults, ...spotResults].slice(0, limit);
+  // 結果をマージしてlimit件まで返す（優先順: 都道府県 → 市区 → 街 → スポット）
+  return [...prefResults, ...cityResults, ...machiResults, ...spotResults].slice(0, limit);
 }

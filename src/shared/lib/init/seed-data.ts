@@ -408,11 +408,9 @@ function createSampleVisits(userId: string): void {
       id: VISIT_IDS.shibuya,
       user_id: userId,
       machi_id: 'machi_shibuya_shibuya',
-      visit_count: 3,
       visited_at: new Date(
         today.getTime() - 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000
       ).toISOString(), // 昨日 14:00
-      memo: '良いカフェ見つけた',
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
       synced_at: null,
@@ -423,11 +421,9 @@ function createSampleVisits(userId: string): void {
       id: VISIT_IDS.shimokitazawa,
       user_id: userId,
       machi_id: 'machi_setagaya_shimokitazawa',
-      visit_count: 2,
       visited_at: new Date(
         today.getTime() - 3 * 24 * 60 * 60 * 1000 + 12 * 60 * 60 * 1000
       ).toISOString(), // 3日前 12:00
-      memo: '古着屋巡り',
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
       synced_at: null,
@@ -438,11 +434,9 @@ function createSampleVisits(userId: string): void {
       id: VISIT_IDS.ebisu,
       user_id: userId,
       machi_id: 'machi_shibuya_ebisu',
-      visit_count: 1,
       visited_at: new Date(
         today.getTime() - 5 * 24 * 60 * 60 * 1000 + 16 * 60 * 60 * 1000
       ).toISOString(), // 5日前 16:00
-      memo: '恵比寿ガーデンプレイス',
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
       synced_at: null,
@@ -453,11 +447,9 @@ function createSampleVisits(userId: string): void {
       id: VISIT_IDS.nakameguro,
       user_id: userId,
       machi_id: 'machi_meguro_nakameguro',
-      visit_count: 2,
       visited_at: new Date(
         today.getTime() - 7 * 24 * 60 * 60 * 1000 + 11 * 60 * 60 * 1000
       ).toISOString(), // 7日前 11:00
-      memo: '目黒川沿いを散歩',
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
       synced_at: null,
@@ -468,11 +460,9 @@ function createSampleVisits(userId: string): void {
       id: VISIT_IDS.kayabacho,
       user_id: userId,
       machi_id: 'machi_chiyoda_kayabacho',
-      visit_count: 1,
       visited_at: new Date(
         today.getTime() - 10 * 24 * 60 * 60 * 1000 + 9 * 60 * 60 * 1000
       ).toISOString(), // 10日前 9:00
-      memo: 'オフィス街のランチ',
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
       synced_at: null,

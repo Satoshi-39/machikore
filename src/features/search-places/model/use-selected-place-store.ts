@@ -3,6 +3,7 @@
  *
  * 検索結果 → スポット作成画面への遷移時にデータを渡すために使用
  * Google Places検索結果 と 手動登録（現在地/ピン刺し）の両方に対応
+ * また、検索結果からのマップジャンプにも使用
  */
 
 import { create } from 'zustand';
@@ -18,6 +19,15 @@ interface SelectedPlaceStore {
   // マスタースポットへのジャンプ用（いいね一覧からの遷移時）
   jumpToMasterSpotId: string | null;
   setJumpToMasterSpotId: (masterSpotId: string | null) => void;
+  // 街へのジャンプ用（検索結果からの遷移時）
+  jumpToMachiId: string | null;
+  setJumpToMachiId: (machiId: string | null) => void;
+  // 市区へのジャンプ用（検索結果からの遷移時）
+  jumpToCityId: string | null;
+  setJumpToCityId: (cityId: string | null) => void;
+  // 都道府県へのジャンプ用（検索結果からの遷移時）
+  jumpToPrefectureId: string | null;
+  setJumpToPrefectureId: (prefectureId: string | null) => void;
 }
 
 export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
@@ -28,4 +38,10 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
   setJumpToSpotId: (spotId) => set({ jumpToSpotId: spotId }),
   jumpToMasterSpotId: null,
   setJumpToMasterSpotId: (masterSpotId) => set({ jumpToMasterSpotId: masterSpotId }),
+  jumpToMachiId: null,
+  setJumpToMachiId: (machiId) => set({ jumpToMachiId: machiId }),
+  jumpToCityId: null,
+  setJumpToCityId: (cityId) => set({ jumpToCityId: cityId }),
+  jumpToPrefectureId: null,
+  setJumpToPrefectureId: (prefectureId) => set({ jumpToPrefectureId: prefectureId }),
 }));

@@ -53,16 +53,6 @@ export function ImageViewerModal({
     onClose();
   }, [onClose]);
 
-  // 画像読み込み完了時
-  const handleImageLoad = useCallback(() => {
-    if (pendingIndexRef.current !== null) {
-      // プリロードが完了したので表示を更新
-      setDisplayIndex(pendingIndexRef.current);
-      pendingIndexRef.current = null;
-      setIsLoading(false);
-    }
-  }, []);
-
   const handlePrev = useCallback((e: any) => {
     e.stopPropagation();
     if (displayIndex > 0 && !isLoading) {

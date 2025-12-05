@@ -99,9 +99,7 @@ export class SupabaseVisitRepository implements IVisitRepository {
       const visit = {
         user_id: data.user_id,
         machi_id: data.machi_id,
-        visit_count: data.visit_count ?? 1,
         visited_at: data.visited_at ?? now,
-        memo: data.memo ?? null,
         // Supabase will auto-generate: id, created_at, updated_at
       };
 
@@ -136,14 +134,8 @@ export class SupabaseVisitRepository implements IVisitRepository {
       const updates: Record<string, any> = {};
 
       // Build update fields
-      if (data.visit_count !== undefined) {
-        updates.visit_count = data.visit_count;
-      }
       if (data.visited_at !== undefined) {
         updates.visited_at = data.visited_at;
-      }
-      if (data.memo !== undefined) {
-        updates.memo = data.memo;
       }
 
       // Supabase auto-updates updated_at via trigger
@@ -287,41 +279,6 @@ export class SupabaseVisitRepository implements IVisitRepository {
     limit: number
   ): Promise<RepositoryResult<VisitRow[]>> {
     return this.findByUserId(userId, { limit });
-  }
-
-  async incrementVisitCount(visitId: string): Promise<RepositoryVoidResult> {
-    try {
-      // Use Supabase RPC for atomic increment
-      const { error } = await supabase.rpc('increment_visit_count', {
-        visit_id: visitId,
-      });
-
-      if (error) {
-        // Fallback to manual increment if RPC doesn't exist
-        const visitResult = await this.findById(visitId);
-        if (!visitResult.success || !visitResult.data) {
-          return voidFailure(new Error('Visit not found'));
-        }
-
-        const { error: updateError } = await supabase
-          .from('visits')
-          .update({
-            visit_count: (visitResult.data.visit_count ?? 0) + 1,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', visitId);
-
-        if (updateError) throw updateError;
-      }
-
-      return voidSuccess();
-    } catch (error) {
-      return voidFailure(
-        error instanceof Error
-          ? error
-          : new Error('Failed to increment visit count')
-      );
-    }
   }
 
   async deleteByUserId(userId: string): Promise<RepositoryVoidResult> {

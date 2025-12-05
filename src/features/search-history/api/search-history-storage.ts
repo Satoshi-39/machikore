@@ -17,7 +17,7 @@ export interface SearchHistoryItem {
   id: string;
   query: string;
   timestamp: number;
-  resultType?: 'machi' | 'spot' | 'place'; // 検索結果のタイプ
+  resultType?: 'machi' | 'spot' | 'place' | 'city' | 'prefecture'; // 検索結果のタイプ
 }
 
 const MAX_HISTORY_COUNT = 20; // 最大履歴数
@@ -42,7 +42,7 @@ export async function getSearchHistory(type: SearchHistoryType): Promise<SearchH
 export async function addSearchHistory(
   type: SearchHistoryType,
   query: string,
-  resultType?: 'machi' | 'spot' | 'place'
+  resultType?: 'machi' | 'spot' | 'place' | 'city' | 'prefecture'
 ): Promise<void> {
   try {
     const key = STORAGE_KEYS[type];

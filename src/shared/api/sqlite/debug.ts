@@ -113,9 +113,7 @@ export function logVisits(userId?: string, limit: number = 10) {
     visits.forEach((visit: VisitRow, index: number) => {
       console.log(`\n[${index + 1}] Visit ID: ${visit.id}`);
       console.log(`  Machi ID: ${visit.machi_id}`);
-      console.log(`  Visit count: ${visit.visit_count}`);
       console.log(`  Last visited: ${visit.visited_at}`);
-      console.log(`  Memo: ${visit.memo || 'None'}`);
     });
   } catch (error) {
     console.error('Error reading visits:', error);

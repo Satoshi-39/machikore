@@ -27,6 +27,7 @@ import {
   useSelectedPlaceStore,
   type PlaceSearchResult,
 } from '@/features/search-places';
+import { useSearchResultJump } from '@/features/map-jump';
 
 interface MapPageProps {
   /** propsで渡されるマップID（URLパラメータより優先） */
@@ -44,6 +45,9 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   const router = useRouter();
   const currentTab = useCurrentTab();
   const insets = useSafeAreaInsets();
+
+  // 検索結果からのジャンプ処理
+  const { jumpToSearchResult } = useSearchResultJump();
 
   const user = useUserStore((state) => state.user);
   // スポット作成時などでマップIDを共有するためにsetSelectedMapIdは維持
@@ -259,10 +263,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
                 onClose={handleSearchClose}
-                onPlaceSelect={(place) => {
-                  console.log('場所選択:', place);
-                  // TODO: 場所選択後の処理
-                }}
+                onPlaceSelect={jumpToSearchResult}
               />
             )}
           </View>

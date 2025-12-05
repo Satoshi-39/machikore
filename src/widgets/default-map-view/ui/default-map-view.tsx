@@ -2,7 +2,7 @@
  * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
-import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo, useCallback } from 'react';
 import { View } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,11 +10,11 @@ import Mapbox from '@rnmapbox/maps';
 import { useMachi, useMachiGeoJson } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
-import { getMasterSpotById } from '@/shared/api/supabase/spots';
+import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCities, useCitiesGeoJson } from '@/entities/city';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
-import { MapSearchBar, useSelectedPlaceStore } from '@/features/search-places';
+import { MapSearchBar } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -61,42 +61,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const [visitFilter, setVisitFilter] = useState<VisitFilter>('all');
     const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);
     const cameraRef = useRef<Mapbox.Camera>(null);
-
-    // ジャンプ完了後のリセット抑制用タイムスタンプ
-    const lastJumpTimeRef = useRef<number>(0);
-
-    // Zustandストアを直接subscribeしてジャンプ処理を実行
-    useEffect(() => {
-      const unsubscribe = useSelectedPlaceStore.subscribe((state, prevState) => {
-        const newId = state.jumpToMasterSpotId;
-        const prevId = prevState.jumpToMasterSpotId;
-
-        // IDが変わった時（null以外への変更）のみ処理
-        if (newId && newId !== prevId) {
-          // スポットデータを取得してジャンプ
-          getMasterSpotById(newId).then((spot) => {
-            if (spot) {
-              lastJumpTimeRef.current = Date.now();
-              setSelectedSpot(spot);
-              // カメラを移動
-              setTimeout(() => {
-                if (cameraRef.current) {
-                  cameraRef.current.setCamera({
-                    centerCoordinate: [spot.longitude, spot.latitude],
-                    zoomLevel: 15,
-                    animationDuration: 500,
-                  });
-                }
-              }, 100);
-              // ステートをクリア
-              state.setJumpToMasterSpotId(null);
-            }
-          });
-        }
-      });
-
-      return () => unsubscribe();
-    }, []);
 
     // 画面がフォーカスされた時に選択状態をリセット
     useFocusEffect(
@@ -166,6 +130,14 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         setIsSearchBarHidden(false);
       }
     };
+
+    // マップジャンプフック（検索結果からのジャンプ処理）
+    const { lastJumpTimeRef } = useMapJump({
+      cameraRef,
+      onMachiSelect: handleMachiSelect,
+      onCitySelect: handleCitySelect,
+      onSpotSelect: handleSpotSelect,
+    });
 
     // スナップ変更を親に通知して、ローカルstateも更新
     const handleSnapChange = (snapIndex: number) => {

@@ -29,18 +29,14 @@ export interface VisitQueryOptions {
 export interface CreateVisitData {
   user_id: string;
   machi_id: string;
-  visit_count?: number;
   visited_at?: string;
-  memo?: string;
 }
 
 /**
  * Visit update data
  */
 export interface UpdateVisitData {
-  visit_count?: number;
   visited_at?: string;
-  memo?: string;
   updated_at?: string;
 }
 
@@ -86,11 +82,6 @@ export interface IVisitRepository extends SyncableRepository<VisitRow, CreateVis
     userId: string,
     limit: number
   ): Promise<RepositoryResult<VisitRow[]>>;
-
-  /**
-   * Increment visit count
-   */
-  incrementVisitCount(visitId: string): Promise<RepositoryVoidResult>;
 
   /**
    * Delete visits by user ID

@@ -3,7 +3,7 @@
  */
 
 import React, { useRef } from 'react';
-import { View, Text, Pressable, Animated } from 'react-native';
+import { Text, Pressable, Animated } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -21,7 +21,7 @@ export function SwipeableRow({ children, onDelete }: SwipeableRowProps) {
   };
 
   const renderRightActions = (
-    progress: Animated.AnimatedInterpolation<number>,
+    _progress: Animated.AnimatedInterpolation<number>,
     dragX: Animated.AnimatedInterpolation<number>
   ) => {
     const scale = dragX.interpolate({

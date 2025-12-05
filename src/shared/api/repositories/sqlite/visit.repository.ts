@@ -102,9 +102,7 @@ export class SQLiteVisitRepository implements IVisitRepository {
         id,
         user_id: data.user_id,
         machi_id: data.machi_id,
-        visit_count: data.visit_count ?? 1, // Default to 1st visit
         visited_at: data.visited_at ?? now, // Default to current time
-        memo: data.memo ?? null,
         created_at: now,
         updated_at: now,
         synced_at: null, // Not synced yet
@@ -113,16 +111,14 @@ export class SQLiteVisitRepository implements IVisitRepository {
 
       db.runSync(
         `INSERT INTO visits (
-          id, user_id, machi_id, visit_count, visited_at, memo,
+          id, user_id, machi_id, visited_at,
           created_at, updated_at, synced_at, is_synced
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);`,
         [
           visit.id,
           visit.user_id,
           visit.machi_id,
-          visit.visit_count,
           visit.visited_at,
-          visit.memo,
           visit.created_at,
           visit.updated_at,
           visit.synced_at,
@@ -148,17 +144,9 @@ export class SQLiteVisitRepository implements IVisitRepository {
       const values: any[] = [];
 
       // Build update fields
-      if (data.visit_count !== undefined) {
-        fields.push('visit_count = ?');
-        values.push(data.visit_count);
-      }
       if (data.visited_at !== undefined) {
         fields.push('visited_at = ?');
         values.push(data.visited_at);
-      }
-      if (data.memo !== undefined) {
-        fields.push('memo = ?');
-        values.push(data.memo);
       }
 
       // Always update timestamp and reset sync status
@@ -334,29 +322,6 @@ export class SQLiteVisitRepository implements IVisitRepository {
     limit: number
   ): Promise<RepositoryResult<VisitRow[]>> {
     return this.findByUserId(userId, { limit });
-  }
-
-  async incrementVisitCount(visitId: string): Promise<RepositoryVoidResult> {
-    try {
-      const db = getDatabase();
-      const now = new Date().toISOString();
-      db.runSync(
-        `UPDATE visits
-         SET visit_count = visit_count + 1,
-             updated_at = ?,
-             is_synced = 0,
-             synced_at = NULL
-         WHERE id = ?;`,
-        [now, visitId]
-      );
-      return voidSuccess();
-    } catch (error) {
-      return voidFailure(
-        error instanceof Error
-          ? error
-          : new Error('Failed to increment visit count')
-      );
-    }
   }
 
   async deleteByUserId(userId: string): Promise<RepositoryVoidResult> {

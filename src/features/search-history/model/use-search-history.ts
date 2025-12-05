@@ -19,7 +19,7 @@ interface UseSearchHistoryOptions {
 interface UseSearchHistoryReturn {
   history: SearchHistoryItem[];
   isLoading: boolean;
-  addHistory: (query: string, resultType?: 'machi' | 'spot' | 'place') => Promise<void>;
+  addHistory: (query: string, resultType?: 'machi' | 'spot' | 'place' | 'city' | 'prefecture') => Promise<void>;
   removeHistory: (id: string) => Promise<void>;
   clearHistory: () => Promise<void>;
   refresh: () => Promise<void>;
@@ -46,7 +46,7 @@ export function useSearchHistory({ type }: UseSearchHistoryOptions): UseSearchHi
   }, [loadHistory]);
 
   // 履歴を追加
-  const addHistory = useCallback(async (query: string, resultType?: 'machi' | 'spot' | 'place') => {
+  const addHistory = useCallback(async (query: string, resultType?: 'machi' | 'spot' | 'place' | 'city' | 'prefecture') => {
     if (!query.trim()) return;
     await addSearchHistory(type, query.trim(), resultType);
     await loadHistory(); // 再読み込み

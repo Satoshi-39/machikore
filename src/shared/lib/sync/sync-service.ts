@@ -196,9 +196,7 @@ export class SyncService {
         const createResult = await this.visitRemote.create({
           user_id: visit.user_id,
           machi_id: visit.machi_id,
-          visit_count: visit.visit_count ?? undefined,
           visited_at: visit.visited_at,
-          memo: visit.memo ? String(visit.memo) : undefined,
         });
 
         if (createResult.success) {
