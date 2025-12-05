@@ -122,7 +122,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
         title="プロフィール編集"
-        rightElement={
+        rightComponent={
           <Pressable
             onPress={handleSave}
             disabled={isSaving}

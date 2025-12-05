@@ -12,6 +12,7 @@ import Toast from 'react-native-toast-message';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert, useCurrentTab, useSearchBarSync } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { ImageViewerModal, useImageViewer } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
@@ -64,6 +65,17 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
   // このマスタースポットに紐づくユーザー投稿を取得
   const { data: userSpots = [], isLoading: isLoadingUserSpots } = useSpotsByMasterSpot(spot.id);
+
+  // 画像ビューアー
+  const imageViewer = useImageViewer();
+
+  // 画像タップハンドラー（投稿ごとに呼び出し）
+  const handleImagePress = useCallback((images: { id: string; cloud_path: string | null }[], index: number) => {
+    const imageUrls = images.map((img) => img.cloud_path || '').filter(Boolean);
+    if (imageUrls.length > 0) {
+      imageViewer.openImages(imageUrls, index);
+    }
+  }, [imageViewer]);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
@@ -363,13 +375,18 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                       className="mt-2 -mx-3"
                       contentContainerStyle={{ paddingHorizontal: 12 }}
                     >
-                      {userSpot.images.map((image) => (
-                        <Image
+                      {userSpot.images.map((image, index) => (
+                        <Pressable
                           key={image.id}
-                          source={{ uri: image.cloud_path || '' }}
-                          className="w-24 h-24 rounded-lg mr-2"
-                          resizeMode="cover"
-                        />
+                          onPress={() => handleImagePress(userSpot.images!, index)}
+                          className="active:opacity-80"
+                        >
+                          <Image
+                            source={{ uri: image.cloud_path || '' }}
+                            className="w-24 h-24 rounded-lg mr-2"
+                            resizeMode="cover"
+                          />
+                        </Pressable>
                       ))}
                     </ScrollView>
                   )}
@@ -401,6 +418,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         onClose={() => setShowMapSelectSheet(false)}
       />
     )}
+
+    {/* 画像拡大表示モーダル */}
+    <ImageViewerModal
+      visible={imageViewer.isOpen}
+      images={imageViewer.images}
+      initialIndex={imageViewer.initialIndex}
+      onClose={imageViewer.closeImage}
+    />
     </>
   );
 }

@@ -9,21 +9,68 @@ import '../global.css';
 
 import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox } from '@/shared/lib/init';
+import { colors } from '@/shared/config';
 
-// カスタムToast設定（successを青に統一）
-const toastConfig = {
+// カスタムToast設定（ダークモード対応）
+const createToastConfig = (isDarkMode: boolean) => ({
   success: (props: BaseToastProps) => (
     <BaseToast
       {...props}
-      style={{ borderLeftColor: '#007AFF' }}
+      style={{
+        borderLeftColor: colors.primary.DEFAULT,
+        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
+      }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
         fontSize: 14,
         fontWeight: '600',
+        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
+      }}
+      text2Style={{
+        fontSize: 12,
+        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
       }}
     />
   ),
-};
+  error: (props: BaseToastProps) => (
+    <BaseToast
+      {...props}
+      style={{
+        borderLeftColor: colors.danger,
+        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
+      }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 14,
+        fontWeight: '600',
+        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
+      }}
+      text2Style={{
+        fontSize: 12,
+        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
+      }}
+    />
+  ),
+  info: (props: BaseToastProps) => (
+    <BaseToast
+      {...props}
+      style={{
+        borderLeftColor: colors.info,
+        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
+      }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 14,
+        fontWeight: '600',
+        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
+      }}
+      text2Style={{
+        fontSize: 12,
+        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
+      }}
+    />
+  ),
+});
 
 // AppProvidersの内側で使うためのコンポーネント
 function RootNavigator() {
@@ -206,7 +253,7 @@ function RootNavigator() {
           />
         </Stack>
         <StatusBar style={isDarkMode ? 'light' : 'dark'} />
-        <Toast config={toastConfig} />
+        <Toast config={createToastConfig(isDarkMode)} />
       </ThemeProvider>
     );
   }

@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, CommentInputModal } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer } from '@/shared/ui';
 import { showLoginRequiredAlert, useSearchBarSync } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
@@ -167,6 +167,17 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // スポットの画像を取得
   const { data: images = [] } = useSpotImages(spot.id);
+
+  // 画像ビューアー
+  const imageViewer = useImageViewer();
+
+  // 画像タップハンドラー
+  const handleImagePress = useCallback((index: number) => {
+    const imageUrls = images.map((img) => img.cloud_path || '').filter(Boolean);
+    if (imageUrls.length > 0) {
+      imageViewer.openImages(imageUrls, index);
+    }
+  }, [images, imageViewer]);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
@@ -339,13 +350,18 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               showsHorizontalScrollIndicator={false}
               className="-mx-4 px-4"
             >
-              {images.map((image) => (
-                <Image
+              {images.map((image, index) => (
+                <Pressable
                   key={image.id}
-                  source={{ uri: image.cloud_path || '' }}
-                  className="w-32 h-32 rounded-lg mr-2"
-                  resizeMode="cover"
-                />
+                  onPress={() => handleImagePress(index)}
+                  className="active:opacity-80"
+                >
+                  <Image
+                    source={{ uri: image.cloud_path || '' }}
+                    className="w-32 h-32 rounded-lg mr-2"
+                    resizeMode="cover"
+                  />
+                </Pressable>
               ))}
             </ScrollView>
           </View>
@@ -519,6 +535,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       onSubmit={handleEditSubmit}
       isSubmitting={isUpdatingComment}
       isEditing
+    />
+
+    {/* 画像拡大表示モーダル */}
+    <ImageViewerModal
+      visible={imageViewer.isOpen}
+      images={imageViewer.images}
+      initialIndex={imageViewer.initialIndex}
+      onClose={imageViewer.closeImage}
     />
     </>
   );

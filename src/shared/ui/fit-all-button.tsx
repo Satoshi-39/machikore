@@ -7,6 +7,8 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface FitAllButtonProps {
   onPress: () => void;
@@ -14,6 +16,8 @@ interface FitAllButtonProps {
 }
 
 export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
+  const isDarkMode = useIsDarkMode();
+
   return (
     <Pressable
       onPress={onPress}
@@ -28,7 +32,11 @@ export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
       }}
     >
       <View className="w-full h-full items-center justify-center">
-        <Ionicons name="scan-outline" size={24} color="#007AFF" />
+        <Ionicons
+          name="scan-outline"
+          size={24}
+          color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT}
+        />
       </View>
     </Pressable>
   );

@@ -5,7 +5,7 @@
  * 単一画像・複数画像両対応、前後ナビゲーション付き
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import {
   View,
   Modal,
@@ -14,6 +14,7 @@ import {
   Text,
   Dimensions,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -34,35 +35,88 @@ export function ImageViewerModal({
   onClose,
 }: ImageViewerModalProps) {
   const insets = useSafeAreaInsets();
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  // 表示中のインデックス（UIに反映される）
+  const [displayIndex, setDisplayIndex] = useState(initialIndex);
+  // 読み込み中かどうか
+  const [isLoading, setIsLoading] = useState(false);
+  // 次に表示するインデックス（プリロード用）
+  const pendingIndexRef = useRef<number | null>(null);
 
-  // initialIndex が変わったら currentIndex を更新
+  // initialIndex が変わったら displayIndex を更新
   React.useEffect(() => {
-    setCurrentIndex(initialIndex);
+    setDisplayIndex(initialIndex);
+    setIsLoading(false);
+    pendingIndexRef.current = null;
   }, [initialIndex, visible]);
 
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
 
+  // 画像読み込み完了時
+  const handleImageLoad = useCallback(() => {
+    if (pendingIndexRef.current !== null) {
+      // プリロードが完了したので表示を更新
+      setDisplayIndex(pendingIndexRef.current);
+      pendingIndexRef.current = null;
+      setIsLoading(false);
+    }
+  }, []);
+
   const handlePrev = useCallback((e: any) => {
     e.stopPropagation();
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+    if (displayIndex > 0 && !isLoading) {
+      const newIndex = displayIndex - 1;
+      pendingIndexRef.current = newIndex;
+      setIsLoading(true);
+      // 画像をプリロード
+      Image.prefetch(images[newIndex]!).then(() => {
+        if (pendingIndexRef.current === newIndex) {
+          setDisplayIndex(newIndex);
+          pendingIndexRef.current = null;
+          setIsLoading(false);
+        }
+      }).catch(() => {
+        // エラーでも表示を更新
+        if (pendingIndexRef.current === newIndex) {
+          setDisplayIndex(newIndex);
+          pendingIndexRef.current = null;
+          setIsLoading(false);
+        }
+      });
     }
-  }, [currentIndex]);
+  }, [displayIndex, images, isLoading]);
 
   const handleNext = useCallback((e: any) => {
     e.stopPropagation();
-    if (currentIndex < images.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+    if (displayIndex < images.length - 1 && !isLoading) {
+      const newIndex = displayIndex + 1;
+      pendingIndexRef.current = newIndex;
+      setIsLoading(true);
+      // 画像をプリロード
+      Image.prefetch(images[newIndex]!).then(() => {
+        if (pendingIndexRef.current === newIndex) {
+          setDisplayIndex(newIndex);
+          pendingIndexRef.current = null;
+          setIsLoading(false);
+        }
+      }).catch(() => {
+        // エラーでも表示を更新
+        if (pendingIndexRef.current === newIndex) {
+          setDisplayIndex(newIndex);
+          pendingIndexRef.current = null;
+          setIsLoading(false);
+        }
+      });
     }
-  }, [currentIndex, images.length]);
+  }, [displayIndex, images, isLoading]);
 
   if (images.length === 0) return null;
 
-  const currentImage = images[currentIndex];
+  const currentImage = images[displayIndex];
   const hasMultiple = images.length > 1;
+  const canGoPrev = displayIndex > 0;
+  const canGoNext = displayIndex < images.length - 1;
 
   return (
     <Modal
@@ -99,30 +153,43 @@ export function ImageViewerModal({
           />
         </Pressable>
 
+        {/* 読み込み中インジケーター */}
+        {isLoading && (
+          <View className="absolute inset-0 items-center justify-center">
+            <ActivityIndicator size="large" color="white" />
+          </View>
+        )}
+
         {/* 複数画像の場合のナビゲーション */}
         {hasMultiple && (
           <>
-            {/* 前へボタン */}
-            {currentIndex > 0 && (
-              <Pressable
-                onPress={handlePrev}
-                className="absolute left-4 w-10 h-10 bg-surface dark:bg-dark-surface/20 rounded-full items-center justify-center"
-                style={{ top: '50%', marginTop: -20 }}
-              >
-                <Ionicons name="chevron-back" size={24} color="white" />
-              </Pressable>
-            )}
+            {/* 前へボタン - 常に表示、最初の画像または読み込み中は非活性 */}
+            <Pressable
+              onPress={handlePrev}
+              disabled={!canGoPrev || isLoading}
+              className="absolute left-4 w-12 h-12 bg-black/50 rounded-full items-center justify-center active:bg-black/70"
+              style={{
+                top: '50%',
+                marginTop: -24,
+                opacity: !canGoPrev || isLoading ? 0.3 : 1,
+              }}
+            >
+              <Ionicons name="chevron-back" size={28} color="white" />
+            </Pressable>
 
-            {/* 次へボタン */}
-            {currentIndex < images.length - 1 && (
-              <Pressable
-                onPress={handleNext}
-                className="absolute right-4 w-10 h-10 bg-surface dark:bg-dark-surface/20 rounded-full items-center justify-center"
-                style={{ top: '50%', marginTop: -20 }}
-              >
-                <Ionicons name="chevron-forward" size={24} color="white" />
-              </Pressable>
-            )}
+            {/* 次へボタン - 常に表示、最後の画像または読み込み中は非活性 */}
+            <Pressable
+              onPress={handleNext}
+              disabled={!canGoNext || isLoading}
+              className="absolute right-4 w-12 h-12 bg-black/50 rounded-full items-center justify-center active:bg-black/70"
+              style={{
+                top: '50%',
+                marginTop: -24,
+                opacity: !canGoNext || isLoading ? 0.3 : 1,
+              }}
+            >
+              <Ionicons name="chevron-forward" size={28} color="white" />
+            </Pressable>
 
             {/* 画像カウンター */}
             <View
@@ -130,7 +197,7 @@ export function ImageViewerModal({
               style={{ bottom: insets.bottom + 20, alignSelf: 'center' }}
             >
               <Text className="text-white text-sm">
-                {currentIndex + 1} / {images.length}
+                {displayIndex + 1} / {images.length}
               </Text>
             </View>
           </>
