@@ -24,6 +24,7 @@ export function useSearchMachikorePlaces(options: UseSearchMachikorePlacesOption
   const [results, setResults] = useState<MachikorePlaceSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   // 簡易キャッシュ（同じクエリの重複検索を防ぐ）
   const cacheRef = useRef<Map<string, MachikorePlaceSearchResult[]>>(new Map());
@@ -36,6 +37,7 @@ export function useSearchMachikorePlaces(options: UseSearchMachikorePlacesOption
       if (!trimmedQuery) {
         setResults([]);
         setIsLoading(false);
+        setHasSearched(false);
         return;
       }
 
@@ -43,6 +45,7 @@ export function useSearchMachikorePlaces(options: UseSearchMachikorePlacesOption
       if (trimmedQuery.length < minQueryLength) {
         setResults([]);
         setIsLoading(false);
+        setHasSearched(false);
         return;
       }
 
@@ -50,14 +53,15 @@ export function useSearchMachikorePlaces(options: UseSearchMachikorePlacesOption
       const cacheKey = `${userId || 'all'}_${includeAllSpots}_${trimmedQuery}`;
       const cached = cacheRef.current.get(cacheKey);
       if (cached) {
-        console.log(`✅ [街コレ検索キャッシュ] "${trimmedQuery}" (検索スキップ)`);
         setResults(cached);
         setIsLoading(false);
+        setHasSearched(true);
         return;
       }
 
       setIsLoading(true);
       setError(null);
+      setHasSearched(true);
 
       try {
         const searchOptions: MachikorePlaceSearchOptions = {
@@ -66,11 +70,6 @@ export function useSearchMachikorePlaces(options: UseSearchMachikorePlacesOption
           includeAllSpots,
           limit: 20,
         };
-
-        console.log(`🔍 [街コレDB検索] 検索実行: "${trimmedQuery}"`, {
-          userId,
-          includeAllSpots,
-        });
 
         const searchResults = await searchMachikorePlaces(searchOptions);
 
@@ -99,17 +98,18 @@ export function useSearchMachikorePlaces(options: UseSearchMachikorePlacesOption
   const clearResults = useCallback(() => {
     setResults([]);
     setError(null);
+    setHasSearched(false);
   }, []);
 
   const clearCache = useCallback(() => {
     cacheRef.current.clear();
-    console.log('🗑️ [街コレ検索キャッシュ] クリア完了');
   }, []);
 
   return {
     results,
     isLoading,
     error,
+    hasSearched,
     search,
     clearResults,
     clearCache,

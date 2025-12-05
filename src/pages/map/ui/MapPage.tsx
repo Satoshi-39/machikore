@@ -249,12 +249,13 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
                   onMapPinSelect={handleMapPinSelect}
                 />
               ) : (
-                // 他人のマップ: そのユーザーのスポットを検索
+                // 他人のマップ: そのマップのスポットを検索
                 <OtherMapSearch
-                  mapUserId={selectedMap?.user_id ?? null}
+                  mapId={selectedMap?.id ?? null}
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
                   onClose={handleSearchClose}
+                  onSpotSelect={(spot) => setJumpToSpotId(spot.id)}
                 />
               )
             ) : (

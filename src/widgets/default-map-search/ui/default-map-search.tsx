@@ -24,7 +24,7 @@ export function DefaultMapSearch({
   onClose,
   onPlaceSelect,
 }: DefaultMapSearchProps) {
-  const { results, isLoading, error, search, config } = useSearchMachikorePlaces({
+  const { results, isLoading, error, hasSearched, search, config } = useSearchMachikorePlaces({
     includeAllSpots: true, // デフォルトマップ: 全ユーザーのspotsを検索
     minQueryLength: 1,
     debounceMs: 300,
@@ -91,7 +91,7 @@ export function DefaultMapSearch({
         ) : (
           // 検索結果
           <View className="p-4">
-            {isLoading ? (
+            {isLoading || !hasSearched ? (
               <Loading variant="inline" message="検索中..." />
             ) : error ? (
               <ErrorView

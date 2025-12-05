@@ -154,11 +154,11 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
       ) : searchQuery.trim().length > 0 ? (
         // 入力中: ユーザーサジェスト表示
         <View className="flex-1 bg-surface dark:bg-dark-surface">
-          {usersLoading ? (
+          {usersLoading || suggestedUsers === undefined ? (
             <View className="flex-1 justify-center items-center py-12">
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             </View>
-          ) : suggestedUsers && suggestedUsers.length > 0 ? (
+          ) : suggestedUsers.length > 0 ? (
             <FlatList
               data={suggestedUsers}
               keyExtractor={(item) => item.id}

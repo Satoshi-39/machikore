@@ -597,6 +597,90 @@ export async function searchPublicUserSpots(
 // master_spot_idからユーザー投稿を取得
 // ===============================
 
+// ===============================
+// マップ内スポット検索
+// ===============================
+
+/**
+ * マップ内スポット検索結果の型
+ */
+export interface MapSpotSearchResult {
+  id: string;
+  name: string;
+  address: string | null;
+  latitude: number;
+  longitude: number;
+}
+
+/**
+ * 指定マップ内のスポットをキーワードで検索
+ * other-map-searchで使用
+ */
+export async function searchSpotsByMapId(
+  mapId: string,
+  query: string,
+  limit: number = 30
+): Promise<MapSpotSearchResult[]> {
+  // 1. user_spotsのcustom_nameで検索
+  const { data: customNameResults } = await supabase
+    .from('user_spots')
+    .select(`
+      id,
+      custom_name,
+      master_spots (
+        name,
+        latitude,
+        longitude,
+        google_formatted_address
+      )
+    `)
+    .eq('map_id', mapId)
+    .ilike('custom_name', `%${query}%`)
+    .limit(limit);
+
+  // 2. master_spotsの名前で検索
+  const { data: masterNameResults } = await supabase
+    .from('user_spots')
+    .select(`
+      id,
+      custom_name,
+      master_spots!inner (
+        name,
+        latitude,
+        longitude,
+        google_formatted_address
+      )
+    `)
+    .eq('map_id', mapId)
+    .ilike('master_spots.name', `%${query}%`)
+    .limit(limit);
+
+  // 結果をマージ（重複排除）
+  const resultMap = new Map<string, MapSpotSearchResult>();
+
+  const processSpot = (spot: any) => {
+    const masterSpot = spot.master_spots;
+    if (masterSpot && !resultMap.has(spot.id)) {
+      resultMap.set(spot.id, {
+        id: spot.id,
+        name: spot.custom_name || masterSpot.name,
+        address: masterSpot.google_formatted_address,
+        latitude: masterSpot.latitude,
+        longitude: masterSpot.longitude,
+      });
+    }
+  };
+
+  (customNameResults || []).forEach(processSpot);
+  (masterNameResults || []).forEach(processSpot);
+
+  return Array.from(resultMap.values()).slice(0, limit);
+}
+
+// ===============================
+// master_spot_idからユーザー投稿を取得
+// ===============================
+
 /**
  * master_spot_idに紐づく公開ユーザー投稿を取得（画像付き）
  */

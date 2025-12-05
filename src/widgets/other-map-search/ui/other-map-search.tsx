@@ -1,39 +1,35 @@
 /**
  * 他人のマップ全画面検索Widget
- * そのユーザーのスポットのみを検索
+ * そのマップのスポットのみを検索
  */
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, EmptyState, ErrorView, SearchBar } from '@/shared/ui';
-import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
-import { useSpotSelectHandler } from '../model';
+import { searchSpotsByMapId, type MapSpotSearchResult } from '@/shared/api/supabase/user-spots';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 
 interface OtherMapSearchProps {
-  mapUserId: string | null;
+  mapId: string | null;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClose: () => void;
-  onSpotSelect?: (spot: MachikorePlaceSearchResult) => void;
+  onSpotSelect?: (spot: MapSpotSearchResult) => void;
 }
 
 export function OtherMapSearch({
-  mapUserId,
+  mapId,
   searchQuery,
   onSearchChange,
   onClose,
   onSpotSelect,
 }: OtherMapSearchProps) {
-  // 街コレデータ検索（そのユーザーのスポットのみ）
-  const { results, isLoading, error, search, config } = useSearchMachikorePlaces({
-    userId: mapUserId,
-    includeAllSpots: false,
-    minQueryLength: 1,
-    debounceMs: 300,
-  });
+  const [results, setResults] = useState<MapSpotSearchResult[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   // 検索履歴フック
   const {
@@ -43,16 +39,36 @@ export function OtherMapSearch({
     clearHistory,
   } = useSearchHistory({ type: 'userMap' });
 
-  // 検索結果選択ハンドラー
-  const { handleSpotSelect: baseSpotSelect } = useSpotSelectHandler({
-    onSpotSelect,
-    onClose,
-  });
+  // 検索実行
+  const search = useCallback(async (query: string) => {
+    const trimmedQuery = query.trim();
 
-  // 検索結果選択時に履歴も追加
-  const handleSpotSelect = (spot: MachikorePlaceSearchResult) => {
+    if (!trimmedQuery || !mapId) {
+      setResults([]);
+      setIsLoading(false);
+      setHasSearched(false);
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    setHasSearched(true);
+
+    try {
+      const searchResults = await searchSpotsByMapId(mapId, trimmedQuery);
+      setResults(searchResults);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('検索に失敗しました'));
+    } finally {
+      setIsLoading(false);
+    }
+  }, [mapId]);
+
+  // 検索結果選択時
+  const handleSpotSelect = (spot: MapSpotSearchResult) => {
     addHistory(searchQuery, 'spot');
-    baseSpotSelect(spot);
+    onSpotSelect?.(spot);
+    onClose();
   };
 
   // 履歴から検索
@@ -64,10 +80,10 @@ export function OtherMapSearch({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       search(searchQuery);
-    }, config.debounceMs);
+    }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [searchQuery, search, config.debounceMs]);
+  }, [searchQuery, search]);
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
@@ -96,7 +112,7 @@ export function OtherMapSearch({
         ) : (
           // 検索結果
           <View className="p-4">
-            {isLoading ? (
+            {isLoading || !hasSearched ? (
               <Loading variant="inline" message="検索中..." />
             ) : error ? (
               <ErrorView
@@ -121,24 +137,15 @@ export function OtherMapSearch({
                     onPress={() => handleSpotSelect(spot)}
                     className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                   >
-                    <View className={`w-10 h-10 rounded-full items-center justify-center ${
-                      spot.type === 'machi' ? 'bg-green-100' : 'bg-blue-100'
-                    }`}>
+                    <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
                       <Ionicons
-                        name={spot.type === 'machi' ? 'map' : 'location'}
+                        name="location"
                         size={20}
-                        color={spot.type === 'machi' ? colors.secondary.DEFAULT : colors.primary.DEFAULT}
+                        color={colors.primary.DEFAULT}
                       />
                     </View>
                     <View className="flex-1 ml-3">
-                      <View className="flex-row items-center gap-2">
-                        <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{spot.name}</Text>
-                        {spot.type === 'machi' && (
-                          <View className="bg-green-100 px-2 py-0.5 rounded">
-                            <Text className="text-xs text-green-700 font-medium">街</Text>
-                          </View>
-                        )}
-                      </View>
+                      <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{spot.name}</Text>
                       {spot.address && (
                         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
                           {spot.address}
