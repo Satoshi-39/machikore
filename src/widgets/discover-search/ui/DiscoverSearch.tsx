@@ -3,17 +3,20 @@
  *
  * FSDの原則：Widget層 - 複数のFeatureを組み合わせた複合コンポーネント
  * - 検索バー（タップでオーバーレイを表示）
- * - 検索オーバーレイ（入力フィールド + 履歴/検索結果表示）
- * - 検索結果はDiscoverSearchResultsに委譲
+ * - 検索オーバーレイ（入力フィールド + ユーザーサジェスト/検索結果表示）
+ * - 入力中: ユーザーのみリアルタイムサジェスト表示
+ * - 確定後: 検索結果はDiscoverSearchResultsに委譲（全タブ検索）
  */
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Pressable, FlatList, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 import { DiscoverSearchResults } from '@/widgets/discover-search-results';
+import { useUserSearch, UserListItem } from '@/entities/user';
 
 interface DiscoverSearchProps {
   onFocus: () => void;
@@ -26,9 +29,15 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
   const [submittedQuery, setSubmittedQuery] = useState('');
   const inputRef = useRef<TextInput>(null);
   const isDarkMode = useIsDarkMode();
+  const router = useRouter();
 
   // 検索履歴
   const { history, addHistory, removeHistory, clearHistory } = useSearchHistory({ type: 'discover' });
+
+  // 入力中のユーザーサジェスト（リアルタイム検索）
+  const { data: suggestedUsers, isLoading: usersLoading } = useUserSearch(
+    searchQuery.trim().length > 0 && !submittedQuery ? searchQuery.trim() : ''
+  );
 
   // オーバーレイが開いたら入力フィールドにフォーカス
   useEffect(() => {
@@ -64,6 +73,15 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
     setSearchQuery(query);
     setSubmittedQuery(query);
   }, [addHistory]);
+
+  // サジェストされたユーザーをタップしたら直接プロフィールへ遷移
+  const handleUserSuggestPress = useCallback((userId: string) => {
+    router.push(`/(tabs)/discover/users/${userId}`);
+    // 検索状態をクリア
+    setSearchQuery('');
+    setSubmittedQuery('');
+    onClose();
+  }, [router, onClose]);
 
   // 通常時: タップでオーバーレイを開くダミー検索バー
   if (!isSearchFocused) {
@@ -130,10 +148,48 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
         </View>
       )}
 
-      {/* 検索結果がある場合は結果を表示、なければ履歴を表示 */}
+      {/* コンテンツ表示: 確定後→検索結果、入力中→ユーザーサジェスト、それ以外→履歴 */}
       {submittedQuery ? (
         <DiscoverSearchResults query={submittedQuery} />
+      ) : searchQuery.trim().length > 0 ? (
+        // 入力中: ユーザーサジェスト表示
+        <View className="flex-1 bg-surface dark:bg-dark-surface">
+          {usersLoading ? (
+            <View className="flex-1 justify-center items-center py-12">
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            </View>
+          ) : suggestedUsers && suggestedUsers.length > 0 ? (
+            <FlatList
+              data={suggestedUsers}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <UserListItem
+                  user={item}
+                  onPress={() => handleUserSuggestPress(item.id)}
+                />
+              )}
+              ListHeaderComponent={
+                <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light">
+                  <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
+                    ユーザー
+                  </Text>
+                </View>
+              }
+              showsVerticalScrollIndicator={false}
+            />
+          ) : (
+            <TouchableOpacity
+              onPress={handleSearch}
+              className="px-4 py-3"
+            >
+              <Text className="text-base text-foreground dark:text-dark-foreground">
+                「{searchQuery.trim()}」を検索
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
       ) : (
+        // 入力前: 履歴表示
         <View className="flex-1 bg-surface dark:bg-dark-surface px-4 pt-4">
           <SearchHistoryList
             history={history}

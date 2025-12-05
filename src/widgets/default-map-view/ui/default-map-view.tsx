@@ -25,7 +25,7 @@ import { useCountriesGeoJson } from '@/entities/country/model';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import { useBoundsManagement } from '../model';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
-import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
+import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
 import { MasterSpotDetailCard } from '@/widgets/master-spot-detail-card';

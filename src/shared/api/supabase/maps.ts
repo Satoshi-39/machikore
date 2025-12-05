@@ -538,8 +538,58 @@ export async function updateSpotArticleContent(
 }
 
 // ===============================
-// フォロー中ユーザーのマップ
+// マップ検索（発見タブ用）
 // ===============================
+
+/**
+ * 公開マップをキーワードで検索（Supabase版）
+ * 発見タブの検索で使用
+ */
+export async function searchPublicMaps(
+  query: string,
+  limit: number = 30
+): Promise<MapWithUser[]> {
+  const { data, error } = await supabase
+    .from('maps')
+    .select(`
+      *,
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      )
+    `)
+    .eq('is_public', true)
+    .or(`name.ilike.%${query}%,description.ilike.%${query}%`)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error('[searchPublicMaps] Error:', error);
+    return [];
+  }
+
+  return (data || []).map((map: SupabaseMapResponse) => ({
+    id: map.id,
+    user_id: map.user_id,
+    name: map.name,
+    description: map.description,
+    category: map.category,
+    tags: map.tags,
+    is_public: map.is_public,
+    is_default: map.is_default,
+    is_official: map.is_official,
+    thumbnail_url: map.thumbnail_url,
+    spots_count: map.spots_count,
+    likes_count: map.likes_count,
+    comments_count: map.comments_count ?? 0,
+    created_at: map.created_at,
+    updated_at: map.updated_at,
+    user: map.users || null,
+    is_article_public: map.is_article_public ?? false,
+  }));
+}
 
 /**
  * フォロー中ユーザーの公開マップ一覧を取得

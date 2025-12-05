@@ -3,7 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
-import { getSpotById, type UserSpotWithMasterSpot } from '@/shared/api/supabase/spots';
+import { getSpotById, type UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
 
 /**
  * IDでスポットを取得（master_spotsと結合）

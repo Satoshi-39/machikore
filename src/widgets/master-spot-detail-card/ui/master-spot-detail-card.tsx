@@ -13,7 +13,7 @@ import { colors } from '@/shared/config';
 import { showLoginRequiredAlert, useCurrentTab, useSearchBarSync } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { ImageViewerModal, useImageViewer } from '@/shared/ui';
-import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
+import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useCurrentUserId } from '@/entities/user';

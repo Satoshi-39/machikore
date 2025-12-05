@@ -18,7 +18,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { StyledTextInput } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
-import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/spots';
+import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
 import type { Database } from '@/shared/types/supabase.generated';
 import type { MapWithUser } from '@/shared/types';
 

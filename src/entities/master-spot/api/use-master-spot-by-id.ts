@@ -3,7 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
-import { getMasterSpotById } from '@/shared/api/supabase/spots';
+import { getMasterSpotById } from '@/shared/api/supabase/master-spots';
 
 export function useMasterSpotById(masterSpotId: string | null | undefined) {
   return useQuery({

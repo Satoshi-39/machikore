@@ -4,7 +4,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { invalidateSpots } from '@/shared/api/query-client';
-import { deleteSpot } from '@/shared/api/supabase/spots';
+import { deleteSpot } from '@/shared/api/supabase/user-spots';
 
 /**
  * スポットを削除（関連する画像も連鎖削除される）

@@ -14,7 +14,7 @@ import {
   getMasterSpotById,
 } from '@/shared/api/supabase';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
-import type { MasterSpotDisplay } from '@/shared/api/supabase/spots';
+import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 
 interface CameraController {
   setCamera: (options: {

@@ -4,7 +4,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { invalidateSpots } from '@/shared/api/query-client';
-import { createSpot, type CreateSpotInput } from '@/shared/api/supabase/spots';
+import { createSpot, type CreateSpotInput } from '@/shared/api/supabase/user-spots';
 
 /**
  * スポットを作成

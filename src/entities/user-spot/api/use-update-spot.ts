@@ -4,7 +4,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { invalidateSpots } from '@/shared/api/query-client';
-import { updateSpot } from '@/shared/api/supabase/spots';
+import { updateSpot } from '@/shared/api/supabase/user-spots';
 import type { UpdateSpotParams } from '../model/types';
 
 /**

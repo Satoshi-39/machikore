@@ -1,19 +1,19 @@
 /**
- * マップ検索hook
+ * マップ検索hook（Supabase版）
  */
 
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { searchMaps } from '@/shared/api/sqlite';
-import type { MapRow } from '@/shared/types/database.types';
+import { searchPublicMaps } from '@/shared/api/supabase';
+import type { MapWithUser } from '@/shared/types';
 
 /**
- * キーワードでマップを検索
+ * キーワードで公開マップを検索（発見タブ用）
  */
 export function useMapSearch(query: string) {
-  return useQuery<MapRow[], Error>({
+  return useQuery<MapWithUser[], Error>({
     queryKey: [...QUERY_KEYS.maps, 'search', query],
-    queryFn: () => searchMaps(query),
+    queryFn: () => searchPublicMaps(query),
     enabled: query.length > 0,
   });
 }

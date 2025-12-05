@@ -4,7 +4,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
-import { getMasterSpotsByBounds } from '@/shared/api/supabase/spots';
+import { getMasterSpotsByBounds } from '@/shared/api/supabase/master-spots';
 
 interface Bounds {
   minLat: number;

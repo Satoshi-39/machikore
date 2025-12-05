@@ -1,19 +1,18 @@
 /**
- * スポット検索hook
+ * スポット検索hook（Supabase版）
  */
 
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { searchSpots } from '@/shared/api/sqlite';
-import type { SpotWithMasterSpot } from '@/shared/types/database.types';
+import { searchPublicUserSpots, type UserSpotSearchResult } from '@/shared/api/supabase';
 
 /**
- * キーワードでスポットを検索
+ * キーワードで公開スポットを検索（発見タブ用）
  */
 export function useSpotSearch(query: string) {
-  return useQuery<SpotWithMasterSpot[], Error>({
+  return useQuery<UserSpotSearchResult[], Error>({
     queryKey: [...QUERY_KEYS.spots, 'search', query],
-    queryFn: () => searchSpots(query),
+    queryFn: () => searchPublicUserSpots(query),
     enabled: query.length > 0,
   });
 }

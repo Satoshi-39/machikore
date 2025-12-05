@@ -8,10 +8,20 @@ import React from 'react';
 import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import type { UserRow } from '@/shared/types/database.types';
+
+/**
+ * UserListItemで必要な最小限のユーザー情報
+ */
+interface UserListItemUser {
+  id: string;
+  username: string | null;
+  display_name: string | null;
+  avatar_url: string | null;
+  bio?: string | null;
+}
 
 interface UserListItemProps {
-  user: UserRow;
+  user: UserListItemUser;
   onPress?: () => void;
 }
 

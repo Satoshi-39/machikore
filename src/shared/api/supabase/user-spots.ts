@@ -1,10 +1,11 @@
 /**
- * Supabase Spots API
- * スポットの作成・取得など
+ * Supabase User Spots API
+ * ユーザースポットのCRUD・検索
  */
 
 import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
+import type { SpotWithDetails } from '@/shared/types';
 
 type MasterSpotInsert = Database['public']['Tables']['master_spots']['Insert'];
 type MasterSpotRow = Database['public']['Tables']['master_spots']['Row'];
@@ -12,7 +13,7 @@ type UserSpotInsert = Database['public']['Tables']['user_spots']['Insert'];
 type UserSpotRow = Database['public']['Tables']['user_spots']['Row'];
 
 // ===============================
-// スポット作成パラメータ
+// 型定義
 // ===============================
 
 export interface CreateSpotInput {
@@ -34,6 +35,91 @@ export interface CreateSpotInput {
   customName?: string | null;
   description?: string | null;
   tags?: string[] | null;
+}
+
+export interface UpdateSpotInput {
+  id: string;
+  custom_name?: string | null;
+  description?: string | null;
+  tags?: string[] | null;
+  order_index?: number;
+  map_id?: string;
+}
+
+export interface UserSpotWithMasterSpot extends UserSpotRow {
+  master_spot: MasterSpotRow | null;
+}
+
+export interface UserSpotImage {
+  id: string;
+  cloud_path: string | null;
+  order_index: number;
+}
+
+export interface UserSpotWithImages {
+  id: string;
+  user_id: string;
+  map_id: string;
+  master_spot_id: string;
+  machi_id: string | null;
+  custom_name: string | null;
+  description: string | null;
+  tags: string[] | null;
+  images_count: number;
+  likes_count: number;
+  comments_count: number;
+  order_index: number;
+  created_at: string;
+  updated_at: string;
+  master_spot: any;
+  user: {
+    id: string;
+    username: string | null;
+    display_name: string | null;
+    avatar_url: string | null;
+  } | null;
+  map: {
+    id: string;
+    name: string;
+  } | null;
+  images: UserSpotImage[];
+}
+
+/**
+ * 発見タブ用のスポット検索結果型
+ */
+export interface UserSpotSearchResult {
+  id: string;
+  user_id: string;
+  map_id: string;
+  master_spot_id: string;
+  machi_id: string | null;
+  custom_name: string | null;
+  description: string | null;
+  tags: string[] | null;
+  images_count: number;
+  likes_count: number;
+  comments_count: number;
+  order_index: number;
+  created_at: string;
+  updated_at: string;
+  master_spot: {
+    id: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+    google_formatted_address: string | null;
+  } | null;
+  user: {
+    id: string;
+    username: string | null;
+    display_name: string | null;
+    avatar_url: string | null;
+  } | null;
+  map: {
+    id: string;
+    name: string;
+  } | null;
 }
 
 // ===============================
@@ -143,13 +229,6 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
 // ===============================
 
 /**
- * user_spotとmaster_spotを結合した型
- */
-export interface UserSpotWithMasterSpot extends UserSpotRow {
-  master_spot: MasterSpotRow | null;
-}
-
-/**
  * マップIDでスポット一覧を取得
  */
 export async function getSpotsByMapId(mapId: string): Promise<UserSpotWithMasterSpot[]> {
@@ -172,64 +251,6 @@ export async function getSpotsByMapId(mapId: string): Promise<UserSpotWithMaster
   }));
 }
 
-// ===============================
-// スポット更新
-// ===============================
-
-export interface UpdateSpotInput {
-  id: string;
-  custom_name?: string | null;
-  description?: string | null;
-  tags?: string[] | null;
-  order_index?: number;
-  map_id?: string;
-}
-
-/**
- * スポットを更新（user_spotのカスタマイズ可能フィールドのみ）
- */
-export async function updateSpot(input: UpdateSpotInput): Promise<UserSpotRow> {
-  const { id, ...updateData } = input;
-
-  const { data, error } = await supabase
-    .from('user_spots')
-    .update({
-      ...updateData,
-      updated_at: new Date().toISOString(),
-    })
-    .eq('id', id)
-    .select()
-    .single();
-
-  if (error) {
-    handleSupabaseError('updateSpot', error);
-  }
-
-  return data;
-}
-
-// ===============================
-// スポット削除
-// ===============================
-
-/**
- * スポットを削除（関連する画像も自動削除される）
- */
-export async function deleteSpot(spotId: string): Promise<void> {
-  const { error } = await supabase
-    .from('user_spots')
-    .delete()
-    .eq('id', spotId);
-
-  if (error) {
-    handleSupabaseError('deleteSpot', error);
-  }
-}
-
-// ===============================
-// スポットをIDで取得
-// ===============================
-
 /**
  * IDでスポットを取得（master_spotを結合）
  */
@@ -245,7 +266,6 @@ export async function getSpotById(spotId: string): Promise<UserSpotWithMasterSpo
 
   if (error) {
     if (error.code === 'PGRST116') {
-      // Not found
       return null;
     }
     handleSupabaseError('getSpotById', error);
@@ -259,12 +279,11 @@ export async function getSpotById(spotId: string): Promise<UserSpotWithMasterSpo
 
 /**
  * IDでスポットを詳細情報付きで取得（user, master_spot, is_liked含む）
- * SpotWithDetails型を返す（SpotCardで使用可能）
  */
 export async function getSpotWithDetails(
   spotId: string,
   currentUserId?: string | null
-): Promise<import('@/shared/types').SpotWithDetails | null> {
+): Promise<SpotWithDetails | null> {
   const { data, error } = await supabase
     .from('user_spots')
     .select(`
@@ -323,18 +342,62 @@ export async function getSpotWithDetails(
 }
 
 // ===============================
+// スポット更新
+// ===============================
+
+/**
+ * スポットを更新（user_spotのカスタマイズ可能フィールドのみ）
+ */
+export async function updateSpot(input: UpdateSpotInput): Promise<UserSpotRow> {
+  const { id, ...updateData } = input;
+
+  const { data, error } = await supabase
+    .from('user_spots')
+    .update({
+      ...updateData,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    handleSupabaseError('updateSpot', error);
+  }
+
+  return data;
+}
+
+// ===============================
+// スポット削除
+// ===============================
+
+/**
+ * スポットを削除（関連する画像も自動削除される）
+ */
+export async function deleteSpot(spotId: string): Promise<void> {
+  const { error } = await supabase
+    .from('user_spots')
+    .delete()
+    .eq('id', spotId);
+
+  if (error) {
+    handleSupabaseError('deleteSpot', error);
+  }
+}
+
+// ===============================
 // 公開スポット取得
 // ===============================
 
 /**
  * 公開スポット一覧を取得
- * @param currentUserId - 現在のユーザーID（いいね状態を取得するため）
  */
 export async function getPublicSpots(
   limit: number = 50,
   offset: number = 0,
   currentUserId?: string | null
-) {
+): Promise<SpotWithDetails[]> {
   const { data, error } = await supabase
     .from('user_spots')
     .select(`
@@ -365,7 +428,6 @@ export async function getPublicSpots(
   }
 
   return (data || []).map((spot: any) => {
-    // 現在のユーザーがいいねしているかチェック
     const isLiked = currentUserId
       ? (spot.likes || []).some((like: any) => like.user_id === currentUserId)
       : false;
@@ -394,171 +456,155 @@ export async function getPublicSpots(
 }
 
 // ===============================
-// マスタースポット取得（デフォルトマップ用）
+// ユーザースポット検索（発見タブ用）
 // ===============================
 
-export interface MasterSpotDisplay {
-  id: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-  google_place_id: string | null;
-  google_formatted_address: string | null;
-  google_types: string[] | null;
-  google_phone_number: string | null;
-  google_website_uri: string | null;
-  google_rating: number | null;
-  google_user_rating_count: number | null;
-  likes_count: number;
-  user_spots_count: number;
-}
-
 /**
- * ビューポート範囲内のマスタースポットを取得（Supabase版）
- * ユーザー投稿があるマスタースポットのみ返す
+ * 公開スポットをキーワードで検索（Supabase版）
+ * 発見タブの検索で使用
+ *
+ * 検索対象:
+ * 1. user_spots.custom_name, user_spots.description
+ * 2. master_spots.name（スポット名）
  */
-export async function getMasterSpotsByBounds(
-  minLat: number,
-  maxLat: number,
-  minLng: number,
-  maxLng: number,
-  limit: number = 500
-): Promise<MasterSpotDisplay[]> {
-  const { data, error } = await supabase
-    .from('master_spots')
+export async function searchPublicUserSpots(
+  query: string,
+  limit: number = 30
+): Promise<UserSpotSearchResult[]> {
+  // 1. user_spotsのcustom_name, descriptionで検索
+  const { data: userSpotResults, error: userSpotError } = await supabase
+    .from('user_spots')
     .select(`
-      id,
-      name,
-      latitude,
-      longitude,
-      google_place_id,
-      google_formatted_address,
-      google_types,
-      google_phone_number,
-      google_website_uri,
-      google_rating,
-      google_user_rating_count,
-      likes_count,
-      user_spots!inner (id)
+      *,
+      master_spots (
+        id,
+        name,
+        latitude,
+        longitude,
+        google_formatted_address
+      ),
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      ),
+      maps!inner (
+        id,
+        name,
+        is_public
+      )
     `)
-    .gte('latitude', minLat)
-    .lte('latitude', maxLat)
-    .gte('longitude', minLng)
-    .lte('longitude', maxLng)
+    .eq('maps.is_public', true)
+    .or(`custom_name.ilike.%${query}%,description.ilike.%${query}%`)
+    .order('created_at', { ascending: false })
     .limit(limit);
 
-  if (error) {
-    handleSupabaseError('getMasterSpotsByBounds', error);
+  if (userSpotError) {
+    console.error('[searchPublicUserSpots] Error:', userSpotError);
   }
 
-  return (data || []).map((spot: any) => ({
-    id: spot.id,
-    name: spot.name,
-    latitude: spot.latitude,
-    longitude: spot.longitude,
-    google_place_id: spot.google_place_id,
-    google_formatted_address: spot.google_formatted_address,
-    google_types: spot.google_types,
-    google_phone_number: spot.google_phone_number,
-    google_website_uri: spot.google_website_uri,
-    google_rating: spot.google_rating,
-    google_user_rating_count: spot.google_user_rating_count,
-    likes_count: spot.likes_count ?? 0,
-    user_spots_count: spot.user_spots?.length || 0,
-  }));
-}
-
-/**
- * マスタースポットをIDで取得
- */
-export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpotDisplay | null> {
-  const { data, error } = await supabase
+  // 2. master_spotsの名前で検索し、紐づくuser_spotsを取得
+  const { data: masterSpotResults, error: masterSpotError } = await supabase
     .from('master_spots')
     .select(`
       id,
       name,
       latitude,
       longitude,
-      google_place_id,
       google_formatted_address,
-      google_types,
-      google_phone_number,
-      google_website_uri,
-      google_rating,
-      google_user_rating_count,
-      likes_count,
-      user_spots (id)
+      user_spots (
+        *,
+        users (
+          id,
+          username,
+          display_name,
+          avatar_url
+        ),
+        maps!inner (
+          id,
+          name,
+          is_public
+        )
+      )
     `)
-    .eq('id', masterSpotId)
-    .maybeSingle();
+    .ilike('name', `%${query}%`)
+    .limit(limit);
 
-  if (error) {
-    handleSupabaseError('getMasterSpotById', error);
+  if (masterSpotError) {
+    console.error('[searchPublicUserSpots] masterSpot Error:', masterSpotError);
   }
 
-  if (!data) return null;
+  // 結果をマージ（重複排除）
+  const resultMap = new Map<string, UserSpotSearchResult>();
 
-  return {
-    id: data.id,
-    name: data.name,
-    latitude: data.latitude,
-    longitude: data.longitude,
-    google_place_id: data.google_place_id,
-    google_formatted_address: data.google_formatted_address,
-    google_types: data.google_types,
-    google_phone_number: data.google_phone_number,
-    google_website_uri: data.google_website_uri,
-    google_rating: data.google_rating,
-    google_user_rating_count: data.google_user_rating_count,
-    likes_count: data.likes_count ?? 0,
-    user_spots_count: (data.user_spots as any[])?.length || 0,
-  };
+  // user_spotsの結果を追加
+  (userSpotResults || []).forEach((spot: any) => {
+    resultMap.set(spot.id, {
+      id: spot.id,
+      user_id: spot.user_id,
+      map_id: spot.map_id,
+      master_spot_id: spot.master_spot_id,
+      machi_id: spot.machi_id,
+      custom_name: spot.custom_name,
+      description: spot.description,
+      tags: spot.tags,
+      images_count: spot.images_count,
+      likes_count: spot.likes_count,
+      comments_count: spot.comments_count,
+      order_index: spot.order_index,
+      created_at: spot.created_at,
+      updated_at: spot.updated_at,
+      master_spot: spot.master_spots || null,
+      user: spot.users || null,
+      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    });
+  });
+
+  // master_spotsからのuser_spotsを追加（公開マップのみ）
+  (masterSpotResults || []).forEach((masterSpot: any) => {
+    const userSpots = masterSpot.user_spots || [];
+    userSpots.forEach((spot: any) => {
+      // 公開マップのスポットのみ、かつ重複排除
+      if (spot.maps?.is_public && !resultMap.has(spot.id)) {
+        resultMap.set(spot.id, {
+          id: spot.id,
+          user_id: spot.user_id,
+          map_id: spot.map_id,
+          master_spot_id: spot.master_spot_id,
+          machi_id: spot.machi_id,
+          custom_name: spot.custom_name,
+          description: spot.description,
+          tags: spot.tags,
+          images_count: spot.images_count,
+          likes_count: spot.likes_count,
+          comments_count: spot.comments_count,
+          order_index: spot.order_index,
+          created_at: spot.created_at,
+          updated_at: spot.updated_at,
+          master_spot: {
+            id: masterSpot.id,
+            name: masterSpot.name,
+            latitude: masterSpot.latitude,
+            longitude: masterSpot.longitude,
+            google_formatted_address: masterSpot.google_formatted_address,
+          },
+          user: spot.users || null,
+          map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+        });
+      }
+    });
+  });
+
+  // 新着順にソートしてlimit件まで返す
+  return Array.from(resultMap.values())
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .slice(0, limit);
 }
 
 // ===============================
 // master_spot_idからユーザー投稿を取得
 // ===============================
-
-/**
- * ユーザー投稿の画像情報
- */
-export interface UserSpotImage {
-  id: string;
-  cloud_path: string | null;
-  order_index: number;
-}
-
-/**
- * ユーザー投稿（画像付き）
- */
-export interface UserSpotWithImages {
-  id: string;
-  user_id: string;
-  map_id: string;
-  master_spot_id: string;
-  machi_id: string | null;
-  custom_name: string | null;
-  description: string | null;
-  tags: string[] | null;
-  images_count: number;
-  likes_count: number;
-  comments_count: number;
-  order_index: number;
-  created_at: string;
-  updated_at: string;
-  master_spot: any;
-  user: {
-    id: string;
-    username: string | null;
-    display_name: string | null;
-    avatar_url: string | null;
-  } | null;
-  map: {
-    id: string;
-    name: string;
-  } | null;
-  images: UserSpotImage[];
-}
 
 /**
  * master_spot_idに紐づく公開ユーザー投稿を取得（画像付き）
