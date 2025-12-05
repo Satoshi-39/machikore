@@ -3,7 +3,7 @@
  * スポットの作成・取得など
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
 
 type MasterSpotInsert = Database['public']['Tables']['master_spots']['Insert'];
@@ -88,8 +88,7 @@ async function getOrCreateMasterSpot(input: {
     .single();
 
   if (error) {
-    console.error('[getOrCreateMasterSpot] Error:', error);
-    throw error;
+    handleSupabaseError('getOrCreateMasterSpot', error);
   }
 
   console.log('[getOrCreateMasterSpot] Created new:', data.id);
@@ -132,8 +131,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     .single();
 
   if (error) {
-    console.error('[createSpot] Error:', error);
-    throw error;
+    handleSupabaseError('createSpot', error);
   }
 
   console.log('[createSpot] Created user_spot:', data.id);
@@ -165,8 +163,7 @@ export async function getSpotsByMapId(mapId: string): Promise<UserSpotWithMaster
     .order('order_index', { ascending: true });
 
   if (error) {
-    console.error('[getSpotsByMapId] Error:', error);
-    throw error;
+    handleSupabaseError('getSpotsByMapId', error);
   }
 
   return (data || []).map((spot: any) => ({
@@ -205,8 +202,7 @@ export async function updateSpot(input: UpdateSpotInput): Promise<UserSpotRow> {
     .single();
 
   if (error) {
-    console.error('[updateSpot] Error:', error);
-    throw error;
+    handleSupabaseError('updateSpot', error);
   }
 
   return data;
@@ -226,8 +222,7 @@ export async function deleteSpot(spotId: string): Promise<void> {
     .eq('id', spotId);
 
   if (error) {
-    console.error('[deleteSpot] Error:', error);
-    throw error;
+    handleSupabaseError('deleteSpot', error);
   }
 }
 
@@ -253,8 +248,7 @@ export async function getSpotById(spotId: string): Promise<UserSpotWithMasterSpo
       // Not found
       return null;
     }
-    console.error('[getSpotById] Error:', error);
-    throw error;
+    handleSupabaseError('getSpotById', error);
   }
 
   return {
@@ -298,8 +292,7 @@ export async function getSpotWithDetails(
     if (error.code === 'PGRST116') {
       return null;
     }
-    console.error('[getSpotWithDetails] Error:', error);
-    throw error;
+    handleSupabaseError('getSpotWithDetails', error);
   }
 
   const spot = data as any;
@@ -368,8 +361,7 @@ export async function getPublicSpots(
     .range(offset, offset + limit - 1);
 
   if (error) {
-    console.error('Failed to fetch public spots:', error);
-    throw error;
+    handleSupabaseError('getPublicSpots', error);
   }
 
   return (data || []).map((spot: any) => {
@@ -456,8 +448,7 @@ export async function getMasterSpotsByBounds(
     .limit(limit);
 
   if (error) {
-    console.error('[getMasterSpotsByBounds] Error:', error);
-    throw error;
+    handleSupabaseError('getMasterSpotsByBounds', error);
   }
 
   return (data || []).map((spot: any) => ({
@@ -502,8 +493,7 @@ export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpo
     .maybeSingle();
 
   if (error) {
-    console.error('[getMasterSpotById] Error:', error);
-    throw error;
+    handleSupabaseError('getMasterSpotById', error);
   }
 
   if (!data) return null;
@@ -602,8 +592,7 @@ export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: nu
     .limit(limit);
 
   if (error) {
-    console.error('Failed to fetch user spots by master_spot_id:', error);
-    throw error;
+    handleSupabaseError('getUserSpotsByMasterSpotId', error);
   }
 
   return (data || []).map((spot: any) => ({

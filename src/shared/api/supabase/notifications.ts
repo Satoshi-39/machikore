@@ -3,7 +3,7 @@
  * 通知機能
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 
 // 通知タイプ
 export type NotificationType =
@@ -128,8 +128,7 @@ export async function getUserNotifications(
   const { data, error } = await query;
 
   if (error) {
-    console.error('[getUserNotifications] Error:', error);
-    throw error;
+    handleSupabaseError('getUserNotifications', error);
   }
 
   return (data || []).map((item: any) => ({
@@ -152,8 +151,7 @@ export async function getUnreadNotificationCount(userId: string): Promise<number
     .eq('is_read', false);
 
   if (error) {
-    console.error('[getUnreadNotificationCount] Error:', error);
-    throw error;
+    handleSupabaseError('getUnreadNotificationCount', error);
   }
 
   return count ?? 0;
@@ -173,8 +171,7 @@ export async function markNotificationAsRead(notificationId: string): Promise<vo
     .eq('id', notificationId);
 
   if (error) {
-    console.error('[markNotificationAsRead] Error:', error);
-    throw error;
+    handleSupabaseError('markNotificationAsRead', error);
   }
 }
 
@@ -189,8 +186,7 @@ export async function markAllNotificationsAsRead(userId: string): Promise<void> 
     .eq('is_read', false);
 
   if (error) {
-    console.error('[markAllNotificationsAsRead] Error:', error);
-    throw error;
+    handleSupabaseError('markAllNotificationsAsRead', error);
   }
 }
 
@@ -204,8 +200,7 @@ export async function deleteNotification(notificationId: string): Promise<void> 
     .eq('id', notificationId);
 
   if (error) {
-    console.error('[deleteNotification] Error:', error);
-    throw error;
+    handleSupabaseError('deleteNotification', error);
   }
 }
 
@@ -219,8 +214,7 @@ export async function deleteAllNotifications(userId: string): Promise<void> {
     .eq('user_id', userId);
 
   if (error) {
-    console.error('[deleteAllNotifications] Error:', error);
-    throw error;
+    handleSupabaseError('deleteAllNotifications', error);
   }
 }
 
@@ -240,8 +234,7 @@ export async function getSystemAnnouncements(): Promise<SystemAnnouncement[]> {
     .order('published_at', { ascending: false });
 
   if (error) {
-    console.error('[getSystemAnnouncements] Error:', error);
-    throw error;
+    handleSupabaseError('getSystemAnnouncements', error);
   }
 
   return data || [];
@@ -259,8 +252,7 @@ export async function getUnreadAnnouncementCount(userId: string): Promise<number
     .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
 
   if (announcementsError) {
-    console.error('[getUnreadAnnouncementCount] Error:', announcementsError);
-    throw announcementsError;
+    handleSupabaseError('getUnreadAnnouncementCount', announcementsError);
   }
 
   if (!announcements || announcements.length === 0) {
@@ -274,8 +266,7 @@ export async function getUnreadAnnouncementCount(userId: string): Promise<number
     .eq('user_id', userId);
 
   if (readError) {
-    console.error('[getUnreadAnnouncementCount] Error:', readError);
-    throw readError;
+    handleSupabaseError('getUnreadAnnouncementCount', readError);
   }
 
   const readIds = new Set((readAnnouncements || []).map((r) => r.announcement_id));
@@ -297,8 +288,7 @@ export async function markAnnouncementAsRead(
     );
 
   if (error) {
-    console.error('[markAnnouncementAsRead] Error:', error);
-    throw error;
+    handleSupabaseError('markAnnouncementAsRead', error);
   }
 }
 
@@ -313,8 +303,7 @@ export async function markAllAnnouncementsAsRead(userId: string): Promise<void> 
     .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
 
   if (announcementsError) {
-    console.error('[markAllAnnouncementsAsRead] Error:', announcementsError);
-    throw announcementsError;
+    handleSupabaseError('markAllAnnouncementsAsRead', announcementsError);
   }
 
   if (!announcements || announcements.length === 0) {
@@ -331,8 +320,7 @@ export async function markAllAnnouncementsAsRead(userId: string): Promise<void> 
     .upsert(records, { onConflict: 'user_id,announcement_id' });
 
   if (error) {
-    console.error('[markAllAnnouncementsAsRead] Error:', error);
-    throw error;
+    handleSupabaseError('markAllAnnouncementsAsRead', error);
   }
 }
 
@@ -346,8 +334,7 @@ export async function getReadAnnouncementIds(userId: string): Promise<Set<string
     .eq('user_id', userId);
 
   if (error) {
-    console.error('[getReadAnnouncementIds] Error:', error);
-    throw error;
+    handleSupabaseError('getReadAnnouncementIds', error);
   }
 
   return new Set((data || []).map((r) => r.announcement_id));

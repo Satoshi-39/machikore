@@ -9,7 +9,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { colors } from '@/shared/config';
 
-export type DiscoverTabMode = 'spots' | 'maps';
+export type DiscoverTabMode = 'recommend' | 'following';
 
 interface DiscoverTabsProps {
   tabMode: DiscoverTabMode;
@@ -17,8 +17,8 @@ interface DiscoverTabsProps {
 }
 
 const TAB_OPTIONS: { mode: DiscoverTabMode; label: string }[] = [
-  { mode: 'spots', label: 'スポット' },
-  { mode: 'maps', label: 'マップ' },
+  { mode: 'recommend', label: 'おすすめ' },
+  { mode: 'following', label: 'フォロー中' },
 ];
 
 export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {

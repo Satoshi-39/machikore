@@ -3,7 +3,7 @@
  * コメント機能（スポット・マップ）
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 
 // ===============================
 // 型定義
@@ -101,8 +101,7 @@ export async function getSpotComments(
     .range(offset, offset + limit - 1);
 
   if (error) {
-    console.error('[getSpotComments] Error:', error);
-    throw error;
+    handleSupabaseError('getSpotComments', error);
   }
 
   return (data || []).map((comment: any) => mapComment(comment, currentUserId));
@@ -136,8 +135,7 @@ export async function addSpotComment(
     .single();
 
   if (error) {
-    console.error('[addSpotComment] Error:', error);
-    throw error;
+    handleSupabaseError('addSpotComment', error);
   }
 
   // user_spotsのcomments_countをインクリメント
@@ -169,8 +167,7 @@ export async function updateComment(commentId: string, content: string): Promise
     .single();
 
   if (error) {
-    console.error('[updateComment] Error:', error);
-    throw error;
+    handleSupabaseError('updateComment', error);
   }
 
   return mapComment(data);
@@ -192,8 +189,7 @@ export async function deleteComment(
     .eq('id', commentId);
 
   if (error) {
-    console.error('[deleteComment] Error:', error);
-    throw error;
+    handleSupabaseError('deleteComment', error);
   }
 
   // トップレベルコメント（返信でない）の場合のみカウントをデクリメント
@@ -225,8 +221,7 @@ export async function getSpotCommentsCount(spotId: string): Promise<number> {
     .is('parent_id', null);
 
   if (error) {
-    console.error('[getSpotCommentsCount] Error:', error);
-    throw error;
+    handleSupabaseError('getSpotCommentsCount', error);
   }
 
   return count ?? 0;
@@ -265,8 +260,7 @@ export async function getMapComments(
     .range(offset, offset + limit - 1);
 
   if (error) {
-    console.error('[getMapComments] Error:', error);
-    throw error;
+    handleSupabaseError('getMapComments', error);
   }
 
   return (data || []).map((comment: any) => mapComment(comment, currentUserId));
@@ -300,8 +294,7 @@ export async function addMapComment(
     .single();
 
   if (error) {
-    console.error('[addMapComment] Error:', error);
-    throw error;
+    handleSupabaseError('addMapComment', error);
   }
 
   // mapsのcomments_countをインクリメント
@@ -324,8 +317,7 @@ export async function getMapCommentsCount(mapId: string): Promise<number> {
     .is('parent_id', null);
 
   if (error) {
-    console.error('[getMapCommentsCount] Error:', error);
-    throw error;
+    handleSupabaseError('getMapCommentsCount', error);
   }
 
   return count ?? 0;
@@ -346,8 +338,7 @@ export async function likeComment(userId: string, commentId: string): Promise<vo
   if (error) {
     // 重複エラーは無視（既にいいね済み）
     if (error.code === '23505') return;
-    console.error('[likeComment] Error:', error);
-    throw error;
+    handleSupabaseError('likeComment', error);
   }
 }
 
@@ -362,8 +353,7 @@ export async function unlikeComment(userId: string, commentId: string): Promise<
     .eq('comment_id', commentId);
 
   if (error) {
-    console.error('[unlikeComment] Error:', error);
-    throw error;
+    handleSupabaseError('unlikeComment', error);
   }
 }
 
@@ -418,8 +408,7 @@ export async function getCommentReplies(
     .range(offset, offset + limit - 1);
 
   if (error) {
-    console.error('[getCommentReplies] Error:', error);
-    throw error;
+    handleSupabaseError('getCommentReplies', error);
   }
 
   return (data || []).map((comment: any) => mapComment(comment, currentUserId));
@@ -461,8 +450,7 @@ export async function addReplyComment(
     .single();
 
   if (error) {
-    console.error('[addReplyComment] Error:', error);
-    throw error;
+    handleSupabaseError('addReplyComment', error);
   }
 
   // 注意: 返信はスポット/マップのcomments_countには含めない

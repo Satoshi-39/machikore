@@ -3,7 +3,7 @@
  * ブックマーク・フォルダ機能
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 
 // ===============================
 // 型定義
@@ -89,8 +89,7 @@ export async function getBookmarkFolders(
   const { data, error } = await query.order('order_index', { ascending: true });
 
   if (error) {
-    console.error('[getBookmarkFolders] Error:', error);
-    throw error;
+    handleSupabaseError('getBookmarkFolders', error);
   }
 
   return data || [];
@@ -130,8 +129,7 @@ export async function createBookmarkFolder(
     .single();
 
   if (error) {
-    console.error('[createBookmarkFolder] Error:', error);
-    throw error;
+    handleSupabaseError('createBookmarkFolder', error);
   }
 
   return data;
@@ -152,8 +150,7 @@ export async function updateBookmarkFolder(
     .single();
 
   if (error) {
-    console.error('[updateBookmarkFolder] Error:', error);
-    throw error;
+    handleSupabaseError('updateBookmarkFolder', error);
   }
 
   return data;
@@ -170,8 +167,7 @@ export async function deleteBookmarkFolder(folderId: string): Promise<void> {
     .eq('id', folderId);
 
   if (error) {
-    console.error('[deleteBookmarkFolder] Error:', error);
-    throw error;
+    handleSupabaseError('deleteBookmarkFolder', error);
   }
 }
 
@@ -198,8 +194,7 @@ export async function bookmarkSpot(
     .single();
 
   if (error) {
-    console.error('[bookmarkSpot] Error:', error);
-    throw error;
+    handleSupabaseError('bookmarkSpot', error);
   }
 
   return data;
@@ -224,8 +219,7 @@ export async function bookmarkMap(
     .single();
 
   if (error) {
-    console.error('[bookmarkMap] Error:', error);
-    throw error;
+    handleSupabaseError('bookmarkMap', error);
   }
 
   return data;
@@ -241,8 +235,7 @@ export async function removeBookmark(bookmarkId: string): Promise<void> {
     .eq('id', bookmarkId);
 
   if (error) {
-    console.error('[removeBookmark] Error:', error);
-    throw error;
+    handleSupabaseError('removeBookmark', error);
   }
 }
 
@@ -257,8 +250,7 @@ export async function unbookmarkSpot(userId: string, spotId: string): Promise<vo
     .eq('spot_id', spotId);
 
   if (error) {
-    console.error('[unbookmarkSpot] Error:', error);
-    throw error;
+    handleSupabaseError('unbookmarkSpot', error);
   }
 }
 
@@ -273,8 +265,7 @@ export async function unbookmarkMap(userId: string, mapId: string): Promise<void
     .eq('map_id', mapId);
 
   if (error) {
-    console.error('[unbookmarkMap] Error:', error);
-    throw error;
+    handleSupabaseError('unbookmarkMap', error);
   }
 }
 
@@ -291,8 +282,7 @@ export async function moveBookmarkToFolder(
     .eq('id', bookmarkId);
 
   if (error) {
-    console.error('[moveBookmarkToFolder] Error:', error);
-    throw error;
+    handleSupabaseError('moveBookmarkToFolder', error);
   }
 }
 
@@ -315,8 +305,7 @@ export async function checkSpotBookmarked(
     .maybeSingle();
 
   if (error) {
-    console.error('[checkSpotBookmarked] Error:', error);
-    throw error;
+    handleSupabaseError('checkSpotBookmarked', error);
   }
 
   return data !== null;
@@ -337,8 +326,7 @@ export async function checkMapBookmarked(
     .maybeSingle();
 
   if (error) {
-    console.error('[checkMapBookmarked] Error:', error);
-    throw error;
+    handleSupabaseError('checkMapBookmarked', error);
   }
 
   return data !== null;
@@ -359,8 +347,7 @@ export async function getSpotBookmarkInfo(
     .eq('spot_id', spotId);
 
   if (error) {
-    console.error('[getSpotBookmarkInfo] Error:', error);
-    throw error;
+    handleSupabaseError('getSpotBookmarkInfo', error);
   }
 
   return data || [];
@@ -381,8 +368,7 @@ export async function getMapBookmarkInfo(
     .eq('map_id', mapId);
 
   if (error) {
-    console.error('[getMapBookmarkInfo] Error:', error);
-    throw error;
+    handleSupabaseError('getMapBookmarkInfo', error);
   }
 
   return data || [];
@@ -411,8 +397,7 @@ export async function unbookmarkSpotFromFolder(
   const { error } = await query;
 
   if (error) {
-    console.error('[unbookmarkSpotFromFolder] Error:', error);
-    throw error;
+    handleSupabaseError('unbookmarkSpotFromFolder', error);
   }
 }
 
@@ -439,8 +424,7 @@ export async function unbookmarkMapFromFolder(
   const { error } = await query;
 
   if (error) {
-    console.error('[unbookmarkMapFromFolder] Error:', error);
-    throw error;
+    handleSupabaseError('unbookmarkMapFromFolder', error);
   }
 }
 
@@ -508,8 +492,7 @@ export async function getUserBookmarks(
   const { data, error } = await query;
 
   if (error) {
-    console.error('[getUserBookmarks] Error:', error);
-    throw error;
+    handleSupabaseError('getUserBookmarks', error);
   }
 
   return (data || []).map((bookmark: any) => ({

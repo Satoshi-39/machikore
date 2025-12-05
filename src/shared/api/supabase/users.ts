@@ -3,7 +3,7 @@
  * ユーザー関連の操作
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
 
 type User = Database['public']['Tables']['users']['Row'];
@@ -36,8 +36,7 @@ export async function updateUserProfile(
     .single();
 
   if (error) {
-    console.error('[updateUserProfile] Error:', error);
-    throw error;
+    handleSupabaseError('updateUserProfile', error);
   }
 
   return user;
@@ -57,8 +56,7 @@ export async function getUserById(userId: string): Promise<User | null> {
     if (error.code === 'PGRST116') {
       return null; // Not found
     }
-    console.error('[getUserById] Error:', error);
-    throw error;
+    handleSupabaseError('getUserById', error);
   }
 
   return data;
@@ -88,8 +86,7 @@ export async function uploadAvatar(
     });
 
   if (uploadError) {
-    console.error('[uploadAvatar] Upload error:', uploadError);
-    throw uploadError;
+    handleSupabaseError('uploadAvatar', uploadError);
   }
 
   // 公開URLを取得
@@ -104,8 +101,7 @@ export async function uploadAvatar(
 export async function updatePushToken(token: string): Promise<void> {
   const { error } = await supabase.rpc('update_push_token', { token });
   if (error) {
-    console.error('[updatePushToken] Error:', error);
-    throw error;
+    handleSupabaseError('updatePushToken', error);
   }
 }
 
@@ -115,7 +111,6 @@ export async function updatePushToken(token: string): Promise<void> {
 export async function clearPushToken(): Promise<void> {
   const { error } = await supabase.rpc('clear_push_token');
   if (error) {
-    console.error('[clearPushToken] Error:', error);
-    throw error;
+    handleSupabaseError('clearPushToken', error);
   }
 }

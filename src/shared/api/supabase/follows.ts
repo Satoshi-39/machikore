@@ -3,7 +3,7 @@
  * フォロー機能
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 
 // フォロー関係の情報
 export interface FollowUser {
@@ -39,8 +39,7 @@ export async function checkIsFollowing(
     .maybeSingle();
 
   if (error) {
-    console.error('[checkIsFollowing] Error:', error);
-    throw error;
+    handleSupabaseError('checkIsFollowing', error);
   }
 
   return data !== null;
@@ -73,8 +72,7 @@ export async function followUser(
       console.log('[followUser] Already following');
       return;
     }
-    console.error('[followUser] Error:', error);
-    throw error;
+    handleSupabaseError('followUser', error);
   }
 }
 
@@ -92,8 +90,7 @@ export async function unfollowUser(
     .eq('followee_id', followeeId);
 
   if (error) {
-    console.error('[unfollowUser] Error:', error);
-    throw error;
+    handleSupabaseError('unfollowUser', error);
   }
 }
 
@@ -144,8 +141,7 @@ export async function getFollowers(
     .limit(limit);
 
   if (error) {
-    console.error('[getFollowers] Error:', error);
-    throw error;
+    handleSupabaseError('getFollowers', error);
   }
 
   return (data || []).map((item: any) => ({
@@ -180,8 +176,7 @@ export async function getFollowing(
     .limit(limit);
 
   if (error) {
-    console.error('[getFollowing] Error:', error);
-    throw error;
+    handleSupabaseError('getFollowing', error);
   }
 
   return (data || []).map((item: any) => ({
@@ -205,8 +200,7 @@ export async function getFollowersCount(userId: string): Promise<number> {
     .eq('followee_id', userId);
 
   if (error) {
-    console.error('[getFollowersCount] Error:', error);
-    throw error;
+    handleSupabaseError('getFollowersCount', error);
   }
 
   return count ?? 0;
@@ -222,8 +216,7 @@ export async function getFollowingCount(userId: string): Promise<number> {
     .eq('follower_id', userId);
 
   if (error) {
-    console.error('[getFollowingCount] Error:', error);
-    throw error;
+    handleSupabaseError('getFollowingCount', error);
   }
 
   return count ?? 0;

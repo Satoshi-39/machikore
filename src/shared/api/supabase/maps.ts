@@ -3,7 +3,7 @@
  * 公開マップの取得など
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 import type { MapWithUser, SpotWithDetails, MapArticleData, SpotWithImages } from '@/shared/types';
 
 // ===============================
@@ -63,8 +63,7 @@ export async function getPublicMaps(
     .range(offset, offset + limit - 1);
 
   if (error) {
-    console.error('Failed to fetch public maps:', error);
-    throw error;
+    handleSupabaseError('getPublicMaps', error);
   }
 
   // データを整形
@@ -112,8 +111,7 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
       // Not found
       return null;
     }
-    console.error('Failed to fetch map:', error);
-    throw error;
+    handleSupabaseError('getMapById', error);
   }
 
   if (!data) return null;
@@ -167,8 +165,7 @@ export async function getMapSpots(
     .order('order_index', { ascending: true });
 
   if (error) {
-    console.error('Failed to fetch map spots:', error);
-    throw error;
+    handleSupabaseError('getMapSpots', error);
   }
 
   return (data || []).map((spot: any) => {
@@ -219,8 +216,7 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Failed to fetch user maps:', error);
-    throw error;
+    handleSupabaseError('getUserPublicMaps', error);
   }
 
   return (data || []).map((map: SupabaseMapResponse) => ({
@@ -263,8 +259,7 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Failed to fetch user maps:', error);
-    throw error;
+    handleSupabaseError('getUserMaps', error);
   }
 
   return (data || []).map((map: SupabaseMapResponse) => ({
@@ -339,8 +334,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     .single();
 
   if (error) {
-    console.error('[createMap] Failed:', error);
-    throw error;
+    handleSupabaseError('createMap', error);
   }
 
   console.log('[createMap] Success:', data);
@@ -406,8 +400,7 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
     .single();
 
   if (error) {
-    console.error('[updateMap] Error:', error);
-    throw error;
+    handleSupabaseError('updateMap', error);
   }
 
   return {
@@ -445,8 +438,7 @@ export async function deleteMap(mapId: string): Promise<void> {
     .eq('id', mapId);
 
   if (error) {
-    console.error('[deleteMap] Error:', error);
-    throw error;
+    handleSupabaseError('deleteMap', error);
   }
 }
 
@@ -491,8 +483,7 @@ export async function getMapArticle(
     .order('order_index', { ascending: true });
 
   if (spotsError) {
-    console.error('[getMapArticle] Failed to fetch spots:', spotsError);
-    throw spotsError;
+    handleSupabaseError('getMapArticle', spotsError);
   }
 
   const spots: SpotWithImages[] = (spotsData || []).map((spot: any) => {
@@ -542,7 +533,78 @@ export async function updateSpotArticleContent(
     .eq('id', spotId);
 
   if (error) {
-    console.error('[updateSpotArticleContent] Error:', error);
-    throw error;
+    handleSupabaseError('updateSpotArticleContent', error);
   }
+}
+
+// ===============================
+// フォロー中ユーザーのマップ
+// ===============================
+
+/**
+ * フォロー中ユーザーの公開マップ一覧を取得
+ * @param userId 現在のユーザーID
+ */
+export async function getFollowingUsersMaps(
+  userId: string,
+  limit: number = 50,
+  offset: number = 0
+): Promise<MapWithUser[]> {
+  // 1. フォロー中のユーザーIDを取得
+  const { data: followsData, error: followsError } = await supabase
+    .from('follows')
+    .select('followee_id')
+    .eq('follower_id', userId);
+
+  if (followsError) {
+    handleSupabaseError('getFollowingUsersMaps:follows', followsError);
+  }
+
+  const followingUserIds = (followsData || []).map((f) => f.followee_id);
+
+  // フォロー中のユーザーがいない場合は空配列を返す
+  if (followingUserIds.length === 0) {
+    return [];
+  }
+
+  // 2. フォロー中ユーザーの公開マップを取得
+  const { data, error } = await supabase
+    .from('maps')
+    .select(`
+      *,
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      )
+    `)
+    .eq('is_public', true)
+    .in('user_id', followingUserIds)
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) {
+    handleSupabaseError('getFollowingUsersMaps', error);
+  }
+
+  return (data || []).map((map: SupabaseMapResponse) => ({
+    id: map.id,
+    user_id: map.user_id,
+    name: map.name,
+    description: map.description,
+    category: map.category,
+    tags: map.tags,
+    is_public: map.is_public,
+    is_default: map.is_default,
+    is_official: map.is_official,
+    thumbnail_url: map.thumbnail_url,
+    spots_count: map.spots_count,
+    likes_count: map.likes_count,
+    comments_count: map.comments_count ?? 0,
+    created_at: map.created_at,
+    updated_at: map.updated_at,
+    user: map.users || null,
+    is_article_public: map.is_article_public ?? false,
+  }));
 }

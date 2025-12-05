@@ -2,7 +2,7 @@
  * 発見ページ
  *
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
- * スポット・マップフィードと検索機能を提供
+ * おすすめ・フォロー中のマップフィードと検索機能を提供
  */
 
 import React, { useState } from 'react';
@@ -10,11 +10,13 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DiscoverTabs, type DiscoverTabMode } from '@/widgets/discover-tabs';
 import { DiscoverSearch } from '@/widgets/discover-search';
-import { SpotFeed } from '@/widgets/spot-feed';
-import { MapFeed } from '@/widgets/map-feed';
+import { RecommendMapFeed } from '@/widgets/recommend-map-feed';
+import { FollowingMapFeed } from '@/widgets/following-map-feed';
+// SpotFeedは将来復活の可能性があるため保持
+// import { SpotFeed } from '@/widgets/spot-feed';
 
 export function DiscoverPage() {
-  const [tabMode, setTabMode] = useState<DiscoverTabMode>('spots');
+  const [tabMode, setTabMode] = useState<DiscoverTabMode>('recommend');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const handleSearchFocus = () => {
@@ -42,8 +44,8 @@ export function DiscoverPage() {
 
           {/* タブコンテンツ */}
           <View className="flex-1">
-            {tabMode === 'spots' && <SpotFeed />}
-            {tabMode === 'maps' && <MapFeed />}
+            {tabMode === 'recommend' && <RecommendMapFeed />}
+            {tabMode === 'following' && <FollowingMapFeed />}
           </View>
         </>
       )}

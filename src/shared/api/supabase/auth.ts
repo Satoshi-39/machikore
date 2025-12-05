@@ -1,130 +1,12 @@
 /**
  * Supabase認証関連の関数
+ *
+ * セッション管理はSupabaseクライアントが自動で行う（SecureStorageAdapterを使用）
+ * このファイルでは認証関数のみを提供
  */
 
-import * as SecureStore from 'expo-secure-store';
 import { supabase } from './client';
-import { STORAGE_KEYS } from '@/shared/config';
 import type { Result } from '@/shared/types';
-
-// ===============================
-// セッション管理
-// ===============================
-
-/**
- * セッションをSecureStoreに保存
- */
-export async function saveSession(
-  accessToken: string,
-  refreshToken: string,
-  expiresAt: number
-): Promise<void> {
-  const sessionData = {
-    access_token: accessToken,
-    refresh_token: refreshToken,
-    expires_at: expiresAt,
-  };
-
-  await SecureStore.setItemAsync(
-    STORAGE_KEYS.USER_SESSION,
-    JSON.stringify(sessionData)
-  );
-}
-
-/**
- * セッションをSecureStoreから復元
- * アクセストークンが期限切れでもリフレッシュトークンで復元を試みる
- */
-export async function restoreSession(): Promise<boolean> {
-  try {
-    const sessionStr = await SecureStore.getItemAsync(
-      STORAGE_KEYS.USER_SESSION
-    );
-
-    if (!sessionStr) {
-      console.log('[restoreSession] セッションが保存されていません');
-      return false;
-    }
-
-    const session = JSON.parse(sessionStr);
-
-    // refresh_token がなければ復元不可
-    if (!session.refresh_token) {
-      console.log('[restoreSession] リフレッシュトークンがありません');
-      await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
-      return false;
-    }
-
-    const now = Math.floor(Date.now() / 1000);
-    const isExpired = session.expires_at && session.expires_at <= now;
-
-    if (isExpired) {
-      // アクセストークンが期限切れの場合、リフレッシュトークンで更新を試みる
-      console.log('[restoreSession] アクセストークン期限切れ、リフレッシュを試行');
-      const { data, error } = await supabase.auth.refreshSession({
-        refresh_token: session.refresh_token,
-      });
-
-      if (error || !data.session) {
-        console.log('[restoreSession] リフレッシュ失敗:', error?.message);
-        await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
-        return false;
-      }
-
-      // 新しいセッションを保存
-      await saveSession(
-        data.session.access_token,
-        data.session.refresh_token,
-        data.session.expires_at || 0
-      );
-      console.log('[restoreSession] リフレッシュ成功、新しいセッションを保存');
-      return true;
-    }
-
-    // 期限内の場合、そのままセッションを設定
-    const { error } = await supabase.auth.setSession({
-      access_token: session.access_token,
-      refresh_token: session.refresh_token,
-    });
-
-    if (error) {
-      console.log('[restoreSession] セッション設定失敗:', error.message);
-      // 設定に失敗した場合、リフレッシュを試みる
-      const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession({
-        refresh_token: session.refresh_token,
-      });
-
-      if (refreshError || !refreshData.session) {
-        console.log('[restoreSession] リフレッシュも失敗:', refreshError?.message);
-        await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
-        return false;
-      }
-
-      // 新しいセッションを保存
-      await saveSession(
-        refreshData.session.access_token,
-        refreshData.session.refresh_token,
-        refreshData.session.expires_at || 0
-      );
-      console.log('[restoreSession] リフレッシュ成功');
-      return true;
-    }
-
-    console.log('[restoreSession] セッション復元成功');
-    return true;
-  } catch (error) {
-    console.error('[restoreSession] エラー:', error);
-    await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
-    return false;
-  }
-}
-
-/**
- * セッションを削除
- */
-export async function clearSession(): Promise<void> {
-  await SecureStore.deleteItemAsync(STORAGE_KEYS.USER_SESSION);
-}
 
 // ===============================
 // 認証関数
@@ -160,14 +42,7 @@ export async function signUpWithEmail(
       };
     }
 
-    // セッション保存
-    if (data.session) {
-      await saveSession(
-        data.session.access_token,
-        data.session.refresh_token,
-        data.session.expires_at || 0
-      );
-    }
+    // セッションはSupabaseクライアントが自動でSecureStoreに保存する
 
     return {
       success: true,
@@ -205,14 +80,7 @@ export async function signInWithEmail(
       };
     }
 
-    // セッション保存
-    if (data.session) {
-      await saveSession(
-        data.session.access_token,
-        data.session.refresh_token,
-        data.session.expires_at || 0
-      );
-    }
+    // セッションはSupabaseクライアントが自動でSecureStoreに保存する
 
     return {
       success: true,
@@ -237,7 +105,7 @@ export async function signOut(): Promise<Result<void>> {
       return { success: false, error };
     }
 
-    await clearSession();
+    // セッションはSupabaseクライアントが自動でSecureStoreから削除する
 
     return { success: true, data: undefined };
   } catch (error) {
@@ -384,14 +252,7 @@ export async function signInAnonymously(): Promise<Result<{ userId: string }>> {
       };
     }
 
-    // セッション保存
-    if (data.session) {
-      await saveSession(
-        data.session.access_token,
-        data.session.refresh_token,
-        data.session.expires_at || 0
-      );
-    }
+    // セッションはSupabaseクライアントが自動でSecureStoreに保存する
 
     return {
       success: true,
@@ -444,15 +305,7 @@ export async function convertAnonymousToRegistered(
       };
     }
 
-    // 新しいセッション保存
-    const { data: sessionData } = await supabase.auth.getSession();
-    if (sessionData.session) {
-      await saveSession(
-        sessionData.session.access_token,
-        sessionData.session.refresh_token,
-        sessionData.session.expires_at || 0
-      );
-    }
+    // セッションはSupabaseクライアントが自動でSecureStoreに保存する
 
     return {
       success: true,
@@ -595,14 +448,7 @@ export async function handleOAuthCallback(
       };
     }
 
-    // セッション保存
-    if (data.session) {
-      await saveSession(
-        data.session.access_token,
-        data.session.refresh_token,
-        data.session.expires_at || 0
-      );
-    }
+    // セッションはSupabaseクライアントが自動でSecureStoreに保存する
 
     return {
       success: true,

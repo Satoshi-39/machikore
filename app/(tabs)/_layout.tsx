@@ -39,7 +39,7 @@ export default function TabLayout() {
           title: '',
           tabBarIcon: ({ color }) => (
             <View style={{ marginTop: 2 }}>
-              <Ionicons name="map-outline" size={26} color={color} />
+              <Ionicons name="home-outline" size={26} color={color} />
             </View>
           ),
         }}

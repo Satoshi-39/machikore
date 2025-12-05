@@ -3,7 +3,7 @@
  * いいね機能（スポット・マップ）
  */
 
-import { supabase } from './client';
+import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
 
 type LikeRow = Database['public']['Tables']['likes']['Row'];
@@ -25,8 +25,7 @@ export async function checkSpotLiked(userId: string, spotId: string): Promise<bo
     .maybeSingle();
 
   if (error) {
-    console.error('[checkSpotLiked] Error:', error);
-    throw error;
+    handleSupabaseError('checkSpotLiked', error);
   }
 
   return data !== null;
@@ -48,8 +47,7 @@ export async function addSpotLike(userId: string, spotId: string): Promise<LikeR
     .single();
 
   if (error) {
-    console.error('[addSpotLike] Error:', error);
-    throw error;
+    handleSupabaseError('addSpotLike', error);
   }
 
   // user_spotsのlikes_countをインクリメント
@@ -72,8 +70,7 @@ export async function removeSpotLike(userId: string, spotId: string): Promise<vo
     .eq('spot_id', spotId);
 
   if (error) {
-    console.error('[removeSpotLike] Error:', error);
-    throw error;
+    handleSupabaseError('removeSpotLike', error);
   }
 
   // user_spotsのlikes_countをデクリメント
@@ -109,8 +106,7 @@ export async function getSpotLikesCount(spotId: string): Promise<number> {
     .eq('spot_id', spotId);
 
   if (error) {
-    console.error('[getSpotLikesCount] Error:', error);
-    throw error;
+    handleSupabaseError('getSpotLikesCount', error);
   }
 
   return count ?? 0;
@@ -132,8 +128,7 @@ export async function checkMapLiked(userId: string, mapId: string): Promise<bool
     .maybeSingle();
 
   if (error) {
-    console.error('[checkMapLiked] Error:', error);
-    throw error;
+    handleSupabaseError('checkMapLiked', error);
   }
 
   return data !== null;
@@ -155,8 +150,7 @@ export async function addMapLike(userId: string, mapId: string): Promise<LikeRow
     .single();
 
   if (error) {
-    console.error('[addMapLike] Error:', error);
-    throw error;
+    handleSupabaseError('addMapLike', error);
   }
 
   // mapsのlikes_countをインクリメント
@@ -176,8 +170,7 @@ export async function removeMapLike(userId: string, mapId: string): Promise<void
     .eq('map_id', mapId);
 
   if (error) {
-    console.error('[removeMapLike] Error:', error);
-    throw error;
+    handleSupabaseError('removeMapLike', error);
   }
 
   // mapsのlikes_countをデクリメント
@@ -210,8 +203,7 @@ export async function getMapLikesCount(mapId: string): Promise<number> {
     .eq('map_id', mapId);
 
   if (error) {
-    console.error('[getMapLikesCount] Error:', error);
-    throw error;
+    handleSupabaseError('getMapLikesCount', error);
   }
 
   return count ?? 0;
@@ -233,8 +225,7 @@ export async function checkMasterSpotLiked(userId: string, masterSpotId: string)
     .maybeSingle();
 
   if (error) {
-    console.error('[checkMasterSpotLiked] Error:', error);
-    throw error;
+    handleSupabaseError('checkMasterSpotLiked', error);
   }
 
   return data !== null;
@@ -256,8 +247,7 @@ export async function addMasterSpotLike(userId: string, masterSpotId: string): P
     .single();
 
   if (error) {
-    console.error('[addMasterSpotLike] Error:', error);
-    throw error;
+    handleSupabaseError('addMasterSpotLike', error);
   }
 
   // master_spotsのlikes_countをインクリメント
@@ -277,8 +267,7 @@ export async function removeMasterSpotLike(userId: string, masterSpotId: string)
     .eq('master_spot_id', masterSpotId);
 
   if (error) {
-    console.error('[removeMasterSpotLike] Error:', error);
-    throw error;
+    handleSupabaseError('removeMasterSpotLike', error);
   }
 
   // master_spotsのlikes_countをデクリメント
@@ -352,8 +341,7 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
     .limit(limit);
 
   if (error) {
-    console.error('[getUserLikedSpots] Error:', error);
-    throw error;
+    handleSupabaseError('getUserLikedSpots', error);
   }
 
   return (data || [])
@@ -411,8 +399,7 @@ export async function getUserLikedMasterSpots(userId: string, limit: number = 50
     .limit(limit);
 
   if (error) {
-    console.error('[getUserLikedMasterSpots] Error:', error);
-    throw error;
+    handleSupabaseError('getUserLikedMasterSpots', error);
   }
 
   return (data || [])
@@ -455,8 +442,7 @@ export async function getUserLikedMaps(userId: string, limit: number = 50) {
     .limit(limit);
 
   if (error) {
-    console.error('[getUserLikedMaps] Error:', error);
-    throw error;
+    handleSupabaseError('getUserLikedMaps', error);
   }
 
   return (data || [])

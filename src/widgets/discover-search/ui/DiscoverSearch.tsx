@@ -11,6 +11,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 import { DiscoverSearchResults } from '@/widgets/discover-search-results';
 
@@ -24,6 +25,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
   const [searchQuery, setSearchQuery] = useState('');
   const [submittedQuery, setSubmittedQuery] = useState('');
   const inputRef = useRef<TextInput>(null);
+  const isDarkMode = useIsDarkMode();
 
   // 検索履歴
   const { history, addHistory, removeHistory, clearHistory } = useSearchHistory({ type: 'discover' });
@@ -88,7 +90,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
         <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3">
           <View className="flex-row items-center gap-3">
             <TouchableOpacity onPress={handleClose} className="p-1">
-              <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
+              <Ionicons name="arrow-back" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
             </TouchableOpacity>
             <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">
               <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
@@ -106,7 +108,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
               <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
               <TextInput
                 ref={inputRef}
-                className="flex-1 ml-2 text-base"
+                className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground"
                 placeholder="スポット、マップ、ユーザーを検索"
                 placeholderTextColor={colors.text.tertiary}
                 value={searchQuery}

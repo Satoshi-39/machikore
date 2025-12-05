@@ -53,7 +53,8 @@ export const SYNC_RETRY_DELAY = 1000; // 1秒
 // ===============================
 
 export const STORAGE_KEYS = {
-  USER_SESSION: 'user_session',
+  // USER_SESSION は Supabase が自動管理するため削除
+  // Supabaseクライアントが SecureStorageAdapter を使用してセッションを保存
   UI_STATE: 'ui-storage',
   USER_STATE: 'user-storage',
   POST_STATE: 'post-storage',

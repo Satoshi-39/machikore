@@ -5,19 +5,19 @@
  * 設計書: 02_system-design.md - 9.2 認証セッション永続化
  *
  * 役割:
- * - アプリ起動時のセッション復元
+ * - アプリ起動時のセッション復元（Supabaseが自動で行う）
  * - Supabase Authイベントの監視
  * - 認証状態変更時のZustand Store更新
  * - ゲストモード対応（認証なしでも閲覧可能）
+ *
+ * セッション管理:
+ * - Supabaseクライアントが SecureStorageAdapter を使用して自動管理
+ * - トークンの保存/復元/リフレッシュはすべてSupabaseが処理
  */
 
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/shared/api/supabase/client';
-import {
-  restoreSession,
-  saveSession,
-  upsertUserToSupabase,
-} from '@/shared/api/supabase/auth';
+import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
 import { syncUserToSQLite } from '@/shared/lib/sync';
 import { getUserById } from '@/shared/api/sqlite';
 import { useUserStore } from '@/entities/user/model';
@@ -31,7 +31,7 @@ interface AuthProviderProps {
  * 認証プロバイダ
  *
  * アプリ起動時に以下の処理を行う：
- * 1. SecureStoreからセッション復元を試みる
+ * 1. Supabaseが自動でSecureStoreからセッション復元
  * 2. 復元失敗 → ゲストモードで起動（認証なしでも閲覧可能）
  * 3. Supabase Authイベントを監視してZustand Storeを同期
  */
@@ -47,38 +47,40 @@ export function AuthProvider({ children }: AuthProviderProps) {
       try {
         console.log('[AuthProvider] 認証初期化開始');
 
-        // 1. セッション復元を試みる
-        const restored = await restoreSession();
+        // Supabaseが自動でSecureStoreからセッションを復元する
+        // getSession()を呼ぶことで復元されたセッションを取得
+        const { data: { session } } = await supabase.auth.getSession();
 
-        if (restored) {
-          // セッション復元成功 → 現在のセッションを取得
-          const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user && isMounted) {
+          // セッション復元成功
+          console.log('[AuthProvider] セッション復元成功:', session.user.id);
 
-          if (session?.user && isMounted) {
-            // Supabase public.users にupsert（外部キー制約を満たすため）
-            await upsertUserToSupabase(session.user);
+          // Supabase public.users にupsert（外部キー制約を満たすため）
+          await upsertUserToSupabase(session.user);
 
-            // SQLiteにもキャッシュとして同期
-            await syncUserToSQLite(session.user);
+          // SQLiteにもキャッシュとして同期
+          await syncUserToSQLite(session.user);
 
-            // SQLiteからユーザー情報を取得してストアに保存
-            const userData = getUserById(session.user.id);
-            if (userData) {
-              setUser(userData as User);
-              setAuthState('authenticated');
-            }
+          // SQLiteからユーザー情報を取得してストアに保存
+          const userData = getUserById(session.user.id);
+          if (userData) {
+            setUser(userData as User);
+            setAuthState('authenticated');
           }
         } else {
-          // 2. セッション復元失敗 → ゲストモード（認証なしでも閲覧可能）
+          // セッション復元失敗 → ゲストモード（認証なしでも閲覧可能）
+          console.log('[AuthProvider] セッションなし、ゲストモードで起動');
           if (isMounted) {
             setUser(null);
             setAuthState('unauthenticated');
           }
         }
 
-        // 3. 認証完了後にSupabase Authイベントを監視開始
+        // 認証完了後にSupabase Authイベントを監視開始
         if (isMounted) {
           const { data } = supabase.auth.onAuthStateChange((event, session) => {
+            console.log('[AuthProvider] Auth event:', event);
+
             // 非同期処理はコールバック外で実行（setSessionのブロッキングを防ぐ）
             if (event === 'SIGNED_IN' && session?.user) {
               // サインイン時（Email/Password、OAuth）
@@ -107,17 +109,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 setUser(null);
                 setAuthState('unauthenticated');
               }
-            } else if (event === 'TOKEN_REFRESHED' && session) {
-              // トークンリフレッシュ時
-              // 新しいトークンをSecureStoreに保存
-              if (session.access_token && session.refresh_token) {
-                saveSession(
-                  session.access_token,
-                  session.refresh_token,
-                  session.expires_at || 0
-                ).catch(err => console.error('[AuthProvider] TOKEN_REFRESHED保存エラー:', err));
-              }
             }
+            // TOKEN_REFRESHED: Supabaseが自動でSecureStoreに保存するので何もしない
           });
           subscription = data.subscription;
         }
