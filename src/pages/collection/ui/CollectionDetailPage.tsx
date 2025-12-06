@@ -242,7 +242,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         rightComponent={
           isOwner ? (
             <Pressable onPress={handleAddMaps} className="py-2">
-              <Text className="text-base font-semibold text-blue-500">編集</Text>
+              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">編集</Text>
             </Pressable>
           ) : undefined
         }
