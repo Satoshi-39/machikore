@@ -17,6 +17,7 @@ import { useDeleteMap } from '@/entities/map/api';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { LikersModal } from '@/features/view-likers';
 
 interface MapCardProps {
   map: MapRow | MapWithUser;
@@ -53,6 +54,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   const { mutate: addBookmark } = useBookmarkMap();
   const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const isOwner = currentUserId && map.user_id === currentUserId;
 
@@ -233,22 +235,31 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
           </Text>
         </Pressable>
 
-        {/* いいね */}
-        <Pressable
-          onPress={handleLikePress}
-          className="flex-row items-center py-2 px-3"
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          disabled={isTogglingLike}
-        >
-          <Ionicons
-            name={isLiked ? 'heart' : 'heart-outline'}
-            size={18}
-            color={isLiked ? '#EF4444' : colors.text.secondary}
-          />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-            {map.likes_count ?? 0}
-          </Text>
-        </Pressable>
+        {/* いいね（アイコン：トグル、数字：ユーザー一覧） */}
+        <View className="flex-row items-center py-2 px-3">
+          <Pressable
+            onPress={handleLikePress}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
+            disabled={isTogglingLike}
+          >
+            <Ionicons
+              name={isLiked ? 'heart' : 'heart-outline'}
+              size={18}
+              color={isLiked ? '#EF4444' : colors.text.secondary}
+            />
+          </Pressable>
+          <Pressable
+            onPress={(e) => {
+              e.stopPropagation();
+              setIsLikersModalVisible(true);
+            }}
+            hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+          >
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+              {map.likes_count ?? 0}
+            </Text>
+          </Pressable>
+        </View>
 
         {/* ブックマーク */}
         <Pressable
@@ -289,6 +300,14 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
           bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
+
+      {/* いいねユーザー一覧モーダル */}
+      <LikersModal
+        visible={isLikersModalVisible}
+        mapId={map.id}
+        onClose={() => setIsLikersModalVisible(false)}
+        onUserPress={onUserPress}
+      />
     </Pressable>
   );
 }

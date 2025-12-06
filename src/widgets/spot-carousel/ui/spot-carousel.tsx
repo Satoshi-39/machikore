@@ -29,6 +29,7 @@ import {
   useUnbookmarkSpotFromFolder,
 } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 
 // レイアウト定数
@@ -75,6 +76,7 @@ function SpotCard({
   const { mutate: addBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const handleLike = () => {
     if (!currentUserId) {
@@ -176,16 +178,20 @@ function SpotCard({
               </Text>
             </Pressable>
 
-            <Pressable onPress={handleLike} className="flex-row items-center active:opacity-70">
-              <Ionicons
-                name={isLiked ? 'heart' : 'heart-outline'}
-                size={22}
-                color={isLiked ? '#EF4444' : isDarkMode ? '#9CA3AF' : '#6B7280'}
-              />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                {likeCount > 0 ? likeCount : 'いいね'}
-              </Text>
-            </Pressable>
+            <View className="flex-row items-center">
+              <Pressable onPress={handleLike} className="active:opacity-70">
+                <Ionicons
+                  name={isLiked ? 'heart' : 'heart-outline'}
+                  size={22}
+                  color={isLiked ? '#EF4444' : isDarkMode ? '#9CA3AF' : '#6B7280'}
+                />
+              </Pressable>
+              <Pressable onPress={() => setIsLikersModalVisible(true)} className="active:opacity-70 ml-1">
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                  {likeCount > 0 ? likeCount : 'いいね'}
+                </Text>
+              </Pressable>
+            </View>
 
             <Pressable onPress={handleBookmark} className="flex-row items-center active:opacity-70">
               <Ionicons
@@ -228,6 +234,13 @@ function SpotCard({
           bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
+
+      {/* いいねユーザー一覧モーダル */}
+      <LikersModal
+        visible={isLikersModalVisible}
+        spotId={spot.id}
+        onClose={() => setIsLikersModalVisible(false)}
+      />
     </Pressable>
   );
 }

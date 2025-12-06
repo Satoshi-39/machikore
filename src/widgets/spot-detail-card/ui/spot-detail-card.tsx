@@ -19,6 +19,7 @@ import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } fro
 import { useSpotComments, useAddSpotComment, useAddReplyComment, CommentItem } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { LikersModal } from '@/features/view-likers';
 import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -70,6 +71,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const { mutate: addBookmark, isPending: isAddingBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // コメント関連
@@ -400,24 +402,31 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">コメント</Text>
           </Pressable>
 
-          {/* いいねボタン */}
-          <Pressable
-            className="items-center"
-            onPress={handleLikePress}
-            disabled={isTogglingLike}
-          >
+          {/* いいねボタン（アイコン：トグル、数字：ユーザー一覧） */}
+          <View className="items-center">
             <View className="flex-row items-center">
-              <Ionicons
-                name={isLiked ? 'heart' : 'heart-outline'}
-                size={18}
-                color={isLiked ? '#EF4444' : colors.text.secondary}
-              />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
-                {spot.likes_count}
-              </Text>
+              <Pressable
+                onPress={handleLikePress}
+                disabled={isTogglingLike}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
+              >
+                <Ionicons
+                  name={isLiked ? 'heart' : 'heart-outline'}
+                  size={18}
+                  color={isLiked ? '#EF4444' : colors.text.secondary}
+                />
+              </Pressable>
+              <Pressable
+                onPress={() => setIsLikersModalVisible(true)}
+                hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+              >
+                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
+                  {spot.likes_count}
+                </Text>
+              </Pressable>
             </View>
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">いいね</Text>
-          </Pressable>
+          </View>
 
           {/* ブックマークボタン */}
           <Pressable
@@ -543,6 +552,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       images={imageViewer.images}
       initialIndex={imageViewer.initialIndex}
       onClose={imageViewer.closeImage}
+    />
+
+    {/* いいねユーザー一覧モーダル */}
+    <LikersModal
+      visible={isLikersModalVisible}
+      spotId={spot.id}
+      onClose={() => setIsLikersModalVisible(false)}
+      onUserPress={handleUserPressInternal}
     />
     </>
   );

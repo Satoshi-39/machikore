@@ -48,7 +48,7 @@ export function UserProfilePage() {
 
       {/* タブコンテンツ（各タブが独自にスクロール） */}
       <View className="flex-1">
-        {tabMode === 'maps' && <MapsTab userId={id} />}
+        {tabMode === 'maps' && <MapsTab userId={id} currentUserId={currentUserId} />}
         {tabMode === 'collections' && <CollectionsTab userId={id} />}
       </View>
     </View>

@@ -2,55 +2,130 @@
  * マイページ マップタブ
  *
  * ユーザーが作成したカスタムマップの一覧を表示
+ * コンパクトなカードレイアウト（サムネイル左、情報右）
  */
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useCurrentTab } from '@/shared/lib';
+import { useCurrentTab, showLoginRequiredAlert } from '@/shared/lib';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
+import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
+import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { LikersModal } from '@/features/view-likers';
 import { AsyncBoundary, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 
 interface MapsTabProps {
+  /** 表示対象のユーザーID */
   userId: string | null;
+  /** 現在ログイン中のユーザーID */
+  currentUserId?: string | null;
 }
 
-interface MapCardProps {
+interface MyPageMapCardProps {
   map: MapWithUser;
+  currentUserId?: string | null;
+  isOwner?: boolean;
   onPress?: () => void;
   onEdit?: (mapId: string) => void;
   onDelete?: (mapId: string) => void;
   onArticlePress?: (mapId: string) => void;
+  onUserPress?: (userId: string) => void;
 }
 
-function MapCard({ map, onPress, onEdit, onDelete, onArticlePress }: MapCardProps) {
+function MyPageMapCard({
+  map,
+  currentUserId,
+  isOwner,
+  onPress,
+  onEdit,
+  onDelete,
+  onArticlePress,
+  onUserPress,
+}: MyPageMapCardProps) {
   const createdDate = new Date(map.created_at);
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
-  const menuItems: PopupMenuItem[] = useMemo(() => [
-    {
-      id: 'article',
-      label: '記事を見る',
-      icon: 'document-text-outline',
-      onPress: () => onArticlePress?.(map.id),
-    },
-    {
-      id: 'edit',
-      label: '編集',
-      icon: 'create-outline',
-      onPress: () => onEdit?.(map.id),
-    },
-    {
-      id: 'delete',
-      label: '削除',
-      icon: 'trash-outline',
-      destructive: true,
-      onPress: () => onDelete?.(map.id),
-    },
-  ], [map.id, onEdit, onDelete, onArticlePress]);
+  // いいね状態
+  const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
+
+  // ブックマーク状態
+  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
+  const isBookmarked = bookmarkInfo.length > 0;
+  const bookmarkedFolderIds = useMemo(
+    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
+    [bookmarkInfo]
+  );
+  const { mutate: addBookmark } = useBookmarkMap();
+  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
+  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
+
+  const handleLikePress = (e: any) => {
+    e.stopPropagation();
+    if (!currentUserId) {
+      showLoginRequiredAlert('いいね');
+      return;
+    }
+    if (isTogglingLike) return;
+    toggleLike({ userId: currentUserId, mapId: map.id });
+  };
+
+  const handleBookmarkPress = useCallback((e: any) => {
+    e.stopPropagation();
+    if (!currentUserId) {
+      showLoginRequiredAlert('保存');
+      return;
+    }
+    setIsFolderModalVisible(true);
+  }, [currentUserId]);
+
+  const handleAddToFolder = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+    addBookmark({ userId: currentUserId, mapId: map.id, folderId });
+  }, [currentUserId, map.id, addBookmark]);
+
+  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+    removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
+  }, [currentUserId, map.id, removeFromFolder]);
+
+  const menuItems: PopupMenuItem[] = useMemo(() => {
+    const items: PopupMenuItem[] = [
+      {
+        id: 'article',
+        label: '記事を見る',
+        icon: 'document-text-outline',
+        onPress: () => onArticlePress?.(map.id),
+      },
+    ];
+
+    // オーナーのみ編集・削除を表示
+    if (isOwner) {
+      items.push(
+        {
+          id: 'edit',
+          label: '編集',
+          icon: 'create-outline',
+          onPress: () => onEdit?.(map.id),
+        },
+        {
+          id: 'delete',
+          label: '削除',
+          icon: 'trash-outline',
+          destructive: true,
+          onPress: () => onDelete?.(map.id),
+        }
+      );
+    }
+
+    return items;
+  }, [map.id, onEdit, onDelete, onArticlePress, isOwner]);
 
   return (
     <Pressable
@@ -81,19 +156,57 @@ function MapCard({ map, onPress, onEdit, onDelete, onArticlePress }: MapCardProp
               {map.description}
             </Text>
           )}
-          <View className="flex-row items-center gap-3">
-            <View className="flex-row items-center gap-1">
+
+          {/* アクションボタン（説明の下） */}
+          <View className="flex-row items-center gap-5">
+            {/* スポット数 */}
+            <View className="flex-row items-center">
               <Ionicons name="location" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                {map.spots_count}スポット
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                {map.spots_count}
               </Text>
             </View>
-            <View className="flex-row items-center gap-1">
-              <Ionicons name="heart" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                {map.likes_count}
-              </Text>
+
+            {/* いいね（アイコン：いいねトグル、数字：ユーザー一覧） */}
+            <View className="flex-row items-center">
+              <Pressable
+                onPress={handleLikePress}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
+                disabled={isTogglingLike}
+              >
+                <Ionicons
+                  name={isLiked ? 'heart' : 'heart-outline'}
+                  size={14}
+                  color={isLiked ? '#EF4444' : colors.text.secondary}
+                />
+              </Pressable>
+              <Pressable
+                onPress={(e) => {
+                  e.stopPropagation();
+                  setIsLikersModalVisible(true);
+                }}
+                hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+              >
+                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                  {map.likes_count ?? 0}
+                </Text>
+              </Pressable>
             </View>
+
+            {/* ブックマーク */}
+            <Pressable
+              onPress={handleBookmarkPress}
+              className="flex-row items-center"
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Ionicons
+                name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+                size={14}
+                color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
+              />
+            </Pressable>
+
+            {/* 作成日 */}
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
               {formattedDate}
             </Text>
@@ -110,15 +223,39 @@ function MapCard({ map, onPress, onEdit, onDelete, onArticlePress }: MapCardProp
           <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
         </View>
       </View>
+
+      {/* フォルダ選択モーダル */}
+      {currentUserId && (
+        <SelectFolderModal
+          visible={isFolderModalVisible}
+          userId={currentUserId}
+          folderType="maps"
+          onClose={() => setIsFolderModalVisible(false)}
+          onAddToFolder={handleAddToFolder}
+          onRemoveFromFolder={handleRemoveFromFolder}
+          bookmarkedFolderIds={bookmarkedFolderIds}
+        />
+      )}
+
+      {/* いいねユーザー一覧モーダル */}
+      <LikersModal
+        visible={isLikersModalVisible}
+        mapId={map.id}
+        onClose={() => setIsLikersModalVisible(false)}
+        onUserPress={onUserPress}
+      />
     </Pressable>
   );
 }
 
-export function MapsTab({ userId }: MapsTabProps) {
+export function MapsTab({ userId, currentUserId }: MapsTabProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
-  const { data: maps, isLoading, error } = useUserMaps(userId);
+  const { data: maps, isLoading, error } = useUserMaps(userId, { currentUserId });
   const { mutate: deleteMap } = useDeleteMap();
+
+  // 自分のマップかどうか
+  const isOwner = userId === currentUserId;
 
   const handleMapPress = (map: MapWithUser) => {
     router.push(`/(tabs)/${currentTab}/maps/${map.id}` as any);
@@ -147,6 +284,10 @@ export function MapsTab({ userId }: MapsTabProps) {
     router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
   };
 
+  const handleUserPress = (targetUserId: string) => {
+    router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as any);
+  };
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
@@ -161,12 +302,15 @@ export function MapsTab({ userId }: MapsTabProps) {
           data={data}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <MapCard
+            <MyPageMapCard
               map={item}
+              currentUserId={currentUserId}
+              isOwner={isOwner}
               onPress={() => handleMapPress(item)}
               onEdit={handleEdit}
               onDelete={handleDelete}
               onArticlePress={handleArticlePress}
+              onUserPress={handleUserPress}
             />
           )}
           className="bg-surface dark:bg-dark-surface"

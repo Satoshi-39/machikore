@@ -44,7 +44,7 @@ export function MyPage() {
 
       {/* タブコンテンツ（マップ一覧） */}
       <View className="flex-1">
-        <MapsTab userId={currentUserId} />
+        <MapsTab userId={currentUserId} currentUserId={currentUserId} />
       </View>
     </SafeAreaView>
   );

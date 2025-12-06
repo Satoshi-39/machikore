@@ -218,6 +218,12 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     handleSupabaseError('createSpot', error);
   }
 
+  // 3. マップのspots_countをインクリメント
+  const { error: rpcError } = await supabase.rpc('increment_map_spots_count', { map_id: input.mapId });
+  if (rpcError) {
+    console.error('[createSpot] Failed to increment spots_count:', rpcError);
+  }
+
   return data.id;
 }
 
@@ -373,6 +379,15 @@ export async function updateSpot(input: UpdateSpotInput): Promise<UserSpotRow> {
  * スポットを削除（関連する画像も自動削除される）
  */
 export async function deleteSpot(spotId: string): Promise<void> {
+  // まずスポット情報を取得（map_idが必要）
+  const { data: spot } = await supabase
+    .from('user_spots')
+    .select('map_id')
+    .eq('id', spotId)
+    .single();
+
+  const mapId = spot?.map_id;
+
   const { error } = await supabase
     .from('user_spots')
     .delete()
@@ -380,6 +395,14 @@ export async function deleteSpot(spotId: string): Promise<void> {
 
   if (error) {
     handleSupabaseError('deleteSpot', error);
+  }
+
+  // マップのspots_countをデクリメント
+  if (mapId) {
+    const { error: rpcError } = await supabase.rpc('decrement_map_spots_count', { map_id: mapId });
+    if (rpcError) {
+      console.error('[deleteSpot] Failed to decrement spots_count:', rpcError);
+    }
   }
 }
 
