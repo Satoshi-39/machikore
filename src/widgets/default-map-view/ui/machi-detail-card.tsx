@@ -11,7 +11,10 @@ import { colors } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { useSearchBarSync } from '@/shared/lib';
+import {
+  useSearchBarSync,
+  SEARCH_BAR_BOTTOM_Y,
+} from '@/shared/lib';
 import type { MachiRow } from '@/shared/types/database.types';
 
 interface MachiDetailCardProps {
@@ -19,6 +22,8 @@ interface MachiDetailCardProps {
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
+  /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
+  onBeforeClose?: () => void;
 }
 
 /**
@@ -44,25 +49,20 @@ function parseLines(linesJson: string | null): string[] {
 
 /** 検索バー同期を行う内部コンテンツコンポーネント */
 function MachiDetailCardContent({
-  searchBarBottomY,
   onSearchBarVisibilityChange,
 }: {
-  searchBarBottomY: number;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
 }) {
   // animatedPositionを監視して検索バーの表示/非表示を同期
   useSearchBarSync({
-    searchBarBottomY,
+    searchBarBottomY: SEARCH_BAR_BOTTOM_Y,
     onVisibilityChange: onSearchBarVisibilityChange ?? (() => {}),
   });
 
-  return null; // 実際のUIはBottomSheetScrollViewで描画
+  return null;
 }
 
-// 検索バー領域の下端Y座標（固定値）
-const SEARCH_BAR_BOTTOM_Y = 180;
-
-export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange }: MachiDetailCardProps) {
+export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose }: MachiDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
@@ -104,9 +104,10 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
 
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
-    // 直接onCloseを呼ぶのではなく、BottomSheetをアニメーションで閉じる
+    // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
+    onBeforeClose?.();
     bottomSheetRef.current?.close();
-  }, []);
+  }, [onBeforeClose]);
 
   return (
     <BottomSheet
@@ -120,9 +121,8 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
       handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
-      {/* 検索バー同期用の内部コンポーネント（UIスレッドでanimatedPositionを監視） */}
+      {/* 検索バー同期用の内部コンポーネント */}
       <MachiDetailCardContent
-        searchBarBottomY={SEARCH_BAR_BOTTOM_Y}
         onSearchBarVisibilityChange={onSearchBarVisibilityChange}
       />
 
@@ -183,11 +183,11 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               onPress={handleToggleVisit}
               disabled={isCheckingVisit || toggleVisitMutation.isPending}
               className={`flex-row items-center px-4 py-2.5 rounded-full ${
-                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface dark:bg-dark-surface border border-blue-500 active:bg-blue-50'
+                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface dark:bg-dark-surface border border-foreground dark:border-dark-foreground active:bg-blue-50 dark:active:bg-dark-muted'
               }`}
             >
               {(isCheckingVisit || toggleVisitMutation.isPending) ? (
-                <ActivityIndicator size="small" color={isVisited ? 'white' : '#3B82F6'} />
+                <ActivityIndicator size="small" color={isVisited ? 'white' : (isDarkMode ? colors.dark.foreground : '#3B82F6')} />
               ) : (
                 <>
                   {isVisited && (
@@ -198,7 +198,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                     />
                   )}
                   <Text
-                    className={`text-sm font-semibold ${isVisited ? 'ml-1.5 text-white' : 'text-blue-500'}`}
+                    className={`text-sm font-semibold ${isVisited ? 'ml-1.5 text-white' : 'text-foreground dark:text-dark-foreground'}`}
                   >
                     {isVisited ? '訪問済み' : '訪問する'}
                   </Text>

@@ -10,7 +10,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { useSearchBarSync } from '@/shared/lib';
+import {
+  useSearchBarSync,
+  SEARCH_BAR_BOTTOM_Y,
+} from '@/shared/lib';
 import type { CityRow } from '@/shared/types/database.types';
 
 interface CityDetailCardProps {
@@ -18,28 +21,25 @@ interface CityDetailCardProps {
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
+  /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
+  onBeforeClose?: () => void;
 }
 
 /** 検索バー同期を行う内部コンテンツコンポーネント */
 function CityDetailCardContent({
-  searchBarBottomY,
   onSearchBarVisibilityChange,
 }: {
-  searchBarBottomY: number;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
 }) {
   useSearchBarSync({
-    searchBarBottomY,
+    searchBarBottomY: SEARCH_BAR_BOTTOM_Y,
     onVisibilityChange: onSearchBarVisibilityChange ?? (() => {}),
   });
 
   return null;
 }
 
-// 検索バー領域の下端Y座標（固定値）
-const SEARCH_BAR_BOTTOM_Y = 180;
-
-export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibilityChange }: CityDetailCardProps) {
+export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose }: CityDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -74,8 +74,10 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
 
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
+    // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
+    onBeforeClose?.();
     bottomSheetRef.current?.close();
-  }, []);
+  }, [onBeforeClose]);
 
   return (
     <BottomSheet
@@ -91,7 +93,6 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
     >
       {/* 検索バー同期用の内部コンポーネント */}
       <CityDetailCardContent
-        searchBarBottomY={SEARCH_BAR_BOTTOM_Y}
         onSearchBarVisibilityChange={onSearchBarVisibilityChange}
       />
 

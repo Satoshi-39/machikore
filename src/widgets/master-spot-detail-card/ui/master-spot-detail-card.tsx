@@ -10,7 +10,12 @@ import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
 import { colors } from '@/shared/config';
-import { showLoginRequiredAlert, useCurrentTab, useSearchBarSync } from '@/shared/lib';
+import {
+  showLoginRequiredAlert,
+  useCurrentTab,
+  useSearchBarSync,
+  SEARCH_BAR_BOTTOM_Y,
+} from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { ImageViewerModal, useImageViewer } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
@@ -27,6 +32,8 @@ interface MasterSpotDetailCardProps {
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
+  /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
+  onBeforeClose?: () => void;
 }
 
 /** 検索バー同期を行う内部コンテンツコンポーネント */
@@ -45,10 +52,7 @@ function MasterSpotDetailCardContent({
   return null;
 }
 
-// 検索バー領域の下端Y座標（固定値）
-const SEARCH_BAR_BOTTOM_Y = 180;
-
-export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarVisibilityChange }: MasterSpotDetailCardProps) {
+export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose }: MasterSpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const router = useRouter();
@@ -101,9 +105,10 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
-    // 直接onCloseを呼ぶのではなく、BottomSheetをアニメーションで閉じる
+    // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
+    onBeforeClose?.();
     bottomSheetRef.current?.close();
-  }, []);
+  }, [onBeforeClose]);
 
   // いいねボタン
   const handleLikePress = useCallback(() => {
@@ -255,7 +260,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             className="flex-1 items-center py-2"
           >
             <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
-              <Ionicons name="add-circle-outline" size={24} color={colors.primary.DEFAULT} />
+              <Ionicons name="add-circle-outline" size={24} color={colors.text.secondary} />
             </View>
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">投稿</Text>
           </Pressable>
@@ -266,7 +271,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             className="flex-1 items-center py-2"
           >
             <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
-              <Ionicons name="navigate" size={24} color={colors.primary.DEFAULT} />
+              <Ionicons name="navigate" size={24} color={colors.text.secondary} />
             </View>
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">経路</Text>
           </Pressable>
@@ -280,7 +285,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               <Ionicons
                 name="globe-outline"
                 size={24}
-                color={spot.google_website_uri ? colors.primary.DEFAULT : colors.gray[300]}
+                color={spot.google_website_uri ? colors.text.secondary : colors.gray[300]}
               />
             </View>
             <Text className={`text-xs ${spot.google_website_uri ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-gray-300'}`}>

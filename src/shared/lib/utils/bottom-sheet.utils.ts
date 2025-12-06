@@ -7,6 +7,9 @@ import { useAnimatedReaction, useSharedValue } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { useCallback } from 'react';
 
+/** 検索バー領域の下端Y座標 */
+export const SEARCH_BAR_BOTTOM_Y = 180;
+
 interface UseSearchBarSyncOptions {
   /** 検索バー領域の下端Y座標（この位置より上にカードが来たら検索バーを非表示） */
   searchBarBottomY: number;
