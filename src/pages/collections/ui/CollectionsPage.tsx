@@ -28,7 +28,7 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
         title="コレクション"
         rightComponent={
           <Pressable onPress={handleCreate} className="py-2">
-            <Text className="text-base font-semibold text-blue-500">新規作成</Text>
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">新規作成</Text>
           </Pressable>
         }
       />

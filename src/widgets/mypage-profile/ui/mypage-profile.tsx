@@ -101,7 +101,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
 
       {/* 自己紹介 */}
       {user?.bio && (
-        <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-5 mb-3">{user.bio}</Text>
+        <Text className="text-base text-foreground dark:text-dark-foreground leading-5 mb-3">{user.bio}</Text>
       )}
 
       {/* 統計情報（Instagram/noteスタイル） */}

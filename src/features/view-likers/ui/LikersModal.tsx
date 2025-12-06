@@ -78,7 +78,7 @@ function LikersContent({ mapId, spotId, onUserPress }: LikersContentProps) {
   };
 
   return (
-    <View className="bg-surface dark:bg-dark-surface rounded-t-3xl shadow-2xl" style={{ height: sheetHeight }}>
+    <View className="bg-surface dark:bg-dark-surface-elevated rounded-t-3xl shadow-2xl" style={{ height: sheetHeight }}>
       {/* ドラッグハンドルバー */}
       <View className="items-center pt-3 pb-2">
         <View className="w-10 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />

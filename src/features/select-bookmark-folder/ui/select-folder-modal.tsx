@@ -168,9 +168,9 @@ export function SelectFolderModal({
                   ) : (
                     <Pressable
                       onPress={() => handleAddToFolder(item.id)}
-                      className="bg-surface dark:bg-dark-surface border border-blue-500 px-4 py-1.5 rounded-full active:bg-blue-50"
+                      className="bg-surface dark:bg-dark-surface border border-foreground dark:border-dark-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
                     >
-                      <Text className="text-sm text-blue-500 font-medium">追加</Text>
+                      <Text className="text-sm text-foreground dark:text-dark-foreground font-medium">追加</Text>
                     </Pressable>
                   )}
                 </View>

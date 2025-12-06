@@ -176,7 +176,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
           <View className="bg-surface dark:bg-dark-surface mt-4 px-4 py-4">
             {/* 表示名 */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
+              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
                 表示名
               </Text>
               <StyledTextInput
@@ -193,7 +193,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
 
             {/* ユーザー名（変更不可） */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
+              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
                 ユーザー名
               </Text>
               <View className="border border-border dark:border-dark-border rounded-lg px-4 py-3 bg-background-secondary dark:bg-dark-background-secondary">
@@ -206,7 +206,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
 
             {/* 自己紹介 */}
             <View>
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
+              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
                 自己紹介
               </Text>
               <StyledTextInput

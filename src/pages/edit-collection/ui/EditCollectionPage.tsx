@@ -138,7 +138,7 @@ export function EditCollectionPage() {
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : (
               <Text
-                className={`text-base ${isValid ? 'text-blue-500 font-semibold' : 'text-gray-300'}`}
+                className={`text-base font-semibold ${isValid ? 'text-foreground dark:text-dark-foreground' : 'text-gray-300'}`}
               >
                 保存
               </Text>
@@ -150,7 +150,7 @@ export function EditCollectionPage() {
       <ScrollView className="flex-1" contentContainerClassName="p-4">
         {/* 名前入力 */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
             コレクション名 <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
@@ -164,7 +164,7 @@ export function EditCollectionPage() {
 
         {/* 説明入力 */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
             説明（任意）
           </Text>
           <TextInput
@@ -182,7 +182,7 @@ export function EditCollectionPage() {
 
         {/* サムネイル */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
             サムネイル
           </Text>
           <ThumbnailPicker

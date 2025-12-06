@@ -94,7 +94,7 @@ export function CreateCollectionPage() {
         {/* ヘッダー */}
         <View className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
           <Pressable onPress={handleCancel} className="py-2 w-20">
-            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base">キャンセル</Text>
+            <Text className="text-foreground dark:text-dark-foreground text-base">キャンセル</Text>
           </Pressable>
           <Text className="flex-1 text-lg font-semibold text-foreground dark:text-dark-foreground text-center">
             新しいコレクション
@@ -119,7 +119,7 @@ export function CreateCollectionPage() {
           <View className="px-4 py-6">
             {/* 名前入力 */}
             <View className="mb-5">
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
                 コレクション名 <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
@@ -136,7 +136,7 @@ export function CreateCollectionPage() {
 
             {/* 説明入力 */}
             <View className="mb-6">
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
                 説明（任意）
               </Text>
               <TextInput
@@ -155,7 +155,7 @@ export function CreateCollectionPage() {
 
             {/* サムネイル */}
             <View className="mb-6">
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
                 サムネイル
               </Text>
               <ThumbnailPicker
