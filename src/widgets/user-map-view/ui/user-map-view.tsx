@@ -164,20 +164,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // スナップ変更時のハンドラー（snapIndex=2で最大化）
     // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
-    // 「小」の時のみ現在地ボタンを表示、それ以外は非表示
     const handleSnapChange = (snapIndex: number) => {
       onDetailCardMaximized?.(snapIndex === 2);
-      setControlButtonsVisible(snapIndex === 0);
     };
 
-    // ドラッグ開始時のハンドラー
-    // 「小」から移動し始めたら即座にボタンを非表示にする
-    const handleAnimateStart = (fromIndex: number, toIndex: number) => {
-      // 「小」(index=0)から他へ移動開始 → 即座に非表示
-      if (fromIndex === 0 && toIndex !== 0) {
-        setControlButtonsVisible(false);
-      }
-    };
+    // 現在地ボタン表示/非表示のコールバック（高さベースの判定）
+    const handleLocationButtonVisibilityChange = useCallback((isVisible: boolean) => {
+      setControlButtonsVisible(isVisible);
+    }, [setControlButtonsVisible]);
 
     // マップのロード完了ハンドラー
     const handleMapReady = () => {
@@ -374,7 +368,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onEdit={onEditSpot}
             onSearchBarVisibilityChange={onDetailCardMaximized}
             onBeforeClose={() => setControlButtonsVisible(false)}
-            onAnimateStart={handleAnimateStart}
+            onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
           />
         )}
 

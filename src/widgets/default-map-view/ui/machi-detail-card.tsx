@@ -13,6 +13,7 @@ import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   useSearchBarSync,
+  useLocationButtonSync,
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import type { MachiRow } from '@/shared/types/database.types';
@@ -24,8 +25,8 @@ interface MachiDetailCardProps {
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
   /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
   onBeforeClose?: () => void;
-  /** ドラッグ開始時のコールバック（fromIndex, toIndex） */
-  onAnimateStart?: (fromIndex: number, toIndex: number) => void;
+  /** 現在地ボタンの表示/非表示変更コールバック（高さベースの判定） */
+  onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
 }
 
 /**
@@ -49,11 +50,13 @@ function parseLines(linesJson: string | null): string[] {
   }
 }
 
-/** 検索バー同期を行う内部コンテンツコンポーネント */
+/** 検索バー・現在地ボタン同期を行う内部コンテンツコンポーネント */
 function MachiDetailCardContent({
   onSearchBarVisibilityChange,
+  onLocationButtonVisibilityChange,
 }: {
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
+  onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
 }) {
   // animatedPositionを監視して検索バーの表示/非表示を同期
   useSearchBarSync({
@@ -61,10 +64,15 @@ function MachiDetailCardContent({
     onVisibilityChange: onSearchBarVisibilityChange ?? (() => {}),
   });
 
+  // animatedPositionを監視して現在地ボタンの表示/非表示を同期
+  useLocationButtonSync({
+    onVisibilityChange: onLocationButtonVisibilityChange ?? (() => {}),
+  });
+
   return null;
 }
 
-export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onAnimateStart }: MachiDetailCardProps) {
+export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange }: MachiDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
@@ -104,11 +112,6 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
     }
   }, [onSnapChange, onClose]);
 
-  // アニメーション開始時のハンドラー（ドラッグ開始時に呼ばれる）
-  const handleAnimate = useCallback((fromIndex: number, toIndex: number) => {
-    onAnimateStart?.(fromIndex, toIndex);
-  }, [onAnimateStart]);
-
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
     // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
@@ -122,16 +125,16 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
       index={1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
-      onAnimate={handleAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={false}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
       handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
     >
-      {/* 検索バー同期用の内部コンポーネント */}
+      {/* 検索バー・現在地ボタン同期用の内部コンポーネント */}
       <MachiDetailCardContent
         onSearchBarVisibilityChange={onSearchBarVisibilityChange}
+        onLocationButtonVisibilityChange={onLocationButtonVisibilityChange}
       />
 
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>

@@ -155,32 +155,25 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       onSpotSelect: handleSpotSelect,
     });
 
-    // スナップ変更を親に通知 + 現在地ボタンの表示制御
+    // スナップ変更を親に通知
     // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
-    // 「小」の時のみ現在地ボタンを表示、それ以外は非表示
     const handleSnapChange = (snapIndex: number) => {
       onMachiDetailSnapChange?.(snapIndex);
-      setLocationButtonVisible(snapIndex === 0);
     };
 
     // 市区カードのスナップ変更
     const handleCitySnapChange = (snapIndex: number) => {
       onCityDetailSnapChange?.(snapIndex);
-      setLocationButtonVisible(snapIndex === 0);
     };
 
     // スポットカードのスナップ変更
     const handleSpotSnapChange = (snapIndex: number) => {
       onSpotDetailSnapChange?.(snapIndex);
-      setLocationButtonVisible(snapIndex === 0);
     };
 
-    // ドラッグ開始時のハンドラー（共通）
-    // 「小」から移動し始めたら即座にボタンを非表示にする
-    const handleAnimateStart = useCallback((fromIndex: number, toIndex: number) => {
-      if (fromIndex === 0 && toIndex !== 0) {
-        setLocationButtonVisible(false);
-      }
+    // 現在地ボタン表示/非表示のコールバック（高さベースの判定）
+    const handleLocationButtonVisibilityChange = useCallback((isVisible: boolean) => {
+      setLocationButtonVisible(isVisible);
     }, [setLocationButtonVisible]);
 
     // 訪問済みmachiのIDセットを作成
@@ -399,7 +392,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSnapChange={handleSnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={() => setLocationButtonVisible(false)}
-              onAnimateStart={handleAnimateStart}
+              onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
             />
           )}
 
@@ -411,7 +404,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSnapChange={handleCitySnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={() => setLocationButtonVisible(false)}
-              onAnimateStart={handleAnimateStart}
+              onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
             />
           )}
 
@@ -423,7 +416,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSnapChange={handleSpotSnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={() => setLocationButtonVisible(false)}
-              onAnimateStart={handleAnimateStart}
+              onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
             />
           )}
         </View>
