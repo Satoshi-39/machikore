@@ -35,10 +35,10 @@ export function useMasterSpotsGeoJson(
     return {
       type: 'FeatureCollection',
       features: masterSpots.map((spot) => ({
-        type: 'Feature',
+        type: 'Feature' as const,
         id: spot.id,
         geometry: {
-          type: 'Point',
+          type: 'Point' as const,
           coordinates: [spot.longitude, spot.latitude],
         },
         properties: {

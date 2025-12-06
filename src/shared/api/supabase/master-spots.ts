@@ -55,7 +55,7 @@ export async function getMasterSpotsByBounds(
       google_rating,
       google_user_rating_count,
       likes_count,
-      user_spots!inner (id)
+      user_spots (id)
     `)
     .gte('latitude', minLat)
     .lte('latitude', maxLat)
