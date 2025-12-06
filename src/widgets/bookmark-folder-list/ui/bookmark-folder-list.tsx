@@ -211,7 +211,7 @@ export function BookmarkFolderList({
             <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
               <Ionicons name="add" size={24} color={colors.primary.DEFAULT} />
             </View>
-            <Text className="text-base font-medium text-blue-500">
+            <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
               新しいフォルダを作成
             </Text>
           </Pressable>
@@ -226,7 +226,7 @@ export function BookmarkFolderList({
         onRequestClose={() => setEditingFolder(null)}
       >
         <View className="flex-1 bg-black/50 justify-center items-center px-6">
-          <View className="bg-surface dark:bg-dark-surface rounded-2xl w-full max-w-sm p-6">
+          <View className="bg-surface dark:bg-dark-surface-elevated rounded-2xl w-full max-w-sm p-6">
             <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground mb-4">
               フォルダ名を編集
             </Text>
@@ -243,7 +243,7 @@ export function BookmarkFolderList({
                 onPress={() => setEditingFolder(null)}
                 className="px-4 py-2 mr-2"
               >
-                <Text className="text-foreground-secondary dark:text-dark-foreground-secondary font-medium">キャンセル</Text>
+                <Text className="text-foreground dark:text-dark-foreground font-medium">キャンセル</Text>
               </Pressable>
               <Pressable
                 onPress={handleSaveEdit}

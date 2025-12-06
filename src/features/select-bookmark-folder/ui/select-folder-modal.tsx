@@ -129,7 +129,7 @@ export function SelectFolderModal({
         onPress={onClose}
       >
         <Pressable
-          className="bg-surface dark:bg-dark-surface rounded-2xl mx-6 w-full max-w-sm overflow-hidden"
+          className="bg-surface dark:bg-dark-surface-elevated rounded-2xl mx-6 w-full max-w-sm overflow-hidden"
           onPress={(e) => e.stopPropagation()}
         >
           {/* ヘッダー */}
@@ -168,7 +168,7 @@ export function SelectFolderModal({
                   ) : (
                     <Pressable
                       onPress={() => handleAddToFolder(item.id)}
-                      className="bg-surface dark:bg-dark-surface border border-foreground dark:border-dark-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
+                      className="bg-surface dark:bg-dark-surface-elevated border border-foreground dark:border-dark-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
                     >
                       <Text className="text-sm text-foreground dark:text-dark-foreground font-medium">追加</Text>
                     </Pressable>
@@ -216,7 +216,7 @@ export function SelectFolderModal({
               <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
                 <Ionicons name="add" size={20} color={colors.primary.DEFAULT} />
               </View>
-              <Text className="text-base font-medium text-blue-500">
+              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
                 新しいフォルダを作成
               </Text>
             </Pressable>
@@ -226,9 +226,9 @@ export function SelectFolderModal({
           <View className="px-4 py-3 border-t border-border dark:border-dark-border">
             <Pressable
               onPress={onClose}
-              className="py-3 bg-muted dark:bg-dark-muted rounded-lg active:bg-gray-200"
+              className="py-3 bg-muted dark:bg-dark-muted rounded-lg active:bg-gray-200 dark:active:bg-gray-600"
             >
-              <Text className="text-center text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-center text-sm font-medium text-foreground dark:text-dark-foreground">
                 閉じる
               </Text>
             </Pressable>

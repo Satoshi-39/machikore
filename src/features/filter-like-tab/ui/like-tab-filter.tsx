@@ -26,7 +26,7 @@ export function LikeTabFilter({
       >
         <Text
           className={`text-base font-medium ${
-            tabMode === 'spots' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+            tabMode === 'spots' ? 'text-blue-500' : 'text-foreground dark:text-dark-foreground'
           }`}
         >
           スポット
@@ -41,7 +41,7 @@ export function LikeTabFilter({
       >
         <Text
           className={`text-base font-medium ${
-            tabMode === 'maps' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+            tabMode === 'maps' ? 'text-blue-500' : 'text-foreground dark:text-dark-foreground'
           }`}
         >
           マップ
