@@ -66,8 +66,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
 
     // 検索バーの表示状態
     const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);
-    // カード閉じる処理完了のコールバック（refで保持して循環参照を回避）
+    // コールバックをrefで保持して循環参照を回避
     const resetClosingStateRef = useRef<() => void>(() => {});
+    const handleCardOpenRef = useRef<() => void>(() => {});
 
     // カード選択状態の管理
     const {
@@ -82,13 +83,15 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     } = useSelectDefaultMapCard({
       showSearchBar: () => setIsSearchBarHidden(false),
       onCloseComplete: () => resetClosingStateRef.current(),
+      onCardOpen: () => handleCardOpenRef.current(),
     });
 
     // マップコントロールの表示制御（現在地ボタン）
     const controlsVisibility = useMapControlsVisibility({ hasCard });
 
-    // resetClosingStateをrefに設定
+    // コールバックをrefに設定
     resetClosingStateRef.current = controlsVisibility.resetClosingState;
+    handleCardOpenRef.current = controlsVisibility.handleCardOpen;
 
     // 画面がフォーカスされた時に選択状態をリセット
     useFocusEffect(

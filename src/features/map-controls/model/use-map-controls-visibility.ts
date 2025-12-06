@@ -21,6 +21,8 @@ interface UseMapControlsVisibilityReturn {
   handleBeforeClose: () => void;
   /** カード閉じる処理完了時に呼ぶ（refをリセット） */
   resetClosingState: () => void;
+  /** カードが開く時のコールバック（初回ちらつき防止用） */
+  handleCardOpen: () => void;
   /** 現在地ボタンのopacity値（pointerEvents判定用） */
   controlButtonsOpacity: { value: number };
 }
@@ -68,6 +70,11 @@ export function useMapControlsVisibility({
     isClosingRef.current = false;
   }, []);
 
+  // カードが開く時のコールバック（初回ちらつき防止用）
+  const handleCardOpen = useCallback(() => {
+    controlButtonsOpacity.value = 0;
+  }, [controlButtonsOpacity]);
+
   // カードがなくなったら現在地ボタンを表示
   useEffect(() => {
     if (!hasCard) {
@@ -81,6 +88,7 @@ export function useMapControlsVisibility({
     handleControlButtonsVisibilityChange,
     handleBeforeClose,
     resetClosingState,
+    handleCardOpen,
     controlButtonsOpacity,
   };
 }

@@ -11,6 +11,8 @@ interface UseSelectDefaultMapCardOptions {
   showSearchBar: () => void;
   /** 閉じる処理完了時のコールバック */
   onCloseComplete: () => void;
+  /** カードが開く時のコールバック（初回ちらつき防止用） */
+  onCardOpen?: () => void;
 }
 
 interface UseSelectDefaultMapCardReturn {
@@ -40,6 +42,7 @@ interface UseSelectDefaultMapCardReturn {
 export function useSelectDefaultMapCard({
   showSearchBar,
   onCloseComplete,
+  onCardOpen,
 }: UseSelectDefaultMapCardOptions): UseSelectDefaultMapCardReturn {
   const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
   const [selectedCity, setSelectedCity] = useState<CityRow | null>(null);
@@ -52,11 +55,12 @@ export function useSelectDefaultMapCard({
       onCloseComplete();
       showSearchBar();
     } else {
+      onCardOpen?.();
       setSelectedCity(null);
       setSelectedSpot(null);
     }
     setSelectedMachi(machi);
-  }, [showSearchBar, onCloseComplete]);
+  }, [showSearchBar, onCloseComplete, onCardOpen]);
 
   // 市区を選択/解除
   const handleCitySelect = useCallback((city: CityRow | null) => {
@@ -64,11 +68,12 @@ export function useSelectDefaultMapCard({
       onCloseComplete();
       showSearchBar();
     } else {
+      onCardOpen?.();
       setSelectedMachi(null);
       setSelectedSpot(null);
     }
     setSelectedCity(city);
-  }, [showSearchBar, onCloseComplete]);
+  }, [showSearchBar, onCloseComplete, onCardOpen]);
 
   // スポットを選択/解除
   const handleSpotSelect = useCallback((spot: MasterSpotDisplay | null) => {
@@ -76,11 +81,12 @@ export function useSelectDefaultMapCard({
       onCloseComplete();
       showSearchBar();
     } else {
+      onCardOpen?.();
       setSelectedMachi(null);
       setSelectedCity(null);
     }
     setSelectedSpot(spot);
-  }, [showSearchBar, onCloseComplete]);
+  }, [showSearchBar, onCloseComplete, onCardOpen]);
 
   // すべての選択を解除
   const clearAllSelections = useCallback(() => {
