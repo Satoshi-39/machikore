@@ -2,9 +2,9 @@
  * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
-import React, { useState, useRef, useImperativeHandle, forwardRef, useMemo, useCallback, useEffect } from 'react';
+import React, { useRef, useImperativeHandle, forwardRef, useMemo, useCallback, useState } from 'react';
 import { View, Dimensions } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming, useSharedValue } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Mapbox from '@rnmapbox/maps';
@@ -25,12 +25,14 @@ import { CountryLabels } from './layers/country-labels';
 import { useCountriesGeoJson } from '@/entities/country/model';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import { useBoundsManagement } from '../model';
-import type { MachiRow, CityRow } from '@/shared/types/database.types';
+import type { MachiRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
 import { MasterSpotDetailCard } from '@/widgets/master-spot-detail-card';
 import { CityDetailCard } from '@/widgets/city-detail-card';
+import { useMapControlsVisibility } from '@/features/map-controls';
+import { useSelectDefaultMapCard } from '@/features/select-default-map-card';
 
 // 画面サイズと現在地ボタンの位置計算用定数
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -59,31 +61,34 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
     const { data: cities = [] } = useCities();
-    const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
-    const [selectedCity, setSelectedCity] = useState<CityRow | null>(null);
-    const [selectedSpot, setSelectedSpot] = useState<MasterSpotDisplay | null>(null);
     const [visitFilter, setVisitFilter] = useState<VisitFilter>('all');
-    const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);
     const cameraRef = useRef<Mapbox.Camera>(null);
 
-    // 現在地ボタンの表示状態（アニメーション用）
-    // 0 = 非表示、1 = 表示
-    const locationButtonOpacity = useSharedValue(1);
-    // カード閉じる処理中フラグ（refで管理して即座に反映）
-    const isClosingRef = useRef(false);
+    // 検索バーの表示状態
+    const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);
+    // カード閉じる処理完了のコールバック（refで保持して循環参照を回避）
+    const resetClosingStateRef = useRef<() => void>(() => {});
 
-    // 現在地ボタンのアニメーションスタイル
-    // カードなし → 通常位置、カード「小」→ カード上、それ以外 → フェードアウト
-    const locationButtonAnimatedStyle = useAnimatedStyle(() => {
-      return {
-        opacity: locationButtonOpacity.value,
-      };
+    // カード選択状態の管理
+    const {
+      selectedMachi,
+      selectedCity,
+      selectedSpot,
+      handleMachiSelect,
+      handleCitySelect,
+      handleSpotSelect,
+      clearAllSelections,
+      hasCard,
+    } = useSelectDefaultMapCard({
+      showSearchBar: () => setIsSearchBarHidden(false),
+      onCloseComplete: () => resetClosingStateRef.current(),
     });
 
-    // 現在地ボタンを表示/非表示にする（アニメーション付き）
-    const setLocationButtonVisible = useCallback((visible: boolean) => {
-      locationButtonOpacity.value = withTiming(visible ? 1 : 0, { duration: 150 });
-    }, [locationButtonOpacity]);
+    // マップコントロールの表示制御（現在地ボタン）
+    const controlsVisibility = useMapControlsVisibility({ hasCard });
+
+    // resetClosingStateをrefに設定
+    resetClosingStateRef.current = controlsVisibility.resetClosingState;
 
     // 画面がフォーカスされた時に選択状態をリセット
     useFocusEffect(
@@ -93,11 +98,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         if (timeSinceLastJump < 500) {
           return;
         }
-        // 選択状態をリセット
-        setSelectedMachi(null);
-        setSelectedCity(null);
-        setSelectedSpot(null);
-      }, [])
+        clearAllSelections();
+      }, [clearAllSelections])
     );
 
     // ビューポート範囲管理
@@ -111,43 +113,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       cameraRef,
       currentLocation,
     });
-
-    // 選択状態を管理
-    const handleMachiSelect = (machi: MachiRow | null) => {
-      if (!machi) {
-        // 閉じる処理完了（カードが実際にアンマウントされる）
-        isClosingRef.current = false;
-        setIsSearchBarHidden(false);
-      } else {
-        setSelectedCity(null);
-        setSelectedSpot(null);
-      }
-      setSelectedMachi(machi);
-    };
-
-    // 市区選択状態を管理
-    const handleCitySelect = (city: CityRow | null) => {
-      if (!city) {
-        isClosingRef.current = false;
-        setIsSearchBarHidden(false);
-      } else {
-        setSelectedMachi(null);
-        setSelectedSpot(null);
-      }
-      setSelectedCity(city);
-    };
-
-    // スポット選択状態を管理
-    const handleSpotSelect = (spot: MasterSpotDisplay | null) => {
-      if (!spot) {
-        isClosingRef.current = false;
-        setIsSearchBarHidden(false);
-      } else {
-        setSelectedMachi(null);
-        setSelectedCity(null);
-      }
-      setSelectedSpot(spot);
-    };
 
     // マップジャンプフック（検索結果からのジャンプ処理）
     const { lastJumpTimeRef } = useMapJump({
@@ -172,29 +137,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const handleSpotSnapChange = (snapIndex: number) => {
       onSpotDetailSnapChange?.(snapIndex);
     };
-
-    // カードが存在するかどうか
-    const hasCard = !!(selectedMachi || selectedCity || selectedSpot);
-
-    // 現在地ボタン表示/非表示のコールバック（高さベースの判定）
-    // 閉じる処理中は無視（refで即座に判定）
-    const handleLocationButtonVisibilityChange = useCallback((isVisible: boolean) => {
-      if (isClosingRef.current) return;
-      setLocationButtonVisible(isVisible);
-    }, [setLocationButtonVisible]);
-
-    // カード閉じる前のコールバック（閉じるフラグを立てて現在地ボタンを非表示）
-    const handleBeforeClose = useCallback(() => {
-      isClosingRef.current = true;
-      setLocationButtonVisible(false);
-    }, [setLocationButtonVisible]);
-
-    // カードがなくなったら現在地ボタンを表示
-    useEffect(() => {
-      if (!hasCard) {
-        setLocationButtonVisible(true);
-      }
-    }, [hasCard, setLocationButtonVisible]);
 
     // 訪問済みmachiのIDセットを作成
     const visitedMachiIds = useMemo(
@@ -389,13 +331,13 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                   right: 24,
                   zIndex: 50,
                   // カード表示中はカードの上、それ以外は通常位置
-                  bottom: (selectedMachi || selectedCity || selectedSpot)
+                  bottom: hasCard
                     ? CARD_SMALL_HEIGHT + LOCATION_BUTTON_CARD_OFFSET
                     : LOCATION_BUTTON_DEFAULT_BOTTOM,
                 },
-                locationButtonAnimatedStyle,
+                controlsVisibility.controlButtonsAnimatedStyle,
               ]}
-              pointerEvents={locationButtonOpacity.value === 0 ? 'none' : 'auto'}
+              pointerEvents={controlsVisibility.controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
             >
               <LocationButton
                 onPress={handleLocationPress}
@@ -411,8 +353,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onClose={() => handleMachiSelect(null)}
               onSnapChange={handleSnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
-              onBeforeClose={handleBeforeClose}
-              onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
+              onBeforeClose={controlsVisibility.handleBeforeClose}
+              onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
             />
           )}
 
@@ -423,8 +365,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onClose={() => handleCitySelect(null)}
               onSnapChange={handleCitySnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
-              onBeforeClose={handleBeforeClose}
-              onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
+              onBeforeClose={controlsVisibility.handleBeforeClose}
+              onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
             />
           )}
 
@@ -435,8 +377,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onClose={() => handleSpotSelect(null)}
               onSnapChange={handleSpotSnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
-              onBeforeClose={handleBeforeClose}
-              onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
+              onBeforeClose={controlsVisibility.handleBeforeClose}
+              onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
             />
           )}
         </View>

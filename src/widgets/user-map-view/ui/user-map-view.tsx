@@ -154,19 +154,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       moveCameraToSingleSpot(spot);
     };
 
-    // 詳細カードを閉じる
+    // 詳細カードを閉じる → カルーセルに戻る
     const handleDetailCardClose = () => {
       isClosingRef.current = false;
       setSelectedSpotId(null);
       setIsDetailCardOpen(false);
+      setIsCarouselVisible(true); // カルーセルに戻る
       // ヘッダーを表示状態に戻す
       onDetailCardMaximized?.(false);
-    };
-
-    // スナップ変更時のハンドラー（snapIndex=2で最大化）
-    // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
-    const handleSnapChange = (snapIndex: number) => {
-      onDetailCardMaximized?.(snapIndex === 2);
     };
 
     // 現在地ボタン表示/非表示のコールバック（高さベースの判定）
@@ -182,12 +177,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       setControlButtonsVisible(false);
     }, [setControlButtonsVisible]);
 
-    // 詳細カードがなくなったらボタンを表示
-    useEffect(() => {
-      if (!isDetailCardOpen) {
-        setControlButtonsVisible(true);
-      }
-    }, [isDetailCardOpen, setControlButtonsVisible]);
+    // スナップ変更時のハンドラー（snapIndex=2で最大化）
+    // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
+    const handleSnapChange = (snapIndex: number) => {
+      onDetailCardMaximized?.(snapIndex === 2);
+    };
 
     // マップのロード完了ハンドラー
     const handleMapReady = () => {
@@ -322,9 +316,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         </Mapbox.MapView>
 
         {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン）
+            - カルーセル表示中 → 非表示
             - カルーセル非表示かつ詳細カード非表示 → 通常位置で表示
             - 詳細カード「小」→ カード上に表示、「中」「大」→ フェードアウト */}
-        {viewMode === 'map' && !isSearchFocused && !(isCarouselVisible && spots.length > 0 && !isDetailCardOpen) && (
+        {viewMode === 'map' && !isSearchFocused && !(isCarouselVisible && spots.length > 0) && (
           <Animated.View
             style={[
               {

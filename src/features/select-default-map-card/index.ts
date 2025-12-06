@@ -1,0 +1,1 @@
+export { useSelectDefaultMapCard } from './model';
