@@ -11,6 +11,42 @@ import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.t
 // ===============================
 
 /**
+ * 位置情報から最寄りの街を取得
+ */
+export async function getNearbyMachi(
+  latitude: number,
+  longitude: number,
+  limit: number = 1
+): Promise<MachiRow[]> {
+  // PostGISがないため、簡易的な距離計算でソート
+  // SQLiteと同様に緯度・経度の絶対値差で近似
+  const { data, error } = await supabase
+    .from('machi')
+    .select('*')
+    .order('latitude', { ascending: true }) // 一度全件取得してクライアント側でソート
+    .limit(1000); // 十分な件数を取得
+
+  if (error) {
+    handleSupabaseError('getNearbyMachi', error);
+  }
+
+  if (!data || data.length === 0) {
+    return [];
+  }
+
+  // クライアント側で距離計算してソート
+  const sorted = data
+    .map((machi) => ({
+      ...machi,
+      distance: Math.abs(machi.latitude - latitude) + Math.abs(machi.longitude - longitude),
+    }))
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, limit);
+
+  return sorted;
+}
+
+/**
  * IDで街を取得
  */
 export async function getMachiById(machiId: string): Promise<MachiRow | null> {

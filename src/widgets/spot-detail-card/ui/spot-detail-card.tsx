@@ -34,6 +34,10 @@ interface SpotDetailCardProps {
   onEdit?: (spotId: string) => void;
   onUserPress?: (userId: string) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
+  /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
+  onBeforeClose?: () => void;
+  /** ドラッグ開始時のコールバック（fromIndex, toIndex） */
+  onAnimateStart?: (fromIndex: number, toIndex: number) => void;
 }
 
 /** 検索バー同期を行う内部コンテンツコンポーネント */
@@ -55,7 +59,7 @@ function SpotDetailCardContent({
 // 検索バー領域の下端Y座標（固定値）
 const SEARCH_BAR_BOTTOM_Y = 140;
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onAnimateStart }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -206,11 +210,17 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     }
   }, [onSnapChange, onExpandedChange, onClose]);
 
+  // アニメーション開始時のハンドラー（ドラッグ開始時に呼ばれる）
+  const handleAnimate = useCallback((fromIndex: number, toIndex: number) => {
+    onAnimateStart?.(fromIndex, toIndex);
+  }, [onAnimateStart]);
+
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
-    // 直接onCloseを呼ぶのではなく、BottomSheetをアニメーションで閉じる
+    // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
+    onBeforeClose?.();
     bottomSheetRef.current?.close();
-  }, []);
+  }, [onBeforeClose]);
 
   // ユーザープレスハンドラー
   const handleUserPressInternal = useCallback((userId: string) => {
@@ -304,6 +314,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       index={1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
+      onAnimate={handleAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={false}

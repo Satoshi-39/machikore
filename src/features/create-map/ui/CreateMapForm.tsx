@@ -65,7 +65,11 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
   };
 
   return (
-    <ScrollView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <ScrollView
+      className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
+    >
       <View className="p-4">
         {/* マップ名 */}
         <View className="mb-6">
@@ -195,6 +199,8 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
           </Text>
         </TouchableOpacity>
       </View>
+      {/* 下部余白 */}
+      <View className="h-8" />
     </ScrollView>
   );
 }

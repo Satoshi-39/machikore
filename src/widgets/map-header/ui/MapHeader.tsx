@@ -24,6 +24,10 @@ interface MapHeaderProps {
   mapId?: string | null;
   mapTitle?: string;
   userId?: string | null;
+  /** 現在ログイン中のユーザーID（自分のマップ判定用） */
+  currentUserId?: string | null;
+  /** マップ所有者のID */
+  mapOwnerId?: string | null;
   userName?: string;
   userAvatarUrl?: string;
   userMaps?: MapWithUser[];
@@ -32,6 +36,7 @@ interface MapHeaderProps {
   onUserPress?: () => void;
   onSearchPress?: () => void;
   onArticlePress?: () => void;
+  onEditPress?: () => void;
 }
 
 export function MapHeader({
@@ -40,6 +45,8 @@ export function MapHeader({
   mapId,
   mapTitle,
   userId,
+  currentUserId,
+  mapOwnerId,
   userName,
   userAvatarUrl,
   userMaps = [],
@@ -48,6 +55,7 @@ export function MapHeader({
   onUserPress,
   onSearchPress,
   onArticlePress,
+  onEditPress,
 }: MapHeaderProps) {
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -112,35 +120,54 @@ export function MapHeader({
     }
   }, [mapTitle, mapId]);
 
+  // 自分のマップかどうかを判定
+  const isOwnMap = currentUserId && mapOwnerId && currentUserId === mapOwnerId;
+
   // ポップアップメニュー項目
-  const menuItems: PopupMenuItem[] = useMemo(() => [
-    {
-      id: 'article',
-      label: '記事を見る',
-      icon: 'document-text-outline',
-      onPress: () => onArticlePress?.(),
-    },
-    {
-      id: 'like',
-      label: isLiked ? 'いいね済み' : 'いいね',
-      icon: isLiked ? 'heart' : 'heart-outline',
-      iconColor: isLiked ? '#EF4444' : undefined,
-      onPress: handleLikePress,
-    },
-    {
-      id: 'bookmark',
-      label: isBookmarked ? '保存済み' : '保存',
-      icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
-      iconColor: isBookmarked ? '#007AFF' : undefined,
-      onPress: handleBookmarkPress,
-    },
-    {
-      id: 'share',
-      label: '共有',
-      icon: 'share-outline',
-      onPress: handleSharePress,
-    },
-  ], [isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress]);
+  const menuItems: PopupMenuItem[] = useMemo(() => {
+    const items: PopupMenuItem[] = [];
+
+    // 自分のマップの場合は編集ボタンを先頭に追加
+    if (isOwnMap && onEditPress) {
+      items.push({
+        id: 'edit',
+        label: '編集',
+        icon: 'create-outline',
+        onPress: onEditPress,
+      });
+    }
+
+    items.push(
+      {
+        id: 'article',
+        label: '記事を見る',
+        icon: 'document-text-outline',
+        onPress: () => onArticlePress?.(),
+      },
+      {
+        id: 'like',
+        label: isLiked ? 'いいね済み' : 'いいね',
+        icon: isLiked ? 'heart' : 'heart-outline',
+        iconColor: isLiked ? '#EF4444' : undefined,
+        onPress: handleLikePress,
+      },
+      {
+        id: 'bookmark',
+        label: isBookmarked ? '保存済み' : '保存',
+        icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
+        iconColor: isBookmarked ? '#007AFF' : undefined,
+        onPress: handleBookmarkPress,
+      },
+      {
+        id: 'share',
+        label: '共有',
+        icon: 'share-outline',
+        onPress: handleSharePress,
+      }
+    );
+
+    return items;
+  }, [isOwnMap, isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress, onEditPress]);
 
   // モーダルの開閉に応じてアニメーション
   useEffect(() => {

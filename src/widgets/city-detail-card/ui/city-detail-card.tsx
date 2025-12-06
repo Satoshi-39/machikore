@@ -23,6 +23,8 @@ interface CityDetailCardProps {
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
   /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
   onBeforeClose?: () => void;
+  /** ドラッグ開始時のコールバック（fromIndex, toIndex） */
+  onAnimateStart?: (fromIndex: number, toIndex: number) => void;
 }
 
 /** 検索バー同期を行う内部コンテンツコンポーネント */
@@ -39,7 +41,7 @@ function CityDetailCardContent({
   return null;
 }
 
-export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose }: CityDetailCardProps) {
+export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onAnimateStart }: CityDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -72,6 +74,11 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
     }
   }, [onSnapChange, onClose]);
 
+  // アニメーション開始時のハンドラー（ドラッグ開始時に呼ばれる）
+  const handleAnimate = useCallback((fromIndex: number, toIndex: number) => {
+    onAnimateStart?.(fromIndex, toIndex);
+  }, [onAnimateStart]);
+
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
     // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
@@ -85,6 +92,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
       index={1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
+      onAnimate={handleAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={false}

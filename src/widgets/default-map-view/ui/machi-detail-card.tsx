@@ -24,6 +24,8 @@ interface MachiDetailCardProps {
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
   /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
   onBeforeClose?: () => void;
+  /** ドラッグ開始時のコールバック（fromIndex, toIndex） */
+  onAnimateStart?: (fromIndex: number, toIndex: number) => void;
 }
 
 /**
@@ -62,7 +64,7 @@ function MachiDetailCardContent({
   return null;
 }
 
-export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose }: MachiDetailCardProps) {
+export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onAnimateStart }: MachiDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
@@ -102,6 +104,11 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
     }
   }, [onSnapChange, onClose]);
 
+  // アニメーション開始時のハンドラー（ドラッグ開始時に呼ばれる）
+  const handleAnimate = useCallback((fromIndex: number, toIndex: number) => {
+    onAnimateStart?.(fromIndex, toIndex);
+  }, [onAnimateStart]);
+
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
     // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
@@ -115,6 +122,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
       index={1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
+      onAnimate={handleAnimate}
       enablePanDownToClose={false}
       enableDynamicSizing={false}
       animateOnMount={false}

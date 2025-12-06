@@ -175,6 +175,14 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       setLocationButtonVisible(snapIndex === 0);
     };
 
+    // ドラッグ開始時のハンドラー（共通）
+    // 「小」から移動し始めたら即座にボタンを非表示にする
+    const handleAnimateStart = useCallback((fromIndex: number, toIndex: number) => {
+      if (fromIndex === 0 && toIndex !== 0) {
+        setLocationButtonVisible(false);
+      }
+    }, [setLocationButtonVisible]);
+
     // 訪問済みmachiのIDセットを作成
     const visitedMachiIds = useMemo(
       () => new Set(visits.map((visit) => visit.machi_id)),
@@ -391,6 +399,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSnapChange={handleSnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={() => setLocationButtonVisible(false)}
+              onAnimateStart={handleAnimateStart}
             />
           )}
 
@@ -402,6 +411,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSnapChange={handleCitySnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={() => setLocationButtonVisible(false)}
+              onAnimateStart={handleAnimateStart}
             />
           )}
 
@@ -413,6 +423,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSnapChange={handleSpotSnapChange}
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={() => setLocationButtonVisible(false)}
+              onAnimateStart={handleAnimateStart}
             />
           )}
         </View>

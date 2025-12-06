@@ -10,6 +10,7 @@ import {
   uploadAvatar,
   type ProfileUpdateData,
 } from '@/shared/api/supabase/users';
+import { useUserStore } from '../model/use-user-store';
 
 interface UpdateProfileParams {
   userId: string;
@@ -26,6 +27,7 @@ interface UploadAvatarParams {
  */
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
+  const updateStoreProfile = useUserStore((state) => state.updateProfile);
 
   return useMutation({
     mutationFn: ({ userId, data }: UpdateProfileParams) =>
@@ -35,6 +37,12 @@ export function useUpdateProfile() {
       queryClient.setQueryData(['user', updatedUser.id], updatedUser);
       // ユーザー一覧系のキャッシュも無効化
       queryClient.invalidateQueries({ queryKey: ['user', updatedUser.id] });
+      // Zustand ストアも更新（AsyncStorageに永続化される）
+      updateStoreProfile({
+        display_name: updatedUser.display_name,
+        bio: updatedUser.bio,
+        avatar_url: updatedUser.avatar_url,
+      });
     },
   });
 }

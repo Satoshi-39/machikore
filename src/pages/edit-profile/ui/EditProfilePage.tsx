@@ -131,10 +131,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
             {isSaving ? (
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : (
-              <Text
-                className="text-base font-semibold"
-                style={{ color: colors.primary.DEFAULT }}
-              >
+              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                 保存
               </Text>
             )}
@@ -146,7 +143,11 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1"
       >
-        <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
+        <ScrollView
+            className="flex-1"
+            keyboardShouldPersistTaps="handled"
+            keyboardDismissMode="on-drag"
+          >
           {/* アバター画像 */}
           <View className="items-center py-6 bg-surface dark:bg-dark-surface">
             <Pressable onPress={handlePickImage} className="relative">
@@ -225,6 +226,8 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
               </Text>
             </View>
           </View>
+          {/* 下部余白 */}
+          <View className="h-8" />
         </ScrollView>
       </KeyboardAvoidingView>
     </View>

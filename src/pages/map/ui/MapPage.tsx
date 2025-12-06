@@ -176,6 +176,12 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
     router.push(`/(tabs)/${currentTab}/articles/maps/${currentMapId}` as any);
   };
 
+  // マップ編集画面へ遷移
+  const handleEditMap = () => {
+    if (!currentMapId) return;
+    router.push(`/edit-map/${currentMapId}` as Href);
+  };
+
   return (
     <View className="flex-1">
       {/* マップ表示（常にレンダリング・全画面） */}
@@ -285,6 +291,8 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
               mapId={currentMapId}
               mapTitle={selectedMap?.name}
               userId={user?.id}
+              currentUserId={user?.id}
+              mapOwnerId={selectedMap?.user_id}
               userName={mapOwner?.display_name || undefined}
               userAvatarUrl={mapOwner?.avatar_url || undefined}
               userMaps={ownerMaps}
@@ -293,6 +301,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
               onUserPress={handleUserPress}
               onSearchPress={handleSearchFocus}
               onArticlePress={handleArticlePress}
+              onEditPress={handleEditMap}
             />
           </View>
         </View>

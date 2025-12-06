@@ -15,8 +15,7 @@ import {
 import { useCreateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
-import { getNearbyMachi } from '@/shared/api/sqlite';
-import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
+import { uploadImage, STORAGE_BUCKETS, insertSpotImage, getNearbyMachi } from '@/shared/api/supabase';
 import { queryClient } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 
@@ -140,14 +139,25 @@ export function useSpotForm() {
       return;
     }
 
-    // 座標から最寄りのmachiを取得（SQLiteから）
-    const nearbyMachi = getNearbyMachi(selectedPlace.latitude, selectedPlace.longitude, 1);
-    const nearestMachi = nearbyMachi[0];
-    if (!nearestMachi) {
-      Alert.alert('エラー', '近くの街が見つかりません');
+    // 座標から最寄りのmachiを取得（Supabaseから）
+    // SQLiteではなくSupabaseから取得することで外部キー制約エラーを防ぐ
+    let machiId: string;
+    try {
+      const nearbyMachi = await getNearbyMachi(
+        selectedPlace.latitude,
+        selectedPlace.longitude,
+        1
+      );
+      if (nearbyMachi.length === 0) {
+        Alert.alert('エラー', '近くの街が見つかりません');
+        return;
+      }
+      machiId = nearbyMachi[0]!.id;
+    } catch (error) {
+      console.error('最寄りの街の取得に失敗しました:', error);
+      Alert.alert('エラー', '街の情報を取得できませんでした');
       return;
     }
-    const machiId = nearestMachi.id;
 
     // スポット作成
     createSpot(

@@ -18,8 +18,8 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/shared/api/supabase/client';
 import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
+import { getUserById as getUserByIdFromSupabase } from '@/shared/api/supabase/users';
 import { syncUserToSQLite } from '@/shared/lib/sync';
-import { getUserById } from '@/shared/api/sqlite';
 import { useUserStore } from '@/entities/user/model';
 import type { User } from '@/entities/user/model';
 
@@ -61,9 +61,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           // SQLiteにもキャッシュとして同期
           await syncUserToSQLite(session.user);
 
-          // SQLiteからユーザー情報を取得してストアに保存
-          const userData = getUserById(session.user.id);
-          if (userData) {
+          // Supabaseから最新のユーザー情報を取得してストアに保存
+          // （プロフィール更新後も最新データが反映されるようにするため）
+          const userData = await getUserByIdFromSupabase(session.user.id);
+          if (userData && isMounted) {
             setUser(userData as User);
             setAuthState('authenticated');
           }
@@ -93,8 +94,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                   // SQLiteにもキャッシュとして同期
                   await syncUserToSQLite(user);
 
-                  // SQLiteからユーザー情報を取得してストアに保存
-                  const userData = getUserById(user.id);
+                  // Supabaseから最新のユーザー情報を取得してストアに保存
+                  const userData = await getUserByIdFromSupabase(user.id);
                   if (userData && isMounted) {
                     setUser(userData as User);
                     setAuthState('authenticated');

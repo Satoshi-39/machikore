@@ -112,7 +112,11 @@ export function EditSpotForm({
   };
 
   return (
-    <ScrollView className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <ScrollView
+      className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
+    >
       {/* ローディングオーバーレイ */}
       <Modal visible={isLoading} transparent animationType="fade">
         <View className="flex-1 bg-black/50 items-center justify-center">
@@ -302,6 +306,8 @@ export function EditSpotForm({
           </Text>
         </TouchableOpacity>
       </View>
+      {/* 下部余白 */}
+      <View className="h-8" />
     </ScrollView>
   );
 }

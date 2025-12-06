@@ -153,6 +153,9 @@ export async function getUserById(userId: string) {
  *
  * 認証時に呼び出し、maps等の外部キー制約を満たす
  * SQLiteへの保存は別途syncUserToSQLiteで行う
+ *
+ * 重要: 既存ユーザーの場合、avatar_url/display_name/bioは上書きしない
+ * （ユーザーが編集した情報をOAuth metadataで上書きしないため）
  */
 export async function upsertUserToSupabase(authUser: {
   id: string;
@@ -160,6 +163,15 @@ export async function upsertUserToSupabase(authUser: {
   user_metadata?: Record<string, any>;
 }): Promise<void> {
   const metadata = authUser.user_metadata || {};
+
+  // まず既存ユーザーかどうかを確認
+  const { data: existingUser } = await supabase
+    .from('users')
+    .select('id')
+    .eq('id', authUser.id)
+    .single();
+
+  const isNewUser = !existingUser;
 
   // username取得ロジック
   let username = metadata.username;
@@ -170,41 +182,50 @@ export async function upsertUserToSupabase(authUser: {
       || `user_${authUser.id.slice(0, 8)}`;
   }
 
-  // Display name取得
-  const displayName =
-    metadata.display_name ||
-    metadata.full_name ||
-    metadata.name ||
-    username;
-
-  // Avatar URL取得
-  const avatarUrl =
-    metadata.avatar_url ||
-    metadata.picture ||
-    null;
-
   const now = new Date().toISOString();
 
-  const { error } = await supabase
-    .from('users')
-    .upsert({
-      id: authUser.id,
-      email: authUser.email || '',
-      username,
-      display_name: displayName,
-      avatar_url: avatarUrl,
-      updated_at: now,
-    }, {
-      onConflict: 'id',
-      ignoreDuplicates: false,
-    });
+  if (isNewUser) {
+    // 新規ユーザー: OAuthのmetadataからプロフィール情報を設定
+    const displayName =
+      metadata.display_name ||
+      metadata.full_name ||
+      metadata.name ||
+      username;
 
-  if (error) {
-    console.error('[upsertUserToSupabase] Error:', error);
-    throw error;
+    const avatarUrl =
+      metadata.avatar_url ||
+      metadata.picture ||
+      null;
+
+    const { error } = await supabase
+      .from('users')
+      .insert({
+        id: authUser.id,
+        email: authUser.email || '',
+        username,
+        display_name: displayName,
+        avatar_url: avatarUrl,
+        updated_at: now,
+      });
+
+    if (error) {
+      throw error;
+    }
+  } else {
+    // 既存ユーザー: email と updated_at のみ更新
+    // avatar_url, display_name, bio はユーザーが編集した可能性があるため上書きしない
+    const { error } = await supabase
+      .from('users')
+      .update({
+        email: authUser.email || '',
+        updated_at: now,
+      })
+      .eq('id', authUser.id);
+
+    if (error) {
+      throw error;
+    }
   }
-
-  console.log('[upsertUserToSupabase] User upserted successfully:', authUser.id);
 }
 
 /**

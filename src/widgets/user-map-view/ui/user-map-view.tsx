@@ -18,14 +18,21 @@ import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
 import React, {
   forwardRef,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Dimensions } from 'react-native';
+import Animated, { useAnimatedStyle, withTiming, useSharedValue } from 'react-native-reanimated';
 import { useSpotCamera } from '../model';
+
+// 画面サイズと現在地ボタンの位置計算用定数
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const LOCATION_BUTTON_DEFAULT_BOTTOM = 48;
+const LOCATION_BUTTON_CAROUSEL_OFFSET = 16; // カード上端からのオフセット
 
 interface UserMapViewProps {
   mapId: string | null;
@@ -77,6 +84,21 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const [isCarouselVisible, setIsCarouselVisible] = useState(!initialSpotId);
     // カルーセルで現在フォーカスされているスポットID
     const [focusedSpotId, setFocusedSpotId] = useState<string | null>(null);
+
+    // 現在地ボタン・全スポットボタンの表示状態（アニメーション用）
+    const controlButtonsOpacity = useSharedValue(1);
+
+    // 現在地ボタン・全スポットボタンのアニメーションスタイル
+    const controlButtonsAnimatedStyle = useAnimatedStyle(() => {
+      return {
+        opacity: controlButtonsOpacity.value,
+      };
+    });
+
+    // 現在地ボタン・全スポットボタンを表示/非表示にする（アニメーション付き）
+    const setControlButtonsVisible = useCallback((visible: boolean) => {
+      controlButtonsOpacity.value = withTiming(visible ? 1 : 0, { duration: 150 });
+    }, [controlButtonsOpacity]);
 
     const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
     const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
@@ -136,11 +158,25 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       setIsDetailCardOpen(false);
       // ヘッダーを表示状態に戻す
       onDetailCardMaximized?.(false);
+      // ボタンを表示
+      setControlButtonsVisible(true);
     };
 
     // スナップ変更時のハンドラー（snapIndex=2で最大化）
+    // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
+    // 「小」の時のみ現在地ボタンを表示、それ以外は非表示
     const handleSnapChange = (snapIndex: number) => {
       onDetailCardMaximized?.(snapIndex === 2);
+      setControlButtonsVisible(snapIndex === 0);
+    };
+
+    // ドラッグ開始時のハンドラー
+    // 「小」から移動し始めたら即座にボタンを非表示にする
+    const handleAnimateStart = (fromIndex: number, toIndex: number) => {
+      // 「小」(index=0)から他へ移動開始 → 即座に非表示
+      if (fromIndex === 0 && toIndex !== 0) {
+        setControlButtonsVisible(false);
+      }
     };
 
     // マップのロード完了ハンドラー
@@ -276,13 +312,22 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         </Mapbox.MapView>
 
         {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン）
-            カルーセルと詳細カードが両方非表示の時に表示 */}
-        {viewMode === 'map' && !isSearchFocused && (!isCarouselVisible || spots.length === 0) && !isDetailCardOpen && (
-          <View
-            className="absolute right-6 z-50"
-            style={{
-              bottom: 48,
-            }}
+            - カルーセル非表示かつ詳細カード非表示 → 通常位置で表示
+            - 詳細カード「小」→ カード上に表示、「中」「大」→ フェードアウト */}
+        {viewMode === 'map' && !isSearchFocused && !(isCarouselVisible && spots.length > 0 && !isDetailCardOpen) && (
+          <Animated.View
+            style={[
+              {
+                position: 'absolute',
+                right: 24,
+                zIndex: 50,
+                bottom: isDetailCardOpen
+                  ? SCREEN_HEIGHT * 0.15 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」の上
+                  : LOCATION_BUTTON_DEFAULT_BOTTOM, // 通常位置
+              },
+              isDetailCardOpen ? controlButtonsAnimatedStyle : {},
+            ]}
+            pointerEvents={isDetailCardOpen && controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
           >
             <LocationButton
               onPress={handleLocationPress}
@@ -303,7 +348,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                 />
               </View>
             )}
-          </View>
+          </Animated.View>
         )}
 
         {/* スポットカルーセル（詳細カードが開いていない時のみ表示） */}
@@ -328,6 +373,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onExpandedChange={onDetailCardMaximized}
             onEdit={onEditSpot}
             onSearchBarVisibilityChange={onDetailCardMaximized}
+            onBeforeClose={() => setControlButtonsVisible(false)}
+            onAnimateStart={handleAnimateStart}
           />
         )}
 

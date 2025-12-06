@@ -64,35 +64,30 @@ export async function getUserById(userId: string): Promise<User | null> {
 
 /**
  * アバター画像をアップロード
+ * Edge Function経由でアップロード（スポット画像と同じ方式）
  */
 export async function uploadAvatar(
   userId: string,
   file: { uri: string; type: string; name: string }
 ): Promise<string> {
   const fileExt = file.name.split('.').pop() || 'jpg';
-  const fileName = `${userId}/${Date.now()}.${fileExt}`;
-  const filePath = `avatars/${fileName}`;
+  const filePath = `${userId}/${Date.now()}.${fileExt}`;
 
-  // ファイルをBlobとして取得
-  const response = await fetch(file.uri);
-  const blob = await response.blob();
+  // 共通のuploadImage関数を使用
+  const { uploadImage, STORAGE_BUCKETS } = await import('./storage');
 
-  // Supabase Storageにアップロード
-  const { error: uploadError } = await supabase.storage
-    .from('avatars')
-    .upload(filePath, blob, {
-      contentType: file.type,
-      upsert: true,
-    });
+  const result = await uploadImage({
+    uri: file.uri,
+    bucket: STORAGE_BUCKETS.AVATARS,
+    path: filePath,
+    contentType: file.type,
+  });
 
-  if (uploadError) {
-    handleSupabaseError('uploadAvatar', uploadError);
+  if (!result.success) {
+    throw result.error || new Error('アバターのアップロードに失敗しました');
   }
 
-  // 公開URLを取得
-  const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
-
-  return data.publicUrl;
+  return result.data.url;
 }
 
 /**
