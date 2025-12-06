@@ -67,8 +67,6 @@ export function useSearchBarSync({
 interface UseLocationButtonSyncOptions {
   /** 現在地ボタンの表示/非表示が変化した時のコールバック */
   onVisibilityChange: (isVisible: boolean) => void;
-  /** 閉じる時のコールバック（カードが完全に閉じた時） */
-  onClose?: () => void;
 }
 
 /**

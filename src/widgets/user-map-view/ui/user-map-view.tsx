@@ -87,6 +87,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // 現在地ボタン・全スポットボタンの表示状態（アニメーション用）
     const controlButtonsOpacity = useSharedValue(1);
+    // カード閉じる処理中フラグ（refで管理して即座に反映）
+    const isClosingRef = useRef(false);
 
     // 現在地ボタン・全スポットボタンのアニメーションスタイル
     const controlButtonsAnimatedStyle = useAnimatedStyle(() => {
@@ -154,12 +156,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // 詳細カードを閉じる
     const handleDetailCardClose = () => {
+      isClosingRef.current = false;
       setSelectedSpotId(null);
       setIsDetailCardOpen(false);
       // ヘッダーを表示状態に戻す
       onDetailCardMaximized?.(false);
-      // ボタンを表示
-      setControlButtonsVisible(true);
     };
 
     // スナップ変更時のハンドラー（snapIndex=2で最大化）
@@ -169,9 +170,24 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     };
 
     // 現在地ボタン表示/非表示のコールバック（高さベースの判定）
+    // 閉じる処理中は無視（refで即座に判定）
     const handleLocationButtonVisibilityChange = useCallback((isVisible: boolean) => {
+      if (isClosingRef.current) return;
       setControlButtonsVisible(isVisible);
     }, [setControlButtonsVisible]);
+
+    // カード閉じる前のコールバック（閉じるフラグを立ててボタンを非表示）
+    const handleBeforeClose = useCallback(() => {
+      isClosingRef.current = true;
+      setControlButtonsVisible(false);
+    }, [setControlButtonsVisible]);
+
+    // 詳細カードがなくなったらボタンを表示
+    useEffect(() => {
+      if (!isDetailCardOpen) {
+        setControlButtonsVisible(true);
+      }
+    }, [isDetailCardOpen, setControlButtonsVisible]);
 
     // マップのロード完了ハンドラー
     const handleMapReady = () => {
@@ -367,7 +383,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onExpandedChange={onDetailCardMaximized}
             onEdit={onEditSpot}
             onSearchBarVisibilityChange={onDetailCardMaximized}
-            onBeforeClose={() => setControlButtonsVisible(false)}
+            onBeforeClose={handleBeforeClose}
             onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
           />
         )}

@@ -203,12 +203,20 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         </View>
       )}
 
-      {/* マップ名 */}
+      {/* マップ名とスポット数 */}
       <View className="flex-row items-center mb-2">
         <Ionicons name="map" size={18} color={colors.primary.DEFAULT} />
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2" numberOfLines={1}>
           {map.name}
         </Text>
+        {'spots_count' in map && (
+          <View className="flex-row items-center ml-3">
+            <Ionicons name="location" size={14} color={colors.text.secondary} />
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+              {map.spots_count}
+            </Text>
+          </View>
+        )}
       </View>
 
       {/* 説明 */}
