@@ -12,7 +12,7 @@ import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { ENV, colors } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
-import { SpotDetailCard } from '@/widgets/spot-detail-card';
+import { SpotDetailCard } from './spot-detail-card';
 import { SpotCarousel } from '@/widgets/spot-carousel';
 import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';

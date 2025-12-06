@@ -29,8 +29,8 @@ import type { MachiRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
-import { MasterSpotDetailCard } from '@/widgets/master-spot-detail-card';
-import { CityDetailCard } from '@/widgets/city-detail-card';
+import { MasterSpotDetailCard } from './master-spot-detail-card';
+import { CityDetailCard } from './city-detail-card';
 import { useMapControlsVisibility } from '@/features/map-controls';
 import { useSelectDefaultMapCard } from '@/features/select-default-map-card';
 
