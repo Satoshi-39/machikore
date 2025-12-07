@@ -43,15 +43,33 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
   } | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // 初期値を保持（変更検出用）
+  const [initialDisplayName, setInitialDisplayName] = useState<string>('');
+  const [initialBio, setInitialBio] = useState<string>('');
+
   // ユーザーデータが取得できたら初期値を設定
   React.useEffect(() => {
     if (user && !isInitialized) {
-      setDisplayName(user.display_name || '');
-      setBio(user.bio || '');
+      const name = user.display_name || '';
+      const userBio = user.bio || '';
+
+      setDisplayName(name);
+      setBio(userBio);
       setAvatarUri(user.avatar_url);
+
+      // 初期値を保存
+      setInitialDisplayName(name);
+      setInitialBio(userBio);
+
       setIsInitialized(true);
     }
   }, [user, isInitialized]);
+
+  // 変更があるかどうかを判定
+  const hasChanges =
+    displayName !== initialDisplayName ||
+    bio !== initialBio ||
+    newAvatarFile !== null;
 
   // 画像選択
   const handlePickImage = useCallback(async () => {
@@ -125,13 +143,19 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
         rightComponent={
           <Pressable
             onPress={handleSave}
-            disabled={isSaving}
+            disabled={isSaving || !hasChanges}
             className="px-4 py-2"
           >
             {isSaving ? (
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : (
-              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+              <Text
+                className={`text-base font-semibold ${
+                  hasChanges
+                    ? 'text-foreground dark:text-dark-foreground'
+                    : 'text-foreground-muted dark:text-dark-foreground-muted'
+                }`}
+              >
                 保存
               </Text>
             )}
