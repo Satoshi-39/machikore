@@ -15,7 +15,8 @@ import {
   useLocationButtonSync,
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
-import type { CityRow } from '@/shared/types/database.types';
+import { useMachiByCity } from '@/entities/machi';
+import type { CityRow, MachiRow } from '@/shared/types/database.types';
 
 interface CityDetailCardProps {
   city: CityRow;
@@ -26,6 +27,8 @@ interface CityDetailCardProps {
   onBeforeClose?: () => void;
   /** 現在地ボタンの表示/非表示変更コールバック（高さベースの判定） */
   onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
+  /** 街選択時のコールバック */
+  onMachiSelect?: (machi: MachiRow) => void;
 }
 
 /** 検索バー・現在地ボタン同期を行う内部コンテンツコンポーネント */
@@ -48,21 +51,20 @@ function CityDetailCardContent({
   return null;
 }
 
-export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange }: CityDetailCardProps) {
+export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onMachiSelect }: CityDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
 
+  // 市区に属する街データを取得
+  const { data: machis = [] } = useMachiByCity(city.id);
+
+  // 街選択時にカードを閉じてから遷移するためのペンディング状態（refで保持してクロージャ問題を回避）
+  const pendingMachiRef = useRef<MachiRow | null>(null);
+
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
   const snapPoints = useMemo(() => ['15%', '45%', '90%'], []);
-
-  // 仮データ: おすすめスポット（実際のデータは後で実装）
-  const recommendedSpots = [
-    { rank: 1, name: '人気のカフェ', category: '飲食店' },
-    { rank: 2, name: '有名な公園', category: '観光地' },
-    { rank: 3, name: 'おしゃれな雑貨店', category: 'ショッピング' },
-  ];
 
   // 初回マウント時に初期状態（デフォルト状態）を通知
   useEffect(() => {
@@ -75,15 +77,30 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
     // index -1 = 閉じた状態 → デフォルト状態(1)にリセットして親に通知
     if (index === -1) {
       onSnapChange?.(1);
-      onClose();
+      // ペンディング中の街があれば、閉じた後に街カードを開く
+      const pendingMachi = pendingMachiRef.current;
+      if (pendingMachi) {
+        pendingMachiRef.current = null;
+        onMachiSelect?.(pendingMachi);
+      } else {
+        onClose();
+      }
     } else {
       onSnapChange?.(index);
     }
-  }, [onSnapChange, onClose]);
+  }, [onSnapChange, onClose, onMachiSelect]);
 
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
     // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
+    onBeforeClose?.();
+    bottomSheetRef.current?.close();
+  }, [onBeforeClose]);
+
+  // 街をタップした時のハンドラー
+  const handleMachiPress = useCallback((machi: MachiRow) => {
+    // ペンディング状態にして、カードを閉じる
+    pendingMachiRef.current = machi;
     onBeforeClose?.();
     bottomSheetRef.current?.close();
   }, [onBeforeClose]);
@@ -132,68 +149,56 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
           </Text>
         </View>
 
-        {/* 統計情報（仮データ） */}
+        {/* 統計情報 */}
         <View className="flex-row items-center justify-around py-3 border-y border-border dark:border-dark-border mb-4">
           <View className="items-center">
             <View className="flex-row items-center">
-              <Ionicons name="location" size={18} color={colors.text.secondary} />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">12</Text>
+              <Ionicons name="map" size={18} color={colors.secondary.DEFAULT} />
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">{machis.length}</Text>
             </View>
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">街</Text>
           </View>
-
-          <View className="items-center">
-            <View className="flex-row items-center">
-              <Ionicons name="business" size={18} color={colors.text.secondary} />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">48</Text>
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">スポット</Text>
-          </View>
-
-          <View className="items-center">
-            <View className="flex-row items-center">
-              <Ionicons name="people" size={18} color={colors.text.secondary} />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">324</Text>
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">訪問者</Text>
-          </View>
         </View>
 
-        {/* おすすめスポットランキング（仮データ） */}
+        {/* 街リスト */}
         <View className="mb-4">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="star" size={18} color="#F59E0B" />
+            <Ionicons name="map" size={18} color={colors.secondary.DEFAULT} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-              おすすめスポット
+              この市区の街
             </Text>
           </View>
 
-          {recommendedSpots.map((spot) => (
-            <View
-              key={spot.rank}
-              className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light"
-            >
-              <View className="w-8 h-8 items-center justify-center bg-orange-100 rounded-full mr-3">
-                <Text className="text-sm font-bold text-orange-600">
-                  {spot.rank}
-                </Text>
-              </View>
-              <View className="flex-1">
-                <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
-                  {spot.name}
-                </Text>
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{spot.category}</Text>
-              </View>
-              <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+          {machis.length > 0 ? (
+            machis.map((machi, index) => (
+              <Pressable
+                key={machi.id}
+                onPress={() => handleMachiPress(machi)}
+                className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+              >
+                <View className="w-8 h-8 items-center justify-center bg-green-100 rounded-full mr-3">
+                  <Text className="text-sm font-bold text-green-600">
+                    {index + 1}
+                  </Text>
+                </View>
+                <View className="flex-1">
+                  <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+                    {machi.name}
+                  </Text>
+                  {machi.name_kana && (
+                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{machi.name_kana}</Text>
+                  )}
+                </View>
+                <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+              </Pressable>
+            ))
+          ) : (
+            <View className="py-4">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+                この市区には街が登録されていません
+              </Text>
             </View>
-          ))}
-        </View>
-
-        {/* 注意書き */}
-        <View className="mt-2 pt-3 border-t border-border dark:border-dark-border">
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary text-center">
-            ※ 現在は仮データを表示しています。今後、実際のデータに基づいたランキングを表示予定です。
-          </Text>
+          )}
         </View>
       </BottomSheetScrollView>
     </BottomSheet>

@@ -4,7 +4,7 @@
 
 import countriesData from '@/shared/assets/data/countries.json';
 
-interface CountryRow {
+export interface CountryData {
   id: string;
   name: string;
   name_kana: string;
@@ -16,6 +16,6 @@ interface CountryRow {
 /**
  * 国データを取得（JSONから）
  */
-export function getCountriesData(): CountryRow[] {
-  return countriesData as CountryRow[];
+export function getCountriesData(): CountryData[] {
+  return countriesData as CountryData[];
 }

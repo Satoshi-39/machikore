@@ -15,7 +15,6 @@ import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCities, useCitiesGeoJson } from '@/entities/city';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
-import { MapSearchBar } from '@/features/search-places';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -24,8 +23,9 @@ import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels } from './layers'
 import { CountryLabels } from './layers/country-labels';
 import { useCountriesGeoJson } from '@/entities/country/model';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
-import { useBoundsManagement } from '../model';
-import type { MachiRow } from '@/shared/types/database.types';
+import { useBoundsManagement, useCenterLocationName } from '../model';
+import { DefaultMapHeader } from './default-map-header';
+import type { MachiRow, CityRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
@@ -54,7 +54,7 @@ interface DefaultMapViewProps {
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange: _onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false }, ref) => {
     const insets = useSafeAreaInsets();
     const isDarkMode = useIsDarkMode();
     const { data: machiData, isLoading, error } = useMachi();
@@ -106,7 +106,19 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     );
 
     // ビューポート範囲管理
-    const { bounds, handleCameraChanged } = useBoundsManagement({ currentLocation });
+    const { bounds, cameraState, handleCameraChanged } = useBoundsManagement({ currentLocation });
+
+    // 国データを取得
+    const countries = useMemo(() => getCountriesData(), []);
+
+    // マップ中心の地名を取得
+    const centerLocation = useCenterLocationName({
+      cameraState,
+      machiData,
+      cities,
+      prefectures,
+      countries,
+    });
 
     // ビューポート範囲内のmaster_spotsを取得
     const { data: masterSpots = [] } = useMasterSpotsByBounds(bounds);
@@ -163,9 +175,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       if (!masterSpots) return new Map<string, MasterSpotDisplay>();
       return new Map(masterSpots.map((spot) => [spot.id, spot]));
     }, [masterSpots]);
-
-    // 国データを取得
-    const countries = useMemo(() => getCountriesData(), []);
 
     // フィルタリングされたmachiDataを生成
     const filteredMachiData = useMemo(() => {
@@ -229,6 +238,17 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         }
       }
     };
+
+    // ヘッダーの地名クリック時のハンドラー
+    const handleHeaderLocationPress = useCallback(() => {
+      if (!centerLocation.entity) return;
+
+      if (centerLocation.type === 'machi') {
+        handleMachiSelect(centerLocation.entity as MachiRow);
+      } else if (centerLocation.type === 'city') {
+        handleCitySelect(centerLocation.entity as CityRow);
+      }
+    }, [centerLocation, handleMachiSelect, handleCitySelect]);
 
     // 初期カメラ位置を計算
     const initialCenter = currentLocation
@@ -296,25 +316,27 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             />
           </Mapbox.MapView>
 
-          {/* 検索バー + ViewModeToggle */}
-          {viewMode === 'map' && !isSearchFocused && onViewModeChange && onSearchFocus && (
+          {/* ヘッダー（Snapchat風） */}
+          {viewMode === 'map' && !isSearchFocused && onSearchFocus && (
             <View
               className="absolute top-0 left-0 right-0"
-              style={{
-                paddingTop: insets.top,
-                opacity: isSearchBarHidden ? 0 : 1,
-              }}
-              pointerEvents={isSearchBarHidden ? 'none' : 'auto'}
+              style={{ paddingTop: insets.top }}
             >
-              <MapSearchBar
-                viewMode={viewMode}
-                onViewModeChange={onViewModeChange}
-                onFocus={onSearchFocus}
-                showIcon={true}
-                placeholder="スポットを検索"
+              <DefaultMapHeader
+                locationName={centerLocation.name}
+                locationType={centerLocation.type}
+                onSearchPress={onSearchFocus}
+                onLocationPress={handleHeaderLocationPress}
+                isHidden={isSearchBarHidden}
               />
               {/* クイック検索/フィルタリングボタン */}
-              <View className="mt-4">
+              <View
+                className="mt-2"
+                style={{
+                  opacity: isSearchBarHidden ? 0 : 1,
+                }}
+                pointerEvents={isSearchBarHidden ? 'none' : 'auto'}
+              >
                 <QuickSearchButtons
                   activeFilter={visitFilter}
                   onFilterChange={setVisitFilter}
@@ -370,6 +392,11 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={controlsVisibility.handleBeforeClose}
               onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+              onMachiSelect={(machi) => {
+                // 市区カードが閉じた後に街カードを開く
+                // handleMachiSelect内部でselectedCityもクリアされる
+                handleMachiSelect(machi);
+              }}
             />
           )}
 

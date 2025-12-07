@@ -15,6 +15,11 @@ interface Bounds {
   maxLng: number;
 }
 
+export interface CameraState {
+  center: { latitude: number; longitude: number };
+  zoom: number;
+}
+
 interface UseBoundsManagementParams {
   currentLocation?: { latitude: number; longitude: number } | null;
 }
@@ -24,6 +29,12 @@ const DEBOUNCE_DELAY_MS = 300; // カメラ移動のデバウンス時間
 
 export function useBoundsManagement({ currentLocation }: UseBoundsManagementParams) {
   const [bounds, setBounds] = useState<Bounds | null>(null);
+  const [cameraState, setCameraState] = useState<CameraState>({
+    center: currentLocation
+      ? { latitude: currentLocation.latitude, longitude: currentLocation.longitude }
+      : { latitude: TOKYO_CENTER.lat, longitude: TOKYO_CENTER.lng },
+    zoom: currentLocation ? 14 : 10,
+  });
   const boundsUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 初期bounds設定
@@ -47,6 +58,16 @@ export function useBoundsManagement({ currentLocation }: UseBoundsManagementPara
   // カメラ移動時にビューポート範囲を更新（デバウンス付き）
   const handleCameraChanged = useCallback((state: any) => {
     const cameraBounds = state?.properties?.bounds;
+    const cameraCenter = state?.properties?.center;
+    const cameraZoom = state?.properties?.zoom;
+
+    // カメラ状態を即座に更新（ヘッダー表示用）
+    if (cameraCenter && cameraZoom != null) {
+      setCameraState({
+        center: { latitude: cameraCenter[1], longitude: cameraCenter[0] },
+        zoom: cameraZoom,
+      });
+    }
 
     // 前のタイマーをクリア
     if (boundsUpdateTimerRef.current) {
@@ -72,6 +93,7 @@ export function useBoundsManagement({ currentLocation }: UseBoundsManagementPara
 
   return {
     bounds,
+    cameraState,
     handleCameraChanged,
   };
 }
