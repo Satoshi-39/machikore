@@ -5,3 +5,4 @@
 export * from './constants';
 export * from './env';
 export * from './theme';
+export * from './categories';

@@ -4,29 +4,20 @@
  * FSDの原則：Featureはユーザーのアクション・インタラクション
  */
 
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
+import { MAP_CATEGORIES, type MapCategory } from '@/shared/config';
+import { StyledTextInput, TagInput } from '@/shared/ui';
+import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
+  Alert,
+  FlatList,
   ScrollView,
   Switch,
-  Alert,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { StyledTextInput, TagInput } from '@/shared/ui';
-import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-
-type MapCategory = '旅行' | 'グルメ' | '観光' | 'ショッピング' | 'アクティビティ' | 'その他';
-
-const CATEGORIES: MapCategory[] = [
-  '旅行',
-  'グルメ',
-  '観光',
-  'ショッピング',
-  'アクティビティ',
-  'その他',
-];
 
 interface CreateMapFormProps {
   onSubmit: (data: {
@@ -40,13 +31,20 @@ interface CreateMapFormProps {
   isLoading?: boolean;
 }
 
-export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProps) {
+export function CreateMapForm({
+  onSubmit,
+  isLoading = false,
+}: CreateMapFormProps) {
   const [mapName, setMapName] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(
+    null
+  );
   const [tags, setTags] = useState<string[]>([]);
   const [isPublic, setIsPublic] = useState(true);
-  const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(null);
+  const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
+    null
+  );
 
   const handleSubmit = () => {
     if (!mapName.trim()) {
@@ -73,7 +71,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
       <View className="p-4">
         {/* マップ名 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
             マップ名 <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
@@ -101,35 +99,51 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
         </View>
 
         {/* カテゴリー */}
-        <View className="mb-6">
+        <View className="mb-4">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             カテゴリー
           </Text>
-          <View className="flex-row flex-wrap gap-2">
-            {CATEGORIES.map((category) => {
-              const isSelected = selectedCategory === category;
+          <FlatList
+            data={MAP_CATEGORIES}
+            numColumns={3}
+            scrollEnabled={false}
+            keyExtractor={(item) => item.value}
+            columnWrapperStyle={{
+              justifyContent: 'space-between',
+              marginBottom: 12,
+            }}
+            renderItem={({ item: category, index }) => {
+              const isSelected = selectedCategory === category.value;
+              const isLastRow = index >= 3;
               return (
                 <TouchableOpacity
-                  key={category}
-                  onPress={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full border ${
+                  onPress={() => setSelectedCategory(category.value)}
+                  className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
                     isSelected
-                      ? 'bg-blue-500 border-blue-500'
+                      ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
                       : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
                   }`}
+                  style={isLastRow ? { marginBottom: 0 } : undefined}
                   activeOpacity={0.7}
                 >
+                  <Ionicons
+                    name={category.icon}
+                    size={28}
+                    color={isSelected ? '#3B82F6' : '#9CA3AF'}
+                  />
                   <Text
-                    className={`text-sm font-medium ${
-                      isSelected ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                    className={`text-xs font-medium mt-1.5 ${
+                      isSelected
+                        ? 'text-blue-500'
+                        : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
-                    {category}
+                    {category.label}
                   </Text>
                 </TouchableOpacity>
               );
-            })}
-          </View>
+            }}
+          />
         </View>
 
         {/* タグ */}

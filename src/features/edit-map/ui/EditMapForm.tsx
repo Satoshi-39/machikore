@@ -12,9 +12,10 @@ import {
   TouchableOpacity,
   ScrollView,
   Switch,
+  FlatList,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, MAP_CATEGORIES, type MapCategory } from '@/shared/config';
 import { TagInput } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import type { MapWithUser } from '@/shared/types';
@@ -36,7 +37,9 @@ interface EditMapFormProps {
 export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormProps) {
   const [name, setName] = useState(map.name);
   const [description, setDescription] = useState(map.description || '');
-  const [category, setCategory] = useState(map.category || '');
+  const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(
+    (map.category as MapCategory) || null
+  );
   const [tags, setTags] = useState<string[]>(map.tags || []);
   const [isPublic, setIsPublic] = useState(map.is_public);
 
@@ -58,7 +61,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
     onSubmit({
       name: name.trim(),
       description: description.trim() || undefined,
-      category: category.trim() || undefined,
+      category: selectedCategory || undefined,
       tags,
       isPublic,
       // 新しい画像が選択された場合のみ送信（既存URLの場合は送らない）
@@ -137,14 +140,46 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
         </View>
 
         {/* カテゴリ */}
-        <View className="mb-6">
+        <View className="mb-4">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">カテゴリ</Text>
-          <TextInput
-            value={category}
-            onChangeText={setCategory}
-            placeholder="例：グルメ, 旅行, ショッピング"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+          <FlatList
+            data={MAP_CATEGORIES}
+            numColumns={3}
+            scrollEnabled={false}
+            keyExtractor={(item) => item.value}
+            columnWrapperStyle={{
+              justifyContent: 'space-between',
+              marginBottom: 12,
+            }}
+            renderItem={({ item: category, index }) => {
+              const isSelected = selectedCategory === category.value;
+              const isLastRow = index >= 3;
+              return (
+                <TouchableOpacity
+                  onPress={() => setSelectedCategory(category.value)}
+                  className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
+                    isSelected
+                      ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
+                      : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
+                  }`}
+                  style={isLastRow ? { marginBottom: 0 } : undefined}
+                  activeOpacity={0.7}
+                >
+                  <Ionicons
+                    name={category.icon}
+                    size={28}
+                    color={isSelected ? '#3B82F6' : '#9CA3AF'}
+                  />
+                  <Text
+                    className={`text-xs font-medium mt-1.5 ${
+                      isSelected ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                    }`}
+                  >
+                    {category.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
           />
         </View>
 
