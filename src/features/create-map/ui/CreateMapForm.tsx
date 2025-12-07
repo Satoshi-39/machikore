@@ -14,7 +14,7 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { StyledTextInput } from '@/shared/ui';
+import { StyledTextInput, TagInput } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 
 type MapCategory = '旅行' | 'グルメ' | '観光' | 'ショッピング' | 'アクティビティ' | 'その他';
@@ -44,7 +44,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
   const [mapName, setMapName] = useState('');
   const [description, setDescription] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(null);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
   const [isPublic, setIsPublic] = useState(true);
   const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(null);
 
@@ -58,7 +58,7 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
       name: mapName.trim(),
       description: description.trim() || undefined,
       category: selectedCategory || undefined,
-      tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+      tags,
       isPublic,
       thumbnailImage: thumbnailImage || undefined,
     });
@@ -137,15 +137,12 @@ export function CreateMapForm({ onSubmit, isLoading = false }: CreateMapFormProp
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             タグ
           </Text>
-          <StyledTextInput
-            value={tags}
-            onChangeText={setTags}
-            placeholder="例：カフェ, スイーツ, デート"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+          <TagInput
+            tags={tags}
+            onTagsChange={setTags}
+            placeholder="タグを入力してEnter"
+            maxTags={10}
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            カンマ区切りで入力してください
-          </Text>
         </View>
 
         {/* サムネイル画像 */}

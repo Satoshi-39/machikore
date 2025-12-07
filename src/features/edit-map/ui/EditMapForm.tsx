@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { TagInput } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import type { MapWithUser } from '@/shared/types';
 
@@ -36,7 +37,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
   const [name, setName] = useState(map.name);
   const [description, setDescription] = useState(map.description || '');
   const [category, setCategory] = useState(map.category || '');
-  const [tags, setTags] = useState((map.tags || []).join(', '));
+  const [tags, setTags] = useState<string[]>(map.tags || []);
   const [isPublic, setIsPublic] = useState(map.is_public);
 
   // サムネイル関連
@@ -58,7 +59,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
       name: name.trim(),
       description: description.trim() || undefined,
       category: category.trim() || undefined,
-      tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+      tags,
       isPublic,
       // 新しい画像が選択された場合のみ送信（既存URLの場合は送らない）
       thumbnailImage: thumbnailChanged && thumbnailImage && !thumbnailImage.uri.startsWith('http')
@@ -150,16 +151,12 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
-          <TextInput
-            value={tags}
-            onChangeText={setTags}
-            placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
-            placeholderTextColor="#9CA3AF"
+          <TagInput
+            tags={tags}
+            onTagsChange={setTags}
+            placeholder="タグを入力してEnter"
+            maxTags={10}
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            カンマ区切りで入力してください
-          </Text>
         </View>
 
         {/* サムネイル */}

@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { StyledTextInput } from '@/shared/ui';
+import { StyledTextInput, TagInput } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
 import type { Database } from '@/shared/types/supabase.generated';
@@ -68,7 +68,7 @@ export function EditSpotForm({
 
   const [customName, setCustomName] = useState(spotName);
   const [description, setDescription] = useState(spot.description || '');
-  const [tags, setTags] = useState((spot.tags || []).join(', '));
+  const [tags, setTags] = useState<string[]>(spot.tags || []);
 
   // 画像関連
   const [newImages, setNewImages] = useState<SelectedImage[]>([]);
@@ -90,7 +90,7 @@ export function EditSpotForm({
     onSubmit({
       customName: customName.trim(),
       description: description.trim() || undefined,
-      tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+      tags,
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
       mapId: selectedMapId || undefined,
@@ -234,15 +234,12 @@ export function EditSpotForm({
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
-          <StyledTextInput
-            value={tags}
-            onChangeText={setTags}
-            placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+          <TagInput
+            tags={tags}
+            onTagsChange={setTags}
+            placeholder="タグを入力してEnter"
+            maxTags={10}
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            カンマ区切りで入力してください
-          </Text>
         </View>
 
         {/* 写真 */}

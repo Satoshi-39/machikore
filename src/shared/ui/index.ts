@@ -22,3 +22,4 @@ export { ImageViewerModal, useImageViewer } from './image-viewer';
 export { CommentInput, type CommentInputRef, CommentInputModal } from './comment-input';
 export { SwipeableRow } from './swipeable-row';
 export { StyledTextInput, type StyledTextInputProps } from './styled-text-input';
+export { TagInput } from './tag-input';

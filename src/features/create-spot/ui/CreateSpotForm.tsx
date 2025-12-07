@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { StyledTextInput } from '@/shared/ui';
+import { StyledTextInput, TagInput } from '@/shared/ui';
 import {
   type SpotLocationInput,
   isPlaceSearchResult,
@@ -65,7 +65,7 @@ export function CreateSpotForm({
   // カスタム名の初期値（Google検索結果の場合は元の名前、手動の場合は空）
   const [customName, setCustomName] = useState(placeData.name ?? '');
   const [description, setDescription] = useState('');
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
   const [images, setImages] = useState<SelectedImage[]>([]);
 
   // 選択中のマップを取得
@@ -85,7 +85,7 @@ export function CreateSpotForm({
     onSubmit({
       customName: customName.trim(),
       description: description.trim() || undefined,
-      tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+      tags,
       images,
       mapId: selectedMapId,
     });
@@ -227,15 +227,12 @@ export function CreateSpotForm({
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
-          <StyledTextInput
-            value={tags}
-            onChangeText={setTags}
-            placeholder="例：カフェ, 作業, Wi-Fi"
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+          <TagInput
+            tags={tags}
+            onTagsChange={setTags}
+            placeholder="タグを入力してEnter"
+            maxTags={10}
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            カンマ区切りで入力してください
-          </Text>
         </View>
 
         {/* 写真 */}
