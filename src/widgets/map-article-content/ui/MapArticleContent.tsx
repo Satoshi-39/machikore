@@ -269,6 +269,22 @@ export function MapArticleContent({
             </View>
           )}
 
+          {/* タグ */}
+          {map.tags && map.tags.length > 0 && (
+            <View className="flex-row flex-wrap gap-2 mt-4">
+              {map.tags.map((tag, index) => (
+                <View
+                  key={`${tag}-${index}`}
+                  className="bg-muted dark:bg-dark-muted rounded-full px-3 py-1.5"
+                >
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                    #{tag}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          )}
+
           {/* フッターアクション（note風） */}
           <View className="py-6 mt-6">
             {/* アクションボタン */}
