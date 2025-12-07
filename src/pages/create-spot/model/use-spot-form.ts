@@ -17,10 +17,8 @@ import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage, getNearbyMachi } from '@/shared/api/supabase';
 import { queryClient } from '@/shared/api/query-client';
+import { INPUT_LIMITS } from '@/shared/config';
 import type { SelectedImage } from '@/features/pick-images';
-
-// スポット数の上限
-const MAX_SPOTS_PER_MAP = 100;
 
 export interface UploadProgress {
   current: number;
@@ -144,10 +142,10 @@ export function useSpotForm() {
 
     // スポット数の上限チェック
     const selectedMap = userMaps.find((m) => m.id === data.mapId);
-    if (selectedMap && selectedMap.spots_count >= MAX_SPOTS_PER_MAP) {
+    if (selectedMap && selectedMap.spots_count >= INPUT_LIMITS.MAX_SPOTS_PER_MAP) {
       Alert.alert(
         'スポット数の上限',
-        `1つのマップには最大${MAX_SPOTS_PER_MAP}個までスポットを登録できます。\n別のマップを選択するか、既存のスポットを削除してください。`
+        `1つのマップには最大${INPUT_LIMITS.MAX_SPOTS_PER_MAP}個までスポットを登録できます。\n別のマップを選択するか、既存のスポットを削除してください。`
       );
       return;
     }

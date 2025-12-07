@@ -9,7 +9,7 @@ import { View, Text, TouchableOpacity, Image, Alert, ActionSheetIOS, Platform } 
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
-import { colors } from '@/shared/config';
+import { colors, INPUT_LIMITS } from '@/shared/config';
 
 export interface SelectedImage {
   uri: string;
@@ -22,6 +22,8 @@ interface ImagePickerButtonProps {
   images: SelectedImage[];
   onImagesChange: (images: SelectedImage[]) => void;
   maxImages?: number;
+  /** 枚数表示を非表示にする（編集画面で合計表示を別途行う場合用） */
+  hideCount?: boolean;
 }
 
 // 画像をJPEGに変換・圧縮・リサイズするヘルパー
@@ -52,7 +54,8 @@ async function convertToJpeg(uri: string): Promise<{ uri: string; width: number;
 export function ImagePickerButton({
   images,
   onImagesChange,
-  maxImages = 5,
+  maxImages = INPUT_LIMITS.MAX_IMAGES_PER_SPOT,
+  hideCount = false,
 }: ImagePickerButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -227,9 +230,11 @@ export function ImagePickerButton({
         </Text>
       </TouchableOpacity>
 
-      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-        {images.length}/{maxImages}枚
-      </Text>
+      {!hideCount && (
+        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+          {images.length}/{maxImages}枚
+        </Text>
+      )}
     </View>
   );
 }

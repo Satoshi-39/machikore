@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, INPUT_LIMITS } from '@/shared/config';
 import { formatLocalDateKey } from '@/shared/lib';
 
 interface CreateScheduleFormProps {
@@ -28,9 +28,7 @@ export function CreateScheduleForm({
   );
   const [selectedMachiId] = useState<string | undefined>(); // TODO: 街選択機能実装時に使用
 
-  const maxTitleLength = 100;
-  const maxMemoLength = 500;
-  const isValid = title.trim().length > 0 && title.length <= maxTitleLength;
+  const isValid = title.trim().length > 0 && title.length <= INPUT_LIMITS.SCHEDULE_TITLE;
 
   const handleSubmit = () => {
     if (isValid && !isSubmitting) {
@@ -75,13 +73,13 @@ export function CreateScheduleForm({
             onChangeText={setTitle}
             placeholder="例：新宿でランチ"
             placeholderTextColor={colors.text.placeholder}
-            maxLength={maxTitleLength}
+            maxLength={INPUT_LIMITS.SCHEDULE_TITLE}
             editable={!isSubmitting}
             className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
             autoFocus
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            {title.length} / {maxTitleLength}
+            {title.length} / {INPUT_LIMITS.SCHEDULE_TITLE}
           </Text>
         </View>
 
@@ -113,13 +111,13 @@ export function CreateScheduleForm({
             placeholderTextColor={colors.text.placeholder}
             multiline
             numberOfLines={4}
-            maxLength={maxMemoLength}
+            maxLength={INPUT_LIMITS.SCHEDULE_MEMO}
             editable={!isSubmitting}
             className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
             style={{ textAlignVertical: 'top', minHeight: 100 }}
           />
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            {memo.length} / {maxMemoLength}
+            {memo.length} / {INPUT_LIMITS.SCHEDULE_MEMO}
           </Text>
         </View>
 

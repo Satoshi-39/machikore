@@ -15,7 +15,7 @@ import {
   FlatList,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, MAP_CATEGORIES, type MapCategory } from '@/shared/config';
+import { colors, INPUT_LIMITS, MAP_CATEGORIES, type MapCategory } from '@/shared/config';
 import { TagInput } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import type { MapWithUser } from '@/shared/types';
@@ -119,9 +119,13 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
             value={name}
             onChangeText={setName}
             placeholder="例：東京カフェ巡り"
+            maxLength={INPUT_LIMITS.MAP_NAME}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
           />
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+            {name.length}/{INPUT_LIMITS.MAP_NAME}
+          </Text>
         </View>
 
         {/* 説明 */}
@@ -133,10 +137,14 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
             placeholder="このマップについての説明を入力してください"
             multiline
             numberOfLines={4}
+            maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+            {description.length}/{INPUT_LIMITS.MAP_DESCRIPTION}
+          </Text>
         </View>
 
         {/* カテゴリ */}

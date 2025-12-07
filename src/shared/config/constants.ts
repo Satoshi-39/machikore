@@ -21,7 +21,6 @@ export const MAX_PAGE_SIZE = 100;
 // ===============================
 
 export const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
-export const MAX_IMAGES_PER_POST = 4;
 export const SUPPORTED_IMAGE_FORMATS = ['image/jpeg', 'image/png', 'image/webp'];
 
 // ===============================
@@ -118,4 +117,40 @@ export const ERROR_CODES = {
   NOT_FOUND: 'NOT_FOUND',
   VALIDATION_ERROR: 'VALIDATION_ERROR',
   SYNC_ERROR: 'SYNC_ERROR',
+} as const;
+
+// ===============================
+// 入力値制限
+// ===============================
+
+export const INPUT_LIMITS = {
+  // ユーザー
+  USER_DISPLAY_NAME: 50,
+  USER_BIO: 200,
+
+  // マップ
+  MAP_NAME: 100,
+  MAP_DESCRIPTION: 1000,
+  MAX_SPOTS_PER_MAP: 100,
+
+  // スポット
+  SPOT_NAME: 100,
+  SPOT_DESCRIPTION: 2000,
+  SPOT_ADDRESS: 200,
+  MAX_IMAGES_PER_SPOT: 4,
+
+  // タグ
+  TAG_NAME: 30,
+  MAX_TAGS: 10,
+
+  // コメント
+  COMMENT: 500,
+
+  // コレクション
+  COLLECTION_NAME: 100,
+  COLLECTION_DESCRIPTION: 500,
+
+  // スケジュール
+  SCHEDULE_TITLE: 100,
+  SCHEDULE_MEMO: 500,
 } as const;

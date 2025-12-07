@@ -16,7 +16,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, INPUT_LIMITS } from '@/shared/config';
 import { StyledTextInput, TagInput } from '@/shared/ui';
 import {
   type SpotLocationInput,
@@ -203,11 +203,17 @@ export function CreateSpotForm({
             value={customName}
             onChangeText={setCustomName}
             placeholder="例：お気に入りのカフェ"
+            maxLength={INPUT_LIMITS.SPOT_NAME}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            自分だけのわかりやすい名前をつけられます
-          </Text>
+          <View className="flex-row justify-between mt-1">
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+              自分だけのわかりやすい名前をつけられます
+            </Text>
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+              {customName.length}/{INPUT_LIMITS.SPOT_NAME}
+            </Text>
+          </View>
         </View>
 
         {/* メモ */}
@@ -219,9 +225,13 @@ export function CreateSpotForm({
             placeholder="このスポットについてのメモを入力してください"
             multiline
             numberOfLines={4}
+            maxLength={INPUT_LIMITS.SPOT_DESCRIPTION}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             textAlignVertical="top"
           />
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+            {description.length}/{INPUT_LIMITS.SPOT_DESCRIPTION}
+          </Text>
         </View>
 
         {/* タグ */}
@@ -241,7 +251,7 @@ export function CreateSpotForm({
           <ImagePickerButton
             images={images}
             onImagesChange={setImages}
-            maxImages={4}
+            maxImages={INPUT_LIMITS.MAX_IMAGES_PER_SPOT}
           />
         </View>
 

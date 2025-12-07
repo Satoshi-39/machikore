@@ -19,7 +19,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { PageHeader, StyledTextInput } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { colors, INPUT_LIMITS } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { useUser, useUpdateProfileWithAvatar } from '@/entities/user/api';
 
@@ -209,10 +209,10 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
                 onChangeText={setDisplayName}
                 placeholder="表示名を入力"
                 className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
-                maxLength={50}
+                maxLength={INPUT_LIMITS.USER_DISPLAY_NAME}
               />
               <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
-                {displayName.length}/50
+                {displayName.length}/{INPUT_LIMITS.USER_DISPLAY_NAME}
               </Text>
             </View>
 
@@ -243,10 +243,10 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
                 numberOfLines={4}
                 textAlignVertical="top"
                 style={{ minHeight: 100 }}
-                maxLength={200}
+                maxLength={INPUT_LIMITS.USER_BIO}
               />
               <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
-                {bio.length}/200
+                {bio.length}/{INPUT_LIMITS.USER_BIO}
               </Text>
             </View>
           </View>

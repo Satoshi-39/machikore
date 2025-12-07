@@ -5,7 +5,7 @@
  */
 
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import { MAP_CATEGORIES, type MapCategory } from '@/shared/config';
+import { INPUT_LIMITS, MAP_CATEGORIES, type MapCategory } from '@/shared/config';
 import { StyledTextInput, TagInput } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
@@ -78,8 +78,12 @@ export function CreateMapForm({
             value={mapName}
             onChangeText={setMapName}
             placeholder="例：東京カフェ巡り"
+            maxLength={INPUT_LIMITS.MAP_NAME}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+            {mapName.length}/{INPUT_LIMITS.MAP_NAME}
+          </Text>
         </View>
 
         {/* 説明 */}
@@ -93,9 +97,13 @@ export function CreateMapForm({
             placeholder="マップの説明を入力してください"
             multiline
             numberOfLines={4}
+            maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             textAlignVertical="top"
           />
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+            {description.length}/{INPUT_LIMITS.MAP_DESCRIPTION}
+          </Text>
         </View>
 
         {/* カテゴリー */}

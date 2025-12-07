@@ -15,7 +15,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, INPUT_LIMITS } from '@/shared/config';
 
 interface ReplyTarget {
   displayName: string;
@@ -144,7 +144,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
                 placeholder={placeholder || defaultPlaceholder}
                 placeholderTextColor={colors.gray[400]}
                 multiline
-                maxLength={500}
+                maxLength={INPUT_LIMITS.COMMENT}
                 className="flex-1 text-base text-foreground dark:text-dark-foreground max-h-24"
                 style={{ minHeight: 24 }}
               />
