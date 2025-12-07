@@ -6,8 +6,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, Text, Pressable, FlatList, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
-import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
+import { colors, LOCATION_ICONS } from '@/shared/config';
+import { Loading, EmptyState, SwipeableRow, LocationPinIcon } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
 
 export interface LikedSpotItem {
@@ -152,8 +152,8 @@ export function LikeSpotList({
           >
             <View className="flex-row items-center">
               {/* 青いスポットアイコン */}
-              <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center mr-3">
-                <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
+              <View className={`w-10 h-10 rounded-full ${LOCATION_ICONS.MASTER_SPOT.bgColor} items-center justify-center mr-3`}>
+                <LocationPinIcon size={20} color={LOCATION_ICONS.MASTER_SPOT.color} />
               </View>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">

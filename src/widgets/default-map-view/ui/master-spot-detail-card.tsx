@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
-import { colors } from '@/shared/config';
+import { colors, LOCATION_ICONS } from '@/shared/config';
 import {
   showLoginRequiredAlert,
   useCurrentTab,
@@ -18,7 +18,7 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ImageViewerModal, useImageViewer } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, LocationPinIcon } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
@@ -230,9 +230,12 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-1">
-              {spot.name}
-            </Text>
+            <View className="flex-row items-center mb-1">
+              <LocationPinIcon size={24} color={LOCATION_ICONS.MASTER_SPOT.color} />
+              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
+                {spot.name}
+              </Text>
+            </View>
             {spot.google_formatted_address && (
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{spot.google_formatted_address}</Text>
             )}
@@ -370,9 +373,12 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
                   {/* カスタム名 */}
                   {userSpot.custom_name && (
-                    <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
-                      {userSpot.custom_name}
-                    </Text>
+                    <View className="flex-row items-center mb-1">
+                      <LocationPinIcon size={14} color={LOCATION_ICONS.USER_SPOT.color} />
+                      <Text className="text-sm font-medium text-foreground dark:text-dark-foreground ml-1">
+                        {userSpot.custom_name}
+                      </Text>
+                    </View>
                   )}
 
                   {/* 説明 */}

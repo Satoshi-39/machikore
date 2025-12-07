@@ -1,12 +1,15 @@
 /**
- * 街ラベルレイヤー（アイコン + テキスト）
+ * 街ラベルレイヤー（アイコン + テキスト横並び）
  */
 
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { MAP_MARKER } from '@/shared/config/constants';
+import { LOCATION_ICONS } from '@/shared/config/constants';
 import type { VisitFilter } from '@/features/quick-search-buttons';
+
+// アイコン画像（緑色）
+const storefrontIcon = require('@assets/icons/storefront-machi.png');
 
 interface MachiLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string; isVisited: boolean }>;
@@ -19,69 +22,63 @@ export function MachiLabels({ geoJson, onPress, visitFilter = 'all' }: MachiLabe
   const isUnvisitedFilter = visitFilter === 'not_visited';
   const isFiltered = isVisitedFilter || isUnvisitedFilter;
 
-  // テキスト色を決定
-  const getTextColor = () => {
-    if (isVisitedFilter) return MAP_MARKER.COLOR.VISITED_HIGHLIGHT;
-    if (isUnvisitedFilter) return MAP_MARKER.COLOR.UNVISITED_HIGHLIGHT;
-    return MAP_MARKER.COLOR.DEFAULT;
-  };
+  // 色は常に街の色（緑）で統一
+  const color = LOCATION_ICONS.MACHI.color;
 
   return (
-    <Mapbox.ShapeSource
-      id="machi-source"
-      shape={geoJson}
-      onPress={onPress}
-    >
-      {/* 訪問済み街アイコン */}
-      <Mapbox.SymbolLayer
-        id="visited-machi-icon"
-        filter={['==', ['get', 'isVisited'], true]}
-        minZoomLevel={isVisitedFilter ? 0 : 12}
-        style={{
-          textField: isVisitedFilter
-            ? MAP_MARKER.MACHI.VISITED_HIGHLIGHT
-            : MAP_MARKER.MACHI.VISITED,
-          textSize: isVisitedFilter
-            ? MAP_MARKER.SIZE.HIGHLIGHT
-            : MAP_MARKER.SIZE.DEFAULT,
-          textAnchor: 'bottom',
-          textOffset: [0, 0.5],
-          visibility: isUnvisitedFilter ? 'none' : 'visible',
-        }}
-      />
+    <>
+      {/* アイコン画像を登録 */}
+      <Mapbox.Images images={{ 'machi-icon': storefrontIcon }} />
 
-      {/* 未訪問街アイコン */}
-      <Mapbox.SymbolLayer
-        id="unvisited-machi-icon"
-        filter={['==', ['get', 'isVisited'], false]}
-        minZoomLevel={isUnvisitedFilter ? 0 : 12}
-        style={{
-          textField: MAP_MARKER.MACHI.UNVISITED,
-          textSize: isUnvisitedFilter
-            ? MAP_MARKER.SIZE.HIGHLIGHT
-            : MAP_MARKER.SIZE.DEFAULT,
-          textAnchor: 'bottom',
-          textOffset: [0, 0.5],
-          visibility: isVisitedFilter ? 'none' : 'visible',
-        }}
-      />
+      <Mapbox.ShapeSource
+        id="machi-source"
+        shape={geoJson}
+        onPress={onPress}
+      >
+        {/* 訪問済み街（アイコン + テキスト横並び） */}
+        <Mapbox.SymbolLayer
+          id="visited-machi-labels"
+          filter={['==', ['get', 'isVisited'], true]}
+          minZoomLevel={isVisitedFilter ? 0 : 12}
+          style={{
+            iconImage: 'machi-icon',
+            iconSize: isFiltered ? 0.4 : 0.35,
+            textField: ['get', 'name'],
+            textSize: isFiltered ? 18 : 16,
+            textColor: color,
+            textHaloColor: '#FFFFFF',
+            textHaloWidth: 2,
+            textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+            iconTextFit: 'none',
+            textAnchor: 'left',
+            iconAnchor: 'right',
+            textOffset: [0.3, 0],
+            visibility: isUnvisitedFilter ? 'none' : 'visible',
+          }}
+        />
 
-      {/* 街名テキスト表示 */}
-      <Mapbox.SymbolLayer
-        id="machi-labels"
-        minZoomLevel={isFiltered ? 0 : 12}
-        style={{
-          textField: ['get', 'name'],
-          textSize: isFiltered ? 18 : 16,
-          textColor: getTextColor(),
-          textHaloColor: '#FFFFFF',
-          textHaloWidth: 2,
-          textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
-          textAnchor: 'top',
-          textOffset: [0, 1.5],
-          visibility: 'visible',
-        }}
-      />
-    </Mapbox.ShapeSource>
+        {/* 未訪問街（アイコン + テキスト横並び） */}
+        <Mapbox.SymbolLayer
+          id="unvisited-machi-labels"
+          filter={['==', ['get', 'isVisited'], false]}
+          minZoomLevel={isUnvisitedFilter ? 0 : 12}
+          style={{
+            iconImage: 'machi-icon',
+            iconSize: isFiltered ? 0.4 : 0.35,
+            textField: ['get', 'name'],
+            textSize: isFiltered ? 18 : 16,
+            textColor: color,
+            textHaloColor: '#FFFFFF',
+            textHaloWidth: 2,
+            textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+            iconTextFit: 'none',
+            textAnchor: 'left',
+            iconAnchor: 'right',
+            textOffset: [0.3, 0],
+            visibility: isVisitedFilter ? 'none' : 'visible',
+          }}
+        />
+      </Mapbox.ShapeSource>
+    </>
   );
 }

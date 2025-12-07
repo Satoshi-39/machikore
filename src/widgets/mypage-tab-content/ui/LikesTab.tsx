@@ -8,9 +8,9 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, Pressable, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
-import { Loading } from '@/shared/ui';
+import { Loading, LocationPinIcon } from '@/shared/ui';
 import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
 import type { SpotWithDetails } from '@/shared/types';
 
@@ -89,8 +89,8 @@ export function LikesTab({ userId }: LikesTabProps) {
                   className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
                 >
                   <View className="flex-row items-center">
-                    <View className="w-10 h-10 rounded-full bg-orange-100 items-center justify-center mr-3">
-                      <Ionicons name="location" size={20} color="#F97316" />
+                    <View className={`w-10 h-10 rounded-full ${LOCATION_ICONS.USER_SPOT.bgColor} items-center justify-center mr-3`}>
+                      <LocationPinIcon size={20} color={LOCATION_ICONS.USER_SPOT.color} />
                     </View>
                     <View className="flex-1">
                       <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">

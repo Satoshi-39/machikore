@@ -1,5 +1,5 @@
 /**
- * スポットラベルレイヤー（アイコン + テキスト横並び、カテゴリ別色分け）
+ * ユーザマップ用スポットラベルレイヤー（アイコン + テキスト横並び、カテゴリ別色分け）
  */
 
 import React from 'react';
@@ -15,36 +15,35 @@ const locationTourismIcon = require('@assets/icons/location-tourism.png');
 const locationTransitIcon = require('@assets/icons/location-transit.png');
 const locationOtherIcon = require('@assets/icons/location-other.png');
 
-interface SpotLabelsProps {
+interface UserSpotLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string; category: SpotCategory }>;
   onPress: (event: any) => void;
 }
 
-export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
+export function UserSpotLabels({ geoJson, onPress }: UserSpotLabelsProps) {
   return (
     <>
       {/* カテゴリ別アイコン画像を登録 */}
       <Mapbox.Images images={{
-        'spot-icon-food': locationFoodIcon,
-        'spot-icon-shopping': locationShoppingIcon,
-        'spot-icon-tourism': locationTourismIcon,
-        'spot-icon-transit': locationTransitIcon,
-        'spot-icon-other': locationOtherIcon,
+        'user-spot-icon-food': locationFoodIcon,
+        'user-spot-icon-shopping': locationShoppingIcon,
+        'user-spot-icon-tourism': locationTourismIcon,
+        'user-spot-icon-transit': locationTransitIcon,
+        'user-spot-icon-other': locationOtherIcon,
       }} />
 
       <Mapbox.ShapeSource
-        id="master-spots-source"
+        id="user-spots-source"
         shape={geoJson}
         onPress={onPress}
       >
         {/* 飲食店系 - オレンジ */}
         <Mapbox.SymbolLayer
-          id="master-spots-food"
-          minZoomLevel={13}
+          id="user-spots-food"
           filter={['==', ['get', 'category'], 'food']}
           style={{
-            iconImage: 'spot-icon-food',
-            iconSize: 0.16,
+            iconImage: 'user-spot-icon-food',
+            iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.food,
@@ -60,12 +59,11 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
 
         {/* ショッピング系 - 紫 */}
         <Mapbox.SymbolLayer
-          id="master-spots-shopping"
-          minZoomLevel={13}
+          id="user-spots-shopping"
           filter={['==', ['get', 'category'], 'shopping']}
           style={{
-            iconImage: 'spot-icon-shopping',
-            iconSize: 0.16,
+            iconImage: 'user-spot-icon-shopping',
+            iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.shopping,
@@ -81,12 +79,11 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
 
         {/* 公園・観光地系 - 緑 */}
         <Mapbox.SymbolLayer
-          id="master-spots-tourism"
-          minZoomLevel={13}
+          id="user-spots-tourism"
           filter={['==', ['get', 'category'], 'tourism']}
           style={{
-            iconImage: 'spot-icon-tourism',
-            iconSize: 0.16,
+            iconImage: 'user-spot-icon-tourism',
+            iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.tourism,
@@ -102,12 +99,11 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
 
         {/* 交通系 - 青 */}
         <Mapbox.SymbolLayer
-          id="master-spots-transit"
-          minZoomLevel={13}
+          id="user-spots-transit"
           filter={['==', ['get', 'category'], 'transit']}
           style={{
-            iconImage: 'spot-icon-transit',
-            iconSize: 0.16,
+            iconImage: 'user-spot-icon-transit',
+            iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.transit,
@@ -123,12 +119,11 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
 
         {/* その他 - グレー（デフォルト） */}
         <Mapbox.SymbolLayer
-          id="master-spots-other"
-          minZoomLevel={13}
+          id="user-spots-other"
           filter={['==', ['get', 'category'], 'other']}
           style={{
-            iconImage: 'spot-icon-other',
-            iconSize: 0.16,
+            iconImage: 'user-spot-icon-other',
+            iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.other,

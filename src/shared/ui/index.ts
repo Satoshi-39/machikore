@@ -23,3 +23,4 @@ export { CommentInput, type CommentInputRef, CommentInputModal } from './comment
 export { SwipeableRow } from './swipeable-row';
 export { StyledTextInput, type StyledTextInputProps } from './styled-text-input';
 export { TagInput } from './tag-input';
+export { LocationPinIcon } from './icons';

@@ -9,9 +9,9 @@ import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicat
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors } from '@/shared/config';
+import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon } from '@/shared/ui';
 import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
@@ -332,9 +332,12 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-1">
-              {spotName}
-            </Text>
+            <View className="flex-row items-center mb-1">
+              <LocationPinIcon size={24} color={LOCATION_ICONS.USER_SPOT.color} />
+              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
+                {spotName}
+              </Text>
+            </View>
             {spotAddress && (
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{spotAddress}</Text>
             )}

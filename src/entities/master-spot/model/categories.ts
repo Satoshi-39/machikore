@@ -68,17 +68,3 @@ export function determineSpotCategory(googleTypes: string[] | string | null): Sp
 
   return 'other';
 }
-
-/**
- * カテゴリに対応する色を取得
- */
-export function getCategoryColor(category: SpotCategory): string {
-  const colorMap: Record<SpotCategory, string> = {
-    food: '#F97316',      // オレンジ - 飲食店系
-    shopping: '#9333EA',  // 紫 - ショッピング系
-    tourism: '#10B981',   // 緑 - 公園・観光地系
-    transit: '#3B82F6',   // 青 - 交通系
-    other: '#6B7280',     // グレー - その他
-  };
-  return colorMap[category];
-}

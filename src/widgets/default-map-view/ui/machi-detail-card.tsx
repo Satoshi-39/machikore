@@ -7,9 +7,11 @@ import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors } from '@/shared/config';
+import { colors, LOCATION_ICONS } from '@/shared/config';
+import { LocationPinIcon } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
+import { useMasterSpotsByMachi } from '@/entities/master-spot';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   useSearchBarSync,
@@ -17,6 +19,7 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import type { MachiRow } from '@/shared/types/database.types';
+import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 
 interface MachiDetailCardProps {
   machi: MachiRow;
@@ -27,6 +30,8 @@ interface MachiDetailCardProps {
   onBeforeClose?: () => void;
   /** 現在地ボタンの表示/非表示変更コールバック（高さベースの判定） */
   onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
+  /** スポット選択時のコールバック */
+  onSpotSelect?: (spot: MasterSpotDisplay) => void;
 }
 
 /**
@@ -72,7 +77,7 @@ function MachiDetailCardContent({
   return null;
 }
 
-export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange }: MachiDetailCardProps) {
+export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onSpotSelect }: MachiDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
@@ -81,6 +86,12 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
   // 訪問状態
   const { data: isVisited, isLoading: isCheckingVisit } = useCheckMachiVisited(currentUserId, machi.id);
   const toggleVisitMutation = useToggleVisit();
+
+  // 街に属するマスタースポットを取得（上位10件）
+  const { data: masterSpots = [], isLoading: isSpotsLoading } = useMasterSpotsByMachi(machi.id, 10);
+
+  // スポット選択時にカードを閉じてから遷移するためのペンディング状態
+  const pendingSpotRef = useRef<MasterSpotDisplay | null>(null);
 
   const handleToggleVisit = useCallback(() => {
     if (!currentUserId || toggleVisitMutation.isPending) return;
@@ -106,15 +117,30 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
     // index -1 = 閉じた状態 → デフォルト状態(1)にリセットして親に通知
     if (index === -1) {
       onSnapChange?.(1);
-      onClose();
+      // ペンディング中のスポットがあれば、閉じた後にスポットカードを開く
+      const pendingSpot = pendingSpotRef.current;
+      if (pendingSpot) {
+        pendingSpotRef.current = null;
+        onSpotSelect?.(pendingSpot);
+      } else {
+        onClose();
+      }
     } else {
       onSnapChange?.(index);
     }
-  }, [onSnapChange, onClose]);
+  }, [onSnapChange, onClose, onSpotSelect]);
 
   // 閉じるボタンのハンドラー
   const handleClose = useCallback(() => {
     // まず現在地ボタンを非表示にしてから、BottomSheetを閉じる
+    onBeforeClose?.();
+    bottomSheetRef.current?.close();
+  }, [onBeforeClose]);
+
+  // スポットをタップした時のハンドラー
+  const handleSpotPress = useCallback((spot: MasterSpotDisplay) => {
+    // ペンディング状態にして、カードを閉じる
+    pendingSpotRef.current = spot;
     onBeforeClose?.();
     bottomSheetRef.current?.close();
   }, [onBeforeClose]);
@@ -141,13 +167,16 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-1">
-              {machi.name}
-            </Text>
+            <View className="flex-row items-center mb-1">
+              <Ionicons name={LOCATION_ICONS.MACHI.name} size={24} color={LOCATION_ICONS.MACHI.color} />
+              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
+                {machi.name}
+              </Text>
+            </View>
             {/* 所在地 */}
             {(machi.prefecture_name || machi.city_name) && (
               <View className="flex-row items-center">
-                <Ionicons name="location-outline" size={14} color={colors.text.secondary} />
+                <Ionicons name="location" size={14} color={colors.text.secondary} />
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                   {[machi.prefecture_name, machi.city_name].filter(Boolean).join(' ')}
                 </Text>
@@ -216,6 +245,79 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                 </>
               )}
             </Pressable>
+          )}
+        </View>
+
+        {/* スポットランキング */}
+        <View className="mt-4">
+          <View className="flex-row items-center mb-3">
+            <LocationPinIcon size={18} color={LOCATION_ICONS.MASTER_SPOT.color} />
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+              人気スポット
+            </Text>
+            {masterSpots.length > 0 && (
+              <View className={`ml-2 px-2 py-0.5 ${LOCATION_ICONS.MASTER_SPOT.bgColor} rounded-full`}>
+                <Text className="text-xs font-semibold" style={{ color: LOCATION_ICONS.MASTER_SPOT.color }}>
+                  {masterSpots.length}
+                </Text>
+              </View>
+            )}
+          </View>
+
+          {isSpotsLoading ? (
+            <View className="py-4 items-center">
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            </View>
+          ) : masterSpots.length > 0 ? (
+            masterSpots.map((spot, index) => (
+              <Pressable
+                key={spot.id}
+                onPress={() => handleSpotPress(spot)}
+                className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+              >
+                {/* ランキング番号 */}
+                <View className={`w-8 h-8 items-center justify-center rounded-full mr-3 ${
+                  index === 0 ? 'bg-yellow-100' : index === 1 ? 'bg-gray-200' : index === 2 ? 'bg-orange-100' : 'bg-muted dark:bg-dark-muted'
+                }`}>
+                  <Text className={`text-sm font-bold ${
+                    index === 0 ? 'text-yellow-600' : index === 1 ? 'text-gray-500' : index === 2 ? 'text-orange-600' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                  }`}>
+                    {index + 1}
+                  </Text>
+                </View>
+                {/* スポット情報 */}
+                <View className="flex-1">
+                  <Text className="text-base text-foreground dark:text-dark-foreground font-medium" numberOfLines={1}>
+                    {spot.name}
+                  </Text>
+                  <View className="flex-row items-center mt-0.5">
+                    {spot.likes_count > 0 && (
+                      <View className="flex-row items-center mr-3">
+                        <Ionicons name="heart" size={12} color="#EF4444" />
+                        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                          {spot.likes_count}
+                        </Text>
+                      </View>
+                    )}
+                    {spot.google_rating && (
+                      <View className="flex-row items-center">
+                        <Ionicons name="star" size={12} color="#F59E0B" />
+                        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                          {spot.google_rating.toFixed(1)}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                </View>
+                <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+              </Pressable>
+            ))
+          ) : (
+            <View className="py-4">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+                この街にはまだスポットが登録されていません
+              </Text>
+            </View>
           )}
         </View>
       </BottomSheetScrollView>

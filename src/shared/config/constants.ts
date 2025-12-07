@@ -76,6 +76,97 @@ export const VISIT_ICONS = {
 } as const;
 
 // ===============================
+// マップズームレベル
+// ===============================
+
+export const MAP_ZOOM = {
+  /** 地球全体 */
+  EARTH: 3,
+  /** 国レベル */
+  COUNTRY: 5,
+  /** 都道府県レベル */
+  PREFECTURE: 8,
+  /** 市区レベル */
+  CITY: 11,
+  /** 街レベル（デフォルト） */
+  MACHI: 14,
+  /** スポット詳細レベル */
+  SPOT: 16,
+  /** 初期表示（現在地なし） */
+  INITIAL: 10,
+} as const;
+
+// ===============================
+// スポットカテゴリ色
+// ===============================
+
+export const SPOT_CATEGORY_COLORS = {
+  food: '#F97316',      // オレンジ - 飲食店系
+  shopping: '#9333EA',  // 紫 - ショッピング系
+  tourism: '#10B981',   // 緑 - 公園・観光地系
+  transit: '#3B82F6',   // 青 - 交通系
+  other: '#A78BFA',     // 薄い紫 - その他
+} as const;
+
+// ===============================
+// 地名アイコン設定
+// ===============================
+
+export const LOCATION_ICONS = {
+  /** 街 */
+  MACHI: {
+    name: 'storefront' as const,
+    color: '#16a34a', // green-600 (secondary.DEFAULT)
+    bgColor: 'bg-green-100',
+  },
+  /** 市区 */
+  CITY: {
+    name: 'business' as const,
+    color: '#ea580c', // orange-600
+    bgColor: 'bg-orange-100',
+  },
+  /** 都道府県 */
+  PREFECTURE: {
+    name: 'shield' as const,
+    color: '#9333ea', // purple-600
+    bgColor: 'bg-purple-100',
+  },
+  /** マスタースポット */
+  MASTER_SPOT: {
+    name: 'location-outline' as const,
+    color: '#3B82F6', // blue-500 (primary.DEFAULT)
+    bgColor: 'bg-blue-100',
+  },
+  /** ユーザースポット */
+  USER_SPOT: {
+    name: 'location-outline' as const,
+    color: '#ec4899', // pink-500
+    bgColor: 'bg-pink-100',
+  },
+  /** 国 */
+  COUNTRY: {
+    emoji: '🇯🇵',
+    bgColor: 'bg-white',
+  },
+  /** 地球 */
+  EARTH: {
+    name: 'globe' as const,
+    color: '#0284c7', // sky-600
+    bgColor: 'bg-sky-100',
+  },
+} as const;
+
+/** locationTypeからLOCATION_ICONSのキーへのマッピング */
+export const LOCATION_TYPE_MAP = {
+  machi: 'MACHI',
+  city: 'CITY',
+  prefecture: 'PREFECTURE',
+  country: 'COUNTRY',
+  earth: 'EARTH',
+  unknown: 'MASTER_SPOT',
+} as const;
+
+// ===============================
 // マップマーカー設定
 // ===============================
 

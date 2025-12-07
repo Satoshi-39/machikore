@@ -22,6 +22,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { LocationPinIcon } from '@/shared/ui';
+import { LOCATION_ICONS } from '@/shared/config';
 import { useToggleSpotLike } from '@/entities/like';
 import {
   useSpotBookmarkInfo,
@@ -133,12 +135,15 @@ function SpotCard({
       >
         <View className="flex-1 p-4">
           {/* タイトル */}
-          <Text
-            className="text-xl font-bold text-foreground dark:text-dark-foreground"
-            numberOfLines={2}
-          >
-            {spotName}
-          </Text>
+          <View className="flex-row items-center">
+            <LocationPinIcon size={20} color={LOCATION_ICONS.USER_SPOT.color} />
+            <Text
+              className="text-xl font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
+              numberOfLines={2}
+            >
+              {spotName}
+            </Text>
+          </View>
 
           {/* 住所 */}
           {spot.master_spot?.google_formatted_address && (
