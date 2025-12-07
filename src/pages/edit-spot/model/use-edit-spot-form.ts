@@ -12,6 +12,9 @@ import { useUserStore } from '@/entities/user';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
 import type { SelectedImage } from '@/features/pick-images';
 
+// スポット数の上限
+const MAX_SPOTS_PER_MAP = 100;
+
 interface UploadProgress {
   current: number;
   total: number;
@@ -60,6 +63,18 @@ export function useEditSpotForm() {
     if (!id) {
       Alert.alert('エラー', 'スポットIDが見つかりません');
       return;
+    }
+
+    // マップを変更する場合、移動先のスポット数をチェック
+    if (data.mapId && spot && data.mapId !== spot.map_id) {
+      const targetMap = userMaps.find((m) => m.id === data.mapId);
+      if (targetMap && targetMap.spots_count >= MAX_SPOTS_PER_MAP) {
+        Alert.alert(
+          'スポット数の上限',
+          `移動先のマップには既に${MAX_SPOTS_PER_MAP}個のスポットが登録されています。\n別のマップを選択するか、既存のスポットを削除してください。`
+        );
+        return;
+      }
     }
 
     setIsProcessing(true);

@@ -382,11 +382,9 @@ export function SpotCarousel({
         onMomentumScrollEnd={handleScrollEnd}
         renderItem={renderItem}
         onScrollToIndexFailed={handleScrollToIndexFailed}
-        // パフォーマンス最適化
-        removeClippedSubviews={true}
-        maxToRenderPerBatch={5}
-        windowSize={5}
-        initialNumToRender={3}
+        // 全アイテムをレンダリング（100枚以下を想定）
+        initialNumToRender={spots.length}
+        maxToRenderPerBatch={spots.length}
       />
     </View>
   );

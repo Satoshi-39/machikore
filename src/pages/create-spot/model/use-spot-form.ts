@@ -19,6 +19,9 @@ import { uploadImage, STORAGE_BUCKETS, insertSpotImage, getNearbyMachi } from '@
 import { queryClient } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 
+// スポット数の上限
+const MAX_SPOTS_PER_MAP = 100;
+
 export interface UploadProgress {
   current: number;
   total: number;
@@ -136,6 +139,16 @@ export function useSpotForm() {
 
     if (!data.mapId) {
       Alert.alert('エラー', 'マップが選択されていません');
+      return;
+    }
+
+    // スポット数の上限チェック
+    const selectedMap = userMaps.find((m) => m.id === data.mapId);
+    if (selectedMap && selectedMap.spots_count >= MAX_SPOTS_PER_MAP) {
+      Alert.alert(
+        'スポット数の上限',
+        `1つのマップには最大${MAX_SPOTS_PER_MAP}個までスポットを登録できます。\n別のマップを選択するか、既存のスポットを削除してください。`
+      );
       return;
     }
 
