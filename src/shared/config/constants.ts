@@ -21,7 +21,11 @@ export const MAX_PAGE_SIZE = 100;
 // ===============================
 
 export const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
-export const SUPPORTED_IMAGE_FORMATS = ['image/jpeg', 'image/png', 'image/webp'];
+export const SUPPORTED_IMAGE_FORMATS = [
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+];
 
 // ===============================
 // 投稿
@@ -90,8 +94,8 @@ export const MAP_MARKER = {
   // マーカー色
   COLOR: {
     DEFAULT: '#000000',
-    VISITED_HIGHLIGHT: '#3B82F6',    // blue-500
-    UNVISITED_HIGHLIGHT: '#6B7280',  // gray-500
+    VISITED_HIGHLIGHT: '#3B82F6', // blue-500
+    UNVISITED_HIGHLIGHT: '#6B7280', // gray-500
   },
 } as const;
 
@@ -129,13 +133,13 @@ export const INPUT_LIMITS = {
   USER_BIO: 200,
 
   // マップ
-  MAP_NAME: 100,
-  MAP_DESCRIPTION: 1000,
+  MAP_NAME: 50,
+  MAP_DESCRIPTION: 200,
   MAX_SPOTS_PER_MAP: 100,
 
   // スポット
-  SPOT_NAME: 100,
-  SPOT_DESCRIPTION: 2000,
+  SPOT_NAME: 50,
+  SPOT_DESCRIPTION: 200,
   SPOT_ADDRESS: 200,
   MAX_IMAGES_PER_SPOT: 4,
 
@@ -148,7 +152,7 @@ export const INPUT_LIMITS = {
 
   // コレクション
   COLLECTION_NAME: 100,
-  COLLECTION_DESCRIPTION: 500,
+  COLLECTION_DESCRIPTION: 200,
 
   // スケジュール
   SCHEDULE_TITLE: 100,

@@ -8,9 +8,11 @@
 import React from 'react';
 import { useRouter } from 'expo-router';
 import { SelectMapPage } from '@/pages/select-map';
+import { useMapStore } from '@/entities/map';
 
 export default function SelectMapScreen() {
   const router = useRouter();
+  const sourceTab = useMapStore((state) => state.sourceTab);
 
   const handleClose = () => {
     // BottomSheetがアニメーション完了後にこのコールバックを呼ぶ
@@ -18,9 +20,10 @@ export default function SelectMapScreen() {
   };
 
   const handleSelectMap = (mapId: string) => {
-    console.log('マップ選択完了:', mapId);
-    // スポット追加モードでユーザーマップページに遷移（一意なタイムスタンプを使用）
-    router.push(`/(tabs)/map/maps/${mapId}?addSpot=${Date.now()}`);
+    console.log('マップ選択完了:', mapId, 'sourceTab:', sourceTab);
+    // 元のタブ内のマップ画面に遷移（デフォルトはmapタブ）
+    const tab = sourceTab ?? 'map';
+    router.push(`/(tabs)/${tab}/maps/${mapId}?addSpot=${Date.now()}`);
   };
 
   const handleCreateNewMap = () => {

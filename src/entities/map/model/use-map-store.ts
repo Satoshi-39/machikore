@@ -6,6 +6,8 @@
 
 import { create } from 'zustand';
 
+export type SourceTab = 'map' | 'discover' | 'mypage' | 'notifications';
+
 interface MapStore {
   /**
    * 選択中のマップID
@@ -15,9 +17,20 @@ interface MapStore {
   selectedMapId: string | null;
 
   /**
+   * スポット作成モーダルを開いた時の元タブ
+   * スポット作成後に元のタブに戻るために使用
+   */
+  sourceTab: SourceTab | null;
+
+  /**
    * マップを選択
    */
   setSelectedMapId: (id: string | null) => void;
+
+  /**
+   * 元タブを設定
+   */
+  setSourceTab: (tab: SourceTab | null) => void;
 
   /**
    * デフォルトマップに戻る
@@ -27,6 +40,8 @@ interface MapStore {
 
 export const useMapStore = create<MapStore>((set) => ({
   selectedMapId: null,
+  sourceTab: null,
   setSelectedMapId: (id) => set({ selectedMapId: id }),
+  setSourceTab: (tab) => set({ sourceTab: tab }),
   resetToDefault: () => set({ selectedMapId: null }),
 }));

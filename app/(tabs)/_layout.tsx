@@ -1,6 +1,8 @@
 import { useUserStore } from '@/entities/user';
 import { useTotalUnreadCount } from '@/entities/notification';
+import { useMapStore } from '@/entities/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useCurrentTab } from '@/shared/lib';
 import { colors } from '@/shared/config';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
@@ -9,10 +11,12 @@ import { View, Text } from 'react-native';
 
 export default function TabLayout() {
   const router = useRouter();
+  const currentTab = useCurrentTab();
   const user = useUserStore((state) => state.user);
   const isAnonymous = !user?.email;
   const unreadCount = useTotalUnreadCount(user?.id);
   const isDarkMode = useIsDarkMode();
+  const setSourceTab = useMapStore((state) => state.setSourceTab);
 
   return (
     <Tabs
@@ -76,6 +80,8 @@ export default function TabLayout() {
               // 未ログインの場合は認証モーダルを開く
               router.push('/auth/auth-required');
             } else {
+              // スポット作成後に戻るタブを記録
+              setSourceTab(currentTab);
               // ログイン済みの場合は作成モーダルを開く
               router.push('/create-menu');
             }
