@@ -139,7 +139,7 @@ export function OtherMapSearch({
                   >
                     <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
                       <Ionicons
-                        name="location"
+                        name="location-outline"
                         size={20}
                         color={colors.primary.DEFAULT}
                       />

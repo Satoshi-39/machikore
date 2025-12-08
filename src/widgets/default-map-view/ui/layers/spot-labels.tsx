@@ -1,5 +1,5 @@
 /**
- * スポットラベルレイヤー（アイコン + テキスト横並び、カテゴリ別色分け）
+ * スポットラベルレイヤー（テキストのみ、カテゴリ別色分け）
  */
 
 import React from 'react';
@@ -8,13 +8,6 @@ import type { FeatureCollection, Point } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
 import { SPOT_CATEGORY_COLORS } from '@/shared/config';
 
-// カテゴリ別アイコン画像
-const locationFoodIcon = require('@assets/icons/location-food.png');
-const locationShoppingIcon = require('@assets/icons/location-shopping.png');
-const locationTourismIcon = require('@assets/icons/location-tourism.png');
-const locationTransitIcon = require('@assets/icons/location-transit.png');
-const locationOtherIcon = require('@assets/icons/location-other.png');
-
 interface SpotLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string; category: SpotCategory }>;
   onPress: (event: any) => void;
@@ -22,126 +15,85 @@ interface SpotLabelsProps {
 
 export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
   return (
-    <>
-      {/* カテゴリ別アイコン画像を登録 */}
-      <Mapbox.Images images={{
-        'spot-icon-food': locationFoodIcon,
-        'spot-icon-shopping': locationShoppingIcon,
-        'spot-icon-tourism': locationTourismIcon,
-        'spot-icon-transit': locationTransitIcon,
-        'spot-icon-other': locationOtherIcon,
-      }} />
+    <Mapbox.ShapeSource
+      id="master-spots-source"
+      shape={geoJson}
+      onPress={onPress}
+    >
+      {/* 飲食店系 - テキストオレンジ */}
+      <Mapbox.SymbolLayer
+        id="master-spots-food"
+        minZoomLevel={13}
+        filter={['==', ['get', 'category'], 'food']}
+        style={{
+          textField: ['get', 'name'],
+          textSize: 13,
+          textColor: SPOT_CATEGORY_COLORS.food,
+          textHaloColor: '#FFFFFF',
+          textHaloWidth: 2,
+          textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+        }}
+      />
 
-      <Mapbox.ShapeSource
-        id="master-spots-source"
-        shape={geoJson}
-        onPress={onPress}
-      >
-        {/* 飲食店系 - オレンジ */}
-        <Mapbox.SymbolLayer
-          id="master-spots-food"
-          minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'food']}
-          style={{
-            iconImage: 'spot-icon-food',
-            iconSize: 0.16,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.food,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
+      {/* ショッピング系 - テキスト紫 */}
+      <Mapbox.SymbolLayer
+        id="master-spots-shopping"
+        minZoomLevel={13}
+        filter={['==', ['get', 'category'], 'shopping']}
+        style={{
+          textField: ['get', 'name'],
+          textSize: 13,
+          textColor: SPOT_CATEGORY_COLORS.shopping,
+          textHaloColor: '#FFFFFF',
+          textHaloWidth: 2,
+          textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+        }}
+      />
 
-        {/* ショッピング系 - 紫 */}
-        <Mapbox.SymbolLayer
-          id="master-spots-shopping"
-          minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'shopping']}
-          style={{
-            iconImage: 'spot-icon-shopping',
-            iconSize: 0.16,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.shopping,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
+      {/* 公園・観光地系 - テキスト緑 */}
+      <Mapbox.SymbolLayer
+        id="master-spots-tourism"
+        minZoomLevel={13}
+        filter={['==', ['get', 'category'], 'tourism']}
+        style={{
+          textField: ['get', 'name'],
+          textSize: 13,
+          textColor: SPOT_CATEGORY_COLORS.tourism,
+          textHaloColor: '#FFFFFF',
+          textHaloWidth: 2,
+          textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+        }}
+      />
 
-        {/* 公園・観光地系 - 緑 */}
-        <Mapbox.SymbolLayer
-          id="master-spots-tourism"
-          minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'tourism']}
-          style={{
-            iconImage: 'spot-icon-tourism',
-            iconSize: 0.16,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.tourism,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
+      {/* 交通系 - テキスト青 */}
+      <Mapbox.SymbolLayer
+        id="master-spots-transit"
+        minZoomLevel={13}
+        filter={['==', ['get', 'category'], 'transit']}
+        style={{
+          textField: ['get', 'name'],
+          textSize: 13,
+          textColor: SPOT_CATEGORY_COLORS.transit,
+          textHaloColor: '#FFFFFF',
+          textHaloWidth: 2,
+          textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+        }}
+      />
 
-        {/* 交通系 - 青 */}
-        <Mapbox.SymbolLayer
-          id="master-spots-transit"
-          minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'transit']}
-          style={{
-            iconImage: 'spot-icon-transit',
-            iconSize: 0.16,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.transit,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
-
-        {/* その他 - グレー（デフォルト） */}
-        <Mapbox.SymbolLayer
-          id="master-spots-other"
-          minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'other']}
-          style={{
-            iconImage: 'spot-icon-other',
-            iconSize: 0.16,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.other,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
-      </Mapbox.ShapeSource>
-    </>
+      {/* その他 - テキスト薄紫 */}
+      <Mapbox.SymbolLayer
+        id="master-spots-other"
+        minZoomLevel={13}
+        filter={['==', ['get', 'category'], 'other']}
+        style={{
+          textField: ['get', 'name'],
+          textSize: 13,
+          textColor: SPOT_CATEGORY_COLORS.other,
+          textHaloColor: '#FFFFFF',
+          textHaloWidth: 2,
+          textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+        }}
+      />
+    </Mapbox.ShapeSource>
   );
 }

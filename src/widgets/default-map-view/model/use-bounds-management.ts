@@ -7,6 +7,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { calculateBoundsFromCamera } from '@/shared/lib/map';
+import { MAP_ZOOM } from '@/shared/config';
 
 interface Bounds {
   minLat: number;
@@ -33,7 +34,7 @@ export function useBoundsManagement({ currentLocation }: UseBoundsManagementPara
     center: currentLocation
       ? { latitude: currentLocation.latitude, longitude: currentLocation.longitude }
       : { latitude: TOKYO_CENTER.lat, longitude: TOKYO_CENTER.lng },
-    zoom: currentLocation ? 14 : 10,
+    zoom: currentLocation ? MAP_ZOOM.MACHI : MAP_ZOOM.INITIAL,
   });
   const boundsUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -42,7 +43,7 @@ export function useBoundsManagement({ currentLocation }: UseBoundsManagementPara
     const center = currentLocation
       ? { lat: currentLocation.latitude, lng: currentLocation.longitude }
       : TOKYO_CENTER;
-    const zoom = currentLocation ? 14 : 10;
+    const zoom = currentLocation ? MAP_ZOOM.MACHI : MAP_ZOOM.INITIAL;
 
     const initialBounds = calculateBoundsFromCamera(center, zoom);
     setBounds(initialBounds);

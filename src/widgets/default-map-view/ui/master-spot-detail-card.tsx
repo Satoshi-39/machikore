@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
-import { colors, LOCATION_ICONS } from '@/shared/config';
+import { colors, LOCATION_ICONS, USER_MAP_THEME_COLORS, type UserMapThemeColor } from '@/shared/config';
 import {
   showLoginRequiredAlert,
   useCurrentTab,
@@ -18,7 +18,7 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ImageViewerModal, useImageViewer, LocationPinIcon } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
@@ -237,7 +237,10 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               </Text>
             </View>
             {spot.google_formatted_address && (
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{spot.google_formatted_address}</Text>
+              <View className="flex-row items-center">
+                <AddressPinIcon size={14} color="#6B7280" />
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spot.google_formatted_address}</Text>
+              </View>
             )}
           </View>
           <Pressable
@@ -374,7 +377,10 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                   {/* カスタム名 */}
                   {userSpot.custom_name && (
                     <View className="flex-row items-center mb-1">
-                      <LocationPinIcon size={14} color={LOCATION_ICONS.USER_SPOT.color} />
+                      <LocationPinIcon
+                        size={14}
+                        color={USER_MAP_THEME_COLORS[userSpot.map!.theme_color as UserMapThemeColor].color}
+                      />
                       <Text className="text-sm font-medium text-foreground dark:text-dark-foreground ml-1">
                         {userSpot.custom_name}
                       </Text>

@@ -23,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { LocationPinIcon } from '@/shared/ui';
-import { LOCATION_ICONS } from '@/shared/config';
+import { LOCATION_ICONS, USER_MAP_THEME_COLORS, type UserMapThemeColor } from '@/shared/config';
 import { useToggleSpotLike } from '@/entities/like';
 import {
   useSpotBookmarkInfo,
@@ -52,6 +52,7 @@ interface SpotCardProps {
   isLast: boolean;
   currentUserId?: UUID | null;
   onPress: () => void;
+  themeColor: UserMapThemeColor;
 }
 
 function SpotCard({
@@ -61,10 +62,12 @@ function SpotCard({
   isLast,
   currentUserId,
   onPress,
+  themeColor,
 }: SpotCardProps) {
   const isDarkMode = useIsDarkMode();
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
   const description = spot.description;
+  const themeColorValue = USER_MAP_THEME_COLORS[themeColor]?.color ?? LOCATION_ICONS.USER_SPOT.color;
 
   // いいね
   const isLiked = spot.is_liked ?? false;
@@ -136,7 +139,7 @@ function SpotCard({
         <View className="flex-1 p-4">
           {/* タイトル */}
           <View className="flex-row items-center">
-            <LocationPinIcon size={20} color={LOCATION_ICONS.USER_SPOT.color} />
+            <LocationPinIcon size={20} color={themeColorValue} />
             <Text
               className="text-xl font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
               numberOfLines={2}
@@ -259,6 +262,7 @@ interface SpotCarouselProps {
   onSpotSelect: (spot: SpotWithDetails) => void;
   onSpotPress: (spot: SpotWithDetails) => void;
   onClose: () => void;
+  themeColor: UserMapThemeColor;
 }
 
 export function SpotCarousel({
@@ -268,6 +272,7 @@ export function SpotCarousel({
   onSpotSelect,
   onSpotPress,
   onClose,
+  themeColor,
 }: SpotCarouselProps) {
   const isDarkMode = useIsDarkMode();
   const insets = useSafeAreaInsets();
@@ -324,9 +329,10 @@ export function SpotCarousel({
         isLast={index === spots.length - 1}
         currentUserId={currentUserId}
         onPress={() => handleCardPress(item)}
+        themeColor={themeColor}
       />
     ),
-    [selectedSpotId, currentUserId, handleCardPress, spots.length]
+    [selectedSpotId, currentUserId, handleCardPress, spots.length, themeColor]
   );
 
   // キー抽出

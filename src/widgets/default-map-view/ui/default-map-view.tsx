@@ -16,7 +16,7 @@ import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCities, useCitiesGeoJson } from '@/entities/city';
 import { AsyncBoundary, LocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
-import { ENV } from '@/shared/config';
+import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
 import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels } from './layers';
@@ -279,7 +279,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           >
             <Mapbox.Camera
               ref={cameraRef}
-              zoomLevel={currentLocation ? 14 : 10} // 現在地があれば詳細レベル
+              zoomLevel={currentLocation ? MAP_ZOOM.MACHI : MAP_ZOOM.INITIAL}
               centerCoordinate={initialCenter as [number, number]}
               animationDuration={0}
             />
@@ -380,6 +380,12 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               onSearchBarVisibilityChange={setIsSearchBarHidden}
               onBeforeClose={controlsVisibility.handleBeforeClose}
               onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+              onSpotSelect={(spot) => {
+                // 街カードが閉じた後にスポットカードを開く
+                handleSpotSelect(spot);
+                // カメラをスポットの位置に移動
+                flyToLocation(spot.longitude, spot.latitude, MAP_ZOOM.SPOT);
+              }}
             />
           )}
 
@@ -396,6 +402,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
                 // 市区カードが閉じた後に街カードを開く
                 // handleMachiSelect内部でselectedCityもクリアされる
                 handleMachiSelect(machi);
+                // カメラを街の位置に移動
+                flyToLocation(machi.longitude, machi.latitude, MAP_ZOOM.MACHI);
               }}
             />
           )}

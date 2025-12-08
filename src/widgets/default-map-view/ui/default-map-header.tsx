@@ -9,7 +9,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, LOCATION_ICONS, LOCATION_TYPE_MAP } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -36,25 +36,9 @@ export function DefaultMapHeader({
 }: DefaultMapHeaderProps) {
   const isDarkMode = useIsDarkMode();
 
-  // 地名の種類に応じたアイコン設定（検索結果と同じ）
-  const getLocationConfig = () => {
-    switch (locationType) {
-      case 'machi':
-        return { iconName: 'map' as const, iconColor: colors.secondary.DEFAULT, bgColor: 'bg-green-100', emoji: null };
-      case 'city':
-        return { iconName: 'business' as const, iconColor: '#ea580c', bgColor: 'bg-orange-100', emoji: null };
-      case 'prefecture':
-        return { iconName: 'earth' as const, iconColor: '#9333ea', bgColor: 'bg-purple-100', emoji: null };
-      case 'country':
-        return { iconName: null, iconColor: null, bgColor: 'bg-white', emoji: '🇯🇵' };
-      case 'earth':
-        return { iconName: 'globe' as const, iconColor: '#0284c7', bgColor: 'bg-sky-100', emoji: null };
-      default:
-        return { iconName: 'location' as const, iconColor: colors.primary.DEFAULT, bgColor: 'bg-blue-100', emoji: null };
-    }
-  };
-
-  const locationConfig = getLocationConfig();
+  // 地名の種類に応じたアイコン設定を取得
+  const iconKey = LOCATION_TYPE_MAP[locationType] || 'MASTER_SPOT';
+  const locationConfig = LOCATION_ICONS[iconKey];
 
   return (
     <View
@@ -93,13 +77,13 @@ export function DefaultMapHeader({
           <View
             className={`absolute left-1 w-8 h-8 rounded-full items-center justify-center ${locationConfig.bgColor}`}
           >
-            {locationConfig.emoji ? (
+            {'emoji' in locationConfig ? (
               <Text className="text-base">{locationConfig.emoji}</Text>
             ) : (
               <Ionicons
-                name={locationConfig.iconName!}
+                name={locationConfig.name}
                 size={16}
-                color={locationConfig.iconColor!}
+                color={locationConfig.color}
               />
             )}
           </View>

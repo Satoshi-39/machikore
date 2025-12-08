@@ -11,6 +11,7 @@ import { useCreateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import type { ThumbnailImage } from '@/features/pick-images';
+import type { UserMapThemeColor } from '@/shared/config';
 
 export function useMapForm() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export function useMapForm() {
     tags: string[];
     isPublic: boolean;
     thumbnailImage?: ThumbnailImage;
+    themeColor: UserMapThemeColor;
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
@@ -72,6 +74,7 @@ export function useMapForm() {
         tags: data.tags,
         isPublic: data.isPublic,
         thumbnailUrl,
+        themeColor: data.themeColor,
       },
       {
         onSuccess: () => {

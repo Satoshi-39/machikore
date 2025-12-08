@@ -101,12 +101,81 @@ export const MAP_ZOOM = {
 // ===============================
 
 export const SPOT_CATEGORY_COLORS = {
-  food: '#F97316',      // オレンジ - 飲食店系
-  shopping: '#9333EA',  // 紫 - ショッピング系
-  tourism: '#10B981',   // 緑 - 公園・観光地系
-  transit: '#3B82F6',   // 青 - 交通系
-  other: '#A78BFA',     // 薄い紫 - その他
+  food: '#F97316', // オレンジ - 飲食店系
+  shopping: '#9333EA', // 紫 - ショッピング系
+  tourism: '#10B981', // 緑 - 公園・観光地系
+  transit: '#3B82F6', // 青 - 交通系
+  other: '#A78BFA', // 薄い紫 - その他
 } as const;
+
+// ===============================
+// ユーザマップテーマカラー（プリセット）
+// ===============================
+
+export const USER_MAP_THEME_COLORS = {
+  pink: {
+    color: '#ec4899',
+    label: 'ピンク',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+  },
+  red: {
+    color: '#EF4444',
+    label: '赤',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+  },
+  orange: {
+    color: '#F97316',
+    label: 'オレンジ',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+  },
+  yellow: {
+    color: '#EAB308',
+    label: '黄色',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+  },
+  green: {
+    color: '#22C55E',
+    label: '緑',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+  },
+  blue: {
+    color: '#3B82F6',
+    label: '青',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+  },
+  purple: {
+    color: '#9333EA',
+    label: '紫',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+  },
+  gray: {
+    color: '#6B7280',
+    label: 'グレー',
+    haloLight: '#FFFFFF',
+    haloDark: '#FFFFFF',
+    useOutlinedIconInDark: true,
+  },
+  white: {
+    color: '#FFFFFF',
+    label: '白',
+    haloLight: '#374151',
+    haloDark: '#374151',
+    useOutlinedIconInLight: true,
+  },
+} as const;
+
+export type UserMapThemeColor = keyof typeof USER_MAP_THEME_COLORS;
+
+export const USER_MAP_THEME_COLOR_LIST = Object.entries(
+  USER_MAP_THEME_COLORS
+).map(([key, value]) => ({ key: key as UserMapThemeColor, ...value }));
 
 // ===============================
 // 地名アイコン設定

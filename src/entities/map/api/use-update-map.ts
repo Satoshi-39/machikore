@@ -4,6 +4,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateMap, type UpdateMapParams } from '@/shared/api/supabase/maps';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 
 /**
  * マップを更新
@@ -17,9 +18,9 @@ export function useUpdateMap() {
     },
     onSuccess: (data) => {
       // マップ関連のキャッシュを無効化
-      queryClient.invalidateQueries({ queryKey: ['maps'] });
-      queryClient.invalidateQueries({ queryKey: ['map', data.id] });
-      queryClient.invalidateQueries({ queryKey: ['userMaps', data.user_id] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(data.id) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsList(data.user_id) });
       queryClient.invalidateQueries({ queryKey: ['feed-maps'] });
       // 記事キャッシュも無効化
       queryClient.invalidateQueries({ queryKey: ['map-article', data.id] });

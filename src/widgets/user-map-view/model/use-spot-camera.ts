@@ -7,6 +7,7 @@
 import { useCallback } from 'react';
 import type Mapbox from '@rnmapbox/maps';
 import type { SpotWithDetails } from '@/shared/types';
+import { MAP_ZOOM } from '@/shared/config';
 
 interface UseSpotCameraParams {
   cameraRef: React.RefObject<Mapbox.Camera | null>;
@@ -20,7 +21,7 @@ export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
 
       cameraRef.current.setCamera({
         centerCoordinate: [spot.master_spot.longitude, spot.master_spot.latitude],
-        zoomLevel: 14,
+        zoomLevel: MAP_ZOOM.MACHI,
         animationDuration: 1000,
       });
     },

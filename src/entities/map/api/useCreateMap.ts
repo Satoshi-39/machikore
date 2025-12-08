@@ -18,6 +18,7 @@ interface CreateMapParams {
   tags?: string[];
   isPublic: boolean;
   thumbnailUrl?: string;
+  themeColor?: string;
 }
 
 /**
@@ -39,6 +40,7 @@ export function useCreateMap() {
         tags: params.tags && params.tags.length > 0 ? params.tags : null,
         is_public: params.isPublic,
         thumbnail_url: params.thumbnailUrl || null,
+        theme_color: params.themeColor || 'pink',
       });
     },
     onSuccess: (_data, variables) => {

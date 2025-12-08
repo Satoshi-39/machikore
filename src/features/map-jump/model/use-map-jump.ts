@@ -13,6 +13,7 @@ import {
   getPrefectureById,
   getMasterSpotById,
 } from '@/shared/api/supabase';
+import { MAP_ZOOM } from '@/shared/config';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 
@@ -67,7 +68,7 @@ export function useMapJump({
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [spot.longitude, spot.latitude],
-                  zoomLevel: 15,
+                  zoomLevel: MAP_ZOOM.SPOT,
                   animationDuration: 500,
                 });
               }
@@ -89,7 +90,7 @@ export function useMapJump({
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [machi.longitude, machi.latitude],
-                  zoomLevel: 14,
+                  zoomLevel: MAP_ZOOM.MACHI,
                   animationDuration: 500,
                 });
               }
@@ -111,7 +112,7 @@ export function useMapJump({
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [city.longitude!, city.latitude!],
-                  zoomLevel: 11,
+                  zoomLevel: MAP_ZOOM.CITY,
                   animationDuration: 500,
                 });
               }
@@ -138,7 +139,7 @@ export function useMapJump({
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [pref.longitude!, pref.latitude!],
-                  zoomLevel: 8,
+                  zoomLevel: MAP_ZOOM.PREFECTURE,
                   animationDuration: 500,
                 });
               }

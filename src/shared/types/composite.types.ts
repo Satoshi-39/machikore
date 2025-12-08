@@ -39,6 +39,7 @@ export interface MapWithUser {
   is_default: boolean;
   is_official: boolean;
   thumbnail_url: string | null;
+  theme_color?: string | null;
   spots_count: number;
   likes_count: number;
   comments_count: number;

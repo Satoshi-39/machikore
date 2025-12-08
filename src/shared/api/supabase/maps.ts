@@ -21,6 +21,7 @@ interface SupabaseMapResponse {
   is_default: boolean;
   is_official: boolean;
   thumbnail_url: string | null;
+  theme_color: string | null;
   spots_count: number;
   likes_count: number;
   comments_count: number | null;
@@ -78,6 +79,7 @@ export async function getPublicMaps(
     is_default: map.is_default,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
+    theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
     comments_count: map.comments_count ?? 0,
@@ -127,6 +129,7 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
     is_default: data.is_default,
     is_official: data.is_official,
     thumbnail_url: data.thumbnail_url,
+    theme_color: data.theme_color,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
     comments_count: data.comments_count ?? 0,
@@ -230,6 +233,7 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
     is_default: map.is_default,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
+    theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
     comments_count: map.comments_count ?? 0,
@@ -273,6 +277,7 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
     is_default: map.is_default,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
+    theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
     comments_count: map.comments_count ?? 0,
@@ -298,6 +303,7 @@ export interface CreateMapParams {
   is_default?: boolean;
   is_official?: boolean;
   thumbnail_url?: string | null;
+  theme_color?: string;
 }
 
 /**
@@ -319,6 +325,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
       is_default: params.is_default || false,
       is_official: params.is_official || false,
       thumbnail_url: params.thumbnail_url || null,
+      theme_color: params.theme_color || 'pink',
       spots_count: 0,
       likes_count: 0,
     })
@@ -350,6 +357,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     is_default: data.is_default,
     is_official: data.is_official,
     thumbnail_url: data.thumbnail_url,
+    theme_color: data.theme_color,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
     comments_count: data.comments_count ?? 0,
@@ -373,6 +381,7 @@ export interface UpdateMapParams {
   is_public?: boolean;
   is_article_public?: boolean;
   thumbnail_url?: string | null;
+  theme_color?: string;
 }
 
 /**
@@ -414,6 +423,7 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
     is_default: data.is_default,
     is_official: data.is_official,
     thumbnail_url: data.thumbnail_url,
+    theme_color: data.theme_color,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
     comments_count: data.comments_count ?? 0,
@@ -581,6 +591,7 @@ export async function searchPublicMaps(
     is_default: map.is_default,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
+    theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
     comments_count: map.comments_count ?? 0,
@@ -649,6 +660,7 @@ export async function getFollowingUsersMaps(
     is_default: map.is_default,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
+    theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
     comments_count: map.comments_count ?? 0,

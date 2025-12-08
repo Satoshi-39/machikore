@@ -9,6 +9,7 @@ import { useMap, useUpdateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import type { ThumbnailImage } from '@/features/pick-images';
+import type { UserMapThemeColor } from '@/shared/config';
 
 export function useEditMapForm() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export function useEditMapForm() {
     isPublic: boolean;
     thumbnailImage?: ThumbnailImage;
     removeThumbnail?: boolean;
+    themeColor: UserMapThemeColor;
   }) => {
     if (!id) {
       Alert.alert('エラー', 'マップIDが見つかりません');
@@ -79,6 +81,7 @@ export function useEditMapForm() {
         category: data.category || null,
         tags: data.tags.length > 0 ? data.tags : null,
         is_public: data.isPublic,
+        theme_color: data.themeColor,
         ...(thumbnailUrl !== undefined && { thumbnail_url: thumbnailUrl }),
       },
       {

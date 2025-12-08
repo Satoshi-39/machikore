@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS } from '@/shared/config';
-import { LocationPinIcon } from '@/shared/ui';
+import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
 import { useMasterSpotsByMachi } from '@/entities/master-spot';
@@ -176,7 +176,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             {/* 所在地 */}
             {(machi.prefecture_name || machi.city_name) && (
               <View className="flex-row items-center">
-                <Ionicons name="location" size={14} color={colors.text.secondary} />
+                <AddressPinIcon size={14} color="#6B7280" />
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                   {[machi.prefecture_name, machi.city_name].filter(Boolean).join(' ')}
                 </Text>

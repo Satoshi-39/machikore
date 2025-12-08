@@ -4,17 +4,18 @@
  * FSDの原則：Widget層は複合的なUIコンポーネント
  */
 
+import { useMap } from '@/entities/map';
 import { useSpots } from '@/entities/user-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ENV, colors } from '@/shared/config';
+import { ENV, type UserMapThemeColor } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
+import { UserSpotLabels } from './layers';
 import { SpotCarousel } from '@/widgets/spot-carousel';
-import { Ionicons } from '@expo/vector-icons';
 import Mapbox from '@rnmapbox/maps';
 import React, {
   forwardRef,
@@ -24,9 +25,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { View, Text, Pressable, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming, useSharedValue } from 'react-native-reanimated';
-import { useSpotCamera } from '../model';
+import { useSpotCamera, useUserSpotsGeoJson } from '../model';
 
 // 画面サイズと現在地ボタンの位置計算用定数
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -67,9 +68,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const mapViewRef = useRef<Mapbox.MapView>(null);
     const cameraRef = useRef<Mapbox.Camera>(null);
     const isDarkMode = useIsDarkMode();
+    // マップ情報を取得（テーマカラー用）
+    const { data: mapData } = useMap(mapId);
     // currentUserId を渡していいね状態も含めて取得
     const { data: spots = [] } = useSpots(mapId ?? '', currentUserId);
     const [isMapReady, setIsMapReady] = useState(false);
+
+    // スポットをGeoJSON形式に変換
+    const spotsGeoJson = useUserSpotsGeoJson(spots);
 
     // スポットカメラ操作用フック
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
@@ -174,6 +180,20 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       setIsMapReady(true);
     };
 
+    // スポットマーカータップ時のハンドラー
+    const handleSpotPress = (event: any) => {
+      const feature = event.features?.[0];
+      if (!feature) return;
+
+      const spotId = feature.properties?.id;
+      if (spotId) {
+        const spot = spots.find((s) => s.id === spotId);
+        if (spot) {
+          handleSpotSelect(spot);
+        }
+      }
+    };
+
     // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット + カルーセル表示をリセット
     useEffect(() => {
       resetSelection();
@@ -252,39 +272,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             animated={true}
           />
 
-          {/* スポットマーカー表示 */}
-          {spots.map((spot) => {
-            if (!spot.master_spot) return null;
-            const spotName = spot.custom_name || spot.master_spot.name;
-            const markerColor = isDarkMode ? colors.dark.foreground : colors.primary.light;
-            const shadowColor = isDarkMode ? colors.black : colors.white;
-            return (
-              <Mapbox.MarkerView
-                key={spot.id}
-                id={spot.id}
-                coordinate={[spot.master_spot.longitude, spot.master_spot.latitude]}
-              >
-                <Pressable
-                  onPress={() => handleSpotSelect(spot)}
-                  className="flex-row items-center"
-                >
-                  <Ionicons name="location" size={32} color={markerColor} />
-                  <Text
-                    className="text-xs font-semibold"
-                    style={{
-                      color: markerColor,
-                      textShadowColor: shadowColor,
-                      textShadowOffset: { width: 1, height: 1 },
-                      textShadowRadius: 2,
-                    }}
-                    numberOfLines={1}
-                  >
-                    {spotName}
-                  </Text>
-                </Pressable>
-              </Mapbox.MarkerView>
-            );
-          })}
+          {/* スポットラベルレイヤー（マップのテーマカラーを使用） */}
+          <UserSpotLabels
+            geoJson={spotsGeoJson}
+            onPress={handleSpotPress}
+            themeColor={mapData?.theme_color as UserMapThemeColor}
+          />
         </Mapbox.MapView>
 
         {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン）
@@ -337,6 +330,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onSpotSelect={handleCarouselSpotFocus}
             onSpotPress={handleCarouselSpotPress}
             onClose={closeCarousel}
+            themeColor={mapData?.theme_color as UserMapThemeColor}
           />
         )}
 
@@ -352,6 +346,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onSearchBarVisibilityChange={onDetailCardMaximized}
             onBeforeClose={handleBeforeClose}
             onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
+            themeColor={mapData?.theme_color as UserMapThemeColor}
           />
         )}
 

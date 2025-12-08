@@ -12,6 +12,7 @@ import { useMemo } from 'react';
 import type { CameraState } from './use-bounds-management';
 import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
 import type { CountryData } from '@/shared/lib/utils/countries.utils';
+import { MAP_ZOOM } from '@/shared/config';
 
 interface UseCenterLocationNameParams {
   cameraState: CameraState;
@@ -95,7 +96,8 @@ export function useCenterLocationName({
     const { center, zoom } = cameraState;
 
     // ズームレベルに応じて表示する地名の種類を決定
-    if (zoom >= 12 && machiData && machiData.length > 0) {
+    // CITY(11)より少し寄った12以上で街名を表示
+    if (zoom >= MAP_ZOOM.CITY + 1 && machiData && machiData.length > 0) {
       // 街名を表示
       const nearest = findNearest(machiData, center);
       if (nearest) {
@@ -103,7 +105,8 @@ export function useCenterLocationName({
       }
     }
 
-    if (zoom >= 10 && cities.length > 0) {
+    // INITIAL(10)以上で市区名を表示
+    if (zoom >= MAP_ZOOM.INITIAL && cities.length > 0) {
       // 市区名を表示（型アサーション：座標は必ず存在する）
       const validCities = cities as Array<CityRow & { latitude: number; longitude: number }>;
       const nearest = findNearest(validCities, center);
@@ -114,7 +117,8 @@ export function useCenterLocationName({
       }
     }
 
-    if (zoom >= 5 && prefectures.length > 0) {
+    // COUNTRY(5)以上で都道府県名を表示
+    if (zoom >= MAP_ZOOM.COUNTRY && prefectures.length > 0) {
       // 都道府県名を表示（型アサーション：座標は必ず存在する）
       const validPrefectures = prefectures as Array<PrefectureRow & { latitude: number; longitude: number }>;
       const nearest = findNearest(validPrefectures, center);
@@ -123,7 +127,8 @@ export function useCenterLocationName({
       }
     }
 
-    if (zoom >= 3 && countries.length > 0) {
+    // EARTH(3)以上で国名を表示
+    if (zoom >= MAP_ZOOM.EARTH && countries.length > 0) {
       // 国名を表示
       const nearest = findNearest(countries, center);
       if (nearest) {

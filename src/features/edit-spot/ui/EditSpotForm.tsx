@@ -143,7 +143,7 @@ export function EditSpotForm({
         {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
+            <Ionicons name="location-outline" size={20} color={colors.primary.DEFAULT} />
             <Text className="ml-2 text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
               スポット情報
             </Text>

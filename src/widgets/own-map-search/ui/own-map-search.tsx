@@ -203,7 +203,7 @@ export function OwnMapSearch({
                     className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                   >
                     <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
-                      <Ionicons name="location" size={20} color={colors.primary.DEFAULT} />
+                      <Ionicons name="location-outline" size={20} color={colors.primary.DEFAULT} />
                     </View>
                     <View className="flex-1 ml-3">
                       <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>

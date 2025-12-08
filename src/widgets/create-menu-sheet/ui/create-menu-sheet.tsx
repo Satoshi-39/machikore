@@ -63,7 +63,7 @@ function CreateMenuContent({
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
-            <Ionicons name="location" size={32} color="#FFFFFF" />
+            <Ionicons name="location-outline" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
             スポット

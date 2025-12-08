@@ -8,7 +8,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors } from '@/shared/config';
+import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   useSearchBarSync,
@@ -126,11 +126,11 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
-          <View className="flex-1">
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-1">
+          <View className="flex-1 flex-row items-center">
+            <Ionicons name={LOCATION_ICONS.CITY.name} size={24} color={LOCATION_ICONS.CITY.color} />
+            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
               {city.name}
             </Text>
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{city.type}</Text>
           </View>
           <Pressable
             onPress={handleClose}
@@ -149,24 +149,20 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
           </Text>
         </View>
 
-        {/* 統計情報 */}
-        <View className="flex-row items-center justify-around py-3 border-y border-border dark:border-dark-border mb-4">
-          <View className="items-center">
-            <View className="flex-row items-center">
-              <Ionicons name="map" size={18} color={colors.secondary.DEFAULT} />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">{machis.length}</Text>
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">街</Text>
-          </View>
-        </View>
-
         {/* 街リスト */}
         <View className="mb-4">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="map" size={18} color={colors.secondary.DEFAULT} />
+            <Ionicons name={LOCATION_ICONS.MACHI.name} size={18} color={LOCATION_ICONS.MACHI.color} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-              この市区の街
+              この都市の街
             </Text>
+            {machis.length > 0 && (
+              <View className={`ml-2 px-2 py-0.5 ${LOCATION_ICONS.MACHI.bgColor} rounded-full`}>
+                <Text className="text-xs font-semibold" style={{ color: LOCATION_ICONS.MACHI.color }}>
+                  {machis.length}
+                </Text>
+              </View>
+            )}
           </View>
 
           {machis.length > 0 ? (

@@ -1,35 +1,59 @@
 /**
- * ユーザマップ用スポットラベルレイヤー（アイコン + テキスト横並び、カテゴリ別色分け）
+ * ユーザマップ用スポットラベルレイヤー（マップのテーマカラーを使用）
  */
 
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
-import { SPOT_CATEGORY_COLORS } from '@/shared/config';
+import { USER_MAP_THEME_COLORS, type UserMapThemeColor } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
-// カテゴリ別アイコン画像
-const locationFoodIcon = require('@assets/icons/location-food.png');
-const locationShoppingIcon = require('@assets/icons/location-shopping.png');
-const locationTourismIcon = require('@assets/icons/location-tourism.png');
-const locationTransitIcon = require('@assets/icons/location-transit.png');
-const locationOtherIcon = require('@assets/icons/location-other.png');
+// 各テーマカラーのアイコン画像
+const mapSpotIcons = {
+  pink: require('@assets/icons/map-spot-pink.png'),
+  red: require('@assets/icons/map-spot-red.png'),
+  orange: require('@assets/icons/map-spot-orange.png'),
+  yellow: require('@assets/icons/map-spot-yellow.png'),
+  green: require('@assets/icons/map-spot-green.png'),
+  blue: require('@assets/icons/map-spot-blue.png'),
+  purple: require('@assets/icons/map-spot-purple.png'),
+  gray: require('@assets/icons/map-spot-gray.png'),
+  white: require('@assets/icons/map-spot-white.png'),
+};
+
+// 縁取り付きアイコン（背景と同化しやすい色用）
+const mapSpotOutlinedIcons = {
+  gray: require('@assets/icons/map-spot-gray-outlined.png'),
+  white: require('@assets/icons/map-spot-white-outlined.png'),
+};
 
 interface UserSpotLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string; category: SpotCategory }>;
   onPress: (event: any) => void;
+  themeColor?: UserMapThemeColor;
 }
 
-export function UserSpotLabels({ geoJson, onPress }: UserSpotLabelsProps) {
+export function UserSpotLabels({ geoJson, onPress, themeColor = 'pink' }: UserSpotLabelsProps) {
+  const isDarkMode = useIsDarkMode();
+  const themeConfig = USER_MAP_THEME_COLORS[themeColor] ?? USER_MAP_THEME_COLORS.pink;
+  const color = themeConfig.color;
+  const haloColor = isDarkMode ? themeConfig.haloDark : themeConfig.haloLight;
+
+  // 縁取り付きアイコンを使用するかどうか
+  const useOutlined =
+    ('useOutlinedIconInLight' in themeConfig && !isDarkMode && themeConfig.useOutlinedIconInLight) ||
+    ('useOutlinedIconInDark' in themeConfig && isDarkMode && themeConfig.useOutlinedIconInDark);
+
+  const iconImage = useOutlined && themeColor in mapSpotOutlinedIcons
+    ? mapSpotOutlinedIcons[themeColor as keyof typeof mapSpotOutlinedIcons]
+    : mapSpotIcons[themeColor] ?? mapSpotIcons.pink;
+
   return (
     <>
-      {/* カテゴリ別アイコン画像を登録 */}
+      {/* テーマカラーのアイコン画像を登録 */}
       <Mapbox.Images images={{
-        'user-spot-icon-food': locationFoodIcon,
-        'user-spot-icon-shopping': locationShoppingIcon,
-        'user-spot-icon-tourism': locationTourismIcon,
-        'user-spot-icon-transit': locationTransitIcon,
-        'user-spot-icon-other': locationOtherIcon,
+        'user-spot-icon': iconImage,
       }} />
 
       <Mapbox.ShapeSource
@@ -37,97 +61,16 @@ export function UserSpotLabels({ geoJson, onPress }: UserSpotLabelsProps) {
         shape={geoJson}
         onPress={onPress}
       >
-        {/* 飲食店系 - オレンジ */}
+        {/* 全スポット - マップのテーマカラーで統一 */}
         <Mapbox.SymbolLayer
-          id="user-spots-food"
-          filter={['==', ['get', 'category'], 'food']}
+          id="user-spots-all"
           style={{
-            iconImage: 'user-spot-icon-food',
+            iconImage: 'user-spot-icon',
             iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.food,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
-
-        {/* ショッピング系 - 紫 */}
-        <Mapbox.SymbolLayer
-          id="user-spots-shopping"
-          filter={['==', ['get', 'category'], 'shopping']}
-          style={{
-            iconImage: 'user-spot-icon-shopping',
-            iconSize: 0.2,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.shopping,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
-
-        {/* 公園・観光地系 - 緑 */}
-        <Mapbox.SymbolLayer
-          id="user-spots-tourism"
-          filter={['==', ['get', 'category'], 'tourism']}
-          style={{
-            iconImage: 'user-spot-icon-tourism',
-            iconSize: 0.2,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.tourism,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
-
-        {/* 交通系 - 青 */}
-        <Mapbox.SymbolLayer
-          id="user-spots-transit"
-          filter={['==', ['get', 'category'], 'transit']}
-          style={{
-            iconImage: 'user-spot-icon-transit',
-            iconSize: 0.2,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.transit,
-            textHaloColor: '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-          }}
-        />
-
-        {/* その他 - グレー（デフォルト） */}
-        <Mapbox.SymbolLayer
-          id="user-spots-other"
-          filter={['==', ['get', 'category'], 'other']}
-          style={{
-            iconImage: 'user-spot-icon-other',
-            iconSize: 0.2,
-            textField: ['get', 'name'],
-            textSize: 13,
-            textColor: SPOT_CATEGORY_COLORS.other,
-            textHaloColor: '#FFFFFF',
+            textColor: color,
+            textHaloColor: haloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',

@@ -4,7 +4,6 @@
 
 import { useMemo } from 'react';
 import { useMachi } from './use-machi';
-import type { MachiRow } from '@/shared/types/database.types';
 
 /**
  * 指定された市区IDに属する街データを取得

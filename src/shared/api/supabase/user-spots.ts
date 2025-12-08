@@ -81,6 +81,7 @@ export interface UserSpotWithImages {
   map: {
     id: string;
     name: string;
+    theme_color: string;
   } | null;
   images: UserSpotImage[];
 }
@@ -722,7 +723,8 @@ export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: nu
       maps!inner (
         id,
         name,
-        is_public
+        is_public,
+        theme_color
       ),
       images (
         id,
@@ -756,7 +758,7 @@ export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: nu
     updated_at: spot.updated_at,
     master_spot: spot.master_spots || null,
     user: spot.users || null,
-    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
     images: (spot.images || []).sort((a: any, b: any) => a.order_index - b.order_index),
   }));
 }
