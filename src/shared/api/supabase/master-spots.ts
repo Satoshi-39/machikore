@@ -15,7 +15,8 @@ export interface MasterSpotDisplay {
   latitude: number;
   longitude: number;
   google_place_id: string | null;
-  google_formatted_address: string | null;
+  google_formatted_address: string | null; // 完全住所（コピー用）
+  google_short_address: string | null; // 短縮住所（表示用）
   google_types: string[] | null;
   google_phone_number: string | null;
   google_website_uri: string | null;
@@ -49,6 +50,7 @@ export async function getMasterSpotsByBounds(
       longitude,
       google_place_id,
       google_formatted_address,
+      google_short_address,
       google_types,
       google_phone_number,
       google_website_uri,
@@ -74,6 +76,7 @@ export async function getMasterSpotsByBounds(
     longitude: spot.longitude,
     google_place_id: spot.google_place_id,
     google_formatted_address: spot.google_formatted_address,
+    google_short_address: spot.google_short_address,
     google_types: spot.google_types,
     google_phone_number: spot.google_phone_number,
     google_website_uri: spot.google_website_uri,
@@ -97,6 +100,7 @@ export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpo
       longitude,
       google_place_id,
       google_formatted_address,
+      google_short_address,
       google_types,
       google_phone_number,
       google_website_uri,
@@ -121,6 +125,7 @@ export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpo
     longitude: data.longitude,
     google_place_id: data.google_place_id,
     google_formatted_address: data.google_formatted_address,
+    google_short_address: data.google_short_address,
     google_types: data.google_types,
     google_phone_number: data.google_phone_number,
     google_website_uri: data.google_website_uri,
@@ -147,6 +152,7 @@ export async function getMasterSpotsByMachi(
       longitude,
       google_place_id,
       google_formatted_address,
+      google_short_address,
       google_types,
       google_phone_number,
       google_website_uri,
@@ -170,6 +176,7 @@ export async function getMasterSpotsByMachi(
     longitude: spot.longitude,
     google_place_id: spot.google_place_id,
     google_formatted_address: spot.google_formatted_address,
+    google_short_address: spot.google_short_address,
     google_types: spot.google_types,
     google_phone_number: spot.google_phone_number,
     google_website_uri: spot.google_website_uri,
@@ -200,6 +207,7 @@ export async function searchMasterSpots(
       longitude,
       google_place_id,
       google_formatted_address,
+      google_short_address,
       google_types,
       google_phone_number,
       google_website_uri,
@@ -208,7 +216,7 @@ export async function searchMasterSpots(
       likes_count,
       user_spots (id)
     `)
-    .or(`name.ilike.%${query}%,google_formatted_address.ilike.%${query}%`)
+    .or(`name.ilike.%${query}%,google_short_address.ilike.%${query}%`)
     .limit(limit);
 
   if (error) {
@@ -223,6 +231,7 @@ export async function searchMasterSpots(
     longitude: spot.longitude,
     google_place_id: spot.google_place_id,
     google_formatted_address: spot.google_formatted_address,
+    google_short_address: spot.google_short_address,
     google_types: spot.google_types,
     google_phone_number: spot.google_phone_number,
     google_website_uri: spot.google_website_uri,

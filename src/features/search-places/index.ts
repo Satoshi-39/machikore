@@ -30,3 +30,4 @@ export type {
 
 // Reverse Geocoding
 export { reverseGeocode, reverseGeocodeDetailed } from './api/google-reverse-geocode';
+export type { ReverseGeocodeAddresses } from './api/google-reverse-geocode';

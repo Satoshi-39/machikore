@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS } from '@/shared/config';
-import { StyledTextInput, TagInput } from '@/shared/ui';
+import { StyledTextInput, TagInput, AddressPinIcon } from '@/shared/ui';
 import {
   type SpotLocationInput,
   isPlaceSearchResult,
@@ -134,12 +134,14 @@ export function CreateSpotForm({
         {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
           <View className="flex-row items-center mb-3">
-            <Ionicons
-              name={isGooglePlace ? 'information-circle' : 'location'}
-              size={20}
-              color={colors.primary.DEFAULT}
-            />
-            <Text className="ml-2 text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
+            {isGooglePlace && (
+              <Ionicons
+                name="information-circle"
+                size={20}
+                color={colors.primary.DEFAULT}
+              />
+            )}
+            <Text className={`text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary ${isGooglePlace ? 'ml-2' : ''}`}>
               {isGooglePlace
                 ? 'Google Placesから取得した情報'
                 : !isGooglePlace && 'source' in placeData && placeData.source === 'current_location'
@@ -157,20 +159,12 @@ export function CreateSpotForm({
           )}
 
           {/* 住所 */}
-          {placeData.address && (
-            <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">住所</Text>
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{placeData.address}</Text>
+          {placeData.shortAddress && (
+            <View className="flex-row items-center">
+              <AddressPinIcon size={16} color={colors.gray[500]} />
+              <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">{placeData.shortAddress}</Text>
             </View>
           )}
-
-          {/* 座標 */}
-          <View className="flex-row items-center">
-            <Ionicons name="location" size={16} color={colors.gray[500]} />
-            <Text className="ml-1 text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-              {placeData.latitude.toFixed(6)}, {placeData.longitude.toFixed(6)}
-            </Text>
-          </View>
         </View>
 
         {/* マップ（表示のみ） */}

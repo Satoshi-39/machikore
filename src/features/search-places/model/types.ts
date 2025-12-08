@@ -13,7 +13,8 @@ import type { GooglePlaceDetails } from '../api/google-places.types';
 export interface PlaceSearchResult {
   id: string; // Google Place ID
   name: string;
-  address: string | null;
+  shortAddress: string | null; // 短縮住所（表示用）
+  formattedAddress: string | null; // 完全住所（コピー用）
   latitude: number;
   longitude: number;
   category: string[]; // types
@@ -21,8 +22,8 @@ export interface PlaceSearchResult {
     placeId: string;
     placeName: string;
     category: string[]; // types
-    address: string | null;
-    formattedAddress?: string;
+    shortAddress: string | null; // 短縮住所（表示用）
+    formattedAddress: string | null; // 完全住所（コピー用）
     internationalPhoneNumber?: string;
     websiteUri?: string;
     rating?: number;
@@ -37,7 +38,8 @@ export interface PlaceSearchResult {
 export interface ManualLocationInput {
   id: string; // UUID（一時的なID）
   name: string | null; // 手動入力 or null
-  address: string | null; // 逆ジオコーディングで取得 or null
+  shortAddress: string | null; // 短縮住所（表示用）- 逆ジオコーディングで取得
+  formattedAddress: string | null; // 完全住所（コピー用）- 逆ジオコーディングで取得
   latitude: number;
   longitude: number;
   category: string[]; // 空配列
@@ -92,7 +94,8 @@ export function convertToPlaceResult(
   return {
     id: details.id,
     name: details.displayName.text,
-    address: shortAddress || details.formattedAddress || null,
+    shortAddress: shortAddress || null,
+    formattedAddress: details.formattedAddress || null,
     latitude: details.location.latitude,
     longitude: details.location.longitude,
     category: details.types || [],
@@ -100,8 +103,8 @@ export function convertToPlaceResult(
       placeId: details.id,
       placeName: details.displayName.text,
       category: details.types || [],
-      address: shortAddress || null,
-      formattedAddress: details.formattedAddress,
+      shortAddress: shortAddress || null,
+      formattedAddress: details.formattedAddress || null,
       internationalPhoneNumber: details.internationalPhoneNumber,
       websiteUri: details.websiteUri,
       rating: details.rating,

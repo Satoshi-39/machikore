@@ -26,7 +26,7 @@ export interface LikedMasterSpotItem {
     latitude: number;
     longitude: number;
     google_place_id: string | null;
-    google_formatted_address: string | null;
+    google_short_address: string | null;
     google_types: string[] | null;
     google_rating: number | null;
     google_user_rating_count: number | null;
@@ -87,7 +87,7 @@ export function LikeSpotList({
       if (item.type === 'userSpot') {
         // ユーザースポット：ユーザーのアバターを表示
         const spotName = item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット';
-        const address = item.spot.master_spot?.google_formatted_address || item.spot.address;
+        const address = item.spot.master_spot?.google_short_address || item.spot.google_short_address;
         const user = item.spot.user;
 
         const content = (
@@ -162,9 +162,9 @@ export function LikeSpotList({
                 <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                   {masterSpot.name}
                 </Text>
-                {masterSpot.google_formatted_address && (
+                {masterSpot.google_short_address && (
                   <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
-                    {masterSpot.google_formatted_address}
+                    {masterSpot.google_short_address}
                   </Text>
                 )}
                 <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">

@@ -653,6 +653,7 @@ export type Database = {
           google_phone_number: string | null
           google_place_id: string | null
           google_rating: number | null
+          google_short_address: string | null
           google_types: string[] | null
           google_user_rating_count: number | null
           google_website_uri: string | null
@@ -670,6 +671,7 @@ export type Database = {
           google_phone_number?: string | null
           google_place_id?: string | null
           google_rating?: number | null
+          google_short_address?: string | null
           google_types?: string[] | null
           google_user_rating_count?: number | null
           google_website_uri?: string | null
@@ -687,6 +689,7 @@ export type Database = {
           google_phone_number?: string | null
           google_place_id?: string | null
           google_rating?: number | null
+          google_short_address?: string | null
           google_types?: string[] | null
           google_user_rating_count?: number | null
           google_website_uri?: string | null
@@ -984,12 +987,13 @@ export type Database = {
       }
       user_spots: {
         Row: {
-          address: string | null
           article_content: string | null
           comments_count: number | null
           created_at: string
           custom_name: string
           description: string | null
+          google_formatted_address: string | null
+          google_short_address: string | null
           id: string
           images_count: number | null
           latitude: number | null
@@ -1004,12 +1008,13 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          address?: string | null
           article_content?: string | null
           comments_count?: number | null
           created_at?: string
           custom_name: string
           description?: string | null
+          google_formatted_address?: string | null
+          google_short_address?: string | null
           id?: string
           images_count?: number | null
           latitude?: number | null
@@ -1024,12 +1029,13 @@ export type Database = {
           user_id: string
         }
         Update: {
-          address?: string | null
           article_content?: string | null
           comments_count?: number | null
           created_at?: string
           custom_name?: string
           description?: string | null
+          google_formatted_address?: string | null
+          google_short_address?: string | null
           id?: string
           images_count?: number | null
           latitude?: number | null

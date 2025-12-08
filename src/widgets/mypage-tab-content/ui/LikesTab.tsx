@@ -81,7 +81,7 @@ export function LikesTab({ userId }: LikesTabProps) {
             keyExtractor={(item) => item.likeId}
             renderItem={({ item }) => {
               const spotName = item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット';
-              const address = item.spot.master_spot?.google_formatted_address || item.spot.address;
+              const address = item.spot.master_spot?.google_short_address || item.spot.google_short_address;
 
               return (
                 <Pressable

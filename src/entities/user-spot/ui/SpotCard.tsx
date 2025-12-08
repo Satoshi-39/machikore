@@ -37,7 +37,7 @@ interface EmbeddedMasterSpot {
   latitude: number;
   longitude: number;
   google_place_id: string | null;
-  google_formatted_address: string | null;
+  google_short_address: string | null;
   google_types: string[] | null;
 }
 
@@ -115,17 +115,17 @@ export function SpotCard({
     return '不明なスポット';
   };
 
-  // 住所の取得
+  // 住所の取得（表示用は短縮住所）
   const getAddress = (): string | null => {
-    if ('master_spot' in spot && spot.master_spot?.google_formatted_address) {
-      return spot.master_spot.google_formatted_address;
+    if ('master_spot' in spot && spot.master_spot?.google_short_address) {
+      return spot.master_spot.google_short_address;
     }
-    if (embeddedMasterSpot?.google_formatted_address) {
-      return embeddedMasterSpot.google_formatted_address;
+    if (embeddedMasterSpot?.google_short_address) {
+      return embeddedMasterSpot.google_short_address;
     }
     // ピン刺し・現在地登録の場合はuser_spotの住所を使用
-    if ('address' in spot && spot.address) {
-      return spot.address;
+    if ('google_short_address' in spot && spot.google_short_address) {
+      return spot.google_short_address;
     }
     return null;
   };

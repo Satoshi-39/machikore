@@ -113,8 +113,8 @@ function searchMachis(query: string, limit: number): MachikorePlaceSearchResult[
 async function searchMasterSpots(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
   const { data: spots, error } = await supabase
     .from('master_spots')
-    .select('id, name, latitude, longitude, google_formatted_address, google_types')
-    .or(`name.ilike.%${query}%,google_formatted_address.ilike.%${query}%`)
+    .select('id, name, latitude, longitude, google_short_address, google_types')
+    .or(`name.ilike.%${query}%,google_short_address.ilike.%${query}%`)
     .limit(limit);
 
   if (error) {
@@ -124,7 +124,7 @@ async function searchMasterSpots(query: string, limit: number): Promise<Machikor
   return (spots ?? []).map((spot) => ({
     id: spot.id,
     name: spot.name,
-    address: spot.google_formatted_address,
+    address: spot.google_short_address,
     latitude: spot.latitude,
     longitude: spot.longitude,
     type: 'spot' as const,
@@ -157,10 +157,10 @@ function searchUserSpots(
       COALESCE(s.custom_name, ms.name) as name,
       ms.latitude,
       ms.longitude,
-      ms.google_formatted_address as address
+      ms.google_short_address as address
     FROM user_spots s
     JOIN master_spots ms ON s.master_spot_id = ms.id
-    WHERE (COALESCE(s.custom_name, ms.name) LIKE ? OR ms.google_formatted_address LIKE ?)
+    WHERE (COALESCE(s.custom_name, ms.name) LIKE ? OR ms.google_short_address LIKE ?)
       AND s.user_id = ?
     ORDER BY name
     LIMIT ?;

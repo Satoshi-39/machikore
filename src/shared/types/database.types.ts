@@ -135,7 +135,8 @@ export interface MasterSpotRow {
   latitude: number;
   longitude: number;
   google_place_id: string | null; // Google Place ID
-  google_formatted_address: string | null; // フォーマット済み住所
+  google_formatted_address: string | null; // 完全住所（コピー用）: 日本、〒150-0041 東京都渋谷区神南1丁目21−1
+  google_short_address: string | null; // 短縮住所（表示用）: 東京都渋谷区神南
   google_types: string | null; // JSON string array: ["restaurant", "food"]
   google_phone_number: string | null; // 国際電話番号
   google_website_uri: string | null; // ウェブサイトURL
@@ -178,7 +179,8 @@ export interface SpotWithMasterSpot extends SpotRow {
   name: string; // master_spots.name (基本名称)
   latitude: number; // master_spots.latitude
   longitude: number; // master_spots.longitude
-  address: string | null; // master_spots.google_formatted_address
+  google_formatted_address: string | null; // master_spots.google_formatted_address (完全住所)
+  google_short_address: string | null; // master_spots.google_short_address (短縮住所)
   google_place_id: string | null; // master_spots.google_place_id
   google_types: string | null; // master_spots.google_types
   google_phone_number: string | null; // master_spots.google_phone_number

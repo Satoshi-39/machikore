@@ -174,9 +174,14 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
   // ピン刺し確定時のハンドラー
   const handlePinDropConfirm = async (pinLocation: { latitude: number; longitude: number }) => {
     // 逆ジオコーディングで住所を取得
-    let address: string | null = null;
+    let shortAddress: string | null = null;
+    let formattedAddress: string | null = null;
     try {
-      address = await reverseGeocode(pinLocation.latitude, pinLocation.longitude);
+      const addresses = await reverseGeocode(pinLocation.latitude, pinLocation.longitude);
+      if (addresses) {
+        shortAddress = addresses.shortAddress;
+        formattedAddress = addresses.formattedAddress;
+      }
     } catch (error) {
       console.warn('住所の取得に失敗しました:', error);
     }
@@ -184,7 +189,8 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
     const manualInput: ManualLocationInput = {
       id: Crypto.randomUUID(),
       name: null,
-      address,
+      shortAddress,
+      formattedAddress,
       latitude: pinLocation.latitude,
       longitude: pinLocation.longitude,
       category: [],

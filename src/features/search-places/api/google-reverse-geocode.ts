@@ -51,18 +51,25 @@ function buildShortAddress(addressComponents: ReverseGeocodeResult['address_comp
 }
 
 /**
+ * Reverse Geocoding の結果型
+ */
+export interface ReverseGeocodeAddresses {
+  shortAddress: string | null; // 短縮住所（表示用）
+  formattedAddress: string | null; // 完全住所（コピー用）
+}
+
+/**
  * 座標から住所を取得（Reverse Geocoding）
- * Google Places APIと同じ形式の短縮住所を返す（都道府県 + 市区町村 + 地域名）
  * @param latitude 緯度
  * @param longitude 経度
  * @param languageCode 言語コード（デフォルト: 'ja'）
- * @returns 短縮住所文字列、取得できない場合はnull
+ * @returns 短縮住所と完全住所のオブジェクト、取得できない場合はnull
  */
 export async function reverseGeocode(
   latitude: number,
   longitude: number,
   languageCode: string = 'ja'
-): Promise<string | null> {
+): Promise<ReverseGeocodeAddresses | null> {
   if (!GOOGLE_PLACES_API_KEY) {
     console.error('[reverseGeocode] Google API key is not configured');
     return null;
@@ -96,8 +103,10 @@ export async function reverseGeocode(
     // address_componentsから短縮住所を生成（Google Places APIと同じ形式）
     const shortAddress = buildShortAddress(firstResult.address_components);
 
-    // 短縮住所が取得できない場合はformatted_addressをフォールバック
-    return shortAddress || firstResult.formatted_address;
+    return {
+      shortAddress,
+      formattedAddress: firstResult.formatted_address || null,
+    };
   } catch (error) {
     console.error('[reverseGeocode] Error:', error);
     return null;

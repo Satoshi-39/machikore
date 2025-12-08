@@ -94,9 +94,14 @@ export function OwnMapSearch({
     }
 
     // 逆ジオコーディングで住所を取得
-    let address: string | null = null;
+    let shortAddress: string | null = null;
+    let formattedAddress: string | null = null;
     try {
-      address = await reverseGeocode(currentLocation.latitude, currentLocation.longitude);
+      const addresses = await reverseGeocode(currentLocation.latitude, currentLocation.longitude);
+      if (addresses) {
+        shortAddress = addresses.shortAddress;
+        formattedAddress = addresses.formattedAddress;
+      }
     } catch (error) {
       console.warn('住所の取得に失敗しました:', error);
     }
@@ -104,7 +109,8 @@ export function OwnMapSearch({
     const manualInput: ManualLocationInput = {
       id: Crypto.randomUUID(),
       name: null,
-      address,
+      shortAddress,
+      formattedAddress,
       latitude: currentLocation.latitude,
       longitude: currentLocation.longitude,
       category: [],
@@ -223,9 +229,9 @@ export function OwnMapSearch({
                     </View>
                     <View className="flex-1 ml-3">
                       <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>
-                      {place.address && (
+                      {place.shortAddress && (
                         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
-                          {place.address}
+                          {place.shortAddress}
                         </Text>
                       )}
                     </View>

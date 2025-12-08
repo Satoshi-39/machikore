@@ -183,7 +183,8 @@ export function useSpotForm() {
         latitude: selectedPlace.latitude,
         longitude: selectedPlace.longitude,
         googlePlaceId: isGooglePlace ? selectedPlace.googleData.placeId : null,
-        googleFormattedAddress: isGooglePlace ? selectedPlace.address : null,
+        googleFormattedAddress: isGooglePlace ? selectedPlace.formattedAddress : selectedPlace.formattedAddress,
+        googleShortAddress: isGooglePlace ? selectedPlace.shortAddress : selectedPlace.shortAddress,
         googleTypes: isGooglePlace ? selectedPlace.category : [],
         googlePhoneNumber: isGooglePlace ? selectedPlace.googleData.internationalPhoneNumber : null,
         googleWebsiteUri: isGooglePlace ? selectedPlace.googleData.websiteUri : null,
@@ -192,7 +193,6 @@ export function useSpotForm() {
         customName: data.customName,
         description: data.description,
         tags: data.tags,
-        address: isGooglePlace ? null : selectedPlace.address,
       },
       {
         onSuccess: async (spotId) => {

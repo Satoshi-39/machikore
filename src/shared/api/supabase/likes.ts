@@ -320,7 +320,8 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         updated_at,
         latitude,
         longitude,
-        address,
+        google_formatted_address,
+        google_short_address,
         master_spots (
           id,
           name,
@@ -328,6 +329,7 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
           longitude,
           google_place_id,
           google_formatted_address,
+          google_short_address,
           google_types
         ),
         users (
@@ -369,7 +371,8 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         updated_at: like.user_spots.updated_at,
         latitude: like.user_spots.latitude,
         longitude: like.user_spots.longitude,
-        address: like.user_spots.address,
+        google_formatted_address: like.user_spots.google_formatted_address,
+        google_short_address: like.user_spots.google_short_address,
         master_spot: like.user_spots.master_spots,
         user: like.user_spots.users,
         is_liked: true, // いいね一覧なので必ずtrue
@@ -392,7 +395,7 @@ export async function getUserLikedMasterSpots(userId: string, limit: number = 50
         latitude,
         longitude,
         google_place_id,
-        google_formatted_address,
+        google_short_address,
         google_types,
         google_rating,
         google_user_rating_count,

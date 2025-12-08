@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS } from '@/shared/config';
-import { StyledTextInput, TagInput } from '@/shared/ui';
+import { StyledTextInput, TagInput, AddressPinIcon } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
 import type { Database } from '@/shared/types/supabase.generated';
@@ -142,9 +142,8 @@ export function EditSpotForm({
       <View className="p-4">
         {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
-          <View className="flex-row items-center mb-3">
-            <Ionicons name="location-outline" size={20} color={colors.primary.DEFAULT} />
-            <Text className="ml-2 text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
+          <View className="mb-3">
+            <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
               スポット情報
             </Text>
           </View>
@@ -160,21 +159,11 @@ export function EditSpotForm({
           )}
 
           {/* 住所 */}
-          {(spot.master_spot?.google_formatted_address || spot.address) && (
-            <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">住所</Text>
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                {spot.master_spot?.google_formatted_address || spot.address}
-              </Text>
-            </View>
-          )}
-
-          {/* 座標 */}
-          {(spot.master_spot || (spot.latitude != null && spot.longitude != null)) && (
+          {(spot.master_spot?.google_short_address || spot.google_short_address) && (
             <View className="flex-row items-center">
-              <Ionicons name="location" size={16} color={colors.gray[500]} />
-              <Text className="ml-1 text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                {(spot.master_spot?.latitude ?? spot.latitude)?.toFixed(6)}, {(spot.master_spot?.longitude ?? spot.longitude)?.toFixed(6)}
+              <AddressPinIcon size={16} color={colors.gray[500]} />
+              <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">
+                {spot.master_spot?.google_short_address || spot.google_short_address}
               </Text>
             </View>
           )}

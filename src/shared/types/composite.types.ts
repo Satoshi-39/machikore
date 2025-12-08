@@ -63,7 +63,8 @@ export interface MasterSpotBasicInfo {
   latitude: number;
   longitude: number;
   google_place_id: string | null;
-  google_formatted_address: string | null;
+  google_formatted_address: string | null; // 完全住所（コピー用）
+  google_short_address: string | null; // 短縮住所（表示用）
   google_types: string[] | null;
 }
 
@@ -104,7 +105,8 @@ export interface SpotWithDetails {
   latitude?: number | null;
   longitude?: number | null;
   /** ピン刺し・現在地登録の場合の住所（master_spotがない場合に使用） */
-  address?: string | null;
+  google_formatted_address?: string | null; // 完全住所（コピー用）
+  google_short_address?: string | null; // 短縮住所（表示用）
   master_spot: MasterSpotBasicInfo | null;
   user: UserBasicInfo | null;
   /** 所属するマップの情報 */

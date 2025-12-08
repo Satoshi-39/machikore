@@ -25,7 +25,8 @@ export interface CreateSpotInput {
   latitude: number;
   longitude: number;
   googlePlaceId?: string | null;  // ピン刺し・現在地登録の場合はnull
-  googleFormattedAddress?: string | null;
+  googleFormattedAddress?: string | null; // 完全住所（コピー用）
+  googleShortAddress?: string | null; // 短縮住所（表示用）
   googleTypes?: string[] | null;
   googlePhoneNumber?: string | null;
   googleWebsiteUri?: string | null;
@@ -35,8 +36,6 @@ export interface CreateSpotInput {
   customName?: string | null;
   description?: string | null;
   tags?: string[] | null;
-  /** ピン刺し・現在地登録の場合の住所（Reverse Geocodingで取得） */
-  address?: string | null;
 }
 
 export interface UpdateSpotInput {
@@ -112,6 +111,7 @@ export interface UserSpotSearchResult {
     latitude: number;
     longitude: number;
     google_formatted_address: string | null;
+    google_short_address: string | null;
   } | null;
   user: {
     id: string;
@@ -138,6 +138,7 @@ async function getOrCreateMasterSpot(input: {
   longitude: number;
   googlePlaceId?: string | null;
   googleFormattedAddress?: string | null;
+  googleShortAddress?: string | null;
   googleTypes?: string[] | null;
   googlePhoneNumber?: string | null;
   googleWebsiteUri?: string | null;
@@ -164,6 +165,7 @@ async function getOrCreateMasterSpot(input: {
     longitude: input.longitude,
     google_place_id: input.googlePlaceId ?? null,
     google_formatted_address: input.googleFormattedAddress ?? null,
+    google_short_address: input.googleShortAddress ?? null,
     google_types: input.googleTypes ?? null,
     google_phone_number: input.googlePhoneNumber ?? null,
     google_website_uri: input.googleWebsiteUri ?? null,
@@ -197,6 +199,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
       longitude: input.longitude,
       googlePlaceId: input.googlePlaceId,
       googleFormattedAddress: input.googleFormattedAddress,
+      googleShortAddress: input.googleShortAddress,
       googleTypes: input.googleTypes,
       googlePhoneNumber: input.googlePhoneNumber,
       googleWebsiteUri: input.googleWebsiteUri,
@@ -214,7 +217,8 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     machi_id: input.machiId,
     latitude: input.googlePlaceId ? null : input.latitude,
     longitude: input.googlePlaceId ? null : input.longitude,
-    address: input.googlePlaceId ? null : input.address ?? null,
+    google_formatted_address: input.googlePlaceId ? null : input.googleFormattedAddress ?? null,
+    google_short_address: input.googlePlaceId ? null : input.googleShortAddress ?? null,
     custom_name: input.customName ?? input.name,
     description: input.description ?? null,
     tags: input.tags ?? null,
@@ -351,7 +355,8 @@ export async function getSpotWithDetails(
     updated_at: spot.updated_at,
     latitude: spot.latitude,
     longitude: spot.longitude,
-    address: spot.address,
+    google_formatted_address: spot.google_formatted_address,
+    google_short_address: spot.google_short_address,
     master_spot: spot.master_spots || null,
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
@@ -484,7 +489,8 @@ export async function getPublicSpots(
       updated_at: spot.updated_at,
       latitude: spot.latitude,
       longitude: spot.longitude,
-      address: spot.address,
+      google_formatted_address: spot.google_formatted_address,
+      google_short_address: spot.google_short_address,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
       map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
@@ -519,7 +525,8 @@ export async function searchPublicUserSpots(
         name,
         latitude,
         longitude,
-        google_formatted_address
+        google_formatted_address,
+        google_short_address
       ),
       users (
         id,
@@ -548,6 +555,7 @@ export async function searchPublicUserSpots(
       latitude,
       longitude,
       google_formatted_address,
+      google_short_address,
       user_spots (
         *,
         users (
@@ -620,6 +628,7 @@ export async function searchPublicUserSpots(
             latitude: masterSpot.latitude,
             longitude: masterSpot.longitude,
             google_formatted_address: masterSpot.google_formatted_address,
+            google_short_address: masterSpot.google_short_address,
           },
           user: spot.users || null,
           map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
@@ -672,7 +681,7 @@ export async function searchSpotsByMapId(
         name,
         latitude,
         longitude,
-        google_formatted_address
+        google_short_address
       )
     `)
     .eq('map_id', mapId)
@@ -689,7 +698,7 @@ export async function searchSpotsByMapId(
         name,
         latitude,
         longitude,
-        google_formatted_address
+        google_short_address
       )
     `)
     .eq('map_id', mapId)
@@ -705,7 +714,7 @@ export async function searchSpotsByMapId(
       resultMap.set(spot.id, {
         id: spot.id,
         name: spot.custom_name || masterSpot.name,
-        address: masterSpot.google_formatted_address,
+        address: masterSpot.google_short_address,
         latitude: masterSpot.latitude,
         longitude: masterSpot.longitude,
       });

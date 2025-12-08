@@ -167,7 +167,8 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
     setSelectedPlace({
       id: spot.google_place_id || spot.id,
       name: spot.name,
-      address: spot.google_formatted_address,
+      shortAddress: spot.google_short_address,
+      formattedAddress: spot.google_formatted_address,
       latitude: spot.latitude,
       longitude: spot.longitude,
       category: spot.google_types || [],
@@ -175,8 +176,8 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         placeId: spot.google_place_id || spot.id,
         placeName: spot.name,
         category: spot.google_types || [],
-        address: spot.google_formatted_address,
-        formattedAddress: spot.google_formatted_address || undefined,
+        shortAddress: spot.google_short_address,
+        formattedAddress: spot.google_formatted_address,
         internationalPhoneNumber: spot.google_phone_number || undefined,
         websiteUri: spot.google_website_uri || undefined,
         rating: spot.google_rating || undefined,
@@ -237,10 +238,10 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                 {spot.name}
               </Text>
             </View>
-            {spot.google_formatted_address && (
+            {spot.google_short_address && (
               <View className="flex-row items-center">
                 <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spot.google_formatted_address}</Text>
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spot.google_short_address}</Text>
               </View>
             )}
           </View>
