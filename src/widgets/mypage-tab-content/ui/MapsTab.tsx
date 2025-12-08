@@ -9,14 +9,15 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { colors } from '@/shared/config';
+import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCurrentTab, showLoginRequiredAlert } from '@/shared/lib';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
-import { AsyncBoundary, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { AsyncBoundary, PopupMenu, type PopupMenuItem, LocationPinIcon } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 
 interface MapsTabProps {
@@ -47,6 +48,7 @@ function MyPageMapCard({
   onArticlePress,
   onUserPress,
 }: MyPageMapCardProps) {
+  const isDarkMode = useIsDarkMode();
   const createdDate = new Date(map.created_at);
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
@@ -161,7 +163,11 @@ function MyPageMapCard({
           <View className="flex-row items-center gap-5">
             {/* スポット数 */}
             <View className="flex-row items-center">
-              <Ionicons name="location" size={14} color={colors.text.secondary} />
+              <LocationPinIcon
+                size={14}
+                color={USER_MAP_THEME_COLORS[map.theme_color as UserMapThemeColor].color}
+                strokeColor={getThemeColorStroke(map.theme_color as UserMapThemeColor, isDarkMode)}
+              />
               <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                 {map.spots_count}
               </Text>

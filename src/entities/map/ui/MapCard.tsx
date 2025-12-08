@@ -7,8 +7,9 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Share, Platform, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { PopupMenu, type PopupMenuItem, LocationPinIcon } from '@/shared/ui';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
@@ -30,6 +31,7 @@ interface MapCardProps {
 }
 
 export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress }: MapCardProps) {
+  const isDarkMode = useIsDarkMode();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
@@ -211,7 +213,11 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         </Text>
         {'spots_count' in map && (
           <View className="flex-row items-center ml-3">
-            <Ionicons name="location" size={14} color={colors.text.secondary} />
+            <LocationPinIcon
+              size={14}
+              color={USER_MAP_THEME_COLORS[map.theme_color as UserMapThemeColor].color}
+              strokeColor={getThemeColorStroke(map.theme_color as UserMapThemeColor, isDarkMode)}
+            />
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
               {map.spots_count}
             </Text>

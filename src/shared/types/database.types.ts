@@ -116,6 +116,7 @@ export interface MapRow {
   is_default: 0 | 1;
   is_official: 0 | 1;
   thumbnail_url: string | null;
+  theme_color: string;
   spots_count: number;
   likes_count: number;
   comments_count: number;
