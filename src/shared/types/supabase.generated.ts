@@ -161,12 +161,142 @@ export type Database = {
           },
         ]
       }
+      collection_maps: {
+        Row: {
+          collection_id: string
+          created_at: string
+          id: string
+          map_id: string
+          order_index: number | null
+        }
+        Insert: {
+          collection_id: string
+          created_at?: string
+          id?: string
+          map_id: string
+          order_index?: number | null
+        }
+        Update: {
+          collection_id?: string
+          created_at?: string
+          id?: string
+          map_id?: string
+          order_index?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collection_maps_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collections: {
+        Row: {
+          color: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_public: boolean | null
+          maps_count: number | null
+          name: string
+          order_index: number | null
+          thumbnail_url: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          maps_count?: number | null
+          name: string
+          order_index?: number | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          maps_count?: number | null
+          name?: string
+          order_index?: number | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collections_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      comment_likes: {
+        Row: {
+          comment_id: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          comment_id: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          comment_id?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comment_likes_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       comments: {
         Row: {
           content: string
           created_at: string
+          depth: number
           id: string
+          likes_count: number
           map_id: string | null
+          parent_id: string | null
+          replies_count: number
+          root_id: string | null
           spot_id: string | null
           updated_at: string
           user_id: string
@@ -174,8 +304,13 @@ export type Database = {
         Insert: {
           content: string
           created_at?: string
+          depth?: number
           id?: string
+          likes_count?: number
           map_id?: string | null
+          parent_id?: string | null
+          replies_count?: number
+          root_id?: string | null
           spot_id?: string | null
           updated_at?: string
           user_id: string
@@ -183,8 +318,13 @@ export type Database = {
         Update: {
           content?: string
           created_at?: string
+          depth?: number
           id?: string
+          likes_count?: number
           map_id?: string | null
+          parent_id?: string | null
+          replies_count?: number
+          root_id?: string | null
           spot_id?: string | null
           updated_at?: string
           user_id?: string
@@ -195,6 +335,20 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_root_id_fkey"
+            columns: ["root_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
             referencedColumns: ["id"]
           },
           {
@@ -427,6 +581,7 @@ export type Database = {
       maps: {
         Row: {
           category: string | null
+          comments_count: number | null
           created_at: string
           description: string | null
           id: string
@@ -438,12 +593,14 @@ export type Database = {
           name: string
           spots_count: number | null
           tags: Json | null
+          theme_color: string
           thumbnail_url: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           category?: string | null
+          comments_count?: number | null
           created_at?: string
           description?: string | null
           id?: string
@@ -455,12 +612,14 @@ export type Database = {
           name: string
           spots_count?: number | null
           tags?: Json | null
+          theme_color?: string
           thumbnail_url?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           category?: string | null
+          comments_count?: number | null
           created_at?: string
           description?: string | null
           id?: string
@@ -472,6 +631,7 @@ export type Database = {
           name?: string
           spots_count?: number | null
           tags?: Json | null
+          theme_color?: string
           thumbnail_url?: string | null
           updated_at?: string
           user_id?: string
@@ -498,8 +658,9 @@ export type Database = {
           google_website_uri: string | null
           id: string
           latitude: number
-          likes_count: number
+          likes_count: number | null
           longitude: number
+          machi_id: string | null
           name: string
           updated_at: string
         }
@@ -514,8 +675,9 @@ export type Database = {
           google_website_uri?: string | null
           id?: string
           latitude: number
-          likes_count?: number
+          likes_count?: number | null
           longitude: number
+          machi_id?: string | null
           name: string
           updated_at?: string
         }
@@ -530,12 +692,21 @@ export type Database = {
           google_website_uri?: string | null
           id?: string
           latitude?: number
-          likes_count?: number
+          likes_count?: number | null
           longitude?: number
+          machi_id?: string | null
           name?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "master_spots_machi_id_fkey"
+            columns: ["machi_id"]
+            isOneToOne: false
+            referencedRelation: "machi"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       notifications: {
         Row: {
@@ -616,6 +787,8 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          latitude: number | null
+          longitude: number | null
           name: string
           name_kana: string
           region_id: string
@@ -624,6 +797,8 @@ export type Database = {
         Insert: {
           created_at?: string
           id: string
+          latitude?: number | null
+          longitude?: number | null
           name: string
           name_kana: string
           region_id: string
@@ -632,6 +807,8 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          latitude?: number | null
+          longitude?: number | null
           name?: string
           name_kana?: string
           region_id?: string
@@ -674,6 +851,42 @@ export type Database = {
         }
         Relationships: []
       }
+      system_announcement_reads: {
+        Row: {
+          announcement_id: string
+          id: string
+          read_at: string | null
+          user_id: string
+        }
+        Insert: {
+          announcement_id: string
+          id?: string
+          read_at?: string | null
+          user_id: string
+        }
+        Update: {
+          announcement_id?: string
+          id?: string
+          read_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_announcement_reads_announcement_id_fkey"
+            columns: ["announcement_id"]
+            isOneToOne: false
+            referencedRelation: "system_announcements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_announcement_reads_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       system_announcements: {
         Row: {
           content: string
@@ -710,50 +923,121 @@ export type Database = {
         }
         Relationships: []
       }
+      user_notification_settings: {
+        Row: {
+          comment_enabled: boolean
+          created_at: string
+          email_comment_enabled: boolean
+          email_enabled: boolean
+          email_follow_enabled: boolean
+          email_like_enabled: boolean
+          email_system_enabled: boolean
+          follow_enabled: boolean
+          id: string
+          like_enabled: boolean
+          push_enabled: boolean
+          system_enabled: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comment_enabled?: boolean
+          created_at?: string
+          email_comment_enabled?: boolean
+          email_enabled?: boolean
+          email_follow_enabled?: boolean
+          email_like_enabled?: boolean
+          email_system_enabled?: boolean
+          follow_enabled?: boolean
+          id?: string
+          like_enabled?: boolean
+          push_enabled?: boolean
+          system_enabled?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comment_enabled?: boolean
+          created_at?: string
+          email_comment_enabled?: boolean
+          email_enabled?: boolean
+          email_follow_enabled?: boolean
+          email_like_enabled?: boolean
+          email_system_enabled?: boolean
+          follow_enabled?: boolean
+          id?: string
+          like_enabled?: boolean
+          push_enabled?: boolean
+          system_enabled?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_notification_settings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_spots: {
         Row: {
+          address: string | null
+          article_content: string | null
           comments_count: number | null
           created_at: string
-          custom_name: string | null
+          custom_name: string
           description: string | null
           id: string
           images_count: number | null
+          latitude: number | null
           likes_count: number | null
+          longitude: number | null
           machi_id: string
           map_id: string
-          master_spot_id: string
+          master_spot_id: string | null
           order_index: number | null
           tags: string[] | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          address?: string | null
+          article_content?: string | null
           comments_count?: number | null
           created_at?: string
-          custom_name?: string | null
+          custom_name: string
           description?: string | null
           id?: string
           images_count?: number | null
+          latitude?: number | null
           likes_count?: number | null
+          longitude?: number | null
           machi_id: string
           map_id: string
-          master_spot_id: string
+          master_spot_id?: string | null
           order_index?: number | null
           tags?: string[] | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          address?: string | null
+          article_content?: string | null
           comments_count?: number | null
           created_at?: string
-          custom_name?: string | null
+          custom_name?: string
           description?: string | null
           id?: string
           images_count?: number | null
+          latitude?: number | null
           likes_count?: number | null
+          longitude?: number | null
           machi_id?: string
           map_id?: string
-          master_spot_id?: string
+          master_spot_id?: string | null
           order_index?: number | null
           tags?: string[] | null
           updated_at?: string
@@ -799,6 +1083,8 @@ export type Database = {
           email: string
           id: string
           is_subscribed: boolean | null
+          push_token: string | null
+          push_token_updated_at: string | null
           subscription_expires_at: string | null
           subscription_started_at: string | null
           updated_at: string
@@ -812,6 +1098,8 @@ export type Database = {
           email: string
           id?: string
           is_subscribed?: boolean | null
+          push_token?: string | null
+          push_token_updated_at?: string | null
           subscription_expires_at?: string | null
           subscription_started_at?: string | null
           updated_at?: string
@@ -825,6 +1113,8 @@ export type Database = {
           email?: string
           id?: string
           is_subscribed?: boolean | null
+          push_token?: string | null
+          push_token_updated_at?: string | null
           subscription_expires_at?: string | null
           subscription_started_at?: string | null
           updated_at?: string
@@ -837,30 +1127,24 @@ export type Database = {
           created_at: string
           id: string
           machi_id: string
-          memo: string | null
           updated_at: string
           user_id: string
-          visit_count: number | null
           visited_at: string
         }
         Insert: {
           created_at?: string
           id?: string
           machi_id: string
-          memo?: string | null
           updated_at?: string
           user_id: string
-          visit_count?: number | null
           visited_at: string
         }
         Update: {
           created_at?: string
           id?: string
           machi_id?: string
-          memo?: string | null
           updated_at?: string
           user_id?: string
-          visit_count?: number | null
           visited_at?: string
         }
         Relationships: [
@@ -885,22 +1169,117 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      clear_push_token: { Args: never; Returns: undefined }
+      decrement_map_comments_count: {
+        Args: { map_id: string }
+        Returns: undefined
+      }
       decrement_map_likes_count: {
         Args: { map_id: string }
+        Returns: undefined
+      }
+      decrement_map_spots_count: {
+        Args: { map_id: string }
+        Returns: undefined
+      }
+      decrement_master_spot_likes_count: {
+        Args: { p_master_spot_id: string }
+        Returns: undefined
+      }
+      decrement_spot_comments_count: {
+        Args: { spot_id: string }
         Returns: undefined
       }
       decrement_spot_likes_count: {
         Args: { spot_id: string }
         Returns: undefined
       }
+      get_notification_settings: {
+        Args: never
+        Returns: {
+          comment_enabled: boolean
+          created_at: string
+          email_comment_enabled: boolean
+          email_enabled: boolean
+          email_follow_enabled: boolean
+          email_like_enabled: boolean
+          email_system_enabled: boolean
+          follow_enabled: boolean
+          id: string
+          like_enabled: boolean
+          push_enabled: boolean
+          system_enabled: boolean
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "user_notification_settings"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      increment_map_comments_count: {
+        Args: { map_id: string }
+        Returns: undefined
+      }
       increment_map_likes_count: {
         Args: { map_id: string }
+        Returns: undefined
+      }
+      increment_map_spots_count: {
+        Args: { map_id: string }
+        Returns: undefined
+      }
+      increment_master_spot_likes_count: {
+        Args: { p_master_spot_id: string }
+        Returns: undefined
+      }
+      increment_spot_comments_count: {
+        Args: { spot_id: string }
         Returns: undefined
       }
       increment_spot_likes_count: {
         Args: { spot_id: string }
         Returns: undefined
       }
+      update_notification_settings: {
+        Args: {
+          p_comment_enabled?: boolean
+          p_email_comment_enabled?: boolean
+          p_email_enabled?: boolean
+          p_email_follow_enabled?: boolean
+          p_email_like_enabled?: boolean
+          p_email_system_enabled?: boolean
+          p_follow_enabled?: boolean
+          p_like_enabled?: boolean
+          p_push_enabled?: boolean
+          p_system_enabled?: boolean
+        }
+        Returns: {
+          comment_enabled: boolean
+          created_at: string
+          email_comment_enabled: boolean
+          email_enabled: boolean
+          email_follow_enabled: boolean
+          email_like_enabled: boolean
+          email_system_enabled: boolean
+          follow_enabled: boolean
+          id: string
+          like_enabled: boolean
+          push_enabled: boolean
+          system_enabled: boolean
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "user_notification_settings"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      update_push_token: { Args: { token: string }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never

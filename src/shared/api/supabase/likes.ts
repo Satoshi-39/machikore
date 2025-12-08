@@ -318,6 +318,9 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         order_index,
         created_at,
         updated_at,
+        latitude,
+        longitude,
+        address,
         master_spots (
           id,
           name,
@@ -364,6 +367,9 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         order_index: like.user_spots.order_index || 0,
         created_at: like.user_spots.created_at,
         updated_at: like.user_spots.updated_at,
+        latitude: like.user_spots.latitude,
+        longitude: like.user_spots.longitude,
+        address: like.user_spots.address,
         master_spot: like.user_spots.master_spots,
         user: like.user_spots.users,
         is_liked: true, // いいね一覧なので必ずtrue

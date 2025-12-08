@@ -9,6 +9,7 @@ import { useSpots } from '@/entities/user-spot';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
+import { usePinDropStore, PinDropOverlay } from '@/features/drop-pin';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { ENV, type UserMapThemeColor } from '@/shared/config';
@@ -47,6 +48,8 @@ interface UserMapViewProps {
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
   onEditSpot?: (spotId: string) => void;
+  /** ピン刺しモードで位置確定時のコールバック */
+  onPinDropConfirm?: (location: { latitude: number; longitude: number }) => void;
 }
 
 export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
@@ -62,6 +65,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       viewMode = 'map',
       isSearchFocused = false,
       onEditSpot,
+      onPinDropConfirm,
     },
     ref
   ) => {
@@ -135,14 +139,39 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     // 初回カメラ移動済みフラグ（マップごとにリセット）
     const hasInitialCameraMoved = useRef(false);
 
-    // マップの中心座標を保持（将来のピン刺し機能で使用予定）
-    const [_centerCoords, setCenterCoords] = useState<{
+    // マップの中心座標を保持（ピン刺し機能で使用）
+    const [centerCoords, setCenterCoords] = useState<{
       latitude: number;
       longitude: number;
     }>({
       latitude: 35.6812,
       longitude: 139.7671,
     });
+
+    // ピン刺しモードのストア
+    const isPinDropMode = usePinDropStore((state) => state.isActive);
+    const endPinDropMode = usePinDropStore((state) => state.endPinDropMode);
+
+    // ピン刺しモード開始時にカルーセル/詳細カードを閉じる
+    useEffect(() => {
+      if (isPinDropMode) {
+        closeCarousel();
+        if (isDetailCardOpen) {
+          baseHandleDetailCardClose();
+        }
+      }
+    }, [isPinDropMode, closeCarousel, isDetailCardOpen, baseHandleDetailCardClose]);
+
+    // ピン刺し確定時のハンドラー
+    const handlePinDropConfirm = useCallback(() => {
+      endPinDropMode();
+      onPinDropConfirm?.(centerCoords);
+    }, [endPinDropMode, onPinDropConfirm, centerCoords]);
+
+    // ピン刺しキャンセル時のハンドラー
+    const handlePinDropCancel = useCallback(() => {
+      endPinDropMode();
+    }, [endPinDropMode]);
 
     // マップ操作用フック
     const { flyToLocation, handleLocationPress } = useMapLocation({
@@ -347,6 +376,15 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onBeforeClose={handleBeforeClose}
             onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
             themeColor={mapData?.theme_color as UserMapThemeColor}
+          />
+        )}
+
+        {/* ピン刺しモードのオーバーレイ */}
+        {isPinDropMode && mapData && (
+          <PinDropOverlay
+            onConfirm={handlePinDropConfirm}
+            onCancel={handlePinDropCancel}
+            themeColor={mapData.theme_color as UserMapThemeColor}
           />
         )}
 

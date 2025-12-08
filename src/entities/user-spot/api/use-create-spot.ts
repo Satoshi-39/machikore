@@ -27,9 +27,7 @@ export function useCreateSpot() {
       if (!params.name) {
         throw new Error('スポット名が必要です');
       }
-      if (!params.googlePlaceId) {
-        throw new Error('Google Place IDが必要です');
-      }
+      // googlePlaceIdはピン刺し・現在地登録の場合はnullでも可
 
       console.log('✅ useCreateSpot: バリデーション成功');
 

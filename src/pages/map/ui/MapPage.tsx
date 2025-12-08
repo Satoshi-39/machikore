@@ -27,8 +27,12 @@ import type { UserMapThemeColor } from '@/shared/config';
 import {
   useSelectedPlaceStore,
   type PlaceSearchResult,
+  type ManualLocationInput,
+  reverseGeocode,
 } from '@/features/search-places';
 import { useSearchResultJump } from '@/features/map-jump';
+import { usePinDropStore } from '@/features/drop-pin';
+import * as Crypto from 'expo-crypto';
 
 interface MapPageProps {
   /** propsで渡されるマップID（URLパラメータより優先） */
@@ -79,6 +83,9 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
 
   // スポットジャンプ用のstoreアクション
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
+
+  // ピン刺しモード開始
+  const startPinDropMode = usePinDropStore((state) => state.startPinDropMode);
 
   // マップIDをグローバルステートに設定
   // スポット作成時などで使用するため、常にセットする
@@ -161,9 +168,31 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
 
   // 地図上でピン刺しモード開始
   const handleMapPinSelect = () => {
-    // TODO: ピン刺しモードを実装
-    // 現状は検索画面が閉じるだけ（OwnMapSearch側でonCloseを呼んでいる）
-    console.log('📍 ピン刺しモード開始');
+    startPinDropMode();
+  };
+
+  // ピン刺し確定時のハンドラー
+  const handlePinDropConfirm = async (pinLocation: { latitude: number; longitude: number }) => {
+    // 逆ジオコーディングで住所を取得
+    let address: string | null = null;
+    try {
+      address = await reverseGeocode(pinLocation.latitude, pinLocation.longitude);
+    } catch (error) {
+      console.warn('住所の取得に失敗しました:', error);
+    }
+
+    const manualInput: ManualLocationInput = {
+      id: Crypto.randomUUID(),
+      name: null,
+      address,
+      latitude: pinLocation.latitude,
+      longitude: pinLocation.longitude,
+      category: [],
+      source: 'map_pin',
+    };
+
+    setSelectedPlace(manualInput);
+    router.push('/create-spot');
   };
 
   // スポット編集
@@ -201,6 +230,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
             isSearchFocused={isSearchFocused}
             onEditSpot={handleEditSpot}
             onDetailCardMaximized={setIsDetailCardMaximized}
+            onPinDropConfirm={handlePinDropConfirm}
           />
         ) : (
           <DefaultMapView
@@ -242,9 +272,9 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
               paddingTop: insets.top,
             }}
           >
-            {isUserMap ? (
+            {isUserMap && selectedMap ? (
               // ユーザーマップ: 自分のマップか他人のマップかで分岐
-              selectedMap?.user_id === user?.id ? (
+              selectedMap.user_id === user?.id ? (
                 // 自分のマップ: Google Places APIで新規スポット検索
                 <OwnMapSearch
                   mapId={currentMapId || effectiveMapId || null}
@@ -254,17 +284,17 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
                   currentLocation={location}
                   onPlaceSelect={handlePlaceSelect}
                   onMapPinSelect={handleMapPinSelect}
-                  themeColor={selectedMap!.theme_color as UserMapThemeColor}
+                  themeColor={selectedMap.theme_color as UserMapThemeColor}
                 />
               ) : (
                 // 他人のマップ: そのマップのスポットを検索
                 <OtherMapSearch
-                  mapId={selectedMap?.id ?? null}
+                  mapId={selectedMap.id}
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
                   onClose={handleSearchClose}
                   onSpotSelect={(spot) => setJumpToSpotId(spot.id)}
-                  themeColor={selectedMap!.theme_color as UserMapThemeColor}
+                  themeColor={selectedMap.theme_color as UserMapThemeColor}
                 />
               )
             ) : (

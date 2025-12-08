@@ -13,14 +13,28 @@ interface UseSpotCameraParams {
   cameraRef: React.RefObject<Mapbox.Camera | null>;
 }
 
+// スポットから座標を取得するヘルパー関数
+function getSpotCoordinates(spot: SpotWithDetails): { latitude: number; longitude: number } | null {
+  // master_spotがあればそこから取得
+  if (spot.master_spot) {
+    return { latitude: spot.master_spot.latitude, longitude: spot.master_spot.longitude };
+  }
+  // なければuser_spotの座標を使用（ピン刺し・現在地登録の場合）
+  if (spot.latitude != null && spot.longitude != null) {
+    return { latitude: spot.latitude, longitude: spot.longitude };
+  }
+  return null;
+}
+
 export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
   // カメラを単一スポットに移動
   const moveCameraToSingleSpot = useCallback(
     (spot: SpotWithDetails) => {
-      if (!spot.master_spot || !cameraRef.current) return;
+      const coords = getSpotCoordinates(spot);
+      if (!coords || !cameraRef.current) return;
 
       cameraRef.current.setCamera({
-        centerCoordinate: [spot.master_spot.longitude, spot.master_spot.latitude],
+        centerCoordinate: [coords.longitude, coords.latitude],
         zoomLevel: MAP_ZOOM.MACHI,
         animationDuration: 1000,
       });
@@ -33,11 +47,13 @@ export function useSpotCamera({ cameraRef }: UseSpotCameraParams) {
     (spots: SpotWithDetails[]) => {
       if (!cameraRef.current || spots.length === 0) return;
 
-      const validSpots = spots.filter((s) => s.master_spot !== null);
-      if (validSpots.length === 0) return;
+      const validCoords = spots
+        .map(getSpotCoordinates)
+        .filter((c): c is { latitude: number; longitude: number } => c !== null);
+      if (validCoords.length === 0) return;
 
-      const lngs = validSpots.map((s) => s.master_spot!.longitude);
-      const lats = validSpots.map((s) => s.master_spot!.latitude);
+      const lngs = validCoords.map((c) => c.longitude);
+      const lats = validCoords.map((c) => c.latitude);
 
       const minLng = Math.min(...lngs);
       const maxLng = Math.max(...lngs);

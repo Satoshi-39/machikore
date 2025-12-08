@@ -177,7 +177,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // SpotWithDetailsから表示用データを抽出
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
-  const spotAddress = spot.master_spot?.google_formatted_address;
+  const spotAddress = spot.master_spot?.google_formatted_address || spot.address;
 
   // テーマカラーの色と縁取りを取得
   const themeColorValue = USER_MAP_THEME_COLORS[themeColor]?.color ?? LOCATION_ICONS.USER_SPOT.color;

@@ -11,6 +11,7 @@ import { useRouter } from 'expo-router';
 import {
   useSelectedPlaceStore,
   isPlaceSearchResult,
+  isManualLocationInput,
 } from '@/features/search-places';
 import { useCreateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
@@ -65,8 +66,8 @@ export function useSpotForm() {
     return defaultReturn;
   }
 
-  // Google Places検索結果でない場合はエラー
-  if (!isPlaceSearchResult(selectedPlace)) {
+  // Google Places検索結果でも手動入力でもない場合はエラー
+  if (!isPlaceSearchResult(selectedPlace) && !isManualLocationInput(selectedPlace)) {
     return defaultReturn;
   }
 
@@ -170,25 +171,28 @@ export function useSpotForm() {
       return;
     }
 
-    // スポット作成
+    // スポット作成（Google Places検索結果か手動入力かで分岐）
+    const isGooglePlace = isPlaceSearchResult(selectedPlace);
+
     createSpot(
       {
         userId: user.id,
         mapId: data.mapId,
         machiId,
-        name: selectedPlace.name,
+        name: selectedPlace.name ?? data.customName,
         latitude: selectedPlace.latitude,
         longitude: selectedPlace.longitude,
-        googlePlaceId: selectedPlace.googleData.placeId,
-        googleFormattedAddress: selectedPlace.address,
-        googleTypes: selectedPlace.category,
-        googlePhoneNumber: selectedPlace.googleData.internationalPhoneNumber,
-        googleWebsiteUri: selectedPlace.googleData.websiteUri,
-        googleRating: selectedPlace.googleData.rating,
-        googleUserRatingCount: selectedPlace.googleData.userRatingCount,
+        googlePlaceId: isGooglePlace ? selectedPlace.googleData.placeId : null,
+        googleFormattedAddress: isGooglePlace ? selectedPlace.address : null,
+        googleTypes: isGooglePlace ? selectedPlace.category : [],
+        googlePhoneNumber: isGooglePlace ? selectedPlace.googleData.internationalPhoneNumber : null,
+        googleWebsiteUri: isGooglePlace ? selectedPlace.googleData.websiteUri : null,
+        googleRating: isGooglePlace ? selectedPlace.googleData.rating : null,
+        googleUserRatingCount: isGooglePlace ? selectedPlace.googleData.userRatingCount : null,
         customName: data.customName,
         description: data.description,
         tags: data.tags,
+        address: isGooglePlace ? null : selectedPlace.address,
       },
       {
         onSuccess: async (spotId) => {

@@ -19,7 +19,7 @@ interface ArticleSpotSectionProps {
 
 export function ArticleSpotSection({ spot, index, onPress, onImagePress }: ArticleSpotSectionProps) {
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
-  const address = spot.master_spot?.google_formatted_address;
+  const address = spot.master_spot?.google_formatted_address || spot.address;
 
   return (
     <View className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light">

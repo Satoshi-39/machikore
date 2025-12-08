@@ -27,3 +27,6 @@ export type {
   MachikorePlaceSearchResult,
   MachikorePlaceSearchOptions,
 } from './api/searchMachikorePlaces';
+
+// Reverse Geocoding
+export { reverseGeocode, reverseGeocodeDetailed } from './api/google-reverse-geocode';

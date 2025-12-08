@@ -150,14 +150,14 @@ function SpotCard({
           </View>
 
           {/* 住所 */}
-          {spot.master_spot?.google_formatted_address && (
+          {(spot.master_spot?.google_formatted_address || spot.address) && (
             <View className="flex-row items-center mt-2">
               <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
               <Text
                 className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 flex-1"
                 numberOfLines={1}
               >
-                {spot.master_spot.google_formatted_address}
+                {spot.master_spot?.google_formatted_address || spot.address}
               </Text>
             </View>
           )}

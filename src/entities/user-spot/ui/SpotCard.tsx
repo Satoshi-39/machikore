@@ -123,6 +123,10 @@ export function SpotCard({
     if (embeddedMasterSpot?.google_formatted_address) {
       return embeddedMasterSpot.google_formatted_address;
     }
+    // ピン刺し・現在地登録の場合はuser_spotの住所を使用
+    if ('address' in spot && spot.address) {
+      return spot.address;
+    }
     return null;
   };
 

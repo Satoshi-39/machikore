@@ -160,21 +160,21 @@ export function EditSpotForm({
           )}
 
           {/* 住所 */}
-          {spot.master_spot?.google_formatted_address && (
+          {(spot.master_spot?.google_formatted_address || spot.address) && (
             <View className="mb-3">
               <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">住所</Text>
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                {spot.master_spot.google_formatted_address}
+                {spot.master_spot?.google_formatted_address || spot.address}
               </Text>
             </View>
           )}
 
           {/* 座標 */}
-          {spot.master_spot && (
+          {(spot.master_spot || (spot.latitude != null && spot.longitude != null)) && (
             <View className="flex-row items-center">
               <Ionicons name="location" size={16} color={colors.gray[500]} />
               <Text className="ml-1 text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                {spot.master_spot.latitude.toFixed(6)}, {spot.master_spot.longitude.toFixed(6)}
+                {(spot.master_spot?.latitude ?? spot.latitude)?.toFixed(6)}, {(spot.master_spot?.longitude ?? spot.longitude)?.toFixed(6)}
               </Text>
             </View>
           )}

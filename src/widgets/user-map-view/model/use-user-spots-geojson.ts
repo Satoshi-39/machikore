@@ -10,6 +10,9 @@ import { determineSpotCategory } from '@/entities/master-spot';
 interface UserSpotWithMasterSpot {
   id: string;
   custom_name: string | null;
+  // ピン刺し・現在地登録の場合はuser_spotに直接座標がある
+  latitude?: number | null;
+  longitude?: number | null;
   master_spot: {
     id: string;
     name: string;
@@ -30,17 +33,28 @@ export function useUserSpotsGeoJson(
 ): FeatureCollection<Point, UserSpotGeoJsonProperties> {
   return useMemo(() => {
     const features = spots
-      .filter((spot) => spot.master_spot !== null)
+      .filter((spot) => {
+        // master_spotがあるか、user_spotに直接座標があるスポットのみ
+        if (spot.master_spot) return true;
+        if (spot.latitude != null && spot.longitude != null) return true;
+        return false;
+      })
       .map((spot) => {
-        const masterSpot = spot.master_spot!;
-        const name = spot.custom_name || masterSpot.name;
-        const category = determineSpotCategory(masterSpot.google_types);
+        // 座標: master_spotがあればそこから、なければuser_spotから取得
+        const latitude = spot.master_spot?.latitude ?? spot.latitude!;
+        const longitude = spot.master_spot?.longitude ?? spot.longitude!;
+        // 名前: custom_nameを優先、なければmaster_spotの名前
+        const name = spot.custom_name || spot.master_spot?.name || '';
+        // カテゴリ: master_spotがあればgoogle_typesから判定、なければ'other'
+        const category = spot.master_spot
+          ? determineSpotCategory(spot.master_spot.google_types)
+          : 'other' as SpotCategory;
 
         return {
           type: 'Feature' as const,
           geometry: {
             type: 'Point' as const,
-            coordinates: [masterSpot.longitude, masterSpot.latitude],
+            coordinates: [longitude, latitude],
           },
           properties: {
             id: spot.id,

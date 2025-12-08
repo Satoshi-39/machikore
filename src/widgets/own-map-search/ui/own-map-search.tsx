@@ -14,6 +14,7 @@ import {
   useSelectedPlaceStore,
   type PlaceSearchResult,
   type ManualLocationInput,
+  reverseGeocode,
 } from '@/features/search-places';
 import { usePlaceSelectHandler } from '../model';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
@@ -86,16 +87,24 @@ export function OwnMapSearch({
   };
 
   // 現在地を登録
-  const handleCurrentLocationRegister = () => {
+  const handleCurrentLocationRegister = async () => {
     if (!currentLocation) {
       Alert.alert('位置情報が取得できません', '位置情報の許可を確認してください');
       return;
     }
 
+    // 逆ジオコーディングで住所を取得
+    let address: string | null = null;
+    try {
+      address = await reverseGeocode(currentLocation.latitude, currentLocation.longitude);
+    } catch (error) {
+      console.warn('住所の取得に失敗しました:', error);
+    }
+
     const manualInput: ManualLocationInput = {
       id: Crypto.randomUUID(),
       name: null,
-      address: null,
+      address,
       latitude: currentLocation.latitude,
       longitude: currentLocation.longitude,
       category: [],

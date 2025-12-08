@@ -87,7 +87,7 @@ export function LikeSpotList({
       if (item.type === 'userSpot') {
         // ユーザースポット：ユーザーのアバターを表示
         const spotName = item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット';
-        const address = item.spot.master_spot?.google_formatted_address;
+        const address = item.spot.master_spot?.google_formatted_address || item.spot.address;
         const user = item.spot.user;
 
         const content = (

@@ -89,7 +89,7 @@ export interface SpotWithDetails {
   id: string;
   user_id: string;
   map_id: string;
-  master_spot_id: string;
+  master_spot_id: string | null;
   machi_id: string;
   custom_name: string | null;
   description: string | null;
@@ -100,6 +100,11 @@ export interface SpotWithDetails {
   order_index: number;
   created_at: string;
   updated_at: string;
+  /** ピン刺し・現在地登録の場合の座標（master_spotがない場合に使用） */
+  latitude?: number | null;
+  longitude?: number | null;
+  /** ピン刺し・現在地登録の場合の住所（master_spotがない場合に使用） */
+  address?: string | null;
   master_spot: MasterSpotBasicInfo | null;
   user: UserBasicInfo | null;
   /** 所属するマップの情報 */

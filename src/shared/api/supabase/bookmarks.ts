@@ -37,6 +37,8 @@ export interface BookmarkWithDetails extends Bookmark {
     custom_name: string | null;
     description: string | null;
     likes_count: number;
+    /** ピン刺し・現在地登録の場合の住所 */
+    address: string | null;
     master_spot: {
       id: string;
       name: string;
@@ -449,6 +451,7 @@ export async function getUserBookmarks(
         custom_name,
         description,
         likes_count,
+        address,
         master_spots (
           id,
           name,
@@ -508,6 +511,7 @@ export async function getUserBookmarks(
           custom_name: bookmark.user_spots.custom_name,
           description: bookmark.user_spots.description,
           likes_count: bookmark.user_spots.likes_count,
+          address: bookmark.user_spots.address,
           master_spot: bookmark.user_spots.master_spots || null,
           user: bookmark.user_spots.users || null,
         }

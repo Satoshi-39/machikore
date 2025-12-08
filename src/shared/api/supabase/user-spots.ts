@@ -24,7 +24,7 @@ export interface CreateSpotInput {
   name: string;
   latitude: number;
   longitude: number;
-  googlePlaceId: string;
+  googlePlaceId?: string | null;  // ピン刺し・現在地登録の場合はnull
   googleFormattedAddress?: string | null;
   googleTypes?: string[] | null;
   googlePhoneNumber?: string | null;
@@ -35,6 +35,8 @@ export interface CreateSpotInput {
   customName?: string | null;
   description?: string | null;
   tags?: string[] | null;
+  /** ピン刺し・現在地登録の場合の住所（Reverse Geocodingで取得） */
+  address?: string | null;
 }
 
 export interface UpdateSpotInput {
@@ -134,7 +136,7 @@ async function getOrCreateMasterSpot(input: {
   name: string;
   latitude: number;
   longitude: number;
-  googlePlaceId: string;
+  googlePlaceId?: string | null;
   googleFormattedAddress?: string | null;
   googleTypes?: string[] | null;
   googlePhoneNumber?: string | null;
@@ -142,23 +144,25 @@ async function getOrCreateMasterSpot(input: {
   googleRating?: number | null;
   googleUserRatingCount?: number | null;
 }): Promise<string> {
-  // まず既存のmaster_spotを検索（google_place_idで）
-  const { data: existing } = await supabase
-    .from('master_spots')
-    .select('id')
-    .eq('google_place_id', input.googlePlaceId)
-    .single();
+  // Google Place IDがある場合は既存のmaster_spotを検索
+  if (input.googlePlaceId) {
+    const { data: existing } = await supabase
+      .from('master_spots')
+      .select('id')
+      .eq('google_place_id', input.googlePlaceId)
+      .single();
 
-  if (existing) {
-    return existing.id;
+    if (existing) {
+      return existing.id;
+    }
   }
 
-  // 新規作成
+  // 新規作成（ピン刺し・現在地登録の場合はgoogle_place_idがnull）
   const insertData: MasterSpotInsert = {
     name: input.name,
     latitude: input.latitude,
     longitude: input.longitude,
-    google_place_id: input.googlePlaceId,
+    google_place_id: input.googlePlaceId ?? null,
     google_formatted_address: input.googleFormattedAddress ?? null,
     google_types: input.googleTypes ?? null,
     google_phone_number: input.googlePhoneNumber ?? null,
@@ -184,27 +188,34 @@ async function getOrCreateMasterSpot(input: {
  * スポットを作成（master_spot + user_spot）
  */
 export async function createSpot(input: CreateSpotInput): Promise<string> {
-  // 1. master_spotを取得または作成
-  const masterSpotId = await getOrCreateMasterSpot({
-    name: input.name,
-    latitude: input.latitude,
-    longitude: input.longitude,
-    googlePlaceId: input.googlePlaceId,
-    googleFormattedAddress: input.googleFormattedAddress,
-    googleTypes: input.googleTypes,
-    googlePhoneNumber: input.googlePhoneNumber,
-    googleWebsiteUri: input.googleWebsiteUri,
-    googleRating: input.googleRating,
-    googleUserRatingCount: input.googleUserRatingCount,
-  });
+  // 1. google_place_idがある場合のみmaster_spotを取得または作成
+  let masterSpotId: string | null = null;
+  if (input.googlePlaceId) {
+    masterSpotId = await getOrCreateMasterSpot({
+      name: input.name,
+      latitude: input.latitude,
+      longitude: input.longitude,
+      googlePlaceId: input.googlePlaceId,
+      googleFormattedAddress: input.googleFormattedAddress,
+      googleTypes: input.googleTypes,
+      googlePhoneNumber: input.googlePhoneNumber,
+      googleWebsiteUri: input.googleWebsiteUri,
+      googleRating: input.googleRating,
+      googleUserRatingCount: input.googleUserRatingCount,
+    });
+  }
 
   // 2. user_spotを作成
+  // ピン刺し・現在地登録の場合（googlePlaceIdがない）は座標と住所をuser_spotに直接保存
   const userSpotInsert: UserSpotInsert = {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
     machi_id: input.machiId,
-    custom_name: input.customName ?? null,
+    latitude: input.googlePlaceId ? null : input.latitude,
+    longitude: input.googlePlaceId ? null : input.longitude,
+    address: input.googlePlaceId ? null : input.address ?? null,
+    custom_name: input.customName ?? input.name,
     description: input.description ?? null,
     tags: input.tags ?? null,
   };
@@ -338,6 +349,9 @@ export async function getSpotWithDetails(
     order_index: spot.order_index,
     created_at: spot.created_at,
     updated_at: spot.updated_at,
+    latitude: spot.latitude,
+    longitude: spot.longitude,
+    address: spot.address,
     master_spot: spot.master_spots || null,
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
@@ -468,6 +482,9 @@ export async function getPublicSpots(
       order_index: spot.order_index,
       created_at: spot.created_at,
       updated_at: spot.updated_at,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+      address: spot.address,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
       map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,

@@ -105,9 +105,9 @@ export function BookmarkItemList({
                 <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
                   {item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット'}
                 </Text>
-                {item.spot.master_spot?.google_formatted_address && (
+                {(item.spot.master_spot?.google_formatted_address || item.spot.address) && (
                   <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
-                    {item.spot.master_spot.google_formatted_address}
+                    {item.spot.master_spot?.google_formatted_address || item.spot.address}
                   </Text>
                 )}
                 {user && (
