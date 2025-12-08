@@ -20,6 +20,7 @@ export interface MachikorePlaceSearchResult {
   // spotの場合の追加情報
   userId?: string;
   mapId?: string;
+  googleTypes?: string[] | null;
 }
 
 export interface MachikorePlaceSearchOptions {
@@ -112,7 +113,7 @@ function searchMachis(query: string, limit: number): MachikorePlaceSearchResult[
 async function searchMasterSpots(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
   const { data: spots, error } = await supabase
     .from('master_spots')
-    .select('id, name, latitude, longitude, google_formatted_address')
+    .select('id, name, latitude, longitude, google_formatted_address, google_types')
     .or(`name.ilike.%${query}%,google_formatted_address.ilike.%${query}%`)
     .limit(limit);
 
@@ -127,6 +128,7 @@ async function searchMasterSpots(query: string, limit: number): Promise<Machikor
     latitude: spot.latitude,
     longitude: spot.longitude,
     type: 'spot' as const,
+    googleTypes: spot.google_types,
   }));
 }
 

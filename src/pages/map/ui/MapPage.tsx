@@ -23,6 +23,7 @@ import { OtherMapSearch } from '@/widgets/other-map-search';
 import { MapHeader } from '@/widgets/map-header';
 import { useLocation, useCurrentTab } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
+import type { UserMapThemeColor } from '@/shared/config';
 import {
   useSelectedPlaceStore,
   type PlaceSearchResult,
@@ -253,6 +254,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
                   currentLocation={location}
                   onPlaceSelect={handlePlaceSelect}
                   onMapPinSelect={handleMapPinSelect}
+                  themeColor={selectedMap!.theme_color as UserMapThemeColor}
                 />
               ) : (
                 // 他人のマップ: そのマップのスポットを検索
@@ -262,6 +264,7 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
                   onSearchChange={setSearchQuery}
                   onClose={handleSearchClose}
                   onSpotSelect={(spot) => setJumpToSpotId(spot.id)}
+                  themeColor={selectedMap!.theme_color as UserMapThemeColor}
                 />
               )
             ) : (

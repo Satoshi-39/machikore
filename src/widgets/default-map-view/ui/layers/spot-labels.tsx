@@ -40,7 +40,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
           filter={['==', ['get', 'category'], 'food']}
           style={{
             iconImage: 'spot-food',
-            iconSize: 0.3,
+            iconSize: 0.18,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.food,
@@ -61,7 +61,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
           filter={['==', ['get', 'category'], 'shopping']}
           style={{
             iconImage: 'spot-shopping',
-            iconSize: 0.3,
+            iconSize: 0.18,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.shopping,
@@ -82,7 +82,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
           filter={['==', ['get', 'category'], 'tourism']}
           style={{
             iconImage: 'spot-tourism',
-            iconSize: 0.3,
+            iconSize: 0.18,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.tourism,
@@ -103,7 +103,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
           filter={['==', ['get', 'category'], 'transit']}
           style={{
             iconImage: 'spot-transit',
-            iconSize: 0.3,
+            iconSize: 0.18,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.transit,
@@ -124,7 +124,7 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
           filter={['==', ['get', 'category'], 'other']}
           style={{
             iconImage: 'spot-other',
-            iconSize: 0.3,
+            iconSize: 0.18,
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_CATEGORY_COLORS.other,

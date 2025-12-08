@@ -6,9 +6,10 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
-import { Loading, EmptyState, ErrorView, SearchBar } from '@/shared/ui';
+import { colors, SPOT_CATEGORY_COLORS } from '@/shared/config';
+import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
+import { determineSpotCategory } from '@/entities/master-spot';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 
 interface DefaultMapSearchProps {
@@ -116,9 +117,14 @@ export function DefaultMapSearch({
                     prefecture: { bgColor: 'bg-purple-100', iconName: 'earth' as const, iconColor: '#9333ea', label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
                     city: { bgColor: 'bg-orange-100', iconName: 'business' as const, iconColor: '#ea580c', label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
                     machi: { bgColor: 'bg-green-100', iconName: 'map' as const, iconColor: colors.secondary.DEFAULT, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
-                    spot: { bgColor: 'bg-blue-100', iconName: 'location' as const, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
+                    spot: { bgColor: 'bg-surface-secondary dark:bg-gray-200', iconName: 'location' as const, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
                   };
                   const config = typeConfig[place.type];
+
+                  // スポットの場合はカテゴリカラーを使用
+                  const spotCategoryColor = place.type === 'spot'
+                    ? SPOT_CATEGORY_COLORS[determineSpotCategory(place.googleTypes ?? null)]
+                    : null;
 
                   return (
                     <Pressable
@@ -127,11 +133,15 @@ export function DefaultMapSearch({
                       className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                     >
                       <View className={`w-10 h-10 rounded-full items-center justify-center ${config.bgColor}`}>
-                        <Ionicons
-                          name={config.iconName}
-                          size={20}
-                          color={config.iconColor}
-                        />
+                        {place.type === 'spot' ? (
+                          <LocationPinIcon size={20} color={spotCategoryColor!} />
+                        ) : (
+                          <Ionicons
+                            name={config.iconName}
+                            size={20}
+                            color={config.iconColor}
+                          />
+                        )}
                       </View>
                       <View className="flex-1 ml-3">
                         <View className="flex-row items-center gap-2">

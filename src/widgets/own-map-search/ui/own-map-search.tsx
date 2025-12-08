@@ -6,9 +6,9 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { Loading, EmptyState, ErrorView, SearchBar } from '@/shared/ui';
+import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import {
   useSearchGooglePlaces,
   useSelectedPlaceStore,
@@ -28,6 +28,8 @@ interface OwnMapSearchProps {
   onPlaceSelect?: (place: PlaceSearchResult) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   onMapPinSelect?: () => void; // 地図上でピン刺しモード開始
+  /** マップのテーマカラー */
+  themeColor: UserMapThemeColor;
 }
 
 export function OwnMapSearch({
@@ -38,6 +40,7 @@ export function OwnMapSearch({
   onPlaceSelect,
   currentLocation = null,
   onMapPinSelect,
+  themeColor,
 }: OwnMapSearchProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
@@ -202,8 +205,12 @@ export function OwnMapSearch({
                     onPress={() => handlePlaceSelect(place)}
                     className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                   >
-                    <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
-                      <Ionicons name="location-outline" size={20} color={colors.primary.DEFAULT} />
+                    <View className="w-10 h-10 rounded-full items-center justify-center bg-muted dark:bg-dark-foreground-secondary">
+                      <LocationPinIcon
+                        size={24}
+                        color={USER_MAP_THEME_COLORS[themeColor].color}
+                        strokeColor={getThemeColorStroke(themeColor, isDarkMode)}
+                      />
                     </View>
                     <View className="flex-1 ml-3">
                       <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>

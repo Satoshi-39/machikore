@@ -6,8 +6,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
-import { Loading, EmptyState, ErrorView, SearchBar } from '@/shared/ui';
+import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { searchSpotsByMapId, type MapSpotSearchResult } from '@/shared/api/supabase/user-spots';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 
@@ -17,6 +18,8 @@ interface OtherMapSearchProps {
   onSearchChange: (query: string) => void;
   onClose: () => void;
   onSpotSelect?: (spot: MapSpotSearchResult) => void;
+  /** マップのテーマカラー */
+  themeColor: UserMapThemeColor;
 }
 
 export function OtherMapSearch({
@@ -25,7 +28,9 @@ export function OtherMapSearch({
   onSearchChange,
   onClose,
   onSpotSelect,
+  themeColor,
 }: OtherMapSearchProps) {
+  const isDarkMode = useIsDarkMode();
   const [results, setResults] = useState<MapSpotSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -137,11 +142,11 @@ export function OtherMapSearch({
                     onPress={() => handleSpotSelect(spot)}
                     className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                   >
-                    <View className="w-10 h-10 rounded-full bg-blue-100 items-center justify-center">
-                      <Ionicons
-                        name="location-outline"
-                        size={20}
-                        color={colors.primary.DEFAULT}
+                    <View className="w-10 h-10 rounded-full items-center justify-center bg-muted dark:bg-dark-foreground-secondary">
+                      <LocationPinIcon
+                        size={24}
+                        color={USER_MAP_THEME_COLORS[themeColor].color}
+                        strokeColor={getThemeColorStroke(themeColor, isDarkMode)}
                       />
                     </View>
                     <View className="flex-1 ml-3">

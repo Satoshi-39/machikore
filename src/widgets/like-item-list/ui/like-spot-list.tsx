@@ -6,8 +6,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, Text, Pressable, FlatList, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, LOCATION_ICONS } from '@/shared/config';
+import { colors, SPOT_CATEGORY_COLORS } from '@/shared/config';
 import { Loading, EmptyState, SwipeableRow, LocationPinIcon } from '@/shared/ui';
+import { determineSpotCategory } from '@/entities/master-spot';
 import type { SpotWithDetails } from '@/shared/types';
 
 export interface LikedSpotItem {
@@ -111,7 +112,7 @@ export function LikeSpotList({
                     className="w-10 h-10 rounded-full mr-3"
                   />
                 ) : (
-                  <View className="w-10 h-10 rounded-full bg-gray-200 items-center justify-center mr-3">
+                  <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-foreground-secondary items-center justify-center mr-3">
                     <Ionicons name="person" size={20} color={colors.gray[500]} />
                   </View>
                 )}
@@ -142,8 +143,10 @@ export function LikeSpotList({
           </SwipeableRow>
         ) : content;
       } else {
-        // マスタースポット：青いスポットアイコンを表示
+        // マスタースポット：カテゴリ色のスポットアイコンを表示
         const { masterSpot } = item;
+        const category = determineSpotCategory(masterSpot.google_types);
+        const categoryColor = SPOT_CATEGORY_COLORS[category];
 
         const content = (
           <Pressable
@@ -151,9 +154,9 @@ export function LikeSpotList({
             className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
           >
             <View className="flex-row items-center">
-              {/* 青いスポットアイコン */}
-              <View className={`w-10 h-10 rounded-full ${LOCATION_ICONS.MASTER_SPOT.bgColor} items-center justify-center mr-3`}>
-                <LocationPinIcon size={20} color={LOCATION_ICONS.MASTER_SPOT.color} />
+              {/* カテゴリ色のスポットアイコン */}
+              <View className="w-10 h-10 rounded-full bg-surface-secondary dark:bg-gray-200 items-center justify-center mr-3">
+                <LocationPinIcon size={20} color={categoryColor} />
               </View>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
