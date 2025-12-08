@@ -9,7 +9,7 @@ import { LOCATION_ICONS } from '@/shared/config/constants';
 import type { VisitFilter } from '@/features/quick-search-buttons';
 
 // アイコン画像（緑色）
-const storefrontIcon = require('@assets/icons/storefront-machi.png');
+const storefrontIcon = require('@assets/icons/storefront.png');
 
 interface MachiLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string; isVisited: boolean }>;

@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
-import { colors, LOCATION_ICONS, USER_MAP_THEME_COLORS, type UserMapThemeColor } from '@/shared/config';
+import { colors, LOCATION_ICONS, USER_MAP_THEME_COLORS, SPOT_CATEGORY_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
 import {
   showLoginRequiredAlert,
   useCurrentTab,
@@ -21,6 +21,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { useSpotsByMasterSpot } from '@/entities/user-spot';
+import { determineSpotCategory } from '@/entities/master-spot';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMasterSpotLiked, useToggleMasterSpotLike } from '@/entities/like';
@@ -231,14 +232,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
             <View className="flex-row items-center mb-1">
-              <LocationPinIcon size={24} color={LOCATION_ICONS.MASTER_SPOT.color} />
+              <LocationPinIcon size={24} color={SPOT_CATEGORY_COLORS[determineSpotCategory(spot.google_types)]} />
               <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
                 {spot.name}
               </Text>
             </View>
             {spot.google_formatted_address && (
               <View className="flex-row items-center">
-                <AddressPinIcon size={14} color="#6B7280" />
+                <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spot.google_formatted_address}</Text>
               </View>
             )}
@@ -380,6 +381,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                       <LocationPinIcon
                         size={14}
                         color={USER_MAP_THEME_COLORS[userSpot.map!.theme_color as UserMapThemeColor].color}
+                        strokeColor={getThemeColorStroke(userSpot.map!.theme_color as UserMapThemeColor, isDarkMode)}
                       />
                       <Text className="text-sm font-medium text-foreground dark:text-dark-foreground ml-1">
                         {userSpot.custom_name}

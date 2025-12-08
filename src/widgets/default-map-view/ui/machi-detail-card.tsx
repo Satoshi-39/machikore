@@ -7,7 +7,7 @@ import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, LOCATION_ICONS } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_CATEGORY_COLORS } from '@/shared/config';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
@@ -176,7 +176,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             {/* 所在地 */}
             {(machi.prefecture_name || machi.city_name) && (
               <View className="flex-row items-center">
-                <AddressPinIcon size={14} color="#6B7280" />
+                <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
                   {[machi.prefecture_name, machi.city_name].filter(Boolean).join(' ')}
                 </Text>
@@ -251,13 +251,13 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
         {/* スポットランキング */}
         <View className="mt-4">
           <View className="flex-row items-center mb-3">
-            <LocationPinIcon size={18} color={LOCATION_ICONS.MASTER_SPOT.color} />
+            <LocationPinIcon size={18} color={SPOT_CATEGORY_COLORS.popular} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
               人気スポット
             </Text>
             {masterSpots.length > 0 && (
-              <View className={`ml-2 px-2 py-0.5 ${LOCATION_ICONS.MASTER_SPOT.bgColor} rounded-full`}>
-                <Text className="text-xs font-semibold" style={{ color: LOCATION_ICONS.MASTER_SPOT.color }}>
+              <View className="ml-2 px-2 py-0.5 bg-amber-100 rounded-full">
+                <Text className="text-xs font-semibold" style={{ color: SPOT_CATEGORY_COLORS.popular }}>
                   {masterSpots.length}
                 </Text>
               </View>

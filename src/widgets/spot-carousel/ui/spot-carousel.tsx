@@ -22,8 +22,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
-import { LocationPinIcon } from '@/shared/ui';
-import { LOCATION_ICONS, USER_MAP_THEME_COLORS, type UserMapThemeColor } from '@/shared/config';
+import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
+import { LOCATION_ICONS, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
 import { useToggleSpotLike } from '@/entities/like';
 import {
   useSpotBookmarkInfo,
@@ -68,6 +68,7 @@ function SpotCard({
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
   const description = spot.description;
   const themeColorValue = USER_MAP_THEME_COLORS[themeColor]?.color ?? LOCATION_ICONS.USER_SPOT.color;
+  const themeColorStroke = getThemeColorStroke(themeColor, isDarkMode);
 
   // いいね
   const isLiked = spot.is_liked ?? false;
@@ -139,7 +140,7 @@ function SpotCard({
         <View className="flex-1 p-4">
           {/* タイトル */}
           <View className="flex-row items-center">
-            <LocationPinIcon size={20} color={themeColorValue} />
+            <LocationPinIcon size={20} color={themeColorValue} strokeColor={themeColorStroke} />
             <Text
               className="text-xl font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
               numberOfLines={2}
@@ -151,7 +152,7 @@ function SpotCard({
           {/* 住所 */}
           {spot.master_spot?.google_formatted_address && (
             <View className="flex-row items-center mt-2">
-              <Ionicons name="location-outline" size={14} color="#6B7280" />
+              <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
               <Text
                 className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 flex-1"
                 numberOfLines={1}

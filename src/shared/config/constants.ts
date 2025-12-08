@@ -106,6 +106,7 @@ export const SPOT_CATEGORY_COLORS = {
   tourism: '#10B981', // 緑 - 公園・観光地系
   transit: '#3B82F6', // 青 - 交通系
   other: '#A78BFA', // 薄い紫 - その他
+  popular: '#F59E0B', // ゴールド - 人気スポット
 } as const;
 
 // ===============================
@@ -177,6 +178,28 @@ export const USER_MAP_THEME_COLOR_LIST = Object.entries(
   USER_MAP_THEME_COLORS
 ).map(([key, value]) => ({ key: key as UserMapThemeColor, ...value }));
 
+/**
+ * テーマカラーが縁取りを必要とするかどうかを判定
+ * @param themeColor テーマカラー
+ * @param isDarkMode ダークモードかどうか
+ * @returns 縁取りの色（不要な場合はundefined）
+ */
+export function getThemeColorStroke(themeColor: UserMapThemeColor, isDarkMode: boolean): string | undefined {
+  const config = USER_MAP_THEME_COLORS[themeColor];
+  if (!config) return undefined;
+
+  // ライトモードで縁取りが必要（白）
+  if ('useOutlinedIconInLight' in config && !isDarkMode && config.useOutlinedIconInLight) {
+    return config.haloLight;
+  }
+  // ダークモードで縁取りが必要（グレー）
+  if ('useOutlinedIconInDark' in config && isDarkMode && config.useOutlinedIconInDark) {
+    return config.haloDark;
+  }
+
+  return undefined;
+}
+
 // ===============================
 // 地名アイコン設定
 // ===============================
@@ -211,6 +234,12 @@ export const LOCATION_ICONS = {
     name: 'location-outline' as const,
     color: '#ec4899', // pink-500
     bgColor: 'bg-pink-100',
+  },
+  /** 住所アイコン */
+  ADDRESS: {
+    color: '#6B7280', // gray-500
+    holeColorLight: '#FFFFFF',
+    holeColorDark: '#1f2937', // gray-800
   },
   /** 国 */
   COUNTRY: {
