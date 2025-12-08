@@ -1,8 +1,8 @@
 /**
- * スポットカルーセルWidget
+ * スポットカルーセル
  *
  * マップ下部に表示される横スワイプ式のスポットカード
- * FSDの原則：Widget層は複合的なUIコンポーネント
+ * UserMapViewの内部コンポーネント
  */
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';

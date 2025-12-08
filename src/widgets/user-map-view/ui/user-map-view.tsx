@@ -16,7 +16,7 @@ import { ENV, type UserMapThemeColor } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
 import { UserSpotLabels } from './layers';
-import { SpotCarousel } from '@/widgets/spot-carousel';
+import { SpotCarousel } from './spot-carousel';
 import Mapbox from '@rnmapbox/maps';
 import React, {
   forwardRef,
@@ -28,7 +28,7 @@ import React, {
 } from 'react';
 import { View, Dimensions } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming, useSharedValue } from 'react-native-reanimated';
-import { useSpotCamera, useUserSpotsGeoJson } from '../model';
+import { useSpotCamera, useUserSpotsGeoJson, usePinDropAutoCancel } from '../model';
 
 // 画面サイズと現在地ボタンの位置計算用定数
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -151,6 +151,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     // ピン刺しモードのストア
     const isPinDropMode = usePinDropStore((state) => state.isActive);
     const endPinDropMode = usePinDropStore((state) => state.endPinDropMode);
+
+    // ページがフォーカスを失った時にピン刺しモードを自動キャンセル
+    usePinDropAutoCancel();
 
     // ピン刺しモード開始時にカルーセル/詳細カードを閉じる
     useEffect(() => {

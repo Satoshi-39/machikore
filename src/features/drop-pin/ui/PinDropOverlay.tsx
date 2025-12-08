@@ -8,7 +8,8 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { USER_MAP_THEME_COLORS, type UserMapThemeColor } from '@/shared/config';
+import { USER_MAP_THEME_COLORS, colors, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { LocationPinIcon } from '@/shared/ui';
 
 interface PinDropOverlayProps {
@@ -22,7 +23,20 @@ interface PinDropOverlayProps {
 
 export function PinDropOverlay({ onConfirm, onCancel, themeColor }: PinDropOverlayProps) {
   const insets = useSafeAreaInsets();
-  const pinColor = USER_MAP_THEME_COLORS[themeColor].color;
+  const isDarkMode = useIsDarkMode();
+  const themeConfig = USER_MAP_THEME_COLORS[themeColor];
+  const pinColor = themeConfig.color;
+
+  // ピンの縁取り色（白/グレーテーマの場合に必要）
+  const pinStrokeColor = getThemeColorStroke(themeColor, isDarkMode);
+
+  // 確定ボタンの色（テーマカラー）
+  // 白テーマの場合は文字色を黒にする
+  const isWhiteTheme = themeColor === 'white';
+  const confirmButtonTextColor = isWhiteTheme ? '#374151' : '#FFFFFF';
+
+  // 閉じるボタンの色（ライト/ダークモード対応）
+  const closeButtonColor = isDarkMode ? colors.gray[300] : colors.gray[600];
 
   return (
     <View className="absolute inset-0 pointer-events-box-none" pointerEvents="box-none">
@@ -45,7 +59,7 @@ export function PinDropOverlay({ onConfirm, onCancel, themeColor }: PinDropOverl
         style={{ transform: [{ translateX: -20 }, { translateY: -40 }] }}
         pointerEvents="none"
       >
-        <LocationPinIcon size={40} color={pinColor} />
+        <LocationPinIcon size={40} color={pinColor} strokeColor={pinStrokeColor} />
       </View>
 
       {/* 下部：確定ボタン + 閉じるボタン */}
@@ -60,7 +74,7 @@ export function PinDropOverlay({ onConfirm, onCancel, themeColor }: PinDropOverl
             className="p-1"
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
-            <Ionicons name="close" size={24} color="#666" />
+            <Ionicons name="close" size={24} color={closeButtonColor} />
           </Pressable>
         </View>
 
@@ -68,9 +82,13 @@ export function PinDropOverlay({ onConfirm, onCancel, themeColor }: PinDropOverl
         <Pressable
           onPress={onConfirm}
           className="px-12 py-3 rounded-full active:opacity-80"
-          style={{ backgroundColor: pinColor }}
+          style={{
+            backgroundColor: pinColor,
+            // 白テーマの場合は枠線を追加
+            ...(isWhiteTheme && { borderWidth: 1, borderColor: '#D1D5DB' }),
+          }}
         >
-          <Text className="text-white font-semibold text-base">
+          <Text style={{ color: confirmButtonTextColor }} className="font-semibold text-base">
             この位置で登録
           </Text>
         </Pressable>
