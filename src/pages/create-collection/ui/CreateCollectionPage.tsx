@@ -106,7 +106,9 @@ export function CreateCollectionPage() {
           >
             <Text
               className={`text-base font-semibold ${
-                isValid && !isSubmitting ? 'text-blue-500' : 'text-gray-300'
+                isValid && !isSubmitting
+                  ? 'text-foreground dark:text-dark-foreground'
+                  : 'text-foreground-muted dark:text-dark-foreground-muted'
               }`}
             >
               {isSubmitting ? '作成中...' : '作成'}

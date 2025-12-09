@@ -157,10 +157,10 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
         コレクション
       </Text>
       <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
-        マップをテーマ別にまとめましょう
+        {isOwner ? 'マップをテーマ別にまとめましょう' : 'コレクションが作成されていません'}
       </Text>
     </View>
-  ), []);
+  ), [isOwner]);
 
   // ローディング中
   if (isLoading) {
