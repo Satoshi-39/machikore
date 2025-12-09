@@ -10,11 +10,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ScrollView,
   Alert,
   Modal,
   ActivityIndicator,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { StyledTextInput, TagInput, AddressPinIcon } from '@/shared/ui';
@@ -103,10 +103,11 @@ export function CreateSpotForm({
   };
 
   return (
-    <ScrollView
+    <KeyboardAwareScrollView
       className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
       keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
+      enableOnAndroid
+      extraScrollHeight={20}
     >
       {/* ローディングオーバーレイ */}
       <Modal visible={isLoading} transparent animationType="fade">
@@ -264,7 +265,7 @@ export function CreateSpotForm({
         </TouchableOpacity>
       </View>
       {/* 下部余白 */}
-      <View className="h-8" />
-    </ScrollView>
+      <View className="h-16" />
+    </KeyboardAwareScrollView>
   );
 }

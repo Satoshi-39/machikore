@@ -8,14 +8,12 @@ import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
-  ScrollView,
   Pressable,
   Image,
   Alert,
   ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { PageHeader, StyledTextInput } from '@/shared/ui';
@@ -163,15 +161,12 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
         }
       />
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      <KeyboardAwareScrollView
         className="flex-1"
+        keyboardShouldPersistTaps="handled"
+        enableOnAndroid
+        extraScrollHeight={20}
       >
-        <ScrollView
-            className="flex-1"
-            keyboardShouldPersistTaps="handled"
-            keyboardDismissMode="on-drag"
-          >
           {/* アバター画像 */}
           <View className="items-center py-6 bg-surface dark:bg-dark-surface">
             <Pressable onPress={handlePickImage} className="relative">
@@ -250,10 +245,9 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
               </Text>
             </View>
           </View>
-          {/* 下部余白 */}
-          <View className="h-8" />
-        </ScrollView>
-      </KeyboardAvoidingView>
+        {/* 下部余白 */}
+        <View className="h-16" />
+      </KeyboardAwareScrollView>
     </View>
   );
 }

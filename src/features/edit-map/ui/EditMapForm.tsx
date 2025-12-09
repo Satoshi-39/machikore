@@ -10,10 +10,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   Switch,
   FlatList,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, MAP_CATEGORIES, type MapCategory, USER_MAP_THEME_COLOR_LIST, type UserMapThemeColor } from '@/shared/config';
 import { TagInput } from '@/shared/ui';
@@ -78,10 +78,11 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
   };
 
   return (
-    <ScrollView
+    <KeyboardAwareScrollView
       className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
       keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
+      enableOnAndroid
+      extraScrollHeight={20}
     >
       <View className="p-4">
         {/* マップ統計情報（読み取り専用） */}
@@ -290,7 +291,7 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
         </TouchableOpacity>
       </View>
       {/* 下部余白 */}
-      <View className="h-8" />
-    </ScrollView>
+      <View className="h-16" />
+    </KeyboardAwareScrollView>
   );
 }

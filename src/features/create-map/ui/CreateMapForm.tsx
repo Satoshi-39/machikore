@@ -12,12 +12,12 @@ import React, { useState } from 'react';
 import {
   Alert,
   FlatList,
-  ScrollView,
   Switch,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface CreateMapFormProps {
   onSubmit: (data: {
@@ -66,10 +66,11 @@ export function CreateMapForm({
   };
 
   return (
-    <ScrollView
+    <KeyboardAwareScrollView
       className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
       keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
+      enableOnAndroid
+      extraScrollHeight={20}
     >
       <View className="p-4">
         {/* マップ名 */}
@@ -257,7 +258,7 @@ export function CreateMapForm({
         </TouchableOpacity>
       </View>
       {/* 下部余白 */}
-      <View className="h-8" />
-    </ScrollView>
+      <View className="h-16" />
+    </KeyboardAwareScrollView>
   );
 }
