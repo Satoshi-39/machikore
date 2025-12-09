@@ -4,8 +4,8 @@
     "name": "北海道",
     "name_kana": "ほっかいどう",
     "region_id": "hokkaido",
-    "latitude": 43.0642,
-    "longitude": 141.3469,
+    "latitude": 43.4316324,
+    "longitude": 142.4916576,
     "country_code": "jp"
   },
   {
@@ -13,6 +13,8 @@
     "name": "青森県",
     "name_kana": "あおもりけん",
     "region_id": "tohoku",
+    "latitude": 40.9118853,
+    "longitude": 140.5690398,
     "country_code": "jp"
   },
   {
@@ -20,6 +22,8 @@
     "name": "岩手県",
     "name_kana": "いわてけん",
     "region_id": "tohoku",
+    "latitude": 39.6539952,
+    "longitude": 141.4923162,
     "country_code": "jp"
   },
   {
@@ -27,6 +31,8 @@
     "name": "宮城県",
     "name_kana": "みやぎけん",
     "region_id": "tohoku",
+    "latitude": 38.3880155,
+    "longitude": 141.1631147,
     "country_code": "jp"
   },
   {
@@ -34,6 +40,8 @@
     "name": "秋田県",
     "name_kana": "あきたけん",
     "region_id": "tohoku",
+    "latitude": 39.6920715,
+    "longitude": 140.1692751,
     "country_code": "jp"
   },
   {
@@ -41,6 +49,8 @@
     "name": "山形県",
     "name_kana": "やまがたけん",
     "region_id": "tohoku",
+    "latitude": 38.6633517,
+    "longitude": 139.8923423,
     "country_code": "jp"
   },
   {
@@ -48,6 +58,8 @@
     "name": "福島県",
     "name_kana": "ふくしまけん",
     "region_id": "tohoku",
+    "latitude": 37.3664672,
+    "longitude": 140.3012033,
     "country_code": "jp"
   },
   {
@@ -55,6 +67,8 @@
     "name": "茨城県",
     "name_kana": "いばらきけん",
     "region_id": "kanto",
+    "latitude": 36.34222,
+    "longitude": 140.3592463,
     "country_code": "jp"
   },
   {
@@ -62,6 +76,8 @@
     "name": "栃木県",
     "name_kana": "とちぎけん",
     "region_id": "kanto",
+    "latitude": 36.6773725,
+    "longitude": 139.809403,
     "country_code": "jp"
   },
   {
@@ -69,6 +85,8 @@
     "name": "群馬県",
     "name_kana": "ぐんまけん",
     "region_id": "kanto",
+    "latitude": 36.5219801,
+    "longitude": 139.033483,
     "country_code": "jp"
   },
   {
@@ -76,6 +94,8 @@
     "name": "埼玉県",
     "name_kana": "さいたまけん",
     "region_id": "kanto",
+    "latitude": 36.0184661,
+    "longitude": 139.3058455,
     "country_code": "jp"
   },
   {
@@ -83,6 +103,8 @@
     "name": "千葉県",
     "name_kana": "ちばけん",
     "region_id": "kanto",
+    "latitude": 35.360459,
+    "longitude": 140.3217107,
     "country_code": "jp"
   },
   {
@@ -90,8 +112,8 @@
     "name": "東京都",
     "name_kana": "とうきょうと",
     "region_id": "kanto",
-    "latitude": 35.6812,
-    "longitude": 139.6503,
+    "latitude": 35.6895,
+    "longitude": 139.6917,
     "country_code": "jp"
   },
   {
@@ -99,8 +121,8 @@
     "name": "神奈川県",
     "name_kana": "かながわけん",
     "region_id": "kanto",
-    "latitude": 35.4478,
-    "longitude": 139.6425,
+    "latitude": 35.3150313,
+    "longitude": 139.386759,
     "country_code": "jp"
   },
   {
@@ -108,6 +130,8 @@
     "name": "新潟県",
     "name_kana": "にいがたけん",
     "region_id": "chubu",
+    "latitude": 37.8169186,
+    "longitude": 138.7157609,
     "country_code": "jp"
   },
   {
@@ -115,6 +139,8 @@
     "name": "富山県",
     "name_kana": "とやまけん",
     "region_id": "chubu",
+    "latitude": 36.7635807,
+    "longitude": 137.2658665,
     "country_code": "jp"
   },
   {
@@ -122,6 +148,8 @@
     "name": "石川県",
     "name_kana": "いしかわけん",
     "region_id": "chubu",
+    "latitude": 37.1010934,
+    "longitude": 136.9734267,
     "country_code": "jp"
   },
   {
@@ -129,6 +157,8 @@
     "name": "福井県",
     "name_kana": "ふくいけん",
     "region_id": "chubu",
+    "latitude": 35.8975675,
+    "longitude": 136.1408505,
     "country_code": "jp"
   },
   {
@@ -136,6 +166,8 @@
     "name": "山梨県",
     "name_kana": "やまなしけん",
     "region_id": "chubu",
+    "latitude": 35.5700465,
+    "longitude": 138.657249,
     "country_code": "jp"
   },
   {
@@ -143,6 +175,8 @@
     "name": "長野県",
     "name_kana": "ながのけん",
     "region_id": "chubu",
+    "latitude": 36.1143945,
+    "longitude": 138.0319015,
     "country_code": "jp"
   },
   {
@@ -150,6 +184,8 @@
     "name": "岐阜県",
     "name_kana": "ぎふけん",
     "region_id": "chubu",
+    "latitude": 35.7993975,
+    "longitude": 136.964635,
     "country_code": "jp"
   },
   {
@@ -157,6 +193,8 @@
     "name": "静岡県",
     "name_kana": "しずおかけん",
     "region_id": "chubu",
+    "latitude": 35.0092013,
+    "longitude": 138.4474315,
     "country_code": "jp"
   },
   {
@@ -164,8 +202,8 @@
     "name": "愛知県",
     "name_kana": "あいちけん",
     "region_id": "chubu",
-    "latitude": 35.1802,
-    "longitude": 136.9066,
+    "latitude": 34.8505462,
+    "longitude": 137.254574,
     "country_code": "jp"
   },
   {
@@ -173,6 +211,8 @@
     "name": "三重県",
     "name_kana": "みえけん",
     "region_id": "kinki",
+    "latitude": 34.4355564,
+    "longitude": 136.5893802,
     "country_code": "jp"
   },
   {
@@ -180,6 +220,8 @@
     "name": "滋賀県",
     "name_kana": "しがけん",
     "region_id": "kinki",
+    "latitude": 35.247154,
+    "longitude": 136.1093852,
     "country_code": "jp"
   },
   {
@@ -187,8 +229,8 @@
     "name": "京都府",
     "name_kana": "きょうとふ",
     "region_id": "kinki",
-    "latitude": 35.0116,
-    "longitude": 135.7681,
+    "latitude": 35.427891,
+    "longitude": 135.4534093,
     "country_code": "jp"
   },
   {
@@ -196,8 +238,8 @@
     "name": "大阪府",
     "name_kana": "おおさかふ",
     "region_id": "kinki",
-    "latitude": 34.6937,
-    "longitude": 135.5023,
+    "latitude": 34.661557,
+    "longitude": 135.3862454,
     "country_code": "jp"
   },
   {
@@ -205,8 +247,8 @@
     "name": "兵庫県",
     "name_kana": "ひょうごけん",
     "region_id": "kinki",
-    "latitude": 34.6913,
-    "longitude": 135.1830,
+    "latitude": 34.9433662,
+    "longitude": 134.860666,
     "country_code": "jp"
   },
   {
@@ -214,6 +256,8 @@
     "name": "奈良県",
     "name_kana": "ならけん",
     "region_id": "kinki",
+    "latitude": 34.320156,
+    "longitude": 135.884773,
     "country_code": "jp"
   },
   {
@@ -221,6 +265,8 @@
     "name": "和歌山県",
     "name_kana": "わかやまけん",
     "region_id": "kinki",
+    "latitude": 33.8136796,
+    "longitude": 135.6013633,
     "country_code": "jp"
   },
   {
@@ -228,6 +274,8 @@
     "name": "鳥取県",
     "name_kana": "とっとりけん",
     "region_id": "chugoku",
+    "latitude": 35.4303659,
+    "longitude": 133.8256435,
     "country_code": "jp"
   },
   {
@@ -235,6 +283,8 @@
     "name": "島根県",
     "name_kana": "しまねけん",
     "region_id": "chugoku",
+    "latitude": 35.4291024,
+    "longitude": 132.5501852,
     "country_code": "jp"
   },
   {
@@ -242,6 +292,8 @@
     "name": "岡山県",
     "name_kana": "おかやまけん",
     "region_id": "chugoku",
+    "latitude": 34.8023747,
+    "longitude": 133.839977,
     "country_code": "jp"
   },
   {
@@ -249,6 +301,8 @@
     "name": "広島県",
     "name_kana": "ひろしまけん",
     "region_id": "chugoku",
+    "latitude": 34.5566578,
+    "longitude": 132.7669051,
     "country_code": "jp"
   },
   {
@@ -256,6 +310,8 @@
     "name": "山口県",
     "name_kana": "やまぐちけん",
     "region_id": "chugoku",
+    "latitude": 34.3156093,
+    "longitude": 131.4545526,
     "country_code": "jp"
   },
   {
@@ -263,6 +319,8 @@
     "name": "徳島県",
     "name_kana": "とくしまけん",
     "region_id": "shikoku",
+    "latitude": 33.8485454,
+    "longitude": 134.3238008,
     "country_code": "jp"
   },
   {
@@ -270,6 +328,8 @@
     "name": "香川県",
     "name_kana": "かがわけん",
     "region_id": "shikoku",
+    "latitude": 34.3204428,
+    "longitude": 133.9765295,
     "country_code": "jp"
   },
   {
@@ -277,6 +337,8 @@
     "name": "愛媛県",
     "name_kana": "えひめけん",
     "region_id": "shikoku",
+    "latitude": 33.5530829,
+    "longitude": 132.7865786,
     "country_code": "jp"
   },
   {
@@ -284,6 +346,8 @@
     "name": "高知県",
     "name_kana": "こうちけん",
     "region_id": "shikoku",
+    "latitude": 33.1339092,
+    "longitude": 133.377517,
     "country_code": "jp"
   },
   {
@@ -291,8 +355,8 @@
     "name": "福岡県",
     "name_kana": "ふくおかけん",
     "region_id": "kyushu",
-    "latitude": 33.5904,
-    "longitude": 130.4017,
+    "latitude": 33.7936104,
+    "longitude": 130.5314035,
     "country_code": "jp"
   },
   {
@@ -300,6 +364,8 @@
     "name": "佐賀県",
     "name_kana": "さがけん",
     "region_id": "kyushu",
+    "latitude": 33.3114894,
+    "longitude": 130.0910709,
     "country_code": "jp"
   },
   {
@@ -307,6 +373,8 @@
     "name": "長崎県",
     "name_kana": "ながさきけん",
     "region_id": "kyushu",
+    "latitude": 32.7448,
+    "longitude": 129.8737,
     "country_code": "jp"
   },
   {
@@ -314,6 +382,8 @@
     "name": "熊本県",
     "name_kana": "くまもとけん",
     "region_id": "kyushu",
+    "latitude": 32.6022056,
+    "longitude": 130.3255497,
     "country_code": "jp"
   },
   {
@@ -321,6 +391,8 @@
     "name": "大分県",
     "name_kana": "おおいたけん",
     "region_id": "kyushu",
+    "latitude": 33.1122524,
+    "longitude": 131.5504224,
     "country_code": "jp"
   },
   {
@@ -328,6 +400,8 @@
     "name": "宮崎県",
     "name_kana": "みやざきけん",
     "region_id": "kyushu",
+    "latitude": 32.0452902,
+    "longitude": 131.4547797,
     "country_code": "jp"
   },
   {
@@ -335,6 +409,8 @@
     "name": "鹿児島県",
     "name_kana": "かごしまけん",
     "region_id": "kyushu",
+    "latitude": 31.5602,
+    "longitude": 130.5581,
     "country_code": "jp"
   },
   {
@@ -342,6 +418,8 @@
     "name": "沖縄県",
     "name_kana": "おきなわけん",
     "region_id": "okinawa",
+    "latitude": 26.2124,
+    "longitude": 127.6809,
     "country_code": "jp"
   }
 ]

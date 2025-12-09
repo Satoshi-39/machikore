@@ -14,7 +14,7 @@ import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master
 import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCities, useCitiesGeoJson } from '@/entities/city';
-import { AsyncBoundary, LocationButton } from '@/shared/ui';
+import { LocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -57,12 +57,17 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
   ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange: _onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false }, ref) => {
     const insets = useSafeAreaInsets();
     const isDarkMode = useIsDarkMode();
-    const { data: machiData, isLoading, error } = useMachi({ currentLocation });
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
-    const { data: cities = [] } = useCities({ currentLocation });
     const [visitFilter, setVisitFilter] = useState<VisitFilter>('all');
     const cameraRef = useRef<Mapbox.Camera>(null);
+
+    // ビューポート範囲管理（先に定義してcameraStateを取得）
+    const { bounds, cameraState, handleCameraChanged } = useBoundsManagement({ currentLocation });
+
+    // マップ中心座標でmachi/citiesを取得
+    const { data: machiData, isLoading, error } = useMachi({ currentLocation, mapCenter: cameraState.center });
+    const { data: cities = [] } = useCities({ currentLocation, mapCenter: cameraState.center });
 
     // 検索バーの表示状態
     const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);
@@ -104,9 +109,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         clearAllSelections();
       }, [clearAllSelections])
     );
-
-    // ビューポート範囲管理
-    const { bounds, cameraState, handleCameraChanged } = useBoundsManagement({ currentLocation });
 
     // 国データを取得
     const countries = useMemo(() => getCountriesData(), []);
@@ -261,167 +263,157 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
   }));
 
   return (
-    <AsyncBoundary
-      isLoading={isLoading}
-      error={error}
-      data={machiData}
-      loadingMessage="マップを読み込み中..."
-      emptyMessage="街データがありません"
-      emptyIcon="🗺️"
-    >
-      {() => (
-        <View style={{ flex: 1 }}>
-          <Mapbox.MapView
-            style={{ flex: 1 }}
-            styleURL={isDarkMode ? ENV.MAPBOX_DEFAULT_MAP_STYLE_URL_DARK : ENV.MAPBOX_DEFAULT_MAP_STYLE_URL}
-            onCameraChanged={handleCameraChanged}
-            scaleBarEnabled={false}
+    <View style={{ flex: 1 }}>
+      <Mapbox.MapView
+        style={{ flex: 1 }}
+        styleURL={isDarkMode ? ENV.MAPBOX_DEFAULT_MAP_STYLE_URL_DARK : ENV.MAPBOX_DEFAULT_MAP_STYLE_URL}
+        localizeLabels={true}
+        onCameraChanged={handleCameraChanged}
+        scaleBarEnabled={false}
+      >
+        <Mapbox.Camera
+          ref={cameraRef}
+          zoomLevel={currentLocation ? MAP_ZOOM.MACHI : MAP_ZOOM.INITIAL}
+          centerCoordinate={initialCenter as [number, number]}
+          animationDuration={0}
+        />
+
+        {/* 現在地マーカー（青い点） */}
+        <Mapbox.UserLocation
+          visible={true}
+          showsUserHeadingIndicator={true}
+          animated={true}
+        />
+
+        {/* フィルター中は他のレイヤーを非表示 */}
+        {visitFilter === 'all' && (
+          <>
+            {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
+            <CountryLabels geoJson={countriesGeoJson} />
+
+            {/* 都道府県ラベル表示（テキストのみ）- ズーム5-10で表示 */}
+            <PrefectureLabels geoJson={prefecturesGeoJson} />
+
+            {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
+            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
+
+            {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
+            <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
+          </>
+        )}
+
+        {/* 街マーカー表示（アイコン + ラベル）- ズーム12以上で表示 */}
+        <MachiLabels
+          geoJson={machiGeoJson}
+          onPress={handleMarkerPress}
+          visitFilter={visitFilter}
+        />
+      </Mapbox.MapView>
+
+      {/* ヘッダー（Snapchat風） */}
+      {viewMode === 'map' && !isSearchFocused && onSearchFocus && (
+        <View
+          className="absolute top-0 left-0 right-0"
+          style={{ paddingTop: insets.top }}
+        >
+          <DefaultMapHeader
+            locationName={centerLocation.name}
+            locationType={centerLocation.type}
+            onSearchPress={onSearchFocus}
+            onLocationPress={handleHeaderLocationPress}
+            isHidden={isSearchBarHidden}
+          />
+          {/* クイック検索/フィルタリングボタン */}
+          <View
+            className="mt-2"
+            style={{
+              opacity: isSearchBarHidden ? 0 : 1,
+            }}
+            pointerEvents={isSearchBarHidden ? 'none' : 'auto'}
           >
-            <Mapbox.Camera
-              ref={cameraRef}
-              zoomLevel={currentLocation ? MAP_ZOOM.MACHI : MAP_ZOOM.INITIAL}
-              centerCoordinate={initialCenter as [number, number]}
-              animationDuration={0}
+            <QuickSearchButtons
+              activeFilter={visitFilter}
+              onFilterChange={setVisitFilter}
+              onCategoryPress={onQuickSearch}
             />
-
-            {/* 現在地マーカー（青い点） */}
-            <Mapbox.UserLocation
-              visible={true}
-              showsUserHeadingIndicator={true}
-              animated={true}
-            />
-
-            {/* フィルター中は他のレイヤーを非表示 */}
-            {visitFilter === 'all' && (
-              <>
-                {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
-                <CountryLabels geoJson={countriesGeoJson} />
-
-                {/* 都道府県ラベル表示（テキストのみ）- ズーム5-10で表示 */}
-                <PrefectureLabels geoJson={prefecturesGeoJson} />
-
-                {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
-                <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
-
-                {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
-                <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
-              </>
-            )}
-
-            {/* 街マーカー表示（アイコン + ラベル）- ズーム12以上で表示 */}
-            <MachiLabels
-              geoJson={machiGeoJson}
-              onPress={handleMarkerPress}
-              visitFilter={visitFilter}
-            />
-          </Mapbox.MapView>
-
-          {/* ヘッダー（Snapchat風） */}
-          {viewMode === 'map' && !isSearchFocused && onSearchFocus && (
-            <View
-              className="absolute top-0 left-0 right-0"
-              style={{ paddingTop: insets.top }}
-            >
-              <DefaultMapHeader
-                locationName={centerLocation.name}
-                locationType={centerLocation.type}
-                onSearchPress={onSearchFocus}
-                onLocationPress={handleHeaderLocationPress}
-                isHidden={isSearchBarHidden}
-              />
-              {/* クイック検索/フィルタリングボタン */}
-              <View
-                className="mt-2"
-                style={{
-                  opacity: isSearchBarHidden ? 0 : 1,
-                }}
-                pointerEvents={isSearchBarHidden ? 'none' : 'auto'}
-              >
-                <QuickSearchButtons
-                  activeFilter={visitFilter}
-                  onFilterChange={setVisitFilter}
-                  onCategoryPress={onQuickSearch}
-                />
-              </View>
-            </View>
-          )}
-
-          {/* マップコントロールボタン（現在地ボタン） */}
-          {/* カードなし → 通常位置、カード「小」→ カード上、中/大 → フェードアウト */}
-          {viewMode === 'map' && !isSearchFocused && (
-            <Animated.View
-              style={[
-                {
-                  position: 'absolute',
-                  right: 24,
-                  zIndex: 50,
-                  // カード表示中はカードの上、それ以外は通常位置
-                  bottom: hasCard
-                    ? CARD_SMALL_HEIGHT + LOCATION_BUTTON_CARD_OFFSET
-                    : LOCATION_BUTTON_DEFAULT_BOTTOM,
-                },
-                controlsVisibility.controlButtonsAnimatedStyle,
-              ]}
-              pointerEvents={controlsVisibility.controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
-            >
-              <LocationButton
-                onPress={handleLocationPress}
-                testID="location-button"
-              />
-            </Animated.View>
-          )}
-
-          {/* 選択された街の詳細カード */}
-          {selectedMachi && (
-            <MachiDetailCard
-              machi={selectedMachi}
-              onClose={() => handleMachiSelect(null)}
-              onSnapChange={handleSnapChange}
-              onSearchBarVisibilityChange={setIsSearchBarHidden}
-              onBeforeClose={controlsVisibility.handleBeforeClose}
-              onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
-              onSpotSelect={(spot) => {
-                // 街カードが閉じた後にスポットカードを開く
-                handleSpotSelect(spot);
-                // カメラをスポットの位置に移動
-                flyToLocation(spot.longitude, spot.latitude, MAP_ZOOM.SPOT);
-              }}
-            />
-          )}
-
-          {/* 選択された市区の詳細カード */}
-          {selectedCity && (
-            <CityDetailCard
-              city={selectedCity}
-              onClose={() => handleCitySelect(null)}
-              onSnapChange={handleCitySnapChange}
-              onSearchBarVisibilityChange={setIsSearchBarHidden}
-              onBeforeClose={controlsVisibility.handleBeforeClose}
-              onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
-              onMachiSelect={(machi) => {
-                // 市区カードが閉じた後に街カードを開く
-                // handleMachiSelect内部でselectedCityもクリアされる
-                handleMachiSelect(machi);
-                // カメラを街の位置に移動
-                flyToLocation(machi.longitude, machi.latitude, MAP_ZOOM.MACHI);
-              }}
-            />
-          )}
-
-          {/* 選択されたスポットの詳細カード */}
-          {selectedSpot && (
-            <MasterSpotDetailCard
-              spot={selectedSpot}
-              onClose={() => handleSpotSelect(null)}
-              onSnapChange={handleSpotSnapChange}
-              onSearchBarVisibilityChange={setIsSearchBarHidden}
-              onBeforeClose={controlsVisibility.handleBeforeClose}
-              onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
-            />
-          )}
+          </View>
         </View>
       )}
-    </AsyncBoundary>
+
+      {/* マップコントロールボタン（現在地ボタン） */}
+      {/* カードなし → 通常位置、カード「小」→ カード上、中/大 → フェードアウト */}
+      {viewMode === 'map' && !isSearchFocused && (
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              right: 24,
+              zIndex: 50,
+              // カード表示中はカードの上、それ以外は通常位置
+              bottom: hasCard
+                ? CARD_SMALL_HEIGHT + LOCATION_BUTTON_CARD_OFFSET
+                : LOCATION_BUTTON_DEFAULT_BOTTOM,
+            },
+            controlsVisibility.controlButtonsAnimatedStyle,
+          ]}
+          pointerEvents={controlsVisibility.controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
+        >
+          <LocationButton
+            onPress={handleLocationPress}
+            testID="location-button"
+          />
+        </Animated.View>
+      )}
+
+      {/* 選択された街の詳細カード */}
+      {selectedMachi && (
+        <MachiDetailCard
+          machi={selectedMachi}
+          onClose={() => handleMachiSelect(null)}
+          onSnapChange={handleSnapChange}
+          onSearchBarVisibilityChange={setIsSearchBarHidden}
+          onBeforeClose={controlsVisibility.handleBeforeClose}
+          onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+          onSpotSelect={(spot) => {
+            // 街カードが閉じた後にスポットカードを開く
+            handleSpotSelect(spot);
+            // カメラをスポットの位置に移動
+            flyToLocation(spot.longitude, spot.latitude, MAP_ZOOM.SPOT);
+          }}
+        />
+      )}
+
+      {/* 選択された市区の詳細カード */}
+      {selectedCity && (
+        <CityDetailCard
+          city={selectedCity}
+          onClose={() => handleCitySelect(null)}
+          onSnapChange={handleCitySnapChange}
+          onSearchBarVisibilityChange={setIsSearchBarHidden}
+          onBeforeClose={controlsVisibility.handleBeforeClose}
+          onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+          onMachiSelect={(machi) => {
+            // 市区カードが閉じた後に街カードを開く
+            // handleMachiSelect内部でselectedCityもクリアされる
+            handleMachiSelect(machi);
+            // カメラを街の位置に移動
+            flyToLocation(machi.longitude, machi.latitude, MAP_ZOOM.MACHI);
+          }}
+        />
+      )}
+
+      {/* 選択されたスポットの詳細カード */}
+      {selectedSpot && (
+        <MasterSpotDetailCard
+          spot={selectedSpot}
+          onClose={() => handleSpotSelect(null)}
+          onSnapChange={handleSpotSnapChange}
+          onSearchBarVisibilityChange={setIsSearchBarHidden}
+          onBeforeClose={controlsVisibility.handleBeforeClose}
+          onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+        />
+      )}
+    </View>
     );
   }
 );
