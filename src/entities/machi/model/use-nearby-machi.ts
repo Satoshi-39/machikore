@@ -21,7 +21,10 @@ export function useNearbyMachi({
   longitude,
   limit = 10,
 }: UseNearbyMachiParams) {
-  const { data: allMachi, ...rest } = useMachi();
+  // 現在地を渡してその都道府県のデータを取得
+  const { data: allMachi, ...rest } = useMachi({
+    currentLocation: { latitude, longitude },
+  });
 
   const nearbyMachi = useMemo<MachiDistance[]>(() => {
     if (!allMachi || !latitude || !longitude) return [];

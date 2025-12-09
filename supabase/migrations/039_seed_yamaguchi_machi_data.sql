@@ -1,666 +1,193 @@
 -- =============================================
--- 東京都の街データ（OSMから取得）
--- 生成日時: 2025-12-09T12:18:57.681Z
--- データ取得日時: 2025-12-09T12:16:56.713Z
+-- 山口県の街データ（OSMから取得）
+-- 生成日時: 2025-12-09T12:25:59.082Z
+-- データ取得日時: 2025-12-09T12:22:46.304Z
 -- =============================================
 
 -- トランザクション開始
 BEGIN;
 
 -- =============================================
--- 1. 既存データの削除（東京都のみ）
+-- 1. 既存データの削除（山口県のみ）
 -- =============================================
 
--- machiテーブルから東京都のデータを削除
-DELETE FROM machi WHERE prefecture_id = 'tokyo';
+-- machiテーブルから山口県のデータを削除
+DELETE FROM machi WHERE prefecture_id = 'yamaguchi';
 
--- citiesテーブルから東京都のデータを削除
-DELETE FROM cities WHERE prefecture_id = 'tokyo';
+-- citiesテーブルから山口県のデータを削除
+DELETE FROM cities WHERE prefecture_id = 'yamaguchi';
 
 -- =============================================
 -- 2. citiesデータの挿入
 -- =============================================
 
--- ⚠️ 以下の3件は正式な市区町村でないため除外:
---   - 秋葉原クロスフィールド (type: null)
---   - キャナルコート (type: null)
---   - 大むさし (type: null)
-
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_meguro',
-  'tokyo',
-  '目黒区',
-  'めぐろく',
-  '{"en":"Meguro"}'::jsonb,
-  '区',
-  'jp',
-  35.6412891,
-  139.6983834
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_musashino',
-  'tokyo',
-  '武蔵野市',
-  '武蔵野市',
-  '{"en":"Musashino"}'::jsonb,
+  'yamaguchi_nagato',
+  'yamaguchi',
+  '長門市',
+  'ながとし',
+  '{"en":"Nagato"}'::jsonb,
   '市',
   'jp',
-  35.7177239,
-  139.5659802
+  34.3708941,
+  131.1821587
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_mitaka',
-  'tokyo',
-  '三鷹市',
-  '三鷹市',
-  '{"en":"Mitaka"}'::jsonb,
+  'yamaguchi_hagi',
+  'yamaguchi',
+  '萩市',
+  'はぎし',
+  '{"en":"Hagi"}'::jsonb,
   '市',
   'jp',
-  35.6833926,
-  139.5592421
+  34.4074815,
+  131.399194
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_komae',
-  'tokyo',
-  '狛江市',
-  '狛江市',
-  '{"en":"Komae"}'::jsonb,
+  'yamaguchi_shimonoseki',
+  'yamaguchi',
+  '下関市',
+  'しものせきし',
+  '{"en":"Shimonoseki"}'::jsonb,
   '市',
   'jp',
-  35.6347642,
-  139.5787343
+  33.9577116,
+  130.9415455
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_chofu',
-  'tokyo',
-  '調布市',
-  '調布市',
-  '{"en":"Chofu"}'::jsonb,
+  'yamaguchi_ube',
+  'yamaguchi',
+  '宇部市',
+  'うべし',
+  '{"en":"Ube"}'::jsonb,
   '市',
   'jp',
-  35.6506036,
-  139.5407066
+  33.9518498,
+  131.2472243
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_fuchu',
-  'tokyo',
-  '府中市',
-  '府中市',
-  '{"en":"Fuchu"}'::jsonb,
+  'yamaguchi_hofu',
+  'yamaguchi',
+  '防府市',
+  'ほうふし',
+  '{"en":"Hofu"}'::jsonb,
   '市',
   'jp',
-  35.6693751,
-  139.4774094
+  34.0517226,
+  131.5629141
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_hachioji',
-  'tokyo',
-  '八王子市',
-  'はちおうじし',
-  '{"en":"Hachioji"}'::jsonb,
+  'yamaguchi_yamaguchi',
+  'yamaguchi',
+  '山口市',
+  'やまぐちし',
+  '{"en":"Yamaguchi"}'::jsonb,
   '市',
   'jp',
-  35.6663595,
-  139.3163653
+  34.1781317,
+  131.4737077
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_hino',
-  'tokyo',
-  '日野市',
-  '日野市',
-  '{"en":"Hino"}'::jsonb,
+  'yamaguchi_shunan',
+  'yamaguchi',
+  '周南市',
+  'しゅうなんし',
+  '{"en":"Shunan"}'::jsonb,
   '市',
   'jp',
-  35.6713394,
-  139.3949801
+  34.0550595,
+  131.8064092
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_inagi',
-  'tokyo',
-  '稲城市',
-  'いなぎし',
-  '{"en":"Inagi"}'::jsonb,
+  'yamaguchi_kudamatsu',
+  'yamaguchi',
+  '下松市',
+  'くだまつし',
+  '{"en":"Kudamatsu"}'::jsonb,
   '市',
   'jp',
-  35.6379674,
-  139.5046754
+  34.0149872,
+  131.8704567
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_tama',
-  'tokyo',
-  '多摩市',
-  '多摩市',
-  '{"en":"Tama"}'::jsonb,
+  'yamaguchi_hikari',
+  'yamaguchi',
+  '光市',
+  'ひかりし',
+  '{"en":"Hikari"}'::jsonb,
   '市',
   'jp',
-  35.6370223,
-  139.4463569
+  33.9615807,
+  131.9425203
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_nakano',
-  'tokyo',
-  '中野区',
-  'なかのく',
-  '{"en":"Nakano"}'::jsonb,
-  '区',
-  'jp',
-  35.7086179,
-  139.6629399
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_nerima',
-  'tokyo',
-  '練馬区',
-  'ねりまく',
-  '{"en":"Nerima"}'::jsonb,
-  '区',
-  'jp',
-  35.7357808,
-  139.6521325
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_machida',
-  'tokyo',
-  '町田市',
-  '町田市',
-  '{"en":"Machida"}'::jsonb,
+  'yamaguchi_yanai',
+  'yamaguchi',
+  '柳井市',
+  'やないし',
+  '{"en":"Yanai"}'::jsonb,
   '市',
   'jp',
-  35.5466803,
-  139.4386999
+  33.9640825,
+  132.101193
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_kokubunji',
-  'tokyo',
-  '国分寺市',
-  '国分寺市',
-  '{"en":"Kokubunji"}'::jsonb,
+  'yamaguchi_mine',
+  'yamaguchi',
+  '美祢市',
+  'みねし',
+  '{"en":"Mine"}'::jsonb,
   '市',
   'jp',
-  35.709674,
-  139.454224
+  34.1667992,
+  131.2062283
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_kunitachi',
-  'tokyo',
-  '国立市',
-  '国立市',
-  '{"en":"Kunitachi"}'::jsonb,
+  'yamaguchi_sanyo_onoda',
+  'yamaguchi',
+  '山陽小野田市',
+  'さんようおのだし',
+  '{"en":"Sanyo-Onoda"}'::jsonb,
   '市',
   'jp',
-  35.681991,
-  139.43624
+  34.0030045,
+  131.1819289
 );
 
 INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
 VALUES (
-  'tokyo_toshima',
-  'tokyo',
-  '豊島区',
-  'としまく',
-  '{"en":"Toshima"}'::jsonb,
-  '区',
-  'jp',
-  35.725913,
-  139.7166365
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_bunkyo',
-  'tokyo',
-  '文京区',
-  'ぶんきょうく',
-  '{"en":"Bunkyo"}'::jsonb,
-  '区',
-  'jp',
-  35.7080255,
-  139.7523066
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_itabashi',
-  'tokyo',
-  '板橋区',
-  'いたばしく',
-  '{"en":"Itabashi"}'::jsonb,
-  '区',
-  'jp',
-  35.7512814,
-  139.7087794
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_suginami',
-  'tokyo',
-  '杉並区',
-  'すぎなみく',
-  '{"en":"Suginami"}'::jsonb,
-  '区',
-  'jp',
-  35.6994929,
-  139.6362876
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_sumida',
-  'tokyo',
-  '墨田区',
-  'すみだく',
-  '{"en":"Sumida"}'::jsonb,
-  '区',
-  'jp',
-  35.7104196,
-  139.8017421
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_edogawa',
-  'tokyo',
-  '江戸川区',
-  'えどがわく',
-  '{"en":"Edogawa"}'::jsonb,
-  '区',
-  'jp',
-  35.7066318,
-  139.868677
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_katsushika',
-  'tokyo',
-  '葛飾区',
-  'かつしかく',
-  '{"en":"Katsushika"}'::jsonb,
-  '区',
-  'jp',
-  35.7433912,
-  139.8473472
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_koto',
-  'tokyo',
-  '江東区',
-  'こうとうく',
-  '{"en":"Koto"}'::jsonb,
-  '区',
-  'jp',
-  35.6727747,
-  139.8169621
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_kita',
-  'tokyo',
-  '北区',
-  'きたく',
-  '{"en":"Kita"}'::jsonb,
-  '区',
-  'jp',
-  35.7528821,
-  139.7338331
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_kodaira',
-  'tokyo',
-  '小平市',
-  '小平市',
-  '{"en":"Kodaira"}'::jsonb,
+  'yamaguchi_iwakuni',
+  'yamaguchi',
+  '岩国市',
+  'いわくにし',
+  '{"en":"Iwakuni"}'::jsonb,
   '市',
   'jp',
-  35.72522,
-  139.476606
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_taito',
-  'tokyo',
-  '台東区',
-  'たいとうく',
-  '{"en":"Taito"}'::jsonb,
-  '区',
-  'jp',
-  35.7125805,
-  139.7800712
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_chiyoda',
-  'tokyo',
-  '千代田区',
-  'ちよだく',
-  '{"en":"Chiyoda"}'::jsonb,
-  '区',
-  'jp',
-  35.6938097,
-  139.7532163
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_akishima',
-  'tokyo',
-  '昭島市',
-  'あきしまし',
-  '{"en":"Akishima"}'::jsonb,
-  '市',
-  'jp',
-  35.7058081,
-  139.3536109
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_chuo',
-  'tokyo',
-  '中央区',
-  'ちゅうおうく',
-  '{"en":"Chuo"}'::jsonb,
-  '区',
-  'jp',
-  35.6706436,
-  139.7719923
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_arakawa',
-  'tokyo',
-  '荒川区',
-  'あらかわく',
-  '{"en":"Arakawa"}'::jsonb,
-  '区',
-  'jp',
-  35.737529,
-  139.78131
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_ota',
-  'tokyo',
-  '大田区',
-  'おおたく',
-  '{"en":"Ota"}'::jsonb,
-  '区',
-  'jp',
-  35.561206,
-  139.715843
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_adachi',
-  'tokyo',
-  '足立区',
-  'あだちく',
-  '{"en":"Adachi"}'::jsonb,
-  '区',
-  'jp',
-  35.7746029,
-  139.8045163
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_minato',
-  'tokyo',
-  '港区',
-  'みなとく',
-  '{"en":"Minato"}'::jsonb,
-  '区',
-  'jp',
-  35.6580089,
-  139.7515137
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_setagaya',
-  'tokyo',
-  '世田谷区',
-  'せたがやく',
-  '{"en":"Setagaya"}'::jsonb,
-  '区',
-  'jp',
-  35.6469025,
-  139.652531
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_shinagawa',
-  'tokyo',
-  '品川区',
-  'しながわく',
-  '{"en":"Shinagawa"}'::jsonb,
-  '区',
-  'jp',
-  35.6092008,
-  139.7301982
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_shibuya',
-  'tokyo',
-  '渋谷区',
-  'しぶやく',
-  '{"en":"Shibuya"}'::jsonb,
-  '区',
-  'jp',
-  35.6633709,
-  139.6964952
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_tachikawa',
-  'tokyo',
-  '立川市',
-  'たちかわし',
-  '{"en":"Tachikawa"}'::jsonb,
-  '市',
-  'jp',
-  35.7139057,
-  139.4077701
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_ome',
-  'tokyo',
-  '青梅市',
-  'おうめし',
-  '{"en":"Ome"}'::jsonb,
-  '市',
-  'jp',
-  35.7880531,
-  139.2753553
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_musashimurayama',
-  'tokyo',
-  '武蔵村山市',
-  'むさしむらやまし',
-  '{"en":"Musashimurayama"}'::jsonb,
-  '市',
-  'jp',
-  35.756509,
-  139.385637
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_akiruno',
-  'tokyo',
-  'あきる野市',
-  'あきる野市',
-  '{"en":"Akiruno"}'::jsonb,
-  '市',
-  'jp',
-  35.7289031,
-  139.2941912
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_fussa',
-  'tokyo',
-  '福生市',
-  '福生市',
-  '{"en":"Fussa"}'::jsonb,
-  '市',
-  'jp',
-  35.7386772,
-  139.3267856
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_hamura',
-  'tokyo',
-  '羽村市',
-  '羽村市',
-  '{"en":"Hamura"}'::jsonb,
-  '市',
-  'jp',
-  35.764833,
-  139.307862
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_koganei',
-  'tokyo',
-  '小金井市',
-  '小金井市',
-  '{"en":"Koganei"}'::jsonb,
-  '市',
-  'jp',
-  35.7041083,
-  139.5106759
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_higashikurume',
-  'tokyo',
-  '東久留米市',
-  '東久留米市',
-  '{"en":"Higashikurume"}'::jsonb,
-  '市',
-  'jp',
-  35.752546,
-  139.519089
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_higashimurayama',
-  'tokyo',
-  '東村山市',
-  '東村山市',
-  '{"en":"Higashimurayama"}'::jsonb,
-  '市',
-  'jp',
-  35.768929,
-  139.484539
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_kiyose',
-  'tokyo',
-  '清瀬市',
-  'きよせし',
-  '{"en":"Kiyose"}'::jsonb,
-  '市',
-  'jp',
-  35.785483,
-  139.531253
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_higashiyamato',
-  'tokyo',
-  '東大和市',
-  '東大和市',
-  '{"en":"Higashiyamato"}'::jsonb,
-  '市',
-  'jp',
-  35.740869,
-  139.428831
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_nishitokyo',
-  'tokyo',
-  '西東京市',
-  '西東京市',
-  '{"en":"Nishitokyo"}'::jsonb,
-  '市',
-  'jp',
-  35.7261366,
-  139.5380347
-);
-
-INSERT INTO cities (id, prefecture_id, name, name_kana, name_translations, type, country_code, latitude, longitude)
-VALUES (
-  'tokyo_shinjuku',
-  'tokyo',
-  '新宿区',
-  'しんじゅくく',
-  '{"en":"Shinjuku"}'::jsonb,
-  '区',
-  'jp',
-  35.6937632,
-  139.7036319
+  34.1664995,
+  132.2191163
 );
 
 -- =============================================
@@ -669,20966 +196,25085 @@ VALUES (
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kagurazaka',
-  '神楽坂',
-  'かぐらざか',
-  '{"en":"Kagurazaka"}'::jsonb,
-  35.7010851,
-  139.7412287,
+  'yamaguchi_unknown_錦町中ノ瀬',
+  '錦町中ノ瀬',
+  '錦町中ノ瀬',
   NULL,
-  'tokyo',
+  34.278548,
+  131.9644276,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  57519541,
+  2782719145,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ebisu',
-  '恵比寿',
-  'えびす',
-  '{"en":"Ebisu"}'::jsonb,
-  35.6462954,
-  139.714385,
+  'yamaguchi_unknown_徳山',
+  '徳山',
+  '徳山',
   NULL,
-  'tokyo',
+  34.087517,
+  131.8365598,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  57533371,
+  2784745935,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hiroo',
-  '広尾',
-  'ひろお',
-  '{"en":"Hiroo"}'::jsonb,
-  35.6522569,
-  139.7175844,
+  'yamaguchi_unknown_扇',
+  '扇町',
+  '扇町',
   NULL,
-  'tokyo',
+  34.0553058,
+  131.8237328,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  57534062,
+  2784751897,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinbashi',
-  '新橋',
-  'しんばし',
-  '{"en":"Shinbashi"}'::jsonb,
-  35.6651059,
-  139.7561163,
+  'yamaguchi_unknown_江の宮',
+  '江の宮町',
+  '江の宮町',
   NULL,
-  'tokyo',
+  34.0513477,
+  131.8288007,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  57536180,
+  2784752251,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_gotanda',
-  '五反田',
-  'ごたんだ',
-  '{"en":"Gotanda"}'::jsonb,
-  35.6283773,
-  139.721783,
+  'yamaguchi_unknown_瀬戸見',
+  '瀬戸見町',
+  '瀬戸見町',
   NULL,
-  'tokyo',
+  34.0505919,
+  131.8314316,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  57542928,
+  2784752288,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_uehara',
-  '上原',
-  'うえはら',
-  '{"en":"Uehara"}'::jsonb,
-  35.6669782,
-  139.6806824,
+  'yamaguchi_unknown_大内',
+  '大内町',
+  '大内町',
   NULL,
-  'tokyo',
+  34.0495309,
+  131.8247679,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  661127358,
+  2784755395,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nakano_higashi_nakano',
-  '東中野',
-  'ひがしなかの',
-  '{"en":"Higashi-Nakano"}'::jsonb,
-  35.7044839,
-  139.6832333,
+  'yamaguchi_unknown_辻',
+  '辻町',
+  '辻町',
   NULL,
-  'tokyo',
-  'tokyo_nakano',
+  34.0576001,
+  131.8152235,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '中野区',
   NULL,
-  777895924,
+  NULL,
+  2784756777,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_旭',
-  '旭町',
-  '旭町',
+  'yamaguchi_unknown_岐南',
+  '岐南町',
+  '岐南町',
   NULL,
-  35.7698455,
-  139.6250974,
+  34.0585853,
+  131.8136128,
   NULL,
-  'tokyo',
-  'tokyo_nerima',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '練馬区',
   NULL,
-  790014996,
+  NULL,
+  2784758307,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shoto',
-  '松濤',
-  'しょうとう',
-  '{"en":"Shoto"}'::jsonb,
-  35.6607632,
-  139.6920068,
+  'yamaguchi_unknown_一番',
+  '一番町',
+  '一番町',
   NULL,
-  'tokyo',
+  34.054444,
+  131.8128051,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  790668011,
+  2784758659,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_arai',
-  '新井',
-  'あらい',
-  '{"en":"Arai"}'::jsonb,
-  35.7133664,
-  139.66418,
+  'yamaguchi_unknown_二番',
+  '二番町',
+  '二番町',
   NULL,
-  'tokyo',
+  34.0549242,
+  131.8118999,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  790668142,
+  2784758727,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_takamatsu',
-  '高松',
-  '高松',
-  '{"en":"Takamatsu"}'::jsonb,
-  35.7504853,
-  139.6298966,
+  'yamaguchi_unknown_三番',
+  '三番町',
+  '三番町',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
+  34.0553105,
+  131.8110742,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '練馬区',
   NULL,
-  790670718,
+  NULL,
+  2784758880,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_shinjuku_kami_ochiai',
-  '上落合',
-  '上落合',
-  '{"en":"Kami-ochiai"}'::jsonb,
-  35.7114276,
-  139.6836606,
+  'yamaguchi_unknown_花畠',
+  '花畠町',
+  '花畠町',
   NULL,
-  'tokyo',
-  'tokyo_shinjuku',
+  34.0596742,
+  131.8107515,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '新宿区',
   NULL,
-  790757596,
+  NULL,
+  2784758934,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_honcho',
-  '本町',
-  'ほんちょう',
-  '{"en":"Honcho"}'::jsonb,
-  35.6959247,
-  139.6742379,
+  'yamaguchi_unknown_岡田',
+  '岡田町',
+  '岡田町',
   NULL,
-  'tokyo',
+  34.0610541,
+  131.8062774,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  792571518,
+  2784759248,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yayoicho',
+  'yamaguchi_unknown_弥生',
   '弥生町',
-  'やよいちょう',
-  '{"en":"Yayoicho"}'::jsonb,
-  35.6908488,
-  139.6755198,
+  '弥生町',
   NULL,
-  'tokyo',
+  34.0574022,
+  131.8060741,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  792571529,
+  2784801282,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nakano_wakamiya',
-  '若宮',
-  'わかみや',
-  '{"en":"Wakamiya"}'::jsonb,
-  35.7185235,
-  139.6456514,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  806413872,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_k_enji_north',
-  '高円寺北',
-  'こうえんじきた',
-  '{"en":"Kōenji-north"}'::jsonb,
-  35.7073164,
-  139.6548546,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  806413957,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_kamitakada',
-  '上高田',
-  'かみたかだ',
-  '{"en":"Kamitakada"}'::jsonb,
-  35.712836,
-  139.6747493,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  809692508,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_kami_saginomiya',
-  '上鷺宮',
-  'かみさぎのみや',
-  '{"en":"Kami-Saginomiya"}'::jsonb,
-  35.731639,
-  139.6317433,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  818944870,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_minamidai',
-  '南台',
-  'みなみだい',
-  '{"en":"Minamidai"}'::jsonb,
-  35.683521,
-  139.667254,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  876619057,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_honmachi',
-  '本町',
-  'ほんまち',
-  '{"en":"Honmachi"}'::jsonb,
-  35.6841449,
-  139.6806558,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  876619059,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_nakamura_minami',
-  '中村南',
-  '中村南',
-  '{"en":"Nakamura Minami"}'::jsonb,
-  35.7280632,
-  139.6441963,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  1067472644,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_yamato_cho',
-  '大和町',
-  '大和町',
-  '{"en":"Yamato-cho"}'::jsonb,
-  35.7125295,
-  139.6494199,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  1084868710,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_funabashi',
-  '船橋',
-  '船橋',
-  '{"en":"Funabashi"}'::jsonb,
-  35.6485548,
-  139.6207921,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  1345401675,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_izumi',
-  '泉町',
-  '泉町',
-  '{"en":"Izumi"}'::jsonb,
-  35.7411935,
-  139.55359,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584387407,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_kitahara',
-  '北原町',
-  '北原町',
-  '{"en":"Kitahara"}'::jsonb,
-  35.7333391,
-  139.5462707,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584390947,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kitamachi',
-  '北町',
-  '北町',
-  '{"en":"Kitamachi"}'::jsonb,
-  35.75626,
-  139.5599647,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1584391901,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_sakae',
+  'yamaguchi_unknown_栄',
   '栄町',
   '栄町',
-  '{"en":"Sakae"}'::jsonb,
-  35.7502928,
-  139.5542775,
   NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
+  34.0542,
+  131.8056212,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '西東京市',
   NULL,
-  1584392702,
+  NULL,
+  2784802502,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nishitokyo_shibakubo',
-  '芝久保町',
-  '芝久保町',
-  '{"en":"Shibakubo"}'::jsonb,
-  35.7291771,
-  139.5257955,
+  'yamaguchi_unknown_若宮',
+  '若宮町',
+  '若宮町',
   NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
+  34.0528502,
+  131.8062932,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '西東京市',
   NULL,
-  1584394582,
+  NULL,
+  2784802990,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nishitokyo_shimohoya',
-  '下保谷',
-  '下保谷',
-  '{"en":"Shimohoya"}'::jsonb,
-  35.7510848,
-  139.5635879,
+  'yamaguchi_unknown_飯島',
+  '飯島町',
+  '飯島町',
   NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
+  34.0514453,
+  131.8083565,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '西東京市',
   NULL,
-  1584397148,
+  NULL,
+  2784803428,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinmachi',
-  '新町',
-  '新町',
-  '{"en":"Shinmachi"}'::jsonb,
-  35.7151418,
-  139.5411434,
+  'yamaguchi_unknown_蓮ヶ浴',
+  '蓮ヶ浴',
+  '蓮ヶ浴',
   NULL,
-  'tokyo',
+  34.0657889,
+  131.8081296,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  1584399832,
+  2785285953,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nishitokyo_sumiyoshi',
+  'yamaguchi_unknown_東北山',
+  '東北山',
+  '東北山',
+  NULL,
+  34.0660198,
+  131.8061849,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  2785286931,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_住吉',
   '住吉町',
   '住吉町',
-  '{"en":"Sumiyoshi"}'::jsonb,
-  35.7464544,
-  139.5501347,
   NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
+  34.0649191,
+  131.8034761,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '西東京市',
   NULL,
-  1584400983,
+  NULL,
+  2785287660,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tanashi_cho',
-  '田無町',
-  'たなしちょう',
-  '{"en":"Tanashi-cho"}'::jsonb,
-  35.7287951,
-  139.5400411,
+  'yamaguchi_unknown_今住',
+  '今住町',
+  '今住町',
   NULL,
-  'tokyo',
+  34.0630007,
+  131.8018516,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  1584418653,
+  2785288855,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nishitokyo_nakamachi',
-  '中町',
-  '中町',
-  '{"en":"Nakamachi"}'::jsonb,
-  35.7390056,
-  139.559644,
+  'yamaguchi_unknown_原宿',
+  '原宿町',
+  '原宿町',
   NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
+  34.0619438,
+  131.8043787,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '西東京市',
   NULL,
-  1584421583,
+  NULL,
+  2785292641,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nishitokyo_nishihara',
-  '西原町',
-  '西原町',
-  '{"en":"Nishihara"}'::jsonb,
-  35.7387192,
-  139.5312468,
+  'yamaguchi_unknown_今宿',
+  '今宿町',
+  '今宿町',
   NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
+  34.0566591,
+  131.8031289,
+  NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '西東京市',
   NULL,
-  1584423446,
+  NULL,
+  2785298134,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nishitokyo_higashicho',
-  '東町',
-  '東町',
-  '{"en":"Higashicho"}'::jsonb,
-  35.7431347,
-  139.5651766,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584426679,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_higashifushimi',
-  '東伏見',
-  '東伏見',
-  '{"en":"Higashifushimi"}'::jsonb,
-  35.7243928,
-  139.5625199,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584427700,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_hibarigaokakita',
-  'ひばりが丘北',
-  'ひばりが丘北',
-  '{"en":"Hibarigaokakita"}'::jsonb,
-  35.7527695,
-  139.5483811,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584429752,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_fujimachi',
-  '富士町',
-  '富士町',
-  '{"en":"Fujimachi"}'::jsonb,
-  35.7308267,
-  139.5638206,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584430346,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_hoya',
-  '保谷町',
-  '保谷町',
-  '{"en":"Hoya"}'::jsonb,
-  35.7322182,
-  139.5532586,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584432887,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_midoricho',
-  '緑町',
-  '緑町',
-  '{"en":"Midoricho"}'::jsonb,
-  35.7409491,
-  139.5357447,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584434762,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_minamicho',
-  '南町',
-  '南町',
-  '{"en":"Minamicho"}'::jsonb,
-  35.7260261,
-  139.5434353,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584436192,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mukodaicho',
-  '向台町',
-  '向台町',
-  '{"en":"Mukodaicho"}'::jsonb,
-  35.7210462,
-  139.5358856,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1584438241,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_yagisawa',
-  '柳沢',
-  '柳沢',
-  '{"en":"Yagisawa"}'::jsonb,
-  35.7229618,
-  139.5529357,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584438428,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_yatocho',
-  '谷戸町',
-  '谷戸町',
-  '{"en":"Yatocho"}'::jsonb,
-  35.7399323,
-  139.545304,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  1584438975,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kichijoji_kitamachi',
-  '吉祥寺北町',
-  '吉祥寺北町',
-  '{"en":"Kichijoji Kitamachi"}'::jsonb,
-  35.712295,
-  139.5757678,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1585706979,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_kichijoji_higashicho',
-  '吉祥寺東町',
-  '吉祥寺東町',
-  '{"en":"Kichijoji Higashicho"}'::jsonb,
-  35.7088234,
-  139.586782,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585715457,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_kichijoji_honcho',
-  '吉祥寺本町',
-  '吉祥寺本町',
-  '{"en":"Kichijoji Honcho"}'::jsonb,
-  35.7043267,
-  139.5775409,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585720489,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_kichijoji_minamicho',
-  '吉祥寺南町',
-  '吉祥寺南町',
-  '{"en":"Kichijoji Minamicho"}'::jsonb,
-  35.6996526,
-  139.5852469,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585749405,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_kyonancho',
-  '境南町',
-  '境南町',
-  '{"en":"Kyonancho"}'::jsonb,
-  35.6989464,
-  139.5411554,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585759047,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_gotenyama',
-  '御殿山',
-  '御殿山',
-  '{"en":"Gotenyama"}'::jsonb,
-  35.7023931,
-  139.575435,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585763402,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_sakai',
-  '境',
-  '境',
-  '{"en":"Sakai"}'::jsonb,
-  35.7066696,
-  139.543343,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585767133,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_sakurazutsumi',
-  '桜堤',
-  '桜堤',
-  '{"en":"Sakurazutsumi"}'::jsonb,
-  35.711329,
-  139.5319693,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585780144,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_sekimae',
-  '関前',
-  '関前',
-  '{"en":"Sekimae"}'::jsonb,
-  35.7122046,
-  139.5518286,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585789386,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_nakacho',
-  '中町',
-  '中町',
-  '{"en":"Nakacho"}'::jsonb,
-  35.7037986,
-  139.5662633,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585794173,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_nishikubo',
-  '西久保',
-  '西久保',
-  '{"en":"Nishikubo"}'::jsonb,
-  35.710347,
-  139.5579926,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585799278,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_midoricho',
-  '緑町',
-  '緑町',
-  '{"en":"Midoricho"}'::jsonb,
-  35.7175922,
-  139.562909,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585802569,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_musashino_yahatacho',
-  '八幡町',
-  '八幡町',
-  '{"en":"Yahatacho"}'::jsonb,
-  35.7170546,
-  139.5555091,
-  NULL,
-  'tokyo',
-  'tokyo_musashino',
-  'jp',
-  '東京都',
-  NULL,
-  '武蔵野市',
-  NULL,
-  1585806859,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_kajinocho',
-  '梶野町',
-  '梶野町',
-  '{"en":"Kajinocho"}'::jsonb,
-  35.7084743,
-  139.5294849,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596125322,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_sakuracho',
-  '桜町',
-  '桜町',
-  '{"en":"Sakuracho"}'::jsonb,
-  35.71189,
-  139.5090665,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596135440,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_sekinocho',
-  '関野町',
-  '関野町',
-  '{"en":"Sekinocho"}'::jsonb,
-  35.7132624,
-  139.5225557,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596142082,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_nakacho',
-  '中町',
-  '中町',
-  '{"en":"Nakacho"}'::jsonb,
-  35.6962208,
-  139.5163007,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596145620,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_nukuikitamachi',
-  '貫井北町',
-  '貫井北町',
-  '{"en":"Nukuikitamachi"}'::jsonb,
-  35.7070284,
-  139.4963703,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596150856,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_nukuiminamicho',
-  '貫井南町',
-  '貫井南町',
-  '{"en":"Nukuiminamicho"}'::jsonb,
-  35.6918669,
-  139.4945842,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596158464,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_higashicho',
-  '東町',
-  '東町',
-  '{"en":"Higashicho"}'::jsonb,
-  35.6957178,
-  139.5292798,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596162995,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_honcho',
+  'yamaguchi_unknown_本',
   '本町',
   '本町',
-  '{"en":"Honcho"}'::jsonb,
-  35.7002737,
-  139.5064494,
   NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596164127,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_maeharacho',
-  '前原町',
-  '前原町',
-  '{"en":"Maeharacho"}'::jsonb,
-  35.6919631,
-  139.5075641,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596167558,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koganei_midoricho',
-  '緑町',
-  '緑町',
-  '{"en":"Midoricho"}'::jsonb,
-  35.7072249,
-  139.5171598,
-  NULL,
-  'tokyo',
-  'tokyo_koganei',
-  'jp',
-  '東京都',
-  NULL,
-  '小金井市',
-  NULL,
-  1596182890,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_iguchi',
-  '井口',
-  '井口',
-  '{"en":"Iguchi"}'::jsonb,
-  35.6953563,
-  139.5350195,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619645888,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_inokashira',
-  '井の頭',
-  '井の頭',
-  '{"en":"Inokashira"}'::jsonb,
-  35.6936527,
-  139.583691,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619646324,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_osawa',
-  '大沢',
-  '大沢',
-  '{"en":"Osawa"}'::jsonb,
-  35.6731969,
-  139.5387495,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619650152,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_kamirenjaku',
-  '上連雀',
-  '上連雀',
-  '{"en":"Kamirenjaku"}'::jsonb,
-  35.6987444,
-  139.5548857,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619745779,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_kitano',
-  '北野',
-  'きたの',
-  '{"en":"Kitano"}'::jsonb,
-  35.6791407,
-  139.5850745,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619749118,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_shimorenjaku',
-  '下連雀',
-  '下連雀',
-  '{"en":"Shimorenjaku"}'::jsonb,
-  35.6964799,
-  139.565496,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619751166,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_shinkawa',
-  '新川',
-  '新川',
-  '{"en":"Shinkawa"}'::jsonb,
-  35.681551,
-  139.5686095,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619754796,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_jindaiji',
-  '深大寺',
-  '深大寺',
-  '{"en":"Jindaiji"}'::jsonb,
-  35.6884547,
-  139.5442341,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619769176,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_nakahara',
-  '中原',
-  '中原',
-  '{"en":"Nakahara"}'::jsonb,
-  35.6648817,
-  139.5746696,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619772512,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_nozaki',
-  '野崎',
-  '野崎',
-  '{"en":"Nozaki"}'::jsonb,
-  35.6822597,
-  139.5441568,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619773608,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_mitaka_mure',
-  '牟礼',
-  '牟礼',
-  '{"en":"Mure"}'::jsonb,
-  35.6871232,
-  139.5800341,
-  NULL,
-  'tokyo',
-  'tokyo_mitaka',
-  'jp',
-  '東京都',
-  NULL,
-  '三鷹市',
-  NULL,
-  1619778195,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_asagayakita',
-  '阿佐谷北',
-  'あさがやきた',
-  '{"en":"Asagayakita"}'::jsonb,
-  35.7105571,
-  139.636261,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1622911239,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_asagaya_minami',
-  '阿佐谷南',
-  'あさがやみなみ',
-  '{"en":"Asagaya-minami"}'::jsonb,
-  35.7020498,
-  139.6373057,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1622922196,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_amanuma',
-  '天沼',
-  'あまぬま',
-  '{"en":"Amanuma"}'::jsonb,
-  35.7081696,
-  139.624042,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1622932562,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_igusa',
-  '井草',
-  'いぐさ',
-  '{"en":"Igusa"}'::jsonb,
-  35.7268135,
-  139.6140079,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1622948061,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_imagawa',
-  '今川',
-  'いまがわ',
-  '{"en":"Imagawa"}'::jsonb,
-  35.7167433,
-  139.6078269,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1623000182,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_umezato',
-  '梅里',
-  '梅里',
-  '{"en":"Umezato"}'::jsonb,
-  35.6969116,
-  139.6457468,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1623002269,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_eifuku',
-  '永福',
-  'えいふく',
-  '{"en":"Eifuku"}'::jsonb,
-  35.6769648,
-  139.641321,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1623005135,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_omiya',
-  '大宮',
-  '大宮',
-  '{"en":"Omiya"}'::jsonb,
-  35.6836579,
-  139.6460631,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1623008351,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ogikubo',
-  '荻窪',
-  'おぎくぼ',
-  '{"en":"Ogikubo"}'::jsonb,
-  35.6996931,
-  139.6227802,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1623012378,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_shimizu',
-  '清水',
-  'しみず',
-  '{"en":"Shimizu"}'::jsonb,
-  35.7126525,
-  139.6169502,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1629604003,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_shimoigusa',
-  '下井草',
-  '下井草',
-  '{"en":"Shimoigusa"}'::jsonb,
-  35.7205501,
-  139.6260159,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1629609990,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_shoan',
-  '松庵',
-  'しょうあん',
-  '{"en":"Shoan"}'::jsonb,
-  35.6977161,
-  139.5947802,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  1629624097,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_zenbukuji',
-  '善福寺',
-  'ぜんぶくじ',
-  '{"en":"Zenbukuji"}'::jsonb,
-  35.7143948,
-  139.590818,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1629625959,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_wada',
-  '和田',
-  'わだ',
-  '{"en":"Wada"}'::jsonb,
-  35.6935241,
-  139.6576038,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1629628690,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_okata',
-  '岡田',
-  'おかた',
-  '{"en":"Okata"}'::jsonb,
-  34.7890866,
-  139.3762361,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1632486540,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_sashikiji',
-  '差木地',
-  'さしきじ',
-  '{"en":"Sashikiji"}'::jsonb,
-  34.6880017,
-  139.4241934,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1632496485,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_senzu',
-  '泉津',
-  'せんづ',
-  '{"en":"Senzu"}'::jsonb,
-  34.7769563,
-  139.4099946,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1632497622,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nomashi',
-  '野増',
-  'のまし',
-  '{"en":"Nomashi"}'::jsonb,
-  34.7150808,
-  139.3753014,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1632531343,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_habuminato',
-  '波浮港',
-  'はぶみなと',
-  '{"en":"Habuminato"}'::jsonb,
-  34.6935748,
-  139.439821,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1632547087,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_motomachi',
-  '元町',
-  'もとまち',
-  '{"en":"Motomachi"}'::jsonb,
-  34.7516178,
-  139.3570205,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1632555617,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_egota',
-  '江古田',
-  'えごた',
-  '{"en":"Egota"}'::jsonb,
-  35.7256208,
-  139.6679693,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  1827239411,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hachimancho',
-  '八幡町',
-  '八幡町',
-  '{"en":"Hachimancho"}'::jsonb,
-  35.6678257,
-  139.4896683,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1833150244,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_higashi_koigakubo',
-  '東恋ケ窪',
-  '東恋ケ窪',
-  '{"en":"Higashi Koigakubo"}'::jsonb,
-  35.7093966,
-  139.4747003,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1833176162,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_honda',
-  '本多',
-  '本多',
-  '{"en":"Honda"}'::jsonb,
-  35.7071175,
-  139.4815393,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1833196344,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hanakoganei',
-  '花小金井',
-  '花小金井',
-  '{"en":"Hanakoganei"}'::jsonb,
-  35.7334962,
-  139.5134338,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1842606621,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_sangenjaya',
-  '三軒茶屋',
-  'さんげんじゃや',
-  '{"en":"Sangenjaya"}'::jsonb,
-  35.6420125,
-  139.6692341,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  1884954079,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kitazawa',
-  '北沢',
-  'きたざわ',
-  '{"en":"Kitazawa"}'::jsonb,
-  35.6634677,
-  139.668154,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1884959241,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_daizawa',
-  '代沢',
-  'だいざわ',
-  '{"en":"Daizawa"}'::jsonb,
-  35.6566718,
-  139.6705979,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  1884965134,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_taishido',
-  '太子堂',
-  'たいしどう',
-  '{"en":"Taishido"}'::jsonb,
-  35.6475328,
-  139.671095,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  1885145531,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_shinjuku_kabukicho',
-  '歌舞伎町',
-  'かぶきちょう',
-  '{"en":"Kabukicho"}'::jsonb,
-  35.6945429,
-  139.7027105,
-  NULL,
-  'tokyo',
-  'tokyo_shinjuku',
-  'jp',
-  '東京都',
-  NULL,
-  '新宿区',
-  NULL,
-  1952395613,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_musashinodai',
-  '武蔵野台',
-  '武蔵野台',
-  '{"en":"Musashinodai"}'::jsonb,
-  35.7483148,
-  139.3313869,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2000550265,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kita_denen',
-  '北田園',
-  '北田園',
-  '{"en":"Kita denen"}'::jsonb,
-  35.7339041,
-  139.3225092,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2000550267,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_minami_denen',
-  '南田園',
-  '南田園',
-  '{"en":"Minami Denen"}'::jsonb,
-  35.724761,
-  139.3317819,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2000550270,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kamidaira',
-  '加美平',
-  '加美平',
-  '{"en":"Kamidaira"}'::jsonb,
-  35.7497024,
-  139.3225223,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2000550276,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_haijimacho',
-  '拝島町',
-  '拝島町',
-  '{"en":"Haijimacho"}'::jsonb,
-  35.7078587,
-  139.3396641,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2000575741,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_showacho',
-  '昭和町',
-  '昭和町',
-  '{"en":"Showacho"}'::jsonb,
-  35.7113405,
-  139.36326,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033442282,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nakagami_ch',
-  '中神町',
-  'なかがみちょう',
-  '{"en":"Nakagami-chō"}'::jsonb,
-  35.7001891,
-  139.3720683,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033442283,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_田中',
-  '田中町',
-  '田中町',
-  NULL,
-  35.7010211,
-  139.3519249,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033442284,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_matsubaracho',
-  '松原町',
-  '松原町',
-  '{"en":"Matsubaracho"}'::jsonb,
-  35.7176691,
-  139.3434057,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033442285,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_midoricho',
-  '緑町',
-  '緑町',
-  '{"en":"Midoricho"}'::jsonb,
-  35.7114542,
-  139.3452109,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033442287,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_大神',
-  '大神町',
-  '大神町',
-  NULL,
-  35.702805,
-  139.3586755,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033442293,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_miyazawacho',
-  '宮沢町',
-  '宮沢町',
-  '{"en":"Miyazawacho"}'::jsonb,
-  35.7000519,
-  139.3647606,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033442296,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_gochicho',
-  '郷地町',
-  '郷地町',
-  '{"en":"Gochicho"}'::jsonb,
-  35.6955058,
-  139.3872711,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510946,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_fujimi_ch',
-  '富士見町',
-  'ふじみちょう',
-  '{"en":"Fujimi-chō"}'::jsonb,
-  35.6960112,
-  139.3990041,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510950,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_fukujima_ch',
-  '福島町',
-  'ふくじまちょう',
-  '{"en":"Fukujima-chō"}'::jsonb,
-  35.6976057,
-  139.3802061,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510953,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_musashino',
-  '武蔵野',
-  '武蔵野',
-  '{"en":"Musashino"}'::jsonb,
-  35.7202101,
-  139.3767428,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510956,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mokusei_no_mori',
-  'もくせいの杜',
-  'もくせいのもり',
-  '{"en":"Mokusei no mori"}'::jsonb,
-  35.7122778,
-  139.3886551,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510960,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_asahicho',
-  '朝日町',
-  '朝日町',
-  '{"en":"Asahicho"}'::jsonb,
-  35.7055088,
-  139.3711735,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510964,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tamagawacho',
-  '玉川町',
-  '玉川町',
-  '{"en":"Tamagawacho"}'::jsonb,
-  35.705264,
-  139.3771388,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510968,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mihoricho',
-  '美堀町',
-  '美堀町',
-  '{"en":"Mihoricho"}'::jsonb,
-  35.7209095,
-  139.3540492,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510972,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tsutsujigaoka',
-  'つつじが丘',
-  'つつじが丘',
-  '{"en":"Tsutsujigaoka"}'::jsonb,
-  35.7173294,
-  139.3694666,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510976,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_azuma_ch',
-  '東町',
-  'あずまちょう',
-  '{"en":"Azuma-chō"}'::jsonb,
-  35.7019708,
-  139.3882538,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2033510980,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_akebonocho',
-  '曙町',
-  '曙町',
-  '{"en":"Akebonocho"}'::jsonb,
-  35.6991763,
-  139.410881,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2037517346,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_haneda',
-  '羽田',
-  'はねだ',
-  '{"en":"Haneda"}'::jsonb,
-  35.5479444,
-  139.7466458,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2289257986,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_south_ikebukuro',
-  '南池袋',
-  '南池袋',
-  '{"en":"South Ikebukuro"}'::jsonb,
-  35.7247203,
-  139.7147332,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2367729200,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_haginaka',
-  '萩中',
-  'はぎなか',
-  '{"en":"Haginaka"}'::jsonb,
-  35.5511001,
-  139.7317797,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2368436750,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_honhaneda',
-  '本羽田',
-  'ほんはねだ',
-  '{"en":"Honhaneda"}'::jsonb,
-  35.5457031,
-  139.7316232,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2368503802,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hikawa',
-  '氷川',
-  'ひかわ',
-  '{"en":"Hikawa"}'::jsonb,
-  35.8095934,
-  139.0928219,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2502547394,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shiromaru',
-  '白丸',
-  'しろまる',
-  '{"en":"Shiromaru"}'::jsonb,
-  35.8131714,
-  139.1127004,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2502556387,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_unazawa',
-  '海澤',
-  'うなざわ',
-  '{"en":"Unazawa"}'::jsonb,
-  35.8036302,
-  139.1137461,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2502561180,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_sakai',
-  '境',
-  'さかい',
-  '{"en":"Sakai"}'::jsonb,
-  35.7987724,
-  139.0674955,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2502569473,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kotaba',
-  '小丹波',
-  'こたば',
-  '{"en":"Kotaba"}'::jsonb,
-  35.8182815,
-  139.1516798,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2502575268,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nishitokyo_hibarigaoka',
-  'ひばりヶ丘',
-  'ひばりヶ丘',
-  '{"en":"Hibarigaoka"}'::jsonb,
-  35.7462782,
-  139.5378682,
-  NULL,
-  'tokyo',
-  'tokyo_nishitokyo',
-  'jp',
-  '東京都',
-  NULL,
-  '西東京市',
-  NULL,
-  2525234429,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_asahigaoka',
-  '旭丘',
-  '旭丘',
-  '{"en":"Asahigaoka"}'::jsonb,
-  35.7350726,
-  139.6765561,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  2534663023,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_azabudai',
-  '麻布台',
-  'あざぶだい',
-  '{"en":"Azabudai"}'::jsonb,
-  35.6596917,
-  139.7412077,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2706955206,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_azabu_juban',
-  '麻布十番',
-  'あざぶじゅうばん',
-  '{"en":"Azabu-Juban"}'::jsonb,
-  35.6542621,
-  139.7366855,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2706980759,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_oguno',
-  '大久野',
-  'おおぐの',
-  '{"en":"Oguno"}'::jsonb,
-  35.7536986,
-  139.2326459,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906663011,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hirai',
-  '平井',
-  'ひらい',
-  '{"en":"Hirai"}'::jsonb,
-  35.738788,
-  139.266575,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906663014,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mitsugo',
-  '三都郷',
-  'みつご',
-  '{"en":"Mitsugo"}'::jsonb,
-  35.7433702,
-  139.13741,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676012,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kamimotogo',
-  '上元郷',
-  'かみもとごう',
-  '{"en":"Kamimotogo"}'::jsonb,
-  35.7275295,
-  139.151921,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676013,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shimomotogo',
-  '下元郷',
-  'しももとごう',
-  '{"en":"Shimomotogo"}'::jsonb,
-  35.7234023,
-  139.1599514,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676014,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_henbori',
-  '人里',
-  'へんぼり',
-  '{"en":"Henbori"}'::jsonb,
-  35.7105633,
-  139.0846352,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676015,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kurakake',
-  '倉掛',
-  'くらかけ',
-  '{"en":"Kurakake"}'::jsonb,
-  35.742229,
-  139.0659498,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676016,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nango',
-  '南郷',
-  'なんごう',
-  '{"en":"Nango"}'::jsonb,
-  35.7055571,
-  139.1218856,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676017,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_大嶽',
-  '大嶽',
-  '大嶽',
-  NULL,
-  35.762803,
-  139.137024,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676018,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ozawa',
-  '小沢',
-  'おざわ',
-  '{"en":"Ozawa"}'::jsonb,
-  35.7399136,
-  139.1229436,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676019,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kazuma',
-  '数馬',
-  'かずま',
-  '{"en":"Kazuma"}'::jsonb,
-  35.7269678,
-  139.0571236,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676020,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_motoshuku',
-  '本宿',
-  'もとしゅく',
-  '{"en":"Motoshuku"}'::jsonb,
-  35.7194915,
-  139.146758,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676021,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hizato',
-  '樋里',
-  'ひざと',
-  '{"en":"Hizato"}'::jsonb,
-  35.7341872,
-  139.1071941,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676022,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kanoto',
-  '神戸',
-  'かのと',
-  '{"en":"Kanoto"}'::jsonb,
-  35.7478365,
-  139.1214116,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676023,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_fujiwara',
-  '藤原',
-  'ふじわら',
-  '{"en":"Fujiwara"}'::jsonb,
-  35.7435089,
-  139.0790389,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906676024,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_misono',
-  '三園',
-  '三園',
-  '{"en":"Misono"}'::jsonb,
-  35.7918914,
-  139.6407924,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2943843331,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_tokumaru',
-  '徳丸',
-  '徳丸',
-  '{"en":"Tokumaru"}'::jsonb,
-  35.775789,
-  139.6598681,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  2943843332,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_narimasu',
-  '成増',
-  '成増',
-  '{"en":"Narimasu"}'::jsonb,
-  35.7817326,
-  139.6324824,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  2943847533,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hasune',
-  '蓮根',
-  '蓮根',
-  '{"en":"Hasune"}'::jsonb,
-  35.7845059,
-  139.676781,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2943847534,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nishidai',
-  '西台',
-  '西台',
-  '{"en":"Nishidai"}'::jsonb,
-  35.77443,
-  139.6702602,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2943847535,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_akatsuka',
-  '赤塚',
-  '赤塚',
-  '{"en":"Akatsuka"}'::jsonb,
-  35.7788033,
-  139.6434642,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  34.0526609,
+  131.803431,
   NULL,
+  'yamaguchi',
   NULL,
-  2943847536,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_takashimadaira',
-  '高島平',
-  '高島平',
-  '{"en":"Takashimadaira"}'::jsonb,
-  35.7883692,
-  139.6589375,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  2943847537,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hikarigaoka',
-  '光が丘',
-  '光が丘',
-  '{"en":"Hikarigaoka"}'::jsonb,
-  35.758805,
-  139.6277446,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2948118356,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_yotsuba',
-  '四葉',
-  '四葉',
-  '{"en":"Yotsuba"}'::jsonb,
-  35.7799122,
-  139.6520556,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  2948118358,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_shingashi',
-  '新河岸',
-  '新河岸',
-  '{"en":"Shingashi"}'::jsonb,
-  35.7946237,
-  139.6581151,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  2948118359,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_ukima',
-  '浮間',
-  'うきま',
-  '{"en":"Ukima"}'::jsonb,
-  35.7905901,
-  139.7004698,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  2948118360,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_funado',
-  '舟渡',
-  '舟渡',
-  '{"en":"Funado"}'::jsonb,
-  35.7941546,
-  139.6837601,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  2948118361,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_akikawa',
-  '秋川',
-  '秋川',
-  '{"en":"Akikawa"}'::jsonb,
-  35.731457,
-  139.2884047,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  3108873129,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_akiru',
-  '秋留',
-  '秋留',
-  '{"en":"Akiru"}'::jsonb,
-  35.7246294,
-  139.2990851,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  3108873132,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ogawahigashi',
-  '小川東',
-  '小川東',
-  '{"en":"Ogawahigashi"}'::jsonb,
-  35.7187369,
-  139.3241402,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  3108873134,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ninomiyahigashi',
-  '二宮東',
-  '二宮東',
-  '{"en":"Ninomiyahigashi"}'::jsonb,
-  35.7245255,
-  139.3219016,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  3109083240,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_kami_itabashi',
-  '上板橋',
-  '上板橋',
-  '{"en":"Kami-itabashi"}'::jsonb,
-  35.7634804,
-  139.6743427,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396665,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_nakadai',
-  '中台',
-  '中台',
-  '{"en":"Nakadai"}'::jsonb,
-  35.7703802,
-  139.6799156,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396666,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_maenocho',
-  '前野町',
-  '前野町',
-  '{"en":"Maenocho"}'::jsonb,
-  35.7687915,
-  139.6902076,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396667,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_sakashita',
-  '坂下',
-  '坂下',
-  '{"en":"Sakashita"}'::jsonb,
-  35.7852052,
-  139.6821549,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396668,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_azusawa',
-  '小豆沢',
-  '小豆沢',
-  '{"en":"Azusawa"}'::jsonb,
-  35.7779319,
-  139.697781,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396669,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_tokiwadai',
-  '常盤台',
-  '常盤台',
-  '{"en":"Tokiwadai"}'::jsonb,
-  35.761537,
-  139.6855991,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396670,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_shimura',
-  '志村',
-  '志村',
-  '{"en":"Shimura"}'::jsonb,
-  35.7752578,
-  139.6908861,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396671,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_higashi_sakashita',
-  '東坂下',
-  '東坂下',
-  '{"en":"Higashi-sakashita"}'::jsonb,
-  35.7843119,
-  139.6891321,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396672,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_wakagi',
-  '若木',
-  '若木',
-  '{"en":"Wakagi"}'::jsonb,
-  35.7696134,
-  139.6730933,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396673,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_itabashi_akatsuka_shimmachi',
-  '赤塚新町',
-  '赤塚新町',
-  '{"en":"Akatsuka-shimmachi"}'::jsonb,
-  35.7712588,
-  139.6398705,
-  NULL,
-  'tokyo',
-  'tokyo_itabashi',
-  'jp',
-  '東京都',
-  NULL,
-  '板橋区',
-  NULL,
-  3412396674,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ikebukuro',
-  '池袋',
-  'いけぶくろ',
-  '{"en":"Ikebukuro"}'::jsonb,
-  35.7358426,
-  139.7084043,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  3501157128,
+  2785306441,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_南郷',
-  '南郷',
-  '南郷',
+  'yamaguchi_unknown_千代田',
+  '千代田町',
+  '千代田町',
   NULL,
-  33.8663561,
-  139.6261816,
+  34.0536702,
+  131.7996354,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4279773266,
+  2786983498,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_wakago',
-  '若郷',
-  'わかごう',
-  '{"en":"Wakago"}'::jsonb,
-  34.4218683,
-  139.2842778,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_築港',
+  '築港町',
+  '築港町',
   NULL,
+  34.0503906,
+  131.8008304,
   NULL,
+  'yamaguchi',
   NULL,
-  4406597737,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_igaya',
-  '伊ヶ谷',
-  'いがや',
-  '{"en":"Igaya"}'::jsonb,
-  34.0973267,
-  139.4937975,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4407952870,
+  2786983769,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_izu',
-  '伊豆',
-  'いず',
-  '{"en":"Izu"}'::jsonb,
-  34.1173454,
-  139.5064361,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_住崎',
+  '住崎町',
+  '住崎町',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  4407952871,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mitsune_sho_mae',
-  '三根',
-  'みつね',
-  '{"en":"Mitsune Sho Mae"}'::jsonb,
-  33.1245017,
-  139.798257,
+  34.0481663,
+  131.8031018,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4420332357,
+  2786984007,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_okago',
-  '大賀郷',
-  'おおかごう',
-  '{"en":"Okago"}'::jsonb,
-  33.1082852,
-  139.7727795,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_徳山港',
+  '徳山港町',
+  '徳山港町',
   NULL,
-  NULL,
-  NULL,
-  4423626670,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nakanogo',
-  '中ノ郷',
-  'なかのごう',
-  '{"en":"Nakanogo"}'::jsonb,
-  33.0705225,
-  139.8101026,
+  34.0518568,
+  131.7956947,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4437101856,
+  2786984293,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kashitate',
-  '樫立',
-  'かしたて',
-  '{"en":"Kashitate"}'::jsonb,
-  33.0718487,
-  139.79354,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_入船',
+  '入船町',
+  '入船町',
   NULL,
-  4437101869,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_sueyoshi',
-  '末吉',
-  'すえよし',
-  '{"en":"Sueyoshi"}'::jsonb,
-  33.0842301,
-  139.8475618,
+  34.0562492,
+  131.7974816,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4443768583,
+  2786984343,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_okago_quarter',
-  '大賀郷',
-  'おおかごう',
-  '{"en":"Okago"}'::jsonb,
-  33.1392301,
-  139.7398697,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_権現',
+  '権現町',
+  '権現町',
   NULL,
+  34.0562369,
+  131.7984915,
   NULL,
+  'yamaguchi',
   NULL,
-  4455067310,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tomodamachi',
-  '友田町',
-  '友田町',
-  '{"en":"Tomodamachi"}'::jsonb,
-  35.7686496,
-  139.2868567,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4544559617,
+  2786984669,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kabemachi',
-  '河辺町',
-  '河辺町',
-  '{"en":"Kabemachi"}'::jsonb,
-  35.7810198,
-  139.2880925,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_都',
+  '都町',
+  '都町',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  4544559618,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_morookacho',
-  '師岡町',
-  '師岡町',
-  '{"en":"Morookacho"}'::jsonb,
-  35.7914942,
-  139.2840772,
+  34.0553746,
+  131.8003199,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4544559619,
+  2787710547,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nogamicho',
+  'yamaguchi_unknown_野上',
   '野上町',
   '野上町',
-  '{"en":"Nogamicho"}'::jsonb,
-  35.7920381,
-  139.2904609,
   NULL,
-  'tokyo',
+  34.0556889,
+  131.8013088,
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  4544559620,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_daimon',
-  '大門',
-  '大門',
-  '{"en":"Daimon"}'::jsonb,
-  35.7961761,
-  139.2940899,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4544559621,
+  2787714486,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_suehirocho',
-  '末広町',
-  '末広町',
-  '{"en":"Suehirocho"}'::jsonb,
-  35.7796033,
-  139.3134072,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_初音',
+  '初音町',
+  '初音町',
   NULL,
+  34.0591367,
+  131.8006315,
   NULL,
-  4544559622,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shinmachi_quarter',
-  '新町',
-  '新町',
-  '{"en":"Shinmachi"}'::jsonb,
-  35.7871101,
-  139.3078161,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4544559623,
+  2787727902,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_imai',
-  '今井',
-  '今井',
-  '{"en":"Imai"}'::jsonb,
-  35.8015409,
-  139.3134528,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_相生',
+  '相生町',
+  '相生町',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  4544559624,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_imadera',
-  '今寺',
-  '今寺',
-  '{"en":"Imadera"}'::jsonb,
-  35.7976859,
-  139.2993283,
+  34.0598256,
+  131.7994373,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4544559625,
+  2787731000,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_fujihashi',
-  '藤橋',
-  '藤橋',
-  '{"en":"Fujihashi"}'::jsonb,
-  35.801828,
-  139.3035661,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_沖見',
+  '沖見町',
+  '沖見町',
   NULL,
-  4544559626,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kinoshita',
-  '木野下',
-  '木野下',
-  '{"en":"Kinoshita"}'::jsonb,
-  35.8072957,
-  139.2958903,
+  34.0589622,
+  131.7989211,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4544559627,
+  2787733740,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_osogi',
-  '小曾木',
-  '小曾木',
-  '{"en":"Osogi"}'::jsonb,
-  35.8196631,
-  139.2871356,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_御影',
+  '御影町',
+  '御影町',
   NULL,
-  4544559628,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tomioka',
-  '富岡',
-  '富岡',
-  '{"en":"Tomioka"}'::jsonb,
-  35.8305652,
-  139.2930626,
+  34.0614829,
+  131.7921399,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4544559629,
+  2787736432,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nagabuchi',
-  '長淵',
-  '長淵',
-  '{"en":"Nagabuchi"}'::jsonb,
-  35.7756017,
-  139.2695076,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_西千代田',
+  '西千代田町',
+  '西千代田町',
   NULL,
-  NULL,
-  4552359202,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hatanaka',
-  '畑中',
-  '畑中',
-  '{"en":"Hatanaka"}'::jsonb,
-  35.7780912,
-  139.240951,
+  34.0687666,
+  131.7846124,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4552359390,
+  2787741555,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_komakicho',
-  '駒木町',
-  '駒木町',
-  '{"en":"Komakicho"}'::jsonb,
-  35.780092,
-  139.2528824,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_浦山',
+  '浦山',
+  '浦山',
   NULL,
-  NULL,
-  NULL,
-  4552359391,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hinatawada',
-  '日向和田',
-  '日向和田',
-  '{"en":"Hinatawada"}'::jsonb,
-  35.7882863,
-  139.2331467,
+  34.0714397,
+  131.7927057,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4552359392,
+  2787754029,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nariki',
-  '成木',
-  '成木',
-  '{"en":"Nariki"}'::jsonb,
-  35.8268837,
-  139.2400131,
+  'yamaguchi_unknown_南浦山',
+  '南浦山町',
+  '南浦山町',
   NULL,
-  'tokyo',
+  34.0690705,
+  131.7919142,
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  4552359393,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kurosawa',
-  '黒沢',
-  '黒沢',
-  '{"en":"Kurosawa"}'::jsonb,
-  35.810389,
-  139.2546044,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4552359394,
+  2787755922,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_higashiome',
-  '東青梅',
-  '東青梅',
-  '{"en":"Higashiome"}'::jsonb,
-  35.790771,
-  139.2755524,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_道源',
+  '道源町',
+  '道源町',
   NULL,
+  34.0655842,
+  131.7848084,
   NULL,
-  4552359395,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_chigasemachi',
-  '千ヶ瀬町',
-  '千ヶ瀬町',
-  '{"en":"Chigasemachi"}'::jsonb,
-  35.7859476,
-  139.270187,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4552359396,
+  2787763691,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_wadamachi',
-  '和田町',
-  '和田町',
-  '{"en":"Wadamachi"}'::jsonb,
-  35.7753358,
-  139.2273679,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_三笹',
+  '三笹町',
+  '三笹町',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  4566577588,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_baigo',
-  '梅郷',
-  '梅郷',
-  '{"en":"Baigo"}'::jsonb,
-  35.7841965,
-  139.2148581,
+  34.0623892,
+  131.7854837,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4566577889,
+  2787764498,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_mitake',
-  '御岳',
-  '御岳',
-  '{"en":"Mitake"}'::jsonb,
-  35.7914549,
-  139.1739383,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_野村南',
+  '野村南町',
+  '野村南町',
   NULL,
-  4566577890,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_sawai',
-  '沢井',
-  '沢井',
-  '{"en":"Sawai"}'::jsonb,
-  35.8103549,
-  139.1924563,
+  34.0594241,
+  131.7719357,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4566577891,
+  2789443408,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yugimachi',
-  '柚木町',
-  '柚木町',
-  '{"en":"Yugimachi"}'::jsonb,
-  35.7980077,
-  139.2068436,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_古川',
+  '古川町',
+  '古川町',
   NULL,
+  34.0701461,
+  131.7755498,
   NULL,
+  'yamaguchi',
   NULL,
-  4566577892,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_futamatao',
-  '二俣尾',
-  '二俣尾',
-  '{"en":"Futamatao"}'::jsonb,
-  35.805378,
-  139.2219176,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4566577893,
+  2789456538,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nekabu',
-  '根ヶ布',
-  '根ヶ布',
-  '{"en":"Nekabu"}'::jsonb,
-  35.8013079,
-  139.2639184,
+  'yamaguchi_unknown_桶川',
+  '桶川町',
+  '桶川町',
   NULL,
-  'tokyo',
+  34.0713339,
+  131.7754123,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4566627112,
+  2789459878,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_桜丘',
-  '桜丘',
-  '桜丘',
+  'yamaguchi_unknown_土井',
+  '土井',
+  '土井',
   NULL,
-  35.6430072,
-  139.6247828,
+  34.0823211,
+  131.7737028,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5034894479,
+  2789483949,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shibuya',
-  '渋谷',
-  'しぶや',
-  '{"en":"Shibuya"}'::jsonb,
-  35.6610748,
-  139.7037525,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_新堤',
+  '新堤町',
+  '新堤町',
   NULL,
-  NULL,
-  5296991942,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_roppongi',
-  '六本木',
-  'ろっぽんぎ',
-  '{"en":"Roppongi"}'::jsonb,
-  35.6624568,
-  139.7334981,
+  34.0778237,
+  131.7607401,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5732714911,
+  2790195661,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_akasaka',
-  '赤坂',
-  'あかさか',
-  '{"en":"Akasaka"}'::jsonb,
-  35.6716786,
-  139.7356224,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_坂根',
+  '坂根町',
+  '坂根町',
   NULL,
-  NULL,
-  NULL,
-  5732715872,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shimomeguro',
-  '下目黒',
-  'しもめぐろ',
-  '{"en":"Shimomeguro"}'::jsonb,
-  35.6300236,
-  139.7058982,
+  34.0808824,
+  131.7573312,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5845649010,
+  2790196340,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_okinotori_island',
-  '沖ノ鳥島',
-  'おきのとりしま',
-  '{"en":"Okinotori island"}'::jsonb,
-  20.424931,
-  136.0756861,
+  'yamaguchi_unknown_長田',
+  '長田町',
+  '長田町',
   NULL,
-  'tokyo',
+  34.0620606,
+  131.7235018,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5986615664,
+  2791869789,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_成瀬',
-  '成瀬',
-  '成瀬',
+  'yamaguchi_unknown_かせ河原',
+  'かせ河原町',
+  'かせ河原町',
   NULL,
-  35.5473119,
-  139.4753765,
+  34.0699222,
+  131.7265536,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6035882225,
+  2791870627,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_成瀬台',
-  '成瀬台',
-  '成瀬台',
+  'yamaguchi_unknown_港',
+  '港町',
+  '港町',
   NULL,
-  35.5555716,
-  139.4773051,
+  34.0680336,
+  131.7475939,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6035885145,
+  2791964954,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_higashi_tamagawagakuen',
-  '東玉川学園',
-  'ひがしたまがわがくえん',
-  '{"en":"Higashi-Tamagawagakuen"}'::jsonb,
-  35.5563303,
-  139.4690689,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_日地',
+  '日地町',
+  '日地町',
   NULL,
-  NULL,
-  6075545807,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_asakusa',
-  '浅草',
-  'あさくさ',
-  '{"en":"Asakusa"}'::jsonb,
-  35.7175966,
-  139.7975626,
+  34.0764997,
+  131.7548015,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6089948203,
+  2791966647,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_南成瀬',
-  '南成瀬',
-  '南成瀬',
+  'yamaguchi_unknown_皿山',
+  '皿山町',
+  '皿山町',
   NULL,
-  35.5389362,
-  139.4724842,
+  34.078789,
+  131.7375875,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6110156865,
+  2791970443,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_西成瀬',
-  '西成瀬',
-  '西成瀬',
+  'yamaguchi_unknown_福川南',
+  '福川南町',
+  '福川南町',
   NULL,
-  35.5454946,
-  139.4695784,
+  34.0673365,
+  131.7398068,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6110163013,
+  2791979482,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_つくし野',
-  'つくし野',
-  'つくし野',
+  'yamaguchi_unknown_社地',
+  '社地町',
+  '社地町',
   NULL,
-  35.5264256,
-  139.4821904,
+  34.0714145,
+  131.7384304,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6110164083,
+  2791981156,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tanazawa',
-  '棚澤',
-  'たなざわ',
-  '{"en":"Tanazawa"}'::jsonb,
-  35.8184049,
-  139.1288885,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_西桝',
+  '西桝町',
+  '西桝町',
   NULL,
+  34.0698908,
+  131.7336369,
   NULL,
+  'yamaguchi',
   NULL,
-  6486989219,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kawano',
-  '川野',
-  'かわの',
-  '{"en":"Kawano"}'::jsonb,
-  35.7793383,
-  139.0041171,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6487244069,
+  2791983669,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yanaka',
-  '谷中',
-  'やなか',
-  '{"en":"Yanaka"}'::jsonb,
-  35.7247892,
-  139.7685576,
+  'yamaguchi_unknown_新地',
+  '新地町',
+  '新地町',
   NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6793554270,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_asahimachi',
-  '旭町',
-  'あさひまち',
-  '{"en":"Asahimachi"}'::jsonb,
-  35.555695,
-  139.4396548,
+  34.0714946,
+  131.7323709,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6972833079,
+  2792077600,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_morino',
-  '森野',
-  'もりの',
-  '{"en":"Morino"}'::jsonb,
-  35.5506935,
-  139.4376577,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_本陣',
+  '本陣町',
+  '本陣町',
   NULL,
+  34.0744976,
+  131.7321412,
   NULL,
-  6972833080,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nakamachi',
-  '中町',
-  'なかまち',
-  '{"en":"Nakamachi"}'::jsonb,
-  35.5515141,
-  139.4472453,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  6972833081,
+  2792079022,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nishi_ayase',
-  '西綾瀬',
-  '西綾瀬',
-  '{"en":"Nishi-Ayase"}'::jsonb,
-  35.7624847,
-  139.8165787,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_福川中市',
+  '福川中市町',
+  '福川中市町',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7094563041,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_minamioya',
-  '南大谷',
-  'みなみおおや',
-  '{"en":"Minamioya"}'::jsonb,
-  35.5529566,
-  139.4593666,
+  34.0742125,
+  131.735653,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  7680682083,
+  2792079384,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kanaigaoka',
-  '金井ヶ丘',
-  'かないがおか',
-  '{"en":"Kanaigaoka"}'::jsonb,
-  35.5714305,
-  139.4651543,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_戸田',
+  '戸田',
+  '戸田',
   NULL,
-  7763452744,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_fujinodai',
-  '藤の台',
-  'ふじのだい',
-  '{"en":"Fujinodai"}'::jsonb,
-  35.5708546,
-  139.4498818,
+  34.0801201,
+  131.6850575,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  7763452745,
+  2793812424,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_氷川台',
-  '氷川台',
-  '氷川台',
+  'yamaguchi_unknown_湯野',
+  '湯野',
+  '湯野',
   NULL,
-  35.7547144,
-  139.6687978,
+  34.1127743,
+  131.6682162,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  7785845258,
+  2793859888,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kiso_higashi',
-  '木曽東',
-  'きそひがし',
-  '{"en":"Kiso-Higashi"}'::jsonb,
-  35.560866,
-  139.4275643,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_莇地',
+  '莇地',
+  '莇地',
   NULL,
-  7787553306,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tamagawagakuen',
-  '玉川学園',
-  'たまがわがくえん',
-  '{"en":"Tamagawagakuen"}'::jsonb,
-  35.564671,
-  139.4628312,
+  34.1114402,
+  131.839651,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  7797034419,
+  2794241713,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kanai',
-  '金井',
-  'かない',
-  '{"en":"Kanai"}'::jsonb,
-  35.5766543,
-  139.4606403,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_美川町添谷',
+  '美川町添谷',
+  '美川町添谷',
   NULL,
-  NULL,
-  7856198709,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_yakushidai',
-  '薬師台',
-  'やくしだい',
-  '{"en":"Yakushidai"}'::jsonb,
-  35.5804025,
-  139.4542569,
+  34.2535063,
+  131.9938069,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  7856198710,
+  2798176702,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_negishi',
-  '根岸',
-  'ねぎし',
-  '{"en":"Negishi"}'::jsonb,
-  35.5752717,
-  139.4116855,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_美川町四馬神',
+  '美川町四馬神',
+  '美川町四馬神',
   NULL,
+  34.2599256,
+  131.9800333,
   NULL,
-  7865779002,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_yamazaki',
-  '山崎',
-  'やまざき',
-  '{"en":"Yamazaki"}'::jsonb,
-  35.5687718,
-  139.4288388,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  7895833723,
+  2798197701,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kogasaka',
-  '高ヶ坂',
-  'こがさか',
-  '{"en":"Kogasaka"}'::jsonb,
-  35.544692,
-  139.460359,
+  'yamaguchi_unknown_錦町野谷',
+  '錦町野谷',
+  '錦町野谷',
+  NULL,
+  34.2230883,
+  131.95754,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  7899810772,
+  2802689110,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_setagaya_minami_karasuyama',
-  '南烏山',
-  'みなみからすやま',
-  '{"en":"Minami-Karasuyama"}'::jsonb,
-  35.6689793,
-  139.6007466,
+  'yamaguchi_unknown_周東町三瀬川',
+  '周東町三瀬川',
+  '周東町三瀬川',
   NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  7954335389,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hama_rikyu_gardens',
-  '浜離宮庭園',
-  'はまりきゅうていえん',
-  '{"en":"Hama-rikyu Gardens"}'::jsonb,
-  35.6595485,
-  139.7636247,
+  34.1478393,
+  131.9715959,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8356448438,
+  2802897907,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tsubota',
-  '坪田',
-  'つぼた',
-  '{"en":"Tsubota"}'::jsonb,
-  34.0694848,
-  139.5538223,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_周東町樋余地',
+  '周東町樋余地',
+  '周東町樋余地',
   NULL,
-  NULL,
-  8362828626,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kamitsuki',
-  '神着',
-  'かみつき',
-  '{"en":"Kamitsuki"}'::jsonb,
-  34.1179691,
-  139.5388448,
+  34.1041322,
+  131.9729426,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8362828627,
+  2803413723,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_oyama',
-  '雄山',
-  'おやま',
-  '{"en":"Oyama"}'::jsonb,
-  34.0857781,
-  139.5270538,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_周東町上須通',
+  '周東町上須通',
+  '周東町上須通',
   NULL,
+  34.0983184,
+  131.9968236,
   NULL,
+  'yamaguchi',
   NULL,
-  8362828628,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ako',
-  '阿古',
-  'あこ',
-  '{"en":"Ako"}'::jsonb,
-  34.0660987,
-  139.484868,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8362828629,
+  2803430301,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_honson',
-  '本村',
-  'ほんそん',
-  '{"en":"Honson"}'::jsonb,
-  34.3755464,
-  139.2556894,
+  'yamaguchi_unknown_周東町下須通',
+  '周東町下須通',
+  '周東町下須通',
   NULL,
-  'tokyo',
+  34.0964177,
+  132.0158537,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8362972242,
+  2803441501,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_式根島',
-  '式根島',
-  'しきねじま',
+  'yamaguchi_unknown_周東町下長野',
+  '周東町下長野',
+  '周東町下長野',
   NULL,
-  34.3273209,
-  139.2189324,
+  34.0887796,
+  132.0190284,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8362972286,
+  2803441502,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinsencho',
-  '神泉町',
-  'しんせんちょう',
-  '{"en":"Shinsencho"}'::jsonb,
-  35.6563738,
-  139.6925133,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_周東町下久原',
+  '周東町下久原',
+  '周東町下久原',
   NULL,
-  NULL,
-  8370128629,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nippara',
-  '日原',
-  'にっぱら',
-  '{"en":"Nippara"}'::jsonb,
-  35.8260689,
-  139.0721619,
+  34.0961718,
+  132.0495901,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8389715040,
+  2804979401,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_otaba',
-  '大丹波',
-  'おおたば',
-  '{"en":"Otaba"}'::jsonb,
-  35.8305487,
-  139.1621017,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_周東町上久原',
+  '周東町上久原',
+  '周東町上久原',
   NULL,
-  NULL,
-  NULL,
-  8389715041,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tanzaburo',
-  '丹三郎',
-  'たんざぶろう',
-  '{"en":"Tanzaburo"}'::jsonb,
-  35.8104963,
-  139.1538298,
+  34.0729047,
+  132.0559971,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8389715042,
+  2804996701,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kawai',
-  '川井',
-  'かわい',
-  '{"en":"Kawai"}'::jsonb,
-  35.8143158,
-  139.1622412,
+  'yamaguchi_unknown_玖珂',
+  '玖珂町',
+  '玖珂町',
   NULL,
-  'tokyo',
+  34.0968689,
+  132.0927593,
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  8389715043,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_umezawa',
-  '梅澤',
-  'うめざわ',
-  '{"en":"Umezawa"}'::jsonb,
-  35.8074858,
-  139.1665971,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8389715044,
+  2805325801,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tozura',
-  '留浦',
-  'とずら',
-  '{"en":"Tozura"}'::jsonb,
-  35.7896817,
-  138.9997959,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_廿木',
+  '廿木',
+  '廿木',
   NULL,
+  34.1254243,
+  132.1044014,
   NULL,
-  8389715045,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_chichijima',
-  '父島',
-  'ちちじま',
-  '{"en":"Chichijima"}'::jsonb,
-  27.0712034,
-  142.209608,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8586707441,
+  2805355401,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hahajima',
-  '母島',
-  'ははじま',
-  '{"en":"Hahajima"}'::jsonb,
-  26.6600873,
-  142.155764,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_入野',
+  '入野',
+  '入野',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  8586707442,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ioto',
-  '硫黄島',
-  'いおうとう',
-  '{"en":"Ioto"}'::jsonb,
-  24.7849423,
-  141.3167953,
+  34.1419272,
+  132.1014938,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8586707443,
+  2805542507,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_minamitorishima',
-  '南鳥島',
-  'みなみとりしま',
-  '{"en":"Minamitorishima"}'::jsonb,
-  24.2892394,
-  153.9805716,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_大山',
+  '大山',
+  '大山',
   NULL,
-  8586707444,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tobitakyu',
-  '飛田給',
-  'とびたきゅう',
-  '{"en":"Tobitakyu"}'::jsonb,
-  35.6600603,
-  139.5226789,
+  34.139353,
+  132.0903919,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8664582188,
+  2805580401,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_高根',
-  '高根',
-  '高根',
+  'yamaguchi_unknown_竹安',
+  '竹安',
+  '竹安',
   NULL,
-  35.7835969,
-  139.3648395,
+  34.1495257,
+  132.0910823,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8682345998,
+  2805610801,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_駒形富士山',
-  '駒形富士山',
-  '駒形富士山',
+  'yamaguchi_unknown_伊房',
+  '伊房',
+  '伊房',
   NULL,
-  35.790402,
-  139.3654675,
+  34.142876,
+  132.0776389,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8682347317,
+  2805615901,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_入かねが沢',
-  '入かねが沢',
-  '入かねが沢',
+  'yamaguchi_unknown_角',
+  '角',
+  '角',
   NULL,
-  33.897291,
-  139.595894,
+  34.1621409,
+  132.1015235,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8754324877,
+  2807605701,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_mukojima',
-  '聟島',
-  'むこじま',
-  '{"en":"Mukojima"}'::jsonb,
-  27.680008,
-  142.142874,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_瓦谷',
+  '瓦谷',
+  '瓦谷',
   NULL,
-  8784786147,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_toriuchi',
-  '鳥打',
-  'とりうち',
-  '{"en":"Toriuchi"}'::jsonb,
-  33.128788,
-  139.685299,
+  34.1761991,
+  132.1170648,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8784794719,
+  2807606601,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_utsuki',
-  '宇津木',
-  'うつき',
-  '{"en":"Utsuki"}'::jsonb,
-  33.122039,
-  139.692944,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_保木',
+  '保木',
+  '保木',
   NULL,
-  NULL,
-  NULL,
-  8784794720,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kochi',
-  '河内',
-  'こうち',
-  '{"en":"Kochi"}'::jsonb,
-  35.749685,
-  139.022509,
+  34.1684777,
+  132.1105397,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8784833560,
+  2807607701,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hara',
-  '原',
-  'はら',
-  '{"en":"Hara"}'::jsonb,
-  35.776808,
-  139.049665,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_上田',
+  '上田',
+  '上田',
   NULL,
+  34.1542618,
+  132.1083731,
   NULL,
-  8784833561,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hane',
-  '羽',
-  'はね',
-  '{"en":"Hane"}'::jsonb,
-  35.758253,
-  139.298892,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8785503725,
+  2807609501,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_honcho_quarter',
-  '本町',
-  'ほんちょう',
-  '{"en":"Honcho"}'::jsonb,
-  35.7598471,
-  139.5315502,
+  'yamaguchi_unknown_杭名',
+  '杭名',
+  '杭名',
+  NULL,
+  34.1728364,
+  132.1105835,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8991873659,
+  2807615701,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_minamisawa',
-  '南沢',
-  'みなみさわ',
-  '{"en":"Minamisawa"}'::jsonb,
-  35.750195,
-  139.529763,
+  'yamaguchi_unknown_下',
+  '下',
+  '下',
   NULL,
-  'tokyo',
+  34.1684299,
+  132.094046,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  8991873661,
+  2807615702,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_chuo',
-  '中央',
-  'ちゅうおう',
-  '{"en":"Chuo"}'::jsonb,
-  35.745163,
-  139.4286729,
+  'yamaguchi_unknown_行波',
+  '行波',
+  '行波',
   NULL,
-  'tokyo',
+  34.1619274,
+  132.08685,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  9051390669,
+  2807667701,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sakuragaoka',
-  '桜が丘',
-  'さくらがおか',
-  '{"en":"Sakuragaoka"}'::jsonb,
-  35.7341935,
-  139.4230889,
+  'yamaguchi_unknown_天尾',
+  '天尾',
+  '天尾',
+  NULL,
+  34.1799359,
+  132.0625366,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  9051390670,
+  2807678401,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kanaimachi',
-  '金井町',
-  'かないまち',
-  '{"en":"Kanaimachi"}'::jsonb,
-  35.5761733,
-  139.4482072,
+  'yamaguchi_unknown_美川町南桑',
+  '美川町南桑',
+  '美川町南桑',
   NULL,
-  'tokyo',
+  34.1937164,
+  132.0323629,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  9093844563,
+  2807915802,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kanaimachi_quarter',
-  '金井町',
-  'かないまち',
-  '{"en":"Kanaimachi"}'::jsonb,
-  35.5744159,
-  139.4492997,
+  'yamaguchi_unknown_錦町府谷',
+  '錦町府谷',
+  '錦町府谷',
+  NULL,
+  34.2717367,
+  131.9854549,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  9093844564,
+  2822091601,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_okubo',
-  '大久保',
-  '大久保',
-  '{"en":"Okubo"}'::jsonb,
-  35.7046389,
-  139.7052761,
+  'yamaguchi_unknown_錦町深川',
+  '錦町深川',
+  '錦町深川',
   NULL,
-  'tokyo',
+  34.3151791,
+  131.9847841,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  9254835245,
+  2825419502,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_misonoch',
-  '美園町',
-  'みそのちょう',
-  '{"en":"Misonochō"}'::jsonb,
-  35.7387551,
-  139.4893276,
+  'yamaguchi_unknown_錦町宇佐郷',
+  '錦町宇佐郷',
+  '錦町宇佐郷',
+  NULL,
+  34.3742662,
+  132.0258022,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  10800031555,
+  2825977901,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nishikojiya',
-  '西糀谷',
-  '西糀谷',
-  '{"en":"Nishikojiya"}'::jsonb,
-  35.5572648,
-  139.7331679,
+  'yamaguchi_unknown_錦町大原',
+  '錦町大原',
+  '錦町大原',
   NULL,
-  'tokyo',
+  34.3663093,
+  132.0426441,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11061450745,
+  2827901602,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_higashikojiya',
-  '東糀谷',
-  '東糀谷',
-  '{"en":"Higashikojiya"}'::jsonb,
-  35.5573381,
-  139.7438994,
+  'yamaguchi_unknown_錦町宇佐',
+  '錦町宇佐',
+  '錦町宇佐',
   NULL,
-  'tokyo',
+  34.422004,
+  132.0522369,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11061461185,
+  2828620210,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_k_enji_south',
-  '高円寺南',
-  'こうえんじみなみ',
-  '{"en":"Kōenji-south"}'::jsonb,
-  35.7000231,
-  139.6549094,
+  'yamaguchi_unknown_柳',
+  '柳町',
+  '柳町',
+  NULL,
+  34.049219,
+  131.8098288,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11708079925,
+  2863527202,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_honan',
-  '方南',
-  'ほうなん',
-  '{"en":"Honan"}'::jsonb,
-  35.680503,
-  139.6582853,
+  'yamaguchi_unknown_那智',
+  '那智町',
+  '那智町',
   NULL,
-  'tokyo',
+  34.0453415,
+  131.803891,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11708116686,
+  2863528102,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_izumi',
-  '和泉',
-  'いずみ',
-  '{"en":"Izumi"}'::jsonb,
-  35.6782189,
-  139.6503888,
+  'yamaguchi_unknown_若草',
+  '若草町',
+  '若草町',
+  NULL,
+  34.0470559,
+  131.8185069,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11708116687,
+  2863528103,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_horinouchi',
-  '堀ノ内',
-  'ほりのうち',
-  '{"en":"Horinouchi"}'::jsonb,
-  35.6865625,
-  139.650863,
+  'yamaguchi_unknown_橋本',
+  '橋本町',
+  '橋本町',
   NULL,
-  'tokyo',
+  34.0470518,
+  131.8081366,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11708116688,
+  2863528901,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_matsunoki',
-  '松ノ木',
-  'まつのき',
-  '{"en":"Matsunoki"}'::jsonb,
-  35.6909497,
-  139.6429255,
+  'yamaguchi_unknown_慶万',
+  '慶万町',
+  '慶万町',
+  NULL,
+  34.0494943,
+  131.8134679,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11708137807,
+  2863531001,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shimo_takaido',
-  '下高井戸',
-  'しもたかいど',
-  '{"en":"Shimo Takaido"}'::jsonb,
-  35.6731043,
-  139.6314056,
+  'yamaguchi_unknown_泉原',
+  '泉原町',
+  '泉原町',
   NULL,
-  'tokyo',
+  34.0539144,
+  131.8217925,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11709567858,
+  2863531002,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kami_takaido',
-  '上高井戸',
-  'かみたかいど',
-  '{"en":"Kami Takaido"}'::jsonb,
-  35.6760997,
-  139.6136914,
+  'yamaguchi_unknown_東山',
+  '東山町',
+  '東山町',
   NULL,
-  'tokyo',
+  34.0475349,
+  131.8157405,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11709567859,
+  2863531003,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_suginami_momoi',
-  '桃井',
-  'ももい',
-  '{"en":"Momoi"}'::jsonb,
-  35.7134088,
-  139.6086647,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_舞車',
+  '舞車町',
+  '舞車町',
   NULL,
-  '杉並区',
+  34.0520132,
+  131.8154104,
   NULL,
-  11710458175,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_hon_amanuma',
-  '本天沼',
-  '本天沼',
-  '{"en":"Hon Amanuma"}'::jsonb,
-  35.7145402,
-  139.6261006,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_suginami',
   'jp',
-  '東京都',
+  '山口県',
+  NULL,
   NULL,
-  '杉並区',
   NULL,
-  11710482764,
+  2863533001,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_narita_higashi',
-  '成田東',
-  'なりたひがし',
-  '{"en":"Narita-higashi"}'::jsonb,
-  35.6929233,
-  139.6367011,
+  'yamaguchi_unknown_清水',
+  '清水町',
+  '清水町',
   NULL,
-  'tokyo',
+  34.0549219,
+  131.8193295,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11710500716,
+  2863534201,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_narita_nishi',
-  '成田西',
-  'なりたにし',
-  '{"en":"Narita-nishi"}'::jsonb,
-  35.6903369,
-  139.6299418,
+  'yamaguchi_unknown_晴海',
+  '晴海町',
+  '晴海町',
+  NULL,
+  34.042542,
+  131.7940225,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11710500717,
+  2863541001,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_suginami_hamadayama',
-  '浜田山',
-  'はまだやま',
-  '{"en":"Hamadayama"}'::jsonb,
-  35.6813295,
-  139.6292715,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_青山',
+  '青山町',
+  '青山町',
   NULL,
-  '杉並区',
+  34.0442324,
+  131.8177455,
   NULL,
-  11710500718,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_miyamae',
-  '宮前',
-  'みやまえ',
-  '{"en":"Miyamae"}'::jsonb,
-  35.6937952,
-  139.6068856,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11710509780,
+  2863545001,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_suginami_kami_igusa',
-  '上井草',
-  'かみいぐさ',
-  '{"en":"Kami Igusa"}'::jsonb,
-  35.7212283,
-  139.6058275,
-  NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_松保',
+  '松保町',
+  '松保町',
   NULL,
-  '杉並区',
-  NULL,
-  11710523592,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_minami_ogikubo',
-  '南荻窪',
-  'みなみおぎくぼ',
-  '{"en":"Minami Ogikubo"}'::jsonb,
-  35.7005095,
-  139.6127907,
+  34.0444924,
+  131.8133094,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11724164545,
+  2863547302,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_suginami_kugayama',
-  '久我山',
-  'くがやま',
-  '{"en":"Kugayama"}'::jsonb,
-  35.6862106,
-  139.5985006,
+  'yamaguchi_unknown_速玉',
+  '速玉町',
+  '速玉町',
   NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
+  34.0460247,
+  131.8119221,
   NULL,
-  '杉並区',
-  NULL,
-  11724170145,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_takaido_nishi',
-  '高井戸西',
-  'たかいどにし',
-  '{"en":"Takaido Nishi"}'::jsonb,
-  35.6847034,
-  139.6121869,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_suginami',
   'jp',
-  '東京都',
-  NULL,
-  '杉並区',
-  NULL,
-  11735463859,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_suginami_nishiogi_minami',
-  '西荻南',
-  'にしおぎみなみ',
-  '{"en":"Nishiogi Minami"}'::jsonb,
-  35.7010053,
-  139.6030934,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_suginami',
-  'jp',
-  '東京都',
   NULL,
-  '杉並区',
   NULL,
-  11735684343,
+  2863549801,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_takaido_higashi',
-  '高井戸東',
-  'たかいどひがし',
-  '{"en":"Takaido-higashi"}'::jsonb,
-  35.6822563,
-  139.6213132,
+  'yamaguchi_unknown_河東',
+  '河東町',
+  '河東町',
   NULL,
-  'tokyo',
+  34.0479925,
+  131.8117584,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11735686064,
+  2863551001,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nishiogi_kita',
-  '西荻北',
-  'にしおぎきた',
-  '{"en":"Nishiogi kita"}'::jsonb,
-  35.7065034,
-  139.6017866,
+  'yamaguchi_unknown_五月',
+  '五月町',
+  '五月町',
+  NULL,
+  34.0371908,
+  131.8278838,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11735697974,
+  2863570610,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kamiogi',
-  '上荻',
-  'かみおぎ',
-  '{"en":"Kamiogi"}'::jsonb,
-  35.7077759,
-  139.610824,
+  'yamaguchi_unknown_上遠石',
+  '上遠石町',
+  '上遠石町',
   NULL,
-  'tokyo',
+  34.0449245,
+  131.8223463,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11735699183,
+  2863578201,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_muk_jima',
-  '向島',
-  'むこうじま',
-  '{"en":"Mukōjima"}'::jsonb,
-  35.7159673,
-  139.8093821,
+  'yamaguchi_unknown_宮前',
+  '宮前町',
+  '宮前町',
+  NULL,
+  34.0327251,
+  131.8234931,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11735872868,
+  2863588201,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_sumida_higashi_mukojima',
-  '東向島',
-  'ひがしむこうじま',
-  '{"en":"Higashi Mukojima"}'::jsonb,
-  35.7231961,
-  139.8184066,
-  NULL,
-  'tokyo',
-  'tokyo_sumida',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_由加',
+  '由加町',
+  '由加町',
   NULL,
-  '墨田区',
+  34.0299537,
+  131.8240759,
   NULL,
-  11736125895,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_sumida_tsutsumi_dori',
-  '堤通',
-  'つつみどおり',
-  '{"en":"Tsutsumi Dori"}'::jsonb,
-  35.7316247,
-  139.813188,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_sumida',
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '墨田区',
   NULL,
-  11736126012,
+  NULL,
+  2863593401,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sumida',
-  '墨田',
-  'すみだ',
-  '{"en":"Sumida"}'::jsonb,
-  35.7355627,
-  139.820369,
+  'yamaguchi_unknown_横浜',
+  '横浜町',
+  '横浜町',
+  NULL,
+  34.0347148,
+  131.8298158,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11736126030,
+  3385396493,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_oshiage',
-  '押上',
-  'おしあげ',
-  '{"en":"Oshiage"}'::jsonb,
-  35.7125387,
-  139.8148147,
+  'yamaguchi_unknown_平原',
+  '平原町',
+  '平原町',
   NULL,
-  'tokyo',
+  34.0490621,
+  131.8425238,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11737968609,
+  3385438693,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sendagaya',
-  '千駄ヶ谷',
-  'せんだがや',
-  '{"en":"Sendagaya"}'::jsonb,
-  35.6818379,
-  139.7074785,
+  'yamaguchi_unknown_yoshida',
+  '吉田',
+  'よしだ',
+  '{"en":"Yoshida"}'::jsonb,
+  34.141918,
+  131.4673829,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11738013406,
+  4407575391,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_jingumae',
-  '神宮前',
-  'じんぐうまえ',
-  '{"en":"Jingumae"}'::jsonb,
-  35.6692039,
-  139.7072847,
+  'yamaguchi_unknown_大字蓋井島',
+  '大字蓋井島',
+  '大字蓋井島',
   NULL,
-  'tokyo',
+  34.1052744,
+  130.7867387,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11738019824,
+  4563334458,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_shinjuku_nishi_shinjuku',
-  '西新宿',
-  'にししんじゅく',
-  '{"en":"Nishi-Shinjuku"}'::jsonb,
-  35.690719,
-  139.6941527,
-  NULL,
-  'tokyo',
-  'tokyo_shinjuku',
-  'jp',
-  '東京都',
-  NULL,
-  '新宿区',
+  'yamaguchi_unknown_大字野島',
+  '大字野島',
+  '大字野島',
   NULL,
-  11738023792,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_yoyogi',
-  '代々木',
-  'よよぎ',
-  '{"en":"Yoyogi"}'::jsonb,
-  35.682304,
-  139.6917362,
+  33.9414217,
+  131.6927576,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11738023796,
+  4852670477,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_shinjuku_shinjuku',
-  '新宿',
-  'しんじゅく',
-  '{"en":"Shinjuku"}'::jsonb,
-  35.6942679,
-  139.7086541,
+  'yamaguchi_unknown_牛島',
+  '牛島',
+  '牛島',
   NULL,
-  'tokyo',
-  'tokyo_shinjuku',
-  'jp',
-  '東京都',
-  NULL,
-  '新宿区',
+  33.8573107,
+  132.0082855,
   NULL,
-  11738036615,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_shibuya_higashi',
-  '東',
-  'ひがし',
-  '{"en":"Higashi"}'::jsonb,
-  35.6531376,
-  139.7114585,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_shibuya',
   'jp',
-  '東京都',
-  NULL,
-  '渋谷区',
-  NULL,
-  11738047384,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_kitasuna',
-  '北砂',
-  'きたすな',
-  '{"en":"Kitasuna"}'::jsonb,
-  35.6812221,
-  139.8308372,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
   NULL,
-  '江東区',
   NULL,
-  11754513992,
+  4855633592,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_bunka',
-  '文花',
-  'ぶんか',
-  '{"en":"Bunka"}'::jsonb,
-  35.7093979,
-  139.8241097,
+  'yamaguchi_unknown_umashima',
+  '馬島',
+  'うましま',
+  '{"en":"Umashima"}'::jsonb,
+  33.8966995,
+  132.0497954,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11754529411,
+  4859787222,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tachibana',
-  '立花',
-  'たちばな',
-  '{"en":"Tachibana"}'::jsonb,
-  35.7106072,
-  139.8322279,
+  'yamaguchi_unknown_下関市豊田',
+  '下関市豊田町',
+  '下関市豊田町',
   NULL,
-  'tokyo',
+  34.202042,
+  131.0756707,
   NULL,
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11754529454,
+  5455830712,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_toyosu',
-  '豊洲',
-  'とよす',
-  '{"en":"Toyosu"}'::jsonb,
-  35.6501423,
-  139.7931179,
+  'yamaguchi_unknown_竹島',
+  '竹島町',
+  '竹島町',
+  NULL,
+  34.0511305,
+  131.7608678,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11754545688,
+  6339756943,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_koto_minamisuna',
-  '南砂',
-  'みなみすな',
-  '{"en":"Minamisuna"}'::jsonb,
-  35.6743164,
-  139.8262215,
+  'yamaguchi_unknown_hitsushima',
+  '櫃島',
+  'ひつしま',
+  '{"en":"Hitsushima"}'::jsonb,
+  34.5145228,
+  131.3861284,
   NULL,
-  'tokyo',
-  'tokyo_koto',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
+  NULL,
   NULL,
-  '江東区',
   NULL,
-  11754596702,
+  6751629455,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_koto_oshima',
+  'yamaguchi_unknown_oshima',
   '大島',
   'おおしま',
   '{"en":"Oshima"}'::jsonb,
-  35.690322,
-  139.8327205,
+  34.4951411,
+  131.410394,
   NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  11754601329,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kameido',
-  '亀戸',
-  'かめいど',
-  '{"en":"Kameido"}'::jsonb,
-  35.697902,
-  139.83253,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  11754602288,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_higashisuna',
-  '東砂',
-  'ひがしすな',
-  '{"en":"Higashisuna"}'::jsonb,
-  35.6760119,
-  139.8406184,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  11754602551,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_shinsuna',
-  '新砂',
-  'しんすな',
-  '{"en":"Shinsuna"}'::jsonb,
-  35.6615806,
-  139.8317778,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  11754604439,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_sumida_yahiro',
-  '八広',
-  'やひろ',
-  '{"en":"Yahiro"}'::jsonb,
-  35.7226532,
-  139.8270846,
-  NULL,
-  'tokyo',
-  'tokyo_sumida',
-  'jp',
-  '東京都',
-  NULL,
-  '墨田区',
-  NULL,
-  11756950940,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_sumida_kyojima',
-  '京島',
-  'きょうじま',
-  '{"en":"Kyojima"}'::jsonb,
-  35.7156541,
-  139.820884,
-  NULL,
-  'tokyo',
-  'tokyo_sumida',
-  'jp',
-  '東京都',
-  NULL,
-  '墨田区',
-  NULL,
-  11756966134,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_sumida_higashi_sumida',
-  '東墨田',
-  'ひがしすみだ',
-  '{"en":"Higashi-Sumida"}'::jsonb,
-  35.7214866,
-  139.834493,
-  NULL,
-  'tokyo',
-  'tokyo_sumida',
-  'jp',
-  '東京都',
-  NULL,
-  '墨田区',
-  NULL,
-  11756966161,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_ohara',
-  '大原',
-  'おおはら',
-  '{"en":"Ohara"}'::jsonb,
-  35.6695696,
-  139.6618404,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  11777959722,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hanegi',
-  '羽根木',
-  'はねぎ',
-  '{"en":"Hanegi"}'::jsonb,
-  35.665532,
-  139.6577681,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  11777959769,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_komatsugawa',
-  '小松川',
-  'こまつがわ',
-  '{"en":"Komatsugawa"}'::jsonb,
-  35.695241,
-  139.85134,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12117945926,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_hirai',
-  '平井',
-  'ひらい',
-  '{"en":"Hirai"}'::jsonb,
-  35.7089402,
-  139.8435521,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12118265107,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_matsushima',
-  '松島',
-  'まつしま',
-  '{"en":"Matsushima"}'::jsonb,
-  35.7077082,
-  139.8589732,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12118463049,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_chuo',
-  '中央',
-  'ちゅうおう',
-  '{"en":"Chuo"}'::jsonb,
-  35.7097839,
-  139.8702235,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12127595361,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_osugi',
-  '大杉',
-  'おおすぎ',
-  '{"en":"Osugi"}'::jsonb,
-  35.7075252,
-  139.8799628,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12132136047,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_matsumoto',
-  '松本',
-  'まつもと',
-  '{"en":"Matsumoto"}'::jsonb,
-  35.7166709,
-  139.8783199,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12132136915,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_nishi_koiwa',
-  '西小岩',
-  'にしこいわ',
-  '{"en":"Nishi koiwa"}'::jsonb,
-  35.7364029,
-  139.8786008,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12133220780,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_honisshiki',
-  '本一色',
-  'ほんいっしき',
-  '{"en":"Honisshiki"}'::jsonb,
-  35.7183384,
-  139.8713092,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12133221774,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_kamiisshiki',
-  '上一色',
-  'かみいっしき',
-  '{"en":"Kamiisshiki"}'::jsonb,
-  35.7272158,
-  139.8727715,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12133243090,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_kita_koiwa',
-  '北小岩',
-  'きたこいわ',
-  '{"en":"Kita koiwa"}'::jsonb,
-  35.7420662,
-  139.891105,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12133283549,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_higashi_koiwa',
-  '東小岩',
-  'ひがしこいわ',
-  '{"en":"Higashi koiwa"}'::jsonb,
-  35.7266033,
-  139.8929123,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12133554735,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_minami_koiwa',
-  '南小岩',
-  'みなみこいわ',
-  '{"en":"Minami koiwa"}'::jsonb,
-  35.7260236,
-  139.883879,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12133773223,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_higashi_matsumoto',
-  '東松本',
-  'ひがしまつもと',
-  '{"en":"Higashi matsumoto"}'::jsonb,
-  35.7191259,
-  139.8833813,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12134835865,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_shishibone',
-  '鹿骨',
-  'ししぼね',
-  '{"en":"Shishibone"}'::jsonb,
-  35.7126463,
-  139.8897347,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12134884438,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_nihori',
-  '新堀',
-  'にいほり',
-  '{"en":"Nihori"}'::jsonb,
-  35.7047963,
-  139.8889677,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12134907602,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_yagouchi',
-  '谷河内',
-  'やごうち',
-  '{"en":"Yagouchi"}'::jsonb,
-  35.7020899,
-  139.8964815,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12134907644,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_haruecho',
-  '春江町',
-  'はるえちょう',
-  '{"en":"Haruecho"}'::jsonb,
-  35.6967121,
-  139.8885247,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12134907698,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_kita_shinozaki',
-  '北篠崎',
-  'きたしのざき',
-  '{"en":"Kita shinozaki"}'::jsonb,
-  35.7195526,
-  139.8961748,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12134940371,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nishi_shinozaki',
-  '西篠崎',
-  'にししのざき',
-  '{"en":"Nishi shinozaki"}'::jsonb,
-  35.7134917,
-  139.8945681,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12134947403,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_kami_shinozaki',
-  '上篠崎',
-  'かみしのざき',
-  '{"en":"Kami shinozaki"}'::jsonb,
-  35.713261,
-  139.9017015,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12134947459,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_shinozakimachi',
-  '篠崎町',
-  'しのざきまち',
-  '{"en":"Shinozakimachi"}'::jsonb,
-  35.7046995,
-  139.9062828,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12135017799,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_higashi_shinozaki',
-  '東篠崎',
-  'ひがししのざき',
-  '{"en":"Higashi Shinozaki"}'::jsonb,
-  35.6946113,
-  139.9132742,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12135640766,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_minami_shinozakimachi',
-  '南篠崎町',
-  'みなみしのざきまち',
-  '{"en":"Minami Shinozakimachi"}'::jsonb,
-  35.694852,
-  139.904389,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12135640855,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_mizue',
-  '瑞江',
-  'みずえ',
-  '{"en":"Mizue"}'::jsonb,
-  35.6967152,
-  139.8953931,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12147165020,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_higashi_mizue',
-  '東瑞江',
-  'ひがしみずえ',
-  '{"en":"Higashi Mizue"}'::jsonb,
-  35.6889373,
-  139.8968556,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12147181349,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_nishi_mizue',
-  '西瑞江',
-  'にしみずえ',
-  '{"en":"Nishi Mizue"}'::jsonb,
-  35.6835221,
-  139.885834,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12147181427,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_edogawa',
-  '江戸川',
-  'えどがわ',
-  '{"en":"Edogawa"}'::jsonb,
-  35.6824477,
-  139.8896464,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12147181469,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_higashi_komatsugawa',
-  '東小松川',
-  'ひがしこまつがわ',
-  '{"en":"Higashi Komatsugawa"}'::jsonb,
-  35.693776,
-  139.864866,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12148779042,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_matsue',
-  '松江',
-  'まつえ',
-  '{"en":"Matsue"}'::jsonb,
-  35.6937469,
-  139.8718694,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12148871368,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_nishi_ichinoe',
-  '西一之江',
-  'にしいちのえ',
-  '{"en":"Nishi Ichinoe"}'::jsonb,
-  35.6976522,
-  139.8772371,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12148871562,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_ichinoe',
-  '一之江',
-  'いちのえ',
-  '{"en":"Ichinoe"}'::jsonb,
-  35.6926393,
-  139.8829149,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12148871607,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_fubabori',
-  '船堀',
-  'ふなぼり',
-  '{"en":"Fubabori"}'::jsonb,
-  35.6823249,
-  139.8633109,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12148906036,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_ecchujima',
-  '越中島',
-  'えっちゅうじま',
-  '{"en":"Ecchujima"}'::jsonb,
-  35.6684177,
-  139.791768,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149462994,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ariake',
-  '有明',
-  'ありあけ',
-  '{"en":"Ariake"}'::jsonb,
-  35.6337517,
-  139.7902031,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12149486468,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_sumiyoshi',
-  '住吉',
-  'すみよし',
-  '{"en":"Sumiyoshi"}'::jsonb,
-  35.6890802,
-  139.814512,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149489961,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_eitai',
-  '永代',
-  'えいたい',
-  '{"en":"Eitai"}'::jsonb,
-  35.6741434,
-  139.7907503,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149499933,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_kiyosumi',
-  '清澄',
-  'きよすみ',
-  '{"en":"Kiyosumi"}'::jsonb,
-  35.6826914,
-  139.7960478,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149499940,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_ogibashi',
-  '扇橋',
-  'おうぎばし',
-  '{"en":"Ogibashi"}'::jsonb,
-  35.6840871,
-  139.8171261,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149504736,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_edagawa',
-  '枝川',
-  'えだがわ',
-  '{"en":"Edagawa"}'::jsonb,
-  35.6580584,
-  139.8090649,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149506028,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_aomi',
-  '青海',
-  'あおみ',
-  '{"en":"Aomi"}'::jsonb,
-  35.6137752,
-  139.7814016,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12149506223,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_saga',
-  '佐賀',
-  'さが',
-  '{"en":"Saga"}'::jsonb,
-  35.6781595,
-  139.7907312,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149519176,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_kiba',
-  '木場',
-  'きば',
-  '{"en":"Kiba"}'::jsonb,
-  35.6714772,
-  139.8057495,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149530224,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_shirakawa',
-  '白河',
-  'しらかわ',
-  '{"en":"Shirakawa"}'::jsonb,
-  35.6828746,
-  139.8037452,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149530267,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_sarue',
-  '猿江',
-  'さるえ',
-  '{"en":"Sarue"}'::jsonb,
-  35.6861541,
-  139.8149685,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149531212,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_shinonome',
-  '東雲',
-  'しののめ',
-  '{"en":"Shinonome"}'::jsonb,
-  35.6441411,
-  139.8022923,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149532724,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_shinohashi',
-  '新大橋',
-  'しんおおはし',
-  '{"en":"Shinohashi"}'::jsonb,
-  35.6890786,
-  139.7938061,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149532725,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_shiohama',
-  '塩浜',
-  'しおはま',
-  '{"en":"Shiohama"}'::jsonb,
-  35.6634824,
-  139.8077876,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149536988,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_sengoku',
-  '千石',
-  'せんごく',
-  '{"en":"Sengoku"}'::jsonb,
-  35.6790309,
-  139.8155777,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149541485,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_shiomi',
-  '潮見',
-  'しおみ',
-  '{"en":"Shiomi"}'::jsonb,
-  35.6573359,
-  139.8159093,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149542605,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_tatsumi',
-  '辰巳',
-  'たつみ',
-  '{"en":"Tatsumi"}'::jsonb,
-  35.6485139,
-  139.8119175,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149550364,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_tokiwa',
-  '常盤',
-  'ときわ',
-  '{"en":"Tokiwa"}'::jsonb,
-  35.6846428,
-  139.7960892,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149552583,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_tomioka',
-  '富岡',
-  'とみおか',
-  '{"en":"Tomioka"}'::jsonb,
-  35.671289,
-  139.7995633,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149641998,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_morishita',
-  '森下',
-  'もりした',
-  '{"en":"Morishita"}'::jsonb,
-  35.6867282,
-  139.8043483,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149666796,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_toyo',
-  '東陽',
-  'とうよう',
-  '{"en":"Toyo"}'::jsonb,
-  35.6706676,
-  139.8141034,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149677904,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_furuishiba',
-  '古石場',
-  'ふるいしば',
-  '{"en":"Furuishiba"}'::jsonb,
-  35.6680295,
-  139.7968481,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149677913,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_hirano',
-  '平野',
-  'ひらの',
-  '{"en":"Hirano"}'::jsonb,
-  35.6777246,
-  139.8043094,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149679541,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_fukagawa',
-  '深川',
-  'ふかがわ',
-  '{"en":"Fukagawa"}'::jsonb,
-  35.6768254,
-  139.7972635,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149681167,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_botan',
-  '牡丹',
-  'ぼたん',
-  '{"en":"Botan"}'::jsonb,
-  35.6694399,
-  139.7977158,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149681668,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_monzennakacho',
-  '門前仲町',
-  'もんぜんなかちょう',
-  '{"en":"Monzennakacho"}'::jsonb,
-  35.6734513,
-  139.7956639,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149692567,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_fukuzumi',
-  '福住',
-  'ふくずみ',
-  '{"en":"Fukuzumi"}'::jsonb,
-  35.6771737,
-  139.7935599,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149694624,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_miyoshi',
-  '三好',
-  'みよし',
-  '{"en":"Miyoshi"}'::jsonb,
-  35.6800594,
-  139.8039413,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149694750,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_koto_mori',
-  '毛利',
-  'もうり',
-  '{"en":"Mori"}'::jsonb,
-  35.6918189,
-  139.8160147,
-  NULL,
-  'tokyo',
-  'tokyo_koto',
-  'jp',
-  '東京都',
-  NULL,
-  '江東区',
-  NULL,
-  12149697762,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_higashi_kasai',
-  '東葛西',
-  'ひがしかさい',
-  '{"en":"Higashi Kasai"}'::jsonb,
-  35.6621415,
-  139.8801543,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12161146527,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_minami_kasai',
-  '南葛西',
-  'みなみかさい',
-  '{"en":"Minami Kasai"}'::jsonb,
-  35.648195,
-  139.8735315,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12161146824,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_naka_kasai',
-  '中葛西',
-  'なかかさい',
-  '{"en":"Naka Kasai"}'::jsonb,
-  35.6638877,
-  139.8687474,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12161254003,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_kita_kasai',
-  '北葛西',
-  'きたかさい',
-  '{"en":"Kita Kasai"}'::jsonb,
-  35.6770502,
-  139.8565578,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12161254146,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_nishi_kasai',
-  '西葛西',
-  'にしかさい',
-  '{"en":"Nishi Kasai"}'::jsonb,
-  35.6660446,
-  139.8552713,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12161478563,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_seishincho',
-  '清新町',
-  'せいしんちょう',
-  '{"en":"Seishincho"}'::jsonb,
-  35.6586332,
-  139.8528124,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12161478694,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_edogawa_rinkaicho',
-  '臨海町',
-  'りんかいちょう',
-  '{"en":"Rinkaicho"}'::jsonb,
-  35.64762,
-  139.8579782,
-  NULL,
-  'tokyo',
-  'tokyo_edogawa',
-  'jp',
-  '東京都',
-  NULL,
-  '江戸川区',
-  NULL,
-  12161515905,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_omori_minami',
-  '大森南',
-  'おおもりみなみ',
-  '{"en":"Omori minami"}'::jsonb,
-  35.5652451,
-  139.7447965,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12161913333,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_omori_higashi',
-  '大森東',
-  'おおもりひがし',
-  '{"en":"Omori Higashi"}'::jsonb,
-  35.5722504,
-  139.7384572,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12161961869,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_naka_rokugo',
-  '仲六郷',
-  'なかろくごう',
-  '{"en":"Naka Rokugo"}'::jsonb,
-  35.5460518,
-  139.7107572,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162643465,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_minami_rokugo',
-  '南六郷',
-  'みなみろくごう',
-  '{"en":"Minami Rokugo"}'::jsonb,
-  35.5435161,
-  139.7196773,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162644387,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_higashi_rokugo',
-  '東六郷',
-  'ひがしろくごう',
-  '{"en":"Higashi Rokugo"}'::jsonb,
-  35.5465706,
-  139.7148809,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162647475,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_kamata_honcho',
-  '蒲田本町',
-  'かまたほんちょう',
-  '{"en":"Kamata honcho"}'::jsonb,
-  35.5571834,
-  139.7174305,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162688189,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_kamata',
-  '蒲田',
-  'かまた',
-  '{"en":"Kamata"}'::jsonb,
-  35.5637235,
-  139.7216959,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162692795,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_nishi_rokugo',
-  '西六郷',
-  'にしろくごう',
-  '{"en":"Nishi Rokugo"}'::jsonb,
-  35.5466705,
-  139.7057661,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162700219,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_minami_kamata',
-  '南蒲田',
-  'みなみかまた',
-  '{"en":"Minami Kamata"}'::jsonb,
-  35.5569613,
-  139.7248808,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162726795,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_omori_honcho',
-  '大森本町',
-  'おおもりほんちょう',
-  '{"en":"Omori honcho"}'::jsonb,
-  35.5828893,
-  139.7373,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162740322,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_kita_kojiya',
-  '北糀谷',
-  'きたこうじや',
-  '{"en":"Kita Kojiya"}'::jsonb,
-  35.5625885,
-  139.7344491,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162751401,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_nishi_kamata',
-  '西蒲田',
-  'にしかまた',
-  '{"en":"Nishi Kamata"}'::jsonb,
-  35.5665816,
-  139.7126792,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12162754363,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_higashi_kamata',
-  '東蒲田',
-  'ひがしかまた',
-  '{"en":"Higashi Kamata"}'::jsonb,
-  35.5629681,
-  139.7282855,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12163321477,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_higashi_yaguchi',
-  '東矢口',
-  'ひがしやぐち',
-  '{"en":"Higashi Yaguchi"}'::jsonb,
-  35.5642119,
-  139.7022299,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12163331266,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_omori_nishi',
-  '大森西',
-  'おおもりにし',
-  '{"en":"Omori Nishi"}'::jsonb,
-  35.5740483,
-  139.7269748,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12163403120,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_omori_naka',
-  '大森中',
-  'おおもりなか',
-  '{"en":"Omori Naka"}'::jsonb,
-  35.5687257,
-  139.73284,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12163419207,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_omori_kita',
-  '大森北',
-  'おおもりきた',
-  '{"en":"Omori Kita"}'::jsonb,
-  35.5833459,
-  139.7298435,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12163473058,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_shin_kamata',
-  '新蒲田',
-  'しんかまた',
-  '{"en":"Shin Kamata"}'::jsonb,
-  35.5579836,
-  139.7087,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12163512751,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_tamagawa',
-  '多摩川',
-  'たまがわ',
-  '{"en":"Tamagawa"}'::jsonb,
-  35.5597078,
-  139.7001747,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12163512794,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_sanno',
-  '山王',
-  'さんのう',
-  '{"en":"Sanno"}'::jsonb,
-  35.5876111,
-  139.7238897,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12175016251,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_chuo',
-  '中央',
-  'ちゅうおう',
-  '{"en":"Chuo"}'::jsonb,
-  35.5767633,
-  139.7151304,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12175862374,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_ikegami',
-  '池上',
-  'いけがみ',
-  '{"en":"Ikegami"}'::jsonb,
-  35.5744251,
-  139.7041622,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12175862805,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_minami_magome',
-  '南馬込',
-  'みなみまごめ',
-  '{"en":"Minami Magome"}'::jsonb,
-  35.5881179,
-  139.7123265,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12175951674,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_higashi_magome',
-  '東馬込',
-  'ひがしまごめ',
-  '{"en":"Higashi Magome"}'::jsonb,
-  35.5961963,
-  139.7154876,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12175996172,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_kita_magome',
-  '北馬込',
-  'きたまごめ',
-  '{"en":"Kita Magome"}'::jsonb,
-  35.5997702,
-  139.7077863,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12176904059,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_naka_magome',
-  '中馬込',
-  'なかまごめ',
-  '{"en":"Naka Magome"}'::jsonb,
-  35.5949455,
-  139.706635,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12176917343,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_nishi_magome',
-  '西馬込',
-  'にしまごめ',
-  '{"en":"Nishi Magome"}'::jsonb,
-  35.5887932,
-  139.7043421,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12176917407,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_naka_ikegami',
-  '仲池上',
-  'なかいけがみ',
-  '{"en":"Naka Ikegami"}'::jsonb,
-  35.5856105,
-  139.6985045,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12176917458,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_kugahara',
-  '久が原',
-  'くがはら',
-  '{"en":"Kugahara"}'::jsonb,
-  35.5803856,
-  139.6932265,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12177690630,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_minami_kugahara',
-  '南久が原',
-  'みなみくがはら',
-  '{"en":"Minami Kugahara"}'::jsonb,
-  35.576679,
-  139.6873872,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12177690790,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_chidori',
-  '千鳥',
-  'ちどり',
-  '{"en":"Chidori"}'::jsonb,
-  35.5706647,
-  139.6923407,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12177690866,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_yaguchi',
-  '矢口',
-  'やぐち',
-  '{"en":"Yaguchi"}'::jsonb,
-  35.5639836,
-  139.6932882,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12177690958,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_shimomaruko',
-  '下丸子',
-  'しもまるこ',
-  '{"en":"Shimomaruko"}'::jsonb,
-  35.5660505,
-  139.6820651,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12177705461,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_unoki',
-  '鵜の木',
-  'うのき',
-  '{"en":"Unoki"}'::jsonb,
-  35.5756425,
-  139.6790224,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12177822525,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_denenchofu',
-  '田園調布',
-  'でんえんちょうふ',
-  '{"en":"Denenchofu"}'::jsonb,
-  35.5933549,
-  139.6655655,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12177822759,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_kamiikedai',
-  '上池台',
-  'かみいけだい',
-  '{"en":"Kamiikedai"}'::jsonb,
-  35.5964965,
-  139.6974208,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12178270564,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_higashi_yukigaya',
-  '東雪谷',
-  'ひがしゆきがや',
-  '{"en":"Higashi Yukigaya"}'::jsonb,
-  35.5953436,
-  139.6906433,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12178270706,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_minami_yukigaya',
-  '南雪谷',
-  'みなみゆきがや',
-  '{"en":"Minami Yukigaya"}'::jsonb,
-  35.5916071,
-  139.6842421,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12178270833,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_ishikawacho',
-  '石川町',
-  'いしかわちょう',
-  '{"en":"Ishikawacho"}'::jsonb,
-  35.5997015,
-  139.6826319,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12178341399,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_minami_senzoku',
-  '南千束',
-  'みなみせんぞく',
-  '{"en":"Minami Senzoku"}'::jsonb,
-  35.6019962,
-  139.6914609,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12178377254,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ota_kita_senzoku',
-  '北千束',
-  'きたせんぞく',
-  '{"en":"Kita Senzoku"}'::jsonb,
-  35.6085774,
-  139.6893869,
-  NULL,
-  'tokyo',
-  'tokyo_ota',
-  'jp',
-  '東京都',
-  NULL,
-  '大田区',
-  NULL,
-  12178377406,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_okudo',
-  '奥戸',
-  'おくど',
-  '{"en":"Okudo"}'::jsonb,
-  35.7343663,
-  139.8636746,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12189393400,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_shinkoiwa',
-  '新小岩',
-  'しんこいわ',
-  '{"en":"Shinkoiwa"}'::jsonb,
-  35.7177335,
-  139.8642696,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12189403234,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_nishi_shinkoiwa',
-  '西新小岩',
-  'にししんこいわ',
-  '{"en":"Nishi Shinkoiwa"}'::jsonb,
-  35.7198521,
-  139.8494453,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12189403326,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_higashi_shinkoiwa',
-  '東新小岩',
-  'ひがししんこいわ',
-  '{"en":"Higashi Shinkoiwa"}'::jsonb,
-  35.723947,
-  139.859121,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12189403480,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_hosoda',
-  '細田',
-  'ほそだ',
-  '{"en":"Hosoda"}'::jsonb,
-  35.7411062,
-  139.8708628,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12191952977,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_kamakura',
-  '鎌倉',
-  'かまくら',
-  '{"en":"Kamakura"}'::jsonb,
-  35.7459954,
-  139.8787501,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12191961759,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_takasago',
-  '高砂',
-  'たかさご',
-  '{"en":"Takasago"}'::jsonb,
-  35.7491173,
-  139.8662271,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12191961875,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shibamata',
-  '柴又',
-  'しばまた',
-  '{"en":"Shibamata"}'::jsonb,
-  35.7563821,
-  139.8770799,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12194396870,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_niijuku',
-  '新宿',
-  'にいじゅく',
-  '{"en":"Niijuku"}'::jsonb,
-  35.7681272,
-  139.8618804,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12198919060,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_kanamachi',
-  '金町',
-  'かなまち',
-  '{"en":"Kanamachi"}'::jsonb,
-  35.7666976,
-  139.8710689,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12198919204,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_higashi_kanamachi',
-  '東金町',
-  'ひがしかなまち',
-  '{"en":"Higashi Kanamachi"}'::jsonb,
-  35.7762982,
-  139.8791437,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12206371682,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_higashi_mizumoto',
-  '東水元',
-  'ひがしみずもと',
-  '{"en":"Higashi Mizumoto"}'::jsonb,
-  35.7867123,
-  139.8670357,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12206998974,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_minami_mizumoto',
-  '南水元',
-  'みなみみずもと',
-  '{"en":"Minami Mizumoto"}'::jsonb,
-  35.7776152,
-  139.8607906,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12207003897,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_mizumoto',
-  '水元',
-  'みずもと',
-  '{"en":"Mizumoto"}'::jsonb,
-  35.7844846,
-  139.8604831,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12207003989,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_nishi_mizumoto',
-  '西水元',
-  'にしみずもと',
-  '{"en":"Nishi Mizumoto"}'::jsonb,
-  35.787324,
-  139.8518675,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12207004030,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ontacho',
-  '恩多町',
-  'おんたちょう',
-  '{"en":"Ontacho"}'::jsonb,
-  35.7533697,
-  139.4844735,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12220163009,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_higashi_yotsugi',
-  '東四つ木',
-  'ひがしよつぎ',
-  '{"en":"Higashi Yotsugi"}'::jsonb,
-  35.7291102,
-  139.8403364,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12223608022,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_yotsugi',
-  '四つ木',
-  'よつぎ',
-  '{"en":"Yotsugi"}'::jsonb,
-  35.7357221,
-  139.8342105,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12223608156,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_aoto',
-  '青戸',
-  'あおと',
-  '{"en":"Aoto"}'::jsonb,
-  35.7504293,
-  139.8541318,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12228656491,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_higashi_tateishi',
-  '東立石',
-  'ひがしたていし',
-  '{"en":"Higashi Tateishi"}'::jsonb,
-  35.7329088,
-  139.8490434,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12228679251,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_tateishi',
-  '立石',
-  'たていし',
-  '{"en":"Tateishi"}'::jsonb,
-  35.7416796,
-  139.8495356,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12228686679,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_shiratori',
-  '白鳥',
-  'しらとり',
-  '{"en":"Shiratori"}'::jsonb,
-  35.749885,
-  139.8446139,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12228737840,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_kameari',
-  '亀有',
-  'かめあり',
-  '{"en":"Kameari"}'::jsonb,
-  35.7625903,
-  139.8473483,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12245153602,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_nishi_kameari',
-  '西亀有',
-  'にしかめあり',
-  '{"en":"Nishi Kameari"}'::jsonb,
-  35.7613063,
-  139.83748,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12245210642,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_ohanajaya',
-  'お花茶屋',
-  'おはなぢゃや',
-  '{"en":"Ohanajaya"}'::jsonb,
-  35.7531013,
-  139.8410888,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12245210707,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_takaramachi',
-  '宝町',
-  'たからまち',
-  '{"en":"Takaramachi"}'::jsonb,
-  35.7443438,
-  139.8374458,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12245210767,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_higashi_horikiri',
-  '東堀切',
-  'ひがしほりきり',
-  '{"en":"Higashi Horikiri"}'::jsonb,
-  35.7536508,
-  139.8364038,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12245474863,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_horikiri',
-  '堀切',
-  'ほりきり',
-  '{"en":"Horikiri"}'::jsonb,
-  35.7464692,
-  139.8270423,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12245485714,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_katsushika_kosuge',
-  '小菅',
-  'こすげ',
-  '{"en":"Kosuge"}'::jsonb,
-  35.7551572,
-  139.8202754,
-  NULL,
-  'tokyo',
-  'tokyo_katsushika',
-  'jp',
-  '東京都',
-  NULL,
-  '葛飾区',
-  NULL,
-  12245688159,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_arakawa_minami_senju',
-  '南千住',
-  'みなみせんじゅ',
-  '{"en":"Minami Senju"}'::jsonb,
-  35.7357935,
-  139.8000711,
-  NULL,
-  'tokyo',
-  'tokyo_arakawa',
-  'jp',
-  '東京都',
-  NULL,
-  '荒川区',
-  NULL,
-  12247319771,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_higashi_nippori',
-  '東日暮里',
-  'ひがしにっぽり',
-  '{"en":"Higashi-Nippori"}'::jsonb,
-  35.7294836,
-  139.7817646,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12247347530,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nishi_nippori',
-  '西日暮里',
-  'にしにっぽり',
-  '{"en":"Nishi-Nippori"}'::jsonb,
-  35.7325615,
-  139.7703179,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12247367496,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_arakawa_arakawa',
-  '荒川',
-  'あらかわ',
-  '{"en":"Arakawa"}'::jsonb,
-  35.7390532,
-  139.7813524,
-  NULL,
-  'tokyo',
-  'tokyo_arakawa',
-  'jp',
-  '東京都',
-  NULL,
-  '荒川区',
-  NULL,
-  12248365883,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_arakawa_machiya',
-  '町屋',
-  'まちや',
-  '{"en":"Machiya"}'::jsonb,
-  35.7494932,
-  139.7831056,
-  NULL,
-  'tokyo',
-  'tokyo_arakawa',
-  'jp',
-  '東京都',
-  NULL,
-  '荒川区',
-  NULL,
-  12248426692,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_arakawa_higashi_ogu',
-  '東尾久',
-  'ひがしおぐ',
-  '{"en":"Higashi Ogu"}'::jsonb,
-  35.7449152,
-  139.7696223,
-  NULL,
-  'tokyo',
-  'tokyo_arakawa',
-  'jp',
-  '東京都',
-  NULL,
-  '荒川区',
-  NULL,
-  12249361501,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_arakawa_nishi_ogu',
-  '西尾久',
-  'にしおぐ',
-  '{"en":"Nishi Ogu"}'::jsonb,
-  35.750299,
-  139.7580339,
-  NULL,
-  'tokyo',
-  'tokyo_arakawa',
-  'jp',
-  '東京都',
-  NULL,
-  '荒川区',
-  NULL,
-  12249361665,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_higashi_jujo',
-  '東十条',
-  'ひがしじゅうじょう',
-  '{"en":"Higashi Jujo"}'::jsonb,
-  35.7658363,
-  139.7272025,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12250500373,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_toshima',
-  '豊島',
-  'としま',
-  '{"en":"Toshima"}'::jsonb,
-  35.7630169,
-  139.7488159,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12250511594,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ji',
-  '王子',
-  'おうじ',
-  '{"en":"Ōji"}'::jsonb,
-  35.7599287,
-  139.7365951,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12250515318,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_kamiya',
-  '神谷',
-  'かみや',
-  '{"en":"Kamiya"}'::jsonb,
-  35.7711695,
-  139.7312601,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12250518619,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_shimo',
-  '志茂',
-  'しも',
-  '{"en":"Shimo"}'::jsonb,
-  35.7824772,
-  139.7320654,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12262764842,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_akabane',
-  '赤羽',
-  'あかばね',
-  '{"en":"Akabane"}'::jsonb,
-  35.7831564,
-  139.7207636,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12265373700,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_akabane_minami',
-  '赤羽南',
-  'あかばねみなみ',
-  '{"en":"Akabane minami"}'::jsonb,
-  35.7750826,
-  139.723931,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12265444436,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_akabane_kita',
-  '赤羽北',
-  'あかばねきた',
-  '{"en":"Akabane kita"}'::jsonb,
-  35.7862869,
-  139.7103797,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12265444555,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_kirigaoka',
-  '桐ケ丘',
-  'きりがおか',
-  '{"en":"Kirigaoka"}'::jsonb,
-  35.7786868,
-  139.7090534,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12269221838,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_akabanedai',
-  '赤羽台',
-  'あかばねだい',
-  '{"en":"Akabanedai"}'::jsonb,
-  35.7805029,
-  139.7163839,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12269221953,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_akabane_nishi',
-  '赤羽西',
-  'あかばねにし',
-  '{"en":"Akabane nishi"}'::jsonb,
-  35.7733906,
-  139.7136748,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12270064093,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_nishigaoka',
-  '西が丘',
-  'にしがおか',
-  '{"en":"Nishigaoka"}'::jsonb,
-  35.7679833,
-  139.7115692,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12270071689,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kishimachi',
-  '岸町',
-  'きしまち',
-  '{"en":"Kishimachi"}'::jsonb,
-  35.7581173,
-  139.7321942,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12270106337,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ji_honch',
-  '王子本町',
-  'おうじほんちょう',
-  '{"en":"Ōji-Honchō"}'::jsonb,
-  35.7540583,
-  139.7308564,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12270106452,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_naka_jujo',
-  '中十条',
-  'なかじゅうじょう',
-  '{"en":"Naka jujo"}'::jsonb,
-  35.7630902,
-  139.7236608,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12280374453,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_jujo_nakahara',
-  '十条仲原',
-  'じゅうじょうなかはら',
-  '{"en":"Jujo Nakahara"}'::jsonb,
-  35.7660297,
-  139.7210195,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12280374570,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_kami_jujo',
-  '上十条',
-  'かみじゅうじょう',
-  '{"en":"Kami jujo"}'::jsonb,
-  35.7629881,
-  139.7180209,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12280396990,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_jujodai',
-  '十条台',
-  'じゅうじょうだい',
-  '{"en":"Jujodai"}'::jsonb,
-  35.7555887,
-  139.7224434,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12281709677,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_takinogawa',
-  '滝野川',
-  'たきのがわ',
-  '{"en":"Takinogawa"}'::jsonb,
-  35.7478346,
-  139.7268411,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12289142402,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_horifune',
-  '堀船',
-  'ほりふね',
-  '{"en":"Horifune"}'::jsonb,
-  35.7544046,
-  139.7473296,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12289354412,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nishigahara',
-  '西ケ原',
-  'にしがはら',
-  '{"en":"Nishigahara"}'::jsonb,
-  35.7432985,
-  139.7421535,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12290997701,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_showamachi',
-  '昭和町',
-  'しょうわまち',
-  '{"en":"Showamachi"}'::jsonb,
-  35.7473342,
-  139.7544266,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12290997811,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kami_nakazato',
-  '上中里',
-  'かみなかざと',
-  '{"en":"Kami-Nakazato"}'::jsonb,
-  35.7466653,
-  139.7496234,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12290997858,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_nakazato',
-  '中里',
-  'なかざと',
-  '{"en":"Nakazato"}'::jsonb,
-  35.739541,
-  139.7522185,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12290997933,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_tabata',
-  '田端',
-  'たばた',
-  '{"en":"Tabata"}'::jsonb,
-  35.7368318,
-  139.7574864,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12291021998,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_higashi_tabata',
-  '東田端',
-  'ひがしたばた',
-  '{"en":"Higashi Tabata"}'::jsonb,
-  35.7395979,
-  139.7611709,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12291032750,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_kita_tabata_shimachi',
-  '田端新町',
-  'たばたしんまち',
-  '{"en":"Tabata shimachi"}'::jsonb,
-  35.7414456,
-  139.7644714,
-  NULL,
-  'tokyo',
-  'tokyo_kita',
-  'jp',
-  '東京都',
-  NULL,
-  '北区',
-  NULL,
-  12291032768,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_matsubara',
-  '松原',
-  'まつばら',
-  '{"en":"Matsubara"}'::jsonb,
-  35.6633686,
-  139.6492965,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12306877399,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_akatsutsumi',
-  '赤堤',
-  'あかつつみ',
-  '{"en":"Akatsutsumi"}'::jsonb,
-  35.6600329,
-  139.6387897,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12307016803,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_sakurajosui',
-  '桜上水',
-  'さくらじょうすい',
-  '{"en":"Sakurajosui"}'::jsonb,
-  35.6622214,
-  139.6310557,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12307017014,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_umegaoka',
-  '梅丘',
-  'うめがおか',
-  '{"en":"Umegaoka"}'::jsonb,
-  35.6523766,
-  139.6530459,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12308518915,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_g_tokuji',
-  '豪徳寺',
-  'ごうとくじ',
-  '{"en":"Gōtokuji"}'::jsonb,
-  35.6504114,
-  139.647322,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12308519001,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_ikejiri',
-  '池尻',
-  'いけじり',
-  '{"en":"Ikejiri"}'::jsonb,
-  35.6490094,
-  139.680715,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12308772313,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_mishuku',
-  '三宿',
-  'みしゅく',
-  '{"en":"Mishuku"}'::jsonb,
-  35.6500875,
-  139.6750067,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12308772426,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_taishido_quarter',
-  '太子堂',
-  'たいしどう',
-  '{"en":"Taishido"}'::jsonb,
-  35.6470592,
-  139.6699374,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12308772556,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_shimouma',
-  '下馬',
-  'しもうま',
-  '{"en":"Shimouma"}'::jsonb,
-  35.6346312,
-  139.679197,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12313746894,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_nozawa',
-  '野沢',
-  'のざわ',
-  '{"en":"Nozawa"}'::jsonb,
-  35.6335651,
-  139.6715038,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12324799089,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kamiuma',
-  '上馬',
-  'かみうま',
-  '{"en":"Kamiuma"}'::jsonb,
-  35.6372239,
-  139.6625859,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12324883732,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_komazawa',
-  '駒沢',
-  'こまざわ',
-  '{"en":"Komazawa"}'::jsonb,
-  35.6313334,
-  139.6562555,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12325561585,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_wakabayashi',
-  '若林',
-  'わかばやし',
-  '{"en":"Wakabayashi"}'::jsonb,
-  35.6476078,
-  139.6602321,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12325577958,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_setagaya',
-  '世田谷',
-  'せたがや',
-  '{"en":"Setagaya"}'::jsonb,
-  35.6442148,
-  139.6482554,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12325578105,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_miyasaka',
-  '宮坂',
-  'みやさか',
-  '{"en":"Miyasaka"}'::jsonb,
-  35.6520437,
-  139.6405299,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12326809945,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kyodo',
-  '経堂',
-  'きょうどう',
-  '{"en":"Kyodo"}'::jsonb,
-  35.6499894,
-  139.6317129,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12327797377,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_sakura',
-  '桜',
-  'さくら',
-  '{"en":"Sakura"}'::jsonb,
-  35.6440435,
-  139.6398674,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12327797515,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_tsurumaki',
-  '弦巻',
-  'つるまき',
-  '{"en":"Tsurumaki"}'::jsonb,
-  35.6365215,
-  139.6483471,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12327834863,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kami_kitazawa',
-  '上北沢',
-  'かみきたざわ',
-  '{"en":"Kami Kitazawa"}'::jsonb,
-  35.6664639,
-  139.6220906,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12347128239,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_hachimanyama',
-  '八幡山',
-  'はちまんやま',
-  '{"en":"Hachimanyama"}'::jsonb,
-  35.6640372,
-  139.6169744,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12347128361,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kasuya',
-  '粕谷',
-  'かすや',
-  '{"en":"Kasuya"}'::jsonb,
-  35.6628538,
-  139.6075808,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12347128513,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kita_karasuyama',
-  '北烏山',
-  'きたからすやま',
-  '{"en":"Kita Karasuyama"}'::jsonb,
-  35.676579,
-  139.5976078,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12347229093,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kyuden',
-  '給田',
-  'きゅうでん',
-  '{"en":"Kyuden"}'::jsonb,
-  35.6681356,
-  139.5921635,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12347250001,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kitami',
-  '喜多見',
-  'きたみ',
-  '{"en":"Kitami"}'::jsonb,
-  35.6304381,
-  139.5984953,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12368943477,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_seijo',
-  '成城',
-  'せいじょう',
-  '{"en":"Seijo"}'::jsonb,
-  35.6417081,
-  139.5969089,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12368943777,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kami_soshigaya',
-  '上祖師谷',
-  'かみそしがや',
-  '{"en":"Kami Soshigaya"}'::jsonb,
-  35.65779,
-  139.5960149,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12385529749,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_soshigaya',
-  '祖師谷',
-  'そしがや',
-  '{"en":"Soshigaya"}'::jsonb,
-  35.6505326,
-  139.6055915,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12385565462,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kinuta',
-  '砧',
-  'きぬた',
-  '{"en":"Kinuta"}'::jsonb,
-  35.6397064,
-  139.6115512,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12385616158,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_chitosedai',
-  '千歳台',
-  'ちとせだい',
-  '{"en":"Chitosedai"}'::jsonb,
-  35.652865,
-  139.6122145,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12387462315,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_unane',
-  '宇奈根',
-  'うなね',
-  '{"en":"Unane"}'::jsonb,
-  35.6210337,
-  139.6030406,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12387463142,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_okura',
-  '大蔵',
-  'おおくら',
-  '{"en":"Okura"}'::jsonb,
-  35.631861,
-  139.6123003,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12387463277,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_funabashi_quarter',
-  '船橋',
-  'ふなばし',
-  '{"en":"Funabashi"}'::jsonb,
-  35.6539857,
-  139.6218325,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12387467512,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_okamoto',
-  '岡本',
-  'おかもと',
-  '{"en":"Okamoto"}'::jsonb,
-  35.6246619,
-  139.6184472,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12398871299,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kamata',
-  '鎌田',
-  'かまた',
-  '{"en":"Kamata"}'::jsonb,
-  35.6186819,
-  139.61357,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12398877171,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kami_yoga',
-  '上用賀',
-  'かみようが',
-  '{"en":"Kami Yoga"}'::jsonb,
-  35.63352,
-  139.6302503,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12398959872,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_yoga',
-  '用賀',
-  'ようが',
-  '{"en":"Yoga"}'::jsonb,
-  35.6271878,
-  139.6359349,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12399071903,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_tamagawadai',
-  '玉川台',
-  'たまがわだい',
-  '{"en":"Tamagawadai"}'::jsonb,
-  35.6240066,
-  139.6323338,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12399071980,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_tamagawa',
-  '玉川',
-  'たまがわ',
-  '{"en":"Tamagawa"}'::jsonb,
-  35.6148068,
-  139.6267055,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401264852,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_seta',
-  '瀬田',
-  'せた',
-  '{"en":"Seta"}'::jsonb,
-  35.6199238,
-  139.6294944,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401264986,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_kami_noge',
-  '上野毛',
-  'かみのげ',
-  '{"en":"Kami noge"}'::jsonb,
-  35.6131974,
-  139.6372476,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401265145,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_noge',
-  '野毛',
-  'のげ',
-  '{"en":"Noge"}'::jsonb,
-  35.6044166,
-  139.6406343,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401265245,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_nakamachi',
-  '中町',
-  'なかまち',
-  '{"en":"Nakamachi"}'::jsonb,
-  35.6164135,
-  139.6442497,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401315666,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_sakurashinmachi',
-  '桜新町',
-  'さくらしんまち',
-  '{"en":"Sakurashinmachi"}'::jsonb,
-  35.6304482,
-  139.6423714,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401315764,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_shinmachi',
-  '新町',
-  'しんまち',
-  '{"en":"Shinmachi"}'::jsonb,
-  35.6311681,
-  139.64853,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401315797,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_fukasawa',
-  '深沢',
-  'ふかさわ',
-  '{"en":"Fukasawa"}'::jsonb,
-  35.6213336,
-  139.6513838,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12401415741,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_todoroki',
-  '等々力',
-  'とどろき',
-  '{"en":"Todoroki"}'::jsonb,
-  35.6084839,
-  139.6541168,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12414105954,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_tamazutsumi',
-  '玉堤',
-  'たまづつみ',
-  '{"en":"Tamazutsumi"}'::jsonb,
-  35.5962676,
-  139.650861,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12421839232,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_oyamadai',
-  '尾山台',
-  'おやまだい',
-  '{"en":"Oyamadai"}'::jsonb,
-  35.6020863,
-  139.6548109,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12421839278,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_tamagawa_denenchofu',
-  '玉川田園調布',
-  'たまがわでんえんちょうふ',
-  '{"en":"Tamagawa Denenchofu"}'::jsonb,
-  35.6006955,
-  139.6647068,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12421847855,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_higashi_tamagawa',
-  '東玉川',
-  'ひがしたまがわ',
-  '{"en":"Higashi Tamagawa"}'::jsonb,
-  35.5959383,
-  139.6768228,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12421847891,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_setagaya_okusawa',
-  '奥沢',
-  'おくさわ',
-  '{"en":"Okusawa"}'::jsonb,
-  35.6052056,
-  139.6662933,
-  NULL,
-  'tokyo',
-  'tokyo_setagaya',
-  'jp',
-  '東京都',
-  NULL,
-  '世田谷区',
-  NULL,
-  12421847919,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_meguro_honcho',
-  '目黒本町',
-  'めぐろほんちょう',
-  '{"en":"Meguro honcho"}'::jsonb,
-  35.6219682,
-  139.6962753,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12423637505,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_meguro',
-  '目黒',
-  'めぐろ',
-  '{"en":"Meguro"}'::jsonb,
-  35.6339231,
-  139.7072864,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12423660474,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_mita',
-  '三田',
-  'みた',
-  '{"en":"Mita"}'::jsonb,
-  35.6401343,
-  139.7121573,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12423660551,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_naka_meguro',
-  '中目黒',
-  'なかめぐろ',
-  '{"en":"Naka Meguro"}'::jsonb,
-  35.6403507,
-  139.7034599,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12438137836,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kami_meguro',
-  '上目黒',
-  'かみめぐろ',
-  '{"en":"Kami-Meguro"}'::jsonb,
-  35.6428011,
-  139.6930849,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12438138100,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_aobadai',
-  '青葉台',
-  'あおばだい',
-  '{"en":"Aobadai"}'::jsonb,
-  35.6513684,
-  139.6934004,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12438179322,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_higashiyama',
-  '東山',
-  'ひがしやま',
-  '{"en":"Higashiyama"}'::jsonb,
-  35.6472236,
-  139.6898194,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12438179407,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_ohashi',
-  '大橋',
-  'おおはし',
-  '{"en":"Ohashi"}'::jsonb,
-  35.6522218,
-  139.6856436,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12440002904,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_komaba',
-  '駒場',
-  'こまば',
-  '{"en":"Komaba"}'::jsonb,
-  35.6593621,
-  139.6827141,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12440002910,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_gobongi',
-  '五本木',
-  'ごほんぎ',
-  '{"en":"Gobongi"}'::jsonb,
-  35.6355011,
-  139.6871893,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12440345370,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_yutenji',
-  '祐天寺',
-  'ゆうてんじ',
-  '{"en":"Yutenji"}'::jsonb,
-  35.6381201,
-  139.6935573,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12440345393,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_nakacho',
-  '中町',
-  'なかちょう',
-  '{"en":"Nakacho"}'::jsonb,
-  35.6323271,
-  139.6959081,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '目黒区',
   NULL,
-  12440345444,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_chuo_cho',
-  '中央町',
-  'ちゅうおうちょう',
-  '{"en":"Chuo cho"}'::jsonb,
-  35.6303197,
-  139.6914353,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12440345533,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_takaban',
-  '鷹番',
-  'たかばん',
-  '{"en":"Takaban"}'::jsonb,
-  35.6278194,
-  139.6855823,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
   NULL,
-  '目黒区',
-  NULL,
-  12440345606,
+  6751631426,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_meguro_himonya',
-  '碑文谷',
-  'ひもんや',
-  '{"en":"Himonya"}'::jsonb,
-  35.6220438,
-  139.6855136,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
+  'yamaguchi_unknown_aio_nishi',
+  '秋穂西',
+  'あいおにし',
+  '{"en":"Aio-Nishi"}'::jsonb,
+  34.0265978,
+  131.4274935,
   NULL,
-  12458025111,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_haramachi',
-  '原町',
-  'はらまち',
-  '{"en":"Haramachi"}'::jsonb,
-  35.6172757,
-  139.6932536,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
   'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12458025249,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_senzoku',
-  '洗足',
-  'せんぞく',
-  '{"en":"Senzoku"}'::jsonb,
-  35.6127195,
-  139.6944579,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
   NULL,
-  '目黒区',
   NULL,
-  12458025262,
+  7593810411,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_meguro_minami',
-  '南',
-  'みなみ',
-  '{"en":"Minami"}'::jsonb,
-  35.6140788,
-  139.6872945,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
+  'yamaguchi_unknown_aio_futajima',
+  '秋穂二島',
+  'あいおふたじま',
+  '{"en":"Aio-Futajima"}'::jsonb,
+  34.0442099,
+  131.4145028,
   NULL,
-  12458025279,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_kakinokizaka',
-  '柿の木坂',
-  'かきのきざか',
-  '{"en":"Kakinokizaka"}'::jsonb,
-  35.6237238,
-  139.6756671,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
   'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12458049069,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_higashigaoka',
-  '東が丘',
-  'ひがしがおか',
-  '{"en":"Higashigaoka"}'::jsonb,
-  35.628122,
-  139.6673813,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
   NULL,
-  '目黒区',
   NULL,
-  12458057622,
+  7593810412,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_meguro_yakumo',
-  '八雲',
-  'やくも',
-  '{"en":"Yakumo"}'::jsonb,
-  35.6203425,
-  139.6690718,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
+  'yamaguchi_unknown_aio_higashi',
+  '秋穂東',
+  'あいおひがし',
+  '{"en":"Aio-Higashi"}'::jsonb,
+  34.0221326,
+  131.4541465,
   NULL,
-  12459875039,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_nakane',
-  '中根',
-  'なかね',
-  '{"en":"Nakane"}'::jsonb,
-  35.615509,
-  139.674159,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
   'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12459877208,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_tairamachi',
-  '平町',
-  'たいらまち',
-  '{"en":"Tairamachi"}'::jsonb,
-  35.6164098,
-  139.6803867,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
   NULL,
-  '目黒区',
   NULL,
-  12459877253,
+  7593810421,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_meguro_ookayama',
-  '大岡山',
-  'おおおかやま',
-  '{"en":"Ookayama"}'::jsonb,
-  35.6088096,
-  139.6827405,
-  NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
-  NULL,
-  '目黒区',
+  'yamaguchi_unknown_kamitengemachi',
+  '上天花町',
+  'かみてんげまち',
+  '{"en":"Kamitengemachi"}'::jsonb,
+  34.2121216,
+  131.46487,
   NULL,
-  12459895774,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_midorigaoka',
-  '緑が丘',
-  'みどりがおか',
-  '{"en":"Midorigaoka"}'::jsonb,
-  35.6105308,
-  139.6758726,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
   'jp',
-  '東京都',
-  NULL,
-  '目黒区',
-  NULL,
-  12459912514,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_meguro_jiyugaoka',
-  '自由が丘',
-  'じゆうがおか',
-  '{"en":"Jiyugaoka"}'::jsonb,
-  35.6114502,
-  139.6675812,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_meguro',
-  'jp',
-  '東京都',
   NULL,
-  '目黒区',
   NULL,
-  12459912543,
+  7637351424,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_kotake_cho',
-  '小竹町',
-  'こたけちょう',
-  '{"en":"Kotake cho"}'::jsonb,
-  35.7416147,
-  139.6760684,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
+  'yamaguchi_unknown_kimachi',
+  '木町',
+  'きまち',
+  '{"en":"Kimachi"}'::jsonb,
+  34.1913577,
+  131.4743784,
   NULL,
-  12460606653,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_toyotama_kami',
-  '豊玉上',
-  'とよたまかみ',
-  '{"en":"Toyotama kami"}'::jsonb,
-  35.7370942,
-  139.6653736,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
   'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12460754977,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_toyotama_kita',
-  '豊玉北',
-  'とよたまきた',
-  '{"en":"Toyotama kita"}'::jsonb,
-  35.7348831,
-  139.6602943,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
   NULL,
-  '練馬区',
   NULL,
-  12460755134,
+  7637351428,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_toyotama_naka',
-  '豊玉中',
-  'とよたまなか',
-  '{"en":"Toyotama naka"}'::jsonb,
-  35.7315159,
-  139.6570743,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
+  'yamaguchi_unknown_kozancho',
+  '香山町',
+  'こうざんちょう',
+  '{"en":"Kozancho"}'::jsonb,
+  34.1891735,
+  131.4733297,
   NULL,
-  12460967806,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_toyotama_minami',
-  '豊玉南',
-  'とよたまみなみ',
-  '{"en":"Toyotama minami"}'::jsonb,
-  35.7281946,
-  139.6543265,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
   'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12460967907,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_nakamura',
-  '中村',
-  'なかむら',
-  '{"en":"Nakamura"}'::jsonb,
-  35.7326347,
-  139.6418449,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
   NULL,
-  '練馬区',
   NULL,
-  12472766297,
+  7637351429,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_nakamura_kita',
-  '中村北',
-  'なかむらきた',
-  '{"en":"Nakamura kita"}'::jsonb,
-  35.7355613,
-  139.6412751,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
+  'yamaguchi_unknown_takimachi',
+  '滝町',
+  'たきまち',
+  '{"en":"Takimachi"}'::jsonb,
+  34.188225,
+  131.465967,
   NULL,
-  12472766364,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_hazawa',
-  '羽沢',
-  'はざわ',
-  '{"en":"Hazawa"}'::jsonb,
-  35.7473822,
-  139.6712258,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
   'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12472836228,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_sakuradai',
-  '桜台',
-  'さくらだい',
-  '{"en":"Sakuradai"}'::jsonb,
-  35.7439991,
-  139.6625599,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
   NULL,
-  '練馬区',
   NULL,
-  12472836342,
+  7637351431,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_nerima',
-  '練馬',
-  'ねりま',
-  '{"en":"Nerima"}'::jsonb,
-  35.7421582,
-  139.6524859,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
+  'yamaguchi_unknown_kamitatekoji',
+  '上竪小路',
+  'かみたてこうじ',
+  '{"en":"Kamitatekoji"}'::jsonb,
+  34.1872155,
+  131.4773449,
   NULL,
-  12472871013,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_heiwadai',
-  '平和台',
-  'へいわだい',
-  '{"en":"Heiwadai"}'::jsonb,
-  35.7582771,
-  139.6608375,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
   'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12472989073,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_nishiki',
-  '錦',
-  'にしき',
-  '{"en":"Nishiki"}'::jsonb,
-  35.7609705,
-  139.668056,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
   NULL,
-  '練馬区',
   NULL,
-  12472989147,
+  7637351432,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_hayamiya',
-  '早宮',
-  'はやみや',
-  '{"en":"Hayamiya"}'::jsonb,
-  35.7520223,
-  139.6549439,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
+  'yamaguchi_unknown_mizunouecho',
+  '水の上町',
+  'みずのうえちょう',
+  '{"en":"Mizunouecho"}'::jsonb,
+  34.186734,
+  131.4735818,
   NULL,
-  12472989295,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_kitamachi',
-  '北町',
-  'きたまち',
-  '{"en":"Kitamachi"}'::jsonb,
-  35.7655918,
-  139.6570357,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
   'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12475014052,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_tagara',
-  '田柄',
-  'たがら',
-  '{"en":"Tagara"}'::jsonb,
-  35.7627233,
-  139.6406856,
+  '山口県',
   NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
   NULL,
-  '練馬区',
   NULL,
-  12475014352,
+  7637351433,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_nerima_kasugacho',
+  'yamaguchi_unknown_kasugacho',
   '春日町',
   'かすがちょう',
   '{"en":"Kasugacho"}'::jsonb,
-  35.7517409,
-  139.6413347,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12475054961,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_koyama',
-  '向山',
-  'こうやま',
-  '{"en":"Koyama"}'::jsonb,
-  35.74217,
-  139.64139,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12490956180,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_nukui',
-  '貫井',
-  'ぬくい',
-  '{"en":"Nukui"}'::jsonb,
-  35.7400718,
-  139.6319688,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12491497567,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_doshida',
-  '土支田',
-  'どしだ',
-  '{"en":"Doshida"}'::jsonb,
-  35.7644244,
-  139.6145267,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12492209787,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_yahara',
-  '谷原',
-  'やはら',
-  '{"en":"Yahara"}'::jsonb,
-  35.7533018,
-  139.6150872,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12494462906,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_miharadai',
-  '三原台',
-  'みはらだい',
-  '{"en":"Miharadai"}'::jsonb,
-  35.7541122,
-  139.6036841,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12494463108,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_takanodai',
-  '高野台',
-  'たかのだい',
-  '{"en":"Takanodai"}'::jsonb,
-  35.7455378,
-  139.6162274,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12494463306,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_fujimidai',
-  '富士見台',
-  'ふじみだい',
-  '{"en":"Fujimidai"}'::jsonb,
-  35.7367091,
-  139.6235163,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12495388769,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_minami_tanaka',
-  '南田中',
-  'みなみたなか',
-  '{"en":"Minami Tanaka"}'::jsonb,
-  35.7350514,
-  139.6150321,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12497370048,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_shimo_shakujii',
-  '下石神井',
-  'しもしゃくじい',
-  '{"en":"Shimo Shakujii"}'::jsonb,
-  35.7317147,
-  139.6048749,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12497370195,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_shakujii_machi',
-  '石神井町',
-  'しゃくじいまち',
-  '{"en":"Shakujii machi"}'::jsonb,
-  35.7436117,
-  139.6043049,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12497421605,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_kami_shakujii',
-  '上石神井',
-  'かみしゃくじい',
-  '{"en":"Kami Shakujii"}'::jsonb,
-  35.7286801,
-  139.5907338,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12497967147,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_shakujiidai',
-  '石神井台',
-  'しゃくじいだい',
-  '{"en":"Shakujiidai"}'::jsonb,
-  35.7370076,
-  139.588461,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12497967372,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_sekimachi_minami',
-  '関町南',
-  'せきまちみなみ',
-  '{"en":"Sekimachi minami"}'::jsonb,
-  35.7216016,
-  139.5786182,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12511356818,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_sekimachi_higashi',
-  '関町東',
-  'せきまちひがし',
-  '{"en":"Sekimachi higashi"}'::jsonb,
-  35.7268388,
-  139.5822574,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12511356937,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_sekimachi_kita',
-  '関町北',
-  'せきまちきた',
-  '{"en":"Sekimachi kita"}'::jsonb,
-  35.7277517,
-  139.5729792,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12511367880,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_minami_oizumi',
-  '南大泉',
-  'みなみおおいずみ',
-  '{"en":"Minami Oizumi"}'::jsonb,
-  35.7448245,
-  139.5728931,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12511442774,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_nishi_oizumi',
-  '西大泉',
-  'にしおおいずみ',
-  '{"en":"Nishi Oizumi"}'::jsonb,
-  35.7594647,
-  139.5728745,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12513272519,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_higashi_oizumi',
-  '東大泉',
-  'ひがしおおいずみ',
-  '{"en":"Higashi Oizumi"}'::jsonb,
-  35.7480017,
-  139.5885504,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12513324358,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_oizumi_machi',
-  '大泉町',
-  'おおいずみまち',
-  '{"en":"Oizumi machi"}'::jsonb,
-  35.7634647,
-  139.6007154,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12514065207,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nerima_oizumi_gakuen_cho',
-  '大泉学園町',
-  'おおいずみがくえんちょう',
-  '{"en":"Oizumi gakuen cho"}'::jsonb,
-  35.7663852,
-  139.5881897,
-  NULL,
-  'tokyo',
-  'tokyo_nerima',
-  'jp',
-  '東京都',
-  NULL,
-  '練馬区',
-  NULL,
-  12514070738,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_chuo',
-  '中央',
-  'ちゅうおう',
-  '{"en":"Chuo"}'::jsonb,
-  35.6997511,
-  139.6750207,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12530584121,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nakano',
-  '中野',
-  'なかの',
-  '{"en":"Nakano"}'::jsonb,
-  35.7058283,
-  139.6709357,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12532967600,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_matsugaoka',
-  '松が丘',
-  'まつがおか',
-  '{"en":"Matsugaoka"}'::jsonb,
-  35.7219132,
-  139.672447,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12533313043,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_numabukuro',
-  '沼袋',
-  'ぬまぶくろ',
-  '{"en":"Numabukuro"}'::jsonb,
-  35.720935,
-  139.6635395,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12547926482,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_eharacho',
-  '江原町',
-  'えはらちょう',
-  '{"en":"Eharacho"}'::jsonb,
-  35.7305452,
-  139.6724727,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12548920737,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_nogata',
-  '野方',
-  'のがた',
-  '{"en":"Nogata"}'::jsonb,
-  35.7138444,
-  139.6554215,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12550151200,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_maruyama',
-  '丸山',
-  'まるやま',
-  '{"en":"Maruyama"}'::jsonb,
-  35.7246512,
-  139.6539931,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12550151315,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_shirasagi',
-  '白鷺',
-  'しらさぎ',
-  '{"en":"Shirasagi"}'::jsonb,
-  35.720639,
-  139.6359464,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12550224043,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_nakano_saginomiya',
-  '鷺宮',
-  'さぎのみや',
-  '{"en":"Saginomiya"}'::jsonb,
-  35.7244779,
-  139.6378083,
-  NULL,
-  'tokyo',
-  'tokyo_nakano',
-  'jp',
-  '東京都',
-  NULL,
-  '中野区',
-  NULL,
-  12550408202,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_akabane',
-  '高松',
-  'たかまつ',
-  '{"en":"Akabane"}'::jsonb,
-  35.7377689,
-  139.6976272,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12558780912,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_kanamecho',
-  '要町',
-  'かなめちょう',
-  '{"en":"Kanamecho"}'::jsonb,
-  35.7365989,
-  139.6931594,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12558780913,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_chihaya',
-  '千早',
-  'ちはや',
-  '{"en":"Chihaya"}'::jsonb,
-  35.7339531,
-  139.6891843,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12558780914,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_senkawa',
-  '千川',
-  'せんかわ',
-  '{"en":"Senkawa"}'::jsonb,
-  35.7401188,
-  139.6927038,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12558780926,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_minami_nagasaki',
-  '南長崎',
-  'みなみながさき',
-  '{"en":"Minami-Nagasaki"}'::jsonb,
-  35.7262074,
-  139.6864893,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12558997407,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_nagasaki',
-  '長崎',
-  'ながさき',
-  '{"en":"Nagasaki"}'::jsonb,
-  35.7315657,
-  139.6846593,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12566754094,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_takada',
-  '高田',
-  'たかだ',
-  '{"en":"Takada"}'::jsonb,
-  35.7157717,
-  139.712324,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12566990190,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_zoshigaya',
-  '雑司が谷',
-  'ぞうしがや',
-  '{"en":"Zoshigaya"}'::jsonb,
-  35.7195684,
-  139.7177949,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12569833461,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_mejiro',
-  '目白',
-  'めじろ',
-  '{"en":"Mejiro"}'::jsonb,
-  35.7242907,
-  139.7028671,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12569837758,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_nishi_ikebukuro',
-  '西池袋',
-  'にしいけぶくろ',
-  '{"en":"Nishi Ikebukuro"}'::jsonb,
-  35.7284313,
-  139.7017131,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12570052763,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_higashi_ikebukuro',
-  '東池袋',
-  'ひがしいけぶくろ',
-  '{"en":"Higashi Ikebukuro"}'::jsonb,
-  35.7290721,
-  139.7209701,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12570326457,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_ikebukuro_honcho',
-  '池袋本町',
-  'いけぶくろほんちょう',
-  '{"en":"Ikebukuro honcho"}'::jsonb,
-  35.7422596,
-  139.7126929,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12570326625,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_kami_ikebukuro',
-  '上池袋',
-  'かみいけぶくろ',
-  '{"en":"Kami Ikebukuro"}'::jsonb,
-  35.7384949,
-  139.7185451,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12570326750,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_minami_otsuka',
-  '南大塚',
-  'みなみおおつか',
-  '{"en":"Minami Otsuka"}'::jsonb,
-  35.7293181,
-  139.72957,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12577080292,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_kita_otsuka',
-  '北大塚',
-  'きたおおつか',
-  '{"en":"Kita Otsuka"}'::jsonb,
-  35.7339779,
-  139.7292492,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12577084506,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_toshima_nishi_sugamo',
-  '西巣鴨',
-  'にしすがも',
-  '{"en":"Nishi Sugamo"}'::jsonb,
-  35.7400681,
-  139.7278786,
-  NULL,
-  'tokyo',
-  'tokyo_toshima',
-  'jp',
-  '東京都',
-  NULL,
-  '豊島区',
-  NULL,
-  12577139196,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_sugamo',
-  '巣鴨',
-  'すがも',
-  '{"en":"Sugamo"}'::jsonb,
-  35.7364837,
-  139.7344705,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  34.1821987,
+  131.4719376,
   NULL,
+  'yamaguchi',
   NULL,
-  NULL,
-  12577163240,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_komagome',
-  '駒込',
-  'こまごめ',
-  '{"en":"Komagome"}'::jsonb,
-  35.7377051,
-  139.7423727,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12577163313,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_yamagibashi',
-  '柳橋',
-  'やなぎばし',
-  '{"en":"Yamagibashi"}'::jsonb,
-  35.6980391,
-  139.7882835,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12577822744,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_asakusabashi',
-  '浅草橋',
-  'あさくさばし',
-  '{"en":"Asakusabashi"}'::jsonb,
-  35.6997758,
-  139.7835525,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12577822745,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_torigoe',
-  '鳥越',
-  'とりごえ',
-  '{"en":"Torigoe"}'::jsonb,
-  35.7025484,
-  139.784445,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12577822759,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_misuji',
-  '三筋',
-  'みすじ',
-  '{"en":"Misuji"}'::jsonb,
-  35.7049215,
-  139.7864058,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578117845,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_kuramae',
-  '蔵前',
-  'くらまえ',
-  '{"en":"Kuramae"}'::jsonb,
-  35.7026209,
-  139.7910027,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578117847,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_komagata',
-  '駒形',
-  'こまがた',
-  '{"en":"Komagata"}'::jsonb,
-  35.7060393,
-  139.7945589,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578117885,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_taito',
-  '台東',
-  'たいとう',
-  '{"en":"Taito"}'::jsonb,
-  35.7042507,
-  139.7783633,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578391446,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_kojima',
-  '小島',
-  'こじま',
-  '{"en":"Kojima"}'::jsonb,
-  35.7049576,
-  139.7831804,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578391452,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_kotobuki',
-  '寿',
-  'ことぶき',
-  '{"en":"Kotobuki"}'::jsonb,
-  35.7081099,
-  139.7907949,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578391474,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_nishi_asakusa',
-  '西浅草',
-  'にしあさくさ',
-  '{"en":"Nishi Asakusa"}'::jsonb,
-  35.7144096,
-  139.7903283,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578731053,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kaminarimon',
-  '雷門',
-  'かみなりもん',
-  '{"en":"Kaminarimon"}'::jsonb,
-  35.7102151,
-  139.7947242,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12578731071,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_moto_asakusa',
-  '元浅草',
-  'もとあさくさ',
-  '{"en":"Moto Asakusa"}'::jsonb,
-  35.7089213,
-  139.7848462,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578752807,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_higashi_ueno',
-  '東上野',
-  'ひがしうえの',
-  '{"en":"Higashi Ueno"}'::jsonb,
-  35.7123827,
-  139.7810384,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578752867,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_matsugaya',
-  '松が谷',
-  'まつがや',
-  '{"en":"Matsugaya"}'::jsonb,
-  35.7152237,
-  139.7868927,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578752919,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_hanakawado',
-  '花川戸',
-  'はなかわど',
-  '{"en":"Hanakawado"}'::jsonb,
-  35.7137898,
-  139.7993636,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578832395,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_kita_ueno',
-  '北上野',
-  'きたうえの',
-  '{"en":"Kita Ueno"}'::jsonb,
-  35.7174765,
-  139.7835597,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
-  NULL,
-  '台東区',
-  NULL,
-  12578832398,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_imado',
-  '今戸',
-  'いまど',
-  '{"en":"Imado"}'::jsonb,
-  35.7201954,
-  139.8044266,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12582191606,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hashiba',
-  '橋場',
-  'はしば',
-  '{"en":"Hashiba"}'::jsonb,
-  35.725733,
-  139.8067405,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12582191631,
+  7637351434,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kiyokawa',
-  '清川',
-  'きよかわ',
-  '{"en":"Kiyokawa"}'::jsonb,
-  35.725935,
-  139.8026561,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_kameyamacho',
+  '亀山町',
+  'かめやまちょう',
+  '{"en":"Kameyamacho"}'::jsonb,
+  34.1798778,
+  131.4734584,
   NULL,
+  'yamaguchi',
   NULL,
-  12588904353,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_higashi_asakusa',
-  '東浅草',
-  'ひがしあさくさ',
-  '{"en":"Higashi-Asakusa"}'::jsonb,
-  35.7231129,
-  139.8006027,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12588904383,
+  7637351436,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_taito_nihonzutsumi',
-  '日本堤',
-  'にほんづつみ',
-  '{"en":"Nihonzutsumi"}'::jsonb,
-  35.7269213,
-  139.7980059,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_nakagawara',
+  '中河原',
+  'なかがわら',
+  '{"en":"Nakagawara"}'::jsonb,
+  34.1794101,
+  131.4782113,
   NULL,
-  '台東区',
+  'yamaguchi',
   NULL,
-  12588928607,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_senzoku',
-  '千束',
-  'せんぞく',
-  '{"en":"Senzoku"}'::jsonb,
-  35.7218507,
-  139.7906806,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '台東区',
-  NULL,
-  12588928650,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_iriya',
-  '入谷',
-  'いりや',
-  '{"en":"Iriya"}'::jsonb,
-  35.7207616,
-  139.787268,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
   NULL,
-  '台東区',
   NULL,
-  12588928682,
+  7637351437,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_taito_ryusen',
-  '竜泉',
-  'りゅうせん',
-  '{"en":"Ryusen"}'::jsonb,
-  35.7253594,
-  139.7908443,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_komeyacho',
+  '米屋町',
+  'こめやちょう',
+  '{"en":"Komeyacho"}'::jsonb,
+  34.1769349,
+  131.4775025,
   NULL,
-  '台東区',
+  'yamaguchi',
   NULL,
-  12588928728,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_minowa',
-  '三ノ輪',
-  'みのわ',
-  '{"en":"Minowa"}'::jsonb,
-  35.7290471,
-  139.7931582,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
   'jp',
-  '東京都',
-  NULL,
-  '台東区',
+  '山口県',
   NULL,
-  12588928744,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_taito_shitaya',
-  '下谷',
-  'したや',
-  '{"en":"Shitaya"}'::jsonb,
-  35.7236866,
-  139.7851231,
-  NULL,
-  'tokyo',
-  'tokyo_taito',
-  'jp',
-  '東京都',
   NULL,
-  '台東区',
   NULL,
-  12589016535,
+  7637351438,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_negishi_quarter',
-  '根岸',
-  'ねぎし',
-  '{"en":"Negishi"}'::jsonb,
-  35.7250249,
-  139.7826839,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_waniishicho',
+  '鰐石町',
+  'わにいしちょう',
+  '{"en":"Waniishicho"}'::jsonb,
+  34.1695713,
+  131.4780624,
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12589016576,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ueno_sakuragi',
-  '上野桜木',
-  'うえのさくらぎ',
-  '{"en":"Ueno-Sakuragi"}'::jsonb,
-  35.7215016,
-  139.7737857,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12591766634,
+  7637351439,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ikenohata',
-  '池之端',
-  'いけのはた',
-  '{"en":"Ikenohata"}'::jsonb,
-  35.7164064,
-  139.7687671,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_sodayucho',
+  '惣太夫町',
+  'そうだゆうちょう',
+  '{"en":"Sodayucho"}'::jsonb,
+  34.1721422,
+  131.4813656,
   NULL,
-  NULL,
-  12591766679,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ginza',
-  '銀座',
-  'ぎんざ',
-  '{"en":"Ginza"}'::jsonb,
-  35.6720135,
-  139.7647202,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12591842392,
+  7637351440,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yaesu',
-  '八重洲',
-  'やえす',
-  '{"en":"Yaesu"}'::jsonb,
-  35.6799658,
-  139.7696846,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_nakagawaracho',
+  '中河原町',
+  'なかがわらちょう',
+  '{"en":"Nakagawaracho"}'::jsonb,
+  34.1788371,
+  131.4763096,
   NULL,
-  NULL,
-  NULL,
-  12591849322,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tsukiji',
-  '築地',
-  'つきじ',
-  '{"en":"Tsukiji"}'::jsonb,
-  35.6650914,
-  139.7708281,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12598304963,
+  7637351441,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_chuo_harumi',
-  '晴海',
-  'はるみ',
-  '{"en":"Harumi"}'::jsonb,
-  35.6527208,
-  139.7785896,
-  NULL,
-  'tokyo',
-  'tokyo_chuo',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_sentoshoji',
+  '銭湯小路',
+  'せんとうしょうじ',
+  '{"en":"Sentoshoji"}'::jsonb,
+  34.1799266,
+  131.4790079,
   NULL,
-  '中央区',
-  NULL,
-  12598508803,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kachidoki',
-  '勝どき',
-  'かちどき',
-  '{"en":"Kachidoki"}'::jsonb,
-  35.658244,
-  139.7749921,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12598508804,
+  7637351442,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_chuo_tsukishima',
-  '月島',
-  'つきしま',
-  '{"en":"Tsukishima"}'::jsonb,
-  35.6632293,
-  139.7822568,
-  NULL,
-  'tokyo',
-  'tokyo_chuo',
-  'jp',
-  '東京都',
+  'yamaguchi_unknown_shoganshoji',
+  '諸願小路',
+  'しょがんしょうじ',
+  '{"en":"Shoganshoji"}'::jsonb,
+  34.180216,
+  131.4793088,
   NULL,
-  '中央区',
+  'yamaguchi',
   NULL,
-  12598508805,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_chuo_tsukuda',
-  '佃',
-  'つくだ',
-  '{"en":"Tsukuda"}'::jsonb,
-  35.6668345,
-  139.7856803,
-  NULL,
-  'tokyo',
-  'tokyo_chuo',
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '中央区',
   NULL,
-  12598508806,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_chuo_shinkawa',
-  '新川',
-  'しんかわ',
-  '{"en":"Shinkawa"}'::jsonb,
-  35.6760564,
-  139.7831285,
-  NULL,
-  'tokyo',
-  'tokyo_chuo',
-  'jp',
-  '東京都',
   NULL,
-  '中央区',
-  NULL,
-  12598508807,
+  7637351443,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hacch_bori',
-  '八丁堀',
-  'はっちょうぼり',
-  '{"en":"Hacchōbori"}'::jsonb,
-  35.67563,
-  139.7775882,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_shinbaba',
+  '新馬場',
+  'しんばば',
+  '{"en":"Shinbaba"}'::jsonb,
+  34.180488,
+  131.4784232,
   NULL,
-  NULL,
-  12598508808,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ky_bashi',
-  '京橋',
-  'きょうばし',
-  '{"en":"Kyōbashi"}'::jsonb,
-  35.6758835,
-  139.7717019,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12598508809,
+  7637351444,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nihonbashi',
-  '日本橋',
-  'にほんばし',
-  '{"en":"Nihonbashi"}'::jsonb,
-  35.6812562,
-  139.7730907,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_kuboshoji',
+  '久保小路',
+  'くぼしょうじ',
+  '{"en":"Kuboshoji"}'::jsonb,
+  34.1807786,
+  131.4792842,
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12598508810,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_soto_kanda',
-  '外神田',
-  'そとかんだ',
-  '{"en":"Soto-Kanda"}'::jsonb,
-  35.7025506,
-  139.7706069,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12608796377,
+  7637351445,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_temachi',
+  'yamaguchi_unknown_otemachi',
   '大手町',
   'おおてまち',
-  '{"en":"Ōtemachi"}'::jsonb,
-  35.6868132,
-  139.76608,
+  '{"en":"Otemachi"}'::jsonb,
+  34.1832283,
+  131.4743274,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12612617063,
+  7637351446,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_marunouchi',
-  '丸の内',
-  'まるのうち',
-  '{"en":"Marunouchi"}'::jsonb,
-  35.6790703,
-  139.7652988,
+  'yamaguchi_unknown_ushirogawara',
+  '後河原',
+  'うしろがわら',
+  '{"en":"Ushirogawara"}'::jsonb,
+  34.1841613,
+  131.4766315,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12612617064,
+  7637351447,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_chiyoda_yurakucho',
-  '有楽町',
-  'ゆうらくちょう',
-  '{"en":"Yurakucho"}'::jsonb,
-  35.6736817,
-  139.7611853,
+  'yamaguchi_unknown_shimotatekoji',
+  '下竪小路',
+  'しもたてこうじ',
+  '{"en":"Shimotatekoji"}'::jsonb,
+  34.1827468,
+  131.4794075,
   NULL,
-  'tokyo',
-  'tokyo_chiyoda',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '千代田区',
   NULL,
-  12612617094,
+  NULL,
+  7637351448,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_chiyoda_uchisaiwaicho',
-  '内幸町',
-  'うちさいわいちょう',
-  '{"en":"Uchisaiwaicho"}'::jsonb,
-  35.6699956,
-  139.7570758,
+  'yamaguchi_unknown_odonooji',
+  '大殿大路',
+  '大殿大路',
+  '{"en":"Odonooji"}'::jsonb,
+  34.1836565,
+  131.4808559,
   NULL,
-  'tokyo',
-  'tokyo_chiyoda',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '千代田区',
   NULL,
-  12612625318,
+  NULL,
+  7637351449,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_chiyoda_kasumigaseki',
-  '霞が関',
-  'かすみがせき',
-  '{"en":"Kasumigaseki"}'::jsonb,
-  35.6734887,
-  139.7501817,
+  'yamaguchi_unknown_noda',
+  '野田',
+  'のだ',
+  '{"en":"Noda"}'::jsonb,
+  34.1855469,
+  131.47994,
   NULL,
-  'tokyo',
-  'tokyo_chiyoda',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '千代田区',
   NULL,
-  12612625335,
+  NULL,
+  7637351450,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_chiyoda_nagatacho',
-  '永田町',
-  'ながたちょう',
-  '{"en":"Nagatacho"}'::jsonb,
-  35.6768717,
-  139.7431557,
+  'yamaguchi_unknown_yawatanobaba',
+  '八幡馬場',
+  'やわたのばば',
+  '{"en":"Yawatanobaba"}'::jsonb,
+  34.1854471,
+  131.4825404,
   NULL,
-  'tokyo',
-  'tokyo_chiyoda',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '千代田区',
   NULL,
-  12612625372,
+  NULL,
+  7637351451,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_chiyoda_kojimachi',
-  '麹町',
-  'こうじまち',
-  '{"en":"Kojimachi"}'::jsonb,
-  35.6838064,
-  139.7379229,
+  'yamaguchi_unknown_kanakosocho',
+  '金古曽町',
+  'かなこそちょう',
+  '{"en":"Kanakosocho"}'::jsonb,
+  34.1856246,
+  131.4854801,
   NULL,
-  'tokyo',
-  'tokyo_chiyoda',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '千代田区',
   NULL,
-  12614245800,
+  NULL,
+  7637351452,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_konan',
-  '港南',
-  'こうなん',
-  '{"en":"Konan"}'::jsonb,
-  35.6301291,
-  139.7507521,
+  'yamaguchi_unknown_ishigannoncho',
+  '石観音町',
+  'いしがんのんちょう',
+  '{"en":"Ishigannoncho"}'::jsonb,
+  34.1834324,
+  131.4832163,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12614912812,
+  NULL,
+  7637351453,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_nishi_shinbashi',
-  '西新橋',
-  'にししんばし',
-  '{"en":"Nishi Shinbashi"}'::jsonb,
-  35.6675521,
-  139.752114,
+  'yamaguchi_unknown_dosocho',
+  '道祖町',
+  'どうそちょう',
+  '{"en":"Dosocho"}'::jsonb,
+  34.1826625,
+  131.4842436,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12615166339,
+  NULL,
+  7637351454,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_higashi_shinbashi',
-  '東新橋',
-  'ひがししんばし',
-  '{"en":"Higashi Shinbashi"}'::jsonb,
-  35.6631257,
-  139.7589757,
+  'yamaguchi_unknown_enseijicho',
+  '円政寺町',
+  'えんせいじちょう',
+  '{"en":"Enseijicho"}'::jsonb,
+  34.181096,
+  131.4829186,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12615166430,
+  7637351455,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hamamatsuch',
-  '浜松町',
-  'はままつちょう',
-  '{"en":"Hamamatsuchō"}'::jsonb,
-  35.656521,
-  139.7558718,
+  'yamaguchi_unknown_donomaecho',
+  '堂の前町',
+  'どうのまえちょう',
+  '{"en":"Donomaecho"}'::jsonb,
+  34.1798733,
+  131.4817759,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12615166431,
+  7637351456,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shiba_daimon',
-  '芝大門',
-  'しばだいもん',
-  '{"en":"Shiba Daimon"}'::jsonb,
-  35.6567524,
-  139.7537021,
+  'yamaguchi_unknown_oichicho',
+  '大市町',
+  'おおいちちょう',
+  '{"en":"Oichicho"}'::jsonb,
+  34.1790967,
+  131.4803678,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12615166432,
+  7637351457,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_shiba',
-  '芝',
-  'しば',
-  '{"en":"Shiba"}'::jsonb,
-  35.6505871,
-  139.7495267,
+  'yamaguchi_unknown_nakaichicho',
+  '中市町',
+  'なかいちちょう',
+  '{"en":"Nakaichicho"}'::jsonb,
+  34.1780793,
+  131.4787745,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12615524122,
+  NULL,
+  7637351458,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shiba_park',
-  '芝公園',
-  'しばこうえん',
-  '{"en":"Shiba Park"}'::jsonb,
-  35.6582563,
-  139.7466728,
+  'yamaguchi_unknown_sujikawacho',
+  '筋川町',
+  'すじかわちょう',
+  '{"en":"Sujikawacho"}'::jsonb,
+  33.9653948,
+  130.9159613,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12615524123,
+  8046399279,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_toranomon',
-  '虎ノ門',
-  'とらのもん',
-  '{"en":"Toranomon"}'::jsonb,
-  35.6670276,
-  139.7460078,
+  'yamaguchi_unknown_sujigahamacho',
+  '筋ケ浜町',
+  'すじがはまちょう',
+  '{"en":"Sujigahamacho"}'::jsonb,
+  33.9615907,
+  130.9132683,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12615672780,
+  NULL,
+  8046399280,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_higashi_azabu',
-  '東麻布',
-  'ひがしあざぶ',
-  '{"en":"Higashi Azabu"}'::jsonb,
-  35.656266,
-  139.7401686,
+  'yamaguchi_unknown_nishiotsubocho',
+  '西大坪町',
+  'にしおおつぼちょう',
+  '{"en":"Nishiotsubocho"}'::jsonb,
+  33.9625963,
+  130.9170556,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12615717403,
+  NULL,
+  8046399281,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_moto_akasaka',
-  '元赤坂',
-  'もとあかさか',
-  '{"en":"Moto-Akasaka"}'::jsonb,
-  35.6785313,
-  139.7284293,
+  'yamaguchi_unknown_minamiotsubocho',
+  '南大坪町',
+  'みなみおおつぼちょう',
+  '{"en":"Minamiotsubocho"}'::jsonb,
+  33.9599623,
+  130.9164065,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12625802170,
+  8046399282,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_kita_aoyama',
-  '北青山',
-  'きたあおやま',
-  '{"en":"Kita Aoyama"}'::jsonb,
-  35.6705999,
-  139.7159289,
+  'yamaguchi_unknown_shinchinishimachi',
+  '新地西町',
+  'しんちにしまち',
+  '{"en":"Shinchinishimachi"}'::jsonb,
+  33.9566341,
+  130.9202689,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12625835220,
+  NULL,
+  8046408790,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_minami_aoyama',
-  '南青山',
-  'みなみあおやま',
-  '{"en":"Minami-Aoyama"}'::jsonb,
-  35.6667236,
-  139.7188607,
+  'yamaguchi_unknown_uejocho',
+  '上条町',
+  'うえじょうちょう',
+  '{"en":"Uejocho"}'::jsonb,
+  33.9556151,
+  130.9238845,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12628310502,
+  8046408791,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nishi_azabu',
-  '西麻布',
-  'にしあざぶ',
-  '{"en":"Nishi-Azabu"}'::jsonb,
-  35.6600266,
-  139.7238075,
+  'yamaguchi_unknown_shinchicho',
+  '新地町',
+  'しんちちょう',
+  '{"en":"Shinchicho"}'::jsonb,
+  33.9556952,
+  130.9215027,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12628511779,
+  8046408792,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_moto_azabu',
-  '元麻布',
-  'もとあざぶ',
-  '{"en":"Moto Azabu"}'::jsonb,
-  35.6555514,
-  139.729634,
+  'yamaguchi_unknown_imauracho',
+  '今浦町',
+  'いまうらちょう',
+  '{"en":"Imauracho"}'::jsonb,
+  33.9545917,
+  130.9224254,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12629472076,
+  NULL,
+  8046408793,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_mita',
-  '三田',
-  'みた',
-  '{"en":"Mita"}'::jsonb,
-  35.6467874,
-  139.7414307,
+  'yamaguchi_unknown_nagasakichuocho',
+  '長崎中央町',
+  'ながさきちゅうおうちょう',
+  '{"en":"Nagasakichuocho"}'::jsonb,
+  33.9559666,
+  130.9296298,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12629472376,
+  NULL,
+  8046408794,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_minato_minami_azabu',
-  '南麻布',
-  'みなみあざぶ',
-  '{"en":"Minami Azabu"}'::jsonb,
-  35.6515204,
-  139.728716,
+  'yamaguchi_unknown_kanseicho',
+  '関西町',
+  'かんせいちょう',
+  '{"en":"Kanseicho"}'::jsonb,
+  33.9578132,
+  130.9281599,
   NULL,
-  'tokyo',
-  'tokyo_minato',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '港区',
   NULL,
-  12629472377,
+  NULL,
+  8046408795,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_takanawa',
-  '高輪',
-  'たかなわ',
-  '{"en":"Takanawa"}'::jsonb,
-  35.6349739,
-  139.7357164,
+  'yamaguchi_unknown_kanseihonmachi',
+  '関西本町',
+  'かんせいほんまち',
+  '{"en":"Kanseihonmachi"}'::jsonb,
+  33.9564917,
+  130.9267652,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12630144302,
+  8046408796,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shirokane',
-  '白金',
-  'しろかね',
-  '{"en":"Shirokane"}'::jsonb,
-  35.6438973,
-  139.7277018,
+  'yamaguchi_unknown_nagasakihonmachi',
+  '長崎本町',
+  'ながさきほんまち',
+  '{"en":"Nagasakihonmachi"}'::jsonb,
+  33.956683,
+  130.9250969,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12630144450,
+  8046408797,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shirokanedai',
-  '白金台',
-  'しろかねだい',
-  '{"en":"Shirokanedai"}'::jsonb,
-  35.6375308,
-  139.7244945,
+  'yamaguchi_unknown_nagasakishinmachi',
+  '長崎新町',
+  'ながさきしんまち',
+  '{"en":"Nagasakishinmachi"}'::jsonb,
+  33.9549032,
+  130.9260946,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12630144577,
+  8046408798,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yushima',
-  '湯島',
-  'ゆしま',
-  '{"en":"Yushima"}'::jsonb,
-  35.7073938,
-  139.7678135,
+  'yamaguchi_unknown_nagatomachi',
+  '長門町',
+  'ながとまち',
+  '{"en":"Nagatomachi"}'::jsonb,
+  33.9540933,
+  130.9254187,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12638693634,
+  8046408799,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hong',
-  '本郷',
-  'ほんごう',
-  '{"en":"Hongō"}'::jsonb,
-  35.7077379,
-  139.760167,
+  'yamaguchi_unknown_hosoeshinmachi',
+  '細江新町',
+  'ほそえしんまち',
+  '{"en":"Hosoeshinmachi"}'::jsonb,
+  33.948442,
+  130.9296888,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12638693920,
+  8046408800,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yayoi',
-  '弥生',
-  'やよい',
-  '{"en":"Yayoi"}'::jsonb,
-  35.7165889,
-  139.7620787,
+  'yamaguchi_unknown_chinto',
+  '椿東',
+  'ちんとう',
+  '{"en":"Chinto"}'::jsonb,
+  34.4339647,
+  131.4225108,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12643594450,
+  8479011084,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nezu',
-  '根津',
-  'ねづ',
-  '{"en":"Nezu"}'::jsonb,
-  35.7198456,
-  139.763863,
+  'yamaguchi_unknown_horiuchi',
+  '堀内',
+  'ほりうち',
+  '{"en":"Horiuchi"}'::jsonb,
+  34.4145431,
+  131.3849586,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12643594496,
+  8479011086,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sendagi',
-  '千駄木',
-  'せんだぎ',
-  '{"en":"Sendagi"}'::jsonb,
-  35.7261771,
-  139.7607174,
+  'yamaguchi_unknown_taruyacho',
+  '樽屋町',
+  'たるやちょう',
+  '{"en":"Taruyacho"}'::jsonb,
+  34.4160488,
+  131.394903,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12643594691,
+  8479011087,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_bunkyo_mukogaoka',
-  '向丘',
-  'むこうがおか',
-  '{"en":"Mukogaoka"}'::jsonb,
-  35.7210419,
-  139.7551745,
+  'yamaguchi_unknown_shibuki',
+  '紫福',
+  'しぶき',
+  '{"en":"Shibuki"}'::jsonb,
+  34.4706076,
+  131.5271153,
   NULL,
-  'tokyo',
-  'tokyo_bunkyo',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '文京区',
   NULL,
-  12644464624,
+  NULL,
+  8479011088,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_honkomagome',
-  '本駒込',
-  'ほんこまごめ',
-  '{"en":"Honkomagome"}'::jsonb,
-  35.7302853,
-  139.751492,
+  'yamaguchi_unknown_kawakami',
+  '川上',
+  'かわかみ',
+  '{"en":"Kawakami"}'::jsonb,
+  34.3667454,
+  131.4594473,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12644464743,
+  8479011089,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_bunkyo_nishikata',
-  '西片',
-  'にしかた',
-  '{"en":"Nishikata"}'::jsonb,
-  35.7149455,
-  139.7546856,
+  'yamaguchi_unknown_kamigokenmachi',
+  '上五間町',
+  'かみごけんまち',
+  '{"en":"Kamigokenmachi"}'::jsonb,
+  34.4136011,
+  131.4004871,
   NULL,
-  'tokyo',
-  'tokyo_bunkyo',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '文京区',
   NULL,
-  12644464805,
+  NULL,
+  8479011090,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_k_raku',
-  '後楽',
-  'こうらく',
-  '{"en":"Kōraku"}'::jsonb,
-  35.7050451,
-  139.7478428,
+  'yamaguchi_unknown_fukuishimo',
+  '福井下',
+  'ふくいしも',
+  '{"en":"Fukuishimo"}'::jsonb,
+  34.4219141,
+  131.4820991,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12644551159,
+  8479011091,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_suid',
-  '水道',
-  'すいどう',
-  '{"en":"Suidō"}'::jsonb,
-  35.7096282,
-  139.7397745,
+  'yamaguchi_unknown_suzunogawa',
+  '鈴野川',
+  'すずのがわ',
+  '{"en":"Suzunogawa"}'::jsonb,
+  34.5392271,
+  131.6893972,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12644551334,
+  8479011092,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sekiguchi',
-  '関口',
-  'せきぐち',
-  '{"en":"Sekiguchi"}'::jsonb,
-  35.7115354,
-  139.7284224,
+  'yamaguchi_unknown_saikumachi',
+  '細工町',
+  'さいくまち',
+  '{"en":"Saikumachi"}'::jsonb,
+  34.414787,
+  131.395708,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12644551427,
+  8479011093,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_mejirodai',
-  '目白台',
-  'めじろだい',
-  '{"en":"Mejirodai"}'::jsonb,
-  35.7160076,
-  139.72296,
+  'yamaguchi_unknown_higashihamasakimachi',
+  '東浜崎町',
+  'ひがしはまさきまち',
+  '{"en":"Higashihamasakimachi"}'::jsonb,
+  34.4196474,
+  131.4026853,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12644568737,
+  8479011094,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kasuga',
-  '春日',
-  'かすが',
-  '{"en":"Kasuga"}'::jsonb,
-  35.7094398,
-  139.7464096,
+  'yamaguchi_unknown_katamata',
+  '片俣',
+  'かたまた',
+  '{"en":"Katamata"}'::jsonb,
+  34.4860249,
+  131.6367837,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12645449043,
+  8479011095,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_koishikawa',
-  '小石川',
-  'こいしかわ',
-  '{"en":"Koishikawa"}'::jsonb,
-  35.7131491,
-  139.7460916,
+  'yamaguchi_unknown_yadomishimo',
+  '弥富下',
+  'やどみしも',
+  '{"en":"Yadomishimo"}'::jsonb,
+  34.543168,
+  131.6543421,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12646760436,
+  8479011096,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hakusan',
-  '白山',
-  'はくさん',
-  '{"en":"Hakusan"}'::jsonb,
-  35.7198179,
-  139.7493913,
+  'yamaguchi_unknown_nakaogawa',
+  '中小川',
+  'なかおがわ',
+  '{"en":"Nakaogawa"}'::jsonb,
+  34.5965392,
+  131.6804319,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12646760591,
+  8479011097,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sengoku',
-  '千石',
-  'せんごく',
-  '{"en":"Sengoku"}'::jsonb,
-  35.7259144,
-  139.7411272,
+  'yamaguchi_unknown_kibeshimo',
+  '吉部下',
+  'きべしも',
+  '{"en":"Kibeshimo"}'::jsonb,
+  34.4399176,
+  131.5625749,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12646778780,
+  8479011098,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_bunkyo_kohinata',
-  '小日向',
-  'こひなた',
-  '{"en":"Kohinata"}'::jsonb,
-  35.7139362,
-  139.7366541,
+  'yamaguchi_unknown_aburayacho',
+  '油屋町',
+  'あぶらやちょう',
+  '{"en":"Aburayacho"}'::jsonb,
+  34.413746,
+  131.394264,
   NULL,
-  'tokyo',
-  'tokyo_bunkyo',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '文京区',
   NULL,
-  12646869562,
+  NULL,
+  8479011099,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_bunkyo_otowa',
-  '音羽',
-  'おとわ',
-  '{"en":"Otowa"}'::jsonb,
-  35.71617,
-  139.728532,
+  'yamaguchi_unknown_kawaramachi',
+  '瓦町',
+  'かわらまち',
+  '{"en":"Kawaramachi"}'::jsonb,
+  34.4121689,
+  131.3969057,
   NULL,
-  'tokyo',
-  'tokyo_bunkyo',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '文京区',
   NULL,
-  12646869634,
+  NULL,
+  8479011100,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_bunkyo_otsuka',
-  '大塚',
-  'おおつか',
-  '{"en":"Otsuka"}'::jsonb,
-  35.7225683,
-  139.7324987,
+  'yamaguchi_unknown_minamikatakawamachi',
+  '南片河町',
+  'みなみかたかわまち',
+  '{"en":"Minamikatakawamachi"}'::jsonb,
+  34.4120332,
+  131.3924553,
   NULL,
-  'tokyo',
-  'tokyo_bunkyo',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '文京区',
   NULL,
-  12646869778,
+  NULL,
+  8479011101,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kitanomaru_park',
-  '北の丸公園',
-  'きたのまるこうえん',
-  '{"en":"Kitanomaru Park"}'::jsonb,
-  35.6920362,
-  139.7508573,
+  'yamaguchi_unknown_chinto_quarter',
+  '椿東',
+  'ちんとう',
+  '{"en":"Chinto"}'::jsonb,
+  34.4096067,
+  131.4235223,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12686759501,
+  8479011102,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_taihei',
-  '太平',
-  'たいへい',
-  '{"en":"Taihei"}'::jsonb,
-  35.7010978,
-  139.8130524,
+  'yamaguchi_unknown_shimoogawa',
+  '下小川',
+  'しもおがわ',
+  '{"en":"Shimoogawa"}'::jsonb,
+  34.6013923,
+  131.704486,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12797584431,
+  8479011103,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_harakomiya',
-  '原小宮',
-  'はらこみや',
-  '{"en":"Harakomiya"}'::jsonb,
-  35.7355902,
-  139.3010717,
+  'yamaguchi_unknown_sanmi',
+  '三見',
+  'さんみ',
+  '{"en":"Sanmi"}'::jsonb,
+  34.3866786,
+  131.3295894,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12850121293,
+  8479011104,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_akishima_daikanyama',
-  '代官山',
-  'だいかんやま',
-  '{"en":"Daikanyama"}'::jsonb,
-  35.7177308,
-  139.3587786,
+  'yamaguchi_unknown_kamitama',
+  '上田万',
+  'かみたま',
+  '{"en":"Kamitama"}'::jsonb,
+  34.6275114,
+  131.671016,
   NULL,
-  'tokyo',
-  'tokyo_akishima',
+  'yamaguchi',
+  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
-  '昭島市',
   NULL,
-  12853186074,
+  NULL,
+  8479011105,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_jogawaracho',
-  '上川原町',
-  'じょうがわらちょう',
-  '{"en":"Jogawaracho"}'::jsonb,
-  35.7080958,
-  139.3605992,
+  'yamaguchi_unknown_hijiwara',
+  '土原',
+  'ひじわら',
+  '{"en":"Hijiwara"}'::jsonb,
+  34.4125136,
+  131.4073642,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12854980037,
+  8479011106,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_futabacho',
-  '双葉町',
-  '双葉町',
-  '{"en":"Futabacho"}'::jsonb,
-  35.759078,
-  139.3352968,
+  'yamaguchi_unknown_hamasakimachi',
+  '浜崎町',
+  'はまさきまち',
+  '{"en":"Hamasakimachi"}'::jsonb,
+  34.4209271,
+  131.4006141,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12861808118,
+  8479011107,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinmeidai',
-  '神明台',
-  '神明台',
-  '{"en":"Shinmeidai"}'::jsonb,
-  35.7591464,
-  139.3254891,
+  'yamaguchi_unknown_ebisucho',
+  '恵美須町',
+  'えびすちょう',
+  '{"en":"Ebisucho"}'::jsonb,
+  34.4137261,
+  131.3963065,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12861808142,
+  8479011109,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kawasaki',
-  '川崎',
-  '川崎',
-  '{"en":"Kawasaki"}'::jsonb,
-  35.7530437,
-  139.3172959,
+  'yamaguchi_unknown_yamada',
+  '山田',
+  'やまだ',
+  '{"en":"Yamada"}'::jsonb,
+  34.32742,
+  131.3692706,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12861831530,
+  8479011110,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tamagawa',
-  '玉川',
-  '玉川',
-  '{"en":"Tamagawa"}'::jsonb,
-  35.7522156,
-  139.3125854,
+  'yamaguchi_unknown_nishitamachi',
+  '西田町',
+  'にしたまち',
+  '{"en":"Nishitamachi"}'::jsonb,
+  34.4122823,
+  131.3991826,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12861833214,
+  8479011111,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_fujimidaira',
-  '富士見平',
-  '富士見平',
-  '{"en":"Fujimidaira"}'::jsonb,
-  35.7649691,
-  139.3260356,
+  'yamaguchi_unknown_kumagayacho',
+  '熊谷町',
+  'くまがやちょう',
+  '{"en":"Kumagayacho"}'::jsonb,
+  34.4159376,
+  131.4006481,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12861949379,
+  8479011112,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_gonokami',
-  '五ノ神',
-  '五ノ神',
-  '{"en":"Gonokami"}'::jsonb,
-  35.7609839,
-  139.3185501,
+  'yamaguchi_unknown_imauonotanamachi',
+  '今魚店町',
+  'いまうおのたなまち',
+  '{"en":"Imauonotanamachi"}'::jsonb,
+  34.4177453,
+  131.3938134,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12861951327,
+  8479011113,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_midorigaoka',
-  '緑ケ丘',
-  '緑ケ丘',
-  '{"en":"Midorigaoka"}'::jsonb,
-  35.7695305,
-  139.3182639,
+  'yamaguchi_unknown_mishima',
+  '見島',
+  'みしま',
+  '{"en":"Mishima"}'::jsonb,
+  34.7742474,
+  131.147437,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12861951462,
+  8479011114,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sakaecho',
+  'yamaguchi_unknown_furuuonotanamachi',
+  '古魚店町',
+  'ふるうおのたなまち',
+  '{"en":"Furuuonotanamachi"}'::jsonb,
+  34.41395,
+  131.392929,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479011115,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kitakatakawamachi',
+  '北片河町',
+  'きたかたかわまち',
+  '{"en":"Kitakatakawamachi"}'::jsonb,
+  34.4153569,
+  131.3928525,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479011116,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_aishima',
+  '相島',
+  'あいしま',
+  '{"en":"Aishima"}'::jsonb,
+  34.503889,
+  131.2776479,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049117,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_takasakami',
+  '高佐上',
+  'たかさかみ',
+  '{"en":"Takasakami"}'::jsonb,
+  34.482875,
+  131.6058442,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049118,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sasanami',
+  '佐々並',
+  'ささなみ',
+  '{"en":"Sasanami"}'::jsonb,
+  34.2859286,
+  131.4537932,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049119,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kamiogawa_nishibun',
+  '上小川西分',
+  'かみおがわにしぶん',
+  '{"en":"Kamiogawa-nishibun"}'::jsonb,
+  34.5735436,
+  131.6460254,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049120,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hiyakimachi',
+  '平安古町',
+  'ひやこまち',
+  '{"en":"Hiyakimachi"}'::jsonb,
+  34.4064384,
+  131.3886555,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049121,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_haruwakacho',
+  '春若町',
+  'はるわかちょう',
+  '{"en":"Haruwakacho"}'::jsonb,
+  34.4147634,
+  131.3937497,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049122,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_emukai',
+  '江向',
+  'えむかい',
+  '{"en":"Emukai"}'::jsonb,
+  34.4065086,
+  131.3987082,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049124,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_minamifuruhagimachi',
+  '南古萩町',
+  'みなみふるはぎまち',
+  '{"en":"Minamifuruhagimachi"}'::jsonb,
+  34.411095,
+  131.393499,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049125,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kitafuruhagimachi',
+  '北古萩町',
+  'きたふるはぎまち',
+  '{"en":"Kitafuruhagimachi"}'::jsonb,
+  34.418335,
+  131.396893,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049126,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tsubaki',
+  '椿',
+  'つばき',
+  '{"en":"Tsubaki"}'::jsonb,
+  34.3892548,
+  131.4029162,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049127,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shimogokenmachi',
+  '下五間町',
+  'しもごけんまち',
+  '{"en":"Shimogokenmachi"}'::jsonb,
+  34.4137191,
+  131.4022512,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049128,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_furuhagimachi',
+  '古萩町',
+  'ふるはぎまち',
+  '{"en":"Furuhagimachi"}'::jsonb,
+  34.4157194,
+  131.4042647,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049129,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_karahimachi',
+  '唐樋町',
+  'からひまち',
+  '{"en":"Karahimachi"}'::jsonb,
+  34.410016,
+  131.4023814,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049130,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_akiragi',
+  '明木',
+  'あきらぎ',
+  '{"en":"Akiragi"}'::jsonb,
+  34.3444277,
+  131.4084967,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049131,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yamada_quarter',
+  '山田',
+  'やまだ',
+  '{"en":"Yamada"}'::jsonb,
+  34.3922692,
+  131.3699544,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049132,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_takasashimo',
+  '高佐下',
+  'たかさしも',
+  '{"en":"Takasashimo"}'::jsonb,
+  34.4655901,
+  131.6087224,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049133,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shioyacho',
+  '塩屋町',
+  'しおやちょう',
+  '{"en":"Shioyacho"}'::jsonb,
+  34.4146821,
+  131.397104,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049134,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kamiogawa_higashibun',
+  '上小川東分',
+  'かみおがわひがしぶん',
+  '{"en":"Kamiogawa-higashibun"}'::jsonb,
+  34.5852533,
+  131.6698085,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049135,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yoshidacho',
+  '吉田町',
+  'よしだちょう',
+  '{"en":"Yoshidacho"}'::jsonb,
+  34.4142986,
+  131.4034058,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049136,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kurogawa',
+  '黒川',
+  'くろがわ',
+  '{"en":"Kurogawa"}'::jsonb,
+  34.4431218,
+  131.4641661,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049137,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hashimotomachi',
+  '橋本町',
+  'はしもとまち',
+  '{"en":"Hashimotomachi"}'::jsonb,
+  34.4028781,
+  131.4018911,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049138,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_imafuruhagimachi',
+  '今古萩町',
+  'いまふるはぎまち',
+  '{"en":"Imafuruhagimachi"}'::jsonb,
+  34.4157705,
+  131.4019868,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049139,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yadomikami',
+  '弥富上',
+  'やどみかみ',
+  '{"en":"Yadomikami"}'::jsonb,
+  34.5572534,
+  131.6175565,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049140,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kibekami',
+  '吉部上',
+  'きべかみ',
+  '{"en":"Kibekami"}'::jsonb,
+  34.4491619,
+  131.5883815,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049141,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tsumoricho',
+  '津守町',
+  'つもりちょう',
+  '{"en":"Tsumoricho"}'::jsonb,
+  34.4138053,
+  131.3991438,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049142,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shimotama',
+  '下田万',
+  'しもたま',
+  '{"en":"Shimotama"}'::jsonb,
+  34.6401146,
+  131.668654,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049143,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kawashima',
+  '川島',
+  'かわしま',
+  '{"en":"Kawashima"}'::jsonb,
+  34.3998866,
+  131.4086587,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049144,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_fukuikami',
+  '福井上',
+  'ふくいかみ',
+  '{"en":"Fukuikami"}'::jsonb,
+  34.4055866,
+  131.5232817,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049145,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_susa',
+  '須佐',
+  'すさ',
+  '{"en":"Susa"}'::jsonb,
+  34.6205342,
+  131.618109,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049146,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_komeyacho_quarter',
+  '米屋町',
+  'こめやちょう',
+  '{"en":"Komeyacho"}'::jsonb,
+  34.413429,
+  131.3983271,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049147,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashitamachi',
+  '東田町',
+  'ひがしたまち',
+  '{"en":"Higashitamachi"}'::jsonb,
+  34.412127,
+  131.402231,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049148,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_omotomachi',
+  '御許町',
+  'おもとまち',
+  '{"en":"Omotomachi"}'::jsonb,
+  34.4065097,
+  131.4023236,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049149,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_oi',
+  '大井',
+  'おおい',
+  '{"en":"Oi"}'::jsonb,
+  34.4661419,
+  131.4565119,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049150,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kozoe',
+  '河添',
+  'こうぞえ',
+  '{"en":"Kozoe"}'::jsonb,
+  34.4011132,
+  131.3928815,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049151,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hamasakishincho',
+  '浜崎新町',
+  'はまさきしんちょう',
+  '{"en":"Hamasakishincho"}'::jsonb,
+  34.4187821,
+  131.3993416,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049152,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_esaki',
+  '江崎',
+  'えさき',
+  '{"en":"Esaki"}'::jsonb,
+  34.64204,
+  131.6511002,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479049153,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ubuka',
+  '宇生賀',
+  'うぶか',
+  '{"en":"Ubuka"}'::jsonb,
+  34.4946331,
+  131.5761248,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192947,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nago',
+  '奈古',
+  'なご',
+  '{"en":"Nago"}'::jsonb,
+  34.5047318,
+  131.466711,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192948,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kiyo',
+  '木与',
+  'きよ',
+  '{"en":"Kiyo"}'::jsonb,
+  34.5334493,
+  131.5068723,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192949,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_fukudakami',
+  '福田上',
+  'ふくだかみ',
+  '{"en":"Fukudakami"}'::jsonb,
+  34.5255656,
+  131.6251827,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192950,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nago_quarter',
+  '奈古',
+  'なご',
+  '{"en":"Nago"}'::jsonb,
+  34.520719,
+  131.5215196,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192951,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ubuka_quarter',
+  '宇生賀',
+  'うぶか',
+  '{"en":"Ubuka"}'::jsonb,
+  34.5182459,
+  131.5682548,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192952,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_uta',
+  '宇田',
+  'うた',
+  '{"en":"Uta"}'::jsonb,
+  34.5637149,
+  131.5472148,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192953,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_fukudashimo',
+  '福田下',
+  'ふくだしも',
+  '{"en":"Fukudashimo"}'::jsonb,
+  34.5225567,
+  131.5945157,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192954,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sogo',
+  '惣郷',
+  'そうごう',
+  '{"en":"Sogo"}'::jsonb,
+  34.587282,
+  131.5644455,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479192955,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_kawara',
+  '油谷河原',
+  'ゆやかわら',
+  '{"en":"Yuya-Kawara"}'::jsonb,
+  34.364019,
+  131.0494639,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253705,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hekikami',
+  '日置上',
+  'へきかみ',
+  '{"en":"Hekikami"}'::jsonb,
+  34.3936464,
+  131.131972,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253706,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_maki',
+  '真木',
+  'まき',
+  '{"en":"Maki"}'::jsonb,
+  34.3160213,
+  131.2281018,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253707,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tawarayama',
+  '俵山',
+  'たわらやま',
+  '{"en":"Tawarayama"}'::jsonb,
+  34.3027628,
+  131.1033397,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253708,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_shinbetsumyo',
+  '油谷新別名',
+  'ゆやしんべつみょう',
+  '{"en":"Yuya-Shinbetsumyo"}'::jsonb,
+  34.3700371,
+  131.0615787,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253709,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hekishimo',
+  '日置下',
+  'へきしも',
+  '{"en":"Hekishimo"}'::jsonb,
+  34.3862228,
+  131.0767305,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253710,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_misumishimo',
+  '三隅下',
+  'みすみしも',
+  '{"en":"Misumishimo"}'::jsonb,
+  34.3644886,
+  131.2275666,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253711,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_hisadomi',
+  '油谷久富',
+  'ゆやひさどみ',
+  '{"en":"Yuya-Hisadomi"}'::jsonb,
+  34.3642949,
+  131.0807677,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253712,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hekinoda',
+  '日置野田',
+  'へきのだ',
+  '{"en":"Hekinoda"}'::jsonb,
+  34.4041507,
+  131.0746741,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253713,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_igami',
+  '油谷伊上',
+  'ゆやいがみ',
+  '{"en":"Yuya-Igami"}'::jsonb,
+  34.3689589,
+  131.0070768,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253714,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_mukatsukushimo',
+  '油谷向津具下',
+  'ゆやむかつくしも',
+  '{"en":"Yuya-Mukatsukushimo"}'::jsonb,
+  34.4116619,
+  130.9603801,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253715,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_kuraoda',
+  '油谷蔵小田',
+  'ゆやくらおだ',
+  '{"en":"Yuya-Kuraoda"}'::jsonb,
+  34.387713,
+  131.0520795,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479253716,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishifukawa',
+  '西深川',
+  'にしふかわ',
+  '{"en":"Nishifukawa"}'::jsonb,
+  34.3640547,
+  131.1601843,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281717,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_misumikami',
+  '三隅上',
+  'みすみかみ',
+  '{"en":"Misumikami"}'::jsonb,
+  34.3546984,
+  131.2900578,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281718,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_kadoyama',
+  '油谷角山',
+  'ゆやかどやま',
+  '{"en":"Yuya-Kadoyama"}'::jsonb,
+  34.3943723,
+  131.0314709,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281719,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kayoi',
+  '通',
+  'かよい',
+  '{"en":"Kayoi"}'::jsonb,
+  34.4257064,
+  131.2507242,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281720,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tawarayama_quarter',
+  '俵山',
+  'たわらやま',
+  '{"en":"Tawarayama"}'::jsonb,
+  34.301195,
+  131.1408186,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281721,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_tsuo',
+  '油谷津黄',
+  'ゆやつおう',
+  '{"en":"Yuya-Tsuo"}'::jsonb,
+  34.4160988,
+  131.0733841,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281722,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_fukawayumoto',
+  '深川湯本',
+  'ふかわゆもと',
+  '{"en":"Fukawayumoto"}'::jsonb,
+  34.3283587,
+  131.1697073,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281723,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_misuminaka',
+  '三隅中',
+  'みすみなか',
+  '{"en":"Misuminaka"}'::jsonb,
+  34.3612092,
+  131.2546254,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281724,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_senzaki',
+  '仙崎',
+  'せんざき',
+  '{"en":"Senzaki"}'::jsonb,
+  34.4019603,
+  131.1998231,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281725,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_misumikami_quarter',
+  '三隅上',
+  'みすみかみ',
+  '{"en":"Misumikami"}'::jsonb,
+  34.3337021,
+  131.3215309,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281726,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_mukatsukukami',
+  '油谷向津具上',
+  'ゆやむかつくかみ',
+  '{"en":"Yuya-Mukatsukukami"}'::jsonb,
+  34.4159178,
+  130.9969229,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281727,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hekikuraoda',
+  '日置蔵小田',
+  'へきくらおだ',
+  '{"en":"Hekikuraoda"}'::jsonb,
+  34.3984819,
+  131.061754,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281728,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_ushirobata',
+  '油谷後畑',
+  'ゆやうしろばた',
+  '{"en":"Yuya-Ushirobata"}'::jsonb,
+  34.4062255,
+  131.0313979,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281729,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashifukawa',
+  '東深川',
+  'ひがしふかわ',
+  '{"en":"Higashifukawa"}'::jsonb,
+  34.3698989,
+  131.190109,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281730,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_misumishimo_quarter',
+  '三隅下',
+  'みすみしも',
+  '{"en":"Misumishimo"}'::jsonb,
+  34.3773408,
+  131.248365,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281731,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hekinaka',
+  '日置中',
+  'へきなか',
+  '{"en":"Hekinaka"}'::jsonb,
+  34.3816493,
+  131.0981088,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281732,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuya_kawashiri',
+  '油谷川尻',
+  'ゆやかわしり',
+  '{"en":"Yuya-Kawashiri"}'::jsonb,
+  34.4230203,
+  130.9993121,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281733,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shibuki_quarter',
+  '渋木',
+  'しぶき',
+  '{"en":"Shibuki"}'::jsonb,
+  34.3036962,
+  131.2039446,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8479281734,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogodanchi',
+  '麻郷団地',
+  'おごうだんち',
+  '{"en":"Ogodanchi"}'::jsonb,
+  33.9363345,
+  132.0499223,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570766515,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mori',
+  '森',
+  'もり',
+  '{"en":"Mori"}'::jsonb,
+  33.9124132,
+  132.3597885,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570766516,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kawanishi',
+  '川西',
+  'かわにし',
+  '{"en":"Kawanishi"}'::jsonb,
+  33.9621041,
+  132.0125202,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793717,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hikuma',
+  '日前',
+  'ひくま',
+  '{"en":"Hikuma"}'::jsonb,
+  33.9216236,
+  132.2955817,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793718,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_iwaishima',
+  '祝島',
+  'いわいしま',
+  '{"en":"Iwaishima"}'::jsonb,
+  33.7857734,
+  131.985979,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793719,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashiyashiro',
+  '東屋代',
+  'ひがしやしろ',
+  '{"en":"Higashiyashiro"}'::jsonb,
+  33.9111349,
+  132.2184688,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793720,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishigata',
+  '西方',
+  'にしがた',
+  '{"en":"Nishigata"}'::jsonb,
+  33.896127,
+  132.337666,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793722,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_doi',
+  '土居',
+  'どい',
+  '{"en":"Doi"}'::jsonb,
+  33.9142976,
+  132.3046394,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793723,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sagojima',
+  '佐合島',
+  'さごうじま',
+  '{"en":"Sagojima"}'::jsonb,
+  33.8755448,
+  132.0640956,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793724,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kodomari',
+  '小泊',
+  'こどまり',
+  '{"en":"Kodomari"}'::jsonb,
+  33.9164939,
+  132.3905161,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793726,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_saga',
+  '佐賀',
+  'さが',
+  '{"en":"Saga"}'::jsonb,
+  33.8977947,
+  132.083604,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793727,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_izui',
+  '出井',
+  'いずい',
+  '{"en":"Izui"}'::jsonb,
+  33.8749825,
+  132.2190954,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793730,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_usanagi',
+  '宇佐木',
+  'うさなぎ',
+  '{"en":"Usanagi"}'::jsonb,
+  33.9508046,
+  132.0927039,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793731,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yokomi',
+  '横見',
+  'よこみ',
+  '{"en":"Yokomi"}'::jsonb,
+  33.8950862,
+  132.1936605,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793732,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kamitabuse',
+  '上田布施',
+  'かみたぶせ',
+  '{"en":"Kamitabuse"}'::jsonb,
+  33.9408874,
+  132.0047537,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793733,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yura',
+  '油良',
+  'ゆら',
+  '{"en":"Yura"}'::jsonb,
+  33.9040186,
+  132.3155766,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793734,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yashima',
+  '八島',
+  'やしま',
+  '{"en":"Yashima"}'::jsonb,
+  33.7333544,
+  132.1464795,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793735,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hirano',
+  '平野',
+  'ひらの',
+  '{"en":"Hirano"}'::jsonb,
+  33.9060379,
+  132.3570919,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793736,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_murotsu',
+  '室津',
+  'むろつ',
+  '{"en":"Murotsu"}'::jsonb,
+  33.8409105,
+  132.1358827,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793737,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishi_agenosho',
+  '西安下庄',
+  'にしあげのしょう',
+  '{"en":"Nishi-Agenosho"}'::jsonb,
+  33.8963289,
+  132.266331,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793738,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_konoura',
+  '神浦',
+  'こうのうら',
+  '{"en":"Konoura"}'::jsonb,
+  33.9242465,
+  132.3771059,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793740,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tategahama',
+  '竪ケ浜',
+  'たてがはま',
+  '{"en":"Tategahama"}'::jsonb,
+  33.946238,
+  132.0631845,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793741,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_uchinonyu',
+  '内入',
+  'うちのにゅう',
+  '{"en":"Uchinonyu"}'::jsonb,
+  33.9251393,
+  132.3969746,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793743,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_chuominami',
+  '中央南',
+  'ちゅうおうみなみ',
+  '{"en":"Chuominami"}'::jsonb,
+  33.951641,
+  132.0438464,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793744,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ukashima',
+  '浮島',
+  'うかしま',
+  '{"en":"Ukashima"}'::jsonb,
+  33.9510304,
+  132.3496617,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793746,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shukui',
+  '宿井',
+  'しゅくい',
+  '{"en":"Shukui"}'::jsonb,
+  33.9739852,
+  132.0218763,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793747,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_wada',
+  '和田',
+  'わだ',
+  '{"en":"Wada"}'::jsonb,
+  33.9292688,
+  132.407659,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793748,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shimotabuse',
+  '下田布施',
+  'しもたぶせ',
+  '{"en":"Shimotabuse"}'::jsonb,
+  33.9507587,
+  132.0356998,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793749,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_himi',
+  '日見',
+  'ひみ',
+  '{"en":"Himi"}'::jsonb,
+  33.9017679,
+  132.1829468,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793750,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ohano',
+  '大波野',
+  'おおはの',
+  '{"en":"Ohano"}'::jsonb,
+  33.9768277,
+  132.0578533,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793751,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishiyashiro',
+  '西屋代',
+  'にしやしろ',
+  '{"en":"Nishiyashiro"}'::jsonb,
+  33.9207626,
+  132.2015871,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793752,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishimigama',
+  '西三蒲',
+  'にしみがま',
+  '{"en":"Nishimigama"}'::jsonb,
+  33.9395006,
+  132.2105236,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793753,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_komatsu_kaisaku',
+  '小松開作',
+  'こまつかいさく',
+  '{"en":"Komatsu-kaisaku"}'::jsonb,
+  33.9283228,
+  132.1833079,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793755,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sone',
+  '曽根',
+  'そね',
+  '{"en":"Sone"}'::jsonb,
+  33.9209635,
+  132.0706699,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793756,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_komatsu',
+  '小松',
+  'こまつ',
+  '{"en":"Komatsu"}'::jsonb,
+  33.9381224,
+  132.1949344,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793758,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_onominami',
+  '大野南',
+  'おおのみなみ',
+  '{"en":"Onominami"}'::jsonb,
+  33.9282362,
+  132.0875821,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793759,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kasasajima',
+  '笠佐島',
+  'かささじま',
+  '{"en":"Kasasajima"}'::jsonb,
+  33.9440607,
+  132.1642427,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793761,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_onokita',
+  '大野北',
+  'おおのきた',
+  '{"en":"Onokita"}'::jsonb,
+  33.9362812,
+  132.0941481,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793762,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_wasa',
+  '和佐',
+  'わさ',
+  '{"en":"Wasa"}'::jsonb,
+  33.9165897,
+  132.3801616,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793763,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_befu',
+  '別府',
+  'べふ',
+  '{"en":"Befu"}'::jsonb,
+  33.9189667,
+  132.0292751,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793764,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mukuno',
+  '椋野',
+  'むくの',
+  '{"en":"Mukuno"}'::jsonb,
+  33.9561877,
+  132.2283513,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793765,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_heta',
+  '戸田',
+  'へた',
+  '{"en":"Heta"}'::jsonb,
+  33.8895698,
+  132.2038292,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793766,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashimigama',
+  '東三蒲',
+  'ひがしみがま',
+  '{"en":"Higashimigama"}'::jsonb,
+  33.9458625,
+  132.2198196,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793768,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hiraomura',
+  '平生村',
+  'ひらおむら',
+  '{"en":"Hiraomura"}'::jsonb,
+  33.9451678,
+  132.0761095,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793769,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shisa',
+  '志佐',
+  'しさ',
+  '{"en":"Shisa"}'::jsonb,
+  33.9202153,
+  132.180936,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793770,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hiraomachi',
+  '平生町',
+  'ひらおまち',
+  '{"en":"Hiraomachi"}'::jsonb,
+  33.9364465,
+  132.0676583,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793771,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_okikamurojima',
+  '沖家室島',
+  'おきかむろじま',
+  '{"en":"Okikamurojima"}'::jsonb,
+  33.8527727,
+  132.3620968,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793773,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_oguni',
+  '小郡',
+  'おぐに',
+  '{"en":"Oguni"}'::jsonb,
+  33.8826128,
+  132.1183,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793774,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sekigahama',
+  '関ケ浜',
+  'せきがはま',
+  '{"en":"Sekigahama"}'::jsonb,
+  34.2031556,
+  132.2021761,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793775,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_aki',
+  '秋',
+  'あき',
+  '{"en":"Aki"}'::jsonb,
+  33.8828189,
+  132.2558119,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793776,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hano',
+  '波野',
+  'はの',
+  '{"en":"Hano"}'::jsonb,
+  33.9656079,
+  132.045828,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793777,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_seta',
+  '瀬田',
+  'せた',
+  '{"en":"Seta"}'::jsonb,
+  34.1838091,
+  132.2050668,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793778,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogooku',
+  '麻郷奥',
+  'おごうおく',
+  '{"en":"Ogooku"}'::jsonb,
+  33.9426194,
+  132.0366168,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793779,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yuu',
+  '油宇',
+  'ゆう',
+  '{"en":"Yuu"}'::jsonb,
+  33.9341838,
+  132.4398912,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793780,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ihota',
+  '伊保田',
+  'いほた',
+  '{"en":"Ihota"}'::jsonb,
+  33.9427903,
+  132.453103,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793781,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogo',
+  '麻郷',
+  'おごう',
+  '{"en":"Ogo"}'::jsonb,
+  33.9382644,
+  132.0520172,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793783,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashi_agenosho',
+  '東安下庄',
+  'ひがしあげのしょう',
+  '{"en":"Higashi-Agenosho"}'::jsonb,
+  33.9048694,
+  132.2896263,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793784,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nagashima',
+  '長島',
+  'ながしま',
+  '{"en":"Nagashima"}'::jsonb,
+  33.8184449,
+  132.0728027,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793785,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tononyu',
+  '外入',
+  'とのにゅう',
+  '{"en":"Tononyu"}'::jsonb,
+  33.8753037,
+  132.3361608,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793786,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_jikamuro',
+  '地家室',
+  'じかむろ',
+  '{"en":"Jikamuro"}'::jsonb,
+  33.8684362,
+  132.3530438,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793787,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kuka',
+  '久賀',
+  'くか',
+  '{"en":"Kuka"}'::jsonb,
+  33.9466795,
+  132.2529257,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793789,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_okuni',
+  '尾国',
+  'おくに',
+  '{"en":"Okuni"}'::jsonb,
+  33.8723516,
+  132.1229072,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793790,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kabo',
+  '家房',
+  'かぼう',
+  '{"en":"Kabo"}'::jsonb,
+  33.8804599,
+  132.2342833,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793792,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kusunoki',
+  '楠',
+  'くすのき',
+  '{"en":"Kusunoki"}'::jsonb,
+  33.9359116,
+  132.0264843,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8570793793,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kamonosho',
+  '鴨庄',
+  'かものしょう',
+  '{"en":"Kamonosho"}'::jsonb,
+  34.0703341,
+  131.1666647,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532161,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_toyotamaecho_hoho',
+  '豊田前町保々',
+  'とよたまえちょうほうほう',
+  '{"en":"Toyotamaecho-Hoho"}'::jsonb,
+  34.1554602,
+  131.1099487,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532163,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shin_arihocho',
+  '新有帆町',
+  'しんありほちょう',
+  '{"en":"Shin-Arihocho"}'::jsonb,
+  34.0195161,
+  131.2025924,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532164,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_minatomachi',
+  '港町',
+  'みなとまち',
+  '{"en":"Minatomachi"}'::jsonb,
+  33.9740189,
+  131.176314,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532165,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_toyotamaecho_asokami',
+  '豊田前町麻生上',
+  'とよたまえちょうあそうかみ',
+  '{"en":"Toyotamaecho-Asokami"}'::jsonb,
+  34.207715,
+  131.1274905,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532166,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_jiyugaoka',
+  '自由ヶ丘',
+  'じゆうがおか',
+  '{"en":"Jiyugaoka"}'::jsonb,
+  33.9840573,
+  131.1860757,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532167,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shuhocho_beppu',
+  '秋芳町別府',
+  'しゅうほうちょうべっぷ',
+  '{"en":"Shuhocho-Beppu"}'::jsonb,
+  34.2577954,
+  131.2403858,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532169,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ofukucho_kami',
+  '於福町上',
+  'おふくちょうかみ',
+  '{"en":"Ofukucho-kami"}'::jsonb,
+  34.2401998,
+  131.1859673,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532171,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ariho',
+  '有帆',
+  'ありほ',
+  '{"en":"Ariho"}'::jsonb,
+  34.0169673,
+  131.2091477,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532172,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ominecho_higashibun',
+  '大嶺町東分',
+  'おおみねちょうひがしぶん',
+  '{"en":"Ominecho-Higashibun"}'::jsonb,
+  34.170725,
+  131.1988765,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532174,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_isacho_kawara',
+  '伊佐町河原',
+  'いさちょうかわら',
+  '{"en":"Isacho-Kawara"}'::jsonb,
+  34.1969183,
+  131.2497177,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532178,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_marugochi',
+  '丸河内',
+  'まるごうち',
+  '{"en":"Marugochi"}'::jsonb,
+  33.9800224,
+  131.1859168,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532179,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_oda',
+  '美東町大田',
+  'みとうちょうおおだ',
+  '{"en":"Mitocho-Oda"}'::jsonb,
+  34.2280657,
+  131.340578,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532182,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_fukuda',
+  '福田',
+  'ふくだ',
+  '{"en":"Fukuda"}'::jsonb,
+  34.0676925,
+  131.1059429,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532183,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_minami_ryuocho',
+  '南竜王町',
+  'みなみりゅうおうちょう',
+  '{"en":"Minami-Ryuocho"}'::jsonb,
+  33.9663791,
+  131.1762481,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532184,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashiatsucho_kawahigashi',
+  '東厚保町川東',
+  'ひがしあつちょうかわひがし',
+  '{"en":"Higashiatsucho-Kawahigashi"}'::jsonb,
+  34.1370727,
+  131.154243,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532186,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_takahata',
+  '高畑',
+  'たかはた',
+  '{"en":"Takahata"}'::jsonb,
+  34.0292921,
+  131.1905939,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532187,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishiatsucho_hongo',
+  '西厚保町本郷',
+  'にしあつちょうほんごう',
+  '{"en":"Nishiatsucho-Hongo"}'::jsonb,
+  34.1036132,
+  131.1474457,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532188,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_toyotamaecho_imayama',
+  '豊田前町今山',
+  'とよたまえちょういまやま',
+  '{"en":"Toyotamaecho-Imayama"}'::jsonb,
+  34.1701753,
+  131.1238399,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532191,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shuhocho_aokage',
+  '秋芳町青景',
+  'しゅうほうちょうあおかげ',
+  '{"en":"Shuhocho-Aokage"}'::jsonb,
+  34.2741995,
+  131.2861647,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532194,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kita_ryuocho',
+  '北竜王町',
+  'きたりゅうおうちょう',
+  '{"en":"Kita-Ryuocho"}'::jsonb,
+  33.9709381,
+  131.1764491,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532195,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_isacho_okumagura',
+  '伊佐町奥万倉',
+  'いさちょうおくまぐら',
+  '{"en":"Isacho-Okumagura"}'::jsonb,
+  34.1331135,
+  131.226536,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532199,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_naganobori',
+  '美東町長登',
+  'みとうちょうながのぼり',
+  '{"en":"Mitocho-Naganobori"}'::jsonb,
+  34.2493059,
+  131.3370432,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532201,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yamanoi',
+  '山野井',
+  'やまのい',
+  '{"en":"Yamanoi"}'::jsonb,
+  34.0624256,
+  131.1289683,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532202,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_nagata',
+  '美東町長田',
+  'みとうちょうながた',
+  '{"en":"Mitocho-Nagata"}'::jsonb,
+  34.1745047,
+  131.364952,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532203,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kori',
+  '郡',
+  'こおり',
+  '{"en":"Kori"}'::jsonb,
+  34.0149336,
+  131.1399107,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532205,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_aka',
+  '美東町赤',
+  'みとうちょうあか',
+  '{"en":"Mitocho-Aka"}'::jsonb,
+  34.2919079,
+  131.3354361,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532207,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_toyotamaecho_asoshimo',
+  '豊田前町麻生下',
+  'とよたまえちょうあそうしも',
+  '{"en":"Toyotamaecho-Asoshimo"}'::jsonb,
+  34.1904226,
+  131.1253661,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571532211,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sakaemachi',
   '栄町',
-  '栄町',
-  '{"en":"Sakaecho"}'::jsonb,
-  35.7732992,
-  139.3104484,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12862007940,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ozakudai',
-  '小作台',
-  '小作台',
-  '{"en":"Ozakudai"}'::jsonb,
-  35.7768071,
-  139.2976199,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12862008067,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hane_higashi',
-  '羽東',
-  '羽東',
-  '{"en":"Hane higashi"}'::jsonb,
-  35.7588352,
-  139.3108248,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12863829794,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hane_naka',
-  '羽中',
-  '羽中',
-  '{"en":"Hane naka"}'::jsonb,
-  35.7630848,
-  139.3052305,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12863937098,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hane_kami',
-  '羽加美',
-  '羽加美',
-  '{"en":"Hane kami"}'::jsonb,
-  35.7655197,
-  139.302638,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12863946224,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hane_nishi',
-  '羽西',
-  '羽西',
-  '{"en":"Hane nishi"}'::jsonb,
-  35.7710174,
-  139.2975922,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12863946343,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_musashino_quarter',
-  'むさし野',
-  'むさし野',
-  '{"en":"Musashino"}'::jsonb,
-  35.7602734,
-  139.3394061,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12875171897,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_minamidaira',
-  '南平',
-  '南平',
-  '{"en":"Minamidaira"}'::jsonb,
-  35.7667212,
-  139.3389608,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12875186414,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nagaoka',
-  '長岡',
-  '長岡',
-  '{"en":"Nagaoka"}'::jsonb,
-  35.7759594,
-  139.3284942,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12878059255,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ome_katsunuma',
-  '勝沼',
-  'かつぬま',
-  '{"en":"Katsunuma"}'::jsonb,
-  35.7929395,
-  139.2659077,
-  NULL,
-  'tokyo',
-  'tokyo_ome',
-  'jp',
-  '東京都',
-  NULL,
-  '青梅市',
-  NULL,
-  12913785199,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_ome_nishiwakecho',
-  '西分町',
-  'にしわけちょう',
-  '{"en":"Nishiwakecho"}'::jsonb,
-  35.7887,
-  139.2648865,
-  NULL,
-  'tokyo',
-  'tokyo_ome',
-  'jp',
-  '東京都',
-  NULL,
-  '青梅市',
-  NULL,
-  12916051117,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nakahara',
-  '中原',
-  '中原',
-  '{"en":"Nakahara"}'::jsonb,
-  35.7548743,
-  139.3614969,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12951369170,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kishi',
-  '岸',
-  '岸',
-  '{"en":"Kishi"}'::jsonb,
-  35.7662687,
-  139.3690505,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12955463069,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mitsugi',
-  '三ツ木',
-  '三ツ木',
-  '{"en":"Mitsugi"}'::jsonb,
-  35.7600929,
-  139.3743066,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12955463325,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mitsufuji',
-  '三ツ藤',
-  '三ツ藤',
-  '{"en":"Mitsufuji"}'::jsonb,
-  35.7535103,
-  139.374484,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12957916382,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_zanbori',
-  '残堀',
-  '残堀',
-  '{"en":"Zanbori"}'::jsonb,
-  35.7500658,
-  139.3715589,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12957916478,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_inadaira',
-  '伊奈平',
-  '伊奈平',
-  '{"en":"Inadaira"}'::jsonb,
-  35.7409989,
-  139.3763425,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12958239102,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_enoki',
-  '榎',
-  '榎',
-  '{"en":"Enoki"}'::jsonb,
-  35.7425175,
-  139.3877619,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12958239260,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_narihira',
-  '業平',
-  'なりひら',
-  '{"en":"Narihira"}'::jsonb,
-  35.7074925,
-  139.8132133,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12967237472,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_ominami',
-  '大南',
-  '大南',
-  '{"en":"Ominami"}'::jsonb,
-  35.736876,
-  139.404362,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12972209045,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_gakuen',
-  '学園',
-  '学園',
-  '{"en":"Gakuen"}'::jsonb,
-  35.7460449,
-  139.3979928,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12972214311,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_honmachi_quarter',
-  '本町',
-  '本町',
-  '{"en":"Honmachi"}'::jsonb,
-  35.7580954,
-  139.3831382,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12972288424,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_chuo_quarter',
-  '中央',
-  '中央',
-  '{"en":"Chuo"}'::jsonb,
-  35.7550705,
-  139.3924728,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12979086871,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shinmei',
-  '神明',
-  '神明',
-  '{"en":"Shinmei"}'::jsonb,
-  35.7530666,
-  139.403175,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12979087027,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nakato',
-  '中藤',
-  '中藤',
-  '{"en":"Nakato"}'::jsonb,
-  35.7587784,
-  139.400732,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12979142536,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tamako',
-  '多摩湖',
-  '多摩湖',
-  '{"en":"Tamako"}'::jsonb,
-  35.7631906,
-  139.4194491,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12981473671,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_imokubo',
-  '芋窪',
-  '芋窪',
-  '{"en":"Imokubo"}'::jsonb,
-  35.7554419,
-  139.4121287,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12986806780,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_zoshiki',
-  '蔵敷',
-  '蔵敷',
-  '{"en":"Zoshiki"}'::jsonb,
-  35.7508361,
-  139.4196783,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12986807043,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_narahashi',
-  '奈良橋',
-  '奈良橋',
-  '{"en":"Narahashi"}'::jsonb,
-  35.7530682,
-  139.4265755,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12986892926,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kohan',
-  '湖畔',
-  '湖畔',
-  '{"en":"Kohan"}'::jsonb,
-  35.7585147,
-  139.4307483,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12986893135,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_takagi',
-  '高木',
-  '高木',
-  '{"en":"Takagi"}'::jsonb,
-  35.7512033,
-  139.4351495,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12988751636,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_sayama',
-  '狭山',
-  '狭山',
-  '{"en":"Sayama"}'::jsonb,
-  35.7539325,
-  139.4402477,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12988751798,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shimizu',
-  '清水',
-  '清水',
-  '{"en":"Shimizu"}'::jsonb,
-  35.7510926,
-  139.4441365,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12988751918,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kamikitadai',
-  '上北台',
-  '上北台',
-  '{"en":"Kamikitadai"}'::jsonb,
-  35.7424228,
-  139.4129955,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12988898914,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_tateno',
-  '立野',
-  '立野',
-  '{"en":"Tateno"}'::jsonb,
-  35.7427665,
-  139.4199556,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12988898984,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nangai',
-  '南街',
-  '南街',
-  '{"en":"Nangai"}'::jsonb,
-  35.7388607,
-  139.4293687,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12990822406,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_nakahara_quarter',
-  '仲原',
-  '仲原',
-  '{"en":"Nakahara"}'::jsonb,
-  35.7452277,
-  139.4400054,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12990958227,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mukohara',
-  '向原',
-  '向原',
-  '{"en":"Mukohara"}'::jsonb,
-  35.7391533,
-  139.4400442,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12990965115,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kiyohara',
-  '清原',
-  '清原',
-  '{"en":"Kiyohara"}'::jsonb,
-  35.742755,
-  139.4461663,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12993439325,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shinbori',
-  '新堀',
-  '新堀',
-  '{"en":"Shinbori"}'::jsonb,
-  35.7390758,
-  139.4485956,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  12993439399,
-  'quarter'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_sakaemachi',
-  '栄町',
-  '栄町',
+  'さかえまち',
   '{"en":"Sakaemachi"}'::jsonb,
-  35.6861362,
-  139.3865549,
+  33.9915019,
+  131.1774923,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12995196611,
+  8571532212,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinmachi_quarter_12995196840',
-  '新町',
-  '新町',
-  '{"en":"Shinmachi"}'::jsonb,
-  35.681353,
-  139.3845749,
+  'yamaguchi_unknown_shuhocho_iwanagashimogo',
+  '秋芳町岩永下郷',
+  'しゅうほうちょういわながしもごう',
+  '{"en":"Shuhocho-Iwanagashimogo"}'::jsonb,
+  34.1896287,
+  131.2999875,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12995196840,
+  8571532214,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hinodai',
-  '日野台',
-  '日野台',
-  '{"en":"Hinodai"}'::jsonb,
-  35.6767319,
-  139.3804981,
+  'yamaguchi_unknown_ofukucho_shimo',
+  '於福町下',
+  'おふくちょうしも',
+  '{"en":"Ofukucho-shimo"}'::jsonb,
+  34.2282364,
+  131.2047934,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12995224158,
+  8571532216,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hino_honcho',
-  '日野本町',
-  '日野本町',
-  '{"en":"Hino honcho"}'::jsonb,
-  35.6817306,
-  139.4000822,
+  'yamaguchi_unknown_ominecho_okubun',
+  '大嶺町奥分',
+  'おおみねちょうおくぶん',
+  '{"en":"Ominecho-Okubun"}'::jsonb,
+  34.1905056,
+  131.1644194,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12996647992,
+  8571553920,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_osakaue',
-  '大坂上',
-  '大坂上',
-  '{"en":"Osakaue"}'::jsonb,
-  35.6751712,
-  139.3882444,
+  'yamaguchi_unknown_isacho_horikoshi',
+  '伊佐町堀越',
+  'いさちょうほりこし',
+  '{"en":"Isacho-Horikoshi"}'::jsonb,
+  34.1379148,
+  131.2204812,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12996668579,
+  8571553923,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tamadaira',
-  '多摩平',
-  '多摩平',
-  '{"en":"Tamadaira"}'::jsonb,
-  35.6676778,
-  139.3809912,
+  'yamaguchi_unknown_yamakawa',
+  '山川',
+  'やまかわ',
+  '{"en":"Yamakawa"}'::jsonb,
+  34.0549831,
+  131.1510774,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  12998394730,
+  8571553924,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_asahigaoka',
-  '旭が丘',
-  '旭が丘',
+  'yamaguchi_unknown_aobadai',
+  '青葉台',
+  'あおばだい',
+  '{"en":"Aobadai"}'::jsonb,
+  34.0103597,
+  131.161935,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553925,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sementomachi',
+  'セメント町',
+  'せめんとまち',
+  '{"en":"Sementomachi"}'::jsonb,
+  33.9778674,
+  131.1759459,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553926,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tsubuta',
+  '津布田',
+  'つぶた',
+  '{"en":"Tsubuta"}'::jsonb,
+  34.0209569,
+  131.1183274,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553927,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashi_takadomari',
+  '東高泊',
+  'ひがしたかどまり',
+  '{"en":"Higashi-Takadomari"}'::jsonb,
+  34.0109385,
+  131.1798139,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553928,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_higashiatsucho_yamanaka',
+  '東厚保町山中',
+  'ひがしあつちょうやまなか',
+  '{"en":"Higashiatsucho-Yamanaka"}'::jsonb,
+  34.1294432,
+  131.1865664,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553930,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_chizaki',
+  '千崎',
+  'ちざき',
+  '{"en":"Chizaki"}'::jsonb,
+  34.0256,
+  131.1818809,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553931,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_toyotamaecho_furueboshi',
+  '豊田前町古烏帽子',
+  'とよたまえちょうふるえぼし',
+  '{"en":"Toyotamaecho-Furueboshi"}'::jsonb,
+  34.1479041,
+  131.0959308,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553933,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_midorigaoka',
+  '緑が丘',
+  'みどりがおか',
+  '{"en":"Midorigaoka"}'::jsonb,
+  34.0162213,
+  131.1723337,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553935,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_toyotamaecho_dake',
+  '豊田前町嶽',
+  'とよたまえちょうだけ',
+  '{"en":"Toyotamaecho-Dake"}'::jsonb,
+  34.1542921,
+  131.0960757,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553936,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shuhocho_kama',
+  '秋芳町嘉万',
+  'しゅうほうちょうかま',
+  '{"en":"Shuhocho-Kama"}'::jsonb,
+  34.2898169,
+  131.2600407,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553939,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shuhocho_akiyoshi',
+  '秋芳町秋吉',
+  'しゅうほうちょうあきよし',
+  '{"en":"Shuhocho-Akiyoshi"}'::jsonb,
+  34.2165399,
+  131.3088618,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553940,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kyowadai',
+  '共和台',
+  'きょうわだい',
+  '{"en":"Kyowadai"}'::jsonb,
+  34.0090363,
+  131.2043837,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553941,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_asa',
+  '厚狭',
+  'あさ',
+  '{"en":"Asa"}'::jsonb,
+  34.0680668,
+  131.1829439,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553942,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ominecho_nishibun',
+  '大嶺町西分',
+  'おおみねちょうにしぶん',
+  '{"en":"Ominecho-Nishibun"}'::jsonb,
+  34.1550311,
+  131.1652868,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553944,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_mana',
+  '美東町真名',
+  'みとうちょうまな',
+  '{"en":"Mitocho-Mana"}'::jsonb,
+  34.1610766,
+  131.3438016,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553947,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_edo',
+  '美東町絵堂',
+  'みとうちょうえどう',
+  '{"en":"Mitocho-Edo"}'::jsonb,
+  34.281542,
+  131.3704506,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553951,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_habu',
+  '埴生',
+  'はぶ',
+  '{"en":"Habu"}'::jsonb,
+  34.0452612,
+  131.0875011,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553952,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_onoda',
+  '小野田',
+  'おのだ',
+  '{"en":"Onoda"}'::jsonb,
+  33.9525122,
+  131.1735844,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553953,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_ayagi',
+  '美東町綾木',
+  'みとうちょうあやぎ',
+  '{"en":"Mitocho-Ayagi"}'::jsonb,
+  34.1959189,
+  131.3537338,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553954,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_heiseicho',
+  '平成町',
+  'へいせいちょう',
+  '{"en":"Heiseicho"}'::jsonb,
+  33.9789326,
+  131.1744647,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553956,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishiatsucho_hara',
+  '西厚保町原',
+  'にしあつちょうはら',
+  '{"en":"Nishiatsucho-Hara"}'::jsonb,
+  34.127263,
+  131.1203736,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553957,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shuhocho_iwanagahongo',
+  '秋芳町岩永本郷',
+  'しゅうほうちょういわながほんごう',
+  '{"en":"Shuhocho-Iwanagahongo"}'::jsonb,
+  34.208301,
+  131.2828438,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553960,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_inarimachi',
+  '稲荷町',
+  'いなりまち',
+  '{"en":"Inarimachi"}'::jsonb,
+  33.9845852,
+  131.1794076,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553963,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ominecho_kitabun',
+  '大嶺町北分',
+  'おおみねちょうきたぶん',
+  '{"en":"Ominecho-Kitabun"}'::jsonb,
+  34.2076317,
+  131.2189912,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553965,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_isacho_isa',
+  '伊佐町伊佐',
+  'いさちょういさ',
+  '{"en":"Isacho-Isa"}'::jsonb,
+  34.1662398,
+  131.2360687,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553969,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_taikyudanchi',
+  '大休団地',
+  'たいきゅうだんち',
+  '{"en":"Taikyudanchi"}'::jsonb,
+  34.033365,
+  131.20775,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553971,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishi_takadomari',
+  '西高泊',
+  'にしたかどまり',
+  '{"en":"Nishi-Takadomari"}'::jsonb,
+  34.0048123,
+  131.1655582,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553973,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nishioki',
+  '西沖',
+  'にしおき',
+  '{"en":"Nishioki"}'::jsonb,
+  33.9486278,
+  131.1892609,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553974,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_mitocho_ono',
+  '美東町小野',
+  'みとうちょうおの',
+  '{"en":"Mitocho-Ono"}'::jsonb,
+  34.1703639,
+  131.3158062,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571553975,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_heigun',
+  '平郡',
+  'へいぐん',
+  '{"en":"Heigun"}'::jsonb,
+  33.7877291,
+  132.2438857,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571635747,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atsuki',
+  '阿月',
+  'あつき',
+  '{"en":"Atsuki"}'::jsonb,
+  33.8609724,
+  132.1486187,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571635748,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atsuki_quarter',
+  '阿月',
+  'あつき',
+  '{"en":"Atsuki"}'::jsonb,
+  33.8878719,
+  132.1239981,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571635749,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ihonosho',
+  '伊保庄',
+  'いほのしょう',
+  '{"en":"Ihonosho"}'::jsonb,
+  33.9269023,
+  132.1198453,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571635750,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_asahigaoka',
+  '旭ヶ丘',
+  'あさひがおか',
   '{"en":"Asahigaoka"}'::jsonb,
-  35.6589239,
-  139.3684946,
+  33.9552348,
+  132.102591,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13000330259,
+  8571635751,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nishi_hirayama',
-  '西平山',
-  '西平山',
-  '{"en":"Nishi Hirayama"}'::jsonb,
-  35.651833,
-  139.36365,
+  'yamaguchi_unknown_newtown_minamimachi',
+  'ニュータウン南町',
+  'にゅーたうんみなみまち',
+  '{"en":"Newtown-minamimachi"}'::jsonb,
+  33.9667558,
+  132.0972413,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13003385983,
+  8571635753,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_higashi_hirayama',
-  '東平山',
-  '東平山',
-  '{"en":"Higashi Hirayama"}'::jsonb,
-  35.6515724,
-  139.3752636,
+  'yamaguchi_unknown_yota',
+  '余田',
+  'よた',
+  '{"en":"Yota"}'::jsonb,
+  33.9794536,
+  132.0701196,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13003395745,
+  8571635754,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_toyoda',
-  '豊田',
-  '豊田',
-  '{"en":"Toyoda"}'::jsonb,
-  35.6569277,
-  139.384049,
+  'yamaguchi_unknown_shin_ichi_oki',
+  '新市沖',
+  'しんいちおき',
+  '{"en":"Shin-ichi-oki"}'::jsonb,
+  33.9632679,
+  132.1175913,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13003503719,
+  8571635756,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_higashi_toyoda',
-  '東豊田',
-  '東豊田',
-  '{"en":"Higashi Toyoda"}'::jsonb,
-  35.6642148,
-  139.3908113,
+  'yamaguchi_unknown_kitahama',
+  '北浜',
+  'きたはま',
+  '{"en":"Kitahama"}'::jsonb,
+  33.9629396,
+  132.1155274,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13003503793,
+  8571635762,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinmei_quarter',
-  '神明',
-  '神明',
-  '{"en":"Shinmei"}'::jsonb,
-  35.6727872,
-  139.3957177,
+  'yamaguchi_unknown_shin_ichi_kita',
+  '新市北',
+  'しんいちきた',
+  '{"en":"Shin-ichi-kita"}'::jsonb,
+  33.9653668,
+  132.118673,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13007749304,
+  8571635764,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_manganji',
-  '万願寺',
-  '万願寺',
-  '{"en":"Manganji"}'::jsonb,
-  35.6727821,
-  139.4149509,
+  'yamaguchi_unknown_shin_ichi_minami',
+  '新市南',
+  'しんいちみなみ',
+  '{"en":"Shin-ichi-minami"}'::jsonb,
+  33.9640658,
+  132.117978,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13007800376,
+  8571635766,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ishida',
-  '石田',
-  '石田',
-  '{"en":"Ishida"}'::jsonb,
-  35.6693168,
-  139.4216266,
+  'yamaguchi_unknown_higashidote',
+  '東土手',
+  'ひがしどて',
+  '{"en":"Higashidote"}'::jsonb,
+  33.9669424,
+  132.1175976,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13007800494,
+  8571635767,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hatagaya',
-  '幡ヶ谷',
-  'はたがや',
-  '{"en":"Hatagaya"}'::jsonb,
-  35.677903,
-  139.6740463,
+  'yamaguchi_unknown_yanai',
+  '柳井',
+  'やない',
+  '{"en":"Yanai"}'::jsonb,
+  33.9835086,
+  132.1063584,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13011384020,
+  8571635768,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sasazuka',
-  '笹塚',
-  'ささずか',
-  '{"en":"Sasazuka"}'::jsonb,
-  35.6748043,
-  139.666403,
+  'yamaguchi_unknown_kogaisaku',
+  '古開作',
+  'こがいさく',
+  '{"en":"Kogaisaku"}'::jsonb,
+  33.9676304,
+  132.0967914,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13011384021,
+  8571635771,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_arai_quarter',
-  '新井',
-  '新井',
-  '{"en":"Arai"}'::jsonb,
-  35.6656452,
-  139.420532,
+  'yamaguchi_unknown_tenjin',
+  '天神',
+  'てんじん',
+  '{"en":"Tenjin"}'::jsonb,
+  33.9661572,
+  132.1143403,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13016500081,
+  8571635772,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_misawa',
-  '三沢',
-  '三沢',
-  '{"en":"Misawa"}'::jsonb,
-  35.6575876,
-  139.4202867,
+  'yamaguchi_unknown_shinjo',
+  '新庄',
+  'しんじょう',
+  '{"en":"Shinjo"}'::jsonb,
+  33.9720297,
+  132.0864527,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13018271955,
+  8571635774,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_minamidaira_quarter',
-  '南平',
-  '南平',
-  '{"en":"Minamidaira"}'::jsonb,
-  35.6585249,
-  139.3973141,
+  'yamaguchi_unknown_ekinan',
+  '駅南',
+  'えきなん',
+  '{"en":"Ekinan"}'::jsonb,
+  33.9662528,
+  132.103129,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13018322063,
+  8571635775,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hodokubo',
-  '程久保',
-  '程久保',
-  '{"en":"Hodokubo"}'::jsonb,
-  35.6470298,
-  139.4047931,
+  'yamaguchi_unknown_himeda',
+  '姫田',
+  'ひめだ',
+  '{"en":"Himeda"}'::jsonb,
+  33.9699935,
+  132.112809,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13019980392,
+  8571635776,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hirayama',
-  '平山',
-  '平山',
-  '{"en":"Hirayama"}'::jsonb,
-  35.6466075,
-  139.3840968,
+  'yamaguchi_unknown_shin_ichi',
+  '新市',
+  'しんいち',
+  '{"en":"Shin-ichi"}'::jsonb,
+  33.9649903,
+  132.1177102,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13019999296,
+  8571635777,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ebisu_nishi',
-  '猿楽町',
-  'えびすにし',
-  '{"en":"Ebisu-Nishi"}'::jsonb,
-  35.6483517,
-  139.7065258,
+  'yamaguchi_unknown_yanaitsu',
+  '柳井津',
+  'やないつ',
+  '{"en":"Yanaitsu"}'::jsonb,
+  33.9678815,
+  132.1103333,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13045231855,
+  8571635778,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yashio',
-  '八潮',
-  'やしお',
-  '{"en":"Yashio"}'::jsonb,
-  35.6051145,
-  139.761114,
+  'yamaguchi_unknown_dotemachi',
+  '土手町',
+  'どてまち',
+  '{"en":"Dotemachi"}'::jsonb,
+  33.9667162,
+  132.1124102,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13056882625,
+  8571635779,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tamakocho',
-  '多摩湖町',
-  '多摩湖町',
-  '{"en":"Tamakocho"}'::jsonb,
-  35.7644014,
-  139.4471862,
+  'yamaguchi_unknown_katanonishi',
+  '片野西',
+  'かたのにし',
+  '{"en":"Katanonishi"}'::jsonb,
+  33.9705941,
+  132.1210911,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13091754102,
+  8571635780,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_meguritacho',
-  '廻田町',
-  '廻田町',
-  '{"en":"Meguritacho"}'::jsonb,
-  35.757245,
-  139.4506405,
+  'yamaguchi_unknown_shintenchi',
+  '新天地',
+  'しんてんち',
+  '{"en":"Shintenchi"}'::jsonb,
+  33.9672995,
+  132.1147884,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13091756641,
+  8571635782,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_suwacho',
-  '諏訪町',
-  '諏訪町',
-  '{"en":"Suwacho"}'::jsonb,
-  35.7708311,
-  139.4626755,
+  'yamaguchi_unknown_yamane',
+  '山根',
+  'やまね',
+  '{"en":"Yamane"}'::jsonb,
+  33.9700889,
+  132.115659,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13108064573,
+  8571635784,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_noguchicho',
-  '野口町',
-  '野口町',
-  '{"en":"Noguchicho"}'::jsonb,
-  35.762467,
-  139.4596641,
+  'yamaguchi_unknown_tozaki',
+  '遠崎',
+  'とおざき',
+  '{"en":"Tozaki"}'::jsonb,
+  33.9601228,
+  132.1453709,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13108064717,
+  8571635785,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_misumicho',
-  '美住町',
-  '美住町',
-  '{"en":"Misumicho"}'::jsonb,
-  35.7523922,
-  139.4602445,
+  'yamaguchi_unknown_obatake',
+  '大畠',
+  'おおばたけ',
+  '{"en":"Obatake"}'::jsonb,
+  33.9670975,
+  132.1653775,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13109529159,
+  8571635786,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_fujimicho',
-  '富士見町',
-  '富士見町',
-  '{"en":"Fujimicho"}'::jsonb,
-  35.7452033,
-  139.4568016,
+  'yamaguchi_unknown_kojiro',
+  '神代',
+  'こうじろ',
+  '{"en":"Kojiro"}'::jsonb,
+  33.9802658,
+  132.183757,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13109529243,
+  8571635787,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hagiyamacho',
-  '萩山町',
-  '萩山町',
-  '{"en":"Hagiyamacho"}'::jsonb,
-  35.7427904,
-  139.4779242,
+  'yamaguchi_unknown_hizumi',
+  '日積',
+  'ひづみ',
+  '{"en":"Hizumi"}'::jsonb,
+  33.9948673,
+  132.1619358,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13109586938,
+  8571635788,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sakaecho_quarter',
+  'yamaguchi_unknown_ikachi',
+  '伊陸',
+  'いかち',
+  '{"en":"Ikachi"}'::jsonb,
+  34.0259829,
+  132.109628,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8571635789,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atoikumonishibun',
+  '阿東生雲西分',
+  '阿東生雲西分',
+  '{"en":"Atoikumonishibun"}'::jsonb,
+  34.3996952,
+  131.6186893,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8633732472,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atoikumonaka',
+  '阿東生雲中',
+  '阿東生雲中',
+  '{"en":"Atoikumonaka"}'::jsonb,
+  34.3874336,
+  131.5939807,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8634347124,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atozomeki',
+  '阿東蔵目喜',
+  '阿東蔵目喜',
+  '{"en":"Atozomeki"}'::jsonb,
+  34.3892662,
+  131.5645087,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8634347130,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atokaneshimo',
+  '阿東嘉年下',
+  '阿東嘉年下',
+  '{"en":"Atokaneshimo"}'::jsonb,
+  34.4552441,
+  131.6736316,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8645534135,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atokanekami',
+  '阿東嘉年上',
+  '阿東嘉年上',
+  '{"en":"Atokanekami"}'::jsonb,
+  34.483876,
+  131.662849,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8645605596,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字荒瀬',
+  '大字荒瀬',
+  '大字荒瀬',
+  NULL,
+  34.066206,
+  131.293439,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745430,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_岩鼻',
+  '岩鼻町',
+  '岩鼻町',
+  NULL,
+  33.980532,
+  131.222809,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745433,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_琴崎',
+  '琴崎町',
+  '琴崎町',
+  NULL,
+  33.971027,
+  131.268052,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745438,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_上野中',
+  '上野中町',
+  '上野中町',
+  NULL,
+  33.952902,
+  131.272725,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745460,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字西万倉',
+  '大字西万倉',
+  '大字西万倉',
+  NULL,
+  34.082934,
+  131.225778,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745464,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中宇部',
+  '大字中宇部',
+  '大字中宇部',
+  NULL,
+  33.972162,
+  131.258169,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745468,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_常藤',
+  '常藤町',
+  '常藤町',
+  NULL,
+  33.949451,
+  131.254426,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745469,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字善和',
+  '大字善和',
+  '大字善和',
+  NULL,
+  34.016707,
+  131.287257,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745470,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の手',
+  '山の手町',
+  '山の手町',
+  NULL,
+  34.006842,
+  131.231605,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745471,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_末広',
+  '末広町',
+  '末広町',
+  NULL,
+  33.935842,
+  131.263617,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745473,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字木田',
+  '大字木田',
+  '大字木田',
+  NULL,
+  34.064101,
+  131.281027,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745474,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字藤曲',
+  '大字藤曲',
+  '大字藤曲',
+  NULL,
+  33.959983,
+  131.221147,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745475,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字沖ノ旦',
+  '大字沖ノ旦',
+  '大字沖ノ旦',
+  NULL,
+  33.995635,
+  131.238831,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745479,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字櫟原',
+  '大字櫟原',
+  '大字櫟原',
+  NULL,
+  34.090505,
+  131.30016,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745484,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_芝中',
+  '芝中町',
+  '芝中町',
+  NULL,
+  33.943813,
+  131.25761,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745485,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東見初',
+  '東見初町',
+  '東見初町',
+  NULL,
+  33.934758,
+  131.255185,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745507,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東芝中',
+  '東芝中町',
+  '東芝中町',
+  NULL,
+  33.939776,
+  131.259013,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745512,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字妻崎開作',
+  '大字妻崎開作',
+  '大字妻崎開作',
+  NULL,
+  33.972759,
+  131.209858,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678745515,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字山田',
+  '大字山田',
+  '大字山田',
+  NULL,
+  34.047008,
+  131.90626,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752175,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中須南',
+  '大字中須南',
+  '大字中須南',
+  NULL,
+  34.086169,
+  131.895498,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752178,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字河内',
+  '大字河内',
+  '大字河内',
+  NULL,
+  34.012997,
+  131.897707,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752181,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大藤谷',
+  '大字大藤谷',
+  '大字大藤谷',
+  NULL,
+  34.071901,
+  131.917152,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752185,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字東豊井',
+  '大字東豊井',
+  '大字東豊井',
+  NULL,
+  33.995495,
+  131.88306,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752200,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東海岸通り',
+  '東海岸通り',
+  '東海岸通り',
+  NULL,
+  33.9854033,
+  131.8841763,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752202,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字末武中',
+  '大字末武中',
+  '大字末武中',
+  NULL,
+  34.025145,
+  131.842818,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752203,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字下谷',
+  '大字下谷',
+  '大字下谷',
+  NULL,
+  34.089304,
+  131.872165,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752206,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_桃山',
+  '桃山町',
+  '桃山町',
+  NULL,
+  34.026851,
+  131.917925,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678752207,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_阿月',
+  '阿月',
+  '阿月',
+  NULL,
+  33.878375,
+  132.132144,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758633,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新天地',
+  '新天地',
+  '新天地',
+  NULL,
+  33.967314,
+  132.11483,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758634,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新',
+  '新市',
+  '新市',
+  NULL,
+  33.964977,
+  132.11768,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758637,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_余田',
+  '余田',
+  '余田',
+  NULL,
+  33.985839,
+  132.067086,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758638,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大畠',
+  '大畠',
+  '大畠',
+  NULL,
+  33.968519,
+  132.163213,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758639,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ニュータウン南',
+  'ニュータウン南町',
+  'ニュータウン南町',
+  NULL,
+  33.966807,
+  132.097134,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758640,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_旭ケ丘',
+  '旭ケ丘',
+  '旭ケ丘',
+  NULL,
+  33.955286,
+  132.102583,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758642,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新庄',
+  '新庄',
+  '新庄',
+  NULL,
+  33.976316,
+  132.086509,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758644,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_古開作',
+  '古開作',
+  '古開作',
+  NULL,
+  33.96406,
+  132.096601,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758645,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_平郡',
+  '平郡',
+  '平郡',
+  NULL,
+  33.792524,
+  132.226969,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758646,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山根',
+  '山根',
+  '山根',
+  NULL,
+  33.969822,
+  132.115667,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758647,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_駅南',
+  '駅南',
+  '駅南',
+  NULL,
+  33.966304,
+  132.103121,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758648,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_土手',
+  '土手町',
+  '土手町',
+  NULL,
+  33.966744,
+  132.112382,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758649,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新市南',
+  '新市南',
+  '新市南',
+  NULL,
+  33.964117,
+  132.11797,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758652,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_神代',
+  '神代',
+  '神代',
+  NULL,
+  33.980317,
+  132.183749,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758654,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_姫田',
+  '姫田',
+  '姫田',
+  NULL,
+  33.969899,
+  132.112746,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758655,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_柳井津',
+  '柳井津',
+  '柳井津',
+  NULL,
+  33.967807,
+  132.11034,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758656,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_伊保庄',
+  '伊保庄',
+  '伊保庄',
+  NULL,
+  33.930087,
+  132.116168,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758657,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_遠崎',
+  '遠崎',
+  '遠崎',
+  NULL,
+  33.962541,
+  132.148839,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758658,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新市北',
+  '新市北',
+  '新市北',
+  NULL,
+  33.965418,
+  132.118665,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758661,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_北浜',
+  '北浜',
+  '北浜',
+  NULL,
+  33.960428,
+  132.117708,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758663,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_日積',
+  '日積',
+  '日積',
+  NULL,
+  34.002141,
+  132.161799,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758664,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_柳井',
+  '柳井',
+  '柳井',
+  NULL,
+  33.983453,
+  132.112852,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758665,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_天神',
+  '天神',
+  '天神',
+  NULL,
+  33.966135,
+  132.114339,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758666,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_伊陸',
+  '伊陸',
+  '伊陸',
+  NULL,
+  34.026034,
+  132.10962,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758667,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新市沖',
+  '新市沖',
+  '新市沖',
+  NULL,
+  33.96318,
+  132.11749,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758670,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東土手',
+  '東土手',
+  '東土手',
+  NULL,
+  33.966978,
+  132.11767,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758672,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_片野西',
+  '片野西',
+  '片野西',
+  NULL,
+  33.97093,
+  132.121362,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678758673,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字如意寺',
+  '大字如意寺',
+  '大字如意寺',
+  NULL,
+  34.096925,
+  131.290791,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763518,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_寺の前',
+  '寺の前町',
+  '寺の前町',
+  NULL,
+  33.962727,
+  131.268642,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763522,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中山',
+  '大字中山',
+  '大字中山',
+  NULL,
+  33.985444,
+  131.245747,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763523,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_若松',
+  '若松町',
+  '若松町',
+  NULL,
+  33.959502,
+  131.242291,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763525,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字車地',
+  '大字車地',
+  '大字車地',
+  NULL,
+  34.04434,
+  131.296209,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763527,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_助田',
+  '助田町',
+  '助田町',
+  NULL,
+  33.962901,
+  131.230727,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763528,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字船木',
+  '大字船木',
+  '大字船木',
+  NULL,
+  34.052167,
+  131.207209,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763529,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字奥万倉',
+  '大字奥万倉',
+  '大字奥万倉',
+  NULL,
+  34.106693,
+  131.23704,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763533,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字今富',
+  '大字今富',
+  '大字今富',
+  NULL,
+  34.091092,
+  131.254143,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763538,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_文京',
+  '文京町',
+  '文京町',
+  NULL,
+  33.972589,
+  131.230925,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763552,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_鍋倉',
+  '鍋倉町',
+  '鍋倉町',
+  NULL,
+  33.96791,
+  131.233126,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763563,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東新川',
+  '東新川町',
+  '東新川町',
+  NULL,
+  33.947429,
+  131.256067,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763567,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中野開作',
+  '大字中野開作',
+  '大字中野開作',
+  NULL,
+  33.987053,
+  131.216857,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763570,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字東吉部',
+  '大字東吉部',
+  '大字東吉部',
+  NULL,
+  34.14217,
+  131.291333,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763573,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字西沖の山',
+  '大字西沖の山',
+  '大字西沖の山',
+  NULL,
+  33.951356,
+  131.203145,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763578,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字小串',
+  '大字小串',
+  '大字小串',
+  NULL,
+  33.949139,
+  131.232534,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763583,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字矢矯',
+  '大字矢矯',
+  '大字矢矯',
+  NULL,
+  34.077203,
+  131.250256,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763584,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_八王子',
+  '八王子町',
+  '八王子町',
+  NULL,
+  33.927806,
+  131.26519,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763586,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字小野',
+  '大字小野',
+  '大字小野',
+  NULL,
+  34.117241,
+  131.334786,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763587,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字東万倉',
+  '大字東万倉',
+  '大字東万倉',
+  NULL,
+  34.056758,
+  131.243347,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763589,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字棯小野',
+  '大字棯小野',
+  '大字棯小野',
+  NULL,
+  34.08924,
+  131.342438,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763593,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_鵜の島',
+  '鵜の島町',
+  '鵜の島町',
+  NULL,
+  33.961628,
+  131.238159,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763597,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_幸',
+  '幸町',
+  '幸町',
+  NULL,
+  33.939091,
+  131.253441,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763598,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_西中',
+  '西中町',
+  '西中町',
+  NULL,
+  33.961099,
+  131.234078,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763605,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_松崎',
+  '松崎町',
+  '松崎町',
+  NULL,
+  33.982571,
+  131.225345,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763608,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_錦',
+  '錦町',
+  '錦町',
+  NULL,
+  33.945745,
+  131.251843,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763609,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_風呂ヶ迫',
+  '風呂ヶ迫町',
+  '風呂ヶ迫町',
+  NULL,
+  33.96681,
+  131.277722,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763612,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_相生_quarter',
+  '相生町',
+  '相生町',
+  NULL,
+  33.953657,
+  131.245356,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763620,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字東須恵',
+  '大字東須恵',
+  '大字東須恵',
+  NULL,
+  33.979279,
+  131.195274,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763623,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字東岐波',
+  '大字東岐波',
+  '大字東岐波',
+  NULL,
+  33.980255,
+  131.331788,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763629,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字西吉部',
+  '大字西吉部',
+  '大字西吉部',
+  NULL,
+  34.118625,
+  131.258063,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763635,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字末信',
+  '大字末信',
+  '大字末信',
+  NULL,
+  34.012354,
+  131.248358,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763640,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字山中',
+  '大字山中',
+  '大字山中',
+  NULL,
+  34.058123,
+  131.315884,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763641,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字上宇部',
+  '大字上宇部',
+  '大字上宇部',
+  NULL,
+  33.992852,
+  131.258064,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763645,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字広瀬',
+  '大字広瀬',
+  '大字広瀬',
+  NULL,
+  34.002407,
+  131.2384,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763646,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字瓜生野',
+  '大字瓜生野',
+  '大字瓜生野',
+  NULL,
+  34.049656,
+  131.281696,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763650,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字芦河内',
+  '大字芦河内',
+  '大字芦河内',
+  NULL,
+  34.087076,
+  131.271661,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763655,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_五十目山',
+  '五十目山町',
+  '五十目山町',
+  NULL,
+  33.936767,
+  131.267896,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763664,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_松島',
+  '松島町',
+  '松島町',
+  NULL,
+  33.956322,
+  131.244993,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763666,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_朝日',
+  '朝日町',
+  '朝日町',
+  NULL,
+  33.957225,
+  131.246604,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763673,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_海南',
+  '海南町',
+  '海南町',
+  NULL,
+  33.958115,
+  131.262737,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763687,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字際波',
+  '大字際波',
+  '大字際波',
+  NULL,
+  34.00695,
+  131.213125,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763688,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字西岐波',
+  '大字西岐波',
+  '大字西岐波',
+  NULL,
+  33.969316,
+  131.30799,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763691,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字棚井',
+  '大字棚井',
+  '大字棚井',
+  NULL,
+  34.024616,
+  131.23878,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763696,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字吉見',
+  '大字吉見',
+  '大字吉見',
+  NULL,
+  34.042592,
+  131.257078,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763697,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新_quarter',
+  '新町',
+  '新町',
+  NULL,
+  33.949276,
+  131.243712,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763700,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字川上',
+  '大字川上',
+  '大字川上',
+  NULL,
+  33.993031,
+  131.273006,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763701,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字藤河内',
+  '大字藤河内',
+  '大字藤河内',
+  NULL,
+  34.074138,
+  131.324226,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763702,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字沖宇部',
+  '大字沖宇部',
+  '大字沖宇部',
+  NULL,
+  33.930178,
+  131.276265,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763706,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_宮地',
+  '宮地町',
+  '宮地町',
+  NULL,
+  33.963311,
+  131.255658,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763708,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_南中山',
+  '南中山町',
+  '南中山町',
+  NULL,
+  33.982254,
+  131.237155,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678763709,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中央',
+  '中央町',
+  '中央町',
+  NULL,
+  34.017719,
+  131.862645,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765223,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字西豊井',
+  '大字西豊井',
+  '大字西豊井',
+  NULL,
+  34.01401,
+  131.873761,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765225,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字末武上',
+  '大字末武上',
+  '大字末武上',
+  NULL,
+  34.043716,
+  131.869753,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765228,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字笠戸島',
+  '大字笠戸島',
+  '大字笠戸島',
+  NULL,
+  33.960021,
+  131.854722,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765232,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字平田',
+  '大字平田',
+  '大字平田',
+  NULL,
+  34.01268,
+  131.846881,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765247,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字瀬戸',
+  '大字瀬戸',
+  '大字瀬戸',
+  NULL,
+  34.0679,
+  131.888941,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765250,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字来巻',
+  '大字来巻',
+  '大字来巻',
+  NULL,
+  34.01456,
+  131.923474,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765253,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_若宮_quarter',
+  '若宮町',
+  '若宮町',
+  NULL,
+  34.022699,
+  131.881784,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765254,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字生野屋',
+  '大字生野屋',
+  '大字生野屋',
+  NULL,
+  34.047097,
+  131.887271,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765257,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_北斗',
+  '北斗町',
+  '北斗町',
+  NULL,
+  34.009986,
+  131.869296,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765271,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字温見',
+  '大字温見',
+  '大字温見',
+  NULL,
+  34.078174,
+  131.903288,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765273,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字末武下',
+  '大字末武下',
+  '大字末武下',
+  NULL,
+  34.012311,
+  131.85747,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765276,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字切山',
+  '大字切山',
+  '大字切山',
+  NULL,
+  34.047705,
+  131.923769,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8678765279,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atojifukukami',
+  '阿東地福上',
+  '阿東地福上',
+  '{"en":"Atojifukukami"}'::jsonb,
+  34.3701313,
+  131.6717863,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8727014380,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atotokusanaka',
+  '阿東徳佐中',
+  '阿東徳佐中',
+  '{"en":"Atotokusanaka"}'::jsonb,
+  34.4059714,
+  131.7332089,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8738285154,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atotokusakami',
+  '阿東徳佐上',
+  '阿東徳佐上',
+  '{"en":"Atotokusakami"}'::jsonb,
+  34.4165575,
+  131.7445493,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8738517229,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogorienzanishicho',
+  '小郡円座西町',
+  '小郡円座西町',
+  '{"en":"Ogorienzanishicho"}'::jsonb,
+  34.114727,
+  131.3872737,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8770652886,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogorienzahigashicho',
+  '小郡円座東町',
+  '小郡円座東町',
+  '{"en":"Ogorienzahigashicho"}'::jsonb,
+  34.1136389,
+  131.3900457,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8770652887,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogorikamigo',
+  '小郡上郷',
+  '小郡上郷',
+  '{"en":"Ogorikamigo"}'::jsonb,
+  34.1336625,
+  131.3986194,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8770667236,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogorihikarigaoka',
+  '小郡光が丘',
+  '小郡光が丘',
+  '{"en":"Ogorihikarigaoka"}'::jsonb,
+  34.1244617,
+  131.3976753,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8770667238,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogorikazenooka',
+  '小郡かぜの丘',
+  '小郡かぜの丘',
+  '{"en":"Ogorikazenooka"}'::jsonb,
+  34.1235514,
+  131.4026105,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8770667239,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogorimana',
+  '小郡真名',
+  '小郡真名',
+  '{"en":"Ogorimana"}'::jsonb,
+  34.1330764,
+  131.3755846,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8787693731,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hishima',
+  '肥島',
+  'ひしま',
+  '{"en":"Hishima"}'::jsonb,
+  34.48473,
+  131.379666,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8851952894,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_hajima',
+  '羽島',
+  'はじま',
+  '{"en":"Hajima"}'::jsonb,
+  34.464396,
+  131.377007,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8851952895,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_oshima_quarter',
+  '尾島',
+  'おしま',
+  '{"en":"Oshima"}'::jsonb,
+  34.500906,
+  131.342181,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8851952896,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogorishimogo',
+  '小郡下郷',
+  '小郡下郷',
+  '{"en":"Ogorishimogo"}'::jsonb,
+  34.1067145,
+  131.3871503,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  8864951111,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_幡生本',
+  '幡生本町',
+  '幡生本町',
+  NULL,
+  33.975313,
+  130.926164,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495777,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_幡生新',
+  '幡生新町',
+  '幡生新町',
+  NULL,
+  33.976316,
+  130.923058,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495778,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_羽山',
+  '羽山町',
+  '羽山町',
+  NULL,
+  33.970266,
+  130.924029,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495779,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大坪本',
+  '大坪本町',
+  '大坪本町',
+  NULL,
+  33.97006,
+  130.921118,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495781,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_幡生宮の下',
+  '幡生宮の下町',
+  '幡生宮の下町',
+  NULL,
+  33.98336,
+  130.930931,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495784,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新垢田北',
+  '新垢田北町',
+  '新垢田北町',
+  NULL,
+  33.990987,
+  130.912067,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495785,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の田東',
+  '山の田東町',
+  '山の田東町',
+  NULL,
+  33.985626,
+  130.928865,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495793,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ゆめタウン',
+  'ゆめタウン',
+  'ゆめタウン',
+  NULL,
+  34.029143,
+  131.013051,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495794,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_武久西原台',
+  '武久西原台',
+  '武久西原台',
+  NULL,
+  33.986274,
+  130.921509,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495802,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の田南',
+  '山の田南町',
+  '山の田南町',
+  NULL,
+  33.985332,
+  130.925779,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495803,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長州出島',
+  '長州出島',
+  '長州出島',
+  NULL,
+  33.989636,
+  130.898124,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495804,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字阿内',
+  '大字阿内',
+  '大字阿内',
+  NULL,
+  34.088652,
+  131.004323,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495805,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_吉見竜王',
+  '吉見竜王町',
+  '吉見竜王町',
+  NULL,
+  34.068596,
+  130.905784,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495806,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_吉見古宿',
+  '吉見古宿町',
+  '吉見古宿町',
+  NULL,
+  34.06284,
+  130.903147,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120495813,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の田本',
+  '山の田本町',
+  '山の田本町',
+  NULL,
+  33.98933,
+  130.928548,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534118,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の田西',
+  '山の田西町',
+  '山の田西町',
+  NULL,
+  33.988234,
+  130.923345,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534119,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の田中央',
+  '山の田中央町',
+  '山の田中央町',
+  NULL,
+  33.987575,
+  130.926673,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534120,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の田北',
+  '山の田北町',
+  '山の田北町',
+  NULL,
+  33.991697,
+  130.932559,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534121,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山の口',
+  '山の口町',
+  '山の口町',
+  NULL,
+  33.969731,
+  130.936256,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534122,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_山手',
+  '山手町',
+  '山手町',
+  NULL,
+  33.959061,
+  130.925333,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534123,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_元',
+  '元町',
+  '元町',
+  NULL,
+  33.965877,
+  130.924646,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534136,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_名池',
+  '名池町',
+  '名池町',
+  NULL,
+  33.958222,
+  130.937796,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534137,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_椋野上',
+  '椋野上町',
+  '椋野上町',
+  NULL,
+  33.975673,
+  130.953599,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534141,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_向山',
+  '向山町',
+  '向山町',
+  NULL,
+  33.967099,
+  130.926199,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534142,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_みもすそ川',
+  'みもすそ川町',
+  'みもすそ川町',
+  NULL,
+  33.968491,
+  130.956992,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534145,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_三河',
+  '三河町',
+  '三河町',
+  NULL,
+  33.987193,
+  130.942195,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534146,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_前勝谷',
+  '前勝谷町',
+  '前勝谷町',
+  NULL,
+  34.00649,
+  130.964929,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534165,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字矢玉',
+  '豊北町大字矢玉',
+  '豊北町大字矢玉',
+  NULL,
+  34.274918,
+  130.888522,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534173,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字角島',
+  '豊北町大字角島',
+  '豊北町大字角島',
+  NULL,
+  34.354968,
+  130.859718,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534174,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字田耕',
+  '豊北町大字田耕',
+  '豊北町大字田耕',
+  NULL,
+  34.269528,
+  130.988175,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534175,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字滝部',
+  '豊北町大字滝部',
+  '豊北町大字滝部',
+  NULL,
+  34.295853,
+  130.946241,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534176,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字北宇賀',
+  '豊北町大字北宇賀',
+  '豊北町大字北宇賀',
+  NULL,
+  34.243118,
+  130.951938,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534177,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字神田上',
+  '豊北町大字神田上',
+  '豊北町大字神田上',
+  NULL,
+  34.281659,
+  130.900956,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534178,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字神田',
+  '豊北町大字神田',
+  '豊北町大字神田',
+  NULL,
+  34.328149,
+  130.901143,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534179,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字粟野',
+  '豊北町大字粟野',
+  '豊北町大字粟野',
+  NULL,
+  34.330068,
+  130.986765,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534180,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊北町大字阿川',
+  '豊北町大字阿川',
+  '豊北町大字阿川',
+  NULL,
+  34.32949,
+  130.929704,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534181,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_藤附',
+  '藤附町',
+  '藤附町',
+  NULL,
+  33.965495,
+  130.921521,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534187,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_藤ケ谷',
+  '藤ケ谷町',
+  '藤ケ谷町',
+  NULL,
+  33.98127,
+  130.955738,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534188,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_彦島緑',
+  '彦島緑町',
+  '彦島緑町',
+  NULL,
+  33.932047,
+  130.908657,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534193,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_彦島弟子待東',
+  '彦島弟子待東町',
+  '彦島弟子待東町',
+  NULL,
+  33.928566,
+  130.924307,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534209,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_彦島竹ノ子島',
+  '彦島竹ノ子島町',
+  '彦島竹ノ子島町',
+  NULL,
+  33.951386,
+  130.877496,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534215,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_彦島桜ケ丘',
+  '彦島桜ケ丘町',
+  '彦島桜ケ丘町',
+  NULL,
+  33.921496,
+  130.922829,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534233,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_彦島老の山公園',
+  '彦島老の山公園',
+  '彦島老の山公園',
+  NULL,
+  33.947957,
+  130.903536,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534237,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_彦島海士郷',
+  '彦島海士郷町',
+  '彦島海士郷町',
+  NULL,
+  33.95157,
+  130.914974,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534247,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東向山',
+  '東向山町',
+  '東向山町',
+  NULL,
+  33.966114,
+  130.927644,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534248,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東勝谷',
+  '東勝谷',
+  '東勝谷',
+  NULL,
+  34.001784,
+  130.97307,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534249,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東観音',
+  '東観音町',
+  '東観音町',
+  NULL,
+  34.047152,
+  131.008571,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534250,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東神田',
+  '東神田町',
+  '東神田町',
+  NULL,
+  33.961011,
+  130.926601,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534251,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_稗田南',
+  '稗田南町',
+  '稗田南町',
+  NULL,
+  33.991449,
+  130.929655,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534252,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_稗田西',
+  '稗田西町',
+  '稗田西町',
+  NULL,
+  33.999156,
+  130.927424,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534253,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_稗田中',
+  '稗田中町',
+  '稗田中町',
+  NULL,
+  33.995481,
+  130.927827,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534254,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_稗田',
+  '稗田町',
+  '稗田町',
+  NULL,
+  33.994535,
+  130.931114,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534255,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_稗田北',
+  '稗田北町',
+  '稗田北町',
+  NULL,
+  33.996452,
+  130.931754,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534256,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_岬之',
+  '岬之町',
+  '岬之町',
+  NULL,
+  33.951571,
+  130.935162,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534257,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_西観音',
+  '西観音町',
+  '西観音町',
+  NULL,
+  34.04736,
+  131.003055,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534263,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_西神田',
+  '西神田町',
+  '西神田町',
+  NULL,
+  33.960129,
+  130.923608,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534264,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_南部',
+  '南部町',
+  '南部町',
+  NULL,
+  33.955763,
+  130.940383,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534266,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中之',
+  '中之町',
+  '中之町',
+  NULL,
+  33.958166,
+  130.945306,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534267,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字矢田',
+  '豊田町大字矢田',
+  '豊田町大字矢田',
+  NULL,
+  34.202244,
+  131.070797,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534273,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字八道',
+  '豊田町大字八道',
+  '豊田町大字八道',
+  NULL,
+  34.218344,
+  131.059997,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534274,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字杢路子',
+  '豊田町大字杢路子',
+  '豊田町大字杢路子',
+  NULL,
+  34.216146,
+  131.001653,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534275,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字日野',
+  '豊田町大字日野',
+  '豊田町大字日野',
+  NULL,
+  34.174688,
+  131.081706,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534276,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字東長野',
+  '豊田町大字東長野',
+  '豊田町大字東長野',
+  NULL,
+  34.168274,
+  131.061996,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534277,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字萩原',
+  '豊田町大字萩原',
+  '豊田町大字萩原',
+  NULL,
+  34.159533,
+  131.083488,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534278,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字庭田',
+  '豊田町大字庭田',
+  '豊田町大字庭田',
+  NULL,
+  34.201046,
+  131.057897,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534279,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字西長野',
+  '豊田町大字西長野',
+  '豊田町大字西長野',
+  NULL,
+  34.171474,
+  131.055081,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534280,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字西',
+  '豊田町大字西市',
+  '豊田町大字西市',
+  NULL,
+  34.202335,
+  131.075424,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534281,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字楢原',
+  '豊田町大字楢原',
+  '豊田町大字楢原',
+  NULL,
+  34.21306,
+  131.089122,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534282,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字中',
+  '豊田町大字中村',
+  '豊田町大字中村',
+  NULL,
+  34.191704,
+  131.07184,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534283,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字殿敷',
+  '豊田町大字殿敷',
+  '豊田町大字殿敷',
+  NULL,
+  34.19371,
+  131.091911,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534284,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字殿居',
+  '豊田町大字殿居',
+  '豊田町大字殿居',
+  NULL,
+  34.266252,
+  131.029833,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534285,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字手洗',
+  '豊田町大字手洗',
+  '豊田町大字手洗',
+  NULL,
+  34.178894,
+  131.06687,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534286,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字高山',
+  '豊田町大字高山',
+  '豊田町大字高山',
+  NULL,
+  34.16947,
+  131.073104,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534287,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字鷹子',
+  '豊田町大字鷹子',
+  '豊田町大字鷹子',
+  NULL,
+  34.206037,
+  131.03923,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534288,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字地吉',
+  '豊田町大字地吉',
+  '豊田町大字地吉',
+  NULL,
+  34.25156,
+  131.118632,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534289,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字佐野',
+  '豊田町大字佐野',
+  '豊田町大字佐野',
+  NULL,
+  34.264336,
+  131.046997,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534290,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字金道',
+  '豊田町大字金道',
+  '豊田町大字金道',
+  NULL,
+  34.226804,
+  131.068506,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534291,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字城戸',
+  '豊田町大字城戸',
+  '豊田町大字城戸',
+  NULL,
+  34.156304,
+  131.065395,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534292,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字大河内',
+  '豊田町大字大河内',
+  '豊田町大字大河内',
+  NULL,
+  34.225927,
+  131.121628,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534293,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字江良',
+  '豊田町大字江良',
+  '豊田町大字江良',
+  NULL,
+  34.180025,
+  131.04404,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534294,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字宇内',
+  '豊田町大字宇内',
+  '豊田町大字宇内',
+  NULL,
+  34.239545,
+  131.076311,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534295,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字浮石',
+  '豊田町大字浮石',
+  '豊田町大字浮石',
+  NULL,
+  34.241202,
+  131.049311,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534296,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字今出',
+  '豊田町大字今出',
+  '豊田町大字今出',
+  NULL,
+  34.248732,
+  131.149384,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534297,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字稲光',
+  '豊田町大字稲光',
+  '豊田町大字稲光',
+  NULL,
+  34.182599,
+  131.083458,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534298,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字稲見',
+  '豊田町大字稲見',
+  '豊田町大字稲見',
+  NULL,
+  34.24648,
+  131.092779,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534299,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字一ノ俣',
+  '豊田町大字一ノ俣',
+  '豊田町大字一ノ俣',
+  NULL,
+  34.283486,
+  131.05762,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534300,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字荒木',
+  '豊田町大字荒木',
+  '豊田町大字荒木',
+  NULL,
+  34.254291,
+  131.047742,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534301,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊田町大字阿座上',
+  '豊田町大字阿座上',
+  '豊田町大字阿座上',
+  NULL,
+  34.193085,
+  131.056749,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534302,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町豊洋台新',
+  '豊浦町豊洋台新町',
+  '豊浦町豊洋台新町',
+  NULL,
+  34.118957,
+  130.910983,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534303,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字涌田後地',
+  '豊浦町大字涌田後地',
+  '豊浦町大字涌田後地',
+  NULL,
+  34.148394,
+  130.907792,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534307,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字吉永',
+  '豊浦町大字吉永',
+  '豊浦町大字吉永',
+  NULL,
+  34.129701,
+  130.925863,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534308,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字室津下',
+  '豊浦町大字室津下',
+  '豊浦町大字室津下',
+  NULL,
+  34.13243,
+  130.881898,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534309,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字室津上',
+  '豊浦町大字室津上',
+  '豊浦町大字室津上',
+  NULL,
+  34.117468,
+  130.880802,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534310,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字小串',
+  '豊浦町大字小串',
+  '豊浦町大字小串',
+  NULL,
+  34.176768,
+  130.937634,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534311,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字黒井',
+  '豊浦町大字黒井',
+  '豊浦町大字黒井',
+  NULL,
+  34.119259,
+  130.920681,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534312,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字川棚',
+  '豊浦町大字川棚',
+  '豊浦町大字川棚',
+  NULL,
+  34.16809,
+  130.957235,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534313,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字宇賀',
+  '豊浦町大字宇賀',
+  '豊浦町大字宇賀',
+  NULL,
+  34.217779,
+  130.938231,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534314,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_豊浦町大字厚母郷',
+  '豊浦町大字厚母郷',
+  '豊浦町大字厚母郷',
+  NULL,
+  34.110442,
+  130.903197,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534315,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府八幡',
+  '長府八幡町',
+  '長府八幡町',
+  NULL,
+  34.009341,
+  130.993877,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534321,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府向田',
+  '長府向田町',
+  '長府向田町',
+  NULL,
+  33.981857,
+  130.975537,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534322,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府宮の内',
+  '長府宮の内町',
+  '長府宮の内町',
+  NULL,
+  33.999635,
+  130.98573,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534323,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府宮崎',
+  '長府宮崎町',
+  '長府宮崎町',
+  NULL,
+  33.991375,
+  130.993487,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534324,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府南之',
+  '長府南之町',
+  '長府南之町',
+  NULL,
+  33.997144,
+  130.989286,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534325,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府港',
+  '長府港町',
+  '長府港町',
+  NULL,
+  34.006675,
+  130.997714,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534326,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府三島',
+  '長府三島町',
+  '長府三島町',
+  NULL,
+  34.005674,
+  130.985816,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534327,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府満珠',
+  '長府満珠町',
+  '長府満珠町',
+  NULL,
+  34.013787,
+  130.988386,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534328,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府満珠新',
+  '長府満珠新町',
+  '長府満珠新町',
+  NULL,
+  34.012783,
+  130.98418,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534329,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府松原',
+  '長府松原町',
+  '長府松原町',
+  NULL,
+  33.993247,
+  130.990134,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534330,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府松小田南',
+  '長府松小田南町',
+  '長府松小田南町',
+  NULL,
+  34.016016,
+  130.996408,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534331,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府松小田本',
+  '長府松小田本町',
+  '長府松小田本町',
+  NULL,
+  34.017585,
+  130.999499,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534332,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府松小田東',
+  '長府松小田東町',
+  '長府松小田東町',
+  NULL,
+  34.019205,
+  131.00314,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534333,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府松小田西',
+  '長府松小田西町',
+  '長府松小田西町',
+  NULL,
+  34.01749,
+  130.988973,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534334,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府松小田中',
+  '長府松小田中町',
+  '長府松小田中町',
+  NULL,
+  34.019068,
+  130.99433,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534335,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府松小田北',
+  '長府松小田北町',
+  '長府松小田北町',
+  NULL,
+  34.022134,
+  130.997916,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534336,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府前八幡',
+  '長府前八幡町',
+  '長府前八幡町',
+  NULL,
+  34.007643,
+  130.993414,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534337,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府豊城',
+  '長府豊城町',
+  '長府豊城町',
+  NULL,
+  34.01443,
+  130.989947,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534338,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府古江小路',
+  '長府古江小路町',
+  '長府古江小路町',
+  NULL,
+  33.99825,
+  130.985662,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534339,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府日の出',
+  '長府日の出町',
+  '長府日の出町',
+  NULL,
+  34.015127,
+  130.993785,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534340,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府東侍',
+  '長府東侍町',
+  '長府東侍町',
+  NULL,
+  33.994879,
+  130.992249,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534341,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府浜浦南',
+  '長府浜浦南町',
+  '長府浜浦南町',
+  NULL,
+  33.980383,
+  130.977591,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534342,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府浜浦西',
+  '長府浜浦西町',
+  '長府浜浦西町',
+  NULL,
+  33.986509,
+  130.978416,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534343,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府浜浦',
+  '長府浜浦町',
+  '長府浜浦町',
+  NULL,
+  33.983308,
+  130.979879,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534344,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府羽衣南',
+  '長府羽衣南町',
+  '長府羽衣南町',
+  NULL,
+  33.989244,
+  130.985296,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534345,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府羽衣',
+  '長府羽衣町',
+  '長府羽衣町',
+  NULL,
+  33.989683,
+  130.987105,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534346,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府野久留米',
+  '長府野久留米町',
+  '長府野久留米町',
+  NULL,
+  33.990859,
+  130.979734,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534347,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府中六波',
+  '長府中六波町',
+  '長府中六波町',
+  NULL,
+  34.012739,
+  130.992212,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534348,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府中浜',
+  '長府中浜町',
+  '長府中浜町',
+  NULL,
+  33.998228,
+  130.989329,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534349,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府中之',
+  '長府中之町',
+  '長府中之町',
+  NULL,
+  34.000363,
+  130.990061,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534350,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府中土居本',
+  '長府中土居本町',
+  '長府中土居本町',
+  NULL,
+  34.006158,
+  130.989871,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534351,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府中土居北',
+  '長府中土居北町',
+  '長府中土居北町',
+  NULL,
+  34.007614,
+  130.987849,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534352,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府中尾',
+  '長府中尾町',
+  '長府中尾町',
+  NULL,
+  34.009277,
+  130.986403,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534353,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府豊浦',
+  '長府豊浦町',
+  '長府豊浦町',
+  NULL,
+  34.010314,
+  130.989083,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534354,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府土居の内',
+  '長府土居の内町',
+  '長府土居の内町',
+  NULL,
+  33.999194,
+  130.989662,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534355,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府珠の浦',
+  '長府珠の浦町',
+  '長府珠の浦町',
+  NULL,
+  34.007502,
+  130.978398,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534356,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府高場',
+  '長府高場町',
+  '長府高場町',
+  NULL,
+  33.978772,
+  130.976913,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534357,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府外浦',
+  '長府外浦町',
+  '長府外浦町',
+  NULL,
+  33.987832,
+  130.991804,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534358,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府惣社',
+  '長府惣社町',
+  '長府惣社町',
+  NULL,
+  33.997194,
+  130.985528,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534359,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府新松原',
+  '長府新松原町',
+  '長府新松原町',
+  NULL,
+  33.992316,
+  130.988805,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534360,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府新四王司',
+  '長府新四王司町',
+  '長府新四王司町',
+  NULL,
+  34.018854,
+  130.983673,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534361,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府四王司',
+  '長府四王司町',
+  '長府四王司町',
+  NULL,
+  34.018754,
+  130.985998,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534362,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府紺屋',
+  '長府紺屋町',
+  '長府紺屋町',
+  NULL,
+  34.001666,
+  130.986024,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534366,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府古城',
+  '長府古城町',
+  '長府古城町',
+  NULL,
+  34.011045,
+  130.992795,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534367,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府黒門南',
+  '長府黒門南町',
+  '長府黒門南町',
+  NULL,
+  33.986133,
+  130.986815,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534368,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府黒門東',
+  '長府黒門東町',
+  '長府黒門東町',
+  NULL,
+  33.989998,
+  130.989613,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534369,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府黒門',
+  '長府黒門町',
+  '長府黒門町',
+  NULL,
+  33.984613,
+  130.9841,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534370,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府金屋浜',
+  '長府金屋浜町',
+  '長府金屋浜町',
+  NULL,
+  34.001945,
+  130.99128,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534375,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府金屋',
+  '長府金屋町',
+  '長府金屋町',
+  NULL,
+  34.002332,
+  130.989994,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534376,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府逢坂',
+  '長府逢坂町',
+  '長府逢坂町',
+  NULL,
+  33.998544,
+  130.979805,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534377,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府扇',
+  '長府扇町',
+  '長府扇町',
+  NULL,
+  34.018592,
+  131.013276,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534378,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府江下',
+  '長府江下町',
+  '長府江下町',
+  NULL,
+  34.012376,
+  130.996005,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534379,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長府印内',
+  '長府印内町',
+  '長府印内町',
+  NULL,
+  34.004839,
+  130.992081,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534380,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中央_quarter',
+  '中央町',
+  '中央町',
+  NULL,
+  33.961432,
+  130.928602,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534385,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_千鳥浜',
+  '千鳥浜町',
+  '千鳥浜町',
+  NULL,
+  34.036162,
+  131.02016,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534386,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_千鳥ケ丘',
+  '千鳥ケ丘町',
+  '千鳥ケ丘町',
+  NULL,
+  34.032695,
+  131.006576,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534387,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_壇之浦',
+  '壇之浦町',
+  '壇之浦町',
+  NULL,
+  33.962798,
+  130.953519,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534388,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_田中',
+  '田中町',
+  '田中町',
+  NULL,
+  33.959754,
+  130.941045,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534389,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_宝',
+  '宝町',
+  '宝町',
+  NULL,
+  33.982176,
+  130.939673,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534392,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大平',
+  '大平町',
+  '大平町',
+  NULL,
+  33.963947,
+  130.918878,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534393,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_汐入',
+  '汐入町',
+  '汐入町',
+  NULL,
+  33.973522,
+  130.916926,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534414,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_笹山',
+  '笹山町',
+  '笹山町',
+  NULL,
+  33.953424,
+  130.927526,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534415,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_桜山',
+  '桜山町',
+  '桜山町',
+  NULL,
+  33.960753,
+  130.922,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534416,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_栄_quarter',
   '栄町',
   '栄町',
-  '{"en":"Sakaecho"}'::jsonb,
-  35.7498713,
-  139.4704685,
   NULL,
-  'tokyo',
+  33.965799,
+  130.928728,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13140175592,
+  9120534417,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_honcho_quarter_13140202908',
-  '本町',
-  '本町',
-  '{"en":"Honcho"}'::jsonb,
-  35.7569349,
-  139.4686505,
+  'yamaguchi_unknown_幸_quarter',
+  '幸町',
+  '幸町',
   NULL,
-  'tokyo',
+  33.961889,
+  130.94355,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13140202908,
+  9120534418,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_aobacho',
-  '青葉町',
-  '青葉町',
-  '{"en":"Aobacho"}'::jsonb,
-  35.7646286,
-  139.4939256,
+  'yamaguchi_unknown_金比羅',
+  '金比羅町',
+  '金比羅町',
   NULL,
-  'tokyo',
+  33.968884,
+  130.916361,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13141914060,
+  9120534419,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kumegawacho',
-  '久米川町',
-  '久米川町',
-  '{"en":"Kumegawacho"}'::jsonb,
-  35.7669458,
-  139.4761961,
+  'yamaguchi_unknown_工領開作',
+  '工領開作',
+  '工領開作',
   NULL,
-  'tokyo',
+  34.041596,
+  131.064788,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13141914234,
+  9120534434,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_akitsucho',
-  '秋津町',
-  '秋津町',
-  '{"en":"Akitsucho"}'::jsonb,
-  35.7761229,
-  139.4863751,
+  'yamaguchi_unknown_熊野西',
+  '熊野西町',
+  '熊野西町',
   NULL,
-  'tokyo',
+  33.995416,
+  130.942971,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13146994065,
+  9120534435,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_noshio',
-  '野塩',
-  '野塩',
-  '{"en":"Noshio"}'::jsonb,
-  35.7779861,
-  139.5037573,
+  'yamaguchi_unknown_清末本',
+  '清末本町',
+  '清末本町',
   NULL,
-  'tokyo',
+  34.059595,
+  131.022475,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13159022512,
+  9120534444,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_umezono',
-  '梅園',
-  '梅園',
-  '{"en":"Umezono"}'::jsonb,
-  35.7726234,
-  139.5053996,
+  'yamaguchi_unknown_清末大門',
+  '清末大門',
+  '清末大門',
   NULL,
-  'tokyo',
+  34.061714,
+  131.015663,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13159022715,
+  9120534457,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_takeoka',
-  '竹丘',
-  '竹丘',
-  '{"en":"Takeoka"}'::jsonb,
-  35.7665583,
-  139.5065592,
+  'yamaguchi_unknown_清末陣屋',
+  '清末陣屋',
+  '清末陣屋',
   NULL,
-  'tokyo',
+  34.066396,
+  131.021315,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13174620371,
+  9120534461,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_matsuyama',
-  '松山',
-  '松山',
-  '{"en":"Matsuyama"}'::jsonb,
-  35.7702957,
-  139.5154526,
+  'yamaguchi_unknown_菊川町大字吉賀',
+  '菊川町大字吉賀',
+  '菊川町大字吉賀',
   NULL,
-  'tokyo',
+  34.129854,
+  131.015007,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13174657490,
+  9120534472,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_motomachi_quarter',
+  'yamaguchi_unknown_菊川町大字樅ノ木',
+  '菊川町大字樅ノ木',
+  '菊川町大字樅ノ木',
+  NULL,
+  34.143677,
+  131.076441,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534473,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字道',
+  '菊川町大字道市',
+  '菊川町大字道市',
+  NULL,
+  34.133282,
+  131.076197,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534474,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字東中山',
+  '菊川町大字東中山',
+  '菊川町大字東中山',
+  NULL,
+  34.146178,
+  131.058509,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534475,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字日新',
+  '菊川町大字日新',
+  '菊川町大字日新',
+  NULL,
+  34.126773,
+  130.981489,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534476,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字西中山',
+  '菊川町大字西中山',
+  '菊川町大字西中山',
+  NULL,
+  34.15204,
+  131.03656,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534477,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字楢崎',
+  '菊川町大字楢崎',
+  '菊川町大字楢崎',
+  NULL,
+  34.137213,
+  130.995167,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534478,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字七見',
+  '菊川町大字七見',
+  '菊川町大字七見',
+  NULL,
+  34.109898,
+  131.006642,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534479,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字田部',
+  '菊川町大字田部',
+  '菊川町大字田部',
+  NULL,
+  34.108873,
+  131.038406,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534480,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字下保木',
+  '菊川町大字下保木',
+  '菊川町大字下保木',
+  NULL,
+  34.116826,
+  131.060799,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534481,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字下岡枝',
+  '菊川町大字下岡枝',
+  '菊川町大字下岡枝',
+  NULL,
+  34.133573,
+  131.036055,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534482,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字下大野',
+  '菊川町大字下大野',
+  '菊川町大字下大野',
+  NULL,
+  34.097025,
+  131.051483,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534483,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字久野',
+  '菊川町大字久野',
+  '菊川町大字久野',
+  NULL,
+  34.149458,
+  130.967415,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534484,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字轡井',
+  '菊川町大字轡井',
+  '菊川町大字轡井',
+  NULL,
+  34.118687,
+  131.081307,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534485,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字貴飯',
+  '菊川町大字貴飯',
+  '菊川町大字貴飯',
+  NULL,
+  34.160489,
+  130.998257,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534486,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字上保木',
+  '菊川町大字上保木',
+  '菊川町大字上保木',
+  NULL,
+  34.132077,
+  131.047478,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534487,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字上田部',
+  '菊川町大字上田部',
+  '菊川町大字上田部',
+  NULL,
+  34.102438,
+  131.023622,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534488,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字上岡枝',
+  '菊川町大字上岡枝',
+  '菊川町大字上岡枝',
+  NULL,
+  34.158269,
+  131.020741,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534489,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_菊川町大字上大野',
+  '菊川町大字上大野',
+  '菊川町大字上大野',
+  NULL,
+  34.111851,
+  131.05039,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534490,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_観音崎',
+  '観音崎町',
+  '観音崎町',
+  NULL,
+  33.952984,
+  130.938233,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534491,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_川中本',
+  '川中本町',
+  '川中本町',
+  NULL,
+  34.000331,
+  130.930689,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534503,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_唐戸',
+  '唐戸町',
+  '唐戸町',
+  NULL,
+  33.957118,
+  130.943434,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534504,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_亀浜',
+  '亀浜町',
+  '亀浜町',
+  NULL,
+  34.032161,
+  131.016094,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534505,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_形山みどり',
+  '形山みどり町',
+  '形山みどり町',
+  NULL,
+  34.01589,
+  130.955159,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534514,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_形山',
+  '形山町',
+  '形山町',
+  NULL,
+  34.016068,
+  130.958643,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534515,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_春日',
+  '春日町',
+  '春日町',
+  NULL,
+  33.959495,
+  130.929237,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534520,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_卸新',
+  '卸新町',
+  '卸新町',
+  NULL,
+  33.98549,
+  130.949681,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534525,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月宮の',
+  '小月宮の町',
+  '小月宮の町',
+  NULL,
+  34.073291,
+  131.039566,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534526,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月南',
+  '小月南町',
+  '小月南町',
+  NULL,
+  34.060246,
+  131.037634,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534527,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月西の台',
+  '小月西の台',
+  '小月西の台',
+  NULL,
+  34.069285,
+  131.043223,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534530,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月高雄',
+  '小月高雄町',
+  '小月高雄町',
+  NULL,
+  34.073858,
+  131.043282,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534534,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月幸',
+  '小月幸町',
+  '小月幸町',
+  NULL,
+  34.077841,
+  131.034953,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534538,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月公園',
+  '小月公園町',
+  '小月公園町',
+  NULL,
+  34.072466,
+  131.031601,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534541,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月京泊',
+  '小月京泊',
+  '小月京泊',
+  NULL,
+  34.070465,
+  131.045542,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534542,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小月市原',
+  '小月市原町',
+  '小月市原町',
+  NULL,
+  34.076297,
+  131.032053,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534544,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字吉母',
+  '大字吉母',
+  '大字吉母',
+  NULL,
+  34.100339,
+  130.881069,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534545,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字吉見下',
+  '大字吉見下',
+  '大字吉見下',
+  NULL,
+  34.066345,
+  130.921249,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534546,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字吉見上',
+  '大字吉見上',
+  '大字吉見上',
+  NULL,
+  34.088929,
+  130.920117,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534547,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字吉田地方',
+  '大字吉田地方',
+  '大字吉田地方',
+  NULL,
+  34.092837,
+  131.088183,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534548,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字吉田',
+  '大字吉田',
+  '大字吉田',
+  NULL,
+  34.088898,
+  131.063247,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534549,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字横野',
+  '大字横野',
+  '大字横野',
+  NULL,
+  34.03598,
+  130.916415,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534550,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字山田_quarter',
+  '大字山田',
+  '大字山田',
+  NULL,
+  34.059711,
+  130.993167,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534551,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字安岡',
+  '大字安岡',
+  '大字安岡',
+  NULL,
+  34.035868,
+  130.930696,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534552,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字六連島',
+  '大字六連島',
+  '大字六連島',
+  NULL,
+  33.975601,
+  130.863248,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534553,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字椋野',
+  '大字椋野',
+  '大字椋野',
+  NULL,
+  33.974734,
+  130.957802,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534554,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字松屋',
+  '大字松屋',
+  '大字松屋',
+  NULL,
+  34.059119,
+  131.071199,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534555,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字松小田',
+  '大字松小田',
+  '大字松小田',
+  NULL,
+  34.024734,
+  130.991319,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534556,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字前田',
+  '大字前田',
+  '大字前田',
+  NULL,
+  33.976876,
+  130.971041,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534557,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字藤ケ谷',
+  '大字藤ケ谷',
+  '大字藤ケ谷',
+  NULL,
+  33.982615,
+  130.959557,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534558,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字福江',
+  '大字福江',
+  '大字福江',
+  NULL,
+  34.048143,
+  130.924378,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534559,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字彦島',
+  '大字彦島',
+  '大字彦島',
+  NULL,
+  33.933414,
+  130.929827,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534560,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字延行',
+  '大字延行',
+  '大字延行',
+  NULL,
+  34.013435,
+  130.939793,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534561,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字永田郷',
+  '大字永田郷',
+  '大字永田郷',
+  NULL,
+  34.088144,
+  130.896624,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534562,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字豊浦',
+  '大字豊浦村',
+  '大字豊浦村',
+  NULL,
+  33.995586,
+  130.977073,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534563,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字冨任',
+  '大字冨任',
+  '大字冨任',
+  NULL,
+  34.019385,
+  130.931107,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534564,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字田倉',
+  '大字田倉',
+  '大字田倉',
+  NULL,
+  34.021546,
+  130.971838,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534565,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字高畑',
+  '大字高畑',
+  '大字高畑',
+  NULL,
+  33.98653,
+  130.968113,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534566,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字勝谷',
+  '大字勝谷',
+  '大字勝谷',
+  NULL,
+  34.016531,
+  130.979955,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534567,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字才川',
+  '大字才川',
+  '大字才川',
+  NULL,
+  34.030964,
+  130.997334,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534568,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字楠乃',
+  '大字楠乃',
+  '大字楠乃',
+  NULL,
+  33.992229,
+  130.961852,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534569,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字清末',
+  '大字清末',
+  '大字清末',
+  NULL,
+  34.073196,
+  131.018278,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534570,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字蒲生野',
+  '大字蒲生野',
+  '大字蒲生野',
+  NULL,
+  34.0427,
+  130.941012,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534571,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字形山',
+  '大字形山',
+  '大字形山',
+  NULL,
+  34.019507,
+  130.960422,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534572,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字員光',
+  '大字員光',
+  '大字員光',
+  NULL,
+  34.043077,
+  130.992189,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534573,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字小野_quarter',
+  '大字小野',
+  '大字小野',
+  NULL,
+  34.044049,
+  130.956432,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534574,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字小月',
+  '大字小月町',
+  '大字小月町',
+  NULL,
+  34.087323,
+  131.035756,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534575,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字宇部',
+  '大字宇部',
+  '大字宇部',
+  NULL,
+  34.04041,
+  131.005774,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534576,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字内日下',
+  '大字内日下',
+  '大字内日下',
+  NULL,
+  34.10275,
+  130.967504,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534577,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字内日上',
+  '大字内日上',
+  '大字内日上',
+  NULL,
+  34.08919,
+  130.948705,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534578,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字宇津井',
+  '大字宇津井',
+  '大字宇津井',
+  NULL,
+  34.070321,
+  131.0686,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534579,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字植田',
+  '大字植田',
+  '大字植田',
+  NULL,
+  34.103908,
+  130.981743,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534580,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字井田',
+  '大字井田',
+  '大字井田',
+  NULL,
+  34.056287,
+  130.971907,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534581,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字石原',
+  '大字石原',
+  '大字石原',
+  NULL,
+  34.020677,
+  130.952103,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534582,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字伊倉',
+  '大字伊倉',
+  '大字伊倉',
+  NULL,
+  34.001163,
+  130.94103,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534583,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字有冨',
+  '大字有冨',
+  '大字有冨',
+  NULL,
+  34.018245,
+  130.945502,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534584,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字綾羅木',
+  '大字綾羅木',
+  '大字綾羅木',
+  NULL,
+  34.013146,
+  130.930164,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534585,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字秋根',
+  '大字秋根',
+  '大字秋根',
+  NULL,
+  34.011666,
+  130.963179,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534586,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字垢田',
+  '大字垢田',
+  '大字垢田',
+  NULL,
+  33.996817,
+  130.91325,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534587,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_王司南',
+  '王司南町',
+  '王司南町',
+  NULL,
+  34.032505,
+  131.012571,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534588,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_入江',
+  '入江町',
+  '入江町',
+  NULL,
+  33.95403,
+  130.93523,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534622,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_一の宮学園',
+  '一の宮学園町',
+  '一の宮学園町',
+  NULL,
+  33.999491,
+  130.947946,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534636,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_一の宮卸本',
+  '一の宮卸本町',
+  '一の宮卸本町',
+  NULL,
+  33.989077,
+  130.94863,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534637,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_石神',
+  '石神町',
+  '石神町',
+  NULL,
+  33.97386,
+  130.938465,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534638,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_伊倉本',
+  '伊倉本町',
+  '伊倉本町',
+  NULL,
+  34.00342,
+  130.93568,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534639,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_伊倉東',
+  '伊倉東町',
+  '伊倉東町',
+  NULL,
+  34.005495,
+  130.943731,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534640,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_あるかぽーと',
+  'あるかぽーと',
+  'あるかぽーと',
+  NULL,
+  33.95349,
+  130.941213,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534651,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_阿弥陀寺',
+  '阿弥陀寺町',
+  '阿弥陀寺町',
+  NULL,
+  33.959369,
+  130.948383,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534668,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_秋根東',
+  '秋根東町',
+  '秋根東町',
+  NULL,
+  34.010726,
+  130.954617,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534673,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_秋根新',
+  '秋根新町',
+  '秋根新町',
+  NULL,
+  34.011829,
+  130.948328,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534676,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_秋根北',
+  '秋根北町',
+  '秋根北町',
+  NULL,
+  34.01412,
+  130.95219,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534677,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_赤間',
+  '赤間町',
+  '赤間町',
+  NULL,
+  33.959339,
+  130.943753,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534681,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_赤池',
+  '赤池町',
+  '赤池町',
+  NULL,
+  34.059673,
+  131.011382,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9120534684,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_六呂師',
+  '六呂師',
+  '六呂師',
+  NULL,
+  34.102397,
+  132.163904,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353751,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_行正',
+  '行正',
+  '行正',
+  NULL,
+  34.148771,
+  132.108972,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353755,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_由宇町由宇崎',
+  '由宇町由宇崎',
+  '由宇町由宇崎',
+  NULL,
+  34.036742,
+  132.216357,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353756,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_由宇町神東',
+  '由宇町神東',
+  '由宇町神東',
+  NULL,
+  34.002798,
+  132.203967,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353777,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_由宇',
+  '由宇町',
+  '由宇町',
+  NULL,
+  34.035921,
+  132.176929,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353785,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_持国',
+  '持国',
+  '持国',
+  NULL,
+  34.167764,
+  132.138725,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353799,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町百合谷',
+  '美和町百合谷',
+  '美和町百合谷',
+  NULL,
+  34.230203,
+  132.145191,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353805,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町日宛',
+  '美和町日宛',
+  '美和町日宛',
+  NULL,
+  34.20884,
+  132.118468,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353806,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町西畑',
+  '美和町西畑',
+  '美和町西畑',
+  NULL,
+  34.211612,
+  132.066131,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353807,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町滑',
+  '美和町滑',
+  '美和町滑',
+  NULL,
+  34.235242,
+  132.123134,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353808,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町長谷',
+  '美和町長谷',
+  '美和町長谷',
+  NULL,
+  34.212478,
+  132.144388,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353809,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町中垣内',
+  '美和町中垣内',
+  '美和町中垣内',
+  NULL,
+  34.240746,
+  132.123916,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353810,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町田ノ口',
+  '美和町田ノ口',
+  '美和町田ノ口',
+  NULL,
+  34.242661,
+  132.103028,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353811,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町瀬戸ノ内',
+  '美和町瀬戸ノ内',
+  '美和町瀬戸ノ内',
+  NULL,
+  34.249995,
+  132.115304,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353812,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町下畑',
+  '美和町下畑',
+  '美和町下畑',
+  NULL,
+  34.234772,
+  132.057829,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353813,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町渋前',
+  '美和町渋前',
+  '美和町渋前',
+  NULL,
+  34.218583,
+  132.093811,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353814,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町佐坂',
+  '美和町佐坂',
+  '美和町佐坂',
+  NULL,
+  34.228626,
+  132.113425,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353815,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町黒沢',
+  '美和町黒沢',
+  '美和町黒沢',
+  NULL,
+  34.240267,
+  132.128947,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128353816,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_和田',
+  '和田町',
+  '和田町',
+  NULL,
+  33.983793,
+  131.927408,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383453,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積松原',
+  '室積松原',
+  '室積松原',
+  NULL,
+  33.936261,
+  131.968803,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383454,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積正木',
+  '室積正木',
+  '室積正木',
+  NULL,
+  33.936857,
+  131.971242,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383455,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積東ノ庄',
+  '室積東ノ庄',
+  '室積東ノ庄',
+  NULL,
+  33.930261,
+  131.981661,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383456,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積西ノ庄',
+  '室積西ノ庄',
+  '室積西ノ庄',
+  NULL,
+  33.936783,
+  131.976231,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383457,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積中央',
+  '室積中央町',
+  '室積中央町',
+  NULL,
+  33.934142,
+  131.972337,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383458,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積神田',
+  '室積神田',
+  '室積神田',
+  NULL,
+  33.931978,
+  131.976964,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383459,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積沖田',
+  '室積沖田',
+  '室積沖田',
+  NULL,
+  33.933649,
+  131.975636,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383462,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積大',
+  '室積大町',
+  '室積大町',
+  NULL,
+  33.939206,
+  131.970662,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383463,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_室積市延',
+  '室積市延',
+  '室積市延',
+  NULL,
+  33.934514,
+  131.979073,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383464,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_宮ノ下',
+  '宮ノ下町',
+  '宮ノ下町',
+  NULL,
+  33.981841,
+  131.930209,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383473,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_丸山',
+  '丸山町',
+  '丸山町',
+  NULL,
+  33.988351,
+  131.925073,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383491,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_光ケ丘',
+  '光ケ丘',
+  '光ケ丘',
+  NULL,
+  33.97974,
+  131.921803,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383492,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中',
+  '中村町',
+  '中村町',
+  NULL,
+  33.977414,
+  131.918478,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383502,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_宝_quarter',
+  '宝町',
+  '宝町',
+  NULL,
+  33.987412,
+  131.928297,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128383512,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町北中山',
+  '美和町北中山',
+  '美和町北中山',
+  NULL,
+  34.296122,
+  132.099857,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388017,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町岸根',
+  '美和町岸根',
+  '美和町岸根',
+  NULL,
+  34.247914,
+  132.134554,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388018,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町上駄床',
+  '美和町上駄床',
+  '美和町上駄床',
+  NULL,
+  34.264207,
+  132.112668,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388019,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町釜ヶ原',
+  '美和町釜ヶ原',
+  '美和町釜ヶ原',
+  NULL,
+  34.294384,
+  132.122103,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388020,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町大根川',
+  '美和町大根川',
+  '美和町大根川',
+  NULL,
+  34.229029,
+  132.127614,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388021,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町生見',
+  '美和町生見',
+  '美和町生見',
+  NULL,
+  34.247898,
+  132.086368,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388022,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町秋掛',
+  '美和町秋掛',
+  '美和町秋掛',
+  NULL,
+  34.321894,
+  132.084251,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388023,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和町阿賀',
+  '美和町阿賀',
+  '美和町阿賀',
+  NULL,
+  34.2893,
+  132.068508,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388024,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_御庄',
+  '御庄',
+  '御庄',
+  NULL,
+  34.159892,
+  132.155697,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388040,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美川町根笠',
+  '美川町根笠',
+  '美川町根笠',
+  NULL,
+  34.178858,
+  131.997547,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388041,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美川町小川',
+  '美川町小川',
+  '美川町小川',
+  NULL,
+  34.2422,
+  132.007372,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388042,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_本郷町本谷',
+  '本郷町本谷',
+  '本郷町本谷',
+  NULL,
+  34.328038,
+  132.044808,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388053,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_本郷町本郷',
+  '本郷町本郷',
+  '本郷町本郷',
+  NULL,
+  34.290528,
+  132.043276,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388054,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_本郷町波野',
+  '本郷町波野',
+  '本郷町波野',
+  NULL,
+  34.258759,
+  132.032052,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388055,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_本郷町西黒沢',
+  '本郷町西黒沢',
+  '本郷町西黒沢',
+  NULL,
+  34.320306,
+  132.016077,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388056,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_本郷町宇塚',
+  '本郷町宇塚',
+  '本郷町宇塚',
+  NULL,
+  34.304814,
+  132.023092,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388057,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_二鹿',
+  '二鹿',
+  '二鹿',
+  NULL,
+  34.158367,
+  132.044036,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388060,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_日の出',
+  '日の出町',
+  '日の出町',
+  NULL,
+  34.166803,
+  132.238598,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388072,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_土生',
+  '土生',
+  '土生',
+  NULL,
+  34.152525,
+  132.099399,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388073,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_柱野',
+  '柱野',
+  '柱野',
+  NULL,
+  34.131181,
+  132.150615,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388074,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_柱島',
+  '柱島',
+  '柱島',
+  NULL,
+  34.020553,
+  132.412355,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388075,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_錦町広瀬',
+  '錦町広瀬',
+  '錦町広瀬',
+  NULL,
+  34.274346,
+  131.92182,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388084,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_錦町須川',
+  '錦町須川',
+  '錦町須川',
+  NULL,
+  34.34438,
+  132.005457,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388085,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_錦町大野',
+  '錦町大野',
+  '錦町大野',
+  NULL,
+  34.311036,
+  131.932794,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388086,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_灘',
+  '灘町',
+  '灘町',
+  NULL,
+  34.128961,
+  132.206488,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388087,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_長野',
+  '長野',
+  '長野',
+  NULL,
+  34.056336,
+  132.194303,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388088,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_寺山',
+  '寺山',
+  '寺山',
+  NULL,
+  34.156191,
+  132.120481,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388092,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_通津',
+  '通津',
+  '通津',
+  NULL,
+  34.073696,
+  132.182036,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388093,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_近延',
+  '近延',
+  '近延',
+  NULL,
+  34.139661,
+  132.119879,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388094,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_田原',
+  '田原',
+  '田原',
+  NULL,
+  34.173211,
+  132.143347,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388095,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_多田',
+  '多田',
+  '多田',
+  NULL,
+  34.182306,
+  132.155499,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388103,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_関戸',
+  '関戸',
+  '関戸',
+  NULL,
+  34.18707,
+  132.178119,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388105,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町用田',
+  '周東町用田',
+  '周東町用田',
+  NULL,
+  34.068144,
+  132.059926,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388122,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町西長野',
+  '周東町西長野',
+  '周東町西長野',
+  NULL,
+  34.091099,
+  132.00167,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388123,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町中山',
+  '周東町中山',
+  '周東町中山',
+  NULL,
+  34.034722,
+  132.039206,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388124,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町田尻',
+  '周東町田尻',
+  '周東町田尻',
+  NULL,
+  34.034431,
+  132.070974,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388125,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町祖生',
+  '周東町祖生',
+  '周東町祖生',
+  NULL,
+  34.068265,
+  132.115627,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388126,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町差川',
+  '周東町差川',
+  '周東町差川',
+  NULL,
+  34.075877,
+  132.016284,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388127,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町川上',
+  '周東町川上',
+  '周東町川上',
+  NULL,
+  34.1168,
+  132.045342,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388128,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町上久原_quarter',
+  '周東町上久原',
+  '周東町上久原',
+  NULL,
+  34.071692,
+  132.071373,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388129,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_周東町明見谷',
+  '周東町明見谷',
+  '周東町明見谷',
+  NULL,
+  34.13417,
+  132.035921,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388130,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_守内',
+  '守内',
+  '守内',
+  NULL,
+  34.172086,
+  132.133193,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388131,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_叶木',
+  '叶木',
+  '叶木',
+  NULL,
+  34.100648,
+  132.138546,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388150,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小瀬',
+  '小瀬',
+  '小瀬',
+  NULL,
+  34.212512,
+  132.177558,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388158,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大谷',
+  '大谷',
+  '大谷',
+  NULL,
+  34.15641,
+  132.135364,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388159,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_阿品',
+  '阿品',
+  '阿品',
+  NULL,
+  34.190326,
+  132.136023,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388184,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_相ノ谷',
+  '相ノ谷',
+  '相ノ谷',
+  NULL,
+  34.130808,
+  132.064813,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388188,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_協和',
+  '協和町',
+  '協和町',
+  NULL,
+  33.984749,
+  131.92891,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388823,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字室積',
+  '大字室積村',
+  '大字室積村',
+  NULL,
+  33.930718,
+  131.992409,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388834,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字三輪',
+  '大字三輪',
+  '大字三輪',
+  NULL,
+  33.974776,
+  132.00269,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388835,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字光井',
+  '大字光井',
+  '大字光井',
+  NULL,
+  33.964789,
+  131.969663,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388836,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字三井',
+  '大字三井',
+  '大字三井',
+  NULL,
+  33.998071,
+  131.944115,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388837,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字束荷',
+  '大字束荷',
+  '大字束荷',
+  NULL,
+  34.011847,
+  132.009973,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388838,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字立野',
+  '大字立野',
+  '大字立野',
+  NULL,
+  33.999272,
+  131.974781,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388839,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字島田',
+  '大字島田',
+  '大字島田',
+  NULL,
+  33.97877,
+  131.963299,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388840,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字塩田',
+  '大字塩田',
+  '大字塩田',
+  NULL,
+  33.998239,
+  132.037231,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388841,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字小周防',
+  '大字小周防',
+  '大字小周防',
+  NULL,
+  34.020056,
+  131.981583,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388842,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字岩田立野',
+  '大字岩田立野',
+  '大字岩田立野',
+  NULL,
+  33.993447,
+  131.982729,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388843,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字岩田',
+  '大字岩田',
+  '大字岩田',
+  NULL,
+  33.982563,
+  131.988393,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388844,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字浅江',
+  '大字浅江',
+  '大字浅江',
+  NULL,
+  33.989029,
+  131.911032,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128388845,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_御山',
+  '御山町',
+  '御山町',
+  NULL,
+  34.067268,
+  131.799314,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128596771,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_臨海',
+  '臨海町',
+  '臨海町',
+  NULL,
+  34.057918,
+  131.744025,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128596776,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_呼坂本',
+  '呼坂本町',
+  '呼坂本町',
+  NULL,
+  34.050449,
+  131.967841,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128596779,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_有楽',
+  '有楽町',
+  '有楽町',
+  NULL,
+  34.052397,
+  131.802333,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128596780,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_丸山_quarter',
+  '丸山町',
+  '丸山町',
+  NULL,
+  34.076215,
+  131.750955,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128596798,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_花園',
+  '花園町',
+  '花園町',
+  NULL,
+  34.066983,
+  131.7755,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128596807,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_開出',
+  '開出',
+  '開出',
+  NULL,
+  34.056979,
+  131.553572,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128601004,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中泉',
+  '中泉町',
+  '中泉町',
+  NULL,
+  34.056044,
+  131.547263,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128601005,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_車塚',
+  '車塚町',
+  '車塚町',
+  NULL,
+  34.051505,
+  131.573441,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128601012,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_鋳物師',
+  '鋳物師町',
+  '鋳物師町',
+  NULL,
+  34.051393,
+  131.57675,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128601014,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中央_quarter_9128601015',
+  '中央町',
+  '中央町',
+  NULL,
+  34.050803,
+  131.570154,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128601015,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_渚',
+  '渚町',
+  '渚町',
+  NULL,
+  34.057656,
+  131.785298,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608520,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中畷',
+  '中畷町',
+  '中畷町',
+  NULL,
+  34.071214,
+  131.728174,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608521,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_清光台',
+  '清光台町',
+  '清光台町',
+  NULL,
+  34.031427,
+  131.950967,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608529,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新宮',
+  '新宮町',
+  '新宮町',
+  NULL,
+  34.040622,
+  131.812416,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608542,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_鐘楼',
+  '鐘楼町',
+  '鐘楼町',
+  NULL,
+  34.060606,
+  131.808714,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608545,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_椎木',
+  '椎木町',
+  '椎木町',
+  NULL,
+  34.066507,
+  131.781345,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608546,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_河内',
+  '河内町',
+  '河内町',
+  NULL,
+  34.078264,
+  131.757005,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608561,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_孝田',
+  '孝田町',
+  '孝田町',
+  NULL,
+  34.04828,
+  131.834859,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608562,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_熊毛中央',
+  '熊毛中央町',
+  '熊毛中央町',
+  NULL,
+  34.049017,
+  131.968931,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608565,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_銀南街',
+  '銀南街',
+  '銀南街',
+  NULL,
+  34.05091,
+  131.805483,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608566,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_上迫',
+  '上迫町',
+  '上迫町',
+  NULL,
+  34.079667,
+  131.733009,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608574,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_学園台',
+  '学園台',
+  '学園台',
+  NULL,
+  34.051805,
+  131.847677,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608578,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_開成',
+  '開成町',
+  '開成町',
+  NULL,
+  34.057162,
+  131.75586,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608579,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_御姫',
+  '御姫町',
+  '御姫町',
+  NULL,
+  34.075162,
+  131.727349,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608580,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_小川屋',
+  '小川屋町',
+  '小川屋町',
+  NULL,
+  34.067158,
+  131.754138,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608584,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字呼坂',
+  '大字呼坂',
+  '大字呼坂',
+  NULL,
+  34.051235,
+  131.941423,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608585,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字米光',
+  '大字米光',
+  '大字米光',
+  NULL,
+  34.124906,
+  131.734828,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608586,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字譲羽',
+  '大字譲羽',
+  '大字譲羽',
+  NULL,
+  34.068454,
+  131.862849,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608587,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字安田',
+  '大字安田',
+  '大字安田',
+  NULL,
+  34.039784,
+  131.973002,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608588,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字八代',
+  '大字八代',
+  '大字八代',
+  NULL,
+  34.094254,
+  131.945093,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608589,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字夜',
+  '大字夜市',
+  '大字夜市',
+  NULL,
+  34.089616,
+  131.715469,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608590,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_金峰',
+  '金峰',
+  '金峰',
+  NULL,
+  34.17155,
+  131.906878,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608591,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字福川',
+  '大字福川',
+  '大字福川',
+  NULL,
+  34.083533,
+  131.729318,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608592,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字樋口',
+  '大字樋口',
+  '大字樋口',
+  NULL,
+  34.071497,
+  131.978305,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608593,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字原',
+  '大字原',
+  '大字原',
+  NULL,
+  34.066977,
+  131.960969,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608594,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字夏切',
+  '大字夏切',
+  '大字夏切',
+  NULL,
+  34.164523,
+  131.739125,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608595,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中',
+  '大字中村',
+  '大字中村',
+  NULL,
+  34.033109,
+  131.960989,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608596,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字長穂',
+  '大字長穂',
+  '大字長穂',
+  NULL,
+  34.137912,
+  131.840316,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608597,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中野',
+  '大字中野',
+  '大字中野',
+  NULL,
+  34.135744,
+  131.774384,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608598,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中須南_quarter',
+  '大字中須南',
+  '大字中須南',
+  NULL,
+  34.107217,
+  131.916415,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608599,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中須北',
+  '大字中須北',
+  '大字中須北',
+  NULL,
+  34.144593,
+  131.935069,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608600,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字富田',
+  '大字富田',
+  '大字富田',
+  NULL,
+  34.039097,
+  131.761824,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608601,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字高瀬',
+  '大字高瀬',
+  '大字高瀬',
+  NULL,
+  34.173936,
+  131.767935,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608602,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字垰',
+  '大字垰',
+  '大字垰',
+  NULL,
+  34.143536,
+  131.734763,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608603,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字清尾',
+  '大字清尾',
+  '大字清尾',
+  NULL,
+  34.055169,
+  131.985298,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608604,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字巣山',
+  '大字巣山',
+  '大字巣山',
+  NULL,
+  34.231477,
+  131.767573,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608605,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字須万',
+  '大字須万',
+  '大字須万',
+  NULL,
+  34.216508,
+  131.890137,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608606,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字須々万本郷',
+  '大字須々万本郷',
+  '大字須々万本郷',
+  NULL,
+  34.112503,
+  131.864157,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608607,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字須々万奥',
+  '大字須々万奥',
+  '大字須々万奥',
+  NULL,
+  34.149957,
+  131.870244,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608608,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字粭島',
+  '大字粭島',
+  '大字粭島',
+  NULL,
+  33.978949,
+  131.763546,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608609,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字上',
+  '大字上村',
+  '大字上村',
+  NULL,
+  34.091043,
+  131.800614,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608610,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字下上',
+  '大字下上',
+  '大字下上',
+  NULL,
+  34.086124,
+  131.77899,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608611,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字四熊',
+  '大字四熊',
+  '大字四熊',
+  NULL,
+  34.113721,
+  131.764039,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608612,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字小松原',
+  '大字小松原',
+  '大字小松原',
+  NULL,
+  34.04736,
+  132.010775,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608613,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字栗屋',
+  '大字栗屋',
+  '大字栗屋',
+  NULL,
+  34.013334,
+  131.813358,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608614,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字久米',
+  '大字久米',
+  '大字久米',
+  NULL,
+  34.051854,
+  131.856113,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608615,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字櫛ヶ浜',
+  '大字櫛ヶ浜',
+  '大字櫛ヶ浜',
+  NULL,
+  34.026097,
+  131.829796,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608616,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字川曲',
+  '大字川曲',
+  '大字川曲',
+  NULL,
+  34.103642,
+  131.817184,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608617,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字川上_quarter',
+  '大字川上',
+  '大字川上',
+  NULL,
+  34.121886,
+  131.794881,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608618,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字鹿野中',
+  '大字鹿野中',
+  '大字鹿野中',
+  NULL,
+  34.228467,
+  131.798298,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608619,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字鹿野下',
+  '大字鹿野下',
+  '大字鹿野下',
+  NULL,
+  34.210497,
+  131.825372,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608620,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字鹿野上',
+  '大字鹿野上',
+  '大字鹿野上',
+  NULL,
+  34.253082,
+  131.85329,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608621,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字小畑',
+  '大字小畑',
+  '大字小畑',
+  NULL,
+  34.102062,
+  131.738956,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608622,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字奥関屋',
+  '大字奥関屋',
+  '大字奥関屋',
+  NULL,
+  34.066862,
+  131.944865,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608623,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大向',
+  '大字大向',
+  '大字大向',
+  NULL,
+  34.177865,
+  131.831732,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608624,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大道理',
+  '大字大道理',
+  '大字大道理',
+  NULL,
+  34.166865,
+  131.798434,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608625,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大津島',
+  '大字大津島',
+  '大字大津島',
+  NULL,
+  34.007275,
+  131.697587,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608626,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大島',
+  '大字大島',
+  '大字大島',
+  NULL,
+  33.991656,
+  131.799316,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608627,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大潮',
+  '大字大潮',
+  '大字大潮',
+  NULL,
+  34.298281,
+  131.814394,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608628,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大河内',
+  '大字大河内',
+  '大字大河内',
+  NULL,
+  34.023734,
+  131.948157,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608629,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字馬神',
+  '大字馬神',
+  '大字馬神',
+  NULL,
+  34.123507,
+  131.710832,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128608630,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_惣社',
+  '惣社町',
+  '惣社町',
+  NULL,
+  34.061986,
+  131.581391,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614018,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字東佐波令',
+  '大字東佐波令',
+  '大字東佐波令',
+  NULL,
+  34.073427,
+  131.58141,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614019,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_迫戸',
+  '迫戸町',
+  '迫戸町',
+  NULL,
+  34.066627,
+  131.569074,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614020,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字上右田',
+  '大字上右田',
+  '大字上右田',
+  NULL,
+  34.096364,
+  131.567973,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614021,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新橋',
+  '新橋町',
+  '新橋町',
+  NULL,
+  34.063343,
+  131.559538,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614022,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_泉',
+  '泉町',
+  '泉町',
+  NULL,
+  34.060923,
+  131.55506,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614023,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字高井',
+  '大字高井',
+  '大字高井',
+  NULL,
+  34.078851,
+  131.546984,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614024,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_本橋',
+  '本橋町',
+  '本橋町',
+  NULL,
+  34.066423,
+  131.564626,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614025,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字下右田',
+  '大字下右田',
+  '大字下右田',
+  NULL,
+  34.082198,
+  131.556276,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614026,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_今市',
+  '今市町',
+  '今市町',
+  NULL,
+  34.061846,
+  131.566206,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614027,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_平和',
+  '平和町',
+  '平和町',
+  NULL,
+  34.058187,
+  131.563411,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614029,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_古祖原',
+  '古祖原',
+  '古祖原',
+  NULL,
+  34.059023,
+  131.550174,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614030,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_開出本',
+  '開出本町',
+  '開出本町',
+  NULL,
+  34.053324,
+  131.551034,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614031,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_開出西',
+  '開出西町',
+  '開出西町',
+  NULL,
+  34.052878,
+  131.546123,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614036,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字大崎',
+  '大字大崎',
+  '大字大崎',
+  NULL,
+  34.072057,
+  131.543914,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614037,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字西佐波令',
+  '大字西佐波令',
+  '大字西佐波令',
+  NULL,
+  34.053627,
+  131.543057,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614038,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_牟礼柳',
+  '牟礼柳',
+  '牟礼柳',
+  NULL,
+  34.0579948,
+  131.6023866,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614039,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_美和',
+  '美和町',
+  '美和町',
+  NULL,
+  34.057477,
+  131.580654,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614042,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_宮市',
+  '宮市町',
+  '宮市町',
+  NULL,
+  34.061095,
+  131.570878,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614043,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_南松崎',
+  '南松崎町',
+  '南松崎町',
+  NULL,
+  34.057642,
+  131.577816,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614044,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_三田尻本',
+  '三田尻本町',
+  '三田尻本町',
+  NULL,
+  34.043556,
+  131.573103,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614046,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_鞠生',
+  '鞠生町',
+  '鞠生町',
+  NULL,
+  34.040112,
+  131.565772,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614050,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_松原',
+  '松原町',
+  '松原町',
+  NULL,
+  34.0423,
+  131.568129,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614051,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_松崎_quarter',
+  '松崎町',
+  '松崎町',
+  NULL,
+  34.063344,
+  131.575254,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614052,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東松崎',
+  '東松崎町',
+  '東松崎町',
+  NULL,
+  34.059612,
+  131.577454,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614055,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_東仁井令',
+  '東仁井令町',
+  '東仁井令町',
+  NULL,
+  34.047478,
+  131.556052,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614056,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_華園',
+  '華園町',
+  '華園町',
+  NULL,
+  34.043961,
+  131.555896,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614057,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_仁井令',
+  '仁井令町',
+  '仁井令町',
+  NULL,
+  34.050697,
+  131.555381,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614064,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_中西',
+  '中西',
+  '中西',
+  NULL,
+  34.062927,
+  131.601811,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614065,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_酢貝',
+  '酢貝',
+  '酢貝',
+  NULL,
+  34.058262,
+  131.598834,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614068,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_新築地',
+  '新築地町',
+  '新築地町',
+  NULL,
+  34.041631,
+  131.59221,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614070,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_自力',
+  '自力町',
+  '自力町',
+  NULL,
+  34.042441,
+  131.574989,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614071,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_清水_quarter',
+  '清水町',
+  '清水町',
+  NULL,
+  34.047624,
+  131.551773,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614076,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_敷山',
+  '敷山町',
+  '敷山町',
+  NULL,
+  34.067038,
+  131.598571,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614077,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_寿',
+  '寿町',
+  '寿町',
+  NULL,
+  34.051295,
+  131.561137,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614079,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_国分寺',
+  '国分寺町',
+  '国分寺町',
+  NULL,
+  34.064666,
+  131.579477,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614080,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_協和_quarter',
+  '協和町',
+  '協和町',
+  NULL,
+  34.038898,
+  131.576776,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614090,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_上天神',
+  '上天神町',
+  '上天神町',
+  NULL,
+  34.059758,
+  131.573883,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614093,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_鐘紡',
+  '鐘紡町',
+  '鐘紡町',
+  NULL,
+  34.044706,
+  131.585973,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614096,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_お茶屋',
+  'お茶屋町',
+  'お茶屋町',
+  NULL,
+  34.045653,
+  131.572747,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614100,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_岡',
+  '岡村町',
+  '岡村町',
+  NULL,
+  34.04611,
+  131.570025,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614103,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字和字',
+  '大字和字',
+  '大字和字',
+  NULL,
+  34.120023,
+  131.614323,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614104,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字牟礼',
+  '大字牟礼',
+  '大字牟礼',
+  NULL,
+  34.070195,
+  131.6106,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614105,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字向島',
+  '大字向島',
+  '大字向島',
+  NULL,
+  34.005026,
+  131.580689,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614106,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字三田尻',
+  '大字三田尻村',
+  '大字三田尻村',
+  NULL,
+  34.038272,
+  131.57161,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614107,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字真尾',
+  '大字真尾',
+  '大字真尾',
+  NULL,
+  34.095797,
+  131.604705,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614108,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字久兼',
+  '大字久兼',
+  '大字久兼',
+  NULL,
+  34.110882,
+  131.635598,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614109,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字浜方',
+  '大字浜方',
+  '大字浜方',
+  NULL,
+  34.01645,
+  131.557279,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614110,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字西浦',
+  '大字西浦',
+  '大字西浦',
+  NULL,
+  34.023198,
+  131.52139,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614111,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字仁井令',
+  '大字仁井令',
+  '大字仁井令',
+  NULL,
+  34.037713,
+  131.556812,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614112,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字奈美',
+  '大字奈美',
+  '大字奈美',
+  NULL,
+  34.133392,
+  131.587485,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614113,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字中山_quarter',
+  '大字中山',
+  '大字中山',
+  NULL,
+  34.13973,
+  131.609275,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614114,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字富海',
+  '大字富海',
+  '大字富海',
+  NULL,
+  34.057678,
+  131.645588,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614115,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字田島',
+  '大字田島',
+  '大字田島',
+  NULL,
+  34.014605,
+  131.530924,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614116,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字台道',
+  '大字台道',
+  '大字台道',
+  NULL,
+  34.052521,
+  131.480863,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614117,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字鈴屋',
+  '大字鈴屋',
+  '大字鈴屋',
+  NULL,
+  34.11517,
+  131.583237,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614118,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字新田',
+  '大字新田',
+  '大字新田',
+  NULL,
+  34.029526,
+  131.56774,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614119,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字佐野',
+  '大字佐野',
+  '大字佐野',
+  NULL,
+  34.057477,
+  131.518451,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614120,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字切畑',
+  '大字切畑',
+  '大字切畑',
+  NULL,
+  34.083874,
+  131.501542,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614121,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字奥畑',
+  '大字奥畑',
+  '大字奥畑',
+  NULL,
+  34.146268,
+  131.643444,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614122,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字江泊',
+  '大字江泊',
+  '大字江泊',
+  NULL,
+  34.038073,
+  131.612949,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614123,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字植松',
+  '大字植松',
+  '大字植松',
+  NULL,
+  34.045599,
+  131.528473,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614124,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_大字伊佐江',
+  '大字伊佐江',
+  '大字伊佐江',
+  NULL,
+  34.038054,
+  131.554074,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614125,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_駅南_quarter',
+  '駅南町',
+  '駅南町',
+  NULL,
+  34.051254,
+  131.565769,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614126,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_伊佐江',
+  '伊佐江町',
+  '伊佐江町',
+  NULL,
+  34.044443,
+  131.550385,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9128614133,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujifukadani',
+  '徳地深谷',
+  '徳地深谷',
+  '{"en":"Tokujifukadani"}'::jsonb,
+  34.2133638,
+  131.6831588,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9136458073,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujiyasaka',
+  '徳地八坂',
+  '徳地八坂',
+  '{"en":"Tokujiyasaka"}'::jsonb,
+  34.2200354,
+  131.6699409,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9136458074,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujinotani',
+  '徳地野谷',
+  '徳地野谷',
+  '{"en":"Tokujinotani"}'::jsonb,
+  34.2765367,
+  131.6315746,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9147041669,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujifunaji',
+  '徳地船路',
+  '徳地船路',
+  '{"en":"Tokujifunaji"}'::jsonb,
+  34.252286,
+  131.6666793,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9154027983,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_nihokamigo',
+  '仁保上郷',
+  '仁保上郷',
+  '{"en":"Nihokamigo"}'::jsonb,
+  34.2565071,
+  131.5895175,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9154050394,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujiyunoki',
+  '徳地柚木',
+  '徳地柚木',
+  '{"en":"Tokujiyunoki"}'::jsonb,
+  34.313303,
+  131.7233813,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9154062674,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atoikumohigashibun',
+  '阿東生雲東分',
+  '阿東生雲東分',
+  '{"en":"Atoikumohigashibun"}'::jsonb,
+  34.3198072,
+  131.5956223,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9166179558,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_atojifukushimo',
+  '阿東地福下',
+  '阿東地福下',
+  '{"en":"Atojifukushimo"}'::jsonb,
+  34.3372349,
+  131.624043,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9166179559,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujiogoso',
+  '徳地小古祖',
+  '徳地小古祖',
+  '{"en":"Tokujiogoso"}'::jsonb,
+  34.2093178,
+  131.6606498,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181763752,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujihori',
+  '徳地堀',
+  '徳地堀',
+  '{"en":"Tokujihori"}'::jsonb,
+  34.1942685,
+  131.648891,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181763765,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujifujiki',
+  '徳地藤木',
+  '徳地藤木',
+  '{"en":"Tokujifujiki"}'::jsonb,
+  34.1457215,
+  131.678921,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181763773,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujiyamahata',
+  '徳地山畑',
+  '徳地山畑',
+  '{"en":"Tokujiyamahata"}'::jsonb,
+  34.1718937,
+  131.6949284,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181763783,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujishimaji',
+  '徳地島地',
+  '徳地島地',
+  '{"en":"Tokujishimaji"}'::jsonb,
+  34.1642684,
+  131.6979647,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181763789,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujiikaji',
+  '徳地伊賀地',
+  '徳地伊賀地',
+  '{"en":"Tokujiikaji"}'::jsonb,
+  34.1734204,
+  131.6470992,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181763805,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujikishimi',
+  '徳地岸見',
+  '徳地岸見',
+  '{"en":"Tokujikishimi"}'::jsonb,
+  34.1546625,
+  131.624794,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181763810,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujisabagouchi',
+  '徳地鯖河内',
+  '徳地鯖河内',
+  '{"en":"Tokujisabagouchi"}'::jsonb,
+  34.2030358,
+  131.743927,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181847110,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_tokujikushi',
+  '徳地串',
+  '徳地串',
+  '{"en":"Tokujikushi"}'::jsonb,
+  34.1902929,
+  131.7276191,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9181847115,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ouchimihori',
+  '大内御堀',
+  '大内御堀',
+  '{"en":"Ouchimihori"}'::jsonb,
+  34.138813,
+  131.497377,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338062,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_kamiunorei',
+  '上宇野令',
+  '上宇野令',
+  '{"en":"Kamiunorei"}'::jsonb,
+  34.207599,
+  131.46137,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338071,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ogicho',
+  '荻町',
+  '荻町',
+  '{"en":"Ogicho"}'::jsonb,
+  34.173078,
+  131.458657,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338073,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_midoricho',
+  '緑町',
+  '緑町',
+  '{"en":"Midoricho"}'::jsonb,
+  34.171021,
+  131.464772,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338074,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_佐山',
+  '佐山',
+  '佐山',
+  NULL,
+  34.042114,
+  131.346696,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338082,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_深溝',
+  '深溝',
+  '深溝',
+  NULL,
+  34.046693,
+  131.37302,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338083,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ouchihimeyamadai',
+  '大内姫山台',
+  '大内姫山台',
+  '{"en":"Ouchihimeyamadai"}'::jsonb,
+  34.157699,
+  131.477763,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338084,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_ouchishokyoto',
+  '大内小京都',
+  '大内小京都',
+  '{"en":"Ouchishokyoto"}'::jsonb,
+  34.152645,
+  131.479741,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338085,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_wakamiyacho',
+  '若宮町',
+  '若宮町',
+  '{"en":"Wakamiyacho"}'::jsonb,
+  34.158729,
+  131.455863,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338093,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_吉敷',
+  '吉敷',
+  '吉敷',
+  NULL,
+  34.183545,
+  131.41196,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218338116,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yabaracho',
+  '矢原町',
+  '矢原町',
+  '{"en":"Yabaracho"}'::jsonb,
+  34.156503,
+  131.452513,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352723,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_yabara',
+  '矢原',
+  '矢原',
+  '{"en":"Yabara"}'::jsonb,
+  34.150672,
+  131.445939,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352724,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_motomachi',
   '元町',
   '元町',
   '{"en":"Motomachi"}'::jsonb,
-  35.7752954,
-  139.5164465,
+  34.170314,
+  131.458428,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13174657689,
+  9218352725,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nakazato',
-  '中里',
-  '中里',
-  '{"en":"Nakazato"}'::jsonb,
-  35.7852795,
-  139.5208651,
+  'yamaguchi_unknown_miyanoshimo',
+  '宮野下',
+  '宮野下',
+  '{"en":"Miyanoshimo"}'::jsonb,
+  34.200894,
+  131.502974,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13191748573,
+  9218352726,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shitajuku',
-  '下宿',
-  '下宿',
-  '{"en":"Shitajuku"}'::jsonb,
-  35.8008246,
-  139.5380832,
+  'yamaguchi_unknown_miyanokami',
+  '宮野上',
+  '宮野上',
+  '{"en":"Miyanokami"}'::jsonb,
+  34.216981,
+  131.51365,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13202311690,
+  9218352727,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_asahigaoka_quarter',
-  '旭が丘',
-  'あさひがおか',
-  '{"en":"Asahigaoka"}'::jsonb,
-  35.7978331,
-  139.540496,
+  'yamaguchi_unknown_miyajimacho',
+  '宮島町',
+  '宮島町',
+  '{"en":"Miyajimacho"}'::jsonb,
+  34.166775,
+  131.479026,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13202330847,
+  9218352728,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nishi_waseda',
-  '西早稲田',
-  'にしわせだ',
-  '{"en":"Nishi-Waseda"}'::jsonb,
-  35.7101584,
-  139.7153878,
+  'yamaguchi_unknown_midorigaoka_quarter',
+  '緑ヶ丘',
+  '緑ヶ丘',
+  '{"en":"Midorigaoka"}'::jsonb,
+  34.195524,
+  131.488054,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13205616891,
+  9218352729,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kaigan',
-  '海岸',
-  'かいがん',
-  '{"en":"Kaigan"}'::jsonb,
-  35.6452654,
-  139.7573804,
+  'yamaguchi_unknown_matsumicho',
+  '松美町',
+  '松美町',
+  '{"en":"Matsumicho"}'::jsonb,
+  34.164484,
+  131.464716,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13227593934,
+  9218352730,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kami_kiyoto',
-  '上清戸',
-  '上清戸',
-  '{"en":"Kami-kiyoto"}'::jsonb,
-  35.7774033,
-  139.5228832,
+  'yamaguchi_unknown_maemachi',
+  '前町',
+  '前町',
+  '{"en":"Maemachi"}'::jsonb,
+  34.162737,
+  131.462359,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13242223248,
+  9218352731,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_naka_kiyoto',
-  '中清戸',
-  '中清戸',
-  '{"en":"Naka kiyoto"}'::jsonb,
-  35.7801154,
-  139.5306711,
+  'yamaguchi_unknown_hozumicho',
+  '穂積町',
+  '穂積町',
+  '{"en":"Hozumicho"}'::jsonb,
+  34.155127,
+  131.455595,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13242223339,
+  9218352734,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shimo_kiyoto',
-  '下清戸',
-  '下清戸',
-  '{"en":"Shimo kiyoto"}'::jsonb,
-  35.7849597,
-  139.5383064,
+  'yamaguchi_unknown_hirai',
+  '平井',
+  '平井',
+  '{"en":"Hirai"}'::jsonb,
+  34.153714,
+  131.463727,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13242223501,
+  9218352738,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_uenohara',
-  '上の原',
-  '上の原',
-  '{"en":"Uenohara"}'::jsonb,
-  35.7711677,
-  139.5441242,
+  'yamaguchi_unknown_仁保中郷',
+  '仁保中郷',
+  '仁保中郷',
   NULL,
-  'tokyo',
+  34.199314,
+  131.576548,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13255780340,
+  9218352741,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinhocho',
-  '神宝町',
-  '神宝町',
-  '{"en":"Shinhocho"}'::jsonb,
-  35.7664816,
-  139.5452056,
+  'yamaguchi_unknown_仁保下郷',
+  '仁保下郷',
+  '仁保下郷',
   NULL,
-  'tokyo',
+  34.190408,
+  131.542502,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13255780443,
+  9218352742,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kanayamacho',
-  '金山町',
-  '金山町',
-  '{"en":"Kanayamacho"}'::jsonb,
-  35.7681783,
-  139.5384087,
+  'yamaguchi_unknown_nanaodai',
+  '七尾台',
+  '七尾台',
+  '{"en":"Nanaodai"}'::jsonb,
+  34.192279,
+  131.482221,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13255780566,
+  9218352744,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hikawadai',
-  '氷川台',
-  '氷川台',
-  '{"en":"Hikawadai"}'::jsonb,
-  35.7670333,
-  139.5315074,
+  'yamaguchi_unknown_名田島',
+  '名田島',
+  '名田島',
   NULL,
-  'tokyo',
+  34.068819,
+  131.414722,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13256939778,
+  9218352745,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_daimoncho',
-  '大門町',
-  '大門町',
-  '{"en":"Daimoncho"}'::jsonb,
-  35.764213,
-  139.5397248,
+  'yamaguchi_unknown_nakazonocho',
+  '中園町',
+  '中園町',
+  '{"en":"Nakazonocho"}'::jsonb,
+  34.169043,
+  131.46676,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13256956933,
+  9218352746,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shinkawamachi',
-  '新川町',
-  '新川町',
-  '{"en":"Shinkawamachi"}'::jsonb,
-  35.7610859,
-  139.5385238,
+  'yamaguchi_unknown_nakao',
+  '中尾',
+  '中尾',
+  '{"en":"Nakao"}'::jsonb,
+  34.201876,
+  131.439961,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13256992349,
+  9218352747,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_sengencho',
-  '浅間町',
-  '浅間町',
-  '{"en":"Sengencho"}'::jsonb,
-  35.7575538,
-  139.5422712,
+  'yamaguchi_unknown_tomitabaracho',
+  '富田原町',
+  '富田原町',
+  '{"en":"Tomitabaracho"}'::jsonb,
+  34.1607,
+  131.46399,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13256992439,
+  9218352748,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_daiba',
-  '台場',
-  'だいば',
-  '{"en":"Daiba"}'::jsonb,
-  35.6333245,
-  139.7708923,
+  'yamaguchi_unknown_tokujimitani',
+  '徳地三谷',
+  '徳地三谷',
+  '{"en":"Tokujimitani"}'::jsonb,
+  34.256,
+  131.72347,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13266797608,
+  9218352749,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_koyama',
-  '小山',
-  '小山',
-  '{"en":"Koyama"}'::jsonb,
-  35.7655272,
-  139.5229312,
+  'yamaguchi_unknown_tokujihikutani',
+  '徳地引谷',
+  '徳地引谷',
+  '{"en":"Tokujihikutani"}'::jsonb,
+  34.221623,
+  131.614918,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13273274478,
+  9218352750,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_saiwaicho',
+  'yamaguchi_unknown_tokujikamimura',
+  '徳地上村',
+  '徳地上村',
+  '{"en":"Tokujikamimura"}'::jsonb,
+  34.14921,
+  131.71084,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352751,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_takaracho',
+  '宝町',
+  '宝町',
+  '{"en":"Takaracho"}'::jsonb,
+  34.157343,
+  131.447282,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352759,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sentocho',
+  '泉都町',
+  '泉都町',
+  '{"en":"Sentocho"}'::jsonb,
+  34.166746,
+  131.463266,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352760,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sufucho',
+  '周布町',
+  '周布町',
+  '{"en":"Sufucho"}'::jsonb,
+  34.160619,
+  131.453825,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352761,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_鋳銭司',
+  '鋳銭司',
+  '鋳銭司',
+  NULL,
+  34.086682,
+  131.464519,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352762,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_陶',
+  '陶',
+  '陶',
+  NULL,
+  34.094675,
+  131.428515,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352763,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shimoosaba',
+  '下小鯖',
+  '下小鯖',
+  '{"en":"Shimoosaba"}'::jsonb,
+  34.128129,
+  131.546041,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352766,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shimounorei',
+  '下宇野令',
+  '下宇野令',
+  '{"en":"Shimounorei"}'::jsonb,
+  34.177421,
+  131.446226,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352767,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shimoichicho',
+  '下市町',
+  '下市町',
+  '{"en":"Shimoichicho"}'::jsonb,
+  34.161994,
+  131.459826,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352768,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_shibasakicho',
+  '芝崎町',
+  '芝崎町',
+  '{"en":"Shibasakicho"}'::jsonb,
+  34.189274,
+  131.488318,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352769,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_sanwacho',
+  '三和町',
+  '三和町',
+  '{"en":"Sanwacho"}'::jsonb,
+  34.165971,
+  131.468645,
+  NULL,
+  'yamaguchi',
+  NULL,
+  'jp',
+  '山口県',
+  NULL,
+  NULL,
+  NULL,
+  9218352770,
+  'quarter'
+);
+
+INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
+VALUES (
+  'yamaguchi_unknown_saiwaicho',
   '幸町',
   '幸町',
   '{"en":"Saiwaicho"}'::jsonb,
-  35.760126,
-  139.5210536,
+  34.158695,
+  131.450974,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13274838495,
+  9218352779,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_chuocho',
-  '中央町',
-  '中央町',
-  '{"en":"Chuocho"}'::jsonb,
-  35.7528326,
-  139.5198539,
+  'yamaguchi_unknown_koganecho',
+  '黄金町',
+  '黄金町',
+  '{"en":"Koganecho"}'::jsonb,
+  34.171499,
+  131.476774,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13274918957,
+  9218352780,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_gakuencho',
-  '学園町',
-  '学園町',
-  '{"en":"Gakuencho"}'::jsonb,
-  35.7525935,
-  139.5368249,
+  'yamaguchi_unknown_kurokawa',
+  '黒川',
+  '黒川',
+  '{"en":"Kurokawa"}'::jsonb,
+  34.129471,
+  131.450791,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13276821931,
+  9218352781,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kanda_misakich',
-  '神田三崎町',
-  'かんだみさきちょう',
-  '{"en":"Kanda-Misakichō"}'::jsonb,
-  35.700896,
-  139.7540135,
+  'yamaguchi_unknown_kumanocho',
+  '熊野町',
+  '熊野町',
+  '{"en":"Kumanocho"}'::jsonb,
+  34.168792,
+  131.461261,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13284984212,
+  9218352782,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_iidabashi',
-  '飯田橋',
-  'いいだばし',
-  '{"en":"Iidabashi"}'::jsonb,
-  35.700781,
-  139.7486156,
+  'yamaguchi_unknown_kusunokicho',
+  '楠木町',
+  '楠木町',
+  '{"en":"Kusunokicho"}'::jsonb,
+  34.170923,
+  131.4533,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13284984213,
+  9218352783,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_minamicho',
-  '南町',
-  '南町',
-  '{"en":"Minamicho"}'::jsonb,
-  35.7403141,
-  139.5249295,
+  'yamaguchi_unknown_kandacho',
+  '神田町',
+  '神田町',
+  '{"en":"Kandacho"}'::jsonb,
+  34.172889,
+  131.45585,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13290063922,
+  9218352784,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_maesawa',
-  '前沢',
-  '前沢',
-  '{"en":"Maesawa"}'::jsonb,
-  35.7433534,
-  139.513935,
+  'yamaguchi_unknown_上小鯖',
+  '上小鯖',
+  '上小鯖',
   NULL,
-  'tokyo',
+  34.107999,
+  131.504974,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13290064048,
+  9218352785,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_takiyama',
-  '滝山',
-  '滝山',
-  '{"en":"Takiyama"}'::jsonb,
-  35.7464648,
-  139.503856,
+  'yamaguchi_unknown_嘉川',
+  '嘉川',
+  '嘉川',
   NULL,
-  'tokyo',
+  34.085941,
+  131.369837,
+  NULL,
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13290103757,
+  9218352786,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yayoi_quarter',
-  '弥生',
-  '弥生',
-  '{"en":"Yayoi"}'::jsonb,
-  35.7369022,
-  139.5053374,
+  'yamaguchi_unknown_ogoriwakakusamachi',
+  '小郡若草町',
+  '小郡若草町',
+  '{"en":"Ogoriwakakusamachi"}'::jsonb,
+  34.085394,
+  131.394907,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13290103894,
+  9218352787,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_hachimancho_quarter',
-  '八幡町',
-  '八幡町',
-  '{"en":"Hachimancho"}'::jsonb,
-  35.7533516,
-  139.5123854,
+  'yamaguchi_unknown_ogoriyamate_kamimachi',
+  '小郡山手上町',
+  '小郡山手上町',
+  '{"en":"Ogoriyamate Kamimachi"}'::jsonb,
+  34.106609,
+  131.392742,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13305662470,
+  9218352788,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nobidome',
-  '野火止',
-  '野火止',
-  '{"en":"Nobidome"}'::jsonb,
-  35.7615159,
-  139.5106,
+  'yamaguchi_unknown_ogorimiyukimachi',
+  '小郡御幸町',
+  '小郡御幸町',
+  '{"en":"Ogorimiyukimachi"}'::jsonb,
+  34.09339,
+  131.398447,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13305662565,
+  9218352789,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_shimosato',
-  '下里',
-  '下里',
-  '{"en":"Shimosato"}'::jsonb,
-  35.7558852,
-  139.5026727,
+  'yamaguchi_unknown_ogorimidorimachi',
+  '小郡緑町',
+  '小郡緑町',
+  '{"en":"Ogorimidorimachi"}'::jsonb,
+  34.090864,
+  131.401714,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13307538458,
+  9218352790,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yanagikubo',
-  '柳窪',
-  '柳窪',
-  '{"en":"Yanagikubo"}'::jsonb,
-  35.7472115,
-  139.492107,
+  'yamaguchi_unknown_ogorimaedamachi',
+  '小郡前田町',
+  '小郡前田町',
+  '{"en":"Ogorimaedamachi"}'::jsonb,
+  34.086147,
+  131.397809,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  13307568333,
+  9218352791,
   'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tamachi',
-  '田町',
-  '田町',
-  '{"en":"Tamachi"}'::jsonb,
-  35.6455451,
-  139.7485367,
+  'yamaguchi_unknown_ogoriheiseimachi',
+  '小郡平成町',
+  '小郡平成町',
+  '{"en":"Ogoriheiseimachi"}'::jsonb,
+  34.088321,
+  131.401033,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  57544160,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_izu_islands',
-  '伊豆諸島',
-  '伊豆諸島',
-  '{"en":"Izu Islands"}'::jsonb,
-  31.9999272,
-  139.9992275,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  557718230,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_yoshino_baigo',
-  '吉野梅郷',
-  '吉野梅郷',
-  '{"en":"Yoshino Baigo"}'::jsonb,
-  35.7854075,
-  139.2209435,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1655964253,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_iwakura_onsen_kyo',
-  '岩蔵温泉郷',
-  '岩蔵温泉郷',
-  '{"en":"Iwakura Onsen-kyo"}'::jsonb,
-  35.8255643,
-  139.2904807,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  1657233010,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_fudeshima',
-  '筆島',
-  '筆島',
-  '{"en":"Fudeshima"}'::jsonb,
-  34.7063929,
-  139.4451299,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2087049016,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_toushiki_no_hana',
-  'トウシキの鼻',
-  'トウシキの鼻',
-  '{"en":"Toushiki no hana"}'::jsonb,
-  34.678789,
-  139.4306663,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2088095625,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_龍王崎',
-  '龍王崎',
-  '龍王崎',
-  NULL,
-  34.6854407,
-  139.4437289,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2088110634,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kakihara_iso',
-  'カキハラ磯',
-  'カキハラ磯',
-  '{"en":"Kakihara iso"}'::jsonb,
-  34.6996977,
-  139.4485392,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2088112202,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_千波崎',
-  '千波崎',
-  '千波崎',
-  NULL,
-  34.7020491,
-  139.3589327,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2088123231,
-  'locality'
+  9218352792,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ryunokuchi',
-  '龍の口',
-  '龍の口',
-  '{"en":"Ryunokuchi"}'::jsonb,
-  34.7209793,
-  139.3525821,
+  'yamaguchi_unknown_ogorifunakuramachi',
+  '小郡船倉町',
+  '小郡船倉町',
+  '{"en":"Ogorifunakuramachi"}'::jsonb,
+  34.092793,
+  131.404764,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088130188,
-  'locality'
+  9218352793,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ounohama',
-  '王の浜',
-  '王の浜',
-  '{"en":"Ounohama"}'::jsonb,
-  34.7260854,
-  139.3530423,
+  'yamaguchi_unknown_ogorihirasamachi',
+  '小郡平砂町',
+  '小郡平砂町',
+  '{"en":"Ogorihirasamachi"}'::jsonb,
+  34.088383,
+  131.393445,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088130189,
-  'locality'
+  9218352794,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_前浜',
-  '前浜',
-  '前浜',
+  'yamaguchi_unknown_ogorihanazonomachi',
+  '小郡花園町',
+  '小郡花園町',
+  '{"en":"Ogorihanazonomachi"}'::jsonb,
+  34.088912,
+  131.39612,
   NULL,
-  34.7327955,
-  139.3551248,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088130779,
-  'locality'
+  9218352795,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_kohohama',
-  '弘法浜',
-  '弘法浜',
-  '{"en":"Kohohama"}'::jsonb,
-  34.7459228,
-  139.353773,
+  'yamaguchi_unknown_ogoritakasagomachi',
+  '小郡高砂町',
+  '小郡高砂町',
+  '{"en":"Ogoritakasagomachi"}'::jsonb,
+  34.092605,
+  131.400285,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088130780,
-  'locality'
+  9218352796,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_yunohama',
-  '湯の浜',
-  '湯の浜',
-  '{"en":"Yunohama"}'::jsonb,
-  34.7436025,
-  139.356085,
+  'yamaguchi_unknown_ogorisangenyamachi',
+  '小郡三軒屋町',
+  '小郡三軒屋町',
+  '{"en":"Ogorisangenyamachi"}'::jsonb,
+  34.087695,
+  131.4039,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088130781,
-  'locality'
+  9218352798,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_前浜_locality',
-  '前浜',
-  '前浜',
+  'yamaguchi_unknown_ogorisakaemachi',
+  '小郡栄町',
+  '小郡栄町',
+  '{"en":"Ogorisakaemachi"}'::jsonb,
+  34.088741,
+  131.402883,
   NULL,
-  34.7542533,
-  139.3518847,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088141825,
-  'locality'
+  9218352799,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nagane',
-  '長根',
-  '長根',
-  '{"en":"Nagane"}'::jsonb,
-  34.7557829,
-  139.3502325,
+  'yamaguchi_unknown_ogorikoganemachi',
+  '小郡黄金町',
+  '小郡黄金町',
+  '{"en":"Ogorikoganemachi"}'::jsonb,
+  34.090418,
+  131.398007,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088141830,
-  'locality'
+  9218352800,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_泉浜',
-  '泉浜',
-  '泉浜',
+  'yamaguchi_unknown_ogorikyuryomachi',
+  '小郡給領町',
+  '小郡給領町',
+  '{"en":"Ogorikyuryomachi"}'::jsonb,
+  34.086366,
+  131.402244,
   NULL,
-  34.7694839,
-  139.3520563,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088145993,
-  'locality'
+  9218352801,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_akappage',
-  '赤禿',
-  '赤禿',
-  '{"en":"Akappage"}'::jsonb,
-  34.7749652,
-  139.3495785,
+  'yamaguchi_unknown_ogorikanahoricho',
+  '小郡金堀町',
+  '小郡金堀町',
+  '{"en":"Ogorikanahoricho"}'::jsonb,
+  34.109953,
+  131.390313,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088145998,
-  'locality'
+  9218352802,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_万立',
-  '万立',
-  '万立',
+  'yamaguchi_unknown_ogoriozakicho',
+  '小郡尾崎町',
+  '小郡尾崎町',
+  '{"en":"Ogoriozakicho"}'::jsonb,
+  34.109141,
+  131.395061,
   NULL,
-  34.7844082,
-  139.3526354,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088151692,
-  'locality'
+  9218352803,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_乳が崎',
-  '乳が崎',
-  '乳が崎',
+  'yamaguchi_unknown_ogorioemachi',
+  '小郡大江町',
+  '小郡大江町',
+  '{"en":"Ogorioemachi"}'::jsonb,
+  34.093419,
+  131.402951,
   NULL,
-  34.7987638,
-  139.3609994,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088151892,
-  'locality'
+  9218352804,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_野田浜',
-  '野田浜',
-  '野田浜',
-  NULL,
-  34.7970907,
-  139.3609329,
+  'yamaguchi_unknown_ogoriishinmachi',
+  '小郡維新町',
+  '小郡維新町',
+  '{"en":"Ogoriishinmachi"}'::jsonb,
+  34.087362,
+  131.399626,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088151893,
-  'locality'
+  9218352805,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_碁石浜',
-  '碁石浜',
-  '碁石浜',
+  'yamaguchi_unknown_ouchiyata',
+  '大内矢田',
+  '大内矢田',
+  '{"en":"Ouchiyata"}'::jsonb,
+  34.145569,
+  131.507015,
   NULL,
-  34.7965486,
-  139.3663527,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088154339,
-  'locality'
+  9218352816,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_小口崎',
-  '小口崎',
-  '小口崎',
+  'yamaguchi_unknown_ouchinagano',
+  '大内長野',
+  '大内長野',
+  '{"en":"Ouchinagano"}'::jsonb,
+  34.160596,
+  131.526461,
   NULL,
-  34.7937692,
-  139.3801986,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088154340,
-  'locality'
+  9218352817,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_風早崎',
-  '風早崎',
-  '風早崎',
-  NULL,
-  34.7980158,
-  139.3719374,
+  'yamaguchi_unknown_enseiji',
+  '円政寺',
+  '円政寺',
+  '{"en":"Enseiji"}'::jsonb,
+  34.182045,
+  131.481878,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088154341,
-  'locality'
+  9218352818,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_万根崎',
-  '万根崎',
-  '万根崎',
+  'yamaguchi_unknown_江崎',
+  '江崎',
+  '江崎',
   NULL,
-  34.7866851,
-  139.4126426,
+  34.061834,
+  131.354067,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088161311,
-  'locality'
+  9218352822,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_松崎',
-  '松崎',
-  '松崎',
-  NULL,
-  34.7813981,
-  139.4222557,
+  'yamaguchi_unknown_imiacho',
+  '今井町',
+  '今井町',
+  '{"en":"Imiacho"}'::jsonb,
+  34.160731,
+  131.458025,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088161538,
-  'locality'
+  9218352825,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_潮吹',
-  '潮吹',
-  '潮吹',
+  'yamaguchi_unknown_izumicho',
+  '泉町',
+  '泉町',
+  '{"en":"Izumicho"}'::jsonb,
+  34.16769,
+  131.450946,
   NULL,
-  34.781169,
-  139.4210755,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088161539,
-  'locality'
+  9218352826,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_gyoja_hama_gyoja_beach',
-  '行者浜',
-  '行者浜',
-  '{"en":"Gyoja hama (Gyoja beach)"}'::jsonb,
-  34.7542705,
-  139.4404915,
+  'yamaguchi_unknown_atotokusashimo',
+  '阿東徳佐下',
+  '阿東徳佐下',
+  '{"en":"Atotokusashimo"}'::jsonb,
+  34.400992,
+  131.693032,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088162729,
-  'locality'
+  9218352833,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_nagane_misaki_nagane_cape',
-  '長根岬',
-  '長根岬',
-  '{"en":"Nagane misaki (Nagane cape)"}'::jsonb,
-  34.7403982,
-  139.4489749,
+  'yamaguchi_unknown_atoshinome',
+  '阿東篠目',
+  '阿東篠目',
+  '{"en":"Atoshinome"}'::jsonb,
+  34.280764,
+  131.554278,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088167964,
-  'locality'
+  9218352834,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_黒崎',
-  '黒崎',
-  '黒崎',
+  'yamaguchi_unknown_阿知須',
+  '阿知須',
+  '阿知須',
   NULL,
-  34.7154063,
-  139.4492247,
+  34.016356,
+  131.343505,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2088171787,
-  'locality'
+  9218352835,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_okuyamasabaku_okuyama_desert',
-  '奥山砂漠',
-  '奥山砂漠',
-  '{"en":"Okuyamasabaku (Okuyama desert)"}'::jsonb,
-  34.7443587,
-  139.4276561,
+  'yamaguchi_unknown_asada',
+  '朝田',
+  '朝田',
+  '{"en":"Asada"}'::jsonb,
+  34.149879,
+  131.41732,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2090976979,
-  'locality'
+  9218352838,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_惣兵衛越し',
-  '惣兵衛越し',
-  '惣兵衛越し',
+  'yamaguchi_unknown_asakuracho',
+  '朝倉町',
+  '朝倉町',
+  '{"en":"Asakuracho"}'::jsonb,
+  34.179891,
+  131.448259,
   NULL,
-  34.7487316,
-  139.3536909,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2128407938,
-  'locality'
+  9218352839,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_サンカク',
-  'サンカク',
-  'サンカク',
+  'yamaguchi_unknown_akazumacho',
+  '赤妻町',
+  '赤妻町',
+  '{"en":"Akazumacho"}'::jsonb,
+  34.171304,
+  131.446816,
   NULL,
-  34.7447974,
-  139.3541263,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2128486783,
-  'locality'
+  9218352840,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_為朝の刀研ぎ場',
-  '為朝の刀研ぎ場',
-  '為朝の刀研ぎ場',
-  NULL,
-  34.7425558,
-  139.3575973,
+  'yamaguchi_unknown_aobadai_quarter',
+  '青葉台',
+  '青葉台',
+  '{"en":"Aobadai"}'::jsonb,
+  34.206388,
+  131.504495,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2128497154,
-  'locality'
+  9218352841,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ひよどり沢',
-  'ひよどり沢',
-  'ひよどり沢',
+  'yamaguchi_unknown_kaminogo',
+  '上の郷',
+  'かみのごう',
+  '{"en":"Kaminogo"}'::jsonb,
+  34.0054007,
+  131.1615121,
   NULL,
-  35.6739993,
-  139.339559,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2362796467,
-  'locality'
+  9364946948,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_くぬぎ平',
-  'くぬぎ平',
-  'くぬぎ平',
+  'yamaguchi_unknown_nishikicho',
+  '錦町',
+  '錦町',
+  '{"en":"Nishikicho"}'::jsonb,
+  34.1757041,
+  131.4494362,
   NULL,
-  35.6722713,
-  139.3418311,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2362796468,
-  'locality'
+  11225989895,
+  'quarter'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_みずき平',
-  'みずき平',
-  'みずき平',
-  NULL,
-  35.6736309,
-  139.341123,
+  'yamaguchi_unknown_mishima_3412041400',
+  '三島',
+  '三島',
+  '{"en":"Mishima"}'::jsonb,
+  33.7669121,
+  132.2571176,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2362796469,
+  3412041400,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ひよどり山',
-  'ひよどり山',
-  'ひよどり山',
+  'yamaguchi_unknown_houkinohana',
+  '保木鼻',
+  '保木鼻',
+  '{"en":"Houkinohana"}'::jsonb,
+  33.9296516,
+  132.441188,
   NULL,
-  35.6755705,
-  139.3424731,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2362796470,
+  3412041411,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_水源涵養林',
-  '水源涵養林',
-  '水源涵養林',
+  'yamaguchi_unknown_厨子ヶ鼻',
+  '厨子ヶ鼻',
+  '厨子ヶ鼻',
   NULL,
-  35.6744613,
-  139.3388885,
+  33.9407823,
+  132.4024507,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2362796471,
+  3412041415,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_草堂ノ入',
-  '草堂ノ入',
-  '草堂ノ入',
+  'yamaguchi_unknown_大三郎鼻',
+  '大三郎鼻',
+  '大三郎鼻',
   NULL,
-  35.7341494,
-  139.2396981,
+  33.8830883,
+  132.3272702,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2402661813,
+  3412041419,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_中央湿地',
-  '中央湿地',
-  '中央湿地',
+  'yamaguchi_unknown_大崎鼻',
+  '大崎鼻',
+  '大崎鼻',
   NULL,
-  35.7354965,
-  139.2417527,
+  33.9558938,
+  132.2836078,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2402681559,
+  3412041421,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_富田ノ入',
-  '富田ノ入',
-  '富田ノ入',
+  'yamaguchi_unknown_安下崎',
+  '安下崎',
+  '安下崎',
   NULL,
-  35.7352309,
-  139.2393177,
+  33.8715493,
+  132.2766496,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2402681560,
+  3412041427,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_下ノ川',
-  '下ノ川',
-  '下ノ川',
+  'yamaguchi_unknown_家房崎',
+  '家房崎',
+  '家房崎',
   NULL,
-  35.7357852,
-  139.2438581,
+  33.8747005,
+  132.2412455,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2402687748,
+  3412041428,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_宮田西沢',
-  '宮田西沢',
-  '宮田西沢',
+  'yamaguchi_unknown_押前鼻',
+  '押前鼻',
+  '押前鼻',
   NULL,
-  35.7367723,
-  139.2409265,
+  33.8711826,
+  132.1998638,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2402687751,
+  3412041441,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_宮田東沢',
-  '宮田東沢',
-  '宮田東沢',
+  'yamaguchi_unknown_shinguubana',
+  '新宮鼻',
+  '新宮鼻',
+  '{"en":"Shinguubana"}'::jsonb,
+  34.0155282,
+  132.4291547,
   NULL,
-  35.7365437,
-  139.2419243,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2402687752,
+  3412041444,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_荒田ノ入',
-  '荒田ノ入',
-  '荒田ノ入',
-  NULL,
-  35.7370771,
-  139.2396074,
+  'yamaguchi_unknown_日見崎',
+  '日見崎',
+  '日見崎',
   NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2402687756,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hatonosu_valley',
-  '鳩ノ巣渓谷',
-  '鳩ノ巣渓谷',
-  '{"en":"Hatonosu Valley"}'::jsonb,
-  35.8131774,
-  139.1291762,
+  33.8945778,
+  132.1768774,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2442452449,
+  3412041445,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_imosaka',
-  '芋坂',
-  '芋坂',
-  '{"en":"Imosaka"}'::jsonb,
-  35.7266876,
-  139.7735296,
+  'yamaguchi_unknown_matsugahana',
+  '松ヶ鼻',
+  '松ヶ鼻',
+  '{"en":"Matsugahana"}'::jsonb,
+  33.9513935,
+  132.4381843,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2571008577,
+  3412041446,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大字五ノ神字武蔵野',
-  '大字五ノ神字武蔵野',
-  '大字五ノ神字武蔵野',
-  NULL,
-  35.769146,
-  139.3303125,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_津長鼻',
+  '津長鼻',
+  '津長鼻',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  2906663008,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_oaza_kawasaki_aza_musashino',
-  '大字川崎字武蔵野',
-  '大字川崎字武蔵野',
-  '{"en":"Oaza Kawasaki-aza Musashino"}'::jsonb,
-  35.7625232,
-  139.3345781,
+  33.9304901,
+  132.1765466,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2906663013,
+  3412041452,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大字羽字武蔵野',
-  '大字羽字武蔵野',
-  '大字羽字武蔵野',
+  'yamaguchi_unknown_洲首崎',
+  '洲首崎',
+  '洲首崎',
   NULL,
-  35.7668401,
-  139.3309346,
+  33.8143563,
+  132.4009008,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2906663021,
+  3412041453,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大字羽字玉川附',
-  '大字羽字玉川附',
-  '大字羽字玉川附',
+  'yamaguchi_unknown_setogahana',
+  '瀬戸ヶ鼻',
+  '瀬戸ヶ鼻',
+  '{"en":"Setogahana"}'::jsonb,
+  33.9499365,
+  132.4711063,
   NULL,
-  35.7551111,
-  139.3029956,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2906663022,
+  3412041458,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大字羽字羽ケ上',
-  '大字羽字羽ケ上',
-  '大字羽字羽ケ上',
+  'yamaguchi_unknown_牛ヶ首',
+  '牛ヶ首',
+  '牛ヶ首',
   NULL,
-  35.7689124,
-  139.3057722,
+  33.8628226,
+  132.3716604,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  2906663023,
+  3412041460,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_地鉈温泉',
-  '地鉈温泉',
-  '地鉈温泉',
-  NULL,
-  34.3178786,
-  139.2160101,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_田ノ尻鼻',
+  '田ノ尻鼻',
+  '田ノ尻鼻',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  3259183358,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_mitake_gorge',
-  '御岳渓谷',
-  '御岳渓谷',
-  '{"en":"Mitake Gorge"}'::jsonb,
-  35.8009016,
-  139.1848433,
+  33.9650322,
+  132.2152551,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  3997059716,
+  3412041462,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大千代港',
-  '大千代港',
-  '大千代港',
+  'yamaguchi_unknown_竜崎',
+  '竜崎',
+  '竜崎',
   NULL,
-  32.4572392,
-  139.7812589,
+  33.8916925,
+  132.2908768,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4267999539,
+  3412041474,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大名子',
-  '大名子',
-  '大名子',
+  'yamaguchi_unknown_符崎の鼻',
+  '符崎の鼻',
+  '符崎の鼻',
   NULL,
-  32.4619321,
-  139.7774544,
+  33.9207301,
+  132.3197232,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4267999540,
+  3412041477,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_三宝港',
-  '三宝港',
-  '三宝港',
+  'yamaguchi_unknown_筆崎',
+  '筆崎',
+  '筆崎',
   NULL,
-  32.4467665,
-  139.7589463,
+  33.9545565,
+  132.1934966,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4267999541,
+  3412041479,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_式根島港',
-  '式根島港',
-  '式根島港',
+  'yamaguchi_unknown_脇ガ鼻',
+  '脇ガ鼻',
+  '脇ガ鼻',
   NULL,
-  34.3196482,
-  139.2184653,
+  33.9236115,
+  132.1729597,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4271603479,
+  3412041483,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_袴ヶ崎',
-  '袴ヶ崎',
-  '袴ヶ崎',
+  'yamaguchi_unknown_雨が浦鼻',
+  '雨が浦鼻',
+  '雨が浦鼻',
   NULL,
-  34.3294846,
-  139.2007031,
+  33.8657061,
+  132.216036,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4271603486,
+  3412041498,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_足付温泉',
-  '足付温泉',
-  '足付温泉',
+  'yamaguchi_unknown_象鼻ヶ岬',
+  '象鼻ヶ岬',
+  '象鼻ヶ岬',
   NULL,
-  34.3198614,
-  139.2175764,
+  33.9221376,
+  131.9763164,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4271603487,
+  4367216989,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_コシダ崩れ',
-  'コシダ崩れ',
-  'コシダ崩れ',
+  'yamaguchi_unknown_鼓ヶ浦',
+  '鼓ヶ浦',
+  '鼓ヶ浦',
   NULL,
-  34.5121165,
-  139.2716934,
+  33.9176256,
+  131.9759258,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277500882,
+  4367217089,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ツムギ根',
-  'ツムギ根',
-  'ツムギ根',
+  'yamaguchi_unknown_杵崎',
+  '杵崎',
+  '杵崎',
   NULL,
-  34.5319643,
-  139.2847376,
+  33.9208079,
+  131.9621131,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277500883,
+  4367217189,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ナズカタ',
-  'ナズカタ',
-  'ナズカタ',
+  'yamaguchi_unknown_竜ヶ崎',
+  '竜ヶ崎',
+  '竜ヶ崎',
   NULL,
-  34.5197251,
-  139.2900012,
+  34.020673,
+  131.6098258,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277500884,
+  4452855598,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_亀石',
-  '亀石',
-  '亀石',
+  'yamaguchi_unknown_酒ノ瀬',
+  '酒ノ瀬',
+  '酒ノ瀬',
   NULL,
-  34.5171156,
-  139.2683757,
+  34.0922612,
+  130.7951421,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277502439,
+  4563334460,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_利島港',
-  '利島港',
-  '利島港',
+  'yamaguchi_unknown_夢ヶ崎',
+  '夢ヶ崎',
+  '夢ヶ崎',
   NULL,
-  34.5323982,
-  139.2810088,
+  34.3555282,
+  130.8401097,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277502440,
+  4686743058,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大根',
-  '大根',
-  '大根',
+  'yamaguchi_unknown_通瀬岬',
+  '通瀬岬',
+  '通瀬岬',
   NULL,
-  34.5305849,
-  139.2720572,
+  34.3409782,
+  130.8462627,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277502441,
+  4686743059,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_橋',
-  '橋',
-  '橋',
+  'yamaguchi_unknown_金山岬',
+  '金山岬',
+  '金山岬',
   NULL,
-  34.5285706,
-  139.2904128,
+  34.3524105,
+  130.9383746,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277502442,
+  4686743599,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大和田',
-  '大和田',
-  '大和田',
+  'yamaguchi_unknown_神宮崎',
+  '神宮崎',
+  '神宮崎',
   NULL,
-  34.3755434,
-  139.2243463,
+  34.3529646,
+  130.9218526,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4277505666,
+  4686744176,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_里',
-  '里',
-  '里',
+  'yamaguchi_unknown_本場鼻',
+  '本場鼻',
+  '本場鼻',
   NULL,
-  33.8950581,
-  139.5941242,
+  34.3634286,
+  130.9017501,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4279773270,
+  4686746912,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_新澪池跡',
-  '新澪池跡',
-  '新澪池跡',
+  'yamaguchi_unknown_折紙鼻',
+  '折紙鼻',
+  '折紙鼻',
   NULL,
-  34.0506576,
-  139.5024097,
+  34.3642757,
+  130.9057068,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4344283097,
+  4686746913,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ミノワ',
-  'ミノワ',
-  'ミノワ',
+  'yamaguchi_unknown_牧崎',
+  '牧崎',
+  '牧崎',
   NULL,
-  34.1173245,
-  139.5492069,
+  34.3740235,
+  130.8670459,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4344301767,
+  4686746967,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_六双根',
-  '六双根',
-  '六双根',
+  'yamaguchi_unknown_瀬崎',
+  '瀬崎',
+  '瀬崎',
   NULL,
-  34.0907722,
-  139.4823703,
+  34.353327,
+  130.8776332,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4344301770,
+  4686746968,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_湯ノ浜',
-  '湯ノ浜',
-  '湯ノ浜',
+  'yamaguchi_unknown_犬鳴岬',
+  '犬鳴岬',
+  '犬鳴岬',
   NULL,
-  34.1246277,
-  139.5339853,
+  34.2044405,
+  130.9290454,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4344301774,
+  4702847103,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_赤場暁',
-  '赤場暁',
-  '赤場暁',
-  NULL,
-  34.1052038,
-  139.5602361,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
+  'yamaguchi_unknown_大崎鼻_locality',
+  '大崎鼻',
+  '大崎鼻',
   NULL,
-  4344301776,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_senryo_pond',
-  '千両池',
-  'せんりょういけ',
-  '{"en":"Senryo Pond"}'::jsonb,
-  34.1896899,
-  139.1210909,
+  34.2153496,
+  130.9158064,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4385207873,
+  4702860517,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_神木島',
-  '神木島',
-  'かんきじま',
+  'yamaguchi_unknown_笠松ノ鼻',
+  '笠松ノ鼻',
+  '笠松ノ鼻',
   NULL,
-  34.2086491,
-  139.1309238,
+  34.1792176,
+  130.9252177,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4385207886,
+  4703447603,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_アジア磯',
-  'アジア磯',
-  'アジア磯',
+  'yamaguchi_unknown_真崎',
+  '真崎',
+  '真崎',
   NULL,
-  34.4060931,
-  139.2621067,
+  34.1529075,
+  130.8956543,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4407498658,
+  4711008641,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_高根_4407499786',
-  '高根',
-  '高根',
+  'yamaguchi_unknown_泊ヶ鼻',
+  '泊ヶ鼻',
+  '泊ヶ鼻',
   NULL,
-  34.3965282,
-  139.2550471,
+  34.1425485,
+  130.8857732,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4407499786,
+  4716613718,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_湯の浜漁港',
-  '湯の浜漁港',
-  '湯の浜漁港',
+  'yamaguchi_unknown_柱島港',
+  '柱島港',
+  '柱島港',
   NULL,
-  34.1240286,
-  139.5314054,
+  34.0205586,
+  132.4223467,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4408687332,
+  4761805907,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_gihei_rock',
-  '儀兵岩',
-  'ぎへい いわ',
-  '{"en":"Gihei Rock"}'::jsonb,
-  27.1003084,
-  142.1816202,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_岩国港',
+  '岩国港',
+  '岩国港',
   NULL,
-  NULL,
-  4409671515,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_futami_rock',
-  '二見岩',
-  'ふたみ いわ',
-  '{"en":"Futami Rock"}'::jsonb,
-  27.0954484,
-  142.1995631,
+  34.190478,
+  132.2340564,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4411502515,
+  4768504602,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_宮之浜',
-  '宮之浜',
-  '宮之浜',
+  'yamaguchi_unknown_定兼鼻',
+  '定兼鼻',
+  '定兼鼻',
   NULL,
-  27.1035619,
-  142.1944341,
+  33.9350731,
+  131.695025,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4411502518,
+  4852670474,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_屏風谷',
-  '屏風谷',
-  '屏風谷',
+  'yamaguchi_unknown_天石鼻',
+  '天石鼻',
+  '天石鼻',
   NULL,
-  27.0928581,
-  142.205925,
+  33.9424966,
+  131.6888291,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4411502519,
+  4852670475,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_釣浜',
-  '釣浜',
-  '釣浜',
+  'yamaguchi_unknown_野島漁港',
+  '野島漁港',
+  '野島漁港',
   NULL,
-  27.1036527,
-  142.2050476,
+  33.944873,
+  131.6941345,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4411502526,
+  4852670476,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ウグイス浜',
-  'ウグイス浜',
-  'ウグイス浜',
+  'yamaguchi_unknown_海附岬',
+  '海附岬',
+  '海附岬',
   NULL,
-  27.1248834,
-  142.190955,
+  33.8710302,
+  132.0169973,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414864857,
+  4855633588,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_二俣岬',
-  '二俣岬',
-  '二俣岬',
+  'yamaguchi_unknown_平茂岬',
+  '平茂岬',
+  '平茂岬',
   NULL,
-  27.1440686,
-  142.1914913,
+  33.8532924,
+  132.0241857,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865489,
+  4855633589,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_兄島瀬戸',
-  '兄島瀬戸',
-  '兄島瀬戸',
+  'yamaguchi_unknown_竜尾岬',
+  '竜尾岬',
+  '竜尾岬',
   NULL,
-  27.1078637,
-  142.2021076,
+  33.8606828,
+  131.9979858,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865492,
+  4855633590,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_吐出鼻',
-  '吐出鼻',
-  '吐出鼻',
+  'yamaguchi_unknown_牛島漁港',
+  '牛島漁港',
+  '牛島漁港',
   NULL,
-  27.1099361,
-  142.2009462,
+  33.8598677,
+  132.0088863,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865494,
+  4855633594,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_家内見崎',
-  '家内見崎',
-  '家内見崎',
+  'yamaguchi_unknown_才塩ケ鼻',
+  '才塩ケ鼻',
+  '才塩ケ鼻',
   NULL,
-  27.1100253,
-  142.2355895,
+  33.9007068,
+  132.0439589,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865497,
+  4859787221,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_弟島瀬戸',
-  '弟島瀬戸',
-  '弟島瀬戸',
+  'yamaguchi_unknown_笠佐港',
+  '笠佐港',
+  '笠佐港',
   NULL,
-  27.1441975,
-  142.189654,
+  33.9472227,
+  132.168113,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865499,
+  4914802500,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_挙崎',
-  '挙崎',
-  '挙崎',
+  'yamaguchi_unknown_通ケ鼻',
+  '通ケ鼻',
+  '通ケ鼻',
   NULL,
-  27.1324109,
-  142.2194855,
+  34.5179036,
+  131.277566,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865500,
+  4946815930,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_滝之浦',
-  '滝之浦',
-  '滝之浦',
+  'yamaguchi_unknown_椎木岩',
+  '椎木岩',
+  '椎木岩',
   NULL,
-  27.117595,
-  142.2058976,
+  34.5128513,
+  131.2866425,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865502,
+  4946815931,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_立神崎',
-  '立神崎',
-  '立神崎',
+  'yamaguchi_unknown_唐鳩',
+  '唐鳩',
+  '唐鳩',
   NULL,
-  27.1304153,
-  142.1871407,
+  34.5052923,
+  131.2920392,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865510,
+  4946815932,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_筋岩岬',
-  '筋岩岬',
-  '筋岩岬',
+  'yamaguchi_unknown_火崎',
+  '火崎',
+  '火崎',
   NULL,
-  27.1218349,
-  142.1872589,
+  34.497264,
+  131.2783813,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4414865511,
+  4946815933,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_神湊漁港',
-  '神湊漁港',
-  '神湊漁港',
+  'yamaguchi_unknown_丸山岬',
+  '丸山岬',
+  '丸山岬',
   NULL,
-  33.1314054,
-  139.8057692,
+  34.0356239,
+  131.7088668,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4420332364,
+  5224569155,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大平潟',
-  '大平潟',
-  '大平潟',
+  'yamaguchi_unknown_亀ヶ崎',
+  '亀ヶ崎',
+  '亀ヶ崎',
   NULL,
-  33.1303756,
-  139.815106,
+  34.0317674,
+  131.7157282,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4421870872,
+  5224569160,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_神湊 (底土) 港',
-  '神湊 (底土) 港',
-  '神湊 (底土) 港',
+  'yamaguchi_unknown_帝岬',
+  '帝岬',
+  '帝岬',
   NULL,
-  33.1214624,
-  139.8190113,
+  34.0204884,
+  131.7136329,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4421870873,
+  5224569314,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ウロウ根',
-  'ウロウ根',
-  'ウロウ根',
+  'yamaguchi_unknown_水尻岬',
+  '水尻岬',
+  '水尻岬',
   NULL,
-  33.0673685,
-  139.8425586,
+  34.0082395,
+  131.6907445,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471109,
+  5224573433,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_エイガ浦',
-  'エイガ浦',
-  'エイガ浦',
+  'yamaguchi_unknown_金崎',
+  '金崎',
+  '金崎',
   NULL,
-  33.1335001,
-  139.7379994,
+  33.9791818,
+  131.718983,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471110,
+  5224573496,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_オアサ根',
-  'オアサ根',
-  'オアサ根',
+  'yamaguchi_unknown_水揚鼻',
+  '水揚鼻',
+  '水揚鼻',
   NULL,
-  33.1544804,
-  139.7780756,
+  33.9825293,
+  131.733336,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471111,
+  5224575653,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_ナズマド',
-  'ナズマド',
-  'ナズマド',
+  'yamaguchi_unknown_銭橘ノ岬',
+  '銭橘ノ岬',
+  '銭橘ノ岬',
   NULL,
-  33.1449992,
-  139.7393995,
+  34.013328,
+  131.7154677,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471116,
+  5224581936,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_乙千代ケ浜',
-  '乙千代ケ浜',
-  '乙千代ケ浜',
+  'yamaguchi_unknown_宮ノ鼻',
+  '宮ノ鼻',
+  '宮ノ鼻',
   NULL,
-  33.0655658,
-  139.7941347,
+  33.9835905,
+  131.7602758,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471148,
+  5224593616,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_亀トド',
-  '亀トド',
-  '亀トド',
+  'yamaguchi_unknown_三ツ石鼻',
+  '三ツ石鼻',
+  '三ツ石鼻',
   NULL,
-  33.0561829,
-  139.8215321,
+  33.9740699,
+  131.7630979,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471149,
+  5224595165,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_八重根港',
-  '八重根港',
-  '八重根港',
+  'yamaguchi_unknown_竜宮岬',
+  '竜宮岬',
+  '竜宮岬',
   NULL,
-  33.0978745,
-  139.7696951,
+  33.9736647,
+  131.7779788,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471152,
+  5224607385,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_八重根漁港',
-  '八重根漁港',
-  '八重根漁港',
+  'yamaguchi_unknown_コベ鼻',
+  'コベ鼻',
+  'コベ鼻',
   NULL,
-  33.0998878,
-  139.7777417,
+  33.9760958,
+  131.8220584,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471153,
+  5224619593,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_南原千畳敷',
-  '南原千畳敷',
-  '南原千畳敷',
+  'yamaguchi_unknown_漁人鼻',
+  '漁人鼻',
+  '漁人鼻',
   NULL,
-  33.1061295,
-  139.7541704,
+  33.9946568,
+  131.7817846,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471157,
+  5228175350,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大ヶ根',
-  '大ヶ根',
-  '大ヶ根',
+  'yamaguchi_unknown_瀬戸岬',
+  '瀬戸岬',
+  '瀬戸岬',
   NULL,
-  33.0842544,
-  139.8603054,
+  33.9904804,
+  131.8581156,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471159,
+  5228191126,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_屋けんケ浜',
-  '屋けんケ浜',
-  '屋けんケ浜',
+  'yamaguchi_unknown_四十鼻',
+  '四十鼻',
+  '四十鼻',
   NULL,
-  33.1007191,
-  139.7696226,
+  34.0536465,
+  131.7071586,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471166,
+  5228260460,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_火潟',
-  '火潟',
-  '火潟',
+  'yamaguchi_unknown_八崎岬',
+  '八崎岬',
+  '八崎岬',
   NULL,
-  33.1401078,
-  139.7378519,
+  34.0368697,
+  131.6444612,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471174,
+  5228262457,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_白ママ',
-  '白ママ',
-  '白ママ',
+  'yamaguchi_unknown_推木岬',
+  '推木岬',
+  '推木岬',
   NULL,
-  33.1106657,
-  139.8492413,
+  34.0475153,
+  131.6881043,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471176,
+  5228266349,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_赤崎',
+  'yamaguchi_unknown_赤崎',
   '赤崎',
   '赤崎',
   NULL,
-  33.1576129,
-  139.7745257,
+  34.0432997,
+  131.6780306,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471183,
+  5228268032,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_鮫切',
-  '鮫切',
-  '鮫切',
+  'yamaguchi_unknown_扇崎',
+  '扇崎',
+  '扇崎',
   NULL,
-  33.1583023,
-  139.7565415,
+  34.0149359,
+  131.6018832,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4469471187,
+  5230168017,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_初寝崎',
-  '初寝崎',
-  '初寝崎',
+  'yamaguchi_unknown_赤崎_locality',
+  '赤崎',
+  '赤崎',
   NULL,
-  30.4835391,
-  140.2867748,
+  33.9994265,
+  131.5919047,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4470977950,
+  5230181697,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_小島',
-  '小島',
-  '小島',
+  'yamaguchi_unknown_牛ヶ類',
+  '牛ヶ類',
+  '牛ヶ類',
   NULL,
-  30.4852634,
-  140.2866849,
+  33.9890807,
+  131.556341,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4470977951,
+  5230192544,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_四本岩',
-  '四本岩',
-  '四本岩',
+  'yamaguchi_unknown_タズノ鼻',
+  'タズノ鼻',
+  'タズノ鼻',
   NULL,
-  26.6478574,
-  142.1435602,
+  33.9859873,
+  131.5670756,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4471310861,
+  5230192545,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大瀬戸',
-  '大瀬戸',
-  '大瀬戸',
+  'yamaguchi_unknown_西泊崎',
+  '西泊崎',
+  '西泊崎',
   NULL,
-  26.6067698,
-  142.1777235,
+  33.9989879,
+  131.5458459,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4471310863,
+  5230199365,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_母島漁港',
-  '母島漁港',
-  '母島漁港',
+  'yamaguchi_unknown_地蔵鼻',
+  '地蔵鼻',
+  '地蔵鼻',
   NULL,
-  26.6930281,
-  142.147432,
+  34.0036465,
+  131.5088604,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4471310867,
+  5230208339,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_沖ノ浅根',
-  '沖ノ浅根',
-  'おきの あさね',
+  'yamaguchi_unknown_小磯崎',
+  '小磯崎',
+  '小磯崎',
   NULL,
-  26.6303365,
-  142.1567902,
+  34.0119192,
+  131.4806417,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4471310868,
+  5230212798,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_西浦',
-  '西浦',
-  'にしうら',
+  'yamaguchi_unknown_赤石鼻',
+  '赤石鼻',
+  '赤石鼻',
   NULL,
-  26.6536563,
-  142.14911,
+  33.9865577,
+  131.4572561,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4471310873,
+  5230226777,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_針ノ岩',
-  '針ノ岩',
-  '針ノ岩',
+  'yamaguchi_unknown_草山崎',
+  '草山崎',
+  '草山崎',
   NULL,
-  26.6807676,
-  142.1623263,
+  33.9827372,
+  131.4420589,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4471310875,
+  5230228953,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_伊ヶ谷漁港',
-  '伊ヶ谷漁港',
-  '伊ヶ谷漁港',
+  'yamaguchi_unknown_岩屋の鼻',
+  '岩屋の鼻',
+  '岩屋の鼻',
   NULL,
-  34.1008528,
-  139.4886399,
+  33.9836116,
+  131.3966126,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4488559740,
+  5230235949,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_阿古漁港',
-  '阿古漁港',
-  '阿古漁港',
+  'yamaguchi_unknown_月崎',
+  '月崎',
+  '月崎',
   NULL,
-  34.066655,
-  139.4804182,
+  33.9853661,
+  131.3603435,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  4488613183,
+  5244093053,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_松が下雅湯',
-  '松が下雅湯',
-  '松が下雅湯',
+  'yamaguchi_unknown_本山岬',
+  '本山岬',
+  '本山岬',
   NULL,
-  34.3205906,
-  139.2182186,
+  33.9304046,
+  131.1807881,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5008998805,
+  5244093068,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_唐人津城',
-  '唐人津城',
-  '唐人津城',
+  'yamaguchi_unknown_黒崎',
+  '黒崎',
+  '黒崎',
   NULL,
-  34.3211407,
-  139.1960987,
+  33.9404432,
+  131.3000549,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5011794328,
+  5244095416,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_隈の井',
-  '隈の井',
-  '隈の井',
+  'yamaguchi_unknown_串本岬',
+  '串本岬',
+  '串本岬',
   NULL,
-  34.3180793,
-  139.1985154,
+  34.0614805,
+  130.9036193,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5011794329,
+  5244184006,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_小浜漁港',
-  '小浜漁港',
-  '小浜漁港',
+  'yamaguchi_unknown_村崎ノ鼻',
+  '村崎ノ鼻',
+  '村崎ノ鼻',
   NULL,
-  34.330453,
-  139.2228967,
+  34.024446,
+  130.9038204,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5011794337,
+  5244193747,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_前浜_locality_5022092028',
-  '前浜',
-  '前浜',
+  'yamaguchi_unknown_綱代ノ鼻',
+  '綱代ノ鼻',
+  '綱代ノ鼻',
   NULL,
-  34.5319624,
-  139.2778096,
+  34.0643185,
+  130.8898125,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5022092028,
+  5244209215,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_三原山',
-  '三原山',
-  '三原山',
+  'yamaguchi_unknown_眼ノ崎',
+  '眼ノ崎',
+  '眼ノ崎',
   NULL,
-  33.0942561,
-  139.8134708,
+  34.0809325,
+  130.8752027,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5126406832,
+  5244209844,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_八丈富士',
-  '八丈富士',
-  '八丈富士',
+  'yamaguchi_unknown_毘沙ノ鼻',
+  '毘沙ノ鼻',
+  '毘沙ノ鼻',
   NULL,
-  33.1388089,
-  139.7644615,
+  34.1110256,
+  130.8601204,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5126406833,
+  5244210886,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_Taka Bureau Board',
-  'Taka Bureau Board',
-  'Taka Bureau Board',
+  'yamaguchi_unknown_戸屋ノ鼻',
+  '戸屋ノ鼻',
+  '戸屋ノ鼻',
   NULL,
-  24.2956006,
-  153.9837112,
+  34.1043342,
+  130.8612476,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5181297587,
+  5244210887,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_鎧端',
-  '鎧端',
-  '鎧端',
+  'yamaguchi_unknown_観音崎_5244218852',
+  '観音崎',
+  '観音崎',
   NULL,
-  34.7428468,
-  139.3875789,
+  34.137019,
+  130.8667923,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5222825806,
+  5244218852,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_滑台',
-  '滑台',
-  '滑台',
+  'yamaguchi_unknown_帰水',
+  '帰水',
+  '帰水',
   NULL,
-  34.7206978,
-  139.385004,
+  34.2677239,
+  131.3140654,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5222825807,
+  5694070012,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_鏡端',
-  '鏡端',
-  '鏡端',
+  'yamaguchi_unknown_馬ころび',
+  '馬ころび',
+  '馬ころび',
   NULL,
-  34.7322668,
-  139.3798542,
+  34.2483218,
+  131.3138509,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  5222825808,
+  5694152327,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_harajuku',
-  '原宿',
-  '原宿',
-  '{"en":"Harajuku"}'::jsonb,
-  35.6687049,
-  139.7053357,
-  NULL,
-  'tokyo',
+  'yamaguchi_unknown_長者ヶ森',
+  '長者ヶ森',
+  '長者ヶ森',
   NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5296974307,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_takasagodai',
-  '高砂台',
-  '高砂台',
-  '{"en":"Takasagodai"}'::jsonb,
-  24.7626474,
-  141.3011271,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386820,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_chidorigahara',
-  '千鳥ヶ原',
-  '千鳥ヶ原',
-  '{"en":"Chidorigahara"}'::jsonb,
-  24.7606404,
-  141.2946469,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386821,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_鶯',
-  '鶯',
-  '鶯',
-  NULL,
-  24.7703765,
-  141.2992549,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386822,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_azuma',
-  '東',
-  '東',
-  '{"en":"Azuma"}'::jsonb,
-  24.7811559,
-  141.3392856,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386827,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_玉名山',
-  '玉名山',
-  '玉名山',
-  NULL,
-  24.784939,
-  141.3323157,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386828,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_kong_iwa',
-  '金剛岩',
-  '金剛岩',
-  '{"en":"Kongō iwa"}'::jsonb,
-  24.7928739,
-  141.3431774,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386830,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_古山',
-  '古山',
-  '古山',
-  NULL,
-  24.7956294,
-  141.3328731,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386831,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_東山',
-  '東山',
-  '東山',
-  NULL,
-  24.7924363,
-  141.334762,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386832,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_三軒家',
-  '三軒家',
-  '三軒家',
-  NULL,
-  24.7969447,
-  141.3174895,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386834,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_元山',
-  '元山',
-  '元山',
-  NULL,
-  24.7868805,
-  141.3217443,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386835,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_aso_dai',
-  '阿蘇台',
-  '阿蘇台',
-  '{"en":"Aso-dai"}'::jsonb,
-  24.7848029,
-  141.3026265,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386836,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_西',
-  '西',
-  '西',
-  NULL,
-  24.7973444,
-  141.3086689,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386837,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_漂流木',
-  '漂流木',
-  '漂流木',
-  NULL,
-  24.803489,
-  141.3168892,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386838,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_北',
-  '北',
-  '北',
-  NULL,
-  24.8024207,
-  141.3216526,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386839,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_南',
-  '南',
-  '南',
-  NULL,
-  24.7777526,
-  141.3234961,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386843,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_霧島',
-  '霧島',
-  '霧島',
-  NULL,
-  24.7931954,
-  141.3081295,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386844,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_漂流木海岸',
-  '漂流木海岸',
-  '漂流木海岸',
-  NULL,
-  24.801637,
-  141.3092999,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996386845,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_石野',
-  '石野村',
-  '石野村',
-  NULL,
-  25.4375895,
-  141.2919707,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996425165,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_西_locality',
-  '西村',
-  '西村',
-  NULL,
-  25.4444486,
-  141.276756,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996425166,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_姪島瀬戸',
-  '姪島瀬戸',
-  '姪島瀬戸',
-  NULL,
-  26.5640804,
-  142.2226453,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489495,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_北浦',
-  '北浦',
-  '北浦',
-  NULL,
-  26.5617066,
-  142.1575281,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489507,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_姉島瀬戸',
-  '姉島瀬戸',
-  '姉島瀬戸',
-  NULL,
-  26.5675251,
-  142.148247,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489513,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_丸島瀬戸',
-  '丸島瀬戸',
-  '丸島瀬戸',
-  NULL,
-  26.5968797,
-  142.1720342,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489516,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_向島瀬戸',
-  '向島瀬戸',
-  '向島瀬戸',
-  NULL,
-  26.5913292,
-  142.1359336,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489519,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_安井海岸',
-  '安井海岸',
-  '安井海岸',
-  NULL,
-  26.6067558,
-  142.1333246,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489520,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_石浜',
-  '石浜',
-  '石浜',
-  NULL,
-  26.6035403,
-  142.1348621,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489521,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_コペペ浜',
-  'コペペ浜',
-  'コペペ浜',
-  NULL,
-  26.5998382,
-  142.1278163,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  5996489525,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_hyakkendana',
-  '渋谷百軒店',
-  'しぶやひゃっけんだな',
-  '{"en":"Hyakkendana"}'::jsonb,
-  35.6589174,
-  139.6964855,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6484427285,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_大黒根海岸',
-  '大黒根海岸',
-  '大黒根海岸',
-  NULL,
-  34.2430049,
-  139.1397428,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6664883298,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_水がしり海岸',
-  '水がしり海岸',
-  '水がしり海岸',
-  NULL,
-  34.2421446,
-  139.1386056,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6664883299,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_沢尻海岸',
-  '沢尻海岸',
-  '沢尻海岸',
-  NULL,
-  34.2175823,
-  139.1339225,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6664910353,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_小浜',
-  '小浜',
-  '小浜',
-  NULL,
-  34.2235351,
-  139.134534,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6664924216,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_うらん根海岸',
-  'うらん根海岸',
-  'うらん根海岸',
-  NULL,
-  34.2319179,
-  139.1354728,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6664924239,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_たたみが鼻',
-  'たたみが鼻',
-  'たたみが鼻',
-  NULL,
-  34.2349869,
-  139.1344428,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6664924240,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_おおだちの入り江',
-  'おおだちの入り江',
-  'おおだちの入り江',
-  NULL,
-  34.2365923,
-  139.1353011,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6672822819,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_shimokitazawa',
-  '下北沢',
-  'しもきたざわ',
-  '{"en":"Shimokitazawa"}'::jsonb,
-  35.6616779,
-  139.6663345,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  6808377675,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_そよぎの丘',
-  'そよぎの丘',
-  'そよぎの丘',
-  NULL,
-  35.7025005,
-  139.4074903,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159763175,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_小さな池の間',
-  '小さな池の間',
-  '小さな池の間',
-  NULL,
-  35.7041471,
-  139.4081227,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159763182,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_シンボルツリーの間',
-  'シンボルツリーの間',
-  'シンボルツリーの間',
-  NULL,
-  35.7040551,
-  139.4079316,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159763183,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_エクボの間',
-  'エクボの間',
-  'エクボの間',
-  NULL,
-  35.7038438,
-  139.407898,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159800485,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_実りの間',
-  '実りの間',
-  '実りの間',
-  NULL,
-  35.7035481,
-  139.407898,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159800486,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_小さな丘の間',
-  '小さな丘の間',
-  '小さな丘の間',
-  NULL,
-  35.7034136,
-  139.4079544,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159800487,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_花と香りの間',
-  '花と香りの間',
-  '花と香りの間',
+  34.2550771,
+  131.3151946,
   NULL,
-  35.7034125,
-  139.4078082,
+  'yamaguchi',
   NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159800488,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_大広間',
-  '大広間',
-  '大広間',
-  NULL,
-  35.7033173,
-  139.4079296,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159800489,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_エントランス(出会いの間)',
-  'エントランス(出会いの間)',
-  'エントランス(出会いの間)',
-  NULL,
-  35.7029587,
-  139.4079299,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  7159800490,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_horaine_coast',
-  '蓬莱根海岸',
-  'ほうらい ね かいがん',
-  '{"en":"Horaine coast"}'::jsonb,
-  26.6154405,
-  142.1782619,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  8310535849,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_四ッ海岸',
-  '四ッ海岸',
-  '四ッ海岸',
-  NULL,
-  26.6215024,
-  142.1763843,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
-  NULL,
-  NULL,
-  8310535850,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_1945_us_military_landing_nitonehama',
-  '二ッ根浜',
-  '二ッ根浜',
-  '{"en":"1945 US military landing Nitonehama"}'::jsonb,
-  24.75588,
-  141.3013586,
-  NULL,
-  'tokyo',
-  NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  9468310348,
+  5694152328,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_tamehachi_coast',
-  '為八海岸',
-  '為八海岸',
-  '{"en":"Tamehachi coast"}'::jsonb,
-  24.8083477,
-  141.3215495,
-  NULL,
-  'tokyo',
-  NULL,
-  'jp',
-  '東京都',
-  NULL,
+  'yamaguchi_unknown_西ノ島',
+  '西ノ島',
+  '西ノ島',
   NULL,
+  34.0498415,
+  131.743294,
   NULL,
-  9468310379,
-  'locality'
-);
-
-INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
-VALUES (
-  'tokyo_unknown_fuel_tanks',
-  'ジェット燃料タンク',
-  'ジェット燃料タンク',
-  '{"en":"Fuel tanks"}'::jsonb,
-  24.7848047,
-  141.3042864,
-  NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  9468312340,
+  6339756940,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_坪田漁港',
-  '坪田漁港',
-  '坪田漁港',
+  'yamaguchi_unknown_中ノ島',
+  '中ノ島',
+  '中ノ島',
   NULL,
-  34.0572216,
-  139.5442817,
+  34.0472725,
+  131.7484224,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11982721590,
+  6339756941,
   'locality'
 );
 
 INSERT INTO machi (id, name, name_kana, name_translations, latitude, longitude, lines, prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations, city_name, city_name_translations, osm_id, place_type)
 VALUES (
-  'tokyo_unknown_大久保漁港',
-  '大久保漁港',
-  '大久保漁港',
+  'yamaguchi_unknown_鍋島',
+  '鍋島',
+  '鍋島',
   NULL,
-  34.1221702,
-  139.508442,
+  34.0467169,
+  131.7505681,
   NULL,
-  'tokyo',
+  'yamaguchi',
   NULL,
   'jp',
-  '東京都',
+  '山口県',
   NULL,
   NULL,
   NULL,
-  11982721591,
+  6339756942,
   'locality'
 );
 
 -- トランザクションコミット
 COMMIT;
 
--- 完了: cities 49件, machi 1048件を挿入
--- (cities 3件は正式な市区町村でないため除外)
+-- 完了: cities 13件, machi 1254件を挿入

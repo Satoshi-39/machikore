@@ -3,13 +3,13 @@
  */
 
 import { useMemo } from 'react';
-import { useMachi } from '../api/use-machi';
+import { useCachedMachi } from '../api/use-machi';
 
 /**
  * 全路線名を取得
  */
 export function useLineNames() {
-  const { data: machiList, ...rest } = useMachi();
+  const { data: machiList, ...rest } = useCachedMachi();
 
   const lineNames = useMemo<string[]>(() => {
     if (!machiList) return [];

@@ -82,6 +82,8 @@ export const QUERY_KEYS = {
 
   // 市区町村
   cities: () => ['cities'] as const,
+  citiesByPrefecture: (prefectureId: string) =>
+    ['cities', 'prefecture', prefectureId] as const,
 
   // 街
   machi: ['machi'] as const,

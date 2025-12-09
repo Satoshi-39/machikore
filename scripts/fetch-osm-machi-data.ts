@@ -39,7 +39,7 @@ interface CityData {
   name: string;
   nameKana: string | null;
   nameTranslations: { en?: string } | null;
-  type: string; // 区, 市, 町, 村
+  type: string | null; // 区, 市, 町, 村, 郡 または null（正式な市区町村でない場合）
   countryCode: string;
   latitude: number;
   longitude: number;
@@ -83,17 +83,20 @@ const PREFECTURES: Record<string, { id: string; name: string }> = {
   '愛知県': { id: 'aichi', name: '愛知県' },
   '福岡県': { id: 'fukuoka', name: '福岡県' },
   '北海道': { id: 'hokkaido', name: '北海道' },
+  '山口県': { id: 'yamaguchi', name: '山口県' },
 };
 
 /**
  * 市区町村の種別を判定
+ * 正式な市区町村名でない場合はnullを返す
  */
-function getCityType(name: string): string {
+function getCityType(name: string): string | null {
   if (name.endsWith('区')) return '区';
   if (name.endsWith('市')) return '市';
   if (name.endsWith('町')) return '町';
   if (name.endsWith('村')) return '村';
-  return '市'; // デフォルト
+  if (name.endsWith('郡')) return '郡';
+  return null; // 正式な市区町村でない場合はnull
 }
 
 /**
@@ -142,7 +145,7 @@ async function fetchOSMData(prefectureName: string, placeTypes: string[]): Promi
     throw new Error(`Failed to fetch OSM data: ${response.statusText}`);
   }
 
-  const data: OSMResponse = await response.json();
+  const data = await response.json() as OSMResponse;
   return data.elements;
 }
 
@@ -190,29 +193,25 @@ function convertToCityData(
 }
 
 /**
- * 座標から最寄りのcityを見つける
+ * is_inタグからcityを見つける
+ * is_inの形式例: "北区 (Kita)", "中野区 (Nakano)", "Japan, Tokyo"
+ * is_inタグがない場合はnullを返す（座標ベースの判定は誤りの原因になるため行わない）
  */
-function findNearestCity(lat: number, lon: number, cities: CityData[]): CityData | null {
-  if (cities.length === 0) return null;
+function findCityByIsIn(isInValue: string | undefined, cities: CityData[]): CityData | null {
+  if (!isInValue) return null;
+  const isIn: string = isInValue;
 
-  let nearest: CityData | null = null;
-  let minDistance = Infinity;
+  // "北区 (Kita)" のような形式から日本語名を抽出
+  const japaneseName = isIn.split('(')[0].trim();
 
-  for (const city of cities) {
-    const distance = Math.sqrt(
-      Math.pow(city.latitude - lat, 2) + Math.pow(city.longitude - lon, 2)
-    );
-    if (distance < minDistance) {
-      minDistance = distance;
-      nearest = city;
-    }
-  }
-
-  return nearest;
+  // 完全一致で検索（部分一致は誤マッチの原因になるため行わない）
+  const exactMatch = cities.find(city => city.name === japaneseName);
+  return exactMatch ?? null;
 }
 
 /**
  * OSMデータをMachiData形式に変換
+ * is_inタグがある場合のみcityを紐付け、ない場合はcityId/cityNameをnullにする
  */
 function convertToMachiData(
   elements: OSMElement[],
@@ -222,6 +221,7 @@ function convertToMachiData(
 ): MachiData[] {
   const results: MachiData[] = [];
   const seenIds = new Set<string>();
+  let noIsInCount = 0;
 
   for (const element of elements) {
     const name = element.tags.name;
@@ -230,17 +230,26 @@ function convertToMachiData(
     // 丁目を含む名前は除外
     if (name.includes('丁目')) continue;
 
-    // 最寄りのcityを見つける
-    const nearestCity = findNearestCity(element.lat, element.lon, cities);
-    if (!nearestCity) continue;
+    // is_inタグからcityを探す（座標ベースの判定は行わない）
+    const matchedCity = findCityByIsIn(element.tags['is_in'], cities);
 
     const slug = toSlugFromEn(element.tags['name:en'] ?? null, name);
-    const citySlug = nearestCity.id.replace(`${prefectureId}_`, '');
-    const id = `${prefectureId}_${citySlug}_${slug}`;
+    const citySlug = matchedCity ? matchedCity.id.replace(`${prefectureId}_`, '') : 'unknown';
+    const placeType = element.tags.place || 'unknown';
+    let id = `${prefectureId}_${citySlug}_${slug}`;
 
-    // 重複チェック（IDベース）
-    if (seenIds.has(id)) continue;
+    // 重複チェック（IDベース）- 重複がある場合はplaceTypeを付与、それでも重複ならosmIdを付与
+    if (seenIds.has(id)) {
+      id = `${id}_${placeType}`;
+      if (seenIds.has(id)) {
+        id = `${id}_${element.id}`;
+      }
+    }
     seenIds.add(id);
+
+    if (!matchedCity) {
+      noIsInCount++;
+    }
 
     const nameEn = element.tags['name:en'] ?? null;
 
@@ -254,14 +263,18 @@ function convertToMachiData(
       longitude: element.lon,
       lines: null,
       prefectureId,
-      cityId: nearestCity.id,
+      cityId: matchedCity?.id ?? null,
       countryCode: 'jp',
       prefectureName,
       prefectureNameTranslations: null,
-      cityName: nearestCity.name,
+      cityName: matchedCity?.name ?? null,
       cityNameTranslations: null,
       placeType: element.tags.place || 'unknown',
     });
+  }
+
+  if (noIsInCount > 0) {
+    console.log(`    ⚠️ is_inタグなし: ${noIsInCount}件（cityId/cityNameがnull）`);
   }
 
   return results;
@@ -274,8 +287,8 @@ async function main() {
   console.log('OSM街データ取得スクリプト');
   console.log('='.repeat(50));
 
-  // 東京都のデータを取得
-  const prefectureName = '東京都';
+  // 山口県のデータを取得
+  const prefectureName = '山口県';
   const prefecture = PREFECTURES[prefectureName];
 
   if (!prefecture) {

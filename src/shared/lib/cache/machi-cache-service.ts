@@ -35,8 +35,13 @@ export async function getMachiByPrefecture(prefectureId: string): Promise<MachiR
 
   // キャッシュが有効かチェック
   if (isCacheValid(cacheKey)) {
-    console.log(`📦 キャッシュから街データを取得: ${prefectureId}`);
-    return getMachiFromSQLite(prefectureId);
+    const cachedData = getMachiFromSQLite(prefectureId);
+    // キャッシュにデータがある場合のみ使用（0件の場合は再取得）
+    if (cachedData.length > 0) {
+      console.log(`📦 キャッシュから街データを取得: ${prefectureId} (${cachedData.length}件)`);
+      return cachedData;
+    }
+    console.log(`⚠️ キャッシュは有効だがデータが空、Supabaseから再取得: ${prefectureId}`);
   }
 
   // Supabaseから取得

@@ -57,10 +57,10 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
   ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange: _onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false }, ref) => {
     const insets = useSafeAreaInsets();
     const isDarkMode = useIsDarkMode();
-    const { data: machiData, isLoading, error } = useMachi();
+    const { data: machiData, isLoading, error } = useMachi({ currentLocation });
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
-    const { data: cities = [] } = useCities();
+    const { data: cities = [] } = useCities({ currentLocation });
     const [visitFilter, setVisitFilter] = useState<VisitFilter>('all');
     const cameraRef = useRef<Mapbox.Camera>(null);
 
@@ -273,7 +273,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         <View style={{ flex: 1 }}>
           <Mapbox.MapView
             style={{ flex: 1 }}
-            styleURL={isDarkMode ? ENV.MAPBOX_STYLE_URL_DARK : ENV.MAPBOX_STYLE_URL}
+            styleURL={isDarkMode ? ENV.MAPBOX_DEFAULT_MAP_STYLE_URL_DARK : ENV.MAPBOX_DEFAULT_MAP_STYLE_URL}
             onCameraChanged={handleCameraChanged}
             scaleBarEnabled={false}
           >

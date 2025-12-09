@@ -3,13 +3,16 @@
  */
 
 import { useMemo } from 'react';
-import { useMachi } from './use-machi';
+import { useCachedMachi } from './use-machi';
 
 /**
  * 指定された市区IDに属する街データを取得
+ *
+ * Note: キャッシュされた街データからフィルタリングします。
+ * 事前に該当する都道府県のデータが取得されている必要があります。
  */
 export function useMachiByCity(cityId: string) {
-  const { data: allMachi, isLoading, error } = useMachi();
+  const { data: allMachi, isLoading, error } = useCachedMachi();
 
   const machis = useMemo(() => {
     if (!allMachi) return [];

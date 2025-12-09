@@ -62,8 +62,12 @@ export const ENV = {
 
   // Mapbox
   MAPBOX_ACCESS_TOKEN: getEnvVar('EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN', ''),
-  MAPBOX_STYLE_URL: getEnvVar('EXPO_PUBLIC_MAPBOX_STYLE_URL', 'mapbox://styles/mapbox/streets-v12'),
-  MAPBOX_STYLE_URL_DARK: 'mapbox://styles/tyatsushi/cmiq3bvq800os01r98ki7bk0f',
+  // デフォルトマップ用スタイル
+  MAPBOX_DEFAULT_MAP_STYLE_URL: 'mapbox://styles/tyatsushi/cmib9h22p003x01snfpcmd1wn',
+  MAPBOX_DEFAULT_MAP_STYLE_URL_DARK: 'mapbox://styles/tyatsushi/cmiq3bvq800os01r98ki7bk0f',
+  // ユーザーマップ用スタイル
+  MAPBOX_USER_MAP_STYLE_URL: 'mapbox://styles/tyatsushi/cmibfra3o004d01sng79sgd84',
+  MAPBOX_USER_MAP_STYLE_URL_DARK: 'mapbox://styles/tyatsushi/cmibfkmf5004i01rc5bwq49ug',
 
   // Google OAuth
   GOOGLE_OAUTH_IOS_CLIENT_ID: getEnvVar('EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID', ''),
