@@ -90,6 +90,8 @@ export const QUERY_KEYS = {
     [...QUERY_KEYS.machi, 'detail', machiId] as const,
   machiSearch: (searchTerm: string) =>
     [...QUERY_KEYS.machi, 'search', searchTerm] as const,
+  machiByPrefecture: (prefectureId: string) =>
+    [...QUERY_KEYS.machi, 'prefecture', prefectureId] as const,
 
   // 駅（後方互換性のため残す）
   /** @deprecated Use machi instead */

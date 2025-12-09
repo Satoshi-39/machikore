@@ -15,3 +15,4 @@ export * from './spots';
 export * from './likes';
 export * from './schedules';
 export * from './follows';
+export * from './cache';

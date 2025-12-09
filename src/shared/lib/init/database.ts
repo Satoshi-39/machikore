@@ -8,14 +8,10 @@ import {
   runMigrations,
   bulkInsertRegions,
   bulkInsertPrefectures,
-  bulkInsertCities,
-  bulkInsertMachi,
   getRegionCount,
   getPrefectureCount,
-  getCityCount,
-  getMachiCount,
 } from '@/shared/api/sqlite';
-import { getRegionsData, getPrefecturesData, getCitiesData, getMachiData } from '@/shared/lib';
+import { getRegionsData, getPrefecturesData } from '@/shared/lib';
 import { seedSampleData } from './seed-data';
 import { cleanupSampleData } from './cleanup-data';
 
@@ -67,29 +63,9 @@ export async function initDatabase(): Promise<void> {
       console.log(`✅ 都道府県データはすでに存在 (${prefectureCount}件)`);
     }
 
-    // 市区町村データをチェック
-    const cityCount = getCityCount();
-
-    if (cityCount === 0) {
-      console.log('🏙️ 市区町村データを読み込み中...');
-      const citiesData = getCitiesData();
-      bulkInsertCities(citiesData);
-      console.log(`✅ ${citiesData.length}件の市区町村データを読み込み完了`);
-    } else {
-      console.log(`✅ 市区町村データはすでに存在 (${cityCount}件)`);
-    }
-
-    // 街データをチェック
-    const machiCount = getMachiCount();
-
-    if (machiCount === 0) {
-      console.log('🏘️ 街データを読み込み中...');
-      const machiData = getMachiData();
-      bulkInsertMachi(machiData);
-      console.log(`✅ ${machiData.length}件の街データを読み込み完了`);
-    } else {
-      console.log(`✅ 街データはすでに存在 (${machiCount}件)`);
-    }
+    // 街・市区町村データはSupabaseからオンデマンドで取得するため、
+    // ここでは初期化しない（machi-cache-service.tsで管理）
+    console.log('📍 街・市区町村データはSupabaseからオンデマンド取得');
 
     console.log('🎉 データベース初期化完了（Stage 1）');
   } catch (error) {

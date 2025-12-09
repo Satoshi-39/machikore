@@ -519,6 +519,27 @@ export function initializeDatabase(): void {
       );
     `);
 
+    // 15. キャッシュメタデータテーブル（TTL管理用）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS cache_metadata (
+        cache_key TEXT PRIMARY KEY,
+        entity_type TEXT NOT NULL,
+        fetched_at TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        record_count INTEGER DEFAULT 0
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_cache_metadata_entity_type
+      ON cache_metadata(entity_type);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_cache_metadata_expires_at
+      ON cache_metadata(expires_at);
+    `);
+
     // インデックス作成
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_sync_queue_entity_type

@@ -172,6 +172,13 @@ export function clearAllMachi(): void {
   execute('DELETE FROM machi;');
 }
 
+/**
+ * 特定の都道府県の街データを削除
+ */
+export function clearMachiByPrefectureId(prefectureId: string): void {
+  execute('DELETE FROM machi WHERE prefecture_id = ?;', [prefectureId]);
+}
+
 // ===============================
 // ユーティリティ
 // ===============================

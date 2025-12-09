@@ -85,3 +85,26 @@ export function getPrefecturesByRegionId(regionId: string): PrefectureRow[] {
     [regionId]
   );
 }
+
+/**
+ * 位置情報から最寄りの都道府県を取得
+ */
+export function getNearestPrefecture(
+  latitude: number,
+  longitude: number
+): PrefectureRow | null {
+  const db = getDatabase();
+
+  // 緯度経度の差分で簡易的に距離を計算してソート
+  const result = db.getFirstSync<PrefectureRow>(
+    `SELECT *,
+      ABS(latitude - ?) + ABS(longitude - ?) as distance
+    FROM prefectures
+    WHERE latitude IS NOT NULL AND longitude IS NOT NULL
+    ORDER BY distance
+    LIMIT 1`,
+    [latitude, longitude]
+  );
+
+  return result ?? null;
+}

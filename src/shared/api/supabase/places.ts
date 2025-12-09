@@ -66,6 +66,40 @@ export async function getMachiById(machiId: string): Promise<MachiRow | null> {
   return data;
 }
 
+/**
+ * 都道府県IDで街データを取得
+ */
+export async function getMachiByPrefectureId(prefectureId: string): Promise<MachiRow[]> {
+  const { data, error } = await supabase
+    .from('machi')
+    .select('*')
+    .eq('prefecture_id', prefectureId)
+    .order('name');
+
+  if (error) {
+    handleSupabaseError('getMachiByPrefectureId', error);
+  }
+
+  return data || [];
+}
+
+/**
+ * 市区町村IDで街データを取得
+ */
+export async function getMachiByCityId(cityId: string): Promise<MachiRow[]> {
+  const { data, error } = await supabase
+    .from('machi')
+    .select('*')
+    .eq('city_id', cityId)
+    .order('name');
+
+  if (error) {
+    handleSupabaseError('getMachiByCityId', error);
+  }
+
+  return data || [];
+}
+
 // ===============================
 // City（市区町村）
 // ===============================
@@ -88,6 +122,39 @@ export async function getCityById(cityId: string): Promise<CityRow | null> {
   }
 
   return data;
+}
+
+/**
+ * 都道府県IDで市区町村データを取得
+ */
+export async function getCitiesByPrefectureId(prefectureId: string): Promise<CityRow[]> {
+  const { data, error } = await supabase
+    .from('cities')
+    .select('*')
+    .eq('prefecture_id', prefectureId)
+    .order('name');
+
+  if (error) {
+    handleSupabaseError('getCitiesByPrefectureId', error);
+  }
+
+  return data || [];
+}
+
+/**
+ * 全都道府県を取得
+ */
+export async function getAllPrefectures(): Promise<PrefectureRow[]> {
+  const { data, error } = await supabase
+    .from('prefectures')
+    .select('*')
+    .order('id');
+
+  if (error) {
+    handleSupabaseError('getAllPrefectures', error);
+  }
+
+  return data || [];
 }
 
 // ===============================
