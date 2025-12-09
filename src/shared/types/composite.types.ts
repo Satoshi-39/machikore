@@ -84,6 +84,7 @@ export interface MasterSpotBasicInfo {
 export interface MapBasicInfo {
   id: string;
   name: string;
+  theme_color: string;
 }
 
 export interface SpotWithDetails {

@@ -7,6 +7,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Share, Platform, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon } from '@/shared/ui';
@@ -31,6 +32,7 @@ interface MapCardProps {
 }
 
 export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress }: MapCardProps) {
+  const router = useRouter();
   const isDarkMode = useIsDarkMode();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
@@ -59,6 +61,9 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const isOwner = currentUserId && map.user_id === currentUserId;
+
+  // 記事公開状態（MapWithUserの場合のみ）
+  const isArticlePublic = 'is_article_public' in map && map.is_article_public === true;
 
   const handleLikePress = (e: any) => {
     e.stopPropagation();
@@ -122,15 +127,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   const menuItems: PopupMenuItem[] = useMemo(() => {
     const items: PopupMenuItem[] = [];
 
-    // 記事を見る（常に表示、非公開の場合は記事ページ側で対応）
-    items.push({
-      id: 'article',
-      label: '記事を見る',
-      icon: 'document-text-outline',
-      onPress: () => onArticlePress?.(map.id),
-    });
-
-    // オーナーのみ編集・削除を表示
+    // オーナーの場合: 編集・削除
     if (isOwner) {
       items.push(
         {
@@ -147,10 +144,24 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
           onPress: handleDelete,
         }
       );
+    } else {
+      // 他ユーザーの場合: 報告する
+      items.push({
+        id: 'report',
+        label: '報告する',
+        icon: 'flag-outline',
+        onPress: () => {
+          if (!currentUserId) {
+            showLoginRequiredAlert('報告');
+            return;
+          }
+          router.push(`/report?targetType=map&targetId=${map.id}`);
+        },
+      });
     }
 
     return items;
-  }, [map.id, onEdit, onArticlePress, isOwner]);
+  }, [map.id, onEdit, isOwner, currentUserId, router]);
 
   return (
     <Pressable
@@ -181,6 +192,20 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
             </Text>
           </Pressable>
         </View>
+
+        {/* 記事アイコン（オーナーは常に表示、他ユーザーは公開時のみ） */}
+        {(isOwner || isArticlePublic) && (
+          <Pressable
+            onPress={(e) => {
+              e.stopPropagation();
+              onArticlePress?.(map.id);
+            }}
+            className="p-2 mr-1"
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons name="document-text-outline" size={20} color={colors.text.secondary} />
+          </Pressable>
+        )}
 
         {/* 三点リーダーメニュー */}
         <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />

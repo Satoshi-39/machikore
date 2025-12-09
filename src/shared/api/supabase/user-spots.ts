@@ -122,6 +122,7 @@ export interface UserSpotSearchResult {
   map: {
     id: string;
     name: string;
+    theme_color: string;
   } | null;
 }
 
@@ -316,7 +317,8 @@ export async function getSpotWithDetails(
       ),
       maps (
         id,
-        name
+        name,
+        theme_color
       ),
       likes (
         id,
@@ -359,7 +361,7 @@ export async function getSpotWithDetails(
     google_short_address: spot.google_short_address,
     master_spot: spot.master_spots || null,
     user: spot.users || null,
-    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
     is_liked: isLiked,
   };
 }
@@ -452,6 +454,7 @@ export async function getPublicSpots(
       maps!inner (
         id,
         name,
+        theme_color,
         is_public
       ),
       likes (
@@ -493,7 +496,7 @@ export async function getPublicSpots(
       google_short_address: spot.google_short_address,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
-      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
       is_liked: isLiked,
     };
   });
@@ -537,6 +540,7 @@ export async function searchPublicUserSpots(
       maps!inner (
         id,
         name,
+        theme_color,
         is_public
       )
     `)
@@ -597,7 +601,7 @@ export async function searchPublicUserSpots(
       updated_at: spot.updated_at,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
-      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
     });
   });
 
@@ -631,7 +635,7 @@ export async function searchPublicUserSpots(
             google_short_address: masterSpot.google_short_address,
           },
           user: spot.users || null,
-          map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+          map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
         });
       }
     });

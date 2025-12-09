@@ -20,3 +20,4 @@ export { updateUserProfile, searchUsers, type ProfileUpdateData, type UserSearch
 export * from './visits';
 export * from './notification-settings';
 export * from './places';
+export * from './reports';

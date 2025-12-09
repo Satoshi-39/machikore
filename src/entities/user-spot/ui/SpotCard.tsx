@@ -10,8 +10,9 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions, Share, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer } from '@/shared/ui';
+import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon } from '@/shared/ui';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
@@ -68,12 +69,19 @@ export function SpotCard({
   embeddedUser,
   embeddedMasterSpot,
 }: SpotCardProps) {
+  const isDarkMode = useIsDarkMode();
+
   // embeddedUserがあればuseUserをスキップ
   const { data: fetchedUser } = useUser(embeddedUser ? null : spot.user_id);
   const user = embeddedUser || fetchedUser;
 
   // いいね状態は spot.is_liked を使用（SpotWithDetails の場合）
   const isLiked = 'is_liked' in spot ? (spot.is_liked ?? false) : false;
+
+  // マップのテーマカラーを取得
+  const themeColor = ('map' in spot && spot.map?.theme_color) ? spot.map.theme_color as UserMapThemeColor : 'blue';
+  const themeColorValue = USER_MAP_THEME_COLORS[themeColor]?.color ?? colors.primary.DEFAULT;
+  const themeColorStroke = getThemeColorStroke(themeColor, isDarkMode);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
@@ -259,9 +267,19 @@ export function SpotCard({
       </View>
 
       {/* スポット名 */}
-      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
-        📍 {spotName}
-      </Text>
+      <View className="flex-row items-center mb-1">
+        <LocationPinIcon size={18} color={themeColorValue} strokeColor={themeColorStroke} />
+        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-1">
+          {spotName}
+        </Text>
+      </View>
+
+      {/* 説明 */}
+      {spot.description && (
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          {spot.description}
+        </Text>
+      )}
 
       {/* マップ名 */}
       {mapName && (
@@ -274,13 +292,6 @@ export function SpotCard({
             {mapName}
           </Text>
         </Pressable>
-      )}
-
-      {/* 説明 */}
-      {spot.description && (
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
-          {spot.description}
-        </Text>
       )}
 
       {/* 画像（2x2グリッド、最大4枚表示） */}

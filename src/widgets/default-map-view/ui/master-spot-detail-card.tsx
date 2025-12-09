@@ -343,7 +343,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                     router.push(`/(tabs)/${currentTab}/spots/${userSpot.id}` as any);
                   }}
                 >
-                  {/* ユーザー情報とマップ名 */}
+                  {/* ユーザー情報 */}
                   <View className="flex-row items-center mb-2">
                     {userSpot.user?.avatar_url ? (
                       <Image
@@ -356,19 +356,9 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                       </View>
                     )}
                     <View className="ml-2 flex-1">
-                      <View className="flex-row items-center">
-                        <Text className="text-sm font-medium text-foreground dark:text-dark-foreground">
-                          {userSpot.user?.display_name || userSpot.user?.username || 'ユーザー'}
-                        </Text>
-                        {userSpot.map && (
-                          <View className="flex-row items-center ml-2">
-                            <Ionicons name="map-outline" size={12} color={colors.primary.DEFAULT} />
-                            <Text className="text-xs text-blue-500 ml-1" numberOfLines={1}>
-                              {userSpot.map.name}
-                            </Text>
-                          </View>
-                        )}
-                      </View>
+                      <Text className="text-sm font-medium text-foreground dark:text-dark-foreground">
+                        {userSpot.user?.display_name || userSpot.user?.username || 'ユーザー'}
+                      </Text>
                       <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
                         {getRelativeSpotTime(userSpot.created_at)}
                       </Text>
@@ -419,6 +409,16 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                         </Pressable>
                       ))}
                     </ScrollView>
+                  )}
+
+                  {/* マップ名 */}
+                  {userSpot.map && (
+                    <View className="flex-row items-center mt-2">
+                      <Ionicons name="map-outline" size={14} color={colors.primary.DEFAULT} />
+                      <Text className="text-xs text-blue-500 ml-1" numberOfLines={1}>
+                        {userSpot.map.name}
+                      </Text>
+                    </View>
                   )}
 
                   {/* いいね・コメント数 */}

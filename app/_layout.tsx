@@ -251,6 +251,13 @@ function RootNavigator() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="report"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
         </Stack>
         <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         <Toast config={createToastConfig(isDarkMode)} />

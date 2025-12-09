@@ -346,4 +346,7 @@ export const INPUT_LIMITS = {
   // スケジュール
   SCHEDULE_TITLE: 100,
   SCHEDULE_MEMO: 500,
+
+  // 報告
+  REPORT_DESCRIPTION: 500,
 } as const;
