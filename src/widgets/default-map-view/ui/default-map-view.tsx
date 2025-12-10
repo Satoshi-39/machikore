@@ -11,6 +11,7 @@ import Mapbox from '@rnmapbox/maps';
 import { useMachi, useMachiGeoJson } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
+import { useTransportHubs, useTransportHubsGeoJson } from '@/entities/transport-hub';
 import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCities, useCitiesGeoJson } from '@/entities/city';
@@ -19,7 +20,7 @@ import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
-import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels } from './layers';
+import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels, TransportHubLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
 import { useCountriesGeoJson } from '@/entities/country/model';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
@@ -65,9 +66,10 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // ビューポート範囲管理（先に定義してcameraStateを取得）
     const { bounds, cameraState, handleCameraChanged } = useBoundsManagement({ currentLocation });
 
-    // マップ中心座標でmachi/citiesを取得
+    // マップ中心座標でmachi/cities/transportHubsを取得
     const { data: machiData, isLoading, error } = useMachi({ currentLocation, mapCenter: cameraState.center });
     const { data: cities = [] } = useCities({ currentLocation, mapCenter: cameraState.center });
+    const { data: transportHubs = [] } = useTransportHubs({ currentLocation, mapCenter: cameraState.center });
 
     // 検索バーの表示状態
     const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);
@@ -197,6 +199,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
     const citiesGeoJson = useCitiesGeoJson(cities);
     const countriesGeoJson = useCountriesGeoJson(countries);
+    const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
 
 
     // 街マーカータップ時のハンドラー
@@ -267,7 +270,6 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       <Mapbox.MapView
         style={{ flex: 1 }}
         styleURL={isDarkMode ? ENV.MAPBOX_DEFAULT_MAP_STYLE_URL_DARK : ENV.MAPBOX_DEFAULT_MAP_STYLE_URL}
-        localizeLabels={true}
         onCameraChanged={handleCameraChanged}
         scaleBarEnabled={false}
       >
@@ -296,6 +298,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
 
             {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
             <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
+
+            {/* 交通機関ラベル表示（駅・空港など）- ズーム12以上で表示 */}
+            <TransportHubLabels geoJson={transportHubsGeoJson} />
 
             {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
             <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />

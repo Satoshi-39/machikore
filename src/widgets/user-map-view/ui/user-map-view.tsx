@@ -285,7 +285,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           ref={mapViewRef}
           style={{ flex: 1 }}
           styleURL={isDarkMode ? ENV.MAPBOX_USER_MAP_STYLE_URL_DARK : ENV.MAPBOX_USER_MAP_STYLE_URL}
-          localizeLabels={true}
           onCameraChanged={handleCameraChanged}
           onDidFinishLoadingMap={handleMapReady}
           scaleBarEnabled={false}

@@ -95,6 +95,9 @@ export const QUERY_KEYS = {
   machiByPrefecture: (prefectureId: string) =>
     [...QUERY_KEYS.machi, 'prefecture', prefectureId] as const,
 
+  // 交通機関
+  transportHubs: () => ['transport-hubs'] as const,
+
   // 駅（後方互換性のため残す）
   /** @deprecated Use machi instead */
   stations: ['machi'] as const,

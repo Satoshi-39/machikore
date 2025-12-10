@@ -21,3 +21,4 @@ export * from './visits';
 export * from './notification-settings';
 export * from './places';
 export * from './reports';
+export * from './transport-hubs';
