@@ -20,6 +20,8 @@ const OVERPASS_API = 'https://overpass-api.de/api/interpreter';
 const PREFECTURES: Record<string, string> = {
   tokyo: '東京都',
   kanagawa: '神奈川県',
+  saitama: '埼玉県',
+  chiba: '千葉県',
   osaka: '大阪府',
   kyoto: '京都府',
   aichi: '愛知県',

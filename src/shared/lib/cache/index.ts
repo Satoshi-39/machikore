@@ -10,11 +10,8 @@ export {
   prefetchMachiData,
 } from './machi-cache-service';
 
-export {
-  getCitiesByPrefecture,
-  getCitiesByLocation,
-  getAllCachedCities,
-} from './cities-cache-service';
+// Note: cities-cache-serviceは廃止
+// citiesはReact Queryメモリキャッシュのみ使用（use-cities.ts参照）
 
 // TanStack Query キャッシュ管理
 export {

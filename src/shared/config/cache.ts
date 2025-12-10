@@ -33,14 +33,15 @@ export const STATIC_DATA_CACHE_CONFIG = {
  *
  * 各データ種別ごとにメモリに保持する最大エントリ数を定義
  * 上限を超えた場合、最も古くアクセスされたものから削除
+ *
+ * Note:
+ * - transport-hubs/citiesは動的に多くの場所を見るため、LRU管理対象外
+ *   （gcTimeで自動的にメモリから解放される）
+ * - machiはデフォルトマップでのみ表示されるため、LRU管理対象
  */
 export const LRU_CACHE_LIMITS = {
-  /** 交通機関データ: 最大5都道府県分 */
-  transportHubs: 5,
   /** 街データ: 最大5都道府県分 */
   machi: 5,
-  /** 市区町村データ: 最大5都道府県分 */
-  cities: 5,
 } as const;
 
 // ===============================
@@ -70,10 +71,11 @@ export const PERSISTER_STORAGE_KEY = 'MACHIKORE_QUERY_CACHE';
  * 永続化対象のクエリキープレフィックス
  *
  * これらのプレフィックスを持つクエリのみAsyncStorageに永続化
+ *
+ * Note:
+ * - machi/citiesはSQLiteでキャッシュするため対象外
+ * - transport-hubsは動的に多くの場所を見るため対象外（メモリキャッシュのみ）
  */
 export const PERSISTED_QUERY_PREFIXES = [
-  'transport-hubs',
-  'machi',
-  'cities',
   'prefectures',
 ] as const;

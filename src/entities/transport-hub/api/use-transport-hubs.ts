@@ -1,9 +1,9 @@
 /**
  * 交通機関データを取得するhook
  *
- * Supabaseから取得し、TanStack Queryでキャッシュ管理
- * - 永続化: AsyncStorageに30日間保存
- * - LRU: 最大5都道府県分をメモリに保持
+ * Supabaseから取得し、TanStack Queryでメモリキャッシュ
+ * - 永続化: なし（ユーザーが様々な場所を見るため）
+ * - LRU管理: なし（gcTimeで自動解放）
  */
 
 import { useQuery } from '@tanstack/react-query';
@@ -15,7 +15,7 @@ import {
   type TransportHubRow,
   type TransportHubType,
 } from '@/shared/api/supabase';
-import { STATIC_DATA_CACHE_CONFIG } from '@/shared/config';
+import { DYNAMIC_DATA_CACHE_CONFIG } from '@/shared/config';
 
 // デフォルトの都道府県ID（東京）
 const DEFAULT_PREFECTURE_ID = 'tokyo';
@@ -52,8 +52,8 @@ export function useTransportHubs(options: UseTransportHubsOptions = {}) {
       console.log(`✅ getTransportHubsByPrefecture成功: ${hubs.length}件`);
       return hubs;
     },
-    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
-    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分（メモリから解放、永続化には残る）
+    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
+    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分（メモリから解放）
   });
 }
 
@@ -99,7 +99,7 @@ export function useTransportHubsByBounds(options: UseTransportHubsByBoundsOption
       );
     },
     enabled: !!bounds,
-    staleTime: 5 * 60 * 1000, // 5分
-    gcTime: 30 * 60 * 1000, // 30分
+    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
+    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分
   });
 }

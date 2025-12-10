@@ -78,6 +78,8 @@ interface OutputData {
 const PREFECTURES: Record<string, { id: string; name: string }> = {
   '東京都': { id: 'tokyo', name: '東京都' },
   '神奈川県': { id: 'kanagawa', name: '神奈川県' },
+  '埼玉県': { id: 'saitama', name: '埼玉県' },
+  '千葉県': { id: 'chiba', name: '千葉県' },
   '大阪府': { id: 'osaka', name: '大阪府' },
   '京都府': { id: 'kyoto', name: '京都府' },
   '愛知県': { id: 'aichi', name: '愛知県' },
@@ -280,6 +282,20 @@ function convertToMachiData(
   return results;
 }
 
+// IDから日本語名へのマッピング
+const ID_TO_NAME: Record<string, string> = {
+  tokyo: '東京都',
+  kanagawa: '神奈川県',
+  saitama: '埼玉県',
+  chiba: '千葉県',
+  osaka: '大阪府',
+  kyoto: '京都府',
+  aichi: '愛知県',
+  fukuoka: '福岡県',
+  hokkaido: '北海道',
+  yamaguchi: '山口県',
+};
+
 /**
  * メイン処理
  */
@@ -287,8 +303,16 @@ async function main() {
   console.log('OSM街データ取得スクリプト');
   console.log('='.repeat(50));
 
-  // 山口県のデータを取得
-  const prefectureName = '山口県';
+  // コマンドライン引数から都道府県IDを取得
+  const prefectureId = process.argv[2] || 'yamaguchi';
+  const prefectureName = ID_TO_NAME[prefectureId];
+
+  if (!prefectureName) {
+    console.error(`Unknown prefecture ID: ${prefectureId}`);
+    console.error(`Available: ${Object.keys(ID_TO_NAME).join(', ')}`);
+    process.exit(1);
+  }
+
   const prefecture = PREFECTURES[prefectureName];
 
   if (!prefecture) {

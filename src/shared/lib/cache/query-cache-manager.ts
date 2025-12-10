@@ -23,19 +23,18 @@ interface CacheConfig {
 // LRUキャッシュ設定
 // ===============================
 
-/** LRUキャッシュの設定（shared/configから参照） */
+/**
+ * LRUキャッシュの設定（shared/configから参照）
+ *
+ * Note:
+ * - transport-hubs/citiesは動的に多くの場所を見るため、LRU管理対象外
+ *   （gcTimeで自動的にメモリから解放される）
+ * - machiはデフォルトマップでのみ表示されるため、LRU管理対象
+ */
 const LRU_CACHE_CONFIGS: CacheConfig[] = [
-  {
-    queryKeyPrefix: ['transport-hubs'],
-    maxEntries: LRU_CACHE_LIMITS.transportHubs,
-  },
   {
     queryKeyPrefix: ['machi'],
     maxEntries: LRU_CACHE_LIMITS.machi,
-  },
-  {
-    queryKeyPrefix: ['cities'],
-    maxEntries: LRU_CACHE_LIMITS.cities,
   },
 ];
 

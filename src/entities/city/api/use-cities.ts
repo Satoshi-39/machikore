@@ -1,13 +1,16 @@
 /**
  * 市区町村データを取得するhook
  *
- * Supabase → SQLiteキャッシュのフローで市区町村データを取得
+ * Supabaseから取得し、TanStack Queryでメモリキャッシュ
+ * - 永続化: なし（ユーザーが様々なマップを見るため）
+ * - LRU管理: なし（gcTimeで自動解放）
  */
 
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getNearestPrefecture } from '@/shared/api/sqlite/prefectures';
-import { getCitiesByPrefecture, getAllCachedCities } from '@/shared/lib/cache';
+import { getCitiesByPrefectureId } from '@/shared/api/supabase/places';
+import { DYNAMIC_DATA_CACHE_CONFIG } from '@/shared/config';
 import type { CityRow } from '@/shared/types/database.types';
 
 // デフォルトの都道府県ID（東京）
@@ -24,8 +27,7 @@ interface UseCitiesOptions {
  * 市区町村データを取得（マップ中心座標ベースでSupabaseから取得）
  *
  * 1. マップ中心座標（なければ現在地）から最寄りの都道府県を特定
- * 2. その都道府県の市区町村データをSupabaseから取得（TTLキャッシュ）
- * 3. SQLiteにキャッシュして返す
+ * 2. その都道府県の市区町村データをSupabaseから取得
  */
 export function useCities(options: UseCitiesOptions = {}) {
   const { currentLocation, mapCenter } = options;
@@ -40,24 +42,27 @@ export function useCities(options: UseCitiesOptions = {}) {
     queryKey: QUERY_KEYS.citiesByPrefecture(prefectureId),
     queryFn: async () => {
       console.log(`🏙️ useCities queryFn: prefectureId=${prefectureId}`);
-      return getCitiesByPrefecture(prefectureId);
+      const cities = await getCitiesByPrefectureId(prefectureId);
+      console.log(`✅ getCitiesByPrefectureId成功: ${cities.length}件`);
+      return cities;
     },
-    staleTime: 7 * 24 * 60 * 60 * 1000, // 7日間（TTLと合わせる）
-    gcTime: Infinity,
+    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
+    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分（メモリから解放）
   });
 }
 
 /**
- * キャッシュされた全市区町村データを取得（SQLiteから同期的に取得）
- *
- * Note: これはSQLiteにキャッシュ済みのデータのみを返します。
- * 新しいデータを取得する場合は useCities を使用してください。
+ * 都道府県単位で市区町村データを取得（Supabaseから取得）
  */
-export function useCachedCities() {
+export function useCitiesByPrefecture(prefectureId: string | null) {
   return useQuery<CityRow[], Error>({
-    queryKey: QUERY_KEYS.cities(),
-    queryFn: () => getAllCachedCities(),
-    staleTime: Infinity,
-    gcTime: Infinity,
+    queryKey: QUERY_KEYS.citiesByPrefecture(prefectureId || ''),
+    queryFn: async () => {
+      if (!prefectureId) return [];
+      return getCitiesByPrefectureId(prefectureId);
+    },
+    enabled: !!prefectureId,
+    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
+    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分（メモリから解放）
   });
 }
