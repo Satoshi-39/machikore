@@ -1,7 +1,9 @@
 /**
  * 交通機関データを取得するhook
  *
- * Supabaseから直接取得（キャッシュはReact Queryで管理）
+ * Supabaseから取得し、TanStack Queryでキャッシュ管理
+ * - 永続化: AsyncStorageに30日間保存
+ * - LRU: 最大5都道府県分をメモリに保持
  */
 
 import { useQuery } from '@tanstack/react-query';
@@ -13,6 +15,7 @@ import {
   type TransportHubRow,
   type TransportHubType,
 } from '@/shared/api/supabase';
+import { STATIC_DATA_CACHE_CONFIG } from '@/shared/config';
 
 // デフォルトの都道府県ID（東京）
 const DEFAULT_PREFECTURE_ID = 'tokyo';
@@ -49,8 +52,8 @@ export function useTransportHubs(options: UseTransportHubsOptions = {}) {
       console.log(`✅ getTransportHubsByPrefecture成功: ${hubs.length}件`);
       return hubs;
     },
-    staleTime: 7 * 24 * 60 * 60 * 1000, // 7日間
-    gcTime: Infinity,
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分（メモリから解放、永続化には残る）
   });
 }
 

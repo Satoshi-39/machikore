@@ -1,13 +1,16 @@
 /**
  * 街データを取得するhook
  *
- * Supabase → SQLiteキャッシュのフローで街データを取得
+ * Supabaseから取得し、TanStack Queryでキャッシュ管理
+ * - 永続化: AsyncStorageに30日間保存
+ * - LRU: 最大5都道府県分をメモリに保持
  */
 
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getAllMachi, getNearestPrefecture } from '@/shared/api/sqlite';
 import { getMachiByPrefecture } from '@/shared/lib/cache';
+import { STATIC_DATA_CACHE_CONFIG } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
 
 // デフォルトの都道府県ID（東京）
@@ -49,8 +52,8 @@ export function useMachi(options: UseMachiOptions = {}) {
         throw error;
       }
     },
-    staleTime: 7 * 24 * 60 * 60 * 1000, // 7日間（TTLと合わせる）
-    gcTime: Infinity,
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分（メモリから解放、永続化には残る）
   });
 }
 
@@ -85,7 +88,7 @@ export function useMachiByPrefecture(prefectureId: string | null) {
       return getMachiByPrefecture(prefectureId);
     },
     enabled: !!prefectureId,
-    staleTime: 7 * 24 * 60 * 60 * 1000, // 7日間（TTLと合わせる）
-    gcTime: Infinity,
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分（メモリから解放、永続化には残る）
   });
 }

@@ -15,3 +15,16 @@ export {
   getCitiesByLocation,
   getAllCachedCities,
 } from './cities-cache-service';
+
+// TanStack Query キャッシュ管理
+export {
+  setupLRUCacheManager,
+  getCacheStats,
+  clearCacheByPrefix,
+} from './query-cache-manager';
+
+export {
+  setupQueryPersister,
+  clearPersistedCache,
+  getPersistedCacheSize,
+} from './query-persister';

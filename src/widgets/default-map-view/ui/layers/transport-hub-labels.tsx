@@ -9,8 +9,10 @@ import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import type { TransportHubGeoJsonProperties } from '@/entities/transport-hub';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 // アイコン画像（交通機関タイプ別・色付き）
+// ライトモード用
 const trainJrIcon = require('@assets/icons/train.png'); // JR（青）
 const trainPrivateIcon = require('@assets/icons/train-private.png'); // 私鉄（ピンク）
 const subwayMetroIcon = require('@assets/icons/subway-metro.png'); // 東京メトロ（水色）
@@ -19,11 +21,13 @@ const subwayOtherIcon = require('@assets/icons/subway-other.png'); // その他�
 const airportIcon = require('@assets/icons/airport.png');
 const busIcon = require('@assets/icons/bus.png');
 const ferryIcon = require('@assets/icons/ferry.png');
+// ダークモード用
+const trainJrDarkIcon = require('@assets/icons/train-jr-dark.png'); // JR（明るい青）
 
-// 交通機関タイプ別の色（アイコンの色と統一）
-const TRANSPORT_HUB_COLORS = {
+// 交通機関タイプ別の色（ライトモード）
+const TRANSPORT_HUB_COLORS_LIGHT = {
   // 駅（サブタイプ別）
-  station_jr: '#0066CC', // 青（JR）- アイコンと同じ
+  station_jr: '#0066CC', // 青（JR）
   station_metro: '#06B6D4', // 水色（東京メトロ）
   station_toei: '#22C55E', // 緑（都営）
   station_subway: '#8B5CF6', // 紫（その他地下鉄）
@@ -37,16 +41,42 @@ const TRANSPORT_HUB_COLORS = {
   bus_terminal: '#84CC16', // ライムグリーン
 };
 
+// 交通機関タイプ別の色（ダークモード）
+const TRANSPORT_HUB_COLORS_DARK = {
+  // 駅（サブタイプ別）
+  station_jr: '#60A5FA', // 明るい青（JR）- ダークモードで見やすく
+  station_metro: '#22D3EE', // 明るい水色（東京メトロ）
+  station_toei: '#4ADE80', // 明るい緑（都営）
+  station_subway: '#A78BFA', // 明るい紫（その他地下鉄）
+  station_private: '#F472B6', // 明るいピンク（私鉄）
+  station_default: '#9CA3AF', // 明るいグレー（不明）
+  // 空港
+  airport: '#F87171', // 明るい赤
+  // フェリーターミナル
+  ferry_terminal: '#22D3EE', // 明るいシアン
+  // バスターミナル
+  bus_terminal: '#A3E635', // 明るいライムグリーン
+};
+
 interface TransportHubLabelsProps {
   geoJson: FeatureCollection<Point, TransportHubGeoJsonProperties>;
 }
 
 export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
+  const isDarkMode = useIsDarkMode();
+  const colors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
+  const haloColor = isDarkMode ? '#1F2937' : '#FFFFFF'; // ダークモードでは暗いハロー
+
+  // データがない場合はレンダリングしない
+  if (!geoJson.features || geoJson.features.length === 0) {
+    return null;
+  }
+
   return (
     <>
       {/* アイコン画像を登録 */}
       <Mapbox.Images images={{
-        'train-jr-icon': trainJrIcon,
+        'train-jr-icon': isDarkMode ? trainJrDarkIcon : trainJrIcon,
         'train-private-icon': trainPrivateIcon,
         'subway-metro-icon': subwayMetroIcon,
         'subway-toei-icon': subwayToeiIcon,
@@ -71,8 +101,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: TRANSPORT_HUB_COLORS.station_jr,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.station_jr,
+            textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
@@ -93,8 +123,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: TRANSPORT_HUB_COLORS.station_metro,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.station_metro,
+            textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
@@ -115,8 +145,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: TRANSPORT_HUB_COLORS.station_toei,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.station_toei,
+            textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
@@ -137,8 +167,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: TRANSPORT_HUB_COLORS.station_subway,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.station_subway,
+            textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
@@ -159,8 +189,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: TRANSPORT_HUB_COLORS.station_private,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.station_private,
+            textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
@@ -181,8 +211,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 14,
-            textColor: TRANSPORT_HUB_COLORS.airport,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.airport,
+            textHaloColor: haloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
             textAnchor: 'top',
@@ -203,8 +233,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: TRANSPORT_HUB_COLORS.ferry_terminal,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.ferry_terminal,
+            textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
@@ -225,8 +255,8 @@ export function TransportHubLabels({ geoJson }: TransportHubLabelsProps) {
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 11,
-            textColor: TRANSPORT_HUB_COLORS.bus_terminal,
-            textHaloColor: '#FFFFFF',
+            textColor: colors.bus_terminal,
+            textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
