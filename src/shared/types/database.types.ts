@@ -338,6 +338,7 @@ export interface CityRow {
   type: string;            // "区", "市", "町", "村"
   latitude: number | null; // 中心座標の緯度
   longitude: number | null; // 中心座標の経度
+  tile_id: string | null;  // タイルID: "559_142" (lng/0.25 + "_" + lat/0.25)
   country_code: string;    // "jp"
   created_at: string;
   updated_at: string;
@@ -357,6 +358,7 @@ export interface MachiRow {
   lines: string | null;      // JSON array: [{"ja": "JR山手線", "en": "JR Yamanote Line"}, ...]
   prefecture_id: string;     // "tokyo", "kanagawa"
   city_id: string | null;    // "shibuya", "minato"
+  tile_id: string | null;    // タイルID: "559_142" (lng/0.25 + "_" + lat/0.25)
   country_code: string;      // "jp"
   prefecture_name: string;   // "東京都" (denormalized for performance)
   prefecture_name_translations: string | null; // JSON: {"en": "Tokyo", "zh": "东京"}

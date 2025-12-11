@@ -1,20 +1,98 @@
 /**
  * 街データを取得するhook
  *
- * Supabaseから取得し、TanStack Queryでキャッシュ管理
- * - 永続化: AsyncStorageに30日間保存
- * - LRU: 最大5都道府県分をメモリに保持
+ * タイル単位でSupabaseから取得し、SQLiteにキャッシュ
+ * - キャッシュ: SQLiteにタイル単位で保存
+ * - LRU: 最大50タイル分をSQLiteに保持
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { getAllMachi, getNearestPrefecture } from '@/shared/api/sqlite';
-import { getMachiByPrefecture } from '@/shared/lib/cache';
-import { STATIC_DATA_CACHE_CONFIG } from '@/shared/config';
+import { getAllMachi } from '@/shared/api/sqlite';
+import { getMachiByTileIds } from '@/shared/lib/cache';
+import { getVisibleTileIds, getTileId, type MapBounds } from '@/shared/lib/utils/tile.utils';
+import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
 
-// デフォルトの都道府県ID（東京）
-const DEFAULT_PREFECTURE_ID = 'tokyo';
+interface UseMachiByBoundsOptions {
+  /** マップの境界 */
+  bounds?: {
+    minLat: number;
+    maxLat: number;
+    minLng: number;
+    maxLng: number;
+  } | null;
+  /** 現在のズームレベル */
+  zoom?: number;
+}
+
+interface UseMachiByBoundsResult {
+  data: MachiRow[] | undefined;
+  isLoading: boolean;
+  error: Error | null;
+  /** 現在取得中のタイルID一覧 */
+  tileIds: string[];
+}
+
+/**
+ * マップ境界内の街データを取得（タイルベース）
+ *
+ * 1. マップ境界から必要なタイルIDを計算
+ * 2. 各タイルのデータをSQLiteキャッシュ or Supabaseから取得
+ */
+export function useMachiByBounds(options: UseMachiByBoundsOptions = {}): UseMachiByBoundsResult {
+  const { bounds, zoom = MAP_ZOOM.MACHI } = options;
+
+  // boundsからタイルIDを計算
+  const tileIds = useMemo(() => {
+    if (!bounds) return [];
+    // ズームがMACHI表示レベル未満の場合は取得しない
+    if (zoom < MAP_ZOOM.CITY) return [];
+
+    const mapBounds: MapBounds = {
+      north: bounds.maxLat,
+      south: bounds.minLat,
+      east: bounds.maxLng,
+      west: bounds.minLng,
+    };
+    return getVisibleTileIds(mapBounds);
+  }, [bounds, zoom]);
+
+  // タイルIDをキーにしてクエリ
+  const tileIdsKey = tileIds.sort().join(',');
+
+  const query = useQuery<MachiRow[], Error>({
+    queryKey: [...QUERY_KEYS.machiList(), 'tiles', tileIdsKey],
+    queryFn: async () => {
+      if (tileIds.length === 0) return [];
+
+      console.log(`🗾 useMachiByBounds: ${tileIds.length}タイル取得`);
+      try {
+        const machi = await getMachiByTileIds(tileIds);
+        console.log(`✅ getMachiByTileIds成功: ${machi.length}件`);
+        return machi;
+      } catch (error) {
+        console.error(`❌ queryFnエラー:`, error);
+        throw error;
+      }
+    },
+    enabled: tileIds.length > 0,
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分
+  });
+
+  return {
+    data: query.data,
+    isLoading: query.isLoading,
+    error: query.error,
+    tileIds,
+  };
+}
+
+// ===============================
+// 下位互換性のための関数（段階的移行用）
+// ===============================
 
 interface UseMachiOptions {
   /** 現在地（GPS位置、初期表示用） */
@@ -23,45 +101,76 @@ interface UseMachiOptions {
   mapCenter?: { latitude: number; longitude: number } | null;
 }
 
+interface UseMachiResult {
+  data: MachiRow[] | undefined;
+  isLoading: boolean;
+  error: Error | null;
+  /** @deprecated 都道府県IDは非推奨。タイルIDを使用してください */
+  prefectureId: string;
+}
+
 /**
- * 街データを取得（マップ中心座標ベースでSupabaseから取得）
+ * @deprecated useMachiByBoundsを使用してください
  *
- * 1. マップ中心座標（なければ現在地）から最寄りの都道府県を特定
- * 2. その都道府県の街データをSupabaseから取得（TTLキャッシュ）
- * 3. SQLiteにキャッシュして返す
+ * 街データを取得（マップ中心座標ベース）
+ * 後方互換性のために残していますが、新規実装ではuseMachiByBoundsを使用してください
  */
-export function useMachi(options: UseMachiOptions = {}) {
+export function useMachi(options: UseMachiOptions = {}): UseMachiResult {
   const { currentLocation, mapCenter } = options;
 
-  // マップ中心 > 現在地 > デフォルト の優先順位で都道府県を特定
+  // マップ中心 > 現在地 > デフォルト の優先順位で座標を決定
   const targetLocation = mapCenter || currentLocation;
-  const prefectureId = targetLocation
-    ? getNearestPrefecture(targetLocation.latitude, targetLocation.longitude)?.id ?? DEFAULT_PREFECTURE_ID
-    : DEFAULT_PREFECTURE_ID;
+  const latitude = targetLocation?.latitude ?? 35.6812; // 東京駅
+  const longitude = targetLocation?.longitude ?? 139.7671;
 
-  return useQuery<MachiRow[], Error>({
-    queryKey: QUERY_KEYS.machiByPrefecture(prefectureId),
+  // 中心座標からタイルIDを計算
+  const centerTileId = getTileId(latitude, longitude);
+
+  // 中心タイルとその周辺8タイル（3x3）を取得
+  const tileIds = useMemo(() => {
+    const parts = centerTileId.split('_').map(Number);
+    const x = parts[0] ?? 0;
+    const y = parts[1] ?? 0;
+    const tiles: string[] = [];
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        tiles.push(`${x + dx}_${y + dy}`);
+      }
+    }
+    return tiles;
+  }, [centerTileId]);
+
+  const tileIdsKey = tileIds.sort().join(',');
+
+  const query = useQuery<MachiRow[], Error>({
+    queryKey: [...QUERY_KEYS.machiList(), 'center-tiles', tileIdsKey],
     queryFn: async () => {
-      console.log(`🗾 useMachi queryFn: prefectureId=${prefectureId}`);
+      console.log(`🗾 useMachi (legacy): center=${centerTileId}, ${tileIds.length}タイル取得`);
       try {
-        const machi = await getMachiByPrefecture(prefectureId);
-        console.log(`✅ getMachiByPrefecture成功: ${machi.length}件`);
+        const machi = await getMachiByTileIds(tileIds);
+        console.log(`✅ getMachiByTileIds成功: ${machi.length}件`);
         return machi;
       } catch (error) {
         console.error(`❌ queryFnエラー:`, error);
         throw error;
       }
     },
-    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
-    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分（メモリから解放、永続化には残る）
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
   });
+
+  return {
+    data: query.data,
+    isLoading: query.isLoading,
+    error: query.error,
+    prefectureId: 'tile-based', // 後方互換性のためのダミー値
+  };
 }
 
 /**
  * キャッシュされた全街データを取得（SQLiteから同期的に取得）
  *
  * Note: これはSQLiteにキャッシュ済みのデータのみを返します。
- * 新しいデータを取得する場合は useMachi または useMachiByPrefecture を使用してください。
  */
 export function useCachedMachi() {
   return useQuery<MachiRow[], Error>({
@@ -76,19 +185,22 @@ export function useCachedMachi() {
 }
 
 /**
- * 都道府県単位で街データを取得（Supabaseから取得してキャッシュ）
- *
- * TTLキャッシュ付きでSupabaseから取得し、SQLiteにキャッシュ
+ * @deprecated useMachiByBoundsを使用してください
  */
 export function useMachiByPrefecture(prefectureId: string | null) {
+  // タイル方式では都道府県単位の取得は非推奨
+  // 後方互換性のため、prefectureIdからおおよその中心座標を推測して取得
+  console.warn('useMachiByPrefecture is deprecated. Use useMachiByBounds instead.');
+
   return useQuery<MachiRow[], Error>({
     queryKey: QUERY_KEYS.machiByPrefecture(prefectureId || ''),
     queryFn: async () => {
       if (!prefectureId) return [];
-      return getMachiByPrefecture(prefectureId);
+      // タイル方式では都道府県単位での取得をサポートしないため空配列を返す
+      return [];
     },
-    enabled: !!prefectureId,
-    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
-    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分（メモリから解放、永続化には残る）
+    enabled: false, // 無効化
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
   });
 }

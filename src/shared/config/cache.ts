@@ -29,15 +29,22 @@ export const STATIC_DATA_CACHE_CONFIG = {
 // ===============================
 
 /**
- * LRUキャッシュの上限設定
+ * タイルベースのLRUキャッシュ上限設定
  *
- * 各データ種別ごとにメモリに保持する最大エントリ数を定義
- * 上限を超えた場合、最も古くアクセスされたものから削除
+ * machi/citiesはタイル単位でキャッシュし、上限を超えたら古いタイルから削除
  *
  * Note:
  * - transport-hubsは動的に多くの場所を見るため、LRU管理対象外
  *   （gcTimeで自動的にメモリから解放される）
- * - machi/citiesはデフォルトマップでのみ表示されるため、LRU管理対象
+ * - machi/citiesはタイル単位でSQLiteにキャッシュ
+ */
+export const TILE_CACHE_LIMITS = {
+  /** 最大タイル数（machi + cities共通） */
+  maxTiles: 50,
+} as const;
+
+/**
+ * @deprecated タイル方式に移行したため非推奨。TILE_CACHE_LIMITSを使用してください。
  */
 export const LRU_CACHE_LIMITS = {
   /** 街データ: 最大5都道府県分 */

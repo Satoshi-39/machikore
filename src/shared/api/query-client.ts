@@ -81,7 +81,8 @@ export const QUERY_KEYS = {
   prefectures: () => ['prefectures'] as const,
 
   // 市区町村
-  cities: () => ['cities'] as const,
+  cities: ['cities'] as const,
+  citiesList: () => ['cities', 'list'] as const,
   citiesByPrefecture: (prefectureId: string) =>
     ['cities', 'prefecture', prefectureId] as const,
 

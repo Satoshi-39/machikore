@@ -67,8 +67,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const { bounds, cameraState, handleCameraChanged } = useBoundsManagement({ currentLocation });
 
     // マップ中心座標でmachi/cities/transportHubsを取得
-    const { data: machiData, isLoading, error } = useMachi({ currentLocation, mapCenter: cameraState.center });
-    const { data: cities = [] } = useCities({ currentLocation, mapCenter: cameraState.center });
+    const { data: machiData, isLoading, error, prefectureId: machiPrefectureId } = useMachi({ currentLocation, mapCenter: cameraState.center });
+    const { data: cities = [], prefectureId: citiesPrefectureId } = useCities({ currentLocation, mapCenter: cameraState.center });
     const { data: transportHubs = [] } = useTransportHubs({ currentLocation, mapCenter: cameraState.center });
 
     // 検索バーの表示状態
@@ -119,7 +119,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const centerLocation = useCenterLocationName({
       cameraState,
       machiData,
+      machiPrefectureId,
       cities,
+      citiesPrefectureId,
       prefectures,
       countries,
     });

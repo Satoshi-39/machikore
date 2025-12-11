@@ -137,10 +137,10 @@ export function bulkInsertMachi(machiList: MachiRow[]): void {
     sql: `
       INSERT OR REPLACE INTO machi (
         id, name, name_kana, name_translations, latitude, longitude, lines,
-        prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations,
+        prefecture_id, city_id, tile_id, country_code, prefecture_name, prefecture_name_translations,
         city_name, city_name_translations, created_at, updated_at
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     params: [
       machi.id,
@@ -152,6 +152,7 @@ export function bulkInsertMachi(machiList: MachiRow[]): void {
       machi.lines,
       machi.prefecture_id,
       machi.city_id,
+      machi.tile_id,
       machi.country_code,
       machi.prefecture_name,
       machi.prefecture_name_translations,

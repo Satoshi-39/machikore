@@ -19,8 +19,8 @@ export function bulkInsertCities(cities: CityRow[]): void {
     for (const city of cities) {
       db.runSync(
         `INSERT OR REPLACE INTO cities (
-          id, prefecture_id, name, name_kana, name_translations, type, latitude, longitude, country_code, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          id, prefecture_id, name, name_kana, name_translations, type, latitude, longitude, tile_id, country_code, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           city.id,
           city.prefecture_id,
@@ -30,6 +30,7 @@ export function bulkInsertCities(cities: CityRow[]): void {
           city.type,
           city.latitude,
           city.longitude,
+          city.tile_id,
           city.country_code,
           city.created_at,
           city.updated_at,
@@ -86,3 +87,4 @@ export function getAllCities(): CityRow[] {
   const db = getDatabase();
   return db.getAllSync<CityRow>('SELECT * FROM cities ORDER BY prefecture_id, name');
 }
+

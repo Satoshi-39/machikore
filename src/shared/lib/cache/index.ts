@@ -28,3 +28,15 @@ export {
   clearPersistedCache,
   getPersistedCacheSize,
 } from './query-persister';
+
+// タイルベースのキャッシュサービス
+export {
+  getMachiByTileId,
+  getMachiByTileIds,
+  getMachiByBounds,
+  getCitiesByTileId,
+  getCitiesByTileIds,
+  getCitiesByBounds,
+  getCachedTileIds,
+  clearAllTileCache,
+} from './tile-cache-service';

@@ -127,6 +127,7 @@ export function useMapHierarchy() {
             type: '',
             latitude: null,
             longitude: null,
+            tile_id: null,
             country_code: 'jp',
             created_at: '',
             updated_at: '',

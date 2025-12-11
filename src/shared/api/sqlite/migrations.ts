@@ -117,6 +117,7 @@ export function initializeDatabase(): void {
         type TEXT NOT NULL,
         latitude REAL,
         longitude REAL,
+        tile_id TEXT,
         country_code TEXT NOT NULL DEFAULT 'jp',
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
@@ -128,6 +129,10 @@ export function initializeDatabase(): void {
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_cities_prefecture_id
       ON cities(prefecture_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_cities_tile_id
+      ON cities(tile_id);
     `);
 
     // 5. 街テーブル（マスターデータ）
@@ -142,6 +147,7 @@ export function initializeDatabase(): void {
         lines TEXT,
         prefecture_id TEXT NOT NULL,
         city_id TEXT,
+        tile_id TEXT,
         country_code TEXT NOT NULL DEFAULT 'jp',
         prefecture_name TEXT NOT NULL,
         prefecture_name_translations TEXT,
@@ -170,6 +176,10 @@ export function initializeDatabase(): void {
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_machi_country_code
       ON machi(country_code);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_machi_tile_id
+      ON machi(tile_id);
     `);
 
     // 6. マップテーブル
@@ -801,6 +811,64 @@ export function migration005_AddMasterSpots(): void {
 }
 
 /**
+ * マイグレーション6: machi/citiesテーブルにtile_idカラム追加
+ */
+export function migration006_AddTileId(): void {
+  const db = getDatabase();
+
+  console.log('[Migration 006] Starting: Add tile_id to machi and cities...');
+
+  db.execSync('BEGIN TRANSACTION;');
+
+  try {
+    // 1. machiテーブルにtile_idカラム追加（存在しない場合のみ）
+    const machiColumns = db.getAllSync<{ name: string }>(
+      "PRAGMA table_info(machi);"
+    );
+    const hasMachiTileId = machiColumns.some(col => col.name === 'tile_id');
+
+    if (!hasMachiTileId) {
+      db.execSync('ALTER TABLE machi ADD COLUMN tile_id TEXT;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_machi_tile_id ON machi(tile_id);');
+
+      // 既存データのtile_idを計算して更新
+      db.execSync(`
+        UPDATE machi
+        SET tile_id = CAST(CAST(longitude / 0.25 AS INTEGER) AS TEXT) || '_' || CAST(CAST(latitude / 0.25 AS INTEGER) AS TEXT)
+        WHERE tile_id IS NULL AND latitude IS NOT NULL AND longitude IS NOT NULL;
+      `);
+    }
+
+    // 2. citiesテーブルにtile_idカラム追加（存在しない場合のみ）
+    const citiesColumns = db.getAllSync<{ name: string }>(
+      "PRAGMA table_info(cities);"
+    );
+    const hasCitiesTileId = citiesColumns.some(col => col.name === 'tile_id');
+
+    if (!hasCitiesTileId) {
+      db.execSync('ALTER TABLE cities ADD COLUMN tile_id TEXT;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_cities_tile_id ON cities(tile_id);');
+
+      // 既存データのtile_idを計算して更新
+      db.execSync(`
+        UPDATE cities
+        SET tile_id = CAST(CAST(longitude / 0.25 AS INTEGER) AS TEXT) || '_' || CAST(CAST(latitude / 0.25 AS INTEGER) AS TEXT)
+        WHERE tile_id IS NULL AND latitude IS NOT NULL AND longitude IS NOT NULL;
+      `);
+    }
+
+    // コミット
+    db.execSync('COMMIT;');
+
+    console.log('[Migration 006] Completed successfully');
+  } catch (error) {
+    db.execSync('ROLLBACK;');
+    console.error('[Migration 006] Failed:', error);
+    throw error;
+  }
+}
+
+/**
  * 全マイグレーションを実行
  */
 export function runMigrations(): void {
@@ -815,6 +883,13 @@ export function runMigrations(): void {
     migration005_AddMasterSpots();
     recordVersion(5);
     console.log('[Migrations] Applied version 5');
+  }
+
+  // マイグレーション6: tile_id追加
+  if (currentVersion < 6) {
+    migration006_AddTileId();
+    recordVersion(6);
+    console.log('[Migrations] Applied version 6');
   }
 
   console.log('[Migrations] All migrations completed');
