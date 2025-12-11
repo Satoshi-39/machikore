@@ -1,16 +1,16 @@
 /**
  * 市区町村データを取得するhook
  *
- * Supabaseから取得し、TanStack Queryでメモリキャッシュ
- * - 永続化: なし（ユーザーが様々なマップを見るため）
- * - LRU管理: なし（gcTimeで自動解放）
+ * Supabaseから取得し、SQLiteにキャッシュ + TanStack QueryでLRU管理
+ * - 永続化: SQLite（machi-cache-serviceと同じ方式）
+ * - LRU管理: 最大5都道府県分（shared/config/cache.tsで設定）
  */
 
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getNearestPrefecture } from '@/shared/api/sqlite/prefectures';
-import { getCitiesByPrefectureId } from '@/shared/api/supabase/places';
-import { DYNAMIC_DATA_CACHE_CONFIG } from '@/shared/config';
+import { getCitiesByPrefecture } from '@/shared/lib/cache/cities-cache-service';
+import { STATIC_DATA_CACHE_CONFIG } from '@/shared/config';
 import type { CityRow } from '@/shared/types/database.types';
 
 // デフォルトの都道府県ID（東京）
@@ -24,10 +24,10 @@ interface UseCitiesOptions {
 }
 
 /**
- * 市区町村データを取得（マップ中心座標ベースでSupabaseから取得）
+ * 市区町村データを取得（マップ中心座標ベースでSQLiteキャッシュ優先）
  *
  * 1. マップ中心座標（なければ現在地）から最寄りの都道府県を特定
- * 2. その都道府県の市区町村データをSupabaseから取得
+ * 2. その都道府県の市区町村データをSQLiteキャッシュ or Supabaseから取得
  */
 export function useCities(options: UseCitiesOptions = {}) {
   const { currentLocation, mapCenter } = options;
@@ -42,27 +42,28 @@ export function useCities(options: UseCitiesOptions = {}) {
     queryKey: QUERY_KEYS.citiesByPrefecture(prefectureId),
     queryFn: async () => {
       console.log(`🏙️ useCities queryFn: prefectureId=${prefectureId}`);
-      const cities = await getCitiesByPrefectureId(prefectureId);
-      console.log(`✅ getCitiesByPrefectureId成功: ${cities.length}件`);
+      // SQLiteキャッシュサービス経由で取得（キャッシュがあればSQLite、なければSupabase）
+      const cities = await getCitiesByPrefecture(prefectureId);
+      console.log(`✅ getCitiesByPrefecture成功: ${cities.length}件`);
       return cities;
     },
-    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
-    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分（メモリから解放）
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日（静的データ）
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分（LRUで管理）
   });
 }
 
 /**
- * 都道府県単位で市区町村データを取得（Supabaseから取得）
+ * 都道府県単位で市区町村データを取得（SQLiteキャッシュ優先）
  */
 export function useCitiesByPrefecture(prefectureId: string | null) {
   return useQuery<CityRow[], Error>({
     queryKey: QUERY_KEYS.citiesByPrefecture(prefectureId || ''),
     queryFn: async () => {
       if (!prefectureId) return [];
-      return getCitiesByPrefectureId(prefectureId);
+      return getCitiesByPrefecture(prefectureId);
     },
     enabled: !!prefectureId,
-    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
-    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分（メモリから解放）
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分
   });
 }
