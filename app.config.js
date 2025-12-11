@@ -11,6 +11,7 @@ module.exports = {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'com.tyatsushi.machikore',
+      appleTeamId: '9KT9GSG58F',
       deploymentTarget: '15.1',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,

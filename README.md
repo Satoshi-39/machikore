@@ -48,3 +48,13 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+### マイグレーションファイルの実行
+
+Direct Connectionの場合
+psql "postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres" -f
+./supabase/migrations/048_seed_chiba_machi_data.sql
+
+session poolerの場合
+PGPASSWORD=[PASSWORD] psql -h aws-1-ap-southeast-1.pooler.supabase.com -p 5432 -U
+postgres.[PROJECT_REF] -d postgres -f ./supabase/migrations/048_seed_chiba_machi_data.sql
