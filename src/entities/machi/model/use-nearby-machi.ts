@@ -3,8 +3,9 @@
  */
 
 import { useMemo } from 'react';
-import { useMachi } from '../api/use-machi';
+import { useMachiByBounds } from '../api/use-machi';
 import { sortMachiByDistance } from './helpers';
+import { MAP_TILE } from '@/shared/config';
 import type { MachiDistance } from './types';
 
 interface UseNearbyMachiParams {
@@ -21,10 +22,20 @@ export function useNearbyMachi({
   longitude,
   limit = 10,
 }: UseNearbyMachiParams) {
-  // 現在地を渡してその都道府県のデータを取得
-  const { data: allMachi, ...rest } = useMachi({
-    currentLocation: { latitude, longitude },
-  });
+  // 現在地周辺のboundsを計算（タイル1つ分 = 約25km四方）
+  const bounds = useMemo(() => {
+    if (!latitude || !longitude) return null;
+    const halfSize = MAP_TILE.SIZE; // 0.25度 = 約25km
+    return {
+      minLat: latitude - halfSize,
+      maxLat: latitude + halfSize,
+      minLng: longitude - halfSize,
+      maxLng: longitude + halfSize,
+    };
+  }, [latitude, longitude]);
+
+  // タイルベースで街データを取得
+  const { data: allMachi, ...rest } = useMachiByBounds({ bounds });
 
   const nearbyMachi = useMemo<MachiDistance[]>(() => {
     if (!allMachi || !latitude || !longitude) return [];

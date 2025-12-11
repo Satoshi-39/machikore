@@ -8,13 +8,13 @@ import Animated from 'react-native-reanimated';
 import { useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Mapbox from '@rnmapbox/maps';
-import { useMachi, useMachiGeoJson } from '@/entities/machi';
+import { useMachiByBounds, useMachiGeoJson } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
 import { useTransportHubs, useTransportHubsGeoJson } from '@/entities/transport-hub';
 import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
-import { useCities, useCitiesGeoJson } from '@/entities/city';
+import { useCitiesByBounds, useCitiesGeoJson } from '@/entities/city';
 import { LocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
@@ -66,9 +66,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // ビューポート範囲管理（先に定義してcameraStateを取得）
     const { bounds, cameraState, handleCameraChanged } = useBoundsManagement({ currentLocation });
 
-    // マップ中心座標でmachi/cities/transportHubsを取得
-    const { data: machiData, isLoading, error, prefectureId: machiPrefectureId } = useMachi({ currentLocation, mapCenter: cameraState.center });
-    const { data: cities = [], prefectureId: citiesPrefectureId } = useCities({ currentLocation, mapCenter: cameraState.center });
+    // マップ境界でmachi/cities/transportHubsを取得（タイルベース）
+    const { data: machiData } = useMachiByBounds({ bounds, zoom: cameraState.zoom });
+    const { data: cities = [] } = useCitiesByBounds({ bounds, zoom: cameraState.zoom });
     const { data: transportHubs = [] } = useTransportHubs({ currentLocation, mapCenter: cameraState.center });
 
     // 検索バーの表示状態
@@ -119,9 +119,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const centerLocation = useCenterLocationName({
       cameraState,
       machiData,
-      machiPrefectureId,
       cities,
-      citiesPrefectureId,
       prefectures,
       countries,
     });

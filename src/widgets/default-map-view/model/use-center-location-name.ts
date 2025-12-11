@@ -17,11 +17,7 @@ import { MAP_ZOOM } from '@/shared/config';
 interface UseCenterLocationNameParams {
   cameraState: CameraState;
   machiData?: MachiRow[] | null;
-  /** machiDataが取得された都道府県ID */
-  machiPrefectureId?: string;
   cities?: CityRow[];
-  /** citiesが取得された都道府県ID */
-  citiesPrefectureId?: string;
   prefectures?: PrefectureRow[];
   countries?: CountryData[];
 }
@@ -92,45 +88,26 @@ function findNearest<T extends { latitude: number; longitude: number; name: stri
 export function useCenterLocationName({
   cameraState,
   machiData,
-  machiPrefectureId,
   cities = [],
-  citiesPrefectureId,
   prefectures = [],
   countries = [],
 }: UseCenterLocationNameParams): LocationInfo {
   return useMemo(() => {
     const { center, zoom } = cameraState;
 
-    // 現在のカメラ中心がどの都道府県に属するか確認
-    // machiDataやcitiesの都道府県と一致しない場合はそのデータを使わない
-    const currentPrefecture = prefectures.length > 0
-      ? findNearest(
-          prefectures as Array<PrefectureRow & { latitude: number; longitude: number }>,
-          center
-        )
-      : null;
-    const currentPrefectureId = currentPrefecture?.id;
-
     // ズームレベルに応じて表示する地名の種類を決定
     // CITY(11)より少し寄った12以上で街名を表示
-    // ただし、machiDataの都道府県が現在のカメラ位置の都道府県と一致する場合のみ
-    const isMachiDataValid = machiData && machiData.length > 0 &&
-      (!currentPrefectureId || !machiPrefectureId || currentPrefectureId === machiPrefectureId);
-
-    if (zoom >= MAP_ZOOM.CITY + 1 && isMachiDataValid) {
+    // タイルベースで取得しているので、現在のビューポート内のデータは常に有効
+    if (zoom >= MAP_ZOOM.CITY + 1 && machiData && machiData.length > 0) {
       // 街名を表示
-      const nearest = findNearest(machiData!, center);
+      const nearest = findNearest(machiData, center);
       if (nearest) {
         return { name: nearest.name, type: 'machi', entity: nearest };
       }
     }
 
     // INITIAL(10)以上で市区名を表示
-    // ただし、citiesの都道府県が現在のカメラ位置の都道府県と一致する場合のみ
-    const isCitiesDataValid = cities.length > 0 &&
-      (!currentPrefectureId || !citiesPrefectureId || currentPrefectureId === citiesPrefectureId);
-
-    if (zoom >= MAP_ZOOM.INITIAL && isCitiesDataValid) {
+    if (zoom >= MAP_ZOOM.INITIAL && cities.length > 0) {
       // 市区名を表示（型アサーション：座標は必ず存在する）
       const validCities = cities as Array<CityRow & { latitude: number; longitude: number }>;
       const nearest = findNearest(validCities, center);
@@ -162,5 +139,5 @@ export function useCenterLocationName({
 
     // ズーム3未満は地球
     return { name: '地球', type: 'earth', entity: null };
-  }, [cameraState, machiData, machiPrefectureId, cities, citiesPrefectureId, prefectures, countries]);
+  }, [cameraState, machiData, cities, prefectures, countries]);
 }

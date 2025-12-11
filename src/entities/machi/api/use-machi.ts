@@ -11,7 +11,7 @@ import { useMemo } from 'react';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getAllMachi } from '@/shared/api/sqlite';
 import { getMachiByTileIds } from '@/shared/lib/cache';
-import { getVisibleTileIds, getTileId, type MapBounds } from '@/shared/lib/utils/tile.utils';
+import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
 import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
 
@@ -87,83 +87,6 @@ export function useMachiByBounds(options: UseMachiByBoundsOptions = {}): UseMach
     isLoading: query.isLoading,
     error: query.error,
     tileIds,
-  };
-}
-
-// ===============================
-// 下位互換性のための関数（段階的移行用）
-// ===============================
-
-interface UseMachiOptions {
-  /** 現在地（GPS位置、初期表示用） */
-  currentLocation?: { latitude: number; longitude: number } | null;
-  /** マップ中心座標（マップ移動時のデータ取得用） */
-  mapCenter?: { latitude: number; longitude: number } | null;
-}
-
-interface UseMachiResult {
-  data: MachiRow[] | undefined;
-  isLoading: boolean;
-  error: Error | null;
-  /** @deprecated 都道府県IDは非推奨。タイルIDを使用してください */
-  prefectureId: string;
-}
-
-/**
- * @deprecated useMachiByBoundsを使用してください
- *
- * 街データを取得（マップ中心座標ベース）
- * 後方互換性のために残していますが、新規実装ではuseMachiByBoundsを使用してください
- */
-export function useMachi(options: UseMachiOptions = {}): UseMachiResult {
-  const { currentLocation, mapCenter } = options;
-
-  // マップ中心 > 現在地 > デフォルト の優先順位で座標を決定
-  const targetLocation = mapCenter || currentLocation;
-  const latitude = targetLocation?.latitude ?? 35.6812; // 東京駅
-  const longitude = targetLocation?.longitude ?? 139.7671;
-
-  // 中心座標からタイルIDを計算
-  const centerTileId = getTileId(latitude, longitude);
-
-  // 中心タイルとその周辺8タイル（3x3）を取得
-  const tileIds = useMemo(() => {
-    const parts = centerTileId.split('_').map(Number);
-    const x = parts[0] ?? 0;
-    const y = parts[1] ?? 0;
-    const tiles: string[] = [];
-    for (let dx = -1; dx <= 1; dx++) {
-      for (let dy = -1; dy <= 1; dy++) {
-        tiles.push(`${x + dx}_${y + dy}`);
-      }
-    }
-    return tiles;
-  }, [centerTileId]);
-
-  const tileIdsKey = tileIds.sort().join(',');
-
-  const query = useQuery<MachiRow[], Error>({
-    queryKey: [...QUERY_KEYS.machiList(), 'center-tiles', tileIdsKey],
-    queryFn: async () => {
-      console.log(`🗾 useMachi (legacy): center=${centerTileId}, ${tileIds.length}タイル取得`);
-      try {
-        const machi = await getMachiByTileIds(tileIds);
-        console.log(`✅ getMachiByTileIds成功: ${machi.length}件`);
-        return machi;
-      } catch (error) {
-        console.error(`❌ queryFnエラー:`, error);
-        throw error;
-      }
-    },
-    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
-    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
-  });
-
-  return {
-    data: query.data,
-    isLoading: query.isLoading,
-    error: query.error,
-    prefectureId: 'tile-based', // 後方互換性のためのダミー値
   };
 }
 
