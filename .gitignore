@@ -47,3 +47,8 @@ app-example
 *.db
 *.db-shm
 *.db-wal
+
+# 一時データファイル
+scripts/data/*_machi_data.json
+scripts/data/*_transport_data.json
+scripts/data/admin-boundaries/
