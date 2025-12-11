@@ -4,7 +4,7 @@
 
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
-import type { TransportHubRow, TransportHubType } from '@/shared/api/supabase';
+import type { TransportHubRow, TransportHubType } from '../api/use-transport-hubs';
 
 export interface TransportHubGeoJsonProperties {
   id: string;
@@ -42,7 +42,7 @@ export function useTransportHubsGeoJson(
         properties: {
           id: hub.id,
           name: hub.name,
-          type: hub.type,
+          type: hub.type as TransportHubType,
           subtype: hub.subtype,
           operator: hub.operator,
           network: hub.network,

@@ -11,7 +11,7 @@ import Mapbox from '@rnmapbox/maps';
 import { useMachiByBounds, useMachiGeoJson } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
 import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
-import { useTransportHubs, useTransportHubsGeoJson } from '@/entities/transport-hub';
+import { useTransportHubsByBounds, useTransportHubsGeoJson } from '@/entities/transport-hub';
 import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCitiesByBounds, useCitiesGeoJson } from '@/entities/city';
@@ -69,7 +69,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // マップ境界でmachi/cities/transportHubsを取得（タイルベース）
     const { data: machiData } = useMachiByBounds({ bounds, zoom: cameraState.zoom });
     const { data: cities = [] } = useCitiesByBounds({ bounds, zoom: cameraState.zoom });
-    const { data: transportHubs = [] } = useTransportHubs({ currentLocation, mapCenter: cameraState.center });
+    const { data: transportHubs = [] } = useTransportHubsByBounds({ bounds, zoom: cameraState.zoom });
 
     // 検索バーの表示状態
     const [isSearchBarHidden, setIsSearchBarHidden] = useState(false);

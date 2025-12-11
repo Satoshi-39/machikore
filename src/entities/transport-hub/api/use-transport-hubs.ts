@@ -1,105 +1,105 @@
 /**
  * 交通機関データを取得するhook
  *
- * Supabaseから取得し、TanStack Queryでメモリキャッシュ
- * - 永続化: なし（ユーザーが様々な場所を見るため）
- * - LRU管理: なし（gcTimeで自動解放）
+ * タイル単位でSupabaseから取得し、SQLiteにキャッシュ
+ * - キャッシュ: SQLiteにタイル単位で保存
+ * - LRU: 最大50タイル分をSQLiteに保持
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { getNearestPrefecture } from '@/shared/api/sqlite';
-import {
-  getTransportHubsByPrefecture,
-  getTransportHubsByBounds,
-  type TransportHubRow,
-  type TransportHubType,
-} from '@/shared/api/supabase';
-import { DYNAMIC_DATA_CACHE_CONFIG } from '@/shared/config';
+import { getTransportHubsByTileIds } from '@/shared/lib/cache';
+import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
+import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM } from '@/shared/config';
+import type { TransportHubRow } from '@/shared/api/sqlite/transport-hubs';
 
-// デフォルトの都道府県ID（東京）
-const DEFAULT_PREFECTURE_ID = 'tokyo';
-
-interface UseTransportHubsOptions {
-  /** 現在地（GPS位置、初期表示用） */
-  currentLocation?: { latitude: number; longitude: number } | null;
-  /** マップ中心座標（マップ移動時のデータ取得用） */
-  mapCenter?: { latitude: number; longitude: number } | null;
-  /** 取得する交通機関タイプ（指定しない場合は全タイプ） */
-  types?: TransportHubType[];
-}
-
-/**
- * 交通機関データを取得（マップ中心座標ベースでSupabaseから取得）
- *
- * 1. マップ中心座標（なければ現在地）から最寄りの都道府県を特定
- * 2. その都道府県の交通機関データをSupabaseから取得
- */
-export function useTransportHubs(options: UseTransportHubsOptions = {}) {
-  const { currentLocation, mapCenter, types } = options;
-
-  // マップ中心 > 現在地 > デフォルト の優先順位で都道府県を特定
-  const targetLocation = mapCenter || currentLocation;
-  const prefectureId = targetLocation
-    ? getNearestPrefecture(targetLocation.latitude, targetLocation.longitude)?.id ?? DEFAULT_PREFECTURE_ID
-    : DEFAULT_PREFECTURE_ID;
-
-  return useQuery<TransportHubRow[], Error>({
-    queryKey: [...QUERY_KEYS.transportHubs(), prefectureId, types?.join(',') ?? 'all'],
-    queryFn: async () => {
-      console.log(`🚃 useTransportHubs queryFn: prefectureId=${prefectureId}`);
-      const hubs = await getTransportHubsByPrefecture(prefectureId, types);
-      console.log(`✅ getTransportHubsByPrefecture成功: ${hubs.length}件`);
-      return hubs;
-    },
-    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
-    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分（メモリから解放）
-  });
-}
+// 交通機関タイプの定義
+export type TransportHubType = 'station' | 'airport' | 'ferry_terminal' | 'bus_terminal';
 
 interface UseTransportHubsByBoundsOptions {
-  /** ビューポート境界 */
-  bounds: {
+  /** マップの境界 */
+  bounds?: {
     minLat: number;
     maxLat: number;
     minLng: number;
     maxLng: number;
   } | null;
-  /** 取得する交通機関タイプ */
+  /** 現在のズームレベル */
+  zoom?: number;
+  /** フィルタするタイプ（省略時は全タイプ） */
   types?: TransportHubType[];
-  /** 取得上限 */
-  limit?: number;
+}
+
+interface UseTransportHubsByBoundsResult {
+  data: TransportHubRow[] | undefined;
+  isLoading: boolean;
+  error: Error | null;
+  /** 現在取得中のタイルID一覧 */
+  tileIds: string[];
 }
 
 /**
- * ビューポート範囲内の交通機関データを取得
+ * マップ境界内の交通機関データを取得（タイルベース）
+ *
+ * 1. マップ境界から必要なタイルIDを計算
+ * 2. 各タイルのデータをSQLiteキャッシュ or Supabaseから取得
  */
-export function useTransportHubsByBounds(options: UseTransportHubsByBoundsOptions) {
-  const { bounds, types, limit = 500 } = options;
+export function useTransportHubsByBounds(
+  options: UseTransportHubsByBoundsOptions = {}
+): UseTransportHubsByBoundsResult {
+  const { bounds, zoom = MAP_ZOOM.MACHI, types } = options;
 
-  return useQuery<TransportHubRow[], Error>({
-    queryKey: [
-      ...QUERY_KEYS.transportHubs(),
-      'bounds',
-      bounds?.minLat,
-      bounds?.maxLat,
-      bounds?.minLng,
-      bounds?.maxLng,
-      types?.join(',') ?? 'all',
-    ],
+  // boundsからタイルIDを計算
+  const tileIds = useMemo(() => {
+    if (!bounds) return [];
+    // ズームがPREFECTURE表示レベル未満の場合は取得しない
+    if (zoom < MAP_ZOOM.PREFECTURE) return [];
+
+    const mapBounds: MapBounds = {
+      north: bounds.maxLat,
+      south: bounds.minLat,
+      east: bounds.maxLng,
+      west: bounds.minLng,
+    };
+    return getVisibleTileIds(mapBounds);
+  }, [bounds, zoom]);
+
+  // タイルIDをキーにしてクエリ
+  const tileIdsKey = tileIds.sort().join(',');
+
+  const query = useQuery<TransportHubRow[], Error>({
+    queryKey: [...QUERY_KEYS.transportHubsList(), 'tiles', tileIdsKey, types?.join(',') ?? 'all'],
     queryFn: async () => {
-      if (!bounds) return [];
-      return getTransportHubsByBounds(
-        bounds.minLat,
-        bounds.maxLat,
-        bounds.minLng,
-        bounds.maxLng,
-        types,
-        limit
-      );
+      if (tileIds.length === 0) return [];
+
+      console.log(`🚃 useTransportHubsByBounds: ${tileIds.length}タイル取得`);
+      try {
+        const hubs = await getTransportHubsByTileIds(tileIds);
+        console.log(`✅ getTransportHubsByTileIds成功: ${hubs.length}件`);
+
+        // タイプでフィルタ（必要な場合）
+        if (types && types.length > 0) {
+          return hubs.filter((hub) => types.includes(hub.type as TransportHubType));
+        }
+        return hubs;
+      } catch (error) {
+        console.error(`❌ queryFnエラー:`, error);
+        throw error;
+      }
     },
-    enabled: !!bounds,
-    staleTime: DYNAMIC_DATA_CACHE_CONFIG.staleTime, // 5分
-    gcTime: DYNAMIC_DATA_CACHE_CONFIG.gcTime, // 10分
+    enabled: tileIds.length > 0,
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分
   });
+
+  return {
+    data: query.data,
+    isLoading: query.isLoading,
+    error: query.error,
+    tileIds,
+  };
 }
+
+// 型の再エクスポート
+export type { TransportHubRow };

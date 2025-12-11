@@ -1,14 +1,15 @@
 /**
  * タイルベースのキャッシュサービス
  *
- * machi/citiesデータをタイル単位でSupabaseから取得し、SQLiteにキャッシュする
- * LRU方式で最大50タイルまで保持
+ * machi/cities/transport_hubsデータをタイル単位でSupabaseから取得し、SQLiteにキャッシュする
+ * LRU方式で最大50タイルまで保持（各エンティティタイプごとに独立）
  */
 
 import { supabase } from '@/shared/api/supabase';
 import { getDatabase } from '@/shared/api/sqlite/client';
 import { bulkInsertMachi } from '@/shared/api/sqlite/machi';
 import { bulkInsertCities } from '@/shared/api/sqlite/cities';
+import { bulkInsertTransportHubs, type TransportHubRow } from '@/shared/api/sqlite/transport-hubs';
 import { TILE_CACHE_LIMITS } from '@/shared/config/cache';
 import type { MapBounds } from '@/shared/lib/utils/tile.utils';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
@@ -55,9 +56,12 @@ function toSQLiteCity(city: Record<string, unknown>): CityRow {
 // タイルキャッシュメタデータ管理
 // ===============================
 
+/** キャッシュ対象のエンティティタイプ */
+type CacheEntityType = 'machi' | 'cities' | 'transport_hubs';
+
 interface TileCacheMetadata {
   tile_id: string;
-  entity_type: 'machi' | 'cities';
+  entity_type: CacheEntityType;
   fetched_at: string;
   record_count: number;
   last_accessed_at: string;
@@ -66,7 +70,7 @@ interface TileCacheMetadata {
 /**
  * タイルのキャッシュメタデータを取得
  */
-function getTileCacheMetadata(tileId: string, entityType: 'machi' | 'cities'): TileCacheMetadata | null {
+function getTileCacheMetadata(tileId: string, entityType: CacheEntityType): TileCacheMetadata | null {
   const db = getDatabase();
   return db.getFirstSync<TileCacheMetadata>(
     'SELECT * FROM cache_metadata WHERE cache_key = ? AND entity_type = ?',
@@ -77,7 +81,7 @@ function getTileCacheMetadata(tileId: string, entityType: 'machi' | 'cities'): T
 /**
  * タイルのキャッシュメタデータを保存/更新
  */
-function setTileCacheMetadata(tileId: string, entityType: 'machi' | 'cities', recordCount: number): void {
+function setTileCacheMetadata(tileId: string, entityType: CacheEntityType, recordCount: number): void {
   const db = getDatabase();
   const now = new Date().toISOString();
   // expires_atは30日後に設定（実際にはLRUで管理するので使用しない）
@@ -94,7 +98,7 @@ function setTileCacheMetadata(tileId: string, entityType: 'machi' | 'cities', re
 /**
  * タイルのアクセス時刻を更新（LRU用）
  */
-function updateTileAccessTime(tileId: string, entityType: 'machi' | 'cities'): void {
+function updateTileAccessTime(tileId: string, entityType: CacheEntityType): void {
   const db = getDatabase();
   const now = new Date().toISOString();
   db.runSync(
@@ -106,7 +110,7 @@ function updateTileAccessTime(tileId: string, entityType: 'machi' | 'cities'): v
 /**
  * キャッシュされているタイル数を取得
  */
-function getCachedTileCount(entityType: 'machi' | 'cities'): number {
+function getCachedTileCount(entityType: CacheEntityType): number {
   const db = getDatabase();
   const result = db.getFirstSync<{ count: number }>(
     "SELECT COUNT(*) as count FROM cache_metadata WHERE cache_key LIKE 'tile:%' AND entity_type = ?",
@@ -118,7 +122,7 @@ function getCachedTileCount(entityType: 'machi' | 'cities'): number {
 /**
  * 最も古いタイルを削除（LRU）
  */
-function evictOldestTile(entityType: 'machi' | 'cities'): void {
+function evictOldestTile(entityType: CacheEntityType): void {
   const db = getDatabase();
 
   // 最も古いアクセスのタイルを取得
@@ -135,8 +139,10 @@ function evictOldestTile(entityType: 'machi' | 'cities'): void {
   // データを削除
   if (entityType === 'machi') {
     db.runSync('DELETE FROM machi WHERE tile_id = ?', [tileId]);
-  } else {
+  } else if (entityType === 'cities') {
     db.runSync('DELETE FROM cities WHERE tile_id = ?', [tileId]);
+  } else if (entityType === 'transport_hubs') {
+    db.runSync('DELETE FROM transport_hubs WHERE tile_id = ?', [tileId]);
   }
 
   // メタデータを削除
@@ -149,7 +155,7 @@ function evictOldestTile(entityType: 'machi' | 'cities'): void {
 /**
  * LRU制限を適用（必要に応じて古いタイルを削除）
  */
-function enforceLRULimit(entityType: 'machi' | 'cities'): void {
+function enforceLRULimit(entityType: CacheEntityType): void {
   const count = getCachedTileCount(entityType);
   const limit = TILE_CACHE_LIMITS.maxTiles;
 
@@ -322,13 +328,119 @@ export async function getCitiesByBounds(bounds: MapBounds): Promise<CityRow[]> {
 }
 
 // ===============================
+// TransportHubsデータ取得
+// ===============================
+
+/** SupabaseのtransportHubデータをSQLite用に変換 */
+function toSQLiteTransportHub(hub: Record<string, unknown>): TransportHubRow {
+  const now = new Date().toISOString();
+  return {
+    id: hub.id as string,
+    osm_id: hub.osm_id as number | null,
+    osm_type: hub.osm_type as string | null,
+    prefecture_id: hub.prefecture_id as string,
+    city_id: hub.city_id as string | null,
+    type: hub.type as string,
+    subtype: hub.subtype as string | null,
+    name: hub.name as string,
+    name_kana: hub.name_kana as string | null,
+    name_en: hub.name_en as string | null,
+    operator: hub.operator as string | null,
+    network: hub.network as string | null,
+    ref: hub.ref as string | null,
+    latitude: hub.latitude as number,
+    longitude: hub.longitude as number,
+    tile_id: hub.tile_id as string | null,
+    country_code: (hub.country_code as string) || 'jp',
+    created_at: (hub.created_at as string) || now,
+    updated_at: (hub.updated_at as string) || now,
+  };
+}
+
+/**
+ * タイルIDから交通機関データを取得（キャッシュ優先）
+ */
+export async function getTransportHubsByTileId(tileId: string): Promise<TransportHubRow[]> {
+  const db = getDatabase();
+
+  // キャッシュをチェック
+  const metadata = getTileCacheMetadata(tileId, 'transport_hubs');
+  if (metadata) {
+    // アクセス時刻を更新
+    updateTileAccessTime(tileId, 'transport_hubs');
+
+    const cached = db.getAllSync<TransportHubRow>(
+      'SELECT * FROM transport_hubs WHERE tile_id = ?',
+      [tileId]
+    );
+    if (cached.length > 0) {
+      console.log(`📦 キャッシュからtransport_hubsデータを取得: ${tileId} (${cached.length}件)`);
+      return cached;
+    }
+  }
+
+  // Supabaseから取得
+  console.log(`🌐 Supabaseからtransport_hubsデータを取得: ${tileId}`);
+  const { data, error } = await supabase
+    .from('transport_hubs')
+    .select('*')
+    .eq('tile_id', tileId);
+
+  if (error) {
+    console.error(`❌ transport_hubsデータ取得エラー: ${tileId}`, error);
+    throw error;
+  }
+
+  if (data && data.length > 0) {
+    // LRU制限を適用
+    enforceLRULimit('transport_hubs');
+
+    // SQLiteにキャッシュ
+    const hubsForSQLite = data.map(toSQLiteTransportHub);
+    bulkInsertTransportHubs(hubsForSQLite);
+
+    // メタデータを記録
+    setTileCacheMetadata(tileId, 'transport_hubs', data.length);
+    console.log(`✅ ${data.length}件のtransport_hubsデータをキャッシュ: ${tileId}`);
+  } else {
+    // データが0件でもメタデータを記録（再取得を防ぐ）
+    setTileCacheMetadata(tileId, 'transport_hubs', 0);
+  }
+
+  return (data ?? []) as TransportHubRow[];
+}
+
+/**
+ * 複数タイルの交通機関データを取得
+ */
+export async function getTransportHubsByTileIds(tileIds: string[]): Promise<TransportHubRow[]> {
+  const results: TransportHubRow[] = [];
+
+  for (const tileId of tileIds) {
+    const hubs = await getTransportHubsByTileId(tileId);
+    results.push(...hubs);
+  }
+
+  return results;
+}
+
+/**
+ * マップ境界から交通機関データを取得
+ */
+export async function getTransportHubsByBounds(bounds: MapBounds): Promise<TransportHubRow[]> {
+  const { getVisibleTileIds } = await import('@/shared/lib/utils/tile.utils');
+  const tileIds = getVisibleTileIds(bounds);
+  return getTransportHubsByTileIds(tileIds);
+}
+
+// ===============================
 // ユーティリティ
 // ===============================
 
 /**
  * キャッシュされているタイルIDの一覧を取得
  */
-export function getCachedTileIds(entityType: 'machi' | 'cities'): string[] {
+export function getCachedTileIds(entityType: CacheEntityType): string[] {
   const db = getDatabase();
   const results = db.getAllSync<{ cache_key: string }>(
     "SELECT cache_key FROM cache_metadata WHERE cache_key LIKE 'tile:%' AND entity_type = ?",
@@ -343,6 +455,6 @@ export function getCachedTileIds(entityType: 'machi' | 'cities'): string[] {
 export function clearAllTileCache(): void {
   const db = getDatabase();
   db.runSync("DELETE FROM cache_metadata WHERE cache_key LIKE 'tile:%'");
-  // 注意: machi/citiesテーブルのデータも削除が必要な場合は別途実装
+  // 注意: machi/cities/transport_hubsテーブルのデータも削除が必要な場合は別途実装
   console.log('🗑️ 全タイルキャッシュをクリア');
 }

@@ -31,15 +31,11 @@ export const STATIC_DATA_CACHE_CONFIG = {
 /**
  * タイルベースのLRUキャッシュ上限設定
  *
- * machi/citiesはタイル単位でキャッシュし、上限を超えたら古いタイルから削除
- *
- * Note:
- * - transport-hubsは動的に多くの場所を見るため、LRU管理対象外
- *   （gcTimeで自動的にメモリから解放される）
- * - machi/citiesはタイル単位でSQLiteにキャッシュ
+ * machi/cities/transport_hubsはタイル単位でキャッシュし、上限を超えたら古いタイルから削除
+ * 各エンティティタイプごとに独立したLRU管理（それぞれ最大50タイル）
  */
 export const TILE_CACHE_LIMITS = {
-  /** 最大タイル数（machi + cities共通） */
+  /** 最大タイル数（各エンティティタイプごと） */
   maxTiles: 50,
 } as const;
 
@@ -82,7 +78,6 @@ export const PERSISTER_STORAGE_KEY = 'MACHIKORE_QUERY_CACHE';
  * これらのプレフィックスを持つクエリのみAsyncStorageに永続化
  *
  * Note:
- * - machi/citiesはSQLiteでキャッシュするため対象外
- * - transport-hubsは動的に多くの場所を見るため対象外（メモリキャッシュのみ）
+ * - machi/cities/transport_hubsはSQLiteでタイル単位にキャッシュするため対象外
  */
 export const PERSISTED_QUERY_PREFIXES = ['prefectures'] as const;

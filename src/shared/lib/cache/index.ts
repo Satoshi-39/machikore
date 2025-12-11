@@ -23,6 +23,9 @@ export {
   getCitiesByTileId,
   getCitiesByTileIds,
   getCitiesByBounds,
+  getTransportHubsByTileId,
+  getTransportHubsByTileIds,
+  getTransportHubsByBounds,
   getCachedTileIds,
   clearAllTileCache,
 } from './tile-cache-service';

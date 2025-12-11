@@ -2,4 +2,4 @@
  * Transport Hub API エクスポート
  */
 
-export { useTransportHubs, useTransportHubsByBounds } from './use-transport-hubs';
+export { useTransportHubsByBounds, type TransportHubType, type TransportHubRow } from './use-transport-hubs';

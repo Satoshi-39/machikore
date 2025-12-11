@@ -94,6 +94,7 @@ export const QUERY_KEYS = {
 
   // 交通機関
   transportHubs: () => ['transport-hubs'] as const,
+  transportHubsList: () => ['transport-hubs', 'list'] as const,
 
   // 駅（後方互換性のため残す）
   /** @deprecated Use machi instead */

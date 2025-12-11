@@ -182,6 +182,51 @@ export function initializeDatabase(): void {
       ON machi(tile_id);
     `);
 
+    // 5.5. 交通機関テーブル（駅、空港、フェリーターミナル、バスターミナル）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS transport_hubs (
+        id TEXT PRIMARY KEY,
+        osm_id INTEGER,
+        osm_type TEXT,
+        prefecture_id TEXT NOT NULL,
+        city_id TEXT,
+        type TEXT NOT NULL,
+        subtype TEXT,
+        name TEXT NOT NULL,
+        name_kana TEXT,
+        name_en TEXT,
+        operator TEXT,
+        network TEXT,
+        ref TEXT,
+        latitude REAL NOT NULL,
+        longitude REAL NOT NULL,
+        tile_id TEXT,
+        country_code TEXT NOT NULL DEFAULT 'jp',
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        FOREIGN KEY (prefecture_id) REFERENCES prefectures(id),
+        FOREIGN KEY (city_id) REFERENCES cities(id)
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_transport_hubs_prefecture_id
+      ON transport_hubs(prefecture_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_transport_hubs_type
+      ON transport_hubs(type);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_transport_hubs_tile_id
+      ON transport_hubs(tile_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_transport_hubs_location
+      ON transport_hubs(latitude, longitude);
+    `);
+
     // 6. マップテーブル
     db.execSync(`
       CREATE TABLE IF NOT EXISTS maps (
@@ -594,6 +639,7 @@ export function dropAllTables(): void {
     db.execSync('DROP TABLE IF EXISTS spots;');
     db.execSync('DROP TABLE IF EXISTS maps;');
     db.execSync('DROP TABLE IF EXISTS visits;');
+    db.execSync('DROP TABLE IF EXISTS transport_hubs;');
     db.execSync('DROP TABLE IF EXISTS machi;');
     db.execSync('DROP TABLE IF EXISTS cities;');
     db.execSync('DROP TABLE IF EXISTS prefectures;');
@@ -869,6 +915,67 @@ export function migration006_AddTileId(): void {
 }
 
 /**
+ * マイグレーション7: transport_hubsテーブル追加
+ */
+export function migration007_AddTransportHubs(): void {
+  const db = getDatabase();
+
+  console.log('[Migration 007] Starting: Add transport_hubs table...');
+
+  db.execSync('BEGIN TRANSACTION;');
+
+  try {
+    // transport_hubsテーブルが存在しない場合のみ作成
+    const tableExists = db.getAllSync<{ count: number }>(
+      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='transport_hubs';"
+    )[0];
+
+    if (!tableExists || tableExists.count === 0) {
+      db.execSync(`
+        CREATE TABLE IF NOT EXISTS transport_hubs (
+          id TEXT PRIMARY KEY,
+          osm_id INTEGER,
+          osm_type TEXT,
+          prefecture_id TEXT NOT NULL,
+          city_id TEXT,
+          type TEXT NOT NULL,
+          subtype TEXT,
+          name TEXT NOT NULL,
+          name_kana TEXT,
+          name_en TEXT,
+          operator TEXT,
+          network TEXT,
+          ref TEXT,
+          latitude REAL NOT NULL,
+          longitude REAL NOT NULL,
+          tile_id TEXT,
+          country_code TEXT NOT NULL DEFAULT 'jp',
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL,
+          FOREIGN KEY (prefecture_id) REFERENCES prefectures(id),
+          FOREIGN KEY (city_id) REFERENCES cities(id)
+        );
+      `);
+
+      // インデックス作成
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_transport_hubs_prefecture_id ON transport_hubs(prefecture_id);');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_transport_hubs_type ON transport_hubs(type);');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_transport_hubs_tile_id ON transport_hubs(tile_id);');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_transport_hubs_location ON transport_hubs(latitude, longitude);');
+    }
+
+    // コミット
+    db.execSync('COMMIT;');
+
+    console.log('[Migration 007] Completed successfully');
+  } catch (error) {
+    db.execSync('ROLLBACK;');
+    console.error('[Migration 007] Failed:', error);
+    throw error;
+  }
+}
+
+/**
  * 全マイグレーションを実行
  */
 export function runMigrations(): void {
@@ -890,6 +997,13 @@ export function runMigrations(): void {
     migration006_AddTileId();
     recordVersion(6);
     console.log('[Migrations] Applied version 6');
+  }
+
+  // マイグレーション7: transport_hubs追加
+  if (currentVersion < 7) {
+    migration007_AddTransportHubs();
+    recordVersion(7);
+    console.log('[Migrations] Applied version 7');
   }
 
   console.log('[Migrations] All migrations completed');
