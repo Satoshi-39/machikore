@@ -83,8 +83,6 @@ export const QUERY_KEYS = {
   // 市区町村
   cities: ['cities'] as const,
   citiesList: () => ['cities', 'list'] as const,
-  citiesByPrefecture: (prefectureId: string) =>
-    ['cities', 'prefecture', prefectureId] as const,
 
   // 街
   machi: ['machi'] as const,
@@ -93,8 +91,6 @@ export const QUERY_KEYS = {
     [...QUERY_KEYS.machi, 'detail', machiId] as const,
   machiSearch: (searchTerm: string) =>
     [...QUERY_KEYS.machi, 'search', searchTerm] as const,
-  machiByPrefecture: (prefectureId: string) =>
-    [...QUERY_KEYS.machi, 'prefecture', prefectureId] as const,
 
   // 交通機関
   transportHubs: () => ['transport-hubs'] as const,

@@ -166,20 +166,3 @@ export function useCities(options: UseCitiesOptions = {}): UseCitiesResult {
   };
 }
 
-/**
- * @deprecated useCitiesByBoundsを使用してください
- */
-export function useCitiesByPrefecture(prefectureId: string | null) {
-  console.warn('useCitiesByPrefecture is deprecated. Use useCitiesByBounds instead.');
-
-  return useQuery<CityRow[], Error>({
-    queryKey: QUERY_KEYS.citiesByPrefecture(prefectureId || ''),
-    queryFn: async () => {
-      if (!prefectureId) return [];
-      return [];
-    },
-    enabled: false, // 無効化
-    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
-    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
-  });
-}

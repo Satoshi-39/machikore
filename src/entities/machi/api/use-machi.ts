@@ -184,23 +184,3 @@ export function useCachedMachi() {
   });
 }
 
-/**
- * @deprecated useMachiByBoundsを使用してください
- */
-export function useMachiByPrefecture(prefectureId: string | null) {
-  // タイル方式では都道府県単位の取得は非推奨
-  // 後方互換性のため、prefectureIdからおおよその中心座標を推測して取得
-  console.warn('useMachiByPrefecture is deprecated. Use useMachiByBounds instead.');
-
-  return useQuery<MachiRow[], Error>({
-    queryKey: QUERY_KEYS.machiByPrefecture(prefectureId || ''),
-    queryFn: async () => {
-      if (!prefectureId) return [];
-      // タイル方式では都道府県単位での取得をサポートしないため空配列を返す
-      return [];
-    },
-    enabled: false, // 無効化
-    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
-    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
-  });
-}

@@ -2,20 +2,6 @@
  * キャッシュサービス エクスポート
  */
 
-export {
-  getMachiByPrefecture,
-  getMachiByPrefectures,
-  getMachiByLocation,
-  refreshMachiCache,
-  prefetchMachiData,
-} from './machi-cache-service';
-
-export {
-  getCitiesByPrefecture,
-  getCitiesByLocation,
-  getAllCachedCities,
-} from './cities-cache-service';
-
 // TanStack Query キャッシュ管理
 export {
   setupLRUCacheManager,
