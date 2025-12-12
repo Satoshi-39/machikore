@@ -19,12 +19,15 @@ export interface MapBounds {
 /**
  * 座標からタイルIDを計算
  *
+ * 経度は+180、緯度は+90のオフセットを加えて正規化し、
+ * 世界中どこでも正の整数になるようにする
+ *
  * @example
- * getTileId(35.6812, 139.7671) // "559_142" (東京駅)
+ * getTileId(35.6812, 139.7671) // "1279_502" (東京駅)
  */
 export function getTileId(latitude: number, longitude: number): string {
-  const tileX = Math.floor(longitude / MAP_TILE.SIZE);
-  const tileY = Math.floor(latitude / MAP_TILE.SIZE);
+  const tileX = Math.floor((longitude + 180) / MAP_TILE.SIZE);
+  const tileY = Math.floor((latitude + 90) / MAP_TILE.SIZE);
   return `${tileX}_${tileY}`;
 }
 
@@ -36,10 +39,10 @@ export function getTileBounds(tileId: string): MapBounds {
   const tileX = parts[0] ?? 0;
   const tileY = parts[1] ?? 0;
   return {
-    west: tileX * MAP_TILE.SIZE,
-    east: (tileX + 1) * MAP_TILE.SIZE,
-    south: tileY * MAP_TILE.SIZE,
-    north: (tileY + 1) * MAP_TILE.SIZE,
+    west: tileX * MAP_TILE.SIZE - 180,
+    east: (tileX + 1) * MAP_TILE.SIZE - 180,
+    south: tileY * MAP_TILE.SIZE - 90,
+    north: (tileY + 1) * MAP_TILE.SIZE - 90,
   };
 }
 
@@ -47,10 +50,10 @@ export function getTileBounds(tileId: string): MapBounds {
  * 画面の表示範囲から必要なタイルIDの配列を取得
  */
 export function getVisibleTileIds(bounds: MapBounds): string[] {
-  const minX = Math.floor(bounds.west / MAP_TILE.SIZE);
-  const maxX = Math.floor(bounds.east / MAP_TILE.SIZE);
-  const minY = Math.floor(bounds.south / MAP_TILE.SIZE);
-  const maxY = Math.floor(bounds.north / MAP_TILE.SIZE);
+  const minX = Math.floor((bounds.west + 180) / MAP_TILE.SIZE);
+  const maxX = Math.floor((bounds.east + 180) / MAP_TILE.SIZE);
+  const minY = Math.floor((bounds.south + 90) / MAP_TILE.SIZE);
+  const maxY = Math.floor((bounds.north + 90) / MAP_TILE.SIZE);
 
   const tileIds: string[] = [];
   for (let x = minX; x <= maxX; x++) {

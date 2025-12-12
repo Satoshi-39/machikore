@@ -242,10 +242,10 @@ export const TRANSPORT_HUB_COLORS_DARK = {
 
 /** 交通機関のデフォルトminZoomLevel（shared/default-map用） */
 export const TRANSPORT_HUB_MIN_ZOOM_DEFAULT = {
-  station: 12,
-  airport: 8,
-  ferry: 12,
-  bus: 13,
+  station: 13,
+  airport: 9,
+  ferry: 13,
+  bus: 14,
 } as const;
 
 /** 交通機関のminZoomLevel（ユーザマップ用 - より拡大時のみ表示、スポット優先） */
