@@ -1,3 +1,2 @@
-export { UserSpotLabels } from './user-spot-labels';
-// TransportHubLabels は shared/ui/map-layers から再エクスポート（共通化）
-export { TransportHubLabels } from '@/shared/ui/map-layers';
+// ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ）
+export { UserMapLabels } from './user-map-labels';

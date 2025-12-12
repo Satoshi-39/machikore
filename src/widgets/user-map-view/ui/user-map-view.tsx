@@ -16,7 +16,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { ENV, type UserMapThemeColor } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
-import { UserSpotLabels, TransportHubLabels } from './layers';
+import { UserMapLabels } from './layers';
 import { SpotCarousel } from './spot-carousel';
 import Mapbox from '@rnmapbox/maps';
 import React, {
@@ -350,14 +350,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             animated={true}
           />
 
-          {/* 交通機関ラベルレイヤー（駅・空港など） */}
-          <TransportHubLabels geoJson={transportHubsGeoJson} />
-
-          {/* スポットラベルレイヤー（マップのテーマカラーを使用） */}
-          <UserSpotLabels
-            geoJson={spotsGeoJson}
-            onPress={handleSpotPress}
+          {/* ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ）
+              同じShapeSourceにまとめることで、symbolSortKeyでスポットを優先表示 */}
+          <UserMapLabels
+            spotsGeoJson={spotsGeoJson}
+            transportGeoJson={transportHubsGeoJson}
+            onSpotPress={handleSpotPress}
             themeColor={mapData?.theme_color as UserMapThemeColor}
+            selectedSpotId={selectedSpot?.id ?? focusedSpotId}
           />
         </Mapbox.MapView>
 
