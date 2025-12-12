@@ -47,7 +47,7 @@ export function useCitiesByBounds(options: UseCitiesByBoundsOptions = {}): UseCi
   const tileIds = useMemo(() => {
     if (!bounds) return [];
     // ズームがCITY表示レベル未満の場合は取得しない
-    if (zoom < MAP_ZOOM.PREFECTURE) return [];
+    if (zoom < MAP_ZOOM.CITY) return [];
 
     const mapBounds: MapBounds = {
       north: bounds.maxLat,
