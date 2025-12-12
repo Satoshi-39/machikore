@@ -14,7 +14,7 @@ import {
   getMasterSpotById,
 } from '@/shared/api/supabase';
 import { MAP_ZOOM } from '@/shared/config';
-import { getRegionsDataWithCoords } from '@/shared/lib/utils/regions.utils';
+import { getRegionsData } from '@/shared/lib/utils/regions.utils';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
@@ -156,7 +156,7 @@ export function useMapJump({
       const prevRegionId = prevState.jumpToRegionId;
       if (newRegionId && newRegionId !== prevRegionId) {
         // 地方データはローカルJSONから取得
-        const regions = getRegionsDataWithCoords();
+        const regions = getRegionsData();
         const region = regions.find((r) => r.id === newRegionId);
         if (region) {
           lastJumpTimeRef.current = Date.now();

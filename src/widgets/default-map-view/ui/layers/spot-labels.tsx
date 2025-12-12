@@ -20,9 +20,11 @@ const spotIcons = {
 interface SpotLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string; category: SpotCategory }>;
   onPress: (event: any) => void;
+  /** 選択中のスポットID（選択中は常に表示） */
+  selectedSpotId?: string | null;
 }
 
-export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
+export function SpotLabels({ geoJson, onPress, selectedSpotId }: SpotLabelsProps) {
   return (
     <>
       {/* アイコン画像を登録 */}
@@ -37,7 +39,10 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
         <Mapbox.SymbolLayer
           id="master-spots-food"
           minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'food']}
+          filter={selectedSpotId
+            ? ['all', ['==', ['get', 'category'], 'food'], ['!=', ['get', 'id'], selectedSpotId]]
+            : ['==', ['get', 'category'], 'food']
+          }
           style={{
             iconImage: 'spot-food',
             iconSize: 0.18,
@@ -58,7 +63,10 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
         <Mapbox.SymbolLayer
           id="master-spots-shopping"
           minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'shopping']}
+          filter={selectedSpotId
+            ? ['all', ['==', ['get', 'category'], 'shopping'], ['!=', ['get', 'id'], selectedSpotId]]
+            : ['==', ['get', 'category'], 'shopping']
+          }
           style={{
             iconImage: 'spot-shopping',
             iconSize: 0.18,
@@ -79,7 +87,10 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
         <Mapbox.SymbolLayer
           id="master-spots-tourism"
           minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'tourism']}
+          filter={selectedSpotId
+            ? ['all', ['==', ['get', 'category'], 'tourism'], ['!=', ['get', 'id'], selectedSpotId]]
+            : ['==', ['get', 'category'], 'tourism']
+          }
           style={{
             iconImage: 'spot-tourism',
             iconSize: 0.18,
@@ -100,7 +111,10 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
         <Mapbox.SymbolLayer
           id="master-spots-transit"
           minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'transit']}
+          filter={selectedSpotId
+            ? ['all', ['==', ['get', 'category'], 'transit'], ['!=', ['get', 'id'], selectedSpotId]]
+            : ['==', ['get', 'category'], 'transit']
+          }
           style={{
             iconImage: 'spot-transit',
             iconSize: 0.18,
@@ -121,7 +135,10 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
         <Mapbox.SymbolLayer
           id="master-spots-other"
           minZoomLevel={13}
-          filter={['==', ['get', 'category'], 'other']}
+          filter={selectedSpotId
+            ? ['all', ['==', ['get', 'category'], 'other'], ['!=', ['get', 'id'], selectedSpotId]]
+            : ['==', ['get', 'category'], 'other']
+          }
           style={{
             iconImage: 'spot-other',
             iconSize: 0.18,
@@ -135,6 +152,47 @@ export function SpotLabels({ geoJson, onPress }: SpotLabelsProps) {
             textAnchor: 'left',
             iconAnchor: 'right',
             textOffset: [0.3, 0],
+          }}
+        />
+
+        {/* 選択中のスポット（常に優先表示） */}
+        <Mapbox.SymbolLayer
+          id="selected-master-spot"
+          filter={selectedSpotId
+            ? ['==', ['get', 'id'], selectedSpotId]
+            : ['==', 'dummy', 'never-match']
+          }
+          style={{
+            iconImage: [
+              'match',
+              ['get', 'category'],
+              'food', 'spot-food',
+              'shopping', 'spot-shopping',
+              'tourism', 'spot-tourism',
+              'transit', 'spot-transit',
+              'spot-other',
+            ],
+            iconSize: 0.18,
+            textField: ['get', 'name'],
+            textSize: 13,
+            textColor: [
+              'match',
+              ['get', 'category'],
+              'food', SPOT_CATEGORY_COLORS.food,
+              'shopping', SPOT_CATEGORY_COLORS.shopping,
+              'tourism', SPOT_CATEGORY_COLORS.tourism,
+              'transit', SPOT_CATEGORY_COLORS.transit,
+              SPOT_CATEGORY_COLORS.other,
+            ],
+            textHaloColor: '#FFFFFF',
+            textHaloWidth: 2,
+            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            iconTextFit: 'none',
+            textAnchor: 'left',
+            iconAnchor: 'right',
+            textOffset: [0.3, 0],
+            textAllowOverlap: true,
+            iconAllowOverlap: true,
           }}
         />
       </Mapbox.ShapeSource>

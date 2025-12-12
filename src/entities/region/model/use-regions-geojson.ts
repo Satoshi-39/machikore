@@ -4,7 +4,7 @@
 
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
-import type { RegionDataWithCoords } from '@/shared/lib/utils/regions.utils';
+import type { RegionRow } from '@/shared/types/database.types';
 
 interface RegionFeatureProperties {
   id: string;
@@ -15,7 +15,7 @@ interface RegionFeatureProperties {
  * RegionデータをGeoJSON形式に変換
  */
 export function useRegionsGeoJson(
-  regions: RegionDataWithCoords[]
+  regions: RegionRow[]
 ): FeatureCollection<Point, RegionFeatureProperties> {
   return useMemo(() => {
     return {

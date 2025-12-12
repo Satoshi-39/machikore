@@ -79,6 +79,9 @@ export const VISIT_ICONS = {
 // マップズームレベル
 // ===============================
 
+/**
+ * ジャンプ時のズームレベル（検索結果タップ時など）
+ */
 export const MAP_ZOOM = {
   /** 地球全体 */
   EARTH: 3,
@@ -90,12 +93,30 @@ export const MAP_ZOOM = {
   PREFECTURE: 8,
   /** 市区レベル */
   CITY: 11,
-  /** 街レベル（デフォルト） */
+  /** 街レベル */
   MACHI: 13,
   /** スポット詳細レベル */
   SPOT: 16,
   /** 初期表示（現在地なし） */
   INITIAL: 10,
+} as const;
+
+/**
+ * ラベル表示のズームレベル範囲
+ * min: この値以上のズームでラベルが表示される（minZoomLevel）
+ * max: この値以下のズームでラベルが表示される（maxZoomLevel）
+ */
+export const LABEL_ZOOM = {
+  /** 国ラベル */
+  COUNTRY: { min: 1, max: 4 },
+  /** 地方ラベル */
+  REGION: { min: 3, max: 7 },
+  /** 都道府県ラベル */
+  PREFECTURE: { min: 5, max: 11 },
+  /** 市区ラベル */
+  CITY: { min: 10, max: 12 },
+  /** 街ラベル（maxなし = ずっと表示） */
+  MACHI: { min: 12 },
 } as const;
 
 // ===============================

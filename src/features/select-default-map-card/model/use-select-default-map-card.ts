@@ -3,15 +3,8 @@
  */
 
 import { useState, useCallback } from 'react';
-import type { MachiRow, CityRow, PrefectureRow, RegionRow } from '@/shared/types/database.types';
+import type { MachiRow, CityRow, PrefectureRow, RegionRow, CountryRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
-
-/** 国データの型（日本のみ対応） */
-export interface CountryData {
-  id: string;
-  name: string;
-  code: string;
-}
 
 interface UseSelectDefaultMapCardOptions {
   /** 検索バーを表示する */
@@ -24,7 +17,7 @@ interface UseSelectDefaultMapCardOptions {
 
 interface UseSelectDefaultMapCardReturn {
   /** 選択された国 */
-  selectedCountry: CountryData | null;
+  selectedCountry: CountryRow | null;
   /** 選択された地方 */
   selectedRegion: RegionRow | null;
   /** 選択された都道府県 */
@@ -36,7 +29,7 @@ interface UseSelectDefaultMapCardReturn {
   /** 選択されたスポット */
   selectedSpot: MasterSpotDisplay | null;
   /** 国を選択/解除 */
-  handleCountrySelect: (country: CountryData | null) => void;
+  handleCountrySelect: (country: CountryRow | null) => void;
   /** 地方を選択/解除 */
   handleRegionSelect: (region: RegionRow | null) => void;
   /** 都道府県を選択/解除 */
@@ -63,7 +56,7 @@ export function useSelectDefaultMapCard({
   onCloseComplete,
   onCardOpen,
 }: UseSelectDefaultMapCardOptions): UseSelectDefaultMapCardReturn {
-  const [selectedCountry, setSelectedCountry] = useState<CountryData | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<CountryRow | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<RegionRow | null>(null);
   const [selectedPrefecture, setSelectedPrefecture] = useState<PrefectureRow | null>(null);
   const [selectedMachi, setSelectedMachi] = useState<MachiRow | null>(null);
@@ -81,7 +74,7 @@ export function useSelectDefaultMapCard({
   }, []);
 
   // 国を選択/解除
-  const handleCountrySelect = useCallback((country: CountryData | null) => {
+  const handleCountrySelect = useCallback((country: CountryRow | null) => {
     if (!country) {
       onCloseComplete();
       showSearchBar();

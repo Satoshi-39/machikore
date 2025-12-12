@@ -7,7 +7,7 @@
 
 import { queryAll } from '@/shared/api/sqlite/client';
 import { supabase } from '@/shared/api/supabase/client';
-import { getRegionsDataWithCoords } from '@/shared/lib/utils/regions.utils';
+import { getRegionsData } from '@/shared/lib/utils/regions.utils';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 
 export interface MachikorePlaceSearchResult {
@@ -57,7 +57,7 @@ function searchCountries(query: string, limit: number): MachikorePlaceSearchResu
  * regionsを検索（ローカルJSONから検索）
  */
 function searchRegions(query: string, limit: number): MachikorePlaceSearchResult[] {
-  const regions = getRegionsDataWithCoords();
+  const regions = getRegionsData();
   const lowerQuery = query.toLowerCase();
 
   return regions

@@ -20,19 +20,18 @@ import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
-import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, SpotLabels, TransportHubLabels } from './layers';
+import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, SpotTransportLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
 import { useRegionsGeoJson } from '@/entities/region';
 import { useCountriesGeoJson } from '@/entities/country/model';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
-import { getRegionsDataWithCoords, getRegionsData } from '@/shared/lib/utils/regions.utils';
-import type { RegionDataWithCoords } from '@/shared/lib/utils/regions.utils';
+import { getRegionsData } from '@/shared/lib/utils/regions.utils';
 import { useBoundsManagement, useCenterLocationName } from '../model';
 import { DefaultMapHeader } from './default-map-header';
 import { CountryDetailCard } from './country-detail-card';
 import { RegionDetailCard } from './region-detail-card';
 import { PrefectureDetailCard } from './prefecture-detail-card';
-import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
+import type { MachiRow, CityRow, PrefectureRow, RegionRow, CountryRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
@@ -126,7 +125,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
 
     // 国データと地方データを取得
     const countries = useMemo(() => getCountriesData(), []);
-    const regions = useMemo(() => getRegionsDataWithCoords(), []);
+    const regions = useMemo(() => getRegionsData(), []);
 
     // マップ中心の地名を取得
     const centerLocation = useCenterLocationName({
@@ -194,13 +193,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     }, [prefectures]);
 
     // RegionRowのマップを作成（IDからRegionRowへの変換用）
-    const regionsRowData = useMemo(() => getRegionsData(), []);
     const regionMap = useMemo(() => {
-      return new Map(regionsRowData.map((region) => [region.id, region]));
-    }, [regionsRowData]);
-
-    // 座標付き地方データのマップを作成（ズーム用）
-    const regionCoordsMap = useMemo(() => {
       return new Map(regions.map((region) => [region.id, region]));
     }, [regions]);
 
@@ -279,11 +272,11 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const handleRegionLabelPress = useCallback((region: import('@/shared/types/database.types').RegionRow) => {
       handleRegionSelect(region);
       // 座標付きデータからズーム
-      const regionCoords = regionCoordsMap.get(region.id);
+      const regionCoords = regionMap.get(region.id);
       if (regionCoords) {
         flyToLocation(regionCoords.longitude, regionCoords.latitude, MAP_ZOOM.REGION);
       }
-    }, [handleRegionSelect, regionCoordsMap, flyToLocation]);
+    }, [handleRegionSelect, regionMap, flyToLocation]);
 
     // 都道府県ラベルタップ時のハンドラー（ズーム付き）
     const handlePrefectureLabelPress = useCallback((prefecture: PrefectureRow) => {
@@ -305,23 +298,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       } else if (centerLocation.type === 'prefecture') {
         handlePrefectureSelect(centerLocation.entity as PrefectureRow);
       } else if (centerLocation.type === 'region') {
-        // 地方の場合はRegionDataWithCoords型からRegionRow型に変換
-        const regionData = centerLocation.entity as RegionDataWithCoords;
-        const now = new Date().toISOString();
-        handleRegionSelect({
-          id: regionData.id,
-          name: regionData.name,
-          name_kana: regionData.name_kana,
-          name_translations: null,
-          country_code: regionData.country_code,
-          display_order: regionData.display_order,
-          created_at: now,
-          updated_at: now,
-        });
+        handleRegionSelect(centerLocation.entity as RegionRow);
       } else if (centerLocation.type === 'country') {
-        // 国の場合はCountryData型からカード用の型に変換
-        const countryData = centerLocation.entity as { id: string; name: string; country_code: string };
-        handleCountrySelect({ id: countryData.id, name: countryData.name, code: countryData.country_code });
+        handleCountrySelect(centerLocation.entity as CountryRow);
       }
     }, [centerLocation, handleMachiSelect, handleCitySelect, handlePrefectureSelect, handleRegionSelect, handleCountrySelect]);
 
@@ -361,13 +340,14 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {visitFilter === 'all' && (
           <>
             {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
-            <CountryLabels geoJson={countriesGeoJson} onPress={handleCountrySelect} />
+            <CountryLabels geoJson={countriesGeoJson} onPress={handleCountrySelect} selectedCountry={selectedCountry} />
 
             {/* 地方ラベル表示（テキストのみ）- ズーム5-7で表示 */}
             <RegionLabels
               geoJson={regionsGeoJson}
               regionMap={regionMap}
               onPress={handleRegionLabelPress}
+              selectedRegion={selectedRegion}
             />
 
             {/* 都道府県ラベル表示（テキストのみ）- ズーム6-11で表示 */}
@@ -375,16 +355,19 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               geoJson={prefecturesGeoJson}
               prefectureMap={prefectureMap}
               onPress={handlePrefectureLabelPress}
+              selectedPrefecture={selectedPrefecture}
             />
 
             {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
-            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
+            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} selectedCity={selectedCity} />
 
-            {/* 交通機関ラベル表示（駅・空港など）- ズーム12以上で表示 */}
-            <TransportHubLabels geoJson={transportHubsGeoJson} />
-
-            {/* スポットマーカー表示（ラベルのみ、カテゴリ別色分け）- ズーム13以上で表示 */}
-            <SpotLabels geoJson={masterSpotsGeoJson} onPress={handleSpotPress} />
+            {/* スポット＋交通機関統合レイヤー（symbolSortKeyで優先度制御） */}
+            <SpotTransportLabels
+              spotsGeoJson={masterSpotsGeoJson}
+              transportGeoJson={transportHubsGeoJson}
+              onSpotPress={handleSpotPress}
+              selectedSpotId={selectedSpot?.id}
+            />
           </>
         )}
 
@@ -393,6 +376,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           geoJson={machiGeoJson}
           onPress={handleMarkerPress}
           visitFilter={visitFilter}
+          selectedMachi={selectedMachi}
+          isSelectedMachiVisited={selectedMachi ? visitedMachiIds.has(selectedMachi.id) : false}
         />
       </Mapbox.MapView>
 
@@ -464,7 +449,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             // 国カードが閉じた後に地方カードを開く
             handleRegionSelect(region);
             // カメラを地方の位置に移動（座標がある場合のみ）
-            const regionCoords = regionCoordsMap.get(region.id);
+            const regionCoords = regionMap.get(region.id);
             if (regionCoords) {
               flyToLocation(regionCoords.longitude, regionCoords.latitude, MAP_ZOOM.REGION);
             }

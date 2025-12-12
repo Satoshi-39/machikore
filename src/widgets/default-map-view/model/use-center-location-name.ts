@@ -13,9 +13,7 @@
 
 import { useMemo } from 'react';
 import type { CameraState } from './use-bounds-management';
-import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
-import type { CountryData } from '@/shared/lib/utils/countries.utils';
-import type { RegionDataWithCoords } from '@/shared/lib/utils/regions.utils';
+import type { MachiRow, CityRow, PrefectureRow, RegionRow, CountryRow } from '@/shared/types/database.types';
 import { MAP_ZOOM, MAP_DISTANCE_THRESHOLD } from '@/shared/config';
 
 interface UseCenterLocationNameParams {
@@ -23,15 +21,15 @@ interface UseCenterLocationNameParams {
   machiData?: MachiRow[] | null;
   cities?: CityRow[];
   prefectures?: PrefectureRow[];
-  regions?: RegionDataWithCoords[];
-  countries?: CountryData[];
+  regions?: RegionRow[];
+  countries?: CountryRow[];
 }
 
 interface LocationInfo {
   name: string;
   type: 'machi' | 'city' | 'prefecture' | 'region' | 'country' | 'earth' | 'unknown';
   /** 対応するエンティティ（街、市区、都道府県、地方、国） */
-  entity?: MachiRow | CityRow | PrefectureRow | RegionDataWithCoords | CountryData | null;
+  entity?: MachiRow | CityRow | PrefectureRow | RegionRow | CountryRow | null;
 }
 
 /**

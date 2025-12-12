@@ -2,22 +2,64 @@
  * 都道府県ラベルレイヤー（アイコン + テキスト横並び）
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Mapbox from '@rnmapbox/maps';
-import type { FeatureCollection, Point } from 'geojson';
-import { LOCATION_ICONS, MAP_ZOOM } from '@/shared/config';
+import type { FeatureCollection, Point, Feature } from 'geojson';
+import { LABEL_ZOOM, LOCATION_ICONS } from '@/shared/config';
 import type { PrefectureRow } from '@/shared/types/database.types';
 
 // アイコン画像（紫色）
 const shieldIcon = require('@assets/icons/shield-prefecture.png');
 
-interface PrefectureLabelsProps {
-  geoJson: FeatureCollection<Point, { id: string; name: string; name_kana?: string; region_id?: string }>;
-  prefectureMap?: Map<string, PrefectureRow>;
-  onPress?: (prefecture: PrefectureRow) => void;
+interface PrefectureFeatureProperties {
+  id: string;
+  name: string;
+  name_kana?: string;
+  region_id?: string;
 }
 
-export function PrefectureLabels({ geoJson, prefectureMap, onPress }: PrefectureLabelsProps) {
+interface PrefectureLabelsProps {
+  geoJson: FeatureCollection<Point, PrefectureFeatureProperties>;
+  prefectureMap?: Map<string, PrefectureRow>;
+  onPress?: (prefecture: PrefectureRow) => void;
+  /** 選択中の都道府県（GeoJSONに含まれていなくても表示するため） */
+  selectedPrefecture?: PrefectureRow | null;
+}
+
+export function PrefectureLabels({ geoJson, prefectureMap, onPress, selectedPrefecture }: PrefectureLabelsProps) {
+  // 選択中の都道府県がGeoJSONに含まれていない場合、追加したGeoJSONを生成
+  const combinedGeoJson = useMemo((): FeatureCollection<Point, PrefectureFeatureProperties> => {
+    if (!selectedPrefecture || selectedPrefecture.longitude == null || selectedPrefecture.latitude == null) {
+      return geoJson;
+    }
+
+    // 既にGeoJSONに含まれているかチェック
+    const exists = geoJson.features.some((f) => f.properties.id === selectedPrefecture.id);
+    if (exists) return geoJson;
+
+    // 含まれていない場合、選択中の都道府県を追加
+    const selectedFeature: Feature<Point, PrefectureFeatureProperties> = {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [selectedPrefecture.longitude, selectedPrefecture.latitude],
+      },
+      properties: {
+        id: selectedPrefecture.id,
+        name: selectedPrefecture.name,
+        name_kana: selectedPrefecture.name_kana ?? undefined,
+        region_id: selectedPrefecture.region_id ?? undefined,
+      },
+    };
+
+    return {
+      ...geoJson,
+      features: [...geoJson.features, selectedFeature],
+    };
+  }, [geoJson, selectedPrefecture]);
+
+  const selectedPrefectureId = selectedPrefecture?.id;
+
   const handlePress = (event: any) => {
     const feature = event.features?.[0];
     if (!feature || !onPress || !prefectureMap) return;
@@ -38,14 +80,18 @@ export function PrefectureLabels({ geoJson, prefectureMap, onPress }: Prefecture
 
       <Mapbox.ShapeSource
         id="prefectures-source"
-        shape={geoJson}
+        shape={combinedGeoJson}
         onPress={handlePress}
       >
-        {/* アイコン + テキスト横並び */}
+        {/* 通常の都道府県ラベル（選択中は除外） */}
         <Mapbox.SymbolLayer
           id="prefectures-labels"
-          minZoomLevel={MAP_ZOOM.PREFECTURE - 3}
-          maxZoomLevel={MAP_ZOOM.PREFECTURE + 3}
+          minZoomLevel={LABEL_ZOOM.PREFECTURE.min}
+          maxZoomLevel={LABEL_ZOOM.PREFECTURE.max}
+          filter={selectedPrefectureId
+            ? ['!=', ['get', 'id'], selectedPrefectureId]
+            : ['has', 'id']
+          }
           style={{
             iconImage: 'prefecture-icon',
             iconSize: 0.35,
@@ -59,6 +105,31 @@ export function PrefectureLabels({ geoJson, prefectureMap, onPress }: Prefecture
             textAnchor: 'left',
             iconAnchor: 'right',
             textOffset: [0.3, 0],
+          }}
+        />
+
+        {/* 選択中の都道府県（常に優先表示） */}
+        <Mapbox.SymbolLayer
+          id="selected-prefecture-label"
+          filter={selectedPrefectureId
+            ? ['==', ['get', 'id'], selectedPrefectureId]
+            : ['==', 'dummy', 'never-match']
+          }
+          style={{
+            iconImage: 'prefecture-icon',
+            iconSize: 0.35,
+            textField: ['get', 'name'],
+            textSize: 16,
+            textColor: LOCATION_ICONS.PREFECTURE.color,
+            textHaloColor: '#FFFFFF',
+            textHaloWidth: 2,
+            textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+            iconTextFit: 'none',
+            textAnchor: 'left',
+            iconAnchor: 'right',
+            textOffset: [0.3, 0],
+            textAllowOverlap: true,
+            iconAllowOverlap: true,
           }}
         />
       </Mapbox.ShapeSource>

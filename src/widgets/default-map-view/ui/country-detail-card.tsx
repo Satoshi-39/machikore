@@ -17,11 +17,10 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { getAllRegions } from '@/shared/api/sqlite/regions';
-import type { CountryData } from '@/features/select-default-map-card';
-import type { RegionRow } from '@/shared/types/database.types';
+import type { CountryRow, RegionRow } from '@/shared/types/database.types';
 
 interface CountryDetailCardProps {
-  country: CountryData;
+  country: CountryRow;
   onClose: () => void;
   onSnapChange?: (snapIndex: number) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;

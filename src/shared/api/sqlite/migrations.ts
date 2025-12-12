@@ -82,6 +82,8 @@ export function initializeDatabase(): void {
         name TEXT NOT NULL UNIQUE,
         name_kana TEXT NOT NULL,
         name_translations TEXT,
+        latitude REAL,
+        longitude REAL,
         country_code TEXT NOT NULL DEFAULT 'jp',
         display_order INTEGER NOT NULL,
         created_at TEXT NOT NULL,
@@ -976,6 +978,30 @@ export function migration007_AddTransportHubs(): void {
 }
 
 /**
+ * マイグレーション008: regionsテーブルに座標カラム追加
+ */
+function migration008_AddRegionsCoordinates(): void {
+  const db = getDatabase();
+
+  console.log('[Migration 008] Adding coordinates to regions table...');
+
+  db.execSync('BEGIN TRANSACTION;');
+
+  try {
+    // latitude, longitude カラムを追加
+    db.execSync('ALTER TABLE regions ADD COLUMN latitude REAL;');
+    db.execSync('ALTER TABLE regions ADD COLUMN longitude REAL;');
+
+    db.execSync('COMMIT;');
+    console.log('[Migration 008] Completed successfully');
+  } catch (error) {
+    db.execSync('ROLLBACK;');
+    console.error('[Migration 008] Failed:', error);
+    throw error;
+  }
+}
+
+/**
  * 全マイグレーションを実行
  */
 export function runMigrations(): void {
@@ -1004,6 +1030,13 @@ export function runMigrations(): void {
     migration007_AddTransportHubs();
     recordVersion(7);
     console.log('[Migrations] Applied version 7');
+  }
+
+  // マイグレーション8: regions座標カラム追加
+  if (currentVersion < 8) {
+    migration008_AddRegionsCoordinates();
+    recordVersion(8);
+    console.log('[Migrations] Applied version 8');
   }
 
   console.log('[Migrations] All migrations completed');

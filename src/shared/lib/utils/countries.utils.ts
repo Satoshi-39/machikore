@@ -3,19 +3,11 @@
  */
 
 import countriesData from '@/shared/assets/data/countries.json';
-
-export interface CountryData {
-  id: string;
-  name: string;
-  name_kana: string;
-  latitude: number;
-  longitude: number;
-  country_code: string;
-}
+import type { CountryRow } from '@/shared/types/database.types';
 
 /**
  * 国データを取得（JSONから）
  */
-export function getCountriesData(): CountryData[] {
-  return countriesData as CountryData[];
+export function getCountriesData(): CountryRow[] {
+  return countriesData as CountryRow[];
 }

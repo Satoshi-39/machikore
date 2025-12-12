@@ -297,6 +297,18 @@ export type BookmarkUpdate = Partial<Omit<BookmarkRow, 'id' | 'created_at'>>;
 // ===============================
 
 /**
+ * Country (国マスター)
+ */
+export interface CountryRow {
+  id: string;              // "japan", "usa"
+  name: string;            // "日本", "アメリカ"
+  name_kana: string;       // "にほん", "あめりか"
+  latitude: number;        // 中心座標の緯度
+  longitude: number;       // 中心座標の経度
+  country_code: string;    // "jp", "us"
+}
+
+/**
  * Region (地方マスター)
  */
 export interface RegionRow {
@@ -304,6 +316,8 @@ export interface RegionRow {
   name: string;            // "北海道", "東北", "関東"
   name_kana: string;       // "ほっかいどう", "とうほく"
   name_translations: string | null; // JSON: {"en": "Hokkaido", "zh": "北海道"}
+  latitude: number;        // 中心座標の緯度
+  longitude: number;       // 中心座標の経度
   country_code: string;    // "jp"
   display_order: number;   // 1, 2, 3...
   created_at: string;
