@@ -9,6 +9,7 @@ export { AsyncBoundary } from './async-boundary';
 export { SingleDataBoundary } from './single-data-boundary';
 export { FAB } from './fab';
 export { LocationButton } from './location-button';
+export { SelectedLocationButton } from './selected-location-button';
 export { FitAllButton } from './fit-all-button';
 export { Breadcrumb } from './breadcrumb';
 export type { BreadcrumbItem } from './breadcrumb';

@@ -15,7 +15,7 @@ import { useTransportHubsByBounds, useTransportHubsGeoJson } from '@/entities/tr
 import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCitiesByBounds, useCitiesGeoJson } from '@/entities/city';
-import { LocationButton } from '@/shared/ui';
+import { LocationButton, SelectedLocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -312,6 +312,36 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       }
     }, [centerLocation, handleMachiSelect, handleCitySelect, handlePrefectureSelect, handleRegionSelect, handleCountrySelect]);
 
+    // 選択中アイテムの座標を取得
+    const selectedLocation = useMemo(() => {
+      if (selectedSpot) {
+        return { lng: selectedSpot.longitude, lat: selectedSpot.latitude, zoom: MAP_ZOOM.SPOT };
+      }
+      if (selectedMachi) {
+        return { lng: selectedMachi.longitude, lat: selectedMachi.latitude, zoom: MAP_ZOOM.MACHI };
+      }
+      if (selectedCity && selectedCity.longitude != null && selectedCity.latitude != null) {
+        return { lng: selectedCity.longitude, lat: selectedCity.latitude, zoom: MAP_ZOOM.CITY };
+      }
+      if (selectedPrefecture && selectedPrefecture.longitude != null && selectedPrefecture.latitude != null) {
+        return { lng: selectedPrefecture.longitude, lat: selectedPrefecture.latitude, zoom: MAP_ZOOM.PREFECTURE };
+      }
+      if (selectedRegion) {
+        return { lng: selectedRegion.longitude, lat: selectedRegion.latitude, zoom: MAP_ZOOM.REGION };
+      }
+      if (selectedCountry) {
+        return { lng: selectedCountry.longitude, lat: selectedCountry.latitude, zoom: MAP_ZOOM.COUNTRY };
+      }
+      return null;
+    }, [selectedSpot, selectedMachi, selectedCity, selectedPrefecture, selectedRegion, selectedCountry]);
+
+    // 選択中アイテムの位置に戻るハンドラー
+    const handleSelectedLocationPress = useCallback(() => {
+      if (selectedLocation) {
+        flyToLocation(selectedLocation.lng, selectedLocation.lat, selectedLocation.zoom);
+      }
+    }, [selectedLocation, flyToLocation]);
+
     // 初期カメラ位置を計算
     const initialCenter = currentLocation
       ? [currentLocation.longitude, currentLocation.latitude]
@@ -332,8 +362,10 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       >
         <Mapbox.Camera
           ref={cameraRef}
-          zoomLevel={currentLocation ? MAP_ZOOM.MACHI : MAP_ZOOM.INITIAL}
-          centerCoordinate={initialCenter as [number, number]}
+          defaultSettings={{
+            centerCoordinate: initialCenter as [number, number],
+            zoomLevel: currentLocation ? MAP_ZOOM.MACHI : MAP_ZOOM.INITIAL,
+          }}
           animationDuration={0}
         />
 
@@ -419,7 +451,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         </View>
       )}
 
-      {/* マップコントロールボタン（現在地ボタン） */}
+      {/* マップコントロールボタン（現在地ボタン + 選択位置に戻る） */}
       {/* カードなし → 通常位置、カード「小」→ カード上、中/大 → フェードアウト */}
       {viewMode === 'map' && !isSearchFocused && (
         <Animated.View
@@ -437,10 +469,20 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           ]}
           pointerEvents={controlsVisibility.controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
         >
+          {/* 現在地ボタン */}
           <LocationButton
             onPress={handleLocationPress}
             testID="location-button"
           />
+          {/* 選択位置に戻るボタン（カード表示中のみ） */}
+          {hasCard && selectedLocation && (
+            <View className="mt-3">
+              <SelectedLocationButton
+                onPress={handleSelectedLocationPress}
+                testID="selected-location-button"
+              />
+            </View>
+          )}
         </Animated.View>
       )}
 
