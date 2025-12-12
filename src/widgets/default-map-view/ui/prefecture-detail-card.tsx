@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -17,6 +17,7 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { getCitiesByPrefecture } from '@/shared/api/sqlite/cities';
+import { usePrefectureWikipediaSummary } from '@/shared/api/wikipedia/use-wikipedia-summary';
 import type { PrefectureRow, CityRow } from '@/shared/types/database.types';
 
 interface PrefectureDetailCardProps {
@@ -67,6 +68,9 @@ export function PrefectureDetailCard({
 
   // 都道府県に属する市区データを取得
   const cities = useMemo(() => getCitiesByPrefecture(prefecture.id), [prefecture.id]);
+
+  // Wikipedia要約を取得
+  const { data: wikiSummary, isLoading: isWikiLoading } = usePrefectureWikipediaSummary(prefecture.name);
 
   // 市区選択時にカードを閉じてから遷移するためのペンディング状態
   const pendingCityRef = useRef<CityRow | null>(null);
@@ -145,11 +149,37 @@ export function PrefectureDetailCard({
           </Pressable>
         </View>
 
-        {/* 説明テキスト */}
+        {/* エリア紹介（Wikipedia要約） */}
         <View className="mb-4">
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
-            {prefecture.name}の市区町村を選択して、街を探索しましょう。
-          </Text>
+          {isWikiLoading ? (
+            <View className="flex-row items-center">
+              <ActivityIndicator size="small" color={colors.text.secondary} />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+                情報を取得中...
+              </Text>
+            </View>
+          ) : wikiSummary?.extract ? (
+            <Text
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              numberOfLines={3}
+            >
+              {wikiSummary.extract.length > 90
+                ? wikiSummary.extract.slice(0, 90) + '…'
+                : wikiSummary.extract}
+              {wikiSummary.pageUrl && (
+                <Text
+                  className="text-sm text-blue-500"
+                  onPress={() => Linking.openURL(wikiSummary.pageUrl)}
+                >
+                  {' '}ウィキペディア
+                </Text>
+              )}
+            </Text>
+          ) : (
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+              {prefecture.name}の市区町村を選択して、街を探索しましょう。
+            </Text>
+          )}
         </View>
 
         {/* 市区リスト */}

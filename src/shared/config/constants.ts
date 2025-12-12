@@ -110,7 +110,7 @@ export const LABEL_ZOOM = {
   /** 国ラベル */
   COUNTRY: { min: 1, max: 4 },
   /** 地方ラベル */
-  REGION: { min: 3, max: 7 },
+  REGION: { min: 4, max: 7 },
   /** 都道府県ラベル */
   PREFECTURE: { min: 5, max: 11 },
   /** 市区ラベル */
@@ -283,7 +283,8 @@ export const TRANSPORT_HUB_MIN_ZOOM_USER_MAP = {
 
 /** symbolSortKeyの値（小さいほど優先、同じShapeSource内で有効） */
 export const SYMBOL_SORT_KEY = {
-  spot: 1, // スポットは最優先
+  machi: 1, // 街は最優先
+  spot: 25, // スポットは街の次に優先
   airport: 50, // 空港は次に優先
   station: 100, // 駅
   ferry: 100, // フェリー

@@ -3,7 +3,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Pressable, ActivityIndicator } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -18,6 +18,7 @@ import {
   useLocationButtonSync,
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
+import { useMachiWikipediaSummary } from '@/shared/api/wikipedia/use-wikipedia-summary';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 
@@ -32,27 +33,6 @@ interface MachiDetailCardProps {
   onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
   /** スポット選択時のコールバック */
   onSpotSelect?: (spot: MasterSpotDisplay) => void;
-}
-
-/**
- * 路線情報をパースして表示用の文字列配列に変換
- */
-function parseLines(linesJson: string | null): string[] {
-  if (!linesJson) return [];
-  try {
-    const parsed = JSON.parse(linesJson);
-    if (Array.isArray(parsed)) {
-      // [{ja: "JR山手線", en: "..."}, ...] または ["JR山手線", ...] 形式に対応
-      return parsed.map((line) => {
-        if (typeof line === 'string') return line;
-        if (typeof line === 'object' && line.ja) return line.ja;
-        return '';
-      }).filter(Boolean);
-    }
-    return [];
-  } catch {
-    return [];
-  }
 }
 
 /** 検索バー・現在地ボタン同期を行う内部コンテンツコンポーネント */
@@ -90,6 +70,13 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
   // 街に属するマスタースポットを取得（上位10件）
   const { data: masterSpots = [], isLoading: isSpotsLoading } = useMasterSpotsByMachi(machi.id, 10);
 
+  // Wikipedia要約を取得
+  const { data: wikiSummary, isLoading: isWikiLoading } = useMachiWikipediaSummary(
+    machi.name,
+    machi.city_name ?? undefined,
+    machi.prefecture_name ?? undefined
+  );
+
   // スポット選択時にカードを閉じてから遷移するためのペンディング状態
   const pendingSpotRef = useRef<MasterSpotDisplay | null>(null);
 
@@ -97,9 +84,6 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
     if (!currentUserId || toggleVisitMutation.isPending) return;
     toggleVisitMutation.mutate({ userId: currentUserId, machiId: machi.id });
   }, [currentUserId, machi.id, toggleVisitMutation]);
-
-  // 路線情報をパース
-  const lines = useMemo(() => parseLines(machi.lines), [machi.lines]);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
@@ -184,45 +168,12 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             )}
           </View>
 
-          <Pressable
-            onPress={handleClose}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
-          >
-            <Ionicons name="close" size={20} color={colors.text.secondary} />
-          </Pressable>
-        </View>
-
-        {/* 路線情報 + 訪問ボタン */}
-        <View className="flex-row items-start justify-between">
-          {/* 路線情報 */}
-          {lines.length > 0 ? (
-            <View className="flex-1 mr-3">
-              <View className="flex-row items-center mb-2">
-                <Ionicons name="train-outline" size={16} color={colors.text.secondary} />
-                <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary ml-1">路線</Text>
-              </View>
-              <View className="flex-row flex-wrap gap-1.5">
-                {lines.map((line, index) => (
-                  <View
-                    key={index}
-                    className="px-2.5 py-1 bg-muted dark:bg-dark-muted rounded-full"
-                  >
-                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{line}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          ) : (
-            <View className="flex-1" />
-          )}
-
           {/* 訪問トグルボタン */}
           {currentUserId && (
             <Pressable
               onPress={handleToggleVisit}
               disabled={isCheckingVisit || toggleVisitMutation.isPending}
-              className={`flex-row items-center px-4 py-2.5 rounded-full ${
+              className={`flex-row items-center px-4 py-2 rounded-full mr-4 ${
                 isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface dark:bg-dark-surface border border-foreground dark:border-dark-foreground active:bg-blue-50 dark:active:bg-dark-muted'
               }`}
             >
@@ -233,7 +184,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                   {isVisited && (
                     <Ionicons
                       name="checkmark-circle"
-                      size={20}
+                      size={18}
                       color="white"
                     />
                   )}
@@ -246,10 +197,51 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               )}
             </Pressable>
           )}
+
+          <Pressable
+            onPress={handleClose}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+          >
+            <Ionicons name="close" size={20} color={colors.text.secondary} />
+          </Pressable>
+        </View>
+
+        {/* エリア紹介（Wikipedia要約） */}
+        <View className="mb-4">
+          {isWikiLoading ? (
+            <View className="flex-row items-center">
+              <ActivityIndicator size="small" color={colors.text.secondary} />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+                情報を取得中...
+              </Text>
+            </View>
+          ) : wikiSummary?.extract ? (
+            <Text
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              numberOfLines={3}
+            >
+              {wikiSummary.extract.length > 90
+                ? wikiSummary.extract.slice(0, 90) + '…'
+                : wikiSummary.extract}
+              {wikiSummary.pageUrl && (
+                <Text
+                  className="text-sm text-blue-500"
+                  onPress={() => Linking.openURL(wikiSummary.pageUrl)}
+                >
+                  {' '}ウィキペディア
+                </Text>
+              )}
+            </Text>
+          ) : (
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+              {machi.name}の街を探索してみましょう。
+            </Text>
+          )}
         </View>
 
         {/* スポットランキング */}
-        <View className="mt-4">
+        <View>
           <View className="flex-row items-center mb-3">
             <LocationPinIcon size={18} color={SPOT_CATEGORY_COLORS.popular} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">

@@ -4,7 +4,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -16,6 +16,8 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { useMachiByCity } from '@/entities/machi';
+import { useCityWikipediaSummary } from '@/shared/api/wikipedia/use-wikipedia-summary';
+import { getPrefectureById } from '@/shared/api/sqlite/prefectures';
 import type { CityRow, MachiRow } from '@/shared/types/database.types';
 
 interface CityDetailCardProps {
@@ -58,6 +60,18 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
 
   // 市区に属する街データを取得
   const { data: machis = [] } = useMachiByCity(city.id);
+
+  // 都道府県名を取得（Wikipedia検索用）
+  const prefectureName = useMemo(() => {
+    const prefecture = getPrefectureById(city.prefecture_id);
+    return prefecture?.name ?? null;
+  }, [city.prefecture_id]);
+
+  // Wikipedia要約を取得
+  const { data: wikiSummary, isLoading: isWikiLoading } = useCityWikipediaSummary(
+    city.name,
+    prefectureName ?? undefined
+  );
 
   // 街選択時にカードを閉じてから遷移するためのペンディング状態（refで保持してクロージャ問題を回避）
   const pendingMachiRef = useRef<MachiRow | null>(null);
@@ -141,12 +155,37 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
           </Pressable>
         </View>
 
-        {/* エリア紹介（仮テキスト） */}
+        {/* エリア紹介（Wikipedia要約） */}
         <View className="mb-4">
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
-            {city.name}エリアのおすすめスポットやイベント情報を表示します。
-            現在は開発中のため、仮のデータを表示しています。
-          </Text>
+          {isWikiLoading ? (
+            <View className="flex-row items-center">
+              <ActivityIndicator size="small" color={colors.text.secondary} />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+                情報を取得中...
+              </Text>
+            </View>
+          ) : wikiSummary?.extract ? (
+            <Text
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              numberOfLines={3}
+            >
+              {wikiSummary.extract.length > 90
+                ? wikiSummary.extract.slice(0, 90) + '…'
+                : wikiSummary.extract}
+              {wikiSummary.pageUrl && (
+                <Text
+                  className="text-sm text-blue-500"
+                  onPress={() => Linking.openURL(wikiSummary.pageUrl)}
+                >
+                  {' '}ウィキペディア
+                </Text>
+              )}
+            </Text>
+          ) : (
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+              {city.name}の街を探索してみましょう。
+            </Text>
+          )}
         </View>
 
         {/* 街リスト */}

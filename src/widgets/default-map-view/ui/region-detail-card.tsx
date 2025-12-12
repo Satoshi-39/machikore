@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -17,6 +17,7 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { getPrefecturesByRegionId } from '@/shared/api/sqlite/prefectures';
+import { useRegionWikipediaSummary } from '@/shared/api/wikipedia/use-wikipedia-summary';
 import type { RegionRow, PrefectureRow } from '@/shared/types/database.types';
 
 interface RegionDetailCardProps {
@@ -67,6 +68,10 @@ export function RegionDetailCard({
 
   // 地方に属する都道府県データを取得
   const prefectures = useMemo(() => getPrefecturesByRegionId(region.id), [region.id]);
+
+  // Wikipedia要約を取得（地方名 + "地方" で検索）
+  const regionWikiName = region.name.endsWith('地方') ? region.name : `${region.name}地方`;
+  const { data: wikiSummary, isLoading: isWikiLoading } = useRegionWikipediaSummary(regionWikiName);
 
   // 都道府県選択時にカードを閉じてから遷移するためのペンディング状態
   const pendingPrefectureRef = useRef<PrefectureRow | null>(null);
@@ -145,11 +150,37 @@ export function RegionDetailCard({
           </Pressable>
         </View>
 
-        {/* 説明テキスト */}
+        {/* エリア紹介（Wikipedia要約） */}
         <View className="mb-4">
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
-            {region.name}地方の都道府県を選択して、市区町村を探索しましょう。
-          </Text>
+          {isWikiLoading ? (
+            <View className="flex-row items-center">
+              <ActivityIndicator size="small" color={colors.text.secondary} />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+                情報を取得中...
+              </Text>
+            </View>
+          ) : wikiSummary?.extract ? (
+            <Text
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              numberOfLines={3}
+            >
+              {wikiSummary.extract.length > 90
+                ? wikiSummary.extract.slice(0, 90) + '…'
+                : wikiSummary.extract}
+              {wikiSummary.pageUrl && (
+                <Text
+                  className="text-sm text-blue-500"
+                  onPress={() => Linking.openURL(wikiSummary.pageUrl)}
+                >
+                  {' '}ウィキペディア
+                </Text>
+              )}
+            </Text>
+          ) : (
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+              {region.name}地方の都道府県を選択して、市区町村を探索しましょう。
+            </Text>
+          )}
         </View>
 
         {/* 都道府県リスト */}

@@ -20,7 +20,7 @@ import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
-import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, SpotTransportLabels } from './layers';
+import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, MachiSpotTransportLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
 import { useRegionsGeoJson } from '@/entities/region';
 import { useCountriesGeoJson } from '@/entities/country/model';
@@ -254,18 +254,26 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       }
     };
 
-    // スポットマーカータップ時のハンドラー
-    const handleSpotPress = (event: any) => {
+    // 街・スポット統合レイヤーのタップハンドラー
+    const handleMachiSpotPress = (event: any) => {
       const feature = event.features?.[0];
       if (!feature) return;
 
-      const spotId = feature.properties?.id;
-      if (spotId) {
-        const spot = masterSpotMap.get(spotId);
+      const featureType = feature.properties?.featureType;
+      const id = feature.properties?.id;
+
+      if (featureType === 'machi' && id) {
+        const machi = machiMap.get(id);
+        if (machi) {
+          handleMachiSelect(machi);
+        }
+      } else if (featureType === 'spot' && id) {
+        const spot = masterSpotMap.get(id);
         if (spot) {
           handleSpotSelect(spot);
         }
       }
+      // transportは何もしない（タップ無効）
     };
 
     // 地方ラベルタップ時のハンドラー（ズーム付き）
@@ -340,14 +348,13 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {visitFilter === 'all' && (
           <>
             {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
-            <CountryLabels geoJson={countriesGeoJson} onPress={handleCountrySelect} selectedCountry={selectedCountry} />
+            <CountryLabels geoJson={countriesGeoJson} onPress={handleCountrySelect} />
 
             {/* 地方ラベル表示（テキストのみ）- ズーム5-7で表示 */}
             <RegionLabels
               geoJson={regionsGeoJson}
               regionMap={regionMap}
               onPress={handleRegionLabelPress}
-              selectedRegion={selectedRegion}
             />
 
             {/* 都道府県ラベル表示（テキストのみ）- ズーム6-11で表示 */}
@@ -355,30 +362,31 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
               geoJson={prefecturesGeoJson}
               prefectureMap={prefectureMap}
               onPress={handlePrefectureLabelPress}
-              selectedPrefecture={selectedPrefecture}
             />
 
             {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
-            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} selectedCity={selectedCity} />
+            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
 
-            {/* スポット＋交通機関統合レイヤー（symbolSortKeyで優先度制御） */}
-            <SpotTransportLabels
+            {/* 街＋スポット＋交通機関統合レイヤー（symbolSortKeyで優先度制御） */}
+            <MachiSpotTransportLabels
+              machiGeoJson={machiGeoJson}
               spotsGeoJson={masterSpotsGeoJson}
               transportGeoJson={transportHubsGeoJson}
-              onSpotPress={handleSpotPress}
+              onPress={handleMachiSpotPress}
+              selectedMachiId={selectedMachi?.id}
               selectedSpotId={selectedSpot?.id}
             />
           </>
         )}
 
-        {/* 街マーカー表示（アイコン + ラベル）- ズーム12以上で表示 */}
-        <MachiLabels
-          geoJson={machiGeoJson}
-          onPress={handleMarkerPress}
-          visitFilter={visitFilter}
-          selectedMachi={selectedMachi}
-          isSelectedMachiVisited={selectedMachi ? visitedMachiIds.has(selectedMachi.id) : false}
-        />
+        {/* 街マーカー表示（フィルター時のみ）- visitFilter='all'時は統合レイヤーで表示 */}
+        {visitFilter !== 'all' && (
+          <MachiLabels
+            geoJson={machiGeoJson}
+            onPress={handleMarkerPress}
+            visitFilter={visitFilter}
+          />
+        )}
       </Mapbox.MapView>
 
       {/* ヘッダー（Snapchat風） */}
