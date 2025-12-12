@@ -14,6 +14,8 @@ import {
   getMasterSpotById,
 } from '@/shared/api/supabase';
 import { MAP_ZOOM } from '@/shared/config';
+import { getRegionsDataWithCoords } from '@/shared/lib/utils/regions.utils';
+import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 
@@ -148,6 +150,58 @@ export function useMapJump({
           state.setJumpToPrefectureId(null);
         });
       }
+
+      // 地方へのジャンプ（詳細カードなし、カメラ移動のみ）
+      const newRegionId = state.jumpToRegionId;
+      const prevRegionId = prevState.jumpToRegionId;
+      if (newRegionId && newRegionId !== prevRegionId) {
+        // 地方データはローカルJSONから取得
+        const regions = getRegionsDataWithCoords();
+        const region = regions.find((r) => r.id === newRegionId);
+        if (region) {
+          lastJumpTimeRef.current = Date.now();
+          // 地方は詳細カードを表示せず、他の選択もクリア
+          onMachiSelect(null);
+          onCitySelect(null);
+          onSpotSelect(null);
+          setTimeout(() => {
+            if (cameraRef.current) {
+              cameraRef.current.setCamera({
+                centerCoordinate: [region.longitude, region.latitude],
+                zoomLevel: MAP_ZOOM.REGION,
+                animationDuration: 500,
+              });
+            }
+          }, 100);
+        }
+        state.setJumpToRegionId(null);
+      }
+
+      // 国へのジャンプ（詳細カードなし、カメラ移動のみ）
+      const newCountryId = state.jumpToCountryId;
+      const prevCountryId = prevState.jumpToCountryId;
+      if (newCountryId && newCountryId !== prevCountryId) {
+        // 国データはローカルJSONから取得
+        const countries = getCountriesData();
+        const country = countries.find((c) => c.id === newCountryId);
+        if (country) {
+          lastJumpTimeRef.current = Date.now();
+          // 国は詳細カードを表示せず、他の選択もクリア
+          onMachiSelect(null);
+          onCitySelect(null);
+          onSpotSelect(null);
+          setTimeout(() => {
+            if (cameraRef.current) {
+              cameraRef.current.setCamera({
+                centerCoordinate: [country.longitude, country.latitude],
+                zoomLevel: MAP_ZOOM.COUNTRY,
+                animationDuration: 500,
+              });
+            }
+          }, 100);
+        }
+        state.setJumpToCountryId(null);
+      }
     });
 
     return () => unsubscribe();
@@ -165,10 +219,18 @@ export function useSearchResultJump() {
   const setJumpToMachiId = useSelectedPlaceStore((s) => s.setJumpToMachiId);
   const setJumpToCityId = useSelectedPlaceStore((s) => s.setJumpToCityId);
   const setJumpToPrefectureId = useSelectedPlaceStore((s) => s.setJumpToPrefectureId);
+  const setJumpToRegionId = useSelectedPlaceStore((s) => s.setJumpToRegionId);
+  const setJumpToCountryId = useSelectedPlaceStore((s) => s.setJumpToCountryId);
   const setJumpToMasterSpotId = useSelectedPlaceStore((s) => s.setJumpToMasterSpotId);
 
   const jumpToSearchResult = useCallback((place: MachikorePlaceSearchResult) => {
     switch (place.type) {
+      case 'country':
+        setJumpToCountryId(place.id);
+        break;
+      case 'region':
+        setJumpToRegionId(place.id);
+        break;
       case 'prefecture':
         setJumpToPrefectureId(place.id);
         break;
@@ -184,7 +246,7 @@ export function useSearchResultJump() {
         setJumpToMasterSpotId(place.id);
         break;
     }
-  }, [setJumpToMachiId, setJumpToCityId, setJumpToPrefectureId, setJumpToMasterSpotId]);
+  }, [setJumpToMachiId, setJumpToCityId, setJumpToPrefectureId, setJumpToRegionId, setJumpToCountryId, setJumpToMasterSpotId]);
 
   return { jumpToSearchResult };
 }

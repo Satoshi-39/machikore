@@ -28,6 +28,12 @@ interface SelectedPlaceStore {
   // 都道府県へのジャンプ用（検索結果からの遷移時）
   jumpToPrefectureId: string | null;
   setJumpToPrefectureId: (prefectureId: string | null) => void;
+  // 地方へのジャンプ用（検索結果からの遷移時）
+  jumpToRegionId: string | null;
+  setJumpToRegionId: (regionId: string | null) => void;
+  // 国へのジャンプ用（検索結果からの遷移時）
+  jumpToCountryId: string | null;
+  setJumpToCountryId: (countryId: string | null) => void;
 }
 
 export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
@@ -44,4 +50,8 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
   setJumpToCityId: (cityId) => set({ jumpToCityId: cityId }),
   jumpToPrefectureId: null,
   setJumpToPrefectureId: (prefectureId) => set({ jumpToPrefectureId: prefectureId }),
+  jumpToRegionId: null,
+  setJumpToRegionId: (regionId) => set({ jumpToRegionId: regionId }),
+  jumpToCountryId: null,
+  setJumpToCountryId: (countryId) => set({ jumpToCountryId: countryId }),
 }));

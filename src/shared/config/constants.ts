@@ -83,7 +83,7 @@ export const MAP_ZOOM = {
   /** 地球全体 */
   EARTH: 3,
   /** 国レベル */
-  COUNTRY: 5,
+  COUNTRY: 4,
   /** 地方レベル */
   REGION: 6,
   /** 都道府県レベル */
@@ -220,28 +220,28 @@ export const USER_MAP_THEME_COLOR_LIST = Object.entries(
 
 /** 交通機関タイプ別の色（ライトモード） */
 export const TRANSPORT_HUB_COLORS_LIGHT = {
-  station_jr: '#0066CC',      // 青（JR）
-  station_metro: '#06B6D4',   // 水色（東京メトロ）
-  station_toei: '#22C55E',    // 緑（都営）
-  station_subway: '#8B5CF6',  // 紫（その他地下鉄）
+  station_jr: '#0066CC', // 青（JR）
+  station_metro: '#06B6D4', // 水色（東京メトロ）
+  station_toei: '#22C55E', // 緑（都営）
+  station_subway: '#8B5CF6', // 紫（その他地下鉄）
   station_private: '#EC4899', // ピンク（私鉄）
   station_default: '#6B7280', // グレー（不明）
-  airport: '#EF4444',         // 赤
-  ferry_terminal: '#06B6D4',  // シアン
-  bus_terminal: '#84CC16',    // ライムグリーン
+  airport: '#EF4444', // 赤
+  ferry_terminal: '#06B6D4', // シアン
+  bus_terminal: '#84CC16', // ライムグリーン
 } as const;
 
 /** 交通機関タイプ別の色（ダークモード） */
 export const TRANSPORT_HUB_COLORS_DARK = {
-  station_jr: '#60A5FA',      // 明るい青（JR）
-  station_metro: '#22D3EE',   // 明るい水色（東京メトロ）
-  station_toei: '#4ADE80',    // 明るい緑（都営）
-  station_subway: '#A78BFA',  // 明るい紫（その他地下鉄）
+  station_jr: '#60A5FA', // 明るい青（JR）
+  station_metro: '#22D3EE', // 明るい水色（東京メトロ）
+  station_toei: '#4ADE80', // 明るい緑（都営）
+  station_subway: '#A78BFA', // 明るい紫（その他地下鉄）
   station_private: '#F472B6', // 明るいピンク（私鉄）
   station_default: '#9CA3AF', // 明るいグレー（不明）
-  airport: '#F87171',         // 明るい赤
-  ferry_terminal: '#22D3EE',  // 明るいシアン
-  bus_terminal: '#A3E635',    // 明るいライムグリーン
+  airport: '#F87171', // 明るい赤
+  ferry_terminal: '#22D3EE', // 明るいシアン
+  bus_terminal: '#A3E635', // 明るいライムグリーン
 } as const;
 
 /** 交通機関のデフォルトminZoomLevel（shared/default-map用） */
@@ -262,11 +262,11 @@ export const TRANSPORT_HUB_MIN_ZOOM_USER_MAP = {
 
 /** symbolSortKeyの値（小さいほど優先、同じShapeSource内で有効） */
 export const SYMBOL_SORT_KEY = {
-  spot: 1,       // スポットは最優先
-  airport: 50,   // 空港は次に優先
-  station: 100,  // 駅
-  ferry: 100,    // フェリー
-  bus: 150,      // バス
+  spot: 1, // スポットは最優先
+  airport: 50, // 空港は次に優先
+  station: 100, // 駅
+  ferry: 100, // フェリー
+  bus: 150, // バス
 } as const;
 
 /**
@@ -275,16 +275,27 @@ export const SYMBOL_SORT_KEY = {
  * @param isDarkMode ダークモードかどうか
  * @returns 縁取りの色（不要な場合はundefined）
  */
-export function getThemeColorStroke(themeColor: UserMapThemeColor, isDarkMode: boolean): string | undefined {
+export function getThemeColorStroke(
+  themeColor: UserMapThemeColor,
+  isDarkMode: boolean
+): string | undefined {
   const config = USER_MAP_THEME_COLORS[themeColor];
   if (!config) return undefined;
 
   // ライトモードで縁取りが必要（白）
-  if ('useOutlinedIconInLight' in config && !isDarkMode && config.useOutlinedIconInLight) {
+  if (
+    'useOutlinedIconInLight' in config &&
+    !isDarkMode &&
+    config.useOutlinedIconInLight
+  ) {
     return config.haloLight;
   }
   // ダークモードで縁取りが必要（グレー）
-  if ('useOutlinedIconInDark' in config && isDarkMode && config.useOutlinedIconInDark) {
+  if (
+    'useOutlinedIconInDark' in config &&
+    isDarkMode &&
+    config.useOutlinedIconInDark
+  ) {
     return config.haloDark;
   }
 
@@ -316,7 +327,7 @@ export const LOCATION_ICONS = {
   },
   /** 地方 */
   REGION: {
-    name: 'map' as const,
+    name: 'layers' as const,
     color: '#0891b2', // cyan-600
     bgColor: 'bg-cyan-100',
   },

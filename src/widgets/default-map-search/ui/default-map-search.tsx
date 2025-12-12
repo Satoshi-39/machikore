@@ -114,10 +114,12 @@ export function DefaultMapSearch({
                 {results.map((place) => {
                   // タイプ別のスタイル設定（LOCATION_ICONSを使用して統一）
                   const typeConfig = {
-                    prefecture: { bgColor: LOCATION_ICONS.PREFECTURE.bgColor, iconName: LOCATION_ICONS.PREFECTURE.name, iconColor: LOCATION_ICONS.PREFECTURE.color, label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
-                    city: { bgColor: LOCATION_ICONS.CITY.bgColor, iconName: LOCATION_ICONS.CITY.name, iconColor: LOCATION_ICONS.CITY.color, label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
-                    machi: { bgColor: LOCATION_ICONS.MACHI.bgColor, iconName: LOCATION_ICONS.MACHI.name, iconColor: LOCATION_ICONS.MACHI.color, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
-                    spot: { bgColor: 'bg-surface-secondary dark:bg-gray-200', iconName: 'location' as const, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
+                    country: { bgColor: 'bg-white', iconName: null as null, emoji: LOCATION_ICONS.COUNTRY.emoji, iconColor: null, label: '国', labelBg: 'bg-gray-100', labelColor: 'text-gray-700' },
+                    region: { bgColor: LOCATION_ICONS.REGION.bgColor, iconName: LOCATION_ICONS.REGION.name, emoji: null as null, iconColor: LOCATION_ICONS.REGION.color, label: '地方', labelBg: 'bg-cyan-100', labelColor: 'text-cyan-700' },
+                    prefecture: { bgColor: LOCATION_ICONS.PREFECTURE.bgColor, iconName: LOCATION_ICONS.PREFECTURE.name, emoji: null as null, iconColor: LOCATION_ICONS.PREFECTURE.color, label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
+                    city: { bgColor: LOCATION_ICONS.CITY.bgColor, iconName: LOCATION_ICONS.CITY.name, emoji: null as null, iconColor: LOCATION_ICONS.CITY.color, label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
+                    machi: { bgColor: LOCATION_ICONS.MACHI.bgColor, iconName: LOCATION_ICONS.MACHI.name, emoji: null as null, iconColor: LOCATION_ICONS.MACHI.color, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
+                    spot: { bgColor: 'bg-surface-secondary dark:bg-gray-200', iconName: 'location' as const, emoji: null as null, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
                   };
                   const config = typeConfig[place.type];
 
@@ -133,13 +135,15 @@ export function DefaultMapSearch({
                       className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
                     >
                       <View className={`w-10 h-10 rounded-full items-center justify-center ${config.bgColor}`}>
-                        {place.type === 'spot' ? (
+                        {place.type === 'country' && config.emoji ? (
+                          <Text style={{ fontSize: 22 }}>{config.emoji}</Text>
+                        ) : place.type === 'spot' ? (
                           <LocationPinIcon size={20} color={spotCategoryColor!} />
                         ) : (
                           <Ionicons
-                            name={config.iconName}
+                            name={config.iconName!}
                             size={20}
-                            color={config.iconColor}
+                            color={config.iconColor!}
                           />
                         )}
                       </View>

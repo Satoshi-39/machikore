@@ -7,6 +7,8 @@
 
 import { queryAll } from '@/shared/api/sqlite/client';
 import { supabase } from '@/shared/api/supabase/client';
+import { getRegionsDataWithCoords } from '@/shared/lib/utils/regions.utils';
+import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 
 export interface MachikorePlaceSearchResult {
   id: string;
@@ -14,7 +16,7 @@ export interface MachikorePlaceSearchResult {
   address: string | null;
   latitude: number;
   longitude: number;
-  type: 'machi' | 'spot' | 'city' | 'prefecture';
+  type: 'machi' | 'spot' | 'city' | 'prefecture' | 'region' | 'country';
   // spotの場合の追加情報
   userId?: string;
   mapId?: string;
@@ -26,6 +28,52 @@ export interface MachikorePlaceSearchOptions {
   userId?: string | null; // 指定した場合、そのユーザーのspotsのみ検索
   includeAllSpots?: boolean; // trueの場合、全ユーザーのspotsを検索（デフォルトマップ用）
   limit?: number;
+}
+
+/**
+ * countriesを検索（ローカルJSONから検索）
+ */
+function searchCountries(query: string, limit: number): MachikorePlaceSearchResult[] {
+  const countries = getCountriesData();
+  const lowerQuery = query.toLowerCase();
+
+  return countries
+    .filter((country) =>
+      country.name.toLowerCase().includes(lowerQuery) ||
+      country.name_kana.toLowerCase().includes(lowerQuery)
+    )
+    .slice(0, limit)
+    .map((country) => ({
+      id: country.id,
+      name: country.name,
+      address: null,
+      latitude: country.latitude,
+      longitude: country.longitude,
+      type: 'country' as const,
+    }));
+}
+
+/**
+ * regionsを検索（ローカルJSONから検索）
+ */
+function searchRegions(query: string, limit: number): MachikorePlaceSearchResult[] {
+  const regions = getRegionsDataWithCoords();
+  const lowerQuery = query.toLowerCase();
+
+  return regions
+    .filter((region) =>
+      region.name.toLowerCase().includes(lowerQuery) ||
+      region.name_kana.toLowerCase().includes(lowerQuery)
+    )
+    .slice(0, limit)
+    .map((region) => ({
+      id: region.id,
+      name: region.name,
+      address: '日本',
+      latitude: region.latitude,
+      longitude: region.longitude,
+      type: 'region' as const,
+    }));
 }
 
 /**
@@ -187,7 +235,7 @@ function searchUserSpots(
 }
 
 /**
- * 街コレデータを検索（prefectures + cities + machis + spots）
+ * 街コレデータを検索（countries + regions + prefectures + cities + machis + spots）
  */
 export async function searchMachikorePlaces(
   options: MachikorePlaceSearchOptions
@@ -199,13 +247,19 @@ export async function searchMachikorePlaces(
     return [];
   }
 
-  // 各カテゴリの取得件数を調整（都道府県・市区は少なめ、街・スポットは多め）
+  // 各カテゴリの取得件数を調整（国・地方・都道府県・市区は少なめ、街・スポットは多め）
+  const countryLimit = Math.max(1, Math.floor(limit / 20)); // 国は最小限
+  const regionLimit = Math.max(2, Math.floor(limit / 10));
   const prefLimit = Math.max(2, Math.floor(limit / 10));
   const cityLimit = Math.max(3, Math.floor(limit / 6));
   const machiLimit = Math.floor(limit / 3);
   const spotLimit = Math.floor(limit / 3);
 
-  // 全カテゴリを並行検索（Supabaseから直接検索）
+  // 国・地方は同期的に検索（ローカルJSON）
+  const countryResults = searchCountries(trimmedQuery, countryLimit);
+  const regionResults = searchRegions(trimmedQuery, regionLimit);
+
+  // 他カテゴリを並行検索（Supabaseから直接検索）
   const [prefResults, cityResults, machiResults, spotResults] = await Promise.all([
     searchPrefectures(trimmedQuery, prefLimit),
     searchCities(trimmedQuery, cityLimit),
@@ -218,14 +272,16 @@ export async function searchMachikorePlaces(
   ]);
 
   // 結果をマージ
-  const allResults = [...prefResults, ...cityResults, ...machiResults, ...spotResults];
+  const allResults = [...countryResults, ...regionResults, ...prefResults, ...cityResults, ...machiResults, ...spotResults];
 
   // タイプ別優先度（小さいほど優先）
   const typePriority: Record<string, number> = {
-    prefecture: 1, // 都道府県
-    city: 2, // 市区
-    machi: 3, // 街
-    spot: 4, // スポット（最後に表示）
+    country: 0, // 国（最優先）
+    region: 1, // 地方
+    prefecture: 2, // 都道府県
+    city: 3, // 市区
+    machi: 4, // 街
+    spot: 5, // スポット（最後に表示）
   };
 
   // 優先度順にソートしてlimit件まで返す

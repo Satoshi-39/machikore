@@ -131,7 +131,7 @@ export function RegionDetailCard({
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1 flex-row items-center">
-            <Ionicons name="map-outline" size={24} color={LOCATION_ICONS.PREFECTURE.color} />
+            <Ionicons name={LOCATION_ICONS.REGION.name} size={24} color={LOCATION_ICONS.REGION.color} />
             <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
               {region.name}
             </Text>
