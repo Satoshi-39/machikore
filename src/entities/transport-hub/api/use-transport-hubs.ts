@@ -11,7 +11,7 @@ import { useMemo } from 'react';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getTransportHubsByTileIds } from '@/shared/lib/cache';
 import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
-import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM } from '@/shared/config';
+import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM, MAP_TILE } from '@/shared/config';
 import type { TransportHubRow } from '@/shared/api/sqlite/transport-hubs';
 
 // 交通機関タイプの定義
@@ -53,8 +53,8 @@ export function useTransportHubsByBounds(
   // boundsからタイルIDを計算
   const tileIds = useMemo(() => {
     if (!bounds) return [];
-    // ズームがPREFECTURE表示レベル未満の場合は取得しない
-    if (zoom < MAP_ZOOM.PREFECTURE) return [];
+    // ズームがCITY表示レベル未満の場合は取得しない（広範囲での大量リクエスト防止）
+    if (zoom < MAP_ZOOM.CITY) return [];
 
     const mapBounds: MapBounds = {
       north: bounds.maxLat,
@@ -62,7 +62,14 @@ export function useTransportHubsByBounds(
       east: bounds.maxLng,
       west: bounds.minLng,
     };
-    return getVisibleTileIds(mapBounds);
+    const tiles = getVisibleTileIds(mapBounds);
+
+    // タイル数が多すぎる場合は取得しない（過剰なリクエスト防止）
+    if (tiles.length > MAP_TILE.MAX_TRANSPORT_TILES) {
+      return [];
+    }
+
+    return tiles;
   }, [bounds, zoom]);
 
   // タイルIDをキーにしてクエリ

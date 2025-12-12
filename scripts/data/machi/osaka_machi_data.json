@@ -1,0 +1,2013 @@
+{
+  "fetchedAt": "2025-12-11T00:54:21.903Z",
+  "prefecture": {
+    "id": "osaka",
+    "name": "大阪府"
+  },
+  "cities": [
+    {
+      "id": "osaka_osaka",
+      "osmId": 57563779,
+      "prefectureId": "osaka",
+      "name": "大阪市",
+      "nameKana": "おおさかし",
+      "nameTranslations": {
+        "en": "Osaka"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.6937569,
+      "longitude": 135.5014539
+    },
+    {
+      "id": "osaka_kishiwada",
+      "osmId": 551363189,
+      "prefectureId": "osaka",
+      "name": "岸和田市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Kishiwada"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.4644,
+      "longitude": 135.385237
+    },
+    {
+      "id": "osaka_izumisano",
+      "osmId": 551363275,
+      "prefectureId": "osaka",
+      "name": "泉佐野市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Izumisano"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.394629,
+      "longitude": 135.322725
+    },
+    {
+      "id": "osaka_kawachinagano",
+      "osmId": 551363475,
+      "prefectureId": "osaka",
+      "name": "河内長野市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Kawachinagano"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.4575979,
+      "longitude": 135.5643131
+    },
+    {
+      "id": "osaka_hannan",
+      "osmId": 551363627,
+      "prefectureId": "osaka",
+      "name": "阪南市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Hannan"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.3595067,
+      "longitude": 135.2398397
+    },
+    {
+      "id": "osaka_sennan",
+      "osmId": 551363784,
+      "prefectureId": "osaka",
+      "name": "泉南市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Sennan"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.3657277,
+      "longitude": 135.2739742
+    },
+    {
+      "id": "osaka_izumi",
+      "osmId": 551363896,
+      "prefectureId": "osaka",
+      "name": "和泉市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Izumi"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.4831932,
+      "longitude": 135.4232139
+    },
+    {
+      "id": "osaka_kaizuka",
+      "osmId": 551363978,
+      "prefectureId": "osaka",
+      "name": "貝塚市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Kaizuka"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.4374998,
+      "longitude": 135.3581719
+    },
+    {
+      "id": "osaka_izumiotsu",
+      "osmId": 551364054,
+      "prefectureId": "osaka",
+      "name": "泉大津市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Izumiotsu"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.5043442,
+      "longitude": 135.4104345
+    },
+    {
+      "id": "osaka_takaishi",
+      "osmId": 551364161,
+      "prefectureId": "osaka",
+      "name": "高石市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Takaishi"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.5207361,
+      "longitude": 135.4424339
+    },
+    {
+      "id": "osaka_sakai",
+      "osmId": 551364486,
+      "prefectureId": "osaka",
+      "name": "堺市",
+      "nameKana": "さかいし",
+      "nameTranslations": {
+        "en": "Sakai"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.5737364,
+      "longitude": 135.4828866
+    },
+    {
+      "id": "osaka_osakasayama",
+      "osmId": 551365268,
+      "prefectureId": "osaka",
+      "name": "大阪狭山市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Osakasayama"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.5036668,
+      "longitude": 135.5556737
+    },
+    {
+      "id": "osaka_tondabayashi",
+      "osmId": 551365335,
+      "prefectureId": "osaka",
+      "name": "富田林市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Tondabayashi"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.4998098,
+      "longitude": 135.5972946
+    },
+    {
+      "id": "osaka_fujiidera",
+      "osmId": 551365486,
+      "prefectureId": "osaka",
+      "name": "藤井寺市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Fujiidera"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.5743612,
+      "longitude": 135.5974874
+    },
+    {
+      "id": "osaka_kashiwara",
+      "osmId": 551365555,
+      "prefectureId": "osaka",
+      "name": "柏原市",
+      "nameKana": "かしわらし",
+      "nameTranslations": {
+        "en": "Kashiwara"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.578373,
+      "longitude": 135.6291878
+    },
+    {
+      "id": "osaka_habikino",
+      "osmId": 551365624,
+      "prefectureId": "osaka",
+      "name": "羽曳野市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Habikino"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.5581531,
+      "longitude": 135.6061619
+    },
+    {
+      "id": "osaka_matsubara",
+      "osmId": 551365761,
+      "prefectureId": "osaka",
+      "name": "松原市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Matsubara"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.5780936,
+      "longitude": 135.5517555
+    },
+    {
+      "id": "osaka_yao",
+      "osmId": 551365916,
+      "prefectureId": "osaka",
+      "name": "八尾市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Yao"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.6269018,
+      "longitude": 135.6008668
+    },
+    {
+      "id": "osaka_toyonaka",
+      "osmId": 551367193,
+      "prefectureId": "osaka",
+      "name": "豊中市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Toyonaka"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.7811578,
+      "longitude": 135.4699059
+    },
+    {
+      "id": "osaka_suita",
+      "osmId": 551367260,
+      "prefectureId": "osaka",
+      "name": "吹田市",
+      "nameKana": "すいたし",
+      "nameTranslations": {
+        "en": "Suita"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.7594193,
+      "longitude": 135.516835
+    },
+    {
+      "id": "osaka_higashiosaka",
+      "osmId": 551367401,
+      "prefectureId": "osaka",
+      "name": "東大阪市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Higashiosaka"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.679391,
+      "longitude": 135.6009037
+    },
+    {
+      "id": "osaka_daito",
+      "osmId": 551367538,
+      "prefectureId": "osaka",
+      "name": "大東市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Daito"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.7120151,
+      "longitude": 135.6235341
+    },
+    {
+      "id": "osaka_settsu",
+      "osmId": 551367722,
+      "prefectureId": "osaka",
+      "name": "摂津市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Settsu"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.7772953,
+      "longitude": 135.5617138
+    },
+    {
+      "id": "osaka_moriguchi",
+      "osmId": 551367819,
+      "prefectureId": "osaka",
+      "name": "守口市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Moriguchi"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.735816,
+      "longitude": 135.5617277
+    },
+    {
+      "id": "osaka_kadoma",
+      "osmId": 551367895,
+      "prefectureId": "osaka",
+      "name": "門真市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Kadoma"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.739496,
+      "longitude": 135.5869107
+    },
+    {
+      "id": "osaka_katano",
+      "osmId": 551367945,
+      "prefectureId": "osaka",
+      "name": "交野市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Katano"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.7879544,
+      "longitude": 135.6799638
+    },
+    {
+      "id": "osaka_shijonawate",
+      "osmId": 551368101,
+      "prefectureId": "osaka",
+      "name": "四條畷市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Shijonawate"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.730447,
+      "longitude": 135.674005
+    },
+    {
+      "id": "osaka_neyagawa",
+      "osmId": 551368147,
+      "prefectureId": "osaka",
+      "name": "寝屋川市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Neyagawa"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.7660998,
+      "longitude": 135.6278989
+    },
+    {
+      "id": "osaka_minoh",
+      "osmId": 551368308,
+      "prefectureId": "osaka",
+      "name": "箕面市",
+      "nameKana": "みのおし",
+      "nameTranslations": {
+        "en": "Minoh"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.8269554,
+      "longitude": 135.4704617
+    },
+    {
+      "id": "osaka_hirakata",
+      "osmId": 551368349,
+      "prefectureId": "osaka",
+      "name": "枚方市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Hirakata"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.8144363,
+      "longitude": 135.6507278
+    },
+    {
+      "id": "osaka_ikeda",
+      "osmId": 551368421,
+      "prefectureId": "osaka",
+      "name": "池田市",
+      "nameKana": "いけだし",
+      "nameTranslations": {
+        "en": "Ikeda"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.8217095,
+      "longitude": 135.4284236
+    },
+    {
+      "id": "osaka_takatsuki",
+      "osmId": 551368471,
+      "prefectureId": "osaka",
+      "name": "高槻市",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Takatsuki"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.8464785,
+      "longitude": 135.6172204
+    },
+    {
+      "id": "osaka_ibaraki",
+      "osmId": 551368684,
+      "prefectureId": "osaka",
+      "name": "茨木市",
+      "nameKana": "いばらきし",
+      "nameTranslations": {
+        "en": "Ibaraki"
+      },
+      "type": "市",
+      "countryCode": "jp",
+      "latitude": 34.8161302,
+      "longitude": 135.5685528
+    },
+    {
+      "id": "osaka_shimamoto",
+      "osmId": 551368825,
+      "prefectureId": "osaka",
+      "name": "島本町",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Shimamoto"
+      },
+      "type": "町",
+      "countryCode": "jp",
+      "latitude": 34.8837129,
+      "longitude": 135.6630537
+    }
+  ],
+  "machi": [
+    {
+      "id": "osaka_unknown_北条",
+      "osmId": 1422991841,
+      "name": "北条",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.540299,
+      "longitude": 135.483195,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_niryo",
+      "osmId": 6748841262,
+      "name": "二料",
+      "nameKana": "にりょう",
+      "nameTranslations": {
+        "en": "Niryo"
+      },
+      "latitude": 34.9447977,
+      "longitude": 135.572776,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_tano",
+      "osmId": 6748841263,
+      "name": "田能",
+      "nameKana": "たのう",
+      "nameTranslations": {
+        "en": "Tano"
+      },
+      "latitude": 34.9511591,
+      "longitude": 135.5895307,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_sugio",
+      "osmId": 6748841265,
+      "name": "杉生",
+      "nameKana": "すぎお",
+      "nameTranslations": {
+        "en": "Sugio"
+      },
+      "latitude": 34.9686192,
+      "longitude": 135.579725,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_sugihara",
+      "osmId": 6748841271,
+      "name": "杉原",
+      "nameKana": "すぎはら",
+      "nameTranslations": {
+        "en": "Sugihara"
+      },
+      "latitude": 34.9699067,
+      "longitude": 135.4862679,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_takayama",
+      "osmId": 6748891985,
+      "name": "高山",
+      "nameKana": "たかやま",
+      "nameTranslations": {
+        "en": "Takayama"
+      },
+      "latitude": 34.8901401,
+      "longitude": 135.4876954,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kawashiri",
+      "osmId": 6748891986,
+      "name": "川尻",
+      "nameKana": "かわしり",
+      "nameTranslations": {
+        "en": "Kawashiri"
+      },
+      "latitude": 34.9138823,
+      "longitude": 135.4837281,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kishiro",
+      "osmId": 6748891987,
+      "name": "木代",
+      "nameKana": "きしろ",
+      "nameTranslations": {
+        "en": "Kishiro"
+      },
+      "latitude": 34.9159849,
+      "longitude": 135.4988493,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_yono",
+      "osmId": 6748891988,
+      "name": "余野",
+      "nameKana": "よの",
+      "nameTranslations": {
+        "en": "Yono"
+      },
+      "latitude": 34.9221592,
+      "longitude": 135.4968643,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kirihata",
+      "osmId": 6748891989,
+      "name": "切畑",
+      "nameKana": "きりはた",
+      "nameTranslations": {
+        "en": "Kirihata"
+      },
+      "latitude": 34.9220302,
+      "longitude": 135.5157074,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_terada",
+      "osmId": 6748891991,
+      "name": "寺田",
+      "nameKana": "てらだ",
+      "nameTranslations": {
+        "en": "Terada"
+      },
+      "latitude": 34.9382682,
+      "longitude": 135.50616,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_nomaguchi",
+      "osmId": 6748891992,
+      "name": "野間口",
+      "nameKana": "のまぐち",
+      "nameTranslations": {
+        "en": "Nomaguchi"
+      },
+      "latitude": 34.9324691,
+      "longitude": 135.4875186,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_maki",
+      "osmId": 6748891993,
+      "name": "牧",
+      "nameKana": "まき",
+      "nameTranslations": {
+        "en": "Maki"
+      },
+      "latitude": 34.939715,
+      "longitude": 135.4970794,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_noma_ohara",
+      "osmId": 6748891994,
+      "name": "野間大原",
+      "nameKana": "のまおおはら",
+      "nameTranslations": {
+        "en": "Noma-ohara"
+      },
+      "latitude": 34.9473413,
+      "longitude": 135.4679107,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_nomanaka",
+      "osmId": 6748891995,
+      "name": "野間中",
+      "nameKana": "のまなか",
+      "nameTranslations": {
+        "en": "Nomanaka"
+      },
+      "latitude": 34.9462095,
+      "longitude": 135.4594746,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_noma_inaji",
+      "osmId": 6748891996,
+      "name": "野間稲地",
+      "nameKana": "のまいなじ",
+      "nameTranslations": {
+        "en": "Noma-inaji"
+      },
+      "latitude": 34.9446424,
+      "longitude": 135.4543158,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_noma_shutsuno",
+      "osmId": 6748891997,
+      "name": "野間出野",
+      "nameKana": "のましゅつの",
+      "nameTranslations": {
+        "en": "Noma-shutsuno"
+      },
+      "latitude": 34.9469884,
+      "longitude": 135.4397218,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_noma_nishiyama",
+      "osmId": 6748891998,
+      "name": "野間西山",
+      "nameKana": "のまにしやま",
+      "nameTranslations": {
+        "en": "Noma-nishiyama"
+      },
+      "latitude": 34.9527461,
+      "longitude": 135.4493867,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_jio",
+      "osmId": 6748891999,
+      "name": "地黄",
+      "nameKana": "じおう",
+      "nameTranslations": {
+        "en": "Jio"
+      },
+      "latitude": 34.956602,
+      "longitude": 135.4612224,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kamitajiri",
+      "osmId": 6748892000,
+      "name": "上田尻",
+      "nameKana": "かみたじり",
+      "nameTranslations": {
+        "en": "Kamitajiri"
+      },
+      "latitude": 34.9682185,
+      "longitude": 135.4445057,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_yamauchi",
+      "osmId": 6748892001,
+      "name": "山内",
+      "nameKana": "やまうち",
+      "nameTranslations": {
+        "en": "Yamauchi"
+      },
+      "latitude": 34.9740764,
+      "longitude": 135.4477593,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kuragaki",
+      "osmId": 6748892002,
+      "name": "倉垣",
+      "nameKana": "くらがき",
+      "nameTranslations": {
+        "en": "Kuragaki"
+      },
+      "latitude": 34.9769987,
+      "longitude": 135.4634832,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_yoshino",
+      "osmId": 6748892003,
+      "name": "吉野",
+      "nameKana": "よしの",
+      "nameTranslations": {
+        "en": "Yoshino"
+      },
+      "latitude": 34.9881937,
+      "longitude": 135.4772439,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_shukuno",
+      "osmId": 6748892006,
+      "name": "宿野",
+      "nameKana": "しゅくの",
+      "nameTranslations": {
+        "en": "Shukuno"
+      },
+      "latitude": 34.9992133,
+      "longitude": 135.4317037,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_shukuno_quarter",
+      "osmId": 6748892007,
+      "name": "宿野",
+      "nameKana": "しゅくの",
+      "nameTranslations": {
+        "en": "Shukuno"
+      },
+      "latitude": 34.9803368,
+      "longitude": 135.4282665,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_shukuno_quarter_6748892008",
+      "osmId": 6748892008,
+      "name": "宿野",
+      "nameKana": "しゅくの",
+      "nameTranslations": {
+        "en": "Shukuno"
+      },
+      "latitude": 35.0069296,
+      "longitude": 135.4099819,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_ozato",
+      "osmId": 6748892009,
+      "name": "大里",
+      "nameKana": "おおざと",
+      "nameTranslations": {
+        "en": "Ozato"
+      },
+      "latitude": 34.9709857,
+      "longitude": 135.4102738,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kurusu",
+      "osmId": 6748892010,
+      "name": "栗栖",
+      "nameKana": "くるす",
+      "nameTranslations": {
+        "en": "Kurusu"
+      },
+      "latitude": 34.9682337,
+      "longitude": 135.4042048,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kashihara",
+      "osmId": 6748892011,
+      "name": "柏原",
+      "nameKana": "かしはら",
+      "nameTranslations": {
+        "en": "Kashihara"
+      },
+      "latitude": 34.9619389,
+      "longitude": 135.4112545,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_katayama",
+      "osmId": 6748892012,
+      "name": "片山",
+      "nameKana": "かたやま",
+      "nameTranslations": {
+        "en": "Katayama"
+      },
+      "latitude": 34.95934,
+      "longitude": 135.4080379,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_shimoda",
+      "osmId": 6748892013,
+      "name": "下田",
+      "nameKana": "しもだ",
+      "nameTranslations": {
+        "en": "Shimoda"
+      },
+      "latitude": 34.9511781,
+      "longitude": 135.406813,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_hiradori",
+      "osmId": 6748892014,
+      "name": "平通",
+      "nameKana": "ひらどおり",
+      "nameTranslations": {
+        "en": "Hiradori"
+      },
+      "latitude": 34.9561359,
+      "longitude": 135.4141789,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_hirano",
+      "osmId": 6748892015,
+      "name": "平野",
+      "nameKana": "ひらの",
+      "nameTranslations": {
+        "en": "Hirano"
+      },
+      "latitude": 34.9590302,
+      "longitude": 135.3970047,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_uesugi",
+      "osmId": 6748892016,
+      "name": "上杉",
+      "nameKana": "うえすぎ",
+      "nameTranslations": {
+        "en": "Uesugi"
+      },
+      "latitude": 34.9537814,
+      "longitude": 135.3909644,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_morigami",
+      "osmId": 6748892017,
+      "name": "森上",
+      "nameKana": "もりがみ",
+      "nameTranslations": {
+        "en": "Morigami"
+      },
+      "latitude": 34.9656116,
+      "longitude": 135.3964317,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_inaji",
+      "osmId": 6748892018,
+      "name": "稲地",
+      "nameKana": "いなじ",
+      "nameTranslations": {
+        "en": "Inaji"
+      },
+      "latitude": 34.9649315,
+      "longitude": 135.3937612,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_koyama",
+      "osmId": 6748892019,
+      "name": "神山",
+      "nameKana": "こやま",
+      "nameTranslations": {
+        "en": "Koyama"
+      },
+      "latitude": 34.9635311,
+      "longitude": 135.3808568,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_nagatani",
+      "osmId": 6748892020,
+      "name": "長谷",
+      "nameKana": "ながたに",
+      "nameTranslations": {
+        "en": "Nagatani"
+      },
+      "latitude": 34.9668028,
+      "longitude": 135.3723903,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_tarumi",
+      "osmId": 6748892021,
+      "name": "垂水",
+      "nameKana": "たるみ",
+      "nameTranslations": {
+        "en": "Tarumi"
+      },
+      "latitude": 34.9695974,
+      "longitude": 135.3811956,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_imanishi",
+      "osmId": 6748892022,
+      "name": "今西",
+      "nameKana": "いまにし",
+      "nameTranslations": {
+        "en": "Imanishi"
+      },
+      "latitude": 34.9716526,
+      "longitude": 135.3903437,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_yamada",
+      "osmId": 6748892023,
+      "name": "山田",
+      "nameKana": "やまだ",
+      "nameTranslations": {
+        "en": "Yamada"
+      },
+      "latitude": 34.9813366,
+      "longitude": 135.3714701,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_yamabe",
+      "osmId": 6748892024,
+      "name": "山辺",
+      "nameKana": "やまべ",
+      "nameTranslations": {
+        "en": "Yamabe"
+      },
+      "latitude": 34.9853965,
+      "longitude": 135.3931566,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_yamabe_quarter",
+      "osmId": 6748892025,
+      "name": "山辺",
+      "nameKana": "やまべ",
+      "nameTranslations": {
+        "en": "Yamabe"
+      },
+      "latitude": 35.0006567,
+      "longitude": 135.3792485,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_tenno",
+      "osmId": 6748892026,
+      "name": "天王",
+      "nameKana": "てんのう",
+      "nameTranslations": {
+        "en": "Tenno"
+      },
+      "latitude": 35.0292495,
+      "longitude": 135.3784332,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_tenno_quarter",
+      "osmId": 6748892027,
+      "name": "天王",
+      "nameKana": "てんのう",
+      "nameTranslations": {
+        "en": "Tenno"
+      },
+      "latitude": 35.037682,
+      "longitude": 135.3575117,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_yoshikawa",
+      "osmId": 7389056485,
+      "name": "吉川",
+      "nameKana": "よしかわ",
+      "nameTranslations": {
+        "en": "Yoshikawa"
+      },
+      "latitude": 34.9131662,
+      "longitude": 135.4413145,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_nakahata",
+      "osmId": 8095903517,
+      "name": "中畑",
+      "nameKana": "なかはた",
+      "nameTranslations": {
+        "en": "Nakahata"
+      },
+      "latitude": 34.9607655,
+      "longitude": 135.6087116,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_izuriha",
+      "osmId": 8118027137,
+      "name": "出灰",
+      "nameKana": "いずりは",
+      "nameTranslations": {
+        "en": "Izuriha"
+      },
+      "latitude": 34.9415946,
+      "longitude": 135.6090653,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_shimotajiri",
+      "osmId": 8625913983,
+      "name": "下田尻",
+      "nameKana": "しもたじり",
+      "nameTranslations": {
+        "en": "Shimotajiri"
+      },
+      "latitude": 34.9556036,
+      "longitude": 135.4310846,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_kisabe",
+      "osmId": 12339799638,
+      "name": "私部",
+      "nameKana": "きさべ",
+      "nameTranslations": {
+        "en": "Kisabe"
+      },
+      "latitude": 34.7882704,
+      "longitude": 135.6823834,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_abenosuji",
+      "osmId": 13354419891,
+      "name": "阿倍野筋",
+      "nameKana": "あべのすじ",
+      "nameTranslations": {
+        "en": "Abenosuji"
+      },
+      "latitude": 34.6419999,
+      "longitude": 135.5119586,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "quarter"
+    },
+    {
+      "id": "osaka_unknown_豊野浄水場南",
+      "osmId": 1155635928,
+      "name": "豊野浄水場南",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7585257,
+      "longitude": 135.6408466,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_逢合橋東",
+      "osmId": 1155662579,
+      "name": "逢合橋東",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7838586,
+      "longitude": 135.6734801,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_交野駅前",
+      "osmId": 1155662585,
+      "name": "交野駅前",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7870608,
+      "longitude": 135.6748179,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_逢合橋西",
+      "osmId": 1155662594,
+      "name": "逢合橋西",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7837432,
+      "longitude": 135.6721348,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_太秦交番前",
+      "osmId": 1155669490,
+      "name": "太秦交番前",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7595025,
+      "longitude": 135.6347194,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_香里南口",
+      "osmId": 1155674575,
+      "name": "香里南口",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7800506,
+      "longitude": 135.6320601,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_木屋",
+      "osmId": 1155677120,
+      "name": "木屋",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7876448,
+      "longitude": 135.6237657,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_石津元",
+      "osmId": 1155677122,
+      "name": "石津元町",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7782965,
+      "longitude": 135.6165763,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_木屋南",
+      "osmId": 1155677129,
+      "name": "木屋南",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7856385,
+      "longitude": 135.6227297,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_大平ポンプ場前",
+      "osmId": 1155731855,
+      "name": "大平ポンプ場前",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7438275,
+      "longitude": 135.6204783,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_萱嶋駅前",
+      "osmId": 1155737987,
+      "name": "萱嶋駅前",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7474712,
+      "longitude": 135.6119086,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_上馬伏北",
+      "osmId": 1155737989,
+      "name": "上馬伏北",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7370287,
+      "longitude": 135.6116414,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_上馬伏",
+      "osmId": 1155738001,
+      "name": "上馬伏",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7366995,
+      "longitude": 135.6120333,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_下島頭北",
+      "osmId": 1155738010,
+      "name": "下島頭北",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7334976,
+      "longitude": 135.6085093,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_楠公里",
+      "osmId": 1157335166,
+      "name": "楠公里",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7385426,
+      "longitude": 135.6533526,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_蔀屋",
+      "osmId": 1157335177,
+      "name": "蔀屋",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.740016,
+      "longitude": 135.6319676,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_下田原西",
+      "osmId": 1164711471,
+      "name": "下田原西",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.7333103,
+      "longitude": 135.6937591,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_d_tonbori",
+      "osmId": 4029007869,
+      "name": "道頓堀",
+      "nameKana": "どうとんぼり",
+      "nameTranslations": {
+        "en": "Dōtonbori"
+      },
+      "latitude": 34.6690306,
+      "longitude": 135.5015715,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_den_den_town",
+      "osmId": 4584822193,
+      "name": "でんでんタウン",
+      "nameKana": null,
+      "nameTranslations": {
+        "en": "Den Den Town"
+      },
+      "latitude": 34.6592152,
+      "longitude": 135.5058245,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_日本庭園",
+      "osmId": 4819900496,
+      "name": "日本庭園",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.8143248,
+      "longitude": 135.5317183,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_自然文化園",
+      "osmId": 4819900497,
+      "name": "自然文化園",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.8101685,
+      "longitude": 135.5272912,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_本坊庭園",
+      "osmId": 4830104944,
+      "name": "本坊庭園",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.6559907,
+      "longitude": 135.5180964,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_中心伽藍",
+      "osmId": 4830104945,
+      "name": "中心伽藍",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.6540782,
+      "longitude": 135.5164397,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_あいりん地",
+      "osmId": 6163717693,
+      "name": "あいりん地区",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.6449527,
+      "longitude": 135.5014212,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_生活環境保全林",
+      "osmId": 11035174641,
+      "name": "生活環境保全林",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.8504991,
+      "longitude": 135.4764757,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_下赤阪の棚田",
+      "osmId": 11147706502,
+      "name": "下赤阪の棚田",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.4588772,
+      "longitude": 135.6181415,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_泉佐野漁港",
+      "osmId": 11709779539,
+      "name": "泉佐野漁港",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.421235,
+      "longitude": 135.3167903,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    },
+    {
+      "id": "osaka_unknown_泉佐野港",
+      "osmId": 11709779540,
+      "name": "泉佐野港",
+      "nameKana": null,
+      "nameTranslations": null,
+      "latitude": 34.4202394,
+      "longitude": 135.3093767,
+      "lines": null,
+      "prefectureId": "osaka",
+      "cityId": null,
+      "countryCode": "jp",
+      "prefectureName": "大阪府",
+      "prefectureNameTranslations": null,
+      "cityName": null,
+      "cityNameTranslations": null,
+      "placeType": "locality"
+    }
+  ]
+}

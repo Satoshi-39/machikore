@@ -103,6 +103,8 @@ export const MAP_ZOOM = {
 export const MAP_TILE = {
   /** タイルサイズ（度）: 0.25度 ≒ 約25km四方 */
   SIZE: 0.25,
+  /** 交通データ取得の最大タイル数（これを超える場合は取得しない） */
+  MAX_TRANSPORT_TILES: 9, // 3x3グリッド程度
 } as const;
 
 // ===============================

@@ -6,6 +6,7 @@
 
 import { useMap } from '@/entities/map';
 import { useSpots } from '@/entities/user-spot';
+import { useTransportHubsByBounds, useTransportHubsGeoJson } from '@/entities/transport-hub';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
@@ -15,7 +16,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { ENV, type UserMapThemeColor } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
-import { UserSpotLabels } from './layers';
+import { UserSpotLabels, TransportHubLabels } from './layers';
 import { SpotCarousel } from './spot-carousel';
 import Mapbox from '@rnmapbox/maps';
 import React, {
@@ -80,6 +81,23 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // スポットをGeoJSON形式に変換
     const spotsGeoJson = useUserSpotsGeoJson(spots);
+
+    // マップのビューポート範囲とズームレベル（交通データ取得用）
+    const [mapBounds, setMapBounds] = useState<{
+      minLat: number;
+      maxLat: number;
+      minLng: number;
+      maxLng: number;
+    } | null>(null);
+    const [zoomLevel, setZoomLevel] = useState(12);
+    const boundsUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    // 交通データを表示領域ベースで取得（React Queryでキャッシュ）
+    const { data: transportHubs = [] } = useTransportHubsByBounds({
+      bounds: mapBounds,
+      zoom: zoomLevel,
+    });
+    const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
 
     // スポットカメラ操作用フック
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
@@ -266,13 +284,42 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       }, 100);
     }, [spots, isMapReady, jumpToSpotId, moveCameraToSingleSpot, fitCameraToAllSpots]);
 
-    // カメラ変更時に中心座標を更新
-    const handleCameraChanged = async (state: any) => {
+    // カメラ変更時に中心座標とビューポート範囲を更新
+    const handleCameraChanged = useCallback((state: any) => {
+      // 中心座標を即座に更新（ピン刺し機能用）
       if (state?.properties?.center) {
         const [longitude, latitude] = state.properties.center;
         setCenterCoords({ latitude, longitude });
       }
-    };
+
+      // ズームレベルを即座に更新
+      if (state?.properties?.zoom != null) {
+        setZoomLevel(state.properties.zoom);
+      }
+
+      // boundsの更新はデバウンス（交通データ取得の最適化）
+      const cameraBounds = state?.properties?.bounds;
+      if (cameraBounds?.ne && cameraBounds?.sw) {
+        // 前のタイマーをクリア
+        if (boundsUpdateTimerRef.current) {
+          clearTimeout(boundsUpdateTimerRef.current);
+        }
+
+        const [neLng, neLat] = cameraBounds.ne;
+        const [swLng, swLat] = cameraBounds.sw;
+        const newBounds = {
+          minLat: swLat,
+          maxLat: neLat,
+          minLng: swLng,
+          maxLng: neLng,
+        };
+
+        // カメラ移動が止まってから300ms後にboundsを更新
+        boundsUpdateTimerRef.current = setTimeout(() => {
+          setMapBounds(newBounds);
+        }, 300);
+      }
+    }, []);
 
     // 外部から呼び出せるメソッドを公開
     useImperativeHandle(ref, () => ({
@@ -302,6 +349,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             showsUserHeadingIndicator={true}
             animated={true}
           />
+
+          {/* 交通機関ラベルレイヤー（駅・空港など） */}
+          <TransportHubLabels geoJson={transportHubsGeoJson} />
 
           {/* スポットラベルレイヤー（マップのテーマカラーを使用） */}
           <UserSpotLabels
