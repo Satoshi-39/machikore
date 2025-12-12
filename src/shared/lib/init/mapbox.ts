@@ -20,12 +20,14 @@ export function initMapbox(): void {
   Mapbox.setAccessToken(accessToken);
 
   // @rnmapbox/maps の既知のタイミング問題によるエラーを抑制
-  // マップのアンマウント時にheadingIndicatorレイヤーの更新が発生する問題
+  // マップのアンマウント時にレイヤーの更新/削除が発生する問題
   // 機能自体は正常に動作するため、ログのみ抑制
   // 参考: https://github.com/rnmapbox/maps/issues/2895
   const ignoredMapboxErrors = [
     'Mapbox [error] updateLayer SymbolLayer.mapboxUserLocationHeadingIndicator',
     'Layer mapboxUserLocationHeadingIndicator is not in style',
+    // レイヤー削除時のタイミング問題（条件付きレンダリングでアンマウント時に発生）
+    'does not exist',
   ];
 
   LogBox.ignoreLogs(ignoredMapboxErrors);
