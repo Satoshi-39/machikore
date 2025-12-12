@@ -85,8 +85,12 @@ export function convertToPlaceResult(
   const prefecture = getComponent('administrative_area_level_1');
   const city =
     getComponent('locality') || getComponent('administrative_area_level_2');
+  // sublocality_level_2（大字・町名）を優先、なければsublocality_level_1、最後にsublocality
+  // 例: "江崎字和井田" の場合、"江崎"（level_2）を取得したい
   const sublocality =
-    getComponent('sublocality_level_1') || getComponent('sublocality');
+    getComponent('sublocality_level_2') ||
+    getComponent('sublocality_level_1') ||
+    getComponent('sublocality');
 
   // 短い住所: "東京都渋谷区神南" のような形式
   const shortAddress = [prefecture, city, sublocality].filter(Boolean).join('');

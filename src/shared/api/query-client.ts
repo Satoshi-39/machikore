@@ -33,8 +33,8 @@ export const queryClient = new QueryClient({
       retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     },
     mutations: {
-      // ミューテーションのリトライ設定
-      retry: 1,
+      // ミューテーションはリトライしない（重複登録を防ぐため）
+      retry: false,
     },
   },
 });

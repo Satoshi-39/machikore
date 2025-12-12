@@ -137,6 +137,7 @@ async function getOrCreateMasterSpot(input: {
   name: string;
   latitude: number;
   longitude: number;
+  machiId: string;
   googlePlaceId?: string | null;
   googleFormattedAddress?: string | null;
   googleShortAddress?: string | null;
@@ -150,11 +151,18 @@ async function getOrCreateMasterSpot(input: {
   if (input.googlePlaceId) {
     const { data: existing } = await supabase
       .from('master_spots')
-      .select('id')
+      .select('id, machi_id')
       .eq('google_place_id', input.googlePlaceId)
       .single();
 
     if (existing) {
+      // 既存のmaster_spotにmachi_idがない場合は更新
+      if (!existing.machi_id && input.machiId) {
+        await supabase
+          .from('master_spots')
+          .update({ machi_id: input.machiId })
+          .eq('id', existing.id);
+      }
       return existing.id;
     }
   }
@@ -164,6 +172,7 @@ async function getOrCreateMasterSpot(input: {
     name: input.name,
     latitude: input.latitude,
     longitude: input.longitude,
+    machi_id: input.machiId,
     google_place_id: input.googlePlaceId ?? null,
     google_formatted_address: input.googleFormattedAddress ?? null,
     google_short_address: input.googleShortAddress ?? null,
@@ -198,6 +207,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
       name: input.name,
       latitude: input.latitude,
       longitude: input.longitude,
+      machiId: input.machiId,
       googlePlaceId: input.googlePlaceId,
       googleFormattedAddress: input.googleFormattedAddress,
       googleShortAddress: input.googleShortAddress,

@@ -16,7 +16,7 @@ import {
 import { useCreateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
-import { uploadImage, STORAGE_BUCKETS, insertSpotImage, getNearbyMachi } from '@/shared/api/supabase';
+import { uploadImage, STORAGE_BUCKETS, insertSpotImage, findMachiForSpot } from '@/shared/api/supabase';
 import { queryClient } from '@/shared/api/query-client';
 import { INPUT_LIMITS } from '@/shared/config';
 import type { SelectedImage } from '@/features/pick-images';
@@ -151,20 +151,19 @@ export function useSpotForm() {
       return;
     }
 
-    // 座標から最寄りのmachiを取得（Supabaseから）
-    // SQLiteではなくSupabaseから取得することで外部キー制約エラーを防ぐ
+    // スポットに紐づけるmachiを特定
     let machiId: string;
     try {
-      const nearbyMachi = await getNearbyMachi(
+      const machi = await findMachiForSpot(
         selectedPlace.latitude,
         selectedPlace.longitude,
-        1
+        selectedPlace.formattedAddress ?? undefined
       );
-      if (nearbyMachi.length === 0) {
+      if (!machi) {
         Alert.alert('エラー', '近くの街が見つかりません');
         return;
       }
-      machiId = nearbyMachi[0]!.id;
+      machiId = machi.id;
     } catch (error) {
       console.error('最寄りの街の取得に失敗しました:', error);
       Alert.alert('エラー', '街の情報を取得できませんでした');

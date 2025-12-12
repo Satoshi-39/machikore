@@ -41,8 +41,10 @@ function buildShortAddress(addressComponents: ReverseGeocodeResult['address_comp
   const prefecture = getComponent('administrative_area_level_1');
   // 市区町村
   const city = getComponent('locality') || getComponent('administrative_area_level_2');
-  // 地域名（丁目など）
-  const sublocality = getComponent('sublocality_level_1') || getComponent('sublocality_level_2') || getComponent('sublocality');
+  // 地域名（大字・町名を優先）
+  // sublocality_level_2（大字・町名）を優先、なければsublocality_level_1、最後にsublocality
+  // 例: "江崎字和井田" の場合、"江崎"（level_2）を取得したい
+  const sublocality = getComponent('sublocality_level_2') || getComponent('sublocality_level_1') || getComponent('sublocality');
 
   // 短縮住所を構築
   const shortAddress = [prefecture, city, sublocality].filter(Boolean).join('');
