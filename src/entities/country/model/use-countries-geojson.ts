@@ -17,6 +17,7 @@ interface CountryRow {
 interface CountryFeatureProperties {
   id: string;
   name: string;
+  code: string;
 }
 
 /**
@@ -38,6 +39,7 @@ export function useCountriesGeoJson(
         properties: {
           id: country.id,
           name: country.name,
+          code: country.country_code,
         },
       })),
     };

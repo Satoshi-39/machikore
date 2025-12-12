@@ -18,7 +18,7 @@ interface DefaultMapHeaderProps {
   /** 表示する地名 */
   locationName: string;
   /** 地名の種類 */
-  locationType: 'machi' | 'city' | 'prefecture' | 'country' | 'earth' | 'unknown';
+  locationType: 'machi' | 'city' | 'prefecture' | 'region' | 'country' | 'earth' | 'unknown';
   /** 検索ボタン押下時 */
   onSearchPress?: () => void;
   /** 地名押下時 */

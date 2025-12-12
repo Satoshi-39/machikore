@@ -84,6 +84,8 @@ export const MAP_ZOOM = {
   EARTH: 3,
   /** 国レベル */
   COUNTRY: 5,
+  /** 地方レベル */
+  REGION: 6,
   /** 都道府県レベル */
   PREFECTURE: 8,
   /** 市区レベル */
@@ -124,6 +126,8 @@ export const MAP_DISTANCE_THRESHOLD = {
   CITY: 5,
   /** 都道府県名を表示する最大距離（km） - 都道府県の陸地範囲 */
   PREFECTURE: 30,
+  /** 地方名を表示する最大距離（km） - 地方は複数の都道府県をカバー */
+  REGION: 250,
   /** 国名を表示する最大距離（km） - 日本は南北約3000km、東西約3000kmあるので大きめに */
   COUNTRY: 2000,
 } as const;
@@ -310,6 +314,12 @@ export const LOCATION_ICONS = {
     color: '#9333ea', // purple-600
     bgColor: 'bg-purple-100',
   },
+  /** 地方 */
+  REGION: {
+    name: 'map' as const,
+    color: '#0891b2', // cyan-600
+    bgColor: 'bg-cyan-100',
+  },
   /** マスタースポット */
   MASTER_SPOT: {
     name: 'location-outline' as const,
@@ -346,6 +356,7 @@ export const LOCATION_TYPE_MAP = {
   machi: 'MACHI',
   city: 'CITY',
   prefecture: 'PREFECTURE',
+  region: 'REGION',
   country: 'COUNTRY',
   earth: 'EARTH',
   unknown: 'MASTER_SPOT',

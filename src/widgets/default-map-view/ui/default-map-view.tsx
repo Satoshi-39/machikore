@@ -20,13 +20,19 @@ import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
-import { PrefectureLabels, CityLabels, MachiLabels, SpotLabels, TransportHubLabels } from './layers';
+import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, SpotLabels, TransportHubLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
+import { useRegionsGeoJson } from '@/entities/region';
 import { useCountriesGeoJson } from '@/entities/country/model';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
+import { getRegionsDataWithCoords, getRegionsData } from '@/shared/lib/utils/regions.utils';
+import type { RegionDataWithCoords } from '@/shared/lib/utils/regions.utils';
 import { useBoundsManagement, useCenterLocationName } from '../model';
 import { DefaultMapHeader } from './default-map-header';
-import type { MachiRow, CityRow } from '@/shared/types/database.types';
+import { CountryDetailCard } from './country-detail-card';
+import { RegionDetailCard } from './region-detail-card';
+import { PrefectureDetailCard } from './prefecture-detail-card';
+import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
@@ -79,9 +85,15 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
 
     // カード選択状態の管理
     const {
+      selectedCountry,
+      selectedRegion,
+      selectedPrefecture,
       selectedMachi,
       selectedCity,
       selectedSpot,
+      handleCountrySelect,
+      handleRegionSelect,
+      handlePrefectureSelect,
       handleMachiSelect,
       handleCitySelect,
       handleSpotSelect,
@@ -112,8 +124,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       }, [clearAllSelections])
     );
 
-    // 国データを取得
+    // 国データと地方データを取得
     const countries = useMemo(() => getCountriesData(), []);
+    const regions = useMemo(() => getRegionsDataWithCoords(), []);
 
     // マップ中心の地名を取得
     const centerLocation = useCenterLocationName({
@@ -121,6 +134,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       machiData,
       cities,
       prefectures,
+      regions,
       countries,
     });
 
@@ -174,6 +188,22 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       return new Map(cities.map((city) => [city.id, city]));
     }, [cities]);
 
+    // PrefectureRowのマップを作成（IDからPrefectureRowへの変換用）
+    const prefectureMap = useMemo(() => {
+      return new Map(prefectures.map((prefecture) => [prefecture.id, prefecture]));
+    }, [prefectures]);
+
+    // RegionRowのマップを作成（IDからRegionRowへの変換用）
+    const regionsRowData = useMemo(() => getRegionsData(), []);
+    const regionMap = useMemo(() => {
+      return new Map(regionsRowData.map((region) => [region.id, region]));
+    }, [regionsRowData]);
+
+    // 座標付き地方データのマップを作成（ズーム用）
+    const regionCoordsMap = useMemo(() => {
+      return new Map(regions.map((region) => [region.id, region]));
+    }, [regions]);
+
     // MasterSpotDisplayのマップを作成（IDからMasterSpotDisplayへの変換用）
     const masterSpotMap = useMemo(() => {
       if (!masterSpots) return new Map<string, MasterSpotDisplay>();
@@ -197,6 +227,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const machiGeoJson = useMachiGeoJson(filteredMachiData ?? undefined, visitedMachiIds);
     const masterSpotsGeoJson = useMasterSpotsGeoJson(masterSpots);
     const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
+    const regionsGeoJson = useRegionsGeoJson(regions);
     const citiesGeoJson = useCitiesGeoJson(cities);
     const countriesGeoJson = useCountriesGeoJson(countries);
     const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
@@ -244,6 +275,25 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       }
     };
 
+    // 地方ラベルタップ時のハンドラー（ズーム付き）
+    const handleRegionLabelPress = useCallback((region: import('@/shared/types/database.types').RegionRow) => {
+      handleRegionSelect(region);
+      // 座標付きデータからズーム
+      const regionCoords = regionCoordsMap.get(region.id);
+      if (regionCoords) {
+        flyToLocation(regionCoords.longitude, regionCoords.latitude, MAP_ZOOM.REGION);
+      }
+    }, [handleRegionSelect, regionCoordsMap, flyToLocation]);
+
+    // 都道府県ラベルタップ時のハンドラー（ズーム付き）
+    const handlePrefectureLabelPress = useCallback((prefecture: PrefectureRow) => {
+      handlePrefectureSelect(prefecture);
+      // 座標がある場合のみズーム
+      if (prefecture.longitude != null && prefecture.latitude != null) {
+        flyToLocation(prefecture.longitude, prefecture.latitude, MAP_ZOOM.PREFECTURE);
+      }
+    }, [handlePrefectureSelect, flyToLocation]);
+
     // ヘッダーの地名クリック時のハンドラー
     const handleHeaderLocationPress = useCallback(() => {
       if (!centerLocation.entity) return;
@@ -252,8 +302,28 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         handleMachiSelect(centerLocation.entity as MachiRow);
       } else if (centerLocation.type === 'city') {
         handleCitySelect(centerLocation.entity as CityRow);
+      } else if (centerLocation.type === 'prefecture') {
+        handlePrefectureSelect(centerLocation.entity as PrefectureRow);
+      } else if (centerLocation.type === 'region') {
+        // 地方の場合はRegionDataWithCoords型からRegionRow型に変換
+        const regionData = centerLocation.entity as RegionDataWithCoords;
+        const now = new Date().toISOString();
+        handleRegionSelect({
+          id: regionData.id,
+          name: regionData.name,
+          name_kana: regionData.name_kana,
+          name_translations: null,
+          country_code: regionData.country_code,
+          display_order: regionData.display_order,
+          created_at: now,
+          updated_at: now,
+        });
+      } else if (centerLocation.type === 'country') {
+        // 国の場合はCountryData型からカード用の型に変換
+        const countryData = centerLocation.entity as { id: string; name: string; country_code: string };
+        handleCountrySelect({ id: countryData.id, name: countryData.name, code: countryData.country_code });
       }
-    }, [centerLocation, handleMachiSelect, handleCitySelect]);
+    }, [centerLocation, handleMachiSelect, handleCitySelect, handlePrefectureSelect, handleRegionSelect, handleCountrySelect]);
 
     // 初期カメラ位置を計算
     const initialCenter = currentLocation
@@ -291,10 +361,21 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {visitFilter === 'all' && (
           <>
             {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
-            <CountryLabels geoJson={countriesGeoJson} />
+            <CountryLabels geoJson={countriesGeoJson} onPress={handleCountrySelect} />
 
-            {/* 都道府県ラベル表示（テキストのみ）- ズーム5-10で表示 */}
-            <PrefectureLabels geoJson={prefecturesGeoJson} />
+            {/* 地方ラベル表示（テキストのみ）- ズーム5-7で表示 */}
+            <RegionLabels
+              geoJson={regionsGeoJson}
+              regionMap={regionMap}
+              onPress={handleRegionLabelPress}
+            />
+
+            {/* 都道府県ラベル表示（テキストのみ）- ズーム6-11で表示 */}
+            <PrefectureLabels
+              geoJson={prefecturesGeoJson}
+              prefectureMap={prefectureMap}
+              onPress={handlePrefectureLabelPress}
+            />
 
             {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
             <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
@@ -368,6 +449,67 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             testID="location-button"
           />
         </Animated.View>
+      )}
+
+      {/* 選択された国の詳細カード */}
+      {selectedCountry && (
+        <CountryDetailCard
+          country={selectedCountry}
+          onClose={() => handleCountrySelect(null)}
+          onSnapChange={handleSnapChange}
+          onSearchBarVisibilityChange={setIsSearchBarHidden}
+          onBeforeClose={controlsVisibility.handleBeforeClose}
+          onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+          onRegionSelect={(region) => {
+            // 国カードが閉じた後に地方カードを開く
+            handleRegionSelect(region);
+            // カメラを地方の位置に移動（座標がある場合のみ）
+            const regionCoords = regionCoordsMap.get(region.id);
+            if (regionCoords) {
+              flyToLocation(regionCoords.longitude, regionCoords.latitude, MAP_ZOOM.REGION);
+            }
+          }}
+        />
+      )}
+
+      {/* 選択された地方の詳細カード */}
+      {selectedRegion && (
+        <RegionDetailCard
+          region={selectedRegion}
+          onClose={() => handleRegionSelect(null)}
+          onSnapChange={handleSnapChange}
+          onSearchBarVisibilityChange={setIsSearchBarHidden}
+          onBeforeClose={controlsVisibility.handleBeforeClose}
+          onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+          onPrefectureSelect={(prefecture) => {
+            // 地方カードが閉じた後に都道府県カードを開く
+            handlePrefectureSelect(prefecture);
+            // カメラを都道府県の位置に移動（座標がある場合のみ）
+            if (prefecture.longitude != null && prefecture.latitude != null) {
+              flyToLocation(prefecture.longitude, prefecture.latitude, MAP_ZOOM.PREFECTURE);
+            }
+          }}
+        />
+      )}
+
+      {/* 選択された都道府県の詳細カード */}
+      {selectedPrefecture && (
+        <PrefectureDetailCard
+          prefecture={selectedPrefecture}
+          onClose={() => handlePrefectureSelect(null)}
+          onSnapChange={handleSnapChange}
+          onSearchBarVisibilityChange={setIsSearchBarHidden}
+          onBeforeClose={controlsVisibility.handleBeforeClose}
+          onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+          onCitySelect={(city) => {
+            // 都道府県カードが閉じた後に市区カードを開く
+            handleCitySelect(city);
+            // カメラを市区の位置に移動（座標がある場合のみ）
+            if (city.longitude != null && city.latitude != null) {
+              flyToLocation(city.longitude, city.latitude, MAP_ZOOM.CITY);
+            }
+          }}
+        />
       )}
 
       {/* 選択された街の詳細カード */}

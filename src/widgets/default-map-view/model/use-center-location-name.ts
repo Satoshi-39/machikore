@@ -15,6 +15,7 @@ import { useMemo } from 'react';
 import type { CameraState } from './use-bounds-management';
 import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
 import type { CountryData } from '@/shared/lib/utils/countries.utils';
+import type { RegionDataWithCoords } from '@/shared/lib/utils/regions.utils';
 import { MAP_ZOOM, MAP_DISTANCE_THRESHOLD } from '@/shared/config';
 
 interface UseCenterLocationNameParams {
@@ -22,14 +23,15 @@ interface UseCenterLocationNameParams {
   machiData?: MachiRow[] | null;
   cities?: CityRow[];
   prefectures?: PrefectureRow[];
+  regions?: RegionDataWithCoords[];
   countries?: CountryData[];
 }
 
 interface LocationInfo {
   name: string;
-  type: 'machi' | 'city' | 'prefecture' | 'country' | 'earth' | 'unknown';
-  /** 対応するエンティティ（街または市区） */
-  entity?: MachiRow | CityRow | null;
+  type: 'machi' | 'city' | 'prefecture' | 'region' | 'country' | 'earth' | 'unknown';
+  /** 対応するエンティティ（街、市区、都道府県、地方、国） */
+  entity?: MachiRow | CityRow | PrefectureRow | RegionDataWithCoords | CountryData | null;
 }
 
 /**
@@ -98,6 +100,7 @@ export function useCenterLocationName({
   machiData,
   cities = [],
   prefectures = [],
+  regions = [],
   countries = [],
 }: UseCenterLocationNameParams): LocationInfo {
   return useMemo(() => {
@@ -128,13 +131,25 @@ export function useCenterLocationName({
       // 距離しきい値を超えた場合は次のレベル（都道府県）にフォールスルー
     }
 
-    // COUNTRY(5)以上で都道府県名を表示
-    if (zoom >= MAP_ZOOM.COUNTRY && prefectures.length > 0) {
+    // REGION(6)以上で都道府県名を表示
+    if (zoom >= MAP_ZOOM.REGION && prefectures.length > 0) {
       // 都道府県名を表示（型アサーション：座標は必ず存在する）
       const validPrefectures = prefectures as Array<PrefectureRow & { latitude: number; longitude: number }>;
       const result = findNearest(validPrefectures, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.PREFECTURE) {
-        return { name: result.item.name, type: 'prefecture', entity: null };
+        // 元のPrefectureRowを探す
+        const originalPrefecture = prefectures.find(p => p.id === result.item.id);
+        return { name: result.item.name, type: 'prefecture', entity: originalPrefecture ?? null };
+      }
+      // 距離しきい値を超えた場合は次のレベル（地方）にフォールスルー
+    }
+
+    // COUNTRY(5)以上で地方名を表示
+    if (zoom >= MAP_ZOOM.COUNTRY && regions.length > 0) {
+      // 地方名を表示
+      const result = findNearest(regions, center);
+      if (result && result.distance <= MAP_DISTANCE_THRESHOLD.REGION) {
+        return { name: result.item.name, type: 'region', entity: result.item };
       }
       // 距離しきい値を超えた場合は次のレベル（国）にフォールスルー
     }
@@ -144,11 +159,11 @@ export function useCenterLocationName({
       // 国名を表示
       const result = findNearest(countries, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.COUNTRY) {
-        return { name: result.item.name, type: 'country', entity: null };
+        return { name: result.item.name, type: 'country', entity: result.item };
       }
     }
 
     // どの距離しきい値も満たさない場合、またはズーム3未満は地球
     return { name: '地球', type: 'earth', entity: null };
-  }, [cameraState, machiData, cities, prefectures, countries]);
+  }, [cameraState, machiData, cities, prefectures, regions, countries]);
 }

@@ -5,7 +5,7 @@
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { LOCATION_ICONS } from '@/shared/config';
+import { LOCATION_ICONS, MAP_ZOOM } from '@/shared/config';
 
 // アイコン画像（オレンジ色）
 const businessIcon = require('@assets/icons/business-city.png');
@@ -29,8 +29,8 @@ export function CityLabels({ geoJson, onPress }: CityLabelsProps) {
         {/* アイコン + テキスト横並び */}
         <Mapbox.SymbolLayer
           id="cities-labels"
-          minZoomLevel={10}
-          maxZoomLevel={12}
+          minZoomLevel={MAP_ZOOM.CITY - 1}
+          maxZoomLevel={MAP_ZOOM.CITY + 1}
           style={{
             iconImage: 'city-icon',
             iconSize: 0.35,

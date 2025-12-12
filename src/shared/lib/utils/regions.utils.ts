@@ -5,8 +5,19 @@
 import regionsData from '@/shared/assets/data/regions.json';
 import type { RegionRow } from '@/shared/types/database.types';
 
+/** 座標付き地方データの型 */
+export interface RegionDataWithCoords {
+  id: string;
+  name: string;
+  name_kana: string;
+  latitude: number;
+  longitude: number;
+  country_code: string;
+  display_order: number;
+}
+
 /**
- * 地方データを取得
+ * 地方データを取得（RegionRow形式）
  */
 export function getRegionsData(): RegionRow[] {
   const now = new Date().toISOString();
@@ -21,4 +32,11 @@ export function getRegionsData(): RegionRow[] {
     created_at: now,
     updated_at: now,
   }));
+}
+
+/**
+ * 座標付き地方データを取得（JSONから直接）
+ */
+export function getRegionsDataWithCoords(): RegionDataWithCoords[] {
+  return regionsData as RegionDataWithCoords[];
 }
