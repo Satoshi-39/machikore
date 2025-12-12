@@ -6,7 +6,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_CATEGORY_COLORS } from '@/shared/config';
+import { colors, SPOT_CATEGORY_COLORS, LOCATION_ICONS } from '@/shared/config';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
 import { determineSpotCategory } from '@/entities/master-spot';
@@ -112,11 +112,11 @@ export function DefaultMapSearch({
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
                 {results.map((place) => {
-                  // タイプ別のスタイル設定
+                  // タイプ別のスタイル設定（LOCATION_ICONSを使用して統一）
                   const typeConfig = {
-                    prefecture: { bgColor: 'bg-purple-100', iconName: 'earth' as const, iconColor: '#9333ea', label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
-                    city: { bgColor: 'bg-orange-100', iconName: 'business' as const, iconColor: '#ea580c', label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
-                    machi: { bgColor: 'bg-green-100', iconName: 'map' as const, iconColor: colors.secondary.DEFAULT, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
+                    prefecture: { bgColor: LOCATION_ICONS.PREFECTURE.bgColor, iconName: LOCATION_ICONS.PREFECTURE.name, iconColor: LOCATION_ICONS.PREFECTURE.color, label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
+                    city: { bgColor: LOCATION_ICONS.CITY.bgColor, iconName: LOCATION_ICONS.CITY.name, iconColor: LOCATION_ICONS.CITY.color, label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
+                    machi: { bgColor: LOCATION_ICONS.MACHI.bgColor, iconName: LOCATION_ICONS.MACHI.name, iconColor: LOCATION_ICONS.MACHI.color, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
                     spot: { bgColor: 'bg-surface-secondary dark:bg-gray-200', iconName: 'location' as const, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
                   };
                   const config = typeConfig[place.type];

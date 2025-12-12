@@ -211,6 +211,24 @@ export async function searchMachikorePlaces(
         : Promise.resolve([]),
   ]);
 
-  // 結果をマージしてlimit件まで返す（優先順: 都道府県 → 市区 → 街 → スポット）
-  return [...prefResults, ...cityResults, ...machiResults, ...spotResults].slice(0, limit);
+  // 結果をマージ
+  const allResults = [...prefResults, ...cityResults, ...machiResults, ...spotResults];
+
+  // タイプ別優先度（小さいほど優先）
+  const typePriority: Record<string, number> = {
+    prefecture: 1, // 都道府県
+    city: 2, // 市区
+    machi: 3, // 街
+    spot: 4, // スポット（最後に表示）
+  };
+
+  // 優先度順にソートしてlimit件まで返す
+  return allResults
+    .sort((a, b) => {
+      const priorityDiff = (typePriority[a.type] ?? 99) - (typePriority[b.type] ?? 99);
+      if (priorityDiff !== 0) return priorityDiff;
+      // 同じタイプの場合は名前順
+      return a.name.localeCompare(b.name, 'ja');
+    })
+    .slice(0, limit);
 }
