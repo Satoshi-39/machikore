@@ -2,13 +2,11 @@
  * 街コレデータ検索API
  * machis + master_spots + cities + prefectures を検索
  *
- * - 都道府県、市区、街: SQLiteから検索（マスターデータ）
- * - マスタースポット: Supabaseから検索（動的データ）
+ * すべてSupabaseから直接検索（真実のソース）
  */
 
 import { queryAll } from '@/shared/api/sqlite/client';
 import { supabase } from '@/shared/api/supabase/client';
-import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
 
 export interface MachikorePlaceSearchResult {
   id: string;
@@ -31,73 +29,81 @@ export interface MachikorePlaceSearchOptions {
 }
 
 /**
- * prefecturesテーブルを検索
+ * prefecturesテーブルを検索（Supabaseから直接検索）
  */
-function searchPrefectures(query: string, limit: number): MachikorePlaceSearchResult[] {
-  const prefectures = queryAll<PrefectureRow>(
-    `
-    SELECT * FROM prefectures
-    WHERE name LIKE ? AND latitude IS NOT NULL AND longitude IS NOT NULL
-    ORDER BY name
-    LIMIT ?;
-    `,
-    [`%${query}%`, limit]
-  );
+async function searchPrefectures(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
+  const { data: prefectures, error } = await supabase
+    .from('prefectures')
+    .select('id, name, latitude, longitude')
+    .ilike('name', `%${query}%`)
+    .not('latitude', 'is', null)
+    .not('longitude', 'is', null)
+    .limit(limit);
 
-  return prefectures
-    .filter((pref) => pref.latitude !== null && pref.longitude !== null)
-    .map((pref) => ({
-      id: pref.id,
-      name: pref.name,
-      address: null,
-      latitude: pref.latitude!,
-      longitude: pref.longitude!,
-      type: 'prefecture' as const,
-    }));
+  if (error) {
+    console.error('searchPrefectures error:', error);
+    return [];
+  }
+
+  return (prefectures ?? []).map((pref) => ({
+    id: pref.id,
+    name: pref.name,
+    address: null,
+    latitude: pref.latitude!,
+    longitude: pref.longitude!,
+    type: 'prefecture' as const,
+  }));
 }
 
 /**
- * citiesテーブルを検索
+ * citiesテーブルを検索（Supabaseから直接検索）
  */
-function searchCities(query: string, limit: number): MachikorePlaceSearchResult[] {
-  const cities = queryAll<CityRow & { prefecture_name?: string }>(
-    `
-    SELECT c.*, p.name as prefecture_name FROM cities c
-    LEFT JOIN prefectures p ON c.prefecture_id = p.id
-    WHERE c.name LIKE ? AND c.latitude IS NOT NULL AND c.longitude IS NOT NULL
-    ORDER BY c.name
-    LIMIT ?;
-    `,
-    [`%${query}%`, limit]
-  );
+async function searchCities(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
+  const { data: cities, error } = await supabase
+    .from('cities')
+    .select('id, name, latitude, longitude, prefectures(name)')
+    .ilike('name', `%${query}%`)
+    .not('latitude', 'is', null)
+    .not('longitude', 'is', null)
+    .limit(limit);
 
-  return cities
-    .filter((city) => city.latitude !== null && city.longitude !== null)
-    .map((city) => ({
+  if (error) {
+    console.error('searchCities error:', error);
+    return [];
+  }
+
+  return (cities ?? []).map((city) => {
+    // Supabaseのリレーション結果の型を処理
+    const prefName = city.prefectures && typeof city.prefectures === 'object' && 'name' in city.prefectures
+      ? (city.prefectures as { name: string }).name
+      : null;
+    return {
       id: city.id,
       name: city.name,
-      address: city.prefecture_name || null,
+      address: prefName,
       latitude: city.latitude!,
       longitude: city.longitude!,
       type: 'city' as const,
-    }));
+    };
+  });
 }
 
 /**
- * machisテーブルを検索
+ * machisテーブルを検索（Supabaseから直接検索）
  */
-function searchMachis(query: string, limit: number): MachikorePlaceSearchResult[] {
-  const machis = queryAll<MachiRow>(
-    `
-    SELECT * FROM machi
-    WHERE name LIKE ? OR name_kana LIKE ?
-    ORDER BY name
-    LIMIT ?;
-    `,
-    [`%${query}%`, `%${query}%`, limit]
-  );
+async function searchMachis(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
+  const { data: machis, error } = await supabase
+    .from('machi')
+    .select('id, name, name_kana, latitude, longitude, prefecture_name, city_name')
+    .or(`name.ilike.%${query}%,name_kana.ilike.%${query}%`)
+    .limit(limit);
 
-  return machis.map((machi) => ({
+  if (error) {
+    console.error('searchMachis error:', error);
+    return [];
+  }
+
+  return (machis ?? []).map((machi) => ({
     id: machi.id,
     name: machi.name,
     address: `${machi.prefecture_name}${machi.city_name || ''}`,
@@ -199,11 +205,11 @@ export async function searchMachikorePlaces(
   const machiLimit = Math.floor(limit / 3);
   const spotLimit = Math.floor(limit / 3);
 
-  // 全カテゴリを並行検索（スポット検索：デフォルトマップはmaster_spots、ユーザーマップはuser_spots）
+  // 全カテゴリを並行検索（Supabaseから直接検索）
   const [prefResults, cityResults, machiResults, spotResults] = await Promise.all([
-    Promise.resolve(searchPrefectures(trimmedQuery, prefLimit)),
-    Promise.resolve(searchCities(trimmedQuery, cityLimit)),
-    Promise.resolve(searchMachis(trimmedQuery, machiLimit)),
+    searchPrefectures(trimmedQuery, prefLimit),
+    searchCities(trimmedQuery, cityLimit),
+    searchMachis(trimmedQuery, machiLimit),
     includeAllSpots
       ? searchMasterSpots(trimmedQuery, spotLimit)
       : userId
