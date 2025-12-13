@@ -50,6 +50,9 @@ function MyPageMapCard({
 }: MyPageMapCardProps) {
   const isDarkMode = useIsDarkMode();
   const createdDate = new Date(map.created_at);
+
+  // 記事公開状態
+  const isArticlePublic = map.is_article_public === true;
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
   // いいね状態
@@ -214,12 +217,25 @@ function MyPageMapCard({
           </View>
         </View>
 
-        {/* 公開/非公開アイコン + メニュー */}
+        {/* 公開/非公開アイコン + 記事アイコン + メニュー */}
         <View className="flex-row items-center">
           {!map.is_public && (
             <View className="mr-2">
               <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
             </View>
+          )}
+          {/* 記事アイコン（オーナーは常に表示、他ユーザーは公開時のみ） */}
+          {(isOwner || isArticlePublic) && (
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation();
+                onArticlePress?.(map.id);
+              }}
+              className="p-1 mr-1"
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
+            </Pressable>
           )}
           <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
         </View>
