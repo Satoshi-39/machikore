@@ -292,7 +292,7 @@ function extractPlaceNamesFromAddress(
  * 1. PostGISで座標から市区町村を特定
  * 2. 住所文字列から地名を抽出し、同じ市区町村内のmachiと照合
  * 3. 住所マッチングで見つからない場合、市区町村内で座標から最寄りを選択
- * 4. 市区町村が特定できない場合は全国から最寄りを検索
+ * 4. 市区町村が特定できない場合はnullを返す（誤った街に紐づけるリスクを避ける）
  */
 export async function findMachiForSpot(
   latitude: number,
@@ -372,7 +372,7 @@ export async function findMachiForSpot(
     }
   }
 
-  // 7. 市区町村が見つからない or machiがない場合は従来通り全国から検索
-  const fallback = await getNearbyMachi(latitude, longitude, 1);
-  return fallback[0] ?? null;
+  // 7. 市区町村が見つからない or machiがない場合はnullを返す
+  // （全国から最寄りを検索すると誤った街に紐づくリスクがあるため）
+  return null;
 }

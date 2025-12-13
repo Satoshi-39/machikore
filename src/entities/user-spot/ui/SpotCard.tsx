@@ -16,6 +16,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
+import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
@@ -43,8 +44,8 @@ interface EmbeddedMasterSpot {
 }
 
 interface SpotCardProps {
-  // ローカルSQLiteデータまたはSupabase SpotWithDetailsデータ
-  spot: SpotWithMasterSpot | SpotWithDetails;
+  // ローカルSQLiteデータまたはSupabase SpotWithDetails/UserSpotSearchResultデータ
+  spot: SpotWithMasterSpot | SpotWithDetails | UserSpotSearchResult;
   currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用、いいね機能にも使用）
   machiName?: string;
   onPress?: () => void;

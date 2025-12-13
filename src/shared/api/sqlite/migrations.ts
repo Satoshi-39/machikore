@@ -985,15 +985,27 @@ function migration008_AddRegionsCoordinates(): void {
 
   console.log('[Migration 008] Adding coordinates to regions table...');
 
-  db.execSync('BEGIN TRANSACTION;');
-
   try {
-    // latitude, longitude カラムを追加
-    db.execSync('ALTER TABLE regions ADD COLUMN latitude REAL;');
-    db.execSync('ALTER TABLE regions ADD COLUMN longitude REAL;');
+    // カラムが存在するかチェック
+    const tableInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(regions);');
+    const hasLatitude = tableInfo.some((col) => col.name === 'latitude');
+    const hasLongitude = tableInfo.some((col) => col.name === 'longitude');
 
-    db.execSync('COMMIT;');
-    console.log('[Migration 008] Completed successfully');
+    if (!hasLatitude || !hasLongitude) {
+      db.execSync('BEGIN TRANSACTION;');
+
+      if (!hasLatitude) {
+        db.execSync('ALTER TABLE regions ADD COLUMN latitude REAL;');
+      }
+      if (!hasLongitude) {
+        db.execSync('ALTER TABLE regions ADD COLUMN longitude REAL;');
+      }
+
+      db.execSync('COMMIT;');
+      console.log('[Migration 008] Completed successfully');
+    } else {
+      console.log('[Migration 008] Columns already exist, skipping');
+    }
   } catch (error) {
     db.execSync('ROLLBACK;');
     console.error('[Migration 008] Failed:', error);

@@ -14,7 +14,7 @@ import {
   useCollectionMaps,
 } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
-import { PageHeader, Loading, ErrorView } from '@/shared/ui';
+import { PageHeader, Loading, ErrorView, MapThumbnail } from '@/shared/ui';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
 
 interface CollectionDetailPageProps {
@@ -38,17 +38,12 @@ function MapItem({
     >
       <View className="flex-row items-start">
         {/* サムネイル */}
-        {map.thumbnail_url ? (
-          <Image
-            source={{ uri: map.thumbnail_url }}
-            className="w-16 h-16 rounded-lg mr-3"
-            resizeMode="cover"
-          />
-        ) : (
-          <View className="w-16 h-16 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
-            <Ionicons name="map" size={24} color={colors.primary.DEFAULT} />
-          </View>
-        )}
+        <MapThumbnail
+          url={map.thumbnail_url}
+          width={64}
+          height={64}
+          className="mr-3"
+        />
 
         {/* マップ情報 */}
         <View className="flex-1">

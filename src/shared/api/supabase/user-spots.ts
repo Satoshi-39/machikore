@@ -57,36 +57,6 @@ export interface UserSpotImage {
   order_index: number;
 }
 
-export interface UserSpotWithImages {
-  id: string;
-  user_id: string;
-  map_id: string;
-  master_spot_id: string;
-  machi_id: string | null;
-  custom_name: string | null;
-  description: string | null;
-  tags: string[] | null;
-  images_count: number;
-  likes_count: number;
-  comments_count: number;
-  order_index: number;
-  created_at: string;
-  updated_at: string;
-  master_spot: any;
-  user: {
-    id: string;
-    username: string | null;
-    display_name: string | null;
-    avatar_url: string | null;
-  } | null;
-  map: {
-    id: string;
-    name: string;
-    theme_color: string;
-  } | null;
-  images: UserSpotImage[];
-}
-
 /**
  * 発見タブ用のスポット検索結果型
  */
@@ -94,7 +64,7 @@ export interface UserSpotSearchResult {
   id: string;
   user_id: string;
   map_id: string;
-  master_spot_id: string;
+  master_spot_id: string | null;
   machi_id: string | null;
   custom_name: string | null;
   description: string | null;
@@ -110,8 +80,10 @@ export interface UserSpotSearchResult {
     name: string;
     latitude: number;
     longitude: number;
+    google_place_id: string | null;
     google_formatted_address: string | null;
     google_short_address: string | null;
+    google_types: string[] | null;
   } | null;
   user: {
     id: string;
@@ -533,14 +505,7 @@ export async function searchPublicUserSpots(
     .from('user_spots')
     .select(`
       *,
-      master_spots (
-        id,
-        name,
-        latitude,
-        longitude,
-        google_formatted_address,
-        google_short_address
-      ),
+      master_spots (*),
       users (
         id,
         username,
@@ -641,8 +606,10 @@ export async function searchPublicUserSpots(
             name: masterSpot.name,
             latitude: masterSpot.latitude,
             longitude: masterSpot.longitude,
+            google_place_id: masterSpot.google_place_id,
             google_formatted_address: masterSpot.google_formatted_address,
             google_short_address: masterSpot.google_short_address,
+            google_types: masterSpot.google_types,
           },
           user: spot.users || null,
           map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
@@ -746,9 +713,9 @@ export async function searchSpotsByMapId(
 // ===============================
 
 /**
- * master_spot_idに紐づく公開ユーザー投稿を取得（画像付き）
+ * master_spot_idに紐づく公開ユーザー投稿を取得
  */
-export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: number = 20): Promise<UserSpotWithImages[]> {
+export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: number = 20): Promise<SpotWithDetails[]> {
   const { data, error } = await supabase
     .from('user_spots')
     .select(`
@@ -765,11 +732,6 @@ export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: nu
         name,
         is_public,
         theme_color
-      ),
-      images (
-        id,
-        cloud_path,
-        order_index
       )
     `)
     .eq('master_spot_id', masterSpotId)
@@ -799,6 +761,5 @@ export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: nu
     master_spot: spot.master_spots || null,
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
-    images: (spot.images || []).sort((a: any, b: any) => a.order_index - b.order_index),
   }));
 }

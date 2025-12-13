@@ -92,7 +92,7 @@ export interface SpotWithDetails {
   user_id: string;
   map_id: string;
   master_spot_id: string | null;
-  machi_id: string;
+  machi_id: string | null;
   custom_name: string | null;
   description: string | null;
   tags: string[] | null;

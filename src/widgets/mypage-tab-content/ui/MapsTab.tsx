@@ -6,7 +6,7 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
+import { View, Text, Pressable, FlatList, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
@@ -17,7 +17,7 @@ import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
-import { AsyncBoundary, PopupMenu, type PopupMenuItem, LocationPinIcon } from '@/shared/ui';
+import { AsyncBoundary, PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 
 interface MapsTabProps {
@@ -135,18 +135,13 @@ function MyPageMapCard({
       className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
     >
       <View className="flex-row items-start">
-        {/* サムネイル or アイコン */}
-        {map.thumbnail_url ? (
-          <Image
-            source={{ uri: map.thumbnail_url }}
-            className="w-16 h-16 rounded-lg mr-3"
-            resizeMode="cover"
-          />
-        ) : (
-          <View className="w-16 h-16 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
-            <Ionicons name="map" size={24} color={colors.primary.DEFAULT} />
-          </View>
-        )}
+        {/* サムネイル */}
+        <MapThumbnail
+          url={map.thumbnail_url}
+          width={64}
+          height={64}
+          className="mr-3"
+        />
 
         {/* マップ情報 */}
         <View className="flex-1">

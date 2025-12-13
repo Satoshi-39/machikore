@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-import { View, Text, ScrollView, Image, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { View, Text, ScrollView, Pressable } from 'react-native';
+import { MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 
 interface AuthorOtherMapsProps {
@@ -35,17 +34,12 @@ export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
             className="mr-3"
             style={{ width: 160 }}
           >
-            {map.thumbnail_url ? (
-              <Image
-                source={{ uri: map.thumbnail_url }}
-                className="w-full h-24 rounded-lg mb-2"
-                resizeMode="cover"
-              />
-            ) : (
-              <View className="w-full h-24 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mb-2">
-                <Ionicons name="map" size={32} color={colors.gray[300]} />
-              </View>
-            )}
+            <MapThumbnail
+              url={map.thumbnail_url}
+              width={160}
+              height={96}
+              className="mb-2"
+            />
             <Text className="text-sm font-medium text-foreground dark:text-dark-foreground" numberOfLines={2}>
               {map.name}
             </Text>

@@ -5,14 +5,14 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, FlatList, Image, Pressable, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, Pressable, ActivityIndicator } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCollection, useCollectionMaps, useAddMapToCollection, useRemoveMapFromCollection } from '@/entities/collection';
 import { useUserMaps } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 
 export function AddMapsToCollectionPage() {
@@ -51,17 +51,12 @@ export function AddMapsToCollectionPage() {
     return (
       <View className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light flex-row items-center">
         {/* サムネイル */}
-        {item.thumbnail_url ? (
-          <Image
-            source={{ uri: item.thumbnail_url }}
-            className="w-14 h-14 rounded-lg mr-3"
-            resizeMode="cover"
-          />
-        ) : (
-          <View className="w-14 h-14 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
-            <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
-          </View>
-        )}
+        <MapThumbnail
+          url={item.thumbnail_url}
+          width={56}
+          height={56}
+          className="mr-3"
+        />
 
         {/* マップ情報 */}
         <View className="flex-1">

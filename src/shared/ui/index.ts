@@ -26,6 +26,7 @@ export { StyledTextInput, type StyledTextInputProps } from './styled-text-input'
 export { TagInput } from './tag-input';
 export { LocationPinIcon, AddressPinIcon } from './icons';
 export { UserLocationPuck } from './user-location-puck';
+export { MapThumbnail } from './map-thumbnail';
 
 // マップレイヤー
 export { TransportHubLabels } from './map-layers';

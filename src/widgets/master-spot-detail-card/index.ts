@@ -2,4 +2,4 @@
  * Master Spot Detail Card Widget エクスポート
  */
 
-export { MasterSpotDetailCard } from './ui/master-spot-detail-card';
+export { MasterSpotDetailCard } from '@/widgets/default-map-view/ui/master-spot-detail-card';

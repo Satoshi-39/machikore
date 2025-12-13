@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, LocationPinIcon } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
@@ -40,8 +40,6 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   const user = embeddedUser || fetchedUser;
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
 
-  // サムネイル画像のローディング状態
-  const [isThumbnailLoading, setIsThumbnailLoading] = useState(!!map.thumbnail_url);
   const screenWidth = Dimensions.get('window').width;
 
   const { mutate: deleteMap } = useDeleteMap();
@@ -211,24 +209,14 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
       </View>
 
-      {/* サムネイル画像（ローディング中はプレースホルダー表示でちらつき防止） */}
-      {map.thumbnail_url && (
-        <View className="mb-3" style={{ width: screenWidth - 32, height: 160 }}>
-          {isThumbnailLoading && (
-            <View
-              className="absolute inset-0 bg-muted dark:bg-dark-muted rounded-lg"
-              style={{ width: screenWidth - 32, height: 160 }}
-            />
-          )}
-          <Image
-            source={{ uri: map.thumbnail_url }}
-            className="w-full h-full rounded-lg"
-            style={{ width: screenWidth - 32, height: 160 }}
-            resizeMode="cover"
-            onLoad={() => setIsThumbnailLoading(false)}
-          />
-        </View>
-      )}
+      {/* サムネイル画像 */}
+      <MapThumbnail
+        url={map.thumbnail_url}
+        width={screenWidth - 32}
+        height={160}
+        defaultImagePadding={0.1}
+        className="mb-3"
+      />
 
       {/* マップ名とスポット数 */}
       <View className="flex-row items-center mb-2">

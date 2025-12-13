@@ -3,13 +3,13 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Linking, Image, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, Pressable, Linking, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
-import { colors, LOCATION_ICONS, USER_MAP_THEME_COLORS, SPOT_CATEGORY_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_CATEGORY_COLORS } from '@/shared/config';
 import {
   showLoginRequiredAlert,
   useCurrentTab,
@@ -18,11 +18,10 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
+import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
-import { useSpotsByMasterSpot } from '@/entities/user-spot';
+import { useSpotsByMasterSpot, SpotCard } from '@/entities/user-spot';
 import { determineSpotCategory } from '@/entities/master-spot';
-import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMasterSpotLiked, useToggleMasterSpotLike } from '@/entities/like';
 import { useSelectedPlaceStore } from '@/features/search-places';
@@ -79,17 +78,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
   // このマスタースポットに紐づくユーザー投稿を取得
   const { data: userSpots = [], isLoading: isLoadingUserSpots } = useSpotsByMasterSpot(spot.id);
-
-  // 画像ビューアー
-  const imageViewer = useImageViewer();
-
-  // 画像タップハンドラー（投稿ごとに呼び出し）
-  const handleImagePress = useCallback((images: { id: string; cloud_path: string | null }[], index: number) => {
-    const imageUrls = images.map((img) => img.cloud_path || '').filter(Boolean);
-    if (imageUrls.length > 0) {
-      imageViewer.openImages(imageUrls, index);
-    }
-  }, [imageViewer]);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
   // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
@@ -208,6 +196,27 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
     }
   }, [spot.google_website_uri]);
 
+  // SpotCard用ハンドラー
+  const handleSpotPress = useCallback((spotId: string) => {
+    onClose();
+    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as any);
+  }, [onClose, router, currentTab]);
+
+  const handleUserPress = useCallback((userId: string) => {
+    onClose();
+    router.push(`/(tabs)/${currentTab}/users/${userId}` as any);
+  }, [onClose, router, currentTab]);
+
+  const handleMapPress = useCallback((mapId: string) => {
+    onClose();
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+  }, [onClose, router, currentTab]);
+
+  const handleCommentPress = useCallback((spotId: string) => {
+    onClose();
+    router.push(`/comments/spot/${spotId}` as any);
+  }, [onClose, router]);
+
   return (
     <>
     <BottomSheet
@@ -313,8 +322,8 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         </View>
 
         {/* ユーザー投稿一覧 */}
-        <View className="mt-4 pt-4 border-t border-border dark:border-dark-border">
-          <View className="flex-row items-center mb-3">
+        <View className="mt-4">
+          <View className="flex-row items-center mb-3 px-4">
             <Ionicons name="people-outline" size={18} color={colors.text.secondary} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
               みんなの投稿 ({spot.user_spots_count}件)
@@ -332,107 +341,17 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               </Text>
             </View>
           ) : (
-            <View className="gap-3">
+            <View className="-mx-4">
               {userSpots.map((userSpot) => (
-                <Pressable
+                <SpotCard
                   key={userSpot.id}
-                  className="bg-surface dark:bg-dark-surface rounded-lg p-3 border border-border dark:border-dark-border active:bg-muted dark:active:bg-dark-muted"
-                  onPress={() => {
-                    // スポット詳細ページに遷移（タブ内ルートを使用）
-                    onClose();
-                    router.push(`/(tabs)/${currentTab}/spots/${userSpot.id}` as any);
-                  }}
-                >
-                  {/* ユーザー情報 */}
-                  <View className="flex-row items-center mb-2">
-                    {userSpot.user?.avatar_url ? (
-                      <Image
-                        source={{ uri: userSpot.user.avatar_url }}
-                        className="w-8 h-8 rounded-full"
-                      />
-                    ) : (
-                      <View className="w-8 h-8 rounded-full bg-gray-300 items-center justify-center">
-                        <Ionicons name="person" size={16} color={colors.gray[500]} />
-                      </View>
-                    )}
-                    <View className="ml-2 flex-1">
-                      <Text className="text-sm font-medium text-foreground dark:text-dark-foreground">
-                        {userSpot.user?.display_name || userSpot.user?.username || 'ユーザー'}
-                      </Text>
-                      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                        {getRelativeSpotTime(userSpot.created_at)}
-                      </Text>
-                    </View>
-                    <Ionicons name="chevron-forward" size={16} color={colors.text.secondary} />
-                  </View>
-
-                  {/* カスタム名 */}
-                  {userSpot.custom_name && (
-                    <View className="flex-row items-center mb-1">
-                      <LocationPinIcon
-                        size={14}
-                        color={USER_MAP_THEME_COLORS[userSpot.map!.theme_color as UserMapThemeColor].color}
-                        strokeColor={getThemeColorStroke(userSpot.map!.theme_color as UserMapThemeColor, isDarkMode)}
-                      />
-                      <Text className="text-sm font-medium text-foreground dark:text-dark-foreground ml-1">
-                        {userSpot.custom_name}
-                      </Text>
-                    </View>
-                  )}
-
-                  {/* 説明 */}
-                  {userSpot.description && (
-                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={3}>
-                      {userSpot.description}
-                    </Text>
-                  )}
-
-                  {/* 画像 */}
-                  {userSpot.images && userSpot.images.length > 0 && (
-                    <ScrollView
-                      horizontal
-                      showsHorizontalScrollIndicator={false}
-                      className="mt-2 -mx-3"
-                      contentContainerStyle={{ paddingHorizontal: 12 }}
-                    >
-                      {userSpot.images.map((image, index) => (
-                        <Pressable
-                          key={image.id}
-                          onPress={() => handleImagePress(userSpot.images!, index)}
-                          className="active:opacity-80"
-                        >
-                          <Image
-                            source={{ uri: image.cloud_path || '' }}
-                            className="w-24 h-24 rounded-lg mr-2"
-                            resizeMode="cover"
-                          />
-                        </Pressable>
-                      ))}
-                    </ScrollView>
-                  )}
-
-                  {/* マップ名 */}
-                  {userSpot.map && (
-                    <View className="flex-row items-center mt-2">
-                      <Ionicons name="map-outline" size={14} color={colors.primary.DEFAULT} />
-                      <Text className="text-xs text-blue-500 ml-1" numberOfLines={1}>
-                        {userSpot.map.name}
-                      </Text>
-                    </View>
-                  )}
-
-                  {/* いいね・コメント数 */}
-                  <View className="flex-row items-center mt-2 gap-3">
-                    <View className="flex-row items-center">
-                      <Ionicons name="heart-outline" size={14} color={colors.text.secondary} />
-                      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{userSpot.likes_count}</Text>
-                    </View>
-                    <View className="flex-row items-center">
-                      <Ionicons name="chatbubble-outline" size={14} color={colors.text.secondary} />
-                      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{userSpot.comments_count}</Text>
-                    </View>
-                  </View>
-                </Pressable>
+                  spot={userSpot}
+                  currentUserId={currentUserId}
+                  onPress={() => handleSpotPress(userSpot.id)}
+                  onUserPress={handleUserPress}
+                  onMapPress={handleMapPress}
+                  onCommentPress={handleCommentPress}
+                />
               ))}
             </View>
           )}
@@ -448,14 +367,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         onClose={() => setShowMapSelectSheet(false)}
       />
     )}
-
-    {/* 画像拡大表示モーダル */}
-    <ImageViewerModal
-      visible={imageViewer.isOpen}
-      images={imageViewer.images}
-      initialIndex={imageViewer.initialIndex}
-      onClose={imageViewer.closeImage}
-    />
     </>
   );
 }
