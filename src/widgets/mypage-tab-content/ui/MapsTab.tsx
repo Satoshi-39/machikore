@@ -100,37 +100,26 @@ function MyPageMapCard({
     removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
   }, [currentUserId, map.id, removeFromFolder]);
 
+  // オーナーのみメニュー表示
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    const items: PopupMenuItem[] = [
+    if (!isOwner) return [];
+
+    return [
       {
-        id: 'article',
-        label: '記事を見る',
-        icon: 'document-text-outline',
-        onPress: () => onArticlePress?.(map.id),
+        id: 'edit',
+        label: '編集',
+        icon: 'create-outline',
+        onPress: () => onEdit?.(map.id),
+      },
+      {
+        id: 'delete',
+        label: '削除',
+        icon: 'trash-outline',
+        destructive: true,
+        onPress: () => onDelete?.(map.id),
       },
     ];
-
-    // オーナーのみ編集・削除を表示
-    if (isOwner) {
-      items.push(
-        {
-          id: 'edit',
-          label: '編集',
-          icon: 'create-outline',
-          onPress: () => onEdit?.(map.id),
-        },
-        {
-          id: 'delete',
-          label: '削除',
-          icon: 'trash-outline',
-          destructive: true,
-          onPress: () => onDelete?.(map.id),
-        }
-      );
-    }
-
-    return items;
-  }, [map.id, onEdit, onDelete, onArticlePress, isOwner]);
+  }, [map.id, onEdit, onDelete, isOwner]);
 
   return (
     <Pressable
@@ -237,7 +226,10 @@ function MyPageMapCard({
               <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
             </Pressable>
           )}
-          <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+          {/* オーナーのみ三点リーダメニューを表示 */}
+          {isOwner && (
+            <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+          )}
         </View>
       </View>
 
