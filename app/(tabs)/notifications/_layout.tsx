@@ -14,9 +14,6 @@ export default function NotificationsLayout() {
       <Stack.Screen name="comments/spots/[id]" />
       <Stack.Screen name="comments/maps/[id]" />
       <Stack.Screen name="articles/maps/[id]" />
-      <Stack.Screen name="settings" />
-      <Stack.Screen name="schedule" />
-      <Stack.Screen name="edit-profile" />
     </Stack>
   );
 }

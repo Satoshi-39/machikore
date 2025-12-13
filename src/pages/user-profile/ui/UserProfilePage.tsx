@@ -16,14 +16,12 @@ import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-ta
 import { UserProfileTabFilter, type UserProfileTabMode } from '@/features/filter-user-profile-tab';
 import { MapsTab, CollectionsTab } from '@/widgets/mypage-tab-content';
 import { useCurrentUserId } from '@/entities/user';
-import { useCurrentTab } from '@/shared/lib';
 import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
 
 export function UserProfilePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const isOwner = currentUserId === id;
 
@@ -31,11 +29,11 @@ export function UserProfilePage() {
   const [tabMode, setTabMode] = useState<MyPageTabMode | UserProfileTabMode>('maps');
 
   const handleSettingsPress = () => {
-    router.push(`/(tabs)/${currentTab}/settings` as any);
+    router.push('/settings');
   };
 
   const handleSchedulePress = () => {
-    router.push(`/(tabs)/${currentTab}/schedule` as any);
+    router.push('/schedule');
   };
 
   // 自分のプロフィールの場合は設定・スケジュールボタンを表示
