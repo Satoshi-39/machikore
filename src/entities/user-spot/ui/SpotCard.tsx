@@ -11,7 +11,8 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions, Share, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
+import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
@@ -364,7 +365,11 @@ export function SpotCard({
       {/* 住所または街情報 */}
       {(address || machiName) && (
         <View className="flex-row items-center mb-2">
-          <Ionicons name="location-outline" size={16} color={colors.text.secondary} />
+          <AddressPinIcon
+            size={14}
+            color={LOCATION_ICONS.ADDRESS.color}
+            holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight}
+          />
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
             {address || machiName}
           </Text>
