@@ -4,6 +4,7 @@ import { DefaultTheme, DarkTheme, ThemeProvider } from '@react-navigation/native
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import Toast, { BaseToast, type BaseToastProps } from 'react-native-toast-message';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import 'react-native-reanimated';
 import '../global.css';
 
@@ -78,6 +79,7 @@ function RootNavigator() {
 
   return (
     <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
+      <BottomSheetModalProvider>
       <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
@@ -261,6 +263,7 @@ function RootNavigator() {
         </Stack>
         <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         <Toast config={createToastConfig(isDarkMode)} />
+      </BottomSheetModalProvider>
       </ThemeProvider>
     );
   }

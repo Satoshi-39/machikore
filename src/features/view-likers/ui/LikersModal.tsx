@@ -1,14 +1,17 @@
 /**
  * いいねしたユーザー一覧モーダル
  * マップといいねスポット両方に対応
+ * Modal + @gorhom/bottom-sheetの組み合わせで実装
  */
 
-import React from 'react';
-import { View, Text, Pressable, FlatList, Image, ActivityIndicator, Dimensions } from 'react-native';
+import React, { useRef, useCallback, useMemo } from 'react';
+import { View, Text, Pressable, Image, ActivityIndicator, Modal, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { useMapLikers, useSpotLikers } from '@/entities/like';
-import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 
 interface LikersModalProps {
   visible: boolean;
@@ -56,76 +59,110 @@ function UserItem({ user, onPress }: UserItemProps) {
   );
 }
 
-interface LikersContentProps {
-  mapId?: string | null;
-  spotId?: string | null;
-  onUserPress?: (userId: string) => void;
-}
+export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: LikersModalProps) {
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const isDarkMode = useIsDarkMode();
 
-function LikersContent({ mapId, spotId, onUserPress }: LikersContentProps) {
-  const { close } = useBottomSheet();
-  const { data: mapLikers, isLoading: isLoadingMap } = useMapLikers(mapId ?? null);
-  const { data: spotLikers, isLoading: isLoadingSpot } = useSpotLikers(spotId ?? null);
+  const { data: mapLikers, isLoading: isLoadingMap } = useMapLikers(visible && mapId ? mapId : null);
+  const { data: spotLikers, isLoading: isLoadingSpot } = useSpotLikers(visible && spotId ? spotId : null);
 
   const likers = mapId ? mapLikers : spotLikers;
   const isLoading = mapId ? isLoadingMap : isLoadingSpot;
-  const screenHeight = Dimensions.get('window').height;
-  const sheetHeight = screenHeight * 0.6; // 画面の60%
 
-  const handleUserPress = (userId: string) => {
-    close();
+  // 画面の60%の高さをスナップポイントとして設定
+  const snapPoints = useMemo(() => ['60%'], []);
+
+  // シート変更時のハンドラー（閉じた時）
+  const handleSheetChanges = useCallback((index: number) => {
+    if (index === -1) {
+      onClose();
+    }
+  }, [onClose]);
+
+  // ユーザータップ時
+  const handleUserPress = useCallback((userId: string) => {
+    bottomSheetRef.current?.close();
     setTimeout(() => onUserPress?.(userId), 300);
-  };
+  }, [onUserPress]);
+
+  // 背景のレンダリング
+  const renderBackdrop = useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        opacity={0.5}
+        pressBehavior="close"
+      />
+    ),
+    []
+  );
+
+  if (!visible) {
+    return null;
+  }
 
   return (
-    <View className="bg-surface dark:bg-dark-surface-elevated rounded-t-3xl shadow-2xl" style={{ height: sheetHeight }}>
-      {/* ドラッグハンドルバー */}
-      <View className="items-center pt-3 pb-2">
-        <View className="w-10 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
-      </View>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="none"
+      statusBarTranslucent
+      onRequestClose={onClose}
+    >
+      <GestureHandlerRootView style={styles.container}>
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={0}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+          enablePanDownToClose={true}
+          enableDynamicSizing={false}
+          animateOnMount={false}
+          backdropComponent={renderBackdrop}
+          backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
+          handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
+        >
+          {/* ヘッダー */}
+          <View className="items-center pb-3 border-b border-border dark:border-dark-border">
+            <Text className="text-base font-bold text-foreground dark:text-dark-foreground">
+              いいねしたユーザー
+            </Text>
+          </View>
 
-      {/* ヘッダー */}
-      <View className="items-center pb-3 border-b border-border dark:border-dark-border">
-        <Text className="text-base font-bold text-foreground dark:text-dark-foreground">
-          いいねしたユーザー
-        </Text>
-      </View>
-
-      {/* コンテンツ */}
-      {isLoading ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-        </View>
-      ) : likers && likers.length > 0 ? (
-        <FlatList
-          data={likers}
-          keyExtractor={(item) => item.likeId}
-          renderItem={({ item }) => (
-            <UserItem
-              user={item.user}
-              onPress={() => handleUserPress(item.user.id)}
+          {/* コンテンツ */}
+          {isLoading ? (
+            <View className="flex-1 items-center justify-center">
+              <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            </View>
+          ) : likers && likers.length > 0 ? (
+            <BottomSheetFlatList
+              data={likers}
+              keyExtractor={(item: typeof likers[number]) => item.likeId}
+              renderItem={({ item }: { item: typeof likers[number] }) => (
+                <UserItem
+                  user={item.user}
+                  onPress={() => handleUserPress(item.user.id)}
+                />
+              )}
             />
+          ) : (
+            <View className="flex-1 items-center justify-center">
+              <Ionicons name="heart-outline" size={48} color={colors.gray[400]} />
+              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+                まだいいねがありません
+              </Text>
+            </View>
           )}
-          className="flex-1"
-        />
-      ) : (
-        <View className="flex-1 items-center justify-center">
-          <Ionicons name="heart-outline" size={48} color={colors.gray[400]} />
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-            まだいいねがありません
-          </Text>
-        </View>
-      )}
-    </View>
+        </BottomSheet>
+      </GestureHandlerRootView>
+    </Modal>
   );
 }
 
-export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: LikersModalProps) {
-  if (!visible) return null;
-
-  return (
-    <BottomSheet onClose={onClose}>
-      <LikersContent mapId={mapId} spotId={spotId} onUserPress={onUserPress} />
-    </BottomSheet>
-  );
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
