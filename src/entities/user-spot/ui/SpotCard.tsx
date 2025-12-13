@@ -49,6 +49,8 @@ interface SpotCardProps {
   spot: SpotWithMasterSpot | SpotWithDetails | UserSpotSearchResult;
   currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用、いいね機能にも使用）
   machiName?: string;
+  /** コンテナの幅（画像サイズ計算用）。省略時はscreenWidth - 32 */
+  containerWidth?: number;
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
   onMapPress?: (mapId: string) => void;
@@ -63,6 +65,7 @@ export function SpotCard({
   spot,
   currentUserId,
   machiName,
+  containerWidth: containerWidthProp,
   onPress,
   onUserPress,
   onMapPress,
@@ -103,6 +106,8 @@ export function SpotCard({
   // 画像拡大表示用
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImages, closeImage } = useImageViewer();
   const screenWidth = Dimensions.get('window').width;
+  // コンテナ幅：指定があればそれを使用、なければscreenWidth - 32（デフォルトのパディング分）
+  const containerWidth = containerWidthProp ?? (screenWidth - 32);
 
   const avatarUri = user?.avatar_url ?? undefined;
   const isOwner = currentUserId && spot.user_id === currentUserId;
@@ -304,21 +309,20 @@ export function SpotCard({
             // ローディング中はプレースホルダーを表示（高さを確保してちらつき防止）
             <View
               className="bg-muted dark:bg-dark-muted rounded-lg"
-              style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.6 }}
+              style={{ width: containerWidth, height: containerWidth * 0.6 }}
             />
           ) : (
             <View className="flex-row flex-wrap" style={{ gap: 4 }}>
               {images.slice(0, 4).map((image, index) => {
                 const isLastWithMore = index === 3 && images.length > 4;
-                const halfSize = (screenWidth - 32 - 4) / 2; // 2列用サイズ
-                const fullWidth = screenWidth - 32; // 1列用サイズ（横幅いっぱい）
+                const halfSize = (containerWidth - 4) / 2; // 2列用サイズ（gapの4pxを引く）
 
                 // 1枚の場合は横幅いっぱい、3枚の場合の3枚目も横幅いっぱい
                 const isSingleImage = images.length === 1;
                 const isThirdOfThree = images.length === 3 && index === 2;
                 const isFullWidth = isSingleImage || isThirdOfThree;
-                const imageWidth = isFullWidth ? fullWidth : halfSize;
-                const imageHeight = isSingleImage ? fullWidth * 0.6 : halfSize; // 1枚の時は少し低めに
+                const imageWidth = isFullWidth ? containerWidth : halfSize;
+                const imageHeight = isSingleImage ? containerWidth * 0.6 : halfSize; // 1枚の時は少し低めに
 
                 return (
                   <Pressable

@@ -3,7 +3,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Linking, ActivityIndicator } from 'react-native';
+import { View, Text, Pressable, Linking, ActivityIndicator, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
@@ -68,6 +68,9 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
+  const screenWidth = Dimensions.get('window').width;
+  // SpotCard用のコンテナ幅計算: 画面幅 - BottomSheetのpx-4(32px) - カードのp-4(32px) - border(2px)
+  const spotCardContainerWidth = screenWidth - 32 - 32 - 2;
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const [showMapSelectSheet, setShowMapSelectSheet] = useState(false);
@@ -350,6 +353,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                   <SpotCard
                     spot={userSpot}
                     currentUserId={currentUserId}
+                    containerWidth={spotCardContainerWidth}
                     onPress={() => handleSpotPress(userSpot.id)}
                     onUserPress={handleUserPress}
                     onMapPress={handleMapPress}
