@@ -16,6 +16,7 @@ import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
 import { useDeleteMap } from '@/entities/map/api';
+import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -182,13 +183,16 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
           )}
         </Pressable>
 
-        {/* ユーザー名（タップでプロフィールへ） */}
+        {/* ユーザー名と時間 */}
         <View className="flex-1">
           <Pressable onPress={() => onUserPress?.(map.user_id)} className="self-start">
             <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
               {user?.display_name || user?.username || 'ユーザー'}
             </Text>
           </Pressable>
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+            {getRelativeSpotTime(map.created_at)}
+          </Text>
         </View>
 
         {/* 記事アイコン（オーナーは常に表示、他ユーザーは公開時のみ） */}
