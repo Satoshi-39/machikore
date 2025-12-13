@@ -103,19 +103,26 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSe
   // オーバーレイ時: 入力フィールド + 履歴/検索結果
   return (
     <View className="flex-1">
-      {/* 検索結果がある場合は編集不可のヘッダー */}
+      {/* 検索結果がある場合は編集不可のヘッダー（タップで再検索モードへ） */}
       {submittedQuery ? (
         <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3">
           <View className="flex-row items-center gap-3">
             <TouchableOpacity onPress={handleClose} className="p-1">
               <Ionicons name="arrow-back" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
             </TouchableOpacity>
-            <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">
+            <Pressable
+              onPress={() => {
+                // 検索結果をクリアして入力モードに戻る
+                setSubmittedQuery('');
+                setTimeout(() => inputRef.current?.focus(), 100);
+              }}
+              className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2"
+            >
               <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
               <Text className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground" numberOfLines={1}>
                 {submittedQuery}
               </Text>
-            </View>
+            </Pressable>
           </View>
         </View>
       ) : (
