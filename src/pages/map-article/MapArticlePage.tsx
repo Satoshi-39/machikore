@@ -99,7 +99,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   // ローディング状態
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
         <PageHeader title="記事" />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -111,7 +111,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   // データなし
   if (!articleData) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
+      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
         <PageHeader title="記事" />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="document-text-outline" size={48} color={colors.gray[300]} />
