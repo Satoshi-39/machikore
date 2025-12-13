@@ -70,6 +70,14 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
     router.push(`/(tabs)/discover/users/${userId}`);
   };
 
+  const handleSpotCommentPress = (spotId: string) => {
+    router.push(`/(tabs)/discover/comments/spots/${spotId}`);
+  };
+
+  const handleMapCommentPress = (mapId: string) => {
+    router.push(`/(tabs)/discover/comments/maps/${mapId}`);
+  };
+
   // 最新タブ: スポットとマップを混合して新着順
   const renderLatestResults = () => {
     const allItems: Array<{ type: 'spot' | 'map'; item: any; createdAt: string }> = [
@@ -97,10 +105,20 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
                 spot={item.item}
                 currentUserId={currentUser?.id}
                 onPress={() => handleSpotPress(item.item.id)}
+                onUserPress={handleUserPress}
+                onCommentPress={handleSpotCommentPress}
               />
             );
           }
-          return <MapCard map={item.item} currentUserId={currentUser?.id} onPress={() => handleMapPress(item.item.id)} />;
+          return (
+            <MapCard
+              map={item.item}
+              currentUserId={currentUser?.id}
+              onPress={() => handleMapPress(item.item.id)}
+              onUserPress={handleUserPress}
+              onCommentPress={handleMapCommentPress}
+            />
+          );
         }}
         showsVerticalScrollIndicator={false}
       />
@@ -134,10 +152,20 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
                 spot={item.item}
                 currentUserId={currentUser?.id}
                 onPress={() => handleSpotPress(item.item.id)}
+                onUserPress={handleUserPress}
+                onCommentPress={handleSpotCommentPress}
               />
             );
           }
-          return <MapCard map={item.item} currentUserId={currentUser?.id} onPress={() => handleMapPress(item.item.id)} />;
+          return (
+            <MapCard
+              map={item.item}
+              currentUserId={currentUser?.id}
+              onPress={() => handleMapPress(item.item.id)}
+              onUserPress={handleUserPress}
+              onCommentPress={handleMapCommentPress}
+            />
+          );
         }}
         showsVerticalScrollIndicator={false}
       />
@@ -179,6 +207,8 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
               spot={item}
               currentUserId={currentUser?.id}
               onPress={() => handleSpotPress(item.id)}
+              onUserPress={handleUserPress}
+              onCommentPress={handleSpotCommentPress}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -200,7 +230,13 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
           data={maps}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <MapCard map={item} currentUserId={currentUser?.id} onPress={() => handleMapPress(item.id)} />
+            <MapCard
+              map={item}
+              currentUserId={currentUser?.id}
+              onPress={() => handleMapPress(item.id)}
+              onUserPress={handleUserPress}
+              onCommentPress={handleMapCommentPress}
+            />
           )}
           showsVerticalScrollIndicator={false}
         />

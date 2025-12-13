@@ -8,26 +8,57 @@
  */
 
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { View, Pressable } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { MyPageProfile } from '@/widgets/mypage-profile';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
 import { UserProfileTabFilter, type UserProfileTabMode } from '@/features/filter-user-profile-tab';
 import { MapsTab, CollectionsTab } from '@/widgets/mypage-tab-content';
 import { useCurrentUserId } from '@/entities/user';
+import { useCurrentTab } from '@/shared/lib';
 import { PageHeader } from '@/shared/ui';
+import { colors } from '@/shared/config';
 
 export function UserProfilePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const router = useRouter();
+  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const isOwner = currentUserId === id;
 
   // 自分の場合はMyPageTabMode、他人の場合はUserProfileTabMode
   const [tabMode, setTabMode] = useState<MyPageTabMode | UserProfileTabMode>('maps');
 
+  const handleSettingsPress = () => {
+    router.push(`/(tabs)/${currentTab}/settings` as any);
+  };
+
+  const handleSchedulePress = () => {
+    router.push(`/(tabs)/${currentTab}/schedule` as any);
+  };
+
+  // 自分のプロフィールの場合は設定・スケジュールボタンを表示
+  const rightComponent = isOwner ? (
+    <View className="flex-row gap-2">
+      <Pressable
+        onPress={handleSchedulePress}
+        className="w-10 h-10 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+      >
+        <Ionicons name="calendar-outline" size={24} color={colors.text.secondary} />
+      </Pressable>
+      <Pressable
+        onPress={handleSettingsPress}
+        className="w-10 h-10 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+      >
+        <Ionicons name="settings-outline" size={24} color={colors.text.secondary} />
+      </Pressable>
+    </View>
+  ) : undefined;
+
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-      <PageHeader title="プロフィール" />
+      <PageHeader title="プロフィール" rightComponent={rightComponent} />
 
       {/* プロフィールセクション */}
       <MyPageProfile userId={id} />
@@ -37,6 +68,7 @@ export function UserProfilePage() {
         <MyPageTabFilter
           tabMode={tabMode as MyPageTabMode}
           onTabModeChange={setTabMode}
+          userId={id}
         />
       ) : (
         <UserProfileTabFilter

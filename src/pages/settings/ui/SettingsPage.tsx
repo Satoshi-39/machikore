@@ -12,6 +12,7 @@ import { useSignOut } from '@/features/auth';
 import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useAppSettingsStore } from '@/shared/lib/store';
+import { useCurrentTab } from '@/shared/lib';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
@@ -111,6 +112,7 @@ function SettingsToggle({
 
 export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   const router = useRouter();
+  const currentTab = useCurrentTab();
   const { signOut } = useSignOut();
 
   // ストアから設定値を取得
@@ -157,7 +159,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="person-outline"
             label="プロフィール編集"
-            onPress={() => router.push('/edit-profile')}
+            onPress={() => router.push(`/(tabs)/${currentTab}/edit-profile` as any)}
           />
           <SettingsItem
             icon="mail-outline"
@@ -186,7 +188,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="notifications-outline"
             label="通知設定"
-            onPress={() => router.push('/settings/notifications')}
+            onPress={() => router.push(`/(tabs)/${currentTab}/settings/notifications` as any)}
           />
         </SettingsSection>
 

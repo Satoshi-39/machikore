@@ -9,6 +9,10 @@ export default function UserLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="likes" />
+      <Stack.Screen name="followers" />
+      <Stack.Screen name="following" />
+      <Stack.Screen name="collections" />
+      <Stack.Screen name="bookmarks" />
     </Stack>
   );
 }

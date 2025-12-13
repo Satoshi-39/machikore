@@ -9,19 +9,29 @@ import { Pressable, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 
 export type MyPageTabMode = 'maps';
 
 interface MyPageTabFilterProps {
   tabMode: MyPageTabMode;
   onTabModeChange: (mode: MyPageTabMode) => void;
+  /** 表示対象のユーザーID（他ユーザーのプロフィール用） */
+  userId?: string;
 }
 
 export function MyPageTabFilter({
   tabMode,
   onTabModeChange,
+  userId,
 }: MyPageTabFilterProps) {
   const router = useRouter();
+  const currentTab = useCurrentTab();
+
+  // userIdがある場合は他ユーザーのプロフィール画面からの遷移
+  const basePath = userId
+    ? `/(tabs)/${currentTab}/users/${userId}`
+    : `/(tabs)/${currentTab}`;
 
   return (
     <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
@@ -46,7 +56,7 @@ export function MyPageTabFilter({
         </Pressable>
         {/* コレクションボタン（別ページへ遷移） */}
         <Pressable
-          onPress={() => router.push('/(tabs)/mypage/collections' as any)}
+          onPress={() => router.push(`${basePath}/collections` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons
@@ -57,7 +67,7 @@ export function MyPageTabFilter({
         </Pressable>
         {/* いいねボタン（別ページへ遷移） */}
         <Pressable
-          onPress={() => router.push('/(tabs)/mypage/likes')}
+          onPress={() => router.push(`${basePath}/likes` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons
@@ -68,7 +78,7 @@ export function MyPageTabFilter({
         </Pressable>
         {/* ブックマークボタン（別ページへ遷移） */}
         <Pressable
-          onPress={() => router.push('/(tabs)/mypage/bookmarks')}
+          onPress={() => router.push(`${basePath}/bookmarks` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons

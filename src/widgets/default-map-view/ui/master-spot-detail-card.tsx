@@ -217,8 +217,8 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
   const handleCommentPress = useCallback((spotId: string) => {
     onClose();
-    router.push(`/comments/spot/${spotId}` as any);
-  }, [onClose, router]);
+    router.push(`/(tabs)/${currentTab}/comments/spots/${spotId}` as any);
+  }, [onClose, router, currentTab]);
 
   return (
     <>
