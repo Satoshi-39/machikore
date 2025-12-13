@@ -341,17 +341,21 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               </Text>
             </View>
           ) : (
-            <View className="-mx-4">
+            <View className="gap-3">
               {userSpots.map((userSpot) => (
-                <SpotCard
+                <View
                   key={userSpot.id}
-                  spot={userSpot}
-                  currentUserId={currentUserId}
-                  onPress={() => handleSpotPress(userSpot.id)}
-                  onUserPress={handleUserPress}
-                  onMapPress={handleMapPress}
-                  onCommentPress={handleCommentPress}
-                />
+                  className="rounded-xl overflow-hidden border border-border dark:border-dark-border"
+                >
+                  <SpotCard
+                    spot={userSpot}
+                    currentUserId={currentUserId}
+                    onPress={() => handleSpotPress(userSpot.id)}
+                    onUserPress={handleUserPress}
+                    onMapPress={handleMapPress}
+                    onCommentPress={handleCommentPress}
+                  />
+                </View>
               ))}
             </View>
           )}
