@@ -21,12 +21,10 @@ export function useCreateSpot() {
       if (!params.mapId) {
         throw new Error('マップIDが必要です');
       }
-      if (!params.machiId) {
-        throw new Error('街IDが必要です');
-      }
       if (!params.name) {
         throw new Error('スポット名が必要です');
       }
+      // machiIdは街が見つからない場合はnullでも可
       // googlePlaceIdはピン刺し・現在地登録の場合はnullでも可
 
       console.log('✅ useCreateSpot: バリデーション成功');

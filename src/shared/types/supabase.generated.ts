@@ -999,7 +999,7 @@ export type Database = {
           latitude: number | null
           likes_count: number | null
           longitude: number | null
-          machi_id: string
+          machi_id: string | null
           map_id: string
           master_spot_id: string | null
           order_index: number | null
@@ -1020,7 +1020,7 @@ export type Database = {
           latitude?: number | null
           likes_count?: number | null
           longitude?: number | null
-          machi_id: string
+          machi_id?: string | null
           map_id: string
           master_spot_id?: string | null
           order_index?: number | null

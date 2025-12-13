@@ -157,7 +157,7 @@ export interface SpotRow {
   user_id: string;
   map_id: string;
   master_spot_id: string; // master_spotsテーブルへの参照
-  machi_id: string;
+  machi_id: string | null; // 街が見つからない場合はnull
   custom_name: string | null; // ユーザー独自の名前（任意）
   description: string | null; // 旧memoカラム
   tags: string | null; // JSON string array: ["tag1", "tag2"]

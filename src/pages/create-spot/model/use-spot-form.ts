@@ -151,23 +151,21 @@ export function useSpotForm() {
       return;
     }
 
-    // スポットに紐づけるmachiを特定
-    let machiId: string;
+    // スポットに紐づけるmachiを特定（見つからない場合はnull）
+    let machiId: string | null = null;
     try {
       const machi = await findMachiForSpot(
         selectedPlace.latitude,
         selectedPlace.longitude,
         selectedPlace.formattedAddress ?? undefined
       );
-      if (!machi) {
-        Alert.alert('エラー', '近くの街が見つかりません');
-        return;
+      machiId = machi?.id ?? null;
+      if (!machiId) {
+        console.log('最寄りの街が見つかりませんでした。machi_idなしで登録します');
       }
-      machiId = machi.id;
     } catch (error) {
       console.error('最寄りの街の取得に失敗しました:', error);
-      Alert.alert('エラー', '街の情報を取得できませんでした');
-      return;
+      // エラーが発生しても続行（machi_idはnullのまま）
     }
 
     // スポット作成（Google Places検索結果か手動入力かで分岐）

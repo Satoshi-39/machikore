@@ -19,7 +19,7 @@ type UserSpotRow = Database['public']['Tables']['user_spots']['Row'];
 export interface CreateSpotInput {
   userId: string;
   mapId: string;
-  machiId: string;
+  machiId?: string | null;  // 街が見つからない場合はnull
   // master_spot情報
   name: string;
   latitude: number;
@@ -137,7 +137,7 @@ async function getOrCreateMasterSpot(input: {
   name: string;
   latitude: number;
   longitude: number;
-  machiId: string;
+  machiId?: string | null;
   googlePlaceId?: string | null;
   googleFormattedAddress?: string | null;
   googleShortAddress?: string | null;
@@ -156,7 +156,7 @@ async function getOrCreateMasterSpot(input: {
       .single();
 
     if (existing) {
-      // 既存のmaster_spotにmachi_idがない場合は更新
+      // 既存のmaster_spotにmachi_idがない場合は更新（新しいmachiIdがある場合のみ）
       if (!existing.machi_id && input.machiId) {
         await supabase
           .from('master_spots')
@@ -172,7 +172,7 @@ async function getOrCreateMasterSpot(input: {
     name: input.name,
     latitude: input.latitude,
     longitude: input.longitude,
-    machi_id: input.machiId,
+    machi_id: input.machiId ?? null,
     google_place_id: input.googlePlaceId ?? null,
     google_formatted_address: input.googleFormattedAddress ?? null,
     google_short_address: input.googleShortAddress ?? null,
@@ -225,7 +225,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
-    machi_id: input.machiId,
+    machi_id: input.machiId ?? null,
     latitude: input.googlePlaceId ? null : input.latitude,
     longitude: input.googlePlaceId ? null : input.longitude,
     google_formatted_address: input.googlePlaceId ? null : input.googleFormattedAddress ?? null,
