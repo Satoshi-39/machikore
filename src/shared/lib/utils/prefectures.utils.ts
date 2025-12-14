@@ -1,25 +1,84 @@
 /**
- * 都道府県データ読み込みユーティリティ
+ * 都道府県/州データ読み込みユーティリティ
  */
 
-import prefecturesData from '@/shared/assets/data/prefectures.json';
 import type { PrefectureRow } from '@/shared/types/database.types';
 
+// 各国の都道府県/州データをインポート
+import jpPrefectures from '@/shared/assets/data/prefectures/jp.json';
+import usPrefectures from '@/shared/assets/data/prefectures/us.json';
+import krPrefectures from '@/shared/assets/data/prefectures/kr.json';
+import twPrefectures from '@/shared/assets/data/prefectures/tw.json';
+import cnPrefectures from '@/shared/assets/data/prefectures/cn.json';
+import thPrefectures from '@/shared/assets/data/prefectures/th.json';
+
+// 都道府県/州データの型（JSONから読み込む形式）
+interface PrefectureJsonData {
+  id: string;
+  name: string;
+  name_en?: string;
+  name_kana: string;
+  region_id: string;
+  latitude: number | null;
+  longitude: number | null;
+  country_code: string;
+}
+
+// 国コードと都道府県/州データのマッピング
+const prefecturesByCountry: Record<string, PrefectureJsonData[]> = {
+  jp: jpPrefectures as PrefectureJsonData[],
+  us: usPrefectures as PrefectureJsonData[],
+  kr: krPrefectures as PrefectureJsonData[],
+  tw: twPrefectures as PrefectureJsonData[],
+  cn: cnPrefectures as PrefectureJsonData[],
+  th: thPrefectures as PrefectureJsonData[],
+};
+
 /**
- * 都道府県データを取得（JSONから）
+ * JSONデータをPrefectureRowに変換
+ */
+function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow {
+  const now = new Date().toISOString();
+  return {
+    id: prefecture.id,
+    name: prefecture.name,
+    name_kana: prefecture.name_kana,
+    name_translations: prefecture.name_en ? JSON.stringify({ en: prefecture.name_en }) : null,
+    region_id: prefecture.region_id,
+    latitude: prefecture.latitude,
+    longitude: prefecture.longitude,
+    country_code: prefecture.country_code,
+    created_at: now,
+    updated_at: now,
+  };
+}
+
+/**
+ * 全ての都道府県/州データを取得（JSONから）
  *
  * Note: これは初期データ読み込み専用です。
  * アプリ内でのデータ取得は src/shared/api/sqlite/prefectures.ts を使用してください。
  */
 export function getPrefecturesData(): PrefectureRow[] {
-  const now = new Date().toISOString();
+  return Object.values(prefecturesByCountry)
+    .flat()
+    .map(toPrefectureRow);
+}
 
-  return prefecturesData.map((p) => ({
-    ...p,
-    latitude: 'latitude' in p ? p.latitude : null,
-    longitude: 'longitude' in p ? p.longitude : null,
-    name_translations: null, // TODO: Add translations when available
-    created_at: now,
-    updated_at: now,
-  })) as PrefectureRow[];
+/**
+ * 特定の国の都道府県/州データを取得
+ */
+export function getPrefecturesByCountry(countryCode: string): PrefectureRow[] {
+  const prefectures = prefecturesByCountry[countryCode];
+  if (!prefectures) {
+    return [];
+  }
+  return prefectures.map(toPrefectureRow);
+}
+
+/**
+ * 利用可能な国コードの一覧を取得
+ */
+export function getAvailablePrefectureCountryCodes(): string[] {
+  return Object.keys(prefecturesByCountry);
 }

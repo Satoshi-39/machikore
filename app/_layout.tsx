@@ -9,7 +9,7 @@ import 'react-native-reanimated';
 import '../global.css';
 
 import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
-import { initDatabase, initMapbox } from '@/shared/lib/init';
+import { initDatabase, initMapbox, initRevenueCat } from '@/shared/lib/init';
 import { colors } from '@/shared/config';
 
 // カスタムToast設定（ダークモード対応）
@@ -278,7 +278,11 @@ export default function RootLayout() {
 
     // データベース初期化（非同期処理）
     initDatabase()
-      .then(() => setIsReady(true))
+      .then(() => {
+        // RevenueCat初期化（非同期、失敗してもアプリは動作継続）
+        initRevenueCat();
+        setIsReady(true);
+      })
       .catch((err) => {
         console.error('初期化エラー:', err);
         setError(err);

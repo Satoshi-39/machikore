@@ -481,3 +481,18 @@ export const INPUT_LIMITS = {
   // 報告
   REPORT_DESCRIPTION: 500,
 } as const;
+
+// ===============================
+// サブスクリプション
+// ===============================
+
+export const SUBSCRIPTION = {
+  /** 無料プランのスポット上限（マップごと） */
+  FREE_SPOT_LIMIT: 30,
+  /** プレミアムプランのスポット上限（マップごと） */
+  PREMIUM_SPOT_LIMIT: 100,
+  /** プレミアムプラン月額価格（円） */
+  PREMIUM_PRICE: 480,
+  /** RevenueCat Entitlement ID */
+  ENTITLEMENT_ID: 'premium',
+} as const;

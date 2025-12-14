@@ -20,6 +20,7 @@ interface Env {
   EXPO_PUBLIC_MAPBOX_STYLE_URL?: string;
   EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID?: string;
   EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID?: string;
+  EXPO_PUBLIC_REVENUECAT_API_KEY?: string;
 }
 
 // ===============================
@@ -72,6 +73,9 @@ export const ENV = {
   // Google OAuth
   GOOGLE_OAUTH_IOS_CLIENT_ID: getEnvVar('EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID', ''),
   GOOGLE_OAUTH_ANDROID_CLIENT_ID: getEnvVar('EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID', ''),
+
+  // RevenueCat
+  REVENUECAT_API_KEY: getEnvVar('EXPO_PUBLIC_REVENUECAT_API_KEY', ''),
 
   // 環境
   ENV: getEnvVar('EXPO_PUBLIC_ENV', 'development') as

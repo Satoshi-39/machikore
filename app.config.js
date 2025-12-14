@@ -4,7 +4,7 @@ module.exports = {
     slug: 'machikore',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/images/machikore8.png',
+    icon: './assets/images/machikore12.png',
     scheme: 'machikore',
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
@@ -82,6 +82,7 @@ module.exports = {
       EXPO_PUBLIC_MAPBOX_STYLE_URL: process.env.EXPO_PUBLIC_MAPBOX_STYLE_URL,
       EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID: process.env.EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID,
       EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID: process.env.EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID,
+      EXPO_PUBLIC_REVENUECAT_API_KEY: process.env.EXPO_PUBLIC_REVENUECAT_API_KEY,
     },
   },
 };

@@ -19,8 +19,14 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '@/shared/api/supabase/client';
 import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
 import { getUserById as getUserByIdFromSupabase } from '@/shared/api/supabase/users';
+import {
+  loginToRevenueCat,
+  logoutFromRevenueCat,
+  isPremiumActive,
+} from '@/shared/api/revenuecat';
 import { syncUserToSQLite } from '@/shared/lib/sync';
 import { useUserStore } from '@/entities/user/model';
+import { useSubscriptionStore } from '@/entities/subscription';
 import type { User } from '@/entities/user/model';
 
 interface AuthProviderProps {
@@ -38,6 +44,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isInitializing, setIsInitializing] = useState(true);
   const { setUser, setAuthState } = useUserStore();
+  const { setSubscriptionStatus, reset: resetSubscription } = useSubscriptionStore();
 
   useEffect(() => {
     let isMounted = true;
@@ -67,6 +74,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
           if (userData && isMounted) {
             setUser(userData as User);
             setAuthState('authenticated');
+          }
+
+          // RevenueCatにログインしてサブスクリプション状態を取得
+          try {
+            const customerInfo = await loginToRevenueCat(session.user.id);
+            const isPremium = isPremiumActive(customerInfo);
+            if (isMounted) {
+              setSubscriptionStatus(isPremium, customerInfo);
+            }
+          } catch (err) {
+            console.warn('[AuthProvider] RevenueCatログインエラー（続行）:', err);
           }
         } else {
           // セッション復元失敗 → ゲストモード（認証なしでも閲覧可能）
@@ -100,16 +118,37 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     setUser(userData as User);
                     setAuthState('authenticated');
                   }
+
+                  // RevenueCatにログインしてサブスクリプション状態を取得
+                  try {
+                    const customerInfo = await loginToRevenueCat(user.id);
+                    const isPremium = isPremiumActive(customerInfo);
+                    if (isMounted) {
+                      setSubscriptionStatus(isPremium, customerInfo);
+                    }
+                  } catch (rcErr) {
+                    console.warn('[AuthProvider] RevenueCatログインエラー（続行）:', rcErr);
+                  }
                 } catch (err) {
                   console.error('[AuthProvider] SIGNED_IN処理エラー:', err);
                 }
               })();
             } else if (event === 'SIGNED_OUT') {
               // サインアウト時
-              if (isMounted) {
-                setUser(null);
-                setAuthState('unauthenticated');
-              }
+              (async () => {
+                // RevenueCatからログアウト
+                try {
+                  await logoutFromRevenueCat();
+                } catch (rcErr) {
+                  console.warn('[AuthProvider] RevenueCatログアウトエラー:', rcErr);
+                }
+
+                if (isMounted) {
+                  setUser(null);
+                  setAuthState('unauthenticated');
+                  resetSubscription();
+                }
+              })();
             }
             // TOKEN_REFRESHED: Supabaseが自動でSecureStoreに保存するので何もしない
           });

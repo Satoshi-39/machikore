@@ -31,6 +31,7 @@ export function CountryLabels({ geoJson, onPress }: CountryLabelsProps) {
       onPress({
         id,
         name,
+        name_en: name, // 英語名は表示名と同じ（ラベルからは英語名取得できないため）
         name_kana: '',
         latitude: 0,
         longitude: 0,

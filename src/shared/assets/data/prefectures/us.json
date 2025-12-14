@@ -1,0 +1,512 @@
+[
+  {
+    "id": "us_ar",
+    "name": "アーカンソー州",
+    "name_en": "Arkansas",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 34.75037,
+    "longitude": -92.50044,
+    "country_code": "us"
+  },
+  {
+    "id": "us_dc",
+    "name": "コロンビア特別区",
+    "name_en": "District of Columbia",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 38.91706,
+    "longitude": -77.00025,
+    "country_code": "us"
+  },
+  {
+    "id": "us_de",
+    "name": "デラウェア州",
+    "name_en": "Delaware",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 39.00039,
+    "longitude": -75.49992,
+    "country_code": "us"
+  },
+  {
+    "id": "us_fl",
+    "name": "フロリダ州",
+    "name_en": "Florida",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 28.75054,
+    "longitude": -82.5001,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ga",
+    "name": "ジョージア州",
+    "name_en": "Georgia",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 32.75042,
+    "longitude": -83.50018,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ks",
+    "name": "カンザス州",
+    "name_en": "Kansas",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 38.50029,
+    "longitude": -98.50063,
+    "country_code": "us"
+  },
+  {
+    "id": "us_la",
+    "name": "ルイジアナ州",
+    "name_en": "Louisiana",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 31.00047,
+    "longitude": -92.0004,
+    "country_code": "us"
+  },
+  {
+    "id": "us_md",
+    "name": "メリーランド州",
+    "name_en": "Maryland",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 39.00039,
+    "longitude": -76.74997,
+    "country_code": "us"
+  },
+  {
+    "id": "us_mo",
+    "name": "ミズーリ州",
+    "name_en": "Missouri",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 38.25031,
+    "longitude": -92.50046,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ms",
+    "name": "ミシシッピ州",
+    "name_en": "Mississippi",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 32.75041,
+    "longitude": -89.75036,
+    "country_code": "us"
+  },
+  {
+    "id": "us_nc",
+    "name": "ノースカロライナ州",
+    "name_en": "North Carolina",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 35.50069,
+    "longitude": -80.00032,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ok",
+    "name": "オクラホマ州",
+    "name_en": "Oklahoma",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 35.49209,
+    "longitude": -97.50328,
+    "country_code": "us"
+  },
+  {
+    "id": "us_sc",
+    "name": "サウスカロライナ州",
+    "name_en": "South Carolina",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 34.00043,
+    "longitude": -81.00009,
+    "country_code": "us"
+  },
+  {
+    "id": "us_tn",
+    "name": "テネシー州",
+    "name_en": "Tennessee",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 35.75035,
+    "longitude": -86.25027,
+    "country_code": "us"
+  },
+  {
+    "id": "us_tx",
+    "name": "テキサス州",
+    "name_en": "Texas",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 31.25044,
+    "longitude": -99.25061,
+    "country_code": "us"
+  },
+  {
+    "id": "us_wv",
+    "name": "ウェストバージニア州",
+    "name_en": "West Virginia",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 38.50038,
+    "longitude": -80.50009,
+    "country_code": "us"
+  },
+  {
+    "id": "us_al",
+    "name": "アラバマ州",
+    "name_en": "Alabama",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 32.75041,
+    "longitude": -86.75026,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ct",
+    "name": "コネチカット州",
+    "name_en": "Connecticut",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 41.66704,
+    "longitude": -72.66648,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ia",
+    "name": "アイオワ州",
+    "name_en": "Iowa",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 42.00027,
+    "longitude": -93.50049,
+    "country_code": "us"
+  },
+  {
+    "id": "us_il",
+    "name": "イリノイ州",
+    "name_en": "Illinois",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 40.00032,
+    "longitude": -89.25037,
+    "country_code": "us"
+  },
+  {
+    "id": "us_in",
+    "name": "インディアナ州",
+    "name_en": "Indiana",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 40.00032,
+    "longitude": -86.25027,
+    "country_code": "us"
+  },
+  {
+    "id": "us_me",
+    "name": "メイン州",
+    "name_en": "Maine",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 45.50032,
+    "longitude": -69.24977,
+    "country_code": "us"
+  },
+  {
+    "id": "us_mi",
+    "name": "ミシガン州",
+    "name_en": "Michigan",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 44.25029,
+    "longitude": -85.50033,
+    "country_code": "us"
+  },
+  {
+    "id": "us_mn",
+    "name": "ミネソタ州",
+    "name_en": "Minnesota",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 46.25024,
+    "longitude": -94.25055,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ne",
+    "name": "ネブラスカ州",
+    "name_en": "Nebraska",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 41.50028,
+    "longitude": -99.75067,
+    "country_code": "us"
+  },
+  {
+    "id": "us_nh",
+    "name": "ニューハンプシャー州",
+    "name_en": "New Hampshire",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 43.66702,
+    "longitude": -71.4998,
+    "country_code": "us"
+  },
+  {
+    "id": "us_nj",
+    "name": "ニュージャージー州",
+    "name_en": "New Jersey",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 40.16706,
+    "longitude": -74.49987,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ny",
+    "name": "ニューヨーク州",
+    "name_en": "New York",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 43.00035,
+    "longitude": -75.4999,
+    "country_code": "us"
+  },
+  {
+    "id": "us_oh",
+    "name": "オハイオ州",
+    "name_en": "Ohio",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 40.25034,
+    "longitude": -83.00018,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ri",
+    "name": "ロードアイランド州",
+    "name_en": "Rhode Island",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 41.75038,
+    "longitude": -71.49978,
+    "country_code": "us"
+  },
+  {
+    "id": "us_vt",
+    "name": "バーモント州",
+    "name_en": "Vermont",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 44.00034,
+    "longitude": -72.74983,
+    "country_code": "us"
+  },
+  {
+    "id": "us_wi",
+    "name": "ウィスコンシン州",
+    "name_en": "Wisconsin",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 44.50024,
+    "longitude": -90.00041,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ca",
+    "name": "カリフォルニア州",
+    "name_en": "California",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 37.25022,
+    "longitude": -119.75126,
+    "country_code": "us"
+  },
+  {
+    "id": "us_co",
+    "name": "コロラド州",
+    "name_en": "Colorado",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 39.00027,
+    "longitude": -105.50083,
+    "country_code": "us"
+  },
+  {
+    "id": "us_nm",
+    "name": "ニューメキシコ州",
+    "name_en": "New Mexico",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 34.50034,
+    "longitude": -106.00085,
+    "country_code": "us"
+  },
+  {
+    "id": "us_nv",
+    "name": "ネバダ州",
+    "name_en": "Nevada",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 39.25021,
+    "longitude": -116.75119,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ut",
+    "name": "ユタ州",
+    "name_en": "Utah",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 39.25024,
+    "longitude": -111.75103,
+    "country_code": "us"
+  },
+  {
+    "id": "us_az",
+    "name": "アリゾナ州",
+    "name_en": "Arizona",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 34.5003,
+    "longitude": -111.50098,
+    "country_code": "us"
+  },
+  {
+    "id": "us_id",
+    "name": "アイダホ州",
+    "name_en": "Idaho",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 44.5002,
+    "longitude": -114.25118,
+    "country_code": "us"
+  },
+  {
+    "id": "us_mt",
+    "name": "モンタナ州",
+    "name_en": "Montana",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 47.00025,
+    "longitude": -109.75102,
+    "country_code": "us"
+  },
+  {
+    "id": "us_nd",
+    "name": "ノースダコタ州",
+    "name_en": "North Dakota",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 47.50027,
+    "longitude": -100.00068,
+    "country_code": "us"
+  },
+  {
+    "id": "us_or",
+    "name": "オレゴン州",
+    "name_en": "Oregon",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 44.00013,
+    "longitude": -120.50139,
+    "country_code": "us"
+  },
+  {
+    "id": "us_sd",
+    "name": "サウスダコタ州",
+    "name_en": "South Dakota",
+    "name_kana": "",
+    "region_id": "us_midwest",
+    "latitude": 44.50026,
+    "longitude": -100.25069,
+    "country_code": "us"
+  },
+  {
+    "id": "us_wa",
+    "name": "ワシントン州",
+    "name_en": "Washington",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 47.50012,
+    "longitude": -120.50147,
+    "country_code": "us"
+  },
+  {
+    "id": "us_wy",
+    "name": "ワイオミング州",
+    "name_en": "Wyoming",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 43.00024,
+    "longitude": -107.5009,
+    "country_code": "us"
+  },
+  {
+    "id": "us_hi",
+    "name": "ハワイ州",
+    "name_en": "Hawaii",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 20.78785,
+    "longitude": -156.38612,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ak",
+    "name": "アラスカ州",
+    "name_en": "Alaska",
+    "name_kana": "",
+    "region_id": "us_west",
+    "latitude": 64.00028,
+    "longitude": -150.00028,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ky",
+    "name": "ケンタッキー州",
+    "name_en": "Kentucky",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 38.20042,
+    "longitude": -84.87762,
+    "country_code": "us"
+  },
+  {
+    "id": "us_ma",
+    "name": "マサチューセッツ州",
+    "name_en": "Massachusetts",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 42.36565,
+    "longitude": -71.10832,
+    "country_code": "us"
+  },
+  {
+    "id": "us_pa",
+    "name": "ペンシルベニア州",
+    "name_en": "Pennsylvania",
+    "name_kana": "",
+    "region_id": "us_northeast",
+    "latitude": 40.8,
+    "longitude": -77.7,
+    "country_code": "us"
+  },
+  {
+    "id": "us_va",
+    "name": "バージニア州",
+    "name_en": "Virginia",
+    "name_kana": "",
+    "region_id": "us_south",
+    "latitude": 37.54812,
+    "longitude": -77.44675,
+    "country_code": "us"
+  }
+]

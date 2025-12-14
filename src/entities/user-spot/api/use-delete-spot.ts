@@ -3,7 +3,7 @@
  */
 
 import { useMutation } from '@tanstack/react-query';
-import { invalidateSpots } from '@/shared/api/query-client';
+import { invalidateSpots, invalidateMaps } from '@/shared/api/query-client';
 import { deleteSpot } from '@/shared/api/supabase/user-spots';
 
 /**
@@ -17,6 +17,7 @@ export function useDeleteSpot() {
     },
     onSuccess: () => {
       invalidateSpots();
+      invalidateMaps(); // spots_countを更新するためにマップキャッシュも無効化
     },
   });
 }

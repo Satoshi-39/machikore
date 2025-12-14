@@ -302,7 +302,8 @@ export type BookmarkUpdate = Partial<Omit<BookmarkRow, 'id' | 'created_at'>>;
 export interface CountryRow {
   id: string;              // "japan", "usa"
   name: string;            // "日本", "アメリカ"
-  name_kana: string;       // "にほん", "あめりか"
+  name_en: string;         // "Japan", "United States"
+  name_kana: string;       // "にほん", "あめりか" (日本以外は空文字)
   latitude: number;        // 中心座標の緯度
   longitude: number;       // 中心座標の経度
   country_code: string;    // "jp", "us"

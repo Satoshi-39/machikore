@@ -16,9 +16,9 @@ import {
 import { useCreateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
+import { useSpotLimit } from '@/entities/subscription';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage, findMachiForSpot } from '@/shared/api/supabase';
 import { queryClient } from '@/shared/api/query-client';
-import { INPUT_LIMITS } from '@/shared/config';
 import type { SelectedImage } from '@/features/pick-images';
 
 export interface UploadProgress {
@@ -34,6 +34,7 @@ export function useSpotForm() {
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
+  const spotLimit = useSpotLimit();
   const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
     current: 0,
     total: 0,
@@ -141,12 +142,19 @@ export function useSpotForm() {
       return;
     }
 
-    // スポット数の上限チェック
+    // スポット数の上限チェック（プレミアム状態に応じた上限）
     const selectedMap = userMaps.find((m) => m.id === data.mapId);
-    if (selectedMap && selectedMap.spots_count >= INPUT_LIMITS.MAX_SPOTS_PER_MAP) {
+    if (selectedMap && selectedMap.spots_count >= spotLimit) {
       Alert.alert(
         'スポット数の上限',
-        `1つのマップには最大${INPUT_LIMITS.MAX_SPOTS_PER_MAP}個までスポットを登録できます。\n別のマップを選択するか、既存のスポットを削除してください。`
+        `1つのマップには最大${spotLimit}個までスポットを登録できます。\n別のマップを選択するか、既存のスポットを削除してください。`,
+        [
+          { text: 'OK' },
+          {
+            text: 'プレミアムに登録',
+            onPress: () => router.push('/settings/premium'),
+          },
+        ]
       );
       return;
     }

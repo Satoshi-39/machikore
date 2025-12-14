@@ -12,6 +12,7 @@ import { useSignOut } from '@/features/auth';
 import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useAppSettingsStore } from '@/shared/lib/store';
+import { useIsPremium } from '@/entities/subscription';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
@@ -112,6 +113,7 @@ function SettingsToggle({
 export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   const router = useRouter();
   const { signOut } = useSignOut();
+  const isPremium = useIsPremium();
 
   // ストアから設定値を取得
   const themeMode = useAppSettingsStore((state) => state.themeMode);
@@ -168,6 +170,16 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             icon="lock-closed-outline"
             label="パスワード変更"
             onPress={showComingSoon}
+          />
+        </SettingsSection>
+
+        {/* プレミアム */}
+        <SettingsSection title="プレミアム">
+          <SettingsItem
+            icon="diamond-outline"
+            label="プレミアムプラン"
+            value={isPremium ? '加入中' : undefined}
+            onPress={() => router.push('/settings/premium')}
           />
         </SettingsSection>
 

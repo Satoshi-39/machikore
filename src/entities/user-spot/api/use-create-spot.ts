@@ -3,7 +3,7 @@
  */
 
 import { useMutation } from '@tanstack/react-query';
-import { invalidateSpots } from '@/shared/api/query-client';
+import { invalidateSpots, invalidateMaps } from '@/shared/api/query-client';
 import { createSpot, type CreateSpotInput } from '@/shared/api/supabase/user-spots';
 
 /**
@@ -38,6 +38,7 @@ export function useCreateSpot() {
     onSuccess: (spotId) => {
       console.log('🎊 useCreateSpot: 成功コールバック実行', spotId);
       invalidateSpots();
+      invalidateMaps(); // spots_countを更新するためにマップキャッシュも無効化
     },
     onError: (error) => {
       console.error('💥 useCreateSpot: エラーコールバック実行', error);

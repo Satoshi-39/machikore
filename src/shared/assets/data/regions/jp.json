@@ -2,6 +2,7 @@
   {
     "id": "hokkaido",
     "name": "北海道",
+    "name_en": "Hokkaido",
     "name_kana": "ほっかいどう",
     "latitude": 43.4316324,
     "longitude": 142.4916576,
@@ -11,6 +12,7 @@
   {
     "id": "tohoku",
     "name": "東北地方",
+    "name_en": "Tohoku",
     "name_kana": "とうほくちほう",
     "latitude": 39.1126311,
     "longitude": 140.5976819,
@@ -20,6 +22,7 @@
   {
     "id": "kanto",
     "name": "関東地方",
+    "name_en": "Kanto",
     "name_kana": "かんとうちほう",
     "latitude": 35.9892697,
     "longitude": 139.6537351,
@@ -29,6 +32,7 @@
   {
     "id": "chubu",
     "name": "中部地方",
+    "name_en": "Chubu",
     "name_kana": "ちゅうぶちほう",
     "latitude": 36.1024806,
     "longitude": 137.4944984,
@@ -38,6 +42,7 @@
   {
     "id": "kinki",
     "name": "近畿地方",
+    "name_en": "Kinki",
     "name_kana": "きんきちほう",
     "latitude": 34.6921073,
     "longitude": 135.6939318,
@@ -47,8 +52,9 @@
   {
     "id": "chugoku",
     "name": "中国地方",
+    "name_en": "Chugoku",
     "name_kana": "ちゅうごくちほう",
-    "latitude": 34.9068220,
+    "latitude": 34.906822,
     "longitude": 132.8874127,
     "country_code": "jp",
     "display_order": 6
@@ -56,6 +62,7 @@
   {
     "id": "shikoku",
     "name": "四国地方",
+    "name_en": "Shikoku",
     "name_kana": "しこくちほう",
     "latitude": 33.7139951,
     "longitude": 133.6160565,
@@ -65,6 +72,7 @@
   {
     "id": "kyushu",
     "name": "九州地方",
+    "name_en": "Kyushu",
     "name_kana": "きゅうしゅうちほう",
     "latitude": 32.7381926,
     "longitude": 130.6260752,
@@ -74,6 +82,7 @@
   {
     "id": "okinawa",
     "name": "沖縄",
+    "name_en": "Okinawa",
     "name_kana": "おきなわ",
     "latitude": 26.2124,
     "longitude": 127.6809,

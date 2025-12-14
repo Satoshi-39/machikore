@@ -1,0 +1,172 @@
+[
+  {
+    "id": "kr_21",
+    "name": "蔚山広域市",
+    "name_en": "Ulsan",
+    "name_kana": "",
+    "region_id": "kr_yeongnam",
+    "latitude": 35.56667,
+    "longitude": 129.26667,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_19",
+    "name": "大田広域市",
+    "name_en": "Daejeon",
+    "name_kana": "",
+    "region_id": "kr_chungcheong",
+    "latitude": 36.33333,
+    "longitude": 127.41667,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_15",
+    "name": "大邱広域市",
+    "name_en": "Daegu",
+    "name_kana": "",
+    "region_id": "kr_yeongnam",
+    "latitude": 35.96667,
+    "longitude": 128.65,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_11",
+    "name": "ソウル特別市",
+    "name_en": "Seoul",
+    "name_kana": "",
+    "region_id": "kr_capital",
+    "latitude": 37.58333,
+    "longitude": 127,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_10",
+    "name": "釜山広域市",
+    "name_en": "Busan",
+    "name_kana": "",
+    "region_id": "kr_yeongnam",
+    "latitude": 35.13333,
+    "longitude": 129.05,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_14",
+    "name": "慶尚北道",
+    "name_en": "Gyeongsangbuk-do",
+    "name_kana": "",
+    "region_id": "kr_yeongnam",
+    "latitude": 36.6,
+    "longitude": 128.86667,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_13",
+    "name": "京畿道",
+    "name_en": "Gyeonggi-do",
+    "name_kana": "",
+    "region_id": "kr_capital",
+    "latitude": 37.6,
+    "longitude": 127.25,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_18",
+    "name": "光州広域市",
+    "name_en": "Gwangju",
+    "name_kana": "",
+    "region_id": "kr_honam",
+    "latitude": 35.16667,
+    "longitude": 126.91667,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_06",
+    "name": "江原特別自治道",
+    "name_en": "Gangwon-do",
+    "name_kana": "",
+    "region_id": "kr_gangwon",
+    "latitude": 37.75,
+    "longitude": 128.25,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_12",
+    "name": "仁川広域市",
+    "name_en": "Incheon",
+    "name_kana": "",
+    "region_id": "kr_capital",
+    "latitude": 37.46178,
+    "longitude": 126.70017,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_17",
+    "name": "忠清南道",
+    "name_en": "Chungcheongnam-do",
+    "name_kana": "",
+    "region_id": "kr_chungcheong",
+    "latitude": 36.5,
+    "longitude": 127,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_05",
+    "name": "忠清北道",
+    "name_en": "Chungcheongbuk-do",
+    "name_kana": "",
+    "region_id": "kr_chungcheong",
+    "latitude": 36.82153,
+    "longitude": 127.65685,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_16",
+    "name": "全羅南道",
+    "name_en": "Jeollanam-do",
+    "name_kana": "",
+    "region_id": "kr_honam",
+    "latitude": 34.75,
+    "longitude": 127,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_03",
+    "name": "全北特別自治道",
+    "name_en": "Jeonbuk-do",
+    "name_kana": "",
+    "region_id": "kr_honam",
+    "latitude": 35.75,
+    "longitude": 127.25,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_01",
+    "name": "済州特別自治道",
+    "name_en": "Jeju-do",
+    "name_kana": "",
+    "region_id": "kr_jeju",
+    "latitude": 33.41667,
+    "longitude": 126.5,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_20",
+    "name": "慶尚南道",
+    "name_en": "Gyeongsangnam-do",
+    "name_kana": "",
+    "region_id": "kr_yeongnam",
+    "latitude": 35.25,
+    "longitude": 128.25,
+    "country_code": "kr"
+  },
+  {
+    "id": "kr_22",
+    "name": "世宗特別自治市",
+    "name_en": "Sejong-si",
+    "name_kana": "",
+    "region_id": "kr_chungcheong",
+    "latitude": 36.59296,
+    "longitude": 127.29239,
+    "country_code": "kr"
+  }
+]

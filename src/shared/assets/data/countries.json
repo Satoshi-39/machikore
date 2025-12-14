@@ -2,9 +2,55 @@
   {
     "id": "japan",
     "name": "日本",
+    "name_en": "Japan",
     "name_kana": "にほん",
     "latitude": 36.2048,
     "longitude": 138.2529,
     "country_code": "jp"
+  },
+  {
+    "id": "usa",
+    "name": "アメリカ",
+    "name_en": "United States",
+    "name_kana": "",
+    "latitude": 37.0902,
+    "longitude": -95.7129,
+    "country_code": "us"
+  },
+  {
+    "id": "south_korea",
+    "name": "韓国",
+    "name_en": "South Korea",
+    "name_kana": "",
+    "latitude": 35.9078,
+    "longitude": 127.7669,
+    "country_code": "kr"
+  },
+  {
+    "id": "taiwan",
+    "name": "台湾",
+    "name_en": "Taiwan",
+    "name_kana": "",
+    "latitude": 23.6978,
+    "longitude": 120.9605,
+    "country_code": "tw"
+  },
+  {
+    "id": "china",
+    "name": "中国",
+    "name_en": "China",
+    "name_kana": "",
+    "latitude": 35.8617,
+    "longitude": 104.1954,
+    "country_code": "cn"
+  },
+  {
+    "id": "thailand",
+    "name": "タイ",
+    "name_en": "Thailand",
+    "name_kana": "",
+    "latitude": 15.87,
+    "longitude": 100.9925,
+    "country_code": "th"
   }
 ]

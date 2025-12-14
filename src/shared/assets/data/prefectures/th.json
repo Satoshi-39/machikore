@@ -1,0 +1,772 @@
+[
+  {
+    "id": "th_15",
+    "name": "Uthai Thani県",
+    "name_en": "Uthai Thani",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 15.38333,
+    "longitude": 99.55,
+    "country_code": "th"
+  },
+  {
+    "id": "th_65",
+    "name": "Trang県",
+    "name_en": "Trang",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 7.50722,
+    "longitude": 99.59811,
+    "country_code": "th"
+  },
+  {
+    "id": "th_08",
+    "name": "Tak県",
+    "name_en": "Tak",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 16.58333,
+    "longitude": 98.83333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_60",
+    "name": "スラートターニー県",
+    "name_en": "Surat Thani",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 9.0011,
+    "longitude": 99.0394,
+    "country_code": "th"
+  },
+  {
+    "id": "th_09",
+    "name": "スコータイ県",
+    "name_en": "Sukhothai",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 17.25,
+    "longitude": 99.66667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_52",
+    "name": "Ratchaburi県",
+    "name_en": "Ratchaburi",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.58333,
+    "longitude": 99.53333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_59",
+    "name": "Ranong県",
+    "name_en": "Ranong",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 10.1,
+    "longitude": 98.75,
+    "country_code": "th"
+  },
+  {
+    "id": "th_57",
+    "name": "Prachuap Khiri Khan県",
+    "name_en": "Prachuap Khiri Khan",
+    "name_kana": "",
+    "region_id": "th_west",
+    "latitude": 12.21667,
+    "longitude": 99.75,
+    "country_code": "th"
+  },
+  {
+    "id": "th_62",
+    "name": "プーケット県",
+    "name_en": "Phuket",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 7.97152,
+    "longitude": 98.35098,
+    "country_code": "th"
+  },
+  {
+    "id": "th_56",
+    "name": "Phetchaburi県",
+    "name_en": "Phetchaburi",
+    "name_kana": "",
+    "region_id": "th_west",
+    "latitude": 12.96667,
+    "longitude": 99.58333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_61",
+    "name": "Phangnga県",
+    "name_en": "Phangnga",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 8.63333,
+    "longitude": 98.41667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_01",
+    "name": "Mae Hong Son県",
+    "name_en": "Mae Hong Son",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 18.75,
+    "longitude": 97.91667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_05",
+    "name": "Lamphun県",
+    "name_en": "Lamphun",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 18.25,
+    "longitude": 98.91667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_06",
+    "name": "Lampang県",
+    "name_en": "Lampang",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 18.33333,
+    "longitude": 99.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_63",
+    "name": "クラビー県",
+    "name_en": "Krabi",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 8.19793,
+    "longitude": 99.00859,
+    "country_code": "th"
+  },
+  {
+    "id": "th_50",
+    "name": "カンチャナブリー県",
+    "name_en": "Kanchanaburi",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.63333,
+    "longitude": 99.1,
+    "country_code": "th"
+  },
+  {
+    "id": "th_11",
+    "name": "Kamphaeng Phet県",
+    "name_en": "Kamphaeng Phet",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 16.25,
+    "longitude": 99.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_58",
+    "name": "Chumphon県",
+    "name_en": "Chumphon",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 10.4,
+    "longitude": 99.06667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_03",
+    "name": "チェンライ県",
+    "name_en": "Chiang Rai",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 19.91667,
+    "longitude": 99.91667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_02",
+    "name": "チェンマイ県",
+    "name_en": "Chiang Mai",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 18.75,
+    "longitude": 99,
+    "country_code": "th"
+  },
+  {
+    "id": "th_72",
+    "name": "Yasothon県",
+    "name_en": "Yasothon",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 15.85,
+    "longitude": 104.28333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_70",
+    "name": "Yala県",
+    "name_en": "Yala",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 6.33333,
+    "longitude": 101.25,
+    "country_code": "th"
+  },
+  {
+    "id": "th_10",
+    "name": "Uttaradit県",
+    "name_en": "Uttaradit",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 17.66667,
+    "longitude": 100.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_49",
+    "name": "Trat県",
+    "name_en": "Trat",
+    "name_kana": "",
+    "region_id": "th_east",
+    "latitude": 12.5,
+    "longitude": 102.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_29",
+    "name": "Surin県",
+    "name_en": "Surin",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 14.83333,
+    "longitude": 103.75,
+    "country_code": "th"
+  },
+  {
+    "id": "th_51",
+    "name": "Suphan Buri県",
+    "name_en": "Suphan Buri",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.46667,
+    "longitude": 100.06667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_68",
+    "name": "ソンクラー県",
+    "name_en": "Songkhla",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 6.83333,
+    "longitude": 100.66667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_30",
+    "name": "Si Sa Ket県",
+    "name_en": "Si Sa Ket",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 14.83333,
+    "longitude": 104.33333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_33",
+    "name": "Sing Buri県",
+    "name_en": "Sing Buri",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.925,
+    "longitude": 100.33333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_67",
+    "name": "Satun県",
+    "name_en": "Satun",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 6.83333,
+    "longitude": 100,
+    "country_code": "th"
+  },
+  {
+    "id": "th_37",
+    "name": "Saraburi県",
+    "name_en": "Saraburi",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.60838,
+    "longitude": 100.96822,
+    "country_code": "th"
+  },
+  {
+    "id": "th_54",
+    "name": "Samut Songkhram県",
+    "name_en": "Samut Songkhram",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.4,
+    "longitude": 99.95833,
+    "country_code": "th"
+  },
+  {
+    "id": "th_55",
+    "name": "Samut Sakhon県",
+    "name_en": "Samut Sakhon",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.56667,
+    "longitude": 100.21667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_42",
+    "name": "Samut Prakan県",
+    "name_en": "Samut Prakan",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.60442,
+    "longitude": 100.70531,
+    "country_code": "th"
+  },
+  {
+    "id": "th_20",
+    "name": "Sakon Nakhon県",
+    "name_en": "Sakon Nakhon",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 17.33333,
+    "longitude": 103.83333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_25",
+    "name": "Roi Et県",
+    "name_en": "Roi Et",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 15.75,
+    "longitude": 103.75,
+    "country_code": "th"
+  },
+  {
+    "id": "th_47",
+    "name": "Rayong県",
+    "name_en": "Rayong",
+    "name_kana": "",
+    "region_id": "th_east",
+    "latitude": 12.83333,
+    "longitude": 101.43333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_36",
+    "name": "Phra Nakhon Si Ayutthaya県",
+    "name_en": "Phra Nakhon Si Ayutthaya",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.28333,
+    "longitude": 100.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_07",
+    "name": "Phrae県",
+    "name_en": "Phrae",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 18.08333,
+    "longitude": 100,
+    "country_code": "th"
+  },
+  {
+    "id": "th_12",
+    "name": "Phitsanulok県",
+    "name_en": "Phitsanulok",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 16.91667,
+    "longitude": 100.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_13",
+    "name": "Phichit県",
+    "name_en": "Phichit",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 16.25,
+    "longitude": 100.41667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_14",
+    "name": "Phetchabun県",
+    "name_en": "Phetchabun",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 16.25,
+    "longitude": 101.08333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_41",
+    "name": "Phayao県",
+    "name_en": "Phayao",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 19.25,
+    "longitude": 100.25,
+    "country_code": "th"
+  },
+  {
+    "id": "th_66",
+    "name": "Phatthalung県",
+    "name_en": "Phatthalung",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 7.5,
+    "longitude": 100.08333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_69",
+    "name": "パッターニー県",
+    "name_en": "Pattani",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 6.74722,
+    "longitude": 101.375,
+    "country_code": "th"
+  },
+  {
+    "id": "th_39",
+    "name": "Pathum Thani県",
+    "name_en": "Pathum Thani",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.04554,
+    "longitude": 100.63955,
+    "country_code": "th"
+  },
+  {
+    "id": "th_38",
+    "name": "Nonthaburi県",
+    "name_en": "Nonthaburi",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.90433,
+    "longitude": 100.40335,
+    "country_code": "th"
+  },
+  {
+    "id": "th_17",
+    "name": "Nong Khai県",
+    "name_en": "Nong Khai",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 17.75,
+    "longitude": 102.75,
+    "country_code": "th"
+  },
+  {
+    "id": "th_31",
+    "name": "Narathiwat県",
+    "name_en": "Narathiwat",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 6.20336,
+    "longitude": 101.72005,
+    "country_code": "th"
+  },
+  {
+    "id": "th_04",
+    "name": "Nan県",
+    "name_en": "Nan",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 18.83333,
+    "longitude": 100.66667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_64",
+    "name": "ナコーンシータンマラート県",
+    "name_en": "Nakhon Si Thammarat",
+    "name_kana": "",
+    "region_id": "th_south",
+    "latitude": 8.39102,
+    "longitude": 99.82203,
+    "country_code": "th"
+  },
+  {
+    "id": "th_16",
+    "name": "Nakhon Sawan県",
+    "name_en": "Nakhon Sawan",
+    "name_kana": "",
+    "region_id": "th_north",
+    "latitude": 15.7,
+    "longitude": 100.08333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_27",
+    "name": "ナコーンラーチャシーマー県",
+    "name_en": "Nakhon Ratchasima",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 15,
+    "longitude": 102.16667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_73",
+    "name": "Nakhon Phanom県",
+    "name_en": "Nakhon Phanom",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 17.48611,
+    "longitude": 104.48333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_53",
+    "name": "Nakhon Pathom県",
+    "name_en": "Nakhon Pathom",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.98333,
+    "longitude": 100.08333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_43",
+    "name": "Nakhon Nayok県",
+    "name_en": "Nakhon Nayok",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.16667,
+    "longitude": 101.1,
+    "country_code": "th"
+  },
+  {
+    "id": "th_78",
+    "name": "Mukdahan県",
+    "name_en": "Mukdahan",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 16.58333,
+    "longitude": 104.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_24",
+    "name": "Maha Sarakham県",
+    "name_en": "Maha Sarakham",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 16.00571,
+    "longitude": 103.17233,
+    "country_code": "th"
+  },
+  {
+    "id": "th_34",
+    "name": "Lop Buri県",
+    "name_en": "Lop Buri",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 15.12191,
+    "longitude": 100.88605,
+    "country_code": "th"
+  },
+  {
+    "id": "th_18",
+    "name": "Loei県",
+    "name_en": "Loei",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 17.41667,
+    "longitude": 101.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_40",
+    "name": "バンコク",
+    "name_en": "Bangkok",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.87719,
+    "longitude": 100.71991,
+    "country_code": "th"
+  },
+  {
+    "id": "th_22",
+    "name": "コーンケン県",
+    "name_en": "Khon Kaen",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 16.43056,
+    "longitude": 102.61667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_23",
+    "name": "Kalasin県",
+    "name_en": "Kalasin",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 16.5,
+    "longitude": 103.5,
+    "country_code": "th"
+  },
+  {
+    "id": "th_46",
+    "name": "チョンブリー県",
+    "name_en": "Chon Buri",
+    "name_kana": "",
+    "region_id": "th_east",
+    "latitude": 13.3,
+    "longitude": 101.3,
+    "country_code": "th"
+  },
+  {
+    "id": "th_48",
+    "name": "Chanthaburi県",
+    "name_en": "Chanthaburi",
+    "name_kana": "",
+    "region_id": "th_east",
+    "latitude": 12.85798,
+    "longitude": 102.15434,
+    "country_code": "th"
+  },
+  {
+    "id": "th_26",
+    "name": "Chaiyaphum県",
+    "name_en": "Chaiyaphum",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 16.01804,
+    "longitude": 101.81249,
+    "country_code": "th"
+  },
+  {
+    "id": "th_32",
+    "name": "Chai Nat県",
+    "name_en": "Chai Nat",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 15.11667,
+    "longitude": 100.1,
+    "country_code": "th"
+  },
+  {
+    "id": "th_44",
+    "name": "Chachoengsao県",
+    "name_en": "Chachoengsao",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 13.63105,
+    "longitude": 101.41666,
+    "country_code": "th"
+  },
+  {
+    "id": "th_28",
+    "name": "Buri Ram県",
+    "name_en": "Buri Ram",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 14.84823,
+    "longitude": 102.99332,
+    "country_code": "th"
+  },
+  {
+    "id": "th_35",
+    "name": "Ang Thong県",
+    "name_en": "Ang Thong",
+    "name_kana": "",
+    "region_id": "th_central",
+    "latitude": 14.6105,
+    "longitude": 100.35845,
+    "country_code": "th"
+  },
+  {
+    "id": "th_76",
+    "name": "ウドーンターニー県",
+    "name_en": "Udon Thani",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 17.33333,
+    "longitude": 102.83333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_74",
+    "name": "Prachin Buri県",
+    "name_en": "Prachin Buri",
+    "name_kana": "",
+    "region_id": "th_east",
+    "latitude": 14.08333,
+    "longitude": 101.66667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_75",
+    "name": "Ubon Ratchathani県",
+    "name_en": "Ubon Ratchathani",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 15.16667,
+    "longitude": 105.16667,
+    "country_code": "th"
+  },
+  {
+    "id": "th_77",
+    "name": "Amnat Charoen県",
+    "name_en": "Amnat Charoen",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 15.91667,
+    "longitude": 104.75,
+    "country_code": "th"
+  },
+  {
+    "id": "th_79",
+    "name": "Nong Bua Lamphu県",
+    "name_en": "Nong Bua Lamphu",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 17.25,
+    "longitude": 102.25,
+    "country_code": "th"
+  },
+  {
+    "id": "th_80",
+    "name": "Sa Kaeo県",
+    "name_en": "Sa Kaeo",
+    "name_kana": "",
+    "region_id": "th_east",
+    "latitude": 13.75,
+    "longitude": 102.33333,
+    "country_code": "th"
+  },
+  {
+    "id": "th_81",
+    "name": "Bueng Kan県",
+    "name_en": "Bueng Kan",
+    "name_kana": "",
+    "region_id": "th_northeast",
+    "latitude": 18.16228,
+    "longitude": 103.75085,
+    "country_code": "th"
+  }
+]
