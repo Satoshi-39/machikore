@@ -20,6 +20,8 @@ import type { Collection } from '@/shared/api/supabase/collections';
 
 interface CollectionsTabProps {
   userId: string | null;
+  /** リストのヘッダーコンポーネント（プロフィール+タブフィルター） */
+  ListHeaderComponent?: React.ReactElement;
 }
 
 interface CollectionCardProps {
@@ -114,7 +116,7 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
   );
 }
 
-export function CollectionsTab({ userId }: CollectionsTabProps) {
+export function CollectionsTab({ userId, ListHeaderComponent }: CollectionsTabProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
@@ -185,6 +187,7 @@ export function CollectionsTab({ userId }: CollectionsTabProps) {
           onDelete={handleDelete}
         />
       )}
+      ListHeaderComponent={ListHeaderComponent}
       className="bg-surface dark:bg-dark-surface"
       contentContainerClassName="flex-grow"
       ListEmptyComponent={renderEmptyState}

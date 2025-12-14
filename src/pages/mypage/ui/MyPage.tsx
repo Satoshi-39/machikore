@@ -3,9 +3,11 @@
  *
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
  * 認証済みユーザーのプロフィール、統計、友達などを表示
+ *
+ * Instagram/note風にプロフィールとタブフィルターもスクロールに追従
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -28,23 +30,31 @@ export function MyPage() {
     router.push('/schedule');
   };
 
+  // FlatListのヘッダーとしてプロフィール+タブフィルターを渡す
+  const listHeader = useMemo(() => (
+    <View>
+      {/* プロフィールセクション */}
+      <MyPageProfile userId={currentUserId} />
+      {/* タブフィルター */}
+      <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} userId={currentUserId ?? undefined} />
+    </View>
+  ), [currentUserId, tabMode]);
+
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-      {/* ヘッダーバー */}
+      {/* ヘッダーバー（固定） */}
       <MyPageHeader
         onSettingsPress={handleSettingsPress}
         onSchedulePress={handleSchedulePress}
       />
 
-      {/* プロフィールセクション */}
-      <MyPageProfile userId={currentUserId} />
-
-      {/* タブフィルター */}
-      <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} userId={currentUserId} />
-
-      {/* タブコンテンツ（マップ一覧） */}
+      {/* タブコンテンツ（プロフィール+タブフィルター+マップ一覧が一緒にスクロール） */}
       <View className="flex-1">
-        <MapsTab userId={currentUserId} currentUserId={currentUserId} />
+        <MapsTab
+          userId={currentUserId}
+          currentUserId={currentUserId}
+          ListHeaderComponent={listHeader}
+        />
       </View>
     </SafeAreaView>
   );

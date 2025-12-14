@@ -7,17 +7,23 @@
  * - 未ログイン時はログイン促進メッセージを表示
  */
 
-import React, { useCallback, useMemo } from 'react';
-import { FlatList, RefreshControl, ActivityIndicator, View, Text } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
-import { AsyncBoundary } from '@/shared/ui';
-import { colors } from '@/shared/config';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getFollowingUsersMaps } from '@/shared/api/supabase';
+import { colors } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
+import { AsyncBoundary } from '@/shared/ui';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
+import React, { useCallback, useMemo } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
 
 const PAGE_SIZE = 10;
 
@@ -58,25 +64,40 @@ export function FollowingMapFeed() {
     return data?.pages.flatMap((page) => page) ?? [];
   }, [data]);
 
-  const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/maps/${mapId}`);
-  }, [router]);
+  const handleMapPress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/maps/${mapId}`);
+    },
+    [router]
+  );
 
-  const handleUserPress = useCallback((userId: string) => {
-    router.push(`/(tabs)/discover/users/${userId}`);
-  }, [router]);
+  const handleUserPress = useCallback(
+    (userId: string) => {
+      router.push(`/(tabs)/discover/users/${userId}`);
+    },
+    [router]
+  );
 
-  const handleEditMap = useCallback((mapId: string) => {
-    router.push(`/edit-map/${mapId}`);
-  }, [router]);
+  const handleEditMap = useCallback(
+    (mapId: string) => {
+      router.push(`/edit-map/${mapId}`);
+    },
+    [router]
+  );
 
-  const handleCommentPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/comments/maps/${mapId}`);
-  }, [router]);
+  const handleCommentPress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/comments/maps/${mapId}`);
+    },
+    [router]
+  );
 
-  const handleArticlePress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/articles/maps/${mapId}`);
-  }, [router]);
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}`);
+    },
+    [router]
+  );
 
   const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -98,7 +119,7 @@ export function FollowingMapFeed() {
     return (
       <View className="flex-1 items-center justify-center px-6">
         <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
-          ログインするとフォロー中のユーザーのマップが表示されます
+          フォロー中のユーザーはいません
         </Text>
       </View>
     );

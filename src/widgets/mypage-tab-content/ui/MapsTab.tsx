@@ -25,6 +25,10 @@ interface MapsTabProps {
   userId: string | null;
   /** 現在ログイン中のユーザーID */
   currentUserId?: string | null;
+  /** リストのヘッダーコンポーネント（プロフィール+タブフィルター） */
+  ListHeaderComponent?: React.ReactElement;
+  /** スクロールイベントコールバック */
+  onScroll?: (event: any) => void;
 }
 
 interface MyPageMapCardProps {
@@ -257,7 +261,7 @@ function MyPageMapCard({
   );
 }
 
-export function MapsTab({ userId, currentUserId }: MapsTabProps) {
+export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }: MapsTabProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
   const { data: maps, isLoading, error } = useUserMaps(userId, { currentUserId });
@@ -322,6 +326,9 @@ export function MapsTab({ userId, currentUserId }: MapsTabProps) {
               onUserPress={handleUserPress}
             />
           )}
+          ListHeaderComponent={ListHeaderComponent}
+          onScroll={onScroll}
+          scrollEventThrottle={16}
           className="bg-surface dark:bg-dark-surface"
           contentContainerClassName="flex-grow"
         />
