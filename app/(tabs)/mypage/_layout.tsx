@@ -8,7 +8,6 @@ export default function MypageLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
-      <Stack.Screen name="likes" />
       <Stack.Screen name="bookmarks/index" />
       <Stack.Screen name="bookmarks/[folderId]" />
       <Stack.Screen name="maps/[id]" />

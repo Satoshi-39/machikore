@@ -1,5 +1,7 @@
 /**
- * ブックマークフォルダ詳細ページ
+ * ブックマークフォルダ詳細ページ（通知タブ内スタック）
+ *
+ * URL: /(tabs)/notifications/bookmarks/[folderId]
  */
 
 import { BookmarkFolderPage } from '@/pages/bookmarks';

@@ -78,7 +78,7 @@ export function MyPageTabFilter({
         </Pressable>
         {/* ブックマークボタン（別ページへ遷移） */}
         <Pressable
-          onPress={() => router.push(`${basePath}/bookmarks` as any)}
+          onPress={() => router.push(`/(tabs)/${currentTab}/bookmarks` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons

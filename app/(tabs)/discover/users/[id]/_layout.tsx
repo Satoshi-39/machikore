@@ -12,7 +12,6 @@ export default function UserLayout() {
       <Stack.Screen name="followers" />
       <Stack.Screen name="following" />
       <Stack.Screen name="collections" />
-      <Stack.Screen name="bookmarks" />
     </Stack>
   );
 }

@@ -13,9 +13,10 @@ import {
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
 import { colors } from '@/shared/config';
+import { useCurrentTab } from '@/shared/lib';
 import { PopupMenu } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter, useSegments, type Href } from 'expo-router';
+import { useRouter, type Href } from 'expo-router';
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   Alert,
@@ -39,18 +40,13 @@ export function BookmarkFolderList({
   onCreateFolder,
 }: BookmarkFolderListProps) {
   const router = useRouter();
-  const segments = useSegments();
-
-  // タブ内かどうかを判定
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
+  const currentTab = useCurrentTab();
 
   // フォルダタップ時の遷移
   const handleFolderPress = useCallback((folderId: string) => {
-    const path = isInMypageTab
-      ? `/(tabs)/mypage/bookmarks/${folderId}?tab=${activeTab}`
-      : `/bookmarks/${folderId}?tab=${activeTab}`;
+    const path = `/(tabs)/${currentTab}/bookmarks/${folderId}?tab=${activeTab}`;
     router.push(path as Href);
-  }, [router, isInMypageTab, activeTab]);
+  }, [router, currentTab, activeTab]);
 
   // activeTabに応じたフォルダのみ取得
   const { data: folders = [] } = useBookmarkFolders(userId, activeTab);

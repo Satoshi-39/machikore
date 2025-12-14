@@ -14,6 +14,8 @@ export default function NotificationsLayout() {
       <Stack.Screen name="comments/spots/[id]" />
       <Stack.Screen name="comments/maps/[id]" />
       <Stack.Screen name="articles/maps/[id]" />
+      <Stack.Screen name="bookmarks/index" />
+      <Stack.Screen name="bookmarks/[folderId]" />
     </Stack>
   );
 }

@@ -40,7 +40,7 @@ export function MyPage() {
       <MyPageProfile userId={currentUserId} />
 
       {/* タブフィルター */}
-      <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} />
+      <MyPageTabFilter tabMode={tabMode} onTabModeChange={setTabMode} userId={currentUserId} />
 
       {/* タブコンテンツ（マップ一覧） */}
       <View className="flex-1">
