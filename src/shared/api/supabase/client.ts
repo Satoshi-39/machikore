@@ -3,7 +3,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { SecureStorageAdapter } from '@/shared/lib/storage';
+import { LargeSecureStorageAdapter } from '@/shared/lib/storage';
 import { ENV } from '@/shared/config';
 
 // ===============================
@@ -13,12 +13,17 @@ import { ENV } from '@/shared/config';
 /**
  * Supabaseクライアント
  *
- * 認証情報は SecureStore に暗号化保存される（AsyncStorageではなく）
- * これによりトークンがデバイス上で安全に保管される
+ * 認証情報は LargeSecureStorageAdapter を使用して保存:
+ * - 暗号化キー（32バイト）→ SecureStore（暗号化保存）
+ * - セッションデータ → AsyncStorage（AES-256で暗号化済み）
+ *
+ * これによりSecureStoreの2KB制限を回避しつつ、セキュリティを確保
+ *
+ * @see https://zenn.dev/rei2718/articles/80f5903602cbe9
  */
 export const supabase = createClient(ENV.SUPABASE_URL, ENV.SUPABASE_ANON_KEY, {
   auth: {
-    storage: SecureStorageAdapter,
+    storage: LargeSecureStorageAdapter,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
