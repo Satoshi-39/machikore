@@ -5,7 +5,7 @@
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { LABEL_ZOOM, LOCATION_ICONS } from '@/shared/config/constants';
+import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS } from '@/shared/config/constants';
 import type { VisitFilter } from '@/features/quick-search-buttons';
 
 // アイコン画像（緑色）
@@ -49,7 +49,7 @@ export function MachiLabels({
         <Mapbox.SymbolLayer
           id="visited-machi-labels"
           filter={['==', ['get', 'isVisited'], true]}
-          minZoomLevel={isVisitedFilter ? 0 : LABEL_ZOOM.MACHI.min}
+          minZoomLevel={isVisitedFilter ? 0 : LABEL_ZOOM_DEFAULT_MAP.MACHI.min}
           style={{
             iconImage: 'machi-icon',
             iconSize: isFiltered ? 0.4 : 0.35,
@@ -71,7 +71,7 @@ export function MachiLabels({
         <Mapbox.SymbolLayer
           id="unvisited-machi-labels"
           filter={['==', ['get', 'isVisited'], false]}
-          minZoomLevel={isUnvisitedFilter ? 0 : LABEL_ZOOM.MACHI.min}
+          minZoomLevel={isUnvisitedFilter ? 0 : LABEL_ZOOM_DEFAULT_MAP.MACHI.min}
           style={{
             iconImage: 'machi-icon',
             iconSize: isFiltered ? 0.4 : 0.35,

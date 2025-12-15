@@ -2,13 +2,7 @@
  * キャッシュサービス エクスポート
  */
 
-// TanStack Query キャッシュ管理
-export {
-  setupLRUCacheManager,
-  getCacheStats,
-  clearCacheByPrefix,
-} from './query-cache-manager';
-
+// TanStack Query 永続化
 export {
   setupQueryPersister,
   clearPersistedCache,

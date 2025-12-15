@@ -151,6 +151,30 @@ export async function getCitiesByPrefectureId(prefectureId: string): Promise<Cit
 }
 
 /**
+ * 境界範囲内の市区町村データを取得
+ */
+export async function getCitiesByBounds(bounds: {
+  minLat: number;
+  maxLat: number;
+  minLng: number;
+  maxLng: number;
+}): Promise<CityRow[]> {
+  const { data, error } = await supabase
+    .from('cities')
+    .select('*')
+    .gte('latitude', bounds.minLat)
+    .lte('latitude', bounds.maxLat)
+    .gte('longitude', bounds.minLng)
+    .lte('longitude', bounds.maxLng);
+
+  if (error) {
+    handleSupabaseError('getCitiesByBounds', error);
+  }
+
+  return data || [];
+}
+
+/**
  * 全都道府県を取得
  */
 export async function getAllPrefectures(): Promise<PrefectureRow[]> {

@@ -130,6 +130,8 @@ async function createSampleUser(userId: string): Promise<void> {
     is_subscribed: 0,
     subscription_started_at: null,
     subscription_expires_at: null,
+    push_token: null,
+    push_token_updated_at: null,
     created_at: now,
     updated_at: now,
     synced_at: null,

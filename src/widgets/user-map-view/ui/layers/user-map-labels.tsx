@@ -15,7 +15,10 @@ import {
   TRANSPORT_HUB_COLORS_LIGHT,
   TRANSPORT_HUB_COLORS_DARK,
   TRANSPORT_HUB_MIN_ZOOM_USER_MAP,
-  SYMBOL_SORT_KEY,
+  SYMBOL_SORT_KEY_USER_MAP,
+  LABEL_ZOOM_USER_MAP,
+  LOCATION_LABEL_COLORS_LIGHT,
+  LOCATION_LABEL_COLORS_DARK,
   type UserMapThemeColor,
 } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -55,12 +58,17 @@ interface SpotProperties {
   category: SpotCategory;
 }
 
+interface LocationFeatureProperties {
+  id: string;
+  name: string;
+}
+
 // 統合GeoJSONのプロパティ型
 interface CombinedProperties {
   // 共通
   id: string;
   name: string;
-  featureType: 'spot' | 'transport';
+  featureType: 'spot' | 'transport' | 'city' | 'prefecture';
   sortKey: number;
   // スポット用
   category?: SpotCategory;
@@ -72,6 +80,10 @@ interface CombinedProperties {
 interface UserMapLabelsProps {
   spotsGeoJson: FeatureCollection<Point, SpotProperties>;
   transportGeoJson: FeatureCollection<Point, TransportHubGeoJsonProperties>;
+  /** 都道府県GeoJSON */
+  prefecturesGeoJson?: FeatureCollection<Point, LocationFeatureProperties>;
+  /** 市区町村GeoJSON */
+  citiesGeoJson?: FeatureCollection<Point, LocationFeatureProperties>;
   onSpotPress: (event: any) => void;
   themeColor?: UserMapThemeColor;
   /** 選択中のスポットID（選択中は常に表示） */
@@ -81,6 +93,8 @@ interface UserMapLabelsProps {
 export function UserMapLabels({
   spotsGeoJson,
   transportGeoJson,
+  prefecturesGeoJson,
+  citiesGeoJson,
   onSpotPress,
   themeColor = 'pink',
   selectedSpotId,
@@ -92,6 +106,9 @@ export function UserMapLabels({
   const transportColors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
   const transportHaloColor = isDarkMode ? '#1F2937' : '#FFFFFF';
 
+  // 地名ラベル用の色
+  const locationColors = isDarkMode ? LOCATION_LABEL_COLORS_DARK : LOCATION_LABEL_COLORS_LIGHT;
+
   // 縁取り付きアイコンを使用するかどうか
   const useOutlined =
     ('useOutlinedIconInLight' in themeConfig && !isDarkMode && themeConfig.useOutlinedIconInLight) ||
@@ -101,7 +118,7 @@ export function UserMapLabels({
     ? mapSpotOutlinedIcons[themeColor as keyof typeof mapSpotOutlinedIcons]
     : mapSpotIcons[themeColor] ?? mapSpotIcons.pink;
 
-  // スポットと交通データを統合したGeoJSONを作成
+  // スポットと交通データと地名を統合したGeoJSONを作成
   const combinedGeoJson = useMemo((): FeatureCollection<Point, CombinedProperties> => {
     const spotFeatures: Feature<Point, CombinedProperties>[] = spotsGeoJson.features.map((f) => ({
       type: 'Feature',
@@ -110,16 +127,16 @@ export function UserMapLabels({
         id: f.properties.id,
         name: f.properties.name,
         featureType: 'spot' as const,
-        sortKey: SYMBOL_SORT_KEY.spot,
+        sortKey: SYMBOL_SORT_KEY_USER_MAP.spot,
         category: f.properties.category,
       },
     }));
 
     const transportFeatures: Feature<Point, CombinedProperties>[] = transportGeoJson.features.map((f) => {
-      let sortKey: number = SYMBOL_SORT_KEY.station;
-      if (f.properties.type === 'airport') sortKey = SYMBOL_SORT_KEY.airport;
-      else if (f.properties.type === 'ferry_terminal') sortKey = SYMBOL_SORT_KEY.ferry;
-      else if (f.properties.type === 'bus_terminal') sortKey = SYMBOL_SORT_KEY.bus;
+      let sortKey: number = SYMBOL_SORT_KEY_USER_MAP.station;
+      if (f.properties.type === 'airport') sortKey = SYMBOL_SORT_KEY_USER_MAP.airport;
+      else if (f.properties.type === 'ferry_terminal') sortKey = SYMBOL_SORT_KEY_USER_MAP.ferry;
+      else if (f.properties.type === 'bus_terminal') sortKey = SYMBOL_SORT_KEY_USER_MAP.bus;
 
       return {
         type: 'Feature',
@@ -135,11 +152,35 @@ export function UserMapLabels({
       };
     });
 
+    // 都道府県フィーチャー
+    const prefectureFeatures: Feature<Point, CombinedProperties>[] = (prefecturesGeoJson?.features ?? []).map((f) => ({
+      type: 'Feature',
+      geometry: f.geometry,
+      properties: {
+        id: f.properties.id,
+        name: f.properties.name,
+        featureType: 'prefecture' as const,
+        sortKey: SYMBOL_SORT_KEY_USER_MAP.prefecture,
+      },
+    }));
+
+    // 市区町村フィーチャー
+    const cityFeatures: Feature<Point, CombinedProperties>[] = (citiesGeoJson?.features ?? []).map((f) => ({
+      type: 'Feature',
+      geometry: f.geometry,
+      properties: {
+        id: f.properties.id,
+        name: f.properties.name,
+        featureType: 'city' as const,
+        sortKey: SYMBOL_SORT_KEY_USER_MAP.city,
+      },
+    }));
+
     return {
       type: 'FeatureCollection',
-      features: [...spotFeatures, ...transportFeatures],
+      features: [...spotFeatures, ...transportFeatures, ...prefectureFeatures, ...cityFeatures],
     };
-  }, [spotsGeoJson, transportGeoJson]);
+  }, [spotsGeoJson, transportGeoJson, prefecturesGeoJson, citiesGeoJson]);
 
   // データがない場合はレンダリングしない
   if (combinedGeoJson.features.length === 0) {
@@ -166,30 +207,45 @@ export function UserMapLabels({
         shape={combinedGeoJson}
         onPress={onSpotPress}
       >
-        {/* ========== スポットレイヤー（最優先） ========== */}
-        {/* 通常のスポット（選択中のスポット以外） */}
+        {/* ========== 地名ラベルレイヤー（最背面、テキストのみ） ========== */}
+
+        {/* 都道府県ラベル */}
         <Mapbox.SymbolLayer
-          id="user-spots-layer"
-          filter={selectedSpotId
-            ? ['all', ['==', ['get', 'featureType'], 'spot'], ['!=', ['get', 'id'], selectedSpotId]]
-            : ['==', ['get', 'featureType'], 'spot']
-          }
+          id="prefecture-labels-layer"
+          minZoomLevel={LABEL_ZOOM_USER_MAP.PREFECTURE.min}
+          maxZoomLevel={LABEL_ZOOM_USER_MAP.PREFECTURE.max}
+          filter={['==', ['get', 'featureType'], 'prefecture']}
           style={{
             symbolSortKey: ['get', 'sortKey'],
-            iconImage: 'user-spot-icon',
-            iconSize: 0.2,
             textField: ['get', 'name'],
-            textSize: 13,
-            textColor: spotColor,
-            textHaloColor: spotHaloColor,
+            textSize: 16,
+            textColor: locationColors.text,
+            textHaloColor: locationColors.halo,
+            textHaloWidth: 2,
+            textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+            textAllowOverlap: false,
+            symbolPlacement: 'point',
+            textLetterSpacing: 0.1,
+          }}
+        />
+
+        {/* 市区町村ラベル */}
+        <Mapbox.SymbolLayer
+          id="city-labels-layer"
+          minZoomLevel={LABEL_ZOOM_USER_MAP.CITY.min}
+          maxZoomLevel={LABEL_ZOOM_USER_MAP.CITY.max}
+          filter={['==', ['get', 'featureType'], 'city']}
+          style={{
+            symbolSortKey: ['get', 'sortKey'],
+            textField: ['get', 'name'],
+            textSize: 15,
+            textColor: locationColors.text,
+            textHaloColor: locationColors.halo,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
             textAllowOverlap: false,
-            iconAllowOverlap: false,
+            symbolPlacement: 'point',
+            textLetterSpacing: 0.05,
           }}
         />
 
@@ -403,6 +459,33 @@ export function UserMapLabels({
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
             textAnchor: 'top',
             textOffset: [0, 0.3],
+            textAllowOverlap: false,
+            iconAllowOverlap: false,
+          }}
+        />
+
+        {/* ========== スポットレイヤー（交通機関より優先） ========== */}
+        {/* 通常のスポット（選択中のスポット以外） */}
+        <Mapbox.SymbolLayer
+          id="user-spots-layer"
+          filter={selectedSpotId
+            ? ['all', ['==', ['get', 'featureType'], 'spot'], ['!=', ['get', 'id'], selectedSpotId]]
+            : ['==', ['get', 'featureType'], 'spot']
+          }
+          style={{
+            symbolSortKey: ['get', 'sortKey'],
+            iconImage: 'user-spot-icon',
+            iconSize: 0.2,
+            textField: ['get', 'name'],
+            textSize: 13,
+            textColor: spotColor,
+            textHaloColor: spotHaloColor,
+            textHaloWidth: 2,
+            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            iconTextFit: 'none',
+            textAnchor: 'left',
+            iconAnchor: 'right',
+            textOffset: [0.3, 0],
             textAllowOverlap: false,
             iconAllowOverlap: false,
           }}

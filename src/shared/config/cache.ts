@@ -39,16 +39,6 @@ export const TILE_CACHE_LIMITS = {
   maxTiles: 50,
 } as const;
 
-/**
- * @deprecated タイル方式に移行したため非推奨。TILE_CACHE_LIMITSを使用してください。
- */
-export const LRU_CACHE_LIMITS = {
-  /** 街データ: 最大5都道府県分 */
-  machi: 5,
-  /** 市区町村データ: 最大5都道府県分 */
-  cities: 5,
-} as const;
-
 // ===============================
 // 動的データのキャッシュ設定
 // ===============================

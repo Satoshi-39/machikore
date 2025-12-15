@@ -19,7 +19,7 @@ import {
   TRANSPORT_HUB_COLORS_DARK,
   TRANSPORT_HUB_MIN_ZOOM_DEFAULT,
   SYMBOL_SORT_KEY,
-  LABEL_ZOOM,
+  LABEL_ZOOM_DEFAULT_MAP,
   LOCATION_ICONS,
 } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -524,7 +524,7 @@ export function MachiSpotTransportLabels({
         {/* 街（訪問済み・未訪問共通） - アイコン + テキスト緑 */}
         <Mapbox.SymbolLayer
           id="default-machi-labels"
-          minZoomLevel={LABEL_ZOOM.MACHI.min}
+          minZoomLevel={LABEL_ZOOM_DEFAULT_MAP.MACHI.min}
           filter={['==', ['get', 'featureType'], 'machi']}
           style={{
             symbolSortKey: ['get', 'sortKey'],

@@ -9,7 +9,8 @@ import { supabase } from '@/shared/api/supabase';
 import { getDatabase } from '@/shared/api/sqlite/client';
 import { bulkInsertMachi } from '@/shared/api/sqlite/machi';
 import { bulkInsertCities } from '@/shared/api/sqlite/cities';
-import { bulkInsertTransportHubs, type TransportHubRow } from '@/shared/api/sqlite/transport-hubs';
+import { bulkInsertTransportHubs } from '@/shared/api/sqlite/transport-hubs';
+import type { TransportHubRow, TransportHubType } from '@/shared/api/supabase/transport-hubs';
 import { TILE_CACHE_LIMITS } from '@/shared/config/cache';
 import type { MapBounds } from '@/shared/lib/utils/tile.utils';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
@@ -340,7 +341,7 @@ function toSQLiteTransportHub(hub: Record<string, unknown>): TransportHubRow {
     osm_type: hub.osm_type as string | null,
     prefecture_id: hub.prefecture_id as string,
     city_id: hub.city_id as string | null,
-    type: hub.type as string,
+    type: hub.type as TransportHubType,
     subtype: hub.subtype as string | null,
     name: hub.name as string,
     name_kana: hub.name_kana as string | null,
@@ -350,7 +351,7 @@ function toSQLiteTransportHub(hub: Record<string, unknown>): TransportHubRow {
     ref: hub.ref as string | null,
     latitude: hub.latitude as number,
     longitude: hub.longitude as number,
-    tile_id: hub.tile_id as string | null,
+    tile_id: hub.tile_id as string,
     country_code: (hub.country_code as string) || 'jp',
     created_at: (hub.created_at as string) || now,
     updated_at: (hub.updated_at as string) || now,

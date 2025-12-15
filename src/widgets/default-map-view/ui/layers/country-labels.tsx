@@ -5,7 +5,7 @@
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { LABEL_ZOOM } from '@/shared/config';
+import { LABEL_ZOOM_DEFAULT_MAP } from '@/shared/config';
 import type { CountryRow } from '@/shared/types/database.types';
 
 interface CountryFeatureProperties {
@@ -49,8 +49,8 @@ export function CountryLabels({ geoJson, onPress }: CountryLabelsProps) {
     >
       <Mapbox.SymbolLayer
         id="countries-labels"
-        minZoomLevel={LABEL_ZOOM.COUNTRY.min}
-        maxZoomLevel={LABEL_ZOOM.COUNTRY.max}
+        minZoomLevel={LABEL_ZOOM_DEFAULT_MAP.COUNTRY.min}
+        maxZoomLevel={LABEL_ZOOM_DEFAULT_MAP.COUNTRY.max}
         style={{
           textField: ['get', 'name'],
           textSize: 18,

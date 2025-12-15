@@ -1,21 +1,24 @@
 /**
  * 交通機関データを取得するhook
  *
- * タイル単位でSupabaseから取得し、SQLiteにキャッシュ
- * - キャッシュ: SQLiteにタイル単位で保存
- * - LRU: 最大50タイル分をSQLiteに保持
+ * - useTransportHubsByBounds: タイル単位でSQLiteキャッシュ/Supabaseから取得（デフォルトマップ用）
+ * - useTransportHubsSimple: boundsで直接Supabaseから取得（ユーザマップ用）
  */
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getTransportHubsByTileIds } from '@/shared/lib/cache';
+import {
+  getTransportHubsByBounds as getTransportHubsByBoundsApi,
+  type TransportHubType,
+  type TransportHubRow,
+} from '@/shared/api/supabase';
 import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
 import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM, MAP_TILE } from '@/shared/config';
-import type { TransportHubRow } from '@/shared/api/sqlite/transport-hubs';
 
-// 交通機関タイプの定義
-export type TransportHubType = 'station' | 'airport' | 'ferry_terminal' | 'bus_terminal';
+// 交通機関タイプと行の型を再エクスポート
+export type { TransportHubType, TransportHubRow };
 
 interface UseTransportHubsByBoundsOptions {
   /** マップの境界 */
@@ -98,6 +101,8 @@ export function useTransportHubsByBounds(
     enabled: tileIds.length > 0,
     staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
     gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分
+    // 新しいデータ取得中も前のデータを表示し続ける（ちらつき防止）
+    placeholderData: keepPreviousData,
   });
 
   return {
@@ -108,5 +113,57 @@ export function useTransportHubsByBounds(
   };
 }
 
-// 型の再エクスポート
-export type { TransportHubRow };
+// ===============================
+// ユーザマップ用（シンプルなboundsクエリ）
+// ===============================
+
+interface UseTransportHubsSimpleOptions {
+  /** マップの境界 */
+  bounds?: {
+    minLat: number;
+    maxLat: number;
+    minLng: number;
+    maxLng: number;
+  } | null;
+  /** 現在のズームレベル */
+  zoom?: number;
+  /** データ取得を開始する最小ズームレベル */
+  minZoomToFetch?: number;
+  /** フィルタするタイプ（省略時は全タイプ） */
+  types?: TransportHubType[];
+}
+
+/**
+ * マップ境界内の交通機関データを取得（シンプル版・ユーザマップ用）
+ *
+ * タイルベースではなく、boundsで直接Supabaseから取得
+ */
+export function useTransportHubsSimple(options: UseTransportHubsSimpleOptions = {}) {
+  const { bounds, zoom = 0, minZoomToFetch = 0, types } = options;
+
+  // boundsをキーにする（小数点2桁で丸めて不要な再取得を防ぐ）
+  const boundsKey = bounds
+    ? `${bounds.minLat.toFixed(2)},${bounds.maxLat.toFixed(2)},${bounds.minLng.toFixed(2)},${bounds.maxLng.toFixed(2)}`
+    : '';
+
+  const enabled = !!bounds && zoom >= minZoomToFetch;
+
+  return useQuery<TransportHubRow[], Error>({
+    queryKey: [...QUERY_KEYS.transportHubsList(), 'simple', boundsKey, types?.join(',') ?? 'all'],
+    queryFn: async () => {
+      if (!bounds) return [];
+      return getTransportHubsByBoundsApi(
+        bounds.minLat,
+        bounds.maxLat,
+        bounds.minLng,
+        bounds.maxLng,
+        types
+      );
+    },
+    enabled,
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
+    // 新しいデータ取得中も前のデータを表示し続ける（ちらつき防止）
+    placeholderData: keepPreviousData,
+  });
+}

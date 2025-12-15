@@ -3,32 +3,10 @@
  */
 
 import { queryOne, queryAll, execute, executeBatch } from './client';
+import type { TransportHubRow } from '@/shared/api/supabase/transport-hubs';
 
-// ===============================
-// 型定義
-// ===============================
-
-export interface TransportHubRow {
-  id: string;
-  osm_id: number | null;
-  osm_type: string | null;
-  prefecture_id: string;
-  city_id: string | null;
-  type: string;
-  subtype: string | null;
-  name: string;
-  name_kana: string | null;
-  name_en: string | null;
-  operator: string | null;
-  network: string | null;
-  ref: string | null;
-  latitude: number;
-  longitude: number;
-  tile_id: string | null;
-  country_code: string;
-  created_at: string;
-  updated_at: string;
-}
+// 型を再エクスポート
+export type { TransportHubRow };
 
 // ===============================
 // 交通機関データ取得

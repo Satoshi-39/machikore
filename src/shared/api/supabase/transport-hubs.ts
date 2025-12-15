@@ -30,6 +30,7 @@ export interface TransportHubRow {
   ref: string | null;
   latitude: number;
   longitude: number;
+  tile_id: string;
   country_code: string;
   created_at: string;
   updated_at: string;

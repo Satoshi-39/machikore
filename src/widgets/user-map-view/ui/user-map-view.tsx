@@ -6,14 +6,16 @@
 
 import { useMap } from '@/entities/map';
 import { useSpots } from '@/entities/user-spot';
-import { useTransportHubsByBounds, useTransportHubsGeoJson } from '@/entities/transport-hub';
+import { useTransportHubsSimple, useTransportHubsGeoJson } from '@/entities/transport-hub';
+import { useCitiesSimple, useCitiesGeoJson } from '@/entities/city';
+import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import { usePinDropStore, PinDropOverlay } from '@/features/drop-pin';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ENV, type UserMapThemeColor } from '@/shared/config';
+import { ENV, LABEL_ZOOM_USER_MAP, TRANSPORT_HUB_MIN_ZOOM_USER_MAP, type UserMapThemeColor } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
 import { UserMapLabels } from './layers';
@@ -92,12 +94,25 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const [zoomLevel, setZoomLevel] = useState(12);
     const boundsUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    // 交通データを表示領域ベースで取得（React Queryでキャッシュ）
-    const { data: transportHubs = [] } = useTransportHubsByBounds({
+    // 交通データを表示領域ベースで取得（シンプル版）
+    const { data: transportHubs = [] } = useTransportHubsSimple({
       bounds: mapBounds,
       zoom: zoomLevel,
+      minZoomToFetch: TRANSPORT_HUB_MIN_ZOOM_USER_MAP.station, // 駅のズームレベル（12）で統一
     });
     const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
+
+    // 都市データを表示領域ベースで取得（シンプル版）
+    const { data: cities = [] } = useCitiesSimple({
+      bounds: mapBounds,
+      zoom: zoomLevel,
+      minZoomToFetch: LABEL_ZOOM_USER_MAP.CITY.min,
+    });
+    const citiesGeoJson = useCitiesGeoJson(cities);
+
+    // 都道府県データを取得（47件と少ないので全件取得）
+    const { data: prefectures = [] } = usePrefectures();
+    const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
 
     // スポットカメラ操作用フック
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
@@ -350,11 +365,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             animated={true}
           />
 
-          {/* ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ）
+          {/* ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ+地名）
               同じShapeSourceにまとめることで、symbolSortKeyでスポットを優先表示 */}
           <UserMapLabels
             spotsGeoJson={spotsGeoJson}
             transportGeoJson={transportHubsGeoJson}
+            prefecturesGeoJson={prefecturesGeoJson}
+            citiesGeoJson={citiesGeoJson}
             onSpotPress={handleSpotPress}
             themeColor={mapData?.theme_color as UserMapThemeColor}
             selectedSpotId={selectedSpot?.id ?? focusedSpotId}

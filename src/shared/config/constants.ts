@@ -102,11 +102,11 @@ export const MAP_ZOOM = {
 } as const;
 
 /**
- * ラベル表示のズームレベル範囲
+ * ラベル表示のズームレベル範囲 - デフォルトマップ用
  * min: この値以上のズームでラベルが表示される（minZoomLevel）
  * max: この値以下のズームでラベルが表示される（maxZoomLevel）
  */
-export const LABEL_ZOOM = {
+export const LABEL_ZOOM_DEFAULT_MAP = {
   /** 国ラベル */
   COUNTRY: { min: 1, max: 4 },
   /** 地方ラベル */
@@ -117,6 +117,18 @@ export const LABEL_ZOOM = {
   CITY: { min: 10, max: 12 },
   /** 街ラベル（maxなし = ずっと表示） */
   MACHI: { min: 12 },
+} as const;
+
+/**
+ * ラベル表示のズームレベル範囲 - ユーザマップ用
+ * min: この値以上のズームでラベルが表示される（minZoomLevel）
+ * max: この値以下のズームでラベルが表示される（maxZoomLevel）
+ */
+export const LABEL_ZOOM_USER_MAP = {
+  /** 都道府県ラベル */
+  PREFECTURE: { min: 5, max: 11 },
+  /** 市区ラベル（より広域から表示） */
+  CITY: { min: 8, max: 12 },
 } as const;
 
 // ===============================
@@ -275,13 +287,13 @@ export const TRANSPORT_HUB_MIN_ZOOM_DEFAULT = {
 
 /** 交通機関のminZoomLevel（ユーザマップ用 - より拡大時のみ表示、スポット優先） */
 export const TRANSPORT_HUB_MIN_ZOOM_USER_MAP = {
-  station: 13,
-  airport: 9,
-  ferry: 13,
-  bus: 14,
+  station: 12,
+  airport: 8,
+  ferry: 12,
+  bus: 13,
 } as const;
 
-/** symbolSortKeyの値（小さいほど優先、同じShapeSource内で有効） */
+/** symbolSortKeyの値（小さいほど優先、同じShapeSource内で有効）- デフォルトマップ用 */
 export const SYMBOL_SORT_KEY = {
   machi: 1, // 街は最優先
   spot: 25, // スポットは街の次に優先
@@ -289,6 +301,29 @@ export const SYMBOL_SORT_KEY = {
   station: 100, // 駅
   ferry: 100, // フェリー
   bus: 150, // バス
+} as const;
+
+/** symbolSortKeyの値（小さいほど優先、同じShapeSource内で有効）- ユーザマップ用 */
+export const SYMBOL_SORT_KEY_USER_MAP = {
+  spot: 1, // スポットは最優先
+  airport: 50, // 空港
+  station: 100, // 駅
+  ferry: 100, // フェリー
+  bus: 150, // バス
+  city: 200, // 市区町村（交通データより低優先度）
+  prefecture: 250, // 都道府県（最低優先度）
+} as const;
+
+/** 地名ラベルの色（ライトモード）- ユーザマップ用 */
+export const LOCATION_LABEL_COLORS_LIGHT = {
+  text: '#4B5563', // gray-600
+  halo: '#FFFFFF',
+} as const;
+
+/** 地名ラベルの色（ダークモード）- ユーザマップ用 */
+export const LOCATION_LABEL_COLORS_DARK = {
+  text: '#D1D5DB', // gray-300
+  halo: '#1F2937', // gray-800
 } as const;
 
 /**

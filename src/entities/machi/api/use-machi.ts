@@ -6,7 +6,7 @@
  * - LRU: 最大50タイル分をSQLiteに保持
  */
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getAllMachi } from '@/shared/api/sqlite';
@@ -80,6 +80,8 @@ export function useMachiByBounds(options: UseMachiByBoundsOptions = {}): UseMach
     enabled: tileIds.length > 0,
     staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
     gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分
+    // 新しいデータ取得中も前のデータを表示し続ける（ちらつき防止）
+    placeholderData: keepPreviousData,
   });
 
   return {

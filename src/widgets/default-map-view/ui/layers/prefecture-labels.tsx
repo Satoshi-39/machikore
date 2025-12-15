@@ -5,7 +5,7 @@
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { LABEL_ZOOM, LOCATION_ICONS } from '@/shared/config';
+import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS } from '@/shared/config';
 import type { PrefectureRow } from '@/shared/types/database.types';
 
 // アイコン画像（紫色）
@@ -51,8 +51,8 @@ export function PrefectureLabels({ geoJson, prefectureMap, onPress }: Prefecture
       >
         <Mapbox.SymbolLayer
           id="prefectures-labels"
-          minZoomLevel={LABEL_ZOOM.PREFECTURE.min}
-          maxZoomLevel={LABEL_ZOOM.PREFECTURE.max}
+          minZoomLevel={LABEL_ZOOM_DEFAULT_MAP.PREFECTURE.min}
+          maxZoomLevel={LABEL_ZOOM_DEFAULT_MAP.PREFECTURE.max}
           style={{
             iconImage: 'prefecture-icon',
             iconSize: 0.35,

@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { DiscoverSearch } from '@/widgets/discover-search';
