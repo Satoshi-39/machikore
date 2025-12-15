@@ -91,10 +91,14 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
   if (!isSearchFocused) {
     return (
       <View className="flex-row items-center px-4 py-2 bg-surface dark:bg-dark-surface gap-3">
-        {/* 左側: オプションコンポーネント */}
-        {leftComponent && (
+        {/* 左側: オプションコンポーネント（または仮アイコン） */}
+        {leftComponent ? (
           <View>{leftComponent}</View>
-        )}
+        ) : onMapPress ? (
+          <Pressable className="p-1">
+            <Ionicons name="menu" size={24} color={colors.primary.DEFAULT} />
+          </Pressable>
+        ) : null}
 
         {/* 検索バー */}
         <Pressable
