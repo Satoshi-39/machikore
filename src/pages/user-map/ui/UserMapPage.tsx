@@ -15,7 +15,7 @@ import { UserMapView } from '@/widgets/user-map-view';
 import { UserMapList } from '@/widgets/user-map-list';
 import { OwnMapSearch } from '@/widgets/own-map-search';
 import { OtherMapSearch } from '@/widgets/other-map-search';
-import { MapHeader } from '@/widgets/map-header';
+import { UserMapHeader } from '@/widgets/user-map-view/ui/user-map-header';
 import type { MapViewHandle } from '@/shared/lib/map';
 import { useLocation, useCurrentTab, useSafeBack } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
@@ -234,14 +234,14 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
           style={{ paddingTop: insets.top }}
         >
           <View className="mx-4 mt-2">
-            <MapHeader
-              isUserMap
+            <UserMapHeader
               isLoading={isMapLoading}
               mapId={mapId}
               mapTitle={selectedMap?.name}
               userId={user?.id}
               currentUserId={user?.id}
               mapOwnerId={selectedMap?.user_id}
+              isArticlePublic={selectedMap?.is_article_public ?? false}
               userName={mapOwner?.display_name || undefined}
               userAvatarUrl={mapOwner?.avatar_url || undefined}
               userMaps={ownerMaps}

@@ -1,7 +1,7 @@
 /**
- * マップヘッダーWidget
+ * ユーザーマップヘッダーWidget
  *
- * デフォルトマップとユーザーマップのヘッダー表示を切り替える
+ * ユーザーマップ専用のヘッダー表示
  * FSDの原則：Widget層は複数の要素を組み合わせた複合コンポーネント
  */
 
@@ -18,8 +18,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
 
-interface MapHeaderProps {
-  isUserMap: boolean;
+interface UserMapHeaderProps {
   isLoading?: boolean;
   mapId?: string | null;
   mapTitle?: string;
@@ -28,6 +27,8 @@ interface MapHeaderProps {
   currentUserId?: string | null;
   /** マップ所有者のID */
   mapOwnerId?: string | null;
+  /** 記事が公開されているかどうか */
+  isArticlePublic?: boolean;
   userName?: string;
   userAvatarUrl?: string;
   userMaps?: MapWithUser[];
@@ -39,14 +40,14 @@ interface MapHeaderProps {
   onEditPress?: () => void;
 }
 
-export function MapHeader({
-  isUserMap,
+export function UserMapHeader({
   isLoading = false,
   mapId,
   mapTitle,
   userId,
   currentUserId,
   mapOwnerId,
+  isArticlePublic = false,
   userName,
   userAvatarUrl,
   userMaps = [],
@@ -56,7 +57,7 @@ export function MapHeader({
   onSearchPress,
   onArticlePress,
   onEditPress,
-}: MapHeaderProps) {
+}: UserMapHeaderProps) {
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -137,18 +138,23 @@ export function MapHeader({
       });
     }
 
-    items.push(
-      {
+    // 記事が公開されているまたは自分のマップの場合のみ「記事を見る」を表示
+    if (isArticlePublic || isOwnMap) {
+      items.push({
         id: 'article',
         label: '記事を見る',
         icon: 'document-text-outline',
         onPress: () => onArticlePress?.(),
-      },
+      });
+    }
+
+    items.push(
       {
         id: 'like',
         label: isLiked ? 'いいね済み' : 'いいね',
         icon: isLiked ? 'heart' : 'heart-outline',
         iconColor: isLiked ? '#EF4444' : undefined,
+        closeOnSelect: false,
         onPress: handleLikePress,
       },
       {
@@ -156,6 +162,7 @@ export function MapHeader({
         label: isBookmarked ? '保存済み' : '保存',
         icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
         iconColor: isBookmarked ? '#007AFF' : undefined,
+        closeOnSelect: false,
         onPress: handleBookmarkPress,
       },
       {
@@ -167,7 +174,7 @@ export function MapHeader({
     );
 
     return items;
-  }, [isOwnMap, isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress, onEditPress]);
+  }, [isOwnMap, isArticlePublic, isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress, onEditPress]);
 
   // モーダルの開閉に応じてアニメーション
   useEffect(() => {
@@ -194,13 +201,13 @@ export function MapHeader({
     }
   };
 
-  const handleMapItemPress = (mapId: string) => {
-    onMapSelect?.(mapId);
+  const handleMapItemPress = (selectedMapId: string) => {
+    onMapSelect?.(selectedMapId);
     setIsDropdownOpen(false);
   };
 
   // ローディング時の表示
-  if (isUserMap && isLoading) {
+  if (isLoading) {
     return (
       <View
         className="bg-surface dark:bg-dark-surface-elevated px-4 py-3 rounded-full"
@@ -228,106 +235,83 @@ export function MapHeader({
 
   return (
     <View
-      className={isUserMap ? "bg-surface dark:bg-dark-surface-elevated px-4 py-3 rounded-full" : "bg-surface dark:bg-dark-surface-elevated px-5 py-4"}
+      className="bg-surface dark:bg-dark-surface-elevated px-4 py-3 rounded-full"
       style={{
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: isDarkMode ? 0.4 : 0.15,
-        shadowRadius: isDarkMode ? 8 : (isUserMap ? 4 : 6),
+        shadowRadius: isDarkMode ? 8 : 4,
         elevation: isDarkMode ? 8 : 4,
       }}
     >
-      {isUserMap ? (
-        // ユーザーマップ：戻るボタン + ユーザーアイコン + マップ名（左）、アクションボタン群（右）
-        <View className="flex-row items-center justify-between">
-          {/* 左側：戻るボタン + ユーザーアイコン + マップ名 */}
-          <View className="flex-row items-center flex-1 mr-2">
-            {/* 戻るボタン */}
-            <Pressable onPress={onBack} className="mr-2.5">
-              <Ionicons name="arrow-back" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
-            </Pressable>
+      {/* ユーザーマップ：戻るボタン + ユーザーアイコン + マップ名（左）、アクションボタン群（右） */}
+      <View className="flex-row items-center justify-between">
+        {/* 左側：戻るボタン + ユーザーアイコン + マップ名 */}
+        <View className="flex-row items-center flex-1 mr-2">
+          {/* 戻るボタン */}
+          <Pressable onPress={onBack} className="mr-2.5">
+            <Ionicons name="arrow-back" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
+          </Pressable>
 
-            {/* ユーザーアイコン */}
+          {/* ユーザーアイコン */}
+          <Pressable
+            onPress={onUserPress}
+            onLongPress={() => userAvatarUrl && setIsAvatarModalVisible(true)}
+            className="mr-2.5"
+          >
+            {userAvatarUrl ? (
+              <Image
+                source={{ uri: userAvatarUrl }}
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <View className="w-10 h-10 rounded-full bg-gray-300 items-center justify-center">
+                <Text className="text-sm font-bold text-foreground-secondary dark:text-dark-foreground-secondary">
+                  {userName?.[0]?.toUpperCase() || '?'}
+                </Text>
+              </View>
+            )}
+          </Pressable>
+
+          {/* マップ名 - クリックでドロップダウン表示 */}
+          <View className="flex-1 flex-shrink">
             <Pressable
-              onPress={onUserPress}
-              onLongPress={() => userAvatarUrl && setIsAvatarModalVisible(true)}
-              className="mr-2.5"
+              onPress={handleMapTitlePress}
+              className="flex-row items-center"
             >
-              {userAvatarUrl ? (
-                <Image
-                  source={{ uri: userAvatarUrl }}
-                  className="w-10 h-10 rounded-full"
+              <Text
+                className="text-base font-bold text-foreground dark:text-dark-foreground flex-shrink"
+                numberOfLines={1}
+              >
+                {mapTitle || `${userName || 'ゲスト'}のマップ`}
+              </Text>
+              {userMaps.length > 0 && (
+                <Ionicons
+                  name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
+                  size={19}
+                  color="#6B7280"
+                  style={{ marginLeft: 4 }}
                 />
-              ) : (
-                <View className="w-10 h-10 rounded-full bg-gray-300 items-center justify-center">
-                  <Text className="text-sm font-bold text-foreground-secondary dark:text-dark-foreground-secondary">
-                    {userName?.[0]?.toUpperCase() || '?'}
-                  </Text>
-                </View>
               )}
             </Pressable>
-
-            {/* マップ名 - クリックでドロップダウン表示 */}
-            <View className="flex-1 flex-shrink">
-              <Pressable
-                onPress={handleMapTitlePress}
-                className="flex-row items-center"
-              >
-                <Text
-                  className="text-base font-bold text-foreground dark:text-dark-foreground flex-shrink"
-                  numberOfLines={1}
-                >
-                  {mapTitle || `${userName || 'ゲスト'}のマップ`}
-                </Text>
-                {userMaps.length > 0 && (
-                  <Ionicons
-                    name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
-                    size={19}
-                    color="#6B7280"
-                    style={{ marginLeft: 4 }}
-                  />
-                )}
-              </Pressable>
-            </View>
-          </View>
-
-          {/* 右側：アクションボタン群 */}
-          <View className="flex-row items-center gap-3">
-            {/* 検索ボタン */}
-            <Pressable onPress={onSearchPress} className="items-center justify-center">
-              <Ionicons name="search-outline" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
-            </Pressable>
-
-            {/* 三点リーダメニュー */}
-            <PopupMenu
-              items={menuItems}
-              triggerSize={23}
-              triggerColor={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT}
-            />
           </View>
         </View>
-      ) : (
-        // デフォルトマップ：ロゴ（左）+ キャッチフレーズ（中央）
-        <View className="flex-row items-center">
-          {/* ロゴ（左端） */}
-          <View className="flex-row items-center">
-            <Ionicons name="map" size={20} color="#007AFF" />
-            <Text className="ml-1 text-base font-bold text-blue-500">
-              街コレ
-            </Text>
-          </View>
 
-          {/* キャッチフレーズ（中央） */}
-          <View className="flex-1 items-center">
-            <Text className="text-lg font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
-              日本の街を再発見しよう
-            </Text>
-          </View>
+        {/* 右側：アクションボタン群 */}
+        <View className="flex-row items-center gap-3">
+          {/* 検索ボタン */}
+          <Pressable onPress={onSearchPress} className="items-center justify-center">
+            <Ionicons name="search-outline" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
+          </Pressable>
 
-          {/* 右側のスペース（バランス調整） */}
-          <View style={{ width: 60 }} />
+          {/* 三点リーダメニュー */}
+          <PopupMenu
+            items={menuItems}
+            triggerSize={23}
+            triggerColor={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT}
+          />
         </View>
-      )}
+      </View>
 
       {/* マップ選択モーダル */}
       <Modal

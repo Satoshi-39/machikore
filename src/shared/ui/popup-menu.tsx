@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {
   Menu,
@@ -22,6 +22,8 @@ export interface PopupMenuItem {
   icon?: keyof typeof Ionicons.glyphMap;
   iconColor?: string;
   destructive?: boolean;
+  /** falseにするとメニューを閉じない（いいね・ブックマーク等に有効） */
+  closeOnSelect?: boolean;
   onPress: () => void;
 }
 
@@ -57,6 +59,61 @@ export function PopupMenu({
     iconColor: isDarkMode ? '#A0A0A0' : colors.gray[700], // グレーアイコン
   };
 
+  const renderMenuItem = (item: PopupMenuItem, index: number) => {
+    const content = (
+      <View
+        style={[
+          styles.menuItem,
+          index < items.length - 1 && dynamicStyles.menuItemBorder,
+        ]}
+      >
+        {item.icon && (
+          <Ionicons
+            name={item.icon}
+            size={20}
+            color={
+              item.destructive
+                ? colors.danger
+                : item.iconColor || dynamicStyles.iconColor
+            }
+            style={styles.menuIcon}
+          />
+        )}
+        <Text
+          style={[
+            dynamicStyles.menuLabel,
+            item.destructive && styles.destructiveLabel,
+          ]}
+        >
+          {item.label}
+        </Text>
+      </View>
+    );
+
+    // closeOnSelect === falseの場合、Pressableでラップしてメニューを閉じない
+    if (item.closeOnSelect === false) {
+      return (
+        <MenuOption key={item.id} disableTouchable>
+          <Pressable
+            onPress={item.onPress}
+            style={({ pressed }) => [
+              pressed && styles.menuItemPressed,
+            ]}
+          >
+            {content}
+          </Pressable>
+        </MenuOption>
+      );
+    }
+
+    // 通常: メニュー選択時に閉じる
+    return (
+      <MenuOption key={item.id} onSelect={item.onPress}>
+        {content}
+      </MenuOption>
+    );
+  };
+
   return (
     <Menu>
       <MenuTrigger
@@ -73,37 +130,7 @@ export function PopupMenu({
       </MenuTrigger>
 
       <MenuOptions customStyles={{ optionsContainer: dynamicStyles.optionsContainer }}>
-        {items.map((item, index) => (
-          <MenuOption key={item.id} onSelect={item.onPress}>
-            <View
-              style={[
-                styles.menuItem,
-                index < items.length - 1 && dynamicStyles.menuItemBorder,
-              ]}
-            >
-              {item.icon && (
-                <Ionicons
-                  name={item.icon}
-                  size={20}
-                  color={
-                    item.destructive
-                      ? colors.danger
-                      : item.iconColor || dynamicStyles.iconColor
-                  }
-                  style={styles.menuIcon}
-                />
-              )}
-              <Text
-                style={[
-                  dynamicStyles.menuLabel,
-                  item.destructive && styles.destructiveLabel,
-                ]}
-              >
-                {item.label}
-              </Text>
-            </View>
-          </MenuOption>
-        ))}
+        {items.map((item, index) => renderMenuItem(item, index))}
       </MenuOptions>
     </Menu>
   );
@@ -132,6 +159,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     paddingHorizontal: 16,
+  },
+  menuItemPressed: {
+    opacity: 0.5,
   },
   menuItemBorder: {
     borderBottomWidth: StyleSheet.hairlineWidth,
