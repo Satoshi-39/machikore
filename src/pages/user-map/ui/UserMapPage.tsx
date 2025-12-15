@@ -17,7 +17,7 @@ import { OwnMapSearch } from '@/widgets/own-map-search';
 import { OtherMapSearch } from '@/widgets/other-map-search';
 import { MapHeader } from '@/widgets/map-header';
 import type { MapViewHandle } from '@/shared/lib/map';
-import { useLocation, useCurrentTab } from '@/shared/lib';
+import { useLocation, useCurrentTab, useSafeBack } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
 import type { UserMapThemeColor } from '@/shared/config';
 import {
@@ -43,6 +43,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   const router = useRouter();
   const currentTab = useCurrentTab();
   const insets = useSafeAreaInsets();
+  const { goBack } = useSafeBack();
 
   const user = useUserStore((state) => state.user);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
@@ -93,11 +94,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
   const handleBack = () => {
     setSelectedMapId(null);
-    if (router.canGoBack()) {
-      router.back();
-    } else {
-      router.dismiss();
-    }
+    goBack();
   };
 
   // 検索結果タップ時の処理（新規スポット作成）

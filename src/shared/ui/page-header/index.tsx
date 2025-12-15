@@ -7,10 +7,10 @@
 
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useSafeBack } from '@/shared/lib/navigation';
 import { colors } from '@/shared/config';
 
 interface PageHeaderProps {
@@ -33,17 +33,14 @@ export function PageHeader({
   rightComponent,
   useSafeArea = true,
 }: PageHeaderProps) {
-  const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const { goBack } = useSafeBack();
 
   const handleBack = () => {
     if (onBack) {
       onBack();
-    } else if (router.canGoBack()) {
-      router.back();
     } else {
-      // 戻れない場合はスタックを閉じる（タブ内スタックの場合）
-      router.dismiss();
+      goBack();
     }
   };
 

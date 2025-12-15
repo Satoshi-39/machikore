@@ -8,13 +8,12 @@
 import React, { useState, useRef } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { DefaultMapView } from '@/widgets/default-map-view';
 import { DefaultMapList } from '@/widgets/default-map-list';
 import { DefaultMapSearch } from '@/widgets/default-map-search';
 import type { MapViewHandle } from '@/shared/lib/map';
-import { useLocation } from '@/shared/lib';
+import { useLocation, useSafeBack } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
 import { useSearchResultJump } from '@/features/map-jump';
 
@@ -24,8 +23,8 @@ interface DefaultMapPageProps {
 }
 
 export function DefaultMapPage({ showBackButton = false }: DefaultMapPageProps) {
-  const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { goBack } = useSafeBack();
 
   // 検索結果からのジャンプ処理
   const { jumpToSearchResult } = useSearchResultJump();
@@ -53,14 +52,6 @@ export function DefaultMapPage({ showBackButton = false }: DefaultMapPageProps) 
     setIsSearchFocused(true);
   };
 
-  const handleBack = () => {
-    if (router.canGoBack()) {
-      router.back();
-    } else {
-      router.dismiss();
-    }
-  };
-
   return (
     <View className="flex-1">
       {/* マップ表示（常にレンダリング・全画面） */}
@@ -75,7 +66,7 @@ export function DefaultMapPage({ showBackButton = false }: DefaultMapPageProps) 
           onQuickSearch={handleQuickSearch}
           isSearchFocused={isSearchFocused}
           showBackButton={showBackButton}
-          onBackPress={handleBack}
+          onBackPress={goBack}
         />
 
         {/* リスト表示時：マップの上にリストUIをオーバーレイ */}
