@@ -5,17 +5,16 @@
  * コンパクトなカードレイアウト（サムネイル左、情報右）
  */
 
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Text, Pressable, FlatList, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { useCurrentTab, showLoginRequiredAlert } from '@/shared/lib';
+import { useCurrentTab } from '@/shared/lib';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
-import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
-import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
-import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { MapLikeButton } from '@/features/map-like';
+import { MapBookmarkButton } from '@/features/map-bookmark';
 import { LikersModal } from '@/features/view-likers';
 import { AsyncBoundary, PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
@@ -59,50 +58,7 @@ function MyPageMapCard({
   const isArticlePublic = map.is_article_public === true;
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
-  // いいね状態
-  const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
-
-  // ブックマーク状態
-  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
-  const isBookmarked = bookmarkInfo.length > 0;
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
-  const { mutate: addBookmark } = useBookmarkMap();
-  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
-
-  const handleLikePress = (e: any) => {
-    e.stopPropagation();
-    if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
-      return;
-    }
-    if (isTogglingLike) return;
-    toggleLike({ userId: currentUserId, mapId: map.id });
-  };
-
-  const handleBookmarkPress = useCallback((e: any) => {
-    e.stopPropagation();
-    if (!currentUserId) {
-      showLoginRequiredAlert('保存');
-      return;
-    }
-    setIsFolderModalVisible(true);
-  }, [currentUserId]);
-
-  const handleAddToFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    addBookmark({ userId: currentUserId, mapId: map.id, folderId });
-  }, [currentUserId, map.id, addBookmark]);
-
-  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
-  }, [currentUserId, map.id, removeFromFolder]);
 
   // オーナーのみメニュー表示
   const menuItems: PopupMenuItem[] = useMemo(() => {
@@ -164,44 +120,21 @@ function MyPageMapCard({
               </Text>
             </View>
 
-            {/* いいね（アイコン：いいねトグル、数字：ユーザー一覧） */}
-            <View className="flex-row items-center">
-              <Pressable
-                onPress={handleLikePress}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
-                disabled={isTogglingLike}
-              >
-                <Ionicons
-                  name={isLiked ? 'heart' : 'heart-outline'}
-                  size={14}
-                  color={isLiked ? '#EF4444' : colors.text.secondary}
-                />
-              </Pressable>
-              <Pressable
-                onPress={(e) => {
-                  e.stopPropagation();
-                  setIsLikersModalVisible(true);
-                }}
-                hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
-              >
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                  {map.likes_count ?? 0}
-                </Text>
-              </Pressable>
-            </View>
+            {/* いいね */}
+            <MapLikeButton
+              mapId={map.id}
+              currentUserId={currentUserId}
+              likesCount={map.likes_count ?? 0}
+              size={14}
+              onCountPress={() => setIsLikersModalVisible(true)}
+            />
 
             {/* ブックマーク */}
-            <Pressable
-              onPress={handleBookmarkPress}
-              className="flex-row items-center"
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <Ionicons
-                name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-                size={14}
-                color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
-              />
-            </Pressable>
+            <MapBookmarkButton
+              mapId={map.id}
+              currentUserId={currentUserId}
+              size={14}
+            />
 
             {/* 作成日 */}
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
@@ -236,19 +169,6 @@ function MyPageMapCard({
           )}
         </View>
       </View>
-
-      {/* フォルダ選択モーダル */}
-      {currentUserId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={currentUserId}
-          folderType="maps"
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={handleAddToFolder}
-          onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
-        />
-      )}
 
       {/* いいねユーザー一覧モーダル */}
       <LikersModal

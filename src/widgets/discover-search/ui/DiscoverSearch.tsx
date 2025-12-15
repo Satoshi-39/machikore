@@ -96,7 +96,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
           <View>{leftComponent}</View>
         ) : onMapPress ? (
           <Pressable className="p-1">
-            <Ionicons name="menu" size={24} color={colors.primary.DEFAULT} />
+            <Ionicons name="menu" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
           </Pressable>
         ) : null}
 
@@ -114,7 +114,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
         {/* 右側: スポットアイコン */}
         {onMapPress && (
           <Pressable onPress={onMapPress} className="p-1">
-            <Ionicons name="location-outline" size={24} color={colors.primary.DEFAULT} />
+            <Ionicons name="location-outline" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
           </Pressable>
         )}
       </View>

@@ -22,7 +22,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#007AFF',
+        tabBarActiveTintColor: isDarkMode ? colors.dark.foreground : colors.light.foreground,
         tabBarInactiveTintColor: isDarkMode ? '#9CA3AF' : '#6B7280',
         tabBarStyle: {
           backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
@@ -41,9 +41,9 @@ export default function TabLayout() {
         name="home"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color, focused }) => (
             <View style={{ marginTop: 2 }}>
-              <Ionicons name="home-outline" size={26} color={color} />
+              <Ionicons name={focused ? 'home' : 'home-outline'} size={26} color={color} />
             </View>
           ),
         }}
@@ -52,9 +52,9 @@ export default function TabLayout() {
         name="discover"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color, focused }) => (
             <View style={{ marginTop: 2 }}>
-              <Ionicons name="search-outline" size={26} color={color} />
+              <Ionicons name={focused ? 'search' : 'search-outline'} size={26} color={color} />
             </View>
           ),
         }}
@@ -92,9 +92,9 @@ export default function TabLayout() {
         name="notifications"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color, focused }) => (
             <View style={{ marginTop: 2 }}>
-              <Ionicons name="notifications-outline" size={26} color={color} />
+              <Ionicons name={focused ? 'notifications' : 'notifications-outline'} size={26} color={color} />
               {unreadCount > 0 ? (
                 <View
                   style={{
@@ -132,9 +132,9 @@ export default function TabLayout() {
         name="mypage"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color, focused }) => (
             <View style={{ marginTop: 2 }}>
-              <Ionicons name="person-outline" size={26} color={color} />
+              <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
             </View>
           ),
         }}

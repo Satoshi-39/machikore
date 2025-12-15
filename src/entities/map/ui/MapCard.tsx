@@ -17,9 +17,8 @@ import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
 import { useDeleteMap } from '@/entities/map/api';
 import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
-import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
-import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
-import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { MapLikeButton } from '@/features/map-like';
+import { MapBookmarkButton } from '@/features/map-bookmark';
 import { LikersModal } from '@/features/view-likers';
 
 interface MapCardProps {
@@ -44,55 +43,12 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   const screenWidth = Dimensions.get('window').width;
 
   const { mutate: deleteMap } = useDeleteMap();
-  const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
-
-  // ブックマーク状態
-  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
-  const isBookmarked = bookmarkInfo.length > 0;
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
-  const { mutate: addBookmark } = useBookmarkMap();
-  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const isOwner = currentUserId && map.user_id === currentUserId;
 
   // 記事公開状態（MapWithUserの場合のみ）
   const isArticlePublic = 'is_article_public' in map && map.is_article_public === true;
-
-  const handleLikePress = (e: any) => {
-    e.stopPropagation();
-    if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
-      return;
-    }
-    if (isTogglingLike) return;
-    toggleLike({ userId: currentUserId, mapId: map.id });
-  };
-
-  // ブックマーク処理
-  const handleBookmarkPress = useCallback((e: any) => {
-    e.stopPropagation();
-    if (!currentUserId) {
-      showLoginRequiredAlert('保存');
-      return;
-    }
-    setIsFolderModalVisible(true);
-  }, [currentUserId]);
-
-  const handleAddToFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    addBookmark({ userId: currentUserId, mapId: map.id, folderId });
-  }, [currentUserId, map.id, addBookmark]);
-
-  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
-  }, [currentUserId, map.id, removeFromFolder]);
 
   // 共有処理
   const handleSharePress = useCallback(async (e: any) => {
@@ -266,44 +222,25 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
           </Text>
         </Pressable>
 
-        {/* いいね（アイコン：トグル、数字：ユーザー一覧） */}
-        <View className="flex-row items-center py-2 px-3">
-          <Pressable
-            onPress={handleLikePress}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
-            disabled={isTogglingLike}
-          >
-            <Ionicons
-              name={isLiked ? 'heart' : 'heart-outline'}
-              size={18}
-              color={isLiked ? '#EF4444' : colors.text.secondary}
-            />
-          </Pressable>
-          <Pressable
-            onPress={(e) => {
-              e.stopPropagation();
-              setIsLikersModalVisible(true);
-            }}
-            hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
-          >
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-              {map.likes_count ?? 0}
-            </Text>
-          </Pressable>
+        {/* いいね */}
+        <View className="py-2 px-3">
+          <MapLikeButton
+            mapId={map.id}
+            currentUserId={currentUserId}
+            likesCount={map.likes_count ?? 0}
+            size={18}
+            onCountPress={() => setIsLikersModalVisible(true)}
+          />
         </View>
 
         {/* ブックマーク */}
-        <Pressable
-          onPress={handleBookmarkPress}
-          className="flex-row items-center py-2 px-3"
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Ionicons
-            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+        <View className="py-2 px-3">
+          <MapBookmarkButton
+            mapId={map.id}
+            currentUserId={currentUserId}
             size={18}
-            color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
           />
-        </Pressable>
+        </View>
 
         {/* 共有 */}
         <Pressable
@@ -318,19 +255,6 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
           />
         </Pressable>
       </View>
-
-      {/* フォルダ選択モーダル */}
-      {currentUserId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={currentUserId}
-          folderType="maps"
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={handleAddToFolder}
-          onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
-        />
-      )}
 
       {/* いいねユーザー一覧モーダル */}
       <LikersModal

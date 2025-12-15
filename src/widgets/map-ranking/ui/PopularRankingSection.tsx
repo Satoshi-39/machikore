@@ -4,10 +4,12 @@
 
 import React from 'react';
 import { usePopularMaps } from '@/entities/map';
+import { useCurrentUserId } from '@/entities/user';
 import { MapRankingSection } from './MapRankingSection';
 
 export function PopularRankingSection() {
-  const { data: maps, isLoading, error } = usePopularMaps(10);
+  const currentUserId = useCurrentUserId();
+  const { data: maps, isLoading, error } = usePopularMaps(10, currentUserId);
 
   return (
     <MapRankingSection

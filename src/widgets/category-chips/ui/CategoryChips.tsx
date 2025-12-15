@@ -8,6 +8,7 @@
 import React from 'react';
 import { ScrollView, Pressable, Text, View } from 'react-native';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 // カテゴリ定義
 export const CATEGORIES = [
@@ -31,6 +32,9 @@ interface CategoryChipsProps {
 }
 
 export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryChipsProps) {
+  const isDarkMode = useIsDarkMode();
+  const selectedColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
+
   return (
     <ScrollView
       horizontal
@@ -47,9 +51,10 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
             className="items-center py-2 active:opacity-70"
           >
             <Text
+              style={isSelected ? { color: selectedColor } : undefined}
               className={`text-sm font-medium ${
                 isSelected
-                  ? 'text-primary'
+                  ? ''
                   : 'text-foreground-muted dark:text-dark-foreground-muted'
               }`}
             >

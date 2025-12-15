@@ -48,6 +48,10 @@ export interface MapWithUser {
   user: UserBasicInfo | null;
   /** 記事の公開設定（マップの公開とは独立） */
   is_article_public?: boolean;
+  /** 現在のユーザーがこのマップにいいねしているか */
+  is_liked?: boolean;
+  /** 現在のユーザーがこのマップをブックマークしているか */
+  is_bookmarked?: boolean;
 }
 
 // ===============================

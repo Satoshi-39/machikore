@@ -10,3 +10,4 @@ export * from './action-sheet.utils';
 export * from './auth.utils';
 export * from './bottom-sheet.utils';
 export * from './tile.utils';
+export * from './theme.utils';

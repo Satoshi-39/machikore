@@ -8,13 +8,16 @@ import type { MapWithUser } from '@/shared/types';
 
 /**
  * 人気マップを取得（いいね数順）
+ * @param currentUserId 現在のユーザーID（いいね状態・ブックマーク状態を取得するため）
  */
-async function getPopularMaps(limit: number = 10): Promise<MapWithUser[]> {
+async function getPopularMaps(limit: number = 10, currentUserId?: string | null): Promise<MapWithUser[]> {
   const { data, error } = await supabase
     .from('maps')
     .select(`
       *,
-      user:users!maps_user_id_fkey(id, username, display_name, avatar_url)
+      user:users!maps_user_id_fkey(id, username, display_name, avatar_url),
+      likes(id, user_id),
+      bookmarks(id, user_id)
     `)
     .eq('is_public', true)
     .order('likes_count', { ascending: false })
@@ -25,16 +28,32 @@ async function getPopularMaps(limit: number = 10): Promise<MapWithUser[]> {
     throw error;
   }
 
-  return data ?? [];
+  // いいね状態・ブックマーク状態を判定してマップ
+  return (data ?? []).map((map: any) => {
+    const isLiked = currentUserId
+      ? (map.likes || []).some((like: any) => like.user_id === currentUserId)
+      : false;
+    const isBookmarked = currentUserId
+      ? (map.bookmarks || []).some((bookmark: any) => bookmark.user_id === currentUserId)
+      : false;
+
+    return {
+      ...map,
+      user: map.user || null,
+      is_liked: isLiked,
+      is_bookmarked: isBookmarked,
+    };
+  });
 }
 
 /**
  * 人気マップを取得するhook
+ * @param currentUserId 現在のユーザーID（いいね状態を取得するため）
  */
-export function usePopularMaps(limit: number = 10) {
+export function usePopularMaps(limit: number = 10, currentUserId?: string | null) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: ['popular-maps', limit],
-    queryFn: () => getPopularMaps(limit),
+    queryKey: ['popular-maps', limit, currentUserId],
+    queryFn: () => getPopularMaps(limit, currentUserId),
     staleTime: 5 * 60 * 1000, // 5分
   });
 }
@@ -42,8 +61,9 @@ export function usePopularMaps(limit: number = 10) {
 /**
  * 本日のピックアップマップを取得（最近作成 + いいね数考慮）
  * 将来的には今日のいいね数でランキングする
+ * @param currentUserId 現在のユーザーID（いいね状態・ブックマーク状態を取得するため）
  */
-async function getTodayPicksMaps(limit: number = 10): Promise<MapWithUser[]> {
+async function getTodayPicksMaps(limit: number = 10, currentUserId?: string | null): Promise<MapWithUser[]> {
   // 24時間以内に作成されたマップ、またはいいね数が多いマップ
   const oneDayAgo = new Date();
   oneDayAgo.setDate(oneDayAgo.getDate() - 1);
@@ -52,7 +72,9 @@ async function getTodayPicksMaps(limit: number = 10): Promise<MapWithUser[]> {
     .from('maps')
     .select(`
       *,
-      user:users!maps_user_id_fkey(id, username, display_name, avatar_url)
+      user:users!maps_user_id_fkey(id, username, display_name, avatar_url),
+      likes(id, user_id),
+      bookmarks(id, user_id)
     `)
     .eq('is_public', true)
     .gte('created_at', oneDayAgo.toISOString())
@@ -64,13 +86,32 @@ async function getTodayPicksMaps(limit: number = 10): Promise<MapWithUser[]> {
     throw error;
   }
 
+  // いいね状態・ブックマーク状態を判定するヘルパー
+  const mapWithStatus = (maps: any[]) =>
+    maps.map((map: any) => {
+      const isLiked = currentUserId
+        ? (map.likes || []).some((like: any) => like.user_id === currentUserId)
+        : false;
+      const isBookmarked = currentUserId
+        ? (map.bookmarks || []).some((bookmark: any) => bookmark.user_id === currentUserId)
+        : false;
+      return {
+        ...map,
+        user: map.user || null,
+        is_liked: isLiked,
+        is_bookmarked: isBookmarked,
+      };
+    });
+
   // 24時間以内のマップが少ない場合は、全体から人気順で補完
   if (data.length < limit) {
     const { data: popularData, error: popularError } = await supabase
       .from('maps')
       .select(`
         *,
-        user:users!maps_user_id_fkey(id, username, display_name, avatar_url)
+        user:users!maps_user_id_fkey(id, username, display_name, avatar_url),
+        likes(id, user_id),
+        bookmarks(id, user_id)
       `)
       .eq('is_public', true)
       .order('likes_count', { ascending: false })
@@ -78,22 +119,23 @@ async function getTodayPicksMaps(limit: number = 10): Promise<MapWithUser[]> {
 
     if (popularError) {
       console.error('[getTodayPicksMaps] Popular fallback error:', popularError);
-      return data ?? [];
+      return mapWithStatus(data ?? []);
     }
 
-    return popularData ?? [];
+    return mapWithStatus(popularData ?? []);
   }
 
-  return data ?? [];
+  return mapWithStatus(data ?? []);
 }
 
 /**
  * 本日のピックアップマップを取得するhook
+ * @param currentUserId 現在のユーザーID（いいね状態を取得するため）
  */
-export function useTodayPicksMaps(limit: number = 10) {
+export function useTodayPicksMaps(limit: number = 10, currentUserId?: string | null) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: ['today-picks-maps', limit],
-    queryFn: () => getTodayPicksMaps(limit),
+    queryKey: ['today-picks-maps', limit, currentUserId],
+    queryFn: () => getTodayPicksMaps(limit, currentUserId),
     staleTime: 5 * 60 * 1000, // 5分
   });
 }

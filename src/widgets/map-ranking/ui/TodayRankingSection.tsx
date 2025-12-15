@@ -4,10 +4,12 @@
 
 import React from 'react';
 import { useTodayPicksMaps } from '@/entities/map';
+import { useCurrentUserId } from '@/entities/user';
 import { MapRankingSection } from './MapRankingSection';
 
 export function TodayRankingSection() {
-  const { data: maps, isLoading, error } = useTodayPicksMaps(10);
+  const currentUserId = useCurrentUserId();
+  const { data: maps, isLoading, error } = useTodayPicksMaps(10, currentUserId);
 
   return (
     <MapRankingSection
