@@ -6,45 +6,24 @@
  */
 
 import React, { useState } from 'react';
-import { View, Image, Pressable } from 'react-native';
+import { View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { DiscoverTabs, type DiscoverTabMode } from '@/widgets/discover-tabs';
 import { RecommendMapFeed } from '@/widgets/recommend-map-feed';
 import { FollowingMapFeed } from '@/widgets/following-map-feed';
-import { colors } from '@/shared/config';
 
 export function HomePage() {
-  const router = useRouter();
   const [tabMode, setTabMode] = useState<DiscoverTabMode>('recommend');
-
-  const handleMapPress = () => {
-    router.push('/(tabs)/home/default-map');
-  };
 
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-      {/* ヘッダー: 街コレアイコン + マップボタン */}
-      <View className="flex-row items-center justify-between px-4" style={{ height: 40 }}>
-        {/* 左側スペーサー */}
-        <View style={{ width: 32 }} />
-
-        {/* 中央: 街コレアイコン */}
+      {/* ヘッダー: 街コレアイコン */}
+      <View className="items-center justify-center" style={{ height: 40 }}>
         <Image
           source={require('@assets/images/machikore8.png')}
           style={{ width: 180, height: 48 }}
           resizeMode="contain"
         />
-
-        {/* 右側: マップアイコン */}
-        <Pressable onPress={handleMapPress} className="p-1">
-          <Ionicons
-            name="map-outline"
-            size={24}
-            color={colors.primary.DEFAULT}
-          />
-        </Pressable>
       </View>
 
       {/* タブ */}

@@ -8,9 +8,11 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { DiscoverSearch } from '@/widgets/discover-search';
 
 export function DiscoverPage() {
+  const router = useRouter();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const handleSearchFocus = () => {
@@ -21,6 +23,10 @@ export function DiscoverPage() {
     setIsSearchFocused(false);
   };
 
+  const handleMapPress = () => {
+    router.push('/(tabs)/discover/default-map');
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
       {/* 検索バー */}
@@ -28,6 +34,7 @@ export function DiscoverPage() {
         onFocus={handleSearchFocus}
         onClose={handleSearchClose}
         isSearchFocused={isSearchFocused}
+        onMapPress={handleMapPress}
       />
 
       {/* 検索がフォーカスされていない時のコンテンツ（後で追加予定） */}

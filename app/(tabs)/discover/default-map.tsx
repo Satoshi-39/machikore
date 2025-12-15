@@ -1,7 +1,7 @@
 /**
- * デフォルトマップ画面（ホームタブ内スタック）
+ * デフォルトマップ画面（発見タブ内スタック）
  *
- * URL: /(tabs)/home/default-map
+ * URL: /(tabs)/discover/default-map
  * 街コレのデフォルトマップを表示
  */
 
