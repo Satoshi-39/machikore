@@ -1,7 +1,7 @@
 /**
- * ブックマークフォルダ詳細ページ（マップタブ内スタック）
+ * ブックマークフォルダ詳細ページ（ホームタブ内スタック）
  *
- * URL: /(tabs)/map/bookmarks/[folderId]
+ * URL: /(tabs)/home/bookmarks/[folderId]
  */
 
 import { BookmarkFolderPage } from '@/pages/bookmarks';

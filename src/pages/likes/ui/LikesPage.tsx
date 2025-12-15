@@ -40,9 +40,9 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   // マスタースポットタップ: デフォルトマップに遷移してスポットを表示
   const setJumpToMasterSpotId = useSelectedPlaceStore((state) => state.setJumpToMasterSpotId);
   const handleMasterSpotPress = useCallback((masterSpotId: string) => {
-    // グローバルステートにジャンプ先を設定してからマップタブに遷移
+    // グローバルステートにジャンプ先を設定してからホームタブに遷移
     setJumpToMasterSpotId(masterSpotId);
-    router.push('/(tabs)/map');
+    router.push('/(tabs)/home');
   }, [router, setJumpToMasterSpotId]);
 
   // ユーザータップ: プロフィール画面に遷移

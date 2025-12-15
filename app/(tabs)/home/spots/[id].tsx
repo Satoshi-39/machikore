@@ -1,7 +1,7 @@
 /**
- * スポット詳細画面（マップタブ内スタック）
+ * スポット詳細画面（ホームタブ内スタック）
  *
- * URL: /(tabs)/map/spots/:id
+ * URL: /(tabs)/home/spots/:id
  * スポットIDからmap_idを取得してMapPageを表示
  */
 

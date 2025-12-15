@@ -1,7 +1,7 @@
 /**
- * ユーザーコレクション一覧画面（マップタブ内スタック）
+ * ユーザーコレクション一覧画面（ホームタブ内スタック）
  *
- * URL: /(tabs)/map/users/:id/collections
+ * URL: /(tabs)/home/users/:id/collections
  */
 
 import { useLocalSearchParams } from 'expo-router';

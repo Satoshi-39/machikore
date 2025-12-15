@@ -5,7 +5,7 @@
 
 import { usePathname } from 'expo-router';
 
-export type TabName = 'discover' | 'map' | 'mypage' | 'notifications';
+export type TabName = 'discover' | 'home' | 'mypage' | 'notifications';
 
 /**
  * 現在のURLパスからタブ名を判定
@@ -16,7 +16,7 @@ export function useCurrentTab(): TabName {
   // /mypage または /mypage/xxx にマッチ
   if (pathname === '/mypage' || pathname.startsWith('/mypage/')) return 'mypage';
   if (pathname === '/notifications' || pathname.startsWith('/notifications/')) return 'notifications';
-  if (pathname === '/map' || pathname.startsWith('/map/')) return 'map';
+  if (pathname === '/home' || pathname.startsWith('/home/')) return 'home';
   if (pathname === '/discover' || pathname.startsWith('/discover/')) return 'discover';
   return 'discover'; // デフォルト
 }

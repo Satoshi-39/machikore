@@ -1,7 +1,7 @@
 /**
- * ユーザーいいね一覧画面（マップタブ内スタック）
+ * ユーザーいいね一覧画面（ホームタブ内スタック）
  *
- * URL: /(tabs)/map/users/:id/likes
+ * URL: /(tabs)/home/users/:id/likes
  */
 
 import { useLocalSearchParams } from 'expo-router';

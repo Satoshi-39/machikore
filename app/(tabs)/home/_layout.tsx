@@ -1,12 +1,12 @@
 /**
- * マップタブ内のスタックナビゲーション
+ * ホームタブ内のスタックナビゲーション
  *
  * タブ内でスタックを形成し、タブバーを維持したまま画面遷移を行う
  */
 
 import { Stack } from 'expo-router';
 
-export default function MapLayout() {
+export default function HomeLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />

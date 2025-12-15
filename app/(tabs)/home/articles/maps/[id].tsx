@@ -1,7 +1,7 @@
 /**
- * マップ記事画面（マップタブ内スタック）
+ * マップ記事画面（ホームタブ内スタック）
  *
- * URL: /(tabs)/map/articles/maps/:id
+ * URL: /(tabs)/home/articles/maps/:id
  */
 
 import { useLocalSearchParams } from 'expo-router';

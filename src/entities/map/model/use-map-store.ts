@@ -6,7 +6,7 @@
 
 import { create } from 'zustand';
 
-export type SourceTab = 'map' | 'discover' | 'mypage' | 'notifications';
+export type SourceTab = 'home' | 'discover' | 'mypage' | 'notifications';
 
 interface MapStore {
   /**

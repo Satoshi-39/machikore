@@ -25,5 +25,5 @@ export default function Index() {
 
   // 認証完了後、メイン画面にリダイレクト
   // 匿名ユーザーも認証済み扱いで使用可能
-  return <Redirect href="/(tabs)/map" />;
+  return <Redirect href="/(tabs)/home" />;
 }

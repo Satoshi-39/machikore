@@ -89,15 +89,15 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
   // タブ判定
   const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInMapTab = segments[0] === '(tabs)' && segments[1] === 'map';
+  const isInHomeTab = segments[0] === '(tabs)' && segments[1] === 'home';
   const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
   const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
 
   const handleMapPress = useCallback((mapId: string) => {
     if (isInDiscoverTab) {
       router.push(`/(tabs)/discover/maps/${mapId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/maps/${mapId}`);
+    } else if (isInHomeTab) {
+      router.push(`/(tabs)/home/maps/${mapId}`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/maps/${mapId}`);
     } else if (isInNotificationsTab) {
@@ -105,13 +105,13 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
     } else {
       router.push(`/(tabs)/mypage/maps/${mapId}`);
     }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
+  }, [router, isInDiscoverTab, isInHomeTab, isInMypageTab, isInNotificationsTab]);
 
   const handleUserPress = useCallback((userId: string) => {
     if (isInDiscoverTab) {
       router.push(`/(tabs)/discover/users/${userId}`);
-    } else if (isInMapTab) {
-      router.push(`/(tabs)/map/users/${userId}`);
+    } else if (isInHomeTab) {
+      router.push(`/(tabs)/home/users/${userId}`);
     } else if (isInMypageTab) {
       router.push(`/(tabs)/mypage/users/${userId}`);
     } else if (isInNotificationsTab) {
@@ -119,7 +119,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
     } else {
       router.push(`/(tabs)/mypage/users/${userId}`);
     }
-  }, [router, isInDiscoverTab, isInMapTab, isInMypageTab, isInNotificationsTab]);
+  }, [router, isInDiscoverTab, isInHomeTab, isInMypageTab, isInNotificationsTab]);
 
   const renderHeader = useCallback(() => {
     if (!collection) return null;

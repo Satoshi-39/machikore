@@ -21,8 +21,8 @@ export default function SelectMapScreen() {
 
   const handleSelectMap = (mapId: string) => {
     console.log('マップ選択完了:', mapId, 'sourceTab:', sourceTab);
-    // 元のタブ内のマップ画面に遷移（デフォルトはmapタブ）
-    const tab = sourceTab ?? 'map';
+    // 元のタブ内のマップ画面に遷移（デフォルトはhomeタブ）
+    const tab = sourceTab ?? 'home';
     router.push(`/(tabs)/${tab}/maps/${mapId}?addSpot=${Date.now()}`);
   };
 
