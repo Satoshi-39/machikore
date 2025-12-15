@@ -52,7 +52,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
     );
   }
 
-  const visitedMachiCount = stats?.visitedMachiCount ?? 0;
+  const mapsCount = stats?.mapsCount ?? 0;
   const followingCount = stats?.followingCount ?? 0;
   const followersCount = stats?.followersCount ?? 0;
 
@@ -107,18 +107,18 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       {/* 統計情報（Instagram/noteスタイル） */}
       <View className="flex-row items-center">
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-          訪問した街 <Text className="font-bold text-foreground dark:text-dark-foreground">{visitedMachiCount}</Text>
-          {'  '}·{'  '}
+          <Text className="font-bold text-foreground dark:text-dark-foreground">{mapsCount}</Text> マップ
         </Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{'  '}·{'  '}</Text>
         <TouchableOpacity onPress={handleFollowingPress}>
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-            フォロー <Text className="font-bold text-foreground dark:text-dark-foreground">{followingCount}</Text>
+            <Text className="font-bold text-foreground dark:text-dark-foreground">{followingCount}</Text> フォロー
           </Text>
         </TouchableOpacity>
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{'  '}·{'  '}</Text>
         <TouchableOpacity onPress={handleFollowersPress}>
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-            フォロワー <Text className="font-bold text-foreground dark:text-dark-foreground">{followersCount}</Text>
+            <Text className="font-bold text-foreground dark:text-dark-foreground">{followersCount}</Text> フォロワー
           </Text>
         </TouchableOpacity>
       </View>
