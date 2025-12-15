@@ -54,11 +54,11 @@ export function RecommendMapFeed() {
   }, [data]);
 
   const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/maps/${mapId}`);
+    router.push(`/(tabs)/home/maps/${mapId}`);
   }, [router]);
 
   const handleUserPress = useCallback((userId: string) => {
-    router.push(`/(tabs)/discover/users/${userId}`);
+    router.push(`/(tabs)/home/users/${userId}`);
   }, [router]);
 
   const handleEditMap = useCallback((mapId: string) => {
@@ -66,11 +66,11 @@ export function RecommendMapFeed() {
   }, [router]);
 
   const handleCommentPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/comments/maps/${mapId}`);
+    router.push(`/(tabs)/home/comments/maps/${mapId}`);
   }, [router]);
 
   const handleArticlePress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/articles/maps/${mapId}`);
+    router.push(`/(tabs)/home/articles/maps/${mapId}`);
   }, [router]);
 
   const handleEndReached = useCallback(() => {

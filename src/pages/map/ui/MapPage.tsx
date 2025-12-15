@@ -39,9 +39,11 @@ interface MapPageProps {
   mapId?: string;
   /** propsで渡されるスポットID（URLパラメータより優先） */
   initialSpotId?: string;
+  /** 戻るボタンを表示するか（デフォルトマップ用） */
+  showBackButton?: boolean;
 }
 
-export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPageProps = {}) {
+export function MapPage({ mapId: propMapId, initialSpotId: propSpotId, showBackButton = false }: MapPageProps = {}) {
   const { id, addSpot, spotId } = useLocalSearchParams<{ id?: string; addSpot?: string; spotId?: string }>();
 
   // propsがあればpropsを優先、なければURLパラメータを使用
@@ -248,6 +250,8 @@ export function MapPage({ mapId: propMapId, initialSpotId: propSpotId }: MapPage
             onSearchFocus={handleSearchFocus}
             onQuickSearch={handleQuickSearch}
             isSearchFocused={isSearchFocused}
+            showBackButton={showBackButton}
+            onBackPress={() => router.back()}
           />
         )}
 

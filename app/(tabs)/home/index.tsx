@@ -1,10 +1,9 @@
 /**
- * ホームタブ - インデックス（デフォルトマップ）
+ * ホームタブ - インデックス（フィード表示）
  */
 
-import { MapPage } from '@/pages/map';
+import { HomePage } from '@/pages/home';
 
-export default function MapIndex() {
-  // mapIdを渡さない = デフォルトマップ表示
-  return <MapPage />;
+export default function HomeIndex() {
+  return <HomePage />;
 }

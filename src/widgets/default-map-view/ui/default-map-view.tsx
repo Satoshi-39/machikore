@@ -57,10 +57,14 @@ interface DefaultMapViewProps {
   onSearchFocus?: () => void;
   onQuickSearch?: (query: string) => void; // クイック検索
   isSearchFocused?: boolean;
+  /** 戻るボタンを表示するか */
+  showBackButton?: boolean;
+  /** 戻るボタン押下時 */
+  onBackPress?: () => void;
 }
 
 export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
-  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange: _onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false }, ref) => {
+  ({ userId = null, currentLocation = null, onMachiDetailSnapChange, onCityDetailSnapChange, onSpotDetailSnapChange, viewMode = 'map', onViewModeChange: _onViewModeChange, onSearchFocus, onQuickSearch, isSearchFocused = false, showBackButton = false, onBackPress }, ref) => {
     const insets = useSafeAreaInsets();
     const isDarkMode = useIsDarkMode();
     const { data: visits = [] } = useVisits(userId ?? '');
@@ -433,6 +437,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             onSearchPress={onSearchFocus}
             onLocationPress={handleHeaderLocationPress}
             isHidden={isSearchBarHidden}
+            showBackButton={showBackButton}
+            onBackPress={onBackPress}
           />
           {/* クイック検索/フィルタリングボタン */}
           <View

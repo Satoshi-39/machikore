@@ -10,6 +10,7 @@ export default function HomeLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
+      <Stack.Screen name="default-map" />
       <Stack.Screen name="maps/[id]" />
       <Stack.Screen name="spots/[id]" />
       <Stack.Screen name="users/[id]" />

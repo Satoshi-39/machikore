@@ -1,7 +1,7 @@
 /**
  * デフォルトマップヘッダー（Snapchat風）
  *
- * 左: 街コレアイコン
+ * 左: 街コレアイコン または 戻るボタン
  * 中央: 現在地の街/市区/都道府県名（アイコン付き）
  * 右: 虫眼鏡アイコン（検索ボタン）
  */
@@ -25,6 +25,10 @@ interface DefaultMapHeaderProps {
   onLocationPress?: () => void;
   /** 非表示状態 */
   isHidden?: boolean;
+  /** 戻るボタンを表示するか */
+  showBackButton?: boolean;
+  /** 戻るボタン押下時 */
+  onBackPress?: () => void;
 }
 
 export function DefaultMapHeader({
@@ -33,6 +37,8 @@ export function DefaultMapHeader({
   onSearchPress,
   onLocationPress,
   isHidden = false,
+  showBackButton = false,
+  onBackPress,
 }: DefaultMapHeaderProps) {
   const isDarkMode = useIsDarkMode();
 
@@ -48,14 +54,35 @@ export function DefaultMapHeader({
       }}
       pointerEvents={isHidden ? 'none' : 'auto'}
     >
-      {/* 左: 街コレアイコン */}
-      <View className="w-12 h-12 items-center justify-center">
-        <Image
-          source={require('@assets/images/machikore7.png')}
-          style={{ width: 44, height: 44 }}
-          resizeMode="contain"
-        />
-      </View>
+      {/* 左: 戻るボタン または 街コレアイコン */}
+      {showBackButton ? (
+        <TouchableOpacity
+          onPress={onBackPress}
+          className="w-10 h-10 rounded-full bg-surface dark:bg-dark-surface-elevated items-center justify-center"
+          style={{
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: isDarkMode ? 0.4 : 0.15,
+            shadowRadius: 4,
+            elevation: 4,
+          }}
+          activeOpacity={0.7}
+        >
+          <Ionicons
+            name="chevron-back"
+            size={24}
+            color={isDarkMode ? colors.gray[300] : colors.gray[600]}
+          />
+        </TouchableOpacity>
+      ) : (
+        <View className="w-12 h-12 items-center justify-center">
+          <Image
+            source={require('@assets/images/machikore7.png')}
+            style={{ width: 44, height: 44 }}
+            resizeMode="contain"
+          />
+        </View>
+      )}
 
       {/* 中央: 地名表示（楕円形コンテナ） */}
       <View className="flex-1 items-center mx-2">
