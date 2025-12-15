@@ -11,6 +11,8 @@ export default function DiscoverLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="default-map" />
+      <Stack.Screen name="tag-results" />
+      <Stack.Screen name="featured/[id]" />
       <Stack.Screen name="maps/[id]" />
       <Stack.Screen name="spots/[id]" />
       <Stack.Screen name="users/[id]" />

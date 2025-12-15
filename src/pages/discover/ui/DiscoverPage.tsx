@@ -6,10 +6,11 @@
  */
 
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { DiscoverSearch } from '@/widgets/discover-search';
+import { FeaturedCarousel } from '@/widgets/featured-carousel';
 
 export function DiscoverPage() {
   const router = useRouter();
@@ -37,11 +38,14 @@ export function DiscoverPage() {
         onMapPress={handleMapPress}
       />
 
-      {/* 検索がフォーカスされていない時のコンテンツ（後で追加予定） */}
+      {/* 検索がフォーカスされていない時のコンテンツ */}
       {!isSearchFocused && (
-        <View className="flex-1">
-          {/* TODO: 検索以外のコンテンツをここに追加 */}
-        </View>
+        <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+          {/* 特集カルーセル */}
+          <FeaturedCarousel />
+
+          {/* TODO: カテゴリ別マップ、本日のおすすめなど */}
+        </ScrollView>
       )}
     </SafeAreaView>
   );

@@ -611,6 +611,57 @@ export async function searchPublicMaps(
 }
 
 /**
+ * タグで公開マップを検索
+ * @param tag 検索するタグ名
+ */
+export async function searchPublicMapsByTag(
+  tag: string,
+  limit: number = 50
+): Promise<MapWithUser[]> {
+  const { data, error } = await supabase
+    .from('maps')
+    .select(`
+      *,
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      )
+    `)
+    .eq('is_public', true)
+    .contains('tags', [tag])
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error('[searchPublicMapsByTag] Error:', error);
+    return [];
+  }
+
+  return (data || []).map((map: SupabaseMapResponse) => ({
+    id: map.id,
+    user_id: map.user_id,
+    name: map.name,
+    description: map.description,
+    category: map.category,
+    tags: map.tags,
+    is_public: map.is_public,
+    is_default: map.is_default,
+    is_official: map.is_official,
+    thumbnail_url: map.thumbnail_url,
+    theme_color: map.theme_color,
+    spots_count: map.spots_count,
+    likes_count: map.likes_count,
+    comments_count: map.comments_count ?? 0,
+    created_at: map.created_at,
+    updated_at: map.updated_at,
+    user: map.users || null,
+    is_article_public: map.is_article_public ?? false,
+  }));
+}
+
+/**
  * フォロー中ユーザーの公開マップ一覧を取得
  * @param userId 現在のユーザーID
  */

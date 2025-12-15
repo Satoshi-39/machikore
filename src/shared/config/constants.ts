@@ -496,3 +496,16 @@ export const SUBSCRIPTION = {
   /** RevenueCat Entitlement ID */
   ENTITLEMENT_ID: 'premium',
 } as const;
+
+// ===============================
+// 特集カルーセル
+// ===============================
+
+export const FEATURED_CAROUSEL = {
+  /** カード幅の割合（画面幅に対する比率） */
+  CARD_WIDTH_RATIO: 0.82,
+  /** カードの高さ */
+  CARD_HEIGHT: 160,
+  /** カード間のギャップ */
+  CARD_GAP: 10,
+} as const;
