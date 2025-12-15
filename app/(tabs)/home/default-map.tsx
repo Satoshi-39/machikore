@@ -5,10 +5,8 @@
  * 街コレのデフォルトマップを表示
  */
 
-import { MapPage } from '@/pages/map';
+import { DefaultMapPage } from '@/pages/default-map';
 
 export default function DefaultMapScreen() {
-  // mapIdを渡さない = デフォルトマップ表示
-  // showBackButton = true でフィードに戻るボタンを表示
-  return <MapPage showBackButton />;
+  return <DefaultMapPage showBackButton />;
 }

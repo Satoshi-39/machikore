@@ -1,15 +1,16 @@
 /**
  * マップ詳細画面（ホームタブ内スタック）
  *
- * URL: /(tabs)/home/:id
- * マップIDをMapPageに渡して表示
+ * URL: /(tabs)/home/maps/:id
+ * マップIDをUserMapPageに渡して表示
  */
 
 import { useLocalSearchParams } from 'expo-router';
-import { MapPage } from '@/pages/map';
+import { UserMapPage } from '@/pages/user-map';
 
 export default function MapDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  return <MapPage mapId={id} />;
+  if (!id) return null;
+  return <UserMapPage mapId={id} />;
 }

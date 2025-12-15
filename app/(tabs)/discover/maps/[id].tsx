@@ -2,14 +2,15 @@
  * マップ詳細画面（発見タブ内スタック）
  *
  * URL: /(tabs)/discover/maps/:id
- * マップIDをMapPageに渡して表示
+ * マップIDをUserMapPageに渡して表示
  */
 
 import { useLocalSearchParams } from 'expo-router';
-import { MapPage } from '@/pages/map';
+import { UserMapPage } from '@/pages/user-map';
 
 export default function MapDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  return <MapPage mapId={id} />;
+  if (!id) return null;
+  return <UserMapPage mapId={id} />;
 }

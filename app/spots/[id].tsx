@@ -2,14 +2,14 @@
  * スポット詳細画面
  *
  * URL: /spots/:id
- * スポットIDからmap_idを取得してMapPageを表示
+ * スポットIDからmap_idを取得してUserMapPageを表示
  */
 
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ActivityIndicator, Text, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSpotById } from '@/entities/user-spot/api';
-import { MapPage } from '@/pages/map';
+import { UserMapPage } from '@/pages/user-map';
 import { colors } from '@/shared/config';
 
 export default function SpotDetailScreen() {
@@ -36,5 +36,5 @@ export default function SpotDetailScreen() {
     );
   }
 
-  return <MapPage mapId={spot.map_id} initialSpotId={id} />;
+  return <UserMapPage mapId={spot.map_id} initialSpotId={id} />;
 }
