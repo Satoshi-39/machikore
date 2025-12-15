@@ -2,7 +2,7 @@
  * 市区町村データを取得するhook
  *
  * - useCitiesByBounds: タイル単位でSupabaseから取得（デフォルトマップ用）
- * - useCitiesSimple: boundsで直接Supabaseから取得（ユーザマップ用）
+ * - useCitiesForUserMap: マップID単位でキャッシュ（ユーザマップ用）
  */
 
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
@@ -37,7 +37,7 @@ interface UseCitiesByBoundsResult {
 }
 
 /**
- * マップ境界内の市区町村データを取得（タイルベース）
+ * マップ境界内の市区町村データを取得（タイルベース・デフォルトマップ用）
  *
  * 1. マップ境界から必要なタイルIDを計算
  * 2. 各タイルのデータをSQLiteキャッシュ or Supabaseから取得
@@ -79,9 +79,8 @@ export function useCitiesByBounds(options: UseCitiesByBoundsOptions = {}): UseCi
       }
     },
     enabled: tileIds.length > 0,
-    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime, // 30日間
-    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime, // 5分
-    // 新しいデータ取得中も前のデータを表示し続ける（ちらつき防止）
+    staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
+    gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
     placeholderData: keepPreviousData,
   });
 
@@ -94,7 +93,7 @@ export function useCitiesByBounds(options: UseCitiesByBoundsOptions = {}): UseCi
 }
 
 // ===============================
-// ユーザマップ用（シンプルなboundsクエリ）
+// ユーザマップ用（boundsベース・粗いroundingでキャッシュヒット率向上）
 // ===============================
 
 interface UseCitiesSimpleOptions {
@@ -112,19 +111,24 @@ interface UseCitiesSimpleOptions {
 }
 
 /**
- * マップ境界内の市区町村データを取得（シンプル版・ユーザマップ用）
+ * ユーザマップ用の市区町村データを取得（boundsベース）
  *
- * タイルベースではなく、boundsで直接Supabaseから取得
+ * - boundsを小数点1桁（約10km）で丸めてキャッシュキーを生成
+ * - 近い場所に戻った時にキャッシュがヒットしやすくなる
+ * - デバウンスはhook利用側で行う想定
  */
 export function useCitiesSimple(options: UseCitiesSimpleOptions = {}) {
   const { bounds, zoom = 0, minZoomToFetch = 0 } = options;
 
-  // boundsをキーにする（小数点2桁で丸めて不要な再取得を防ぐ）
-  const boundsKey = bounds
-    ? `${bounds.minLat.toFixed(2)},${bounds.maxLat.toFixed(2)},${bounds.minLng.toFixed(2)},${bounds.maxLng.toFixed(2)}`
-    : '';
+  // boundsを小数点1桁（約10km）で丸めてキャッシュキーを生成
+  // これにより、近い場所に戻った時にキャッシュがヒットしやすくなる
+  const boundsKey = useMemo(() => {
+    if (!bounds) return '';
+    if (zoom < minZoomToFetch) return '';
+    return `${bounds.minLat.toFixed(1)},${bounds.maxLat.toFixed(1)},${bounds.minLng.toFixed(1)},${bounds.maxLng.toFixed(1)}`;
+  }, [bounds, zoom, minZoomToFetch]);
 
-  const enabled = !!bounds && zoom >= minZoomToFetch;
+  const enabled = !!boundsKey;
 
   return useQuery<CityRow[], Error>({
     queryKey: [...QUERY_KEYS.citiesList(), 'simple', boundsKey],
@@ -135,8 +139,6 @@ export function useCitiesSimple(options: UseCitiesSimpleOptions = {}) {
     enabled,
     staleTime: STATIC_DATA_CACHE_CONFIG.staleTime,
     gcTime: STATIC_DATA_CACHE_CONFIG.gcTime,
-    // 新しいデータ取得中も前のデータを表示し続ける（ちらつき防止）
     placeholderData: keepPreviousData,
   });
 }
-

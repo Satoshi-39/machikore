@@ -126,13 +126,13 @@ export const LABEL_ZOOM_DEFAULT_MAP = {
  */
 export const LABEL_ZOOM_USER_MAP = {
   /** 都道府県ラベル */
-  PREFECTURE: { min: 5, max: 11 },
+  PREFECTURE: { min: 5, max: 9 },
   /** 市区ラベル（より広域から表示） */
-  CITY: { min: 11, max: 12 },
+  CITY: { min: 9, max: 12 },
   /** 交通機関ラベル */
   TRANSPORT: {
     station: { min: 12, max: 22 },
-    airport: { min: 8, max: 22 },
+    airport: { min: 9, max: 22 },
     ferry: { min: 12, max: 22 },
     bus: { min: 12, max: 22 },
   },

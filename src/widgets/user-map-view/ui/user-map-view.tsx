@@ -84,18 +84,18 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     // スポットをGeoJSON形式に変換
     const spotsGeoJson = useUserSpotsGeoJson(spots);
 
-    // マップのビューポート範囲とズームレベル（交通データ取得用）
+    // ズームレベル（交通データ・都市データ取得用）
+    const [zoomLevel, setZoomLevel] = useState(12);
+    // マップ境界（交通データ・都市データ取得用、デバウンスで更新）
     const [mapBounds, setMapBounds] = useState<{
       minLat: number;
       maxLat: number;
       minLng: number;
       maxLng: number;
     } | null>(null);
-    const [zoomLevel, setZoomLevel] = useState(12);
     const boundsUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    // 交通データを表示領域ベースで取得（シンプル版）
-    // 駅のズームレベル（12）を基準に取得開始
+    // 交通データをboundsベースで取得（デバウンス済み）
     const { data: transportHubs = [] } = useTransportHubsSimple({
       bounds: mapBounds,
       zoom: zoomLevel,
@@ -103,7 +103,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     });
     const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
 
-    // 都市データを表示領域ベースで取得（シンプル版）
+    // 都市データをboundsベースで取得（デバウンス済み）
     const { data: cities = [] } = useCitiesSimple({
       bounds: mapBounds,
       zoom: zoomLevel,
