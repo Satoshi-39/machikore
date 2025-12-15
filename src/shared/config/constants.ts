@@ -128,7 +128,14 @@ export const LABEL_ZOOM_USER_MAP = {
   /** 都道府県ラベル */
   PREFECTURE: { min: 5, max: 11 },
   /** 市区ラベル（より広域から表示） */
-  CITY: { min: 8, max: 12 },
+  CITY: { min: 11, max: 12 },
+  /** 交通機関ラベル */
+  TRANSPORT: {
+    station: { min: 12, max: 22 },
+    airport: { min: 8, max: 22 },
+    ferry: { min: 12, max: 22 },
+    bus: { min: 12, max: 22 },
+  },
 } as const;
 
 // ===============================
@@ -280,16 +287,8 @@ export const TRANSPORT_HUB_COLORS_DARK = {
 /** 交通機関のデフォルトminZoomLevel（shared/default-map用） */
 export const TRANSPORT_HUB_MIN_ZOOM_DEFAULT = {
   station: 13,
-  airport: 9,
-  ferry: 13,
-  bus: 14,
-} as const;
-
-/** 交通機関のminZoomLevel（ユーザマップ用 - より拡大時のみ表示、スポット優先） */
-export const TRANSPORT_HUB_MIN_ZOOM_USER_MAP = {
-  station: 12,
   airport: 8,
-  ferry: 12,
+  ferry: 13,
   bus: 13,
 } as const;
 

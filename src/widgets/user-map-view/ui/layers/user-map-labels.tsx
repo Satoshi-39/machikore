@@ -14,7 +14,6 @@ import {
   USER_MAP_THEME_COLORS,
   TRANSPORT_HUB_COLORS_LIGHT,
   TRANSPORT_HUB_COLORS_DARK,
-  TRANSPORT_HUB_MIN_ZOOM_USER_MAP,
   SYMBOL_SORT_KEY_USER_MAP,
   LABEL_ZOOM_USER_MAP,
   LOCATION_LABEL_COLORS_LIGHT,
@@ -254,7 +253,7 @@ export function UserMapLabels({
         {/* JR駅 */}
         <Mapbox.SymbolLayer
           id="transport-jr-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.station}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.station.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'station'],
@@ -281,7 +280,7 @@ export function UserMapLabels({
         {/* 東京メトロ */}
         <Mapbox.SymbolLayer
           id="transport-metro-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.station}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.station.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'station'],
@@ -308,7 +307,7 @@ export function UserMapLabels({
         {/* 都営 */}
         <Mapbox.SymbolLayer
           id="transport-toei-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.station}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.station.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'station'],
@@ -335,7 +334,7 @@ export function UserMapLabels({
         {/* その他地下鉄 */}
         <Mapbox.SymbolLayer
           id="transport-subway-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.station}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.station.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'station'],
@@ -362,7 +361,7 @@ export function UserMapLabels({
         {/* 私鉄 */}
         <Mapbox.SymbolLayer
           id="transport-private-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.station}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.station.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'station'],
@@ -389,7 +388,7 @@ export function UserMapLabels({
         {/* 空港 */}
         <Mapbox.SymbolLayer
           id="transport-airport-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.airport}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.airport.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'airport'],
@@ -415,7 +414,7 @@ export function UserMapLabels({
         {/* フェリーターミナル */}
         <Mapbox.SymbolLayer
           id="transport-ferry-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.ferry}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.ferry.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'ferry_terminal'],
@@ -441,7 +440,7 @@ export function UserMapLabels({
         {/* バスターミナル */}
         <Mapbox.SymbolLayer
           id="transport-bus-layer"
-          minZoomLevel={TRANSPORT_HUB_MIN_ZOOM_USER_MAP.bus}
+          minZoomLevel={LABEL_ZOOM_USER_MAP.TRANSPORT.bus.min}
           filter={['all',
             ['==', ['get', 'featureType'], 'transport'],
             ['==', ['get', 'type'], 'bus_terminal'],

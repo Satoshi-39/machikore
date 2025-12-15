@@ -15,7 +15,7 @@ import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import { usePinDropStore, PinDropOverlay } from '@/features/drop-pin';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ENV, LABEL_ZOOM_USER_MAP, TRANSPORT_HUB_MIN_ZOOM_USER_MAP, type UserMapThemeColor } from '@/shared/config';
+import { ENV, LABEL_ZOOM_USER_MAP, type UserMapThemeColor } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
 import { UserMapLabels } from './layers';
@@ -95,10 +95,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const boundsUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     // 交通データを表示領域ベースで取得（シンプル版）
+    // 駅のズームレベル（12）を基準に取得開始
     const { data: transportHubs = [] } = useTransportHubsSimple({
       bounds: mapBounds,
       zoom: zoomLevel,
-      minZoomToFetch: TRANSPORT_HUB_MIN_ZOOM_USER_MAP.station, // 駅のズームレベル（12）で統一
+      minZoomToFetch: LABEL_ZOOM_USER_MAP.TRANSPORT.station.min,
     });
     const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
 
