@@ -111,10 +111,10 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
           </Text>
         </Pressable>
 
-        {/* 右側: マップアイコン */}
+        {/* 右側: スポットアイコン */}
         {onMapPress && (
           <Pressable onPress={onMapPress} className="p-1">
-            <Ionicons name="map-outline" size={24} color={colors.primary.DEFAULT} />
+            <Ionicons name="location-outline" size={24} color={colors.primary.DEFAULT} />
           </Pressable>
         )}
       </View>

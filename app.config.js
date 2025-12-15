@@ -4,7 +4,7 @@ module.exports = {
     slug: 'machikore',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/images/machikore12.png',
+    icon: './assets/images/machikore13.png',
     scheme: 'machikore',
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,

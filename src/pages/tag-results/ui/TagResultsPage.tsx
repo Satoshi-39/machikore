@@ -5,13 +5,13 @@
  */
 
 import React, { useCallback } from 'react';
-import { View, FlatList, RefreshControl, Text, Image, Pressable } from 'react-native';
+import { View, FlatList, RefreshControl, Text, Pressable } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import { useMapTagSearch } from '@/entities/map';
-import { PageHeader, AsyncBoundary } from '@/shared/ui';
+import { PageHeader, AsyncBoundary, MapThumbnail } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
 import type { MapWithUser } from '@/shared/types';
 
@@ -28,19 +28,13 @@ function CompactMapCard({ map, onPress }: CompactMapCardProps) {
       className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-gray-100 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-900"
     >
       {/* サムネイル（小さめ） */}
-      <View className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700">
-        {map.thumbnail_url ? (
-          <Image
-            source={{ uri: map.thumbnail_url }}
-            style={{ width: '100%', height: '100%' }}
-            resizeMode="cover"
-          />
-        ) : (
-          <View className="flex-1 items-center justify-center">
-            <Ionicons name="map-outline" size={24} color="#9CA3AF" />
-          </View>
-        )}
-      </View>
+      <MapThumbnail
+        url={map.thumbnail_url}
+        width={64}
+        height={64}
+        borderRadius={8}
+        defaultImagePadding={0.15}
+      />
 
       {/* マップ情報 */}
       <View className="flex-1 ml-3">
@@ -101,7 +95,7 @@ export function TagResultsPage() {
   if (!tag) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-        <PageHeader title="タグ検索" onBack={goBack} />
+        <PageHeader title="タグ検索" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
           <Text className="text-text-secondary dark:text-dark-text-secondary">
             タグが指定されていません
@@ -113,7 +107,7 @@ export function TagResultsPage() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-      <PageHeader title={`#${tag}`} onBack={goBack} />
+      <PageHeader title={`#${tag}`} onBack={goBack} useSafeArea={false} />
 
       <AsyncBoundary
         isLoading={isLoading}

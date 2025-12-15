@@ -9,7 +9,6 @@ import React, { useCallback } from 'react';
 import { View, Text, ScrollView, Pressable, Image, ActivityIndicator } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 import type { Href } from 'expo-router';
 import { useFeaturedCarouselItem } from '@/entities/featured-carousel';
 import { PageHeader } from '@/shared/ui';
@@ -33,7 +32,7 @@ export function FeaturedDetailPage() {
   if (isLoading) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-        <PageHeader title="特集" onBack={goBack} />
+        <PageHeader title="特集" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -44,7 +43,7 @@ export function FeaturedDetailPage() {
   if (error || !item) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-        <PageHeader title="特集" onBack={goBack} />
+        <PageHeader title="特集" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center px-4">
           <Text className="text-text-secondary dark:text-dark-text-secondary text-center">
             特集が見つかりませんでした
@@ -56,33 +55,32 @@ export function FeaturedDetailPage() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-      <PageHeader title={item.title} onBack={goBack} />
+      <PageHeader title={item.title} onBack={goBack} useSafeArea={false} />
 
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* ヘッダー画像 */}
-        <View className="relative" style={{ height: 200 }}>
+        <View style={{ height: 200 }}>
           <Image
             source={{ uri: item.image_url }}
             style={{ width: '100%', height: '100%' }}
             resizeMode="cover"
           />
-          <LinearGradient
-            colors={['transparent', 'rgba(0,0,0,0.6)']}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '50%',
-              justifyContent: 'flex-end',
-              padding: 16,
-            }}
-          >
-            <Text className="text-white text-2xl font-bold">{item.title}</Text>
-            {item.description && (
-              <Text className="text-white/80 text-sm mt-1">{item.description}</Text>
-            )}
-          </LinearGradient>
+          {/* 半透明オーバーレイ + 説明文 */}
+          {item.description && (
+            <View
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                paddingHorizontal: 16,
+                paddingVertical: 12,
+              }}
+            >
+              <Text className="text-white text-sm">{item.description}</Text>
+            </View>
+          )}
         </View>
 
         {/* 関連タグ一覧 */}

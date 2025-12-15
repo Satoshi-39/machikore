@@ -18,6 +18,7 @@ import {
   type NativeScrollEvent,
   Linking,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { useFeaturedCarouselItems, type FeaturedCarouselItem } from '@/entities/featured-carousel';
@@ -94,16 +95,17 @@ function CarouselCard({ item, onPress }: CarouselCardProps) {
           resizeMode="cover"
         />
 
-        {/* 半透明オーバーレイ + テキスト */}
-        <View
+        {/* グラデーションオーバーレイ + テキスト */}
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,0.7)']}
           style={{
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
             paddingHorizontal: 16,
-            paddingVertical: 12,
+            paddingTop: 24,
+            paddingBottom: 12,
           }}
         >
           <Text className="text-white text-lg font-bold" numberOfLines={1}>
@@ -114,7 +116,7 @@ function CarouselCard({ item, onPress }: CarouselCardProps) {
               {item.description}
             </Text>
           )}
-        </View>
+        </LinearGradient>
       </View>
     </Pressable>
   );
