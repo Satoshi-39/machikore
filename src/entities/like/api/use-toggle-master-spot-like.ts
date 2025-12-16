@@ -4,6 +4,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { log } from '@/shared/config/logger';
 import { checkMasterSpotLiked, toggleMasterSpotLike } from '@/shared/api/supabase/likes';
 import type { UUID } from '@/shared/types';
 
@@ -57,7 +58,7 @@ export function useToggleMasterSpotLike() {
       return { previousLikeStatus };
     },
     onError: (err, { userId, masterSpotId }, context) => {
-      console.error('[useToggleMasterSpotLike] Error:', err);
+      log.error('[Like] useToggleMasterSpotLike Error:', err);
       Toast.show({
         type: 'error',
         text1: 'いいねに失敗しました',

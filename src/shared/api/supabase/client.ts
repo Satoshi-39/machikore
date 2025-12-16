@@ -5,6 +5,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { LargeSecureStorageAdapter } from '@/shared/lib/storage';
 import { ENV } from '@/shared/config';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // Supabase クライアント作成
@@ -71,7 +72,7 @@ export function normalizeSupabaseError(error: any): Error {
  */
 export function handleSupabaseError(context: string, error: any): never {
   const normalizedError = normalizeSupabaseError(error);
-  console.error(`[${context}] Error:`, normalizedError.message);
+  log.error(`[Supabase] Error:`, normalizedError.message);
   throw normalizedError;
 }
 

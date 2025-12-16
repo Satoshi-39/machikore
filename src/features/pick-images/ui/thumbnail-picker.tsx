@@ -9,6 +9,7 @@ import { View, Text, TouchableOpacity, Image, Alert, ActionSheetIOS, Platform } 
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { colors } from '@/shared/config';
+import { log } from '@/shared/config/logger';
 
 export interface ThumbnailImage {
   uri: string;
@@ -80,7 +81,7 @@ export function ThumbnailPicker({
         });
       }
     } catch (error: any) {
-      console.error('画像選択エラー:', error);
+      log.error('[PickImages] 画像選択エラー:', error);
       if (error?.message?.includes('Camera not available')) {
         Alert.alert('カメラが利用できません', 'シミュレータではカメラを使用できません。ライブラリから選択してください。');
       } else {

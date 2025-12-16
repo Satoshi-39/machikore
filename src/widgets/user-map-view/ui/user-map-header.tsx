@@ -17,6 +17,7 @@ import { showLoginRequiredAlert } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
+import { log } from '@/shared/config/logger';
 
 interface UserMapHeaderProps {
   isLoading?: boolean;
@@ -117,7 +118,7 @@ export function UserMapHeader({
         default: { message: `${mapTitle || 'マップ'}をチェック！\n${url}` },
       })!);
     } catch (error) {
-      console.error('Share error:', error);
+      log.error('[UserMapHeader] Share error:', error);
     }
   }, [mapTitle, mapId]);
 

@@ -10,6 +10,7 @@ import type {
 } from './google-places.types';
 import { fetchPlaceDetails } from './google-place-details';
 import { convertToPlaceResult, type PlaceSearchResult } from '../model/types';
+import { log } from '@/shared/config/logger';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const AUTOCOMPLETE_URL = 'https://places.googleapis.com/v1/places:autocomplete';
@@ -38,7 +39,7 @@ export async function searchPlaces(
 
   try {
     // Step 1: Autocomplete APIで候補を取得
-    console.log(`🔍 [Google Places] "${query}" を検索中...`);
+    log.debug(`[SearchPlaces] "${query}" を検索中...`);
 
     const autocompleteBody = {
       input: query,
@@ -59,7 +60,7 @@ export async function searchPlaces(
 
     if (!autocompleteResponse.ok) {
       const errorBody = await autocompleteResponse.text();
-      console.error('❌ [Google Places Autocomplete] エラー:', errorBody);
+      log.error('[SearchPlaces] Google Places Autocomplete エラー:', errorBody);
       throw new Error(
         `Google Places Autocomplete error: ${autocompleteResponse.status}`
       );
@@ -68,8 +69,8 @@ export async function searchPlaces(
     const autocompleteData: GooglePlacesAutocompleteResponse =
       await autocompleteResponse.json();
 
-    console.log(
-      `📊 [Google Places] ${autocompleteData.suggestions?.length || 0}件の候補を取得`
+    log.debug(
+      `[SearchPlaces] ${autocompleteData.suggestions?.length || 0}件の候補を取得`
     );
 
     // Step 2: 各Place IDの詳細情報を取得
@@ -93,15 +94,15 @@ export async function searchPlaces(
       if (result.status === 'fulfilled' && result.value) {
         places.push(convertToPlaceResult(result.value));
       } else if (result.status === 'rejected') {
-        console.warn('Place Details取得失敗:', result.reason);
+        log.warn('[SearchPlaces] Place Details取得失敗:', result.reason);
       }
     }
 
-    console.log(`✅ [Google Places] ${places.length}件の詳細情報を取得完了`);
+    log.debug(`[SearchPlaces] ${places.length}件の詳細情報を取得完了`);
 
     return places;
   } catch (error) {
-    console.error('❌ Google Places検索エラー:', error);
+    log.error('[SearchPlaces] Google Places検索エラー:', error);
     throw error;
   }
 }

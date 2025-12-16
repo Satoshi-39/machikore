@@ -21,6 +21,7 @@ import {
   voidSuccess,
   voidFailure,
 } from '@/shared/types/repository.types';
+import { log } from '@/shared/config/logger';
 
 export class SQLiteVisitRepository implements IVisitRepository {
   // ===============================
@@ -249,7 +250,7 @@ export class SQLiteVisitRepository implements IVisitRepository {
   ): Promise<RepositoryVoidResult> {
     try {
       // For now, just log the error. In future, we might add error column
-      console.error(`Visit sync error for ${id}:`, error);
+      log.error(`[VisitRepository] Visit sync error for ${id}:`, error);
       return voidSuccess();
     } catch (err) {
       return voidFailure(

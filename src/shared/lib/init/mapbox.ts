@@ -5,6 +5,7 @@
 import Mapbox from '@rnmapbox/maps';
 import { LogBox } from 'react-native';
 import { ENV } from '@/shared/config/env';
+import { log } from '@/shared/config/logger';
 
 /**
  * Mapboxを初期化する
@@ -13,7 +14,7 @@ export function initMapbox(): void {
   const accessToken = ENV.MAPBOX_ACCESS_TOKEN;
 
   if (!accessToken) {
-    console.warn('Mapbox access token is not set');
+    log.warn('[Mapbox] Access token is not set');
     return;
   }
 
@@ -42,5 +43,5 @@ export function initMapbox(): void {
     originalConsoleError.apply(console, args);
   };
 
-  console.log('Mapbox initialized');
+  log.info('[Mapbox] Initialized');
 }

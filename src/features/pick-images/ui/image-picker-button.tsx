@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { colors, INPUT_LIMITS } from '@/shared/config';
+import { log } from '@/shared/config/logger';
 
 export interface SelectedImage {
   uri: string;
@@ -47,7 +48,7 @@ async function convertToJpeg(uri: string): Promise<{ uri: string; width: number;
     compress: 0.6, // 圧縮率を上げてファイルサイズを削減
     format: ImageManipulator.SaveFormat.JPEG,
   });
-  console.log(`[ImagePicker] JPEG変換完了: ${result.width}x${result.height}`);
+  log.debug(`[PickImages] JPEG変換完了: ${result.width}x${result.height}`);
   return { uri: result.uri, width: result.width, height: result.height };
 }
 
@@ -118,7 +119,7 @@ export function ImagePickerButton({
               fileSize: asset.fileSize,
             });
           } catch (error) {
-            console.error('画像変換エラー:', error);
+            log.error('[PickImages] 画像変換エラー:', error);
             conversionErrors++;
           }
         }
@@ -135,7 +136,7 @@ export function ImagePickerButton({
         }
       }
     } catch (error: any) {
-      console.error('画像選択エラー:', error);
+      log.error('[PickImages] 画像選択エラー:', error);
       // シミュレータでカメラが使えない場合
       if (error?.message?.includes('Camera not available')) {
         Alert.alert('カメラが利用できません', 'シミュレータではカメラを使用できません。ライブラリから選択してください。');

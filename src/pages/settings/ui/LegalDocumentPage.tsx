@@ -17,6 +17,7 @@ import {
   type TermsVersion,
 } from '@/shared/api/supabase';
 import { formatJapaneseDate } from '@/shared/lib/utils/date.utils';
+import { log } from '@/shared/config/logger';
 
 interface LegalDocumentPageProps {
   type: TermsType;
@@ -41,7 +42,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         const doc = type === 'terms_of_service' ? terms.termsOfService : terms.privacyPolicy;
         setDocument(doc);
       } catch (err) {
-        console.error('規約の取得に失敗:', err);
+        log.error('[LegalDocumentPage] 規約の取得に失敗:', err);
         setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
       } finally {
         setIsLoading(false);
@@ -89,7 +90,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
                   setDocument(doc);
                 })
                 .catch((err) => {
-                  console.error('規約の取得に失敗:', err);
+                  log.error('[LegalDocumentPage] 規約の取得に失敗:', err);
                   setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
                 })
                 .finally(() => setIsLoading(false));

@@ -5,6 +5,7 @@
 
 import { supabase } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
+import { log } from '@/shared/config/logger';
 
 type ImageInsert = Database['public']['Tables']['images']['Insert'];
 type ImageRow = Database['public']['Tables']['images']['Row'];
@@ -20,7 +21,7 @@ export async function insertSpotImage(image: ImageInsert): Promise<ImageRow> {
     .single();
 
   if (error) {
-    console.error('[insertSpotImage] Error:', error);
+    log.error('[Images] Error:', error);
     throw error;
   }
 
@@ -37,7 +38,7 @@ export async function insertSpotImages(images: ImageInsert[]): Promise<ImageRow[
     .select();
 
   if (error) {
-    console.error('[insertSpotImages] Error:', error);
+    log.error('[Images] Error:', error);
     throw error;
   }
 
@@ -55,7 +56,7 @@ export async function getSpotImages(spotId: string): Promise<ImageRow[]> {
     .order('order_index', { ascending: true });
 
   if (error) {
-    console.error('[getSpotImages] Error:', error);
+    log.error('[Images] Error:', error);
     throw error;
   }
 
@@ -72,7 +73,7 @@ export async function deleteSpotImage(imageId: string): Promise<void> {
     .eq('id', imageId);
 
   if (error) {
-    console.error('[deleteSpotImage] Error:', error);
+    log.error('[Images] Error:', error);
     throw error;
   }
 }

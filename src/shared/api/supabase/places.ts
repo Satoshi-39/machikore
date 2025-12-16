@@ -5,6 +5,7 @@
 
 import { supabase, handleSupabaseError } from './client';
 import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // Machi（街）
@@ -264,7 +265,7 @@ async function getPrefectureIdByName(prefectureName: string): Promise<string | n
 
   if (error) {
     if (error.code !== 'PGRST116') {
-      console.warn('getPrefectureIdByName error:', error);
+      log.warn('[Places] getPrefectureIdByName error:', error);
     }
     return null;
   }
@@ -331,7 +332,7 @@ export async function findMachiForSpot(
     const prefectureId = await getPrefectureIdByName(adminBoundary.prefecture);
 
     if (!prefectureId) {
-      console.warn(`findMachiForSpot: 都道府県が見つかりません: ${adminBoundary.prefecture}`);
+      log.warn(`[Places] 都道府県が見つかりません: ${adminBoundary.prefecture}`);
     }
 
     // 3. 市区町村名でcitiesテーブルを検索してcity_idを取得
@@ -342,7 +343,7 @@ export async function findMachiForSpot(
       .eq('prefecture_id', prefectureId ?? '');
 
     if (cityError) {
-      console.warn('findMachiForSpot:cityLookup error:', cityError);
+      log.warn('[Places] cityLookup error:', cityError);
     }
 
     const cityId = cities?.[0]?.id;

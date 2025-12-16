@@ -5,6 +5,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 /**
  * 人気マップを取得（いいね数順）
@@ -24,7 +25,7 @@ async function getPopularMaps(limit: number = 10, currentUserId?: string | null)
     .limit(limit);
 
   if (error) {
-    console.error('[getPopularMaps] Error:', error);
+    log.error('[Map] Error:', error);
     throw error;
   }
 
@@ -82,7 +83,7 @@ async function getTodayPicksMaps(limit: number = 10, currentUserId?: string | nu
     .limit(limit);
 
   if (error) {
-    console.error('[getTodayPicksMaps] Error:', error);
+    log.error('[Map] Error:', error);
     throw error;
   }
 
@@ -118,7 +119,7 @@ async function getTodayPicksMaps(limit: number = 10, currentUserId?: string | nu
       .limit(limit);
 
     if (popularError) {
-      console.error('[getTodayPicksMaps] Popular fallback error:', popularError);
+      log.error('[Map] Popular fallback error:', popularError);
       return mapWithStatus(data ?? []);
     }
 

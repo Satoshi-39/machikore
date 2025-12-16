@@ -8,7 +8,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Share, Platform, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor, log } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
 import { showLoginRequiredAlert } from '@/shared/lib';
@@ -60,7 +60,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         default: { message: `${map.name}をチェック！\n${url}` },
       })!);
     } catch (error) {
-      console.error('Share error:', error);
+      log.error('[Map] Share error:', error);
     }
   }, [map.name, map.id]);
 

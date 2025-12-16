@@ -16,6 +16,7 @@ import {
 import { copyAssetToFileSystem } from '@/shared/lib';
 import { getCurrentUserId } from '@/entities/user/model';
 import type { ScheduleRow, VisitRow, UserRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 // 訪問記録のID（投稿との紐付け用）
 // 固定値にすることで、再起動時の重複を防ぐ
@@ -32,12 +33,12 @@ const VISIT_IDS = {
  */
 export async function seedSampleData(): Promise<void> {
   try {
-    console.log('🌱 サンプルデータ投入開始...');
+    log.debug('[SeedData] 投入開始...');
 
     // ユーザーIDを取得（認証完了後）
     const userId = getCurrentUserId();
     if (!userId) {
-      console.warn('⚠️  ユーザーIDが取得できません。認証が完了していない可能性があります。');
+      log.warn('[SeedData] ユーザーIDが取得できません。認証が完了していない可能性があります。');
       return;
     }
 
@@ -47,8 +48,8 @@ export async function seedSampleData(): Promise<void> {
     // 現在のデータ数を確認
     const currentScheduleCount = getTotalScheduleCount(userId);
     const currentVisitCount = getTotalVisitedMachiCount(userId);
-    console.log(
-      `📊 現在の予定数: ${currentScheduleCount}, 訪問数: ${currentVisitCount}`
+    log.debug(
+      `[SeedData] 現在の予定数: ${currentScheduleCount}, 訪問数: ${currentVisitCount}`
     );
 
     // 訪問記録データ作成
@@ -63,13 +64,13 @@ export async function seedSampleData(): Promise<void> {
     // 投入後のデータ数を確認
     const afterScheduleCount = getTotalScheduleCount(userId);
     const afterVisitCount = getTotalVisitedMachiCount(userId);
-    console.log(
-      `📊 投入後の予定数: ${afterScheduleCount}, 訪問数: ${afterVisitCount}`
+    log.debug(
+      `[SeedData] 投入後の予定数: ${afterScheduleCount}, 訪問数: ${afterVisitCount}`
     );
 
-    console.log('🎉 サンプルデータ投入完了');
+    log.info('[SeedData] 投入完了');
   } catch (error) {
-    console.error('❌ サンプルデータ投入エラー:', error);
+    log.error('[SeedData] 投入エラー:', error);
     throw error;
   }
 }
@@ -86,14 +87,14 @@ async function createSampleUser(userId: string): Promise<void> {
 
   if (existingUserById || existingUserByUsername) {
     const existingUser = existingUserById || existingUserByUsername!;
-    console.log('👤 ユーザーは既に存在します（認証で作成済み）');
+    log.debug('[SeedData] ユーザーは既に存在します（認証で作成済み）');
 
     // アバター画像をコピー（まだ設定されていない場合）
     if (!existingUser.avatar_url) {
       try {
         const assetModule = require('../../../../assets/images/tyatsushi.png');
         const avatarUri = await copyAssetToFileSystem(assetModule, 'tyatsushi.png');
-        console.log('📷 アバター画像をコピー:', avatarUri);
+        log.debug('[SeedData] アバター画像をコピー:', avatarUri);
 
         // ユーザー情報を更新
         updateUser(existingUser.id, {
@@ -102,9 +103,9 @@ async function createSampleUser(userId: string): Promise<void> {
           bio: 'サンプルユーザーです',
           updated_at: now,
         });
-        console.log('👤 既存ユーザーの情報を更新');
+        log.debug('[SeedData] 既存ユーザーの情報を更新');
       } catch (error) {
-        console.warn('⚠️  アバター画像のコピーに失敗:', error);
+        log.warn('[SeedData] アバター画像のコピーに失敗:', error);
       }
     }
     return;
@@ -115,9 +116,9 @@ async function createSampleUser(userId: string): Promise<void> {
   try {
     const assetModule = require('../../../../assets/images/tyatsushi.png');
     avatarUri = await copyAssetToFileSystem(assetModule, 'tyatsushi.png');
-    console.log('📷 アバター画像をコピー:', avatarUri);
+    log.debug('[SeedData] アバター画像をコピー:', avatarUri);
   } catch (error) {
-    console.warn('⚠️  アバター画像のコピーに失敗:', error);
+    log.warn('[SeedData] アバター画像のコピーに失敗:', error);
   }
 
   const user: UserRow = {
@@ -139,7 +140,7 @@ async function createSampleUser(userId: string): Promise<void> {
   };
 
   insertUser(user);
-  console.log('👤 サンプルユーザーを作成');
+  log.debug('[SeedData] サンプルユーザーを作成');
 }
 
 /**
@@ -219,7 +220,7 @@ function createSampleSchedules(userId: string): void {
   ];
 
   schedules.forEach((schedule) => insertSchedule(schedule));
-  console.log(`📅 ${schedules.length}件の予定を作成`);
+  log.debug(`[SeedData] ${schedules.length}件の予定を作成`);
 }
 
 /**
@@ -473,5 +474,5 @@ function createSampleVisits(userId: string): void {
   ];
 
   visits.forEach((visit) => insertVisit(visit));
-  console.log(`📍 ${visits.length}件の訪問記録を作成`);
+  log.debug(`[SeedData] ${visits.length}件の訪問記録を作成`);
 }

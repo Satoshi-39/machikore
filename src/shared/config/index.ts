@@ -8,3 +8,4 @@ export * from './theme';
 export * from './categories';
 export * from './cache';
 export * from './assets';
+export * from './logger';

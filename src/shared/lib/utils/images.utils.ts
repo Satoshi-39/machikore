@@ -8,6 +8,7 @@
 
 import * as FileSystem from 'expo-file-system/legacy';
 import { Asset } from 'expo-asset';
+import { log } from '@/shared/config/logger';
 
 /**
  * 画像保存ディレクトリのパス
@@ -27,7 +28,7 @@ export async function initializeImagesDirectory(): Promise<void> {
   const dirInfo = await FileSystem.getInfoAsync(IMAGES_DIR);
   if (!dirInfo.exists) {
     await FileSystem.makeDirectoryAsync(IMAGES_DIR, { intermediates: true });
-    console.log('📁 画像ディレクトリを作成:', IMAGES_DIR);
+    log.debug('[Images] 画像ディレクトリを作成:', IMAGES_DIR);
   }
 }
 
@@ -62,7 +63,7 @@ export async function copyAssetToFileSystem(
     to: destinationUri,
   });
 
-  console.log(`📷 画像をコピー: ${filename} -> ${destinationUri}`);
+  log.debug(`[Images] 画像をコピー: ${filename} -> ${destinationUri}`);
 
   return destinationUri;
 }
@@ -87,7 +88,7 @@ export async function deleteImage(uri: string): Promise<void> {
   const exists = await imageExists(uri);
   if (exists) {
     await FileSystem.deleteAsync(uri);
-    console.log(`🗑️  画像を削除: ${uri}`);
+    log.debug(`[Images] 画像を削除: ${uri}`);
   }
 }
 

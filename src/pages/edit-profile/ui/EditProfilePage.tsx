@@ -20,6 +20,7 @@ import { PageHeader, StyledTextInput } from '@/shared/ui';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { useUser, useUpdateProfileWithAvatar } from '@/entities/user/api';
+import { log } from '@/shared/config/logger';
 
 interface EditProfilePageProps {
   onSaveSuccess?: () => void;
@@ -118,7 +119,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
         },
       ]);
     } catch (error) {
-      console.error('[EditProfilePage] Save error:', error);
+      log.error('[EditProfilePage] Save error:', error);
       Alert.alert('エラー', 'プロフィールの保存に失敗しました。');
     }
   }, [currentUserId, displayName, bio, newAvatarFile, updateProfile, onSaveSuccess]);

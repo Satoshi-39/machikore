@@ -24,6 +24,7 @@ import {
   addNotificationResponseListener,
   setBadgeCount,
 } from '../lib/notifications';
+import { log } from '@/shared/config/logger';
 
 interface NotificationData {
   type?: string;
@@ -48,9 +49,9 @@ export function usePushNotifications() {
 
     try {
       await updatePushToken(token);
-      console.log('Push token saved successfully');
+      log.info('[PushNotifications] Push token saved successfully');
     } catch (error) {
-      console.error('Failed to save push token:', error);
+      log.error('[PushNotifications] Failed to save push token:', error);
     }
   }, [user?.id]);
 
@@ -59,7 +60,7 @@ export function usePushNotifications() {
     try {
       await clearPushTokenApi();
     } catch (error) {
-      console.error('Failed to clear push token:', error);
+      log.error('[PushNotifications] Failed to clear push token:', error);
     }
   }, []);
 
@@ -71,7 +72,7 @@ export function usePushNotifications() {
       const count = await getUnreadNotificationCount(user.id);
       await setBadgeCount(count);
     } catch (error) {
-      console.error('Failed to update badge count:', error);
+      log.error('[PushNotifications] Failed to update badge count:', error);
     }
   }, [user?.id]);
 
@@ -79,7 +80,7 @@ export function usePushNotifications() {
   const handleNotificationResponse = useCallback(
     async (response: Notifications.NotificationResponse, isFromColdStart = false) => {
       const data = response.notification.request.content.data as NotificationData;
-      console.log('Notification tapped:', data, { isFromColdStart });
+      log.debug('[PushNotifications] Notification tapped:', data, { isFromColdStart });
 
       // 通知を既読にしてバッジを更新
       if (data.notificationId) {
@@ -87,7 +88,7 @@ export function usePushNotifications() {
           await markNotificationAsRead(data.notificationId);
           await updateBadgeCount();
         } catch (error) {
-          console.error('Failed to mark notification as read:', error);
+          log.error('[PushNotifications] Failed to mark notification as read:', error);
         }
       }
 
@@ -136,7 +137,7 @@ export function usePushNotifications() {
       // アプリが通知から起動された場合の処理（コールドスタート）
       const lastNotificationResponse = await Notifications.getLastNotificationResponseAsync();
       if (lastNotificationResponse) {
-        console.log('App launched from notification:', lastNotificationResponse);
+        log.debug('[PushNotifications] App launched from notification:', lastNotificationResponse);
         handleNotificationResponse(lastNotificationResponse, true);
       }
     };
@@ -145,7 +146,7 @@ export function usePushNotifications() {
 
     // 通知受信リスナー（アプリがフォアグラウンドの時）
     notificationListener.current = addNotificationReceivedListener((notification) => {
-      console.log('Notification received:', notification);
+      log.debug('[PushNotifications] Notification received:', notification);
       // フォアグラウンドで受信した場合もバッジを更新
       updateBadgeCount();
     });

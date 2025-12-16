@@ -9,6 +9,7 @@ import { SQLiteVisitRepository } from '@/shared/api/repositories/sqlite/visit.re
 import { SupabaseVisitRepository } from '@/shared/api/repositories/supabase/visit.repository';
 import { isOnline } from '@/shared/lib/network/monitor';
 import type { SyncResult } from '@/shared/types/sync.types';
+import { log } from '@/shared/config/logger';
 
 /**
  * Sync Service Configuration
@@ -62,7 +63,7 @@ export class SyncService {
   async syncAll(): Promise<SyncResult> {
     // Prevent concurrent syncs
     if (this.isSyncing) {
-      console.log('⏳ Sync already in progress, skipping...');
+      log.debug('[Sync] Already in progress, skipping...');
       return {
         success: false,
         syncedCount: 0,
@@ -74,7 +75,7 @@ export class SyncService {
     // Check network
     const online = await isOnline();
     if (!online) {
-      console.log('📴 Offline, sync skipped');
+      log.debug('[Sync] Offline, sync skipped');
       return {
         success: false,
         syncedCount: 0,
@@ -84,14 +85,14 @@ export class SyncService {
     }
 
     this.isSyncing = true;
-    console.log('🔄 Starting sync...');
+    log.debug('[Sync] Starting sync...');
 
     try {
       const result = await this._performSync();
-      console.log('✅ Sync completed:', result);
+      log.info('[Sync] Completed:', result);
       return result;
     } catch (error) {
-      console.error('❌ Sync failed:', error);
+      log.error('[Sync] Failed:', error);
       return {
         success: false,
         syncedCount: 0,
@@ -173,21 +174,21 @@ export class SyncService {
     // Step 1: Find unsynced visits in local DB
     const unsyncedResult = await this.visitLocal.findUnsyncedRecords();
     if (!unsyncedResult.success) {
-      console.error('❌ Failed to find unsynced records:', unsyncedResult.error);
+      log.error('[Sync] Failed to find unsynced records:', unsyncedResult.error);
       return result;
     }
     if (!unsyncedResult.data) {
-      console.log('📭 No data returned');
+      log.debug('[Sync] No data returned');
       return result;
     }
 
     const unsyncedVisits = unsyncedResult.data;
     if (unsyncedVisits.length === 0) {
-      console.log('📭 No pending sync items');
+      log.debug('[Sync] No pending sync items');
       return result;
     }
 
-    console.log(`📤 Syncing ${unsyncedVisits.length} visits...`);
+    log.debug(`[Sync] Syncing ${unsyncedVisits.length} visits...`);
 
     // Step 2: Sync each visit to Supabase
     for (const visit of unsyncedVisits) {
@@ -203,7 +204,7 @@ export class SyncService {
           // Mark as synced in local DB
           await this.visitLocal.markAsSynced(visit.id);
           result.syncedCount++;
-          console.log(`✅ Synced visit: ${visit.id}`);
+          log.debug(`[Sync] Synced visit: ${visit.id}`);
         } else {
           throw createResult.error;
         }
@@ -216,7 +217,7 @@ export class SyncService {
           entityId: visit.id,
           error: errorMessage,
         });
-        console.error(`❌ Failed to sync visit ${visit.id}:`, errorMessage);
+        log.error(`[Sync] Failed to sync visit ${visit.id}:`, errorMessage);
 
         // Mark as sync error
         await this.visitLocal.markAsSyncError(visit.id, errorMessage);

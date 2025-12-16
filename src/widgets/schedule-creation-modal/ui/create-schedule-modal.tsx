@@ -9,6 +9,7 @@ import { Modal } from 'react-native';
 import { CreateScheduleForm } from '@/features/create-schedule';
 import { useCreateSchedule } from '@/entities/schedule';
 import { useCurrentUserId } from '@/entities/user';
+import { log } from '@/shared/config/logger';
 
 interface CreateScheduleModalProps {
   visible: boolean;
@@ -40,7 +41,7 @@ export function CreateScheduleModal({ visible, onClose }: CreateScheduleModalPro
           onClose();
         },
         onError: (error) => {
-          console.error('予定作成エラー:', error);
+          log.error('[CreateScheduleModal] 予定作成エラー:', error);
           // TODO: エラートーストを表示
         },
       }

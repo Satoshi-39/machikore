@@ -9,6 +9,7 @@
  */
 
 import * as SecureStore from 'expo-secure-store';
+import { log } from '@/shared/config/logger';
 
 /**
  * Supabaseが要求するストレージインターフェース
@@ -23,7 +24,7 @@ export const SecureStorageAdapter = {
       const value = await SecureStore.getItemAsync(key);
       return value;
     } catch (error) {
-      console.error('[SecureStorageAdapter] getItem error:', error);
+      log.error('[SecureStorageAdapter] getItem error:', error);
       return null;
     }
   },
@@ -35,10 +36,10 @@ export const SecureStorageAdapter = {
     try {
       await SecureStore.setItemAsync(key, value);
     } catch (error) {
-      console.error('[SecureStorageAdapter] setItem error:', error);
+      log.error('[SecureStorageAdapter] setItem error:', error);
       // SecureStoreのサイズ制限（約2KB）を超えた場合のエラーハンドリング
       if (error instanceof Error && error.message.includes('size')) {
-        console.error('[SecureStorageAdapter] Value too large for SecureStore');
+        log.error('[SecureStorageAdapter] Value too large for SecureStore');
       }
       throw error;
     }
@@ -51,7 +52,7 @@ export const SecureStorageAdapter = {
     try {
       await SecureStore.deleteItemAsync(key);
     } catch (error) {
-      console.error('[SecureStorageAdapter] removeItem error:', error);
+      log.error('[SecureStorageAdapter] removeItem error:', error);
     }
   },
 };

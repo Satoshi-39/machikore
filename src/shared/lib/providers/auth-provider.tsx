@@ -32,6 +32,7 @@ import {
 import { syncUserToSQLite } from '@/shared/lib/sync';
 import { setSentryUser } from '@/shared/lib/init/sentry';
 import { identifyUser as identifyPostHogUser, resetUser as resetPostHogUser } from '@/shared/lib/init/posthog';
+import { log } from '@/shared/config/logger';
 import { useUserStore } from '@/entities/user/model';
 import { useSubscriptionStore } from '@/entities/subscription';
 import { useAppSettingsStore } from '@/shared/lib/store';
@@ -51,7 +52,7 @@ async function syncTermsAgreementToServer(userId: string): Promise<void> {
     const { agreedTermsVersion, agreedPrivacyVersion } = useAppSettingsStore.getState();
 
     if (!agreedTermsVersion || !agreedPrivacyVersion) {
-      console.log('[AuthProvider] ローカルに同意情報なし、同期スキップ');
+      log.debug('[AuthProvider] ローカルに同意情報なし、同期スキップ');
       return;
     }
 
@@ -64,14 +65,14 @@ async function syncTermsAgreementToServer(userId: string): Promise<void> {
       serverAgreement.terms_version === agreedTermsVersion &&
       serverAgreement.privacy_version === agreedPrivacyVersion
     ) {
-      console.log('[AuthProvider] サーバーに同意情報あり、同期スキップ');
+      log.debug('[AuthProvider] サーバーに同意情報あり、同期スキップ');
       return;
     }
 
     // サーバーから現在の規約バージョンIDを取得
     const currentTerms = await getCurrentTermsVersions();
     if (!currentTerms.termsOfService || !currentTerms.privacyPolicy) {
-      console.warn('[AuthProvider] サーバーに規約が設定されていません');
+      log.warn('[AuthProvider] サーバーに規約が設定されていません');
       return;
     }
 
@@ -80,7 +81,7 @@ async function syncTermsAgreementToServer(userId: string): Promise<void> {
       currentTerms.termsOfService.version !== agreedTermsVersion ||
       currentTerms.privacyPolicy.version !== agreedPrivacyVersion
     ) {
-      console.log('[AuthProvider] ローカルとサーバーの規約バージョンが異なる、同期スキップ');
+      log.debug('[AuthProvider] ローカルとサーバーの規約バージョンが異なる、同期スキップ');
       return;
     }
 
@@ -91,9 +92,9 @@ async function syncTermsAgreementToServer(userId: string): Promise<void> {
       currentTerms.privacyPolicy.id
     );
 
-    console.log('[AuthProvider] 同意情報をサーバーに同期しました');
+    log.info('[AuthProvider] 同意情報をサーバーに同期しました');
   } catch (err) {
-    console.error('[AuthProvider] 同意情報の同期に失敗:', err);
+    log.error('[AuthProvider] 同意情報の同期に失敗:', err);
     // 失敗してもアプリは続行
   }
 }
@@ -117,7 +118,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     async function initializeAuth() {
       try {
-        console.log('[AuthProvider] 認証初期化開始');
+        log.debug('[AuthProvider] 認証初期化開始');
 
         // Supabaseが自動でSecureStoreからセッションを復元する
         // getSession()を呼ぶことで復元されたセッションを取得
@@ -125,7 +126,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         if (session?.user && isMounted) {
           // セッション復元成功
-          console.log('[AuthProvider] セッション復元成功:', session.user.id);
+          log.info('[AuthProvider] セッション復元成功:', session.user.id);
 
           // Supabase public.users にupsert（外部キー制約を満たすため）
           await upsertUserToSupabase(session.user);
@@ -153,11 +154,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
               setSubscriptionStatus(isPremium, customerInfo);
             }
           } catch (err) {
-            console.warn('[AuthProvider] RevenueCatログインエラー（続行）:', err);
+            log.warn('[AuthProvider] RevenueCatログインエラー（続行）:', err);
           }
         } else {
           // セッション復元失敗 → ゲストモード（認証なしでも閲覧可能）
-          console.log('[AuthProvider] セッションなし、ゲストモードで起動');
+          log.debug('[AuthProvider] セッションなし、ゲストモードで起動');
           if (isMounted) {
             setUser(null);
             setAuthState('unauthenticated');
@@ -167,7 +168,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // 認証完了後にSupabase Authイベントを監視開始
         if (isMounted) {
           const { data } = supabase.auth.onAuthStateChange((event, session) => {
-            console.log('[AuthProvider] Auth event:', event);
+            log.debug('[AuthProvider] Auth event:', event);
 
             // 非同期処理はコールバック外で実行（setSessionのブロッキングを防ぐ）
             if (event === 'SIGNED_IN' && session?.user) {
@@ -200,13 +201,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
                       setSubscriptionStatus(isPremium, customerInfo);
                     }
                   } catch (rcErr) {
-                    console.warn('[AuthProvider] RevenueCatログインエラー（続行）:', rcErr);
+                    log.warn('[AuthProvider] RevenueCatログインエラー（続行）:', rcErr);
                   }
 
                   // ローカルの同意情報をサーバーに同期
                   await syncTermsAgreementToServer(user.id);
                 } catch (err) {
-                  console.error('[AuthProvider] SIGNED_IN処理エラー:', err);
+                  log.error('[AuthProvider] SIGNED_IN処理エラー:', err);
                 }
               })();
             } else if (event === 'SIGNED_OUT') {
@@ -216,7 +217,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 try {
                   await logoutFromRevenueCat();
                 } catch (rcErr) {
-                  console.warn('[AuthProvider] RevenueCatログアウトエラー:', rcErr);
+                  log.warn('[AuthProvider] RevenueCatログアウトエラー:', rcErr);
                 }
 
                 if (isMounted) {
@@ -235,7 +236,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           subscription = data.subscription;
         }
       } catch (err) {
-        console.error('[AuthProvider] 認証初期化エラー:', err);
+        log.error('[AuthProvider] 認証初期化エラー:', err);
         // エラーが発生してもゲストモードで続行
         if (isMounted) {
           setUser(null);

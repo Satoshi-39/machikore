@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import { signInWithEmail } from '@/shared/api/supabase/auth';
+import { log } from '@/shared/config/logger';
 
 interface SignInFormData {
   email: string;
@@ -36,13 +37,13 @@ export function useSignIn(): UseSignInReturn {
         throw result.error;
       }
 
-      console.log('[SignIn] サインイン成功:', result.data.userId);
+      log.info('[Auth] サインイン成功:', result.data.userId);
 
       // AuthProviderのonAuthStateChangeでユーザー情報が自動的に設定される
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'サインインに失敗しました';
       setError(errorMessage);
-      console.error('[SignIn] サインインエラー:', err);
+      log.error('[Auth] サインインエラー:', err);
       throw err;
     } finally {
       setIsLoading(false);

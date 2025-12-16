@@ -8,6 +8,7 @@ import { useState, useCallback, useRef } from 'react';
 import { searchPlaces } from '../api/search-google-places';
 import type { PlacesSearchOptions } from '../api/google-places.types';
 import type { PlaceSearchResult } from './types';
+import { log } from '@/shared/config/logger';
 
 interface UseSearchGooglePlacesOptions {
   currentLocation?: { latitude: number; longitude: number } | null;
@@ -57,7 +58,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
       // キャッシュチェック
       const cached = cacheRef.current.get(trimmedQuery);
       if (cached) {
-        console.log(`✅ [検索キャッシュ] "${trimmedQuery}" (API呼び出しスキップ)`);
+        log.debug(`[SearchPlaces] 検索キャッシュ "${trimmedQuery}" (API呼び出しスキップ)`);
         setResults(cached);
         setIsLoading(false);
         setHasSearched(true);
@@ -67,7 +68,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
       // セッショントークンを生成（検索セッション開始）
       if (!sessionTokenRef.current) {
         sessionTokenRef.current = uuidv4();
-        console.log(`🎫 [Autocomplete Session] 新規セッション開始: ${sessionTokenRef.current}`);
+        log.debug(`[SearchPlaces] Autocomplete Session 新規セッション開始: ${sessionTokenRef.current}`);
       }
 
       setIsLoading(true);
@@ -94,7 +95,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
           };
         }
 
-        console.log(`🔍 [Google Places API] 検索実行: "${trimmedQuery}" (Session: ${sessionTokenRef.current})`);
+        log.debug(`[SearchPlaces] Google Places API 検索実行: "${trimmedQuery}" (Session: ${sessionTokenRef.current})`);
         const searchResults = await searchPlaces(searchOptions);
 
         // 結果をキャッシュに保存（最大100件まで）
@@ -112,7 +113,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
       } catch (err) {
         const error = err instanceof Error ? err : new Error('検索に失敗しました');
         setError(error);
-        console.error('場所検索エラー:', error);
+        log.error('[SearchPlaces] 場所検索エラー:', error);
       } finally {
         setIsLoading(false);
       }
@@ -127,7 +128,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
 
   const clearCache = useCallback(() => {
     cacheRef.current.clear();
-    console.log('🗑️ [検索キャッシュ] クリア完了');
+    log.debug('[SearchPlaces] 検索キャッシュ クリア完了');
   }, []);
 
   /**
@@ -135,7 +136,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
    */
   const endSession = useCallback(() => {
     if (sessionTokenRef.current) {
-      console.log(`✅ [Autocomplete Session] セッション終了: ${sessionTokenRef.current}`);
+      log.debug(`[SearchPlaces] Autocomplete Session セッション終了: ${sessionTokenRef.current}`);
       sessionTokenRef.current = null;
     }
   }, []);

@@ -10,6 +10,7 @@ import {
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
 import type { UUID } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 /**
  * コメントの返信一覧を取得
@@ -59,7 +60,7 @@ export function useAddReplyComment() {
       });
     },
     onError: (error) => {
-      console.error('[useAddReplyComment] Error:', error);
+      log.error('[Comment] Error:', error);
       Toast.show({
         type: 'error',
         text1: '返信の投稿に失敗しました',

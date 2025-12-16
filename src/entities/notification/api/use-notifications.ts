@@ -18,6 +18,7 @@ import {
   type NotificationWithDetails,
   type SystemAnnouncement,
 } from '@/shared/api/supabase/notifications';
+import { log } from '@/shared/config/logger';
 
 /**
  * ユーザーの通知一覧を取得
@@ -99,7 +100,7 @@ export function useMarkNotificationAsRead() {
       return { previousNotifications, previousCount };
     },
     onError: (error, { userId }, context) => {
-      console.error('[useMarkNotificationAsRead] Error:', error);
+      log.error('[Notification] Error:', error);
       if (context?.previousNotifications) {
         queryClient.setQueryData(
           ['notifications', userId, {}],
@@ -149,7 +150,7 @@ export function useMarkAllNotificationsAsRead() {
       return { previousNotifications };
     },
     onError: (error, { userId }, context) => {
-      console.error('[useMarkAllNotificationsAsRead] Error:', error);
+      log.error('[Notification] Error:', error);
       if (context?.previousNotifications) {
         queryClient.setQueryData(
           ['notifications', userId, {}],
@@ -176,7 +177,7 @@ export function useDeleteNotification() {
       queryClient.invalidateQueries({ queryKey: ['notifications', userId] });
     },
     onError: (error) => {
-      console.error('[useDeleteNotification] Error:', error);
+      log.error('[Notification] Error:', error);
     },
   });
 }
@@ -194,7 +195,7 @@ export function useDeleteAllNotifications() {
       queryClient.invalidateQueries({ queryKey: ['notifications', userId] });
     },
     onError: (error) => {
-      console.error('[useDeleteAllNotifications] Error:', error);
+      log.error('[Notification] Error:', error);
     },
   });
 }
@@ -278,7 +279,7 @@ export function useMarkAnnouncementAsRead() {
       return { previousReadIds, previousCount };
     },
     onError: (error, { userId }, context) => {
-      console.error('[useMarkAnnouncementAsRead] Error:', error);
+      log.error('[Notification] Error:', error);
       if (context?.previousReadIds) {
         queryClient.setQueryData(['announcements', 'read-ids', userId], context.previousReadIds);
       }
@@ -307,7 +308,7 @@ export function useMarkAllAnnouncementsAsRead() {
       queryClient.invalidateQueries({ queryKey: ['announcements', 'read-ids', userId] });
     },
     onError: (error) => {
-      console.error('[useMarkAllAnnouncementsAsRead] Error:', error);
+      log.error('[Notification] Error:', error);
     },
   });
 }

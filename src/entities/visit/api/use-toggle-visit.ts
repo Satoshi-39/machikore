@@ -11,6 +11,7 @@ import {
 } from '@/shared/api/supabase/visits';
 import { invalidateVisits } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 interface ToggleVisitParams {
   userId: UUID;
@@ -80,7 +81,7 @@ export function useToggleVisit() {
       return { previousIsVisited };
     },
     onError: (err, { userId, machiId }, context) => {
-      console.error('[useToggleVisit] Error:', err);
+      log.error('[Visit] Error:', err);
       Toast.show({
         type: 'error',
         text1: '訪問状態の更新に失敗しました',

@@ -15,6 +15,7 @@ import {
   unbookmarkSpotFromFolder,
   unbookmarkMapFromFolder,
 } from '@/shared/api/supabase/bookmarks';
+import { log } from '@/shared/config/logger';
 
 /**
  * スポットのブックマークをトグル
@@ -53,7 +54,7 @@ export function useToggleSpotBookmark() {
       return { previousStatus };
     },
     onError: (error, { userId, spotId }, context) => {
-      console.error('[useToggleSpotBookmark] Error:', error);
+      log.error('[Bookmark] useToggleSpotBookmark Error:', error);
       Toast.show({
         type: 'error',
         text1: 'ブックマークに失敗しました',
@@ -111,7 +112,7 @@ export function useToggleMapBookmark() {
       return { previousStatus };
     },
     onError: (error, { userId, mapId }, context) => {
-      console.error('[useToggleMapBookmark] Error:', error);
+      log.error('[Bookmark] useToggleMapBookmark Error:', error);
       Toast.show({
         type: 'error',
         text1: 'ブックマークに失敗しました',
@@ -151,7 +152,7 @@ export function useMoveBookmarkToFolder() {
       queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
     },
     onError: (error) => {
-      console.error('[useMoveBookmarkToFolder] Error:', error);
+      log.error('[Bookmark] useMoveBookmarkToFolder Error:', error);
       Toast.show({
         type: 'error',
         text1: 'フォルダの移動に失敗しました',
@@ -189,7 +190,7 @@ export function useBookmarkSpot() {
       );
     },
     onError: (error, { userId, spotId }) => {
-      console.error('[useBookmarkSpot] Error:', error);
+      log.error('[Bookmark] useBookmarkSpot Error:', error);
       Toast.show({
         type: 'error',
         text1: '保存に失敗しました',
@@ -240,7 +241,7 @@ export function useUnbookmarkSpot() {
       );
     },
     onError: (error, { userId, spotId }) => {
-      console.error('[useUnbookmarkSpot] Error:', error);
+      log.error('[Bookmark] useUnbookmarkSpot Error:', error);
       Toast.show({
         type: 'error',
         text1: '保存の解除に失敗しました',
@@ -293,7 +294,7 @@ export function useBookmarkMap() {
       );
     },
     onError: (error, { userId, mapId }) => {
-      console.error('[useBookmarkMap] Error:', error);
+      log.error('[Bookmark] useBookmarkMap Error:', error);
       Toast.show({
         type: 'error',
         text1: '保存に失敗しました',
@@ -344,7 +345,7 @@ export function useUnbookmarkMap() {
       );
     },
     onError: (error, { userId, mapId }) => {
-      console.error('[useUnbookmarkMap] Error:', error);
+      log.error('[Bookmark] useUnbookmarkMap Error:', error);
       Toast.show({
         type: 'error',
         text1: '保存の解除に失敗しました',
@@ -391,7 +392,7 @@ export function useUnbookmarkSpotFromFolder() {
       queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'spot', userId, spotId] });
     },
     onError: (error) => {
-      console.error('[useUnbookmarkSpotFromFolder] Error:', error);
+      log.error('[Bookmark] useUnbookmarkSpotFromFolder Error:', error);
       Toast.show({
         type: 'error',
         text1: '保存の解除に失敗しました',
@@ -423,7 +424,7 @@ export function useUnbookmarkMapFromFolder() {
       queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'map', userId, mapId] });
     },
     onError: (error) => {
-      console.error('[useUnbookmarkMapFromFolder] Error:', error);
+      log.error('[Bookmark] useUnbookmarkMapFromFolder Error:', error);
       Toast.show({
         type: 'error',
         text1: '保存の解除に失敗しました',

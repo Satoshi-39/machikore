@@ -22,6 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
 import * as aesjs from 'aes-js';
 import 'react-native-get-random-values';
+import { log } from '@/shared/config/logger';
 
 // 暗号化キーを保存するためのSecureStoreキー
 const ENCRYPTION_KEY_PREFIX = '_encryption_key_';
@@ -56,7 +57,7 @@ class LargeSecureStore {
 
       return newKey;
     } catch (error) {
-      console.error('[LargeSecureStore] Failed to get/create encryption key:', error);
+      log.error('[LargeSecureStore] Failed to get/create encryption key:', error);
       throw error;
     }
   }
@@ -83,7 +84,7 @@ class LargeSecureStore {
 
       return ivHex + encryptedHex;
     } catch (error) {
-      console.error('[LargeSecureStore] Encryption failed:', error);
+      log.error('[LargeSecureStore] Encryption failed:', error);
       throw error;
     }
   }
@@ -110,7 +111,7 @@ class LargeSecureStore {
 
       return aesjs.utils.utf8.fromBytes(decryptedBytes);
     } catch (error) {
-      console.error('[LargeSecureStore] Decryption failed:', error);
+      log.error('[LargeSecureStore] Decryption failed:', error);
       // 復号に失敗した場合はnullを返す（データ破損などの場合）
       return null;
     }
@@ -127,7 +128,7 @@ class LargeSecureStore {
       }
       return await this._decrypt(key, encrypted);
     } catch (error) {
-      console.error('[LargeSecureStore] getItem error:', error);
+      log.error('[LargeSecureStore] getItem error:', error);
       return null;
     }
   }
@@ -140,7 +141,7 @@ class LargeSecureStore {
       const encrypted = await this._encrypt(key, value);
       await AsyncStorage.setItem(key, encrypted);
     } catch (error) {
-      console.error('[LargeSecureStore] setItem error:', error);
+      log.error('[LargeSecureStore] setItem error:', error);
       throw error;
     }
   }
@@ -155,7 +156,7 @@ class LargeSecureStore {
       // SecureStoreから暗号化キーを削除
       await SecureStore.deleteItemAsync(ENCRYPTION_KEY_PREFIX + key);
     } catch (error) {
-      console.error('[LargeSecureStore] removeItem error:', error);
+      log.error('[LargeSecureStore] removeItem error:', error);
     }
   }
 }

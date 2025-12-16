@@ -7,6 +7,7 @@
 import { useState } from 'react';
 import { signOut } from '@/shared/api/supabase/auth';
 import { useUserStore } from '@/entities/user';
+import { log } from '@/shared/config/logger';
 
 interface UseSignOutReturn {
   signOut: () => Promise<void>;
@@ -36,12 +37,12 @@ export function useSignOut(): UseSignOutReturn {
       // ユーザー状態をクリア
       clearUser();
 
-      console.log('[SignOut] サインアウト成功');
+      log.info('[Auth] サインアウト成功');
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : 'サインアウトに失敗しました';
       setError(errorMessage);
-      console.error('[SignOut] サインアウトエラー:', err);
+      log.error('[Auth] サインアウトエラー:', err);
       throw err;
     } finally {
       setIsLoading(false);

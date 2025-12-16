@@ -10,7 +10,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions, Share, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor, log } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -199,7 +199,7 @@ export function SpotCard({
         default: { message: `${spotName}をチェック！\n${url}` },
       })!);
     } catch (error) {
-      console.error('Share error:', error);
+      log.error('[Spot] Share error:', error);
     }
   }, [spotName, spot.id]);
 

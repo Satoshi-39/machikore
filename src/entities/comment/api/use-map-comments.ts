@@ -12,6 +12,7 @@ import {
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 /**
  * マップのコメント一覧を取得
@@ -71,7 +72,7 @@ export function useAddMapComment() {
       });
     },
     onError: (error) => {
-      console.error('[useAddMapComment] Error:', error);
+      log.error('[Comment] Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コメントの投稿に失敗しました',

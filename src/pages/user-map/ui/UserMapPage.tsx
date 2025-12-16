@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
+import { useRecordView } from '@/entities/view-history';
 import { UserMapView } from '@/widgets/user-map-view';
 import { UserMapList } from '@/widgets/user-map-list';
 import { OwnMapSearch } from '@/widgets/own-map-search';
@@ -28,6 +29,7 @@ import {
 } from '@/features/search-places';
 import { usePinDropStore } from '@/features/drop-pin';
 import * as Crypto from 'expo-crypto';
+import { log } from '@/shared/config/logger';
 
 interface UserMapPageProps {
   /** マップID（必須） */
@@ -71,10 +73,20 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   // ピン刺しモード開始
   const startPinDropMode = usePinDropStore((state) => state.startPinDropMode);
 
+  // 閲覧履歴を記録
+  const { mutate: recordView } = useRecordView();
+
   // マップIDをグローバルステートに設定（スポット作成時などで使用）
   useEffect(() => {
     setSelectedMapId(mapId);
   }, [mapId, setSelectedMapId]);
+
+  // マップ詳細を開いた時に閲覧履歴を記録（ログイン中かつ自分以外のマップの場合）
+  useEffect(() => {
+    if (user?.id && selectedMap && selectedMap.user_id !== user.id && selectedMap.is_public) {
+      recordView({ userId: user.id, mapId });
+    }
+  }, [user?.id, selectedMap?.id, selectedMap?.user_id, selectedMap?.is_public, mapId, recordView]);
 
   // スポットIDがある場合はスポットにジャンプ
   useEffect(() => {
@@ -131,7 +143,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
         formattedAddress = addresses.formattedAddress;
       }
     } catch (error) {
-      console.warn('住所の取得に失敗しました:', error);
+      log.warn('[UserMapPage] 住所の取得に失敗しました:', error);
     }
 
     const manualInput: ManualLocationInput = {

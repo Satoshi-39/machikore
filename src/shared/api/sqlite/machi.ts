@@ -202,7 +202,7 @@ export function getMachiCount(): number {
  * getAllMachi()でデータを取得してアプリ側でJSON.parseして処理してください。
  */
 export function getAllLineNames(): string[] {
-  console.warn('getAllLineNames is deprecated. Use client-side processing instead.');
+  log.warn('[SQLite] getAllLineNames is deprecated. Use client-side processing instead.');
   return [];
 }
 

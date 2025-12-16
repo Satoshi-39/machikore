@@ -20,6 +20,7 @@ import { usePlaceSelectHandler } from '../model';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 import { useRouter, type Href } from 'expo-router';
 import * as Crypto from 'expo-crypto';
+import { log } from '@/shared/config/logger';
 
 interface OwnMapSearchProps {
   mapId: string | null;
@@ -103,7 +104,7 @@ export function OwnMapSearch({
         formattedAddress = addresses.formattedAddress;
       }
     } catch (error) {
-      console.warn('住所の取得に失敗しました:', error);
+      log.warn('[OwnMapSearch] 住所の取得に失敗しました:', error);
     }
 
     const manualInput: ManualLocationInput = {

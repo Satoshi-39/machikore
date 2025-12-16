@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { invalidateVisits } from '@/shared/api/query-client';
 import { supabase } from '@/shared/api/supabase/client';
 import type { UpdateVisitParams } from '../model/types';
+import { log } from '@/shared/config/logger';
 
 /**
  * 訪問記録を更新
@@ -25,7 +26,7 @@ export function useUpdateVisit() {
         .eq('id', params.visitId);
 
       if (error) {
-        console.error('Error updating visit:', error);
+        log.error('[Visit] Error updating visit:', error);
         throw error;
       }
 

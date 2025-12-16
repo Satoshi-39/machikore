@@ -13,6 +13,7 @@ import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useBookmarks } from '@/entities/bookmark';
 import { removeBookmark } from '@/shared/api/supabase/bookmarks';
+import { log } from '@/shared/config/logger';
 import type { BookmarkWithDetails } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import { SwipeableRow } from '@/shared/ui';
@@ -66,7 +67,7 @@ export function BookmarkItemList({
       await removeBookmark(bookmarkId);
       queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
     } catch (error) {
-      console.error('Failed to delete bookmark:', error);
+      log.error('[BookmarkItemList] Failed to delete bookmark:', error);
     }
   }, [userId, queryClient]);
 

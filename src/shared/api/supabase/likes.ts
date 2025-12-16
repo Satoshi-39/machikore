@@ -5,6 +5,7 @@
 
 import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
+import { log } from '@/shared/config/logger';
 
 type LikeRow = Database['public']['Tables']['likes']['Row'];
 type LikeInsert = Database['public']['Tables']['likes']['Insert'];
@@ -53,7 +54,7 @@ export async function addSpotLike(userId: string, spotId: string): Promise<LikeR
   // user_spotsのlikes_countをインクリメント
   const { error: rpcError } = await supabase.rpc('increment_spot_likes_count', { spot_id: spotId });
   if (rpcError) {
-    console.error('[addSpotLike] RPC Error:', rpcError);
+    log.error('[Likes] RPC Error:', rpcError);
   }
 
   return data;
@@ -76,7 +77,7 @@ export async function removeSpotLike(userId: string, spotId: string): Promise<vo
   // user_spotsのlikes_countをデクリメント
   const { error: rpcError } = await supabase.rpc('decrement_spot_likes_count', { spot_id: spotId });
   if (rpcError) {
-    console.error('[removeSpotLike] RPC Error:', rpcError);
+    log.error('[Likes] RPC Error:', rpcError);
   }
 }
 

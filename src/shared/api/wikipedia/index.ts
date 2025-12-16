@@ -4,6 +4,8 @@
  * 日本語Wikipediaから記事の要約を取得
  */
 
+import { log } from '@/shared/config/logger';
+
 export interface WikipediaSummary {
   title: string;
   extract: string;
@@ -71,7 +73,7 @@ export async function getWikipediaSummary(title: string): Promise<WikipediaSumma
       thumbnail: data.thumbnail,
     };
   } catch (error) {
-    console.warn(`Wikipedia summary fetch failed for "${title}":`, error);
+    log.warn(`[Wikipedia] Summary fetch failed for "${title}":`, error);
     return null;
   }
 }

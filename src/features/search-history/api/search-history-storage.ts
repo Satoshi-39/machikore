@@ -3,6 +3,7 @@
  */
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { log } from '@/shared/config/logger';
 
 // 保存キー（デフォルトマップとユーザーマップで分ける）
 const STORAGE_KEYS = {
@@ -31,7 +32,7 @@ export async function getSearchHistory(type: SearchHistoryType): Promise<SearchH
     const data = await AsyncStorage.getItem(key);
     return data ? JSON.parse(data) : [];
   } catch (error) {
-    console.error('Failed to get search history:', error);
+    log.error('[SearchHistory] Failed to get search history:', error);
     return [];
   }
 }
@@ -62,7 +63,7 @@ export async function addSearchHistory(
     const newHistory = [newItem, ...filteredHistory].slice(0, MAX_HISTORY_COUNT);
     await AsyncStorage.setItem(key, JSON.stringify(newHistory));
   } catch (error) {
-    console.error('Failed to add search history:', error);
+    log.error('[SearchHistory] Failed to add search history:', error);
   }
 }
 
@@ -79,7 +80,7 @@ export async function removeSearchHistory(
     const newHistory = history.filter((item) => item.id !== id);
     await AsyncStorage.setItem(key, JSON.stringify(newHistory));
   } catch (error) {
-    console.error('Failed to remove search history:', error);
+    log.error('[SearchHistory] Failed to remove search history:', error);
   }
 }
 
@@ -91,6 +92,6 @@ export async function clearSearchHistory(type: SearchHistoryType): Promise<void>
     const key = STORAGE_KEYS[type];
     await AsyncStorage.removeItem(key);
   } catch (error) {
-    console.error('Failed to clear search history:', error);
+    log.error('[SearchHistory] Failed to clear search history:', error);
   }
 }

@@ -5,6 +5,7 @@
 
 import { useState, useCallback, useRef } from 'react';
 import { searchMachikorePlaces, type MachikorePlaceSearchResult, type MachikorePlaceSearchOptions } from '../api/searchMachikorePlaces';
+import { log } from '@/shared/config/logger';
 
 interface UseSearchMachikorePlacesOptions {
   userId?: string | null; // 指定した場合、そのユーザーのspotsのみ検索
@@ -87,7 +88,7 @@ export function useSearchMachikorePlaces(options: UseSearchMachikorePlacesOption
       } catch (err) {
         const error = err instanceof Error ? err : new Error('検索に失敗しました');
         setError(error);
-        console.error('街コレ検索エラー:', error);
+        log.error('[SearchPlaces] 街コレ検索エラー:', error);
       } finally {
         setIsLoading(false);
       }

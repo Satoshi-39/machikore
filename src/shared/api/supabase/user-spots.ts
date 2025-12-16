@@ -6,6 +6,7 @@
 import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
 import type { SpotWithDetails } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 type MasterSpotInsert = Database['public']['Tables']['master_spots']['Insert'];
 type MasterSpotRow = Database['public']['Tables']['master_spots']['Row'];
@@ -220,7 +221,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
   // 3. マップのspots_countをインクリメント
   const { error: rpcError } = await supabase.rpc('increment_map_spots_count', { map_id: input.mapId });
   if (rpcError) {
-    console.error('[createSpot] Failed to increment spots_count:', rpcError);
+    log.error('[UserSpots] Failed to increment spots_count:', rpcError);
   }
 
   return data.id;
@@ -405,7 +406,7 @@ export async function deleteSpot(spotId: string): Promise<void> {
   if (mapId) {
     const { error: rpcError } = await supabase.rpc('decrement_map_spots_count', { map_id: mapId });
     if (rpcError) {
-      console.error('[deleteSpot] Failed to decrement spots_count:', rpcError);
+      log.error('[UserSpots] Failed to decrement spots_count:', rpcError);
     }
   }
 }

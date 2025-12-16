@@ -3,6 +3,7 @@
  */
 
 import { getDatabase } from './client';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // マイグレーション実行
@@ -560,7 +561,46 @@ export function initializeDatabase(): void {
       ON likes(is_synced);
     `);
 
-    // 14. 同期キューテーブル
+    // 14. 閲覧履歴テーブル（マップ閲覧履歴のキャッシュ）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS view_history (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        map_id TEXT NOT NULL,
+        viewed_at TEXT NOT NULL,
+        view_count INTEGER DEFAULT 1,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0,
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+        UNIQUE(user_id, map_id)
+      );
+    `);
+
+    // インデックス作成（view_history）
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_view_history_user_id
+      ON view_history(user_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_view_history_map_id
+      ON view_history(map_id);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_view_history_viewed_at
+      ON view_history(viewed_at DESC);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_view_history_user_viewed
+      ON view_history(user_id, viewed_at DESC);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_view_history_is_synced
+      ON view_history(is_synced);
+    `);
+
+    // 15. 同期キューテーブル
     db.execSync(`
       CREATE TABLE IF NOT EXISTS sync_queue (
         id TEXT PRIMARY KEY,
@@ -614,11 +654,11 @@ export function initializeDatabase(): void {
     // コミット
     db.execSync('COMMIT;');
 
-    console.log('Database initialized successfully');
+    log.info('[SQLite] Database initialized successfully');
   } catch (error) {
     // ロールバック
     db.execSync('ROLLBACK;');
-    console.error('Database initialization failed:', error);
+    log.error('[SQLite] Database initialization failed:', error);
     throw error;
   }
 }
@@ -633,6 +673,7 @@ export function dropAllTables(): void {
 
   try {
     db.execSync('DROP TABLE IF EXISTS sync_queue;');
+    db.execSync('DROP TABLE IF EXISTS view_history;');
     db.execSync('DROP TABLE IF EXISTS bookmarks;');
     db.execSync('DROP TABLE IF EXISTS comments;');
     db.execSync('DROP TABLE IF EXISTS follows;');
@@ -649,10 +690,10 @@ export function dropAllTables(): void {
 
     db.execSync('COMMIT;');
 
-    console.log('All tables dropped successfully');
+    log.info('[SQLite] All tables dropped successfully');
   } catch (error) {
     db.execSync('ROLLBACK;');
-    console.error('Failed to drop tables:', error);
+    log.error('[SQLite] Failed to drop tables:', error);
     throw error;
   }
 }
@@ -719,7 +760,7 @@ export function recordVersion(version: number): void {
 export function migration005_AddMasterSpots(): void {
   const db = getDatabase();
 
-  console.log('[Migration 005] Starting: Add master_spots and refactor spots...');
+  log.info('[SQLite] [Migration 005] Starting: Add master_spots and refactor spots...');
 
   db.execSync('BEGIN TRANSACTION;');
 
@@ -850,10 +891,10 @@ export function migration005_AddMasterSpots(): void {
     // コミット
     db.execSync('COMMIT;');
 
-    console.log('[Migration 005] Completed successfully');
+    log.info('[SQLite] [Migration 005] Completed successfully');
   } catch (error) {
     db.execSync('ROLLBACK;');
-    console.error('[Migration 005] Failed:', error);
+    log.error('[SQLite] [Migration 005] Failed:', error);
     throw error;
   }
 }
@@ -864,7 +905,7 @@ export function migration005_AddMasterSpots(): void {
 export function migration006_AddTileId(): void {
   const db = getDatabase();
 
-  console.log('[Migration 006] Starting: Add tile_id to machi and cities...');
+  log.info('[SQLite] [Migration 006] Starting: Add tile_id to machi and cities...');
 
   db.execSync('BEGIN TRANSACTION;');
 
@@ -908,10 +949,10 @@ export function migration006_AddTileId(): void {
     // コミット
     db.execSync('COMMIT;');
 
-    console.log('[Migration 006] Completed successfully');
+    log.info('[SQLite] [Migration 006] Completed successfully');
   } catch (error) {
     db.execSync('ROLLBACK;');
-    console.error('[Migration 006] Failed:', error);
+    log.error('[SQLite] [Migration 006] Failed:', error);
     throw error;
   }
 }
@@ -922,7 +963,7 @@ export function migration006_AddTileId(): void {
 export function migration007_AddTransportHubs(): void {
   const db = getDatabase();
 
-  console.log('[Migration 007] Starting: Add transport_hubs table...');
+  log.info('[SQLite] [Migration 007] Starting: Add transport_hubs table...');
 
   db.execSync('BEGIN TRANSACTION;');
 
@@ -969,10 +1010,10 @@ export function migration007_AddTransportHubs(): void {
     // コミット
     db.execSync('COMMIT;');
 
-    console.log('[Migration 007] Completed successfully');
+    log.info('[SQLite] [Migration 007] Completed successfully');
   } catch (error) {
     db.execSync('ROLLBACK;');
-    console.error('[Migration 007] Failed:', error);
+    log.error('[SQLite] [Migration 007] Failed:', error);
     throw error;
   }
 }
@@ -983,7 +1024,7 @@ export function migration007_AddTransportHubs(): void {
 function migration008_AddRegionsCoordinates(): void {
   const db = getDatabase();
 
-  console.log('[Migration 008] Adding coordinates to regions table...');
+  log.info('[SQLite] [Migration 008] Adding coordinates to regions table...');
 
   try {
     // カラムが存在するかチェック
@@ -1002,13 +1043,13 @@ function migration008_AddRegionsCoordinates(): void {
       }
 
       db.execSync('COMMIT;');
-      console.log('[Migration 008] Completed successfully');
+      log.info('[SQLite] [Migration 008] Completed successfully');
     } else {
-      console.log('[Migration 008] Columns already exist, skipping');
+      log.info('[SQLite] [Migration 008] Columns already exist, skipping');
     }
   } catch (error) {
     db.execSync('ROLLBACK;');
-    console.error('[Migration 008] Failed:', error);
+    log.error('[SQLite] [Migration 008] Failed:', error);
     throw error;
   }
 }
@@ -1021,35 +1062,35 @@ export function runMigrations(): void {
   initVersionTable();
 
   const currentVersion = getCurrentVersion();
-  console.log(`[Migrations] Current database version: ${currentVersion}`);
+  log.info(`[SQLite] Current database version: ${currentVersion}`);
 
   // マイグレーション5: master_spots追加
   if (currentVersion < 5) {
     migration005_AddMasterSpots();
     recordVersion(5);
-    console.log('[Migrations] Applied version 5');
+    log.info('[SQLite] Applied version 5');
   }
 
   // マイグレーション6: tile_id追加
   if (currentVersion < 6) {
     migration006_AddTileId();
     recordVersion(6);
-    console.log('[Migrations] Applied version 6');
+    log.info('[SQLite] Applied version 6');
   }
 
   // マイグレーション7: transport_hubs追加
   if (currentVersion < 7) {
     migration007_AddTransportHubs();
     recordVersion(7);
-    console.log('[Migrations] Applied version 7');
+    log.info('[SQLite] Applied version 7');
   }
 
   // マイグレーション8: regions座標カラム追加
   if (currentVersion < 8) {
     migration008_AddRegionsCoordinates();
     recordVersion(8);
-    console.log('[Migrations] Applied version 8');
+    log.info('[SQLite] Applied version 8');
   }
 
-  console.log('[Migrations] All migrations completed');
+  log.info('[SQLite] All migrations completed');
 }

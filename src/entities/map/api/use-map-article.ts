@@ -4,6 +4,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { log } from '@/shared/config/logger';
 import { getMapArticle, updateSpotArticleContent } from '@/shared/api/supabase';
 import type { MapArticleData } from '@/shared/types';
 
@@ -48,7 +49,7 @@ export function useUpdateSpotArticle() {
       });
     },
     onError: (error) => {
-      console.error('[useUpdateSpotArticle] Error:', error);
+      log.error('[Map] useUpdateSpotArticle Error:', error);
       Toast.show({
         type: 'error',
         text1: '記事の保存に失敗しました',

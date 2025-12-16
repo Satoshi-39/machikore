@@ -14,6 +14,7 @@ import { getMachiByTileIds } from '@/shared/lib/cache';
 import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
 import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 interface UseMachiByBoundsOptions {
   /** マップの境界 */
@@ -67,13 +68,13 @@ export function useMachiByBounds(options: UseMachiByBoundsOptions = {}): UseMach
     queryFn: async () => {
       if (tileIds.length === 0) return [];
 
-      console.log(`🗾 useMachiByBounds: ${tileIds.length}タイル取得`);
+      log.debug(`[Machi] useMachiByBounds: ${tileIds.length}タイル取得`);
       try {
         const machi = await getMachiByTileIds(tileIds);
-        console.log(`✅ getMachiByTileIds成功: ${machi.length}件`);
+        log.debug(`[Machi] getMachiByTileIds成功: ${machi.length}件`);
         return machi;
       } catch (error) {
-        console.error(`❌ queryFnエラー:`, error);
+        log.error(`[Machi] queryFnエラー:`, error);
         throw error;
       }
     },

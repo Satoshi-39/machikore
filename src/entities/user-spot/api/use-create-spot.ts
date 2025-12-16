@@ -5,6 +5,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { invalidateSpots, invalidateMaps } from '@/shared/api/query-client';
 import { createSpot, type CreateSpotInput } from '@/shared/api/supabase/user-spots';
+import { log } from '@/shared/config/logger';
 
 /**
  * スポットを作成
@@ -12,7 +13,7 @@ import { createSpot, type CreateSpotInput } from '@/shared/api/supabase/user-spo
 export function useCreateSpot() {
   return useMutation({
     mutationFn: async (params: CreateSpotInput) => {
-      console.log('🔍 useCreateSpot: 作成開始', params);
+      log.debug('[Spot] 作成開始', params);
 
       // バリデーション
       if (!params.userId) {
@@ -27,21 +28,21 @@ export function useCreateSpot() {
       // machiIdは街が見つからない場合はnullでも可
       // googlePlaceIdはピン刺し・現在地登録の場合はnullでも可
 
-      console.log('✅ useCreateSpot: バリデーション成功');
+      log.debug('[Spot] バリデーション成功');
 
       // Supabaseにスポットを作成
       const spotId = await createSpot(params);
-      console.log('💾 useCreateSpot: Supabase挿入完了', spotId);
+      log.debug('[Spot] Supabase挿入完了', spotId);
 
       return spotId;
     },
     onSuccess: (spotId) => {
-      console.log('🎊 useCreateSpot: 成功コールバック実行', spotId);
+      log.info('[Spot] 成功コールバック実行', spotId);
       invalidateSpots();
       invalidateMaps(); // spots_countを更新するためにマップキャッシュも無効化
     },
     onError: (error) => {
-      console.error('💥 useCreateSpot: エラーコールバック実行', error);
+      log.error('[Spot] エラーコールバック実行', error);
     },
   });
 }

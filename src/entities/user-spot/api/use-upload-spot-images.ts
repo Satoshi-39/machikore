@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import type { SelectedImage } from '@/features/pick-images';
 import type { Database } from '@/shared/types/supabase.generated';
+import { log } from '@/shared/config/logger';
 
 type ImageRow = Database['public']['Tables']['images']['Row'];
 
@@ -30,14 +31,14 @@ export function useUploadSpotImages() {
 
   return useMutation<UploadResult, Error, UploadSpotImagesParams>({
     mutationFn: async ({ spotId, images, onProgress }) => {
-      console.log(`[useUploadSpotImages] 開始: spotId=${spotId}, images=${images.length}`);
+      log.debug(`[Spot] 開始: spotId=${spotId}, images=${images.length}`);
 
       const uploadedImages: ImageRow[] = [];
       let failed = 0;
 
       for (let i = 0; i < images.length; i++) {
         const image = images[i]!;
-        console.log(`[useUploadSpotImages] 画像${i}: URI=${image.uri}`);
+        log.debug(`[Spot] 画像${i}: URI=${image.uri}`);
 
         // 進捗を報告
         onProgress?.(i + 1, images.length);
@@ -45,7 +46,7 @@ export function useUploadSpotImages() {
         const extension = image.uri.split('.').pop() || 'jpg';
         const fileName = `${Date.now()}_${i}.${extension}`;
         const path = `${spotId}/${fileName}`;
-        console.log(`[useUploadSpotImages] path=${path}`);
+        log.debug(`[Spot] path=${path}`);
 
         try {
           // Supabase Storageにアップロード
@@ -57,7 +58,7 @@ export function useUploadSpotImages() {
           });
 
           if (!result.success) {
-            console.error('画像アップロード失敗:', result.error);
+            log.error('[Spot] 画像アップロード失敗:', result.error);
             failed++;
             continue;
           }
@@ -75,7 +76,7 @@ export function useUploadSpotImages() {
 
           uploadedImages.push(imageRow);
         } catch (error) {
-          console.error('画像処理エラー:', error);
+          log.error('[Spot] 画像処理エラー:', error);
           failed++;
         }
       }

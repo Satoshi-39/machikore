@@ -4,6 +4,7 @@
 
 import { supabase } from './client';
 import type { Result } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 画像アップロード
@@ -31,7 +32,7 @@ export async function uploadImage({
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      console.log(`[uploadImage] 開始 (試行${attempt}/${maxRetries}):`, { uri, bucket, path });
+      log.debug(`[Storage] 開始 (試行${attempt}/${maxRetries}):`, { uri, bucket, path });
 
       // セッション取得
       const { data: sessionData } = await supabase.auth.getSession();
@@ -63,17 +64,17 @@ export async function uploadImage({
         body: formData,
       });
 
-      console.log('[uploadImage] Edge Function結果:', response.status);
+      log.debug('[Storage] Edge Function結果:', response.status);
 
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        console.log('[uploadImage] アップロード失敗:', result.error);
+        log.error('[Storage] アップロード失敗:', result.error);
         lastError = new Error(result.error || 'アップロード失敗');
         continue; // リトライ
       }
 
-      console.log('[uploadImage] 成功:', result.url);
+      log.info('[Storage] 成功:', result.url);
 
       return {
         success: true,
@@ -83,7 +84,7 @@ export async function uploadImage({
         },
       };
     } catch (error) {
-      console.log(`[uploadImage] 例外発生 (試行${attempt}):`, error);
+      log.error(`[Storage] 例外発生 (試行${attempt}):`, error);
       lastError = error instanceof Error ? error : new Error('Unknown error');
 
       // リトライ前に少し待機

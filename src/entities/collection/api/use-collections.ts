@@ -4,6 +4,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { log } from '@/shared/config/logger';
 import {
   getUserCollections,
   getCollectionById,
@@ -86,7 +87,7 @@ export function useCreateCollection() {
       });
     },
     onError: (error) => {
-      console.error('[useCreateCollection] Error:', error);
+      log.error('[Collection] useCreateCollection Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コレクションの作成に失敗しました',
@@ -130,7 +131,7 @@ export function useUpdateCollection() {
       });
     },
     onError: (error) => {
-      console.error('[useUpdateCollection] Error:', error);
+      log.error('[Collection] useUpdateCollection Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コレクションの更新に失敗しました',
@@ -157,7 +158,7 @@ export function useDeleteCollection() {
       });
     },
     onError: (error) => {
-      console.error('[useDeleteCollection] Error:', error);
+      log.error('[Collection] useDeleteCollection Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コレクションの削除に失敗しました',

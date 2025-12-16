@@ -15,6 +15,7 @@ import { removeSpotLike, removeMapLike, removeMasterSpotLike } from '@/shared/ap
 import { PageHeader } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import type { SpotWithDetails } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 interface LikesPageProps {
   userId?: string;
@@ -62,7 +63,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       await removeSpotLike(userId, spotId);
       queryClient.invalidateQueries({ queryKey: ['user-liked-spots', userId] });
     } catch (error) {
-      console.error('Failed to delete spot like:', error);
+      log.error('[LikesPage] Failed to delete spot like:', error);
     }
   }, [userId, queryClient]);
 
@@ -73,7 +74,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       await removeMasterSpotLike(userId, masterSpotId);
       queryClient.invalidateQueries({ queryKey: ['user-liked-master-spots', userId] });
     } catch (error) {
-      console.error('Failed to delete master spot like:', error);
+      log.error('[LikesPage] Failed to delete master spot like:', error);
     }
   }, [userId, queryClient]);
 
@@ -84,7 +85,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       await removeMapLike(userId, mapId);
       queryClient.invalidateQueries({ queryKey: ['user-liked-maps', userId] });
     } catch (error) {
-      console.error('Failed to delete map like:', error);
+      log.error('[LikesPage] Failed to delete map like:', error);
     }
   }, [userId, queryClient]);
 

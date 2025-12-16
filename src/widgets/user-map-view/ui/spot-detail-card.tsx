@@ -23,6 +23,7 @@ import { LikersModal } from '@/features/view-likers';
 import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
+import { log } from '@/shared/config/logger';
 
 interface SpotDetailCardProps {
   spot: SpotWithDetails;
@@ -274,7 +275,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         default: { message: `${spotName}をチェック！\n${url}` },
       })!);
     } catch (error) {
-      console.error('Share error:', error);
+      log.error('[SpotDetailCard] Share error:', error);
     }
   }, [spotName, spot.id]);
 

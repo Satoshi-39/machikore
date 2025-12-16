@@ -11,6 +11,7 @@ import {
 } from '@/shared/api/supabase/notification-settings';
 import { updatePushToken, clearPushToken } from '@/shared/api/supabase/users';
 import { getExpoPushToken } from '@/features/push-notifications';
+import { log } from '@/shared/config/logger';
 
 const QUERY_KEY = ['notification-settings'];
 
@@ -42,12 +43,12 @@ export function useUpdateNotificationSettings() {
           const token = await getExpoPushToken();
           if (token) {
             await updatePushToken(token);
-            console.log('[useUpdateNotificationSettings] Push token registered');
+            log.info('[User] Push token registered');
           }
         } else {
           // OFFにした場合：トークンをクリア
           await clearPushToken();
-          console.log('[useUpdateNotificationSettings] Push token cleared');
+          log.info('[User] Push token cleared');
         }
       }
 

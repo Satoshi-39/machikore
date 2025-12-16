@@ -7,6 +7,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 import * as Location from 'expo-location';
+import { log } from '@/shared/config/logger';
 
 export interface LocationCoords {
   latitude: number;
@@ -42,7 +43,7 @@ export function useLocation() {
         longitude: currentLocation.coords.longitude,
       };
 
-      console.log('📍 現在地を取得:', coords);
+      log.debug('[Location] 現在地を取得:', coords);
 
       setLocation(coords);
       setError(null);
@@ -65,7 +66,7 @@ export function useLocation() {
     const subscription = AppState.addEventListener('change', (nextAppState: AppStateStatus) => {
       // バックグラウンド → アクティブに変化した時
       if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
-        console.log('🔄 アプリがフォアグラウンドに復帰 - 位置情報を再取得');
+        log.debug('[Location] アプリがフォアグラウンドに復帰 - 位置情報を再取得');
         fetchLocation();
       }
       appState.current = nextAppState;
@@ -78,7 +79,7 @@ export function useLocation() {
 
   // 現在地を再取得する関数（手動再取得用）
   const refetchLocation = async (): Promise<LocationCoords | null> => {
-    console.log('📍 現在地を手動で再取得');
+    log.debug('[Location] 現在地を手動で再取得');
     return fetchLocation();
   };
 

@@ -4,6 +4,7 @@
 
 import { getDatabase } from './client';
 import type { CityRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // Create
@@ -39,7 +40,7 @@ export function bulkInsertCities(cities: CityRow[]): void {
     }
   });
 
-  console.log(`✅ ${cities.length}件の市区町村データを挿入`);
+  log.info(`[SQLite] ${cities.length}件の市区町村データを挿入`);
 }
 
 // ===============================

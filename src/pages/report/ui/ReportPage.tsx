@@ -22,6 +22,7 @@ import { PageHeader, StyledTextInput } from '@/shared/ui';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { createReport, checkAlreadyReported, type ReportTargetType, type ReportReason } from '@/shared/api/supabase/reports';
+import { log } from '@/shared/config/logger';
 
 interface ReportPageProps {
   targetType: ReportTargetType;
@@ -85,7 +86,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
         [{ text: 'OK', onPress: () => router.back() }]
       );
     } catch (error) {
-      console.error('[ReportPage] Error:', error);
+      log.error('[ReportPage] Error:', error);
       Alert.alert('エラー', '報告の送信に失敗しました。もう一度お試しください。');
     } finally {
       setIsSubmitting(false);

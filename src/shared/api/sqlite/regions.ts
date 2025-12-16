@@ -4,6 +4,7 @@
 
 import { getDatabase } from './client';
 import type { RegionRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // Create
@@ -37,7 +38,7 @@ export function bulkInsertRegions(regions: RegionRow[]): void {
     }
   });
 
-  console.log(`✅ ${regions.length}件の地方データを挿入`);
+  log.info(`[SQLite] ${regions.length}件の地方データを挿入`);
 }
 
 // ===============================

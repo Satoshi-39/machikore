@@ -5,6 +5,7 @@
 
 import { supabase, handleSupabaseError } from './client';
 import type { MapWithUser, SpotWithDetails, MapArticleData, SpotWithImages } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 内部用型（Supabaseレスポンス）
@@ -314,7 +315,7 @@ export interface CreateMapParams {
  * 新しいマップを作成
  */
 export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
-  console.log('[createMap] Creating map:', params);
+  log.debug('[Maps] Creating map:', params);
 
   const { data, error } = await supabase
     .from('maps')
@@ -348,7 +349,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     handleSupabaseError('createMap', error);
   }
 
-  console.log('[createMap] Success:', data);
+  log.info('[Maps] Success:', data);
 
   return {
     id: data.id,
@@ -584,7 +585,7 @@ export async function searchPublicMaps(
     .limit(limit);
 
   if (error) {
-    console.error('[searchPublicMaps] Error:', error);
+    log.error('[Maps] Error:', error);
     return [];
   }
 
@@ -635,7 +636,7 @@ export async function searchPublicMapsByTag(
     .limit(limit);
 
   if (error) {
-    console.error('[searchPublicMapsByTag] Error:', error);
+    log.error('[Maps] Error:', error);
     return [];
   }
 

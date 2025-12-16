@@ -11,7 +11,7 @@ import Purchases, {
   PurchasesPackage,
   CustomerInfo,
 } from 'react-native-purchases';
-import { ENV, SUBSCRIPTION } from '@/shared/config';
+import { ENV, SUBSCRIPTION, log } from '@/shared/config';
 
 // Entitlement ID（RevenueCatダッシュボードで設定した名前）
 export const ENTITLEMENT_ID = SUBSCRIPTION.ENTITLEMENT_ID;
@@ -28,14 +28,14 @@ let isInitialized = false;
  */
 export async function initializeRevenueCat(): Promise<void> {
   if (isInitialized) {
-    console.log('[RevenueCat] Already initialized');
+    log.debug('[RevenueCat] Already initialized');
     return;
   }
 
   const apiKey = ENV.REVENUECAT_API_KEY;
 
   if (!apiKey) {
-    console.error('[RevenueCat] API key not found');
+    log.error('[RevenueCat] API key not found');
     return;
   }
 
@@ -53,9 +53,9 @@ export async function initializeRevenueCat(): Promise<void> {
     });
 
     isInitialized = true;
-    console.log('[RevenueCat] Initialized successfully');
+    log.info('[RevenueCat] Initialized successfully');
   } catch (error) {
-    console.error('[RevenueCat] Initialization failed:', error);
+    log.error('[RevenueCat] Initialization failed:', error);
     throw error;
   }
 }
@@ -71,10 +71,10 @@ export async function initializeRevenueCat(): Promise<void> {
 export async function loginToRevenueCat(userId: string): Promise<CustomerInfo> {
   try {
     const { customerInfo } = await Purchases.logIn(userId);
-    console.log('[RevenueCat] User logged in:', userId);
+    log.info('[RevenueCat] User logged in:', userId);
     return customerInfo;
   } catch (error) {
-    console.error('[RevenueCat] Login failed:', error);
+    log.error('[RevenueCat] Login failed:', error);
     throw error;
   }
 }
@@ -86,10 +86,10 @@ export async function loginToRevenueCat(userId: string): Promise<CustomerInfo> {
 export async function logoutFromRevenueCat(): Promise<CustomerInfo> {
   try {
     const customerInfo = await Purchases.logOut();
-    console.log('[RevenueCat] User logged out');
+    log.info('[RevenueCat] User logged out');
     return customerInfo;
   } catch (error) {
-    console.error('[RevenueCat] Logout failed:', error);
+    log.error('[RevenueCat] Logout failed:', error);
     throw error;
   }
 }
@@ -106,7 +106,7 @@ export async function getCustomerInfo(): Promise<CustomerInfo> {
     const customerInfo = await Purchases.getCustomerInfo();
     return customerInfo;
   } catch (error) {
-    console.error('[RevenueCat] Failed to get customer info:', error);
+    log.error('[RevenueCat] Failed to get customer info:', error);
     throw error;
   }
 }
@@ -119,7 +119,7 @@ export async function getOfferings(): Promise<PurchasesOffering | null> {
     const offerings = await Purchases.getOfferings();
     return offerings.current;
   } catch (error) {
-    console.error('[RevenueCat] Failed to get offerings:', error);
+    log.error('[RevenueCat] Failed to get offerings:', error);
     throw error;
   }
 }
@@ -143,15 +143,15 @@ export async function purchasePackage(
 ): Promise<{ customerInfo: CustomerInfo; productIdentifier: string }> {
   try {
     const { customerInfo, productIdentifier } = await Purchases.purchasePackage(pkg);
-    console.log('[RevenueCat] Purchase successful:', productIdentifier);
+    log.info('[RevenueCat] Purchase successful:', productIdentifier);
     return { customerInfo, productIdentifier };
   } catch (error: any) {
     // ユーザーがキャンセルした場合
     if (error.userCancelled) {
-      console.log('[RevenueCat] Purchase cancelled by user');
+      log.debug('[RevenueCat] Purchase cancelled by user');
       throw new Error('PURCHASE_CANCELLED');
     }
-    console.error('[RevenueCat] Purchase failed:', error);
+    log.error('[RevenueCat] Purchase failed:', error);
     throw error;
   }
 }
@@ -162,10 +162,10 @@ export async function purchasePackage(
 export async function restorePurchases(): Promise<CustomerInfo> {
   try {
     const customerInfo = await Purchases.restorePurchases();
-    console.log('[RevenueCat] Purchases restored');
+    log.info('[RevenueCat] Purchases restored');
     return customerInfo;
   } catch (error) {
-    console.error('[RevenueCat] Restore failed:', error);
+    log.error('[RevenueCat] Restore failed:', error);
     throw error;
   }
 }

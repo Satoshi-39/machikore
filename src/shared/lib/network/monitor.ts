@@ -8,6 +8,7 @@ import NetInfo, {
   NetInfoState,
   NetInfoSubscription,
 } from '@react-native-community/netinfo';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // Type definitions
@@ -70,7 +71,7 @@ export function startNetworkMonitoring(): NetInfoSubscription {
       networkState.isInternetReachable !==
         currentNetworkState.isInternetReachable
     ) {
-      console.log('📶 Network state changed:', networkState);
+      log.debug('[Network] State changed:', networkState);
       currentNetworkState = networkState;
       notifyListeners(networkState);
     }

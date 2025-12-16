@@ -4,6 +4,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { log } from '@/shared/config/logger';
 import {
   getSpotComments,
   addSpotComment,
@@ -60,7 +61,7 @@ export function useAddSpotComment() {
       });
     },
     onError: (error) => {
-      console.error('[useAddSpotComment] Error:', error);
+      log.error('[Comment] useAddSpotComment Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コメントの投稿に失敗しました',
@@ -107,7 +108,7 @@ export function useUpdateComment() {
       });
     },
     onError: (error) => {
-      console.error('[useUpdateComment] Error:', error);
+      log.error('[Comment] useUpdateComment Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コメントの編集に失敗しました',
@@ -166,7 +167,7 @@ export function useDeleteComment() {
       });
     },
     onError: (error) => {
-      console.error('[useDeleteComment] Error:', error);
+      log.error('[Comment] useDeleteComment Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コメントの削除に失敗しました',

@@ -10,6 +10,7 @@ import '../global.css';
 import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat, initSentry, wrapWithSentry } from '@/shared/lib/init';
 import { AppToast } from '@/shared/ui';
+import { log } from '@/shared/config/logger';
 
 // Sentry初期化（最初に実行）
 initSentry();
@@ -225,7 +226,7 @@ function RootLayout() {
         setIsReady(true);
       })
       .catch((err) => {
-        console.error('初期化エラー:', err);
+        log.error('[App] 初期化エラー:', err);
         setError(err);
       });
   }, []);

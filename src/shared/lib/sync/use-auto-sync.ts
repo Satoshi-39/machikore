@@ -11,6 +11,7 @@ import {
   addNetworkListener,
   type NetworkState,
 } from '@/shared/lib/network/monitor';
+import { log } from '@/shared/config/logger';
 
 interface AutoSyncOptions {
   enabled?: boolean;
@@ -54,7 +55,7 @@ export function useAutoSync(options: AutoSyncOptions = {}) {
       }
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Sync failed'));
-      console.error('Auto sync error:', err);
+      log.error('[AutoSync] error:', err);
     } finally {
       setIsSyncing(false);
     }
@@ -67,7 +68,7 @@ export function useAutoSync(options: AutoSyncOptions = {}) {
     const handleNetworkChange = (state: NetworkState) => {
       // Sync when network is restored
       if (state.status === 'online' && state.isInternetReachable) {
-        console.log('📶 Network restored, triggering sync...');
+        log.debug('[AutoSync] Network restored, triggering sync...');
         triggerSync();
       }
     };
@@ -88,7 +89,7 @@ export function useAutoSync(options: AutoSyncOptions = {}) {
           appState.current.match(/inactive|background/) &&
           nextAppState === 'active'
         ) {
-          console.log('📱 App foregrounded, triggering sync...');
+          log.debug('[AutoSync] App foregrounded, triggering sync...');
           triggerSync();
         }
         appState.current = nextAppState;
@@ -114,7 +115,7 @@ export function useAutoSync(options: AutoSyncOptions = {}) {
     }
 
     intervalRef.current = setInterval(() => {
-      console.log('⏰ Interval sync triggered');
+      log.debug('[AutoSync] Interval sync triggered');
       triggerSync();
     }, opts.syncIntervalMs);
 

@@ -13,6 +13,7 @@ import {
   type CollectionMapWithDetails,
 } from '@/shared/api/supabase/collections';
 import { COLLECTION_KEYS } from './use-collections';
+import { log } from '@/shared/config/logger';
 
 // クエリキー
 export const COLLECTION_MAPS_KEYS = {
@@ -77,7 +78,7 @@ export function useAddMapToCollection() {
       });
     },
     onError: (error) => {
-      console.error('[useAddMapToCollection] Error:', error);
+      log.error('[Collection] useAddMapToCollection Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コレクションへの追加に失敗しました',
@@ -120,7 +121,7 @@ export function useRemoveMapFromCollection() {
       });
     },
     onError: (error) => {
-      console.error('[useRemoveMapFromCollection] Error:', error);
+      log.error('[Collection] useRemoveMapFromCollection Error:', error);
       Toast.show({
         type: 'error',
         text1: 'コレクションからの削除に失敗しました',
@@ -149,7 +150,7 @@ export function useUpdateCollectionMapOrder() {
       });
     },
     onError: (error) => {
-      console.error('[useUpdateCollectionMapOrder] Error:', error);
+      log.error('[Collection] useUpdateCollectionMapOrder Error:', error);
     },
   });
 }

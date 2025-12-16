@@ -6,6 +6,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { log } from '@/shared/config/logger';
 import { checkMapLiked, toggleMapLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, MapArticleData } from '@/shared/types';
@@ -157,7 +158,7 @@ export function useToggleMapLike() {
       return { previousLikeStatus };
     },
     onError: (err, { userId, mapId }, context) => {
-      console.error('[useToggleMapLike] Error:', err);
+      log.error('[Like] useToggleMapLike Error:', err);
       Toast.show({
         type: 'error',
         text1: 'いいねに失敗しました',

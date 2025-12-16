@@ -4,6 +4,7 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
+import { log } from '@/shared/config/logger';
 
 // フォロー関係の情報
 export interface FollowUser {
@@ -69,7 +70,7 @@ export async function followUser(
   if (error) {
     // 既にフォロー済みの場合は無視
     if (error.code === '23505') {
-      console.log('[followUser] Already following');
+      log.debug('[Follows] Already following');
       return;
     }
     handleSupabaseError('followUser', error);

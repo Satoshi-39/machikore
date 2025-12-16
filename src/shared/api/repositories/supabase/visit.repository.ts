@@ -22,6 +22,7 @@ import {
   voidSuccess,
   voidFailure,
 } from '@/shared/types/repository.types';
+import { log } from '@/shared/config/logger';
 
 export class SupabaseVisitRepository implements IVisitRepository {
   // ===============================
@@ -103,7 +104,7 @@ export class SupabaseVisitRepository implements IVisitRepository {
         // Supabase will auto-generate: id, created_at, updated_at
       };
 
-      console.log('🔍 Creating visit in Supabase:', visit);
+      log.debug('[VisitRepository] Creating visit in Supabase:', visit);
 
       const { data: created, error } = await supabase
         .from('visits')
@@ -112,14 +113,14 @@ export class SupabaseVisitRepository implements IVisitRepository {
         .single();
 
       if (error) {
-        console.error('❌ Supabase error:', error);
+        log.error('[VisitRepository] Supabase error:', error);
         throw error;
       }
 
-      console.log('✅ Created in Supabase:', created);
+      log.info('[VisitRepository] Created in Supabase:', created);
       return success(convertSupabaseVisitToSQLite(created));
     } catch (error) {
-      console.error('❌ Exception in create:', error);
+      log.error('[VisitRepository] Exception in create:', error);
       return failure(
         error instanceof Error ? error : new Error('Failed to create visit')
       );
@@ -202,7 +203,7 @@ export class SupabaseVisitRepository implements IVisitRepository {
     error: string
   ): Promise<RepositoryVoidResult> {
     // Not applicable for Supabase (no local sync queue)
-    console.error('Visit sync error:', error);
+    log.error('[VisitRepository] Visit sync error:', error);
     return voidSuccess();
   }
 

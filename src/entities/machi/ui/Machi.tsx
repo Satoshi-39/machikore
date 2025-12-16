@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, log } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
 
 interface MachiProps {
@@ -25,7 +25,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
       const linesArray = JSON.parse(machi.lines);
       lineNames = linesArray.map((line: { ja: string }) => line.ja);
     } catch (e) {
-      console.error('Failed to parse lines JSON:', e);
+      log.error('[Machi] Failed to parse lines JSON:', e);
     }
   }
 

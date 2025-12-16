@@ -19,6 +19,7 @@ import {
   type TermsVersion,
 } from '@/shared/api/supabase';
 import { formatJapaneseDate } from '@/shared/lib/utils/date.utils';
+import { log } from '@/shared/config/logger';
 
 interface TermsUpdatePageProps {
   onComplete: () => void;
@@ -57,7 +58,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         setTermsOfService(terms.termsOfService);
         setPrivacyPolicy(terms.privacyPolicy);
       } catch (err) {
-        console.error('規約の取得に失敗:', err);
+        log.error('[TermsUpdatePage] 規約の取得に失敗:', err);
         setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
       } finally {
         setIsLoading(false);
@@ -89,7 +90,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
 
       onComplete();
     } catch (err) {
-      console.error('同意の記録に失敗:', err);
+      log.error('[TermsUpdatePage] 同意の記録に失敗:', err);
       // エラーでもローカルには保存して続行（後でサーバー同期）
       agreeToTerms(termsOfService.version, privacyPolicy.version);
       onComplete();
@@ -138,7 +139,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
                 setPrivacyPolicy(terms.privacyPolicy);
               })
               .catch((err) => {
-                console.error('規約の取得に失敗:', err);
+                log.error('[TermsUpdatePage] 規約の取得に失敗:', err);
                 setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
               })
               .finally(() => setIsLoading(false));

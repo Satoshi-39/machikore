@@ -4,6 +4,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/shared/api/supabase';
+import { log } from '@/shared/config/logger';
 
 /**
  * リンク種別
@@ -40,7 +41,7 @@ async function getFeaturedCarouselItems(): Promise<FeaturedCarouselItem[]> {
     .order('display_order', { ascending: true });
 
   if (error) {
-    console.error('[getFeaturedCarouselItems] Error:', error);
+    log.error('[FeaturedCarousel] Error:', error);
     throw error;
   }
 
@@ -74,7 +75,7 @@ async function getFeaturedCarouselItem(id: string): Promise<FeaturedCarouselItem
     if (error.code === 'PGRST116') {
       return null;
     }
-    console.error('[getFeaturedCarouselItem] Error:', error);
+    log.error('[FeaturedCarousel] Error:', error);
     throw error;
   }
 

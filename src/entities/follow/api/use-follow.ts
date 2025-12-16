@@ -13,6 +13,7 @@ import {
   getFollowCounts,
   type FollowWithUser,
 } from '@/shared/api/supabase/follows';
+import { log } from '@/shared/config/logger';
 
 // 型を再エクスポート
 export type { FollowWithUser, FollowUser } from '@/shared/api/supabase/follows';
@@ -72,7 +73,7 @@ export function useFollowUser() {
       return { previousCounts };
     },
     onError: (error, { followerId, followeeId }, context) => {
-      console.error('[useFollowUser] Error:', error);
+      log.error('[Follow] Error:', error);
       Toast.show({
         type: 'error',
         text1: 'フォローに失敗しました',
@@ -139,7 +140,7 @@ export function useUnfollowUser() {
       return { previousCounts };
     },
     onError: (error, { followerId, followeeId }, context) => {
-      console.error('[useUnfollowUser] Error:', error);
+      log.error('[Follow] Error:', error);
       Toast.show({
         type: 'error',
         text1: 'フォロー解除に失敗しました',

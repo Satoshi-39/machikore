@@ -5,6 +5,7 @@
  */
 
 import { supabase } from './client';
+import { log } from '@/shared/config/logger';
 
 export interface NotificationSettings {
   id: string;
@@ -48,7 +49,7 @@ export async function getNotificationSettings(): Promise<NotificationSettings> {
   const { data, error } = await supabase.rpc('get_notification_settings');
 
   if (error) {
-    console.error('[getNotificationSettings] Error:', error);
+    log.error('[NotificationSettings] Error:', error);
     throw error;
   }
 
@@ -78,7 +79,7 @@ export async function updateNotificationSettings(
   });
 
   if (error) {
-    console.error('[updateNotificationSettings] Error:', error);
+    log.error('[NotificationSettings] Error:', error);
     throw error;
   }
 

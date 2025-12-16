@@ -10,6 +10,7 @@ import { View, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Calendar } from './Calendar';
+import { log } from '@/shared/config/logger';
 
 interface UserScheduleProps {
   userId: string | null;
@@ -24,7 +25,7 @@ export function UserSchedule({ userId }: UserScheduleProps) {
 
   // 現在はプレースホルダー実装のためuserIdは未使用
   // スケジュールAPI実装時に使用予定
-  console.log('UserSchedule for userId:', userId);
+  log.debug('[UserSchedule] Rendering for userId:', userId);
 
   return (
     <ScrollView className="flex-1 bg-surface dark:bg-dark-surface">

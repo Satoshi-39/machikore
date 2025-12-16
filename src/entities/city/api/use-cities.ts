@@ -13,6 +13,7 @@ import { getCitiesByBounds as getCitiesByBoundsApi } from '@/shared/api/supabase
 import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
 import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM } from '@/shared/config';
 import type { CityRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 interface UseCitiesByBoundsOptions {
   /** マップの境界 */
@@ -68,13 +69,13 @@ export function useCitiesByBounds(options: UseCitiesByBoundsOptions = {}): UseCi
     queryFn: async () => {
       if (tileIds.length === 0) return [];
 
-      console.log(`🏙️ useCitiesByBounds: ${tileIds.length}タイル取得`);
+      log.debug(`[City] useCitiesByBounds: ${tileIds.length}タイル取得`);
       try {
         const cities = await getCitiesByTileIds(tileIds);
-        console.log(`✅ getCitiesByTileIds成功: ${cities.length}件`);
+        log.debug(`[City] getCitiesByTileIds成功: ${cities.length}件`);
         return cities;
       } catch (error) {
-        console.error(`❌ queryFnエラー:`, error);
+        log.error(`[City] queryFnエラー:`, error);
         throw error;
       }
     },

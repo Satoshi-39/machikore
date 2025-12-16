@@ -7,6 +7,7 @@
 import { insertUser, updateUser, getUserById } from '@/shared/api/sqlite';
 import { getCurrentUser } from '@/shared/api/supabase/auth';
 import type { UserRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 /**
  * Supabase AuthユーザーをSQLiteに同期
@@ -33,7 +34,7 @@ export async function syncUserToSQLite(user?: any): Promise<void> {
     }
 
     if (!supabaseUser) {
-      console.warn('[syncUser] Supabaseユーザーが見つかりません');
+      log.warn('[syncUser] Supabaseユーザーが見つかりません');
       return;
     }
 
@@ -101,7 +102,7 @@ export async function syncUserToSQLite(user?: any): Promise<void> {
       insertUser(newUser);
     }
   } catch (error) {
-    console.error('[syncUser] 同期エラー:', error);
+    log.error('[syncUser] 同期エラー:', error);
     throw error;
   }
 }

@@ -9,6 +9,7 @@ import { queryAll } from '@/shared/api/sqlite/client';
 import { supabase } from '@/shared/api/supabase/client';
 import { getRegionsData } from '@/shared/lib/utils/regions.utils';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
+import { log } from '@/shared/config/logger';
 
 export interface MachikorePlaceSearchResult {
   id: string;
@@ -89,7 +90,7 @@ async function searchPrefectures(query: string, limit: number): Promise<Machikor
     .limit(limit);
 
   if (error) {
-    console.error('searchPrefectures error:', error);
+    log.error('[SearchPlaces] searchPrefectures error:', error);
     return [];
   }
 
@@ -116,7 +117,7 @@ async function searchCities(query: string, limit: number): Promise<MachikorePlac
     .limit(limit);
 
   if (error) {
-    console.error('searchCities error:', error);
+    log.error('[SearchPlaces] searchCities error:', error);
     return [];
   }
 
@@ -147,7 +148,7 @@ async function searchMachis(query: string, limit: number): Promise<MachikorePlac
     .limit(limit);
 
   if (error) {
-    console.error('searchMachis error:', error);
+    log.error('[SearchPlaces] searchMachis error:', error);
     return [];
   }
 

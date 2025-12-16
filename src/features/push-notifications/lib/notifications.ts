@@ -8,6 +8,7 @@ import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
+import { log } from '@/shared/config/logger';
 
 // 通知の表示設定
 Notifications.setNotificationHandler({
@@ -26,7 +27,7 @@ Notifications.setNotificationHandler({
 export async function requestNotificationPermissions(): Promise<boolean> {
   // 実機でのみ動作
   if (!Device.isDevice) {
-    console.log('Push notifications require a physical device');
+    log.debug('[PushNotifications] Push notifications require a physical device');
     return false;
   }
 
@@ -41,7 +42,7 @@ export async function requestNotificationPermissions(): Promise<boolean> {
   }
 
   if (finalStatus !== 'granted') {
-    console.log('Notification permission not granted');
+    log.debug('[PushNotifications] Notification permission not granted');
     return false;
   }
 
@@ -55,7 +56,7 @@ export async function getExpoPushToken(): Promise<string | null> {
   try {
     // 実機でのみ動作
     if (!Device.isDevice) {
-      console.log('Push notifications require a physical device');
+      log.debug('[PushNotifications] Push notifications require a physical device');
       return null;
     }
 
@@ -68,7 +69,7 @@ export async function getExpoPushToken(): Promise<string | null> {
     // projectIdを取得（EAS Build用）
     const projectId = Constants.expoConfig?.extra?.eas?.projectId;
     if (!projectId) {
-      console.warn('EAS projectId not found. Push notifications may not work correctly.');
+      log.warn('[PushNotifications] EAS projectId not found. Push notifications may not work correctly.');
     }
 
     // トークンを取得
@@ -78,7 +79,7 @@ export async function getExpoPushToken(): Promise<string | null> {
 
     return tokenData.data;
   } catch (error) {
-    console.error('Failed to get push token:', error);
+    log.error('[PushNotifications] Failed to get push token:', error);
     return null;
   }
 }

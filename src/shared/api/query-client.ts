@@ -120,6 +120,11 @@ export const QUERY_KEYS = {
   users: ['users'] as const,
   usersMe: () => [...QUERY_KEYS.users, 'me'] as const,
   usersDetail: (userId: string) => [...QUERY_KEYS.users, 'detail', userId] as const,
+
+  // 閲覧履歴
+  viewHistory: ['view-history'] as const,
+  viewHistoryRecent: (userId: string, limit?: number) =>
+    [...QUERY_KEYS.viewHistory, 'recent', userId, limit] as const,
 } as const;
 
 // ===============================
@@ -174,6 +179,13 @@ export function invalidateMachi() {
  */
 export function invalidateStations() {
   invalidateMachi();
+}
+
+/**
+ * 閲覧履歴関連のクエリを無効化
+ */
+export function invalidateViewHistory() {
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.viewHistory });
 }
 
 /**

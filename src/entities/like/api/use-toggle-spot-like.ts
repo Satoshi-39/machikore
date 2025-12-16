@@ -6,6 +6,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { log } from '@/shared/config/logger';
 import { toggleSpotLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, SpotWithDetails } from '@/shared/types';
@@ -161,7 +162,7 @@ export function useToggleSpotLike() {
       return { previousIsLiked };
     },
     onError: (error, { spotId }, context) => {
-      console.error('[useToggleSpotLike] Error:', error);
+      log.error('[Like] useToggleSpotLike Error:', error);
       Toast.show({
         type: 'error',
         text1: 'いいねに失敗しました',

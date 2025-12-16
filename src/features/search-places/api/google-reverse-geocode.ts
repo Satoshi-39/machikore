@@ -5,6 +5,8 @@
  * https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding
  */
 
+import { log } from '@/shared/config/logger';
+
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const GEOCODING_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
@@ -73,7 +75,7 @@ export async function reverseGeocode(
   languageCode: string = 'ja'
 ): Promise<ReverseGeocodeAddresses | null> {
   if (!GOOGLE_PLACES_API_KEY) {
-    console.error('[reverseGeocode] Google API key is not configured');
+    log.error('[SearchPlaces] Google API key is not configured');
     return null;
   }
 
@@ -83,19 +85,19 @@ export async function reverseGeocode(
     const response = await fetch(url);
 
     if (!response.ok) {
-      console.error(`[reverseGeocode] HTTP error: ${response.status}`);
+      log.error(`[SearchPlaces] HTTP error: ${response.status}`);
       return null;
     }
 
     const data: ReverseGeocodeResponse = await response.json();
 
     if (data.status !== 'OK') {
-      console.error(`[reverseGeocode] API error: ${data.status}`, data.error_message);
+      log.error(`[SearchPlaces] API error: ${data.status}`, data.error_message);
       return null;
     }
 
     if (data.results.length === 0) {
-      console.warn('[reverseGeocode] No results found');
+      log.warn('[SearchPlaces] No results found');
       return null;
     }
 
@@ -110,7 +112,7 @@ export async function reverseGeocode(
       formattedAddress: firstResult.formatted_address || null,
     };
   } catch (error) {
-    console.error('[reverseGeocode] Error:', error);
+    log.error('[SearchPlaces] Error:', error);
     return null;
   }
 }
@@ -128,7 +130,7 @@ export async function reverseGeocodeDetailed(
   languageCode: string = 'ja'
 ): Promise<ReverseGeocodeResult | null> {
   if (!GOOGLE_PLACES_API_KEY) {
-    console.error('[reverseGeocodeDetailed] Google API key is not configured');
+    log.error('[SearchPlaces] Google API key is not configured');
     return null;
   }
 
@@ -138,19 +140,19 @@ export async function reverseGeocodeDetailed(
     const response = await fetch(url);
 
     if (!response.ok) {
-      console.error(`[reverseGeocodeDetailed] HTTP error: ${response.status}`);
+      log.error(`[SearchPlaces] HTTP error: ${response.status}`);
       return null;
     }
 
     const data: ReverseGeocodeResponse = await response.json();
 
     if (data.status !== 'OK') {
-      console.error(`[reverseGeocodeDetailed] API error: ${data.status}`, data.error_message);
+      log.error(`[SearchPlaces] API error: ${data.status}`, data.error_message);
       return null;
     }
 
     if (data.results.length === 0) {
-      console.warn('[reverseGeocodeDetailed] No results found');
+      log.warn('[SearchPlaces] No results found');
       return null;
     }
 
@@ -158,7 +160,7 @@ export async function reverseGeocodeDetailed(
     const firstResult = data.results[0];
     return firstResult ?? null;
   } catch (error) {
-    console.error('[reverseGeocodeDetailed] Error:', error);
+    log.error('[SearchPlaces] Error:', error);
     return null;
   }
 }

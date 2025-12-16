@@ -20,6 +20,7 @@ import { useSpotLimit } from '@/entities/subscription';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage, findMachiForSpot } from '@/shared/api/supabase';
 import { queryClient } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
+import { log } from '@/shared/config/logger';
 
 export interface UploadProgress {
   current: number;
@@ -109,11 +110,11 @@ export function useSpotForm() {
           });
           uploaded++;
         } else {
-          console.error('画像アップロード失敗:', result.error);
+          log.error('[useSpotForm] 画像アップロード失敗:', result.error);
           failed++;
         }
       } catch (error) {
-        console.error('画像処理エラー:', error);
+        log.error('[useSpotForm] 画像処理エラー:', error);
         failed++;
       }
 
@@ -169,10 +170,10 @@ export function useSpotForm() {
       );
       machiId = machi?.id ?? null;
       if (!machiId) {
-        console.log('最寄りの街が見つかりませんでした。machi_idなしで登録します');
+        log.info('[useSpotForm] 最寄りの街が見つかりませんでした。machi_idなしで登録します');
       }
     } catch (error) {
-      console.error('最寄りの街の取得に失敗しました:', error);
+      log.error('[useSpotForm] 最寄りの街の取得に失敗しました:', error);
       // エラーが発生しても続行（machi_idはnullのまま）
     }
 
@@ -205,11 +206,11 @@ export function useSpotForm() {
           if (data.images.length > 0) {
             try {
               const result = await uploadSpotImages(spotId, data.images);
-              console.log(`📸 画像アップロード完了: ${result.uploaded}枚成功, ${result.failed}枚失敗`);
+              log.info('[useSpotForm] 画像アップロード完了:', `${result.uploaded}枚成功, ${result.failed}枚失敗`);
               // 画像キャッシュを無効化して再取得
               queryClient.invalidateQueries({ queryKey: ['spot-images', spotId] });
             } catch (error) {
-              console.error('画像アップロードエラー:', error);
+              log.error('[useSpotForm] 画像アップロードエラー:', error);
               // 画像アップロード失敗してもスポット自体は作成済み
             }
           }
@@ -218,7 +219,7 @@ export function useSpotForm() {
             {
               text: 'OK',
               onPress: () => {
-                console.log('🎯 [useSpotForm] setJumpToSpotId呼び出し:', spotId);
+                log.debug('[useSpotForm] setJumpToSpotId呼び出し:', spotId);
                 setJumpToSpotId(spotId);
                 router.back();
               },
@@ -226,7 +227,7 @@ export function useSpotForm() {
           ]);
         },
         onError: (error) => {
-          console.error('スポット作成エラー:', error);
+          log.error('[useSpotForm] スポット作成エラー:', error);
           Alert.alert('エラー', 'スポットの登録に失敗しました');
         },
       }

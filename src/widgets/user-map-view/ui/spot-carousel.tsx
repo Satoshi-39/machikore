@@ -33,6 +33,7 @@ import {
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 // レイアウト定数
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -111,7 +112,7 @@ function SpotCard({
         })!
       );
     } catch (error) {
-      console.error('Share error:', error);
+      log.error('[SpotCarousel] Share error:', error);
     }
   };
 

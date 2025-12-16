@@ -7,6 +7,7 @@
 
 import { supabase } from './client';
 import type { Result } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 認証関数
@@ -141,7 +142,7 @@ export async function getUserById(userId: string) {
       // Not found
       return null;
     }
-    console.error('[getUserById] Error:', error);
+    log.error('[Auth] Error:', error);
     throw error;
   }
 

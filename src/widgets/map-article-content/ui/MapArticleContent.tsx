@@ -33,6 +33,7 @@ import { ArticleAuthorSection } from './ArticleAuthorSection';
 import { ArticleFooterActions } from './ArticleFooterActions';
 import { AuthorOtherMaps } from './AuthorOtherMaps';
 import { ArticleCommentPreview } from './ArticleCommentPreview';
+import { log } from '@/shared/config/logger';
 
 interface MapArticleContentProps {
   articleData: MapArticleData;
@@ -150,7 +151,7 @@ export function MapArticleContent({
         default: { message: `${map.name || 'マップ'}をチェック！\n${url}` },
       })!);
     } catch (error) {
-      console.error('Share error:', error);
+      log.error('[MapArticleContent] Share error:', error);
     }
   }, [map.name, map.id]);
 

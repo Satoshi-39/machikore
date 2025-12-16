@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { DiscoverSearch } from '@/widgets/discover-search';
 import { CategoryChips, CATEGORIES, type CategoryId } from '@/widgets/category-chips';
 import { FeaturedCarousel } from '@/widgets/featured-carousel';
+import { RecentlyViewedSection } from '@/widgets/recently-viewed';
 import { TodayRankingSection, PopularRankingSection } from '@/widgets/map-ranking';
 import { AreaSection } from '@/widgets/area-section';
 import { CategoryMapsSection } from '@/widgets/category-maps';
@@ -64,6 +65,9 @@ export function DiscoverPage() {
             <>
               {/* 特集カルーセル */}
               <FeaturedCarousel />
+
+              {/* 最近見たマップ（ログイン時のみ表示） */}
+              <RecentlyViewedSection />
 
               {/* 本日のピックアップ */}
               <TodayRankingSection />

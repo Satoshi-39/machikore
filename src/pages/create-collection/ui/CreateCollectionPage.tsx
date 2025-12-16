@@ -23,6 +23,7 @@ import { useCreateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { log } from '@/shared/config/logger';
 
 export function CreateCollectionPage() {
   const router = useRouter();
@@ -63,7 +64,7 @@ export function CreateCollectionPage() {
           thumbnailUrl = result.data.url;
         }
       } catch (error) {
-        console.error('サムネイルアップロードエラー:', error);
+        log.error('[CreateCollectionPage] サムネイルアップロードエラー:', error);
       } finally {
         setIsUploading(false);
       }

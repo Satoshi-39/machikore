@@ -14,6 +14,7 @@ import {
   type PurchasesPackage,
 } from '@/shared/api/revenuecat';
 import { useSubscriptionStore } from '@/entities/subscription';
+import { log } from '@/shared/config/logger';
 
 interface UsePurchaseResult {
   /** 現在のオファリング */
@@ -54,7 +55,7 @@ export function usePurchase(): UsePurchaseResult {
       const currentOffering = await getOfferings();
       setOffering(currentOffering);
     } catch (err) {
-      console.error('[usePurchase] Failed to get offerings:', err);
+      log.error('[Purchase] Failed to get offerings:', err);
       setError('プランの取得に失敗しました');
     } finally {
       setIsLoading(false);
@@ -82,7 +83,7 @@ export function usePurchase(): UsePurchaseResult {
           // ユーザーがキャンセルした場合はエラーとして扱わない
           return false;
         }
-        console.error('[usePurchase] Purchase failed:', err);
+        log.error('[Purchase] Purchase failed:', err);
         setError('購入に失敗しました。もう一度お試しください。');
         return false;
       } finally {
@@ -108,7 +109,7 @@ export function usePurchase(): UsePurchaseResult {
 
       return isPremium;
     } catch (err) {
-      console.error('[usePurchase] Restore failed:', err);
+      log.error('[Purchase] Restore failed:', err);
       setError('購入の復元に失敗しました');
       return false;
     } finally {

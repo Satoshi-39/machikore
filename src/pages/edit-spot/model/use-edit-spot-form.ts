@@ -12,6 +12,7 @@ import { useUserStore } from '@/entities/user';
 import { useSpotLimit } from '@/entities/subscription';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
 import type { SelectedImage } from '@/features/pick-images';
+import { log } from '@/shared/config/logger';
 
 interface UploadProgress {
   current: number;
@@ -94,7 +95,7 @@ export function useEditSpotForm() {
           try {
             await deleteSpotImage(imageId);
           } catch (error) {
-            console.error('画像削除エラー:', error);
+            log.error('[useEditSpotForm] 画像削除エラー:', error);
             // 削除エラーは続行
           }
         }
@@ -113,10 +114,10 @@ export function useEditSpotForm() {
           });
 
           if (result.failed > 0) {
-            console.warn(`${result.failed}枚の画像アップロードに失敗`);
+            log.warn('[useEditSpotForm]', `${result.failed}枚の画像アップロードに失敗`);
           }
         } catch (error) {
-          console.error('画像アップロードエラー:', error);
+          log.error('[useEditSpotForm] 画像アップロードエラー:', error);
           Alert.alert('警告', '一部の画像のアップロードに失敗しましたが、他の変更は保存されます');
         }
       }
@@ -143,13 +144,13 @@ export function useEditSpotForm() {
             ]);
           },
           onError: (error) => {
-            console.error('スポット更新エラー:', error);
+            log.error('[useEditSpotForm] スポット更新エラー:', error);
             Alert.alert('エラー', 'スポットの更新に失敗しました');
           },
         }
       );
     } catch (error) {
-      console.error('処理エラー:', error);
+      log.error('[useEditSpotForm] 処理エラー:', error);
       Alert.alert('エラー', '処理中にエラーが発生しました');
     } finally {
       setIsProcessing(false);

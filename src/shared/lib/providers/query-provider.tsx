@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/shared/api/query-client';
 import { setupQueryPersister } from '@/shared/lib/cache';
+import { log } from '@/shared/config/logger';
 
 interface QueryProviderProps {
   children: React.ReactNode;
@@ -27,7 +28,7 @@ export function QueryProvider({ children }: QueryProviderProps) {
     try {
       unsubscribePersister = setupQueryPersister(queryClient);
     } catch (error) {
-      console.warn('Query Persister のセットアップに失敗:', error);
+      log.warn('[QueryProvider] Persisterのセットアップに失敗:', error);
     }
 
     return () => {

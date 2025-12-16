@@ -16,6 +16,7 @@ import {
 } from '@/shared/api/supabase';
 import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
 import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM, MAP_TILE } from '@/shared/config';
+import { log } from '@/shared/config/logger';
 
 // 交通機関タイプと行の型を再エクスポート
 export type { TransportHubType, TransportHubRow };
@@ -83,10 +84,10 @@ export function useTransportHubsByBounds(
     queryFn: async () => {
       if (tileIds.length === 0) return [];
 
-      console.log(`🚃 useTransportHubsByBounds: ${tileIds.length}タイル取得`);
+      log.debug(`[TransportHub] useTransportHubsByBounds: ${tileIds.length}タイル取得`);
       try {
         const hubs = await getTransportHubsByTileIds(tileIds);
-        console.log(`✅ getTransportHubsByTileIds成功: ${hubs.length}件`);
+        log.debug(`[TransportHub] getTransportHubsByTileIds成功: ${hubs.length}件`);
 
         // タイプでフィルタ（必要な場合）
         if (types && types.length > 0) {
@@ -94,7 +95,7 @@ export function useTransportHubsByBounds(
         }
         return hubs;
       } catch (error) {
-        console.error(`❌ queryFnエラー:`, error);
+        log.error(`[TransportHub] queryFnエラー:`, error);
         throw error;
       }
     },

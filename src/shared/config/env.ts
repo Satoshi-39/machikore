@@ -6,6 +6,7 @@
  */
 
 import Constants from 'expo-constants';
+import { log } from './logger';
 
 // ===============================
 // 環境変数の型定義
@@ -103,9 +104,9 @@ export const ENV = {
 // ===============================
 
 if (__DEV__) {
-  console.log('[ENV] Environment variables loaded:', {
+  log.debug('[ENV] Environment variables loaded:', {
     ENV: ENV.ENV,
-    SUPABASE_URL: ENV.SUPABASE_URL ? '✅ Set' : '❌ Not set',
-    SUPABASE_ANON_KEY: ENV.SUPABASE_ANON_KEY ? '✅ Set' : '❌ Not set',
+    SUPABASE_URL: ENV.SUPABASE_URL ? 'Set' : 'Not set',
+    SUPABASE_ANON_KEY: ENV.SUPABASE_ANON_KEY ? 'Set' : 'Not set',
   });
 }

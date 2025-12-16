@@ -5,6 +5,7 @@
  */
 
 import type { GooglePlaceDetails } from './google-places.types';
+import { log } from '@/shared/config/logger';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const PLACE_DETAILS_URL = 'https://places.googleapis.com/v1/places';
@@ -52,7 +53,7 @@ export async function fetchPlaceDetails(
 
   if (!response.ok) {
     const errorBody = await response.text();
-    console.error(`❌ [Place Details] エラー (${placeId}):`, errorBody);
+    log.error(`[SearchPlaces] Place Details エラー (${placeId}):`, errorBody);
     throw new Error(`Place Details error: ${response.status}`);
   }
 

@@ -4,6 +4,7 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 型定義
@@ -220,7 +221,7 @@ export async function searchMasterSpots(
     .limit(limit);
 
   if (error) {
-    console.error('[searchMasterSpots] Error:', error);
+    log.error('[MasterSpots] Error:', error);
     return [];
   }
 

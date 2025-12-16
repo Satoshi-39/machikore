@@ -10,6 +10,7 @@ import { useUserStore } from '@/entities/user';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import type { ThumbnailImage } from '@/features/pick-images';
 import type { UserMapThemeColor } from '@/shared/config';
+import { log } from '@/shared/config/logger';
 
 export function useEditMapForm() {
   const router = useRouter();
@@ -56,13 +57,13 @@ export function useEditMapForm() {
         if (result.success) {
           thumbnailUrl = result.data.url;
         } else {
-          console.error('サムネイルアップロードエラー:', result.error);
+          log.error('[useEditMapForm] サムネイルアップロードエラー:', result.error);
           Alert.alert('エラー', 'サムネイルのアップロードに失敗しました');
           setIsUploading(false);
           return;
         }
       } catch (error) {
-        console.error('サムネイルアップロードエラー:', error);
+        log.error('[useEditMapForm] サムネイルアップロードエラー:', error);
         Alert.alert('エラー', 'サムネイルのアップロードに失敗しました');
         setIsUploading(false);
         return;
@@ -94,7 +95,7 @@ export function useEditMapForm() {
           ]);
         },
         onError: (error) => {
-          console.error('マップ更新エラー:', error);
+          log.error('[useEditMapForm] マップ更新エラー:', error);
           Alert.alert('エラー', 'マップの更新に失敗しました');
         },
       }

@@ -16,6 +16,7 @@ import {
 } from '@/shared/api/supabase';
 import { OnboardingPage } from '@/pages/onboarding';
 import { TermsUpdatePage } from '@/pages/terms-update';
+import { log } from '@/shared/config/logger';
 
 // 同意画面の種類
 type ConsentScreenType = 'none' | 'onboarding' | 'terms-update';
@@ -71,7 +72,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
         const isFirstTime = !agreedTermsVersion;
         setConsentScreen(isFirstTime ? 'onboarding' : 'terms-update');
       } catch (err) {
-        console.error('規約バージョンの取得に失敗:', err);
+        log.error('[Consent] 規約バージョンの取得に失敗:', err);
         // エラー時はオンボーディングを表示（安全側に倒す）
         setConsentScreen('onboarding');
       } finally {

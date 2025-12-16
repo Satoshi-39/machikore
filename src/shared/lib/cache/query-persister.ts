@@ -13,6 +13,7 @@ import {
   STATIC_DATA_CACHE_CONFIG,
   PERSISTER_STORAGE_KEY,
   PERSISTED_QUERY_PREFIXES,
+  log,
 } from '@/shared/config';
 
 // ===============================
@@ -45,7 +46,7 @@ export function setupQueryPersister(queryClient: QueryClient): () => void {
     },
   });
 
-  console.log('💾 Query Persister: セットアップ完了');
+  log.debug('[QueryPersister] セットアップ完了');
 
   return unsubscribe;
 }
@@ -55,7 +56,7 @@ export function setupQueryPersister(queryClient: QueryClient): () => void {
  */
 export async function clearPersistedCache(): Promise<void> {
   await AsyncStorage.removeItem(PERSISTER_STORAGE_KEY);
-  console.log('🗑️ Query Persister: キャッシュクリア完了');
+  log.debug('[QueryPersister] キャッシュクリア完了');
 }
 
 /**

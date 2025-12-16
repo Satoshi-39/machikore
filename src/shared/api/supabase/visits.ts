@@ -4,6 +4,7 @@
 
 import { supabase } from './client';
 import type { UUID } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 訪問記録の取得
@@ -20,7 +21,7 @@ export async function getVisitsByUserId(userId: UUID) {
     .order('visited_at', { ascending: false });
 
   if (error) {
-    console.error('Error fetching visits:', error);
+    log.error('[Visits] Error fetching visits:', error);
     throw error;
   }
 
@@ -40,7 +41,7 @@ export async function getVisitByUserAndMachi(userId: UUID, machiId: string) {
 
   if (error && error.code !== 'PGRST116') {
     // PGRST116 = no rows found (正常ケース)
-    console.error('Error fetching visit:', error);
+    log.error('[Visits] Error fetching visit:', error);
     throw error;
   }
 
@@ -59,7 +60,7 @@ export async function checkMachiVisited(userId: UUID, machiId: string): Promise<
     .single();
 
   if (error && error.code !== 'PGRST116') {
-    console.error('Error checking visit status:', error);
+    log.error('[Visits] Error checking visit status:', error);
     throw error;
   }
 
@@ -91,7 +92,7 @@ export async function createVisit(
     .single();
 
   if (error) {
-    console.error('Error creating visit:', error);
+    log.error('[Visits] Error creating visit:', error);
     throw error;
   }
 
@@ -109,7 +110,7 @@ export async function deleteVisit(userId: UUID, machiId: string): Promise<void> 
     .eq('machi_id', machiId);
 
   if (error) {
-    console.error('Error deleting visit:', error);
+    log.error('[Visits] Error deleting visit:', error);
     throw error;
   }
 }
@@ -151,7 +152,7 @@ export async function getTotalVisitedMachiCount(userId: UUID): Promise<number> {
     .eq('user_id', userId);
 
   if (error) {
-    console.error('Error counting visits:', error);
+    log.error('[Visits] Error counting visits:', error);
     throw error;
   }
 
@@ -168,7 +169,7 @@ export async function getVisitedMachiIds(userId: UUID): Promise<string[]> {
     .eq('user_id', userId);
 
   if (error) {
-    console.error('Error fetching visited machi IDs:', error);
+    log.error('[Visits] Error fetching visited machi IDs:', error);
     throw error;
   }
 

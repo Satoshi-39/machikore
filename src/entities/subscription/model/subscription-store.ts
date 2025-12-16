@@ -12,6 +12,7 @@ import {
   type CustomerInfo,
 } from '@/shared/api/revenuecat';
 import { SUBSCRIPTION } from '@/shared/config';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 型定義
@@ -91,7 +92,7 @@ export const useSubscriptionStore = create<SubscriptionStore>((set, get) => ({
         error: null,
       });
     } catch (error) {
-      console.error('[SubscriptionStore] Failed to refresh status:', error);
+      log.error('[Subscription] Failed to refresh status:', error);
       set({
         isLoading: false,
         error: 'サブスクリプション情報の取得に失敗しました',

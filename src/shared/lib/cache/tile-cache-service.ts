@@ -14,6 +14,7 @@ import type { TransportHubRow, TransportHubType } from '@/shared/api/supabase/tr
 import { TILE_CACHE_LIMITS } from '@/shared/config/cache';
 import type { MapBounds } from '@/shared/lib/utils/tile.utils';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // ヘルパー関数
@@ -135,7 +136,7 @@ function evictOldestTile(entityType: CacheEntityType): void {
   if (!oldest) return;
 
   const tileId = oldest.cache_key.replace('tile:', '');
-  console.log(`🗑️ LRU: 最も古いタイルを削除: ${tileId} (${entityType})`);
+  log.debug(`[TileCache] LRU: 最も古いタイルを削除: ${tileId} (${entityType})`);
 
   // データを削除
   if (entityType === 'machi') {
@@ -165,7 +166,7 @@ function enforceLRULimit(entityType: CacheEntityType): void {
   }
 
   if (count >= limit) {
-    console.log(`📊 LRU: ${entityType}タイル数を${limit}以下に調整`);
+    log.debug(`[TileCache] LRU: ${entityType}タイル数を${limit}以下に調整`);
   }
 }
 
@@ -190,20 +191,20 @@ export async function getMachiByTileId(tileId: string): Promise<MachiRow[]> {
       [tileId]
     );
     if (cached.length > 0) {
-      console.log(`📦 キャッシュからmachiデータを取得: ${tileId} (${cached.length}件)`);
+      log.debug(`[TileCache] キャッシュからmachiデータを取得: ${tileId} (${cached.length}件)`);
       return cached;
     }
   }
 
   // Supabaseから取得
-  console.log(`🌐 Supabaseからmachiデータを取得: ${tileId}`);
+  log.debug(`[TileCache] Supabaseからmachiデータを取得: ${tileId}`);
   const { data, error } = await supabase
     .from('machi')
     .select('*')
     .eq('tile_id', tileId);
 
   if (error) {
-    console.error(`❌ machiデータ取得エラー: ${tileId}`, error);
+    log.error(`[TileCache] machiデータ取得エラー: ${tileId}`, error);
     throw error;
   }
 
@@ -217,7 +218,7 @@ export async function getMachiByTileId(tileId: string): Promise<MachiRow[]> {
 
     // メタデータを記録
     setTileCacheMetadata(tileId, 'machi', data.length);
-    console.log(`✅ ${data.length}件のmachiデータをキャッシュ: ${tileId}`);
+    log.debug(`[TileCache] ${data.length}件のmachiデータをキャッシュ: ${tileId}`);
   } else {
     // データが0件でもメタデータを記録（再取得を防ぐ）
     setTileCacheMetadata(tileId, 'machi', 0);
@@ -270,20 +271,20 @@ export async function getCitiesByTileId(tileId: string): Promise<CityRow[]> {
       [tileId]
     );
     if (cached.length > 0) {
-      console.log(`📦 キャッシュからcitiesデータを取得: ${tileId} (${cached.length}件)`);
+      log.debug(`[TileCache] キャッシュからcitiesデータを取得: ${tileId} (${cached.length}件)`);
       return cached;
     }
   }
 
   // Supabaseから取得
-  console.log(`🌐 Supabaseからcitiesデータを取得: ${tileId}`);
+  log.debug(`[TileCache] Supabaseからcitiesデータを取得: ${tileId}`);
   const { data, error } = await supabase
     .from('cities')
     .select('*')
     .eq('tile_id', tileId);
 
   if (error) {
-    console.error(`❌ citiesデータ取得エラー: ${tileId}`, error);
+    log.error(`[TileCache] citiesデータ取得エラー: ${tileId}`, error);
     throw error;
   }
 
@@ -375,20 +376,20 @@ export async function getTransportHubsByTileId(tileId: string): Promise<Transpor
       [tileId]
     );
     if (cached.length > 0) {
-      console.log(`📦 キャッシュからtransport_hubsデータを取得: ${tileId} (${cached.length}件)`);
+      log.debug(`[TileCache] キャッシュからtransport_hubsデータを取得: ${tileId} (${cached.length}件)`);
       return cached;
     }
   }
 
   // Supabaseから取得
-  console.log(`🌐 Supabaseからtransport_hubsデータを取得: ${tileId}`);
+  log.debug(`[TileCache] Supabaseからtransport_hubsデータを取得: ${tileId}`);
   const { data, error } = await supabase
     .from('transport_hubs')
     .select('*')
     .eq('tile_id', tileId);
 
   if (error) {
-    console.error(`❌ transport_hubsデータ取得エラー: ${tileId}`, error);
+    log.error(`[TileCache] transport_hubsデータ取得エラー: ${tileId}`, error);
     throw error;
   }
 
@@ -402,7 +403,7 @@ export async function getTransportHubsByTileId(tileId: string): Promise<Transpor
 
     // メタデータを記録
     setTileCacheMetadata(tileId, 'transport_hubs', data.length);
-    console.log(`✅ ${data.length}件のtransport_hubsデータをキャッシュ: ${tileId}`);
+    log.debug(`[TileCache] ${data.length}件のtransport_hubsデータをキャッシュ: ${tileId}`);
   } else {
     // データが0件でもメタデータを記録（再取得を防ぐ）
     setTileCacheMetadata(tileId, 'transport_hubs', 0);
@@ -457,5 +458,5 @@ export function clearAllTileCache(): void {
   const db = getDatabase();
   db.runSync("DELETE FROM cache_metadata WHERE cache_key LIKE 'tile:%'");
   // 注意: machi/cities/transport_hubsテーブルのデータも削除が必要な場合は別途実装
-  console.log('🗑️ 全タイルキャッシュをクリア');
+  log.debug('[TileCache] 全タイルキャッシュをクリア');
 }

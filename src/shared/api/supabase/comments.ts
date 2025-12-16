@@ -4,6 +4,7 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 型定義
@@ -141,7 +142,7 @@ export async function addSpotComment(
   // user_spotsのcomments_countをインクリメント
   const { error: rpcError } = await supabase.rpc('increment_spot_comments_count', { spot_id: spotId });
   if (rpcError) {
-    console.error('[addSpotComment] RPC Error:', rpcError);
+    log.error('[Comments] RPC Error:', rpcError);
   }
 
   return mapComment(data);
@@ -198,13 +199,13 @@ export async function deleteComment(
     if (spotId) {
       const { error: rpcError } = await supabase.rpc('decrement_spot_comments_count', { spot_id: spotId });
       if (rpcError) {
-        console.error('[deleteComment] RPC Error:', rpcError);
+        log.error('[Comments] RPC Error:', rpcError);
       }
     }
     if (mapId) {
       const { error: rpcError } = await supabase.rpc('decrement_map_comments_count', { map_id: mapId });
       if (rpcError) {
-        console.error('[deleteComment] RPC Error:', rpcError);
+        log.error('[Comments] RPC Error:', rpcError);
       }
     }
   }
@@ -300,7 +301,7 @@ export async function addMapComment(
   // mapsのcomments_countをインクリメント
   const { error: rpcError } = await supabase.rpc('increment_map_comments_count', { map_id: mapId });
   if (rpcError) {
-    console.error('[addMapComment] RPC Error:', rpcError);
+    log.error('[Comments] RPC Error:', rpcError);
   }
 
   return mapComment(data);
@@ -369,7 +370,7 @@ export async function isCommentLiked(userId: string, commentId: string): Promise
     .maybeSingle();
 
   if (error) {
-    console.error('[isCommentLiked] Error:', error);
+    log.error('[Comments] Error:', error);
     return false;
   }
 

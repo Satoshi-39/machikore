@@ -5,6 +5,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { likeComment, unlikeComment } from '@/shared/api/supabase/comments';
 import type { UUID } from '@/shared/types';
+import { log } from '@/shared/config/logger';
 
 interface LikeCommentParams {
   userId: UUID;
@@ -33,7 +34,7 @@ export function useLikeComment() {
       }
     },
     onError: (error) => {
-      console.error('[useLikeComment] Error:', error);
+      log.error('[Comment] Error:', error);
     },
   });
 }
@@ -58,7 +59,7 @@ export function useUnlikeComment() {
       }
     },
     onError: (error) => {
-      console.error('[useUnlikeComment] Error:', error);
+      log.error('[Comment] Error:', error);
     },
   });
 }

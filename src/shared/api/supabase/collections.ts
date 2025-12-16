@@ -4,6 +4,7 @@
  */
 
 import { supabase } from './client';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 型定義
@@ -73,7 +74,7 @@ export async function getUserCollections(userId: string): Promise<Collection[]> 
     .order('order_index', { ascending: true });
 
   if (error) {
-    console.error('[getUserCollections] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -100,7 +101,7 @@ export async function getCollectionById(collectionId: string): Promise<Collectio
 
   if (error) {
     if (error.code === 'PGRST116') return null; // Not found
-    console.error('[getCollectionById] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -133,7 +134,7 @@ export async function getPublicCollections(
     .range(offset, offset + limit - 1);
 
   if (error) {
-    console.error('[getPublicCollections] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -182,7 +183,7 @@ export async function createCollection(
     .single();
 
   if (error) {
-    console.error('[createCollection] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -213,7 +214,7 @@ export async function updateCollection(
     .single();
 
   if (error) {
-    console.error('[updateCollection] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -231,7 +232,7 @@ export async function deleteCollection(collectionId: string, userId: string): Pr
     .eq('user_id', userId);
 
   if (error) {
-    console.error('[deleteCollection] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 }
@@ -270,7 +271,7 @@ export async function getCollectionMaps(
     .order('order_index', { ascending: true });
 
   if (error) {
-    console.error('[getCollectionMaps] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -314,7 +315,7 @@ export async function addMapToCollection(
     .single();
 
   if (error) {
-    console.error('[addMapToCollection] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -335,7 +336,7 @@ export async function removeMapFromCollection(
     .eq('map_id', mapId);
 
   if (error) {
-    console.error('[removeMapFromCollection] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 }
@@ -355,7 +356,7 @@ export async function updateCollectionMapOrder(
     .eq('map_id', mapId);
 
   if (error) {
-    console.error('[updateCollectionMapOrder] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 }
@@ -375,7 +376,7 @@ export async function checkMapInCollection(
     .maybeSingle();
 
   if (error) {
-    console.error('[checkMapInCollection] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 
@@ -401,7 +402,7 @@ export async function getMapCollections(
     .eq('collections.user_id', userId);
 
   if (error) {
-    console.error('[getMapCollections] Error:', error);
+    log.error('[Collections] Error:', error);
     throw error;
   }
 

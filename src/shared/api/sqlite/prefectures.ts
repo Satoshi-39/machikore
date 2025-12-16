@@ -4,6 +4,7 @@
 
 import { getDatabase } from './client';
 import type { PrefectureRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // Create
@@ -37,7 +38,7 @@ export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
     }
   });
 
-  console.log(`✅ ${prefectures.length}件の都道府県データを挿入`);
+  log.info(`[SQLite] ${prefectures.length}件の都道府県データを挿入`);
 }
 
 // ===============================

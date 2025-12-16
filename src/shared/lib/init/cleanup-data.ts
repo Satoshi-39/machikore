@@ -10,18 +10,19 @@ import {
   checkTableExists,
 } from '@/shared/api/sqlite';
 import { getCurrentUserId } from '@/entities/user/model';
+import { log } from '@/shared/config/logger';
 
 /**
  * サンプルデータをクリーンアップ（開発用）
  * 再起動時に古いサンプルデータを削除
  */
 export function cleanupSampleData(): void {
-  console.log('🧹 サンプルデータをクリーンアップ中...');
+  log.debug('[Cleanup] サンプルデータをクリーンアップ中...');
 
   // ユーザーIDを取得（認証完了後）
   const userId = getCurrentUserId();
   if (!userId) {
-    console.warn('⚠️  ユーザーIDが取得できません。クリーンアップをスキップします。');
+    log.warn('[Cleanup] ユーザーIDが取得できません。クリーンアップをスキップします。');
     return;
   }
 
@@ -42,5 +43,5 @@ export function cleanupSampleData(): void {
     deleteUser(userId);
   }
 
-  console.log('✅ サンプルデータをクリーンアップ完了');
+  log.debug('[Cleanup] サンプルデータをクリーンアップ完了');
 }
