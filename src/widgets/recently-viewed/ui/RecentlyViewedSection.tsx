@@ -161,7 +161,9 @@ function RecentlyViewedCard({ map, onPress }: RecentlyViewedCardProps) {
             <MapBookmarkButton
               mapId={map.id}
               currentUserId={currentUserId}
+              bookmarksCount={map.bookmarks_count ?? 0}
               size={12}
+              showCount
               inactiveColor={
                 isDarkMode
                   ? colors.dark.foregroundSecondary
@@ -243,10 +245,7 @@ export function RecentlyViewedSection() {
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
           最近見たマップ
         </Text>
-        <View className="flex-row items-center">
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mr-1">すべて見る</Text>
-          <Ionicons name="chevron-forward" size={16} color="#9CA3AF" />
-        </View>
+        <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
       </Pressable>
 
       {isLoading ? (

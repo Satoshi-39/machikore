@@ -238,7 +238,9 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
           <MapBookmarkButton
             mapId={map.id}
             currentUserId={currentUserId}
+            bookmarksCount={map.bookmarks_count ?? 0}
             size={18}
+            showCount
           />
         </View>
 

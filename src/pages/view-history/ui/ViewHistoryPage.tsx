@@ -165,7 +165,9 @@ function MapCard({ item, onPress, onUserPress, onArticlePress }: MapCardProps) {
           <MapBookmarkButton
             mapId={map.id}
             currentUserId={currentUserId}
+            bookmarksCount={map.bookmarks_count ?? 0}
             size={14}
+            showCount
             inactiveColor={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground}
           />
           {/* 作成日時 */}

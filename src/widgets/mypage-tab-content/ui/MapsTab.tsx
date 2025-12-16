@@ -132,7 +132,9 @@ function MyPageMapCard({
             <MapBookmarkButton
               mapId={map.id}
               currentUserId={currentUserId}
+              bookmarksCount={map.bookmarks_count ?? 0}
               size={14}
+              showCount
             />
 
             {/* 作成日時 */}
