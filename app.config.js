@@ -70,6 +70,7 @@ module.exports = {
         },
       ],
       '@rnmapbox/maps',
+      'expo-localization',
     ],
     experiments: {
       typedRoutes: true,
