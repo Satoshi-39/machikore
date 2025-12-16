@@ -283,11 +283,11 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                     {spot.name}
                   </Text>
                   <View className="flex-row items-center mt-0.5">
-                    {spot.likes_count > 0 && (
+                    {spot.bookmarks_count > 0 && (
                       <View className="flex-row items-center mr-3">
-                        <Ionicons name="heart" size={12} color="#EF4444" />
+                        <Ionicons name="bookmark" size={12} color={colors.primary.DEFAULT} />
                         <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                          {spot.likes_count}
+                          {spot.bookmarks_count}
                         </Text>
                       </View>
                     )}

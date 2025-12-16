@@ -9,9 +9,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentUserId } from '@/entities/user';
 import { LikeTabFilter, type LikeTabMode } from '@/features/filter-like-tab';
 import { LikeSpotList, LikeMapList } from '@/widgets/like-item-list';
-import { useUserLikedSpots, useUserLikedMaps, useUserLikedMasterSpots } from '@/entities/like/api/use-user-likes';
-import { useSelectedPlaceStore } from '@/features/search-places';
-import { removeSpotLike, removeMapLike, removeMasterSpotLike } from '@/shared/api/supabase/likes';
+import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
+import { removeSpotLike, removeMapLike } from '@/shared/api/supabase/likes';
 import { PageHeader } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import type { SpotWithDetails } from '@/shared/types';
@@ -30,21 +29,12 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   const [activeTab, setActiveTab] = useState<LikeTabMode>('spots');
 
   const { data: likedSpots = [], isLoading: spotsLoading } = useUserLikedSpots(userId);
-  const { data: likedMasterSpots = [], isLoading: masterSpotsLoading } = useUserLikedMasterSpots(userId);
   const { data: likedMaps = [], isLoading: mapsLoading } = useUserLikedMaps(userId);
 
   // スポットタップ: スポット詳細画面に遷移（戻るでいいね一覧に戻れる）
   const handleSpotPress = useCallback((spot: SpotWithDetails) => {
     router.push(`/(tabs)/${currentTab}/spots/${spot.id}` as any);
   }, [router, currentTab]);
-
-  // マスタースポットタップ: デフォルトマップに遷移してスポットを表示
-  const setJumpToMasterSpotId = useSelectedPlaceStore((state) => state.setJumpToMasterSpotId);
-  const handleMasterSpotPress = useCallback((masterSpotId: string) => {
-    // グローバルステートにジャンプ先を設定してからホームタブに遷移
-    setJumpToMasterSpotId(masterSpotId);
-    router.push('/(tabs)/home');
-  }, [router, setJumpToMasterSpotId]);
 
   // ユーザータップ: プロフィール画面に遷移
   const handleUserPress = useCallback((navUserId: string) => {
@@ -64,17 +54,6 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       queryClient.invalidateQueries({ queryKey: ['user-liked-spots', userId] });
     } catch (error) {
       log.error('[LikesPage] Failed to delete spot like:', error);
-    }
-  }, [userId, queryClient]);
-
-  // マスタースポットいいね削除
-  const handleDeleteMasterSpotLike = useCallback(async (masterSpotId: string) => {
-    if (!userId) return;
-    try {
-      await removeMasterSpotLike(userId, masterSpotId);
-      queryClient.invalidateQueries({ queryKey: ['user-liked-master-spots', userId] });
-    } catch (error) {
-      log.error('[LikesPage] Failed to delete master spot like:', error);
     }
   }, [userId, queryClient]);
 
@@ -99,13 +78,10 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
       {activeTab === 'spots' ? (
         <LikeSpotList
           data={likedSpots}
-          masterSpotData={likedMasterSpots}
-          isLoading={spotsLoading || masterSpotsLoading}
+          isLoading={spotsLoading}
           onSpotPress={handleSpotPress}
-          onMasterSpotPress={handleMasterSpotPress}
           onUserPress={handleUserPress}
           onDeleteSpotLike={handleDeleteSpotLike}
-          onDeleteMasterSpotLike={handleDeleteMasterSpotLike}
         />
       ) : (
         <LikeMapList

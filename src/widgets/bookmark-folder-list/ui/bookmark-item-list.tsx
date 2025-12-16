@@ -9,14 +9,16 @@ import { View, Text, Pressable, FlatList, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, SPOT_CATEGORY_COLORS } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useBookmarks } from '@/entities/bookmark';
 import { removeBookmark } from '@/shared/api/supabase/bookmarks';
 import { log } from '@/shared/config/logger';
 import type { BookmarkWithDetails } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
-import { SwipeableRow } from '@/shared/ui';
+import { SwipeableRow, LocationPinIcon } from '@/shared/ui';
+import { determineSpotCategory } from '@/entities/master-spot';
+import { useSelectedPlaceStore } from '@/features/search-places';
 
 interface BookmarkItemListProps {
   userId: string;
@@ -34,6 +36,7 @@ export function BookmarkItemList({
   const queryClient = useQueryClient();
 
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
+  const setJumpToMasterSpotId = useSelectedPlaceStore((state) => state.setJumpToMasterSpotId);
 
   // 選択中のフォルダのブックマーク
   const bookmarks = useMemo(() => {
@@ -41,7 +44,8 @@ export function BookmarkItemList({
       const matchFolder = folderId === 'uncategorized'
         ? !b.folder_id
         : b.folder_id === folderId;
-      const matchType = activeTab === 'spots' ? b.spot_id : b.map_id;
+      // spotsタブではユーザースポットとマスタースポットの両方を表示
+      const matchType = activeTab === 'spots' ? (b.spot_id || b.master_spot_id) : b.map_id;
       return matchFolder && matchType;
     });
   }, [allBookmarks, folderId, activeTab]);
@@ -50,6 +54,12 @@ export function BookmarkItemList({
   const navigateToSpot = useCallback((spotId: string) => {
     router.push(`/(tabs)/${currentTab}/spots/${spotId}` as any);
   }, [router, currentTab]);
+
+  // マスタースポットへの遷移（発見タブのデフォルトマップに移動して表示）
+  const navigateToMasterSpot = useCallback((masterSpotId: string) => {
+    setJumpToMasterSpotId(masterSpotId);
+    router.push('/(tabs)/discover/default-map');
+  }, [router, setJumpToMasterSpotId]);
 
   // マップへの遷移
   const navigateToMap = useCallback((mapId: string) => {
@@ -183,9 +193,49 @@ export function BookmarkItemList({
         );
       }
 
+      // マスタースポット（デフォルトマップ上のスポット）
+      if (item.master_spot) {
+        const category = determineSpotCategory(item.master_spot.google_types);
+        const categoryColor = SPOT_CATEGORY_COLORS[category];
+
+        const content = (
+          <Pressable
+            onPress={() => navigateToMasterSpot(item.master_spot!.id)}
+            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
+          >
+            <View className="flex-row items-center">
+              {/* カテゴリ色のスポットアイコン */}
+              <View className="w-10 h-10 rounded-full bg-surface-secondary dark:bg-gray-200 items-center justify-center mr-3">
+                <LocationPinIcon size={20} color={categoryColor} />
+              </View>
+              <View className="flex-1">
+                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+                  {item.master_spot.name}
+                </Text>
+                {item.master_spot.google_short_address && (
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
+                    {item.master_spot.google_short_address}
+                  </Text>
+                )}
+                <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
+                  スポット
+                </Text>
+              </View>
+              <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+            </View>
+          </Pressable>
+        );
+
+        return (
+          <SwipeableRow onDelete={() => handleDeleteBookmark(item.id)}>
+            {content}
+          </SwipeableRow>
+        );
+      }
+
       return null;
     },
-    [navigateToSpot, navigateToMap, navigateToUser, handleDeleteBookmark]
+    [navigateToSpot, navigateToMasterSpot, navigateToMap, navigateToUser, handleDeleteBookmark]
   );
 
   if (bookmarks.length === 0) {

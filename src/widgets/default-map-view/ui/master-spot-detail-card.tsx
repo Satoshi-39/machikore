@@ -23,10 +23,11 @@ import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { useSpotsByMasterSpot, SpotCard } from '@/entities/user-spot';
 import { determineSpotCategory } from '@/entities/master-spot';
 import { useCurrentUserId } from '@/entities/user';
-import { useCheckMasterSpotLiked, useToggleMasterSpotLike } from '@/entities/like';
+import { useMasterSpotBookmarkInfo, useBookmarkMasterSpot, useUnbookmarkMasterSpot } from '@/entities/bookmark';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useMapStore } from '@/entities/map';
 import { MapSelectSheet } from '@/widgets/map-select-sheet';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
 
 interface MasterSpotDetailCardProps {
   spot: MasterSpotDisplay;
@@ -74,10 +75,20 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const [showMapSelectSheet, setShowMapSelectSheet] = useState(false);
+  const [showFolderModal, setShowFolderModal] = useState(false);
 
-  // いいね状態
-  const { data: isLiked = false } = useCheckMasterSpotLiked(currentUserId, spot.id);
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMasterSpotLike();
+  // ブックマーク情報（どのフォルダに保存されているか）
+  const { data: bookmarkInfo = [] } = useMasterSpotBookmarkInfo(currentUserId, spot.id);
+  const { mutate: bookmarkMasterSpot } = useBookmarkMasterSpot();
+  const { mutate: unbookmarkMasterSpot } = useUnbookmarkMasterSpot();
+
+  // ブックマークされているか（1つ以上のフォルダに保存されている場合）
+  const isBookmarked = bookmarkInfo.length > 0;
+
+  // 現在ブックマークされているフォルダIDのセット
+  const bookmarkedFolderIds = useMemo(() => {
+    return new Set<string | null>(bookmarkInfo.map(info => info.folder_id));
+  }, [bookmarkInfo]);
 
   // このマスタースポットに紐づくユーザー投稿を取得
   const { data: userSpots = [], isLoading: isLoadingUserSpots } = useSpotsByMasterSpot(spot.id);
@@ -111,15 +122,26 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
     bottomSheetRef.current?.close();
   }, [onBeforeClose]);
 
-  // いいねボタン
-  const handleLikePress = useCallback(() => {
+  // ブックマーク（保存）ボタン - フォルダ選択モーダルを開く
+  const handleBookmarkPress = useCallback(() => {
     if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
+      showLoginRequiredAlert('保存');
       return;
     }
-    if (isTogglingLike) return;
-    toggleLike({ userId: currentUserId, masterSpotId: spot.id });
-  }, [currentUserId, isTogglingLike, toggleLike, spot.id]);
+    setShowFolderModal(true);
+  }, [currentUserId]);
+
+  // フォルダに追加
+  const handleAddToFolder = useCallback((folderId: string | null) => {
+    if (!currentUserId) return;
+    bookmarkMasterSpot({ userId: currentUserId, masterSpotId: spot.id, folderId });
+  }, [currentUserId, spot.id, bookmarkMasterSpot]);
+
+  // フォルダから削除
+  const handleRemoveFromFolder = useCallback((_folderId: string | null) => {
+    if (!currentUserId) return;
+    unbookmarkMasterSpot({ userId: currentUserId, masterSpotId: spot.id });
+  }, [currentUserId, spot.id, unbookmarkMasterSpot]);
 
   // Google Mapsで経路を開く
   const handleDirectionsPress = useCallback(() => {
@@ -268,22 +290,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
         {/* アクションボタン - 横並び4つ均等配置 */}
         <View className="flex-row py-3 border-t border-b border-border dark:border-dark-border">
-          {/* いいね */}
-          <Pressable
-            onPress={handleLikePress}
-            disabled={isTogglingLike}
-            className="flex-1 items-center py-2"
-          >
-            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
-              <Ionicons
-                name={isLiked ? 'heart' : 'heart-outline'}
-                size={24}
-                color={isLiked ? '#EF4444' : colors.text.secondary}
-              />
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">いいね</Text>
-          </Pressable>
-
           {/* 投稿 */}
           <Pressable
             onPress={handlePostPress}
@@ -321,6 +327,21 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             <Text className={`text-xs ${spot.google_website_uri ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-gray-300'}`}>
               Web
             </Text>
+          </Pressable>
+
+          {/* 保存（ブックマーク） */}
+          <Pressable
+            onPress={handleBookmarkPress}
+            className="flex-1 items-center py-2"
+          >
+            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
+              <Ionicons
+                name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+                size={24}
+                color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
+              />
+            </View>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">保存</Text>
           </Pressable>
         </View>
 
@@ -373,6 +394,19 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         onSelectMap={handleMapSelect}
         onCreateNewMap={handleCreateNewMap}
         onClose={() => setShowMapSelectSheet(false)}
+      />
+    )}
+
+    {/* フォルダ選択モーダル */}
+    {currentUserId && (
+      <SelectFolderModal
+        visible={showFolderModal}
+        userId={currentUserId}
+        folderType="spots"
+        onClose={() => setShowFolderModal(false)}
+        onAddToFolder={handleAddToFolder}
+        onRemoveFromFolder={handleRemoveFromFolder}
+        bookmarkedFolderIds={bookmarkedFolderIds}
       />
     )}
     </>

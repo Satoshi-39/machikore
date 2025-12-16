@@ -211,87 +211,6 @@ export async function getMapLikesCount(mapId: string): Promise<number> {
 }
 
 // ===============================
-// マスタースポットいいね
-// ===============================
-
-/**
- * ユーザーがマスタースポットにいいねしているか確認
- */
-export async function checkMasterSpotLiked(userId: string, masterSpotId: string): Promise<boolean> {
-  const { data, error } = await supabase
-    .from('likes')
-    .select('id')
-    .eq('user_id', userId)
-    .eq('master_spot_id', masterSpotId)
-    .maybeSingle();
-
-  if (error) {
-    handleSupabaseError('checkMasterSpotLiked', error);
-  }
-
-  return data !== null;
-}
-
-/**
- * マスタースポットにいいねを追加
- */
-export async function addMasterSpotLike(userId: string, masterSpotId: string): Promise<LikeRow> {
-  const insertData: LikeInsert = {
-    user_id: userId,
-    master_spot_id: masterSpotId,
-  };
-
-  const { data, error } = await supabase
-    .from('likes')
-    .insert(insertData)
-    .select()
-    .single();
-
-  if (error) {
-    handleSupabaseError('addMasterSpotLike', error);
-  }
-
-  // master_spotsのlikes_countをインクリメント
-  await supabase.rpc('increment_master_spot_likes_count', { p_master_spot_id: masterSpotId });
-
-  return data;
-}
-
-/**
- * マスタースポットのいいねを削除
- */
-export async function removeMasterSpotLike(userId: string, masterSpotId: string): Promise<void> {
-  const { error } = await supabase
-    .from('likes')
-    .delete()
-    .eq('user_id', userId)
-    .eq('master_spot_id', masterSpotId);
-
-  if (error) {
-    handleSupabaseError('removeMasterSpotLike', error);
-  }
-
-  // master_spotsのlikes_countをデクリメント
-  await supabase.rpc('decrement_master_spot_likes_count', { p_master_spot_id: masterSpotId });
-}
-
-/**
- * マスタースポットのいいねをトグル
- * @returns いいね後の状態（true: いいね済み, false: いいね解除）
- */
-export async function toggleMasterSpotLike(userId: string, masterSpotId: string): Promise<boolean> {
-  const isLiked = await checkMasterSpotLiked(userId, masterSpotId);
-
-  if (isLiked) {
-    await removeMasterSpotLike(userId, masterSpotId);
-    return false;
-  } else {
-    await addMasterSpotLike(userId, masterSpotId);
-    return true;
-  }
-}
-
-// ===============================
 // ユーザーのいいね一覧
 // ===============================
 
@@ -379,46 +298,6 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         user: like.user_spots.users,
         is_liked: true, // いいね一覧なので必ずtrue
       },
-    }));
-}
-
-/**
- * ユーザーがいいねしたマスタースポット一覧を取得
- */
-export async function getUserLikedMasterSpots(userId: string, limit: number = 50) {
-  const { data, error } = await supabase
-    .from('likes')
-    .select(`
-      id,
-      created_at,
-      master_spots (
-        id,
-        name,
-        latitude,
-        longitude,
-        google_place_id,
-        google_short_address,
-        google_types,
-        google_rating,
-        google_user_rating_count,
-        likes_count
-      )
-    `)
-    .eq('user_id', userId)
-    .not('master_spot_id', 'is', null)
-    .order('created_at', { ascending: false })
-    .limit(limit);
-
-  if (error) {
-    handleSupabaseError('getUserLikedMasterSpots', error);
-  }
-
-  return (data || [])
-    .filter((like: any) => like.master_spots !== null)
-    .map((like: any) => ({
-      likeId: like.id,
-      likedAt: like.created_at,
-      masterSpot: like.master_spots,
     }));
 }
 
