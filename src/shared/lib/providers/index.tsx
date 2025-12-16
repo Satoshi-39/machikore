@@ -39,7 +39,15 @@ export function AppProviders({ children }: AppProvidersProps) {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <PostHogProvider
         apiKey={POSTHOG_API_KEY}
-        options={{ host: POSTHOG_HOST }}
+        options={{
+          host: POSTHOG_HOST,
+        }}
+        autocapture={{
+          captureLifecycleEvents: true,
+          captureScreens: true,
+          captureTouches: false,
+        }}
+        debug={__DEV__}
       >
         <MenuProvider>
           <AuthProvider>

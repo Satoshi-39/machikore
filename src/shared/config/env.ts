@@ -21,13 +21,16 @@ interface Env {
   EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID?: string;
   EXPO_PUBLIC_GOOGLE_OAUTH_ANDROID_CLIENT_ID?: string;
   EXPO_PUBLIC_REVENUECAT_API_KEY?: string;
+  EXPO_PUBLIC_POSTHOG_API_KEY?: string;
+  EXPO_PUBLIC_POSTHOG_HOST?: string;
+  EXPO_PUBLIC_SENTRY_DSN?: string;
 }
 
 // ===============================
 // 環境変数の取得
 // ===============================
 
-function getEnvVar(key: keyof Env, fallback?: string): string {
+export function getEnvVar(key: keyof Env, fallback?: string): string {
   // 1. Constants.expoConfig?.extra から取得（Release ビルドで使用）
   const extraValue = Constants.expoConfig?.extra?.[key];
 
@@ -76,6 +79,13 @@ export const ENV = {
 
   // RevenueCat
   REVENUECAT_API_KEY: getEnvVar('EXPO_PUBLIC_REVENUECAT_API_KEY', ''),
+
+  // PostHog
+  POSTHOG_API_KEY: getEnvVar('EXPO_PUBLIC_POSTHOG_API_KEY', ''),
+  POSTHOG_HOST: getEnvVar('EXPO_PUBLIC_POSTHOG_HOST', 'https://us.i.posthog.com'),
+
+  // Sentry
+  SENTRY_DSN: getEnvVar('EXPO_PUBLIC_SENTRY_DSN', ''),
 
   // 環境
   ENV: getEnvVar('EXPO_PUBLIC_ENV', 'development') as

@@ -5,9 +5,7 @@
  */
 
 import * as Sentry from '@sentry/react-native';
-
-const SENTRY_DSN =
-  'https://b729bd9c966411131968e48ad04543a8@o4510542818050048.ingest.us.sentry.io/4510542819098624';
+import { ENV } from '@/shared/config/env';
 
 /**
  * Sentryを初期化
@@ -15,7 +13,7 @@ const SENTRY_DSN =
  */
 export function initSentry(): void {
   Sentry.init({
-    dsn: SENTRY_DSN,
+    dsn: ENV.SENTRY_DSN,
 
     // 開発環境では無効化
     enabled: !__DEV__,

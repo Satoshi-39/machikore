@@ -5,9 +5,10 @@
  */
 
 import { PostHog } from 'posthog-react-native';
+import { ENV } from '@/shared/config/env';
 
-const POSTHOG_API_KEY = 'phc_HEjH12PbSk7JpnbZAD0ErH9NKhg4UAc8JSOKvvvhAcx';
-const POSTHOG_HOST = 'https://us.i.posthog.com';
+export const POSTHOG_API_KEY = ENV.POSTHOG_API_KEY;
+export const POSTHOG_HOST = ENV.POSTHOG_HOST;
 
 // PostHogクライアントインスタンス
 let posthogClient: PostHog | null = null;
@@ -70,6 +71,3 @@ export function captureScreen(
 ): void {
   posthogClient?.screen(screenName, properties);
 }
-
-// PostHogProvider用のエクスポート
-export { POSTHOG_API_KEY, POSTHOG_HOST };
