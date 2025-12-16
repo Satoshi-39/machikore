@@ -119,6 +119,7 @@ export interface MapRow {
   theme_color: string;
   spots_count: number;
   likes_count: number;
+  bookmarks_count: number;
   comments_count: number;
   created_at: string;
   updated_at: string;
@@ -163,6 +164,7 @@ export interface SpotRow {
   tags: string | null; // JSON string array: ["tag1", "tag2"]
   images_count: number;
   likes_count: number;
+  bookmarks_count: number;
   comments_count: number;
   order_index: number;
   created_at: string;

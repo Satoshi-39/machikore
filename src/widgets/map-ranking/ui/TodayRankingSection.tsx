@@ -13,10 +13,12 @@ export function TodayRankingSection() {
 
   return (
     <MapRankingSection
-      title="🔥 本日のピックアップ"
+      title="本日のピックアップ"
       maps={maps}
       isLoading={isLoading}
       error={error}
+      showRank={false}
+      seeAllHref="/(tabs)/discover/today-picks"
     />
   );
 }

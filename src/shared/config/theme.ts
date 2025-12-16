@@ -108,6 +108,14 @@ export const colors = {
   white: '#FFFFFF',
   black: '#000000',
   transparent: 'transparent',
+
+  // Ranking Colors
+  ranking: {
+    gold: '#FFD700',
+    silver: '#C0C0C0',
+    bronze: '#CD7F32',
+    default: '#9CA3AF',
+  },
 } as const;
 
 /**

@@ -22,7 +22,7 @@ import { LikersModal } from '@/features/view-likers';
 
 interface MapRankingCardProps {
   map: MapWithUser;
-  rank: number;
+  rank?: number;
   onPress: () => void;
 }
 
@@ -63,13 +63,13 @@ function MapRankingCard({ map, rank, onPress }: MapRankingCardProps) {
   const getRankColor = (r: number) => {
     switch (r) {
       case 1:
-        return '#FFD700'; // Gold
+        return colors.ranking.gold;
       case 2:
-        return '#C0C0C0'; // Silver
+        return colors.ranking.silver;
       case 3:
-        return '#CD7F32'; // Bronze
+        return colors.ranking.bronze;
       default:
-        return '#9CA3AF'; // Gray
+        return colors.ranking.default;
     }
   };
 
@@ -88,23 +88,24 @@ function MapRankingCard({ map, rank, onPress }: MapRankingCardProps) {
           borderRadius={12}
           defaultImagePadding={0.15}
         />
-
-        {/* ランキングバッジ */}
-        <View
-          style={{
-            position: 'absolute',
-            top: 8,
-            left: 8,
-            backgroundColor: getRankColor(rank),
-            borderRadius: 12,
-            width: 24,
-            height: 24,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Text className="text-white text-xs font-bold">{rank}</Text>
-        </View>
+        {/* ランキングバッジ（rankが指定されている場合のみ表示） */}
+        {rank !== undefined && (
+          <View
+            style={{
+              position: 'absolute',
+              top: 8,
+              left: 8,
+              backgroundColor: getRankColor(rank),
+              borderRadius: 12,
+              width: 24,
+              height: 24,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Text className="text-white text-xs font-bold">{rank}</Text>
+          </View>
+        )}
       </View>
 
       {/* マップ情報 */}
@@ -171,7 +172,9 @@ function MapRankingCard({ map, rank, onPress }: MapRankingCardProps) {
             <MapBookmarkButton
               mapId={map.id}
               currentUserId={currentUserId}
+              bookmarksCount={map.bookmarks_count}
               size={12}
+              showCount
               inactiveColor={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground}
             />
             {/* 作成日時 */}
@@ -210,9 +213,13 @@ interface MapRankingSectionProps {
   maps: MapWithUser[] | undefined;
   isLoading: boolean;
   error: Error | null;
+  /** ランキングバッジを表示するか */
+  showRank?: boolean;
+  /** すべて見るリンク先 */
+  seeAllHref?: string;
 }
 
-export function MapRankingSection({ title, maps, isLoading, error }: MapRankingSectionProps) {
+export function MapRankingSection({ title, maps, isLoading, error, showRank = false, seeAllHref }: MapRankingSectionProps) {
   const router = useRouter();
 
   const handleMapPress = useCallback(
@@ -222,12 +229,27 @@ export function MapRankingSection({ title, maps, isLoading, error }: MapRankingS
     [router]
   );
 
+  const handleSeeAllPress = useCallback(() => {
+    if (seeAllHref) {
+      router.push(seeAllHref as Href);
+    }
+  }, [router, seeAllHref]);
+
   return (
     <View className="py-4">
       {/* セクションタイトル */}
-      <Text className="text-lg font-bold text-foreground dark:text-dark-foreground px-4 mb-3">
-        {title}
-      </Text>
+      <Pressable
+        onPress={seeAllHref ? handleSeeAllPress : undefined}
+        disabled={!seeAllHref}
+        className="flex-row items-center justify-between px-4 mb-3"
+      >
+        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+          {title}
+        </Text>
+        {seeAllHref && (
+          <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+        )}
+      </Pressable>
 
       {isLoading ? (
         <View className="h-32 items-center justify-center">
@@ -255,7 +277,7 @@ export function MapRankingSection({ title, maps, isLoading, error }: MapRankingS
             <MapRankingCard
               key={map.id}
               map={map}
-              rank={index + 1}
+              rank={showRank ? index + 1 : undefined}
               onPress={() => handleMapPress(map.id)}
             />
           ))}

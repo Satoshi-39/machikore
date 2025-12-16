@@ -25,6 +25,7 @@ interface SupabaseMapResponse {
   theme_color: string | null;
   spots_count: number;
   likes_count: number;
+  bookmarks_count: number | null;
   comments_count: number | null;
   created_at: string;
   updated_at: string;
@@ -83,6 +84,7 @@ export async function getPublicMaps(
     theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    bookmarks_count: map.bookmarks_count ?? 0,
     comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
@@ -133,6 +135,7 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
     theme_color: data.theme_color,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
+    bookmarks_count: data.bookmarks_count ?? 0,
     comments_count: data.comments_count ?? 0,
     created_at: data.created_at,
     updated_at: data.updated_at,
@@ -189,6 +192,7 @@ export async function getMapSpots(
       tags: spot.tags,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
+      bookmarks_count: spot.bookmarks_count ?? 0,
       comments_count: spot.comments_count,
       order_index: spot.order_index,
       created_at: spot.created_at,
@@ -241,6 +245,7 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
     theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    bookmarks_count: map.bookmarks_count ?? 0,
     comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
@@ -285,6 +290,7 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
     theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    bookmarks_count: map.bookmarks_count ?? 0,
     comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
@@ -365,6 +371,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     theme_color: data.theme_color,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
+    bookmarks_count: data.bookmarks_count ?? 0,
     comments_count: data.comments_count ?? 0,
     created_at: data.created_at,
     updated_at: data.updated_at,
@@ -431,6 +438,7 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
     theme_color: data.theme_color,
     spots_count: data.spots_count,
     likes_count: data.likes_count,
+    bookmarks_count: data.bookmarks_count ?? 0,
     comments_count: data.comments_count ?? 0,
     created_at: data.created_at,
     updated_at: data.updated_at,
@@ -517,6 +525,7 @@ export async function getMapArticle(
       tags: spot.tags,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
+      bookmarks_count: spot.bookmarks_count ?? 0,
       comments_count: spot.comments_count,
       order_index: spot.order_index,
       created_at: spot.created_at,
@@ -603,6 +612,7 @@ export async function searchPublicMaps(
     theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    bookmarks_count: map.bookmarks_count ?? 0,
     comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
@@ -654,6 +664,7 @@ export async function searchPublicMapsByTag(
     theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    bookmarks_count: map.bookmarks_count ?? 0,
     comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
@@ -723,6 +734,7 @@ export async function getFollowingUsersMaps(
     theme_color: map.theme_color,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
+    bookmarks_count: map.bookmarks_count ?? 0,
     comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,

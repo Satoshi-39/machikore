@@ -199,6 +199,9 @@ export async function bookmarkSpot(
     handleSupabaseError('bookmarkSpot', error);
   }
 
+  // ブックマーク数をインクリメント
+  await supabase.rpc('increment_spot_bookmarks_count', { p_spot_id: spotId });
+
   return data;
 }
 
@@ -223,6 +226,9 @@ export async function bookmarkMap(
   if (error) {
     handleSupabaseError('bookmarkMap', error);
   }
+
+  // ブックマーク数をインクリメント
+  await supabase.rpc('increment_map_bookmarks_count', { p_map_id: mapId });
 
   return data;
 }
@@ -254,6 +260,9 @@ export async function unbookmarkSpot(userId: string, spotId: string): Promise<vo
   if (error) {
     handleSupabaseError('unbookmarkSpot', error);
   }
+
+  // ブックマーク数をデクリメント
+  await supabase.rpc('decrement_spot_bookmarks_count', { p_spot_id: spotId });
 }
 
 /**
@@ -269,6 +278,9 @@ export async function unbookmarkMap(userId: string, mapId: string): Promise<void
   if (error) {
     handleSupabaseError('unbookmarkMap', error);
   }
+
+  // ブックマーク数をデクリメント
+  await supabase.rpc('decrement_map_bookmarks_count', { p_map_id: mapId });
 }
 
 /**
@@ -401,6 +413,9 @@ export async function unbookmarkSpotFromFolder(
   if (error) {
     handleSupabaseError('unbookmarkSpotFromFolder', error);
   }
+
+  // ブックマーク数をデクリメント
+  await supabase.rpc('decrement_spot_bookmarks_count', { p_spot_id: spotId });
 }
 
 /**
@@ -428,6 +443,9 @@ export async function unbookmarkMapFromFolder(
   if (error) {
     handleSupabaseError('unbookmarkMapFromFolder', error);
   }
+
+  // ブックマーク数をデクリメント
+  await supabase.rpc('decrement_map_bookmarks_count', { p_map_id: mapId });
 }
 
 /**

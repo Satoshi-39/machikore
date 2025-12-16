@@ -42,6 +42,7 @@ export interface MapWithUser {
   theme_color?: string | null;
   spots_count: number;
   likes_count: number;
+  bookmarks_count: number;
   comments_count: number;
   created_at: string;
   updated_at: string;
@@ -102,6 +103,7 @@ export interface SpotWithDetails {
   tags: string[] | null;
   images_count: number;
   likes_count: number;
+  bookmarks_count: number;
   comments_count: number;
   order_index: number;
   created_at: string;

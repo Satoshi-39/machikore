@@ -47,6 +47,7 @@ export function createSpotData(params: CreateSpotParams): {
       tags: params.tags ? JSON.stringify(params.tags) : null,
       images_count: 0,
       likes_count: 0,
+      bookmarks_count: 0,
       comments_count: 0,
       order_index: 0,
       created_at: now,

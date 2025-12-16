@@ -5,7 +5,7 @@
  */
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
@@ -17,8 +17,12 @@ interface MapBookmarkButtonProps {
   mapId: string;
   /** 現在のユーザーID（ログイン状態判定用） */
   currentUserId?: string | null;
+  /** ブックマーク数（表示する場合） */
+  bookmarksCount?: number;
   /** アイコンサイズ */
   size?: number;
+  /** ブックマーク数を表示するか */
+  showCount?: boolean;
   /** 非アクティブ時のアイコン色 */
   inactiveColor?: string;
 }
@@ -26,7 +30,9 @@ interface MapBookmarkButtonProps {
 export function MapBookmarkButton({
   mapId,
   currentUserId,
+  bookmarksCount = 0,
   size = 18,
+  showCount = false,
   inactiveColor = colors.text.secondary,
 }: MapBookmarkButtonProps) {
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
@@ -72,17 +78,31 @@ export function MapBookmarkButton({
 
   return (
     <>
-      <Pressable
-        onPress={handleBookmarkPress}
-        className="flex-row items-center"
-        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-      >
-        <Ionicons
-          name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-          size={size}
-          color={isBookmarked ? colors.primary.DEFAULT : inactiveColor}
-        />
-      </Pressable>
+      <View className="flex-row items-center">
+        <Pressable
+          onPress={handleBookmarkPress}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: showCount ? 5 : 10 }}
+        >
+          <Ionicons
+            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+            size={size}
+            color={isBookmarked ? colors.primary.DEFAULT : inactiveColor}
+          />
+        </Pressable>
+        {showCount && (
+          <Pressable
+            onPress={handleBookmarkPress}
+            hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+          >
+            <Text
+              className="text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+              style={{ fontSize: size * 0.78 }}
+            >
+              {bookmarksCount}
+            </Text>
+          </Pressable>
+        )}
+      </View>
 
       {/* フォルダ選択モーダル */}
       {currentUserId && (

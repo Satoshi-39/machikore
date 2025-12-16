@@ -13,10 +13,12 @@ export function PopularRankingSection() {
 
   return (
     <MapRankingSection
-      title="👑 人気マップランキング"
+      title="人気マップランキング"
       maps={maps}
       isLoading={isLoading}
       error={error}
+      showRank={true}
+      seeAllHref="/(tabs)/discover/popular-maps"
     />
   );
 }

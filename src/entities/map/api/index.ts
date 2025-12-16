@@ -2,9 +2,9 @@
  * Map API エクスポート
  */
 
-export { useMap } from './useMap';
-export { useUserMaps } from './useUserMaps';
-export { useCreateMap } from './useCreateMap';
+export { useMap } from './use-map';
+export { useUserMaps } from './use-user-maps';
+export { useCreateMap } from './use-create-map';
 export { useUpdateMap } from './use-update-map';
 export { useDeleteMap } from './use-delete-map';
 export { useFeedMaps } from './use-feed-maps';
