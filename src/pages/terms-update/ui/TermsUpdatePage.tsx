@@ -1,18 +1,12 @@
 /**
- * オンボーディングページ
+ * 規約更新時の再同意ページ
  *
- * 初回起動時に利用規約・プライバシーポリシーへの同意を求める
- * 規約はサーバー（Supabase）から取得
- *
- * フロー:
- * 1. 利用規約を読む → 「読んだ」チェックが付く
- * 2. プライバシーポリシーを読む → 「読んだ」チェックが付く
- * 3. 両方読んだら「同意します」チェックボックスが有効になる
- * 4. 「同意します」にチェック → 「はじめる」ボタンが有効になる
+ * 利用規約・プライバシーポリシーが更新された場合に表示
+ * 初回オンボーディングより簡潔なUI
  */
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Pressable, ActivityIndicator, Image } from 'react-native';
+import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAppSettingsStore } from '@/shared/lib/store';
@@ -26,24 +20,17 @@ import {
 } from '@/shared/api/supabase';
 import { formatJapaneseDate } from '@/shared/lib/utils/date.utils';
 
-// アプリアイコン
-const AppIcon = require('@assets/images/machikore13.png');
-
-interface OnboardingPageProps {
+interface TermsUpdatePageProps {
   onComplete: () => void;
 }
 
 type DocumentType = 'terms' | 'privacy' | null;
 
-export function OnboardingPage({ onComplete }: OnboardingPageProps) {
+export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
   const user = useUserStore((state) => state.user);
   const agreeToTerms = useAppSettingsStore((state) => state.agreeToTerms);
-
-  // 読んだかどうかの状態
-  const [hasReadTerms, setHasReadTerms] = useState(false);
-  const [hasReadPrivacy, setHasReadPrivacy] = useState(false);
 
   // 同意チェックボックス
   const [isAgreed, setIsAgreed] = useState(false);
@@ -59,9 +46,6 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
   // 規約データ
   const [termsOfService, setTermsOfService] = useState<TermsVersion | null>(null);
   const [privacyPolicy, setPrivacyPolicy] = useState<TermsVersion | null>(null);
-
-  // 両方読んだかどうか
-  const hasBothRead = hasReadTerms && hasReadPrivacy;
 
   // 規約をサーバーから取得
   useEffect(() => {
@@ -82,13 +66,7 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
     fetchTerms();
   }, []);
 
-  // 文書を閉じたときに「読んだ」フラグを立てる
   const handleCloseDocument = () => {
-    if (viewingDocument === 'terms') {
-      setHasReadTerms(true);
-    } else if (viewingDocument === 'privacy') {
-      setHasReadPrivacy(true);
-    }
     setViewingDocument(null);
   };
 
@@ -222,49 +200,33 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
       className="flex-1 bg-surface dark:bg-dark-surface"
       style={{ paddingTop: insets.top }}
     >
-
       <View className="flex-1 justify-center px-6">
-        {/* ロゴとウェルカムメッセージ */}
-        <View className="items-center mb-10">
-          <Image
-            source={AppIcon}
-            className="w-24 h-24 rounded-3xl mb-6"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.2,
-              shadowRadius: 8,
-            }}
-          />
-          <Text className="text-3xl font-bold text-foreground dark:text-dark-foreground mb-2">
-            街コレ
+        {/* 更新通知 */}
+        <View className="items-center mb-8">
+          <View className="w-16 h-16 bg-primary/10 rounded-full items-center justify-center mb-4">
+            <Ionicons name="document-text" size={32} color={colors.primary.DEFAULT} />
+          </View>
+          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-2">
+            規約が更新されました
           </Text>
           <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center">
-            お気に入りの場所を集めて共有しよう
+            続けてご利用いただくには、{'\n'}更新された規約への同意が必要です
           </Text>
         </View>
 
-        {/* 規約確認エリア */}
-        <View className="mb-6">
+        {/* 規約リンク */}
+        <View className="mb-6 bg-surface-secondary dark:bg-dark-surface-secondary rounded-xl">
           {/* 利用規約 */}
           <Pressable
             onPress={() => setViewingDocument('terms')}
-            className="flex-row items-center py-4 border-b border-border-light dark:border-dark-border-light"
+            className="flex-row items-center py-4 px-4 border-b border-border-light dark:border-dark-border-light"
           >
-            <View
-              className={`w-6 h-6 rounded-full items-center justify-center mr-3 ${
-                hasReadTerms
-                  ? 'bg-green-500'
-                  : 'bg-gray-200 dark:bg-gray-700'
-              }`}
-            >
-              {hasReadTerms ? (
-                <Ionicons name="checkmark" size={16} color="white" />
-              ) : (
-                <Text className="text-xs text-gray-500 dark:text-gray-400">1</Text>
-              )}
-            </View>
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground">
+            <Ionicons
+              name="document-text-outline"
+              size={20}
+              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+            />
+            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">
               利用規約
             </Text>
             <Ionicons
@@ -277,22 +239,14 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
           {/* プライバシーポリシー */}
           <Pressable
             onPress={() => setViewingDocument('privacy')}
-            className="flex-row items-center py-4 border-b border-border-light dark:border-dark-border-light"
+            className="flex-row items-center py-4 px-4"
           >
-            <View
-              className={`w-6 h-6 rounded-full items-center justify-center mr-3 ${
-                hasReadPrivacy
-                  ? 'bg-green-500'
-                  : 'bg-gray-200 dark:bg-gray-700'
-              }`}
-            >
-              {hasReadPrivacy ? (
-                <Ionicons name="checkmark" size={16} color="white" />
-              ) : (
-                <Text className="text-xs text-gray-500 dark:text-gray-400">2</Text>
-              )}
-            </View>
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground">
+            <Ionicons
+              name="shield-checkmark-outline"
+              size={20}
+              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+            />
+            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">
               プライバシーポリシー
             </Text>
             <Ionicons
@@ -306,38 +260,24 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
         {/* 同意チェックボックス */}
         <View className="mb-8">
           <Pressable
-            onPress={() => hasBothRead && setIsAgreed(!isAgreed)}
-            disabled={!hasBothRead}
-            className={`flex-row items-center py-4 ${!hasBothRead ? 'opacity-50' : ''}`}
+            onPress={() => setIsAgreed(!isAgreed)}
+            className="flex-row items-center py-4"
           >
             <View
               className={`w-6 h-6 rounded-md border-2 items-center justify-center mr-3 ${
                 isAgreed
                   ? 'bg-primary border-primary'
-                  : hasBothRead
-                    ? 'border-gray-300 dark:border-gray-600'
-                    : 'border-gray-200 dark:border-gray-700'
+                  : 'border-gray-300 dark:border-gray-600'
               }`}
             >
               {isAgreed && (
                 <Ionicons name="checkmark" size={16} color="white" />
               )}
             </View>
-            <Text
-              className={`flex-1 text-base leading-6 ${
-                hasBothRead
-                  ? 'text-foreground dark:text-dark-foreground'
-                  : 'text-foreground-muted dark:text-dark-foreground-muted'
-              }`}
-            >
-              上記の利用規約とプライバシーポリシーに同意します
+            <Text className="flex-1 text-base leading-6 text-foreground dark:text-dark-foreground">
+              更新された利用規約とプライバシーポリシーに同意します
             </Text>
           </Pressable>
-
-          {/* 補足説明 */}
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted leading-5 ml-9">
-            続行することで、13歳以上であることを確認し、位置情報やコンテンツの利用について同意したものとみなされます。
-          </Text>
         </View>
       </View>
 
@@ -365,7 +305,7 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
               isAgreed && !isSubmitting ? 'text-white' : 'text-gray-400 dark:text-gray-500'
             }`}
           >
-            {isSubmitting ? '処理中...' : 'はじめる'}
+            {isSubmitting ? '処理中...' : '続ける'}
           </Text>
         </Pressable>
       </View>

@@ -9,9 +9,9 @@
  */
 
 import React from 'react';
-import { Loading } from './loading';
-import { ErrorView } from './error-view';
-import { EmptyState } from './empty-state';
+import { Loading } from './Loading';
+import { ErrorView } from './ErrorView';
+import { EmptyState } from './EmptyState';
 
 interface SingleDataBoundaryProps<T> {
   /** ローディング状態 */

@@ -16,6 +16,7 @@ import {
   type TermsType,
   type TermsVersion,
 } from '@/shared/api/supabase';
+import { formatJapaneseDate } from '@/shared/lib/utils/date.utils';
 
 interface LegalDocumentPageProps {
   type: TermsType;
@@ -114,15 +115,17 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         return <View key={index} className="h-3" />;
       }
 
-      // H1（# ）
+      // H1（タイトル）- 前後に広めの余白、施行日をその下に表示
       if (trimmedLine.startsWith('# ')) {
         return (
-          <Text
-            key={index}
-            className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-4"
-          >
-            {trimmedLine.slice(2)}
-          </Text>
+          <View key={index} className="mt-6 mb-8">
+            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground text-center">
+              {trimmedLine.slice(2)}
+            </Text>
+            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center mt-3">
+              {formatJapaneseDate(document.effective_at)} 施行
+            </Text>
+          </View>
         );
       }
 
@@ -212,15 +215,6 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         className="flex-1 px-4 py-4"
         showsVerticalScrollIndicator={true}
       >
-        {/* バージョン情報 */}
-        <View className="mb-4 pb-3 border-b border-border-light dark:border-dark-border-light">
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
-            バージョン {document.version}
-          </Text>
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-            施行日: {new Date(document.effective_at).toLocaleDateString('ja-JP')}
-          </Text>
-        </View>
         {renderContent()}
         {/* 下部余白 */}
         <View className="h-8" />

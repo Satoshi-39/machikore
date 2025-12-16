@@ -3,138 +3,17 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import { DefaultTheme, DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import Toast, { BaseToast, type BaseToastProps } from 'react-native-toast-message';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import 'react-native-reanimated';
 import '../global.css';
 
 import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat } from '@/shared/lib/init';
-import { useAppSettingsStore } from '@/shared/lib/store';
-import { colors } from '@/shared/config';
-import { OnboardingPage } from '@/pages/onboarding';
-import { getCurrentTermsVersions } from '@/shared/api/supabase';
-
-// カスタムToast設定（ダークモード対応）
-const createToastConfig = (isDarkMode: boolean) => ({
-  success: (props: BaseToastProps) => (
-    <BaseToast
-      {...props}
-      style={{
-        borderLeftColor: colors.primary.DEFAULT,
-        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
-      }}
-      contentContainerStyle={{ paddingHorizontal: 15 }}
-      text1Style={{
-        fontSize: 14,
-        fontWeight: '600',
-        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
-      }}
-      text2Style={{
-        fontSize: 12,
-        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
-      }}
-    />
-  ),
-  error: (props: BaseToastProps) => (
-    <BaseToast
-      {...props}
-      style={{
-        borderLeftColor: colors.danger,
-        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
-      }}
-      contentContainerStyle={{ paddingHorizontal: 15 }}
-      text1Style={{
-        fontSize: 14,
-        fontWeight: '600',
-        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
-      }}
-      text2Style={{
-        fontSize: 12,
-        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
-      }}
-    />
-  ),
-  info: (props: BaseToastProps) => (
-    <BaseToast
-      {...props}
-      style={{
-        borderLeftColor: colors.info,
-        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
-      }}
-      contentContainerStyle={{ paddingHorizontal: 15 }}
-      text1Style={{
-        fontSize: 14,
-        fontWeight: '600',
-        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
-      }}
-      text2Style={{
-        fontSize: 12,
-        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
-      }}
-    />
-  ),
-});
+import { AppToast } from '@/shared/ui';
 
 // AppProvidersの内側で使うためのコンポーネント
 function RootNavigator() {
   const isDarkMode = useIsDarkMode();
-  const hasAgreedToVersion = useAppSettingsStore((state) => state.hasAgreedToVersion);
-
-  const [isCheckingTerms, setIsCheckingTerms] = useState(true);
-  const [showOnboarding, setShowOnboarding] = useState(false);
-
-  // サーバーから現在の規約バージョンを取得して、ローカルの同意バージョンと比較
-  useEffect(() => {
-    async function checkTermsAgreement() {
-      try {
-        const currentTerms = await getCurrentTermsVersions();
-
-        // ローカルの同意バージョンとサーバーの規約バージョンを比較
-        const hasAgreed = hasAgreedToVersion(
-          currentTerms.termsOfService?.version ?? '',
-          currentTerms.privacyPolicy?.version ?? ''
-        );
-
-        setShowOnboarding(!hasAgreed);
-      } catch (err) {
-        console.error('規約バージョンの取得に失敗:', err);
-        // エラー時はオンボーディングを表示（安全側に倒す）
-        setShowOnboarding(true);
-      } finally {
-        setIsCheckingTerms(false);
-      }
-    }
-
-    checkTermsAgreement();
-  }, [hasAgreedToVersion]);
-
-  // オンボーディング完了時
-  const handleOnboardingComplete = () => {
-    setShowOnboarding(false);
-  };
-
-  // 規約チェック中
-  if (isCheckingTerms) {
-    return (
-      <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
-        <View className="flex-1 justify-center items-center bg-surface dark:bg-dark-surface">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-        </View>
-        <StatusBar style={isDarkMode ? 'light' : 'dark'} />
-      </ThemeProvider>
-    );
-  }
-
-  // オンボーディング表示
-  if (showOnboarding) {
-    return (
-      <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
-        <OnboardingPage onComplete={handleOnboardingComplete} />
-        <StatusBar style={isDarkMode ? 'light' : 'dark'} />
-      </ThemeProvider>
-    );
-  }
 
   return (
     <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
@@ -321,7 +200,7 @@ function RootNavigator() {
           />
         </Stack>
         <StatusBar style={isDarkMode ? 'light' : 'dark'} />
-        <Toast config={createToastConfig(isDarkMode)} />
+        <AppToast />
       </BottomSheetModalProvider>
       </ThemeProvider>
     );
