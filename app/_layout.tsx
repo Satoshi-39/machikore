@@ -13,6 +13,7 @@ import { initDatabase, initMapbox, initRevenueCat } from '@/shared/lib/init';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { colors } from '@/shared/config';
 import { OnboardingPage } from '@/pages/onboarding';
+import { getCurrentTermsVersions } from '@/shared/api/supabase';
 
 // カスタムToast設定（ダークモード対応）
 const createToastConfig = (isDarkMode: boolean) => ({
@@ -78,13 +79,52 @@ const createToastConfig = (isDarkMode: boolean) => ({
 // AppProvidersの内側で使うためのコンポーネント
 function RootNavigator() {
   const isDarkMode = useIsDarkMode();
-  const hasAgreedToLatestTerms = useAppSettingsStore((state) => state.hasAgreedToLatestTerms);
-  const [showOnboarding, setShowOnboarding] = useState(!hasAgreedToLatestTerms());
+  const hasAgreedToVersion = useAppSettingsStore((state) => state.hasAgreedToVersion);
+
+  const [isCheckingTerms, setIsCheckingTerms] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  // サーバーから現在の規約バージョンを取得して、ローカルの同意バージョンと比較
+  useEffect(() => {
+    async function checkTermsAgreement() {
+      try {
+        const currentTerms = await getCurrentTermsVersions();
+
+        // ローカルの同意バージョンとサーバーの規約バージョンを比較
+        const hasAgreed = hasAgreedToVersion(
+          currentTerms.termsOfService?.version ?? '',
+          currentTerms.privacyPolicy?.version ?? ''
+        );
+
+        setShowOnboarding(!hasAgreed);
+      } catch (err) {
+        console.error('規約バージョンの取得に失敗:', err);
+        // エラー時はオンボーディングを表示（安全側に倒す）
+        setShowOnboarding(true);
+      } finally {
+        setIsCheckingTerms(false);
+      }
+    }
+
+    checkTermsAgreement();
+  }, [hasAgreedToVersion]);
 
   // オンボーディング完了時
   const handleOnboardingComplete = () => {
     setShowOnboarding(false);
   };
+
+  // 規約チェック中
+  if (isCheckingTerms) {
+    return (
+      <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
+        <View className="flex-1 justify-center items-center bg-surface dark:bg-dark-surface">
+          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        </View>
+        <StatusBar style={isDarkMode ? 'light' : 'dark'} />
+      </ThemeProvider>
+    );
+  }
 
   // オンボーディング表示
   if (showOnboarding) {

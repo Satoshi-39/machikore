@@ -49,6 +49,18 @@ export function getFirstDayOfMonth(year: number, month: number): number {
 }
 
 /**
+ * 日付を日本語形式で表示（例: 2025年1月1日）
+ */
+export function formatJapaneseDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+/**
  * 日付を相対時間形式で表示（例: 3時間前、2日前）
  */
 export function formatRelativeTime(dateString: string): string {

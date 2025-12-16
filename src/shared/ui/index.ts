@@ -18,7 +18,7 @@ export { ActionSheet } from './action-sheet';
 export type { ActionSheetItem } from './action-sheet';
 export { PopupMenu } from './popup-menu';
 export type { PopupMenuItem } from './popup-menu';
-export { PageHeader } from './page-header';
+export { PageHeader } from './PageHeader';
 export { ImageViewerModal, useImageViewer } from './image-viewer';
 export { CommentInput, type CommentInputRef, CommentInputModal } from './comment-input';
 export { SwipeableRow } from './swipeable-row';

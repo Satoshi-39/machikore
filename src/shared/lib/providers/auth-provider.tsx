@@ -20,6 +20,11 @@ import { supabase } from '@/shared/api/supabase/client';
 import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
 import { getUserById as getUserByIdFromSupabase } from '@/shared/api/supabase/users';
 import {
+  getCurrentTermsVersions,
+  recordTermsAgreement,
+  getUserLatestAgreement,
+} from '@/shared/api/supabase/terms';
+import {
   loginToRevenueCat,
   logoutFromRevenueCat,
   isPremiumActive,
@@ -27,10 +32,68 @@ import {
 import { syncUserToSQLite } from '@/shared/lib/sync';
 import { useUserStore } from '@/entities/user/model';
 import { useSubscriptionStore } from '@/entities/subscription';
+import { useAppSettingsStore } from '@/shared/lib/store';
 import type { User } from '@/entities/user/model';
 
 interface AuthProviderProps {
   children: React.ReactNode;
+}
+
+/**
+ * ログイン時にローカルの同意情報をサーバーに同期
+ * 未ログイン時にオンボーディングで同意した内容をサーバーに記録
+ */
+async function syncTermsAgreementToServer(userId: string): Promise<void> {
+  try {
+    // ローカルの同意バージョンを取得
+    const { agreedTermsVersion, agreedPrivacyVersion } = useAppSettingsStore.getState();
+
+    if (!agreedTermsVersion || !agreedPrivacyVersion) {
+      console.log('[AuthProvider] ローカルに同意情報なし、同期スキップ');
+      return;
+    }
+
+    // サーバーの同意情報を確認
+    const serverAgreement = await getUserLatestAgreement(userId);
+
+    // すでにサーバーに同じバージョンの同意が記録されていればスキップ
+    if (
+      serverAgreement &&
+      serverAgreement.terms_version === agreedTermsVersion &&
+      serverAgreement.privacy_version === agreedPrivacyVersion
+    ) {
+      console.log('[AuthProvider] サーバーに同意情報あり、同期スキップ');
+      return;
+    }
+
+    // サーバーから現在の規約バージョンIDを取得
+    const currentTerms = await getCurrentTermsVersions();
+    if (!currentTerms.termsOfService || !currentTerms.privacyPolicy) {
+      console.warn('[AuthProvider] サーバーに規約が設定されていません');
+      return;
+    }
+
+    // ローカルの同意バージョンとサーバーの規約バージョンが一致するか確認
+    if (
+      currentTerms.termsOfService.version !== agreedTermsVersion ||
+      currentTerms.privacyPolicy.version !== agreedPrivacyVersion
+    ) {
+      console.log('[AuthProvider] ローカルとサーバーの規約バージョンが異なる、同期スキップ');
+      return;
+    }
+
+    // サーバーに同意を記録
+    await recordTermsAgreement(
+      userId,
+      currentTerms.termsOfService.id,
+      currentTerms.privacyPolicy.id
+    );
+
+    console.log('[AuthProvider] 同意情報をサーバーに同期しました');
+  } catch (err) {
+    console.error('[AuthProvider] 同意情報の同期に失敗:', err);
+    // 失敗してもアプリは続行
+  }
 }
 
 /**
@@ -129,6 +192,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
                   } catch (rcErr) {
                     console.warn('[AuthProvider] RevenueCatログインエラー（続行）:', rcErr);
                   }
+
+                  // ローカルの同意情報をサーバーに同期
+                  await syncTermsAgreementToServer(user.id);
                 } catch (err) {
                   console.error('[AuthProvider] SIGNED_IN処理エラー:', err);
                 }
