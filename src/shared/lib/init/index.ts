@@ -5,3 +5,4 @@
 export * from './database';
 export * from './mapbox';
 export * from './revenuecat';
+export * from './sentry';

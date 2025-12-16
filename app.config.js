@@ -42,6 +42,13 @@ module.exports = {
       favicon: './assets/images/favicon.png',
     },
     plugins: [
+      [
+        '@sentry/react-native/expo',
+        {
+          organization: '68f07d35e635',
+          project: 'react-native',
+        },
+      ],
       'expo-router',
       [
         'expo-splash-screen',

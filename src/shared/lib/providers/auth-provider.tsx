@@ -30,6 +30,7 @@ import {
   isPremiumActive,
 } from '@/shared/api/revenuecat';
 import { syncUserToSQLite } from '@/shared/lib/sync';
+import { setSentryUser } from '@/shared/lib/init/sentry';
 import { useUserStore } from '@/entities/user/model';
 import { useSubscriptionStore } from '@/entities/subscription';
 import { useAppSettingsStore } from '@/shared/lib/store';
@@ -137,6 +138,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
           if (userData && isMounted) {
             setUser(userData as User);
             setAuthState('authenticated');
+            // Sentryにユーザー情報を設定
+            setSentryUser({ id: userData.id, username: userData.username });
           }
 
           // RevenueCatにログインしてサブスクリプション状態を取得
@@ -180,6 +183,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                   if (userData && isMounted) {
                     setUser(userData as User);
                     setAuthState('authenticated');
+                    // Sentryにユーザー情報を設定
+                    setSentryUser({ id: userData.id, username: userData.username });
                   }
 
                   // RevenueCatにログインしてサブスクリプション状態を取得
@@ -213,6 +218,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                   setUser(null);
                   setAuthState('unauthenticated');
                   resetSubscription();
+                  // Sentryからユーザー情報をクリア
+                  setSentryUser(null);
                 }
               })();
             }
