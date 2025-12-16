@@ -19,7 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
 import { colors, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
-import { getMapThemeColor, showLoginRequiredAlert } from '@/shared/lib';
+import { getMapThemeColor, showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
@@ -141,7 +141,7 @@ function RecentlyViewedCard({ map, onPress }: RecentlyViewedCardProps) {
             </Text>
           </Pressable>
         )}
-        {/* いいね、ブックマーク、記事アイコン、三点リーダ */}
+        {/* いいね、ブックマーク、閲覧日時、記事アイコン、三点リーダ */}
         <View className="flex-row items-center justify-between mt-1">
           <View className="flex-row items-center gap-3">
             {/* いいね */}
@@ -168,6 +168,10 @@ function RecentlyViewedCard({ map, onPress }: RecentlyViewedCardProps) {
                   : colors.light.foreground
               }
             />
+            {/* 作成日時 */}
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+              {formatRelativeTime(map.created_at)}
+            </Text>
           </View>
           {/* 記事アイコン + 三点リーダ */}
           <View className="flex-row items-center">

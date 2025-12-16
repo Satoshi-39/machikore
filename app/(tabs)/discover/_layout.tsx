@@ -12,6 +12,7 @@ export default function DiscoverLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="default-map" />
       <Stack.Screen name="tag-results" />
+      <Stack.Screen name="view-history" />
       <Stack.Screen name="featured/[id]" />
       <Stack.Screen name="maps/[id]" />
       <Stack.Screen name="spots/[id]" />

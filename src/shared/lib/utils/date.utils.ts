@@ -61,7 +61,7 @@ export function formatJapaneseDate(dateString: string): string {
 }
 
 /**
- * 日付を相対時間形式で表示（例: 3時間前、2日前）
+ * 日付を相対時間形式で表示（例: 3時間前、2日前、1ヶ月前、1年前）
  */
 export function formatRelativeTime(dateString: string): string {
   const date = new Date(dateString);
@@ -70,11 +70,15 @@ export function formatRelativeTime(dateString: string): string {
   const diffMins = Math.floor(diffMs / (1000 * 60));
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const diffWeeks = Math.floor(diffDays / 7);
+  const diffMonths = Math.floor(diffDays / 30);
+  const diffYears = Math.floor(diffDays / 365);
 
   if (diffMins < 1) return 'たった今';
   if (diffMins < 60) return `${diffMins}分前`;
   if (diffHours < 24) return `${diffHours}時間前`;
   if (diffDays < 7) return `${diffDays}日前`;
-
-  return `${date.getMonth() + 1}/${date.getDate()}`;
+  if (diffWeeks < 5) return `${diffWeeks}週間前`;
+  if (diffMonths < 12) return `${diffMonths}ヶ月前`;
+  return `${diffYears}年前`;
 }

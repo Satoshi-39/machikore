@@ -5,7 +5,7 @@
  * マップの説明と各スポットをブログ形式で紹介
  */
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,6 +15,7 @@ import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
+import { useRecordView } from '@/entities/view-history';
 import { MapArticleContent } from '@/widgets/map-article-content';
 
 interface MapArticlePageProps {
@@ -26,9 +27,22 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
+  const { mutate: recordView } = useRecordView();
 
   // 自分のマップかどうか
   const isOwner = currentUserId === articleData?.map.user_id;
+
+  // 記事を開いた時に閲覧履歴を記録（ログイン中かつ自分以外のマップかつ公開中の場合）
+  useEffect(() => {
+    if (
+      currentUserId &&
+      articleData?.map &&
+      articleData.map.user_id !== currentUserId &&
+      articleData.map.is_public
+    ) {
+      recordView({ userId: currentUserId, mapId });
+    }
+  }, [currentUserId, articleData?.map, mapId, recordView]);
 
   // マップ編集へ遷移
   const handleEditMapPress = useCallback(() => {
