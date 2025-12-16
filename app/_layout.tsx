@@ -10,7 +10,9 @@ import '../global.css';
 
 import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat } from '@/shared/lib/init';
+import { useAppSettingsStore } from '@/shared/lib/store';
 import { colors } from '@/shared/config';
+import { OnboardingPage } from '@/pages/onboarding';
 
 // カスタムToast設定（ダークモード対応）
 const createToastConfig = (isDarkMode: boolean) => ({
@@ -76,6 +78,23 @@ const createToastConfig = (isDarkMode: boolean) => ({
 // AppProvidersの内側で使うためのコンポーネント
 function RootNavigator() {
   const isDarkMode = useIsDarkMode();
+  const hasAgreedToLatestTerms = useAppSettingsStore((state) => state.hasAgreedToLatestTerms);
+  const [showOnboarding, setShowOnboarding] = useState(!hasAgreedToLatestTerms());
+
+  // オンボーディング完了時
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+  };
+
+  // オンボーディング表示
+  if (showOnboarding) {
+    return (
+      <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
+        <OnboardingPage onComplete={handleOnboardingComplete} />
+        <StatusBar style={isDarkMode ? 'light' : 'dark'} />
+      </ThemeProvider>
+    );
+  }
 
   return (
     <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>

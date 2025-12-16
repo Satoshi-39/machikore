@@ -226,12 +226,12 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="document-text-outline"
             label="利用規約"
-            onPress={showComingSoon}
+            onPress={() => router.push('/settings/terms')}
           />
           <SettingsItem
             icon="shield-outline"
             label="プライバシーポリシー"
-            onPress={showComingSoon}
+            onPress={() => router.push('/settings/privacy')}
           />
           <SettingsItem
             icon="information-circle-outline"
