@@ -27,7 +27,6 @@ export interface Bookmark {
   user_id: string;
   map_id: string | null;
   user_spot_id: string | null;
-  master_spot_id: string | null;
   folder_id: string | null;
   created_at: string;
 }
@@ -44,6 +43,8 @@ export interface BookmarkWithDetails extends Bookmark {
       id: string;
       name: string;
       google_short_address: string | null;
+      latitude: number;
+      longitude: number;
     } | null;
     user: {
       id: string;
@@ -65,15 +66,6 @@ export interface BookmarkWithDetails extends Bookmark {
       display_name: string | null;
       avatar_url: string | null;
     } | null;
-  } | null;
-  /** マスタースポット（デフォルトマップ上のスポット） */
-  master_spot?: {
-    id: string;
-    name: string;
-    google_short_address: string | null;
-    google_types: string[] | null;
-    latitude: number;
-    longitude: number;
   } | null;
 }
 
@@ -294,52 +286,6 @@ export async function unbookmarkMap(userId: string, mapId: string): Promise<void
 }
 
 /**
- * マスタースポットをブックマーク
- */
-export async function bookmarkMasterSpot(
-  userId: string,
-  masterSpotId: string,
-  folderId?: string | null
-): Promise<Bookmark> {
-  const { data, error } = await supabase
-    .from('bookmarks')
-    .insert({
-      user_id: userId,
-      master_spot_id: masterSpotId,
-      folder_id: folderId || null,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    handleSupabaseError('bookmarkMasterSpot', error);
-  }
-
-  // ブックマーク数をインクリメント
-  await supabase.rpc('increment_master_spot_bookmarks_count', { p_master_spot_id: masterSpotId });
-
-  return data;
-}
-
-/**
- * マスタースポットのブックマークを解除
- */
-export async function unbookmarkMasterSpot(userId: string, masterSpotId: string): Promise<void> {
-  const { error } = await supabase
-    .from('bookmarks')
-    .delete()
-    .eq('user_id', userId)
-    .eq('master_spot_id', masterSpotId);
-
-  if (error) {
-    handleSupabaseError('unbookmarkMasterSpot', error);
-  }
-
-  // ブックマーク数をデクリメント
-  await supabase.rpc('decrement_master_spot_bookmarks_count', { p_master_spot_id: masterSpotId });
-}
-
-/**
  * ブックマークのフォルダを変更
  */
 export async function moveBookmarkToFolder(
@@ -403,27 +349,6 @@ export async function checkMapBookmarked(
 }
 
 /**
- * ユーザーがマスタースポットをブックマークしているか確認
- */
-export async function checkMasterSpotBookmarked(
-  userId: string,
-  masterSpotId: string
-): Promise<boolean> {
-  const { data, error } = await supabase
-    .from('bookmarks')
-    .select('id')
-    .eq('user_id', userId)
-    .eq('master_spot_id', masterSpotId)
-    .maybeSingle();
-
-  if (error) {
-    handleSupabaseError('checkMasterSpotBookmarked', error);
-  }
-
-  return data !== null;
-}
-
-/**
  * スポットがどのフォルダにブックマークされているか取得（複数フォルダ対応）
  * @returns ブックマーク情報の配列（各フォルダへのブックマーク）
  */
@@ -460,27 +385,6 @@ export async function getMapBookmarkInfo(
 
   if (error) {
     handleSupabaseError('getMapBookmarkInfo', error);
-  }
-
-  return data || [];
-}
-
-/**
- * マスタースポットがどのフォルダにブックマークされているか取得
- * @returns ブックマーク情報の配列（各フォルダへのブックマーク）
- */
-export async function getMasterSpotBookmarkInfo(
-  userId: string,
-  masterSpotId: string
-): Promise<{ id: string; folder_id: string | null }[]> {
-  const { data, error } = await supabase
-    .from('bookmarks')
-    .select('id, folder_id')
-    .eq('user_id', userId)
-    .eq('master_spot_id', masterSpotId);
-
-  if (error) {
-    handleSupabaseError('getMasterSpotBookmarkInfo', error);
   }
 
   return data || [];
@@ -560,7 +464,6 @@ export async function getUserBookmarks(
       user_id,
       map_id,
       user_spot_id,
-      master_spot_id,
       folder_id,
       created_at,
       user_spots (
@@ -572,7 +475,9 @@ export async function getUserBookmarks(
         master_spots (
           id,
           name,
-          google_short_address
+          google_short_address,
+          latitude,
+          longitude
         ),
         users (
           id,
@@ -594,14 +499,6 @@ export async function getUserBookmarks(
           display_name,
           avatar_url
         )
-      ),
-      master_spots (
-        id,
-        name,
-        google_short_address,
-        google_types,
-        latitude,
-        longitude
       )
     `)
     .eq('user_id', userId)
@@ -628,7 +525,6 @@ export async function getUserBookmarks(
     user_id: bookmark.user_id,
     map_id: bookmark.map_id,
     user_spot_id: bookmark.user_spot_id,
-    master_spot_id: bookmark.master_spot_id,
     folder_id: bookmark.folder_id,
     created_at: bookmark.created_at,
     spot: bookmark.user_spots
@@ -651,16 +547,6 @@ export async function getUserBookmarks(
           spots_count: bookmark.maps.spots_count,
           likes_count: bookmark.maps.likes_count,
           user: bookmark.maps.users || null,
-        }
-      : null,
-    master_spot: bookmark.master_spots
-      ? {
-          id: bookmark.master_spots.id,
-          name: bookmark.master_spots.name,
-          google_short_address: bookmark.master_spots.google_short_address,
-          google_types: bookmark.master_spots.google_types,
-          latitude: bookmark.master_spots.latitude,
-          longitude: bookmark.master_spots.longitude,
         }
       : null,
   }));
@@ -704,21 +590,3 @@ export async function toggleMapBookmark(
   }
 }
 
-/**
- * マスタースポットのブックマークをトグル
- */
-export async function toggleMasterSpotBookmark(
-  userId: string,
-  masterSpotId: string,
-  folderId?: string | null
-): Promise<boolean> {
-  const isBookmarked = await checkMasterSpotBookmarked(userId, masterSpotId);
-
-  if (isBookmarked) {
-    await unbookmarkMasterSpot(userId, masterSpotId);
-    return false;
-  } else {
-    await bookmarkMasterSpot(userId, masterSpotId, folderId);
-    return true;
-  }
-}

@@ -10,7 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Mapbox from '@rnmapbox/maps';
 import { useMachiByBounds, useMachiGeoJson } from '@/entities/machi';
 import { useVisits } from '@/entities/visit';
-import { useMasterSpotsByBounds, useMasterSpotsGeoJson } from '@/entities/master-spot';
+import { useMasterSpotsByBounds, useMasterSpotsGeoJson, useUserFavoriteMasterSpotIds } from '@/entities/master-spot';
 import { useTransportHubsByBounds, useTransportHubsGeoJson } from '@/entities/transport-hub';
 import { useMapJump } from '@/features/map-jump';
 import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
@@ -20,7 +20,7 @@ import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { ENV, MAP_ZOOM } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
-import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, MachiSpotTransportLabels } from './layers';
+import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, MachiSpotTransportLabels, SpotLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
 import { useRegionsGeoJson } from '@/entities/region';
 import { useCountriesGeoJson } from '@/entities/country/model';
@@ -69,6 +69,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const isDarkMode = useIsDarkMode();
     const { data: visits = [] } = useVisits(userId ?? '');
     const { data: prefectures = [] } = usePrefectures();
+    const { data: favoriteMasterSpotIds = [] } = useUserFavoriteMasterSpotIds(userId);
     const [visitFilter, setVisitFilter] = useState<VisitFilter>('all');
     const cameraRef = useRef<Mapbox.Camera>(null);
 
@@ -180,6 +181,12 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       [visits]
     );
 
+    // お気に入りマスタースポットIDセットを作成
+    const favoriteMasterSpotIdSet = useMemo(
+      () => new Set(favoriteMasterSpotIds),
+      [favoriteMasterSpotIds]
+    );
+
     // MachiRowのマップを作成（IDからMachiRowへの変換用）
     const machiMap = useMemo(() => {
       if (!machiData) return new Map<string, MachiRow>();
@@ -210,7 +217,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // フィルタリングされたmachiDataを生成
     const filteredMachiData = useMemo(() => {
       if (!machiData) return null;
-      if (visitFilter === 'all') return machiData;
+      if (visitFilter === 'all' || visitFilter === 'favorite') return machiData;
       if (visitFilter === 'visited') {
         return machiData.filter((machi) => visitedMachiIds.has(machi.id));
       }
@@ -220,9 +227,17 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       return machiData;
     }, [machiData, visitFilter, visitedMachiIds]);
 
+    // フィルタリングされたmasterSpotsを生成
+    const filteredMasterSpots = useMemo(() => {
+      if (visitFilter === 'favorite') {
+        return masterSpots.filter((spot) => favoriteMasterSpotIdSet.has(spot.id));
+      }
+      return masterSpots;
+    }, [masterSpots, visitFilter, favoriteMasterSpotIdSet]);
+
     // GeoJSON データ生成
     const machiGeoJson = useMachiGeoJson(filteredMachiData ?? undefined, visitedMachiIds);
-    const masterSpotsGeoJson = useMasterSpotsGeoJson(masterSpots);
+    const masterSpotsGeoJson = useMasterSpotsGeoJson(filteredMasterSpots);
     const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
     const regionsGeoJson = useRegionsGeoJson(regions);
     const citiesGeoJson = useCitiesGeoJson(cities);
@@ -415,12 +430,21 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           </>
         )}
 
-        {/* 街マーカー表示（フィルター時のみ）- visitFilter='all'時は統合レイヤーで表示 */}
-        {visitFilter !== 'all' && (
+        {/* 街マーカー表示（訪問済み/未訪問フィルター時のみ） */}
+        {(visitFilter === 'visited' || visitFilter === 'not_visited') && (
           <MachiLabels
             geoJson={machiGeoJson}
             onPress={handleMarkerPress}
             visitFilter={visitFilter}
+          />
+        )}
+
+        {/* お気に入りスポットのみ表示（お気に入りフィルター時） */}
+        {visitFilter === 'favorite' && (
+          <SpotLabels
+            geoJson={masterSpotsGeoJson}
+            onPress={handleMachiSpotPress}
+            selectedSpotId={selectedSpot?.id}
           />
         )}
       </Mapbox.MapView>

@@ -11,6 +11,7 @@ export * from './user-spots';
 export * from './images';
 export * from './likes';
 export * from './bookmarks';
+export * from './master-spot-favorites';
 export * from './notifications';
 export * from './follows';
 export * from './comments';

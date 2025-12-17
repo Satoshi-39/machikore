@@ -17,7 +17,7 @@ export function insertUser(user: UserRow): void {
   db.runSync(
     `INSERT INTO users (
       id, email, username, display_name, avatar_url, bio,
-      is_subscribed, subscription_started_at, subscription_expires_at,
+      is_premium, premium_started_at, premium_expires_at,
       created_at, updated_at, synced_at, is_synced
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
     [
@@ -27,9 +27,9 @@ export function insertUser(user: UserRow): void {
       user.display_name,
       user.avatar_url,
       user.bio,
-      user.is_subscribed,
-      user.subscription_started_at,
-      user.subscription_expires_at,
+      user.is_premium,
+      user.premium_started_at,
+      user.premium_expires_at,
       user.created_at,
       user.updated_at,
       user.synced_at,
@@ -119,17 +119,17 @@ export function updateUser(
     fields.push('bio = ?');
     values.push(updates.bio);
   }
-  if (updates.is_subscribed !== undefined) {
-    fields.push('is_subscribed = ?');
-    values.push(updates.is_subscribed);
+  if (updates.is_premium !== undefined) {
+    fields.push('is_premium = ?');
+    values.push(updates.is_premium);
   }
-  if (updates.subscription_started_at !== undefined) {
-    fields.push('subscription_started_at = ?');
-    values.push(updates.subscription_started_at);
+  if (updates.premium_started_at !== undefined) {
+    fields.push('premium_started_at = ?');
+    values.push(updates.premium_started_at);
   }
-  if (updates.subscription_expires_at !== undefined) {
-    fields.push('subscription_expires_at = ?');
-    values.push(updates.subscription_expires_at);
+  if (updates.premium_expires_at !== undefined) {
+    fields.push('premium_expires_at = ?');
+    values.push(updates.premium_expires_at);
   }
   if (updates.updated_at !== undefined) {
     fields.push('updated_at = ?');

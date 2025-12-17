@@ -7,10 +7,8 @@ import {
   getUserBookmarks,
   checkSpotBookmarked,
   checkMapBookmarked,
-  checkMasterSpotBookmarked,
   getSpotBookmarkInfo,
   getMapBookmarkInfo,
-  getMasterSpotBookmarkInfo,
   type BookmarkWithDetails,
 } from '@/shared/api/supabase/bookmarks';
 
@@ -103,36 +101,3 @@ export function useMapBookmarkInfo(
   });
 }
 
-/**
- * マスタースポットがブックマークされているか確認
- */
-export function useCheckMasterSpotBookmarked(
-  userId: string | null | undefined,
-  masterSpotId: string | null | undefined
-) {
-  return useQuery<boolean, Error>({
-    queryKey: ['bookmark-status', 'master-spot', userId, masterSpotId],
-    queryFn: () => {
-      if (!userId || !masterSpotId) return false;
-      return checkMasterSpotBookmarked(userId, masterSpotId);
-    },
-    enabled: !!userId && !!masterSpotId,
-  });
-}
-
-/**
- * マスタースポットのブックマーク情報を取得（どのフォルダに入っているか含む）
- */
-export function useMasterSpotBookmarkInfo(
-  userId: string | null | undefined,
-  masterSpotId: string | null | undefined
-) {
-  return useQuery<BookmarkInfo, Error>({
-    queryKey: ['bookmark-info', 'master-spot', userId, masterSpotId],
-    queryFn: () => {
-      if (!userId || !masterSpotId) return [];
-      return getMasterSpotBookmarkInfo(userId, masterSpotId);
-    },
-    enabled: !!userId && !!masterSpotId,
-  });
-}

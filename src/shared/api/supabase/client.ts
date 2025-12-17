@@ -72,7 +72,7 @@ export function normalizeSupabaseError(error: any): Error {
  */
 export function handleSupabaseError(context: string, error: any): never {
   const normalizedError = normalizeSupabaseError(error);
-  log.error(`[Supabase] Error:`, normalizedError.message);
+  log.error(`[Supabase] ${context} Error:`, normalizedError.message);
   throw normalizedError;
 }
 

@@ -11,8 +11,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
-export type QuickSearchCategory = 'visited' | 'not_visited' | 'tourism' | 'shopping' | 'station';
-export type VisitFilter = 'all' | 'visited' | 'not_visited';
+export type QuickSearchCategory = 'visited' | 'not_visited' | 'favorite' | 'tourism' | 'shopping' | 'station';
+export type VisitFilter = 'all' | 'visited' | 'not_visited' | 'favorite';
 
 const FILTER_OPTIONS: {
   id: QuickSearchCategory;
@@ -24,6 +24,7 @@ const FILTER_OPTIONS: {
 }[] = [
   { id: 'visited', label: '訪問済み', icon: 'checkmark-circle', isFilter: true, filterValue: 'visited' },
   { id: 'not_visited', label: '未訪問', icon: 'ellipse-outline', isFilter: true, filterValue: 'not_visited' },
+  { id: 'favorite', label: 'お気に入り', icon: 'heart', isFilter: true, filterValue: 'favorite' },
   { id: 'tourism', label: '観光', icon: 'camera', isFilter: false, searchQuery: '観光' },
   { id: 'shopping', label: 'ショッピング', icon: 'bag', isFilter: false, searchQuery: 'ショッピング' },
   { id: 'station', label: '駅', icon: 'train', isFilter: false, searchQuery: '駅' },

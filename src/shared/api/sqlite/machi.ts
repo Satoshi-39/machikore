@@ -4,6 +4,7 @@
 
 import { queryOne, queryAll, execute, executeBatch } from './client';
 import type { MachiRow } from '@/shared/types/database.types';
+import { log } from '@/shared/config/logger';
 
 // ===============================
 // 街データ取得

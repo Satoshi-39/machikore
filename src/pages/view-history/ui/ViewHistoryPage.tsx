@@ -33,7 +33,6 @@ interface MapCardProps {
 function MapCard({ item, onPress, onUserPress, onArticlePress }: MapCardProps) {
   const { map } = item;
   const router = useRouter();
-  const currentTab = useCurrentTab();
   const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);

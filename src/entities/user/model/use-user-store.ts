@@ -49,7 +49,7 @@ export const useUserStore = create<UserState>()(
         set({
           user,
           authState: user ? 'authenticated' : 'unauthenticated',
-          isSubscribed: user?.is_subscribed ?? false,
+          isSubscribed: user?.is_premium ?? false,
         });
       },
 
@@ -81,7 +81,7 @@ export const useUserStore = create<UserState>()(
           isSubscribed: status,
           user: {
             ...currentUser,
-            is_subscribed: status,
+            is_premium: status,
           },
         });
       },

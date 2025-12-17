@@ -43,7 +43,6 @@ export function AppProviders({ children }: AppProvidersProps) {
           host: POSTHOG_HOST,
         }}
         autocapture={{
-          captureLifecycleEvents: true,
           captureScreens: true,
           captureTouches: false,
         }}

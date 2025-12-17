@@ -75,7 +75,7 @@ export function BookmarkFolderList({
       if (!counts[folderId]) {
         counts[folderId] = { spots: 0, maps: 0 };
       }
-      if (bookmark.user_spot_id || bookmark.master_spot_id) {
+      if (bookmark.user_spot_id) {
         counts[folderId].spots++;
       }
       if (bookmark.map_id) {
