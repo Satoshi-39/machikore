@@ -5,6 +5,7 @@
 export { Loading } from './Loading';
 export { ErrorView } from './ErrorView';
 export { EmptyState } from './EmptyState';
+export { Skeleton, ProfileSkeleton } from './Skeleton';
 export { AsyncBoundary } from './AsyncBoundary';
 export { SingleDataBoundary } from './SingleDataBoundary';
 export { FAB } from './FAB';

@@ -22,7 +22,7 @@ export function Loading({ message = '読み込み中...', variant = 'fullscreen'
   }
 
   return (
-    <View className="flex-1 justify-center items-center bg-muted dark:bg-dark-muted">
+    <View className="flex-1 justify-center items-center bg-surface dark:bg-dark-surface">
       <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
       <Text className="mt-3 text-base text-foreground-secondary dark:text-dark-foreground-secondary">{message}</Text>
     </View>

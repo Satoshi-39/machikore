@@ -10,7 +10,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
-import { Loading, ImageViewerModal } from '@/shared/ui';
+import { ProfileSkeleton, ImageViewerModal } from '@/shared/ui';
 import { useUser, useUserStats, useCurrentUserId } from '@/entities/user';
 import { FollowButton } from '@/features/follow-user';
 import { EditProfileButton } from '@/features/edit-profile';
@@ -43,13 +43,9 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
   };
 
 
-  // ローディング中
+  // ローディング中はスケルトンを表示（レイアウトシフト防止）
   if (isLoading) {
-    return (
-      <View className="bg-surface dark:bg-dark-surface px-4 py-6 border-b border-border dark:border-dark-border">
-        <Loading variant="inline" />
-      </View>
-    );
+    return <ProfileSkeleton />;
   }
 
   const mapsCount = stats?.mapsCount ?? 0;
