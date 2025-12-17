@@ -20,7 +20,7 @@ export interface NotificationRow {
   user_id: string;
   actor_id: string | null;
   type: NotificationType;
-  spot_id: string | null;
+  user_spot_id: string | null;
   map_id: string | null;
   comment_id: string | null;
   content: string | null;
@@ -89,7 +89,7 @@ export async function getUserNotifications(
       user_id,
       actor_id,
       type,
-      spot_id,
+      user_spot_id,
       map_id,
       comment_id,
       content,

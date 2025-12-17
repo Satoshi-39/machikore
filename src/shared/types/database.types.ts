@@ -208,7 +208,7 @@ export type VisitUpdate = Partial<Omit<VisitRow, 'id' | 'created_at'>>;
 // Images (スポット画像)
 export interface ImageRow {
   id: string;
-  spot_id: string;
+  user_spot_id: string;
   local_path: string | null;
   cloud_path: string | null;
   width: number | null;
@@ -220,7 +220,7 @@ export interface ImageRow {
   synced_at: string | null;
   is_synced: 0 | 1;
 }
-export type ImageInsert = Partial<ImageRow> & Pick<ImageRow, 'id' | 'spot_id' | 'created_at' | 'updated_at'>;
+export type ImageInsert = Partial<ImageRow> & Pick<ImageRow, 'id' | 'user_spot_id' | 'created_at' | 'updated_at'>;
 export type ImageUpdate = Partial<Omit<ImageRow, 'id' | 'created_at'>>;
 
 // Follows (フォロー関係)
@@ -240,7 +240,7 @@ export interface LikeRow {
   id: string;
   user_id: string;
   map_id: string | null;
-  spot_id: string | null;
+  user_spot_id: string | null;
   created_at: string;
   synced_at: string | null;
   is_synced: 0 | 1;
@@ -253,7 +253,7 @@ export interface CommentRow {
   id: string;
   user_id: string;
   map_id: string | null;
-  spot_id: string | null;
+  user_spot_id: string | null;
   content: string;
   created_at: string;
   updated_at: string;
@@ -286,7 +286,7 @@ export interface BookmarkRow {
   id: string;
   user_id: string;
   map_id: string | null;
-  spot_id: string | null;
+  user_spot_id: string | null;
   created_at: string;
   synced_at: string | null;
   is_synced: 0 | 1;

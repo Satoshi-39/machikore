@@ -194,8 +194,8 @@ export function NotificationList() {
       // フォロー通知の場合はコンテンツタップでもユーザープロフィールへ
       if (notification.type === 'follow' && notification.actor_id) {
         router.push(`/(tabs)/notifications/users/${notification.actor_id}`);
-      } else if (notification.spot_id) {
-        router.push(`/(tabs)/notifications/spots/${notification.spot_id}`);
+      } else if (notification.user_spot_id) {
+        router.push(`/(tabs)/notifications/spots/${notification.user_spot_id}`);
       } else if (notification.map_id) {
         router.push(`/(tabs)/notifications/maps/${notification.map_id}`);
       }

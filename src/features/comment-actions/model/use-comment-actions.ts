@@ -72,7 +72,7 @@ export function useCommentActions({
       {
         commentId: editingComment.id,
         content: editText.trim(),
-        spotId: editingComment.spot_id,
+        spotId: editingComment.user_spot_id,
         mapId: editingComment.map_id,
         parentId: editingComment.parent_id,
       },
@@ -104,7 +104,7 @@ export function useCommentActions({
           onPress: () => {
             deleteComment({
               commentId: comment.id,
-              spotId: comment.spot_id,
+              spotId: comment.user_spot_id,
               mapId: comment.map_id,
               parentId: comment.parent_id,
             });
@@ -118,7 +118,7 @@ export function useCommentActions({
   const handleDeleteConfirm = useCallback((comment: CommentWithUser) => {
     deleteComment({
       commentId: comment.id,
-      spotId: comment.spot_id,
+      spotId: comment.user_spot_id,
       mapId: comment.map_id,
       parentId: comment.parent_id,
     });
@@ -134,14 +134,14 @@ export function useCommentActions({
       unlikeComment({
         userId: currentUserId,
         commentId: comment.id,
-        spotId: comment.spot_id,
+        spotId: comment.user_spot_id,
         mapId: comment.map_id,
       });
     } else {
       likeComment({
         userId: currentUserId,
         commentId: comment.id,
-        spotId: comment.spot_id,
+        spotId: comment.user_spot_id,
         mapId: comment.map_id,
       });
     }

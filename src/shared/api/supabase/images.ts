@@ -52,7 +52,7 @@ export async function getSpotImages(spotId: string): Promise<ImageRow[]> {
   const { data, error } = await supabase
     .from('images')
     .select('*')
-    .eq('spot_id', spotId)
+    .eq('user_spot_id', spotId)
     .order('order_index', { ascending: true });
 
   if (error) {

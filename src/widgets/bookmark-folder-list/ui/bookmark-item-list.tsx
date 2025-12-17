@@ -45,7 +45,7 @@ export function BookmarkItemList({
         ? !b.folder_id
         : b.folder_id === folderId;
       // spotsタブではユーザースポットとマスタースポットの両方を表示
-      const matchType = activeTab === 'spots' ? (b.spot_id || b.master_spot_id) : b.map_id;
+      const matchType = activeTab === 'spots' ? (b.user_spot_id || b.master_spot_id) : b.map_id;
       return matchFolder && matchType;
     });
   }, [allBookmarks, folderId, activeTab]);

@@ -1055,6 +1055,59 @@ function migration008_AddRegionsCoordinates(): void {
 }
 
 /**
+ * マイグレーション009: spot_idをuser_spot_idにリネーム
+ * 対象テーブル: comments, bookmarks, images, likes
+ */
+function migration009_RenameSpotIdToUserSpotId(): void {
+  const db = getDatabase();
+
+  log.info('[SQLite] [Migration 009] Renaming spot_id to user_spot_id...');
+
+  try {
+    db.execSync('BEGIN TRANSACTION;');
+
+    // 1. commentsテーブル
+    const commentsInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(comments);');
+    if (commentsInfo.some((col) => col.name === 'spot_id')) {
+      db.execSync('DROP INDEX IF EXISTS idx_comments_spot_id;');
+      db.execSync('ALTER TABLE comments RENAME COLUMN spot_id TO user_spot_id;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_comments_user_spot_id ON comments(user_spot_id);');
+    }
+
+    // 2. bookmarksテーブル
+    const bookmarksInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(bookmarks);');
+    if (bookmarksInfo.some((col) => col.name === 'spot_id')) {
+      db.execSync('DROP INDEX IF EXISTS idx_bookmarks_spot_id;');
+      db.execSync('ALTER TABLE bookmarks RENAME COLUMN spot_id TO user_spot_id;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_bookmarks_user_spot_id ON bookmarks(user_spot_id);');
+    }
+
+    // 3. imagesテーブル
+    const imagesInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(images);');
+    if (imagesInfo.some((col) => col.name === 'spot_id')) {
+      db.execSync('DROP INDEX IF EXISTS idx_images_spot_id;');
+      db.execSync('ALTER TABLE images RENAME COLUMN spot_id TO user_spot_id;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_images_user_spot_id ON images(user_spot_id);');
+    }
+
+    // 4. likesテーブル
+    const likesInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(likes);');
+    if (likesInfo.some((col) => col.name === 'spot_id')) {
+      db.execSync('DROP INDEX IF EXISTS idx_likes_spot_id;');
+      db.execSync('ALTER TABLE likes RENAME COLUMN spot_id TO user_spot_id;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_likes_user_spot_id ON likes(user_spot_id);');
+    }
+
+    db.execSync('COMMIT;');
+    log.info('[SQLite] [Migration 009] Completed successfully');
+  } catch (error) {
+    db.execSync('ROLLBACK;');
+    log.error('[SQLite] [Migration 009] Failed:', error);
+    throw error;
+  }
+}
+
+/**
  * 全マイグレーションを実行
  */
 export function runMigrations(): void {
@@ -1090,6 +1143,13 @@ export function runMigrations(): void {
     migration008_AddRegionsCoordinates();
     recordVersion(8);
     log.info('[SQLite] Applied version 8');
+  }
+
+  // マイグレーション9: spot_id → user_spot_idリネーム
+  if (currentVersion < 9) {
+    migration009_RenameSpotIdToUserSpotId();
+    recordVersion(9);
+    log.info('[SQLite] Applied version 9');
   }
 
   log.info('[SQLite] All migrations completed');

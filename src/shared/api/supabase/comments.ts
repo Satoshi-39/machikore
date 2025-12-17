@@ -21,7 +21,7 @@ export interface CommentWithUser {
   id: string;
   user_id: string;
   map_id: string | null;
-  spot_id: string | null;
+  user_spot_id: string | null;
   content: string;
   created_at: string;
   updated_at: string;
@@ -55,7 +55,7 @@ function mapComment(comment: any, currentUserId?: string | null): CommentWithUse
     id: comment.id,
     user_id: comment.user_id,
     map_id: comment.map_id,
-    spot_id: comment.spot_id,
+    user_spot_id: comment.user_spot_id,
     content: comment.content,
     created_at: comment.created_at,
     updated_at: comment.updated_at,
@@ -96,7 +96,7 @@ export async function getSpotComments(
         user_id
       )
     `)
-    .eq('spot_id', spotId)
+    .eq('user_spot_id', spotId)
     .is('parent_id', null)
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1);
@@ -120,7 +120,7 @@ export async function addSpotComment(
     .from('comments')
     .insert({
       user_id: userId,
-      spot_id: spotId,
+      user_spot_id: spotId,
       content,
       depth: 0,
     })
@@ -140,7 +140,7 @@ export async function addSpotComment(
   }
 
   // user_spotsのcomments_countをインクリメント
-  const { error: rpcError } = await supabase.rpc('increment_spot_comments_count', { spot_id: spotId });
+  const { error: rpcError } = await supabase.rpc('increment_user_spot_comments_count', { user_spot_id: spotId });
   if (rpcError) {
     log.error('[Comments] RPC Error:', rpcError);
   }
@@ -197,7 +197,7 @@ export async function deleteComment(
   // 返信の場合は親コメントのreplies_countはDBトリガーで自動更新される
   if (!parentId) {
     if (spotId) {
-      const { error: rpcError } = await supabase.rpc('decrement_spot_comments_count', { spot_id: spotId });
+      const { error: rpcError } = await supabase.rpc('decrement_user_spot_comments_count', { user_spot_id: spotId });
       if (rpcError) {
         log.error('[Comments] RPC Error:', rpcError);
       }
@@ -218,7 +218,7 @@ export async function getSpotCommentsCount(spotId: string): Promise<number> {
   const { count, error } = await supabase
     .from('comments')
     .select('*', { count: 'exact', head: true })
-    .eq('spot_id', spotId)
+    .eq('user_spot_id', spotId)
     .is('parent_id', null);
 
   if (error) {
@@ -432,7 +432,7 @@ export async function addReplyComment(
     .from('comments')
     .insert({
       user_id: userId,
-      spot_id: parentComment.spot_id,
+      user_spot_id: parentComment.user_spot_id,
       map_id: parentComment.map_id,
       parent_id: parentComment.id,
       root_id: rootId,

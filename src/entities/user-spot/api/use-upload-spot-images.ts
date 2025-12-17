@@ -65,7 +65,7 @@ export function useUploadSpotImages() {
 
           // Supabaseのimagesテーブルに保存
           const imageRow = await insertSpotImage({
-            spot_id: spotId,
+            user_spot_id: spotId,
             cloud_path: result.data.url,
             local_path: image.uri,
             width: image.width,

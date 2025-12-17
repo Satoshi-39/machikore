@@ -26,7 +26,7 @@ export interface Bookmark {
   id: string;
   user_id: string;
   map_id: string | null;
-  spot_id: string | null;
+  user_spot_id: string | null;
   master_spot_id: string | null;
   folder_id: string | null;
   created_at: string;
@@ -199,7 +199,7 @@ export async function bookmarkSpot(
     .from('bookmarks')
     .insert({
       user_id: userId,
-      spot_id: spotId,
+      user_spot_id: spotId,
       folder_id: folderId || null,
     })
     .select()
@@ -210,7 +210,7 @@ export async function bookmarkSpot(
   }
 
   // ブックマーク数をインクリメント
-  await supabase.rpc('increment_spot_bookmarks_count', { p_spot_id: spotId });
+  await supabase.rpc('increment_user_spot_bookmarks_count', { user_spot_id: spotId });
 
   return data;
 }
@@ -265,14 +265,14 @@ export async function unbookmarkSpot(userId: string, spotId: string): Promise<vo
     .from('bookmarks')
     .delete()
     .eq('user_id', userId)
-    .eq('spot_id', spotId);
+    .eq('user_spot_id', spotId);
 
   if (error) {
     handleSupabaseError('unbookmarkSpot', error);
   }
 
   // ブックマーク数をデクリメント
-  await supabase.rpc('decrement_spot_bookmarks_count', { p_spot_id: spotId });
+  await supabase.rpc('decrement_user_spot_bookmarks_count', { user_spot_id: spotId });
 }
 
 /**
@@ -371,7 +371,7 @@ export async function checkSpotBookmarked(
     .from('bookmarks')
     .select('id')
     .eq('user_id', userId)
-    .eq('spot_id', spotId)
+    .eq('user_spot_id', spotId)
     .maybeSingle();
 
   if (error) {
@@ -435,7 +435,7 @@ export async function getSpotBookmarkInfo(
     .from('bookmarks')
     .select('id, folder_id')
     .eq('user_id', userId)
-    .eq('spot_id', spotId);
+    .eq('user_spot_id', spotId);
 
   if (error) {
     handleSupabaseError('getSpotBookmarkInfo', error);
@@ -498,7 +498,7 @@ export async function unbookmarkSpotFromFolder(
     .from('bookmarks')
     .delete()
     .eq('user_id', userId)
-    .eq('spot_id', spotId);
+    .eq('user_spot_id', spotId);
 
   if (folderId === null) {
     query = query.is('folder_id', null);
@@ -513,7 +513,7 @@ export async function unbookmarkSpotFromFolder(
   }
 
   // ブックマーク数をデクリメント
-  await supabase.rpc('decrement_spot_bookmarks_count', { p_spot_id: spotId });
+  await supabase.rpc('decrement_user_spot_bookmarks_count', { user_spot_id: spotId });
 }
 
 /**
@@ -559,7 +559,7 @@ export async function getUserBookmarks(
       id,
       user_id,
       map_id,
-      spot_id,
+      user_spot_id,
       master_spot_id,
       folder_id,
       created_at,
@@ -627,7 +627,7 @@ export async function getUserBookmarks(
     id: bookmark.id,
     user_id: bookmark.user_id,
     map_id: bookmark.map_id,
-    spot_id: bookmark.spot_id,
+    user_spot_id: bookmark.user_spot_id,
     master_spot_id: bookmark.master_spot_id,
     folder_id: bookmark.folder_id,
     created_at: bookmark.created_at,

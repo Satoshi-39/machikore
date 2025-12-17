@@ -22,7 +22,7 @@ export async function checkSpotLiked(userId: string, spotId: string): Promise<bo
     .from('likes')
     .select('id')
     .eq('user_id', userId)
-    .eq('spot_id', spotId)
+    .eq('user_spot_id', spotId)
     .maybeSingle();
 
   if (error) {
@@ -38,7 +38,7 @@ export async function checkSpotLiked(userId: string, spotId: string): Promise<bo
 export async function addSpotLike(userId: string, spotId: string): Promise<LikeRow> {
   const insertData: LikeInsert = {
     user_id: userId,
-    spot_id: spotId,
+    user_spot_id: spotId,
   };
 
   const { data, error } = await supabase
@@ -52,7 +52,7 @@ export async function addSpotLike(userId: string, spotId: string): Promise<LikeR
   }
 
   // user_spotsのlikes_countをインクリメント
-  const { error: rpcError } = await supabase.rpc('increment_spot_likes_count', { spot_id: spotId });
+  const { error: rpcError } = await supabase.rpc('increment_user_spot_likes_count', { user_spot_id: spotId });
   if (rpcError) {
     log.error('[Likes] RPC Error:', rpcError);
   }
@@ -68,14 +68,14 @@ export async function removeSpotLike(userId: string, spotId: string): Promise<vo
     .from('likes')
     .delete()
     .eq('user_id', userId)
-    .eq('spot_id', spotId);
+    .eq('user_spot_id', spotId);
 
   if (error) {
     handleSupabaseError('removeSpotLike', error);
   }
 
   // user_spotsのlikes_countをデクリメント
-  const { error: rpcError } = await supabase.rpc('decrement_spot_likes_count', { spot_id: spotId });
+  const { error: rpcError } = await supabase.rpc('decrement_user_spot_likes_count', { user_spot_id: spotId });
   if (rpcError) {
     log.error('[Likes] RPC Error:', rpcError);
   }
@@ -104,7 +104,7 @@ export async function getSpotLikesCount(spotId: string): Promise<number> {
   const { count, error } = await supabase
     .from('likes')
     .select('*', { count: 'exact', head: true })
-    .eq('spot_id', spotId);
+    .eq('user_spot_id', spotId);
 
   if (error) {
     handleSupabaseError('getSpotLikesCount', error);
@@ -261,7 +261,7 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
       )
     `)
     .eq('user_id', userId)
-    .not('spot_id', 'is', null)
+    .not('user_spot_id', 'is', null)
     .order('created_at', { ascending: false })
     .limit(limit);
 
@@ -317,7 +317,7 @@ export async function getSpotLikers(spotId: string, limit: number = 50) {
         avatar_url
       )
     `)
-    .eq('spot_id', spotId)
+    .eq('user_spot_id', spotId)
     .order('created_at', { ascending: false })
     .limit(limit);
 

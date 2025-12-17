@@ -371,7 +371,7 @@ export function deleteAllSpotsByUser(userId: UUID): void {
  */
 export function getSpotImages(spotId: UUID): ImageRow[] {
   return queryAll<ImageRow>(
-    'SELECT * FROM images WHERE spot_id = ? ORDER BY order_index ASC;',
+    'SELECT * FROM images WHERE user_spot_id = ? ORDER BY order_index ASC;',
     [spotId]
   );
 }
@@ -383,14 +383,14 @@ export function insertSpotImage(image: ImageRow): void {
   execute(
     `
     INSERT INTO images (
-      id, spot_id, local_path, cloud_path, width, height,
+      id, user_spot_id, local_path, cloud_path, width, height,
       file_size, order_index, created_at, updated_at, synced_at, is_synced
     )
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       image.id,
-      image.spot_id,
+      image.user_spot_id,
       image.local_path,
       image.cloud_path,
       image.width,
@@ -412,14 +412,14 @@ export function bulkInsertSpotImages(images: ImageRow[]): void {
   const statements = images.map((image) => ({
     sql: `
       INSERT INTO images (
-        id, spot_id, local_path, cloud_path, width, height,
+        id, user_spot_id, local_path, cloud_path, width, height,
         file_size, order_index, created_at, updated_at, synced_at, is_synced
       )
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     params: [
       image.id,
-      image.spot_id,
+      image.user_spot_id,
       image.local_path,
       image.cloud_path,
       image.width,
@@ -447,7 +447,7 @@ export function deleteSpotImage(imageId: UUID): void {
  * スポットの全画像を削除
  */
 export function deleteAllSpotImages(spotId: UUID): void {
-  execute('DELETE FROM images WHERE spot_id = ?;', [spotId]);
+  execute('DELETE FROM images WHERE user_spot_id = ?;', [spotId]);
 }
 
 // ===============================

@@ -46,8 +46,8 @@ export function useAddReplyComment() {
       // 返信一覧を再取得（プレフィックスで全てのcurrentUserIdパターンをinvalidate）
       queryClient.invalidateQueries({ queryKey: ['comments', 'replies', parentComment.id] });
       // 親コメントの返信数を更新するためコメント一覧も再取得
-      if (parentComment.spot_id) {
-        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', parentComment.spot_id] });
+      if (parentComment.user_spot_id) {
+        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', parentComment.user_spot_id] });
       }
       if (parentComment.map_id) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'map', parentComment.map_id] });

@@ -100,7 +100,7 @@ export function useSpotForm() {
         if (result.success) {
           // imagesテーブルに保存
           await insertSpotImage({
-            spot_id: spotId,
+            user_spot_id: spotId,
             cloud_path: result.data.url,
             local_path: image.uri,
             width: image.width,
