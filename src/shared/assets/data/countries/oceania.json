@@ -1,0 +1,83 @@
+[
+  {
+    "id": "australia",
+    "name": "オーストラリア",
+    "name_en": "Australia",
+    "name_kana": "",
+    "latitude": -25.2744,
+    "longitude": 133.7751,
+    "country_code": "au"
+  },
+  {
+    "id": "new_zealand",
+    "name": "ニュージーランド",
+    "name_en": "New Zealand",
+    "name_kana": "",
+    "latitude": -40.9006,
+    "longitude": 174.886,
+    "country_code": "nz"
+  },
+  {
+    "id": "fiji",
+    "name": "フィジー",
+    "name_en": "Fiji",
+    "name_kana": "",
+    "latitude": -17.7134,
+    "longitude": 178.065,
+    "country_code": "fj"
+  },
+  {
+    "id": "guam",
+    "name": "グアム",
+    "name_en": "Guam",
+    "name_kana": "",
+    "latitude": 13.4443,
+    "longitude": 144.7937,
+    "country_code": "gu"
+  },
+  {
+    "id": "hawaii",
+    "name": "ハワイ",
+    "name_en": "Hawaii",
+    "name_kana": "",
+    "latitude": 19.8968,
+    "longitude": -155.5828,
+    "country_code": "us-hi"
+  },
+  {
+    "id": "new_caledonia",
+    "name": "ニューカレドニア",
+    "name_en": "New Caledonia",
+    "name_kana": "",
+    "latitude": -20.9043,
+    "longitude": 165.618,
+    "country_code": "nc"
+  },
+  {
+    "id": "tahiti",
+    "name": "タヒチ",
+    "name_en": "Tahiti",
+    "name_kana": "",
+    "latitude": -17.6509,
+    "longitude": -149.4260,
+    "country_code": "pf"
+  },
+  {
+    "id": "palau",
+    "name": "パラオ",
+    "name_en": "Palau",
+    "name_kana": "",
+    "latitude": 7.515,
+    "longitude": 134.5825,
+    "country_code": "pw"
+  },
+  {
+    "id": "saipan",
+    "name": "サイパン",
+    "name_en": "Saipan",
+    "name_kana": "",
+    "latitude": 15.1801,
+    "longitude": 145.7496,
+    "country_code": "mp"
+  }
+]

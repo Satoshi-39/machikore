@@ -7,10 +7,13 @@
 
 import React, { useCallback } from 'react';
 import { View, Text, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
-// エリア定義
+// 主要都市エリア定義
 const AREAS = [
   { id: 'tokyo', label: '東京', emoji: '🗼' },
   { id: 'osaka', label: '大阪', emoji: '🏯' },
@@ -24,6 +27,7 @@ const AREAS = [
 
 export function AreaSection() {
   const router = useRouter();
+  const isDarkMode = useIsDarkMode();
 
   const handleAreaPress = useCallback(
     (areaLabel: string) => {
@@ -32,12 +36,28 @@ export function AreaSection() {
     [router]
   );
 
+  const handleShowAllPrefectures = useCallback(() => {
+    router.push('/(tabs)/discover/prefectures' as Href);
+  }, [router]);
+
   return (
     <View className="py-4 px-4">
       {/* セクションタイトル */}
-      <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-3">
-        📍 エリアから探す
-      </Text>
+      <View className="flex-row items-center justify-between mb-3">
+        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+          📍 エリアから探す
+        </Text>
+        <Pressable
+          onPress={handleShowAllPrefectures}
+          className="active:opacity-70"
+        >
+          <Ionicons
+            name="chevron-forward"
+            size={20}
+            color={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary}
+          />
+        </Pressable>
+      </View>
 
       {/* 2列グリッド */}
       <View className="flex-row flex-wrap" style={{ marginHorizontal: -6 }}>

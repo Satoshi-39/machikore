@@ -245,8 +245,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
 
 
-    // 街マーカータップ時のハンドラー
-    const handleMarkerPress = (event: any) => {
+    // 街マーカータップ時のハンドラー（MachiLabels専用）
+    const handleMachiMarkerPress = (event: any) => {
       const feature = event.features?.[0];
       if (!feature) return;
 
@@ -255,6 +255,20 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         const machi = machiMap.get(machiId);
         if (machi) {
           handleMachiSelect(machi);
+        }
+      }
+    };
+
+    // スポットマーカータップ時のハンドラー（SpotLabels専用）
+    const handleSpotMarkerPress = (event: any) => {
+      const feature = event.features?.[0];
+      if (!feature) return;
+
+      const spotId = feature.properties?.id;
+      if (spotId) {
+        const spot = masterSpotMap.get(spotId);
+        if (spot) {
+          handleSpotSelect(spot);
         }
       }
     };
@@ -434,7 +448,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {(visitFilter === 'visited' || visitFilter === 'not_visited') && (
           <MachiLabels
             geoJson={machiGeoJson}
-            onPress={handleMarkerPress}
+            onPress={handleMachiMarkerPress}
             visitFilter={visitFilter}
           />
         )}
@@ -443,8 +457,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {visitFilter === 'favorite' && (
           <SpotLabels
             geoJson={masterSpotsGeoJson}
-            onPress={handleMachiSpotPress}
+            onPress={handleSpotMarkerPress}
             selectedSpotId={selectedSpot?.id}
+            isFavoriteFilter
           />
         )}
       </Mapbox.MapView>

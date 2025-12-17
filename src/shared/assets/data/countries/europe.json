@@ -1,0 +1,182 @@
+[
+  {
+    "id": "united_kingdom",
+    "name": "イギリス",
+    "name_en": "United Kingdom",
+    "name_kana": "",
+    "latitude": 55.3781,
+    "longitude": -3.436,
+    "country_code": "gb"
+  },
+  {
+    "id": "france",
+    "name": "フランス",
+    "name_en": "France",
+    "name_kana": "",
+    "latitude": 46.2276,
+    "longitude": 2.2137,
+    "country_code": "fr"
+  },
+  {
+    "id": "germany",
+    "name": "ドイツ",
+    "name_en": "Germany",
+    "name_kana": "",
+    "latitude": 51.1657,
+    "longitude": 10.4515,
+    "country_code": "de"
+  },
+  {
+    "id": "italy",
+    "name": "イタリア",
+    "name_en": "Italy",
+    "name_kana": "",
+    "latitude": 41.8719,
+    "longitude": 12.5674,
+    "country_code": "it"
+  },
+  {
+    "id": "spain",
+    "name": "スペイン",
+    "name_en": "Spain",
+    "name_kana": "",
+    "latitude": 40.4637,
+    "longitude": -3.7492,
+    "country_code": "es"
+  },
+  {
+    "id": "portugal",
+    "name": "ポルトガル",
+    "name_en": "Portugal",
+    "name_kana": "",
+    "latitude": 39.3999,
+    "longitude": -8.2245,
+    "country_code": "pt"
+  },
+  {
+    "id": "netherlands",
+    "name": "オランダ",
+    "name_en": "Netherlands",
+    "name_kana": "",
+    "latitude": 52.1326,
+    "longitude": 5.2913,
+    "country_code": "nl"
+  },
+  {
+    "id": "belgium",
+    "name": "ベルギー",
+    "name_en": "Belgium",
+    "name_kana": "",
+    "latitude": 50.5039,
+    "longitude": 4.4699,
+    "country_code": "be"
+  },
+  {
+    "id": "switzerland",
+    "name": "スイス",
+    "name_en": "Switzerland",
+    "name_kana": "",
+    "latitude": 46.8182,
+    "longitude": 8.2275,
+    "country_code": "ch"
+  },
+  {
+    "id": "austria",
+    "name": "オーストリア",
+    "name_en": "Austria",
+    "name_kana": "",
+    "latitude": 47.5162,
+    "longitude": 14.5501,
+    "country_code": "at"
+  },
+  {
+    "id": "sweden",
+    "name": "スウェーデン",
+    "name_en": "Sweden",
+    "name_kana": "",
+    "latitude": 60.1282,
+    "longitude": 18.6435,
+    "country_code": "se"
+  },
+  {
+    "id": "norway",
+    "name": "ノルウェー",
+    "name_en": "Norway",
+    "name_kana": "",
+    "latitude": 60.472,
+    "longitude": 8.4689,
+    "country_code": "no"
+  },
+  {
+    "id": "denmark",
+    "name": "デンマーク",
+    "name_en": "Denmark",
+    "name_kana": "",
+    "latitude": 56.2639,
+    "longitude": 9.5018,
+    "country_code": "dk"
+  },
+  {
+    "id": "finland",
+    "name": "フィンランド",
+    "name_en": "Finland",
+    "name_kana": "",
+    "latitude": 61.9241,
+    "longitude": 25.7482,
+    "country_code": "fi"
+  },
+  {
+    "id": "ireland",
+    "name": "アイルランド",
+    "name_en": "Ireland",
+    "name_kana": "",
+    "latitude": 53.1424,
+    "longitude": -7.6921,
+    "country_code": "ie"
+  },
+  {
+    "id": "greece",
+    "name": "ギリシャ",
+    "name_en": "Greece",
+    "name_kana": "",
+    "latitude": 39.0742,
+    "longitude": 21.8243,
+    "country_code": "gr"
+  },
+  {
+    "id": "poland",
+    "name": "ポーランド",
+    "name_en": "Poland",
+    "name_kana": "",
+    "latitude": 51.9194,
+    "longitude": 19.1451,
+    "country_code": "pl"
+  },
+  {
+    "id": "czech_republic",
+    "name": "チェコ",
+    "name_en": "Czech Republic",
+    "name_kana": "",
+    "latitude": 49.8175,
+    "longitude": 15.473,
+    "country_code": "cz"
+  },
+  {
+    "id": "hungary",
+    "name": "ハンガリー",
+    "name_en": "Hungary",
+    "name_kana": "",
+    "latitude": 47.1625,
+    "longitude": 19.5033,
+    "country_code": "hu"
+  },
+  {
+    "id": "croatia",
+    "name": "クロアチア",
+    "name_en": "Croatia",
+    "name_kana": "",
+    "latitude": 45.1,
+    "longitude": 15.2,
+    "country_code": "hr"
+  }
+]

@@ -2,8 +2,18 @@
  * 国データ読み込みユーティリティ
  */
 
-import countriesData from '@/shared/assets/data/countries.json';
 import type { CountryRow } from '@/shared/types/database.types';
+
+// 各大陸の国データをインポート
+import eastAsiaCountries from '@/shared/assets/data/countries/east_asia.json';
+import southeastAsiaCountries from '@/shared/assets/data/countries/southeast_asia.json';
+import southAsiaCountries from '@/shared/assets/data/countries/south_asia.json';
+import middleEastCountries from '@/shared/assets/data/countries/middle_east.json';
+import europeCountries from '@/shared/assets/data/countries/europe.json';
+import northAmericaCountries from '@/shared/assets/data/countries/north_america.json';
+import southAmericaCountries from '@/shared/assets/data/countries/south_america.json';
+import oceaniaCountries from '@/shared/assets/data/countries/oceania.json';
+import africaCountries from '@/shared/assets/data/countries/africa.json';
 
 // 国データの型（JSONから読み込む形式）
 interface CountryJsonData {
@@ -16,11 +26,25 @@ interface CountryJsonData {
   country_code: string;
 }
 
+// 大陸IDと国データのマッピング
+const countriesByContinent: Record<string, CountryJsonData[]> = {
+  east_asia: eastAsiaCountries as CountryJsonData[],
+  southeast_asia: southeastAsiaCountries as CountryJsonData[],
+  south_asia: southAsiaCountries as CountryJsonData[],
+  middle_east: middleEastCountries as CountryJsonData[],
+  europe: europeCountries as CountryJsonData[],
+  north_america: northAmericaCountries as CountryJsonData[],
+  south_america: southAmericaCountries as CountryJsonData[],
+  oceania: oceaniaCountries as CountryJsonData[],
+  africa: africaCountries as CountryJsonData[],
+};
+
 /**
- * 国データを取得（JSONから）
+ * JSONデータをCountryRowに変換
  */
-export function getCountriesData(): CountryRow[] {
-  return (countriesData as CountryJsonData[]).map((country) => ({
+function toCountryRow(country: CountryJsonData, continentId: string): CountryRow {
+  const now = new Date().toISOString();
+  return {
     id: country.id,
     name: country.name,
     name_en: country.name_en,
@@ -28,7 +52,30 @@ export function getCountriesData(): CountryRow[] {
     latitude: country.latitude,
     longitude: country.longitude,
     country_code: country.country_code,
-  }));
+    continent_id: continentId,
+    created_at: now,
+    updated_at: now,
+  };
+}
+
+/**
+ * 全ての国データを取得（JSONから）
+ */
+export function getCountriesData(): CountryRow[] {
+  return Object.entries(countriesByContinent).flatMap(([continentId, countries]) =>
+    countries.map((country) => toCountryRow(country, continentId))
+  );
+}
+
+/**
+ * 特定の大陸の国データを取得
+ */
+export function getCountriesByContinent(continentId: string): CountryRow[] {
+  const countries = countriesByContinent[continentId];
+  if (!countries) {
+    return [];
+  }
+  return countries.map((country) => toCountryRow(country, continentId));
 }
 
 /**
@@ -36,6 +83,13 @@ export function getCountriesData(): CountryRow[] {
  */
 export function getCountryByCode(countryCode: string): CountryRow | undefined {
   return getCountriesData().find((c) => c.country_code === countryCode);
+}
+
+/**
+ * 利用可能な大陸IDの一覧を取得
+ */
+export function getAvailableContinentIds(): string[] {
+  return Object.keys(countriesByContinent);
 }
 
 /**

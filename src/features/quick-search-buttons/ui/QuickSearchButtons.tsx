@@ -24,7 +24,7 @@ const FILTER_OPTIONS: {
 }[] = [
   { id: 'visited', label: '訪問済み', icon: 'checkmark-circle', isFilter: true, filterValue: 'visited' },
   { id: 'not_visited', label: '未訪問', icon: 'ellipse-outline', isFilter: true, filterValue: 'not_visited' },
-  { id: 'favorite', label: 'お気に入り', icon: 'heart', isFilter: true, filterValue: 'favorite' },
+  { id: 'favorite', label: 'お気に入り', icon: 'star', isFilter: true, filterValue: 'favorite' },
   { id: 'tourism', label: '観光', icon: 'camera', isFilter: false, searchQuery: '観光' },
   { id: 'shopping', label: 'ショッピング', icon: 'bag', isFilter: false, searchQuery: 'ショッピング' },
   { id: 'station', label: '駅', icon: 'train', isFilter: false, searchQuery: '駅' },

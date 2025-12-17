@@ -1,0 +1,83 @@
+[
+  {
+    "id": "uae",
+    "name": "アラブ首長国連邦",
+    "name_en": "United Arab Emirates",
+    "name_kana": "",
+    "latitude": 23.4241,
+    "longitude": 53.8478,
+    "country_code": "ae"
+  },
+  {
+    "id": "turkey",
+    "name": "トルコ",
+    "name_en": "Turkey",
+    "name_kana": "",
+    "latitude": 38.9637,
+    "longitude": 35.2433,
+    "country_code": "tr"
+  },
+  {
+    "id": "israel",
+    "name": "イスラエル",
+    "name_en": "Israel",
+    "name_kana": "",
+    "latitude": 31.0461,
+    "longitude": 34.8516,
+    "country_code": "il"
+  },
+  {
+    "id": "qatar",
+    "name": "カタール",
+    "name_en": "Qatar",
+    "name_kana": "",
+    "latitude": 25.3548,
+    "longitude": 51.1839,
+    "country_code": "qa"
+  },
+  {
+    "id": "saudi_arabia",
+    "name": "サウジアラビア",
+    "name_en": "Saudi Arabia",
+    "name_kana": "",
+    "latitude": 23.8859,
+    "longitude": 45.0792,
+    "country_code": "sa"
+  },
+  {
+    "id": "jordan",
+    "name": "ヨルダン",
+    "name_en": "Jordan",
+    "name_kana": "",
+    "latitude": 30.5852,
+    "longitude": 36.2384,
+    "country_code": "jo"
+  },
+  {
+    "id": "oman",
+    "name": "オマーン",
+    "name_en": "Oman",
+    "name_kana": "",
+    "latitude": 21.4735,
+    "longitude": 55.9754,
+    "country_code": "om"
+  },
+  {
+    "id": "bahrain",
+    "name": "バーレーン",
+    "name_en": "Bahrain",
+    "name_kana": "",
+    "latitude": 26.0667,
+    "longitude": 50.5577,
+    "country_code": "bh"
+  },
+  {
+    "id": "kuwait",
+    "name": "クウェート",
+    "name_en": "Kuwait",
+    "name_kana": "",
+    "latitude": 29.3117,
+    "longitude": 47.4818,
+    "country_code": "kw"
+  }
+]

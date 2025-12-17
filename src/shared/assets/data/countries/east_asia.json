@@ -9,15 +9,6 @@
     "country_code": "jp"
   },
   {
-    "id": "usa",
-    "name": "アメリカ",
-    "name_en": "United States",
-    "name_kana": "",
-    "latitude": 37.0902,
-    "longitude": -95.7129,
-    "country_code": "us"
-  },
-  {
     "id": "south_korea",
     "name": "韓国",
     "name_en": "South Korea",
@@ -45,12 +36,30 @@
     "country_code": "cn"
   },
   {
-    "id": "thailand",
-    "name": "タイ",
-    "name_en": "Thailand",
+    "id": "hong_kong",
+    "name": "香港",
+    "name_en": "Hong Kong",
     "name_kana": "",
-    "latitude": 15.87,
-    "longitude": 100.9925,
-    "country_code": "th"
+    "latitude": 22.3193,
+    "longitude": 114.1694,
+    "country_code": "hk"
+  },
+  {
+    "id": "macau",
+    "name": "マカオ",
+    "name_en": "Macau",
+    "name_kana": "",
+    "latitude": 22.1987,
+    "longitude": 113.5439,
+    "country_code": "mo"
+  },
+  {
+    "id": "mongolia",
+    "name": "モンゴル",
+    "name_en": "Mongolia",
+    "name_kana": "",
+    "latitude": 46.8625,
+    "longitude": 103.8467,
+    "country_code": "mn"
   }
 ]

@@ -211,6 +211,7 @@ function RecentlyViewedCard({ map, onPress }: RecentlyViewedCardProps) {
 
 export function RecentlyViewedSection() {
   const router = useRouter();
+  const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
   const { data: viewHistory, isLoading, error } = useRecentViewHistory(currentUserId, 10);
 
@@ -245,7 +246,11 @@ export function RecentlyViewedSection() {
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
           最近見たマップ
         </Text>
-        <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
+        <Ionicons
+          name="chevron-forward"
+          size={20}
+          color={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary}
+        />
       </Pressable>
 
       {isLoading ? (

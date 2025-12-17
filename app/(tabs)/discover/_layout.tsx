@@ -12,6 +12,8 @@ export default function DiscoverLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="default-map" />
       <Stack.Screen name="tag-results" />
+      <Stack.Screen name="prefectures" />
+      <Stack.Screen name="countries" />
       <Stack.Screen name="view-history" />
       <Stack.Screen name="today-picks" />
       <Stack.Screen name="popular-maps" />

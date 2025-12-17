@@ -1,0 +1,29 @@
+[
+  {
+    "id": "usa",
+    "name": "アメリカ",
+    "name_en": "United States",
+    "name_kana": "",
+    "latitude": 37.0902,
+    "longitude": -95.7129,
+    "country_code": "us"
+  },
+  {
+    "id": "canada",
+    "name": "カナダ",
+    "name_en": "Canada",
+    "name_kana": "",
+    "latitude": 56.1304,
+    "longitude": -106.3468,
+    "country_code": "ca"
+  },
+  {
+    "id": "mexico",
+    "name": "メキシコ",
+    "name_en": "Mexico",
+    "name_kana": "",
+    "latitude": 23.6345,
+    "longitude": -102.5528,
+    "country_code": "mx"
+  }
+]

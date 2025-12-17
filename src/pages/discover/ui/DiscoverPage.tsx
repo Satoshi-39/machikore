@@ -15,6 +15,7 @@ import { FeaturedCarousel } from '@/widgets/featured-carousel';
 import { RecentlyViewedSection } from '@/widgets/recently-viewed';
 import { TodayRankingSection, PopularRankingSection } from '@/widgets/map-ranking';
 import { AreaSection } from '@/widgets/area-section';
+import { WorldSection } from '@/widgets/world-section';
 import { CategoryMapsSection } from '@/widgets/category-maps';
 
 export function DiscoverPage() {
@@ -75,8 +76,11 @@ export function DiscoverPage() {
               {/* 人気マップランキング */}
               <PopularRankingSection />
 
-              {/* エリア別 */}
+              {/* エリア別（日本） */}
               <AreaSection />
+
+              {/* 海外 */}
+              <WorldSection />
             </>
           ) : (
             /* カテゴリ選択時: そのカテゴリのマップ一覧 */

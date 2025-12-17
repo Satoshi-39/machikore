@@ -22,9 +22,13 @@ interface SpotLabelsProps {
   onPress: (event: any) => void;
   /** 選択中のスポットID（選択中は常に表示） */
   selectedSpotId?: string | null;
+  /** お気に入りフィルターが適用されているか（trueの場合はズーム制限なし） */
+  isFavoriteFilter?: boolean;
 }
 
-export function SpotLabels({ geoJson, onPress, selectedSpotId }: SpotLabelsProps) {
+export function SpotLabels({ geoJson, onPress, selectedSpotId, isFavoriteFilter = false }: SpotLabelsProps) {
+  // お気に入りフィルター時はズーム制限なし、通常時はズーム13以上
+  const minZoom = isFavoriteFilter ? 0 : 13;
   return (
     <>
       {/* アイコン画像を登録 */}
@@ -38,7 +42,7 @@ export function SpotLabels({ geoJson, onPress, selectedSpotId }: SpotLabelsProps
         {/* 飲食店系 - アイコン + テキストオレンジ */}
         <Mapbox.SymbolLayer
           id="master-spots-food"
-          minZoomLevel={13}
+          minZoomLevel={minZoom}
           filter={selectedSpotId
             ? ['all', ['==', ['get', 'category'], 'food'], ['!=', ['get', 'id'], selectedSpotId]]
             : ['==', ['get', 'category'], 'food']
@@ -62,7 +66,7 @@ export function SpotLabels({ geoJson, onPress, selectedSpotId }: SpotLabelsProps
         {/* ショッピング系 - アイコン + テキスト紫 */}
         <Mapbox.SymbolLayer
           id="master-spots-shopping"
-          minZoomLevel={13}
+          minZoomLevel={minZoom}
           filter={selectedSpotId
             ? ['all', ['==', ['get', 'category'], 'shopping'], ['!=', ['get', 'id'], selectedSpotId]]
             : ['==', ['get', 'category'], 'shopping']
@@ -86,7 +90,7 @@ export function SpotLabels({ geoJson, onPress, selectedSpotId }: SpotLabelsProps
         {/* 公園・観光地系 - アイコン + テキスト緑 */}
         <Mapbox.SymbolLayer
           id="master-spots-tourism"
-          minZoomLevel={13}
+          minZoomLevel={minZoom}
           filter={selectedSpotId
             ? ['all', ['==', ['get', 'category'], 'tourism'], ['!=', ['get', 'id'], selectedSpotId]]
             : ['==', ['get', 'category'], 'tourism']
@@ -110,7 +114,7 @@ export function SpotLabels({ geoJson, onPress, selectedSpotId }: SpotLabelsProps
         {/* 交通系 - アイコン + テキスト青 */}
         <Mapbox.SymbolLayer
           id="master-spots-transit"
-          minZoomLevel={13}
+          minZoomLevel={minZoom}
           filter={selectedSpotId
             ? ['all', ['==', ['get', 'category'], 'transit'], ['!=', ['get', 'id'], selectedSpotId]]
             : ['==', ['get', 'category'], 'transit']
@@ -134,7 +138,7 @@ export function SpotLabels({ geoJson, onPress, selectedSpotId }: SpotLabelsProps
         {/* その他 - アイコン + テキスト薄紫 */}
         <Mapbox.SymbolLayer
           id="master-spots-other"
-          minZoomLevel={13}
+          minZoomLevel={minZoom}
           filter={selectedSpotId
             ? ['all', ['==', ['get', 'category'], 'other'], ['!=', ['get', 'id'], selectedSpotId]]
             : ['==', ['get', 'category'], 'other']

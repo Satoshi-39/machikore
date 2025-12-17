@@ -1,0 +1,47 @@
+[
+  {
+    "id": "brazil",
+    "name": "ブラジル",
+    "name_en": "Brazil",
+    "name_kana": "",
+    "latitude": -14.235,
+    "longitude": -51.9253,
+    "country_code": "br"
+  },
+  {
+    "id": "argentina",
+    "name": "アルゼンチン",
+    "name_en": "Argentina",
+    "name_kana": "",
+    "latitude": -38.4161,
+    "longitude": -63.6167,
+    "country_code": "ar"
+  },
+  {
+    "id": "chile",
+    "name": "チリ",
+    "name_en": "Chile",
+    "name_kana": "",
+    "latitude": -35.6751,
+    "longitude": -71.543,
+    "country_code": "cl"
+  },
+  {
+    "id": "peru",
+    "name": "ペルー",
+    "name_en": "Peru",
+    "name_kana": "",
+    "latitude": -9.19,
+    "longitude": -75.0152,
+    "country_code": "pe"
+  },
+  {
+    "id": "colombia",
+    "name": "コロンビア",
+    "name_en": "Colombia",
+    "name_kana": "",
+    "latitude": 4.5709,
+    "longitude": -74.2973,
+    "country_code": "co"
+  }
+]

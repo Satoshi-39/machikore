@@ -318,9 +318,9 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
           >
             <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
               <Ionicons
-                name={isFavorited ? 'heart' : 'heart-outline'}
+                name={isFavorited ? 'star' : 'star-outline'}
                 size={24}
-                color={isFavorited ? colors.danger : colors.text.secondary}
+                color={isFavorited ? colors.warning : colors.text.secondary}
               />
             </View>
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">お気に入り</Text>

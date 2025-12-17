@@ -12,14 +12,17 @@ import type { Href } from 'expo-router';
 import { useMapTagSearch } from '@/entities/map';
 import type { MapWithUser } from '@/shared/types';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { MapThumbnail } from '@/shared/ui';
 
 interface CategoryMapsCardProps {
   map: MapWithUser;
   onPress: () => void;
+  isDarkMode: boolean;
 }
 
-function CategoryMapsCard({ map, onPress }: CategoryMapsCardProps) {
+function CategoryMapsCard({ map, onPress, isDarkMode }: CategoryMapsCardProps) {
+  const iconColor = isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary;
   return (
     <Pressable
       onPress={onPress}
@@ -52,13 +55,13 @@ function CategoryMapsCard({ map, onPress }: CategoryMapsCardProps) {
         )}
         <View className="flex-row items-center mt-1 gap-3">
           <View className="flex-row items-center">
-            <Ionicons name="location-outline" size={14} color="#9CA3AF" />
+            <Ionicons name="location-outline" size={14} color={iconColor} />
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-1">
               {map.spots_count}
             </Text>
           </View>
           <View className="flex-row items-center">
-            <Ionicons name="heart-outline" size={14} color="#9CA3AF" />
+            <Ionicons name="heart-outline" size={14} color={iconColor} />
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-1">
               {map.likes_count}
             </Text>
@@ -67,7 +70,7 @@ function CategoryMapsCard({ map, onPress }: CategoryMapsCardProps) {
       </View>
 
       {/* 矢印 */}
-      <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
+      <Ionicons name="chevron-forward" size={20} color={iconColor} />
     </Pressable>
   );
 }
@@ -78,6 +81,7 @@ interface CategoryMapsSectionProps {
 
 export function CategoryMapsSection({ tag }: CategoryMapsSectionProps) {
   const router = useRouter();
+  const isDarkMode = useIsDarkMode();
   const { data: maps, isLoading, error } = useMapTagSearch(tag);
 
   const handleMapPress = useCallback(
@@ -108,7 +112,11 @@ export function CategoryMapsSection({ tag }: CategoryMapsSectionProps) {
   if (!maps || maps.length === 0) {
     return (
       <View className="flex-1 items-center justify-center py-12">
-        <Ionicons name="map-outline" size={48} color="#9CA3AF" />
+        <Ionicons
+          name="map-outline"
+          size={48}
+          color={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary}
+        />
         <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
           「{tag}」のマップが見つかりませんでした
         </Text>
@@ -121,7 +129,7 @@ export function CategoryMapsSection({ tag }: CategoryMapsSectionProps) {
       data={maps}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <CategoryMapsCard map={item} onPress={() => handleMapPress(item.id)} />
+        <CategoryMapsCard map={item} onPress={() => handleMapPress(item.id)} isDarkMode={isDarkMode} />
       )}
       showsVerticalScrollIndicator={false}
     />

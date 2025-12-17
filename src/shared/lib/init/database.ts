@@ -6,12 +6,16 @@ import * as FileSystem from 'expo-file-system/legacy';
 import {
   initializeDatabase,
   runMigrations,
+  bulkInsertContinents,
+  bulkInsertCountries,
   bulkInsertRegions,
   bulkInsertPrefectures,
+  getContinentCount,
+  getCountryCount,
   getRegionCount,
   getPrefectureCount,
 } from '@/shared/api/sqlite';
-import { getRegionsData, getPrefecturesData } from '@/shared/lib';
+import { getContinentsData, getCountriesData, getRegionsData, getPrefecturesData } from '@/shared/lib';
 import { seedSampleData } from './seed-data';
 import { cleanupSampleData } from './cleanup-data';
 import { log } from '@/shared/config/logger';
@@ -39,6 +43,30 @@ export async function initDatabase(): Promise<void> {
     log.debug('[Database] マイグレーション実行中...');
     runMigrations();
     log.debug('[Database] マイグレーション完了');
+
+    // 大陸データをチェック
+    const continentCount = getContinentCount();
+
+    if (continentCount === 0) {
+      log.debug('[Database] 大陸データを読み込み中...');
+      const continentsData = getContinentsData();
+      bulkInsertContinents(continentsData);
+      log.debug(`[Database] ${continentsData.length}件の大陸データを読み込み完了`);
+    } else {
+      log.debug(`[Database] 大陸データはすでに存在 (${continentCount}件)`);
+    }
+
+    // 国データをチェック
+    const countryCount = getCountryCount();
+
+    if (countryCount === 0) {
+      log.debug('[Database] 国データを読み込み中...');
+      const countriesData = getCountriesData();
+      bulkInsertCountries(countriesData);
+      log.debug(`[Database] ${countriesData.length}件の国データを読み込み完了`);
+    } else {
+      log.debug(`[Database] 国データはすでに存在 (${countryCount}件)`);
+    }
 
     // 地方データをチェック
     const regionCount = getRegionCount();

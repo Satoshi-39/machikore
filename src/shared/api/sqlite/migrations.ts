@@ -37,6 +37,7 @@ export function initializeDatabase(): void {
     db.execSync('DROP TABLE IF EXISTS cities;');
     db.execSync('DROP TABLE IF EXISTS prefectures;');
     db.execSync('DROP TABLE IF EXISTS regions;');
+    db.execSync('DROP TABLE IF EXISTS countries;');
     // 削除された古いテーブル
     db.execSync('DROP TABLE IF EXISTS posts;');
     db.execSync('DROP TABLE IF EXISTS schedules;');
@@ -76,7 +77,36 @@ export function initializeDatabase(): void {
       ON users(is_synced);
     `);
 
-    // 2. 地方テーブル（マスターデータ）
+    // 2. 大陸テーブル（マスターデータ）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS continents (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL UNIQUE,
+        name_en TEXT NOT NULL,
+        display_order INTEGER NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+    `);
+
+    // 2.5. 国テーブル（マスターデータ）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS countries (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL UNIQUE,
+        name_en TEXT NOT NULL,
+        name_kana TEXT,
+        latitude REAL,
+        longitude REAL,
+        country_code TEXT NOT NULL UNIQUE,
+        continent_id TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        FOREIGN KEY (continent_id) REFERENCES continents(id)
+      );
+    `);
+
+    // 3. 地方テーブル（マスターデータ）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS regions (
         id TEXT PRIMARY KEY,

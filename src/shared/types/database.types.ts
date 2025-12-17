@@ -299,6 +299,18 @@ export type BookmarkUpdate = Partial<Omit<BookmarkRow, 'id' | 'created_at'>>;
 // ===============================
 
 /**
+ * Continent (大陸マスター)
+ */
+export interface ContinentRow {
+  id: string;              // "east_asia", "europe"
+  name: string;            // "東アジア", "ヨーロッパ"
+  name_en: string;         // "East Asia", "Europe"
+  display_order: number;   // 表示順
+  created_at: string;
+  updated_at: string;
+}
+
+/**
  * Country (国マスター)
  */
 export interface CountryRow {
@@ -309,6 +321,9 @@ export interface CountryRow {
   latitude: number;        // 中心座標の緯度
   longitude: number;       // 中心座標の経度
   country_code: string;    // "jp", "us"
+  continent_id: string;    // "east_asia", "europe" (外部キー → continents.id)
+  created_at: string;
+  updated_at: string;
 }
 
 /**

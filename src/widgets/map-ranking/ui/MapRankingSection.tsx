@@ -221,6 +221,7 @@ interface MapRankingSectionProps {
 
 export function MapRankingSection({ title, maps, isLoading, error, showRank = false, seeAllHref }: MapRankingSectionProps) {
   const router = useRouter();
+  const isDarkMode = useIsDarkMode();
 
   const handleMapPress = useCallback(
     (mapId: string) => {
@@ -247,7 +248,11 @@ export function MapRankingSection({ title, maps, isLoading, error, showRank = fa
           {title}
         </Text>
         {seeAllHref && (
-          <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+          <Ionicons
+            name="chevron-forward"
+            size={20}
+            color={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary}
+          />
         )}
       </Pressable>
 

@@ -6,6 +6,8 @@ export * from './client';
 export * from './migrations';
 export * from './users';
 export * from './maps';
+export * from './continents';
+export * from './countries';
 export * from './regions';
 export * from './prefectures';
 export * from './cities';
