@@ -55,11 +55,11 @@ export function BookmarkItemList({
     router.push(`/(tabs)/${currentTab}/spots/${spotId}` as any);
   }, [router, currentTab]);
 
-  // マスタースポットへの遷移（発見タブのデフォルトマップに移動して表示）
+  // マスタースポットへの遷移（現在のタブ内のデフォルトマップに移動して表示）
   const navigateToMasterSpot = useCallback((masterSpotId: string) => {
     setJumpToMasterSpotId(masterSpotId);
-    router.push('/(tabs)/discover/default-map');
-  }, [router, setJumpToMasterSpotId]);
+    router.push(`/(tabs)/${currentTab}/bookmarks/default-map` as any);
+  }, [router, currentTab, setJumpToMasterSpotId]);
 
   // マップへの遷移
   const navigateToMap = useCallback((mapId: string) => {
