@@ -105,13 +105,13 @@ export type UserUpdate = ToSQLite<SupabaseUserUpdate> & {
 // NOTE: 以下は一時的にローカル定義。Supabaseプロジェクト作成後、上記のSupabase型から生成する
 
 // Maps
+// tagsは中間テーブル(map_tags)で管理
 export interface MapRow {
   id: string;
   user_id: string;
   name: string;
   description: string | null;
   category: string | null;
-  tags: string | null; // JSON string array
   is_public: 0 | 1;
   is_default: 0 | 1;
   is_official: 0 | 1;
@@ -153,6 +153,7 @@ export type MasterSpotUpdate = Partial<Omit<MasterSpotRow, 'id' | 'created_at'>>
 
 
 // Spots (ユーザースポット - master_spotsへの参照 + ユーザーカスタマイズ)
+// tagsは中間テーブル(spot_tags)で管理
 export interface SpotRow {
   id: string;
   user_id: string;
@@ -161,7 +162,6 @@ export interface SpotRow {
   machi_id: string | null; // 街が見つからない場合はnull
   custom_name: string | null; // ユーザー独自の名前（任意）
   description: string | null; // 旧memoカラム
-  tags: string | null; // JSON string array: ["tag1", "tag2"]
   images_count: number;
   likes_count: number;
   bookmarks_count: number;

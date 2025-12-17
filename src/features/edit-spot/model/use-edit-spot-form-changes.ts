@@ -1,0 +1,80 @@
+/**
+ * スポット編集フォームの変更検出hook
+ *
+ * FSD: features/edit-spot/model に配置
+ */
+
+import { useMemo } from 'react';
+import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
+import type { SelectedImage } from '@/features/pick-images';
+
+interface EditSpotFormCurrentValues {
+  customName: string;
+  description: string;
+  articleContent: string;
+  tags: string[];
+  newImages: SelectedImage[];
+  deletedImageIds: string[];
+  selectedMapId: string | null;
+}
+
+/**
+ * フォームの変更検出hook
+ */
+export function useEditSpotFormChanges(
+  spot: UserSpotWithMasterSpot,
+  initialTags: string[],
+  currentValues: EditSpotFormCurrentValues
+) {
+  const hasChanges = useMemo(() => {
+    const spotName = spot.custom_name || spot.master_spot?.name || '';
+
+    // 名前の変更
+    if (currentValues.customName.trim() !== spotName) return true;
+
+    // 説明の変更
+    const originalDescription = spot.description || '';
+    if (currentValues.description.trim() !== originalDescription) return true;
+
+    // 記事コンテンツの変更
+    const originalArticleContent = spot.article_content || '';
+    if (currentValues.articleContent.trim() !== originalArticleContent) return true;
+
+    // タグの変更
+    if (currentValues.tags.length !== initialTags.length) return true;
+    if (currentValues.tags.some((tag, index) => tag !== initialTags[index])) return true;
+
+    // 新しい画像が追加された
+    if (currentValues.newImages.length > 0) return true;
+
+    // 既存画像が削除された
+    if (currentValues.deletedImageIds.length > 0) return true;
+
+    // マップの変更
+    if (currentValues.selectedMapId !== spot.map_id) return true;
+
+    return false;
+  }, [
+    spot,
+    initialTags,
+    currentValues.customName,
+    currentValues.description,
+    currentValues.articleContent,
+    currentValues.tags,
+    currentValues.newImages,
+    currentValues.deletedImageIds,
+    currentValues.selectedMapId,
+  ]);
+
+  // フォームのバリデーション（スポット名とひとことは必須）
+  const isFormValid = useMemo(() => {
+    // スポット名が空でないことを確認（custom_nameはNOT NULL制約があるため必須）
+    // ひとことも必須
+    return !!(currentValues.customName.trim() && currentValues.description.trim());
+  }, [currentValues.customName, currentValues.description]);
+
+  return {
+    hasChanges,
+    isFormValid,
+  };
+}

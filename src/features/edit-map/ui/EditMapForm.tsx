@@ -1,47 +1,69 @@
 /**
  * マップ編集フォーム Feature
  *
- * FSDの原則：Featureはユーザーのアクション・インタラクション
+ * FSD: features/edit-map/ui に配置
+ * - 純粋なUIコンポーネント
+ * - ビジネスロジックはmodel層のhookを使用
  */
 
+import { useCategories } from '@/entities/category';
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
+import {
+  colors,
+  INPUT_LIMITS,
+  USER_MAP_THEME_COLOR_LIST,
+  type UserMapThemeColor,
+} from '@/shared/config';
+import type { MapWithUser } from '@/shared/types';
+import { TagInput } from '@/shared/ui';
+import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
-  View,
+  FlatList,
+  Switch,
   Text,
   TextInput,
   TouchableOpacity,
-  Switch,
-  FlatList,
+  View,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS, MAP_CATEGORIES, type MapCategory, USER_MAP_THEME_COLOR_LIST, type UserMapThemeColor } from '@/shared/config';
-import { TagInput } from '@/shared/ui';
-import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import type { MapWithUser } from '@/shared/types';
+import { useEditMapFormChanges, type EditMapFormData } from '../model';
+
+// カテゴリアイコンのマッピング
+const CATEGORY_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
+  gourmet: 'restaurant',
+  shopping: 'cart',
+  tourism: 'camera',
+  culture: 'library',
+  entertainment: 'mic',
+  activity: 'bicycle',
+  lifestyle: 'home',
+  learning: 'school',
+  other: 'ellipsis-horizontal',
+};
 
 interface EditMapFormProps {
   map: MapWithUser;
-  onSubmit: (data: {
-    name: string;
-    description?: string;
-    category?: string;
-    tags: string[];
-    isPublic: boolean;
-    thumbnailImage?: ThumbnailImage;
-    removeThumbnail?: boolean;
-    themeColor: UserMapThemeColor;
-  }) => void;
+  /** 中間テーブルから取得したタグ名の配列 */
+  initialTags: string[];
+  onSubmit: (data: EditMapFormData) => void;
   isLoading?: boolean;
 }
 
-export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormProps) {
+export function EditMapForm({
+  map,
+  initialTags,
+  onSubmit,
+  isLoading = false,
+}: EditMapFormProps) {
+  const { data: categories = [] } = useCategories();
+
   const [name, setName] = useState(map.name);
   const [description, setDescription] = useState(map.description || '');
-  const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(
-    (map.category as MapCategory) || null
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+    map.category_id || null
   );
-  const [tags, setTags] = useState<string[]>(map.tags || []);
+  const [tags, setTags] = useState<string[]>(initialTags);
   const [isPublic, setIsPublic] = useState(map.is_public);
 
   // サムネイル関連
@@ -53,8 +75,22 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
     (map.theme_color as UserMapThemeColor) || 'pink'
   );
 
+  // model層のhookを使用して変更検知
+  const { hasChanges, isFormValid } = useEditMapFormChanges(map, initialTags, {
+    name,
+    description,
+    selectedCategoryId,
+    isPublic,
+    themeColor,
+    thumbnailUri: thumbnailImage?.uri || null,
+    tags,
+  });
+
+  // ボタンを無効化する条件
+  const isButtonDisabled = isLoading || !isFormValid || !hasChanges;
+
   const handleSubmit = () => {
-    if (!name.trim()) {
+    if (!isFormValid || !selectedCategoryId) {
       return;
     }
 
@@ -64,14 +100,17 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
 
     onSubmit({
       name: name.trim(),
-      description: description.trim() || undefined,
-      category: selectedCategory || undefined,
+      description: description.trim(),
+      categoryId: selectedCategoryId,
       tags,
       isPublic,
       // 新しい画像が選択された場合のみ送信（既存URLの場合は送らない）
-      thumbnailImage: thumbnailChanged && thumbnailImage && !thumbnailImage.uri.startsWith('http')
-        ? thumbnailImage
-        : undefined,
+      thumbnailImage:
+        thumbnailChanged &&
+        thumbnailImage &&
+        !thumbnailImage.uri.startsWith('http')
+          ? thumbnailImage
+          : undefined,
       removeThumbnail: thumbnailRemoved,
       themeColor,
     });
@@ -99,16 +138,22 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
               <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
                 {map.spots_count}
               </Text>
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">スポット</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+                スポット
+              </Text>
             </View>
             <View className="items-center">
               <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
                 {map.likes_count}
               </Text>
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">いいね</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+                いいね
+              </Text>
             </View>
             <View className="items-center">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">作成日</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
+                作成日
+              </Text>
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                 {new Date(map.created_at).toLocaleDateString('ja-JP')}
               </Text>
@@ -136,7 +181,9 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
 
         {/* 説明 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">説明</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            説明 <Text className="text-red-500">*</Text>
+          </Text>
           <TextInput
             value={description}
             onChangeText={setDescription}
@@ -155,22 +202,26 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
 
         {/* カテゴリ */}
         <View className="mb-4">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">カテゴリ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            カテゴリ <Text className="text-red-500">*</Text>
+          </Text>
           <FlatList
-            data={MAP_CATEGORIES}
+            data={categories}
             numColumns={3}
             scrollEnabled={false}
-            keyExtractor={(item) => item.value}
+            keyExtractor={(item) => item.id}
             columnWrapperStyle={{
               justifyContent: 'space-between',
               marginBottom: 12,
             }}
             renderItem={({ item: category, index }) => {
-              const isSelected = selectedCategory === category.value;
-              const isLastRow = index >= 3;
+              const isSelected = selectedCategoryId === category.id;
+              const isLastRow = index >= categories.length - 3;
+              const iconName =
+                CATEGORY_ICONS[category.id] || 'ellipsis-horizontal';
               return (
                 <TouchableOpacity
-                  onPress={() => setSelectedCategory(category.value)}
+                  onPress={() => setSelectedCategoryId(category.id)}
                   className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
                     isSelected
                       ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
@@ -180,16 +231,18 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
                   activeOpacity={0.7}
                 >
                   <Ionicons
-                    name={category.icon}
+                    name={iconName}
                     size={28}
                     color={isSelected ? '#3B82F6' : '#9CA3AF'}
                   />
                   <Text
                     className={`text-xs font-medium mt-1.5 ${
-                      isSelected ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                      isSelected
+                        ? 'text-blue-500'
+                        : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
-                    {category.label}
+                    {category.name}
                   </Text>
                 </TouchableOpacity>
               );
@@ -199,7 +252,9 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            タグ
+          </Text>
           <TagInput
             tags={tags}
             onTagsChange={setTags}
@@ -245,7 +300,11 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
                     <Ionicons
                       name="checkmark"
                       size={18}
-                      color={isWhite || colorItem.key === 'yellow' ? '#374151' : '#FFFFFF'}
+                      color={
+                        isWhite || colorItem.key === 'yellow'
+                          ? '#374151'
+                          : '#FFFFFF'
+                      }
                     />
                   )}
                 </TouchableOpacity>
@@ -279,9 +338,9 @@ export function EditMapForm({ map, onSubmit, isLoading = false }: EditMapFormPro
         {/* 更新ボタン */}
         <TouchableOpacity
           onPress={handleSubmit}
-          disabled={isLoading || !name.trim()}
+          disabled={isButtonDisabled}
           className={`py-4 rounded-lg items-center mb-4 ${
-            isLoading || !name.trim() ? 'bg-blue-300' : 'bg-blue-500'
+            isButtonDisabled ? 'bg-blue-300' : 'bg-blue-500'
           }`}
           activeOpacity={0.8}
         >

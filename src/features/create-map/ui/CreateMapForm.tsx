@@ -1,11 +1,17 @@
 /**
  * マップ作成フォーム Feature
  *
- * FSDの原則：Featureはユーザーのアクション・インタラクション
+ * FSD: features/create-map/ui に配置
+ * - 純粋なUIコンポーネント
+ * - ビジネスロジックはmodel層のhookを使用
  */
 
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import { INPUT_LIMITS, MAP_CATEGORIES, type MapCategory, USER_MAP_THEME_COLOR_LIST, type UserMapThemeColor } from '@/shared/config';
+import {
+  INPUT_LIMITS,
+  USER_MAP_THEME_COLOR_LIST,
+  type UserMapThemeColor,
+} from '@/shared/config';
 import { StyledTextInput, TagInput } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
@@ -18,17 +24,24 @@ import {
   View,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useCategories } from '@/entities/category';
+import { useCreateMapFormValidation, type CreateMapFormData } from '../model';
+
+// カテゴリアイコンのマッピング
+const CATEGORY_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
+  gourmet: 'restaurant',
+  shopping: 'cart',
+  tourism: 'camera',
+  culture: 'library',
+  entertainment: 'mic',
+  activity: 'bicycle',
+  lifestyle: 'home',
+  learning: 'school',
+  other: 'ellipsis-horizontal',
+};
 
 interface CreateMapFormProps {
-  onSubmit: (data: {
-    name: string;
-    description?: string;
-    category?: MapCategory;
-    tags: string[];
-    isPublic: boolean;
-    thumbnailImage?: ThumbnailImage;
-    themeColor: UserMapThemeColor;
-  }) => void;
+  onSubmit: (data: CreateMapFormData) => void;
   isLoading?: boolean;
 }
 
@@ -36,9 +49,11 @@ export function CreateMapForm({
   onSubmit,
   isLoading = false,
 }: CreateMapFormProps) {
+  const { data: categories = [] } = useCategories();
+
   const [mapName, setMapName] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<MapCategory | null>(
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
     null
   );
   const [tags, setTags] = useState<string[]>([]);
@@ -48,16 +63,36 @@ export function CreateMapForm({
   );
   const [themeColor, setThemeColor] = useState<UserMapThemeColor>('pink');
 
+  // model層のhookを使用してバリデーション
+  const { isFormValid } = useCreateMapFormValidation({
+    name: mapName,
+    description,
+    selectedCategoryId,
+  });
+
+  // ボタンを無効化する条件
+  const isButtonDisabled = isLoading || !isFormValid;
+
   const handleSubmit = () => {
     if (!mapName.trim()) {
       Alert.alert('エラー', 'マップ名を入力してください');
       return;
     }
 
+    if (!description.trim()) {
+      Alert.alert('エラー', '説明を入力してください');
+      return;
+    }
+
+    if (!selectedCategoryId) {
+      Alert.alert('エラー', 'カテゴリーを選択してください');
+      return;
+    }
+
     onSubmit({
       name: mapName.trim(),
-      description: description.trim() || undefined,
-      category: selectedCategory || undefined,
+      description: description.trim(),
+      categoryId: selectedCategoryId,
       tags,
       isPublic,
       thumbnailImage: thumbnailImage || undefined,
@@ -93,7 +128,7 @@ export function CreateMapForm({
         {/* 説明 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            説明
+            説明 <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={description}
@@ -113,23 +148,25 @@ export function CreateMapForm({
         {/* カテゴリー */}
         <View className="mb-4">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            カテゴリー
+            カテゴリー <Text className="text-red-500">*</Text>
           </Text>
           <FlatList
-            data={MAP_CATEGORIES}
+            data={categories}
             numColumns={3}
             scrollEnabled={false}
-            keyExtractor={(item) => item.value}
+            keyExtractor={(item) => item.id}
             columnWrapperStyle={{
               justifyContent: 'space-between',
               marginBottom: 12,
             }}
             renderItem={({ item: category, index }) => {
-              const isSelected = selectedCategory === category.value;
-              const isLastRow = index >= 3;
+              const isSelected = selectedCategoryId === category.id;
+              const isLastRow = index >= categories.length - 3;
+              const iconName =
+                CATEGORY_ICONS[category.id] || 'ellipsis-horizontal';
               return (
                 <TouchableOpacity
-                  onPress={() => setSelectedCategory(category.value)}
+                  onPress={() => setSelectedCategoryId(category.id)}
                   className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
                     isSelected
                       ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
@@ -139,7 +176,7 @@ export function CreateMapForm({
                   activeOpacity={0.7}
                 >
                   <Ionicons
-                    name={category.icon}
+                    name={iconName}
                     size={28}
                     color={isSelected ? '#3B82F6' : '#9CA3AF'}
                   />
@@ -150,7 +187,7 @@ export function CreateMapForm({
                         : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
-                    {category.label}
+                    {category.name}
                   </Text>
                 </TouchableOpacity>
               );
@@ -208,7 +245,11 @@ export function CreateMapForm({
                     <Ionicons
                       name="checkmark"
                       size={18}
-                      color={isWhite || colorItem.key === 'yellow' ? '#374151' : '#FFFFFF'}
+                      color={
+                        isWhite || colorItem.key === 'yellow'
+                          ? '#374151'
+                          : '#FFFFFF'
+                      }
                     />
                   )}
                 </TouchableOpacity>
@@ -246,9 +287,9 @@ export function CreateMapForm({
         {/* 作成ボタン */}
         <TouchableOpacity
           onPress={handleSubmit}
-          disabled={isLoading}
+          disabled={isButtonDisabled}
           className={`py-4 rounded-lg items-center mb-4 ${
-            isLoading ? 'bg-blue-300' : 'bg-blue-500'
+            isButtonDisabled ? 'bg-blue-300' : 'bg-blue-500'
           }`}
           activeOpacity={0.8}
         >

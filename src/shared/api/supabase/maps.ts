@@ -17,7 +17,7 @@ interface SupabaseMapResponse {
   name: string;
   description: string | null;
   category: string | null;
-  tags: string[] | null;
+  category_id: string | null;
   is_public: boolean;
   is_default: boolean;
   is_official: boolean;
@@ -76,7 +76,7 @@ export async function getPublicMaps(
     name: map.name,
     description: map.description,
     category: map.category,
-    tags: map.tags,
+    category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,
     is_official: map.is_official,
@@ -127,7 +127,7 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
     name: data.name,
     description: data.description,
     category: data.category,
-    tags: data.tags,
+    category_id: data.category_id,
     is_public: data.is_public,
     is_default: data.is_default,
     is_official: data.is_official,
@@ -237,7 +237,7 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
     name: map.name,
     description: map.description,
     category: map.category,
-    tags: map.tags,
+    category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,
     is_official: map.is_official,
@@ -282,7 +282,7 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
     name: map.name,
     description: map.description,
     category: map.category,
-    tags: map.tags,
+    category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,
     is_official: map.is_official,
@@ -308,8 +308,7 @@ export interface CreateMapParams {
   user_id: string;
   name: string;
   description?: string | null;
-  category?: string | null;
-  tags?: string[] | null;
+  category_id: string;
   is_public: boolean;
   is_default?: boolean;
   is_official?: boolean;
@@ -330,8 +329,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
       user_id: params.user_id,
       name: params.name,
       description: params.description || null,
-      category: params.category || null,
-      tags: params.tags || null,
+      category_id: params.category_id,
       is_public: params.is_public,
       is_default: params.is_default || false,
       is_official: params.is_official || false,
@@ -363,7 +361,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     name: data.name,
     description: data.description,
     category: data.category,
-    tags: data.tags,
+    category_id: data.category_id,
     is_public: data.is_public,
     is_default: data.is_default,
     is_official: data.is_official,
@@ -389,7 +387,7 @@ export interface UpdateMapParams {
   name?: string;
   description?: string | null;
   category?: string | null;
-  tags?: string[] | null;
+  category_id?: string | null;
   is_public?: boolean;
   is_article_public?: boolean;
   thumbnail_url?: string | null;
@@ -430,7 +428,7 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
     name: data.name,
     description: data.description,
     category: data.category,
-    tags: data.tags,
+    category_id: data.category_id,
     is_public: data.is_public,
     is_default: data.is_default,
     is_official: data.is_official,
@@ -604,7 +602,7 @@ export async function searchPublicMaps(
     name: map.name,
     description: map.description,
     category: map.category,
-    tags: map.tags,
+    category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,
     is_official: map.is_official,
@@ -656,7 +654,7 @@ export async function searchPublicMapsByTag(
     name: map.name,
     description: map.description,
     category: map.category,
-    tags: map.tags,
+    category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,
     is_official: map.is_official,
@@ -708,7 +706,7 @@ export async function searchPublicMapsByCategoryId(
     name: map.name,
     description: map.description,
     category: map.category,
-    tags: map.tags,
+    category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,
     is_official: map.is_official,
@@ -778,7 +776,7 @@ export async function getFollowingUsersMaps(
     name: map.name,
     description: map.description,
     category: map.category,
-    tags: map.tags,
+    category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,
     is_official: map.is_official,

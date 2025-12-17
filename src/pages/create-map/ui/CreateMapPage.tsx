@@ -1,17 +1,18 @@
 /**
  * マップ作成ページ
  *
- * FSDの原則：Pagesはルーティング可能な画面。Featureの組み合わせのみ
+ * FSD: pages/create-map/ui に配置
+ * - ルーティング可能な画面
+ * - Featureの組み合わせのみ（ロジックは持たない）
  */
 
 import React from 'react';
 import { View } from 'react-native';
-import { CreateMapForm } from '@/features/create-map';
+import { CreateMapForm, useCreateMapForm } from '@/features/create-map';
 import { PageHeader } from '@/shared/ui';
-import { useMapForm } from '../model';
 
 export function CreateMapPage() {
-  const { handleSubmit, isLoading } = useMapForm();
+  const { handleSubmit, isLoading } = useCreateMapForm();
 
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">

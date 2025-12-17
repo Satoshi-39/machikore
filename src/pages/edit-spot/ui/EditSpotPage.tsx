@@ -1,19 +1,21 @@
 /**
  * スポット編集ページ
  *
- * FSDの原則：Pagesはルーティング可能な画面。Featureの組み合わせのみ
+ * FSD: pages/edit-spot/ui に配置
+ * - ルーティング可能な画面
+ * - Featureの組み合わせのみ（ロジックは持たない）
  */
 
 import React from 'react';
 import { View } from 'react-native';
-import { EditSpotForm } from '@/features/edit-spot';
+import { EditSpotForm, useEditSpotForm } from '@/features/edit-spot';
 import { SingleDataBoundary, PageHeader } from '@/shared/ui';
-import { useEditSpotForm } from '../model';
 
 export function EditSpotPage() {
   const {
     spot,
     existingImages,
+    initialTags,
     isLoading,
     isUpdating,
     uploadProgress,
@@ -37,6 +39,7 @@ export function EditSpotPage() {
           <EditSpotForm
             spot={spotData}
             existingImages={existingImages}
+            initialTags={initialTags}
             onSubmit={handleSubmit}
             isLoading={isUpdating}
             uploadProgress={uploadProgress}

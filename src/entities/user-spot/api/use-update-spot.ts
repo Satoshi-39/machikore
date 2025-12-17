@@ -10,6 +10,7 @@ import type { UpdateSpotParams } from '../model/types';
 /**
  * スポットを更新（新スキーマ対応）
  * ユーザーカスタマイズ可能なフィールドのみ更新
+ * tagsは中間テーブル(spot_tags)で管理するため、useUpdateSpotTagsを使用
  */
 export function useUpdateSpot() {
   return useMutation({
@@ -18,7 +19,7 @@ export function useUpdateSpot() {
         id: params.spotId,
         custom_name: params.customName,
         description: params.description,
-        tags: params.tags,
+        article_content: params.articleContent,
         order_index: params.orderIndex,
         map_id: params.mapId,
       });

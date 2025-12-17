@@ -4,19 +4,16 @@
  * ユーザーが作成したコレクションの一覧を表示
  */
 
-import React, { useMemo, useCallback } from 'react';
-import { View, Text, Pressable, FlatList, Image, Alert } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useDeleteCollection, useUserCollections } from '@/entities/collection';
+import { useCurrentUserId } from '@/entities/user';
+import type { Collection } from '@/shared/api/supabase/collections';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
-import {
-  useUserCollections,
-  useDeleteCollection,
-} from '@/entities/collection';
-import { useCurrentUserId } from '@/entities/user';
-import { Loading, ErrorView, PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import type { Collection } from '@/shared/api/supabase/collections';
+import { ErrorView, Loading, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import React, { useCallback, useMemo } from 'react';
+import { Alert, FlatList, Image, Pressable, Text, View } from 'react-native';
 
 interface CollectionsTabProps {
   userId: string | null;
@@ -32,7 +29,13 @@ interface CollectionCardProps {
   onDelete?: (collectionId: string) => void;
 }
 
-function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: CollectionCardProps) {
+function CollectionCard({
+  collection,
+  isOwner,
+  onPress,
+  onEdit,
+  onDelete,
+}: CollectionCardProps) {
   const createdDate = new Date(collection.created_at);
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
@@ -73,7 +76,11 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
             className="w-16 h-16 rounded-lg items-center justify-center mr-3"
             style={{ backgroundColor: collection.color || colors.gray[100] }}
           >
-            <Ionicons name="library" size={24} color={collection.color ? '#fff' : colors.primary.DEFAULT} />
+            <Ionicons
+              name="grid"
+              size={24}
+              color={collection.color ? '#fff' : colors.primary.DEFAULT}
+            />
           </View>
         )}
 
@@ -83,7 +90,10 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
             {collection.name}
           </Text>
           {collection.description && (
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
+            <Text
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2"
+              numberOfLines={2}
+            >
               {collection.description}
             </Text>
           )}
@@ -103,8 +113,12 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
         {/* 公開/非公開アイコン + メニュー */}
         <View className="flex-row items-center">
           {!collection.is_public && (
-            <View className={isOwner ? "mr-2" : ""}>
-              <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
+            <View className={isOwner ? 'mr-2' : ''}>
+              <Ionicons
+                name="lock-closed"
+                size={16}
+                color={colors.text.secondary}
+              />
             </View>
           )}
           {isOwner && menuItems.length > 0 && (
@@ -116,7 +130,10 @@ function CollectionCard({ collection, isOwner, onPress, onEdit, onDelete }: Coll
   );
 }
 
-export function CollectionsTab({ userId, ListHeaderComponent }: CollectionsTabProps) {
+export function CollectionsTab({
+  userId,
+  ListHeaderComponent,
+}: CollectionsTabProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
@@ -126,43 +143,53 @@ export function CollectionsTab({ userId, ListHeaderComponent }: CollectionsTabPr
   // 自分のコレクションかどうか
   const isOwner = userId === currentUserId;
 
-  const handleCollectionPress = useCallback((collection: Collection) => {
-    router.push(`/(tabs)/${currentTab}/collections/${collection.id}` as any);
-  }, [router, currentTab]);
+  const handleCollectionPress = useCallback(
+    (collection: Collection) => {
+      router.push(`/(tabs)/${currentTab}/collections/${collection.id}` as any);
+    },
+    [router, currentTab]
+  );
 
-  const handleEdit = useCallback((collectionId: string) => {
-    router.push(`/edit-collection/${collectionId}`);
-  }, [router]);
+  const handleEdit = useCallback(
+    (collectionId: string) => {
+      router.push(`/edit-collection/${collectionId}`);
+    },
+    [router]
+  );
 
-  const handleDelete = useCallback((collectionId: string) => {
-    if (!userId) return;
-    Alert.alert(
-      'コレクションを削除',
-      'このコレクションを削除しますか？',
-      [
+  const handleDelete = useCallback(
+    (collectionId: string) => {
+      if (!userId) return;
+      Alert.alert('コレクションを削除', 'このコレクションを削除しますか？', [
         { text: 'キャンセル', style: 'cancel' },
         {
           text: '削除',
           style: 'destructive',
           onPress: () => deleteCollection({ collectionId, userId }),
         },
-      ]
-    );
-  }, [userId, deleteCollection]);
+      ]);
+    },
+    [userId, deleteCollection]
+  );
 
-  const renderEmptyState = useCallback(() => (
-    <View className="items-center py-12">
-      <View className="w-20 h-20 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-4">
-        <Ionicons name="library" size={40} color={colors.text.secondary} />
+  const renderEmptyState = useCallback(
+    () => (
+      <View className="items-center py-12">
+        <View className="w-20 h-20 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-4">
+          <Ionicons name="grid" size={40} color={colors.text.secondary} />
+        </View>
+        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          コレクション
+        </Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          {isOwner
+            ? 'マップをテーマ別にまとめましょう'
+            : 'コレクションが作成されていません'}
+        </Text>
       </View>
-      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-        コレクション
-      </Text>
-      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
-        {isOwner ? 'マップをテーマ別にまとめましょう' : 'コレクションが作成されていません'}
-      </Text>
-    </View>
-  ), [isOwner]);
+    ),
+    [isOwner]
+  );
 
   // ローディング中
   if (isLoading) {

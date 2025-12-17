@@ -36,14 +36,13 @@ export interface CreateSpotInput {
   // user_spot情報
   customName?: string | null;
   description?: string | null;
-  tags?: string[] | null;
 }
 
 export interface UpdateSpotInput {
   id: string;
-  custom_name?: string | null;
+  custom_name?: string; // NOT NULL制約があるためnullは不可
   description?: string | null;
-  tags?: string[] | null;
+  article_content?: string | null;
   order_index?: number;
   map_id?: string;
 }
@@ -194,6 +193,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
 
   // 2. user_spotを作成
   // ピン刺し・現在地登録の場合（googlePlaceIdがない）は座標と住所をuser_spotに直接保存
+  // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
   const userSpotInsert: UserSpotInsert = {
     user_id: input.userId,
     map_id: input.mapId,
@@ -205,7 +205,6 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     google_short_address: input.googlePlaceId ? null : input.googleShortAddress ?? null,
     custom_name: input.customName ?? input.name,
     description: input.description ?? null,
-    tags: input.tags ?? null,
   };
 
   const { data, error } = await supabase

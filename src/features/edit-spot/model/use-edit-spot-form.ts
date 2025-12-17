@@ -1,5 +1,11 @@
 /**
  * スポット編集フォームのビジネスロジック
+ *
+ * FSD: features/edit-spot/model に配置
+ * - データ取得
+ * - 画像アップロード/削除
+ * - タグ更新
+ * - 画面遷移
  */
 
 import { useState, useEffect } from 'react';
@@ -10,11 +16,12 @@ import { useSpotById, useUpdateSpot, useSpotImages, useUploadSpotImages } from '
 import { useUserMaps } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useSpotLimit } from '@/entities/subscription';
+import { useSpotTags, useUpdateSpotTags } from '@/entities/tag';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
 
-interface UploadProgress {
+export interface UploadProgress {
   current: number;
   total: number;
   status: 'idle' | 'updating' | 'uploading' | 'deleting' | 'done';
@@ -27,9 +34,14 @@ export function useEditSpotForm() {
   const user = useUserStore((state) => state.user);
   const { data: spot, isLoading: isLoadingSpot } = useSpotById(id ?? null);
   const { data: existingImages, isLoading: isLoadingImages } = useSpotImages(id ?? null);
+  const { data: spotTags = [], isLoading: isLoadingTags } = useSpotTags(id ?? '');
   const { mutate: updateSpot, isPending: isUpdating } = useUpdateSpot();
   const { mutateAsync: uploadImages } = useUploadSpotImages();
+  const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
   const spotLimit = useSpotLimit();
+
+  // タグ名の配列を取得
+  const initialTags = spotTags.map((tag) => tag.name);
   const [isProcessing, setIsProcessing] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
     current: 0,
@@ -55,6 +67,7 @@ export function useEditSpotForm() {
   const handleSubmit = async (data: {
     customName: string;
     description?: string;
+    articleContent?: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -122,13 +135,22 @@ export function useEditSpotForm() {
         }
       }
 
-      // 3. スポット情報を更新
+      // 3. タグを中間テーブルに保存
+      try {
+        await updateSpotTags({ spotId: id, tagNames: data.tags });
+      } catch (error) {
+        log.error('[useEditSpotForm] タグ更新エラー:', error);
+        // タグ更新エラーは警告のみで続行
+      }
+
+      // 4. スポット情報を更新
       updateSpot(
         {
           spotId: id,
-          customName: data.customName || null,
+          customName: data.customName, // NOT NULL制約があるため、nullは渡さない
           description: data.description || null,
-          tags: data.tags.length > 0 ? data.tags : null,
+          articleContent: data.articleContent || null,
+          // タグは中間テーブルに保存するため、ここでは更新しない（将来的にカラム削除予定）
           mapId: data.mapId,
         },
         {
@@ -161,7 +183,8 @@ export function useEditSpotForm() {
   return {
     spot,
     existingImages: existingImages ?? [],
-    isLoading: isLoadingSpot || isLoadingImages,
+    initialTags,
+    isLoading: isLoadingSpot || isLoadingImages || isLoadingTags,
     isUpdating: isUpdating || isProcessing,
     uploadProgress,
     handleSubmit,

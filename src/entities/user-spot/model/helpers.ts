@@ -44,7 +44,7 @@ export function createSpotData(params: CreateSpotParams): {
       master_spot_id: masterSpotId, // 後で insertOrGetMasterSpot で置き換えられる
       custom_name: params.customName || null,
       description: params.description || null,
-      tags: params.tags ? JSON.stringify(params.tags) : null,
+      // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
       images_count: 0,
       likes_count: 0,
       bookmarks_count: 0,

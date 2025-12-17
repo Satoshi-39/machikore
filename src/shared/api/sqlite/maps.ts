@@ -16,20 +16,20 @@ export function insertMap(map: MapInsert): void {
   const db = getDatabase();
   const now = new Date().toISOString();
 
+  // tagsは中間テーブル(map_tags)で管理するため、ここでは設定しない
   db.runSync(
     `INSERT INTO maps (
-      id, user_id, name, description, category, tags,
+      id, user_id, name, description, category,
       is_public, is_default, is_official, thumbnail_url,
       spots_count, likes_count,
       created_at, updated_at, synced_at, is_synced
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
     [
       map.id,
       map.user_id,
       map.name,
       map.description ?? null,
       map.category ?? null,
-      map.tags ?? null,
       map.is_public ?? 1,
       map.is_default ?? 0,
       map.is_official ?? 0,
@@ -118,10 +118,7 @@ export function updateMap(
     fields.push('category = ?');
     values.push(updates.category);
   }
-  if (updates.tags !== undefined) {
-    fields.push('tags = ?');
-    values.push(updates.tags);
-  }
+  // tagsは中間テーブル(map_tags)で管理するため、ここでは更新しない
   if (updates.is_public !== undefined) {
     fields.push('is_public = ?');
     values.push(updates.is_public);

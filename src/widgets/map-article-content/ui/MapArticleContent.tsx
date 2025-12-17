@@ -24,6 +24,7 @@ import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { useUserMaps } from '@/entities/map';
 import { useUser } from '@/entities/user';
+import { useMapTags } from '@/entities/tag';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { useCommentActions } from '@/features/comment-actions';
 import type { MapArticleData } from '@/shared/types';
@@ -74,6 +75,9 @@ export function MapArticleContent({
 
   // コメント取得（プレビュー用に3件）
   const { data: comments = [] } = useMapComments(map.id, 3, 0, currentUserId);
+
+  // タグを中間テーブルから取得
+  const { data: mapTags = [] } = useMapTags(map.id);
 
   // 現在のユーザー情報（編集モーダル用）
   const { data: currentUser } = useUser(currentUserId ?? null);
@@ -271,15 +275,15 @@ export function MapArticleContent({
           )}
 
           {/* タグ */}
-          {map.tags && map.tags.length > 0 && (
+          {mapTags.length > 0 && (
             <View className="flex-row flex-wrap gap-2 mt-4">
-              {map.tags.map((tag, index) => (
+              {mapTags.map((tag) => (
                 <View
-                  key={`${tag}-${index}`}
+                  key={tag.id}
                   className="bg-muted dark:bg-dark-muted rounded-full px-3 py-1.5"
                 >
                   <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                    #{tag}
+                    #{tag.name}
                   </Text>
                 </View>
               ))}

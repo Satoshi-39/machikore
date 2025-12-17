@@ -1,7 +1,11 @@
 /**
  * スポット作成フォームのビジネスロジック
  *
- * エラーハンドリング、データ送信、画面遷移を管理
+ * FSD: features/create-spot/model に配置
+ * - データ送信ロジック
+ * - 画像アップロード
+ * - 画面遷移
+ *
  * Google Places検索結果からのみスポット追加可能
  */
 
@@ -17,6 +21,7 @@ import { useCreateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
 import { useSpotLimit } from '@/entities/subscription';
+import { useUpdateSpotTags } from '@/entities/tag';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage, findMachiForSpot } from '@/shared/api/supabase';
 import { queryClient } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
@@ -35,6 +40,7 @@ export function useSpotForm() {
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
+  const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
   const spotLimit = useSpotLimit();
   const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
     current: 0,
@@ -198,10 +204,20 @@ export function useSpotForm() {
         googleUserRatingCount: isGooglePlace ? selectedPlace.googleData.userRatingCount : null,
         customName: data.customName,
         description: data.description,
-        tags: data.tags,
       },
       {
         onSuccess: async (spotId) => {
+          // タグを中間テーブルに保存
+          if (data.tags.length > 0) {
+            try {
+              await updateSpotTags({ spotId, tagNames: data.tags });
+              log.info('[useSpotForm] タグ保存完了:', data.tags);
+            } catch (error) {
+              log.error('[useSpotForm] タグ保存エラー:', error);
+              // タグ保存失敗してもスポット自体は作成済み
+            }
+          }
+
           // 画像がある場合はアップロード
           if (data.images.length > 0) {
             try {

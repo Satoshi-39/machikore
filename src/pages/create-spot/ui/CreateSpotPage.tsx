@@ -1,14 +1,15 @@
 /**
  * スポット作成ページ
  *
- * FSDの原則：Pagesはルーティング可能な画面。Featureの組み合わせのみ
+ * FSD: pages/create-spot/ui に配置
+ * - ルーティング可能な画面
+ * - Featureの組み合わせのみ（ロジックは持たない）
  */
 
 import React from 'react';
 import { View } from 'react-native';
-import { CreateSpotForm } from '@/features/create-spot';
+import { CreateSpotForm, useSpotForm } from '@/features/create-spot';
 import { PageHeader } from '@/shared/ui';
-import { useSpotForm } from '../model';
 
 export function CreateSpotPage() {
   const {

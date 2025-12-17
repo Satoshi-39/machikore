@@ -1,17 +1,26 @@
 /**
  * マップ編集ページ
  *
- * FSDの原則：Pagesはルーティング可能な画面。Featureの組み合わせのみ
+ * FSD: pages/edit-map/ui に配置
+ * - ルーティング可能な画面
+ * - Featureの組み合わせのみ（ロジックは持たない）
  */
 
 import React from 'react';
 import { View } from 'react-native';
-import { EditMapForm } from '@/features/edit-map';
+import { useLocalSearchParams } from 'expo-router';
+import { EditMapForm, useEditMapForm } from '@/features/edit-map';
 import { SingleDataBoundary, PageHeader } from '@/shared/ui';
-import { useEditMapForm } from '../model';
 
 export function EditMapPage() {
-  const { map, isLoading, isUpdating, handleSubmit } = useEditMapForm();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { map, initialTags, isLoading, isUpdating, handleSubmit } = useEditMapForm({
+    mapId: id ?? '',
+  });
+
+  // map と initialTags の両方が揃っているかチェック
+  // isLoading が false の場合のみ、データが確定している
+  const formData = !isLoading && map ? { map, initialTags } : null;
 
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
@@ -19,13 +28,14 @@ export function EditMapPage() {
       <SingleDataBoundary
         isLoading={isLoading}
         error={null}
-        data={map}
+        data={formData}
         notFoundMessage="マップが見つかりません"
         notFoundIcon="map-outline"
       >
-        {(mapData) => (
+        {(data) => (
           <EditMapForm
-            map={mapData}
+            map={data.map}
+            initialTags={data.initialTags}
             onSubmit={handleSubmit}
             isLoading={isUpdating}
           />

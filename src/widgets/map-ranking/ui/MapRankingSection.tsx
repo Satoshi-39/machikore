@@ -182,7 +182,7 @@ function MapRankingCard({ map, rank, onPress }: MapRankingCardProps) {
               {formatRelativeTime(map.created_at)}
             </Text>
           </View>
-          {/* 記事アイコン + 三点リーダ */}
+          {/* 記事アイコン + 三点リーダ（自分のマップ以外） */}
           <View className="flex-row items-center">
             {(isOwner || map.is_article_public) && (
               <Pressable onPress={handleArticlePress}>
@@ -193,7 +193,9 @@ function MapRankingCard({ map, rank, onPress }: MapRankingCardProps) {
                 />
               </Pressable>
             )}
-            <PopupMenu items={menuItems} triggerSize={14} triggerColor={colors.text.secondary} />
+            {!isOwner && (
+              <PopupMenu items={menuItems} triggerSize={14} triggerColor={colors.text.secondary} />
+            )}
           </View>
         </View>
       </View>

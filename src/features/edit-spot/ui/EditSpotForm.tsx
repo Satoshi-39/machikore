@@ -21,6 +21,7 @@ import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
 import type { Database } from '@/shared/types/supabase.generated';
 import type { MapWithUser } from '@/shared/types';
+import { useEditSpotFormChanges } from '../model';
 
 type ImageRow = Database['public']['Tables']['images']['Row'];
 
@@ -33,9 +34,12 @@ interface UploadProgress {
 interface EditSpotFormProps {
   spot: UserSpotWithMasterSpot;
   existingImages?: ImageRow[];
+  /** 中間テーブルから取得したタグ名の配列 */
+  initialTags: string[];
   onSubmit: (data: {
     customName: string;
     description?: string;
+    articleContent?: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -54,6 +58,7 @@ interface EditSpotFormProps {
 export function EditSpotForm({
   spot,
   existingImages = [],
+  initialTags,
   onSubmit,
   isLoading = false,
   uploadProgress,
@@ -68,7 +73,8 @@ export function EditSpotForm({
 
   const [customName, setCustomName] = useState(spotName);
   const [description, setDescription] = useState(spot.description || '');
-  const [tags, setTags] = useState<string[]>(spot.tags || []);
+  const [articleContent, setArticleContent] = useState(spot.article_content || '');
+  const [tags, setTags] = useState<string[]>(initialTags);
 
   // 画像関連
   const [newImages, setNewImages] = useState<SelectedImage[]>([]);
@@ -86,10 +92,25 @@ export function EditSpotForm({
     setDeletedImageIds([...deletedImageIds, imageId]);
   };
 
+  // 変更検出とバリデーション
+  const { hasChanges, isFormValid } = useEditSpotFormChanges(spot, initialTags, {
+    customName,
+    description,
+    articleContent,
+    tags,
+    newImages,
+    deletedImageIds,
+    selectedMapId: selectedMapId ?? null,
+  });
+
+  // ボタンを無効化する条件
+  const isButtonDisabled = isLoading || !isFormValid || !hasChanges;
+
   const handleSubmit = () => {
     onSubmit({
       customName: customName.trim(),
       description: description.trim() || undefined,
+      articleContent: articleContent.trim() || undefined,
       tags,
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
@@ -191,10 +212,10 @@ export function EditSpotForm({
           </View>
         </View>
 
-        {/* カスタム名（編集可能） */}
+        {/* カスタム名（編集可能・必須） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポット名
+            スポット名 <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={customName}
@@ -213,22 +234,49 @@ export function EditSpotForm({
           </View>
         </View>
 
-        {/* メモ */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">メモ</Text>
+        {/* ひとこと（必須） */}
+        <View className="mb-2">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            ひとこと <Text className="text-red-500">*</Text>
+          </Text>
           <StyledTextInput
             value={description}
             onChangeText={setDescription}
-            placeholder="このスポットについてのメモを入力してください"
+            placeholder="このスポットについてひとこと"
             multiline
-            numberOfLines={4}
+            numberOfLines={2}
             maxLength={INPUT_LIMITS.SPOT_DESCRIPTION}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             textAlignVertical="top"
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
-            {description.length}/{INPUT_LIMITS.SPOT_DESCRIPTION}
-          </Text>
+          <View className="flex-row justify-end mt-1">
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+              {description.length}/{INPUT_LIMITS.SPOT_DESCRIPTION}
+            </Text>
+          </View>
+        </View>
+
+        {/* 記事 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">記事</Text>
+          <StyledTextInput
+            value={articleContent}
+            onChangeText={setArticleContent}
+            placeholder="スポットについて詳しく書いてみましょう"
+            multiline
+            numberOfLines={8}
+            maxLength={INPUT_LIMITS.SPOT_ARTICLE_CONTENT}
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base min-h-[160px]"
+            textAlignVertical="top"
+          />
+          <View className="flex-row justify-between mt-1">
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+              ここに入力した内容が記事ページで表示されます
+            </Text>
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+              {articleContent.length}/{INPUT_LIMITS.SPOT_ARTICLE_CONTENT}
+            </Text>
+          </View>
         </View>
 
         {/* タグ */}
@@ -293,9 +341,9 @@ export function EditSpotForm({
         {/* 更新ボタン */}
         <TouchableOpacity
           onPress={handleSubmit}
-          disabled={isLoading}
+          disabled={isButtonDisabled}
           className={`py-4 rounded-lg items-center mb-4 ${
-            isLoading ? 'bg-blue-300' : 'bg-blue-500'
+            isButtonDisabled ? 'bg-blue-300' : 'bg-blue-500'
           }`}
           activeOpacity={0.8}
         >

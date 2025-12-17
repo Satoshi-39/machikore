@@ -141,7 +141,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
                 style={{ backgroundColor: collection.color || colors.gray[100] }}
               >
                 <Ionicons
-                  name="library"
+                  name="grid"
                   size={32}
                   color={collection.color ? '#fff' : colors.primary.DEFAULT}
                 />

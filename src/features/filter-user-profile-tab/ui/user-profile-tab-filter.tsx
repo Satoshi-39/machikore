@@ -35,7 +35,7 @@ export function UserProfileTabFilter({
 
   const tabs: { mode: UserProfileTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [
     { mode: 'maps', icon: 'map' },
-    { mode: 'collections', icon: 'library' },
+    { mode: 'collections', icon: 'grid' },
   ];
 
   return (

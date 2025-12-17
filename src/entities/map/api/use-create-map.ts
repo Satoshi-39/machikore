@@ -7,14 +7,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { createMap } from '@/shared/api/supabase';
+import { createMap, setMapTags } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
 
 interface CreateMapParams {
   userId: string;
   name: string;
   description?: string;
-  category?: string;
+  categoryId: string;
   tags?: string[];
   isPublic: boolean;
   thumbnailUrl?: string;
@@ -31,17 +31,24 @@ export function useCreateMap() {
     mutationFn: async (params) => {
       const mapId = uuidv4();
 
-      return createMap({
+      // マップを作成
+      const map = await createMap({
         id: mapId,
         user_id: params.userId,
         name: params.name,
         description: params.description || null,
-        category: params.category || null,
-        tags: params.tags && params.tags.length > 0 ? params.tags : null,
+        category_id: params.categoryId,
         is_public: params.isPublic,
         thumbnail_url: params.thumbnailUrl || null,
         theme_color: params.themeColor || 'pink',
       });
+
+      // タグを中間テーブルに保存
+      if (params.tags && params.tags.length > 0) {
+        await setMapTags(mapId, params.tags);
+      }
+
+      return map;
     },
     onSuccess: (_data, variables) => {
       // ユーザーのマップ一覧キャッシュを無効化

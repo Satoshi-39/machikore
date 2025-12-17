@@ -4,12 +4,12 @@
  * マップはタブ内で表示、コレクション・いいね・ブックマークは別ページへ遷移
  */
 
-import React from 'react';
-import { Pressable, View } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { Pressable, View } from 'react-native';
 
 export type MyPageTabMode = 'maps';
 
@@ -45,7 +45,11 @@ export function MyPageTabFilter({
           <Ionicons
             name="map"
             size={24}
-            color={tabMode === 'maps' ? colors.primary.DEFAULT : colors.text.secondary}
+            color={
+              tabMode === 'maps'
+                ? colors.primary.DEFAULT
+                : colors.text.secondary
+            }
           />
           {tabMode === 'maps' && (
             <View
@@ -59,33 +63,21 @@ export function MyPageTabFilter({
           onPress={() => router.push(`${basePath}/collections` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons
-            name="library"
-            size={24}
-            color={colors.text.secondary}
-          />
+          <Ionicons name="grid" size={24} color={colors.text.secondary} />
         </Pressable>
         {/* いいねボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push(`${basePath}/likes` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons
-            name="heart"
-            size={24}
-            color={colors.text.secondary}
-          />
+          <Ionicons name="heart" size={24} color={colors.text.secondary} />
         </Pressable>
         {/* ブックマークボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push(`/(tabs)/${currentTab}/bookmarks` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons
-            name="bookmark"
-            size={24}
-            color={colors.text.secondary}
-          />
+          <Ionicons name="bookmark" size={24} color={colors.text.secondary} />
         </Pressable>
       </View>
     </View>

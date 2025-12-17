@@ -268,7 +268,6 @@ export function initializeDatabase(): void {
         name TEXT NOT NULL,
         description TEXT,
         category TEXT,
-        tags TEXT,
         is_public INTEGER DEFAULT 0,
         is_default INTEGER DEFAULT 0,
         is_official INTEGER DEFAULT 0,
@@ -336,6 +335,7 @@ export function initializeDatabase(): void {
     `);
 
     // 8. ユーザースポットテーブル（ユーザーごとのスポット）
+    // tagsは中間テーブル(spot_tags)で管理
     db.execSync(`
       CREATE TABLE IF NOT EXISTS user_spots (
         id TEXT PRIMARY KEY,
@@ -345,7 +345,6 @@ export function initializeDatabase(): void {
         machi_id TEXT NOT NULL,
         custom_name TEXT,
         description TEXT,
-        tags TEXT,
         images_count INTEGER DEFAULT 0,
         likes_count INTEGER DEFAULT 0,
         comments_count INTEGER DEFAULT 0,

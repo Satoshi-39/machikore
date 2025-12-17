@@ -17,6 +17,7 @@ export interface SpotWithImages extends SpotRow {
 
 /**
  * スポット作成パラメータ（新スキーマ対応）
+ * tagsは中間テーブル(spot_tags)で管理するため、useUpdateSpotTagsを使用
  */
 export interface CreateSpotParams {
   userId: string;
@@ -28,7 +29,6 @@ export interface CreateSpotParams {
   longitude: number;
   description?: string | null; // 旧memo
   customName?: string | null; // ユーザー独自の名前
-  tags?: string[]; // タグ配列
   images?: string[]; // 画像URI配列
   // Google Placesデータ（検索から選択した場合）
   googlePlaceId?: string | null;
@@ -42,12 +42,13 @@ export interface CreateSpotParams {
 /**
  * スポット更新パラメータ（新スキーマ対応）
  * ユーザーカスタマイズ可能なフィールドのみ
+ * tagsは中間テーブル(spot_tags)で管理するため、useUpdateSpotTagsを使用
  */
 export interface UpdateSpotParams {
   spotId: string;
-  customName?: string | null;
-  description?: string | null; // 旧memo
-  tags?: string[] | null;
+  customName?: string; // NOT NULL制約があるためnullは不可
+  description?: string | null; // ひとこと
+  articleContent?: string | null; // 記事
   orderIndex?: number;
   mapId?: string;
 }

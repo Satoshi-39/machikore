@@ -34,7 +34,7 @@ export interface MapWithUser {
   name: string;
   description: string | null;
   category: string | null;
-  tags: string[] | null;
+  category_id: string | null;
   is_public: boolean;
   is_default: boolean;
   is_official: boolean;

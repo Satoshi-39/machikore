@@ -259,15 +259,16 @@ export function insertSpot(params: {
   });
 
   // 2. スポットを挿入
+  // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
   execute(
     `
     INSERT INTO user_spots (
       id, map_id, user_id, machi_id, master_spot_id,
-      custom_name, description, tags, images_count,
+      custom_name, description, images_count,
       likes_count, comments_count, order_index,
       created_at, updated_at, synced_at, is_synced
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       spot.id,
@@ -277,7 +278,6 @@ export function insertSpot(params: {
       masterSpotId,
       spot.custom_name ?? null,
       spot.description ?? null,
-      spot.tags ?? null,
       spot.images_count,
       spot.likes_count,
       spot.comments_count,
@@ -293,13 +293,13 @@ export function insertSpot(params: {
 /**
  * スポットを更新（新しいスキーマ用）
  * ユーザーカスタマイズ可能なフィールドのみ更新
+ * tagsは中間テーブル(spot_tags)で管理するため、ここでは更新しない
  */
 export function updateSpot(
   spotId: UUID,
   updates: {
     custom_name?: string | null;
     description?: string | null;
-    tags?: string | null;
     order_index?: number;
   }
 ): void {
@@ -314,11 +314,6 @@ export function updateSpot(
   if (updates.description !== undefined) {
     fields.push('description = ?');
     values.push(updates.description);
-  }
-
-  if (updates.tags !== undefined) {
-    fields.push('tags = ?');
-    values.push(updates.tags);
   }
 
   if (updates.order_index !== undefined) {
