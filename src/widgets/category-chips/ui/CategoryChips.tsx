@@ -3,28 +3,19 @@
  *
  * 横スクロールのカテゴリ選択タブを表示
  * 選択時は下線でフォーカス表示
+ * カテゴリはcategoriesテーブルから取得
  */
 
-import React from 'react';
-import { ScrollView, Pressable, Text, View } from 'react-native';
+import React, { useMemo } from 'react';
+import { ScrollView, Pressable, Text, View, ActivityIndicator } from 'react-native';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useCategories } from '@/entities/category';
 
-// カテゴリ定義
-export const CATEGORIES = [
-  { id: 'all', label: 'すべて', tag: null },
-  { id: 'gourmet', label: 'グルメ', tag: 'グルメ' },
-  { id: 'cafe', label: 'カフェ', tag: 'カフェ' },
-  { id: 'ramen', label: 'ラーメン', tag: 'ラーメン' },
-  { id: 'izakaya', label: '居酒屋', tag: '居酒屋' },
-  { id: 'sweets', label: 'スイーツ', tag: 'スイーツ' },
-  { id: 'shopping', label: 'ショッピング', tag: 'ショッピング' },
-  { id: 'tourism', label: '観光', tag: '観光' },
-  { id: 'nature', label: '自然', tag: '自然' },
-  { id: 'nightview', label: '夜景', tag: '夜景' },
-] as const;
+// 「すべて」カテゴリのID
+const ALL_CATEGORY_ID = 'all';
 
-export type CategoryId = typeof CATEGORIES[number]['id'];
+export type CategoryId = string;
 
 interface CategoryChipsProps {
   selectedCategory: CategoryId;
@@ -34,6 +25,21 @@ interface CategoryChipsProps {
 export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryChipsProps) {
   const isDarkMode = useIsDarkMode();
   const selectedColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
+  const { data: categories = [], isLoading } = useCategories();
+
+  // 「すべて」を先頭に追加したカテゴリリスト
+  const displayCategories = useMemo(() => {
+    const allCategory = { id: ALL_CATEGORY_ID, name: 'すべて', slug: 'all', icon: '', display_order: 0, is_active: true, name_translations: null, created_at: '', updated_at: '' };
+    return [allCategory, ...categories];
+  }, [categories]);
+
+  if (isLoading) {
+    return (
+      <View className="py-4 items-center">
+        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }
 
   return (
     <ScrollView
@@ -42,7 +48,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
       contentContainerStyle={{ paddingHorizontal: 16, gap: 20 }}
       className="py-2"
     >
-      {CATEGORIES.map((category) => {
+      {displayCategories.map((category) => {
         const isSelected = selectedCategory === category.id;
         return (
           <Pressable
@@ -58,7 +64,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
                   : 'text-foreground-muted dark:text-dark-foreground-muted'
               }`}
             >
-              {category.label}
+              {category.name}
             </Text>
             {isSelected && (
               <View

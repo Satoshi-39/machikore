@@ -1,1 +1,1 @@
-export { CategoryChips, CATEGORIES, type CategoryId } from './ui/CategoryChips';
+export { CategoryChips, type CategoryId } from './ui/CategoryChips';

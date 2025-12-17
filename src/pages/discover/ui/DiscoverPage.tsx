@@ -10,7 +10,7 @@ import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { DiscoverSearch } from '@/widgets/discover-search';
-import { CategoryChips, CATEGORIES, type CategoryId } from '@/widgets/category-chips';
+import { CategoryChips, type CategoryId } from '@/widgets/category-chips';
 import { FeaturedCarousel } from '@/widgets/featured-carousel';
 import { RecentlyViewedSection } from '@/widgets/recently-viewed';
 import { TodayRankingSection, PopularRankingSection } from '@/widgets/map-ranking';
@@ -38,9 +38,6 @@ export function DiscoverPage() {
   const handleCategorySelect = useCallback((categoryId: CategoryId) => {
     setSelectedCategory(categoryId);
   }, []);
-
-  // 選択されたカテゴリのタグを取得
-  const selectedTag = CATEGORIES.find((c) => c.id === selectedCategory)?.tag;
 
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
@@ -84,7 +81,7 @@ export function DiscoverPage() {
             </>
           ) : (
             /* カテゴリ選択時: そのカテゴリのマップ一覧 */
-            selectedTag && <CategoryMapsSection tag={selectedTag} />
+            <CategoryMapsSection categoryId={selectedCategory} />
           )}
         </ScrollView>
       )}

@@ -9,7 +9,8 @@ import { View, Text, FlatList, Pressable, ActivityIndicator } from 'react-native
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
-import { useMapTagSearch } from '@/entities/map';
+import { useMapCategorySearch } from '@/entities/map';
+import { useCategories } from '@/entities/category';
 import type { MapWithUser } from '@/shared/types';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -76,13 +77,14 @@ function CategoryMapsCard({ map, onPress, isDarkMode }: CategoryMapsCardProps) {
 }
 
 interface CategoryMapsSectionProps {
-  tag: string;
+  categoryId: string;
 }
 
-export function CategoryMapsSection({ tag }: CategoryMapsSectionProps) {
+export function CategoryMapsSection({ categoryId }: CategoryMapsSectionProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
-  const { data: maps, isLoading, error } = useMapTagSearch(tag);
+  const { data: maps, isLoading, error } = useMapCategorySearch(categoryId);
+  const { data: categories = [] } = useCategories();
 
   const handleMapPress = useCallback(
     (mapId: string) => {
@@ -109,6 +111,9 @@ export function CategoryMapsSection({ tag }: CategoryMapsSectionProps) {
     );
   }
 
+  // カテゴリ名を取得
+  const categoryName = categories.find((c) => c.id === categoryId)?.name ?? categoryId;
+
   if (!maps || maps.length === 0) {
     return (
       <View className="flex-1 items-center justify-center py-12">
@@ -118,7 +123,7 @@ export function CategoryMapsSection({ tag }: CategoryMapsSectionProps) {
           color={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary}
         />
         <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-          「{tag}」のマップが見つかりませんでした
+          「{categoryName}」のマップが見つかりませんでした
         </Text>
       </View>
     );
