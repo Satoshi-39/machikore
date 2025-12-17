@@ -7,6 +7,8 @@ import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS } from '@/shared/config/constants';
 import type { VisitFilter } from '@/features/quick-search-buttons';
+import type { MachiRow } from '@/shared/types/database.types';
+import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 // アイコン画像（緑色）
 const storefrontIcon = require('@assets/icons/storefront.png');
@@ -19,12 +21,14 @@ interface MachiFeatureProperties {
 
 interface MachiLabelsProps {
   geoJson: FeatureCollection<Point, MachiFeatureProperties>;
-  onPress: (event: any) => void;
+  machiMap?: Map<string, MachiRow>;
+  onPress?: (machi: MachiRow) => void;
   visitFilter?: VisitFilter;
 }
 
 export function MachiLabels({
   geoJson,
+  machiMap,
   onPress,
   visitFilter = 'all',
 }: MachiLabelsProps) {
@@ -35,6 +39,19 @@ export function MachiLabels({
   // 色は常に街の色（緑）で統一
   const color = LOCATION_ICONS.MACHI.color;
 
+  const handlePress = (event: MapboxOnPressEvent) => {
+    const feature = event.features?.[0];
+    if (!feature || !onPress || !machiMap) return;
+
+    const machiId = feature.properties?.id as string | undefined;
+    if (machiId) {
+      const machi = machiMap.get(machiId);
+      if (machi) {
+        onPress(machi);
+      }
+    }
+  };
+
   return (
     <>
       {/* アイコン画像を登録 */}
@@ -43,7 +60,7 @@ export function MachiLabels({
       <Mapbox.ShapeSource
         id="machi-source"
         shape={geoJson}
-        onPress={onPress}
+        onPress={handlePress}
       >
         {/* 訪問済み街（アイコン + テキスト横並び） */}
         <Mapbox.SymbolLayer

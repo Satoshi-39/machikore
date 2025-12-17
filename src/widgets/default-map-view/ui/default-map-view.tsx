@@ -208,6 +208,11 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       return new Map(regions.map((region) => [region.id, region]));
     }, [regions]);
 
+    // CountryRowのマップを作成（IDからCountryRowへの変換用）
+    const countryMap = useMemo(() => {
+      return new Map(countries.map((country) => [country.id, country]));
+    }, [countries]);
+
     // MasterSpotDisplayのマップを作成（IDからMasterSpotDisplayへの変換用）
     const masterSpotMap = useMemo(() => {
       if (!masterSpots) return new Map<string, MasterSpotDisplay>();
@@ -245,47 +250,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
 
 
-    // 街マーカータップ時のハンドラー（MachiLabels専用）
-    const handleMachiMarkerPress = (event: any) => {
-      const feature = event.features?.[0];
-      if (!feature) return;
 
-      const machiId = feature.properties?.id;
-      if (machiId) {
-        const machi = machiMap.get(machiId);
-        if (machi) {
-          handleMachiSelect(machi);
-        }
-      }
-    };
-
-    // スポットマーカータップ時のハンドラー（SpotLabels専用）
-    const handleSpotMarkerPress = (event: any) => {
-      const feature = event.features?.[0];
-      if (!feature) return;
-
-      const spotId = feature.properties?.id;
-      if (spotId) {
-        const spot = masterSpotMap.get(spotId);
-        if (spot) {
-          handleSpotSelect(spot);
-        }
-      }
-    };
-
-    // 市区マーカータップ時のハンドラー
-    const handleCityPress = (event: any) => {
-      const feature = event.features?.[0];
-      if (!feature) return;
-
-      const cityId = feature.properties?.id;
-      if (cityId) {
-        const city = cityMap.get(cityId);
-        if (city) {
-          handleCitySelect(city);
-        }
-      }
-    };
 
     // 街・スポット統合レイヤーのタップハンドラー
     const handleMachiSpotPress = (event: any) => {
@@ -413,7 +378,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {visitFilter === 'all' && (
           <>
             {/* 国ラベル表示（テキストのみ）- ズーム0-5で表示 */}
-            <CountryLabels geoJson={countriesGeoJson} onPress={handleCountrySelect} />
+            <CountryLabels geoJson={countriesGeoJson} countryMap={countryMap} onPress={handleCountrySelect} />
 
             {/* 地方ラベル表示（テキストのみ）- ズーム5-7で表示 */}
             <RegionLabels
@@ -430,7 +395,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             />
 
             {/* 市区ラベル表示（テキストのみ）- ズーム10-12で表示 */}
-            <CityLabels geoJson={citiesGeoJson} onPress={handleCityPress} />
+            <CityLabels geoJson={citiesGeoJson} cityMap={cityMap} onPress={handleCitySelect} />
 
             {/* 街＋スポット＋交通機関統合レイヤー（symbolSortKeyで優先度制御） */}
             <MachiSpotTransportLabels
@@ -448,7 +413,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {(visitFilter === 'visited' || visitFilter === 'not_visited') && (
           <MachiLabels
             geoJson={machiGeoJson}
-            onPress={handleMachiMarkerPress}
+            machiMap={machiMap}
+            onPress={handleMachiSelect}
             visitFilter={visitFilter}
           />
         )}
@@ -457,7 +423,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {visitFilter === 'favorite' && (
           <SpotLabels
             geoJson={masterSpotsGeoJson}
-            onPress={handleSpotMarkerPress}
+            spotMap={masterSpotMap}
+            onPress={handleSpotSelect}
             selectedSpotId={selectedSpot?.id}
             isFavoriteFilter
           />

@@ -13,6 +13,7 @@ import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import { usePinDropStore, PinDropOverlay } from '@/features/drop-pin';
+import { useMapControlsVisibility } from '@/features/map-controls';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { ENV, LABEL_ZOOM_USER_MAP, type UserMapThemeColor } from '@/shared/config';
@@ -30,7 +31,7 @@ import React, {
   useState,
 } from 'react';
 import { View, Dimensions } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming, useSharedValue } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSpotCamera, useUserSpotsGeoJson, usePinDropAutoCancel } from '../model';
 
 // 画面サイズと現在地ボタンの位置計算用定数
@@ -120,11 +121,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       cameraRef,
     });
 
-    // 現在地ボタン・全スポットボタンの表示状態（アニメーション用）
-    const controlButtonsOpacity = useSharedValue(1);
-    // カード閉じる処理中フラグ（refで管理して即座に反映）
-    const isClosingRef = useRef(false);
-
     // カード選択状態の管理
     const {
       selectedSpot,
@@ -145,27 +141,22 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       onDetailCardMaximized,
     });
 
+    // マップコントロールの表示制御（現在地ボタン・全スポットボタン）
+    // user-map-viewではカルーセル表示中はボタンを隠すので、autoShowOnCardCloseはfalse
+    const controlsVisibility = useMapControlsVisibility({
+      hasCard: isDetailCardOpen,
+      autoShowOnCardClose: false,
+    });
+
     // カルーセルからカード表示時のラッパー（初回ちらつき防止）
     const handleCarouselSpotPress = useCallback(
       (spot: Parameters<typeof baseHandleCarouselSpotPress>[0]) => {
         // カード表示前にopacityを0にして、カード表示後にフェードインさせる
-        controlButtonsOpacity.value = 0;
+        controlsVisibility.handleCardOpen();
         baseHandleCarouselSpotPress(spot);
       },
-      [baseHandleCarouselSpotPress, controlButtonsOpacity]
+      [baseHandleCarouselSpotPress, controlsVisibility]
     );
-
-    // 現在地ボタン・全スポットボタンのアニメーションスタイル
-    const controlButtonsAnimatedStyle = useAnimatedStyle(() => {
-      return {
-        opacity: controlButtonsOpacity.value,
-      };
-    });
-
-    // 現在地ボタン・全スポットボタンを表示/非表示にする（アニメーション付き）
-    const setControlButtonsVisible = useCallback((visible: boolean) => {
-      controlButtonsOpacity.value = withTiming(visible ? 1 : 0, { duration: 150 });
-    }, [controlButtonsOpacity]);
 
     const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
     const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
@@ -218,22 +209,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // 詳細カードを閉じる → カルーセルに戻る（閉じるフラグのリセットを追加）
     const handleDetailCardClose = useCallback(() => {
-      isClosingRef.current = false;
+      controlsVisibility.resetClosingState();
       baseHandleDetailCardClose();
-    }, [baseHandleDetailCardClose]);
-
-    // 現在地ボタン表示/非表示のコールバック（高さベースの判定）
-    // 閉じる処理中は無視（refで即座に判定）
-    const handleLocationButtonVisibilityChange = useCallback((isVisible: boolean) => {
-      if (isClosingRef.current) return;
-      setControlButtonsVisible(isVisible);
-    }, [setControlButtonsVisible]);
-
-    // カード閉じる前のコールバック（閉じるフラグを立ててボタンを非表示）
-    const handleBeforeClose = useCallback(() => {
-      isClosingRef.current = true;
-      setControlButtonsVisible(false);
-    }, [setControlButtonsVisible]);
+    }, [baseHandleDetailCardClose, controlsVisibility]);
 
     // スナップ変更時のハンドラー（snapIndex=2で最大化）
     // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
@@ -394,9 +372,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                   ? SCREEN_HEIGHT * 0.15 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」の上
                   : LOCATION_BUTTON_DEFAULT_BOTTOM, // 通常位置
               },
-              isDetailCardOpen ? controlButtonsAnimatedStyle : {},
+              isDetailCardOpen ? controlsVisibility.controlButtonsAnimatedStyle : {},
             ]}
-            pointerEvents={isDetailCardOpen && controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
+            pointerEvents={isDetailCardOpen && controlsVisibility.controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
           >
             <LocationButton
               onPress={handleLocationPress}
@@ -443,8 +421,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onExpandedChange={onDetailCardMaximized}
             onEdit={onEditSpot}
             onSearchBarVisibilityChange={onDetailCardMaximized}
-            onBeforeClose={handleBeforeClose}
-            onLocationButtonVisibilityChange={handleLocationButtonVisibilityChange}
+            onBeforeClose={controlsVisibility.handleBeforeClose}
+            onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
             themeColor={mapData?.theme_color as UserMapThemeColor}
           />
         )}

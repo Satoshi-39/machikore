@@ -6,6 +6,8 @@ import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS } from '@/shared/config';
+import type { CityRow } from '@/shared/types/database.types';
+import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 // アイコン画像（オレンジ色）
 const businessIcon = require('@assets/icons/business-city.png');
@@ -17,10 +19,25 @@ interface CityFeatureProperties {
 
 interface CityLabelsProps {
   geoJson: FeatureCollection<Point, CityFeatureProperties>;
-  onPress: (event: any) => void;
+  cityMap?: Map<string, CityRow>;
+  onPress?: (city: CityRow) => void;
 }
 
-export function CityLabels({ geoJson, onPress }: CityLabelsProps) {
+export function CityLabels({ geoJson, cityMap, onPress }: CityLabelsProps) {
+
+  const handlePress = (event: MapboxOnPressEvent) => {
+    const feature = event.features?.[0];
+    if (!feature || !onPress || !cityMap) return;
+
+    const cityId = feature.properties?.id as string | undefined;
+    if (cityId) {
+      const city = cityMap.get(cityId);
+      if (city) {
+        onPress(city);
+      }
+    }
+  };
+
   return (
     <>
       {/* アイコン画像を登録 */}
@@ -29,7 +46,7 @@ export function CityLabels({ geoJson, onPress }: CityLabelsProps) {
       <Mapbox.ShapeSource
         id="cities-source"
         shape={geoJson}
-        onPress={onPress}
+        onPress={handlePress}
       >
         <Mapbox.SymbolLayer
           id="cities-labels"

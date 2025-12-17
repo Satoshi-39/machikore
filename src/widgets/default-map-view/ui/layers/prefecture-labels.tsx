@@ -7,6 +7,7 @@ import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS } from '@/shared/config';
 import type { PrefectureRow } from '@/shared/types/database.types';
+import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 // アイコン画像（紫色）
 const shieldIcon = require('@assets/icons/shield-prefecture.png');
@@ -26,11 +27,11 @@ interface PrefectureLabelsProps {
 
 export function PrefectureLabels({ geoJson, prefectureMap, onPress }: PrefectureLabelsProps) {
 
-  const handlePress = (event: any) => {
+  const handlePress = (event: MapboxOnPressEvent) => {
     const feature = event.features?.[0];
     if (!feature || !onPress || !prefectureMap) return;
 
-    const prefectureId = feature.properties?.id;
+    const prefectureId = feature.properties?.id as string | undefined;
     if (prefectureId) {
       const prefecture = prefectureMap.get(prefectureId);
       if (prefecture) {

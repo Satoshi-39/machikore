@@ -6,7 +6,9 @@ import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
+import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { SPOT_CATEGORY_COLORS } from '@/shared/config';
+import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 // カテゴリ別アイコン画像
 const spotIcons = {
@@ -19,16 +21,31 @@ const spotIcons = {
 
 interface SpotLabelsProps {
   geoJson: FeatureCollection<Point, { id: string; name: string; category: SpotCategory }>;
-  onPress: (event: any) => void;
+  spotMap?: Map<string, MasterSpotDisplay>;
+  onPress?: (spot: MasterSpotDisplay) => void;
   /** 選択中のスポットID（選択中は常に表示） */
   selectedSpotId?: string | null;
   /** お気に入りフィルターが適用されているか（trueの場合はズーム制限なし） */
   isFavoriteFilter?: boolean;
 }
 
-export function SpotLabels({ geoJson, onPress, selectedSpotId, isFavoriteFilter = false }: SpotLabelsProps) {
+export function SpotLabels({ geoJson, spotMap, onPress, selectedSpotId, isFavoriteFilter = false }: SpotLabelsProps) {
   // お気に入りフィルター時はズーム制限なし、通常時はズーム13以上
   const minZoom = isFavoriteFilter ? 0 : 13;
+
+  const handlePress = (event: MapboxOnPressEvent) => {
+    const feature = event.features?.[0];
+    if (!feature || !onPress || !spotMap) return;
+
+    const spotId = feature.properties?.id as string | undefined;
+    if (spotId) {
+      const spot = spotMap.get(spotId);
+      if (spot) {
+        onPress(spot);
+      }
+    }
+  };
+
   return (
     <>
       {/* アイコン画像を登録 */}
@@ -37,7 +54,7 @@ export function SpotLabels({ geoJson, onPress, selectedSpotId, isFavoriteFilter 
       <Mapbox.ShapeSource
         id="master-spots-source"
         shape={geoJson}
-        onPress={onPress}
+        onPress={handlePress}
       >
         {/* 飲食店系 - アイコン + テキストオレンジ */}
         <Mapbox.SymbolLayer

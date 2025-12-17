@@ -7,6 +7,7 @@ import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import { LABEL_ZOOM_DEFAULT_MAP } from '@/shared/config';
 import type { CountryRow } from '@/shared/types/database.types';
+import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 interface CountryFeatureProperties {
   id: string;
@@ -16,27 +17,22 @@ interface CountryFeatureProperties {
 
 interface CountryLabelsProps {
   geoJson: FeatureCollection<Point, CountryFeatureProperties>;
-  onPress?: (country: CountryRow | null) => void;
+  onPress?: (country: CountryRow) => void;
+  countryMap?: Map<string, CountryRow>;
 }
 
-export function CountryLabels({ geoJson, onPress }: CountryLabelsProps) {
+export function CountryLabels({ geoJson, onPress, countryMap }: CountryLabelsProps) {
 
-  const handlePress = (event: any) => {
+  const handlePress = (event: MapboxOnPressEvent) => {
     const feature = event.features?.[0];
-    if (!feature || !onPress) return;
+    if (!feature || !onPress || !countryMap) return;
 
-    const { id, name, code } = feature.properties;
-    if (id && name) {
-      // CountryRow形式で渡す（座標はダミーでOK、カード表示には使わない）
-      onPress({
-        id,
-        name,
-        name_en: name, // 英語名は表示名と同じ（ラベルからは英語名取得できないため）
-        name_kana: '',
-        latitude: 0,
-        longitude: 0,
-        country_code: code,
-      });
+    const countryId = feature.properties?.id as string | undefined;
+    if (countryId) {
+      const country = countryMap.get(countryId);
+      if (country) {
+        onPress(country);
+      }
     }
   };
 

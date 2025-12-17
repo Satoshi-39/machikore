@@ -24,3 +24,5 @@ export * from './notification-settings';
 export * from './places';
 export * from './reports';
 export * from './transport-hubs';
+export * from './categories';
+export * from './tags';

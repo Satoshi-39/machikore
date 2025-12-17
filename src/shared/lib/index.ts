@@ -9,3 +9,4 @@ export * from './sync';
 export * from './map';
 export * from './navigation';
 export * from './cache';
+export * from './i18n';

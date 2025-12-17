@@ -7,6 +7,7 @@ import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import type { RegionRow } from '@/shared/types/database.types';
 import { LABEL_ZOOM_DEFAULT_MAP } from '@/shared/config';
+import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 interface RegionFeatureProperties {
   id: string;
@@ -21,11 +22,11 @@ interface RegionLabelsProps {
 
 export function RegionLabels({ geoJson, onPress, regionMap }: RegionLabelsProps) {
 
-  const handlePress = (event: any) => {
+  const handlePress = (event: MapboxOnPressEvent) => {
     const feature = event.features?.[0];
     if (!feature || !onPress || !regionMap) return;
 
-    const regionId = feature.properties?.id;
+    const regionId = feature.properties?.id as string | undefined;
     if (regionId) {
       const region = regionMap.get(regionId);
       if (region) {

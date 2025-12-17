@@ -8,6 +8,8 @@ import { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reani
 interface UseMapControlsVisibilityOptions {
   /** カードが存在するかどうか */
   hasCard: boolean;
+  /** カードがなくなった時に自動でボタンを表示するか（デフォルト: true） */
+  autoShowOnCardClose?: boolean;
 }
 
 interface UseMapControlsVisibilityReturn {
@@ -34,6 +36,7 @@ interface UseMapControlsVisibilityReturn {
  */
 export function useMapControlsVisibility({
   hasCard,
+  autoShowOnCardClose = true,
 }: UseMapControlsVisibilityOptions): UseMapControlsVisibilityReturn {
   // 現在地ボタンの表示状態（アニメーション用）
   const controlButtonsOpacity = useSharedValue(1);
@@ -75,12 +78,12 @@ export function useMapControlsVisibility({
     controlButtonsOpacity.value = 0;
   }, [controlButtonsOpacity]);
 
-  // カードがなくなったら現在地ボタンを表示
+  // カードがなくなったら現在地ボタンを表示（autoShowOnCardCloseがtrueの場合のみ）
   useEffect(() => {
-    if (!hasCard) {
+    if (autoShowOnCardClose && !hasCard) {
       setControlButtonsVisible(true);
     }
-  }, [hasCard, setControlButtonsVisible]);
+  }, [hasCard, autoShowOnCardClose, setControlButtonsVisible]);
 
   return {
     controlButtonsAnimatedStyle,

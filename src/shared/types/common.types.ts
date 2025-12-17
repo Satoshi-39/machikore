@@ -67,3 +67,23 @@ export type VisitIconType =
   | 'first' // 1回目
   | 'second' // 2回目
   | 'multiple'; // 3回以上
+
+// ===============================
+// Mapbox関連型
+// ===============================
+
+/**
+ * Mapbox ShapeSourceのonPressイベント型
+ * @rnmapbox/maps の内部型を再定義
+ */
+export interface MapboxOnPressEvent {
+  features: Array<GeoJSON.Feature>;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+  point: {
+    x: number;
+    y: number;
+  };
+}
