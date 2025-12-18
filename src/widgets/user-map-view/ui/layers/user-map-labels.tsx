@@ -467,25 +467,24 @@ export function UserMapLabels({
         />
 
         {/* ========== スポットレイヤー（交通機関より優先） ========== */}
-        {/* 通常のスポット：フォーカス中または選択中のスポットは拡大表示 */}
+        {/* 通常のスポット：フォーカス中・選択中のスポットは別レイヤーで表示 */}
         <Mapbox.SymbolLayer
           id="user-spots-layer"
-          filter={selectedSpotId
-            ? ['all', ['==', ['get', 'featureType'], 'spot'], ['!=', ['get', 'id'], selectedSpotId]]
-            : ['==', ['get', 'featureType'], 'spot']
+          filter={
+            selectedSpotId || focusedSpotId
+              ? ['all',
+                  ['==', ['get', 'featureType'], 'spot'],
+                  ...(selectedSpotId ? [['!=', ['get', 'id'], selectedSpotId]] : []),
+                  ...(focusedSpotId && focusedSpotId !== selectedSpotId ? [['!=', ['get', 'id'], focusedSpotId]] : []),
+                ]
+              : ['==', ['get', 'featureType'], 'spot']
           }
           style={{
             symbolSortKey: ['get', 'sortKey'],
             iconImage: 'user-spot-icon',
-            // フォーカス中のスポットは拡大表示（0.2 → 0.28）
-            iconSize: focusedSpotId
-              ? ['case', ['==', ['get', 'id'], focusedSpotId], 0.28, 0.2]
-              : 0.2,
+            iconSize: 0.2,
             textField: ['get', 'name'],
-            // フォーカス中のスポットはテキストも少し大きく
-            textSize: focusedSpotId
-              ? ['case', ['==', ['get', 'id'], focusedSpotId], 15, 13]
-              : 13,
+            textSize: 13,
             textColor: spotColor,
             textHaloColor: spotHaloColor,
             textHaloWidth: 2,
@@ -496,6 +495,32 @@ export function UserMapLabels({
             textOffset: [0.3, 0],
             textAllowOverlap: false,
             iconAllowOverlap: false,
+          }}
+        />
+
+        {/* ========== フォーカス中スポットレイヤー（カルーセルでフォーカス中、最前面に拡大表示） ========== */}
+        <Mapbox.SymbolLayer
+          id="user-spots-focused-layer"
+          filter={focusedSpotId && focusedSpotId !== selectedSpotId
+            ? ['all', ['==', ['get', 'featureType'], 'spot'], ['==', ['get', 'id'], focusedSpotId]]
+            : ['==', 'dummy', 'never-match']
+          }
+          style={{
+            symbolSortKey: 0,
+            iconImage: 'user-spot-icon',
+            iconSize: 0.28,
+            textField: ['get', 'name'],
+            textSize: 15,
+            textColor: spotColor,
+            textHaloColor: spotHaloColor,
+            textHaloWidth: 2,
+            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            iconTextFit: 'none',
+            textAnchor: 'left',
+            iconAnchor: 'right',
+            textOffset: [0.3, 0],
+            textAllowOverlap: true,
+            iconAllowOverlap: true,
           }}
         />
 

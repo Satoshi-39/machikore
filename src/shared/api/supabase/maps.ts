@@ -189,6 +189,7 @@ export async function getMapSpots(
       machi_id: spot.machi_id,
       custom_name: spot.custom_name,
       description: spot.description,
+      article_content: spot.article_content,
       tags: spot.tags,
       images_count: spot.images_count,
       likes_count: spot.likes_count,

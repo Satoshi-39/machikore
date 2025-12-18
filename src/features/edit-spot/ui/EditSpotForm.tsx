@@ -212,46 +212,43 @@ export function EditSpotForm({
           </View>
         </View>
 
-        {/* カスタム名（編集可能・必須） */}
+        {/* このスポットを一言で！（必須） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポット名 <Text className="text-red-500">*</Text>
+            このスポットを一言で！ <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={customName}
             onChangeText={setCustomName}
-            placeholder="例：お気に入りのカフェ"
-            maxLength={INPUT_LIMITS.SPOT_NAME}
+            placeholder="例：最高のラーメン屋"
+            maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
-          <View className="flex-row justify-between mt-1">
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-              自分だけのわかりやすい名前をつけられます
-            </Text>
+          <View className="flex-row justify-end mt-1">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {customName.length}/{INPUT_LIMITS.SPOT_NAME}
+              {customName.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
             </Text>
           </View>
         </View>
 
-        {/* ひとこと（必須） */}
-        <View className="mb-2">
+        {/* スポットの概要（必須） */}
+        <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            ひとこと <Text className="text-red-500">*</Text>
+            スポットの概要 <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={description}
             onChangeText={setDescription}
-            placeholder="このスポットについてひとこと"
+            placeholder="このスポットの魅力を簡潔に"
             multiline
             numberOfLines={2}
-            maxLength={INPUT_LIMITS.SPOT_DESCRIPTION}
+            maxLength={INPUT_LIMITS.SPOT_SUMMARY}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             textAlignVertical="top"
           />
           <View className="flex-row justify-end mt-1">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {description.length}/{INPUT_LIMITS.SPOT_DESCRIPTION}
+              {description.length}/{INPUT_LIMITS.SPOT_SUMMARY}
             </Text>
           </View>
         </View>

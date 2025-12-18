@@ -179,7 +179,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const isLiked = spot.is_liked ?? false;
 
   // SpotWithDetailsから表示用データを抽出
-  const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+  // マスタースポットの正式名称（メイン表示）
+  const masterSpotName = spot.master_spot?.name || '不明なスポット';
+  // ユーザーの一言（サブ表示）
+  const oneWord = spot.custom_name;
   const spotAddress = spot.master_spot?.google_short_address || spot.google_short_address;
 
   // テーマカラーの色と縁取りを取得
@@ -273,13 +276,13 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     try {
       const url = `machikore://spots/${spot.id}`;
       await Share.share(Platform.select({
-        ios: { message: `${spotName}をチェック！`, url },
-        default: { message: `${spotName}をチェック！\n${url}` },
+        ios: { message: `${masterSpotName}をチェック！`, url },
+        default: { message: `${masterSpotName}をチェック！\n${url}` },
       })!);
     } catch (error) {
       log.error('[SpotDetailCard] Share error:', error);
     }
-  }, [spotName, spot.id]);
+  }, [masterSpotName, spot.id]);
 
   // 削除確認ダイアログ
   const handleDeleteSpot = useCallback(() => {
@@ -339,22 +342,23 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* ヘッダー */}
-        <View className="flex-row items-center justify-between mb-3">
+        <View className="flex-row items-start justify-between mb-3">
           <View className="flex-1">
+            {/* マスタースポット正式名称（メイン） */}
             <View className="flex-row items-center mb-1">
               <LocationPinIcon size={24} color={themeColorValue} strokeColor={themeColorStroke} />
-              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
-                {spotName}
+              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
+                {masterSpotName}
               </Text>
             </View>
-            {spotAddress && (
-              <View className="flex-row items-center">
-                <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
-              </View>
+            {/* ユーザーの一言（サブ） */}
+            {oneWord && (
+              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">
+                {oneWord}
+              </Text>
             )}
           </View>
-          <View className="flex-row items-center">
+          <View className="flex-row items-center mt-0.5">
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
               onPress={onCameraMove}
@@ -379,8 +383,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
         </View>
 
-        {/* 画像 */}
-        {images.length > 0 && (
+        {/* 画像（画像がある場合のみ表示） */}
+        {images.length > 0 ? (
           <View className="mb-3">
             <ScrollView
               horizontal
@@ -402,22 +406,20 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               ))}
             </ScrollView>
           </View>
+        ) : null}
+
+        {/* 住所 */}
+        {spotAddress && (
+          <View className="flex-row items-center mb-3">
+            <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
+          </View>
         )}
 
-        {/* 説明 */}
+        {/* 概要（ラベルなし） */}
         {spot.description && (
           <View className="mb-3">
-            <View className="flex-row items-center mb-1">
-              <Ionicons
-                name="document-text-outline"
-                size={16}
-                color={colors.text.secondary}
-              />
-              <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                説明
-              </Text>
-            </View>
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary pl-5">{spot.description}</Text>
+            <Text className="text-sm text-foreground dark:text-dark-foreground">{spot.description}</Text>
           </View>
         )}
 
@@ -494,6 +496,21 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">共有</Text>
           </Pressable>
         </View>
+
+        {/* 記事セクション */}
+        {spot.article_content && (
+          <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
+            <View className="flex-row items-center mb-3">
+              <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
+              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+                記事
+              </Text>
+            </View>
+            <Text className="text-sm text-foreground dark:text-dark-foreground leading-relaxed">
+              {spot.article_content}
+            </Text>
+          </View>
+        )}
 
         {/* コメントセクション */}
         <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
