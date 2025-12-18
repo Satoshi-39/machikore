@@ -215,6 +215,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       baseHandleDetailCardClose();
     }, [baseHandleDetailCardClose, controlsVisibility]);
 
+    // カルーセルも詳細カードも閉じた時にボタンを表示
+    // autoShowOnCardClose=falseなので手動で制御
+    useEffect(() => {
+      if (!isCarouselVisible && !isDetailCardOpen) {
+        controlsVisibility.setControlButtonsVisible(true);
+      }
+    }, [isCarouselVisible, isDetailCardOpen, controlsVisibility]);
+
     // スナップ変更時のハンドラー（snapIndex=2で最大化）
     // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
     const handleSnapChange = (snapIndex: number) => {
@@ -363,10 +371,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         </Mapbox.MapView>
 
         {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン）
-            - カルーセル表示中 → 非表示
-            - カルーセル非表示かつ詳細カード非表示 → 通常位置で表示
+            - カルーセルが実際に表示されている時 → 非表示
+            - カルーセル非表示または詳細カード表示中 → 表示
             - 詳細カード「小」→ カード上に表示、「中」「大」→ フェードアウト */}
-        {viewMode === 'map' && !isSearchFocused && !(isCarouselVisible && spots.length > 0) && (
+        {viewMode === 'map' && !isSearchFocused && !(isCarouselVisible && !isDetailCardOpen && spots.length > 0) && (
           <Animated.View
             style={[
               {
@@ -377,9 +385,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                   ? SCREEN_HEIGHT * 0.15 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」の上
                   : LOCATION_BUTTON_DEFAULT_BOTTOM, // 通常位置
               },
-              isDetailCardOpen ? controlsVisibility.controlButtonsAnimatedStyle : {},
+              controlsVisibility.controlButtonsAnimatedStyle,
             ]}
-            pointerEvents={isDetailCardOpen && controlsVisibility.controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
+            pointerEvents={controlsVisibility.isButtonsTouchable ? 'auto' : 'none'}
           >
             <LocationButton
               onPress={handleLocationPress}

@@ -2,8 +2,8 @@
  * マップコントロール（現在地ボタンなど）の表示制御フック
  */
 
-import { useCallback, useEffect, useRef } from 'react';
-import { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from 'react-native-reanimated';
 
 interface UseMapControlsVisibilityOptions {
   /** カードが存在するかどうか */
@@ -27,6 +27,8 @@ interface UseMapControlsVisibilityReturn {
   handleCardOpen: () => void;
   /** 現在地ボタンのopacity値（pointerEvents判定用） */
   controlButtonsOpacity: { value: number };
+  /** ボタンがタッチ可能かどうか（React state、pointerEvents用） */
+  isButtonsTouchable: boolean;
 }
 
 /**
@@ -42,6 +44,8 @@ export function useMapControlsVisibility({
   const controlButtonsOpacity = useSharedValue(1);
   // カード閉じる処理中フラグ（refで管理して即座に反映）
   const isClosingRef = useRef(false);
+  // ボタンがタッチ可能かどうか（React state、pointerEvents用）
+  const [isButtonsTouchable, setIsButtonsTouchable] = useState(true);
 
   // 現在地ボタンのアニメーションスタイル
   const controlButtonsAnimatedStyle = useAnimatedStyle(() => {
@@ -52,6 +56,8 @@ export function useMapControlsVisibility({
 
   // 現在地ボタンを表示/非表示にする（アニメーション付き）
   const setControlButtonsVisible = useCallback((visible: boolean) => {
+    // React stateをUI threadから安全に更新
+    setIsButtonsTouchable(visible);
     controlButtonsOpacity.value = withTiming(visible ? 1 : 0, { duration: 150 });
   }, [controlButtonsOpacity]);
 
@@ -75,6 +81,7 @@ export function useMapControlsVisibility({
 
   // カードが開く時のコールバック（初回ちらつき防止用）
   const handleCardOpen = useCallback(() => {
+    setIsButtonsTouchable(false);
     controlButtonsOpacity.value = 0;
   }, [controlButtonsOpacity]);
 
@@ -93,5 +100,6 @@ export function useMapControlsVisibility({
     resetClosingState,
     handleCardOpen,
     controlButtonsOpacity,
+    isButtonsTouchable,
   };
 }

@@ -479,7 +479,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             },
             controlsVisibility.controlButtonsAnimatedStyle,
           ]}
-          pointerEvents={controlsVisibility.controlButtonsOpacity.value === 0 ? 'none' : 'auto'}
+          pointerEvents={controlsVisibility.isButtonsTouchable ? 'auto' : 'none'}
         >
           {/* 現在地ボタン */}
           <LocationButton

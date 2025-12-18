@@ -467,7 +467,7 @@ export function UserMapLabels({
         />
 
         {/* ========== スポットレイヤー（交通機関より優先） ========== */}
-        {/* 通常のスポット：フォーカス中のスポットは拡大表示 */}
+        {/* 通常のスポット：フォーカス中または選択中のスポットは拡大表示 */}
         <Mapbox.SymbolLayer
           id="user-spots-layer"
           filter={selectedSpotId
@@ -499,19 +499,19 @@ export function UserMapLabels({
           }}
         />
 
-        {/* ========== 選択中スポットレイヤー（最後に描画して最前面に） ========== */}
+        {/* ========== 選択中スポットレイヤー（詳細カード表示中、最前面に拡大表示） ========== */}
         <Mapbox.SymbolLayer
           id="user-spots-selected-layer"
           filter={selectedSpotId
             ? ['all', ['==', ['get', 'featureType'], 'spot'], ['==', ['get', 'id'], selectedSpotId]]
-            : ['==', 'dummy', 'never-match'] // 選択なしの場合は何もマッチしない
+            : ['==', 'dummy', 'never-match']
           }
           style={{
-            symbolSortKey: 0, // 最優先
+            symbolSortKey: 0,
             iconImage: 'user-spot-icon',
-            iconSize: 0.2,
+            iconSize: 0.28,
             textField: ['get', 'name'],
-            textSize: 13,
+            textSize: 15,
             textColor: spotColor,
             textHaloColor: spotHaloColor,
             textHaloWidth: 2,
@@ -524,6 +524,7 @@ export function UserMapLabels({
             iconAllowOverlap: true,
           }}
         />
+
       </Mapbox.ShapeSource>
     </>
   );
