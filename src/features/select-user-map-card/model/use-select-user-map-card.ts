@@ -130,10 +130,10 @@ export function useSelectUserMapCard({
     setFocusedSpotId(null);
   }, []);
 
-  // カルーセルを開く（フォーカス状態もリセット）
+  // カルーセルを開く
+  // 詳細カードから戻る場合はフォーカスを維持したいので、focusedSpotIdはリセットしない
   const openCarousel = useCallback(() => {
     setIsCarouselVisible(true);
-    setFocusedSpotId(null);
   }, []);
 
   // 選択状態をリセット（mapId変更時など）
