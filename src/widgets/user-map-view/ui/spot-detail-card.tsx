@@ -498,19 +498,26 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         </View>
 
         {/* 記事セクション */}
-        {spot.article_content && (
-          <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
-            <View className="flex-row items-center mb-3">
-              <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
-              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-                記事
-              </Text>
-            </View>
+        <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
+          <View className="flex-row items-center mb-3">
+            <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+              記事
+            </Text>
+          </View>
+          {spot.article_content ? (
             <Text className="text-sm text-foreground dark:text-dark-foreground leading-relaxed">
               {spot.article_content}
             </Text>
-          </View>
-        )}
+          ) : (
+            <View className="py-4 items-center">
+              <Ionicons name="document-text-outline" size={24} color={colors.gray[400]} />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+                まだ記事がありません
+              </Text>
+            </View>
+          )}
+        </View>
 
         {/* コメントセクション */}
         <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
@@ -538,7 +545,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </View>
           ) : comments.length === 0 ? (
             <View className="py-4 items-center">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">まだコメントはありません</Text>
+              <Ionicons name="chatbubble-outline" size={24} color={colors.gray[400]} />
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+                まだコメントはありません
+              </Text>
             </View>
           ) : (
             <View className="-mx-4">
