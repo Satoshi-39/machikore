@@ -31,14 +31,18 @@ interface UseSelectUserMapCardReturn {
   focusedSpotId: string | null;
   /** マーカータップ時：カルーセルを表示してスポットにフォーカス */
   handleSpotSelect: (spot: SpotWithDetails | null) => void;
-  /** カルーセルでスワイプしてスポットにフォーカス */
+  /** カルーセルでスワイプしてスポットにフォーカス（カメラ移動なし） */
   handleCarouselSpotFocus: (spot: SpotWithDetails) => void;
+  /** カメラをスポットに移動（目のアイコンタップ時） */
+  handleCameraMove: (spot: SpotWithDetails) => void;
   /** カルーセルでスポットカードをタップ（詳細カードを開く） */
   handleCarouselSpotPress: (spot: SpotWithDetails) => void;
   /** 詳細カードを閉じる → カルーセルに戻る */
   handleDetailCardClose: () => void;
   /** カルーセルを閉じる */
   closeCarousel: () => void;
+  /** カルーセルを開く */
+  openCarousel: () => void;
   /** 選択状態をリセット（mapId変更時など） */
   resetSelection: () => void;
   /** 特定のスポットIDで詳細カードを開く（ジャンプ時用） */
@@ -66,23 +70,32 @@ export function useSelectUserMapCard({
   // カルーセルで現在フォーカスされているスポットID
   const [focusedSpotId, setFocusedSpotId] = useState<string | null>(null);
 
-  // マーカータップ時：カルーセルを表示してそのスポットにフォーカス
+  // マーカータップ時：カルーセルを表示してそのスポットにフォーカス（カメラ移動なし）
   const handleSpotSelect = useCallback(
     (spot: SpotWithDetails | null) => {
       if (spot) {
         setFocusedSpotId(spot.id);
         setIsCarouselVisible(true);
         setIsDetailCardOpen(false);
-        moveCameraToSpot(spot);
+        // カメラ移動は目のアイコンタップ時のみ
       } else {
         setFocusedSpotId(null);
       }
     },
-    [moveCameraToSpot]
+    []
   );
 
-  // カルーセルでスワイプしてスポットにフォーカス（カメラ移動のみ）
+  // カルーセルでスワイプしてスポットにフォーカス（カメラ移動なし）
   const handleCarouselSpotFocus = useCallback(
+    (spot: SpotWithDetails) => {
+      setFocusedSpotId(spot.id);
+      // カメラ移動はしない
+    },
+    []
+  );
+
+  // カメラをスポットに移動（目のアイコンタップ時）
+  const handleCameraMove = useCallback(
     (spot: SpotWithDetails) => {
       setFocusedSpotId(spot.id);
       moveCameraToSpot(spot);
@@ -91,15 +104,15 @@ export function useSelectUserMapCard({
   );
 
   // カルーセルでスポットカードをタップ（詳細カードを開く）
+  // カメラ移動は行わない（目のアイコンタップ時のみ移動）
   const handleCarouselSpotPress = useCallback(
     (spot: SpotWithDetails) => {
       setSelectedSpotId(spot.id);
       setFocusedSpotId(spot.id);
       setIsDetailCardOpen(true);
       setIsCarouselVisible(false); // カルーセルを非表示にしてボタン表示を有効にする
-      moveCameraToSpot(spot);
     },
-    [moveCameraToSpot]
+    []
   );
 
   // 詳細カードを閉じる → カルーセルに戻る
@@ -111,9 +124,16 @@ export function useSelectUserMapCard({
     onDetailCardMaximized?.(false);
   }, [onDetailCardMaximized]);
 
-  // カルーセルを閉じる
+  // カルーセルを閉じる（フォーカスも解除）
   const closeCarousel = useCallback(() => {
     setIsCarouselVisible(false);
+    setFocusedSpotId(null);
+  }, []);
+
+  // カルーセルを開く（フォーカス状態もリセット）
+  const openCarousel = useCallback(() => {
+    setIsCarouselVisible(true);
+    setFocusedSpotId(null);
   }, []);
 
   // 選択状態をリセット（mapId変更時など）
@@ -137,9 +157,11 @@ export function useSelectUserMapCard({
     focusedSpotId,
     handleSpotSelect,
     handleCarouselSpotFocus,
+    handleCameraMove,
     handleCarouselSpotPress,
     handleDetailCardClose,
     closeCarousel,
+    openCarousel,
     resetSelection,
     openSpotById,
   };

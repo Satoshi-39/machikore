@@ -36,6 +36,7 @@ export interface CreateSpotInput {
   // user_spot情報
   customName?: string | null;
   description?: string | null;
+  articleContent?: string | null;
 }
 
 export interface UpdateSpotInput {
@@ -205,6 +206,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     google_short_address: input.googlePlaceId ? null : input.googleShortAddress ?? null,
     custom_name: input.customName ?? input.name,
     description: input.description ?? null,
+    article_content: input.articleContent ?? null,
   };
 
   const { data, error } = await supabase

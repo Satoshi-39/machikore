@@ -227,7 +227,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                 className="flex-row items-center px-4 py-3"
               >
                 {/* 番号 */}
-                <Text className="text-lg font-bold text-primary-500 w-8">
+                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground w-8">
                   {index + 1}.
                 </Text>
 

@@ -129,9 +129,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       focusedSpotId,
       handleSpotSelect,
       handleCarouselSpotFocus,
+      handleCameraMove,
       handleCarouselSpotPress: baseHandleCarouselSpotPress,
       handleDetailCardClose: baseHandleDetailCardClose,
       closeCarousel,
+      openCarousel,
       resetSelection,
       openSpotById,
     } = useSelectUserMapCard({
@@ -346,6 +348,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
           {/* ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ+地名）
               同じShapeSourceにまとめることで、symbolSortKeyでスポットを優先表示 */}
+          {/* selectedSpotIdは詳細カード表示中のスポット（常に最前面表示）
+              focusedSpotIdはカルーセルでフォーカス中のスポット（アイコン拡大表示） */}
           <UserMapLabels
             spotsGeoJson={spotsGeoJson}
             transportGeoJson={transportHubsGeoJson}
@@ -353,7 +357,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             citiesGeoJson={citiesGeoJson}
             onSpotPress={handleSpotPress}
             themeColor={mapData?.theme_color as UserMapThemeColor}
-            selectedSpotId={selectedSpot?.id ?? focusedSpotId}
+            selectedSpotId={selectedSpot?.id}
+            focusedSpotId={focusedSpotId}
           />
         </Mapbox.MapView>
 
@@ -390,6 +395,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                     } else {
                       fitCameraToAllSpots(spots);
                     }
+                    // カルーセルを再表示
+                    openCarousel();
                   }}
                   testID="fit-all-button"
                 />
@@ -404,8 +411,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             spots={spots}
             selectedSpotId={focusedSpotId}
             currentUserId={currentUserId}
+            onSpotFocus={handleCarouselSpotFocus}
             onSpotSelect={handleCarouselSpotFocus}
             onSpotPress={handleCarouselSpotPress}
+            onCameraMove={handleCameraMove}
             onClose={closeCarousel}
             themeColor={mapData?.theme_color as UserMapThemeColor}
           />
@@ -423,6 +432,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onSearchBarVisibilityChange={onDetailCardMaximized}
             onBeforeClose={controlsVisibility.handleBeforeClose}
             onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+            onCameraMove={() => handleCameraMove(selectedSpot)}
             themeColor={mapData?.theme_color as UserMapThemeColor}
           />
         )}

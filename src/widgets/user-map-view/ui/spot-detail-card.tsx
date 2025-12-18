@@ -39,6 +39,8 @@ interface SpotDetailCardProps {
   onBeforeClose?: () => void;
   /** 現在地ボタンの表示/非表示変更コールバック（高さベースの判定） */
   onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
+  /** カメラをスポットに移動（目のアイコンタップ時） */
+  onCameraMove?: () => void;
   /** マップのテーマカラー */
   themeColor: UserMapThemeColor;
 }
@@ -68,7 +70,7 @@ function SpotDetailCardContent({
 // 検索バー領域の下端Y座標（固定値）
 const SEARCH_BAR_BOTTOM_Y = 140;
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, themeColor }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove, themeColor }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -353,6 +355,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             )}
           </View>
           <View className="flex-row items-center">
+            {/* カメラ移動ボタン（目のアイコン） */}
+            <Pressable
+              onPress={onCameraMove}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              className="w-8 h-8 items-center justify-center rounded-full mr-2 active:bg-gray-100 dark:active:bg-gray-700"
+            >
+              <Ionicons name="eye-outline" size={22} color={colors.text.secondary} />
+            </Pressable>
             {/* 三点リーダーメニュー（自分のスポットのみ） */}
             {isOwner && !isDeleting && (
               <View className="mr-2">

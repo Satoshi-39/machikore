@@ -53,6 +53,7 @@ interface SpotCardProps {
   isLast: boolean;
   currentUserId?: UUID | null;
   onPress: () => void;
+  onCameraMove?: () => void;
   themeColor: UserMapThemeColor;
 }
 
@@ -63,6 +64,7 @@ function SpotCard({
   isLast,
   currentUserId,
   onPress,
+  onCameraMove,
   themeColor,
 }: SpotCardProps) {
   const isDarkMode = useIsDarkMode();
@@ -139,7 +141,7 @@ function SpotCard({
         }}
       >
         <View className="flex-1 p-4">
-          {/* タイトル */}
+          {/* タイトル + カメラ移動ボタン */}
           <View className="flex-row items-center">
             <LocationPinIcon size={20} color={themeColorValue} strokeColor={themeColorStroke} />
             <Text
@@ -148,6 +150,18 @@ function SpotCard({
             >
               {spotName}
             </Text>
+            {/* カメラ移動ボタン（目のアイコン） */}
+            <Pressable
+              onPress={onCameraMove}
+              className="ml-2 p-1.5 rounded-full active:bg-gray-100 dark:active:bg-gray-700"
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            >
+              <Ionicons
+                name="eye-outline"
+                size={22}
+                color={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              />
+            </Pressable>
           </View>
 
           {/* 住所 */}
@@ -261,8 +275,13 @@ interface SpotCarouselProps {
   spots: SpotWithDetails[];
   selectedSpotId?: string | null;
   currentUserId?: UUID | null;
+  /** フォーカス（青枠）のみ変更（カメラ移動なし） */
+  onSpotFocus?: (spot: SpotWithDetails) => void;
+  /** フォーカス中のカードをタップ → 詳細カードを開く */
   onSpotSelect: (spot: SpotWithDetails) => void;
   onSpotPress: (spot: SpotWithDetails) => void;
+  /** カメラ移動（目のアイコンタップ時） */
+  onCameraMove?: (spot: SpotWithDetails) => void;
   onClose: () => void;
   themeColor: UserMapThemeColor;
 }
@@ -271,8 +290,10 @@ export function SpotCarousel({
   spots,
   selectedSpotId,
   currentUserId,
+  onSpotFocus,
   onSpotSelect,
   onSpotPress,
+  onCameraMove,
   onClose,
   themeColor,
 }: SpotCarouselProps) {
@@ -294,17 +315,17 @@ export function SpotCarousel({
     }
   }, [selectedSpotId, spots]);
 
-  // スクロール終了時に中央のカードを選択
+  // スクロール終了時（スナップ完了後）のフォーカス確定
   const handleScrollEnd = useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
       const offsetX = event.nativeEvent.contentOffset.x;
       const index = Math.round(offsetX / ITEM_WIDTH);
       const spot = spots[index];
-      if (spot && spot.id !== selectedSpotId) {
-        onSpotSelect(spot);
+      if (spot) {
+        onSpotFocus?.(spot);
       }
     },
-    [spots, selectedSpotId, onSpotSelect]
+    [spots, onSpotFocus]
   );
 
   // カードタップ時の処理（フォーカス状態で分岐）
@@ -331,10 +352,11 @@ export function SpotCarousel({
         isLast={index === spots.length - 1}
         currentUserId={currentUserId}
         onPress={() => handleCardPress(item)}
+        onCameraMove={() => onCameraMove?.(item)}
         themeColor={themeColor}
       />
     ),
-    [selectedSpotId, currentUserId, handleCardPress, spots.length, themeColor]
+    [selectedSpotId, currentUserId, handleCardPress, onCameraMove, spots.length, themeColor]
   );
 
   // キー抽出

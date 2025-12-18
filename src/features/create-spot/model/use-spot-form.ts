@@ -135,6 +135,7 @@ export function useSpotForm() {
   const handleSubmit = async (data: {
     customName: string;
     description?: string;
+    articleContent?: string;
     tags: string[];
     images: SelectedImage[];
     mapId: string;
@@ -204,6 +205,7 @@ export function useSpotForm() {
         googleUserRatingCount: isGooglePlace ? selectedPlace.googleData.userRatingCount : null,
         customName: data.customName,
         description: data.description,
+        articleContent: data.articleContent,
       },
       {
         onSuccess: async (spotId) => {

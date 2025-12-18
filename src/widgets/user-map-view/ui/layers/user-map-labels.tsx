@@ -85,8 +85,10 @@ interface UserMapLabelsProps {
   citiesGeoJson?: FeatureCollection<Point, LocationFeatureProperties>;
   onSpotPress: (event: any) => void;
   themeColor?: UserMapThemeColor;
-  /** 選択中のスポットID（選択中は常に表示） */
+  /** 選択中のスポットID（詳細カード表示中、常に最前面表示） */
   selectedSpotId?: string | null;
+  /** カルーセルでフォーカス中のスポットID（アイコン拡大表示） */
+  focusedSpotId?: string | null;
 }
 
 export function UserMapLabels({
@@ -97,6 +99,7 @@ export function UserMapLabels({
   onSpotPress,
   themeColor = 'pink',
   selectedSpotId,
+  focusedSpotId,
 }: UserMapLabelsProps) {
   const isDarkMode = useIsDarkMode();
   const themeConfig = USER_MAP_THEME_COLORS[themeColor] ?? USER_MAP_THEME_COLORS.pink;
@@ -464,7 +467,7 @@ export function UserMapLabels({
         />
 
         {/* ========== スポットレイヤー（交通機関より優先） ========== */}
-        {/* 通常のスポット（選択中のスポット以外） */}
+        {/* 通常のスポット：フォーカス中のスポットは拡大表示 */}
         <Mapbox.SymbolLayer
           id="user-spots-layer"
           filter={selectedSpotId
@@ -474,9 +477,15 @@ export function UserMapLabels({
           style={{
             symbolSortKey: ['get', 'sortKey'],
             iconImage: 'user-spot-icon',
-            iconSize: 0.2,
+            // フォーカス中のスポットは拡大表示（0.2 → 0.28）
+            iconSize: focusedSpotId
+              ? ['case', ['==', ['get', 'id'], focusedSpotId], 0.28, 0.2]
+              : 0.2,
             textField: ['get', 'name'],
-            textSize: 13,
+            // フォーカス中のスポットはテキストも少し大きく
+            textSize: focusedSpotId
+              ? ['case', ['==', ['get', 'id'], focusedSpotId], 15, 13]
+              : 13,
             textColor: spotColor,
             textHaloColor: spotHaloColor,
             textHaloWidth: 2,
