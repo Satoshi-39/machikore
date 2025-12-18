@@ -14,6 +14,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { StyledTextInput, TagInput, AddressPinIcon } from '@/shared/ui';
@@ -39,7 +40,6 @@ interface EditSpotFormProps {
   onSubmit: (data: {
     customName: string;
     description?: string;
-    articleContent?: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -66,6 +66,7 @@ export function EditSpotForm({
   selectedMapId,
   isMapsLoading = false,
 }: EditSpotFormProps) {
+  const router = useRouter();
   const spotName = spot.custom_name || spot.master_spot?.name || '';
 
   // 選択中のマップを取得
@@ -73,7 +74,7 @@ export function EditSpotForm({
 
   const [customName, setCustomName] = useState(spotName);
   const [description, setDescription] = useState(spot.description || '');
-  const [articleContent, setArticleContent] = useState(spot.article_content || '');
+  const articleContent = spot.article_content || '';
   const [tags, setTags] = useState<string[]>(initialTags);
 
   // 画像関連
@@ -96,7 +97,6 @@ export function EditSpotForm({
   const { hasChanges, isFormValid } = useEditSpotFormChanges(spot, initialTags, {
     customName,
     description,
-    articleContent,
     tags,
     newImages,
     deletedImageIds,
@@ -110,7 +110,6 @@ export function EditSpotForm({
     onSubmit({
       customName: customName.trim(),
       description: description.trim() || undefined,
-      articleContent: articleContent.trim() || undefined,
       tags,
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
@@ -256,24 +255,22 @@ export function EditSpotForm({
         {/* 記事 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">記事</Text>
-          <StyledTextInput
-            value={articleContent}
-            onChangeText={setArticleContent}
-            placeholder="スポットについて詳しく書いてみましょう"
-            multiline
-            numberOfLines={8}
-            maxLength={INPUT_LIMITS.SPOT_ARTICLE_CONTENT}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base min-h-[160px]"
-            textAlignVertical="top"
-          />
-          <View className="flex-row justify-between mt-1">
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-              ここに入力した内容が記事ページで表示されます
-            </Text>
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {articleContent.length}/{INPUT_LIMITS.SPOT_ARTICLE_CONTENT}
-            </Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => router.push(`/edit-spot-article/${spot.id}`)}
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
+            activeOpacity={0.7}
+          >
+            <View className="flex-row items-center flex-1">
+              <Ionicons name="document-text-outline" size={20} color={colors.primary.DEFAULT} />
+              <Text className="ml-3 text-base text-foreground dark:text-dark-foreground">
+                {articleContent ? '記事を編集' : '記事を書く'}
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+          </TouchableOpacity>
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+            {articleContent ? '記事が書かれています' : 'このスポットについて詳しく書いてみましょう'}
+          </Text>
         </View>
 
         {/* タグ */}

@@ -11,7 +11,6 @@ import type { SelectedImage } from '@/features/pick-images';
 interface EditSpotFormCurrentValues {
   customName: string;
   description: string;
-  articleContent: string;
   tags: string[];
   newImages: SelectedImage[];
   deletedImageIds: string[];
@@ -36,10 +35,6 @@ export function useEditSpotFormChanges(
     const originalDescription = spot.description || '';
     if (currentValues.description.trim() !== originalDescription) return true;
 
-    // 記事コンテンツの変更
-    const originalArticleContent = spot.article_content || '';
-    if (currentValues.articleContent.trim() !== originalArticleContent) return true;
-
     // タグの変更
     if (currentValues.tags.length !== initialTags.length) return true;
     if (currentValues.tags.some((tag, index) => tag !== initialTags[index])) return true;
@@ -59,7 +54,6 @@ export function useEditSpotFormChanges(
     initialTags,
     currentValues.customName,
     currentValues.description,
-    currentValues.articleContent,
     currentValues.tags,
     currentValues.newImages,
     currentValues.deletedImageIds,

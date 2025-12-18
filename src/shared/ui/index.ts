@@ -34,3 +34,6 @@ export { TransportHubLabels } from './map-layers';
 
 // Toast
 export { AppToast } from './AppToast';
+
+// リッチテキストエディタ
+export { RichTextEditor } from './rich-text-editor';
