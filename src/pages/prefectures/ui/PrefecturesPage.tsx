@@ -119,8 +119,8 @@ export function PrefecturesPage() {
   }, [regions, prefectures]);
 
   const handlePrefecturePress = useCallback(
-    (prefectureName: string) => {
-      router.push(`/(tabs)/discover/tag-results?tag=${encodeURIComponent(prefectureName)}` as Href);
+    (prefectureId: string) => {
+      router.push(`/(tabs)/discover/prefectures/${prefectureId}` as Href);
     },
     [router]
   );
@@ -160,7 +160,7 @@ export function PrefecturesPage() {
                   {section.prefectures.map((prefecture) => (
                     <View key={prefecture.id} style={{ width: '50%', paddingHorizontal: 6, marginBottom: 12 }}>
                       <Pressable
-                        onPress={() => handlePrefecturePress(prefecture.name)}
+                        onPress={() => handlePrefecturePress(prefecture.id)}
                         className="flex-row items-center bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 active:opacity-70"
                       >
                         <Text style={{ fontSize: 24 }}>

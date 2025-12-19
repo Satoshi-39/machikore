@@ -341,6 +341,128 @@ export async function getSpotIdsByTagId(tagId: string, limit: number = 50): Prom
 // ヘルパー関数
 // ===============================
 
+// ===============================
+// カテゴリ別タグAPI
+// ===============================
+
+/**
+ * カテゴリ別の運営選定タグを取得
+ */
+export async function getFeaturedTagsByCategory(categoryId: string): Promise<Tag[]> {
+  const { data, error } = await supabase
+    .from('category_featured_tags')
+    .select('tag_id, tags(*)')
+    .eq('category_id', categoryId)
+    .eq('is_active', true)
+    .order('display_order', { ascending: true });
+
+  if (error) {
+    handleSupabaseError('getFeaturedTagsByCategory', error);
+  }
+
+  return (data || []).map((item: any) => item.tags).filter(Boolean);
+}
+
+/**
+ * カテゴリ別の人気タグを取得（自動集計）
+ * そのカテゴリのマップで多く使われているタグを返す
+ */
+export async function getPopularTagsByCategory(
+  categoryId: string,
+  limit: number = 10
+): Promise<Tag[]> {
+  // map_tagsからカテゴリに属するマップのタグを集計
+  const { data, error } = await supabase.rpc('get_popular_tags_by_category', {
+    p_category_id: categoryId,
+    p_limit: limit,
+  });
+
+  if (error) {
+    // RPC関数がない場合はフォールバック
+    console.warn('get_popular_tags_by_category RPC not found, using fallback');
+    return getPopularTagsByCategoryFallback(categoryId, limit);
+  }
+
+  return data || [];
+}
+
+/**
+ * カテゴリ別人気タグのフォールバック実装
+ */
+async function getPopularTagsByCategoryFallback(
+  categoryId: string,
+  limit: number
+): Promise<Tag[]> {
+  // 1. カテゴリに属するマップIDを取得
+  const { data: maps, error: mapsError } = await supabase
+    .from('maps')
+    .select('id')
+    .eq('category_id', categoryId)
+    .eq('is_public', true);
+
+  if (mapsError || !maps || maps.length === 0) {
+    return [];
+  }
+
+  const mapIds = maps.map((m) => m.id);
+
+  // 2. これらのマップに紐づくタグを取得
+  const { data: mapTags, error: tagsError } = await supabase
+    .from('map_tags')
+    .select('tag_id, tags(*)')
+    .in('map_id', mapIds);
+
+  if (tagsError || !mapTags) {
+    return [];
+  }
+
+  // 3. タグごとに出現回数をカウントしてソート
+  const tagCounts = new Map<string, { tag: Tag; count: number }>();
+  for (const item of mapTags) {
+    const tag = (item as any).tags as Tag | null;
+    if (!tag) continue;
+
+    const existing = tagCounts.get(tag.id);
+    if (existing) {
+      existing.count++;
+    } else {
+      tagCounts.set(tag.id, { tag, count: 1 });
+    }
+  }
+
+  // 4. カウント順にソートしてlimit件返す
+  return Array.from(tagCounts.values())
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit)
+    .map((item) => item.tag);
+}
+
+/**
+ * カテゴリ別タグを取得（ハイブリッド: 運営選定 + 人気）
+ * 運営選定タグを優先し、足りない分を人気タグで補う
+ */
+export async function getCategoryTags(
+  categoryId: string,
+  limit: number = 10
+): Promise<Tag[]> {
+  // 1. 運営選定タグを取得
+  const featuredTags = await getFeaturedTagsByCategory(categoryId);
+
+  // 運営選定タグだけで足りる場合
+  if (featuredTags.length >= limit) {
+    return featuredTags.slice(0, limit);
+  }
+
+  // 2. 人気タグを取得して補完
+  const popularTags = await getPopularTagsByCategory(categoryId, limit);
+
+  // 重複を除いてマージ
+  const featuredTagIds = new Set(featuredTags.map((t) => t.id));
+  const additionalTags = popularTags.filter((t) => !featuredTagIds.has(t.id));
+
+  return [...featuredTags, ...additionalTags].slice(0, limit);
+}
+
 /**
  * タグ名を現在の言語で取得
  */

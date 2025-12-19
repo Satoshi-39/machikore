@@ -21,6 +21,7 @@ export interface CreateSpotInput {
   userId: string;
   mapId: string;
   machiId?: string | null;  // 街が見つからない場合はnull
+  prefectureId?: string | null;  // 都道府県ID（都道府県検索用）
   // master_spot情報
   name: string;
   latitude: number;
@@ -195,11 +196,12 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
   // 2. user_spotを作成
   // ピン刺し・現在地登録の場合（googlePlaceIdがない）は座標と住所をuser_spotに直接保存
   // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
-  const userSpotInsert: UserSpotInsert = {
+  const userSpotInsert: UserSpotInsert & { prefecture_id?: string | null } = {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
     machi_id: input.machiId ?? null,
+    prefecture_id: input.prefectureId ?? null,
     latitude: input.googlePlaceId ? null : input.latitude,
     longitude: input.googlePlaceId ? null : input.longitude,
     google_formatted_address: input.googlePlaceId ? null : input.googleFormattedAddress ?? null,
@@ -768,4 +770,162 @@ export async function getUserSpotsByMasterSpotId(masterSpotId: string, limit: nu
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
   }));
+}
+
+// ===============================
+// 都道府県別スポット検索
+// ===============================
+
+/**
+ * 都道府県IDで公開スポットを検索
+ * @param prefectureId 都道府県ID（prefectures.id）
+ * @param currentUserId 現在のユーザーID（いいね状態取得用）
+ * @param limit 取得件数
+ */
+export async function getPublicSpotsByPrefecture(
+  prefectureId: string,
+  currentUserId?: string | null,
+  limit: number = 50
+): Promise<SpotWithDetails[]> {
+  const { data, error } = await supabase
+    .from('user_spots')
+    .select(`
+      *,
+      master_spots (*),
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      ),
+      maps!inner (
+        id,
+        name,
+        theme_color,
+        is_public
+      ),
+      likes (
+        id,
+        user_id
+      )
+    `)
+    .eq('prefecture_id', prefectureId)
+    .eq('maps.is_public', true)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    handleSupabaseError('getPublicSpotsByPrefecture', error);
+  }
+
+  return (data || []).map((spot: any) => {
+    const isLiked = currentUserId
+      ? (spot.likes || []).some((like: any) => like.user_id === currentUserId)
+      : false;
+
+    return {
+      id: spot.id,
+      user_id: spot.user_id,
+      map_id: spot.map_id,
+      master_spot_id: spot.master_spot_id,
+      machi_id: spot.machi_id,
+      custom_name: spot.custom_name,
+      description: spot.description,
+      tags: spot.tags,
+      images_count: spot.images_count,
+      likes_count: spot.likes_count,
+      bookmarks_count: spot.bookmarks_count ?? 0,
+      comments_count: spot.comments_count,
+      order_index: spot.order_index,
+      created_at: spot.created_at,
+      updated_at: spot.updated_at,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+      google_formatted_address: spot.google_formatted_address,
+      google_short_address: spot.google_short_address,
+      master_spot: spot.master_spots || null,
+      user: spot.users || null,
+      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
+      is_liked: isLiked,
+    };
+  });
+}
+
+/**
+ * 都道府県ID + カテゴリIDで公開スポットを検索
+ * @param prefectureId 都道府県ID（prefectures.id）
+ * @param categoryId カテゴリID（categories.id）
+ * @param currentUserId 現在のユーザーID（いいね状態取得用）
+ * @param limit 取得件数
+ */
+export async function getPublicSpotsByPrefectureAndCategory(
+  prefectureId: string,
+  categoryId: string,
+  currentUserId?: string | null,
+  limit: number = 50
+): Promise<SpotWithDetails[]> {
+  const { data, error } = await supabase
+    .from('user_spots')
+    .select(`
+      *,
+      master_spots (*),
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      ),
+      maps!inner (
+        id,
+        name,
+        theme_color,
+        is_public,
+        category_id
+      ),
+      likes (
+        id,
+        user_id
+      )
+    `)
+    .eq('prefecture_id', prefectureId)
+    .eq('maps.is_public', true)
+    .eq('maps.category_id', categoryId)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    handleSupabaseError('getPublicSpotsByPrefectureAndCategory', error);
+  }
+
+  return (data || []).map((spot: any) => {
+    const isLiked = currentUserId
+      ? (spot.likes || []).some((like: any) => like.user_id === currentUserId)
+      : false;
+
+    return {
+      id: spot.id,
+      user_id: spot.user_id,
+      map_id: spot.map_id,
+      master_spot_id: spot.master_spot_id,
+      machi_id: spot.machi_id,
+      custom_name: spot.custom_name,
+      description: spot.description,
+      tags: spot.tags,
+      images_count: spot.images_count,
+      likes_count: spot.likes_count,
+      bookmarks_count: spot.bookmarks_count ?? 0,
+      comments_count: spot.comments_count,
+      order_index: spot.order_index,
+      created_at: spot.created_at,
+      updated_at: spot.updated_at,
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+      google_formatted_address: spot.google_formatted_address,
+      google_short_address: spot.google_short_address,
+      master_spot: spot.master_spots || null,
+      user: spot.users || null,
+      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
+      is_liked: isLiked,
+    };
+  });
 }

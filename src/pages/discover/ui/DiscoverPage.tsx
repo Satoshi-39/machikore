@@ -102,6 +102,9 @@ export function DiscoverPage() {
 
               {/* 人気マップ */}
               <CategoryPopularSection categoryId={selectedCategory} />
+
+              {/* エリアから探す */}
+              <AreaSection categoryId={selectedCategory} />
             </>
           )}
         </ScrollView>
