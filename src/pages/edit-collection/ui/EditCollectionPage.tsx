@@ -9,7 +9,6 @@ import {
   TextInput,
   ScrollView,
   Pressable,
-  Switch,
   ActivityIndicator,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
@@ -17,7 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCollection, useUpdateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, PublicToggle } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
@@ -194,22 +193,11 @@ export function EditCollectionPage() {
 
         {/* 公開設定 */}
         <View className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-4 border border-border dark:border-dark-border">
-          <View className="flex-row items-center justify-between">
-            <View className="flex-1 mr-4">
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground mb-1">
-                公開する
-              </Text>
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                オンにすると、他のユーザーがこのコレクションを閲覧できます
-              </Text>
-            </View>
-            <Switch
-              value={isPublic}
-              onValueChange={setIsPublic}
-              trackColor={{ false: colors.gray[200], true: colors.primary.DEFAULT }}
-              thumbColor="#fff"
-            />
-          </View>
+          <PublicToggle
+            value={isPublic}
+            onValueChange={setIsPublic}
+            description="オンにすると、他のユーザーがこのコレクションを閲覧できます"
+          />
         </View>
 
         {/* マップを管理 */}

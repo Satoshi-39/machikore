@@ -13,7 +13,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Switch,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -21,6 +20,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCreateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
+import { PublicToggle } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
@@ -169,23 +169,12 @@ export function CreateCollectionPage() {
 
             {/* 公開設定 */}
             <View className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-4 mb-6">
-              <View className="flex-row items-center justify-between">
-                <View className="flex-1 mr-4">
-                  <Text className="text-base font-medium text-foreground dark:text-dark-foreground mb-1">
-                    公開する
-                  </Text>
-                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                    オンにすると、他のユーザーがこのコレクションを閲覧できます
-                  </Text>
-                </View>
-                <Switch
-                  value={isPublic}
-                  onValueChange={setIsPublic}
-                  trackColor={{ false: colors.gray[200], true: colors.primary.DEFAULT }}
-                  thumbColor="#fff"
-                  disabled={isSubmitting}
-                />
-              </View>
+              <PublicToggle
+                value={isPublic}
+                onValueChange={setIsPublic}
+                disabled={isSubmitting}
+                description="オンにすると、他のユーザーがこのコレクションを閲覧できます"
+              />
             </View>
 
             {/* ヒント */}

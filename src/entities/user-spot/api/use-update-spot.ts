@@ -2,7 +2,7 @@
  * スポットを更新するhook
  */
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { invalidateSpots } from '@/shared/api/query-client';
 import { updateSpot } from '@/shared/api/supabase/user-spots';
 import type { UpdateSpotParams } from '../model/types';
@@ -13,6 +13,8 @@ import type { UpdateSpotParams } from '../model/types';
  * tagsは中間テーブル(spot_tags)で管理するため、useUpdateSpotTagsを使用
  */
 export function useUpdateSpot() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (params: UpdateSpotParams) => {
       await updateSpot({
@@ -24,10 +26,16 @@ export function useUpdateSpot() {
         map_id: params.mapId,
       });
 
-      return params.spotId;
+      return params;
     },
-    onSuccess: () => {
+    onSuccess: (params) => {
       invalidateSpots();
+      // 記事キャッシュを完全に削除（staleTimeに関係なく次回アクセス時に再取得）
+      if (params.mapId) {
+        queryClient.removeQueries({
+          queryKey: ['map-article', params.mapId],
+        });
+      }
     },
   });
 }

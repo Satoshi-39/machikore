@@ -12,13 +12,12 @@ import {
   USER_MAP_THEME_COLOR_LIST,
   type UserMapThemeColor,
 } from '@/shared/config';
-import { StyledTextInput, TagInput } from '@/shared/ui';
+import { StyledTextInput, TagInput, PublicToggle } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   Alert,
   FlatList,
-  Switch,
   Text,
   TouchableOpacity,
   View,
@@ -259,29 +258,12 @@ export function CreateMapForm({
         </View>
 
         {/* 公開設定 */}
-        <View className="mb-6">
-          <View className="flex-row items-center justify-between bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3">
-            <View className="flex-row items-center">
-              <Ionicons
-                name={isPublic ? 'earth' : 'lock-closed'}
-                size={20}
-                color={isPublic ? '#3B82F6' : '#6B7280'}
-                style={{ marginRight: 8 }}
-              />
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
-                {isPublic ? '公開' : '非公開'}
-              </Text>
-            </View>
-            <Switch
-              value={isPublic}
-              onValueChange={setIsPublic}
-              trackColor={{ false: '#D1D5DB', true: '#93C5FD' }}
-              thumbColor={isPublic ? '#3B82F6' : '#F3F4F6'}
-            />
-          </View>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            公開すると他のユーザーもこのマップを見ることができます
-          </Text>
+        <View className="mb-6 bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3">
+          <PublicToggle
+            value={isPublic}
+            onValueChange={setIsPublic}
+            description="公開すると他のユーザーもこのマップを見ることができます"
+          />
         </View>
 
         {/* 作成ボタン */}

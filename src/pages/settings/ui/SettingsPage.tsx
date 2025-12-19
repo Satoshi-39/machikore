@@ -205,7 +205,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
         {/* プライバシー */}
         <SettingsSection title="プライバシー">
           <SettingsItem
-            icon="eye-outline"
+            icon="earth"
             label="公開範囲"
             onPress={showComingSoon}
           />

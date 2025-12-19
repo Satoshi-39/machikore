@@ -22,8 +22,10 @@ export function useUpdateMap() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(data.id) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsList(data.user_id) });
       queryClient.invalidateQueries({ queryKey: ['feed-maps'] });
-      // 記事キャッシュも無効化
-      queryClient.invalidateQueries({ queryKey: ['map-article', data.id] });
+      // 記事キャッシュを完全に削除（staleTimeに関係なく次回アクセス時に再取得）
+      queryClient.removeQueries({
+        queryKey: ['map-article', data.id],
+      });
     },
   });
 }

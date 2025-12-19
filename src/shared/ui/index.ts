@@ -40,3 +40,6 @@ export { RichTextEditor } from './rich-text-editor';
 
 // リッチテキストレンダラー（ProseMirror JSONの表示用）
 export { RichTextRenderer } from './rich-text-renderer';
+
+// 公開/非公開トグル
+export { PublicToggle } from './PublicToggle';

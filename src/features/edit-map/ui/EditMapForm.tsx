@@ -15,12 +15,11 @@ import {
   type UserMapThemeColor,
 } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
-import { TagInput } from '@/shared/ui';
+import { TagInput, PublicToggle } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   FlatList,
-  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -315,24 +314,13 @@ export function EditMapForm({
 
         {/* 公開設定 */}
         <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
-          <View className="flex-row items-center justify-between">
-            <View className="flex-1 mr-4">
-              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-                公開設定
-              </Text>
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-                {isPublic
-                  ? '誰でもこのマップを見ることができます'
-                  : '自分だけがこのマップを見ることができます'}
-              </Text>
-            </View>
-            <Switch
-              value={isPublic}
-              onValueChange={setIsPublic}
-              trackColor={{ false: '#E5E7EB', true: colors.primary.light }}
-              thumbColor={isPublic ? colors.primary.DEFAULT : '#F3F4F6'}
-            />
-          </View>
+          <PublicToggle
+            value={isPublic}
+            onValueChange={setIsPublic}
+            description={isPublic
+              ? '誰でもこのマップを見ることができます'
+              : '自分だけがこのマップを見ることができます'}
+          />
         </View>
 
         {/* 更新ボタン */}

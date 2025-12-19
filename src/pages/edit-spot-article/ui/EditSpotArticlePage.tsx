@@ -144,6 +144,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
         {
           spotId: spot.id,
           articleContent: content,
+          mapId: spot.map_id,
         },
         {
           onSuccess: () => {

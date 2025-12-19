@@ -14,13 +14,12 @@ import {
   Image,
   ActivityIndicator,
   Alert,
-  Switch,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, PublicToggle } from '@/shared/ui';
 import { useMapArticle, useUpdateMap } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { extractPlainText } from '@/shared/types';
@@ -138,22 +137,12 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           </Text>
 
           {/* 記事公開設定 */}
-          <View className="flex-row items-center mb-4">
-            <Ionicons
-              name={isArticlePublic ? 'eye-outline' : 'eye-off-outline'}
-              size={16}
-              color={isArticlePublic ? colors.primary.DEFAULT : colors.gray[500]}
-            />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 mr-3">
-              {isArticlePublic ? '公開中' : '非公開'}
-            </Text>
-            <Switch
+          <View className="mb-4">
+            <PublicToggle
               value={isArticlePublic}
               onValueChange={handleToggleArticlePublic}
-              trackColor={{ false: colors.gray[200], true: colors.primary.light }}
-              thumbColor={isArticlePublic ? colors.primary.DEFAULT : '#f4f3f4'}
               disabled={isUpdatingMap}
-              style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
+              variant="compact"
             />
           </View>
 
