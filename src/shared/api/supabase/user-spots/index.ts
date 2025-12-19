@@ -1,0 +1,45 @@
+/**
+ * Supabase User Spots API
+ * ユーザースポットのCRUD・検索
+ */
+
+// 型定義
+export {
+  type CreateSpotInput,
+  type UpdateSpotInput,
+  type UserSpotWithMasterSpot,
+  type UserSpotImage,
+  type UserSpotSearchResult,
+  type MapSpotSearchResult,
+  type MasterSpotInsert,
+  type MasterSpotRow,
+  type UserSpotInsert,
+  type UserSpotRow,
+} from './types';
+
+// スポット作成
+export { createSpot } from './create-spot';
+
+// 単一スポット取得
+export { getSpotById, getSpotWithDetails } from './get-spot';
+
+// スポット一覧取得
+export { getSpotsByMapId, getPublicSpots } from './get-spots';
+
+// スポット更新
+export { updateSpot } from './update-spot';
+
+// スポット削除
+export { deleteSpot } from './delete-spot';
+
+// スポット検索
+export { searchPublicUserSpots, searchSpotsByMapId } from './search-spots';
+
+// 都道府県別スポット
+export {
+  getPublicSpotsByPrefecture,
+  getPublicSpotsByPrefectureAndCategory,
+} from './prefecture-spots';
+
+// master_spot関連
+export { getUserSpotsByMasterSpotId } from './master-spot-posts';
