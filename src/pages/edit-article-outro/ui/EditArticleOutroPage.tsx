@@ -73,7 +73,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
   // エディタの初期化（ダークモード対応）
   const editor = useEditorBridge({
     autofocus: true,
-    avoidIosKeyboard: true,
+    avoidIosKeyboard: false,
     initialContent: EMPTY_DOC,
     theme: isDarkMode ? darkEditorTheme : undefined,
   });
@@ -255,16 +255,6 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
         onBack={handleBack}
         rightComponent={saveButton}
       />
-
-      {/* マップ名 */}
-      <View className="py-3 items-center bg-white dark:bg-[#191919]">
-        <Text
-          className="text-lg font-bold text-foreground dark:text-dark-foreground"
-          numberOfLines={1}
-        >
-          {map.name}
-        </Text>
-      </View>
 
       {/* エディタ */}
       <View className="flex-1 px-4">

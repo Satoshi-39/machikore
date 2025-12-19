@@ -73,7 +73,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   // エディタの初期化（ダークモード対応）
   const editor = useEditorBridge({
     autofocus: true,
-    avoidIosKeyboard: true,
+    avoidIosKeyboard: false,
     initialContent: EMPTY_DOC,
     theme: isDarkMode ? darkEditorTheme : undefined,
   });
@@ -254,25 +254,15 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   }
 
   const spotName =
-    spot.custom_name || spot.master_spot?.name || '不明なスポット';
+    spot.master_spot?.name || spot.custom_name || '不明なスポット';
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader
-        title="記事を編集"
+        title={spotName}
         onBack={handleBack}
         rightComponent={saveButton}
       />
-
-      {/* スポット名 */}
-      <View className="py-3 items-center bg-white dark:bg-[#191919]">
-        <Text
-          className="text-lg font-bold text-foreground dark:text-dark-foreground"
-          numberOfLines={1}
-        >
-          {spotName}
-        </Text>
-      </View>
 
       {/* エディタ */}
       <View className="flex-1 px-4">

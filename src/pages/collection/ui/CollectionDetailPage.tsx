@@ -6,7 +6,8 @@
 
 import React, { useCallback } from 'react';
 import { View, Text, FlatList, Image, Pressable } from 'react-native';
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
+import type { Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import {
@@ -14,6 +15,7 @@ import {
   useCollectionMaps,
 } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
+import { useCurrentTab } from '@/shared/lib/navigation';
 import { PageHeader, Loading, ErrorView, MapThumbnail } from '@/shared/ui';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
 
@@ -77,7 +79,7 @@ function MapItem({
 
 export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps) {
   const router = useRouter();
-  const segments = useSegments();
+  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
 
   const { data: collection, isLoading: isLoadingCollection, error: collectionError } = useCollection(collectionId);
@@ -87,39 +89,13 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   const isLoading = isLoadingCollection || isLoadingMaps;
   const error = collectionError || mapsError;
 
-  // タブ判定
-  const isInDiscoverTab = segments[0] === '(tabs)' && segments[1] === 'discover';
-  const isInHomeTab = segments[0] === '(tabs)' && segments[1] === 'home';
-  const isInMypageTab = segments[0] === '(tabs)' && segments[1] === 'mypage';
-  const isInNotificationsTab = segments[0] === '(tabs)' && segments[1] === 'notifications';
-
   const handleMapPress = useCallback((mapId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/maps/${mapId}`);
-    } else if (isInHomeTab) {
-      router.push(`/(tabs)/home/maps/${mapId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/maps/${mapId}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/maps/${mapId}`);
-    } else {
-      router.push(`/(tabs)/mypage/maps/${mapId}`);
-    }
-  }, [router, isInDiscoverTab, isInHomeTab, isInMypageTab, isInNotificationsTab]);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
+  }, [router, currentTab]);
 
   const handleUserPress = useCallback((userId: string) => {
-    if (isInDiscoverTab) {
-      router.push(`/(tabs)/discover/users/${userId}`);
-    } else if (isInHomeTab) {
-      router.push(`/(tabs)/home/users/${userId}`);
-    } else if (isInMypageTab) {
-      router.push(`/(tabs)/mypage/users/${userId}`);
-    } else if (isInNotificationsTab) {
-      router.push(`/(tabs)/notifications/users/${userId}`);
-    } else {
-      router.push(`/(tabs)/mypage/users/${userId}`);
-    }
-  }, [router, isInDiscoverTab, isInHomeTab, isInMypageTab, isInNotificationsTab]);
+    router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
+  }, [router, currentTab]);
 
   const renderHeader = useCallback(() => {
     if (!collection) return null;
@@ -206,7 +182,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         </View>
       </View>
     );
-  }, [collection, isOwner, collectionId, router, handleUserPress]);
+  }, [collection, handleUserPress]);
 
   if (isLoading) {
     return (

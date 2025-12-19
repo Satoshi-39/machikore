@@ -22,7 +22,7 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
         目次
       </Text>
       {spots.map((spot, index) => {
-        const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+        const spotName = spot.master_spot?.name || spot.custom_name || '不明なスポット';
         return (
           <Pressable
             key={spot.id}

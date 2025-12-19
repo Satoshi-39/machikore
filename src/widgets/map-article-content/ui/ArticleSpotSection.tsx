@@ -19,22 +19,23 @@ interface ArticleSpotSectionProps {
 }
 
 export function ArticleSpotSection({ spot, index, onPress, onImagePress }: ArticleSpotSectionProps) {
-  const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+  const spotName = spot.master_spot?.name || spot.custom_name || '不明なスポット';
+  const customName = spot.custom_name;
   const address = spot.master_spot?.google_short_address || spot.google_short_address;
 
   return (
-    <View className="mb-6">
+    <View className="mb-10">
       {/* セクション番号とスポット名 */}
-      <Pressable onPress={onPress} className="flex-row items-center mb-2">
+      <Pressable onPress={onPress} className="flex-row items-center mb-1">
         <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">{index}.</Text>
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">{spotName}</Text>
         <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
       </Pressable>
 
-      {/* 一言メモ（スポット名のすぐ下） */}
-      {spot.description && (
+      {/* カスタム名（スポット名と異なる場合のみ表示） */}
+      {customName && customName !== spotName && (
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-          {spot.description}
+          {customName}
         </Text>
       )}
 
