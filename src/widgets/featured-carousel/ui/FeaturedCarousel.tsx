@@ -123,10 +123,19 @@ function CarouselCard({ item, onPress }: CarouselCardProps) {
 }
 
 // メインコンポーネント
-export function FeaturedCarousel() {
+interface FeaturedCarouselProps {
+  /**
+   * カテゴリID
+   * - 'all' または undefined: カテゴリ未設定（category_id=null）のアイテムを表示
+   * - その他: 指定されたカテゴリのアイテムを表示
+   */
+  categoryId?: string;
+}
+
+export function FeaturedCarousel({ categoryId }: FeaturedCarouselProps) {
   const router = useRouter();
   const scrollViewRef = useRef<ScrollView>(null);
-  const { data: items, isLoading, error } = useFeaturedCarouselItems();
+  const { data: items, isLoading, error } = useFeaturedCarouselItems(categoryId);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // 無限ループ用：データを3倍に複製（前後に1セットずつ追加）
