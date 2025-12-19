@@ -213,3 +213,27 @@ export function getRecentVisits(userId: UUID, limit: number): VisitRow[] {
     [userId, limit]
   );
 }
+
+// ===============================
+// 同期関連
+// ===============================
+
+/**
+ * 未同期の訪問記録を取得
+ */
+export function getUnsyncedVisits(): VisitRow[] {
+  return queryAll<VisitRow>(
+    'SELECT * FROM visits WHERE is_synced = 0 ORDER BY created_at ASC;'
+  );
+}
+
+/**
+ * 訪問記録を同期済みにマーク
+ */
+export function markVisitAsSynced(visitId: UUID): void {
+  const now = new Date().toISOString();
+  execute(
+    'UPDATE visits SET is_synced = 1, synced_at = ? WHERE id = ?;',
+    [now, visitId]
+  );
+}

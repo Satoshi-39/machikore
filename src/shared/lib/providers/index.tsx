@@ -8,7 +8,6 @@ import { MenuProvider } from 'react-native-popup-menu';
 import { PostHogProvider } from 'posthog-react-native';
 import { QueryProvider } from './query-provider';
 import { AuthProvider } from './auth-provider';
-import { RepositoryProvider } from './repository-provider';
 import { ThemeProvider } from './ThemeProvider';
 import { ConsentProvider } from './consent-provider';
 import { SyncProvider } from '@/shared/lib/sync';
@@ -27,12 +26,11 @@ interface AppProvidersProps {
  * 2. PostHogProvider - アナリティクス（早い段階で初期化）
  * 3. MenuProvider - ポップアップメニュー
  * 4. AuthProvider - 認証状態の初期化
- * 5. RepositoryProvider - データアクセス
- * 6. SyncProvider - データ同期
- * 7. QueryProvider - React Query
- * 8. ThemeProvider - テーマ管理（NativeWindのcolorScheme設定）
- * 9. ConsentProvider - 利用規約同意チェック
- * 10. PushNotificationInitializer - プッシュ通知初期化
+ * 5. SyncProvider - データ同期
+ * 6. QueryProvider - React Query
+ * 7. ThemeProvider - テーマ管理（NativeWindのcolorScheme設定）
+ * 8. ConsentProvider - 利用規約同意チェック
+ * 9. PushNotificationInitializer - プッシュ通知初期化
  */
 export function AppProviders({ children }: AppProvidersProps) {
   return (
@@ -50,18 +48,16 @@ export function AppProviders({ children }: AppProvidersProps) {
       >
         <MenuProvider>
           <AuthProvider>
-            <RepositoryProvider>
-              <SyncProvider enabled={true} syncIntervalMs={0}>
-                <QueryProvider>
-                  <ThemeProvider>
-                    <ConsentProvider>
-                      <PushNotificationInitializer />
-                      {children}
-                    </ConsentProvider>
-                  </ThemeProvider>
-                </QueryProvider>
-              </SyncProvider>
-            </RepositoryProvider>
+            <SyncProvider enabled={true} syncIntervalMs={0}>
+              <QueryProvider>
+                <ThemeProvider>
+                  <ConsentProvider>
+                    <PushNotificationInitializer />
+                    {children}
+                  </ConsentProvider>
+                </ThemeProvider>
+              </QueryProvider>
+            </SyncProvider>
           </AuthProvider>
         </MenuProvider>
       </PostHogProvider>
@@ -72,7 +68,6 @@ export function AppProviders({ children }: AppProvidersProps) {
 // 個別エクスポート
 export { QueryProvider } from './query-provider';
 export { AuthProvider } from './auth-provider';
-export { RepositoryProvider } from './repository-provider';
 export { ThemeProvider, useIsDarkMode, useNavigationTheme } from './ThemeProvider';
 export { ConsentProvider } from './consent-provider';
 export { SyncProvider } from '@/shared/lib/sync';
