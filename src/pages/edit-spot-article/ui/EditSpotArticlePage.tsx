@@ -7,11 +7,11 @@
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotWithDetails, useUpdateSpot } from '@/entities/user-spot/api';
 import { colors } from '@/shared/config';
+import { useEditorStyles } from '@/shared/lib/editor';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { PageHeader } from '@/shared/ui';
 import {
-  darkEditorCss,
   darkEditorTheme,
   RichText,
   Toolbar,
@@ -86,12 +86,8 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   // 改行を除外した文字数をカウント
   const charCount = editorContent?.replace(/\n/g, '').length ?? 0;
 
-  // ダークモード時にCSSを注入
-  useEffect(() => {
-    if (isDarkMode && editorState.isReady) {
-      editor.injectCSS(darkEditorCss, 'dark-mode-styles');
-    }
-  }, [editor, isDarkMode, editorState.isReady]);
+  // CSSを注入（パディングとダークモード）
+  useEditorStyles({ editor, editorState, isDarkMode });
 
   // スポットデータが取得され、エディタが準備完了したらコンテンツを設定
   useEffect(() => {
@@ -265,7 +261,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       />
 
       {/* エディタ */}
-      <View className="flex-1 px-4">
+      <View className="flex-1">
         <RichText editor={editor} />
         {/* 文字数カウンター */}
         <View className={`absolute right-6 ${isKeyboardVisible ? 'bottom-2' : 'bottom-8'}`}>
