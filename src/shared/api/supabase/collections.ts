@@ -44,12 +44,17 @@ export interface CollectionMap {
 export interface CollectionMapWithDetails extends CollectionMap {
   map: {
     id: string;
+    user_id: string;
     name: string;
     description: string | null;
     thumbnail_url: string | null;
+    theme_color: string | null;
     spots_count: number;
     likes_count: number;
+    bookmarks_count: number;
     is_public: boolean;
+    is_article_public: boolean;
+    created_at: string;
     user: {
       id: string;
       username: string | null;
@@ -253,12 +258,17 @@ export async function getCollectionMaps(
       *,
       maps (
         id,
+        user_id,
         name,
         description,
         thumbnail_url,
+        theme_color,
         spots_count,
         likes_count,
+        bookmarks_count,
         is_public,
+        is_article_public,
+        created_at,
         users (
           id,
           username,

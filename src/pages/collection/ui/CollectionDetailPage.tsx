@@ -10,71 +10,16 @@ import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import {
-  useCollection,
-  useCollectionMaps,
-} from '@/entities/collection';
+import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { useCurrentTab } from '@/shared/lib/navigation';
-import { PageHeader, Loading, ErrorView, MapThumbnail } from '@/shared/ui';
+import { PageHeader, Loading, ErrorView } from '@/shared/ui';
+import { MapCompactCard } from '@/widgets/map-cards';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
+import type { MapWithUser } from '@/shared/types';
 
 interface CollectionDetailPageProps {
   collectionId: string;
-}
-
-function MapItem({
-  item,
-  onPress,
-}: {
-  item: CollectionMapWithDetails;
-  onPress: () => void;
-}) {
-  const map = item.map;
-  if (!map) return null;
-
-  return (
-    <Pressable
-      onPress={onPress}
-      className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
-    >
-      <View className="flex-row items-start">
-        {/* サムネイル */}
-        <MapThumbnail
-          url={map.thumbnail_url}
-          width={64}
-          height={64}
-          className="mr-3"
-        />
-
-        {/* マップ情報 */}
-        <View className="flex-1">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
-            {map.name}
-          </Text>
-          {map.description && (
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
-              {map.description}
-            </Text>
-          )}
-          <View className="flex-row items-center gap-3">
-            <View className="flex-row items-center gap-1">
-              <Ionicons name="location" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                {map.spots_count}スポット
-              </Text>
-            </View>
-            <View className="flex-row items-center gap-1">
-              <Ionicons name="heart" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                {map.likes_count}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-    </Pressable>
-  );
 }
 
 export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps) {
@@ -96,6 +41,20 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   const handleUserPress = useCallback((userId: string) => {
     router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
   }, [router, currentTab]);
+
+  const handleArticlePress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+  }, [router, currentTab]);
+
+  const handleAddMaps = useCallback(() => {
+    router.push(`/add-maps-to-collection?id=${collectionId}` as any);
+  }, [router, collectionId]);
+
+  // CollectionMapWithDetails.map を MapWithUser として扱うためのヘルパー
+  const toMapWithUser = (item: CollectionMapWithDetails): MapWithUser | null => {
+    if (!item.map) return null;
+    return item.map as unknown as MapWithUser;
+  };
 
   const renderHeader = useCallback(() => {
     if (!collection) return null;
@@ -202,10 +161,6 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
     );
   }
 
-  const handleAddMaps = useCallback(() => {
-    router.push(`/add-maps-to-collection?id=${collectionId}` as any);
-  }, [router, collectionId]);
-
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
@@ -223,12 +178,20 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         data={collectionMaps || []}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={renderHeader}
-        renderItem={({ item }) => (
-          <MapItem
-            item={item}
-            onPress={() => item.map && handleMapPress(item.map.id)}
-          />
-        )}
+        renderItem={({ item }) => {
+          const map = toMapWithUser(item);
+          if (!map) return null;
+          return (
+            <MapCompactCard
+              map={map}
+              currentUserId={currentUserId}
+              isOwner={false}
+              onPress={() => handleMapPress(map.id)}
+              onArticlePress={handleArticlePress}
+              onUserPress={handleUserPress}
+            />
+          );
+        }}
         contentContainerClassName="bg-surface dark:bg-dark-surface flex-grow"
         ListEmptyComponent={
           <View className="py-12 items-center">

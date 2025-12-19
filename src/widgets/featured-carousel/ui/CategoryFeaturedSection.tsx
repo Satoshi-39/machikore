@@ -15,7 +15,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
 import { useCategoryFeaturedMaps } from '@/entities/featured-carousel';
-import { MapDisplayCard } from '@/entities/map';
+import { MapDisplayCard } from '@/widgets/map-cards';
 
 interface CategoryFeaturedSectionProps {
   categoryId: string;

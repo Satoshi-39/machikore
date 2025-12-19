@@ -14,7 +14,7 @@ import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentViewHistory } from '@/entities/view-history';
-import { MapDisplayCard } from '@/entities/map';
+import { MapDisplayCard } from '@/widgets/map-cards';
 
 export function RecentlyViewedSection() {
   const router = useRouter();

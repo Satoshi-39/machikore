@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import type { Href } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentViewHistory } from '@/entities/view-history';
-import { MapListCard } from '@/entities/map';
+import { MapListCard } from '@/widgets/map-cards';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack, useCurrentTab } from '@/shared/lib';
 

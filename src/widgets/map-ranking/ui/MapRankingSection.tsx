@@ -13,7 +13,7 @@ import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { MapDisplayCard } from '@/entities/map';
+import { MapDisplayCard } from '@/widgets/map-cards';
 
 interface MapRankingSectionProps {
   title: string;
