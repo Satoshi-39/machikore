@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
 import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync } from '@/shared/lib';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
@@ -506,9 +506,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </Text>
           </View>
           {spot.article_content ? (
-            <Text className="text-sm text-foreground dark:text-dark-foreground leading-relaxed">
-              {spot.article_content}
-            </Text>
+            <RichTextRenderer content={spot.article_content} />
           ) : (
             <View className="py-4 items-center">
               <Ionicons name="document-text-outline" size={24} color={colors.gray[400]} />

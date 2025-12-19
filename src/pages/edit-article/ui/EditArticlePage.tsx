@@ -1,15 +1,15 @@
 /**
  * 記事編集ページ
  *
- * マップ内の各スポットの紹介文を編集する
+ * マップ内の各スポットの一覧を表示し、
+ * 各スポットをタップするとEditSpotArticlePageに遷移する
  */
 
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
   ScrollView,
-  TextInput,
   Pressable,
   Image,
   ActivityIndicator,
@@ -21,9 +21,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
-import { useMapArticle, useUpdateSpotArticle, useUpdateMap } from '@/entities/map';
+import { useMapArticle, useUpdateMap } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
-import type { SpotWithImages } from '@/shared/types';
+import { extractPlainText } from '@/shared/types';
 
 interface EditArticlePageProps {
   mapId: string;
@@ -33,50 +33,20 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const router = useRouter();
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
-  const { mutate: updateSpotArticle, isPending: isSaving } = useUpdateSpotArticle();
   const { mutate: updateMap, isPending: isUpdatingMap } = useUpdateMap();
 
-  // 各スポットの編集中の紹介文を管理
-  const [editedContents, setEditedContents] = useState<Record<string, string>>({});
-  // 現在展開中のスポットID
-  const [expandedSpotId, setExpandedSpotId] = useState<string | null>(null);
   // 記事の公開状態
   const [isArticlePublic, setIsArticlePublic] = useState(false);
 
   // 初期データをセット
   useEffect(() => {
-    if (articleData?.spots) {
-      const initialContents: Record<string, string> = {};
-      articleData.spots.forEach((spot) => {
-        initialContents[spot.id] = spot.article_content || '';
-      });
-      setEditedContents(initialContents);
-    }
     if (articleData?.map) {
       setIsArticlePublic(articleData.map.is_article_public ?? false);
     }
-  }, [articleData?.spots, articleData?.map]);
-
-  // 変更があるかどうか（実際のデータと比較）
-  const hasChanges = useMemo(() => {
-    if (!articleData?.spots) return false;
-    return articleData.spots.some((spot) => {
-      const original = spot.article_content || '';
-      const edited = editedContents[spot.id] || '';
-      return original !== edited;
-    });
-  }, [articleData?.spots, editedContents]);
+  }, [articleData?.map]);
 
   // 自分のマップかどうか
   const isOwner = currentUserId === articleData?.map.user_id;
-
-  // テキスト変更ハンドラー
-  const handleContentChange = useCallback((spotId: string, text: string) => {
-    setEditedContents((prev) => ({
-      ...prev,
-      [spotId]: text,
-    }));
-  }, []);
 
   // 記事公開設定の変更ハンドラー
   const handleToggleArticlePublic = useCallback((value: boolean) => {
@@ -96,47 +66,25 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
     );
   }, [mapId, updateMap]);
 
-  // スポットの展開/折りたたみ
-  const handleToggleExpand = useCallback((spotId: string) => {
-    setExpandedSpotId((prev) => (prev === spotId ? null : spotId));
-  }, []);
+  // スポットの記事編集ページに遷移
+  const handleEditSpot = useCallback((spotId: string) => {
+    router.push(`/edit-spot-article/${spotId}`);
+  }, [router]);
 
-  // 個別のスポットを保存
-  const handleSaveSpot = useCallback((spot: SpotWithImages) => {
-    const newContent = editedContents[spot.id];
-    const originalContent = spot.article_content || '';
+  // まえがき編集ページに遷移
+  const handleEditIntro = useCallback(() => {
+    router.push(`/edit-article-intro/${mapId}`);
+  }, [router, mapId]);
 
-    // 変更がない場合はスキップ
-    if (newContent === originalContent) {
-      return;
-    }
+  // あとがき編集ページに遷移
+  const handleEditOutro = useCallback(() => {
+    router.push(`/edit-article-outro/${mapId}`);
+  }, [router, mapId]);
 
-    updateSpotArticle({
-      spotId: spot.id,
-      articleContent: newContent || null,
-      mapId,
-    });
-  }, [editedContents, mapId, updateSpotArticle]);
-
-  // 戻るボタン（変更がある場合は確認）
+  // 戻るボタン
   const handleBack = useCallback(() => {
-    if (hasChanges) {
-      Alert.alert(
-        '変更を破棄しますか？',
-        '保存していない変更があります。',
-        [
-          { text: 'キャンセル', style: 'cancel' },
-          {
-            text: '破棄',
-            style: 'destructive',
-            onPress: () => router.back(),
-          },
-        ]
-      );
-    } else {
-      router.back();
-    }
-  }, [hasChanges, router]);
+    router.back();
+  }, [router]);
 
   // ローディング状態
   if (isLoading) {
@@ -170,158 +118,204 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
       <PageHeader title="記事を編集" onBack={handleBack} />
 
       <ScrollView className="flex-1">
-        {/* マップ情報 */}
-        <View className="px-4 py-4 border-b border-border dark:border-dark-border">
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+        {/* ヒーロー画像 */}
+        {articleData.map.thumbnail_url ? (
+          <Image
+            source={{ uri: articleData.map.thumbnail_url }}
+            className="w-full h-40"
+            resizeMode="cover"
+          />
+        ) : (
+          <View className="w-full h-40 items-center justify-center bg-muted dark:bg-dark-muted">
+            <Ionicons name="map" size={48} color={colors.primary.DEFAULT} />
+          </View>
+        )}
+
+        <View className="px-4 py-4">
+          {/* マップタイトル */}
+          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-2">
             {articleData.map.name}
           </Text>
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            {articleData.spots.length}スポット
-          </Text>
-        </View>
 
-        {/* 記事公開設定 */}
-        <View className="px-4 py-4 border-b border-border dark:border-dark-border">
-          <View className="flex-row items-center justify-between">
-            <View className="flex-1 mr-4">
-              <View className="flex-row items-center">
-                <Ionicons
-                  name={isArticlePublic ? 'eye-outline' : 'eye-off-outline'}
-                  size={20}
-                  color={isArticlePublic ? colors.primary.DEFAULT : colors.gray[500]}
-                />
-                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-                  記事を公開
-                </Text>
-              </View>
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-                {isArticlePublic
-                  ? 'この記事は他のユーザーに公開されています'
-                  : 'この記事は非公開です（マップの公開とは別）'}
-              </Text>
-            </View>
+          {/* 記事公開設定 */}
+          <View className="flex-row items-center mb-4">
+            <Ionicons
+              name={isArticlePublic ? 'eye-outline' : 'eye-off-outline'}
+              size={16}
+              color={isArticlePublic ? colors.primary.DEFAULT : colors.gray[500]}
+            />
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 mr-3">
+              {isArticlePublic ? '公開中' : '非公開'}
+            </Text>
             <Switch
               value={isArticlePublic}
               onValueChange={handleToggleArticlePublic}
               trackColor={{ false: colors.gray[200], true: colors.primary.light }}
               thumbColor={isArticlePublic ? colors.primary.DEFAULT : '#f4f3f4'}
               disabled={isUpdatingMap}
+              style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             />
           </View>
+
+          {/* マップ概要 */}
+          {articleData.map.description && (
+            <View className="mb-6">
+              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+                {articleData.map.description}
+              </Text>
+            </View>
+          )}
+
+          {/* まえがきセクション */}
+          <Pressable
+            onPress={handleEditIntro}
+            className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
+          >
+            <View className="flex-row items-center mb-2">
+              <Ionicons name="document-text-outline" size={18} color={colors.primary.DEFAULT} />
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
+                まえがき
+              </Text>
+              <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+            </View>
+            {extractPlainText(articleData.map.article_intro) ? (
+              <Text
+                className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+                numberOfLines={3}
+              >
+                {extractPlainText(articleData.map.article_intro)}
+              </Text>
+            ) : (
+              <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
+                <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
+                  タップしてまえがきを書く
+                </Text>
+              </View>
+            )}
+          </Pressable>
+
+          {/* スポット一覧 */}
+          {articleData.spots.length > 0 ? (
+            <View>
+              {articleData.spots.map((spot, index) => {
+                const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+                const firstImage = spot.images?.[0]?.cloud_path;
+                const articleText = extractPlainText(spot.article_content);
+                const hasArticle = articleText.length > 0;
+                const address = spot.master_spot?.google_short_address || spot.google_short_address;
+
+                return (
+                  <Pressable
+                    key={spot.id}
+                    onPress={() => handleEditSpot(spot.id)}
+                    className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
+                  >
+                    {/* セクション番号とスポット名 */}
+                    <View className="flex-row items-center mb-2">
+                      <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">
+                        {index + 1}.
+                      </Text>
+                      <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">
+                        {spotName}
+                      </Text>
+                      <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+                    </View>
+
+                    {/* 一言メモ */}
+                    {spot.description && (
+                      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
+                        {spot.description}
+                      </Text>
+                    )}
+
+                    {/* スポット画像 */}
+                    {firstImage && (
+                      <View className="mb-2 -mx-4 px-4">
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                          {spot.images.map((image) => (
+                            <Image
+                              key={image.id}
+                              source={{ uri: image.cloud_path || '' }}
+                              className="w-48 h-36 rounded-lg mr-2"
+                              resizeMode="cover"
+                            />
+                          ))}
+                        </ScrollView>
+                      </View>
+                    )}
+
+                    {/* 住所 */}
+                    {address && (
+                      <View className="flex-row items-center mb-3">
+                        <Ionicons name="location-outline" size={14} color={colors.gray[400]} />
+                        <Text
+                          className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+                          numberOfLines={1}
+                        >
+                          {address}
+                        </Text>
+                      </View>
+                    )}
+
+                    {/* 記事プレビュー */}
+                    {hasArticle ? (
+                      <Text
+                        className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+                        numberOfLines={3}
+                      >
+                        {articleText}
+                      </Text>
+                    ) : (
+                      <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
+                        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
+                          タップして紹介文を書く
+                        </Text>
+                      </View>
+                    )}
+                  </Pressable>
+                );
+              })}
+            </View>
+          ) : (
+            <View className="py-8 items-center">
+              <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
+              <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+                まだスポットがありません
+              </Text>
+            </View>
+          )}
+
+          {/* あとがきセクション */}
+          <Pressable
+            onPress={handleEditOutro}
+            className="mt-2 mb-6 active:opacity-70"
+          >
+            <View className="flex-row items-center mb-2">
+              <Ionicons name="chatbox-ellipses-outline" size={18} color={colors.primary.DEFAULT} />
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
+                あとがき
+              </Text>
+              <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+            </View>
+            {extractPlainText(articleData.map.article_outro) ? (
+              <Text
+                className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+                numberOfLines={3}
+              >
+                {extractPlainText(articleData.map.article_outro)}
+              </Text>
+            ) : (
+              <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
+                <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
+                  タップしてあとがきを書く
+                </Text>
+              </View>
+            )}
+          </Pressable>
         </View>
 
-        {/* スポット一覧 */}
-        {articleData.spots.map((spot, index) => {
-          const isExpanded = expandedSpotId === spot.id;
-          const currentContent = editedContents[spot.id] || '';
-          const originalContent = spot.article_content || '';
-          const isChanged = currentContent !== originalContent;
-          const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
-          const firstImage = spot.images?.[0]?.cloud_path;
-
-          return (
-            <View key={spot.id} className="border-b border-border dark:border-dark-border">
-              {/* スポットヘッダー（タップで展開） */}
-              <Pressable
-                onPress={() => handleToggleExpand(spot.id)}
-                className="flex-row items-center px-4 py-3"
-              >
-                {/* 番号 */}
-                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground w-8">
-                  {index + 1}.
-                </Text>
-
-                {/* サムネイル */}
-                {firstImage ? (
-                  <Image
-                    source={{ uri: firstImage }}
-                    className="w-12 h-12 rounded-lg mr-3"
-                    resizeMode="cover"
-                  />
-                ) : (
-                  <View className="w-12 h-12 rounded-lg bg-gray-200 items-center justify-center mr-3">
-                    <Ionicons name="image-outline" size={20} color={colors.gray[400]} />
-                  </View>
-                )}
-
-                {/* スポット名 */}
-                <View className="flex-1">
-                  <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-                    {spotName}
-                  </Text>
-                  <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5">
-                    {currentContent ? `${currentContent.length}文字` : '紹介文なし'}
-                  </Text>
-                </View>
-
-                {/* 変更マーク */}
-                {isChanged && (
-                  <View className="w-2 h-2 rounded-full bg-orange-500 mr-2" />
-                )}
-
-                {/* 展開アイコン */}
-                <Ionicons
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  size={20}
-                  color={colors.gray[400]}
-                />
-              </Pressable>
-
-              {/* 展開時の編集エリア */}
-              {isExpanded && (
-                <View className="px-4 pb-4">
-                  <TextInput
-                    value={currentContent}
-                    onChangeText={(text) => handleContentChange(spot.id, text)}
-                    placeholder="このスポットの紹介文を入力..."
-                    placeholderTextColor={colors.gray[400]}
-                    multiline
-                    className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground min-h-[150px]"
-                    textAlignVertical="top"
-                  />
-
-                  {/* 保存ボタン */}
-                  <View className="flex-row justify-end mt-3">
-                    <Pressable
-                      onPress={() => handleSaveSpot(spot)}
-                      disabled={!isChanged || isSaving}
-                      style={{
-                        backgroundColor: isChanged ? colors.primary.DEFAULT : colors.gray[200],
-                        paddingHorizontal: 20,
-                        paddingVertical: 10,
-                        borderRadius: 8,
-                      }}
-                    >
-                      {isSaving ? (
-                        <ActivityIndicator size="small" color="white" />
-                      ) : (
-                        <Text
-                          style={{
-                            color: isChanged ? 'white' : colors.gray[400],
-                            fontWeight: '600',
-                          }}
-                        >
-                          保存
-                        </Text>
-                      )}
-                    </Pressable>
-                  </View>
-                </View>
-              )}
-            </View>
-          );
-        })}
-
-        {/* スポットがない場合 */}
-        {articleData.spots.length === 0 && (
-          <View className="py-12 items-center">
-            <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">スポットがありません</Text>
-            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mt-1">
-              マップにスポットを追加してください
-            </Text>
-          </View>
-        )}
+        {/* 下部余白 */}
+        <View className="h-16" />
       </ScrollView>
     </SafeAreaView>
   );

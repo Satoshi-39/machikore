@@ -3,7 +3,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from 'react-native-reanimated';
+import { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 interface UseMapControlsVisibilityOptions {
   /** カードが存在するかどうか */

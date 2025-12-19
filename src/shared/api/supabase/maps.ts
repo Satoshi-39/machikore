@@ -4,7 +4,7 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
-import type { MapWithUser, SpotWithDetails, MapArticleData, SpotWithImages } from '@/shared/types';
+import type { MapWithUser, SpotWithDetails, MapArticleData, SpotWithImages, ProseMirrorDoc } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
 // ===============================
@@ -30,6 +30,8 @@ interface SupabaseMapResponse {
   created_at: string;
   updated_at: string;
   is_article_public: boolean | null;
+  article_intro: ProseMirrorDoc | null;
+  article_outro: ProseMirrorDoc | null;
   users?: {
     id: string;
     username: string;
@@ -90,6 +92,8 @@ export async function getPublicMaps(
     updated_at: map.updated_at,
     user: map.users || null,
     is_article_public: map.is_article_public ?? false,
+    article_intro: map.article_intro ?? null,
+    article_outro: map.article_outro ?? null,
   }));
 }
 
@@ -141,6 +145,8 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
     updated_at: data.updated_at,
     user: data.users || null,
     is_article_public: data.is_article_public ?? false,
+    article_intro: data.article_intro ?? null,
+    article_outro: data.article_outro ?? null,
   };
 }
 
@@ -252,6 +258,8 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
     updated_at: map.updated_at,
     user: map.users || null,
     is_article_public: map.is_article_public ?? false,
+    article_intro: map.article_intro ?? null,
+    article_outro: map.article_outro ?? null,
   }));
 }
 
@@ -297,6 +305,8 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
     updated_at: map.updated_at,
     user: map.users || null,
     is_article_public: map.is_article_public ?? false,
+    article_intro: map.article_intro ?? null,
+    article_outro: map.article_outro ?? null,
   }));
 }
 
@@ -376,6 +386,8 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
     updated_at: data.updated_at,
     user: data.users || null,
     is_article_public: data.is_article_public ?? false,
+    article_intro: data.article_intro ?? null,
+    article_outro: data.article_outro ?? null,
   };
 }
 
@@ -393,6 +405,8 @@ export interface UpdateMapParams {
   is_article_public?: boolean;
   thumbnail_url?: string | null;
   theme_color?: string;
+  article_intro?: ProseMirrorDoc | null;
+  article_outro?: ProseMirrorDoc | null;
 }
 
 /**
@@ -443,6 +457,8 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
     updated_at: data.updated_at,
     user: data.users || null,
     is_article_public: data.is_article_public ?? false,
+    article_intro: data.article_intro ?? null,
+    article_outro: data.article_outro ?? null,
   };
 }
 
@@ -617,6 +633,8 @@ export async function searchPublicMaps(
     updated_at: map.updated_at,
     user: map.users || null,
     is_article_public: map.is_article_public ?? false,
+    article_intro: map.article_intro ?? null,
+    article_outro: map.article_outro ?? null,
   }));
 }
 
@@ -669,6 +687,8 @@ export async function searchPublicMapsByTag(
     updated_at: map.updated_at,
     user: map.users || null,
     is_article_public: map.is_article_public ?? false,
+    article_intro: map.article_intro ?? null,
+    article_outro: map.article_outro ?? null,
   }));
 }
 
@@ -721,6 +741,8 @@ export async function searchPublicMapsByCategoryId(
     updated_at: map.updated_at,
     user: map.users || null,
     is_article_public: map.is_article_public ?? false,
+    article_intro: map.article_intro ?? null,
+    article_outro: map.article_outro ?? null,
   }));
 }
 
@@ -791,5 +813,7 @@ export async function getFollowingUsersMaps(
     updated_at: map.updated_at,
     user: map.users || null,
     is_article_public: map.is_article_public ?? false,
+    article_intro: map.article_intro ?? null,
+    article_outro: map.article_outro ?? null,
   }));
 }

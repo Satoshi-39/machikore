@@ -1,11 +1,11 @@
 /**
- * スポット記事編集ページ
+ * まえがき編集ページ
  *
- * 単一スポットの記事をリッチエディタで編集する
+ * マップ記事のまえがきをリッチエディタで編集する
  */
 
 import { useCurrentUserId } from '@/entities/user';
-import { useSpotWithDetails, useUpdateSpot } from '@/entities/user-spot/api';
+import { useMap, useUpdateMap } from '@/entities/map';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { ProseMirrorDoc } from '@/shared/types';
@@ -33,8 +33,8 @@ import {
   View,
 } from 'react-native';
 
-interface EditSpotArticlePageProps {
-  spotId: string;
+interface EditArticleIntroPageProps {
+  mapId: string;
 }
 
 // 空のドキュメント
@@ -43,12 +43,12 @@ const EMPTY_DOC: ProseMirrorDoc = {
   content: [{ type: 'paragraph' }],
 };
 
-export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
+export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
-  const { data: spot, isLoading } = useSpotWithDetails(spotId, currentUserId);
-  const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
+  const { data: map, isLoading } = useMap(mapId);
+  const { mutate: updateMap, isPending: isSaving } = useUpdateMap();
 
   const [initialContent, setInitialContent] = useState<ProseMirrorDoc | null>(
     null
@@ -93,24 +93,22 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     }
   }, [editor, isDarkMode, editorState.isReady]);
 
-  // スポットデータが取得され、エディタが準備完了したらコンテンツを設定
+  // マップデータが取得され、エディタが準備完了したらコンテンツを設定
   useEffect(() => {
-    if (spot && initialContent === null && editorState.isReady) {
-      const content = spot.article_content || EMPTY_DOC;
+    if (map && initialContent === null && editorState.isReady) {
+      const content = map.article_intro || EMPTY_DOC;
       // エディタにコンテンツを設定
       editor.setContent(content);
 
       // エディタが正規化した後のJSONを初期値として保存
-      // これにより比較時に同じ形式で比較できる
       const saveInitialContent = async () => {
-        // エディタが内容を処理する時間を待つ
         await new Promise((resolve) => setTimeout(resolve, 50));
         const normalizedJson = await editor.getJSON();
         setInitialContent(normalizedJson as ProseMirrorDoc);
       };
       saveInitialContent();
     }
-  }, [spot, initialContent, editor, editorState.isReady]);
+  }, [map, initialContent, editor, editorState.isReady]);
 
   // JSONが空かどうかを判定
   const isEmptyDoc = useCallback((doc: ProseMirrorDoc): boolean => {
@@ -118,7 +116,6 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     if (doc.content.length === 1) {
       const firstNode = doc.content[0];
       if (!firstNode) return true;
-      // 空の段落のみの場合
       if (
         firstNode.type === 'paragraph' &&
         (!firstNode.content || firstNode.content.length === 0)
@@ -131,7 +128,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
 
   // 保存処理
   const handleSave = useCallback(async () => {
-    if (!spot) return;
+    if (!map) return;
 
     try {
       const json = await editor.getJSON();
@@ -140,14 +137,13 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
         ? null
         : (json as ProseMirrorDoc);
 
-      updateSpot(
+      updateMap(
         {
-          spotId: spot.id,
-          articleContent: content,
+          id: map.id,
+          article_intro: content,
         },
         {
           onSuccess: () => {
-            // 保存後は現在の内容を初期コンテンツとして更新（変更検出用）
             setInitialContent(content || EMPTY_DOC);
             Alert.alert('保存しました');
           },
@@ -159,7 +155,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     } catch (error) {
       Alert.alert('エラー', '保存に失敗しました');
     }
-  }, [editor, spot, updateSpot, router, isEmptyDoc]);
+  }, [editor, map, updateMap, isEmptyDoc]);
 
   // 戻るボタン
   const handleBack = useCallback(async () => {
@@ -210,7 +206,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   if (isLoading) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="記事を編集" />
+        <PageHeader title="まえがきを編集" />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -233,11 +229,11 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     </Pressable>
   );
 
-  // スポットが見つからない or 権限なし
-  if (!spot || spot.user_id !== currentUserId) {
+  // マップが見つからない or 権限なし
+  if (!map || map.user_id !== currentUserId) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="記事を編集" />
+        <PageHeader title="まえがきを編集" />
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
@@ -245,31 +241,28 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
             color={colors.gray[300]}
           />
           <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-            {!spot ? 'スポットが見つかりません' : '編集権限がありません'}
+            {!map ? 'マップが見つかりません' : '編集権限がありません'}
           </Text>
         </View>
       </View>
     );
   }
 
-  const spotName =
-    spot.custom_name || spot.master_spot?.name || '不明なスポット';
-
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader
-        title="記事を編集"
+        title="まえがきを編集"
         onBack={handleBack}
         rightComponent={saveButton}
       />
 
-      {/* スポット名 */}
+      {/* マップ名 */}
       <View className="py-3 items-center bg-white dark:bg-[#191919]">
         <Text
           className="text-lg font-bold text-foreground dark:text-dark-foreground"
           numberOfLines={1}
         >
-          {spotName}
+          {map.name}
         </Text>
       </View>
 

@@ -37,3 +37,6 @@ export { AppToast } from './AppToast';
 
 // リッチテキストエディタ
 export { RichTextEditor } from './rich-text-editor';
+
+// リッチテキストレンダラー（ProseMirror JSONの表示用）
+export { RichTextRenderer } from './rich-text-renderer';

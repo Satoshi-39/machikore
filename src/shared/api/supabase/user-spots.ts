@@ -5,7 +5,7 @@
 
 import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
-import type { SpotWithDetails } from '@/shared/types';
+import type { SpotWithDetails, ProseMirrorDoc } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
 type MasterSpotInsert = Database['public']['Tables']['master_spots']['Insert'];
@@ -43,7 +43,7 @@ export interface UpdateSpotInput {
   id: string;
   custom_name?: string; // NOT NULL制約があるためnullは不可
   description?: string | null;
-  article_content?: string | null;
+  article_content?: ProseMirrorDoc | null; // ProseMirror JSON形式
   order_index?: number;
   map_id?: string;
 }
@@ -348,6 +348,7 @@ export async function getSpotWithDetails(
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
     is_liked: isLiked,
+    article_content: spot.article_content || null,
   };
 }
 

@@ -6,6 +6,48 @@
  */
 
 // ===============================
+// ProseMirror/TipTap JSON型
+// ===============================
+
+/**
+ * ProseMirror JSONのノード型
+ * TipTapエディタで使用するJSON形式
+ */
+export interface ProseMirrorNode {
+  type: string;
+  attrs?: Record<string, unknown>;
+  content?: ProseMirrorNode[];
+  marks?: { type: string; attrs?: Record<string, unknown> }[];
+  text?: string;
+}
+
+/**
+ * ProseMirror JSONドキュメント型
+ */
+export interface ProseMirrorDoc {
+  type: 'doc';
+  content: ProseMirrorNode[];
+}
+
+/**
+ * ProseMirror JSONからプレーンテキストを抽出
+ */
+export function extractPlainText(doc: ProseMirrorDoc | null | undefined): string {
+  if (!doc || !doc.content) return '';
+
+  const extractFromNode = (node: ProseMirrorNode): string => {
+    if (node.text) return node.text;
+    if (!node.content) return '';
+    return node.content.map(extractFromNode).join('');
+  };
+
+  return doc.content
+    .map((node) => extractFromNode(node))
+    .join('\n')
+    .trim();
+}
+
+// ===============================
 // ユーザー情報（共通）
 // ===============================
 
@@ -49,6 +91,10 @@ export interface MapWithUser {
   user: UserBasicInfo | null;
   /** 記事の公開設定（マップの公開とは独立） */
   is_article_public?: boolean;
+  /** 記事のまえがき（ProseMirror JSON形式） */
+  article_intro?: ProseMirrorDoc | null;
+  /** 記事のあとがき（ProseMirror JSON形式） */
+  article_outro?: ProseMirrorDoc | null;
   /** 現在のユーザーがこのマップにいいねしているか */
   is_liked?: boolean;
   /** 現在のユーザーがこのマップをブックマークしているか */
@@ -120,8 +166,8 @@ export interface SpotWithDetails {
   map?: MapBasicInfo | null;
   /** 現在のユーザーがこのスポットにいいねしているか */
   is_liked?: boolean;
-  /** マップ記事用の紹介文 */
-  article_content?: string | null;
+  /** マップ記事用の紹介文（ProseMirror JSON形式） */
+  article_content?: ProseMirrorDoc | null;
 }
 
 // ===============================

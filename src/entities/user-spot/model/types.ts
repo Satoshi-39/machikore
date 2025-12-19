@@ -3,6 +3,7 @@
  */
 
 import type { SpotRow, ImageRow } from '@/shared/types/database.types';
+import type { ProseMirrorDoc } from '@/shared/types';
 
 // ===============================
 // Domain Types
@@ -48,7 +49,7 @@ export interface UpdateSpotParams {
   spotId: string;
   customName?: string; // NOT NULL制約があるためnullは不可
   description?: string | null; // ひとこと
-  articleContent?: string | null; // 記事
+  articleContent?: ProseMirrorDoc | null; // 記事（ProseMirror JSON形式）
   orderIndex?: number;
   mapId?: string;
 }

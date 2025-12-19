@@ -190,6 +190,20 @@ function RootNavigator() {
             }}
           />
           <Stack.Screen
+            name="edit-article-intro/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="edit-article-outro/[id]"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
             name="add-maps-to-collection"
             options={{
               presentation: 'card',

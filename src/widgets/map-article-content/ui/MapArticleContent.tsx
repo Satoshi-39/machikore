@@ -18,7 +18,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
-import { ImageViewerModal, useImageViewer, CommentInputModal } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, CommentInputModal, RichTextRenderer } from '@/shared/ui';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
@@ -232,7 +232,7 @@ export function MapArticleContent({
           {/* マップ説明（導入文） */}
           {map.description && (
             <View className="mb-6 py-4">
-              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+              <Text className="text-base text-foreground dark:text-dark-foreground leading-6">
                 {map.description}
               </Text>
             </View>
@@ -243,6 +243,16 @@ export function MapArticleContent({
             spots={spots}
             onSpotPress={handleTocPress}
           />
+
+          {/* まえがき */}
+          {map.article_intro && (
+            <View className="mb-6">
+              <RichTextRenderer
+                content={map.article_intro}
+                textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
+              />
+            </View>
+          )}
 
           {/* スポット一覧 */}
           {spots.length > 0 ? (
@@ -271,6 +281,16 @@ export function MapArticleContent({
             <View className="py-8 items-center">
               <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
               <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">まだスポットがありません</Text>
+            </View>
+          )}
+
+          {/* あとがき */}
+          {map.article_outro && (
+            <View className="mt-6 mb-4">
+              <RichTextRenderer
+                content={map.article_outro}
+                textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
+              />
             </View>
           )}
 

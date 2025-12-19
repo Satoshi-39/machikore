@@ -67,7 +67,6 @@ export function useEditSpotForm() {
   const handleSubmit = async (data: {
     customName: string;
     description?: string;
-    articleContent?: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -149,7 +148,7 @@ export function useEditSpotForm() {
           spotId: id,
           customName: data.customName, // NOT NULL制約があるため、nullは渡さない
           description: data.description || null,
-          articleContent: data.articleContent || null,
+          // 記事は別ページで編集（EditSpotArticlePage）
           // タグは中間テーブルに保存するため、ここでは更新しない（将来的にカラム削除予定）
           mapId: data.mapId,
         },

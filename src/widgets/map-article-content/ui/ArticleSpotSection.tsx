@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, ScrollView, Image, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { RichTextRenderer } from '@/shared/ui';
 import type { SpotWithImages } from '@/shared/types';
 
 interface ArticleSpotSectionProps {
@@ -22,7 +23,7 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
   const address = spot.master_spot?.google_short_address || spot.google_short_address;
 
   return (
-    <View className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light">
+    <View className="mb-6">
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-center mb-2">
         <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">{index}.</Text>
@@ -74,9 +75,10 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
 
       {/* 記事内容 */}
       {spot.article_content ? (
-        <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
-          {spot.article_content}
-        </Text>
+        <RichTextRenderer
+          content={spot.article_content}
+          textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
+        />
       ) : (
         <View className="py-4 px-3 bg-surface dark:bg-dark-surface rounded-lg border border-border dark:border-dark-border">
           <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">

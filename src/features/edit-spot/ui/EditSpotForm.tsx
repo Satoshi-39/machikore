@@ -169,10 +169,10 @@ export function EditSpotForm({
             </Text>
           </View>
 
-          {/* 元の名前 */}
+          {/* スポット名 */}
           {spot.master_spot?.name && (
             <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">元の名前</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">スポット名</Text>
               <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
                 {spot.master_spot.name}
               </Text>
@@ -268,9 +268,11 @@ export function EditSpotForm({
             </View>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
           </TouchableOpacity>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-            {articleContent ? '記事が書かれています' : 'このスポットについて詳しく書いてみましょう'}
-          </Text>
+          {!articleContent && (
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+              このスポットについて詳しく書いてみましょう
+            </Text>
+          )}
         </View>
 
         {/* タグ */}
