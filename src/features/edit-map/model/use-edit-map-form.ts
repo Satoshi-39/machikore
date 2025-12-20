@@ -10,11 +10,14 @@
 import { useState, useMemo, useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { useMap, useUpdateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useMapTags, useUpdateMapTags } from '@/entities/tag';
+import { createMapLabel, updateMapLabel, deleteMapLabel } from '@/entities/map-label';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import type { ThumbnailImage } from '@/features/pick-images';
+import type { LocalMapLabel } from '@/features/manage-map-labels';
 import { log } from '@/shared/config/logger';
 
 export interface EditMapFormData {
@@ -25,6 +28,7 @@ export interface EditMapFormData {
   isPublic: boolean;
   thumbnailImage?: ThumbnailImage;
   removeThumbnail?: boolean;
+  labels?: LocalMapLabel[];
 }
 
 interface UseEditMapFormOptions {
@@ -36,6 +40,7 @@ interface UseEditMapFormOptions {
  */
 export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const user = useUserStore((state) => state.user);
   const { data: map, isLoading: isLoadingMap } = useMap(mapId);
   const { data: mapTags = [], isLoading: isLoadingTags } = useMapTags(mapId);
@@ -100,6 +105,40 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         // タグ更新エラーは警告のみで続行
       }
 
+      // ラベルの保存（追加・更新・削除）
+      if (data.labels) {
+        try {
+          // 削除予定のラベルを削除
+          const labelsToDelete = data.labels.filter((l) => l.isDeleted && !l.isNew);
+          for (const label of labelsToDelete) {
+            await deleteMapLabel(label.id);
+          }
+
+          // 新規ラベルを作成
+          const labelsToCreate = data.labels.filter((l) => l.isNew && !l.isDeleted);
+          for (const label of labelsToCreate) {
+            await createMapLabel({
+              map_id: mapId,
+              name: label.name,
+              color: label.color,
+              sort_order: label.sort_order,
+            });
+          }
+
+          // 変更されたラベルを更新
+          const labelsToUpdate = data.labels.filter((l) => l.isModified && !l.isDeleted && !l.isNew);
+          for (const label of labelsToUpdate) {
+            await updateMapLabel(label.id, {
+              name: label.name,
+              color: label.color,
+            });
+          }
+        } catch (error) {
+          log.error('[useEditMapForm] ラベル更新エラー:', error);
+          // ラベル更新エラーは警告のみで続行
+        }
+      }
+
       updateMap(
         {
           id: mapId,
@@ -111,6 +150,9 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         },
         {
           onSuccess: () => {
+            // ラベルキャッシュを無効化して再取得させる
+            queryClient.invalidateQueries({ queryKey: ['map-labels', mapId] });
+
             Alert.alert('更新完了', 'マップを更新しました', [
               {
                 text: 'OK',
@@ -125,7 +167,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         }
       );
     },
-    [mapId, user?.id, updateMapTags, updateMap, router]
+    [mapId, user?.id, updateMapTags, updateMap, router, queryClient]
   );
 
   return {

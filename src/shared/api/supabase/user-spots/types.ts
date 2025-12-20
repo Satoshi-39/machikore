@@ -3,7 +3,7 @@
  */
 
 import type { Database } from '@/shared/types/database.types';
-import type { ProseMirrorDoc } from '@/shared/types';
+import type { ProseMirrorDoc, MapLabelBasicInfo } from '@/shared/types';
 
 // MergeDeepで拡張されたDatabase型を使用
 // article_contentがProseMirrorDoc型として正しく認識される
@@ -50,6 +50,7 @@ export interface UpdateSpotInput {
 
 export interface UserSpotWithMasterSpot extends UserSpotRow {
   master_spot: MasterSpotRow | null;
+  map_label?: MapLabelBasicInfo | null;
 }
 
 export interface UserSpotImage {

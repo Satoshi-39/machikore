@@ -7,18 +7,21 @@
  */
 
 import { useCategories } from '@/entities/category';
+import { useMapLabels } from '@/entities/map-label';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
+import { MapLabelsSection, type LocalMapLabel } from '@/features/manage-map-labels';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 import { TagInput, PublicToggle } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FlatList,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useEditMapFormChanges, type EditMapFormData } from '../model';
@@ -44,6 +47,16 @@ interface EditMapFormProps {
   isLoading?: boolean;
 }
 
+/** DBから取得したラベルをLocalMapLabel形式に変換 */
+function toLocalLabels(dbLabels: { id: string; name: string; color: string; sort_order: number }[]): LocalMapLabel[] {
+  return dbLabels.map((l) => ({
+    id: l.id,
+    name: l.name,
+    color: l.color,
+    sort_order: l.sort_order,
+  }));
+}
+
 export function EditMapForm({
   map,
   initialTags,
@@ -51,6 +64,9 @@ export function EditMapForm({
   isLoading = false,
 }: EditMapFormProps) {
   const { data: categories = [] } = useCategories();
+
+  // ラベルデータ取得
+  const { data: dbLabels = [], isLoading: isLabelsLoading } = useMapLabels(map.id);
 
   const [name, setName] = useState(map.name);
   const [description, setDescription] = useState(map.description || '');
@@ -60,6 +76,19 @@ export function EditMapForm({
   const [tags, setTags] = useState<string[]>(initialTags);
   const [isPublic, setIsPublic] = useState(map.is_public);
 
+  // ラベルのローカルステート
+  const [labels, setLabels] = useState<LocalMapLabel[]>([]);
+  const [initialLabels, setInitialLabels] = useState<LocalMapLabel[]>([]);
+
+  // DBからラベルを読み込んだらローカルステートにセット
+  useEffect(() => {
+    if (dbLabels.length > 0 || !isLabelsLoading) {
+      const converted = toLocalLabels(dbLabels);
+      setLabels(converted);
+      setInitialLabels(converted);
+    }
+  }, [dbLabels, isLabelsLoading]);
+
   // サムネイル関連
   const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
     map.thumbnail_url ? { uri: map.thumbnail_url, width: 0, height: 0 } : null
@@ -67,13 +96,14 @@ export function EditMapForm({
   const [originalThumbnailUrl] = useState(map.thumbnail_url);
 
   // model層のhookを使用して変更検知
-  const { hasChanges, isFormValid } = useEditMapFormChanges(map, initialTags, {
+  const { hasChanges, isFormValid } = useEditMapFormChanges(map, initialTags, initialLabels, {
     name,
     description,
     selectedCategoryId,
     isPublic,
     thumbnailUri: thumbnailImage?.uri || null,
     tags,
+    labels,
   });
 
   // ボタンを無効化する条件
@@ -102,6 +132,7 @@ export function EditMapForm({
           ? thumbnailImage
           : undefined,
       removeThumbnail: thumbnailRemoved,
+      labels,
     });
   };
 
@@ -238,6 +269,18 @@ export function EditMapForm({
             }}
           />
         </View>
+
+        {/* ラベル管理 */}
+        {isLabelsLoading ? (
+          <View className="mb-6">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+              ラベル
+            </Text>
+            <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+          </View>
+        ) : (
+          <MapLabelsSection labels={labels} onLabelsChange={setLabels} />
+        )}
 
         {/* タグ */}
         <View className="mb-6">

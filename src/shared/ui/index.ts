@@ -46,3 +46,6 @@ export { PublicToggle } from './PublicToggle';
 
 // スポットカラーピッカー
 export { SpotColorPicker } from './SpotColorPicker';
+
+// ラベルピッカー
+export { LabelPicker } from './LabelPicker';

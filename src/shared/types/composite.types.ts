@@ -120,6 +120,15 @@ export interface MapBasicInfo {
   name: string;
 }
 
+/**
+ * JOINで取得するマップラベル情報
+ */
+export interface MapLabelBasicInfo {
+  id: string;
+  name: string;
+  color: string;
+}
+
 export interface SpotWithDetails {
   id: string;
   user_id: string;
@@ -131,6 +140,10 @@ export interface SpotWithDetails {
   tags: string[] | null;
   /** スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white） */
   spot_color: string | null;
+  /** ラベルID（ラベルが設定されている場合、その色が優先される） */
+  label_id?: string | null;
+  /** JOINで取得したラベル情報（id, name, color） */
+  map_label?: MapLabelBasicInfo | null;
   images_count: number;
   likes_count: number;
   bookmarks_count: number;

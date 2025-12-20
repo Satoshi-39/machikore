@@ -6,12 +6,18 @@ import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
 import { determineSpotCategory } from '@/entities/master-spot';
-import { type SpotColor, DEFAULT_SPOT_COLOR } from '@/shared/config';
+import { type SpotColor, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST } from '@/shared/config';
 
 interface UserSpotWithMasterSpot {
   id: string;
   custom_name: string | null;
   spot_color?: string | null;
+  // ラベル情報（ラベルが設定されている場合、その色が優先される）
+  map_label?: {
+    id: string;
+    name: string;
+    color: string;
+  } | null;
   // ピン刺し・現在地登録の場合はuser_spotに直接座標がある
   latitude?: number | null;
   longitude?: number | null;
@@ -53,8 +59,17 @@ export function useUserSpotsGeoJson(
           ? determineSpotCategory(spot.master_spot.google_types)
           : 'other' as SpotCategory;
 
-        // スポットカラー: 設定されていればそれを使用、なければデフォルト
-        const spotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
+        // スポットカラー: ラベル色を優先、なければスポット色、それもなければデフォルト
+        let spotColor: SpotColor = DEFAULT_SPOT_COLOR;
+        if (spot.map_label?.color) {
+          // ラベルの色（hex）からSpotColorキーを取得
+          const labelColorKey = SPOT_COLOR_LIST.find((c) => c.color === spot.map_label?.color)?.key;
+          if (labelColorKey) {
+            spotColor = labelColorKey;
+          }
+        } else if (spot.spot_color) {
+          spotColor = spot.spot_color as SpotColor;
+        }
 
         return {
           type: 'Feature' as const,

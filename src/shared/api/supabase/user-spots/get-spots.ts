@@ -14,7 +14,12 @@ export async function getSpotsByMapId(mapId: string): Promise<UserSpotWithMaster
     .from('user_spots')
     .select(`
       *,
-      master_spots (*)
+      master_spots (*),
+      map_labels (
+        id,
+        name,
+        color
+      )
     `)
     .eq('map_id', mapId)
     .order('order_index', { ascending: true });
@@ -26,6 +31,7 @@ export async function getSpotsByMapId(mapId: string): Promise<UserSpotWithMaster
   return (data || []).map((spot: any) => ({
     ...spot,
     master_spot: spot.master_spots || null,
+    map_label: spot.map_labels || null,
   }));
 }
 
@@ -47,6 +53,11 @@ export async function getPublicSpots(
         username,
         display_name,
         avatar_url
+      ),
+      map_labels (
+        id,
+        name,
+        color
       ),
       maps!inner (
         id,
@@ -81,6 +92,8 @@ export async function getPublicSpots(
       description: spot.description,
       tags: spot.tags,
       spot_color: spot.spot_color,
+      label_id: spot.label_id || null,
+      map_label: spot.map_labels || null,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
       bookmarks_count: spot.bookmarks_count ?? 0,

@@ -50,6 +50,11 @@ export async function getSpotWithDetails(
         display_name,
         avatar_url
       ),
+      map_labels (
+        id,
+        name,
+        color
+      ),
       maps (
         id,
         name
@@ -84,6 +89,8 @@ export async function getSpotWithDetails(
     description: spot.description,
     tags: spot.tags,
     spot_color: spot.spot_color,
+    label_id: spot.label_id || null,
+    map_label: spot.map_labels || null,
     images_count: spot.images_count,
     likes_count: spot.likes_count,
     bookmarks_count: spot.bookmarks_count ?? 0,

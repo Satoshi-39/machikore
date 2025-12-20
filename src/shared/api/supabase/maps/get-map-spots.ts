@@ -24,6 +24,11 @@ export async function getMapSpots(
         display_name,
         avatar_url
       ),
+      map_labels (
+        id,
+        name,
+        color
+      ),
       likes (
         id,
         user_id
@@ -64,6 +69,8 @@ export async function getMapSpots(
       google_formatted_address: spot.google_formatted_address,
       google_short_address: spot.google_short_address,
       spot_color: spot.spot_color || null,
+      label_id: spot.label_id || null,
+      map_label: spot.map_labels || null,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
       is_liked: isLiked,
