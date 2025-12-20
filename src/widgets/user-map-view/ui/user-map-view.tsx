@@ -15,6 +15,7 @@ import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import { usePinDropStore, PinDropOverlay } from '@/features/drop-pin';
 import { useMapControlsVisibility } from '@/features/map-controls';
+import { LabelChipsBar } from '@/features/filter-by-label';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { ENV, LABEL_ZOOM_USER_MAP } from '@/shared/config';
@@ -22,7 +23,6 @@ import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
 import { UserMapLabels } from './layers';
 import { SpotCarousel } from './spot-carousel';
-import { LabelChipsBar } from './label-chips-bar';
 import Mapbox from '@rnmapbox/maps';
 import React, {
   forwardRef,
@@ -52,6 +52,8 @@ interface UserMapViewProps {
   initialSpotId?: string | null;
   /** 詳細カードが最大化されている時に呼ばれる（ヘッダー非表示用） */
   onDetailCardMaximized?: (isMaximized: boolean) => void;
+  /** 詳細カードが最大化されているか（ラベルチップ非表示用） */
+  isDetailCardMaximized?: boolean;
   currentLocation?: { latitude: number; longitude: number } | null;
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
@@ -69,6 +71,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       defaultMapId: _defaultMapId = null, // 将来のピン刺し機能で使用予定
       initialSpotId = null,
       onDetailCardMaximized,
+      isDetailCardMaximized = false,
       currentLocation = null,
       viewMode = 'map',
       isSearchFocused = false,
@@ -389,9 +392,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         </Mapbox.MapView>
 
         {/* ラベルチップバー（show_label_chipsがtrueの場合のみ表示）
-            ヘッダーの下に配置: insets.top + 8(mt-2) + 56(ヘッダー高さ) = insets.top + 64 */}
-        {mapData?.show_label_chips && mapLabels.length > 0 && !isSearchFocused && !isDetailCardOpen && (
-          <View className="absolute left-0 right-0" style={{ top: insets.top + 64 }}>
+            ヘッダーの下に配置: insets.top + 8(mt-2) + 56(ヘッダー高さ) + 16(余白) = insets.top + 80
+            検索中・カード最大時は非表示（ヘッダーと同じ条件） */}
+        {mapData?.show_label_chips && mapLabels.length > 0 && !isSearchFocused && !isDetailCardMaximized && (
+          <View className="absolute left-0 right-0" style={{ top: insets.top + 80 }}>
             <LabelChipsBar
               labels={mapLabels}
               selectedLabelId={selectedLabelId}

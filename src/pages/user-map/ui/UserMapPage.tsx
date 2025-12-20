@@ -189,6 +189,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
           currentLocation={location}
           viewMode={viewMode}
           isSearchFocused={isSearchFocused}
+          isDetailCardMaximized={isDetailCardMaximized}
           onEditSpot={handleEditSpot}
           onDetailCardMaximized={setIsDetailCardMaximized}
           onPinDropConfirm={handlePinDropConfirm}

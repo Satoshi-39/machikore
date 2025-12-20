@@ -65,8 +65,9 @@ function SpotDetailCardContent({
   return null;
 }
 
-// 検索バー領域の下端Y座標（固定値）
-const SEARCH_BAR_BOTTOM_Y = 140;
+// ヘッダー・ラベルチップ領域の下端Y座標（固定値）
+// カードがこの位置より上に来たらヘッダー・ラベルチップを非表示にする
+const SEARCH_BAR_BOTTOM_Y = 180;
 
 export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
