@@ -354,7 +354,7 @@ export function CreateSpotForm({
             />
           </View>
           {selectedLabelId && (
-            <Text className="text-xs text-foreground dark:text-dark-foreground mt-2">
+            <Text className="text-xs text-red-500 mt-2">
               ※ラベルが設定されている場合、ラベルの色が優先されます
             </Text>
           )}

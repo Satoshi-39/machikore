@@ -495,7 +495,7 @@ export const INPUT_LIMITS = {
   MAX_SPOTS_PER_MAP: 100,
 
   // スポット
-  SPOT_ONE_WORD: 15, // このスポットを一言で
+  SPOT_ONE_WORD: 20, // このスポットを一言で
   SPOT_SUMMARY: 50, // スポットの概要
   SPOT_ARTICLE_CONTENT: 5000,
   SPOT_ADDRESS: 200,
