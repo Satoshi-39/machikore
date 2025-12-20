@@ -286,6 +286,32 @@ export function EditMapForm({
           <MapLabelsSection labels={labels} onLabelsChange={setLabels} />
         )}
 
+        {/* ラベルチップ表示設定 */}
+        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+          <View className="flex-row items-center justify-between">
+            <View className="flex-row items-center flex-1 mr-4">
+              <Ionicons
+                name="pricetags-outline"
+                size={20}
+                color={showLabelChips ? colors.primary.DEFAULT : '#9CA3AF'}
+                style={{ marginRight: 8 }}
+              />
+              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+                ラベルチップを表示
+              </Text>
+            </View>
+            <Switch
+              value={showLabelChips}
+              onValueChange={setShowLabelChips}
+              trackColor={{ false: '#D1D5DB', true: colors.primary.DEFAULT }}
+              thumbColor="#fff"
+            />
+          </View>
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+            マップ上部にラベルを表示し、タップでスポットをフィルタリングできます
+          </Text>
+        </View>
+
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
@@ -319,32 +345,6 @@ export function EditMapForm({
               ? '誰でもこのマップを見ることができます'
               : '自分だけがこのマップを見ることができます'}
           />
-        </View>
-
-        {/* ラベルチップ表示設定 */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
-          <View className="flex-row items-center justify-between">
-            <View className="flex-row items-center flex-1 mr-4">
-              <Ionicons
-                name="pricetags-outline"
-                size={20}
-                color={showLabelChips ? colors.primary.DEFAULT : '#9CA3AF'}
-                style={{ marginRight: 8 }}
-              />
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
-                ラベルチップを表示
-              </Text>
-            </View>
-            <Switch
-              value={showLabelChips}
-              onValueChange={setShowLabelChips}
-              trackColor={{ false: '#D1D5DB', true: colors.primary.DEFAULT }}
-              thumbColor="#fff"
-            />
-          </View>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-            マップ上部にラベルを表示し、タップでスポットをフィルタリングできます
-          </Text>
         </View>
 
         {/* 更新ボタン */}

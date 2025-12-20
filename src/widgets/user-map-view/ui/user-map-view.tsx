@@ -34,6 +34,7 @@ import React, {
   useState,
 } from 'react';
 import { View, Dimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
 import { useSpotCamera, useUserSpotsGeoJson, usePinDropAutoCancel } from '../model';
 
@@ -79,6 +80,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const mapViewRef = useRef<Mapbox.MapView>(null);
     const cameraRef = useRef<Mapbox.Camera>(null);
     const isDarkMode = useIsDarkMode();
+    const insets = useSafeAreaInsets();
     // マップ情報を取得（テーマカラー用）
     const { data: mapData } = useMap(mapId);
     // currentUserId を渡していいね状態も含めて取得
@@ -386,9 +388,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           />
         </Mapbox.MapView>
 
-        {/* ラベルチップバー（show_label_chipsがtrueの場合のみ表示） */}
+        {/* ラベルチップバー（show_label_chipsがtrueの場合のみ表示）
+            ヘッダーの下に配置: insets.top + 8(mt-2) + 56(ヘッダー高さ) = insets.top + 64 */}
         {mapData?.show_label_chips && mapLabels.length > 0 && !isSearchFocused && !isDetailCardOpen && (
-          <View className="absolute top-0 left-0 right-0" style={{ top: 72 }}>
+          <View className="absolute left-0 right-0" style={{ top: insets.top + 64 }}>
             <LabelChipsBar
               labels={mapLabels}
               selectedLabelId={selectedLabelId}
