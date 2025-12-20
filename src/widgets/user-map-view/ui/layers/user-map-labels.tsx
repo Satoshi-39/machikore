@@ -75,6 +75,9 @@ interface CombinedProperties {
   // スポット用
   category?: SpotCategory;
   spot_color?: SpotColor;
+  // スポットの状態（フォーカス/選択）
+  isFocused?: boolean;
+  isSelected?: boolean;
   // 交通機関用
   type?: 'station' | 'airport' | 'ferry_terminal' | 'bus_terminal';
   subtype?: string | null;
@@ -113,19 +116,30 @@ export function UserMapLabels({
   const locationColors = isDarkMode ? LOCATION_LABEL_COLORS_DARK : LOCATION_LABEL_COLORS_LIGHT;
 
   // スポットと交通データと地名を統合したGeoJSONを作成
+  // focusedSpotId/selectedSpotIdをGeoJSONプロパティに含めることで、
+  // フィルター切り替えではなくdata-driven stylingでサイズを変更
   const combinedGeoJson = useMemo((): FeatureCollection<Point, CombinedProperties> => {
-    const spotFeatures: Feature<Point, CombinedProperties>[] = spotsGeoJson.features.map((f) => ({
-      type: 'Feature',
-      geometry: f.geometry,
-      properties: {
-        id: f.properties.id,
-        name: f.properties.name,
-        featureType: 'spot' as const,
-        sortKey: SYMBOL_SORT_KEY_USER_MAP.spot,
-        category: f.properties.category,
-        spot_color: f.properties.spot_color,
-      },
-    }));
+    const spotFeatures: Feature<Point, CombinedProperties>[] = spotsGeoJson.features.map((f) => {
+      const isFocused = f.properties.id === focusedSpotId && f.properties.id !== selectedSpotId;
+      const isSelected = f.properties.id === selectedSpotId;
+      // フォーカス/選択中のスポットはsortKeyを最小にして最前面に表示
+      const sortKey = isFocused || isSelected ? 0 : SYMBOL_SORT_KEY_USER_MAP.spot;
+
+      return {
+        type: 'Feature',
+        geometry: f.geometry,
+        properties: {
+          id: f.properties.id,
+          name: f.properties.name,
+          featureType: 'spot' as const,
+          sortKey,
+          category: f.properties.category,
+          spot_color: f.properties.spot_color,
+          isFocused,
+          isSelected,
+        },
+      };
+    });
 
     const transportFeatures: Feature<Point, CombinedProperties>[] = transportGeoJson.features.map((f) => {
       let sortKey: number = SYMBOL_SORT_KEY_USER_MAP.station;
@@ -175,7 +189,7 @@ export function UserMapLabels({
       type: 'FeatureCollection',
       features: [...spotFeatures, ...transportFeatures, ...prefectureFeatures, ...cityFeatures],
     };
-  }, [spotsGeoJson, transportGeoJson, prefecturesGeoJson, citiesGeoJson]);
+  }, [spotsGeoJson, transportGeoJson, prefecturesGeoJson, citiesGeoJson, focusedSpotId, selectedSpotId]);
 
   // データがない場合はレンダリングしない
   if (combinedGeoJson.features.length === 0) {
@@ -470,26 +484,35 @@ export function UserMapLabels({
         />
 
         {/* ========== スポットレイヤー（交通機関より優先） ========== */}
-        {/* 通常のスポット：フォーカス中・選択中のスポットは別レイヤーで表示 */}
+        {/* 単一レイヤーでdata-driven stylingを使用し、フォーカス/選択状態でサイズを変更 */}
+        {/* フィルター切り替えを使わないことでフリッカーを防止 */}
         <Mapbox.SymbolLayer
           id="user-spots-layer"
-          filter={
-            selectedSpotId || focusedSpotId
-              ? ['all',
-                  ['==', ['get', 'featureType'], 'spot'],
-                  ...(selectedSpotId ? [['!=', ['get', 'id'], selectedSpotId]] : []),
-                  ...(focusedSpotId && focusedSpotId !== selectedSpotId ? [['!=', ['get', 'id'], focusedSpotId]] : []),
-                ]
-              : ['==', ['get', 'featureType'], 'spot']
-          }
+          filter={['==', ['get', 'featureType'], 'spot']}
           style={{
             symbolSortKey: ['get', 'sortKey'],
-            // spot_colorに応じたアイコンを選択
+            // スポットカラーに応じたアイコンを表示
             iconImage: ['concat', 'spot-icon-', ['get', 'spot_color']],
-            iconSize: 0.2,
+            // フォーカス/選択中は拡大表示
+            iconSize: [
+              'case',
+              ['==', ['get', 'isFocused'], true],
+              0.28,
+              ['==', ['get', 'isSelected'], true],
+              0.28,
+              0.2,
+            ],
             textField: ['get', 'name'],
-            textSize: 13,
-            // spot_colorに応じたテキスト色
+            // フォーカス/選択中はテキストも拡大
+            textSize: [
+              'case',
+              ['==', ['get', 'isFocused'], true],
+              15,
+              ['==', ['get', 'isSelected'], true],
+              15,
+              13,
+            ],
+            // スポットカラーに応じたテキスト色
             textColor: [
               'match', ['get', 'spot_color'],
               'pink', SPOT_COLORS.pink.color,
@@ -501,7 +524,7 @@ export function UserMapLabels({
               'purple', SPOT_COLORS.purple.color,
               'gray', SPOT_COLORS.gray.color,
               'white', SPOT_COLORS.white.color,
-              defaultSpotColor, // デフォルト
+              defaultSpotColor, // fallback
             ],
             textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
             textHaloWidth: 2,
@@ -512,82 +535,6 @@ export function UserMapLabels({
             textOffset: [0.3, 0],
             textAllowOverlap: false,
             iconAllowOverlap: false,
-          }}
-        />
-
-        {/* ========== フォーカス中スポットレイヤー（カルーセルでフォーカス中、最前面に拡大表示） ========== */}
-        <Mapbox.SymbolLayer
-          id="user-spots-focused-layer"
-          filter={focusedSpotId && focusedSpotId !== selectedSpotId
-            ? ['all', ['==', ['get', 'featureType'], 'spot'], ['==', ['get', 'id'], focusedSpotId]]
-            : ['==', 'dummy', 'never-match']
-          }
-          style={{
-            symbolSortKey: 0,
-            iconImage: ['concat', 'spot-icon-', ['get', 'spot_color']],
-            iconSize: 0.28,
-            textField: ['get', 'name'],
-            textSize: 15,
-            textColor: [
-              'match', ['get', 'spot_color'],
-              'pink', SPOT_COLORS.pink.color,
-              'red', SPOT_COLORS.red.color,
-              'orange', SPOT_COLORS.orange.color,
-              'yellow', SPOT_COLORS.yellow.color,
-              'green', SPOT_COLORS.green.color,
-              'blue', SPOT_COLORS.blue.color,
-              'purple', SPOT_COLORS.purple.color,
-              'gray', SPOT_COLORS.gray.color,
-              'white', SPOT_COLORS.white.color,
-              defaultSpotColor,
-            ],
-            textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-            textAllowOverlap: true,
-            iconAllowOverlap: true,
-          }}
-        />
-
-        {/* ========== 選択中スポットレイヤー（詳細カード表示中、最前面に拡大表示） ========== */}
-        <Mapbox.SymbolLayer
-          id="user-spots-selected-layer"
-          filter={selectedSpotId
-            ? ['all', ['==', ['get', 'featureType'], 'spot'], ['==', ['get', 'id'], selectedSpotId]]
-            : ['==', 'dummy', 'never-match']
-          }
-          style={{
-            symbolSortKey: 0,
-            iconImage: ['concat', 'spot-icon-', ['get', 'spot_color']],
-            iconSize: 0.28,
-            textField: ['get', 'name'],
-            textSize: 15,
-            textColor: [
-              'match', ['get', 'spot_color'],
-              'pink', SPOT_COLORS.pink.color,
-              'red', SPOT_COLORS.red.color,
-              'orange', SPOT_COLORS.orange.color,
-              'yellow', SPOT_COLORS.yellow.color,
-              'green', SPOT_COLORS.green.color,
-              'blue', SPOT_COLORS.blue.color,
-              'purple', SPOT_COLORS.purple.color,
-              'gray', SPOT_COLORS.gray.color,
-              'white', SPOT_COLORS.white.color,
-              defaultSpotColor,
-            ],
-            textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
-            textHaloWidth: 2,
-            textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
-            textAllowOverlap: true,
-            iconAllowOverlap: true,
           }}
         />
 
