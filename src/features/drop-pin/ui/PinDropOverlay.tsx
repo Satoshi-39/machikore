@@ -8,7 +8,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { USER_MAP_THEME_COLORS, colors, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { LocationPinIcon } from '@/shared/ui';
 
@@ -17,22 +17,22 @@ interface PinDropOverlayProps {
   onConfirm: () => void;
   /** キャンセルボタン押下時 */
   onCancel: () => void;
-  /** マップのテーマカラー */
-  themeColor: UserMapThemeColor;
+  /** スポットの色（オプション、デフォルトは青） */
+  spotColor?: SpotColor;
 }
 
-export function PinDropOverlay({ onConfirm, onCancel, themeColor }: PinDropOverlayProps) {
+export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_COLOR }: PinDropOverlayProps) {
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
-  const themeConfig = USER_MAP_THEME_COLORS[themeColor];
-  const pinColor = themeConfig.color;
+  const colorConfig = SPOT_COLORS[spotColor];
+  const pinColor = colorConfig.color;
 
   // ピンの縁取り色（白/グレーテーマの場合に必要）
-  const pinStrokeColor = getThemeColorStroke(themeColor, isDarkMode);
+  const pinStrokeColor = getSpotColorStroke(spotColor, isDarkMode);
 
-  // 確定ボタンの色（テーマカラー）
+  // 確定ボタンの色（スポットカラー）
   // 白テーマの場合は文字色を黒にする
-  const isWhiteTheme = themeColor === 'white';
+  const isWhiteTheme = spotColor === 'white';
   const confirmButtonTextColor = isWhiteTheme ? '#374151' : '#FFFFFF';
 
   // 閉じるボタンの色（ライト/ダークモード対応）

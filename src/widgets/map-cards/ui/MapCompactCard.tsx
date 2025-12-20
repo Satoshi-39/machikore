@@ -13,8 +13,7 @@
 import React, { useMemo, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
-import { useIsDarkMode } from '@/shared/lib/providers';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { formatRelativeTime } from '@/shared/lib';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
@@ -52,8 +51,6 @@ export function MapCompactCard({
   onArticlePress,
   onUserPress,
 }: MapCompactCardProps) {
-  const isDarkMode = useIsDarkMode();
-
   // 記事公開状態
   const isArticlePublic = map.is_article_public === true;
 
@@ -107,8 +104,7 @@ export function MapCompactCard({
             <View className="flex-row items-center ml-1 flex-shrink-0">
               <LocationPinIcon
                 size={12}
-                color={USER_MAP_THEME_COLORS[map.theme_color as UserMapThemeColor]?.color}
-                strokeColor={getThemeColorStroke(map.theme_color as UserMapThemeColor, isDarkMode)}
+                color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
               />
               <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
                 {map.spots_count}

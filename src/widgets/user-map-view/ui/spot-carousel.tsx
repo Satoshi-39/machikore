@@ -23,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
-import { LOCATION_ICONS, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { LOCATION_ICONS, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { useToggleSpotLike } from '@/entities/like';
 import {
   useSpotBookmarkInfo,
@@ -54,7 +54,6 @@ interface SpotCardProps {
   currentUserId?: UUID | null;
   onPress: () => void;
   onCameraMove?: () => void;
-  themeColor: UserMapThemeColor;
 }
 
 function SpotCard({
@@ -65,13 +64,14 @@ function SpotCard({
   currentUserId,
   onPress,
   onCameraMove,
-  themeColor,
 }: SpotCardProps) {
   const isDarkMode = useIsDarkMode();
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
   const description = spot.description;
-  const themeColorValue = USER_MAP_THEME_COLORS[themeColor]?.color ?? LOCATION_ICONS.USER_SPOT.color;
-  const themeColorStroke = getThemeColorStroke(themeColor, isDarkMode);
+  // スポット固有の色、なければデフォルト色を使用
+  const spotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
+  const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
+  const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
 
   // いいね
   const isLiked = spot.is_liked ?? false;
@@ -143,7 +143,7 @@ function SpotCard({
         <View className="flex-1 p-4">
           {/* タイトル + カメラ移動ボタン */}
           <View className="flex-row items-center">
-            <LocationPinIcon size={20} color={themeColorValue} strokeColor={themeColorStroke} />
+            <LocationPinIcon size={20} color={spotColorValue} strokeColor={spotColorStroke} />
             <Text
               className="text-xl font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
               numberOfLines={2}
@@ -283,7 +283,6 @@ interface SpotCarouselProps {
   /** カメラ移動（目のアイコンタップ時） */
   onCameraMove?: (spot: SpotWithDetails) => void;
   onClose: () => void;
-  themeColor: UserMapThemeColor;
 }
 
 export function SpotCarousel({
@@ -295,7 +294,6 @@ export function SpotCarousel({
   onSpotPress,
   onCameraMove,
   onClose,
-  themeColor,
 }: SpotCarouselProps) {
   const isDarkMode = useIsDarkMode();
   const insets = useSafeAreaInsets();
@@ -353,10 +351,9 @@ export function SpotCarousel({
         currentUserId={currentUserId}
         onPress={() => handleCardPress(item)}
         onCameraMove={() => onCameraMove?.(item)}
-        themeColor={themeColor}
       />
     ),
-    [selectedSpotId, currentUserId, handleCardPress, onCameraMove, spots.length, themeColor]
+    [selectedSpotId, currentUserId, handleCardPress, onCameraMove, spots.length]
   );
 
   // キー抽出

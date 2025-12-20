@@ -26,8 +26,7 @@ export async function getUserSpotsByMasterSpotId(
       maps!inner (
         id,
         name,
-        is_public,
-        theme_color
+        is_public
       )
     `)
     .eq('master_spot_id', masterSpotId)
@@ -48,6 +47,7 @@ export async function getUserSpotsByMasterSpotId(
     custom_name: spot.custom_name,
     description: spot.description,
     tags: spot.tags,
+    spot_color: spot.spot_color,
     images_count: spot.images_count,
     likes_count: spot.likes_count,
     bookmarks_count: spot.bookmarks_count ?? 0,
@@ -57,6 +57,6 @@ export async function getUserSpotsByMasterSpotId(
     updated_at: spot.updated_at,
     master_spot: spot.master_spots || null,
     user: spot.users || null,
-    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
+    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
   }));
 }

@@ -18,7 +18,6 @@ interface CreateMapParams {
   tags?: string[];
   isPublic: boolean;
   thumbnailUrl?: string;
-  themeColor?: string;
 }
 
 /**
@@ -40,7 +39,6 @@ export function useCreateMap() {
         category_id: params.categoryId,
         is_public: params.isPublic,
         thumbnail_url: params.thumbnailUrl || null,
-        theme_color: params.themeColor || 'pink',
       });
 
       // タグを中間テーブルに保存

@@ -63,6 +63,7 @@ export async function getMapSpots(
       longitude: spot.longitude,
       google_formatted_address: spot.google_formatted_address,
       google_short_address: spot.google_short_address,
+      spot_color: spot.spot_color || null,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
       is_liked: isLiked,

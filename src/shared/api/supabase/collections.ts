@@ -48,7 +48,6 @@ export interface CollectionMapWithDetails extends CollectionMap {
     name: string;
     description: string | null;
     thumbnail_url: string | null;
-    theme_color: string | null;
     spots_count: number;
     likes_count: number;
     bookmarks_count: number;
@@ -262,7 +261,6 @@ export async function getCollectionMaps(
         name,
         description,
         thumbnail_url,
-        theme_color,
         spots_count,
         likes_count,
         bookmarks_count,

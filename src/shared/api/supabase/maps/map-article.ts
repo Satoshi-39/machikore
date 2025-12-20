@@ -60,6 +60,7 @@ export async function getMapArticle(
       custom_name: spot.custom_name,
       description: spot.description,
       tags: spot.tags,
+      spot_color: spot.spot_color || null,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
       bookmarks_count: spot.bookmarks_count ?? 0,

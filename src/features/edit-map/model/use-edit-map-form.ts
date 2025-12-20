@@ -15,7 +15,6 @@ import { useUserStore } from '@/entities/user';
 import { useMapTags, useUpdateMapTags } from '@/entities/tag';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import type { ThumbnailImage } from '@/features/pick-images';
-import type { UserMapThemeColor } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 export interface EditMapFormData {
@@ -26,7 +25,6 @@ export interface EditMapFormData {
   isPublic: boolean;
   thumbnailImage?: ThumbnailImage;
   removeThumbnail?: boolean;
-  themeColor: UserMapThemeColor;
 }
 
 interface UseEditMapFormOptions {
@@ -109,7 +107,6 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
           description: data.description || null,
           category_id: data.categoryId || null,
           is_public: data.isPublic,
-          theme_color: data.themeColor,
           ...(thumbnailUrl !== undefined && { thumbnail_url: thumbnailUrl }),
         },
         {

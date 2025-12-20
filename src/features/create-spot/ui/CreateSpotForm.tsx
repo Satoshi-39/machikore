@@ -16,15 +16,35 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS } from '@/shared/config';
-import { StyledTextInput, TagInput, AddressPinIcon } from '@/shared/ui';
+import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker } from '@/shared/ui';
 import {
   type SpotLocationInput,
   isPlaceSearchResult,
+  useSelectedPlaceStore,
 } from '@/features/search-places';
+import { useRouter } from 'expo-router';
+import type { ProseMirrorDoc } from '@/shared/types';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { MapWithUser } from '@/shared/types';
 import { useCreateSpotFormValidation } from '../model';
+
+// 記事コンテンツが空かどうかを判定
+function isEmptyArticle(doc: ProseMirrorDoc | null): boolean {
+  if (!doc) return true;
+  if (!doc.content || doc.content.length === 0) return true;
+  if (doc.content.length === 1) {
+    const firstNode = doc.content[0];
+    if (!firstNode) return true;
+    if (
+      firstNode.type === 'paragraph' &&
+      (!firstNode.content || firstNode.content.length === 0)
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
 
 interface UploadProgress {
   current: number;
@@ -37,10 +57,11 @@ interface CreateSpotFormProps {
   onSubmit: (data: {
     customName: string;
     description?: string;
-    articleContent?: string;
+    articleContent?: ProseMirrorDoc | null;
     tags: string[];
     images: SelectedImage[];
     mapId: string;
+    spotColor: SpotColor;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
@@ -61,15 +82,20 @@ export function CreateSpotForm({
   isMapsLoading = false,
   selectedMapId,
 }: CreateSpotFormProps) {
+  const router = useRouter();
+
   // Google検索結果か手動登録かを判定
   const isGooglePlace = isPlaceSearchResult(placeData);
 
   // 「このスポットを一言で」は常に空から開始
   const [customName, setCustomName] = useState('');
   const [description, setDescription] = useState('');
-  const [articleContent, setArticleContent] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [images, setImages] = useState<SelectedImage[]>([]);
+  const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
+
+  // 記事コンテンツはストアから取得
+  const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
 
   // 選択中のマップを取得
   const selectedMap = userMaps.find(m => m.id === selectedMapId);
@@ -103,10 +129,11 @@ export function CreateSpotForm({
     onSubmit({
       customName: customName.trim(),
       description: description.trim() || undefined,
-      articleContent: articleContent.trim() || undefined,
+      articleContent: draftArticleContent,
       tags,
       images,
       mapId: selectedMapId,
+      spotColor,
     });
   };
 
@@ -252,24 +279,39 @@ export function CreateSpotForm({
         {/* 記事 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">記事</Text>
-          <StyledTextInput
-            value={articleContent}
-            onChangeText={setArticleContent}
-            placeholder="スポットについて詳しく書いてみましょう"
-            multiline
-            numberOfLines={8}
-            maxLength={INPUT_LIMITS.SPOT_ARTICLE_CONTENT}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base min-h-[160px]"
-            textAlignVertical="top"
-          />
-          <View className="flex-row justify-between mt-1">
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-              ここに入力した内容が記事ページで表示されます
-            </Text>
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {articleContent.length}/{INPUT_LIMITS.SPOT_ARTICLE_CONTENT}
-            </Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => router.push('/create-spot-article')}
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
+            activeOpacity={0.7}
+          >
+            <View className="flex-row items-center flex-1">
+              <Ionicons
+                name="document-text-outline"
+                size={20}
+                color={colors.gray[400]}
+              />
+              <Text
+                className={`ml-3 text-base ${
+                  isEmptyArticle(draftArticleContent)
+                    ? 'text-foreground-muted dark:text-dark-foreground-muted'
+                    : 'text-foreground dark:text-dark-foreground'
+                }`}
+                numberOfLines={1}
+              >
+                {isEmptyArticle(draftArticleContent)
+                  ? 'スポットについて詳しく書いてみましょう'
+                  : '記事が入力されています'}
+              </Text>
+            </View>
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={colors.gray[400]}
+            />
+          </TouchableOpacity>
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+            ここに入力した内容が記事ページで表示されます
+          </Text>
         </View>
 
         {/* タグ */}
@@ -280,6 +322,17 @@ export function CreateSpotForm({
             onTagsChange={setTags}
             placeholder="タグを入力してEnter"
             maxTags={10}
+          />
+        </View>
+
+        {/* スポットの色 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            スポットの色
+          </Text>
+          <SpotColorPicker
+            selectedColor={spotColor}
+            onColorChange={setSpotColor}
           />
         </View>
 

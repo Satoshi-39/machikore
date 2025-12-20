@@ -8,11 +8,16 @@
 
 import { create } from 'zustand';
 import type { SpotLocationInput } from './types';
+import type { ProseMirrorDoc } from '@/shared/types';
 
 interface SelectedPlaceStore {
   selectedPlace: SpotLocationInput | null;
   setSelectedPlace: (place: SpotLocationInput | null) => void;
   clearSelectedPlace: () => void;
+  // スポット作成時の記事コンテンツ（一時保存）
+  draftArticleContent: ProseMirrorDoc | null;
+  setDraftArticleContent: (content: ProseMirrorDoc | null) => void;
+  clearDraftArticleContent: () => void;
   // 登録したスポットへのジャンプ用
   jumpToSpotId: string | null;
   setJumpToSpotId: (spotId: string | null) => void;
@@ -40,6 +45,9 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
   selectedPlace: null,
   setSelectedPlace: (place) => set({ selectedPlace: place }),
   clearSelectedPlace: () => set({ selectedPlace: null }),
+  draftArticleContent: null,
+  setDraftArticleContent: (content) => set({ draftArticleContent: content }),
+  clearDraftArticleContent: () => set({ draftArticleContent: null }),
   jumpToSpotId: null,
   setJumpToSpotId: (spotId) => set({ jumpToSpotId: spotId }),
   jumpToMasterSpotId: null,

@@ -20,6 +20,7 @@ import { useSpotTags, useUpdateSpotTags } from '@/entities/tag';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
+import type { SpotColor } from '@/shared/config';
 
 export interface UploadProgress {
   current: number;
@@ -71,6 +72,7 @@ export function useEditSpotForm() {
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
     mapId?: string;
+    spotColor?: SpotColor;
   }) => {
     if (!id) {
       Alert.alert('エラー', 'スポットIDが見つかりません');
@@ -151,6 +153,7 @@ export function useEditSpotForm() {
           // 記事は別ページで編集（EditSpotArticlePage）
           // タグは中間テーブルに保存するため、ここでは更新しない（将来的にカラム削除予定）
           mapId: data.mapId,
+          spotColor: data.spotColor,
         },
         {
           onSuccess: () => {

@@ -2,17 +2,16 @@
  * テーマ関連ユーティリティ
  */
 
-import { USER_MAP_THEME_COLORS, type UserMapThemeColor } from '@/shared/config';
-import { colors } from '@/shared/config';
+import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 
 /**
- * マップのテーマカラーを取得
- * @param themeColor テーマカラーのキー
- * @returns カラーコード（無効な場合はデフォルトのプライマリカラー）
+ * スポットカラーのカラーコードを取得
+ * @param color スポットカラーのキー
+ * @returns カラーコード（無効な場合はデフォルトの青）
  */
-export function getMapThemeColor(themeColor: string | null | undefined): string {
-  if (themeColor && themeColor in USER_MAP_THEME_COLORS) {
-    return USER_MAP_THEME_COLORS[themeColor as UserMapThemeColor].color;
+export function getSpotColor(color: string | null | undefined): string {
+  if (color && color in SPOT_COLORS) {
+    return SPOT_COLORS[color as SpotColor].color;
   }
-  return colors.primary.DEFAULT;
+  return SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
 }

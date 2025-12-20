@@ -11,14 +11,15 @@ import type { FeatureCollection, Point, Feature } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
 import type { TransportHubGeoJsonProperties } from '@/entities/transport-hub';
 import {
-  USER_MAP_THEME_COLORS,
+  SPOT_COLORS,
+  DEFAULT_SPOT_COLOR,
   TRANSPORT_HUB_COLORS_LIGHT,
   TRANSPORT_HUB_COLORS_DARK,
   SYMBOL_SORT_KEY_USER_MAP,
   LABEL_ZOOM_USER_MAP,
   LOCATION_LABEL_COLORS_LIGHT,
   LOCATION_LABEL_COLORS_DARK,
-  type UserMapThemeColor,
+  type SpotColor,
 } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -35,10 +36,11 @@ const mapSpotIcons = {
   white: require('@assets/icons/map-spot-white.png'),
 };
 
-const mapSpotOutlinedIcons = {
-  gray: require('@assets/icons/map-spot-gray-outlined.png'),
-  white: require('@assets/icons/map-spot-white-outlined.png'),
-};
+// mapSpotOutlinedIcons - 将来使用予定（個別スポット選択時）
+// const mapSpotOutlinedIcons = {
+//   gray: require('@assets/icons/map-spot-gray-outlined.png'),
+//   white: require('@assets/icons/map-spot-white-outlined.png'),
+// };
 
 // 交通機関アイコン
 const trainJrIcon = require('@assets/icons/train.png');
@@ -55,6 +57,7 @@ interface SpotProperties {
   id: string;
   name: string;
   category: SpotCategory;
+  spot_color?: SpotColor;
 }
 
 interface LocationFeatureProperties {
@@ -84,7 +87,6 @@ interface UserMapLabelsProps {
   /** 市区町村GeoJSON */
   citiesGeoJson?: FeatureCollection<Point, LocationFeatureProperties>;
   onSpotPress: (event: any) => void;
-  themeColor?: UserMapThemeColor;
   /** 選択中のスポットID（詳細カード表示中、常に最前面表示） */
   selectedSpotId?: string | null;
   /** カルーセルでフォーカス中のスポットID（アイコン拡大表示） */
@@ -97,28 +99,22 @@ export function UserMapLabels({
   prefecturesGeoJson,
   citiesGeoJson,
   onSpotPress,
-  themeColor = 'pink',
   selectedSpotId,
   focusedSpotId,
 }: UserMapLabelsProps) {
   const isDarkMode = useIsDarkMode();
-  const themeConfig = USER_MAP_THEME_COLORS[themeColor] ?? USER_MAP_THEME_COLORS.pink;
-  const spotColor = themeConfig.color;
-  const spotHaloColor = isDarkMode ? themeConfig.haloDark : themeConfig.haloLight;
+  // デフォルトのスポットカラー設定（各スポットは個別にspot_colorを持つ）
+  const defaultColorConfig = SPOT_COLORS[DEFAULT_SPOT_COLOR];
+  const defaultSpotColor = defaultColorConfig.color;
+  const defaultSpotHaloColor = isDarkMode ? defaultColorConfig.haloDark : defaultColorConfig.haloLight;
   const transportColors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
   const transportHaloColor = isDarkMode ? '#1F2937' : '#FFFFFF';
 
   // 地名ラベル用の色
   const locationColors = isDarkMode ? LOCATION_LABEL_COLORS_DARK : LOCATION_LABEL_COLORS_LIGHT;
 
-  // 縁取り付きアイコンを使用するかどうか
-  const useOutlined =
-    ('useOutlinedIconInLight' in themeConfig && !isDarkMode && themeConfig.useOutlinedIconInLight) ||
-    ('useOutlinedIconInDark' in themeConfig && isDarkMode && themeConfig.useOutlinedIconInDark);
-
-  const spotIconImage = useOutlined && themeColor in mapSpotOutlinedIcons
-    ? mapSpotOutlinedIcons[themeColor as keyof typeof mapSpotOutlinedIcons]
-    : mapSpotIcons[themeColor] ?? mapSpotIcons.pink;
+  // デフォルトのスポットアイコン画像（青）
+  const spotIconImage = mapSpotIcons[DEFAULT_SPOT_COLOR];
 
   // スポットと交通データと地名を統合したGeoJSONを作成
   const combinedGeoJson = useMemo((): FeatureCollection<Point, CombinedProperties> => {
@@ -485,8 +481,8 @@ export function UserMapLabels({
             iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
-            textColor: spotColor,
-            textHaloColor: spotHaloColor,
+            textColor: defaultSpotColor,
+            textHaloColor: defaultSpotHaloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -511,8 +507,8 @@ export function UserMapLabels({
             iconSize: 0.28,
             textField: ['get', 'name'],
             textSize: 15,
-            textColor: spotColor,
-            textHaloColor: spotHaloColor,
+            textColor: defaultSpotColor,
+            textHaloColor: defaultSpotHaloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -537,8 +533,8 @@ export function UserMapLabels({
             iconSize: 0.28,
             textField: ['get', 'name'],
             textSize: 15,
-            textColor: spotColor,
-            textHaloColor: spotHaloColor,
+            textColor: defaultSpotColor,
+            textHaloColor: defaultSpotHaloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',

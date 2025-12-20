@@ -52,8 +52,7 @@ export async function getSpotWithDetails(
       ),
       maps (
         id,
-        name,
-        theme_color
+        name
       ),
       likes (
         id,
@@ -84,6 +83,7 @@ export async function getSpotWithDetails(
     custom_name: spot.custom_name,
     description: spot.description,
     tags: spot.tags,
+    spot_color: spot.spot_color,
     images_count: spot.images_count,
     likes_count: spot.likes_count,
     bookmarks_count: spot.bookmarks_count ?? 0,
@@ -97,7 +97,7 @@ export async function getSpotWithDetails(
     google_short_address: spot.google_short_address,
     master_spot: spot.master_spots || null,
     user: spot.users || null,
-    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
+    map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
     is_liked: isLiked,
     article_content: spot.article_content || null,
   };

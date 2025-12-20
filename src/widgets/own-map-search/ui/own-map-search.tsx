@@ -6,7 +6,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import {
@@ -30,8 +30,6 @@ interface OwnMapSearchProps {
   onPlaceSelect?: (place: PlaceSearchResult) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
   onMapPinSelect?: () => void; // 地図上でピン刺しモード開始
-  /** マップのテーマカラー */
-  themeColor: UserMapThemeColor;
 }
 
 export function OwnMapSearch({
@@ -42,7 +40,6 @@ export function OwnMapSearch({
   onPlaceSelect,
   currentLocation = null,
   onMapPinSelect,
-  themeColor,
 }: OwnMapSearchProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
@@ -224,8 +221,8 @@ export function OwnMapSearch({
                     <View className="w-10 h-10 rounded-full items-center justify-center bg-muted dark:bg-dark-foreground-secondary">
                       <LocationPinIcon
                         size={24}
-                        color={USER_MAP_THEME_COLORS[themeColor].color}
-                        strokeColor={getThemeColorStroke(themeColor, isDarkMode)}
+                        color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
+                        strokeColor={getSpotColorStroke(DEFAULT_SPOT_COLOR, isDarkMode)}
                       />
                     </View>
                     <View className="flex-1 ml-3">

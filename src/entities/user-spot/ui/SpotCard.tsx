@@ -10,7 +10,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions, Share, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor, log } from '@/shared/config';
+import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor, log } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -83,10 +83,10 @@ export function SpotCard({
   // いいね状態は spot.is_liked を使用（SpotWithDetails の場合）
   const isLiked = 'is_liked' in spot ? (spot.is_liked ?? false) : false;
 
-  // マップのテーマカラーを取得
-  const themeColor = ('map' in spot && spot.map?.theme_color) ? spot.map.theme_color as UserMapThemeColor : 'blue';
-  const themeColorValue = USER_MAP_THEME_COLORS[themeColor]?.color ?? colors.primary.DEFAULT;
-  const themeColorStroke = getThemeColorStroke(themeColor, isDarkMode);
+  // スポットのカラーを取得（spot.spot_colorがあればそれを使用、なければデフォルトの青）
+  const spotColor = ('spot_color' in spot && spot.spot_color) ? spot.spot_color as SpotColor : DEFAULT_SPOT_COLOR;
+  const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
+  const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
@@ -275,7 +275,7 @@ export function SpotCard({
 
       {/* スポット名 */}
       <View className="flex-row items-center mb-1">
-        <LocationPinIcon size={18} color={themeColorValue} strokeColor={themeColorStroke} />
+        <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
         <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-1">
           {spotName}
         </Text>

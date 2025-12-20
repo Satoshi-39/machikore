@@ -13,7 +13,6 @@ import { useCreateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import type { ThumbnailImage } from '@/features/pick-images';
-import type { UserMapThemeColor } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 export interface CreateMapFormData {
@@ -23,7 +22,6 @@ export interface CreateMapFormData {
   tags: string[];
   isPublic: boolean;
   thumbnailImage?: ThumbnailImage;
-  themeColor: UserMapThemeColor;
 }
 
 /**
@@ -83,7 +81,6 @@ export function useCreateMapForm() {
           tags: data.tags,
           isPublic: data.isPublic,
           thumbnailUrl,
-          themeColor: data.themeColor,
         },
         {
           onSuccess: () => {

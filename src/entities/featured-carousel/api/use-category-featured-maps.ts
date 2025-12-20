@@ -53,7 +53,6 @@ async function getCategoryFeaturedMaps(
         is_default: map.is_default,
         is_official: map.is_official,
         thumbnail_url: map.thumbnail_url,
-        theme_color: map.theme_color,
         spots_count: map.spots_count,
         likes_count: map.likes_count,
         bookmarks_count: map.bookmarks_count ?? 0,

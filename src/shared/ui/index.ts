@@ -43,3 +43,6 @@ export { RichTextRenderer } from './rich-text-renderer';
 
 // 公開/非公開トグル
 export { PublicToggle } from './PublicToggle';
+
+// スポットカラーピッカー
+export { SpotColorPicker } from './SpotColorPicker';

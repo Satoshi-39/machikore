@@ -26,6 +26,8 @@ import { uploadImage, STORAGE_BUCKETS, insertSpotImage, findMachiForSpot } from 
 import { queryClient } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
+import type { SpotColor } from '@/shared/config';
+import type { ProseMirrorDoc } from '@/shared/types';
 
 export interface UploadProgress {
   current: number;
@@ -39,6 +41,7 @@ export function useSpotForm() {
   const storeMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
+  const clearDraftArticleContent = useSelectedPlaceStore((state) => state.clearDraftArticleContent);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
   const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
   const spotLimit = useSpotLimit();
@@ -135,10 +138,11 @@ export function useSpotForm() {
   const handleSubmit = async (data: {
     customName: string;
     description?: string;
-    articleContent?: string;
+    articleContent?: ProseMirrorDoc | null;
     tags: string[];
     images: SelectedImage[];
     mapId: string;
+    spotColor: SpotColor;
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
@@ -209,6 +213,7 @@ export function useSpotForm() {
         customName: data.customName,
         description: data.description,
         articleContent: data.articleContent,
+        spotColor: data.spotColor,
       },
       {
         onSuccess: async (spotId) => {
@@ -235,6 +240,9 @@ export function useSpotForm() {
               // 画像アップロード失敗してもスポット自体は作成済み
             }
           }
+
+          // 下書き記事をクリア
+          clearDraftArticleContent();
 
           Alert.alert('登録完了', 'スポットを登録しました', [
             {

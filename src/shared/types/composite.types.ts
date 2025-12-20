@@ -81,7 +81,6 @@ export interface MapWithUser {
   is_default: boolean;
   is_official: boolean;
   thumbnail_url: string | null;
-  theme_color?: string | null;
   spots_count: number;
   likes_count: number;
   bookmarks_count: number;
@@ -135,7 +134,6 @@ export interface MasterSpotBasicInfo {
 export interface MapBasicInfo {
   id: string;
   name: string;
-  theme_color: string;
 }
 
 export interface SpotWithDetails {
@@ -147,6 +145,8 @@ export interface SpotWithDetails {
   custom_name: string | null;
   description: string | null;
   tags: string[] | null;
+  /** スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white） */
+  spot_color: string | null;
   images_count: number;
   likes_count: number;
   bookmarks_count: number;

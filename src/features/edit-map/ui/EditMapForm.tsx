@@ -8,12 +8,7 @@
 
 import { useCategories } from '@/entities/category';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import {
-  colors,
-  INPUT_LIMITS,
-  USER_MAP_THEME_COLOR_LIST,
-  type UserMapThemeColor,
-} from '@/shared/config';
+import { colors, INPUT_LIMITS } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 import { TagInput, PublicToggle } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -70,9 +65,6 @@ export function EditMapForm({
     map.thumbnail_url ? { uri: map.thumbnail_url, width: 0, height: 0 } : null
   );
   const [originalThumbnailUrl] = useState(map.thumbnail_url);
-  const [themeColor, setThemeColor] = useState<UserMapThemeColor>(
-    (map.theme_color as UserMapThemeColor) || 'pink'
-  );
 
   // model層のhookを使用して変更検知
   const { hasChanges, isFormValid } = useEditMapFormChanges(map, initialTags, {
@@ -80,7 +72,6 @@ export function EditMapForm({
     description,
     selectedCategoryId,
     isPublic,
-    themeColor,
     thumbnailUri: thumbnailImage?.uri || null,
     tags,
   });
@@ -111,7 +102,6 @@ export function EditMapForm({
           ? thumbnailImage
           : undefined,
       removeThumbnail: thumbnailRemoved,
-      themeColor,
     });
   };
 
@@ -271,45 +261,6 @@ export function EditMapForm({
             image={thumbnailImage}
             onImageChange={setThumbnailImage}
           />
-        </View>
-
-        {/* テーマカラー */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            テーマカラー
-          </Text>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-            マップ上のスポットがこの色で表示されます
-          </Text>
-          <View className="flex-row justify-between">
-            {USER_MAP_THEME_COLOR_LIST.map((colorItem) => {
-              const isSelected = themeColor === colorItem.key;
-              const isWhite = colorItem.key === 'white';
-              return (
-                <TouchableOpacity
-                  key={colorItem.key}
-                  onPress={() => setThemeColor(colorItem.key)}
-                  className={`w-9 h-9 rounded-full items-center justify-center ${
-                    isSelected ? 'border-2 border-blue-500' : ''
-                  } ${isWhite ? 'border border-gray-300' : ''}`}
-                  style={{ backgroundColor: colorItem.color }}
-                  activeOpacity={0.7}
-                >
-                  {isSelected && (
-                    <Ionicons
-                      name="checkmark"
-                      size={18}
-                      color={
-                        isWhite || colorItem.key === 'yellow'
-                          ? '#374151'
-                          : '#FFFFFF'
-                      }
-                    />
-                  )}
-                </TouchableOpacity>
-              );
-            })}
-          </View>
         </View>
 
         {/* 公開設定 */}

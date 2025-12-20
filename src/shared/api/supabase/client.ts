@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 import { LargeSecureStorageAdapter } from '@/shared/lib/storage';
 import { ENV } from '@/shared/config';
 import { log } from '@/shared/config/logger';
+import type { Database } from '@/shared/types/database.types';
 
 // ===============================
 // Supabase クライアント作成
@@ -22,7 +23,7 @@ import { log } from '@/shared/config/logger';
  *
  * @see https://zenn.dev/rei2718/articles/80f5903602cbe9
  */
-export const supabase = createClient(ENV.SUPABASE_URL, ENV.SUPABASE_ANON_KEY, {
+export const supabase = createClient<Database>(ENV.SUPABASE_URL, ENV.SUPABASE_ANON_KEY, {
   auth: {
     storage: LargeSecureStorageAdapter,
     autoRefreshToken: true,
@@ -80,5 +81,4 @@ export function handleSupabaseError(context: string, error: any): never {
 // 型エクスポート
 // ===============================
 
-// Supabase自動生成型は後で追加
-// export type Database = {} from './database.types';
+export type { Database } from '@/shared/types/database.types';

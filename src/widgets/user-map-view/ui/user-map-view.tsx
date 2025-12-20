@@ -16,7 +16,7 @@ import { usePinDropStore, PinDropOverlay } from '@/features/drop-pin';
 import { useMapControlsVisibility } from '@/features/map-controls';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ENV, LABEL_ZOOM_USER_MAP, type UserMapThemeColor } from '@/shared/config';
+import { ENV, LABEL_ZOOM_USER_MAP } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
 import { UserMapLabels } from './layers';
@@ -364,7 +364,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             prefecturesGeoJson={prefecturesGeoJson}
             citiesGeoJson={citiesGeoJson}
             onSpotPress={handleSpotPress}
-            themeColor={mapData?.theme_color as UserMapThemeColor}
             selectedSpotId={selectedSpot?.id}
             focusedSpotId={focusedSpotId}
           />
@@ -424,7 +423,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onSpotPress={handleCarouselSpotPress}
             onCameraMove={handleCameraMove}
             onClose={closeCarousel}
-            themeColor={mapData?.theme_color as UserMapThemeColor}
           />
         )}
 
@@ -441,7 +439,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onBeforeClose={controlsVisibility.handleBeforeClose}
             onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
             onCameraMove={() => handleCameraMove(selectedSpot)}
-            themeColor={mapData?.theme_color as UserMapThemeColor}
           />
         )}
 
@@ -450,7 +447,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           <PinDropOverlay
             onConfirm={handlePinDropConfirm}
             onCancel={handlePinDropCancel}
-            themeColor={mapData.theme_color as UserMapThemeColor}
           />
         )}
 

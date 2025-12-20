@@ -9,7 +9,7 @@ import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicat
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, LOCATION_ICONS, USER_MAP_THEME_COLORS, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
 import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync } from '@/shared/lib';
@@ -41,8 +41,6 @@ interface SpotDetailCardProps {
   onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
   /** カメラをスポットに移動（目のアイコンタップ時） */
   onCameraMove?: () => void;
-  /** マップのテーマカラー */
-  themeColor: UserMapThemeColor;
 }
 
 /** 検索バー・現在地ボタン同期を行う内部コンテンツコンポーネント */
@@ -70,7 +68,7 @@ function SpotDetailCardContent({
 // 検索バー領域の下端Y座標（固定値）
 const SEARCH_BAR_BOTTOM_Y = 140;
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove, themeColor }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -185,9 +183,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const oneWord = spot.custom_name;
   const spotAddress = spot.master_spot?.google_short_address || spot.google_short_address;
 
-  // テーマカラーの色と縁取りを取得
-  const themeColorValue = USER_MAP_THEME_COLORS[themeColor]?.color ?? LOCATION_ICONS.USER_SPOT.color;
-  const themeColorStroke = getThemeColorStroke(themeColor, isDarkMode);
+  // スポット固有の色、なければデフォルト色を使用
+  const spotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
+  const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
+  const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
 
   // スポットの画像を取得
   const { data: images = [] } = useSpotImages(spot.id);
@@ -346,7 +345,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <View className="flex-1">
             {/* マスタースポット正式名称（メイン） */}
             <View className="flex-row items-center mb-1">
-              <LocationPinIcon size={24} color={themeColorValue} strokeColor={themeColorStroke} />
+              <LocationPinIcon size={24} color={spotColorValue} strokeColor={spotColorStroke} />
               <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
                 {masterSpotName}
               </Text>

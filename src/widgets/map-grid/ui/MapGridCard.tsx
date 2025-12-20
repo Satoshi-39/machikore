@@ -11,8 +11,8 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
-import { colors, getThemeColorStroke, type UserMapThemeColor } from '@/shared/config';
-import { getMapThemeColor, showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
+import { showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
@@ -95,12 +95,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
           <View className="flex-row items-center ml-1 flex-shrink-0">
             <LocationPinIcon
               size={12}
-              color={getMapThemeColor(map.theme_color)}
-              strokeColor={
-                map.theme_color
-                  ? getThemeColorStroke(map.theme_color as UserMapThemeColor, isDarkMode)
-                  : undefined
-              }
+              color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
             />
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
               {map.spots_count}

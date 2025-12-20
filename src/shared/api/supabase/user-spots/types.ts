@@ -2,9 +2,11 @@
  * User Spots API 型定義
  */
 
-import type { Database } from '@/shared/types/supabase.generated';
+import type { Database } from '@/shared/types/database.types';
 import type { ProseMirrorDoc } from '@/shared/types';
 
+// MergeDeepで拡張されたDatabase型を使用
+// article_contentがProseMirrorDoc型として正しく認識される
 export type MasterSpotInsert = Database['public']['Tables']['master_spots']['Insert'];
 export type MasterSpotRow = Database['public']['Tables']['master_spots']['Row'];
 export type UserSpotInsert = Database['public']['Tables']['user_spots']['Insert'];
@@ -30,7 +32,8 @@ export interface CreateSpotInput {
   // user_spot情報
   customName?: string | null;
   description?: string | null;
-  articleContent?: string | null;
+  articleContent?: ProseMirrorDoc | null;
+  spotColor?: string | null;
 }
 
 export interface UpdateSpotInput {
@@ -40,6 +43,7 @@ export interface UpdateSpotInput {
   article_content?: ProseMirrorDoc | null;
   order_index?: number;
   map_id?: string;
+  spot_color?: string | null;
 }
 
 export interface UserSpotWithMasterSpot extends UserSpotRow {
@@ -89,7 +93,6 @@ export interface UserSpotSearchResult {
   map: {
     id: string;
     name: string;
-    theme_color: string;
   } | null;
 }
 

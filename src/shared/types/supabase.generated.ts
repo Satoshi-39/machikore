@@ -12,31 +12,6 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "13.0.5"
   }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       admin_boundaries: {
@@ -162,6 +137,132 @@ export type Database = {
             columns: ["user_spot_id"]
             isOneToOne: false
             referencedRelation: "user_spots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          created_at: string
+          display_order: number
+          icon: string
+          id: string
+          is_active: boolean
+          name: string
+          name_translations: Json | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          icon: string
+          id: string
+          is_active?: boolean
+          name: string
+          name_translations?: Json | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          icon?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          name_translations?: Json | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      category_featured_maps: {
+        Row: {
+          category_id: string
+          created_at: string
+          display_order: number
+          id: string
+          is_active: boolean
+          map_id: string
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          map_id: string
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          map_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "category_featured_maps_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "category_featured_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      category_featured_tags: {
+        Row: {
+          category_id: string
+          created_at: string
+          display_order: number
+          id: string
+          is_active: boolean
+          tag_id: string
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          tag_id: string
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          tag_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "category_featured_tags_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "category_featured_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
             referencedColumns: ["id"]
           },
         ]
@@ -463,6 +564,7 @@ export type Database = {
       }
       featured_carousel_items: {
         Row: {
+          category_id: string | null
           created_at: string
           description: string | null
           display_order: number
@@ -478,6 +580,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          category_id?: string | null
           created_at?: string
           description?: string | null
           display_order?: number
@@ -493,6 +596,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          category_id?: string | null
           created_at?: string
           description?: string | null
           display_order?: number
@@ -507,7 +611,15 @@ export type Database = {
           title?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "featured_carousel_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       follows: {
         Row: {
@@ -719,10 +831,49 @@ export type Database = {
           },
         ]
       }
+      map_tags: {
+        Row: {
+          created_at: string
+          id: string
+          map_id: string
+          tag_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          map_id: string
+          tag_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          map_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "map_tags_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "map_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       maps: {
         Row: {
+          article_intro: Json | null
+          article_outro: Json | null
           bookmarks_count: number | null
           category: string | null
+          category_id: string | null
           comments_count: number | null
           created_at: string
           description: string | null
@@ -734,15 +885,16 @@ export type Database = {
           likes_count: number | null
           name: string
           spots_count: number | null
-          tags: Json | null
-          theme_color: string
           thumbnail_url: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          article_intro?: Json | null
+          article_outro?: Json | null
           bookmarks_count?: number | null
           category?: string | null
+          category_id?: string | null
           comments_count?: number | null
           created_at?: string
           description?: string | null
@@ -754,15 +906,16 @@ export type Database = {
           likes_count?: number | null
           name: string
           spots_count?: number | null
-          tags?: Json | null
-          theme_color?: string
           thumbnail_url?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          article_intro?: Json | null
+          article_outro?: Json | null
           bookmarks_count?: number | null
           category?: string | null
+          category_id?: string | null
           comments_count?: number | null
           created_at?: string
           description?: string | null
@@ -774,13 +927,18 @@ export type Database = {
           likes_count?: number | null
           name?: string
           spots_count?: number | null
-          tags?: Json | null
-          theme_color?: string
           thumbnail_url?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "maps_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "maps_user_id_fkey"
             columns: ["user_id"]
@@ -1136,6 +1294,42 @@ export type Database = {
         }
         Relationships: []
       }
+      spot_tags: {
+        Row: {
+          created_at: string
+          id: string
+          tag_id: string
+          user_spot_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          tag_id: string
+          user_spot_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          tag_id?: string
+          user_spot_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "spot_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "spot_tags_user_spot_id_fkey"
+            columns: ["user_spot_id"]
+            isOneToOne: false
+            referencedRelation: "user_spots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       system_announcement_reads: {
         Row: {
           announcement_id: string
@@ -1205,6 +1399,36 @@ export type Database = {
           title?: string
           type?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      tags: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          name_translations: Json | null
+          slug: string
+          updated_at: string
+          usage_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          name_translations?: Json | null
+          slug: string
+          updated_at?: string
+          usage_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          name_translations?: Json | null
+          slug?: string
+          updated_at?: string
+          usage_count?: number
         }
         Relationships: []
       }
@@ -1460,8 +1684,9 @@ export type Database = {
       }
       user_spots: {
         Row: {
-          article_content: string | null
+          article_content: Json | null
           bookmarks_count: number | null
+          color: string | null
           comments_count: number | null
           created_at: string
           custom_name: string
@@ -1477,13 +1702,15 @@ export type Database = {
           map_id: string
           master_spot_id: string | null
           order_index: number | null
-          tags: string[] | null
+          prefecture_id: string | null
+          spot_color: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
-          article_content?: string | null
+          article_content?: Json | null
           bookmarks_count?: number | null
+          color?: string | null
           comments_count?: number | null
           created_at?: string
           custom_name: string
@@ -1499,13 +1726,15 @@ export type Database = {
           map_id: string
           master_spot_id?: string | null
           order_index?: number | null
-          tags?: string[] | null
+          prefecture_id?: string | null
+          spot_color?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
-          article_content?: string | null
+          article_content?: Json | null
           bookmarks_count?: number | null
+          color?: string | null
           comments_count?: number | null
           created_at?: string
           custom_name?: string
@@ -1521,7 +1750,8 @@ export type Database = {
           map_id?: string
           master_spot_id?: string | null
           order_index?: number | null
-          tags?: string[] | null
+          prefecture_id?: string | null
+          spot_color?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -1545,6 +1775,13 @@ export type Database = {
             columns: ["master_spot_id"]
             isOneToOne: false
             referencedRelation: "master_spots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_spots_prefecture_id_fkey"
+            columns: ["prefecture_id"]
+            isOneToOne: false
+            referencedRelation: "prefectures"
             referencedColumns: ["id"]
           },
           {
@@ -1925,6 +2162,10 @@ export type Database = {
             Returns: string
           }
       clear_push_token: { Args: never; Returns: undefined }
+      count_user_spots_in_map: {
+        Args: { p_map_id: string; p_user_id: string }
+        Returns: number
+      }
       decrement_map_bookmarks_count: {
         Args: { p_map_id: string }
         Returns: undefined
@@ -2164,7 +2405,10 @@ export type Database = {
         Args: { user_spot_id: string }
         Returns: undefined
       }
+      is_user_premium: { Args: { p_user_id: string }; Returns: boolean }
       longtransactionsenabled: { Args: never; Returns: boolean }
+      migrate_maps_tags_to_table: { Args: never; Returns: undefined }
+      migrate_spots_tags_to_table: { Args: never; Returns: undefined }
       populate_geometry_columns:
         | { Args: { tbl_oid: unknown; use_typmod?: boolean }; Returns: number }
         | { Args: { use_typmod?: boolean }; Returns: string }
@@ -2990,9 +3234,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       report_reason: [

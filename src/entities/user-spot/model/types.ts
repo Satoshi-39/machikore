@@ -4,6 +4,7 @@
 
 import type { SpotRow, ImageRow } from '@/shared/types/database.types';
 import type { ProseMirrorDoc } from '@/shared/types';
+import type { SpotColor } from '@/shared/config';
 
 // ===============================
 // Domain Types
@@ -52,6 +53,7 @@ export interface UpdateSpotParams {
   articleContent?: ProseMirrorDoc | null; // 記事（ProseMirror JSON形式）
   orderIndex?: number;
   mapId?: string;
+  spotColor?: SpotColor;
 }
 
 /**

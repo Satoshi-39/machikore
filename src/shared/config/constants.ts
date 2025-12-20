@@ -186,10 +186,10 @@ export const SPOT_CATEGORY_COLORS = {
 } as const;
 
 // ===============================
-// ユーザマップテーマカラー（プリセット）
+// スポットカラー（プリセット）
 // ===============================
 
-export const USER_MAP_THEME_COLORS = {
+export const SPOT_COLORS = {
   pink: {
     color: '#ec4899',
     label: 'ピンク',
@@ -248,11 +248,14 @@ export const USER_MAP_THEME_COLORS = {
   },
 } as const;
 
-export type UserMapThemeColor = keyof typeof USER_MAP_THEME_COLORS;
+export type SpotColor = keyof typeof SPOT_COLORS;
 
-export const USER_MAP_THEME_COLOR_LIST = Object.entries(
-  USER_MAP_THEME_COLORS
-).map(([key, value]) => ({ key: key as UserMapThemeColor, ...value }));
+/** スポットのデフォルトカラー */
+export const DEFAULT_SPOT_COLOR: SpotColor = 'blue';
+
+export const SPOT_COLOR_LIST = Object.entries(
+  SPOT_COLORS
+).map(([key, value]) => ({ key: key as SpotColor, ...value }));
 
 // ===============================
 // 交通機関ラベル設定
@@ -326,16 +329,16 @@ export const LOCATION_LABEL_COLORS_DARK = {
 } as const;
 
 /**
- * テーマカラーが縁取りを必要とするかどうかを判定
- * @param themeColor テーマカラー
+ * スポットカラーが縁取りを必要とするかどうかを判定
+ * @param spotColor スポットカラー
  * @param isDarkMode ダークモードかどうか
  * @returns 縁取りの色（不要な場合はundefined）
  */
-export function getThemeColorStroke(
-  themeColor: UserMapThemeColor,
+export function getSpotColorStroke(
+  spotColor: SpotColor,
   isDarkMode: boolean
 ): string | undefined {
-  const config = USER_MAP_THEME_COLORS[themeColor];
+  const config = SPOT_COLORS[spotColor];
   if (!config) return undefined;
 
   // ライトモードで縁取りが必要（白）

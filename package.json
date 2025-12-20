@@ -100,6 +100,7 @@
     "prettier": "^3.6.2",
     "shapefile": "^0.6.6",
     "sharp": "^0.34.5",
+    "type-fest": "^5.3.1",
     "typescript": "~5.9.2"
   },
   "private": true

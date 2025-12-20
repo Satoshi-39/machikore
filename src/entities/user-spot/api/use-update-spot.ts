@@ -24,6 +24,7 @@ export function useUpdateSpot() {
         article_content: params.articleContent,
         order_index: params.orderIndex,
         map_id: params.mapId,
+        spot_color: params.spotColor,
       });
 
       return params;

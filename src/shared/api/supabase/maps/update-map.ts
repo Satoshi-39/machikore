@@ -15,7 +15,6 @@ export interface UpdateMapParams {
   is_public?: boolean;
   is_article_public?: boolean;
   thumbnail_url?: string | null;
-  theme_color?: string;
   article_intro?: ProseMirrorDoc | null;
   article_outro?: ProseMirrorDoc | null;
 }

@@ -16,8 +16,8 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS } from '@/shared/config';
-import { StyledTextInput, TagInput, AddressPinIcon } from '@/shared/ui';
+import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
 import type { Database } from '@/shared/types/supabase.generated';
@@ -44,6 +44,7 @@ interface EditSpotFormProps {
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
     mapId?: string;
+    spotColor?: SpotColor;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
@@ -76,6 +77,9 @@ export function EditSpotForm({
   const [description, setDescription] = useState(spot.description || '');
   const articleContent = spot.article_content || '';
   const [tags, setTags] = useState<string[]>(initialTags);
+  const [spotColor, setSpotColor] = useState<SpotColor>(
+    (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR
+  );
 
   // 画像関連
   const [newImages, setNewImages] = useState<SelectedImage[]>([]);
@@ -101,6 +105,7 @@ export function EditSpotForm({
     newImages,
     deletedImageIds,
     selectedMapId: selectedMapId ?? null,
+    spotColor,
   });
 
   // ボタンを無効化する条件
@@ -114,6 +119,7 @@ export function EditSpotForm({
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
       mapId: selectedMapId || undefined,
+      spotColor,
     });
   };
 
@@ -283,6 +289,17 @@ export function EditSpotForm({
             onTagsChange={setTags}
             placeholder="タグを入力してEnter"
             maxTags={10}
+          />
+        </View>
+
+        {/* スポットの色 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            スポットの色
+          </Text>
+          <SpotColorPicker
+            selectedColor={spotColor}
+            onColorChange={setSpotColor}
           />
         </View>
 

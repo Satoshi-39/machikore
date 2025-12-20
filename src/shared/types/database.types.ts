@@ -2,9 +2,49 @@
  * Database Types
  *
  * Supabase型を基準に、SQLite用の型を自動生成
+ * JSONカラムはMergeDeepで適切な型に上書き
+ *
+ * 参考: https://github.com/orgs/supabase/discussions/32925
  */
 
-import type { Database } from './supabase.generated';
+import type { MergeDeep } from 'type-fest';
+import type { Database as DatabaseGenerated } from './supabase.generated';
+import type { ProseMirrorDoc } from './composite.types';
+
+/**
+ * 拡張されたDatabase型
+ *
+ * JSONカラム（article_content, article_intro, article_outro）に
+ * ProseMirrorDoc型を適用
+ */
+export type Database = MergeDeep<
+  DatabaseGenerated,
+  {
+    public: {
+      Tables: {
+        user_spots: {
+          Row: { article_content: ProseMirrorDoc | null };
+          Insert: { article_content?: ProseMirrorDoc | null };
+          Update: { article_content?: ProseMirrorDoc | null };
+        };
+        maps: {
+          Row: {
+            article_intro: ProseMirrorDoc | null;
+            article_outro: ProseMirrorDoc | null;
+          };
+          Insert: {
+            article_intro?: ProseMirrorDoc | null;
+            article_outro?: ProseMirrorDoc | null;
+          };
+          Update: {
+            article_intro?: ProseMirrorDoc | null;
+            article_outro?: ProseMirrorDoc | null;
+          };
+        };
+      };
+    };
+  }
+>;
 
 // ===============================
 // Type Utilities
@@ -452,4 +492,5 @@ export function convertSupabaseVisitToSQLite(visit: any): VisitRow {
 // Re-export common types
 // ===============================
 
-export type { Database } from './supabase.generated';
+// Database型は上記でMergeDeepを使って拡張済み
+// DatabaseGeneratedは必要に応じてsupabase.generatedから直接インポート可能

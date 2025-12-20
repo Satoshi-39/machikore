@@ -283,6 +283,7 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         custom_name: like.user_spots.custom_name,
         description: like.user_spots.description,
         tags: like.user_spots.tags,
+        spot_color: like.user_spots.spot_color || null,
         images_count: like.user_spots.images_count,
         likes_count: like.user_spots.likes_count,
         bookmarks_count: like.user_spots.bookmarks_count ?? 0,

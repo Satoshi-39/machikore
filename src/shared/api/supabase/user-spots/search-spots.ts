@@ -32,7 +32,6 @@ export async function searchPublicUserSpots(
       maps!inner (
         id,
         name,
-        theme_color,
         is_public
       )
     `)
@@ -91,7 +90,7 @@ export async function searchPublicUserSpots(
       updated_at: spot.updated_at,
       master_spot: spot.master_spots || null,
       user: spot.users || null,
-      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
+      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
     });
   });
 
@@ -127,7 +126,7 @@ export async function searchPublicUserSpots(
             google_types: masterSpot.google_types,
           },
           user: spot.users || null,
-          map: spot.maps ? { id: spot.maps.id, name: spot.maps.name, theme_color: spot.maps.theme_color } : null,
+          map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
         });
       }
     });

@@ -5,7 +5,6 @@
  */
 
 import { useMemo } from 'react';
-import type { UserMapThemeColor } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 
 interface EditMapFormCurrentValues {
@@ -13,7 +12,6 @@ interface EditMapFormCurrentValues {
   description: string;
   selectedCategoryId: string | null;
   isPublic: boolean;
-  themeColor: UserMapThemeColor;
   thumbnailUri: string | null;
   tags: string[];
 }
@@ -35,8 +33,6 @@ export function useEditMapFormChanges(
     if (currentValues.selectedCategoryId !== map.category_id) return true;
     // 公開設定の変更
     if (currentValues.isPublic !== map.is_public) return true;
-    // テーマカラーの変更
-    if (currentValues.themeColor !== (map.theme_color || 'pink')) return true;
     // サムネイルの変更
     if (currentValues.thumbnailUri !== map.thumbnail_url) return true;
     // タグの変更（配列の比較）

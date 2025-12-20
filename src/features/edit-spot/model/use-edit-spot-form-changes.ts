@@ -7,6 +7,7 @@
 import { useMemo } from 'react';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
 import type { SelectedImage } from '@/features/pick-images';
+import { DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 
 interface EditSpotFormCurrentValues {
   customName: string;
@@ -15,6 +16,7 @@ interface EditSpotFormCurrentValues {
   newImages: SelectedImage[];
   deletedImageIds: string[];
   selectedMapId: string | null;
+  spotColor: SpotColor;
 }
 
 /**
@@ -48,6 +50,10 @@ export function useEditSpotFormChanges(
     // マップの変更
     if (currentValues.selectedMapId !== spot.map_id) return true;
 
+    // スポットカラーの変更
+    const originalSpotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
+    if (currentValues.spotColor !== originalSpotColor) return true;
+
     return false;
   }, [
     spot,
@@ -58,6 +64,7 @@ export function useEditSpotFormChanges(
     currentValues.newImages,
     currentValues.deletedImageIds,
     currentValues.selectedMapId,
+    currentValues.spotColor,
   ]);
 
   // フォームのバリデーション（スポット名とひとことは必須）

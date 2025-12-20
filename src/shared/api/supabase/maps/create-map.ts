@@ -17,7 +17,6 @@ export interface CreateMapParams {
   is_default?: boolean;
   is_official?: boolean;
   thumbnail_url?: string | null;
-  theme_color?: string;
 }
 
 /**
@@ -38,7 +37,6 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
       is_default: params.is_default || false,
       is_official: params.is_official || false,
       thumbnail_url: params.thumbnail_url || null,
-      theme_color: params.theme_color || 'pink',
       spots_count: 0,
       likes_count: 0,
     })

@@ -20,7 +20,6 @@ import { UserMapHeader } from '@/widgets/user-map-view/ui/user-map-header';
 import type { MapViewHandle } from '@/shared/lib/map';
 import { useLocation, useCurrentTab, useSafeBack } from '@/shared/lib';
 import { type MapListViewMode } from '@/features/toggle-view-mode';
-import type { UserMapThemeColor } from '@/shared/config';
 import {
   useSelectedPlaceStore,
   type PlaceSearchResult,
@@ -222,7 +221,6 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
                 currentLocation={location}
                 onPlaceSelect={handlePlaceSelect}
                 onMapPinSelect={handleMapPinSelect}
-                themeColor={selectedMap.theme_color as UserMapThemeColor}
               />
             ) : (
               // 他人のマップ: そのマップのスポットを検索
@@ -232,7 +230,6 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
                 onSearchChange={setSearchQuery}
                 onClose={handleSearchClose}
                 onSpotSelect={(spot) => setJumpToSpotId(spot.id)}
-                themeColor={selectedMap.theme_color as UserMapThemeColor}
               />
             )}
           </View>

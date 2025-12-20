@@ -111,6 +111,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     custom_name: input.customName ?? input.name,
     description: input.description ?? null,
     article_content: input.articleContent ?? null,
+    spot_color: input.spotColor ?? null,
   };
 
   const { data, error } = await supabase
