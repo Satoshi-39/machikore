@@ -13,6 +13,7 @@ interface EditMapFormCurrentValues {
   description: string;
   selectedCategoryId: string | null;
   isPublic: boolean;
+  showLabelChips: boolean;
   thumbnailUri: string | null;
   tags: string[];
   labels: LocalMapLabel[];
@@ -52,6 +53,8 @@ export function useEditMapFormChanges(
     if (currentValues.selectedCategoryId !== map.category_id) return true;
     // 公開設定の変更
     if (currentValues.isPublic !== map.is_public) return true;
+    // ラベルチップ表示設定の変更
+    if (currentValues.showLabelChips !== (map.show_label_chips ?? false)) return true;
     // サムネイルの変更
     if (currentValues.thumbnailUri !== map.thumbnail_url) return true;
     // タグの変更（配列の比較）

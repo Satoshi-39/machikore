@@ -35,19 +35,22 @@ export type Database = MergeDeep<
           Insert: { article_content?: ProseMirrorDoc | null };
           Update: { article_content?: ProseMirrorDoc | null };
         };
-        // maps: 記事のまえがき・あとがき
+        // maps: 記事のまえがき・あとがき、ラベルチップ表示設定
         maps: {
           Row: {
             article_intro: ProseMirrorDoc | null;
             article_outro: ProseMirrorDoc | null;
+            show_label_chips: boolean;
           };
           Insert: {
             article_intro?: ProseMirrorDoc | null;
             article_outro?: ProseMirrorDoc | null;
+            show_label_chips?: boolean;
           };
           Update: {
             article_intro?: ProseMirrorDoc | null;
             article_outro?: ProseMirrorDoc | null;
+            show_label_chips?: boolean;
           };
         };
         // categories: 多言語対応

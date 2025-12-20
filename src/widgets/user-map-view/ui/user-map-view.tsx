@@ -5,6 +5,7 @@
  */
 
 import { useMap } from '@/entities/map';
+import { useMapLabels } from '@/entities/map-label';
 import { useSpots } from '@/entities/user-spot';
 import { useTransportHubsSimple, useTransportHubsGeoJson } from '@/entities/transport-hub';
 import { useCitiesSimple, useCitiesGeoJson } from '@/entities/city';
@@ -21,12 +22,14 @@ import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
 import { UserMapLabels } from './layers';
 import { SpotCarousel } from './spot-carousel';
+import { LabelChipsBar } from './label-chips-bar';
 import Mapbox from '@rnmapbox/maps';
 import React, {
   forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -80,10 +83,23 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const { data: mapData } = useMap(mapId);
     // currentUserId を渡していいね状態も含めて取得
     const { data: spots = [] } = useSpots(mapId ?? '', currentUserId);
+    // ラベルデータを取得（ラベルチップ表示用）
+    const { data: mapLabels = [] } = useMapLabels(mapId);
     const [isMapReady, setIsMapReady] = useState(false);
 
-    // スポットをGeoJSON形式に変換
-    const spotsGeoJson = useUserSpotsGeoJson(spots);
+    // ラベルフィルタリング状態
+    const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
+
+    // フィルタリングされたスポット
+    const filteredSpots = useMemo(() => {
+      if (selectedLabelId === null) {
+        return spots;
+      }
+      return spots.filter((spot) => spot.label_id === selectedLabelId);
+    }, [spots, selectedLabelId]);
+
+    // スポットをGeoJSON形式に変換（フィルタ済みスポットを使用）
+    const spotsGeoJson = useUserSpotsGeoJson(filteredSpots);
 
     // ズームレベル（交通データ・都市データ取得用）
     const [zoomLevel, setZoomLevel] = useState(12);
@@ -248,10 +264,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       }
     };
 
-    // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット + カルーセル表示をリセット
+    // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット + カルーセル表示をリセット + ラベルフィルタをリセット
     useEffect(() => {
       resetSelection();
       hasInitialCameraMoved.current = false;
+      setSelectedLabelId(null);
     }, [mapId, resetSelection]);
 
     // 新規登録したスポット or 発見タブからのジャンプ
@@ -369,6 +386,17 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           />
         </Mapbox.MapView>
 
+        {/* ラベルチップバー（show_label_chipsがtrueの場合のみ表示） */}
+        {mapData?.show_label_chips && mapLabels.length > 0 && !isSearchFocused && !isDetailCardOpen && (
+          <View className="absolute top-0 left-0 right-0" style={{ top: 72 }}>
+            <LabelChipsBar
+              labels={mapLabels}
+              selectedLabelId={selectedLabelId}
+              onLabelSelect={setSelectedLabelId}
+            />
+          </View>
+        )}
+
         {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン）
             - カルーセルが実際に表示されている時 → 非表示
             - カルーセル非表示または詳細カード表示中 → 表示
@@ -393,14 +421,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
               testID="location-button"
             />
             {/* 全スポット表示ボタン */}
-            {spots.length > 0 && (
+            {filteredSpots.length > 0 && (
               <View className="mt-3">
                 <FitAllButton
                   onPress={() => {
-                    if (spots.length === 1) {
-                      moveCameraToSingleSpot(spots[0]!);
+                    if (filteredSpots.length === 1) {
+                      moveCameraToSingleSpot(filteredSpots[0]!);
                     } else {
-                      fitCameraToAllSpots(spots);
+                      fitCameraToAllSpots(filteredSpots);
                     }
                     // カルーセルを再表示
                     openCarousel();
@@ -413,9 +441,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         )}
 
         {/* スポットカルーセル（詳細カードが開いていない時のみ表示） */}
-        {viewMode === 'map' && !isSearchFocused && !isDetailCardOpen && isCarouselVisible && spots.length > 0 && (
+        {viewMode === 'map' && !isSearchFocused && !isDetailCardOpen && isCarouselVisible && filteredSpots.length > 0 && (
           <SpotCarousel
-            spots={spots}
+            spots={filteredSpots}
             selectedSpotId={focusedSpotId}
             currentUserId={currentUserId}
             onSpotFocus={handleCarouselSpotFocus}

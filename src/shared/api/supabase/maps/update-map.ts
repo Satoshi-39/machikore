@@ -17,6 +17,7 @@ export interface UpdateMapParams {
   thumbnail_url?: string | null;
   article_intro?: ProseMirrorDoc | null;
   article_outro?: ProseMirrorDoc | null;
+  show_label_chips?: boolean;
 }
 
 /**

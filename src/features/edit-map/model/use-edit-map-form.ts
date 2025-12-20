@@ -26,6 +26,7 @@ export interface EditMapFormData {
   categoryId: string;
   tags: string[];
   isPublic: boolean;
+  showLabelChips: boolean;
   thumbnailImage?: ThumbnailImage;
   removeThumbnail?: boolean;
   labels?: LocalMapLabel[];
@@ -146,6 +147,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
           description: data.description || null,
           category_id: data.categoryId || null,
           is_public: data.isPublic,
+          show_label_chips: data.showLabelChips,
           ...(thumbnailUrl !== undefined && { thumbnail_url: thumbnailUrl }),
         },
         {

@@ -22,6 +22,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  Switch,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useEditMapFormChanges, type EditMapFormData } from '../model';
@@ -75,6 +76,7 @@ export function EditMapForm({
   );
   const [tags, setTags] = useState<string[]>(initialTags);
   const [isPublic, setIsPublic] = useState(map.is_public);
+  const [showLabelChips, setShowLabelChips] = useState(map.show_label_chips ?? false);
 
   // ラベルのローカルステート
   const [labels, setLabels] = useState<LocalMapLabel[]>([]);
@@ -101,6 +103,7 @@ export function EditMapForm({
     description,
     selectedCategoryId,
     isPublic,
+    showLabelChips,
     thumbnailUri: thumbnailImage?.uri || null,
     tags,
     labels,
@@ -124,6 +127,7 @@ export function EditMapForm({
       categoryId: selectedCategoryId,
       tags,
       isPublic,
+      showLabelChips,
       // 新しい画像が選択された場合のみ送信（既存URLの場合は送らない）
       thumbnailImage:
         thumbnailChanged &&
@@ -315,6 +319,32 @@ export function EditMapForm({
               ? '誰でもこのマップを見ることができます'
               : '自分だけがこのマップを見ることができます'}
           />
+        </View>
+
+        {/* ラベルチップ表示設定 */}
+        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+          <View className="flex-row items-center justify-between">
+            <View className="flex-row items-center flex-1 mr-4">
+              <Ionicons
+                name="pricetags-outline"
+                size={20}
+                color={showLabelChips ? colors.primary.DEFAULT : '#9CA3AF'}
+                style={{ marginRight: 8 }}
+              />
+              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+                ラベルチップを表示
+              </Text>
+            </View>
+            <Switch
+              value={showLabelChips}
+              onValueChange={setShowLabelChips}
+              trackColor={{ false: '#D1D5DB', true: colors.primary.DEFAULT }}
+              thumbColor="#fff"
+            />
+          </View>
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+            マップ上部にラベルを表示し、タップでスポットをフィルタリングできます
+          </Text>
         </View>
 
         {/* 更新ボタン */}

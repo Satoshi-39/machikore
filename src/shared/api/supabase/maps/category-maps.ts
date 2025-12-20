@@ -60,6 +60,7 @@ export async function getPopularMapsByCategory(
     is_article_public: map.is_article_public ?? false,
     article_intro: map.article_intro ?? null,
     article_outro: map.article_outro ?? null,
+    show_label_chips: map.show_label_chips ?? false,
     is_liked: currentUserId
       ? (map.likes || []).some((like: any) => like.user_id === currentUserId)
       : false,
@@ -123,6 +124,7 @@ export async function getLatestMapsByCategory(
     is_article_public: map.is_article_public ?? false,
     article_intro: map.article_intro ?? null,
     article_outro: map.article_outro ?? null,
+    show_label_chips: map.show_label_chips ?? false,
     is_liked: currentUserId
       ? (map.likes || []).some((like: any) => like.user_id === currentUserId)
       : false,

@@ -44,5 +44,6 @@ export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
     is_article_public: map.is_article_public ?? false,
     article_intro: map.article_intro ?? null,
     article_outro: map.article_outro ?? null,
+    show_label_chips: map.show_label_chips ?? false,
   };
 }
