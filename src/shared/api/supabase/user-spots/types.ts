@@ -34,6 +34,7 @@ export interface CreateSpotInput {
   description?: string | null;
   articleContent?: ProseMirrorDoc | null;
   spotColor?: string | null;
+  labelId?: string | null;
 }
 
 export interface UpdateSpotInput {
@@ -44,6 +45,7 @@ export interface UpdateSpotInput {
   order_index?: number;
   map_id?: string;
   spot_color?: string | null;
+  label_id?: string | null;
 }
 
 export interface UserSpotWithMasterSpot extends UserSpotRow {

@@ -73,6 +73,7 @@ export function useEditSpotForm() {
     deletedImageIds?: string[];
     mapId?: string;
     spotColor?: SpotColor;
+    labelId?: string | null;
   }) => {
     if (!id) {
       Alert.alert('エラー', 'スポットIDが見つかりません');
@@ -154,6 +155,7 @@ export function useEditSpotForm() {
           // タグは中間テーブルに保存するため、ここでは更新しない（将来的にカラム削除予定）
           mapId: data.mapId,
           spotColor: data.spotColor,
+          labelId: data.labelId,
         },
         {
           onSuccess: () => {

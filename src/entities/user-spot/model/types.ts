@@ -54,6 +54,7 @@ export interface UpdateSpotParams {
   orderIndex?: number;
   mapId?: string;
   spotColor?: SpotColor;
+  labelId?: string | null;
 }
 
 /**

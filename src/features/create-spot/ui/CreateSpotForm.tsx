@@ -13,6 +13,7 @@ import {
   Alert,
   Modal,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
@@ -28,6 +29,7 @@ import type { ProseMirrorDoc } from '@/shared/types';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { MapWithUser } from '@/shared/types';
 import { useCreateSpotFormValidation } from '../model';
+import { useMapLabels } from '@/entities/map-label';
 
 // 記事コンテンツが空かどうかを判定
 function isEmptyArticle(doc: ProseMirrorDoc | null): boolean {
@@ -62,6 +64,7 @@ interface CreateSpotFormProps {
     images: SelectedImage[];
     mapId: string;
     spotColor: SpotColor;
+    labelId?: string | null;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
@@ -93,12 +96,18 @@ export function CreateSpotForm({
   const [tags, setTags] = useState<string[]>([]);
   const [images, setImages] = useState<SelectedImage[]>([]);
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
+  const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
+  const [isLabelPickerVisible, setIsLabelPickerVisible] = useState(false);
 
   // 記事コンテンツはストアから取得
   const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
 
   // 選択中のマップを取得
   const selectedMap = userMaps.find(m => m.id === selectedMapId);
+
+  // マップのラベル一覧を取得
+  const { data: mapLabels = [], isLoading: isLabelsLoading } = useMapLabels(selectedMapId);
+  const selectedLabel = mapLabels.find(l => l.id === selectedLabelId);
 
   // バリデーション
   const { isFormValid } = useCreateSpotFormValidation({
@@ -134,6 +143,7 @@ export function CreateSpotForm({
       images,
       mapId: selectedMapId,
       spotColor,
+      labelId: selectedLabelId,
     });
   };
 
@@ -324,6 +334,125 @@ export function CreateSpotForm({
             maxTags={10}
           />
         </View>
+
+        {/* ラベル */}
+        {selectedMapId && (
+          <View className="mb-6">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+              ラベル
+            </Text>
+            <TouchableOpacity
+              onPress={() => setIsLabelPickerVisible(true)}
+              className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center justify-between"
+              activeOpacity={0.7}
+              disabled={isLabelsLoading}
+            >
+              <View className="flex-row items-center flex-1">
+                {isLabelsLoading ? (
+                  <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+                ) : selectedLabel ? (
+                  <>
+                    <View
+                      className="w-3 h-3 rounded-full mr-2"
+                      style={{ backgroundColor: selectedLabel.color }}
+                    />
+                    <Text className="text-base text-foreground dark:text-dark-foreground">
+                      {selectedLabel.name}
+                    </Text>
+                  </>
+                ) : (
+                  <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">
+                    {mapLabels.length === 0 ? 'ラベルなし' : 'ラベルを選択（任意）'}
+                  </Text>
+                )}
+              </View>
+              {mapLabels.length > 0 && (
+                <Ionicons name="chevron-down" size={20} color={colors.gray[400]} />
+              )}
+            </TouchableOpacity>
+            {mapLabels.length === 0 && !isLabelsLoading && (
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+                マップ設定でラベルを追加できます
+              </Text>
+            )}
+          </View>
+        )}
+
+        {/* ラベル選択モーダル */}
+        <Modal
+          visible={isLabelPickerVisible}
+          transparent
+          animationType="fade"
+          onRequestClose={() => setIsLabelPickerVisible(false)}
+        >
+          <TouchableOpacity
+            className="flex-1 bg-black/50 justify-end"
+            activeOpacity={1}
+            onPress={() => setIsLabelPickerVisible(false)}
+          >
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {}}
+              className="bg-surface dark:bg-dark-surface rounded-t-2xl max-h-[50%]"
+            >
+              <View className="px-4 py-3 border-b border-border dark:border-dark-border flex-row items-center justify-between">
+                <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+                  ラベルを選択
+                </Text>
+                <TouchableOpacity
+                  onPress={() => setIsLabelPickerVisible(false)}
+                  className="p-1"
+                >
+                  <Ionicons name="close" size={24} color={colors.gray[500]} />
+                </TouchableOpacity>
+              </View>
+              <ScrollView className="max-h-80">
+                {/* 選択解除オプション */}
+                <TouchableOpacity
+                  className="px-4 py-3 flex-row items-center border-b border-border dark:border-dark-border"
+                  onPress={() => {
+                    setSelectedLabelId(null);
+                    setIsLabelPickerVisible(false);
+                  }}
+                >
+                  <View className="w-6 h-6 items-center justify-center mr-3">
+                    {selectedLabelId === null && (
+                      <Ionicons name="checkmark" size={20} color={colors.primary.DEFAULT} />
+                    )}
+                  </View>
+                  <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">
+                    ラベルなし
+                  </Text>
+                </TouchableOpacity>
+                {/* ラベル一覧 */}
+                {mapLabels.map((label) => (
+                  <TouchableOpacity
+                    key={label.id}
+                    className="px-4 py-3 flex-row items-center border-b border-border dark:border-dark-border"
+                    onPress={() => {
+                      setSelectedLabelId(label.id);
+                      setIsLabelPickerVisible(false);
+                    }}
+                  >
+                    <View className="w-6 h-6 items-center justify-center mr-3">
+                      {selectedLabelId === label.id && (
+                        <Ionicons name="checkmark" size={20} color={colors.primary.DEFAULT} />
+                      )}
+                    </View>
+                    <View
+                      className="w-3 h-3 rounded-full mr-2"
+                      style={{ backgroundColor: label.color }}
+                    />
+                    <Text className="text-base text-foreground dark:text-dark-foreground">
+                      {label.name}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+              <View className="h-8" />
+            </TouchableOpacity>
+          </TouchableOpacity>
+        </Modal>
 
         {/* スポットの色 */}
         <View className="mb-6">

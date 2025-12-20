@@ -143,6 +143,7 @@ export function useSpotForm() {
     images: SelectedImage[];
     mapId: string;
     spotColor: SpotColor;
+    labelId?: string | null;
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
@@ -214,6 +215,7 @@ export function useSpotForm() {
         description: data.description,
         articleContent: data.articleContent,
         spotColor: data.spotColor,
+        labelId: data.labelId,
       },
       {
         onSuccess: async (spotId) => {

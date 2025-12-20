@@ -17,6 +17,7 @@ interface EditSpotFormCurrentValues {
   deletedImageIds: string[];
   selectedMapId: string | null;
   spotColor: SpotColor;
+  labelId: string | null;
 }
 
 /**
@@ -54,6 +55,9 @@ export function useEditSpotFormChanges(
     const originalSpotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
     if (currentValues.spotColor !== originalSpotColor) return true;
 
+    // ラベルの変更
+    if (currentValues.labelId !== spot.label_id) return true;
+
     return false;
   }, [
     spot,
@@ -65,6 +69,7 @@ export function useEditSpotFormChanges(
     currentValues.deletedImageIds,
     currentValues.selectedMapId,
     currentValues.spotColor,
+    currentValues.labelId,
   ]);
 
   // フォームのバリデーション（スポット名とひとことは必須）

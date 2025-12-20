@@ -98,7 +98,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
   // 2. user_spotを作成
   // ピン刺し・現在地登録の場合（googlePlaceIdがない）は座標と住所をuser_spotに直接保存
   // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
-  const userSpotInsert: UserSpotInsert & { prefecture_id?: string | null } = {
+  const userSpotInsert: UserSpotInsert & { prefecture_id?: string | null; label_id?: string | null } = {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
@@ -112,6 +112,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     description: input.description ?? null,
     article_content: input.articleContent ?? null,
     spot_color: input.spotColor ?? null,
+    label_id: input.labelId ?? null,
   };
 
   const { data, error } = await supabase
