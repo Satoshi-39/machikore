@@ -341,6 +341,8 @@ export function initializeDatabase(): void {
         machi_id TEXT NOT NULL,
         custom_name TEXT,
         description TEXT,
+        spot_color TEXT DEFAULT 'blue',
+        label TEXT,
         images_count INTEGER DEFAULT 0,
         likes_count INTEGER DEFAULT 0,
         comments_count INTEGER DEFAULT 0,
@@ -380,6 +382,10 @@ export function initializeDatabase(): void {
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_user_spots_is_synced
       ON user_spots(is_synced);
+    `);
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_user_spots_label
+      ON user_spots(label);
     `);
 
     // 9. 訪問記録テーブル（街訪問 - シンプルな訪問済み/未訪問管理）
@@ -1132,6 +1138,40 @@ function migration009_RenameSpotIdToUserSpotId(): void {
 }
 
 /**
+ * マイグレーション010: user_spotsにspot_colorとlabelカラム追加
+ */
+function migration010_AddSpotColorAndLabel(): void {
+  const db = getDatabase();
+
+  log.info('[SQLite] [Migration 010] Adding spot_color and label to user_spots...');
+
+  try {
+    db.execSync('BEGIN TRANSACTION;');
+
+    // カラムが存在するかチェック
+    const tableInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(user_spots);');
+    const hasSpotColor = tableInfo.some((col) => col.name === 'spot_color');
+    const hasLabel = tableInfo.some((col) => col.name === 'label');
+
+    if (!hasSpotColor) {
+      db.execSync("ALTER TABLE user_spots ADD COLUMN spot_color TEXT DEFAULT 'blue';");
+    }
+
+    if (!hasLabel) {
+      db.execSync('ALTER TABLE user_spots ADD COLUMN label TEXT;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_label ON user_spots(label);');
+    }
+
+    db.execSync('COMMIT;');
+    log.info('[SQLite] [Migration 010] Completed successfully');
+  } catch (error) {
+    db.execSync('ROLLBACK;');
+    log.error('[SQLite] [Migration 010] Failed:', error);
+    throw error;
+  }
+}
+
+/**
  * 全マイグレーションを実行
  */
 export function runMigrations(): void {
@@ -1174,6 +1214,13 @@ export function runMigrations(): void {
     migration009_RenameSpotIdToUserSpotId();
     recordVersion(9);
     log.info('[SQLite] Applied version 9');
+  }
+
+  // マイグレーション10: user_spotsにspot_colorとlabel追加
+  if (currentVersion < 10) {
+    migration010_AddSpotColorAndLabel();
+    recordVersion(10);
+    log.info('[SQLite] Applied version 10');
   }
 
   log.info('[SQLite] All migrations completed');

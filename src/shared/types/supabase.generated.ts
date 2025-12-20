@@ -1778,6 +1778,7 @@ export type Database = {
           google_short_address: string | null
           id: string
           images_count: number
+          label: string | null
           latitude: number | null
           likes_count: number
           longitude: number | null
@@ -1802,6 +1803,7 @@ export type Database = {
           google_short_address?: string | null
           id?: string
           images_count?: number
+          label?: string | null
           latitude?: number | null
           likes_count?: number
           longitude?: number | null
@@ -1826,6 +1828,7 @@ export type Database = {
           google_short_address?: string | null
           id?: string
           images_count?: number
+          label?: string | null
           latitude?: number | null
           likes_count?: number
           longitude?: number | null
@@ -2450,6 +2453,18 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      get_popular_tags_by_category: {
+        Args: { p_category_id: string; p_limit?: number }
+        Returns: {
+          created_at: string
+          id: string
+          is_official: boolean
+          name: string
+          name_translations: Json
+          updated_at: string
+          usage_count: number
+        }[]
       }
       gettransactionid: { Args: never; Returns: unknown }
       increment_map_bookmarks_count: {
