@@ -17,13 +17,12 @@ interface CreateSpotFormValues {
  */
 export function useCreateSpotFormValidation(currentValues: CreateSpotFormValues) {
   const isFormValid = useMemo(() => {
-    // スポット名とひとことは必須
+    // スポット名とマップ選択は必須（概要は任意）
     return !!(
       currentValues.customName.trim() &&
-      currentValues.description.trim() &&
       currentValues.selectedMapId
     );
-  }, [currentValues.customName, currentValues.description, currentValues.selectedMapId]);
+  }, [currentValues.customName, currentValues.selectedMapId]);
 
   return {
     isFormValid,

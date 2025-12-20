@@ -72,12 +72,11 @@ export function useEditSpotFormChanges(
     currentValues.labelId,
   ]);
 
-  // フォームのバリデーション（スポット名とひとことは必須）
+  // フォームのバリデーション（スポット名は必須、概要は任意）
   const isFormValid = useMemo(() => {
     // スポット名が空でないことを確認（custom_nameはNOT NULL制約があるため必須）
-    // ひとことも必須
-    return !!(currentValues.customName.trim() && currentValues.description.trim());
-  }, [currentValues.customName, currentValues.description]);
+    return !!currentValues.customName.trim();
+  }, [currentValues.customName]);
 
   return {
     hasChanges,

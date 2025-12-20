@@ -122,11 +122,6 @@ export function CreateSpotForm({
       return;
     }
 
-    if (!description.trim()) {
-      Alert.alert('エラー', 'スポットの概要を入力してください');
-      return;
-    }
-
     if (!selectedMapId) {
       Alert.alert('エラー', 'マップを選択してください');
       return;
@@ -261,10 +256,10 @@ export function CreateSpotForm({
           </View>
         </View>
 
-        {/* スポットの概要（必須） */}
+        {/* スポットの概要（任意） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポットの概要 <Text className="text-red-500">*</Text>
+            スポットの概要
           </Text>
           <StyledTextInput
             value={description}

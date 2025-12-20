@@ -244,10 +244,10 @@ export function EditSpotForm({
           </View>
         </View>
 
-        {/* スポットの概要（必須） */}
+        {/* スポットの概要（任意） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポットの概要 <Text className="text-red-500">*</Text>
+            スポットの概要
           </Text>
           <StyledTextInput
             value={description}
