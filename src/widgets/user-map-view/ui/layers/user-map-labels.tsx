@@ -57,7 +57,7 @@ interface SpotProperties {
   id: string;
   name: string;
   category: SpotCategory;
-  spot_color?: SpotColor;
+  spot_color: SpotColor;
 }
 
 interface LocationFeatureProperties {
@@ -74,6 +74,7 @@ interface CombinedProperties {
   sortKey: number;
   // スポット用
   category?: SpotCategory;
+  spot_color?: SpotColor;
   // 交通機関用
   type?: 'station' | 'airport' | 'ferry_terminal' | 'bus_terminal';
   subtype?: string | null;
@@ -104,17 +105,12 @@ export function UserMapLabels({
 }: UserMapLabelsProps) {
   const isDarkMode = useIsDarkMode();
   // デフォルトのスポットカラー設定（各スポットは個別にspot_colorを持つ）
-  const defaultColorConfig = SPOT_COLORS[DEFAULT_SPOT_COLOR];
-  const defaultSpotColor = defaultColorConfig.color;
-  const defaultSpotHaloColor = isDarkMode ? defaultColorConfig.haloDark : defaultColorConfig.haloLight;
+  const defaultSpotColor = SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
   const transportColors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
   const transportHaloColor = isDarkMode ? '#1F2937' : '#FFFFFF';
 
   // 地名ラベル用の色
   const locationColors = isDarkMode ? LOCATION_LABEL_COLORS_DARK : LOCATION_LABEL_COLORS_LIGHT;
-
-  // デフォルトのスポットアイコン画像（青）
-  const spotIconImage = mapSpotIcons[DEFAULT_SPOT_COLOR];
 
   // スポットと交通データと地名を統合したGeoJSONを作成
   const combinedGeoJson = useMemo((): FeatureCollection<Point, CombinedProperties> => {
@@ -127,6 +123,7 @@ export function UserMapLabels({
         featureType: 'spot' as const,
         sortKey: SYMBOL_SORT_KEY_USER_MAP.spot,
         category: f.properties.category,
+        spot_color: f.properties.spot_color,
       },
     }));
 
@@ -187,9 +184,19 @@ export function UserMapLabels({
 
   return (
     <>
-      {/* 全アイコン画像を登録 */}
+      {/* 全アイコン画像を登録（スポットカラー別 + 交通機関） */}
       <Mapbox.Images images={{
-        'user-spot-icon': spotIconImage,
+        // スポットカラー別アイコン
+        'spot-icon-pink': mapSpotIcons.pink,
+        'spot-icon-red': mapSpotIcons.red,
+        'spot-icon-orange': mapSpotIcons.orange,
+        'spot-icon-yellow': mapSpotIcons.yellow,
+        'spot-icon-green': mapSpotIcons.green,
+        'spot-icon-blue': mapSpotIcons.blue,
+        'spot-icon-purple': mapSpotIcons.purple,
+        'spot-icon-gray': mapSpotIcons.gray,
+        'spot-icon-white': mapSpotIcons.white,
+        // 交通機関アイコン
         'train-jr-icon': isDarkMode ? trainJrDarkIcon : trainJrIcon,
         'train-private-icon': trainPrivateIcon,
         'subway-metro-icon': subwayMetroIcon,
@@ -477,12 +484,26 @@ export function UserMapLabels({
           }
           style={{
             symbolSortKey: ['get', 'sortKey'],
-            iconImage: 'user-spot-icon',
+            // spot_colorに応じたアイコンを選択
+            iconImage: ['concat', 'spot-icon-', ['get', 'spot_color']],
             iconSize: 0.2,
             textField: ['get', 'name'],
             textSize: 13,
-            textColor: defaultSpotColor,
-            textHaloColor: defaultSpotHaloColor,
+            // spot_colorに応じたテキスト色
+            textColor: [
+              'match', ['get', 'spot_color'],
+              'pink', SPOT_COLORS.pink.color,
+              'red', SPOT_COLORS.red.color,
+              'orange', SPOT_COLORS.orange.color,
+              'yellow', SPOT_COLORS.yellow.color,
+              'green', SPOT_COLORS.green.color,
+              'blue', SPOT_COLORS.blue.color,
+              'purple', SPOT_COLORS.purple.color,
+              'gray', SPOT_COLORS.gray.color,
+              'white', SPOT_COLORS.white.color,
+              defaultSpotColor, // デフォルト
+            ],
+            textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -503,12 +524,24 @@ export function UserMapLabels({
           }
           style={{
             symbolSortKey: 0,
-            iconImage: 'user-spot-icon',
+            iconImage: ['concat', 'spot-icon-', ['get', 'spot_color']],
             iconSize: 0.28,
             textField: ['get', 'name'],
             textSize: 15,
-            textColor: defaultSpotColor,
-            textHaloColor: defaultSpotHaloColor,
+            textColor: [
+              'match', ['get', 'spot_color'],
+              'pink', SPOT_COLORS.pink.color,
+              'red', SPOT_COLORS.red.color,
+              'orange', SPOT_COLORS.orange.color,
+              'yellow', SPOT_COLORS.yellow.color,
+              'green', SPOT_COLORS.green.color,
+              'blue', SPOT_COLORS.blue.color,
+              'purple', SPOT_COLORS.purple.color,
+              'gray', SPOT_COLORS.gray.color,
+              'white', SPOT_COLORS.white.color,
+              defaultSpotColor,
+            ],
+            textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -529,12 +562,24 @@ export function UserMapLabels({
           }
           style={{
             symbolSortKey: 0,
-            iconImage: 'user-spot-icon',
+            iconImage: ['concat', 'spot-icon-', ['get', 'spot_color']],
             iconSize: 0.28,
             textField: ['get', 'name'],
             textSize: 15,
-            textColor: defaultSpotColor,
-            textHaloColor: defaultSpotHaloColor,
+            textColor: [
+              'match', ['get', 'spot_color'],
+              'pink', SPOT_COLORS.pink.color,
+              'red', SPOT_COLORS.red.color,
+              'orange', SPOT_COLORS.orange.color,
+              'yellow', SPOT_COLORS.yellow.color,
+              'green', SPOT_COLORS.green.color,
+              'blue', SPOT_COLORS.blue.color,
+              'purple', SPOT_COLORS.purple.color,
+              'gray', SPOT_COLORS.gray.color,
+              'white', SPOT_COLORS.white.color,
+              defaultSpotColor,
+            ],
+            textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',

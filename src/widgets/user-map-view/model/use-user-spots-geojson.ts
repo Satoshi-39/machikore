@@ -6,10 +6,12 @@ import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
 import { determineSpotCategory } from '@/entities/master-spot';
+import { type SpotColor, DEFAULT_SPOT_COLOR } from '@/shared/config';
 
 interface UserSpotWithMasterSpot {
   id: string;
   custom_name: string | null;
+  spot_color?: string | null;
   // ピン刺し・現在地登録の場合はuser_spotに直接座標がある
   latitude?: number | null;
   longitude?: number | null;
@@ -26,6 +28,7 @@ interface UserSpotGeoJsonProperties {
   id: string;
   name: string;
   category: SpotCategory;
+  spot_color: SpotColor;
 }
 
 export function useUserSpotsGeoJson(
@@ -50,6 +53,9 @@ export function useUserSpotsGeoJson(
           ? determineSpotCategory(spot.master_spot.google_types)
           : 'other' as SpotCategory;
 
+        // スポットカラー: 設定されていればそれを使用、なければデフォルト
+        const spotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
+
         return {
           type: 'Feature' as const,
           geometry: {
@@ -60,6 +66,7 @@ export function useUserSpotsGeoJson(
             id: spot.id,
             name,
             category,
+            spot_color: spotColor,
           },
         };
       });
