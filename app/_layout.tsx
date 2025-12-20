@@ -224,6 +224,13 @@ function RootNavigator() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="create-spot-article"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
         </Stack>
         <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         <AppToast />
