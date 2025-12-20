@@ -10,7 +10,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions, Share, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor, log } from '@/shared/config';
+import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor, log } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -83,8 +83,19 @@ export function SpotCard({
   // いいね状態は spot.is_liked を使用（SpotWithDetails の場合）
   const isLiked = 'is_liked' in spot ? (spot.is_liked ?? false) : false;
 
-  // スポットのカラーを取得（spot.spot_colorがあればそれを使用、なければデフォルトの青）
-  const spotColor = ('spot_color' in spot && spot.spot_color) ? spot.spot_color as SpotColor : DEFAULT_SPOT_COLOR;
+  // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
+  const spotColor = useMemo((): SpotColor => {
+    // ラベルが設定されている場合はラベル色を優先
+    if ('map_label' in spot && spot.map_label?.color) {
+      const labelColorKey = SPOT_COLOR_LIST.find((c) => c.color === spot.map_label?.color)?.key;
+      if (labelColorKey) return labelColorKey;
+    }
+    // スポット色が設定されている場合
+    if ('spot_color' in spot && spot.spot_color) {
+      return spot.spot_color as SpotColor;
+    }
+    return DEFAULT_SPOT_COLOR;
+  }, [spot]);
   const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
   const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();

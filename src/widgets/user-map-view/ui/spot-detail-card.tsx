@@ -9,7 +9,7 @@ import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicat
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, LOCATION_ICONS, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
 import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync } from '@/shared/lib';
@@ -183,8 +183,19 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const oneWord = spot.custom_name;
   const spotAddress = spot.master_spot?.google_short_address || spot.google_short_address;
 
-  // スポット固有の色、なければデフォルト色を使用
-  const spotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
+  // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
+  const spotColor = useMemo((): SpotColor => {
+    // ラベルが設定されている場合はラベル色を優先
+    if (spot.map_label?.color) {
+      const labelColorKey = SPOT_COLOR_LIST.find((c) => c.color === spot.map_label?.color)?.key;
+      if (labelColorKey) return labelColorKey;
+    }
+    // スポット色が設定されている場合
+    if (spot.spot_color) {
+      return spot.spot_color as SpotColor;
+    }
+    return DEFAULT_SPOT_COLOR;
+  }, [spot.map_label?.color, spot.spot_color]);
   const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
   const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
 

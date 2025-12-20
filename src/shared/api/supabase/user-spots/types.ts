@@ -71,6 +71,9 @@ export interface UserSpotSearchResult {
   custom_name: string | null;
   description: string | null;
   tags: string[] | null;
+  spot_color?: string | null;
+  label_id?: string | null;
+  map_label?: MapLabelBasicInfo | null;
   images_count: number;
   likes_count: number;
   comments_count: number;

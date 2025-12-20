@@ -23,6 +23,11 @@ export async function searchPublicUserSpots(
     .select(`
       *,
       master_spots (*),
+      map_labels (
+        id,
+        name,
+        color
+      ),
       users (
         id,
         username,
@@ -52,6 +57,11 @@ export async function searchPublicUserSpots(
       google_short_address,
       user_spots (
         *,
+        map_labels (
+          id,
+          name,
+          color
+        ),
         users (
           id,
           username,
@@ -82,6 +92,9 @@ export async function searchPublicUserSpots(
       custom_name: spot.custom_name,
       description: spot.description,
       tags: spot.tags,
+      spot_color: spot.spot_color || null,
+      label_id: spot.label_id || null,
+      map_label: spot.map_labels || null,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
       comments_count: spot.comments_count,
@@ -109,6 +122,9 @@ export async function searchPublicUserSpots(
           custom_name: spot.custom_name,
           description: spot.description,
           tags: spot.tags,
+          spot_color: spot.spot_color || null,
+          label_id: spot.label_id || null,
+          map_label: spot.map_labels || null,
           images_count: spot.images_count,
           likes_count: spot.likes_count,
           comments_count: spot.comments_count,

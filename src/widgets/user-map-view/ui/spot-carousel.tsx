@@ -23,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
-import { LOCATION_ICONS, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { LOCATION_ICONS, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { useToggleSpotLike } from '@/entities/like';
 import {
   useSpotBookmarkInfo,
@@ -68,8 +68,19 @@ function SpotCard({
   const isDarkMode = useIsDarkMode();
   const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
   const description = spot.description;
-  // スポット固有の色、なければデフォルト色を使用
-  const spotColor = (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR;
+  // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
+  const spotColor = (() => {
+    // ラベルが設定されている場合はラベル色を優先
+    if (spot.map_label?.color) {
+      const labelColorKey = SPOT_COLOR_LIST.find((c) => c.color === spot.map_label?.color)?.key;
+      if (labelColorKey) return labelColorKey;
+    }
+    // スポット色が設定されている場合
+    if (spot.spot_color) {
+      return spot.spot_color as SpotColor;
+    }
+    return DEFAULT_SPOT_COLOR;
+  })();
   const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
   const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
 
