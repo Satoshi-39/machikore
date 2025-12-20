@@ -183,8 +183,8 @@ export function initializeDatabase(): void {
         prefecture_name_translations TEXT,
         city_name TEXT,
         city_name_translations TEXT,
-        created_at TEXT,
-        updated_at TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
         FOREIGN KEY (prefecture_id) REFERENCES prefectures(id),
         FOREIGN KEY (city_id) REFERENCES cities(id)
       );
