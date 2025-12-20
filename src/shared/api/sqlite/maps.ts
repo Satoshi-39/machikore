@@ -10,9 +10,9 @@ import type { MapRow, MapInsert, MapUpdate } from '@/shared/types/database.types
 // ===============================
 
 /**
- * マップを挿入
+ * マップを挿入（IDは必須）
  */
-export function insertMap(map: MapInsert): void {
+export function insertMap(map: MapInsert & { id: string }): void {
   const db = getDatabase();
   const now = new Date().toISOString();
 
@@ -22,24 +22,22 @@ export function insertMap(map: MapInsert): void {
       id, user_id, name, description, category,
       is_public, is_default, is_official, thumbnail_url,
       spots_count, likes_count,
-      created_at, updated_at, synced_at, is_synced
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+      created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
     [
       map.id,
       map.user_id,
       map.name,
       map.description ?? null,
       map.category ?? null,
-      map.is_public ?? 1,
-      map.is_default ?? 0,
-      map.is_official ?? 0,
+      map.is_public ?? true,
+      map.is_default ?? false,
+      map.is_official ?? false,
       map.thumbnail_url ?? null,
       map.spots_count ?? 0,
       map.likes_count ?? 0,
       map.created_at ?? now,
       map.updated_at ?? now,
-      map.synced_at ?? null,
-      map.is_synced ?? 0,
     ]
   );
 }
@@ -146,14 +144,6 @@ export function updateMap(
   if (updates.updated_at !== undefined) {
     fields.push('updated_at = ?');
     values.push(updates.updated_at);
-  }
-  if (updates.synced_at !== undefined) {
-    fields.push('synced_at = ?');
-    values.push(updates.synced_at);
-  }
-  if (updates.is_synced !== undefined) {
-    fields.push('is_synced = ?');
-    values.push(updates.is_synced);
   }
 
   if (fields.length === 0) return;

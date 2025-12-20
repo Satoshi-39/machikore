@@ -2,7 +2,6 @@
   {
     "id": "india",
     "name": "インド",
-    "name_en": "India",
     "name_kana": "",
     "latitude": 20.5937,
     "longitude": 78.9629,
@@ -11,7 +10,6 @@
   {
     "id": "sri_lanka",
     "name": "スリランカ",
-    "name_en": "Sri Lanka",
     "name_kana": "",
     "latitude": 7.8731,
     "longitude": 80.7718,
@@ -20,7 +18,6 @@
   {
     "id": "nepal",
     "name": "ネパール",
-    "name_en": "Nepal",
     "name_kana": "",
     "latitude": 28.3949,
     "longitude": 84.124,
@@ -29,7 +26,6 @@
   {
     "id": "maldives",
     "name": "モルディブ",
-    "name_en": "Maldives",
     "name_kana": "",
     "latitude": 3.2028,
     "longitude": 73.2207,
@@ -38,7 +34,6 @@
   {
     "id": "bangladesh",
     "name": "バングラデシュ",
-    "name_en": "Bangladesh",
     "name_kana": "",
     "latitude": 23.685,
     "longitude": 90.3563,
@@ -47,7 +42,6 @@
   {
     "id": "pakistan",
     "name": "パキスタン",
-    "name_en": "Pakistan",
     "name_kana": "",
     "latitude": 30.3753,
     "longitude": 69.3451,
@@ -56,7 +50,6 @@
   {
     "id": "bhutan",
     "name": "ブータン",
-    "name_en": "Bhutan",
     "name_kana": "",
     "latitude": 27.5142,
     "longitude": 90.4336,

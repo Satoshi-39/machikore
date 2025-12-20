@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, log } from '@/shared/config';
+import { colors } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
 
 interface MachiProps {
@@ -18,17 +18,6 @@ interface MachiProps {
 }
 
 export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) {
-  // lines JSONを解析して最初の路線名を取得
-  let lineNames: string[] = [];
-  if (machi.lines) {
-    try {
-      const linesArray = JSON.parse(machi.lines);
-      lineNames = linesArray.map((line: { ja: string }) => line.ja);
-    } catch (e) {
-      log.error('[Machi] Failed to parse lines JSON:', e);
-    }
-  }
-
   return (
     <View
       className={`flex-row items-center p-4 mb-2 rounded-xl shadow-sm ${
@@ -57,11 +46,6 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
             </View>
           )}
         </View>
-        {lineNames.length > 0 && (
-          <Text className={`text-sm ${isVisited ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}>
-            {lineNames.join('・')}
-          </Text>
-        )}
         {isVisited && visitCount > 0 && (
           <Text className="text-xs text-blue-600 mt-0.5 font-medium">
             {visitCount}回訪問

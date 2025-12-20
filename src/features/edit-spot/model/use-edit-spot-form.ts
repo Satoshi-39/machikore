@@ -82,7 +82,7 @@ export function useEditSpotForm() {
     // マップを変更する場合、移動先のスポット数をチェック（プレミアム状態に応じた上限）
     if (data.mapId && spot && data.mapId !== spot.map_id) {
       const targetMap = userMaps.find((m) => m.id === data.mapId);
-      if (targetMap && targetMap.spots_count >= spotLimit) {
+      if (targetMap && (targetMap.spots_count ?? 0) >= spotLimit) {
         Alert.alert(
           'スポット数の上限',
           `移動先のマップには既に${spotLimit}個のスポットが登録されています。\n別のマップを選択するか、既存のスポットを削除してください。`,

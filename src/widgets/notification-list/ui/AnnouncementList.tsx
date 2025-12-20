@@ -53,7 +53,7 @@ interface AnnouncementItemProps {
 
 function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemProps) {
   const defaultConfig = { icon: 'information-circle' as const, color: '#3B82F6' };
-  const config = ANNOUNCEMENT_TYPE_CONFIG[announcement.type] || defaultConfig;
+  const config = (announcement.type && ANNOUNCEMENT_TYPE_CONFIG[announcement.type]) || defaultConfig;
 
   return (
     <Pressable
@@ -79,9 +79,11 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={3}>
             {announcement.content}
           </Text>
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-2">
-            {formatDate(announcement.published_at)}
-          </Text>
+          {announcement.published_at && (
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-2">
+              {formatDate(announcement.published_at)}
+            </Text>
+          )}
         </View>
 
         {/* 未読インジケーター */}

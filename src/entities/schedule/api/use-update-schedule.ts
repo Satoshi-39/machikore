@@ -19,7 +19,7 @@ export function useUpdateSchedule() {
         scheduled_at: params.scheduledAt,
         title: params.title,
         memo: params.memo,
-        is_completed: params.isCompleted !== undefined ? (params.isCompleted ? 1 : 0) : undefined,
+        is_completed: params.isCompleted,
         completed_at:
           params.isCompleted === true
             ? now

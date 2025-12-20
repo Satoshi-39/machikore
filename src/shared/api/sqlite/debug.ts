@@ -139,7 +139,7 @@ export function logSchedules(userId?: string, limit: number = 10) {
       console.log(`  Title: ${schedule.title}`);
       console.log(`  Machi ID: ${schedule.machi_id}`);
       console.log(`  Scheduled at: ${schedule.scheduled_at}`);
-      console.log(`  Completed: ${schedule.is_completed === 1 ? 'Yes' : 'No'}`);
+      console.log(`  Completed: ${schedule.is_completed ? 'Yes' : 'No'}`);
     });
   } catch (error) {
     console.error('Error reading schedules:', error);
@@ -159,7 +159,7 @@ export function logMachi(limit: number = 10) {
     );
     console.log(`Found ${machi.length} machi:`);
     machi.forEach((m: MachiRow, index: number) => {
-      console.log(`\n[${index + 1}] ${m.name} (${m.lines || 'no lines'})`);
+      console.log(`\n[${index + 1}] ${m.name}`);
       console.log(`  ID: ${m.id}`);
       console.log(`  Location: ${m.latitude}, ${m.longitude}`);
     });

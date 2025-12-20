@@ -29,7 +29,7 @@ import {
   logoutFromRevenueCat,
   isPremiumActive,
 } from '@/shared/api/revenuecat';
-import { syncUserToSQLite } from '@/shared/lib/sync';
+import { cacheUserToSQLite } from '@/shared/lib/cache';
 import { setSentryUser } from '@/shared/lib/init/sentry';
 import { identifyUser as identifyPostHogUser, resetUser as resetPostHogUser } from '@/shared/lib/init/posthog';
 import { log } from '@/shared/config/logger';
@@ -132,7 +132,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           await upsertUserToSupabase(session.user);
 
           // SQLiteにもキャッシュとして同期
-          await syncUserToSQLite(session.user);
+          await cacheUserToSQLite(session.user);
 
           // Supabaseから最新のユーザー情報を取得してストアに保存
           // （プロフィール更新後も最新データが反映されるようにするため）
@@ -180,7 +180,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                   await upsertUserToSupabase(user);
 
                   // SQLiteにもキャッシュとして同期
-                  await syncUserToSQLite(user);
+                  await cacheUserToSQLite(user);
 
                   // Supabaseから最新のユーザー情報を取得してストアに保存
                   const userData = await getUserByIdFromSupabase(user.id);

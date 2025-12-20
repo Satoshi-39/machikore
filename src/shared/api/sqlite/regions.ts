@@ -26,7 +26,7 @@ export function bulkInsertRegions(regions: RegionRow[]): void {
           region.id,
           region.name,
           region.name_kana,
-          region.name_translations,
+          region.name_translations ? JSON.stringify(region.name_translations) : null,
           region.latitude,
           region.longitude,
           region.country_code,

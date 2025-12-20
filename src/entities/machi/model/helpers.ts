@@ -124,20 +124,6 @@ export function filterMachiByName(
 }
 
 /**
- * 路線で絞り込み
- */
-export function filterMachiByLine(
-  machiList: MachiRow[],
-  lineName: string
-): MachiRow[] {
-  if (!lineName) return machiList;
-  // Note: linesはJSON配列のため、文字列検索で対応
-  return machiList.filter((machi) =>
-    machi.lines?.includes(lineName) ?? false
-  );
-}
-
-/**
  * 都道府県で絞り込み
  */
 export function filterMachiByPrefecture(
@@ -159,35 +145,14 @@ export function sortMachiByName(machiList: MachiRow[]): MachiRow[] {
   return [...machiList].sort((a, b) => a.name.localeCompare(b.name, 'ja'));
 }
 
-/**
- * 路線名でソート
- * Note: linesはJSON配列のため、最初の路線でソート
- */
-export function sortMachiByLine(machiList: MachiRow[]): MachiRow[] {
-  return [...machiList].sort((a, b) => {
-    const aLine = a.lines || '';
-    const bLine = b.lines || '';
-    return aLine.localeCompare(bLine, 'ja');
-  });
-}
-
 // ===============================
 // ユーティリティ
 // ===============================
 
 /**
- * 街の表示名を取得（路線名を含む場合がある）
+ * 街の表示名を取得
  */
 export function getMachiDisplayName(machi: MachiRow): string {
-  return machi.name;
-}
-
-/**
- * 街の完全な名称を取得（路線名 + 街名）
- * Note: linesはJSON配列のため、最初の路線を使用
- */
-export function getMachiFullName(machi: MachiRow): string {
-  // TODO: lines JSONをパースして最初の路線名を取得
   return machi.name;
 }
 
@@ -204,17 +169,11 @@ export function isValidMachiId(machiId: string): boolean {
 
 /** @deprecated Use filterMachiByName instead */
 export const filterStationsByName = filterMachiByName;
-/** @deprecated Use filterMachiByLine instead */
-export const filterStationsByLine = filterMachiByLine;
 /** @deprecated Use filterMachiByPrefecture instead */
 export const filterStationsByPrefecture = filterMachiByPrefecture;
 /** @deprecated Use sortMachiByName instead */
 export const sortStationsByName = sortMachiByName;
-/** @deprecated Use sortMachiByLine instead */
-export const sortStationsByLine = sortMachiByLine;
 /** @deprecated Use getMachiDisplayName instead */
 export const getStationDisplayName = getMachiDisplayName;
-/** @deprecated Use getMachiFullName instead */
-export const getStationFullName = getMachiFullName;
 /** @deprecated Use isValidMachiId instead */
 export const isValidStationId = isValidMachiId;

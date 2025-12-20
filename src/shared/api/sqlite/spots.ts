@@ -200,9 +200,9 @@ export function insertOrGetMasterSpot(masterSpot: {
       google_place_id, google_formatted_address, google_types,
       google_phone_number, google_website_uri,
       google_rating, google_user_rating_count,
-      created_at, updated_at, synced_at, is_synced
+      created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 0);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       masterSpot.id,
@@ -266,9 +266,9 @@ export function insertSpot(params: {
       id, map_id, user_id, machi_id, master_spot_id,
       custom_name, description, images_count,
       likes_count, comments_count, order_index,
-      created_at, updated_at, synced_at, is_synced
+      created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       spot.id,
@@ -284,8 +284,6 @@ export function insertSpot(params: {
       spot.order_index,
       spot.created_at,
       spot.updated_at,
-      spot.synced_at,
-      spot.is_synced,
     ]
   );
 }
@@ -379,9 +377,9 @@ export function insertSpotImage(image: ImageRow): void {
     `
     INSERT INTO images (
       id, user_spot_id, local_path, cloud_path, width, height,
-      file_size, order_index, created_at, updated_at, synced_at, is_synced
+      file_size, order_index, created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       image.id,
@@ -394,8 +392,6 @@ export function insertSpotImage(image: ImageRow): void {
       image.order_index,
       image.created_at,
       image.updated_at,
-      image.synced_at,
-      image.is_synced,
     ]
   );
 }
@@ -408,9 +404,9 @@ export function bulkInsertSpotImages(images: ImageRow[]): void {
     sql: `
       INSERT INTO images (
         id, user_spot_id, local_path, cloud_path, width, height,
-        file_size, order_index, created_at, updated_at, synced_at, is_synced
+        file_size, order_index, created_at, updated_at
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     params: [
       image.id,
@@ -423,8 +419,6 @@ export function bulkInsertSpotImages(images: ImageRow[]): void {
       image.order_index,
       image.created_at,
       image.updated_at,
-      image.synced_at,
-      image.is_synced,
     ],
   }));
 

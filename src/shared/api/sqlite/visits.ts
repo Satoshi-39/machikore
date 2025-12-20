@@ -96,9 +96,9 @@ export function insertVisit(visit: VisitRow): void {
     `
     INSERT INTO visits (
       id, user_id, machi_id, visited_at,
-      created_at, updated_at, synced_at, is_synced
+      created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?);
     `,
     [
       visit.id,
@@ -107,8 +107,6 @@ export function insertVisit(visit: VisitRow): void {
       visit.visited_at,
       visit.created_at,
       visit.updated_at,
-      visit.synced_at,
-      visit.is_synced,
     ]
   );
 }
@@ -120,8 +118,6 @@ export function updateVisit(
   visitId: UUID,
   data: {
     visited_at?: string;
-    synced_at?: string | null;
-    is_synced?: 0 | 1;
     updated_at: string;
   }
 ): void {
@@ -131,16 +127,6 @@ export function updateVisit(
   if (data.visited_at !== undefined) {
     fields.push('visited_at = ?');
     values.push(data.visited_at);
-  }
-
-  if (data.synced_at !== undefined) {
-    fields.push('synced_at = ?');
-    values.push(data.synced_at);
-  }
-
-  if (data.is_synced !== undefined) {
-    fields.push('is_synced = ?');
-    values.push(data.is_synced);
   }
 
   fields.push('updated_at = ?');
@@ -214,26 +200,3 @@ export function getRecentVisits(userId: UUID, limit: number): VisitRow[] {
   );
 }
 
-// ===============================
-// 同期関連
-// ===============================
-
-/**
- * 未同期の訪問記録を取得
- */
-export function getUnsyncedVisits(): VisitRow[] {
-  return queryAll<VisitRow>(
-    'SELECT * FROM visits WHERE is_synced = 0 ORDER BY created_at ASC;'
-  );
-}
-
-/**
- * 訪問記録を同期済みにマーク
- */
-export function markVisitAsSynced(visitId: UUID): void {
-  const now = new Date().toISOString();
-  execute(
-    'UPDATE visits SET is_synced = 1, synced_at = ? WHERE id = ?;',
-    [now, visitId]
-  );
-}

@@ -9,7 +9,6 @@ import type { ContinentRow } from '@/shared/types/database.types';
 interface ContinentJsonData {
   id: string;
   name: string;
-  name_en: string;
   display_order: number;
 }
 
@@ -21,7 +20,6 @@ function toContinentRow(continent: ContinentJsonData): ContinentRow {
   return {
     id: continent.id,
     name: continent.name,
-    name_en: continent.name_en,
     display_order: continent.display_order,
     created_at: now,
     updated_at: now,

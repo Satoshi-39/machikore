@@ -11,22 +11,31 @@ import type { MergeDeep } from 'type-fest';
 import type { Database as DatabaseGenerated } from './supabase.generated';
 import type { ProseMirrorDoc } from './composite.types';
 
+// ===============================
+// JSON カラム用の型定義
+// ===============================
+
+/** 多言語翻訳用の型 */
+type NameTranslations = { [key: string]: string } | null;
+
 /**
  * 拡張されたDatabase型
  *
- * JSONカラム（article_content, article_intro, article_outro）に
- * ProseMirrorDoc型を適用
+ * Supabase CLIが生成した型のJSONカラムを適切な型に上書き
+ * 参考: https://github.com/orgs/supabase/discussions/32925
  */
 export type Database = MergeDeep<
   DatabaseGenerated,
   {
     public: {
       Tables: {
+        // user_spots: 記事コンテンツ
         user_spots: {
           Row: { article_content: ProseMirrorDoc | null };
           Insert: { article_content?: ProseMirrorDoc | null };
           Update: { article_content?: ProseMirrorDoc | null };
         };
+        // maps: 記事のまえがき・あとがき
         maps: {
           Row: {
             article_intro: ProseMirrorDoc | null;
@@ -41,456 +50,148 @@ export type Database = MergeDeep<
             article_outro?: ProseMirrorDoc | null;
           };
         };
+        // categories: 多言語対応
+        categories: {
+          Row: { name_translations: NameTranslations };
+          Insert: { name_translations?: NameTranslations };
+          Update: { name_translations?: NameTranslations };
+        };
+        // cities: 多言語対応
+        cities: {
+          Row: { name_translations: NameTranslations };
+          Insert: { name_translations?: NameTranslations };
+          Update: { name_translations?: NameTranslations };
+        };
+        // tags: 多言語対応
+        tags: {
+          Row: { name_translations: NameTranslations };
+          Insert: { name_translations?: NameTranslations };
+          Update: { name_translations?: NameTranslations };
+        };
+        // machi: 多言語対応
+        machi: {
+          Row: {
+            name_translations: NameTranslations;
+            city_name_translations: NameTranslations;
+            prefecture_name_translations: NameTranslations;
+          };
+          Insert: {
+            name_translations?: NameTranslations;
+            city_name_translations?: NameTranslations;
+            prefecture_name_translations?: NameTranslations;
+          };
+          Update: {
+            name_translations?: NameTranslations;
+            city_name_translations?: NameTranslations;
+            prefecture_name_translations?: NameTranslations;
+          };
+        };
       };
     };
   }
 >;
 
 // ===============================
-// Type Utilities
-// ===============================
-
-/**
- * SQLite用に型を変換
- * - boolean → 0 | 1
- * - その他はそのまま
- */
-type ToSQLiteType<T> =
-  T extends string | null ? T :
-  T extends number | null ? T :
-  T extends boolean ? 0 | 1 :
-  T extends boolean | null ? 0 | 1 | null :
-  T;
-
-/**
- * オブジェクト全体をSQLite型に変換
- */
-type ToSQLite<T> = {
-  [K in keyof T]: ToSQLiteType<T[K]>;
-};
-
-// ===============================
-// Supabase Tables (as-is)
-// ===============================
-
-export type SupabaseTables = Database['public']['Tables'];
-
-// Users
-export type SupabaseUserRow = SupabaseTables['users']['Row'];
-export type SupabaseUserInsert = SupabaseTables['users']['Insert'];
-export type SupabaseUserUpdate = SupabaseTables['users']['Update'];
-
-// NOTE: 以下は将来的にSupabaseから生成される型
-// 現在は街コレ用のSupabaseプロジェクトを作成していないため、一時的にコメントアウト
-// 新しいSupabaseプロジェクト作成後、これらの型を有効化する
-
-// // Visits
-// export type SupabaseVisitRow = SupabaseTables['visits']['Row'];
-// export type SupabaseVisitInsert = SupabaseTables['visits']['Insert'];
-// export type SupabaseVisitUpdate = SupabaseTables['visits']['Update'];
-
-// // Maps
-// export type SupabaseMapRow = SupabaseTables['maps']['Row'];
-// export type SupabaseMapInsert = SupabaseTables['maps']['Insert'];
-// export type SupabaseMapUpdate = SupabaseTables['maps']['Update'];
-
-// // Spots
-// export type SupabaseSpotRow = SupabaseTables['spots']['Row'];
-// export type SupabaseSpotInsert = SupabaseTables['spots']['Insert'];
-// export type SupabaseSpotUpdate = SupabaseTables['spots']['Update'];
-
-// // Images
-// export type SupabaseImageRow = SupabaseTables['images']['Row'];
-// export type SupabaseImageInsert = SupabaseTables['images']['Insert'];
-// export type SupabaseImageUpdate = SupabaseTables['images']['Update'];
-
-// // Follows
-// export type SupabaseFollowRow = SupabaseTables['follows']['Row'];
-// export type SupabaseFollowInsert = SupabaseTables['follows']['Insert'];
-// export type SupabaseFollowUpdate = SupabaseTables['follows']['Update'];
-
-// // Likes
-// export type SupabaseLikeRow = SupabaseTables['likes']['Row'];
-// export type SupabaseLikeInsert = SupabaseTables['likes']['Insert'];
-// export type SupabaseLikeUpdate = SupabaseTables['likes']['Update'];
-
-// // Comments
-// export type SupabaseCommentRow = SupabaseTables['comments']['Row'];
-// export type SupabaseCommentInsert = SupabaseTables['comments']['Insert'];
-// export type SupabaseCommentUpdate = SupabaseTables['comments']['Update'];
-
-// // Bookmarks
-// export type SupabaseBookmarkRow = SupabaseTables['bookmarks']['Row'];
-// export type SupabaseBookmarkInsert = SupabaseTables['bookmarks']['Insert'];
-// export type SupabaseBookmarkUpdate = SupabaseTables['bookmarks']['Update'];
-
-// ===============================
-// SQLite Tables (converted)
+// Supabase Tables (Database型から派生)
 // ===============================
 
 // Users
-export type UserRow = ToSQLite<SupabaseUserRow> & {
-  synced_at: string | null;
-  is_synced: 0 | 1;
-};
-export type UserInsert = ToSQLite<SupabaseUserInsert> & {
-  synced_at?: string | null;
-  is_synced?: 0 | 1;
-};
-export type UserUpdate = ToSQLite<SupabaseUserUpdate> & {
-  synced_at?: string | null;
-  is_synced?: 0 | 1;
-};
-
-// NOTE: 以下は一時的にローカル定義。Supabaseプロジェクト作成後、上記のSupabase型から生成する
+export type UserRow = Database['public']['Tables']['users']['Row'];
+export type UserInsert = Database['public']['Tables']['users']['Insert'];
+export type UserUpdate = Database['public']['Tables']['users']['Update'];
 
 // Maps
-// tagsは中間テーブル(map_tags)で管理
-export interface MapRow {
-  id: string;
-  user_id: string;
-  name: string;
-  description: string | null;
-  category: string | null;
-  is_public: 0 | 1;
-  is_default: 0 | 1;
-  is_official: 0 | 1;
-  thumbnail_url: string | null;
-  theme_color: string;
-  spots_count: number;
-  likes_count: number;
-  bookmarks_count: number;
-  comments_count: number;
-  created_at: string;
-  updated_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type MapInsert = Partial<MapRow> & Pick<MapRow, 'id' | 'user_id' | 'name' | 'created_at' | 'updated_at'>;
-export type MapUpdate = Partial<Omit<MapRow, 'id' | 'created_at'>>;
+export type MapRow = Database['public']['Tables']['maps']['Row'];
+export type MapInsert = Database['public']['Tables']['maps']['Insert'];
+export type MapUpdate = Database['public']['Tables']['maps']['Update'];
 
-// Master Spots (マスタースポット - 正規化された場所データ)
-export interface MasterSpotRow {
-  id: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-  google_place_id: string | null; // Google Place ID
-  google_formatted_address: string | null; // 完全住所（コピー用）: 日本、〒150-0041 東京都渋谷区神南1丁目21−1
-  google_short_address: string | null; // 短縮住所（表示用）: 東京都渋谷区神南
-  google_types: string | null; // JSON string array: ["restaurant", "food"]
-  google_phone_number: string | null; // 国際電話番号
-  google_website_uri: string | null; // ウェブサイトURL
-  google_rating: number | null; // 評価（1-5）
-  google_user_rating_count: number | null; // レビュー数
-  created_at: string;
-  updated_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type MasterSpotInsert = Partial<MasterSpotRow> & Pick<MasterSpotRow, 'id' | 'name' | 'latitude' | 'longitude' | 'created_at' | 'updated_at'>;
-export type MasterSpotUpdate = Partial<Omit<MasterSpotRow, 'id' | 'created_at'>>;
+// Master Spots
+export type MasterSpotRow = Database['public']['Tables']['master_spots']['Row'];
+export type MasterSpotInsert = Database['public']['Tables']['master_spots']['Insert'];
+export type MasterSpotUpdate = Database['public']['Tables']['master_spots']['Update'];
 
+// User Spots (旧Spots)
+export type UserSpotRow = Database['public']['Tables']['user_spots']['Row'];
+export type UserSpotInsert = Database['public']['Tables']['user_spots']['Insert'];
+export type UserSpotUpdate = Database['public']['Tables']['user_spots']['Update'];
+// 後方互換性のためにSpotRowもエクスポート
+export type SpotRow = UserSpotRow;
+export type SpotInsert = UserSpotInsert;
+export type SpotUpdate = UserSpotUpdate;
 
-// Spots (ユーザースポット - master_spotsへの参照 + ユーザーカスタマイズ)
-// tagsは中間テーブル(spot_tags)で管理
-export interface SpotRow {
-  id: string;
-  user_id: string;
-  map_id: string;
-  master_spot_id: string; // master_spotsテーブルへの参照
-  machi_id: string | null; // 街が見つからない場合はnull
-  custom_name: string | null; // ユーザー独自の名前（任意）
-  description: string | null; // 旧memoカラム
-  images_count: number;
-  likes_count: number;
-  bookmarks_count: number;
-  comments_count: number;
-  order_index: number;
-  created_at: string;
-  updated_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type SpotInsert = Partial<SpotRow> & Pick<SpotRow, 'id' | 'user_id' | 'map_id' | 'master_spot_id' | 'machi_id' | 'created_at' | 'updated_at'>;
-export type SpotUpdate = Partial<Omit<SpotRow, 'id' | 'created_at'>>;
+// Visits
+export type VisitRow = Database['public']['Tables']['visits']['Row'];
+export type VisitInsert = Database['public']['Tables']['visits']['Insert'];
+export type VisitUpdate = Database['public']['Tables']['visits']['Update'];
 
-// SpotWithMasterSpot (JOINクエリ用 - spotsとmaster_spotsを結合したデータ)
-export interface SpotWithMasterSpot extends SpotRow {
-  // master_spotsからの追加フィールド
-  name: string; // master_spots.name (基本名称)
-  latitude: number; // master_spots.latitude
-  longitude: number; // master_spots.longitude
-  google_formatted_address: string | null; // master_spots.google_formatted_address (完全住所)
-  google_short_address: string | null; // master_spots.google_short_address (短縮住所)
-  google_place_id: string | null; // master_spots.google_place_id
-  google_types: string | null; // master_spots.google_types
-  google_phone_number: string | null; // master_spots.google_phone_number
-  google_website_uri: string | null; // master_spots.google_website_uri
-  google_rating: number | null; // master_spots.google_rating
-  google_user_rating_count: number | null; // master_spots.google_user_rating_count
-}
+// Images
+export type ImageRow = Database['public']['Tables']['images']['Row'];
+export type ImageInsert = Database['public']['Tables']['images']['Insert'];
+export type ImageUpdate = Database['public']['Tables']['images']['Update'];
 
-// Visits (街訪問記録 - シンプルな訪問済み/未訪問管理)
-export interface VisitRow {
-  id: string;
-  user_id: string;
-  machi_id: string;
-  visited_at: string;
-  created_at: string;
-  updated_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type VisitInsert = Partial<VisitRow> & Pick<VisitRow, 'id' | 'user_id' | 'machi_id' | 'visited_at' | 'created_at' | 'updated_at'>;
-export type VisitUpdate = Partial<Omit<VisitRow, 'id' | 'created_at'>>;
+// Follows
+export type FollowRow = Database['public']['Tables']['follows']['Row'];
+export type FollowInsert = Database['public']['Tables']['follows']['Insert'];
+export type FollowUpdate = Database['public']['Tables']['follows']['Update'];
 
-// Images (スポット画像)
-export interface ImageRow {
-  id: string;
-  user_spot_id: string;
-  local_path: string | null;
-  cloud_path: string | null;
-  width: number | null;
-  height: number | null;
-  file_size: number | null;
-  order_index: number;
-  created_at: string;
-  updated_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type ImageInsert = Partial<ImageRow> & Pick<ImageRow, 'id' | 'user_spot_id' | 'created_at' | 'updated_at'>;
-export type ImageUpdate = Partial<Omit<ImageRow, 'id' | 'created_at'>>;
+// Likes
+export type LikeRow = Database['public']['Tables']['likes']['Row'];
+export type LikeInsert = Database['public']['Tables']['likes']['Insert'];
+export type LikeUpdate = Database['public']['Tables']['likes']['Update'];
 
-// Follows (フォロー関係)
-export interface FollowRow {
-  id: string;
-  follower_id: string; // フォローする人
-  followee_id: string; // フォローされる人
-  created_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type FollowInsert = Partial<FollowRow> & Pick<FollowRow, 'id' | 'follower_id' | 'followee_id' | 'created_at'>;
-export type FollowUpdate = Partial<Omit<FollowRow, 'id' | 'created_at'>>;
+// Comments
+export type CommentRow = Database['public']['Tables']['comments']['Row'];
+export type CommentInsert = Database['public']['Tables']['comments']['Insert'];
+export type CommentUpdate = Database['public']['Tables']['comments']['Update'];
 
-// Likes (マップ・スポットへのいいね)
-export interface LikeRow {
-  id: string;
-  user_id: string;
-  map_id: string | null;
-  user_spot_id: string | null;
-  created_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type LikeInsert = Partial<LikeRow> & Pick<LikeRow, 'id' | 'user_id' | 'created_at'>;
-export type LikeUpdate = Partial<Omit<LikeRow, 'id' | 'created_at'>>;
+// Bookmarks
+export type BookmarkRow = Database['public']['Tables']['bookmarks']['Row'];
+export type BookmarkInsert = Database['public']['Tables']['bookmarks']['Insert'];
+export type BookmarkUpdate = Database['public']['Tables']['bookmarks']['Update'];
 
-// Comments (マップ・スポットへのコメント)
-export interface CommentRow {
-  id: string;
-  user_id: string;
-  map_id: string | null;
-  user_spot_id: string | null;
-  content: string;
-  created_at: string;
-  updated_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type CommentInsert = Partial<CommentRow> & Pick<CommentRow, 'id' | 'user_id' | 'content' | 'created_at' | 'updated_at'>;
-export type CommentUpdate = Partial<Omit<CommentRow, 'id' | 'created_at'>>;
+// ===============================
+// 地理マスターテーブル（Database型から派生）
+// ===============================
+
+// Continents (大陸)
+export type ContinentRow = Database['public']['Tables']['continents']['Row'];
+
+// Countries (国)
+export type CountryRow = Database['public']['Tables']['countries']['Row'];
+
+// Regions (地方)
+export type RegionRow = Database['public']['Tables']['regions']['Row'];
+
+// Prefectures (都道府県)
+export type PrefectureRow = Database['public']['Tables']['prefectures']['Row'];
+
+// Cities (市区町村)
+export type CityRow = Database['public']['Tables']['cities']['Row'];
+
+// Machi (街)
+export type MachiRow = Database['public']['Tables']['machi']['Row'];
 
 // Schedules (予定)
-export interface ScheduleRow {
-  id: string;
-  user_id: string;
-  machi_id: string;
-  scheduled_at: string;
-  title: string;
-  memo: string | null;
-  is_completed: 0 | 1;
-  completed_at: string | null;
-  created_at: string;
-  updated_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type ScheduleInsert = Partial<ScheduleRow> & Pick<ScheduleRow, 'id' | 'user_id' | 'machi_id' | 'scheduled_at' | 'title' | 'created_at' | 'updated_at'>;
-export type ScheduleUpdate = Partial<Omit<ScheduleRow, 'id' | 'created_at'>>;
-
-// Bookmarks (マップ・スポットのブックマーク)
-export interface BookmarkRow {
-  id: string;
-  user_id: string;
-  map_id: string | null;
-  user_spot_id: string | null;
-  created_at: string;
-  synced_at: string | null;
-  is_synced: 0 | 1;
-}
-export type BookmarkInsert = Partial<BookmarkRow> & Pick<BookmarkRow, 'id' | 'user_id' | 'created_at'>;
-export type BookmarkUpdate = Partial<Omit<BookmarkRow, 'id' | 'created_at'>>;
+export type ScheduleRow = Database['public']['Tables']['schedules']['Row'];
+export type ScheduleInsert = Database['public']['Tables']['schedules']['Insert'];
+export type ScheduleUpdate = Database['public']['Tables']['schedules']['Update'];
 
 // ===============================
-// Local-only Tables
+// 複合型（JOINなど）
 // ===============================
 
 /**
- * Continent (大陸マスター)
+ * user_spots + master_spots を結合した型
  */
-export interface ContinentRow {
-  id: string;              // "east_asia", "europe"
-  name: string;            // "東アジア", "ヨーロッパ"
-  name_en: string;         // "East Asia", "Europe"
-  display_order: number;   // 表示順
-  created_at: string;
-  updated_at: string;
-}
-
-/**
- * Country (国マスター)
- */
-export interface CountryRow {
-  id: string;              // "japan", "usa"
-  name: string;            // "日本", "アメリカ"
-  name_en: string;         // "Japan", "United States"
-  name_kana: string;       // "にほん", "あめりか" (日本以外は空文字)
-  latitude: number;        // 中心座標の緯度
-  longitude: number;       // 中心座標の経度
-  country_code: string;    // "jp", "us"
-  continent_id: string;    // "east_asia", "europe" (外部キー → continents.id)
-  created_at: string;
-  updated_at: string;
-}
-
-/**
- * Region (地方マスター)
- */
-export interface RegionRow {
-  id: string;              // "hokkaido", "tohoku", "kanto"
-  name: string;            // "北海道", "東北", "関東"
-  name_kana: string;       // "ほっかいどう", "とうほく"
-  name_translations: string | null; // JSON: {"en": "Hokkaido", "zh": "北海道"}
-  latitude: number;        // 中心座標の緯度
-  longitude: number;       // 中心座標の経度
-  country_code: string;    // "jp"
-  display_order: number;   // 1, 2, 3...
-  created_at: string;
-  updated_at: string;
-}
-
-/**
- * Prefecture (都道府県マスター)
- */
-export interface PrefectureRow {
-  id: string;              // "tokyo", "kanagawa"
-  name: string;            // "東京都", "神奈川県"
-  name_kana: string;       // "とうきょうと"
-  name_translations: string | null; // JSON: {"en": "Tokyo", "zh": "东京"}
-  region_id: string | null; // "kanto", "kinki" (外部キー → regions.id) - Optional for countries without region concept
-  latitude: number | null; // 中心座標の緯度
-  longitude: number | null; // 中心座標の経度
-  country_code: string;    // "jp"
-  created_at: string;
-  updated_at: string;
-}
-
-/**
- * City (市区町村マスター)
- */
-export interface CityRow {
-  id: string;              // "shibuya", "minato"
-  prefecture_id: string;   // "tokyo"
-  name: string;            // "渋谷区", "港区"
-  name_kana: string;       // "しぶやく"
-  name_translations: string | null; // JSON: {"en": "Shibuya", "zh": "涩谷"}
-  type: string;            // "区", "市", "町", "村"
-  latitude: number | null; // 中心座標の緯度
-  longitude: number | null; // 中心座標の経度
-  tile_id: string | null;  // タイルID: "559_142" (lng/0.25 + "_" + lat/0.25)
-  country_code: string;    // "jp"
-  created_at: string;
-  updated_at: string;
-}
-
-/**
- * Machi (ローカルマスターデータ)
- * Supabaseには存在しない、アプリ専用のマスターデータ
- */
-export interface MachiRow {
-  id: string;
+export type SpotWithMasterSpot = UserSpotRow & {
   name: string;
-  name_kana: string;
-  name_translations: string | null; // JSON: {"en": "Shibuya", "zh": "涩谷"}
   latitude: number;
   longitude: number;
-  lines: string | null;      // JSON array: [{"ja": "JR山手線", "en": "JR Yamanote Line"}, ...]
-  prefecture_id: string;     // "tokyo", "kanagawa"
-  city_id: string | null;    // "shibuya", "minato"
-  tile_id: string | null;    // タイルID: "559_142" (lng/0.25 + "_" + lat/0.25)
-  country_code: string;      // "jp"
-  prefecture_name: string;   // "東京都" (denormalized for performance)
-  prefecture_name_translations: string | null; // JSON: {"en": "Tokyo", "zh": "东京"}
-  city_name: string | null;  // "渋谷区" (denormalized for performance)
-  city_name_translations: string | null; // JSON: {"en": "Shibuya", "zh": "涩谷"}
-  created_at: string;
-  updated_at: string;
-}
-
-/**
- * Sync Queue (ローカル同期キュー)
- * Note: SyncQueueRow, SyncOperationType は sync.types.ts に定義されています
- */
-
-/**
- * App Settings (ローカル設定)
- */
-export interface AppSettingRow {
-  key: string;
-  value: string;
-  updated_at: string;
-}
-
-// ===============================
-// Helper Functions
-// ===============================
-
-/**
- * SQLite boolean (0 | 1) → TypeScript boolean
- */
-export function sqliteBooleanToBoolean(value: 0 | 1 | null): boolean | null {
-  if (value === null) return null;
-  return value === 1;
-}
-
-/**
- * TypeScript boolean → SQLite boolean (0 | 1)
- */
-export function booleanToSQLiteBoolean(value: boolean | null): 0 | 1 | null {
-  if (value === null) return null;
-  return value ? 1 : 0;
-}
-
-/**
- * Convert Supabase Row to SQLite Row
- * Supabase: boolean | null → SQLite: 0 | 1 | null
- * NOTE: 新しいSupabaseプロジェクト作成後、必要に応じて変換関数を追加
- */
-
-/**
- * Supabase VisitRow → SQLite VisitRow
- * TODO: 現在は変換不要。Supabaseプロジェクト作成後、型変換ロジックを実装
- */
-export function convertSupabaseVisitToSQLite(visit: any): VisitRow {
-  return visit as VisitRow;
-}
-
-// ===============================
-// Re-export common types
-// ===============================
-
-// Database型は上記でMergeDeepを使って拡張済み
-// DatabaseGeneratedは必要に応じてsupabase.generatedから直接インポート可能
+  address: string | null;
+  google_place_id: string | null;
+  google_types: string | null;
+  google_phone_number: string | null;
+  google_website_uri: string | null;
+  google_rating: number | null;
+  google_user_rating_count: number | null;
+};

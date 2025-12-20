@@ -4,6 +4,7 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
+import type { Database } from '@/shared/types/database.types';
 
 // ===============================
 // 型定義
@@ -14,27 +15,8 @@ export type TransportHubType = 'station' | 'airport' | 'ferry_terminal' | 'bus_t
 export type StationSubtype = 'jr' | 'metro' | 'toei' | 'subway' | 'private';
 export type AirportSubtype = 'international' | 'domestic' | 'military' | 'heliport';
 
-export interface TransportHubRow {
-  id: string;
-  osm_id: number | null;
-  osm_type: string | null;
-  prefecture_id: string;
-  city_id: string | null;
-  type: TransportHubType;
-  subtype: string | null;
-  name: string;
-  name_kana: string | null;
-  name_en: string | null;
-  operator: string | null;
-  network: string | null;
-  ref: string | null;
-  latitude: number;
-  longitude: number;
-  tile_id: string;
-  country_code: string;
-  created_at: string;
-  updated_at: string;
-}
+// Database型から取得
+export type TransportHubRow = Database['public']['Tables']['transport_hubs']['Row'];
 
 // ===============================
 // 交通機関データ取得

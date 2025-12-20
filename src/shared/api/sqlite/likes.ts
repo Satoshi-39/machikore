@@ -75,8 +75,8 @@ export function toggleLike(userId: UUID, postId: UUID): boolean {
 
     execute(
       `
-      INSERT INTO likes (id, user_id, post_id, created_at, synced_at, is_synced)
-      VALUES (?, ?, ?, ?, NULL, 0);
+      INSERT INTO likes (id, user_id, post_id, created_at)
+      VALUES (?, ?, ?, ?);
       `,
       [likeId, userId, postId, now]
     );

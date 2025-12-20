@@ -2,55 +2,46 @@
   {
     "id": "east_asia",
     "name": "東アジア",
-    "name_en": "East Asia",
     "display_order": 1
   },
   {
     "id": "southeast_asia",
     "name": "東南アジア",
-    "name_en": "Southeast Asia",
     "display_order": 2
   },
   {
     "id": "south_asia",
     "name": "南アジア",
-    "name_en": "South Asia",
     "display_order": 3
   },
   {
     "id": "middle_east",
     "name": "中東",
-    "name_en": "Middle East",
     "display_order": 4
   },
   {
     "id": "europe",
     "name": "ヨーロッパ",
-    "name_en": "Europe",
     "display_order": 5
   },
   {
     "id": "north_america",
     "name": "北アメリカ",
-    "name_en": "North America",
     "display_order": 6
   },
   {
     "id": "south_america",
     "name": "南アメリカ",
-    "name_en": "South America",
     "display_order": 7
   },
   {
     "id": "oceania",
     "name": "オセアニア",
-    "name_en": "Oceania",
     "display_order": 8
   },
   {
     "id": "africa",
     "name": "アフリカ",
-    "name_en": "Africa",
     "display_order": 9
   }
 ]

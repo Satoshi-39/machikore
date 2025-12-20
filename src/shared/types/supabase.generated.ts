@@ -365,8 +365,8 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
-          is_public: boolean | null
-          maps_count: number | null
+          is_public: boolean
+          maps_count: number
           name: string
           order_index: number | null
           thumbnail_url: string | null
@@ -378,8 +378,8 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
-          is_public?: boolean | null
-          maps_count?: number | null
+          is_public?: boolean
+          maps_count?: number
           name: string
           order_index?: number | null
           thumbnail_url?: string | null
@@ -391,8 +391,8 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
-          is_public?: boolean | null
-          maps_count?: number | null
+          is_public?: boolean
+          maps_count?: number
           name?: string
           order_index?: number | null
           thumbnail_url?: string | null
@@ -526,41 +526,73 @@ export type Database = {
           },
         ]
       }
+      continents: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       countries: {
         Row: {
+          continent_id: string | null
           country_code: string
           created_at: string
           id: string
           latitude: number
           longitude: number
           name: string
-          name_en: string
           name_kana: string
           updated_at: string
         }
         Insert: {
+          continent_id?: string | null
           country_code: string
           created_at?: string
           id: string
           latitude: number
           longitude: number
           name: string
-          name_en: string
           name_kana?: string
           updated_at?: string
         }
         Update: {
+          continent_id?: string | null
           country_code?: string
           created_at?: string
           id?: string
           latitude?: number
           longitude?: number
           name?: string
-          name_en?: string
           name_kana?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "countries_continent_id_fkey"
+            columns: ["continent_id"]
+            isOneToOne: false
+            referencedRelation: "continents"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       featured_carousel_items: {
         Row: {
@@ -759,7 +791,6 @@ export type Database = {
           created_at: string | null
           id: string
           latitude: number
-          lines: Json | null
           longitude: number
           name: string
           name_kana: string | null
@@ -780,7 +811,6 @@ export type Database = {
           created_at?: string | null
           id: string
           latitude: number
-          lines?: Json | null
           longitude: number
           name: string
           name_kana?: string | null
@@ -801,7 +831,6 @@ export type Database = {
           created_at?: string | null
           id?: string
           latitude?: number
-          lines?: Json | null
           longitude?: number
           name?: string
           name_kana?: string | null
@@ -871,20 +900,20 @@ export type Database = {
         Row: {
           article_intro: Json | null
           article_outro: Json | null
-          bookmarks_count: number | null
+          bookmarks_count: number
           category: string | null
           category_id: string | null
-          comments_count: number | null
+          comments_count: number
           created_at: string
           description: string | null
           id: string
-          is_article_public: boolean | null
-          is_default: boolean | null
-          is_official: boolean | null
-          is_public: boolean | null
-          likes_count: number | null
+          is_article_public: boolean
+          is_default: boolean
+          is_official: boolean
+          is_public: boolean
+          likes_count: number
           name: string
-          spots_count: number | null
+          spots_count: number
           thumbnail_url: string | null
           updated_at: string
           user_id: string
@@ -892,20 +921,20 @@ export type Database = {
         Insert: {
           article_intro?: Json | null
           article_outro?: Json | null
-          bookmarks_count?: number | null
+          bookmarks_count?: number
           category?: string | null
           category_id?: string | null
-          comments_count?: number | null
+          comments_count?: number
           created_at?: string
           description?: string | null
           id?: string
-          is_article_public?: boolean | null
-          is_default?: boolean | null
-          is_official?: boolean | null
-          is_public?: boolean | null
-          likes_count?: number | null
+          is_article_public?: boolean
+          is_default?: boolean
+          is_official?: boolean
+          is_public?: boolean
+          likes_count?: number
           name: string
-          spots_count?: number | null
+          spots_count?: number
           thumbnail_url?: string | null
           updated_at?: string
           user_id: string
@@ -913,20 +942,20 @@ export type Database = {
         Update: {
           article_intro?: Json | null
           article_outro?: Json | null
-          bookmarks_count?: number | null
+          bookmarks_count?: number
           category?: string | null
           category_id?: string | null
-          comments_count?: number | null
+          comments_count?: number
           created_at?: string
           description?: string | null
           id?: string
-          is_article_public?: boolean | null
-          is_default?: boolean | null
-          is_official?: boolean | null
-          is_public?: boolean | null
-          likes_count?: number | null
+          is_article_public?: boolean
+          is_default?: boolean
+          is_official?: boolean
+          is_public?: boolean
+          likes_count?: number
           name?: string
-          spots_count?: number | null
+          spots_count?: number
           thumbnail_url?: string | null
           updated_at?: string
           user_id?: string
@@ -1129,35 +1158,38 @@ export type Database = {
       }
       prefectures: {
         Row: {
+          country_code: string
           created_at: string
           id: string
           latitude: number | null
           longitude: number | null
           name: string
-          name_en: string | null
           name_kana: string
+          name_translations: Json | null
           region_id: string
           updated_at: string
         }
         Insert: {
+          country_code?: string
           created_at?: string
           id: string
           latitude?: number | null
           longitude?: number | null
           name: string
-          name_en?: string | null
           name_kana: string
+          name_translations?: Json | null
           region_id: string
           updated_at?: string
         }
         Update: {
+          country_code?: string
           created_at?: string
           id?: string
           latitude?: number | null
           longitude?: number | null
           name?: string
-          name_en?: string | null
           name_kana?: string
+          name_translations?: Json | null
           region_id?: string
           updated_at?: string
         }
@@ -1177,11 +1209,11 @@ export type Database = {
           created_at: string
           display_order: number
           id: string
-          latitude: number | null
-          longitude: number | null
+          latitude: number
+          longitude: number
           name: string
-          name_en: string | null
           name_kana: string
+          name_translations: Json | null
           updated_at: string
         }
         Insert: {
@@ -1189,11 +1221,11 @@ export type Database = {
           created_at?: string
           display_order: number
           id: string
-          latitude?: number | null
-          longitude?: number | null
+          latitude: number
+          longitude: number
           name: string
-          name_en?: string | null
           name_kana: string
+          name_translations?: Json | null
           updated_at?: string
         }
         Update: {
@@ -1201,11 +1233,11 @@ export type Database = {
           created_at?: string
           display_order?: number
           id?: string
-          latitude?: number | null
-          longitude?: number | null
+          latitude?: number
+          longitude?: number
           name?: string
-          name_en?: string | null
           name_kana?: string
+          name_translations?: Json | null
           updated_at?: string
         }
         Relationships: []
@@ -1264,6 +1296,60 @@ export type Database = {
           {
             foreignKeyName: "reports_resolved_by_fkey"
             columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedules: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          is_completed: boolean
+          machi_id: string
+          memo: string | null
+          scheduled_at: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          is_completed?: boolean
+          machi_id: string
+          memo?: string | null
+          scheduled_at: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          is_completed?: boolean
+          machi_id?: string
+          memo?: string | null
+          scheduled_at?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedules_machi_id_fkey"
+            columns: ["machi_id"]
+            isOneToOne: false
+            referencedRelation: "machi"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "schedules_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -1551,7 +1637,6 @@ export type Database = {
           latitude: number
           longitude: number
           name: string
-          name_en: string | null
           name_kana: string | null
           network: string | null
           operator: string | null
@@ -1572,7 +1657,6 @@ export type Database = {
           latitude: number
           longitude: number
           name: string
-          name_en?: string | null
           name_kana?: string | null
           network?: string | null
           operator?: string | null
@@ -1593,7 +1677,6 @@ export type Database = {
           latitude?: number
           longitude?: number
           name?: string
-          name_en?: string | null
           name_kana?: string | null
           network?: string | null
           operator?: string | null
@@ -1685,23 +1768,23 @@ export type Database = {
       user_spots: {
         Row: {
           article_content: Json | null
-          bookmarks_count: number | null
+          bookmarks_count: number
           color: string | null
-          comments_count: number | null
+          comments_count: number
           created_at: string
           custom_name: string
           description: string | null
           google_formatted_address: string | null
           google_short_address: string | null
           id: string
-          images_count: number | null
+          images_count: number
           latitude: number | null
-          likes_count: number | null
+          likes_count: number
           longitude: number | null
           machi_id: string | null
           map_id: string
           master_spot_id: string | null
-          order_index: number | null
+          order_index: number
           prefecture_id: string | null
           spot_color: string | null
           updated_at: string
@@ -1709,23 +1792,23 @@ export type Database = {
         }
         Insert: {
           article_content?: Json | null
-          bookmarks_count?: number | null
+          bookmarks_count?: number
           color?: string | null
-          comments_count?: number | null
+          comments_count?: number
           created_at?: string
           custom_name: string
           description?: string | null
           google_formatted_address?: string | null
           google_short_address?: string | null
           id?: string
-          images_count?: number | null
+          images_count?: number
           latitude?: number | null
-          likes_count?: number | null
+          likes_count?: number
           longitude?: number | null
           machi_id?: string | null
           map_id: string
           master_spot_id?: string | null
-          order_index?: number | null
+          order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
           updated_at?: string
@@ -1733,23 +1816,23 @@ export type Database = {
         }
         Update: {
           article_content?: Json | null
-          bookmarks_count?: number | null
+          bookmarks_count?: number
           color?: string | null
-          comments_count?: number | null
+          comments_count?: number
           created_at?: string
           custom_name?: string
           description?: string | null
           google_formatted_address?: string | null
           google_short_address?: string | null
           id?: string
-          images_count?: number | null
+          images_count?: number
           latitude?: number | null
-          likes_count?: number | null
+          likes_count?: number
           longitude?: number | null
           machi_id?: string | null
           map_id?: string
           master_spot_id?: string | null
-          order_index?: number | null
+          order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
           updated_at?: string

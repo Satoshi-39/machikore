@@ -23,12 +23,10 @@ export function createScheduleData(params: CreateScheduleParams): ScheduleRow {
     scheduled_at: params.scheduledAt,
     title: params.title,
     memo: params.memo || null,
-    is_completed: 0,
+    is_completed: false,
     completed_at: null,
     created_at: now,
     updated_at: now,
-    synced_at: null,
-    is_synced: 0,
   };
 }
 
@@ -152,7 +150,7 @@ export function sortSchedulesByDate(schedules: ScheduleRow[]): ScheduleRow[] {
 export function filterCompletedSchedules(
   schedules: ScheduleRow[]
 ): ScheduleRow[] {
-  return schedules.filter((schedule) => schedule.is_completed === 1);
+  return schedules.filter((schedule) => schedule.is_completed);
 }
 
 /**
@@ -161,5 +159,5 @@ export function filterCompletedSchedules(
 export function filterIncompleteSchedules(
   schedules: ScheduleRow[]
 ): ScheduleRow[] {
-  return schedules.filter((schedule) => schedule.is_completed === 0);
+  return schedules.filter((schedule) => !schedule.is_completed);
 }

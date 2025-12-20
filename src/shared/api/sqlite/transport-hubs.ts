@@ -78,10 +78,10 @@ export function insertTransportHub(hub: TransportHubRow): void {
     `
     INSERT INTO transport_hubs (
       id, osm_id, osm_type, prefecture_id, city_id, type, subtype,
-      name, name_kana, name_en, operator, network, ref,
+      name, name_kana, operator, network, ref,
       latitude, longitude, tile_id, country_code, created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       hub.id,
@@ -93,7 +93,6 @@ export function insertTransportHub(hub: TransportHubRow): void {
       hub.subtype,
       hub.name,
       hub.name_kana,
-      hub.name_en,
       hub.operator,
       hub.network,
       hub.ref,
@@ -115,10 +114,10 @@ export function bulkInsertTransportHubs(hubs: TransportHubRow[]): void {
     sql: `
       INSERT OR REPLACE INTO transport_hubs (
         id, osm_id, osm_type, prefecture_id, city_id, type, subtype,
-        name, name_kana, name_en, operator, network, ref,
+        name, name_kana, operator, network, ref,
         latitude, longitude, tile_id, country_code, created_at, updated_at
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     params: [
       hub.id,
@@ -130,7 +129,6 @@ export function bulkInsertTransportHubs(hubs: TransportHubRow[]): void {
       hub.subtype,
       hub.name,
       hub.name_kana,
-      hub.name_en,
       hub.operator,
       hub.network,
       hub.ref,

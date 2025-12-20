@@ -26,7 +26,7 @@ export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
           prefecture.id,
           prefecture.name,
           prefecture.name_kana,
-          prefecture.name_translations,
+          prefecture.name_translations ? JSON.stringify(prefecture.name_translations) : null,
           prefecture.region_id,
           prefecture.latitude,
           prefecture.longitude,

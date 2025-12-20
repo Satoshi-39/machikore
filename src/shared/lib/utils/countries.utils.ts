@@ -19,7 +19,6 @@ import africaCountries from '@/shared/assets/data/countries/africa.json';
 interface CountryJsonData {
   id: string;
   name: string;
-  name_en: string;
   name_kana: string;
   latitude: number;
   longitude: number;
@@ -47,7 +46,6 @@ function toCountryRow(country: CountryJsonData, continentId: string): CountryRow
   return {
     id: country.id,
     name: country.name,
-    name_en: country.name_en,
     name_kana: country.name_kana,
     latitude: country.latitude,
     longitude: country.longitude,

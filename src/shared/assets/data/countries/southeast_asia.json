@@ -2,7 +2,6 @@
   {
     "id": "thailand",
     "name": "タイ",
-    "name_en": "Thailand",
     "name_kana": "",
     "latitude": 15.87,
     "longitude": 100.9925,
@@ -11,7 +10,6 @@
   {
     "id": "vietnam",
     "name": "ベトナム",
-    "name_en": "Vietnam",
     "name_kana": "",
     "latitude": 14.0583,
     "longitude": 108.2772,
@@ -20,7 +18,6 @@
   {
     "id": "singapore",
     "name": "シンガポール",
-    "name_en": "Singapore",
     "name_kana": "",
     "latitude": 1.3521,
     "longitude": 103.8198,
@@ -29,7 +26,6 @@
   {
     "id": "malaysia",
     "name": "マレーシア",
-    "name_en": "Malaysia",
     "name_kana": "",
     "latitude": 4.2105,
     "longitude": 101.9758,
@@ -38,7 +34,6 @@
   {
     "id": "indonesia",
     "name": "インドネシア",
-    "name_en": "Indonesia",
     "name_kana": "",
     "latitude": -0.7893,
     "longitude": 113.9213,
@@ -47,7 +42,6 @@
   {
     "id": "philippines",
     "name": "フィリピン",
-    "name_en": "Philippines",
     "name_kana": "",
     "latitude": 12.8797,
     "longitude": 121.774,
@@ -56,7 +50,6 @@
   {
     "id": "cambodia",
     "name": "カンボジア",
-    "name_en": "Cambodia",
     "name_kana": "",
     "latitude": 12.5657,
     "longitude": 104.991,
@@ -65,7 +58,6 @@
   {
     "id": "myanmar",
     "name": "ミャンマー",
-    "name_en": "Myanmar",
     "name_kana": "",
     "latitude": 21.9162,
     "longitude": 95.956,
@@ -74,7 +66,6 @@
   {
     "id": "laos",
     "name": "ラオス",
-    "name_en": "Laos",
     "name_kana": "",
     "latitude": 19.8563,
     "longitude": 102.4955,
@@ -83,7 +74,6 @@
   {
     "id": "brunei",
     "name": "ブルネイ",
-    "name_en": "Brunei",
     "name_kana": "",
     "latitude": 4.5353,
     "longitude": 114.7277,
@@ -92,7 +82,6 @@
   {
     "id": "timor_leste",
     "name": "東ティモール",
-    "name_en": "Timor-Leste",
     "name_kana": "",
     "latitude": -8.8742,
     "longitude": 125.7275,

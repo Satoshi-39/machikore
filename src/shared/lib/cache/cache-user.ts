@@ -1,7 +1,7 @@
 /**
- * Supabase Auth ↔ SQLite users 同期処理
+ * Supabase Auth → SQLite users キャッシュ処理
  *
- * 認証時にSupabase Authのユーザー情報をSQLite usersテーブルに同期
+ * 認証時にSupabase Authのユーザー情報をSQLite usersテーブルにキャッシュ
  */
 
 import { insertUser, updateUser, getUserById } from '@/shared/api/sqlite';
@@ -10,7 +10,7 @@ import type { UserRow } from '@/shared/types/database.types';
 import { log } from '@/shared/config/logger';
 
 /**
- * Supabase AuthユーザーをSQLiteに同期
+ * Supabase AuthユーザーをSQLiteにキャッシュ
  *
  * ## 呼び出しタイミング
  * - サインアップ時
@@ -18,14 +18,14 @@ import { log } from '@/shared/config/logger';
  * - OAuth認証時
  * - AuthProviderの初期化時（セッション復元）
  *
- * ## 同期内容
+ * ## キャッシュ内容
  * - Supabase Auth user_metadata → SQLite users
  * - 新規ユーザー: insertUser
  * - 既存ユーザー: updateUser（usernameは保持）
  *
  * @param user - オプション。指定された場合はこのユーザーを使用し、getCurrentUser()を呼ばない
  */
-export async function syncUserToSQLite(user?: any): Promise<void> {
+export async function cacheUserToSQLite(user?: any): Promise<void> {
   try {
     let supabaseUser = user;
 
@@ -34,7 +34,7 @@ export async function syncUserToSQLite(user?: any): Promise<void> {
     }
 
     if (!supabaseUser) {
-      log.warn('[syncUser] Supabaseユーザーが見つかりません');
+      log.warn('[cacheUser] Supabaseユーザーが見つかりません');
       return;
     }
 
@@ -88,21 +88,19 @@ export async function syncUserToSQLite(user?: any): Promise<void> {
         display_name: displayName,
         avatar_url: avatarUrl,
         bio: null,
-        is_premium: 0,
+        is_premium: false,
         premium_started_at: null,
         premium_expires_at: null,
         push_token: null,
         push_token_updated_at: null,
         created_at: now,
         updated_at: now,
-        synced_at: null,
-        is_synced: 0,
       };
 
       insertUser(newUser);
     }
   } catch (error) {
-    log.error('[syncUser] 同期エラー:', error);
+    log.error('[cacheUser] キャッシュエラー:', error);
     throw error;
   }
 }

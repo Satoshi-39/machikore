@@ -2,27 +2,13 @@
  * Bookmarks API 型定義
  */
 
+import type { Database } from '@/shared/types/database.types';
+
 export type BookmarkFolderType = 'spots' | 'maps';
 
-export interface BookmarkFolder {
-  id: string;
-  user_id: string;
-  name: string;
-  color: string | null;
-  order_index: number;
-  folder_type: BookmarkFolderType;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface Bookmark {
-  id: string;
-  user_id: string;
-  map_id: string | null;
-  user_spot_id: string | null;
-  folder_id: string | null;
-  created_at: string;
-}
+// MergeDeepで拡張されたDatabase型から取得
+export type BookmarkFolder = Database['public']['Tables']['bookmark_folders']['Row'];
+export type Bookmark = Database['public']['Tables']['bookmarks']['Row'];
 
 export interface BookmarkWithDetails extends Bookmark {
   spot?: {

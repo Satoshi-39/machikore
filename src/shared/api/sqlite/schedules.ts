@@ -126,9 +126,9 @@ export function insertSchedule(schedule: ScheduleRow): void {
     `
     INSERT INTO schedules (
       id, user_id, machi_id, scheduled_at, title, memo,
-      is_completed, completed_at, created_at, updated_at, synced_at, is_synced
+      is_completed, completed_at, created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       schedule.id,
@@ -141,8 +141,6 @@ export function insertSchedule(schedule: ScheduleRow): void {
       schedule.completed_at,
       schedule.created_at,
       schedule.updated_at,
-      schedule.synced_at,
-      schedule.is_synced,
     ]
   );
 }
@@ -156,10 +154,8 @@ export function updateSchedule(
     scheduled_at?: string;
     title?: string;
     memo?: string | null;
-    is_completed?: 0 | 1;
+    is_completed?: boolean;
     completed_at?: string | null;
-    synced_at?: string | null;
-    is_synced?: 0 | 1;
     updated_at: string;
   }
 ): void {
@@ -183,22 +179,12 @@ export function updateSchedule(
 
   if (data.is_completed !== undefined) {
     fields.push('is_completed = ?');
-    values.push(data.is_completed);
+    values.push(data.is_completed ? 1 : 0);
   }
 
   if (data.completed_at !== undefined) {
     fields.push('completed_at = ?');
     values.push(data.completed_at);
-  }
-
-  if (data.synced_at !== undefined) {
-    fields.push('synced_at = ?');
-    values.push(data.synced_at);
-  }
-
-  if (data.is_synced !== undefined) {
-    fields.push('is_synced = ?');
-    values.push(data.is_synced);
   }
 
   fields.push('updated_at = ?');

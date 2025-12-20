@@ -5,6 +5,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
+import type { Database } from '@/shared/types/database.types';
 
 /**
  * リンク種別
@@ -12,24 +13,9 @@ import { log } from '@/shared/config/logger';
 export type FeaturedCarouselLinkType = 'tag' | 'map' | 'url';
 
 /**
- * 特集カルーセルアイテムの型
+ * 特集カルーセルアイテムの型（Database型から取得）
  */
-export interface FeaturedCarouselItem {
-  id: string;
-  title: string;
-  description: string | null;
-  image_url: string;
-  link_type: FeaturedCarouselLinkType;
-  link_value: string | null;
-  related_tags: string[] | null;
-  category_id: string | null;
-  display_order: number;
-  is_active: boolean;
-  starts_at: string | null;
-  ends_at: string | null;
-  created_at: string;
-  updated_at: string;
-}
+export type FeaturedCarouselItem = Database['public']['Tables']['featured_carousel_items']['Row'];
 
 /**
  * 有効な特集カルーセルアイテムを取得

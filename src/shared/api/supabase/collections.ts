@@ -5,24 +5,14 @@
 
 import { supabase } from './client';
 import { log } from '@/shared/config/logger';
+import type { Database } from '@/shared/types/database.types';
 
 // ===============================
 // 型定義
 // ===============================
 
-export interface Collection {
-  id: string;
-  user_id: string;
-  name: string;
-  description: string | null;
-  thumbnail_url: string | null;
-  color: string | null;
-  is_public: boolean;
-  maps_count: number;
-  order_index: number;
-  created_at: string;
-  updated_at: string;
-}
+// MergeDeepで拡張されたDatabase型から取得
+export type Collection = Database['public']['Tables']['collections']['Row'];
 
 export interface CollectionWithUser extends Collection {
   user: {
@@ -33,13 +23,8 @@ export interface CollectionWithUser extends Collection {
   } | null;
 }
 
-export interface CollectionMap {
-  id: string;
-  collection_id: string;
-  map_id: string;
-  order_index: number;
-  created_at: string;
-}
+// collection_mapsテーブルの型
+export type CollectionMap = Database['public']['Tables']['collection_maps']['Row'];
 
 export interface CollectionMapWithDetails extends CollectionMap {
   map: {

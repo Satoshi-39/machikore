@@ -53,17 +53,9 @@ export interface NotificationWithDetails extends NotificationRow {
   } | null;
 }
 
-// システムお知らせ
-export interface SystemAnnouncement {
-  id: string;
-  title: string;
-  content: string;
-  type: 'info' | 'update' | 'maintenance' | 'promotion';
-  is_active: boolean;
-  published_at: string;
-  expires_at: string | null;
-  created_at: string;
-}
+// システムお知らせ（Database型から取得）
+import type { Database } from '@/shared/types/database.types';
+export type SystemAnnouncement = Database['public']['Tables']['system_announcements']['Row'];
 
 // ===============================
 // 通知取得

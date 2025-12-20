@@ -156,7 +156,7 @@ export function useSpotForm() {
 
     // スポット数の上限チェック（プレミアム状態に応じた上限）
     const selectedMap = userMaps.find((m) => m.id === data.mapId);
-    if (selectedMap && selectedMap.spots_count >= spotLimit) {
+    if (selectedMap && (selectedMap.spots_count ?? 0) >= spotLimit) {
       Alert.alert(
         'スポット数の上限',
         `1つのマップには最大${spotLimit}個までスポットを登録できます。\n別のマップを選択するか、既存のスポットを削除してください。`,

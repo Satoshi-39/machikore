@@ -56,6 +56,7 @@ export function CountriesPage() {
     const groupedByContinent = new Map<string, CountryRow[]>();
     countries.forEach((country) => {
       const continentId = country.continent_id;
+      if (!continentId) return; // 大陸IDがない国はスキップ
       const existing = groupedByContinent.get(continentId) ?? [];
       existing.push(country);
       groupedByContinent.set(continentId, existing);

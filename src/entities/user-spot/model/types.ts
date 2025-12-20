@@ -30,7 +30,7 @@ export interface CreateSpotParams {
   latitude: number;
   longitude: number;
   description?: string | null; // 旧memo
-  customName?: string | null; // ユーザー独自の名前
+  customName: string; // ユーザー独自の名前（必須）
   images?: string[]; // 画像URI配列
   // Google Placesデータ（検索から選択した場合）
   googlePlaceId?: string | null;

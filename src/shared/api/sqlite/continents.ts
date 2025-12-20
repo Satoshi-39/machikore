@@ -20,12 +20,11 @@ export function bulkInsertContinents(continents: ContinentRow[]): void {
     for (const continent of continents) {
       db.runSync(
         `INSERT OR REPLACE INTO continents (
-          id, name, name_en, display_order, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?)`,
+          id, name, display_order, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?)`,
         [
           continent.id,
           continent.name,
-          continent.name_en,
           continent.display_order,
           continent.created_at,
           continent.updated_at,

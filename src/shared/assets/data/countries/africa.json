@@ -2,7 +2,6 @@
   {
     "id": "egypt",
     "name": "エジプト",
-    "name_en": "Egypt",
     "name_kana": "",
     "latitude": 26.8206,
     "longitude": 30.8025,
@@ -11,7 +10,6 @@
   {
     "id": "morocco",
     "name": "モロッコ",
-    "name_en": "Morocco",
     "name_kana": "",
     "latitude": 31.7917,
     "longitude": -7.0926,
@@ -20,7 +18,6 @@
   {
     "id": "south_africa",
     "name": "南アフリカ",
-    "name_en": "South Africa",
     "name_kana": "",
     "latitude": -30.5595,
     "longitude": 22.9375,
@@ -29,7 +26,6 @@
   {
     "id": "kenya",
     "name": "ケニア",
-    "name_en": "Kenya",
     "name_kana": "",
     "latitude": -0.0236,
     "longitude": 37.9062,
@@ -38,7 +34,6 @@
   {
     "id": "tanzania",
     "name": "タンザニア",
-    "name_en": "Tanzania",
     "name_kana": "",
     "latitude": -6.369,
     "longitude": 34.8888,
@@ -47,7 +42,6 @@
   {
     "id": "tunisia",
     "name": "チュニジア",
-    "name_en": "Tunisia",
     "name_kana": "",
     "latitude": 33.8869,
     "longitude": 9.5375,
@@ -56,7 +50,6 @@
   {
     "id": "mauritius",
     "name": "モーリシャス",
-    "name_en": "Mauritius",
     "name_kana": "",
     "latitude": -20.3484,
     "longitude": 57.5522,

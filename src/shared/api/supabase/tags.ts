@@ -371,70 +371,16 @@ export async function getPopularTagsByCategory(
   categoryId: string,
   limit: number = 10
 ): Promise<Tag[]> {
-  // map_tagsからカテゴリに属するマップのタグを集計
-  const { data, error } = await supabase.rpc('get_popular_tags_by_category', {
+  const { data, error } = await (supabase.rpc as any)('get_popular_tags_by_category', {
     p_category_id: categoryId,
     p_limit: limit,
   });
 
   if (error) {
-    // RPC関数がない場合はフォールバック
-    console.warn('get_popular_tags_by_category RPC not found, using fallback');
-    return getPopularTagsByCategoryFallback(categoryId, limit);
+    throw error;
   }
 
-  return data || [];
-}
-
-/**
- * カテゴリ別人気タグのフォールバック実装
- */
-async function getPopularTagsByCategoryFallback(
-  categoryId: string,
-  limit: number
-): Promise<Tag[]> {
-  // 1. カテゴリに属するマップIDを取得
-  const { data: maps, error: mapsError } = await supabase
-    .from('maps')
-    .select('id')
-    .eq('category_id', categoryId)
-    .eq('is_public', true);
-
-  if (mapsError || !maps || maps.length === 0) {
-    return [];
-  }
-
-  const mapIds = maps.map((m) => m.id);
-
-  // 2. これらのマップに紐づくタグを取得
-  const { data: mapTags, error: tagsError } = await supabase
-    .from('map_tags')
-    .select('tag_id, tags(*)')
-    .in('map_id', mapIds);
-
-  if (tagsError || !mapTags) {
-    return [];
-  }
-
-  // 3. タグごとに出現回数をカウントしてソート
-  const tagCounts = new Map<string, { tag: Tag; count: number }>();
-  for (const item of mapTags) {
-    const tag = (item as any).tags as Tag | null;
-    if (!tag) continue;
-
-    const existing = tagCounts.get(tag.id);
-    if (existing) {
-      existing.count++;
-    } else {
-      tagCounts.set(tag.id, { tag, count: 1 });
-    }
-  }
-
-  // 4. カウント順にソートしてlimit件返す
-  return Array.from(tagCounts.values())
-    .sort((a, b) => b.count - a.count)
-    .slice(0, limit)
-    .map((item) => item.tag);
+  return (data as Tag[]) || [];
 }
 
 /**

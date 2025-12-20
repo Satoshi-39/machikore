@@ -128,15 +128,13 @@ async function createSampleUser(userId: string): Promise<void> {
     display_name: 'サンプルユーザー',
     avatar_url: avatarUri,
     bio: 'サンプルユーザーです',
-    is_premium: 0,
+    is_premium: false,
     premium_started_at: null,
     premium_expires_at: null,
     push_token: null,
     push_token_updated_at: null,
     created_at: now,
     updated_at: now,
-    synced_at: null,
-    is_synced: 0,
   };
 
   insertUser(user);
@@ -159,12 +157,10 @@ function createSampleSchedules(userId: string): void {
       scheduled_at: new Date(today.getTime() + 10 * 60 * 60 * 1000).toISOString(), // 今日 10:00
       title: 'カフェで作業',
       memo: '新しいカフェを探してみる',
-      is_completed: 0,
+      is_completed: false,
       completed_at: null,
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
     // 明日の予定
     {
@@ -176,12 +172,10 @@ function createSampleSchedules(userId: string): void {
       ).toISOString(), // 明日 14:00
       title: '友人とランチ',
       memo: null,
-      is_completed: 0,
+      is_completed: false,
       completed_at: null,
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
     // 3日後の予定
     {
@@ -193,12 +187,10 @@ function createSampleSchedules(userId: string): void {
       ).toISOString(), // 3日後 18:00
       title: '映画鑑賞',
       memo: '新作映画をチェック',
-      is_completed: 0,
+      is_completed: false,
       completed_at: null,
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
     // 来週の予定（完了済み）
     {
@@ -210,12 +202,10 @@ function createSampleSchedules(userId: string): void {
       ).toISOString(), // 7日後 10:00
       title: 'ジムトレーニング',
       memo: null,
-      is_completed: 1,
+      is_completed: true,
       completed_at: now.toISOString(),
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
   ];
 
@@ -416,8 +406,6 @@ function createSampleVisits(userId: string): void {
       ).toISOString(), // 昨日 14:00
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
     // 3日前訪問
     {
@@ -429,8 +417,6 @@ function createSampleVisits(userId: string): void {
       ).toISOString(), // 3日前 12:00
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
     // 5日前訪問
     {
@@ -442,8 +428,6 @@ function createSampleVisits(userId: string): void {
       ).toISOString(), // 5日前 16:00
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
     // 1週間前訪問
     {
@@ -455,8 +439,6 @@ function createSampleVisits(userId: string): void {
       ).toISOString(), // 7日前 11:00
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
     // 10日前訪問
     {
@@ -468,8 +450,6 @@ function createSampleVisits(userId: string): void {
       ).toISOString(), // 10日前 9:00
       created_at: now.toISOString(),
       updated_at: now.toISOString(),
-      synced_at: null,
-      is_synced: 0,
     },
   ];
 

@@ -5,6 +5,8 @@
  * FSD: shared/types に配置（複数entityにまたがるため）
  */
 
+import type { Database } from './database.types';
+
 // ===============================
 // ProseMirror/TipTap JSON型
 // ===============================
@@ -65,35 +67,17 @@ export interface UserBasicInfo {
 // マップ複合型
 // ===============================
 
+// MergeDeepで拡張されたDatabase型からマップのRow型を取得
+type MapRow = Database['public']['Tables']['maps']['Row'];
+
 /**
  * MapWithUser - マップ + ユーザー情報
  *
  * maps JOIN users の結果
+ * MapRowを継承し、userとUI用のフラグを追加
  */
-export interface MapWithUser {
-  id: string;
-  user_id: string;
-  name: string;
-  description: string | null;
-  category: string | null;
-  category_id: string | null;
-  is_public: boolean;
-  is_default: boolean;
-  is_official: boolean;
-  thumbnail_url: string | null;
-  spots_count: number;
-  likes_count: number;
-  bookmarks_count: number;
-  comments_count: number;
-  created_at: string;
-  updated_at: string;
+export interface MapWithUser extends MapRow {
   user: UserBasicInfo | null;
-  /** 記事の公開設定（マップの公開とは独立） */
-  is_article_public?: boolean;
-  /** 記事のまえがき（ProseMirror JSON形式） */
-  article_intro?: ProseMirrorDoc | null;
-  /** 記事のあとがき（ProseMirror JSON形式） */
-  article_outro?: ProseMirrorDoc | null;
   /** 現在のユーザーがこのマップにいいねしているか */
   is_liked?: boolean;
   /** 現在のユーザーがこのマップをブックマークしているか */

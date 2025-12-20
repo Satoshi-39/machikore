@@ -3,7 +3,7 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
-import type { MapArticleData, SpotWithImages } from '@/shared/types';
+import type { MapArticleData, SpotWithImages, ProseMirrorDoc } from '@/shared/types';
 import { getMapById } from './get-map';
 
 /**
@@ -88,7 +88,7 @@ export async function getMapArticle(
  */
 export async function updateSpotArticleContent(
   spotId: string,
-  articleContent: string | null
+  articleContent: ProseMirrorDoc | null
 ): Promise<void> {
   const { error } = await supabase
     .from('user_spots')

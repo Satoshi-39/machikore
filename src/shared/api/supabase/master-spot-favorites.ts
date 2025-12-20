@@ -4,17 +4,14 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
+import type { Database } from '@/shared/types/database.types';
 
 // ===============================
 // 型定義
 // ===============================
 
-export interface MasterSpotFavorite {
-  id: string;
-  user_id: string;
-  master_spot_id: string;
-  created_at: string;
-}
+// Database型から取得
+export type MasterSpotFavorite = Database['public']['Tables']['master_spot_favorites']['Row'];
 
 // ===============================
 // お気に入り操作

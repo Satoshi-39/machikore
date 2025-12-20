@@ -4,8 +4,13 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
-import type { MachiRow, CityRow, PrefectureRow } from '@/shared/types/database.types';
+import type { Database } from '@/shared/types/database.types';
 import { log } from '@/shared/config/logger';
+
+// Supabaseの型をそのまま使用
+type MachiRow = Database['public']['Tables']['machi']['Row'];
+type CityRow = Database['public']['Tables']['cities']['Row'];
+type PrefectureRow = Database['public']['Tables']['prefectures']['Row'];
 
 // ===============================
 // Machi（街）

@@ -3,22 +3,14 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
+import type { Database } from '@/shared/types/database.types';
 
 // ===============================
 // 型定義
 // ===============================
 
-export interface Category {
-  id: string;
-  slug: string;
-  name: string;
-  name_translations: { [key: string]: string } | null;
-  icon: string;
-  display_order: number;
-  is_active: boolean;
-  created_at: string;
-  updated_at: string;
-}
+// MergeDeepで拡張されたDatabase型から取得
+export type Category = Database['public']['Tables']['categories']['Row'];
 
 // ===============================
 // API関数

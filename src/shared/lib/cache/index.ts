@@ -1,15 +1,8 @@
 /**
- * キャッシュサービス エクスポート
+ * Cache exports
  */
 
-// TanStack Query 永続化
-export {
-  setupQueryPersister,
-  clearPersistedCache,
-  getPersistedCacheSize,
-} from './query-persister';
-
-// タイルベースのキャッシュサービス
+export { cacheUserToSQLite } from './cache-user';
 export {
   getMachiByTileId,
   getMachiByTileIds,
@@ -23,3 +16,9 @@ export {
   getCachedTileIds,
   clearAllTileCache,
 } from './tile-cache-service';
+export {
+  setupQueryPersister,
+  clearPersistedCache,
+  getPersistedCacheSize,
+} from './query-persister';
+

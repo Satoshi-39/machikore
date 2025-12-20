@@ -23,8 +23,6 @@ export function createVisitData(params: CreateVisitParams): VisitRow {
     visited_at: params.visitedAt || now,
     created_at: now,
     updated_at: now,
-    synced_at: null,
-    is_synced: 0,
   };
 }
 

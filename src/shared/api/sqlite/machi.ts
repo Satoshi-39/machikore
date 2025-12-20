@@ -1,10 +1,43 @@
 /**
  * 街データ関連のSQLite操作
+ *
+ * SQLiteではJSONカラムを文字列として保存するため、
+ * このDAO層でJSON変換を行い、外部には統一された型を公開する
  */
 
 import { queryOne, queryAll, execute, executeBatch } from './client';
 import type { MachiRow } from '@/shared/types/database.types';
-import { log } from '@/shared/config/logger';
+
+// ===============================
+// JSON変換ヘルパー
+// ===============================
+
+/** SQLiteから取得した生データの型（JSONカラムは文字列） */
+interface MachiRowSQLite extends Omit<MachiRow, 'name_translations' | 'prefecture_name_translations' | 'city_name_translations'> {
+  name_translations: string | null;
+  prefecture_name_translations: string | null;
+  city_name_translations: string | null;
+}
+
+/** SQLiteの生データをMachiRowに変換（JSON.parse） */
+function fromSQLite(row: MachiRowSQLite): MachiRow {
+  return {
+    ...row,
+    name_translations: row.name_translations ? JSON.parse(row.name_translations) : null,
+    prefecture_name_translations: row.prefecture_name_translations ? JSON.parse(row.prefecture_name_translations) : null,
+    city_name_translations: row.city_name_translations ? JSON.parse(row.city_name_translations) : null,
+  };
+}
+
+/** MachiRowをSQLite保存用に変換（JSON.stringify） */
+function toSQLite(machi: MachiRow): MachiRowSQLite {
+  return {
+    ...machi,
+    name_translations: machi.name_translations ? JSON.stringify(machi.name_translations) : null,
+    prefecture_name_translations: machi.prefecture_name_translations ? JSON.stringify(machi.prefecture_name_translations) : null,
+    city_name_translations: machi.city_name_translations ? JSON.stringify(machi.city_name_translations) : null,
+  };
+}
 
 // ===============================
 // 街データ取得
@@ -14,49 +47,38 @@ import { log } from '@/shared/config/logger';
  * 全街データを取得
  */
 export function getAllMachi(): MachiRow[] {
-  return queryAll<MachiRow>('SELECT * FROM machi ORDER BY name;');
+  const rows = queryAll<MachiRowSQLite>('SELECT * FROM machi ORDER BY name;');
+  return rows.map(fromSQLite);
 }
 
 /**
  * IDで街を取得
  */
 export function getMachiById(machiId: string): MachiRow | null {
-  return queryOne<MachiRow>('SELECT * FROM machi WHERE id = ?;', [machiId]);
+  const row = queryOne<MachiRowSQLite>('SELECT * FROM machi WHERE id = ?;', [machiId]);
+  return row ? fromSQLite(row) : null;
 }
 
 /**
  * 街名で検索
  */
 export function searchMachiByName(searchTerm: string): MachiRow[] {
-  return queryAll<MachiRow>(
+  const rows = queryAll<MachiRowSQLite>(
     'SELECT * FROM machi WHERE name LIKE ? ORDER BY name;',
     [`%${searchTerm}%`]
   );
-}
-
-/**
- * 路線で絞り込み (Deprecated)
- * @deprecated Lines are now stored as JSON array. Use client-side filtering instead.
- *
- * 路線データはJSON配列として保存されています。
- * アプリ側でJSON.parseして絞り込みを行ってください。
- */
-export function getMachiByLine(lineName: string): MachiRow[] {
-  // Use LIKE to search within JSON text (less efficient, but works)
-  return queryAll<MachiRow>(
-    'SELECT * FROM machi WHERE lines LIKE ? ORDER BY name;',
-    [`%${lineName}%`]
-  );
+  return rows.map(fromSQLite);
 }
 
 /**
  * 都道府県IDで絞り込み
  */
 export function getMachiByPrefectureId(prefectureId: string): MachiRow[] {
-  return queryAll<MachiRow>(
+  const rows = queryAll<MachiRowSQLite>(
     'SELECT * FROM machi WHERE prefecture_id = ? ORDER BY name;',
     [prefectureId]
   );
+  return rows.map(fromSQLite);
 }
 
 /**
@@ -64,10 +86,11 @@ export function getMachiByPrefectureId(prefectureId: string): MachiRow[] {
  * @deprecated Use getMachiByPrefectureId instead
  */
 export function getMachiByPrefecture(prefectureName: string): MachiRow[] {
-  return queryAll<MachiRow>(
+  const rows = queryAll<MachiRowSQLite>(
     'SELECT * FROM machi WHERE prefecture_name = ? ORDER BY name;',
     [prefectureName]
   );
+  return rows.map(fromSQLite);
 }
 
 /**
@@ -80,7 +103,7 @@ export function getNearbyMachi(
 ): MachiRow[] {
   // SQLiteには地理空間関数がないため、簡易的な距離計算
   // より正確な計算が必要な場合は、Haversine公式をアプリ側で実装
-  return queryAll<MachiRow>(
+  const rows = queryAll<MachiRowSQLite>(
     `
     SELECT *,
       ABS(latitude - ?) + ABS(longitude - ?) as distance
@@ -90,6 +113,7 @@ export function getNearbyMachi(
     `,
     [latitude, longitude, limit]
   );
+  return rows.map(fromSQLite);
 }
 
 // ===============================
@@ -100,32 +124,32 @@ export function getNearbyMachi(
  * 街データを1件挿入
  */
 export function insertMachi(machi: MachiRow): void {
+  const row = toSQLite(machi);
   execute(
     `
     INSERT INTO machi (
-      id, name, name_kana, name_translations, latitude, longitude, lines,
+      id, name, name_kana, name_translations, latitude, longitude,
       prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations,
       city_name, city_name_translations, created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
-      machi.id,
-      machi.name,
-      machi.name_kana,
-      machi.name_translations,
-      machi.latitude,
-      machi.longitude,
-      machi.lines,
-      machi.prefecture_id,
-      machi.city_id,
-      machi.country_code,
-      machi.prefecture_name,
-      machi.prefecture_name_translations,
-      machi.city_name,
-      machi.city_name_translations,
-      machi.created_at,
-      machi.updated_at,
+      row.id,
+      row.name,
+      row.name_kana,
+      row.name_translations,
+      row.latitude,
+      row.longitude,
+      row.prefecture_id,
+      row.city_id,
+      row.country_code,
+      row.prefecture_name,
+      row.prefecture_name_translations,
+      row.city_name,
+      row.city_name_translations,
+      row.created_at,
+      row.updated_at,
     ]
   );
 }
@@ -134,35 +158,37 @@ export function insertMachi(machi: MachiRow): void {
  * 複数の街データを一括挿入
  */
 export function bulkInsertMachi(machiList: MachiRow[]): void {
-  const statements = machiList.map((machi) => ({
-    sql: `
-      INSERT OR REPLACE INTO machi (
-        id, name, name_kana, name_translations, latitude, longitude, lines,
-        prefecture_id, city_id, tile_id, country_code, prefecture_name, prefecture_name_translations,
-        city_name, city_name_translations, created_at, updated_at
-      )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-    `,
-    params: [
-      machi.id,
-      machi.name,
-      machi.name_kana,
-      machi.name_translations,
-      machi.latitude,
-      machi.longitude,
-      machi.lines,
-      machi.prefecture_id,
-      machi.city_id,
-      machi.tile_id,
-      machi.country_code,
-      machi.prefecture_name,
-      machi.prefecture_name_translations,
-      machi.city_name,
-      machi.city_name_translations,
-      machi.created_at,
-      machi.updated_at,
-    ],
-  }));
+  const statements = machiList.map((machi) => {
+    const row = toSQLite(machi);
+    return {
+      sql: `
+        INSERT OR REPLACE INTO machi (
+          id, name, name_kana, name_translations, latitude, longitude,
+          prefecture_id, city_id, tile_id, country_code, prefecture_name, prefecture_name_translations,
+          city_name, city_name_translations, created_at, updated_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      `,
+      params: [
+        row.id,
+        row.name,
+        row.name_kana,
+        row.name_translations,
+        row.latitude,
+        row.longitude,
+        row.prefecture_id,
+        row.city_id,
+        row.tile_id,
+        row.country_code,
+        row.prefecture_name,
+        row.prefecture_name_translations,
+        row.city_name,
+        row.city_name_translations,
+        row.created_at,
+        row.updated_at,
+      ],
+    };
+  });
 
   executeBatch(statements);
 }
@@ -196,18 +222,6 @@ export function getMachiCount(): number {
 }
 
 /**
- * 全路線名を取得 (Deprecated)
- * @deprecated Lines are now stored as JSON array. Use client-side processing instead.
- *
- * 路線データはJSON配列として保存されています。
- * getAllMachi()でデータを取得してアプリ側でJSON.parseして処理してください。
- */
-export function getAllLineNames(): string[] {
-  log.warn('[SQLite] getAllLineNames is deprecated. Use client-side processing instead.');
-  return [];
-}
-
-/**
  * 全都道府県名を取得（文字列）
  * @deprecated Use getAllPrefectures from prefectures.ts instead
  */
@@ -228,8 +242,6 @@ export const getAllStations = getAllMachi;
 export const getStationById = getMachiById;
 /** @deprecated Use searchMachiByName instead */
 export const searchStationsByName = searchMachiByName;
-/** @deprecated Use getMachiByLine instead */
-export const getStationsByLine = getMachiByLine;
 /** @deprecated Use getMachiByPrefecture instead */
 export const getStationsByPrefecture = getMachiByPrefecture;
 /** @deprecated Use getNearbyMachi instead */

@@ -18,8 +18,8 @@ export function insertUser(user: UserRow): void {
     `INSERT INTO users (
       id, email, username, display_name, avatar_url, bio,
       is_premium, premium_started_at, premium_expires_at,
-      created_at, updated_at, synced_at, is_synced
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+      created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
     [
       user.id,
       user.email,
@@ -32,8 +32,6 @@ export function insertUser(user: UserRow): void {
       user.premium_expires_at,
       user.created_at,
       user.updated_at,
-      user.synced_at,
-      user.is_synced,
     ]
   );
 }
@@ -134,14 +132,6 @@ export function updateUser(
   if (updates.updated_at !== undefined) {
     fields.push('updated_at = ?');
     values.push(updates.updated_at);
-  }
-  if (updates.synced_at !== undefined) {
-    fields.push('synced_at = ?');
-    values.push(updates.synced_at);
-  }
-  if (updates.is_synced !== undefined) {
-    fields.push('is_synced = ?');
-    values.push(updates.is_synced);
   }
 
   if (fields.length === 0) return;
