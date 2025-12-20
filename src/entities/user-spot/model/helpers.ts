@@ -53,7 +53,7 @@ export function createSpotData(params: CreateSpotParams): {
       order_index: 0,
       color: null,
       spot_color: null,
-      label: null,
+      label_id: null,
       latitude: params.latitude,
       longitude: params.longitude,
       prefecture_id: null,

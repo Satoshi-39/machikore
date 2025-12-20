@@ -295,6 +295,29 @@ export function initializeDatabase(): void {
       ON maps(is_synced);
     `);
 
+    // 6.5. マップラベルテーブル（スポットの種類分け用）
+    db.execSync(`
+      CREATE TABLE IF NOT EXISTS map_labels (
+        id TEXT PRIMARY KEY,
+        map_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        color TEXT NOT NULL DEFAULT 'blue',
+        sort_order INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        synced_at TEXT,
+        is_synced INTEGER DEFAULT 0,
+        FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+        UNIQUE(map_id, name)
+      );
+    `);
+
+    // インデックス作成
+    db.execSync(`
+      CREATE INDEX IF NOT EXISTS idx_map_labels_map_id
+      ON map_labels(map_id);
+    `);
+
     // 7. マスタースポットテーブル（共有スポットデータ）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS master_spots (
@@ -342,7 +365,7 @@ export function initializeDatabase(): void {
         custom_name TEXT,
         description TEXT,
         spot_color TEXT DEFAULT 'blue',
-        label TEXT,
+        label_id TEXT,
         images_count INTEGER DEFAULT 0,
         likes_count INTEGER DEFAULT 0,
         comments_count INTEGER DEFAULT 0,
@@ -354,6 +377,7 @@ export function initializeDatabase(): void {
         FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
         FOREIGN KEY (master_spot_id) REFERENCES master_spots(id) ON DELETE CASCADE,
         FOREIGN KEY (machi_id) REFERENCES machi(id),
+        FOREIGN KEY (label_id) REFERENCES map_labels(id) ON DELETE SET NULL,
         UNIQUE(user_id, map_id, master_spot_id)
       );
     `);
@@ -384,8 +408,8 @@ export function initializeDatabase(): void {
       ON user_spots(is_synced);
     `);
     db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_user_spots_label
-      ON user_spots(label);
+      CREATE INDEX IF NOT EXISTS idx_user_spots_label_id
+      ON user_spots(label_id);
     `);
 
     // 9. 訪問記録テーブル（街訪問 - シンプルな訪問済み/未訪問管理）
@@ -1138,12 +1162,12 @@ function migration009_RenameSpotIdToUserSpotId(): void {
 }
 
 /**
- * マイグレーション010: user_spotsにspot_colorとlabelカラム追加
+ * マイグレーション010: user_spotsにspot_colorカラム追加
  */
-function migration010_AddSpotColorAndLabel(): void {
+function migration010_AddSpotColor(): void {
   const db = getDatabase();
 
-  log.info('[SQLite] [Migration 010] Adding spot_color and label to user_spots...');
+  log.info('[SQLite] [Migration 010] Adding spot_color to user_spots...');
 
   try {
     db.execSync('BEGIN TRANSACTION;');
@@ -1151,15 +1175,9 @@ function migration010_AddSpotColorAndLabel(): void {
     // カラムが存在するかチェック
     const tableInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(user_spots);');
     const hasSpotColor = tableInfo.some((col) => col.name === 'spot_color');
-    const hasLabel = tableInfo.some((col) => col.name === 'label');
 
     if (!hasSpotColor) {
       db.execSync("ALTER TABLE user_spots ADD COLUMN spot_color TEXT DEFAULT 'blue';");
-    }
-
-    if (!hasLabel) {
-      db.execSync('ALTER TABLE user_spots ADD COLUMN label TEXT;');
-      db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_label ON user_spots(label);');
     }
 
     db.execSync('COMMIT;');
@@ -1167,6 +1185,59 @@ function migration010_AddSpotColorAndLabel(): void {
   } catch (error) {
     db.execSync('ROLLBACK;');
     log.error('[SQLite] [Migration 010] Failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * マイグレーション011: map_labelsテーブル追加、user_spots.label_id追加
+ */
+function migration011_AddMapLabels(): void {
+  const db = getDatabase();
+
+  log.info('[SQLite] [Migration 011] Adding map_labels table and user_spots.label_id...');
+
+  try {
+    db.execSync('BEGIN TRANSACTION;');
+
+    // 1. map_labelsテーブル作成
+    const tableExists = db.getAllSync<{ count: number }>(
+      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='map_labels';"
+    )[0];
+
+    if (!tableExists || tableExists.count === 0) {
+      db.execSync(`
+        CREATE TABLE IF NOT EXISTS map_labels (
+          id TEXT PRIMARY KEY,
+          map_id TEXT NOT NULL,
+          name TEXT NOT NULL,
+          color TEXT NOT NULL DEFAULT 'blue',
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL,
+          synced_at TEXT,
+          is_synced INTEGER DEFAULT 0,
+          FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
+          UNIQUE(map_id, name)
+        );
+      `);
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_map_labels_map_id ON map_labels(map_id);');
+    }
+
+    // 2. user_spots.label_idカラム追加
+    const userSpotsInfo = db.getAllSync<{ name: string }>('PRAGMA table_info(user_spots);');
+    const hasLabelId = userSpotsInfo.some((col) => col.name === 'label_id');
+
+    if (!hasLabelId) {
+      db.execSync('ALTER TABLE user_spots ADD COLUMN label_id TEXT REFERENCES map_labels(id) ON DELETE SET NULL;');
+      db.execSync('CREATE INDEX IF NOT EXISTS idx_user_spots_label_id ON user_spots(label_id);');
+    }
+
+    db.execSync('COMMIT;');
+    log.info('[SQLite] [Migration 011] Completed successfully');
+  } catch (error) {
+    db.execSync('ROLLBACK;');
+    log.error('[SQLite] [Migration 011] Failed:', error);
     throw error;
   }
 }
@@ -1216,11 +1287,18 @@ export function runMigrations(): void {
     log.info('[SQLite] Applied version 9');
   }
 
-  // マイグレーション10: user_spotsにspot_colorとlabel追加
+  // マイグレーション10: user_spotsにspot_color追加
   if (currentVersion < 10) {
-    migration010_AddSpotColorAndLabel();
+    migration010_AddSpotColor();
     recordVersion(10);
     log.info('[SQLite] Applied version 10');
+  }
+
+  // マイグレーション11: map_labelsテーブル追加、user_spots.label_id追加
+  if (currentVersion < 11) {
+    migration011_AddMapLabels();
+    recordVersion(11);
+    log.info('[SQLite] Applied version 11');
   }
 
   log.info('[SQLite] All migrations completed');

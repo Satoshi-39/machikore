@@ -860,6 +860,44 @@ export type Database = {
           },
         ]
       }
+      map_labels: {
+        Row: {
+          color: string
+          created_at: string
+          id: string
+          map_id: string
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          id?: string
+          map_id: string
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          id?: string
+          map_id?: string
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "map_labels_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       map_tags: {
         Row: {
           created_at: string
@@ -1778,7 +1816,7 @@ export type Database = {
           google_short_address: string | null
           id: string
           images_count: number
-          label: string | null
+          label_id: string | null
           latitude: number | null
           likes_count: number
           longitude: number | null
@@ -1803,7 +1841,7 @@ export type Database = {
           google_short_address?: string | null
           id?: string
           images_count?: number
-          label?: string | null
+          label_id?: string | null
           latitude?: number | null
           likes_count?: number
           longitude?: number | null
@@ -1828,7 +1866,7 @@ export type Database = {
           google_short_address?: string | null
           id?: string
           images_count?: number
-          label?: string | null
+          label_id?: string | null
           latitude?: number | null
           likes_count?: number
           longitude?: number | null
@@ -1842,6 +1880,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "user_spots_label_id_fkey"
+            columns: ["label_id"]
+            isOneToOne: false
+            referencedRelation: "map_labels"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "user_spots_machi_id_fkey"
             columns: ["machi_id"]
