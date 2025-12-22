@@ -9,6 +9,10 @@
  *   --transport   交通データのみアップロード
  *   --prefecture=ID  特定の都道府県のみ（省略時は全都道府県）
  *   --dry-run     実際にはアップロードせず、件数のみ表示
+ *
+ * 注意:
+ *   - このスクリプトはUPSERTのみ使用し、既存データを削除しません
+ *   - master_spots, user_spots などのユーザーデータに影響を与えません
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -161,10 +165,7 @@ async function uploadMachiData(prefectureId: string, dryRun: boolean): Promise<{
     return { cities: processedCities.length, machi: processedMachi.length };
   }
 
-  // 既存データを削除
-  await supabase.from('machi').delete().eq('prefecture_id', prefectureId);
-  await supabase.from('cities').delete().eq('prefecture_id', prefectureId);
-
+  // UPSERTのみ使用（削除は行わない）
   // citiesを挿入（バッチ）
   if (processedCities.length > 0) {
     const cityRows = processedCities.map((c) => ({
@@ -229,9 +230,7 @@ async function uploadTransportData(prefectureId: string, dryRun: boolean): Promi
     return data.data.length;
   }
 
-  // 既存データを削除
-  await supabase.from('transport_hubs').delete().eq('prefecture_id', prefectureId);
-
+  // UPSERTのみ使用（削除は行わない）
   // バッチ挿入（1000件ずつ）
   const BATCH_SIZE = 1000;
   for (let i = 0; i < data.data.length; i += BATCH_SIZE) {

@@ -1,6 +1,6 @@
 # Machikore テーブル定義書
 
-最終更新: 2025-12-22
+最終更新: 2025-12-23
 
 全40テーブルの詳細定義。
 
@@ -410,6 +410,9 @@
 | created_at | timestamptz | NO | now() | 作成日時 |
 | updated_at | timestamptz | NO | now() | 更新日時 |
 
+**外部キー制約:**
+- `machi_id` → machi.id **ON DELETE SET NULL** （machiが削除されてもmaster_spotsは保持）
+
 ---
 
 ### master_spot_favorites
@@ -458,6 +461,14 @@
 | article_content | jsonb | YES | - | 記事コンテンツ（ProseMirror JSON） |
 | created_at | timestamptz | NO | now() | 作成日時 |
 | updated_at | timestamptz | NO | now() | 更新日時 |
+
+**外部キー制約:**
+- `user_id` → users.id **ON DELETE CASCADE**
+- `map_id` → maps.id **ON DELETE CASCADE**
+- `master_spot_id` → master_spots.id **ON DELETE CASCADE**
+- `machi_id` → machi.id **ON DELETE SET NULL** （machiが削除されてもuser_spotsは保持）
+- `prefecture_id` → prefectures.id **ON DELETE SET NULL**
+- `label_id` → map_labels.id **ON DELETE SET NULL**
 
 ---
 
