@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict rVb6aPOjVCqnEEsTIaglhKoScVeEGKg5EAnmnA8bXtoa6wDQTRFtw7gyv2gOSBk
+\restrict p5jzjG7S1j57xJrAorczlFPJTx1c01L2IeXkXEdsLofd4NbvbhQbTTeEvCIxhjW
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.7 (Homebrew)
@@ -2763,6 +2763,14 @@ ALTER TABLE ONLY public.admin_boundaries ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
+-- Name: admin_boundaries admin_boundaries_city_id_unique; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_boundaries
+    ADD CONSTRAINT admin_boundaries_city_id_unique UNIQUE (city_id);
+
+
+--
 -- Name: admin_boundaries admin_boundaries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4732,7 +4740,7 @@ ALTER TABLE ONLY public.master_spot_favorites
 --
 
 ALTER TABLE ONLY public.master_spots
-    ADD CONSTRAINT master_spots_machi_id_fkey FOREIGN KEY (machi_id) REFERENCES public.machi(id);
+    ADD CONSTRAINT master_spots_machi_id_fkey FOREIGN KEY (machi_id) REFERENCES public.machi(id) ON DELETE SET NULL;
 
 
 --
@@ -4916,7 +4924,7 @@ ALTER TABLE ONLY public.user_spots
 --
 
 ALTER TABLE ONLY public.user_spots
-    ADD CONSTRAINT user_spots_machi_id_fkey FOREIGN KEY (machi_id) REFERENCES public.machi(id);
+    ADD CONSTRAINT user_spots_machi_id_fkey FOREIGN KEY (machi_id) REFERENCES public.machi(id) ON DELETE SET NULL;
 
 
 --
@@ -5888,5 +5896,5 @@ ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict rVb6aPOjVCqnEEsTIaglhKoScVeEGKg5EAnmnA8bXtoa6wDQTRFtw7gyv2gOSBk
+\unrestrict p5jzjG7S1j57xJrAorczlFPJTx1c01L2IeXkXEdsLofd4NbvbhQbTTeEvCIxhjW
 

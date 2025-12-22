@@ -7,7 +7,7 @@
 Machikoreのデータベースは PostgreSQL (Supabase) を使用。全40テーブル、PostGIS拡張による地理空間データサポート。
 
 **正式なスキーマ定義:**
-- `supabase/migrations/000_initial_schema2.sql` - pg_dumpで生成された完全なスキーマ
+- `supabase/migrations/000_initial_schema.sql` - pg_dumpで生成された完全なスキーマ
 - `supabase/schema/` - 可読性のためにテーブルごとに分割したDDL（参照用）
 
 ---
@@ -299,7 +299,7 @@ continents → countries → regions → prefectures → cities → machi
 ```
 supabase/
 ├── migrations/
-│   ├── 000_initial_schema2.sql    # 完全なスキーマ（pg_dump生成）
+│   ├── 000_initial_schema.sql     # 完全なスキーマ（pg_dump生成）
 │   ├── 001_*.sql                  # 追加マイグレーション
 │   └── 002_*.sql
 └── schema/                        # 可読性のための分割DDL（参照用）
