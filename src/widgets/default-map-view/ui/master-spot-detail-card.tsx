@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
-import { colors, LOCATION_ICONS, SPOT_CATEGORY_COLORS } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_TYPE_COLORS } from '@/shared/config';
 import {
   showLoginRequiredAlert,
   useCurrentTab,
@@ -249,7 +249,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
             <View className="flex-row items-center mb-1">
-              <LocationPinIcon size={24} color={SPOT_CATEGORY_COLORS[determineSpotCategory(spot.google_types)]} />
+              <LocationPinIcon size={24} color={SPOT_TYPE_COLORS[determineSpotCategory(spot.google_types)]} />
               <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
                 {spot.name}
               </Text>

@@ -35,16 +35,6 @@ export const MAX_POST_LENGTH = 500;
 export const MIN_POST_LENGTH = 1;
 
 // ===============================
-// キャッシュ
-// ===============================
-
-export const CACHE_TIME = {
-  SHORT: 5 * 60 * 1000, // 5分
-  MEDIUM: 30 * 60 * 1000, // 30分
-  LONG: 24 * 60 * 60 * 1000, // 24時間
-} as const;
-
-// ===============================
 // 同期
 // ===============================
 
@@ -173,10 +163,10 @@ export const MAP_DISTANCE_THRESHOLD = {
 } as const;
 
 // ===============================
-// スポットカテゴリ色
+// スポットタイプ色
 // ===============================
 
-export const SPOT_CATEGORY_COLORS = {
+export const SPOT_TYPE_COLORS = {
   food: '#F97316', // オレンジ - 飲食店系
   shopping: '#9333EA', // 紫 - ショッピング系
   tourism: '#10B981', // 緑 - 公園・観光地系

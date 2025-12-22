@@ -4,7 +4,7 @@
 
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
-import { determineSpotCategory, type SpotCategory } from './categories';
+import { determineSpotCategory, type SpotCategory } from './spot-type';
 
 // GeoJSON変換に必要な最小限のフィールド
 interface MasterSpotForGeoJson {

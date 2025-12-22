@@ -4,6 +4,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/shared/api/supabase';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import type { MapWithUser } from '@/shared/types';
 
@@ -84,7 +85,7 @@ export function useCategoryFeaturedMaps(
   currentUserId?: string | null
 ) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: ['category-featured-maps', categoryId, currentUserId],
+    queryKey: [...QUERY_KEYS.categoryFeaturedMaps(categoryId), currentUserId],
     queryFn: () => getCategoryFeaturedMaps(categoryId, currentUserId),
     enabled: categoryId.length > 0 && categoryId !== 'all',
     staleTime: 5 * 60 * 1000, // 5分

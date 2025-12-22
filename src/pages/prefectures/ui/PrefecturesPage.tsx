@@ -92,11 +92,12 @@ export function PrefecturesPage() {
   const sections = useMemo((): SectionData[] => {
     if (!regions || !prefectures) return [];
 
-    // 日本の地方のみ
-    const jpRegions = regions.filter((r) => r.country_code === 'jp');
+    // 日本の地方のみ（regions.country_idは国コード：jp, kr, cn...）
+    const jpRegions = regions.filter((r) => r.country_id === 'jp');
 
-    // 日本の都道府県のみ
-    const jpPrefectures = prefectures.filter((p) => p.country_code === 'jp');
+    // 日本の都道府県のみ（prefecturesはregion_id経由でフィルタ）
+    const jpRegionIds = new Set(jpRegions.map((r) => r.id));
+    const jpPrefectures = prefectures.filter((p) => jpRegionIds.has(p.region_id));
 
     // 都道府県を地方ごとにグループ化
     const groupedByRegion = new Map<string, PrefectureRow[]>();

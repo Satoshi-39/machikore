@@ -35,11 +35,11 @@ export function WorldSection() {
 
   const { data: allCountries } = useCountries();
 
-  // 日本以外の国を最大6件取得
+  // 日本以外の国を最大6件取得（countries.idは国コード：jp, kr, cn...）
   const countries = useMemo(() => {
     if (!allCountries) return [];
     return allCountries
-      .filter((c) => c.country_code !== 'jp')
+      .filter((c) => c.id !== 'jp')
       .slice(0, MAX_DISPLAY_COUNTRIES);
   }, [allCountries]);
 
@@ -86,7 +86,7 @@ export function WorldSection() {
               onPress={() => handleCountryPress(country.name)}
               className="flex-row items-center bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 active:opacity-70"
             >
-              <Text style={{ fontSize: 24 }}>{getCountryFlagEmoji(country.country_code)}</Text>
+              <Text style={{ fontSize: 24 }}>{getCountryFlagEmoji(country.id)}</Text>
               <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
                 {country.name}
               </Text>

@@ -6,7 +6,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_CATEGORY_COLORS, LOCATION_ICONS } from '@/shared/config';
+import { colors, SPOT_TYPE_COLORS, LOCATION_ICONS } from '@/shared/config';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
 import { determineSpotCategory } from '@/entities/master-spot';
@@ -125,7 +125,7 @@ export function DefaultMapSearch({
 
                   // スポットの場合はカテゴリカラーを使用
                   const spotCategoryColor = place.type === 'spot'
-                    ? SPOT_CATEGORY_COLORS[determineSpotCategory(place.googleTypes ?? null)]
+                    ? SPOT_TYPE_COLORS[determineSpotCategory(place.googleTypes ?? null)]
                     : null;
 
                   return (

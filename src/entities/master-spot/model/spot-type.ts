@@ -1,5 +1,7 @@
 /**
- * Master Spot カテゴリ判定ロジック
+ * Master Spot タイプ判定ロジック
+ *
+ * Google Places APIのtypesからスポットタイプを判定
  */
 
 export type SpotCategory = 'food' | 'shopping' | 'tourism' | 'transit' | 'other';

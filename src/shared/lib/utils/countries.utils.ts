@@ -16,13 +16,14 @@ import oceaniaCountries from '@/shared/assets/data/countries/oceania.json';
 import africaCountries from '@/shared/assets/data/countries/africa.json';
 
 // 国データの型（JSONから読み込む形式）
+// Note: JSONのidはcountry_code(jp, kr, cn...)になっている
 interface CountryJsonData {
-  id: string;
+  id: string; // country_code (jp, kr, cn...)
   name: string;
   name_kana: string;
   latitude: number;
   longitude: number;
-  country_code: string;
+  country_code: string; // 後方互換性のため残す（id と同じ値）
 }
 
 // 大陸IDと国データのマッピング
@@ -40,17 +41,18 @@ const countriesByContinent: Record<string, CountryJsonData[]> = {
 
 /**
  * JSONデータをCountryRowに変換
+ * Note: countries.idは国コード（jp, kr, cn...）
  */
 function toCountryRow(country: CountryJsonData, continentId: string): CountryRow {
   const now = new Date().toISOString();
   return {
-    id: country.id,
+    id: country.country_code, // country_codeをidとして使用
     name: country.name,
     name_kana: country.name_kana,
     latitude: country.latitude,
     longitude: country.longitude,
-    country_code: country.country_code,
     continent_id: continentId,
+    name_translations: null,
     created_at: now,
     updated_at: now,
   };
@@ -78,9 +80,10 @@ export function getCountriesByContinent(continentId: string): CountryRow[] {
 
 /**
  * 国コードから国データを取得
+ * Note: countries.idは国コード（jp, kr, cn...）なのでidで検索
  */
 export function getCountryByCode(countryCode: string): CountryRow | undefined {
-  return getCountriesData().find((c) => c.country_code === countryCode);
+  return getCountriesData().find((c) => c.id === countryCode);
 }
 
 /**
@@ -92,7 +95,8 @@ export function getAvailableContinentIds(): string[] {
 
 /**
  * 利用可能な国コードの一覧を取得
+ * Note: countries.idは国コード（jp, kr, cn...）
  */
 export function getAvailableCountryCodes(): string[] {
-  return getCountriesData().map((c) => c.country_code);
+  return getCountriesData().map((c) => c.id);
 }

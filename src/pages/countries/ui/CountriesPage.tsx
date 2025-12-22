@@ -49,8 +49,8 @@ export function CountriesPage() {
   const sections = useMemo((): SectionData[] => {
     if (!continents || !allCountries) return [];
 
-    // 日本以外の国
-    const countries = allCountries.filter((c) => c.country_code !== 'jp');
+    // 日本以外の国（countries.idは国コード：jp, kr, cn...）
+    const countries = allCountries.filter((c) => c.id !== 'jp');
 
     // 国を大陸ごとにグループ化
     const groupedByContinent = new Map<string, CountryRow[]>();
@@ -119,7 +119,7 @@ export function CountriesPage() {
                         className="flex-row items-center bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 active:opacity-70"
                       >
                         <Text style={{ fontSize: 24 }}>
-                          {getCountryFlagEmoji(country.country_code)}
+                          {getCountryFlagEmoji(country.id)}
                         </Text>
                         <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3 flex-1" numberOfLines={1}>
                           {country.name}

@@ -7,7 +7,7 @@ import { View, Text, Pressable, ActivityIndicator, Linking } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, LOCATION_ICONS, SPOT_CATEGORY_COLORS } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_TYPE_COLORS } from '@/shared/config';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
@@ -243,13 +243,13 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
         {/* スポットランキング */}
         <View>
           <View className="flex-row items-center mb-3">
-            <LocationPinIcon size={18} color={SPOT_CATEGORY_COLORS.popular} />
+            <LocationPinIcon size={18} color={SPOT_TYPE_COLORS.popular} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
               人気スポット
             </Text>
             {masterSpots.length > 0 && (
               <View className="ml-2 px-2 py-0.5 bg-amber-100 rounded-full">
-                <Text className="text-xs font-semibold" style={{ color: SPOT_CATEGORY_COLORS.popular }}>
+                <Text className="text-xs font-semibold" style={{ color: SPOT_TYPE_COLORS.popular }}>
                   {masterSpots.length}
                 </Text>
               </View>
@@ -283,14 +283,6 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                     {spot.name}
                   </Text>
                   <View className="flex-row items-center mt-0.5">
-                    {spot.bookmarks_count > 0 && (
-                      <View className="flex-row items-center mr-3">
-                        <Ionicons name="bookmark" size={12} color={colors.primary.DEFAULT} />
-                        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                          {spot.bookmarks_count}
-                        </Text>
-                      </View>
-                    )}
                     {spot.google_rating && (
                       <View className="flex-row items-center">
                         <Ionicons name="star" size={12} color="#F59E0B" />

@@ -36,6 +36,7 @@ const prefecturesByCountry: Record<string, PrefectureJsonData[]> = {
 
 /**
  * JSONデータをPrefectureRowに変換
+ * Note: Supabaseのprefecturesテーブルにはcountry_codeがない（region_id経由で国を取得）
  */
 function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow {
   const now = new Date().toISOString();
@@ -47,7 +48,6 @@ function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow {
     region_id: prefecture.region_id,
     latitude: prefecture.latitude,
     longitude: prefecture.longitude,
-    country_code: prefecture.country_code,
     created_at: now,
     updated_at: now,
   };

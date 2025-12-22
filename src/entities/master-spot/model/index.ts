@@ -3,5 +3,5 @@
  */
 
 export * from './types';
-export * from './categories';
+export * from './spot-type';
 export * from './use-master-spots-geojson';

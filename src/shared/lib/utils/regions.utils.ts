@@ -20,7 +20,7 @@ interface RegionJsonData {
   name_kana: string;
   latitude: number;
   longitude: number;
-  country_code: string;
+  country_code: string; // JSONではcountry_codeだが、DBではcountry_idとして使用
   display_order: number;
 }
 
@@ -36,6 +36,7 @@ const regionsByCountry: Record<string, RegionJsonData[]> = {
 
 /**
  * JSONデータをRegionRowに変換
+ * Note: JSONのcountry_codeはDBのcountry_id（countries.id）に対応
  */
 function toRegionRow(region: RegionJsonData): RegionRow {
   const now = new Date().toISOString();
@@ -46,7 +47,7 @@ function toRegionRow(region: RegionJsonData): RegionRow {
     name_translations: JSON.stringify({ en: region.name_en }),
     latitude: region.latitude,
     longitude: region.longitude,
-    country_code: region.country_code,
+    country_id: region.country_code, // country_codeをcountry_idとして使用
     display_order: region.display_order,
     created_at: now,
     updated_at: now,
