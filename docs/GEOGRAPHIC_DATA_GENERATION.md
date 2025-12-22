@@ -2,6 +2,32 @@
 
 本ドキュメントでは、OSMから取得した地理データ（machi、cities、transport_hubs）およびPostGISポリゴンデータ（admin_boundaries）の生成・登録方法をまとめています。
 
+## クイックスタート
+
+全国データを一括で登録する場合の手順：
+
+```bash
+# 1. OSMデータ取得（約1-2時間）
+npx tsx scripts/osm/fetch-all-prefectures.ts
+
+# 2. マスターデータ登録（continents, countries, regions, prefectures）
+npx tsx scripts/supabase/upload-master-data.ts
+
+# 3. OSMデータ登録（cities, machi, transport_hubs）
+npx tsx scripts/supabase/upload-osm-data.ts
+
+# 4. ポリゴン登録（psql経由）
+bash scripts/supabase/upload-admin-boundaries.sh
+
+# 5. machi更新（city_id, id, city_name）
+psql -h db.YOUR_PROJECT.supabase.co -p 5432 -U postgres -d postgres \
+  -f scripts/sql/update-machi-after-polygon.sql
+```
+
+**注意**: 手順4-5はpsqlコマンドを使用します。接続情報は`.env`ファイルまたはSupabaseダッシュボードで確認してください。
+
+---
+
 ## 概要
 
 ### データの種類
