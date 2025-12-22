@@ -82,9 +82,9 @@ function updateSpotInCache(
     }
   );
 
-  // 単一スポットキャッシュ ['spot', spotId] も更新
+  // 単一スポットキャッシュも更新
   queryClient.setQueryData<SpotWithDetails>(
-    ['spot', spotId],
+    QUERY_KEYS.spotsDetail(spotId),
     (oldData) => {
       if (!oldData) return oldData;
       return {
@@ -130,7 +130,7 @@ function getSpotIsLiked(
   }
 
   // 単一スポットキャッシュからも検索
-  const singleSpot = queryClient.getQueryData<SpotWithDetails>(['spot', spotId]);
+  const singleSpot = queryClient.getQueryData<SpotWithDetails>(QUERY_KEYS.spotsDetail(spotId));
   if (singleSpot) {
     return singleSpot.is_liked ?? false;
   }
@@ -175,7 +175,7 @@ export function useToggleSpotLike() {
     },
     onSuccess: (_, { userId }) => {
       // いいね一覧のキャッシュを無効化して再取得
-      queryClient.invalidateQueries({ queryKey: ['user-liked-spots', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userLikedSpots(userId) });
     },
   });
 }

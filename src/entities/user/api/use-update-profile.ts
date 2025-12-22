@@ -10,6 +10,7 @@ import {
   uploadAvatar,
   type ProfileUpdateData,
 } from '@/shared/api/supabase/users';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { useUserStore } from '../model/use-user-store';
 
 interface UpdateProfileParams {
@@ -34,9 +35,9 @@ export function useUpdateProfile() {
       updateUserProfile(userId, data),
     onSuccess: (updatedUser) => {
       // ユーザー情報のキャッシュを更新
-      queryClient.setQueryData(['user', updatedUser.id], updatedUser);
+      queryClient.setQueryData(QUERY_KEYS.usersDetail(updatedUser.id), updatedUser);
       // ユーザー一覧系のキャッシュも無効化
-      queryClient.invalidateQueries({ queryKey: ['user', updatedUser.id] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.usersDetail(updatedUser.id) });
       // Zustand ストアも更新（AsyncStorageに永続化される）
       updateStoreProfile({
         display_name: updatedUser.display_name,

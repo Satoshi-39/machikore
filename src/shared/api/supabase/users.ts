@@ -11,7 +11,7 @@ type UserUpdate = Database['public']['Tables']['users']['Update'];
 
 /** プロフィール更新用の型 */
 export interface ProfileUpdateData {
-  display_name?: string | null;
+  display_name?: string;
   bio?: string | null;
   avatar_url?: string | null;
 }

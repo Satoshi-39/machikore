@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getMapArticle } from '@/shared/api/supabase';
 import type { MapArticleData } from '@/shared/types';
 
@@ -11,7 +12,7 @@ import type { MapArticleData } from '@/shared/types';
  */
 export function useMapArticle(mapId: string | null, currentUserId?: string | null) {
   return useQuery<MapArticleData | null, Error>({
-    queryKey: ['map-article', mapId, currentUserId],
+    queryKey: [...QUERY_KEYS.mapsArticle(mapId || ''), currentUserId],
     queryFn: () => {
       if (!mapId) return null;
       return getMapArticle(mapId, currentUserId);

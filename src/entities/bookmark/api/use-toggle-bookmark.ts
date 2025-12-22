@@ -4,6 +4,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   toggleSpotBookmark,
   toggleMapBookmark,
@@ -36,18 +37,15 @@ export function useToggleSpotBookmark() {
     onMutate: async ({ userId, spotId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['bookmark-status', 'spot', userId, spotId],
+        queryKey: QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
       });
 
-      const previousStatus = queryClient.getQueryData<boolean>([
-        'bookmark-status',
-        'spot',
-        userId,
-        spotId,
-      ]);
+      const previousStatus = queryClient.getQueryData<boolean>(
+        QUERY_KEYS.bookmarkStatus('spot', userId, spotId)
+      );
 
       queryClient.setQueryData(
-        ['bookmark-status', 'spot', userId, spotId],
+        QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
         !previousStatus
       );
 
@@ -63,14 +61,14 @@ export function useToggleSpotBookmark() {
       // ロールバック
       if (context?.previousStatus !== undefined) {
         queryClient.setQueryData(
-          ['bookmark-status', 'spot', userId, spotId],
+          QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
           context.previousStatus
         );
       }
     },
     onSuccess: (_, { userId }) => {
       // ブックマーク一覧を更新
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
     },
   });
 }
@@ -94,18 +92,15 @@ export function useToggleMapBookmark() {
     onMutate: async ({ userId, mapId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['bookmark-status', 'map', userId, mapId],
+        queryKey: QUERY_KEYS.bookmarkStatus('map', userId, mapId),
       });
 
-      const previousStatus = queryClient.getQueryData<boolean>([
-        'bookmark-status',
-        'map',
-        userId,
-        mapId,
-      ]);
+      const previousStatus = queryClient.getQueryData<boolean>(
+        QUERY_KEYS.bookmarkStatus('map', userId, mapId)
+      );
 
       queryClient.setQueryData(
-        ['bookmark-status', 'map', userId, mapId],
+        QUERY_KEYS.bookmarkStatus('map', userId, mapId),
         !previousStatus
       );
 
@@ -121,14 +116,14 @@ export function useToggleMapBookmark() {
       // ロールバック
       if (context?.previousStatus !== undefined) {
         queryClient.setQueryData(
-          ['bookmark-status', 'map', userId, mapId],
+          QUERY_KEYS.bookmarkStatus('map', userId, mapId),
           context.previousStatus
         );
       }
     },
     onSuccess: (_, { userId }) => {
       // ブックマーク一覧を更新
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
     },
   });
 }
@@ -149,7 +144,7 @@ export function useMoveBookmarkToFolder() {
       userId: string;
     }) => moveBookmarkToFolder(bookmarkId, folderId),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
     },
     onError: (error) => {
       log.error('[Bookmark] useMoveBookmarkToFolder Error:', error);
@@ -181,11 +176,11 @@ export function useBookmarkSpot() {
     onMutate: async ({ userId, spotId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['bookmark-status', 'spot', userId, spotId],
+        queryKey: QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
       });
 
       queryClient.setQueryData(
-        ['bookmark-status', 'spot', userId, spotId],
+        QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
         true
       );
     },
@@ -198,7 +193,7 @@ export function useBookmarkSpot() {
       });
       // ロールバック
       queryClient.setQueryData(
-        ['bookmark-status', 'spot', userId, spotId],
+        QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
         false
       );
     },
@@ -208,9 +203,9 @@ export function useBookmarkSpot() {
         text1: '保存しました',
         visibilityTime: 2000,
       });
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-info', 'spot', userId, spotId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'spot', userId, spotId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkInfo('spot', userId, spotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkStatus('spot', userId, spotId) });
     },
   });
 }
@@ -232,11 +227,11 @@ export function useUnbookmarkSpot() {
     onMutate: async ({ userId, spotId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['bookmark-status', 'spot', userId, spotId],
+        queryKey: QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
       });
 
       queryClient.setQueryData(
-        ['bookmark-status', 'spot', userId, spotId],
+        QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
         false
       );
     },
@@ -249,7 +244,7 @@ export function useUnbookmarkSpot() {
       });
       // ロールバック
       queryClient.setQueryData(
-        ['bookmark-status', 'spot', userId, spotId],
+        QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
         true
       );
     },
@@ -259,9 +254,9 @@ export function useUnbookmarkSpot() {
         text1: '保存を解除しました',
         visibilityTime: 2000,
       });
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-info', 'spot', userId, spotId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'spot', userId, spotId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkInfo('spot', userId, spotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkStatus('spot', userId, spotId) });
     },
   });
 }
@@ -285,11 +280,11 @@ export function useBookmarkMap() {
     onMutate: async ({ userId, mapId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['bookmark-status', 'map', userId, mapId],
+        queryKey: QUERY_KEYS.bookmarkStatus('map', userId, mapId),
       });
 
       queryClient.setQueryData(
-        ['bookmark-status', 'map', userId, mapId],
+        QUERY_KEYS.bookmarkStatus('map', userId, mapId),
         true
       );
     },
@@ -302,7 +297,7 @@ export function useBookmarkMap() {
       });
       // ロールバック
       queryClient.setQueryData(
-        ['bookmark-status', 'map', userId, mapId],
+        QUERY_KEYS.bookmarkStatus('map', userId, mapId),
         false
       );
     },
@@ -312,9 +307,9 @@ export function useBookmarkMap() {
         text1: '保存しました',
         visibilityTime: 2000,
       });
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-info', 'map', userId, mapId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'map', userId, mapId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkInfo('map', userId, mapId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkStatus('map', userId, mapId) });
     },
   });
 }
@@ -336,11 +331,11 @@ export function useUnbookmarkMap() {
     onMutate: async ({ userId, mapId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['bookmark-status', 'map', userId, mapId],
+        queryKey: QUERY_KEYS.bookmarkStatus('map', userId, mapId),
       });
 
       queryClient.setQueryData(
-        ['bookmark-status', 'map', userId, mapId],
+        QUERY_KEYS.bookmarkStatus('map', userId, mapId),
         false
       );
     },
@@ -353,7 +348,7 @@ export function useUnbookmarkMap() {
       });
       // ロールバック
       queryClient.setQueryData(
-        ['bookmark-status', 'map', userId, mapId],
+        QUERY_KEYS.bookmarkStatus('map', userId, mapId),
         true
       );
     },
@@ -363,9 +358,9 @@ export function useUnbookmarkMap() {
         text1: '保存を解除しました',
         visibilityTime: 2000,
       });
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-info', 'map', userId, mapId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'map', userId, mapId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkInfo('map', userId, mapId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkStatus('map', userId, mapId) });
     },
   });
 }
@@ -387,9 +382,9 @@ export function useUnbookmarkSpotFromFolder() {
       folderId: string | null;
     }) => unbookmarkSpotFromFolder(userId, spotId, folderId),
     onSuccess: (_, { userId, spotId }) => {
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-info', 'spot', userId, spotId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'spot', userId, spotId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkInfo('spot', userId, spotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkStatus('spot', userId, spotId) });
     },
     onError: (error) => {
       log.error('[Bookmark] useUnbookmarkSpotFromFolder Error:', error);
@@ -419,9 +414,9 @@ export function useUnbookmarkMapFromFolder() {
       folderId: string | null;
     }) => unbookmarkMapFromFolder(userId, mapId, folderId),
     onSuccess: (_, { userId, mapId }) => {
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-info', 'map', userId, mapId] });
-      queryClient.invalidateQueries({ queryKey: ['bookmark-status', 'map', userId, mapId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkInfo('map', userId, mapId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkStatus('map', userId, mapId) });
     },
     onError: (error) => {
       log.error('[Bookmark] useUnbookmarkMapFromFolder Error:', error);
@@ -433,4 +428,3 @@ export function useUnbookmarkMapFromFolder() {
     },
   });
 }
-

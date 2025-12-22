@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getUserLikedSpots, getUserLikedMaps } from '@/shared/api/supabase/likes';
 
 /**
@@ -10,7 +11,7 @@ import { getUserLikedSpots, getUserLikedMaps } from '@/shared/api/supabase/likes
  */
 export function useUserLikedSpots(userId: string | null | undefined) {
   return useQuery({
-    queryKey: ['user-liked-spots', userId],
+    queryKey: QUERY_KEYS.userLikedSpots(userId || ''),
     queryFn: () => {
       if (!userId) return [];
       return getUserLikedSpots(userId);
@@ -24,7 +25,7 @@ export function useUserLikedSpots(userId: string | null | undefined) {
  */
 export function useUserLikedMaps(userId: string | null | undefined) {
   return useQuery({
-    queryKey: ['user-liked-maps', userId],
+    queryKey: QUERY_KEYS.userLikedMaps(userId || ''),
     queryFn: () => {
       if (!userId) return [];
       return getUserLikedMaps(userId);

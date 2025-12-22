@@ -277,20 +277,15 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
     // 地方ラベルタップ時のハンドラー（ズーム付き）
     const handleRegionLabelPress = useCallback((region: import('@/shared/types/database.types').RegionRow) => {
       handleRegionSelect(region);
-      // 座標付きデータからズーム
-      const regionCoords = regionMap.get(region.id);
-      if (regionCoords) {
-        flyToLocation(regionCoords.longitude, regionCoords.latitude, MAP_ZOOM.REGION);
-      }
-    }, [handleRegionSelect, regionMap, flyToLocation]);
+      // regionsはNOT NULLなので直接ズーム
+      flyToLocation(region.longitude, region.latitude, MAP_ZOOM.REGION);
+    }, [handleRegionSelect, flyToLocation]);
 
     // 都道府県ラベルタップ時のハンドラー（ズーム付き）
     const handlePrefectureLabelPress = useCallback((prefecture: PrefectureRow) => {
       handlePrefectureSelect(prefecture);
-      // 座標がある場合のみズーム
-      if (prefecture.longitude != null && prefecture.latitude != null) {
-        flyToLocation(prefecture.longitude, prefecture.latitude, MAP_ZOOM.PREFECTURE);
-      }
+      // prefecturesはNOT NULLなので直接ズーム
+      flyToLocation(prefecture.longitude, prefecture.latitude, MAP_ZOOM.PREFECTURE);
     }, [handlePrefectureSelect, flyToLocation]);
 
     // ヘッダーの地名クリック時のハンドラー
@@ -315,18 +310,23 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       if (selectedSpot) {
         return { lng: selectedSpot.longitude, lat: selectedSpot.latitude, zoom: MAP_ZOOM.SPOT };
       }
-      if (selectedMachi) {
+      // machiはNULL許容なのでnullチェックが必要
+      if (selectedMachi && selectedMachi.longitude != null && selectedMachi.latitude != null) {
         return { lng: selectedMachi.longitude, lat: selectedMachi.latitude, zoom: MAP_ZOOM.MACHI };
       }
+      // citiesはNULL許容なのでnullチェックが必要
       if (selectedCity && selectedCity.longitude != null && selectedCity.latitude != null) {
         return { lng: selectedCity.longitude, lat: selectedCity.latitude, zoom: MAP_ZOOM.CITY };
       }
-      if (selectedPrefecture && selectedPrefecture.longitude != null && selectedPrefecture.latitude != null) {
+      // prefecturesはNOT NULLなので直接参照可能
+      if (selectedPrefecture) {
         return { lng: selectedPrefecture.longitude, lat: selectedPrefecture.latitude, zoom: MAP_ZOOM.PREFECTURE };
       }
+      // regionsはNOT NULLなので直接参照可能
       if (selectedRegion) {
         return { lng: selectedRegion.longitude, lat: selectedRegion.latitude, zoom: MAP_ZOOM.REGION };
       }
+      // countriesはNOT NULLなので直接参照可能
       if (selectedCountry) {
         return { lng: selectedCountry.longitude, lat: selectedCountry.latitude, zoom: MAP_ZOOM.COUNTRY };
       }
@@ -510,11 +510,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           onRegionSelect={(region) => {
             // 国カードが閉じた後に地方カードを開く
             handleRegionSelect(region);
-            // カメラを地方の位置に移動（座標がある場合のみ）
-            const regionCoords = regionMap.get(region.id);
-            if (regionCoords) {
-              flyToLocation(regionCoords.longitude, regionCoords.latitude, MAP_ZOOM.REGION);
-            }
+            // regionsはNOT NULLなので直接ズーム
+            flyToLocation(region.longitude, region.latitude, MAP_ZOOM.REGION);
           }}
         />
       )}
@@ -531,10 +528,8 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
           onPrefectureSelect={(prefecture) => {
             // 地方カードが閉じた後に都道府県カードを開く
             handlePrefectureSelect(prefecture);
-            // カメラを都道府県の位置に移動（座標がある場合のみ）
-            if (prefecture.longitude != null && prefecture.latitude != null) {
-              flyToLocation(prefecture.longitude, prefecture.latitude, MAP_ZOOM.PREFECTURE);
-            }
+            // prefecturesはNOT NULLなので直接ズーム
+            flyToLocation(prefecture.longitude, prefecture.latitude, MAP_ZOOM.PREFECTURE);
           }}
         />
       )}
@@ -590,8 +585,10 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             // 市区カードが閉じた後に街カードを開く
             // handleMachiSelect内部でselectedCityもクリアされる
             handleMachiSelect(machi);
-            // カメラを街の位置に移動
-            flyToLocation(machi.longitude, machi.latitude, MAP_ZOOM.MACHI);
+            // カメラを街の位置に移動（座標がある場合のみ）
+            if (machi.longitude != null && machi.latitude != null) {
+              flyToLocation(machi.longitude, machi.latitude, MAP_ZOOM.MACHI);
+            }
           }}
         />
       )}

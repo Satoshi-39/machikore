@@ -38,8 +38,12 @@ const prefecturesByCountry: Record<string, PrefectureJsonData[]> = {
  * JSONデータをPrefectureRowに変換
  * Note: Supabaseのprefecturesテーブルにはcountry_codeがない（region_id経由で国を取得）
  */
-function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow {
+function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow | null {
   const now = new Date().toISOString();
+  // latitude/longitudeがnullの場合はスキップ（DBはNOT NULL制約）
+  if (prefecture.latitude == null || prefecture.longitude == null) {
+    return null;
+  }
   return {
     id: prefecture.id,
     name: prefecture.name,
@@ -62,7 +66,8 @@ function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow {
 export function getPrefecturesData(): PrefectureRow[] {
   return Object.values(prefecturesByCountry)
     .flat()
-    .map(toPrefectureRow);
+    .map(toPrefectureRow)
+    .filter((p): p is PrefectureRow => p !== null);
 }
 
 /**
@@ -73,7 +78,9 @@ export function getPrefecturesByCountry(countryCode: string): PrefectureRow[] {
   if (!prefectures) {
     return [];
   }
-  return prefectures.map(toPrefectureRow);
+  return prefectures
+    .map(toPrefectureRow)
+    .filter((p): p is PrefectureRow => p !== null);
 }
 
 /**

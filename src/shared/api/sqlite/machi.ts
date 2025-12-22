@@ -122,6 +122,7 @@ export function getNearbyMachi(
 
 /**
  * 街データを1件挿入
+ * Note: country_codeは持たない（prefecture_id経由で国を取得）
  */
 export function insertMachi(machi: MachiRow): void {
   const row = toSQLite(machi);
@@ -129,10 +130,10 @@ export function insertMachi(machi: MachiRow): void {
     `
     INSERT INTO machi (
       id, name, name_kana, name_translations, latitude, longitude,
-      prefecture_id, city_id, country_code, prefecture_name, prefecture_name_translations,
+      prefecture_id, city_id, tile_id, osm_id, place_type, prefecture_name, prefecture_name_translations,
       city_name, city_name_translations, created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       row.id,
@@ -143,7 +144,9 @@ export function insertMachi(machi: MachiRow): void {
       row.longitude,
       row.prefecture_id,
       row.city_id,
-      row.country_code,
+      row.tile_id,
+      row.osm_id,
+      row.place_type,
       row.prefecture_name,
       row.prefecture_name_translations,
       row.city_name,
@@ -156,6 +159,7 @@ export function insertMachi(machi: MachiRow): void {
 
 /**
  * 複数の街データを一括挿入
+ * Note: country_codeは持たない（prefecture_id経由で国を取得）
  */
 export function bulkInsertMachi(machiList: MachiRow[]): void {
   const statements = machiList.map((machi) => {
@@ -164,10 +168,10 @@ export function bulkInsertMachi(machiList: MachiRow[]): void {
       sql: `
         INSERT OR REPLACE INTO machi (
           id, name, name_kana, name_translations, latitude, longitude,
-          prefecture_id, city_id, tile_id, country_code, prefecture_name, prefecture_name_translations,
+          prefecture_id, city_id, tile_id, osm_id, place_type, prefecture_name, prefecture_name_translations,
           city_name, city_name_translations, created_at, updated_at
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       `,
       params: [
         row.id,
@@ -179,7 +183,8 @@ export function bulkInsertMachi(machiList: MachiRow[]): void {
         row.prefecture_id,
         row.city_id,
         row.tile_id,
-        row.country_code,
+        row.osm_id,
+        row.place_type,
         row.prefecture_name,
         row.prefecture_name_translations,
         row.city_name,

@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { supabase } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
 import type { Database } from '@/shared/types/database.types';
@@ -53,7 +54,7 @@ async function getFeaturedCarouselItems(categoryId?: string): Promise<FeaturedCa
  */
 export function useFeaturedCarouselItems(categoryId?: string) {
   return useQuery<FeaturedCarouselItem[], Error>({
-    queryKey: ['featured-carousel-items', categoryId ?? 'all'],
+    queryKey: QUERY_KEYS.featuredCarouselByCategory(categoryId),
     queryFn: () => getFeaturedCarouselItems(categoryId),
     // 5分ごとに更新
     staleTime: 5 * 60 * 1000,
@@ -87,7 +88,7 @@ async function getFeaturedCarouselItem(id: string): Promise<FeaturedCarouselItem
  */
 export function useFeaturedCarouselItem(id: string | undefined) {
   return useQuery<FeaturedCarouselItem | null, Error>({
-    queryKey: ['featured-carousel-item', id],
+    queryKey: QUERY_KEYS.featuredCarouselDetail(id || ''),
     queryFn: () => getFeaturedCarouselItem(id!),
     enabled: !!id,
     staleTime: 5 * 60 * 1000,

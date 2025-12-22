@@ -28,7 +28,6 @@ export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
     user_id: map.user_id,
     name: map.name,
     description: map.description,
-    category: map.category,
     category_id: map.category_id,
     is_public: map.is_public,
     is_default: map.is_default,

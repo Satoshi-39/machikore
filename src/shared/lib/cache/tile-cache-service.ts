@@ -33,7 +33,6 @@ function toSQLiteMachi(machi: Record<string, unknown>): MachiRow {
     name_translations: jsonify(machi.name_translations),
     prefecture_name_translations: jsonify(machi.prefecture_name_translations),
     city_name_translations: jsonify(machi.city_name_translations),
-    country_code: (machi.country_code as string) || 'jp',
     prefecture_name: (machi.prefecture_name as string) || '',
     created_at: (machi.created_at as string) || now,
     updated_at: (machi.updated_at as string) || now,
@@ -47,7 +46,6 @@ function toSQLiteCity(city: Record<string, unknown>): CityRow {
     ...city,
     name_kana: (city.name_kana as string) || (city.name as string),
     name_translations: jsonify(city.name_translations),
-    country_code: (city.country_code as string) || 'jp',
     created_at: (city.created_at as string) || now,
     updated_at: (city.updated_at as string) || now,
   } as CityRow;
@@ -345,6 +343,7 @@ function toSQLiteTransportHub(hub: Record<string, unknown>): TransportHubRow {
     subtype: hub.subtype as string | null,
     name: hub.name as string,
     name_kana: hub.name_kana as string | null,
+    name_translations: hub.name_translations as Record<string, string> | null,
     operator: hub.operator as string | null,
     network: hub.network as string | null,
     ref: hub.ref as string | null,

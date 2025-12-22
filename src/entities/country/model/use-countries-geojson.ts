@@ -4,15 +4,7 @@
 
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
-
-interface CountryRow {
-  id: string;
-  name: string;
-  name_kana: string;
-  latitude: number;
-  longitude: number;
-  country_code: string;
-}
+import type { CountryRow } from '@/shared/types/database.types';
 
 interface CountryFeatureProperties {
   id: string;
@@ -22,24 +14,29 @@ interface CountryFeatureProperties {
 
 /**
  * CountryデータをGeoJSON形式に変換
+ * Note: countries.idは国コード（jp, kr, cn...）なのでcodeにはidを使用
  */
 export function useCountriesGeoJson(
   countries: CountryRow[]
 ): FeatureCollection<Point, CountryFeatureProperties> {
   return useMemo(() => {
+    // 座標がnullのデータは除外
+    const validCountries = countries.filter(
+      (country) => country.longitude != null && country.latitude != null
+    );
     return {
       type: 'FeatureCollection',
-      features: countries.map((country) => ({
-        type: 'Feature',
+      features: validCountries.map((country) => ({
+        type: 'Feature' as const,
         id: country.id,
         geometry: {
-          type: 'Point',
-          coordinates: [country.longitude, country.latitude],
+          type: 'Point' as const,
+          coordinates: [country.longitude!, country.latitude!],
         },
         properties: {
           id: country.id,
           name: country.name,
-          code: country.country_code,
+          code: country.id, // countries.idは国コード（jp, kr, cn...）
         },
       })),
     };

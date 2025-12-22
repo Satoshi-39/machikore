@@ -104,8 +104,9 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     master_spot_id: masterSpotId,
     machi_id: input.machiId ?? null,
     prefecture_id: input.prefectureId ?? null,
-    latitude: input.googlePlaceId ? null : input.latitude,
-    longitude: input.googlePlaceId ? null : input.longitude,
+    // latitude/longitudeはNOT NULL制約があるため、常に値を設定
+    latitude: input.latitude,
+    longitude: input.longitude,
     google_formatted_address: input.googlePlaceId ? null : input.googleFormattedAddress ?? null,
     google_short_address: input.googlePlaceId ? null : input.googleShortAddress ?? null,
     custom_name: input.customName ?? input.name,

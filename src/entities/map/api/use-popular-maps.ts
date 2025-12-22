@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { supabase } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
 import { log } from '@/shared/config/logger';
@@ -74,7 +75,7 @@ async function getPopularMaps(limit: number = 10, currentUserId?: string | null)
  */
 export function usePopularMaps(limit: number = 10, currentUserId?: string | null) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: ['popular-maps', limit, currentUserId],
+    queryKey: [...QUERY_KEYS.mapsPopular(limit), currentUserId],
     queryFn: () => getPopularMaps(limit, currentUserId),
     staleTime: 5 * 60 * 1000, // 5分
   });
@@ -171,7 +172,7 @@ async function getTodayPicksMaps(limit: number = 10, currentUserId?: string | nu
  */
 export function useTodayPicksMaps(limit: number = 10, currentUserId?: string | null) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: ['today-picks-maps', limit, currentUserId],
+    queryKey: [...QUERY_KEYS.mapsTodayPicks(limit), currentUserId],
     queryFn: () => getTodayPicksMaps(limit, currentUserId),
     staleTime: 5 * 60 * 1000, // 5分
   });

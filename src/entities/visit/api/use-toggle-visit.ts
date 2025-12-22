@@ -9,7 +9,7 @@ import {
   toggleVisit,
   getVisitByUserAndMachi,
 } from '@/shared/api/supabase/visits';
-import { invalidateVisits } from '@/shared/api/query-client';
+import { QUERY_KEYS, invalidateVisits } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
@@ -28,7 +28,7 @@ interface MutationContext {
  */
 export function useCheckMachiVisited(userId: UUID | null | undefined, machiId: string | null | undefined) {
   return useQuery<boolean, Error>({
-    queryKey: ['machi-visit-status', userId, machiId],
+    queryKey: QUERY_KEYS.visitsStatus(userId || '', machiId || ''),
     queryFn: () => {
       if (!userId || !machiId) return false;
       return checkMachiVisited(userId, machiId);
@@ -43,7 +43,7 @@ export function useCheckMachiVisited(userId: UUID | null | undefined, machiId: s
  */
 export function useVisitInfo(userId: UUID | null | undefined, machiId: string | null | undefined) {
   return useQuery({
-    queryKey: ['machi-visit-info', userId, machiId],
+    queryKey: QUERY_KEYS.visitsInfo(userId || '', machiId || ''),
     queryFn: () => {
       if (!userId || !machiId) return null;
       return getVisitByUserAndMachi(userId, machiId);
@@ -65,16 +65,16 @@ export function useToggleVisit() {
     },
     onMutate: async ({ userId, machiId }) => {
       // キャンセル
-      await queryClient.cancelQueries({ queryKey: ['machi-visit-status', userId, machiId] });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.visitsStatus(userId, machiId) });
 
       // 現在の値を保存
       const previousIsVisited = queryClient.getQueryData<boolean>(
-        ['machi-visit-status', userId, machiId]
+        QUERY_KEYS.visitsStatus(userId, machiId)
       );
 
       // 楽観的更新: 訪問状態を反転
       queryClient.setQueryData<boolean>(
-        ['machi-visit-status', userId, machiId],
+        QUERY_KEYS.visitsStatus(userId, machiId),
         !previousIsVisited
       );
 
@@ -90,7 +90,7 @@ export function useToggleVisit() {
       // エラー時は元に戻す
       if (context?.previousIsVisited !== undefined) {
         queryClient.setQueryData<boolean>(
-          ['machi-visit-status', userId, machiId],
+          QUERY_KEYS.visitsStatus(userId, machiId),
           context.previousIsVisited
         );
       }
@@ -104,7 +104,7 @@ export function useToggleVisit() {
       });
 
       // 訪問情報キャッシュを無効化
-      queryClient.invalidateQueries({ queryKey: ['machi-visit-info', userId, machiId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.visitsInfo(userId, machiId) });
 
       // 訪問記録一覧のキャッシュを無効化
       invalidateVisits();

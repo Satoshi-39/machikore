@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import { supabase } from '@/shared/api/supabase';
 import type { ViewHistoryWithMap } from '../model/types';
@@ -70,7 +71,7 @@ export function useRecentViewHistory(
   limit: number = 10
 ) {
   return useQuery<ViewHistoryWithMap[], Error>({
-    queryKey: ['view-history', 'recent', userId, limit],
+    queryKey: QUERY_KEYS.viewHistoryRecent(userId || '', limit),
     queryFn: () => {
       if (!userId) return [];
       return getRecentViewHistory(userId, limit);

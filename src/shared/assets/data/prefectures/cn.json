@@ -1,8 +1,8 @@
 [
   {
-    "id": "cn_14",
+    "id": "cn_tibet",
     "name": "チベット自治区",
-    "name_en": "Tibet",
+    "name_translations": { "en": "Tibet" },
     "name_kana": "",
     "region_id": "cn_southwest",
     "latitude": 31.66667,
@@ -10,9 +10,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_06",
+    "id": "cn_qinghai",
     "name": "青海省",
-    "name_en": "Qinghai",
+    "name_translations": { "en": "Qinghai" },
     "name_kana": "",
     "region_id": "cn_northwest",
     "latitude": 36,
@@ -20,9 +20,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_13",
+    "id": "cn_xinjiang",
     "name": "新疆ウイグル自治区",
-    "name_en": "Xinjiang",
+    "name_translations": { "en": "Xinjiang" },
     "name_kana": "",
     "region_id": "cn_northwest",
     "latitude": 41.5,
@@ -30,9 +30,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_02",
+    "id": "cn_zhejiang",
     "name": "浙江省",
-    "name_en": "Zhejiang",
+    "name_translations": { "en": "Zhejiang" },
     "name_kana": "",
     "region_id": "cn_east",
     "latitude": 29.16667,
@@ -40,9 +40,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_29",
+    "id": "cn_yunnan",
     "name": "雲南省",
-    "name_en": "Yunnan",
+    "name_translations": { "en": "Yunnan" },
     "name_kana": "",
     "region_id": "cn_southwest",
     "latitude": 25,
@@ -50,9 +50,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_28",
+    "id": "cn_tianjin",
     "name": "天津市",
-    "name_en": "Tianjin",
+    "name_translations": { "en": "Tianjin" },
     "name_kana": "",
     "region_id": "cn_north",
     "latitude": 39.33333,
@@ -60,9 +60,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_32",
+    "id": "cn_sichuan",
     "name": "四川省",
-    "name_en": "Sichuan",
+    "name_translations": { "en": "Sichuan" },
     "name_kana": "",
     "region_id": "cn_southwest",
     "latitude": 30.5,
@@ -70,9 +70,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_24",
+    "id": "cn_shanxi",
     "name": "山西省",
-    "name_en": "Shanxi",
+    "name_translations": { "en": "Shanxi" },
     "name_kana": "",
     "region_id": "cn_north",
     "latitude": 37.66667,
@@ -80,9 +80,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_23",
+    "id": "cn_shanghai",
     "name": "上海市",
-    "name_en": "Shanghai",
+    "name_translations": { "en": "Shanghai" },
     "name_kana": "",
     "region_id": "cn_east",
     "latitude": 31.16667,
@@ -90,9 +90,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_25",
+    "id": "cn_shandong",
     "name": "山東省",
-    "name_en": "Shandong",
+    "name_translations": { "en": "Shandong" },
     "name_kana": "",
     "region_id": "cn_east",
     "latitude": 36.33333,
@@ -100,9 +100,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_26",
+    "id": "cn_shaanxi",
     "name": "陝西省",
-    "name_en": "Shaanxi",
+    "name_translations": { "en": "Shaanxi" },
     "name_kana": "",
     "region_id": "cn_northwest",
     "latitude": 36,
@@ -110,9 +110,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_21",
+    "id": "cn_ningxia",
     "name": "寧夏回族自治区",
-    "name_en": "Ningxia",
+    "name_translations": { "en": "Ningxia" },
     "name_kana": "",
     "region_id": "cn_northwest",
     "latitude": 37.25,
@@ -120,9 +120,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_03",
+    "id": "cn_jiangxi",
     "name": "江西省",
-    "name_en": "Jiangxi",
+    "name_translations": { "en": "Jiangxi" },
     "name_kana": "",
     "region_id": "cn_east",
     "latitude": 27.66667,
@@ -130,9 +130,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_04",
+    "id": "cn_jiangsu",
     "name": "江蘇省",
-    "name_en": "Jiangsu",
+    "name_translations": { "en": "Jiangsu" },
     "name_kana": "",
     "region_id": "cn_east",
     "latitude": 33,
@@ -140,9 +140,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_11",
+    "id": "cn_hunan",
     "name": "湖南省",
-    "name_en": "Hunan",
+    "name_translations": { "en": "Hunan" },
     "name_kana": "",
     "region_id": "cn_central",
     "latitude": 27.66667,
@@ -150,9 +150,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_12",
+    "id": "cn_hubei",
     "name": "湖北省",
-    "name_en": "Hubei",
+    "name_translations": { "en": "Hubei" },
     "name_kana": "",
     "region_id": "cn_central",
     "latitude": 31,
@@ -160,9 +160,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_09",
+    "id": "cn_henan",
     "name": "河南省",
-    "name_en": "Henan",
+    "name_translations": { "en": "Henan" },
     "name_kana": "",
     "region_id": "cn_central",
     "latitude": 34,
@@ -170,9 +170,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_10",
+    "id": "cn_hebei",
     "name": "河北省",
-    "name_en": "Hebei",
+    "name_translations": { "en": "Hebei" },
     "name_kana": "",
     "region_id": "cn_north",
     "latitude": 39,
@@ -180,9 +180,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_31",
+    "id": "cn_hainan",
     "name": "海南省",
-    "name_en": "Hainan",
+    "name_translations": { "en": "Hainan" },
     "name_kana": "",
     "region_id": "cn_south",
     "latitude": 19.25,
@@ -190,9 +190,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_18",
+    "id": "cn_guizhou",
     "name": "貴州省",
-    "name_en": "Guizhou",
+    "name_translations": { "en": "Guizhou" },
     "name_kana": "",
     "region_id": "cn_southwest",
     "latitude": 27,
@@ -200,9 +200,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_16",
+    "id": "cn_guangxi",
     "name": "広西チワン族自治区",
-    "name_en": "Guangxi",
+    "name_translations": { "en": "Guangxi" },
     "name_kana": "",
     "region_id": "cn_south",
     "latitude": 24,
@@ -210,9 +210,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_30",
+    "id": "cn_guangdong",
     "name": "広東省",
-    "name_en": "Guangdong",
+    "name_translations": { "en": "Guangdong" },
     "name_kana": "",
     "region_id": "cn_south",
     "latitude": 23.5,
@@ -220,9 +220,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_15",
+    "id": "cn_gansu",
     "name": "甘粛省",
-    "name_en": "Gansu",
+    "name_translations": { "en": "Gansu" },
     "name_kana": "",
     "region_id": "cn_northwest",
     "latitude": 37.75,
@@ -230,9 +230,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_07",
+    "id": "cn_fujian",
     "name": "福建省",
-    "name_en": "Fujian",
+    "name_translations": { "en": "Fujian" },
     "name_kana": "",
     "region_id": "cn_east",
     "latitude": 26.25,
@@ -240,9 +240,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_33",
+    "id": "cn_chongqing",
     "name": "重慶市",
-    "name_en": "Chongqing",
+    "name_translations": { "en": "Chongqing" },
     "name_kana": "",
     "region_id": "cn_southwest",
     "latitude": 30.08333,
@@ -250,9 +250,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_01",
+    "id": "cn_anhui",
     "name": "安徽省",
-    "name_en": "Anhui",
+    "name_translations": { "en": "Anhui" },
     "name_kana": "",
     "region_id": "cn_east",
     "latitude": 31.91667,
@@ -260,9 +260,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_20",
+    "id": "cn_inner_mongolia",
     "name": "内モンゴル自治区",
-    "name_en": "Inner Mongolia",
+    "name_translations": { "en": "Inner Mongolia" },
     "name_kana": "",
     "region_id": "cn_north",
     "latitude": 43.5,
@@ -270,9 +270,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_19",
+    "id": "cn_liaoning",
     "name": "遼寧省",
-    "name_en": "Liaoning",
+    "name_translations": { "en": "Liaoning" },
     "name_kana": "",
     "region_id": "cn_northeast",
     "latitude": 41.25,
@@ -280,9 +280,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_05",
+    "id": "cn_jilin",
     "name": "吉林省",
-    "name_en": "Jilin",
+    "name_translations": { "en": "Jilin" },
     "name_kana": "",
     "region_id": "cn_northeast",
     "latitude": 43.58333,
@@ -290,9 +290,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_08",
+    "id": "cn_heilongjiang",
     "name": "黒竜江省",
-    "name_en": "Heilongjiang",
+    "name_translations": { "en": "Heilongjiang" },
     "name_kana": "",
     "region_id": "cn_northeast",
     "latitude": 47.75,
@@ -300,9 +300,9 @@
     "country_code": "cn"
   },
   {
-    "id": "cn_22",
+    "id": "cn_beijing",
     "name": "北京市",
-    "name_en": "Beijing",
+    "name_translations": { "en": "Beijing" },
     "name_kana": "",
     "region_id": "cn_north",
     "latitude": 39.91691,

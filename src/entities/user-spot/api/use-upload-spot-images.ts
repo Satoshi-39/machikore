@@ -4,6 +4,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import type { Database } from '@/shared/types/supabase.generated';
 import { log } from '@/shared/config/logger';
@@ -90,7 +91,7 @@ export function useUploadSpotImages() {
     },
     onSuccess: (result) => {
       // 画像キャッシュを無効化して再取得
-      queryClient.invalidateQueries({ queryKey: ['spot-images', result.spotId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsImages(result.spotId) });
     },
   });
 }

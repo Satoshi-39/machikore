@@ -108,8 +108,12 @@ export function useCenterLocationName({
     // CITY(11)より少し寄った12以上で街名を表示
     // タイルベースで取得しているので、現在のビューポート内のデータは常に有効
     if (zoom >= MAP_ZOOM.CITY + 1 && machiData && machiData.length > 0) {
-      // 街名を表示
-      const result = findNearest(machiData, center);
+      // 街名を表示（座標がnullのデータを除外 - machiはNULL許容）
+      const validMachi = machiData.filter(
+        (m): m is MachiRow & { latitude: number; longitude: number } =>
+          m.latitude != null && m.longitude != null
+      );
+      const result = findNearest(validMachi, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.MACHI) {
         return { name: result.item.name, type: 'machi', entity: result.item };
       }
@@ -118,33 +122,31 @@ export function useCenterLocationName({
 
     // INITIAL(10)以上で市区名を表示
     if (zoom >= MAP_ZOOM.INITIAL && cities.length > 0) {
-      // 市区名を表示（型アサーション：座標は必ず存在する）
-      const validCities = cities as Array<CityRow & { latitude: number; longitude: number }>;
+      // 市区名を表示（座標がnullのデータを除外 - citiesはNULL許容）
+      const validCities = cities.filter(
+        (c): c is CityRow & { latitude: number; longitude: number } =>
+          c.latitude != null && c.longitude != null
+      );
       const result = findNearest(validCities, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.CITY) {
-        // 元のCityRowを探す
-        const originalCity = cities.find(c => c.id === result.item.id);
-        return { name: result.item.name, type: 'city', entity: originalCity ?? null };
+        return { name: result.item.name, type: 'city', entity: result.item };
       }
       // 距離しきい値を超えた場合は次のレベル（都道府県）にフォールスルー
     }
 
     // REGION(6)以上で都道府県名を表示
     if (zoom >= MAP_ZOOM.REGION && prefectures.length > 0) {
-      // 都道府県名を表示（型アサーション：座標は必ず存在する）
-      const validPrefectures = prefectures as Array<PrefectureRow & { latitude: number; longitude: number }>;
-      const result = findNearest(validPrefectures, center);
+      // prefecturesはNOT NULLなので直接渡せる
+      const result = findNearest(prefectures, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.PREFECTURE) {
-        // 元のPrefectureRowを探す
-        const originalPrefecture = prefectures.find(p => p.id === result.item.id);
-        return { name: result.item.name, type: 'prefecture', entity: originalPrefecture ?? null };
+        return { name: result.item.name, type: 'prefecture', entity: result.item };
       }
       // 距離しきい値を超えた場合は次のレベル（地方）にフォールスルー
     }
 
     // COUNTRY(5)以上で地方名を表示
     if (zoom >= MAP_ZOOM.COUNTRY && regions.length > 0) {
-      // 地方名を表示
+      // regionsはNOT NULLなので直接渡せる
       const result = findNearest(regions, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.REGION) {
         return { name: result.item.name, type: 'region', entity: result.item };
@@ -154,7 +156,7 @@ export function useCenterLocationName({
 
     // EARTH(3)以上で国名を表示
     if (zoom >= MAP_ZOOM.EARTH && countries.length > 0) {
-      // 国名を表示
+      // countriesはNOT NULLなので直接渡せる
       const result = findNearest(countries, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.COUNTRY) {
         return { name: result.item.name, type: 'country', entity: result.item };

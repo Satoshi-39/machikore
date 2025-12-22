@@ -24,14 +24,19 @@ export function useMachiGeoJson(
       return { type: 'FeatureCollection', features: [] };
     }
 
+    // 座標がnullのデータは除外
+    const validMachi = machiData.filter(
+      (machi) => machi.longitude != null && machi.latitude != null
+    );
+
     return {
       type: 'FeatureCollection',
-      features: machiData.map((machi) => ({
-        type: 'Feature',
+      features: validMachi.map((machi) => ({
+        type: 'Feature' as const,
         id: machi.id,
         geometry: {
-          type: 'Point',
-          coordinates: [machi.longitude, machi.latitude],
+          type: 'Point' as const,
+          coordinates: [machi.longitude!, machi.latitude!],
         },
         properties: {
           id: machi.id,

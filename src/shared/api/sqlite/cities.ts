@@ -40,6 +40,7 @@ function toSQLite(city: CityRow): CityRowSQLite {
 
 /**
  * 市区町村を一括挿入
+ * Note: country_codeは持たない（prefecture_id経由で国を取得）
  */
 export function bulkInsertCities(cities: CityRow[]): void {
   const db = getDatabase();
@@ -49,8 +50,8 @@ export function bulkInsertCities(cities: CityRow[]): void {
       const row = toSQLite(city);
       db.runSync(
         `INSERT OR REPLACE INTO cities (
-          id, prefecture_id, name, name_kana, name_translations, type, latitude, longitude, tile_id, country_code, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          id, prefecture_id, name, name_kana, name_translations, type, latitude, longitude, tile_id, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           row.id,
           row.prefecture_id,
@@ -61,7 +62,6 @@ export function bulkInsertCities(cities: CityRow[]): void {
           row.latitude,
           row.longitude,
           row.tile_id,
-          row.country_code,
           row.created_at,
           row.updated_at,
         ]

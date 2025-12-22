@@ -4,6 +4,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getPopularMapsByCategory, getLatestMapsByCategory } from '@/shared/api/supabase';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { MapWithUser } from '@/shared/types';
 
 /**
@@ -17,7 +18,7 @@ export function useCategoryPopularMaps(
   currentUserId?: string | null
 ) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: ['category-popular-maps', categoryId, limit, currentUserId],
+    queryKey: [...QUERY_KEYS.mapsCategoryPopular(categoryId, limit), currentUserId],
     queryFn: () => getPopularMapsByCategory(categoryId, limit, currentUserId),
     enabled: categoryId.length > 0,
     staleTime: 5 * 60 * 1000, // 5分
@@ -35,7 +36,7 @@ export function useCategoryLatestMaps(
   currentUserId?: string | null
 ) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: ['category-latest-maps', categoryId, limit, currentUserId],
+    queryKey: [...QUERY_KEYS.mapsCategoryLatest(categoryId, limit), currentUserId],
     queryFn: () => getLatestMapsByCategory(categoryId, limit, currentUserId),
     enabled: categoryId.length > 0,
     staleTime: 5 * 60 * 1000, // 5分

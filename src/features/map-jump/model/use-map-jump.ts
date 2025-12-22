@@ -85,13 +85,13 @@ export function useMapJump({
       const prevMachiId = prevState.jumpToMachiId;
       if (newMachiId && newMachiId !== prevMachiId) {
         getMachiById(newMachiId).then((machi) => {
-          if (machi) {
+          if (machi && machi.longitude != null && machi.latitude != null) {
             lastJumpTimeRef.current = Date.now();
             onMachiSelect(machi);
             setTimeout(() => {
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
-                  centerCoordinate: [machi.longitude, machi.latitude],
+                  centerCoordinate: [machi.longitude!, machi.latitude!],
                   zoomLevel: MAP_ZOOM.MACHI,
                   animationDuration: 500,
                 });
@@ -164,15 +164,17 @@ export function useMapJump({
           onMachiSelect(null);
           onCitySelect(null);
           onSpotSelect(null);
-          setTimeout(() => {
-            if (cameraRef.current) {
-              cameraRef.current.setCamera({
-                centerCoordinate: [region.longitude, region.latitude],
-                zoomLevel: MAP_ZOOM.REGION,
-                animationDuration: 500,
-              });
-            }
-          }, 100);
+          if (region.longitude != null && region.latitude != null) {
+            setTimeout(() => {
+              if (cameraRef.current) {
+                cameraRef.current.setCamera({
+                  centerCoordinate: [region.longitude!, region.latitude!],
+                  zoomLevel: MAP_ZOOM.REGION,
+                  animationDuration: 500,
+                });
+              }
+            }, 100);
+          }
         }
         state.setJumpToRegionId(null);
       }
@@ -184,7 +186,7 @@ export function useMapJump({
         // 国データはローカルJSONから取得
         const countries = getCountriesData();
         const country = countries.find((c) => c.id === newCountryId);
-        if (country) {
+        if (country && country.longitude != null && country.latitude != null) {
           lastJumpTimeRef.current = Date.now();
           // 国は詳細カードを表示せず、他の選択もクリア
           onMachiSelect(null);
@@ -193,7 +195,7 @@ export function useMapJump({
           setTimeout(() => {
             if (cameraRef.current) {
               cameraRef.current.setCamera({
-                centerCoordinate: [country.longitude, country.latitude],
+                centerCoordinate: [country.longitude!, country.latitude!],
                 zoomLevel: MAP_ZOOM.COUNTRY,
                 animationDuration: 500,
               });

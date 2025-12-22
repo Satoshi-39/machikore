@@ -4,6 +4,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getAllRegions } from '@/shared/api/sqlite';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { RegionRow } from '@/shared/types/database.types';
 
 /**
@@ -11,7 +12,7 @@ import type { RegionRow } from '@/shared/types/database.types';
  */
 export function useRegions() {
   return useQuery<RegionRow[], Error>({
-    queryKey: ['regions'],
+    queryKey: QUERY_KEYS.regions(),
     queryFn: () => {
       const regions = getAllRegions();
       return regions;

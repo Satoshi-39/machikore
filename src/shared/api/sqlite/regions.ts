@@ -20,16 +20,18 @@ export function bulkInsertRegions(regions: RegionRow[]): void {
     for (const region of regions) {
       db.runSync(
         `INSERT OR REPLACE INTO regions (
-          id, name, name_kana, name_translations, latitude, longitude, country_code, display_order, created_at, updated_at
+          id, name, name_kana, name_translations, latitude, longitude, country_id, display_order, created_at, updated_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           region.id,
           region.name,
           region.name_kana,
-          region.name_translations ? JSON.stringify(region.name_translations) : null,
+          typeof region.name_translations === 'string'
+            ? region.name_translations
+            : JSON.stringify(region.name_translations),
           region.latitude,
           region.longitude,
-          region.country_code,
+          region.country_id,
           region.display_order,
           region.created_at,
           region.updated_at,

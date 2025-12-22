@@ -9,6 +9,7 @@ import {
   addReplyComment,
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
@@ -21,7 +22,7 @@ export function useCommentReplies(
   enabled: boolean = true
 ) {
   return useQuery({
-    queryKey: ['comments', 'replies', parentId, currentUserId],
+    queryKey: QUERY_KEYS.commentsRepliesWithUser(parentId || '', currentUserId),
     queryFn: () => getCommentReplies(parentId!, 50, 0, currentUserId),
     enabled: !!parentId && enabled,
   });
@@ -44,13 +45,13 @@ export function useAddReplyComment() {
       addReplyComment(userId, parentComment, content),
     onSuccess: (_, { parentComment }) => {
       // 返信一覧を再取得（プレフィックスで全てのcurrentUserIdパターンをinvalidate）
-      queryClient.invalidateQueries({ queryKey: ['comments', 'replies', parentComment.id] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsReplies(parentComment.id) });
       // 親コメントの返信数を更新するためコメント一覧も再取得
       if (parentComment.user_spot_id) {
-        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', parentComment.user_spot_id] });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsSpot(parentComment.user_spot_id) });
       }
       if (parentComment.map_id) {
-        queryClient.invalidateQueries({ queryKey: ['comments', 'map', parentComment.map_id] });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(parentComment.map_id) });
       }
 
       Toast.show({

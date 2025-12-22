@@ -88,13 +88,17 @@ export function sortMachiByDistance(
   currentLat: number,
   currentLon: number
 ): MachiDistance[] {
-  const machiWithDistance: MachiDistance[] = machiList.map((machi) => ({
+  // 座標がnullのデータは除外
+  const validMachi = machiList.filter(
+    (machi) => machi.latitude != null && machi.longitude != null
+  );
+  const machiWithDistance: MachiDistance[] = validMachi.map((machi) => ({
     machi,
     distance: calculateDistance(
       currentLat,
       currentLon,
-      machi.latitude,
-      machi.longitude
+      machi.latitude!,
+      machi.longitude!
     ),
   }));
 

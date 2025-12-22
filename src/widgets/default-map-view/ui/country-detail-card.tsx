@@ -19,6 +19,7 @@ import {
 import { getAllRegions } from '@/shared/api/sqlite/regions';
 import { useQuery } from '@tanstack/react-query';
 import { getWikipediaSummary } from '@/shared/api/wikipedia';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { CountryRow, RegionRow } from '@/shared/types/database.types';
 
 interface CountryDetailCardProps {
@@ -72,7 +73,7 @@ export function CountryDetailCard({
 
   // Wikipedia要約を取得（日本）
   const { data: wikiSummary, isLoading: isWikiLoading } = useQuery({
-    queryKey: ['wikipedia', 'country', country.name],
+    queryKey: QUERY_KEYS.wikipediaCountry(country.name),
     queryFn: () => getWikipediaSummary(country.name),
     staleTime: 1000 * 60 * 60,
     gcTime: 1000 * 60 * 60 * 24,

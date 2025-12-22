@@ -23,7 +23,7 @@ import { useMapStore, useUserMaps } from '@/entities/map';
 import { useSpotLimit } from '@/entities/subscription';
 import { useUpdateSpotTags } from '@/entities/tag';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage, findMachiForSpot } from '@/shared/api/supabase';
-import { queryClient } from '@/shared/api/query-client';
+import { queryClient, QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
 import type { SpotColor } from '@/shared/config';
@@ -236,7 +236,7 @@ export function useSpotForm() {
               const result = await uploadSpotImages(spotId, data.images);
               log.info('[useSpotForm] 画像アップロード完了:', `${result.uploaded}枚成功, ${result.failed}枚失敗`);
               // 画像キャッシュを無効化して再取得
-              queryClient.invalidateQueries({ queryKey: ['spot-images', spotId] });
+              queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsImages(spotId) });
             } catch (error) {
               log.error('[useSpotForm] 画像アップロードエラー:', error);
               // 画像アップロード失敗してもスポット自体は作成済み

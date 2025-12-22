@@ -3,6 +3,7 @@
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   getBookmarkFolders,
   createBookmarkFolder,
@@ -11,8 +12,6 @@ import {
   type BookmarkFolder,
   type BookmarkFolderType,
 } from '@/shared/api/supabase/bookmarks';
-
-const QUERY_KEY = ['bookmark-folders'];
 
 /**
  * ユーザーのブックマークフォルダ一覧を取得
@@ -23,7 +22,7 @@ export function useBookmarkFolders(
   folderType?: BookmarkFolderType
 ) {
   return useQuery<BookmarkFolder[], Error>({
-    queryKey: [...QUERY_KEY, userId, folderType],
+    queryKey: QUERY_KEYS.bookmarkFoldersList(userId || '', folderType),
     queryFn: () => {
       if (!userId) return [];
       return getBookmarkFolders(userId, folderType);
@@ -51,7 +50,7 @@ export function useCreateBookmarkFolder() {
       color?: string;
     }) => createBookmarkFolder(userId, name, folderType, color),
     onSuccess: (_, { userId, folderType }) => {
-      queryClient.invalidateQueries({ queryKey: [...QUERY_KEY, userId, folderType] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId, folderType) });
     },
   });
 }
@@ -72,7 +71,7 @@ export function useUpdateBookmarkFolder() {
       userId: string;
     }) => updateBookmarkFolder(folderId, updates),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: [...QUERY_KEY, userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId) });
     },
   });
 }
@@ -87,9 +86,9 @@ export function useDeleteBookmarkFolder() {
     mutationFn: ({ folderId }: { folderId: string; userId: string }) =>
       deleteBookmarkFolder(folderId),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: [...QUERY_KEY, userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId) });
       // ブックマーク一覧も更新（フォルダが消えるため）
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
     },
   });
 }

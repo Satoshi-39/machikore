@@ -13,6 +13,7 @@ import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useBookmarks } from '@/entities/bookmark';
 import { removeBookmark } from '@/shared/api/supabase/bookmarks';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import type { BookmarkWithDetails } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
@@ -65,7 +66,7 @@ export function BookmarkItemList({
   const handleDeleteBookmark = useCallback(async (bookmarkId: string) => {
     try {
       await removeBookmark(bookmarkId);
-      queryClient.invalidateQueries({ queryKey: ['bookmarks', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
     } catch (error) {
       log.error('[BookmarkItemList] Failed to delete bookmark:', error);
     }

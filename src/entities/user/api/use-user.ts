@@ -6,6 +6,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getUserById } from '@/shared/api/supabase';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { Database } from '@/shared/types/supabase.generated';
 
 type UserRow = Database['public']['Tables']['users']['Row'];
@@ -15,7 +16,7 @@ type UserRow = Database['public']['Tables']['users']['Row'];
  */
 export function useUser(userId: string | null) {
   return useQuery<UserRow | null, Error>({
-    queryKey: ['user', userId || ''],
+    queryKey: QUERY_KEYS.usersDetail(userId || ''),
     queryFn: () => {
       if (!userId) return null;
       return getUserById(userId);

@@ -3,7 +3,7 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { invalidateSpots } from '@/shared/api/query-client';
+import { invalidateSpots, QUERY_KEYS } from '@/shared/api/query-client';
 import { updateSpot } from '@/shared/api/supabase/user-spots';
 import type { UpdateSpotParams } from '../model/types';
 
@@ -35,7 +35,7 @@ export function useUpdateSpot() {
       // 記事キャッシュを完全に削除（staleTimeに関係なく次回アクセス時に再取得）
       if (params.mapId) {
         queryClient.removeQueries({
-          queryKey: ['map-article', params.mapId],
+          queryKey: QUERY_KEYS.mapsArticle(params.mapId),
         });
       }
     },

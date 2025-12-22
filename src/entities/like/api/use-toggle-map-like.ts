@@ -82,9 +82,9 @@ function updateMapLikesCountInCache(
     }
   );
 
-  // 単一マップキャッシュ ['map', mapId] を更新
+  // 単一マップキャッシュを更新
   queryClient.setQueryData<MapWithLikesCount>(
-    ['map', mapId],
+    QUERY_KEYS.mapsDetail(mapId),
     (oldData) => {
       if (!oldData) return oldData;
       return {
@@ -94,9 +94,9 @@ function updateMapLikesCountInCache(
     }
   );
 
-  // 記事ページ用キャッシュ ['map-article', mapId, ...] を更新
+  // 記事ページ用キャッシュを更新
   queryClient.setQueriesData<MapArticleData>(
-    { queryKey: ['map-article', mapId] },
+    { queryKey: QUERY_KEYS.mapsArticle(mapId) },
     (oldData) => {
       if (!oldData) return oldData;
       return {
@@ -115,7 +115,7 @@ function updateMapLikesCountInCache(
  */
 export function useCheckMapLiked(userId: UUID | null | undefined, mapId: UUID | null | undefined) {
   return useQuery<boolean, Error>({
-    queryKey: ['map-like-status', userId, mapId],
+    queryKey: QUERY_KEYS.mapLikeStatus(userId || '', mapId || ''),
     queryFn: () => {
       if (!userId || !mapId) return false;
       return checkMapLiked(userId, mapId);
@@ -137,17 +137,17 @@ export function useToggleMapLike() {
     },
     onMutate: async ({ userId, mapId }) => {
       // キャンセル
-      await queryClient.cancelQueries({ queryKey: ['map-like-status', userId, mapId] });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.mapLikeStatus(userId, mapId) });
 
       // 現在の値を保存
       const previousLikeStatus = queryClient.getQueryData<boolean>(
-        ['map-like-status', userId, mapId]
+        QUERY_KEYS.mapLikeStatus(userId, mapId)
       );
 
       // 楽観的更新: いいね状態
       const newLikeStatus = !previousLikeStatus;
       queryClient.setQueryData<boolean>(
-        ['map-like-status', userId, mapId],
+        QUERY_KEYS.mapLikeStatus(userId, mapId),
         newLikeStatus
       );
 
@@ -166,7 +166,7 @@ export function useToggleMapLike() {
       });
       if (context?.previousLikeStatus !== undefined) {
         queryClient.setQueryData<boolean>(
-          ['map-like-status', userId, mapId],
+          QUERY_KEYS.mapLikeStatus(userId, mapId),
           context.previousLikeStatus
         );
         // いいね数も元に戻す
@@ -176,7 +176,7 @@ export function useToggleMapLike() {
     },
     onSuccess: (_, { userId }) => {
       // いいね一覧のキャッシュを無効化して再取得
-      queryClient.invalidateQueries({ queryKey: ['user-liked-maps', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userLikedMaps(userId) });
     },
   });
 }

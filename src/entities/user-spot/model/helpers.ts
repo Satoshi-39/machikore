@@ -41,6 +41,7 @@ export function createSpotData(params: CreateSpotParams): {
       map_id: params.mapId,
       user_id: params.userId,
       machi_id: params.machiId,
+      machi_name: null,
       master_spot_id: masterSpotId, // 後で insertOrGetMasterSpot で置き換えられる
       custom_name: params.customName,
       description: params.description || null,
@@ -57,6 +58,9 @@ export function createSpotData(params: CreateSpotParams): {
       latitude: params.latitude,
       longitude: params.longitude,
       prefecture_id: null,
+      prefecture_name: null,
+      city_id: null,
+      city_name: null,
       google_formatted_address: params.address || null,
       google_short_address: null,
       created_at: now,

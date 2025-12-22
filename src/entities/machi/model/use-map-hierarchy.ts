@@ -12,6 +12,7 @@ import {
   getAllMachi,
   getAllRegions,
 } from '@/shared/api/sqlite';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type {
   PrefectureRow,
   CityRow,
@@ -44,7 +45,7 @@ export function useMapHierarchy() {
     isLoading: isRegionsLoading,
     error: regionsError,
   } = useQuery({
-    queryKey: ['regions'],
+    queryKey: QUERY_KEYS.regions(),
     queryFn: () => getAllRegions(),
   });
 
@@ -54,7 +55,7 @@ export function useMapHierarchy() {
     isLoading: isPrefecturesLoading,
     error: prefecturesError,
   } = useQuery({
-    queryKey: ['prefectures'],
+    queryKey: QUERY_KEYS.prefectures(),
     queryFn: () => getAllPrefectures(),
   });
 
@@ -64,7 +65,7 @@ export function useMapHierarchy() {
     isLoading: isCitiesLoading,
     error: citiesError,
   } = useQuery({
-    queryKey: ['cities'],
+    queryKey: QUERY_KEYS.citiesList(),
     queryFn: () => getAllCities(),
   });
 
@@ -74,7 +75,7 @@ export function useMapHierarchy() {
     isLoading: isMachisLoading,
     error: machisError,
   } = useQuery({
-    queryKey: ['machi'],
+    queryKey: QUERY_KEYS.machiList(),
     queryFn: () => getAllMachi(),
   });
 
@@ -128,7 +129,6 @@ export function useMapHierarchy() {
             latitude: null,
             longitude: null,
             tile_id: null,
-            country_code: 'jp',
             created_at: '',
             updated_at: '',
           },

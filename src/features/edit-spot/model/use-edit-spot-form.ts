@@ -18,6 +18,7 @@ import { useUserStore } from '@/entities/user';
 import { useSpotLimit } from '@/entities/subscription';
 import { useSpotTags, useUpdateSpotTags } from '@/entities/tag';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
 import type { SpotColor } from '@/shared/config';
@@ -160,7 +161,7 @@ export function useEditSpotForm() {
         {
           onSuccess: () => {
             // 画像キャッシュを更新
-            queryClient.invalidateQueries({ queryKey: ['spot-images', id] });
+            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsImages(id) });
 
             Alert.alert('更新完了', 'スポットを更新しました', [
               {

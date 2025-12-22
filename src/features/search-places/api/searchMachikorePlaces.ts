@@ -41,15 +41,16 @@ function searchCountries(query: string, limit: number): MachikorePlaceSearchResu
   return countries
     .filter((country) =>
       country.name.toLowerCase().includes(lowerQuery) ||
-      country.name_kana.toLowerCase().includes(lowerQuery)
+      (country.name_kana?.toLowerCase().includes(lowerQuery) ?? false)
     )
+    .filter((country) => country.latitude != null && country.longitude != null)
     .slice(0, limit)
     .map((country) => ({
       id: country.id,
       name: country.name,
       address: null,
-      latitude: country.latitude,
-      longitude: country.longitude,
+      latitude: country.latitude!,
+      longitude: country.longitude!,
       type: 'country' as const,
     }));
 }
@@ -64,15 +65,16 @@ function searchRegions(query: string, limit: number): MachikorePlaceSearchResult
   return regions
     .filter((region) =>
       region.name.toLowerCase().includes(lowerQuery) ||
-      region.name_kana.toLowerCase().includes(lowerQuery)
+      (region.name_kana?.toLowerCase().includes(lowerQuery) ?? false)
     )
+    .filter((region) => region.latitude != null && region.longitude != null)
     .slice(0, limit)
     .map((region) => ({
       id: region.id,
       name: region.name,
       address: '日本',
-      latitude: region.latitude,
-      longitude: region.longitude,
+      latitude: region.latitude!,
+      longitude: region.longitude!,
       type: 'region' as const,
     }));
 }
@@ -152,14 +154,16 @@ async function searchMachis(query: string, limit: number): Promise<MachikorePlac
     return [];
   }
 
-  return (machis ?? []).map((machi) => ({
-    id: machi.id,
-    name: machi.name,
-    address: `${machi.prefecture_name}${machi.city_name || ''}`,
-    latitude: machi.latitude,
-    longitude: machi.longitude,
-    type: 'machi' as const,
-  }));
+  return (machis ?? [])
+    .filter((machi) => machi.latitude != null && machi.longitude != null)
+    .map((machi) => ({
+      id: machi.id,
+      name: machi.name,
+      address: `${machi.prefecture_name}${machi.city_name || ''}`,
+      latitude: machi.latitude!,
+      longitude: machi.longitude!,
+      type: 'machi' as const,
+    }));
 }
 
 /**

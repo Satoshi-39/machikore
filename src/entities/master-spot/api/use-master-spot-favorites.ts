@@ -11,6 +11,7 @@ import {
   toggleMasterSpotFavorite,
   getUserFavoriteMasterSpotIds,
 } from '@/shared/api/supabase/master-spot-favorites';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 
 /**
@@ -21,7 +22,7 @@ export function useCheckMasterSpotFavorited(
   masterSpotId: string | null | undefined
 ) {
   return useQuery<boolean, Error>({
-    queryKey: ['master-spot-favorite', userId, masterSpotId],
+    queryKey: QUERY_KEYS.masterSpotFavorite(userId || '', masterSpotId || ''),
     queryFn: () => {
       if (!userId || !masterSpotId) return false;
       return checkMasterSpotFavorited(userId, masterSpotId);
@@ -37,7 +38,7 @@ export function useUserFavoriteMasterSpotIds(
   userId: string | null | undefined
 ) {
   return useQuery<string[], Error>({
-    queryKey: ['master-spot-favorite-ids', userId],
+    queryKey: QUERY_KEYS.masterSpotFavoriteIds(userId || ''),
     queryFn: () => {
       if (!userId) return [];
       return getUserFavoriteMasterSpotIds(userId);
@@ -63,17 +64,15 @@ export function useToggleMasterSpotFavorite() {
     onMutate: async ({ userId, masterSpotId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['master-spot-favorite', userId, masterSpotId],
+        queryKey: QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
       });
 
-      const previousStatus = queryClient.getQueryData<boolean>([
-        'master-spot-favorite',
-        userId,
-        masterSpotId,
-      ]);
+      const previousStatus = queryClient.getQueryData<boolean>(
+        QUERY_KEYS.masterSpotFavorite(userId, masterSpotId)
+      );
 
       queryClient.setQueryData(
-        ['master-spot-favorite', userId, masterSpotId],
+        QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
         !previousStatus
       );
 
@@ -89,13 +88,13 @@ export function useToggleMasterSpotFavorite() {
       // ロールバック
       if (context?.previousStatus !== undefined) {
         queryClient.setQueryData(
-          ['master-spot-favorite', userId, masterSpotId],
+          QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
           context.previousStatus
         );
       }
     },
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['master-spot-favorite-ids', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.masterSpotFavoriteIds(userId) });
     },
   });
 }
@@ -117,11 +116,11 @@ export function useAddMasterSpotFavorite() {
     onMutate: async ({ userId, masterSpotId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['master-spot-favorite', userId, masterSpotId],
+        queryKey: QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
       });
 
       queryClient.setQueryData(
-        ['master-spot-favorite', userId, masterSpotId],
+        QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
         true
       );
     },
@@ -134,7 +133,7 @@ export function useAddMasterSpotFavorite() {
       });
       // ロールバック
       queryClient.setQueryData(
-        ['master-spot-favorite', userId, masterSpotId],
+        QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
         false
       );
     },
@@ -144,8 +143,8 @@ export function useAddMasterSpotFavorite() {
         text1: 'お気に入りに追加しました',
         visibilityTime: 2000,
       });
-      queryClient.invalidateQueries({ queryKey: ['master-spot-favorite', userId, masterSpotId] });
-      queryClient.invalidateQueries({ queryKey: ['master-spot-favorite-ids', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.masterSpotFavorite(userId, masterSpotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.masterSpotFavoriteIds(userId) });
     },
   });
 }
@@ -167,11 +166,11 @@ export function useRemoveMasterSpotFavorite() {
     onMutate: async ({ userId, masterSpotId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['master-spot-favorite', userId, masterSpotId],
+        queryKey: QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
       });
 
       queryClient.setQueryData(
-        ['master-spot-favorite', userId, masterSpotId],
+        QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
         false
       );
     },
@@ -184,7 +183,7 @@ export function useRemoveMasterSpotFavorite() {
       });
       // ロールバック
       queryClient.setQueryData(
-        ['master-spot-favorite', userId, masterSpotId],
+        QUERY_KEYS.masterSpotFavorite(userId, masterSpotId),
         true
       );
     },
@@ -194,8 +193,8 @@ export function useRemoveMasterSpotFavorite() {
         text1: 'お気に入りを解除しました',
         visibilityTime: 2000,
       });
-      queryClient.invalidateQueries({ queryKey: ['master-spot-favorite', userId, masterSpotId] });
-      queryClient.invalidateQueries({ queryKey: ['master-spot-favorite-ids', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.masterSpotFavorite(userId, masterSpotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.masterSpotFavoriteIds(userId) });
     },
   });
 }

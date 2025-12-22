@@ -5,7 +5,6 @@
 
 import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/database.types';
-import { log } from '@/shared/config/logger';
 
 // Supabaseの型をそのまま使用
 type MachiRow = Database['public']['Tables']['machi']['Row'];
@@ -45,10 +44,14 @@ export async function getNearbyMachi(
 
     if (data && data.length > 0) {
       // 範囲内で見つかったらクライアント側で距離計算してソート
-      const sorted = data
+      // 座標がnullのデータは除外
+      const validData = data.filter(
+        (machi) => machi.latitude != null && machi.longitude != null
+      );
+      const sorted = validData
         .map((machi) => ({
           ...machi,
-          distance: Math.abs(machi.latitude - latitude) + Math.abs(machi.longitude - longitude),
+          distance: Math.abs(machi.latitude! - latitude) + Math.abs(machi.longitude! - longitude),
         }))
         .sort((a, b) => a.distance - b.distance)
         .slice(0, limit);
@@ -224,15 +227,20 @@ export async function getPrefectureById(prefectureId: string): Promise<Prefectur
 // Admin Boundaries（行政区域ポリゴン）
 // ===============================
 
+/**
+ * 座標から行政区画を判定した結果
+ * RPC関数 get_city_by_coordinate の戻り値
+ */
 interface AdminBoundaryResult {
-  code: string;       // 行政区域コード（5桁）
-  name: string;       // 市区町村名
-  prefecture: string; // 都道府県名
-  pref_code: string;  // 都道府県コード（2桁）
+  country_id: string;     // 国ID（例: "jp"）
+  admin_level: number;    // OSM admin_level
+  prefecture_id: string;  // 都道府県ID（例: "tokyo"）
+  city_id: string;        // 市区町村ID（例: "tokyo_shibuya"）
 }
 
 /**
- * 座標から市区町村を判定（PostGIS RPC関数を使用）
+ * 座標から行政区画を判定（PostGIS RPC関数を使用）
+ * prefecture_id と city_id を直接返す
  */
 export async function getCityByCoordinate(
   longitude: number,
@@ -253,29 +261,6 @@ export async function getCityByCoordinate(
   }
 
   return data[0] as AdminBoundaryResult;
-}
-
-/**
- * 都道府県名からprefecture_idを取得
- * 例: "山口県" → "yamaguchi"
- *
- * prefecturesテーブルから動的に取得
- */
-async function getPrefectureIdByName(prefectureName: string): Promise<string | null> {
-  const { data, error } = await supabase
-    .from('prefectures')
-    .select('id')
-    .eq('name', prefectureName)
-    .single();
-
-  if (error) {
-    if (error.code !== 'PGRST116') {
-      log.warn('[Places] getPrefectureIdByName error:', error);
-    }
-    return null;
-  }
-
-  return data?.id ?? null;
 }
 
 /**
@@ -319,90 +304,78 @@ function extractPlaceNamesFromAddress(
  * スポット登録時に適切なmachiを特定
  *
  * 処理フロー:
- * 1. PostGISで座標から市区町村を特定
- * 2. 住所文字列から地名を抽出し、同じ市区町村内のmachiと照合
- * 3. 住所マッチングで見つからない場合、市区町村内で座標から最寄りを選択
- * 4. 市区町村が特定できない場合はnullを返す（誤った街に紐づけるリスクを避ける）
+ * 1. PostGISで座標から行政区画を特定（city_idを直接取得）
+ * 2. その市区町村内のmachiを取得
+ * 3. 住所文字列から地名を抽出し、machiと照合
+ * 4. 住所マッチングで見つからない場合、距離ベースで最寄りを選択
+ * 5. 市区町村が特定できない場合はnullを返す（誤った街に紐づけるリスクを避ける）
  */
 export async function findMachiForSpot(
   latitude: number,
   longitude: number,
   formattedAddress?: string
 ): Promise<MachiRow | null> {
-  // 1. PostGISで市区町村を判定
+  // 1. PostGISで行政区画を判定（city_idを直接取得）
   const adminBoundary = await getCityByCoordinate(longitude, latitude);
 
-  if (adminBoundary) {
-    // 2. 都道府県名からprefecture_idを取得（Supabaseから動的に）
-    const prefectureId = await getPrefectureIdByName(adminBoundary.prefecture);
+  if (!adminBoundary?.city_id) {
+    // 市区町村が見つからない場合はnullを返す
+    return null;
+  }
 
-    if (!prefectureId) {
-      log.warn(`[Places] 都道府県が見つかりません: ${adminBoundary.prefecture}`);
-    }
+  // 2. その市区町村内のmachiを取得
+  const { data: machiInCity, error: machiError } = await supabase
+    .from('machi')
+    .select('*')
+    .eq('city_id', adminBoundary.city_id);
 
-    // 3. 市区町村名でcitiesテーブルを検索してcity_idを取得
-    const { data: cities, error: cityError } = await supabase
-      .from('cities')
-      .select('id')
-      .eq('name', adminBoundary.name)
-      .eq('prefecture_id', prefectureId ?? '');
+  if (machiError) {
+    handleSupabaseError('findMachiForSpot:machiInCity', machiError);
+  }
 
-    if (cityError) {
-      log.warn('[Places] cityLookup error:', cityError);
-    }
+  if (!machiInCity || machiInCity.length === 0) {
+    return null;
+  }
 
-    const cityId = cities?.[0]?.id;
+  // 3. 住所から地名を抽出してマッチング（優先）
+  if (formattedAddress) {
+    // city_id から市区町村名を取得
+    const city = await getCityById(adminBoundary.city_id);
+    if (city) {
+      const placeNames = extractPlaceNamesFromAddress(formattedAddress, city.name);
 
-    if (cityId) {
-      // 4. その市区町村内のmachiを取得
-      const { data: machiInCity, error: machiError } = await supabase
-        .from('machi')
-        .select('*')
-        .eq('city_id', cityId);
-
-      if (machiError) {
-        handleSupabaseError('findMachiForSpot:machiInCity', machiError);
-      }
-
-      if (machiInCity && machiInCity.length > 0) {
-        // 5. 住所から地名を抽出してマッチング（優先）
-        if (formattedAddress) {
-          const placeNames = extractPlaceNamesFromAddress(formattedAddress, adminBoundary.name);
-
-          for (const placeName of placeNames) {
-            // 完全一致を優先
-            const exactMatch = machiInCity.find(
-              (machi) => machi.name === placeName
-            );
-            if (exactMatch) {
-              return exactMatch;
-            }
-
-            // 部分一致（machiの名前が地名を含む、または地名がmachiの名前を含む）
-            const partialMatch = machiInCity.find(
-              (machi) =>
-                machi.name.includes(placeName) || placeName.includes(machi.name)
-            );
-            if (partialMatch) {
-              return partialMatch;
-            }
-          }
+      for (const placeName of placeNames) {
+        // 完全一致を優先
+        const exactMatch = machiInCity.find(
+          (machi) => machi.name === placeName
+        );
+        if (exactMatch) {
+          return exactMatch;
         }
 
-        // 6. 住所マッチングで見つからない場合は距離ベースで最寄りを選択
-        const sorted = machiInCity
-          .map((machi) => ({
-            ...machi,
-            distance: Math.abs(machi.latitude - latitude) + Math.abs(machi.longitude - longitude),
-          }))
-          .sort((a, b) => a.distance - b.distance);
-
-        return sorted[0] ?? null;
+        // 部分一致（machiの名前が地名を含む、または地名がmachiの名前を含む）
+        const partialMatch = machiInCity.find(
+          (machi) =>
+            machi.name.includes(placeName) || placeName.includes(machi.name)
+        );
+        if (partialMatch) {
+          return partialMatch;
+        }
       }
     }
   }
 
-  // 7. 市区町村が見つからない or machiがない場合はnullを返す
-  // （全国から最寄りを検索すると誤った街に紐づくリスクがあるため）
-  return null;
+  // 4. 住所マッチングで見つからない場合は距離ベースで最寄りを選択
+  // 座標がnullのデータは除外
+  const validMachi = machiInCity.filter(
+    (machi) => machi.latitude != null && machi.longitude != null
+  );
+  const sorted = validMachi
+    .map((machi) => ({
+      ...machi,
+      distance: Math.abs(machi.latitude! - latitude) + Math.abs(machi.longitude! - longitude),
+    }))
+    .sort((a, b) => a.distance - b.distance);
+
+  return sorted[0] ?? null;
 }

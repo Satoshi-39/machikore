@@ -18,6 +18,7 @@ import {
   type NotificationWithDetails,
   type SystemAnnouncement,
 } from '@/shared/api/supabase/notifications';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 
 /**
@@ -31,7 +32,7 @@ export function useNotifications(
   } = {}
 ) {
   return useQuery<NotificationWithDetails[], Error>({
-    queryKey: ['notifications', userId, options],
+    queryKey: [...QUERY_KEYS.notificationsList(userId || ''), options],
     queryFn: () => {
       if (!userId) return [];
       return getUserNotifications(userId, options);
@@ -45,7 +46,7 @@ export function useNotifications(
  */
 export function useUnreadNotificationCount(userId: string | null | undefined) {
   return useQuery<number, Error>({
-    queryKey: ['notifications', 'unread-count', userId],
+    queryKey: QUERY_KEYS.notificationsUnreadCount(userId || ''),
     queryFn: () => {
       if (!userId) return 0;
       return getUnreadNotificationCount(userId);
@@ -67,17 +68,16 @@ export function useMarkNotificationAsRead() {
       markNotificationAsRead(notificationId),
     onMutate: async ({ notificationId, userId }) => {
       // 楽観的更新
-      await queryClient.cancelQueries({ queryKey: ['notifications', userId] });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
 
       const previousNotifications = queryClient.getQueryData<NotificationWithDetails[]>([
-        'notifications',
-        userId,
+        ...QUERY_KEYS.notificationsList(userId),
         {},
       ]);
 
       if (previousNotifications) {
         queryClient.setQueryData(
-          ['notifications', userId, {}],
+          [...QUERY_KEYS.notificationsList(userId), {}],
           previousNotifications.map((n) =>
             n.id === notificationId ? { ...n, is_read: true } : n
           )
@@ -85,14 +85,12 @@ export function useMarkNotificationAsRead() {
       }
 
       // 未読カウントを更新
-      const previousCount = queryClient.getQueryData<number>([
-        'notifications',
-        'unread-count',
-        userId,
-      ]);
+      const previousCount = queryClient.getQueryData<number>(
+        QUERY_KEYS.notificationsUnreadCount(userId)
+      );
       if (previousCount !== undefined) {
         queryClient.setQueryData(
-          ['notifications', 'unread-count', userId],
+          QUERY_KEYS.notificationsUnreadCount(userId),
           Math.max(0, previousCount - 1)
         );
       }
@@ -103,19 +101,19 @@ export function useMarkNotificationAsRead() {
       log.error('[Notification] Error:', error);
       if (context?.previousNotifications) {
         queryClient.setQueryData(
-          ['notifications', userId, {}],
+          [...QUERY_KEYS.notificationsList(userId), {}],
           context.previousNotifications
         );
       }
       if (context?.previousCount !== undefined) {
         queryClient.setQueryData(
-          ['notifications', 'unread-count', userId],
+          QUERY_KEYS.notificationsUnreadCount(userId),
           context.previousCount
         );
       }
     },
     onSettled: (_, __, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['notifications', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
     },
   });
 }
@@ -130,22 +128,21 @@ export function useMarkAllNotificationsAsRead() {
     mutationFn: ({ userId }: { userId: string }) =>
       markAllNotificationsAsRead(userId),
     onMutate: async ({ userId }) => {
-      await queryClient.cancelQueries({ queryKey: ['notifications', userId] });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
 
       const previousNotifications = queryClient.getQueryData<NotificationWithDetails[]>([
-        'notifications',
-        userId,
+        ...QUERY_KEYS.notificationsList(userId),
         {},
       ]);
 
       if (previousNotifications) {
         queryClient.setQueryData(
-          ['notifications', userId, {}],
+          [...QUERY_KEYS.notificationsList(userId), {}],
           previousNotifications.map((n) => ({ ...n, is_read: true }))
         );
       }
 
-      queryClient.setQueryData(['notifications', 'unread-count', userId], 0);
+      queryClient.setQueryData(QUERY_KEYS.notificationsUnreadCount(userId), 0);
 
       return { previousNotifications };
     },
@@ -153,13 +150,13 @@ export function useMarkAllNotificationsAsRead() {
       log.error('[Notification] Error:', error);
       if (context?.previousNotifications) {
         queryClient.setQueryData(
-          ['notifications', userId, {}],
+          [...QUERY_KEYS.notificationsList(userId), {}],
           context.previousNotifications
         );
       }
     },
     onSettled: (_, __, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['notifications', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
     },
   });
 }
@@ -174,7 +171,7 @@ export function useDeleteNotification() {
     mutationFn: ({ notificationId }: { notificationId: string; userId: string }) =>
       deleteNotification(notificationId),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['notifications', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
     },
     onError: (error) => {
       log.error('[Notification] Error:', error);
@@ -192,7 +189,7 @@ export function useDeleteAllNotifications() {
     mutationFn: ({ userId }: { userId: string }) =>
       deleteAllNotifications(userId),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['notifications', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
     },
     onError: (error) => {
       log.error('[Notification] Error:', error);
@@ -205,7 +202,7 @@ export function useDeleteAllNotifications() {
  */
 export function useSystemAnnouncements() {
   return useQuery<SystemAnnouncement[], Error>({
-    queryKey: ['system-announcements'],
+    queryKey: QUERY_KEYS.announcementsSystem(),
     queryFn: getSystemAnnouncements,
     // 5分ごとに更新
     refetchInterval: 5 * 60 * 1000,
@@ -217,7 +214,7 @@ export function useSystemAnnouncements() {
  */
 export function useUnreadAnnouncementCount(userId: string | null | undefined) {
   return useQuery<number, Error>({
-    queryKey: ['announcements', 'unread-count', userId],
+    queryKey: QUERY_KEYS.announcementsUnreadCount(userId || ''),
     queryFn: () => {
       if (!userId) return 0;
       return getUnreadAnnouncementCount(userId);
@@ -249,29 +246,25 @@ export function useMarkAnnouncementAsRead() {
       markAnnouncementAsRead(userId, announcementId),
     onMutate: async ({ userId, announcementId }) => {
       // 楽観的更新
-      await queryClient.cancelQueries({ queryKey: ['announcements', 'read-ids', userId] });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.announcementsReadIds(userId) });
 
-      const previousReadIds = queryClient.getQueryData<Set<string>>([
-        'announcements',
-        'read-ids',
-        userId,
-      ]);
+      const previousReadIds = queryClient.getQueryData<Set<string>>(
+        QUERY_KEYS.announcementsReadIds(userId)
+      );
 
       if (previousReadIds) {
         const newReadIds = new Set(previousReadIds);
         newReadIds.add(announcementId);
-        queryClient.setQueryData(['announcements', 'read-ids', userId], newReadIds);
+        queryClient.setQueryData(QUERY_KEYS.announcementsReadIds(userId), newReadIds);
       }
 
       // 未読カウントを更新
-      const previousCount = queryClient.getQueryData<number>([
-        'announcements',
-        'unread-count',
-        userId,
-      ]);
+      const previousCount = queryClient.getQueryData<number>(
+        QUERY_KEYS.announcementsUnreadCount(userId)
+      );
       if (previousCount !== undefined) {
         queryClient.setQueryData(
-          ['announcements', 'unread-count', userId],
+          QUERY_KEYS.announcementsUnreadCount(userId),
           Math.max(0, previousCount - 1)
         );
       }
@@ -281,15 +274,15 @@ export function useMarkAnnouncementAsRead() {
     onError: (error, { userId }, context) => {
       log.error('[Notification] Error:', error);
       if (context?.previousReadIds) {
-        queryClient.setQueryData(['announcements', 'read-ids', userId], context.previousReadIds);
+        queryClient.setQueryData(QUERY_KEYS.announcementsReadIds(userId), context.previousReadIds);
       }
       if (context?.previousCount !== undefined) {
-        queryClient.setQueryData(['announcements', 'unread-count', userId], context.previousCount);
+        queryClient.setQueryData(QUERY_KEYS.announcementsUnreadCount(userId), context.previousCount);
       }
     },
     onSettled: (_, __, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['announcements', 'unread-count', userId] });
-      queryClient.invalidateQueries({ queryKey: ['announcements', 'read-ids', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.announcementsUnreadCount(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.announcementsReadIds(userId) });
     },
   });
 }
@@ -304,8 +297,8 @@ export function useMarkAllAnnouncementsAsRead() {
     mutationFn: ({ userId }: { userId: string }) =>
       markAllAnnouncementsAsRead(userId),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: ['announcements', 'unread-count', userId] });
-      queryClient.invalidateQueries({ queryKey: ['announcements', 'read-ids', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.announcementsUnreadCount(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.announcementsReadIds(userId) });
     },
     onError: (error) => {
       log.error('[Notification] Error:', error);
@@ -318,7 +311,7 @@ export function useMarkAllAnnouncementsAsRead() {
  */
 export function useReadAnnouncementIds(userId: string | null | undefined) {
   return useQuery<Set<string>, Error>({
-    queryKey: ['announcements', 'read-ids', userId],
+    queryKey: QUERY_KEYS.announcementsReadIds(userId || ''),
     queryFn: () => {
       if (!userId) return new Set<string>();
       return getReadAnnouncementIds(userId);

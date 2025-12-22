@@ -3,6 +3,7 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { deleteMap } from '@/shared/api/supabase/maps';
 
 /**
@@ -18,9 +19,8 @@ export function useDeleteMap() {
     },
     onSuccess: () => {
       // マップ関連のキャッシュを無効化
-      queryClient.invalidateQueries({ queryKey: ['maps'] });
-      queryClient.invalidateQueries({ queryKey: ['userMaps'] });
-      queryClient.invalidateQueries({ queryKey: ['feed-maps'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsFeed() });
     },
   });
 }

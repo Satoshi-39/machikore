@@ -24,7 +24,7 @@ export function useMapComments(
   currentUserId?: string | null
 ) {
   return useQuery({
-    queryKey: ['comments', 'map', mapId, { limit, offset }, currentUserId],
+    queryKey: QUERY_KEYS.commentsMap(mapId || '', { limit, offset }, currentUserId),
     queryFn: () => getMapComments(mapId!, limit, offset, currentUserId),
     enabled: !!mapId,
   });
@@ -35,7 +35,7 @@ export function useMapComments(
  */
 export function useMapCommentsCount(mapId: string | null) {
   return useQuery({
-    queryKey: ['comments', 'map', mapId, 'count'],
+    queryKey: QUERY_KEYS.commentsMapCount(mapId || ''),
     queryFn: () => getMapCommentsCount(mapId!),
     enabled: !!mapId,
   });
@@ -58,9 +58,9 @@ export function useAddMapComment() {
       addMapComment(userId, mapId, content),
     onSuccess: (_newComment, { mapId }) => {
       // コメント一覧を再取得
-      queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(mapId) });
       // コメント総数を再取得
-      queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId, 'count'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMapCount(mapId) });
       // マップのコメント数を更新（一覧と個別詳細の両方）
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId) });

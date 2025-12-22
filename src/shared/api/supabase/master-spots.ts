@@ -23,7 +23,6 @@ export interface MasterSpotDisplay {
   google_website_uri: string | null;
   google_rating: number | null;
   google_user_rating_count: number | null;
-  bookmarks_count: number;
   user_spots_count: number;
 }
 
@@ -57,7 +56,6 @@ export async function getMasterSpotsByBounds(
       google_website_uri,
       google_rating,
       google_user_rating_count,
-      bookmarks_count,
       user_spots (id)
     `)
     .gte('latitude', minLat)
@@ -83,7 +81,6 @@ export async function getMasterSpotsByBounds(
     google_website_uri: spot.google_website_uri,
     google_rating: spot.google_rating,
     google_user_rating_count: spot.google_user_rating_count,
-    bookmarks_count: spot.bookmarks_count ?? 0,
     user_spots_count: spot.user_spots?.length || 0,
   }));
 }
@@ -107,7 +104,6 @@ export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpo
       google_website_uri,
       google_rating,
       google_user_rating_count,
-      bookmarks_count,
       user_spots (id)
     `)
     .eq('id', masterSpotId)
@@ -132,13 +128,12 @@ export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpo
     google_website_uri: data.google_website_uri,
     google_rating: data.google_rating,
     google_user_rating_count: data.google_user_rating_count,
-    bookmarks_count: data.bookmarks_count ?? 0,
     user_spots_count: (data.user_spots as any[])?.length || 0,
   };
 }
 
 /**
- * 街に属するマスタースポットを取得（ブックマーク数順）
+ * 街に属するマスタースポットを取得（お気に入り数順）
  */
 export async function getMasterSpotsByMachi(
   machiId: string,
@@ -159,11 +154,11 @@ export async function getMasterSpotsByMachi(
       google_website_uri,
       google_rating,
       google_user_rating_count,
-      bookmarks_count,
+      favorites_count,
       user_spots (id)
     `)
     .eq('machi_id', machiId)
-    .order('bookmarks_count', { ascending: false, nullsFirst: false })
+    .order('favorites_count', { ascending: false, nullsFirst: false })
     .limit(limit);
 
   if (error) {
@@ -183,7 +178,6 @@ export async function getMasterSpotsByMachi(
     google_website_uri: spot.google_website_uri,
     google_rating: spot.google_rating,
     google_user_rating_count: spot.google_user_rating_count,
-    bookmarks_count: spot.bookmarks_count ?? 0,
     user_spots_count: spot.user_spots?.length || 0,
   }));
 }
@@ -214,7 +208,6 @@ export async function searchMasterSpots(
       google_website_uri,
       google_rating,
       google_user_rating_count,
-      bookmarks_count,
       user_spots (id)
     `)
     .or(`name.ilike.%${query}%,google_short_address.ilike.%${query}%`)
@@ -238,7 +231,6 @@ export async function searchMasterSpots(
     google_website_uri: spot.google_website_uri,
     google_rating: spot.google_rating,
     google_user_rating_count: spot.google_user_rating_count,
-    bookmarks_count: spot.bookmarks_count ?? 0,
     user_spots_count: spot.user_spots?.length || 0,
   }));
 }

@@ -2,7 +2,7 @@
   {
     "id": "tw_new_taipei_city",
     "name": "新北市",
-    "name_en": "New Taipei City",
+    "name_translations": { "en": "New Taipei City" },
     "name_kana": "",
     "region_id": "tw_north",
     "latitude": 24.94702,
@@ -12,7 +12,7 @@
   {
     "id": "tw_yunlin",
     "name": "雲林県",
-    "name_en": "Yunlin",
+    "name_translations": { "en": "Yunlin" },
     "name_kana": "",
     "region_id": "tw_central",
     "latitude": 23.70701,
@@ -22,7 +22,7 @@
   {
     "id": "tw_taoyuan",
     "name": "桃園市",
-    "name_en": "Taoyuan",
+    "name_translations": { "en": "Taoyuan" },
     "name_kana": "",
     "region_id": "tw_north",
     "latitude": 24.895,
@@ -32,7 +32,7 @@
   {
     "id": "tw_taitung",
     "name": "台東県",
-    "name_en": "Taitung",
+    "name_translations": { "en": "Taitung" },
     "name_kana": "",
     "region_id": "tw_east",
     "latitude": 22.88361,
@@ -42,7 +42,7 @@
   {
     "id": "tw_taipei_city",
     "name": "台北市",
-    "name_en": "Taipei City",
+    "name_translations": { "en": "Taipei City" },
     "name_kana": "",
     "region_id": "tw_north",
     "latitude": 25.083,
@@ -52,7 +52,7 @@
   {
     "id": "tw_tainan",
     "name": "台南市",
-    "name_en": "Tainan",
+    "name_translations": { "en": "Tainan" },
     "name_kana": "",
     "region_id": "tw_south",
     "latitude": 23.00002,
@@ -62,7 +62,7 @@
   {
     "id": "tw_pingtung",
     "name": "屏東県",
-    "name_en": "Pingtung",
+    "name_translations": { "en": "Pingtung" },
     "name_kana": "",
     "region_id": "tw_south",
     "latitude": 22.49555,
@@ -72,7 +72,7 @@
   {
     "id": "tw_penghu_county",
     "name": "澎湖県",
-    "name_en": "Penghu County",
+    "name_translations": { "en": "Penghu County" },
     "name_kana": "",
     "region_id": "tw_islands",
     "latitude": 23.57111,
@@ -82,7 +82,7 @@
   {
     "id": "tw_nantou",
     "name": "南投県",
-    "name_en": "Nantou",
+    "name_translations": { "en": "Nantou" },
     "name_kana": "",
     "region_id": "tw_central",
     "latitude": 23.83419,
@@ -92,7 +92,7 @@
   {
     "id": "tw_miaoli",
     "name": "苗栗県",
-    "name_en": "Miaoli",
+    "name_translations": { "en": "Miaoli" },
     "name_kana": "",
     "region_id": "tw_central",
     "latitude": 24.48972,
@@ -102,7 +102,7 @@
   {
     "id": "tw_yilan",
     "name": "宜蘭県",
-    "name_en": "Yilan",
+    "name_translations": { "en": "Yilan" },
     "name_kana": "",
     "region_id": "tw_north",
     "latitude": 24.5425,
@@ -112,7 +112,7 @@
   {
     "id": "tw_hualien",
     "name": "花蓮県",
-    "name_en": "Hualien",
+    "name_translations": { "en": "Hualien" },
     "name_kana": "",
     "region_id": "tw_east",
     "latitude": 23.78166,
@@ -122,7 +122,7 @@
   {
     "id": "tw_hsinchu",
     "name": "新竹市",
-    "name_en": "Hsinchu",
+    "name_translations": { "en": "Hsinchu" },
     "name_kana": "",
     "region_id": "tw_north",
     "latitude": 24.81472,
@@ -132,7 +132,7 @@
   {
     "id": "tw_hsinchu_county",
     "name": "新竹県",
-    "name_en": "Hsinchu County",
+    "name_translations": { "en": "Hsinchu County" },
     "name_kana": "",
     "region_id": "tw_north",
     "latitude": 24.67416,
@@ -142,7 +142,7 @@
   {
     "id": "tw_kinmen_county",
     "name": "金門県",
-    "name_en": "Kinmen County",
+    "name_translations": { "en": "Kinmen County" },
     "name_kana": "",
     "region_id": "tw_islands",
     "latitude": 24.45333,
@@ -152,7 +152,7 @@
   {
     "id": "tw_chiayi",
     "name": "嘉義市",
-    "name_en": "Chiayi",
+    "name_translations": { "en": "Chiayi" },
     "name_kana": "",
     "region_id": "tw_south",
     "latitude": 23.47722,
@@ -162,7 +162,7 @@
   {
     "id": "tw_chiayi_county",
     "name": "嘉義県",
-    "name_en": "Chiayi County",
+    "name_translations": { "en": "Chiayi County" },
     "name_kana": "",
     "region_id": "tw_south",
     "latitude": 23.46333,
@@ -172,7 +172,7 @@
   {
     "id": "tw_changhua",
     "name": "彰化県",
-    "name_en": "Changhua",
+    "name_translations": { "en": "Changhua" },
     "name_kana": "",
     "region_id": "tw_central",
     "latitude": 23.95361,
@@ -182,7 +182,7 @@
   {
     "id": "tw_keelung",
     "name": "基隆市",
-    "name_en": "Keelung",
+    "name_translations": { "en": "Keelung" },
     "name_kana": "",
     "region_id": "tw_north",
     "latitude": 25.11486,
@@ -192,7 +192,7 @@
   {
     "id": "tw_lienchiang",
     "name": "連江県",
-    "name_en": "Lienchiang",
+    "name_translations": { "en": "Lienchiang" },
     "name_kana": "",
     "region_id": "tw_islands",
     "latitude": 26.37004,
@@ -202,7 +202,7 @@
   {
     "id": "tw_kaohsiung",
     "name": "高雄市",
-    "name_en": "Kaohsiung",
+    "name_translations": { "en": "Kaohsiung" },
     "name_kana": "",
     "region_id": "tw_south",
     "latitude": 22.6533,
@@ -212,7 +212,7 @@
   {
     "id": "tw_taichung_city",
     "name": "台中市",
-    "name_en": "Taichung City",
+    "name_translations": { "en": "Taichung City" },
     "name_kana": "",
     "region_id": "tw_central",
     "latitude": 24.15472,

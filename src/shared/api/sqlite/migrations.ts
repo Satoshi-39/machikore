@@ -89,15 +89,16 @@ export function initializeDatabase(): void {
     `);
 
     // 2.5. 国テーブル（マスターデータ）
+    // Note: id自体が国コード（jp, kr, cn...）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS countries (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL UNIQUE,
         name_kana TEXT,
+        name_translations TEXT,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,
-        country_code TEXT NOT NULL UNIQUE,
-        continent_id TEXT,
+        continent_id TEXT NOT NULL,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         FOREIGN KEY (continent_id) REFERENCES continents(id)
@@ -113,24 +114,25 @@ export function initializeDatabase(): void {
         name_translations TEXT,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,
-        country_code TEXT NOT NULL DEFAULT 'jp',
+        country_id TEXT,
         display_order INTEGER NOT NULL,
         created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+        updated_at TEXT NOT NULL,
+        FOREIGN KEY (country_id) REFERENCES countries(id)
       );
     `);
 
     // 3. 都道府県テーブル（マスターデータ）
+    // Note: country_codeは持たない（region_id経由で国を取得）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS prefectures (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL UNIQUE,
         name_kana TEXT NOT NULL,
         name_translations TEXT,
-        region_id TEXT,
+        region_id TEXT NOT NULL,
         latitude REAL,
         longitude REAL,
-        country_code TEXT NOT NULL DEFAULT 'jp',
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         FOREIGN KEY (region_id) REFERENCES regions(id)
@@ -138,6 +140,7 @@ export function initializeDatabase(): void {
     `);
 
     // 4. 市区町村テーブル（マスターデータ）
+    // Note: country_codeは持たない（prefecture_id経由で国を取得）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS cities (
         id TEXT PRIMARY KEY,
@@ -149,7 +152,6 @@ export function initializeDatabase(): void {
         latitude REAL,
         longitude REAL,
         tile_id TEXT,
-        country_code TEXT NOT NULL DEFAULT 'jp',
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
         FOREIGN KEY (prefecture_id) REFERENCES prefectures(id)
@@ -167,6 +169,7 @@ export function initializeDatabase(): void {
     `);
 
     // 5. 街テーブル（マスターデータ）
+    // Note: country_codeは持たない（prefecture_id経由で国を取得）
     db.execSync(`
       CREATE TABLE IF NOT EXISTS machi (
         id TEXT PRIMARY KEY,
@@ -178,13 +181,14 @@ export function initializeDatabase(): void {
         prefecture_id TEXT NOT NULL,
         city_id TEXT,
         tile_id TEXT,
-        country_code TEXT NOT NULL DEFAULT 'jp',
+        osm_id INTEGER,
+        place_type TEXT,
         prefecture_name TEXT,
         prefecture_name_translations TEXT,
         city_name TEXT,
         city_name_translations TEXT,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
+        created_at TEXT,
+        updated_at TEXT,
         FOREIGN KEY (prefecture_id) REFERENCES prefectures(id),
         FOREIGN KEY (city_id) REFERENCES cities(id)
       );
@@ -202,10 +206,6 @@ export function initializeDatabase(): void {
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_machi_city_id
       ON machi(city_id);
-    `);
-    db.execSync(`
-      CREATE INDEX IF NOT EXISTS idx_machi_country_code
-      ON machi(country_code);
     `);
     db.execSync(`
       CREATE INDEX IF NOT EXISTS idx_machi_tile_id
@@ -263,7 +263,7 @@ export function initializeDatabase(): void {
         user_id TEXT NOT NULL,
         name TEXT NOT NULL,
         description TEXT,
-        category TEXT,
+        category_id TEXT,
         is_public INTEGER DEFAULT 0,
         is_default INTEGER DEFAULT 0,
         is_official INTEGER DEFAULT 0,

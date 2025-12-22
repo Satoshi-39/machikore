@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { supabase } from '@/shared/api/supabase';
 import { getFollowCounts } from '@/shared/api/supabase/follows';
 import type { UUID } from '@/shared/types';
@@ -18,7 +19,7 @@ interface UserStats {
  */
 export function useUserStats(userId: UUID) {
   return useQuery<UserStats, Error>({
-    queryKey: ['userStats', userId],
+    queryKey: QUERY_KEYS.usersStats(userId),
     queryFn: async () => {
       // マップ数を取得
       const { count: mapsCount } = await supabase

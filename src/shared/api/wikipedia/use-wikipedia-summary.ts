@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   getCityWikipediaSummary,
   getMachiWikipediaSummary,
@@ -15,7 +16,7 @@ import {
  */
 export function useCityWikipediaSummary(cityName?: string, prefectureName?: string) {
   return useQuery({
-    queryKey: ['wikipedia', 'city', cityName, prefectureName],
+    queryKey: QUERY_KEYS.wikipediaCity(cityName || '', prefectureName || ''),
     queryFn: () => getCityWikipediaSummary(cityName!, prefectureName!),
     enabled: !!cityName && !!prefectureName,
     staleTime: 1000 * 60 * 60, // 1時間キャッシュ
@@ -32,7 +33,7 @@ export function useMachiWikipediaSummary(
   prefectureName?: string
 ) {
   return useQuery({
-    queryKey: ['wikipedia', 'machi', machiName, cityName, prefectureName],
+    queryKey: QUERY_KEYS.wikipediaMachi(machiName || '', cityName, prefectureName),
     queryFn: () => getMachiWikipediaSummary(machiName!, cityName, prefectureName),
     enabled: !!machiName,
     staleTime: 1000 * 60 * 60,
@@ -45,7 +46,7 @@ export function useMachiWikipediaSummary(
  */
 export function usePrefectureWikipediaSummary(prefectureName?: string) {
   return useQuery({
-    queryKey: ['wikipedia', 'prefecture', prefectureName],
+    queryKey: QUERY_KEYS.wikipediaPrefecture(prefectureName || ''),
     queryFn: () => getPrefectureWikipediaSummary(prefectureName!),
     enabled: !!prefectureName,
     staleTime: 1000 * 60 * 60,
@@ -58,7 +59,7 @@ export function usePrefectureWikipediaSummary(prefectureName?: string) {
  */
 export function useRegionWikipediaSummary(regionName?: string) {
   return useQuery({
-    queryKey: ['wikipedia', 'region', regionName],
+    queryKey: QUERY_KEYS.wikipediaRegion(regionName || ''),
     queryFn: () => getRegionWikipediaSummary(regionName!),
     enabled: !!regionName,
     staleTime: 1000 * 60 * 60,

@@ -16,6 +16,7 @@ import { useUserStore } from '@/entities/user';
 import { useMapTags, useUpdateMapTags } from '@/entities/tag';
 import { createMapLabel, updateMapLabel, deleteMapLabel } from '@/entities/map-label';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { ThumbnailImage } from '@/features/pick-images';
 import type { LocalMapLabel } from '@/features/manage-map-labels';
 import { log } from '@/shared/config/logger';
@@ -153,7 +154,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         {
           onSuccess: () => {
             // ラベルキャッシュを無効化して再取得させる
-            queryClient.invalidateQueries({ queryKey: ['map-labels', mapId] });
+            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsLabels(mapId) });
 
             Alert.alert('更新完了', 'マップを更新しました', [
               {

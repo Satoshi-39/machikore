@@ -5,6 +5,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { log } from '@/shared/config/logger';
 import { supabase } from '@/shared/api/supabase';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { RecordViewParams } from '../model/types';
 
 /**
@@ -34,7 +35,7 @@ export function useRecordView() {
     onSuccess: (_, variables) => {
       // 閲覧履歴のキャッシュを無効化
       queryClient.invalidateQueries({
-        queryKey: ['view-history', 'recent', variables.userId],
+        queryKey: QUERY_KEYS.viewHistoryRecent(variables.userId),
       });
     },
     onError: (error) => {

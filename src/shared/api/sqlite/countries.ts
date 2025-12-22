@@ -12,6 +12,7 @@ import { log } from '@/shared/config/logger';
 
 /**
  * 国を一括挿入
+ * Note: countries.idは国コード（jp, kr, cn...）
  */
 export function bulkInsertCountries(countries: CountryRow[]): void {
   const db = getDatabase();
@@ -20,15 +21,17 @@ export function bulkInsertCountries(countries: CountryRow[]): void {
     for (const country of countries) {
       db.runSync(
         `INSERT OR REPLACE INTO countries (
-          id, name, name_kana, latitude, longitude, country_code, continent_id, created_at, updated_at
+          id, name, name_kana, name_translations, latitude, longitude, continent_id, created_at, updated_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           country.id,
           country.name,
           country.name_kana,
+          typeof country.name_translations === 'string'
+            ? country.name_translations
+            : JSON.stringify(country.name_translations),
           country.latitude,
           country.longitude,
-          country.country_code,
           country.continent_id,
           country.created_at,
           country.updated_at,
@@ -69,11 +72,12 @@ export function getCountryById(id: string): CountryRow | null {
 
 /**
  * 国を取得（国コードで）
+ * Note: countries.idは国コード（jp, kr, cn...）なのでidで検索
  */
 export function getCountryByCode(countryCode: string): CountryRow | null {
   const db = getDatabase();
   const result = db.getFirstSync<CountryRow>(
-    'SELECT * FROM countries WHERE country_code = ?',
+    'SELECT * FROM countries WHERE id = ?',
     [countryCode]
   );
   return result ?? null;

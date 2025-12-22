@@ -4,6 +4,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { likeComment, unlikeComment } from '@/shared/api/supabase/comments';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
@@ -25,12 +26,12 @@ export function useLikeComment() {
     onSuccess: (_, { spotId, mapId }) => {
       // コメント一覧を再取得
       if (spotId) {
-        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
-        queryClient.invalidateQueries({ queryKey: ['replies'] });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsSpot(spotId) });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.comments });
       }
       if (mapId) {
-        queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
-        queryClient.invalidateQueries({ queryKey: ['replies'] });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(mapId) });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.comments });
       }
     },
     onError: (error) => {
@@ -50,12 +51,12 @@ export function useUnlikeComment() {
     onSuccess: (_, { spotId, mapId }) => {
       // コメント一覧を再取得
       if (spotId) {
-        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
-        queryClient.invalidateQueries({ queryKey: ['replies'] });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsSpot(spotId) });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.comments });
       }
       if (mapId) {
-        queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
-        queryClient.invalidateQueries({ queryKey: ['replies'] });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(mapId) });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.comments });
       }
     },
     onError: (error) => {

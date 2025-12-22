@@ -1,472 +1,472 @@
 [
   {
-    "id": "hokkaido",
+    "id": "jp_hokkaido",
     "name": "北海道",
     "name_kana": "ほっかいどう",
-    "region_id": "hokkaido",
+    "name_translations": { "en": "Hokkaido" },
+    "region_id": "jp_hokkaido",
     "latitude": 43.4316324,
     "longitude": 142.4916576,
-    "country_code": "jp",
-    "name_en": "北海"
+    "country_code": "jp"
   },
   {
-    "id": "aomori",
+    "id": "jp_aomori",
     "name": "青森県",
     "name_kana": "あおもりけん",
-    "region_id": "tohoku",
+    "name_translations": { "en": "Aomori" },
+    "region_id": "jp_tohoku",
     "latitude": 40.9118853,
     "longitude": 140.5690398,
-    "country_code": "jp",
-    "name_en": "青森"
+    "country_code": "jp"
   },
   {
-    "id": "iwate",
+    "id": "jp_iwate",
     "name": "岩手県",
     "name_kana": "いわてけん",
-    "region_id": "tohoku",
+    "name_translations": { "en": "Iwate" },
+    "region_id": "jp_tohoku",
     "latitude": 39.6539952,
     "longitude": 141.4923162,
-    "country_code": "jp",
-    "name_en": "岩手"
+    "country_code": "jp"
   },
   {
-    "id": "miyagi",
+    "id": "jp_miyagi",
     "name": "宮城県",
     "name_kana": "みやぎけん",
-    "region_id": "tohoku",
+    "name_translations": { "en": "Miyagi" },
+    "region_id": "jp_tohoku",
     "latitude": 38.3880155,
     "longitude": 141.1631147,
-    "country_code": "jp",
-    "name_en": "宮城"
+    "country_code": "jp"
   },
   {
-    "id": "akita",
+    "id": "jp_akita",
     "name": "秋田県",
     "name_kana": "あきたけん",
-    "region_id": "tohoku",
+    "name_translations": { "en": "Akita" },
+    "region_id": "jp_tohoku",
     "latitude": 39.6920715,
     "longitude": 140.1692751,
-    "country_code": "jp",
-    "name_en": "秋田"
+    "country_code": "jp"
   },
   {
-    "id": "yamagata",
+    "id": "jp_yamagata",
     "name": "山形県",
     "name_kana": "やまがたけん",
-    "region_id": "tohoku",
+    "name_translations": { "en": "Yamagata" },
+    "region_id": "jp_tohoku",
     "latitude": 38.6633517,
     "longitude": 139.8923423,
-    "country_code": "jp",
-    "name_en": "山形"
+    "country_code": "jp"
   },
   {
-    "id": "fukushima",
+    "id": "jp_fukushima",
     "name": "福島県",
     "name_kana": "ふくしまけん",
-    "region_id": "tohoku",
+    "name_translations": { "en": "Fukushima" },
+    "region_id": "jp_tohoku",
     "latitude": 37.3664672,
     "longitude": 140.3012033,
-    "country_code": "jp",
-    "name_en": "福島"
+    "country_code": "jp"
   },
   {
-    "id": "ibaraki",
+    "id": "jp_ibaraki",
     "name": "茨城県",
     "name_kana": "いばらきけん",
-    "region_id": "kanto",
+    "name_translations": { "en": "Ibaraki" },
+    "region_id": "jp_kanto",
     "latitude": 36.34222,
     "longitude": 140.3592463,
-    "country_code": "jp",
-    "name_en": "茨城"
+    "country_code": "jp"
   },
   {
-    "id": "tochigi",
+    "id": "jp_tochigi",
     "name": "栃木県",
     "name_kana": "とちぎけん",
-    "region_id": "kanto",
+    "name_translations": { "en": "Tochigi" },
+    "region_id": "jp_kanto",
     "latitude": 36.6773725,
     "longitude": 139.809403,
-    "country_code": "jp",
-    "name_en": "栃木"
+    "country_code": "jp"
   },
   {
-    "id": "gunma",
+    "id": "jp_gunma",
     "name": "群馬県",
     "name_kana": "ぐんまけん",
-    "region_id": "kanto",
+    "name_translations": { "en": "Gunma" },
+    "region_id": "jp_kanto",
     "latitude": 36.5219801,
     "longitude": 139.033483,
-    "country_code": "jp",
-    "name_en": "群馬"
+    "country_code": "jp"
   },
   {
-    "id": "saitama",
+    "id": "jp_saitama",
     "name": "埼玉県",
     "name_kana": "さいたまけん",
-    "region_id": "kanto",
+    "name_translations": { "en": "Saitama" },
+    "region_id": "jp_kanto",
     "latitude": 36.0184661,
     "longitude": 139.3058455,
-    "country_code": "jp",
-    "name_en": "埼玉"
+    "country_code": "jp"
   },
   {
-    "id": "chiba",
+    "id": "jp_chiba",
     "name": "千葉県",
     "name_kana": "ちばけん",
-    "region_id": "kanto",
+    "name_translations": { "en": "Chiba" },
+    "region_id": "jp_kanto",
     "latitude": 35.360459,
     "longitude": 140.3217107,
-    "country_code": "jp",
-    "name_en": "千葉"
+    "country_code": "jp"
   },
   {
-    "id": "tokyo",
+    "id": "jp_tokyo",
     "name": "東京都",
     "name_kana": "とうきょうと",
-    "region_id": "kanto",
+    "name_translations": { "en": "Tokyo" },
+    "region_id": "jp_kanto",
     "latitude": 35.6895,
     "longitude": 139.6917,
-    "country_code": "jp",
-    "name_en": "東京"
+    "country_code": "jp"
   },
   {
-    "id": "kanagawa",
+    "id": "jp_kanagawa",
     "name": "神奈川県",
     "name_kana": "かながわけん",
-    "region_id": "kanto",
+    "name_translations": { "en": "Kanagawa" },
+    "region_id": "jp_kanto",
     "latitude": 35.3150313,
     "longitude": 139.386759,
-    "country_code": "jp",
-    "name_en": "神奈川"
+    "country_code": "jp"
   },
   {
-    "id": "niigata",
+    "id": "jp_niigata",
     "name": "新潟県",
     "name_kana": "にいがたけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Niigata" },
+    "region_id": "jp_chubu",
     "latitude": 37.8169186,
     "longitude": 138.7157609,
-    "country_code": "jp",
-    "name_en": "新潟"
+    "country_code": "jp"
   },
   {
-    "id": "toyama",
+    "id": "jp_toyama",
     "name": "富山県",
     "name_kana": "とやまけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Toyama" },
+    "region_id": "jp_chubu",
     "latitude": 36.7635807,
     "longitude": 137.2658665,
-    "country_code": "jp",
-    "name_en": "富山"
+    "country_code": "jp"
   },
   {
-    "id": "ishikawa",
+    "id": "jp_ishikawa",
     "name": "石川県",
     "name_kana": "いしかわけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Ishikawa" },
+    "region_id": "jp_chubu",
     "latitude": 37.1010934,
     "longitude": 136.9734267,
-    "country_code": "jp",
-    "name_en": "石川"
+    "country_code": "jp"
   },
   {
-    "id": "fukui",
+    "id": "jp_fukui",
     "name": "福井県",
     "name_kana": "ふくいけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Fukui" },
+    "region_id": "jp_chubu",
     "latitude": 35.8975675,
     "longitude": 136.1408505,
-    "country_code": "jp",
-    "name_en": "福井"
+    "country_code": "jp"
   },
   {
-    "id": "yamanashi",
+    "id": "jp_yamanashi",
     "name": "山梨県",
     "name_kana": "やまなしけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Yamanashi" },
+    "region_id": "jp_chubu",
     "latitude": 35.5700465,
     "longitude": 138.657249,
-    "country_code": "jp",
-    "name_en": "山梨"
+    "country_code": "jp"
   },
   {
-    "id": "nagano",
+    "id": "jp_nagano",
     "name": "長野県",
     "name_kana": "ながのけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Nagano" },
+    "region_id": "jp_chubu",
     "latitude": 36.1143945,
     "longitude": 138.0319015,
-    "country_code": "jp",
-    "name_en": "長野"
+    "country_code": "jp"
   },
   {
-    "id": "gifu",
+    "id": "jp_gifu",
     "name": "岐阜県",
     "name_kana": "ぎふけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Gifu" },
+    "region_id": "jp_chubu",
     "latitude": 35.7993975,
     "longitude": 136.964635,
-    "country_code": "jp",
-    "name_en": "岐阜"
+    "country_code": "jp"
   },
   {
-    "id": "shizuoka",
+    "id": "jp_shizuoka",
     "name": "静岡県",
     "name_kana": "しずおかけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Shizuoka" },
+    "region_id": "jp_chubu",
     "latitude": 35.0092013,
     "longitude": 138.4474315,
-    "country_code": "jp",
-    "name_en": "静岡"
+    "country_code": "jp"
   },
   {
-    "id": "aichi",
+    "id": "jp_aichi",
     "name": "愛知県",
     "name_kana": "あいちけん",
-    "region_id": "chubu",
+    "name_translations": { "en": "Aichi" },
+    "region_id": "jp_chubu",
     "latitude": 34.8505462,
     "longitude": 137.254574,
-    "country_code": "jp",
-    "name_en": "愛知"
+    "country_code": "jp"
   },
   {
-    "id": "mie",
+    "id": "jp_mie",
     "name": "三重県",
     "name_kana": "みえけん",
-    "region_id": "kinki",
+    "name_translations": { "en": "Mie" },
+    "region_id": "jp_kinki",
     "latitude": 34.4355564,
     "longitude": 136.5893802,
-    "country_code": "jp",
-    "name_en": "三重"
+    "country_code": "jp"
   },
   {
-    "id": "shiga",
+    "id": "jp_shiga",
     "name": "滋賀県",
     "name_kana": "しがけん",
-    "region_id": "kinki",
+    "name_translations": { "en": "Shiga" },
+    "region_id": "jp_kinki",
     "latitude": 35.247154,
     "longitude": 136.1093852,
-    "country_code": "jp",
-    "name_en": "滋賀"
+    "country_code": "jp"
   },
   {
-    "id": "kyoto",
+    "id": "jp_kyoto",
     "name": "京都府",
     "name_kana": "きょうとふ",
-    "region_id": "kinki",
+    "name_translations": { "en": "Kyoto" },
+    "region_id": "jp_kinki",
     "latitude": 35.427891,
     "longitude": 135.4534093,
-    "country_code": "jp",
-    "name_en": "京"
+    "country_code": "jp"
   },
   {
-    "id": "osaka",
+    "id": "jp_osaka",
     "name": "大阪府",
     "name_kana": "おおさかふ",
-    "region_id": "kinki",
+    "name_translations": { "en": "Osaka" },
+    "region_id": "jp_kinki",
     "latitude": 34.661557,
     "longitude": 135.3862454,
-    "country_code": "jp",
-    "name_en": "大阪"
+    "country_code": "jp"
   },
   {
-    "id": "hyogo",
+    "id": "jp_hyogo",
     "name": "兵庫県",
     "name_kana": "ひょうごけん",
-    "region_id": "kinki",
+    "name_translations": { "en": "Hyogo" },
+    "region_id": "jp_kinki",
     "latitude": 34.9433662,
     "longitude": 134.860666,
-    "country_code": "jp",
-    "name_en": "兵庫"
+    "country_code": "jp"
   },
   {
-    "id": "nara",
+    "id": "jp_nara",
     "name": "奈良県",
     "name_kana": "ならけん",
-    "region_id": "kinki",
+    "name_translations": { "en": "Nara" },
+    "region_id": "jp_kinki",
     "latitude": 34.320156,
     "longitude": 135.884773,
-    "country_code": "jp",
-    "name_en": "奈良"
+    "country_code": "jp"
   },
   {
-    "id": "wakayama",
+    "id": "jp_wakayama",
     "name": "和歌山県",
     "name_kana": "わかやまけん",
-    "region_id": "kinki",
+    "name_translations": { "en": "Wakayama" },
+    "region_id": "jp_kinki",
     "latitude": 33.8136796,
     "longitude": 135.6013633,
-    "country_code": "jp",
-    "name_en": "和歌山"
+    "country_code": "jp"
   },
   {
-    "id": "tottori",
+    "id": "jp_tottori",
     "name": "鳥取県",
     "name_kana": "とっとりけん",
-    "region_id": "chugoku",
+    "name_translations": { "en": "Tottori" },
+    "region_id": "jp_chugoku",
     "latitude": 35.4303659,
     "longitude": 133.8256435,
-    "country_code": "jp",
-    "name_en": "鳥取"
+    "country_code": "jp"
   },
   {
-    "id": "shimane",
+    "id": "jp_shimane",
     "name": "島根県",
     "name_kana": "しまねけん",
-    "region_id": "chugoku",
+    "name_translations": { "en": "Shimane" },
+    "region_id": "jp_chugoku",
     "latitude": 35.4291024,
     "longitude": 132.5501852,
-    "country_code": "jp",
-    "name_en": "島根"
+    "country_code": "jp"
   },
   {
-    "id": "okayama",
+    "id": "jp_okayama",
     "name": "岡山県",
     "name_kana": "おかやまけん",
-    "region_id": "chugoku",
+    "name_translations": { "en": "Okayama" },
+    "region_id": "jp_chugoku",
     "latitude": 34.8023747,
     "longitude": 133.839977,
-    "country_code": "jp",
-    "name_en": "岡山"
+    "country_code": "jp"
   },
   {
-    "id": "hiroshima",
+    "id": "jp_hiroshima",
     "name": "広島県",
     "name_kana": "ひろしまけん",
-    "region_id": "chugoku",
+    "name_translations": { "en": "Hiroshima" },
+    "region_id": "jp_chugoku",
     "latitude": 34.5566578,
     "longitude": 132.7669051,
-    "country_code": "jp",
-    "name_en": "広島"
+    "country_code": "jp"
   },
   {
-    "id": "yamaguchi",
+    "id": "jp_yamaguchi",
     "name": "山口県",
     "name_kana": "やまぐちけん",
-    "region_id": "chugoku",
+    "name_translations": { "en": "Yamaguchi" },
+    "region_id": "jp_chugoku",
     "latitude": 34.3156093,
     "longitude": 131.4545526,
-    "country_code": "jp",
-    "name_en": "山口"
+    "country_code": "jp"
   },
   {
-    "id": "tokushima",
+    "id": "jp_tokushima",
     "name": "徳島県",
     "name_kana": "とくしまけん",
-    "region_id": "shikoku",
+    "name_translations": { "en": "Tokushima" },
+    "region_id": "jp_shikoku",
     "latitude": 33.8485454,
     "longitude": 134.3238008,
-    "country_code": "jp",
-    "name_en": "徳島"
+    "country_code": "jp"
   },
   {
-    "id": "kagawa",
+    "id": "jp_kagawa",
     "name": "香川県",
     "name_kana": "かがわけん",
-    "region_id": "shikoku",
+    "name_translations": { "en": "Kagawa" },
+    "region_id": "jp_shikoku",
     "latitude": 34.3204428,
     "longitude": 133.9765295,
-    "country_code": "jp",
-    "name_en": "香川"
+    "country_code": "jp"
   },
   {
-    "id": "ehime",
+    "id": "jp_ehime",
     "name": "愛媛県",
     "name_kana": "えひめけん",
-    "region_id": "shikoku",
+    "name_translations": { "en": "Ehime" },
+    "region_id": "jp_shikoku",
     "latitude": 33.5530829,
     "longitude": 132.7865786,
-    "country_code": "jp",
-    "name_en": "愛媛"
+    "country_code": "jp"
   },
   {
-    "id": "kochi",
+    "id": "jp_kochi",
     "name": "高知県",
     "name_kana": "こうちけん",
-    "region_id": "shikoku",
+    "name_translations": { "en": "Kochi" },
+    "region_id": "jp_shikoku",
     "latitude": 33.1339092,
     "longitude": 133.377517,
-    "country_code": "jp",
-    "name_en": "高知"
+    "country_code": "jp"
   },
   {
-    "id": "fukuoka",
+    "id": "jp_fukuoka",
     "name": "福岡県",
     "name_kana": "ふくおかけん",
-    "region_id": "kyushu",
+    "name_translations": { "en": "Fukuoka" },
+    "region_id": "jp_kyushu",
     "latitude": 33.7936104,
     "longitude": 130.5314035,
-    "country_code": "jp",
-    "name_en": "福岡"
+    "country_code": "jp"
   },
   {
-    "id": "saga",
+    "id": "jp_saga",
     "name": "佐賀県",
     "name_kana": "さがけん",
-    "region_id": "kyushu",
+    "name_translations": { "en": "Saga" },
+    "region_id": "jp_kyushu",
     "latitude": 33.3114894,
     "longitude": 130.0910709,
-    "country_code": "jp",
-    "name_en": "佐賀"
+    "country_code": "jp"
   },
   {
-    "id": "nagasaki",
+    "id": "jp_nagasaki",
     "name": "長崎県",
     "name_kana": "ながさきけん",
-    "region_id": "kyushu",
+    "name_translations": { "en": "Nagasaki" },
+    "region_id": "jp_kyushu",
     "latitude": 32.7448,
     "longitude": 129.8737,
-    "country_code": "jp",
-    "name_en": "長崎"
+    "country_code": "jp"
   },
   {
-    "id": "kumamoto",
+    "id": "jp_kumamoto",
     "name": "熊本県",
     "name_kana": "くまもとけん",
-    "region_id": "kyushu",
+    "name_translations": { "en": "Kumamoto" },
+    "region_id": "jp_kyushu",
     "latitude": 32.6022056,
     "longitude": 130.3255497,
-    "country_code": "jp",
-    "name_en": "熊本"
+    "country_code": "jp"
   },
   {
-    "id": "oita",
+    "id": "jp_oita",
     "name": "大分県",
     "name_kana": "おおいたけん",
-    "region_id": "kyushu",
+    "name_translations": { "en": "Oita" },
+    "region_id": "jp_kyushu",
     "latitude": 33.1122524,
     "longitude": 131.5504224,
-    "country_code": "jp",
-    "name_en": "大分"
+    "country_code": "jp"
   },
   {
-    "id": "miyazaki",
+    "id": "jp_miyazaki",
     "name": "宮崎県",
     "name_kana": "みやざきけん",
-    "region_id": "kyushu",
+    "name_translations": { "en": "Miyazaki" },
+    "region_id": "jp_kyushu",
     "latitude": 32.0452902,
     "longitude": 131.4547797,
-    "country_code": "jp",
-    "name_en": "宮崎"
+    "country_code": "jp"
   },
   {
-    "id": "kagoshima",
+    "id": "jp_kagoshima",
     "name": "鹿児島県",
     "name_kana": "かごしまけん",
-    "region_id": "kyushu",
+    "name_translations": { "en": "Kagoshima" },
+    "region_id": "jp_kyushu",
     "latitude": 31.5602,
     "longitude": 130.5581,
-    "country_code": "jp",
-    "name_en": "鹿児島"
+    "country_code": "jp"
   },
   {
-    "id": "okinawa",
+    "id": "jp_okinawa",
     "name": "沖縄県",
     "name_kana": "おきなわけん",
-    "region_id": "okinawa",
+    "name_translations": { "en": "Okinawa" },
+    "region_id": "jp_okinawa",
     "latitude": 26.2124,
     "longitude": 127.6809,
-    "country_code": "jp",
-    "name_en": "沖縄"
+    "country_code": "jp"
   }
 ]

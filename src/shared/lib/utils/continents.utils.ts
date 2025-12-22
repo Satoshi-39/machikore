@@ -10,6 +10,8 @@ interface ContinentJsonData {
   id: string;
   name: string;
   display_order: number;
+  latitude: number;
+  longitude: number;
 }
 
 /**
@@ -20,7 +22,11 @@ function toContinentRow(continent: ContinentJsonData): ContinentRow {
   return {
     id: continent.id,
     name: continent.name,
+    name_kana: null,
+    name_translations: null,
     display_order: continent.display_order,
+    latitude: continent.latitude,
+    longitude: continent.longitude,
     created_at: now,
     updated_at: now,
   };

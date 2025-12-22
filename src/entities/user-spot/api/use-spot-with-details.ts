@@ -5,6 +5,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getSpotWithDetails } from '@/shared/api/supabase';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { SpotWithDetails } from '@/shared/types';
 
 /**
@@ -14,7 +15,7 @@ import type { SpotWithDetails } from '@/shared/types';
  */
 export function useSpotWithDetails(spotId: string | null, currentUserId?: string | null) {
   return useQuery<SpotWithDetails | null, Error>({
-    queryKey: ['spots', 'details', spotId, currentUserId],
+    queryKey: QUERY_KEYS.spotsDetailWithUser(spotId || '', currentUserId),
     queryFn: () => {
       if (!spotId) return null;
       return getSpotWithDetails(spotId, currentUserId);

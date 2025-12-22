@@ -18,14 +18,18 @@ export function useRegionsGeoJson(
   regions: RegionRow[]
 ): FeatureCollection<Point, RegionFeatureProperties> {
   return useMemo(() => {
+    // 座標がnullのデータは除外
+    const validRegions = regions.filter(
+      (region) => region.longitude != null && region.latitude != null
+    );
     return {
       type: 'FeatureCollection',
-      features: regions.map((region) => ({
-        type: 'Feature',
+      features: validRegions.map((region) => ({
+        type: 'Feature' as const,
         id: region.id,
         geometry: {
-          type: 'Point',
-          coordinates: [region.longitude, region.latitude],
+          type: 'Point' as const,
+          coordinates: [region.longitude!, region.latitude!],
         },
         properties: {
           id: region.id,

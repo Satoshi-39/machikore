@@ -4,6 +4,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   checkIsFollowing,
   followUser,
@@ -26,7 +27,7 @@ export function useIsFollowing(
   followeeId: string | null | undefined
 ) {
   return useQuery<boolean, Error>({
-    queryKey: ['follow-status', followerId, followeeId],
+    queryKey: QUERY_KEYS.followStatus(followerId || '', followeeId || ''),
     queryFn: () => {
       if (!followerId || !followeeId) return false;
       return checkIsFollowing(followerId, followeeId);
@@ -52,19 +53,19 @@ export function useFollowUser() {
     onMutate: async ({ followerId, followeeId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['follow-status', followerId, followeeId],
+        queryKey: QUERY_KEYS.followStatus(followerId, followeeId),
       });
 
-      queryClient.setQueryData(['follow-status', followerId, followeeId], true);
+      queryClient.setQueryData(QUERY_KEYS.followStatus(followerId, followeeId), true);
 
       // フォロー数も楽観的に更新
       const previousCounts = queryClient.getQueryData<{
         followers: number;
         following: number;
-      }>(['follow-counts', followeeId]);
+      }>(QUERY_KEYS.followCounts(followeeId));
 
       if (previousCounts) {
-        queryClient.setQueryData(['follow-counts', followeeId], {
+        queryClient.setQueryData(QUERY_KEYS.followCounts(followeeId), {
           ...previousCounts,
           followers: previousCounts.followers + 1,
         });
@@ -80,9 +81,9 @@ export function useFollowUser() {
         visibilityTime: 3000,
       });
       // ロールバック
-      queryClient.setQueryData(['follow-status', followerId, followeeId], false);
+      queryClient.setQueryData(QUERY_KEYS.followStatus(followerId, followeeId), false);
       if (context?.previousCounts) {
-        queryClient.setQueryData(['follow-counts', followeeId], context.previousCounts);
+        queryClient.setQueryData(QUERY_KEYS.followCounts(followeeId), context.previousCounts);
       }
     },
     onSuccess: (_, { followerId, followeeId }) => {
@@ -92,12 +93,12 @@ export function useFollowUser() {
         visibilityTime: 2000,
       });
       // 関連クエリを無効化
-      queryClient.invalidateQueries({ queryKey: ['followers', followeeId] });
-      queryClient.invalidateQueries({ queryKey: ['following', followerId] });
-      queryClient.invalidateQueries({ queryKey: ['follow-counts'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.followers(followeeId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.following(followerId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.follows });
       // userStatsも無効化（プロフィール画面のフォロー数表示用）
-      queryClient.invalidateQueries({ queryKey: ['userStats', followeeId] });
-      queryClient.invalidateQueries({ queryKey: ['userStats', followerId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.usersStats(followeeId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.usersStats(followerId) });
     },
   });
 }
@@ -119,19 +120,19 @@ export function useUnfollowUser() {
     onMutate: async ({ followerId, followeeId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
-        queryKey: ['follow-status', followerId, followeeId],
+        queryKey: QUERY_KEYS.followStatus(followerId, followeeId),
       });
 
-      queryClient.setQueryData(['follow-status', followerId, followeeId], false);
+      queryClient.setQueryData(QUERY_KEYS.followStatus(followerId, followeeId), false);
 
       // フォロー数も楽観的に更新
       const previousCounts = queryClient.getQueryData<{
         followers: number;
         following: number;
-      }>(['follow-counts', followeeId]);
+      }>(QUERY_KEYS.followCounts(followeeId));
 
       if (previousCounts) {
-        queryClient.setQueryData(['follow-counts', followeeId], {
+        queryClient.setQueryData(QUERY_KEYS.followCounts(followeeId), {
           ...previousCounts,
           followers: Math.max(0, previousCounts.followers - 1),
         });
@@ -147,9 +148,9 @@ export function useUnfollowUser() {
         visibilityTime: 3000,
       });
       // ロールバック
-      queryClient.setQueryData(['follow-status', followerId, followeeId], true);
+      queryClient.setQueryData(QUERY_KEYS.followStatus(followerId, followeeId), true);
       if (context?.previousCounts) {
-        queryClient.setQueryData(['follow-counts', followeeId], context.previousCounts);
+        queryClient.setQueryData(QUERY_KEYS.followCounts(followeeId), context.previousCounts);
       }
     },
     onSuccess: (_, { followerId, followeeId }) => {
@@ -159,9 +160,9 @@ export function useUnfollowUser() {
         visibilityTime: 2000,
       });
       // フォロー数のみ即座に更新（リストは次回表示時に更新）
-      queryClient.invalidateQueries({ queryKey: ['follow-counts'] });
-      queryClient.invalidateQueries({ queryKey: ['userStats', followeeId] });
-      queryClient.invalidateQueries({ queryKey: ['userStats', followerId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.follows });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.usersStats(followeeId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.usersStats(followerId) });
     },
   });
 }
@@ -171,7 +172,7 @@ export function useUnfollowUser() {
  */
 export function useFollowers(userId: string | null | undefined) {
   return useQuery<FollowWithUser[], Error>({
-    queryKey: ['followers', userId],
+    queryKey: QUERY_KEYS.followers(userId || ''),
     queryFn: () => {
       if (!userId) return [];
       return getFollowers(userId);
@@ -186,7 +187,7 @@ export function useFollowers(userId: string | null | undefined) {
  */
 export function useFollowing(userId: string | null | undefined) {
   return useQuery<FollowWithUser[], Error>({
-    queryKey: ['following', userId],
+    queryKey: QUERY_KEYS.following(userId || ''),
     queryFn: () => {
       if (!userId) return [];
       return getFollowing(userId);
@@ -201,7 +202,7 @@ export function useFollowing(userId: string | null | undefined) {
  */
 export function useFollowCounts(userId: string | null | undefined) {
   return useQuery<{ followers: number; following: number }, Error>({
-    queryKey: ['follow-counts', userId],
+    queryKey: QUERY_KEYS.followCounts(userId || ''),
     queryFn: () => {
       if (!userId) return { followers: 0, following: 0 };
       return getFollowCounts(userId);

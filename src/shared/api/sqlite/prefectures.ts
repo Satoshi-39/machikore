@@ -12,6 +12,7 @@ import { log } from '@/shared/config/logger';
 
 /**
  * 都道府県を一括挿入
+ * Note: country_codeは持たない（region_id経由で国を取得）
  */
 export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
   const db = getDatabase();
@@ -20,17 +21,18 @@ export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
     for (const prefecture of prefectures) {
       db.runSync(
         `INSERT OR REPLACE INTO prefectures (
-          id, name, name_kana, name_translations, region_id, latitude, longitude, country_code, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          id, name, name_kana, name_translations, region_id, latitude, longitude, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           prefecture.id,
           prefecture.name,
           prefecture.name_kana,
-          prefecture.name_translations ? JSON.stringify(prefecture.name_translations) : null,
+          typeof prefecture.name_translations === 'string'
+            ? prefecture.name_translations
+            : JSON.stringify(prefecture.name_translations),
           prefecture.region_id,
           prefecture.latitude,
           prefecture.longitude,
-          prefecture.country_code,
           prefecture.created_at,
           prefecture.updated_at,
         ]

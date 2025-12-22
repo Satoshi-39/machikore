@@ -11,6 +11,7 @@ import { LikeTabFilter, type LikeTabMode } from '@/features/filter-like-tab';
 import { LikeSpotList, LikeMapList } from '@/widgets/like-item-list';
 import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
 import { removeSpotLike, removeMapLike } from '@/shared/api/supabase/likes';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { PageHeader } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import type { SpotWithDetails } from '@/shared/types';
@@ -51,7 +52,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
     if (!userId) return;
     try {
       await removeSpotLike(userId, spotId);
-      queryClient.invalidateQueries({ queryKey: ['user-liked-spots', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userLikedSpots(userId) });
     } catch (error) {
       log.error('[LikesPage] Failed to delete spot like:', error);
     }
@@ -62,7 +63,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
     if (!userId) return;
     try {
       await removeMapLike(userId, mapId);
-      queryClient.invalidateQueries({ queryKey: ['user-liked-maps', userId] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userLikedMaps(userId) });
     } catch (error) {
       log.error('[LikesPage] Failed to delete map like:', error);
     }

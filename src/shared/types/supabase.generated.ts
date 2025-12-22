@@ -16,33 +16,55 @@ export type Database = {
     Tables: {
       admin_boundaries: {
         Row: {
-          code: string
+          admin_level: number | null
+          city_id: string | null
+          country_id: string | null
           created_at: string | null
           geom: unknown
           id: number
-          name: string
-          pref_code: string
-          prefecture: string
+          prefecture_id: string | null
         }
         Insert: {
-          code: string
+          admin_level?: number | null
+          city_id?: string | null
+          country_id?: string | null
           created_at?: string | null
           geom?: unknown
           id?: number
-          name: string
-          pref_code: string
-          prefecture: string
+          prefecture_id?: string | null
         }
         Update: {
-          code?: string
+          admin_level?: number | null
+          city_id?: string | null
+          country_id?: string | null
           created_at?: string | null
           geom?: unknown
           id?: number
-          name?: string
-          pref_code?: string
-          prefecture?: string
+          prefecture_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "admin_boundaries_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "admin_boundaries_country_id_fkey"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "admin_boundaries_prefecture_id_fkey"
+            columns: ["prefecture_id"]
+            isOneToOne: false
+            referencedRelation: "prefectures"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       bookmark_folders: {
         Row: {
@@ -145,7 +167,6 @@ export type Database = {
         Row: {
           created_at: string
           display_order: number
-          icon: string
           id: string
           is_active: boolean
           name: string
@@ -156,7 +177,6 @@ export type Database = {
         Insert: {
           created_at?: string
           display_order?: number
-          icon: string
           id: string
           is_active?: boolean
           name: string
@@ -167,7 +187,6 @@ export type Database = {
         Update: {
           created_at?: string
           display_order?: number
-          icon?: string
           id?: string
           is_active?: boolean
           name?: string
@@ -269,13 +288,12 @@ export type Database = {
       }
       cities: {
         Row: {
-          country_code: string | null
           created_at: string
           id: string
           latitude: number | null
           longitude: number | null
           name: string
-          name_kana: string
+          name_kana: string | null
           name_translations: Json | null
           prefecture_id: string
           tile_id: string | null
@@ -283,13 +301,12 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          country_code?: string | null
           created_at?: string
           id: string
           latitude?: number | null
           longitude?: number | null
           name: string
-          name_kana: string
+          name_kana?: string | null
           name_translations?: Json | null
           prefecture_id: string
           tile_id?: string | null
@@ -297,13 +314,12 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          country_code?: string | null
           created_at?: string
           id?: string
           latitude?: number | null
           longitude?: number | null
           name?: string
-          name_kana?: string
+          name_kana?: string | null
           name_translations?: Json | null
           prefecture_id?: string
           tile_id?: string | null
@@ -531,57 +547,69 @@ export type Database = {
           created_at: string
           display_order: number
           id: string
+          latitude: number
+          longitude: number
           name: string
+          name_kana: string | null
+          name_translations: Json | null
           updated_at: string
         }
         Insert: {
           created_at?: string
           display_order?: number
           id: string
+          latitude: number
+          longitude: number
           name: string
+          name_kana?: string | null
+          name_translations?: Json | null
           updated_at?: string
         }
         Update: {
           created_at?: string
           display_order?: number
           id?: string
+          latitude?: number
+          longitude?: number
           name?: string
+          name_kana?: string | null
+          name_translations?: Json | null
           updated_at?: string
         }
         Relationships: []
       }
       countries: {
         Row: {
-          continent_id: string | null
-          country_code: string
+          continent_id: string
           created_at: string
           id: string
           latitude: number
           longitude: number
           name: string
-          name_kana: string
+          name_kana: string | null
+          name_translations: Json | null
           updated_at: string
         }
         Insert: {
-          continent_id?: string | null
-          country_code: string
+          continent_id: string
           created_at?: string
           id: string
           latitude: number
           longitude: number
           name: string
-          name_kana?: string
+          name_kana?: string | null
+          name_translations?: Json | null
           updated_at?: string
         }
         Update: {
-          continent_id?: string | null
-          country_code?: string
+          continent_id?: string
           created_at?: string
           id?: string
           latitude?: number
           longitude?: number
           name?: string
-          name_kana?: string
+          name_kana?: string | null
+          name_translations?: Json | null
           updated_at?: string
         }
         Relationships: [
@@ -787,61 +815,58 @@ export type Database = {
           city_id: string | null
           city_name: string | null
           city_name_translations: Json | null
-          country_code: string | null
-          created_at: string | null
+          created_at: string
           id: string
-          latitude: number
-          longitude: number
+          latitude: number | null
+          longitude: number | null
           name: string
           name_kana: string | null
           name_translations: Json | null
           osm_id: number | null
           place_type: string | null
           prefecture_id: string
-          prefecture_name: string | null
+          prefecture_name: string
           prefecture_name_translations: Json | null
           tile_id: string | null
-          updated_at: string | null
+          updated_at: string
         }
         Insert: {
           city_id?: string | null
           city_name?: string | null
           city_name_translations?: Json | null
-          country_code?: string | null
-          created_at?: string | null
+          created_at?: string
           id: string
-          latitude: number
-          longitude: number
+          latitude?: number | null
+          longitude?: number | null
           name: string
           name_kana?: string | null
           name_translations?: Json | null
           osm_id?: number | null
           place_type?: string | null
           prefecture_id: string
-          prefecture_name?: string | null
+          prefecture_name: string
           prefecture_name_translations?: Json | null
           tile_id?: string | null
-          updated_at?: string | null
+          updated_at?: string
         }
         Update: {
           city_id?: string | null
           city_name?: string | null
           city_name_translations?: Json | null
-          country_code?: string | null
-          created_at?: string | null
+          created_at?: string
           id?: string
-          latitude?: number
-          longitude?: number
+          latitude?: number | null
+          longitude?: number | null
           name?: string
           name_kana?: string | null
           name_translations?: Json | null
           osm_id?: number | null
           place_type?: string | null
           prefecture_id?: string
-          prefecture_name?: string | null
+          prefecture_name?: string
           prefecture_name_translations?: Json | null
           tile_id?: string | null
-          updated_at?: string | null
+          updated_at?: string
         }
         Relationships: [
           {
@@ -939,7 +964,6 @@ export type Database = {
           article_intro: Json | null
           article_outro: Json | null
           bookmarks_count: number
-          category: string | null
           category_id: string | null
           comments_count: number
           created_at: string
@@ -951,6 +975,7 @@ export type Database = {
           is_public: boolean
           likes_count: number
           name: string
+          show_label_chips: boolean | null
           spots_count: number
           thumbnail_url: string | null
           updated_at: string
@@ -960,7 +985,6 @@ export type Database = {
           article_intro?: Json | null
           article_outro?: Json | null
           bookmarks_count?: number
-          category?: string | null
           category_id?: string | null
           comments_count?: number
           created_at?: string
@@ -972,6 +996,7 @@ export type Database = {
           is_public?: boolean
           likes_count?: number
           name: string
+          show_label_chips?: boolean | null
           spots_count?: number
           thumbnail_url?: string | null
           updated_at?: string
@@ -981,7 +1006,6 @@ export type Database = {
           article_intro?: Json | null
           article_outro?: Json | null
           bookmarks_count?: number
-          category?: string | null
           category_id?: string | null
           comments_count?: number
           created_at?: string
@@ -993,6 +1017,7 @@ export type Database = {
           is_public?: boolean
           likes_count?: number
           name?: string
+          show_label_chips?: boolean | null
           spots_count?: number
           thumbnail_url?: string | null
           updated_at?: string
@@ -1053,9 +1078,8 @@ export type Database = {
       }
       master_spots: {
         Row: {
-          bookmarks_count: number | null
           created_at: string
-          favorites_count: number | null
+          favorites_count: number
           google_formatted_address: string | null
           google_phone_number: string | null
           google_place_id: string | null
@@ -1072,9 +1096,8 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          bookmarks_count?: number | null
           created_at?: string
-          favorites_count?: number | null
+          favorites_count?: number
           google_formatted_address?: string | null
           google_phone_number?: string | null
           google_place_id?: string | null
@@ -1091,9 +1114,8 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          bookmarks_count?: number | null
           created_at?: string
-          favorites_count?: number | null
+          favorites_count?: number
           google_formatted_address?: string | null
           google_phone_number?: string | null
           google_place_id?: string | null
@@ -1196,37 +1218,34 @@ export type Database = {
       }
       prefectures: {
         Row: {
-          country_code: string
           created_at: string
           id: string
-          latitude: number | null
-          longitude: number | null
+          latitude: number
+          longitude: number
           name: string
-          name_kana: string
+          name_kana: string | null
           name_translations: Json | null
           region_id: string
           updated_at: string
         }
         Insert: {
-          country_code?: string
           created_at?: string
           id: string
-          latitude?: number | null
-          longitude?: number | null
+          latitude: number
+          longitude: number
           name: string
-          name_kana: string
+          name_kana?: string | null
           name_translations?: Json | null
           region_id: string
           updated_at?: string
         }
         Update: {
-          country_code?: string
           created_at?: string
           id?: string
-          latitude?: number | null
-          longitude?: number | null
+          latitude?: number
+          longitude?: number
           name?: string
-          name_kana?: string
+          name_kana?: string | null
           name_translations?: Json | null
           region_id?: string
           updated_at?: string
@@ -1243,42 +1262,50 @@ export type Database = {
       }
       regions: {
         Row: {
-          country_code: string
+          country_id: string
           created_at: string
           display_order: number
           id: string
           latitude: number
           longitude: number
           name: string
-          name_kana: string
+          name_kana: string | null
           name_translations: Json | null
           updated_at: string
         }
         Insert: {
-          country_code?: string
+          country_id: string
           created_at?: string
           display_order: number
           id: string
           latitude: number
           longitude: number
           name: string
-          name_kana: string
+          name_kana?: string | null
           name_translations?: Json | null
           updated_at?: string
         }
         Update: {
-          country_code?: string
+          country_id?: string
           created_at?: string
           display_order?: number
           id?: string
           latitude?: number
           longitude?: number
           name?: string
-          name_kana?: string
+          name_kana?: string | null
           name_translations?: Json | null
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "fk_regions_country"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       reports: {
         Row: {
@@ -1676,6 +1703,7 @@ export type Database = {
           longitude: number
           name: string
           name_kana: string | null
+          name_translations: Json | null
           network: string | null
           operator: string | null
           osm_id: number | null
@@ -1696,6 +1724,7 @@ export type Database = {
           longitude: number
           name: string
           name_kana?: string | null
+          name_translations?: Json | null
           network?: string | null
           operator?: string | null
           osm_id?: number | null
@@ -1716,6 +1745,7 @@ export type Database = {
           longitude?: number
           name?: string
           name_kana?: string | null
+          name_translations?: Json | null
           network?: string | null
           operator?: string | null
           osm_id?: number | null
@@ -1807,6 +1837,8 @@ export type Database = {
         Row: {
           article_content: Json | null
           bookmarks_count: number
+          city_id: string | null
+          city_name: string | null
           color: string | null
           comments_count: number
           created_at: string
@@ -1817,14 +1849,16 @@ export type Database = {
           id: string
           images_count: number
           label_id: string | null
-          latitude: number | null
+          latitude: number
           likes_count: number
-          longitude: number | null
+          longitude: number
           machi_id: string | null
+          machi_name: string | null
           map_id: string
           master_spot_id: string | null
           order_index: number
           prefecture_id: string | null
+          prefecture_name: string | null
           spot_color: string | null
           updated_at: string
           user_id: string
@@ -1832,6 +1866,8 @@ export type Database = {
         Insert: {
           article_content?: Json | null
           bookmarks_count?: number
+          city_id?: string | null
+          city_name?: string | null
           color?: string | null
           comments_count?: number
           created_at?: string
@@ -1842,14 +1878,16 @@ export type Database = {
           id?: string
           images_count?: number
           label_id?: string | null
-          latitude?: number | null
+          latitude: number
           likes_count?: number
-          longitude?: number | null
+          longitude: number
           machi_id?: string | null
+          machi_name?: string | null
           map_id: string
           master_spot_id?: string | null
           order_index?: number
           prefecture_id?: string | null
+          prefecture_name?: string | null
           spot_color?: string | null
           updated_at?: string
           user_id: string
@@ -1857,6 +1895,8 @@ export type Database = {
         Update: {
           article_content?: Json | null
           bookmarks_count?: number
+          city_id?: string | null
+          city_name?: string | null
           color?: string | null
           comments_count?: number
           created_at?: string
@@ -1867,14 +1907,16 @@ export type Database = {
           id?: string
           images_count?: number
           label_id?: string | null
-          latitude?: number | null
+          latitude?: number
           likes_count?: number
-          longitude?: number | null
+          longitude?: number
           machi_id?: string | null
+          machi_name?: string | null
           map_id?: string
           master_spot_id?: string | null
           order_index?: number
           prefecture_id?: string | null
+          prefecture_name?: string | null
           spot_color?: string | null
           updated_at?: string
           user_id?: string
@@ -1929,7 +1971,7 @@ export type Database = {
           avatar_url: string | null
           bio: string | null
           created_at: string
-          display_name: string | null
+          display_name: string
           email: string
           id: string
           is_premium: boolean | null
@@ -1944,7 +1986,7 @@ export type Database = {
           avatar_url?: string | null
           bio?: string | null
           created_at?: string
-          display_name?: string | null
+          display_name: string
           email: string
           id?: string
           is_premium?: boolean | null
@@ -1959,7 +2001,7 @@ export type Database = {
           avatar_url?: string | null
           bio?: string | null
           created_at?: string
-          display_name?: string | null
+          display_name?: string
           email?: string
           id?: string
           is_premium?: boolean | null
@@ -2468,10 +2510,10 @@ export type Database = {
       get_city_by_coordinate: {
         Args: { lat: number; lng: number }
         Returns: {
-          code: string
-          name: string
-          pref_code: string
-          prefecture: string
+          admin_level: number
+          city_id: string
+          country_id: string
+          prefecture_id: string
         }[]
       }
       get_notification_settings: {

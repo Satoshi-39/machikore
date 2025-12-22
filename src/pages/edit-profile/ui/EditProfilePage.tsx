@@ -106,7 +106,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
       await updateProfile(
         currentUserId,
         {
-          display_name: displayName.trim() || null,
+          display_name: displayName.trim() || undefined,
           bio: bio.trim() || null,
         },
         newAvatarFile || undefined

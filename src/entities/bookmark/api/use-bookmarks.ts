@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   getUserBookmarks,
   checkSpotBookmarked,
@@ -21,7 +22,7 @@ export function useBookmarks(
   folderId?: string | null
 ) {
   return useQuery<BookmarkWithDetails[], Error>({
-    queryKey: ['bookmarks', userId, folderId],
+    queryKey: QUERY_KEYS.bookmarksList(userId || '', folderId ?? undefined),
     queryFn: () => {
       if (!userId) return [];
       return getUserBookmarks(userId, folderId);
@@ -38,7 +39,7 @@ export function useCheckSpotBookmarked(
   spotId: string | null | undefined
 ) {
   return useQuery<boolean, Error>({
-    queryKey: ['bookmark-status', 'spot', userId, spotId],
+    queryKey: QUERY_KEYS.bookmarkStatus('spot', userId || '', spotId || ''),
     queryFn: () => {
       if (!userId || !spotId) return false;
       return checkSpotBookmarked(userId, spotId);
@@ -55,7 +56,7 @@ export function useCheckMapBookmarked(
   mapId: string | null | undefined
 ) {
   return useQuery<boolean, Error>({
-    queryKey: ['bookmark-status', 'map', userId, mapId],
+    queryKey: QUERY_KEYS.bookmarkStatus('map', userId || '', mapId || ''),
     queryFn: () => {
       if (!userId || !mapId) return false;
       return checkMapBookmarked(userId, mapId);
@@ -75,7 +76,7 @@ export function useSpotBookmarkInfo(
   spotId: string | null | undefined
 ) {
   return useQuery<BookmarkInfo, Error>({
-    queryKey: ['bookmark-info', 'spot', userId, spotId],
+    queryKey: QUERY_KEYS.bookmarkInfo('spot', userId || '', spotId || ''),
     queryFn: () => {
       if (!userId || !spotId) return [];
       return getSpotBookmarkInfo(userId, spotId);
@@ -92,7 +93,7 @@ export function useMapBookmarkInfo(
   mapId: string | null | undefined
 ) {
   return useQuery<BookmarkInfo, Error>({
-    queryKey: ['bookmark-info', 'map', userId, mapId],
+    queryKey: QUERY_KEYS.bookmarkInfo('map', userId || '', mapId || ''),
     queryFn: () => {
       if (!userId || !mapId) return [];
       return getMapBookmarkInfo(userId, mapId);
