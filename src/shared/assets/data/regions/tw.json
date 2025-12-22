@@ -2,51 +2,46 @@
   {
     "id": "tw_north",
     "name": "北部",
-    "name_en": "Northern Taiwan",
     "name_kana": "",
+    "name_translations": { "en": "Northern Taiwan" },
     "latitude": 25,
     "longitude": 121.5,
-    "country_code": "tw",
     "display_order": 1
   },
   {
     "id": "tw_central",
     "name": "中部",
-    "name_en": "Central Taiwan",
     "name_kana": "",
+    "name_translations": { "en": "Central Taiwan" },
     "latitude": 24,
     "longitude": 120.7,
-    "country_code": "tw",
     "display_order": 2
   },
   {
     "id": "tw_south",
     "name": "南部",
-    "name_en": "Southern Taiwan",
     "name_kana": "",
+    "name_translations": { "en": "Southern Taiwan" },
     "latitude": 23,
     "longitude": 120.3,
-    "country_code": "tw",
     "display_order": 3
   },
   {
     "id": "tw_east",
     "name": "東部",
-    "name_en": "Eastern Taiwan",
     "name_kana": "",
+    "name_translations": { "en": "Eastern Taiwan" },
     "latitude": 23.5,
     "longitude": 121.3,
-    "country_code": "tw",
     "display_order": 4
   },
   {
     "id": "tw_islands",
     "name": "離島",
-    "name_en": "Offshore Islands",
     "name_kana": "",
+    "name_translations": { "en": "Offshore Islands" },
     "latitude": 24,
     "longitude": 119,
-    "country_code": "tw",
     "display_order": 5
   }
 ]

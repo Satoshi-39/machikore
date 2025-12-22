@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict eq44EOlca0tynlYGze6fMMKl5fd2tYPjthpNwOdDbWlgZhUxaUfhCVZxkfTtGSn
+\restrict 9rXTALRplhS1Es8EJQkhX1uwQUjTTa9pXSOUSWIX8Fku65fvTI99ci9mfhPFLS1
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.7 (Homebrew)
@@ -506,16 +506,17 @@ $$;
 -- Name: get_city_by_coordinate(double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.get_city_by_coordinate(lng double precision, lat double precision) RETURNS TABLE(code character varying, name character varying, prefecture character varying, pref_code character varying)
+CREATE FUNCTION public.get_city_by_coordinate(lng double precision, lat double precision) RETURNS TABLE(country_id text, admin_level integer, prefecture_id text, city_id text)
     LANGUAGE sql STABLE
     AS $$
   SELECT
-    ab.code,
-    ab.name,
-    ab.prefecture,
-    ab.pref_code
+    ab.country_id,
+    ab.admin_level,
+    ab.prefecture_id,
+    ab.city_id
   FROM admin_boundaries ab
   WHERE ST_Contains(ab.geom, ST_SetSRID(ST_Point(lng, lat), 4326))
+  ORDER BY ab.admin_level DESC  -- より詳細な行政区画を優先
   LIMIT 1;
 $$;
 
@@ -524,7 +525,7 @@ $$;
 -- Name: FUNCTION get_city_by_coordinate(lng double precision, lat double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON FUNCTION public.get_city_by_coordinate(lng double precision, lat double precision) IS '座標から市区町村を判定するRPC関数';
+COMMENT ON FUNCTION public.get_city_by_coordinate(lng double precision, lat double precision) IS '座標から行政区画を特定。prefecture_id と city_id を直接返す。';
 
 
 SET default_tablespace = '';
@@ -1145,12 +1146,12 @@ $$;
 
 CREATE TABLE public.admin_boundaries (
     id integer NOT NULL,
-    code character varying(5) NOT NULL,
-    name character varying(100) NOT NULL,
-    prefecture character varying(20) NOT NULL,
-    pref_code character varying(2) NOT NULL,
     geom public.geometry(MultiPolygon,4326),
-    created_at timestamp with time zone DEFAULT now()
+    created_at timestamp with time zone DEFAULT now(),
+    admin_level integer,
+    country_id text,
+    prefecture_id text,
+    city_id text
 );
 
 
@@ -1159,6 +1160,34 @@ CREATE TABLE public.admin_boundaries (
 --
 
 COMMENT ON TABLE public.admin_boundaries IS '行政区域ポリゴン（国土数値情報N03由来）';
+
+
+--
+-- Name: COLUMN admin_boundaries.admin_level; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.admin_boundaries.admin_level IS 'OSM admin_level (4=都道府県相当, 6-7=市区町村相当)';
+
+
+--
+-- Name: COLUMN admin_boundaries.country_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.admin_boundaries.country_id IS '国ID → countries.id (jp, kr, th, tw, cn)';
+
+
+--
+-- Name: COLUMN admin_boundaries.prefecture_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.admin_boundaries.prefecture_id IS '都道府県ID → prefectures.id';
+
+
+--
+-- Name: COLUMN admin_boundaries.city_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.admin_boundaries.city_id IS '市区町村ID → cities.id';
 
 
 --
@@ -1189,7 +1218,6 @@ CREATE TABLE public.bookmark_folders (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     name text NOT NULL,
-    color text,
     order_index integer DEFAULT 0,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -1222,12 +1250,18 @@ CREATE TABLE public.categories (
     slug text NOT NULL,
     name text NOT NULL,
     name_translations jsonb,
-    icon text NOT NULL,
     display_order integer DEFAULT 0 NOT NULL,
     is_active boolean DEFAULT true NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
+
+
+--
+-- Name: TABLE categories; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.categories IS 'マップカテゴリ（グルメ、旅行など）';
 
 
 --
@@ -1338,7 +1372,7 @@ CREATE TABLE public.cities (
     id text NOT NULL,
     prefecture_id text NOT NULL,
     name text NOT NULL,
-    name_kana text NOT NULL,
+    name_kana text,
     type text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -1373,7 +1407,6 @@ CREATE TABLE public.collections (
     name text NOT NULL,
     description text,
     thumbnail_url text,
-    color text,
     is_public boolean DEFAULT false NOT NULL,
     maps_count integer DEFAULT 0 NOT NULL,
     order_index integer DEFAULT 0,
@@ -1439,7 +1472,8 @@ CREATE TABLE public.continents (
     display_order integer DEFAULT 0 NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    name_translations jsonb
+    name_translations jsonb,
+    name_kana text
 );
 
 
@@ -1478,12 +1512,12 @@ COMMENT ON COLUMN public.continents.display_order IS '表示順序';
 CREATE TABLE public.countries (
     id text NOT NULL,
     name text NOT NULL,
-    name_kana text DEFAULT ''::text NOT NULL,
-    latitude double precision NOT NULL,
-    longitude double precision NOT NULL,
+    name_kana text,
+    latitude double precision,
+    longitude double precision,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    continent_id text,
+    continent_id text NOT NULL,
     name_translations jsonb
 );
 
@@ -1586,10 +1620,10 @@ CREATE TABLE public.featured_carousel_items (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     title text NOT NULL,
     description text,
+    content text,
     image_url text NOT NULL,
     link_type text DEFAULT 'tag'::text NOT NULL,
     link_value text,
-    related_tags text[],
     display_order integer DEFAULT 0 NOT NULL,
     is_active boolean DEFAULT true NOT NULL,
     starts_at timestamp with time zone,
@@ -1735,18 +1769,18 @@ CREATE TABLE public.likes (
 CREATE TABLE public.machi (
     id text NOT NULL,
     name text NOT NULL,
-    latitude double precision NOT NULL,
-    longitude double precision NOT NULL,
+    latitude double precision,
+    longitude double precision,
     prefecture_id text NOT NULL,
     city_id text,
-    name_kana text DEFAULT ''::text,
+    name_kana text,
     name_translations jsonb,
-    prefecture_name text DEFAULT ''::text,
+    prefecture_name text NOT NULL,
     prefecture_name_translations jsonb,
     city_name text,
     city_name_translations jsonb,
-    created_at timestamp with time zone DEFAULT now(),
-    updated_at timestamp with time zone DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     osm_id bigint,
     place_type text,
     tile_id text
@@ -1817,7 +1851,6 @@ CREATE TABLE public.maps (
     user_id uuid NOT NULL,
     name text NOT NULL,
     description text,
-    category text,
     is_public boolean DEFAULT false NOT NULL,
     is_default boolean DEFAULT false NOT NULL,
     is_official boolean DEFAULT false NOT NULL,
@@ -1834,13 +1867,6 @@ CREATE TABLE public.maps (
     article_outro jsonb,
     show_label_chips boolean DEFAULT false
 );
-
-
---
--- Name: COLUMN maps.category; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.maps.category IS '非推奨: category_idを使用してください。将来的に削除予定';
 
 
 --
@@ -1959,8 +1985,7 @@ CREATE TABLE public.master_spots (
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     machi_id text,
     google_short_address text,
-    bookmarks_count integer DEFAULT 0,
-    favorites_count integer DEFAULT 0
+    favorites_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1979,7 +2004,13 @@ CREATE TABLE public.notifications (
     content text,
     is_read boolean DEFAULT false,
     created_at timestamp with time zone DEFAULT now(),
-    CONSTRAINT valid_notification_type CHECK ((type = ANY (ARRAY['like_spot'::text, 'like_map'::text, 'comment_spot'::text, 'comment_map'::text, 'follow'::text, 'system'::text])))
+    CONSTRAINT valid_notification_type CHECK ((type = ANY (ARRAY['like_spot'::text, 'like_map'::text, 'comment_spot'::text, 'comment_map'::text, 'follow'::text, 'system'::text]))),
+    CONSTRAINT notifications_type_id_check CHECK (
+        ((type = ANY (ARRAY['like_spot'::text, 'comment_spot'::text])) AND (user_spot_id IS NOT NULL)) OR
+        ((type = ANY (ARRAY['like_map'::text, 'comment_map'::text])) AND (map_id IS NOT NULL)) OR
+        ((type = 'follow'::text) AND (actor_id IS NOT NULL)) OR
+        (type = 'system'::text)
+    )
 );
 
 
@@ -1990,7 +2021,7 @@ CREATE TABLE public.notifications (
 CREATE TABLE public.prefectures (
     id text NOT NULL,
     name text NOT NULL,
-    name_kana text NOT NULL,
+    name_kana text,
     region_id text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -2014,14 +2045,14 @@ COMMENT ON COLUMN public.prefectures.name_translations IS '多言語翻訳 {"en"
 CREATE TABLE public.regions (
     id text NOT NULL,
     name text NOT NULL,
-    name_kana text NOT NULL,
+    name_kana text,
     display_order integer NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    latitude double precision NOT NULL,
-    longitude double precision NOT NULL,
+    latitude double precision,
+    longitude double precision,
     name_translations jsonb,
-    country_id text
+    country_id text NOT NULL
 );
 
 
@@ -2347,6 +2378,7 @@ CREATE TABLE public.transport_hubs (
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone DEFAULT now(),
     tile_id text NOT NULL,
+    name_translations jsonb,
     CONSTRAINT transport_hubs_type_check CHECK ((type = ANY (ARRAY['station'::text, 'airport'::text, 'ferry_terminal'::text, 'bus_terminal'::text])))
 );
 
@@ -2464,6 +2496,13 @@ COMMENT ON COLUMN public.transport_hubs.tile_id IS 'タイルID（0.25度グリ�
 
 
 --
+-- Name: COLUMN transport_hubs.name_translations; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.transport_hubs.name_translations IS '多言語翻訳 {"en": "Shibuya Station", "cn": "涩谷站", "tw": "澀谷站"}';
+
+
+--
 -- Name: user_latest_agreements; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -2507,15 +2546,19 @@ CREATE TABLE public.user_spots (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     article_content jsonb,
-    latitude double precision,
-    longitude double precision,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
     google_formatted_address text,
     google_short_address text,
     bookmarks_count integer DEFAULT 0 NOT NULL,
     prefecture_id text,
-    color text DEFAULT '''blue''::text'::text,
+    color text,
     spot_color text DEFAULT 'blue'::text,
-    label_id uuid
+    label_id uuid,
+    city_id text,
+    prefecture_name text,
+    city_name text,
+    machi_name text
 );
 
 
@@ -2597,7 +2640,7 @@ CREATE TABLE public.users (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     email text NOT NULL,
     username text NOT NULL,
-    display_name text,
+    display_name text NOT NULL,
     avatar_url text,
     bio text,
     is_premium boolean DEFAULT false,
@@ -2714,14 +2757,6 @@ COMMENT ON COLUMN public.visits.visited_at IS '訪問した日時';
 --
 
 ALTER TABLE ONLY public.admin_boundaries ALTER COLUMN id SET DEFAULT nextval('public.admin_boundaries_id_seq'::regclass);
-
-
---
--- Name: admin_boundaries admin_boundaries_code_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.admin_boundaries
-    ADD CONSTRAINT admin_boundaries_code_key UNIQUE (code);
 
 
 --
@@ -3235,10 +3270,31 @@ CREATE UNIQUE INDEX bookmarks_user_spot_folder_unique ON public.bookmarks USING 
 
 
 --
--- Name: idx_admin_boundaries_code; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_admin_boundaries_admin_level; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_admin_boundaries_code ON public.admin_boundaries USING btree (code);
+CREATE INDEX idx_admin_boundaries_admin_level ON public.admin_boundaries USING btree (admin_level);
+
+
+--
+-- Name: idx_admin_boundaries_city_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_admin_boundaries_city_id ON public.admin_boundaries USING btree (city_id);
+
+
+--
+-- Name: idx_admin_boundaries_country_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_admin_boundaries_country_id ON public.admin_boundaries USING btree (country_id);
+
+
+--
+-- Name: idx_admin_boundaries_country_level; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_admin_boundaries_country_level ON public.admin_boundaries USING btree (country_id, admin_level);
 
 
 --
@@ -3249,10 +3305,10 @@ CREATE INDEX idx_admin_boundaries_geom ON public.admin_boundaries USING gist (ge
 
 
 --
--- Name: idx_admin_boundaries_pref_code; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_admin_boundaries_prefecture_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_admin_boundaries_pref_code ON public.admin_boundaries USING btree (pref_code);
+CREATE INDEX idx_admin_boundaries_prefecture_id ON public.admin_boundaries USING btree (prefecture_id);
 
 
 --
@@ -4338,6 +4394,30 @@ CREATE TRIGGER update_user_spots_updated_at BEFORE UPDATE ON public.user_spots F
 --
 
 CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON public.users FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+
+--
+-- Name: admin_boundaries admin_boundaries_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_boundaries
+    ADD CONSTRAINT admin_boundaries_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id);
+
+
+--
+-- Name: admin_boundaries admin_boundaries_country_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_boundaries
+    ADD CONSTRAINT admin_boundaries_country_id_fkey FOREIGN KEY (country_id) REFERENCES public.countries(id);
+
+
+--
+-- Name: admin_boundaries admin_boundaries_prefecture_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_boundaries
+    ADD CONSTRAINT admin_boundaries_prefecture_id_fkey FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id);
 
 
 --
@@ -5805,5 +5885,5 @@ ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict eq44EOlca0tynlYGze6fMMKl5fd2tYPjthpNwOdDbWlgZhUxaUfhCVZxkfTtGSn
+\unrestrict 9rXTALRplhS1Es8EJQkhX1uwQUjTTa9pXSOUSWIX8Fku65fvTI99ci9mfhPFLS1
 

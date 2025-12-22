@@ -2,61 +2,55 @@
   {
     "id": "th_north",
     "name": "北部",
-    "name_en": "Northern Thailand",
     "name_kana": "",
+    "name_translations": { "en": "Northern Thailand" },
     "latitude": 18.8,
     "longitude": 99,
-    "country_code": "th",
     "display_order": 1
   },
   {
     "id": "th_northeast",
     "name": "東北部",
-    "name_en": "Northeastern Thailand",
     "name_kana": "",
+    "name_translations": { "en": "Northeastern Thailand" },
     "latitude": 16,
     "longitude": 103,
-    "country_code": "th",
     "display_order": 2
   },
   {
     "id": "th_central",
     "name": "中部",
-    "name_en": "Central Thailand",
     "name_kana": "",
+    "name_translations": { "en": "Central Thailand" },
     "latitude": 14,
     "longitude": 100.5,
-    "country_code": "th",
     "display_order": 3
   },
   {
     "id": "th_east",
     "name": "東部",
-    "name_en": "Eastern Thailand",
     "name_kana": "",
+    "name_translations": { "en": "Eastern Thailand" },
     "latitude": 13,
     "longitude": 102,
-    "country_code": "th",
     "display_order": 4
   },
   {
     "id": "th_west",
     "name": "西部",
-    "name_en": "Western Thailand",
     "name_kana": "",
+    "name_translations": { "en": "Western Thailand" },
     "latitude": 13,
     "longitude": 99.5,
-    "country_code": "th",
     "display_order": 5
   },
   {
     "id": "th_south",
     "name": "南部",
-    "name_en": "Southern Thailand",
     "name_kana": "",
+    "name_translations": { "en": "Southern Thailand" },
     "latitude": 8,
     "longitude": 99,
-    "country_code": "th",
     "display_order": 6
   }
 ]

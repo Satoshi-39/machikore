@@ -37,8 +37,7 @@ export async function getBookmarkFolders(
 export async function createBookmarkFolder(
   userId: string,
   name: string,
-  folderType: BookmarkFolderType,
-  color?: string
+  folderType: BookmarkFolderType
 ): Promise<BookmarkFolder> {
   // 同じタイプのフォルダ内で最大のorder_indexを取得
   const { data: existing } = await supabase
@@ -58,7 +57,6 @@ export async function createBookmarkFolder(
       user_id: userId,
       name,
       folder_type: folderType,
-      color: color || null,
       order_index: nextOrderIndex,
     })
     .select()
@@ -76,7 +74,7 @@ export async function createBookmarkFolder(
  */
 export async function updateBookmarkFolder(
   folderId: string,
-  updates: { name?: string; color?: string | null; order_index?: number }
+  updates: { name?: string; order_index?: number }
 ): Promise<BookmarkFolder> {
   const { data, error } = await supabase
     .from('bookmark_folders')

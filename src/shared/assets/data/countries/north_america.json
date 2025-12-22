@@ -1,26 +1,26 @@
 [
   {
-    "id": "usa",
+    "id": "us",
     "name": "アメリカ",
     "name_kana": "",
+    "name_translations": { "en": "United States" },
     "latitude": 37.0902,
-    "longitude": -95.7129,
-    "country_code": "us"
+    "longitude": -95.7129
   },
   {
-    "id": "canada",
+    "id": "ca",
     "name": "カナダ",
     "name_kana": "",
+    "name_translations": { "en": "Canada" },
     "latitude": 56.1304,
-    "longitude": -106.3468,
-    "country_code": "ca"
+    "longitude": -106.3468
   },
   {
-    "id": "mexico",
+    "id": "mx",
     "name": "メキシコ",
     "name_kana": "",
+    "name_translations": { "en": "Mexico" },
     "latitude": 23.6345,
-    "longitude": -102.5528,
-    "country_code": "mx"
+    "longitude": -102.5528
   }
 ]

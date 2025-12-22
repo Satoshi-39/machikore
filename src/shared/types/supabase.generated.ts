@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "13.0.5"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       admin_boundaries: {
@@ -68,7 +93,6 @@ export type Database = {
       }
       bookmark_folders: {
         Row: {
-          color: string | null
           created_at: string
           folder_type: string
           id: string
@@ -78,7 +102,6 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          color?: string | null
           created_at?: string
           folder_type?: string
           id?: string
@@ -88,7 +111,6 @@ export type Database = {
           user_id: string
         }
         Update: {
-          color?: string | null
           created_at?: string
           folder_type?: string
           id?: string
@@ -377,7 +399,6 @@ export type Database = {
       }
       collections: {
         Row: {
-          color: string | null
           created_at: string
           description: string | null
           id: string
@@ -390,7 +411,6 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          color?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -403,7 +423,6 @@ export type Database = {
           user_id: string
         }
         Update: {
-          color?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -625,6 +644,7 @@ export type Database = {
       featured_carousel_items: {
         Row: {
           category_id: string | null
+          content: string | null
           created_at: string
           description: string | null
           display_order: number
@@ -634,13 +654,13 @@ export type Database = {
           is_active: boolean
           link_type: string
           link_value: string | null
-          related_tags: string[] | null
           starts_at: string | null
           title: string
           updated_at: string
         }
         Insert: {
           category_id?: string | null
+          content?: string | null
           created_at?: string
           description?: string | null
           display_order?: number
@@ -650,13 +670,13 @@ export type Database = {
           is_active?: boolean
           link_type?: string
           link_value?: string | null
-          related_tags?: string[] | null
           starts_at?: string | null
           title: string
           updated_at?: string
         }
         Update: {
           category_id?: string | null
+          content?: string | null
           created_at?: string
           description?: string | null
           display_order?: number
@@ -666,7 +686,6 @@ export type Database = {
           is_active?: boolean
           link_type?: string
           link_value?: string | null
-          related_tags?: string[] | null
           starts_at?: string | null
           title?: string
           updated_at?: string
@@ -3419,6 +3438,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       report_reason: [

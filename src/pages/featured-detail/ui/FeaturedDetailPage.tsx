@@ -2,32 +2,23 @@
  * 特集詳細ページ
  *
  * 特集カルーセルアイテムの詳細を表示
- * 関連タグをチップ形式で一覧表示し、タップでタグ別マップ一覧へ遷移
+ * 運営からのお知らせや特集コンテンツを表示
  */
 
-import React, { useCallback } from 'react';
-import { View, Text, ScrollView, Pressable, Image, ActivityIndicator } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
+import React from 'react';
+import { View, Text, ScrollView, Image, ActivityIndicator } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import type { Href } from 'expo-router';
 import { useFeaturedCarouselItem } from '@/entities/featured-carousel';
 import { PageHeader } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
 import { colors } from '@/shared/config';
 
 export function FeaturedDetailPage() {
-  const router = useRouter();
   const { goBack } = useSafeBack();
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const { data: item, isLoading, error } = useFeaturedCarouselItem(id);
-
-  const handleTagPress = useCallback(
-    (tag: string) => {
-      router.push(`/(tabs)/discover/tag-results?tag=${encodeURIComponent(tag)}` as Href);
-    },
-    [router]
-  );
 
   if (isLoading) {
     return (
@@ -65,47 +56,28 @@ export function FeaturedDetailPage() {
             style={{ width: '100%', height: '100%' }}
             resizeMode="cover"
           />
-          {/* 半透明オーバーレイ + 説明文 */}
-          {item.description && (
-            <View
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                backgroundColor: 'rgba(0,0,0,0.5)',
-                paddingHorizontal: 16,
-                paddingVertical: 12,
-              }}
-            >
-              <Text className="text-white text-sm">{item.description}</Text>
-            </View>
-          )}
         </View>
 
-        {/* 関連タグ一覧 */}
+        {/* コンテンツ */}
         <View className="px-4 py-6">
-          <Text className="text-lg font-bold text-text dark:text-dark-text mb-4">
-            カテゴリから探す
-          </Text>
+          {/* 説明文 */}
+          {item.description && (
+            <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mb-4">
+              {item.description}
+            </Text>
+          )}
 
-          {item.related_tags && item.related_tags.length > 0 ? (
-            <View className="flex-row flex-wrap gap-3">
-              {item.related_tags.map((tag) => (
-                <Pressable
-                  key={tag}
-                  onPress={() => handleTagPress(tag)}
-                  className="bg-gray-100 dark:bg-gray-800 rounded-full px-4 py-2.5 active:opacity-70"
-                >
-                  <Text className="text-text dark:text-dark-text font-medium">
-                    #{tag}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-          ) : (
-            <Text className="text-text-secondary dark:text-dark-text-secondary">
-              関連タグがありません
+          {/* 本文 */}
+          {item.content && (
+            <Text className="text-base text-foreground dark:text-dark-foreground leading-relaxed">
+              {item.content}
+            </Text>
+          )}
+
+          {/* コンテンツがない場合 */}
+          {!item.description && !item.content && (
+            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+              コンテンツがありません
             </Text>
           )}
         </View>

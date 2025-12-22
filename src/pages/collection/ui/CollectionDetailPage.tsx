@@ -73,12 +73,12 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             ) : (
               <View
                 className="w-20 h-20 rounded-xl items-center justify-center mr-4"
-                style={{ backgroundColor: collection.color || colors.gray[100] }}
+                style={{ backgroundColor: colors.gray[100] }}
               >
                 <Ionicons
                   name="grid"
                   size={32}
-                  color={collection.color ? '#fff' : colors.primary.DEFAULT}
+                  color={colors.primary.DEFAULT}
                 />
               </View>
             )}

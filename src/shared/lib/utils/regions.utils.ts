@@ -13,14 +13,14 @@ import cnRegions from '@/shared/assets/data/regions/cn.json';
 import thRegions from '@/shared/assets/data/regions/th.json';
 
 // 地方データの型（JSONから読み込む形式）
+// Note: idは{country}_{region}形式（例: jp_kanto）、country_idはidから取得
 interface RegionJsonData {
-  id: string;
+  id: string; // {country}_{region}形式
   name: string;
-  name_en: string;
   name_kana: string;
+  name_translations?: { en: string };
   latitude: number;
   longitude: number;
-  country_code: string; // JSONではcountry_codeだが、DBではcountry_idとして使用
   display_order: number;
 }
 
@@ -36,18 +36,21 @@ const regionsByCountry: Record<string, RegionJsonData[]> = {
 
 /**
  * JSONデータをRegionRowに変換
- * Note: JSONのcountry_codeはDBのcountry_id（countries.id）に対応
+ * Note: idから国コードを抽出（例: jp_kanto → jp）
  */
 function toRegionRow(region: RegionJsonData): RegionRow {
   const now = new Date().toISOString();
+  // idの形式: {country}_{region}（例: jp_kanto）から国コードを抽出
+  const parts = region.id.split('_');
+  const countryId = parts[0] ?? region.id;
   return {
     id: region.id,
     name: region.name,
     name_kana: region.name_kana,
-    name_translations: JSON.stringify({ en: region.name_en }),
+    name_translations: region.name_translations ? JSON.stringify(region.name_translations) : null,
     latitude: region.latitude,
     longitude: region.longitude,
-    country_id: region.country_code, // country_codeをcountry_idとして使用
+    country_id: countryId,
     display_order: region.display_order,
     created_at: now,
     updated_at: now,

@@ -13,15 +13,15 @@ import cnPrefectures from '@/shared/assets/data/prefectures/cn.json';
 import thPrefectures from '@/shared/assets/data/prefectures/th.json';
 
 // 都道府県/州データの型（JSONから読み込む形式）
+// Note: idは{country}_{prefecture}形式（例: jp_tokyo）
 interface PrefectureJsonData {
-  id: string;
+  id: string; // {country}_{prefecture}形式
   name: string;
-  name_en?: string;
   name_kana: string;
+  name_translations?: { en: string };
   region_id: string;
   latitude: number | null;
   longitude: number | null;
-  country_code: string;
 }
 
 // 国コードと都道府県/州データのマッピング
@@ -48,7 +48,7 @@ function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow | null {
     id: prefecture.id,
     name: prefecture.name,
     name_kana: prefecture.name_kana,
-    name_translations: prefecture.name_en ? JSON.stringify({ en: prefecture.name_en }) : null,
+    name_translations: prefecture.name_translations ? JSON.stringify(prefecture.name_translations) : null,
     region_id: prefecture.region_id,
     latitude: prefecture.latitude,
     longitude: prefecture.longitude,

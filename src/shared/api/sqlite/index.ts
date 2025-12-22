@@ -3,7 +3,7 @@
  */
 
 export * from './client';
-export * from './migrations';
+export * from './schema';
 export * from './users';
 export * from './maps';
 export * from './continents';

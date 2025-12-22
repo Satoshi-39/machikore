@@ -1,58 +1,58 @@
 [
   {
-    "id": "india",
+    "id": "in",
     "name": "インド",
     "name_kana": "",
+    "name_translations": { "en": "India" },
     "latitude": 20.5937,
-    "longitude": 78.9629,
-    "country_code": "in"
+    "longitude": 78.9629
   },
   {
-    "id": "sri_lanka",
+    "id": "lk",
     "name": "スリランカ",
     "name_kana": "",
+    "name_translations": { "en": "Sri Lanka" },
     "latitude": 7.8731,
-    "longitude": 80.7718,
-    "country_code": "lk"
+    "longitude": 80.7718
   },
   {
-    "id": "nepal",
+    "id": "np",
     "name": "ネパール",
     "name_kana": "",
+    "name_translations": { "en": "Nepal" },
     "latitude": 28.3949,
-    "longitude": 84.124,
-    "country_code": "np"
+    "longitude": 84.124
   },
   {
-    "id": "maldives",
+    "id": "mv",
     "name": "モルディブ",
     "name_kana": "",
+    "name_translations": { "en": "Maldives" },
     "latitude": 3.2028,
-    "longitude": 73.2207,
-    "country_code": "mv"
+    "longitude": 73.2207
   },
   {
-    "id": "bangladesh",
+    "id": "bd",
     "name": "バングラデシュ",
     "name_kana": "",
+    "name_translations": { "en": "Bangladesh" },
     "latitude": 23.685,
-    "longitude": 90.3563,
-    "country_code": "bd"
+    "longitude": 90.3563
   },
   {
-    "id": "pakistan",
+    "id": "pk",
     "name": "パキスタン",
     "name_kana": "",
+    "name_translations": { "en": "Pakistan" },
     "latitude": 30.3753,
-    "longitude": 69.3451,
-    "country_code": "pk"
+    "longitude": 69.3451
   },
   {
-    "id": "bhutan",
+    "id": "bt",
     "name": "ブータン",
     "name_kana": "",
+    "name_translations": { "en": "Bhutan" },
     "latitude": 27.5142,
-    "longitude": 90.4336,
-    "country_code": "bt"
+    "longitude": 90.4336
   }
 ]

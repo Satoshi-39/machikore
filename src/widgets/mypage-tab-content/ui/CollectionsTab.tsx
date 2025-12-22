@@ -74,12 +74,12 @@ function CollectionCard({
         ) : (
           <View
             className="w-16 h-16 rounded-lg items-center justify-center mr-3"
-            style={{ backgroundColor: collection.color || colors.gray[100] }}
+            style={{ backgroundColor: colors.gray[100] }}
           >
             <Ionicons
               name="grid"
               size={24}
-              color={collection.color ? '#fff' : colors.primary.DEFAULT}
+              color={colors.primary.DEFAULT}
             />
           </View>
         )}

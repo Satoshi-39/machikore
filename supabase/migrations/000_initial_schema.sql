@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 9rXTALRplhS1Es8EJQkhX1uwQUjTTa9pXSOUSWIX8Fku65fvTI99ci9mfhPFLS1
+\restrict rVb6aPOjVCqnEEsTIaglhKoScVeEGKg5EAnmnA8bXtoa6wDQTRFtw7gyv2gOSBk
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.7 (Homebrew)
@@ -1218,7 +1218,6 @@ CREATE TABLE public.bookmark_folders (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     name text NOT NULL,
-    color text,
     order_index integer DEFAULT 0,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -1408,7 +1407,6 @@ CREATE TABLE public.collections (
     name text NOT NULL,
     description text,
     thumbnail_url text,
-    color text,
     is_public boolean DEFAULT false NOT NULL,
     maps_count integer DEFAULT 0 NOT NULL,
     order_index integer DEFAULT 0,
@@ -1475,7 +1473,9 @@ CREATE TABLE public.continents (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     name_translations jsonb,
-    name_kana text
+    name_kana text,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL
 );
 
 
@@ -1508,6 +1508,20 @@ COMMENT ON COLUMN public.continents.display_order IS '表示順序';
 
 
 --
+-- Name: COLUMN continents.latitude; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.continents.latitude IS '大陸の代表緯度';
+
+
+--
+-- Name: COLUMN continents.longitude; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.continents.longitude IS '大陸の代表経度';
+
+
+--
 -- Name: countries; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1515,8 +1529,8 @@ CREATE TABLE public.countries (
     id text NOT NULL,
     name text NOT NULL,
     name_kana text,
-    latitude double precision,
-    longitude double precision,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     continent_id text NOT NULL,
@@ -1625,14 +1639,14 @@ CREATE TABLE public.featured_carousel_items (
     image_url text NOT NULL,
     link_type text DEFAULT 'tag'::text NOT NULL,
     link_value text,
-    related_tags text[],
     display_order integer DEFAULT 0 NOT NULL,
     is_active boolean DEFAULT true NOT NULL,
     starts_at timestamp with time zone,
     ends_at timestamp with time zone,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    category_id text
+    category_id text,
+    content text
 );
 
 
@@ -1676,13 +1690,6 @@ COMMENT ON COLUMN public.featured_carousel_items.link_type IS 'リンク種別�
 --
 
 COMMENT ON COLUMN public.featured_carousel_items.link_value IS 'リンク先の値';
-
-
---
--- Name: COLUMN featured_carousel_items.related_tags; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.featured_carousel_items.related_tags IS '関連タグ一覧';
 
 
 --
@@ -2006,6 +2013,7 @@ CREATE TABLE public.notifications (
     content text,
     is_read boolean DEFAULT false,
     created_at timestamp with time zone DEFAULT now(),
+    CONSTRAINT notifications_type_id_check CHECK ((((type = ANY (ARRAY['like_spot'::text, 'comment_spot'::text])) AND (user_spot_id IS NOT NULL)) OR ((type = ANY (ARRAY['like_map'::text, 'comment_map'::text])) AND (map_id IS NOT NULL)) OR ((type = 'follow'::text) AND (actor_id IS NOT NULL)) OR (type = 'system'::text))),
     CONSTRAINT valid_notification_type CHECK ((type = ANY (ARRAY['like_spot'::text, 'like_map'::text, 'comment_spot'::text, 'comment_map'::text, 'follow'::text, 'system'::text])))
 );
 
@@ -2021,8 +2029,8 @@ CREATE TABLE public.prefectures (
     region_id text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    latitude double precision,
-    longitude double precision,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
     name_translations jsonb
 );
 
@@ -2045,8 +2053,8 @@ CREATE TABLE public.regions (
     display_order integer NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    latitude double precision,
-    longitude double precision,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
     name_translations jsonb,
     country_id text NOT NULL
 );
@@ -2370,7 +2378,6 @@ CREATE TABLE public.transport_hubs (
     ref text,
     latitude double precision NOT NULL,
     longitude double precision NOT NULL,
-    country_code text DEFAULT 'jp'::text,
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone DEFAULT now(),
     tile_id text NOT NULL,
@@ -5881,5 +5888,5 @@ ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 9rXTALRplhS1Es8EJQkhX1uwQUjTTa9pXSOUSWIX8Fku65fvTI99ci9mfhPFLS1
+\unrestrict rVb6aPOjVCqnEEsTIaglhKoScVeEGKg5EAnmnA8bXtoa6wDQTRFtw7gyv2gOSBk
 

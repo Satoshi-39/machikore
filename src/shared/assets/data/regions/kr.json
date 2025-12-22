@@ -2,61 +2,55 @@
   {
     "id": "kr_capital",
     "name": "首都圏",
-    "name_en": "Capital",
     "name_kana": "",
+    "name_translations": { "en": "Capital" },
     "latitude": 37.5,
     "longitude": 127,
-    "country_code": "kr",
     "display_order": 1
   },
   {
     "id": "kr_gangwon",
     "name": "江原圏",
-    "name_en": "Gangwon",
     "name_kana": "",
+    "name_translations": { "en": "Gangwon" },
     "latitude": 37.75,
     "longitude": 128.25,
-    "country_code": "kr",
     "display_order": 2
   },
   {
     "id": "kr_chungcheong",
     "name": "忠清圏",
-    "name_en": "Chungcheong",
     "name_kana": "",
+    "name_translations": { "en": "Chungcheong" },
     "latitude": 36.5,
     "longitude": 127,
-    "country_code": "kr",
     "display_order": 3
   },
   {
     "id": "kr_honam",
     "name": "湖南圏",
-    "name_en": "Honam",
     "name_kana": "",
+    "name_translations": { "en": "Honam" },
     "latitude": 35.5,
     "longitude": 127,
-    "country_code": "kr",
     "display_order": 4
   },
   {
     "id": "kr_yeongnam",
     "name": "嶺南圏",
-    "name_en": "Yeongnam",
     "name_kana": "",
+    "name_translations": { "en": "Yeongnam" },
     "latitude": 35.5,
     "longitude": 128.5,
-    "country_code": "kr",
     "display_order": 5
   },
   {
     "id": "kr_jeju",
     "name": "済州圏",
-    "name_en": "Jeju",
     "name_kana": "",
+    "name_translations": { "en": "Jeju" },
     "latitude": 33.4,
     "longitude": 126.5,
-    "country_code": "kr",
     "display_order": 6
   }
 ]

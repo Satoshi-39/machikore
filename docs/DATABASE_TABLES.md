@@ -161,6 +161,8 @@
 | created_at | timestamptz | NO | now() | 作成日時 |
 | updated_at | timestamptz | NO | now() | 更新日時 |
 
+**CHECK制約:** type は '区', '市', '町', '村' のいずれか
+
 ---
 
 ### machi
@@ -197,23 +199,24 @@
 |--------|-----|------|-----------|------|
 | id | text | NO | - | 交通拠点ID |
 | osm_id | bigint | YES | - | OpenStreetMap ID |
-| osm_type | text | YES | - | OSMタイプ |
-| prefecture_id | text | NO | - | 都道府県ID |
-| city_id | text | YES | - | 市区町村ID |
+| osm_type | text | YES | - | OSMタイプ (node/way/relation) |
+| prefecture_id | text | NO | - | 都道府県ID → prefectures.id |
+| city_id | text | YES | - | 市区町村ID → cities.id |
 | type | text | NO | - | 種別 (station/airport/ferry_terminal/bus_terminal) |
-| subtype | text | YES | - | サブタイプ |
+| subtype | text | YES | - | サブタイプ (駅: jr/metro/toei/subway/private、空港: international/domestic/military/heliport) |
 | name | text | NO | - | 名称 |
 | name_kana | text | YES | - | 読み仮名 |
-| name_translations | jsonb | YES | - | 多言語翻訳 |
+| name_translations | jsonb | YES | - | 多言語翻訳 {"en": "..."} |
 | operator | text | YES | - | 運営会社 |
 | network | text | YES | - | 路線網 |
-| ref | text | YES | - | 参照コード |
+| ref | text | YES | - | 参照コード（路線コード/空港コード） |
 | latitude | double | NO | - | 緯度 |
 | longitude | double | NO | - | 経度 |
-| country_code | text | YES | 'jp' | 国コード |
-| tile_id | text | NO | - | 地図タイルID |
+| tile_id | text | NO | - | 地図タイルID (0.25度グリッド、例: "559_142") |
 | created_at | timestamptz | YES | now() | 作成日時 |
 | updated_at | timestamptz | YES | now() | 更新日時 |
+
+**CHECK制約:** type は 'station', 'airport', 'ferry_terminal', 'bus_terminal' のいずれか
 
 ---
 
@@ -534,11 +537,12 @@
 | id | uuid | NO | gen_random_uuid() | フォルダID |
 | user_id | uuid | NO | - | ユーザーID → users.id |
 | name | text | NO | - | フォルダ名 |
-| color | text | YES | - | フォルダ色 |
 | order_index | integer | YES | 0 | 表示順序 |
 | folder_type | text | NO | 'spots' | フォルダ種別 ('spots', 'maps') |
 | created_at | timestamptz | NO | now() | 作成日時 |
 | updated_at | timestamptz | NO | now() | 更新日時 |
+
+**CHECK制約:** folder_type は 'spots' または 'maps' のみ
 
 ---
 
@@ -641,7 +645,6 @@
 | name | text | NO | - | コレクション名 |
 | description | text | YES | - | 説明 |
 | thumbnail_url | text | YES | - | サムネイルURL |
-| color | text | YES | - | テーマカラー |
 | is_public | boolean | NO | false | 公開フラグ |
 | maps_count | integer | NO | 0 | マップ数 |
 | order_index | integer | YES | 0 | 表示順序 |
@@ -683,7 +686,13 @@
 | is_read | boolean | YES | false | 既読フラグ |
 | created_at | timestamptz | YES | now() | 作成日時 |
 
-**type:** like_spot, like_map, comment_spot, comment_map, follow, system
+**CHECK制約:**
+- type は 'like_spot', 'like_map', 'comment_spot', 'comment_map', 'follow', 'system' のいずれか
+- type と ID カラムの整合性:
+  - like_spot, comment_spot → user_spot_id 必須
+  - like_map, comment_map → map_id 必須
+  - follow → actor_id 必須
+  - system → ID不要
 
 ---
 
@@ -754,10 +763,10 @@
 | id | uuid | NO | gen_random_uuid() | ID |
 | title | text | NO | - | 表示タイトル |
 | description | text | YES | - | サブタイトル |
+| content | text | YES | - | 詳細ページ用本文 |
 | image_url | text | NO | - | バナー画像URL |
 | link_type | text | NO | 'tag' | リンク種別 (tag/map/user/url) |
 | link_value | text | YES | - | リンク先の値 |
-| related_tags | text[] | YES | - | 関連タグ一覧 |
 | category_id | text | YES | - | カテゴリID（NULLで全カテゴリ表示） |
 | display_order | integer | NO | 0 | 表示順序 |
 | is_active | boolean | NO | true | 公開フラグ |
@@ -809,13 +818,15 @@
 | カラム | 型 | NULL | デフォルト | 説明 |
 |--------|-----|------|-----------|------|
 | id | uuid | NO | gen_random_uuid() | バージョンID |
-| type | text | NO | - | 種別 ('terms', 'privacy') |
+| type | text | NO | - | 種別 ('terms_of_service', 'privacy_policy') |
 | version | text | NO | - | バージョン番号 |
 | content | text | NO | - | 規約内容 |
 | summary | text | YES | - | 変更概要 |
 | effective_at | timestamptz | NO | - | 発効日 |
 | is_current | boolean | NO | false | 現行バージョンフラグ |
 | created_at | timestamptz | NO | now() | 作成日時 |
+
+**CHECK制約:** type は 'terms_of_service' または 'privacy_policy' のみ
 
 ---
 

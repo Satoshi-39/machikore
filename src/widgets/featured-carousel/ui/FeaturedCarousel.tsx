@@ -149,11 +149,8 @@ export function FeaturedCarousel({ categoryId }: FeaturedCarouselProps) {
     (item: FeaturedCarouselItem) => {
       switch (item.link_type) {
         case 'tag':
-          if (item.related_tags && item.related_tags.length > 0) {
-            router.push(`/(tabs)/discover/featured/${item.id}` as Href);
-          } else if (item.link_value) {
-            router.push(`/(tabs)/discover/tag-results?tag=${encodeURIComponent(item.link_value)}` as Href);
-          }
+          // 特集詳細ページに遷移
+          router.push(`/(tabs)/discover/featured/${item.id}` as Href);
           break;
         case 'map':
           if (item.link_value) {

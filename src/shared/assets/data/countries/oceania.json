@@ -1,74 +1,74 @@
 [
   {
-    "id": "australia",
+    "id": "au",
     "name": "オーストラリア",
     "name_kana": "",
+    "name_translations": { "en": "Australia" },
     "latitude": -25.2744,
-    "longitude": 133.7751,
-    "country_code": "au"
+    "longitude": 133.7751
   },
   {
-    "id": "new_zealand",
+    "id": "nz",
     "name": "ニュージーランド",
     "name_kana": "",
+    "name_translations": { "en": "New Zealand" },
     "latitude": -40.9006,
-    "longitude": 174.886,
-    "country_code": "nz"
+    "longitude": 174.886
   },
   {
-    "id": "fiji",
+    "id": "fj",
     "name": "フィジー",
     "name_kana": "",
+    "name_translations": { "en": "Fiji" },
     "latitude": -17.7134,
-    "longitude": 178.065,
-    "country_code": "fj"
+    "longitude": 178.065
   },
   {
-    "id": "guam",
+    "id": "gu",
     "name": "グアム",
     "name_kana": "",
+    "name_translations": { "en": "Guam" },
     "latitude": 13.4443,
-    "longitude": 144.7937,
-    "country_code": "gu"
+    "longitude": 144.7937
   },
   {
-    "id": "hawaii",
+    "id": "us-hi",
     "name": "ハワイ",
     "name_kana": "",
+    "name_translations": { "en": "Hawaii" },
     "latitude": 19.8968,
-    "longitude": -155.5828,
-    "country_code": "us-hi"
+    "longitude": -155.5828
   },
   {
-    "id": "new_caledonia",
+    "id": "nc",
     "name": "ニューカレドニア",
     "name_kana": "",
+    "name_translations": { "en": "New Caledonia" },
     "latitude": -20.9043,
-    "longitude": 165.618,
-    "country_code": "nc"
+    "longitude": 165.618
   },
   {
-    "id": "tahiti",
+    "id": "pf",
     "name": "タヒチ",
     "name_kana": "",
+    "name_translations": { "en": "Tahiti" },
     "latitude": -17.6509,
-    "longitude": -149.426,
-    "country_code": "pf"
+    "longitude": -149.426
   },
   {
-    "id": "palau",
+    "id": "pw",
     "name": "パラオ",
     "name_kana": "",
+    "name_translations": { "en": "Palau" },
     "latitude": 7.515,
-    "longitude": 134.5825,
-    "country_code": "pw"
+    "longitude": 134.5825
   },
   {
-    "id": "saipan",
+    "id": "mp",
     "name": "サイパン",
     "name_kana": "",
+    "name_translations": { "en": "Saipan" },
     "latitude": 15.1801,
-    "longitude": 145.7496,
-    "country_code": "mp"
+    "longitude": 145.7496
   }
 ]

@@ -2,41 +2,37 @@
   {
     "id": "us_northeast",
     "name": "北東部",
-    "name_en": "Northeast",
     "name_kana": "",
+    "name_translations": { "en": "Northeast" },
     "latitude": 42,
     "longitude": -73,
-    "country_code": "us",
     "display_order": 1
   },
   {
     "id": "us_midwest",
     "name": "中西部",
-    "name_en": "Midwest",
     "name_kana": "",
+    "name_translations": { "en": "Midwest" },
     "latitude": 41,
     "longitude": -91,
-    "country_code": "us",
     "display_order": 2
   },
   {
     "id": "us_south",
     "name": "南部",
-    "name_en": "South",
     "name_kana": "",
+    "name_translations": { "en": "South" },
     "latitude": 33,
     "longitude": -88,
-    "country_code": "us",
     "display_order": 3
   },
   {
     "id": "us_west",
     "name": "西部",
-    "name_en": "West",
     "name_kana": "",
+    "name_translations": { "en": "West" },
     "latitude": 40,
     "longitude": -115,
-    "country_code": "us",
     "display_order": 4
   }
 ]

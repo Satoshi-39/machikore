@@ -1,58 +1,58 @@
 [
   {
-    "id": "japan",
+    "id": "jp",
     "name": "日本",
     "name_kana": "にほん",
+    "name_translations": { "en": "Japan" },
     "latitude": 36.2048,
-    "longitude": 138.2529,
-    "country_code": "jp"
+    "longitude": 138.2529
   },
   {
-    "id": "south_korea",
+    "id": "kr",
     "name": "韓国",
     "name_kana": "",
+    "name_translations": { "en": "South Korea" },
     "latitude": 35.9078,
-    "longitude": 127.7669,
-    "country_code": "kr"
+    "longitude": 127.7669
   },
   {
-    "id": "taiwan",
+    "id": "tw",
     "name": "台湾",
     "name_kana": "",
+    "name_translations": { "en": "Taiwan" },
     "latitude": 23.6978,
-    "longitude": 120.9605,
-    "country_code": "tw"
+    "longitude": 120.9605
   },
   {
-    "id": "china",
+    "id": "cn",
     "name": "中国",
     "name_kana": "",
+    "name_translations": { "en": "China" },
     "latitude": 35.8617,
-    "longitude": 104.1954,
-    "country_code": "cn"
+    "longitude": 104.1954
   },
   {
-    "id": "hong_kong",
+    "id": "hk",
     "name": "香港",
     "name_kana": "",
+    "name_translations": { "en": "Hong Kong" },
     "latitude": 22.3193,
-    "longitude": 114.1694,
-    "country_code": "hk"
+    "longitude": 114.1694
   },
   {
-    "id": "macau",
+    "id": "mo",
     "name": "マカオ",
     "name_kana": "",
+    "name_translations": { "en": "Macau" },
     "latitude": 22.1987,
-    "longitude": 113.5439,
-    "country_code": "mo"
+    "longitude": 113.5439
   },
   {
-    "id": "mongolia",
+    "id": "mn",
     "name": "モンゴル",
     "name_kana": "",
+    "name_translations": { "en": "Mongolia" },
     "latitude": 46.8625,
-    "longitude": 103.8467,
-    "country_code": "mn"
+    "longitude": 103.8467
   }
 ]

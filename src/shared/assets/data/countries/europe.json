@@ -1,162 +1,162 @@
 [
   {
-    "id": "united_kingdom",
+    "id": "gb",
     "name": "イギリス",
     "name_kana": "",
+    "name_translations": { "en": "United Kingdom" },
     "latitude": 55.3781,
-    "longitude": -3.436,
-    "country_code": "gb"
+    "longitude": -3.436
   },
   {
-    "id": "france",
+    "id": "fr",
     "name": "フランス",
     "name_kana": "",
+    "name_translations": { "en": "France" },
     "latitude": 46.2276,
-    "longitude": 2.2137,
-    "country_code": "fr"
+    "longitude": 2.2137
   },
   {
-    "id": "germany",
+    "id": "de",
     "name": "ドイツ",
     "name_kana": "",
+    "name_translations": { "en": "Germany" },
     "latitude": 51.1657,
-    "longitude": 10.4515,
-    "country_code": "de"
+    "longitude": 10.4515
   },
   {
-    "id": "italy",
+    "id": "it",
     "name": "イタリア",
     "name_kana": "",
+    "name_translations": { "en": "Italy" },
     "latitude": 41.8719,
-    "longitude": 12.5674,
-    "country_code": "it"
+    "longitude": 12.5674
   },
   {
-    "id": "spain",
+    "id": "es",
     "name": "スペイン",
     "name_kana": "",
+    "name_translations": { "en": "Spain" },
     "latitude": 40.4637,
-    "longitude": -3.7492,
-    "country_code": "es"
+    "longitude": -3.7492
   },
   {
-    "id": "portugal",
+    "id": "pt",
     "name": "ポルトガル",
     "name_kana": "",
+    "name_translations": { "en": "Portugal" },
     "latitude": 39.3999,
-    "longitude": -8.2245,
-    "country_code": "pt"
+    "longitude": -8.2245
   },
   {
-    "id": "netherlands",
+    "id": "nl",
     "name": "オランダ",
     "name_kana": "",
+    "name_translations": { "en": "Netherlands" },
     "latitude": 52.1326,
-    "longitude": 5.2913,
-    "country_code": "nl"
+    "longitude": 5.2913
   },
   {
-    "id": "belgium",
+    "id": "be",
     "name": "ベルギー",
     "name_kana": "",
+    "name_translations": { "en": "Belgium" },
     "latitude": 50.5039,
-    "longitude": 4.4699,
-    "country_code": "be"
+    "longitude": 4.4699
   },
   {
-    "id": "switzerland",
+    "id": "ch",
     "name": "スイス",
     "name_kana": "",
+    "name_translations": { "en": "Switzerland" },
     "latitude": 46.8182,
-    "longitude": 8.2275,
-    "country_code": "ch"
+    "longitude": 8.2275
   },
   {
-    "id": "austria",
+    "id": "at",
     "name": "オーストリア",
     "name_kana": "",
+    "name_translations": { "en": "Austria" },
     "latitude": 47.5162,
-    "longitude": 14.5501,
-    "country_code": "at"
+    "longitude": 14.5501
   },
   {
-    "id": "sweden",
+    "id": "se",
     "name": "スウェーデン",
     "name_kana": "",
+    "name_translations": { "en": "Sweden" },
     "latitude": 60.1282,
-    "longitude": 18.6435,
-    "country_code": "se"
+    "longitude": 18.6435
   },
   {
-    "id": "norway",
+    "id": "no",
     "name": "ノルウェー",
     "name_kana": "",
+    "name_translations": { "en": "Norway" },
     "latitude": 60.472,
-    "longitude": 8.4689,
-    "country_code": "no"
+    "longitude": 8.4689
   },
   {
-    "id": "denmark",
+    "id": "dk",
     "name": "デンマーク",
     "name_kana": "",
+    "name_translations": { "en": "Denmark" },
     "latitude": 56.2639,
-    "longitude": 9.5018,
-    "country_code": "dk"
+    "longitude": 9.5018
   },
   {
-    "id": "finland",
+    "id": "fi",
     "name": "フィンランド",
     "name_kana": "",
+    "name_translations": { "en": "Finland" },
     "latitude": 61.9241,
-    "longitude": 25.7482,
-    "country_code": "fi"
+    "longitude": 25.7482
   },
   {
-    "id": "ireland",
+    "id": "ie",
     "name": "アイルランド",
     "name_kana": "",
+    "name_translations": { "en": "Ireland" },
     "latitude": 53.1424,
-    "longitude": -7.6921,
-    "country_code": "ie"
+    "longitude": -7.6921
   },
   {
-    "id": "greece",
+    "id": "gr",
     "name": "ギリシャ",
     "name_kana": "",
+    "name_translations": { "en": "Greece" },
     "latitude": 39.0742,
-    "longitude": 21.8243,
-    "country_code": "gr"
+    "longitude": 21.8243
   },
   {
-    "id": "poland",
+    "id": "pl",
     "name": "ポーランド",
     "name_kana": "",
+    "name_translations": { "en": "Poland" },
     "latitude": 51.9194,
-    "longitude": 19.1451,
-    "country_code": "pl"
+    "longitude": 19.1451
   },
   {
-    "id": "czech_republic",
+    "id": "cz",
     "name": "チェコ",
     "name_kana": "",
+    "name_translations": { "en": "Czech Republic" },
     "latitude": 49.8175,
-    "longitude": 15.473,
-    "country_code": "cz"
+    "longitude": 15.473
   },
   {
-    "id": "hungary",
+    "id": "hu",
     "name": "ハンガリー",
     "name_kana": "",
+    "name_translations": { "en": "Hungary" },
     "latitude": 47.1625,
-    "longitude": 19.5033,
-    "country_code": "hu"
+    "longitude": 19.5033
   },
   {
-    "id": "croatia",
+    "id": "hr",
     "name": "クロアチア",
     "name_kana": "",
+    "name_translations": { "en": "Croatia" },
     "latitude": 45.1,
-    "longitude": 15.2,
-    "country_code": "hr"
+    "longitude": 15.2
   }
 ]

@@ -1,92 +1,83 @@
 [
   {
-    "id": "hokkaido",
+    "id": "jp_hokkaido",
     "name": "北海道",
-    "name_en": "Hokkaido",
     "name_kana": "ほっかいどう",
+    "name_translations": { "en": "Hokkaido" },
     "latitude": 43.4316324,
     "longitude": 142.4916576,
-    "country_code": "jp",
     "display_order": 1
   },
   {
-    "id": "tohoku",
+    "id": "jp_tohoku",
     "name": "東北地方",
-    "name_en": "Tohoku",
     "name_kana": "とうほくちほう",
+    "name_translations": { "en": "Tohoku" },
     "latitude": 39.1126311,
     "longitude": 140.5976819,
-    "country_code": "jp",
     "display_order": 2
   },
   {
-    "id": "kanto",
+    "id": "jp_kanto",
     "name": "関東地方",
-    "name_en": "Kanto",
     "name_kana": "かんとうちほう",
+    "name_translations": { "en": "Kanto" },
     "latitude": 35.9892697,
     "longitude": 139.6537351,
-    "country_code": "jp",
     "display_order": 3
   },
   {
-    "id": "chubu",
+    "id": "jp_chubu",
     "name": "中部地方",
-    "name_en": "Chubu",
     "name_kana": "ちゅうぶちほう",
+    "name_translations": { "en": "Chubu" },
     "latitude": 36.1024806,
     "longitude": 137.4944984,
-    "country_code": "jp",
     "display_order": 4
   },
   {
-    "id": "kinki",
+    "id": "jp_kinki",
     "name": "近畿地方",
-    "name_en": "Kinki",
     "name_kana": "きんきちほう",
+    "name_translations": { "en": "Kinki" },
     "latitude": 34.6921073,
     "longitude": 135.6939318,
-    "country_code": "jp",
     "display_order": 5
   },
   {
-    "id": "chugoku",
+    "id": "jp_chugoku",
     "name": "中国地方",
-    "name_en": "Chugoku",
     "name_kana": "ちゅうごくちほう",
+    "name_translations": { "en": "Chugoku" },
     "latitude": 34.906822,
     "longitude": 132.8874127,
-    "country_code": "jp",
     "display_order": 6
   },
   {
-    "id": "shikoku",
+    "id": "jp_shikoku",
     "name": "四国地方",
-    "name_en": "Shikoku",
     "name_kana": "しこくちほう",
+    "name_translations": { "en": "Shikoku" },
     "latitude": 33.7139951,
     "longitude": 133.6160565,
-    "country_code": "jp",
     "display_order": 7
   },
   {
-    "id": "kyushu",
+    "id": "jp_kyushu",
     "name": "九州地方",
-    "name_en": "Kyushu",
     "name_kana": "きゅうしゅうちほう",
+    "name_translations": { "en": "Kyushu" },
     "latitude": 32.7381926,
     "longitude": 130.6260752,
-    "country_code": "jp",
     "display_order": 8
   },
   {
-    "id": "okinawa",
+    "id": "jp_okinawa",
     "name": "沖縄",
-    "name_en": "Okinawa",
     "name_kana": "おきなわ",
+    "name_translations": { "en": "Okinawa" },
     "latitude": 26.2124,
     "longitude": 127.6809,
-    "country_code": "jp",
     "display_order": 9
   }
 ]

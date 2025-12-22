@@ -2,71 +2,64 @@
   {
     "id": "cn_north",
     "name": "華北",
-    "name_en": "North China",
     "name_kana": "",
+    "name_translations": { "en": "North China" },
     "latitude": 40,
     "longitude": 116,
-    "country_code": "cn",
     "display_order": 1
   },
   {
     "id": "cn_northeast",
     "name": "東北",
-    "name_en": "Northeast China",
     "name_kana": "",
+    "name_translations": { "en": "Northeast China" },
     "latitude": 44,
     "longitude": 125,
-    "country_code": "cn",
     "display_order": 2
   },
   {
     "id": "cn_east",
     "name": "華東",
-    "name_en": "East China",
     "name_kana": "",
+    "name_translations": { "en": "East China" },
     "latitude": 31,
     "longitude": 121,
-    "country_code": "cn",
     "display_order": 3
   },
   {
     "id": "cn_central",
     "name": "華中",
-    "name_en": "Central China",
     "name_kana": "",
+    "name_translations": { "en": "Central China" },
     "latitude": 31,
     "longitude": 112,
-    "country_code": "cn",
     "display_order": 4
   },
   {
     "id": "cn_south",
     "name": "華南",
-    "name_en": "South China",
     "name_kana": "",
+    "name_translations": { "en": "South China" },
     "latitude": 23,
     "longitude": 113,
-    "country_code": "cn",
     "display_order": 5
   },
   {
     "id": "cn_southwest",
     "name": "西南",
-    "name_en": "Southwest China",
     "name_kana": "",
+    "name_translations": { "en": "Southwest China" },
     "latitude": 30,
     "longitude": 103,
-    "country_code": "cn",
     "display_order": 6
   },
   {
     "id": "cn_northwest",
     "name": "西北",
-    "name_en": "Northwest China",
     "name_kana": "",
+    "name_translations": { "en": "Northwest China" },
     "latitude": 36,
     "longitude": 106,
-    "country_code": "cn",
     "display_order": 7
   }
 ]

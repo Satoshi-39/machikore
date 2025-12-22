@@ -1,90 +1,90 @@
 [
   {
-    "id": "thailand",
+    "id": "th",
     "name": "タイ",
     "name_kana": "",
+    "name_translations": { "en": "Thailand" },
     "latitude": 15.87,
-    "longitude": 100.9925,
-    "country_code": "th"
+    "longitude": 100.9925
   },
   {
-    "id": "vietnam",
+    "id": "vn",
     "name": "ベトナム",
     "name_kana": "",
+    "name_translations": { "en": "Vietnam" },
     "latitude": 14.0583,
-    "longitude": 108.2772,
-    "country_code": "vn"
+    "longitude": 108.2772
   },
   {
-    "id": "singapore",
+    "id": "sg",
     "name": "シンガポール",
     "name_kana": "",
+    "name_translations": { "en": "Singapore" },
     "latitude": 1.3521,
-    "longitude": 103.8198,
-    "country_code": "sg"
+    "longitude": 103.8198
   },
   {
-    "id": "malaysia",
+    "id": "my",
     "name": "マレーシア",
     "name_kana": "",
+    "name_translations": { "en": "Malaysia" },
     "latitude": 4.2105,
-    "longitude": 101.9758,
-    "country_code": "my"
+    "longitude": 101.9758
   },
   {
-    "id": "indonesia",
+    "id": "id",
     "name": "インドネシア",
     "name_kana": "",
+    "name_translations": { "en": "Indonesia" },
     "latitude": -0.7893,
-    "longitude": 113.9213,
-    "country_code": "id"
+    "longitude": 113.9213
   },
   {
-    "id": "philippines",
+    "id": "ph",
     "name": "フィリピン",
     "name_kana": "",
+    "name_translations": { "en": "Philippines" },
     "latitude": 12.8797,
-    "longitude": 121.774,
-    "country_code": "ph"
+    "longitude": 121.774
   },
   {
-    "id": "cambodia",
+    "id": "kh",
     "name": "カンボジア",
     "name_kana": "",
+    "name_translations": { "en": "Cambodia" },
     "latitude": 12.5657,
-    "longitude": 104.991,
-    "country_code": "kh"
+    "longitude": 104.991
   },
   {
-    "id": "myanmar",
+    "id": "mm",
     "name": "ミャンマー",
     "name_kana": "",
+    "name_translations": { "en": "Myanmar" },
     "latitude": 21.9162,
-    "longitude": 95.956,
-    "country_code": "mm"
+    "longitude": 95.956
   },
   {
-    "id": "laos",
+    "id": "la",
     "name": "ラオス",
     "name_kana": "",
+    "name_translations": { "en": "Laos" },
     "latitude": 19.8563,
-    "longitude": 102.4955,
-    "country_code": "la"
+    "longitude": 102.4955
   },
   {
-    "id": "brunei",
+    "id": "bn",
     "name": "ブルネイ",
     "name_kana": "",
+    "name_translations": { "en": "Brunei" },
     "latitude": 4.5353,
-    "longitude": 114.7277,
-    "country_code": "bn"
+    "longitude": 114.7277
   },
   {
-    "id": "timor_leste",
+    "id": "tl",
     "name": "東ティモール",
     "name_kana": "",
+    "name_translations": { "en": "Timor-Leste" },
     "latitude": -8.8742,
-    "longitude": 125.7275,
-    "country_code": "tl"
+    "longitude": 125.7275
   }
 ]

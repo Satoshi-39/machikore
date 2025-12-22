@@ -1,58 +1,58 @@
 [
   {
-    "id": "egypt",
+    "id": "eg",
     "name": "エジプト",
     "name_kana": "",
+    "name_translations": { "en": "Egypt" },
     "latitude": 26.8206,
-    "longitude": 30.8025,
-    "country_code": "eg"
+    "longitude": 30.8025
   },
   {
-    "id": "morocco",
+    "id": "ma",
     "name": "モロッコ",
     "name_kana": "",
+    "name_translations": { "en": "Morocco" },
     "latitude": 31.7917,
-    "longitude": -7.0926,
-    "country_code": "ma"
+    "longitude": -7.0926
   },
   {
-    "id": "south_africa",
+    "id": "za",
     "name": "南アフリカ",
     "name_kana": "",
+    "name_translations": { "en": "South Africa" },
     "latitude": -30.5595,
-    "longitude": 22.9375,
-    "country_code": "za"
+    "longitude": 22.9375
   },
   {
-    "id": "kenya",
+    "id": "ke",
     "name": "ケニア",
     "name_kana": "",
+    "name_translations": { "en": "Kenya" },
     "latitude": -0.0236,
-    "longitude": 37.9062,
-    "country_code": "ke"
+    "longitude": 37.9062
   },
   {
-    "id": "tanzania",
+    "id": "tz",
     "name": "タンザニア",
     "name_kana": "",
+    "name_translations": { "en": "Tanzania" },
     "latitude": -6.369,
-    "longitude": 34.8888,
-    "country_code": "tz"
+    "longitude": 34.8888
   },
   {
-    "id": "tunisia",
+    "id": "tn",
     "name": "チュニジア",
     "name_kana": "",
+    "name_translations": { "en": "Tunisia" },
     "latitude": 33.8869,
-    "longitude": 9.5375,
-    "country_code": "tn"
+    "longitude": 9.5375
   },
   {
-    "id": "mauritius",
+    "id": "mu",
     "name": "モーリシャス",
     "name_kana": "",
+    "name_translations": { "en": "Mauritius" },
     "latitude": -20.3484,
-    "longitude": 57.5522,
-    "country_code": "mu"
+    "longitude": 57.5522
   }
 ]

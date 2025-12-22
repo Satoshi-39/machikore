@@ -11,7 +11,6 @@ export {
   getDatabase,
   openDatabase,
   closeDatabase,
-  runMigrations,
   // SQLite固有の関数のみエクスポート
   insertMap,
   getMapsByUserId,

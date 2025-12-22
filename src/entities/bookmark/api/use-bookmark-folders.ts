@@ -42,13 +42,11 @@ export function useCreateBookmarkFolder() {
       userId,
       name,
       folderType,
-      color,
     }: {
       userId: string;
       name: string;
       folderType: BookmarkFolderType;
-      color?: string;
-    }) => createBookmarkFolder(userId, name, folderType, color),
+    }) => createBookmarkFolder(userId, name, folderType),
     onSuccess: (_, { userId, folderType }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId, folderType) });
     },
@@ -67,7 +65,7 @@ export function useUpdateBookmarkFolder() {
       updates,
     }: {
       folderId: string;
-      updates: { name?: string; color?: string | null; order_index?: number };
+      updates: { name?: string; order_index?: number };
       userId: string;
     }) => updateBookmarkFolder(folderId, updates),
     onSuccess: (_, { userId }) => {

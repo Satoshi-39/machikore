@@ -48,7 +48,10 @@ app-example
 *.db-shm
 *.db-wal
 
-# 一時データファイル
-scripts/data/*_machi_data.json
-scripts/data/*_transport_data.json
-scripts/data/admin-boundaries/
+# 一時データファイル（OSMから取得したデータ）
+scripts/data/machi/
+scripts/data/transport/
+scripts/data/admin_boundaries/
+scripts/data/admin_boundaries_old/
+scripts/data/city-code-mapping.json
+scripts/data/prefectures_data.json

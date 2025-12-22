@@ -1,74 +1,74 @@
 [
   {
-    "id": "uae",
+    "id": "ae",
     "name": "アラブ首長国連邦",
     "name_kana": "",
+    "name_translations": { "en": "United Arab Emirates" },
     "latitude": 23.4241,
-    "longitude": 53.8478,
-    "country_code": "ae"
+    "longitude": 53.8478
   },
   {
-    "id": "turkey",
+    "id": "tr",
     "name": "トルコ",
     "name_kana": "",
+    "name_translations": { "en": "Turkey" },
     "latitude": 38.9637,
-    "longitude": 35.2433,
-    "country_code": "tr"
+    "longitude": 35.2433
   },
   {
-    "id": "israel",
+    "id": "il",
     "name": "イスラエル",
     "name_kana": "",
+    "name_translations": { "en": "Israel" },
     "latitude": 31.0461,
-    "longitude": 34.8516,
-    "country_code": "il"
+    "longitude": 34.8516
   },
   {
-    "id": "qatar",
+    "id": "qa",
     "name": "カタール",
     "name_kana": "",
+    "name_translations": { "en": "Qatar" },
     "latitude": 25.3548,
-    "longitude": 51.1839,
-    "country_code": "qa"
+    "longitude": 51.1839
   },
   {
-    "id": "saudi_arabia",
+    "id": "sa",
     "name": "サウジアラビア",
     "name_kana": "",
+    "name_translations": { "en": "Saudi Arabia" },
     "latitude": 23.8859,
-    "longitude": 45.0792,
-    "country_code": "sa"
+    "longitude": 45.0792
   },
   {
-    "id": "jordan",
+    "id": "jo",
     "name": "ヨルダン",
     "name_kana": "",
+    "name_translations": { "en": "Jordan" },
     "latitude": 30.5852,
-    "longitude": 36.2384,
-    "country_code": "jo"
+    "longitude": 36.2384
   },
   {
-    "id": "oman",
+    "id": "om",
     "name": "オマーン",
     "name_kana": "",
+    "name_translations": { "en": "Oman" },
     "latitude": 21.4735,
-    "longitude": 55.9754,
-    "country_code": "om"
+    "longitude": 55.9754
   },
   {
-    "id": "bahrain",
+    "id": "bh",
     "name": "バーレーン",
     "name_kana": "",
+    "name_translations": { "en": "Bahrain" },
     "latitude": 26.0667,
-    "longitude": 50.5577,
-    "country_code": "bh"
+    "longitude": 50.5577
   },
   {
-    "id": "kuwait",
+    "id": "kw",
     "name": "クウェート",
     "name_kana": "",
+    "name_translations": { "en": "Kuwait" },
     "latitude": 29.3117,
-    "longitude": 47.4818,
-    "country_code": "kw"
+    "longitude": 47.4818
   }
 ]

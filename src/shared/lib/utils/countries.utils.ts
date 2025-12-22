@@ -21,9 +21,9 @@ interface CountryJsonData {
   id: string; // country_code (jp, kr, cn...)
   name: string;
   name_kana: string;
+  name_translations?: { en: string };
   latitude: number;
   longitude: number;
-  country_code: string; // 後方互換性のため残す（id と同じ値）
 }
 
 // 大陸IDと国データのマッピング
@@ -46,13 +46,13 @@ const countriesByContinent: Record<string, CountryJsonData[]> = {
 function toCountryRow(country: CountryJsonData, continentId: string): CountryRow {
   const now = new Date().toISOString();
   return {
-    id: country.country_code, // country_codeをidとして使用
+    id: country.id, // idがcountry_code
     name: country.name,
     name_kana: country.name_kana,
     latitude: country.latitude,
     longitude: country.longitude,
     continent_id: continentId,
-    name_translations: null,
+    name_translations: country.name_translations ? JSON.stringify(country.name_translations) : null,
     created_at: now,
     updated_at: now,
   };
