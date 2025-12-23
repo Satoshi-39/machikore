@@ -28,6 +28,5 @@ export interface ViewHistoryWithMap extends ViewHistoryRow {
  * 閲覧記録パラメータ
  */
 export interface RecordViewParams {
-  userId: string;
   mapId: string;
 }

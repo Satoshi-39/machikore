@@ -40,7 +40,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       articleData.map.user_id !== currentUserId &&
       articleData.map.is_public
     ) {
-      recordView({ userId: currentUserId, mapId });
+      recordView({ mapId });
     }
   }, [currentUserId, articleData?.map, mapId, recordView]);
 

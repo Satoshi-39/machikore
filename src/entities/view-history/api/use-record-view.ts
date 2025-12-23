@@ -6,15 +6,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { log } from '@/shared/config/logger';
 import { supabase } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
+import { useCurrentUser } from '@/entities/user';
 import type { RecordViewParams } from '../model/types';
 
 /**
  * マップ閲覧を記録（UPSERT）
  */
-async function recordMapView({ userId, mapId }: RecordViewParams): Promise<void> {
-  // Supabaseの関数を呼び出し
+async function recordMapView({ mapId }: RecordViewParams): Promise<void> {
+  // Supabaseの関数を呼び出し（user_idはサーバー側でauth.uid()から取得）
   const { error } = await supabase.rpc('record_map_view', {
-    p_user_id: userId,
     p_map_id: mapId,
   });
 
@@ -29,14 +29,17 @@ async function recordMapView({ userId, mapId }: RecordViewParams): Promise<void>
  */
 export function useRecordView() {
   const queryClient = useQueryClient();
+  const user = useCurrentUser();
 
   return useMutation({
     mutationFn: recordMapView,
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       // 閲覧履歴のキャッシュを無効化
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.viewHistoryRecent(variables.userId),
-      });
+      if (user?.id) {
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEYS.viewHistoryRecent(user.id),
+        });
+      }
     },
     onError: (error) => {
       // エラーは静かに処理（閲覧記録が失敗してもUXには影響しない）

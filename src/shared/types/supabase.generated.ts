@@ -12,31 +12,6 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "13.0.5"
   }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       admin_boundaries: {
@@ -46,7 +21,7 @@ export type Database = {
           country_id: string | null
           created_at: string | null
           geom: unknown
-          id: number
+          id: string
           prefecture_id: string | null
         }
         Insert: {
@@ -55,7 +30,7 @@ export type Database = {
           country_id?: string | null
           created_at?: string | null
           geom?: unknown
-          id?: number
+          id?: string
           prefecture_id?: string | null
         }
         Update: {
@@ -64,7 +39,7 @@ export type Database = {
           country_id?: string | null
           created_at?: string | null
           geom?: unknown
-          id?: number
+          id?: string
           prefecture_id?: string | null
         }
         Relationships: [
@@ -2533,8 +2508,6 @@ export type Database = {
       gettransactionid: { Args: never; Returns: unknown }
       is_user_premium: { Args: { p_user_id: string }; Returns: boolean }
       longtransactionsenabled: { Args: never; Returns: boolean }
-      migrate_maps_tags_to_table: { Args: never; Returns: undefined }
-      migrate_spots_tags_to_table: { Args: never; Returns: undefined }
       populate_geometry_columns:
         | { Args: { tbl_oid: unknown; use_typmod?: boolean }; Returns: number }
         | { Args: { use_typmod?: boolean }; Returns: string }
@@ -2575,10 +2548,7 @@ export type Database = {
       }
       postgis_version: { Args: never; Returns: string }
       postgis_wagyu_version: { Args: never; Returns: string }
-      record_map_view: {
-        Args: { p_map_id: string; p_user_id: string }
-        Returns: undefined
-      }
+      record_map_view: { Args: { p_map_id: string }; Returns: undefined }
       st_3dclosestpoint: {
         Args: { geom1: unknown; geom2: unknown }
         Returns: unknown
@@ -3360,9 +3330,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       report_reason: [

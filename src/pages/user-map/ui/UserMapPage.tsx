@@ -83,7 +83,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   // マップ詳細を開いた時に閲覧履歴を記録（ログイン中かつ自分以外のマップの場合）
   useEffect(() => {
     if (user?.id && selectedMap && selectedMap.user_id !== user.id && selectedMap.is_public) {
-      recordView({ userId: user.id, mapId });
+      recordView({ mapId });
     }
   }, [user?.id, selectedMap?.id, selectedMap?.user_id, selectedMap?.is_public, mapId, recordView]);
 
