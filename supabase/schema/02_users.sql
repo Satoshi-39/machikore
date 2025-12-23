@@ -241,23 +241,13 @@ $$;
 COMMENT ON FUNCTION public.cleanup_old_view_history()
 IS '閲覧履歴を100件に制限するクリーンアップ関数（閾値方式: 110件超で削除）';
 
--- 閲覧履歴のupdated_atを更新
-CREATE FUNCTION public.update_view_history_updated_at() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
-END;
-$$;
-
 CREATE TRIGGER trigger_cleanup_view_history
     AFTER INSERT OR UPDATE ON public.view_history
     FOR EACH ROW EXECUTE FUNCTION public.cleanup_old_view_history();
 
-CREATE TRIGGER trigger_update_view_history_updated_at
+CREATE TRIGGER update_view_history_updated_at
     BEFORE UPDATE ON public.view_history
-    FOR EACH ROW EXECUTE FUNCTION public.update_view_history_updated_at();
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
 -- ============================================================
 -- プレミアム関連関数
