@@ -126,6 +126,8 @@ COMMENT ON COLUMN public.user_spots.label_id IS 'スポットのラベル（map_
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_map_id_master_spot_id_key
     UNIQUE (user_id, map_id, master_spot_id);
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_city_id_fkey
+    FOREIGN KEY (city_id) REFERENCES public.cities(id) ON DELETE SET NULL;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_label_id_fkey
     FOREIGN KEY (label_id) REFERENCES public.map_labels(id) ON DELETE SET NULL;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_machi_id_fkey
@@ -140,6 +142,7 @@ ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_fkey
     FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
 CREATE INDEX idx_user_spots_bookmarks_count ON public.user_spots USING btree (bookmarks_count DESC);
+CREATE INDEX idx_user_spots_city_id ON public.user_spots USING btree (city_id);
 CREATE INDEX idx_user_spots_created_at ON public.user_spots USING btree (created_at DESC);
 CREATE INDEX idx_user_spots_label_id ON public.user_spots USING btree (label_id);
 CREATE INDEX idx_user_spots_machi_id ON public.user_spots USING btree (machi_id);
