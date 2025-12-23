@@ -193,12 +193,17 @@ CREATE POLICY view_history_select_own ON public.view_history
 -- ============================================================
 
 -- 閲覧履歴を記録
-CREATE FUNCTION public.record_map_view(p_user_id uuid, p_map_id uuid) RETURNS void
+CREATE FUNCTION public.record_map_view(p_map_id uuid) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
 BEGIN
+  -- 未認証ユーザーは拒否
+  IF auth.uid() IS NULL THEN
+    RAISE EXCEPTION 'Authentication required';
+  END IF;
+
   INSERT INTO public.view_history (user_id, map_id, viewed_at, view_count)
-  VALUES (p_user_id, p_map_id, now(), 1)
+  VALUES (auth.uid(), p_map_id, now(), 1)
   ON CONFLICT (user_id, map_id)
   DO UPDATE SET
     viewed_at = now(),
