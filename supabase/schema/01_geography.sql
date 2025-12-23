@@ -29,6 +29,8 @@ COMMENT ON COLUMN public.continents.longitude IS '大陸の代表経度';
 
 ALTER TABLE ONLY public.continents ADD CONSTRAINT continents_pkey PRIMARY KEY (id);
 
+CREATE INDEX idx_continents_name_translations ON public.continents USING gin (name_translations);
+
 ALTER TABLE public.continents ENABLE ROW LEVEL SECURITY;
 CREATE POLICY continents_select_policy ON public.continents FOR SELECT USING (true);
 
@@ -58,6 +60,8 @@ CREATE TRIGGER update_countries_updated_at
     BEFORE UPDATE ON public.countries
     FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
+CREATE INDEX idx_countries_name_translations ON public.countries USING gin (name_translations);
+
 ALTER TABLE public.countries ENABLE ROW LEVEL SECURITY;
 CREATE POLICY countries_select_policy ON public.countries FOR SELECT USING (true);
 
@@ -83,6 +87,11 @@ COMMENT ON COLUMN public.regions.name_translations IS '多言語翻訳 {"en": "K
 ALTER TABLE ONLY public.regions ADD CONSTRAINT regions_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.regions ADD CONSTRAINT fk_regions_country
     FOREIGN KEY (country_id) REFERENCES public.countries(id);
+
+CREATE INDEX idx_regions_name_translations ON public.regions USING gin (name_translations);
+
+ALTER TABLE public.regions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY regions_select_policy ON public.regions FOR SELECT USING (true);
 
 -- ============================================================
 -- prefectures（都道府県）
@@ -111,7 +120,10 @@ CREATE TRIGGER update_prefectures_updated_at
     BEFORE UPDATE ON public.prefectures
     FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
-CREATE POLICY "Anyone can view prefectures" ON public.prefectures FOR SELECT USING (true);
+CREATE INDEX idx_prefectures_name_translations ON public.prefectures USING gin (name_translations);
+
+ALTER TABLE public.prefectures ENABLE ROW LEVEL SECURITY;
+CREATE POLICY prefectures_select_policy ON public.prefectures FOR SELECT USING (true);
 
 -- ============================================================
 -- cities（市区町村）
@@ -143,7 +155,10 @@ CREATE TRIGGER update_cities_updated_at
     BEFORE UPDATE ON public.cities
     FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
-CREATE POLICY "Anyone can view cities" ON public.cities FOR SELECT USING (true);
+CREATE INDEX idx_cities_name_translations ON public.cities USING gin (name_translations);
+
+ALTER TABLE public.cities ENABLE ROW LEVEL SECURITY;
+CREATE POLICY cities_select_policy ON public.cities FOR SELECT USING (true);
 
 -- ============================================================
 -- machi（街）
@@ -181,12 +196,14 @@ CREATE INDEX idx_machi_osm_id ON public.machi USING btree (osm_id);
 CREATE INDEX idx_machi_place_type ON public.machi USING btree (place_type);
 CREATE INDEX idx_machi_prefecture_id ON public.machi USING btree (prefecture_id);
 CREATE INDEX idx_machi_tile_id ON public.machi USING btree (tile_id);
+CREATE INDEX idx_machi_name_translations ON public.machi USING gin (name_translations);
 
 CREATE TRIGGER update_machi_updated_at
     BEFORE UPDATE ON public.machi
     FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
-CREATE POLICY "Anyone can view machi" ON public.machi FOR SELECT USING (true);
+ALTER TABLE public.machi ENABLE ROW LEVEL SECURITY;
+CREATE POLICY machi_select_policy ON public.machi FOR SELECT USING (true);
 
 -- ============================================================
 -- transport_hubs（交通機関）
@@ -238,13 +255,8 @@ ALTER TABLE ONLY public.transport_hubs ADD CONSTRAINT transport_hubs_city_id_fke
 ALTER TABLE ONLY public.transport_hubs ADD CONSTRAINT transport_hubs_prefecture_id_fkey
     FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id);
 
-CREATE INDEX idx_transport_hubs_location ON public.transport_hubs USING btree (latitude, longitude);
-CREATE INDEX idx_transport_hubs_name ON public.transport_hubs USING btree (name);
-CREATE INDEX idx_transport_hubs_osm_id ON public.transport_hubs USING btree (osm_id);
-CREATE INDEX idx_transport_hubs_prefecture_id ON public.transport_hubs USING btree (prefecture_id);
 CREATE INDEX idx_transport_hubs_tile_id ON public.transport_hubs USING btree (tile_id);
-CREATE INDEX idx_transport_hubs_type ON public.transport_hubs USING btree (type);
-CREATE INDEX idx_transport_hubs_type_subtype ON public.transport_hubs USING btree (type, subtype);
+CREATE INDEX idx_transport_hubs_osm_id ON public.transport_hubs USING btree (osm_id);
 
 ALTER TABLE public.transport_hubs ENABLE ROW LEVEL SECURITY;
 CREATE POLICY transport_hubs_select_policy ON public.transport_hubs FOR SELECT USING (true);
@@ -254,7 +266,7 @@ CREATE POLICY transport_hubs_select_policy ON public.transport_hubs FOR SELECT U
 -- ============================================================
 
 CREATE TABLE public.admin_boundaries (
-    id integer NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     geom public.geometry(MultiPolygon,4326),
     created_at timestamp with time zone DEFAULT now(),
     admin_level integer,
@@ -268,11 +280,6 @@ COMMENT ON COLUMN public.admin_boundaries.admin_level IS 'OSM admin_level (4=都
 COMMENT ON COLUMN public.admin_boundaries.country_id IS '国ID → countries.id (jp, kr, th, tw, cn)';
 COMMENT ON COLUMN public.admin_boundaries.prefecture_id IS '都道府県ID → prefectures.id';
 COMMENT ON COLUMN public.admin_boundaries.city_id IS '市区町村ID → cities.id';
-
-CREATE SEQUENCE public.admin_boundaries_id_seq
-    AS integer START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-ALTER SEQUENCE public.admin_boundaries_id_seq OWNED BY public.admin_boundaries.id;
-ALTER TABLE ONLY public.admin_boundaries ALTER COLUMN id SET DEFAULT nextval('public.admin_boundaries_id_seq'::regclass);
 
 ALTER TABLE ONLY public.admin_boundaries ADD CONSTRAINT admin_boundaries_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.admin_boundaries ADD CONSTRAINT admin_boundaries_city_id_unique UNIQUE (city_id);
@@ -291,7 +298,7 @@ CREATE INDEX idx_admin_boundaries_geom ON public.admin_boundaries USING gist (ge
 CREATE INDEX idx_admin_boundaries_prefecture_id ON public.admin_boundaries USING btree (prefecture_id);
 
 ALTER TABLE public.admin_boundaries ENABLE ROW LEVEL SECURITY;
-CREATE POLICY admin_boundaries_read ON public.admin_boundaries FOR SELECT USING (true);
+CREATE POLICY admin_boundaries_select_policy ON public.admin_boundaries FOR SELECT USING (true);
 
 -- ============================================================
 -- 地理空間関数
