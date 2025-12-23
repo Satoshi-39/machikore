@@ -31,70 +31,46 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- ============================================================
--- プッシュ通知送信関数
+-- 通知送信トリガー関数
 -- ============================================================
--- Supabase Edge Function経由でプッシュ通知を送信
--- この関数は notifications テーブルへの INSERT トリガーから呼び出される
+-- notifications テーブルへの INSERT 時に Edge Function を呼び出す
+-- Edge Function (send-notification) がプッシュ通知とメール通知を処理
 
 CREATE OR REPLACE FUNCTION send_push_notification()
 RETURNS TRIGGER AS $$
 DECLARE
-    push_token TEXT;
-    notification_settings user_notification_settings%ROWTYPE;
-    should_send BOOLEAN := true;
+    supabase_url TEXT;
+    service_role_key TEXT;
 BEGIN
-    -- ユーザーのプッシュトークンを取得
-    SELECT u.push_token INTO push_token
-    FROM users u
-    WHERE u.id = NEW.user_id;
+    -- 環境変数からSupabase URLとService Role Keyを取得
+    supabase_url := current_setting('app.settings.supabase_url', true);
+    service_role_key := current_setting('app.settings.service_role_key', true);
 
-    -- トークンがなければ終了
-    IF push_token IS NULL THEN
-        RETURN NEW;
-    END IF;
-
-    -- 通知設定を取得
-    SELECT * INTO notification_settings
-    FROM user_notification_settings
-    WHERE user_id = NEW.user_id;
-
-    -- 通知種別に応じて設定をチェック
-    IF notification_settings IS NOT NULL THEN
-        CASE NEW.type
-            WHEN 'like_spot', 'like_map' THEN
-                should_send := notification_settings.likes_enabled;
-            WHEN 'comment_spot', 'comment_map' THEN
-                should_send := notification_settings.comments_enabled;
-            WHEN 'follow' THEN
-                should_send := notification_settings.follows_enabled;
-            WHEN 'system' THEN
-                should_send := notification_settings.system_enabled;
-            ELSE
-                should_send := true;
-        END CASE;
-    END IF;
-
-    -- 通知が無効なら終了
-    IF NOT should_send THEN
-        RETURN NEW;
-    END IF;
-
-    -- Edge Functionにリクエストを送信（非同期）
-    -- 注: 実際のURLは環境変数から取得する必要があります
-    -- PERFORM net.http_post(
-    --     url := 'https://your-project.supabase.co/functions/v1/send-push-notification',
-    --     headers := '{"Content-Type": "application/json", "Authorization": "Bearer YOUR_SERVICE_ROLE_KEY"}'::jsonb,
-    --     body := jsonb_build_object(
-    --         'push_token', push_token,
-    --         'notification_id', NEW.id,
-    --         'type', NEW.type,
-    --         'actor_id', NEW.actor_id
-    --     )
-    -- );
+    -- Edge Functionを非同期で呼び出し
+    PERFORM net.http_post(
+        url := supabase_url || '/functions/v1/send-notification',
+        headers := jsonb_build_object(
+            'Content-Type', 'application/json',
+            'Authorization', 'Bearer ' || service_role_key
+        ),
+        body := jsonb_build_object(
+            'notification_id', NEW.id,
+            'user_id', NEW.user_id,
+            'actor_id', NEW.actor_id,
+            'type', NEW.type,
+            'spot_id', NEW.spot_id,
+            'map_id', NEW.map_id
+        )
+    );
 
     RETURN NEW;
+EXCEPTION
+    WHEN OTHERS THEN
+        -- エラーが発生しても通知の作成は続行
+        RAISE WARNING 'Failed to send notification: %', SQLERRM;
+        RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- ============================================================
 -- マイグレーション用関数（一時的）
