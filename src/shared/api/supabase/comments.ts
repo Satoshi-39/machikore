@@ -139,11 +139,7 @@ export async function addSpotComment(
     handleSupabaseError('addSpotComment', error);
   }
 
-  // user_spotsのcomments_countをインクリメント
-  const { error: rpcError } = await supabase.rpc('increment_user_spot_comments_count', { user_spot_id: spotId });
-  if (rpcError) {
-    log.error('[Comments] RPC Error:', rpcError);
-  }
+  // comments_countはトリガーで自動更新される
 
   return mapComment(data);
 }
@@ -193,22 +189,7 @@ export async function deleteComment(
     handleSupabaseError('deleteComment', error);
   }
 
-  // トップレベルコメント（返信でない）の場合のみカウントをデクリメント
-  // 返信の場合は親コメントのreplies_countはDBトリガーで自動更新される
-  if (!parentId) {
-    if (spotId) {
-      const { error: rpcError } = await supabase.rpc('decrement_user_spot_comments_count', { user_spot_id: spotId });
-      if (rpcError) {
-        log.error('[Comments] RPC Error:', rpcError);
-      }
-    }
-    if (mapId) {
-      const { error: rpcError } = await supabase.rpc('decrement_map_comments_count', { map_id: mapId });
-      if (rpcError) {
-        log.error('[Comments] RPC Error:', rpcError);
-      }
-    }
-  }
+  // comments_countはトリガーで自動更新される
 }
 
 /**
@@ -298,11 +279,7 @@ export async function addMapComment(
     handleSupabaseError('addMapComment', error);
   }
 
-  // mapsのcomments_countをインクリメント
-  const { error: rpcError } = await supabase.rpc('increment_map_comments_count', { map_id: mapId });
-  if (rpcError) {
-    log.error('[Comments] RPC Error:', rpcError);
-  }
+  // comments_countはトリガーで自動更新される
 
   return mapComment(data);
 }

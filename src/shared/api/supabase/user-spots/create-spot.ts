@@ -3,7 +3,6 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
-import { log } from '@/shared/config/logger';
 import type { CreateSpotInput, MasterSpotInsert, UserSpotInsert } from './types';
 
 /**
@@ -126,11 +125,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     handleSupabaseError('createSpot', error);
   }
 
-  // 3. マップのspots_countをインクリメント
-  const { error: rpcError } = await supabase.rpc('increment_user_spots_count', { map_id: input.mapId });
-  if (rpcError) {
-    log.error('[UserSpots] Failed to increment spots_count:', rpcError);
-  }
+  // spots_countはトリガーで自動更新される
 
   return data.id;
 }

@@ -1,6 +1,7 @@
 /**
  * Supabase Master Spot Favorites API
  * マスタースポットのお気に入り機能（デフォルトマップ専用）
+ * favorites_countはトリガーで自動更新される
  */
 
 import { supabase, handleSupabaseError } from './client';
@@ -37,9 +38,6 @@ export async function addMasterSpotFavorite(
     handleSupabaseError('addMasterSpotFavorite', error);
   }
 
-  // お気に入り数をインクリメント
-  await supabase.rpc('increment_master_spot_favorites_count', { master_spot_id: masterSpotId });
-
   return data;
 }
 
@@ -59,9 +57,6 @@ export async function removeMasterSpotFavorite(
   if (error) {
     handleSupabaseError('removeMasterSpotFavorite', error);
   }
-
-  // お気に入り数をデクリメント
-  await supabase.rpc('decrement_master_spot_favorites_count', { master_spot_id: masterSpotId });
 }
 
 /**

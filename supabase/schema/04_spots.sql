@@ -67,20 +67,24 @@ CREATE POLICY "master_spot_favorites_insert_own" ON master_spot_favorites
 CREATE POLICY "master_spot_favorites_delete_own" ON master_spot_favorites
     FOR DELETE USING (user_id = auth.uid());
 
--- RPC Functions
-CREATE OR REPLACE FUNCTION increment_master_spot_favorites_count(master_spot_id UUID)
-RETURNS VOID AS $$
+-- Trigger: お気に入り数の自動更新
+CREATE OR REPLACE FUNCTION update_master_spot_favorites_count()
+RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE master_spots SET favorites_count = favorites_count + 1 WHERE id = master_spot_id;
+    IF TG_OP = 'INSERT' THEN
+        UPDATE master_spots SET favorites_count = favorites_count + 1 WHERE id = NEW.master_spot_id;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE master_spots SET favorites_count = GREATEST(0, favorites_count - 1) WHERE id = OLD.master_spot_id;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
-CREATE OR REPLACE FUNCTION decrement_master_spot_favorites_count(master_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE master_spots SET favorites_count = GREATEST(0, favorites_count - 1) WHERE id = master_spot_id;
-END;
-$$ LANGUAGE plpgsql;
+CREATE TRIGGER trigger_update_master_spot_favorites_count
+    AFTER INSERT OR DELETE ON master_spot_favorites
+    FOR EACH ROW EXECUTE FUNCTION update_master_spot_favorites_count();
 
 -- ============================================================
 -- user_spots (ユーザースポット)
@@ -145,6 +149,12 @@ CREATE POLICY "user_spots_delete_own" ON user_spots
 CREATE TRIGGER update_user_spots_updated_at
     BEFORE UPDATE ON user_spots
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Trigger: マップのスポット数を自動更新
+DROP TRIGGER IF EXISTS trigger_update_map_spots_count ON user_spots;
+CREATE TRIGGER trigger_update_map_spots_count
+    AFTER INSERT OR DELETE ON user_spots
+    FOR EACH ROW EXECUTE FUNCTION update_map_spots_count();
 
 -- スポット数制限チェック
 CREATE OR REPLACE FUNCTION check_spots_limit()
@@ -212,7 +222,78 @@ CREATE TRIGGER enforce_spots_limit_on_update
     BEFORE UPDATE ON user_spots
     FOR EACH ROW EXECUTE FUNCTION check_spots_limit_on_update();
 
--- RPC Functions
+-- ============================================================
+-- カウンタートリガー関数（自動更新）
+-- ============================================================
+
+-- スポットのいいね数を自動更新
+CREATE OR REPLACE FUNCTION update_user_spot_likes_count()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        UPDATE user_spots SET likes_count = likes_count + 1 WHERE id = NEW.user_spot_id;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE user_spots SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.user_spot_id;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- スポットのコメント数を自動更新（トップレベルのみ）
+CREATE OR REPLACE FUNCTION update_user_spot_comments_count()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        IF NEW.parent_id IS NULL THEN
+            UPDATE user_spots SET comments_count = comments_count + 1 WHERE id = NEW.user_spot_id;
+        END IF;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        IF OLD.parent_id IS NULL THEN
+            UPDATE user_spots SET comments_count = GREATEST(0, comments_count - 1) WHERE id = OLD.user_spot_id;
+        END IF;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- スポットのブックマーク数を自動更新
+CREATE OR REPLACE FUNCTION update_user_spot_bookmarks_count()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        UPDATE user_spots SET bookmarks_count = bookmarks_count + 1 WHERE id = NEW.user_spot_id;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE user_spots SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = OLD.user_spot_id;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- スポットの画像数を自動更新
+CREATE OR REPLACE FUNCTION update_user_spot_images_count()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        UPDATE user_spots SET images_count = images_count + 1 WHERE id = NEW.user_spot_id;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE user_spots SET images_count = GREATEST(0, images_count - 1) WHERE id = OLD.user_spot_id;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- ============================================================
+-- RPC Functions（ビジネスロジック用）
+-- ============================================================
+
 CREATE OR REPLACE FUNCTION count_user_spots_in_map(p_user_id UUID, p_map_id UUID)
 RETURNS INTEGER AS $$
 BEGIN
@@ -223,62 +304,6 @@ BEGIN
     );
 END;
 $$ LANGUAGE plpgsql STABLE;
-
-CREATE OR REPLACE FUNCTION increment_user_spot_likes_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET likes_count = likes_count + 1 WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION decrement_user_spot_likes_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET likes_count = GREATEST(0, likes_count - 1) WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION increment_user_spot_comments_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET comments_count = comments_count + 1 WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION decrement_user_spot_comments_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET comments_count = GREATEST(0, comments_count - 1) WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION increment_user_spot_bookmarks_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET bookmarks_count = bookmarks_count + 1 WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION decrement_user_spot_bookmarks_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION increment_user_spot_images_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET images_count = images_count + 1 WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION decrement_user_spot_images_count(user_spot_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE user_spots SET images_count = GREATEST(0, images_count - 1) WHERE id = user_spot_id;
-END;
-$$ LANGUAGE plpgsql;
 
 -- ============================================================
 -- spot_tags (スポットとタグの関連)
@@ -367,3 +392,9 @@ CREATE POLICY "images_delete_own" ON images
 CREATE TRIGGER update_images_updated_at
     BEFORE UPDATE ON images
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Trigger: スポットの画像数を自動更新
+DROP TRIGGER IF EXISTS trigger_update_user_spot_images_count ON images;
+CREATE TRIGGER trigger_update_user_spot_images_count
+    AFTER INSERT OR DELETE ON images
+    FOR EACH ROW EXECUTE FUNCTION update_user_spot_images_count();

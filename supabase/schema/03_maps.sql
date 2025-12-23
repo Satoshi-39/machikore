@@ -194,72 +194,76 @@ CREATE TRIGGER update_map_labels_updated_at
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- ============================================================
--- RPC Functions
+-- カウンタートリガー関数（自動更新）
 -- ============================================================
 
--- マップのuser_spots数+1
-CREATE OR REPLACE FUNCTION increment_user_spots_count(map_id UUID)
-RETURNS VOID AS $$
+-- マップのuser_spots数を自動更新
+CREATE OR REPLACE FUNCTION update_map_spots_count()
+RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE maps SET spots_count = spots_count + 1 WHERE id = map_id;
+    IF TG_OP = 'INSERT' THEN
+        UPDATE maps SET spots_count = spots_count + 1 WHERE id = NEW.map_id;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE maps SET spots_count = GREATEST(0, spots_count - 1) WHERE id = OLD.map_id;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- マップのuser_spots数-1
-CREATE OR REPLACE FUNCTION decrement_user_spots_count(map_id UUID)
-RETURNS VOID AS $$
+-- マップのいいね数を自動更新
+CREATE OR REPLACE FUNCTION update_map_likes_count()
+RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE maps SET spots_count = GREATEST(0, spots_count - 1) WHERE id = map_id;
+    IF TG_OP = 'INSERT' THEN
+        UPDATE maps SET likes_count = likes_count + 1 WHERE id = NEW.map_id;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE maps SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.map_id;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- マップのいいね数+1
-CREATE OR REPLACE FUNCTION increment_map_likes_count(map_id UUID)
-RETURNS VOID AS $$
+-- マップのコメント数を自動更新（トップレベルのみ）
+CREATE OR REPLACE FUNCTION update_map_comments_count()
+RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE maps SET likes_count = likes_count + 1 WHERE id = map_id;
+    IF TG_OP = 'INSERT' THEN
+        IF NEW.parent_id IS NULL THEN
+            UPDATE maps SET comments_count = comments_count + 1 WHERE id = NEW.map_id;
+        END IF;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        IF OLD.parent_id IS NULL THEN
+            UPDATE maps SET comments_count = GREATEST(0, comments_count - 1) WHERE id = OLD.map_id;
+        END IF;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- マップのいいね数-1
-CREATE OR REPLACE FUNCTION decrement_map_likes_count(map_id UUID)
-RETURNS VOID AS $$
+-- マップのブックマーク数を自動更新
+CREATE OR REPLACE FUNCTION update_map_bookmarks_count()
+RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE maps SET likes_count = GREATEST(0, likes_count - 1) WHERE id = map_id;
+    IF TG_OP = 'INSERT' THEN
+        UPDATE maps SET bookmarks_count = bookmarks_count + 1 WHERE id = NEW.map_id;
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE maps SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = OLD.map_id;
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- マップのコメント数+1
-CREATE OR REPLACE FUNCTION increment_map_comments_count(map_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE maps SET comments_count = comments_count + 1 WHERE id = map_id;
-END;
-$$ LANGUAGE plpgsql;
-
--- マップのコメント数-1
-CREATE OR REPLACE FUNCTION decrement_map_comments_count(map_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE maps SET comments_count = GREATEST(0, comments_count - 1) WHERE id = map_id;
-END;
-$$ LANGUAGE plpgsql;
-
--- マップのブックマーク数+1
-CREATE OR REPLACE FUNCTION increment_map_bookmarks_count(p_map_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE maps SET bookmarks_count = bookmarks_count + 1 WHERE id = p_map_id;
-END;
-$$ LANGUAGE plpgsql;
-
--- マップのブックマーク数-1
-CREATE OR REPLACE FUNCTION decrement_map_bookmarks_count(p_map_id UUID)
-RETURNS VOID AS $$
-BEGIN
-    UPDATE maps SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = p_map_id;
-END;
-$$ LANGUAGE plpgsql;
+-- ============================================================
+-- RPC Functions（ビジネスロジック用）
+-- ============================================================
 
 -- マップ閲覧記録
 CREATE OR REPLACE FUNCTION record_map_view(p_user_id UUID, p_map_id UUID)

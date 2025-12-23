@@ -79,6 +79,22 @@ CREATE TRIGGER on_user_spot_like_create_notification
     WHEN (NEW.user_spot_id IS NOT NULL)
     EXECUTE FUNCTION create_like_spot_notification();
 
+-- Trigger: マップいいね数の自動更新
+DROP TRIGGER IF EXISTS trigger_update_map_likes_count ON likes;
+CREATE TRIGGER trigger_update_map_likes_count
+    AFTER INSERT OR DELETE ON likes
+    FOR EACH ROW
+    WHEN (NEW.map_id IS NOT NULL OR OLD.map_id IS NOT NULL)
+    EXECUTE FUNCTION update_map_likes_count();
+
+-- Trigger: スポットいいね数の自動更新
+DROP TRIGGER IF EXISTS trigger_update_user_spot_likes_count ON likes;
+CREATE TRIGGER trigger_update_user_spot_likes_count
+    AFTER INSERT OR DELETE ON likes
+    FOR EACH ROW
+    WHEN (NEW.user_spot_id IS NOT NULL OR OLD.user_spot_id IS NOT NULL)
+    EXECUTE FUNCTION update_user_spot_likes_count();
+
 -- ============================================================
 -- bookmark_folders (ブックマークフォルダ)
 -- ============================================================
@@ -144,6 +160,22 @@ CREATE POLICY "bookmarks_insert_own" ON bookmarks
     FOR INSERT WITH CHECK (user_id = auth.uid());
 CREATE POLICY "bookmarks_delete_own" ON bookmarks
     FOR DELETE USING (user_id = auth.uid());
+
+-- Trigger: マップブックマーク数の自動更新
+DROP TRIGGER IF EXISTS trigger_update_map_bookmarks_count ON bookmarks;
+CREATE TRIGGER trigger_update_map_bookmarks_count
+    AFTER INSERT OR DELETE ON bookmarks
+    FOR EACH ROW
+    WHEN (NEW.map_id IS NOT NULL OR OLD.map_id IS NOT NULL)
+    EXECUTE FUNCTION update_map_bookmarks_count();
+
+-- Trigger: スポットブックマーク数の自動更新
+DROP TRIGGER IF EXISTS trigger_update_user_spot_bookmarks_count ON bookmarks;
+CREATE TRIGGER trigger_update_user_spot_bookmarks_count
+    AFTER INSERT OR DELETE ON bookmarks
+    FOR EACH ROW
+    WHEN (NEW.user_spot_id IS NOT NULL OR OLD.user_spot_id IS NOT NULL)
+    EXECUTE FUNCTION update_user_spot_bookmarks_count();
 
 -- ============================================================
 -- comments (コメント)
@@ -233,6 +265,22 @@ CREATE TRIGGER on_user_spot_comment_create_notification
     FOR EACH ROW
     WHEN (NEW.user_spot_id IS NOT NULL)
     EXECUTE FUNCTION create_comment_spot_notification();
+
+-- Trigger: マップコメント数の自動更新
+DROP TRIGGER IF EXISTS trigger_update_map_comments_count ON comments;
+CREATE TRIGGER trigger_update_map_comments_count
+    AFTER INSERT OR DELETE ON comments
+    FOR EACH ROW
+    WHEN (NEW.map_id IS NOT NULL OR OLD.map_id IS NOT NULL)
+    EXECUTE FUNCTION update_map_comments_count();
+
+-- Trigger: スポットコメント数の自動更新
+DROP TRIGGER IF EXISTS trigger_update_user_spot_comments_count ON comments;
+CREATE TRIGGER trigger_update_user_spot_comments_count
+    AFTER INSERT OR DELETE ON comments
+    FOR EACH ROW
+    WHEN (NEW.user_spot_id IS NOT NULL OR OLD.user_spot_id IS NOT NULL)
+    EXECUTE FUNCTION update_user_spot_comments_count();
 
 -- Trigger: 返信数の更新
 CREATE OR REPLACE FUNCTION increment_comment_replies_count()

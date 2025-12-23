@@ -168,15 +168,12 @@ continents → countries → regions → prefectures → cities → machi
 
 ## 主要なRPC関数
 
-### カウンター操作
+### ビジネスロジック
 
 | 関数名 | 説明 |
 |--------|------|
-| increment_user_spots_count | マップのuser_spots数+1 |
-| decrement_user_spots_count | マップのuser_spots数-1 |
-| increment_map_likes_count | マップのいいね数+1 |
-| increment_user_spot_likes_count | スポットのいいね数+1 |
-| record_map_view | マップ閲覧記録 |
+| record_map_view | マップ閲覧記録（view_historyにupsert） |
+| count_user_spots_in_map | マップ内のスポット数を取得 |
 
 ### ユーザー管理
 
@@ -209,11 +206,24 @@ continents → countries → regions → prefectures → cities → machi
 
 ### カウンター自動更新
 
-| トリガー | テーブル | 説明 |
-|---------|---------|------|
-| trigger_increment_comment_likes | comment_likes | コメントいいね数更新 |
-| update_tag_usage_count_trigger | map_tags | タグ使用回数更新 |
-| trigger_update_collection_maps_count | collection_maps | コレクションマップ数更新 |
+| トリガー | テーブル | 更新対象 | 説明 |
+|---------|---------|---------|------|
+| trigger_update_map_spots_count | user_spots | maps.spots_count | スポット追加/削除でマップのスポット数を更新 |
+| trigger_update_map_likes_count | likes | maps.likes_count | いいね追加/削除でマップのいいね数を更新 |
+| trigger_update_user_spot_likes_count | likes | user_spots.likes_count | いいね追加/削除でスポットのいいね数を更新 |
+| trigger_update_map_comments_count | comments | maps.comments_count | コメント追加/削除でマップのコメント数を更新 |
+| trigger_update_user_spot_comments_count | comments | user_spots.comments_count | コメント追加/削除でスポットのコメント数を更新 |
+| trigger_update_map_bookmarks_count | bookmarks | maps.bookmarks_count | ブックマーク追加/削除でマップのブックマーク数を更新 |
+| trigger_update_user_spot_bookmarks_count | bookmarks | user_spots.bookmarks_count | ブックマーク追加/削除でスポットのブックマーク数を更新 |
+| trigger_update_user_spot_images_count | images | user_spots.images_count | 画像追加/削除でスポットの画像数を更新 |
+| trigger_update_master_spot_favorites_count | master_spot_favorites | master_spots.favorites_count | お気に入り追加/削除でマスタースポットのお気に入り数を更新 |
+| trigger_increment_comment_likes | comment_likes | comments.likes_count | コメントいいね数更新 |
+| trigger_decrement_comment_likes | comment_likes | comments.likes_count | コメントいいね数更新 |
+| trigger_increment_comment_replies | comments | comments.replies_count | 返信数更新 |
+| trigger_decrement_comment_replies | comments | comments.replies_count | 返信数更新 |
+| update_tag_usage_count_trigger | map_tags | tags.usage_count | タグ使用回数更新 |
+| update_tag_usage_count_for_spots_trigger | spot_tags | tags.usage_count | タグ使用回数更新 |
+| trigger_update_collection_maps_count | collection_maps | collections.maps_count | コレクションマップ数更新 |
 
 ### 制限・検証
 

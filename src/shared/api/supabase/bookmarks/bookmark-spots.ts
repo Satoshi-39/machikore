@@ -1,5 +1,6 @@
 /**
  * スポットブックマーク操作
+ * bookmarks_countはトリガーで自動更新される
  */
 
 import { supabase, handleSupabaseError } from '../client';
@@ -27,9 +28,6 @@ export async function bookmarkSpot(
     handleSupabaseError('bookmarkSpot', error);
   }
 
-  // ブックマーク数をインクリメント
-  await supabase.rpc('increment_user_spot_bookmarks_count', { user_spot_id: spotId });
-
   return data;
 }
 
@@ -46,9 +44,6 @@ export async function unbookmarkSpot(userId: string, spotId: string): Promise<vo
   if (error) {
     handleSupabaseError('unbookmarkSpot', error);
   }
-
-  // ブックマーク数をデクリメント
-  await supabase.rpc('decrement_user_spot_bookmarks_count', { user_spot_id: spotId });
 }
 
 /**
@@ -118,9 +113,6 @@ export async function unbookmarkSpotFromFolder(
   if (error) {
     handleSupabaseError('unbookmarkSpotFromFolder', error);
   }
-
-  // ブックマーク数をデクリメント
-  await supabase.rpc('decrement_user_spot_bookmarks_count', { user_spot_id: spotId });
 }
 
 /**

@@ -1,5 +1,6 @@
 /**
  * マップブックマーク操作
+ * bookmarks_countはトリガーで自動更新される
  */
 
 import { supabase, handleSupabaseError } from '../client';
@@ -27,9 +28,6 @@ export async function bookmarkMap(
     handleSupabaseError('bookmarkMap', error);
   }
 
-  // ブックマーク数をインクリメント
-  await supabase.rpc('increment_map_bookmarks_count', { p_map_id: mapId });
-
   return data;
 }
 
@@ -46,9 +44,6 @@ export async function unbookmarkMap(userId: string, mapId: string): Promise<void
   if (error) {
     handleSupabaseError('unbookmarkMap', error);
   }
-
-  // ブックマーク数をデクリメント
-  await supabase.rpc('decrement_map_bookmarks_count', { p_map_id: mapId });
 }
 
 /**
@@ -118,9 +113,6 @@ export async function unbookmarkMapFromFolder(
   if (error) {
     handleSupabaseError('unbookmarkMapFromFolder', error);
   }
-
-  // ブックマーク数をデクリメント
-  await supabase.rpc('decrement_map_bookmarks_count', { p_map_id: mapId });
 }
 
 /**

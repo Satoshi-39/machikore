@@ -1,11 +1,11 @@
 /**
  * Supabase Likes API
  * いいね機能（スポット・マップ）
+ * カウンターはトリガーで自動更新される
  */
 
 import { supabase, handleSupabaseError } from './client';
 import type { Database } from '@/shared/types/supabase.generated';
-import { log } from '@/shared/config/logger';
 
 type LikeRow = Database['public']['Tables']['likes']['Row'];
 type LikeInsert = Database['public']['Tables']['likes']['Insert'];
@@ -34,6 +34,7 @@ export async function checkSpotLiked(userId: string, spotId: string): Promise<bo
 
 /**
  * スポットにいいねを追加
+ * likes_countはトリガーで自動更新される
  */
 export async function addSpotLike(userId: string, spotId: string): Promise<LikeRow> {
   const insertData: LikeInsert = {
@@ -51,17 +52,12 @@ export async function addSpotLike(userId: string, spotId: string): Promise<LikeR
     handleSupabaseError('addSpotLike', error);
   }
 
-  // user_spotsのlikes_countをインクリメント
-  const { error: rpcError } = await supabase.rpc('increment_user_spot_likes_count', { user_spot_id: spotId });
-  if (rpcError) {
-    log.error('[Likes] RPC Error:', rpcError);
-  }
-
   return data;
 }
 
 /**
  * スポットのいいねを削除
+ * likes_countはトリガーで自動更新される
  */
 export async function removeSpotLike(userId: string, spotId: string): Promise<void> {
   const { error } = await supabase
@@ -72,12 +68,6 @@ export async function removeSpotLike(userId: string, spotId: string): Promise<vo
 
   if (error) {
     handleSupabaseError('removeSpotLike', error);
-  }
-
-  // user_spotsのlikes_countをデクリメント
-  const { error: rpcError } = await supabase.rpc('decrement_user_spot_likes_count', { user_spot_id: spotId });
-  if (rpcError) {
-    log.error('[Likes] RPC Error:', rpcError);
   }
 }
 
@@ -137,6 +127,7 @@ export async function checkMapLiked(userId: string, mapId: string): Promise<bool
 
 /**
  * マップにいいねを追加
+ * likes_countはトリガーで自動更新される
  */
 export async function addMapLike(userId: string, mapId: string): Promise<LikeRow> {
   const insertData: LikeInsert = {
@@ -154,14 +145,12 @@ export async function addMapLike(userId: string, mapId: string): Promise<LikeRow
     handleSupabaseError('addMapLike', error);
   }
 
-  // mapsのlikes_countをインクリメント
-  await supabase.rpc('increment_map_likes_count', { map_id: mapId });
-
   return data;
 }
 
 /**
  * マップのいいねを削除
+ * likes_countはトリガーで自動更新される
  */
 export async function removeMapLike(userId: string, mapId: string): Promise<void> {
   const { error } = await supabase
@@ -173,9 +162,6 @@ export async function removeMapLike(userId: string, mapId: string): Promise<void
   if (error) {
     handleSupabaseError('removeMapLike', error);
   }
-
-  // mapsのlikes_countをデクリメント
-  await supabase.rpc('decrement_map_likes_count', { map_id: mapId });
 }
 
 /**
