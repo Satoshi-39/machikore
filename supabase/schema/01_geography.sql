@@ -1,265 +1,317 @@
 -- ============================================================
--- 地理マスターデータ
+-- 地理データ（大陸・国・地域・都道府県・市区町村・街・交通機関・行政区域）
 -- ============================================================
--- テーブル: continents, countries, regions, prefectures, cities, machi, transport_hubs, admin_boundaries
+-- 地理階層: continents → countries → regions → prefectures → cities → machi
 -- 最終更新: 2025-12-23
 
 -- ============================================================
--- continents (大陸)
+-- continents（大陸）
 -- ============================================================
-CREATE TABLE continents (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    name_kana TEXT,
-    display_order INTEGER NOT NULL DEFAULT 0,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    name_translations JSONB,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.continents (
+    id text NOT NULL,
+    name text NOT NULL,
+    display_order integer DEFAULT 0 NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    name_translations jsonb,
+    name_kana text,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL
 );
 
--- RLS
-ALTER TABLE continents ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "continents_select_all" ON continents FOR SELECT USING (true);
+COMMENT ON TABLE public.continents IS '大陸マスターテーブル';
+COMMENT ON COLUMN public.continents.id IS '大陸ID (例: east_asia, europe)';
+COMMENT ON COLUMN public.continents.name IS '大陸名（日本語）';
+COMMENT ON COLUMN public.continents.display_order IS '表示順序';
+COMMENT ON COLUMN public.continents.latitude IS '大陸の代表緯度';
+COMMENT ON COLUMN public.continents.longitude IS '大陸の代表経度';
 
--- Trigger
-CREATE TRIGGER update_continents_updated_at
-    BEFORE UPDATE ON continents
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+ALTER TABLE ONLY public.continents ADD CONSTRAINT continents_pkey PRIMARY KEY (id);
+
+ALTER TABLE public.continents ENABLE ROW LEVEL SECURITY;
+CREATE POLICY continents_select_policy ON public.continents FOR SELECT USING (true);
 
 -- ============================================================
--- countries (国)
+-- countries（国）
 -- ============================================================
-CREATE TABLE countries (
-    id TEXT PRIMARY KEY,  -- ISO 3166-1 alpha-2
-    name TEXT NOT NULL,
-    name_kana TEXT,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    continent_id TEXT NOT NULL REFERENCES continents(id),
-    name_translations JSONB,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.countries (
+    id text NOT NULL,
+    name text NOT NULL,
+    name_kana text,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    continent_id text NOT NULL,
+    name_translations jsonb
 );
 
--- RLS
-ALTER TABLE countries ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "countries_select_all" ON countries FOR SELECT USING (true);
+COMMENT ON COLUMN public.countries.continent_id IS '大陸ID（外部キー → continents.id）';
 
--- Trigger
+ALTER TABLE ONLY public.countries ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.countries ADD CONSTRAINT countries_continent_id_fkey
+    FOREIGN KEY (continent_id) REFERENCES public.continents(id) ON DELETE SET NULL;
+
 CREATE TRIGGER update_countries_updated_at
-    BEFORE UPDATE ON countries
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+    BEFORE UPDATE ON public.countries
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+ALTER TABLE public.countries ENABLE ROW LEVEL SECURITY;
+CREATE POLICY countries_select_policy ON public.countries FOR SELECT USING (true);
 
 -- ============================================================
--- regions (地方)
+-- regions（地域）
 -- ============================================================
-CREATE TABLE regions (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    name_kana TEXT,
-    display_order INTEGER NOT NULL,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    country_id TEXT NOT NULL REFERENCES countries(id),
-    name_translations JSONB,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.regions (
+    id text NOT NULL,
+    name text NOT NULL,
+    name_kana text,
+    display_order integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    name_translations jsonb,
+    country_id text NOT NULL
 );
 
--- RLS
-ALTER TABLE regions ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "regions_select_all" ON regions FOR SELECT USING (true);
+COMMENT ON COLUMN public.regions.name_translations IS '多言語翻訳 {"en": "Kanto", "zh": "关东"}';
 
--- Trigger
-CREATE TRIGGER update_regions_updated_at
-    BEFORE UPDATE ON regions
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+ALTER TABLE ONLY public.regions ADD CONSTRAINT regions_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.regions ADD CONSTRAINT fk_regions_country
+    FOREIGN KEY (country_id) REFERENCES public.countries(id);
 
 -- ============================================================
--- prefectures (都道府県)
+-- prefectures（都道府県）
 -- ============================================================
-CREATE TABLE prefectures (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    name_kana TEXT,
-    region_id TEXT NOT NULL REFERENCES regions(id),
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    name_translations JSONB,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.prefectures (
+    id text NOT NULL,
+    name text NOT NULL,
+    name_kana text,
+    region_id text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    name_translations jsonb
 );
 
--- RLS
-ALTER TABLE prefectures ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "prefectures_select_all" ON prefectures FOR SELECT USING (true);
+COMMENT ON COLUMN public.prefectures.name_translations IS '多言語翻訳 {"en": "Tokyo", "zh": "东京"}';
 
--- Trigger
+ALTER TABLE ONLY public.prefectures ADD CONSTRAINT prefectures_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.prefectures ADD CONSTRAINT prefectures_name_key UNIQUE (name);
+ALTER TABLE ONLY public.prefectures ADD CONSTRAINT prefectures_region_id_fkey
+    FOREIGN KEY (region_id) REFERENCES public.regions(id);
+
 CREATE TRIGGER update_prefectures_updated_at
-    BEFORE UPDATE ON prefectures
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+    BEFORE UPDATE ON public.prefectures
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+CREATE POLICY "Anyone can view prefectures" ON public.prefectures FOR SELECT USING (true);
 
 -- ============================================================
--- cities (市区町村)
+-- cities（市区町村）
 -- ============================================================
-CREATE TABLE cities (
-    id TEXT PRIMARY KEY,
-    prefecture_id TEXT NOT NULL REFERENCES prefectures(id),
-    name TEXT NOT NULL,
-    name_kana TEXT,
-    type TEXT NOT NULL CHECK (type IN ('区', '市', '町', '村')),
-    latitude DOUBLE PRECISION,
-    longitude DOUBLE PRECISION,
-    tile_id TEXT,
-    name_translations JSONB,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.cities (
+    id text NOT NULL,
+    prefecture_id text NOT NULL,
+    name text NOT NULL,
+    name_kana text,
+    type text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    name_translations jsonb,
+    latitude double precision,
+    longitude double precision,
+    tile_id text,
+    CONSTRAINT cities_type_check CHECK ((type = ANY (ARRAY['区'::text, '市'::text, '町'::text, '村'::text])))
 );
 
--- Indexes
-CREATE INDEX idx_cities_prefecture_id ON cities(prefecture_id);
-CREATE INDEX idx_cities_tile_id ON cities(tile_id);
+ALTER TABLE ONLY public.cities ADD CONSTRAINT cities_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.cities ADD CONSTRAINT cities_prefecture_id_fkey
+    FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id);
 
--- RLS
-ALTER TABLE cities ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "cities_select_all" ON cities FOR SELECT USING (true);
+CREATE INDEX idx_cities_prefecture_id ON public.cities USING btree (prefecture_id);
+CREATE INDEX idx_cities_tile_id ON public.cities USING btree (tile_id);
 
--- Trigger
 CREATE TRIGGER update_cities_updated_at
-    BEFORE UPDATE ON cities
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+    BEFORE UPDATE ON public.cities
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+CREATE POLICY "Anyone can view cities" ON public.cities FOR SELECT USING (true);
 
 -- ============================================================
--- machi (街)
+-- machi（街）
 -- ============================================================
-CREATE TABLE machi (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    name_kana TEXT,
-    latitude DOUBLE PRECISION,
-    longitude DOUBLE PRECISION,
-    prefecture_id TEXT NOT NULL REFERENCES prefectures(id),
-    prefecture_name TEXT NOT NULL,
-    prefecture_name_translations JSONB,
-    city_id TEXT REFERENCES cities(id),
-    city_name TEXT,
-    city_name_translations JSONB,
-    name_translations JSONB,
-    osm_id BIGINT,
-    place_type TEXT,
-    tile_id TEXT,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.machi (
+    id text NOT NULL,
+    name text NOT NULL,
+    latitude double precision,
+    longitude double precision,
+    prefecture_id text NOT NULL,
+    city_id text,
+    name_kana text,
+    name_translations jsonb,
+    prefecture_name text NOT NULL,
+    prefecture_name_translations jsonb,
+    city_name text,
+    city_name_translations jsonb,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    osm_id bigint,
+    place_type text,
+    tile_id text
 );
 
--- Indexes
-CREATE INDEX idx_machi_city_id ON machi(city_id);
-CREATE INDEX idx_machi_name ON machi(name);
-CREATE INDEX idx_machi_osm_id ON machi(osm_id);
-CREATE INDEX idx_machi_place_type ON machi(place_type);
-CREATE INDEX idx_machi_prefecture_id ON machi(prefecture_id);
-CREATE INDEX idx_machi_tile_id ON machi(tile_id);
+ALTER TABLE ONLY public.machi ADD CONSTRAINT machi_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.machi ADD CONSTRAINT machi_city_id_fkey
+    FOREIGN KEY (city_id) REFERENCES public.cities(id);
+ALTER TABLE ONLY public.machi ADD CONSTRAINT machi_prefecture_id_fkey
+    FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id);
 
--- RLS
-ALTER TABLE machi ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "machi_select_all" ON machi FOR SELECT USING (true);
+CREATE INDEX idx_machi_city_id ON public.machi USING btree (city_id);
+CREATE INDEX idx_machi_name ON public.machi USING btree (name);
+CREATE INDEX idx_machi_osm_id ON public.machi USING btree (osm_id);
+CREATE INDEX idx_machi_place_type ON public.machi USING btree (place_type);
+CREATE INDEX idx_machi_prefecture_id ON public.machi USING btree (prefecture_id);
+CREATE INDEX idx_machi_tile_id ON public.machi USING btree (tile_id);
 
--- Trigger
 CREATE TRIGGER update_machi_updated_at
-    BEFORE UPDATE ON machi
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+    BEFORE UPDATE ON public.machi
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+CREATE POLICY "Anyone can view machi" ON public.machi FOR SELECT USING (true);
 
 -- ============================================================
--- transport_hubs (交通拠点)
+-- transport_hubs（交通機関）
 -- ============================================================
-CREATE TABLE transport_hubs (
-    id TEXT PRIMARY KEY,
-    osm_id BIGINT,
-    osm_type TEXT,
-    prefecture_id TEXT NOT NULL REFERENCES prefectures(id),
-    city_id TEXT REFERENCES cities(id),
-    type TEXT NOT NULL CHECK (type IN ('station', 'airport', 'ferry_terminal', 'bus_terminal')),
-    subtype TEXT,
-    name TEXT NOT NULL,
-    name_kana TEXT,
-    name_translations JSONB,
-    operator TEXT,
-    network TEXT,
-    ref TEXT,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    tile_id TEXT NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    updated_at TIMESTAMPTZ DEFAULT now()
+
+CREATE TABLE public.transport_hubs (
+    id text NOT NULL,
+    osm_id bigint,
+    osm_type text,
+    prefecture_id text NOT NULL,
+    city_id text,
+    type text NOT NULL,
+    subtype text,
+    name text NOT NULL,
+    name_kana text,
+    operator text,
+    network text,
+    ref text,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
+    tile_id text NOT NULL,
+    name_translations jsonb,
+    CONSTRAINT transport_hubs_type_check CHECK ((type = ANY (ARRAY['station'::text, 'airport'::text, 'ferry_terminal'::text, 'bus_terminal'::text])))
 );
 
--- Indexes
-CREATE INDEX idx_transport_hubs_location ON transport_hubs(latitude, longitude);
-CREATE INDEX idx_transport_hubs_name ON transport_hubs(name);
-CREATE INDEX idx_transport_hubs_osm_id ON transport_hubs(osm_id);
-CREATE INDEX idx_transport_hubs_prefecture_id ON transport_hubs(prefecture_id);
-CREATE INDEX idx_transport_hubs_tile_id ON transport_hubs(tile_id);
-CREATE INDEX idx_transport_hubs_type ON transport_hubs(type);
-CREATE INDEX idx_transport_hubs_type_subtype ON transport_hubs(type, subtype);
+COMMENT ON TABLE public.transport_hubs IS '交通機関データ（駅、空港、フェリーターミナル、バスターミナル）';
+COMMENT ON COLUMN public.transport_hubs.id IS '一意識別子（prefecture_type_osmid形式）';
+COMMENT ON COLUMN public.transport_hubs.osm_id IS 'OpenStreetMapのID';
+COMMENT ON COLUMN public.transport_hubs.osm_type IS 'OSMの要素タイプ（node/way/relation）';
+COMMENT ON COLUMN public.transport_hubs.prefecture_id IS '都道府県ID';
+COMMENT ON COLUMN public.transport_hubs.city_id IS '市区町村ID（オプション）';
+COMMENT ON COLUMN public.transport_hubs.type IS '交通機関の種類（station/airport/ferry_terminal/bus_terminal）';
+COMMENT ON COLUMN public.transport_hubs.subtype IS 'サブタイプ（駅: jr/metro/toei/subway/private、空港: international/domestic/military/heliport）';
+COMMENT ON COLUMN public.transport_hubs.name IS '名称（日本語）';
+COMMENT ON COLUMN public.transport_hubs.name_kana IS '名称（ふりがな）';
+COMMENT ON COLUMN public.transport_hubs.operator IS '運営会社';
+COMMENT ON COLUMN public.transport_hubs.network IS '路線網';
+COMMENT ON COLUMN public.transport_hubs.ref IS '路線コード/空港コード';
+COMMENT ON COLUMN public.transport_hubs.latitude IS '緯度';
+COMMENT ON COLUMN public.transport_hubs.longitude IS '経度';
+COMMENT ON COLUMN public.transport_hubs.tile_id IS 'タイルID（0.25度グリッド、例: "559_142"）';
+COMMENT ON COLUMN public.transport_hubs.name_translations IS '多言語翻訳 {"en": "Shibuya Station", "cn": "涩谷站", "tw": "澀谷站"}';
 
--- RLS
-ALTER TABLE transport_hubs ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "transport_hubs_select_all" ON transport_hubs FOR SELECT USING (true);
+ALTER TABLE ONLY public.transport_hubs ADD CONSTRAINT transport_hubs_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.transport_hubs ADD CONSTRAINT transport_hubs_city_id_fkey
+    FOREIGN KEY (city_id) REFERENCES public.cities(id);
+ALTER TABLE ONLY public.transport_hubs ADD CONSTRAINT transport_hubs_prefecture_id_fkey
+    FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id);
 
--- Trigger
-CREATE TRIGGER update_transport_hubs_updated_at
-    BEFORE UPDATE ON transport_hubs
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+CREATE INDEX idx_transport_hubs_location ON public.transport_hubs USING btree (latitude, longitude);
+CREATE INDEX idx_transport_hubs_name ON public.transport_hubs USING btree (name);
+CREATE INDEX idx_transport_hubs_osm_id ON public.transport_hubs USING btree (osm_id);
+CREATE INDEX idx_transport_hubs_prefecture_id ON public.transport_hubs USING btree (prefecture_id);
+CREATE INDEX idx_transport_hubs_tile_id ON public.transport_hubs USING btree (tile_id);
+CREATE INDEX idx_transport_hubs_type ON public.transport_hubs USING btree (type);
+CREATE INDEX idx_transport_hubs_type_subtype ON public.transport_hubs USING btree (type, subtype);
+
+ALTER TABLE public.transport_hubs ENABLE ROW LEVEL SECURITY;
+CREATE POLICY transport_hubs_select_policy ON public.transport_hubs FOR SELECT USING (true);
 
 -- ============================================================
--- admin_boundaries (行政境界 - PostGIS)
+-- admin_boundaries（行政区域ポリゴン）
 -- ============================================================
--- Note: PostGIS拡張が必要
--- CREATE EXTENSION IF NOT EXISTS postgis;
 
-CREATE TABLE admin_boundaries (
-    id SERIAL PRIMARY KEY,
-    country_id TEXT REFERENCES countries(id),
-    admin_level INTEGER,  -- 4=都道府県, 7=市区町村
-    prefecture_id TEXT REFERENCES prefectures(id),
-    city_id TEXT REFERENCES cities(id),
-    geom GEOMETRY(MultiPolygon, 4326),
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+CREATE TABLE public.admin_boundaries (
+    id integer NOT NULL,
+    geom public.geometry(MultiPolygon,4326),
+    created_at timestamp with time zone DEFAULT now(),
+    admin_level integer,
+    country_id text,
+    prefecture_id text,
+    city_id text
 );
 
--- Indexes
-CREATE INDEX idx_admin_boundaries_geom ON admin_boundaries USING GIST(geom);
-CREATE INDEX idx_admin_boundaries_country_id ON admin_boundaries(country_id);
-CREATE INDEX idx_admin_boundaries_admin_level ON admin_boundaries(admin_level);
-CREATE INDEX idx_admin_boundaries_prefecture_id ON admin_boundaries(prefecture_id);
-CREATE INDEX idx_admin_boundaries_city_id ON admin_boundaries(city_id);
-CREATE INDEX idx_admin_boundaries_country_level ON admin_boundaries(country_id, admin_level);
+COMMENT ON TABLE public.admin_boundaries IS '行政区域ポリゴン（国土数値情報N03由来）';
+COMMENT ON COLUMN public.admin_boundaries.admin_level IS 'OSM admin_level (4=都道府県相当, 6-7=市区町村相当)';
+COMMENT ON COLUMN public.admin_boundaries.country_id IS '国ID → countries.id (jp, kr, th, tw, cn)';
+COMMENT ON COLUMN public.admin_boundaries.prefecture_id IS '都道府県ID → prefectures.id';
+COMMENT ON COLUMN public.admin_boundaries.city_id IS '市区町村ID → cities.id';
 
--- RLS
-ALTER TABLE admin_boundaries ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "admin_boundaries_select_all" ON admin_boundaries FOR SELECT USING (true);
+CREATE SEQUENCE public.admin_boundaries_id_seq
+    AS integer START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+ALTER SEQUENCE public.admin_boundaries_id_seq OWNED BY public.admin_boundaries.id;
+ALTER TABLE ONLY public.admin_boundaries ALTER COLUMN id SET DEFAULT nextval('public.admin_boundaries_id_seq'::regclass);
+
+ALTER TABLE ONLY public.admin_boundaries ADD CONSTRAINT admin_boundaries_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.admin_boundaries ADD CONSTRAINT admin_boundaries_city_id_unique UNIQUE (city_id);
+ALTER TABLE ONLY public.admin_boundaries ADD CONSTRAINT admin_boundaries_city_id_fkey
+    FOREIGN KEY (city_id) REFERENCES public.cities(id);
+ALTER TABLE ONLY public.admin_boundaries ADD CONSTRAINT admin_boundaries_country_id_fkey
+    FOREIGN KEY (country_id) REFERENCES public.countries(id);
+ALTER TABLE ONLY public.admin_boundaries ADD CONSTRAINT admin_boundaries_prefecture_id_fkey
+    FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id);
+
+CREATE INDEX idx_admin_boundaries_admin_level ON public.admin_boundaries USING btree (admin_level);
+CREATE INDEX idx_admin_boundaries_city_id ON public.admin_boundaries USING btree (city_id);
+CREATE INDEX idx_admin_boundaries_country_id ON public.admin_boundaries USING btree (country_id);
+CREATE INDEX idx_admin_boundaries_country_level ON public.admin_boundaries USING btree (country_id, admin_level);
+CREATE INDEX idx_admin_boundaries_geom ON public.admin_boundaries USING gist (geom);
+CREATE INDEX idx_admin_boundaries_prefecture_id ON public.admin_boundaries USING btree (prefecture_id);
+
+ALTER TABLE public.admin_boundaries ENABLE ROW LEVEL SECURITY;
+CREATE POLICY admin_boundaries_read ON public.admin_boundaries FOR SELECT USING (true);
 
 -- ============================================================
--- RPC: 座標から行政区画を取得
+-- 地理空間関数
 -- ============================================================
-CREATE OR REPLACE FUNCTION get_city_by_coordinate(lng DOUBLE PRECISION, lat DOUBLE PRECISION)
-RETURNS TABLE (
-    country_id TEXT,
-    admin_level INTEGER,
-    prefecture_id TEXT,
-    city_id TEXT
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT
-        ab.country_id,
-        ab.admin_level,
-        ab.prefecture_id,
-        ab.city_id
-    FROM admin_boundaries ab
-    WHERE ST_Contains(ab.geom, ST_SetSRID(ST_Point(lng, lat), 4326))
-    ORDER BY ab.admin_level DESC;
-END;
-$$ LANGUAGE plpgsql STABLE;
+
+-- 座標から行政区画を特定
+CREATE FUNCTION public.get_city_by_coordinate(lng double precision, lat double precision)
+RETURNS TABLE(country_id text, admin_level integer, prefecture_id text, city_id text)
+    LANGUAGE sql STABLE
+    AS $$
+  SELECT
+    ab.country_id,
+    ab.admin_level,
+    ab.prefecture_id,
+    ab.city_id
+  FROM admin_boundaries ab
+  WHERE ST_Contains(ab.geom, ST_SetSRID(ST_Point(lng, lat), 4326))
+  ORDER BY ab.admin_level DESC
+  LIMIT 1;
+$$;
+
+COMMENT ON FUNCTION public.get_city_by_coordinate(lng double precision, lat double precision)
+IS '座標から行政区画を特定。prefecture_id と city_id を直接返す。';

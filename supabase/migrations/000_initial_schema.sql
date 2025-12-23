@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict p5jzjG7S1j57xJrAorczlFPJTx1c01L2IeXkXEdsLofd4NbvbhQbTTeEvCIxhjW
+\restrict WZ0TpjY9CYA9KWGJSgKs55HHJ6jY5dIn7a5HSbdf49CovVd7oXJ8fb1JTmSzJd1
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.7 (Homebrew)
@@ -343,141 +343,6 @@ $$;
 
 
 --
--- Name: decrement_map_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_bookmarks_count(p_map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET bookmarks_count = GREATEST(0, bookmarks_count - 1)
-  WHERE id = p_map_id;
-END;
-$$;
-
-
---
--- Name: decrement_map_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_comments_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET comments_count = GREATEST(COALESCE(comments_count, 0) - 1, 0)
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: decrement_map_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_likes_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET likes_count = GREATEST(0, likes_count - 1)
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: decrement_map_spots_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_spots_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET spots_count = GREATEST(0, spots_count - 1)
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: decrement_master_spot_favorites_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_master_spot_favorites_count(master_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE master_spots
-  SET favorites_count = GREATEST(0, favorites_count - 1)
-  WHERE id = master_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_bookmarks_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET bookmarks_count = GREATEST(0, bookmarks_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_comments_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET comments_count = GREATEST(0, comments_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_images_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_images_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET images_count = GREATEST(0, images_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_likes_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET likes_count = GREATEST(0, likes_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
 -- Name: expire_premium_subscriptions(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -680,141 +545,6 @@ $$;
 
 
 --
--- Name: increment_map_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_bookmarks_count(p_map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET bookmarks_count = bookmarks_count + 1
-  WHERE id = p_map_id;
-END;
-$$;
-
-
---
--- Name: increment_map_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_comments_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET comments_count = COALESCE(comments_count, 0) + 1
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: increment_map_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_likes_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET likes_count = likes_count + 1
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: increment_map_spots_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_spots_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET spots_count = spots_count + 1
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: increment_master_spot_favorites_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_master_spot_favorites_count(master_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE master_spots
-  SET favorites_count = favorites_count + 1
-  WHERE id = master_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_bookmarks_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET bookmarks_count = bookmarks_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_comments_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET comments_count = comments_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_images_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_images_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET images_count = images_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_likes_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET likes_count = likes_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
 -- Name: is_user_premium(uuid); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -961,6 +691,34 @@ $$;
 
 
 --
+-- Name: update_bookmarks_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_bookmarks_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.map_id IS NOT NULL THEN
+      UPDATE maps SET bookmarks_count = bookmarks_count + 1 WHERE id = NEW.map_id;
+    ELSIF NEW.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET bookmarks_count = bookmarks_count + 1 WHERE id = NEW.user_spot_id;
+    END IF;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    IF OLD.map_id IS NOT NULL THEN
+      UPDATE maps SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = OLD.map_id;
+    ELSIF OLD.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = OLD.user_spot_id;
+    END IF;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
 -- Name: update_collection_maps_count(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -973,6 +731,127 @@ BEGIN
     RETURN NEW;
   ELSIF TG_OP = 'DELETE' THEN
     UPDATE collections SET maps_count = maps_count - 1, updated_at = NOW() WHERE id = OLD.collection_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_comments_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_comments_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  -- 返信コメント（parent_idがある）はカウントしない
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.parent_id IS NULL THEN
+      IF NEW.map_id IS NOT NULL THEN
+        UPDATE maps SET comments_count = comments_count + 1 WHERE id = NEW.map_id;
+      ELSIF NEW.user_spot_id IS NOT NULL THEN
+        UPDATE user_spots SET comments_count = comments_count + 1 WHERE id = NEW.user_spot_id;
+      END IF;
+    END IF;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    IF OLD.parent_id IS NULL THEN
+      IF OLD.map_id IS NOT NULL THEN
+        UPDATE maps SET comments_count = GREATEST(0, comments_count - 1) WHERE id = OLD.map_id;
+      ELSIF OLD.user_spot_id IS NOT NULL THEN
+        UPDATE user_spots SET comments_count = GREATEST(0, comments_count - 1) WHERE id = OLD.user_spot_id;
+      END IF;
+    END IF;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_images_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_images_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE user_spots SET images_count = images_count + 1 WHERE id = NEW.user_spot_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE user_spots SET images_count = GREATEST(0, images_count - 1) WHERE id = OLD.user_spot_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_likes_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_likes_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.map_id IS NOT NULL THEN
+      UPDATE maps SET likes_count = likes_count + 1 WHERE id = NEW.map_id;
+    ELSIF NEW.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET likes_count = likes_count + 1 WHERE id = NEW.user_spot_id;
+    END IF;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    IF OLD.map_id IS NOT NULL THEN
+      UPDATE maps SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.map_id;
+    ELSIF OLD.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.user_spot_id;
+    END IF;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_map_spots_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_map_spots_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE maps SET spots_count = spots_count + 1 WHERE id = NEW.map_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE maps SET spots_count = GREATEST(0, spots_count - 1) WHERE id = OLD.map_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_master_spot_favorites_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_master_spot_favorites_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE master_spots SET favorites_count = favorites_count + 1 WHERE id = NEW.master_spot_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE master_spots SET favorites_count = GREATEST(0, favorites_count - 1) WHERE id = OLD.master_spot_id;
     RETURN OLD;
   END IF;
   RETURN NULL;
@@ -1861,7 +1740,6 @@ CREATE TABLE public.maps (
     name text NOT NULL,
     description text,
     is_public boolean DEFAULT false NOT NULL,
-    is_default boolean DEFAULT false NOT NULL,
     is_official boolean DEFAULT false NOT NULL,
     thumbnail_url text,
     spots_count integer DEFAULT 0 NOT NULL,
@@ -1883,13 +1761,6 @@ CREATE TABLE public.maps (
 --
 
 COMMENT ON COLUMN public.maps.is_public IS 'マップが公開されているかどうか（デフォルト: false）';
-
-
---
--- Name: COLUMN maps.is_default; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.maps.is_default IS 'デフォルトマップかどうか（デフォルト: false）';
 
 
 --
@@ -4240,10 +4111,52 @@ CREATE TRIGGER trigger_increment_comment_replies AFTER INSERT ON public.comments
 
 
 --
+-- Name: bookmarks trigger_update_bookmarks_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_bookmarks_count AFTER INSERT OR DELETE ON public.bookmarks FOR EACH ROW EXECUTE FUNCTION public.update_bookmarks_count();
+
+
+--
 -- Name: collection_maps trigger_update_collection_maps_count; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER trigger_update_collection_maps_count AFTER INSERT OR DELETE ON public.collection_maps FOR EACH ROW EXECUTE FUNCTION public.update_collection_maps_count();
+
+
+--
+-- Name: comments trigger_update_comments_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_comments_count AFTER INSERT OR DELETE ON public.comments FOR EACH ROW EXECUTE FUNCTION public.update_comments_count();
+
+
+--
+-- Name: images trigger_update_images_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_images_count AFTER INSERT OR DELETE ON public.images FOR EACH ROW EXECUTE FUNCTION public.update_images_count();
+
+
+--
+-- Name: likes trigger_update_likes_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_likes_count AFTER INSERT OR DELETE ON public.likes FOR EACH ROW EXECUTE FUNCTION public.update_likes_count();
+
+
+--
+-- Name: user_spots trigger_update_map_spots_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_map_spots_count AFTER INSERT OR DELETE ON public.user_spots FOR EACH ROW EXECUTE FUNCTION public.update_map_spots_count();
+
+
+--
+-- Name: master_spot_favorites trigger_update_master_spot_favorites_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_master_spot_favorites_count AFTER INSERT OR DELETE ON public.master_spot_favorites FOR EACH ROW EXECUTE FUNCTION public.update_master_spot_favorites_count();
 
 
 --
@@ -5896,5 +5809,5 @@ ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict p5jzjG7S1j57xJrAorczlFPJTx1c01L2IeXkXEdsLofd4NbvbhQbTTeEvCIxhjW
+\unrestrict WZ0TpjY9CYA9KWGJSgKs55HHJ6jY5dIn7a5HSbdf49CovVd7oXJ8fb1JTmSzJd1
 

@@ -61,3 +61,7 @@ postgres.[PROJECT_REF] -d postgres -f ./supabase/migrations/048_seed_chiba_machi
 
 現在の設定をダンプ
 pg_dump 'postgresql://postgres.whgptckcuskqggyybruw:<password>@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres' --schema-only --schema=public --no-owner --no-privileges > supabase/migrations/000_initial_schema.sql
+
+tblでスキーマ変更後に再生成したい場合：
+tbls doc "postgresql://postgres.whgptckcuskqggyybruw:[PASSWORD]@aws-1-ap-southeast-1.pooler.supaba
+se.com:5432/postgres?sslmode=require" ./docs/database --rm-dist

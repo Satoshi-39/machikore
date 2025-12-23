@@ -1,400 +1,350 @@
 -- ============================================================
--- スポット関連
+-- スポット（master_spots, user_spots, images, spot_tags, master_spot_favorites）
 -- ============================================================
--- テーブル: master_spots, master_spot_favorites, user_spots, spot_tags, images
+-- マスタースポット（場所情報）とユーザースポット（ユーザーの保存情報）
 -- 最終更新: 2025-12-23
 
 -- ============================================================
--- master_spots (マスタースポット)
+-- master_spots（マスタースポット）
 -- ============================================================
-CREATE TABLE master_spots (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name TEXT NOT NULL,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    machi_id TEXT REFERENCES machi(id) ON DELETE SET NULL,  -- machiが削除されても保持
-    google_place_id TEXT,
-    google_formatted_address TEXT,
-    google_short_address TEXT,
-    google_types TEXT[],
-    google_phone_number TEXT,
-    google_website_uri TEXT,
-    google_rating DOUBLE PRECISION,
-    google_user_rating_count INTEGER,
-    favorites_count INTEGER NOT NULL DEFAULT 0,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.master_spots (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text NOT NULL,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    google_place_id text,
+    google_formatted_address text,
+    google_types text[],
+    google_phone_number text,
+    google_website_uri text,
+    google_rating double precision,
+    google_user_rating_count integer,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    machi_id text,
+    google_short_address text,
+    favorites_count integer DEFAULT 0 NOT NULL
 );
 
--- Indexes
-CREATE INDEX idx_master_spots_google_place_id ON master_spots(google_place_id);
-CREATE INDEX idx_master_spots_location ON master_spots(latitude, longitude);
-CREATE INDEX idx_master_spots_machi_id ON master_spots(machi_id);
-CREATE INDEX idx_master_spots_name ON master_spots(name);
+ALTER TABLE ONLY public.master_spots ADD CONSTRAINT master_spots_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.master_spots ADD CONSTRAINT master_spots_google_place_id_key UNIQUE (google_place_id);
+ALTER TABLE ONLY public.master_spots ADD CONSTRAINT master_spots_machi_id_fkey
+    FOREIGN KEY (machi_id) REFERENCES public.machi(id) ON DELETE SET NULL;
 
--- RLS
-ALTER TABLE master_spots ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "master_spots_select_all" ON master_spots FOR SELECT USING (true);
-CREATE POLICY "master_spots_insert_authenticated" ON master_spots
-    FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+CREATE INDEX idx_master_spots_google_place_id ON public.master_spots USING btree (google_place_id);
+CREATE INDEX idx_master_spots_location ON public.master_spots USING btree (latitude, longitude);
+CREATE INDEX idx_master_spots_machi_id ON public.master_spots USING btree (machi_id);
+CREATE INDEX idx_master_spots_name ON public.master_spots USING btree (name);
 
--- Trigger
 CREATE TRIGGER update_master_spots_updated_at
-    BEFORE UPDATE ON master_spots
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+    BEFORE UPDATE ON public.master_spots
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+ALTER TABLE public.master_spots ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view master spots" ON public.master_spots FOR SELECT USING (true);
+CREATE POLICY "Authenticated users can create master spots" ON public.master_spots
+    FOR INSERT TO authenticated WITH CHECK (true);
 
 -- ============================================================
--- master_spot_favorites (マスタースポットお気に入り)
+-- master_spot_favorites（マスタースポットお気に入り）
 -- ============================================================
-CREATE TABLE master_spot_favorites (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    master_spot_id UUID NOT NULL REFERENCES master_spots(id) ON DELETE CASCADE,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    UNIQUE(user_id, master_spot_id)
+
+CREATE TABLE public.master_spot_favorites (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    master_spot_id uuid NOT NULL,
+    created_at timestamp with time zone DEFAULT now()
 );
 
--- Indexes
-CREATE INDEX idx_master_spot_favorites_master_spot_id ON master_spot_favorites(master_spot_id);
-CREATE INDEX idx_master_spot_favorites_user_id ON master_spot_favorites(user_id);
+ALTER TABLE ONLY public.master_spot_favorites ADD CONSTRAINT master_spot_favorites_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.master_spot_favorites ADD CONSTRAINT master_spot_favorites_user_id_master_spot_id_key
+    UNIQUE (user_id, master_spot_id);
+ALTER TABLE ONLY public.master_spot_favorites ADD CONSTRAINT master_spot_favorites_master_spot_id_fkey
+    FOREIGN KEY (master_spot_id) REFERENCES public.master_spots(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.master_spot_favorites ADD CONSTRAINT master_spot_favorites_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
--- RLS
-ALTER TABLE master_spot_favorites ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "master_spot_favorites_select_own" ON master_spot_favorites
-    FOR SELECT USING (user_id = auth.uid());
-CREATE POLICY "master_spot_favorites_insert_own" ON master_spot_favorites
-    FOR INSERT WITH CHECK (user_id = auth.uid());
-CREATE POLICY "master_spot_favorites_delete_own" ON master_spot_favorites
-    FOR DELETE USING (user_id = auth.uid());
+CREATE INDEX idx_master_spot_favorites_master_spot_id ON public.master_spot_favorites USING btree (master_spot_id);
+CREATE INDEX idx_master_spot_favorites_user_id ON public.master_spot_favorites USING btree (user_id);
 
--- Trigger: お気に入り数の自動更新
-CREATE OR REPLACE FUNCTION update_master_spot_favorites_count()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' THEN
-        UPDATE master_spots SET favorites_count = favorites_count + 1 WHERE id = NEW.master_spot_id;
-        RETURN NEW;
-    ELSIF TG_OP = 'DELETE' THEN
-        UPDATE master_spots SET favorites_count = GREATEST(0, favorites_count - 1) WHERE id = OLD.master_spot_id;
-        RETURN OLD;
-    END IF;
-    RETURN NULL;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+ALTER TABLE public.master_spot_favorites ENABLE ROW LEVEL SECURITY;
 
-CREATE TRIGGER trigger_update_master_spot_favorites_count
-    AFTER INSERT OR DELETE ON master_spot_favorites
-    FOR EACH ROW EXECUTE FUNCTION update_master_spot_favorites_count();
+CREATE POLICY "Users can delete own favorites" ON public.master_spot_favorites
+    FOR DELETE USING ((auth.uid() = user_id));
+CREATE POLICY "Users can insert own favorites" ON public.master_spot_favorites
+    FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can view own favorites" ON public.master_spot_favorites
+    FOR SELECT USING ((auth.uid() = user_id));
 
 -- ============================================================
--- user_spots (ユーザースポット)
+-- user_spots（ユーザースポット）
 -- ============================================================
-CREATE TABLE user_spots (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    map_id UUID NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
-    master_spot_id UUID REFERENCES master_spots(id) ON DELETE CASCADE,
-    machi_id TEXT REFERENCES machi(id) ON DELETE SET NULL,  -- machiが削除されても保持
-    machi_name TEXT,
-    city_id TEXT REFERENCES cities(id) ON DELETE SET NULL,
-    city_name TEXT,
-    prefecture_id TEXT REFERENCES prefectures(id) ON DELETE SET NULL,
-    prefecture_name TEXT,
-    custom_name TEXT NOT NULL,
-    description TEXT,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    google_formatted_address TEXT,
-    google_short_address TEXT,
-    images_count INTEGER NOT NULL DEFAULT 0,
-    likes_count INTEGER NOT NULL DEFAULT 0,
-    comments_count INTEGER NOT NULL DEFAULT 0,
-    bookmarks_count INTEGER NOT NULL DEFAULT 0,
-    order_index INTEGER NOT NULL DEFAULT 0,
-    color TEXT,  -- deprecated
-    spot_color TEXT DEFAULT 'blue',
-    label_id UUID REFERENCES map_labels(id) ON DELETE SET NULL,
-    article_content JSONB,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+
+CREATE TABLE public.user_spots (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    map_id uuid NOT NULL,
+    master_spot_id uuid,
+    machi_id text,
+    custom_name text NOT NULL,
+    description text,
+    images_count integer DEFAULT 0 NOT NULL,
+    likes_count integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
+    order_index integer DEFAULT 0 NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    article_content jsonb,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    google_formatted_address text,
+    google_short_address text,
+    bookmarks_count integer DEFAULT 0 NOT NULL,
+    prefecture_id text,
+    color text,
+    spot_color text DEFAULT 'blue'::text,
+    label_id uuid,
+    city_id text,
+    prefecture_name text,
+    city_name text,
+    machi_name text
 );
 
--- Indexes
-CREATE INDEX idx_user_spots_bookmarks_count ON user_spots(bookmarks_count DESC);
-CREATE INDEX idx_user_spots_created_at ON user_spots(created_at DESC);
-CREATE INDEX idx_user_spots_label_id ON user_spots(label_id);
-CREATE INDEX idx_user_spots_machi_id ON user_spots(machi_id);
-CREATE INDEX idx_user_spots_map_id ON user_spots(map_id);
-CREATE INDEX idx_user_spots_master_spot_id ON user_spots(master_spot_id);
-CREATE INDEX idx_user_spots_prefecture_id ON user_spots(prefecture_id);
-CREATE INDEX idx_user_spots_prefecture_map ON user_spots(prefecture_id, map_id);
-CREATE INDEX idx_user_spots_user_id ON user_spots(user_id);
+COMMENT ON COLUMN public.user_spots.images_count IS '画像数（デフォルト: 0）';
+COMMENT ON COLUMN public.user_spots.likes_count IS 'いいね数（デフォルト: 0）';
+COMMENT ON COLUMN public.user_spots.comments_count IS 'コメント数（デフォルト: 0）';
+COMMENT ON COLUMN public.user_spots.order_index IS '表示順序（デフォルト: 0）';
+COMMENT ON COLUMN public.user_spots.article_content IS 'マップ記事用のスポット紹介文（ProseMirror JSON形式）';
+COMMENT ON COLUMN public.user_spots.bookmarks_count IS 'ブックマーク数（デフォルト: 0）';
+COMMENT ON COLUMN public.user_spots.prefecture_id IS '都道府県ID（prefectures.id）。都道府県別検索の高速化のため非正規化';
+COMMENT ON COLUMN public.user_spots.color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
+COMMENT ON COLUMN public.user_spots.spot_color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
+COMMENT ON COLUMN public.user_spots.label_id IS 'スポットのラベル（map_labelsへの外部キー）';
 
--- RLS
-ALTER TABLE user_spots ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "user_spots_select_public_or_own" ON user_spots
-    FOR SELECT USING (
-        EXISTS (SELECT 1 FROM maps WHERE id = map_id AND (is_public = true OR user_id = auth.uid()))
-    );
-CREATE POLICY "user_spots_insert_own" ON user_spots
-    FOR INSERT WITH CHECK (
-        EXISTS (SELECT 1 FROM maps WHERE id = map_id AND user_id = auth.uid())
-    );
-CREATE POLICY "user_spots_update_own" ON user_spots
-    FOR UPDATE USING (user_id = auth.uid());
-CREATE POLICY "user_spots_delete_own" ON user_spots
-    FOR DELETE USING (user_id = auth.uid());
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_map_id_master_spot_id_key
+    UNIQUE (user_id, map_id, master_spot_id);
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_label_id_fkey
+    FOREIGN KEY (label_id) REFERENCES public.map_labels(id) ON DELETE SET NULL;
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_machi_id_fkey
+    FOREIGN KEY (machi_id) REFERENCES public.machi(id) ON DELETE SET NULL;
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_map_id_fkey
+    FOREIGN KEY (map_id) REFERENCES public.maps(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_master_spot_id_fkey
+    FOREIGN KEY (master_spot_id) REFERENCES public.master_spots(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_prefecture_id_fkey
+    FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id) ON DELETE SET NULL;
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
--- Trigger
+CREATE INDEX idx_user_spots_bookmarks_count ON public.user_spots USING btree (bookmarks_count DESC);
+CREATE INDEX idx_user_spots_created_at ON public.user_spots USING btree (created_at DESC);
+CREATE INDEX idx_user_spots_label_id ON public.user_spots USING btree (label_id);
+CREATE INDEX idx_user_spots_machi_id ON public.user_spots USING btree (machi_id);
+CREATE INDEX idx_user_spots_map_id ON public.user_spots USING btree (map_id);
+CREATE INDEX idx_user_spots_master_spot_id ON public.user_spots USING btree (master_spot_id);
+CREATE INDEX idx_user_spots_prefecture_id ON public.user_spots USING btree (prefecture_id);
+CREATE INDEX idx_user_spots_prefecture_map ON public.user_spots USING btree (prefecture_id, map_id);
+CREATE INDEX idx_user_spots_user_id ON public.user_spots USING btree (user_id);
+
 CREATE TRIGGER update_user_spots_updated_at
-    BEFORE UPDATE ON user_spots
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+    BEFORE UPDATE ON public.user_spots
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
--- Trigger: マップのスポット数を自動更新
-DROP TRIGGER IF EXISTS trigger_update_map_spots_count ON user_spots;
-CREATE TRIGGER trigger_update_map_spots_count
-    AFTER INSERT OR DELETE ON user_spots
-    FOR EACH ROW EXECUTE FUNCTION update_map_spots_count();
+ALTER TABLE public.user_spots ENABLE ROW LEVEL SECURITY;
 
--- スポット数制限チェック
-CREATE OR REPLACE FUNCTION check_spots_limit()
-RETURNS TRIGGER AS $$
-DECLARE
-    current_count INTEGER;
-    is_premium BOOLEAN;
-    free_limit INTEGER := 30;
+CREATE POLICY "User spots are viewable if map is public or own" ON public.user_spots
+    FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = user_spots.map_id) AND ((maps.is_public = true) OR (maps.user_id = auth.uid()))))));
+CREATE POLICY "Users can create spots in their own maps" ON public.user_spots
+    FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid())))));
+CREATE POLICY "Users can delete their own spots" ON public.user_spots
+    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY "Users can update their own spots" ON public.user_spots
+    FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY user_spots_insert_with_limit ON public.user_spots
+    FOR INSERT WITH CHECK (((auth.uid() = user_id) AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))));
+
+-- ============================================================
+-- images（スポット画像）
+-- ============================================================
+
+CREATE TABLE public.images (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_spot_id uuid NOT NULL,
+    local_path text,
+    cloud_path text,
+    width integer,
+    height integer,
+    file_size integer,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+ALTER TABLE ONLY public.images ADD CONSTRAINT images_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.images ADD CONSTRAINT images_user_spot_id_fkey
+    FOREIGN KEY (user_spot_id) REFERENCES public.user_spots(id) ON DELETE CASCADE;
+
+CREATE INDEX idx_images_user_spot_id ON public.images USING btree (user_spot_id);
+
+ALTER TABLE public.images ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Images are viewable if spot is public or own" ON public.images
+    FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.user_spots us JOIN public.maps m ON ((m.id = us.map_id)) WHERE ((us.id = images.user_spot_id) AND ((m.is_public = true) OR (m.user_id = auth.uid()))))));
+CREATE POLICY "Users can create images in their own spots" ON public.images
+    FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid())))));
+CREATE POLICY "Users can delete images in their own spots" ON public.images
+    FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid())))));
+
+-- ============================================================
+-- spot_tags（スポットとタグの中間テーブル）
+-- ============================================================
+
+CREATE TABLE public.spot_tags (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_spot_id uuid NOT NULL,
+    tag_id uuid NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+ALTER TABLE ONLY public.spot_tags ADD CONSTRAINT spot_tags_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.spot_tags ADD CONSTRAINT spot_tags_user_spot_id_tag_id_key UNIQUE (user_spot_id, tag_id);
+ALTER TABLE ONLY public.spot_tags ADD CONSTRAINT spot_tags_tag_id_fkey
+    FOREIGN KEY (tag_id) REFERENCES public.tags(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.spot_tags ADD CONSTRAINT spot_tags_user_spot_id_fkey
+    FOREIGN KEY (user_spot_id) REFERENCES public.user_spots(id) ON DELETE CASCADE;
+
+CREATE INDEX idx_spot_tags_tag_id ON public.spot_tags USING btree (tag_id);
+CREATE INDEX idx_spot_tags_user_spot_id ON public.spot_tags USING btree (user_spot_id);
+
+ALTER TABLE public.spot_tags ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY spot_tags_delete_policy ON public.spot_tags
+    FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.user_spots WHERE ((user_spots.id = spot_tags.user_spot_id) AND (user_spots.user_id = auth.uid())))));
+CREATE POLICY spot_tags_insert_policy ON public.spot_tags
+    FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.user_spots WHERE ((user_spots.id = spot_tags.user_spot_id) AND (user_spots.user_id = auth.uid())))));
+CREATE POLICY spot_tags_select_policy ON public.spot_tags FOR SELECT USING (true);
+
+-- ============================================================
+-- スポット関連のトリガー関数
+-- ============================================================
+
+-- スポット数制限チェック（INSERT時）
+CREATE FUNCTION public.check_spots_limit() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
 BEGIN
-    -- 現在のスポット数を取得
-    SELECT COUNT(*) INTO current_count
-    FROM user_spots
-    WHERE map_id = NEW.map_id;
-
-    -- プレミアム会員かどうかをチェック
-    SELECT u.is_premium INTO is_premium
-    FROM users u
-    WHERE u.id = NEW.user_id;
-
-    -- 無料ユーザーの場合、制限をチェック
-    IF NOT COALESCE(is_premium, false) AND current_count >= free_limit THEN
-        RAISE EXCEPTION 'Free users can only add up to % spots per map', free_limit;
-    END IF;
-
-    RETURN NEW;
+  -- 現在のマップのスポット数をチェック
+  IF (SELECT COUNT(*) FROM user_spots WHERE map_id = NEW.map_id) >= 100 THEN
+    RAISE EXCEPTION 'マップあたりのスポット数上限（100）に達しています';
+  END IF;
+  RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$;
+
+-- スポット数制限チェック（UPDATE時）
+CREATE FUNCTION public.check_spots_limit_on_update() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  -- map_idが変更された場合のみチェック
+  IF OLD.map_id IS DISTINCT FROM NEW.map_id THEN
+    IF (SELECT COUNT(*) FROM user_spots WHERE map_id = NEW.map_id) >= 100 THEN
+      RAISE EXCEPTION '移動先のマップはスポット数上限（100）に達しています';
+    END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+-- スポット数をカウントする関数
+CREATE FUNCTION public.count_user_spots_in_map(p_user_id uuid, p_map_id uuid) RETURNS integer
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  RETURN (
+    SELECT COUNT(*)::INTEGER
+    FROM user_spots
+    WHERE user_id = p_user_id
+    AND map_id = p_map_id
+  );
+END;
+$$;
+
+-- 画像数カウンター更新関数
+CREATE FUNCTION public.update_images_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE user_spots SET images_count = images_count + 1 WHERE id = NEW.user_spot_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE user_spots SET images_count = GREATEST(0, images_count - 1) WHERE id = OLD.user_spot_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+-- master_spots.favorites_count を更新するトリガー関数
+CREATE FUNCTION public.update_master_spot_favorites_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE master_spots SET favorites_count = favorites_count + 1 WHERE id = NEW.master_spot_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE master_spots SET favorites_count = GREATEST(0, favorites_count - 1) WHERE id = OLD.master_spot_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+-- tags.usage_count を更新するトリガー関数（spot_tags用）
+CREATE FUNCTION public.update_tag_usage_count_for_spots() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE tags SET usage_count = usage_count + 1 WHERE id = NEW.tag_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE tags SET usage_count = usage_count - 1 WHERE id = OLD.tag_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+-- ============================================================
+-- スポット関連のトリガー
+-- ============================================================
 
 CREATE TRIGGER enforce_spots_limit
-    BEFORE INSERT ON user_spots
-    FOR EACH ROW EXECUTE FUNCTION check_spots_limit();
-
-CREATE OR REPLACE FUNCTION check_spots_limit_on_update()
-RETURNS TRIGGER AS $$
-DECLARE
-    current_count INTEGER;
-    is_premium BOOLEAN;
-    free_limit INTEGER := 30;
-BEGIN
-    -- マップIDが変更された場合のみチェック
-    IF OLD.map_id = NEW.map_id THEN
-        RETURN NEW;
-    END IF;
-
-    -- 移動先マップの現在のスポット数を取得
-    SELECT COUNT(*) INTO current_count
-    FROM user_spots
-    WHERE map_id = NEW.map_id AND id != NEW.id;
-
-    -- プレミアム会員かどうかをチェック
-    SELECT u.is_premium INTO is_premium
-    FROM users u
-    WHERE u.id = NEW.user_id;
-
-    -- 無料ユーザーの場合、制限をチェック
-    IF NOT COALESCE(is_premium, false) AND current_count >= free_limit THEN
-        RAISE EXCEPTION 'Free users can only add up to % spots per map', free_limit;
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+    BEFORE INSERT ON public.user_spots
+    FOR EACH ROW EXECUTE FUNCTION public.check_spots_limit();
 
 CREATE TRIGGER enforce_spots_limit_on_update
-    BEFORE UPDATE ON user_spots
-    FOR EACH ROW EXECUTE FUNCTION check_spots_limit_on_update();
+    BEFORE UPDATE ON public.user_spots
+    FOR EACH ROW EXECUTE FUNCTION public.check_spots_limit_on_update();
 
--- ============================================================
--- カウンタートリガー関数（自動更新）
--- ============================================================
+CREATE TRIGGER trigger_update_map_spots_count
+    AFTER INSERT OR DELETE ON public.user_spots
+    FOR EACH ROW EXECUTE FUNCTION public.update_map_spots_count();
 
--- スポットのいいね数を自動更新
-CREATE OR REPLACE FUNCTION update_user_spot_likes_count()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' THEN
-        UPDATE user_spots SET likes_count = likes_count + 1 WHERE id = NEW.user_spot_id;
-        RETURN NEW;
-    ELSIF TG_OP = 'DELETE' THEN
-        UPDATE user_spots SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.user_spot_id;
-        RETURN OLD;
-    END IF;
-    RETURN NULL;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+CREATE TRIGGER trigger_update_images_count
+    AFTER INSERT OR DELETE ON public.images
+    FOR EACH ROW EXECUTE FUNCTION public.update_images_count();
 
--- スポットのコメント数を自動更新（トップレベルのみ）
-CREATE OR REPLACE FUNCTION update_user_spot_comments_count()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' THEN
-        IF NEW.parent_id IS NULL THEN
-            UPDATE user_spots SET comments_count = comments_count + 1 WHERE id = NEW.user_spot_id;
-        END IF;
-        RETURN NEW;
-    ELSIF TG_OP = 'DELETE' THEN
-        IF OLD.parent_id IS NULL THEN
-            UPDATE user_spots SET comments_count = GREATEST(0, comments_count - 1) WHERE id = OLD.user_spot_id;
-        END IF;
-        RETURN OLD;
-    END IF;
-    RETURN NULL;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- スポットのブックマーク数を自動更新
-CREATE OR REPLACE FUNCTION update_user_spot_bookmarks_count()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' THEN
-        UPDATE user_spots SET bookmarks_count = bookmarks_count + 1 WHERE id = NEW.user_spot_id;
-        RETURN NEW;
-    ELSIF TG_OP = 'DELETE' THEN
-        UPDATE user_spots SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = OLD.user_spot_id;
-        RETURN OLD;
-    END IF;
-    RETURN NULL;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- スポットの画像数を自動更新
-CREATE OR REPLACE FUNCTION update_user_spot_images_count()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' THEN
-        UPDATE user_spots SET images_count = images_count + 1 WHERE id = NEW.user_spot_id;
-        RETURN NEW;
-    ELSIF TG_OP = 'DELETE' THEN
-        UPDATE user_spots SET images_count = GREATEST(0, images_count - 1) WHERE id = OLD.user_spot_id;
-        RETURN OLD;
-    END IF;
-    RETURN NULL;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- ============================================================
--- RPC Functions（ビジネスロジック用）
--- ============================================================
-
-CREATE OR REPLACE FUNCTION count_user_spots_in_map(p_user_id UUID, p_map_id UUID)
-RETURNS INTEGER AS $$
-BEGIN
-    RETURN (
-        SELECT COUNT(*)::INTEGER
-        FROM user_spots
-        WHERE map_id = p_map_id
-    );
-END;
-$$ LANGUAGE plpgsql STABLE;
-
--- ============================================================
--- spot_tags (スポットとタグの関連)
--- ============================================================
-CREATE TABLE spot_tags (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_spot_id UUID NOT NULL REFERENCES user_spots(id) ON DELETE CASCADE,
-    tag_id UUID NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    UNIQUE(user_spot_id, tag_id)
-);
-
--- Indexes
-CREATE INDEX idx_spot_tags_tag_id ON spot_tags(tag_id);
-CREATE INDEX idx_spot_tags_user_spot_id ON spot_tags(user_spot_id);
-
--- RLS
-ALTER TABLE spot_tags ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "spot_tags_select_all" ON spot_tags FOR SELECT USING (true);
-CREATE POLICY "spot_tags_insert_own" ON spot_tags
-    FOR INSERT WITH CHECK (
-        EXISTS (SELECT 1 FROM user_spots WHERE id = user_spot_id AND user_id = auth.uid())
-    );
-CREATE POLICY "spot_tags_delete_own" ON spot_tags
-    FOR DELETE USING (
-        EXISTS (SELECT 1 FROM user_spots WHERE id = user_spot_id AND user_id = auth.uid())
-    );
-
--- Trigger: タグ使用回数の更新
-CREATE OR REPLACE FUNCTION update_tag_usage_count_for_spots()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' THEN
-        UPDATE tags SET usage_count = usage_count + 1 WHERE id = NEW.tag_id;
-        RETURN NEW;
-    ELSIF TG_OP = 'DELETE' THEN
-        UPDATE tags SET usage_count = GREATEST(0, usage_count - 1) WHERE id = OLD.tag_id;
-        RETURN OLD;
-    END IF;
-END;
-$$ LANGUAGE plpgsql;
+CREATE TRIGGER trigger_update_master_spot_favorites_count
+    AFTER INSERT OR DELETE ON public.master_spot_favorites
+    FOR EACH ROW EXECUTE FUNCTION public.update_master_spot_favorites_count();
 
 CREATE TRIGGER update_tag_usage_count_for_spots_trigger
-    AFTER INSERT OR DELETE ON spot_tags
-    FOR EACH ROW EXECUTE FUNCTION update_tag_usage_count_for_spots();
-
--- ============================================================
--- images (スポット画像)
--- ============================================================
-CREATE TABLE images (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_spot_id UUID NOT NULL REFERENCES user_spots(id) ON DELETE CASCADE,
-    local_path TEXT,
-    cloud_path TEXT,
-    width INTEGER,
-    height INTEGER,
-    file_size INTEGER,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-
--- Indexes
-CREATE INDEX idx_images_user_spot_id ON images(user_spot_id);
-
--- RLS
-ALTER TABLE images ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "images_select_public_or_own" ON images
-    FOR SELECT USING (
-        EXISTS (
-            SELECT 1 FROM user_spots us
-            JOIN maps m ON m.id = us.map_id
-            WHERE us.id = user_spot_id AND (m.is_public = true OR m.user_id = auth.uid())
-        )
-    );
-CREATE POLICY "images_insert_own" ON images
-    FOR INSERT WITH CHECK (
-        EXISTS (SELECT 1 FROM user_spots WHERE id = user_spot_id AND user_id = auth.uid())
-    );
-CREATE POLICY "images_delete_own" ON images
-    FOR DELETE USING (
-        EXISTS (SELECT 1 FROM user_spots WHERE id = user_spot_id AND user_id = auth.uid())
-    );
-
--- Trigger
-CREATE TRIGGER update_images_updated_at
-    BEFORE UPDATE ON images
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
-
--- Trigger: スポットの画像数を自動更新
-DROP TRIGGER IF EXISTS trigger_update_user_spot_images_count ON images;
-CREATE TRIGGER trigger_update_user_spot_images_count
-    AFTER INSERT OR DELETE ON images
-    FOR EACH ROW EXECUTE FUNCTION update_user_spot_images_count();
+    AFTER INSERT OR DELETE ON public.spot_tags
+    FOR EACH ROW EXECUTE FUNCTION public.update_tag_usage_count_for_spots();

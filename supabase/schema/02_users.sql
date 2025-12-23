@@ -1,13 +1,13 @@
 -- ============================================================
--- ユーザー関連
+-- ユーザー（users, follows, visits, schedules, view_history）
 -- ============================================================
--- テーブル: users, follows, user_notification_settings
+-- ユーザー情報とユーザー間のリレーション
 -- 最終更新: 2025-12-23
--- ソース: 000_initial_schema2.sql (pg_dump)
 
 -- ============================================================
--- users (ユーザー)
+-- users（ユーザー）
 -- ============================================================
+
 CREATE TABLE public.users (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     email text NOT NULL,
@@ -27,32 +27,32 @@ CREATE TABLE public.users (
 COMMENT ON COLUMN public.users.username IS 'ユーザー名（@で表示される識別子）';
 COMMENT ON COLUMN public.users.display_name IS '表示名（自由に設定できる名前）';
 
--- Primary Key & Unique
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_email_key UNIQUE (email);
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_username_key UNIQUE (username);
 
--- Indexes
-CREATE UNIQUE INDEX users_username_idx ON public.users(username);
-CREATE INDEX idx_users_email ON public.users(email);
-CREATE INDEX idx_users_is_premium ON public.users(is_premium);
-CREATE INDEX idx_users_push_token ON public.users(push_token) WHERE push_token IS NOT NULL;
-CREATE INDEX idx_users_username ON public.users(username);
+CREATE INDEX idx_users_email ON public.users USING btree (email);
+CREATE INDEX idx_users_is_premium ON public.users USING btree (is_premium);
+CREATE INDEX idx_users_push_token ON public.users USING btree (push_token) WHERE (push_token IS NOT NULL);
+CREATE INDEX idx_users_username ON public.users USING btree (username);
+CREATE UNIQUE INDEX users_username_idx ON public.users USING btree (username);
 
--- RLS
-ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "users_select_all" ON public.users FOR SELECT USING (true);
-CREATE POLICY "users_insert_own" ON public.users FOR INSERT WITH CHECK (id = auth.uid());
-CREATE POLICY "users_update_own" ON public.users FOR UPDATE USING (id = auth.uid());
-
--- Trigger
 CREATE TRIGGER update_users_updated_at
     BEFORE UPDATE ON public.users
     FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
+ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view users" ON public.users FOR SELECT USING (true);
+CREATE POLICY "Users can insert own profile" ON public.users
+    FOR INSERT TO authenticated WITH CHECK ((auth.uid() = id));
+CREATE POLICY "Users can update their own profile" ON public.users
+    FOR UPDATE TO authenticated USING ((auth.uid() = id));
+
 -- ============================================================
--- follows (フォロー)
+-- follows（フォロー関係）
 -- ============================================================
+
 CREATE TABLE public.follows (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     follower_id uuid NOT NULL,
@@ -60,103 +60,188 @@ CREATE TABLE public.follows (
     created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
--- Primary Key & Unique
 ALTER TABLE ONLY public.follows ADD CONSTRAINT follows_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.follows ADD CONSTRAINT follows_follower_id_followee_id_key UNIQUE (follower_id, followee_id);
+ALTER TABLE ONLY public.follows ADD CONSTRAINT follows_followee_id_fkey
+    FOREIGN KEY (followee_id) REFERENCES public.users(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.follows ADD CONSTRAINT follows_follower_id_fkey
+    FOREIGN KEY (follower_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
--- Foreign Keys
-ALTER TABLE ONLY public.follows ADD CONSTRAINT follows_followee_id_fkey FOREIGN KEY (followee_id) REFERENCES public.users(id) ON DELETE CASCADE;
-ALTER TABLE ONLY public.follows ADD CONSTRAINT follows_follower_id_fkey FOREIGN KEY (follower_id) REFERENCES public.users(id) ON DELETE CASCADE;
+CREATE INDEX idx_follows_followee_id ON public.follows USING btree (followee_id);
+CREATE INDEX idx_follows_follower_id ON public.follows USING btree (follower_id);
 
--- Indexes
-CREATE INDEX idx_follows_followee_id ON public.follows(followee_id);
-CREATE INDEX idx_follows_follower_id ON public.follows(follower_id);
-
--- RLS
 ALTER TABLE public.follows ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "follows_select_all" ON public.follows FOR SELECT USING (true);
-CREATE POLICY "follows_insert_own" ON public.follows FOR INSERT WITH CHECK (follower_id = auth.uid());
-CREATE POLICY "follows_delete_own" ON public.follows FOR DELETE USING (follower_id = auth.uid());
 
--- Trigger: フォロー通知
-CREATE FUNCTION public.create_follow_notification() RETURNS trigger
+CREATE POLICY "Follows are viewable by everyone" ON public.follows FOR SELECT USING (true);
+CREATE POLICY "Users can create their own follows" ON public.follows
+    FOR INSERT TO authenticated WITH CHECK ((follower_id = auth.uid()));
+CREATE POLICY "Users can delete their own follows" ON public.follows
+    FOR DELETE TO authenticated USING ((follower_id = auth.uid()));
+
+-- ============================================================
+-- visits（訪問記録）
+-- ============================================================
+
+CREATE TABLE public.visits (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    machi_id text NOT NULL,
+    visited_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+COMMENT ON TABLE public.visits IS 'ユーザーが訪問した街の記録（街ごとに1レコード、訪問有無のみ管理）';
+COMMENT ON COLUMN public.visits.machi_id IS '訪問した街（駅）のID';
+COMMENT ON COLUMN public.visits.visited_at IS '訪問した日時';
+
+ALTER TABLE ONLY public.visits ADD CONSTRAINT visits_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.visits ADD CONSTRAINT visits_user_id_machi_id_key UNIQUE (user_id, machi_id);
+ALTER TABLE ONLY public.visits ADD CONSTRAINT visits_machi_id_fkey
+    FOREIGN KEY (machi_id) REFERENCES public.machi(id);
+ALTER TABLE ONLY public.visits ADD CONSTRAINT visits_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+CREATE INDEX idx_visits_machi_id ON public.visits USING btree (machi_id);
+CREATE INDEX idx_visits_user_id ON public.visits USING btree (user_id);
+CREATE INDEX idx_visits_user_machi ON public.visits USING btree (user_id, machi_id);
+CREATE INDEX idx_visits_visited_at ON public.visits USING btree (visited_at DESC);
+
+-- ============================================================
+-- schedules（予定）
+-- ============================================================
+
+CREATE TABLE public.schedules (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    machi_id text NOT NULL,
+    scheduled_at timestamp with time zone NOT NULL,
+    title text NOT NULL,
+    memo text,
+    is_completed boolean DEFAULT false NOT NULL,
+    completed_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+COMMENT ON TABLE public.schedules IS 'ユーザーの予定（街への訪問予定など）';
+COMMENT ON COLUMN public.schedules.id IS '予定ID';
+COMMENT ON COLUMN public.schedules.user_id IS 'ユーザーID';
+COMMENT ON COLUMN public.schedules.machi_id IS '街ID';
+COMMENT ON COLUMN public.schedules.scheduled_at IS '予定日時';
+COMMENT ON COLUMN public.schedules.title IS '予定タイトル';
+COMMENT ON COLUMN public.schedules.memo IS 'メモ';
+COMMENT ON COLUMN public.schedules.is_completed IS '完了済みかどうか';
+COMMENT ON COLUMN public.schedules.completed_at IS '完了日時';
+
+ALTER TABLE ONLY public.schedules ADD CONSTRAINT schedules_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.schedules ADD CONSTRAINT schedules_machi_id_fkey
+    FOREIGN KEY (machi_id) REFERENCES public.machi(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.schedules ADD CONSTRAINT schedules_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+CREATE INDEX idx_schedules_machi_id ON public.schedules USING btree (machi_id);
+CREATE INDEX idx_schedules_scheduled_at ON public.schedules USING btree (scheduled_at);
+CREATE INDEX idx_schedules_user_id ON public.schedules USING btree (user_id);
+CREATE INDEX idx_schedules_user_scheduled ON public.schedules USING btree (user_id, scheduled_at);
+
+ALTER TABLE public.schedules ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY schedules_delete_own ON public.schedules FOR DELETE USING ((auth.uid() = user_id));
+CREATE POLICY schedules_insert_own ON public.schedules FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY schedules_select_own ON public.schedules FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY schedules_update_own ON public.schedules FOR UPDATE USING ((auth.uid() = user_id));
+
+-- ============================================================
+-- view_history（閲覧履歴）
+-- ============================================================
+
+CREATE TABLE public.view_history (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    map_id uuid NOT NULL,
+    viewed_at timestamp with time zone DEFAULT now() NOT NULL,
+    view_count integer DEFAULT 1 NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+COMMENT ON TABLE public.view_history IS '閲覧履歴（マップ）';
+COMMENT ON COLUMN public.view_history.user_id IS '閲覧したユーザーID';
+COMMENT ON COLUMN public.view_history.map_id IS '閲覧したマップID';
+COMMENT ON COLUMN public.view_history.viewed_at IS '最終閲覧日時';
+COMMENT ON COLUMN public.view_history.view_count IS '閲覧回数';
+
+ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_user_id_map_id_key UNIQUE (user_id, map_id);
+-- FK to maps is defined in 03_maps.sql
+
+CREATE INDEX idx_view_history_map_id ON public.view_history USING btree (map_id);
+CREATE INDEX idx_view_history_user_id ON public.view_history USING btree (user_id);
+CREATE INDEX idx_view_history_user_viewed ON public.view_history USING btree (user_id, viewed_at DESC);
+CREATE INDEX idx_view_history_viewed_at ON public.view_history USING btree (viewed_at DESC);
+
+ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can delete their own history" ON public.view_history
+    FOR DELETE USING ((auth.uid() = user_id));
+CREATE POLICY "Users can insert their own history" ON public.view_history
+    FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can update their own history" ON public.view_history
+    FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can view their own history" ON public.view_history
+    FOR SELECT USING ((auth.uid() = user_id));
+
+-- ============================================================
+-- 閲覧履歴関連の関数とトリガー
+-- ============================================================
+
+-- 閲覧履歴を記録
+CREATE FUNCTION public.record_map_view(p_user_id uuid, p_map_id uuid) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
 BEGIN
-  INSERT INTO notifications (user_id, actor_id, type)
-  VALUES (NEW.followee_id, NEW.follower_id, 'follow');
-
-  RETURN NEW;
+  INSERT INTO public.view_history (user_id, map_id, viewed_at, view_count)
+  VALUES (p_user_id, p_map_id, now(), 1)
+  ON CONFLICT (user_id, map_id)
+  DO UPDATE SET
+    viewed_at = now(),
+    view_count = view_history.view_count + 1,
+    updated_at = now();
 END;
 $$;
 
-CREATE TRIGGER on_follow_create_notification
-    AFTER INSERT ON public.follows
-    FOR EACH ROW EXECUTE FUNCTION public.create_follow_notification();
-
--- ============================================================
--- user_notification_settings (通知設定)
--- ============================================================
-CREATE TABLE public.user_notification_settings (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    user_id uuid NOT NULL,
-    push_enabled boolean DEFAULT true NOT NULL,
-    like_enabled boolean DEFAULT true NOT NULL,
-    comment_enabled boolean DEFAULT true NOT NULL,
-    follow_enabled boolean DEFAULT true NOT NULL,
-    system_enabled boolean DEFAULT true NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    email_enabled boolean DEFAULT false NOT NULL,
-    email_like_enabled boolean DEFAULT true NOT NULL,
-    email_comment_enabled boolean DEFAULT true NOT NULL,
-    email_follow_enabled boolean DEFAULT true NOT NULL,
-    email_system_enabled boolean DEFAULT true NOT NULL
-);
-
-COMMENT ON COLUMN public.user_notification_settings.email_enabled IS 'メール通知のマスター設定';
-COMMENT ON COLUMN public.user_notification_settings.email_like_enabled IS 'いいねのメール通知';
-COMMENT ON COLUMN public.user_notification_settings.email_comment_enabled IS 'コメントのメール通知';
-COMMENT ON COLUMN public.user_notification_settings.email_follow_enabled IS 'フォローのメール通知';
-COMMENT ON COLUMN public.user_notification_settings.email_system_enabled IS 'システムのメール通知';
-
--- Primary Key & Unique
-ALTER TABLE ONLY public.user_notification_settings ADD CONSTRAINT user_notification_settings_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.user_notification_settings ADD CONSTRAINT user_notification_settings_user_id_key UNIQUE (user_id);
-
--- Foreign Keys
-ALTER TABLE ONLY public.user_notification_settings ADD CONSTRAINT user_notification_settings_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
-
--- Indexes
-CREATE INDEX idx_user_notification_settings_user_id ON public.user_notification_settings(user_id);
-
--- RLS
-ALTER TABLE public.user_notification_settings ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "user_notification_settings_select_own" ON public.user_notification_settings
-    FOR SELECT USING (user_id = auth.uid());
-CREATE POLICY "user_notification_settings_insert_own" ON public.user_notification_settings
-    FOR INSERT WITH CHECK (user_id = auth.uid());
-CREATE POLICY "user_notification_settings_update_own" ON public.user_notification_settings
-    FOR UPDATE USING (user_id = auth.uid());
-
--- Trigger: デフォルト通知設定の作成
-CREATE FUNCTION public.create_default_notification_settings() RETURNS trigger
+-- 閲覧履歴を100件に制限するクリーンアップ関数
+CREATE FUNCTION public.cleanup_old_view_history() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
+DECLARE
+  history_count INTEGER;
 BEGIN
-  INSERT INTO user_notification_settings (user_id)
-  VALUES (NEW.id)
-  ON CONFLICT (user_id) DO NOTHING;
+  SELECT COUNT(*) INTO history_count
+  FROM public.view_history
+  WHERE user_id = NEW.user_id;
+
+  -- 110件を超えたら100件まで削除（10件ごとにまとめて削除）
+  IF history_count > 110 THEN
+    DELETE FROM public.view_history
+    WHERE id IN (
+      SELECT id FROM public.view_history
+      WHERE user_id = NEW.user_id
+      ORDER BY viewed_at DESC
+      OFFSET 100
+    );
+  END IF;
+
   RETURN NEW;
 END;
 $$;
 
-CREATE TRIGGER trigger_create_default_notification_settings
-    AFTER INSERT ON public.users
-    FOR EACH ROW EXECUTE FUNCTION public.create_default_notification_settings();
+COMMENT ON FUNCTION public.cleanup_old_view_history()
+IS '閲覧履歴を100件に制限するクリーンアップ関数（閾値方式: 110件超で削除）';
 
--- Trigger: updated_at
-CREATE FUNCTION public.update_notification_settings_updated_at() RETURNS trigger
+-- 閲覧履歴のupdated_atを更新
+CREATE FUNCTION public.update_view_history_updated_at() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -165,15 +250,19 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER trigger_update_notification_settings_updated_at
-    BEFORE UPDATE ON public.user_notification_settings
-    FOR EACH ROW EXECUTE FUNCTION public.update_notification_settings_updated_at();
+CREATE TRIGGER trigger_cleanup_view_history
+    AFTER INSERT OR UPDATE ON public.view_history
+    FOR EACH ROW EXECUTE FUNCTION public.cleanup_old_view_history();
+
+CREATE TRIGGER trigger_update_view_history_updated_at
+    BEFORE UPDATE ON public.view_history
+    FOR EACH ROW EXECUTE FUNCTION public.update_view_history_updated_at();
 
 -- ============================================================
--- RPC Functions
+-- プレミアム関連関数
 -- ============================================================
 
--- プレミアム会員チェック
+-- ユーザーがプレミアムかどうかをチェック
 CREATE FUNCTION public.is_user_premium(p_user_id uuid) RETURNS boolean
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
@@ -186,8 +275,12 @@ BEGIN
 END;
 $$;
 
--- プレミアム状態更新
-CREATE FUNCTION public.update_user_premium_status(p_user_id uuid, p_is_premium boolean, p_expires_at timestamp with time zone DEFAULT NULL::timestamp with time zone) RETURNS void
+-- プレミアムステータスを更新
+CREATE FUNCTION public.update_user_premium_status(
+    p_user_id uuid,
+    p_is_premium boolean,
+    p_expires_at timestamp with time zone DEFAULT NULL
+) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
 BEGIN
@@ -205,7 +298,7 @@ BEGIN
 END;
 $$;
 
--- 期限切れプレミアム無効化
+-- 期限切れのプレミアムサブスクリプションを無効化
 CREATE FUNCTION public.expire_premium_subscriptions() RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
@@ -226,75 +319,11 @@ BEGIN
 END;
 $$;
 
--- 通知設定取得
-CREATE FUNCTION public.get_notification_settings() RETURNS public.user_notification_settings
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-DECLARE
-  settings user_notification_settings;
-BEGIN
-  -- 既存の設定を取得
-  SELECT * INTO settings
-  FROM user_notification_settings
-  WHERE user_id = auth.uid();
+-- ============================================================
+-- プッシュトークン関連関数
+-- ============================================================
 
-  -- なければ作成
-  IF settings IS NULL THEN
-    INSERT INTO user_notification_settings (user_id)
-    VALUES (auth.uid())
-    RETURNING * INTO settings;
-  END IF;
-
-  RETURN settings;
-END;
-$$;
-
--- 通知設定更新
-CREATE FUNCTION public.update_notification_settings(
-    p_push_enabled boolean DEFAULT NULL::boolean,
-    p_like_enabled boolean DEFAULT NULL::boolean,
-    p_comment_enabled boolean DEFAULT NULL::boolean,
-    p_follow_enabled boolean DEFAULT NULL::boolean,
-    p_system_enabled boolean DEFAULT NULL::boolean,
-    p_email_enabled boolean DEFAULT NULL::boolean,
-    p_email_like_enabled boolean DEFAULT NULL::boolean,
-    p_email_comment_enabled boolean DEFAULT NULL::boolean,
-    p_email_follow_enabled boolean DEFAULT NULL::boolean,
-    p_email_system_enabled boolean DEFAULT NULL::boolean
-) RETURNS public.user_notification_settings
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-DECLARE
-  settings user_notification_settings;
-BEGIN
-  -- 設定がなければ作成
-  INSERT INTO user_notification_settings (user_id)
-  VALUES (auth.uid())
-  ON CONFLICT (user_id) DO NOTHING;
-
-  -- 更新（NULLの場合は現在値を維持）
-  UPDATE user_notification_settings
-  SET
-    -- プッシュ通知
-    push_enabled = COALESCE(p_push_enabled, push_enabled),
-    like_enabled = COALESCE(p_like_enabled, like_enabled),
-    comment_enabled = COALESCE(p_comment_enabled, comment_enabled),
-    follow_enabled = COALESCE(p_follow_enabled, follow_enabled),
-    system_enabled = COALESCE(p_system_enabled, system_enabled),
-    -- メール通知
-    email_enabled = COALESCE(p_email_enabled, email_enabled),
-    email_like_enabled = COALESCE(p_email_like_enabled, email_like_enabled),
-    email_comment_enabled = COALESCE(p_email_comment_enabled, email_comment_enabled),
-    email_follow_enabled = COALESCE(p_email_follow_enabled, email_follow_enabled),
-    email_system_enabled = COALESCE(p_email_system_enabled, email_system_enabled)
-  WHERE user_id = auth.uid()
-  RETURNING * INTO settings;
-
-  RETURN settings;
-END;
-$$;
-
--- プッシュトークン更新
+-- プッシュトークンを更新
 CREATE FUNCTION public.update_push_token(token text) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
@@ -307,7 +336,7 @@ BEGIN
 END;
 $$;
 
--- プッシュトークンクリア
+-- プッシュトークンをクリア
 CREATE FUNCTION public.clear_push_token() RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
