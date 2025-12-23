@@ -125,7 +125,7 @@ CREATE POLICY maps_insert_own ON public.maps
 CREATE POLICY maps_delete_own ON public.maps
     FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 CREATE POLICY maps_update_own ON public.maps
-    FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
+    FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
 
 -- view_history の外部キーを追加
 ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_map_id_fkey
@@ -201,7 +201,8 @@ CREATE POLICY map_labels_insert_own ON public.map_labels
 CREATE POLICY map_labels_delete_own ON public.map_labels
     FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
 CREATE POLICY map_labels_update_own ON public.map_labels
-    FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
+    FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))))
+    WITH CHECK ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
 
 -- ============================================================
 -- カウンター更新トリガー関数

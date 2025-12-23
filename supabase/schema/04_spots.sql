@@ -162,7 +162,7 @@ CREATE POLICY user_spots_insert_own ON public.user_spots
 CREATE POLICY user_spots_delete_own ON public.user_spots
     FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 CREATE POLICY user_spots_update_own ON public.user_spots
-    FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
+    FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
 CREATE POLICY user_spots_insert_with_limit ON public.user_spots
     FOR INSERT WITH CHECK (((auth.uid() = user_id) AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))));
 

@@ -45,7 +45,7 @@ CREATE POLICY user_notification_settings_select_own ON public.user_notification_
 CREATE POLICY user_notification_settings_insert_own ON public.user_notification_settings
     FOR INSERT WITH CHECK ((auth.uid() = user_id));
 CREATE POLICY user_notification_settings_update_own ON public.user_notification_settings
-    FOR UPDATE USING ((auth.uid() = user_id));
+    FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 
 -- ============================================================
 -- notifications（通知）
@@ -99,7 +99,7 @@ CREATE POLICY notifications_select_own ON public.notifications
 CREATE POLICY notifications_insert_system ON public.notifications
     FOR INSERT WITH CHECK (true);
 CREATE POLICY notifications_update_own ON public.notifications
-    FOR UPDATE USING ((auth.uid() = user_id));
+    FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 CREATE POLICY notifications_delete_own ON public.notifications
     FOR DELETE USING ((auth.uid() = user_id));
 

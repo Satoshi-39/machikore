@@ -44,7 +44,7 @@ CREATE POLICY users_select_all ON public.users FOR SELECT USING (true);
 CREATE POLICY users_insert_own ON public.users
     FOR INSERT TO authenticated WITH CHECK ((auth.uid() = id));
 CREATE POLICY users_update_own ON public.users
-    FOR UPDATE TO authenticated USING ((auth.uid() = id));
+    FOR UPDATE TO authenticated USING ((auth.uid() = id)) WITH CHECK ((auth.uid() = id));
 
 -- ============================================================
 -- follows（フォロー関係）
@@ -147,7 +147,7 @@ ALTER TABLE public.schedules ENABLE ROW LEVEL SECURITY;
 CREATE POLICY schedules_delete_own ON public.schedules FOR DELETE USING ((auth.uid() = user_id));
 CREATE POLICY schedules_insert_own ON public.schedules FOR INSERT WITH CHECK ((auth.uid() = user_id));
 CREATE POLICY schedules_select_own ON public.schedules FOR SELECT USING ((auth.uid() = user_id));
-CREATE POLICY schedules_update_own ON public.schedules FOR UPDATE USING ((auth.uid() = user_id));
+CREATE POLICY schedules_update_own ON public.schedules FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 
 -- ============================================================
 -- view_history（閲覧履歴）

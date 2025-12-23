@@ -70,7 +70,7 @@ CREATE POLICY bookmark_folders_select_own ON public.bookmark_folders
 CREATE POLICY bookmark_folders_insert_own ON public.bookmark_folders
     FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
 CREATE POLICY bookmark_folders_update_own ON public.bookmark_folders
-    FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
+    FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
 CREATE POLICY bookmark_folders_delete_own ON public.bookmark_folders
     FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 
@@ -162,7 +162,7 @@ CREATE POLICY comments_select_all ON public.comments FOR SELECT USING (true);
 CREATE POLICY comments_insert_own ON public.comments
     FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
 CREATE POLICY comments_update_own ON public.comments
-    FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
+    FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
 CREATE POLICY comments_delete_own ON public.comments
     FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 

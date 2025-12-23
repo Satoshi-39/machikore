@@ -42,7 +42,7 @@ CREATE POLICY collections_select_public_or_own ON public.collections
 CREATE POLICY collections_insert_own ON public.collections
     FOR INSERT WITH CHECK ((auth.uid() = user_id));
 CREATE POLICY collections_update_own ON public.collections
-    FOR UPDATE USING ((auth.uid() = user_id));
+    FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 CREATE POLICY collections_delete_own ON public.collections
     FOR DELETE USING ((auth.uid() = user_id));
 
@@ -76,7 +76,8 @@ CREATE POLICY collection_maps_select_public_or_own ON public.collection_maps
 CREATE POLICY collection_maps_insert_own ON public.collection_maps
     FOR INSERT WITH CHECK ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
 CREATE POLICY collection_maps_update_own ON public.collection_maps
-    FOR UPDATE USING ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
+    FOR UPDATE USING ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))))
+    WITH CHECK ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
 CREATE POLICY collection_maps_delete_own ON public.collection_maps
     FOR DELETE USING ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
 
