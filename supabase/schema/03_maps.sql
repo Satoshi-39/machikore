@@ -242,8 +242,8 @@ CREATE TRIGGER update_tag_usage_count_trigger
 -- カテゴリ別人気タグ取得関数
 -- ============================================================
 
-CREATE FUNCTION public.get_popular_tags_by_category(p_category_id uuid, p_limit integer DEFAULT 10)
-RETURNS TABLE(id uuid, name text, name_translations jsonb, is_official boolean, usage_count bigint, created_at timestamp with time zone, updated_at timestamp with time zone)
+CREATE FUNCTION public.get_popular_tags_by_category(p_category_id text, p_limit integer DEFAULT 10)
+RETURNS TABLE(id uuid, name text, name_translations jsonb, slug text, usage_count bigint, created_at timestamp with time zone, updated_at timestamp with time zone)
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
 BEGIN
@@ -252,7 +252,7 @@ BEGIN
     t.id,
     t.name,
     t.name_translations,
-    t.is_official,
+    t.slug,
     COUNT(mt.id) AS usage_count,
     t.created_at,
     t.updated_at
@@ -261,7 +261,7 @@ BEGIN
   INNER JOIN maps m ON m.id = mt.map_id
   WHERE m.category_id = p_category_id
     AND m.is_public = true
-  GROUP BY t.id, t.name, t.name_translations, t.is_official, t.created_at, t.updated_at
+  GROUP BY t.id, t.name, t.name_translations, t.slug, t.created_at, t.updated_at
   ORDER BY usage_count DESC, t.name ASC
   LIMIT p_limit;
 END;
