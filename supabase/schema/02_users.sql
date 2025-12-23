@@ -176,7 +176,6 @@ ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_user_id_map_id_
 CREATE INDEX idx_view_history_map_id ON public.view_history USING btree (map_id);
 CREATE INDEX idx_view_history_user_id ON public.view_history USING btree (user_id);
 CREATE INDEX idx_view_history_user_viewed ON public.view_history USING btree (user_id, viewed_at DESC);
-CREATE INDEX idx_view_history_viewed_at ON public.view_history USING btree (viewed_at DESC);
 
 ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
 
