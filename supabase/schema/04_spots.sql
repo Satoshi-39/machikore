@@ -149,7 +149,6 @@ CREATE INDEX idx_user_spots_machi_id ON public.user_spots USING btree (machi_id)
 CREATE INDEX idx_user_spots_map_id ON public.user_spots USING btree (map_id);
 CREATE INDEX idx_user_spots_master_spot_id ON public.user_spots USING btree (master_spot_id);
 CREATE INDEX idx_user_spots_prefecture_id ON public.user_spots USING btree (prefecture_id);
-CREATE INDEX idx_user_spots_prefecture_map ON public.user_spots USING btree (prefecture_id, map_id);
 CREATE INDEX idx_user_spots_user_id ON public.user_spots USING btree (user_id);
 
 CREATE TRIGGER update_user_spots_updated_at
