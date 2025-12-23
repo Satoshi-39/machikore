@@ -10,7 +10,6 @@
 
 CREATE TABLE public.categories (
     id text NOT NULL,
-    slug text NOT NULL,
     name text NOT NULL,
     name_translations jsonb,
     display_order integer DEFAULT 0 NOT NULL,
@@ -19,10 +18,9 @@ CREATE TABLE public.categories (
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
-COMMENT ON TABLE public.categories IS 'マップカテゴリ（グルメ、旅行など）';
+COMMENT ON TABLE public.categories IS 'マップカテゴリ（グルメ、旅行など）。idはURL用のslugとしても使用。';
 
 ALTER TABLE ONLY public.categories ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.categories ADD CONSTRAINT categories_slug_key UNIQUE (slug);
 
 CREATE INDEX idx_categories_display_order ON public.categories USING btree (display_order);
 CREATE INDEX idx_categories_is_active ON public.categories USING btree (is_active);

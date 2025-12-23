@@ -35,6 +35,7 @@ export async function getCategories(): Promise<Category[]> {
 
 /**
  * IDでカテゴリを取得
+ * 注意: idはURL用のslugとしても使用可能（例: "food", "travel"）
  */
 export async function getCategoryById(categoryId: string): Promise<Category | null> {
   const { data, error } = await supabase
@@ -48,26 +49,6 @@ export async function getCategoryById(categoryId: string): Promise<Category | nu
       return null;
     }
     handleSupabaseError('getCategoryById', error);
-  }
-
-  return data;
-}
-
-/**
- * slugでカテゴリを取得
- */
-export async function getCategoryBySlug(slug: string): Promise<Category | null> {
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*')
-    .eq('slug', slug)
-    .single();
-
-  if (error) {
-    if (error.code === 'PGRST116') {
-      return null;
-    }
-    handleSupabaseError('getCategoryBySlug', error);
   }
 
   return data;
