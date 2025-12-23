@@ -258,7 +258,6 @@ CREATE TRIGGER update_view_history_updated_at
 -- そのため、auth.uid() による認証チェックは行っていません。
 
 -- ユーザーがプレミアムかどうかをチェック
--- 用途: RLSポリシー内でスポット数制限の判定に使用（user_spots_insert_with_limit）
 CREATE FUNCTION public.is_user_premium(p_user_id uuid) RETURNS boolean
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
@@ -271,8 +270,10 @@ BEGIN
 END;
 $$;
 
+COMMENT ON FUNCTION public.is_user_premium(uuid)
+IS 'RLSポリシー内でスポット数制限の判定に使用（user_spots_insert_with_limit）。サーバーサイドから呼び出すため認証チェック不要。';
+
 -- プレミアムステータスを更新
--- 用途: RevenueCat Webhook（Edge Function）から課金状態変更時に呼び出し
 CREATE FUNCTION public.update_user_premium_status(
     p_user_id uuid,
     p_is_premium boolean,
@@ -295,8 +296,10 @@ BEGIN
 END;
 $$;
 
+COMMENT ON FUNCTION public.update_user_premium_status(uuid, boolean, timestamp with time zone)
+IS 'RevenueCat Webhook（Edge Function）から課金状態変更時に呼び出し。Service Role Keyで実行するため認証チェック不要。';
+
 -- 期限切れのプレミアムサブスクリプションを無効化
--- 用途: cronジョブで定期実行し、期限切れユーザーのプレミアムを解除
 CREATE FUNCTION public.expire_premium_subscriptions() RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
@@ -316,6 +319,9 @@ BEGIN
   RETURN affected_rows;
 END;
 $$;
+
+COMMENT ON FUNCTION public.expire_premium_subscriptions()
+IS 'cronジョブで定期実行し、期限切れユーザーのプレミアムを解除。Service Role Keyで実行するため認証チェック不要。';
 
 -- ============================================================
 -- プッシュトークン関連関数
