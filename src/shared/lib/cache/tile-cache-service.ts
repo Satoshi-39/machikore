@@ -350,7 +350,6 @@ function toSQLiteTransportHub(hub: Record<string, unknown>): TransportHubRow {
     latitude: hub.latitude as number,
     longitude: hub.longitude as number,
     tile_id: hub.tile_id as string,
-    country_code: (hub.country_code as string) || 'jp',
     created_at: (hub.created_at as string) || now,
     updated_at: (hub.updated_at as string) || now,
   };
