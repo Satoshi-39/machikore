@@ -120,13 +120,13 @@ CREATE TRIGGER update_maps_updated_at
 
 ALTER TABLE public.maps ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Public maps are viewable by anyone" ON public.maps
+CREATE POLICY maps_select_public_or_own ON public.maps
     FOR SELECT USING (((is_public = true) OR ((auth.uid() IS NOT NULL) AND (user_id = auth.uid()))));
-CREATE POLICY "Users can create their own maps" ON public.maps
+CREATE POLICY maps_insert_own ON public.maps
     FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-CREATE POLICY "Users can delete their own maps" ON public.maps
+CREATE POLICY maps_delete_own ON public.maps
     FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-CREATE POLICY "Users can update their own maps" ON public.maps
+CREATE POLICY maps_update_own ON public.maps
     FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
 
 -- view_history の外部キーを追加
@@ -158,11 +158,11 @@ CREATE INDEX idx_map_tags_tag_id ON public.map_tags USING btree (tag_id);
 
 ALTER TABLE public.map_tags ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY map_tags_delete_policy ON public.map_tags
+CREATE POLICY map_tags_delete_own ON public.map_tags
     FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_tags.map_id) AND (maps.user_id = auth.uid())))));
-CREATE POLICY map_tags_insert_policy ON public.map_tags
+CREATE POLICY map_tags_insert_own ON public.map_tags
     FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_tags.map_id) AND (maps.user_id = auth.uid())))));
-CREATE POLICY map_tags_select_policy ON public.map_tags FOR SELECT USING (true);
+CREATE POLICY map_tags_select_all ON public.map_tags FOR SELECT USING (true);
 
 -- ============================================================
 -- map_labels（マップラベル）
@@ -196,13 +196,13 @@ CREATE TRIGGER update_map_labels_updated_at
 
 ALTER TABLE public.map_labels ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Map labels are viewable if map is viewable" ON public.map_labels
+CREATE POLICY map_labels_select_public_or_own ON public.map_labels
     FOR SELECT TO authenticated USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND ((maps.is_public = true) OR (maps.user_id = auth.uid()))))));
-CREATE POLICY "Users can create labels in their own maps" ON public.map_labels
+CREATE POLICY map_labels_insert_own ON public.map_labels
     FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
-CREATE POLICY "Users can delete labels in their own maps" ON public.map_labels
+CREATE POLICY map_labels_delete_own ON public.map_labels
     FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
-CREATE POLICY "Users can update labels in their own maps" ON public.map_labels
+CREATE POLICY map_labels_update_own ON public.map_labels
     FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
 
 -- ============================================================

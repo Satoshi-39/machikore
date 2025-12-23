@@ -50,7 +50,7 @@ CREATE TRIGGER update_featured_carousel_items_updated_at
 
 ALTER TABLE public.featured_carousel_items ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY featured_carousel_items_select_policy ON public.featured_carousel_items
+CREATE POLICY featured_carousel_items_select_active ON public.featured_carousel_items
     FOR SELECT TO authenticated, anon USING (((is_active = true) AND ((starts_at IS NULL) OR (starts_at <= now())) AND ((ends_at IS NULL) OR (ends_at > now()))));
 
 -- ============================================================
@@ -90,7 +90,7 @@ CREATE TRIGGER update_category_featured_maps_updated_at
 
 ALTER TABLE public.category_featured_maps ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY category_featured_maps_select_policy ON public.category_featured_maps FOR SELECT USING ((is_active = true));
+CREATE POLICY category_featured_maps_select_active ON public.category_featured_maps FOR SELECT USING ((is_active = true));
 
 -- ============================================================
 -- category_featured_tags（カテゴリ別おすすめタグ）
@@ -129,7 +129,7 @@ CREATE TRIGGER update_category_featured_tags_updated_at
 
 ALTER TABLE public.category_featured_tags ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY category_featured_tags_select_policy ON public.category_featured_tags FOR SELECT USING ((is_active = true));
+CREATE POLICY category_featured_tags_select_active ON public.category_featured_tags FOR SELECT USING ((is_active = true));
 
 -- ============================================================
 -- system_announcements（システムお知らせ）
@@ -153,7 +153,7 @@ CREATE INDEX idx_system_announcements_published ON public.system_announcements U
 
 ALTER TABLE public.system_announcements ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Anyone can view active announcements" ON public.system_announcements
+CREATE POLICY system_announcements_select_active ON public.system_announcements
     FOR SELECT USING (((is_active = true) AND ((expires_at IS NULL) OR (expires_at > now()))));
 
 -- ============================================================
@@ -177,9 +177,9 @@ ALTER TABLE ONLY public.system_announcement_reads ADD CONSTRAINT user_announceme
 
 ALTER TABLE public.system_announcement_reads ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can delete own announcement reads" ON public.system_announcement_reads
-    FOR DELETE USING ((auth.uid() = user_id));
-CREATE POLICY "Users can insert own announcement reads" ON public.system_announcement_reads
-    FOR INSERT WITH CHECK ((auth.uid() = user_id));
-CREATE POLICY "Users can view own announcement reads" ON public.system_announcement_reads
+CREATE POLICY system_announcement_reads_select_own ON public.system_announcement_reads
     FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY system_announcement_reads_insert_own ON public.system_announcement_reads
+    FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY system_announcement_reads_delete_own ON public.system_announcement_reads
+    FOR DELETE USING ((auth.uid() = user_id));

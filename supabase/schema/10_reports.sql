@@ -56,7 +56,7 @@ CREATE TRIGGER update_reports_updated_at
 
 ALTER TABLE public.reports ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can create reports" ON public.reports
-    FOR INSERT TO authenticated WITH CHECK ((auth.uid() = reporter_id));
-CREATE POLICY "Users can view own reports" ON public.reports
+CREATE POLICY reports_select_own ON public.reports
     FOR SELECT TO authenticated USING ((auth.uid() = reporter_id));
+CREATE POLICY reports_insert_own ON public.reports
+    FOR INSERT TO authenticated WITH CHECK ((auth.uid() = reporter_id));

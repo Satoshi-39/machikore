@@ -43,8 +43,8 @@ CREATE TRIGGER update_master_spots_updated_at
 
 ALTER TABLE public.master_spots ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Anyone can view master spots" ON public.master_spots FOR SELECT USING (true);
-CREATE POLICY "Authenticated users can create master spots" ON public.master_spots
+CREATE POLICY master_spots_select_all ON public.master_spots FOR SELECT USING (true);
+CREATE POLICY master_spots_insert_authenticated ON public.master_spots
     FOR INSERT TO authenticated WITH CHECK (true);
 
 -- ============================================================
@@ -71,11 +71,11 @@ CREATE INDEX idx_master_spot_favorites_user_id ON public.master_spot_favorites U
 
 ALTER TABLE public.master_spot_favorites ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can delete own favorites" ON public.master_spot_favorites
+CREATE POLICY master_spot_favorites_delete_own ON public.master_spot_favorites
     FOR DELETE USING ((auth.uid() = user_id));
-CREATE POLICY "Users can insert own favorites" ON public.master_spot_favorites
+CREATE POLICY master_spot_favorites_insert_own ON public.master_spot_favorites
     FOR INSERT WITH CHECK ((auth.uid() = user_id));
-CREATE POLICY "Users can view own favorites" ON public.master_spot_favorites
+CREATE POLICY master_spot_favorites_select_own ON public.master_spot_favorites
     FOR SELECT USING ((auth.uid() = user_id));
 
 -- ============================================================
@@ -155,13 +155,13 @@ CREATE TRIGGER update_user_spots_updated_at
 
 ALTER TABLE public.user_spots ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "User spots are viewable if map is public or own" ON public.user_spots
+CREATE POLICY user_spots_select_public_or_own ON public.user_spots
     FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = user_spots.map_id) AND ((maps.is_public = true) OR (maps.user_id = auth.uid()))))));
-CREATE POLICY "Users can create spots in their own maps" ON public.user_spots
+CREATE POLICY user_spots_insert_own ON public.user_spots
     FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid())))));
-CREATE POLICY "Users can delete their own spots" ON public.user_spots
+CREATE POLICY user_spots_delete_own ON public.user_spots
     FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-CREATE POLICY "Users can update their own spots" ON public.user_spots
+CREATE POLICY user_spots_update_own ON public.user_spots
     FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
 CREATE POLICY user_spots_insert_with_limit ON public.user_spots
     FOR INSERT WITH CHECK (((auth.uid() = user_id) AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))));
@@ -191,11 +191,11 @@ CREATE INDEX idx_images_user_spot_id ON public.images USING btree (user_spot_id)
 
 ALTER TABLE public.images ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Images are viewable if spot is public or own" ON public.images
+CREATE POLICY images_select_public_or_own ON public.images
     FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.user_spots us JOIN public.maps m ON ((m.id = us.map_id)) WHERE ((us.id = images.user_spot_id) AND ((m.is_public = true) OR (m.user_id = auth.uid()))))));
-CREATE POLICY "Users can create images in their own spots" ON public.images
+CREATE POLICY images_insert_own ON public.images
     FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid())))));
-CREATE POLICY "Users can delete images in their own spots" ON public.images
+CREATE POLICY images_delete_own ON public.images
     FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid())))));
 
 -- ============================================================
@@ -221,11 +221,11 @@ CREATE INDEX idx_spot_tags_user_spot_id ON public.spot_tags USING btree (user_sp
 
 ALTER TABLE public.spot_tags ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY spot_tags_delete_policy ON public.spot_tags
+CREATE POLICY spot_tags_delete_own ON public.spot_tags
     FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.user_spots WHERE ((user_spots.id = spot_tags.user_spot_id) AND (user_spots.user_id = auth.uid())))));
-CREATE POLICY spot_tags_insert_policy ON public.spot_tags
+CREATE POLICY spot_tags_insert_own ON public.spot_tags
     FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.user_spots WHERE ((user_spots.id = spot_tags.user_spot_id) AND (user_spots.user_id = auth.uid())))));
-CREATE POLICY spot_tags_select_policy ON public.spot_tags FOR SELECT USING (true);
+CREATE POLICY spot_tags_select_all ON public.spot_tags FOR SELECT USING (true);
 
 -- ============================================================
 -- スポット関連のトリガー関数

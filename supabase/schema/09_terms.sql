@@ -38,7 +38,7 @@ CREATE INDEX idx_terms_versions_type_effective ON public.terms_versions USING bt
 
 ALTER TABLE public.terms_versions ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY terms_versions_select_policy ON public.terms_versions FOR SELECT USING (true);
+CREATE POLICY terms_versions_select_all ON public.terms_versions FOR SELECT USING (true);
 
 -- ============================================================
 -- terms_agreements（利用規約同意履歴）
@@ -77,7 +77,7 @@ CREATE INDEX idx_terms_agreements_user_id ON public.terms_agreements USING btree
 
 ALTER TABLE public.terms_agreements ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY terms_agreements_insert_own_policy ON public.terms_agreements
-    FOR INSERT WITH CHECK ((auth.uid() = user_id));
-CREATE POLICY terms_agreements_select_own_policy ON public.terms_agreements
+CREATE POLICY terms_agreements_select_own ON public.terms_agreements
     FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY terms_agreements_insert_own ON public.terms_agreements
+    FOR INSERT WITH CHECK ((auth.uid() = user_id));

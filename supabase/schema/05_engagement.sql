@@ -31,14 +31,11 @@ CREATE INDEX idx_likes_user_spot_id ON public.likes USING btree (user_spot_id);
 
 ALTER TABLE public.likes ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Likes are viewable by everyone" ON public.likes FOR SELECT TO authenticated USING (true);
-CREATE POLICY "Users can create their own likes" ON public.likes
+CREATE POLICY likes_select_all ON public.likes FOR SELECT USING (true);
+CREATE POLICY likes_insert_own ON public.likes
     FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-CREATE POLICY "Users can delete their own likes" ON public.likes
+CREATE POLICY likes_delete_own ON public.likes
     FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-CREATE POLICY likes_delete_policy ON public.likes FOR DELETE USING ((auth.uid() = user_id));
-CREATE POLICY likes_insert_policy ON public.likes FOR INSERT WITH CHECK ((auth.uid() = user_id));
-CREATE POLICY likes_select_policy ON public.likes FOR SELECT USING (true);
 
 -- ============================================================
 -- bookmark_folders（ブックマークフォルダ）
@@ -68,14 +65,14 @@ CREATE TRIGGER update_bookmark_folders_updated_at
 
 ALTER TABLE public.bookmark_folders ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can create their own bookmark folders" ON public.bookmark_folders
-    FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-CREATE POLICY "Users can delete their own bookmark folders" ON public.bookmark_folders
-    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-CREATE POLICY "Users can update their own bookmark folders" ON public.bookmark_folders
-    FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
-CREATE POLICY "Users can view their own bookmark folders" ON public.bookmark_folders
+CREATE POLICY bookmark_folders_select_own ON public.bookmark_folders
     FOR SELECT TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY bookmark_folders_insert_own ON public.bookmark_folders
+    FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+CREATE POLICY bookmark_folders_update_own ON public.bookmark_folders
+    FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY bookmark_folders_delete_own ON public.bookmark_folders
+    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 
 -- ============================================================
 -- bookmarks（ブックマーク）
@@ -108,12 +105,12 @@ CREATE INDEX idx_bookmarks_user_spot_id ON public.bookmarks USING btree (user_sp
 
 ALTER TABLE public.bookmarks ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can create their own bookmarks" ON public.bookmarks
-    FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-CREATE POLICY "Users can delete their own bookmarks" ON public.bookmarks
-    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-CREATE POLICY "Users can view their own bookmarks" ON public.bookmarks
+CREATE POLICY bookmarks_select_own ON public.bookmarks
     FOR SELECT TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY bookmarks_insert_own ON public.bookmarks
+    FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+CREATE POLICY bookmarks_delete_own ON public.bookmarks
+    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 
 -- ============================================================
 -- comments（コメント）
@@ -161,13 +158,13 @@ CREATE TRIGGER update_comments_updated_at
 
 ALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Comments are viewable by everyone" ON public.comments FOR SELECT TO authenticated USING (true);
-CREATE POLICY "Users can create comments" ON public.comments
+CREATE POLICY comments_select_all ON public.comments FOR SELECT USING (true);
+CREATE POLICY comments_insert_own ON public.comments
     FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-CREATE POLICY "Users can delete their own comments" ON public.comments
-    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-CREATE POLICY "Users can update their own comments" ON public.comments
+CREATE POLICY comments_update_own ON public.comments
     FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY comments_delete_own ON public.comments
+    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 
 -- ============================================================
 -- comment_likes（コメントいいね）

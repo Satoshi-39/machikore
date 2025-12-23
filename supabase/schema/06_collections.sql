@@ -37,10 +37,14 @@ CREATE TRIGGER update_collections_updated_at
 
 ALTER TABLE public.collections ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Public collections are viewable by everyone" ON public.collections
+CREATE POLICY collections_select_public_or_own ON public.collections
     FOR SELECT USING (((is_public = true) OR (auth.uid() = user_id)));
-CREATE POLICY "Users can manage own collections" ON public.collections
-    USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY collections_insert_own ON public.collections
+    FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY collections_update_own ON public.collections
+    FOR UPDATE USING ((auth.uid() = user_id));
+CREATE POLICY collections_delete_own ON public.collections
+    FOR DELETE USING ((auth.uid() = user_id));
 
 -- ============================================================
 -- collection_maps（コレクションとマップの中間テーブル）
@@ -67,11 +71,14 @@ CREATE INDEX idx_collection_maps_map_id ON public.collection_maps USING btree (m
 
 ALTER TABLE public.collection_maps ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Collection maps viewable if collection is viewable" ON public.collection_maps
+CREATE POLICY collection_maps_select_public_or_own ON public.collection_maps
     FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND ((collections.is_public = true) OR (collections.user_id = auth.uid()))))));
-CREATE POLICY "Users can manage maps in own collections" ON public.collection_maps
-    USING ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))))
-    WITH CHECK ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
+CREATE POLICY collection_maps_insert_own ON public.collection_maps
+    FOR INSERT WITH CHECK ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
+CREATE POLICY collection_maps_update_own ON public.collection_maps
+    FOR UPDATE USING ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
+CREATE POLICY collection_maps_delete_own ON public.collection_maps
+    FOR DELETE USING ((EXISTS ( SELECT 1 FROM public.collections WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
 
 -- ============================================================
 -- カウンター更新トリガー関数

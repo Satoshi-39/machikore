@@ -40,12 +40,12 @@ CREATE INDEX idx_user_notification_settings_user_id ON public.user_notification_
 
 ALTER TABLE public.user_notification_settings ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can insert own notification settings" ON public.user_notification_settings
-    FOR INSERT WITH CHECK ((auth.uid() = user_id));
-CREATE POLICY "Users can update own notification settings" ON public.user_notification_settings
-    FOR UPDATE USING ((auth.uid() = user_id));
-CREATE POLICY "Users can view own notification settings" ON public.user_notification_settings
+CREATE POLICY user_notification_settings_select_own ON public.user_notification_settings
     FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY user_notification_settings_insert_own ON public.user_notification_settings
+    FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY user_notification_settings_update_own ON public.user_notification_settings
+    FOR UPDATE USING ((auth.uid() = user_id));
 
 -- ============================================================
 -- notifications（通知）
@@ -94,10 +94,14 @@ CREATE INDEX idx_notifications_user_spot_id ON public.notifications USING btree 
 
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "System can insert notifications" ON public.notifications FOR INSERT WITH CHECK (true);
-CREATE POLICY "Users can delete own notifications" ON public.notifications FOR DELETE USING ((auth.uid() = user_id));
-CREATE POLICY "Users can update own notifications" ON public.notifications FOR UPDATE USING ((auth.uid() = user_id));
-CREATE POLICY "Users can view own notifications" ON public.notifications FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY notifications_select_own ON public.notifications
+    FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY notifications_insert_system ON public.notifications
+    FOR INSERT WITH CHECK (true);
+CREATE POLICY notifications_update_own ON public.notifications
+    FOR UPDATE USING ((auth.uid() = user_id));
+CREATE POLICY notifications_delete_own ON public.notifications
+    FOR DELETE USING ((auth.uid() = user_id));
 
 -- ============================================================
 -- 通知関連の関数

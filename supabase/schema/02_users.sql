@@ -31,11 +31,8 @@ ALTER TABLE ONLY public.users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_email_key UNIQUE (email);
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_username_key UNIQUE (username);
 
-CREATE INDEX idx_users_email ON public.users USING btree (email);
 CREATE INDEX idx_users_is_premium ON public.users USING btree (is_premium);
 CREATE INDEX idx_users_push_token ON public.users USING btree (push_token) WHERE (push_token IS NOT NULL);
-CREATE INDEX idx_users_username ON public.users USING btree (username);
-CREATE UNIQUE INDEX users_username_idx ON public.users USING btree (username);
 
 CREATE TRIGGER update_users_updated_at
     BEFORE UPDATE ON public.users
@@ -43,10 +40,10 @@ CREATE TRIGGER update_users_updated_at
 
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Anyone can view users" ON public.users FOR SELECT USING (true);
-CREATE POLICY "Users can insert own profile" ON public.users
+CREATE POLICY users_select_all ON public.users FOR SELECT USING (true);
+CREATE POLICY users_insert_own ON public.users
     FOR INSERT TO authenticated WITH CHECK ((auth.uid() = id));
-CREATE POLICY "Users can update their own profile" ON public.users
+CREATE POLICY users_update_own ON public.users
     FOR UPDATE TO authenticated USING ((auth.uid() = id));
 
 -- ============================================================
@@ -72,10 +69,10 @@ CREATE INDEX idx_follows_follower_id ON public.follows USING btree (follower_id)
 
 ALTER TABLE public.follows ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Follows are viewable by everyone" ON public.follows FOR SELECT USING (true);
-CREATE POLICY "Users can create their own follows" ON public.follows
+CREATE POLICY follows_select_all ON public.follows FOR SELECT USING (true);
+CREATE POLICY follows_insert_own ON public.follows
     FOR INSERT TO authenticated WITH CHECK ((follower_id = auth.uid()));
-CREATE POLICY "Users can delete their own follows" ON public.follows
+CREATE POLICY follows_delete_own ON public.follows
     FOR DELETE TO authenticated USING ((follower_id = auth.uid()));
 
 -- ============================================================
@@ -183,13 +180,13 @@ CREATE INDEX idx_view_history_viewed_at ON public.view_history USING btree (view
 
 ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can delete their own history" ON public.view_history
+CREATE POLICY view_history_delete_own ON public.view_history
     FOR DELETE USING ((auth.uid() = user_id));
-CREATE POLICY "Users can insert their own history" ON public.view_history
+CREATE POLICY view_history_insert_own ON public.view_history
     FOR INSERT WITH CHECK ((auth.uid() = user_id));
-CREATE POLICY "Users can update their own history" ON public.view_history
+CREATE POLICY view_history_update_own ON public.view_history
     FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
-CREATE POLICY "Users can view their own history" ON public.view_history
+CREATE POLICY view_history_select_own ON public.view_history
     FOR SELECT USING ((auth.uid() = user_id));
 
 -- ============================================================
