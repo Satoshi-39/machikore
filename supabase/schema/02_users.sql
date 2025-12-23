@@ -252,8 +252,13 @@ CREATE TRIGGER update_view_history_updated_at
 -- ============================================================
 -- プレミアム関連関数
 -- ============================================================
+-- 注意: これらの関数はサーバーサイド（Edge Functions、cronジョブ）から
+-- Service Role Key で呼び出されることを想定しています。
+-- クライアントから直接呼び出されることはありません。
+-- そのため、auth.uid() による認証チェックは行っていません。
 
 -- ユーザーがプレミアムかどうかをチェック
+-- 用途: RLSポリシー内でスポット数制限の判定に使用（user_spots_insert_with_limit）
 CREATE FUNCTION public.is_user_premium(p_user_id uuid) RETURNS boolean
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
@@ -267,6 +272,7 @@ END;
 $$;
 
 -- プレミアムステータスを更新
+-- 用途: RevenueCat Webhook（Edge Function）から課金状態変更時に呼び出し
 CREATE FUNCTION public.update_user_premium_status(
     p_user_id uuid,
     p_is_premium boolean,
@@ -290,6 +296,7 @@ END;
 $$;
 
 -- 期限切れのプレミアムサブスクリプションを無効化
+-- 用途: cronジョブで定期実行し、期限切れユーザーのプレミアムを解除
 CREATE FUNCTION public.expire_premium_subscriptions() RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
