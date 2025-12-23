@@ -128,7 +128,6 @@ continents → countries → regions → prefectures → cities → machi
 |-----------|-----------|------|
 | user_spots | users | ユーザー削除でスポットも削除 |
 | user_spots | maps | マップ削除でスポットも削除 |
-| user_spots | master_spots | マスタースポット削除でスポットも削除 |
 | images | user_spots | スポット削除で画像も削除 |
 | likes | users/maps/user_spots | 親削除でいいねも削除 |
 | comments | users/maps/user_spots | 親削除でコメントも削除 |
@@ -139,11 +138,12 @@ continents → countries → regions → prefectures → cities → machi
 | 子テーブル | カラム | 親テーブル | 説明 |
 |-----------|--------|-----------|------|
 | master_spots | machi_id | machi | 街削除でもスポット保持 |
+| user_spots | master_spot_id | master_spots | マスタースポット削除でもスポット保持 |
 | user_spots | machi_id | machi | 街削除でもスポット保持 |
 | user_spots | prefecture_id | prefectures | 都道府県削除でもスポット保持 |
 | user_spots | label_id | map_labels | ラベル削除でもスポット保持 |
 
-**注意:** `machi`や`prefectures`を削除しても、`user_spots`や`master_spots`のデータは失われません。
+**注意:** `master_spots`、`machi`、`prefectures`を削除しても、`user_spots`のデータは失われません（参照がNULLになるだけ）。
 
 ---
 
@@ -172,7 +172,8 @@ continents → countries → regions → prefectures → cities → machi
 
 | 関数名 | 説明 |
 |--------|------|
-| increment_map_spots_count | マップのスポット数+1 |
+| increment_user_spots_count | マップのuser_spots数+1 |
+| decrement_user_spots_count | マップのuser_spots数-1 |
 | increment_map_likes_count | マップのいいね数+1 |
 | increment_user_spot_likes_count | スポットのいいね数+1 |
 | record_map_view | マップ閲覧記録 |

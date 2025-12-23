@@ -197,16 +197,16 @@ CREATE TRIGGER update_map_labels_updated_at
 -- RPC Functions
 -- ============================================================
 
--- マップのスポット数カウント+1
-CREATE OR REPLACE FUNCTION increment_map_spots_count(map_id UUID)
+-- マップのuser_spots数+1
+CREATE OR REPLACE FUNCTION increment_user_spots_count(map_id UUID)
 RETURNS VOID AS $$
 BEGIN
     UPDATE maps SET spots_count = spots_count + 1 WHERE id = map_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- マップのスポット数カウント-1
-CREATE OR REPLACE FUNCTION decrement_map_spots_count(map_id UUID)
+-- マップのuser_spots数-1
+CREATE OR REPLACE FUNCTION decrement_user_spots_count(map_id UUID)
 RETURNS VOID AS $$
 BEGIN
     UPDATE maps SET spots_count = GREATEST(0, spots_count - 1) WHERE id = map_id;

@@ -127,7 +127,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
   }
 
   // 3. マップのspots_countをインクリメント
-  const { error: rpcError } = await supabase.rpc('increment_map_spots_count', { map_id: input.mapId });
+  const { error: rpcError } = await supabase.rpc('increment_user_spots_count', { map_id: input.mapId });
   if (rpcError) {
     log.error('[UserSpots] Failed to increment spots_count:', rpcError);
   }

@@ -29,7 +29,7 @@ export async function deleteSpot(spotId: string): Promise<void> {
 
   // マップのspots_countをデクリメント
   if (mapId) {
-    const { error: rpcError } = await supabase.rpc('decrement_map_spots_count', { map_id: mapId });
+    const { error: rpcError } = await supabase.rpc('decrement_user_spots_count', { map_id: mapId });
     if (rpcError) {
       log.error('[UserSpots] Failed to decrement spots_count:', rpcError);
     }

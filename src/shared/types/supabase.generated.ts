@@ -71,7 +71,7 @@ export type Database = {
           {
             foreignKeyName: "admin_boundaries_city_id_fkey"
             columns: ["city_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "cities"
             referencedColumns: ["id"]
           },
@@ -1715,7 +1715,6 @@ export type Database = {
       transport_hubs: {
         Row: {
           city_id: string | null
-          country_code: string | null
           created_at: string | null
           id: string
           latitude: number
@@ -1736,7 +1735,6 @@ export type Database = {
         }
         Insert: {
           city_id?: string | null
-          country_code?: string | null
           created_at?: string | null
           id: string
           latitude: number
@@ -1757,7 +1755,6 @@ export type Database = {
         }
         Update: {
           city_id?: string | null
-          country_code?: string | null
           created_at?: string | null
           id?: string
           latitude?: number
@@ -2370,10 +2367,6 @@ export type Database = {
         Args: { map_id: string }
         Returns: undefined
       }
-      decrement_map_spots_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
       decrement_master_spot_favorites_count: {
         Args: { master_spot_id: string }
         Returns: undefined
@@ -2392,6 +2385,10 @@ export type Database = {
       }
       decrement_user_spot_likes_count: {
         Args: { user_spot_id: string }
+        Returns: undefined
+      }
+      decrement_user_spots_count: {
+        Args: { map_id: string }
         Returns: undefined
       }
       disablelongtransactions: { Args: never; Returns: string }
@@ -2585,10 +2582,6 @@ export type Database = {
         Args: { map_id: string }
         Returns: undefined
       }
-      increment_map_spots_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
       increment_master_spot_favorites_count: {
         Args: { master_spot_id: string }
         Returns: undefined
@@ -2607,6 +2600,10 @@ export type Database = {
       }
       increment_user_spot_likes_count: {
         Args: { user_spot_id: string }
+        Returns: undefined
+      }
+      increment_user_spots_count: {
+        Args: { map_id: string }
         Returns: undefined
       }
       is_user_premium: { Args: { p_user_id: string }; Returns: boolean }
