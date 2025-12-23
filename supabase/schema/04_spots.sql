@@ -196,8 +196,11 @@ ALTER TABLE public.images ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY images_select_public_or_own ON public.images
     FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.user_spots us JOIN public.maps m ON ((m.id = us.map_id)) WHERE ((us.id = images.user_spot_id) AND ((m.is_public = true) OR (m.user_id = auth.uid()))))));
-CREATE POLICY images_insert_own ON public.images
-    FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid())))));
+CREATE POLICY images_insert_own_with_limit ON public.images
+    FOR INSERT TO authenticated WITH CHECK ((
+        (EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid()))))
+        AND (public.count_images_in_spot(user_spot_id) < 4)
+    ));
 CREATE POLICY images_delete_own ON public.images
     FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid())))));
 
@@ -234,34 +237,6 @@ CREATE POLICY spot_tags_select_all ON public.spot_tags FOR SELECT USING (true);
 -- スポット関連のトリガー関数
 -- ============================================================
 
--- スポット数制限チェック（INSERT時）
-CREATE FUNCTION public.check_spots_limit() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  -- 現在のマップのスポット数をチェック
-  IF (SELECT COUNT(*) FROM user_spots WHERE map_id = NEW.map_id) >= 100 THEN
-    RAISE EXCEPTION 'マップあたりのスポット数上限（100）に達しています';
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
--- スポット数制限チェック（UPDATE時）
-CREATE FUNCTION public.check_spots_limit_on_update() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  -- map_idが変更された場合のみチェック
-  IF OLD.map_id IS DISTINCT FROM NEW.map_id THEN
-    IF (SELECT COUNT(*) FROM user_spots WHERE map_id = NEW.map_id) >= 100 THEN
-      RAISE EXCEPTION '移動先のマップはスポット数上限（100）に達しています';
-    END IF;
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
 -- スポット数をカウントする関数
 CREATE FUNCTION public.count_user_spots_in_map(p_user_id uuid, p_map_id uuid) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER
@@ -272,6 +247,19 @@ BEGIN
     FROM user_spots
     WHERE user_id = p_user_id
     AND map_id = p_map_id
+  );
+END;
+$$;
+
+-- スポットの画像数をカウントする関数
+CREATE FUNCTION public.count_images_in_spot(p_user_spot_id uuid) RETURNS integer
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  RETURN (
+    SELECT COUNT(*)::INTEGER
+    FROM images
+    WHERE user_spot_id = p_user_spot_id
   );
 END;
 $$;
@@ -327,14 +315,6 @@ $$;
 -- ============================================================
 -- スポット関連のトリガー
 -- ============================================================
-
-CREATE TRIGGER enforce_spots_limit
-    BEFORE INSERT ON public.user_spots
-    FOR EACH ROW EXECUTE FUNCTION public.check_spots_limit();
-
-CREATE TRIGGER enforce_spots_limit_on_update
-    BEFORE UPDATE ON public.user_spots
-    FOR EACH ROW EXECUTE FUNCTION public.check_spots_limit_on_update();
 
 CREATE TRIGGER trigger_update_map_spots_count
     AFTER INSERT OR DELETE ON public.user_spots
