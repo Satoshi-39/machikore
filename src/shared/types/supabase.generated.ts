@@ -2355,42 +2355,6 @@ export type Database = {
         Args: { p_map_id: string; p_user_id: string }
         Returns: number
       }
-      decrement_map_bookmarks_count: {
-        Args: { p_map_id: string }
-        Returns: undefined
-      }
-      decrement_map_comments_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
-      decrement_map_likes_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
-      decrement_master_spot_favorites_count: {
-        Args: { master_spot_id: string }
-        Returns: undefined
-      }
-      decrement_user_spot_bookmarks_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      decrement_user_spot_comments_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      decrement_user_spot_images_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      decrement_user_spot_likes_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      decrement_user_spots_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
       disablelongtransactions: { Args: never; Returns: string }
       dropgeometrycolumn:
         | {
@@ -2570,42 +2534,6 @@ export type Database = {
         }[]
       }
       gettransactionid: { Args: never; Returns: unknown }
-      increment_map_bookmarks_count: {
-        Args: { p_map_id: string }
-        Returns: undefined
-      }
-      increment_map_comments_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
-      increment_map_likes_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
-      increment_master_spot_favorites_count: {
-        Args: { master_spot_id: string }
-        Returns: undefined
-      }
-      increment_user_spot_bookmarks_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      increment_user_spot_comments_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      increment_user_spot_images_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      increment_user_spot_likes_count: {
-        Args: { user_spot_id: string }
-        Returns: undefined
-      }
-      increment_user_spots_count: {
-        Args: { map_id: string }
-        Returns: undefined
-      }
       is_user_premium: { Args: { p_user_id: string }; Returns: boolean }
       longtransactionsenabled: { Args: never; Returns: boolean }
       migrate_maps_tags_to_table: { Args: never; Returns: undefined }
