@@ -171,7 +171,11 @@ COMMENT ON COLUMN public.view_history.view_count IS '閲覧回数';
 
 ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_user_id_map_id_key UNIQUE (user_id, map_id);
--- FK to maps is defined in 03_maps.sql
+-- 注意: mapsテーブルは03_maps.sqlで定義されるが、設計書として外部キーはここにまとめる
+ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_map_id_fkey
+    FOREIGN KEY (map_id) REFERENCES public.maps(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
 CREATE INDEX idx_view_history_map_id ON public.view_history USING btree (map_id);
 CREATE INDEX idx_view_history_user_id ON public.view_history USING btree (user_id);

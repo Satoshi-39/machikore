@@ -127,12 +127,6 @@ CREATE POLICY maps_delete_own ON public.maps
 CREATE POLICY maps_update_own ON public.maps
     FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
 
--- view_history の外部キーを追加
-ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_map_id_fkey
-    FOREIGN KEY (map_id) REFERENCES public.maps(id) ON DELETE CASCADE;
-ALTER TABLE ONLY public.view_history ADD CONSTRAINT view_history_user_id_fkey
-    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
-
 -- ============================================================
 -- map_tags（マップとタグの中間テーブル）
 -- ============================================================
