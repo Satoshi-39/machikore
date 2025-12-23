@@ -20,10 +20,10 @@ export function insertMap(map: MapInsert & { id: string }): void {
   db.runSync(
     `INSERT INTO maps (
       id, user_id, name, description, category_id,
-      is_public, is_default, is_official, thumbnail_url,
+      is_public, is_official, thumbnail_url,
       spots_count, likes_count,
       created_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
     [
       map.id,
       map.user_id,
@@ -31,7 +31,6 @@ export function insertMap(map: MapInsert & { id: string }): void {
       map.description ?? null,
       map.category_id ?? null,
       map.is_public ?? true,
-      map.is_default ?? false,
       map.is_official ?? false,
       map.thumbnail_url ?? null,
       map.spots_count ?? 0,
@@ -120,10 +119,6 @@ export function updateMap(
   if (updates.is_public !== undefined) {
     fields.push('is_public = ?');
     values.push(updates.is_public);
-  }
-  if (updates.is_default !== undefined) {
-    fields.push('is_default = ?');
-    values.push(updates.is_default);
   }
   if (updates.is_official !== undefined) {
     fields.push('is_official = ?');

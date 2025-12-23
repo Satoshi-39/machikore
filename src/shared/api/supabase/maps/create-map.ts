@@ -14,7 +14,6 @@ export interface CreateMapParams {
   description?: string | null;
   category_id: string;
   is_public: boolean;
-  is_default?: boolean;
   is_official?: boolean;
   thumbnail_url?: string | null;
 }
@@ -34,7 +33,6 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
       description: params.description || null,
       category_id: params.category_id,
       is_public: params.is_public,
-      is_default: params.is_default || false,
       is_official: params.is_official || false,
       thumbnail_url: params.thumbnail_url || null,
       spots_count: 0,

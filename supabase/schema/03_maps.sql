@@ -69,7 +69,6 @@ CREATE TABLE maps (
     description TEXT,
     category_id TEXT REFERENCES categories(id),
     is_public BOOLEAN NOT NULL DEFAULT false,
-    is_default BOOLEAN NOT NULL DEFAULT false,
     is_official BOOLEAN NOT NULL DEFAULT false,
     is_article_public BOOLEAN NOT NULL DEFAULT false,
     thumbnail_url TEXT,

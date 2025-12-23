@@ -989,7 +989,6 @@ export type Database = {
           description: string | null
           id: string
           is_article_public: boolean
-          is_default: boolean
           is_official: boolean
           is_public: boolean
           likes_count: number
@@ -1010,7 +1009,6 @@ export type Database = {
           description?: string | null
           id?: string
           is_article_public?: boolean
-          is_default?: boolean
           is_official?: boolean
           is_public?: boolean
           likes_count?: number
@@ -1031,7 +1029,6 @@ export type Database = {
           description?: string | null
           id?: string
           is_article_public?: boolean
-          is_default?: boolean
           is_official?: boolean
           is_public?: boolean
           likes_count?: number

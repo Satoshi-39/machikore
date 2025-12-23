@@ -172,14 +172,9 @@ export async function updateComment(commentId: string, content: string): Promise
 
 /**
  * コメントを削除
- * @param parentId - 親コメントID（返信の場合）。トップレベルコメントの場合はnull
+ * comments_countはトリガーで自動更新される
  */
-export async function deleteComment(
-  commentId: string,
-  spotId?: string | null,
-  mapId?: string | null,
-  parentId?: string | null
-): Promise<void> {
+export async function deleteComment(commentId: string): Promise<void> {
   const { error } = await supabase
     .from('comments')
     .delete()

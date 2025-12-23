@@ -132,8 +132,7 @@ export function useDeleteComment() {
   const queryClient = useQueryClient();
 
   return useMutation<void, Error, DeleteCommentParams>({
-    mutationFn: ({ commentId, spotId, mapId, parentId }) =>
-      deleteComment(commentId, spotId, mapId, parentId),
+    mutationFn: ({ commentId }) => deleteComment(commentId),
     onSuccess: (_, { spotId, mapId, parentId }) => {
       // コメント一覧を再取得
       if (spotId) {

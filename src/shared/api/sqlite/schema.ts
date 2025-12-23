@@ -246,7 +246,6 @@ export function initializeDatabase(): void {
         description TEXT,
         category_id TEXT,
         is_public INTEGER DEFAULT 0,
-        is_default INTEGER DEFAULT 0,
         is_official INTEGER DEFAULT 0,
         show_label_chips INTEGER DEFAULT 1,
         thumbnail_url TEXT,

@@ -30,7 +30,6 @@ export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
     description: map.description,
     category_id: map.category_id,
     is_public: map.is_public,
-    is_default: map.is_default,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
     spots_count: map.spots_count,
