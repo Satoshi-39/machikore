@@ -1,8 +1,8 @@
 -- ============================================================
--- ユーザー（users, follows, visits, schedules, view_history）
+-- ユーザー（users, follows, visits, schedules, view_history, user_preferences）
 -- ============================================================
 -- ユーザー情報とユーザー間のリレーション
--- 最終更新: 2025-12-23
+-- 最終更新: 2025-12-24
 
 -- ============================================================
 -- users（ユーザー）
@@ -252,6 +252,41 @@ CREATE TRIGGER trigger_cleanup_view_history
 CREATE TRIGGER update_view_history_updated_at
     BEFORE UPDATE ON public.view_history
     FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+-- ============================================================
+-- user_preferences（ユーザー設定）
+-- ============================================================
+
+CREATE TABLE public.user_preferences (
+    user_id uuid NOT NULL,
+    theme text DEFAULT 'system' NOT NULL,
+    locale text DEFAULT 'system' NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT user_preferences_theme_check CHECK ((theme = ANY (ARRAY['light'::text, 'dark'::text, 'system'::text]))),
+    CONSTRAINT user_preferences_locale_check CHECK ((locale = ANY (ARRAY['ja'::text, 'en'::text, 'cn'::text, 'tw'::text, 'system'::text])))
+);
+
+COMMENT ON TABLE public.user_preferences IS 'ユーザーのアプリ設定（テーマ、言語など）';
+COMMENT ON COLUMN public.user_preferences.theme IS 'テーマ設定: light, dark, system（デフォルト: system）';
+COMMENT ON COLUMN public.user_preferences.locale IS '言語設定: ja, en, cn, tw, system（デフォルト: system）';
+
+ALTER TABLE ONLY public.user_preferences ADD CONSTRAINT user_preferences_pkey PRIMARY KEY (user_id);
+ALTER TABLE ONLY public.user_preferences ADD CONSTRAINT user_preferences_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+CREATE TRIGGER update_user_preferences_updated_at
+    BEFORE UPDATE ON public.user_preferences
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+ALTER TABLE public.user_preferences ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY user_preferences_select_own ON public.user_preferences
+    FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY user_preferences_insert_own ON public.user_preferences
+    FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY user_preferences_update_own ON public.user_preferences
+    FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 
 -- ============================================================
 -- プレミアム関連関数

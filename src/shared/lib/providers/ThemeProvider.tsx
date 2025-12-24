@@ -7,14 +7,14 @@
 import React, { useEffect } from 'react';
 import { useColorScheme as useNativeWindColorScheme } from 'nativewind';
 import { useColorScheme } from 'react-native';
-import { useAppSettingsStore } from '@/shared/lib/store';
+import { useThemePreference } from '@/entities/user/api';
 
 interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const themeMode = useAppSettingsStore((state) => state.themeMode);
+  const { theme: themeMode } = useThemePreference();
   const systemColorScheme = useColorScheme();
   const { setColorScheme } = useNativeWindColorScheme();
 
@@ -38,7 +38,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
  * 現在のテーマがダークかどうかを返すhook
  */
 export function useIsDarkMode(): boolean {
-  const themeMode = useAppSettingsStore((state) => state.themeMode);
+  const { theme: themeMode } = useThemePreference();
   const systemColorScheme = useColorScheme();
 
   if (themeMode === 'system') {

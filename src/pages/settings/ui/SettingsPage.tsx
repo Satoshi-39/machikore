@@ -11,8 +11,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSignOut } from '@/features/auth';
 import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
-import { useAppSettingsStore } from '@/shared/lib/store';
+import { useThemePreference } from '@/entities/user/api';
 import { useIsPremium } from '@/entities/subscription';
+import { useI18n, LOCALE_NAMES } from '@/shared/lib/i18n';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
@@ -114,14 +115,14 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   const router = useRouter();
   const { signOut } = useSignOut();
   const isPremium = useIsPremium();
+  const { t, locale } = useI18n();
 
-  // ストアから設定値を取得
-  const themeMode = useAppSettingsStore((state) => state.themeMode);
-  const setThemeMode = useAppSettingsStore((state) => state.setThemeMode);
+  // 新しいフックからテーマ設定を取得
+  const { theme: themeMode, setTheme } = useThemePreference();
 
   const isDarkMode = themeMode === 'dark';
   const handleDarkModeChange = (value: boolean) => {
-    setThemeMode(value ? 'dark' : 'light');
+    setTheme(value ? 'dark' : 'light');
   };
 
   const handleSignOutPress = () => {
@@ -184,10 +185,16 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
         </SettingsSection>
 
         {/* 表示 */}
-        <SettingsSection title="表示">
+        <SettingsSection title={t('settings.settings')}>
+          <SettingsItem
+            icon="language-outline"
+            label={t('settings.language')}
+            value={LOCALE_NAMES[locale]}
+            onPress={() => router.push('/settings/language')}
+          />
           <SettingsToggle
             icon="moon-outline"
-            label="ダークモード"
+            label={t('settings.darkMode')}
             value={isDarkMode}
             onValueChange={handleDarkModeChange}
           />

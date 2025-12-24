@@ -8,11 +8,19 @@
 import { I18n } from 'i18n-js';
 import { getLocales } from 'expo-localization';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ja, en } from './locales';
+import { ja, en, cn, tw } from './locales';
 
 // サポートする言語
-export const SUPPORTED_LOCALES = ['ja', 'en'] as const;
-export type SupportedLocale = typeof SUPPORTED_LOCALES[number];
+export const SUPPORTED_LOCALES = ['ja', 'en', 'cn', 'tw'] as const;
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+
+// 言語の表示名
+export const LOCALE_NAMES: Record<SupportedLocale, string> = {
+  ja: '日本語',
+  en: 'English',
+  cn: '简体中文',
+  tw: '繁體中文',
+};
 
 // デフォルト言語
 export const DEFAULT_LOCALE: SupportedLocale = 'ja';
@@ -24,6 +32,8 @@ const LOCALE_STORAGE_KEY = '@machikore/locale';
 const i18n = new I18n({
   ja,
   en,
+  cn,
+  tw,
 });
 
 // デフォルト設定
@@ -35,10 +45,25 @@ i18n.enableFallback = true; // 翻訳がない場合はデフォルト言語に�
  */
 function getDeviceLocale(): SupportedLocale {
   const locales = getLocales();
-  const deviceLocale = locales[0]?.languageCode ?? DEFAULT_LOCALE;
+  const locale = locales[0];
+  const deviceLocale = locale?.languageCode ?? DEFAULT_LOCALE;
 
+  // 直接サポートしている言語かチェック
   if (SUPPORTED_LOCALES.includes(deviceLocale as SupportedLocale)) {
     return deviceLocale as SupportedLocale;
+  }
+
+  // 中国語の判定（簡体字 vs 繁体字）
+  if (deviceLocale === 'zh' || deviceLocale.startsWith('zh')) {
+    const region = locale?.regionCode?.toUpperCase();
+    const script = locale?.languageTag?.includes('Hant') ? 'Hant' : locale?.languageTag?.includes('Hans') ? 'Hans' : null;
+
+    // 繁体字: 台湾、香港、マカオ、または Hant スクリプト
+    if (region === 'TW' || region === 'HK' || region === 'MO' || script === 'Hant') {
+      return 'tw';
+    }
+    // それ以外は簡体字
+    return 'cn';
   }
 
   return DEFAULT_LOCALE;

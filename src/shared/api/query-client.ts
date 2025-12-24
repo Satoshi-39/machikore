@@ -248,6 +248,11 @@ export const QUERY_KEYS = {
   wikipediaRegion: (regionName: string) =>
     ['wikipedia', 'region', regionName] as const,
 
+  // ===============================
+  // ユーザー設定
+  // ===============================
+  userPreferences: ['user-preferences'] as const,
+
 } as const;
 
 // ===============================

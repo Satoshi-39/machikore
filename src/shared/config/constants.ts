@@ -52,6 +52,8 @@ export const STORAGE_KEYS = {
   USER_STATE: 'user-storage',
   POST_STATE: 'post-storage',
   APP_SETTINGS: 'app-settings-storage',
+  /** ユーザー設定（テーマ・言語）- 未ログイン時のローカル保存用 */
+  USER_PREFERENCES: '@machikore/user-preferences',
 } as const;
 
 // ===============================

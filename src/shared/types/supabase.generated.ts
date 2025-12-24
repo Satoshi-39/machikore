@@ -168,7 +168,6 @@ export type Database = {
           is_active: boolean
           name: string
           name_translations: Json | null
-          slug: string
           updated_at: string
         }
         Insert: {
@@ -178,7 +177,6 @@ export type Database = {
           is_active?: boolean
           name: string
           name_translations?: Json | null
-          slug: string
           updated_at?: string
         }
         Update: {
@@ -188,7 +186,6 @@ export type Database = {
           is_active?: boolean
           name?: string
           name_translations?: Json | null
-          slug?: string
           updated_at?: string
         }
         Relationships: []
@@ -1821,6 +1818,38 @@ export type Database = {
           },
         ]
       }
+      user_preferences: {
+        Row: {
+          created_at: string
+          locale: string
+          theme: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          locale?: string
+          theme?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          locale?: string
+          theme?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_spots: {
         Row: {
           article_content: Json | null
@@ -1910,6 +1939,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "user_spots_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "user_spots_label_id_fkey"
             columns: ["label_id"]
@@ -2323,6 +2359,10 @@ export type Database = {
             Returns: string
           }
       clear_push_token: { Args: never; Returns: undefined }
+      count_images_in_spot: {
+        Args: { p_user_spot_id: string }
+        Returns: number
+      }
       count_user_spots_in_map: {
         Args: { p_map_id: string; p_user_id: string }
         Returns: number
@@ -2498,9 +2538,9 @@ export type Database = {
         Returns: {
           created_at: string
           id: string
-          is_official: boolean
           name: string
           name_translations: Json
+          slug: string
           updated_at: string
           usage_count: number
         }[]
