@@ -15,6 +15,7 @@ import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
 import { log } from '@/shared/config/logger';
@@ -59,6 +60,7 @@ export function UserMapHeader({
   onArticlePress,
   onEditPress,
 }: UserMapHeaderProps) {
+  const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -84,12 +86,12 @@ export function UserMapHeader({
   // いいね処理
   const handleLikePress = useCallback(() => {
     if (!userId) {
-      showLoginRequiredAlert('いいね');
+      showLoginRequiredAlert(t('common.like'));
       return;
     }
     if (!mapId || isTogglingLike) return;
     toggleLike({ userId, mapId });
-  }, [userId, mapId, isTogglingLike, toggleLike]);
+  }, [userId, mapId, isTogglingLike, toggleLike, t]);
 
   // ブックマーク処理（フォルダ選択モーダルを開く）
   const handleBookmarkPress = useCallback(() => {
@@ -113,14 +115,15 @@ export function UserMapHeader({
   const handleSharePress = useCallback(async () => {
     try {
       const url = `machikore://maps/${mapId}`;
+      const shareMessage = t('share.checkThis', { name: mapTitle || t('tabs.map') });
       await Share.share(Platform.select({
-        ios: { message: `${mapTitle || 'マップ'}をチェック！`, url },
-        default: { message: `${mapTitle || 'マップ'}をチェック！\n${url}` },
+        ios: { message: shareMessage, url },
+        default: { message: `${shareMessage}\n${url}` },
       })!);
     } catch (error) {
       log.error('[UserMapHeader] Share error:', error);
     }
-  }, [mapTitle, mapId]);
+  }, [mapTitle, mapId, t]);
 
   // 自分のマップかどうかを判定
   const isOwnMap = currentUserId && mapOwnerId && currentUserId === mapOwnerId;
@@ -133,7 +136,7 @@ export function UserMapHeader({
     if (isOwnMap && onEditPress) {
       items.push({
         id: 'edit',
-        label: '編集',
+        label: t('common.edit'),
         icon: 'create-outline',
         onPress: onEditPress,
       });
@@ -143,7 +146,7 @@ export function UserMapHeader({
     if (isArticlePublic || isOwnMap) {
       items.push({
         id: 'article',
-        label: '記事を見る',
+        label: t('menu.viewArticle'),
         icon: 'document-text-outline',
         onPress: () => onArticlePress?.(),
       });
@@ -152,7 +155,7 @@ export function UserMapHeader({
     items.push(
       {
         id: 'like',
-        label: isLiked ? 'いいね済み' : 'いいね',
+        label: isLiked ? t('favorite.liked') : t('common.like'),
         icon: isLiked ? 'heart' : 'heart-outline',
         iconColor: isLiked ? '#EF4444' : undefined,
         closeOnSelect: false,
@@ -160,7 +163,7 @@ export function UserMapHeader({
       },
       {
         id: 'bookmark',
-        label: isBookmarked ? '保存済み' : '保存',
+        label: isBookmarked ? t('bookmark.saved') : t('bookmark.save'),
         icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
         iconColor: isBookmarked ? '#007AFF' : undefined,
         closeOnSelect: false,
@@ -168,14 +171,14 @@ export function UserMapHeader({
       },
       {
         id: 'share',
-        label: '共有',
+        label: t('common.share'),
         icon: 'share-outline',
         onPress: handleSharePress,
       }
     );
 
     return items;
-  }, [isOwnMap, isArticlePublic, isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress, onEditPress]);
+  }, [isOwnMap, isArticlePublic, isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress, onEditPress, t]);
 
   // モーダルの開閉に応じてアニメーション
   useEffect(() => {
@@ -227,7 +230,7 @@ export function UserMapHeader({
               <Ionicons name="arrow-back" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
             </Pressable>
             <ActivityIndicator size="small" color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">読み込み中...</Text>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">{t('common.loading')}</Text>
           </View>
         </View>
       </View>
@@ -284,7 +287,7 @@ export function UserMapHeader({
                 className="text-base font-bold text-foreground dark:text-dark-foreground flex-shrink"
                 numberOfLines={1}
               >
-                {mapTitle || `${userName || 'ゲスト'}のマップ`}
+                {mapTitle || t('userMap.usersMap', { name: userName || '' })}
               </Text>
               {userMaps.length > 0 && (
                 <Ionicons
@@ -331,7 +334,7 @@ export function UserMapHeader({
             }}
           >
             <View className="flex-row items-center justify-between px-6 py-4 border-b border-border-light dark:border-dark-border-light">
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">マップを選択</Text>
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">{t('userMap.selectMap')}</Text>
               <Pressable onPress={() => setIsDropdownOpen(false)}>
                 <Ionicons name="close" size={28} color="#6B7280" />
               </Pressable>

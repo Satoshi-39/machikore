@@ -230,6 +230,8 @@ export default {
     added: '已添加',
     add: '添加',
     createNewFolder: '新建文件夹',
+    save: '收藏',
+    saved: '已收藏',
   },
 
   // 评论
@@ -668,6 +670,17 @@ export default {
     noPrefectureSpots: '%{prefecture}暂无地点',
     noCategoryPrefectureSpots: '%{prefecture}暂无%{category}地点',
     loadError: '加载失败',
+  },
+
+  // 分享
+  share: {
+    checkThis: '来看看%{name}！',
+  },
+
+  // 用户地图
+  userMap: {
+    usersMap: '%{name}的地图',
+    selectMap: '选择地图',
   },
 
   // 编辑文章

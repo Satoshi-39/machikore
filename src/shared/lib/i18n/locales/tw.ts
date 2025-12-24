@@ -230,6 +230,8 @@ export default {
     added: '已加入',
     add: '加入',
     createNewFolder: '新建資料夾',
+    save: '收藏',
+    saved: '已收藏',
   },
 
   // 留言
@@ -668,6 +670,17 @@ export default {
     noPrefectureSpots: '%{prefecture}尚無地點',
     noCategoryPrefectureSpots: '%{prefecture}尚無%{category}地點',
     loadError: '載入失敗',
+  },
+
+  // 分享
+  share: {
+    checkThis: '來看看%{name}！',
+  },
+
+  // 用戶地圖
+  userMap: {
+    usersMap: '%{name}的地圖',
+    selectMap: '選擇地圖',
   },
 
   // 編輯文章

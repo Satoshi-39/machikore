@@ -232,6 +232,8 @@ export default {
     added: '追加済',
     add: '追加',
     createNewFolder: '新しいフォルダを作成',
+    save: '保存',
+    saved: '保存済み',
   },
 
   // コメント
@@ -670,6 +672,17 @@ export default {
     noPrefectureSpots: '%{prefecture}のスポットはまだありません',
     noCategoryPrefectureSpots: '%{category}の%{prefecture}スポットはまだありません',
     loadError: '読み込みに失敗しました',
+  },
+
+  // 共有
+  share: {
+    checkThis: '%{name}をチェック！',
+  },
+
+  // ユーザーマップ
+  userMap: {
+    usersMap: '%{name}のマップ',
+    selectMap: 'マップを選択',
   },
 
   // 記事編集

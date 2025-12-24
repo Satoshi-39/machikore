@@ -230,6 +230,8 @@ export default {
     added: 'Added',
     add: 'Add',
     createNewFolder: 'Create new folder',
+    save: 'Save',
+    saved: 'Saved',
   },
 
   // Comments
@@ -668,6 +670,17 @@ export default {
     noPrefectureSpots: 'No spots in %{prefecture} yet',
     noCategoryPrefectureSpots: 'No %{category} spots in %{prefecture} yet',
     loadError: 'Failed to load',
+  },
+
+  // Share
+  share: {
+    checkThis: 'Check out %{name}!',
+  },
+
+  // User Map
+  userMap: {
+    usersMap: "%{name}'s Map",
+    selectMap: 'Select Map',
   },
 
   // Edit Article

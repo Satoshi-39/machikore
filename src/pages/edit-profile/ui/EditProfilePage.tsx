@@ -72,6 +72,9 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
     bio !== initialBio ||
     newAvatarFile !== null;
 
+  // 保存可能かどうかを判定（表示名は必須）
+  const canSave = hasChanges && displayName.trim().length > 0;
+
   // 画像選択
   const handlePickImage = useCallback(async () => {
     const permissionResult =
@@ -144,7 +147,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
         rightComponent={
           <Pressable
             onPress={handleSave}
-            disabled={isSaving || !hasChanges}
+            disabled={isSaving || !canSave}
             className="px-4 py-2"
           >
             {isSaving ? (
@@ -152,7 +155,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
             ) : (
               <Text
                 className={`text-base font-semibold ${
-                  hasChanges
+                  canSave
                     ? 'text-foreground dark:text-dark-foreground'
                     : 'text-foreground-muted dark:text-dark-foreground-muted'
                 }`}

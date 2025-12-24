@@ -209,6 +209,7 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
     .select(`
       id,
       created_at,
+      user_spot_id,
       user_spots (
         id,
         user_id,
@@ -217,9 +218,10 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         machi_id,
         custom_name,
         description,
-        tags,
+        spot_color,
         images_count,
         likes_count,
+        bookmarks_count,
         comments_count,
         order_index,
         created_at,
@@ -268,7 +270,6 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         machi_id: like.user_spots.machi_id || '',
         custom_name: like.user_spots.custom_name,
         description: like.user_spots.description,
-        tags: like.user_spots.tags,
         spot_color: like.user_spots.spot_color || null,
         images_count: like.user_spots.images_count,
         likes_count: like.user_spots.likes_count,
