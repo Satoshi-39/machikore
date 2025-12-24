@@ -26,6 +26,11 @@ export default {
     none: '無',
     more: '更多',
     less: '收起',
+    comment: '留言',
+    like: '按讚',
+    share: '分享',
+    post: '發布',
+    user: '用戶',
   },
 
   // 標籤欄
@@ -66,6 +71,21 @@ export default {
     deleteMapConfirm: '確定要刪除這個地圖嗎？',
     noMaps: '沒有地圖',
     createFirstMap: '建立您的第一個地圖',
+    // 建立地圖表單
+    mapNameRequired: '地圖名稱',
+    mapNamePlaceholder: '例：東京咖啡廳巡禮',
+    descriptionRequired: '描述',
+    descriptionPlaceholder: '請輸入地圖描述',
+    categoryRequired: '分類',
+    tags: '標籤',
+    tagsPlaceholder: '輸入標籤後按 Enter',
+    thumbnail: '縮圖',
+    publicDescription: '公開後其他用戶也可以查看此地圖',
+    creating: '建立中...',
+    // 地圖選擇
+    targetMap: '新增到地圖',
+    belongingMap: '所屬地圖',
+    noMapSelected: '未選擇地圖',
   },
 
   // 地點
@@ -79,8 +99,47 @@ export default {
     visitDate: '造訪日期',
     visited: '已造訪',
     notVisited: '未造訪',
-    deleteSpotConfirm: '確定要刪除這個地點嗎？',
+    deleteSpotConfirm: '確定要刪除這個地點嗎？此操作無法復原。',
     noSpots: '沒有地點',
+    unknownSpot: '未知地點',
+    noArticle: '尚無文章',
+    // 建立地點表單
+    registerSpot: '註冊地點',
+    googlePlacesInfo: '來自 Google Places 的資訊',
+    currentLocationInfo: '從目前位置註冊',
+    mapPinInfo: '在地圖上選擇的位置',
+    originalSpotName: '原地點名稱',
+    oneWordRequired: '用一句話描述這個地點！',
+    oneWordPlaceholder: '例：最棒的拉麵店',
+    spotSummary: '地點概要',
+    summaryPlaceholder: '簡要描述這個地點的魅力',
+    article: '文章',
+    articleEmpty: '詳細介紹這個地點',
+    articleEntered: '已輸入文章',
+    articleHint: '此內容將顯示在文章頁面',
+    articleEdit: '編輯文章',
+    articleWrite: '撰寫文章',
+    articleWriteHint: '詳細介紹這個地點',
+    label: '標籤',
+    spotColor: '地點顏色',
+    labelColorNotice: '※設定標籤後，標籤顏色優先',
+    photos: '照片',
+    registering: '註冊中...',
+    registerSpotButton: '註冊地點',
+    // 編輯地點
+    spotInfo: '地點資訊',
+    existingPhotos: '已註冊的照片',
+    newPhotos: '新增照片',
+    totalPhotos: '共 %{current}/%{max}張',
+    updating: '更新中...',
+    saveChanges: '儲存變更',
+    spotNotFound: '找不到地點',
+    // 載入中
+    creatingSpot: '正在建立地點...',
+    uploadingImages: '正在上傳圖片... (%{current}/%{total})',
+    processingComplete: '處理中...',
+    updatingSpot: '正在更新地點...',
+    deletingImages: '正在刪除圖片...',
   },
 
   // 收藏和按讚
@@ -92,6 +151,85 @@ export default {
     like: '按讚',
     likes: '按讚',
     liked: '已按讚',
+    likedItems: '按讚',
+    noLikes: '沒有按讚',
+    spot: '地點',
+    map: '地圖',
+    noLikedSpots: '沒有按讚的地點',
+    noLikedMaps: '沒有按讚的地圖',
+    unknownSpot: '未知地點',
+    userPost: '%{name}的貼文',
+    spotsCount: '%{count}個地點',
+    spots: '地點',
+    maps: '地圖',
+  },
+
+  // 合集
+  collection: {
+    collection: '合集',
+    collections: '合集',
+    createNew: '新建',
+    noCollections: '沒有合集',
+    // 建立合集
+    newCollection: '新建合集',
+    collectionName: '合集名稱',
+    collectionNamePlaceholder: '例：東京咖啡廳合集',
+    descriptionOptional: '描述（選填）',
+    descriptionPlaceholder: '輸入描述...',
+    thumbnail: '縮圖',
+    publicDescription: '開啟後，其他用戶可以查看此合集',
+    createHint: '建立合集後，您可以新增地圖',
+    creating: '建立中...',
+    create: '建立',
+    // 編輯合集
+    editCollection: '編輯合集',
+    collectionNotFound: '找不到合集',
+    manageMaps: '管理地圖',
+    itemsCount: '%{count}個',
+    // 合集詳情
+    mapsCount: '%{count}個地圖',
+    private: '私人',
+    mapList: '地圖列表',
+    noMaps: '尚無地圖',
+    edit: '編輯',
+    anonymous: '匿名用戶',
+    notFound: '找不到合集',
+    // 刪除合集
+    deleteTitle: '刪除合集',
+    deleteMessage: '確定刪除此合集嗎？',
+    // 空狀態
+    emptyTitle: '合集',
+    emptyDescriptionOwner: '按主題整理地圖',
+    emptyDescriptionOther: '尚未建立合集',
+    loadingMessage: '載入合集中...',
+  },
+
+  // 書籤
+  bookmark: {
+    bookmark: '書籤',
+    bookmarks: '書籤',
+    loginRequired: '請登入',
+    noBookmarks: '沒有書籤',
+    spots: '地點',
+    maps: '地圖',
+    createFolder: '建立新資料夾',
+    watchLater: '稍後查看',
+    itemCount: '%{count}個',
+    deleteFolder: '刪除資料夾',
+    deleteFolderMessage: '刪除「%{name}」？\n資料夾內的書籤將移動到「稍後查看」。',
+    editFolderName: '編輯資料夾名稱',
+    folderName: '資料夾名稱',
+    // 建立資料夾模態框
+    newFolder: '新建資料夾',
+    folderNamePlaceholder: '資料夾名稱',
+    create: '建立',
+    folder: '資料夾',
+    // 選擇資料夾模態框
+    selectSpotFolder: '選擇地點儲存位置',
+    selectMapFolder: '選擇地圖儲存位置',
+    added: '已加入',
+    add: '加入',
+    createNewFolder: '新建資料夾',
   },
 
   // 留言
@@ -99,9 +237,29 @@ export default {
     comment: '留言',
     comments: '留言',
     addComment: '新增留言',
+    addPlaceholder: '新增留言...',
     writeComment: '寫留言...',
     deleteComment: '刪除留言',
     noComments: '尚無留言',
+    edit: '編輯',
+    delete: '刪除',
+    reply: '回覆',
+    showReplies: '顯示%{count}則回覆',
+    hideReplies: '隱藏回覆',
+    defaultUser: '使用者',
+    enterComment: '輸入留言...',
+    enterReply: '輸入回覆...',
+    replyToUser: '回覆%{name}...',
+    replyingTo: '回覆%{name}',
+    composingReply: '正在撰寫回覆',
+    editComment: '編輯留言',
+  },
+
+  // 瀏覽歷史
+  viewHistory: {
+    title: '最近瀏覽的地圖',
+    loginRequired: '登入後可查看瀏覽歷史',
+    empty: '尚無瀏覽歷史',
   },
 
   // 個人資料
@@ -109,7 +267,12 @@ export default {
     profile: '個人資料',
     editProfile: '編輯資料',
     username: '使用者名稱',
+    usernameCannotChange: '使用者名稱無法更改',
+    displayName: '顯示名稱',
+    displayNamePlaceholder: '輸入顯示名稱',
     bio: '簡介',
+    bioPlaceholder: '輸入簡介',
+    tapToChangePhoto: '點擊更換照片',
     followers: '粉絲',
     following: '追蹤中',
     follow: '追蹤',
@@ -117,6 +280,11 @@ export default {
     posts: '貼文',
     maps: '地圖',
     bookmarks: '書籤',
+    photoPermissionRequired: '需要權限',
+    photoPermissionMessage: '請允許存取您的照片圖庫以選擇圖片。',
+    profileSaved: '已儲存',
+    profileSavedMessage: '您的個人資料已更新。',
+    profileSaveError: '儲存個人資料失敗。',
   },
 
   // 設定
@@ -148,6 +316,9 @@ export default {
     deleteAccount: '刪除帳號',
     comingSoon: '即將推出',
     comingSoonMessage: '此功能即將推出。',
+    effectiveDate: '%{date} 生效',
+    termsLoadError: '載入文件失敗。請檢查網路連線。',
+    termsNotFound: '找不到文件',
   },
 
   // 搜尋
@@ -158,6 +329,18 @@ export default {
     searchMaps: '搜尋地圖',
     recentSearches: '最近搜尋',
     noResults: '找不到結果',
+    noSearchHistory: '沒有搜尋歷史',
+    clearAll: '全部刪除',
+    showMore: '查看更多',
+    searchAndRegister: '搜尋並註冊',
+    registerCurrentLocation: '註冊目前位置',
+    pinOnMap: '在地圖上標記',
+    searching: '搜尋中...',
+    searchFailed: '搜尋失敗，請重試。',
+    noResultsFor: '找不到「%{query}」的搜尋結果',
+    resultsFor: '「%{query}」的搜尋結果（%{count}筆）',
+    locationUnavailable: '無法取得位置資訊',
+    checkLocationPermission: '請檢查位置權限設定',
   },
 
   // 篩選
@@ -222,6 +405,7 @@ export default {
     locationPermissionMessage: '此功能需要位置權限',
     directions: '導航',
     openInMaps: '在地圖中開啟',
+    earth: '地球',
   },
 
   // 圖片
@@ -237,7 +421,276 @@ export default {
     noData: '沒有資料',
     noMaps: '沒有地圖',
     noSpots: '沒有地點',
-    noFollowers: '沒有粉絲',
-    noFollowing: '尚未追蹤任何人',
+    noFollowers: '還沒有粉絲',
+    noFollowing: '還沒有追蹤任何人',
+    noNotifications: '沒有通知',
+    noAnnouncements: '沒有公告',
+    noMapsYet: '還沒有建立地圖',
+    noFollowingUsers: '尚未追蹤任何人',
+    noFollowingMaps: '追蹤的用戶沒有地圖',
+  },
+
+  // 動態
+  feed: {
+    recommended: '推薦',
+    following: '追蹤中',
+  },
+
+  // 通知
+  notification: {
+    notifications: '通知',
+    announcements: '公告',
+    markAllRead: '全部標為已讀',
+    likedYourSpot: '%{name}按讚了你的地點「%{target}」',
+    likedYourMap: '%{name}按讚了你的地圖「%{target}」',
+    commentedOnYourSpot: '%{name}留言了你的地點「%{target}」',
+    commentedOnYourMap: '%{name}留言了你的地圖「%{target}」',
+    followedYou: '%{name}追蹤了你',
+    newNotification: '你有新通知',
+    like: '按讚',
+    comment: '留言',
+    follow: '追蹤',
+    system: '公告',
+    // 通知設定
+    notificationSettings: '通知設定',
+    pushNotification: '推播通知',
+    emailNotification: '電子郵件通知',
+    receivePushNotifications: '接收推播通知',
+    receiveEmailNotifications: '接收電子郵件通知',
+    pushDisabledDescription: '關閉後將不會收到任何推播通知',
+    emailDisabledDescription: '關閉後將不會收到任何電子郵件通知',
+    notificationTypes: '通知類型',
+    pushDisabledNotice: '推播通知已關閉，無法修改',
+    emailDisabledNotice: '電子郵件通知已關閉，無法修改',
+    likeNotification: '按讚',
+    likeNotificationDescription: '有人對你的內容按讚時',
+    commentNotification: '留言',
+    commentNotificationDescription: '有人對你的內容留言時',
+    followNotification: '追蹤',
+    followNotificationDescription: '有新的追蹤者時',
+    systemNotification: '公告',
+    systemNotificationDescription: '來自營運團隊的公告',
+    loadError: '載入設定失敗',
+  },
+
+  // 相對時間
+  time: {
+    justNow: '剛剛',
+    minutesAgo: '%{count}分鐘前',
+    hoursAgo: '%{count}小時前',
+    daysAgo: '%{count}天前',
+    weeksAgo: '%{count}週前',
+    monthsAgo: '%{count}個月前',
+    yearsAgo: '%{count}年前',
+  },
+
+  // 發現
+  discover: {
+    searchPlaceholder: '搜尋地點、地圖、用戶',
+    searchFor: '搜尋「%{query}」',
+    users: '用戶',
+    latest: '最新',
+    trending: '熱門',
+    spots: '地點',
+    maps: '地圖',
+    noTrendingPosts: '沒有熱門內容',
+    noSpotsFound: '找不到地點',
+    noMapsFound: '找不到地圖',
+    noUsersFound: '找不到用戶',
+    noSearchResults: '沒有搜尋結果',
+  },
+
+  // 板塊
+  section: {
+    todaysPicks: '今日精選',
+    popularRanking: '熱門地圖排行',
+    latestInCategory: '%{category}最新',
+    popularInCategory: '%{category}熱門',
+    featuredInCategory: '%{category}推薦',
+    recentlyViewed: '最近瀏覽',
+    searchByArea: '按區域瀏覽',
+    searchOverseas: '瀏覽海外',
+    searchByTag: '按標籤搜尋',
+    searchByPrefecture: '按都道府縣瀏覽',
+    noTodayPicks: '沒有今日精選',
+    noPopularMaps: '沒有熱門地圖',
+    noPrefectureData: '沒有都道府縣資料',
+    noCountryData: '沒有國家資料',
+  },
+
+  // 我的頁面
+  mypage: {
+    myPage: '我的',
+    editProfile: '編輯資料',
+    loadingMaps: '載入地圖中...',
+    deleteMapConfirmDetail: '刪除此地圖？所有相關地點也將被刪除。此操作無法復原。',
+    report: '檢舉',
+    defaultUser: '用戶',
+  },
+
+  // 建立選單
+  create: {
+    map: '地圖',
+    spot: '地點',
+    blog: '部落格',
+  },
+
+  // 地區
+  area: {
+    tokyo: '東京',
+    osaka: '大阪',
+    kyoto: '京都',
+    kanagawa: '神奈川',
+    aichi: '愛知',
+    fukuoka: '福岡',
+    hokkaido: '北海道',
+    hyogo: '兵庫',
+  },
+
+  // 編輯地圖
+  editMap: {
+    title: '編輯地圖',
+    notFound: '找不到地圖',
+    mapInfo: '地圖資訊',
+    spots: '地點',
+    likes: '按讚',
+    createdAt: '建立日期',
+    mapNameLabel: '地圖名稱',
+    mapNamePlaceholder: '例：東京咖啡廳巡禮',
+    descriptionLabel: '描述',
+    descriptionPlaceholder: '請輸入地圖描述',
+    categoryLabel: '分類',
+    labelLabel: '標籤',
+    showLabelChips: '顯示標籤晶片',
+    showLabelChipsDescription: '在地圖頂部顯示標籤，點擊可篩選地點',
+    tagsLabel: '標籤',
+    tagsPlaceholder: '輸入標籤後按 Enter',
+    thumbnailLabel: '縮圖',
+    publicDescription: '任何人都可以查看此地圖',
+    privateDescription: '只有您可以查看此地圖',
+    updating: '更新中...',
+    saveChanges: '儲存變更',
+    required: '*',
+  },
+
+  // 文章
+  article: {
+    article: '文章',
+    notFound: '找不到文章',
+    private: '此文章為私密',
+    viewMap: '查看地圖',
+    editArticle: '編輯文章',
+    editMap: '編輯地圖',
+    // 文章頁面追加
+    tableOfContents: '目錄',
+    spotsCount: '%{count}個地點',
+    noSpots: '尚無地點',
+    unknownSpot: '未知地點',
+    authorOtherMaps: '該作者的其他地圖',
+    comment: '留言',
+    addComment: '新增留言...',
+    noComments: '尚無留言',
+    viewAllComments: '查看全部%{count}則留言',
+    loadError: '載入失敗',
+    searchByTag: '按標籤搜尋',
+    featuredInCategory: '%{category}推薦',
+    latestInCategory: '%{category}最新地圖',
+  },
+
+  // 選單（三點選單）
+  menu: {
+    edit: '編輯',
+    delete: '刪除',
+    share: '分享',
+    report: '檢舉',
+    viewMap: '查看地圖',
+    viewArticle: '查看文章',
+    copyLink: '複製連結',
+  },
+
+  // 需要登入
+  authRequired: {
+    loginRequiredAction: '請登入以%{action}',
+  },
+
+  // 行程表
+  schedule: {
+    title: '行程表',
+    dateSchedule: '%{month}月%{day}日的行程',
+    noSchedule: '沒有行程',
+    comingSoon: '行程表功能即將推出',
+  },
+
+  // 地圖卡片
+  mapCard: {
+    deleteTitle: '刪除地圖',
+    deleteMessage: '確定要刪除此地圖及所有相關地點嗎？此操作無法復原。',
+    defaultUser: '用戶',
+  },
+
+  // 地點卡片
+  spotCard: {
+    deleteTitle: '刪除地點',
+    deleteMessage: '刪除此地點？此操作無法復原。',
+    unknownSpot: '未知地點',
+    defaultUser: '用戶',
+  },
+
+  // 公開/私人切換
+  publicToggle: {
+    public: '公開',
+    private: '私人',
+    publicStatus: '公開中',
+    privateStatus: '私人',
+  },
+
+  // 分類頁面
+  categoryPage: {
+    tagsTitle: '%{category}的標籤',
+    noTags: '沒有標籤',
+    noMapsForTag: '沒有 #%{tag} 的地圖',
+    selectTag: '請選擇標籤',
+  },
+
+  // 新增地圖到收藏夾
+  addMapsToCollection: {
+    title: '新增地圖',
+    addTo: '新增至:',
+    tapToToggle: '點擊新增/移除地圖',
+    spotsCount: '%{count}個地點',
+  },
+
+  // 都道府縣地點列表
+  prefectureSpots: {
+    spotList: '地點列表',
+    missingParams: '缺少參數',
+    prefectureSpotsTitle: '%{prefecture}的地點',
+    noPrefectureSpots: '%{prefecture}尚無地點',
+    noCategoryPrefectureSpots: '%{prefecture}尚無%{category}地點',
+    loadError: '載入失敗',
+  },
+
+  // 編輯文章
+  editArticle: {
+    title: '編輯文章',
+    notFound: '找不到文章',
+    noPermission: '沒有編輯權限',
+    publicToggleError: '變更公開設定失敗',
+    intro: '前言',
+    writeIntro: '點擊撰寫前言',
+    editIntro: '編輯前言',
+    outro: '後記',
+    writeOutro: '點擊撰寫後記',
+    editOutro: '編輯後記',
+    noSpots: '尚無地點',
+    writeDescription: '點擊撰寫介紹文',
+    charCount: '%{count}字',
+    saved: '已儲存',
+    saveError: '儲存失敗',
+    discardTitle: '捨棄變更嗎？',
+    discardMessage: '有未儲存的變更。',
+    discard: '捨棄',
+    spotNotFound: '找不到地點',
+    mapNotFound: '找不到地圖',
   },
 };

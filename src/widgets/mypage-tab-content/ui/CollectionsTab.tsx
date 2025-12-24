@@ -9,6 +9,7 @@ import { useCurrentUserId } from '@/entities/user';
 import type { Collection } from '@/shared/api/supabase/collections';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { ErrorView, Loading, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -36,6 +37,7 @@ function CollectionCard({
   onEdit,
   onDelete,
 }: CollectionCardProps) {
+  const { t } = useI18n();
   const createdDate = new Date(collection.created_at);
   const formattedDate = `${createdDate.getFullYear()}/${createdDate.getMonth() + 1}/${createdDate.getDate()}`;
 
@@ -44,19 +46,19 @@ function CollectionCard({
     return [
       {
         id: 'edit',
-        label: '編集',
+        label: t('common.edit'),
         icon: 'create-outline',
         onPress: () => onEdit?.(collection.id),
       },
       {
         id: 'delete',
-        label: '削除',
+        label: t('common.delete'),
         icon: 'trash-outline',
         destructive: true,
         onPress: () => onDelete?.(collection.id),
       },
     ];
-  }, [collection.id, isOwner, onEdit, onDelete]);
+  }, [collection.id, isOwner, onEdit, onDelete, t]);
 
   return (
     <Pressable
@@ -101,7 +103,7 @@ function CollectionCard({
             <View className="flex-row items-center gap-1">
               <Ionicons name="map" size={14} color={colors.text.secondary} />
               <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                {collection.maps_count}マップ
+                {t('collection.mapsCount', { count: collection.maps_count })}
               </Text>
             </View>
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
@@ -134,6 +136,7 @@ export function CollectionsTab({
   userId,
   ListHeaderComponent,
 }: CollectionsTabProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
@@ -160,16 +163,16 @@ export function CollectionsTab({
   const handleDelete = useCallback(
     (collectionId: string) => {
       if (!userId) return;
-      Alert.alert('コレクションを削除', 'このコレクションを削除しますか？', [
-        { text: 'キャンセル', style: 'cancel' },
+      Alert.alert(t('collection.deleteTitle'), t('collection.deleteMessage'), [
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '削除',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: () => deleteCollection({ collectionId, userId }),
         },
       ]);
     },
-    [userId, deleteCollection]
+    [userId, deleteCollection, t]
   );
 
   const renderEmptyState = useCallback(
@@ -179,21 +182,21 @@ export function CollectionsTab({
           <Ionicons name="grid" size={40} color={colors.text.secondary} />
         </View>
         <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-          コレクション
+          {t('collection.emptyTitle')}
         </Text>
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
           {isOwner
-            ? 'マップをテーマ別にまとめましょう'
-            : 'コレクションが作成されていません'}
+            ? t('collection.emptyDescriptionOwner')
+            : t('collection.emptyDescriptionOther')}
         </Text>
       </View>
     ),
-    [isOwner]
+    [isOwner, t]
   );
 
   // ローディング中
   if (isLoading) {
-    return <Loading message="コレクションを読み込み中..." />;
+    return <Loading message={t('collection.loadingMessage')} />;
   }
 
   // エラー

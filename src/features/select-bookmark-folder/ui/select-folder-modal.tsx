@@ -19,6 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useBookmarkFolders, useCreateBookmarkFolder } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface SelectFolderModalProps {
   visible: boolean;
@@ -42,6 +43,7 @@ export function SelectFolderModal({
   onRemoveFromFolder,
   bookmarkedFolderIds,
 }: SelectFolderModalProps) {
+  const { t } = useI18n();
   const { data: folders = [] } = useBookmarkFolders(userId, folderType);
   const { mutate: createFolder, isPending: isCreating } = useCreateBookmarkFolder();
 
@@ -113,9 +115,9 @@ export function SelectFolderModal({
 
   // デフォルト + ユーザー作成フォルダのリスト
   const foldersWithDefault = useMemo(() => [
-    { id: null as string | null, name: '後で見る', isDefault: true },
+    { id: null as string | null, name: t('bookmark.watchLater'), isDefault: true },
     ...folders.map((f) => ({ ...f, isDefault: false })),
-  ], [folders]);
+  ], [folders, t]);
 
   return (
     <Modal
@@ -135,7 +137,7 @@ export function SelectFolderModal({
           {/* ヘッダー */}
           <View className="px-6 py-4 border-b border-border-light dark:border-dark-border-light">
             <Text className="text-center text-lg font-bold text-foreground dark:text-dark-foreground">
-              {folderType === 'spots' ? 'スポット' : 'マップ'}の保存先を選択
+              {folderType === 'spots' ? t('bookmark.selectSpotFolder') : t('bookmark.selectMapFolder')}
             </Text>
           </View>
 
@@ -163,14 +165,14 @@ export function SelectFolderModal({
                       onPress={() => handleRemoveFromFolder(item.id)}
                       className="bg-blue-500 px-4 py-1.5 rounded-full active:bg-blue-600"
                     >
-                      <Text className="text-sm text-white font-medium">追加済</Text>
+                      <Text className="text-sm text-white font-medium">{t('bookmark.added')}</Text>
                     </Pressable>
                   ) : (
                     <Pressable
                       onPress={() => handleAddToFolder(item.id)}
                       className="bg-surface dark:bg-dark-surface-elevated border border-foreground dark:border-dark-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
                     >
-                      <Text className="text-sm text-foreground dark:text-dark-foreground font-medium">追加</Text>
+                      <Text className="text-sm text-foreground dark:text-dark-foreground font-medium">{t('bookmark.add')}</Text>
                     </Pressable>
                   )}
                 </View>
@@ -185,7 +187,7 @@ export function SelectFolderModal({
                 <TextInput
                   value={newFolderName}
                   onChangeText={setNewFolderName}
-                  placeholder="フォルダ名"
+                  placeholder={t('bookmark.folderNamePlaceholder')}
                   placeholderTextColor="#9CA3AF"
                   className="flex-1 border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground mr-2"
                   autoFocus
@@ -198,14 +200,14 @@ export function SelectFolderModal({
                     newFolderName.trim() && !isCreating ? 'bg-blue-500' : 'bg-gray-300'
                   }`}
                 >
-                  <Text className="text-white font-medium">作成</Text>
+                  <Text className="text-white font-medium">{t('bookmark.create')}</Text>
                 </Pressable>
               </View>
               <Pressable
                 onPress={() => setShowCreateInput(false)}
                 className="mt-2"
               >
-                <Text className="text-center text-foreground-secondary dark:text-dark-foreground-secondary text-sm">キャンセル</Text>
+                <Text className="text-center text-foreground-secondary dark:text-dark-foreground-secondary text-sm">{t('common.cancel')}</Text>
               </Pressable>
             </View>
           ) : (
@@ -217,7 +219,7 @@ export function SelectFolderModal({
                 <Ionicons name="add" size={20} color={colors.primary.DEFAULT} />
               </View>
               <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
-                新しいフォルダを作成
+                {t('bookmark.createNewFolder')}
               </Text>
             </Pressable>
           )}
@@ -229,7 +231,7 @@ export function SelectFolderModal({
               className="py-3 bg-muted dark:bg-dark-muted rounded-lg active:bg-gray-200 dark:active:bg-gray-600"
             >
               <Text className="text-center text-sm font-medium text-foreground dark:text-dark-foreground">
-                閉じる
+                {t('common.close')}
               </Text>
             </Pressable>
           </View>

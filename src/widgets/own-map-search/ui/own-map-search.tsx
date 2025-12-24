@@ -8,6 +8,7 @@ import { View, Text, Pressable, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import {
   useSearchGooglePlaces,
@@ -41,6 +42,7 @@ export function OwnMapSearch({
   currentLocation = null,
   onMapPinSelect,
 }: OwnMapSearchProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
@@ -87,7 +89,7 @@ export function OwnMapSearch({
   // 現在地を登録
   const handleCurrentLocationRegister = async () => {
     if (!currentLocation) {
-      Alert.alert('位置情報が取得できません', '位置情報の許可を確認してください');
+      Alert.alert(t('search.locationUnavailable'), t('search.checkLocationPermission'));
       return;
     }
 
@@ -148,7 +150,7 @@ export function OwnMapSearch({
         value={searchQuery}
         onChangeText={onSearchChange}
         onCancel={handleClose}
-        placeholder="検索して登録"
+        placeholder={t('search.searchAndRegister')}
         autoFocus
         showCancelButton
       />
@@ -173,7 +175,7 @@ export function OwnMapSearch({
                   className="text-sm"
                   style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
                 >
-                  現在地を登録
+                  {t('search.registerCurrentLocation')}
                 </Text>
               </Pressable>
               <Text className="text-gray-300 dark:text-gray-600">|</Text>
@@ -182,7 +184,7 @@ export function OwnMapSearch({
                   className="text-sm"
                   style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
                 >
-                  地図上でピン刺し
+                  {t('search.pinOnMap')}
                 </Text>
               </Pressable>
             </View>
@@ -191,26 +193,26 @@ export function OwnMapSearch({
           // 検索結果
           <View className="p-4">
             {isLoading ? (
-              <Loading variant="inline" message="検索中..." />
+              <Loading variant="inline" message={t('search.searching')} />
             ) : error ? (
               <ErrorView
                 variant="inline"
-                error="検索に失敗しました。もう一度お試しください。"
+                error={t('search.searchFailed')}
               />
             ) : hasSearched && results.length === 0 ? (
               <EmptyState
                 variant="inline"
                 icon="🔍"
-                message={`"${searchQuery}" の検索結果が見つかりませんでした`}
+                message={t('search.noResultsFor', { query: searchQuery })}
               />
             ) : !hasSearched ? (
               // 検索中（デバウンス待ち）
-              <Loading variant="inline" message="検索中..." />
+              <Loading variant="inline" message={t('search.searching')} />
             ) : (
               // 検索結果リスト
               <>
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-                  "{searchQuery}" の検索結果 ({results.length}件)
+                  {t('search.resultsFor', { query: searchQuery, count: results.length })}
                 </Text>
                 {results.map((place) => (
                   <Pressable

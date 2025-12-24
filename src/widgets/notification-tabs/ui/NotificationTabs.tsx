@@ -8,6 +8,7 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useUnreadNotificationCount, useUnreadAnnouncementCount } from '@/entities/notification';
 import { useUserStore } from '@/entities/user';
 
@@ -25,10 +26,11 @@ export function NotificationTabs({
   const user = useUserStore((state) => state.user);
   const { data: notificationCount = 0 } = useUnreadNotificationCount(user?.id);
   const { data: announcementCount = 0 } = useUnreadAnnouncementCount(user?.id);
+  const { t } = useI18n();
 
   const TAB_OPTIONS: { mode: NotificationTabMode; label: string; count: number }[] = [
-    { mode: 'notifications', label: '通知', count: notificationCount },
-    { mode: 'announcements', label: 'お知らせ', count: announcementCount },
+    { mode: 'notifications', label: t('notification.notifications'), count: notificationCount },
+    { mode: 'announcements', label: t('notification.announcements'), count: announcementCount },
   ];
 
   return (

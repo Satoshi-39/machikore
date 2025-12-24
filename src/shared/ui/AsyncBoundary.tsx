@@ -9,6 +9,7 @@ import React from 'react';
 import { Loading } from './Loading';
 import { ErrorView } from './ErrorView';
 import { EmptyState } from './EmptyState';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface AsyncBoundaryProps<T> {
   /** ローディング状態 */
@@ -35,16 +36,19 @@ export function AsyncBoundary<T>({
   isLoading,
   error,
   data,
-  loadingMessage = '読み込み中...',
-  emptyMessage = 'データがありません',
+  loadingMessage,
+  emptyMessage,
   emptyIcon,
   emptyIonIcon = 'search-outline',
   isEmpty,
   children,
 }: AsyncBoundaryProps<T>) {
+  const { t } = useI18n();
+  const displayLoadingMessage = loadingMessage ?? t('common.loading');
+  const displayEmptyMessage = emptyMessage ?? t('empty.noData');
   // ローディング中
   if (isLoading) {
-    return <Loading message={loadingMessage} />;
+    return <Loading message={displayLoadingMessage} />;
   }
 
   // エラー
@@ -54,7 +58,7 @@ export function AsyncBoundary<T>({
 
   // データなし
   if (!data) {
-    return <EmptyState message={emptyMessage} icon={emptyIcon} ionIcon={emptyIonIcon as any} />;
+    return <EmptyState message={displayEmptyMessage} icon={emptyIcon} ionIcon={emptyIonIcon as any} />;
   }
 
   // カスタム空判定またはデフォルト（配列の長さチェック）
@@ -63,7 +67,7 @@ export function AsyncBoundary<T>({
     : Array.isArray(data) && data.length === 0;
 
   if (isDataEmpty) {
-    return <EmptyState message={emptyMessage} icon={emptyIcon} ionIcon={emptyIonIcon as any} />;
+    return <EmptyState message={displayEmptyMessage} icon={emptyIcon} ionIcon={emptyIonIcon as any} />;
   }
 
   // データ存在：子コンポーネントをレンダリング

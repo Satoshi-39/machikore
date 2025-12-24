@@ -19,10 +19,11 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { PageHeader, PublicToggle } from '@/shared/ui';
+import { PageHeader, PublicToggle, AddressPinIcon } from '@/shared/ui';
 import { useMapArticle, useUpdateMap } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { extractPlainText } from '@/shared/types';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface EditArticlePageProps {
   mapId: string;
@@ -30,6 +31,7 @@ interface EditArticlePageProps {
 
 export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const router = useRouter();
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
   const { mutate: updateMap, isPending: isUpdatingMap } = useUpdateMap();
@@ -59,7 +61,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
         onError: () => {
           // エラー時は元に戻す
           setIsArticlePublic(!value);
-          Alert.alert('エラー', '公開設定の変更に失敗しました');
+          Alert.alert(t('common.error'), t('editArticle.publicToggleError'));
         },
       }
     );
@@ -89,7 +91,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   if (isLoading) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="記事を編集" onBack={handleBack} />
+        <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -101,11 +103,11 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   if (!articleData || !isOwner) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="記事を編集" onBack={handleBack} />
+        <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="lock-closed-outline" size={48} color={colors.gray[300]} />
           <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-            {!articleData ? '記事が見つかりません' : '編集権限がありません'}
+            {!articleData ? t('editArticle.notFound') : t('editArticle.noPermission')}
           </Text>
         </View>
       </SafeAreaView>
@@ -114,7 +116,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
 
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
-      <PageHeader title="記事を編集" onBack={handleBack} />
+      <PageHeader title={t('editArticle.title')} onBack={handleBack} />
 
       <ScrollView className="flex-1">
         {/* ヒーロー画像 */}
@@ -163,7 +165,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             <View className="flex-row items-center mb-2">
               <Ionicons name="document-text-outline" size={18} color={colors.primary.DEFAULT} />
               <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
-                まえがき
+                {t('editArticle.intro')}
               </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
             </View>
@@ -177,7 +179,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             ) : (
               <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
                 <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
-                  タップしてまえがきを書く
+                  {t('editArticle.writeIntro')}
                 </Text>
               </View>
             )}
@@ -236,7 +238,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     {/* 住所 */}
                     {address && (
                       <View className="flex-row items-center mb-3">
-                        <Ionicons name="location-outline" size={14} color={colors.gray[400]} />
+                        <AddressPinIcon size={14} color={colors.gray[400]} />
                         <Text
                           className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
                           numberOfLines={1}
@@ -257,7 +259,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     ) : (
                       <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
                         <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
-                          タップして紹介文を書く
+                          {t('editArticle.writeDescription')}
                         </Text>
                       </View>
                     )}
@@ -269,7 +271,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             <View className="py-8 items-center">
               <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
               <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-                まだスポットがありません
+                {t('editArticle.noSpots')}
               </Text>
             </View>
           )}
@@ -282,7 +284,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             <View className="flex-row items-center mb-2">
               <Ionicons name="chatbox-ellipses-outline" size={18} color={colors.primary.DEFAULT} />
               <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
-                あとがき
+                {t('editArticle.outro')}
               </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
             </View>
@@ -296,7 +298,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             ) : (
               <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
                 <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
-                  タップしてあとがきを書く
+                  {t('editArticle.writeOutro')}
                 </Text>
               </View>
             )}

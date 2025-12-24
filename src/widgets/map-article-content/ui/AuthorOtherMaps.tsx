@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';
 import { MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface AuthorOtherMapsProps {
   maps: MapWithUser[];
@@ -15,12 +16,14 @@ interface AuthorOtherMapsProps {
 }
 
 export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
+  const { t } = useI18n();
+
   if (maps.length === 0) return null;
 
   return (
     <View className="mt-8">
       <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-4">
-        この著者の他のマップ
+        {t('article.authorOtherMaps')}
       </Text>
       <ScrollView
         horizontal

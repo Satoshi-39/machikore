@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, Switch } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 type ToggleVariant = 'default' | 'compact';
 
@@ -33,10 +34,14 @@ export function PublicToggle({
   onValueChange,
   disabled = false,
   variant = 'default',
-  publicLabel = '公開',
-  privateLabel = '非公開',
+  publicLabel,
+  privateLabel,
   description,
 }: PublicToggleProps) {
+  const { t } = useI18n();
+  const effectivePublicLabel = publicLabel ?? t('publicToggle.public');
+  const effectivePrivateLabel = privateLabel ?? t('publicToggle.private');
+
   if (variant === 'compact') {
     return (
       <View className="flex-row items-center">
@@ -46,7 +51,7 @@ export function PublicToggle({
           color={value ? colors.primary.DEFAULT : colors.gray[500]}
         />
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 mr-3">
-          {value ? '公開中' : '非公開'}
+          {value ? t('publicToggle.publicStatus') : t('publicToggle.privateStatus')}
         </Text>
         <Switch
           value={value}
@@ -72,7 +77,7 @@ export function PublicToggle({
             style={{ marginRight: 8 }}
           />
           <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
-            {value ? publicLabel : privateLabel}
+            {value ? effectivePublicLabel : effectivePrivateLabel}
           </Text>
         </View>
         <Switch

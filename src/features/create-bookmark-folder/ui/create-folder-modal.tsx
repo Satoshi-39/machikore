@@ -6,6 +6,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, Pressable, TextInput, Modal } from 'react-native';
 import { useCreateBookmarkFolder } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface CreateFolderModalProps {
   visible: boolean;
@@ -15,6 +16,7 @@ interface CreateFolderModalProps {
 }
 
 export function CreateFolderModal({ visible, userId, folderType, onClose }: CreateFolderModalProps) {
+  const { t } = useI18n();
   const [folderName, setFolderName] = useState('');
   const { mutate: createFolder, isPending } = useCreateBookmarkFolder();
 
@@ -52,19 +54,19 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
           onPress={(e) => e.stopPropagation()}
         >
           <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-4">
-            新しいフォルダ
+            {t('bookmark.newFolder')}
           </Text>
           <TextInput
             value={folderName}
             onChangeText={setFolderName}
-            placeholder="フォルダ名"
+            placeholder={t('bookmark.folderNamePlaceholder')}
             placeholderTextColor="#9CA3AF"
             className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground mb-4"
             autoFocus
           />
           <View className="flex-row justify-end gap-3">
             <Pressable onPress={handleClose} className="px-4 py-2">
-              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
+              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.cancel')}</Text>
             </Pressable>
             <Pressable
               onPress={handleCreate}
@@ -73,7 +75,7 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
                 folderName.trim() && !isPending ? 'bg-blue-500' : 'bg-gray-300'
               }`}
             >
-              <Text className="text-white font-medium">作成</Text>
+              <Text className="text-white font-medium">{t('bookmark.create')}</Text>
             </Pressable>
           </View>
         </Pressable>

@@ -10,8 +10,10 @@ import React from 'react';
 import { View } from 'react-native';
 import { EditSpotForm, useEditSpotForm } from '@/features/edit-spot';
 import { SingleDataBoundary, PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function EditSpotPage() {
+  const { t } = useI18n();
   const {
     spot,
     existingImages,
@@ -27,12 +29,12 @@ export function EditSpotPage() {
 
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-      <PageHeader title="スポットを編集" />
+      <PageHeader title={t('spot.editSpot')} />
       <SingleDataBoundary
         isLoading={isLoading}
         error={null}
         data={spot}
-        notFoundMessage="スポットが見つかりません"
+        notFoundMessage={t('spot.spotNotFound')}
         notFoundIcon="location-outline"
       >
         {(spotData) => (

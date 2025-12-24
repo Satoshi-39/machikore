@@ -11,6 +11,7 @@ import { useEditorStyles } from '@/shared/lib/editor';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   darkEditorTheme,
   RichText,
@@ -46,6 +47,7 @@ const EMPTY_DOC: ProseMirrorDoc = {
 export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: map, isLoading } = useMap(mapId);
   const { mutate: updateMap, isPending: isSaving } = useUpdateMap();
@@ -141,15 +143,15 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
         {
           onSuccess: () => {
             setInitialContent(content || EMPTY_DOC);
-            Alert.alert('保存しました');
+            Alert.alert(t('editArticle.saved'));
           },
           onError: () => {
-            Alert.alert('エラー', '保存に失敗しました');
+            Alert.alert(t('common.error'), t('editArticle.saveError'));
           },
         }
       );
     } catch (error) {
-      Alert.alert('エラー', '保存に失敗しました');
+      Alert.alert(t('common.error'), t('editArticle.saveError'));
     }
   }, [editor, map, updateMap, isEmptyDoc]);
 
@@ -167,10 +169,10 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
 
     // どちらかが空でどちらかが空でない場合は変更あり
     if (currentIsEmpty !== originalIsEmpty) {
-      Alert.alert('変更を破棄しますか？', '保存していない変更があります。', [
-        { text: 'キャンセル', style: 'cancel' },
+      Alert.alert(t('editArticle.discardTitle'), t('editArticle.discardMessage'), [
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '破棄',
+          text: t('editArticle.discard'),
           style: 'destructive',
           onPress: () => router.back(),
         },
@@ -183,10 +185,10 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
     const originalStr = JSON.stringify(initialContent);
 
     if (currentStr !== originalStr) {
-      Alert.alert('変更を破棄しますか？', '保存していない変更があります。', [
-        { text: 'キャンセル', style: 'cancel' },
+      Alert.alert(t('editArticle.discardTitle'), t('editArticle.discardMessage'), [
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '破棄',
+          text: t('editArticle.discard'),
           style: 'destructive',
           onPress: () => router.back(),
         },
@@ -202,7 +204,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   if (isLoading) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="まえがきを編集" />
+        <PageHeader title={t('editArticle.editIntro')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -220,7 +222,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
       {isSaving ? (
         <ActivityIndicator size="small" color="white" />
       ) : (
-        <Text className="text-white font-semibold">保存</Text>
+        <Text className="text-white font-semibold">{t('common.save')}</Text>
       )}
     </Pressable>
   );
@@ -229,7 +231,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   if (!map || map.user_id !== currentUserId) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="まえがきを編集" />
+        <PageHeader title={t('editArticle.editIntro')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
@@ -237,7 +239,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
             color={colors.gray[300]}
           />
           <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-            {!map ? 'マップが見つかりません' : '編集権限がありません'}
+            {!map ? t('editArticle.mapNotFound') : t('editArticle.noPermission')}
           </Text>
         </View>
       </View>
@@ -247,7 +249,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader
-        title="まえがきを編集"
+        title={t('editArticle.editIntro')}
         onBack={handleBack}
         rightComponent={saveButton}
       />
@@ -258,7 +260,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
         {/* 文字数カウンター */}
         <View className={`absolute right-6 ${isKeyboardVisible ? 'bottom-2' : 'bottom-8'}`}>
           <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-            {charCount}文字
+            {t('editArticle.charCount', { count: charCount })}
           </Text>
         </View>
       </View>

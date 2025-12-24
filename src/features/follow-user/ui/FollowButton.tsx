@@ -7,6 +7,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useCurrentUserId } from '@/entities/user';
 import { useIsFollowing, useFollowUser, useUnfollowUser } from '@/entities/follow';
 
@@ -15,6 +16,7 @@ interface FollowButtonProps {
 }
 
 export function FollowButton({ targetUserId }: FollowButtonProps) {
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
 
   const { data: isFollowing, isLoading: isFollowingLoading } = useIsFollowing(
@@ -77,7 +79,7 @@ export function FollowButton({ targetUserId }: FollowButtonProps) {
             isFollowing ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-white'
           }`}
         >
-          {isFollowing ? 'フォロー中' : 'フォローする'}
+          {isFollowing ? t('profile.following') : t('profile.follow')}
         </Text>
       )}
     </TouchableOpacity>

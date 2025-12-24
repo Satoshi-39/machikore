@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface ReplyTarget {
   displayName: string;
@@ -61,6 +62,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
     },
     ref
   ) {
+    const { t } = useI18n();
     const inputRef = useRef<TextInput>(null);
 
     useImperativeHandle(ref, () => ({
@@ -68,7 +70,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
     }));
 
     const canSubmit = inputText.trim() && !isSubmitting;
-    const defaultPlaceholder = replyingTo ? '返信を入力...' : 'コメントを追加...';
+    const defaultPlaceholder = replyingTo ? t('comment.enterReply') : t('comment.addComment');
 
     const isInline = variant === 'inline';
 
@@ -82,8 +84,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
             }`}
           >
             <Text className="flex-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
-              <Text className="font-semibold">{replyingTo.displayName}</Text>
-              さんに返信
+              {t('comment.replyingTo', { name: replyingTo.displayName })}
             </Text>
             <Pressable onPress={onCancelReply} className="p-1">
               <Ionicons

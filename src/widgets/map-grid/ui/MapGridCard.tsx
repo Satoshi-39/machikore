@@ -14,6 +14,7 @@ import type { MapWithUser } from '@/shared/types';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { MapLikeButton } from '@/features/map-like';
@@ -32,6 +33,7 @@ interface MapGridCardProps {
 }
 
 export function MapGridCard({ map, onPress }: MapGridCardProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
@@ -54,18 +56,18 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
     return [
       {
         id: 'report',
-        label: '報告する',
+        label: t('menu.report'),
         icon: 'flag-outline',
         onPress: () => {
           if (!currentUserId) {
-            showLoginRequiredAlert('報告');
+            showLoginRequiredAlert(t('menu.report'));
             return;
           }
           router.push(`/report?targetType=map&targetId=${map.id}`);
         },
       },
     ];
-  }, [currentUserId, router, map.id]);
+  }, [currentUserId, router, map.id, t]);
 
   return (
     <Pressable

@@ -18,9 +18,11 @@ import { PageHeader } from '@/shared/ui';
 import { SpotCard } from '@/entities/user-spot';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import type { SpotWithDetails } from '@/shared/types';
 
 export function PrefectureSpotsPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const { prefectureId, categoryId } = useLocalSearchParams<{
@@ -50,9 +52,10 @@ export function PrefectureSpotsPage() {
     isRefetching,
   } = categoryId ? categoryPrefectureQuery : prefectureOnlyQuery;
 
-  const prefectureName =
-    prefectures.find((p) => p.id === prefectureId)?.name ?? '';
-  const categoryName = categories.find((c) => c.id === categoryId)?.name ?? '';
+  const prefecture = prefectures.find((p) => p.id === prefectureId);
+  const category = categories.find((c) => c.id === categoryId);
+  const prefectureName = prefecture ? getTranslatedName(prefecture.name, prefecture.name_translations) : '';
+  const categoryName = category ? getTranslatedName(category.name, category.name_translations) : '';
 
   const handleSpotPress = useCallback(
     (spotId: string) => {
@@ -85,10 +88,10 @@ export function PrefectureSpotsPage() {
   if (!prefectureId) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="スポット一覧" />
+        <PageHeader title={t('prefectureSpots.spotList')} />
         <View className="flex-1 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            パラメータが不足しています
+            {t('prefectureSpots.missingParams')}
           </Text>
         </View>
       </View>
@@ -111,12 +114,12 @@ export function PrefectureSpotsPage() {
   // タイトルを生成
   const title = categoryId
     ? `${categoryName} - ${prefectureName}`
-    : `${prefectureName}のスポット`;
+    : t('prefectureSpots.prefectureSpotsTitle', { prefecture: prefectureName });
 
   // 空メッセージを生成
   const emptyMessage = categoryId
-    ? `${categoryName}の${prefectureName}スポットはまだありません`
-    : `${prefectureName}のスポットはまだありません`;
+    ? t('prefectureSpots.noCategoryPrefectureSpots', { category: categoryName, prefecture: prefectureName })
+    : t('prefectureSpots.noPrefectureSpots', { prefecture: prefectureName });
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
@@ -125,13 +128,13 @@ export function PrefectureSpotsPage() {
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            読み込み中...
+            {t('common.loading')}
           </Text>
         </View>
       ) : error ? (
         <View className="flex-1 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            読み込みに失敗しました
+            {t('prefectureSpots.loadError')}
           </Text>
         </View>
       ) : spots && spots.length > 0 ? (

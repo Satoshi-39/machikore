@@ -5,6 +5,7 @@
 import { getDatabase } from './client';
 import type { ContinentRow } from '@/shared/types/database.types';
 import { log } from '@/shared/config/logger';
+import { parseJsonField } from '@/shared/lib/utils/json.utils';
 
 // ===============================
 // Create
@@ -20,12 +21,16 @@ export function bulkInsertContinents(continents: ContinentRow[]): void {
     for (const continent of continents) {
       db.runSync(
         `INSERT OR REPLACE INTO continents (
-          id, name, display_order, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?)`,
+          id, name, name_kana, name_translations, display_order, latitude, longitude, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           continent.id,
           continent.name,
+          continent.name_kana,
+          continent.name_translations ? JSON.stringify(continent.name_translations) : null,
           continent.display_order,
+          continent.latitude,
+          continent.longitude,
           continent.created_at,
           continent.updated_at,
         ]
@@ -68,5 +73,9 @@ export function getContinentById(id: string): ContinentRow | null {
  */
 export function getAllContinents(): ContinentRow[] {
   const db = getDatabase();
-  return db.getAllSync<ContinentRow>('SELECT * FROM continents ORDER BY display_order');
+  const rows = db.getAllSync<ContinentRow>('SELECT * FROM continents ORDER BY display_order');
+  return rows.map((row) => ({
+    ...row,
+    name_translations: parseJsonField(row.name_translations),
+  }));
 }

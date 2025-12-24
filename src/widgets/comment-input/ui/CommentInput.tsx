@@ -10,6 +10,7 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { useAddSpotComment, useAddMapComment, useAddReplyComment } from '@/entities/comment';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
@@ -33,6 +34,7 @@ export function CommentInput({
   replyingTo,
   onCancelReply,
 }: CommentInputProps) {
+  const { t } = useI18n();
   const [text, setText] = useState('');
 
   // Mutations
@@ -46,13 +48,13 @@ export function CommentInput({
 
   // プレースホルダー
   const placeholder = replyingTo
-    ? `${replyingTo.user?.display_name || replyingTo.user?.username}に返信...`
-    : 'コメントを入力...';
+    ? t('comment.replyToUser', { name: replyingTo.user?.display_name || replyingTo.user?.username })
+    : t('comment.enterComment');
 
   // 送信ハンドラー
   const handleSubmit = useCallback(() => {
     if (!currentUserId) {
-      showLoginRequiredAlert(replyingTo ? '返信' : 'コメント');
+      showLoginRequiredAlert(replyingTo ? t('comment.reply') : t('comment.comment'));
       return;
     }
     if (!text.trim()) return;
@@ -91,7 +93,7 @@ export function CommentInput({
         }
       );
     }
-  }, [currentUserId, text, replyingTo, spotId, mapId, addReply, addSpotComment, addMapComment, onCancelReply]);
+  }, [currentUserId, text, replyingTo, spotId, mapId, addReply, addSpotComment, addMapComment, onCancelReply, t]);
 
   // 返信キャンセル
   const handleCancelReply = useCallback(() => {
@@ -104,7 +106,7 @@ export function CommentInput({
       {/* 返信モード表示 */}
       {isReplyMode && (
         <View className="flex-row items-center justify-between px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary">
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">返信を作成中</Text>
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{t('comment.composingReply')}</Text>
           <Pressable onPress={handleCancelReply} hitSlop={8}>
             <Ionicons name="close" size={20} color={colors.gray[500]} />
           </Pressable>

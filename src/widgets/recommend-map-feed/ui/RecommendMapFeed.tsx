@@ -15,6 +15,7 @@ import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getPublicMaps } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
@@ -24,6 +25,7 @@ const PAGE_SIZE = 10;
 export function RecommendMapFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
+  const { t } = useI18n();
 
   // おすすめマップ取得（公開マップ一覧）
   const {
@@ -93,7 +95,7 @@ export function RecommendMapFeed() {
       isLoading={isLoading}
       error={error}
       data={maps.length > 0 ? maps : null}
-      emptyMessage="マップがまだありません"
+      emptyMessage={t('empty.noMaps')}
       emptyIonIcon="map-outline"
     >
       {(data) => (

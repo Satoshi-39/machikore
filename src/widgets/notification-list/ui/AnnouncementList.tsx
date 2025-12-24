@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
+import { formatLocalizedDate } from '@/shared/lib/utils';
 import {
   useSystemAnnouncements,
   useReadAnnouncementIds,
@@ -29,21 +31,11 @@ const ANNOUNCEMENT_TYPE_CONFIG: Record<
   string,
   { icon: keyof typeof Ionicons.glyphMap; color: string }
 > = {
-  info: { icon: 'information-circle', color: '#3B82F6' },
-  update: { icon: 'sparkles', color: '#8B5CF6' },
-  maintenance: { icon: 'construct', color: '#F59E0B' },
+  info: { icon: 'information-circle', color: colors.info },
+  update: { icon: 'sparkles', color: colors.action.follow },
+  maintenance: { icon: 'construct', color: colors.action.system },
   promotion: { icon: 'gift', color: '#EC4899' },
 };
-
-// 日時フォーマット
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 interface AnnouncementItemProps {
   announcement: SystemAnnouncement;
@@ -81,7 +73,7 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
           </Text>
           {announcement.published_at && (
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-2">
-              {formatDate(announcement.published_at)}
+              {formatLocalizedDate(new Date(announcement.published_at))}
             </Text>
           )}
         </View>
@@ -96,6 +88,7 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
 }
 
 export function AnnouncementList() {
+  const { t } = useI18n();
   const user = useUserStore((state) => state.user);
   const { data: announcements = [], isLoading, refetch, isRefetching } = useSystemAnnouncements();
   const { data: readIds = new Set<string>() } = useReadAnnouncementIds(user?.id);
@@ -134,7 +127,7 @@ export function AnnouncementList() {
       <View className="flex-1 items-center justify-center px-6 bg-surface dark:bg-dark-surface">
         <Ionicons name="megaphone-outline" size={80} color="#D1D5DB" />
         <Text className="text-lg font-medium text-foreground-secondary dark:text-dark-foreground-secondary mt-6">
-          お知らせはありません
+          {t('empty.noAnnouncements')}
         </Text>
       </View>
     );
@@ -147,7 +140,7 @@ export function AnnouncementList() {
         <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface">
           <Pressable onPress={handleMarkAllAsRead}>
             <Text className="text-sm text-blue-500 font-medium text-right">
-              すべて既読にする
+              {t('notification.markAllRead')}
             </Text>
           </Pressable>
         </View>

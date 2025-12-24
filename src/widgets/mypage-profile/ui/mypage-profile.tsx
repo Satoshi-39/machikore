@@ -14,12 +14,14 @@ import { ProfileSkeleton, ImageViewerModal } from '@/shared/ui';
 import { useUser, useUserStats, useCurrentUserId } from '@/entities/user';
 import { FollowButton } from '@/features/follow-user';
 import { EditProfileButton } from '@/features/edit-profile';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface MyPageProfileProps {
   userId: string | null;
 }
 
 export function MyPageProfile({ userId }: MyPageProfileProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
@@ -89,7 +91,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
 
       {/* ユーザー名 */}
       <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-1">
-        {user?.display_name || user?.username || 'ユーザー'}
+        {user?.display_name || user?.username || t('mypage.defaultUser')}
       </Text>
       {user?.username && (
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">@{user.username}</Text>
@@ -103,18 +105,18 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       {/* 統計情報（Instagram/noteスタイル） */}
       <View className="flex-row items-center">
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-          <Text className="font-bold text-foreground dark:text-dark-foreground">{mapsCount}</Text> マップ
+          <Text className="font-bold text-foreground dark:text-dark-foreground">{mapsCount}</Text> {t('profile.maps')}
         </Text>
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{'  '}·{'  '}</Text>
         <TouchableOpacity onPress={handleFollowingPress}>
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-            <Text className="font-bold text-foreground dark:text-dark-foreground">{followingCount}</Text> フォロー
+            <Text className="font-bold text-foreground dark:text-dark-foreground">{followingCount}</Text> {t('profile.following')}
           </Text>
         </TouchableOpacity>
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{'  '}·{'  '}</Text>
         <TouchableOpacity onPress={handleFollowersPress}>
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-            <Text className="font-bold text-foreground dark:text-dark-foreground">{followersCount}</Text> フォロワー
+            <Text className="font-bold text-foreground dark:text-dark-foreground">{followersCount}</Text> {t('profile.followers')}
           </Text>
         </TouchableOpacity>
       </View>

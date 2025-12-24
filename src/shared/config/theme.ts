@@ -116,6 +116,16 @@ export const colors = {
     bronze: '#CD7F32',
     default: '#9CA3AF',
   },
+
+  // Action/Notification Type Colors
+  action: {
+    like: '#EF4444', // Red - いいね
+    comment: '#3B82F6', // Blue - コメント
+    follow: '#8B5CF6', // Purple - フォロー
+    bookmark: '#F59E0B', // Amber - ブックマーク
+    system: '#F59E0B', // Amber - システム通知
+    share: '#10B981', // Green - シェア
+  },
 } as const;
 
 /**

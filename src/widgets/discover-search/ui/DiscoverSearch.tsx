@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
 import { DiscoverSearchResults } from '@/widgets/discover-search-results';
 import { useUserSearch, UserListItem } from '@/entities/user';
@@ -34,6 +35,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
   const inputRef = useRef<TextInput>(null);
   const isDarkMode = useIsDarkMode();
   const router = useRouter();
+  const { t } = useI18n();
 
   // 検索履歴
   const { history, addHistory, removeHistory, clearHistory } = useSearchHistory({ type: 'discover' });
@@ -107,7 +109,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
         >
           <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
           <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground-muted">
-            スポット、マップ、ユーザーを検索
+            {t('discover.searchPlaceholder')}
           </Text>
         </Pressable>
 
@@ -155,7 +157,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
               <TextInput
                 ref={inputRef}
                 className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground"
-                placeholder="スポット、マップ、ユーザーを検索"
+                placeholder={t('discover.searchPlaceholder')}
                 placeholderTextColor={colors.text.tertiary}
                 value={searchQuery}
                 onChangeText={setSearchQuery}
@@ -170,7 +172,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
               )}
             </View>
             <TouchableOpacity onPress={handleClose}>
-              <Text className="text-base text-blue-500 font-medium">キャンセル</Text>
+              <Text className="text-base text-blue-500 font-medium">{t('common.cancel')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -199,7 +201,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
               ListHeaderComponent={
                 <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light">
                   <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
-                    ユーザー
+                    {t('discover.users')}
                   </Text>
                 </View>
               }
@@ -211,7 +213,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
               className="px-4 py-3"
             >
               <Text className="text-base text-foreground dark:text-dark-foreground">
-                「{searchQuery.trim()}」を検索
+                {t('discover.searchFor', { query: searchQuery.trim() })}
               </Text>
             </TouchableOpacity>
           )}

@@ -18,7 +18,7 @@ interface PrefectureJsonData {
   id: string; // {country}_{prefecture}形式
   name: string;
   name_kana: string;
-  name_translations?: { en: string };
+  name_translations?: { [key: string]: string };
   region_id: string;
   latitude: number | null;
   longitude: number | null;
@@ -48,7 +48,7 @@ function toPrefectureRow(prefecture: PrefectureJsonData): PrefectureRow | null {
     id: prefecture.id,
     name: prefecture.name,
     name_kana: prefecture.name_kana,
-    name_translations: prefecture.name_translations ? JSON.stringify(prefecture.name_translations) : null,
+    name_translations: prefecture.name_translations ?? null,
     region_id: prefecture.region_id,
     latitude: prefecture.latitude,
     longitude: prefecture.longitude,

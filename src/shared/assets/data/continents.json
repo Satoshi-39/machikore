@@ -2,6 +2,7 @@
   {
     "id": "east_asia",
     "name": "東アジア",
+    "name_translations": { "en": "East Asia", "cn": "东亚", "tw": "東亞" },
     "display_order": 1,
     "latitude": 35.6762,
     "longitude": 139.6503
@@ -9,6 +10,7 @@
   {
     "id": "southeast_asia",
     "name": "東南アジア",
+    "name_translations": { "en": "Southeast Asia", "cn": "东南亚", "tw": "東南亞" },
     "display_order": 2,
     "latitude": 13.7563,
     "longitude": 100.5018
@@ -16,6 +18,7 @@
   {
     "id": "south_asia",
     "name": "南アジア",
+    "name_translations": { "en": "South Asia", "cn": "南亚", "tw": "南亞" },
     "display_order": 3,
     "latitude": 20.5937,
     "longitude": 78.9629
@@ -23,6 +26,7 @@
   {
     "id": "central_asia",
     "name": "中央アジア",
+    "name_translations": { "en": "Central Asia", "cn": "中亚", "tw": "中亞" },
     "display_order": 4,
     "latitude": 41.2044,
     "longitude": 74.7661
@@ -30,6 +34,7 @@
   {
     "id": "west_asia",
     "name": "西アジア",
+    "name_translations": { "en": "West Asia", "cn": "西亚", "tw": "西亞" },
     "display_order": 5,
     "latitude": 29.3117,
     "longitude": 47.4818
@@ -37,6 +42,7 @@
   {
     "id": "europe",
     "name": "ヨーロッパ",
+    "name_translations": { "en": "Europe", "cn": "欧洲", "tw": "歐洲" },
     "display_order": 6,
     "latitude": 54.5260,
     "longitude": 15.2551
@@ -44,6 +50,7 @@
   {
     "id": "north_america",
     "name": "北アメリカ",
+    "name_translations": { "en": "North America", "cn": "北美洲", "tw": "北美洲" },
     "display_order": 7,
     "latitude": 54.5260,
     "longitude": -105.2551
@@ -51,6 +58,7 @@
   {
     "id": "central_america",
     "name": "中央アメリカ",
+    "name_translations": { "en": "Central America", "cn": "中美洲", "tw": "中美洲" },
     "display_order": 8,
     "latitude": 15.7835,
     "longitude": -90.2308
@@ -58,6 +66,7 @@
   {
     "id": "south_america",
     "name": "南アメリカ",
+    "name_translations": { "en": "South America", "cn": "南美洲", "tw": "南美洲" },
     "display_order": 9,
     "latitude": -8.7832,
     "longitude": -55.4915
@@ -65,6 +74,7 @@
   {
     "id": "oceania",
     "name": "オセアニア",
+    "name_translations": { "en": "Oceania", "cn": "大洋洲", "tw": "大洋洲" },
     "display_order": 10,
     "latitude": -25.2744,
     "longitude": 133.7751
@@ -72,6 +82,7 @@
   {
     "id": "africa",
     "name": "アフリカ",
+    "name_translations": { "en": "Africa", "cn": "非洲", "tw": "非洲" },
     "display_order": 11,
     "latitude": -8.7832,
     "longitude": 34.5085

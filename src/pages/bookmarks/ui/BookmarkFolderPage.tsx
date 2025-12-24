@@ -11,6 +11,7 @@ import { BookmarkItemList } from '@/widgets/bookmark-folder-list';
 import { useCurrentUserId } from '@/entities/user';
 import { useBookmarkFolders } from '@/entities/bookmark';
 import { PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface BookmarkFolderPageProps {
   folderId: string;
@@ -18,20 +19,21 @@ interface BookmarkFolderPageProps {
 }
 
 export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFolderPageProps) {
+  const { t } = useI18n();
   const userId = useCurrentUserId();
 
   // フォルダ名を取得
   const { data: folders = [] } = useBookmarkFolders(userId);
   const folderName = folderId === 'uncategorized'
-    ? '後で見る'
-    : folders.find((f) => f.id === folderId)?.name || 'フォルダ';
+    ? t('bookmark.watchLater')
+    : folders.find((f) => f.id === folderId)?.name || t('bookmark.folder');
 
   if (!userId) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
         <PageHeader title={folderName} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">ログインしてください</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('bookmark.loginRequired')}</Text>
         </View>
       </View>
     );

@@ -14,6 +14,7 @@ import { CommentInputModal } from '@/shared/ui';
 import { CommentItem, useAddMapComment, useAddReplyComment, useMapCommentsCount } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface ArticleCommentPreviewProps {
   comments: CommentWithUser[];
@@ -36,6 +37,7 @@ export function ArticleCommentPreview({
   onDelete,
   onLike,
 }: ArticleCommentPreviewProps) {
+  const { t } = useI18n();
   // トップレベルコメントの総数を取得
   const { data: totalCount = 0 } = useMapCommentsCount(mapId);
 
@@ -116,7 +118,7 @@ export function ArticleCommentPreview({
   return (
     <View className="mt-6">
       <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
-        コメント
+        {t('article.comment')}
       </Text>
 
       {/* コメント追加ボタン（タップでモーダル表示） */}
@@ -125,7 +127,7 @@ export function ArticleCommentPreview({
         className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
       >
         <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
-          コメントを追加...
+          {t('article.addComment')}
         </Text>
       </Pressable>
 
@@ -151,7 +153,7 @@ export function ArticleCommentPreview({
           {totalCount > comments.length && (
             <Pressable onPress={onViewAllPress} className="mt-2">
               <Text className="text-sm text-blue-500">
-                コメント{totalCount}件すべてを見る
+                {t('article.viewAllComments', { count: totalCount })}
               </Text>
             </Pressable>
           )}
@@ -160,7 +162,7 @@ export function ArticleCommentPreview({
         <View className="py-4 items-center">
           <Ionicons name="chatbubble-outline" size={32} color={colors.gray[300]} />
           <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mt-2">
-            まだコメントがありません
+            {t('article.noComments')}
           </Text>
         </View>
       )}

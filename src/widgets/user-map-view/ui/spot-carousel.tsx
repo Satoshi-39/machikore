@@ -22,6 +22,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { LOCATION_ICONS, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { useToggleSpotLike } from '@/entities/like';
@@ -65,8 +66,9 @@ function SpotCard({
   onPress,
   onCameraMove,
 }: SpotCardProps) {
+  const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
-  const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+  const spotName = spot.custom_name || spot.master_spot?.name || t('spot.unknownSpot');
   const description = spot.description;
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
   const spotColor = (() => {
@@ -209,7 +211,7 @@ function SpotCard({
                 color={isDarkMode ? '#9CA3AF' : '#6B7280'}
               />
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                コメント
+                {t('common.comment')}
               </Text>
             </Pressable>
 
@@ -223,7 +225,7 @@ function SpotCard({
               </Pressable>
               <Pressable onPress={() => setIsLikersModalVisible(true)} className="active:opacity-70 ml-1">
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                  {likeCount > 0 ? likeCount : 'いいね'}
+                  {likeCount > 0 ? likeCount : t('common.like')}
                 </Text>
               </Pressable>
             </View>
@@ -235,7 +237,7 @@ function SpotCard({
                 color={isBookmarked ? '#007AFF' : isDarkMode ? '#9CA3AF' : '#6B7280'}
               />
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                保存
+                {t('common.save')}
               </Text>
             </Pressable>
 
@@ -246,7 +248,7 @@ function SpotCard({
                 color={isDarkMode ? '#9CA3AF' : '#6B7280'}
               />
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                共有
+                {t('common.share')}
               </Text>
             </Pressable>
           </View>

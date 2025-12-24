@@ -17,6 +17,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
+import { formatRelativeTime } from '@/shared/lib/utils';
 import { useUserStore } from '@/entities/user';
 import {
   useNotifications,
@@ -25,63 +27,46 @@ import {
 } from '@/entities/notification';
 import type { NotificationWithDetails, NotificationType } from '@/shared/api/supabase/notifications';
 
-// 通知タイプごとのアイコンと色
+// 通知タイプごとのアイコンと色（colors.actionを使用）
 const NOTIFICATION_TYPE_CONFIG: Record<
   NotificationType,
-  { icon: keyof typeof Ionicons.glyphMap; color: string; label: string }
+  { icon: keyof typeof Ionicons.glyphMap; color: string; labelKey: string }
 > = {
-  like_spot: { icon: 'heart', color: '#EF4444', label: 'いいね' },
-  like_map: { icon: 'heart', color: '#EF4444', label: 'いいね' },
-  comment_spot: { icon: 'chatbubble', color: '#3B82F6', label: 'コメント' },
-  comment_map: { icon: 'chatbubble', color: '#3B82F6', label: 'コメント' },
-  follow: { icon: 'person-add', color: '#8B5CF6', label: 'フォロー' },
-  system: { icon: 'megaphone', color: '#F59E0B', label: 'お知らせ' },
+  like_spot: { icon: 'heart', color: colors.action.like, labelKey: 'notification.like' },
+  like_map: { icon: 'heart', color: colors.action.like, labelKey: 'notification.like' },
+  comment_spot: { icon: 'chatbubble', color: colors.action.comment, labelKey: 'notification.comment' },
+  comment_map: { icon: 'chatbubble', color: colors.action.comment, labelKey: 'notification.comment' },
+  follow: { icon: 'person-add', color: colors.action.follow, labelKey: 'notification.follow' },
+  system: { icon: 'megaphone', color: colors.action.system, labelKey: 'notification.system' },
 };
 
-// 相対時間表示
-function getRelativeTime(dateString: string): string {
-  const now = new Date();
-  const date = new Date(dateString);
-  const diffMs = now.getTime() - date.getTime();
-  const diffMins = Math.floor(diffMs / (1000 * 60));
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-  if (diffMins < 1) return 'たった今';
-  if (diffMins < 60) return `${diffMins}分前`;
-  if (diffHours < 24) return `${diffHours}時間前`;
-  if (diffDays < 7) return `${diffDays}日前`;
-
-  return date.toLocaleDateString('ja-JP', {
-    month: 'short',
-    day: 'numeric',
-  });
-}
-
-// 通知メッセージを生成
-function getNotificationMessage(notification: NotificationWithDetails): string {
-  const actorName = notification.actor?.display_name || notification.actor?.username || '誰か';
+// 通知メッセージを生成（i18n対応のためtranslate関数を受け取る）
+function getNotificationMessage(
+  notification: NotificationWithDetails,
+  t: (key: string, params?: Record<string, string | number>) => string
+): string {
+  const actorName = notification.actor?.display_name || notification.actor?.username || t('mypage.defaultUser');
   const spotName =
     notification.spot?.custom_name ||
     notification.spot?.master_spot?.name ||
-    'スポット';
-  const mapName = notification.map?.name || 'マップ';
+    t('spot.spotName');
+  const mapName = notification.map?.name || t('map.mapName');
 
   switch (notification.type) {
     case 'like_spot':
-      return `${actorName}さんがあなたのスポット「${spotName}」にいいねしました`;
+      return t('notification.likedYourSpot', { name: actorName, target: spotName });
     case 'like_map':
-      return `${actorName}さんがあなたのマップ「${mapName}」にいいねしました`;
+      return t('notification.likedYourMap', { name: actorName, target: mapName });
     case 'comment_spot':
-      return `${actorName}さんがあなたのスポット「${spotName}」にコメントしました`;
+      return t('notification.commentedOnYourSpot', { name: actorName, target: spotName });
     case 'comment_map':
-      return `${actorName}さんがあなたのマップ「${mapName}」にコメントしました`;
+      return t('notification.commentedOnYourMap', { name: actorName, target: mapName });
     case 'follow':
-      return `${actorName}さんがあなたをフォローしました`;
+      return t('notification.followedYou', { name: actorName });
     case 'system':
-      return notification.content || 'システムからのお知らせ';
+      return notification.content || t('notification.system');
     default:
-      return '新しい通知があります';
+      return t('notification.newNotification');
   }
 }
 
@@ -89,11 +74,12 @@ interface NotificationItemProps {
   notification: NotificationWithDetails;
   onAvatarPress: () => void;
   onContentPress: () => void;
+  t: (key: string, params?: Record<string, string | number>) => string;
 }
 
-function NotificationItem({ notification, onAvatarPress, onContentPress }: NotificationItemProps) {
+function NotificationItem({ notification, onAvatarPress, onContentPress, t }: NotificationItemProps) {
   const config = NOTIFICATION_TYPE_CONFIG[notification.type];
-  const message = getNotificationMessage(notification);
+  const message = getNotificationMessage(notification, t);
 
   return (
     <View
@@ -147,7 +133,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress }: Notif
 
         {/* 時間 */}
         <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
-          {getRelativeTime(notification.created_at)}
+          {formatRelativeTime(notification.created_at)}
         </Text>
       </Pressable>
 
@@ -161,6 +147,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress }: Notif
 
 export function NotificationList() {
   const router = useRouter();
+  const { t } = useI18n();
   const user = useUserStore((state) => state.user);
   const { data: notifications = [], isLoading, refetch, isRefetching } = useNotifications(user?.id);
   const { mutate: markAsRead } = useMarkNotificationAsRead();
@@ -224,7 +211,7 @@ export function NotificationList() {
       <View className="flex-1 items-center justify-center px-6 bg-surface dark:bg-dark-surface">
         <Ionicons name="notifications-outline" size={80} color="#D1D5DB" />
         <Text className="text-lg font-medium text-foreground-secondary dark:text-dark-foreground-secondary mt-6">
-          通知はありません
+          {t('empty.noNotifications')}
         </Text>
       </View>
     );
@@ -237,7 +224,7 @@ export function NotificationList() {
         <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light">
           <Pressable onPress={handleMarkAllAsRead}>
             <Text className="text-sm text-blue-500 font-medium text-right">
-              すべて既読にする
+              {t('notification.markAllRead')}
             </Text>
           </Pressable>
         </View>
@@ -251,6 +238,7 @@ export function NotificationList() {
             notification={item}
             onAvatarPress={() => handleAvatarPress(item)}
             onContentPress={() => handleContentPress(item)}
+            t={t}
           />
         )}
         refreshControl={

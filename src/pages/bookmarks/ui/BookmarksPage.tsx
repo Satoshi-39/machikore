@@ -14,8 +14,10 @@ import { BookmarkFolderList } from '@/widgets/bookmark-folder-list';
 import { useCurrentUserId } from '@/entities/user';
 import { useBookmarkFolders, useBookmarks } from '@/entities/bookmark';
 import { PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function BookmarksPage() {
+  const { t } = useI18n();
   const userId = useCurrentUserId();
   const [activeTab, setActiveTab] = useState<BookmarkTabMode>('spots');
   const [isCreateFolderModalVisible, setIsCreateFolderModalVisible] = useState(false);
@@ -28,9 +30,9 @@ export function BookmarksPage() {
   if (!userId) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="ブックマーク" />
+        <PageHeader title={t('bookmark.bookmarks')} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">ログインしてください</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('bookmark.loginRequired')}</Text>
         </View>
       </View>
     );
@@ -38,14 +40,14 @@ export function BookmarksPage() {
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
-      <PageHeader title="ブックマーク" />
+      <PageHeader title={t('bookmark.bookmarks')} />
       {/* スポット/マップ タブ */}
       <BookmarkTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />
 
       {/* コンテンツ */}
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">読み込み中...</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.loading')}</Text>
         </View>
       ) : (
         <BookmarkFolderList

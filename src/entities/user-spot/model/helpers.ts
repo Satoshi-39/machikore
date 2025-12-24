@@ -116,42 +116,6 @@ export function validateCreateSpotParams(
 }
 
 // ===============================
-// フォーマット
-// ===============================
-
-/**
- * スポット日時を日本語フォーマットで取得
- */
-export function formatSpotDate(createdAt: string): string {
-  const date = new Date(createdAt);
-  return new Intl.DateTimeFormat('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(date);
-}
-
-/**
- * スポット日時を相対時間で取得
- */
-export function getRelativeSpotTime(createdAt: string): string {
-  const now = new Date();
-  const created = new Date(createdAt);
-  const diffInMs = now.getTime() - created.getTime();
-  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-
-  if (diffInMinutes < 1) return 'たった今';
-  if (diffInMinutes < 60) return `${diffInMinutes}分前`;
-  if (diffInHours < 24) return `${diffInHours}時間前`;
-  if (diffInDays < 7) return `${diffInDays}日前`;
-  return formatSpotDate(createdAt);
-}
-
-// ===============================
 // ソート・フィルタ
 // ===============================
 

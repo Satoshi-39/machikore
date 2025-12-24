@@ -8,12 +8,14 @@ import { useRouter } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { CollectionsTab } from '@/widgets/mypage-tab-content';
 import { PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface CollectionsPageProps {
   userId?: string;
 }
 
 export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentUserId = useCurrentUserId();
   const userId = propUserId || currentUserId;
@@ -25,10 +27,10 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
-        title="コレクション"
+        title={t('collection.collections')}
         rightComponent={
           <Pressable onPress={handleCreate} className="py-2">
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">新規作成</Text>
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">{t('collection.createNew')}</Text>
           </Pressable>
         }
       />

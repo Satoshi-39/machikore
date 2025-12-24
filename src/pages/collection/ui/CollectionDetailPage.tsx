@@ -17,12 +17,14 @@ import { PageHeader, Loading, ErrorView } from '@/shared/ui';
 import { MapCompactCard } from '@/widgets/map-cards';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
 import type { MapWithUser } from '@/shared/types';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface CollectionDetailPageProps {
   collectionId: string;
 }
 
 export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
@@ -97,13 +99,13 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
                 <View className="flex-row items-center gap-1">
                   <Ionicons name="map" size={14} color={colors.text.secondary} />
                   <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                    {collection.maps_count}マップ
+                    {t('collection.mapsCount', { count: collection.maps_count })}
                   </Text>
                 </View>
                 {!collection.is_public && (
                   <View className="flex-row items-center gap-1">
                     <Ionicons name="lock-closed" size={14} color={colors.text.secondary} />
-                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">非公開</Text>
+                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('collection.private')}</Text>
                   </View>
                 )}
               </View>
@@ -127,7 +129,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
                 </View>
               )}
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                {collection.user.display_name || collection.user.username || '名無しさん'}
+                {collection.user.display_name || collection.user.username || t('collection.anonymous')}
               </Text>
             </Pressable>
           )}
@@ -136,7 +138,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         {/* セクションヘッダー */}
         <View className="px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-t border-border-light dark:border-dark-border-light">
           <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
-            マップ一覧
+            {t('collection.mapList')}
           </Text>
         </View>
       </View>
@@ -146,8 +148,8 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   if (isLoading) {
     return (
       <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-        <PageHeader title="コレクション" />
-        <Loading message="読み込み中..." />
+        <PageHeader title={t('collection.collection')} />
+        <Loading message={t('common.loading')} />
       </View>
     );
   }
@@ -155,7 +157,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   if (error) {
     return (
       <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-        <PageHeader title="コレクション" />
+        <PageHeader title={t('collection.collection')} />
         <ErrorView error={error} />
       </View>
     );
@@ -164,11 +166,11 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
-        title="コレクション"
+        title={t('collection.collection')}
         rightComponent={
           isOwner ? (
             <Pressable onPress={handleAddMaps} className="py-2">
-              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">編集</Text>
+              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">{t('collection.edit')}</Text>
             </Pressable>
           ) : undefined
         }
@@ -196,7 +198,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         ListEmptyComponent={
           <View className="py-12 items-center">
             <Ionicons name="map-outline" size={48} color={colors.gray[300]} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">まだマップがありません</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('collection.noMaps')}</Text>
           </View>
         }
       />

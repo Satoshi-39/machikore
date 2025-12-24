@@ -10,10 +10,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { EditMapForm, useEditMapForm } from '@/features/edit-map';
+import { useI18n } from '@/shared/lib/i18n';
 import { SingleDataBoundary, PageHeader } from '@/shared/ui';
 
 export function EditMapPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { t } = useI18n();
   const { map, initialTags, isLoading, isUpdating, handleSubmit } = useEditMapForm({
     mapId: id ?? '',
   });
@@ -24,12 +26,12 @@ export function EditMapPage() {
 
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-      <PageHeader title="マップを編集" />
+      <PageHeader title={t('editMap.title')} />
       <SingleDataBoundary
         isLoading={isLoading}
         error={null}
         data={formData}
-        notFoundMessage="マップが見つかりません"
+        notFoundMessage={t('editMap.notFound')}
         notFoundIcon="map-outline"
       >
         {(data) => (

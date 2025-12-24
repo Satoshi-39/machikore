@@ -6,7 +6,7 @@
  * - 検索結果リスト表示
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -14,25 +14,27 @@ import { colors } from '@/shared/config';
 import { useSpotSearch, SpotCard } from '@/entities/user-spot';
 import { useMapSearch, MapCard } from '@/entities/map';
 import { useUserSearch, UserListItem, useUserStore } from '@/entities/user';
+import { useI18n } from '@/shared/lib/i18n';
 
 type SearchResultTab = 'latest' | 'trending' | 'spots' | 'maps' | 'users';
-
-const SEARCH_RESULT_TABS: { key: SearchResultTab; label: string }[] = [
-  { key: 'latest', label: '最新' },
-  { key: 'trending', label: '話題' },
-  { key: 'spots', label: 'スポット' },
-  { key: 'maps', label: 'マップ' },
-  { key: 'users', label: 'ユーザー' },
-];
 
 interface DiscoverSearchResultsProps {
   query: string;
 }
 
 export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const [resultTab, setResultTab] = useState<SearchResultTab>('latest');
   const currentUser = useUserStore((state) => state.user);
+
+  const searchResultTabs = useMemo(() => [
+    { key: 'latest' as SearchResultTab, label: t('discover.latest') },
+    { key: 'trending' as SearchResultTab, label: t('discover.trending') },
+    { key: 'spots' as SearchResultTab, label: t('discover.spots') },
+    { key: 'maps' as SearchResultTab, label: t('discover.maps') },
+    { key: 'users' as SearchResultTab, label: t('discover.users') },
+  ], [t]);
 
   // 検索実行
   const { data: spots, isLoading: spotsLoading } = useSpotSearch(
@@ -89,7 +91,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="search-outline" size={48} color={colors.text.tertiary} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">検索結果がありません</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noSearchResults')}</Text>
         </View>
       );
     }
@@ -136,7 +138,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="trending-up-outline" size={48} color={colors.text.tertiary} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">話題の投稿がありません</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noTrendingPosts')}</Text>
         </View>
       );
     }
@@ -194,7 +196,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="location-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">スポットが見つかりませんでした</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noSpotsFound')}</Text>
           </View>
         );
       }
@@ -221,7 +223,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="map-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">マップが見つかりませんでした</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noMapsFound')}</Text>
           </View>
         );
       }
@@ -248,7 +250,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="people-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">ユーザーが見つかりませんでした</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noUsersFound')}</Text>
           </View>
         );
       }
@@ -276,7 +278,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 16, paddingVertical: 8, flexDirection: 'row', alignItems: 'center' }}
         >
-          {SEARCH_RESULT_TABS.map((tab) => {
+          {searchResultTabs.map((tab) => {
             const isActive = resultTab === tab.key;
             return (
               <TouchableOpacity

@@ -15,8 +15,10 @@ import { usePopularMaps } from '@/entities/map';
 import { MapListCard } from '@/widgets/map-cards';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack, useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function PopularMapsPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const { goBack } = useSafeBack();
   const currentTab = useCurrentTab();
@@ -56,13 +58,13 @@ export function PopularMapsPage() {
       className="flex-1 bg-surface dark:bg-dark-surface"
       edges={['top']}
     >
-      <PageHeader title="人気マップランキング" onBack={goBack} useSafeArea={false} />
+      <PageHeader title={t('section.popularRanking')} onBack={goBack} useSafeArea={false} />
 
       <AsyncBoundary
         isLoading={isLoading}
         error={error}
         data={maps && maps.length > 0 ? maps : null}
-        emptyMessage="人気マップがありません"
+        emptyMessage={t('section.noPopularMaps')}
         emptyIonIcon="trending-up-outline"
       >
         {(data) => (

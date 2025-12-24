@@ -9,6 +9,7 @@ import React, { useCallback, useState } from 'react';
 import { View, Text, FlatList, Alert, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { CommentItem, useCommentReplies } from '@/entities/comment';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
@@ -87,24 +88,25 @@ export function CommentList({
   isRefreshing = false,
   ListHeaderComponent,
 }: CommentListProps) {
+  const { t } = useI18n();
   // 展開中の返信スレッド
   const [expandedReplies, setExpandedReplies] = useState<Set<string>>(new Set());
 
   // 削除確認ダイアログを表示
   const handleDelete = useCallback((comment: CommentWithUser) => {
     Alert.alert(
-      'コメントを削除',
-      'このコメントを削除しますか？',
+      t('comment.deleteComment'),
+      t('confirm.deleteMessage'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '削除',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: () => onDeleteConfirm(comment),
         },
       ]
     );
-  }, [onDeleteConfirm]);
+  }, [onDeleteConfirm, t]);
 
   // 返信を表示/非表示
   const handleShowReplies = useCallback((comment: CommentWithUser) => {
@@ -153,9 +155,9 @@ export function CommentList({
   const renderEmpty = useCallback(() => (
     <View className="flex-1 justify-center items-center py-20">
       <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
-      <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">まだコメントがありません</Text>
+      <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('comment.noComments')}</Text>
     </View>
-  ), []);
+  ), [t]);
 
   return (
     <FlatList

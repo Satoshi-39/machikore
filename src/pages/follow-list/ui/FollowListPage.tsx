@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { PageHeader, EmptyState } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { useFollowers, useFollowing, type FollowWithUser } from '@/entities/follow';
 import { FollowButton } from '@/features/follow-user';
 
@@ -20,6 +21,7 @@ interface FollowListPageProps {
 }
 
 export function FollowListPage({ userId, type }: FollowListPageProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const isFollowers = type === 'followers';
@@ -75,10 +77,12 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
     </TouchableOpacity>
   );
 
+  const pageTitle = isFollowers ? t('profile.followers') : t('profile.following');
+
   if (isLoading) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title={isFollowers ? 'フォロワー' : 'フォロー中'} />
+        <PageHeader title={pageTitle} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -88,7 +92,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
-      <PageHeader title={isFollowers ? 'フォロワー' : 'フォロー中'} />
+      <PageHeader title={pageTitle} />
 
       {data && data.length > 0 ? (
         <FlatList
@@ -103,8 +107,8 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
           ionIcon="people-outline"
           message={
             isFollowers
-              ? 'フォロワーはいません'
-              : 'フォロー中のユーザーはいません'
+              ? t('empty.noFollowers')
+              : t('empty.noFollowing')
           }
         />
       )}

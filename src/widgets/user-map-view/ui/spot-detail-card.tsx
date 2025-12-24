@@ -13,6 +13,7 @@ import { colors, LOCATION_ICONS, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStrok
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
 import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
@@ -70,6 +71,7 @@ function SpotDetailCardContent({
 const SEARCH_BAR_BOTTOM_Y = 180;
 
 export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
+  const { t } = useI18n();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -179,7 +181,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // SpotWithDetailsから表示用データを抽出
   // マスタースポットの正式名称（メイン表示）
-  const masterSpotName = spot.master_spot?.name || '不明なスポット';
+  const masterSpotName = spot.master_spot?.name || t('spot.unknownSpot');
   // ユーザーの一言（サブ表示）
   const oneWord = spot.custom_name;
   const spotAddress = spot.master_spot?.google_short_address || spot.google_short_address;
@@ -298,12 +300,12 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // 削除確認ダイアログ
   const handleDeleteSpot = useCallback(() => {
     Alert.alert(
-      'スポットを削除',
-      'このスポットを削除しますか？この操作は取り消せません。',
+      t('spot.deleteSpot'),
+      t('spot.deleteConfirm'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '削除',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: () => {
             deleteSpot(spot.id);
@@ -312,24 +314,24 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         },
       ]
     );
-  }, [spot.id, deleteSpot, onClose]);
+  }, [spot.id, deleteSpot, onClose, t]);
 
   // 三点リーダーメニュー項目
   const menuItems: PopupMenuItem[] = useMemo(() => [
     {
       id: 'edit',
-      label: '編集',
+      label: t('common.edit'),
       icon: 'create-outline',
       onPress: () => onEdit?.(spot.id),
     },
     {
       id: 'delete',
-      label: '削除',
+      label: t('common.delete'),
       icon: 'trash-outline',
       destructive: true,
       onPress: handleDeleteSpot,
     },
-  ], [spot.id, onEdit, handleDeleteSpot]);
+  ], [spot.id, onEdit, handleDeleteSpot, t]);
 
   return (
     <>
@@ -435,24 +437,24 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         )}
 
         {/* 統計情報とアクション */}
-        <View className="flex-row items-center justify-around pt-3 border-t border-border dark:border-dark-border mb-2">
+        <View className="flex-row items-center justify-around pt-4 pb-1 border-t border-border dark:border-dark-border">
           {/* コメント - タップでシートを拡大 */}
           <Pressable
             className="items-center"
             onPress={() => bottomSheetRef.current?.snapToIndex(2)}
           >
-            <View className="flex-row items-center">
+            <View className="flex-row items-center h-6">
               <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
               <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
                 {spot.comments_count}
               </Text>
             </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">コメント</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.comment')}</Text>
           </Pressable>
 
           {/* いいねボタン（アイコン：トグル、数字：ユーザー一覧） */}
           <View className="items-center">
-            <View className="flex-row items-center">
+            <View className="flex-row items-center h-6">
               <Pressable
                 onPress={handleLikePress}
                 disabled={isTogglingLike}
@@ -473,7 +475,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 </Text>
               </Pressable>
             </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">いいね</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.like')}</Text>
           </View>
 
           {/* ブックマークボタン */}
@@ -482,14 +484,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             onPress={handleBookmarkPress}
             disabled={isAddingBookmark || isRemovingFromFolder}
           >
-            <View className="flex-row items-center">
+            <View className="flex-row items-center justify-center h-6">
               <Ionicons
                 name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
                 size={18}
                 color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
               />
             </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">保存</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.save')}</Text>
           </Pressable>
 
           {/* 共有ボタン */}
@@ -497,14 +499,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             className="items-center"
             onPress={handleSharePress}
           >
-            <View className="flex-row items-center">
+            <View className="flex-row items-center justify-center h-6">
               <Ionicons
                 name="share-outline"
                 size={18}
                 color={colors.text.secondary}
               />
             </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">共有</Text>
+            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.share')}</Text>
           </Pressable>
         </View>
 
@@ -513,7 +515,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <View className="flex-row items-center mb-3">
             <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-              記事
+              {t('spot.article')}
             </Text>
           </View>
           {spot.article_content ? (
@@ -522,7 +524,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <View className="py-4 items-center">
               <Ionicons name="document-text-outline" size={24} color={colors.gray[400]} />
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-                まだ記事がありません
+                {t('spot.noArticle')}
               </Text>
             </View>
           )}
@@ -533,7 +535,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <View className="flex-row items-center mb-3">
             <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-              コメント
+              {t('common.comment')}
             </Text>
           </View>
 
@@ -543,7 +545,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
           >
             <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
-              コメントを追加...
+              {t('comment.addPlaceholder')}
             </Text>
           </Pressable>
 
@@ -556,7 +558,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <View className="py-4 items-center">
               <Ionicons name="chatbubble-outline" size={24} color={colors.gray[400]} />
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-                まだコメントはありません
+                {t('comment.noComments')}
               </Text>
             </View>
           ) : (

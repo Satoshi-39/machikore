@@ -7,8 +7,10 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function EditProfileButton() {
+  const { t } = useI18n();
   const router = useRouter();
 
   const handlePress = () => {
@@ -21,7 +23,7 @@ export function EditProfileButton() {
       className="px-4 py-2 rounded-full border border-border dark:border-dark-border active:bg-background-secondary dark:active:bg-dark-background-secondary"
     >
       <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
-        プロフィール編集
+        {t('profile.editProfile')}
       </Text>
     </Pressable>
   );

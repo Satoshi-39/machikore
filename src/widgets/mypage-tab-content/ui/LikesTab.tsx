@@ -13,6 +13,7 @@ import { useCurrentTab } from '@/shared/lib';
 import { Loading, LocationPinIcon } from '@/shared/ui';
 import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
 import type { SpotWithDetails } from '@/shared/types';
+import { useI18n } from '@/shared/lib/i18n';
 
 type LikeSubTab = 'spots' | 'maps';
 
@@ -21,6 +22,7 @@ interface LikesTabProps {
 }
 
 export function LikesTab({ userId }: LikesTabProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const [subTab, setSubTab] = useState<LikeSubTab>('spots');
@@ -53,7 +55,7 @@ export function LikesTab({ userId }: LikesTabProps) {
           className={`flex-1 py-3 items-center ${subTab === 'spots' ? 'border-b-2 border-blue-500' : ''}`}
         >
           <Text className={`text-sm font-medium ${subTab === 'spots' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'}`}>
-            スポット
+            {t('favorite.spot')}
           </Text>
         </Pressable>
         <Pressable
@@ -61,7 +63,7 @@ export function LikesTab({ userId }: LikesTabProps) {
           className={`flex-1 py-3 items-center ${subTab === 'maps' ? 'border-b-2 border-blue-500' : ''}`}
         >
           <Text className={`text-sm font-medium ${subTab === 'maps' ? 'text-blue-500' : 'text-foreground-secondary dark:text-dark-foreground-secondary'}`}>
-            マップ
+            {t('favorite.map')}
           </Text>
         </Pressable>
       </View>
@@ -72,7 +74,7 @@ export function LikesTab({ userId }: LikesTabProps) {
           <View className="flex-1 items-center justify-center py-12">
             <Ionicons name="heart-outline" size={48} color={colors.text.secondary} />
             <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
-              いいねしたスポットがありません
+              {t('favorite.noLikedSpots')}
             </Text>
           </View>
         ) : (
@@ -80,7 +82,7 @@ export function LikesTab({ userId }: LikesTabProps) {
             data={likedSpots}
             keyExtractor={(item) => item.likeId}
             renderItem={({ item }) => {
-              const spotName = item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット';
+              const spotName = item.spot.custom_name || item.spot.master_spot?.name || t('favorite.unknownSpot');
               const address = item.spot.master_spot?.google_short_address || item.spot.google_short_address;
 
               return (
@@ -115,7 +117,7 @@ export function LikesTab({ userId }: LikesTabProps) {
           <View className="flex-1 items-center justify-center py-12">
             <Ionicons name="heart-outline" size={48} color={colors.text.secondary} />
             <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
-              いいねしたマップがありません
+              {t('favorite.noLikedMaps')}
             </Text>
           </View>
         ) : (
@@ -136,7 +138,7 @@ export function LikesTab({ userId }: LikesTabProps) {
                       {item.map.name}
                     </Text>
                     <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                      {item.map.spots_count}スポット
+                      {t('favorite.spotsCount', { count: item.map.spots_count })}
                     </Text>
                   </View>
                   <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />

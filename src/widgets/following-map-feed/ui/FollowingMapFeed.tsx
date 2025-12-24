@@ -12,6 +12,7 @@ import { useUserStore } from '@/entities/user';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getFollowingUsersMaps } from '@/shared/api/supabase';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import type { MapWithUser } from '@/shared/types';
 import { AsyncBoundary } from '@/shared/ui';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -31,6 +32,7 @@ export function FollowingMapFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
   const userId = currentUser?.id;
+  const { t } = useI18n();
 
   // フォロー中ユーザーのマップ取得
   const {
@@ -119,7 +121,7 @@ export function FollowingMapFeed() {
     return (
       <View className="flex-1 items-center justify-center px-6">
         <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
-          フォロー中のユーザーはいません
+          {t('empty.noFollowingUsers')}
         </Text>
       </View>
     );
@@ -130,7 +132,7 @@ export function FollowingMapFeed() {
       isLoading={isLoading}
       error={error}
       data={maps.length > 0 ? maps : null}
-      emptyMessage="フォロー中のユーザーのマップはありません"
+      emptyMessage={t('empty.noFollowingMaps')}
       emptyIonIcon="people-outline"
     >
       {(data) => (

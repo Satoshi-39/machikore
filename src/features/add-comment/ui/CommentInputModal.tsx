@@ -23,6 +23,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { useAddSpotComment, useAddMapComment, useAddReplyComment } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -50,6 +51,7 @@ export function CommentInputModal({
   currentUserId,
   replyingTo,
 }: CommentInputModalProps) {
+  const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const [text, setText] = useState('');
   const inputRef = useRef<TextInput>(null);
@@ -97,13 +99,13 @@ export function CommentInputModal({
 
   // プレースホルダー
   const placeholder = replyingTo
-    ? `返信を入力...`
-    : 'コメントを入力...';
+    ? t('comment.enterReply')
+    : t('comment.enterComment');
 
   // 送信ハンドラー
   const handleSubmit = useCallback(() => {
     if (!currentUserId) {
-      showLoginRequiredAlert(replyingTo ? '返信' : 'コメント');
+      showLoginRequiredAlert(replyingTo ? t('comment.reply') : t('comment.comment'));
       return;
     }
     if (!text.trim()) return;
@@ -131,7 +133,7 @@ export function CommentInputModal({
         { onSuccess }
       );
     }
-  }, [currentUserId, text, replyingTo, spotId, mapId, addReply, addSpotComment, addMapComment, onClose]);
+  }, [currentUserId, text, replyingTo, spotId, mapId, addReply, addSpotComment, addMapComment, onClose, t]);
 
   // 閉じる処理
   const handleClose = useCallback(() => {
@@ -178,7 +180,7 @@ export function CommentInputModal({
               <Ionicons name="close" size={24} color={colors.gray[600]} />
             </Pressable>
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-              {isReplyMode ? '返信' : 'コメント'}
+              {isReplyMode ? t('comment.reply') : t('comment.comment')}
             </Text>
             <Pressable
               onPress={handleSubmit}
@@ -202,7 +204,7 @@ export function CommentInputModal({
                     color: canSubmit ? 'white' : colors.gray[400],
                   }}
                 >
-                  投稿
+                  {t('common.post')}
                 </Text>
               )}
             </Pressable>
@@ -225,7 +227,7 @@ export function CommentInputModal({
                 )}
                 <View className="flex-1 ml-3">
                   <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
-                    {replyingTo.user?.display_name || replyingTo.user?.username || 'ユーザー'}
+                    {replyingTo.user?.display_name || replyingTo.user?.username || t('common.user')}
                   </Text>
                   <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={2}>
                     {replyingTo.content}

@@ -11,6 +11,8 @@ import { useMapLabels } from '@/entities/map-label';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { MapLabelsSection, type LocalMapLabel } from '@/features/manage-map-labels';
 import { colors, INPUT_LIMITS } from '@/shared/config';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
+import { formatLocalizedDate } from '@/shared/lib/utils';
 import type { MapWithUser } from '@/shared/types';
 import { TagInput, PublicToggle } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -64,6 +66,7 @@ export function EditMapForm({
   onSubmit,
   isLoading = false,
 }: EditMapFormProps) {
+  const { t } = useI18n();
   const { data: categories = [] } = useCategories();
 
   // ラベルデータ取得
@@ -153,7 +156,7 @@ export function EditMapForm({
           <View className="flex-row items-center mb-3">
             <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
             <Text className="ml-2 text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
-              マップ情報
+              {t('editMap.mapInfo')}
             </Text>
           </View>
 
@@ -163,7 +166,7 @@ export function EditMapForm({
                 {map.spots_count}
               </Text>
               <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                スポット
+                {t('editMap.spots')}
               </Text>
             </View>
             <View className="items-center">
@@ -171,15 +174,15 @@ export function EditMapForm({
                 {map.likes_count}
               </Text>
               <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                いいね
+                {t('editMap.likes')}
               </Text>
             </View>
             <View className="items-center">
               <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
-                作成日
+                {t('editMap.createdAt')}
               </Text>
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                {new Date(map.created_at).toLocaleDateString('ja-JP')}
+                {formatLocalizedDate(new Date(map.created_at))}
               </Text>
             </View>
           </View>
@@ -188,12 +191,12 @@ export function EditMapForm({
         {/* マップ名（必須） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            マップ名 <Text className="text-red-500">*</Text>
+            {t('editMap.mapNameLabel')} <Text className="text-red-500">{t('editMap.required')}</Text>
           </Text>
           <TextInput
             value={name}
             onChangeText={setName}
-            placeholder="例：東京カフェ巡り"
+            placeholder={t('editMap.mapNamePlaceholder')}
             maxLength={INPUT_LIMITS.MAP_NAME}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
             placeholderTextColor="#9CA3AF"
@@ -206,12 +209,12 @@ export function EditMapForm({
         {/* 説明 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            説明 <Text className="text-red-500">*</Text>
+            {t('editMap.descriptionLabel')} <Text className="text-red-500">{t('editMap.required')}</Text>
           </Text>
           <TextInput
             value={description}
             onChangeText={setDescription}
-            placeholder="このマップについての説明を入力してください"
+            placeholder={t('editMap.descriptionPlaceholder')}
             multiline
             numberOfLines={4}
             maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
@@ -227,7 +230,7 @@ export function EditMapForm({
         {/* カテゴリ */}
         <View className="mb-4">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            カテゴリ <Text className="text-red-500">*</Text>
+            {t('editMap.categoryLabel')} <Text className="text-red-500">{t('editMap.required')}</Text>
           </Text>
           <FlatList
             data={categories}
@@ -266,7 +269,7 @@ export function EditMapForm({
                         : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
-                    {category.name}
+                    {getTranslatedName(category.name, category.name_translations)}
                   </Text>
                 </TouchableOpacity>
               );
@@ -278,7 +281,7 @@ export function EditMapForm({
         {isLabelsLoading ? (
           <View className="mb-6">
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-              ラベル
+              {t('editMap.labelLabel')}
             </Text>
             <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
           </View>
@@ -297,7 +300,7 @@ export function EditMapForm({
                 style={{ marginRight: 8 }}
               />
               <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
-                ラベルチップを表示
+                {t('editMap.showLabelChips')}
               </Text>
             </View>
             <Switch
@@ -308,19 +311,19 @@ export function EditMapForm({
             />
           </View>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-            マップ上部にラベルを表示し、タップでスポットをフィルタリングできます
+            {t('editMap.showLabelChipsDescription')}
           </Text>
         </View>
 
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            タグ
+            {t('editMap.tagsLabel')}
           </Text>
           <TagInput
             tags={tags}
             onTagsChange={setTags}
-            placeholder="タグを入力してEnter"
+            placeholder={t('editMap.tagsPlaceholder')}
             maxTags={10}
           />
         </View>
@@ -328,7 +331,7 @@ export function EditMapForm({
         {/* サムネイル */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            サムネイル
+            {t('editMap.thumbnailLabel')}
           </Text>
           <ThumbnailPicker
             image={thumbnailImage}
@@ -342,8 +345,8 @@ export function EditMapForm({
             value={isPublic}
             onValueChange={setIsPublic}
             description={isPublic
-              ? '誰でもこのマップを見ることができます'
-              : '自分だけがこのマップを見ることができます'}
+              ? t('editMap.publicDescription')
+              : t('editMap.privateDescription')}
           />
         </View>
 
@@ -357,7 +360,7 @@ export function EditMapForm({
           activeOpacity={0.8}
         >
           <Text className="text-white text-base font-semibold">
-            {isLoading ? '更新中...' : '変更を保存'}
+            {isLoading ? t('editMap.updating') : t('editMap.saveChanges')}
           </Text>
         </TouchableOpacity>
       </View>

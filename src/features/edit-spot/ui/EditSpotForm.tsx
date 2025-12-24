@@ -24,6 +24,7 @@ import type { Database } from '@/shared/types/supabase.generated';
 import type { MapWithUser } from '@/shared/types';
 import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
+import { useI18n } from '@/shared/lib/i18n';
 
 type ImageRow = Database['public']['Tables']['images']['Row'];
 
@@ -69,6 +70,7 @@ export function EditSpotForm({
   selectedMapId,
   isMapsLoading = false,
 }: EditSpotFormProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const spotName = spot.custom_name || spot.master_spot?.name || '';
 
@@ -134,15 +136,15 @@ export function EditSpotForm({
   // ローディング表示のテキストを決定
   const getLoadingText = () => {
     if (!uploadProgress || uploadProgress.status === 'idle') {
-      return 'スポットを更新中...';
+      return t('spot.updatingSpot');
     }
     if (uploadProgress.status === 'deleting') {
-      return '画像を削除中...';
+      return t('spot.deletingImages');
     }
     if (uploadProgress.status === 'uploading') {
-      return `画像をアップロード中... (${uploadProgress.current}/${uploadProgress.total})`;
+      return t('spot.uploadingImages', { current: uploadProgress.current, total: uploadProgress.total });
     }
-    return '完了処理中...';
+    return t('spot.processingComplete');
   };
 
   return (
@@ -179,14 +181,14 @@ export function EditSpotForm({
         <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
           <View className="mb-3">
             <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
-              スポット情報
+              {t('spot.spotInfo')}
             </Text>
           </View>
 
           {/* スポット名 */}
           {spot.master_spot?.name && (
             <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">スポット名</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.spotName')}</Text>
               <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
                 {spot.master_spot.name}
               </Text>
@@ -207,7 +209,7 @@ export function EditSpotForm({
         {/* マップ（表示のみ） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            所属するマップ
+            {t('map.belongingMap')}
           </Text>
           <View className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
@@ -220,7 +222,7 @@ export function EditSpotForm({
                 <Text className="text-base text-foreground dark:text-dark-foreground">{selectedMap.name}</Text>
               </View>
             ) : (
-              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">マップが選択されていません</Text>
+              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">{t('map.noMapSelected')}</Text>
             )}
           </View>
         </View>
@@ -228,12 +230,12 @@ export function EditSpotForm({
         {/* このスポットを一言で！（必須） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            このスポットを一言で！ <Text className="text-red-500">*</Text>
+            {t('spot.oneWordRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={customName}
             onChangeText={setCustomName}
-            placeholder="例：最高のラーメン屋"
+            placeholder={t('spot.oneWordPlaceholder')}
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
@@ -247,12 +249,12 @@ export function EditSpotForm({
         {/* スポットの概要（任意） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポットの概要
+            {t('spot.spotSummary')}
           </Text>
           <StyledTextInput
             value={description}
             onChangeText={setDescription}
-            placeholder="このスポットの魅力を簡潔に"
+            placeholder={t('spot.summaryPlaceholder')}
             multiline
             numberOfLines={2}
             maxLength={INPUT_LIMITS.SPOT_SUMMARY}
@@ -268,7 +270,7 @@ export function EditSpotForm({
 
         {/* 記事 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">記事</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.article')}</Text>
           <TouchableOpacity
             onPress={() => router.push(`/edit-spot-article/${spot.id}`)}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
@@ -277,25 +279,25 @@ export function EditSpotForm({
             <View className="flex-row items-center flex-1">
               <Ionicons name="document-text-outline" size={20} color={colors.primary.DEFAULT} />
               <Text className="ml-3 text-base text-foreground dark:text-dark-foreground">
-                {articleContent ? '記事を編集' : '記事を書く'}
+                {articleContent ? t('spot.articleEdit') : t('spot.articleWrite')}
               </Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
           </TouchableOpacity>
           {!articleContent && (
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-              このスポットについて詳しく書いてみましょう
+              {t('spot.articleWriteHint')}
             </Text>
           )}
         </View>
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('map.tags')}</Text>
           <TagInput
             tags={tags}
             onTagsChange={setTags}
-            placeholder="タグを入力してEnter"
+            placeholder={t('map.tagsPlaceholder')}
             maxTags={10}
           />
         </View>
@@ -304,7 +306,7 @@ export function EditSpotForm({
         {selectedMapId && (
           <View className="mb-6" style={{ zIndex: 3000 }}>
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-              ラベル
+              {t('spot.label')}
             </Text>
             <LabelPicker
               labels={mapLabels}
@@ -318,7 +320,7 @@ export function EditSpotForm({
         {/* スポットの色 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポットの色
+            {t('spot.spotColor')}
           </Text>
           <View style={{ opacity: selectedLabelId ? 0.5 : 1 }} pointerEvents={selectedLabelId ? 'none' : 'auto'}>
             <SpotColorPicker
@@ -328,19 +330,19 @@ export function EditSpotForm({
           </View>
           {selectedLabelId && (
             <Text className="text-xs text-red-500 mt-2">
-              ※ラベルが設定されている場合、ラベルの色が優先されます
+              {t('spot.labelColorNotice')}
             </Text>
           )}
         </View>
 
         {/* 写真 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">写真</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
 
           {/* 既存の画像 */}
           {displayedExistingImages.length > 0 && (
             <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">登録済みの写真</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.existingPhotos')}</Text>
               <View className="flex-row flex-wrap gap-2">
                 {displayedExistingImages.map((image) => (
                   <View key={image.id} className="relative">
@@ -365,7 +367,7 @@ export function EditSpotForm({
           {maxNewImages > 0 && (
             <View>
               {newImages.length > 0 && (
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">新しく追加する写真</Text>
+                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.newPhotos')}</Text>
               )}
               <ImagePickerButton
                 images={newImages}
@@ -377,7 +379,7 @@ export function EditSpotForm({
           )}
 
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-            合計 {displayedExistingImages.length + newImages.length}/{INPUT_LIMITS.MAX_IMAGES_PER_SPOT}枚
+            {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: INPUT_LIMITS.MAX_IMAGES_PER_SPOT })}
           </Text>
         </View>
 
@@ -391,7 +393,7 @@ export function EditSpotForm({
           activeOpacity={0.8}
         >
           <Text className="text-white text-base font-semibold">
-            {isLoading ? '更新中...' : '変更を保存'}
+            {isLoading ? t('spot.updating') : t('spot.saveChanges')}
           </Text>
         </TouchableOpacity>
       </View>

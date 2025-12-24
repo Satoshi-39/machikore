@@ -9,17 +9,23 @@ import { useCategoryPopularMaps } from '@/entities/map';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
 import { MapRankingSection } from './MapRankingSection';
+import { useI18n } from '@/shared/lib/i18n';
+import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
 
 interface CategoryPopularSectionProps {
   categoryId: string;
 }
 
 export function CategoryPopularSection({ categoryId }: CategoryPopularSectionProps) {
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
   const { data: maps, isLoading, error } = useCategoryPopularMaps(categoryId, 10, currentUserId);
 
-  const categoryName = categories.find((c) => c.id === categoryId)?.name ?? '';
+  const category = categories.find((c) => c.id === categoryId);
+  const categoryName = category
+    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null)
+    : '';
 
   // マップがない場合は何も表示しない
   if (!isLoading && (!maps || maps.length === 0)) {
@@ -28,7 +34,7 @@ export function CategoryPopularSection({ categoryId }: CategoryPopularSectionPro
 
   return (
     <MapRankingSection
-      title={`${categoryName}の人気マップ`}
+      title={t('section.popularInCategory', { category: categoryName })}
       maps={maps}
       isLoading={isLoading}
       error={error}

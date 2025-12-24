@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
@@ -23,6 +24,7 @@ interface MapArticlePageProps {
 }
 
 export function MapArticlePage({ mapId }: MapArticlePageProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
@@ -84,7 +86,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     const items: PopupMenuItem[] = [
       {
         id: 'map',
-        label: 'マップを見る',
+        label: t('article.viewMap'),
         icon: 'map-outline',
         onPress: handleGoToMapPress,
       },
@@ -94,13 +96,13 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       items.push(
         {
           id: 'edit-article',
-          label: '記事を編集',
+          label: t('article.editArticle'),
           icon: 'document-text-outline',
           onPress: handleEditArticlePress,
         },
         {
           id: 'edit-map',
-          label: 'マップを編集',
+          label: t('article.editMap'),
           icon: 'create-outline',
           onPress: handleEditMapPress,
         }
@@ -108,13 +110,13 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     }
 
     return items;
-  }, [isOwner, handleGoToMapPress, handleEditArticlePress, handleEditMapPress]);
+  }, [isOwner, handleGoToMapPress, handleEditArticlePress, handleEditMapPress, t]);
 
   // ローディング状態
   if (isLoading) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
-        <PageHeader title="記事" />
+        <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -126,10 +128,10 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   if (!articleData) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
-        <PageHeader title="記事" />
+        <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="document-text-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">記事が見つかりません</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('article.notFound')}</Text>
         </View>
       </SafeAreaView>
     );
@@ -140,10 +142,10 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   if (!isArticlePublic && !isOwner) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
-        <PageHeader title="記事" />
+        <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="lock-closed-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">この記事は非公開です</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('article.private')}</Text>
         </View>
       </SafeAreaView>
     );
@@ -152,7 +154,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
       <PageHeader
-        title="記事"
+        title={t('article.article')}
         rightComponent={
           <PopupMenu items={menuItems} triggerSize={22} triggerColor={colors.gray[600]} />
         }

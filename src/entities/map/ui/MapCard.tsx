@@ -15,10 +15,11 @@ import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
 import { useDeleteMap } from '@/entities/map/api';
-import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
+import { formatRelativeTime } from '@/shared/lib/utils';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
 import { LikersModal } from '@/features/view-likers';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface MapCardProps {
   map: MapRow | MapWithUser;
@@ -28,10 +29,13 @@ interface MapCardProps {
   onEdit?: (mapId: string) => void;
   onCommentPress?: (mapId: string) => void;
   onArticlePress?: (mapId: string) => void;
+  /** 下部ボーダーを非表示にする */
+  noBorder?: boolean;
 }
 
-export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress }: MapCardProps) {
+export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress, noBorder = false }: MapCardProps) {
   const router = useRouter();
+  const { t } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
@@ -64,12 +68,12 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
 
   const handleDelete = () => {
     Alert.alert(
-      'マップを削除',
-      'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
+      t('mapCard.deleteTitle'),
+      t('mapCard.deleteMessage'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '削除',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: () => deleteMap(map.id),
         },
@@ -85,13 +89,13 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
       items.push(
         {
           id: 'edit',
-          label: '編集',
+          label: t('menu.edit'),
           icon: 'create-outline',
           onPress: () => onEdit?.(map.id),
         },
         {
           id: 'delete',
-          label: '削除',
+          label: t('menu.delete'),
           icon: 'trash-outline',
           destructive: true,
           onPress: handleDelete,
@@ -101,11 +105,11 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
       // 他ユーザーの場合: 報告する
       items.push({
         id: 'report',
-        label: '報告する',
+        label: t('menu.report'),
         icon: 'flag-outline',
         onPress: () => {
           if (!currentUserId) {
-            showLoginRequiredAlert('報告');
+            showLoginRequiredAlert(t('menu.report'));
             return;
           }
           router.push(`/report?targetType=map&targetId=${map.id}`);
@@ -114,12 +118,12 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
     }
 
     return items;
-  }, [map.id, onEdit, isOwner, currentUserId, router]);
+  }, [map.id, onEdit, isOwner, currentUserId, router, t]);
 
   return (
     <Pressable
       onPress={onPress}
-      className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border p-4"
+      className={`bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
@@ -141,11 +145,11 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         <View className="flex-1">
           <Pressable onPress={() => onUserPress?.(map.user_id)} className="self-start">
             <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
-              {user?.display_name || user?.username || 'ユーザー'}
+              {user?.display_name || user?.username || t('mapCard.defaultUser')}
             </Text>
           </Pressable>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-            {getRelativeSpotTime(map.created_at)}
+            {formatRelativeTime(map.created_at)}
           </Text>
         </View>
 

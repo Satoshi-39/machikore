@@ -18,7 +18,7 @@ interface RegionJsonData {
   id: string; // {country}_{region}形式
   name: string;
   name_kana: string;
-  name_translations?: { en: string };
+  name_translations?: { [key: string]: string };
   latitude: number;
   longitude: number;
   display_order: number;
@@ -47,7 +47,7 @@ function toRegionRow(region: RegionJsonData): RegionRow {
     id: region.id,
     name: region.name,
     name_kana: region.name_kana,
-    name_translations: region.name_translations ? JSON.stringify(region.name_translations) : null,
+    name_translations: region.name_translations ?? null,
     latitude: region.latitude,
     longitude: region.longitude,
     country_id: countryId,

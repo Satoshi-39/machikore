@@ -5,24 +5,25 @@
  * タップでそのエリアのスポット一覧へ遷移
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 
 // 主要エリア定義（prefectureId は prefectures.id に対応）
-const AREAS = [
-  { prefectureId: 'tokyo', label: '東京', emoji: '🗼' },
-  { prefectureId: 'osaka', label: '大阪', emoji: '🏯' },
-  { prefectureId: 'kyoto', label: '京都', emoji: '⛩️' },
-  { prefectureId: 'kanagawa', label: '神奈川', emoji: '🌊' },
-  { prefectureId: 'aichi', label: '愛知', emoji: '🏰' },
-  { prefectureId: 'fukuoka', label: '福岡', emoji: '🍜' },
-  { prefectureId: 'hokkaido', label: '北海道', emoji: '❄️' },
-  { prefectureId: 'hyogo', label: '兵庫', emoji: '🌉' },
+const AREA_CONFIGS = [
+  { prefectureId: 'tokyo', labelKey: 'area.tokyo', emoji: '🗼' },
+  { prefectureId: 'osaka', labelKey: 'area.osaka', emoji: '🏯' },
+  { prefectureId: 'kyoto', labelKey: 'area.kyoto', emoji: '⛩️' },
+  { prefectureId: 'kanagawa', labelKey: 'area.kanagawa', emoji: '🌊' },
+  { prefectureId: 'aichi', labelKey: 'area.aichi', emoji: '🏰' },
+  { prefectureId: 'fukuoka', labelKey: 'area.fukuoka', emoji: '🍜' },
+  { prefectureId: 'hokkaido', labelKey: 'area.hokkaido', emoji: '❄️' },
+  { prefectureId: 'hyogo', labelKey: 'area.hyogo', emoji: '🌉' },
 ] as const;
 
 interface AreaSectionProps {
@@ -32,6 +33,15 @@ interface AreaSectionProps {
 export function AreaSection({ categoryId }: AreaSectionProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
+
+  const areas = useMemo(() =>
+    AREA_CONFIGS.map(config => ({
+      prefectureId: config.prefectureId,
+      label: t(config.labelKey),
+      emoji: config.emoji,
+    })),
+  [t]);
 
   const handleAreaPress = useCallback(
     (prefectureId: string) => {
@@ -59,7 +69,7 @@ export function AreaSection({ categoryId }: AreaSectionProps) {
       {/* セクションタイトル */}
       <View className="flex-row items-center justify-between mb-3">
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
-          📍 エリアから探す
+          📍 {t('section.searchByArea')}
         </Text>
         <Pressable
           onPress={handleShowAllPrefectures}
@@ -75,7 +85,7 @@ export function AreaSection({ categoryId }: AreaSectionProps) {
 
       {/* 2列グリッド */}
       <View className="flex-row flex-wrap" style={{ marginHorizontal: -6 }}>
-        {AREAS.map((area) => (
+        {areas.map((area) => (
           <View key={area.prefectureId} style={{ width: '50%', paddingHorizontal: 6, marginBottom: 12 }}>
             <Pressable
               onPress={() => handleAreaPress(area.prefectureId)}

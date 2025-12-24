@@ -13,12 +13,14 @@ import { ArticleEditor } from '@/features/edit-article';
 import { colors } from '@/shared/config';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface EditSpotArticlePageProps {
   spotId: string;
 }
 
 export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: spot, isLoading } = useSpotWithDetails(spotId, currentUserId);
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
@@ -34,20 +36,20 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       },
       {
         onSuccess: () => {
-          Alert.alert('保存しました');
+          Alert.alert(t('editArticle.saved'));
         },
         onError: () => {
-          Alert.alert('エラー', '保存に失敗しました');
+          Alert.alert(t('common.error'), t('editArticle.saveError'));
         },
       }
     );
-  }, [spot, updateSpot]);
+  }, [spot, updateSpot, t]);
 
   // スポットが見つからない or 権限なし
   if (!isLoading && (!spot || spot.user_id !== currentUserId)) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="記事を編集" />
+        <PageHeader title={t('editArticle.title')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
@@ -55,14 +57,14 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
             color={colors.gray[300]}
           />
           <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-            {!spot ? 'スポットが見つかりません' : '編集権限がありません'}
+            {!spot ? t('editArticle.spotNotFound') : t('editArticle.noPermission')}
           </Text>
         </View>
       </View>
     );
   }
 
-  const spotName = spot?.master_spot?.name || spot?.custom_name || '記事を編集';
+  const spotName = spot?.master_spot?.name || spot?.custom_name || t('editArticle.title');
 
   return (
     <ArticleEditor
@@ -71,7 +73,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       onSave={handleSave}
       isSaving={isSaving}
       isLoading={isLoading}
-      saveButtonText="保存"
+      saveButtonText={t('common.save')}
     />
   );
 }

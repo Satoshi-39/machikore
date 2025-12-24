@@ -8,7 +8,8 @@ import React from 'react';
 import { View, Text, ScrollView, Image, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { RichTextRenderer } from '@/shared/ui';
+import { RichTextRenderer, AddressPinIcon } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 import type { SpotWithImages } from '@/shared/types';
 
 interface ArticleSpotSectionProps {
@@ -19,7 +20,8 @@ interface ArticleSpotSectionProps {
 }
 
 export function ArticleSpotSection({ spot, index, onPress, onImagePress }: ArticleSpotSectionProps) {
-  const spotName = spot.master_spot?.name || spot.custom_name || '不明なスポット';
+  const { t } = useI18n();
+  const spotName = spot.master_spot?.name || spot.custom_name || t('article.unknownSpot');
   const customName = spot.custom_name;
   const address = spot.master_spot?.google_short_address || spot.google_short_address;
 
@@ -67,7 +69,7 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
       {/* 住所（写真の下） */}
       {address && (
         <View className="flex-row items-center mb-3">
-          <Ionicons name="location-outline" size={14} color={colors.gray[400]} />
+          <AddressPinIcon size={14} color={colors.gray[400]} />
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
             {address}
           </Text>

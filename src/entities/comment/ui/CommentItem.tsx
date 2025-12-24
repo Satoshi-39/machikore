@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { formatRelativeTime } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface CommentItemProps {
@@ -39,24 +40,25 @@ export function CommentItem({
   isReply = false,
   isRepliesExpanded = false,
 }: CommentItemProps) {
+  const { t } = useI18n();
   const isOwner = currentUserId === comment.user_id;
   const hasReplies = comment.replies_count > 0;
 
   const menuItems: PopupMenuItem[] = useMemo(() => [
     {
       id: 'edit',
-      label: '編集',
+      label: t('comment.edit'),
       icon: 'create-outline',
       onPress: () => onEdit(comment),
     },
     {
       id: 'delete',
-      label: '削除',
+      label: t('comment.delete'),
       icon: 'trash-outline',
       destructive: true,
       onPress: () => onDelete(comment),
     },
-  ], [comment, onEdit, onDelete]);
+  ], [comment, onEdit, onDelete, t]);
 
   return (
     <View className={`flex-row p-4 border-b border-border-light dark:border-dark-border-light ${isReply ? 'pl-12 bg-surface-secondary dark:bg-dark-surface-secondary' : ''}`}>
@@ -79,7 +81,7 @@ export function CommentItem({
         <View className="flex-row items-center justify-between">
           <Pressable onPress={() => onUserPress(comment.user_id)}>
             <Text className={`font-semibold text-foreground dark:text-dark-foreground ${isReply ? 'text-sm' : ''}`}>
-              {comment.user?.display_name || comment.user?.username || 'ユーザー'}
+              {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
             </Text>
           </Pressable>
           <View className="flex-row items-center">
@@ -125,7 +127,7 @@ export function CommentItem({
               hitSlop={8}
             >
               <Ionicons name="chatbubble-outline" size={16} color={colors.gray[400]} />
-              <Text className="ml-1 text-xs text-foreground-muted dark:text-dark-foreground-muted">返信</Text>
+              <Text className="ml-1 text-xs text-foreground-muted dark:text-dark-foreground-muted">{t('comment.reply')}</Text>
             </Pressable>
           )}
         </View>
@@ -139,8 +141,8 @@ export function CommentItem({
           >
             <Text className="text-xs text-blue-500">
               {isRepliesExpanded
-                ? '返信を非表示'
-                : `${comment.replies_count}件の返信を表示`}
+                ? t('comment.hideReplies')
+                : t('comment.showReplies', { count: comment.replies_count })}
             </Text>
           </Pressable>
         )}

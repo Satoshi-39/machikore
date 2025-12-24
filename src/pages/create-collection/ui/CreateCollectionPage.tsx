@@ -24,8 +24,10 @@ import { PublicToggle } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function CreateCollectionPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
@@ -95,10 +97,10 @@ export function CreateCollectionPage() {
         {/* ヘッダー */}
         <View className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
           <Pressable onPress={handleCancel} className="py-2 w-20">
-            <Text className="text-foreground dark:text-dark-foreground text-base">キャンセル</Text>
+            <Text className="text-foreground dark:text-dark-foreground text-base">{t('common.cancel')}</Text>
           </Pressable>
           <Text className="flex-1 text-lg font-semibold text-foreground dark:text-dark-foreground text-center">
-            新しいコレクション
+            {t('collection.newCollection')}
           </Text>
           <Pressable
             onPress={handleSubmit}
@@ -112,7 +114,7 @@ export function CreateCollectionPage() {
                   : 'text-foreground-muted dark:text-dark-foreground-muted'
               }`}
             >
-              {isSubmitting ? '作成中...' : '作成'}
+              {isSubmitting ? t('collection.creating') : t('collection.create')}
             </Text>
           </Pressable>
         </View>
@@ -123,12 +125,12 @@ export function CreateCollectionPage() {
             {/* 名前入力 */}
             <View className="mb-5">
               <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
-                コレクション名 <Text className="text-red-500">*</Text>
+                {t('collection.collectionName')} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 value={name}
                 onChangeText={setName}
-                placeholder="例: 東京カフェコレクション"
+                placeholder={t('collection.collectionNamePlaceholder')}
                 placeholderTextColor={colors.gray[400]}
                 className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3.5 text-base text-foreground dark:text-dark-foreground"
                 autoFocus
@@ -140,12 +142,12 @@ export function CreateCollectionPage() {
             {/* 説明入力 */}
             <View className="mb-6">
               <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
-                説明（任意）
+                {t('collection.descriptionOptional')}
               </Text>
               <TextInput
                 value={description}
                 onChangeText={setDescription}
-                placeholder="コレクションの説明を入力..."
+                placeholder={t('collection.descriptionPlaceholder')}
                 placeholderTextColor={colors.gray[400]}
                 className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3.5 text-base text-foreground dark:text-dark-foreground"
                 multiline
@@ -159,7 +161,7 @@ export function CreateCollectionPage() {
             {/* サムネイル */}
             <View className="mb-6">
               <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
-                サムネイル
+                {t('collection.thumbnail')}
               </Text>
               <ThumbnailPicker
                 image={thumbnail}
@@ -173,7 +175,7 @@ export function CreateCollectionPage() {
                 value={isPublic}
                 onValueChange={setIsPublic}
                 disabled={isSubmitting}
-                description="オンにすると、他のユーザーがこのコレクションを閲覧できます"
+                description={t('collection.publicDescription')}
               />
             </View>
 
@@ -181,7 +183,7 @@ export function CreateCollectionPage() {
             <View className="flex-row items-start bg-blue-50 rounded-xl p-4">
               <Ionicons name="information-circle" size={20} color={colors.primary.DEFAULT} />
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2 flex-1">
-                コレクションを作成後、マップを追加できます
+                {t('collection.createHint')}
               </Text>
             </View>
           </View>

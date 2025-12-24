@@ -14,6 +14,7 @@ import { removeSpotLike, removeMapLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { PageHeader } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import type { SpotWithDetails } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
@@ -22,6 +23,7 @@ interface LikesPageProps {
 }
 
 export function LikesPage({ userId: propUserId }: LikesPageProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
@@ -71,7 +73,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
-      <PageHeader title="いいね" />
+      <PageHeader title={t('favorite.likedItems')} />
       {/* タブフィルター */}
       <LikeTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />
 

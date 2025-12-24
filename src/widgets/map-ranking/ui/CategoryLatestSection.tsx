@@ -9,17 +9,23 @@ import { useCategoryLatestMaps } from '@/entities/map';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
 import { MapRankingSection } from './MapRankingSection';
+import { useI18n } from '@/shared/lib/i18n';
+import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
 
 interface CategoryLatestSectionProps {
   categoryId: string;
 }
 
 export function CategoryLatestSection({ categoryId }: CategoryLatestSectionProps) {
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
   const { data: maps, isLoading, error } = useCategoryLatestMaps(categoryId, 10, currentUserId);
 
-  const categoryName = categories.find((c) => c.id === categoryId)?.name ?? '';
+  const category = categories.find((c) => c.id === categoryId);
+  const categoryName = category
+    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null)
+    : '';
 
   // マップがない場合は何も表示しない
   if (!isLoading && (!maps || maps.length === 0)) {
@@ -28,7 +34,7 @@ export function CategoryLatestSection({ categoryId }: CategoryLatestSectionProps
 
   return (
     <MapRankingSection
-      title={`${categoryName}の新着マップ`}
+      title={t('article.latestInCategory', { category: categoryName })}
       maps={maps}
       isLoading={isLoading}
       error={error}

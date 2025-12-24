@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, type CommentInputRef } from './CommentInput';
 
 interface ReplyTarget {
@@ -62,6 +63,7 @@ export function CommentInputModal({
   placeholder,
   isEditing = false,
 }: CommentInputModalProps) {
+  const { t } = useI18n();
   const inputRef = useRef<CommentInputRef>(null);
 
   // モーダルが開いたら自動的にフォーカス
@@ -83,10 +85,10 @@ export function CommentInputModal({
 
   // 編集モード用のデフォルトプレースホルダー
   const defaultPlaceholder = isEditing
-    ? 'コメントを編集...'
+    ? t('comment.editComment')
     : replyingTo
-    ? '返信を入力...'
-    : 'コメントを追加...';
+    ? t('comment.enterReply')
+    : t('comment.addComment');
 
   return (
     <Modal
@@ -111,7 +113,7 @@ export function CommentInputModal({
           {isEditing && (
             <View className="flex-row items-center justify-between px-4 py-2 border-b border-border-light dark:border-dark-border-light">
               <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
-                コメントを編集
+                {t('comment.editComment')}
               </Text>
               <Pressable onPress={onClose} className="p-1">
                 <Ionicons name="close" size={20} color={colors.gray[500]} />

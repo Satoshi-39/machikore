@@ -10,6 +10,7 @@ import React, { useMemo } from 'react';
 import { ScrollView, Pressable, Text, View, ActivityIndicator } from 'react-native';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { useCategories } from '@/entities/category';
 
 // 「すべて」カテゴリのID
@@ -26,12 +27,13 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
   const isDarkMode = useIsDarkMode();
   const selectedColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
   const { data: categories = [], isLoading } = useCategories();
+  const { t } = useI18n();
 
   // 「すべて」を先頭に追加したカテゴリリスト
   const displayCategories = useMemo(() => {
-    const allCategory = { id: ALL_CATEGORY_ID, name: 'すべて', slug: 'all', icon: '', display_order: 0, is_active: true, name_translations: null, created_at: '', updated_at: '' };
+    const allCategory = { id: ALL_CATEGORY_ID, name: t('common.all'), slug: 'all', icon: '', display_order: 0, is_active: true, name_translations: null, created_at: '', updated_at: '' };
     return [allCategory, ...categories];
-  }, [categories]);
+  }, [categories, t]);
 
   if (isLoading) {
     return (
@@ -64,7 +66,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
                   : 'text-foreground-muted dark:text-dark-foreground-muted'
               }`}
             >
-              {category.name}
+              {getTranslatedName(category.name, category.name_translations)}
             </Text>
             {isSelected && (
               <View

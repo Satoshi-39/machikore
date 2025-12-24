@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Calendar } from './Calendar';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface UserScheduleProps {
   userId: string | null;
@@ -18,6 +19,7 @@ interface UserScheduleProps {
 
 export function UserSchedule({ userId }: UserScheduleProps) {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { t } = useI18n();
 
   // TODO: スケジュールデータの取得
   // const { data: schedules } = useUserSchedules(userId);
@@ -39,7 +41,7 @@ export function UserSchedule({ userId }: UserScheduleProps) {
       {/* 選択日の予定リスト */}
       <View className="bg-surface dark:bg-dark-surface mt-2 px-4 py-4">
         <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
-          {selectedDate.getMonth() + 1}月{selectedDate.getDate()}日の予定
+          {t('schedule.dateSchedule', { month: selectedDate.getMonth() + 1, day: selectedDate.getDate() })}
         </Text>
 
         {/* プレースホルダー */}
@@ -48,10 +50,10 @@ export function UserSchedule({ userId }: UserScheduleProps) {
             <Ionicons name="calendar-outline" size={32} color={colors.text.secondary} />
           </View>
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
-            予定はありません
+            {t('schedule.noSchedule')}
           </Text>
           <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted text-center mt-2">
-            スケジュール機能は今後実装予定です
+            {t('schedule.comingSoon')}
           </Text>
         </View>
       </View>

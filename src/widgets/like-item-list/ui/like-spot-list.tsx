@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
+import { useI18n } from '@/shared/lib/i18n';
 
 export interface LikedSpotItem {
   likeId: string;
@@ -31,9 +32,11 @@ export function LikeSpotList({
   onUserPress,
   onDeleteSpotLike,
 }: LikeSpotListProps) {
+  const { t } = useI18n();
+
   const renderItem = useCallback(
     ({ item }: { item: LikedSpotItem }) => {
-      const spotName = item.spot.custom_name || item.spot.master_spot?.name || '不明なスポット';
+      const spotName = item.spot.custom_name || item.spot.master_spot?.name || t('favorite.unknownSpot');
       const address = item.spot.master_spot?.google_short_address || item.spot.google_short_address;
       const user = item.spot.user;
 
@@ -75,7 +78,7 @@ export function LikeSpotList({
               )}
               {user && (
                 <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
-                  {user.display_name || user.username || 'ユーザー'}の投稿
+                  {t('favorite.userPost', { name: user.display_name || user.username || t('comment.defaultUser') })}
                 </Text>
               )}
             </View>
@@ -90,7 +93,7 @@ export function LikeSpotList({
         </SwipeableRow>
       ) : content;
     },
-    [onSpotPress, onUserPress, onDeleteSpotLike]
+    [onSpotPress, onUserPress, onDeleteSpotLike, t]
   );
 
   if (isLoading) {
@@ -101,7 +104,7 @@ export function LikeSpotList({
     return (
       <EmptyState
         ionIcon="heart-outline"
-        message="いいねしたスポットがありません"
+        message={t('favorite.noLikedSpots')}
       />
     );
   }

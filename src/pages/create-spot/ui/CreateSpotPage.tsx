@@ -10,8 +10,10 @@ import React from 'react';
 import { View } from 'react-native';
 import { CreateSpotForm, useSpotForm } from '@/features/create-spot';
 import { PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function CreateSpotPage() {
+  const { t } = useI18n();
   const {
     placeData,
     handleSubmit,
@@ -27,7 +29,7 @@ export function CreateSpotPage() {
 
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-      <PageHeader title="スポット登録" />
+      <PageHeader title={t('spot.registerSpot')} />
       <CreateSpotForm
         placeData={placeData}
         onSubmit={handleSubmit}

@@ -16,6 +16,8 @@ import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
 import { useCategoryFeaturedMaps } from '@/entities/featured-carousel';
 import { MapDisplayCard } from '@/widgets/map-cards';
+import { useI18n } from '@/shared/lib/i18n';
+import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
 
 interface CategoryFeaturedSectionProps {
   categoryId: string;
@@ -24,11 +26,15 @@ interface CategoryFeaturedSectionProps {
 export function CategoryFeaturedSection({ categoryId }: CategoryFeaturedSectionProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
   const { data: maps, isLoading, error } = useCategoryFeaturedMaps(categoryId, currentUserId);
 
-  const categoryName = categories.find((c) => c.id === categoryId)?.name ?? '';
+  const category = categories.find((c) => c.id === categoryId);
+  const categoryName = category
+    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null)
+    : '';
 
   const handleMapPress = useCallback(
     (mapId: string) => {
@@ -47,7 +53,7 @@ export function CategoryFeaturedSection({ categoryId }: CategoryFeaturedSectionP
       {/* セクションタイトル */}
       <View className="flex-row items-center justify-between px-4 mb-3">
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
-          {categoryName}のおすすめ
+          {t('article.featuredInCategory', { category: categoryName })}
         </Text>
         {/* タグページへの遷移ボタン */}
         <Pressable
@@ -68,7 +74,7 @@ export function CategoryFeaturedSection({ categoryId }: CategoryFeaturedSectionP
             className="text-sm font-medium ml-1"
             style={{ color: isDarkMode ? colors.primary.light : colors.primary.DEFAULT }}
           >
-            タグで探す
+            {t('article.searchByTag')}
           </Text>
         </Pressable>
       </View>
@@ -80,7 +86,7 @@ export function CategoryFeaturedSection({ categoryId }: CategoryFeaturedSectionP
       ) : error ? (
         <View className="h-40 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            読み込みに失敗しました
+            {t('article.loadError')}
           </Text>
         </View>
       ) : (

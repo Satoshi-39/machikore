@@ -10,13 +10,15 @@ import React from 'react';
 import { View } from 'react-native';
 import { CreateMapForm, useCreateMapForm } from '@/features/create-map';
 import { PageHeader } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function CreateMapPage() {
+  const { t } = useI18n();
   const { handleSubmit, isLoading } = useCreateMapForm();
 
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-      <PageHeader title="マップ作成" />
+      <PageHeader title={t('map.createMap')} />
       <CreateMapForm onSubmit={handleSubmit} isLoading={isLoading} />
     </View>
   );

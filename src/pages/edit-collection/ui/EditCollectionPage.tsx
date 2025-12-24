@@ -20,8 +20,10 @@ import { PageHeader, PublicToggle } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function EditCollectionPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const currentUserId = useCurrentUserId();
@@ -104,7 +106,7 @@ export function EditCollectionPage() {
   if (isLoading) {
     return (
       <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-        <PageHeader title="コレクションを編集" />
+        <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -115,10 +117,10 @@ export function EditCollectionPage() {
   if (!collection) {
     return (
       <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-        <PageHeader title="コレクションを編集" />
+        <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="alert-circle-outline" size={48} color={colors.gray[400]} />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">コレクションが見つかりません</Text>
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">{t('collection.collectionNotFound')}</Text>
         </View>
       </View>
     );
@@ -127,7 +129,7 @@ export function EditCollectionPage() {
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
-        title="コレクションを編集"
+        title={t('collection.editCollection')}
         rightComponent={
           <Pressable
             onPress={handleSubmit}
@@ -140,7 +142,7 @@ export function EditCollectionPage() {
               <Text
                 className={`text-base font-semibold ${isValid ? 'text-foreground dark:text-dark-foreground' : 'text-gray-300'}`}
               >
-                保存
+                {t('common.save')}
               </Text>
             )}
           </Pressable>
@@ -151,12 +153,12 @@ export function EditCollectionPage() {
         {/* 名前入力 */}
         <View className="mb-4">
           <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
-            コレクション名 <Text className="text-red-500">*</Text>
+            {t('collection.collectionName')} <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
             value={name}
             onChangeText={setName}
-            placeholder="例: 東京カフェコレクション"
+            placeholder={t('collection.collectionNamePlaceholder')}
             placeholderTextColor={colors.gray[400]}
             className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground border border-border dark:border-dark-border"
           />
@@ -165,12 +167,12 @@ export function EditCollectionPage() {
         {/* 説明入力 */}
         <View className="mb-6">
           <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
-            説明（任意）
+            {t('collection.descriptionOptional')}
           </Text>
           <TextInput
             value={description}
             onChangeText={setDescription}
-            placeholder="コレクションの説明を入力..."
+            placeholder={t('collection.descriptionPlaceholder')}
             placeholderTextColor={colors.gray[400]}
             className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground border border-border dark:border-dark-border"
             multiline
@@ -183,7 +185,7 @@ export function EditCollectionPage() {
         {/* サムネイル */}
         <View className="mb-6">
           <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
-            サムネイル
+            {t('collection.thumbnail')}
           </Text>
           <ThumbnailPicker
             image={thumbnail}
@@ -196,7 +198,7 @@ export function EditCollectionPage() {
           <PublicToggle
             value={isPublic}
             onValueChange={setIsPublic}
-            description="オンにすると、他のユーザーがこのコレクションを閲覧できます"
+            description={t('collection.publicDescription')}
           />
         </View>
 
@@ -208,12 +210,12 @@ export function EditCollectionPage() {
           <View className="flex-row items-center">
             <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
             <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
-              マップを管理
+              {t('collection.manageMaps')}
             </Text>
           </View>
           <View className="flex-row items-center">
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mr-2">
-              {collection.maps_count}件
+              {t('collection.itemsCount', { count: collection.maps_count })}
             </Text>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
           </View>

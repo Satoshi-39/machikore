@@ -21,12 +21,14 @@ import { colors, INPUT_LIMITS } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { useUser, useUpdateProfileWithAvatar } from '@/entities/user/api';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface EditProfilePageProps {
   onSaveSuccess?: () => void;
 }
 
 export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: user, isLoading: isLoadingUser } = useUser(currentUserId);
   const { updateProfile, isLoading: isSaving } = useUpdateProfileWithAvatar();
@@ -76,7 +78,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (!permissionResult.granted) {
-      Alert.alert('権限が必要です', '画像を選択するには写真ライブラリへのアクセスを許可してください。');
+      Alert.alert(t('profile.photoPermissionRequired'), t('profile.photoPermissionMessage'));
       return;
     }
 
@@ -112,22 +114,22 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
         newAvatarFile || undefined
       );
 
-      Alert.alert('保存完了', 'プロフィールを更新しました。', [
+      Alert.alert(t('profile.profileSaved'), t('profile.profileSavedMessage'), [
         {
-          text: 'OK',
+          text: t('common.ok'),
           onPress: () => onSaveSuccess?.(),
         },
       ]);
     } catch (error) {
       log.error('[EditProfilePage] Save error:', error);
-      Alert.alert('エラー', 'プロフィールの保存に失敗しました。');
+      Alert.alert(t('common.error'), t('profile.profileSaveError'));
     }
-  }, [currentUserId, displayName, bio, newAvatarFile, updateProfile, onSaveSuccess]);
+  }, [currentUserId, displayName, bio, newAvatarFile, updateProfile, onSaveSuccess, t]);
 
   if (isLoadingUser || !isInitialized) {
     return (
       <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
-        <PageHeader title="プロフィール編集" />
+        <PageHeader title={t('profile.editProfile')} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -138,7 +140,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
       <PageHeader
-        title="プロフィール編集"
+        title={t('profile.editProfile')}
         rightComponent={
           <Pressable
             onPress={handleSave}
@@ -155,7 +157,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
                     : 'text-foreground-muted dark:text-dark-foreground-muted'
                 }`}
               >
-                保存
+                {t('common.save')}
               </Text>
             )}
           </Pressable>
@@ -189,7 +191,7 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
               </View>
             </Pressable>
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-              タップして写真を変更
+              {t('profile.tapToChangePhoto')}
             </Text>
           </View>
 
@@ -198,12 +200,12 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
             {/* 表示名 */}
             <View className="mb-4">
               <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
-                表示名
+                {t('profile.displayName')}
               </Text>
               <StyledTextInput
                 value={displayName}
                 onChangeText={setDisplayName}
-                placeholder="表示名を入力"
+                placeholder={t('profile.displayNamePlaceholder')}
                 className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
                 maxLength={INPUT_LIMITS.USER_DISPLAY_NAME}
               />
@@ -215,25 +217,25 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
             {/* ユーザー名（変更不可） */}
             <View className="mb-4">
               <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
-                ユーザー名
+                {t('profile.username')}
               </Text>
               <View className="border border-border dark:border-dark-border rounded-lg px-4 py-3 bg-background-secondary dark:bg-dark-background-secondary">
                 <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">@{user?.username}</Text>
               </View>
               <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
-                ユーザー名は変更できません
+                {t('profile.usernameCannotChange')}
               </Text>
             </View>
 
             {/* 自己紹介 */}
             <View>
               <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
-                自己紹介
+                {t('profile.bio')}
               </Text>
               <StyledTextInput
                 value={bio}
                 onChangeText={setBio}
-                placeholder="自己紹介を入力"
+                placeholder={t('profile.bioPlaceholder')}
                 className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
                 multiline
                 numberOfLines={4}

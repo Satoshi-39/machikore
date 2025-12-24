@@ -9,6 +9,7 @@ import React from 'react';
 import { FlatList, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
 import { AsyncBoundary } from '@/shared/ui';
 import { MapCompactCard } from '@/widgets/map-cards';
@@ -28,6 +29,7 @@ interface MapsTabProps {
 export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }: MapsTabProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
+  const { t } = useI18n();
   const { data: maps, isLoading, error } = useUserMaps(userId, { currentUserId });
   const { mutate: deleteMap } = useDeleteMap();
 
@@ -44,12 +46,12 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
 
   const handleDelete = (mapId: string) => {
     Alert.alert(
-      'マップを削除',
-      'このマップを削除しますか？関連するスポットも全て削除されます。この操作は取り消せません。',
+      t('map.deleteMap'),
+      t('mypage.deleteMapConfirmDetail'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '削除',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: () => deleteMap(mapId),
         },
@@ -70,8 +72,8 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
       isLoading={isLoading}
       error={error}
       data={maps}
-      loadingMessage="マップを読み込み中..."
-      emptyMessage="まだマップを作成していません"
+      loadingMessage={t('mypage.loadingMaps')}
+      emptyMessage={t('empty.noMapsYet')}
       emptyIonIcon="map"
     >
       {(data) => (

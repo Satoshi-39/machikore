@@ -18,12 +18,13 @@ import { showLoginRequiredAlert } from '@/shared/lib';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
-import { getRelativeSpotTime } from '@/entities/user-spot/model/helpers';
+import { formatRelativeTime } from '@/shared/lib/utils';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useUser } from '@/entities/user';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { useI18n } from '@/shared/lib/i18n';
 
 // Supabase JOINで取得済みのユーザー情報
 interface EmbeddedUser {
@@ -59,6 +60,8 @@ interface SpotCardProps {
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
+  /** 下部ボーダーを非表示にする */
+  noBorder?: boolean;
 }
 
 export function SpotCard({
@@ -73,7 +76,9 @@ export function SpotCard({
   onCommentPress,
   embeddedUser,
   embeddedMasterSpot,
+  noBorder = false,
 }: SpotCardProps) {
+  const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
 
   // embeddedUserがあればuseUserをスキップ
@@ -138,7 +143,7 @@ export function SpotCard({
     if (embeddedMasterSpot?.name) {
       return embeddedMasterSpot.name;
     }
-    return '不明なスポット';
+    return t('spotCard.unknownSpot');
   };
 
   // 住所の取得（表示用は短縮住所）
@@ -216,12 +221,12 @@ export function SpotCard({
 
   const handleDelete = () => {
     Alert.alert(
-      'スポットを削除',
-      'このスポットを削除しますか？この操作は取り消せません。',
+      t('spotCard.deleteTitle'),
+      t('spotCard.deleteMessage'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '削除',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: () => deleteSpot(spot.id),
         },
@@ -232,23 +237,23 @@ export function SpotCard({
   const menuItems: PopupMenuItem[] = useMemo(() => [
     {
       id: 'edit',
-      label: '編集',
+      label: t('common.edit'),
       icon: 'create-outline',
       onPress: () => onEdit?.(spot.id),
     },
     {
       id: 'delete',
-      label: '削除',
+      label: t('common.delete'),
       icon: 'trash-outline',
       destructive: true,
       onPress: handleDelete,
     },
-  ], [spot.id, onEdit]);
+  ], [spot.id, onEdit, t]);
 
   return (
     <Pressable
       onPress={onPress}
-      className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border p-4"
+      className={`bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
@@ -270,11 +275,11 @@ export function SpotCard({
         <View className="flex-1">
           <Pressable onPress={() => onUserPress?.(spot.user_id)} className="self-start">
             <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
-              {user?.display_name || user?.username || 'ユーザー'}
+              {user?.display_name || user?.username || t('spotCard.defaultUser')}
             </Text>
           </Pressable>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-            {getRelativeSpotTime(spot.created_at)}
+            {formatRelativeTime(spot.created_at)}
           </Text>
         </View>
 

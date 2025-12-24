@@ -14,6 +14,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface EditCommentModalProps {
   visible: boolean;
@@ -32,6 +33,8 @@ export function EditCommentModal({
   onCancel,
   isUpdating,
 }: EditCommentModalProps) {
+  const { t } = useI18n();
+
   return (
     <Modal
       visible={visible}
@@ -47,11 +50,11 @@ export function EditCommentModal({
           className="bg-surface dark:bg-dark-surface rounded-2xl p-4"
           onPress={(e) => e.stopPropagation()}
         >
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-4">コメントを編集</Text>
+          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-4">{t('comment.editComment')}</Text>
           <TextInput
             value={editText}
             onChangeText={onChangeText}
-            placeholder="コメントを入力..."
+            placeholder={t('comment.enterComment')}
             placeholderTextColor={colors.gray[400]}
             multiline
             maxLength={500}
@@ -64,7 +67,7 @@ export function EditCommentModal({
               onPress={onCancel}
               className="px-4 py-2 rounded-lg"
             >
-              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary font-semibold">キャンセル</Text>
+              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary font-semibold">{t('common.cancel')}</Text>
             </Pressable>
             <Pressable
               onPress={onSubmit}
@@ -75,7 +78,7 @@ export function EditCommentModal({
               {isUpdating ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
-                <Text className="text-white font-semibold">保存</Text>
+                <Text className="text-white font-semibold">{t('common.save')}</Text>
               )}
             </Pressable>
           </View>

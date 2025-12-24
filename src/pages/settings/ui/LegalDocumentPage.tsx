@@ -11,12 +11,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   getCurrentTermsVersions,
   type TermsType,
   type TermsVersion,
+  type TermsLocale,
 } from '@/shared/api/supabase';
-import { formatJapaneseDate } from '@/shared/lib/utils/date.utils';
+import { formatLocalizedDate } from '@/shared/lib/utils';
 import { log } from '@/shared/config/logger';
 
 interface LegalDocumentPageProps {
@@ -25,31 +27,32 @@ interface LegalDocumentPageProps {
 }
 
 export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
+  const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [document, setDocument] = useState<TermsVersion | null>(null);
 
-  const title = type === 'terms_of_service' ? '利用規約' : 'プライバシーポリシー';
+  const title = type === 'terms_of_service' ? t('settings.termsOfService') : t('settings.privacyPolicy');
 
-  // サーバーから規約を取得
+  // サーバーから規約を取得（現在の言語で）
   useEffect(() => {
     async function fetchDocument() {
       try {
         setIsLoading(true);
         setError(null);
-        const terms = await getCurrentTermsVersions();
+        const terms = await getCurrentTermsVersions(locale as TermsLocale);
         const doc = type === 'terms_of_service' ? terms.termsOfService : terms.privacyPolicy;
         setDocument(doc);
       } catch (err) {
         log.error('[LegalDocumentPage] 規約の取得に失敗:', err);
-        setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
+        setError(t('settings.termsLoadError'));
       } finally {
         setIsLoading(false);
       }
     }
     fetchDocument();
-  }, [type]);
+  }, [type, locale]);
 
   // ローディング中
   if (isLoading) {
@@ -59,7 +62,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
           <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
-            読み込み中...
+            {t('common.loading')}
           </Text>
         </View>
       </View>
@@ -78,26 +81,26 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
             color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
           />
           <Text className="text-foreground dark:text-dark-foreground text-center mt-4 mb-6">
-            {error || '規約が見つかりませんでした'}
+            {error || t('settings.termsNotFound')}
           </Text>
           <Pressable
             onPress={() => {
               setIsLoading(true);
               setError(null);
-              getCurrentTermsVersions()
+              getCurrentTermsVersions(locale as TermsLocale)
                 .then((terms) => {
                   const doc = type === 'terms_of_service' ? terms.termsOfService : terms.privacyPolicy;
                   setDocument(doc);
                 })
                 .catch((err) => {
                   log.error('[LegalDocumentPage] 規約の取得に失敗:', err);
-                  setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
+                  setError(t('settings.termsLoadError'));
                 })
                 .finally(() => setIsLoading(false));
             }}
             className="bg-primary py-3 px-6 rounded-full"
           >
-            <Text className="text-white font-semibold">再試行</Text>
+            <Text className="text-white font-semibold">{t('common.retry')}</Text>
           </Pressable>
         </View>
       </View>
@@ -119,12 +122,12 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
       // H1（タイトル）- 前後に広めの余白、施行日をその下に表示
       if (trimmedLine.startsWith('# ')) {
         return (
-          <View key={index} className="mt-6 mb-8">
+          <View key={index} className="mt-6 mb-5">
             <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground text-center">
               {trimmedLine.slice(2)}
             </Text>
-            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center mt-3">
-              {formatJapaneseDate(document.effective_at)} 施行
+            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center mt-2">
+              {t('settings.effectiveDate', { date: formatLocalizedDate(new Date(document.effective_at)) })}
             </Text>
           </View>
         );

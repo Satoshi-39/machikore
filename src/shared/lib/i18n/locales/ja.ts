@@ -26,6 +26,11 @@ export default {
     none: 'なし',
     more: 'もっと見る',
     less: '閉じる',
+    comment: 'コメント',
+    like: 'いいね',
+    share: '共有',
+    post: '投稿',
+    user: 'ユーザー',
   },
 
   // タブ
@@ -66,6 +71,21 @@ export default {
     deleteMapConfirm: 'このマップを削除しますか？',
     noMaps: 'マップがありません',
     createFirstMap: '最初のマップを作成しましょう',
+    // マップ作成フォーム
+    mapNameRequired: 'マップ名',
+    mapNamePlaceholder: '例：東京カフェ巡り',
+    descriptionRequired: '説明',
+    descriptionPlaceholder: 'マップの説明を入力してください',
+    categoryRequired: 'カテゴリー',
+    tags: 'タグ',
+    tagsPlaceholder: 'タグを入力してEnter',
+    thumbnail: 'サムネイル',
+    publicDescription: '公開すると他のユーザーもこのマップを見ることができます',
+    creating: '作成中...',
+    // マップ選択
+    targetMap: '追加するマップ',
+    belongingMap: '所属するマップ',
+    noMapSelected: 'マップが選択されていません',
   },
 
   // スポット
@@ -81,6 +101,47 @@ export default {
     notVisited: '未訪問',
     deleteSpotConfirm: 'このスポットを削除しますか？',
     noSpots: 'スポットがありません',
+    // スポット登録フォーム
+    registerSpot: 'スポット登録',
+    googlePlacesInfo: 'Google Placesから取得した情報',
+    currentLocationInfo: '現在地から登録',
+    mapPinInfo: '地図上で選択した位置',
+    originalSpotName: 'スポット名（元）',
+    oneWordRequired: 'このスポットを一言で！',
+    oneWordPlaceholder: '例：最高のラーメン屋',
+    spotSummary: 'スポットの概要',
+    summaryPlaceholder: 'このスポットの魅力を簡潔に',
+    article: '記事',
+    articleEmpty: 'スポットについて詳しく書いてみましょう',
+    articleEntered: '記事が入力されています',
+    articleHint: 'ここに入力した内容が記事ページで表示されます',
+    articleEdit: '記事を編集',
+    articleWrite: '記事を書く',
+    articleWriteHint: 'このスポットについて詳しく書いてみましょう',
+    label: 'ラベル',
+    spotColor: 'スポットの色',
+    labelColorNotice: '※ラベルが設定されている場合、ラベルの色が優先されます',
+    photos: '写真',
+    registering: '登録中...',
+    registerSpotButton: 'スポットを登録',
+    // スポット編集
+    spotInfo: 'スポット情報',
+    existingPhotos: '登録済みの写真',
+    newPhotos: '新しく追加する写真',
+    totalPhotos: '合計 %{current}/%{max}枚',
+    updating: '更新中...',
+    saveChanges: '変更を保存',
+    spotNotFound: 'スポットが見つかりません',
+    // ローディング
+    creatingSpot: 'スポットを作成中...',
+    uploadingImages: '画像をアップロード中... (%{current}/%{total})',
+    processingComplete: '完了処理中...',
+    updatingSpot: 'スポットを更新中...',
+    deletingImages: '画像を削除中...',
+    // スポット詳細カード
+    unknownSpot: '不明なスポット',
+    deleteConfirm: 'このスポットを削除しますか？この操作は取り消せません。',
+    noArticle: 'まだ記事がありません',
   },
 
   // お気に入り・いいね
@@ -92,6 +153,85 @@ export default {
     like: 'いいね',
     likes: 'いいね',
     liked: 'いいね済み',
+    likedItems: 'いいね',
+    noLikes: 'いいねがありません',
+    spot: 'スポット',
+    map: 'マップ',
+    noLikedSpots: 'いいねしたスポットがありません',
+    noLikedMaps: 'いいねしたマップがありません',
+    unknownSpot: '不明なスポット',
+    userPost: '%{name}の投稿',
+    spotsCount: '%{count}スポット',
+    spots: 'スポット',
+    maps: 'マップ',
+  },
+
+  // コレクション
+  collection: {
+    collection: 'コレクション',
+    collections: 'コレクション',
+    createNew: '新規作成',
+    noCollections: 'コレクションがありません',
+    // コレクション作成
+    newCollection: '新しいコレクション',
+    collectionName: 'コレクション名',
+    collectionNamePlaceholder: '例: 東京カフェコレクション',
+    descriptionOptional: '説明（任意）',
+    descriptionPlaceholder: 'コレクションの説明を入力...',
+    thumbnail: 'サムネイル',
+    publicDescription: 'オンにすると、他のユーザーがこのコレクションを閲覧できます',
+    createHint: 'コレクションを作成後、マップを追加できます',
+    creating: '作成中...',
+    create: '作成',
+    // コレクション編集
+    editCollection: 'コレクションを編集',
+    collectionNotFound: 'コレクションが見つかりません',
+    manageMaps: 'マップを管理',
+    itemsCount: '%{count}件',
+    // コレクション詳細
+    mapsCount: '%{count}マップ',
+    private: '非公開',
+    mapList: 'マップ一覧',
+    noMaps: 'まだマップがありません',
+    edit: '編集',
+    anonymous: '名無しさん',
+    notFound: 'コレクションが見つかりません',
+    // コレクション削除
+    deleteTitle: 'コレクションを削除',
+    deleteMessage: 'このコレクションを削除しますか？',
+    // 空状態
+    emptyTitle: 'コレクション',
+    emptyDescriptionOwner: 'マップをテーマ別にまとめましょう',
+    emptyDescriptionOther: 'コレクションが作成されていません',
+    loadingMessage: 'コレクションを読み込み中...',
+  },
+
+  // ブックマーク
+  bookmark: {
+    bookmark: 'ブックマーク',
+    bookmarks: 'ブックマーク',
+    loginRequired: 'ログインしてください',
+    noBookmarks: 'ブックマークがありません',
+    spots: 'スポット',
+    maps: 'マップ',
+    createFolder: '新しいフォルダを作成',
+    watchLater: '後で見る',
+    itemCount: '%{count}件',
+    deleteFolder: 'フォルダを削除',
+    deleteFolderMessage: '「%{name}」を削除しますか？\nフォルダ内のブックマークは「後で見る」に移動します。',
+    editFolderName: 'フォルダ名を編集',
+    folderName: 'フォルダ名',
+    // フォルダ作成モーダル
+    newFolder: '新しいフォルダ',
+    folderNamePlaceholder: 'フォルダ名',
+    create: '作成',
+    folder: 'フォルダ',
+    // フォルダ選択モーダル
+    selectSpotFolder: 'スポットの保存先を選択',
+    selectMapFolder: 'マップの保存先を選択',
+    added: '追加済',
+    add: '追加',
+    createNewFolder: '新しいフォルダを作成',
   },
 
   // コメント
@@ -99,17 +239,42 @@ export default {
     comment: 'コメント',
     comments: 'コメント',
     addComment: 'コメントを追加',
+    addPlaceholder: 'コメントを追加...',
     writeComment: 'コメントを書く...',
     deleteComment: 'コメントを削除',
-    noComments: 'コメントはまだありません',
+    noComments: 'まだコメントはありません',
+    edit: '編集',
+    delete: '削除',
+    reply: '返信',
+    showReplies: '%{count}件の返信を表示',
+    hideReplies: '返信を非表示',
+    defaultUser: 'ユーザー',
+    enterComment: 'コメントを入力...',
+    enterReply: '返信を入力...',
+    replyToUser: '%{name}に返信...',
+    replyingTo: '%{name}さんに返信',
+    composingReply: '返信を作成中',
+    editComment: 'コメントを編集',
+  },
+
+  // 閲覧履歴
+  viewHistory: {
+    title: '最近見たマップ',
+    loginRequired: 'ログインすると閲覧履歴が表示されます',
+    empty: 'まだ閲覧履歴がありません',
   },
 
   // プロフィール
   profile: {
     profile: 'プロフィール',
-    editProfile: 'プロフィールを編集',
+    editProfile: 'プロフィール編集',
     username: 'ユーザー名',
+    usernameCannotChange: 'ユーザー名は変更できません',
+    displayName: '表示名',
+    displayNamePlaceholder: '表示名を入力',
     bio: '自己紹介',
+    bioPlaceholder: '自己紹介を入力',
+    tapToChangePhoto: 'タップして写真を変更',
     followers: 'フォロワー',
     following: 'フォロー中',
     follow: 'フォロー',
@@ -117,6 +282,11 @@ export default {
     posts: '投稿',
     maps: 'マップ',
     bookmarks: 'ブックマーク',
+    photoPermissionRequired: '権限が必要です',
+    photoPermissionMessage: '画像を選択するには写真ライブラリへのアクセスを許可してください。',
+    profileSaved: '保存完了',
+    profileSavedMessage: 'プロフィールを更新しました。',
+    profileSaveError: 'プロフィールの保存に失敗しました。',
   },
 
   // 設定
@@ -148,6 +318,9 @@ export default {
     deleteAccount: 'アカウント削除',
     comingSoon: '準備中',
     comingSoonMessage: 'この機能は準備中です。',
+    effectiveDate: '%{date} 施行',
+    termsLoadError: '規約の読み込みに失敗しました。インターネット接続を確認してください。',
+    termsNotFound: '規約が見つかりませんでした',
   },
 
   // 検索
@@ -158,6 +331,18 @@ export default {
     searchMaps: 'マップを検索',
     recentSearches: '最近の検索',
     noResults: '検索結果がありません',
+    noSearchHistory: '検索履歴がありません',
+    clearAll: 'すべて削除',
+    showMore: '履歴をもっと見る',
+    searchAndRegister: '検索して登録',
+    registerCurrentLocation: '現在地を登録',
+    pinOnMap: '地図上でピン刺し',
+    searching: '検索中...',
+    searchFailed: '検索に失敗しました。もう一度お試しください。',
+    noResultsFor: '「%{query}」の検索結果が見つかりませんでした',
+    resultsFor: '「%{query}」の検索結果（%{count}件）',
+    locationUnavailable: '位置情報が取得できません',
+    checkLocationPermission: '位置情報の許可を確認してください',
   },
 
   // フィルター
@@ -222,6 +407,7 @@ export default {
     locationPermissionMessage: 'この機能を使用するには位置情報の許可が必要です',
     directions: '経路',
     openInMaps: 'マップで開く',
+    earth: '地球',
   },
 
   // 画像
@@ -237,7 +423,276 @@ export default {
     noData: 'データがありません',
     noMaps: 'マップがありません',
     noSpots: 'スポットがありません',
-    noFollowers: 'フォロワーがいません',
-    noFollowing: 'フォロー中のユーザーがいません',
+    noFollowers: 'フォロワーはいません',
+    noFollowing: 'フォロー中のユーザーはいません',
+    noNotifications: '通知はありません',
+    noAnnouncements: 'お知らせはありません',
+    noMapsYet: 'まだマップを作成していません',
+    noFollowingUsers: 'フォロー中のユーザーはいません',
+    noFollowingMaps: 'フォロー中のユーザーのマップはありません',
+  },
+
+  // フィード
+  feed: {
+    recommended: 'おすすめ',
+    following: 'フォロー中',
+  },
+
+  // 通知
+  notification: {
+    notifications: '通知',
+    announcements: 'お知らせ',
+    markAllRead: 'すべて既読にする',
+    likedYourSpot: '%{name}さんがあなたのスポット「%{target}」にいいねしました',
+    likedYourMap: '%{name}さんがあなたのマップ「%{target}」にいいねしました',
+    commentedOnYourSpot: '%{name}さんがあなたのスポット「%{target}」にコメントしました',
+    commentedOnYourMap: '%{name}さんがあなたのマップ「%{target}」にコメントしました',
+    followedYou: '%{name}さんがあなたをフォローしました',
+    newNotification: '新しい通知があります',
+    like: 'いいね',
+    comment: 'コメント',
+    follow: 'フォロー',
+    system: 'お知らせ',
+    // 通知設定
+    notificationSettings: '通知設定',
+    pushNotification: 'プッシュ通知',
+    emailNotification: 'メール通知',
+    receivePushNotifications: 'プッシュ通知を受け取る',
+    receiveEmailNotifications: 'メール通知を受け取る',
+    pushDisabledDescription: 'オフにすると全てのプッシュ通知が届かなくなります',
+    emailDisabledDescription: 'オフにすると全てのメール通知が届かなくなります',
+    notificationTypes: '通知の種類',
+    pushDisabledNotice: 'プッシュ通知がオフのため変更できません',
+    emailDisabledNotice: 'メール通知がオフのため変更できません',
+    likeNotification: 'いいね',
+    likeNotificationDescription: 'あなたの投稿にいいねされた時',
+    commentNotification: 'コメント',
+    commentNotificationDescription: 'あなたの投稿にコメントされた時',
+    followNotification: 'フォロー',
+    followNotificationDescription: '新しいフォロワーができた時',
+    systemNotification: 'お知らせ',
+    systemNotificationDescription: '運営からのお知らせ',
+    loadError: '設定の読み込みに失敗しました',
+  },
+
+  // 相対時間
+  time: {
+    justNow: 'たった今',
+    minutesAgo: '%{count}分前',
+    hoursAgo: '%{count}時間前',
+    daysAgo: '%{count}日前',
+    weeksAgo: '%{count}週間前',
+    monthsAgo: '%{count}ヶ月前',
+    yearsAgo: '%{count}年前',
+  },
+
+  // 検索
+  discover: {
+    searchPlaceholder: 'スポット、マップ、ユーザーを検索',
+    searchFor: '「%{query}」を検索',
+    users: 'ユーザー',
+    latest: '最新',
+    trending: '話題',
+    spots: 'スポット',
+    maps: 'マップ',
+    noTrendingPosts: '話題の投稿がありません',
+    noSpotsFound: 'スポットが見つかりませんでした',
+    noMapsFound: 'マップが見つかりませんでした',
+    noUsersFound: 'ユーザーが見つかりませんでした',
+    noSearchResults: '検索結果がありません',
+  },
+
+  // セクション
+  section: {
+    todaysPicks: '本日のピックアップ',
+    popularRanking: '人気マップランキング',
+    latestInCategory: '%{category}の新着マップ',
+    popularInCategory: '%{category}の人気マップ',
+    featuredInCategory: '%{category}のおすすめ',
+    recentlyViewed: '最近見たマップ',
+    searchByArea: 'エリアから探す',
+    searchOverseas: '海外から探す',
+    searchByTag: 'タグで探す',
+    searchByPrefecture: '都道府県から探す',
+    noTodayPicks: '本日のピックアップはありません',
+    noPopularMaps: '人気マップがありません',
+    noPrefectureData: '都道府県データがありません',
+    noCountryData: '国データがありません',
+  },
+
+  // マイページ
+  mypage: {
+    myPage: 'マイページ',
+    editProfile: 'プロフィール編集',
+    loadingMaps: 'マップを読み込み中...',
+    deleteMapConfirmDetail: 'このマップを削除しますか？関連するスポットも全て削除されます。この操作は取り消せません。',
+    report: '報告する',
+    defaultUser: 'ユーザー',
+  },
+
+  // 作成メニュー
+  create: {
+    map: 'マップ',
+    spot: 'スポット',
+    blog: 'ブログ',
+  },
+
+  // エリア
+  area: {
+    tokyo: '東京',
+    osaka: '大阪',
+    kyoto: '京都',
+    kanagawa: '神奈川',
+    aichi: '愛知',
+    fukuoka: '福岡',
+    hokkaido: '北海道',
+    hyogo: '兵庫',
+  },
+
+  // マップ編集
+  editMap: {
+    title: 'マップを編集',
+    notFound: 'マップが見つかりません',
+    mapInfo: 'マップ情報',
+    spots: 'スポット',
+    likes: 'いいね',
+    createdAt: '作成日',
+    mapNameLabel: 'マップ名',
+    mapNamePlaceholder: '例：東京カフェ巡り',
+    descriptionLabel: '説明',
+    descriptionPlaceholder: 'このマップについての説明を入力してください',
+    categoryLabel: 'カテゴリ',
+    labelLabel: 'ラベル',
+    showLabelChips: 'ラベルチップを表示',
+    showLabelChipsDescription: 'マップ上部にラベルを表示し、タップでスポットをフィルタリングできます',
+    tagsLabel: 'タグ',
+    tagsPlaceholder: 'タグを入力してEnter',
+    thumbnailLabel: 'サムネイル',
+    publicDescription: '誰でもこのマップを見ることができます',
+    privateDescription: '自分だけがこのマップを見ることができます',
+    updating: '更新中...',
+    saveChanges: '変更を保存',
+    required: '*',
+  },
+
+  // 記事
+  article: {
+    article: '記事',
+    notFound: '記事が見つかりません',
+    private: 'この記事は非公開です',
+    viewMap: 'マップを見る',
+    editArticle: '記事を編集',
+    editMap: 'マップを編集',
+    // 記事ページ追加
+    tableOfContents: '目次',
+    spotsCount: '%{count}スポット',
+    noSpots: 'まだスポットがありません',
+    unknownSpot: '不明なスポット',
+    authorOtherMaps: 'この著者の他のマップ',
+    comment: 'コメント',
+    addComment: 'コメントを追加...',
+    noComments: 'まだコメントがありません',
+    viewAllComments: 'コメント%{count}件すべてを見る',
+    loadError: '読み込みに失敗しました',
+    searchByTag: 'タグで探す',
+    featuredInCategory: '%{category}のおすすめ',
+    latestInCategory: '%{category}の新着マップ',
+  },
+
+  // メニュー（三点リーダー）
+  menu: {
+    edit: '編集',
+    delete: '削除',
+    share: '共有',
+    report: '報告',
+    viewMap: 'マップを見る',
+    viewArticle: '記事を見る',
+    copyLink: 'リンクをコピー',
+  },
+
+  // 認証必須
+  authRequired: {
+    loginRequiredAction: '%{action}を利用するにはログインが必要です',
+  },
+
+  // スケジュール
+  schedule: {
+    title: 'スケジュール',
+    dateSchedule: '%{month}月%{day}日の予定',
+    noSchedule: '予定はありません',
+    comingSoon: 'スケジュール機能は今後実装予定です',
+  },
+
+  // マップカード
+  mapCard: {
+    deleteTitle: 'マップを削除',
+    deleteMessage: 'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
+    defaultUser: 'ユーザー',
+  },
+
+  // スポットカード
+  spotCard: {
+    deleteTitle: 'スポットを削除',
+    deleteMessage: 'このスポットを削除しますか？この操作は取り消せません。',
+    unknownSpot: '不明なスポット',
+    defaultUser: 'ユーザー',
+  },
+
+  // 公開/非公開トグル
+  publicToggle: {
+    public: '公開',
+    private: '非公開',
+    publicStatus: '公開中',
+    privateStatus: '非公開',
+  },
+
+  // カテゴリページ
+  categoryPage: {
+    tagsTitle: '%{category}のタグ',
+    noTags: 'タグがありません',
+    noMapsForTag: '#%{tag} のマップはありません',
+    selectTag: 'タグを選択してください',
+  },
+
+  // マップをコレクションに追加
+  addMapsToCollection: {
+    title: 'マップを追加',
+    addTo: '追加先:',
+    tapToToggle: 'タップしてマップを追加/削除',
+    spotsCount: '%{count}スポット',
+  },
+
+  // 都道府県スポット一覧
+  prefectureSpots: {
+    spotList: 'スポット一覧',
+    missingParams: 'パラメータが不足しています',
+    prefectureSpotsTitle: '%{prefecture}のスポット',
+    noPrefectureSpots: '%{prefecture}のスポットはまだありません',
+    noCategoryPrefectureSpots: '%{category}の%{prefecture}スポットはまだありません',
+    loadError: '読み込みに失敗しました',
+  },
+
+  // 記事編集
+  editArticle: {
+    title: '記事を編集',
+    notFound: '記事が見つかりません',
+    noPermission: '編集権限がありません',
+    publicToggleError: '公開設定の変更に失敗しました',
+    intro: 'まえがき',
+    writeIntro: 'タップしてまえがきを書く',
+    editIntro: 'まえがきを編集',
+    outro: 'あとがき',
+    writeOutro: 'タップしてあとがきを書く',
+    editOutro: 'あとがきを編集',
+    noSpots: 'まだスポットがありません',
+    writeDescription: 'タップして紹介文を書く',
+    charCount: '%{count}文字',
+    saved: '保存しました',
+    saveError: '保存に失敗しました',
+    discardTitle: '変更を破棄しますか？',
+    discardMessage: '保存していない変更があります。',
+    discard: '破棄',
+    spotNotFound: 'スポットが見つかりません',
+    mapNotFound: 'マップが見つかりません',
   },
 };

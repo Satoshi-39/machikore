@@ -23,6 +23,8 @@ import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PageHeader } from '@/shared/ui';
 import { MapGridCard, MAP_GRID_CONSTANTS } from '@/widgets/map-grid';
+import { useI18n } from '@/shared/lib/i18n';
+import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
 
 const { GRID_PADDING, GRID_GAP } = MAP_GRID_CONSTANTS;
 
@@ -72,6 +74,7 @@ function TagChip({ tag, isSelected, onPress }: TagChipProps) {
 export function CategoryTagsPage() {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const { categoryId } = useLocalSearchParams<{ categoryId: string }>();
   const { data: categories = [] } = useCategories();
   const { data: tags, isLoading: isTagsLoading } = useCategoryTags(categoryId ?? '', 30);
@@ -81,7 +84,10 @@ export function CategoryTagsPage() {
   // 選択されたタグのマップを取得
   const { data: maps, isLoading: isMapsLoading } = useMapTagSearch(selectedTag?.name ?? '');
 
-  const categoryName = categories.find((c) => c.id === categoryId)?.name ?? '';
+  const category = categories.find((c) => c.id === categoryId);
+  const categoryName = category
+    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null)
+    : '';
 
   const handleTagPress = useCallback((tag: Tag) => {
     setSelectedTag((prev) => (prev?.id === tag.id ? null : tag));
@@ -107,7 +113,7 @@ export function CategoryTagsPage() {
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       {/* ヘッダー */}
-      <PageHeader title={`${categoryName}のタグ`} />
+      <PageHeader title={t('categoryPage.tagsTitle', { category: categoryName })} />
 
       {/* タグチップ（横スクロール） */}
       {isTagsLoading ? (
@@ -134,7 +140,7 @@ export function CategoryTagsPage() {
       ) : (
         <View className="h-14 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            タグがありません
+            {t('categoryPage.noTags')}
           </Text>
         </View>
       )}
@@ -172,7 +178,7 @@ export function CategoryTagsPage() {
               color={isDarkMode ? colors.dark.foregroundMuted : colors.text.secondary}
             />
             <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-              #{selectedTag.name} のマップはありません
+              {t('categoryPage.noMapsForTag', { tag: selectedTag.name })}
             </Text>
           </View>
         )
@@ -184,7 +190,7 @@ export function CategoryTagsPage() {
             color={isDarkMode ? colors.dark.foregroundMuted : colors.text.secondary}
           />
           <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
-            タグを選択してください
+            {t('categoryPage.selectTag')}
           </Text>
         </View>
       )}

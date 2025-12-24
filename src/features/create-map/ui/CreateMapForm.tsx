@@ -21,6 +21,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useCategories } from '@/entities/category';
 import { useCreateMapFormValidation, type CreateMapFormData } from '../model';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 
 // カテゴリアイコンのマッピング
 const CATEGORY_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
@@ -44,6 +45,7 @@ export function CreateMapForm({
   onSubmit,
   isLoading = false,
 }: CreateMapFormProps) {
+  const { t } = useI18n();
   const { data: categories = [] } = useCategories();
 
   const [mapName, setMapName] = useState('');
@@ -69,17 +71,17 @@ export function CreateMapForm({
 
   const handleSubmit = () => {
     if (!mapName.trim()) {
-      Alert.alert('エラー', 'マップ名を入力してください');
+      Alert.alert(t('common.error'), t('map.mapName'));
       return;
     }
 
     if (!description.trim()) {
-      Alert.alert('エラー', '説明を入力してください');
+      Alert.alert(t('common.error'), t('map.mapDescription'));
       return;
     }
 
     if (!selectedCategoryId) {
-      Alert.alert('エラー', 'カテゴリーを選択してください');
+      Alert.alert(t('common.error'), t('map.categoryRequired'));
       return;
     }
 
@@ -104,12 +106,12 @@ export function CreateMapForm({
         {/* マップ名 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-            マップ名 <Text className="text-red-500">*</Text>
+            {t('map.mapNameRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={mapName}
             onChangeText={setMapName}
-            placeholder="例：東京カフェ巡り"
+            placeholder={t('map.mapNamePlaceholder')}
             maxLength={INPUT_LIMITS.MAP_NAME}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
@@ -121,12 +123,12 @@ export function CreateMapForm({
         {/* 説明 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            説明 <Text className="text-red-500">*</Text>
+            {t('map.descriptionRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={description}
             onChangeText={setDescription}
-            placeholder="マップの説明を入力してください"
+            placeholder={t('map.descriptionPlaceholder')}
             multiline
             numberOfLines={4}
             maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
@@ -141,7 +143,7 @@ export function CreateMapForm({
         {/* カテゴリー */}
         <View className="mb-4">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            カテゴリー <Text className="text-red-500">*</Text>
+            {t('map.categoryRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <FlatList
             data={categories}
@@ -180,7 +182,7 @@ export function CreateMapForm({
                         : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
-                    {category.name}
+                    {getTranslatedName(category.name, category.name_translations)}
                   </Text>
                 </TouchableOpacity>
               );
@@ -191,12 +193,12 @@ export function CreateMapForm({
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            タグ
+            {t('map.tags')}
           </Text>
           <TagInput
             tags={tags}
             onTagsChange={setTags}
-            placeholder="タグを入力してEnter"
+            placeholder={t('map.tagsPlaceholder')}
             maxTags={10}
           />
         </View>
@@ -204,7 +206,7 @@ export function CreateMapForm({
         {/* サムネイル画像 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            サムネイル
+            {t('map.thumbnail')}
           </Text>
           <ThumbnailPicker
             image={thumbnailImage}
@@ -217,7 +219,7 @@ export function CreateMapForm({
           <PublicToggle
             value={isPublic}
             onValueChange={setIsPublic}
-            description="公開すると他のユーザーもこのマップを見ることができます"
+            description={t('map.publicDescription')}
           />
         </View>
 
@@ -231,7 +233,7 @@ export function CreateMapForm({
           activeOpacity={0.8}
         >
           <Text className="text-white text-base font-semibold">
-            {isLoading ? '作成中...' : 'マップを作成'}
+            {isLoading ? t('map.creating') : t('map.createMap')}
           </Text>
         </TouchableOpacity>
       </View>

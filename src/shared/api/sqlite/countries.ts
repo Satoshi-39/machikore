@@ -106,8 +106,9 @@ export function getAllCountries(): CountryRow[] {
  */
 export function getCountriesByContinent(continentId: string): CountryRow[] {
   const db = getDatabase();
-  return db.getAllSync<CountryRow>(
+  const rows = db.getAllSync<Record<string, unknown>>(
     'SELECT * FROM countries WHERE continent_id = ? ORDER BY name',
     [continentId]
   );
+  return rows.map(fromSQLiteCountry);
 }

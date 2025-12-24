@@ -13,6 +13,7 @@ import type { Href } from 'expo-router';
 import { useCountries } from '@/entities/country';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 
 /**
  * 国コードから国旗絵文字を生成
@@ -30,6 +31,7 @@ function getCountryFlagEmoji(countryCode: string): string {
 const MAX_DISPLAY_COUNTRIES = 6;
 
 export function WorldSection() {
+  const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
 
@@ -64,7 +66,7 @@ export function WorldSection() {
       {/* セクションタイトル */}
       <View className="flex-row items-center justify-between mb-3">
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
-          🌏 海外から探す
+          🌏 {t('section.searchOverseas')}
         </Text>
         <Pressable
           onPress={handleShowAllCountries}
@@ -88,7 +90,7 @@ export function WorldSection() {
             >
               <Text style={{ fontSize: 24 }}>{getCountryFlagEmoji(country.id)}</Text>
               <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
-                {country.name}
+                {getTranslatedName(country.name, country.name_translations)}
               </Text>
             </Pressable>
           </View>

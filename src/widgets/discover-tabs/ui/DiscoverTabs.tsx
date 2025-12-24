@@ -8,6 +8,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 export type DiscoverTabMode = 'recommend' | 'following';
 
@@ -16,12 +17,14 @@ interface DiscoverTabsProps {
   onTabModeChange: (mode: DiscoverTabMode) => void;
 }
 
-const TAB_OPTIONS: { mode: DiscoverTabMode; label: string }[] = [
-  { mode: 'recommend', label: 'おすすめ' },
-  { mode: 'following', label: 'フォロー中' },
+const TAB_OPTIONS: { mode: DiscoverTabMode; labelKey: string }[] = [
+  { mode: 'recommend', labelKey: 'feed.recommended' },
+  { mode: 'following', labelKey: 'feed.following' },
 ];
 
 export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
+  const { t } = useI18n();
+
   return (
     <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
       <View className="flex-row">
@@ -38,7 +41,7 @@ export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
                   isActive ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                 }`}
               >
-                {option.label}
+                {t(option.labelKey)}
               </Text>
               {isActive && (
                 <View

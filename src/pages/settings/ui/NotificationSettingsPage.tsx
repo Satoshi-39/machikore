@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useNotificationSettings, useUpdateNotificationSettings } from '@/entities/user';
+import { useI18n } from '@/shared/lib/i18n';
 
 // タブの種類
 type TabType = 'push' | 'email';
@@ -19,9 +20,11 @@ type TabType = 'push' | 'email';
 interface TabProps {
   activeTab: TabType;
   onTabChange: (tab: TabType) => void;
+  pushLabel: string;
+  emailLabel: string;
 }
 
-function NotificationTabs({ activeTab, onTabChange }: TabProps) {
+function NotificationTabs({ activeTab, onTabChange, pushLabel, emailLabel }: TabProps) {
   return (
     <View className="flex-row bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light">
       <Pressable
@@ -37,7 +40,7 @@ function NotificationTabs({ activeTab, onTabChange }: TabProps) {
               : 'text-foreground-secondary dark:text-dark-foreground-secondary'
           }`}
         >
-          プッシュ通知
+          {pushLabel}
         </Text>
       </Pressable>
       <Pressable
@@ -53,7 +56,7 @@ function NotificationTabs({ activeTab, onTabChange }: TabProps) {
               : 'text-foreground-secondary dark:text-dark-foreground-secondary'
           }`}
         >
-          メール通知
+          {emailLabel}
         </Text>
       </Pressable>
     </View>
@@ -131,6 +134,7 @@ function SettingsToggle({
 }
 
 export function NotificationSettingsPage() {
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState<TabType>('push');
   const { data: settings, isLoading, error } = useNotificationSettings();
   const { mutate: updateSettings } = useUpdateNotificationSettings();
@@ -149,7 +153,7 @@ export function NotificationSettingsPage() {
   if (isLoading) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="通知設定" showBackButton />
+        <PageHeader title={t('notification.notificationSettings')} showBackButton />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -160,11 +164,11 @@ export function NotificationSettingsPage() {
   if (error || !settings) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title="通知設定" showBackButton />
+        <PageHeader title={t('notification.notificationSettings')} showBackButton />
         <View className="flex-1 items-center justify-center px-4">
           <Ionicons name="alert-circle-outline" size={48} color={colors.text.secondary} />
           <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4 text-center">
-            設定の読み込みに失敗しました
+            {t('notification.loadError')}
           </Text>
         </View>
       </View>
@@ -176,23 +180,28 @@ export function NotificationSettingsPage() {
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
-      <PageHeader title="通知設定" showBackButton />
+      <PageHeader title={t('notification.notificationSettings')} showBackButton />
 
       {/* タブ */}
-      <NotificationTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <NotificationTabs
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        pushLabel={t('notification.pushNotification')}
+        emailLabel={t('notification.emailNotification')}
+      />
 
       <ScrollView className="flex-1">
         {activeTab === 'push' ? (
           <>
             {/* プッシュ通知マスター設定 */}
             <SettingsSection
-              title="プッシュ通知"
-              description="オフにすると全てのプッシュ通知が届かなくなります"
+              title={t('notification.pushNotification')}
+              description={t('notification.pushDisabledDescription')}
               isFirst
             >
               <SettingsToggle
                 icon="notifications"
-                label="プッシュ通知を受け取る"
+                label={t('notification.receivePushNotifications')}
                 value={settings.push_enabled}
                 onValueChange={(value) => handleToggle('push_enabled', value)}
               />
@@ -200,37 +209,37 @@ export function NotificationSettingsPage() {
 
             {/* プッシュ通知タイプ別設定 */}
             <SettingsSection
-              title="通知の種類"
-              description={!settings.push_enabled ? 'プッシュ通知がオフのため変更できません' : undefined}
+              title={t('notification.notificationTypes')}
+              description={!settings.push_enabled ? t('notification.pushDisabledNotice') : undefined}
             >
               <SettingsToggle
                 icon="heart"
-                label="いいね"
-                description="あなたの投稿にいいねされた時"
+                label={t('notification.likeNotification')}
+                description={t('notification.likeNotificationDescription')}
                 value={settings.like_enabled}
                 onValueChange={(value) => handleToggle('like_enabled', value)}
                 disabled={isPushDisabled}
               />
               <SettingsToggle
                 icon="chatbubble"
-                label="コメント"
-                description="あなたの投稿にコメントされた時"
+                label={t('notification.commentNotification')}
+                description={t('notification.commentNotificationDescription')}
                 value={settings.comment_enabled}
                 onValueChange={(value) => handleToggle('comment_enabled', value)}
                 disabled={isPushDisabled}
               />
               <SettingsToggle
                 icon="person-add"
-                label="フォロー"
-                description="新しいフォロワーができた時"
+                label={t('notification.followNotification')}
+                description={t('notification.followNotificationDescription')}
                 value={settings.follow_enabled}
                 onValueChange={(value) => handleToggle('follow_enabled', value)}
                 disabled={isPushDisabled}
               />
               <SettingsToggle
                 icon="megaphone"
-                label="お知らせ"
-                description="運営からのお知らせ"
+                label={t('notification.systemNotification')}
+                description={t('notification.systemNotificationDescription')}
                 value={settings.system_enabled}
                 onValueChange={(value) => handleToggle('system_enabled', value)}
                 disabled={isPushDisabled}
@@ -241,13 +250,13 @@ export function NotificationSettingsPage() {
           <>
             {/* メール通知マスター設定 */}
             <SettingsSection
-              title="メール通知"
-              description="オフにすると全てのメール通知が届かなくなります"
+              title={t('notification.emailNotification')}
+              description={t('notification.emailDisabledDescription')}
               isFirst
             >
               <SettingsToggle
                 icon="mail"
-                label="メール通知を受け取る"
+                label={t('notification.receiveEmailNotifications')}
                 value={settings.email_enabled}
                 onValueChange={(value) => handleToggle('email_enabled', value)}
               />
@@ -255,37 +264,37 @@ export function NotificationSettingsPage() {
 
             {/* メール通知タイプ別設定 */}
             <SettingsSection
-              title="通知の種類"
-              description={!settings.email_enabled ? 'メール通知がオフのため変更できません' : undefined}
+              title={t('notification.notificationTypes')}
+              description={!settings.email_enabled ? t('notification.emailDisabledNotice') : undefined}
             >
               <SettingsToggle
                 icon="heart"
-                label="いいね"
-                description="あなたの投稿にいいねされた時"
+                label={t('notification.likeNotification')}
+                description={t('notification.likeNotificationDescription')}
                 value={settings.email_like_enabled}
                 onValueChange={(value) => handleToggle('email_like_enabled', value)}
                 disabled={isEmailDisabled}
               />
               <SettingsToggle
                 icon="chatbubble"
-                label="コメント"
-                description="あなたの投稿にコメントされた時"
+                label={t('notification.commentNotification')}
+                description={t('notification.commentNotificationDescription')}
                 value={settings.email_comment_enabled}
                 onValueChange={(value) => handleToggle('email_comment_enabled', value)}
                 disabled={isEmailDisabled}
               />
               <SettingsToggle
                 icon="person-add"
-                label="フォロー"
-                description="新しいフォロワーができた時"
+                label={t('notification.followNotification')}
+                description={t('notification.followNotificationDescription')}
                 value={settings.email_follow_enabled}
                 onValueChange={(value) => handleToggle('email_follow_enabled', value)}
                 disabled={isEmailDisabled}
               />
               <SettingsToggle
                 icon="megaphone"
-                label="お知らせ"
-                description="運営からのお知らせ"
+                label={t('notification.systemNotification')}
+                description={t('notification.systemNotificationDescription')}
                 value={settings.email_system_enabled}
                 onValueChange={(value) => handleToggle('email_system_enabled', value)}
                 disabled={isEmailDisabled}

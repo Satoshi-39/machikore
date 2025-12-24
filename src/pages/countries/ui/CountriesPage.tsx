@@ -16,6 +16,8 @@ import { useCountries } from '@/entities/country';
 import type { CountryRow } from '@/shared/types/database.types';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
+import type { ContinentRow } from '@/shared/types/database.types';
 
 /**
  * 国コードから国旗絵文字を生成
@@ -34,11 +36,12 @@ function getCountryFlagEmoji(countryCode: string): string {
 }
 
 interface SectionData {
-  title: string;
+  continent: ContinentRow;
   countries: CountryRow[];
 }
 
 export function CountriesPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const { goBack } = useSafeBack();
 
@@ -68,7 +71,7 @@ export function CountriesPage() {
     return sortedContinents
       .filter((continent) => groupedByContinent.has(continent.id))
       .map((continent) => ({
-        title: continent.name,
+        continent,
         countries: groupedByContinent.get(continent.id) ?? [],
       }));
   }, [continents, allCountries]);
@@ -88,13 +91,13 @@ export function CountriesPage() {
       className="flex-1 bg-background dark:bg-dark-background"
       edges={['top']}
     >
-      <PageHeader title="海外から探す" onBack={goBack} useSafeArea={false} />
+      <PageHeader title={t('section.searchOverseas')} onBack={goBack} useSafeArea={false} />
 
       <AsyncBoundary
         isLoading={isLoading}
         error={error}
         data={sections.length > 0 ? sections : null}
-        emptyMessage="国データがありません"
+        emptyMessage={t('section.noCountryData')}
         emptyIonIcon="globe-outline"
       >
         {(data) => (
@@ -104,10 +107,10 @@ export function CountriesPage() {
             contentContainerStyle={{ paddingBottom: 24 }}
           >
             {data.map((section) => (
-              <View key={section.title} className="mt-4">
+              <View key={section.continent.id} className="mt-4">
                 {/* 大陸名ヘッダー */}
                 <Text className="text-lg font-bold text-foreground dark:text-dark-foreground px-4 mb-3">
-                  {section.title}
+                  {getTranslatedName(section.continent.name, section.continent.name_translations)}
                 </Text>
 
                 {/* 2列グリッド */}
@@ -122,7 +125,7 @@ export function CountriesPage() {
                           {getCountryFlagEmoji(country.id)}
                         </Text>
                         <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3 flex-1" numberOfLines={1}>
-                          {country.name}
+                          {getTranslatedName(country.name, country.name_translations)}
                         </Text>
                       </Pressable>
                     </View>

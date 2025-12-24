@@ -18,7 +18,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
-import { ImageViewerModal, useImageViewer, CommentInputModal, RichTextRenderer } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, CommentInputModal, RichTextRenderer, LocationPinIcon } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
@@ -53,6 +54,7 @@ export function MapArticleContent({
   onCommentsPress,
   onMapPress,
 }: MapArticleContentProps) {
+  const { t } = useI18n();
   const { map, spots } = articleData;
 
   // 画像ビューアー
@@ -207,9 +209,9 @@ export function MapArticleContent({
           {/* スポット数 + いいね */}
           <View className="flex-row items-center gap-4 mb-4">
             <View className="flex-row items-center">
-              <Ionicons name="location" size={18} color={colors.text.secondary} />
+              <LocationPinIcon size={18} color={colors.text.secondary} />
               <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                {map.spots_count}スポット
+                {t('article.spotsCount', { count: map.spots_count })}
               </Text>
             </View>
 
@@ -280,7 +282,7 @@ export function MapArticleContent({
           ) : (
             <View className="py-8 items-center">
               <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
-              <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">まだスポットがありません</Text>
+              <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('article.noSpots')}</Text>
             </View>
           )}
 

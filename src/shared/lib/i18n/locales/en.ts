@@ -26,6 +26,11 @@ export default {
     none: 'None',
     more: 'More',
     less: 'Less',
+    comment: 'Comment',
+    like: 'Like',
+    share: 'Share',
+    post: 'Post',
+    user: 'User',
   },
 
   // Tabs
@@ -66,6 +71,21 @@ export default {
     deleteMapConfirm: 'Delete this map?',
     noMaps: 'No maps',
     createFirstMap: 'Create your first map',
+    // Create map form
+    mapNameRequired: 'Map Name',
+    mapNamePlaceholder: 'e.g. Tokyo Cafe Tour',
+    descriptionRequired: 'Description',
+    descriptionPlaceholder: 'Enter a description for this map',
+    categoryRequired: 'Category',
+    tags: 'Tags',
+    tagsPlaceholder: 'Enter tag and press Enter',
+    thumbnail: 'Thumbnail',
+    publicDescription: 'When public, other users can view this map',
+    creating: 'Creating...',
+    // Map selection
+    targetMap: 'Add to Map',
+    belongingMap: 'Belonging Map',
+    noMapSelected: 'No map selected',
   },
 
   // Spots
@@ -79,8 +99,47 @@ export default {
     visitDate: 'Visit Date',
     visited: 'Visited',
     notVisited: 'Not Visited',
-    deleteSpotConfirm: 'Delete this spot?',
+    deleteSpotConfirm: 'Delete this spot? This cannot be undone.',
     noSpots: 'No spots',
+    unknownSpot: 'Unknown Spot',
+    noArticle: 'No article yet',
+    // Create spot form
+    registerSpot: 'Register Spot',
+    googlePlacesInfo: 'Info from Google Places',
+    currentLocationInfo: 'Register from current location',
+    mapPinInfo: 'Selected location on map',
+    originalSpotName: 'Original Spot Name',
+    oneWordRequired: 'Describe this spot in one word!',
+    oneWordPlaceholder: 'e.g. Best ramen shop',
+    spotSummary: 'Spot Summary',
+    summaryPlaceholder: 'Brief description of this spot',
+    article: 'Article',
+    articleEmpty: 'Write more about this spot',
+    articleEntered: 'Article has been entered',
+    articleHint: 'This content will be displayed on the article page',
+    articleEdit: 'Edit Article',
+    articleWrite: 'Write Article',
+    articleWriteHint: 'Write more about this spot',
+    label: 'Label',
+    spotColor: 'Spot Color',
+    labelColorNotice: '*Label color takes priority when a label is set',
+    photos: 'Photos',
+    registering: 'Registering...',
+    registerSpotButton: 'Register Spot',
+    // Edit spot
+    spotInfo: 'Spot Info',
+    existingPhotos: 'Existing Photos',
+    newPhotos: 'New Photos to Add',
+    totalPhotos: 'Total %{current}/%{max}',
+    updating: 'Updating...',
+    saveChanges: 'Save Changes',
+    spotNotFound: 'Spot not found',
+    // Loading
+    creatingSpot: 'Creating spot...',
+    uploadingImages: 'Uploading images... (%{current}/%{total})',
+    processingComplete: 'Processing...',
+    updatingSpot: 'Updating spot...',
+    deletingImages: 'Deleting images...',
   },
 
   // Favorites & Likes
@@ -92,6 +151,85 @@ export default {
     like: 'Like',
     likes: 'Likes',
     liked: 'Liked',
+    likedItems: 'Liked',
+    noLikes: 'No liked items',
+    spot: 'Spots',
+    map: 'Maps',
+    noLikedSpots: 'No liked spots',
+    noLikedMaps: 'No liked maps',
+    unknownSpot: 'Unknown Spot',
+    userPost: 'Post by %{name}',
+    spotsCount: '%{count} Spots',
+    spots: 'Spots',
+    maps: 'Maps',
+  },
+
+  // Collections
+  collection: {
+    collection: 'Collection',
+    collections: 'Collections',
+    createNew: 'New',
+    noCollections: 'No collections',
+    // Create collection
+    newCollection: 'New Collection',
+    collectionName: 'Collection Name',
+    collectionNamePlaceholder: 'e.g. Tokyo Cafe Collection',
+    descriptionOptional: 'Description (optional)',
+    descriptionPlaceholder: 'Enter a description...',
+    thumbnail: 'Thumbnail',
+    publicDescription: 'When enabled, other users can view this collection',
+    createHint: 'After creating the collection, you can add maps',
+    creating: 'Creating...',
+    create: 'Create',
+    // Edit collection
+    editCollection: 'Edit Collection',
+    collectionNotFound: 'Collection not found',
+    manageMaps: 'Manage Maps',
+    itemsCount: '%{count}',
+    // Collection detail
+    mapsCount: '%{count} Maps',
+    private: 'Private',
+    mapList: 'Map List',
+    noMaps: 'No maps yet',
+    edit: 'Edit',
+    anonymous: 'Anonymous',
+    notFound: 'Collection not found',
+    // Delete collection
+    deleteTitle: 'Delete Collection',
+    deleteMessage: 'Delete this collection?',
+    // Empty state
+    emptyTitle: 'Collections',
+    emptyDescriptionOwner: 'Organize maps by theme',
+    emptyDescriptionOther: 'No collections created',
+    loadingMessage: 'Loading collections...',
+  },
+
+  // Bookmarks
+  bookmark: {
+    bookmark: 'Bookmark',
+    bookmarks: 'Bookmarks',
+    loginRequired: 'Please log in',
+    noBookmarks: 'No bookmarks',
+    spots: 'Spots',
+    maps: 'Maps',
+    createFolder: 'Create new folder',
+    watchLater: 'Watch Later',
+    itemCount: '%{count}',
+    deleteFolder: 'Delete Folder',
+    deleteFolderMessage: 'Delete "%{name}"?\nBookmarks in this folder will be moved to "Watch Later".',
+    editFolderName: 'Edit folder name',
+    folderName: 'Folder name',
+    // Create folder modal
+    newFolder: 'New Folder',
+    folderNamePlaceholder: 'Folder name',
+    create: 'Create',
+    folder: 'Folder',
+    // Select folder modal
+    selectSpotFolder: 'Select destination for spot',
+    selectMapFolder: 'Select destination for map',
+    added: 'Added',
+    add: 'Add',
+    createNewFolder: 'Create new folder',
   },
 
   // Comments
@@ -99,9 +237,29 @@ export default {
     comment: 'Comment',
     comments: 'Comments',
     addComment: 'Add Comment',
+    addPlaceholder: 'Add a comment...',
     writeComment: 'Write a comment...',
     deleteComment: 'Delete Comment',
     noComments: 'No comments yet',
+    edit: 'Edit',
+    delete: 'Delete',
+    reply: 'Reply',
+    showReplies: 'Show %{count} replies',
+    hideReplies: 'Hide replies',
+    defaultUser: 'User',
+    enterComment: 'Enter comment...',
+    enterReply: 'Enter reply...',
+    replyToUser: 'Reply to %{name}...',
+    replyingTo: 'Replying to %{name}',
+    composingReply: 'Composing reply',
+    editComment: 'Edit comment',
+  },
+
+  // View History
+  viewHistory: {
+    title: 'Recently Viewed Maps',
+    loginRequired: 'Log in to see your viewing history',
+    empty: 'No viewing history yet',
   },
 
   // Profile
@@ -109,7 +267,12 @@ export default {
     profile: 'Profile',
     editProfile: 'Edit Profile',
     username: 'Username',
+    usernameCannotChange: 'Username cannot be changed',
+    displayName: 'Display Name',
+    displayNamePlaceholder: 'Enter display name',
     bio: 'Bio',
+    bioPlaceholder: 'Enter your bio',
+    tapToChangePhoto: 'Tap to change photo',
     followers: 'Followers',
     following: 'Following',
     follow: 'Follow',
@@ -117,6 +280,11 @@ export default {
     posts: 'Posts',
     maps: 'Maps',
     bookmarks: 'Bookmarks',
+    photoPermissionRequired: 'Permission Required',
+    photoPermissionMessage: 'Please allow access to your photo library to select an image.',
+    profileSaved: 'Saved',
+    profileSavedMessage: 'Your profile has been updated.',
+    profileSaveError: 'Failed to save profile.',
   },
 
   // Settings
@@ -148,6 +316,9 @@ export default {
     deleteAccount: 'Delete Account',
     comingSoon: 'Coming Soon',
     comingSoonMessage: 'This feature is coming soon.',
+    effectiveDate: 'Effective %{date}',
+    termsLoadError: 'Failed to load document. Please check your internet connection.',
+    termsNotFound: 'Document not found',
   },
 
   // Search
@@ -158,6 +329,18 @@ export default {
     searchMaps: 'Search maps',
     recentSearches: 'Recent searches',
     noResults: 'No results found',
+    noSearchHistory: 'No search history',
+    clearAll: 'Clear all',
+    showMore: 'Show more',
+    searchAndRegister: 'Search and register',
+    registerCurrentLocation: 'Register current location',
+    pinOnMap: 'Pin on map',
+    searching: 'Searching...',
+    searchFailed: 'Search failed. Please try again.',
+    noResultsFor: 'No results found for "%{query}"',
+    resultsFor: 'Results for "%{query}" (%{count})',
+    locationUnavailable: 'Location unavailable',
+    checkLocationPermission: 'Please check your location permissions',
   },
 
   // Filters
@@ -222,6 +405,7 @@ export default {
     locationPermissionMessage: 'Location permission is required for this feature',
     directions: 'Directions',
     openInMaps: 'Open in Maps',
+    earth: 'Earth',
   },
 
   // Images
@@ -237,7 +421,276 @@ export default {
     noData: 'No data',
     noMaps: 'No maps',
     noSpots: 'No spots',
-    noFollowers: 'No followers',
-    noFollowing: 'Not following anyone',
+    noFollowers: 'No followers yet',
+    noFollowing: 'Not following anyone yet',
+    noNotifications: 'No notifications',
+    noAnnouncements: 'No announcements',
+    noMapsYet: 'No maps created yet',
+    noFollowingUsers: 'Not following anyone',
+    noFollowingMaps: 'No maps from followed users',
+  },
+
+  // Feed
+  feed: {
+    recommended: 'Recommended',
+    following: 'Following',
+  },
+
+  // Notifications
+  notification: {
+    notifications: 'Notifications',
+    announcements: 'Announcements',
+    markAllRead: 'Mark all as read',
+    likedYourSpot: '%{name} liked your spot "%{target}"',
+    likedYourMap: '%{name} liked your map "%{target}"',
+    commentedOnYourSpot: '%{name} commented on your spot "%{target}"',
+    commentedOnYourMap: '%{name} commented on your map "%{target}"',
+    followedYou: '%{name} followed you',
+    newNotification: 'You have a new notification',
+    like: 'Like',
+    comment: 'Comment',
+    follow: 'Follow',
+    system: 'Announcement',
+    // Notification settings
+    notificationSettings: 'Notification Settings',
+    pushNotification: 'Push Notifications',
+    emailNotification: 'Email Notifications',
+    receivePushNotifications: 'Receive push notifications',
+    receiveEmailNotifications: 'Receive email notifications',
+    pushDisabledDescription: 'When off, you will not receive any push notifications',
+    emailDisabledDescription: 'When off, you will not receive any email notifications',
+    notificationTypes: 'Notification Types',
+    pushDisabledNotice: 'Cannot change while push notifications are off',
+    emailDisabledNotice: 'Cannot change while email notifications are off',
+    likeNotification: 'Likes',
+    likeNotificationDescription: 'When someone likes your post',
+    commentNotification: 'Comments',
+    commentNotificationDescription: 'When someone comments on your post',
+    followNotification: 'Follows',
+    followNotificationDescription: 'When someone follows you',
+    systemNotification: 'Announcements',
+    systemNotificationDescription: 'Announcements from the team',
+    loadError: 'Failed to load settings',
+  },
+
+  // Relative time
+  time: {
+    justNow: 'Just now',
+    minutesAgo: '%{count}m ago',
+    hoursAgo: '%{count}h ago',
+    daysAgo: '%{count}d ago',
+    weeksAgo: '%{count}w ago',
+    monthsAgo: '%{count}mo ago',
+    yearsAgo: '%{count}y ago',
+  },
+
+  // Discover
+  discover: {
+    searchPlaceholder: 'Search spots, maps, users',
+    searchFor: 'Search for "%{query}"',
+    users: 'Users',
+    latest: 'Latest',
+    trending: 'Trending',
+    spots: 'Spots',
+    maps: 'Maps',
+    noTrendingPosts: 'No trending posts',
+    noSpotsFound: 'No spots found',
+    noMapsFound: 'No maps found',
+    noUsersFound: 'No users found',
+    noSearchResults: 'No search results',
+  },
+
+  // Sections
+  section: {
+    todaysPicks: "Today's Picks",
+    popularRanking: 'Popular Map Ranking',
+    latestInCategory: 'Latest in %{category}',
+    popularInCategory: 'Popular in %{category}',
+    featuredInCategory: 'Featured in %{category}',
+    recentlyViewed: 'Recently Viewed',
+    searchByArea: 'Browse by Area',
+    searchOverseas: 'Browse Overseas',
+    searchByTag: 'Search by Tag',
+    searchByPrefecture: 'Browse by Prefecture',
+    noTodayPicks: "No today's picks",
+    noPopularMaps: 'No popular maps',
+    noPrefectureData: 'No prefecture data',
+    noCountryData: 'No country data',
+  },
+
+  // My Page
+  mypage: {
+    myPage: 'My Page',
+    editProfile: 'Edit Profile',
+    loadingMaps: 'Loading maps...',
+    deleteMapConfirmDetail: 'Delete this map? All related spots will also be deleted. This cannot be undone.',
+    report: 'Report',
+    defaultUser: 'User',
+  },
+
+  // Create menu
+  create: {
+    map: 'Map',
+    spot: 'Spot',
+    blog: 'Blog',
+  },
+
+  // Areas
+  area: {
+    tokyo: 'Tokyo',
+    osaka: 'Osaka',
+    kyoto: 'Kyoto',
+    kanagawa: 'Kanagawa',
+    aichi: 'Aichi',
+    fukuoka: 'Fukuoka',
+    hokkaido: 'Hokkaido',
+    hyogo: 'Hyogo',
+  },
+
+  // Edit Map
+  editMap: {
+    title: 'Edit Map',
+    notFound: 'Map not found',
+    mapInfo: 'Map Info',
+    spots: 'Spots',
+    likes: 'Likes',
+    createdAt: 'Created',
+    mapNameLabel: 'Map Name',
+    mapNamePlaceholder: 'e.g. Tokyo Cafe Tour',
+    descriptionLabel: 'Description',
+    descriptionPlaceholder: 'Enter a description for this map',
+    categoryLabel: 'Category',
+    labelLabel: 'Labels',
+    showLabelChips: 'Show Label Chips',
+    showLabelChipsDescription: 'Display labels at the top of the map for filtering spots',
+    tagsLabel: 'Tags',
+    tagsPlaceholder: 'Enter tag and press Enter',
+    thumbnailLabel: 'Thumbnail',
+    publicDescription: 'Anyone can view this map',
+    privateDescription: 'Only you can view this map',
+    updating: 'Updating...',
+    saveChanges: 'Save Changes',
+    required: '*',
+  },
+
+  // Article
+  article: {
+    article: 'Article',
+    notFound: 'Article not found',
+    private: 'This article is private',
+    viewMap: 'View Map',
+    editArticle: 'Edit Article',
+    editMap: 'Edit Map',
+    // Article page additions
+    tableOfContents: 'Table of Contents',
+    spotsCount: '%{count} Spots',
+    noSpots: 'No spots yet',
+    unknownSpot: 'Unknown Spot',
+    authorOtherMaps: 'Other Maps by This Author',
+    comment: 'Comments',
+    addComment: 'Add a comment...',
+    noComments: 'No comments yet',
+    viewAllComments: 'View all %{count} comments',
+    loadError: 'Failed to load',
+    searchByTag: 'Search by Tag',
+    featuredInCategory: 'Featured in %{category}',
+    latestInCategory: 'Latest in %{category}',
+  },
+
+  // Menu (three-dot menu)
+  menu: {
+    edit: 'Edit',
+    delete: 'Delete',
+    share: 'Share',
+    report: 'Report',
+    viewMap: 'View Map',
+    viewArticle: 'View Article',
+    copyLink: 'Copy Link',
+  },
+
+  // Auth required
+  authRequired: {
+    loginRequiredAction: 'Please log in to %{action}',
+  },
+
+  // Schedule
+  schedule: {
+    title: 'Schedule',
+    dateSchedule: 'Schedule for %{month}/%{day}',
+    noSchedule: 'No scheduled plans',
+    comingSoon: 'Schedule feature coming soon',
+  },
+
+  // Map Card
+  mapCard: {
+    deleteTitle: 'Delete Map',
+    deleteMessage: 'Delete this map and all its spots? This cannot be undone.',
+    defaultUser: 'User',
+  },
+
+  // Spot Card
+  spotCard: {
+    deleteTitle: 'Delete Spot',
+    deleteMessage: 'Delete this spot? This cannot be undone.',
+    unknownSpot: 'Unknown Spot',
+    defaultUser: 'User',
+  },
+
+  // Public/Private Toggle
+  publicToggle: {
+    public: 'Public',
+    private: 'Private',
+    publicStatus: 'Public',
+    privateStatus: 'Private',
+  },
+
+  // Category Page
+  categoryPage: {
+    tagsTitle: '%{category} Tags',
+    noTags: 'No tags',
+    noMapsForTag: 'No maps for #%{tag}',
+    selectTag: 'Select a tag',
+  },
+
+  // Add Maps to Collection
+  addMapsToCollection: {
+    title: 'Add Maps',
+    addTo: 'Add to:',
+    tapToToggle: 'Tap to add/remove maps',
+    spotsCount: '%{count} spots',
+  },
+
+  // Prefecture Spots List
+  prefectureSpots: {
+    spotList: 'Spot List',
+    missingParams: 'Missing parameters',
+    prefectureSpotsTitle: 'Spots in %{prefecture}',
+    noPrefectureSpots: 'No spots in %{prefecture} yet',
+    noCategoryPrefectureSpots: 'No %{category} spots in %{prefecture} yet',
+    loadError: 'Failed to load',
+  },
+
+  // Edit Article
+  editArticle: {
+    title: 'Edit Article',
+    notFound: 'Article not found',
+    noPermission: 'No edit permission',
+    publicToggleError: 'Failed to change publish setting',
+    intro: 'Introduction',
+    writeIntro: 'Tap to write introduction',
+    editIntro: 'Edit Introduction',
+    outro: 'Conclusion',
+    writeOutro: 'Tap to write conclusion',
+    editOutro: 'Edit Conclusion',
+    noSpots: 'No spots yet',
+    writeDescription: 'Tap to write description',
+    charCount: '%{count} chars',
+    saved: 'Saved',
+    saveError: 'Failed to save',
+    discardTitle: 'Discard changes?',
+    discardMessage: 'You have unsaved changes.',
+    discard: 'Discard',
+    spotNotFound: 'Spot not found',
+    mapNotFound: 'Map not found',
   },
 };

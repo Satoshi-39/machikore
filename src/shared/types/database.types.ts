@@ -89,6 +89,30 @@ export type Database = MergeDeep<
             prefecture_name_translations?: NameTranslations;
           };
         };
+        // regions: 多言語対応
+        regions: {
+          Row: { name_translations: NameTranslations };
+          Insert: { name_translations?: NameTranslations };
+          Update: { name_translations?: NameTranslations };
+        };
+        // prefectures: 多言語対応
+        prefectures: {
+          Row: { name_translations: NameTranslations };
+          Insert: { name_translations?: NameTranslations };
+          Update: { name_translations?: NameTranslations };
+        };
+        // continents: 多言語対応
+        continents: {
+          Row: { name_translations: NameTranslations };
+          Insert: { name_translations?: NameTranslations };
+          Update: { name_translations?: NameTranslations };
+        };
+        // countries: 多言語対応
+        countries: {
+          Row: { name_translations: NameTranslations };
+          Insert: { name_translations?: NameTranslations };
+          Update: { name_translations?: NameTranslations };
+        };
       };
     };
   }

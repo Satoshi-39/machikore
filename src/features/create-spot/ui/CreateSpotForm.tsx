@@ -29,6 +29,7 @@ import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { MapWithUser } from '@/shared/types';
 import { useCreateSpotFormValidation } from '../model';
 import { useMapLabels } from '@/entities/map-label';
+import { useI18n } from '@/shared/lib/i18n';
 
 // 記事コンテンツが空かどうかを判定
 function isEmptyArticle(doc: ProseMirrorDoc | null): boolean {
@@ -84,6 +85,7 @@ export function CreateSpotForm({
   isMapsLoading = false,
   selectedMapId,
 }: CreateSpotFormProps) {
+  const { t } = useI18n();
   const router = useRouter();
 
   // Google検索結果か手動登録かを判定
@@ -118,12 +120,12 @@ export function CreateSpotForm({
 
   const handleSubmit = () => {
     if (!customName.trim()) {
-      Alert.alert('エラー', '「このスポットを一言で」を入力してください');
+      Alert.alert(t('common.error'), t('spot.oneWordRequired'));
       return;
     }
 
     if (!selectedMapId) {
-      Alert.alert('エラー', 'マップを選択してください');
+      Alert.alert(t('common.error'), t('map.targetMap'));
       return;
     }
 
@@ -142,12 +144,12 @@ export function CreateSpotForm({
   // ローディング表示のテキストを決定
   const getLoadingText = () => {
     if (!uploadProgress || uploadProgress.status === 'idle') {
-      return 'スポットを作成中...';
+      return t('spot.creatingSpot');
     }
     if (uploadProgress.status === 'uploading') {
-      return `画像をアップロード中... (${uploadProgress.current}/${uploadProgress.total})`;
+      return t('spot.uploadingImages', { current: uploadProgress.current, total: uploadProgress.total });
     }
-    return '完了処理中...';
+    return t('spot.processingComplete');
   };
 
   return (
@@ -192,17 +194,17 @@ export function CreateSpotForm({
             )}
             <Text className={`text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary ${isGooglePlace ? 'ml-2' : ''}`}>
               {isGooglePlace
-                ? 'Google Placesから取得した情報'
+                ? t('spot.googlePlacesInfo')
                 : !isGooglePlace && 'source' in placeData && placeData.source === 'current_location'
-                ? '現在地から登録'
-                : '地図上で選択した位置'}
+                ? t('spot.currentLocationInfo')
+                : t('spot.mapPinInfo')}
             </Text>
           </View>
 
           {/* Google検索の場合: 元の名前を表示 */}
           {isGooglePlace && placeData.name && (
             <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">スポット名（元）</Text>
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.originalSpotName')}</Text>
               <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{placeData.name}</Text>
             </View>
           )}
@@ -219,7 +221,7 @@ export function CreateSpotForm({
         {/* マップ（表示のみ） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            追加するマップ
+            {t('map.targetMap')}
           </Text>
           <View className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
@@ -232,7 +234,7 @@ export function CreateSpotForm({
                 <Text className="text-base text-foreground dark:text-dark-foreground">{selectedMap.name}</Text>
               </View>
             ) : (
-              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">マップが選択されていません</Text>
+              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">{t('map.noMapSelected')}</Text>
             )}
           </View>
         </View>
@@ -240,12 +242,12 @@ export function CreateSpotForm({
         {/* このスポットを一言で！（必須） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            このスポットを一言で！ <Text className="text-red-500">*</Text>
+            {t('spot.oneWordRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
             value={customName}
             onChangeText={setCustomName}
-            placeholder="例：最高のラーメン屋"
+            placeholder={t('spot.oneWordPlaceholder')}
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
@@ -259,12 +261,12 @@ export function CreateSpotForm({
         {/* スポットの概要（任意） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポットの概要
+            {t('spot.spotSummary')}
           </Text>
           <StyledTextInput
             value={description}
             onChangeText={setDescription}
-            placeholder="このスポットの魅力を簡潔に"
+            placeholder={t('spot.summaryPlaceholder')}
             multiline
             numberOfLines={2}
             maxLength={INPUT_LIMITS.SPOT_SUMMARY}
@@ -280,7 +282,7 @@ export function CreateSpotForm({
 
         {/* 記事 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">記事</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.article')}</Text>
           <TouchableOpacity
             onPress={() => router.push('/create-spot-article')}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
@@ -301,8 +303,8 @@ export function CreateSpotForm({
                 numberOfLines={1}
               >
                 {isEmptyArticle(draftArticleContent)
-                  ? 'スポットについて詳しく書いてみましょう'
-                  : '記事が入力されています'}
+                  ? t('spot.articleEmpty')
+                  : t('spot.articleEntered')}
               </Text>
             </View>
             <Ionicons
@@ -312,17 +314,17 @@ export function CreateSpotForm({
             />
           </TouchableOpacity>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-            ここに入力した内容が記事ページで表示されます
+            {t('spot.articleHint')}
           </Text>
         </View>
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">タグ</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('map.tags')}</Text>
           <TagInput
             tags={tags}
             onTagsChange={setTags}
-            placeholder="タグを入力してEnter"
+            placeholder={t('map.tagsPlaceholder')}
             maxTags={10}
           />
         </View>
@@ -331,7 +333,7 @@ export function CreateSpotForm({
         {selectedMapId && (
           <View className="mb-6" style={{ zIndex: 3000 }}>
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-              ラベル
+              {t('spot.label')}
             </Text>
             <LabelPicker
               labels={mapLabels}
@@ -345,7 +347,7 @@ export function CreateSpotForm({
         {/* スポットの色 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            スポットの色
+            {t('spot.spotColor')}
           </Text>
           <View style={{ opacity: selectedLabelId ? 0.5 : 1 }} pointerEvents={selectedLabelId ? 'none' : 'auto'}>
             <SpotColorPicker
@@ -355,14 +357,14 @@ export function CreateSpotForm({
           </View>
           {selectedLabelId && (
             <Text className="text-xs text-red-500 mt-2">
-              ※ラベルが設定されている場合、ラベルの色が優先されます
+              {t('spot.labelColorNotice')}
             </Text>
           )}
         </View>
 
         {/* 写真 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">写真</Text>
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
           <ImagePickerButton
             images={images}
             onImagesChange={setImages}
@@ -380,7 +382,7 @@ export function CreateSpotForm({
           activeOpacity={0.8}
         >
           <Text className="text-white text-base font-semibold">
-            {isLoading ? '登録中...' : 'スポットを登録'}
+            {isLoading ? t('spot.registering') : t('spot.registerSpotButton')}
           </Text>
         </TouchableOpacity>
       </View>

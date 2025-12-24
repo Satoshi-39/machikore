@@ -14,6 +14,7 @@ import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { PopupMenu } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter, type Href } from 'expo-router';
@@ -39,6 +40,7 @@ export function BookmarkFolderList({
   activeTab,
   onCreateFolder,
 }: BookmarkFolderListProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
 
@@ -109,12 +111,12 @@ export function BookmarkFolderList({
   const handleDeleteFolder = useCallback(
     (folder: BookmarkFolder) => {
       Alert.alert(
-        'フォルダを削除',
-        `「${folder.name}」を削除しますか？\nフォルダ内のブックマークは「後で見る」に移動します。`,
+        t('bookmark.deleteFolder'),
+        t('bookmark.deleteFolderMessage', { name: folder.name }),
         [
-          { text: 'キャンセル', style: 'cancel' },
+          { text: t('common.cancel'), style: 'cancel' },
           {
-            text: '削除',
+            text: t('common.delete'),
             style: 'destructive',
             onPress: () => {
               deleteFolder({ folderId: folder.id, userId });
@@ -123,21 +125,21 @@ export function BookmarkFolderList({
         ]
       );
     },
-    [userId, deleteFolder]
+    [userId, deleteFolder, t]
   );
 
   const foldersWithDefault = useMemo(
     () => [
       {
         id: 'uncategorized',
-        name: '後で見る',
+        name: t('bookmark.watchLater'),
         user_id: userId,
         order_index: -1,
         created_at: '',
       },
       ...folders,
     ],
-    [folders, userId]
+    [folders, userId, t]
   );
 
   const renderFolderItem = useCallback(
@@ -157,7 +159,7 @@ export function BookmarkFolderList({
             <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
               {item.name}
             </Text>
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{count}件</Text>
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{t('bookmark.itemCount', { count })}</Text>
           </View>
 
           {/* 3点リーダーメニュー（後で見る以外） */}
@@ -166,13 +168,13 @@ export function BookmarkFolderList({
               items={[
                 {
                   id: 'edit',
-                  label: '編集',
+                  label: t('common.edit'),
                   icon: 'pencil',
                   onPress: () => handleEditFolder(item as BookmarkFolder),
                 },
                 {
                   id: 'delete',
-                  label: '削除',
+                  label: t('common.delete'),
                   icon: 'trash',
                   destructive: true,
                   onPress: () => handleDeleteFolder(item as BookmarkFolder),
@@ -190,6 +192,7 @@ export function BookmarkFolderList({
       handleFolderPress,
       handleEditFolder,
       handleDeleteFolder,
+      t,
     ]
   );
 
@@ -208,7 +211,7 @@ export function BookmarkFolderList({
               <Ionicons name="add" size={24} color={colors.primary.DEFAULT} />
             </View>
             <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
-              新しいフォルダを作成
+              {t('bookmark.createFolder')}
             </Text>
           </Pressable>
         }
@@ -224,12 +227,12 @@ export function BookmarkFolderList({
         <View className="flex-1 bg-black/50 justify-center items-center px-6">
           <View className="bg-surface dark:bg-dark-surface-elevated rounded-2xl w-full max-w-sm p-6">
             <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground mb-4">
-              フォルダ名を編集
+              {t('bookmark.editFolderName')}
             </Text>
             <TextInput
               value={editingName}
               onChangeText={setEditingName}
-              placeholder="フォルダ名"
+              placeholder={t('bookmark.folderName')}
               placeholderTextColor="#9CA3AF"
               className="bg-muted dark:bg-dark-muted rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground mb-4"
               autoFocus
@@ -239,7 +242,7 @@ export function BookmarkFolderList({
                 onPress={() => setEditingFolder(null)}
                 className="px-4 py-2 mr-2"
               >
-                <Text className="text-foreground dark:text-dark-foreground font-medium">キャンセル</Text>
+                <Text className="text-foreground dark:text-dark-foreground font-medium">{t('common.cancel')}</Text>
               </Pressable>
               <Pressable
                 onPress={handleSaveEdit}
@@ -247,7 +250,7 @@ export function BookmarkFolderList({
                 className="px-4 py-2 bg-blue-500 rounded-lg"
                 style={{ opacity: editingName.trim() ? 1 : 0.5 }}
               >
-                <Text className="text-white font-medium">保存</Text>
+                <Text className="text-white font-medium">{t('common.save')}</Text>
               </Pressable>
             </View>
           </View>

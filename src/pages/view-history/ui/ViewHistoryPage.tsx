@@ -14,8 +14,10 @@ import { useRecentViewHistory } from '@/entities/view-history';
 import { MapListCard } from '@/widgets/map-cards';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack, useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function ViewHistoryPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const { goBack } = useSafeBack();
   const currentTab = useCurrentTab();
@@ -57,10 +59,10 @@ export function ViewHistoryPage() {
         className="flex-1 bg-surface dark:bg-dark-surface"
         edges={['top']}
       >
-        <PageHeader title="最近見たマップ" onBack={goBack} useSafeArea={false} />
+        <PageHeader title={t('viewHistory.title')} onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            ログインすると閲覧履歴が表示されます
+            {t('viewHistory.loginRequired')}
           </Text>
         </View>
       </SafeAreaView>
@@ -72,13 +74,13 @@ export function ViewHistoryPage() {
       className="flex-1 bg-surface dark:bg-dark-surface"
       edges={['top']}
     >
-      <PageHeader title="最近見たマップ" onBack={goBack} useSafeArea={false} />
+      <PageHeader title={t('viewHistory.title')} onBack={goBack} useSafeArea={false} />
 
       <AsyncBoundary
         isLoading={isLoading}
         error={error}
         data={viewHistory && viewHistory.length > 0 ? viewHistory : null}
-        emptyMessage="まだ閲覧履歴がありません"
+        emptyMessage={t('viewHistory.empty')}
         emptyIonIcon="time-outline"
       >
         {(data) => (

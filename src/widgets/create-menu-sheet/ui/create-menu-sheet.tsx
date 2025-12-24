@@ -7,6 +7,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useI18n } from '@/shared/lib/i18n';
 import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 
 interface CreateMenuSheetProps {
@@ -22,6 +23,7 @@ function CreateMenuContent({
   onCreateBlog,
 }: Omit<CreateMenuSheetProps, 'onClose'>) {
   const { close } = useBottomSheet();
+  const { t } = useI18n();
 
   const handleCreateMap = () => {
     close();
@@ -52,7 +54,7 @@ function CreateMenuContent({
             <Ionicons name="map" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-            マップ
+            {t('create.map')}
           </Text>
         </TouchableOpacity>
 
@@ -66,7 +68,7 @@ function CreateMenuContent({
             <Ionicons name="location-outline" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-            スポット
+            {t('create.spot')}
           </Text>
         </TouchableOpacity>
 
@@ -80,7 +82,7 @@ function CreateMenuContent({
             <Ionicons name="reader-outline" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-            ブログ
+            {t('create.blog')}
           </Text>
         </TouchableOpacity>
       </View>

@@ -3,6 +3,7 @@
  */
 
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
@@ -27,10 +28,13 @@ export function SearchHistoryList({
   onSelect,
   onRemove,
   onClearAll,
-  title = '検索履歴',
+  title,
   showEmptyMessage = true,
-  emptyMessage = '検索履歴がありません',
+  emptyMessage,
 }: SearchHistoryListProps) {
+  const { t } = useI18n();
+  const displayTitle = title ?? t('search.recentSearches');
+  const displayEmptyMessage = emptyMessage ?? t('search.noSearchHistory');
   const [isExpanded, setIsExpanded] = useState(false);
   const isDarkMode = useIsDarkMode();
   const linkColor = isDarkMode ? colors.dark.foreground : colors.primary.dark;
@@ -43,7 +47,7 @@ export function SearchHistoryList({
       <View className="flex-1 justify-center items-center py-12">
         <Ionicons name="time-outline" size={80} color="#D1D5DB" />
         <Text className="text-lg font-medium text-foreground-secondary dark:text-dark-foreground-secondary mt-6">
-          {emptyMessage}
+          {displayEmptyMessage}
         </Text>
       </View>
     );
@@ -58,10 +62,10 @@ export function SearchHistoryList({
     <View>
       {/* ヘッダー */}
       <View className="flex-row items-center justify-between mb-2">
-        <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">{title}</Text>
+        <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">{displayTitle}</Text>
         {onClearAll && history.length > 0 && (
           <Pressable onPress={onClearAll} hitSlop={8}>
-            <Text className="text-sm" style={{ color: linkColor }}>すべて削除</Text>
+            <Text className="text-sm" style={{ color: linkColor }}>{t('search.clearAll')}</Text>
           </Pressable>
         )}
       </View>
@@ -106,7 +110,7 @@ export function SearchHistoryList({
           onPress={() => setIsExpanded(true)}
           className="py-3 items-center"
         >
-          <Text className="text-sm" style={{ color: linkColor }}>履歴をもっと見る</Text>
+          <Text className="text-sm" style={{ color: linkColor }}>{t('search.showMore')}</Text>
         </Pressable>
       )}
     </View>

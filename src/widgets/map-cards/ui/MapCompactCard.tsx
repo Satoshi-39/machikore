@@ -15,6 +15,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { formatRelativeTime } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
 import { LikersModal } from '@/features/view-likers';
@@ -51,6 +52,7 @@ export function MapCompactCard({
   onArticlePress,
   onUserPress,
 }: MapCompactCardProps) {
+  const { t } = useI18n();
   // 記事公開状態
   const isArticlePublic = map.is_article_public === true;
 
@@ -63,19 +65,19 @@ export function MapCompactCard({
     return [
       {
         id: 'edit',
-        label: '編集',
+        label: t('common.edit'),
         icon: 'create-outline',
         onPress: () => onEdit?.(map.id),
       },
       {
         id: 'delete',
-        label: '削除',
+        label: t('common.delete'),
         icon: 'trash-outline',
         destructive: true,
         onPress: () => onDelete?.(map.id),
       },
     ];
-  }, [map.id, onEdit, onDelete, isOwner]);
+  }, [map.id, onEdit, onDelete, isOwner, t]);
 
   return (
     <Pressable

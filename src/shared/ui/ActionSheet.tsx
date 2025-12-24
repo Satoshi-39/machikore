@@ -8,6 +8,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, Text, Pressable, Modal, Animated, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useI18n } from '@/shared/lib/i18n';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -28,6 +29,7 @@ interface ActionSheetProps {
 }
 
 export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps) {
+  const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const slideAnim = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -133,7 +135,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
               className="bg-muted dark:bg-dark-muted rounded-xl py-4 active:bg-gray-200"
             >
               <Text className="text-center text-base font-medium text-foreground dark:text-dark-foreground">
-                キャンセル
+                {t('common.cancel')}
               </Text>
             </Pressable>
           </View>

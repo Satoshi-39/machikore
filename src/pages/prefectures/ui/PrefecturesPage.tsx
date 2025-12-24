@@ -16,6 +16,8 @@ import { usePrefectures } from '@/entities/prefecture';
 import type { PrefectureRow } from '@/shared/types/database.types';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
+import type { RegionRow } from '@/shared/types/database.types';
 
 // 都道府県の絵文字マッピング
 const PREFECTURE_EMOJIS: Record<string, string> = {
@@ -77,11 +79,12 @@ const PREFECTURE_EMOJIS: Record<string, string> = {
 };
 
 interface SectionData {
-  title: string;
+  region: RegionRow;
   prefectures: PrefectureRow[];
 }
 
 export function PrefecturesPage() {
+  const { t } = useI18n();
   const router = useRouter();
   const { goBack } = useSafeBack();
 
@@ -114,7 +117,7 @@ export function PrefecturesPage() {
     return sortedRegions
       .filter((region) => groupedByRegion.has(region.id))
       .map((region) => ({
-        title: region.name,
+        region,
         prefectures: groupedByRegion.get(region.id) ?? [],
       }));
   }, [regions, prefectures]);
@@ -134,13 +137,13 @@ export function PrefecturesPage() {
       className="flex-1 bg-background dark:bg-dark-background"
       edges={['top']}
     >
-      <PageHeader title="都道府県から探す" onBack={goBack} useSafeArea={false} />
+      <PageHeader title={t('section.searchByPrefecture')} onBack={goBack} useSafeArea={false} />
 
       <AsyncBoundary
         isLoading={isLoading}
         error={error}
         data={sections.length > 0 ? sections : null}
-        emptyMessage="都道府県データがありません"
+        emptyMessage={t('section.noPrefectureData')}
         emptyIonIcon="map-outline"
       >
         {(data) => (
@@ -150,10 +153,10 @@ export function PrefecturesPage() {
             contentContainerStyle={{ paddingBottom: 24 }}
           >
             {data.map((section) => (
-              <View key={section.title} className="mt-4">
+              <View key={section.region.id} className="mt-4">
                 {/* 地方名ヘッダー */}
                 <Text className="text-lg font-bold text-foreground dark:text-dark-foreground px-4 mb-3">
-                  {section.title}
+                  {getTranslatedName(section.region.name, section.region.name_translations)}
                 </Text>
 
                 {/* 2列グリッド */}
@@ -168,7 +171,7 @@ export function PrefecturesPage() {
                           {PREFECTURE_EMOJIS[prefecture.id] ?? '📍'}
                         </Text>
                         <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3 flex-1" numberOfLines={1}>
-                          {prefecture.name}
+                          {getTranslatedName(prefecture.name, prefecture.name_translations)}
                         </Text>
                       </Pressable>
                     </View>

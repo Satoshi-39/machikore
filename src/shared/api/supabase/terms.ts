@@ -11,6 +11,9 @@ import { supabase, handleSupabaseError } from './client';
 
 export type TermsType = 'terms_of_service' | 'privacy_policy';
 
+/** サポートされている言語コード */
+export type TermsLocale = 'ja' | 'en' | 'cn' | 'tw';
+
 /** 規約バージョン */
 export interface TermsVersion {
   id: string;
@@ -20,6 +23,7 @@ export interface TermsVersion {
   summary: string | null;
   effective_at: string;
   created_at: string;
+  locale?: TermsLocale; // マイグレーション前は存在しない場合がある
 }
 
 /** 同意記録 */
@@ -57,18 +61,37 @@ export interface UserLatestAgreement {
 
 /**
  * 現在有効な利用規約・プライバシーポリシーを取得
+ * @param locale 言語コード（指定しない場合は 'ja'、指定した言語が無い場合も 'ja' にフォールバック）
  */
-export async function getCurrentTermsVersions(): Promise<CurrentTermsVersions> {
+export async function getCurrentTermsVersions(locale: TermsLocale = 'ja'): Promise<CurrentTermsVersions> {
   const { data, error } = await supabase
     .from('current_terms_versions')
-    .select('*');
+    .select('*')
+    .eq('locale', locale);
 
   if (error) {
     handleSupabaseError('getCurrentTermsVersions', error);
   }
 
-  const termsOfService = data?.find((v) => v.type === 'terms_of_service') || null;
-  const privacyPolicy = data?.find((v) => v.type === 'privacy_policy') || null;
+  let termsOfService = data?.find((v) => v.type === 'terms_of_service') || null;
+  let privacyPolicy = data?.find((v) => v.type === 'privacy_policy') || null;
+
+  // 指定言語で見つからない場合は英語にフォールバック
+  if ((!termsOfService || !privacyPolicy) && locale !== 'en') {
+    const { data: fallbackData, error: fallbackError } = await supabase
+      .from('current_terms_versions')
+      .select('*')
+      .eq('locale', 'en');
+
+    if (!fallbackError && fallbackData) {
+      if (!termsOfService) {
+        termsOfService = fallbackData.find((v) => v.type === 'terms_of_service') || null;
+      }
+      if (!privacyPolicy) {
+        privacyPolicy = fallbackData.find((v) => v.type === 'privacy_policy') || null;
+      }
+    }
+  }
 
   return {
     termsOfService: termsOfService as TermsVersion | null,

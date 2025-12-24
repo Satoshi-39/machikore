@@ -21,7 +21,7 @@ interface CountryJsonData {
   id: string; // country_code (jp, kr, cn...)
   name: string;
   name_kana: string;
-  name_translations?: { en: string };
+  name_translations?: { [key: string]: string };
   latitude: number;
   longitude: number;
 }
@@ -52,7 +52,7 @@ function toCountryRow(country: CountryJsonData, continentId: string): CountryRow
     latitude: country.latitude,
     longitude: country.longitude,
     continent_id: continentId,
-    name_translations: country.name_translations ? JSON.stringify(country.name_translations) : null,
+    name_translations: country.name_translations ?? null,
     created_at: now,
     updated_at: now,
   };

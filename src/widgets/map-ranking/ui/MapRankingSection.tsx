@@ -13,6 +13,7 @@ import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { MapDisplayCard } from '@/widgets/map-cards';
 
 interface MapRankingSectionProps {
@@ -36,6 +37,7 @@ export function MapRankingSection({
 }: MapRankingSectionProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
 
   const handleMapPress = useCallback(
     (mapId: string) => {
@@ -77,13 +79,13 @@ export function MapRankingSection({
       ) : error ? (
         <View className="h-32 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            読み込みに失敗しました
+            {t('errors.loadFailed')}
           </Text>
         </View>
       ) : !maps || maps.length === 0 ? (
         <View className="h-32 items-center justify-center">
           <Text className="text-foreground-muted dark:text-dark-foreground-muted">
-            マップがありません
+            {t('empty.noMaps')}
           </Text>
         </View>
       ) : (
