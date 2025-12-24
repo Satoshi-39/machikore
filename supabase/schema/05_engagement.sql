@@ -274,55 +274,39 @@ BEGIN
 END;
 $$;
 
--- コメントのいいね数を増加
-CREATE FUNCTION public.increment_comment_likes_count() RETURNS trigger
+-- コメントのいいね数を更新
+CREATE FUNCTION public.update_comment_likes_count() RETURNS trigger
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
 BEGIN
-  UPDATE comments
-  SET likes_count = likes_count + 1
-  WHERE id = NEW.comment_id;
-  RETURN NEW;
-END;
-$$;
-
--- コメントのいいね数を減少
-CREATE FUNCTION public.decrement_comment_likes_count() RETURNS trigger
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE comments
-  SET likes_count = GREATEST(0, likes_count - 1)
-  WHERE id = OLD.comment_id;
-  RETURN OLD;
-END;
-$$;
-
--- コメントの返信数を増加
-CREATE FUNCTION public.increment_comment_replies_count() RETURNS trigger
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  IF NEW.parent_id IS NOT NULL THEN
-    UPDATE comments
-    SET replies_count = replies_count + 1
-    WHERE id = NEW.parent_id;
+  IF TG_OP = 'INSERT' THEN
+    UPDATE comments SET likes_count = likes_count + 1 WHERE id = NEW.comment_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE comments SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.comment_id;
+    RETURN OLD;
   END IF;
-  RETURN NEW;
+  RETURN NULL;
 END;
 $$;
 
--- コメントの返信数を減少
-CREATE FUNCTION public.decrement_comment_replies_count() RETURNS trigger
+-- コメントの返信数を更新
+CREATE FUNCTION public.update_comment_replies_count() RETURNS trigger
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
 BEGIN
-  IF OLD.parent_id IS NOT NULL THEN
-    UPDATE comments
-    SET replies_count = GREATEST(0, replies_count - 1)
-    WHERE id = OLD.parent_id;
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.parent_id IS NOT NULL THEN
+      UPDATE comments SET replies_count = replies_count + 1 WHERE id = NEW.parent_id;
+    END IF;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    IF OLD.parent_id IS NOT NULL THEN
+      UPDATE comments SET replies_count = GREATEST(0, replies_count - 1) WHERE id = OLD.parent_id;
+    END IF;
+    RETURN OLD;
   END IF;
-  RETURN OLD;
+  RETURN NULL;
 END;
 $$;
 
@@ -342,18 +326,10 @@ CREATE TRIGGER trigger_update_comments_count
     AFTER INSERT OR DELETE ON public.comments
     FOR EACH ROW EXECUTE FUNCTION public.update_comments_count();
 
-CREATE TRIGGER trigger_increment_comment_likes
-    AFTER INSERT ON public.comment_likes
-    FOR EACH ROW EXECUTE FUNCTION public.increment_comment_likes_count();
+CREATE TRIGGER trigger_update_comment_likes_count
+    AFTER INSERT OR DELETE ON public.comment_likes
+    FOR EACH ROW EXECUTE FUNCTION public.update_comment_likes_count();
 
-CREATE TRIGGER trigger_decrement_comment_likes
-    AFTER DELETE ON public.comment_likes
-    FOR EACH ROW EXECUTE FUNCTION public.decrement_comment_likes_count();
-
-CREATE TRIGGER trigger_increment_comment_replies
-    AFTER INSERT ON public.comments
-    FOR EACH ROW EXECUTE FUNCTION public.increment_comment_replies_count();
-
-CREATE TRIGGER trigger_decrement_comment_replies
-    AFTER DELETE ON public.comments
-    FOR EACH ROW EXECUTE FUNCTION public.decrement_comment_replies_count();
+CREATE TRIGGER trigger_update_comment_replies_count
+    AFTER INSERT OR DELETE ON public.comments
+    FOR EACH ROW EXECUTE FUNCTION public.update_comment_replies_count();
