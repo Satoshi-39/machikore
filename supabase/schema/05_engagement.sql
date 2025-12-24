@@ -90,7 +90,7 @@ CREATE TABLE public.bookmarks (
 
 ALTER TABLE ONLY public.bookmarks ADD CONSTRAINT bookmarks_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.bookmarks ADD CONSTRAINT bookmarks_folder_id_fkey
-    FOREIGN KEY (folder_id) REFERENCES public.bookmark_folders(id) ON DELETE SET NULL;
+    FOREIGN KEY (folder_id) REFERENCES public.bookmark_folders(id) ON DELETE CASCADE;
 ALTER TABLE ONLY public.bookmarks ADD CONSTRAINT bookmarks_map_id_fkey
     FOREIGN KEY (map_id) REFERENCES public.maps(id) ON DELETE CASCADE;
 ALTER TABLE ONLY public.bookmarks ADD CONSTRAINT bookmarks_user_id_fkey
