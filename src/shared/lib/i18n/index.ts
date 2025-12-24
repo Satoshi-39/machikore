@@ -14,7 +14,7 @@ export {
   type SupportedLocale,
 } from './i18n';
 
-export { useI18n, useLocaleChange } from './useI18n';
+export { I18nProvider, useI18n } from '../providers/I18nProvider';
 
 export {
   getTranslatedName,

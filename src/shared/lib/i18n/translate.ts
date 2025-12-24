@@ -37,7 +37,7 @@ export type TranslationsData = {
  */
 export function getTranslatedName(
   defaultName: string,
-  translations: TranslationsData,
+  translations: TranslationsData | string,
   locale?: SupportedLocale
 ): string {
   const currentLocale = locale ?? getCurrentLocale();
@@ -52,15 +52,31 @@ export function getTranslatedName(
     return defaultName;
   }
 
+  // 文字列の場合はパースする（キャッシュからのデータ対応）
+  let parsed: TranslationsData;
+  if (typeof translations === 'string') {
+    try {
+      parsed = JSON.parse(translations);
+    } catch {
+      return defaultName;
+    }
+  } else {
+    parsed = translations;
+  }
+
+  if (!parsed) {
+    return defaultName;
+  }
+
   // 現在のロケールの翻訳を取得
-  const translated = translations[currentLocale];
+  const translated = parsed[currentLocale];
   if (translated) {
     return translated;
   }
 
   // フォールバック: 英語 → デフォルト名
-  if (currentLocale !== 'en' && translations.en) {
-    return translations.en;
+  if (currentLocale !== 'en' && parsed.en) {
+    return parsed.en;
   }
 
   return defaultName;

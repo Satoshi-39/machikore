@@ -5,6 +5,7 @@
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import type { MachiRow } from '@/shared/types/database.types';
+import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 
 interface MachiFeatureProperties {
   id: string;
@@ -14,11 +15,14 @@ interface MachiFeatureProperties {
 
 /**
  * MachiデータをGeoJSON形式に変換
+ * 現在のロケールに応じて翻訳された名前を使用
  */
 export function useMachiGeoJson(
   machiData: MachiRow[] | undefined,
   visitedMachiIds: Set<string>
 ): FeatureCollection<Point, MachiFeatureProperties> {
+  const { locale } = useI18n();
+
   return useMemo(() => {
     if (!machiData) {
       return { type: 'FeatureCollection', features: [] };
@@ -40,10 +44,10 @@ export function useMachiGeoJson(
         },
         properties: {
           id: machi.id,
-          name: machi.name,
+          name: getTranslatedName(machi.name, machi.name_translations, locale),
           isVisited: visitedMachiIds.has(machi.id),
         },
       })),
     };
-  }, [machiData, visitedMachiIds]);
+  }, [machiData, visitedMachiIds, locale]);
 }

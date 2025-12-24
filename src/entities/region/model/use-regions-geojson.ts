@@ -5,6 +5,7 @@
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import type { RegionRow } from '@/shared/types/database.types';
+import { useI18n, getTranslatedName, type TranslationsData } from '@/shared/lib/i18n';
 
 interface RegionFeatureProperties {
   id: string;
@@ -13,10 +14,13 @@ interface RegionFeatureProperties {
 
 /**
  * RegionデータをGeoJSON形式に変換
+ * 現在のロケールに応じて翻訳された名前を使用
  */
 export function useRegionsGeoJson(
   regions: RegionRow[]
 ): FeatureCollection<Point, RegionFeatureProperties> {
+  const { locale } = useI18n();
+
   return useMemo(() => {
     // 座標がnullのデータは除外
     const validRegions = regions.filter(
@@ -33,9 +37,9 @@ export function useRegionsGeoJson(
         },
         properties: {
           id: region.id,
-          name: region.name,
+          name: getTranslatedName(region.name, region.name_translations as TranslationsData, locale),
         },
       })),
     };
-  }, [regions]);
+  }, [regions, locale]);
 }

@@ -5,6 +5,7 @@
 import { getDatabase } from './client';
 import type { CountryRow } from '@/shared/types/database.types';
 import { log } from '@/shared/config/logger';
+import { parseJsonField } from '@/shared/lib/utils/json.utils';
 
 // ===============================
 // Create
@@ -83,12 +84,21 @@ export function getCountryByCode(countryCode: string): CountryRow | null {
   return result ?? null;
 }
 
+/** SQLiteから取得したデータのname_translationsをパース */
+function fromSQLiteCountry(row: Record<string, unknown>): CountryRow {
+  return {
+    ...row,
+    name_translations: parseJsonField(row.name_translations as string | null | Record<string, string>),
+  } as CountryRow;
+}
+
 /**
  * 全国を取得
  */
 export function getAllCountries(): CountryRow[] {
   const db = getDatabase();
-  return db.getAllSync<CountryRow>('SELECT * FROM countries ORDER BY name');
+  const rows = db.getAllSync<Record<string, unknown>>('SELECT * FROM countries ORDER BY name');
+  return rows.map(fromSQLiteCountry);
 }
 
 /**

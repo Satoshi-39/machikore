@@ -12,6 +12,7 @@ import { ThemeProvider } from './ThemeProvider';
 import { ConsentProvider } from './consent-provider';
 import { PushNotificationInitializer } from '@/features/push-notifications';
 import { POSTHOG_API_KEY, POSTHOG_HOST } from '@/shared/lib/init/posthog';
+import { I18nProvider } from './I18nProvider';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -26,9 +27,10 @@ interface AppProvidersProps {
  * 3. MenuProvider - ポップアップメニュー
  * 4. AuthProvider - 認証状態の初期化
  * 5. QueryProvider - React Query
- * 6. ThemeProvider - テーマ管理（NativeWindのcolorScheme設定）
- * 7. ConsentProvider - 利用規約同意チェック
- * 8. PushNotificationInitializer - プッシュ通知初期化
+ * 6. I18nProvider - 多言語対応
+ * 7. ThemeProvider - テーマ管理（NativeWindのcolorScheme設定）
+ * 8. ConsentProvider - 利用規約同意チェック
+ * 9. PushNotificationInitializer - プッシュ通知初期化
  */
 export function AppProviders({ children }: AppProvidersProps) {
   return (
@@ -47,12 +49,14 @@ export function AppProviders({ children }: AppProvidersProps) {
         <MenuProvider>
           <AuthProvider>
             <QueryProvider>
-              <ThemeProvider>
-                <ConsentProvider>
-                  <PushNotificationInitializer />
-                  {children}
-                </ConsentProvider>
-              </ThemeProvider>
+              <I18nProvider>
+                <ThemeProvider>
+                  <ConsentProvider>
+                    <PushNotificationInitializer />
+                    {children}
+                  </ConsentProvider>
+                </ThemeProvider>
+              </I18nProvider>
             </QueryProvider>
           </AuthProvider>
         </MenuProvider>
@@ -66,3 +70,4 @@ export { QueryProvider } from './query-provider';
 export { AuthProvider } from './auth-provider';
 export { ThemeProvider, useIsDarkMode, useNavigationTheme } from './ThemeProvider';
 export { ConsentProvider } from './consent-provider';
+export { I18nProvider, useI18n } from './I18nProvider';

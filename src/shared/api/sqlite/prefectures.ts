@@ -5,6 +5,7 @@
 import { getDatabase } from './client';
 import type { PrefectureRow } from '@/shared/types/database.types';
 import { log } from '@/shared/config/logger';
+import { parseJsonField } from '@/shared/lib/utils/json.utils';
 
 // ===============================
 // Create
@@ -70,12 +71,21 @@ export function getPrefectureById(id: string): PrefectureRow | null {
   return result ?? null;
 }
 
+/** SQLiteから取得したデータのname_translationsをパース */
+function fromSQLitePrefecture(row: Record<string, unknown>): PrefectureRow {
+  return {
+    ...row,
+    name_translations: parseJsonField(row.name_translations as string | null | Record<string, string>),
+  } as PrefectureRow;
+}
+
 /**
  * 全都道府県を取得
  */
 export function getAllPrefectures(): PrefectureRow[] {
   const db = getDatabase();
-  return db.getAllSync<PrefectureRow>('SELECT * FROM prefectures ORDER BY id');
+  const rows = db.getAllSync<Record<string, unknown>>('SELECT * FROM prefectures ORDER BY id');
+  return rows.map(fromSQLitePrefecture);
 }
 
 /**

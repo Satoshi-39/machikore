@@ -127,12 +127,12 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
 
   const handleSignOutPress = () => {
     Alert.alert(
-      'サインアウト',
-      'サインアウトしてもよろしいですか？',
+      t('settings.signOut'),
+      t('settings.signOutConfirm'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'サインアウト',
+          text: t('settings.signOut'),
           style: 'destructive',
           onPress: async () => {
             try {
@@ -148,38 +148,38 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   };
 
   const showComingSoon = () => {
-    Alert.alert('準備中', 'この機能は準備中です。');
+    Alert.alert(t('settings.comingSoon'), t('settings.comingSoonMessage'));
   };
 
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
-      <PageHeader title="設定" />
+      <PageHeader title={t('settings.settings')} />
       <ScrollView className="flex-1">
         {/* アカウント */}
-        <SettingsSection title="アカウント" isFirst>
+        <SettingsSection title={t('settings.account')} isFirst>
           <SettingsItem
             icon="person-outline"
-            label="プロフィール編集"
+            label={t('settings.editProfile')}
             onPress={() => router.push('/edit-profile')}
           />
           <SettingsItem
             icon="mail-outline"
-            label="メールアドレス変更"
+            label={t('settings.changeEmail')}
             onPress={showComingSoon}
           />
           <SettingsItem
             icon="lock-closed-outline"
-            label="パスワード変更"
+            label={t('settings.changePassword')}
             onPress={showComingSoon}
           />
         </SettingsSection>
 
         {/* プレミアム */}
-        <SettingsSection title="プレミアム">
+        <SettingsSection title={t('settings.premium')}>
           <SettingsItem
             icon="diamond-outline"
-            label="プレミアムプラン"
-            value={isPremium ? '加入中' : undefined}
+            label={t('settings.premiumPlan')}
+            value={isPremium ? t('settings.subscribed') : undefined}
             onPress={() => router.push('/settings/premium')}
           />
         </SettingsSection>
@@ -201,65 +201,65 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
         </SettingsSection>
 
         {/* 通知 */}
-        <SettingsSection title="通知">
+        <SettingsSection title={t('settings.notifications')}>
           <SettingsItem
             icon="notifications-outline"
-            label="通知設定"
+            label={t('settings.notificationSettings')}
             onPress={() => router.push('/settings/notifications')}
           />
         </SettingsSection>
 
         {/* プライバシー */}
-        <SettingsSection title="プライバシー">
+        <SettingsSection title={t('settings.privacy')}>
           <SettingsItem
             icon="earth"
-            label="公開範囲"
+            label={t('settings.publicScope')}
             onPress={showComingSoon}
           />
           <SettingsItem
             icon="ban-outline"
-            label="ブロックしたユーザー"
+            label={t('settings.blockedUsers')}
             onPress={showComingSoon}
           />
         </SettingsSection>
 
         {/* その他 */}
-        <SettingsSection title="その他">
+        <SettingsSection title={t('settings.other')}>
           <SettingsItem
             icon="help-circle-outline"
-            label="ヘルプ"
+            label={t('settings.help')}
             onPress={showComingSoon}
           />
           <SettingsItem
             icon="document-text-outline"
-            label="利用規約"
+            label={t('settings.termsOfService')}
             onPress={() => router.push('/settings/terms')}
           />
           <SettingsItem
             icon="shield-outline"
-            label="プライバシーポリシー"
+            label={t('settings.privacyPolicy')}
             onPress={() => router.push('/settings/privacy')}
           />
           <SettingsItem
             icon="information-circle-outline"
-            label="アプリについて"
+            label={t('settings.about')}
             value="v1.0.0"
             onPress={showComingSoon}
           />
         </SettingsSection>
 
         {/* 危険なアクション */}
-        <SettingsSection title="アカウント操作">
+        <SettingsSection title={t('settings.accountActions')}>
           <SettingsItem
             icon="log-out-outline"
-            label="サインアウト"
+            label={t('settings.signOut')}
             onPress={handleSignOutPress}
             showArrow={false}
             destructive
           />
           <SettingsItem
             icon="trash-outline"
-            label="アカウント削除"
+            label={t('settings.deleteAccount')}
             onPress={showComingSoon}
             showArrow={false}
             destructive

@@ -19,7 +19,7 @@ import {
 import { useUserStore } from '@/entities/user/model';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { STORAGE_KEYS } from '@/shared/config/constants';
-import { i18n, type SupportedLocale } from '@/shared/lib/i18n';
+import { i18n, useI18n, type SupportedLocale } from '@/shared/lib/i18n';
 
 // デフォルト設定
 const DEFAULT_PREFERENCES: LocalPreferences = {
@@ -251,6 +251,7 @@ export function useThemePreference() {
 export function useLocalePreference() {
   const { data, isLoading } = useUserPreferences();
   const { mutate, isPending } = useUpdateUserPreferences();
+  const { changeLocale } = useI18n();
 
   const locale = data?.locale ?? 'system';
 
@@ -261,12 +262,13 @@ export function useLocalePreference() {
   const setLocale = useCallback(
     (newLocale: LocalePreference) => {
       mutate({ locale: newLocale });
-      // i18nにも即座に反映
+      // I18nProviderのstateを更新（UIが即座に再レンダリングされる）
+      // GeoJSONフックはlocaleに依存しているので、自動的に再計算される
       if (newLocale !== 'system') {
-        i18n.locale = newLocale;
+        changeLocale(newLocale);
       }
     },
-    [mutate]
+    [mutate, changeLocale]
   );
 
   return {

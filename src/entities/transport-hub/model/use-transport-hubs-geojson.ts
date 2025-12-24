@@ -5,6 +5,7 @@
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import type { TransportHubRow, TransportHubType } from '../api/use-transport-hubs';
+import { useI18n, getTranslatedName, type TranslationsData } from '@/shared/lib/i18n';
 
 export interface TransportHubGeoJsonProperties {
   id: string;
@@ -18,10 +19,13 @@ export interface TransportHubGeoJsonProperties {
 
 /**
  * 交通機関データをGeoJSON形式に変換
+ * 現在のロケールに応じて翻訳された名前を使用
  */
 export function useTransportHubsGeoJson(
   transportHubs: TransportHubRow[] | undefined
 ): FeatureCollection<Point, TransportHubGeoJsonProperties> {
+  const { locale } = useI18n();
+
   return useMemo(() => {
     if (!transportHubs || transportHubs.length === 0) {
       return {
@@ -41,7 +45,7 @@ export function useTransportHubsGeoJson(
         },
         properties: {
           id: hub.id,
-          name: hub.name,
+          name: getTranslatedName(hub.name, hub.name_translations as TranslationsData, locale),
           type: hub.type as TransportHubType,
           subtype: hub.subtype,
           operator: hub.operator,
@@ -50,5 +54,5 @@ export function useTransportHubsGeoJson(
         },
       })),
     };
-  }, [transportHubs]);
+  }, [transportHubs, locale]);
 }

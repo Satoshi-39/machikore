@@ -5,6 +5,7 @@
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import type { CountryRow } from '@/shared/types/database.types';
+import { useI18n, getTranslatedName, type TranslationsData } from '@/shared/lib/i18n';
 
 interface CountryFeatureProperties {
   id: string;
@@ -15,10 +16,13 @@ interface CountryFeatureProperties {
 /**
  * CountryデータをGeoJSON形式に変換
  * Note: countries.idは国コード（jp, kr, cn...）なのでcodeにはidを使用
+ * 現在のロケールに応じて翻訳された名前を使用
  */
 export function useCountriesGeoJson(
   countries: CountryRow[]
 ): FeatureCollection<Point, CountryFeatureProperties> {
+  const { locale } = useI18n();
+
   return useMemo(() => {
     // 座標がnullのデータは除外
     const validCountries = countries.filter(
@@ -35,10 +39,10 @@ export function useCountriesGeoJson(
         },
         properties: {
           id: country.id,
-          name: country.name,
+          name: getTranslatedName(country.name, country.name_translations as TranslationsData, locale),
           code: country.id, // countries.idは国コード（jp, kr, cn...）
         },
       })),
     };
-  }, [countries]);
+  }, [countries, locale]);
 }

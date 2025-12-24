@@ -5,6 +5,7 @@
 import { getDatabase } from './client';
 import type { RegionRow } from '@/shared/types/database.types';
 import { log } from '@/shared/config/logger';
+import { parseJsonField } from '@/shared/lib/utils/json.utils';
 
 // ===============================
 // Create
@@ -70,10 +71,19 @@ export function getRegionById(id: string): RegionRow | null {
   return result ?? null;
 }
 
+/** SQLiteから取得したデータのname_translationsをパース */
+function fromSQLiteRegion(row: Record<string, unknown>): RegionRow {
+  return {
+    ...row,
+    name_translations: parseJsonField(row.name_translations as string | null | Record<string, string>),
+  } as RegionRow;
+}
+
 /**
  * 全地方を取得
  */
 export function getAllRegions(): RegionRow[] {
   const db = getDatabase();
-  return db.getAllSync<RegionRow>('SELECT * FROM regions ORDER BY display_order');
+  const rows = db.getAllSync<Record<string, unknown>>('SELECT * FROM regions ORDER BY display_order');
+  return rows.map(fromSQLiteRegion);
 }

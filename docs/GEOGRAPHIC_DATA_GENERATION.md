@@ -225,9 +225,105 @@ CREATE TABLE admin_boundaries (
 
 ---
 
-## 4. machiのcity_id更新（ポリゴン使用）
+## 4. tile_idの設定
 
-admin_boundariesにポリゴンを登録後、machiのcity_idを更新：
+### 4.1 tile_idとは
+
+tile_idはアプリでマップ表示時にデータを効率的に取得するためのキャッシュキーです。
+座標を0.25度（約25km）のグリッドに分割し、タイル単位でデータを取得・キャッシュします。
+
+**形式:** `{tileX}_{tileY}`
+
+**計算式:**
+```
+tileX = floor((longitude + 180) / 0.25)
+tileY = floor((latitude + 90) / 0.25)
+```
+
+**例:**
+- 東京駅（35.6812, 139.7671）→ `1279_502`
+- 渋谷（35.6580, 139.7016）→ `1278_502`
+
+### 4.2 tile_idの更新SQL
+
+データ投入後、以下のSQLでtile_idを設定します：
+
+```sql
+-- machi テーブルのtile_idを更新
+UPDATE machi
+SET tile_id = CONCAT(
+  FLOOR((longitude + 180) / 0.25)::text,
+  '_',
+  FLOOR((latitude + 90) / 0.25)::text
+)
+WHERE latitude IS NOT NULL
+  AND longitude IS NOT NULL
+  AND tile_id IS NULL;
+
+-- cities テーブルのtile_idを更新
+UPDATE cities
+SET tile_id = CONCAT(
+  FLOOR((longitude + 180) / 0.25)::text,
+  '_',
+  FLOOR((latitude + 90) / 0.25)::text
+)
+WHERE latitude IS NOT NULL
+  AND longitude IS NOT NULL
+  AND tile_id IS NULL;
+
+-- transport_hubs テーブルのtile_idを更新
+UPDATE transport_hubs
+SET tile_id = CONCAT(
+  FLOOR((longitude + 180) / 0.25)::text,
+  '_',
+  FLOOR((latitude + 90) / 0.25)::text
+)
+WHERE latitude IS NOT NULL
+  AND longitude IS NOT NULL
+  AND tile_id IS NULL;
+```
+
+### 4.3 確認クエリ
+
+```sql
+-- 更新結果を確認
+SELECT tile_id, COUNT(*) as count
+FROM machi
+WHERE tile_id IS NOT NULL
+GROUP BY tile_id
+ORDER BY count DESC
+LIMIT 10;
+
+-- 東京周辺のタイル確認
+SELECT id, name, tile_id, latitude, longitude
+FROM machi
+WHERE tile_id IN ('1278_502', '1279_502')
+LIMIT 10;
+```
+
+### 4.4 アプリ側の実装
+
+アプリでは `src/shared/lib/utils/tile.utils.ts` で同じ計算を行います：
+
+```typescript
+const MAP_TILE_SIZE = 0.25; // 度
+
+function getTileId(latitude: number, longitude: number): string {
+  const tileX = Math.floor((longitude + 180) / MAP_TILE_SIZE);
+  const tileY = Math.floor((latitude + 90) / MAP_TILE_SIZE);
+  return `${tileX}_${tileY}`;
+}
+```
+
+**重要:** Supabase側とアプリ側で同じ計算式を使用する必要があります。
+
+---
+
+## 5. city_id更新（ポリゴン使用）
+
+admin_boundariesにポリゴンを登録後、machi・transport_hubsのcity_idを更新します。
+
+### 5.1 machiのcity_id更新
 
 ```sql
 -- ポリゴン内のmachiにcity_idを設定
@@ -239,9 +335,69 @@ WHERE m.prefecture_id = 'jp_yamaguchi'
   AND ST_Contains(ab.geom, ST_SetSRID(ST_Point(m.longitude, m.latitude), 4326));
 ```
 
+### 5.2 transport_hubsのcity_id更新
+
+transport_hubsも同様にポリゴンを使用してcity_idを設定します：
+
+```sql
+-- ポリゴン内のtransport_hubsにcity_idを設定
+UPDATE transport_hubs th
+SET city_id = ab.city_id
+FROM admin_boundaries ab
+WHERE th.prefecture_id = 'jp_yamaguchi'
+  AND th.city_id IS NULL
+  AND ST_Contains(ab.geom, ST_SetSRID(ST_Point(th.longitude, th.latitude), 4326));
+```
+
+**全都道府県を一括更新する場合：**
+
+```sql
+-- machi（全国）
+UPDATE machi m
+SET city_id = ab.city_id
+FROM admin_boundaries ab
+WHERE m.city_id IS NULL
+  AND ab.prefecture_id = m.prefecture_id
+  AND ST_Contains(ab.geom, ST_SetSRID(ST_Point(m.longitude, m.latitude), 4326));
+
+-- transport_hubs（全国）
+UPDATE transport_hubs th
+SET city_id = ab.city_id
+FROM admin_boundaries ab
+WHERE th.city_id IS NULL
+  AND ab.prefecture_id = th.prefecture_id
+  AND ST_Contains(ab.geom, ST_SetSRID(ST_Point(th.longitude, th.latitude), 4326));
+```
+
+### 5.3 確認クエリ
+
+```sql
+-- machiのcity_id更新結果を確認
+SELECT
+  prefecture_id,
+  COUNT(*) as total,
+  COUNT(city_id) as with_city_id,
+  COUNT(*) - COUNT(city_id) as without_city_id
+FROM machi
+GROUP BY prefecture_id
+ORDER BY prefecture_id;
+
+-- transport_hubsのcity_id更新結果を確認
+SELECT
+  prefecture_id,
+  COUNT(*) as total,
+  COUNT(city_id) as with_city_id,
+  COUNT(*) - COUNT(city_id) as without_city_id
+FROM transport_hubs
+GROUP BY prefecture_id
+ORDER BY prefecture_id;
+```
+
+**注意**: transport_hubsの`city_id`はオプション（NULL許容）です。離島の空港やフェリーターミナルなど、ポリゴン外に位置するものはNULLのままで問題ありません。
+
 ---
 
-## 5. machiのid更新
+## 6. machiのid更新
 
 city_id設定後、idを正しい形式に更新：
 
@@ -281,9 +437,9 @@ WHERE id = 'jp_yamaguchi_unknown_XXX';
 
 ---
 
-## 6. 未解決のケース
+## 7. 未解決のケース
 
-### 6.1 ポリゴン外のmachi（島・岬など）
+### 7.1 ポリゴン外のmachi（島・岬など）
 
 以下のケースはcity_idがnullのまま残ります：
 
@@ -302,7 +458,7 @@ WHERE prefecture_id = 'jp_yamaguchi' AND city_id IS NULL;
 - 現時点ではそのままにしておく
 - 将来的に手動で調査し、最寄りの市区町村に割り当てるか判断
 
-### 6.2 citiesテーブルに存在しない市区町村
+### 7.2 citiesテーブルに存在しない市区町村
 
 `admin_boundaries` への挿入時に外部キー制約でエラーになる場合、先にcitiesテーブルに追加が必要：
 
@@ -314,7 +470,7 @@ DETAIL: Key (city_id)=(jp_yamaguchi_waki) is not present in table "cities".
 
 ---
 
-## 7. 全国展開の手順
+## 8. 全国展開の手順
 
 山口県での検証をもとに、他の都道府県も以下の手順で処理：
 

@@ -13,6 +13,7 @@ import { bulkInsertTransportHubs } from '@/shared/api/sqlite/transport-hubs';
 import type { TransportHubRow, TransportHubType } from '@/shared/api/supabase/transport-hubs';
 import { TILE_CACHE_LIMITS } from '@/shared/config/cache';
 import type { MapBounds } from '@/shared/lib/utils/tile.utils';
+import { parseJsonField } from '@/shared/lib/utils/json.utils';
 import type { MachiRow, CityRow } from '@/shared/types/database.types';
 import { log } from '@/shared/config/logger';
 
@@ -39,6 +40,16 @@ function toSQLiteMachi(machi: Record<string, unknown>): MachiRow {
   } as MachiRow;
 }
 
+/** SQLiteから取得したmachiデータをMachiRowに変換（JSONパース） */
+function fromSQLiteMachi(row: Record<string, unknown>): MachiRow {
+  return {
+    ...row,
+    name_translations: parseJsonField(row.name_translations as string | null),
+    prefecture_name_translations: parseJsonField(row.prefecture_name_translations as string | null),
+    city_name_translations: parseJsonField(row.city_name_translations as string | null),
+  } as MachiRow;
+}
+
 /** SupabaseのcityデータをSQLite用に変換 */
 function toSQLiteCity(city: Record<string, unknown>): CityRow {
   const now = new Date().toISOString();
@@ -49,6 +60,22 @@ function toSQLiteCity(city: Record<string, unknown>): CityRow {
     created_at: (city.created_at as string) || now,
     updated_at: (city.updated_at as string) || now,
   } as CityRow;
+}
+
+/** SQLiteから取得したcityデータをCityRowに変換（JSONパース） */
+function fromSQLiteCity(row: Record<string, unknown>): CityRow {
+  return {
+    ...row,
+    name_translations: parseJsonField(row.name_translations as string | null),
+  } as CityRow;
+}
+
+/** SQLiteから取得したtransportHubデータをTransportHubRowに変換（JSONパース） */
+function fromSQLiteTransportHub(row: Record<string, unknown>): TransportHubRow {
+  return {
+    ...row,
+    name_translations: parseJsonField(row.name_translations as string | null),
+  } as TransportHubRow;
 }
 
 // ===============================
@@ -183,13 +210,14 @@ export async function getMachiByTileId(tileId: string): Promise<MachiRow[]> {
     // アクセス時刻を更新
     updateTileAccessTime(tileId, 'machi');
 
-    const cached = db.getAllSync<MachiRow>(
+    const cached = db.getAllSync<Record<string, unknown>>(
       'SELECT * FROM machi WHERE tile_id = ?',
       [tileId]
     );
     if (cached.length > 0) {
       log.debug(`[TileCache] キャッシュからmachiデータを取得: ${tileId} (${cached.length}件)`);
-      return cached;
+      // SQLiteから取得したデータはname_translationsがJSON文字列なのでパースする
+      return cached.map(fromSQLiteMachi);
     }
   }
 
@@ -216,12 +244,14 @@ export async function getMachiByTileId(tileId: string): Promise<MachiRow[]> {
     // メタデータを記録
     setTileCacheMetadata(tileId, 'machi', data.length);
     log.debug(`[TileCache] ${data.length}件のmachiデータをキャッシュ: ${tileId}`);
-  } else {
-    // データが0件でもメタデータを記録（再取得を防ぐ）
-    setTileCacheMetadata(tileId, 'machi', 0);
+
+    // Supabaseから取得したデータも統一された形式で返す
+    return data as MachiRow[];
   }
 
-  return (data ?? []) as MachiRow[];
+  // データが0件でもメタデータを記録（再取得を防ぐ）
+  setTileCacheMetadata(tileId, 'machi', 0);
+  return [];
 }
 
 /**
@@ -263,13 +293,14 @@ export async function getCitiesByTileId(tileId: string): Promise<CityRow[]> {
     // アクセス時刻を更新
     updateTileAccessTime(tileId, 'cities');
 
-    const cached = db.getAllSync<CityRow>(
+    const cached = db.getAllSync<Record<string, unknown>>(
       'SELECT * FROM cities WHERE tile_id = ?',
       [tileId]
     );
     if (cached.length > 0) {
       log.debug(`[TileCache] キャッシュからcitiesデータを取得: ${tileId} (${cached.length}件)`);
-      return cached;
+      // SQLiteから取得したデータはname_translationsがJSON文字列なのでパースする
+      return cached.map(fromSQLiteCity);
     }
   }
 
@@ -367,14 +398,14 @@ export async function getTransportHubsByTileId(tileId: string): Promise<Transpor
     // アクセス時刻を更新
     updateTileAccessTime(tileId, 'transport_hubs');
 
-    const cached = db.getAllSync<TransportHubRow>(
+    const cached = db.getAllSync<Record<string, unknown>>(
       'SELECT * FROM transport_hubs WHERE tile_id = ?',
       [tileId]
     );
-    if (cached.length > 0) {
-      log.debug(`[TileCache] キャッシュからtransport_hubsデータを取得: ${tileId} (${cached.length}件)`);
-      return cached;
-    }
+    // メタデータがある = このタイルは取得済み（0件でも）
+    log.debug(`[TileCache] キャッシュからtransport_hubsデータを取得: ${tileId} (${cached.length}件)`);
+    // SQLiteから取得したデータはname_translationsがJSON文字列なのでパースする
+    return cached.map(fromSQLiteTransportHub);
   }
 
   // Supabaseから取得

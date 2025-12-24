@@ -22,10 +22,8 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
 import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, MachiSpotTransportLabels, SpotLabels } from './layers';
 import { CountryLabels } from './layers/country-labels';
-import { useRegionsGeoJson } from '@/entities/region';
-import { useCountriesGeoJson } from '@/entities/country/model';
-import { getCountriesData } from '@/shared/lib/utils/countries.utils';
-import { getRegionsData } from '@/shared/lib/utils/regions.utils';
+import { useRegions, useRegionsGeoJson } from '@/entities/region';
+import { useCountries, useCountriesGeoJson } from '@/entities/country';
 import { useBoundsManagement, useCenterLocationName } from '../model';
 import { DefaultMapHeader } from './default-map-header';
 import { CountryDetailCard } from './country-detail-card';
@@ -128,9 +126,9 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       }, [clearAllSelections])
     );
 
-    // 国データと地方データを取得
-    const countries = useMemo(() => getCountriesData(), []);
-    const regions = useMemo(() => getRegionsData(), []);
+    // 国データと地方データを取得（SQLiteから）
+    const { data: countries = [] } = useCountries();
+    const { data: regions = [] } = useRegions();
 
     // マップ中心の地名を取得
     const centerLocation = useCenterLocationName({

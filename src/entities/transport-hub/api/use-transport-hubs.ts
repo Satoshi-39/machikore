@@ -15,7 +15,7 @@ import {
   type TransportHubRow,
 } from '@/shared/api/supabase';
 import { getVisibleTileIds, type MapBounds } from '@/shared/lib/utils/tile.utils';
-import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM, MAP_TILE } from '@/shared/config';
+import { STATIC_DATA_CACHE_CONFIG, MAP_ZOOM } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 // 交通機関タイプと行の型を再エクスポート
@@ -66,14 +66,7 @@ export function useTransportHubsByBounds(
       east: bounds.maxLng,
       west: bounds.minLng,
     };
-    const tiles = getVisibleTileIds(mapBounds);
-
-    // タイル数が多すぎる場合は取得しない（過剰なリクエスト防止）
-    if (tiles.length > MAP_TILE.MAX_TRANSPORT_TILES) {
-      return [];
-    }
-
-    return tiles;
+    return getVisibleTileIds(mapBounds);
   }, [bounds, zoom]);
 
   // タイルIDをキーにしてクエリ
