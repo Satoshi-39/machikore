@@ -1,8 +1,8 @@
 -- ============================================================
--- おすすめ（featured_carousel_items, category_featured_maps, category_featured_tags, system_announcements）
+-- 管理コンテンツ（featured_carousel_items, category_featured_maps, category_featured_tags, system_announcements）
 -- ============================================================
--- おすすめマップ、タグ、カルーセル、お知らせ
--- 最終更新: 2025-12-23
+-- 運営が管理するおすすめコンテンツとお知らせ
+-- 最終更新: 2025-12-24
 
 -- ============================================================
 -- featured_carousel_items（特集カルーセル）

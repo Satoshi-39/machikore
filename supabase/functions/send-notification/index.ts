@@ -25,7 +25,7 @@ interface NotificationPayload {
   user_id: string;
   actor_id: string | null;
   type: string;
-  spot_id: string | null;
+  user_spot_id: string | null;
   map_id: string | null;
 }
 
@@ -36,7 +36,7 @@ interface ExpoPushMessage {
   data: {
     type: string;
     notificationId: string;
-    spotId?: string;
+    userSpotId?: string;
     mapId?: string;
     userId?: string;
   };
@@ -159,8 +159,8 @@ function generateEmailHtml(
   let actionUrl = "https://machikore.io";
   let actionText = "アプリを開く";
 
-  if (payload.spot_id) {
-    actionUrl = `https://machikore.io/spots/${payload.spot_id}`;
+  if (payload.user_spot_id) {
+    actionUrl = `https://machikore.io/spots/${payload.user_spot_id}`;
     actionText = "スポットを見る";
   } else if (payload.map_id) {
     actionUrl = `https://machikore.io/maps/${payload.map_id}`;
@@ -297,7 +297,7 @@ Deno.serve(async (req) => {
       user_id: body.record.user_id,
       actor_id: body.record.actor_id,
       type: body.record.type,
-      spot_id: body.record.spot_id,
+      user_spot_id: body.record.user_spot_id,
       map_id: body.record.map_id,
     } : body;
 
@@ -365,11 +365,11 @@ Deno.serve(async (req) => {
 
     // スポット名を取得
     let spotName: string | undefined;
-    if (payload.spot_id) {
+    if (payload.user_spot_id) {
       const { data: spot } = await supabase
         .from("user_spots")
         .select("custom_name")
-        .eq("id", payload.spot_id)
+        .eq("id", payload.user_spot_id)
         .single();
 
       spotName = spot?.custom_name;
@@ -417,7 +417,7 @@ Deno.serve(async (req) => {
         data: {
           type: payload.type,
           notificationId: payload.notification_id,
-          ...(payload.spot_id && { spotId: payload.spot_id }),
+          ...(payload.user_spot_id && { userSpotId: payload.user_spot_id }),
           ...(payload.map_id && { mapId: payload.map_id }),
           ...(payload.actor_id && { userId: payload.actor_id }),
         },

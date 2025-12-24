@@ -47,6 +47,10 @@ CREATE POLICY user_notification_settings_insert_own ON public.user_notification_
 CREATE POLICY user_notification_settings_update_own ON public.user_notification_settings
     FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 
+CREATE TRIGGER update_user_notification_settings_updated_at
+    BEFORE UPDATE ON public.user_notification_settings
+    FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
 -- ============================================================
 -- notifications（通知）
 -- ============================================================
@@ -172,16 +176,6 @@ BEGIN
   RETURNING * INTO settings;
 
   RETURN settings;
-END;
-$$;
-
--- 通知設定のupdated_atを更新
-CREATE FUNCTION public.update_notification_settings_updated_at() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
 END;
 $$;
 
@@ -317,7 +311,7 @@ BEGIN
             'user_id', NEW.user_id,
             'actor_id', NEW.actor_id,
             'type', NEW.type,
-            'spot_id', NEW.spot_id,
+            'user_spot_id', NEW.user_spot_id,
             'map_id', NEW.map_id
         )
     );
@@ -332,12 +326,8 @@ END;
 $$;
 
 -- ============================================================
--- トリガー
+-- 通知関連トリガー
 -- ============================================================
-
-CREATE TRIGGER trigger_update_notification_settings_updated_at
-    BEFORE UPDATE ON public.user_notification_settings
-    FOR EACH ROW EXECUTE FUNCTION public.update_notification_settings_updated_at();
 
 CREATE TRIGGER trigger_create_default_notification_settings
     AFTER INSERT ON public.users
