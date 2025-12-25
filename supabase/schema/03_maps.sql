@@ -84,7 +84,8 @@ CREATE TABLE public.maps (
     category_id text,
     article_intro jsonb,
     article_outro jsonb,
-    show_label_chips boolean DEFAULT false
+    show_label_chips boolean DEFAULT false,
+    language character varying(10)
 );
 
 COMMENT ON COLUMN public.maps.is_public IS 'マップが公開されているかどうか（デフォルト: false）';
@@ -98,6 +99,7 @@ COMMENT ON COLUMN public.maps.category_id IS 'カテゴリへの外部キー参�
 COMMENT ON COLUMN public.maps.article_intro IS 'マップ記事のまえがき（ProseMirror JSON形式）';
 COMMENT ON COLUMN public.maps.article_outro IS 'マップ記事のあとがき（ProseMirror JSON形式）';
 COMMENT ON COLUMN public.maps.show_label_chips IS 'ラベルチップをマップ上部に表示するかどうか';
+COMMENT ON COLUMN public.maps.language IS '検出された言語コード（ISO 639-1）';
 
 ALTER TABLE ONLY public.maps ADD CONSTRAINT maps_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.maps ADD CONSTRAINT maps_user_id_fkey
@@ -111,6 +113,7 @@ CREATE INDEX idx_maps_created_at ON public.maps USING btree (created_at DESC);
 CREATE INDEX idx_maps_is_article_public ON public.maps USING btree (is_article_public);
 CREATE INDEX idx_maps_is_public ON public.maps USING btree (is_public);
 CREATE INDEX idx_maps_user_id ON public.maps USING btree (user_id);
+CREATE INDEX idx_maps_language ON public.maps USING btree (language);
 
 CREATE TRIGGER update_maps_updated_at
     BEFORE UPDATE ON public.maps
@@ -266,3 +269,25 @@ BEGIN
   LIMIT p_limit;
 END;
 $$;
+
+-- ============================================================
+-- 言語同期トリガー
+-- ============================================================
+
+-- マップの言語変更時にスポットの言語も同期する関数
+CREATE FUNCTION public.sync_spots_language()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.language IS DISTINCT FROM OLD.language THEN
+    UPDATE public.user_spots
+    SET language = NEW.language
+    WHERE map_id = NEW.id;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_sync_spots_language
+AFTER UPDATE OF language ON public.maps
+FOR EACH ROW
+EXECUTE FUNCTION sync_spots_language();

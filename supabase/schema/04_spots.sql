@@ -109,7 +109,8 @@ CREATE TABLE public.user_spots (
     city_id text,
     prefecture_name text,
     city_name text,
-    machi_name text
+    machi_name text,
+    language character varying(10)
 );
 
 COMMENT ON COLUMN public.user_spots.images_count IS '画像数（デフォルト: 0）';
@@ -122,6 +123,7 @@ COMMENT ON COLUMN public.user_spots.prefecture_id IS '都道府県ID（prefectur
 COMMENT ON COLUMN public.user_spots.color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
 COMMENT ON COLUMN public.user_spots.spot_color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
 COMMENT ON COLUMN public.user_spots.label_id IS 'スポットのラベル（map_labelsへの外部キー）';
+COMMENT ON COLUMN public.user_spots.language IS '言語コード（親マップから継承、ISO 639-1）';
 
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_map_id_master_spot_id_key
@@ -150,6 +152,7 @@ CREATE INDEX idx_user_spots_map_id ON public.user_spots USING btree (map_id);
 CREATE INDEX idx_user_spots_master_spot_id ON public.user_spots USING btree (master_spot_id);
 CREATE INDEX idx_user_spots_prefecture_id ON public.user_spots USING btree (prefecture_id);
 CREATE INDEX idx_user_spots_user_id ON public.user_spots USING btree (user_id);
+CREATE INDEX idx_user_spots_language ON public.user_spots USING btree (language);
 
 CREATE TRIGGER update_user_spots_updated_at
     BEFORE UPDATE ON public.user_spots

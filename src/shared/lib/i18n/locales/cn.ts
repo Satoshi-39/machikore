@@ -321,6 +321,18 @@ export default {
     effectiveDate: '%{date} 生效',
     termsLoadError: '加载文档失败。请检查网络连接。',
     termsNotFound: '未找到文档',
+    // 语言设置
+    displayLanguage: '显示语言',
+    displayLanguageDescription: '在设备设置中更改',
+    displayLanguageHint: '显示语言可在设备设置中更改。',
+    contentLanguage: '内容语言',
+    contentLanguageHint: '只显示所选语言的内容。',
+    addOtherLanguages: '添加其他语言',
+    hideOtherLanguages: '隐藏其他语言',
+    contentLanguageHintAll: '未选择语言，将显示所有语言的内容。',
+    loginRequiredForContentLanguage: '请登录以保存内容语言设置。',
+    openSettingsErrorIOS: '无法打开设置。请手动前往 设置 > 应用 > 街コレ > 语言。',
+    openSettingsErrorAndroid: '无法打开设置。请手动前往 设置 > 应用 > 街コレ > 语言。',
   },
 
   // 搜索

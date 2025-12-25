@@ -13,7 +13,7 @@ import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useThemePreference } from '@/entities/user/api';
 import { useIsPremium } from '@/entities/subscription';
-import { useI18n, LOCALE_NAMES } from '@/shared/lib/i18n';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
@@ -115,7 +115,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   const router = useRouter();
   const { signOut } = useSignOut();
   const isPremium = useIsPremium();
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
 
   // 新しいフックからテーマ設定を取得
   const { theme: themeMode, setTheme } = useThemePreference();
@@ -189,7 +189,6 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="language-outline"
             label={t('settings.language')}
-            value={LOCALE_NAMES[locale]}
             onPress={() => router.push('/settings/language')}
           />
           <SettingsToggle

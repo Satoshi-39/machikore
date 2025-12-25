@@ -3,6 +3,7 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
+import { detectContentLanguage } from '../detect-language';
 import type { MapWithUser } from '@/shared/types';
 import { mapResponseToMapWithUser } from './types';
 import { log } from '@/shared/config/logger';
@@ -24,6 +25,12 @@ export interface CreateMapParams {
 export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
   log.debug('[Maps] Creating map:', params);
 
+  // 言語検出（非同期で実行、失敗してもマップ作成は続行）
+  const language = await detectContentLanguage({
+    name: params.name,
+    description: params.description,
+  }).catch(() => null);
+
   const { data, error } = await supabase
     .from('maps')
     .insert({
@@ -37,6 +44,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
       thumbnail_url: params.thumbnail_url || null,
       spots_count: 0,
       likes_count: 0,
+      language,
     })
     .select(`
       *,

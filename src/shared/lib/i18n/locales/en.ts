@@ -321,6 +321,18 @@ export default {
     effectiveDate: 'Effective %{date}',
     termsLoadError: 'Failed to load document. Please check your internet connection.',
     termsNotFound: 'Document not found',
+    // Language settings
+    displayLanguage: 'Display Language',
+    displayLanguageDescription: 'Change in device settings',
+    displayLanguageHint: 'You can change the display language in your device settings.',
+    contentLanguage: 'Content Language',
+    contentLanguageHint: 'Only content in the selected languages will be shown.',
+    addOtherLanguages: 'Add other languages',
+    hideOtherLanguages: 'Hide other languages',
+    contentLanguageHintAll: 'No languages selected, so all content will be shown.',
+    loginRequiredForContentLanguage: 'Please log in to save content language settings.',
+    openSettingsErrorIOS: 'Could not open Settings. Please go to Settings > Apps > Machikore > Language manually.',
+    openSettingsErrorAndroid: 'Could not open Settings. Please go to Settings > Apps > Machikore > Language manually.',
   },
 
   // Search

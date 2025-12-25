@@ -73,6 +73,7 @@ async function getOrCreateMasterSpot(input: {
 
 /**
  * スポットを作成（master_spot + user_spot）
+ * 言語はマップから継承される（マップ作成時に検出）
  */
 export async function createSpot(input: CreateSpotInput): Promise<string> {
   // 1. google_place_idがある場合のみmaster_spotを取得または作成
@@ -94,10 +95,21 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     });
   }
 
-  // 2. user_spotを作成
+  // 2. マップの言語を取得して継承
+  let language: string | null = null;
+  const { data: mapData } = await supabase
+    .from('maps')
+    .select('language')
+    .eq('id', input.mapId)
+    .single();
+  if (mapData?.language) {
+    language = mapData.language;
+  }
+
+  // 3. user_spotを作成
   // ピン刺し・現在地登録の場合（googlePlaceIdがない）は座標と住所をuser_spotに直接保存
   // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
-  const userSpotInsert: UserSpotInsert & { prefecture_id?: string | null; label_id?: string | null } = {
+  const userSpotInsert: UserSpotInsert & { prefecture_id?: string | null; label_id?: string | null; language?: string | null } = {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
@@ -113,6 +125,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     article_content: input.articleContent ?? null,
     spot_color: input.spotColor ?? null,
     label_id: input.labelId ?? null,
+    language,
   };
 
   const { data, error } = await supabase

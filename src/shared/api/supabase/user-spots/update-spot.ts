@@ -1,5 +1,6 @@
 /**
  * スポット更新
+ * 言語はマップから継承されるため、スポット単体では言語検出しない
  */
 
 import { supabase, handleSupabaseError } from '../client';

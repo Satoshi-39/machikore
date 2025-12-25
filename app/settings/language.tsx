@@ -1,8 +1,8 @@
 /**
- * 言語設定ページ（Expo Router）
+ * 言語設定ルート
  */
 
-import { LanguageSettingsPage } from '@/pages/settings/ui/LanguageSettingsPage';
+import { LanguageSettingsPage } from '@/pages/settings';
 
 export default function LanguageSettingsRoute() {
   return <LanguageSettingsPage />;

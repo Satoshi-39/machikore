@@ -36,6 +36,8 @@ import { log } from '@/shared/config/logger';
 import { useUserStore } from '@/entities/user/model';
 import { useSubscriptionStore } from '@/entities/subscription';
 import { useAppSettingsStore } from '@/shared/lib/store';
+import { syncLocalPreferencesToServer } from '@/entities/user/api/use-user-preferences';
+import { getCurrentLocale } from '@/shared/lib/i18n';
 import type { User } from '@/entities/user/model';
 
 interface AuthProviderProps {
@@ -156,6 +158,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
           } catch (err) {
             log.warn('[AuthProvider] RevenueCatログインエラー（続行）:', err);
           }
+
+          // ユーザー設定（locale等）をサーバーに同期（セッション復元時）
+          await syncLocalPreferencesToServer(getCurrentLocale());
         } else {
           // セッション復元失敗 → ゲストモード（認証なしでも閲覧可能）
           log.debug('[AuthProvider] セッションなし、ゲストモードで起動');
@@ -206,6 +211,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
                   // ローカルの同意情報をサーバーに同期
                   await syncTermsAgreementToServer(user.id);
+
+                  // ユーザー設定（locale等）をサーバーに同期
+                  await syncLocalPreferencesToServer(getCurrentLocale());
                 } catch (err) {
                   log.error('[AuthProvider] SIGNED_IN処理エラー:', err);
                 }

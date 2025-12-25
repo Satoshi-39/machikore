@@ -7,6 +7,7 @@
 import { supabase } from './client';
 import { log } from '@/shared/config/logger';
 import { type SupportedLocale } from '@/shared/lib/i18n';
+import { type ContentLanguageCode } from '@/shared/config/constants';
 
 // テーマ設定の選択肢
 export const SUPPORTED_THEMES = ['light', 'dark', 'system'] as const;
@@ -15,10 +16,14 @@ export type ThemePreference = (typeof SUPPORTED_THEMES)[number];
 // 言語設定の選択肢（SUPPORTED_LOCALES + 'system'）
 export type LocalePreference = SupportedLocale | 'system';
 
+// コンテンツ言語フィルターの型（constants.tsで定義）
+export type ContentLanguage = ContentLanguageCode;
+
 export interface UserPreferences {
   user_id: string;
   theme: ThemePreference;
   locale: LocalePreference;
+  content_languages: ContentLanguage[];
   created_at: string;
   updated_at: string;
 }
@@ -26,6 +31,7 @@ export interface UserPreferences {
 export interface UpdateUserPreferencesParams {
   theme?: ThemePreference;
   locale?: LocalePreference;
+  content_languages?: ContentLanguage[];
 }
 
 /**
@@ -103,4 +109,11 @@ export async function updateThemePreference(theme: ThemePreference): Promise<Use
  */
 export async function updateLocalePreference(locale: LocalePreference): Promise<UserPreferences> {
   return upsertUserPreferences({ locale });
+}
+
+/**
+ * コンテンツ言語設定のみ更新
+ */
+export async function updateContentLanguages(content_languages: ContentLanguage[]): Promise<UserPreferences> {
+  return upsertUserPreferences({ content_languages });
 }

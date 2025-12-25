@@ -963,6 +963,7 @@ export type Database = {
           is_article_public: boolean
           is_official: boolean
           is_public: boolean
+          language: string | null
           likes_count: number
           name: string
           show_label_chips: boolean | null
@@ -983,6 +984,7 @@ export type Database = {
           is_article_public?: boolean
           is_official?: boolean
           is_public?: boolean
+          language?: string | null
           likes_count?: number
           name: string
           show_label_chips?: boolean | null
@@ -1003,6 +1005,7 @@ export type Database = {
           is_article_public?: boolean
           is_official?: boolean
           is_public?: boolean
+          language?: string | null
           likes_count?: number
           name?: string
           show_label_chips?: boolean | null
@@ -1647,6 +1650,7 @@ export type Database = {
           created_by: string | null
           effective_at: string
           id: string
+          locale: string
           summary: string | null
           type: string
           version: string
@@ -1657,6 +1661,7 @@ export type Database = {
           created_by?: string | null
           effective_at: string
           id?: string
+          locale?: string
           summary?: string | null
           type: string
           version: string
@@ -1667,6 +1672,7 @@ export type Database = {
           created_by?: string | null
           effective_at?: string
           id?: string
+          locale?: string
           summary?: string | null
           type?: string
           version?: string
@@ -1866,6 +1872,7 @@ export type Database = {
           id: string
           images_count: number
           label_id: string | null
+          language: string | null
           latitude: number
           likes_count: number
           longitude: number
@@ -1895,6 +1902,7 @@ export type Database = {
           id?: string
           images_count?: number
           label_id?: string | null
+          language?: string | null
           latitude: number
           likes_count?: number
           longitude: number
@@ -1924,6 +1932,7 @@ export type Database = {
           id?: string
           images_count?: number
           label_id?: string | null
+          language?: string | null
           latitude?: number
           likes_count?: number
           longitude?: number
@@ -2133,6 +2142,7 @@ export type Database = {
           created_at: string | null
           effective_at: string | null
           id: string | null
+          locale: string | null
           summary: string | null
           type: string | null
           version: string | null

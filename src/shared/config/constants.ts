@@ -537,3 +537,22 @@ export const FEATURED_CAROUSEL = {
   /** カード間のギャップ */
   CARD_GAP: 10,
 } as const;
+
+// ===============================
+// コンテンツ言語
+// ===============================
+
+/**
+ * コンテンツ言語の選択肢（フィード/検索結果のフィルタリング用）
+ * ISO 639-1コード
+ */
+export const CONTENT_LANGUAGES = {
+  ja: { code: 'ja', label: '日本語', labelEn: 'Japanese' },
+  en: { code: 'en', label: '英語', labelEn: 'English' },
+  zh: { code: 'zh', label: '中国語', labelEn: 'Chinese' },
+  ko: { code: 'ko', label: '韓国語', labelEn: 'Korean' },
+} as const;
+
+export type ContentLanguageCode = keyof typeof CONTENT_LANGUAGES;
+
+export const CONTENT_LANGUAGE_LIST = Object.values(CONTENT_LANGUAGES);

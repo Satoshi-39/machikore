@@ -5,7 +5,7 @@
  * 未ログイン時: AsyncStorageから取得・更新（フォールバック）
  */
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -15,6 +15,7 @@ import {
   type UpdateUserPreferencesParams,
   type ThemePreference,
   type LocalePreference,
+  type ContentLanguage,
 } from '@/shared/api/supabase/user-preferences';
 import { useUserStore } from '@/entities/user/model';
 import { QUERY_KEYS } from '@/shared/api/query-client';
@@ -280,6 +281,67 @@ export function useLocalePreference() {
   };
 }
 
+/**
+ * locale から ContentLanguage へのマッピング
+ * cn, tw は zh にマッピング
+ */
+function localeToContentLanguage(locale: SupportedLocale): ContentLanguage {
+  if (locale === 'cn' || locale === 'tw') {
+    return 'zh';
+  }
+  return locale as ContentLanguage;
+}
+
+/**
+ * コンテンツ言語設定を取得・更新する便利フック
+ */
+export function useContentLanguagesPreference() {
+  const user = useUserStore((state) => state.user);
+  const serverQuery = useServerPreferences();
+  const { mutate, isPending } = useUpdateUserPreferences();
+  const { locale } = useI18n();
+
+  // サーバーから取得した生の値（空配列 = 未設定）
+  const contentLanguages: ContentLanguage[] = serverQuery.data?.content_languages ?? [];
+
+  // 実際に適用される言語（空配列の場合はlocale言語をデフォルトとして使用）
+  const effectiveContentLanguages: ContentLanguage[] = useMemo(() => {
+    if (contentLanguages.length === 0) {
+      return [localeToContentLanguage(locale)];
+    }
+    return contentLanguages;
+  }, [contentLanguages, locale]);
+
+  const setContentLanguages = useCallback(
+    (languages: ContentLanguage[]) => {
+      mutate({ content_languages: languages });
+    },
+    [mutate]
+  );
+
+  const toggleLanguage = useCallback(
+    (language: ContentLanguage) => {
+      const newLanguages = contentLanguages.includes(language)
+        ? contentLanguages.filter((l) => l !== language)
+        : [...contentLanguages, language];
+      setContentLanguages(newLanguages);
+    },
+    [contentLanguages, setContentLanguages]
+  );
+
+  return {
+    /** 生のcontent_languages（空配列 = 未設定） */
+    contentLanguages,
+    /** 実際に適用される言語（未設定の場合はlocale言語） */
+    effectiveContentLanguages,
+    setContentLanguages,
+    toggleLanguage,
+    isLoading: serverQuery.isLoading,
+    isPending,
+    isAuthenticated: !!user,
+  };
+}
+
 // ===============================
 // Migration Helper
 // ===============================
@@ -287,26 +349,30 @@ export function useLocalePreference() {
 /**
  * ログイン時にローカル設定をサーバーに同期
  * AuthProviderから呼び出す
+ *
+ * @param currentLocale - 現在のUI言語（OSから取得した言語）
  */
-export async function syncLocalPreferencesToServer(): Promise<void> {
+export async function syncLocalPreferencesToServer(currentLocale?: SupportedLocale): Promise<void> {
   try {
     const localPrefs = await getLocalPreferences();
 
-    // デフォルト値と異なる場合のみ同期
-    if (
-      localPrefs.theme !== DEFAULT_PREFERENCES.theme ||
-      localPrefs.locale !== DEFAULT_PREFERENCES.locale
-    ) {
-      // サーバーの現在の設定を取得
-      const serverPrefs = await getUserPreferences();
+    // サーバーの現在の設定を取得
+    const serverPrefs = await getUserPreferences();
 
-      // サーバーに設定がない場合、ローカル設定をアップロード
-      if (!serverPrefs) {
-        await upsertUserPreferences({
-          theme: localPrefs.theme,
-          locale: localPrefs.locale,
-        });
-      }
+    // サーバーに設定がない場合、ローカル設定をアップロード
+    if (!serverPrefs) {
+      await upsertUserPreferences({
+        theme: localPrefs.theme,
+        locale: currentLocale ?? localPrefs.locale,
+      });
+      return;
+    }
+
+    // サーバーに設定がある場合、localeのみ更新（通知用言語として最新のOS言語を反映）
+    if (currentLocale && serverPrefs.locale !== currentLocale) {
+      await upsertUserPreferences({
+        locale: currentLocale,
+      });
     }
   } catch (error) {
     console.warn('Failed to sync local preferences to server:', error);
@@ -315,4 +381,4 @@ export async function syncLocalPreferencesToServer(): Promise<void> {
 }
 
 // 型のre-export
-export type { UserPreferences, UpdateUserPreferencesParams, ThemePreference, LocalePreference };
+export type { UserPreferences, UpdateUserPreferencesParams, ThemePreference, LocalePreference, ContentLanguage };

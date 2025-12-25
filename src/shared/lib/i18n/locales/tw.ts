@@ -321,6 +321,18 @@ export default {
     effectiveDate: '%{date} 生效',
     termsLoadError: '載入文件失敗。請檢查網路連線。',
     termsNotFound: '找不到文件',
+    // 語言設定
+    displayLanguage: '顯示語言',
+    displayLanguageDescription: '在裝置設定中更改',
+    displayLanguageHint: '顯示語言可在裝置設定中變更。',
+    contentLanguage: '內容語言',
+    contentLanguageHint: '只顯示所選語言的內容。',
+    addOtherLanguages: '新增其他語言',
+    hideOtherLanguages: '隱藏其他語言',
+    contentLanguageHintAll: '未選擇語言，將顯示所有語言的內容。',
+    loginRequiredForContentLanguage: '請登入以儲存內容語言設定。',
+    openSettingsErrorIOS: '無法開啟設定。請手動前往 設定 > App > 街コレ > 語言。',
+    openSettingsErrorAndroid: '無法開啟設定。請手動前往 設定 > App > 街コレ > 語言。',
   },
 
   // 搜尋
