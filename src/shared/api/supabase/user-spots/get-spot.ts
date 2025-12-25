@@ -87,7 +87,6 @@ export async function getSpotWithDetails(
     machi_id: spot.machi_id,
     custom_name: spot.custom_name,
     description: spot.description,
-    tags: spot.tags,
     spot_color: spot.spot_color,
     label_id: spot.label_id || null,
     map_label: spot.map_labels || null,
