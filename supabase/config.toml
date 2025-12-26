@@ -366,3 +366,9 @@ entrypoint = "./functions/upload-image/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/upload-image/*.html" ]
+
+[functions.ogp]
+enabled = true
+verify_jwt = false  # 公開エンドポイント（SNSクローラーがアクセスするため）
+import_map = "./functions/ogp/deno.json"
+entrypoint = "./functions/ogp/index.ts"

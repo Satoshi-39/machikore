@@ -685,11 +685,6 @@ export default {
     loadError: '読み込みに失敗しました',
   },
 
-  // 共有
-  share: {
-    checkThis: '%{name}をチェック！',
-  },
-
   // ユーザーマップ
   userMap: {
     usersMap: '%{name}のマップ',

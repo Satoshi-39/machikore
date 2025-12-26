@@ -5,14 +5,14 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert, Share, ActivityIndicator, Platform, Keyboard } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert, ActivityIndicator, Keyboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
-import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync } from '@/shared/lib';
+import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync, shareSpot } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
@@ -24,7 +24,6 @@ import { LikersModal } from '@/features/view-likers';
 import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
-import { log } from '@/shared/config/logger';
 
 interface SpotDetailCardProps {
   spot: SpotWithDetails;
@@ -286,16 +285,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // 共有処理
   const handleSharePress = useCallback(async () => {
-    try {
-      const url = `machikore://spots/${spot.id}`;
-      await Share.share(Platform.select({
-        ios: { message: `${masterSpotName}をチェック！`, url },
-        default: { message: `${masterSpotName}をチェック！\n${url}` },
-      })!);
-    } catch (error) {
-      log.error('[SpotDetailCard] Share error:', error);
-    }
-  }, [masterSpotName, spot.id]);
+    await shareSpot(spot.id);
+  }, [spot.id]);
 
   // 削除確認ダイアログ
   const handleDeleteSpot = useCallback(() => {

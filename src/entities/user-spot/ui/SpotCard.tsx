@@ -8,13 +8,13 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Dimensions, Share, Platform } from 'react-native';
+import { View, Text, Pressable, Image, Alert, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor, log } from '@/shared/config';
+import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
 import type { SpotWithMasterSpot } from '@/shared/types/database.types';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
@@ -208,16 +208,8 @@ export function SpotCard({
   // 共有処理
   const handleSharePress = useCallback(async (e: any) => {
     e.stopPropagation();
-    try {
-      const url = `machikore://spots/${spot.id}`;
-      await Share.share(Platform.select({
-        ios: { message: `${spotName}をチェック！`, url },
-        default: { message: `${spotName}をチェック！\n${url}` },
-      })!);
-    } catch (error) {
-      log.error('[Spot] Share error:', error);
-    }
-  }, [spotName, spot.id]);
+    await shareSpot(spot.id);
+  }, [spot.id]);
 
   const handleDelete = () => {
     Alert.alert(

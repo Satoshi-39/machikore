@@ -556,3 +556,23 @@ export const CONTENT_LANGUAGES = {
 export type ContentLanguageCode = keyof typeof CONTENT_LANGUAGES;
 
 export const CONTENT_LANGUAGE_LIST = Object.values(CONTENT_LANGUAGES);
+
+// ===============================
+// 共有URL
+// ===============================
+
+/**
+ * 共有用のWebサイトドメイン
+ * OGP対応のUniversal Links用
+ */
+export const SHARE_DOMAIN = 'https://machikore.app';
+
+/**
+ * 共有URLを生成
+ */
+export const SHARE_URLS = {
+  /** マップの共有URL */
+  map: (mapId: string) => `${SHARE_DOMAIN}/maps/${mapId}`,
+  /** スポットの共有URL */
+  spot: (spotId: string) => `${SHARE_DOMAIN}/spots/${spotId}`,
+} as const;

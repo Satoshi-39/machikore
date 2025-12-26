@@ -8,17 +8,16 @@
 import type { MapWithUser } from '@/shared/types';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator, Share, Platform } from 'react-native';
+import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { colors } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
-import { log } from '@/shared/config/logger';
 
 interface UserMapHeaderProps {
   isLoading?: boolean;
@@ -113,17 +112,9 @@ export function UserMapHeader({
 
   // 共有処理
   const handleSharePress = useCallback(async () => {
-    try {
-      const url = `machikore://maps/${mapId}`;
-      const shareMessage = t('share.checkThis', { name: mapTitle || t('tabs.map') });
-      await Share.share(Platform.select({
-        ios: { message: shareMessage, url },
-        default: { message: `${shareMessage}\n${url}` },
-      })!);
-    } catch (error) {
-      log.error('[UserMapHeader] Share error:', error);
-    }
-  }, [mapTitle, mapId, t]);
+    if (!mapId) return;
+    await shareMap(mapId);
+  }, [mapId]);
 
   // 自分のマップかどうかを判定
   const isOwnMap = currentUserId && mapOwnerId && currentUserId === mapOwnerId;

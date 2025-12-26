@@ -12,8 +12,6 @@ import {
   Pressable,
   FlatList,
   Dimensions,
-  Share,
-  Platform,
   type NativeSyntheticEvent,
   type NativeScrollEvent,
   type ListRenderItemInfo,
@@ -21,7 +19,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { LOCATION_ICONS, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
@@ -34,7 +32,6 @@ import {
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
-import { log } from '@/shared/config/logger';
 
 // レイアウト定数
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -118,17 +115,7 @@ function SpotCard({
   };
 
   const handleShare = async () => {
-    try {
-      const url = `machikore://spots/${spot.id}`;
-      await Share.share(
-        Platform.select({
-          ios: { message: `${spotName}をチェック！`, url },
-          default: { message: `${spotName}をチェック！\n${url}` },
-        })!
-      );
-    } catch (error) {
-      log.error('[SpotCarousel] Share error:', error);
-    }
+    await shareSpot(spot.id);
   };
 
   return (

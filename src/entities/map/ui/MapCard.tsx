@@ -5,12 +5,12 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Share, Platform, Dimensions } from 'react-native';
+import { View, Text, Pressable, Image, Alert, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, log } from '@/shared/config';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
@@ -55,16 +55,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
   // 共有処理
   const handleSharePress = useCallback(async (e: any) => {
     e.stopPropagation();
-    try {
-      const url = `machikore://maps/${map.id}`;
-      await Share.share(Platform.select({
-        ios: { message: `${map.name}をチェック！`, url },
-        default: { message: `${map.name}をチェック！\n${url}` },
-      })!);
-    } catch (error) {
-      log.error('[Map] Share error:', error);
-    }
-  }, [map.name, map.id]);
+    await shareMap(map.id);
+  }, [map.id]);
 
   const handleDelete = () => {
     Alert.alert(

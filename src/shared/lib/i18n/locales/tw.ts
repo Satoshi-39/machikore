@@ -684,11 +684,6 @@ export default {
     loadError: '載入失敗',
   },
 
-  // 分享
-  share: {
-    checkThis: '來看看%{name}！',
-  },
-
   // 用戶地圖
   userMap: {
     usersMap: '%{name}的地圖',

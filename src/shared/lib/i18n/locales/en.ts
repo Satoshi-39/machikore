@@ -684,11 +684,6 @@ export default {
     loadError: 'Failed to load',
   },
 
-  // Share
-  share: {
-    checkThis: 'Check out %{name}!',
-  },
-
   // User Map
   userMap: {
     usersMap: "%{name}'s Map",

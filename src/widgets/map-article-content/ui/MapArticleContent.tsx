@@ -12,12 +12,10 @@ import {
   ScrollView,
   Image,
   Pressable,
-  Share,
-  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
+import { formatRelativeTime, showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import { ImageViewerModal, useImageViewer, CommentInputModal, RichTextRenderer, LocationPinIcon } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
@@ -35,7 +33,6 @@ import { ArticleAuthorSection } from './ArticleAuthorSection';
 import { ArticleFooterActions } from './ArticleFooterActions';
 import { AuthorOtherMaps } from './AuthorOtherMaps';
 import { ArticleCommentPreview } from './ArticleCommentPreview';
-import { log } from '@/shared/config/logger';
 
 interface MapArticleContentProps {
   articleData: MapArticleData;
@@ -150,16 +147,8 @@ export function MapArticleContent({
 
   // 共有処理
   const handleSharePress = useCallback(async () => {
-    try {
-      const url = `machikore://maps/${map.id}`;
-      await Share.share(Platform.select({
-        ios: { message: `${map.name || 'マップ'}をチェック！`, url },
-        default: { message: `${map.name || 'マップ'}をチェック！\n${url}` },
-      })!);
-    } catch (error) {
-      log.error('[MapArticleContent] Share error:', error);
-    }
-  }, [map.name, map.id]);
+    await shareMap(map.id);
+  }, [map.id]);
 
   return (
     <>
