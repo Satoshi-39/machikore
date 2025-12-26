@@ -1,15 +1,14 @@
 /**
  * i18n プロバイダー
  *
- * アプリ全体の言語設定を管理し、言語変更時に全コンポーネントを再レンダリング
+ * アプリ全体の言語設定を管理
+ * 表示言語はOS設定に委ねる（設定 > アプリ > 街コレ > 言語）
  */
 
-import React, { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import React, { createContext, useContext, useCallback, type ReactNode } from 'react';
 import {
   i18n,
   getCurrentLocale,
-  setLocale as setI18nLocale,
-  initializeI18n,
   SUPPORTED_LOCALES,
   LOCALE_NAMES,
   type SupportedLocale,
@@ -26,14 +25,10 @@ interface I18nContextValue {
   locale: SupportedLocale;
   /** ロケールの表示名 */
   localeName: string;
-  /** 言語を変更 */
-  changeLocale: (newLocale: SupportedLocale) => Promise<void>;
   /** サポートしている言語一覧 */
   supportedLocales: readonly SupportedLocale[];
   /** 言語の表示名マップ */
   localeNames: Record<SupportedLocale, string>;
-  /** 初期化完了フラグ */
-  isInitialized: boolean;
 }
 
 // ===============================
@@ -51,24 +46,8 @@ interface I18nProviderProps {
 }
 
 export function I18nProvider({ children }: I18nProviderProps) {
-  const [locale, setLocale] = useState<SupportedLocale>(getCurrentLocale());
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  // アプリ起動時にi18nを初期化
-  useEffect(() => {
-    async function init() {
-      await initializeI18n();
-      setLocale(getCurrentLocale());
-      setIsInitialized(true);
-    }
-    init();
-  }, []);
-
-  // 言語変更ハンドラ
-  const changeLocale = useCallback(async (newLocale: SupportedLocale) => {
-    await setI18nLocale(newLocale);
-    setLocale(newLocale);
-  }, []);
+  // i18n.tsのモジュール読み込み時に既にlocaleは設定済み
+  const locale = getCurrentLocale();
 
   // 翻訳関数
   const t = useCallback(
@@ -83,10 +62,8 @@ export function I18nProvider({ children }: I18nProviderProps) {
     t,
     locale,
     localeName: LOCALE_NAMES[locale],
-    changeLocale,
     supportedLocales: SUPPORTED_LOCALES,
     localeNames: LOCALE_NAMES,
-    isInitialized,
   };
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
