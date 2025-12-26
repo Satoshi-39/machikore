@@ -4,10 +4,7 @@
 
 export {
   i18n,
-  initializeI18n,
   getCurrentLocale,
-  setLocale,
-  resetLocale,
   SUPPORTED_LOCALES,
   LOCALE_NAMES,
   DEFAULT_LOCALE,

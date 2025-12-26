@@ -9,7 +9,6 @@ import '../global.css';
 
 import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat, initSentry, wrapWithSentry } from '@/shared/lib/init';
-import { initializeI18n } from '@/shared/lib/i18n';
 import { AppToast } from '@/shared/ui';
 import { log } from '@/shared/config/logger';
 
@@ -248,10 +247,7 @@ function RootLayout() {
     initMapbox();
 
     // 初期化処理（非同期）
-    Promise.all([
-      initDatabase(),
-      initializeI18n(),
-    ])
+    initDatabase()
       .then(() => {
         // RevenueCat初期化（非同期、失敗してもアプリは動作継続）
         initRevenueCat();
