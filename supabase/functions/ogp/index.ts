@@ -302,11 +302,9 @@ function getAssetLinks() {
 }
 
 /**
- * URLからパスを解析
+ * 正規化済みパスからマップ/スポットを解析
  */
-function parsePath(url: URL): { type: string; id: string } | null {
-  const path = url.pathname;
-
+function parseNormalizedPath(path: string): { type: string; id: string } | null {
   // /maps/{id}
   const mapsMatch = path.match(/^\/maps\/([a-zA-Z0-9-]+)$/);
   if (mapsMatch) {
@@ -323,13 +321,28 @@ function parsePath(url: URL): { type: string; id: string } | null {
 }
 
 /**
+ * パスからプレフィックスを除去
+ * Supabase Edge Runtimeは /functions/v1/ogp を /ogp としてリライトする
+ */
+function normalizePath(pathname: string): string {
+  // Supabase Edge Runtimeでは "/ogp" プレフィックスで渡される
+  const prefix = "/ogp";
+  if (pathname.startsWith(prefix)) {
+    return pathname.slice(prefix.length) || "/";
+  }
+  return pathname;
+}
+
+/**
  * メインハンドラー
  */
 Deno.serve(async (req) => {
   const url = new URL(req.url);
-  const path = url.pathname;
+  const rawPath = url.pathname;
+  const path = normalizePath(rawPath);
 
-  console.log("[ogp] Request:", req.method, path);
+  console.log("[ogp] Request:", req.method, "rawPath:", rawPath, "normalizedPath:", path);
+
 
   // CORS preflight
   if (req.method === "OPTIONS") {
@@ -359,7 +372,7 @@ Deno.serve(async (req) => {
   }
 
   // マップ/スポットのOGPページ
-  const parsed = parsePath(url);
+  const parsed = parseNormalizedPath(path);
 
   if (parsed?.type === "maps") {
     const map = await getMap(parsed.id);
