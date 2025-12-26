@@ -17,7 +17,7 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 // 環境変数
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
-const APP_DOMAIN = Deno.env.get("APP_DOMAIN") || "machikore.app";
+const APP_DOMAIN = Deno.env.get("APP_DOMAIN") || "machikore.io";
 const IOS_BUNDLE_ID = "com.tyatsushi.machikore";
 const IOS_TEAM_ID = "9KT9GSG58F";
 const ANDROID_PACKAGE = "com.tyatsushi.machikore";

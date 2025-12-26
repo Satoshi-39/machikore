@@ -565,7 +565,7 @@ export const CONTENT_LANGUAGE_LIST = Object.values(CONTENT_LANGUAGES);
  * 共有用のWebサイトドメイン
  * OGP対応のUniversal Links用
  */
-export const SHARE_DOMAIN = 'https://machikore.app';
+export const SHARE_DOMAIN = 'https://machikore.io';
 
 /**
  * 共有URLを生成
