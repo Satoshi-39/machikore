@@ -519,10 +519,10 @@ export const SUBSCRIPTION = {
   FREE_SPOT_LIMIT: 30,
   /** プレミアムプランのスポット上限（マップごと） */
   PREMIUM_SPOT_LIMIT: 100,
-  /** プレミアムプラン月額価格（円） */
-  PREMIUM_PRICE: 480,
+  /** プレミアムプラン月額価格（円）- フォールバック用 */
+  PREMIUM_PRICE: 400,
   /** RevenueCat Entitlement ID */
-  ENTITLEMENT_ID: 'premium',
+  ENTITLEMENT_ID: 'machikore_premium',
 } as const;
 
 // ===============================

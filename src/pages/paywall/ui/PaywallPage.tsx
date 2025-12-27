@@ -4,7 +4,7 @@
  * プレミアムプランの購入画面
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -20,6 +20,7 @@ import { PageHeader } from '@/shared/ui';
 import { usePurchase } from '@/features/purchase-subscription';
 import { useIsPremium } from '@/entities/subscription';
 import { SUBSCRIPTION } from '@/shared/config';
+import type { PurchasesPackage } from 'react-native-purchases';
 
 interface PaywallPageProps {
   onPurchaseSuccess?: () => void;
@@ -70,8 +71,11 @@ function FeatureItem({
   );
 }
 
+type PlanType = 'monthly' | 'annual';
+
 export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   const isPremium = useIsPremium();
+  const [selectedPlan, setSelectedPlan] = useState<PlanType>('annual');
   const {
     offering,
     isLoading,
@@ -82,16 +86,31 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
     restore,
   } = usePurchase();
 
-  // 月額パッケージを取得
+  // パッケージを取得
   const monthlyPackage = offering?.monthly;
+  const annualPackage = offering?.annual;
+
+  // 選択中のパッケージ
+  const selectedPackage: PurchasesPackage | null =
+    selectedPlan === 'annual' ? annualPackage ?? null : monthlyPackage ?? null;
+
+  // 年額の月あたり価格を計算
+  const annualMonthlyPrice = annualPackage?.product.price
+    ? Math.round(annualPackage.product.price / 12)
+    : null;
+
+  // 年額で何ヶ月分お得かを計算
+  const savingsMonths = monthlyPackage?.product.price && annualPackage?.product.price
+    ? Math.round(12 - (annualPackage.product.price / monthlyPackage.product.price))
+    : null;
 
   const handlePurchase = async () => {
-    if (!monthlyPackage) {
+    if (!selectedPackage) {
       Alert.alert('エラー', 'プランの取得に失敗しました');
       return;
     }
 
-    const success = await purchase(monthlyPackage);
+    const success = await purchase(selectedPackage);
     if (success) {
       Alert.alert(
         'ありがとうございます！',
@@ -184,20 +203,87 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
           </Text>
         </View>
 
-        {/* 価格表示 */}
-        <View className="mx-6 my-4 p-4 rounded-2xl bg-primary/5 dark:bg-primary/10 border border-primary/20">
-          <View className="flex-row items-baseline justify-center">
-            <Text className="text-3xl font-bold text-primary">
-              ¥{monthlyPackage?.product.price ?? SUBSCRIPTION.PREMIUM_PRICE}
-            </Text>
-            <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-              /月
-            </Text>
-          </View>
-          {monthlyPackage?.product.introPrice && (
-            <Text className="text-center text-sm text-green-600 dark:text-green-400 mt-1">
-              {monthlyPackage.product.introPrice.periodNumberOfUnits}
-              {monthlyPackage.product.introPrice.periodUnit === 'DAY' ? '日間' : 'ヶ月'}
+        {/* プラン選択 */}
+        <View className="mx-6 my-4 gap-3">
+          {/* 年額プラン */}
+          {annualPackage && (
+            <Pressable
+              onPress={() => setSelectedPlan('annual')}
+              className={`p-4 rounded-2xl border-2 ${
+                selectedPlan === 'annual'
+                  ? 'border-primary bg-primary/5 dark:bg-primary/10'
+                  : 'border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface'
+              }`}
+            >
+              {savingsMonths && savingsMonths > 0 && (
+                <View className="absolute -top-3 right-4 bg-green-500 px-3 py-1 rounded-full">
+                  <Text className="text-white text-xs font-bold">
+                    {savingsMonths}ヶ月分お得
+                  </Text>
+                </View>
+              )}
+              <View className="flex-row items-center justify-between">
+                <View className="flex-row items-center">
+                  <View className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
+                    selectedPlan === 'annual' ? 'border-primary bg-primary' : 'border-gray-300 dark:border-gray-600'
+                  }`}>
+                    {selectedPlan === 'annual' && (
+                      <Ionicons name="checkmark" size={16} color="white" />
+                    )}
+                  </View>
+                  <View>
+                    <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+                      年額プラン
+                    </Text>
+                    {annualMonthlyPrice && (
+                      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                        月あたり ¥{annualMonthlyPrice}
+                      </Text>
+                    )}
+                  </View>
+                </View>
+                <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+                  ¥{annualPackage.product.price}/年
+                </Text>
+              </View>
+            </Pressable>
+          )}
+
+          {/* 月額プラン */}
+          {monthlyPackage && (
+            <Pressable
+              onPress={() => setSelectedPlan('monthly')}
+              className={`p-4 rounded-2xl border-2 ${
+                selectedPlan === 'monthly'
+                  ? 'border-primary bg-primary/5 dark:bg-primary/10'
+                  : 'border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface'
+              }`}
+            >
+              <View className="flex-row items-center justify-between">
+                <View className="flex-row items-center">
+                  <View className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
+                    selectedPlan === 'monthly' ? 'border-primary bg-primary' : 'border-gray-300 dark:border-gray-600'
+                  }`}>
+                    {selectedPlan === 'monthly' && (
+                      <Ionicons name="checkmark" size={16} color="white" />
+                    )}
+                  </View>
+                  <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+                    月額プラン
+                  </Text>
+                </View>
+                <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+                  ¥{monthlyPackage.product.price}/月
+                </Text>
+              </View>
+            </Pressable>
+          )}
+
+          {/* 無料トライアル表示 */}
+          {selectedPackage?.product.introPrice && (
+            <Text className="text-center text-sm text-green-600 dark:text-green-400">
+              {selectedPackage.product.introPrice.periodNumberOfUnits}
+              {selectedPackage.product.introPrice.periodUnit === 'DAY' ? '日間' : 'ヶ月'}
               無料トライアル
             </Text>
           )}
@@ -228,9 +314,9 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
         {/* 購入ボタン */}
         <Pressable
           onPress={handlePurchase}
-          disabled={isPurchasing || isRestoring || !monthlyPackage}
+          disabled={isPurchasing || isRestoring || !selectedPackage}
           className={`w-full py-4 rounded-xl items-center justify-center ${
-            isPurchasing || isRestoring || !monthlyPackage
+            isPurchasing || isRestoring || !selectedPackage
               ? 'bg-gray-300 dark:bg-gray-700'
               : 'bg-primary active:bg-primary/90'
           }`}
