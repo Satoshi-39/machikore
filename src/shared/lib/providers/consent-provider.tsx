@@ -1,8 +1,10 @@
 /**
- * 同意チェックプロバイダー
+ * 同意プロバイダー
  *
  * 利用規約・プライバシーポリシーへの同意状況を管理
- * 未同意の場合はオンボーディングまたは再同意画面を表示
+ * 未同意の場合は同意画面を表示
+ *
+ * ※デモグラフィック収集は初回サインアップ時に行う（AuthProviderで管理）
  */
 
 import React, { useState, useEffect, type ReactNode } from 'react';
@@ -14,12 +16,12 @@ import {
   getCurrentTermsVersions,
   getUserLatestAgreement,
 } from '@/shared/api/supabase';
-import { OnboardingPage } from '@/pages/onboarding';
+import { TermsAgreementStep } from '@/pages/onboarding';
 import { TermsUpdatePage } from '@/pages/terms-update';
 import { log } from '@/shared/config/logger';
 
-// 同意画面の種類
-type ConsentScreenType = 'none' | 'onboarding' | 'terms-update';
+// 画面の種類
+type ScreenType = 'none' | 'terms' | 'terms-update';
 
 interface ConsentProviderProps {
   children: ReactNode;
@@ -30,9 +32,9 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
   const { hasAgreedToVersion, agreeToTerms, agreedTermsVersion } = useAppSettingsStore();
 
   const [isCheckingTerms, setIsCheckingTerms] = useState(true);
-  const [consentScreen, setConsentScreen] = useState<ConsentScreenType>('none');
+  const [currentScreen, setCurrentScreen] = useState<ScreenType>('none');
 
-  // サーバーから現在の規約バージョンを取得して、同意状況をチェック
+  // サーバーから現在の規約バージョンを取得して、同意状況をチェック（マウント時のみ）
   useEffect(() => {
     async function checkTermsAgreement() {
       try {
@@ -45,7 +47,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
 
         if (hasLocalAgreement) {
           // ローカルに最新の同意があれば同意画面をスキップ
-          setConsentScreen('none');
+          setCurrentScreen('none');
           setIsCheckingTerms(false);
           return;
         }
@@ -61,7 +63,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
           ) {
             // サーバーに最新の同意があればローカルに同期してスキップ
             agreeToTerms(termsVersion, privacyVersion);
-            setConsentScreen('none');
+            setCurrentScreen('none');
             setIsCheckingTerms(false);
             return;
           }
@@ -70,22 +72,28 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
         // 同意が必要
         // 初回（ローカルに同意記録なし）か更新（古い同意記録あり）かを判定
         const isFirstTime = !agreedTermsVersion;
-        setConsentScreen(isFirstTime ? 'onboarding' : 'terms-update');
+        setCurrentScreen(isFirstTime ? 'terms' : 'terms-update');
       } catch (err) {
         log.error('[Consent] 規約バージョンの取得に失敗:', err);
         // エラー時はオンボーディングを表示（安全側に倒す）
-        setConsentScreen('onboarding');
+        setCurrentScreen('terms');
       } finally {
         setIsCheckingTerms(false);
       }
     }
 
     checkTermsAgreement();
-  }, [hasAgreedToVersion, user?.id, agreeToTerms, agreedTermsVersion]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // 同意完了時
-  const handleConsentComplete = () => {
-    setConsentScreen('none');
+  // 利用規約同意完了 → 完了
+  const handleTermsComplete = () => {
+    setCurrentScreen('none');
+  };
+
+  // 規約更新時の再同意完了 → 完了
+  const handleTermsUpdateComplete = () => {
+    setCurrentScreen('none');
   };
 
   // 規約チェック中
@@ -97,14 +105,14 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
     );
   }
 
-  // 初回オンボーディング表示
-  if (consentScreen === 'onboarding') {
-    return <OnboardingPage onComplete={handleConsentComplete} />;
+  // 利用規約同意
+  if (currentScreen === 'terms') {
+    return <TermsAgreementStep onComplete={handleTermsComplete} />;
   }
 
-  // 規約更新時の再同意画面表示
-  if (consentScreen === 'terms-update') {
-    return <TermsUpdatePage onComplete={handleConsentComplete} />;
+  // 規約更新時の再同意画面
+  if (currentScreen === 'terms-update') {
+    return <TermsUpdatePage onComplete={handleTermsUpdateComplete} />;
   }
 
   // 同意済み - 子コンポーネントを表示

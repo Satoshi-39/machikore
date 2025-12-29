@@ -15,7 +15,7 @@
  * - トークンの保存/復元/リフレッシュはすべてSupabaseが処理
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { supabase } from '@/shared/api/supabase/client';
 import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
 import { getUserById as getUserByIdFromSupabase } from '@/shared/api/supabase/users';
@@ -38,10 +38,21 @@ import { useSubscriptionStore } from '@/entities/subscription';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { syncLocalPreferencesToServer } from '@/entities/user/api/use-user-preferences';
 import { getCurrentLocale } from '@/shared/lib/i18n';
+import { DemographicsStep } from '@/pages/onboarding';
 import type { User } from '@/entities/user/model';
 
 interface AuthProviderProps {
   children: React.ReactNode;
+}
+
+/**
+ * デモグラフィック情報が入力済みかチェック
+ * gender または age_group が入力されていれば完了とみなす
+ */
+function hasDemographicsCompleted(user: User | null): boolean {
+  if (!user) return false;
+  // gender または age_group どちらかが設定されていれば完了とみなす
+  return user.gender !== null || user.age_group !== null;
 }
 
 /**
@@ -111,8 +122,15 @@ async function syncTermsAgreementToServer(userId: string): Promise<void> {
  */
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isInitializing, setIsInitializing] = useState(true);
+  const [showDemographics, setShowDemographics] = useState(false);
   const { setUser, setAuthState } = useUserStore();
   const { setSubscriptionStatus, reset: resetSubscription } = useSubscriptionStore();
+
+  // デモグラフィック完了時のハンドラ（保存はDemographicsStep内で行う）
+  const handleDemographicsComplete = useCallback(() => {
+    log.debug('[AuthProvider] デモグラフィック入力完了');
+    setShowDemographics(false);
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -196,6 +214,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     setSentryUser({ id: userData.id, username: userData.username });
                     // PostHogにユーザーを識別
                     identifyPostHogUser(userData.id, { username: userData.username });
+
+                    // 初回サインアップ時のみデモグラフィック画面を表示
+                    if (!hasDemographicsCompleted(userData as User)) {
+                      log.debug('[AuthProvider] デモグラフィック未入力、入力画面を表示');
+                      setShowDemographics(true);
+                    }
                   }
 
                   // RevenueCatにログインしてサブスクリプション状態を取得
@@ -271,6 +295,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // 初期化中のみローディング表示
   if (isInitializing) {
     return null; // または軽量なスプラッシュ画面
+  }
+
+  // デモグラフィック入力画面（初回サインアップ時）
+  if (showDemographics) {
+    return <DemographicsStep onComplete={handleDemographicsComplete} />;
   }
 
   return <>{children}</>;

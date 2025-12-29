@@ -1,5 +1,6 @@
 /**
- * Onboarding Page エクスポート
+ * Onboarding Steps エクスポート
  */
 
-export { OnboardingPage } from './ui/OnboardingPage';
+export { TermsAgreementStep } from './ui/TermsAgreementStep';
+export { DemographicsStep } from './ui/DemographicsStep';

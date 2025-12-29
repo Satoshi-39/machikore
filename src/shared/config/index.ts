@@ -8,3 +8,4 @@ export * from './design-tokens';
 export * from './cache';
 export * from './assets';
 export * from './logger';
+export * from './demographics';

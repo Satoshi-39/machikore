@@ -25,9 +25,9 @@ interface AppProvidersProps {
  * 1. GestureHandlerRootView - ジェスチャー処理（Bottom Sheetなど）
  * 2. PostHogProvider - アナリティクス（早い段階で初期化）
  * 3. MenuProvider - ポップアップメニュー
- * 4. AuthProvider - 認証状態の初期化
- * 5. QueryProvider - React Query
- * 6. I18nProvider - 多言語対応
+ * 4. QueryProvider - React Query
+ * 5. I18nProvider - 多言語対応（AuthProviderより前に配置）
+ * 6. AuthProvider - 認証状態の初期化（デモグラフィック画面でuseI18nを使用）
  * 7. ThemeProvider - テーマ管理（NativeWindのcolorScheme設定）
  * 8. ConsentProvider - 利用規約同意チェック
  * 9. PushNotificationInitializer - プッシュ通知初期化
@@ -47,18 +47,18 @@ export function AppProviders({ children }: AppProvidersProps) {
         debug={__DEV__}
       >
         <MenuProvider>
-          <AuthProvider>
-            <QueryProvider>
-              <I18nProvider>
+          <QueryProvider>
+            <I18nProvider>
+              <AuthProvider>
                 <ThemeProvider>
                   <ConsentProvider>
                     <PushNotificationInitializer />
                     {children}
                   </ConsentProvider>
                 </ThemeProvider>
-              </I18nProvider>
-            </QueryProvider>
-          </AuthProvider>
+              </AuthProvider>
+            </I18nProvider>
+          </QueryProvider>
         </MenuProvider>
       </PostHogProvider>
     </GestureHandlerRootView>
