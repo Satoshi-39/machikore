@@ -9,3 +9,4 @@ export * from './cache';
 export * from './assets';
 export * from './logger';
 export * from './demographics';
+export * from './onboarding';

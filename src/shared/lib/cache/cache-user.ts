@@ -93,6 +93,10 @@ export async function cacheUserToSQLite(user?: any): Promise<void> {
         premium_expires_at: null,
         push_token: null,
         push_token_updated_at: null,
+        gender: null,
+        age_group: null,
+        country: null,
+        prefecture: null,
         created_at: now,
         updated_at: now,
       };

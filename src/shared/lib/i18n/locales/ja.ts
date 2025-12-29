@@ -31,6 +31,8 @@ export default {
     share: '共有',
     post: '投稿',
     user: 'ユーザー',
+    skip: 'スキップ',
+    select: '選択してください',
   },
 
   // タブ
@@ -53,6 +55,56 @@ export default {
     loginRequiredMessage: 'この機能を使用するにはログインしてください',
     continueWithApple: 'Appleでサインイン',
     continueWithGoogle: 'Googleでサインイン',
+    // OTP認証（サインイン）
+    continueWithEmail: 'メールアドレスで続ける',
+    sendCode: '認証コードを送信',
+    codeSentTo: '%{email} に6桁の認証コードを送信しました',
+    authCode: '認証コード（6桁）',
+    verify: '認証する',
+    useAnotherEmail: '別のメールアドレスを使用',
+    resendCode: 'コードを再送信',
+    invalidCode: '認証コードが正しくありません',
+    resendFailed: 'コードの再送信に失敗しました',
+    // OTP認証（サインアップ）
+    signUpWithEmail: 'メールアドレスで登録',
+    sendSignUpCode: '登録用コードを送信',
+    signUpCodeSentTo: '%{email} に登録用コードを送信しました',
+    createAccount: 'アカウント作成',
+  },
+
+  // オンボーディング
+  onboarding: {
+    steps: {
+      profile: 'プロフィール設定',
+      demographics: '属性情報',
+    },
+    profile: {
+      title: 'プロフィール設定',
+      description: 'あなたのプロフィールを設定しましょう',
+      username: 'ユーザー名',
+      usernamePlaceholder: 'user_name',
+      usernameHint: '半角英数字とアンダースコア（_）のみ使用できます',
+      displayName: '表示名',
+      displayNamePlaceholder: 'ニックネーム',
+      displayNameHint: 'あなたの名前やニックネームを入力してください',
+      continue: '次へ',
+      usernameRequired: 'ユーザー名を入力してください',
+      usernameInvalid: 'ユーザー名は半角英数字とアンダースコアのみ使用できます',
+      usernameTooShort: 'ユーザー名は3文字以上で入力してください',
+      usernameTooLong: 'ユーザー名は20文字以内で入力してください',
+      usernameTaken: 'このユーザー名は既に使用されています',
+      displayNameRequired: '表示名を入力してください',
+    },
+    demographics: {
+      title: 'プロフィール',
+      description: 'あなたに合ったおすすめを表示するために、いくつかの情報を教えてください（任意）',
+      gender: '性別',
+      ageGroup: '年代',
+      country: '居住国',
+      prefecture: '都道府県',
+      region: '州・地域',
+      continue: '次へ',
+    },
   },
 
   // マップ

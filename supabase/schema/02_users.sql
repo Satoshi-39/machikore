@@ -2,7 +2,7 @@
 -- ユーザー（users, follows, visits, schedules, view_history, user_preferences）
 -- ============================================================
 -- ユーザー情報とユーザー間のリレーション
--- 最終更新: 2025-12-24
+-- 最終更新: 2025-12-27
 
 -- ============================================================
 -- users（ユーザー）
@@ -21,15 +21,28 @@ CREATE TABLE public.users (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     push_token text,
-    push_token_updated_at timestamp with time zone
+    push_token_updated_at timestamp with time zone,
+    -- デモグラフィック情報（任意、オンボーディングで収集）
+    gender text,
+    age_group text,
+    country text,
+    prefecture text
 );
 
 COMMENT ON COLUMN public.users.username IS 'ユーザー名（@で表示される識別子）';
 COMMENT ON COLUMN public.users.display_name IS '表示名（自由に設定できる名前）';
+COMMENT ON COLUMN public.users.gender IS '性別: male, female, other（任意）';
+COMMENT ON COLUMN public.users.age_group IS '年代: 10s, 20s, 30s, 40s, 50s, 60s+（任意）';
+COMMENT ON COLUMN public.users.country IS '居住国（ISO 3166-1 alpha-2）: jp, us, kr, etc.';
+COMMENT ON COLUMN public.users.prefecture IS '居住地域（日本の場合は都道府県、他国の場合は州など）';
 
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_email_key UNIQUE (email);
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_username_key UNIQUE (username);
+ALTER TABLE ONLY public.users ADD CONSTRAINT users_gender_check
+    CHECK (gender IS NULL OR gender IN ('male', 'female', 'other'));
+ALTER TABLE ONLY public.users ADD CONSTRAINT users_age_group_check
+    CHECK (age_group IS NULL OR age_group IN ('10s', '20s', '30s', '40s', '50s', '60s+'));
 
 CREATE INDEX idx_users_is_premium ON public.users USING btree (is_premium);
 CREATE INDEX idx_users_push_token ON public.users USING btree (push_token) WHERE (push_token IS NOT NULL);

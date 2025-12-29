@@ -31,6 +31,8 @@ export default {
     share: 'Share',
     post: 'Post',
     user: 'User',
+    skip: 'Skip',
+    select: 'Select',
   },
 
   // Tabs
@@ -53,6 +55,56 @@ export default {
     loginRequiredMessage: 'Please log in to use this feature',
     continueWithApple: 'Continue with Apple',
     continueWithGoogle: 'Continue with Google',
+    // OTP Auth (Sign In)
+    continueWithEmail: 'Continue with Email',
+    sendCode: 'Send Code',
+    codeSentTo: 'We sent a 6-digit code to %{email}',
+    authCode: 'Verification Code (6 digits)',
+    verify: 'Verify',
+    useAnotherEmail: 'Use a different email',
+    resendCode: 'Resend Code',
+    invalidCode: 'Invalid verification code',
+    resendFailed: 'Failed to resend code',
+    // OTP Auth (Sign Up)
+    signUpWithEmail: 'Sign up with Email',
+    sendSignUpCode: 'Send Sign Up Code',
+    signUpCodeSentTo: 'We sent a sign up code to %{email}',
+    createAccount: 'Create Account',
+  },
+
+  // Onboarding
+  onboarding: {
+    steps: {
+      profile: 'Profile Setup',
+      demographics: 'About You',
+    },
+    profile: {
+      title: 'Profile Setup',
+      description: 'Set up your profile',
+      username: 'Username',
+      usernamePlaceholder: 'user_name',
+      usernameHint: 'Only letters, numbers, and underscores allowed',
+      displayName: 'Display Name',
+      displayNamePlaceholder: 'Your nickname',
+      displayNameHint: 'Enter your name or nickname',
+      continue: 'Continue',
+      usernameRequired: 'Username is required',
+      usernameInvalid: 'Username can only contain letters, numbers, and underscores',
+      usernameTooShort: 'Username must be at least 3 characters',
+      usernameTooLong: 'Username must be 20 characters or less',
+      usernameTaken: 'This username is already taken',
+      displayNameRequired: 'Display name is required',
+    },
+    demographics: {
+      title: 'Profile',
+      description: 'Tell us a bit about yourself to help us personalize your experience (optional)',
+      gender: 'Gender',
+      ageGroup: 'Age Group',
+      country: 'Country',
+      prefecture: 'Prefecture',
+      region: 'State / Region',
+      continue: 'Continue',
+    },
   },
 
   // Maps

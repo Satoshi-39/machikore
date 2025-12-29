@@ -31,6 +31,8 @@ export default {
     share: '分享',
     post: '发布',
     user: '用户',
+    skip: '跳过',
+    select: '请选择',
   },
 
   // 标签栏
@@ -53,6 +55,56 @@ export default {
     loginRequiredMessage: '请登录后使用此功能',
     continueWithApple: '通过Apple登录',
     continueWithGoogle: '通过Google登录',
+    // OTP认证（登录）
+    continueWithEmail: '使用邮箱继续',
+    sendCode: '发送验证码',
+    codeSentTo: '已向 %{email} 发送6位验证码',
+    authCode: '验证码（6位）',
+    verify: '验证',
+    useAnotherEmail: '使用其他邮箱',
+    resendCode: '重新发送验证码',
+    invalidCode: '验证码错误',
+    resendFailed: '重新发送失败',
+    // OTP认证（注册）
+    signUpWithEmail: '使用邮箱注册',
+    sendSignUpCode: '发送注册验证码',
+    signUpCodeSentTo: '已向 %{email} 发送注册验证码',
+    createAccount: '创建账户',
+  },
+
+  // 引导
+  onboarding: {
+    steps: {
+      profile: '个人资料设置',
+      demographics: '基本信息',
+    },
+    profile: {
+      title: '个人资料设置',
+      description: '设置您的个人资料',
+      username: '用户名',
+      usernamePlaceholder: 'user_name',
+      usernameHint: '只能使用英文字母、数字和下划线',
+      displayName: '显示名称',
+      displayNamePlaceholder: '昵称',
+      displayNameHint: '输入您的姓名或昵称',
+      continue: '继续',
+      usernameRequired: '请输入用户名',
+      usernameInvalid: '用户名只能包含英文字母、数字和下划线',
+      usernameTooShort: '用户名至少需要3个字符',
+      usernameTooLong: '用户名最多20个字符',
+      usernameTaken: '此用户名已被使用',
+      displayNameRequired: '请输入显示名称',
+    },
+    demographics: {
+      title: '个人资料',
+      description: '请告诉我们一些关于您的信息，以便为您提供个性化推荐（可选）',
+      gender: '性别',
+      ageGroup: '年龄段',
+      country: '居住国家',
+      prefecture: '省份',
+      region: '州/地区',
+      continue: '继续',
+    },
   },
 
   // 地图

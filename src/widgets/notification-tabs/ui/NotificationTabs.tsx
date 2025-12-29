@@ -25,7 +25,8 @@ export function NotificationTabs({
 }: NotificationTabsProps) {
   const user = useUserStore((state) => state.user);
   const { data: notificationCount = 0 } = useUnreadNotificationCount(user?.id);
-  const { data: announcementCount = 0 } = useUnreadAnnouncementCount(user?.id);
+  // ユーザー作成日以降のお知らせのみカウント
+  const { data: announcementCount = 0 } = useUnreadAnnouncementCount(user?.id, user?.created_at);
   const { t } = useI18n();
 
   const TAB_OPTIONS: { mode: NotificationTabMode; label: string; count: number }[] = [

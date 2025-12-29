@@ -16,6 +16,9 @@ export interface ProfileUpdateData {
   avatar_url?: string | null;
 }
 
+// デモグラフィック型はconfigから再エクスポート
+export type { Gender, AgeGroup, DemographicsData } from '@/shared/config/demographics';
+
 /**
  * ユーザープロフィールを更新
  */
@@ -60,6 +63,41 @@ export async function getUserById(userId: string): Promise<User | null> {
   }
 
   return data;
+}
+
+/**
+ * ユーザーのデモグラフィック情報を更新
+ */
+export async function updateUserDemographics(
+  userId: string,
+  data: {
+    gender?: string | null;
+    age_group?: string | null;
+    country?: string | null;
+    prefecture?: string | null;
+  }
+): Promise<User> {
+  // supabase gen types で型を再生成するまで型アサーションを使用
+  const updateData = {
+    gender: data.gender,
+    age_group: data.age_group,
+    country: data.country,
+    prefecture: data.prefecture,
+    updated_at: new Date().toISOString(),
+  } as UserUpdate;
+
+  const { data: user, error } = await supabase
+    .from('users')
+    .update(updateData)
+    .eq('id', userId)
+    .select()
+    .single();
+
+  if (error) {
+    handleSupabaseError('updateUserDemographics', error);
+  }
+
+  return user;
 }
 
 /**
@@ -108,6 +146,76 @@ export async function clearPushToken(): Promise<void> {
   if (error) {
     handleSupabaseError('clearPushToken', error);
   }
+}
+
+// ===============================
+// ユーザー名関連
+// ===============================
+
+/**
+ * ユーザー名の利用可否をチェック
+ * @param username - チェックするユーザー名
+ * @param excludeUserId - 除外するユーザーID（自分自身を除外する場合）
+ * @returns true: 利用可能, false: 既に使用されている
+ */
+export async function checkUsernameAvailability(
+  username: string,
+  excludeUserId?: string
+): Promise<boolean> {
+  if (!username) return true;
+
+  let query = supabase
+    .from('users')
+    .select('id')
+    .eq('username', username.toLowerCase());
+
+  if (excludeUserId) {
+    query = query.neq('id', excludeUserId);
+  }
+
+  const { data, error } = await query.single();
+
+  if (error && error.code === 'PGRST116') {
+    // Not found = available
+    return true;
+  }
+
+  if (data) {
+    // Username taken
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * ユーザー名とプロフィールを更新
+ */
+export async function updateUserProfileWithUsername(
+  userId: string,
+  data: {
+    username: string;
+    display_name: string;
+  }
+): Promise<User> {
+  const updateData: UserUpdate = {
+    username: data.username.toLowerCase(),
+    display_name: data.display_name.trim(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const { data: user, error } = await supabase
+    .from('users')
+    .update(updateData)
+    .eq('id', userId)
+    .select()
+    .single();
+
+  if (error) {
+    handleSupabaseError('updateUserProfileWithUsername', error);
+  }
+
+  return user;
 }
 
 // ===============================

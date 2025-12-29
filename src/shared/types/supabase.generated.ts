@@ -1412,6 +1412,83 @@ export type Database = {
           },
         ]
       }
+      search_analytics: {
+        Row: {
+          age_group: string | null
+          created_at: string
+          first_searched_at: string
+          gender: string | null
+          id: string
+          last_searched_at: string
+          prefecture: string | null
+          query: string
+          search_count: number
+          search_type: string
+          updated_at: string
+        }
+        Insert: {
+          age_group?: string | null
+          created_at?: string
+          first_searched_at?: string
+          gender?: string | null
+          id?: string
+          last_searched_at?: string
+          prefecture?: string | null
+          query: string
+          search_count?: number
+          search_type?: string
+          updated_at?: string
+        }
+        Update: {
+          age_group?: string | null
+          created_at?: string
+          first_searched_at?: string
+          gender?: string | null
+          id?: string
+          last_searched_at?: string
+          prefecture?: string | null
+          query?: string
+          search_count?: number
+          search_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      search_history: {
+        Row: {
+          created_at: string
+          id: string
+          query: string
+          search_type: string
+          searched_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          query: string
+          search_type?: string
+          searched_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          query?: string
+          search_type?: string
+          searched_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "search_history_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       spatial_ref_sys: {
         Row: {
           auth_name: string | null
@@ -1826,6 +1903,7 @@ export type Database = {
       }
       user_preferences: {
         Row: {
+          content_languages: string[] | null
           created_at: string
           locale: string
           theme: string
@@ -1833,6 +1911,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          content_languages?: string[] | null
           created_at?: string
           locale?: string
           theme?: string
@@ -1840,6 +1919,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          content_languages?: string[] | null
           created_at?: string
           locale?: string
           theme?: string
@@ -2001,13 +2081,17 @@ export type Database = {
       }
       users: {
         Row: {
+          age_group: string | null
           avatar_url: string | null
           bio: string | null
+          country: string | null
           created_at: string
           display_name: string
           email: string
+          gender: string | null
           id: string
           is_premium: boolean | null
+          prefecture: string | null
           premium_expires_at: string | null
           premium_started_at: string | null
           push_token: string | null
@@ -2016,13 +2100,17 @@ export type Database = {
           username: string
         }
         Insert: {
+          age_group?: string | null
           avatar_url?: string | null
           bio?: string | null
+          country?: string | null
           created_at?: string
           display_name: string
           email: string
+          gender?: string | null
           id?: string
           is_premium?: boolean | null
+          prefecture?: string | null
           premium_expires_at?: string | null
           premium_started_at?: string | null
           push_token?: string | null
@@ -2031,13 +2119,17 @@ export type Database = {
           username: string
         }
         Update: {
+          age_group?: string | null
           avatar_url?: string | null
           bio?: string | null
+          country?: string | null
           created_at?: string
           display_name?: string
           email?: string
+          gender?: string | null
           id?: string
           is_premium?: boolean | null
+          prefecture?: string | null
           premium_expires_at?: string | null
           premium_started_at?: string | null
           push_token?: string | null
@@ -2330,6 +2422,10 @@ export type Database = {
         Returns: unknown
       }
       _st_within: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
+      add_search_history: {
+        Args: { p_query: string; p_search_type?: string }
+        Returns: string
+      }
       addauth: { Args: { "": string }; Returns: boolean }
       addgeometrycolumn:
         | {
@@ -2369,6 +2465,10 @@ export type Database = {
             Returns: string
           }
       clear_push_token: { Args: never; Returns: undefined }
+      clear_search_history: {
+        Args: { p_search_type?: string }
+        Returns: number
+      }
       count_images_in_spot: {
         Args: { p_user_spot_id: string }
         Returns: number
@@ -2542,6 +2642,18 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      get_popular_searches: {
+        Args: {
+          p_limit?: number
+          p_prefecture?: string
+          p_search_type?: string
+        }
+        Returns: {
+          last_searched_at: string
+          query: string
+          search_count: number
+        }[]
       }
       get_popular_tags_by_category: {
         Args: { p_category_id: string; p_limit?: number }

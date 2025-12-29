@@ -9,40 +9,50 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Pressable,
-  ActivityIndicator,
-} from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Localization from 'expo-localization';
 
 import { useCurrentUser } from '@/entities/user';
-import { colors } from '@/shared/config';
 import {
+  getOnboardingSteps,
+  ONBOARDING_STEP_KEYS,
   GENDERS,
   GENDER_LABELS,
   AGE_GROUPS,
   AGE_GROUP_LABELS,
   type Gender,
   type AgeGroup,
-} from '@/shared/config/demographics';
+} from '@/shared/config';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import { getPrefecturesByCountry } from '@/shared/lib/utils/prefectures.utils';
 import { updateUserDemographics } from '@/shared/api/supabase/users';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import {
+  OnboardingProgress,
+  SelectField,
+  PickerSheet,
+  PrimaryButton,
+  type PickerOption,
+} from '@/shared/ui';
 
 interface DemographicsStepProps {
   onComplete: () => void;
 }
 
+type PickerType = 'gender' | 'ageGroup' | 'country' | 'prefecture' | null;
+
 export function DemographicsStep({ onComplete }: DemographicsStepProps) {
   const insets = useSafeAreaInsets();
   const user = useCurrentUser();
   const { t, locale } = useI18n();
+
+  // オンボーディングステップ定義（共通化）
+  const onboardingSteps = getOnboardingSteps(t);
+  const currentStepIndex = Object.values(ONBOARDING_STEP_KEYS).indexOf(
+    ONBOARDING_STEP_KEYS.DEMOGRAPHICS
+  );
 
   // 選択状態
   const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
@@ -50,6 +60,9 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // ピッカー表示状態
+  const [activePicker, setActivePicker] = useState<PickerType>(null);
 
   // 国リスト
   const countries = useMemo(() => getCountriesData(), []);
@@ -75,6 +88,43 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
   useEffect(() => {
     setSelectedPrefecture(null);
   }, [selectedCountry]);
+
+  // 国名を取得（ローカライズ対応）
+  const getCountryName = (countryId: string): string => {
+    const country = countries.find((c) => c.id === countryId);
+    if (!country) return '';
+    if (locale === 'ja') return country.name;
+    return country.name_translations?.en || country.name;
+  };
+
+  // 都道府県名を取得（ローカライズ対応）
+  const getPrefectureName = (prefName: string): string => {
+    const pref = prefectures.find((p) => p.name === prefName);
+    if (!pref) return prefName;
+    if (locale === 'ja') return pref.name;
+    return pref.name_translations?.en || pref.name;
+  };
+
+  // ピッカーオプション生成
+  const genderOptions: PickerOption<Gender>[] = GENDERS.map((g) => ({
+    value: g,
+    label: GENDER_LABELS[g],
+  }));
+
+  const ageGroupOptions: PickerOption<AgeGroup>[] = AGE_GROUPS.map((a) => ({
+    value: a,
+    label: AGE_GROUP_LABELS[a],
+  }));
+
+  const countryOptions: PickerOption<string>[] = countries.map((c) => ({
+    value: c.id,
+    label: locale === 'ja' ? c.name : c.name_translations?.en || c.name,
+  }));
+
+  const prefectureOptions: PickerOption<string>[] = prefectures.map((p) => ({
+    value: p.name,
+    label: locale === 'ja' ? p.name : p.name_translations?.en || p.name,
+  }));
 
   // 保存
   const handleSave = async () => {
@@ -105,18 +155,6 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
     onComplete();
   };
 
-  // 国名を取得（ローカライズ対応）
-  const getCountryName = (country: { id: string; name: string; name_translations?: Record<string, string> | null }) => {
-    if (locale === 'ja') return country.name;
-    return country.name_translations?.en || country.name;
-  };
-
-  // 都道府県名を取得（ローカライズ対応）
-  const getPrefectureName = (pref: { name: string; name_translations?: Record<string, string> | null }) => {
-    if (locale === 'ja') return pref.name;
-    return pref.name_translations?.en || pref.name;
-  };
-
   return (
     <View
       className="flex-1 bg-surface dark:bg-dark-surface"
@@ -129,148 +167,57 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
           {t('onboarding.demographics.title')}
         </Text>
         <Pressable onPress={handleSkip} className="w-16 items-end">
-          <Text className="text-base text-primary">
-            {t('common.skip')}
-          </Text>
+          <Text className="text-base text-primary">{t('common.skip')}</Text>
         </Pressable>
       </View>
 
+      {/* 進捗インジケーター */}
+      <OnboardingProgress steps={onboardingSteps} currentStep={currentStepIndex} />
+
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         {/* 説明 */}
-        <View className="py-6">
+        <View className="py-4">
           <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center leading-6">
             {t('onboarding.demographics.description')}
           </Text>
         </View>
 
         {/* 性別 */}
-        <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-            {t('onboarding.demographics.gender')}
-          </Text>
-          <View className="flex-row flex-wrap gap-2">
-            {GENDERS.map((gender) => (
-              <Pressable
-                key={gender}
-                onPress={() => setSelectedGender(selectedGender === gender ? null : gender)}
-                className={`px-4 py-2 rounded-full border ${
-                  selectedGender === gender
-                    ? 'bg-primary border-primary'
-                    : 'border-border dark:border-dark-border'
-                }`}
-              >
-                <Text
-                  className={`text-base ${
-                    selectedGender === gender
-                      ? 'text-white'
-                      : 'text-foreground dark:text-dark-foreground'
-                  }`}
-                >
-                  {GENDER_LABELS[gender]}
-                </Text>
-              </Pressable>
-            ))}
-          </View>
-        </View>
+        <SelectField
+          label={t('onboarding.demographics.gender')}
+          value={selectedGender ? GENDER_LABELS[selectedGender] : null}
+          placeholder={t('common.select')}
+          onPress={() => setActivePicker('gender')}
+        />
 
         {/* 年代 */}
-        <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-            {t('onboarding.demographics.ageGroup')}
-          </Text>
-          <View className="flex-row flex-wrap gap-2">
-            {AGE_GROUPS.map((ageGroup) => (
-              <Pressable
-                key={ageGroup}
-                onPress={() => setSelectedAgeGroup(selectedAgeGroup === ageGroup ? null : ageGroup)}
-                className={`px-4 py-2 rounded-full border ${
-                  selectedAgeGroup === ageGroup
-                    ? 'bg-primary border-primary'
-                    : 'border-border dark:border-dark-border'
-                }`}
-              >
-                <Text
-                  className={`text-base ${
-                    selectedAgeGroup === ageGroup
-                      ? 'text-white'
-                      : 'text-foreground dark:text-dark-foreground'
-                  }`}
-                >
-                  {AGE_GROUP_LABELS[ageGroup]}
-                </Text>
-              </Pressable>
-            ))}
-          </View>
-        </View>
+        <SelectField
+          label={t('onboarding.demographics.ageGroup')}
+          value={selectedAgeGroup ? AGE_GROUP_LABELS[selectedAgeGroup] : null}
+          placeholder={t('common.select')}
+          onPress={() => setActivePicker('ageGroup')}
+        />
 
         {/* 居住国 */}
-        <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-            {t('onboarding.demographics.country')}
-          </Text>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            <View className="flex-row gap-2">
-              {countries.map((country) => (
-                <Pressable
-                  key={country.id}
-                  onPress={() => setSelectedCountry(selectedCountry === country.id ? null : country.id)}
-                  className={`px-4 py-2 rounded-full border ${
-                    selectedCountry === country.id
-                      ? 'bg-primary border-primary'
-                      : 'border-border dark:border-dark-border'
-                  }`}
-                >
-                  <Text
-                    className={`text-base ${
-                      selectedCountry === country.id
-                        ? 'text-white'
-                        : 'text-foreground dark:text-dark-foreground'
-                    }`}
-                  >
-                    {getCountryName(country)}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-          </ScrollView>
-        </View>
+        <SelectField
+          label={t('onboarding.demographics.country')}
+          value={selectedCountry ? getCountryName(selectedCountry) : null}
+          placeholder={t('common.select')}
+          onPress={() => setActivePicker('country')}
+        />
 
-        {/* 都道府県/州（国が選択されていて、データがある場合のみ表示） */}
-        {selectedCountry && prefectures.length > 0 && (
-          <View className="mb-6">
-            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-              {selectedCountry === 'jp'
-                ? t('onboarding.demographics.prefecture')
-                : t('onboarding.demographics.region')}
-            </Text>
-            <View className="flex-row flex-wrap gap-2">
-              {prefectures.map((pref) => (
-                <Pressable
-                  key={pref.id}
-                  onPress={() => setSelectedPrefecture(selectedPrefecture === pref.name ? null : pref.name)}
-                  className={`px-3 py-1.5 rounded-full border ${
-                    selectedPrefecture === pref.name
-                      ? 'bg-primary border-primary'
-                      : 'border-border dark:border-dark-border'
-                  }`}
-                >
-                  <Text
-                    className={`text-sm ${
-                      selectedPrefecture === pref.name
-                        ? 'text-white'
-                        : 'text-foreground dark:text-dark-foreground'
-                    }`}
-                  >
-                    {getPrefectureName(pref)}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-          </View>
-        )}
+        {/* 都道府県/州 */}
+        <SelectField
+          label={
+            selectedCountry === 'jp'
+              ? t('onboarding.demographics.prefecture')
+              : t('onboarding.demographics.region')
+          }
+          value={selectedPrefecture ? getPrefectureName(selectedPrefecture) : null}
+          placeholder={t('common.select')}
+          onPress={() => setActivePicker('prefecture')}
+          disabled={!selectedCountry || prefectures.length === 0}
+        />
 
         <View className="h-24" />
       </ScrollView>
@@ -280,27 +227,53 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
         className="px-4 pb-4 bg-surface dark:bg-dark-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
-        <Pressable
+        <PrimaryButton
+          title={t('onboarding.demographics.continue')}
           onPress={handleSave}
-          disabled={isSubmitting}
-          className="py-4 rounded-full items-center bg-primary"
-          style={{
-            shadowColor: colors.primary.DEFAULT,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 8,
-            elevation: 4,
-          }}
-        >
-          {isSubmitting ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <Text className="font-semibold text-base text-white">
-              {t('onboarding.demographics.continue')}
-            </Text>
-          )}
-        </Pressable>
+          loading={isSubmitting}
+        />
       </View>
+
+      {/* ピッカーシート */}
+      <PickerSheet
+        visible={activePicker === 'gender'}
+        onClose={() => setActivePicker(null)}
+        title={t('onboarding.demographics.gender')}
+        options={genderOptions}
+        selectedValue={selectedGender}
+        onSelect={(value) => setSelectedGender(value)}
+      />
+
+      <PickerSheet
+        visible={activePicker === 'ageGroup'}
+        onClose={() => setActivePicker(null)}
+        title={t('onboarding.demographics.ageGroup')}
+        options={ageGroupOptions}
+        selectedValue={selectedAgeGroup}
+        onSelect={(value) => setSelectedAgeGroup(value)}
+      />
+
+      <PickerSheet
+        visible={activePicker === 'country'}
+        onClose={() => setActivePicker(null)}
+        title={t('onboarding.demographics.country')}
+        options={countryOptions}
+        selectedValue={selectedCountry}
+        onSelect={(value) => setSelectedCountry(value)}
+      />
+
+      <PickerSheet
+        visible={activePicker === 'prefecture'}
+        onClose={() => setActivePicker(null)}
+        title={
+          selectedCountry === 'jp'
+            ? t('onboarding.demographics.prefecture')
+            : t('onboarding.demographics.region')
+        }
+        options={prefectureOptions}
+        selectedValue={selectedPrefecture}
+        onSelect={(value) => setSelectedPrefecture(value)}
+      />
     </View>
   );
 }

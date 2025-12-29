@@ -1,7 +1,9 @@
 /**
- * サインインフォームUI
+ * OTPサインインフォームUI
  *
- * FSD: features/auth-sign-in/ui
+ * FSD: features/auth/ui
+ *
+ * メールアドレス入力 → OTPコード送信 → 認証コード入力画面へ遷移
  */
 
 import React, { useState } from 'react';
@@ -12,33 +14,47 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useSignIn } from '../model/use-sign-in';
+import { sendOtpCode } from '@/shared/api/supabase/auth';
+import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
-interface SignInFormProps {
-  onSuccess?: () => void;
-}
-
-export function SignInForm({ onSuccess }: SignInFormProps) {
+export function SignInForm() {
+  const { t } = useI18n();
+  const router = useRouter();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
-  const { signIn, isLoading, error } = useSignIn();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async () => {
-    if (!email || !password) {
-      return;
-    }
+  // メール送信
+  const handleSendCode = async () => {
+    if (!email) return;
+
+    setIsLoading(true);
+    setError(null);
 
     try {
-      await signIn({ email, password });
-      onSuccess?.();
+      const result = await sendOtpCode(email);
+
+      if (!result.success) {
+        throw result.error;
+      }
+
+      log.info('[Auth] OTPコード送信成功:', email);
+      // 認証コード入力画面へ遷移
+      router.push(`/auth/verify?email=${encodeURIComponent(email)}`);
     } catch (err) {
-      // エラーはuseSignInフック内で処理される
+      const errorMessage = err instanceof Error ? err.message : 'メール送信に失敗しました';
+      setError(errorMessage);
+      log.error('[Auth] OTPコード送信エラー:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const isFormValid = email.length > 0 && password.length > 0;
+  const isEmailValid = email.length > 0 && email.includes('@');
 
   return (
     <View className="w-full px-6">
@@ -50,7 +66,7 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
       >
         <Ionicons name="mail-outline" size={20} color="#6B7280" />
         <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base font-semibold ml-3">
-          メールアドレスで続ける
+          {t('auth.continueWithEmail')}
         </Text>
         <Ionicons
           name={isExpanded ? 'chevron-up' : 'chevron-down'}
@@ -65,21 +81,25 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
         <View className="mt-4">
           {/* エラーメッセージ */}
           {error && (
-            <View className="mb-4 p-4 bg-red-50 rounded-lg">
-              <Text className="text-red-600 text-sm">{error}</Text>
+            <View className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
+              <Text className="text-red-600 dark:text-red-400 text-sm">{error}</Text>
             </View>
           )}
 
           {/* メールアドレス入力 */}
           <View className="mb-4">
             <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
-              メールアドレス
+              {t('auth.email')}
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
+              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base text-foreground dark:text-dark-foreground"
               placeholder="your@email.com"
+              placeholderTextColor="#9CA3AF"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(text) => {
+                setEmail(text);
+                setError(null);
+              }}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -87,34 +107,18 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
             />
           </View>
 
-          {/* パスワード入力 */}
-          <View className="mb-6">
-            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
-              パスワード
-            </Text>
-            <TextInput
-              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
-              placeholder="••••••••"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              editable={!isLoading}
-            />
-          </View>
-
-          {/* サインインボタン */}
           <TouchableOpacity
             className={`w-full py-4 rounded-lg ${
-              isFormValid && !isLoading ? 'bg-blue-600' : 'bg-gray-300'
+              isEmailValid && !isLoading ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
             }`}
-            onPress={handleSubmit}
-            disabled={!isFormValid || isLoading}
+            onPress={handleSendCode}
+            disabled={!isEmailValid || isLoading}
           >
             {isLoading ? (
               <ActivityIndicator color="white" />
             ) : (
               <Text className="text-white text-center text-base font-semibold">
-                サインイン
+                {t('auth.sendCode')}
               </Text>
             )}
           </TouchableOpacity>

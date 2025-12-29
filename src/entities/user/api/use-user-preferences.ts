@@ -252,7 +252,6 @@ export function useThemePreference() {
 export function useLocalePreference() {
   const { data, isLoading } = useUserPreferences();
   const { mutate, isPending } = useUpdateUserPreferences();
-  const { changeLocale } = useI18n();
 
   const locale = data?.locale ?? 'system';
 
@@ -263,13 +262,9 @@ export function useLocalePreference() {
   const setLocale = useCallback(
     (newLocale: LocalePreference) => {
       mutate({ locale: newLocale });
-      // I18nProviderのstateを更新（UIが即座に再レンダリングされる）
-      // GeoJSONフックはlocaleに依存しているので、自動的に再計算される
-      if (newLocale !== 'system') {
-        changeLocale(newLocale);
-      }
+      // 表示言語はOS設定で管理されるため、ここでは保存のみ行う
     },
-    [mutate, changeLocale]
+    [mutate]
   );
 
   return {

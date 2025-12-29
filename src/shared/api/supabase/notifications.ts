@@ -216,14 +216,23 @@ export async function deleteAllNotifications(userId: string): Promise<void> {
 
 /**
  * アクティブなシステムお知らせを取得
+ * @param userCreatedAt ユーザーの作成日（指定した場合、それ以降のお知らせのみ取得）
  */
-export async function getSystemAnnouncements(): Promise<SystemAnnouncement[]> {
-  const { data, error } = await supabase
+export async function getSystemAnnouncements(
+  userCreatedAt?: string
+): Promise<SystemAnnouncement[]> {
+  let query = supabase
     .from('system_announcements')
     .select('*')
     .eq('is_active', true)
-    .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
-    .order('published_at', { ascending: false });
+    .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
+
+  // ユーザー作成日以降のお知らせのみ取得
+  if (userCreatedAt) {
+    query = query.gte('published_at', userCreatedAt);
+  }
+
+  const { data, error } = await query.order('published_at', { ascending: false });
 
   if (error) {
     handleSupabaseError('getSystemAnnouncements', error);
@@ -234,14 +243,25 @@ export async function getSystemAnnouncements(): Promise<SystemAnnouncement[]> {
 
 /**
  * 未読のお知らせ数を取得
+ * @param userCreatedAt ユーザーの作成日（指定した場合、それ以降のお知らせのみカウント）
  */
-export async function getUnreadAnnouncementCount(userId: string): Promise<number> {
+export async function getUnreadAnnouncementCount(
+  userId: string,
+  userCreatedAt?: string
+): Promise<number> {
   // アクティブなお知らせの総数を取得
-  const { data: announcements, error: announcementsError } = await supabase
+  let query = supabase
     .from('system_announcements')
     .select('id')
     .eq('is_active', true)
     .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
+
+  // ユーザー作成日以降のお知らせのみカウント
+  if (userCreatedAt) {
+    query = query.gte('published_at', userCreatedAt);
+  }
+
+  const { data: announcements, error: announcementsError } = await query;
 
   if (announcementsError) {
     handleSupabaseError('getUnreadAnnouncementCount', announcementsError);

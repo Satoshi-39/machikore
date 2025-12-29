@@ -15,7 +15,7 @@ import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
-import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
+import { useDiscoverSearchHistory, SearchHistoryList } from '@/features/search-history';
 import { DiscoverSearchResults } from '@/widgets/discover-search-results';
 import { useUserSearch, UserListItem } from '@/entities/user';
 
@@ -37,8 +37,8 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
   const router = useRouter();
   const { t } = useI18n();
 
-  // 検索履歴
-  const { history, addHistory, removeHistory, clearHistory } = useSearchHistory({ type: 'discover' });
+  // 検索履歴（Supabase/クラウド同期）
+  const { history, addHistory, removeHistory, clearHistory } = useDiscoverSearchHistory();
 
   // 入力中のユーザーサジェスト（リアルタイム検索）
   const { data: suggestedUsers, isLoading: usersLoading } = useUserSearch(

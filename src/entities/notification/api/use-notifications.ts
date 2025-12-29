@@ -199,11 +199,12 @@ export function useDeleteAllNotifications() {
 
 /**
  * システムお知らせを取得
+ * @param userCreatedAt ユーザーの作成日（指定した場合、それ以降のお知らせのみ取得）
  */
-export function useSystemAnnouncements() {
+export function useSystemAnnouncements(userCreatedAt?: string) {
   return useQuery<SystemAnnouncement[], Error>({
-    queryKey: QUERY_KEYS.announcementsSystem(),
-    queryFn: getSystemAnnouncements,
+    queryKey: [...QUERY_KEYS.announcementsSystem(), userCreatedAt],
+    queryFn: () => getSystemAnnouncements(userCreatedAt),
     // 5分ごとに更新
     refetchInterval: 5 * 60 * 1000,
   });
@@ -211,13 +212,17 @@ export function useSystemAnnouncements() {
 
 /**
  * 未読お知らせ数を取得
+ * @param userCreatedAt ユーザーの作成日（指定した場合、それ以降のお知らせのみカウント）
  */
-export function useUnreadAnnouncementCount(userId: string | null | undefined) {
+export function useUnreadAnnouncementCount(
+  userId: string | null | undefined,
+  userCreatedAt?: string
+) {
   return useQuery<number, Error>({
-    queryKey: QUERY_KEYS.announcementsUnreadCount(userId || ''),
+    queryKey: [...QUERY_KEYS.announcementsUnreadCount(userId || ''), userCreatedAt],
     queryFn: () => {
       if (!userId) return 0;
-      return getUnreadAnnouncementCount(userId);
+      return getUnreadAnnouncementCount(userId, userCreatedAt);
     },
     enabled: !!userId,
     // 30秒ごとに更新
@@ -227,10 +232,14 @@ export function useUnreadAnnouncementCount(userId: string | null | undefined) {
 
 /**
  * 通知とお知らせの合計未読数を取得
+ * @param userCreatedAt ユーザーの作成日（お知らせのフィルタリングに使用）
  */
-export function useTotalUnreadCount(userId: string | null | undefined) {
+export function useTotalUnreadCount(
+  userId: string | null | undefined,
+  userCreatedAt?: string
+) {
   const { data: notificationCount = 0 } = useUnreadNotificationCount(userId);
-  const { data: announcementCount = 0 } = useUnreadAnnouncementCount(userId);
+  const { data: announcementCount = 0 } = useUnreadAnnouncementCount(userId, userCreatedAt);
 
   return notificationCount + announcementCount;
 }

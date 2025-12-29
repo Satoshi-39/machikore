@@ -90,7 +90,10 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
 export function AnnouncementList() {
   const { t } = useI18n();
   const user = useUserStore((state) => state.user);
-  const { data: announcements = [], isLoading, refetch, isRefetching } = useSystemAnnouncements();
+  // ユーザー作成日以降のお知らせのみ取得（新規ユーザーに過去のお知らせを表示しない）
+  const { data: announcements = [], isLoading, refetch, isRefetching } = useSystemAnnouncements(
+    user?.created_at
+  );
   const { data: readIds = new Set<string>() } = useReadAnnouncementIds(user?.id);
   const { mutate: markAsRead } = useMarkAnnouncementAsRead();
   const { mutate: markAllAsRead } = useMarkAllAnnouncementsAsRead();

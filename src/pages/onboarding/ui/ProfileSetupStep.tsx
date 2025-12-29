@@ -1,0 +1,265 @@
+/**
+ * プロフィール設定ステップ
+ *
+ * OTP認証後に表示される、username/display_name設定画面
+ * - ユーザー名（一意、英数字と_のみ）
+ * - 表示名
+ */
+
+import React, { useState, useCallback } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import {
+  useCurrentUser,
+  useUserStore,
+  validateUsername,
+  sanitizeUsername,
+  isDisplayNameEmpty,
+} from '@/entities/user';
+import { colors, getOnboardingSteps, ONBOARDING_STEP_KEYS } from '@/shared/config';
+import {
+  checkUsernameAvailability,
+  updateUserProfileWithUsername,
+} from '@/shared/api/supabase/users';
+import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
+import { OnboardingProgress } from '@/shared/ui';
+
+interface ProfileSetupStepProps {
+  onComplete: () => void;
+}
+
+export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
+  const insets = useSafeAreaInsets();
+  const user = useCurrentUser();
+  const setUser = useUserStore((state) => state.setUser);
+  const { t } = useI18n();
+
+  // オンボーディングステップ定義（共通化）
+  const onboardingSteps = getOnboardingSteps(t);
+  const currentStepIndex = Object.values(ONBOARDING_STEP_KEYS).indexOf(
+    ONBOARDING_STEP_KEYS.PROFILE
+  );
+
+  // 初期値は現在のユーザー情報から
+  const [username, setUsername] = useState(user?.username || '');
+  const [displayName, setDisplayName] = useState(user?.display_name || '');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCheckingUsername, setIsCheckingUsername] = useState(false);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [displayNameError, setDisplayNameError] = useState<string | null>(null);
+
+  // ユーザー名変更ハンドラ
+  const handleUsernameChange = useCallback((text: string) => {
+    setUsername(sanitizeUsername(text));
+    setUsernameError(null);
+  }, []);
+
+  // 表示名変更ハンドラ
+  const handleDisplayNameChange = useCallback((text: string) => {
+    setDisplayName(text);
+    setDisplayNameError(null);
+  }, []);
+
+  // 保存
+  const handleSave = async () => {
+    if (!user?.id) {
+      onComplete();
+      return;
+    }
+
+    // バリデーション
+    const usernameValidationError = validateUsername(username);
+    if (usernameValidationError) {
+      setUsernameError(t(`onboarding.profile.${usernameValidationError}`));
+      return;
+    }
+
+    if (isDisplayNameEmpty(displayName)) {
+      setDisplayNameError(t('onboarding.profile.displayNameRequired'));
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      // ユーザー名の重複チェック（自分以外と重複していないか）
+      if (username !== user.username) {
+        setIsCheckingUsername(true);
+        const isAvailable = await checkUsernameAvailability(username, user.id);
+        setIsCheckingUsername(false);
+
+        if (!isAvailable) {
+          setUsernameError(t('onboarding.profile.usernameTaken'));
+          setIsSubmitting(false);
+          return;
+        }
+      }
+
+      // プロフィール更新
+      const updatedUser = await updateUserProfileWithUsername(user.id, {
+        username,
+        display_name: displayName,
+      });
+
+      // ストアを更新
+      setUser({
+        ...user,
+        username: updatedUser.username,
+        display_name: updatedUser.display_name,
+      });
+
+      log.info('[ProfileSetup] プロフィール更新完了');
+      onComplete();
+    } catch (err) {
+      log.error('[ProfileSetup] 保存に失敗:', err);
+      // エラーでも続行（次回ログイン時に再設定可能）
+      onComplete();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView
+      className="flex-1 bg-surface dark:bg-dark-surface"
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{ paddingTop: insets.top }}
+    >
+      {/* ヘッダー */}
+      <View className="flex-row items-center justify-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
+        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+          {t('onboarding.profile.title')}
+        </Text>
+      </View>
+
+      {/* 進捗インジケーター */}
+      <OnboardingProgress steps={onboardingSteps} currentStep={currentStepIndex} />
+
+      <ScrollView
+        className="flex-1 px-4"
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        {/* 説明 */}
+        <View className="py-6">
+          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center leading-6">
+            {t('onboarding.profile.description')}
+          </Text>
+        </View>
+
+        {/* ユーザー名 */}
+        <View className="mb-6">
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+            {t('onboarding.profile.username')}
+          </Text>
+          <View className="flex-row items-center">
+            <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted mr-1">
+              @
+            </Text>
+            <TextInput
+              className={`flex-1 px-4 py-3 border rounded-lg bg-surface dark:bg-dark-surface text-base text-foreground dark:text-dark-foreground ${
+                usernameError
+                  ? 'border-red-500'
+                  : 'border-border dark:border-dark-border'
+              }`}
+              placeholder={t('onboarding.profile.usernamePlaceholder')}
+              placeholderTextColor="#9CA3AF"
+              value={username}
+              onChangeText={handleUsernameChange}
+              autoCapitalize="none"
+              autoCorrect={false}
+              editable={!isSubmitting}
+              maxLength={20}
+            />
+            {isCheckingUsername && (
+              <ActivityIndicator
+                size="small"
+                color={colors.primary.DEFAULT}
+                style={{ marginLeft: 8 }}
+              />
+            )}
+          </View>
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+            {t('onboarding.profile.usernameHint')}
+          </Text>
+          {usernameError && (
+            <Text className="text-xs text-red-500 mt-1">{usernameError}</Text>
+          )}
+        </View>
+
+        {/* 表示名 */}
+        <View className="mb-6">
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+            {t('onboarding.profile.displayName')}
+          </Text>
+          <TextInput
+            className={`w-full px-4 py-3 border rounded-lg bg-surface dark:bg-dark-surface text-base text-foreground dark:text-dark-foreground ${
+              displayNameError
+                ? 'border-red-500'
+                : 'border-border dark:border-dark-border'
+            }`}
+            placeholder={t('onboarding.profile.displayNamePlaceholder')}
+            placeholderTextColor="#9CA3AF"
+            value={displayName}
+            onChangeText={handleDisplayNameChange}
+            editable={!isSubmitting}
+            maxLength={50}
+          />
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+            {t('onboarding.profile.displayNameHint')}
+          </Text>
+          {displayNameError && (
+            <Text className="text-xs text-red-500 mt-1">{displayNameError}</Text>
+          )}
+        </View>
+
+        <View className="h-24" />
+      </ScrollView>
+
+      {/* 保存ボタン */}
+      <View
+        className="px-4 pb-4 bg-surface dark:bg-dark-surface"
+        style={{ paddingBottom: insets.bottom + 16 }}
+      >
+        <Pressable
+          onPress={handleSave}
+          disabled={isSubmitting || !username || !displayName.trim()}
+          className={`py-4 rounded-full items-center ${
+            isSubmitting || !username || !displayName.trim()
+              ? 'bg-gray-300 dark:bg-gray-600'
+              : 'bg-primary'
+          }`}
+          style={
+            !isSubmitting && username && displayName.trim()
+              ? {
+                  shadowColor: colors.primary.DEFAULT,
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 8,
+                  elevation: 4,
+                }
+              : undefined
+          }
+        >
+          {isSubmitting ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <Text className="font-semibold text-base text-white">
+              {t('onboarding.profile.continue')}
+            </Text>
+          )}
+        </Pressable>
+      </View>
+    </KeyboardAvoidingView>
+  );
+}

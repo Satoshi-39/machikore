@@ -64,6 +64,7 @@ async function getCategoryFeaturedMaps(
         article_intro: map.article_intro ?? null,
         article_outro: map.article_outro ?? null,
         show_label_chips: map.show_label_chips ?? false,
+        language: map.language ?? null,
         is_liked: currentUserId
           ? (map.likes || []).some((like: any) => like.user_id === currentUserId)
           : false,

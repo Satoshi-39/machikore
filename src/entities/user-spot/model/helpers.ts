@@ -63,6 +63,7 @@ export function createSpotData(params: CreateSpotParams): {
       city_name: null,
       google_formatted_address: params.address || null,
       google_short_address: null,
+      language: null,
       created_at: now,
       updated_at: now,
     },

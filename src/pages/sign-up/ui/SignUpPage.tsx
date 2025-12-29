@@ -34,7 +34,7 @@ export function SignUpPage({ onSuccess, onNavigateToSignIn }: SignUpPageProps) {
       </View>
 
       {/* Email/Password サインアップフォーム */}
-      <SignUpForm onSuccess={onSuccess} />
+      <SignUpForm />
 
       {/* サインインへの誘導 */}
       {onNavigateToSignIn && (

@@ -14,7 +14,7 @@ export default function TabLayout() {
   const currentTab = useCurrentTab();
   const user = useUserStore((state) => state.user);
   const isAnonymous = !user?.email;
-  const unreadCount = useTotalUnreadCount(user?.id);
+  const unreadCount = useTotalUnreadCount(user?.id, user?.created_at);
   const isDarkMode = useIsDarkMode();
   const setSourceTab = useMapStore((state) => state.setSourceTab);
 

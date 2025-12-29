@@ -1,7 +1,9 @@
 /**
- * サインアップフォームUI
+ * OTPサインアップフォームUI
  *
- * FSD: features/auth-sign-up/ui
+ * FSD: features/auth/ui
+ *
+ * メールアドレス入力 → OTPコード送信 → 認証コード入力画面へ遷移
  */
 
 import React, { useState } from 'react';
@@ -11,48 +13,48 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  ScrollView,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useSignUp } from '../model/use-sign-up';
+import { sendOtpCode } from '@/shared/api/supabase/auth';
+import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
-interface SignUpFormProps {
-  onSuccess?: () => void;
-}
-
-export function SignUpForm({ onSuccess }: SignUpFormProps) {
-  const [username, setUsername] = useState('');
+export function SignUpForm() {
+  const { t } = useI18n();
+  const router = useRouter();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
-  const { signUp, isLoading, error } = useSignUp();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async () => {
-    if (!username || !email || !password || !confirmPassword) {
-      return;
-    }
+  // メール送信
+  const handleSendCode = async () => {
+    if (!email) return;
 
-    if (password !== confirmPassword) {
-      return;
-    }
+    setIsLoading(true);
+    setError(null);
 
     try {
-      await signUp({ email, password, username });
-      onSuccess?.();
+      const result = await sendOtpCode(email);
+
+      if (!result.success) {
+        throw result.error;
+      }
+
+      log.info('[Auth] OTPコード送信成功:', email);
+      // 認証コード入力画面へ遷移
+      router.push(`/auth/verify?email=${encodeURIComponent(email)}`);
     } catch (err) {
-      // エラーはuseSignUpフック内で処理される
+      const errorMessage = err instanceof Error ? err.message : 'メール送信に失敗しました';
+      setError(errorMessage);
+      log.error('[Auth] OTPコード送信エラー:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const isFormValid =
-    username.length > 0 &&
-    email.length > 0 &&
-    password.length >= 6 &&
-    password === confirmPassword;
-
-  const passwordMismatch =
-    confirmPassword.length > 0 && password !== confirmPassword;
+  const isEmailValid = email.length > 0 && email.includes('@');
 
   return (
     <View className="w-full px-6">
@@ -64,7 +66,7 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
       >
         <Ionicons name="mail-outline" size={20} color="#6B7280" />
         <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-base font-semibold ml-3">
-          メールアドレスで続ける
+          {t('auth.signUpWithEmail')}
         </Text>
         <Ionicons
           name={isExpanded ? 'chevron-up' : 'chevron-down'}
@@ -76,40 +78,28 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
 
       {/* 展開時のフォーム */}
       {isExpanded && (
-        <ScrollView className="mt-4">
+        <View className="mt-4">
           {/* エラーメッセージ */}
           {error && (
-            <View className="mb-4 p-4 bg-red-50 rounded-lg">
-              <Text className="text-red-600 text-sm">{error}</Text>
+            <View className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
+              <Text className="text-red-600 dark:text-red-400 text-sm">{error}</Text>
             </View>
           )}
-
-          {/* ユーザー名入力 */}
-          <View className="mb-4">
-            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
-              ユーザー名
-            </Text>
-            <TextInput
-              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
-              placeholder="username"
-              value={username}
-              onChangeText={setUsername}
-              autoCapitalize="none"
-              autoCorrect={false}
-              editable={!isLoading}
-            />
-          </View>
 
           {/* メールアドレス入力 */}
           <View className="mb-4">
             <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
-              メールアドレス
+              {t('auth.email')}
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
+              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base text-foreground dark:text-dark-foreground"
               placeholder="your@email.com"
+              placeholderTextColor="#9CA3AF"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(text) => {
+                setEmail(text);
+                setError(null);
+              }}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -117,63 +107,22 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
             />
           </View>
 
-          {/* パスワード入力 */}
-          <View className="mb-4">
-            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
-              パスワード
-            </Text>
-            <TextInput
-              className="w-full px-4 py-3 border border-border dark:border-dark-border rounded-lg bg-surface dark:bg-dark-surface text-base"
-              placeholder="••••••••"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              editable={!isLoading}
-            />
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-              6文字以上で入力してください
-            </Text>
-          </View>
-
-          {/* パスワード確認入力 */}
-          <View className="mb-6">
-            <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
-              パスワード（確認）
-            </Text>
-            <TextInput
-              className={`w-full px-4 py-3 border rounded-lg bg-surface dark:bg-dark-surface text-base ${
-                passwordMismatch ? 'border-red-500' : 'border-border dark:border-dark-border'
-              }`}
-              placeholder="••••••••"
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              secureTextEntry
-              editable={!isLoading}
-            />
-            {passwordMismatch && (
-              <Text className="text-xs text-red-500 mt-1">
-                パスワードが一致しません
-              </Text>
-            )}
-          </View>
-
-          {/* サインアップボタン */}
           <TouchableOpacity
             className={`w-full py-4 rounded-lg ${
-              isFormValid && !isLoading ? 'bg-blue-600' : 'bg-gray-300'
+              isEmailValid && !isLoading ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
             }`}
-            onPress={handleSubmit}
-            disabled={!isFormValid || isLoading}
+            onPress={handleSendCode}
+            disabled={!isEmailValid || isLoading}
           >
             {isLoading ? (
               <ActivityIndicator color="white" />
             ) : (
               <Text className="text-white text-center text-base font-semibold">
-                アカウント作成
+                {t('auth.sendSignUpCode')}
               </Text>
             )}
           </TouchableOpacity>
-        </ScrollView>
+        </View>
       )}
     </View>
   );

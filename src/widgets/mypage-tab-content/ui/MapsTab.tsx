@@ -6,13 +6,14 @@
  */
 
 import React from 'react';
-import { FlatList, Alert } from 'react-native';
+import { FlatList, Alert, ActivityIndicator, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
-import { AsyncBoundary } from '@/shared/ui';
+import { EmptyState, ErrorView } from '@/shared/ui';
 import { MapCompactCard } from '@/widgets/map-cards';
+import { colors } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 
 interface MapsTabProps {
@@ -67,38 +68,57 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
     router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as any);
   };
 
+  // エラー状態（プロフィールは表示しつつエラーを表示）
+  if (error) {
+    return (
+      <FlatList
+        data={[]}
+        keyExtractor={() => 'error'}
+        renderItem={() => null}
+        ListHeaderComponent={ListHeaderComponent}
+        ListEmptyComponent={<ErrorView error={error} />}
+        onScroll={onScroll}
+        scrollEventThrottle={16}
+        className="bg-surface dark:bg-dark-surface"
+        contentContainerClassName="flex-grow"
+      />
+    );
+  }
+
   return (
-    <AsyncBoundary
-      isLoading={isLoading}
-      error={error}
-      data={maps}
-      loadingMessage={t('mypage.loadingMaps')}
-      emptyMessage={t('empty.noMapsYet')}
-      emptyIonIcon="map"
-    >
-      {(data) => (
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <MapCompactCard
-              map={item}
-              currentUserId={currentUserId}
-              isOwner={isOwner}
-              onPress={() => handleMapPress(item)}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onArticlePress={handleArticlePress}
-              onUserPress={handleUserPress}
-            />
-          )}
-          ListHeaderComponent={ListHeaderComponent}
-          onScroll={onScroll}
-          scrollEventThrottle={16}
-          className="bg-surface dark:bg-dark-surface"
-          contentContainerClassName="flex-grow"
+    <FlatList
+      data={maps ?? []}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <MapCompactCard
+          map={item}
+          currentUserId={currentUserId}
+          isOwner={isOwner}
+          onPress={() => handleMapPress(item)}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onArticlePress={handleArticlePress}
+          onUserPress={handleUserPress}
         />
       )}
-    </AsyncBoundary>
+      ListHeaderComponent={ListHeaderComponent}
+      ListEmptyComponent={
+        isLoading ? (
+          <View className="py-12 items-center">
+            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          </View>
+        ) : (
+          <EmptyState
+            message={t('empty.noMapsYet')}
+            ionIcon="map"
+            variant="inline"
+          />
+        )
+      }
+      onScroll={onScroll}
+      scrollEventThrottle={16}
+      className="bg-surface dark:bg-dark-surface"
+      contentContainerClassName="flex-grow"
+    />
   );
 }

@@ -31,6 +31,8 @@ export default {
     share: '分享',
     post: '發布',
     user: '用戶',
+    skip: '跳過',
+    select: '請選擇',
   },
 
   // 標籤欄
@@ -53,6 +55,56 @@ export default {
     loginRequiredMessage: '請登入後使用此功能',
     continueWithApple: '透過Apple登入',
     continueWithGoogle: '透過Google登入',
+    // OTP認證（登入）
+    continueWithEmail: '使用電子郵件繼續',
+    sendCode: '發送驗證碼',
+    codeSentTo: '已向 %{email} 發送6位驗證碼',
+    authCode: '驗證碼（6位）',
+    verify: '驗證',
+    useAnotherEmail: '使用其他電子郵件',
+    resendCode: '重新發送驗證碼',
+    invalidCode: '驗證碼錯誤',
+    resendFailed: '重新發送失敗',
+    // OTP認證（註冊）
+    signUpWithEmail: '使用電子郵件註冊',
+    sendSignUpCode: '發送註冊驗證碼',
+    signUpCodeSentTo: '已向 %{email} 發送註冊驗證碼',
+    createAccount: '建立帳戶',
+  },
+
+  // 引導
+  onboarding: {
+    steps: {
+      profile: '個人資料設定',
+      demographics: '基本資訊',
+    },
+    profile: {
+      title: '個人資料設定',
+      description: '設定您的個人資料',
+      username: '使用者名稱',
+      usernamePlaceholder: 'user_name',
+      usernameHint: '只能使用英文字母、數字和底線',
+      displayName: '顯示名稱',
+      displayNamePlaceholder: '暱稱',
+      displayNameHint: '輸入您的姓名或暱稱',
+      continue: '繼續',
+      usernameRequired: '請輸入使用者名稱',
+      usernameInvalid: '使用者名稱只能包含英文字母、數字和底線',
+      usernameTooShort: '使用者名稱至少需要3個字元',
+      usernameTooLong: '使用者名稱最多20個字元',
+      usernameTaken: '此使用者名稱已被使用',
+      displayNameRequired: '請輸入顯示名稱',
+    },
+    demographics: {
+      title: '個人資料',
+      description: '請告訴我們一些關於您的資訊，以便為您提供個人化推薦（選填）',
+      gender: '性別',
+      ageGroup: '年齡層',
+      country: '居住國家',
+      prefecture: '縣市',
+      region: '州/地區',
+      continue: '繼續',
+    },
   },
 
   // 地圖

@@ -194,14 +194,19 @@ export function CollectionsTab({
     [isOwner, t]
   );
 
-  // ローディング中
-  if (isLoading) {
-    return <Loading message={t('collection.loadingMessage')} />;
-  }
-
-  // エラー
+  // エラー状態（プロフィールは表示しつつエラーを表示）
   if (error) {
-    return <ErrorView error={error} />;
+    return (
+      <FlatList
+        data={[]}
+        keyExtractor={() => 'error'}
+        renderItem={() => null}
+        ListHeaderComponent={ListHeaderComponent}
+        ListEmptyComponent={<ErrorView error={error} />}
+        className="bg-surface dark:bg-dark-surface"
+        contentContainerClassName="flex-grow"
+      />
+    );
   }
 
   return (
@@ -220,7 +225,7 @@ export function CollectionsTab({
       ListHeaderComponent={ListHeaderComponent}
       className="bg-surface dark:bg-dark-surface"
       contentContainerClassName="flex-grow"
-      ListEmptyComponent={renderEmptyState}
+      ListEmptyComponent={isLoading ? <Loading variant="inline" /> : renderEmptyState}
     />
   );
 }
