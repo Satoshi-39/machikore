@@ -1,0 +1,7 @@
+id,auth_type,email,password,last_name,first_name,birth_date,username,display_name,gender,age_group,country,prefecture,bio,interests,content_plan,status
+1,google,miki.tanaka0315@gmail.com,,田中,美紀,1998-03-15,miki_cafe,ミキ,female,20s,jp,東京都,カフェ巡りが趣味。都内の隠れ家カフェを探してます,カフェ・スイーツ・インスタ映え,都内おしゃれカフェマップ,未作成
+2,google,taro.yamamoto92@gmail.com,,山本,太郎,1992-08-22,taro_ramen,タロウ,male,30s,jp,大阪府,ラーメン食べ歩き歴10年。関西の名店を紹介します,ラーメン・つけ麺・グルメ,関西ラーメン巡りマップ,未作成
+3,google,yuki.sato_tokyo@gmail.com,,佐藤,由紀,1995-11-08,yuki_outdoor,ゆき,female,20s,jp,神奈川県,週末は山登りとキャンプ。自然が好き,アウトドア・キャンプ・登山,関東キャンプ場マップ,未作成
+4,apple,k.suzuki1988@icloud.com,,鈴木,健一,1988-04-30,kenichi_bar,ケンイチ,male,30s,jp,東京都,バー巡りが生きがい。隠れ家バーを探す旅,バー・ウイスキー・カクテル,都内隠れ家バーマップ,未作成
+5,apple,rina.m.0612@icloud.com,,松本,里奈,2000-06-12,rina_sweets,りな,female,20s,jp,福岡県,パンケーキとかき氷が大好き！九州のスイーツ情報発信中,スイーツ・パンケーキ・かき氷,福岡スイーツマップ,未作成
+6,apple,hiroshi.takeda77@icloud.com,,武田,浩,1977-02-19,hiro_onsen,ヒロシ,male,40s,jp,静岡県,温泉ソムリエ。全国の秘湯を巡ってます,温泉・旅行・秘湯,全国秘湯マップ,未作成
