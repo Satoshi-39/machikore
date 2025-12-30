@@ -70,6 +70,11 @@ export default {
     sendSignUpCode: '发送注册验证码',
     signUpCodeSentTo: '已向 %{email} 发送注册验证码',
     createAccount: '创建账户',
+    emailAlreadyRegistered: '该邮箱已被注册',
+    emailNotRegistered: '该邮箱未注册',
+    emailPendingDeletion: '该邮箱正在注销中，无法注册',
+    accountPendingDeletion: '该账户正在注销中，无法登录',
+    sendCodeFailed: '验证码发送失败',
   },
 
   // 引导
@@ -138,6 +143,14 @@ export default {
     targetMap: '添加到地图',
     belongingMap: '所属地图',
     noMapSelected: '未选择地图',
+  },
+
+  // 标签
+  label: {
+    noLabel: '无标签',
+    noLabels: '暂无标签',
+    addFromMapSettings: '可在地图设置中添加标签',
+    selectLabel: '选择标签（可选）',
   },
 
   // 地点
@@ -368,6 +381,26 @@ export default {
     signOut: '退出登录',
     signOutConfirm: '确定要退出登录吗？',
     deleteAccount: '删除账户',
+    // 账户设置
+    accountSettings: '账户设置',
+    socialConnections: '社交账号绑定',
+    notConnected: '未绑定',
+    accountManagement: '账户管理',
+    deleteAccountProcedure: '注销账户',
+    deleteAccountPage: {
+      title: '注销账户',
+      description: '删除账户后，所有数据将被永久删除。此操作无法撤销。',
+      whatWillBeDeleted: '以下所有数据将被删除',
+      item1: '个人资料信息',
+      item2: '创建的地图和地点',
+      item3: '点赞、评论和收藏',
+      item4: '关注和粉丝信息',
+      reasonLabel: '注销原因（可选）',
+      reasonPlaceholder: '请告诉我们您注销的原因',
+      confirmTitle: '确认注销',
+      confirmMessage: '确定要注销账户吗？\n所有数据将被永久删除。',
+      confirm: '注销账户',
+    },
     comingSoon: '即将推出',
     comingSoonMessage: '此功能即将推出。',
     effectiveDate: '%{date} 生效',

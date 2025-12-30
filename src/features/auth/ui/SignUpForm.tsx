@@ -17,6 +17,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { sendOtpCode } from '@/shared/api/supabase/auth';
+import { checkEmailExists, checkEmailHasPendingDeletion } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -36,6 +37,22 @@ export function SignUpForm() {
     setError(null);
 
     try {
+      // メールアドレスが既に登録されているかチェック
+      const emailExists = await checkEmailExists(email);
+      if (emailExists) {
+        setError(t('auth.emailAlreadyRegistered'));
+        setIsLoading(false);
+        return;
+      }
+
+      // 退会手続き中のメールアドレスかチェック
+      const hasPendingDeletion = await checkEmailHasPendingDeletion(email);
+      if (hasPendingDeletion) {
+        setError(t('auth.emailPendingDeletion'));
+        setIsLoading(false);
+        return;
+      }
+
       const result = await sendOtpCode(email);
 
       if (!result.success) {
@@ -46,7 +63,7 @@ export function SignUpForm() {
       // 認証コード入力画面へ遷移
       router.push(`/auth/verify?email=${encodeURIComponent(email)}`);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'メール送信に失敗しました';
+      const errorMessage = err instanceof Error ? err.message : t('auth.sendCodeFailed');
       setError(errorMessage);
       log.error('[Auth] OTPコード送信エラー:', err);
     } finally {

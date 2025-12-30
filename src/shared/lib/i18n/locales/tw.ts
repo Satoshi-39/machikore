@@ -70,6 +70,11 @@ export default {
     sendSignUpCode: '發送註冊驗證碼',
     signUpCodeSentTo: '已向 %{email} 發送註冊驗證碼',
     createAccount: '建立帳戶',
+    emailAlreadyRegistered: '此電子郵件已被註冊',
+    emailNotRegistered: '此電子郵件未註冊',
+    emailPendingDeletion: '此電子郵件正在註銷中，無法註冊',
+    accountPendingDeletion: '此帳戶正在註銷中，無法登入',
+    sendCodeFailed: '驗證碼發送失敗',
   },
 
   // 引導
@@ -138,6 +143,14 @@ export default {
     targetMap: '新增到地圖',
     belongingMap: '所屬地圖',
     noMapSelected: '未選擇地圖',
+  },
+
+  // 標籤
+  label: {
+    noLabel: '無標籤',
+    noLabels: '暫無標籤',
+    addFromMapSettings: '可在地圖設定中新增標籤',
+    selectLabel: '選擇標籤（可選）',
   },
 
   // 地點
@@ -368,6 +381,26 @@ export default {
     signOut: '登出',
     signOutConfirm: '確定要登出嗎？',
     deleteAccount: '刪除帳號',
+    // 帳號設定
+    accountSettings: '帳號設定',
+    socialConnections: '社群帳號綁定',
+    notConnected: '未綁定',
+    accountManagement: '帳號管理',
+    deleteAccountProcedure: '註銷帳號',
+    deleteAccountPage: {
+      title: '註銷帳號',
+      description: '刪除帳號後，所有資料將被永久刪除。此操作無法復原。',
+      whatWillBeDeleted: '以下所有資料將被刪除',
+      item1: '個人資料',
+      item2: '建立的地圖和景點',
+      item3: '按讚、留言和收藏',
+      item4: '追蹤和粉絲資訊',
+      reasonLabel: '註銷原因（選填）',
+      reasonPlaceholder: '請告訴我們您註銷的原因',
+      confirmTitle: '確認註銷',
+      confirmMessage: '確定要註銷帳號嗎？\n所有資料將被永久刪除。',
+      confirm: '註銷帳號',
+    },
     comingSoon: '即將推出',
     comingSoonMessage: '此功能即將推出。',
     effectiveDate: '%{date} 生效',

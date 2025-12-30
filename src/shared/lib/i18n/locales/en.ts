@@ -70,6 +70,11 @@ export default {
     sendSignUpCode: 'Send Sign Up Code',
     signUpCodeSentTo: 'We sent a sign up code to %{email}',
     createAccount: 'Create Account',
+    emailAlreadyRegistered: 'This email is already registered',
+    emailNotRegistered: 'This email is not registered',
+    emailPendingDeletion: 'This email is pending deletion and cannot be registered',
+    accountPendingDeletion: 'This account is pending deletion and cannot sign in',
+    sendCodeFailed: 'Failed to send code',
   },
 
   // Onboarding
@@ -105,6 +110,11 @@ export default {
       region: 'State / Region',
       continue: 'Continue',
     },
+    completion: {
+      title: 'All Set!',
+      subtitle: 'Welcome to Machikore!\nDiscover your favorite spots and create your own maps.',
+      start: 'Get Started',
+    },
   },
 
   // Maps
@@ -138,6 +148,14 @@ export default {
     targetMap: 'Add to Map',
     belongingMap: 'Belonging Map',
     noMapSelected: 'No map selected',
+  },
+
+  // Labels
+  label: {
+    noLabel: 'No Label',
+    noLabels: 'No labels available',
+    addFromMapSettings: 'Add labels from map settings',
+    selectLabel: 'Select label (optional)',
   },
 
   // Spots
@@ -368,6 +386,26 @@ export default {
     signOut: 'Sign Out',
     signOutConfirm: 'Are you sure you want to sign out?',
     deleteAccount: 'Delete Account',
+    // Account Settings
+    accountSettings: 'Account Settings',
+    socialConnections: 'Social Connections',
+    notConnected: 'Not connected',
+    accountManagement: 'Account Management',
+    deleteAccountProcedure: 'Delete Account',
+    deleteAccountPage: {
+      title: 'Delete Account',
+      description: 'Deleting your account will permanently remove all your data. This action cannot be undone.',
+      whatWillBeDeleted: 'All of the following data will be deleted',
+      item1: 'Profile information',
+      item2: 'Maps and spots you created',
+      item3: 'Likes, comments, and bookmarks',
+      item4: 'Followers and following',
+      reasonLabel: 'Reason for leaving (optional)',
+      reasonPlaceholder: 'Please tell us why you are leaving',
+      confirmTitle: 'Confirm Account Deletion',
+      confirmMessage: 'Are you sure you want to delete your account?\nAll data will be permanently deleted.',
+      confirm: 'Delete Account',
+    },
     comingSoon: 'Coming Soon',
     comingSoonMessage: 'This feature is coming soon.',
     effectiveDate: 'Effective %{date}',

@@ -70,6 +70,11 @@ export default {
     sendSignUpCode: '登録用コードを送信',
     signUpCodeSentTo: '%{email} に登録用コードを送信しました',
     createAccount: 'アカウント作成',
+    emailAlreadyRegistered: 'このメールアドレスは既に登録されています',
+    emailNotRegistered: 'このメールアドレスは登録されていません',
+    emailPendingDeletion: 'このメールアドレスは退会手続き中のため登録できません',
+    accountPendingDeletion: 'このアカウントは退会手続き中のためログインできません',
+    sendCodeFailed: 'コードの送信に失敗しました',
   },
 
   // オンボーディング
@@ -105,6 +110,11 @@ export default {
       region: '州・地域',
       continue: '次へ',
     },
+    completion: {
+      title: '設定完了！',
+      subtitle: '街コレへようこそ！\nお気に入りのスポットを見つけて、あなただけのマップを作りましょう。',
+      start: '始める',
+    },
   },
 
   // マップ
@@ -138,6 +148,14 @@ export default {
     targetMap: '追加するマップ',
     belongingMap: '所属するマップ',
     noMapSelected: 'マップが選択されていません',
+  },
+
+  // ラベル
+  label: {
+    noLabel: 'ラベルなし',
+    noLabels: 'ラベルがありません',
+    addFromMapSettings: 'マップ設定でラベルを追加できます',
+    selectLabel: 'ラベルを選択（任意）',
   },
 
   // スポット
@@ -381,6 +399,26 @@ export default {
     signOut: 'サインアウト',
     signOutConfirm: 'サインアウトしてもよろしいですか？',
     deleteAccount: 'アカウント削除',
+    // アカウント設定
+    accountSettings: 'アカウント設定',
+    socialConnections: 'ソーシャル連携',
+    notConnected: '未連携',
+    accountManagement: 'アカウント管理',
+    deleteAccountProcedure: '退会手続き',
+    deleteAccountPage: {
+      title: '退会手続き',
+      description: 'アカウントを削除すると、すべてのデータが完全に削除されます。この操作は取り消すことができません。',
+      whatWillBeDeleted: '以下のすべてのデータが削除されます',
+      item1: 'プロフィール情報',
+      item2: '作成したマップとスポット',
+      item3: 'いいね、コメント、ブックマーク',
+      item4: 'フォロー・フォロワー情報',
+      reasonLabel: '退会理由（任意）',
+      reasonPlaceholder: 'よろしければ退会理由をお聞かせください',
+      confirmTitle: '退会の確認',
+      confirmMessage: '本当に退会しますか？\nすべてのデータが完全に削除されます。',
+      confirm: '退会する',
+    },
     comingSoon: '準備中',
     comingSoonMessage: 'この機能は準備中です。',
     effectiveDate: '%{date} 施行',

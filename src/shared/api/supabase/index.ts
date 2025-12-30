@@ -27,3 +27,4 @@ export * from './transport-hubs';
 export * from './categories';
 export * from './tags';
 export * from './user-preferences';
+export * from './account-deletion';

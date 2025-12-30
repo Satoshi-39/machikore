@@ -1,0 +1,44 @@
+-- アカウント削除の定期実行ジョブ設定
+--
+-- 前提条件:
+-- 1. Supabaseダッシュボードで pg_cron と pg_net 拡張機能を有効化
+-- 2. Edge Function の環境変数 CRON_SECRET を設定
+--
+-- 手動実行が必要な場合は、Supabaseダッシュボードの SQL Editor で実行してください
+
+-- pg_cron と pg_net 拡張機能を有効化（Supabaseダッシュボードで事前に有効化が必要）
+-- CREATE EXTENSION IF NOT EXISTS pg_cron;
+-- CREATE EXTENSION IF NOT EXISTS pg_net;
+
+-- 注意: 以下のSQLは pg_cron と pg_net が有効化された後に
+-- Supabaseダッシュボードの SQL Editor で手動実行してください
+--
+-- ========================================
+-- pg_cronジョブの設定（手動実行用）
+-- ========================================
+--
+-- 毎日午前3時（JST = UTC+9、つまりUTC 18:00）に実行
+-- SELECT cron.schedule(
+--   'process-account-deletions',  -- ジョブ名
+--   '0 18 * * *',                 -- cron式: 毎日UTC 18:00（JST 3:00）
+--   $$
+--   SELECT net.http_post(
+--     url := 'https://YOUR_PROJECT_REF.supabase.co/functions/v1/account-deletion',
+--     headers := jsonb_build_object(
+--       'Content-Type', 'application/json',
+--       'x-cron-secret', 'YOUR_CRON_SECRET'
+--     ),
+--     body := jsonb_build_object('action', 'process')
+--   );
+--   $$
+-- );
+--
+-- ジョブの確認
+-- SELECT * FROM cron.job;
+--
+-- ジョブの削除（必要な場合）
+-- SELECT cron.unschedule('process-account-deletions');
+-- ========================================
+
+-- このマイグレーションファイルはドキュメントとして残すもので、
+-- 実際のpg_cron設定はSupabaseダッシュボードで行う必要があります。

@@ -613,6 +613,48 @@ export type Database = {
           },
         ]
       }
+      deletion_requests: {
+        Row: {
+          cancelled_at: string | null
+          completed_at: string | null
+          created_at: string
+          email: string | null
+          id: string
+          reason: string | null
+          requested_at: string
+          scheduled_at: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancelled_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          reason?: string | null
+          requested_at?: string
+          scheduled_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancelled_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          reason?: string | null
+          requested_at?: string
+          scheduled_at?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       featured_carousel_items: {
         Row: {
           category_id: string | null
@@ -1415,6 +1457,7 @@ export type Database = {
       search_analytics: {
         Row: {
           age_group: string | null
+          country: string | null
           created_at: string
           first_searched_at: string
           gender: string | null
@@ -1428,6 +1471,7 @@ export type Database = {
         }
         Insert: {
           age_group?: string | null
+          country?: string | null
           created_at?: string
           first_searched_at?: string
           gender?: string | null
@@ -1441,6 +1485,7 @@ export type Database = {
         }
         Update: {
           age_group?: string | null
+          country?: string | null
           created_at?: string
           first_searched_at?: string
           gender?: string | null
@@ -2464,6 +2509,10 @@ export type Database = {
             }
             Returns: string
           }
+      check_email_has_pending_deletion: {
+        Args: { check_email: string }
+        Returns: boolean
+      }
       clear_push_token: { Args: never; Returns: undefined }
       clear_search_history: {
         Args: { p_search_type?: string }
@@ -2643,18 +2692,32 @@ export type Database = {
           isSetofReturn: false
         }
       }
-      get_popular_searches: {
-        Args: {
-          p_limit?: number
-          p_prefecture?: string
-          p_search_type?: string
-        }
-        Returns: {
-          last_searched_at: string
-          query: string
-          search_count: number
-        }[]
-      }
+      get_popular_searches:
+        | {
+            Args: {
+              p_limit?: number
+              p_prefecture?: string
+              p_search_type?: string
+            }
+            Returns: {
+              last_searched_at: string
+              query: string
+              search_count: number
+            }[]
+          }
+        | {
+            Args: {
+              p_country?: string
+              p_limit?: number
+              p_prefecture?: string
+              p_search_type?: string
+            }
+            Returns: {
+              last_searched_at: string
+              query: string
+              search_count: number
+            }[]
+          }
       get_popular_tags_by_category: {
         Args: { p_category_id: string; p_limit?: number }
         Returns: {

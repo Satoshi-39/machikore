@@ -247,21 +247,18 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           />
         </SettingsSection>
 
-        {/* 危険なアクション */}
+        {/* アカウント操作 */}
         <SettingsSection title={t('settings.accountActions')}>
+          <SettingsItem
+            icon="settings-outline"
+            label={t('settings.accountSettings')}
+            onPress={() => router.push('/settings/account')}
+          />
           <SettingsItem
             icon="log-out-outline"
             label={t('settings.signOut')}
             onPress={handleSignOutPress}
             showArrow={false}
-            destructive
-          />
-          <SettingsItem
-            icon="trash-outline"
-            label={t('settings.deleteAccount')}
-            onPress={showComingSoon}
-            showArrow={false}
-            destructive
           />
         </SettingsSection>
 
