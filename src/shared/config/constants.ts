@@ -576,3 +576,12 @@ export const SHARE_URLS = {
   /** スポットの共有URL */
   spot: (spotId: string) => `${SHARE_DOMAIN}/spots/${spotId}`,
 } as const;
+
+// ===============================
+// 外部リンク
+// ===============================
+
+export const EXTERNAL_LINKS = {
+  /** ヘルプ（Notion） */
+  HELP: 'https://cobalt-aurora-096.notion.site/2d6b92c6afac80fc8004fa756426ed7f?pvs=74',
+} as const;

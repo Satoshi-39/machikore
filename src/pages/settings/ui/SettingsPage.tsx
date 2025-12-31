@@ -5,12 +5,12 @@
  */
 
 import React from 'react';
-import { View, Text, ScrollView, Pressable, Switch, Alert } from 'react-native';
+import { View, Text, ScrollView, Pressable, Switch, Alert, Linking } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSignOut } from '@/features/auth';
 import { PageHeader } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { colors, EXTERNAL_LINKS } from '@/shared/config';
 import { useThemePreference } from '@/entities/user/api';
 import { useIsPremium } from '@/entities/subscription';
 import { useI18n } from '@/shared/lib/i18n';
@@ -227,7 +227,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="help-circle-outline"
             label={t('settings.help')}
-            onPress={showComingSoon}
+            onPress={() => Linking.openURL(EXTERNAL_LINKS.HELP)}
           />
           <SettingsItem
             icon="document-text-outline"
