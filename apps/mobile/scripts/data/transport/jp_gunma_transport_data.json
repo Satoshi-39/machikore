@@ -1,0 +1,2592 @@
+{
+  "fetchedAt": "2025-12-24T05:49:18.943Z",
+  "prefecture_id": "jp_gunma",
+  "prefecture_name": "群馬県",
+  "stats": {
+    "station": 134,
+    "airport": 0,
+    "ferry_terminal": 1,
+    "bus_terminal": 9,
+    "total": 144
+  },
+  "data": [
+    {
+      "id": "jp_gunma_station_264415788",
+      "osm_id": 264415788,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "駒形",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3541169,
+      "longitude": 139.1397662
+    },
+    {
+      "id": "jp_gunma_station_264415837",
+      "osm_id": 264415837,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "前橋大島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maebashi-Oshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3705515,
+      "longitude": 139.1096721
+    },
+    {
+      "id": "jp_gunma_station_264460730",
+      "osm_id": 264460730,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "神戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Godo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5374168,
+      "longitude": 139.3563436
+    },
+    {
+      "id": "jp_gunma_station_264461214",
+      "osm_id": 264461214,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "沢入",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5807535,
+      "longitude": 139.3962433
+    },
+    {
+      "id": "jp_gunma_station_264461336",
+      "osm_id": 264461336,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "水沼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizunuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4997652,
+      "longitude": 139.2773051
+    },
+    {
+      "id": "jp_gunma_station_264461777",
+      "osm_id": 264461777,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "小中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5356866,
+      "longitude": 139.3378794
+    },
+    {
+      "id": "jp_gunma_station_264461907",
+      "osm_id": 264461907,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "中野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5242606,
+      "longitude": 139.3171799
+    },
+    {
+      "id": "jp_gunma_station_264462300",
+      "osm_id": 264462300,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "大間々",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4346091,
+      "longitude": 139.2774321
+    },
+    {
+      "id": "jp_gunma_station_264814419",
+      "osm_id": 264814419,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "水上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minakami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7786135,
+      "longitude": 138.9689414
+    },
+    {
+      "id": "jp_gunma_station_264814632",
+      "osm_id": 264814632,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上牧",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamimoku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7354657,
+      "longitude": 138.9845777
+    },
+    {
+      "id": "jp_gunma_station_264815149",
+      "osm_id": 264815149,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "後閑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gokan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6792522,
+      "longitude": 139.0005798
+    },
+    {
+      "id": "jp_gunma_station_264817858",
+      "osm_id": 264817858,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "井野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3570844,
+      "longitude": 139.0230202
+    },
+    {
+      "id": "jp_gunma_station_308840211",
+      "osm_id": 308840211,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "川俣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawamata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2088339,
+      "longitude": 139.5264678
+    },
+    {
+      "id": "jp_gunma_station_335660626",
+      "osm_id": 335660626,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "丸山下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maruyama-shita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4168086,
+      "longitude": 139.3216927
+    },
+    {
+      "id": "jp_gunma_station_335660644",
+      "osm_id": 335660644,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "樋越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4155327,
+      "longitude": 139.1735854
+    },
+    {
+      "id": "jp_gunma_station_335661082",
+      "osm_id": 335661082,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "江木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Egi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4073386,
+      "longitude": 139.1337267
+    },
+    {
+      "id": "jp_gunma_station_335661322",
+      "osm_id": 335661322,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3975191,
+      "longitude": 139.1175449
+    },
+    {
+      "id": "jp_gunma_station_335661607",
+      "osm_id": 335661607,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "大胡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4130012,
+      "longitude": 139.1566521
+    },
+    {
+      "id": "jp_gunma_station_335661612",
+      "osm_id": 335661612,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "城東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3911926,
+      "longitude": 139.0810836
+    },
+    {
+      "id": "jp_gunma_station_335661871",
+      "osm_id": 335661871,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "心臓血管センター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinzo-Kekkan Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.405169,
+      "longitude": 139.1288142
+    },
+    {
+      "id": "jp_gunma_station_355840576",
+      "osm_id": 355840576,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "中之条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakanojo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5853523,
+      "longitude": 138.8521738
+    },
+    {
+      "id": "jp_gunma_station_355840633",
+      "osm_id": 355840633,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "金島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5294462,
+      "longitude": 138.9765506
+    },
+    {
+      "id": "jp_gunma_station_355840643",
+      "osm_id": 355840643,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "郷原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gobara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5488198,
+      "longitude": 138.8011866
+    },
+    {
+      "id": "jp_gunma_station_355840761",
+      "osm_id": 355840761,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.552654,
+      "longitude": 138.784543
+    },
+    {
+      "id": "jp_gunma_station_355840762",
+      "osm_id": 355840762,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "群馬原町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gunma-Haramachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5718153,
+      "longitude": 138.8243718
+    },
+    {
+      "id": "jp_gunma_station_355840764",
+      "osm_id": 355840764,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野上温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onogami-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.556897,
+      "longitude": 138.904724
+    },
+    {
+      "id": "jp_gunma_station_355841473",
+      "osm_id": 355841473,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "祖母島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ubashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5406141,
+      "longitude": 138.9570394
+    },
+    {
+      "id": "jp_gunma_station_355841574",
+      "osm_id": 355841574,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onogami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5525161,
+      "longitude": 138.9222773
+    },
+    {
+      "id": "jp_gunma_station_355841781",
+      "osm_id": 355841781,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "市城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichishiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.570457,
+      "longitude": 138.882592
+    },
+    {
+      "id": "jp_gunma_station_355842284",
+      "osm_id": 355842284,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "群馬大津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gunma-Otsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5537582,
+      "longitude": 138.6278307
+    },
+    {
+      "id": "jp_gunma_station_355842296",
+      "osm_id": 355842296,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5137508,
+      "longitude": 138.5291273
+    },
+    {
+      "id": "jp_gunma_station_355842392",
+      "osm_id": 355842392,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽根尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haneo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.550006,
+      "longitude": 138.6053878
+    },
+    {
+      "id": "jp_gunma_station_355842393",
+      "osm_id": 355842393,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "袋倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukurogura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5440674,
+      "longitude": 138.5788983
+    },
+    {
+      "id": "jp_gunma_station_355842579",
+      "osm_id": 355842579,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "万座・鹿沢口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Manza-Kazawaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5320685,
+      "longitude": 138.5511714
+    },
+    {
+      "id": "jp_gunma_station_355842669",
+      "osm_id": 355842669,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5632327,
+      "longitude": 138.7599489
+    },
+    {
+      "id": "jp_gunma_station_355842841",
+      "osm_id": 355842841,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "吾妻峡八ッ場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "東吾妻町役場 まちづくり推進課",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5592332,
+      "longitude": 138.7150316
+    },
+    {
+      "id": "jp_gunma_station_2620776337",
+      "osm_id": 2620776337,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安中榛名",
+      "name_kana": "あんなかはるな",
+      "name_translations": {
+        "en": "Annaka-Haruna"
+      },
+      "operator": "東日本旅客鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3625792,
+      "longitude": 138.8493964
+    },
+    {
+      "id": "jp_gunma_station_3032951488",
+      "osm_id": 3032951488,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上毛高原",
+      "name_kana": "じょうもうこうげん",
+      "name_translations": {
+        "en": "Jomo-Kogen"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6931647,
+      "longitude": 138.9775973
+    },
+    {
+      "id": "jp_gunma_station_3110550365",
+      "osm_id": 3110550365,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川原湯温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawarayu-Onsen"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5451,
+      "longitude": 138.6974453
+    },
+    {
+      "id": "jp_gunma_station_3402240963",
+      "osm_id": 3402240963,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "高崎問屋町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takasaki-Tonyamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3460185,
+      "longitude": 139.0170821
+    },
+    {
+      "id": "jp_gunma_station_3402288118",
+      "osm_id": 3402288118,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takasaki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3223804,
+      "longitude": 139.0127191
+    },
+    {
+      "id": "jp_gunma_station_3416345762",
+      "osm_id": 3416345762,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "敷島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikishima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5379451,
+      "longitude": 139.0338524
+    },
+    {
+      "id": "jp_gunma_station_3416345763",
+      "osm_id": 3416345763,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "津久田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5611315,
+      "longitude": 139.0428322
+    },
+    {
+      "id": "jp_gunma_station_3442398476",
+      "osm_id": 3442398476,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "群馬八幡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gunma-Yawata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3377009,
+      "longitude": 138.9574688
+    },
+    {
+      "id": "jp_gunma_station_3505733714",
+      "osm_id": 3505733714,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6030654,
+      "longitude": 139.0470124
+    },
+    {
+      "id": "jp_gunma_station_3548915148",
+      "osm_id": 3548915148,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "土合",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Doai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8304169,
+      "longitude": 138.964686
+    },
+    {
+      "id": "jp_gunma_station_3548915151",
+      "osm_id": 3548915151,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "群馬総社",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gunma-Sōja"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4155807,
+      "longitude": 139.0322835
+    },
+    {
+      "id": "jp_gunma_station_3548915154",
+      "osm_id": 3548915154,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "沼田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Numata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6424053,
+      "longitude": 139.0356609
+    },
+    {
+      "id": "jp_gunma_station_3548915155",
+      "osm_id": 3548915155,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "渋川",
+      "name_kana": "しぶかわ",
+      "name_translations": {
+        "en": "Shibukawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4906867,
+      "longitude": 139.0085523
+    },
+    {
+      "id": "jp_gunma_station_3548915156",
+      "osm_id": 3548915156,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "新前橋",
+      "name_kana": "しんまえばし",
+      "name_translations": {
+        "en": "Shin-Maebashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3788486,
+      "longitude": 139.0471407
+    },
+    {
+      "id": "jp_gunma_station_3548915158",
+      "osm_id": 3548915158,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "八木原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4635849,
+      "longitude": 139.0192379
+    },
+    {
+      "id": "jp_gunma_station_3548915159",
+      "osm_id": 3548915159,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯檜曽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yubiso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8027175,
+      "longitude": 138.9865728
+    },
+    {
+      "id": "jp_gunma_station_3556466289",
+      "osm_id": 3556466289,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "群馬藤岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gunma-Fujioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2501545,
+      "longitude": 139.083422
+    },
+    {
+      "id": "jp_gunma_station_3556466291",
+      "osm_id": 3556466291,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "倉賀野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuragano"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3002099,
+      "longitude": 139.049137
+    },
+    {
+      "id": "jp_gunma_station_3558006062",
+      "osm_id": 3558006062,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "前橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maebashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3832125,
+      "longitude": 139.0726408
+    },
+    {
+      "id": "jp_gunma_station_3558006066",
+      "osm_id": 3558006066,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimmachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.2730572,
+      "longitude": 139.1053121
+    },
+    {
+      "id": "jp_gunma_station_3705316801",
+      "osm_id": 3705316801,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北高崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Takasaki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3386912,
+      "longitude": 139.0013003
+    },
+    {
+      "id": "jp_gunma_station_3721641449",
+      "osm_id": 3721641449,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "桐生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiryu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4113225,
+      "longitude": 139.3326744
+    },
+    {
+      "id": "jp_gunma_station_3721667220",
+      "osm_id": 3721667220,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊勢崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isesaki"
+      },
+      "operator": "東日本旅客鉄道;東武鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3268395,
+      "longitude": 139.1942704
+    },
+    {
+      "id": "jp_gunma_station_3781558468",
+      "osm_id": 3781558468,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4257745,
+      "longitude": 139.2762898
+    },
+    {
+      "id": "jp_gunma_station_3781603406",
+      "osm_id": 3781603406,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "中央前橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chuo-Maebashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3911832,
+      "longitude": 139.0749235
+    },
+    {
+      "id": "jp_gunma_station_3781603409",
+      "osm_id": 3781603409,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamiizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3942753,
+      "longitude": 139.1065811
+    },
+    {
+      "id": "jp_gunma_station_3781603410",
+      "osm_id": 3781603410,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "片貝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katakai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3939498,
+      "longitude": 139.0955133
+    },
+    {
+      "id": "jp_gunma_station_3781603411",
+      "osm_id": 3781603411,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "三俣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsumata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3937327,
+      "longitude": 139.0890263
+    },
+    {
+      "id": "jp_gunma_station_3781603413",
+      "osm_id": 3781603413,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "西桐生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kiryu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4139311,
+      "longitude": 139.3338152
+    },
+    {
+      "id": "jp_gunma_ferry_terminal_3781753473",
+      "osm_id": 3781753473,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "赤岩渡船",
+      "name_kana": "あかいわとせん",
+      "name_translations": {
+        "en": "Akaiwa Tosen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2061196,
+      "longitude": 139.4345654
+    },
+    {
+      "id": "jp_gunma_station_3824450761",
+      "osm_id": 3824450761,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "横川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokokawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.336178,
+      "longitude": 138.7372548
+    },
+    {
+      "id": "jp_gunma_station_3824505339",
+      "osm_id": 3824505339,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安中",
+      "name_kana": "あんなか",
+      "name_translations": {
+        "en": "Annaka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3316945,
+      "longitude": 138.9145889
+    },
+    {
+      "id": "jp_gunma_station_3824505341",
+      "osm_id": 3824505341,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松井田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuida"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3094214,
+      "longitude": 138.797336
+    },
+    {
+      "id": "jp_gunma_station_3824505344",
+      "osm_id": 3824505344,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "磯部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isobe"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.2983921,
+      "longitude": 138.8497966
+    },
+    {
+      "id": "jp_gunma_station_3824505347",
+      "osm_id": 3824505347,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西松井田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Matsuida"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3162627,
+      "longitude": 138.7863809
+    },
+    {
+      "id": "jp_gunma_station_3830528959",
+      "osm_id": 3830528959,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "国定",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kunisada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3587439,
+      "longitude": 139.2421072
+    },
+    {
+      "id": "jp_gunma_bus_terminal_3837325008",
+      "osm_id": 3837325008,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "室田営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3848875,
+      "longitude": 138.8799653
+    },
+    {
+      "id": "jp_gunma_station_3879947894",
+      "osm_id": 3879947894,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "北藤岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Fujioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2824282,
+      "longitude": 139.0809068
+    },
+    {
+      "id": "jp_gunma_station_3893494792",
+      "osm_id": 3893494792,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "南高崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Takasaki"
+      },
+      "operator": "上信電鉄",
+      "network": "上信線",
+      "ref": null,
+      "latitude": 36.3123827,
+      "longitude": 139.0122646
+    },
+    {
+      "id": "jp_gunma_station_3893504438",
+      "osm_id": 3893504438,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐野のわたし",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sano-no-Watashi"
+      },
+      "operator": "上信電鉄",
+      "network": "上信線",
+      "ref": null,
+      "latitude": 36.3025866,
+      "longitude": 139.0182837
+    },
+    {
+      "id": "jp_gunma_station_3894565570",
+      "osm_id": 3894565570,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "根小屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Negoya"
+      },
+      "operator": "上信電鉄",
+      "network": "上信線",
+      "ref": null,
+      "latitude": 36.2914111,
+      "longitude": 139.018774
+    },
+    {
+      "id": "jp_gunma_station_3894565571",
+      "osm_id": 3894565571,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "高崎商科大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takasaki-Shoka-Daigaku-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2843094,
+      "longitude": 139.029513
+    },
+    {
+      "id": "jp_gunma_station_3895228695",
+      "osm_id": 3895228695,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "山名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamana"
+      },
+      "operator": "上信電鉄",
+      "network": "上信線",
+      "ref": null,
+      "latitude": 36.277639,
+      "longitude": 139.0381956
+    },
+    {
+      "id": "jp_gunma_station_3934184665",
+      "osm_id": 3934184665,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "新桐生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Kiryu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3951077,
+      "longitude": 139.3202394
+    },
+    {
+      "id": "jp_gunma_station_3936038295",
+      "osm_id": 3936038295,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿左美",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Azami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3869917,
+      "longitude": 139.3083378
+    },
+    {
+      "id": "jp_gunma_station_4068930993",
+      "osm_id": 4068930993,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "境町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaimachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2772141,
+      "longitude": 139.2563411
+    },
+    {
+      "id": "jp_gunma_station_4239204667",
+      "osm_id": 4239204667,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上神梅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Kambai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4700531,
+      "longitude": 139.2576786
+    },
+    {
+      "id": "jp_gunma_station_4339418745",
+      "osm_id": 4339418745,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwajuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3958165,
+      "longitude": 139.2967609
+    },
+    {
+      "id": "jp_gunma_station_4351338272",
+      "osm_id": 4351338272,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "東富岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Tomioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2608367,
+      "longitude": 138.901902
+    },
+    {
+      "id": "jp_gunma_station_4351338273",
+      "osm_id": 4351338273,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上州福島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joshu-Fukushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.25629,
+      "longitude": 138.9296803
+    },
+    {
+      "id": "jp_gunma_station_4351338274",
+      "osm_id": 4351338274,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上州一ノ宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joshu-Ichinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2530369,
+      "longitude": 138.8637154
+    },
+    {
+      "id": "jp_gunma_station_4351338275",
+      "osm_id": 4351338275,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上州七日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joshu-Nanokaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.258802,
+      "longitude": 138.8748834
+    },
+    {
+      "id": "jp_gunma_station_4351338276",
+      "osm_id": 4351338276,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上州新屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joshu-Niiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2559546,
+      "longitude": 138.9516222
+    },
+    {
+      "id": "jp_gunma_station_4351338277",
+      "osm_id": 4351338277,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "上州富岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joshu-Tomioka"
+      },
+      "operator": "上信電鉄",
+      "network": "上信線",
+      "ref": null,
+      "latitude": 36.2604237,
+      "longitude": 138.8919038
+    },
+    {
+      "id": "jp_gunma_station_4351338278",
+      "osm_id": 4351338278,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "神農原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2426671,
+      "longitude": 138.8435266
+    },
+    {
+      "id": "jp_gunma_station_4351338279",
+      "osm_id": 4351338279,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬庭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maniwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2614153,
+      "longitude": 139.0092091
+    },
+    {
+      "id": "jp_gunma_station_4351338280",
+      "osm_id": 4351338280,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "南蛇井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanjai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2380765,
+      "longitude": 138.8138092
+    },
+    {
+      "id": "jp_gunma_station_4351338281",
+      "osm_id": 4351338281,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "西富岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Tomioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2601721,
+      "longitude": 138.8831631
+    },
+    {
+      "id": "jp_gunma_station_4351338282",
+      "osm_id": 4351338282,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "西山名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Yamana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2710412,
+      "longitude": 139.0323515
+    },
+    {
+      "id": "jp_gunma_station_4351338283",
+      "osm_id": 4351338283,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "西吉井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Yoshii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2557231,
+      "longitude": 138.9663303
+    },
+    {
+      "id": "jp_gunma_station_4351338284",
+      "osm_id": 4351338284,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "千平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sendaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2301987,
+      "longitude": 138.7988431
+    },
+    {
+      "id": "jp_gunma_station_4351338286",
+      "osm_id": 4351338286,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "下仁田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimonita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2104653,
+      "longitude": 138.7864082
+    },
+    {
+      "id": "jp_gunma_station_4351338287",
+      "osm_id": 4351338287,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2560542,
+      "longitude": 138.9842924
+    },
+    {
+      "id": "jp_gunma_station_4703818697",
+      "osm_id": 4703818697,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "多々良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2734012,
+      "longitude": 139.5005392
+    },
+    {
+      "id": "jp_gunma_station_4707087114",
+      "osm_id": 4707087114,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "長野原草津口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naganohara-Kusatsuguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5463186,
+      "longitude": 138.6497771
+    },
+    {
+      "id": "jp_gunma_station_4708704149",
+      "osm_id": 4708704149,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "板倉東洋大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itakura Toyodai-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2221334,
+      "longitude": 139.648542
+    },
+    {
+      "id": "jp_gunma_station_5021413969",
+      "osm_id": 5021413969,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "木崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kizaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2711282,
+      "longitude": 139.3125327
+    },
+    {
+      "id": "jp_gunma_station_6050938024",
+      "osm_id": 6050938024,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "下新田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Shinden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4076202,
+      "longitude": 139.31512
+    },
+    {
+      "id": "jp_gunma_station_6050989579",
+      "osm_id": 6050989579,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "世良田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Serada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TI-21",
+      "latitude": 36.2730451,
+      "longitude": 139.2815566
+    },
+    {
+      "id": "jp_gunma_station_6057440277",
+      "osm_id": 6057440277,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士山下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujiyamashita"
+      },
+      "operator": "上毛電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4141075,
+      "longitude": 139.3159025
+    },
+    {
+      "id": "jp_gunma_station_6057440278",
+      "osm_id": 6057440278,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "相老",
+      "name_kana": "あいおい",
+      "name_translations": {
+        "en": "Aioi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4104667,
+      "longitude": 139.3044628
+    },
+    {
+      "id": "jp_gunma_station_6057440279",
+      "osm_id": 6057440279,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "東新川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Nikkawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4220519,
+      "longitude": 139.2676493
+    },
+    {
+      "id": "jp_gunma_station_6571461520",
+      "osm_id": 6571461520,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "新里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niisato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4185914,
+      "longitude": 139.2377038
+    },
+    {
+      "id": "jp_gunma_station_6778376057",
+      "osm_id": 6778376057,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "新川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nikkawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.41821,
+      "longitude": 139.2578184
+    },
+    {
+      "id": "jp_gunma_station_6804657899",
+      "osm_id": 6804657899,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "治良門橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jiroembashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3329724,
+      "longitude": 139.3411701
+    },
+    {
+      "id": "jp_gunma_station_7170805914",
+      "osm_id": 7170805914,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "成島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Narushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2490518,
+      "longitude": 139.5058384
+    },
+    {
+      "id": "jp_gunma_station_7370513070",
+      "osm_id": 7370513070,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "本中野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hon-Nakano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2585529,
+      "longitude": 139.4697452
+    },
+    {
+      "id": "jp_gunma_station_7370988890",
+      "osm_id": 7370988890,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "篠塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinozuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.256655,
+      "longitude": 139.44662
+    },
+    {
+      "id": "jp_gunma_station_7371039190",
+      "osm_id": 7371039190,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "東小泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Koizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2594413,
+      "longitude": 139.4290909
+    },
+    {
+      "id": "jp_gunma_station_7374373441",
+      "osm_id": 7374373441,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "西小泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Koizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2583064,
+      "longitude": 139.4083142
+    },
+    {
+      "id": "jp_gunma_station_7377453616",
+      "osm_id": 7377453616,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "小泉町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koizumi-machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2615161,
+      "longitude": 139.4199121
+    },
+    {
+      "id": "jp_gunma_station_7379053850",
+      "osm_id": 7379053850,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "竜舞",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ryumai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2791804,
+      "longitude": 139.4088764
+    },
+    {
+      "id": "jp_gunma_station_7392223332",
+      "osm_id": 7392223332,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "三枚橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sammaibashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.313581,
+      "longitude": 139.3548272
+    },
+    {
+      "id": "jp_gunma_station_7400598540",
+      "osm_id": 7400598540,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "藪塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yabuzuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3589732,
+      "longitude": 139.315266
+    },
+    {
+      "id": "jp_gunma_station_7478301445",
+      "osm_id": 7478301445,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "太田",
+      "name_kana": "おおた",
+      "name_translations": {
+        "en": "Ota"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.294102,
+      "longitude": 139.3787733
+    },
+    {
+      "id": "jp_gunma_station_7967515039",
+      "osm_id": 7967515039,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "剛志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Goshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2954884,
+      "longitude": 139.2240882
+    },
+    {
+      "id": "jp_gunma_station_7967515045",
+      "osm_id": 7967515045,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "新伊勢崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Isesaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3181973,
+      "longitude": 139.2018357
+    },
+    {
+      "id": "jp_gunma_station_7967910509",
+      "osm_id": 7967910509,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "茂林寺前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Morinji-mae"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.2254683,
+      "longitude": 139.5269854
+    },
+    {
+      "id": "jp_gunma_station_7967910511",
+      "osm_id": 7967910511,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "館林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatebayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2465491,
+      "longitude": 139.5277929
+    },
+    {
+      "id": "jp_gunma_station_7967910518",
+      "osm_id": 7967910518,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "韮川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niragawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3083277,
+      "longitude": 139.4026154
+    },
+    {
+      "id": "jp_gunma_station_7967910548",
+      "osm_id": 7967910548,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "細谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hosoya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2830305,
+      "longitude": 139.3490785
+    },
+    {
+      "id": "jp_gunma_station_8059380834",
+      "osm_id": 8059380834,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "天王宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tennojuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4149335,
+      "longitude": 139.3081896
+    },
+    {
+      "id": "jp_gunma_station_8059380836",
+      "osm_id": 8059380836,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "粕川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4167109,
+      "longitude": 139.2107507
+    },
+    {
+      "id": "jp_gunma_station_8059417355",
+      "osm_id": 8059417355,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "桐生球場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiryu-Kyujo-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4192923,
+      "longitude": 139.2981201
+    },
+    {
+      "id": "jp_gunma_station_8062047206",
+      "osm_id": 8062047206,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "北原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.413667,
+      "longitude": 139.1848652
+    },
+    {
+      "id": "jp_gunma_station_8062047207",
+      "osm_id": 8062047207,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "新屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Araya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4138103,
+      "longitude": 139.1964359
+    },
+    {
+      "id": "jp_gunma_station_8062047208",
+      "osm_id": 8062047208,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "膳",
+      "name_kana": "ぜん",
+      "name_translations": {
+        "en": "Zen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4170901,
+      "longitude": 139.221943
+    },
+    {
+      "id": "jp_gunma_station_8062667105",
+      "osm_id": 8062667105,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "渡瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Watarase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2616873,
+      "longitude": 139.5371537
+    },
+    {
+      "id": "jp_gunma_station_9658525913",
+      "osm_id": 9658525913,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "雁ヶ沢",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "東吾妻町役場 まちづくり推進課",
+      "network": null,
+      "ref": null,
+      "latitude": 36.573085,
+      "longitude": 138.7345481
+    },
+    {
+      "id": "jp_gunma_bus_terminal_11464556636",
+      "osm_id": 11464556636,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "戸倉(高速バス)",
+      "name_kana": "とくら",
+      "name_translations": {
+        "en": "Tokura(Express Bus)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8387995,
+      "longitude": 139.2483707
+    },
+    {
+      "id": "jp_gunma_station_12597670270",
+      "osm_id": 12597670270,
+      "osm_type": "node",
+      "prefecture_id": "jp_gunma",
+      "type": "station",
+      "subtype": "private",
+      "name": "花輪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5208404,
+      "longitude": 139.307863
+    },
+    {
+      "id": "jp_gunma_bus_terminal_370719967",
+      "osm_id": 370719967,
+      "osm_type": "way",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスくるこばな",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3464346,
+      "longitude": 138.9781325
+    },
+    {
+      "id": "jp_gunma_bus_terminal_604747036",
+      "osm_id": 604747036,
+      "osm_type": "way",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "草津温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusatsu Bus Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6208033,
+      "longitude": 138.5963918
+    },
+    {
+      "id": "jp_gunma_bus_terminal_664307230",
+      "osm_id": 664307230,
+      "osm_type": "way",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスターミナルおおた",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bus Terminal Ota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2754201,
+      "longitude": 139.3809656
+    },
+    {
+      "id": "jp_gunma_bus_terminal_940671748",
+      "osm_id": 940671748,
+      "osm_type": "way",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "交通広場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3059245,
+      "longitude": 139.1207944
+    },
+    {
+      "id": "jp_gunma_bus_terminal_1099779154",
+      "osm_id": 1099779154,
+      "osm_type": "way",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "おうらバスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2414588,
+      "longitude": 139.4627989
+    },
+    {
+      "id": "jp_gunma_bus_terminal_1200655689",
+      "osm_id": 1200655689,
+      "osm_type": "way",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Gongentoge",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6343182,
+      "longitude": 138.9891753
+    },
+    {
+      "id": "jp_gunma_bus_terminal_1424331586",
+      "osm_id": 1424331586,
+      "osm_type": "way",
+      "prefecture_id": "jp_gunma",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "富岡市高速バスのりば",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomioka Highway Bus Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.245043,
+      "longitude": 138.8963157
+    }
+  ]
+}

@@ -1,0 +1,3190 @@
+{
+  "fetchedAt": "2025-12-24T05:55:41.955Z",
+  "prefecture_id": "jp_okayama",
+  "prefecture_name": "岡山県",
+  "stats": {
+    "station": 149,
+    "airport": 3,
+    "ferry_terminal": 12,
+    "bus_terminal": 16,
+    "total": 180
+  },
+  "data": [
+    {
+      "id": "jp_okayama_station_265912275",
+      "osm_id": 265912275,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jyoto"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6994525,
+      "longitude": 134.0205696
+    },
+    {
+      "id": "jp_okayama_station_265917572",
+      "osm_id": 265917572,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西阿知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishiachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5858865,
+      "longitude": 133.7277106
+    },
+    {
+      "id": "jp_okayama_station_265917731",
+      "osm_id": 265917731,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新倉敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Kurashiki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5650164,
+      "longitude": 133.6786647
+    },
+    {
+      "id": "jp_okayama_station_266045429",
+      "osm_id": 266045429,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9431902,
+      "longitude": 133.3326139
+    },
+    {
+      "id": "jp_okayama_station_266045472",
+      "osm_id": 266045472,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "市岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9663099,
+      "longitude": 133.34677
+    },
+    {
+      "id": "jp_okayama_station_266045474",
+      "osm_id": 266045474,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "野馳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nochi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9149754,
+      "longitude": 133.3167741
+    },
+    {
+      "id": "jp_okayama_station_266045671",
+      "osm_id": 266045671,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9729672,
+      "longitude": 133.3707349
+    },
+    {
+      "id": "jp_okayama_station_266088575",
+      "osm_id": 266088575,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "足立",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashidachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.038904,
+      "longitude": 133.383559
+    },
+    {
+      "id": "jp_okayama_station_266089373",
+      "osm_id": 266089373,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備中神代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bitchū-Kōjiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9944566,
+      "longitude": 133.4006497
+    },
+    {
+      "id": "jp_okayama_station_266090323",
+      "osm_id": 266090323,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "井倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9316454,
+      "longitude": 133.5148576
+    },
+    {
+      "id": "jp_okayama_station_266108702",
+      "osm_id": 266108702,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "布原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nunohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9876155,
+      "longitude": 133.4213819
+    },
+    {
+      "id": "jp_okayama_station_266108795",
+      "osm_id": 266108795,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niizato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0825514,
+      "longitude": 133.3677881
+    },
+    {
+      "id": "jp_okayama_station_266922046",
+      "osm_id": 266922046,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "楢原",
+      "name_kana": "ならはら",
+      "name_translations": {
+        "en": "Narahara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0197024,
+      "longitude": 134.1894466
+    },
+    {
+      "id": "jp_okayama_station_266922446",
+      "osm_id": 266922446,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "美作江見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimasaka-Emi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0134263,
+      "longitude": 134.2197632
+    },
+    {
+      "id": "jp_okayama_station_266922646",
+      "osm_id": 266922646,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美作土居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimasaka-Doi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9950742,
+      "longitude": 134.259908
+    },
+    {
+      "id": "jp_okayama_station_266922787",
+      "osm_id": 266922787,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美作大崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimasaka-Ōsaki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0453349,
+      "longitude": 134.0675002
+    },
+    {
+      "id": "jp_okayama_station_266923670",
+      "osm_id": 266923670,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西勝間田",
+      "name_kana": "にしかつまだ",
+      "name_translations": {
+        "en": "Nishi-Katsumada"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0435938,
+      "longitude": 134.0892774
+    },
+    {
+      "id": "jp_okayama_station_266923831",
+      "osm_id": 266923831,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "院庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Innosho"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0590442,
+      "longitude": 133.9573718
+    },
+    {
+      "id": "jp_okayama_station_266924919",
+      "osm_id": 266924919,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "勝間田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katsumada"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0357716,
+      "longitude": 134.1189305
+    },
+    {
+      "id": "jp_okayama_station_266925222",
+      "osm_id": 266925222,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "林野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayashino"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0139324,
+      "longitude": 134.1521491
+    },
+    {
+      "id": "jp_okayama_station_266925879",
+      "osm_id": 266925879,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "刑部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Osakabe"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0762602,
+      "longitude": 133.5659802
+    },
+    {
+      "id": "jp_okayama_station_266926400",
+      "osm_id": 266926400,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwayama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0228418,
+      "longitude": 133.5127736
+    },
+    {
+      "id": "jp_okayama_station_266926506",
+      "osm_id": 266926506,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美作千代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimasaka-Sendai"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0584386,
+      "longitude": 133.9061711
+    },
+    {
+      "id": "jp_okayama_station_266930117",
+      "osm_id": 266930117,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美作追分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimasaka-Oiwake"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0589005,
+      "longitude": 133.8201161
+    },
+    {
+      "id": "jp_okayama_station_266930260",
+      "osm_id": 266930260,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中国勝山",
+      "name_kana": "ちゅうごくかつやま",
+      "name_translations": {
+        "en": "Chugoku-Katsuyama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0804497,
+      "longitude": 133.6946943
+    },
+    {
+      "id": "jp_okayama_station_266930290",
+      "osm_id": 266930290,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "月田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukida"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.048216,
+      "longitude": 133.6667587
+    },
+    {
+      "id": "jp_okayama_station_266930293",
+      "osm_id": 266930293,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "久世",
+      "name_kana": "くせ",
+      "name_translations": {
+        "en": "Kuse"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0809912,
+      "longitude": 133.7452808
+    },
+    {
+      "id": "jp_okayama_station_266930334",
+      "osm_id": 266930334,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美作落合",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimasaka-Ochiai"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0231695,
+      "longitude": 133.7596564
+    },
+    {
+      "id": "jp_okayama_station_266930335",
+      "osm_id": 266930335,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "坪井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuboi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0621337,
+      "longitude": 133.8773469
+    },
+    {
+      "id": "jp_okayama_station_266930340",
+      "osm_id": 266930340,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "古見",
+      "name_kana": "こみ",
+      "name_translations": {
+        "en": "Komi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0491459,
+      "longitude": 133.7606253
+    },
+    {
+      "id": "jp_okayama_station_266931136",
+      "osm_id": 266931136,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "富原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomihara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0549302,
+      "longitude": 133.6122002
+    },
+    {
+      "id": "jp_okayama_station_266931199",
+      "osm_id": 266931199,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "丹治部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tajibe"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0461768,
+      "longitude": 133.5535158
+    },
+    {
+      "id": "jp_okayama_station_267054639",
+      "osm_id": 267054639,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "亀甲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamenoko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9987946,
+      "longitude": 133.9591509
+    },
+    {
+      "id": "jp_okayama_station_267054644",
+      "osm_id": 267054644,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "金川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7920571,
+      "longitude": 133.9337335
+    },
+    {
+      "id": "jp_okayama_station_267054744",
+      "osm_id": 267054744,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉柏",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamagashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7169327,
+      "longitude": 133.9644626
+    },
+    {
+      "id": "jp_okayama_station_267054914",
+      "osm_id": 267054914,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "神目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8961727,
+      "longitude": 133.9351998
+    },
+    {
+      "id": "jp_okayama_station_267054922",
+      "osm_id": 267054922,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "津山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuyamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0545867,
+      "longitude": 133.9828585
+    },
+    {
+      "id": "jp_okayama_station_267055003",
+      "osm_id": 267055003,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "弓削",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yuge"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9255556,
+      "longitude": 133.957848
+    },
+    {
+      "id": "jp_okayama_station_267055010",
+      "osm_id": 267055010,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "備前原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Hara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7049705,
+      "longitude": 133.9448882
+    },
+    {
+      "id": "jp_okayama_station_267055051",
+      "osm_id": 267055051,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "牧山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Makiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7410383,
+      "longitude": 133.9606731
+    },
+    {
+      "id": "jp_okayama_station_267055382",
+      "osm_id": 267055382,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "誕生寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanjoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9514682,
+      "longitude": 133.9593952
+    },
+    {
+      "id": "jp_okayama_station_267055383",
+      "osm_id": 267055383,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "小原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.968556,
+      "longitude": 133.9620004
+    },
+    {
+      "id": "jp_okayama_station_267055390",
+      "osm_id": 267055390,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "野々口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nonokuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7712833,
+      "longitude": 133.9325249
+    },
+    {
+      "id": "jp_okayama_station_267055539",
+      "osm_id": 267055539,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐良山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sarayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0320527,
+      "longitude": 133.9607861
+    },
+    {
+      "id": "jp_okayama_station_267055795",
+      "osm_id": 267055795,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "福渡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuwatari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8704336,
+      "longitude": 133.9039797
+    },
+    {
+      "id": "jp_okayama_station_267057667",
+      "osm_id": 267057667,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "建部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takebe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8422745,
+      "longitude": 133.8991477
+    },
+    {
+      "id": "jp_okayama_station_267057849",
+      "osm_id": 267057849,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "法界院",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōkaiin"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.684794,
+      "longitude": 133.9274864
+    },
+    {
+      "id": "jp_okayama_station_267058713",
+      "osm_id": 267058713,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東岡山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Okayama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-S04;JR-N04",
+      "latitude": 34.6856636,
+      "longitude": 133.9881595
+    },
+    {
+      "id": "jp_okayama_station_267059821",
+      "osm_id": 267059821,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "美作河井",
+      "name_kana": "みまさかかわい",
+      "name_translations": {
+        "en": "Mimasaka-Kawai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2053071,
+      "longitude": 134.1070101
+    },
+    {
+      "id": "jp_okayama_station_267059830",
+      "osm_id": 267059830,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "美作滝尾",
+      "name_kana": "みまさかたきお",
+      "name_translations": {
+        "en": "Mimasaka-Takio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1236569,
+      "longitude": 134.0713819
+    },
+    {
+      "id": "jp_okayama_station_267059932",
+      "osm_id": 267059932,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "美作加茂",
+      "name_kana": "みまさかかも",
+      "name_translations": {
+        "en": "Mimasaka-Kamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1694399,
+      "longitude": 134.0622633
+    },
+    {
+      "id": "jp_okayama_station_267060565",
+      "osm_id": 267060565,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "三浦",
+      "name_kana": "みうら",
+      "name_translations": {
+        "en": "Miura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.141664,
+      "longitude": 134.0780212
+    },
+    {
+      "id": "jp_okayama_station_267060750",
+      "osm_id": 267060750,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "知和",
+      "name_kana": "ちわ",
+      "name_translations": {
+        "en": "Chiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1928538,
+      "longitude": 134.077514
+    },
+    {
+      "id": "jp_okayama_station_267060876",
+      "osm_id": 267060876,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高野",
+      "name_kana": "たかの",
+      "name_translations": {
+        "en": "Takano"
+      },
+      "operator": "日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.08042,
+      "longitude": 134.066007
+    },
+    {
+      "id": "jp_okayama_station_270866516",
+      "osm_id": 270866516,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "三菱自工前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsubishijiko-mae"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.5229584,
+      "longitude": 133.7331149
+    },
+    {
+      "id": "jp_okayama_station_270866536",
+      "osm_id": 270866536,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "栄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakae"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.5377661,
+      "longitude": 133.7448862
+    },
+    {
+      "id": "jp_okayama_station_270866538",
+      "osm_id": 270866538,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "球場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyujo-mae"
+      },
+      "operator": "水島臨海鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5912368,
+      "longitude": 133.7473548
+    },
+    {
+      "id": "jp_okayama_station_270866584",
+      "osm_id": 270866584,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "弥生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yayoi"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.543717,
+      "longitude": 133.7474038
+    },
+    {
+      "id": "jp_okayama_station_270866603",
+      "osm_id": 270866603,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "倉敷市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurashikishi"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.6009414,
+      "longitude": 133.7649638
+    },
+    {
+      "id": "jp_okayama_station_270866604",
+      "osm_id": 270866604,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西富井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitomi"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.5775703,
+      "longitude": 133.7433446
+    },
+    {
+      "id": "jp_okayama_station_270866607",
+      "osm_id": 270866607,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "福井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukui"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.5697694,
+      "longitude": 133.7444441
+    },
+    {
+      "id": "jp_okayama_station_270866623",
+      "osm_id": 270866623,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "常盤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokiwa"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.5345508,
+      "longitude": 133.7434695
+    },
+    {
+      "id": "jp_okayama_station_270866626",
+      "osm_id": 270866626,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urada"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.5611335,
+      "longitude": 133.7498617
+    },
+    {
+      "id": "jp_okayama_station_339080252",
+      "osm_id": 339080252,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "子守唄の里高屋",
+      "name_kana": "こもりうたのさとたかや",
+      "name_translations": {
+        "en": "Komoriuta no sato Takaya"
+      },
+      "operator": "井原鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5818061,
+      "longitude": 133.4333612
+    },
+    {
+      "id": "jp_okayama_station_339080255",
+      "osm_id": 339080255,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "早雲の里荏原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sounnosato-Ebara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.596785,
+      "longitude": 133.5079931
+    },
+    {
+      "id": "jp_okayama_station_339080347",
+      "osm_id": 339080347,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "井原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ibara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5929244,
+      "longitude": 133.4690962
+    },
+    {
+      "id": "jp_okayama_station_339080643",
+      "osm_id": 339080643,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "三谷",
+      "name_kana": "みたに",
+      "name_translations": {
+        "en": "Mitani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6164299,
+      "longitude": 133.6195968
+    },
+    {
+      "id": "jp_okayama_station_339081011",
+      "osm_id": 339081011,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "小田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6059942,
+      "longitude": 133.5424399
+    },
+    {
+      "id": "jp_okayama_station_339081025",
+      "osm_id": 339081025,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢掛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakage"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6293417,
+      "longitude": 133.5900212
+    },
+    {
+      "id": "jp_okayama_station_339081095",
+      "osm_id": 339081095,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "いずえ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5879894,
+      "longitude": 133.4508623
+    },
+    {
+      "id": "jp_okayama_station_339081098",
+      "osm_id": 339081098,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備中呉妹",
+      "name_kana": "びっちゅうくれせ",
+      "name_translations": {
+        "en": "Bitchu-Kurese"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6216102,
+      "longitude": 133.6619174
+    },
+    {
+      "id": "jp_okayama_station_339081189",
+      "osm_id": 339081189,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "川辺宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawabejuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6324037,
+      "longitude": 133.7148104
+    },
+    {
+      "id": "jp_okayama_station_355837610",
+      "osm_id": 355837610,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西粟倉",
+      "name_kana": "にしあわくら",
+      "name_translations": {
+        "en": "Nishi-Awakura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.160799,
+      "longitude": 134.3359427
+    },
+    {
+      "id": "jp_okayama_station_355837825",
+      "osm_id": 355837825,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "あわくら温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awakura Onsen"
+      },
+      "operator": "智頭急行",
+      "network": "智頭急行智頭線",
+      "ref": null,
+      "latitude": 35.1886564,
+      "longitude": 134.3368749
+    },
+    {
+      "id": "jp_okayama_station_355837872",
+      "osm_id": 355837872,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮本武蔵",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1016551,
+      "longitude": 134.3303865
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_2951840757",
+      "osm_id": 2951840757,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "牛窓港（前島フェリー乗り場）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6146899,
+      "longitude": 134.1646533
+    },
+    {
+      "id": "jp_okayama_station_3197058890",
+      "osm_id": 3197058890,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西川原",
+      "name_kana": "にしがわら",
+      "name_translations": {
+        "en": "Nishigawara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-S02",
+      "latitude": 34.678907,
+      "longitude": 133.9375777
+    },
+    {
+      "id": "jp_okayama_station_3667643459",
+      "osm_id": 3667643459,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡山",
+      "name_kana": "おかやま",
+      "name_translations": {
+        "en": "Okayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6667504,
+      "longitude": 133.9182664
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_3732996269",
+      "osm_id": 3732996269,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "日生駅前港(中日生港)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7342584,
+      "longitude": 134.2772528
+    },
+    {
+      "id": "jp_okayama_station_4073849189",
+      "osm_id": 4073849189,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "総社",
+      "name_kana": "そうじゃ",
+      "name_translations": {
+        "en": "Sōja"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6735655,
+      "longitude": 133.7380745
+    },
+    {
+      "id": "jp_okayama_station_4095901941",
+      "osm_id": 4095901941,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉ケ原",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "片上鉄道保存会",
+      "network": "片上鉄道",
+      "ref": null,
+      "latitude": 34.9433894,
+      "longitude": 134.0815125
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_4263639490",
+      "osm_id": 4263639490,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "犬島行き連絡船乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5871975,
+      "longitude": 134.1010187
+    },
+    {
+      "id": "jp_okayama_station_4308092924",
+      "osm_id": 4308092924,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "津山",
+      "name_kana": "つやま",
+      "name_translations": {
+        "en": "Tsuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0545175,
+      "longitude": 134.003275
+    },
+    {
+      "id": "jp_okayama_station_4439893771",
+      "osm_id": 4439893771,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uno"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4947746,
+      "longitude": 133.9539193
+    },
+    {
+      "id": "jp_okayama_station_4443950515",
+      "osm_id": 4443950515,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備中高梁",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bitchu-Takahashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7886142,
+      "longitude": 133.6164285
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_4594197711",
+      "osm_id": 4594197711,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大多府港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.684383,
+      "longitude": 134.2991862
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_5649766458",
+      "osm_id": 5649766458,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "四国汽船(旅客船)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4916234,
+      "longitude": 133.9550201
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_5714915832",
+      "osm_id": 5714915832,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "四国汽船 旅客船乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4922118,
+      "longitude": 133.9550125
+    },
+    {
+      "id": "jp_okayama_station_5729644760",
+      "osm_id": 5729644760,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "金光",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konkō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5409507,
+      "longitude": 133.6207826
+    },
+    {
+      "id": "jp_okayama_station_6055022452",
+      "osm_id": 6055022452,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "中庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakashō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6263098,
+      "longitude": 133.8077661
+    },
+    {
+      "id": "jp_okayama_bus_terminal_6172356418",
+      "osm_id": 6172356418,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "イオンモール倉敷",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6034424,
+      "longitude": 133.7459574
+    },
+    {
+      "id": "jp_okayama_station_6375713042",
+      "osm_id": 6375713042,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉永",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshinaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8122398,
+      "longitude": 134.2045527
+    },
+    {
+      "id": "jp_okayama_station_6375717341",
+      "osm_id": 6375717341,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "倉敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurashiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6018629,
+      "longitude": 133.7658834
+    },
+    {
+      "id": "jp_okayama_station_6385537257",
+      "osm_id": 6385537257,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niimi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "伯備線;姫新線",
+      "ref": "JR-V18",
+      "latitude": 34.9871991,
+      "longitude": 133.4567409
+    },
+    {
+      "id": "jp_okayama_station_6397242759",
+      "osm_id": 6397242759,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東津山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Tsuyama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0586384,
+      "longitude": 134.0316759
+    },
+    {
+      "id": "jp_okayama_station_6433941948",
+      "osm_id": 6433941948,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "茶屋町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chayamachi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5770835,
+      "longitude": 133.8259032
+    },
+    {
+      "id": "jp_okayama_station_6813439142",
+      "osm_id": 6813439142,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "水島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizushima"
+      },
+      "operator": "水島臨海鉄道",
+      "network": "水島臨海鉄道水島本線",
+      "ref": null,
+      "latitude": 34.5291948,
+      "longitude": 133.741293
+    },
+    {
+      "id": "jp_okayama_bus_terminal_6968291095",
+      "osm_id": 6968291095,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "井原バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6014116,
+      "longitude": 133.4653477
+    },
+    {
+      "id": "jp_okayama_station_7104111066",
+      "osm_id": 7104111066,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉備真備",
+      "name_kana": "きびのまきび",
+      "name_translations": {
+        "en": "Kibinomakibi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6267408,
+      "longitude": 133.6919128
+    },
+    {
+      "id": "jp_okayama_station_8098643632",
+      "osm_id": 8098643632,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "児島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kojima"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4627408,
+      "longitude": 133.8076652
+    },
+    {
+      "id": "jp_okayama_station_8098896258",
+      "osm_id": 8098896258,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "庭瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niwase"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6426996,
+      "longitude": 133.8539694
+    },
+    {
+      "id": "jp_okayama_station_8105154272",
+      "osm_id": 8105154272,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北長瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitanagase"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6530227,
+      "longitude": 133.8855275
+    },
+    {
+      "id": "jp_okayama_station_8105697661",
+      "osm_id": 8105697661,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備前田井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Tai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5157963,
+      "longitude": 133.9433967
+    },
+    {
+      "id": "jp_okayama_station_8105697663",
+      "osm_id": 8105697663,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "八浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachihama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5320464,
+      "longitude": 133.9189564
+    },
+    {
+      "id": "jp_okayama_station_8105697665",
+      "osm_id": 8105697665,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "常山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuneyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5316188,
+      "longitude": 133.8925327
+    },
+    {
+      "id": "jp_okayama_station_8105697666",
+      "osm_id": 8105697666,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "迫川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hazakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5365053,
+      "longitude": 133.8794817
+    },
+    {
+      "id": "jp_okayama_station_8105697668",
+      "osm_id": 8105697668,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備前片岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Kataoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5440598,
+      "longitude": 133.8614244
+    },
+    {
+      "id": "jp_okayama_station_8105697670",
+      "osm_id": 8105697670,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "彦崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hikosaki"
+      },
+      "operator": "JR西日本",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5521113,
+      "longitude": 133.8348048
+    },
+    {
+      "id": "jp_okayama_station_8105697688",
+      "osm_id": 8105697688,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "久々原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuguhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5921741,
+      "longitude": 133.827998
+    },
+    {
+      "id": "jp_okayama_station_8105697715",
+      "osm_id": 8105697715,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "早島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6023155,
+      "longitude": 133.8335784
+    },
+    {
+      "id": "jp_okayama_station_8105697716",
+      "osm_id": 8105697716,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備中箕島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bitchū-Mishima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6056861,
+      "longitude": 133.8506721
+    },
+    {
+      "id": "jp_okayama_station_8105709317",
+      "osm_id": 8105709317,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "妹尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Senō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6083425,
+      "longitude": 133.871476
+    },
+    {
+      "id": "jp_okayama_station_8105709320",
+      "osm_id": 8105709320,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備前西市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Nishiichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6318396,
+      "longitude": 133.9002775
+    },
+    {
+      "id": "jp_okayama_station_8105709321",
+      "osm_id": 8105709321,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大元",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-L02;JR-M02",
+      "latitude": 34.6474122,
+      "longitude": 133.9107717
+    },
+    {
+      "id": "jp_okayama_station_8114995588",
+      "osm_id": 8114995588,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takashima"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-S03;JR-N03",
+      "latitude": 34.6830709,
+      "longitude": 133.9579765
+    },
+    {
+      "id": "jp_okayama_station_8114995601",
+      "osm_id": 8114995601,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "瀬戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seto"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7344138,
+      "longitude": 134.0418841
+    },
+    {
+      "id": "jp_okayama_station_8114995604",
+      "osm_id": 8114995604,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "万富",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mantomi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7582757,
+      "longitude": 134.0805642
+    },
+    {
+      "id": "jp_okayama_station_8114995607",
+      "osm_id": 8114995607,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "熊山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7833445,
+      "longitude": 134.1094248
+    },
+    {
+      "id": "jp_okayama_station_8114995610",
+      "osm_id": 8114995610,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "和気",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wake"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7970952,
+      "longitude": 134.1526231
+    },
+    {
+      "id": "jp_okayama_station_8114995615",
+      "osm_id": 8114995615,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsuishi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8043755,
+      "longitude": 134.2757446
+    },
+    {
+      "id": "jp_okayama_station_8117359989",
+      "osm_id": 8117359989,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5047232,
+      "longitude": 133.5047114
+    },
+    {
+      "id": "jp_okayama_station_8117359992",
+      "osm_id": 8117359992,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "里庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Satoshō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5081016,
+      "longitude": 133.5510077
+    },
+    {
+      "id": "jp_okayama_station_8117359993",
+      "osm_id": 8117359993,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鴨方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamogata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5272337,
+      "longitude": 133.5875997
+    },
+    {
+      "id": "jp_okayama_station_8118278050",
+      "osm_id": 8118278050,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "豪渓",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gokei"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7063071,
+      "longitude": 133.7225953
+    },
+    {
+      "id": "jp_okayama_station_8118278054",
+      "osm_id": 8118278054,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "日羽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7158922,
+      "longitude": 133.6897168
+    },
+    {
+      "id": "jp_okayama_station_8118278055",
+      "osm_id": 8118278055,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "美袋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7200507,
+      "longitude": 133.6543632
+    },
+    {
+      "id": "jp_okayama_station_8118278056",
+      "osm_id": 8118278056,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備中広瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bitchu-Hirose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7585026,
+      "longitude": 133.6068204
+    },
+    {
+      "id": "jp_okayama_station_8118278059",
+      "osm_id": 8118278059,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "木野山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8256631,
+      "longitude": 133.614454
+    },
+    {
+      "id": "jp_okayama_station_8118278061",
+      "osm_id": 8118278061,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備中川面",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bitchū-Kawamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8500709,
+      "longitude": 133.5886055
+    },
+    {
+      "id": "jp_okayama_station_8118278062",
+      "osm_id": 8118278062,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "方谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hokoku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8767798,
+      "longitude": 133.5566644
+    },
+    {
+      "id": "jp_okayama_station_8118278073",
+      "osm_id": 8118278073,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "石蟹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishiga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-V17",
+      "latitude": 34.9549463,
+      "longitude": 133.479453
+    },
+    {
+      "id": "jp_okayama_station_8118278085",
+      "osm_id": 8118278085,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "清音",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiyone"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6435349,
+      "longitude": 133.7334709
+    },
+    {
+      "id": "jp_okayama_station_8118378898",
+      "osm_id": 8118378898,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上の町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaminochō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4906669,
+      "longitude": 133.8151657
+    },
+    {
+      "id": "jp_okayama_station_8118378900",
+      "osm_id": 8118378900,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kimi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5276557,
+      "longitude": 133.8237146
+    },
+    {
+      "id": "jp_okayama_station_8118378902",
+      "osm_id": 8118378902,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "植松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uematsu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5513325,
+      "longitude": 133.8279652
+    },
+    {
+      "id": "jp_okayama_station_8120093011",
+      "osm_id": 8120093011,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "寒河",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sōgo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7462629,
+      "longitude": 134.2978272
+    },
+    {
+      "id": "jp_okayama_station_8120093016",
+      "osm_id": 8120093016,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7415563,
+      "longitude": 134.2244942
+    },
+    {
+      "id": "jp_okayama_station_8120094621",
+      "osm_id": 8120094621,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西片上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Katakami"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": "JR-N12",
+      "latitude": 34.745183,
+      "longitude": 134.1837126
+    },
+    {
+      "id": "jp_okayama_station_8120094626",
+      "osm_id": 8120094626,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "香登",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kagato"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": null,
+      "latitude": 34.7277787,
+      "longitude": 134.1196252
+    },
+    {
+      "id": "jp_okayama_station_8120094633",
+      "osm_id": 8120094633,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "邑久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oku"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": "JR-N08",
+      "latitude": 34.66841,
+      "longitude": 134.0910584
+    },
+    {
+      "id": "jp_okayama_station_8120094642",
+      "osm_id": 8120094642,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大富",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōdomi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": null,
+      "latitude": 34.6613218,
+      "longitude": 134.0706736
+    },
+    {
+      "id": "jp_okayama_station_8120094647",
+      "osm_id": 8120094647,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大多羅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōdara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": null,
+      "latitude": 34.6655984,
+      "longitude": 134.00643
+    },
+    {
+      "id": "jp_okayama_station_8120094659",
+      "osm_id": 8120094659,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saidaiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6619649,
+      "longitude": 134.0373123
+    },
+    {
+      "id": "jp_okayama_station_8120094662",
+      "osm_id": 8120094662,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長船",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Osafune"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": "JR-N09",
+      "latitude": 34.6996334,
+      "longitude": 134.0987214
+    },
+    {
+      "id": "jp_okayama_station_8120094674",
+      "osm_id": 8120094674,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imbe"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": null,
+      "latitude": 34.7387229,
+      "longitude": 134.1608757
+    },
+    {
+      "id": "jp_okayama_station_8120094700",
+      "osm_id": 8120094700,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "備前片上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Katakami"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR赤穂線",
+      "ref": "JR-N13",
+      "latitude": 34.7483104,
+      "longitude": 134.197022
+    },
+    {
+      "id": "jp_okayama_station_8120094726",
+      "osm_id": 8120094726,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "日生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hinase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-N15",
+      "latitude": 34.7350623,
+      "longitude": 134.2767326
+    },
+    {
+      "id": "jp_okayama_station_8120327716",
+      "osm_id": 8120327716,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東総社",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Soja"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6776394,
+      "longitude": 133.7509583
+    },
+    {
+      "id": "jp_okayama_station_8120331527",
+      "osm_id": 8120331527,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "服部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hattori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6911215,
+      "longitude": 133.7752692
+    },
+    {
+      "id": "jp_okayama_station_8120331528",
+      "osm_id": 8120331528,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "足守",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashimori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6980953,
+      "longitude": 133.8028188
+    },
+    {
+      "id": "jp_okayama_station_8120331529",
+      "osm_id": 8120331529,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備前一宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Ichinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.678841,
+      "longitude": 133.8640831
+    },
+    {
+      "id": "jp_okayama_station_8120331530",
+      "osm_id": 8120331530,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "備前三門",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Mikado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6678111,
+      "longitude": 133.9003265
+    },
+    {
+      "id": "jp_okayama_station_8120331531",
+      "osm_id": 8120331531,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "備中高松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bitchū-Takamatsu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6865502,
+      "longitude": 133.8223413
+    },
+    {
+      "id": "jp_okayama_station_8120331539",
+      "osm_id": 8120331539,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉備津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kibitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6744112,
+      "longitude": 133.8460527
+    },
+    {
+      "id": "jp_okayama_station_8120331557",
+      "osm_id": 8120331557,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大安寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daianji"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6629323,
+      "longitude": 133.8876396
+    },
+    {
+      "id": "jp_okayama_station_8296338341",
+      "osm_id": 8296338341,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1239902,
+      "longitude": 134.3278626
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_9234530766",
+      "osm_id": 9234530766,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "日生港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7311574,
+      "longitude": 134.2692494
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_9234530836",
+      "osm_id": 9234530836,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "頭島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6988166,
+      "longitude": 134.2834496
+    },
+    {
+      "id": "jp_okayama_bus_terminal_9841157833",
+      "osm_id": 9841157833,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "船穂公民館",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "倉敷市船穂地区コミュニティタクシー",
+      "network": "船穂線",
+      "ref": null,
+      "latitude": 34.5846656,
+      "longitude": 133.7084406
+    },
+    {
+      "id": "jp_okayama_bus_terminal_13070986441",
+      "osm_id": 13070986441,
+      "osm_type": "node",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中鉄美作バス",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2002208,
+      "longitude": 133.7324322
+    },
+    {
+      "id": "jp_okayama_airport_57009996",
+      "osm_id": 57009996,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "岡山空港",
+      "name_kana": "おかやまくうこう",
+      "name_translations": {
+        "en": "Okayama Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "OKJ",
+      "latitude": 34.7571474,
+      "longitude": 133.8555389
+    },
+    {
+      "id": "jp_okayama_airport_57009997",
+      "osm_id": 57009997,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "岡南飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kounan Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RJBK",
+      "latitude": 34.5924479,
+      "longitude": 133.9326977
+    },
+    {
+      "id": "jp_okayama_bus_terminal_127528826",
+      "osm_id": 127528826,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岡山駅西口バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6669668,
+      "longitude": 133.9173093
+    },
+    {
+      "id": "jp_okayama_bus_terminal_167273498",
+      "osm_id": 167273498,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岡山駅バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6651781,
+      "longitude": 133.9185894
+    },
+    {
+      "id": "jp_okayama_airport_278762830",
+      "osm_id": 278762830,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "笠岡ふれあい空港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4759843,
+      "longitude": 133.4890059
+    },
+    {
+      "id": "jp_okayama_bus_terminal_399762406",
+      "osm_id": 399762406,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "天満屋バスステーション",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6618159,
+      "longitude": 133.928409
+    },
+    {
+      "id": "jp_okayama_bus_terminal_399762408",
+      "osm_id": 399762408,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宇野バス表町バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.661552,
+      "longitude": 133.9301589
+    },
+    {
+      "id": "jp_okayama_bus_terminal_400501290",
+      "osm_id": 400501290,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宇野駅バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4940555,
+      "longitude": 133.9537635
+    },
+    {
+      "id": "jp_okayama_bus_terminal_400503006",
+      "osm_id": 400503006,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "倉敷駅バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6012081,
+      "longitude": 133.7661865
+    },
+    {
+      "id": "jp_okayama_bus_terminal_400503007",
+      "osm_id": 400503007,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "倉敷駅北口バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6022466,
+      "longitude": 133.765057
+    },
+    {
+      "id": "jp_okayama_bus_terminal_400995120",
+      "osm_id": 400995120,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "両備バス西大寺バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.656432,
+      "longitude": 134.0304195
+    },
+    {
+      "id": "jp_okayama_station_407537571",
+      "osm_id": 407537571,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "黄福柵原駅;黄福柵原",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "片上鉄道保存会",
+      "network": "片上鉄道",
+      "ref": null,
+      "latitude": 34.9435013,
+      "longitude": 134.0774422
+    },
+    {
+      "id": "jp_okayama_bus_terminal_441069993",
+      "osm_id": 441069993,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "笠岡市交通交流センター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4880617,
+      "longitude": 133.5180245
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_601251539",
+      "osm_id": 601251539,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宇野港フェリー乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4930128,
+      "longitude": 133.9522563
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_692893140",
+      "osm_id": 692893140,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "まるがめ競艇行き 無料高速艇乗降船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.524051,
+      "longitude": 133.7396075
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_694016439",
+      "osm_id": 694016439,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "水島通船（株）待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5253114,
+      "longitude": 133.7388649
+    },
+    {
+      "id": "jp_okayama_bus_terminal_771354821",
+      "osm_id": 771354821,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高梁バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7890797,
+      "longitude": 133.6165192
+    },
+    {
+      "id": "jp_okayama_ferry_terminal_1000431418",
+      "osm_id": 1000431418,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "瀬戸内観光汽船(フェリー待合所)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7348788,
+      "longitude": 134.277035
+    },
+    {
+      "id": "jp_okayama_bus_terminal_1189553379",
+      "osm_id": 1189553379,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "北振バス矢掛バスセンター(旧井笠鉄道矢掛駅)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6227063,
+      "longitude": 133.5822476
+    },
+    {
+      "id": "jp_okayama_bus_terminal_1361047710",
+      "osm_id": 1361047710,
+      "osm_type": "way",
+      "prefecture_id": "jp_okayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "宇野自動車",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0126229,
+      "longitude": 134.1506618
+    }
+  ]
+}

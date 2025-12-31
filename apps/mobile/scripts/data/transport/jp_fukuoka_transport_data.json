@@ -1,0 +1,7328 @@
+{
+  "fetchedAt": "2025-12-24T05:56:59.791Z",
+  "prefecture_id": "jp_fukuoka",
+  "prefecture_name": "福岡県",
+  "stats": {
+    "station": 346,
+    "airport": 4,
+    "ferry_terminal": 35,
+    "bus_terminal": 26,
+    "total": 411
+  },
+  "data": [
+    {
+      "id": "jp_fukuoka_station_265839317",
+      "osm_id": 265839317,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三毛門",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikekado"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.6149634,
+      "longitude": 131.1556412
+    },
+    {
+      "id": "jp_fukuoka_station_265840381",
+      "osm_id": 265840381,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉富",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshitomi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.6047714,
+      "longitude": 131.173663
+    },
+    {
+      "id": "jp_fukuoka_station_265842885",
+      "osm_id": 265842885,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南小倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kokura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.8705783,
+      "longitude": 130.8669354
+    },
+    {
+      "id": "jp_fukuoka_station_265843189",
+      "osm_id": 265843189,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "椎田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiida"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.6534202,
+      "longitude": 131.0578259
+    },
+    {
+      "id": "jp_fukuoka_station_265844064",
+      "osm_id": 265844064,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unoshima"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.6213157,
+      "longitude": 131.1265739
+    },
+    {
+      "id": "jp_fukuoka_station_265844065",
+      "osm_id": 265844065,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "城野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jōno"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.8579587,
+      "longitude": 130.8864543
+    },
+    {
+      "id": "jp_fukuoka_station_265844066",
+      "osm_id": 265844066,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊前松江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Buzen-Shōe"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.6225876,
+      "longitude": 131.0951012
+    },
+    {
+      "id": "jp_fukuoka_station_265844070",
+      "osm_id": 265844070,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新田原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shindembaru"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.695266,
+      "longitude": 131.0082078
+    },
+    {
+      "id": "jp_fukuoka_station_265844085",
+      "osm_id": 265844085,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "築城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuiki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.6731973,
+      "longitude": 131.0376753
+    },
+    {
+      "id": "jp_fukuoka_station_265844537",
+      "osm_id": 265844537,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "行橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yukuhashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7287034,
+      "longitude": 130.9702058
+    },
+    {
+      "id": "jp_fukuoka_station_265880647",
+      "osm_id": 265880647,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "鯰田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namazuta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JC16",
+      "latitude": 33.6689677,
+      "longitude": 130.7024736
+    },
+    {
+      "id": "jp_fukuoka_station_265880935",
+      "osm_id": 265880935,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑前植木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen-Ueki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC21",
+      "latitude": 33.7765069,
+      "longitude": 130.708235
+    },
+    {
+      "id": "jp_fukuoka_station_265881296",
+      "osm_id": 265881296,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新入",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinnyū"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC20",
+      "latitude": 33.7639101,
+      "longitude": 130.7135661
+    },
+    {
+      "id": "jp_fukuoka_station_265881636",
+      "osm_id": 265881636,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浦田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC15",
+      "latitude": 33.6564927,
+      "longitude": 130.6992405
+    },
+    {
+      "id": "jp_fukuoka_station_265881991",
+      "osm_id": 265881991,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "天道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tentoh"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JC12",
+      "latitude": 33.6053383,
+      "longitude": 130.6779225
+    },
+    {
+      "id": "jp_fukuoka_station_265883510",
+      "osm_id": 265883510,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑後吉井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikugo-Yoshii"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3410377,
+      "longitude": 130.7521613
+    },
+    {
+      "id": "jp_fukuoka_station_265883518",
+      "osm_id": 265883518,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "うきは",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ukiha"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3350365,
+      "longitude": 130.7887277
+    },
+    {
+      "id": "jp_fukuoka_station_265884218",
+      "osm_id": 265884218,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑後大石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikugo-Ōishi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.34729,
+      "longitude": 130.8159205
+    },
+    {
+      "id": "jp_fukuoka_station_265888800",
+      "osm_id": 265888800,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑後草野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikugo Kusano"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3221418,
+      "longitude": 130.6421994
+    },
+    {
+      "id": "jp_fukuoka_station_265888949",
+      "osm_id": 265888949,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田主丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanushimaru"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3387991,
+      "longitude": 130.6923219
+    },
+    {
+      "id": "jp_fukuoka_station_265889297",
+      "osm_id": 265889297,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "久留米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurume"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB17",
+      "latitude": 33.3206417,
+      "longitude": 130.5014036
+    },
+    {
+      "id": "jp_fukuoka_station_265892214",
+      "osm_id": 265892214,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "池尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikejiri"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日田彦山線",
+      "ref": null,
+      "latitude": 33.6131971,
+      "longitude": 130.8055689
+    },
+    {
+      "id": "jp_fukuoka_station_265892299",
+      "osm_id": 265892299,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "添田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Soeda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5670232,
+      "longitude": 130.8564275
+    },
+    {
+      "id": "jp_fukuoka_station_265892315",
+      "osm_id": 265892315,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西添田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Soeda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日田彦山線",
+      "ref": null,
+      "latitude": 33.5729601,
+      "longitude": 130.8474335
+    },
+    {
+      "id": "jp_fukuoka_station_265894728",
+      "osm_id": 265894728,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊前川崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Buzen-Kawasaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日田彦山線",
+      "ref": null,
+      "latitude": 33.59709,
+      "longitude": 130.821334
+    },
+    {
+      "id": "jp_fukuoka_station_265898978",
+      "osm_id": 265898978,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuyoshi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5015927,
+      "longitude": 130.0796877
+    },
+    {
+      "id": "jp_fukuoka_station_265904140",
+      "osm_id": 265904140,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑前大分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen Daibu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JC10",
+      "latitude": 33.5902375,
+      "longitude": 130.6296499
+    },
+    {
+      "id": "jp_fukuoka_station_265904539",
+      "osm_id": 265904539,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "篠栗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sasaguri"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC06",
+      "latitude": 33.6240723,
+      "longitude": 130.5242527
+    },
+    {
+      "id": "jp_fukuoka_station_265925243",
+      "osm_id": 265925243,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "土井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Doi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JD09",
+      "latitude": 33.6350457,
+      "longitude": 130.4661638
+    },
+    {
+      "id": "jp_fukuoka_station_265925348",
+      "osm_id": 265925348,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "酒殿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6026264,
+      "longitude": 130.4863333
+    },
+    {
+      "id": "jp_fukuoka_station_265930942",
+      "osm_id": 265930942,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "競馬場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Keibajōmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8428612,
+      "longitude": 130.8765828
+    },
+    {
+      "id": "jp_fukuoka_station_265930946",
+      "osm_id": 265930946,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "片野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8654986,
+      "longitude": 130.8800811
+    },
+    {
+      "id": "jp_fukuoka_station_265930987",
+      "osm_id": 265930987,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳力公団前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokuriki Kōdanmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8304484,
+      "longitude": 130.867534
+    },
+    {
+      "id": "jp_fukuoka_station_265931000",
+      "osm_id": 265931000,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "旦過",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8806755,
+      "longitude": 130.8802488
+    },
+    {
+      "id": "jp_fukuoka_station_265931102",
+      "osm_id": 265931102,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "北方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.849092,
+      "longitude": 130.8779726
+    },
+    {
+      "id": "jp_fukuoka_station_265931132",
+      "osm_id": 265931132,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "香春口三萩野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaraguchi Mihagino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.87355,
+      "longitude": 130.880624
+    },
+    {
+      "id": "jp_fukuoka_station_265931137",
+      "osm_id": 265931137,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "守恒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Moritsune"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8363972,
+      "longitude": 130.8727435
+    },
+    {
+      "id": "jp_fukuoka_station_265931202",
+      "osm_id": 265931202,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "企救丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kikugaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8196416,
+      "longitude": 130.8776391
+    },
+    {
+      "id": "jp_fukuoka_station_267462963",
+      "osm_id": 267462963,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "蒲池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamachi"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.1896376,
+      "longitude": 130.4226307
+    },
+    {
+      "id": "jp_fukuoka_station_267598864",
+      "osm_id": 267598864,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "貝塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaizuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "H07;NK01",
+      "latitude": 33.6320356,
+      "longitude": 130.4255947
+    },
+    {
+      "id": "jp_fukuoka_station_267598871",
+      "osm_id": 267598871,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄新宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Shingu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK10",
+      "latitude": 33.7141282,
+      "longitude": 130.436913
+    },
+    {
+      "id": "jp_fukuoka_station_473592443",
+      "osm_id": 473592443,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "二日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Futsukaichi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4944306,
+      "longitude": 130.5187554
+    },
+    {
+      "id": "jp_fukuoka_station_766763060",
+      "osm_id": 766763060,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大野城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onojo"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.525527,
+      "longitude": 130.4795263
+    },
+    {
+      "id": "jp_fukuoka_station_766973807",
+      "osm_id": 766973807,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "紫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Murasaki"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4963998,
+      "longitude": 130.5221372
+    },
+    {
+      "id": "jp_fukuoka_station_767175960",
+      "osm_id": 767175960,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "水城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizuki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5178457,
+      "longitude": 130.4901901
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_768036322",
+      "osm_id": 768036322,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄久留米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Kurume"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3128257,
+      "longitude": 130.5214557
+    },
+    {
+      "id": "jp_fukuoka_station_772486285",
+      "osm_id": 772486285,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "春日",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasuga"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5350966,
+      "longitude": 130.4688631
+    },
+    {
+      "id": "jp_fukuoka_station_817508631",
+      "osm_id": 817508631,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "端間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3785125,
+      "longitude": 130.55077
+    },
+    {
+      "id": "jp_fukuoka_station_822964864",
+      "osm_id": 822964864,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "熊西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumanishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK03",
+      "latitude": 33.8661228,
+      "longitude": 130.7579759
+    },
+    {
+      "id": "jp_fukuoka_station_822965006",
+      "osm_id": 822965006,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三ヶ森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sangamori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK09",
+      "latitude": 33.8347233,
+      "longitude": 130.7360346
+    },
+    {
+      "id": "jp_fukuoka_station_822965460",
+      "osm_id": 822965460,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑豊香月",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuhō-Katsuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK15",
+      "latitude": 33.7997313,
+      "longitude": 130.7187434
+    },
+    {
+      "id": "jp_fukuoka_station_822965577",
+      "osm_id": 822965577,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "永犬丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Einomaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK08",
+      "latitude": 33.8387983,
+      "longitude": 130.738112
+    },
+    {
+      "id": "jp_fukuoka_station_822965774",
+      "osm_id": 822965774,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西黒崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kurosaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK02",
+      "latitude": 33.866411,
+      "longitude": 130.7624092
+    },
+    {
+      "id": "jp_fukuoka_station_822965849",
+      "osm_id": 822965849,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑豊中間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuhō-Nakama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK13",
+      "latitude": 33.8164478,
+      "longitude": 130.7164257
+    },
+    {
+      "id": "jp_fukuoka_station_822965939",
+      "osm_id": 822965939,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "通谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōritani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK11",
+      "latitude": 33.8228627,
+      "longitude": 130.7267545
+    },
+    {
+      "id": "jp_fukuoka_station_822965993",
+      "osm_id": 822965993,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "今池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imaike"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK07",
+      "latitude": 33.8459062,
+      "longitude": 130.7396735
+    },
+    {
+      "id": "jp_fukuoka_station_822966030",
+      "osm_id": 822966030,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "森下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Morishita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK06",
+      "latitude": 33.8538056,
+      "longitude": 130.7409836
+    },
+    {
+      "id": "jp_fukuoka_station_822966218",
+      "osm_id": 822966218,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新木屋瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Koyanose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK17",
+      "latitude": 33.783582,
+      "longitude": 130.7244692
+    },
+    {
+      "id": "jp_fukuoka_station_822966626",
+      "osm_id": 822966626,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒崎駅前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurosaki-Ekimae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK01",
+      "latitude": 33.8665935,
+      "longitude": 130.7645793
+    },
+    {
+      "id": "jp_fukuoka_station_822966699",
+      "osm_id": 822966699,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑豊直方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuhō-Nōgata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK21",
+      "latitude": 33.7535355,
+      "longitude": 130.7262452
+    },
+    {
+      "id": "jp_fukuoka_station_822966888",
+      "osm_id": 822966888,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "感田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ganda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK20",
+      "latitude": 33.758248,
+      "longitude": 130.7327
+    },
+    {
+      "id": "jp_fukuoka_station_822966992",
+      "osm_id": 822966992,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "萩原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hagiwara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK04",
+      "latitude": 33.8616739,
+      "longitude": 130.7495431
+    },
+    {
+      "id": "jp_fukuoka_station_822967010",
+      "osm_id": 822967010,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "木屋瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koyanose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK18",
+      "latitude": 33.7790934,
+      "longitude": 130.7247669
+    },
+    {
+      "id": "jp_fukuoka_station_822967170",
+      "osm_id": 822967170,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "希望が丘高校前",
+      "name_kana": "きぼうがおかこうこうまえ",
+      "name_translations": {
+        "en": "Dotenouchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK14",
+      "latitude": 33.8087075,
+      "longitude": 130.7115356
+    },
+    {
+      "id": "jp_fukuoka_station_822967180",
+      "osm_id": 822967180,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠賀野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ongano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK19",
+      "latitude": 33.769054,
+      "longitude": 130.7306299
+    },
+    {
+      "id": "jp_fukuoka_station_822967217",
+      "osm_id": 822967217,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK10",
+      "latitude": 33.8298178,
+      "longitude": 130.7323857
+    },
+    {
+      "id": "jp_fukuoka_station_822967385",
+      "osm_id": 822967385,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Anō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK05",
+      "latitude": 33.8573742,
+      "longitude": 130.7448882
+    },
+    {
+      "id": "jp_fukuoka_station_822967441",
+      "osm_id": 822967441,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "楠橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusubashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CK16",
+      "latitude": 33.7890995,
+      "longitude": 130.7246545
+    },
+    {
+      "id": "jp_fukuoka_station_1250743978",
+      "osm_id": 1250743978,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "福岡貨物ターミナル",
+      "name_kana": "ふくおかかもつたーみなる",
+      "name_translations": {
+        "en": "Fukuoka Cargo Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6297769,
+      "longitude": 130.4202723
+    },
+    {
+      "id": "jp_fukuoka_station_1266239592",
+      "osm_id": 1266239592,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "博多南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakata South"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5182232,
+      "longitude": 130.4366707
+    },
+    {
+      "id": "jp_fukuoka_station_1855744715",
+      "osm_id": 1855744715,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "遠賀川",
+      "name_kana": "おんががわ",
+      "name_translations": {
+        "en": "Ongagawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "JA17",
+      "latitude": 33.8468575,
+      "longitude": 130.6737793
+    },
+    {
+      "id": "jp_fukuoka_station_1933859936",
+      "osm_id": 1933859936,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "箱崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakozaki"
+      },
+      "operator": "JR Kyushu",
+      "network": null,
+      "ref": "JA02",
+      "latitude": 33.6180172,
+      "longitude": 130.4268669
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_2017099018",
+      "osm_id": 2017099018,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "能古渡船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5974913,
+      "longitude": 130.3272694
+    },
+    {
+      "id": "jp_fukuoka_station_2119540519",
+      "osm_id": 2119540519,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Togo"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA13",
+      "latitude": 33.7945091,
+      "longitude": 130.5288515
+    },
+    {
+      "id": "jp_fukuoka_station_2121373004",
+      "osm_id": 2121373004,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "赤間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akama"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA14",
+      "latitude": 33.8082939,
+      "longitude": 130.5695947
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_2510073234",
+      "osm_id": 2510073234,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄天神高速バスターミナル)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenjin Expressway Bus Terminal"
+      },
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5888685,
+      "longitude": 130.3997369
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_2634123162",
+      "osm_id": 2634123162,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "西戸崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saitozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6492642,
+      "longitude": 130.3600198
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_2637113424",
+      "osm_id": 2637113424,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "志賀島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "福岡市",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6616912,
+      "longitude": 130.3137582
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_2641829033",
+      "osm_id": 2641829033,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "藤崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujisaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5817509,
+      "longitude": 130.3474752
+    },
+    {
+      "id": "jp_fukuoka_station_2733538857",
+      "osm_id": 2733538857,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿家",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4843844,
+      "longitude": 130.0474654
+    },
+    {
+      "id": "jp_fukuoka_station_2747413641",
+      "osm_id": 2747413641,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "戸畑",
+      "name_kana": "とばた",
+      "name_translations": {
+        "en": "Tobata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA25",
+      "latitude": 33.8972177,
+      "longitude": 130.8206112
+    },
+    {
+      "id": "jp_fukuoka_airport_2758262318",
+      "osm_id": 2758262318,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "airport",
+      "subtype": "military",
+      "name": "芦屋飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashiya Airfield"
+      },
+      "operator": "JASDF",
+      "network": null,
+      "ref": "RJFA",
+      "latitude": 33.8829218,
+      "longitude": 130.6544
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_2794291817",
+      "osm_id": 2794291817,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄黒崎バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8664552,
+      "longitude": 130.7651621
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_3032726976",
+      "osm_id": 3032726976,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "博多埠頭",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6041554,
+      "longitude": 130.3996657
+    },
+    {
+      "id": "jp_fukuoka_station_3637038754",
+      "osm_id": 3637038754,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "博多",
+      "name_kana": "はかた",
+      "name_translations": {
+        "en": "Hakata"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "博多南線",
+      "ref": "00",
+      "latitude": 33.5900436,
+      "longitude": 130.4203556
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_3732686773",
+      "osm_id": 3732686773,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "門司港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9463322,
+      "longitude": 130.9603787
+    },
+    {
+      "id": "jp_fukuoka_station_4026759505",
+      "osm_id": 4026759505,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "原田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haruda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB10;JG05",
+      "latitude": 33.4515527,
+      "longitude": 130.5393084
+    },
+    {
+      "id": "jp_fukuoka_station_4026867098",
+      "osm_id": 4026867098,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南福岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami Fukuoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5418928,
+      "longitude": 130.4604162
+    },
+    {
+      "id": "jp_fukuoka_station_4026867150",
+      "osm_id": 4026867150,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "笹原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sasabaru"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5529163,
+      "longitude": 130.4489182
+    },
+    {
+      "id": "jp_fukuoka_station_4026867151",
+      "osm_id": 4026867151,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "竹下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takeshita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5686455,
+      "longitude": 130.4314652
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_4237171264",
+      "osm_id": 4237171264,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "マリンゲートもじ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Marine gate Moji"
+      },
+      "operator": "関門汽船株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9460196,
+      "longitude": 130.9607647
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_4277545308",
+      "osm_id": 4277545308,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄バス北九州（株）　志井車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "西鉄バス北九州(株)中谷自動車営業所",
+      "network": null,
+      "ref": null,
+      "latitude": 33.8084479,
+      "longitude": 130.8760512
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_4277546699",
+      "osm_id": 4277546699,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄バス中谷営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.808354,
+      "longitude": 130.8570099
+    },
+    {
+      "id": "jp_fukuoka_station_4606927153",
+      "osm_id": 4606927153,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑前垣生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen-Habu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC23",
+      "latitude": 33.8183438,
+      "longitude": 130.7021869
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_4730392848",
+      "osm_id": 4730392848,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小倉砂津港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8928954,
+      "longitude": 130.8874459
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_4799927635",
+      "osm_id": 4799927635,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大島港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8970043,
+      "longitude": 130.4349458
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_4851164152",
+      "osm_id": 4851164152,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "藍島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9883219,
+      "longitude": 130.8183732
+    },
+    {
+      "id": "jp_fukuoka_station_5001727892",
+      "osm_id": 5001727892,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "黒崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurosaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA21",
+      "latitude": 33.8670036,
+      "longitude": 130.7662431
+    },
+    {
+      "id": "jp_fukuoka_station_5001733211",
+      "osm_id": 5001733211,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "スペースワールド",
+      "name_kana": "すぺーすわーるど",
+      "name_translations": {
+        "en": "Space World"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA23",
+      "latitude": 33.871264,
+      "longitude": 130.8063609
+    },
+    {
+      "id": "jp_fukuoka_station_5206461801",
+      "osm_id": 5206461801,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "姪浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Meinohama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K01",
+      "latitude": 33.5837095,
+      "longitude": 130.3251041
+    },
+    {
+      "id": "jp_fukuoka_station_5206461802",
+      "osm_id": 5206461802,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "中洲川端",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakasu-Kawabata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K09",
+      "latitude": 33.5947319,
+      "longitude": 130.406413
+    },
+    {
+      "id": "jp_fukuoka_station_5206461805",
+      "osm_id": 5206461805,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄福岡（天神）",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuoka (Tenjin)"
+      },
+      "operator": "西日本鉄道",
+      "network": "天神大牟田線",
+      "ref": "T01",
+      "latitude": 33.5892548,
+      "longitude": 130.3994222
+    },
+    {
+      "id": "jp_fukuoka_station_5213896821",
+      "osm_id": 5213896821,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "薬院",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakuin"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T02",
+      "latitude": 33.5824351,
+      "longitude": 130.401673
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_5292948563",
+      "osm_id": 5292948563,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三池港フェリー乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.0139189,
+      "longitude": 130.4166162
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_5314381181",
+      "osm_id": 5314381181,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "新門司(北九州)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8812038,
+      "longitude": 130.9894822
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_5398239089",
+      "osm_id": 5398239089,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "みどりが丘団地入口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6431909,
+      "longitude": 130.4745935
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_5398239096",
+      "osm_id": 5398239096,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "篠栗駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6242417,
+      "longitude": 130.5242967
+    },
+    {
+      "id": "jp_fukuoka_station_5724179463",
+      "osm_id": 5724179463,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshizuka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA01;JC01",
+      "latitude": 33.6070252,
+      "longitude": 130.4238337
+    },
+    {
+      "id": "jp_fukuoka_station_5724433883",
+      "osm_id": 5724433883,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄千早",
+      "name_kana": "にしてつちはや",
+      "name_translations": {
+        "en": "Nishitetsu Chihaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK03",
+      "latitude": 33.649431,
+      "longitude": 130.4402564
+    },
+    {
+      "id": "jp_fukuoka_station_5724433887",
+      "osm_id": 5724433887,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "名島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Najima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK02",
+      "latitude": 33.6427887,
+      "longitude": 130.4321799
+    },
+    {
+      "id": "jp_fukuoka_station_5724439254",
+      "osm_id": 5724439254,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千早",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chihaya"
+      },
+      "operator": "JR Kyushu",
+      "network": null,
+      "ref": "JA03",
+      "latitude": 33.6491697,
+      "longitude": 130.4403785
+    },
+    {
+      "id": "jp_fukuoka_station_5724448496",
+      "osm_id": 5724448496,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "香椎宮前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashii-Miyamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK04",
+      "latitude": 33.6545713,
+      "longitude": 130.4424863
+    },
+    {
+      "id": "jp_fukuoka_station_5725272369",
+      "osm_id": 5725272369,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "香椎",
+      "name_kana": "かしい",
+      "name_translations": {
+        "en": "Kashii"
+      },
+      "operator": "JR Kyushu",
+      "network": null,
+      "ref": "JA04;JD06",
+      "latitude": 33.659655,
+      "longitude": 130.4441037
+    },
+    {
+      "id": "jp_fukuoka_station_5725434738",
+      "osm_id": 5725434738,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福工大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukkodaimae (Fukuoka Institute of Technology)"
+      },
+      "operator": "JR Kyushu",
+      "network": "JR鹿児島本線",
+      "ref": "JA06",
+      "latitude": 33.6980686,
+      "longitude": 130.4401401
+    },
+    {
+      "id": "jp_fukuoka_station_5725434764",
+      "osm_id": 5725434764,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄香椎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Kashii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK05",
+      "latitude": 33.6594936,
+      "longitude": 130.4417306
+    },
+    {
+      "id": "jp_fukuoka_station_5725434774",
+      "osm_id": 5725434774,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "香椎花園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashii Kaenmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK06",
+      "latitude": 33.6696923,
+      "longitude": 130.4345591
+    },
+    {
+      "id": "jp_fukuoka_station_5725434792",
+      "osm_id": 5725434792,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "唐の原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tonoharu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK07",
+      "latitude": 33.6802687,
+      "longitude": 130.4345523
+    },
+    {
+      "id": "jp_fukuoka_station_5725434810",
+      "osm_id": 5725434810,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "和白",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wajiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6889551,
+      "longitude": 130.4297666
+    },
+    {
+      "id": "jp_fukuoka_station_5725434835",
+      "osm_id": 5725434835,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "九産大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyusandaimae (Kyushu Sangyo University)"
+      },
+      "operator": "JR Kyushu",
+      "network": null,
+      "ref": "JA05",
+      "latitude": 33.6738029,
+      "longitude": 130.4411164
+    },
+    {
+      "id": "jp_fukuoka_station_5726007922",
+      "osm_id": 5726007922,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuma"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA11",
+      "latitude": 33.7634831,
+      "longitude": 130.4868186
+    },
+    {
+      "id": "jp_fukuoka_station_5726027778",
+      "osm_id": 5726027778,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "古賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koga"
+      },
+      "operator": null,
+      "network": "JR鹿児島本線",
+      "ref": "JA09",
+      "latitude": 33.7326714,
+      "longitude": 130.4668375
+    },
+    {
+      "id": "jp_fukuoka_station_5726043042",
+      "osm_id": 5726043042,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "ししぶ",
+      "name_kana": "ししぶ",
+      "name_translations": {
+        "en": "Shishibu"
+      },
+      "operator": null,
+      "network": "JR鹿児島本線",
+      "ref": "JA08",
+      "latitude": 33.721739,
+      "longitude": 130.4583267
+    },
+    {
+      "id": "jp_fukuoka_station_5726043051",
+      "osm_id": 5726043051,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新宮中央",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shingu-Chuo"
+      },
+      "operator": "JR Kyushu",
+      "network": "JR鹿児島本線",
+      "ref": "JA07",
+      "latitude": 33.7117188,
+      "longitude": 130.4491858
+    },
+    {
+      "id": "jp_fukuoka_station_5726058247",
+      "osm_id": 5726058247,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "千鳥",
+      "name_kana": "ちどり",
+      "name_translations": {
+        "en": "Chidori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JA10",
+      "latitude": 33.7486753,
+      "longitude": 130.4760971
+    },
+    {
+      "id": "jp_fukuoka_station_5726477790",
+      "osm_id": 5726477790,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "東福間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashifukuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JA12",
+      "latitude": 33.7740686,
+      "longitude": 130.5109685
+    },
+    {
+      "id": "jp_fukuoka_station_5727852661",
+      "osm_id": 5727852661,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄柳川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanagawa"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T39",
+      "latitude": 33.1651756,
+      "longitude": 130.4192323
+    },
+    {
+      "id": "jp_fukuoka_station_5729556005",
+      "osm_id": 5729556005,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "直方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nōgata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC19",
+      "latitude": 33.748639,
+      "longitude": 130.7242286
+    },
+    {
+      "id": "jp_fukuoka_station_5730081610",
+      "osm_id": 5730081610,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄平尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Hirao"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T03",
+      "latitude": 33.5739778,
+      "longitude": 130.4059716
+    },
+    {
+      "id": "jp_fukuoka_station_5875685166",
+      "osm_id": 5875685166,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南瀬高",
+      "name_kana": "みなみせたか",
+      "name_translations": {
+        "en": "Minami-Setaka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JB23",
+      "latitude": 33.1337723,
+      "longitude": 130.4713617
+    },
+    {
+      "id": "jp_fukuoka_station_5875685167",
+      "osm_id": 5875685167,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "瀬高",
+      "name_kana": "せたか",
+      "name_translations": {
+        "en": "Setaka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JB22",
+      "latitude": 33.1570441,
+      "longitude": 130.4854855
+    },
+    {
+      "id": "jp_fukuoka_station_5875685168",
+      "osm_id": 5875685168,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑後船小屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikugo Funagoya"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB21",
+      "latitude": 33.1782158,
+      "longitude": 130.4916083
+    },
+    {
+      "id": "jp_fukuoka_station_5875685169",
+      "osm_id": 5875685169,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "羽犬塚",
+      "name_kana": "はいぬづか",
+      "name_translations": {
+        "en": "Hainuzuka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB20",
+      "latitude": 33.2099904,
+      "longitude": 130.4975862
+    },
+    {
+      "id": "jp_fukuoka_station_5875685170",
+      "osm_id": 5875685170,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西牟田",
+      "name_kana": "にしむた",
+      "name_translations": {
+        "en": "Nishimuta"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB19",
+      "latitude": 33.2466314,
+      "longitude": 130.5010369
+    },
+    {
+      "id": "jp_fukuoka_station_5875685171",
+      "osm_id": 5875685171,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "荒木",
+      "name_kana": "あらき",
+      "name_translations": {
+        "en": "Araki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB18",
+      "latitude": 33.2767052,
+      "longitude": 130.5026824
+    },
+    {
+      "id": "jp_fukuoka_station_5875685173",
+      "osm_id": 5875685173,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "都府楼南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tofuro-Minami"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5030959,
+      "longitude": 130.5067054
+    },
+    {
+      "id": "jp_fukuoka_station_5875685174",
+      "osm_id": 5875685174,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "天拝山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenpaizan"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4819426,
+      "longitude": 130.5302033
+    },
+    {
+      "id": "jp_fukuoka_station_5875755791",
+      "osm_id": 5875755791,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大牟田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omuta"
+      },
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": "T50",
+      "latitude": 33.0299039,
+      "longitude": 130.4433193
+    },
+    {
+      "id": "jp_fukuoka_station_5875755793",
+      "osm_id": 5875755793,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "銀水",
+      "name_kana": "ぎんすい",
+      "name_translations": {
+        "en": "Ginsui"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JB26",
+      "latitude": 33.0550942,
+      "longitude": 130.4609205
+    },
+    {
+      "id": "jp_fukuoka_station_5875755794",
+      "osm_id": 5875755794,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉野",
+      "name_kana": "よしの",
+      "name_translations": {
+        "en": "Yoshino"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JB25",
+      "latitude": 33.0758042,
+      "longitude": 130.4663521
+    },
+    {
+      "id": "jp_fukuoka_station_5875755795",
+      "osm_id": 5875755795,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "渡瀬",
+      "name_kana": "わたぜ",
+      "name_translations": {
+        "en": "Wataze"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JB24",
+      "latitude": 33.1000127,
+      "longitude": 130.4599435
+    },
+    {
+      "id": "jp_fukuoka_station_5943229344",
+      "osm_id": 5943229344,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "門司港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mojikō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JA31",
+      "latitude": 33.9448819,
+      "longitude": 130.9612571
+    },
+    {
+      "id": "jp_fukuoka_station_6050885672",
+      "osm_id": 6050885672,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小竹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotake"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC17",
+      "latitude": 33.6966012,
+      "longitude": 130.7105537
+    },
+    {
+      "id": "jp_fukuoka_station_6050890025",
+      "osm_id": 6050890025,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "飯塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iizuka"
+      },
+      "operator": "JR九州",
+      "network": null,
+      "ref": "JC13",
+      "latitude": 33.6286803,
+      "longitude": 130.6895265
+    },
+    {
+      "id": "jp_fukuoka_station_6050892787",
+      "osm_id": 6050892787,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新飯塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Iizuka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC14;JJ01",
+      "latitude": 33.6441682,
+      "longitude": 130.6942077
+    },
+    {
+      "id": "jp_fukuoka_station_6060489259",
+      "osm_id": 6060489259,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小森江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komorie"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA30",
+      "latitude": 33.9154455,
+      "longitude": 130.9384609
+    },
+    {
+      "id": "jp_fukuoka_station_6060489260",
+      "osm_id": 6060489260,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "門司",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Moji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA29;JA52",
+      "latitude": 33.9043043,
+      "longitude": 130.9328578
+    },
+    {
+      "id": "jp_fukuoka_station_6060489261",
+      "osm_id": 6060489261,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "九州工大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyūshūkōdaimae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA26",
+      "latitude": 33.9004564,
+      "longitude": 130.8401339
+    },
+    {
+      "id": "jp_fukuoka_station_6060489262",
+      "osm_id": 6060489262,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西小倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kokura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA27;JF01;JI01",
+      "latitude": 33.8886007,
+      "longitude": 130.8740155
+    },
+    {
+      "id": "jp_fukuoka_station_6063546670",
+      "osm_id": 6063546670,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "太宰府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dazaifu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5184903,
+      "longitude": 130.5311595
+    },
+    {
+      "id": "jp_fukuoka_station_6094426857",
+      "osm_id": 6094426857,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下鴨生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Kamoo"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR後藤寺線",
+      "ref": null,
+      "latitude": 33.6146731,
+      "longitude": 130.7286022
+    },
+    {
+      "id": "jp_fukuoka_station_6235459331",
+      "osm_id": 6235459331,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "桂川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Keisen"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC11;JG01",
+      "latitude": 33.5846559,
+      "longitude": 130.6622792
+    },
+    {
+      "id": "jp_fukuoka_station_6241679585",
+      "osm_id": 6241679585,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小倉",
+      "name_kana": "コクラ",
+      "name_translations": {
+        "en": "Kokura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA28;JA51;JF01;JI01",
+      "latitude": 33.8868464,
+      "longitude": 130.882509
+    },
+    {
+      "id": "jp_fukuoka_station_6241750189",
+      "osm_id": 6241750189,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八幡",
+      "name_kana": "やはた",
+      "name_translations": {
+        "en": "Yahata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA22",
+      "latitude": 33.8692808,
+      "longitude": 130.7954844
+    },
+    {
+      "id": "jp_fukuoka_station_6241773035",
+      "osm_id": 6241773035,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "枝光",
+      "name_kana": "えだみつ",
+      "name_translations": {
+        "en": "Edamitsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA24",
+      "latitude": 33.8792308,
+      "longitude": 130.8130436
+    },
+    {
+      "id": "jp_fukuoka_station_6242093369",
+      "osm_id": 6242093369,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "折尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Orio"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JA19;JE01",
+      "latitude": 33.8642177,
+      "longitude": 130.7122632
+    },
+    {
+      "id": "jp_fukuoka_station_6242232201",
+      "osm_id": 6242232201,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東水巻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Mizumaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC25",
+      "latitude": 33.8404845,
+      "longitude": 130.7081496
+    },
+    {
+      "id": "jp_fukuoka_station_6242333738",
+      "osm_id": 6242333738,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "東中間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Nakama"
+      },
+      "operator": "筑豊電気鉄道",
+      "network": null,
+      "ref": "CK12",
+      "latitude": 33.820168,
+      "longitude": 130.7216177
+    },
+    {
+      "id": "jp_fukuoka_station_6242597405",
+      "osm_id": 6242597405,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "あかぢ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akaji"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC3",
+      "latitude": 33.7273897,
+      "longitude": 130.724536
+    },
+    {
+      "id": "jp_fukuoka_station_6242597417",
+      "osm_id": 6242597417,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "南直方御殿口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Nōgata Gotenguchi"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC2",
+      "latitude": 33.7388005,
+      "longitude": 130.7249296
+    },
+    {
+      "id": "jp_fukuoka_station_6469962484",
+      "osm_id": 6469962484,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "井尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ijiri"
+      },
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": "T06",
+      "latitude": 33.5520634,
+      "longitude": 130.4433399
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_6570334685",
+      "osm_id": 6570334685,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "渡船場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ferry Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6123614,
+      "longitude": 130.3108133
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_6614504451",
+      "osm_id": 6614504451,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "能古島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6119852,
+      "longitude": 130.3106972
+    },
+    {
+      "id": "jp_fukuoka_station_6704325855",
+      "osm_id": 6704325855,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳力嵐山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokuriki Arashiyamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8248926,
+      "longitude": 130.863746
+    },
+    {
+      "id": "jp_fukuoka_station_6704349573",
+      "osm_id": 6704349573,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "志井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.822472,
+      "longitude": 130.8714647
+    },
+    {
+      "id": "jp_fukuoka_station_6704353641",
+      "osm_id": 6704353641,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "平和通",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Heiwadōri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8830804,
+      "longitude": 130.8811964
+    },
+    {
+      "id": "jp_fukuoka_station_6845406599",
+      "osm_id": 6845406599,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下曽根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimosone"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.8323559,
+      "longitude": 130.9347186
+    },
+    {
+      "id": "jp_fukuoka_station_6845406639",
+      "osm_id": 6845406639,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安部山公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Abeyamakōen"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JF日豊線",
+      "ref": null,
+      "latitude": 33.8440263,
+      "longitude": 130.9042963
+    },
+    {
+      "id": "jp_fukuoka_station_6845509568",
+      "osm_id": 6845509568,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "朽網",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8072412,
+      "longitude": 130.9551711
+    },
+    {
+      "id": "jp_fukuoka_station_6848941952",
+      "osm_id": 6848941952,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小波瀬西工大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obase-Nishikōdai-mae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.7532097,
+      "longitude": 130.9718907
+    },
+    {
+      "id": "jp_fukuoka_station_6848953764",
+      "osm_id": 6848953764,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南行橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Yukuhashi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.716064,
+      "longitude": 130.9816231
+    },
+    {
+      "id": "jp_fukuoka_station_6848959288",
+      "osm_id": 6848959288,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "苅田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.7845501,
+      "longitude": 130.978792
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_6849323128",
+      "osm_id": 6849323128,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "昭和バス伊都営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6030864,
+      "longitude": 130.2103084
+    },
+    {
+      "id": "jp_fukuoka_station_6871127341",
+      "osm_id": 6871127341,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "海老津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebitsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA16",
+      "latitude": 33.840136,
+      "longitude": 130.6233156
+    },
+    {
+      "id": "jp_fukuoka_station_6871127498",
+      "osm_id": 6871127498,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "教育大前",
+      "name_kana": "きょういくだいまえ",
+      "name_translations": {
+        "en": "Kyōikudai-mae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA15",
+      "latitude": 33.8084045,
+      "longitude": 130.5914153
+    },
+    {
+      "id": "jp_fukuoka_station_7023164090",
+      "osm_id": 7023164090,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "勝野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katsuno"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC18",
+      "latitude": 33.728586,
+      "longitude": 130.7165665
+    },
+    {
+      "id": "jp_fukuoka_station_7207506201",
+      "osm_id": 7207506201,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "水巻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizumaki"
+      },
+      "operator": "JR Kyushu",
+      "network": null,
+      "ref": "JA18",
+      "latitude": 33.8523915,
+      "longitude": 130.6953629
+    },
+    {
+      "id": "jp_fukuoka_station_7712171224",
+      "osm_id": 7712171224,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "室見",
+      "name_kana": "むろみ",
+      "name_translations": {
+        "en": "Muromi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K02",
+      "latitude": 33.580913,
+      "longitude": 130.340033
+    },
+    {
+      "id": "jp_fukuoka_station_7712171225",
+      "osm_id": 7712171225,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "藤崎",
+      "name_kana": "ふじさき",
+      "name_translations": {
+        "en": "Fujisaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K03",
+      "latitude": 33.5813608,
+      "longitude": 130.3483351
+    },
+    {
+      "id": "jp_fukuoka_station_7712171226",
+      "osm_id": 7712171226,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "西新",
+      "name_kana": "にしじん",
+      "name_translations": {
+        "en": "Nishijin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K04",
+      "latitude": 33.5837344,
+      "longitude": 130.3594592
+    },
+    {
+      "id": "jp_fukuoka_station_7712171227",
+      "osm_id": 7712171227,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "唐人町",
+      "name_kana": "とうじんまち",
+      "name_translations": {
+        "en": "Tōjinmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K05",
+      "latitude": 33.5902206,
+      "longitude": 130.370243
+    },
+    {
+      "id": "jp_fukuoka_station_7712171228",
+      "osm_id": 7712171228,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "大濠公園",
+      "name_kana": "おおほりこうえん",
+      "name_translations": {
+        "en": "Ōhorikōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K06",
+      "latitude": 33.590105,
+      "longitude": 130.3787604
+    },
+    {
+      "id": "jp_fukuoka_station_7712171229",
+      "osm_id": 7712171229,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "赤坂",
+      "name_kana": "あかさか",
+      "name_translations": {
+        "en": "Akasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K07",
+      "latitude": 33.5890805,
+      "longitude": 130.390363
+    },
+    {
+      "id": "jp_fukuoka_station_7712171230",
+      "osm_id": 7712171230,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "天神",
+      "name_kana": "てんじん",
+      "name_translations": {
+        "en": "Tenjin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K08",
+      "latitude": 33.5912646,
+      "longitude": 130.3986278
+    },
+    {
+      "id": "jp_fukuoka_station_7712171233",
+      "osm_id": 7712171233,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "東比恵",
+      "name_kana": "ひがしひえ",
+      "name_translations": {
+        "en": "Higashi-Hie"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K12",
+      "latitude": 33.5898296,
+      "longitude": 130.4312915
+    },
+    {
+      "id": "jp_fukuoka_station_7712171234",
+      "osm_id": 7712171234,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "福岡空港",
+      "name_kana": "ふくおかくうこう",
+      "name_translations": {
+        "en": "Fukuokakūkō (Airport)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K13",
+      "latitude": 33.5973227,
+      "longitude": 130.448182
+    },
+    {
+      "id": "jp_fukuoka_station_7712171235",
+      "osm_id": 7712171235,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "呉服町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gofukumachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "H02",
+      "latitude": 33.5979652,
+      "longitude": 130.4097225
+    },
+    {
+      "id": "jp_fukuoka_station_7712171236",
+      "osm_id": 7712171236,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "千代県庁口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chiyo-Kenchōguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "H03",
+      "latitude": 33.6022343,
+      "longitude": 130.4140797
+    },
+    {
+      "id": "jp_fukuoka_station_7712171237",
+      "osm_id": 7712171237,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "馬出九大病院前",
+      "name_kana": "まいだしきゅうだいびょういんまえ",
+      "name_translations": {
+        "en": "Maidashi-Kyūdai-byōin-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "H04",
+      "latitude": 33.6099223,
+      "longitude": 130.4198612
+    },
+    {
+      "id": "jp_fukuoka_station_7712171238",
+      "osm_id": 7712171238,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "箱崎宮前",
+      "name_kana": "はこざきみやまえ",
+      "name_translations": {
+        "en": "Hakozaki-Miyamae"
+      },
+      "operator": "福岡市",
+      "network": "2号線(箱崎線)",
+      "ref": "H05",
+      "latitude": 33.6151878,
+      "longitude": 130.4198606
+    },
+    {
+      "id": "jp_fukuoka_station_7712171239",
+      "osm_id": 7712171239,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "箱崎九大前",
+      "name_kana": "はこざききゅうだいまえ",
+      "name_translations": {
+        "en": "Hakozaki-Kyūdai-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "H06",
+      "latitude": 33.6226418,
+      "longitude": 130.4214457
+    },
+    {
+      "id": "jp_fukuoka_station_7720963429",
+      "osm_id": 7720963429,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "天神南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenjin-Minami"
+      },
+      "operator": "福岡市交通局",
+      "network": "七隈線",
+      "ref": "N16",
+      "latitude": 33.5886007,
+      "longitude": 130.4023826
+    },
+    {
+      "id": "jp_fukuoka_station_7720988174",
+      "osm_id": 7720988174,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "賀茂",
+      "name_kana": "かも",
+      "name_translations": {
+        "en": "Kamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N03",
+      "latitude": 33.5505567,
+      "longitude": 130.3378299
+    },
+    {
+      "id": "jp_fukuoka_station_7720988175",
+      "osm_id": 7720988175,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "七隈",
+      "name_kana": "ななくま",
+      "name_translations": {
+        "en": "Nanakuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N07",
+      "latitude": 33.5529251,
+      "longitude": 130.3617056
+    },
+    {
+      "id": "jp_fukuoka_station_7720988176",
+      "osm_id": 7720988176,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "金山",
+      "name_kana": "かなやま",
+      "name_translations": {
+        "en": "Kanayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N08",
+      "latitude": 33.5596888,
+      "longitude": 130.3617686
+    },
+    {
+      "id": "jp_fukuoka_station_7720988177",
+      "osm_id": 7720988177,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "次郎丸",
+      "name_kana": "じろうまる",
+      "name_translations": {
+        "en": "Jirōmaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N02",
+      "latitude": 33.5524897,
+      "longitude": 130.3299871
+    },
+    {
+      "id": "jp_fukuoka_station_7721059700",
+      "osm_id": 7721059700,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "六本松",
+      "name_kana": "ろっぽんまつ",
+      "name_translations": {
+        "en": "Ropponmatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N11",
+      "latitude": 33.5774198,
+      "longitude": 130.3770659
+    },
+    {
+      "id": "jp_fukuoka_station_7721059701",
+      "osm_id": 7721059701,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "薬院大通",
+      "name_kana": "やくいんおおどおり",
+      "name_translations": {
+        "en": "Yakuin-ōdōri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N13",
+      "latitude": 33.5805393,
+      "longitude": 130.3967594
+    },
+    {
+      "id": "jp_fukuoka_station_7721059702",
+      "osm_id": 7721059702,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "野芥",
+      "name_kana": "のけ",
+      "name_translations": {
+        "en": "Noke"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N04",
+      "latitude": 33.5483465,
+      "longitude": 130.3464639
+    },
+    {
+      "id": "jp_fukuoka_station_7721059703",
+      "osm_id": 7721059703,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "別府",
+      "name_kana": "べふ",
+      "name_translations": {
+        "en": "Befu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N10",
+      "latitude": 33.5741102,
+      "longitude": 130.369553
+    },
+    {
+      "id": "jp_fukuoka_station_7721059704",
+      "osm_id": 7721059704,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "福大前",
+      "name_kana": "ふくだいまえ",
+      "name_translations": {
+        "en": "Fukudaimae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N06",
+      "latitude": 33.5473378,
+      "longitude": 130.3623533
+    },
+    {
+      "id": "jp_fukuoka_station_7721059705",
+      "osm_id": 7721059705,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "梅林",
+      "name_kana": "うめばやし",
+      "name_translations": {
+        "en": "Umebayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N05",
+      "latitude": 33.5457836,
+      "longitude": 130.3551932
+    },
+    {
+      "id": "jp_fukuoka_station_7721059706",
+      "osm_id": 7721059706,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "渡辺通",
+      "name_kana": "わたなべどおり",
+      "name_translations": {
+        "en": "Watanabe-dōri"
+      },
+      "operator": "福岡市交通局",
+      "network": "七隈線",
+      "ref": "N15",
+      "latitude": 33.5839062,
+      "longitude": 130.4051299
+    },
+    {
+      "id": "jp_fukuoka_station_7721059707",
+      "osm_id": 7721059707,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "茶山",
+      "name_kana": "ちゃやま",
+      "name_translations": {
+        "en": "Chayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N09",
+      "latitude": 33.5662866,
+      "longitude": 130.365513
+    },
+    {
+      "id": "jp_fukuoka_station_7721140762",
+      "osm_id": 7721140762,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "桜坂",
+      "name_kana": "さくらざか",
+      "name_translations": {
+        "en": "Sakurazaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N12",
+      "latitude": 33.5772712,
+      "longitude": 130.3868573
+    },
+    {
+      "id": "jp_fukuoka_station_7721140763",
+      "osm_id": 7721140763,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "橋本",
+      "name_kana": "はしもと",
+      "name_translations": {
+        "en": "Hashimoto"
+      },
+      "operator": "福岡市交通局",
+      "network": null,
+      "ref": "N01",
+      "latitude": 33.5551195,
+      "longitude": 130.3210647
+    },
+    {
+      "id": "jp_fukuoka_station_7733299021",
+      "osm_id": 7733299021,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "祇園",
+      "name_kana": "ぎおん",
+      "name_translations": {
+        "en": "Gion"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K10",
+      "latitude": 33.5943367,
+      "longitude": 130.4143171
+    },
+    {
+      "id": "jp_fukuoka_station_7735514077",
+      "osm_id": 7735514077,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "原町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harumachi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC03",
+      "latitude": 33.6117959,
+      "longitude": 130.4708768
+    },
+    {
+      "id": "jp_fukuoka_station_7735514079",
+      "osm_id": 7735514079,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "柚須",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yusu"
+      },
+      "operator": null,
+      "network": "福北ゆたか線",
+      "ref": "JC02",
+      "latitude": 33.6132992,
+      "longitude": 130.4446348
+    },
+    {
+      "id": "jp_fukuoka_station_7735565985",
+      "osm_id": 7735565985,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長者原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chojabaru"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "香椎線",
+      "ref": "JC04",
+      "latitude": 33.6133236,
+      "longitude": 130.4774821
+    },
+    {
+      "id": "jp_fukuoka_station_7735621288",
+      "osm_id": 7735621288,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "門松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kadomatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JC05",
+      "latitude": 33.6205847,
+      "longitude": 130.4964088
+    },
+    {
+      "id": "jp_fukuoka_station_7736216886",
+      "osm_id": 7736216886,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "城戸南蔵院前",
+      "name_kana": "きどなんぞいんまえ",
+      "name_translations": {
+        "en": "Kidonanzoin-Mae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC08",
+      "latitude": 33.6181256,
+      "longitude": 130.5718721
+    },
+    {
+      "id": "jp_fukuoka_station_7736216887",
+      "osm_id": 7736216887,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑前山手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen Yamate"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC07",
+      "latitude": 33.6220895,
+      "longitude": 130.5572017
+    },
+    {
+      "id": "jp_fukuoka_station_7736227385",
+      "osm_id": 7736227385,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "九郎原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroh'baru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JC09",
+      "latitude": 33.5922918,
+      "longitude": 130.611259
+    },
+    {
+      "id": "jp_fukuoka_station_7736610192",
+      "osm_id": 7736610192,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "須恵中央",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sue Central"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5869445,
+      "longitude": 130.5051702
+    },
+    {
+      "id": "jp_fukuoka_station_7736610488",
+      "osm_id": 7736610488,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "須恵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5966337,
+      "longitude": 130.4981849
+    },
+    {
+      "id": "jp_fukuoka_station_7736610587",
+      "osm_id": 7736610587,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "舞松原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maimatsubara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JD08",
+      "latitude": 33.6451641,
+      "longitude": 130.4551591
+    },
+    {
+      "id": "jp_fukuoka_station_7736610594",
+      "osm_id": 7736610594,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇美",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.568907,
+      "longitude": 130.5133281
+    },
+    {
+      "id": "jp_fukuoka_station_7736610596",
+      "osm_id": 7736610596,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinbaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5790488,
+      "longitude": 130.5088723
+    },
+    {
+      "id": "jp_fukuoka_station_7736891447",
+      "osm_id": 7736891447,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西戸崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saitozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6503152,
+      "longitude": 130.3580034
+    },
+    {
+      "id": "jp_fukuoka_station_7736891448",
+      "osm_id": 7736891448,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "海ノ中道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umino Nakamichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6641645,
+      "longitude": 130.3616492
+    },
+    {
+      "id": "jp_fukuoka_station_7736891449",
+      "osm_id": 7736891449,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "雁ノ巣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gan'nosu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JD03",
+      "latitude": 33.6839592,
+      "longitude": 130.4034944
+    },
+    {
+      "id": "jp_fukuoka_station_7736891450",
+      "osm_id": 7736891450,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "奈多",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6867071,
+      "longitude": 130.4125415
+    },
+    {
+      "id": "jp_fukuoka_station_7736891457",
+      "osm_id": 7736891457,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "香椎神宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashii Shrine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JD07",
+      "latitude": 33.6502039,
+      "longitude": 130.4523626
+    },
+    {
+      "id": "jp_fukuoka_station_7740333050",
+      "osm_id": 7740333050,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iga"
+      },
+      "operator": null,
+      "network": "香椎線",
+      "ref": "JD10",
+      "latitude": 33.6207841,
+      "longitude": 130.4735926
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_7779586385",
+      "osm_id": 7779586385,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "飯塚バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iizuka Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.641228,
+      "longitude": 130.6859008
+    },
+    {
+      "id": "jp_fukuoka_station_7798035867",
+      "osm_id": 7798035867,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝倉街道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asakura Kaido"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4839356,
+      "longitude": 130.5326394
+    },
+    {
+      "id": "jp_fukuoka_station_7798035873",
+      "osm_id": 7798035873,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄渡瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Wataze"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T45",
+      "latitude": 33.086778,
+      "longitude": 130.4587412
+    },
+    {
+      "id": "jp_fukuoka_station_7798035875",
+      "osm_id": 7798035875,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "倉永",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuranaga"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T46",
+      "latitude": 33.0715655,
+      "longitude": 130.4638971
+    },
+    {
+      "id": "jp_fukuoka_station_7798035876",
+      "osm_id": 7798035876,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "東甘木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Amagi"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T47",
+      "latitude": 33.0619002,
+      "longitude": 130.4640169
+    },
+    {
+      "id": "jp_fukuoka_station_7798362813",
+      "osm_id": 7798362813,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄中島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Nakashima"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T42",
+      "latitude": 33.1226018,
+      "longitude": 130.4400395
+    },
+    {
+      "id": "jp_fukuoka_station_7798362816",
+      "osm_id": 7798362816,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "江の浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enoura"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T43",
+      "latitude": 33.1093289,
+      "longitude": 130.4464817
+    },
+    {
+      "id": "jp_fukuoka_station_7798362822",
+      "osm_id": 7798362822,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "開",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiraki"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T44",
+      "latitude": 33.0968882,
+      "longitude": 130.4532405
+    },
+    {
+      "id": "jp_fukuoka_station_7798362823",
+      "osm_id": 7798362823,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄銀水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Ginsui"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T48",
+      "latitude": 33.0510774,
+      "longitude": 130.4582096
+    },
+    {
+      "id": "jp_fukuoka_station_7798362824",
+      "osm_id": 7798362824,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新栄町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin Sakaemachi"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T49",
+      "latitude": 33.0385355,
+      "longitude": 130.4499026
+    },
+    {
+      "id": "jp_fukuoka_station_7798362826",
+      "osm_id": 7798362826,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "高宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamiya"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T04",
+      "latitude": 33.567236,
+      "longitude": 130.4144951
+    },
+    {
+      "id": "jp_fukuoka_station_7798593158",
+      "osm_id": 7798593158,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "春日原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasugabaru"
+      },
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": "T09",
+      "latitude": 33.5380094,
+      "longitude": 130.4730964
+    },
+    {
+      "id": "jp_fukuoka_station_7798593163",
+      "osm_id": 7798593163,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "雑餉隈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zasshonokuma"
+      },
+      "operator": "西日本鉄道",
+      "network": "西鉄天神大牟田線",
+      "ref": "T07",
+      "latitude": 33.547399,
+      "longitude": 130.4618515
+    },
+    {
+      "id": "jp_fukuoka_station_7805687682",
+      "osm_id": 7805687682,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "白木原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasugabaru"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.528286,
+      "longitude": 130.4831101
+    },
+    {
+      "id": "jp_fukuoka_station_7814521945",
+      "osm_id": 7814521945,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鞍手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurate"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC22",
+      "latitude": 33.797818,
+      "longitude": 130.6995624
+    },
+    {
+      "id": "jp_fukuoka_station_7814521946",
+      "osm_id": 7814521946,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakama"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JC24",
+      "latitude": 33.8278908,
+      "longitude": 130.7094017
+    },
+    {
+      "id": "jp_fukuoka_station_7815025513",
+      "osm_id": 7815025513,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陣原",
+      "name_kana": "じんのはる",
+      "name_translations": {
+        "en": "Jin'noharu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": "JA20",
+      "latitude": 33.8681707,
+      "longitude": 130.7428622
+    },
+    {
+      "id": "jp_fukuoka_station_7815151176",
+      "osm_id": 7815151176,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑前山家",
+      "name_kana": "ちくぜんやまええき",
+      "name_translations": {
+        "en": "Chikuzen Yamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4773114,
+      "longitude": 130.5738084
+    },
+    {
+      "id": "jp_fukuoka_station_7815151177",
+      "osm_id": 7815151177,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑前内野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen Uchino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5402138,
+      "longitude": 130.6383676
+    },
+    {
+      "id": "jp_fukuoka_station_7815151178",
+      "osm_id": 7815151178,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "上穂波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Honami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5670759,
+      "longitude": 130.6455144
+    },
+    {
+      "id": "jp_fukuoka_station_7815488101",
+      "osm_id": 7815488101,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "船尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Funao"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR後藤寺線",
+      "ref": null,
+      "latitude": 33.6300863,
+      "longitude": 130.7671276
+    },
+    {
+      "id": "jp_fukuoka_station_7815488102",
+      "osm_id": 7815488102,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑前庄内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen-Shōnai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR後藤寺線",
+      "ref": null,
+      "latitude": 33.6164844,
+      "longitude": 130.7384017
+    },
+    {
+      "id": "jp_fukuoka_station_7815488103",
+      "osm_id": 7815488103,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上三緒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Mio"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR後藤寺線",
+      "ref": null,
+      "latitude": 33.622975,
+      "longitude": 130.7134136
+    },
+    {
+      "id": "jp_fukuoka_station_7815488107",
+      "osm_id": 7815488107,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "田川後藤寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tagawa-Gotōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6303531,
+      "longitude": 130.8000701
+    },
+    {
+      "id": "jp_fukuoka_station_7816772400",
+      "osm_id": 7816772400,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑前深江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen-Fukae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5150331,
+      "longitude": 130.1394483
+    },
+    {
+      "id": "jp_fukuoka_station_7816772406",
+      "osm_id": 7816772406,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "一貴山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikisan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.534333,
+      "longitude": 130.1682491
+    },
+    {
+      "id": "jp_fukuoka_station_7816772407",
+      "osm_id": 7816772407,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "加布里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kafuri"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5433486,
+      "longitude": 130.1763314
+    },
+    {
+      "id": "jp_fukuoka_station_7816772412",
+      "osm_id": 7816772412,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美咲が丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misakigaoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5499248,
+      "longitude": 130.1855539
+    },
+    {
+      "id": "jp_fukuoka_station_7816772413",
+      "osm_id": 7816772413,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "筑前前原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikuzen-Maebaru"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5571401,
+      "longitude": 130.1992925
+    },
+    {
+      "id": "jp_fukuoka_station_7816772417",
+      "osm_id": 7816772417,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "糸島高校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itoshimakōkō-mae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5607018,
+      "longitude": 130.2133204
+    },
+    {
+      "id": "jp_fukuoka_station_7816772419",
+      "osm_id": 7816772419,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "波多江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5639695,
+      "longitude": 130.2268454
+    },
+    {
+      "id": "jp_fukuoka_station_7816772422",
+      "osm_id": 7816772422,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "周船寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Susenji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5707876,
+      "longitude": 130.24627
+    },
+    {
+      "id": "jp_fukuoka_station_7816772425",
+      "osm_id": 7816772425,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "九大学研都市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyūdai-Gakkentoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5781634,
+      "longitude": 130.2598996
+    },
+    {
+      "id": "jp_fukuoka_station_7816772426",
+      "osm_id": 7816772426,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "今宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imajuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5793544,
+      "longitude": 130.2736272
+    },
+    {
+      "id": "jp_fukuoka_station_7816772428",
+      "osm_id": 7816772428,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下山門",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoyamato"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5818916,
+      "longitude": 130.3080639
+    },
+    {
+      "id": "jp_fukuoka_station_7816772430",
+      "osm_id": 7816772430,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大入",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dainyū"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5088943,
+      "longitude": 130.1060468
+    },
+    {
+      "id": "jp_fukuoka_station_7816830150",
+      "osm_id": 7816830150,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "津古",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuko"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4464557,
+      "longitude": 130.5655736
+    },
+    {
+      "id": "jp_fukuoka_station_7816830152",
+      "osm_id": 7816830152,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑紫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikushi"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4628934,
+      "longitude": 130.5529283
+    },
+    {
+      "id": "jp_fukuoka_station_7816830156",
+      "osm_id": 7816830156,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakuradai"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4717091,
+      "longitude": 130.5423899
+    },
+    {
+      "id": "jp_fukuoka_station_7816830158",
+      "osm_id": 7816830158,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄二日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Futsukaichi"
+      },
+      "operator": "西日本鉄道",
+      "network": "天神大牟田線",
+      "ref": null,
+      "latitude": 33.5021529,
+      "longitude": 130.5177779
+    },
+    {
+      "id": "jp_fukuoka_station_7816830160",
+      "osm_id": 7816830160,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "都府楼前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tofuromae"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.5119218,
+      "longitude": 130.5076633
+    },
+    {
+      "id": "jp_fukuoka_station_7816830162",
+      "osm_id": 7816830162,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "下大利",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Ōri"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.5223102,
+      "longitude": 130.4893813
+    },
+    {
+      "id": "jp_fukuoka_station_7817176498",
+      "osm_id": 7817176498,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oho"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4108241,
+      "longitude": 130.5579293
+    },
+    {
+      "id": "jp_fukuoka_station_7817176500",
+      "osm_id": 7817176500,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄小郡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Ogori"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.3962305,
+      "longitude": 130.5535881
+    },
+    {
+      "id": "jp_fukuoka_station_7817176504",
+      "osm_id": 7817176504,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "味坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ajisaka"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.3527452,
+      "longitude": 130.5405499
+    },
+    {
+      "id": "jp_fukuoka_station_7817176506",
+      "osm_id": 7817176506,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮の陣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyanojin"
+      },
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3294038,
+      "longitude": 130.5308202
+    },
+    {
+      "id": "jp_fukuoka_station_7817176508",
+      "osm_id": 7817176508,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "櫛原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kushiwara"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.3196233,
+      "longitude": 130.5243651
+    },
+    {
+      "id": "jp_fukuoka_station_7817176510",
+      "osm_id": 7817176510,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄久留米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Kurume"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.3122586,
+      "longitude": 130.5210838
+    },
+    {
+      "id": "jp_fukuoka_station_7817176514",
+      "osm_id": 7817176514,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "花畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanabatake"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.3059351,
+      "longitude": 130.5151628
+    },
+    {
+      "id": "jp_fukuoka_station_7817176518",
+      "osm_id": 7817176518,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "津福",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsubuku"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.2966172,
+      "longitude": 130.4979135
+    },
+    {
+      "id": "jp_fukuoka_station_7817176520",
+      "osm_id": 7817176520,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsusawa"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4233944,
+      "longitude": 130.5604271
+    },
+    {
+      "id": "jp_fukuoka_station_7817176522",
+      "osm_id": 7817176522,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "安武",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasutake"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.2865006,
+      "longitude": 130.4892775
+    },
+    {
+      "id": "jp_fukuoka_station_7817176524",
+      "osm_id": 7817176524,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大善寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daizenji"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.2705282,
+      "longitude": 130.4740525
+    },
+    {
+      "id": "jp_fukuoka_station_7817176526",
+      "osm_id": 7817176526,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三潴",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizuma"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.2562161,
+      "longitude": 130.4695223
+    },
+    {
+      "id": "jp_fukuoka_station_7817176528",
+      "osm_id": 7817176528,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "犬塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inuzuka"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.247766,
+      "longitude": 130.4631816
+    },
+    {
+      "id": "jp_fukuoka_station_7817176530",
+      "osm_id": 7817176530,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "聖マリア病院前駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "St. Mary Hospital Station"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.3020704,
+      "longitude": 130.5102128
+    },
+    {
+      "id": "jp_fukuoka_station_7817176532",
+      "osm_id": 7817176532,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大溝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omizo"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.2274413,
+      "longitude": 130.4500944
+    },
+    {
+      "id": "jp_fukuoka_station_7817176533",
+      "osm_id": 7817176533,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "八丁牟田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatchōmuta"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.2094065,
+      "longitude": 130.4379661
+    },
+    {
+      "id": "jp_fukuoka_station_7817176535",
+      "osm_id": 7817176535,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢加部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakabe"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.1740438,
+      "longitude": 130.4156613
+    },
+    {
+      "id": "jp_fukuoka_station_7817176536",
+      "osm_id": 7817176536,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳益",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokumasu"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T40",
+      "latitude": 33.1550007,
+      "longitude": 130.426892
+    },
+    {
+      "id": "jp_fukuoka_station_7817176537",
+      "osm_id": 7817176537,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiotsuka"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T41",
+      "latitude": 33.1435191,
+      "longitude": 130.4313947
+    },
+    {
+      "id": "jp_fukuoka_station_7817176541",
+      "osm_id": 7817176541,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三国が丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikuni Gaoka"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": null,
+      "latitude": 33.4369137,
+      "longitude": 130.5632042
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_7819880630",
+      "osm_id": 7819880630,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "玄界島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Genkaishima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6824326,
+      "longitude": 130.2351162
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_7819950970",
+      "osm_id": 7819950970,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "博多港国際ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakata Port International Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6077571,
+      "longitude": 130.3996199
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_7820116529",
+      "osm_id": 7820116529,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小呂島市営渡船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8633508,
+      "longitude": 130.0352292
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_7820116530",
+      "osm_id": 7820116530,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小呂島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8632695,
+      "longitude": 130.0349724
+    },
+    {
+      "id": "jp_fukuoka_station_7840431031",
+      "osm_id": 7840431031,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishida"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日田彦山線",
+      "ref": null,
+      "latitude": 33.8319626,
+      "longitude": 130.8889414
+    },
+    {
+      "id": "jp_fukuoka_station_7841329214",
+      "osm_id": 7841329214,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "志井公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shii-Kōen"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日田彦山線",
+      "ref": null,
+      "latitude": 33.8183108,
+      "longitude": 130.8797076
+    },
+    {
+      "id": "jp_fukuoka_station_7842655176",
+      "osm_id": 7842655176,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田川伊田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tagawa Ita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6419955,
+      "longitude": 130.8177441
+    },
+    {
+      "id": "jp_fukuoka_station_7842663899",
+      "osm_id": 7842663899,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "一本松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ipponmatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JI12",
+      "latitude": 33.6559571,
+      "longitude": 130.8354382
+    },
+    {
+      "id": "jp_fukuoka_station_7842663900",
+      "osm_id": 7842663900,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "香春",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawara"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6661307,
+      "longitude": 130.8469158
+    },
+    {
+      "id": "jp_fukuoka_station_7842663901",
+      "osm_id": 7842663901,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "採銅所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saidōsho"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.707156,
+      "longitude": 130.8532918
+    },
+    {
+      "id": "jp_fukuoka_station_7842663914",
+      "osm_id": 7842663914,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "呼野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yobuno"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.754526,
+      "longitude": 130.8615182
+    },
+    {
+      "id": "jp_fukuoka_station_7842663915",
+      "osm_id": 7842663915,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石原町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishiharamachi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日田彦山線",
+      "ref": "JI08",
+      "latitude": 33.7850439,
+      "longitude": 130.8658884
+    },
+    {
+      "id": "jp_fukuoka_station_7843575144",
+      "osm_id": 7843575144,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "下伊田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo Ita"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC14",
+      "latitude": 33.6519859,
+      "longitude": 130.8069727
+    },
+    {
+      "id": "jp_fukuoka_station_7843575146",
+      "osm_id": 7843575146,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "田川市立病院",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tagawa Municipal Hospital"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC13",
+      "latitude": 33.6605602,
+      "longitude": 130.8026393
+    },
+    {
+      "id": "jp_fukuoka_station_7843575147",
+      "osm_id": 7843575147,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "糒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hoshi"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC12",
+      "latitude": 33.6653359,
+      "longitude": 130.798854
+    },
+    {
+      "id": "jp_fukuoka_station_7843633916",
+      "osm_id": 7843633916,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "金田",
+      "name_kana": "かなだ",
+      "name_translations": {
+        "en": "Kanada"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道",
+      "ref": "HC10",
+      "latitude": 33.6830926,
+      "longitude": 130.7762209
+    },
+    {
+      "id": "jp_fukuoka_station_7843633919",
+      "osm_id": 7843633919,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "上金田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Kanada"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC11",
+      "latitude": 33.6723668,
+      "longitude": 130.7897278
+    },
+    {
+      "id": "jp_fukuoka_station_7843633960",
+      "osm_id": 7843633960,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "人見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hitomi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HC9",
+      "latitude": 33.6871081,
+      "longitude": 130.7713497
+    },
+    {
+      "id": "jp_fukuoka_station_7843633961",
+      "osm_id": 7843633961,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akaike"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC8",
+      "latitude": 33.6928534,
+      "longitude": 130.7684465
+    },
+    {
+      "id": "jp_fukuoka_station_7843633962",
+      "osm_id": 7843633962,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "ふれあい生力",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fureai Syouriki"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC7",
+      "latitude": 33.6999902,
+      "longitude": 130.7656516
+    },
+    {
+      "id": "jp_fukuoka_station_7843633990",
+      "osm_id": 7843633990,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "市場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichiba"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC6",
+      "latitude": 33.7079815,
+      "longitude": 130.7594773
+    },
+    {
+      "id": "jp_fukuoka_station_7843634002",
+      "osm_id": 7843634002,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "中泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakaizumi"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC5",
+      "latitude": 33.7210506,
+      "longitude": 130.7423195
+    },
+    {
+      "id": "jp_fukuoka_station_7843634040",
+      "osm_id": 7843634040,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤棚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujitana"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道伊田線",
+      "ref": "HC4",
+      "latitude": 33.7219699,
+      "longitude": 130.7354915
+    },
+    {
+      "id": "jp_fukuoka_station_7844799629",
+      "osm_id": 7844799629,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "小郡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3975797,
+      "longitude": 130.5536538
+    },
+    {
+      "id": "jp_fukuoka_station_7844799630",
+      "osm_id": 7844799630,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大板井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oh'itai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3986041,
+      "longitude": 130.5610406
+    },
+    {
+      "id": "jp_fukuoka_station_7844799631",
+      "osm_id": 7844799631,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "松崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3996857,
+      "longitude": 130.5822757
+    },
+    {
+      "id": "jp_fukuoka_station_7844799639",
+      "osm_id": 7844799639,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "今隈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imaguma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4039514,
+      "longitude": 130.5941686
+    },
+    {
+      "id": "jp_fukuoka_station_7844799643",
+      "osm_id": 7844799643,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西太刀洗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "West Tachiarai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4079224,
+      "longitude": 130.5994754
+    },
+    {
+      "id": "jp_fukuoka_station_7844799644",
+      "osm_id": 7844799644,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "山隈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamaguma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4141209,
+      "longitude": 130.6102324
+    },
+    {
+      "id": "jp_fukuoka_station_7844799647",
+      "osm_id": 7844799647,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "太刀洗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tachiarai"
+      },
+      "operator": "甘木鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4139793,
+      "longitude": 130.6188751
+    },
+    {
+      "id": "jp_fukuoka_station_7844799657",
+      "osm_id": 7844799657,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4141355,
+      "longitude": 130.6336185
+    },
+    {
+      "id": "jp_fukuoka_station_7844799666",
+      "osm_id": 7844799666,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "甘木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amagi"
+      },
+      "operator": "甘木鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4192646,
+      "longitude": 130.6532751
+    },
+    {
+      "id": "jp_fukuoka_station_7846726076",
+      "osm_id": 7846726076,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "二島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Futajima"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JE03",
+      "latitude": 33.8895677,
+      "longitude": 130.7484618
+    },
+    {
+      "id": "jp_fukuoka_station_7846726078",
+      "osm_id": 7846726078,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "奥洞海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okudōkai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JE04",
+      "latitude": 33.8890905,
+      "longitude": 130.7643867
+    },
+    {
+      "id": "jp_fukuoka_station_7846726080",
+      "osm_id": 7846726080,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "藤ノ木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujinoki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JE05",
+      "latitude": 33.8933135,
+      "longitude": 130.7819531
+    },
+    {
+      "id": "jp_fukuoka_station_7846726081",
+      "osm_id": 7846726081,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "若松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakamatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JE06",
+      "latitude": 33.9010409,
+      "longitude": 130.8060264
+    },
+    {
+      "id": "jp_fukuoka_station_7846735388",
+      "osm_id": 7846735388,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Honjō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JE02",
+      "latitude": 33.8747932,
+      "longitude": 130.7227363
+    },
+    {
+      "id": "jp_fukuoka_station_7856677271",
+      "osm_id": 7856677271,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大藪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōyabu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HC54",
+      "latitude": 33.6472241,
+      "longitude": 130.7976335
+    },
+    {
+      "id": "jp_fukuoka_station_7856677272",
+      "osm_id": 7856677272,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "糸田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HC53",
+      "latitude": 33.6569788,
+      "longitude": 130.7853775
+    },
+    {
+      "id": "jp_fukuoka_station_7856677273",
+      "osm_id": 7856677273,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "松山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HC52",
+      "latitude": 33.6678169,
+      "longitude": 130.7807745
+    },
+    {
+      "id": "jp_fukuoka_station_7856677274",
+      "osm_id": 7856677274,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊前大熊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Buzenōkuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HC51",
+      "latitude": 33.6727391,
+      "longitude": 130.780653
+    },
+    {
+      "id": "jp_fukuoka_station_8076911353",
+      "osm_id": 8076911353,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "出光美術館",
+      "name_kana": "いでみつびじゅつかんえき",
+      "name_translations": {
+        "en": "Idemitsu Bijutsukan"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道門司港レトロ観光線",
+      "ref": null,
+      "latitude": 33.9477361,
+      "longitude": 130.9653186
+    },
+    {
+      "id": "jp_fukuoka_station_8076914800",
+      "osm_id": 8076914800,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "ノーフォーク広場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Norfork Hiroba"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道門司港レトロ観光線",
+      "ref": null,
+      "latitude": 33.9558059,
+      "longitude": 130.9643376
+    },
+    {
+      "id": "jp_fukuoka_station_8076914801",
+      "osm_id": 8076914801,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "関門海峡めかり",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanmonkaikyo Mekari"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道門司港レトロ観光線",
+      "ref": null,
+      "latitude": 33.9606998,
+      "longitude": 130.967911
+    },
+    {
+      "id": "jp_fukuoka_station_8076914802",
+      "osm_id": 8076914802,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "九州鉄道記念館",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyushutetsudo-Kinenkan"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道門司港レトロ観光線",
+      "ref": null,
+      "latitude": 33.9445343,
+      "longitude": 130.9625874
+    },
+    {
+      "id": "jp_fukuoka_station_8077141572",
+      "osm_id": 8077141572,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "油須原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yusubaru"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC21",
+      "latitude": 33.612601,
+      "longitude": 130.8840747
+    },
+    {
+      "id": "jp_fukuoka_station_8077141573",
+      "osm_id": 8077141573,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aka"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC20",
+      "latitude": 33.6183728,
+      "longitude": 130.8716562
+    },
+    {
+      "id": "jp_fukuoka_station_8077141574",
+      "osm_id": 8077141574,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "内田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchida"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC19",
+      "latitude": 33.6375724,
+      "longitude": 130.8643871
+    },
+    {
+      "id": "jp_fukuoka_station_8077141575",
+      "osm_id": 8077141575,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "柿下温泉口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kakishita Onsen Guchi"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC18",
+      "latitude": 33.6514892,
+      "longitude": 130.8544236
+    },
+    {
+      "id": "jp_fukuoka_station_8077141576",
+      "osm_id": 8077141576,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "勾金",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Magarikane"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC17",
+      "latitude": 33.6516708,
+      "longitude": 130.842661
+    },
+    {
+      "id": "jp_fukuoka_station_8077145063",
+      "osm_id": 8077145063,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "今川河童",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imagawa Kappa"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC28",
+      "latitude": 33.7031158,
+      "longitude": 130.9655574
+    },
+    {
+      "id": "jp_fukuoka_station_8077145493",
+      "osm_id": 8077145493,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新豊津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Toyotsu"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC26",
+      "latitude": 33.6796085,
+      "longitude": 130.963899
+    },
+    {
+      "id": "jp_fukuoka_station_8077145494",
+      "osm_id": 8077145494,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "東犀川三四郎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi Saigawa Sanshirō"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC25",
+      "latitude": 33.6616923,
+      "longitude": 130.94906
+    },
+    {
+      "id": "jp_fukuoka_station_8077145495",
+      "osm_id": 8077145495,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "犀川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saigawa"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC24",
+      "latitude": 33.6508101,
+      "longitude": 130.9396106
+    },
+    {
+      "id": "jp_fukuoka_station_8077145496",
+      "osm_id": 8077145496,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "崎山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakiyama"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC23",
+      "latitude": 33.6362888,
+      "longitude": 130.9179425
+    },
+    {
+      "id": "jp_fukuoka_station_8077145497",
+      "osm_id": 8077145497,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "源じいの森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Genjii No Mori"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC22",
+      "latitude": 33.6160609,
+      "longitude": 130.8956641
+    },
+    {
+      "id": "jp_fukuoka_station_8077147582",
+      "osm_id": 8077147582,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "美夜古泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyakoizumi"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC29",
+      "latitude": 33.7091155,
+      "longitude": 130.9690549
+    },
+    {
+      "id": "jp_fukuoka_station_8077147584",
+      "osm_id": 8077147584,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "令和コスタ行橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Reiwa Costa Yukuhashi"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC30",
+      "latitude": 33.7174915,
+      "longitude": 130.9737368
+    },
+    {
+      "id": "jp_fukuoka_station_8077147807",
+      "osm_id": 8077147807,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "上伊田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami Ita"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC16",
+      "latitude": 33.6480081,
+      "longitude": 130.8300917
+    },
+    {
+      "id": "jp_fukuoka_station_8077147808",
+      "osm_id": 8077147808,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyotsu"
+      },
+      "operator": "平成筑豊鉄道",
+      "network": "平成筑豊鉄道田川線",
+      "ref": "HC27",
+      "latitude": 33.6870073,
+      "longitude": 130.9630273
+    },
+    {
+      "id": "jp_fukuoka_station_8077407129",
+      "osm_id": 8077407129,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄五条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gojo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5110871,
+      "longitude": 130.5261773
+    },
+    {
+      "id": "jp_fukuoka_station_8077635296",
+      "osm_id": 8077635296,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4078065,
+      "longitude": 130.6408411
+    },
+    {
+      "id": "jp_fukuoka_station_8077635297",
+      "osm_id": 8077635297,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "上浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamiura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3990587,
+      "longitude": 130.6371269
+    },
+    {
+      "id": "jp_fukuoka_station_8077635298",
+      "osm_id": 8077635298,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "本郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hongo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3851098,
+      "longitude": 130.6289857
+    },
+    {
+      "id": "jp_fukuoka_station_8077655700",
+      "osm_id": 8077655700,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "古賀茶屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kogan'chaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3435992,
+      "longitude": 130.5668704
+    },
+    {
+      "id": "jp_fukuoka_station_8077656524",
+      "osm_id": 8077656524,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "金島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaneshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3530947,
+      "longitude": 130.6227918
+    },
+    {
+      "id": "jp_fukuoka_station_8077657579",
+      "osm_id": 8077657579,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大堰",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ozeki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3723682,
+      "longitude": 130.6240591
+    },
+    {
+      "id": "jp_fukuoka_station_8077660976",
+      "osm_id": 8077660976,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "学校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Elementary School"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3365542,
+      "longitude": 130.5475894
+    },
+    {
+      "id": "jp_fukuoka_station_8077660980",
+      "osm_id": 8077660980,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "五郎丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Goromaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3304676,
+      "longitude": 130.5399255
+    },
+    {
+      "id": "jp_fukuoka_station_8077662371",
+      "osm_id": 8077662371,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ohki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3509506,
+      "longitude": 130.6081054
+    },
+    {
+      "id": "jp_fukuoka_station_8077662372",
+      "osm_id": 8077662372,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "北野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3454018,
+      "longitude": 130.5828644
+    },
+    {
+      "id": "jp_fukuoka_station_8079817412",
+      "osm_id": 8079817412,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "御井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mii"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3126699,
+      "longitude": 130.5625963
+    },
+    {
+      "id": "jp_fukuoka_station_8079827418",
+      "osm_id": 8079827418,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "久留米大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurume-Daigakumae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3109866,
+      "longitude": 130.5486287
+    },
+    {
+      "id": "jp_fukuoka_station_8080000557",
+      "osm_id": 8080000557,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南久留米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kurume"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3032457,
+      "longitude": 130.5328774
+    },
+    {
+      "id": "jp_fukuoka_station_8080000558",
+      "osm_id": 8080000558,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "久留米高校前",
+      "name_kana": "くるめこうこうまえ",
+      "name_translations": {
+        "en": "Kurume-Kōkōmae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2984645,
+      "longitude": 130.5164161
+    },
+    {
+      "id": "jp_fukuoka_station_8080013029",
+      "osm_id": 8080013029,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "善導寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zendoji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3200359,
+      "longitude": 130.6088152
+    },
+    {
+      "id": "jp_fukuoka_station_8194369407",
+      "osm_id": 8194369407,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三苫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitoma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK09",
+      "latitude": 33.7021973,
+      "longitude": 130.4225598
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_8393953689",
+      "osm_id": 8393953689,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "福博であい橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5919944,
+      "longitude": 130.4047376
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_8405049778",
+      "osm_id": 8405049778,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "若松渡場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9021648,
+      "longitude": 130.8146156
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_8405049786",
+      "osm_id": 8405049786,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "戸畑渡場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9013577,
+      "longitude": 130.8188218
+    },
+    {
+      "id": "jp_fukuoka_station_8447296024",
+      "osm_id": 8447296024,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新大牟田",
+      "name_kana": "しんおおむた",
+      "name_translations": {
+        "en": "New Omuta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.0711991,
+      "longitude": 130.4887598
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_9219283265",
+      "osm_id": 9219283265,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "博多バスターミナル3F高速バスのりば",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakata Expressway Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5915257,
+      "longitude": 130.4197831
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_9219283270",
+      "osm_id": 9219283270,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高速バス到着ホーム",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5917352,
+      "longitude": 130.4199136
+    },
+    {
+      "id": "jp_fukuoka_station_10765652074",
+      "osm_id": 10765652074,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "subway",
+      "name": "櫛田神社前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kushida Shrine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N17",
+      "latitude": 33.5913162,
+      "longitude": 130.4115372
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_11906882129",
+      "osm_id": 11906882129,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "添田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Soeda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5670246,
+      "longitude": 130.8565187
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_12022602625",
+      "osm_id": 12022602625,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小倉",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8884682,
+      "longitude": 130.8884633
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_12022602629",
+      "osm_id": 12022602629,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "馬島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9651826,
+      "longitude": 130.8546119
+    },
+    {
+      "id": "jp_fukuoka_station_12301989859",
+      "osm_id": 12301989859,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "参道",
+      "name_kana": "さんどう",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.483015,
+      "longitude": 130.9080783
+    },
+    {
+      "id": "jp_fukuoka_station_12301989862",
+      "osm_id": 12301989862,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "幸",
+      "name_kana": "さいわい",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4846581,
+      "longitude": 130.9020017
+    },
+    {
+      "id": "jp_fukuoka_station_12301989863",
+      "osm_id": 12301989863,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "花",
+      "name_kana": "はな",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.48394,
+      "longitude": 130.9053545
+    },
+    {
+      "id": "jp_fukuoka_station_12301989864",
+      "osm_id": 12301989864,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "神",
+      "name_kana": "かみ",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4833125,
+      "longitude": 130.9099571
+    },
+    {
+      "id": "jp_fukuoka_station_12654128661",
+      "osm_id": 12654128661,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ohashi"
+      },
+      "operator": "西日本鉄道",
+      "network": "西日本鉄道天神大牟田線",
+      "ref": "T05",
+      "latitude": 33.5592046,
+      "longitude": 130.4264658
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_12709228259",
+      "osm_id": 12709228259,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ららぽーと福岡",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5654719,
+      "longitude": 130.4395266
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_12826443893",
+      "osm_id": 12826443893,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "甘木営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "西鉄バス二日市",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4205975,
+      "longitude": 130.6638087
+    },
+    {
+      "id": "jp_fukuoka_station_13284625562",
+      "osm_id": 13284625562,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "奈田駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6867031,
+      "longitude": 130.4125291
+    },
+    {
+      "id": "jp_fukuoka_station_13343652441",
+      "osm_id": 13343652441,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜並木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakuranamiki"
+      },
+      "operator": "西日本鉄道",
+      "network": "天神大牟田線",
+      "ref": null,
+      "latitude": 33.5446837,
+      "longitude": 130.4664742
+    },
+    {
+      "id": "jp_fukuoka_airport_130967700",
+      "osm_id": 130967700,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "北九州空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitakyushu Airport"
+      },
+      "operator": "北九州エアターミナル",
+      "network": null,
+      "ref": "KKJ",
+      "latitude": 33.8389693,
+      "longitude": 131.0333117
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_154726337",
+      "osm_id": 154726337,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西日本鉄道 那珂川自動車営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5130167,
+      "longitude": 130.4211715
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_168100626",
+      "osm_id": 168100626,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ベイサイドプレイス博多埠頭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bayside Place Hakata Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.604089,
+      "longitude": 130.3988734
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_168100629",
+      "osm_id": 168100629,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "博多埠頭第2ターミナルビル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakata Port Passenger Terminal 2"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6051605,
+      "longitude": 130.3976424
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_209365728",
+      "osm_id": 209365728,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "博多バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakata Bus Terminal"
+      },
+      "operator": "博多バスターミナル株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5915431,
+      "longitude": 130.4197108
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_223221267",
+      "osm_id": 223221267,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "相島渡船場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ainoshima Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7178509,
+      "longitude": 130.4238292
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_224085974",
+      "osm_id": 224085974,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "百道浜バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5933888,
+      "longitude": 130.3527741
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_226167943",
+      "osm_id": 226167943,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄バス新宮自動車営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitetsu Bus Shingu Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7196097,
+      "longitude": 130.4543499
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_257974797",
+      "osm_id": 257974797,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "福岡市営渡船大岳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otake Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6510289,
+      "longitude": 130.3359567
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_257974798",
+      "osm_id": 257974798,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "福岡市営渡船志賀島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikano'shima Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6622513,
+      "longitude": 130.3141441
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_257974799",
+      "osm_id": 257974799,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "福岡市営渡船西戸崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saitozaki Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6494127,
+      "longitude": 130.3591369
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_258344211",
+      "osm_id": 258344211,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄バス 大岳バス転回場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6527095,
+      "longitude": 130.337624
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_274759225",
+      "osm_id": 274759225,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "砂津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sunatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8825997,
+      "longitude": 130.8886967
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_292391836",
+      "osm_id": 292391836,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "オーシャン東九フェリー 新門司ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ocean Tokyu Ferry ShinMoji Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8815115,
+      "longitude": 130.9891507
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_292391839",
+      "osm_id": 292391839,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "阪九フェリー新門司ターミナル 第2ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hankyu Ferry ShinMoji Terminal 2"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8833683,
+      "longitude": 130.9896413
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_292391840",
+      "osm_id": 292391840,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "阪九フェリー新門司ターミナル 第1ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hankyu Ferry ShinMoji Terminal 1"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8852932,
+      "longitude": 130.9900245
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_341760066",
+      "osm_id": 341760066,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "赤間バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8087592,
+      "longitude": 130.5913135
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_341926506",
+      "osm_id": 341926506,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "神湊港渡船ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kounominato Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.85291,
+      "longitude": 130.4834533
+    },
+    {
+      "id": "jp_fukuoka_airport_529445584",
+      "osm_id": 529445584,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "福岡空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuoka Airport"
+      },
+      "operator": "Ministry of Transport",
+      "network": null,
+      "ref": "FUK",
+      "latitude": 33.5868069,
+      "longitude": 130.4494515
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_618901716",
+      "osm_id": 618901716,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "姪浜渡船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5972569,
+      "longitude": 130.3274728
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_684889745",
+      "osm_id": 684889745,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "名門大洋フェリー 新門司港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Meimon Taiyo Ferry ShinMoji Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8711939,
+      "longitude": 130.9854841
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_701091499",
+      "osm_id": 701091499,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西日本鉄道 壱岐自動車営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5593501,
+      "longitude": 130.3124113
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_717892167",
+      "osm_id": 717892167,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西日本鉄道 桧原自動車営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "西日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5350172,
+      "longitude": 130.3962834
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_770999264",
+      "osm_id": 770999264,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "昭和池入口",
+      "name_kana": "しょうわいけいりぐち",
+      "name_translations": {
+        "en": "Showa Ike Pond Iriguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8044544,
+      "longitude": 130.9546276
+    },
+    {
+      "id": "jp_fukuoka_bus_terminal_831603013",
+      "osm_id": 831603013,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西鉄朝倉街道バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4848432,
+      "longitude": 130.5325844
+    },
+    {
+      "id": "jp_fukuoka_airport_858105044",
+      "osm_id": 858105044,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "airport",
+      "subtype": "military",
+      "name": "航空自衛隊 築城基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JASDF Tsuiki Air Base"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RJFZ",
+      "latitude": 33.6827936,
+      "longitude": 131.0399101
+    },
+    {
+      "id": "jp_fukuoka_ferry_terminal_987275830",
+      "osm_id": 987275830,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "東京九州フェリー 新門司フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokyo Kyusyu Ferry ShinMoji Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8764136,
+      "longitude": 130.9943646
+    },
+    {
+      "id": "jp_fukuoka_station_1005438375",
+      "osm_id": 1005438375,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鉄銀水駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.051719,
+      "longitude": 130.4584995
+    },
+    {
+      "id": "jp_fukuoka_station_1419238796",
+      "osm_id": 1419238796,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "犀川駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": "平成筑豊鉄道",
+      "ref": null,
+      "latitude": 33.6507799,
+      "longitude": 130.9395956
+    }
+  ]
+}

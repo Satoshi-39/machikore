@@ -1,0 +1,2362 @@
+{
+  "fetchedAt": "2025-12-24T05:51:42.817Z",
+  "prefecture_id": "jp_fukui",
+  "prefecture_name": "福井県",
+  "stats": {
+    "station": 128,
+    "airport": 1,
+    "ferry_terminal": 2,
+    "bus_terminal": 0,
+    "total": 131
+  },
+  "data": [
+    {
+      "id": "jp_fukui_station_264457629",
+      "osm_id": 264457629,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "西長田ゆりの里",
+      "name_kana": "にしながたゆりのさと",
+      "name_translations": {
+        "en": "Nishinagata-Yurinosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E35",
+      "latitude": 36.1538195,
+      "longitude": 136.2065032
+    },
+    {
+      "id": "jp_fukui_station_264457633",
+      "osm_id": 264457633,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "鷲塚針原",
+      "name_kana": "わしづかはりばら",
+      "name_translations": {
+        "en": "Washizuka-Haribara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1206712,
+      "longitude": 136.2048999
+    },
+    {
+      "id": "jp_fukui_station_264457651",
+      "osm_id": 264457651,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "三国神社",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikuni-Jinja"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E42",
+      "latitude": 36.2148339,
+      "longitude": 136.1580565
+    },
+    {
+      "id": "jp_fukui_station_264457741",
+      "osm_id": 264457741,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "西別院",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Betsuin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0752259,
+      "longitude": 136.2227161
+    },
+    {
+      "id": "jp_fukui_station_264457761",
+      "osm_id": 264457761,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "中角",
+      "name_kana": "なかつの",
+      "name_translations": {
+        "en": "Nakatsuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E31",
+      "latitude": 36.1013999,
+      "longitude": 136.2045105
+    },
+    {
+      "id": "jp_fukui_station_264457767",
+      "osm_id": 264457767,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "新田塚",
+      "name_kana": "にったづか",
+      "name_translations": {
+        "en": "Nittazuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E30",
+      "latitude": 36.0923432,
+      "longitude": 136.2054239
+    },
+    {
+      "id": "jp_fukui_station_264457777",
+      "osm_id": 264457777,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "三国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikuni"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E43",
+      "latitude": 36.217131,
+      "longitude": 136.1495747
+    },
+    {
+      "id": "jp_fukui_station_264457781",
+      "osm_id": 264457781,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "番田",
+      "name_kana": "ばんでん",
+      "name_translations": {
+        "en": "Banden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E39",
+      "latitude": 36.2124196,
+      "longitude": 136.2024226
+    },
+    {
+      "id": "jp_fukui_station_264457837",
+      "osm_id": 264457837,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "太郎丸エンゼルランド",
+      "name_kana": "たろうまるえんぜるらんど",
+      "name_translations": {
+        "en": "Taromaru Angelland"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E33",
+      "latitude": 36.1313034,
+      "longitude": 136.2057006
+    },
+    {
+      "id": "jp_fukui_station_264457860",
+      "osm_id": 264457860,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "本荘",
+      "name_kana": "ほんじょう",
+      "name_translations": {
+        "en": "Honjyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E38",
+      "latitude": 36.2049767,
+      "longitude": 136.2030539
+    },
+    {
+      "id": "jp_fukui_station_264457866",
+      "osm_id": 264457866,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "あわら湯のまち",
+      "name_kana": "あわらゆのまち",
+      "name_translations": {
+        "en": "Awara-Yunomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E40",
+      "latitude": 36.22306,
+      "longitude": 136.1936755
+    },
+    {
+      "id": "jp_fukui_station_264457867",
+      "osm_id": 264457867,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "大関",
+      "name_kana": "おおぜき",
+      "name_translations": {
+        "en": "Ozeki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E37",
+      "latitude": 36.1868248,
+      "longitude": 136.2038163
+    },
+    {
+      "id": "jp_fukui_station_264457925",
+      "osm_id": 264457925,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "水居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E41",
+      "latitude": 36.2191018,
+      "longitude": 136.1719061
+    },
+    {
+      "id": "jp_fukui_station_264457935",
+      "osm_id": 264457935,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "下兵庫こうふく",
+      "name_kana": "しもひょうごこうふく",
+      "name_translations": {
+        "en": "Shimohyogo-Kofuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E36",
+      "latitude": 36.1701167,
+      "longitude": 136.2025396
+    },
+    {
+      "id": "jp_fukui_station_264457970",
+      "osm_id": 264457970,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "八ツ島",
+      "name_kana": "やつしま",
+      "name_translations": {
+        "en": "Yatsushima"
+      },
+      "operator": "えちぜん鉄道",
+      "network": null,
+      "ref": "E29",
+      "latitude": 36.0863414,
+      "longitude": 136.2060103
+    },
+    {
+      "id": "jp_fukui_station_264458454",
+      "osm_id": 264458454,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "志比堺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiizakai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0979842,
+      "longitude": 136.3112661
+    },
+    {
+      "id": "jp_fukui_station_264458482",
+      "osm_id": 264458482,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前新保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Shinbo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0803809,
+      "longitude": 136.2511027
+    },
+    {
+      "id": "jp_fukui_station_264458485",
+      "osm_id": 264458485,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "追分口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oiwakeguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.08268,
+      "longitude": 136.261708
+    },
+    {
+      "id": "jp_fukui_station_264458516",
+      "osm_id": 264458516,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "下志比",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoshii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0907156,
+      "longitude": 136.3362477
+    },
+    {
+      "id": "jp_fukui_station_264458526",
+      "osm_id": 264458526,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "光明寺",
+      "name_kana": "こうみょうじ",
+      "name_translations": {
+        "en": "Kōmyōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0885598,
+      "longitude": 136.3442476
+    },
+    {
+      "id": "jp_fukui_station_264458550",
+      "osm_id": 264458550,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "轟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Domeki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0868404,
+      "longitude": 136.3609869
+    },
+    {
+      "id": "jp_fukui_station_264458555",
+      "osm_id": 264458555,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前開発",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Kaihotsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.075143,
+      "longitude": 136.240963
+    },
+    {
+      "id": "jp_fukui_station_264458631",
+      "osm_id": 264458631,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "永平寺口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Eiheijiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0958797,
+      "longitude": 136.3266649
+    },
+    {
+      "id": "jp_fukui_station_264458643",
+      "osm_id": 264458643,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "小舟渡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobunato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0755223,
+      "longitude": 136.4340138
+    },
+    {
+      "id": "jp_fukui_station_264458709",
+      "osm_id": 264458709,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "松岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0939788,
+      "longitude": 136.3018447
+    },
+    {
+      "id": "jp_fukui_station_264458788",
+      "osm_id": 264458788,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "発坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hossaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0726192,
+      "longitude": 136.4657594
+    },
+    {
+      "id": "jp_fukui_station_264458809",
+      "osm_id": 264458809,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前野中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Nonaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0829283,
+      "longitude": 136.3767745
+    },
+    {
+      "id": "jp_fukui_station_264458958",
+      "osm_id": 264458958,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "観音町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kannonmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0917593,
+      "longitude": 136.2900808
+    },
+    {
+      "id": "jp_fukui_station_264458968",
+      "osm_id": 264458968,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前島橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Shimabashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0900612,
+      "longitude": 136.2771814
+    },
+    {
+      "id": "jp_fukui_station_264458987",
+      "osm_id": 264458987,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "山王",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sannō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0792111,
+      "longitude": 136.3924928
+    },
+    {
+      "id": "jp_fukui_station_264458989",
+      "osm_id": 264458989,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "東藤島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Fujishima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0866145,
+      "longitude": 136.2698858
+    },
+    {
+      "id": "jp_fukui_station_264459036",
+      "osm_id": 264459036,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前竹原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Takehara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0741138,
+      "longitude": 136.4130339
+    },
+    {
+      "id": "jp_fukui_station_264459080",
+      "osm_id": 264459080,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "保田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0698779,
+      "longitude": 136.4515005
+    },
+    {
+      "id": "jp_fukui_station_264459082",
+      "osm_id": 264459082,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "新福井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Fukui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0649526,
+      "longitude": 136.2268999
+    },
+    {
+      "id": "jp_fukui_station_267306933",
+      "osm_id": 267306933,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前花堂",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0387285,
+      "longitude": 136.218092
+    },
+    {
+      "id": "jp_fukui_station_267307472",
+      "osm_id": 267307472,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "森田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Morita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1096441,
+      "longitude": 136.2226333
+    },
+    {
+      "id": "jp_fukui_station_267307813",
+      "osm_id": 267307813,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "北鯖江",
+      "name_kana": "きたさばえ",
+      "name_translations": {
+        "en": "Kita-Sabae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9717597,
+      "longitude": 136.1984943
+    },
+    {
+      "id": "jp_fukui_station_267308141",
+      "osm_id": 267308141,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "牛ノ谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushinoya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2587248,
+      "longitude": 136.2814036
+    },
+    {
+      "id": "jp_fukui_station_267308354",
+      "osm_id": 267308354,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "大土呂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Odoro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0100795,
+      "longitude": 136.2164472
+    },
+    {
+      "id": "jp_fukui_station_267308425",
+      "osm_id": 267308425,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunoo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8033098,
+      "longitude": 136.1929708
+    },
+    {
+      "id": "jp_fukui_station_267308895",
+      "osm_id": 267308895,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "南条",
+      "name_kana": "なんじょう",
+      "name_translations": {
+        "en": "Nanjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8321987,
+      "longitude": 136.1930839
+    },
+    {
+      "id": "jp_fukui_station_267309039",
+      "osm_id": 267309039,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "南今庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Imajō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7575581,
+      "longitude": 136.1845839
+    },
+    {
+      "id": "jp_fukui_station_267309136",
+      "osm_id": 267309136,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "今庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imajō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7735746,
+      "longitude": 136.19854
+    },
+    {
+      "id": "jp_fukui_station_267309305",
+      "osm_id": 267309305,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "王子保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oshio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8663178,
+      "longitude": 136.1655707
+    },
+    {
+      "id": "jp_fukui_station_267448890",
+      "osm_id": 267448890,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "牛ケ原",
+      "name_kana": "うしがはら",
+      "name_translations": {
+        "en": "Ushigahara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9986582,
+      "longitude": 136.4676954
+    },
+    {
+      "id": "jp_fukui_station_267448953",
+      "osm_id": 267448953,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越前田野",
+      "name_kana": "えちぜんたの",
+      "name_translations": {
+        "en": "Echizen-Tano"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9870211,
+      "longitude": 136.5266892
+    },
+    {
+      "id": "jp_fukui_station_267448955",
+      "osm_id": 267448955,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越前富田",
+      "name_kana": "えちぜんとみだ",
+      "name_translations": {
+        "en": "Echizen-Tomida"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.991227,
+      "longitude": 136.5411772
+    },
+    {
+      "id": "jp_fukui_station_267448957",
+      "osm_id": 267448957,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "計石",
+      "name_kana": "はかりいし",
+      "name_translations": {
+        "en": "Hakariishi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9976236,
+      "longitude": 136.434484
+    },
+    {
+      "id": "jp_fukui_station_267448986",
+      "osm_id": 267448986,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "足羽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asuwa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.020829,
+      "longitude": 136.253535
+    },
+    {
+      "id": "jp_fukui_station_267448990",
+      "osm_id": 267448990,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "六条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokujō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.028026,
+      "longitude": 136.239973
+    },
+    {
+      "id": "jp_fukui_station_267449013",
+      "osm_id": 267449013,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小和清水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kowashōzu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.017426,
+      "longitude": 136.350708
+    },
+    {
+      "id": "jp_fukui_station_267449030",
+      "osm_id": 267449030,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下唯野",
+      "name_kana": "しもゆいの",
+      "name_translations": {
+        "en": "Shimo-Yuino"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9740208,
+      "longitude": 136.5604723
+    },
+    {
+      "id": "jp_fukui_station_267449031",
+      "osm_id": 267449031,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越前薬師",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Yakushi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0053162,
+      "longitude": 136.3843061
+    },
+    {
+      "id": "jp_fukui_station_267449124",
+      "osm_id": 267449124,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北大野",
+      "name_kana": "きたおおの",
+      "name_translations": {
+        "en": "Kita-Ono"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9979595,
+      "longitude": 136.4882674
+    },
+    {
+      "id": "jp_fukui_station_267449139",
+      "osm_id": 267449139,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越前東郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Tōgō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0182871,
+      "longitude": 136.2735924
+    },
+    {
+      "id": "jp_fukui_station_267449183",
+      "osm_id": 267449183,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichinami"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.02,
+      "longitude": 136.33015
+    },
+    {
+      "id": "jp_fukui_station_267449283",
+      "osm_id": 267449283,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越前高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Takada"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.024837,
+      "longitude": 136.3187875
+    },
+    {
+      "id": "jp_fukui_station_267449284",
+      "osm_id": 267449284,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越前大野",
+      "name_kana": "えちぜんおおの",
+      "name_translations": {
+        "en": "Echizen-Ono"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9832744,
+      "longitude": 136.4969352
+    },
+    {
+      "id": "jp_fukui_station_267449875",
+      "osm_id": 267449875,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "柿ケ島",
+      "name_kana": "かきがしま",
+      "name_translations": {
+        "en": "Kakigashima"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9725606,
+      "longitude": 136.5713305
+    },
+    {
+      "id": "jp_fukui_station_267450570",
+      "osm_id": 267450570,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "一乗谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichijōdani"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0137208,
+      "longitude": 136.29745
+    },
+    {
+      "id": "jp_fukui_station_267450574",
+      "osm_id": 267450574,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越前大宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Ōmiya"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9999944,
+      "longitude": 136.4102194
+    },
+    {
+      "id": "jp_fukui_station_267451324",
+      "osm_id": 267451324,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前下山",
+      "name_kana": "越前下山",
+      "name_translations": {
+        "en": "Echizen-Shimoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9205882,
+      "longitude": 136.6347769
+    },
+    {
+      "id": "jp_fukui_station_267451487",
+      "osm_id": 267451487,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "勝原",
+      "name_kana": "かどはら",
+      "name_translations": {
+        "en": "Kadohara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.96738,
+      "longitude": 136.597601
+    },
+    {
+      "id": "jp_fukui_station_822973023",
+      "osm_id": 822973023,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "たけふ新",
+      "name_kana": "たけふしん",
+      "name_translations": {
+        "en": "Takefu-shin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9061222,
+      "longitude": 136.1702578
+    },
+    {
+      "id": "jp_fukui_station_822973253",
+      "osm_id": 822973253,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鯖江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Sabae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.94665,
+      "longitude": 136.1818127
+    },
+    {
+      "id": "jp_fukui_station_822973292",
+      "osm_id": 822973292,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "ハーモニーホール",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harmony Hall"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0139597,
+      "longitude": 136.205317
+    },
+    {
+      "id": "jp_fukui_station_822975155",
+      "osm_id": 822975155,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "三十八社",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanjūhassha"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9890791,
+      "longitude": 136.1937667
+    },
+    {
+      "id": "jp_fukui_station_822975506",
+      "osm_id": 822975506,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳥羽中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobanaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9815657,
+      "longitude": 136.1873429
+    },
+    {
+      "id": "jp_fukui_station_822976815",
+      "osm_id": 822976815,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "浅水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asōzu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.00671,
+      "longitude": 136.2017231
+    },
+    {
+      "id": "jp_fukui_station_822977846",
+      "osm_id": 822977846,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "北府",
+      "name_kana": "きたご",
+      "name_translations": {
+        "en": "Kitago"
+      },
+      "operator": "福井鉄道",
+      "network": "福武線",
+      "ref": null,
+      "latitude": 35.9100647,
+      "longitude": 136.1665861
+    },
+    {
+      "id": "jp_fukui_station_822977949",
+      "osm_id": 822977949,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "江端",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.028123,
+      "longitude": 136.212321
+    },
+    {
+      "id": "jp_fukui_station_822977967",
+      "osm_id": 822977967,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "ベル前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bell-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0338314,
+      "longitude": 136.2139144
+    },
+    {
+      "id": "jp_fukui_station_822978083",
+      "osm_id": 822978083,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "サンドーム西",
+      "name_kana": "さんどーむにし",
+      "name_translations": {
+        "en": "Sundome Nishi"
+      },
+      "operator": "福井鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9364062,
+      "longitude": 136.1805346
+    },
+    {
+      "id": "jp_fukui_station_822978245",
+      "osm_id": 822978245,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "家久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iehisa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9257938,
+      "longitude": 136.1703452
+    },
+    {
+      "id": "jp_fukui_station_2290387538",
+      "osm_id": 2290387538,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "西山公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishiyama-Kōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9519313,
+      "longitude": 136.1857283
+    },
+    {
+      "id": "jp_fukui_station_3893067539",
+      "osm_id": 3893067539,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "まつもと町屋",
+      "name_kana": "まつもとまちや",
+      "name_translations": {
+        "en": "Matsumoto-Machiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0769726,
+      "longitude": 136.2292889
+    },
+    {
+      "id": "jp_fukui_station_3893073351",
+      "osm_id": 3893073351,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "日華化学前",
+      "name_kana": "にっかかがくまえ",
+      "name_translations": {
+        "en": "Nikkakagaku-Mae"
+      },
+      "operator": "えちぜん鉄道",
+      "network": null,
+      "ref": "E28",
+      "latitude": 36.0806198,
+      "longitude": 136.2065864
+    },
+    {
+      "id": "jp_fukui_station_4164240966",
+      "osm_id": 4164240966,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "泰澄の里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taichōnosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9992437,
+      "longitude": 136.1983583
+    },
+    {
+      "id": "jp_fukui_station_4164240967",
+      "osm_id": 4164240967,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "清明",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0222188,
+      "longitude": 136.2095015
+    },
+    {
+      "id": "jp_fukui_station_4164240968",
+      "osm_id": 4164240968,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "福井駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0621411,
+      "longitude": 136.2221908
+    },
+    {
+      "id": "jp_fukui_station_4213475362",
+      "osm_id": 4213475362,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "勝山",
+      "name_kana": "かつやま",
+      "name_translations": {
+        "en": "Katsuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0561896,
+      "longitude": 136.4920532
+    },
+    {
+      "id": "jp_fukui_station_4213475371",
+      "osm_id": 4213475371,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "福井口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0705156,
+      "longitude": 136.2330685
+    },
+    {
+      "id": "jp_fukui_station_4394654074",
+      "osm_id": 4394654074,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "敦賀",
+      "name_kana": "つるが",
+      "name_translations": {
+        "en": "Tsuruga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A01;JR-B08",
+      "latitude": 35.644899,
+      "longitude": 136.0763837
+    },
+    {
+      "id": "jp_fukui_station_4398558721",
+      "osm_id": 4398558721,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "福大前西福井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukudaimae-Nishi-Fukui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E27",
+      "latitude": 36.0741897,
+      "longitude": 136.2104762
+    },
+    {
+      "id": "jp_fukui_station_4921417492",
+      "osm_id": 4921417492,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦原温泉",
+      "name_kana": "あわらおんせん",
+      "name_translations": {
+        "en": "Awaraonsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2146024,
+      "longitude": 136.2350566
+    },
+    {
+      "id": "jp_fukui_ferry_terminal_5612669803",
+      "osm_id": 5612669803,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "東尋坊乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "東尋坊観光遊覧船",
+      "network": "東尋坊観光遊覧船",
+      "ref": null,
+      "latitude": 36.2379255,
+      "longitude": 136.1258483
+    },
+    {
+      "id": "jp_fukui_station_5834446514",
+      "osm_id": 5834446514,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "福井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukui"
+      },
+      "operator": "えちぜん鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0621497,
+      "longitude": 136.2239821
+    },
+    {
+      "id": "jp_fukui_station_6051747165",
+      "osm_id": 6051747165,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "細呂木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hosorogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2412052,
+      "longitude": 136.2571111
+    },
+    {
+      "id": "jp_fukui_station_6641834257",
+      "osm_id": 6641834257,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "武生",
+      "name_kana": "たけふ",
+      "name_translations": {
+        "en": "Takefu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9031163,
+      "longitude": 136.1710672
+    },
+    {
+      "id": "jp_fukui_station_6641834270",
+      "osm_id": 6641834270,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "鯖江",
+      "name_kana": "さばえ",
+      "name_translations": {
+        "en": "Sabae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9435986,
+      "longitude": 136.1889388
+    },
+    {
+      "id": "jp_fukui_station_6641842107",
+      "osm_id": 6641842107,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "丸岡",
+      "name_kana": "まるおか",
+      "name_translations": {
+        "en": "Maruoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1627729,
+      "longitude": 136.2335466
+    },
+    {
+      "id": "jp_fukui_station_6641842113",
+      "osm_id": 6641842113,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "春江",
+      "name_kana": "はるえ",
+      "name_translations": {
+        "en": "Harue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1294122,
+      "longitude": 136.2287293
+    },
+    {
+      "id": "jp_fukui_station_6966993327",
+      "osm_id": 6966993327,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁愛女子高校",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jin'ai Joshikōkō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0695513,
+      "longitude": 136.2180585
+    },
+    {
+      "id": "jp_fukui_station_6966993337",
+      "osm_id": 6966993337,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "田原町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tawaramachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0748461,
+      "longitude": 136.2173409
+    },
+    {
+      "id": "jp_fukui_station_6967028749",
+      "osm_id": 6967028749,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "福井城址大名町",
+      "name_kana": "ふくいじょうしだいみょうまち",
+      "name_translations": {
+        "en": "Fukuijousidaimyoumachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0638701,
+      "longitude": 136.2176007
+    },
+    {
+      "id": "jp_fukui_station_6967046718",
+      "osm_id": 6967046718,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "足羽山公園口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asuwayama-Kōenguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.057999,
+      "longitude": 136.2151405
+    },
+    {
+      "id": "jp_fukui_station_6967046720",
+      "osm_id": 6967046720,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "商工会議所前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shokokaigisho-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0539603,
+      "longitude": 136.2149335
+    },
+    {
+      "id": "jp_fukui_station_6967046729",
+      "osm_id": 6967046729,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤十字前",
+      "name_kana": "せきじゅうじまえ",
+      "name_translations": {
+        "en": "Sekijūjimae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0486073,
+      "longitude": 136.2166649
+    },
+    {
+      "id": "jp_fukui_station_6967062511",
+      "osm_id": 6967062511,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "花堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanandō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0408812,
+      "longitude": 136.2152198
+    },
+    {
+      "id": "jp_fukui_station_6967067865",
+      "osm_id": 6967067865,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "神明",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinmei"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9730558,
+      "longitude": 136.1818674
+    },
+    {
+      "id": "jp_fukui_station_6967067867",
+      "osm_id": 6967067867,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "水落",
+      "name_kana": "みずおち",
+      "name_translations": {
+        "en": "Mizuochi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9624547,
+      "longitude": 136.1831422
+    },
+    {
+      "id": "jp_fukui_station_7097070689",
+      "osm_id": 7097070689,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9986162,
+      "longitude": 136.3648246
+    },
+    {
+      "id": "jp_fukui_station_7802402435",
+      "osm_id": 7802402435,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "jr",
+      "name": "九頭竜湖",
+      "name_kana": "くずりゅうこ",
+      "name_translations": {
+        "en": "Kuzuryuko"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9044816,
+      "longitude": 136.6615446
+    },
+    {
+      "id": "jp_fukui_station_9393411139",
+      "osm_id": 9393411139,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "西春江ハートピア",
+      "name_kana": "にしはるえはーとぴあ",
+      "name_translations": {
+        "en": "Nishiharue Heartpia"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E34",
+      "latitude": 36.1391847,
+      "longitude": 136.2062859
+    },
+    {
+      "id": "jp_fukui_station_9440614433",
+      "osm_id": 9440614433,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "三国港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikuni-Minato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E44",
+      "latitude": 36.2201961,
+      "longitude": 136.140066
+    },
+    {
+      "id": "jp_fukui_station_11652998666",
+      "osm_id": 11652998666,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "越前たけふ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echizen-Takefu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8955139,
+      "longitude": 136.1989052
+    },
+    {
+      "id": "jp_fukui_station_11737552735",
+      "osm_id": 11737552735,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "新疋田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Hikida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A02;JR-B09",
+      "latitude": 35.594533,
+      "longitude": 136.1004752
+    },
+    {
+      "id": "jp_fukui_station_12630331004",
+      "osm_id": 12630331004,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "比島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hishima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0659942,
+      "longitude": 136.4835694
+    },
+    {
+      "id": "jp_fukui_station_12821280111",
+      "osm_id": 12821280111,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "西敦賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Tsuruga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.618117,
+      "longitude": 136.0676624
+    },
+    {
+      "id": "jp_fukui_station_12821280132",
+      "osm_id": 12821280132,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "粟野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.61731,
+      "longitude": 136.0271426
+    },
+    {
+      "id": "jp_fukui_station_12821280169",
+      "osm_id": 12821280169,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "東美浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Mihama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6141142,
+      "longitude": 135.9859207
+    },
+    {
+      "id": "jp_fukui_station_12821280179",
+      "osm_id": 12821280179,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "美浜",
+      "name_kana": "みはま",
+      "name_translations": {
+        "en": "Mihama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.605297,
+      "longitude": 135.936825
+    },
+    {
+      "id": "jp_fukui_station_12821280199",
+      "osm_id": 12821280199,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "気山",
+      "name_kana": "きやま",
+      "name_translations": {
+        "en": "Kiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5845052,
+      "longitude": 135.9095398
+    },
+    {
+      "id": "jp_fukui_station_12821280200",
+      "osm_id": 12821280200,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "三方",
+      "name_kana": "みかた",
+      "name_translations": {
+        "en": "Mikata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5557425,
+      "longitude": 135.9094244
+    },
+    {
+      "id": "jp_fukui_station_12821280601",
+      "osm_id": 12821280601,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤井",
+      "name_kana": "ふじい",
+      "name_translations": {
+        "en": "Fujii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5321995,
+      "longitude": 135.9064022
+    },
+    {
+      "id": "jp_fukui_station_12821280603",
+      "osm_id": 12821280603,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "十村",
+      "name_kana": "とむら",
+      "name_translations": {
+        "en": "Tomura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5162926,
+      "longitude": 135.8969858
+    },
+    {
+      "id": "jp_fukui_station_12821280604",
+      "osm_id": 12821280604,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "大鳥羽",
+      "name_kana": "おおとば",
+      "name_translations": {
+        "en": "Otaba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5047153,
+      "longitude": 135.867015
+    },
+    {
+      "id": "jp_fukui_station_12821280613",
+      "osm_id": 12821280613,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "若狭有田",
+      "name_kana": "わかさありた",
+      "name_translations": {
+        "en": "Wakasa-Arita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4856631,
+      "longitude": 135.8683839
+    },
+    {
+      "id": "jp_fukui_station_12821280626",
+      "osm_id": 12821280626,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "上中",
+      "name_kana": "かみなか",
+      "name_translations": {
+        "en": "Kaminaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4637667,
+      "longitude": 135.8554778
+    },
+    {
+      "id": "jp_fukui_station_12821280645",
+      "osm_id": 12821280645,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "新平野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Hirano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4731117,
+      "longitude": 135.8075531
+    },
+    {
+      "id": "jp_fukui_station_12821280646",
+      "osm_id": 12821280646,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "東小浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Obama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4852107,
+      "longitude": 135.7812128
+    },
+    {
+      "id": "jp_fukui_station_12821280649",
+      "osm_id": 12821280649,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "小浜",
+      "name_kana": "おばま",
+      "name_translations": {
+        "en": "Obama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4916659,
+      "longitude": 135.7454315
+    },
+    {
+      "id": "jp_fukui_station_12821280650",
+      "osm_id": 12821280650,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "勢浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seihama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4811265,
+      "longitude": 135.7082943
+    },
+    {
+      "id": "jp_fukui_station_12821280651",
+      "osm_id": 12821280651,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "加斗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4806162,
+      "longitude": 135.66602
+    },
+    {
+      "id": "jp_fukui_station_12821280652",
+      "osm_id": 12821280652,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "若狭本郷",
+      "name_kana": "わかさほんごう",
+      "name_translations": {
+        "en": "Wakasa-Hongo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4827291,
+      "longitude": 135.6194173
+    },
+    {
+      "id": "jp_fukui_station_12821280658",
+      "osm_id": 12821280658,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "若狭和田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakasa-Wada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4888481,
+      "longitude": 135.5808961
+    },
+    {
+      "id": "jp_fukui_station_12821280661",
+      "osm_id": 12821280661,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "若狭高浜",
+      "name_kana": "わかさたかはま",
+      "name_translations": {
+        "en": "Wakasa-Takahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4862716,
+      "longitude": 135.5475119
+    },
+    {
+      "id": "jp_fukui_station_12821280662",
+      "osm_id": 12821280662,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "三松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsumatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.488803,
+      "longitude": 135.5204634
+    },
+    {
+      "id": "jp_fukui_station_12821280663",
+      "osm_id": 12821280663,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukui",
+      "type": "station",
+      "subtype": "private",
+      "name": "青郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aonogō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4815532,
+      "longitude": 135.499681
+    },
+    {
+      "id": "jp_fukui_airport_57007496",
+      "osm_id": 57007496,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukui",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "福井空港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": "FKJ",
+      "latitude": 36.1431611,
+      "longitude": 136.2230916
+    },
+    {
+      "id": "jp_fukui_ferry_terminal_502540705",
+      "osm_id": 502540705,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukui",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "敦賀新港 新日本海フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6786179,
+      "longitude": 136.0722935
+    }
+  ]
+}

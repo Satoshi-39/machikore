@@ -1,0 +1,2158 @@
+{
+  "fetchedAt": "2025-12-24T05:56:12.429Z",
+  "prefecture_id": "jp_kagawa",
+  "prefecture_name": "香川県",
+  "stats": {
+    "station": 91,
+    "airport": 1,
+    "ferry_terminal": 14,
+    "bus_terminal": 16,
+    "total": 122
+  },
+  "data": [
+    {
+      "id": "jp_kagawa_ferry_terminal_261014200",
+      "osm_id": 261014200,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "草壁港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "Uchinomi Ferry Company",
+      "network": null,
+      "ref": null,
+      "latitude": 34.478747,
+      "longitude": 134.2989923
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_261028802",
+      "osm_id": 261028802,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "土庄フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tonosho Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4893124,
+      "longitude": 134.1741
+    },
+    {
+      "id": "jp_kagawa_station_265003251",
+      "osm_id": 265003251,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "八栗登山口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3551109,
+      "longitude": 134.1335827
+    },
+    {
+      "id": "jp_kagawa_station_265003261",
+      "osm_id": 265003261,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "八栗山上",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3580678,
+      "longitude": 134.1397846
+    },
+    {
+      "id": "jp_kagawa_station_270043372",
+      "osm_id": 270043372,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "八栗新道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakuri-Shinmichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3366589,
+      "longitude": 134.1476032
+    },
+    {
+      "id": "jp_kagawa_station_270043374",
+      "osm_id": 270043374,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "大町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3373603,
+      "longitude": 134.1413074
+    },
+    {
+      "id": "jp_kagawa_station_270043386",
+      "osm_id": 270043386,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "六万寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokumanji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3425675,
+      "longitude": 134.1342168
+    },
+    {
+      "id": "jp_kagawa_station_270043413",
+      "osm_id": 270043413,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "古高松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furutakamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3408557,
+      "longitude": 134.1126264
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_467447508",
+      "osm_id": 467447508,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大部港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5474176,
+      "longitude": 134.281992
+    },
+    {
+      "id": "jp_kagawa_station_956845175",
+      "osm_id": 956845175,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "高松貨物ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamatsu Kamotsu Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3378164,
+      "longitude": 134.0031005
+    },
+    {
+      "id": "jp_kagawa_station_1011920450",
+      "osm_id": 1011920450,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "讃岐相生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanuki-Aioi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T09",
+      "latitude": 34.2119668,
+      "longitude": 134.4243793
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_1032738858",
+      "osm_id": 1032738858,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "高松東港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3541797,
+      "longitude": 134.0739875
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_1444064271",
+      "osm_id": 1444064271,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "女木港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.389105,
+      "longitude": 134.052276
+    },
+    {
+      "id": "jp_kagawa_station_2000655526",
+      "osm_id": 2000655526,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "古高松南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furutakamatsu-Minami"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T22",
+      "latitude": 34.3411642,
+      "longitude": 134.1212399
+    },
+    {
+      "id": "jp_kagawa_station_2004060720",
+      "osm_id": 2004060720,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "讃岐牟礼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanuki-Mure"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T20",
+      "latitude": 34.3365186,
+      "longitude": 134.1475258
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_2399900467",
+      "osm_id": 2399900467,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "真浦港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1254537,
+      "longitude": 133.5337157
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_2501573795",
+      "osm_id": 2501573795,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伏石",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.310256,
+      "longitude": 134.0480913
+    },
+    {
+      "id": "jp_kagawa_station_2523256744",
+      "osm_id": 2523256744,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鶴羽",
+      "name_kana": "つるわ",
+      "name_translations": {
+        "en": "Tsuruwa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T14",
+      "latitude": 34.2800472,
+      "longitude": 134.2739398
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_3079530984",
+      "osm_id": 3079530984,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "国際両備フェリー 池田港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "kokusai ryoubi ferry Ikedako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4792908,
+      "longitude": 134.2258839
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_3965263991",
+      "osm_id": 3965263991,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "農協前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nokyo-mae (Agricultural Co-operative Office)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4608487,
+      "longitude": 133.9974622
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_3965264088",
+      "osm_id": 3965264088,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Yakuba-mae (Town Hall)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4600877,
+      "longitude": 133.9954223
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_3965264089",
+      "osm_id": 3965264089,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Shukaijo Mae",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4852429,
+      "longitude": 134.0875821
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_3965265883",
+      "osm_id": 3965265883,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "豊島公民館前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.48476,
+      "longitude": 134.0620626
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_3965266360",
+      "osm_id": 3965266360,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "直島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4609956,
+      "longitude": 133.9986854
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_4504477803",
+      "osm_id": 4504477803,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "観音寺港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1262533,
+      "longitude": 133.637956
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_4506215720",
+      "osm_id": 4506215720,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "仁尾港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.204008,
+      "longitude": 133.6369044
+    },
+    {
+      "id": "jp_kagawa_station_4903951402",
+      "osm_id": 4903951402,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "志度",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shido"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T19",
+      "latitude": 34.3215278,
+      "longitude": 134.1731132
+    },
+    {
+      "id": "jp_kagawa_station_4903951403",
+      "osm_id": 4903951403,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "琴電志度",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotoden-Shido"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.322513,
+      "longitude": 134.17302
+    },
+    {
+      "id": "jp_kagawa_station_4903956894",
+      "osm_id": 4903956894,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "丹生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nibu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T13",
+      "latitude": 34.2545846,
+      "longitude": 134.3016362
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_6292867145",
+      "osm_id": 6292867145,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "詫間大橋東",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": "詫間三野線",
+      "ref": null,
+      "latitude": 34.2215656,
+      "longitude": 133.6876985
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_6292867147",
+      "osm_id": 6292867147,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JA詫間支店",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2205214,
+      "longitude": 133.6798195
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_6292867152",
+      "osm_id": 6292867152,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "詫間庁舎",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2211051,
+      "longitude": 133.6741723
+    },
+    {
+      "id": "jp_kagawa_station_6887308113",
+      "osm_id": 6887308113,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "高松築港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamatsu-Chikko"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3507278,
+      "longitude": 134.0494851
+    },
+    {
+      "id": "jp_kagawa_station_6887308118",
+      "osm_id": 6887308118,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "栗林公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ritsurin-Koen"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3288568,
+      "longitude": 134.0511623
+    },
+    {
+      "id": "jp_kagawa_station_7047962638",
+      "osm_id": 7047962638,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "讃岐津田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanuki-Tsuda"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T15",
+      "latitude": 34.2883382,
+      "longitude": 134.2480572
+    },
+    {
+      "id": "jp_kagawa_station_7825993155",
+      "osm_id": 7825993155,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "比地大",
+      "name_kana": "ひじだい",
+      "name_translations": {
+        "en": "Hijidai"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y17",
+      "latitude": 34.167169,
+      "longitude": 133.6903122
+    },
+    {
+      "id": "jp_kagawa_station_7825993173",
+      "osm_id": 7825993173,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇多津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Utazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y09",
+      "latitude": 34.3064382,
+      "longitude": 133.8138829
+    },
+    {
+      "id": "jp_kagawa_station_7825993174",
+      "osm_id": 7825993174,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鴨川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamogawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "JR四国",
+      "ref": "Y06",
+      "latitude": 34.3068625,
+      "longitude": 133.9051397
+    },
+    {
+      "id": "jp_kagawa_station_7826015590",
+      "osm_id": 7826015590,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaide"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y08",
+      "latitude": 34.3132298,
+      "longitude": 133.8562913
+    },
+    {
+      "id": "jp_kagawa_station_7826352926",
+      "osm_id": 7826352926,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "丸亀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Marugame"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y10",
+      "latitude": 34.2920372,
+      "longitude": 133.792953
+    },
+    {
+      "id": "jp_kagawa_station_7826352928",
+      "osm_id": 7826352928,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "讃岐塩屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanuki-Shioya"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y11",
+      "latitude": 34.2849663,
+      "longitude": 133.7768953
+    },
+    {
+      "id": "jp_kagawa_station_7826517393",
+      "osm_id": 7826517393,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "みの",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mino"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y15",
+      "latitude": 34.2061553,
+      "longitude": 133.710414
+    },
+    {
+      "id": "jp_kagawa_station_7826517394",
+      "osm_id": 7826517394,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "詫間",
+      "name_kana": "たくま",
+      "name_translations": {
+        "en": "Takuma"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y14",
+      "latitude": 34.2210622,
+      "longitude": 133.6928818
+    },
+    {
+      "id": "jp_kagawa_station_7826536945",
+      "osm_id": 7826536945,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本山",
+      "name_kana": "もとやま",
+      "name_translations": {
+        "en": "Motoyama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y18",
+      "latitude": 34.1460484,
+      "longitude": 133.6863083
+    },
+    {
+      "id": "jp_kagawa_station_7826536946",
+      "osm_id": 7826536946,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高瀬",
+      "name_kana": "たかせ",
+      "name_translations": {
+        "en": "Takase"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y16",
+      "latitude": 34.1838906,
+      "longitude": 133.7110718
+    },
+    {
+      "id": "jp_kagawa_station_7826536947",
+      "osm_id": 7826536947,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "海岸寺",
+      "name_kana": "かいがんじ",
+      "name_translations": {
+        "en": "Kaiganji"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y13",
+      "latitude": 34.2538599,
+      "longitude": 133.7292825
+    },
+    {
+      "id": "jp_kagawa_station_7828721345",
+      "osm_id": 7828721345,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "観音寺",
+      "name_kana": "かんおんじ",
+      "name_translations": {
+        "en": "Kan'onji"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y19",
+      "latitude": 34.124273,
+      "longitude": 133.6554569
+    },
+    {
+      "id": "jp_kagawa_station_7828775047",
+      "osm_id": 7828775047,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyohama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0798297,
+      "longitude": 133.6443675
+    },
+    {
+      "id": "jp_kagawa_station_7832077484",
+      "osm_id": 7832077484,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "箕浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minoura"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y21",
+      "latitude": 34.0480389,
+      "longitude": 133.6191037
+    },
+    {
+      "id": "jp_kagawa_station_7880016397",
+      "osm_id": 7880016397,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "水田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizuta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3029243,
+      "longitude": 134.092771
+    },
+    {
+      "id": "jp_kagawa_station_7880016411",
+      "osm_id": 7880016411,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "公文明",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumommyō"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2666211,
+      "longitude": 134.1618992
+    },
+    {
+      "id": "jp_kagawa_station_7880078706",
+      "osm_id": 7880078706,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "八栗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakuri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3446107,
+      "longitude": 134.122552
+    },
+    {
+      "id": "jp_kagawa_station_8017881699",
+      "osm_id": 8017881699,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "今橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imabashi"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3417322,
+      "longitude": 134.0591404
+    },
+    {
+      "id": "jp_kagawa_station_8019670147",
+      "osm_id": 8019670147,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "松島二丁目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsushima-Nichome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3400388,
+      "longitude": 134.0646151
+    },
+    {
+      "id": "jp_kagawa_station_8025259456",
+      "osm_id": 8025259456,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "沖松島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oki-Matsushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3411915,
+      "longitude": 134.0723178
+    },
+    {
+      "id": "jp_kagawa_station_8067577865",
+      "osm_id": 8067577865,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "瓦町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaramachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3395704,
+      "longitude": 134.0534786
+    },
+    {
+      "id": "jp_kagawa_station_8119625806",
+      "osm_id": 8119625806,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "引田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiketa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T10",
+      "latitude": 34.2244055,
+      "longitude": 134.4020096
+    },
+    {
+      "id": "jp_kagawa_station_8119625807",
+      "osm_id": 8119625807,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "讃岐白鳥",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanuki-Shirotori"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T11",
+      "latitude": 34.243587,
+      "longitude": 134.3661511
+    },
+    {
+      "id": "jp_kagawa_station_8119625808",
+      "osm_id": 8119625808,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三本松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sambommatsu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T12",
+      "latitude": 34.2516356,
+      "longitude": 134.3342521
+    },
+    {
+      "id": "jp_kagawa_station_8119625809",
+      "osm_id": 8119625809,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "神前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanzaki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T16",
+      "latitude": 34.2827124,
+      "longitude": 134.2091614
+    },
+    {
+      "id": "jp_kagawa_station_8119625810",
+      "osm_id": 8119625810,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "造田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zōda"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T17",
+      "latitude": 34.2829506,
+      "longitude": 134.1858852
+    },
+    {
+      "id": "jp_kagawa_station_8119625811",
+      "osm_id": 8119625811,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "オレンジタウン",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Orange Town"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T18",
+      "latitude": 34.3022672,
+      "longitude": 134.1809191
+    },
+    {
+      "id": "jp_kagawa_station_8119625812",
+      "osm_id": 8119625812,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3265158,
+      "longitude": 134.163589
+    },
+    {
+      "id": "jp_kagawa_station_8119625813",
+      "osm_id": 8119625813,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "屋島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T23",
+      "latitude": 34.336581,
+      "longitude": 134.109179
+    },
+    {
+      "id": "jp_kagawa_station_8119625814",
+      "osm_id": 8119625814,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木太町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitacho"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T24",
+      "latitude": 34.3318938,
+      "longitude": 134.0800231
+    },
+    {
+      "id": "jp_kagawa_station_8119625815",
+      "osm_id": 8119625815,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "栗林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ritsurin"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T25",
+      "latitude": 34.3322282,
+      "longitude": 134.0533921
+    },
+    {
+      "id": "jp_kagawa_station_8119625816",
+      "osm_id": 8119625816,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "栗林公園北口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ritsurinkōen Kitaguchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T26",
+      "latitude": 34.334033,
+      "longitude": 134.041692
+    },
+    {
+      "id": "jp_kagawa_station_8142199350",
+      "osm_id": 8142199350,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "房前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fusazaki"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3324799,
+      "longitude": 134.1584375
+    },
+    {
+      "id": "jp_kagawa_station_8164421390",
+      "osm_id": 8164421390,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shioya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3356048,
+      "longitude": 134.1551028
+    },
+    {
+      "id": "jp_kagawa_station_8228821798",
+      "osm_id": 8228821798,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "長尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagao"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.266707,
+      "longitude": 134.1695076
+    },
+    {
+      "id": "jp_kagawa_station_8247625872",
+      "osm_id": 8247625872,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "太田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2990699,
+      "longitude": 134.0459302
+    },
+    {
+      "id": "jp_kagawa_station_8247625874",
+      "osm_id": 8247625874,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "伏石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fuseishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3099022,
+      "longitude": 134.0478332
+    },
+    {
+      "id": "jp_kagawa_station_8247625877",
+      "osm_id": 8247625877,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2701089,
+      "longitude": 133.9893034
+    },
+    {
+      "id": "jp_kagawa_station_8247659563",
+      "osm_id": 8247659563,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "空港通り",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kukodori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2810331,
+      "longitude": 134.0332581
+    },
+    {
+      "id": "jp_kagawa_station_8247659564",
+      "osm_id": 8247659564,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "円座",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enza"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2844992,
+      "longitude": 134.0093978
+    },
+    {
+      "id": "jp_kagawa_station_8247659565",
+      "osm_id": 8247659565,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "挿頭丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazashigaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2621024,
+      "longitude": 133.9796327
+    },
+    {
+      "id": "jp_kagawa_station_8247659566",
+      "osm_id": 8247659566,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "畑田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2592361,
+      "longitude": 133.9721044
+    },
+    {
+      "id": "jp_kagawa_station_8247659567",
+      "osm_id": 8247659567,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "綾川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ayagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2495002,
+      "longitude": 133.9316802
+    },
+    {
+      "id": "jp_kagawa_station_8247659568",
+      "osm_id": 8247659568,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽床",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2411346,
+      "longitude": 133.9020471
+    },
+    {
+      "id": "jp_kagawa_station_8247659570",
+      "osm_id": 8247659570,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "榎井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enai"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.1942902,
+      "longitude": 133.8292935
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_8586606675",
+      "osm_id": 8586606675,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "善通寺インタ一バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zentsuji Interchange Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2459965,
+      "longitude": 133.7904699
+    },
+    {
+      "id": "jp_kagawa_station_8667971394",
+      "osm_id": 8667971394,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "高松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y00;T28",
+      "latitude": 34.350692,
+      "longitude": 134.0461528
+    },
+    {
+      "id": "jp_kagawa_station_8674418745",
+      "osm_id": 8674418745,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鬼無",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinashi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y02",
+      "latitude": 34.3255264,
+      "longitude": 133.9937666
+    },
+    {
+      "id": "jp_kagawa_station_8676489345",
+      "osm_id": 8676489345,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "香西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōzai"
+      },
+      "operator": "JR四国",
+      "network": null,
+      "ref": "Y01",
+      "latitude": 34.340975,
+      "longitude": 134.0096822
+    },
+    {
+      "id": "jp_kagawa_station_8689344128",
+      "osm_id": 8689344128,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "讃岐府中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanuki-Fuchū"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y05",
+      "latitude": 34.2915896,
+      "longitude": 133.9233814
+    },
+    {
+      "id": "jp_kagawa_station_8691604106",
+      "osm_id": 8691604106,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "国分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokubu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y04",
+      "latitude": 34.30057,
+      "longitude": 133.9417029
+    },
+    {
+      "id": "jp_kagawa_station_8691861906",
+      "osm_id": 8691861906,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "端岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashioka"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3049515,
+      "longitude": 133.9677532
+    },
+    {
+      "id": "jp_kagawa_station_8886571432",
+      "osm_id": 8886571432,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "多度津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tadotsu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y12",
+      "latitude": 34.2711186,
+      "longitude": 133.757012
+    },
+    {
+      "id": "jp_kagawa_station_8886574783",
+      "osm_id": 8886574783,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "金蔵寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konzozi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D13",
+      "latitude": 34.2479482,
+      "longitude": 133.7776275
+    },
+    {
+      "id": "jp_kagawa_station_8892385287",
+      "osm_id": 8892385287,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "善通寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zentsuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D14",
+      "latitude": 34.2299924,
+      "longitude": 133.78922
+    },
+    {
+      "id": "jp_kagawa_station_8911389244",
+      "osm_id": 8911389244,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "琴電琴平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotoden-Kotohira"
+      },
+      "operator": "高松琴平電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.1911636,
+      "longitude": 133.8189576
+    },
+    {
+      "id": "jp_kagawa_station_8911420248",
+      "osm_id": 8911420248,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "琴平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotohira"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "JR土讃線",
+      "ref": "D15",
+      "latitude": 34.1920034,
+      "longitude": 133.8214374
+    },
+    {
+      "id": "jp_kagawa_station_8925223620",
+      "osm_id": 8925223620,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩入",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shioiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D16",
+      "latitude": 34.1560952,
+      "longitude": 133.8498768
+    },
+    {
+      "id": "jp_kagawa_station_8933098246",
+      "osm_id": 8933098246,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "讃岐財田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanuki-Saida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D18",
+      "latitude": 34.1173923,
+      "longitude": 133.8145186
+    },
+    {
+      "id": "jp_kagawa_station_9007663239",
+      "osm_id": 9007663239,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "栗熊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurikuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.234024,
+      "longitude": 133.8844619
+    },
+    {
+      "id": "jp_kagawa_station_9025841454",
+      "osm_id": 9025841454,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "昭和町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Showacho"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T27",
+      "latitude": 34.3440572,
+      "longitude": 134.0321524
+    },
+    {
+      "id": "jp_kagawa_station_9133494587",
+      "osm_id": 9133494587,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "片原町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kataharamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3458826,
+      "longitude": 134.0543651
+    },
+    {
+      "id": "jp_kagawa_station_9159514950",
+      "osm_id": 9159514950,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "春日川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasugagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3409053,
+      "longitude": 134.0835941
+    },
+    {
+      "id": "jp_kagawa_station_9641841129",
+      "osm_id": 9641841129,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "三条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3199262,
+      "longitude": 134.0496162
+    },
+    {
+      "id": "jp_kagawa_station_9713103948",
+      "osm_id": 9713103948,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒川",
+      "name_kana": "くろかわ",
+      "name_translations": {
+        "en": "Kurokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D17",
+      "latitude": 34.1331986,
+      "longitude": 133.8200147
+    },
+    {
+      "id": "jp_kagawa_station_9905236466",
+      "osm_id": 9905236466,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "潟元",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3411569,
+      "longitude": 134.097962
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_10294419420",
+      "osm_id": 10294419420,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "朝日町二丁目",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3512865,
+      "longitude": 134.0637639
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_10310141373",
+      "osm_id": 10310141373,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "タコタコ海上タクシー",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3479983,
+      "longitude": 134.0566603
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_10310141376",
+      "osm_id": 10310141376,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "豊島フェリー",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3484645,
+      "longitude": 134.0560824
+    },
+    {
+      "id": "jp_kagawa_station_10600662373",
+      "osm_id": 10600662373,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "琴電屋島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotodenyashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3414894,
+      "longitude": 134.105832
+    },
+    {
+      "id": "jp_kagawa_station_10911033458",
+      "osm_id": 10911033458,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2482745,
+      "longitude": 133.92251
+    },
+    {
+      "id": "jp_kagawa_station_10911171158",
+      "osm_id": 10911171158,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2212191,
+      "longitude": 133.861572
+    },
+    {
+      "id": "jp_kagawa_station_10911171180",
+      "osm_id": 10911171180,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hazama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2096366,
+      "longitude": 133.847246
+    },
+    {
+      "id": "jp_kagawa_station_12338354556",
+      "osm_id": 12338354556,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八栗口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakuriguchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T21",
+      "latitude": 34.338876,
+      "longitude": 134.1369208
+    },
+    {
+      "id": "jp_kagawa_station_12381147417",
+      "osm_id": 12381147417,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "陶",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2502731,
+      "longitude": 133.9473508
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_12554189198",
+      "osm_id": 12554189198,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "坂手港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakate Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4563477,
+      "longitude": 134.3207976
+    },
+    {
+      "id": "jp_kagawa_station_13283071177",
+      "osm_id": 13283071177,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "仏生山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Busshozan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2837439,
+      "longitude": 134.0426936
+    },
+    {
+      "id": "jp_kagawa_station_13283078128",
+      "osm_id": 13283078128,
+      "osm_type": "node",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "一宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2831963,
+      "longitude": 134.022584
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_57755605",
+      "osm_id": 57755605,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高松駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3517645,
+      "longitude": 134.0472547
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_57755634",
+      "osm_id": 57755634,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高松駅高速バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3501499,
+      "longitude": 134.0465587
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_159679802",
+      "osm_id": 159679802,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "坂出インターバスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.295386,
+      "longitude": 133.8383556
+    },
+    {
+      "id": "jp_kagawa_airport_223240147",
+      "osm_id": 223240147,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "高松空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamatsu Airport"
+      },
+      "operator": "http://www.mlit.go.jp",
+      "network": null,
+      "ref": "TAK",
+      "latitude": 34.2151904,
+      "longitude": 134.0150766
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_251018996",
+      "osm_id": 251018996,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "土庄港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4892628,
+      "longitude": 134.1717907
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_289175911",
+      "osm_id": 289175911,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "丸亀駅バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2920614,
+      "longitude": 133.7938716
+    },
+    {
+      "id": "jp_kagawa_station_892631232",
+      "osm_id": 892631232,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八十場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasoba"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y07",
+      "latitude": 34.3128687,
+      "longitude": 133.8851687
+    },
+    {
+      "id": "jp_kagawa_bus_terminal_919310744",
+      "osm_id": 919310744,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "浦城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urajiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3845495,
+      "longitude": 133.8228873
+    },
+    {
+      "id": "jp_kagawa_ferry_terminal_1208452503",
+      "osm_id": 1208452503,
+      "osm_type": "way",
+      "prefecture_id": "jp_kagawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "本島汽船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2950926,
+      "longitude": 133.7908815
+    }
+  ]
+}

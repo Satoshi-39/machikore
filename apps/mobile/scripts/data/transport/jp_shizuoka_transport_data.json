@@ -1,0 +1,4512 @@
+{
+  "fetchedAt": "2025-12-24T05:53:38.016Z",
+  "prefecture_id": "jp_shizuoka",
+  "prefecture_name": "静岡県",
+  "stats": {
+    "station": 217,
+    "airport": 6,
+    "ferry_terminal": 3,
+    "bus_terminal": 27,
+    "total": 253
+  },
+  "data": [
+    {
+      "id": "jp_shizuoka_station_264189521",
+      "osm_id": 264189521,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆大川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izu-Okawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8435776,
+      "longitude": 139.0740728
+    },
+    {
+      "id": "jp_shizuoka_station_264190281",
+      "osm_id": 264190281,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "富戸",
+      "name_kana": "ふと",
+      "name_translations": {
+        "en": "Futo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9094,
+      "longitude": 139.131082
+    },
+    {
+      "id": "jp_shizuoka_station_264191014",
+      "osm_id": 264191014,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "蓮台寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rendaiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6995256,
+      "longitude": 138.9412823
+    },
+    {
+      "id": "jp_shizuoka_station_264199402",
+      "osm_id": 264199402,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "十国登り口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jukkoku-noboriguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.127691,
+      "longitude": 139.0376355
+    },
+    {
+      "id": "jp_shizuoka_station_264199403",
+      "osm_id": 264199403,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "十国峠",
+      "name_kana": "じゅっこくとうげ",
+      "name_translations": {
+        "en": "Jukkoku Pass"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1277147,
+      "longitude": 139.0408437
+    },
+    {
+      "id": "jp_shizuoka_station_264200622",
+      "osm_id": 264200622,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三島田町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mishima-Tamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1164479,
+      "longitude": 138.9178482
+    },
+    {
+      "id": "jp_shizuoka_station_264201692",
+      "osm_id": 264201692,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "来宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JT22",
+      "latitude": 35.0988214,
+      "longitude": 139.0655993
+    },
+    {
+      "id": "jp_shizuoka_station_264207212",
+      "osm_id": 264207212,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩波",
+      "name_kana": "いわなみ",
+      "name_translations": {
+        "en": "Iwanami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2153522,
+      "longitude": 138.919285
+    },
+    {
+      "id": "jp_shizuoka_station_264868597",
+      "osm_id": 264868597,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "相月",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1150532,
+      "longitude": 137.8543561
+    },
+    {
+      "id": "jp_shizuoka_station_264868640",
+      "osm_id": 264868640,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "中部天竜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chubutenryu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0850892,
+      "longitude": 137.8028089
+    },
+    {
+      "id": "jp_shizuoka_station_264869712",
+      "osm_id": 264869712,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "早瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0605986,
+      "longitude": 137.7751628
+    },
+    {
+      "id": "jp_shizuoka_station_264870112",
+      "osm_id": 264870112,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "上市場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamiichiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0501882,
+      "longitude": 137.7524845
+    },
+    {
+      "id": "jp_shizuoka_station_264870899",
+      "osm_id": 264870899,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0561985,
+      "longitude": 137.7634326
+    },
+    {
+      "id": "jp_shizuoka_station_264871359",
+      "osm_id": 264871359,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "下川合",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Kawai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0692294,
+      "longitude": 137.7862474
+    },
+    {
+      "id": "jp_shizuoka_station_264871379",
+      "osm_id": 264871379,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "向市場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukaichiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1540259,
+      "longitude": 137.8694311
+    },
+    {
+      "id": "jp_shizuoka_station_264871381",
+      "osm_id": 264871381,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "城西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shironishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1317089,
+      "longitude": 137.8621347
+    },
+    {
+      "id": "jp_shizuoka_station_264872224",
+      "osm_id": 264872224,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "出馬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0495756,
+      "longitude": 137.7447074
+    },
+    {
+      "id": "jp_shizuoka_station_264872431",
+      "osm_id": 264872431,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "小和田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kowada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2098095,
+      "longitude": 137.8356711
+    },
+    {
+      "id": "jp_shizuoka_station_264873485",
+      "osm_id": 264873485,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐久間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0918758,
+      "longitude": 137.8098764
+    },
+    {
+      "id": "jp_shizuoka_station_264873522",
+      "osm_id": 264873522,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "水窪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misakubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1637594,
+      "longitude": 137.8705062
+    },
+    {
+      "id": "jp_shizuoka_station_265837610",
+      "osm_id": 265837610,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新清水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-shimizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S15",
+      "latitude": 35.0170901,
+      "longitude": 138.4878777
+    },
+    {
+      "id": "jp_shizuoka_station_265837662",
+      "osm_id": 265837662,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "春日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasugacho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S04",
+      "latitude": 34.9784748,
+      "longitude": 138.4009535
+    },
+    {
+      "id": "jp_shizuoka_station_380254403",
+      "osm_id": 380254403,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "気賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8071803,
+      "longitude": 137.6519999
+    },
+    {
+      "id": "jp_shizuoka_station_380377125",
+      "osm_id": 380377125,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "アスモ前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asumomae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.727957,
+      "longitude": 137.4943072
+    },
+    {
+      "id": "jp_shizuoka_station_380377478",
+      "osm_id": 380377478,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7379431,
+      "longitude": 137.509757
+    },
+    {
+      "id": "jp_shizuoka_station_380423354",
+      "osm_id": 380423354,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okaji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8124363,
+      "longitude": 137.6658365
+    },
+    {
+      "id": "jp_shizuoka_station_382957063",
+      "osm_id": 382957063,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "知波田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chibata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.753547,
+      "longitude": 137.5119981
+    },
+    {
+      "id": "jp_shizuoka_station_382964143",
+      "osm_id": 382964143,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾奈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ona"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7838769,
+      "longitude": 137.5417021
+    },
+    {
+      "id": "jp_shizuoka_station_382964213",
+      "osm_id": 382964213,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥浜名湖",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okuhamanako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7951184,
+      "longitude": 137.5458778
+    },
+    {
+      "id": "jp_shizuoka_station_382964282",
+      "osm_id": 382964282,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三ヶ日",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikkabi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.802616,
+      "longitude": 137.5518728
+    },
+    {
+      "id": "jp_shizuoka_station_382968543",
+      "osm_id": 382968543,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "都筑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuzuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7957713,
+      "longitude": 137.5745043
+    },
+    {
+      "id": "jp_shizuoka_station_382968614",
+      "osm_id": 382968614,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "東都筑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Tsuzuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7903654,
+      "longitude": 137.5865868
+    },
+    {
+      "id": "jp_shizuoka_station_382968668",
+      "osm_id": 382968668,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜名湖佐久米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamanako-Sakume"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.789129,
+      "longitude": 137.5993612
+    },
+    {
+      "id": "jp_shizuoka_station_382970669",
+      "osm_id": 382970669,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "寸座",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sunza"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7900701,
+      "longitude": 137.6124671
+    },
+    {
+      "id": "jp_shizuoka_station_382972596",
+      "osm_id": 382972596,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西気賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kiga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.802351,
+      "longitude": 137.6215489
+    },
+    {
+      "id": "jp_shizuoka_station_382974078",
+      "osm_id": 382974078,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "金指",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanasashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8169799,
+      "longitude": 137.6809248
+    },
+    {
+      "id": "jp_shizuoka_station_382974256",
+      "osm_id": 382974256,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "常葉大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokohadaigakumae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8200643,
+      "longitude": 137.7093747
+    },
+    {
+      "id": "jp_shizuoka_station_382974354",
+      "osm_id": 382974354,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "都田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyakoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.828349,
+      "longitude": 137.7182877
+    },
+    {
+      "id": "jp_shizuoka_station_382974421",
+      "osm_id": 382974421,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "フルーツパーク",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fruit Park"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8345062,
+      "longitude": 137.7325018
+    },
+    {
+      "id": "jp_shizuoka_station_382980484",
+      "osm_id": 382980484,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "円田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8207919,
+      "longitude": 137.9074722
+    },
+    {
+      "id": "jp_shizuoka_station_382980509",
+      "osm_id": 382980509,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠州森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enshū-Mori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8309302,
+      "longitude": 137.9238507
+    },
+    {
+      "id": "jp_shizuoka_station_382980529",
+      "osm_id": 382980529,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸綿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Towata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8314447,
+      "longitude": 137.9308079
+    },
+    {
+      "id": "jp_shizuoka_station_384097400",
+      "osm_id": 384097400,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8303908,
+      "longitude": 137.7736222
+    },
+    {
+      "id": "jp_shizuoka_station_384097410",
+      "osm_id": 384097410,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩水寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gansuiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8376039,
+      "longitude": 137.7922232
+    },
+    {
+      "id": "jp_shizuoka_station_384097490",
+      "osm_id": 384097490,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "二俣本町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Futamata-Hommachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8594236,
+      "longitude": 137.8127698
+    },
+    {
+      "id": "jp_shizuoka_station_384106876",
+      "osm_id": 384106876,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "上野部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaminobe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8474474,
+      "longitude": 137.8299713
+    },
+    {
+      "id": "jp_shizuoka_station_384106890",
+      "osm_id": 384106890,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyooka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8372326,
+      "longitude": 137.8397255
+    },
+    {
+      "id": "jp_shizuoka_station_384106941",
+      "osm_id": 384106941,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "敷地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8262226,
+      "longitude": 137.8642713
+    },
+    {
+      "id": "jp_shizuoka_station_384106986",
+      "osm_id": 384106986,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠江一宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōtōmi-Ichinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8180908,
+      "longitude": 137.8890613
+    },
+    {
+      "id": "jp_shizuoka_station_384115753",
+      "osm_id": 384115753,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "原田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8199214,
+      "longitude": 137.9529597
+    },
+    {
+      "id": "jp_shizuoka_station_384115786",
+      "osm_id": 384115786,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "原谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haranoya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8084271,
+      "longitude": 137.9549356
+    },
+    {
+      "id": "jp_shizuoka_station_384115801",
+      "osm_id": 384115801,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "いこいの広場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikoinohiroba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7881142,
+      "longitude": 137.9637041
+    },
+    {
+      "id": "jp_shizuoka_station_384115818",
+      "osm_id": 384115818,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakuragi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7782513,
+      "longitude": 137.9728914
+    },
+    {
+      "id": "jp_shizuoka_station_384115834",
+      "osm_id": 384115834,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西掛川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kakegawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7719237,
+      "longitude": 137.9951963
+    },
+    {
+      "id": "jp_shizuoka_station_384115836",
+      "osm_id": 384115836,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "掛川市役所前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kakegawa-shiyakusho-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7703711,
+      "longitude": 137.9999441
+    },
+    {
+      "id": "jp_shizuoka_station_384115850",
+      "osm_id": 384115850,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "掛川",
+      "name_kana": "かけがわ",
+      "name_translations": {
+        "en": "Kakegawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7695593,
+      "longitude": 138.0142636
+    },
+    {
+      "id": "jp_shizuoka_station_823290701",
+      "osm_id": 823290701,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "駿河徳山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suruga-Tokuyama"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.074368,
+      "longitude": 138.1105711
+    },
+    {
+      "id": "jp_shizuoka_station_823291723",
+      "osm_id": 823291723,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "田野口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanokuchi"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0514235,
+      "longitude": 138.0954368
+    },
+    {
+      "id": "jp_shizuoka_station_823291727",
+      "osm_id": 823291727,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "抜里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nukuri"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9531343,
+      "longitude": 138.0877693
+    },
+    {
+      "id": "jp_shizuoka_station_823291769",
+      "osm_id": 823291769,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "青部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aobe"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0895921,
+      "longitude": 138.1157459
+    },
+    {
+      "id": "jp_shizuoka_station_823292081",
+      "osm_id": 823292081,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新金谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Kanaya"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8257135,
+      "longitude": 138.1377658
+    },
+    {
+      "id": "jp_shizuoka_station_823292408",
+      "osm_id": 823292408,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiogō"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9972672,
+      "longitude": 138.0906978
+    },
+    {
+      "id": "jp_shizuoka_station_823292882",
+      "osm_id": 823292882,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "家山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ieyama"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9402323,
+      "longitude": 138.0777722
+    },
+    {
+      "id": "jp_shizuoka_station_823292942",
+      "osm_id": 823292942,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "地名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jina"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9861199,
+      "longitude": 138.0872386
+    },
+    {
+      "id": "jp_shizuoka_station_823293038",
+      "osm_id": 823293038,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "崎平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakidaira"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0915866,
+      "longitude": 138.127241
+    },
+    {
+      "id": "jp_shizuoka_station_823293131",
+      "osm_id": 823293131,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "門出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kadode"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8501499,
+      "longitude": 138.1193423
+    },
+    {
+      "id": "jp_shizuoka_station_823293452",
+      "osm_id": 823293452,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "川根温泉笹間渡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaneonsen-Sasamado"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9622597,
+      "longitude": 138.0862385
+    },
+    {
+      "id": "jp_shizuoka_station_823293493",
+      "osm_id": 823293493,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "代官町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daikanchō"
+      },
+      "operator": "大井川鐵道",
+      "network": "大井川本線",
+      "ref": null,
+      "latitude": 34.8355079,
+      "longitude": 138.126051
+    },
+    {
+      "id": "jp_shizuoka_station_823293507",
+      "osm_id": 823293507,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "下泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoizumi"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0219767,
+      "longitude": 138.0900492
+    },
+    {
+      "id": "jp_shizuoka_station_823293738",
+      "osm_id": 823293738,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "神尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamio"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8828231,
+      "longitude": 138.1016473
+    },
+    {
+      "id": "jp_shizuoka_station_823293777",
+      "osm_id": 823293777,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Owada"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9207191,
+      "longitude": 138.0824424
+    },
+    {
+      "id": "jp_shizuoka_station_823293817",
+      "osm_id": 823293817,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "福用",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuyō"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9016826,
+      "longitude": 138.089943
+    },
+    {
+      "id": "jp_shizuoka_station_823295297",
+      "osm_id": 823295297,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "日切",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higiri"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8391404,
+      "longitude": 138.1223802
+    },
+    {
+      "id": "jp_shizuoka_station_823295617",
+      "osm_id": 823295617,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "合格",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Goukaku"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8450292,
+      "longitude": 138.1207447
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1400736576",
+      "osm_id": 1400736576,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "しずてつジャストライン丸子営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9448875,
+      "longitude": 138.352042
+    },
+    {
+      "id": "jp_shizuoka_station_1420030159",
+      "osm_id": 1420030159,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "柚木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunoki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S05",
+      "latitude": 34.9819402,
+      "longitude": 138.4061295
+    },
+    {
+      "id": "jp_shizuoka_station_1505154176",
+      "osm_id": 1505154176,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "金谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanaya"
+      },
+      "operator": "大井川鐵道",
+      "network": "大井川本線",
+      "ref": null,
+      "latitude": 34.8196538,
+      "longitude": 138.1261832
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1537813556",
+      "osm_id": 1537813556,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "しずてつジャストライン駅前ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9724827,
+      "longitude": 138.3885007
+    },
+    {
+      "id": "jp_shizuoka_station_1619637943",
+      "osm_id": 1619637943,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "日吉町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiyoshicho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S02",
+      "latitude": 34.9771076,
+      "longitude": 138.3912749
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1670393173",
+      "osm_id": 1670393173,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "相良バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6825907,
+      "longitude": 138.1951409
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1761798030",
+      "osm_id": 1761798030,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.757618,
+      "longitude": 138.7788511
+    },
+    {
+      "id": "jp_shizuoka_airport_1826678044",
+      "osm_id": 1826678044,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "airport",
+      "subtype": "military",
+      "name": "静浜基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JASDF Shizuhama Airbase"
+      },
+      "operator": "航空自衛隊",
+      "network": null,
+      "ref": "RJNY",
+      "latitude": 34.8128917,
+      "longitude": 138.2958962
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1840905469",
+      "osm_id": 1840905469,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "清水駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "しずてつジャストライン",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0237953,
+      "longitude": 138.4883011
+    },
+    {
+      "id": "jp_shizuoka_station_1874169206",
+      "osm_id": 1874169206,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "細谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hosoya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7927564,
+      "longitude": 137.9615838
+    },
+    {
+      "id": "jp_shizuoka_ferry_terminal_1956402990",
+      "osm_id": 1956402990,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "土肥港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toi Port Ferry  Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9060338,
+      "longitude": 138.7860737
+    },
+    {
+      "id": "jp_shizuoka_station_2681951171",
+      "osm_id": 2681951171,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大嵐",
+      "name_kana": "おおぞれ",
+      "name_translations": {
+        "en": "Ōzore"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1908396,
+      "longitude": 137.8183339
+    },
+    {
+      "id": "jp_shizuoka_station_2701194053",
+      "osm_id": 2701194053,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鹿島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "18",
+      "latitude": 34.8466564,
+      "longitude": 137.8079886
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_3017748392",
+      "osm_id": 3017748392,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "下田駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izukyu Shimoda Sta."
+      },
+      "operator": "南伊豆東海バス;西伊豆東海バス",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6786776,
+      "longitude": 138.9445573
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_3138207163",
+      "osm_id": 3138207163,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "御殿場プレミアム・アウトレット",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "富士急行;富士急バス;富士急湘南バス;フジエクスプレス;小田急箱根高速バス;東急トランセ;ジェイアールバス関東;ジェイアールバステック",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3075286,
+      "longitude": 138.9621956
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_3298384850",
+      "osm_id": 3298384850,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "但沼車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0996002,
+      "longitude": 138.5089332
+    },
+    {
+      "id": "jp_shizuoka_station_3585794194",
+      "osm_id": 3585794194,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三島",
+      "name_kana": "みしま",
+      "name_translations": {
+        "en": "Mishima"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": "CA02",
+      "latitude": 35.1262974,
+      "longitude": 138.9115159
+    },
+    {
+      "id": "jp_shizuoka_station_3585794197",
+      "osm_id": 3585794197,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新富士",
+      "name_kana": "しんふじ",
+      "name_translations": {
+        "en": "Shin-Fuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1421319,
+      "longitude": 138.6634609
+    },
+    {
+      "id": "jp_shizuoka_station_3589537636",
+      "osm_id": 3589537636,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "静岡",
+      "name_kana": "しずおか",
+      "name_translations": {
+        "en": "Shizuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9716851,
+      "longitude": 138.3893146
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_3696399258",
+      "osm_id": 3696399258,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "谷津ターミナル",
+      "name_kana": "やつたあみなる",
+      "name_translations": null,
+      "operator": "しずてつジャストライン",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9904254,
+      "longitude": 138.2979922
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_3901054196",
+      "osm_id": 3901054196,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "吉原中央駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1636422,
+      "longitude": 138.683507
+    },
+    {
+      "id": "jp_shizuoka_station_3901054197",
+      "osm_id": 3901054197,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉原本町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshiwara-honcho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1608249,
+      "longitude": 138.6898556
+    },
+    {
+      "id": "jp_shizuoka_station_3998380426",
+      "osm_id": 3998380426,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新所原",
+      "name_kana": "しんじょはら",
+      "name_translations": {
+        "en": "Shinjohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA40",
+      "latitude": 34.7233194,
+      "longitude": 137.4844101
+    },
+    {
+      "id": "jp_shizuoka_station_3999159996",
+      "osm_id": 3999159996,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新居町",
+      "name_kana": "あらいまち",
+      "name_translations": {
+        "en": "Araimachi"
+      },
+      "operator": "東海旅客鉄道",
+      "network": "JR東海道本線",
+      "ref": "CA38",
+      "latitude": 34.6944067,
+      "longitude": 137.5695762
+    },
+    {
+      "id": "jp_shizuoka_station_3999163781",
+      "osm_id": 3999163781,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "鷲津",
+      "name_kana": "わしづ",
+      "name_translations": {
+        "en": "Washizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA39",
+      "latitude": 34.7168397,
+      "longitude": 137.5460261
+    },
+    {
+      "id": "jp_shizuoka_station_3999193758",
+      "osm_id": 3999193758,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "弁天島",
+      "name_kana": "べんてんじま",
+      "name_translations": {
+        "en": "Bentenjima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA37",
+      "latitude": 34.6898623,
+      "longitude": 137.6037602
+    },
+    {
+      "id": "jp_shizuoka_station_3999193759",
+      "osm_id": 3999193759,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜松",
+      "name_kana": "はままつ",
+      "name_translations": {
+        "en": "Hamamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA34",
+      "latitude": 34.7040059,
+      "longitude": 137.7348139
+    },
+    {
+      "id": "jp_shizuoka_station_3999193760",
+      "osm_id": 3999193760,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "舞阪",
+      "name_kana": "まいさか",
+      "name_translations": {
+        "en": "Maisaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA36",
+      "latitude": 34.6857162,
+      "longitude": 137.6271386
+    },
+    {
+      "id": "jp_shizuoka_station_3999193766",
+      "osm_id": 3999193766,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "高塚",
+      "name_kana": "たかつか",
+      "name_translations": {
+        "en": "Takatsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA35",
+      "latitude": 34.6904941,
+      "longitude": 137.6810035
+    },
+    {
+      "id": "jp_shizuoka_station_3999193767",
+      "osm_id": 3999193767,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "天竜川",
+      "name_kana": "てんりゅうがわ",
+      "name_translations": {
+        "en": "Tenryugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA33",
+      "latitude": 34.7170086,
+      "longitude": 137.7792839
+    },
+    {
+      "id": "jp_shizuoka_station_3999193768",
+      "osm_id": 3999193768,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊田町",
+      "name_kana": "とよだちょう",
+      "name_translations": {
+        "en": "Toyodacho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA32",
+      "latitude": 34.7120279,
+      "longitude": 137.819956
+    },
+    {
+      "id": "jp_shizuoka_station_3999393671",
+      "osm_id": 3999393671,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "安倍川",
+      "name_kana": "あべかわ",
+      "name_translations": {
+        "en": "Abekawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA18",
+      "latitude": 34.941226,
+      "longitude": 138.3641323
+    },
+    {
+      "id": "jp_shizuoka_station_3999393672",
+      "osm_id": 3999393672,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "愛野",
+      "name_kana": "あいの",
+      "name_translations": {
+        "en": "Aino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA28",
+      "latitude": 34.7523474,
+      "longitude": 137.9615144
+    },
+    {
+      "id": "jp_shizuoka_station_3999393673",
+      "osm_id": 3999393673,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "熱海",
+      "name_kana": "あたみ",
+      "name_translations": {
+        "en": "Atami"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JT21;CA00",
+      "latitude": 35.1038519,
+      "longitude": 139.0781167
+    },
+    {
+      "id": "jp_shizuoka_station_3999393674",
+      "osm_id": 3999393674,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1514949,
+      "longitude": 138.6509228
+    },
+    {
+      "id": "jp_shizuoka_station_3999393675",
+      "osm_id": 3999393675,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤枝",
+      "name_kana": "ふじえだ",
+      "name_translations": {
+        "en": "Fujieda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA22",
+      "latitude": 34.8492732,
+      "longitude": 138.2522644
+    },
+    {
+      "id": "jp_shizuoka_station_3999393676",
+      "osm_id": 3999393676,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA09",
+      "latitude": 35.1411158,
+      "longitude": 138.6185601
+    },
+    {
+      "id": "jp_shizuoka_station_3999393677",
+      "osm_id": 3999393677,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "袋井",
+      "name_kana": "ふくろい",
+      "name_translations": {
+        "en": "Fukuroi"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": "CA29",
+      "latitude": 34.741337,
+      "longitude": 137.9257682
+    },
+    {
+      "id": "jp_shizuoka_station_3999393679",
+      "osm_id": 3999393679,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "東静岡",
+      "name_kana": "ひがししずおか",
+      "name_translations": {
+        "en": "Higashi-Shizuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA16",
+      "latitude": 34.9842323,
+      "longitude": 138.4130768
+    },
+    {
+      "id": "jp_shizuoka_station_3999393680",
+      "osm_id": 3999393680,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "東田子の浦",
+      "name_kana": "ひがしたごのうら",
+      "name_translations": {
+        "en": "Higashi-Tagonoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA06",
+      "latitude": 35.1361069,
+      "longitude": 138.7461066
+    },
+    {
+      "id": "jp_shizuoka_station_3999393681",
+      "osm_id": 3999393681,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "磐田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwata"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7101215,
+      "longitude": 137.8517978
+    },
+    {
+      "id": "jp_shizuoka_station_3999393683",
+      "osm_id": 3999393683,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "蒲原",
+      "name_kana": "かんばら",
+      "name_translations": {
+        "en": "Kambara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA11",
+      "latitude": 35.1140849,
+      "longitude": 138.5831657
+    },
+    {
+      "id": "jp_shizuoka_station_3999393685",
+      "osm_id": 3999393685,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "函南",
+      "name_kana": "かんなみ",
+      "name_translations": {
+        "en": "Kannami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA01",
+      "latitude": 35.1087265,
+      "longitude": 138.9709903
+    },
+    {
+      "id": "jp_shizuoka_station_3999393686",
+      "osm_id": 3999393686,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "片浜",
+      "name_kana": "かたはま",
+      "name_translations": {
+        "en": "Katahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA04",
+      "latitude": 35.1179857,
+      "longitude": 138.8194593
+    },
+    {
+      "id": "jp_shizuoka_station_3999393687",
+      "osm_id": 3999393687,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "菊川",
+      "name_kana": "きくがわ",
+      "name_translations": {
+        "en": "Kikugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA26",
+      "latitude": 34.7616475,
+      "longitude": 138.085227
+    },
+    {
+      "id": "jp_shizuoka_station_3999393688",
+      "osm_id": 3999393688,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "草薙",
+      "name_kana": "くさなぎ",
+      "name_translations": {
+        "en": "Kusanagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA15",
+      "latitude": 35.0027076,
+      "longitude": 138.4415742
+    },
+    {
+      "id": "jp_shizuoka_station_3999393689",
+      "osm_id": 3999393689,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "用宗",
+      "name_kana": "もちむね",
+      "name_translations": {
+        "en": "Mochimune"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA19",
+      "latitude": 34.9222018,
+      "longitude": 138.3595748
+    },
+    {
+      "id": "jp_shizuoka_station_3999393690",
+      "osm_id": 3999393690,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西焼津",
+      "name_kana": "にしやいづ",
+      "name_translations": {
+        "en": "Nishi-Yaizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA21",
+      "latitude": 34.8598403,
+      "longitude": 138.2855679
+    },
+    {
+      "id": "jp_shizuoka_station_3999393691",
+      "osm_id": 3999393691,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "沼津",
+      "name_kana": "ぬまづ",
+      "name_translations": {
+        "en": "Numazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA03",
+      "latitude": 35.1031271,
+      "longitude": 138.8593352
+    },
+    {
+      "id": "jp_shizuoka_station_3999393692",
+      "osm_id": 3999393692,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "興津",
+      "name_kana": "おきつ",
+      "name_translations": {
+        "en": "Okitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA13",
+      "latitude": 35.052559,
+      "longitude": 138.5219742
+    },
+    {
+      "id": "jp_shizuoka_station_3999393702",
+      "osm_id": 3999393702,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "六合",
+      "name_kana": "ろくごう",
+      "name_translations": {
+        "en": "Rokugo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA23",
+      "latitude": 34.8366128,
+      "longitude": 138.2042561
+    },
+    {
+      "id": "jp_shizuoka_station_3999393703",
+      "osm_id": 3999393703,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "島田",
+      "name_kana": "しまだ",
+      "name_translations": {
+        "en": "Shimada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA24",
+      "latitude": 34.8301289,
+      "longitude": 138.1741848
+    },
+    {
+      "id": "jp_shizuoka_station_3999393704",
+      "osm_id": 3999393704,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "清水",
+      "name_kana": "しみず",
+      "name_translations": {
+        "en": "Shimizu"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": "CA14",
+      "latitude": 35.0233337,
+      "longitude": 138.4890488
+    },
+    {
+      "id": "jp_shizuoka_station_3999393705",
+      "osm_id": 3999393705,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新蒲原",
+      "name_kana": "しんかんばら",
+      "name_translations": {
+        "en": "Shin-Kambara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA10",
+      "latitude": 35.1194548,
+      "longitude": 138.6077881
+    },
+    {
+      "id": "jp_shizuoka_station_3999393707",
+      "osm_id": 3999393707,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "焼津",
+      "name_kana": "やいづ",
+      "name_translations": {
+        "en": "Yaizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA20",
+      "latitude": 34.8723182,
+      "longitude": 138.3181727
+    },
+    {
+      "id": "jp_shizuoka_station_3999393708",
+      "osm_id": 3999393708,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshiwara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1439052,
+      "longitude": 138.7023368
+    },
+    {
+      "id": "jp_shizuoka_station_3999393709",
+      "osm_id": 3999393709,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "由比",
+      "name_kana": "ゆい",
+      "name_translations": {
+        "en": "Yui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA12",
+      "latitude": 35.097192,
+      "longitude": 138.55295
+    },
+    {
+      "id": "jp_shizuoka_station_4069258294",
+      "osm_id": 4069258294,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JT26",
+      "latitude": 34.9755818,
+      "longitude": 139.0922763
+    },
+    {
+      "id": "jp_shizuoka_ferry_terminal_4235536826",
+      "osm_id": 4235536826,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "下田",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6701936,
+      "longitude": 138.9492403
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_4345315538",
+      "osm_id": 4345315538,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東名静岡",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": "高速バス",
+      "ref": null,
+      "latitude": 34.9477954,
+      "longitude": 138.3909207
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_4377118492",
+      "osm_id": 4377118492,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "戸田",
+      "name_kana": "へだ",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9731713,
+      "longitude": 138.7771996
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_4786323866",
+      "osm_id": 4786323866,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中ノ町車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.73094,
+      "longitude": 137.7976541
+    },
+    {
+      "id": "jp_shizuoka_station_4867709056",
+      "osm_id": 4867709056,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "森町病院前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Morimachibyōin-mae"
+      },
+      "operator": "天竜浜名湖鉄道",
+      "network": "天竜浜名湖鉄道天竜浜名湖線",
+      "ref": null,
+      "latitude": 34.826348,
+      "longitude": 137.9178593
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_5178460530",
+      "osm_id": 5178460530,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "浜松駅北口バスターミナル忘れ物コーナー/案内所/第２待合室",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "遠州鉄道（株）",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7049508,
+      "longitude": 137.7342104
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_5761589353",
+      "osm_id": 5761589353,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Mishima station",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1473609,
+      "longitude": 138.948713
+    },
+    {
+      "id": "jp_shizuoka_station_6036084472",
+      "osm_id": 6036084472,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CC06",
+      "latitude": 35.2213204,
+      "longitude": 138.614907
+    },
+    {
+      "id": "jp_shizuoka_station_6036360476",
+      "osm_id": 6036360476,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "竪堀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatebori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CC02",
+      "latitude": 35.1683237,
+      "longitude": 138.6460032
+    },
+    {
+      "id": "jp_shizuoka_station_6036360477",
+      "osm_id": 6036360477,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "入山瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iriyamase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CC03",
+      "latitude": 35.188229,
+      "longitude": 138.6478928
+    },
+    {
+      "id": "jp_shizuoka_station_6036360479",
+      "osm_id": 6036360479,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CC04",
+      "latitude": 35.2055095,
+      "longitude": 138.6354004
+    },
+    {
+      "id": "jp_shizuoka_station_6036360482",
+      "osm_id": 6036360482,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "源道寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gendoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CC05",
+      "latitude": 35.2145395,
+      "longitude": 138.6270533
+    },
+    {
+      "id": "jp_shizuoka_station_6036364656",
+      "osm_id": 6036364656,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "西富士宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Fujinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CC07",
+      "latitude": 35.2255638,
+      "longitude": 138.6026639
+    },
+    {
+      "id": "jp_shizuoka_station_6083859372",
+      "osm_id": 6083859372,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2306532,
+      "longitude": 138.5368694
+    },
+    {
+      "id": "jp_shizuoka_station_6085733354",
+      "osm_id": 6085733354,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "芝川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shibakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1975349,
+      "longitude": 138.5637613
+    },
+    {
+      "id": "jp_shizuoka_station_6086087810",
+      "osm_id": 6086087810,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "沼久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Numakubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1992796,
+      "longitude": 138.5843123
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_6296987674",
+      "osm_id": 6296987674,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "富士中央病院",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.157947,
+      "longitude": 138.6716017
+    },
+    {
+      "id": "jp_shizuoka_station_6652279557",
+      "osm_id": 6652279557,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "足柄",
+      "name_kana": "あしがら",
+      "name_translations": {
+        "en": "Ashigara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3332525,
+      "longitude": 138.981526
+    },
+    {
+      "id": "jp_shizuoka_airport_7257187335",
+      "osm_id": 7257187335,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "三保飛行場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0145295,
+      "longitude": 138.5301943
+    },
+    {
+      "id": "jp_shizuoka_station_7262071208",
+      "osm_id": 7262071208,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "御厨",
+      "name_kana": "みくりや",
+      "name_translations": {
+        "en": "Mikuriya"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": "CA30",
+      "latitude": 34.7183962,
+      "longitude": 137.885208
+    },
+    {
+      "id": "jp_shizuoka_station_7474562388",
+      "osm_id": 7474562388,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新静岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-shizuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S01",
+      "latitude": 34.9759301,
+      "longitude": 138.387743
+    },
+    {
+      "id": "jp_shizuoka_station_7474592089",
+      "osm_id": 7474592089,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "入江岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Irieoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S14",
+      "latitude": 35.0148591,
+      "longitude": 138.481085
+    },
+    {
+      "id": "jp_shizuoka_station_7474594329",
+      "osm_id": 7474594329,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakurabashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S13",
+      "latitude": 35.0129817,
+      "longitude": 138.4774514
+    },
+    {
+      "id": "jp_shizuoka_station_7474614664",
+      "osm_id": 7474614664,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "狐ヶ崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitsunegasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S12",
+      "latitude": 35.0114987,
+      "longitude": 138.4594662
+    },
+    {
+      "id": "jp_shizuoka_station_7474614665",
+      "osm_id": 7474614665,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "御門台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikadodai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S11",
+      "latitude": 35.0077811,
+      "longitude": 138.4523714
+    },
+    {
+      "id": "jp_shizuoka_station_7474621718",
+      "osm_id": 7474621718,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "県立美術館前",
+      "name_kana": "けんぃつびじゅつかんまえ",
+      "name_translations": {
+        "en": "Pref. Art Museum"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S09",
+      "latitude": 34.9973708,
+      "longitude": 138.4379211
+    },
+    {
+      "id": "jp_shizuoka_station_7474637716",
+      "osm_id": 7474637716,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "音羽町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otowacho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S03",
+      "latitude": 34.978398,
+      "longitude": 138.395966
+    },
+    {
+      "id": "jp_shizuoka_station_7474650315",
+      "osm_id": 7474650315,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "県総合運動場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Pref. Sports Park"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S08",
+      "latitude": 34.9934449,
+      "longitude": 138.4301335
+    },
+    {
+      "id": "jp_shizuoka_station_7474670528",
+      "osm_id": 7474670528,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "古庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furusho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S07",
+      "latitude": 34.9927314,
+      "longitude": 138.4193111
+    },
+    {
+      "id": "jp_shizuoka_station_7474670531",
+      "osm_id": 7474670531,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "長沼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naganuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S06",
+      "latitude": 34.9889355,
+      "longitude": 138.4125809
+    },
+    {
+      "id": "jp_shizuoka_station_7603698002",
+      "osm_id": 7603698002,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "新浜松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Hamamatsu"
+      },
+      "operator": "遠州鉄道",
+      "network": "遠州鉄道鉄道線",
+      "ref": "ET01",
+      "latitude": 34.703629,
+      "longitude": 137.7324983
+    },
+    {
+      "id": "jp_shizuoka_station_7603727972",
+      "osm_id": 7603727972,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "上島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamijima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "07",
+      "latitude": 34.7416361,
+      "longitude": 137.7453317
+    },
+    {
+      "id": "jp_shizuoka_station_7603727981",
+      "osm_id": 7603727981,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "自動車学校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jidōsha-Gakkō-Mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7476581,
+      "longitude": 137.7518232
+    },
+    {
+      "id": "jp_shizuoka_station_7603753721",
+      "osm_id": 7603753721,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "助信",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sukenobu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7244729,
+      "longitude": 137.738657
+    },
+    {
+      "id": "jp_shizuoka_station_7603797340",
+      "osm_id": 7603797340,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "積志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7679049,
+      "longitude": 137.7632692
+    },
+    {
+      "id": "jp_shizuoka_station_7603799192",
+      "osm_id": 7603799192,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "さぎの宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saginomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "08",
+      "latitude": 34.7575253,
+      "longitude": 137.7574892
+    },
+    {
+      "id": "jp_shizuoka_station_7815197544",
+      "osm_id": 7815197544,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠州芝本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enshū-Shibamoto"
+      },
+      "operator": "遠州鉄道",
+      "network": "遠州鉄道鉄道線",
+      "ref": null,
+      "latitude": 34.8233551,
+      "longitude": 137.7985655
+    },
+    {
+      "id": "jp_shizuoka_station_7815291854",
+      "osm_id": 7815291854,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠州小林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enshū-Kobayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.808232,
+      "longitude": 137.7954936
+    },
+    {
+      "id": "jp_shizuoka_station_7815296639",
+      "osm_id": 7815296639,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠州岩水寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enshū-Gansuiji"
+      },
+      "operator": "遠州鉄道",
+      "network": "遠州鉄道鉄道線",
+      "ref": null,
+      "latitude": 34.8344623,
+      "longitude": 137.8011445
+    },
+    {
+      "id": "jp_shizuoka_station_7986250147",
+      "osm_id": 7986250147,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "神谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1610594,
+      "longitude": 138.7430691
+    },
+    {
+      "id": "jp_shizuoka_station_7986250351",
+      "osm_id": 7986250351,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "岳南江尾",
+      "name_kana": "がくなんえのお",
+      "name_translations": {
+        "en": "Gakunan-Enoo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.155412,
+      "longitude": 138.751921
+    },
+    {
+      "id": "jp_shizuoka_station_7986304486",
+      "osm_id": 7986304486,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "須津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sudo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1604672,
+      "longitude": 138.7341451
+    },
+    {
+      "id": "jp_shizuoka_station_7986304487",
+      "osm_id": 7986304487,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "岳南富士岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gakunan-Fujioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1609735,
+      "longitude": 138.7232288
+    },
+    {
+      "id": "jp_shizuoka_station_7986304491",
+      "osm_id": 7986304491,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "比奈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1614877,
+      "longitude": 138.7135554
+    },
+    {
+      "id": "jp_shizuoka_station_7986304492",
+      "osm_id": 7986304492,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "岳南原田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gakunan-Harada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1659358,
+      "longitude": 138.7056326
+    },
+    {
+      "id": "jp_shizuoka_station_7986304495",
+      "osm_id": 7986304495,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "本吉原",
+      "name_kana": "ほんよしわら",
+      "name_translations": {
+        "en": "Hon-Yoshiwara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1619757,
+      "longitude": 138.6926474
+    },
+    {
+      "id": "jp_shizuoka_station_7986304497",
+      "osm_id": 7986304497,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "ジャトコ前",
+      "name_kana": "じゃとこまえ",
+      "name_translations": {
+        "en": "Jatco-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1577773,
+      "longitude": 138.690287
+    },
+    {
+      "id": "jp_shizuoka_station_7988401859",
+      "osm_id": 7988401859,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ooka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1159984,
+      "longitude": 138.8814052
+    },
+    {
+      "id": "jp_shizuoka_station_7996800077",
+      "osm_id": 7996800077,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆急下田",
+      "name_kana": "いずきゅうしもだ",
+      "name_translations": {
+        "en": "Izukyushimoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6794492,
+      "longitude": 138.9443225
+    },
+    {
+      "id": "jp_shizuoka_station_7996800079",
+      "osm_id": 7996800079,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "河津",
+      "name_kana": "かわづ",
+      "name_translations": {
+        "en": "Kawazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7475594,
+      "longitude": 138.9959738
+    },
+    {
+      "id": "jp_shizuoka_station_7996805077",
+      "osm_id": 7996805077,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇佐美",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Usami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JT25",
+      "latitude": 35.0059068,
+      "longitude": 139.0797472
+    },
+    {
+      "id": "jp_shizuoka_station_7996805078",
+      "osm_id": 7996805078,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "網代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ajiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JT24",
+      "latitude": 35.0437146,
+      "longitude": 139.0811875
+    },
+    {
+      "id": "jp_shizuoka_station_7996805787",
+      "osm_id": 7996805787,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆高原",
+      "name_kana": "いずこうげん",
+      "name_translations": {
+        "en": "Izu-Kōgen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "IZ06",
+      "latitude": 34.8777513,
+      "longitude": 139.1082671
+    },
+    {
+      "id": "jp_shizuoka_station_7996805789",
+      "osm_id": 7996805789,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆熱川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izuatagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8170415,
+      "longitude": 139.0693013
+    },
+    {
+      "id": "jp_shizuoka_station_7996805790",
+      "osm_id": 7996805790,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆稲取",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izuinatori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7745218,
+      "longitude": 139.0371363
+    },
+    {
+      "id": "jp_shizuoka_station_8013395291",
+      "osm_id": 8013395291,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "片瀬白田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kataseshirata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8021874,
+      "longitude": 139.0611581
+    },
+    {
+      "id": "jp_shizuoka_station_8093166102",
+      "osm_id": 8093166102,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "第一通り",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dai-Ichi-dōri"
+      },
+      "operator": "遠州鉄道",
+      "network": "遠州鉄道鉄道線",
+      "ref": null,
+      "latitude": 34.7072436,
+      "longitude": 137.732652
+    },
+    {
+      "id": "jp_shizuoka_station_8093166103",
+      "osm_id": 8093166103,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠州病院",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enshubyoin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7104777,
+      "longitude": 137.7333198
+    },
+    {
+      "id": "jp_shizuoka_station_8093166108",
+      "osm_id": 8093166108,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "八幡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachiman"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7169874,
+      "longitude": 137.735943
+    },
+    {
+      "id": "jp_shizuoka_station_8093166111",
+      "osm_id": 8093166111,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "曳馬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hikuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7331243,
+      "longitude": 137.7412458
+    },
+    {
+      "id": "jp_shizuoka_station_8093209317",
+      "osm_id": 8093209317,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠州西ヶ崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enshū-Nishigasaki"
+      },
+      "operator": "遠州鉄道（株）",
+      "network": null,
+      "ref": "11",
+      "latitude": 34.7767574,
+      "longitude": 137.7738428
+    },
+    {
+      "id": "jp_shizuoka_station_8093209321",
+      "osm_id": 8093209321,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠州小松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Enshū-Komatsu"
+      },
+      "operator": "遠州鉄道",
+      "network": "遠州鉄道鉄道線",
+      "ref": "12",
+      "latitude": 34.7842114,
+      "longitude": 137.7778445
+    },
+    {
+      "id": "jp_shizuoka_station_8093209328",
+      "osm_id": 8093209328,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜北",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7912868,
+      "longitude": 137.7842671
+    },
+    {
+      "id": "jp_shizuoka_station_8093209330",
+      "osm_id": 8093209330,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "美薗中央公園",
+      "name_kana": "みそのちゅうおうこうえん",
+      "name_translations": {
+        "en": "Misono-Chūō-kōen"
+      },
+      "operator": "遠州鉄道",
+      "network": "遠州鉄道鉄道線",
+      "ref": "14",
+      "latitude": 34.7978782,
+      "longitude": 137.7895296
+    },
+    {
+      "id": "jp_shizuoka_station_8205290606",
+      "osm_id": 8205290606,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三島広小路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mishima-Hirokōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1189767,
+      "longitude": 138.9114339
+    },
+    {
+      "id": "jp_shizuoka_station_8205290607",
+      "osm_id": 8205290607,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "三島二日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mishima-Futsukamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1106558,
+      "longitude": 138.9265005
+    },
+    {
+      "id": "jp_shizuoka_station_8205290608",
+      "osm_id": 8205290608,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "修善寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shuzenji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9793728,
+      "longitude": 138.9509503
+    },
+    {
+      "id": "jp_shizuoka_station_8205290615",
+      "osm_id": 8205290615,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "牧之郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Makinokō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9886114,
+      "longitude": 138.9544867
+    },
+    {
+      "id": "jp_shizuoka_station_8205293023",
+      "osm_id": 8205293023,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大仁",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōhito"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.994613,
+      "longitude": 138.9374862
+    },
+    {
+      "id": "jp_shizuoka_station_8205293024",
+      "osm_id": 8205293024,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "田京",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takyō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0151533,
+      "longitude": 138.9459492
+    },
+    {
+      "id": "jp_shizuoka_station_8205293026",
+      "osm_id": 8205293026,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆長岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izu-Nagaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0399182,
+      "longitude": 138.9475485
+    },
+    {
+      "id": "jp_shizuoka_station_8205293032",
+      "osm_id": 8205293032,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "原木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Baraki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0654473,
+      "longitude": 138.9436519
+    },
+    {
+      "id": "jp_shizuoka_station_8205293039",
+      "osm_id": 8205293039,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "韮山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nirayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0534664,
+      "longitude": 138.9455023
+    },
+    {
+      "id": "jp_shizuoka_station_8205293042",
+      "osm_id": 8205293042,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆仁田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izu-Nitta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0790614,
+      "longitude": 138.9415095
+    },
+    {
+      "id": "jp_shizuoka_station_8205293043",
+      "osm_id": 8205293043,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "大場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.092299,
+      "longitude": 138.9393041
+    },
+    {
+      "id": "jp_shizuoka_station_8231488982",
+      "osm_id": 8231488982,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆多賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izutaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JT23",
+      "latitude": 35.0588682,
+      "longitude": 139.0669045
+    },
+    {
+      "id": "jp_shizuoka_station_8238044455",
+      "osm_id": 8238044455,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長泉なめり",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagaizumi-Nameri"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": "CB15",
+      "latitude": 35.1474995,
+      "longitude": 138.8992419
+    },
+    {
+      "id": "jp_shizuoka_station_8238066029",
+      "osm_id": 8238066029,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "下土狩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Togari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1290633,
+      "longitude": 138.8951575
+    },
+    {
+      "id": "jp_shizuoka_station_8238066722",
+      "osm_id": 8238066722,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "裾野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Susono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1716965,
+      "longitude": 138.9094546
+    },
+    {
+      "id": "jp_shizuoka_station_8238082565",
+      "osm_id": 8238082565,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2556995,
+      "longitude": 138.9199431
+    },
+    {
+      "id": "jp_shizuoka_station_8242042612",
+      "osm_id": 8242042612,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "原",
+      "name_kana": "はら",
+      "name_translations": {
+        "en": "Hara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CA05",
+      "latitude": 35.1248143,
+      "longitude": 138.7937069
+    },
+    {
+      "id": "jp_shizuoka_station_8243990871",
+      "osm_id": 8243990871,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "南御殿場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Gotemba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2771379,
+      "longitude": 138.9255289
+    },
+    {
+      "id": "jp_shizuoka_station_8244028141",
+      "osm_id": 8244028141,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "御殿場",
+      "name_kana": "ごてんば",
+      "name_translations": {
+        "en": "Gotemba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2999658,
+      "longitude": 138.9341778
+    },
+    {
+      "id": "jp_shizuoka_station_8244080368",
+      "osm_id": 8244080368,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "駿河小山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suruga-Oyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.358942,
+      "longitude": 138.9986211
+    },
+    {
+      "id": "jp_shizuoka_station_8246799251",
+      "osm_id": 8246799251,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "城ヶ崎海岸",
+      "name_kana": "じょがさきかいがん",
+      "name_translations": {
+        "en": "Jogasakikaigan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8895392,
+      "longitude": 139.1214804
+    },
+    {
+      "id": "jp_shizuoka_station_8246799252",
+      "osm_id": 8246799252,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊豆北川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izu-Hokkawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8270244,
+      "longitude": 139.0756904
+    },
+    {
+      "id": "jp_shizuoka_station_8246799253",
+      "osm_id": 8246799253,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "今井浜海岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imaihamakaigan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7539256,
+      "longitude": 139.0049726
+    },
+    {
+      "id": "jp_shizuoka_station_8246799254",
+      "osm_id": 8246799254,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲梓",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inazusa  Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7212451,
+      "longitude": 138.9490592
+    },
+    {
+      "id": "jp_shizuoka_station_8246799256",
+      "osm_id": 8246799256,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "川奈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9507979,
+      "longitude": 139.1240573
+    },
+    {
+      "id": "jp_shizuoka_station_8246799258",
+      "osm_id": 8246799258,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "南伊東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamiito"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9578019,
+      "longitude": 139.0880077
+    },
+    {
+      "id": "jp_shizuoka_station_11699754234",
+      "osm_id": 11699754234,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "閑蔵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanzō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1916815,
+      "longitude": 138.1943446
+    },
+    {
+      "id": "jp_shizuoka_station_11699754235",
+      "osm_id": 11699754235,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾盛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1925977,
+      "longitude": 138.1742381
+    },
+    {
+      "id": "jp_shizuoka_station_11699754236",
+      "osm_id": 11699754236,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "接岨峡温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sessokyō-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1795694,
+      "longitude": 138.1851601
+    },
+    {
+      "id": "jp_shizuoka_station_11699754239",
+      "osm_id": 11699754239,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥大井湖上",
+      "name_kana": "おく おおい こじょう",
+      "name_translations": {
+        "en": "Okuōikojō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1680288,
+      "longitude": 138.1810469
+    },
+    {
+      "id": "jp_shizuoka_station_11699754240",
+      "osm_id": 11699754240,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "ひらんだ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiranda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1649404,
+      "longitude": 138.1684848
+    },
+    {
+      "id": "jp_shizuoka_station_11699754241",
+      "osm_id": 11699754241,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "長島ダム",
+      "name_kana": "ながしまダム",
+      "name_translations": {
+        "en": "Nagashima Dam"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1691953,
+      "longitude": 138.1568621
+    },
+    {
+      "id": "jp_shizuoka_station_11699754243",
+      "osm_id": 11699754243,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "アプトいちしろ",
+      "name_kana": "アプトいちしろ",
+      "name_translations": {
+        "en": "Abt Ichishiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1673085,
+      "longitude": 138.1448136
+    },
+    {
+      "id": "jp_shizuoka_station_11699754252",
+      "osm_id": 11699754252,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okuizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1507301,
+      "longitude": 138.1484772
+    },
+    {
+      "id": "jp_shizuoka_station_11699754258",
+      "osm_id": 11699754258,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "川根小山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawane-Koyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1415157,
+      "longitude": 138.1411035
+    },
+    {
+      "id": "jp_shizuoka_station_11699754260",
+      "osm_id": 11699754260,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "土本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Domoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1359653,
+      "longitude": 138.1391233
+    },
+    {
+      "id": "jp_shizuoka_station_11699754261",
+      "osm_id": 11699754261,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "沢間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sawama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.124491,
+      "longitude": 138.1338716
+    },
+    {
+      "id": "jp_shizuoka_station_11699754262",
+      "osm_id": 11699754262,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "川根両国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawane-Ryōgoku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1170795,
+      "longitude": 138.1405362
+    },
+    {
+      "id": "jp_shizuoka_station_11699754265",
+      "osm_id": 11699754265,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "井川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikawa"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2124343,
+      "longitude": 138.2213164
+    },
+    {
+      "id": "jp_shizuoka_station_11699754266",
+      "osm_id": 11699754266,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "千頭",
+      "name_kana": "せんず",
+      "name_translations": {
+        "en": "Senzu"
+      },
+      "operator": "大井川鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1081241,
+      "longitude": 138.1377815
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_11727110224",
+      "osm_id": 11727110224,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "遠州森町",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8378553,
+      "longitude": 137.932378
+    },
+    {
+      "id": "jp_shizuoka_station_13165767449",
+      "osm_id": 13165767449,
+      "osm_type": "node",
+      "prefecture_id": "jp_shizuoka",
+      "type": "station",
+      "subtype": "private",
+      "name": "天竜二俣",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "天竜浜名湖鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8594639,
+      "longitude": 137.8198249
+    },
+    {
+      "id": "jp_shizuoka_airport_42722174",
+      "osm_id": 42722174,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "airport",
+      "subtype": "military",
+      "name": "浜松基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamamatsu Air Base"
+      },
+      "operator": "航空自衛隊",
+      "network": null,
+      "ref": "RJNH",
+      "latitude": 34.7491454,
+      "longitude": 137.7031999
+    },
+    {
+      "id": "jp_shizuoka_airport_57007443",
+      "osm_id": 57007443,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "富士山静岡空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shizuoka Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "FSZ",
+      "latitude": 34.7963656,
+      "longitude": 138.1890593
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_134990859",
+      "osm_id": 134990859,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "しずてつジャストライン新静岡ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shizutetsu Justline Shin-Shizuoka Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9755799,
+      "longitude": 138.3877165
+    },
+    {
+      "id": "jp_shizuoka_ferry_terminal_167170310",
+      "osm_id": 167170310,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "清水マリンターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0090978,
+      "longitude": 138.4969837
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_405030811",
+      "osm_id": 405030811,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "法多山",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7353246,
+      "longitude": 137.9701642
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_422555454",
+      "osm_id": 422555454,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "遠鉄バス乗車券センター/案内所/第１待合室",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "遠州鉄道（株）",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7049448,
+      "longitude": 137.7338189
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_542201418",
+      "osm_id": 542201418,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7227173,
+      "longitude": 137.4842018
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_566079414",
+      "osm_id": 566079414,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "熱海後楽園バス停",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": "伊豆箱根バス　伊豆東海バス",
+      "ref": null,
+      "latitude": 35.0887281,
+      "longitude": 139.0775832
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_572772486",
+      "osm_id": 572772486,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "静波海岸入口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "しずてつジャストライン",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7339128,
+      "longitude": 138.225079
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_624376982",
+      "osm_id": 624376982,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岩波駅前バス専用発着所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2166712,
+      "longitude": 138.9179277
+    },
+    {
+      "id": "jp_shizuoka_airport_1038191263",
+      "osm_id": 1038191263,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "富士川滑空場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujikawa Gliderport"
+      },
+      "operator": "静岡県航空協会",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1209169,
+      "longitude": 138.6315567
+    },
+    {
+      "id": "jp_shizuoka_airport_1137122599",
+      "osm_id": 1137122599,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "浜松市消防ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "浜松市",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8423316,
+      "longitude": 137.7430509
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1186133437",
+      "osm_id": 1186133437,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東海バス大平車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0732736,
+      "longitude": 138.9074736
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1223950035",
+      "osm_id": 1223950035,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三島駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mishima-eki  Bus Teriminal"
+      },
+      "operator": "伊豆箱根バス;富士急シティバス;富士急モビリティ;富士急バス;東海バス;小田急箱根高速バス;京王バス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1257179,
+      "longitude": 138.9117829
+    },
+    {
+      "id": "jp_shizuoka_bus_terminal_1239625275",
+      "osm_id": 1239625275,
+      "osm_type": "way",
+      "prefecture_id": "jp_shizuoka",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "浜松西インターバスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamamatsu Nishi I.C Bus terminal"
+      },
+      "operator": "遠州鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7640661,
+      "longitude": 137.6815572
+    }
+  ]
+}

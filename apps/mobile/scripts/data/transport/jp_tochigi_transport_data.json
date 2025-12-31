@@ -1,0 +1,2356 @@
+{
+  "fetchedAt": "2025-12-24T05:48:57.672Z",
+  "prefecture_id": "jp_tochigi",
+  "prefecture_name": "栃木県",
+  "stats": {
+    "station": 115,
+    "airport": 2,
+    "ferry_terminal": 5,
+    "bus_terminal": 9,
+    "total": 131
+  },
+  "data": [
+    {
+      "id": "jp_tochigi_station_264180326",
+      "osm_id": 264180326,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒田原",
+      "name_kana": "くろだはら",
+      "name_translations": {
+        "en": "Kurodahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0227939,
+      "longitude": 140.1196133
+    },
+    {
+      "id": "jp_tochigi_station_264180828",
+      "osm_id": 264180828,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "蒲須坂",
+      "name_kana": "かますさか",
+      "name_translations": {
+        "en": "Kamasusaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7212122,
+      "longitude": 139.9502693
+    },
+    {
+      "id": "jp_tochigi_station_264181231",
+      "osm_id": 264181231,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊原",
+      "name_kana": "とよはら",
+      "name_translations": {
+        "en": "Toyohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0554937,
+      "longitude": 140.1556233
+    },
+    {
+      "id": "jp_tochigi_station_264183498",
+      "osm_id": 264183498,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "野崎",
+      "name_kana": "のざき",
+      "name_translations": {
+        "en": "Nozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8437535,
+      "longitude": 139.9579832
+    },
+    {
+      "id": "jp_tochigi_station_264183592",
+      "osm_id": 264183592,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "氏家",
+      "name_kana": "うじいえ",
+      "name_translations": {
+        "en": "Ujiie"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.681443,
+      "longitude": 139.962198
+    },
+    {
+      "id": "jp_tochigi_station_264184513",
+      "osm_id": 264184513,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "間々田",
+      "name_kana": "ままだ",
+      "name_translations": {
+        "en": "Mamada"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.258002,
+      "longitude": 139.761192
+    },
+    {
+      "id": "jp_tochigi_station_264223680",
+      "osm_id": 264223680,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "男鹿高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ojika-Kogen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0476111,
+      "longitude": 139.7242453
+    },
+    {
+      "id": "jp_tochigi_station_264224142",
+      "osm_id": 264224142,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯西川温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunishigawa-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9298348,
+      "longitude": 139.6884914
+    },
+    {
+      "id": "jp_tochigi_station_264224261",
+      "osm_id": 264224261,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "川治温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaji-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8844617,
+      "longitude": 139.7038831
+    },
+    {
+      "id": "jp_tochigi_station_264224451",
+      "osm_id": 264224451,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新藤原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinfujiwara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN58",
+      "latitude": 36.8528343,
+      "longitude": 139.7327706
+    },
+    {
+      "id": "jp_tochigi_station_264224643",
+      "osm_id": 264224643,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "川治湯元",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaji-Yumoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8953088,
+      "longitude": 139.7027779
+    },
+    {
+      "id": "jp_tochigi_station_264224990",
+      "osm_id": 264224990,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "龍王峡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ryuokyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8611042,
+      "longitude": 139.7185535
+    },
+    {
+      "id": "jp_tochigi_station_264412395",
+      "osm_id": 264412395,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿沼",
+      "name_kana": "かぬま",
+      "name_translations": {
+        "en": "Kanuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5709476,
+      "longitude": 139.7630742
+    },
+    {
+      "id": "jp_tochigi_station_264412544",
+      "osm_id": 264412544,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "文挟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fubasami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.637253,
+      "longitude": 139.728009
+    },
+    {
+      "id": "jp_tochigi_station_264414251",
+      "osm_id": 264414251,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小俣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3751771,
+      "longitude": 139.3741668
+    },
+    {
+      "id": "jp_tochigi_station_264414867",
+      "osm_id": 264414867,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "富田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3161615,
+      "longitude": 139.5288074
+    },
+    {
+      "id": "jp_tochigi_station_264414923",
+      "osm_id": 264414923,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "足利",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashikaga"
+      },
+      "operator": "足利市",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3319671,
+      "longitude": 139.4562493
+    },
+    {
+      "id": "jp_tochigi_station_264415083",
+      "osm_id": 264415083,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "山前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yama-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.347362,
+      "longitude": 139.4112837
+    },
+    {
+      "id": "jp_tochigi_station_264460504",
+      "osm_id": 264460504,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "通洞",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsudo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6370412,
+      "longitude": 139.4399735
+    },
+    {
+      "id": "jp_tochigi_station_264460505",
+      "osm_id": 264460505,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "原向",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haramuko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6176632,
+      "longitude": 139.4209693
+    },
+    {
+      "id": "jp_tochigi_station_823274691",
+      "osm_id": 823274691,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "笹原田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sasaharada"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5336707,
+      "longitude": 140.1454147
+    },
+    {
+      "id": "jp_tochigi_station_823274752",
+      "osm_id": 823274752,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "益子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mashiko"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4632043,
+      "longitude": 140.0887212
+    },
+    {
+      "id": "jp_tochigi_station_823275153",
+      "osm_id": 823275153,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "七井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanai"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4922043,
+      "longitude": 140.0944136
+    },
+    {
+      "id": "jp_tochigi_station_823275182",
+      "osm_id": 823275182,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "真岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mooka"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4393792,
+      "longitude": 140.002758
+    },
+    {
+      "id": "jp_tochigi_station_823275390",
+      "osm_id": 823275390,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "寺内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Terauchi"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4110352,
+      "longitude": 139.9801004
+    },
+    {
+      "id": "jp_tochigi_station_823275908",
+      "osm_id": 823275908,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "茂木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motegi"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5307389,
+      "longitude": 140.1814246
+    },
+    {
+      "id": "jp_tochigi_station_823276794",
+      "osm_id": 823276794,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西田井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishidai"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4533933,
+      "longitude": 140.0487194
+    },
+    {
+      "id": "jp_tochigi_station_823276903",
+      "osm_id": 823276903,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitayama"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4557094,
+      "longitude": 140.0676491
+    },
+    {
+      "id": "jp_tochigi_station_823277344",
+      "osm_id": 823277344,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "天矢場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ten-yaba"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5292839,
+      "longitude": 140.1559496
+    },
+    {
+      "id": "jp_tochigi_station_823277385",
+      "osm_id": 823277385,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "市塙",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichihana"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5381552,
+      "longitude": 140.1103587
+    },
+    {
+      "id": "jp_tochigi_station_823277442",
+      "osm_id": 823277442,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "多田羅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatara"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5158951,
+      "longitude": 140.0899057
+    },
+    {
+      "id": "jp_tochigi_station_823277559",
+      "osm_id": 823277559,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北真岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Moka"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4490851,
+      "longitude": 140.0138697
+    },
+    {
+      "id": "jp_tochigi_station_823277653",
+      "osm_id": 823277653,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "久下田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kugeta"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.375811,
+      "longitude": 139.9715254
+    },
+    {
+      "id": "jp_tochigi_station_925345480",
+      "osm_id": 925345480,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新高徳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Takatoku Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.779461,
+      "longitude": 139.7111778
+    },
+    {
+      "id": "jp_tochigi_station_925345920",
+      "osm_id": 925345920,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鬼怒川公園",
+      "name_kana": "きぬがわこうえん",
+      "name_translations": {
+        "en": "Kinugawa-Koen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN57",
+      "latitude": 36.8409402,
+      "longitude": 139.722832
+    },
+    {
+      "id": "jp_tochigi_station_925346262",
+      "osm_id": 925346262,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大谷向",
+      "name_kana": "だいやむこう",
+      "name_translations": {
+        "en": "Daiyamuko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7324624,
+      "longitude": 139.691952
+    },
+    {
+      "id": "jp_tochigi_station_925346278",
+      "osm_id": 925346278,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小佐越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kosagoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8023132,
+      "longitude": 139.706617
+    },
+    {
+      "id": "jp_tochigi_station_3721336949",
+      "osm_id": 3721336949,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3129364,
+      "longitude": 139.8065054
+    },
+    {
+      "id": "jp_tochigi_station_3721336950",
+      "osm_id": 3721336950,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇都宮",
+      "name_kana": "うつのみや",
+      "name_translations": {
+        "en": "Utsunomiya"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5592983,
+      "longitude": 139.8981571
+    },
+    {
+      "id": "jp_tochigi_station_3721641451",
+      "osm_id": 3721641451,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東武日光",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobu-Nikko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN25",
+      "latitude": 36.7478743,
+      "longitude": 139.6194559
+    },
+    {
+      "id": "jp_tochigi_station_3721641452",
+      "osm_id": 3721641452,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "栃木",
+      "name_kana": "とちぎ",
+      "name_translations": {
+        "en": "Tochigi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3717284,
+      "longitude": 139.7314038
+    },
+    {
+      "id": "jp_tochigi_station_3729515013",
+      "osm_id": 3729515013,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3166754,
+      "longitude": 139.5789733
+    },
+    {
+      "id": "jp_tochigi_station_3730051723",
+      "osm_id": 3730051723,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下今市",
+      "name_kana": "しもいまいち",
+      "name_translations": {
+        "en": "Shimo-Imaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN23",
+      "latitude": 36.725635,
+      "longitude": 139.6927992
+    },
+    {
+      "id": "jp_tochigi_station_3730128013",
+      "osm_id": 3730128013,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "今市",
+      "name_kana": "いまいち",
+      "name_translations": {
+        "en": "Imaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.720468,
+      "longitude": 139.6872715
+    },
+    {
+      "id": "jp_tochigi_station_3730128014",
+      "osm_id": 3730128014,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上今市",
+      "name_kana": "かみいまいち",
+      "name_translations": {
+        "en": "Kami-Imaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7277842,
+      "longitude": 139.6814776
+    },
+    {
+      "id": "jp_tochigi_station_3730128015",
+      "osm_id": 3730128015,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鬼怒川温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinugawa-onsen"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TN56",
+      "latitude": 36.8226329,
+      "longitude": 139.7165045
+    },
+    {
+      "id": "jp_tochigi_station_3730128016",
+      "osm_id": 3730128016,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "明神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Myojin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6766205,
+      "longitude": 139.7123688
+    },
+    {
+      "id": "jp_tochigi_station_3730128017",
+      "osm_id": 3730128017,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "日光",
+      "name_kana": "にっこう",
+      "name_translations": {
+        "en": "Nikko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7471805,
+      "longitude": 139.6219414
+    },
+    {
+      "id": "jp_tochigi_station_3828076592",
+      "osm_id": 3828076592,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝積寺",
+      "name_kana": "ほうしゃくじ",
+      "name_translations": {
+        "en": "Hoshakuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6314909,
+      "longitude": 139.979591
+    },
+    {
+      "id": "jp_tochigi_station_3898269403",
+      "osm_id": 3898269403,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新栃木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Tochigi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN12",
+      "latitude": 36.3898235,
+      "longitude": 139.7424779
+    },
+    {
+      "id": "jp_tochigi_station_3993074365",
+      "osm_id": 3993074365,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大平下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ohirashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3443513,
+      "longitude": 139.6975422
+    },
+    {
+      "id": "jp_tochigi_station_4098109337",
+      "osm_id": 4098109337,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岡本",
+      "name_kana": "おかもと",
+      "name_translations": {
+        "en": "Okamoto"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5984145,
+      "longitude": 139.9444481
+    },
+    {
+      "id": "jp_tochigi_station_4098109338",
+      "osm_id": 4098109338,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶴田",
+      "name_kana": "つるた",
+      "name_translations": {
+        "en": "Tsuruta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5382007,
+      "longitude": 139.8586506
+    },
+    {
+      "id": "jp_tochigi_station_4098306775",
+      "osm_id": 4098306775,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東武宇都宮",
+      "name_kana": "とうぶうつのみや",
+      "name_translations": {
+        "en": "Tobu-Utsunomiya"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TN40",
+      "latitude": 36.5590664,
+      "longitude": 139.8805997
+    },
+    {
+      "id": "jp_tochigi_ferry_terminal_4114492402",
+      "osm_id": 4114492402,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "立木観音前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tachikikannon Statue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7315397,
+      "longitude": 139.4905193
+    },
+    {
+      "id": "jp_tochigi_ferry_terminal_4114493634",
+      "osm_id": 4114493634,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "菖蒲ヶ浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shobugahama Excursion Ship Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7511965,
+      "longitude": 139.4551041
+    },
+    {
+      "id": "jp_tochigi_ferry_terminal_4114497017",
+      "osm_id": 4114497017,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "船の駅中禅寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Excursion Ship Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.739198,
+      "longitude": 139.4927888
+    },
+    {
+      "id": "jp_tochigi_ferry_terminal_4114501795",
+      "osm_id": 4114501795,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "千手ヶ浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Senjugahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7483825,
+      "longitude": 139.4226011
+    },
+    {
+      "id": "jp_tochigi_station_4358153720",
+      "osm_id": 4358153720,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "国谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuniya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN34",
+      "latitude": 36.4515561,
+      "longitude": 139.8238137
+    },
+    {
+      "id": "jp_tochigi_station_4358153721",
+      "osm_id": 4358153721,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "壬生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mibu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN33",
+      "latitude": 36.4226613,
+      "longitude": 139.8051121
+    },
+    {
+      "id": "jp_tochigi_station_4358903093",
+      "osm_id": 4358903093,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石橋",
+      "name_kana": "いしばし",
+      "name_translations": {
+        "en": "Ishibashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4364953,
+      "longitude": 139.8665122
+    },
+    {
+      "id": "jp_tochigi_station_4437997066",
+      "osm_id": 4437997066,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒磯",
+      "name_kana": "くろいそ",
+      "name_translations": {
+        "en": "Kuroiso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9701908,
+      "longitude": 140.0601121
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_5287453561",
+      "osm_id": 5287453561,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東武西口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5594147,
+      "longitude": 139.8798475
+    },
+    {
+      "id": "jp_tochigi_station_5536927326",
+      "osm_id": 5536927326,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "あしかがフラワーパーク",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashikaga Flower Park"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3151578,
+      "longitude": 139.5183925
+    },
+    {
+      "id": "jp_tochigi_station_5586958187",
+      "osm_id": 5586958187,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新鹿沼",
+      "name_kana": "しんかぬま",
+      "name_translations": {
+        "en": "Shin-Kanuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5572113,
+      "longitude": 139.7449379
+    },
+    {
+      "id": "jp_tochigi_station_5586958219",
+      "osm_id": 5586958219,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "樅山",
+      "name_kana": "もみやま",
+      "name_translations": {
+        "en": "Momiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5330893,
+      "longitude": 139.7418934
+    },
+    {
+      "id": "jp_tochigi_station_5587060435",
+      "osm_id": 5587060435,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下小代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Goshiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6513639,
+      "longitude": 139.713918
+    },
+    {
+      "id": "jp_tochigi_station_5587062040",
+      "osm_id": 5587062040,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "板荷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6202016,
+      "longitude": 139.7076968
+    },
+    {
+      "id": "jp_tochigi_station_5729363569",
+      "osm_id": 5729363569,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "中三依温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakamiyori-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9852804,
+      "longitude": 139.6992817
+    },
+    {
+      "id": "jp_tochigi_station_5825602938",
+      "osm_id": 5825602938,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "高久",
+      "name_kana": "たかく",
+      "name_translations": {
+        "en": "Takaku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9966464,
+      "longitude": 140.0873071
+    },
+    {
+      "id": "jp_tochigi_station_5826641576",
+      "osm_id": 5826641576,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西那須野",
+      "name_kana": "にしなすの",
+      "name_translations": {
+        "en": "Nishi-Nasuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8844145,
+      "longitude": 139.9867128
+    },
+    {
+      "id": "jp_tochigi_station_5826868234",
+      "osm_id": 5826868234,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "片岡",
+      "name_kana": "かたおか",
+      "name_translations": {
+        "en": "Kataoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7542157,
+      "longitude": 139.9459854
+    },
+    {
+      "id": "jp_tochigi_station_5827279832",
+      "osm_id": 5827279832,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小金井",
+      "name_kana": "こがねい",
+      "name_translations": {
+        "en": "Koganei"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3743446,
+      "longitude": 139.8419693
+    },
+    {
+      "id": "jp_tochigi_station_5827279863",
+      "osm_id": 5827279863,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "自治医大",
+      "name_kana": "じちいだい",
+      "name_translations": {
+        "en": "Jichi Medical University"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3953175,
+      "longitude": 139.8545254
+    },
+    {
+      "id": "jp_tochigi_station_5832832679",
+      "osm_id": 5832832679,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "野木",
+      "name_kana": "のぎ",
+      "name_translations": {
+        "en": "Nogi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.2303052,
+      "longitude": 139.735052
+    },
+    {
+      "id": "jp_tochigi_station_6050500242",
+      "osm_id": 6050500242,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "楡木",
+      "name_kana": "にれぎ",
+      "name_translations": {
+        "en": "Niregi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5071518,
+      "longitude": 139.7453712
+    },
+    {
+      "id": "jp_tochigi_station_6050512200",
+      "osm_id": 6050512200,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "田島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2905968,
+      "longitude": 139.5649449
+    },
+    {
+      "id": "jp_tochigi_station_6050596452",
+      "osm_id": 6050596452,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2560128,
+      "longitude": 139.6458638
+    },
+    {
+      "id": "jp_tochigi_station_6095556272",
+      "osm_id": 6095556272,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢板",
+      "name_kana": "やいた",
+      "name_translations": {
+        "en": "Yaita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8067528,
+      "longitude": 139.9328265
+    },
+    {
+      "id": "jp_tochigi_station_6095556278",
+      "osm_id": 6095556278,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "那須塩原",
+      "name_kana": "なすしおばら",
+      "name_translations": {
+        "en": "Nasushiobara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9315325,
+      "longitude": 140.0210685
+    },
+    {
+      "id": "jp_tochigi_station_6101409049",
+      "osm_id": 6101409049,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "烏山",
+      "name_kana": "からすやま",
+      "name_translations": {
+        "en": "Karasuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6504536,
+      "longitude": 140.1550367
+    },
+    {
+      "id": "jp_tochigi_station_6101409050",
+      "osm_id": 6101409050,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝",
+      "name_kana": "たき",
+      "name_translations": {
+        "en": "Taki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6485524,
+      "longitude": 140.1384258
+    },
+    {
+      "id": "jp_tochigi_station_6101409051",
+      "osm_id": 6101409051,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小塙",
+      "name_kana": "こばな",
+      "name_translations": {
+        "en": "Kobana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.642957,
+      "longitude": 140.1168501
+    },
+    {
+      "id": "jp_tochigi_station_6101409060",
+      "osm_id": 6101409060,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大金",
+      "name_kana": "おおがね",
+      "name_translations": {
+        "en": "Ogane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6564475,
+      "longitude": 140.0956392
+    },
+    {
+      "id": "jp_tochigi_station_6101410890",
+      "osm_id": 6101410890,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鴻野山",
+      "name_kana": "こうのやま",
+      "name_translations": {
+        "en": "Konoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6664381,
+      "longitude": 140.0516757
+    },
+    {
+      "id": "jp_tochigi_station_6101410916",
+      "osm_id": 6101410916,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁井田",
+      "name_kana": "にいた",
+      "name_translations": {
+        "en": "Niita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6572135,
+      "longitude": 140.0298581
+    },
+    {
+      "id": "jp_tochigi_station_6101410937",
+      "osm_id": 6101410937,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下野花岡",
+      "name_kana": "しもつけはなおか",
+      "name_translations": {
+        "en": "Shimotsuke-Hanaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6499587,
+      "longitude": 140.0085667
+    },
+    {
+      "id": "jp_tochigi_station_7057400206",
+      "osm_id": 7057400206,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩舟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwafune"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3266804,
+      "longitude": 139.6577238
+    },
+    {
+      "id": "jp_tochigi_station_7088398595",
+      "osm_id": 7088398595,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "野州山辺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashu-Yamabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3262876,
+      "longitude": 139.4318755
+    },
+    {
+      "id": "jp_tochigi_station_7111058199",
+      "osm_id": 7111058199,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東武和泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobu Izumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3151474,
+      "longitude": 139.4552889
+    },
+    {
+      "id": "jp_tochigi_station_7182935492",
+      "osm_id": 7182935492,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "県",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Agata"
+      },
+      "operator": "東武鉄道",
+      "network": "伊勢崎線",
+      "ref": null,
+      "latitude": 36.2909024,
+      "longitude": 139.4717407
+    },
+    {
+      "id": "jp_tochigi_station_7967910516",
+      "osm_id": 7967910516,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "福居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3057491,
+      "longitude": 139.4584671
+    },
+    {
+      "id": "jp_tochigi_station_7967910517",
+      "osm_id": 7967910517,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "足利市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashikagashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.329373,
+      "longitude": 139.4482747
+    },
+    {
+      "id": "jp_tochigi_station_8022247082",
+      "osm_id": 8022247082,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "合戦場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kassemba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4079871,
+      "longitude": 139.7412861
+    },
+    {
+      "id": "jp_tochigi_station_8022247371",
+      "osm_id": 8022247371,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "家中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ienaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4293476,
+      "longitude": 139.7473143
+    },
+    {
+      "id": "jp_tochigi_station_8022247377",
+      "osm_id": 8022247377,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "静和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shizuwa"
+      },
+      "operator": "東武鉄道(株)",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3166326,
+      "longitude": 139.6849914
+    },
+    {
+      "id": "jp_tochigi_station_8053974913",
+      "osm_id": 8053974913,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東武ワールドスクウェア",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobu World Square"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TN55",
+      "latitude": 36.8086594,
+      "longitude": 139.7093088
+    },
+    {
+      "id": "jp_tochigi_station_8057359078",
+      "osm_id": 8057359078,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐野市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.30607,
+      "longitude": 139.5751145
+    },
+    {
+      "id": "jp_tochigi_station_8057414616",
+      "osm_id": 8057414616,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "葛生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuzu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3981905,
+      "longitude": 139.6093007
+    },
+    {
+      "id": "jp_tochigi_station_8062667099",
+      "osm_id": 8062667099,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "多田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3782804,
+      "longitude": 139.5930737
+    },
+    {
+      "id": "jp_tochigi_station_8062667101",
+      "osm_id": 8062667101,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "田沼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3669606,
+      "longitude": 139.5817468
+    },
+    {
+      "id": "jp_tochigi_station_8062667103",
+      "osm_id": 8062667103,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshimizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3450254,
+      "longitude": 139.5790923
+    },
+    {
+      "id": "jp_tochigi_station_8062667107",
+      "osm_id": 8062667107,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "堀米",
+      "name_kana": "ほりごめ",
+      "name_translations": {
+        "en": "Horigome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3283579,
+      "longitude": 139.5803507
+    },
+    {
+      "id": "jp_tochigi_station_8062880433",
+      "osm_id": 8062880433,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北鹿沼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Kanuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5806929,
+      "longitude": 139.7378941
+    },
+    {
+      "id": "jp_tochigi_station_8063060775",
+      "osm_id": 8063060775,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東武金崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōbu Kanasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4661485,
+      "longitude": 139.7494138
+    },
+    {
+      "id": "jp_tochigi_station_8067285757",
+      "osm_id": 8067285757,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新大平下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Ohirashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3384188,
+      "longitude": 139.7015718
+    },
+    {
+      "id": "jp_tochigi_station_8076485974",
+      "osm_id": 8076485974,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大桑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okuwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7604507,
+      "longitude": 139.71335
+    },
+    {
+      "id": "jp_tochigi_station_8147921977",
+      "osm_id": 8147921977,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "おもちゃのまち",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omocha-no-Machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN35",
+      "latitude": 36.4662182,
+      "longitude": 139.8293442
+    },
+    {
+      "id": "jp_tochigi_station_8147921979",
+      "osm_id": 8147921979,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "安塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasuzuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN36",
+      "latitude": 36.4853953,
+      "longitude": 139.835528
+    },
+    {
+      "id": "jp_tochigi_station_8147921981",
+      "osm_id": 8147921981,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西川田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kawada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN37",
+      "latitude": 36.5146817,
+      "longitude": 139.8504746
+    },
+    {
+      "id": "jp_tochigi_station_8147921982",
+      "osm_id": 8147921982,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "野州大塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashu-Otsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN32",
+      "latitude": 36.4089576,
+      "longitude": 139.7730325
+    },
+    {
+      "id": "jp_tochigi_station_8147921987",
+      "osm_id": 8147921987,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "江曽島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Esojima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN38",
+      "latitude": 36.5313091,
+      "longitude": 139.8610143
+    },
+    {
+      "id": "jp_tochigi_station_8147921988",
+      "osm_id": 8147921988,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南宇都宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Utsunomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN39",
+      "latitude": 36.5436177,
+      "longitude": 139.8717284
+    },
+    {
+      "id": "jp_tochigi_station_8147921993",
+      "osm_id": 8147921993,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "野州平川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashu-Hirakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TN31",
+      "latitude": 36.4016815,
+      "longitude": 139.7540881
+    },
+    {
+      "id": "jp_tochigi_station_8832005298",
+      "osm_id": 8832005298,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "思川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omoigawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3507283,
+      "longitude": 139.7816502
+    },
+    {
+      "id": "jp_tochigi_station_11166511809",
+      "osm_id": 11166511809,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下野大沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimotsuke-Osawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.686353,
+      "longitude": 139.7324588
+    },
+    {
+      "id": "jp_tochigi_station_11196857410",
+      "osm_id": 11196857410,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "間藤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6531194,
+      "longitude": 139.4498771
+    },
+    {
+      "id": "jp_tochigi_station_11225116577",
+      "osm_id": 11225116577,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "足尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6417269,
+      "longitude": 139.4479775
+    },
+    {
+      "id": "jp_tochigi_station_11240185368",
+      "osm_id": 11240185368,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上三依塩原温泉口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamimiyori-Shiobara-Onsenguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.013896,
+      "longitude": 139.7275289
+    },
+    {
+      "id": "jp_tochigi_station_11451819162",
+      "osm_id": 11451819162,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "雀宮",
+      "name_kana": "すずめのみや",
+      "name_translations": {
+        "en": "Suzumenomiya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4939255,
+      "longitude": 139.8770003
+    },
+    {
+      "id": "jp_tochigi_ferry_terminal_12015511467",
+      "osm_id": 12015511467,
+      "osm_type": "node",
+      "prefecture_id": "jp_tochigi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大使館別荘記念公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Embassy Villa Memorial Park Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7239544,
+      "longitude": 139.4839576
+    },
+    {
+      "id": "jp_tochigi_airport_100584058",
+      "osm_id": 100584058,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "airport",
+      "subtype": "military",
+      "name": "陸上自衛隊北宇都宮駐屯地;陸上自衛隊宇都宮飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Utsunomiya Airfield"
+      },
+      "operator": "JGSDF",
+      "network": null,
+      "ref": "RJTU",
+      "latitude": 36.5146111,
+      "longitude": 139.872205
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_195072228",
+      "osm_id": 195072228,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中禅寺温泉",
+      "name_kana": "ちゅうぜんじおんせん",
+      "name_translations": {
+        "en": "Chuzenji Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7388833,
+      "longitude": 139.4994595
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_365458524",
+      "osm_id": 365458524,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "関東自動車駒生営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5845565,
+      "longitude": 139.8418563
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_365788476",
+      "osm_id": 365788476,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "関東自動車",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5799042,
+      "longitude": 139.9316213
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_380033527",
+      "osm_id": 380033527,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JRバス関東 塩原温泉駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9724311,
+      "longitude": 139.8189498
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_428686787",
+      "osm_id": 428686787,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "鬼怒川温泉駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8237082,
+      "longitude": 139.7168889
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_450034040",
+      "osm_id": 450034040,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "佐野新都市バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2948645,
+      "longitude": 139.6015911
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_450217632",
+      "osm_id": 450217632,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Kanto Transportation Inc., Utsunomiya Station - Commuter Pass Center",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5582288,
+      "longitude": 139.8968309
+    },
+    {
+      "id": "jp_tochigi_airport_1136938529",
+      "osm_id": 1136938529,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "栃木ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "栃木県",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5600352,
+      "longitude": 140.0067016
+    },
+    {
+      "id": "jp_tochigi_bus_terminal_1422426658",
+      "osm_id": 1422426658,
+      "osm_type": "way",
+      "prefecture_id": "jp_tochigi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "湯元温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nikko Yumoto-onsen"
+      },
+      "operator": "東武バス日光",
+      "network": null,
+      "ref": "46",
+      "latitude": 36.8068119,
+      "longitude": 139.4230555
+    }
+  ]
+}

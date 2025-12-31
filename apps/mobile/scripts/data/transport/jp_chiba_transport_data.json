@@ -1,0 +1,7332 @@
+{
+  "fetchedAt": "2025-12-24T05:50:44.975Z",
+  "prefecture_id": "jp_chiba",
+  "prefecture_name": "千葉県",
+  "stats": {
+    "station": 338,
+    "airport": 8,
+    "ferry_terminal": 13,
+    "bus_terminal": 52,
+    "total": 411
+  },
+  "data": [
+    {
+      "id": "jp_chiba_bus_terminal_392964064",
+      "osm_id": 392964064,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中野操車場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "ちばフラワーバス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5739892,
+      "longitude": 140.2807393
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_691270183",
+      "osm_id": 691270183,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "金谷港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanaya Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1693601,
+      "longitude": 139.8173913
+    },
+    {
+      "id": "jp_chiba_station_859663338",
+      "osm_id": 859663338,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "ウエスタンリバー鉄道",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6337187,
+      "longitude": 139.8823855
+    },
+    {
+      "id": "jp_chiba_station_859682633",
+      "osm_id": 859682633,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "ポートディスカバリー・ステーション",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Port Discovery Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.625393,
+      "longitude": 139.8830972
+    },
+    {
+      "id": "jp_chiba_station_859682692",
+      "osm_id": 859682692,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "アメリカンウォーターフロント・ステーション",
+      "name_kana": "",
+      "name_translations": {
+        "en": "American Waterfront"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6248634,
+      "longitude": 139.8877946
+    },
+    {
+      "id": "jp_chiba_bus_terminal_978254804",
+      "osm_id": 978254804,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "亀成",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamenari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8291736,
+      "longitude": 140.1192435
+    },
+    {
+      "id": "jp_chiba_airport_1042056080",
+      "osm_id": 1042056080,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "military",
+      "name": "下総航空基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimofusa Airbase"
+      },
+      "operator": "JMSDF",
+      "network": null,
+      "ref": "RJTL",
+      "latitude": 35.7974387,
+      "longitude": 140.0113449
+    },
+    {
+      "id": "jp_chiba_station_1093224468",
+      "osm_id": 1093224468,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "東海神",
+      "name_kana": "ひがしかいじん",
+      "name_translations": {
+        "en": "Higashi-Kaijin"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR02",
+      "latitude": 35.7059603,
+      "longitude": 139.98055
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1312711916",
+      "osm_id": 1312711916,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新浦安駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6497316,
+      "longitude": 139.913977
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1586493428",
+      "osm_id": 1586493428,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東船橋駅 (Higashi Funabashi Station)",
+      "name_kana": "ひがしふなばしえき",
+      "name_translations": {
+        "en": "Higashi Funabashi Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7002436,
+      "longitude": 140.0043703
+    },
+    {
+      "id": "jp_chiba_station_1642794907",
+      "osm_id": 1642794907,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "本銚子",
+      "name_kana": "もとちょうし",
+      "name_translations": {
+        "en": "Moto-Choshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7310562,
+      "longitude": 140.8478146
+    },
+    {
+      "id": "jp_chiba_station_1681303228",
+      "osm_id": 1681303228,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "川間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD13",
+      "latitude": 35.9791747,
+      "longitude": 139.8339907
+    },
+    {
+      "id": "jp_chiba_station_1681303232",
+      "osm_id": 1681303232,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊四季",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyoshiki"
+      },
+      "operator": null,
+      "network": "アーバンパークライン",
+      "ref": "TD23",
+      "latitude": 35.8665483,
+      "longitude": 139.9395437
+    },
+    {
+      "id": "jp_chiba_station_1685077179",
+      "osm_id": 1685077179,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "流山",
+      "name_kana": "ながれやま",
+      "name_translations": {
+        "en": "Nagareyama"
+      },
+      "operator": "流鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8558741,
+      "longitude": 139.9016914
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1688061287",
+      "osm_id": 1688061287,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "米本団地",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7578141,
+      "longitude": 140.1097203
+    },
+    {
+      "id": "jp_chiba_station_1831219031",
+      "osm_id": 1831219031,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "西畑",
+      "name_kana": "にしはた",
+      "name_translations": {
+        "en": "Nishihata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2507617,
+      "longitude": 140.2156122
+    },
+    {
+      "id": "jp_chiba_station_1832342938",
+      "osm_id": 1832342938,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "養老渓谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoro-Keikoku"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2664357,
+      "longitude": 140.1596044
+    },
+    {
+      "id": "jp_chiba_station_1832343070",
+      "osm_id": 1832343070,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総鶴舞",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Tsurumai"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3813997,
+      "longitude": 140.1651686
+    },
+    {
+      "id": "jp_chiba_station_1832453983",
+      "osm_id": 1832453983,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯給",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itabu"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3207931,
+      "longitude": 140.1421816
+    },
+    {
+      "id": "jp_chiba_station_1832454906",
+      "osm_id": 1832454906,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総大久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Okubo"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2835084,
+      "longitude": 140.1458583
+    },
+    {
+      "id": "jp_chiba_station_1832454943",
+      "osm_id": 1832454943,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "月崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukizaki"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3021964,
+      "longitude": 140.1393923
+    },
+    {
+      "id": "jp_chiba_station_1844116450",
+      "osm_id": 1844116450,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総中野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Nakano"
+      },
+      "operator": "小湊鉄道;いすみ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.250069,
+      "longitude": 140.1999004
+    },
+    {
+      "id": "jp_chiba_station_1844116451",
+      "osm_id": 1844116451,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総山田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Yamada"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4542014,
+      "longitude": 140.1261824
+    },
+    {
+      "id": "jp_chiba_station_1844116452",
+      "osm_id": 1844116452,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総川間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Kawama"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3881138,
+      "longitude": 140.1511237
+    },
+    {
+      "id": "jp_chiba_station_1844116454",
+      "osm_id": 1844116454,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総牛久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Ushiku"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4001414,
+      "longitude": 140.1420997
+    },
+    {
+      "id": "jp_chiba_station_1844116455",
+      "osm_id": 1844116455,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "光風台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kofudai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4403536,
+      "longitude": 140.1142057
+    },
+    {
+      "id": "jp_chiba_station_1844116457",
+      "osm_id": 1844116457,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "里見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Satomi"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.336711,
+      "longitude": 140.1454885
+    },
+    {
+      "id": "jp_chiba_station_1844116458",
+      "osm_id": 1844116458,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "高滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takataki"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3532938,
+      "longitude": 140.1503489
+    },
+    {
+      "id": "jp_chiba_station_1844138966",
+      "osm_id": 1844138966,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総松丘",
+      "name_kana": "かずさまつおか",
+      "name_translations": {
+        "en": "Kazusa-Matsuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2577956,
+      "longitude": 140.0639976
+    },
+    {
+      "id": "jp_chiba_station_1844138974",
+      "osm_id": 1844138974,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "俵田",
+      "name_kana": "たわらだ",
+      "name_translations": {
+        "en": "Tawarada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3146893,
+      "longitude": 140.0612845
+    },
+    {
+      "id": "jp_chiba_station_1844138981",
+      "osm_id": 1844138981,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "平山",
+      "name_kana": "ひらやま",
+      "name_translations": {
+        "en": "Hirayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2743594,
+      "longitude": 140.0648667
+    },
+    {
+      "id": "jp_chiba_station_1923401945",
+      "osm_id": 1923401945,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "北習志野",
+      "name_kana": "きたならしの",
+      "name_translations": {
+        "en": "Kita-narashino"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR04",
+      "latitude": 35.7214536,
+      "longitude": 140.0417146
+    },
+    {
+      "id": "jp_chiba_station_1923703990",
+      "osm_id": 1923703990,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "船橋日大前",
+      "name_kana": "ふなばしにちだいまえ",
+      "name_translations": {
+        "en": "Funabashi-nichidaimae"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR05",
+      "latitude": 35.7268419,
+      "longitude": 140.0588171
+    },
+    {
+      "id": "jp_chiba_station_1923720146",
+      "osm_id": 1923720146,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "metro",
+      "name": "原木中山",
+      "name_kana": "ばらきなかやま",
+      "name_translations": {
+        "en": "Baraki-nakayama"
+      },
+      "operator": "東京地下鉄",
+      "network": null,
+      "ref": "T22",
+      "latitude": 35.7031484,
+      "longitude": 139.9416595
+    },
+    {
+      "id": "jp_chiba_station_1923723997",
+      "osm_id": 1923723997,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "metro",
+      "name": "妙典",
+      "name_kana": "みょうでん",
+      "name_translations": {
+        "en": "Myoden"
+      },
+      "operator": "東京地下鉄",
+      "network": null,
+      "ref": "T21",
+      "latitude": 35.6910897,
+      "longitude": 139.9244066
+    },
+    {
+      "id": "jp_chiba_station_1923746849",
+      "osm_id": 1923746849,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "metro",
+      "name": "行徳",
+      "name_kana": "ぎょうとく",
+      "name_translations": {
+        "en": "Gyotoku"
+      },
+      "operator": "東京地下鉄",
+      "network": null,
+      "ref": "T20",
+      "latitude": 35.6828816,
+      "longitude": 139.9145062
+    },
+    {
+      "id": "jp_chiba_station_1923746852",
+      "osm_id": 1923746852,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "metro",
+      "name": "南行徳",
+      "name_kana": "みなみぎょうとく",
+      "name_translations": {
+        "en": "Minami-gyotoku"
+      },
+      "operator": "東京地下鉄",
+      "network": null,
+      "ref": "T19",
+      "latitude": 35.6727318,
+      "longitude": 139.902279
+    },
+    {
+      "id": "jp_chiba_station_1923746886",
+      "osm_id": 1923746886,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "metro",
+      "name": "浦安",
+      "name_kana": "うらやす",
+      "name_translations": {
+        "en": "Urayasu"
+      },
+      "operator": "東京地下鉄",
+      "network": null,
+      "ref": "T18",
+      "latitude": 35.6658445,
+      "longitude": 139.8930133
+    },
+    {
+      "id": "jp_chiba_station_1923879760",
+      "osm_id": 1923879760,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "東葉勝田台",
+      "name_kana": "とうようかつただい",
+      "name_translations": {
+        "en": "Toyo-Katsutadai"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR09",
+      "latitude": 35.7159497,
+      "longitude": 140.1260561
+    },
+    {
+      "id": "jp_chiba_station_1925585850",
+      "osm_id": 1925585850,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成八幡",
+      "name_kana": "けいせいやわた",
+      "name_translations": {
+        "en": "Keisei Yawata"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS16",
+      "latitude": 35.7239123,
+      "longitude": 139.9280439
+    },
+    {
+      "id": "jp_chiba_station_1927034703",
+      "osm_id": 1927034703,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成中山",
+      "name_kana": "けいせいなかやま",
+      "name_translations": {
+        "en": "Keisei-Nakayama"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS18",
+      "latitude": 35.7168708,
+      "longitude": 139.9447308
+    },
+    {
+      "id": "jp_chiba_station_1936643564",
+      "osm_id": 1936643564,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "増尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD26",
+      "latitude": 35.8295829,
+      "longitude": 139.9767076
+    },
+    {
+      "id": "jp_chiba_station_1950613882",
+      "osm_id": 1950613882,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "成田空港",
+      "name_kana": "なりたくうこう",
+      "name_translations": {
+        "en": "Narita Airport Terminal 1"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS42",
+      "latitude": 35.7653969,
+      "longitude": 140.3859899
+    },
+    {
+      "id": "jp_chiba_station_2018073976",
+      "osm_id": 2018073976,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "葭川公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshikawa-Koen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6088494,
+      "longitude": 140.1200969
+    },
+    {
+      "id": "jp_chiba_station_2018074010",
+      "osm_id": 2018074010,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "栄町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaecho"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6129614,
+      "longitude": 140.1186221
+    },
+    {
+      "id": "jp_chiba_station_2018074014",
+      "osm_id": 2018074014,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "市役所前",
+      "name_kana": "しやくしょまえ",
+      "name_translations": {
+        "en": "Shiyakushomae"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6072241,
+      "longitude": 140.1078479
+    },
+    {
+      "id": "jp_chiba_station_2018074040",
+      "osm_id": 2018074040,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "県庁前",
+      "name_kana": "けんちょうまえ",
+      "name_translations": {
+        "en": "Kencho-Mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6036854,
+      "longitude": 140.1221568
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2053864314",
+      "osm_id": 2053864314,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "船橋駅北口 (Funabashi station)",
+      "name_kana": "ふなばしえききたぐち",
+      "name_translations": {
+        "en": "Funabashi Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7025745,
+      "longitude": 139.9852609
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2053875641",
+      "osm_id": 2053875641,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "北習志野駅",
+      "name_kana": "きたならしのえき",
+      "name_translations": {
+        "en": "Kita-narashino Station"
+      },
+      "operator": "船橋新京成バス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7213829,
+      "longitude": 140.0424224
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2056213337",
+      "osm_id": 2056213337,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高根公団駅 (Takanekodan Station)",
+      "name_kana": "たかねこうだんえき",
+      "name_translations": {
+        "en": "Takanekodan Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.730253,
+      "longitude": 140.0302309
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2056213451",
+      "osm_id": 2056213451,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "鎌ケ谷大仏 (Kamagaya Daibutsu)",
+      "name_kana": "かまがやだいぶつ",
+      "name_translations": {
+        "en": "Kamagaya Daibutsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7587297,
+      "longitude": 140.0133894
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2057079419",
+      "osm_id": 2057079419,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西白井駅 (Nishi-shiroi Station)",
+      "name_kana": "にししろいえき",
+      "name_translations": {
+        "en": "Nishi-shiroi Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7851928,
+      "longitude": 140.0314305
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2058046353",
+      "osm_id": 2058046353,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "津田沼駅 (Tsudanuma Station)",
+      "name_kana": "つだぬまえき",
+      "name_translations": {
+        "en": "Tsudanuma Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6913953,
+      "longitude": 140.0210816
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2058140386",
+      "osm_id": 2058140386,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "習志野車庫(Narashino syako)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Narashino Syako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7095067,
+      "longitude": 140.0606924
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2058235064",
+      "osm_id": 2058235064,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八千代緑が丘駅(Yachiyo-midorigaoka Station)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7293712,
+      "longitude": 140.0735778
+    },
+    {
+      "id": "jp_chiba_station_2065711074",
+      "osm_id": 2065711074,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴川",
+      "name_kana": "あながわ",
+      "name_translations": {
+        "en": "Anagawa"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6395681,
+      "longitude": 140.1118771
+    },
+    {
+      "id": "jp_chiba_station_2065711075",
+      "osm_id": 2065711075,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "千葉公園",
+      "name_kana": "ちばこうえん",
+      "name_translations": {
+        "en": "Chiba-Koen"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6198055,
+      "longitude": 140.1178236
+    },
+    {
+      "id": "jp_chiba_station_2065711076",
+      "osm_id": 2065711076,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "作草部",
+      "name_kana": "さくさべ",
+      "name_translations": {
+        "en": "Sakusabe"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6256955,
+      "longitude": 140.1152507
+    },
+    {
+      "id": "jp_chiba_station_2065711077",
+      "osm_id": 2065711077,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "天台",
+      "name_kana": "てんだい",
+      "name_translations": {
+        "en": "Tendai"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6314182,
+      "longitude": 140.1127865
+    },
+    {
+      "id": "jp_chiba_station_2102593003",
+      "osm_id": 2102593003,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小林",
+      "name_kana": "こばやし",
+      "name_translations": {
+        "en": "Kobayashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "JR成田線",
+      "ref": null,
+      "latitude": 35.830567,
+      "longitude": 140.193306
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2285709376",
+      "osm_id": 2285709376,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京成バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6071208,
+      "longitude": 140.117786
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_2364172566",
+      "osm_id": 2364172566,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Jungle Cruise Dock",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jungle Cruise"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6337392,
+      "longitude": 139.882499
+    },
+    {
+      "id": "jp_chiba_station_2486366411",
+      "osm_id": 2486366411,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "海士有木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amaariki"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4817067,
+      "longitude": 140.1241104
+    },
+    {
+      "id": "jp_chiba_station_2496904129",
+      "osm_id": 2496904129,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "八千代緑が丘",
+      "name_kana": "やちよみどりがおか",
+      "name_translations": {
+        "en": "Yachiyo-midorigaoka"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR06",
+      "latitude": 35.7288504,
+      "longitude": 140.0729952
+    },
+    {
+      "id": "jp_chiba_station_2496905056",
+      "osm_id": 2496905056,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "八千代中央",
+      "name_kana": "やちよちゅうおう",
+      "name_translations": {
+        "en": "Yachiyo-chuo"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR07",
+      "latitude": 35.7278521,
+      "longitude": 140.1034097
+    },
+    {
+      "id": "jp_chiba_station_2496905171",
+      "osm_id": 2496905171,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "村上",
+      "name_kana": "むらかみ",
+      "name_translations": {
+        "en": "Murakami"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR08",
+      "latitude": 35.7237734,
+      "longitude": 140.1183517
+    },
+    {
+      "id": "jp_chiba_station_2496907359",
+      "osm_id": 2496907359,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "subway",
+      "name": "飯山満",
+      "name_kana": "はさま",
+      "name_translations": {
+        "en": "Hasama"
+      },
+      "operator": "東葉高速鉄道",
+      "network": "東葉高速線",
+      "ref": "TR03",
+      "latitude": 35.7140049,
+      "longitude": 140.0221635
+    },
+    {
+      "id": "jp_chiba_station_2496907808",
+      "osm_id": 2496907808,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西船橋",
+      "name_kana": "にしふなばし",
+      "name_translations": {
+        "en": "Nishi-Funabashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "T23;TR01",
+      "latitude": 35.7074794,
+      "longitude": 139.9591019
+    },
+    {
+      "id": "jp_chiba_station_2543426615",
+      "osm_id": 2543426615,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成津田沼",
+      "name_kana": "けいせいつだぬま",
+      "name_translations": {
+        "en": "Keisei Tsudanuma"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS26",
+      "latitude": 35.6836333,
+      "longitude": 140.0248164
+    },
+    {
+      "id": "jp_chiba_station_2545318838",
+      "osm_id": 2545318838,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成千葉",
+      "name_kana": "けいせいちば",
+      "name_translations": {
+        "en": "Keisei Chiba"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS59",
+      "latitude": 35.6116663,
+      "longitude": 140.1143016
+    },
+    {
+      "id": "jp_chiba_station_2545318845",
+      "osm_id": 2545318845,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "千葉中央",
+      "name_kana": "ちばちゅうおう",
+      "name_translations": {
+        "en": "Chiba-Chuo"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS60",
+      "latitude": 35.6073248,
+      "longitude": 140.1178399
+    },
+    {
+      "id": "jp_chiba_station_2545318853",
+      "osm_id": 2545318853,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "ちはら台",
+      "name_kana": "ちはらだい",
+      "name_translations": {
+        "en": "Chiharadai"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS65",
+      "latitude": 35.5338295,
+      "longitude": 140.1702772
+    },
+    {
+      "id": "jp_chiba_station_2545318856",
+      "osm_id": 2545318856,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "学園前",
+      "name_kana": "がくえんまえ",
+      "name_translations": {
+        "en": "Gakuemmae"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS63",
+      "latitude": 35.5606158,
+      "longitude": 140.1584082
+    },
+    {
+      "id": "jp_chiba_station_2545318862",
+      "osm_id": 2545318862,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成稲毛",
+      "name_kana": "けいせいいなげ",
+      "name_translations": {
+        "en": "Keisei Inage"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS55",
+      "latitude": 35.6376426,
+      "longitude": 140.0856084
+    },
+    {
+      "id": "jp_chiba_station_2545318868",
+      "osm_id": 2545318868,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "検見川",
+      "name_kana": "けみがわ",
+      "name_translations": {
+        "en": "Kemigawa"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS54",
+      "latitude": 35.6526017,
+      "longitude": 140.066294
+    },
+    {
+      "id": "jp_chiba_station_2545318874",
+      "osm_id": 2545318874,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成幕張",
+      "name_kana": "けいせいまくはり",
+      "name_translations": {
+        "en": "Keisei Makuhari"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS53",
+      "latitude": 35.6609528,
+      "longitude": 140.0556604
+    },
+    {
+      "id": "jp_chiba_station_2545318880",
+      "osm_id": 2545318880,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成幕張本郷",
+      "name_kana": "けいせいまくはりほんごう",
+      "name_translations": {
+        "en": "Keisei Makuhari-Hongo"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS52",
+      "latitude": 35.672623,
+      "longitude": 140.0421251
+    },
+    {
+      "id": "jp_chiba_station_2545318886",
+      "osm_id": 2545318886,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "みどり台",
+      "name_kana": "みどりだい",
+      "name_translations": {
+        "en": "Midoridai"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS56",
+      "latitude": 35.6248017,
+      "longitude": 140.0977059
+    },
+    {
+      "id": "jp_chiba_station_2545318891",
+      "osm_id": 2545318891,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "西登戸",
+      "name_kana": "にしのぶと",
+      "name_translations": {
+        "en": "Nishi-Nobuto"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS57",
+      "latitude": 35.6174601,
+      "longitude": 140.1029283
+    },
+    {
+      "id": "jp_chiba_station_2545318902",
+      "osm_id": 2545318902,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "大森台",
+      "name_kana": "おおもりだい",
+      "name_translations": {
+        "en": "Omoridai"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS62",
+      "latitude": 35.5841554,
+      "longitude": 140.1494149
+    },
+    {
+      "id": "jp_chiba_station_2545318916",
+      "osm_id": 2545318916,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "新千葉",
+      "name_kana": "しんちば",
+      "name_translations": {
+        "en": "Shin-Chiba"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS58",
+      "latitude": 35.6125515,
+      "longitude": 140.1082949
+    },
+    {
+      "id": "jp_chiba_station_2546879658",
+      "osm_id": 2546879658,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "印旛日本医大",
+      "name_kana": "いんばにほんいだい",
+      "name_translations": {
+        "en": "Inba Nihon Idai"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS14",
+      "latitude": 35.7876577,
+      "longitude": 140.2031172
+    },
+    {
+      "id": "jp_chiba_station_2546879659",
+      "osm_id": 2546879659,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "印西牧の原",
+      "name_kana": "いんざいまきのはら",
+      "name_translations": {
+        "en": "Inzai-makinohara"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS13",
+      "latitude": 35.8036457,
+      "longitude": 140.1668513
+    },
+    {
+      "id": "jp_chiba_station_2546879661",
+      "osm_id": 2546879661,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "小室",
+      "name_kana": "こむろ",
+      "name_translations": {
+        "en": "Komuro"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS11",
+      "latitude": 35.7870031,
+      "longitude": 140.0762111
+    },
+    {
+      "id": "jp_chiba_station_2558121910",
+      "osm_id": 2558121910,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東船橋",
+      "name_kana": "ひがしふなばし",
+      "name_translations": {
+        "en": "Higashi-Funabashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6997729,
+      "longitude": 140.00429
+    },
+    {
+      "id": "jp_chiba_station_2559434098",
+      "osm_id": 2559434098,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "旭",
+      "name_kana": "あさひ",
+      "name_translations": {
+        "en": "Asahi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7218224,
+      "longitude": 140.6550919
+    },
+    {
+      "id": "jp_chiba_station_2559434100",
+      "osm_id": 2559434100,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千葉",
+      "name_kana": "ちば",
+      "name_translations": {
+        "en": "Chiba"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6137344,
+      "longitude": 140.1125333
+    },
+    {
+      "id": "jp_chiba_station_2559434101",
+      "osm_id": 2559434101,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "銚子",
+      "name_kana": "ちょうし",
+      "name_translations": {
+        "en": "Chōshi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7294122,
+      "longitude": 140.8273135
+    },
+    {
+      "id": "jp_chiba_station_2559434102",
+      "osm_id": 2559434102,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "榎戸",
+      "name_kana": "えのきど",
+      "name_translations": {
+        "en": "Enokido"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.683777,
+      "longitude": 140.2884773
+    },
+    {
+      "id": "jp_chiba_station_2559434103",
+      "osm_id": 2559434103,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "船橋",
+      "name_kana": "ふなばし",
+      "name_translations": {
+        "en": "Funabashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "TD35",
+      "latitude": 35.7016567,
+      "longitude": 139.9852496
+    },
+    {
+      "id": "jp_chiba_station_2559434106",
+      "osm_id": 2559434106,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東千葉",
+      "name_kana": "ひがしちば",
+      "name_translations": {
+        "en": "Higashi-Chiba"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6168339,
+      "longitude": 140.1221308
+    },
+    {
+      "id": "jp_chiba_station_2559434108",
+      "osm_id": 2559434108,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "干潟",
+      "name_kana": "ひがた",
+      "name_translations": {
+        "en": "Higata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7182949,
+      "longitude": 140.6028615
+    },
+    {
+      "id": "jp_chiba_station_2559434110",
+      "osm_id": 2559434110,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向",
+      "name_kana": "ひゅうが",
+      "name_translations": {
+        "en": "Hyuga"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6283537,
+      "longitude": 140.3627718
+    },
+    {
+      "id": "jp_chiba_station_2559434113",
+      "osm_id": 2559434113,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "飯倉",
+      "name_kana": "いいぐら",
+      "name_translations": {
+        "en": "Igura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6856774,
+      "longitude": 140.5224408
+    },
+    {
+      "id": "jp_chiba_station_2559434116",
+      "osm_id": 2559434116,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "飯岡",
+      "name_kana": "いいおか",
+      "name_translations": {
+        "en": "Iioka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7293267,
+      "longitude": 140.683679
+    },
+    {
+      "id": "jp_chiba_station_2559434123",
+      "osm_id": 2559434123,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "倉橋",
+      "name_kana": "くらはし",
+      "name_translations": {
+        "en": "Kurahashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7380715,
+      "longitude": 140.7144461
+    },
+    {
+      "id": "jp_chiba_station_2559434126",
+      "osm_id": 2559434126,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松岸",
+      "name_kana": "まつぎし",
+      "name_translations": {
+        "en": "Matsugishi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7395583,
+      "longitude": 140.7952579
+    },
+    {
+      "id": "jp_chiba_station_2559434127",
+      "osm_id": 2559434127,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松尾",
+      "name_kana": "まつお",
+      "name_translations": {
+        "en": "Matsuo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6360158,
+      "longitude": 140.4576611
+    },
+    {
+      "id": "jp_chiba_station_2559434128",
+      "osm_id": 2559434128,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南酒々井",
+      "name_kana": "みなみしすい",
+      "name_translations": {
+        "en": "Minami-Shisui"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7044089,
+      "longitude": 140.2681631
+    },
+    {
+      "id": "jp_chiba_station_2559434130",
+      "osm_id": 2559434130,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "物井",
+      "name_kana": "ものい",
+      "name_translations": {
+        "en": "Monoi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.685674,
+      "longitude": 140.2002938
+    },
+    {
+      "id": "jp_chiba_station_2559434135",
+      "osm_id": 2559434135,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "滑河",
+      "name_kana": "なめがわ",
+      "name_translations": {
+        "en": "Namegawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8772317,
+      "longitude": 140.3481294
+    },
+    {
+      "id": "jp_chiba_station_2559434136",
+      "osm_id": 2559434136,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "空港第2ビル",
+      "name_kana": "くうこうだいにびる",
+      "name_translations": {
+        "en": "Narita Airport Terminal 2·3"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS41",
+      "latitude": 35.7731974,
+      "longitude": 140.3872118
+    },
+    {
+      "id": "jp_chiba_station_2559434137",
+      "osm_id": 2559434137,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "成田",
+      "name_kana": "なりた",
+      "name_translations": {
+        "en": "Narita"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7779163,
+      "longitude": 140.3140452
+    },
+    {
+      "id": "jp_chiba_station_2559434138",
+      "osm_id": 2559434138,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "成東",
+      "name_kana": "なるとう",
+      "name_translations": {
+        "en": "Naruto"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6084534,
+      "longitude": 140.4108142
+    },
+    {
+      "id": "jp_chiba_station_2559434145",
+      "osm_id": 2559434145,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小見川",
+      "name_kana": "おみがわ",
+      "name_translations": {
+        "en": "Omigawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8501038,
+      "longitude": 140.6046608
+    },
+    {
+      "id": "jp_chiba_station_2559434147",
+      "osm_id": 2559434147,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐倉",
+      "name_kana": "さくら",
+      "name_translations": {
+        "en": "Sakura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7096485,
+      "longitude": 140.2261029
+    },
+    {
+      "id": "jp_chiba_station_2559434148",
+      "osm_id": 2559434148,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "猿田",
+      "name_kana": "さるだ",
+      "name_translations": {
+        "en": "Saruda"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7473178,
+      "longitude": 140.7374255
+    },
+    {
+      "id": "jp_chiba_station_2559434149",
+      "osm_id": 2559434149,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "笹川",
+      "name_kana": "ささがわ",
+      "name_translations": {
+        "en": "Sasagawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8397646,
+      "longitude": 140.6556691
+    },
+    {
+      "id": "jp_chiba_station_2559434150",
+      "osm_id": 2559434150,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐原",
+      "name_kana": "さわら",
+      "name_translations": {
+        "en": "Sawara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8945456,
+      "longitude": 140.4940774
+    },
+    {
+      "id": "jp_chiba_station_2559434152",
+      "osm_id": 2559434152,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "椎柴",
+      "name_kana": "しいしば",
+      "name_translations": {
+        "en": "Shiishiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7653133,
+      "longitude": 140.7587799
+    },
+    {
+      "id": "jp_chiba_station_2559434153",
+      "osm_id": 2559434153,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下総神崎",
+      "name_kana": "しもうさこうざき",
+      "name_translations": {
+        "en": "Shimosa-Kozaki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.894924,
+      "longitude": 140.4105094
+    },
+    {
+      "id": "jp_chiba_station_2559434155",
+      "osm_id": 2559434155,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下総橘",
+      "name_kana": "しもうさたちばな",
+      "name_translations": {
+        "en": "Shimosa-Tachibana"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8186717,
+      "longitude": 140.7022698
+    },
+    {
+      "id": "jp_chiba_station_2559434156",
+      "osm_id": 2559434156,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "下総豊里",
+      "name_kana": "しもうさとよさと",
+      "name_translations": {
+        "en": "Shimosa-Toyosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7931281,
+      "longitude": 140.7206992
+    },
+    {
+      "id": "jp_chiba_station_2559434161",
+      "osm_id": 2559434161,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "酒々井",
+      "name_kana": "しすい",
+      "name_translations": {
+        "en": "Shisui"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.731812,
+      "longitude": 140.2753243
+    },
+    {
+      "id": "jp_chiba_station_2559434163",
+      "osm_id": 2559434163,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "水郷",
+      "name_kana": "すいごう",
+      "name_translations": {
+        "en": "Suigo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.886212,
+      "longitude": 140.5697795
+    },
+    {
+      "id": "jp_chiba_station_2559434169",
+      "osm_id": 2559434169,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "都賀",
+      "name_kana": "つが",
+      "name_translations": {
+        "en": "Tsuga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.636082,
+      "longitude": 140.1492345
+    },
+    {
+      "id": "jp_chiba_station_2559434170",
+      "osm_id": 2559434170,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八街",
+      "name_kana": "やちまた",
+      "name_translations": {
+        "en": "Yachimata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6630784,
+      "longitude": 140.3177463
+    },
+    {
+      "id": "jp_chiba_station_2559434171",
+      "osm_id": 2559434171,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八日市場",
+      "name_kana": "ようかいちば",
+      "name_translations": {
+        "en": "Yokaichiba"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6992256,
+      "longitude": 140.5520936
+    },
+    {
+      "id": "jp_chiba_station_2559434172",
+      "osm_id": 2559434172,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "横芝",
+      "name_kana": "ヨコシバ",
+      "name_translations": {
+        "en": "Yokoshiba"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6618627,
+      "longitude": 140.491109
+    },
+    {
+      "id": "jp_chiba_station_2559434173",
+      "osm_id": 2559434173,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "四街道",
+      "name_kana": "よつかいどう",
+      "name_translations": {
+        "en": "Yotsukaido"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6630267,
+      "longitude": 140.1655995
+    },
+    {
+      "id": "jp_chiba_station_2597276891",
+      "osm_id": 2597276891,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新浦安",
+      "name_kana": "しんうらやす",
+      "name_translations": {
+        "en": "Shin-Urayasu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JE08",
+      "latitude": 35.6495336,
+      "longitude": 139.9124954
+    },
+    {
+      "id": "jp_chiba_station_2597276892",
+      "osm_id": 2597276892,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "舞浜",
+      "name_kana": "まいはま",
+      "name_translations": {
+        "en": "Maihama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JE07",
+      "latitude": 35.636259,
+      "longitude": 139.8836057
+    },
+    {
+      "id": "jp_chiba_station_2706936168",
+      "osm_id": 2706936168,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "みつわ台",
+      "name_kana": "みつわだい",
+      "name_translations": {
+        "en": "Mitsuwadai"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6387515,
+      "longitude": 140.1347843
+    },
+    {
+      "id": "jp_chiba_station_2706936169",
+      "osm_id": 2706936169,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "スポーツセンター",
+      "name_kana": "すぽーつせんたー",
+      "name_translations": {
+        "en": "Sports Center"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6432352,
+      "longitude": 140.1161569
+    },
+    {
+      "id": "jp_chiba_station_2706937292",
+      "osm_id": 2706937292,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "動物公園",
+      "name_kana": "どうぶつこうえん",
+      "name_translations": {
+        "en": "Dobutsu-Koen"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6425768,
+      "longitude": 140.1255139
+    },
+    {
+      "id": "jp_chiba_station_2706937293",
+      "osm_id": 2706937293,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "千城台",
+      "name_kana": "ちしろだい",
+      "name_translations": {
+        "en": "Chishirodai"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6223287,
+      "longitude": 140.1885502
+    },
+    {
+      "id": "jp_chiba_station_2706937294",
+      "osm_id": 2706937294,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "千城台北",
+      "name_kana": "ちしろだいきた",
+      "name_translations": {
+        "en": "Chishirodai-Kita"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6274151,
+      "longitude": 140.1820367
+    },
+    {
+      "id": "jp_chiba_station_2706937295",
+      "osm_id": 2706937295,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "千葉みなと",
+      "name_kana": "ちばみなと",
+      "name_translations": {
+        "en": "Chiba-Minato"
+      },
+      "operator": "千葉都市モノレール",
+      "network": "Chiba Urban Monorail Line 1",
+      "ref": null,
+      "latitude": 35.6074412,
+      "longitude": 140.1024718
+    },
+    {
+      "id": "jp_chiba_station_2706937296",
+      "osm_id": 2706937296,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "小倉台",
+      "name_kana": "おぐらだい",
+      "name_translations": {
+        "en": "Oguradai"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6277152,
+      "longitude": 140.1717592
+    },
+    {
+      "id": "jp_chiba_station_2706937297",
+      "osm_id": 2706937297,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜木",
+      "name_kana": "さくらぎ",
+      "name_translations": {
+        "en": "Sakuragi"
+      },
+      "operator": "千葉都市モノレール",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6312486,
+      "longitude": 140.161015
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_2713535212",
+      "osm_id": 2713535212,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "トムソーヤ島いかだ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tom Sawyer Island Rafts"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6319288,
+      "longitude": 139.8837474
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_2713535217",
+      "osm_id": 2713535217,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "開拓者の船着き場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Settlers' Landing"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6316094,
+      "longitude": 139.8834553
+    },
+    {
+      "id": "jp_chiba_station_2729417325",
+      "osm_id": 2729417325,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市川塩浜",
+      "name_kana": "いちかわしおはま",
+      "name_translations": {
+        "en": "Ichikawa-Shiohama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JE09",
+      "latitude": 35.6666362,
+      "longitude": 139.923649
+    },
+    {
+      "id": "jp_chiba_bus_terminal_2751364944",
+      "osm_id": 2751364944,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "幕張本郷駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6725304,
+      "longitude": 140.0415013
+    },
+    {
+      "id": "jp_chiba_station_2777911838",
+      "osm_id": 2777911838,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "東成田",
+      "name_kana": "ひがしなりた",
+      "name_translations": {
+        "en": "Higashi-Narita"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS44",
+      "latitude": 35.7700881,
+      "longitude": 140.3872193
+    },
+    {
+      "id": "jp_chiba_station_2777911854",
+      "osm_id": 2777911854,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "芝山千代田",
+      "name_kana": "しばやまちよだ",
+      "name_translations": {
+        "en": "Shibayama-Chiyoda"
+      },
+      "operator": "芝山鉄道",
+      "network": null,
+      "ref": "SR01",
+      "latitude": 35.7540578,
+      "longitude": 140.3995073
+    },
+    {
+      "id": "jp_chiba_airport_2902662010",
+      "osm_id": 2902662010,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "館山航空基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tateyama Airbase"
+      },
+      "operator": "JMSDF",
+      "network": null,
+      "ref": "RJTE",
+      "latitude": 34.987205,
+      "longitude": 139.8330565
+    },
+    {
+      "id": "jp_chiba_station_3012068692",
+      "osm_id": 3012068692,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下総松崎",
+      "name_kana": "しもうさまんざき",
+      "name_translations": {
+        "en": "Shimosa-Manzaki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8076583,
+      "longitude": 140.2779396
+    },
+    {
+      "id": "jp_chiba_station_3012068693",
+      "osm_id": 3012068693,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "久住",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuzumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8323487,
+      "longitude": 140.3388809
+    },
+    {
+      "id": "jp_chiba_station_3012068694",
+      "osm_id": 3012068694,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北小金",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Kogane"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8334292,
+      "longitude": 139.9312051
+    },
+    {
+      "id": "jp_chiba_station_3012068695",
+      "osm_id": 3012068695,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北松戸",
+      "name_kana": "きたまつど",
+      "name_translations": {
+        "en": "Kita-Matsudo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8005359,
+      "longitude": 139.911864
+    },
+    {
+      "id": "jp_chiba_station_3012068696",
+      "osm_id": 3012068696,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北柏",
+      "name_kana": "きたかしわ",
+      "name_translations": {
+        "en": "Kita-Kashiwa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.87565,
+      "longitude": 139.9880138
+    },
+    {
+      "id": "jp_chiba_station_3012068697",
+      "osm_id": 3012068697,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南柏",
+      "name_kana": "みなみかしわ",
+      "name_translations": {
+        "en": "Minami-Kashiwa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8446196,
+      "longitude": 139.9542125
+    },
+    {
+      "id": "jp_chiba_station_3012068699",
+      "osm_id": 3012068699,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oto"
+      },
+      "operator": "JR東日本",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8903536,
+      "longitude": 140.4584941
+    },
+    {
+      "id": "jp_chiba_station_3012068700",
+      "osm_id": 3012068700,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "天王台",
+      "name_kana": "てんのうだい",
+      "name_translations": {
+        "en": "Tennodai"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JJ09;JL31",
+      "latitude": 35.8725271,
+      "longitude": 140.0408889
+    },
+    {
+      "id": "jp_chiba_station_3012068701",
+      "osm_id": 3012068701,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "安食",
+      "name_kana": "あじき",
+      "name_translations": {
+        "en": "Ajiki"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8357152,
+      "longitude": 140.2420518
+    },
+    {
+      "id": "jp_chiba_station_3012068702",
+      "osm_id": 3012068702,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "布佐",
+      "name_kana": "ふさ",
+      "name_translations": {
+        "en": "Fusa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8490121,
+      "longitude": 140.1331197
+    },
+    {
+      "id": "jp_chiba_station_3012068703",
+      "osm_id": 3012068703,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "我孫子",
+      "name_kana": "あびこ",
+      "name_translations": {
+        "en": "Abiko"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.872742,
+      "longitude": 140.0107711
+    },
+    {
+      "id": "jp_chiba_station_3012068704",
+      "osm_id": 3012068704,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新木",
+      "name_kana": "あらき",
+      "name_translations": {
+        "en": "Araki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8623295,
+      "longitude": 140.1071831
+    },
+    {
+      "id": "jp_chiba_station_3012068705",
+      "osm_id": 3012068705,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新松戸",
+      "name_kana": "しんまつど",
+      "name_translations": {
+        "en": "Shin-Matsudo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8253729,
+      "longitude": 139.9211293
+    },
+    {
+      "id": "jp_chiba_station_3012068706",
+      "osm_id": 3012068706,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木下",
+      "name_kana": "きおろし",
+      "name_translations": {
+        "en": "Kioroshi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8389123,
+      "longitude": 140.1483223
+    },
+    {
+      "id": "jp_chiba_station_3012068707",
+      "osm_id": 3012068707,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東我孫子",
+      "name_kana": "ひがしあびこ",
+      "name_translations": {
+        "en": "Higashi-Abiko"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8689824,
+      "longitude": 140.0476509
+    },
+    {
+      "id": "jp_chiba_station_3012068708",
+      "osm_id": 3012068708,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "松戸",
+      "name_kana": "まつど",
+      "name_translations": {
+        "en": "Matsudo"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7843061,
+      "longitude": 139.9009417
+    },
+    {
+      "id": "jp_chiba_station_3012068710",
+      "osm_id": 3012068710,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏",
+      "name_kana": "かしわ",
+      "name_translations": {
+        "en": "Kashiwa"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": "JJ07;JL28",
+      "latitude": 35.8623263,
+      "longitude": 139.9710655
+    },
+    {
+      "id": "jp_chiba_station_3012068711",
+      "osm_id": 3012068711,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "湖北",
+      "name_kana": "こほく",
+      "name_translations": {
+        "en": "Kohoku"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8672452,
+      "longitude": 140.0777789
+    },
+    {
+      "id": "jp_chiba_station_3012068712",
+      "osm_id": 3012068712,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "香取",
+      "name_kana": "かとり",
+      "name_translations": {
+        "en": "Katori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8979896,
+      "longitude": 140.5320045
+    },
+    {
+      "id": "jp_chiba_station_3012068713",
+      "osm_id": 3012068713,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "馬橋",
+      "name_kana": "まばし",
+      "name_translations": {
+        "en": "Mabashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8116335,
+      "longitude": 139.9173079
+    },
+    {
+      "id": "jp_chiba_station_3014657226",
+      "osm_id": 3014657226,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三門",
+      "name_kana": "みかど",
+      "name_translations": {
+        "en": "Mikado"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2823898,
+      "longitude": 140.391606
+    },
+    {
+      "id": "jp_chiba_station_3014657227",
+      "osm_id": 3014657227,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上総一ノ宮",
+      "name_kana": "かずさいちのみや",
+      "name_translations": {
+        "en": "Kazusa-Ichinomiya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3736792,
+      "longitude": 140.365021
+    },
+    {
+      "id": "jp_chiba_station_3014657228",
+      "osm_id": 3014657228,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上総清川",
+      "name_kana": "かずさきよかわ",
+      "name_translations": {
+        "en": "Kazusa-Kiyokawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3909493,
+      "longitude": 139.9655402
+    },
+    {
+      "id": "jp_chiba_station_3014657229",
+      "osm_id": 3014657229,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上総湊",
+      "name_kana": "かずさみなと",
+      "name_translations": {
+        "en": "Kazusa-Minato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2222837,
+      "longitude": 139.8712604
+    },
+    {
+      "id": "jp_chiba_station_3014657230",
+      "osm_id": 3014657230,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上総興津",
+      "name_kana": "かずさおきつ",
+      "name_translations": {
+        "en": "Kazusa-Okitsu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1372413,
+      "longitude": 140.250935
+    },
+    {
+      "id": "jp_chiba_station_3014657231",
+      "osm_id": 3014657231,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "九重",
+      "name_kana": "ここのえ",
+      "name_translations": {
+        "en": "Kokonoe"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.997681,
+      "longitude": 139.9110908
+    },
+    {
+      "id": "jp_chiba_station_3014657232",
+      "osm_id": 3014657232,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "五井",
+      "name_kana": "ごい",
+      "name_translations": {
+        "en": "Goi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5130963,
+      "longitude": 140.0895617
+    },
+    {
+      "id": "jp_chiba_station_3014683033",
+      "osm_id": 3014683033,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐貫町",
+      "name_kana": "さぬきまち",
+      "name_translations": {
+        "en": "Sanukimachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2606226,
+      "longitude": 139.8760746
+    },
+    {
+      "id": "jp_chiba_station_3014683034",
+      "osm_id": 3014683034,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "保田",
+      "name_kana": "ほた",
+      "name_translations": {
+        "en": "Hota"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1410607,
+      "longitude": 139.8383441
+    },
+    {
+      "id": "jp_chiba_station_3014683035",
+      "osm_id": 3014683035,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八幡宿",
+      "name_kana": "やわたじゅく",
+      "name_translations": {
+        "en": "Yawatajuku"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5362629,
+      "longitude": 140.1201444
+    },
+    {
+      "id": "jp_chiba_station_3014683036",
+      "osm_id": 3014683036,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八積",
+      "name_kana": "やつみ",
+      "name_translations": {
+        "en": "Yatsumi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4037322,
+      "longitude": 140.345609
+    },
+    {
+      "id": "jp_chiba_station_3014683037",
+      "osm_id": 3014683037,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "勝浦",
+      "name_kana": "かつうら",
+      "name_translations": {
+        "en": "Katsuura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1530976,
+      "longitude": 140.3128799
+    },
+    {
+      "id": "jp_chiba_station_3014683038",
+      "osm_id": 3014683038,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "十二橋",
+      "name_kana": "じゅうにきょう",
+      "name_translations": {
+        "en": "Junikyo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9172538,
+      "longitude": 140.545775
+    },
+    {
+      "id": "jp_chiba_station_3014683039",
+      "osm_id": 3014683039,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千倉",
+      "name_kana": "ちくら",
+      "name_translations": {
+        "en": "Chikura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9767161,
+      "longitude": 139.9546792
+    },
+    {
+      "id": "jp_chiba_station_3014683040",
+      "osm_id": 3014683040,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千歳",
+      "name_kana": "ちとせ",
+      "name_translations": {
+        "en": "Chitose"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9916497,
+      "longitude": 139.966465
+    },
+    {
+      "id": "jp_chiba_station_3014683041",
+      "osm_id": 3014683041,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南三原",
+      "name_kana": "みなみはら",
+      "name_translations": {
+        "en": "Minamihara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0210744,
+      "longitude": 139.9792264
+    },
+    {
+      "id": "jp_chiba_station_3014683042",
+      "osm_id": 3014683042,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "君津",
+      "name_kana": "きみつ",
+      "name_translations": {
+        "en": "Kimitsu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3336304,
+      "longitude": 139.8955052
+    },
+    {
+      "id": "jp_chiba_station_3014683043",
+      "osm_id": 3014683043,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "和田浦",
+      "name_kana": "わだうら",
+      "name_translations": {
+        "en": "Wadaura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0418145,
+      "longitude": 140.0194922
+    },
+    {
+      "id": "jp_chiba_station_3014683044",
+      "osm_id": 3014683044,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土気",
+      "name_kana": "とけ",
+      "name_translations": {
+        "en": "Toke"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5308674,
+      "longitude": 140.2697788
+    },
+    {
+      "id": "jp_chiba_station_3014683045",
+      "osm_id": 3014683045,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大原",
+      "name_kana": "おおはら",
+      "name_translations": {
+        "en": "Ohara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "外房線",
+      "ref": null,
+      "latitude": 35.2508589,
+      "longitude": 140.3909878
+    },
+    {
+      "id": "jp_chiba_station_3014683046",
+      "osm_id": 3014683046,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大網",
+      "name_kana": "おおあみ",
+      "name_translations": {
+        "en": "Oami"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5228296,
+      "longitude": 140.3110002
+    },
+    {
+      "id": "jp_chiba_station_3014683047",
+      "osm_id": 3014683047,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大貫",
+      "name_kana": "おおぬき",
+      "name_translations": {
+        "en": "Onuki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2910811,
+      "longitude": 139.8556052
+    },
+    {
+      "id": "jp_chiba_station_3014683048",
+      "osm_id": 3014683048,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "太東",
+      "name_kana": "たいとう",
+      "name_translations": {
+        "en": "Taito"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3199478,
+      "longitude": 140.3810824
+    },
+    {
+      "id": "jp_chiba_station_3014683049",
+      "osm_id": 3014683049,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "太海",
+      "name_kana": "ふとみ",
+      "name_translations": {
+        "en": "Futomi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.08183,
+      "longitude": 140.0962597
+    },
+    {
+      "id": "jp_chiba_station_3014683050",
+      "osm_id": 3014683050,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "姉ケ崎",
+      "name_kana": "あねがさき",
+      "name_translations": {
+        "en": "Anegasaki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4785994,
+      "longitude": 140.0421725
+    },
+    {
+      "id": "jp_chiba_station_3014683051",
+      "osm_id": 3014683051,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "安房勝山",
+      "name_kana": "あわかつやま",
+      "name_translations": {
+        "en": "Awa-Katsuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1137521,
+      "longitude": 139.8333501
+    },
+    {
+      "id": "jp_chiba_station_3014683052",
+      "osm_id": 3014683052,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安房天津",
+      "name_kana": "あわあまつ",
+      "name_translations": {
+        "en": "Awa-Amatsu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1255783,
+      "longitude": 140.1544577
+    },
+    {
+      "id": "jp_chiba_station_3014683053",
+      "osm_id": 3014683053,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安房小湊",
+      "name_kana": "あわこみなと",
+      "name_translations": {
+        "en": "Awa-Kominato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1286886,
+      "longitude": 140.1903176
+    },
+    {
+      "id": "jp_chiba_station_3014683055",
+      "osm_id": 3014683055,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "富浦",
+      "name_kana": "とみうら",
+      "name_translations": {
+        "en": "Tomiura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0452625,
+      "longitude": 139.8377984
+    },
+    {
+      "id": "jp_chiba_station_3014683056",
+      "osm_id": 3014683056,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩井",
+      "name_kana": "いわい",
+      "name_translations": {
+        "en": "Iwai"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0926346,
+      "longitude": 139.8496343
+    },
+    {
+      "id": "jp_chiba_station_3014683057",
+      "osm_id": 3014683057,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "巌根",
+      "name_kana": "いわね",
+      "name_translations": {
+        "en": "Iwane"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4144082,
+      "longitude": 139.9335177
+    },
+    {
+      "id": "jp_chiba_station_3014683058",
+      "osm_id": 3014683058,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "御宿",
+      "name_kana": "おんじゅく",
+      "name_translations": {
+        "en": "Onjuku"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1877142,
+      "longitude": 140.3514883
+    },
+    {
+      "id": "jp_chiba_station_3014683059",
+      "osm_id": 3014683059,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新茂原",
+      "name_kana": "しんもばら",
+      "name_translations": {
+        "en": "Shin-Mobara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4495692,
+      "longitude": 140.299985
+    },
+    {
+      "id": "jp_chiba_station_3014683060",
+      "osm_id": 3014683060,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木更津",
+      "name_kana": "きさらづ",
+      "name_translations": {
+        "en": "Kisarazu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3816066,
+      "longitude": 139.9262431
+    },
+    {
+      "id": "jp_chiba_station_3014683061",
+      "osm_id": 3014683061,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本千葉",
+      "name_kana": "ほんちば",
+      "name_translations": {
+        "en": "Hon-Chiba"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6011214,
+      "longitude": 140.1210196
+    },
+    {
+      "id": "jp_chiba_station_3014683062",
+      "osm_id": 3014683062,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本納",
+      "name_kana": "ほんのう",
+      "name_translations": {
+        "en": "Honno"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4821242,
+      "longitude": 140.307407
+    },
+    {
+      "id": "jp_chiba_station_3014683063",
+      "osm_id": 3014683063,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東浪見",
+      "name_kana": "とらみ",
+      "name_translations": {
+        "en": "Torami"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3471676,
+      "longitude": 140.3766993
+    },
+    {
+      "id": "jp_chiba_station_3014683064",
+      "osm_id": 3014683064,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東清川",
+      "name_kana": "ひがしきよかわ",
+      "name_translations": {
+        "en": "Higashi-Kiyokawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3900156,
+      "longitude": 139.985803
+    },
+    {
+      "id": "jp_chiba_station_3014683065",
+      "osm_id": 3014683065,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東金",
+      "name_kana": "とうがね",
+      "name_translations": {
+        "en": "Togane"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5602766,
+      "longitude": 140.3636144
+    },
+    {
+      "id": "jp_chiba_station_3014683066",
+      "osm_id": 3014683066,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "横田",
+      "name_kana": "よこた",
+      "name_translations": {
+        "en": "Yokota"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3861086,
+      "longitude": 140.0203412
+    },
+    {
+      "id": "jp_chiba_station_3014683067",
+      "osm_id": 3014683067,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "永田",
+      "name_kana": "ながた",
+      "name_translations": {
+        "en": "Nagata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5033707,
+      "longitude": 140.3110704
+    },
+    {
+      "id": "jp_chiba_station_3014683068",
+      "osm_id": 3014683068,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "求名",
+      "name_kana": "ぐみょう",
+      "name_translations": {
+        "en": "Gumyo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5799098,
+      "longitude": 140.396273
+    },
+    {
+      "id": "jp_chiba_station_3014683069",
+      "osm_id": 3014683069,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "江見",
+      "name_kana": "えみ",
+      "name_translations": {
+        "en": "Emi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.062414,
+      "longitude": 140.0613872
+    },
+    {
+      "id": "jp_chiba_station_3014683070",
+      "osm_id": 3014683070,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浜野",
+      "name_kana": "はまの",
+      "name_translations": {
+        "en": "Hamano"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.552028,
+      "longitude": 140.1321103
+    },
+    {
+      "id": "jp_chiba_station_3014683071",
+      "osm_id": 3014683071,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浜金谷",
+      "name_kana": "はまかなや",
+      "name_translations": {
+        "en": "Hama-Kanaya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1681374,
+      "longitude": 139.8223787
+    },
+    {
+      "id": "jp_chiba_station_3014683072",
+      "osm_id": 3014683072,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浪花",
+      "name_kana": "なみはな",
+      "name_translations": {
+        "en": "Namihana"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2227019,
+      "longitude": 140.3794316
+    },
+    {
+      "id": "jp_chiba_station_3014683073",
+      "osm_id": 3014683073,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "祇園",
+      "name_kana": "ぎおん",
+      "name_translations": {
+        "en": "Gion"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3915242,
+      "longitude": 139.9483041
+    },
+    {
+      "id": "jp_chiba_station_3014683074",
+      "osm_id": 3014683074,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福俵",
+      "name_kana": "ふくたわら",
+      "name_translations": {
+        "en": "Fukutawara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5459418,
+      "longitude": 140.3414858
+    },
+    {
+      "id": "jp_chiba_station_3014683075",
+      "osm_id": 3014683075,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "竹岡",
+      "name_kana": "たけおか",
+      "name_translations": {
+        "en": "Takeoka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1976673,
+      "longitude": 139.8298521
+    },
+    {
+      "id": "jp_chiba_station_3014683076",
+      "osm_id": 3014683076,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "茂原",
+      "name_kana": "もばら",
+      "name_translations": {
+        "en": "Mobara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4269216,
+      "longitude": 140.3038748
+    },
+    {
+      "id": "jp_chiba_station_3014683077",
+      "osm_id": 3014683077,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "蘇我",
+      "name_kana": "そが",
+      "name_translations": {
+        "en": "Soga"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5813725,
+      "longitude": 140.1311573
+    },
+    {
+      "id": "jp_chiba_station_3014683078",
+      "osm_id": 3014683078,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "行川アイランド",
+      "name_kana": "なめがわあいらんど",
+      "name_translations": {
+        "en": "Namegawa-Island"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1182556,
+      "longitude": 140.2259359
+    },
+    {
+      "id": "jp_chiba_station_3014683079",
+      "osm_id": 3014683079,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "袖ケ浦",
+      "name_kana": "そでがうら",
+      "name_translations": {
+        "en": "Sodegaura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4321683,
+      "longitude": 139.9578021
+    },
+    {
+      "id": "jp_chiba_station_3014683080",
+      "osm_id": 3014683080,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "誉田",
+      "name_kana": "ほんだ",
+      "name_translations": {
+        "en": "Honda"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5470106,
+      "longitude": 140.2138696
+    },
+    {
+      "id": "jp_chiba_station_3014683081",
+      "osm_id": 3014683081,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "那古船形",
+      "name_kana": "なこふなかた",
+      "name_translations": {
+        "en": "Nako-Funakata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0284756,
+      "longitude": 139.8515617
+    },
+    {
+      "id": "jp_chiba_station_3014683082",
+      "osm_id": 3014683082,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "鎌取",
+      "name_kana": "かまとり",
+      "name_translations": {
+        "en": "Kamatori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5628336,
+      "longitude": 140.1785002
+    },
+    {
+      "id": "jp_chiba_station_3014683083",
+      "osm_id": 3014683083,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長浦",
+      "name_kana": "ながうら",
+      "name_translations": {
+        "en": "Nagaura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4504888,
+      "longitude": 139.9956187
+    },
+    {
+      "id": "jp_chiba_station_3014683084",
+      "osm_id": 3014683084,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長者町",
+      "name_kana": "ちょうじゃまち",
+      "name_translations": {
+        "en": "Chojamachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2958853,
+      "longitude": 140.3850371
+    },
+    {
+      "id": "jp_chiba_station_3014683085",
+      "osm_id": 3014683085,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "青堀",
+      "name_kana": "あおほり",
+      "name_translations": {
+        "en": "Aohori"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3303196,
+      "longitude": 139.8582901
+    },
+    {
+      "id": "jp_chiba_station_3014683086",
+      "osm_id": 3014683086,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "館山",
+      "name_kana": "たてやま",
+      "name_translations": {
+        "en": "Tateyama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9959209,
+      "longitude": 139.8618906
+    },
+    {
+      "id": "jp_chiba_station_3014683087",
+      "osm_id": 3014683087,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鵜原",
+      "name_kana": "うばら",
+      "name_translations": {
+        "en": "Ubara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.140844,
+      "longitude": 140.2784674
+    },
+    {
+      "id": "jp_chiba_station_3016197319",
+      "osm_id": 3016197319,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "下郡",
+      "name_kana": "しもごおり",
+      "name_translations": {
+        "en": "Shimogori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3553448,
+      "longitude": 140.0554424
+    },
+    {
+      "id": "jp_chiba_station_3016197320",
+      "osm_id": 3016197320,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "小櫃",
+      "name_kana": "おびつ",
+      "name_translations": {
+        "en": "Obitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3284083,
+      "longitude": 140.0599164
+    },
+    {
+      "id": "jp_chiba_station_3016197321",
+      "osm_id": 3016197321,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "東横田",
+      "name_kana": "ひがしよこた",
+      "name_translations": {
+        "en": "Higashi-Yokota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3862677,
+      "longitude": 140.036446
+    },
+    {
+      "id": "jp_chiba_station_3016197322",
+      "osm_id": 3016197322,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬来田",
+      "name_kana": "まくた",
+      "name_translations": {
+        "en": "Makuta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3666754,
+      "longitude": 140.0586872
+    },
+    {
+      "id": "jp_chiba_station_3100212900",
+      "osm_id": 3100212900,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "仲ノ町",
+      "name_kana": "なかのちょう",
+      "name_translations": {
+        "en": "Nakanocho"
+      },
+      "operator": "銚子電気鉄道",
+      "network": null,
+      "ref": "CD02",
+      "latitude": 35.7288796,
+      "longitude": 140.8335069
+    },
+    {
+      "id": "jp_chiba_station_3100212901",
+      "osm_id": 3100212901,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "君ヶ浜",
+      "name_kana": "きみがはま",
+      "name_translations": {
+        "en": "Kimigahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7135504,
+      "longitude": 140.8605022
+    },
+    {
+      "id": "jp_chiba_station_3100212902",
+      "osm_id": 3100212902,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "外川",
+      "name_kana": "とかわ",
+      "name_translations": {
+        "en": "Tokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6992536,
+      "longitude": 140.857025
+    },
+    {
+      "id": "jp_chiba_station_3100212903",
+      "osm_id": 3100212903,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "海鹿島",
+      "name_kana": "あしかじま",
+      "name_translations": {
+        "en": "Ashikajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7217916,
+      "longitude": 140.8635436
+    },
+    {
+      "id": "jp_chiba_station_3100212904",
+      "osm_id": 3100212904,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "犬吠",
+      "name_kana": "いぬぼう",
+      "name_translations": {
+        "en": "Inubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.706245,
+      "longitude": 140.861175
+    },
+    {
+      "id": "jp_chiba_station_3100212905",
+      "osm_id": 3100212905,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠上黒生",
+      "name_kana": "かさがみくろはね",
+      "name_translations": {
+        "en": "Kasagami-Kurohae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CD05",
+      "latitude": 35.7284288,
+      "longitude": 140.8570855
+    },
+    {
+      "id": "jp_chiba_station_3100212906",
+      "osm_id": 3100212906,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "西海鹿島",
+      "name_kana": "にしあしかじま",
+      "name_translations": {
+        "en": "Nishi-Ashikajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7254126,
+      "longitude": 140.8598568
+    },
+    {
+      "id": "jp_chiba_station_3100212907",
+      "osm_id": 3100212907,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "観音",
+      "name_kana": "かんのん",
+      "name_translations": {
+        "en": "Kannon"
+      },
+      "operator": "銚子電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7290391,
+      "longitude": 140.8402233
+    },
+    {
+      "id": "jp_chiba_station_3528531078",
+      "osm_id": 3528531078,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "二俣新町",
+      "name_kana": "ふたまたしんまち",
+      "name_translations": {
+        "en": "Futamata-Shinmachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6913813,
+      "longitude": 139.959533
+    },
+    {
+      "id": "jp_chiba_station_3654391816",
+      "osm_id": 3654391816,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "愛宕",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Atago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD16",
+      "latitude": 35.9505485,
+      "longitude": 139.8645688
+    },
+    {
+      "id": "jp_chiba_station_3654391818",
+      "osm_id": 3654391818,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "江戸川台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Edogawadai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD20",
+      "latitude": 35.8974601,
+      "longitude": 139.9103806
+    },
+    {
+      "id": "jp_chiba_station_3654392227",
+      "osm_id": 3654392227,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "初石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatsuishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD21",
+      "latitude": 35.8841332,
+      "longitude": 139.9177079
+    },
+    {
+      "id": "jp_chiba_station_3654392234",
+      "osm_id": 3654392234,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "鎌ヶ谷",
+      "name_kana": "かまがや",
+      "name_translations": {
+        "en": "Kamagaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD31",
+      "latitude": 35.7640464,
+      "longitude": 139.9973523
+    },
+    {
+      "id": "jp_chiba_station_3654392242",
+      "osm_id": 3654392242,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "七光台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanakōdai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD14",
+      "latitude": 35.970634,
+      "longitude": 139.8529349
+    },
+    {
+      "id": "jp_chiba_station_3654392245",
+      "osm_id": 3654392245,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "野田市",
+      "name_kana": "のだし",
+      "name_translations": {
+        "en": "Nodashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD17",
+      "latitude": 35.9435663,
+      "longitude": 139.8706476
+    },
+    {
+      "id": "jp_chiba_station_3654392256",
+      "osm_id": 3654392256,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "逆井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakasai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD27",
+      "latitude": 35.8232385,
+      "longitude": 139.9839107
+    },
+    {
+      "id": "jp_chiba_station_3654392259",
+      "osm_id": 3654392259,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "清水公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimizu-Kōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD15",
+      "latitude": 35.9590935,
+      "longitude": 139.86011
+    },
+    {
+      "id": "jp_chiba_station_3654392263",
+      "osm_id": 3654392263,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "新船橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Funabashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD34",
+      "latitude": 35.7114485,
+      "longitude": 139.9797963
+    },
+    {
+      "id": "jp_chiba_station_3654392265",
+      "osm_id": 3654392265,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "新鎌ヶ谷",
+      "name_kana": "しんかまがや",
+      "name_translations": {
+        "en": "Shin-Kamagaya"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TD30",
+      "latitude": 35.7803426,
+      "longitude": 139.999507
+    },
+    {
+      "id": "jp_chiba_station_3654392268",
+      "osm_id": 3654392268,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "新柏",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Kashiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD25",
+      "latitude": 35.838506,
+      "longitude": 139.9666532
+    },
+    {
+      "id": "jp_chiba_station_3654392270",
+      "osm_id": 3654392270,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "高柳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takayanagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD28",
+      "latitude": 35.8081725,
+      "longitude": 139.9988464
+    },
+    {
+      "id": "jp_chiba_station_3654392276",
+      "osm_id": 3654392276,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "塚田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD33",
+      "latitude": 35.7216684,
+      "longitude": 139.9825253
+    },
+    {
+      "id": "jp_chiba_station_3654392279",
+      "osm_id": 3654392279,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "運河",
+      "name_kana": "うんが",
+      "name_translations": {
+        "en": "Unga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD19",
+      "latitude": 35.9140176,
+      "longitude": 139.9060619
+    },
+    {
+      "id": "jp_chiba_station_3654392327",
+      "osm_id": 3654392327,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬込沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Magomezawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD32",
+      "latitude": 35.741571,
+      "longitude": 139.9922561
+    },
+    {
+      "id": "jp_chiba_station_3654392332",
+      "osm_id": 3654392332,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "六実",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD29",
+      "latitude": 35.7938671,
+      "longitude": 139.9993452
+    },
+    {
+      "id": "jp_chiba_station_3654392335",
+      "osm_id": 3654392335,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "流山おおたかの森",
+      "name_kana": "ながれやまおおたかのもり",
+      "name_translations": {
+        "en": "Nagareyama-Otakanomori"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TD22",
+      "latitude": 35.8720262,
+      "longitude": 139.9258942
+    },
+    {
+      "id": "jp_chiba_station_3690521151",
+      "osm_id": 3690521151,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬立",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umatate"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4236725,
+      "longitude": 140.1148775
+    },
+    {
+      "id": "jp_chiba_station_3730429155",
+      "osm_id": 3730429155,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "稲毛海岸",
+      "name_kana": "いなげかいがん",
+      "name_translations": {
+        "en": "Inage-Kaigan"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6294925,
+      "longitude": 140.0735654
+    },
+    {
+      "id": "jp_chiba_station_3730429159",
+      "osm_id": 3730429159,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "海浜幕張",
+      "name_kana": "かいひんまくはり",
+      "name_translations": {
+        "en": "Kaihin-Makuhari"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6484234,
+      "longitude": 140.041921
+    },
+    {
+      "id": "jp_chiba_station_3730429165",
+      "osm_id": 3730429165,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "検見川浜",
+      "name_kana": "けみがわはま",
+      "name_translations": {
+        "en": "Kemigawahama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6372071,
+      "longitude": 140.0590771
+    },
+    {
+      "id": "jp_chiba_station_3730429171",
+      "osm_id": 3730429171,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南船橋",
+      "name_kana": "みなみふなばし",
+      "name_translations": {
+        "en": "Minami-Funabashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JE11",
+      "latitude": 35.6819756,
+      "longitude": 139.9955434
+    },
+    {
+      "id": "jp_chiba_station_3730429177",
+      "osm_id": 3730429177,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新習志野",
+      "name_kana": "しんならしの",
+      "name_translations": {
+        "en": "Shin-Narashino"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6673499,
+      "longitude": 140.0128786
+    },
+    {
+      "id": "jp_chiba_station_3896490890",
+      "osm_id": 3896490890,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総亀山",
+      "name_kana": "かずさかめやま",
+      "name_translations": {
+        "en": "Kazusa-Kameyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.233083,
+      "longitude": 140.0898393
+    },
+    {
+      "id": "jp_chiba_station_3896490891",
+      "osm_id": 3896490891,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "久留里",
+      "name_kana": "くるり",
+      "name_translations": {
+        "en": "Kururi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2958456,
+      "longitude": 140.07575
+    },
+    {
+      "id": "jp_chiba_station_3896556676",
+      "osm_id": 3896556676,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Kubo"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3675136,
+      "longitude": 140.154606
+    },
+    {
+      "id": "jp_chiba_bus_terminal_3922753259",
+      "osm_id": 3922753259,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "木更津金田バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4318372,
+      "longitude": 139.9212035
+    },
+    {
+      "id": "jp_chiba_bus_terminal_3922804857",
+      "osm_id": 3922804857,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "君津バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3185163,
+      "longitude": 139.9358865
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_4683206202",
+      "osm_id": 4683206202,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "館山港ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tateyama Port Passenger Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9902449,
+      "longitude": 139.8547009
+    },
+    {
+      "id": "jp_chiba_bus_terminal_5312647231",
+      "osm_id": 5312647231,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "南行徳駅バスロータリー",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6726311,
+      "longitude": 139.9014464
+    },
+    {
+      "id": "jp_chiba_bus_terminal_5824650277",
+      "osm_id": 5824650277,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高塚",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7630207,
+      "longitude": 139.9416526
+    },
+    {
+      "id": "jp_chiba_bus_terminal_5839174044",
+      "osm_id": 5839174044,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "野菊野団地集会所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7795375,
+      "longitude": 139.9128926
+    },
+    {
+      "id": "jp_chiba_station_6051758678",
+      "osm_id": 6051758678,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅郷",
+      "name_kana": "うめさと",
+      "name_translations": {
+        "en": "Umesato"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TD18",
+      "latitude": 35.9313573,
+      "longitude": 139.891223
+    },
+    {
+      "id": "jp_chiba_station_6229725460",
+      "osm_id": 6229725460,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "リゾートゲートウェイ・ステーション",
+      "name_kana": "りぞーとげーとうぇい・すてーしょん",
+      "name_translations": {
+        "en": "Resort Gateway Station"
+      },
+      "operator": "舞浜リゾートライン",
+      "network": "ディズニーリゾートライン",
+      "ref": null,
+      "latitude": 35.6352628,
+      "longitude": 139.8851168
+    },
+    {
+      "id": "jp_chiba_bus_terminal_6310510787",
+      "osm_id": 6310510787,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "酒々井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shisui bus station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7367347,
+      "longitude": 140.2702496
+    },
+    {
+      "id": "jp_chiba_bus_terminal_6482048280",
+      "osm_id": 6482048280,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "君津製鐵所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3569393,
+      "longitude": 139.902032
+    },
+    {
+      "id": "jp_chiba_bus_terminal_6482048281",
+      "osm_id": 6482048281,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "君津駅北口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3345886,
+      "longitude": 139.8949456
+    },
+    {
+      "id": "jp_chiba_station_6725224628",
+      "osm_id": 6725224628,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "公園",
+      "name_kana": "こうえん",
+      "name_translations": {
+        "en": "Koen"
+      },
+      "operator": "山万",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7307393,
+      "longitude": 140.1537491
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7159719350",
+      "osm_id": 7159719350,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "郷土博物館入口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7278378,
+      "longitude": 140.1179548
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7159729436",
+      "osm_id": 7159729436,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "今宿",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6933716,
+      "longitude": 140.1581657
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7159746754",
+      "osm_id": 7159746754,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "上志津原",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7014784,
+      "longitude": 140.145112
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7159760389",
+      "osm_id": 7159760389,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西志津小学校",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7059926,
+      "longitude": 140.1395123
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7159760390",
+      "osm_id": 7159760390,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "千葉銀行前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "東洋バス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7125768,
+      "longitude": 140.1260877
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7159760395",
+      "osm_id": 7159760395,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "開拓地",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6993142,
+      "longitude": 140.150035
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7160047896",
+      "osm_id": 7160047896,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八千代松陰高校前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7405511,
+      "longitude": 140.1219832
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7160116555",
+      "osm_id": 7160116555,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "イトーヨーカドー",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7219483,
+      "longitude": 140.1166046
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7178295479",
+      "osm_id": 7178295479,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "多古台バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takodai Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7323658,
+      "longitude": 140.4614669
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7271738799",
+      "osm_id": 7271738799,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "富津浅間山",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2361612,
+      "longitude": 139.888254
+    },
+    {
+      "id": "jp_chiba_bus_terminal_7472896451",
+      "osm_id": 7472896451,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR成田駅中央口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7773845,
+      "longitude": 140.3143517
+    },
+    {
+      "id": "jp_chiba_station_7753516213",
+      "osm_id": 7753516213,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏たなか",
+      "name_kana": "かしわたなか",
+      "name_translations": {
+        "en": "Kashiwa-Tanaka"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "14",
+      "latitude": 35.9110036,
+      "longitude": 139.9575718
+    },
+    {
+      "id": "jp_chiba_station_7756039209",
+      "osm_id": 7756039209,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "南流山",
+      "name_kana": "みなみながれやま",
+      "name_translations": {
+        "en": "Minami-Nagareyama"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "TX10",
+      "latitude": 35.8385114,
+      "longitude": 139.9030689
+    },
+    {
+      "id": "jp_chiba_station_7756043026",
+      "osm_id": 7756043026,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "流山セントラルパーク",
+      "name_kana": "ながれやませんとらるぱーく",
+      "name_translations": {
+        "en": "Nagareyama-centralpark"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "11",
+      "latitude": 35.854607,
+      "longitude": 139.9152399
+    },
+    {
+      "id": "jp_chiba_station_7756044537",
+      "osm_id": 7756044537,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏の葉キャンパス",
+      "name_kana": "かしわのはきゃんぱす",
+      "name_translations": {
+        "en": "Kashiwanoha-campus"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "13",
+      "latitude": 35.8934481,
+      "longitude": 139.9525326
+    },
+    {
+      "id": "jp_chiba_station_7791605912",
+      "osm_id": 7791605912,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "toei",
+      "name": "本八幡",
+      "name_kana": "もとやわた",
+      "name_translations": {
+        "en": "Motoyawata"
+      },
+      "operator": "東京都交通局",
+      "network": "都営地下鉄",
+      "ref": "S21",
+      "latitude": 35.7237135,
+      "longitude": 139.9270611
+    },
+    {
+      "id": "jp_chiba_station_7829693340",
+      "osm_id": 7829693340,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総村上",
+      "name_kana": "かずさむらかみ",
+      "name_translations": {
+        "en": "Kazusa-Murakami"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4962381,
+      "longitude": 140.1002691
+    },
+    {
+      "id": "jp_chiba_station_7829693341",
+      "osm_id": 7829693341,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総三又",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Mitsumata"
+      },
+      "operator": "小湊鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4660327,
+      "longitude": 140.1267656
+    },
+    {
+      "id": "jp_chiba_station_7829693342",
+      "osm_id": 7829693342,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成大和田",
+      "name_kana": "けいせいおおわだ",
+      "name_translations": {
+        "en": "Keisei-Owada"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS30",
+      "latitude": 35.7120744,
+      "longitude": 140.1079464
+    },
+    {
+      "id": "jp_chiba_station_7858025487",
+      "osm_id": 7858025487,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "公津の杜",
+      "name_kana": "こうづのもり",
+      "name_translations": {
+        "en": "Kozunomori"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS39",
+      "latitude": 35.7604813,
+      "longitude": 140.2952613
+    },
+    {
+      "id": "jp_chiba_station_7858116081",
+      "osm_id": 7858116081,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "菅野",
+      "name_kana": "すがの",
+      "name_translations": {
+        "en": "Sugano"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS15",
+      "latitude": 35.7282185,
+      "longitude": 139.9195583
+    },
+    {
+      "id": "jp_chiba_station_7858116083",
+      "osm_id": 7858116083,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "市川真間",
+      "name_kana": "いちかわまま",
+      "name_translations": {
+        "en": "Ichikawamama"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS14",
+      "latitude": 35.7313977,
+      "longitude": 139.9115626
+    },
+    {
+      "id": "jp_chiba_station_7858116084",
+      "osm_id": 7858116084,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "国府台",
+      "name_kana": "こうのだい",
+      "name_translations": {
+        "en": "Konodai"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS13",
+      "latitude": 35.7364217,
+      "longitude": 139.9025067
+    },
+    {
+      "id": "jp_chiba_station_7858142412",
+      "osm_id": 7858142412,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成西船",
+      "name_kana": "けいせいにしふな",
+      "name_translations": {
+        "en": "Keisei Nishifuna"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS20",
+      "latitude": 35.7116529,
+      "longitude": 139.9589834
+    },
+    {
+      "id": "jp_chiba_station_7858142414",
+      "osm_id": 7858142414,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "東中山",
+      "name_kana": "ひがしなかやま",
+      "name_translations": {
+        "en": "Higashi-Nakayama"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS19",
+      "latitude": 35.7144727,
+      "longitude": 139.9525957
+    },
+    {
+      "id": "jp_chiba_station_7858142417",
+      "osm_id": 7858142417,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "鬼越",
+      "name_kana": "おにごえ",
+      "name_translations": {
+        "en": "Onigoe"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS17",
+      "latitude": 35.7199561,
+      "longitude": 139.9375585
+    },
+    {
+      "id": "jp_chiba_station_7858158401",
+      "osm_id": 7858158401,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成大久保",
+      "name_kana": "けいせいおおくぼ",
+      "name_translations": {
+        "en": "Keisei-Okubo"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS27",
+      "latitude": 35.6859511,
+      "longitude": 140.0481856
+    },
+    {
+      "id": "jp_chiba_station_7858158403",
+      "osm_id": 7858158403,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷津",
+      "name_kana": "やつ",
+      "name_translations": {
+        "en": "Yatsu"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS25",
+      "latitude": 35.6852948,
+      "longitude": 140.0075689
+    },
+    {
+      "id": "jp_chiba_station_7858158405",
+      "osm_id": 7858158405,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "船橋競馬場",
+      "name_kana": "ふなばしけいばじょう",
+      "name_translations": {
+        "en": "Funabashi-Keibajo"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS24",
+      "latitude": 35.689794,
+      "longitude": 139.9979385
+    },
+    {
+      "id": "jp_chiba_station_7858158409",
+      "osm_id": 7858158409,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "大神宮下",
+      "name_kana": "だいじんぐうした",
+      "name_translations": {
+        "en": "Daijingu-Shita"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS23",
+      "latitude": 35.6942913,
+      "longitude": 139.9912517
+    },
+    {
+      "id": "jp_chiba_station_7858159185",
+      "osm_id": 7858159185,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成船橋",
+      "name_kana": "けいせいふなばし",
+      "name_translations": {
+        "en": "Keisei Funabashi"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS22",
+      "latitude": 35.7002308,
+      "longitude": 139.9856338
+    },
+    {
+      "id": "jp_chiba_station_7858159187",
+      "osm_id": 7858159187,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "海神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaijin"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS21",
+      "latitude": 35.705761,
+      "longitude": 139.972098
+    },
+    {
+      "id": "jp_chiba_station_7858159327",
+      "osm_id": 7858159327,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "八千代台",
+      "name_kana": "やちよだい",
+      "name_translations": {
+        "en": "Yachiyodai"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS29",
+      "latitude": 35.7012654,
+      "longitude": 140.0906181
+    },
+    {
+      "id": "jp_chiba_station_7858159331",
+      "osm_id": 7858159331,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "実籾",
+      "name_kana": "みもみ",
+      "name_translations": {
+        "en": "Mimomi"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS28",
+      "latitude": 35.6869069,
+      "longitude": 140.0684242
+    },
+    {
+      "id": "jp_chiba_station_7858182732",
+      "osm_id": 7858182732,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成佐倉",
+      "name_kana": "けいせいさくら",
+      "name_translations": {
+        "en": "Keisei-Sakura"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS35",
+      "latitude": 35.7251893,
+      "longitude": 140.2297242
+    },
+    {
+      "id": "jp_chiba_station_7858182736",
+      "osm_id": 7858182736,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成臼井",
+      "name_kana": "けいせいうすい",
+      "name_translations": {
+        "en": "Keisei-Usui"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS34",
+      "latitude": 35.7299183,
+      "longitude": 140.1808053
+    },
+    {
+      "id": "jp_chiba_station_7858182738",
+      "osm_id": 7858182738,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "ユーカリが丘",
+      "name_kana": "ゆーかりがおか",
+      "name_translations": {
+        "en": "Yukarigaoka"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS33",
+      "latitude": 35.7217309,
+      "longitude": 140.1563758
+    },
+    {
+      "id": "jp_chiba_station_7858182741",
+      "osm_id": 7858182741,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "志津",
+      "name_kana": "しづ",
+      "name_translations": {
+        "en": "Shizu"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS32",
+      "latitude": 35.7174567,
+      "longitude": 140.1449738
+    },
+    {
+      "id": "jp_chiba_station_7858182743",
+      "osm_id": 7858182743,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "勝田台",
+      "name_kana": "かつただい",
+      "name_translations": {
+        "en": "Katsutadai"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS31",
+      "latitude": 35.715463,
+      "longitude": 140.1260447
+    },
+    {
+      "id": "jp_chiba_station_7858255374",
+      "osm_id": 7858255374,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成成田",
+      "name_kana": "けいせいなりた",
+      "name_translations": {
+        "en": "Keisei-Narita"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS40",
+      "latitude": 35.7764435,
+      "longitude": 140.3155186
+    },
+    {
+      "id": "jp_chiba_station_7858255377",
+      "osm_id": 7858255377,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "宗吾参道",
+      "name_kana": "そうごさんどう",
+      "name_translations": {
+        "en": "Sogosando"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS38",
+      "latitude": 35.7526509,
+      "longitude": 140.2810188
+    },
+    {
+      "id": "jp_chiba_station_7858255379",
+      "osm_id": 7858255379,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "京成酒々井",
+      "name_kana": "けいせいしすい",
+      "name_translations": {
+        "en": "Keisei-Shisui"
+      },
+      "operator": "京成電鉄",
+      "network": "京成",
+      "ref": "KS37",
+      "latitude": 35.7367994,
+      "longitude": 140.2700492
+    },
+    {
+      "id": "jp_chiba_station_7858255381",
+      "osm_id": 7858255381,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "大佐倉",
+      "name_kana": "おおさくら",
+      "name_translations": {
+        "en": "Osakura"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS36",
+      "latitude": 35.7301382,
+      "longitude": 140.2510633
+    },
+    {
+      "id": "jp_chiba_station_7858390709",
+      "osm_id": 7858390709,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "井野",
+      "name_kana": "いの",
+      "name_translations": {
+        "en": "Ino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7326736,
+      "longitude": 140.1485968
+    },
+    {
+      "id": "jp_chiba_station_7858390710",
+      "osm_id": 7858390710,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "中学校",
+      "name_kana": "ちゅうがっこう",
+      "name_translations": {
+        "en": "Chugakko"
+      },
+      "operator": "山万",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7402153,
+      "longitude": 140.1483869
+    },
+    {
+      "id": "jp_chiba_station_7858390711",
+      "osm_id": 7858390711,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "女子大",
+      "name_kana": "じょしだい",
+      "name_translations": {
+        "en": "Joshidai"
+      },
+      "operator": "山万",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7382026,
+      "longitude": 140.1549737
+    },
+    {
+      "id": "jp_chiba_station_7858390712",
+      "osm_id": 7858390712,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "地区センター",
+      "name_kana": "ちくせんたー",
+      "name_translations": {
+        "en": "Chikucenter"
+      },
+      "operator": "山万",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7259449,
+      "longitude": 140.1552553
+    },
+    {
+      "id": "jp_chiba_station_7858848010",
+      "osm_id": 7858848010,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "千葉ニュータウン中央",
+      "name_kana": "ちばにゅーたうんちゅうおう",
+      "name_translations": {
+        "en": "Chiba Newtown Chuo"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS12",
+      "latitude": 35.8001351,
+      "longitude": 140.116207
+    },
+    {
+      "id": "jp_chiba_station_7858848020",
+      "osm_id": 7858848020,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "東松戸",
+      "name_kana": "ひがしまつど",
+      "name_translations": {
+        "en": "Higashi-Matsudo"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS05",
+      "latitude": 35.7699563,
+      "longitude": 139.9431054
+    },
+    {
+      "id": "jp_chiba_station_7858848021",
+      "osm_id": 7858848021,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "成田湯川",
+      "name_kana": "なりたゆかわ",
+      "name_translations": {
+        "en": "Narita Yukawa"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS43",
+      "latitude": 35.7995534,
+      "longitude": 140.2913332
+    },
+    {
+      "id": "jp_chiba_station_7865838610",
+      "osm_id": 7865838610,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "幕張",
+      "name_kana": "まくはり",
+      "name_translations": {
+        "en": "Makuhari"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.659323,
+      "longitude": 140.0579864
+    },
+    {
+      "id": "jp_chiba_station_7865838613",
+      "osm_id": 7865838613,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "幕張本郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Makuhari-Hongo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6726962,
+      "longitude": 140.0422955
+    },
+    {
+      "id": "jp_chiba_station_7865838615",
+      "osm_id": 7865838615,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "津田沼",
+      "name_kana": "つだぬま",
+      "name_translations": {
+        "en": "Tsudanuma"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6913892,
+      "longitude": 140.02019
+    },
+    {
+      "id": "jp_chiba_station_7865838617",
+      "osm_id": 7865838617,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下総中山",
+      "name_kana": "しもうさなかやま",
+      "name_translations": {
+        "en": "Shimosa-Nakayama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7143039,
+      "longitude": 139.9430779
+    },
+    {
+      "id": "jp_chiba_station_7865838620",
+      "osm_id": 7865838620,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市川",
+      "name_kana": "いちかわ",
+      "name_translations": {
+        "en": "Ichikawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7288741,
+      "longitude": 139.9081729
+    },
+    {
+      "id": "jp_chiba_station_7865838628",
+      "osm_id": 7865838628,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新検見川",
+      "name_kana": "しんけみがわ",
+      "name_translations": {
+        "en": "Shin-Kemigawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6517845,
+      "longitude": 140.0730979
+    },
+    {
+      "id": "jp_chiba_station_7865838630",
+      "osm_id": 7865838630,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "稲毛",
+      "name_kana": "いなげ",
+      "name_translations": {
+        "en": "Inage"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6370846,
+      "longitude": 140.0925674
+    },
+    {
+      "id": "jp_chiba_station_7865838634",
+      "osm_id": 7865838634,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西千葉",
+      "name_kana": "にしちば",
+      "name_translations": {
+        "en": "Nishi-Chiba"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6227266,
+      "longitude": 140.1031253
+    },
+    {
+      "id": "jp_chiba_station_7881229780",
+      "osm_id": 7881229780,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "幸谷",
+      "name_kana": "こうや",
+      "name_translations": {
+        "en": "Koya"
+      },
+      "operator": "流鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8265973,
+      "longitude": 139.9198204
+    },
+    {
+      "id": "jp_chiba_station_7881229781",
+      "osm_id": 7881229781,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "小金城趾",
+      "name_kana": "こがねじょうし",
+      "name_translations": {
+        "en": "Koganejoshi"
+      },
+      "operator": "流鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8357466,
+      "longitude": 139.9173419
+    },
+    {
+      "id": "jp_chiba_station_7881229783",
+      "osm_id": 7881229783,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "鰭ヶ崎",
+      "name_kana": "ひれがさき",
+      "name_translations": {
+        "en": "Hiregasaki"
+      },
+      "operator": "流鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 35.84101,
+      "longitude": 139.910894
+    },
+    {
+      "id": "jp_chiba_station_7881229784",
+      "osm_id": 7881229784,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "平和台",
+      "name_kana": "へいわだい",
+      "name_translations": {
+        "en": "Heiwadai"
+      },
+      "operator": "流鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8508775,
+      "longitude": 139.9010892
+    },
+    {
+      "id": "jp_chiba_station_7882288883",
+      "osm_id": 7882288883,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "船橋法典",
+      "name_kana": "ふなばしほうてん",
+      "name_translations": {
+        "en": "Funabashi-Hoten"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7308739,
+      "longitude": 139.9665697
+    },
+    {
+      "id": "jp_chiba_station_7882334785",
+      "osm_id": 7882334785,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市川大野",
+      "name_kana": "いちかわおおの",
+      "name_translations": {
+        "en": "Ichikawa-Ono"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7553848,
+      "longitude": 139.9512707
+    },
+    {
+      "id": "jp_chiba_station_7882334789",
+      "osm_id": 7882334789,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新八柱",
+      "name_kana": "しんやはしら",
+      "name_translations": {
+        "en": "Shin-Yahashira"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7919514,
+      "longitude": 139.9383839
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_7915679626",
+      "osm_id": 7915679626,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ロストリバーデルタ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Lost River Delta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6268061,
+      "longitude": 139.8818041
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_7915679627",
+      "osm_id": 7915679627,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "メディテレーニアンハーバー",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mediterranean Harbor"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6264823,
+      "longitude": 139.8859334
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_7915679628",
+      "osm_id": 7915679628,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "アメリカンウォーターフロント",
+      "name_kana": "",
+      "name_translations": {
+        "en": "American Waterfront"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6243216,
+      "longitude": 139.8857837
+    },
+    {
+      "id": "jp_chiba_station_7962936924",
+      "osm_id": 7962936924,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "新津田沼",
+      "name_kana": "しんつだぬま",
+      "name_translations": {
+        "en": "Shin-Tsudanuma"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS66",
+      "latitude": 35.690358,
+      "longitude": 140.0233482
+    },
+    {
+      "id": "jp_chiba_station_7962936926",
+      "osm_id": 7962936926,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "前原",
+      "name_kana": "まえばら",
+      "name_translations": {
+        "en": "Maebara"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS67",
+      "latitude": 35.7009518,
+      "longitude": 140.027839
+    },
+    {
+      "id": "jp_chiba_station_7962936928",
+      "osm_id": 7962936928,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "薬園台",
+      "name_kana": "やくえんだい",
+      "name_translations": {
+        "en": "Yakuendai"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS68",
+      "latitude": 35.7101593,
+      "longitude": 140.0377036
+    },
+    {
+      "id": "jp_chiba_station_7962936929",
+      "osm_id": 7962936929,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "習志野",
+      "name_kana": "ならしの",
+      "name_translations": {
+        "en": "Narashino"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS69",
+      "latitude": 35.7151548,
+      "longitude": 140.0427119
+    },
+    {
+      "id": "jp_chiba_station_7962936930",
+      "osm_id": 7962936930,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "高根公団",
+      "name_kana": "たかねこうだん",
+      "name_translations": {
+        "en": "Takanekodan"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS72",
+      "latitude": 35.7302213,
+      "longitude": 140.0296623
+    },
+    {
+      "id": "jp_chiba_station_7962936932",
+      "osm_id": 7962936932,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝不動",
+      "name_kana": "たきふどう",
+      "name_translations": {
+        "en": "Takifudo"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS73",
+      "latitude": 35.7377176,
+      "longitude": 140.0259856
+    },
+    {
+      "id": "jp_chiba_station_7962936933",
+      "osm_id": 7962936933,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "三咲",
+      "name_kana": "みさき",
+      "name_translations": {
+        "en": "Misaki"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS74",
+      "latitude": 35.749075,
+      "longitude": 140.0285203
+    },
+    {
+      "id": "jp_chiba_station_7962936935",
+      "osm_id": 7962936935,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "二和向台",
+      "name_kana": "ふたわむこうだい",
+      "name_translations": {
+        "en": "Futawamukodai"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS75",
+      "latitude": 35.7539866,
+      "longitude": 140.0234806
+    },
+    {
+      "id": "jp_chiba_station_7962936937",
+      "osm_id": 7962936937,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "鎌ヶ谷大仏",
+      "name_kana": "かまがやだいぶつ",
+      "name_translations": {
+        "en": "Kamagayadaibutsu"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS76",
+      "latitude": 35.7579124,
+      "longitude": 140.0138359
+    },
+    {
+      "id": "jp_chiba_station_7962936940",
+      "osm_id": 7962936940,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "初富",
+      "name_kana": "はつとみ",
+      "name_translations": {
+        "en": "Hatsutomi"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS77",
+      "latitude": 35.7722092,
+      "longitude": 140.0005603
+    },
+    {
+      "id": "jp_chiba_station_7962936943",
+      "osm_id": 7962936943,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "北初富",
+      "name_kana": "きたはつとみ",
+      "name_translations": {
+        "en": "Kita-hatsutomi"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS79",
+      "latitude": 35.7772205,
+      "longitude": 139.9918248
+    },
+    {
+      "id": "jp_chiba_station_7962936945",
+      "osm_id": 7962936945,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "くぬぎ山",
+      "name_kana": "くぬぎやま",
+      "name_translations": {
+        "en": "Kunugiyama"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS80",
+      "latitude": 35.7822925,
+      "longitude": 139.9757175
+    },
+    {
+      "id": "jp_chiba_station_7962936947",
+      "osm_id": 7962936947,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "元山",
+      "name_kana": "もとやま",
+      "name_translations": {
+        "en": "Motoyama"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS81",
+      "latitude": 35.7902188,
+      "longitude": 139.9758291
+    },
+    {
+      "id": "jp_chiba_station_7962936949",
+      "osm_id": 7962936949,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "五香",
+      "name_kana": "ごこう",
+      "name_translations": {
+        "en": "Goko"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS82",
+      "latitude": 35.7969782,
+      "longitude": 139.9659283
+    },
+    {
+      "id": "jp_chiba_station_7962936951",
+      "osm_id": 7962936951,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "常盤平",
+      "name_kana": "ときわだいら",
+      "name_translations": {
+        "en": "Tokiwadaira"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS83",
+      "latitude": 35.8033631,
+      "longitude": 139.9501113
+    },
+    {
+      "id": "jp_chiba_station_7962936953",
+      "osm_id": 7962936953,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "八柱",
+      "name_kana": "やばしら",
+      "name_translations": {
+        "en": "Yabashira"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS84",
+      "latitude": 35.7915908,
+      "longitude": 139.937639
+    },
+    {
+      "id": "jp_chiba_station_7962936955",
+      "osm_id": 7962936955,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "みのり台",
+      "name_kana": "みのりだい",
+      "name_translations": {
+        "en": "Minoridai"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS85",
+      "latitude": 35.7892922,
+      "longitude": 139.9292041
+    },
+    {
+      "id": "jp_chiba_station_7962936957",
+      "osm_id": 7962936957,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "松戸新田",
+      "name_kana": "まつどしんでん",
+      "name_translations": {
+        "en": "Matsudo-Shinden"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS86",
+      "latitude": 35.7906265,
+      "longitude": 139.9226166
+    },
+    {
+      "id": "jp_chiba_station_7962936959",
+      "osm_id": 7962936959,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上本郷",
+      "name_kana": "かみほんごう",
+      "name_translations": {
+        "en": "Kamihongo"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS87",
+      "latitude": 35.7896751,
+      "longitude": 139.9162363
+    },
+    {
+      "id": "jp_chiba_station_7962936961",
+      "osm_id": 7962936961,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "高根木戸",
+      "name_kana": "たかねきど",
+      "name_translations": {
+        "en": "Takanekido"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS71",
+      "latitude": 35.7267329,
+      "longitude": 140.0347504
+    },
+    {
+      "id": "jp_chiba_station_7966050102",
+      "osm_id": 7966050102,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "西白井",
+      "name_kana": "にししろい",
+      "name_translations": {
+        "en": "Nishi-Shiroi"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS09",
+      "latitude": 35.7843686,
+      "longitude": 140.0316518
+    },
+    {
+      "id": "jp_chiba_station_7966050104",
+      "osm_id": 7966050104,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "白井",
+      "name_kana": "しろい",
+      "name_translations": {
+        "en": "Shiroi"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS10",
+      "latitude": 35.7847387,
+      "longitude": 140.0540933
+    },
+    {
+      "id": "jp_chiba_station_7966050113",
+      "osm_id": 7966050113,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "大町",
+      "name_kana": "おおまち",
+      "name_translations": {
+        "en": "Omachi"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS07",
+      "latitude": 35.7751536,
+      "longitude": 139.973586
+    },
+    {
+      "id": "jp_chiba_station_7966050115",
+      "osm_id": 7966050115,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "松飛台",
+      "name_kana": "まつひだい",
+      "name_translations": {
+        "en": "Matsuhidai"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS06",
+      "latitude": 35.775351,
+      "longitude": 139.9576128
+    },
+    {
+      "id": "jp_chiba_station_7966050116",
+      "osm_id": 7966050116,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "秋山",
+      "name_kana": "あきやま",
+      "name_translations": {
+        "en": "Akiyama"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS04",
+      "latitude": 35.7652946,
+      "longitude": 139.9307424
+    },
+    {
+      "id": "jp_chiba_station_7966050118",
+      "osm_id": 7966050118,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "北国分",
+      "name_kana": "きたこくぶん",
+      "name_translations": {
+        "en": "Kita-Kokubun"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS03",
+      "latitude": 35.7629783,
+      "longitude": 139.9140684
+    },
+    {
+      "id": "jp_chiba_station_7966050120",
+      "osm_id": 7966050120,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢切",
+      "name_kana": "やぎり",
+      "name_translations": {
+        "en": "Yagiri"
+      },
+      "operator": "北総鉄道",
+      "network": null,
+      "ref": "HS02",
+      "latitude": 35.7575055,
+      "longitude": 139.9005501
+    },
+    {
+      "id": "jp_chiba_station_8068316719",
+      "osm_id": 8068316719,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "千葉寺",
+      "name_kana": "ちばでら",
+      "name_translations": {
+        "en": "Chibadera"
+      },
+      "operator": "京成電鉄",
+      "network": "京成電鉄",
+      "ref": "KS61",
+      "latitude": 35.5902969,
+      "longitude": 140.1321843
+    },
+    {
+      "id": "jp_chiba_station_8068316725",
+      "osm_id": 8068316725,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "おゆみ野",
+      "name_kana": "おゆみの",
+      "name_translations": {
+        "en": "Oyumino"
+      },
+      "operator": "京成電鉄",
+      "network": null,
+      "ref": "KS64",
+      "latitude": 35.5500759,
+      "longitude": 140.1661277
+    },
+    {
+      "id": "jp_chiba_station_8073893291",
+      "osm_id": 8073893291,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "東京ディズニーシー・ステーション",
+      "name_kana": "とうきょうでぃずにーしー・すてーしょん",
+      "name_translations": {
+        "en": "Tokyo DisneySea Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6274495,
+      "longitude": 139.8895705
+    },
+    {
+      "id": "jp_chiba_station_8073893292",
+      "osm_id": 8073893292,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "ベイサイド・ステーション",
+      "name_kana": "べいさいど・すてーしょん",
+      "name_translations": {
+        "en": "Bay Side Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6278844,
+      "longitude": 139.8763686
+    },
+    {
+      "id": "jp_chiba_station_8073893293",
+      "osm_id": 8073893293,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "東京ディズニーランド・ステーション",
+      "name_kana": "とうきょうでぃずにーらんど・すてーしょん",
+      "name_translations": {
+        "en": "Tokyo Disneyland Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6359285,
+      "longitude": 139.8786741
+    },
+    {
+      "id": "jp_chiba_bus_terminal_8992818451",
+      "osm_id": 8992818451,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "モール東・イオン成田店",
+      "name_kana": "",
+      "name_translations": {
+        "en": "MALL East AEON Narita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7949287,
+      "longitude": 140.319835
+    },
+    {
+      "id": "jp_chiba_bus_terminal_9306998038",
+      "osm_id": 9306998038,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三井アウトレットパーク木更津 バスターミナルＢ",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4380757,
+      "longitude": 139.9345583
+    },
+    {
+      "id": "jp_chiba_airport_9610812797",
+      "osm_id": 9610812797,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "流山場外へリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9040774,
+      "longitude": 139.8838205
+    },
+    {
+      "id": "jp_chiba_airport_10054335207",
+      "osm_id": 10054335207,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "勝浦スカイハーバー",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katsuura Sky Harbor"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1787035,
+      "longitude": 140.2734467
+    },
+    {
+      "id": "jp_chiba_station_10742616693",
+      "osm_id": 10742616693,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "幕張豊砂",
+      "name_kana": "まくはりとよすな",
+      "name_translations": {
+        "en": "Makuharitoyosuna"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6582169,
+      "longitude": 140.026842
+    },
+    {
+      "id": "jp_chiba_station_11483977772",
+      "osm_id": 11483977772,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Azuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2633483,
+      "longitude": 140.345084
+    },
+    {
+      "id": "jp_chiba_station_11483977773",
+      "osm_id": 11483977773,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "新田野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nittano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.276481,
+      "longitude": 140.3280728
+    },
+    {
+      "id": "jp_chiba_station_11483977789",
+      "osm_id": 11483977789,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "国吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuniyoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2805646,
+      "longitude": 140.3137954
+    },
+    {
+      "id": "jp_chiba_station_11483977791",
+      "osm_id": 11483977791,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "上総中川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazusa-Nakagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2827011,
+      "longitude": 140.2804763
+    },
+    {
+      "id": "jp_chiba_station_11483977793",
+      "osm_id": 11483977793,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "城見ヶ丘",
+      "name_kana": "しろみがおか",
+      "name_translations": {
+        "en": "Shiromigaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2916957,
+      "longitude": 140.2525511
+    },
+    {
+      "id": "jp_chiba_station_11483977794",
+      "osm_id": 11483977794,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "大多喜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.286687,
+      "longitude": 140.2439889
+    },
+    {
+      "id": "jp_chiba_station_11483977797",
+      "osm_id": 11483977797,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "小谷松",
+      "name_kana": "こやまつ",
+      "name_translations": {
+        "en": "Koyamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2687827,
+      "longitude": 140.2514186
+    },
+    {
+      "id": "jp_chiba_station_11483977798",
+      "osm_id": 11483977798,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "東総元",
+      "name_kana": "ひがしふさもと",
+      "name_translations": {
+        "en": "Higashi-Fusamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2594029,
+      "longitude": 140.2476266
+    },
+    {
+      "id": "jp_chiba_station_11483977803",
+      "osm_id": 11483977803,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "久我原",
+      "name_kana": "くがはら",
+      "name_translations": {
+        "en": "Kugahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2500969,
+      "longitude": 140.2478962
+    },
+    {
+      "id": "jp_chiba_station_11483977804",
+      "osm_id": 11483977804,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "総元",
+      "name_kana": "ふさもと",
+      "name_translations": {
+        "en": "Fusamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2406328,
+      "longitude": 140.2408587
+    },
+    {
+      "id": "jp_chiba_station_11483977809",
+      "osm_id": 11483977809,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Ohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2605472,
+      "longitude": 140.3779156
+    },
+    {
+      "id": "jp_chiba_station_11493159985",
+      "osm_id": 11493159985,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安房鴨川",
+      "name_kana": "あわかもがわ",
+      "name_translations": {
+        "en": "Awa-Kamogawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1076645,
+      "longitude": 140.1037006
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_11934878007",
+      "osm_id": 11934878007,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ヴェネツィアン・ゴンドラ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Venetian Gondolas"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.626147,
+      "longitude": 139.8879186
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_11937475031",
+      "osm_id": 11937475031,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Boathouse",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6292375,
+      "longitude": 139.8791925
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_11998956350",
+      "osm_id": 11998956350,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Mark Twain Riverboat",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mark Twain Riverboat"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6315467,
+      "longitude": 139.8830878
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_12001756387",
+      "osm_id": 12001756387,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ビーバーブラザーズのカヌー探険",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beaver Brothers Explorer Canoes"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6309898,
+      "longitude": 139.8838289
+    },
+    {
+      "id": "jp_chiba_ferry_terminal_12119893252",
+      "osm_id": 12119893252,
+      "osm_type": "node",
+      "prefecture_id": "jp_chiba",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "トムの船着き場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6317048,
+      "longitude": 139.8844737
+    },
+    {
+      "id": "jp_chiba_bus_terminal_43942410",
+      "osm_id": 43942410,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松戸駅東口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "松戸新京成バス",
+      "network": "松1, 松2, 松3, 松5, 松7, 松8, 松9, 松10, 松12, 松21, 松22, 松23",
+      "ref": null,
+      "latitude": 35.7834819,
+      "longitude": 139.9017123
+    },
+    {
+      "id": "jp_chiba_airport_55683493",
+      "osm_id": 55683493,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "military",
+      "name": "陸上自衛隊木更津駐屯地",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": "RJTK",
+      "latitude": 35.3981753,
+      "longitude": 139.9107768
+    },
+    {
+      "id": "jp_chiba_bus_terminal_72239510",
+      "osm_id": 72239510,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスターミナル・イースト",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bus Terminal East"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6361923,
+      "longitude": 139.8810827
+    },
+    {
+      "id": "jp_chiba_bus_terminal_183348747",
+      "osm_id": 183348747,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京成バス 市川営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7534208,
+      "longitude": 139.9659991
+    },
+    {
+      "id": "jp_chiba_bus_terminal_191006375",
+      "osm_id": 191006375,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京成高速バス予約センター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7082384,
+      "longitude": 139.9586693
+    },
+    {
+      "id": "jp_chiba_bus_terminal_207148382",
+      "osm_id": 207148382,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新検見川",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6530857,
+      "longitude": 140.0740422
+    },
+    {
+      "id": "jp_chiba_bus_terminal_225860592",
+      "osm_id": 225860592,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "市原鶴舞バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichihara Tsurumai Bus Terminus"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3653446,
+      "longitude": 140.1854944
+    },
+    {
+      "id": "jp_chiba_bus_terminal_271934559",
+      "osm_id": 271934559,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスターミナル・ノース",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bus Terminal North"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.628906,
+      "longitude": 139.887941
+    },
+    {
+      "id": "jp_chiba_bus_terminal_377078989",
+      "osm_id": 377078989,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "日東交通",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1073465,
+      "longitude": 140.1041608
+    },
+    {
+      "id": "jp_chiba_bus_terminal_502991950",
+      "osm_id": 502991950,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "関宿中央ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0365628,
+      "longitude": 139.8215455
+    },
+    {
+      "id": "jp_chiba_bus_terminal_659417313",
+      "osm_id": 659417313,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスターミナル・サウス",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bus Terminal South"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6256689,
+      "longitude": 139.8900848
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1008699338",
+      "osm_id": 1008699338,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三井アウトレットパーク木更津 バスターミナルÅ",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.434171,
+      "longitude": 139.9382065
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1013936875",
+      "osm_id": 1013936875,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "安房白浜駅",
+      "name_kana": "あわしらはまえき",
+      "name_translations": {
+        "en": "Awa-Shirahama Bus Station"
+      },
+      "operator": null,
+      "network": "JRバス関東;日東交通",
+      "ref": null,
+      "latitude": 34.907879,
+      "longitude": 139.8959666
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1028564325",
+      "osm_id": 1028564325,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスターミナル・ウエスト",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bus Terminal West"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6332227,
+      "longitude": 139.8763414
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1028567694",
+      "osm_id": 1028567694,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "舞浜駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6356552,
+      "longitude": 139.8833247
+    },
+    {
+      "id": "jp_chiba_airport_1137015607",
+      "osm_id": 1137015607,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "美樹ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "美樹観光",
+      "network": null,
+      "ref": null,
+      "latitude": 35.56922,
+      "longitude": 140.2789454
+    },
+    {
+      "id": "jp_chiba_airport_1137019248",
+      "osm_id": 1137019248,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "浦安へリポート",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urayasu Heliport"
+      },
+      "operator": "エクセル航空",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6242657,
+      "longitude": 139.8945223
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1243497160",
+      "osm_id": 1243497160,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "スクールバス発着場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9067703,
+      "longitude": 139.9296037
+    },
+    {
+      "id": "jp_chiba_bus_terminal_1253817673",
+      "osm_id": 1253817673,
+      "osm_type": "way",
+      "prefecture_id": "jp_chiba",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "沼南庁舎バス乗継場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8420895,
+      "longitude": 140.007467
+    },
+    {
+      "id": "jp_chiba_airport_3182579",
+      "osm_id": 3182579,
+      "osm_type": "relation",
+      "prefecture_id": "jp_chiba",
+      "type": "airport",
+      "subtype": "international",
+      "name": "成田国際空港",
+      "name_kana": "なりたこくさいくうこう",
+      "name_translations": {
+        "en": "Narita International Airport"
+      },
+      "operator": "成田国際空港株式会社",
+      "network": null,
+      "ref": "NRT",
+      "latitude": 35.7758917,
+      "longitude": 140.3835383
+    }
+  ]
+}

@@ -1,0 +1,1350 @@
+{
+  "fetchedAt": "2025-12-24T05:51:34.257Z",
+  "prefecture_id": "jp_ishikawa",
+  "prefecture_name": "石川県",
+  "stats": {
+    "station": 66,
+    "airport": 2,
+    "ferry_terminal": 1,
+    "bus_terminal": 6,
+    "total": 75
+  },
+  "data": [
+    {
+      "id": "jp_ishikawa_station_264459590",
+      "osm_id": 264459590,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "能登中島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Noto-Nakajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1091614,
+      "longitude": 136.8534559
+    },
+    {
+      "id": "jp_ishikawa_station_264459629",
+      "osm_id": 264459629,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴水",
+      "name_kana": "あなみず",
+      "name_translations": {
+        "en": "Anamizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2280892,
+      "longitude": 136.9045484
+    },
+    {
+      "id": "jp_ishikawa_station_264459916",
+      "osm_id": 264459916,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "西岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishigishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1477663,
+      "longitude": 136.8744197
+    },
+    {
+      "id": "jp_ishikawa_station_264460117",
+      "osm_id": 264460117,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠師保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasashiho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0792899,
+      "longitude": 136.8575121
+    },
+    {
+      "id": "jp_ishikawa_station_264460209",
+      "osm_id": 264460209,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "田鶴浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsuruhama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0657581,
+      "longitude": 136.8910036
+    },
+    {
+      "id": "jp_ishikawa_station_264460568",
+      "osm_id": 264460568,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "能登鹿島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Noto-Kashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1802189,
+      "longitude": 136.8982494
+    },
+    {
+      "id": "jp_ishikawa_station_267306898",
+      "osm_id": 267306898,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "能美根上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nomi-Neagari"
+      },
+      "operator": "JR西日本",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4518274,
+      "longitude": 136.4595421
+    },
+    {
+      "id": "jp_ishikawa_station_267307344",
+      "osm_id": 267307344,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "動橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iburihashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3283587,
+      "longitude": 136.3830171
+    },
+    {
+      "id": "jp_ishikawa_station_267307956",
+      "osm_id": 267307956,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "明峰",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Meihō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4247198,
+      "longitude": 136.4630942
+    },
+    {
+      "id": "jp_ishikawa_station_267307984",
+      "osm_id": 267307984,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "粟津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3555113,
+      "longitude": 136.4244391
+    },
+    {
+      "id": "jp_ishikawa_station_267456422",
+      "osm_id": 267456422,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "横山",
+      "name_kana": "よこやま",
+      "name_translations": {
+        "en": "Yokoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7475748,
+      "longitude": 136.7167644
+    },
+    {
+      "id": "jp_ishikawa_station_267456424",
+      "osm_id": 267456424,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "敷浪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikinami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8481531,
+      "longitude": 136.773362
+    },
+    {
+      "id": "jp_ishikawa_station_267456462",
+      "osm_id": 267456462,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0071586,
+      "longitude": 136.9299834
+    },
+    {
+      "id": "jp_ishikawa_station_267456483",
+      "osm_id": 267456483,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "能登部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Notobe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9612706,
+      "longitude": 136.8697667
+    },
+    {
+      "id": "jp_ishikawa_station_267456539",
+      "osm_id": 267456539,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇野気",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unoke"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7228176,
+      "longitude": 136.702952
+    },
+    {
+      "id": "jp_ishikawa_station_267456540",
+      "osm_id": 267456540,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "千路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9281885,
+      "longitude": 136.8011133
+    },
+    {
+      "id": "jp_ishikawa_station_267456560",
+      "osm_id": 267456560,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "南羽咋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Hakui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8709019,
+      "longitude": 136.7747302
+    },
+    {
+      "id": "jp_ishikawa_station_267456605",
+      "osm_id": 267456605,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "能瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6931516,
+      "longitude": 136.7198511
+    },
+    {
+      "id": "jp_ishikawa_station_267456607",
+      "osm_id": 267456607,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝達",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōdatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8203681,
+      "longitude": 136.7622915
+    },
+    {
+      "id": "jp_ishikawa_station_267456611",
+      "osm_id": 267456611,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "良川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9765732,
+      "longitude": 136.8943465
+    },
+    {
+      "id": "jp_ishikawa_station_267456630",
+      "osm_id": 267456630,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "金丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanemaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.943469,
+      "longitude": 136.8364897
+    },
+    {
+      "id": "jp_ishikawa_station_267456631",
+      "osm_id": 267456631,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "免田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Menden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.795429,
+      "longitude": 136.7472773
+    },
+    {
+      "id": "jp_ishikawa_station_267456893",
+      "osm_id": 267456893,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "高松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7683145,
+      "longitude": 136.7288109
+    },
+    {
+      "id": "jp_ishikawa_station_267456957",
+      "osm_id": 267456957,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "能登二宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Noto-Ninomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9850426,
+      "longitude": 136.917533
+    },
+    {
+      "id": "jp_ishikawa_station_267457138",
+      "osm_id": 267457138,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "中津幡",
+      "name_kana": "なかつばた",
+      "name_translations": {
+        "en": "Naka-Tsubata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6713908,
+      "longitude": 136.7404126
+    },
+    {
+      "id": "jp_ishikawa_station_267457150",
+      "osm_id": 267457150,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "本津幡",
+      "name_kana": "ほんつばた",
+      "name_translations": {
+        "en": "Hon-Tsubata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6766775,
+      "longitude": 136.7320833
+    },
+    {
+      "id": "jp_ishikawa_station_355835358",
+      "osm_id": 355835358,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "四十万",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shijima"
+      },
+      "operator": "北陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4988633,
+      "longitude": 136.6156913
+    },
+    {
+      "id": "jp_ishikawa_station_355835381",
+      "osm_id": 355835381,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "井口",
+      "name_kana": "いのくち",
+      "name_translations": {
+        "en": "Inokuchi"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.4767024,
+      "longitude": 136.6123265
+    },
+    {
+      "id": "jp_ishikawa_station_355835410",
+      "osm_id": 355835410,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "額住宅前",
+      "name_kana": "ぬかじゅうたくまえ",
+      "name_translations": {
+        "en": "Nukajutakumae"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.5185945,
+      "longitude": 136.6188842
+    },
+    {
+      "id": "jp_ishikawa_station_355835415",
+      "osm_id": 355835415,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "西泉",
+      "name_kana": "にしいずみ",
+      "name_translations": {
+        "en": "Nishi-izumi"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.5534493,
+      "longitude": 136.6334705
+    },
+    {
+      "id": "jp_ishikawa_station_355835422",
+      "osm_id": 355835422,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "野々市",
+      "name_kana": "ののいち",
+      "name_translations": {
+        "en": "Nonoichi"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.536491,
+      "longitude": 136.6209386
+    },
+    {
+      "id": "jp_ishikawa_station_355835464",
+      "osm_id": 355835464,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "道法寺",
+      "name_kana": "どうほうじ",
+      "name_translations": {
+        "en": "Douhouji"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.4842483,
+      "longitude": 136.613493
+    },
+    {
+      "id": "jp_ishikawa_station_355835569",
+      "osm_id": 355835569,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬替",
+      "name_kana": "まがえ",
+      "name_translations": {
+        "en": "Magae"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.5230329,
+      "longitude": 136.6206696
+    },
+    {
+      "id": "jp_ishikawa_station_355835584",
+      "osm_id": 355835584,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "小柳",
+      "name_kana": "おやなぎ",
+      "name_translations": {
+        "en": "Oyanagi"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.4709681,
+      "longitude": 136.6114683
+    },
+    {
+      "id": "jp_ishikawa_station_355835612",
+      "osm_id": 355835612,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "陽羽里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hibari"
+      },
+      "operator": null,
+      "network": "北陸鉄道",
+      "ref": null,
+      "latitude": 36.4937025,
+      "longitude": 136.6149054
+    },
+    {
+      "id": "jp_ishikawa_station_355835729",
+      "osm_id": 355835729,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "野々市工大前",
+      "name_kana": "ののいちこうだいまえ",
+      "name_translations": {
+        "en": "Nonoichi Kodaimae"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.5325932,
+      "longitude": 136.6218279
+    },
+    {
+      "id": "jp_ishikawa_station_355835737",
+      "osm_id": 355835737,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "押野",
+      "name_kana": "おしの",
+      "name_translations": {
+        "en": "Oshino"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.5424894,
+      "longitude": 136.6220595
+    },
+    {
+      "id": "jp_ishikawa_station_355835755",
+      "osm_id": 355835755,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "乙丸",
+      "name_kana": "おとまる",
+      "name_translations": {
+        "en": "Otomaru"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.5119363,
+      "longitude": 136.617681
+    },
+    {
+      "id": "jp_ishikawa_station_355835787",
+      "osm_id": 355835787,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "曽谷",
+      "name_kana": "そだに",
+      "name_translations": {
+        "en": "Sodani"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.4900166,
+      "longitude": 136.6143508
+    },
+    {
+      "id": "jp_ishikawa_station_3977645705",
+      "osm_id": 3977645705,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "金沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanazawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5780499,
+      "longitude": 136.6480247
+    },
+    {
+      "id": "jp_ishikawa_station_3977861002",
+      "osm_id": 3977861002,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "東金沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Kanazawa"
+      },
+      "operator": "IRいしかわ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5935129,
+      "longitude": 136.6697438
+    },
+    {
+      "id": "jp_ishikawa_station_3992285365",
+      "osm_id": 3992285365,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "西金沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Kanazawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5531798,
+      "longitude": 136.621186
+    },
+    {
+      "id": "jp_ishikawa_station_3992490583",
+      "osm_id": 3992490583,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "松任",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mattō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5266411,
+      "longitude": 136.5661935
+    },
+    {
+      "id": "jp_ishikawa_station_3992523881",
+      "osm_id": 3992523881,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "加賀笠間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaga-Kasama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5030168,
+      "longitude": 136.5274221
+    },
+    {
+      "id": "jp_ishikawa_station_3992557915",
+      "osm_id": 3992557915,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "小舞子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komaiko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4762043,
+      "longitude": 136.4745237
+    },
+    {
+      "id": "jp_ishikawa_station_3992557916",
+      "osm_id": 3992557916,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4859691,
+      "longitude": 136.4892217
+    },
+    {
+      "id": "jp_ishikawa_station_3992638465",
+      "osm_id": 3992638465,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "森本",
+      "name_kana": "もりもと",
+      "name_translations": {
+        "en": "Morimoto"
+      },
+      "operator": "IRいしかわ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6123415,
+      "longitude": 136.6896553
+    },
+    {
+      "id": "jp_ishikawa_station_3992671130",
+      "osm_id": 3992671130,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "jr",
+      "name": "津幡",
+      "name_kana": "つばた",
+      "name_translations": {
+        "en": "Tsubata"
+      },
+      "operator": "IRいしかわ鉄道;西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6577079,
+      "longitude": 136.7307683
+    },
+    {
+      "id": "jp_ishikawa_station_3992713500",
+      "osm_id": 3992713500,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "倶利伽羅",
+      "name_kana": "くりから",
+      "name_translations": {
+        "en": "Kurikara"
+      },
+      "operator": "IRいしかわ鉄道;あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.672509,
+      "longitude": 136.7916218
+    },
+    {
+      "id": "jp_ishikawa_bus_terminal_4127931490",
+      "osm_id": 4127931490,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Hibari",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4937459,
+      "longitude": 136.6147242
+    },
+    {
+      "id": "jp_ishikawa_bus_terminal_5501228889",
+      "osm_id": 5501228889,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "穴水",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2283145,
+      "longitude": 136.9045761
+    },
+    {
+      "id": "jp_ishikawa_ferry_terminal_5794585958",
+      "osm_id": 5794585958,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "へぐら航路",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3994105,
+      "longitude": 136.9008846
+    },
+    {
+      "id": "jp_ishikawa_station_6641719619",
+      "osm_id": 6641719619,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "小松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4018391,
+      "longitude": 136.4528145
+    },
+    {
+      "id": "jp_ishikawa_station_6641719628",
+      "osm_id": 6641719628,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽咋",
+      "name_kana": "はくい",
+      "name_translations": {
+        "en": "Hakui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.896877,
+      "longitude": 136.7834571
+    },
+    {
+      "id": "jp_ishikawa_station_6641834272",
+      "osm_id": 6641834272,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "加賀温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kagaonsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3203882,
+      "longitude": 136.3504996
+    },
+    {
+      "id": "jp_ishikawa_station_6641834281",
+      "osm_id": 6641834281,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "大聖寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daishōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3004619,
+      "longitude": 136.3143803
+    },
+    {
+      "id": "jp_ishikawa_station_6641863475",
+      "osm_id": 6641863475,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "和倉温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakura-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.074912,
+      "longitude": 136.9256945
+    },
+    {
+      "id": "jp_ishikawa_station_6641863484",
+      "osm_id": 6641863484,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "七尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0419859,
+      "longitude": 136.9639832
+    },
+    {
+      "id": "jp_ishikawa_station_7496544729",
+      "osm_id": 7496544729,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶴来",
+      "name_kana": "つるぎ",
+      "name_translations": {
+        "en": "Tsurugi"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.4522166,
+      "longitude": 136.623981
+    },
+    {
+      "id": "jp_ishikawa_station_7826334198",
+      "osm_id": 7826334198,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "野町",
+      "name_kana": "のまち",
+      "name_translations": {
+        "en": "Nomachi"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.5539047,
+      "longitude": 136.6443889
+    },
+    {
+      "id": "jp_ishikawa_station_7826344435",
+      "osm_id": 7826344435,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "日御子",
+      "name_kana": "ひのみこ",
+      "name_translations": {
+        "en": "Hinomiko"
+      },
+      "operator": "北陸鉄道",
+      "network": "石川線",
+      "ref": null,
+      "latitude": 36.4650245,
+      "longitude": 136.6149359
+    },
+    {
+      "id": "jp_ishikawa_station_7826347786",
+      "osm_id": 7826347786,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "新西金沢",
+      "name_kana": "しんにしかなざわ",
+      "name_translations": {
+        "en": "Shin Nishi Kanazawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5530483,
+      "longitude": 136.6227309
+    },
+    {
+      "id": "jp_ishikawa_station_7826372778",
+      "osm_id": 7826372778,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "subway",
+      "name": "北鉄金沢",
+      "name_kana": "ほくてつかなざわ",
+      "name_translations": {
+        "en": "Hokutetsu Kanazawa"
+      },
+      "operator": "北陸鉄道株式会社",
+      "network": null,
+      "ref": "A01",
+      "latitude": 36.5782896,
+      "longitude": 136.6494881
+    },
+    {
+      "id": "jp_ishikawa_station_7826389043",
+      "osm_id": 7826389043,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "内灘",
+      "name_kana": "うちなだ",
+      "name_translations": {
+        "en": "Uchinada"
+      },
+      "operator": "北陸鉄道株式会社",
+      "network": null,
+      "ref": "A12",
+      "latitude": 36.6334313,
+      "longitude": 136.6342184
+    },
+    {
+      "id": "jp_ishikawa_station_7924683443",
+      "osm_id": 7924683443,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "恋路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3717915,
+      "longitude": 137.2380984
+    },
+    {
+      "id": "jp_ishikawa_station_7924683446",
+      "osm_id": 7924683446,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "宗玄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sōgen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3733878,
+      "longitude": 137.2375837
+    },
+    {
+      "id": "jp_ishikawa_station_9009657749",
+      "osm_id": 9009657749,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "三ツ屋",
+      "name_kana": "みつや",
+      "name_translations": {
+        "en": "Mitsuya"
+      },
+      "operator": "北陸鉄道株式会社",
+      "network": null,
+      "ref": "A07",
+      "latitude": 36.6119834,
+      "longitude": 136.6455252
+    },
+    {
+      "id": "jp_ishikawa_station_11297630052",
+      "osm_id": 11297630052,
+      "osm_type": "node",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "西松任",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Mattō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5177744,
+      "longitude": 136.5490493
+    },
+    {
+      "id": "jp_ishikawa_airport_57007545",
+      "osm_id": 57007545,
+      "osm_type": "way",
+      "prefecture_id": "jp_ishikawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "能登空港",
+      "name_kana": "のとくうこう",
+      "name_translations": {
+        "en": "Noto Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NTQ",
+      "latitude": 37.2937936,
+      "longitude": 136.9649073
+    },
+    {
+      "id": "jp_ishikawa_bus_terminal_834082790",
+      "osm_id": 834082790,
+      "osm_type": "way",
+      "prefecture_id": "jp_ishikawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "金沢大学",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5501591,
+      "longitude": 136.7137083
+    },
+    {
+      "id": "jp_ishikawa_bus_terminal_834082845",
+      "osm_id": 834082845,
+      "osm_type": "way",
+      "prefecture_id": "jp_ishikawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "金沢大学自然研前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5445103,
+      "longitude": 136.706891
+    },
+    {
+      "id": "jp_ishikawa_bus_terminal_834269374",
+      "osm_id": 834269374,
+      "osm_type": "way",
+      "prefecture_id": "jp_ishikawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "金沢駅東広場バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "金沢市",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5781534,
+      "longitude": 136.649445
+    },
+    {
+      "id": "jp_ishikawa_bus_terminal_834269375",
+      "osm_id": 834269375,
+      "osm_type": "way",
+      "prefecture_id": "jp_ishikawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "金沢駅西口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanazawa Station West Gate"
+      },
+      "operator": "金沢市",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5785714,
+      "longitude": 136.646461
+    },
+    {
+      "id": "jp_ishikawa_station_840511578",
+      "osm_id": 840511578,
+      "osm_type": "way",
+      "prefecture_id": "jp_ishikawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "北陸新幹線小松駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4023629,
+      "longitude": 136.4531381
+    },
+    {
+      "id": "jp_ishikawa_airport_13514757",
+      "osm_id": 13514757,
+      "osm_type": "relation",
+      "prefecture_id": "jp_ishikawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "小松飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komatsu Airport"
+      },
+      "operator": "Japan Air Self-Defense Force",
+      "network": null,
+      "ref": "KMQ",
+      "latitude": 36.3937725,
+      "longitude": 136.4050735
+    }
+  ]
+}

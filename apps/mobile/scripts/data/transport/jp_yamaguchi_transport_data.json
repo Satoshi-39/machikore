@@ -1,0 +1,3446 @@
+{
+  "fetchedAt": "2025-12-22T04:55:00.761Z",
+  "prefecture_id": "jp_yamaguchi",
+  "prefecture_name": "山口県",
+  "stats": {
+    "station": 153,
+    "airport": 5,
+    "ferry_terminal": 34,
+    "bus_terminal": 3,
+    "total": 195
+  },
+  "data": [
+    {
+      "id": "jp_yamaguchi_station_265905923",
+      "osm_id": 265905923,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "厚狭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0534364,
+      "longitude": 131.1597941
+    },
+    {
+      "id": "jp_yamaguchi_station_265927614",
+      "osm_id": 265927614,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "福川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0720605,
+      "longitude": 131.7384699
+    },
+    {
+      "id": "jp_yamaguchi_station_265928476",
+      "osm_id": 265928476,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "由宇",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yū"
+      },
+      "operator": "JR西日本",
+      "network": "山陽本線",
+      "ref": null,
+      "latitude": 34.043332,
+      "longitude": 132.2137215
+    },
+    {
+      "id": "jp_yamaguchi_station_265936876",
+      "osm_id": 265936876,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chofu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0196968,
+      "longitude": 130.9997459
+    },
+    {
+      "id": "jp_yamaguchi_station_266029164",
+      "osm_id": 266029164,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "三見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sammi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.397333,
+      "longitude": 131.3301857
+    },
+    {
+      "id": "jp_yamaguchi_station_266029589",
+      "osm_id": 266029589,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4054441,
+      "longitude": 131.3795987
+    },
+    {
+      "id": "jp_yamaguchi_station_266031106",
+      "osm_id": 266031106,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇田郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Utagō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5720788,
+      "longitude": 131.5489583
+    },
+    {
+      "id": "jp_yamaguchi_station_266031200",
+      "osm_id": 266031200,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "木与",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5326328,
+      "longitude": 131.5030678
+    },
+    {
+      "id": "jp_yamaguchi_station_266031791",
+      "osm_id": 266031791,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "奈古",
+      "name_kana": "なご",
+      "name_translations": {
+        "en": "Nago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5028228,
+      "longitude": 131.4724664
+    },
+    {
+      "id": "jp_yamaguchi_station_266031885",
+      "osm_id": 266031885,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "越ヶ浜",
+      "name_kana": "こしがはま",
+      "name_translations": {
+        "en": "Koshigahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.438941,
+      "longitude": 131.422519
+    },
+    {
+      "id": "jp_yamaguchi_station_266031887",
+      "osm_id": 266031887,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "須佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Susa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6218519,
+      "longitude": 131.6054511
+    },
+    {
+      "id": "jp_yamaguchi_station_266032222",
+      "osm_id": 266032222,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東萩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Hagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4169951,
+      "longitude": 131.4105197
+    },
+    {
+      "id": "jp_yamaguchi_station_266032224",
+      "osm_id": 266032224,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3791578,
+      "longitude": 131.2950367
+    },
+    {
+      "id": "jp_yamaguchi_station_266032415",
+      "osm_id": 266032415,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門大井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato-Ōi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4712655,
+      "longitude": 131.4498012
+    },
+    {
+      "id": "jp_yamaguchi_station_266032710",
+      "osm_id": 266032710,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門三隅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato-Misumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.366219,
+      "longitude": 131.2364119
+    },
+    {
+      "id": "jp_yamaguchi_station_266032712",
+      "osm_id": 266032712,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "萩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3938041,
+      "longitude": 131.4010475
+    },
+    {
+      "id": "jp_yamaguchi_station_266032796",
+      "osm_id": 266032796,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "江崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Esaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6380909,
+      "longitude": 131.6619984
+    },
+    {
+      "id": "jp_yamaguchi_station_266033094",
+      "osm_id": 266033094,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "安岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0249018,
+      "longitude": 130.916698
+    },
+    {
+      "id": "jp_yamaguchi_station_266033095",
+      "osm_id": 266033095,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅ヶ峠",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umegatō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.101511,
+      "longitude": 130.9002362
+    },
+    {
+      "id": "jp_yamaguchi_station_266033109",
+      "osm_id": 266033109,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "黄波戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiwado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3851713,
+      "longitude": 131.1398057
+    },
+    {
+      "id": "jp_yamaguchi_station_266033169",
+      "osm_id": 266033169,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門古市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato-Furuichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3886611,
+      "longitude": 131.102361
+    },
+    {
+      "id": "jp_yamaguchi_station_266033170",
+      "osm_id": 266033170,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒井村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroimura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1277232,
+      "longitude": 130.9121029
+    },
+    {
+      "id": "jp_yamaguchi_station_266033178",
+      "osm_id": 266033178,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉見",
+      "name_kana": "よしみ",
+      "name_translations": {
+        "en": "Yoshimi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0702037,
+      "longitude": 130.9034869
+    },
+    {
+      "id": "jp_yamaguchi_station_266034495",
+      "osm_id": 266034495,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "綾羅木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ayaragi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0039194,
+      "longitude": 130.926721
+    },
+    {
+      "id": "jp_yamaguchi_station_266034496",
+      "osm_id": 266034496,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Igami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3704236,
+      "longitude": 131.0113316
+    },
+    {
+      "id": "jp_yamaguchi_station_266034506",
+      "osm_id": 266034506,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Agawa"
+      },
+      "operator": "JR 西日本旅客鉄道",
+      "network": "JR 山陰本線",
+      "ref": null,
+      "latitude": 34.3360822,
+      "longitude": 130.9260582
+    },
+    {
+      "id": "jp_yamaguchi_station_266034671",
+      "osm_id": 266034671,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小串",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kogushi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1697783,
+      "longitude": 130.9280746
+    },
+    {
+      "id": "jp_yamaguchi_station_266034800",
+      "osm_id": 266034800,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "川棚温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawatana-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1464995,
+      "longitude": 130.9223059
+    },
+    {
+      "id": "jp_yamaguchi_station_266034801",
+      "osm_id": 266034801,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝部",
+      "name_kana": "たきべ",
+      "name_translations": {
+        "en": "Takibe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.283354,
+      "longitude": 130.946211
+    },
+    {
+      "id": "jp_yamaguchi_station_266034803",
+      "osm_id": 266034803,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "仙崎",
+      "name_kana": "せんざき",
+      "name_translations": {
+        "en": "Senzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3878876,
+      "longitude": 131.1989521
+    },
+    {
+      "id": "jp_yamaguchi_station_266035331",
+      "osm_id": 266035331,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯玉",
+      "name_kana": "ゆたま",
+      "name_translations": {
+        "en": "Yutama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2091084,
+      "longitude": 130.9326946
+    },
+    {
+      "id": "jp_yamaguchi_station_266035335",
+      "osm_id": 266035335,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇賀本郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ukahongō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.227629,
+      "longitude": 130.927371
+    },
+    {
+      "id": "jp_yamaguchi_station_266035376",
+      "osm_id": 266035376,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門粟野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato-Awano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3578837,
+      "longitude": 130.9708825
+    },
+    {
+      "id": "jp_yamaguchi_station_266035378",
+      "osm_id": 266035378,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "福江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0471135,
+      "longitude": 130.9156608
+    },
+    {
+      "id": "jp_yamaguchi_station_266035582",
+      "osm_id": 266035582,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "特牛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kottoi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3059947,
+      "longitude": 130.9186967
+    },
+    {
+      "id": "jp_yamaguchi_station_266035583",
+      "osm_id": 266035583,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "人丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hitomaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3743933,
+      "longitude": 131.0579649
+    },
+    {
+      "id": "jp_yamaguchi_station_266036189",
+      "osm_id": 266036189,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門二見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato Futami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2521518,
+      "longitude": 130.9155325
+    },
+    {
+      "id": "jp_yamaguchi_station_266053978",
+      "osm_id": 266053978,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "川西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawanishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1566233,
+      "longitude": 132.1773925
+    },
+    {
+      "id": "jp_yamaguchi_station_266054144",
+      "osm_id": 266054144,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "欽明路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kimmeiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1041452,
+      "longitude": 132.1015094
+    },
+    {
+      "id": "jp_yamaguchi_station_266054261",
+      "osm_id": 266054261,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "周防高森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suō-Takamori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0908097,
+      "longitude": 132.0465956
+    },
+    {
+      "id": "jp_yamaguchi_station_266054410",
+      "osm_id": 266054410,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "柱野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashirano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1433559,
+      "longitude": 132.1543895
+    },
+    {
+      "id": "jp_yamaguchi_station_266054429",
+      "osm_id": 266054429,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "玖珂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0971923,
+      "longitude": 132.0823683
+    },
+    {
+      "id": "jp_yamaguchi_station_266054849",
+      "osm_id": 266054849,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "高水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0554116,
+      "longitude": 131.9729105
+    },
+    {
+      "id": "jp_yamaguchi_station_266054851",
+      "osm_id": 266054851,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大河内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōkawachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0310485,
+      "longitude": 131.9342773
+    },
+    {
+      "id": "jp_yamaguchi_station_266055062",
+      "osm_id": 266055062,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "米川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yonekawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0745031,
+      "longitude": 132.0144021
+    },
+    {
+      "id": "jp_yamaguchi_station_266055125",
+      "osm_id": 266055125,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "勝間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katsuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0419935,
+      "longitude": 131.9540907
+    },
+    {
+      "id": "jp_yamaguchi_station_266055127",
+      "osm_id": 266055127,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "周防久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suō-Kubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0290793,
+      "longitude": 131.919179
+    },
+    {
+      "id": "jp_yamaguchi_station_266055686",
+      "osm_id": 266055686,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "生野屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikunoya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0354265,
+      "longitude": 131.8871446
+    },
+    {
+      "id": "jp_yamaguchi_station_266055841",
+      "osm_id": 266055841,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "周防花岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suō-Hanaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0359125,
+      "longitude": 131.8680045
+    },
+    {
+      "id": "jp_yamaguchi_station_266058263",
+      "osm_id": 266058263,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "四郎ヶ原",
+      "name_kana": "しろうがはら",
+      "name_translations": {
+        "en": "Shirōgahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1377521,
+      "longitude": 131.161171
+    },
+    {
+      "id": "jp_yamaguchi_station_266058270",
+      "osm_id": 266058270,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "重安",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shigeyasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1939059,
+      "longitude": 131.2086944
+    },
+    {
+      "id": "jp_yamaguchi_station_266058274",
+      "osm_id": 266058274,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南大嶺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Ōmine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1616441,
+      "longitude": 131.1850823
+    },
+    {
+      "id": "jp_yamaguchi_station_266058280",
+      "osm_id": 266058280,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "美祢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1692082,
+      "longitude": 131.2042663
+    },
+    {
+      "id": "jp_yamaguchi_station_266058410",
+      "osm_id": 266058410,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "厚保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Atsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1141295,
+      "longitude": 131.1546903
+    },
+    {
+      "id": "jp_yamaguchi_station_266058698",
+      "osm_id": 266058698,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "於福",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ofuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2362568,
+      "longitude": 131.2079669
+    },
+    {
+      "id": "jp_yamaguchi_station_266058700",
+      "osm_id": 266058700,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯ノ峠",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunotō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0856267,
+      "longitude": 131.1727406
+    },
+    {
+      "id": "jp_yamaguchi_station_266058799",
+      "osm_id": 266058799,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門市",
+      "name_kana": "ながとし",
+      "name_translations": {
+        "en": "Nagatoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.375332,
+      "longitude": 131.1850803
+    },
+    {
+      "id": "jp_yamaguchi_station_266058801",
+      "osm_id": 266058801,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門湯本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato-Yumoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3344883,
+      "longitude": 131.1725893
+    },
+    {
+      "id": "jp_yamaguchi_station_266058803",
+      "osm_id": 266058803,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "板持",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itamochi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3535933,
+      "longitude": 131.1765834
+    },
+    {
+      "id": "jp_yamaguchi_station_266059108",
+      "osm_id": 266059108,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "渋木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shibuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3116906,
+      "longitude": 131.1964891
+    },
+    {
+      "id": "jp_yamaguchi_station_266061995",
+      "osm_id": 266061995,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "妻崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsumazaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9703797,
+      "longitude": 131.2025712
+    },
+    {
+      "id": "jp_yamaguchi_station_266061999",
+      "osm_id": 266061999,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜河内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamagōchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9503115,
+      "longitude": 131.1793807
+    },
+    {
+      "id": "jp_yamaguchi_station_266062023",
+      "osm_id": 266062023,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野田港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onodakō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9720219,
+      "longitude": 131.1749764
+    },
+    {
+      "id": "jp_yamaguchi_station_266062065",
+      "osm_id": 266062065,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "雀田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzumeda"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9604319,
+      "longitude": 131.1866721
+    },
+    {
+      "id": "jp_yamaguchi_station_266062073",
+      "osm_id": 266062073,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南中川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Nakagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9868871,
+      "longitude": 131.1783088
+    },
+    {
+      "id": "jp_yamaguchi_station_266062149",
+      "osm_id": 266062149,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "目出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mede"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR小野田線",
+      "ref": null,
+      "latitude": 33.9970051,
+      "longitude": 131.1837215
+    },
+    {
+      "id": "jp_yamaguchi_station_266062172",
+      "osm_id": 266062172,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南小野田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Onoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9774072,
+      "longitude": 131.174967
+    },
+    {
+      "id": "jp_yamaguchi_station_266062183",
+      "osm_id": 266062183,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門本山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato-Motoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9428192,
+      "longitude": 131.1732676
+    },
+    {
+      "id": "jp_yamaguchi_station_266062275",
+      "osm_id": 266062275,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門長沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagato-Nagasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9666536,
+      "longitude": 131.1967917
+    },
+    {
+      "id": "jp_yamaguchi_station_266063805",
+      "osm_id": 266063805,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "船平山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Funahirayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.421205,
+      "longitude": 131.7341482
+    },
+    {
+      "id": "jp_yamaguchi_station_266065189",
+      "osm_id": 266065189,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "名草",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagusa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.353824,
+      "longitude": 131.651555
+    },
+    {
+      "id": "jp_yamaguchi_station_266065263",
+      "osm_id": 266065263,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2165357,
+      "longitude": 131.5362585
+    },
+    {
+      "id": "jp_yamaguchi_station_266065288",
+      "osm_id": 266065288,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "篠目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2787128,
+      "longitude": 131.5620367
+    },
+    {
+      "id": "jp_yamaguchi_station_266065308",
+      "osm_id": 266065308,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Yamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1825922,
+      "longitude": 131.48498
+    },
+    {
+      "id": "jp_yamaguchi_station_266065358",
+      "osm_id": 266065358,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門峡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chōmonkyō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.304478,
+      "longitude": 131.5787966
+    },
+    {
+      "id": "jp_yamaguchi_station_266065495",
+      "osm_id": 266065495,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1912927,
+      "longitude": 131.4985459
+    },
+    {
+      "id": "jp_yamaguchi_station_266065765",
+      "osm_id": 266065765,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "渡川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Watarigawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3227616,
+      "longitude": 131.6037854
+    },
+    {
+      "id": "jp_yamaguchi_station_266066856",
+      "osm_id": 266066856,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鍋倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nabekura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3783919,
+      "longitude": 131.6945218
+    },
+    {
+      "id": "jp_yamaguchi_station_266067240",
+      "osm_id": 266067240,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "地福",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jifuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3631422,
+      "longitude": 131.6748348
+    },
+    {
+      "id": "jp_yamaguchi_station_401444816",
+      "osm_id": 401444816,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西岩国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Iwakuni"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1627087,
+      "longitude": 132.1952113
+    },
+    {
+      "id": "jp_yamaguchi_station_448124397",
+      "osm_id": 448124397,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanaze"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2573829,
+      "longitude": 131.976842
+    },
+    {
+      "id": "jp_yamaguchi_station_448124399",
+      "osm_id": 448124399,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "根笠",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nekasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2102879,
+      "longitude": 131.9982816
+    },
+    {
+      "id": "jp_yamaguchi_station_448125006",
+      "osm_id": 448125006,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "椋野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1935832,
+      "longitude": 132.0335988
+    },
+    {
+      "id": "jp_yamaguchi_station_448125008",
+      "osm_id": 448125008,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "清流新岩国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seiryū-Shin-Iwakuni"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.162301,
+      "longitude": 132.1477616
+    },
+    {
+      "id": "jp_yamaguchi_station_448125013",
+      "osm_id": 448125013,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "河山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2360708,
+      "longitude": 131.9837001
+    },
+    {
+      "id": "jp_yamaguchi_station_448125816",
+      "osm_id": 448125816,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南河内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Gōchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1659692,
+      "longitude": 132.1035238
+    },
+    {
+      "id": "jp_yamaguchi_station_448126192",
+      "osm_id": 448126192,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "守内かさ神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shuuchi-Kasagami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1702003,
+      "longitude": 132.1355688
+    },
+    {
+      "id": "jp_yamaguchi_station_448126738",
+      "osm_id": 448126738,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "行波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yukaba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1632882,
+      "longitude": 132.0871421
+    },
+    {
+      "id": "jp_yamaguchi_station_448128344",
+      "osm_id": 448128344,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北河内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Gōchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1759474,
+      "longitude": 132.0646403
+    },
+    {
+      "id": "jp_yamaguchi_station_448128997",
+      "osm_id": 448128997,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南桑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naguwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.209697,
+      "longitude": 132.0206924
+    },
+    {
+      "id": "jp_yamaguchi_station_448129000",
+      "osm_id": 448129000,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "錦町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishikichō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2648963,
+      "longitude": 131.9629295
+    },
+    {
+      "id": "jp_yamaguchi_airport_1042055974",
+      "osm_id": 1042055974,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "airport",
+      "subtype": "military",
+      "name": "防府北基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hofu Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RJOF",
+      "latitude": 34.0346985,
+      "longitude": 131.548996
+    },
+    {
+      "id": "jp_yamaguchi_airport_1042056004",
+      "osm_id": 1042056004,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "airport",
+      "subtype": "military",
+      "name": "小月航空基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JMSDF Ozuki Air Base"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RJOZ",
+      "latitude": 34.0452995,
+      "longitude": 131.052002
+    },
+    {
+      "id": "jp_yamaguchi_bus_terminal_2426583080",
+      "osm_id": 2426583080,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "下関駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9505246,
+      "longitude": 130.9238068
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_2498989788",
+      "osm_id": 2498989788,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "下関港国際ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "下関市港湾局",
+      "network": null,
+      "ref": null,
+      "latitude": 33.947731,
+      "longitude": 130.9254417
+    },
+    {
+      "id": "jp_yamaguchi_station_2943848621",
+      "osm_id": 2943848621,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新下関",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0057025,
+      "longitude": 130.948202
+    },
+    {
+      "id": "jp_yamaguchi_station_3262423982",
+      "osm_id": 3262423982,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "梶栗郷台地",
+      "name_kana": "かじくりごうだいち",
+      "name_translations": {
+        "en": "Kajikuri-Gōdaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0140352,
+      "longitude": 130.9235652
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_3314980387",
+      "osm_id": 3314980387,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "舟島(巌流島)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.935826,
+      "longitude": 130.9284596
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_3732686778",
+      "osm_id": 3732686778,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "下関港(唐戸桟橋)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9557657,
+      "longitude": 130.9430214
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_3803549263",
+      "osm_id": 3803549263,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "徳山港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.049757,
+      "longitude": 131.7989341
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_3804431898",
+      "osm_id": 3804431898,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "馬島港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9903886,
+      "longitude": 131.7209764
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_3804433058",
+      "osm_id": 3804433058,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "刈尾港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0165741,
+      "longitude": 131.7107265
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4199676089",
+      "osm_id": 4199676089,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三田尻港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0369148,
+      "longitude": 131.584285
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4199682893",
+      "osm_id": 4199682893,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "野島港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9431682,
+      "longitude": 131.6943969
+    },
+    {
+      "id": "jp_yamaguchi_bus_terminal_4243804336",
+      "osm_id": 4243804336,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "防長バス萩バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4105289,
+      "longitude": 131.4027299
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4362727895",
+      "osm_id": 4362727895,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "牛島港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8593953,
+      "longitude": 132.0069054
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4362773189",
+      "osm_id": 4362773189,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "室積港発着場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.927499,
+      "longitude": 131.9740632
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4373631014",
+      "osm_id": 4373631014,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "佐合島港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8751429,
+      "longitude": 132.0667164
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4373731395",
+      "osm_id": 4373731395,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "佐賀港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8925069,
+      "longitude": 132.0796668
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4373741391",
+      "osm_id": 4373741391,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "馬島港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8964613,
+      "longitude": 132.0506562
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4373823790",
+      "osm_id": 4373823790,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "渡船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9123459,
+      "longitude": 132.0452096
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4374955490",
+      "osm_id": 4374955490,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "蒲井港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8140834,
+      "longitude": 132.0759051
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4374955589",
+      "osm_id": 4374955589,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "四代乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7922493,
+      "longitude": 132.0556826
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4374955791",
+      "osm_id": 4374955791,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "祝島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7875115,
+      "longitude": 131.9884607
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4374970792",
+      "osm_id": 4374970792,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "平郡西港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8018349,
+      "longitude": 132.1994392
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4374973899",
+      "osm_id": 4374973899,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "平郡東浦港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7790076,
+      "longitude": 132.26317
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4375080889",
+      "osm_id": 4375080889,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "羽仁港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7813167,
+      "longitude": 132.2582295
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4375083490",
+      "osm_id": 4375083490,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "八島古浦港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7538964,
+      "longitude": 132.1438448
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4375091092",
+      "osm_id": 4375091092,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "八島港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7294059,
+      "longitude": 132.1427878
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4375142897",
+      "osm_id": 4375142897,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "伊保田港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9442177,
+      "longitude": 132.4391337
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4375458796",
+      "osm_id": 4375458796,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "笠佐島港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9461905,
+      "longitude": 132.1673864
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4375472492",
+      "osm_id": 4375472492,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "笠佐島航路発着場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9427951,
+      "longitude": 132.1875924
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_4663401638",
+      "osm_id": 4663401638,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "元山港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3546396,
+      "longitude": 130.871555
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_5224551618",
+      "osm_id": 5224551618,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "瀬戸浜港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.028908,
+      "longitude": 131.7137611
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_5224583523",
+      "osm_id": 5224583523,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "本浦港旅客船発着所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0075991,
+      "longitude": 131.7032928
+    },
+    {
+      "id": "jp_yamaguchi_station_6054859873",
+      "osm_id": 6054859873,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小月",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ozuki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0680428,
+      "longitude": 131.0328781
+    },
+    {
+      "id": "jp_yamaguchi_bus_terminal_6282455345",
+      "osm_id": 6282455345,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バス案内所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0942624,
+      "longitude": 131.3958567
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_6334563355",
+      "osm_id": 6334563355,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "青海島觀光汽船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.388788,
+      "longitude": 131.2031219
+    },
+    {
+      "id": "jp_yamaguchi_station_6872871854",
+      "osm_id": 6872871854,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下関",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimonoseki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9493851,
+      "longitude": 130.9217895
+    },
+    {
+      "id": "jp_yamaguchi_station_7106287025",
+      "osm_id": 7106287025,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "通津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuzu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0681847,
+      "longitude": 132.2049813
+    },
+    {
+      "id": "jp_yamaguchi_station_7238241815",
+      "osm_id": 7238241815,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwakuni"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "R16",
+      "latitude": 34.1719658,
+      "longitude": 132.2255418
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_7731950746",
+      "osm_id": 7731950746,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "見島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7627173,
+      "longitude": 131.1525434
+    },
+    {
+      "id": "jp_yamaguchi_station_7812775884",
+      "osm_id": 7812775884,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin Yamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0931301,
+      "longitude": 131.3969538
+    },
+    {
+      "id": "jp_yamaguchi_station_8195950643",
+      "osm_id": 8195950643,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "清流みはらし",
+      "name_kana": "せいりゅうみはらし",
+      "name_translations": {
+        "en": "Seiryu-Miharashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2110339,
+      "longitude": 132.0063554
+    },
+    {
+      "id": "jp_yamaguchi_station_8557769911",
+      "osm_id": 8557769911,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南岩国",
+      "name_kana": "みなみいわくに",
+      "name_translations": {
+        "en": "Minami-Iwakuni"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1361357,
+      "longitude": 132.2069058
+    },
+    {
+      "id": "jp_yamaguchi_station_8558010863",
+      "osm_id": 8558010863,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新南陽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinnan-yō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0696603,
+      "longitude": 131.7700182
+    },
+    {
+      "id": "jp_yamaguchi_station_8558302327",
+      "osm_id": 8558302327,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0510183,
+      "longitude": 131.8020941
+    },
+    {
+      "id": "jp_yamaguchi_station_8558302338",
+      "osm_id": 8558302338,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新岩国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Iwakuni"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1645738,
+      "longitude": 132.1495132
+    },
+    {
+      "id": "jp_yamaguchi_station_8559468556",
+      "osm_id": 8559468556,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "幡生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatabu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9812127,
+      "longitude": 130.9274002
+    },
+    {
+      "id": "jp_yamaguchi_station_8559647241",
+      "osm_id": 8559647241,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "埴生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Habu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0491382,
+      "longitude": 131.0868488
+    },
+    {
+      "id": "jp_yamaguchi_station_8559899910",
+      "osm_id": 8559899910,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小野田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onoda"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0079811,
+      "longitude": 131.1854093
+    },
+    {
+      "id": "jp_yamaguchi_station_8559901428",
+      "osm_id": 8559901428,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ube"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0032023,
+      "longitude": 131.2220224
+    },
+    {
+      "id": "jp_yamaguchi_station_8560452356",
+      "osm_id": 8560452356,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本由良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hon-Yura"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0319798,
+      "longitude": 131.3438205
+    },
+    {
+      "id": "jp_yamaguchi_station_8560452357",
+      "osm_id": 8560452357,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "嘉川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kagawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0661292,
+      "longitude": 131.3702121
+    },
+    {
+      "id": "jp_yamaguchi_station_8560452371",
+      "osm_id": 8560452371,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "四辻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yotsutsuji"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.079959,
+      "longitude": 131.4480686
+    },
+    {
+      "id": "jp_yamaguchi_station_8560452378",
+      "osm_id": 8560452378,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daidō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0531928,
+      "longitude": 131.4884654
+    },
+    {
+      "id": "jp_yamaguchi_station_8560452384",
+      "osm_id": 8560452384,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "防府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hofu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0533394,
+      "longitude": 131.5689276
+    },
+    {
+      "id": "jp_yamaguchi_station_8560452430",
+      "osm_id": 8560452430,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "富海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tonomi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0486842,
+      "longitude": 131.639239
+    },
+    {
+      "id": "jp_yamaguchi_station_8560452512",
+      "osm_id": 8560452512,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "厚東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotou"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0387171,
+      "longitude": 131.2677509
+    },
+    {
+      "id": "jp_yamaguchi_station_8561132016",
+      "osm_id": 8561132016,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0726086,
+      "longitude": 131.7045669
+    },
+    {
+      "id": "jp_yamaguchi_station_8562132365",
+      "osm_id": 8562132365,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujū"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1136577,
+      "longitude": 132.198379
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_9146454195",
+      "osm_id": 9146454195,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "情島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9584653,
+      "longitude": 132.4791606
+    },
+    {
+      "id": "jp_yamaguchi_station_10724602324",
+      "osm_id": 10724602324,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "光",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hikari"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9739245,
+      "longitude": 131.9146925
+    },
+    {
+      "id": "jp_yamaguchi_station_10726381153",
+      "osm_id": 10726381153,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwata"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9815653,
+      "longitude": 131.9951688
+    },
+    {
+      "id": "jp_yamaguchi_station_10726381155",
+      "osm_id": 10726381155,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "田布施",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tabuse"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.958818,
+      "longitude": 132.0440859
+    },
+    {
+      "id": "jp_yamaguchi_station_10726381156",
+      "osm_id": 10726381156,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳井港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanaiminato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9582609,
+      "longitude": 132.1342888
+    },
+    {
+      "id": "jp_yamaguchi_station_11711158258",
+      "osm_id": 11711158258,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇部岬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ubemisaki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9347455,
+      "longitude": 131.2622377
+    },
+    {
+      "id": "jp_yamaguchi_station_11711162525",
+      "osm_id": 11711162525,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "居能",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9671842,
+      "longitude": 131.2279988
+    },
+    {
+      "id": "jp_yamaguchi_station_12072029869",
+      "osm_id": 12072029869,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "和木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Waki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2042786,
+      "longitude": 132.2276272
+    },
+    {
+      "id": "jp_yamaguchi_station_12076837508",
+      "osm_id": 12076837508,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "櫛ヶ浜",
+      "name_kana": "くしがはま",
+      "name_translations": {
+        "en": "Kushigahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0310528,
+      "longitude": 131.829059
+    },
+    {
+      "id": "jp_yamaguchi_station_12076837509",
+      "osm_id": 12076837509,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下松",
+      "name_kana": "くだまつ",
+      "name_translations": {
+        "en": "Kudamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0088727,
+      "longitude": 131.867947
+    },
+    {
+      "id": "jp_yamaguchi_station_12076837513",
+      "osm_id": 12076837513,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "島田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9902818,
+      "longitude": 131.960915
+    },
+    {
+      "id": "jp_yamaguchi_station_12076837516",
+      "osm_id": 12076837516,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9658575,
+      "longitude": 132.1062961
+    },
+    {
+      "id": "jp_yamaguchi_station_12076837518",
+      "osm_id": 12076837518,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大畠",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōbatake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9632103,
+      "longitude": 132.1809842
+    },
+    {
+      "id": "jp_yamaguchi_station_12076837519",
+      "osm_id": 12076837519,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "神代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōjiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9982902,
+      "longitude": 132.208723
+    },
+    {
+      "id": "jp_yamaguchi_station_12903226325",
+      "osm_id": 12903226325,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokusa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4001356,
+      "longitude": 131.7204563
+    },
+    {
+      "id": "jp_yamaguchi_station_12903226326",
+      "osm_id": 12903226326,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "三谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3418007,
+      "longitude": 131.6245729
+    },
+    {
+      "id": "jp_yamaguchi_station_12903226333",
+      "osm_id": 12903226333,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1726099,
+      "longitude": 131.4808318
+    },
+    {
+      "id": "jp_yamaguchi_station_12903226334",
+      "osm_id": 12903226334,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯田温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yudaonsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1598129,
+      "longitude": 131.4601091
+    },
+    {
+      "id": "jp_yamaguchi_station_12917908697",
+      "osm_id": 12917908697,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩鼻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwahana"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR宇部線",
+      "ref": null,
+      "latitude": 33.9787845,
+      "longitude": 131.2253602
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927578",
+      "osm_id": 12917927578,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇部新川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ube-Shinkawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.958623,
+      "longitude": 131.2426329
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927585",
+      "osm_id": 12917927585,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "琴芝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotoshiba"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9529019,
+      "longitude": 131.2519804
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927586",
+      "osm_id": 12917927586,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東新川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Shinkawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9484365,
+      "longitude": 131.2570771
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927641",
+      "osm_id": 12917927641,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "草江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9367189,
+      "longitude": 131.2742003
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927642",
+      "osm_id": 12917927642,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "常盤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokiwa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9407959,
+      "longitude": 131.2921651
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927650",
+      "osm_id": 12917927650,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "床波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokonami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9525448,
+      "longitude": 131.3053697
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927651",
+      "osm_id": 12917927651,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "丸尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maruo"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9701402,
+      "longitude": 131.3368119
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927660",
+      "osm_id": 12917927660,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "岐波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9900994,
+      "longitude": 131.3479915
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927688",
+      "osm_id": 12917927688,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿知須",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ajisu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0107308,
+      "longitude": 131.3566754
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927698",
+      "osm_id": 12917927698,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwakura"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0234336,
+      "longitude": 131.3599777
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927703",
+      "osm_id": 12917927703,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "周防佐山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suo-Sayama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0349155,
+      "longitude": 131.3636508
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927714",
+      "osm_id": 12917927714,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "深溝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukamizo"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR宇部線",
+      "ref": null,
+      "latitude": 34.0469266,
+      "longitude": 131.3713943
+    },
+    {
+      "id": "jp_yamaguchi_station_12917927745",
+      "osm_id": 12917927745,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上嘉川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Kagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.073765,
+      "longitude": 131.3789708
+    },
+    {
+      "id": "jp_yamaguchi_station_12920296153",
+      "osm_id": 12920296153,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yabara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1504595,
+      "longitude": 131.4458214
+    },
+    {
+      "id": "jp_yamaguchi_station_12920296171",
+      "osm_id": 12920296171,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大歳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1472377,
+      "longitude": 131.432831
+    },
+    {
+      "id": "jp_yamaguchi_station_12920296178",
+      "osm_id": 12920296178,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁保津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nihozu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1288839,
+      "longitude": 131.4154468
+    },
+    {
+      "id": "jp_yamaguchi_station_12920296196",
+      "osm_id": 12920296196,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamigo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1163523,
+      "longitude": 131.401819
+    },
+    {
+      "id": "jp_yamaguchi_station_12920307413",
+      "osm_id": 12920307413,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "周防下郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suo-Shimogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1009948,
+      "longitude": 131.4016811
+    },
+    {
+      "id": "jp_yamaguchi_airport_57010586",
+      "osm_id": 57010586,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "山口宇部空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamaguchi-Ube Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "UBJ",
+      "latitude": 33.930108,
+      "longitude": 131.2791807
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_225454789",
+      "osm_id": 225454789,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "唐戸桟橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karato Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9558221,
+      "longitude": 130.9423203
+    },
+    {
+      "id": "jp_yamaguchi_airport_664900076",
+      "osm_id": 664900076,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "岩国錦帯橋空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwakuni Kintaikyo Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "IWK",
+      "latitude": 34.1589857,
+      "longitude": 132.2358521
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_989700200",
+      "osm_id": 989700200,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "伊保田港総合待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9440796,
+      "longitude": 132.4387014
+    },
+    {
+      "id": "jp_yamaguchi_ferry_terminal_989914233",
+      "osm_id": 989914233,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "柳井港ポートビル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9569312,
+      "longitude": 132.1334264
+    },
+    {
+      "id": "jp_yamaguchi_airport_1137137613",
+      "osm_id": 1137137613,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "周南ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "福谷産業",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0917301,
+      "longitude": 131.8364833
+    },
+    {
+      "id": "jp_yamaguchi_station_1365657107",
+      "osm_id": 1365657107,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamaguchi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長門二見駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2520289,
+      "longitude": 130.9156712
+    }
+  ]
+}

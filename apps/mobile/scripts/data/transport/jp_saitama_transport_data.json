@@ -1,0 +1,4404 @@
+{
+  "fetchedAt": "2025-12-24T05:49:45.466Z",
+  "prefecture_id": "jp_saitama",
+  "prefecture_name": "埼玉県",
+  "stats": {
+    "station": 230,
+    "airport": 4,
+    "ferry_terminal": 1,
+    "bus_terminal": 10,
+    "total": 245
+  },
+  "data": [
+    {
+      "id": "jp_saitama_station_243887260",
+      "osm_id": 243887260,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝霞",
+      "name_kana": "あさか",
+      "name_translations": {
+        "en": "Asaka"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ12",
+      "latitude": 35.7966582,
+      "longitude": 139.6003513
+    },
+    {
+      "id": "jp_saitama_station_244878145",
+      "osm_id": 244878145,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "蕨",
+      "name_kana": "わらび",
+      "name_translations": {
+        "en": "Warabi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8281232,
+      "longitude": 139.6903799
+    },
+    {
+      "id": "jp_saitama_station_244878189",
+      "osm_id": 244878189,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北浦和",
+      "name_kana": "きたうらわ",
+      "name_translations": {
+        "en": "Kita-Urawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8721554,
+      "longitude": 139.6461059
+    },
+    {
+      "id": "jp_saitama_station_244878195",
+      "osm_id": 244878195,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "与野",
+      "name_kana": "よの",
+      "name_translations": {
+        "en": "Yono"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8843981,
+      "longitude": 139.6391522
+    },
+    {
+      "id": "jp_saitama_station_244878198",
+      "osm_id": 244878198,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "さいたま新都心",
+      "name_kana": "さいたましんとしん",
+      "name_translations": {
+        "en": "Saitama-Shintoshin"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8936374,
+      "longitude": 139.6339481
+    },
+    {
+      "id": "jp_saitama_station_251510846",
+      "osm_id": 251510846,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩槻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwatsuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD06",
+      "latitude": 35.9501595,
+      "longitude": 139.6929146
+    },
+    {
+      "id": "jp_saitama_station_264211486",
+      "osm_id": 264211486,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大宮",
+      "name_kana": "おおみや",
+      "name_translations": {
+        "en": "Omiya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "OMY",
+      "latitude": 35.9063869,
+      "longitude": 139.6243304
+    },
+    {
+      "id": "jp_saitama_station_264889435",
+      "osm_id": 264889435,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "南栗橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kurihashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1132043,
+      "longitude": 139.7129197
+    },
+    {
+      "id": "jp_saitama_station_298329477",
+      "osm_id": 298329477,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "明覚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Myōkaku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0033004,
+      "longitude": 139.2888558
+    },
+    {
+      "id": "jp_saitama_station_298329605",
+      "osm_id": 298329605,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "折原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Orihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0962747,
+      "longitude": 139.1952953
+    },
+    {
+      "id": "jp_saitama_station_298329688",
+      "osm_id": 298329688,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "用土",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yodo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1534484,
+      "longitude": 139.2010083
+    },
+    {
+      "id": "jp_saitama_station_298329690",
+      "osm_id": 298329690,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "松久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuhisa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1729951,
+      "longitude": 139.1821775
+    },
+    {
+      "id": "jp_saitama_station_298329691",
+      "osm_id": 298329691,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "竹沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takezawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.075467,
+      "longitude": 139.2299283
+    },
+    {
+      "id": "jp_saitama_station_298329913",
+      "osm_id": 298329913,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "毛呂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Moro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9403972,
+      "longitude": 139.3093003
+    },
+    {
+      "id": "jp_saitama_station_298329957",
+      "osm_id": 298329957,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "児玉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kodama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1926268,
+      "longitude": 139.1359581
+    },
+    {
+      "id": "jp_saitama_station_298330837",
+      "osm_id": 298330837,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "金子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaneko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8110878,
+      "longitude": 139.3286556
+    },
+    {
+      "id": "jp_saitama_station_298330913",
+      "osm_id": 298330913,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小川町",
+      "name_kana": "おがわまち",
+      "name_translations": {
+        "en": "Ogawamachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0589385,
+      "longitude": 139.2609401
+    },
+    {
+      "id": "jp_saitama_station_308839580",
+      "osm_id": 308839580,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新越谷",
+      "name_kana": "しんこしがや",
+      "name_translations": {
+        "en": "Shin-koshigaya"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TS20",
+      "latitude": 35.8753395,
+      "longitude": 139.7898674
+    },
+    {
+      "id": "jp_saitama_station_308839760",
+      "osm_id": 308839760,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷塚",
+      "name_kana": "やつか",
+      "name_translations": {
+        "en": "Yatsuka"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TS15",
+      "latitude": 35.8142116,
+      "longitude": 139.8011329
+    },
+    {
+      "id": "jp_saitama_station_308839965",
+      "osm_id": 308839965,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東武動物公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobu Dobutsu-Koen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0248138,
+      "longitude": 139.7267541
+    },
+    {
+      "id": "jp_saitama_station_361021508",
+      "osm_id": 361021508,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊奈中央",
+      "name_kana": "いなちゅうおう",
+      "name_translations": {
+        "en": "Ina-Chuo"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9993374,
+      "longitude": 139.6172818
+    },
+    {
+      "id": "jp_saitama_station_361021535",
+      "osm_id": 361021535,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "志久",
+      "name_kana": "しく",
+      "name_translations": {
+        "en": "Shiku"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9912396,
+      "longitude": 139.6222033
+    },
+    {
+      "id": "jp_saitama_station_361021706",
+      "osm_id": 361021706,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鉄道博物館",
+      "name_kana": "てつどうはくぶつかん",
+      "name_translations": {
+        "en": "Tetsudo Hakubutsukan"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9205193,
+      "longitude": 139.6176711
+    },
+    {
+      "id": "jp_saitama_station_361021857",
+      "osm_id": 361021857,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "丸山",
+      "name_kana": "まるやま",
+      "name_translations": {
+        "en": "Maruyama"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9799206,
+      "longitude": 139.6247029
+    },
+    {
+      "id": "jp_saitama_airport_415168305",
+      "osm_id": 415168305,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "航空自衛隊 入間基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iruma Air Base"
+      },
+      "operator": "Japan Air Self-Defense Force",
+      "network": null,
+      "ref": "RJTJ",
+      "latitude": 35.8429315,
+      "longitude": 139.4113541
+    },
+    {
+      "id": "jp_saitama_station_503873207",
+      "osm_id": 503873207,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西武秩父",
+      "name_kana": "せいぶちちぶ",
+      "name_translations": {
+        "en": "Seibu-Chichibu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9902119,
+      "longitude": 139.083122
+    },
+    {
+      "id": "jp_saitama_station_503883147",
+      "osm_id": 503883147,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "持田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mochida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1376538,
+      "longitude": 139.4421269
+    },
+    {
+      "id": "jp_saitama_station_503883148",
+      "osm_id": 503883148,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東行田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Gyōda Station"
+      },
+      "operator": "秩父鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1472311,
+      "longitude": 139.4684922
+    },
+    {
+      "id": "jp_saitama_station_503883152",
+      "osm_id": 503883152,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "石原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishiwara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1477624,
+      "longitude": 139.3688331
+    },
+    {
+      "id": "jp_saitama_station_503883273",
+      "osm_id": 503883273,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shingō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1712227,
+      "longitude": 139.5101135
+    },
+    {
+      "id": "jp_saitama_station_503883289",
+      "osm_id": 503883289,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西羽生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Hanyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.176457,
+      "longitude": 139.5240089
+    },
+    {
+      "id": "jp_saitama_station_503883885",
+      "osm_id": 503883885,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "小前田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omaeda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1289882,
+      "longitude": 139.2223337
+    },
+    {
+      "id": "jp_saitama_station_503883886",
+      "osm_id": 503883886,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "樋口",
+      "name_kana": "ひぐち",
+      "name_translations": {
+        "en": "Higuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.131119,
+      "longitude": 139.1223146
+    },
+    {
+      "id": "jp_saitama_station_503883928",
+      "osm_id": 503883928,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "永田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1353752,
+      "longitude": 139.259362
+    },
+    {
+      "id": "jp_saitama_station_503883929",
+      "osm_id": 503883929,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "皆野",
+      "name_kana": "みなの",
+      "name_translations": {
+        "en": "Minano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0686341,
+      "longitude": 139.0939558
+    },
+    {
+      "id": "jp_saitama_station_503884086",
+      "osm_id": 503884086,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "親鼻",
+      "name_kana": "おやはな",
+      "name_translations": {
+        "en": "Oyahana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0775992,
+      "longitude": 139.1063964
+    },
+    {
+      "id": "jp_saitama_station_503884123",
+      "osm_id": 503884123,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takekawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1421888,
+      "longitude": 139.2824145
+    },
+    {
+      "id": "jp_saitama_station_503884675",
+      "osm_id": 503884675,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "波久礼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hagure"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1267819,
+      "longitude": 139.1580969
+    },
+    {
+      "id": "jp_saitama_station_503885045",
+      "osm_id": 503885045,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "上長瀞",
+      "name_kana": "かみながとろ",
+      "name_translations": {
+        "en": "Kaminagatoro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CR25",
+      "latitude": 36.0861719,
+      "longitude": 139.1133328
+    },
+    {
+      "id": "jp_saitama_station_503885058",
+      "osm_id": 503885058,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "長瀞",
+      "name_kana": "ながとろ",
+      "name_translations": {
+        "en": "Nagatoro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CR24",
+      "latitude": 36.0952949,
+      "longitude": 139.1124969
+    },
+    {
+      "id": "jp_saitama_station_503885116",
+      "osm_id": 503885116,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "ひろせ野鳥の森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirose-Yachō-no-Mori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1461502,
+      "longitude": 139.3515466
+    },
+    {
+      "id": "jp_saitama_station_503885125",
+      "osm_id": 503885125,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "明戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aketo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1430201,
+      "longitude": 139.3034521
+    },
+    {
+      "id": "jp_saitama_station_503885127",
+      "osm_id": 503885127,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "野上",
+      "name_kana": "のがみ",
+      "name_translations": {
+        "en": "Nogami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.111646,
+      "longitude": 139.1107334
+    },
+    {
+      "id": "jp_saitama_station_503885134",
+      "osm_id": 503885134,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "秩父",
+      "name_kana": "ちちぶ",
+      "name_translations": {
+        "en": "Chichibu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9985854,
+      "longitude": 139.0859462
+    },
+    {
+      "id": "jp_saitama_station_503885906",
+      "osm_id": 503885906,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakurazawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1286769,
+      "longitude": 139.2070056
+    },
+    {
+      "id": "jp_saitama_station_503885910",
+      "osm_id": 503885910,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大野原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0186166,
+      "longitude": 139.0940304
+    },
+    {
+      "id": "jp_saitama_station_503886011",
+      "osm_id": 503886011,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大麻生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōasō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1447931,
+      "longitude": 139.3323745
+    },
+    {
+      "id": "jp_saitama_station_503886115",
+      "osm_id": 503886115,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "白久",
+      "name_kana": "しろく",
+      "name_translations": {
+        "en": "Shiroku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9589194,
+      "longitude": 138.9933278
+    },
+    {
+      "id": "jp_saitama_station_503886117",
+      "osm_id": 503886117,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武州日野",
+      "name_kana": "ぶしゅうひの",
+      "name_translations": {
+        "en": "Busyu-Hino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.953936,
+      "longitude": 139.0217769
+    },
+    {
+      "id": "jp_saitama_station_503886125",
+      "osm_id": 503886125,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武州中川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Busyu-Nakagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9583654,
+      "longitude": 139.0354128
+    },
+    {
+      "id": "jp_saitama_station_503886320",
+      "osm_id": 503886320,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "影森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kagemori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9721258,
+      "longitude": 139.0683811
+    },
+    {
+      "id": "jp_saitama_station_503886443",
+      "osm_id": 503886443,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urayamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9640037,
+      "longitude": 139.0583697
+    },
+    {
+      "id": "jp_saitama_station_503886681",
+      "osm_id": 503886681,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "三峰口",
+      "name_kana": "みつみねぐち",
+      "name_translations": {
+        "en": "Mitsumineguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9600528,
+      "longitude": 138.9790441
+    },
+    {
+      "id": "jp_saitama_station_503889912",
+      "osm_id": 503889912,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "川角",
+      "name_kana": "かわかど",
+      "name_translations": {
+        "en": "Kawakado"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ43",
+      "latitude": 35.9374897,
+      "longitude": 139.3468489
+    },
+    {
+      "id": "jp_saitama_station_503890759",
+      "osm_id": 503890759,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武州唐沢",
+      "name_kana": "ぶしゅうからさわ",
+      "name_translations": {
+        "en": "Bushu-karasawa"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ46",
+      "latitude": 35.9519502,
+      "longitude": 139.3093018
+    },
+    {
+      "id": "jp_saitama_station_614674077",
+      "osm_id": 614674077,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北上尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Ageo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9856142,
+      "longitude": 139.5771545
+    },
+    {
+      "id": "jp_saitama_station_1037948559",
+      "osm_id": 1037948559,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西大宮",
+      "name_kana": "にしおおみや",
+      "name_translations": {
+        "en": "Nishi-Omiya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9223096,
+      "longitude": 139.5798125
+    },
+    {
+      "id": "jp_saitama_station_1349023818",
+      "osm_id": 1349023818,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東大宮",
+      "name_kana": "ひがしおおみや",
+      "name_translations": {
+        "en": "Higashi-Omiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9487666,
+      "longitude": 139.6403108
+    },
+    {
+      "id": "jp_saitama_station_1424084428",
+      "osm_id": 1424084428,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西武球場前",
+      "name_kana": "せいぶきゅじょうまえ",
+      "name_translations": {
+        "en": "Seibukyujo-mae"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SY03",
+      "latitude": 35.7704505,
+      "longitude": 139.4197824
+    },
+    {
+      "id": "jp_saitama_station_1503979841",
+      "osm_id": 1503979841,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北戸田",
+      "name_kana": "きたとだ",
+      "name_translations": {
+        "en": "Kita-Toda"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA20",
+      "latitude": 35.8276529,
+      "longitude": 139.6601108
+    },
+    {
+      "id": "jp_saitama_station_1503979844",
+      "osm_id": 1503979844,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "戸田",
+      "name_kana": "とだ",
+      "name_translations": {
+        "en": "Toda"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA19",
+      "latitude": 35.8176989,
+      "longitude": 139.6695966
+    },
+    {
+      "id": "jp_saitama_station_1681303185",
+      "osm_id": 1681303185,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōwada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD04",
+      "latitude": 35.9292717,
+      "longitude": 139.6506137
+    },
+    {
+      "id": "jp_saitama_station_1681303186",
+      "osm_id": 1681303186,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "南桜井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Sakurai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD12",
+      "latitude": 35.980455,
+      "longitude": 139.8079892
+    },
+    {
+      "id": "jp_saitama_station_1681303218",
+      "osm_id": 1681303218,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤の牛島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujino-Ushijima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD11",
+      "latitude": 35.9802677,
+      "longitude": 139.7780321
+    },
+    {
+      "id": "jp_saitama_station_1681303231",
+      "osm_id": 1681303231,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東岩槻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Iwatsuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD07",
+      "latitude": 35.963296,
+      "longitude": 139.7122477
+    },
+    {
+      "id": "jp_saitama_station_1799607422",
+      "osm_id": 1799607422,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中浦和",
+      "name_kana": "なかうらわ",
+      "name_translations": {
+        "en": "Naka-Urawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA22",
+      "latitude": 35.8535248,
+      "longitude": 139.6377223
+    },
+    {
+      "id": "jp_saitama_station_2004078231",
+      "osm_id": 2004078231,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南与野",
+      "name_kana": "みなみよの",
+      "name_translations": {
+        "en": "Minami-Yono"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA23",
+      "latitude": 35.8678858,
+      "longitude": 139.6310388
+    },
+    {
+      "id": "jp_saitama_station_2106545423",
+      "osm_id": 2106545423,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新座",
+      "name_kana": "にいざ",
+      "name_translations": {
+        "en": "Niiza"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8037343,
+      "longitude": 139.5562
+    },
+    {
+      "id": "jp_saitama_station_2348594796",
+      "osm_id": 2348594796,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南浦和",
+      "name_kana": "みなみうらわ",
+      "name_translations": {
+        "en": "Minami-Urawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JK42;JM25",
+      "latitude": 35.8477323,
+      "longitude": 139.669144
+    },
+    {
+      "id": "jp_saitama_station_2469862610",
+      "osm_id": 2469862610,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西武園ゆうえんち",
+      "name_kana": "せいぶえんゆうえんち",
+      "name_translations": {
+        "en": "Seibuen-yūenchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7693627,
+      "longitude": 139.4400558
+    },
+    {
+      "id": "jp_saitama_airport_2474531814",
+      "osm_id": 2474531814,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "ホンダエアポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9766513,
+      "longitude": 139.5238055
+    },
+    {
+      "id": "jp_saitama_station_2669107035",
+      "osm_id": 2669107035,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "与野本町",
+      "name_kana": "よのほんまち",
+      "name_translations": {
+        "en": "Yono-Hommachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA24",
+      "latitude": 35.8812024,
+      "longitude": 139.6260199
+    },
+    {
+      "id": "jp_saitama_station_2670191219",
+      "osm_id": 2670191219,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川口",
+      "name_kana": "かわぐち",
+      "name_translations": {
+        "en": "Kawaguchi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8019257,
+      "longitude": 139.7175116
+    },
+    {
+      "id": "jp_saitama_station_2722542475",
+      "osm_id": 2722542475,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東川口",
+      "name_kana": "ひがしかわぐち",
+      "name_translations": {
+        "en": "Higashi-Kawaguchi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8752711,
+      "longitude": 139.7443712
+    },
+    {
+      "id": "jp_saitama_station_2964285318",
+      "osm_id": 2964285318,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大家",
+      "name_kana": "にしおおや",
+      "name_translations": {
+        "en": "Nishi-oya"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ42",
+      "latitude": 35.9316608,
+      "longitude": 139.3562818
+    },
+    {
+      "id": "jp_saitama_station_3547330605",
+      "osm_id": 3547330605,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西川口",
+      "name_kana": "にしかわぐち",
+      "name_translations": {
+        "en": "Nishi-Kawaguchi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8155833,
+      "longitude": 139.7044816
+    },
+    {
+      "id": "jp_saitama_station_3547330609",
+      "osm_id": 3547330609,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浦和",
+      "name_kana": "うらわ",
+      "name_translations": {
+        "en": "Urawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8589883,
+      "longitude": 139.6571882
+    },
+    {
+      "id": "jp_saitama_station_3558006051",
+      "osm_id": 3558006051,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ageo"
+      },
+      "operator": "JR  東日本旅客鉄道",
+      "network": "JR  高崎線",
+      "ref": null,
+      "latitude": 35.9733274,
+      "longitude": 139.5884718
+    },
+    {
+      "id": "jp_saitama_station_3558006052",
+      "osm_id": 3558006052,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "深谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1915583,
+      "longitude": 139.2810987
+    },
+    {
+      "id": "jp_saitama_station_3558006053",
+      "osm_id": 3558006053,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吹上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukiage"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1032019,
+      "longitude": 139.4529758
+    },
+    {
+      "id": "jp_saitama_station_3558006054",
+      "osm_id": 3558006054,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "行田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gyoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1138875,
+      "longitude": 139.4321697
+    },
+    {
+      "id": "jp_saitama_station_3558006055",
+      "osm_id": 3558006055,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "本庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Honjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2360554,
+      "longitude": 139.188536
+    },
+    {
+      "id": "jp_saitama_station_3558006056",
+      "osm_id": 3558006056,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "神保原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jimbohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2537146,
+      "longitude": 139.1492791
+    },
+    {
+      "id": "jp_saitama_station_3558006057",
+      "osm_id": 3558006057,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "籠原",
+      "name_kana": "かごはら",
+      "name_translations": {
+        "en": "Kagohara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1746666,
+      "longitude": 139.3305124
+    },
+    {
+      "id": "jp_saitama_station_3558006058",
+      "osm_id": 3558006058,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北鴻巣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Konosu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0855262,
+      "longitude": 139.476995
+    },
+    {
+      "id": "jp_saitama_station_3558006059",
+      "osm_id": 3558006059,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitamoto"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0316402,
+      "longitude": 139.533981
+    },
+    {
+      "id": "jp_saitama_station_3558006060",
+      "osm_id": 3558006060,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鴻巣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konosu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0592587,
+      "longitude": 139.5096876
+    },
+    {
+      "id": "jp_saitama_station_3558006061",
+      "osm_id": 3558006061,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "熊谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumagaya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1390715,
+      "longitude": 139.390035
+    },
+    {
+      "id": "jp_saitama_station_3558006063",
+      "osm_id": 3558006063,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宮原",
+      "name_kana": "みやはら",
+      "name_translations": {
+        "en": "Miyahara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9403002,
+      "longitude": 139.6095462
+    },
+    {
+      "id": "jp_saitama_station_3558006064",
+      "osm_id": 3558006064,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2056805,
+      "longitude": 139.2375953
+    },
+    {
+      "id": "jp_saitama_station_3558006065",
+      "osm_id": 3558006065,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "桶川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okegawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9987374,
+      "longitude": 139.5640213
+    },
+    {
+      "id": "jp_saitama_station_3625203341",
+      "osm_id": 3625203341,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "小手指",
+      "name_kana": "こてさし",
+      "name_translations": {
+        "en": "Kotesashi"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI19",
+      "latitude": 35.8006184,
+      "longitude": 139.4377917
+    },
+    {
+      "id": "jp_saitama_station_3625203342",
+      "osm_id": 3625203342,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "狭山ヶ丘",
+      "name_kana": "さやまがおか",
+      "name_translations": {
+        "en": "Sayamagaoka"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI20",
+      "latitude": 35.8105229,
+      "longitude": 139.4167118
+    },
+    {
+      "id": "jp_saitama_station_3625203343",
+      "osm_id": 3625203343,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲荷山公園",
+      "name_kana": "いなりやまこうえん",
+      "name_translations": {
+        "en": "Inariyama-koen"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI22",
+      "latitude": 35.8449274,
+      "longitude": 139.3985589
+    },
+    {
+      "id": "jp_saitama_station_3625203344",
+      "osm_id": 3625203344,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西所沢",
+      "name_kana": "にしところざわ",
+      "name_translations": {
+        "en": "Nishi-Tokorozawa"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI18",
+      "latitude": 35.7889568,
+      "longitude": 139.4560657
+    },
+    {
+      "id": "jp_saitama_station_3625233873",
+      "osm_id": 3625233873,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "入間市",
+      "name_kana": "いるまし",
+      "name_translations": {
+        "en": "Irumashi"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI23",
+      "latitude": 35.8426832,
+      "longitude": 139.3901317
+    },
+    {
+      "id": "jp_saitama_station_3634127606",
+      "osm_id": 3634127606,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "白岡",
+      "name_kana": "しらおか",
+      "name_translations": {
+        "en": "Shiraoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0174085,
+      "longitude": 139.6669008
+    },
+    {
+      "id": "jp_saitama_station_3647437884",
+      "osm_id": 3647437884,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "戸田公園",
+      "name_kana": "とだこうえん",
+      "name_translations": {
+        "en": "Todakoen"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA18",
+      "latitude": 35.8079089,
+      "longitude": 139.6781947
+    },
+    {
+      "id": "jp_saitama_station_3654391415",
+      "osm_id": 3654391415,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "春日部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasukabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD10",
+      "latitude": 35.980074,
+      "longitude": 139.7520793
+    },
+    {
+      "id": "jp_saitama_station_3654391424",
+      "osm_id": 3654391424,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "北大宮",
+      "name_kana": "きたおおみや",
+      "name_translations": {
+        "en": "Kita-omiya"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TD02",
+      "latitude": 35.917609,
+      "longitude": 139.6248125
+    },
+    {
+      "id": "jp_saitama_station_3654392244",
+      "osm_id": 3654392244,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "七里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanasato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD05",
+      "latitude": 35.9363894,
+      "longitude": 139.6658159
+    },
+    {
+      "id": "jp_saitama_station_3654392254",
+      "osm_id": 3654392254,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大宮公園",
+      "name_kana": "おおみやこうえん",
+      "name_translations": {
+        "en": "Omiya Park"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD03",
+      "latitude": 35.9238247,
+      "longitude": 139.6329484
+    },
+    {
+      "id": "jp_saitama_station_3654392271",
+      "osm_id": 3654392271,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊春",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyoharu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TD08",
+      "latitude": 35.9680359,
+      "longitude": 139.7262512
+    },
+    {
+      "id": "jp_saitama_station_3666779221",
+      "osm_id": 3666779221,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "北春日部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Kasukabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9905638,
+      "longitude": 139.7440126
+    },
+    {
+      "id": "jp_saitama_station_3708276249",
+      "osm_id": 3708276249,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "久喜",
+      "name_kana": "くき",
+      "name_translations": {
+        "en": "Kuki"
+      },
+      "operator": "東武鉄道;東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0656137,
+      "longitude": 139.6775246
+    },
+    {
+      "id": "jp_saitama_station_3730035915",
+      "osm_id": 3730035915,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新白岡",
+      "name_kana": "しんしらおか",
+      "name_translations": {
+        "en": "Shin-Shiraoka"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0386605,
+      "longitude": 139.6720894
+    },
+    {
+      "id": "jp_saitama_station_3730443553",
+      "osm_id": 3730443553,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "高麗川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8962692,
+      "longitude": 139.3379886
+    },
+    {
+      "id": "jp_saitama_station_3730703334",
+      "osm_id": 3730703334,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "所沢",
+      "name_kana": "ところざわ",
+      "name_translations": {
+        "en": "Tokorozawa"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI17;SS22",
+      "latitude": 35.7867907,
+      "longitude": 139.4733096
+    },
+    {
+      "id": "jp_saitama_ferry_terminal_3781751214",
+      "osm_id": 3781751214,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "赤岩渡船",
+      "name_kana": "あかいわとせん",
+      "name_translations": {
+        "en": "Akaiwa tosen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2049525,
+      "longitude": 139.4292246
+    },
+    {
+      "id": "jp_saitama_station_3828076591",
+      "osm_id": 3828076591,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "蓮田",
+      "name_kana": "はすだ",
+      "name_translations": {
+        "en": "Hasuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9813997,
+      "longitude": 139.6530635
+    },
+    {
+      "id": "jp_saitama_station_3828076593",
+      "osm_id": 3828076593,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "土呂",
+      "name_kana": "とろ",
+      "name_translations": {
+        "en": "Toro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9317759,
+      "longitude": 139.6321346
+    },
+    {
+      "id": "jp_saitama_station_3918571239",
+      "osm_id": 3918571239,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東ゲート",
+      "name_kana": "",
+      "name_translations": {
+        "en": "East gate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0197432,
+      "longitude": 139.7193319
+    },
+    {
+      "id": "jp_saitama_station_3918633780",
+      "osm_id": 3918633780,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "リバティーランド",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Liberty Land"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.01994,
+      "longitude": 139.7160332
+    },
+    {
+      "id": "jp_saitama_station_3919289263",
+      "osm_id": 3919289263,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "ハートフルランド",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Heartful Land"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0214373,
+      "longitude": 139.7118592
+    },
+    {
+      "id": "jp_saitama_station_4051552657",
+      "osm_id": 4051552657,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北与野",
+      "name_kana": "きたよの",
+      "name_translations": {
+        "en": "Kita-Yono"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA25",
+      "latitude": 35.890369,
+      "longitude": 139.6284122
+    },
+    {
+      "id": "jp_saitama_station_4053970846",
+      "osm_id": 4053970846,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南古谷",
+      "name_kana": "みなみふるや",
+      "name_translations": {
+        "en": "Minami-Furuya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9032539,
+      "longitude": 139.5194429
+    },
+    {
+      "id": "jp_saitama_station_4061808853",
+      "osm_id": 4061808853,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "武蔵浦和",
+      "name_kana": "むさしうらわ",
+      "name_translations": {
+        "en": "Musashi-Urawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JA21;JM26",
+      "latitude": 35.8459689,
+      "longitude": 139.647066
+    },
+    {
+      "id": "jp_saitama_station_4708704099",
+      "osm_id": 4708704099,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2066499,
+      "longitude": 139.65959
+    },
+    {
+      "id": "jp_saitama_station_4755786036",
+      "osm_id": 4755786036,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "ソシオ流通センター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "秩父鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1364779,
+      "longitude": 139.4244068
+    },
+    {
+      "id": "jp_saitama_station_5408205539",
+      "osm_id": 5408205539,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "metro",
+      "name": "和光市",
+      "name_kana": "わこうし",
+      "name_translations": {
+        "en": "Wakoshi"
+      },
+      "operator": "東京地下鉄",
+      "network": "東京メトロ副都心線",
+      "ref": "Y01;F01",
+      "latitude": 35.7884589,
+      "longitude": 139.6125511
+    },
+    {
+      "id": "jp_saitama_station_5453487845",
+      "osm_id": 5453487845,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogose"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9624056,
+      "longitude": 139.2994469
+    },
+    {
+      "id": "jp_saitama_station_5587668909",
+      "osm_id": 5587668909,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新古河",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Koga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1926895,
+      "longitude": 139.6869302
+    },
+    {
+      "id": "jp_saitama_station_5861124168",
+      "osm_id": 5861124168,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "横瀬",
+      "name_kana": "よこぜ",
+      "name_translations": {
+        "en": "Yokoze"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9852772,
+      "longitude": 139.0977904
+    },
+    {
+      "id": "jp_saitama_station_5861124169",
+      "osm_id": 5861124169,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "御花畑",
+      "name_kana": "おはなばたけ",
+      "name_translations": {
+        "en": "Ohanabatake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9925066,
+      "longitude": 139.0837636
+    },
+    {
+      "id": "jp_saitama_station_6287107614",
+      "osm_id": 6287107614,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "subway",
+      "name": "浦和美園",
+      "name_kana": "うらわみその",
+      "name_translations": {
+        "en": "Urawa-misono"
+      },
+      "operator": "埼玉高速鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8938207,
+      "longitude": 139.7276313
+    },
+    {
+      "id": "jp_saitama_station_6677954148",
+      "osm_id": 6677954148,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本庄早稲田",
+      "name_kana": "ほんじょうわせだ",
+      "name_translations": {
+        "en": "Honjō-Waseda"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.2188607,
+      "longitude": 139.1794855
+    },
+    {
+      "id": "jp_saitama_station_6778362968",
+      "osm_id": 6778362968,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "的場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matoba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9176574,
+      "longitude": 139.4360714
+    },
+    {
+      "id": "jp_saitama_station_6778376925",
+      "osm_id": 6778376925,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠幡",
+      "name_kana": "かさはた",
+      "name_translations": {
+        "en": "Kasahata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9075716,
+      "longitude": 139.4065052
+    },
+    {
+      "id": "jp_saitama_station_6790770682",
+      "osm_id": 6790770682,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝霞台",
+      "name_kana": "あさかだい",
+      "name_translations": {
+        "en": "Asakadai"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ13",
+      "latitude": 35.814802,
+      "longitude": 139.5866488
+    },
+    {
+      "id": "jp_saitama_station_6795782192",
+      "osm_id": 6795782192,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南越谷",
+      "name_kana": "みなみこしがや",
+      "name_translations": {
+        "en": "Minami-Koshigaya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8760526,
+      "longitude": 139.7910584
+    },
+    {
+      "id": "jp_saitama_station_6848775432",
+      "osm_id": 6848775432,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "原市",
+      "name_kana": "はらいち",
+      "name_translations": {
+        "en": "Haraichi"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9639368,
+      "longitude": 139.622258
+    },
+    {
+      "id": "jp_saitama_station_6848776160",
+      "osm_id": 6848776160,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉野原",
+      "name_kana": "よしのはら",
+      "name_translations": {
+        "en": "Yoshinohara"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9571921,
+      "longitude": 139.6209522
+    },
+    {
+      "id": "jp_saitama_station_6848812784",
+      "osm_id": 6848812784,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "今羽",
+      "name_kana": "こんば",
+      "name_translations": {
+        "en": "Komba"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9500873,
+      "longitude": 139.619606
+    },
+    {
+      "id": "jp_saitama_station_6848816471",
+      "osm_id": 6848816471,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "沼南",
+      "name_kana": "しょうなん",
+      "name_translations": {
+        "en": "Shonan"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9711107,
+      "longitude": 139.6236848
+    },
+    {
+      "id": "jp_saitama_station_6848824218",
+      "osm_id": 6848824218,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東宮原",
+      "name_kana": "ひがしみやはら",
+      "name_translations": {
+        "en": "Higashi-Miyahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9426459,
+      "longitude": 139.6182367
+    },
+    {
+      "id": "jp_saitama_station_6848829169",
+      "osm_id": 6848829169,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "加茂宮",
+      "name_kana": "かものみや",
+      "name_translations": {
+        "en": "Kamonomiya"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9357299,
+      "longitude": 139.6168343
+    },
+    {
+      "id": "jp_saitama_station_6853946981",
+      "osm_id": 6853946981,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "内宿",
+      "name_kana": "うちじゅく",
+      "name_translations": {
+        "en": "Uchijuku"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0139563,
+      "longitude": 139.6000557
+    },
+    {
+      "id": "jp_saitama_bus_terminal_7054605434",
+      "osm_id": 7054605434,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東都大学 スクールバス 発着場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "東都大学",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1801153,
+      "longitude": 139.2992262
+    },
+    {
+      "id": "jp_saitama_station_7290330225",
+      "osm_id": 7290330225,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "花崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1097453,
+      "longitude": 139.6340744
+    },
+    {
+      "id": "jp_saitama_station_7291879394",
+      "osm_id": 7291879394,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鷲宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Washinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0964431,
+      "longitude": 139.656791
+    },
+    {
+      "id": "jp_saitama_station_7331127516",
+      "osm_id": 7331127516,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "加須",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.122974,
+      "longitude": 139.595706
+    },
+    {
+      "id": "jp_saitama_station_7339120511",
+      "osm_id": 7339120511,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "南羽生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Hanyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TI06",
+      "latitude": 36.1499796,
+      "longitude": 139.5562177
+    },
+    {
+      "id": "jp_saitama_station_7339782119",
+      "osm_id": 7339782119,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武州荒木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bushu-Araki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1625486,
+      "longitude": 139.4881947
+    },
+    {
+      "id": "jp_saitama_station_7340085286",
+      "osm_id": 7340085286,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1704464,
+      "longitude": 139.5339177
+    },
+    {
+      "id": "jp_saitama_station_7351835252",
+      "osm_id": 7351835252,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北朝霞",
+      "name_kana": "きたあさか",
+      "name_translations": {
+        "en": "Kita-Asaka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8153174,
+      "longitude": 139.5869967
+    },
+    {
+      "id": "jp_saitama_station_7411618655",
+      "osm_id": 7411618655,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武蔵藤沢",
+      "name_kana": "むさしふじさわ",
+      "name_translations": {
+        "en": "Musashi-Fujisawa"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI21",
+      "latitude": 35.821335,
+      "longitude": 139.4125668
+    },
+    {
+      "id": "jp_saitama_station_7481812613",
+      "osm_id": 7481812613,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "一ノ割",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichinowari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9642099,
+      "longitude": 139.7661032
+    },
+    {
+      "id": "jp_saitama_station_7481817829",
+      "osm_id": 7481817829,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "姫宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Himemiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0041803,
+      "longitude": 139.7388134
+    },
+    {
+      "id": "jp_saitama_station_7481834867",
+      "osm_id": 7481834867,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "せんげん台",
+      "name_kana": "せんげんだい",
+      "name_translations": {
+        "en": "Sengendai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9358561,
+      "longitude": 139.7744756
+    },
+    {
+      "id": "jp_saitama_station_7481853620",
+      "osm_id": 7481853620,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武里",
+      "name_kana": "たけさと",
+      "name_translations": {
+        "en": "Takesato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.948627,
+      "longitude": 139.7707125
+    },
+    {
+      "id": "jp_saitama_station_7481882262",
+      "osm_id": 7481882262,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koshigaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8882989,
+      "longitude": 139.7859554
+    },
+    {
+      "id": "jp_saitama_station_7481903775",
+      "osm_id": 7481903775,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大袋",
+      "name_kana": "おおぶくろ",
+      "name_translations": {
+        "en": "Obukuro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9238936,
+      "longitude": 139.7780299
+    },
+    {
+      "id": "jp_saitama_station_7481903897",
+      "osm_id": 7481903897,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "北越谷",
+      "name_kana": "きたこしがや",
+      "name_translations": {
+        "en": "Kita-koshigaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9020801,
+      "longitude": 139.7798381
+    },
+    {
+      "id": "jp_saitama_station_7481913906",
+      "osm_id": 7481913906,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "蒲生",
+      "name_kana": "がもう",
+      "name_translations": {
+        "en": "Gamo"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TS19",
+      "latitude": 35.8673508,
+      "longitude": 139.7915927
+    },
+    {
+      "id": "jp_saitama_station_7481943575",
+      "osm_id": 7481943575,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "獨協大学前〈草加松原〉",
+      "name_kana": "どっきょうだいがくまえ",
+      "name_translations": {
+        "en": "Dokkyodaigakumae〈Soka-Matsubara〉"
+      },
+      "operator": "東武鉄道",
+      "network": "東武スカイツリーライン",
+      "ref": "TS17",
+      "latitude": 35.8434099,
+      "longitude": 139.8006128
+    },
+    {
+      "id": "jp_saitama_station_7481953843",
+      "osm_id": 7481953843,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新田",
+      "name_kana": "しんでん",
+      "name_translations": {
+        "en": "Shinden"
+      },
+      "operator": "東武鉄道",
+      "network": "東武スカイツリーライン",
+      "ref": "TS18",
+      "latitude": 35.8540888,
+      "longitude": 139.7954579
+    },
+    {
+      "id": "jp_saitama_station_7481965874",
+      "osm_id": 7481965874,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "草加",
+      "name_kana": "そうか",
+      "name_translations": {
+        "en": "Soka"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TS16",
+      "latitude": 35.8282516,
+      "longitude": 139.8033621
+    },
+    {
+      "id": "jp_saitama_station_7532369442",
+      "osm_id": 7532369442,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東鷲宮",
+      "name_kana": "ひがしわしのみや",
+      "name_translations": {
+        "en": "Higashi-Washinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0894771,
+      "longitude": 139.6792263
+    },
+    {
+      "id": "jp_saitama_station_7756039207",
+      "osm_id": 7756039207,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "三郷中央",
+      "name_kana": "みさとちゅうおう",
+      "name_translations": {
+        "en": "Misato-chuo"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "09",
+      "latitude": 35.8245541,
+      "longitude": 139.8784111
+    },
+    {
+      "id": "jp_saitama_station_7756040183",
+      "osm_id": 7756040183,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "八潮",
+      "name_kana": "やしお",
+      "name_translations": {
+        "en": "Yashio"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "08",
+      "latitude": 35.8078279,
+      "longitude": 139.8448654
+    },
+    {
+      "id": "jp_saitama_station_7763931139",
+      "osm_id": 7763931139,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "仏子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bushi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8377028,
+      "longitude": 139.3599938
+    },
+    {
+      "id": "jp_saitama_station_7763971925",
+      "osm_id": 7763971925,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯能",
+      "name_kana": "はんのう",
+      "name_translations": {
+        "en": "Hanno"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SI26",
+      "latitude": 35.8510047,
+      "longitude": 139.3190593
+    },
+    {
+      "id": "jp_saitama_station_7763971926",
+      "osm_id": 7763971926,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "元加治",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motokaji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8405537,
+      "longitude": 139.345729
+    },
+    {
+      "id": "jp_saitama_station_7777248385",
+      "osm_id": 7777248385,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "subway",
+      "name": "川口元郷",
+      "name_kana": "かわぐちもとごう",
+      "name_translations": {
+        "en": "Kawaguchi-motogo"
+      },
+      "operator": "埼玉高速鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8001212,
+      "longitude": 139.7300045
+    },
+    {
+      "id": "jp_saitama_station_7777259886",
+      "osm_id": 7777259886,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "subway",
+      "name": "戸塚安行",
+      "name_kana": "とづかあんぎょう",
+      "name_translations": {
+        "en": "Tozuka-angyo"
+      },
+      "operator": "埼玉高速鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8589375,
+      "longitude": 139.7537018
+    },
+    {
+      "id": "jp_saitama_station_7777259887",
+      "osm_id": 7777259887,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "subway",
+      "name": "新井宿",
+      "name_kana": "あらいじゅく",
+      "name_translations": {
+        "en": "Araijuku"
+      },
+      "operator": "埼玉高速鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8429634,
+      "longitude": 139.7382293
+    },
+    {
+      "id": "jp_saitama_station_7777259888",
+      "osm_id": 7777259888,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "subway",
+      "name": "鳩ヶ谷",
+      "name_kana": "はとがや",
+      "name_translations": {
+        "en": "Hatogaya"
+      },
+      "operator": "埼玉高速鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8308732,
+      "longitude": 139.7361589
+    },
+    {
+      "id": "jp_saitama_station_7777259889",
+      "osm_id": 7777259889,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "subway",
+      "name": "南鳩ヶ谷",
+      "name_kana": "みなみはとがや",
+      "name_translations": {
+        "en": "Minami-hatogaya"
+      },
+      "operator": "埼玉高速鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8161232,
+      "longitude": 139.7361213
+    },
+    {
+      "id": "jp_saitama_station_7800482889",
+      "osm_id": 7800482889,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "吾野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Agano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9084908,
+      "longitude": 139.2267337
+    },
+    {
+      "id": "jp_saitama_station_7847692435",
+      "osm_id": 7847692435,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "寄居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yorii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1177399,
+      "longitude": 139.1939396
+    },
+    {
+      "id": "jp_saitama_station_7853547106",
+      "osm_id": 7853547106,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "行田市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gyōdashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1435967,
+      "longitude": 139.4593178
+    },
+    {
+      "id": "jp_saitama_station_7863114047",
+      "osm_id": 7863114047,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "高坂",
+      "name_kana": "たかさか",
+      "name_translations": {
+        "en": "Takasaka"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ28",
+      "latitude": 36.0026447,
+      "longitude": 139.3977003
+    },
+    {
+      "id": "jp_saitama_station_7864238131",
+      "osm_id": 7864238131,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "霞ヶ関",
+      "name_kana": "かすみがせき",
+      "name_translations": {
+        "en": "Kasumigaseki"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ23",
+      "latitude": 35.9256142,
+      "longitude": 139.443197
+    },
+    {
+      "id": "jp_saitama_station_7864238136",
+      "osm_id": 7864238136,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "川越市",
+      "name_kana": "かわごえし",
+      "name_translations": {
+        "en": "Kawagoeshi"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ22",
+      "latitude": 35.9141442,
+      "longitude": 139.4774099
+    },
+    {
+      "id": "jp_saitama_station_7864238138",
+      "osm_id": 7864238138,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川越",
+      "name_kana": "かわごえ",
+      "name_translations": {
+        "en": "Kawagoe"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9069901,
+      "longitude": 139.482954
+    },
+    {
+      "id": "jp_saitama_station_7864238144",
+      "osm_id": 7864238144,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新河岸",
+      "name_kana": "しんがし",
+      "name_translations": {
+        "en": "Shingashi"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TJ20",
+      "latitude": 35.8913759,
+      "longitude": 139.4968378
+    },
+    {
+      "id": "jp_saitama_station_7864238145",
+      "osm_id": 7864238145,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "上福岡",
+      "name_kana": "かみふくおか",
+      "name_translations": {
+        "en": "Kami-fukuoka"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ19",
+      "latitude": 35.8739006,
+      "longitude": 139.5118041
+    },
+    {
+      "id": "jp_saitama_station_7864238147",
+      "osm_id": 7864238147,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "ふじみ野",
+      "name_kana": "ふじみの",
+      "name_translations": {
+        "en": "Fujimino"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ18",
+      "latitude": 35.8608406,
+      "longitude": 139.523107
+    },
+    {
+      "id": "jp_saitama_station_7864238151",
+      "osm_id": 7864238151,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶴瀬",
+      "name_kana": "つるせ",
+      "name_translations": {
+        "en": "Tsuruse"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ17",
+      "latitude": 35.8457565,
+      "longitude": 139.5394111
+    },
+    {
+      "id": "jp_saitama_station_7864238153",
+      "osm_id": 7864238153,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "みずほ台",
+      "name_kana": "みずほだい",
+      "name_translations": {
+        "en": "Mizuhodai"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ16",
+      "latitude": 35.8382203,
+      "longitude": 139.5508611
+    },
+    {
+      "id": "jp_saitama_station_7864238156",
+      "osm_id": 7864238156,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳瀬川",
+      "name_kana": "やなせがわ",
+      "name_translations": {
+        "en": "Yanasegawa"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ15",
+      "latitude": 35.8307998,
+      "longitude": 139.5621036
+    },
+    {
+      "id": "jp_saitama_station_7864238159",
+      "osm_id": 7864238159,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "志木",
+      "name_kana": "しき",
+      "name_translations": {
+        "en": "Shiki"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ14",
+      "latitude": 35.8222228,
+      "longitude": 139.5751727
+    },
+    {
+      "id": "jp_saitama_station_7864999211",
+      "osm_id": 7864999211,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉淀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamayodo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1170899,
+      "longitude": 139.2001958
+    },
+    {
+      "id": "jp_saitama_station_7864999216",
+      "osm_id": 7864999216,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鉢形",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachigata"
+      },
+      "operator": null,
+      "network": "東武鉄道",
+      "ref": null,
+      "latitude": 36.1138618,
+      "longitude": 139.2090119
+    },
+    {
+      "id": "jp_saitama_station_7864999226",
+      "osm_id": 7864999226,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "男衾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obusuma"
+      },
+      "operator": null,
+      "network": "東武鉄道",
+      "ref": null,
+      "latitude": 36.1074889,
+      "longitude": 139.2341747
+    },
+    {
+      "id": "jp_saitama_station_7864999237",
+      "osm_id": 7864999237,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東武竹沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōbu-Takezawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0754656,
+      "longitude": 139.2377151
+    },
+    {
+      "id": "jp_saitama_station_7864999263",
+      "osm_id": 7864999263,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武蔵嵐山",
+      "name_kana": "むさしらんざん",
+      "name_translations": {
+        "en": "Musashi-ranzan"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ32",
+      "latitude": 36.04438,
+      "longitude": 139.3277842
+    },
+    {
+      "id": "jp_saitama_station_7864999264",
+      "osm_id": 7864999264,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "つきのわ",
+      "name_kana": "つきのわ",
+      "name_translations": {
+        "en": "Tsukinowa"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ31",
+      "latitude": 36.0434929,
+      "longitude": 139.3453972
+    },
+    {
+      "id": "jp_saitama_station_7864999267",
+      "osm_id": 7864999267,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "森林公園",
+      "name_kana": "しんりんこうえん",
+      "name_translations": {
+        "en": "Shinrin-koen"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TJ30",
+      "latitude": 36.0451902,
+      "longitude": 139.3749686
+    },
+    {
+      "id": "jp_saitama_station_7864999270",
+      "osm_id": 7864999270,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東松山",
+      "name_kana": "ひがしまつやま",
+      "name_translations": {
+        "en": "Higashi-matsuyama"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ29",
+      "latitude": 36.0347621,
+      "longitude": 139.4016056
+    },
+    {
+      "id": "jp_saitama_station_7864999272",
+      "osm_id": 7864999272,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "北坂戸",
+      "name_kana": "きたさかど",
+      "name_translations": {
+        "en": "Kita-sakado"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ27",
+      "latitude": 35.9718969,
+      "longitude": 139.3967234
+    },
+    {
+      "id": "jp_saitama_station_7864999275",
+      "osm_id": 7864999275,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂戸",
+      "name_kana": "さかど",
+      "name_translations": {
+        "en": "Sakado"
+      },
+      "operator": "東武鉄道",
+      "network": null,
+      "ref": "TJ26",
+      "latitude": 35.9570602,
+      "longitude": 139.3937702
+    },
+    {
+      "id": "jp_saitama_station_7864999281",
+      "osm_id": 7864999281,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "若葉",
+      "name_kana": "わかば",
+      "name_translations": {
+        "en": "Wakaba"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ25",
+      "latitude": 35.9491238,
+      "longitude": 139.408806
+    },
+    {
+      "id": "jp_saitama_station_7864999282",
+      "osm_id": 7864999282,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶴ヶ島",
+      "name_kana": "つるがしま",
+      "name_translations": {
+        "en": "Tsurugashima"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ24",
+      "latitude": 35.9369427,
+      "longitude": 139.4236708
+    },
+    {
+      "id": "jp_saitama_station_7866648784",
+      "osm_id": 7866648784,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東飯能",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Hannō"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8532298,
+      "longitude": 139.3260773
+    },
+    {
+      "id": "jp_saitama_station_7875845244",
+      "osm_id": 7875845244,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "八木崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagisaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9783248,
+      "longitude": 139.7417829
+    },
+    {
+      "id": "jp_saitama_station_7880733147",
+      "osm_id": 7880733147,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下山口",
+      "name_kana": "しもやまぐち",
+      "name_translations": {
+        "en": "Shimo-Yamaguchi"
+      },
+      "operator": "西武鉄道",
+      "network": null,
+      "ref": "SI40",
+      "latitude": 35.7795178,
+      "longitude": 139.4414607
+    },
+    {
+      "id": "jp_saitama_station_7881229733",
+      "osm_id": 7881229733,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東所沢",
+      "name_kana": "ひがしところざわ",
+      "name_translations": {
+        "en": "Higashi-Tokorozawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.7945963,
+      "longitude": 139.5137584
+    },
+    {
+      "id": "jp_saitama_station_7882334794",
+      "osm_id": 7882334794,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三郷",
+      "name_kana": "みさと",
+      "name_translations": {
+        "en": "Misato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8450367,
+      "longitude": 139.8857791
+    },
+    {
+      "id": "jp_saitama_station_7882334795",
+      "osm_id": 7882334795,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新三郷",
+      "name_kana": "しんみさと",
+      "name_translations": {
+        "en": "Shim-Misato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8588005,
+      "longitude": 139.8692259
+    },
+    {
+      "id": "jp_saitama_station_7882334798",
+      "osm_id": 7882334798,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉川美南",
+      "name_kana": "よしかわみなみ",
+      "name_translations": {
+        "en": "Yoshikawa-Minami"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.868067,
+      "longitude": 139.8580813
+    },
+    {
+      "id": "jp_saitama_station_7882334803",
+      "osm_id": 7882334803,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西浦和",
+      "name_kana": "にしうらわ",
+      "name_translations": {
+        "en": "Nishi-Urawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8442062,
+      "longitude": 139.6279103
+    },
+    {
+      "id": "jp_saitama_station_7882334806",
+      "osm_id": 7882334806,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東浦和",
+      "name_kana": "ひがしうらわ",
+      "name_translations": {
+        "en": "Higashi-Urawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8640813,
+      "longitude": 139.7045073
+    },
+    {
+      "id": "jp_saitama_station_7882334808",
+      "osm_id": 7882334808,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越谷レイクタウン",
+      "name_kana": "こしがやれいくたうん",
+      "name_translations": {
+        "en": "Koshigaya-Laketown"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8762173,
+      "longitude": 139.822401
+    },
+    {
+      "id": "jp_saitama_station_7882334809",
+      "osm_id": 7882334809,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉川",
+      "name_kana": "よしかわ",
+      "name_translations": {
+        "en": "Yoshikawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.8765782,
+      "longitude": 139.8435049
+    },
+    {
+      "id": "jp_saitama_station_7965117871",
+      "osm_id": 7965117871,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東毛呂",
+      "name_kana": "ひがしもろ",
+      "name_translations": {
+        "en": "Higashi-moro"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ45",
+      "latitude": 35.9468371,
+      "longitude": 139.3154227
+    },
+    {
+      "id": "jp_saitama_station_7965136163",
+      "osm_id": 7965136163,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "一本松",
+      "name_kana": "いっぽんまつ",
+      "name_translations": {
+        "en": "Ippommatsu"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ41",
+      "latitude": 35.9403713,
+      "longitude": 139.3702902
+    },
+    {
+      "id": "jp_saitama_station_7965143821",
+      "osm_id": 7965143821,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武州長瀬",
+      "name_kana": "ぶしゅうながせ",
+      "name_translations": {
+        "en": "Bushu-nagase"
+      },
+      "operator": "東武鉄道",
+      "network": "東武鉄道",
+      "ref": "TJ44",
+      "latitude": 35.9419222,
+      "longitude": 139.326014
+    },
+    {
+      "id": "jp_saitama_station_7966816610",
+      "osm_id": 7966816610,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "高麗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8817112,
+      "longitude": 139.3044363
+    },
+    {
+      "id": "jp_saitama_station_7966844293",
+      "osm_id": 7966844293,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東吾野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Agano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8921031,
+      "longitude": 139.2605215
+    },
+    {
+      "id": "jp_saitama_station_7966845936",
+      "osm_id": 7966845936,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武蔵横手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Musashi-Yokote"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8855696,
+      "longitude": 139.2805808
+    },
+    {
+      "id": "jp_saitama_station_7966871849",
+      "osm_id": 7966871849,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦ヶ久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashigakubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9768873,
+      "longitude": 139.1367153
+    },
+    {
+      "id": "jp_saitama_station_7966871897",
+      "osm_id": 7966871897,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西吾野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Agano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9263798,
+      "longitude": 139.2022462
+    },
+    {
+      "id": "jp_saitama_station_7966878613",
+      "osm_id": 7966878613,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "正丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shomaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.938315,
+      "longitude": 139.1820971
+    },
+    {
+      "id": "jp_saitama_station_7967415774",
+      "osm_id": 7967415774,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0402078,
+      "longitude": 139.7006473
+    },
+    {
+      "id": "jp_saitama_station_7975039774",
+      "osm_id": 7975039774,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新狭山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Sayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8739552,
+      "longitude": 139.4334594
+    },
+    {
+      "id": "jp_saitama_station_7975056397",
+      "osm_id": 7975056397,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "狭山市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sayamashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8572924,
+      "longitude": 139.4132001
+    },
+    {
+      "id": "jp_saitama_station_7975076812",
+      "osm_id": 7975076812,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "南大塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Otsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8898272,
+      "longitude": 139.454295
+    },
+    {
+      "id": "jp_saitama_station_7975080765",
+      "osm_id": 7975080765,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "入曽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iriso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8325034,
+      "longitude": 139.4270696
+    },
+    {
+      "id": "jp_saitama_station_7975091124",
+      "osm_id": 7975091124,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "本川越",
+      "name_kana": "ほんかわごえ",
+      "name_translations": {
+        "en": "Hon-Kawagoe"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SS29",
+      "latitude": 35.9140896,
+      "longitude": 139.4812498
+    },
+    {
+      "id": "jp_saitama_station_7975170093",
+      "osm_id": 7975170093,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新所沢",
+      "name_kana": "しんところざわ",
+      "name_translations": {
+        "en": "Shin-Tokorozawa"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SS24",
+      "latitude": 35.8066745,
+      "longitude": 139.4561526
+    },
+    {
+      "id": "jp_saitama_station_7978379439",
+      "osm_id": 7978379439,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "航空公園",
+      "name_kana": "こうくうこうえん",
+      "name_translations": {
+        "en": "Koku-koen"
+      },
+      "operator": "西武鉄道",
+      "network": "西武鉄道",
+      "ref": "SS23",
+      "latitude": 35.7983033,
+      "longitude": 139.4656794
+    },
+    {
+      "id": "jp_saitama_station_8057374405",
+      "osm_id": 8057374405,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "幸手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Satte"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0748991,
+      "longitude": 139.7150064
+    },
+    {
+      "id": "jp_saitama_station_8063012971",
+      "osm_id": 8063012971,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "栗橋",
+      "name_kana": "くりはし",
+      "name_translations": {
+        "en": "Kurihashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1369114,
+      "longitude": 139.6940191
+    },
+    {
+      "id": "jp_saitama_station_8063018734",
+      "osm_id": 8063018734,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "杉戸高野台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sugito-Takanodai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0516402,
+      "longitude": 139.7145109
+    },
+    {
+      "id": "jp_saitama_station_8079107627",
+      "osm_id": 8079107627,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "みなみ寄居",
+      "name_kana": "みなみよりい",
+      "name_translations": {
+        "en": "Minami-Yorii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TJ 35",
+      "latitude": 36.0908955,
+      "longitude": 139.2363597
+    },
+    {
+      "id": "jp_saitama_station_8170394897",
+      "osm_id": 8170394897,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西川越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kawagoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.919173,
+      "longitude": 139.4594957
+    },
+    {
+      "id": "jp_saitama_station_8170394898",
+      "osm_id": 8170394898,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "指扇",
+      "name_kana": "さしおうぎ",
+      "name_translations": {
+        "en": "Sashiogi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9171426,
+      "longitude": 139.5650513
+    },
+    {
+      "id": "jp_saitama_station_8170394903",
+      "osm_id": 8170394903,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日進",
+      "name_kana": "にっしん",
+      "name_translations": {
+        "en": "Nisshin"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9315562,
+      "longitude": 139.6061435
+    },
+    {
+      "id": "jp_saitama_station_8735534799",
+      "osm_id": 8735534799,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽貫",
+      "name_kana": "はぬき",
+      "name_translations": {
+        "en": "Hanuki"
+      },
+      "operator": "埼玉新都市交通",
+      "network": null,
+      "ref": null,
+      "latitude": 36.0074524,
+      "longitude": 139.6084237
+    },
+    {
+      "id": "jp_saitama_station_8891836095",
+      "osm_id": 8891836095,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "丹荘",
+      "name_kana": "たんしょう",
+      "name_translations": {
+        "en": "Tansho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2167339,
+      "longitude": 139.1024009
+    },
+    {
+      "id": "jp_saitama_station_9920471133",
+      "osm_id": 9920471133,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和銅黒谷",
+      "name_kana": "わどうくろや",
+      "name_translations": {
+        "en": "Wado-Kuroya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0469146,
+      "longitude": 139.1017105
+    },
+    {
+      "id": "jp_saitama_bus_terminal_10673541098",
+      "osm_id": 10673541098,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ふかや花園プレミアムアウトレット",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukaya-Hanazono Premium Outlets"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1329793,
+      "longitude": 139.2470256
+    },
+    {
+      "id": "jp_saitama_station_10837069811",
+      "osm_id": 10837069811,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "ふかや花園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukaya-Hanazono"
+      },
+      "operator": "秩父鉄道",
+      "network": "秩父鉄道本線",
+      "ref": null,
+      "latitude": 36.1308138,
+      "longitude": 139.2480617
+    },
+    {
+      "id": "jp_saitama_station_12327689416",
+      "osm_id": 12327689416,
+      "osm_type": "node",
+      "prefecture_id": "jp_saitama",
+      "type": "station",
+      "subtype": "private",
+      "name": "武蔵高萩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Musashi-Takahagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9017534,
+      "longitude": 139.3713498
+    },
+    {
+      "id": "jp_saitama_bus_terminal_27303179",
+      "osm_id": 27303179,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "名栗車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8913386,
+      "longitude": 139.1777455
+    },
+    {
+      "id": "jp_saitama_bus_terminal_215053747",
+      "osm_id": 215053747,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東京電機大学 スクールバス乗降場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0021747,
+      "longitude": 139.3914838
+    },
+    {
+      "id": "jp_saitama_bus_terminal_299213394",
+      "osm_id": 299213394,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "旭が丘団地バス折返場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bus Turning Place"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7972877,
+      "longitude": 139.5448452
+    },
+    {
+      "id": "jp_saitama_bus_terminal_710036875",
+      "osm_id": 710036875,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東武バスセントラル草加営業事務所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobu Bus Central Soka Sales Office"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8480549,
+      "longitude": 139.8017107
+    },
+    {
+      "id": "jp_saitama_bus_terminal_815909768",
+      "osm_id": 815909768,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "さいたま新都心バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saitama-Shintoshin Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8930368,
+      "longitude": 139.637769
+    },
+    {
+      "id": "jp_saitama_bus_terminal_832876399",
+      "osm_id": 832876399,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松伏バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9240266,
+      "longitude": 139.826798
+    },
+    {
+      "id": "jp_saitama_bus_terminal_857769627",
+      "osm_id": 857769627,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "行田市バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1372324,
+      "longitude": 139.4569221
+    },
+    {
+      "id": "jp_saitama_bus_terminal_940630883",
+      "osm_id": 940630883,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東武バス回転場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9383185,
+      "longitude": 139.5543409
+    },
+    {
+      "id": "jp_saitama_airport_1137004856",
+      "osm_id": 1137004856,
+      "osm_type": "way",
+      "prefecture_id": "jp_saitama",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "朝日・川越ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "朝日航洋",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9580578,
+      "longitude": 139.4673058
+    },
+    {
+      "id": "jp_saitama_airport_16240987",
+      "osm_id": 16240987,
+      "osm_type": "relation",
+      "prefecture_id": "jp_saitama",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "岩槻インターヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9347289,
+      "longitude": 139.6957038
+    }
+  ]
+}

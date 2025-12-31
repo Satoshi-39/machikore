@@ -1,0 +1,2484 @@
+{
+  "fetchedAt": "2025-12-24T05:51:17.793Z",
+  "prefecture_id": "jp_toyama",
+  "prefecture_name": "富山県",
+  "stats": {
+    "station": 134,
+    "airport": 1,
+    "ferry_terminal": 0,
+    "bus_terminal": 4,
+    "total": 139
+  },
+  "data": [
+    {
+      "id": "jp_toyama_station_265830087",
+      "osm_id": 265830087,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "猪谷",
+      "name_kana": "いのたに",
+      "name_translations": {
+        "en": "Inotani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4715105,
+      "longitude": 137.2386811
+    },
+    {
+      "id": "jp_toyama_station_267305796",
+      "osm_id": 267305796,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高岡",
+      "name_kana": "たかおか",
+      "name_translations": {
+        "en": "Takaoka"
+      },
+      "operator": "あいの風とやま鉄道;西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7411592,
+      "longitude": 137.0147573
+    },
+    {
+      "id": "jp_toyama_station_267453152",
+      "osm_id": 267453152,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西富山",
+      "name_kana": "にしとやま",
+      "name_translations": {
+        "en": "Nishi-Toyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6996569,
+      "longitude": 137.1775885
+    },
+    {
+      "id": "jp_toyama_station_267453321",
+      "osm_id": 267453321,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "速星",
+      "name_kana": "はやほし",
+      "name_translations": {
+        "en": "Hayahoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6641689,
+      "longitude": 137.1606558
+    },
+    {
+      "id": "jp_toyama_station_267453749",
+      "osm_id": 267453749,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "笹津",
+      "name_kana": "ささづ",
+      "name_translations": {
+        "en": "Sasazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5620298,
+      "longitude": 137.2113605
+    },
+    {
+      "id": "jp_toyama_station_267453832",
+      "osm_id": 267453832,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中八尾",
+      "name_kana": "えっちゅうやつお",
+      "name_translations": {
+        "en": "Etchu-Yatsuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.591395,
+      "longitude": 137.138372
+    },
+    {
+      "id": "jp_toyama_station_267453905",
+      "osm_id": 267453905,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "千里",
+      "name_kana": "ちさと",
+      "name_translations": {
+        "en": "Chisato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6345545,
+      "longitude": 137.1323306
+    },
+    {
+      "id": "jp_toyama_station_267457450",
+      "osm_id": 267457450,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "伏木",
+      "name_kana": "ふしき",
+      "name_translations": {
+        "en": "Fushiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7919305,
+      "longitude": 137.0582278
+    },
+    {
+      "id": "jp_toyama_station_267457490",
+      "osm_id": 267457490,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "雨晴",
+      "name_kana": "あまはらし",
+      "name_translations": {
+        "en": "Amaharashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8165488,
+      "longitude": 137.0373953
+    },
+    {
+      "id": "jp_toyama_station_267457514",
+      "osm_id": 267457514,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "能町",
+      "name_kana": "のうまち",
+      "name_translations": {
+        "en": "Nomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.76882,
+      "longitude": 137.040024
+    },
+    {
+      "id": "jp_toyama_station_267457571",
+      "osm_id": 267457571,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "氷見",
+      "name_kana": "ひみ",
+      "name_translations": {
+        "en": "Himi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8494025,
+      "longitude": 136.9907966
+    },
+    {
+      "id": "jp_toyama_station_270012019",
+      "osm_id": 270012019,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "猫又",
+      "name_kana": "ねこまた",
+      "name_translations": {
+        "en": "Nekomata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7490375,
+      "longitude": 137.6414888
+    },
+    {
+      "id": "jp_toyama_station_270012045",
+      "osm_id": 270012045,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "小屋平",
+      "name_kana": "こやだいら",
+      "name_translations": {
+        "en": "Koyadaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7108187,
+      "longitude": 137.6469121
+    },
+    {
+      "id": "jp_toyama_station_270012058",
+      "osm_id": 270012058,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒薙",
+      "name_kana": "くろなぎ",
+      "name_translations": {
+        "en": "Kuronagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7863774,
+      "longitude": 137.6250536
+    },
+    {
+      "id": "jp_toyama_station_270012264",
+      "osm_id": 270012264,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "笹平",
+      "name_kana": "ささだいら",
+      "name_translations": {
+        "en": "Sasadaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7830171,
+      "longitude": 137.6240614
+    },
+    {
+      "id": "jp_toyama_station_270012567",
+      "osm_id": 270012567,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "出平",
+      "name_kana": "だしだいら",
+      "name_translations": {
+        "en": "Dashidaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7670314,
+      "longitude": 137.6339656
+    },
+    {
+      "id": "jp_toyama_station_270012584",
+      "osm_id": 270012584,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳橋",
+      "name_kana": "やなぎばし",
+      "name_translations": {
+        "en": "Yanagibashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8031863,
+      "longitude": 137.5916713
+    },
+    {
+      "id": "jp_toyama_station_270012768",
+      "osm_id": 270012768,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇奈月",
+      "name_kana": "うなづき",
+      "name_translations": {
+        "en": "Unazuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8154157,
+      "longitude": 137.5851867
+    },
+    {
+      "id": "jp_toyama_station_270012773",
+      "osm_id": 270012773,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "森石",
+      "name_kana": "もりいし",
+      "name_translations": {
+        "en": "Moriishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.791879,
+      "longitude": 137.6129842
+    },
+    {
+      "id": "jp_toyama_station_270012918",
+      "osm_id": 270012918,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鐘釣",
+      "name_kana": "かねつり",
+      "name_translations": {
+        "en": "Kanetsuri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.734323,
+      "longitude": 137.6515638
+    },
+    {
+      "id": "jp_toyama_station_270014089",
+      "osm_id": 270014089,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "中加積",
+      "name_kana": "なかかずみ",
+      "name_translations": {
+        "en": "Nakakazumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7350967,
+      "longitude": 137.3509127
+    },
+    {
+      "id": "jp_toyama_station_270014091",
+      "osm_id": 270014091,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "音沢",
+      "name_kana": "おとざわ",
+      "name_translations": {
+        "en": "Otozawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.840389,
+      "longitude": 137.5599
+    },
+    {
+      "id": "jp_toyama_station_270014093",
+      "osm_id": 270014093,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "相ノ木",
+      "name_kana": "あいのき",
+      "name_translations": {
+        "en": "Ainoki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.702007,
+      "longitude": 137.3359384
+    },
+    {
+      "id": "jp_toyama_station_270014114",
+      "osm_id": 270014114,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新相ノ木",
+      "name_kana": "しんあいのき",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7031357,
+      "longitude": 137.3423559
+    },
+    {
+      "id": "jp_toyama_station_270014154",
+      "osm_id": 270014154,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦山",
+      "name_kana": "うらやま",
+      "name_translations": {
+        "en": "Urayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8635893,
+      "longitude": 137.519188
+    },
+    {
+      "id": "jp_toyama_station_270014158",
+      "osm_id": 270014158,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "電鉄魚津",
+      "name_kana": "でんてつうおづ",
+      "name_translations": {
+        "en": "Dentetsu-Uozu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8151953,
+      "longitude": 137.4004857
+    },
+    {
+      "id": "jp_toyama_station_270014209",
+      "osm_id": 270014209,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "内山",
+      "name_kana": "うちやま",
+      "name_translations": {
+        "en": "Uchiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.846463,
+      "longitude": 137.5568684
+    },
+    {
+      "id": "jp_toyama_station_270014226",
+      "osm_id": 270014226,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中泉",
+      "name_kana": "えっちゅういずみ",
+      "name_translations": {
+        "en": "Etchu-Izumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6997574,
+      "longitude": 137.326918
+    },
+    {
+      "id": "jp_toyama_station_270014285",
+      "osm_id": 270014285,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西滑川",
+      "name_kana": "にしなめりかわ",
+      "name_translations": {
+        "en": "Nishi-Namerikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7552056,
+      "longitude": 137.3348323
+    },
+    {
+      "id": "jp_toyama_station_270014288",
+      "osm_id": 270014288,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東三日市",
+      "name_kana": "ひがしみっかいち",
+      "name_translations": {
+        "en": "Higashi-Mikkaichi"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8747257,
+      "longitude": 137.4506283
+    },
+    {
+      "id": "jp_toyama_station_270014291",
+      "osm_id": 270014291,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜加積",
+      "name_kana": "はまかずみ",
+      "name_translations": {
+        "en": "Hamakazumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7775547,
+      "longitude": 137.3615256
+    },
+    {
+      "id": "jp_toyama_station_270014297",
+      "osm_id": 270014297,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西加積",
+      "name_kana": "にしかずみ",
+      "name_translations": {
+        "en": "Nishi-Kazumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7466883,
+      "longitude": 137.3400834
+    },
+    {
+      "id": "jp_toyama_station_270014371",
+      "osm_id": 270014371,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下立口",
+      "name_kana": "おりたてぐち",
+      "name_translations": {
+        "en": "Oritateguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.859417,
+      "longitude": 137.533361
+    },
+    {
+      "id": "jp_toyama_station_270014375",
+      "osm_id": 270014375,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新宮川",
+      "name_kana": "しんみやかわ",
+      "name_translations": {
+        "en": "Shin-Miyakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.717666,
+      "longitude": 137.3510161
+    },
+    {
+      "id": "jp_toyama_station_270014377",
+      "osm_id": 270014377,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "栃屋",
+      "name_kana": "とちや",
+      "name_translations": {
+        "en": "Tochiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8698634,
+      "longitude": 137.5056811
+    },
+    {
+      "id": "jp_toyama_station_270014493",
+      "osm_id": 270014493,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "愛本",
+      "name_kana": "あいもと",
+      "name_translations": {
+        "en": "Aimoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8553661,
+      "longitude": 137.553871
+    },
+    {
+      "id": "jp_toyama_station_270014506",
+      "osm_id": 270014506,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下立",
+      "name_kana": "おりたて",
+      "name_translations": {
+        "en": "Oritate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8578158,
+      "longitude": 137.5413324
+    },
+    {
+      "id": "jp_toyama_station_270014507",
+      "osm_id": 270014507,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "滑川",
+      "name_kana": "なめりかわ",
+      "name_translations": {
+        "en": "Namerikawa"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7691519,
+      "longitude": 137.3488867
+    },
+    {
+      "id": "jp_toyama_station_270014579",
+      "osm_id": 270014579,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西魚津",
+      "name_kana": "にしうおづ",
+      "name_translations": {
+        "en": "Nishi-Uozu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8040958,
+      "longitude": 137.3948303
+    },
+    {
+      "id": "jp_toyama_station_270014650",
+      "osm_id": 270014650,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "若栗",
+      "name_kana": "わかぐり",
+      "name_translations": {
+        "en": "Wakaguri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8711382,
+      "longitude": 137.4928231
+    },
+    {
+      "id": "jp_toyama_station_270014677",
+      "osm_id": 270014677,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "電鉄黒部",
+      "name_kana": "でんてつくろべ",
+      "name_translations": {
+        "en": "Dentetsu-Kurobe"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8741184,
+      "longitude": 137.443888
+    },
+    {
+      "id": "jp_toyama_station_270014704",
+      "osm_id": 270014704,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "電鉄石田",
+      "name_kana": "でんてついしだ",
+      "name_translations": {
+        "en": "Dentetsu-Ishida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8661893,
+      "longitude": 137.4232814
+    },
+    {
+      "id": "jp_toyama_station_270014747",
+      "osm_id": 270014747,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "経田",
+      "name_kana": "きょうでん",
+      "name_translations": {
+        "en": "Kyoden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8490926,
+      "longitude": 137.4163587
+    },
+    {
+      "id": "jp_toyama_station_270014757",
+      "osm_id": 270014757,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "中滑川",
+      "name_kana": "なかなめりかわ",
+      "name_translations": {
+        "en": "Naka-Namerikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7619386,
+      "longitude": 137.3399131
+    },
+    {
+      "id": "jp_toyama_station_270014774",
+      "osm_id": 270014774,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "荻生",
+      "name_kana": "おぎゅう",
+      "name_translations": {
+        "en": "Ogyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8750627,
+      "longitude": 137.4594362
+    },
+    {
+      "id": "jp_toyama_station_270014775",
+      "osm_id": 270014775,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新魚津",
+      "name_kana": "しんうおづ",
+      "name_translations": {
+        "en": "Shin-Uozu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8269242,
+      "longitude": 137.405408
+    },
+    {
+      "id": "jp_toyama_station_270014777",
+      "osm_id": 270014777,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "舌山",
+      "name_kana": "したやま",
+      "name_translations": {
+        "en": "Shitayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8722021,
+      "longitude": 137.4855816
+    },
+    {
+      "id": "jp_toyama_station_270014779",
+      "osm_id": 270014779,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "長屋",
+      "name_kana": "ながや",
+      "name_translations": {
+        "en": "Nagaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8737003,
+      "longitude": 137.4703883
+    },
+    {
+      "id": "jp_toyama_station_270014924",
+      "osm_id": 270014924,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "早月加積",
+      "name_kana": "はやつきかずみ",
+      "name_translations": {
+        "en": "Hayatsukikazumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7838825,
+      "longitude": 137.3717194
+    },
+    {
+      "id": "jp_toyama_station_270026300",
+      "osm_id": 270026300,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中中村",
+      "name_kana": "えっちゅうなかむら",
+      "name_translations": {
+        "en": "Etchu-Nakamura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7905764,
+      "longitude": 137.3824345
+    },
+    {
+      "id": "jp_toyama_station_270028060",
+      "osm_id": 270028060,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大庄",
+      "name_kana": "おおしょう",
+      "name_translations": {
+        "en": "Osho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6195021,
+      "longitude": 137.2756175
+    },
+    {
+      "id": "jp_toyama_station_270028097",
+      "osm_id": 270028097,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "上滝",
+      "name_kana": "かみだき",
+      "name_translations": {
+        "en": "Kamidaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6095076,
+      "longitude": 137.2961966
+    },
+    {
+      "id": "jp_toyama_station_270028149",
+      "osm_id": 270028149,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "南富山",
+      "name_kana": "みなみとやま",
+      "name_translations": {
+        "en": "Minami-Toyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6702947,
+      "longitude": 137.2204748
+    },
+    {
+      "id": "jp_toyama_station_270028150",
+      "osm_id": 270028150,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大川寺",
+      "name_kana": "だいせんじ",
+      "name_translations": {
+        "en": "Daisenji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6082801,
+      "longitude": 137.3089104
+    },
+    {
+      "id": "jp_toyama_station_270028156",
+      "osm_id": 270028156,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "小杉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kosugi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6500086,
+      "longitude": 137.232688
+    },
+    {
+      "id": "jp_toyama_station_270028158",
+      "osm_id": 270028158,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "上堀",
+      "name_kana": "かみほり",
+      "name_translations": {
+        "en": "Kamihori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6537488,
+      "longitude": 137.2298768
+    },
+    {
+      "id": "jp_toyama_station_270028206",
+      "osm_id": 270028206,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝菜町",
+      "name_kana": "あさなまち",
+      "name_translations": {
+        "en": "Asana-machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6604912,
+      "longitude": 137.224842
+    },
+    {
+      "id": "jp_toyama_station_270028209",
+      "osm_id": 270028209,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "月岡",
+      "name_kana": "つきおか",
+      "name_translations": {
+        "en": "Tsukioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.626532,
+      "longitude": 137.2635466
+    },
+    {
+      "id": "jp_toyama_station_270028238",
+      "osm_id": 270028238,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "開発",
+      "name_kana": "かいほつ",
+      "name_translations": {
+        "en": "Kaihotsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6362214,
+      "longitude": 137.2429233
+    },
+    {
+      "id": "jp_toyama_station_270028272",
+      "osm_id": 270028272,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "布市",
+      "name_kana": "ぬのいち",
+      "name_translations": {
+        "en": "Nunoichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6451354,
+      "longitude": 137.2355389
+    },
+    {
+      "id": "jp_toyama_station_270028301",
+      "osm_id": 270028301,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "不二越",
+      "name_kana": "ふじこし",
+      "name_translations": {
+        "en": "Fujikoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6875313,
+      "longitude": 137.2323717
+    },
+    {
+      "id": "jp_toyama_station_270028324",
+      "osm_id": 270028324,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6775945,
+      "longitude": 137.228834
+    },
+    {
+      "id": "jp_toyama_station_270041467",
+      "osm_id": 270041467,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下段",
+      "name_kana": "しただん",
+      "name_translations": {
+        "en": "Shitadan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6476952,
+      "longitude": 137.3179114
+    },
+    {
+      "id": "jp_toyama_station_270041486",
+      "osm_id": 270041486,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "本宮",
+      "name_kana": "ほんぐう",
+      "name_translations": {
+        "en": "Hongu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5750099,
+      "longitude": 137.3962106
+    },
+    {
+      "id": "jp_toyama_station_270041527",
+      "osm_id": 270041527,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "榎町",
+      "name_kana": "えのきまち",
+      "name_translations": {
+        "en": "Enoki-machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6575871,
+      "longitude": 137.3168003
+    },
+    {
+      "id": "jp_toyama_station_270041532",
+      "osm_id": 270041532,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "田添",
+      "name_kana": "たぞえ",
+      "name_translations": {
+        "en": "Tazoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.679431,
+      "longitude": 137.317776
+    },
+    {
+      "id": "jp_toyama_station_270041545",
+      "osm_id": 270041545,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "稚子塚",
+      "name_kana": "ちごづか",
+      "name_translations": {
+        "en": "Chigozuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6863119,
+      "longitude": 137.3176282
+    },
+    {
+      "id": "jp_toyama_station_270041589",
+      "osm_id": 270041589,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "横江",
+      "name_kana": "よこえ",
+      "name_translations": {
+        "en": "Yokoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5822074,
+      "longitude": 137.3357033
+    },
+    {
+      "id": "jp_toyama_station_270041934",
+      "osm_id": 270041934,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "沢中山",
+      "name_kana": "さわなかやま",
+      "name_translations": {
+        "en": "Sawanakayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6224376,
+      "longitude": 137.3210952
+    },
+    {
+      "id": "jp_toyama_station_270041991",
+      "osm_id": 270041991,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "釜ヶ淵",
+      "name_kana": "かまがふち",
+      "name_translations": {
+        "en": "Kamagafuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6330153,
+      "longitude": 137.3195187
+    },
+    {
+      "id": "jp_toyama_station_270042068",
+      "osm_id": 270042068,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "千垣",
+      "name_kana": "ちがき",
+      "name_translations": {
+        "en": "Chigaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.573656,
+      "longitude": 137.373534
+    },
+    {
+      "id": "jp_toyama_station_270042110",
+      "osm_id": 270042110,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "有峰口",
+      "name_kana": "ありみねぐち",
+      "name_translations": {
+        "en": "Arimineguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5730786,
+      "longitude": 137.3801895
+    },
+    {
+      "id": "jp_toyama_station_270042155",
+      "osm_id": 270042155,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "五百石",
+      "name_kana": "ごひゃっこく",
+      "name_translations": {
+        "en": "Gohyakkoku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6654108,
+      "longitude": 137.3142786
+    },
+    {
+      "id": "jp_toyama_station_270043102",
+      "osm_id": 270043102,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "萩浦小学校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hagiurashōgakkō-mae"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7481061,
+      "longitude": 137.2283002
+    },
+    {
+      "id": "jp_toyama_station_270043111",
+      "osm_id": 270043111,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "城川原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jogawara"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7311739,
+      "longitude": 137.2260519
+    },
+    {
+      "id": "jp_toyama_station_270043120",
+      "osm_id": 270043120,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中中島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Etchu-Nakajima"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7224891,
+      "longitude": 137.2248971
+    },
+    {
+      "id": "jp_toyama_station_270043126",
+      "osm_id": 270043126,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "粟島 (大阪屋ショップ前)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awajima"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7192591,
+      "longitude": 137.2248127
+    },
+    {
+      "id": "jp_toyama_station_270043139",
+      "osm_id": 270043139,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下奥井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimookui"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.712293,
+      "longitude": 137.224646
+    },
+    {
+      "id": "jp_toyama_station_270043144",
+      "osm_id": 270043144,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥田中学校前",
+      "name_kana": "おくだちゅうがっこうまええき",
+      "name_translations": {
+        "en": "Okuda-Chugakko-Mae"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7034886,
+      "longitude": 137.2235899
+    },
+    {
+      "id": "jp_toyama_station_270043168",
+      "osm_id": 270043168,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩瀬浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwasehama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7615162,
+      "longitude": 137.2340029
+    },
+    {
+      "id": "jp_toyama_station_270043178",
+      "osm_id": 270043178,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "競輪場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Keirinjomae"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7574739,
+      "longitude": 137.2338439
+    },
+    {
+      "id": "jp_toyama_station_335655726",
+      "osm_id": 335655726,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越ノ潟",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7748551,
+      "longitude": 137.1117347
+    },
+    {
+      "id": "jp_toyama_station_335655728",
+      "osm_id": 335655728,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新町口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7788735,
+      "longitude": 137.0843397
+    },
+    {
+      "id": "jp_toyama_station_335655732",
+      "osm_id": 335655732,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "第一イン新湊クロスベイ前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.781267,
+      "longitude": 137.0784907
+    },
+    {
+      "id": "jp_toyama_station_335655737",
+      "osm_id": 335655737,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東新湊",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7779672,
+      "longitude": 137.0987383
+    },
+    {
+      "id": "jp_toyama_station_335655739",
+      "osm_id": 335655739,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "庄川口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7844919,
+      "longitude": 137.0706824
+    },
+    {
+      "id": "jp_toyama_station_335655776",
+      "osm_id": 335655776,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "中新湊",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "万葉線",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7751799,
+      "longitude": 137.0886347
+    },
+    {
+      "id": "jp_toyama_station_711974372",
+      "osm_id": 711974372,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "立山",
+      "name_kana": "たてやま",
+      "name_translations": {
+        "en": "Mt. Tate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T56",
+      "latitude": 36.5834261,
+      "longitude": 137.4458919
+    },
+    {
+      "id": "jp_toyama_station_711974388",
+      "osm_id": 711974388,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "美女平",
+      "name_kana": "Bijodaira",
+      "name_translations": {
+        "en": "Bijodaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5833471,
+      "longitude": 137.4585968
+    },
+    {
+      "id": "jp_toyama_station_711976380",
+      "osm_id": 711976380,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒部平",
+      "name_kana": "くろべだいら",
+      "name_translations": {
+        "en": "Kurobedaira"
+      },
+      "operator": "立山黒部貫光",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5671451,
+      "longitude": 137.6501481
+    },
+    {
+      "id": "jp_toyama_station_2080163640",
+      "osm_id": 2080163640,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "欅平",
+      "name_kana": "けやきだいら",
+      "name_translations": {
+        "en": "Keyakidaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6968748,
+      "longitude": 137.6581056
+    },
+    {
+      "id": "jp_toyama_station_2080846378",
+      "osm_id": 2080846378,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒部湖",
+      "name_kana": "くろべこ",
+      "name_translations": {
+        "en": "Kurobeko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5665265,
+      "longitude": 137.6582898
+    },
+    {
+      "id": "jp_toyama_bus_terminal_2619428773",
+      "osm_id": 2619428773,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "黒部ダム",
+      "name_kana": "くろべダム",
+      "name_translations": {
+        "en": "Kurobe Dam"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5670625,
+      "longitude": 137.666413
+    },
+    {
+      "id": "jp_toyama_station_3977703970",
+      "osm_id": 3977703970,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "富山",
+      "name_kana": "とやま",
+      "name_translations": {
+        "en": "Toyama"
+      },
+      "operator": "あいの風とやま鉄道;西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7021317,
+      "longitude": 137.212666
+    },
+    {
+      "id": "jp_toyama_station_3992874374",
+      "osm_id": 3992874374,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石動",
+      "name_kana": "いするぎ",
+      "name_translations": {
+        "en": "Isurugi"
+      },
+      "operator": "あいの風とやま鉄道;西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6726074,
+      "longitude": 136.8654291
+    },
+    {
+      "id": "jp_toyama_station_4437592203",
+      "osm_id": 4437592203,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "鬼ヶ城連絡所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "国土交通省北陸地方整備局立山砂防事務所",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5569836,
+      "longitude": 137.5050747
+    },
+    {
+      "id": "jp_toyama_station_4437592256",
+      "osm_id": 4437592256,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "桑谷連絡所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5671536,
+      "longitude": 137.4849781
+    },
+    {
+      "id": "jp_toyama_station_4437592284",
+      "osm_id": 4437592284,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "中小屋連絡所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5691082,
+      "longitude": 137.471573
+    },
+    {
+      "id": "jp_toyama_bus_terminal_4642132920",
+      "osm_id": 4642132920,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "砺波駅南",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6363777,
+      "longitude": 136.9538472
+    },
+    {
+      "id": "jp_toyama_station_5211478960",
+      "osm_id": 5211478960,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "蓮町（馬場記念公園前）",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hasumachi (Babakinenkōen-mae)"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7425979,
+      "longitude": 137.2275798
+    },
+    {
+      "id": "jp_toyama_station_5211622524",
+      "osm_id": 5211622524,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東岩瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Iwase"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.752703,
+      "longitude": 137.2309052
+    },
+    {
+      "id": "jp_toyama_station_5211891021",
+      "osm_id": 5211891021,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "犬島新町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inujima-Shimmachi"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7351913,
+      "longitude": 137.2265929
+    },
+    {
+      "id": "jp_toyama_station_5770394957",
+      "osm_id": 5770394957,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "樺平連絡所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5484576,
+      "longitude": 137.5143291
+    },
+    {
+      "id": "jp_toyama_station_5770455204",
+      "osm_id": 5770455204,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "水谷連絡所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5507837,
+      "longitude": 137.5311761
+    },
+    {
+      "id": "jp_toyama_station_6050880711",
+      "osm_id": 6050880711,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "魚津",
+      "name_kana": "うおづ",
+      "name_translations": {
+        "en": "Uozu"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8264529,
+      "longitude": 137.4057296
+    },
+    {
+      "id": "jp_toyama_station_6342854861",
+      "osm_id": 6342854861,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "栄町",
+      "name_kana": "さかえまち",
+      "name_translations": {
+        "en": "Sakaemachi"
+      },
+      "operator": "富山地方鉄道",
+      "network": "富山地方鉄道不二越線",
+      "ref": "T58",
+      "latitude": 36.6916369,
+      "longitude": 137.2333827
+    },
+    {
+      "id": "jp_toyama_station_6433418033",
+      "osm_id": 6433418033,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "福光",
+      "name_kana": "ふくみつ",
+      "name_translations": {
+        "en": "Fukumitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5583025,
+      "longitude": 136.8785696
+    },
+    {
+      "id": "jp_toyama_station_6628640619",
+      "osm_id": 6628640619,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新高岡",
+      "name_kana": "しんたかおか",
+      "name_translations": {
+        "en": "Shin-Takaoka"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.726967,
+      "longitude": 137.01199
+    },
+    {
+      "id": "jp_toyama_station_8142013200",
+      "osm_id": 8142013200,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇奈月温泉",
+      "name_kana": "うなづきおんせん",
+      "name_translations": {
+        "en": "Unazukionsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.815569,
+      "longitude": 137.5841421
+    },
+    {
+      "id": "jp_toyama_station_8142027024",
+      "osm_id": 8142027024,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "上市",
+      "name_kana": "かみいち",
+      "name_translations": {
+        "en": "Kamiichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.704452,
+      "longitude": 137.3569576
+    },
+    {
+      "id": "jp_toyama_station_8142027028",
+      "osm_id": 8142027028,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "電鉄富山",
+      "name_kana": "でんてつとやま",
+      "name_translations": {
+        "en": "Dentetsu-Toyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7004704,
+      "longitude": 137.214881
+    },
+    {
+      "id": "jp_toyama_station_8142283005",
+      "osm_id": 8142283005,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東新庄",
+      "name_kana": "ひがししんじょう",
+      "name_translations": {
+        "en": "Higashi-Shinjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6987221,
+      "longitude": 137.2533064
+    },
+    {
+      "id": "jp_toyama_station_8142283006",
+      "osm_id": 8142283006,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲荷町",
+      "name_kana": "いなりまち",
+      "name_translations": {
+        "en": "Inari-machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6969102,
+      "longitude": 137.2315429
+    },
+    {
+      "id": "jp_toyama_station_8142323099",
+      "osm_id": 8142323099,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新黒部",
+      "name_kana": "しんくろべ",
+      "name_translations": {
+        "en": "Shin-Kurobe"
+      },
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8731731,
+      "longitude": 137.4810621
+    },
+    {
+      "id": "jp_toyama_station_8145864795",
+      "osm_id": 8145864795,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "寺田",
+      "name_kana": "てらだ",
+      "name_translations": {
+        "en": "Terada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6988403,
+      "longitude": 137.318645
+    },
+    {
+      "id": "jp_toyama_station_8145864798",
+      "osm_id": 8145864798,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩峅寺",
+      "name_kana": "いわくらじ",
+      "name_translations": {
+        "en": "Iwakuraji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6082893,
+      "longitude": 137.3196937
+    },
+    {
+      "id": "jp_toyama_station_8145899493",
+      "osm_id": 8145899493,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中舟橋",
+      "name_kana": "えっちゅうふなはし",
+      "name_translations": {
+        "en": "Etchu-Funahashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7055715,
+      "longitude": 137.3065074
+    },
+    {
+      "id": "jp_toyama_station_8146161187",
+      "osm_id": 8146161187,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新庄田中",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "富山地方鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.698036,
+      "longitude": 137.2421899
+    },
+    {
+      "id": "jp_toyama_station_8146161204",
+      "osm_id": 8146161204,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中荏原",
+      "name_kana": "えっちゅうえばら",
+      "name_translations": {
+        "en": "Etchu-Ebara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6992145,
+      "longitude": 137.2664934
+    },
+    {
+      "id": "jp_toyama_station_8146161214",
+      "osm_id": 8146161214,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中三郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Etchu-Sango"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.703365,
+      "longitude": 137.2907808
+    },
+    {
+      "id": "jp_toyama_station_8153723815",
+      "osm_id": 8153723815,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒部",
+      "name_kana": "くろべ",
+      "name_translations": {
+        "en": "Kurobe"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8701841,
+      "longitude": 137.4341449
+    },
+    {
+      "id": "jp_toyama_station_8153723836",
+      "osm_id": 8153723836,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "入善",
+      "name_kana": "にゅうぜん",
+      "name_translations": {
+        "en": "Nyuzen"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.9415048,
+      "longitude": 137.4996901
+    },
+    {
+      "id": "jp_toyama_station_8153724219",
+      "osm_id": 8153724219,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "泊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9518488,
+      "longitude": 137.5557549
+    },
+    {
+      "id": "jp_toyama_station_8153881893",
+      "osm_id": 8153881893,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "高岡やぶなみ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takaoka-Yabunami"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7372495,
+      "longitude": 136.9886541
+    },
+    {
+      "id": "jp_toyama_station_8153881894",
+      "osm_id": 8153881894,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "福岡",
+      "name_kana": "ふくおか",
+      "name_translations": {
+        "en": "Fukuoka"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7081098,
+      "longitude": 136.9317417
+    },
+    {
+      "id": "jp_toyama_station_8154250381",
+      "osm_id": 8154250381,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "呉羽",
+      "name_kana": "くれは",
+      "name_translations": {
+        "en": "Kureha"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.719111,
+      "longitude": 137.1657966
+    },
+    {
+      "id": "jp_toyama_station_8154250407",
+      "osm_id": 8154250407,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "越中大門",
+      "name_kana": "えっちゅうだいもん",
+      "name_translations": {
+        "en": "Etchu-Daimon"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7344594,
+      "longitude": 137.0547625
+    },
+    {
+      "id": "jp_toyama_station_8154338342",
+      "osm_id": 8154338342,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東富山",
+      "name_kana": "ひがしとやま",
+      "name_translations": {
+        "en": "Higashi-Toyama"
+      },
+      "operator": "あいの風とやま鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7412915,
+      "longitude": 137.2490215
+    },
+    {
+      "id": "jp_toyama_station_8236200156",
+      "osm_id": 8236200156,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "仙人谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sennindani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6501212,
+      "longitude": 137.6827126
+    },
+    {
+      "id": "jp_toyama_bus_terminal_10933986846",
+      "osm_id": 10933986846,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "室堂",
+      "name_kana": "むろどう",
+      "name_translations": {
+        "en": "Murodō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5771923,
+      "longitude": 137.5957936
+    },
+    {
+      "id": "jp_toyama_station_10970864076",
+      "osm_id": 10970864076,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "城端",
+      "name_kana": "じょうはな",
+      "name_translations": {
+        "en": "Johana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5221159,
+      "longitude": 136.9017325
+    },
+    {
+      "id": "jp_toyama_station_10970864135",
+      "osm_id": 10970864135,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "福野",
+      "name_kana": "ふくの",
+      "name_translations": {
+        "en": "Fukuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5885423,
+      "longitude": 136.9234483
+    },
+    {
+      "id": "jp_toyama_station_10970864155",
+      "osm_id": 10970864155,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "砺波",
+      "name_kana": "となみ",
+      "name_translations": {
+        "en": "Tonami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6365585,
+      "longitude": 136.9536929
+    },
+    {
+      "id": "jp_toyama_station_10970864158",
+      "osm_id": 10970864158,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸出",
+      "name_kana": "といで",
+      "name_translations": {
+        "en": "Toide"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6841065,
+      "longitude": 136.9838208
+    },
+    {
+      "id": "jp_toyama_station_10970864162",
+      "osm_id": 10970864162,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "二塚",
+      "name_kana": "ふたつか",
+      "name_translations": {
+        "en": "Futatsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7143863,
+      "longitude": 137.0062199
+    },
+    {
+      "id": "jp_toyama_station_11733499148",
+      "osm_id": 11733499148,
+      "osm_type": "node",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "黒部宇奈月温泉",
+      "name_kana": "くろべうなづきおんせん",
+      "name_translations": {
+        "en": "Kurobe-Unazuki-Onsen"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8743189,
+      "longitude": 137.481437
+    },
+    {
+      "id": "jp_toyama_airport_57007579",
+      "osm_id": 57007579,
+      "osm_type": "way",
+      "prefecture_id": "jp_toyama",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "富山空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyama Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TOY",
+      "latitude": 36.6489758,
+      "longitude": 137.187883
+    },
+    {
+      "id": "jp_toyama_station_1058460023",
+      "osm_id": 1058460023,
+      "osm_type": "way",
+      "prefecture_id": "jp_toyama",
+      "type": "station",
+      "subtype": "private",
+      "name": "福岡駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7083077,
+      "longitude": 136.9316512
+    },
+    {
+      "id": "jp_toyama_bus_terminal_1209987704",
+      "osm_id": 1209987704,
+      "osm_type": "way",
+      "prefecture_id": "jp_toyama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "加越能バス本社前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "加越能バス",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7586449,
+      "longitude": 137.0276929
+    }
+  ]
+}

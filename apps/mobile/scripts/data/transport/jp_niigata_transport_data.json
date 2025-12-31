@@ -1,0 +1,4088 @@
+{
+  "fetchedAt": "2025-12-24T05:51:08.304Z",
+  "prefecture_id": "jp_niigata",
+  "prefecture_name": "新潟県",
+  "stats": {
+    "station": 198,
+    "airport": 2,
+    "ferry_terminal": 8,
+    "bus_terminal": 21,
+    "total": 229
+  },
+  "data": [
+    {
+      "id": "jp_niigata_station_263065568",
+      "osm_id": 263065568,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "上条",
+      "name_kana": "かみじょう",
+      "name_translations": {
+        "en": "Kamijō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.347094,
+      "longitude": 139.050894
+    },
+    {
+      "id": "jp_niigata_station_263065569",
+      "osm_id": 263065569,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "入広瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Irihirose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3584139,
+      "longitude": 139.0660163
+    },
+    {
+      "id": "jp_niigata_station_263065744",
+      "osm_id": 263065744,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大白川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōshirakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3416074,
+      "longitude": 139.120983
+    },
+    {
+      "id": "jp_niigata_station_263065976",
+      "osm_id": 263065976,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "藪神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yabukami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.257108,
+      "longitude": 138.976124
+    },
+    {
+      "id": "jp_niigata_station_263066045",
+      "osm_id": 263066045,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後広瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Hirose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.274883,
+      "longitude": 138.981489
+    },
+    {
+      "id": "jp_niigata_station_263066146",
+      "osm_id": 263066146,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後須原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Suhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3204553,
+      "longitude": 139.0176287
+    },
+    {
+      "id": "jp_niigata_station_263066521",
+      "osm_id": 263066521,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "魚沼田中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uonuma-Tanaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2943922,
+      "longitude": 138.9926298
+    },
+    {
+      "id": "jp_niigata_station_263068741",
+      "osm_id": 263068741,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "五十島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Igashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.716006,
+      "longitude": 139.353368
+    },
+    {
+      "id": "jp_niigata_station_263068743",
+      "osm_id": 263068743,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "津川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6880475,
+      "longitude": 139.4472634
+    },
+    {
+      "id": "jp_niigata_station_263068745",
+      "osm_id": 263068745,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6958332,
+      "longitude": 139.4796381
+    },
+    {
+      "id": "jp_niigata_station_263068967",
+      "osm_id": 263068967,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北五泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Gosen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7469155,
+      "longitude": 139.1697061
+    },
+    {
+      "id": "jp_niigata_station_263068968",
+      "osm_id": 263068968,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "日出谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hideya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7057552,
+      "longitude": 139.5344616
+    },
+    {
+      "id": "jp_niigata_station_263068970",
+      "osm_id": 263068970,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "新関",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinseki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7687383,
+      "longitude": 139.1624053
+    },
+    {
+      "id": "jp_niigata_station_263068972",
+      "osm_id": 263068972,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "三川",
+      "name_kana": "みかわ",
+      "name_translations": {
+        "en": "Mikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7087576,
+      "longitude": 139.3818032
+    },
+    {
+      "id": "jp_niigata_station_263068974",
+      "osm_id": 263068974,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東下条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Gejo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.736462,
+      "longitude": 139.322154
+    },
+    {
+      "id": "jp_niigata_station_263069425",
+      "osm_id": 263069425,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maoroshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7376277,
+      "longitude": 139.2604505
+    },
+    {
+      "id": "jp_niigata_station_263069586",
+      "osm_id": 263069586,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊実",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyomi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6806479,
+      "longitude": 139.5763931
+    },
+    {
+      "id": "jp_niigata_station_263069587",
+      "osm_id": 263069587,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "五泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gosen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7344736,
+      "longitude": 139.1795387
+    },
+    {
+      "id": "jp_niigata_station_263069803",
+      "osm_id": 263069803,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東新津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Niitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7879759,
+      "longitude": 139.1432148
+    },
+    {
+      "id": "jp_niigata_station_263069904",
+      "osm_id": 263069904,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "猿和田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saruwada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7296646,
+      "longitude": 139.2222957
+    },
+    {
+      "id": "jp_niigata_station_263069905",
+      "osm_id": 263069905,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "咲花",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakihana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7350353,
+      "longitude": 139.2905541
+    },
+    {
+      "id": "jp_niigata_station_264260692",
+      "osm_id": 264260692,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂町",
+      "name_kana": "さかまち",
+      "name_translations": {
+        "en": "Sakamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1203569,
+      "longitude": 139.4470522
+    },
+    {
+      "id": "jp_niigata_station_264261869",
+      "osm_id": 264261869,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後早川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Hayakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3165097,
+      "longitude": 139.4498478
+    },
+    {
+      "id": "jp_niigata_station_264261911",
+      "osm_id": 264261911,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後寒川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Kangawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4491242,
+      "longitude": 139.4903829
+    },
+    {
+      "id": "jp_niigata_station_264261965",
+      "osm_id": 264261965,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "間島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Majima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2729581,
+      "longitude": 139.450234
+    },
+    {
+      "id": "jp_niigata_station_264262549",
+      "osm_id": 264262549,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "桑川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuwagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3750015,
+      "longitude": 139.4585432
+    },
+    {
+      "id": "jp_niigata_station_264262727",
+      "osm_id": 264262727,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "勝木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gatsugi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4903993,
+      "longitude": 139.5175571
+    },
+    {
+      "id": "jp_niigata_station_264263530",
+      "osm_id": 264263530,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "今川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4103628,
+      "longitude": 139.4683638
+    },
+    {
+      "id": "jp_niigata_station_264264196",
+      "osm_id": 264264196,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "府屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fuya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5140857,
+      "longitude": 139.5311433
+    },
+    {
+      "id": "jp_niigata_station_264410551",
+      "osm_id": 264410551,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "新崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niizaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9225051,
+      "longitude": 139.158294
+    },
+    {
+      "id": "jp_niigata_station_264413821",
+      "osm_id": 264413821,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "新潟大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niigata Daigaku-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8693273,
+      "longitude": 138.9547059
+    },
+    {
+      "id": "jp_niigata_station_264413827",
+      "osm_id": 264413827,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "内野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8582582,
+      "longitude": 138.9365061
+    },
+    {
+      "id": "jp_niigata_station_264413869",
+      "osm_id": 264413869,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "内野西が丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchino-Nishigaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.846149,
+      "longitude": 138.9267322
+    },
+    {
+      "id": "jp_niigata_station_264413965",
+      "osm_id": 264413965,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "巻",
+      "name_kana": "まき",
+      "name_translations": {
+        "en": "Maki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7568262,
+      "longitude": 138.8896189
+    },
+    {
+      "id": "jp_niigata_station_264413970",
+      "osm_id": 264413970,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小針",
+      "name_kana": "こばり",
+      "name_translations": {
+        "en": "Kobari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8895461,
+      "longitude": 138.9911972
+    },
+    {
+      "id": "jp_niigata_station_264414010",
+      "osm_id": 264414010,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩室",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwamuro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.722228,
+      "longitude": 138.880236
+    },
+    {
+      "id": "jp_niigata_station_264414094",
+      "osm_id": 264414094,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後赤塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Akatsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.815666,
+      "longitude": 138.9079351
+    },
+    {
+      "id": "jp_niigata_station_264414095",
+      "osm_id": 264414095,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後曽根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Sone"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.793767,
+      "longitude": 138.9111168
+    },
+    {
+      "id": "jp_niigata_station_264414127",
+      "osm_id": 264414127,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "青山",
+      "name_kana": "あおやま",
+      "name_translations": {
+        "en": "Aoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8986325,
+      "longitude": 139.001079
+    },
+    {
+      "id": "jp_niigata_station_264414130",
+      "osm_id": 264414130,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北吉田",
+      "name_kana": "きたよしだ",
+      "name_translations": {
+        "en": "Kita-Yoshida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.702545,
+      "longitude": 138.882131
+    },
+    {
+      "id": "jp_niigata_station_264414188",
+      "osm_id": 264414188,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "寺尾",
+      "name_kana": "てらお",
+      "name_translations": {
+        "en": "Terao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8792824,
+      "longitude": 138.9739339
+    },
+    {
+      "id": "jp_niigata_station_264414237",
+      "osm_id": 264414237,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "妙法寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Myohoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.566069,
+      "longitude": 138.741791
+    },
+    {
+      "id": "jp_niigata_station_264414323",
+      "osm_id": 264414323,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小島谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ojimaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5745691,
+      "longitude": 138.7713399
+    },
+    {
+      "id": "jp_niigata_station_264414325",
+      "osm_id": 264414325,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "粟生津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aouzu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6542411,
+      "longitude": 138.8735787
+    },
+    {
+      "id": "jp_niigata_station_264414331",
+      "osm_id": 264414331,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "分水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bunsui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6293817,
+      "longitude": 138.8397312
+    },
+    {
+      "id": "jp_niigata_station_264414442",
+      "osm_id": 264414442,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "寺泊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Teradomari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6203944,
+      "longitude": 138.813824
+    },
+    {
+      "id": "jp_niigata_station_264414567",
+      "osm_id": 264414567,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南吉田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Yoshida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6720717,
+      "longitude": 138.8708768
+    },
+    {
+      "id": "jp_niigata_station_264414676",
+      "osm_id": 264414676,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "桐原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kirihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.601876,
+      "longitude": 138.792562
+    },
+    {
+      "id": "jp_niigata_station_264414738",
+      "osm_id": 264414738,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "刈羽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kariwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.429733,
+      "longitude": 138.619387
+    },
+    {
+      "id": "jp_niigata_station_264414743",
+      "osm_id": 264414743,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.531531,
+      "longitude": 138.716067
+    },
+    {
+      "id": "jp_niigata_station_264414832",
+      "osm_id": 264414832,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "西中通",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Nakadori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3926436,
+      "longitude": 138.5932758
+    },
+    {
+      "id": "jp_niigata_station_264414839",
+      "osm_id": 264414839,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小木ノ城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oginojo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.515791,
+      "longitude": 138.704363
+    },
+    {
+      "id": "jp_niigata_station_264414895",
+      "osm_id": 264414895,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東柏崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Kashiwazaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3735527,
+      "longitude": 138.5656925
+    },
+    {
+      "id": "jp_niigata_station_264414901",
+      "osm_id": 264414901,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "西山",
+      "name_kana": "にしやま",
+      "name_translations": {
+        "en": "Nishiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.448673,
+      "longitude": 138.642702
+    },
+    {
+      "id": "jp_niigata_station_264414991",
+      "osm_id": 264414991,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "礼拝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Raihai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4591428,
+      "longitude": 138.6639229
+    },
+    {
+      "id": "jp_niigata_station_264415142",
+      "osm_id": 264415142,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "石地",
+      "name_kana": "いしじ",
+      "name_translations": {
+        "en": "Ishiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.484104,
+      "longitude": 138.6882856
+    },
+    {
+      "id": "jp_niigata_station_264415268",
+      "osm_id": 264415268,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4048609,
+      "longitude": 138.601967
+    },
+    {
+      "id": "jp_niigata_station_264800968",
+      "osm_id": 264800968,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新津",
+      "name_kana": "にいつ",
+      "name_translations": {
+        "en": "Niitsu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.8000262,
+      "longitude": 139.1209935
+    },
+    {
+      "id": "jp_niigata_station_264801432",
+      "osm_id": 264801432,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "亀田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kameda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8772394,
+      "longitude": 139.1082662
+    },
+    {
+      "id": "jp_niigata_station_264801521",
+      "osm_id": 264801521,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "帯織",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obiori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5726667,
+      "longitude": 138.9280776
+    },
+    {
+      "id": "jp_niigata_station_264801525",
+      "osm_id": 264801525,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "押切",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oshikiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5047526,
+      "longitude": 138.8812197
+    },
+    {
+      "id": "jp_niigata_station_264801586",
+      "osm_id": 264801586,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "加茂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6589007,
+      "longitude": 139.0492466
+    },
+    {
+      "id": "jp_niigata_station_264801688",
+      "osm_id": 264801688,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "保内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Honai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6393074,
+      "longitude": 139.0147116
+    },
+    {
+      "id": "jp_niigata_station_264801765",
+      "osm_id": 264801765,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "塚山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3551519,
+      "longitude": 138.7294996
+    },
+    {
+      "id": "jp_niigata_station_264802111",
+      "osm_id": 264802111,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東光寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toukouji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5940323,
+      "longitude": 138.9436914
+    },
+    {
+      "id": "jp_niigata_station_264802123",
+      "osm_id": 264802123,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "前川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maekawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4017969,
+      "longitude": 138.8240703
+    },
+    {
+      "id": "jp_niigata_station_264802208",
+      "osm_id": 264802208,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "三条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6211398,
+      "longitude": 138.960895
+    },
+    {
+      "id": "jp_niigata_station_264802308",
+      "osm_id": 264802308,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "来迎寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Raikoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3971375,
+      "longitude": 138.7835364
+    },
+    {
+      "id": "jp_niigata_station_264802401",
+      "osm_id": 264802401,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後岩塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Iwatsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3867808,
+      "longitude": 138.7564877
+    },
+    {
+      "id": "jp_niigata_station_264802427",
+      "osm_id": 264802427,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "弥彦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yahiko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6992561,
+      "longitude": 138.8319529
+    },
+    {
+      "id": "jp_niigata_station_264802433",
+      "osm_id": 264802433,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢作",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yahagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.690813,
+      "longitude": 138.851307
+    },
+    {
+      "id": "jp_niigata_station_264802440",
+      "osm_id": 264802440,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "西燕",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Tsubame"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6797694,
+      "longitude": 138.9092888
+    },
+    {
+      "id": "jp_niigata_station_264802840",
+      "osm_id": 264802840,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "鯨波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kujiranami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3558698,
+      "longitude": 138.5179947
+    },
+    {
+      "id": "jp_niigata_station_264802952",
+      "osm_id": 264802952,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北三条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Sanjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6326444,
+      "longitude": 138.9557549
+    },
+    {
+      "id": "jp_niigata_station_264802969",
+      "osm_id": 264802969,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "青海川",
+      "name_kana": "おうみがわ",
+      "name_translations": {
+        "en": "Omigawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3462398,
+      "longitude": 138.486395
+    },
+    {
+      "id": "jp_niigata_station_264803365",
+      "osm_id": 264803365,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後広田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Hirota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3571537,
+      "longitude": 138.6608947
+    },
+    {
+      "id": "jp_niigata_station_264803402",
+      "osm_id": 264803402,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitajo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3382879,
+      "longitude": 138.6367985
+    },
+    {
+      "id": "jp_niigata_station_264803555",
+      "osm_id": 264803555,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3358877,
+      "longitude": 138.4675779
+    },
+    {
+      "id": "jp_niigata_station_264803559",
+      "osm_id": 264803559,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashiwazaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3633912,
+      "longitude": 138.5558473
+    },
+    {
+      "id": "jp_niigata_station_264803569",
+      "osm_id": 264803569,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "潟町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2343536,
+      "longitude": 138.3404221
+    },
+    {
+      "id": "jp_niigata_station_264803756",
+      "osm_id": 264803756,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "安田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.341032,
+      "longitude": 138.6124834
+    },
+    {
+      "id": "jp_niigata_station_264803872",
+      "osm_id": 264803872,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "米山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoneyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3169356,
+      "longitude": 138.4315432
+    },
+    {
+      "id": "jp_niigata_station_264804401",
+      "osm_id": 264804401,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "柿崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kakizaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2779587,
+      "longitude": 138.3862188
+    },
+    {
+      "id": "jp_niigata_station_264805607",
+      "osm_id": 264805607,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "新井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arai"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0268151,
+      "longitude": 138.2554847
+    },
+    {
+      "id": "jp_niigata_station_264805815",
+      "osm_id": 264805815,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "jr",
+      "name": "直江津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naoetsu"
+      },
+      "operator": "えちごトキめき鉄道;東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.170264,
+      "longitude": 138.2422616
+    },
+    {
+      "id": "jp_niigata_station_264805947",
+      "osm_id": 264805947,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "長鳥",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagatori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.365977,
+      "longitude": 138.684609
+    },
+    {
+      "id": "jp_niigata_station_264812034",
+      "osm_id": 264812034,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "八色",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yairo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.191982,
+      "longitude": 138.9351497
+    },
+    {
+      "id": "jp_niigata_station_264812047",
+      "osm_id": 264812047,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "五日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itsukamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1195584,
+      "longitude": 138.9080616
+    },
+    {
+      "id": "jp_niigata_station_264812081",
+      "osm_id": 264812081,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "上越国際スキー場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joetsu-Kokusai-Ski-jo-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0288622,
+      "longitude": 138.8284212
+    },
+    {
+      "id": "jp_niigata_station_264812345",
+      "osm_id": 264812345,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北堀之内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Horinouchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2557054,
+      "longitude": 138.8964258
+    },
+    {
+      "id": "jp_niigata_station_264813042",
+      "osm_id": 264813042,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後堀之内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Horinouchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2390504,
+      "longitude": 138.9278948
+    },
+    {
+      "id": "jp_niigata_station_264813349",
+      "osm_id": 264813349,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後滝谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Takiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3691078,
+      "longitude": 138.8350129
+    },
+    {
+      "id": "jp_niigata_station_264813490",
+      "osm_id": 264813490,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小千谷",
+      "name_kana": "おぢや",
+      "name_translations": {
+        "en": "Ojiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3098255,
+      "longitude": 138.8133463
+    },
+    {
+      "id": "jp_niigata_station_264814993",
+      "osm_id": 264814993,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後中里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Nakazato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.909711,
+      "longitude": 138.8484487
+    },
+    {
+      "id": "jp_niigata_station_264815313",
+      "osm_id": 264815313,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Osawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0213756,
+      "longitude": 138.8213997
+    },
+    {
+      "id": "jp_niigata_station_264815406",
+      "osm_id": 264815406,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "土樽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuchitaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8747483,
+      "longitude": 138.8622042
+    },
+    {
+      "id": "jp_niigata_station_267454007",
+      "osm_id": 267454007,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "根知",
+      "name_kana": "ねち",
+      "name_translations": {
+        "en": "Nechi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9667651,
+      "longitude": 137.8669583
+    },
+    {
+      "id": "jp_niigata_station_267454015",
+      "osm_id": 267454015,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "平岩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiraiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8871476,
+      "longitude": 137.8654071
+    },
+    {
+      "id": "jp_niigata_station_267454181",
+      "osm_id": 267454181,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "姫川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Himekawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0203734,
+      "longitude": 137.8608698
+    },
+    {
+      "id": "jp_niigata_station_267454739",
+      "osm_id": 267454739,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "頸城大野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kubiki-Ōno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0060513,
+      "longitude": 137.8725383
+    },
+    {
+      "id": "jp_niigata_station_267455175",
+      "osm_id": 267455175,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "糸魚川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itoigawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0433062,
+      "longitude": 137.8617531
+    },
+    {
+      "id": "jp_niigata_station_267455179",
+      "osm_id": 267455179,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.937941,
+      "longitude": 137.8600393
+    },
+    {
+      "id": "jp_niigata_station_359793059",
+      "osm_id": 359793059,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "しんざ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinza"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1397276,
+      "longitude": 138.7685891
+    },
+    {
+      "id": "jp_niigata_station_359793064",
+      "osm_id": 359793064,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "魚沼丘陵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uonuma-Kyūryō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0964424,
+      "longitude": 138.8772254
+    },
+    {
+      "id": "jp_niigata_station_359793066",
+      "osm_id": 359793066,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "美佐島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misashima"
+      },
+      "operator": "北越急行",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1310496,
+      "longitude": 138.7895372
+    },
+    {
+      "id": "jp_niigata_station_359793089",
+      "osm_id": 359793089,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "十日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.134697,
+      "longitude": 138.7559404
+    },
+    {
+      "id": "jp_niigata_station_359793286",
+      "osm_id": 359793286,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "くびき",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kubiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1981878,
+      "longitude": 138.3616671
+    },
+    {
+      "id": "jp_niigata_station_359793288",
+      "osm_id": 359793288,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "まつだい",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsudai"
+      },
+      "operator": "北越急行",
+      "network": "ほくほく線",
+      "ref": null,
+      "latitude": 37.132214,
+      "longitude": 138.6137313
+    },
+    {
+      "id": "jp_niigata_station_359793585",
+      "osm_id": 359793585,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大池いこいの森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōike-Ikoi-no-mori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1845139,
+      "longitude": 138.3731731
+    },
+    {
+      "id": "jp_niigata_station_359793614",
+      "osm_id": 359793614,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "ほくほく大島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hokuhoku-Ōshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1469361,
+      "longitude": 138.5092691
+    },
+    {
+      "id": "jp_niigata_station_359793977",
+      "osm_id": 359793977,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "うらがわら",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uragawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1591343,
+      "longitude": 138.4193146
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_895456120",
+      "osm_id": 895456120,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "両津港佐渡汽船ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "佐渡汽船株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 38.081653,
+      "longitude": 138.438069
+    },
+    {
+      "id": "jp_niigata_station_1445190627",
+      "osm_id": 1445190627,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越後岩沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Iwasawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "JR飯山線",
+      "ref": null,
+      "latitude": 37.2406621,
+      "longitude": 138.7968932
+    },
+    {
+      "id": "jp_niigata_station_1445190888",
+      "osm_id": 1445190888,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "下条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gejō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.198452,
+      "longitude": 138.7800326
+    },
+    {
+      "id": "jp_niigata_station_1445190889",
+      "osm_id": 1445190889,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "内ヶ巻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchigamaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2500109,
+      "longitude": 138.8521443
+    },
+    {
+      "id": "jp_niigata_station_1445190903",
+      "osm_id": 1445190903,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "魚沼中条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uonumanakajyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1595962,
+      "longitude": 138.7725153
+    },
+    {
+      "id": "jp_niigata_station_3412994273",
+      "osm_id": 3412994273,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takada"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1151642,
+      "longitude": 138.2420093
+    },
+    {
+      "id": "jp_niigata_station_3548915149",
+      "osm_id": 3548915149,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後川口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Kawaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2729129,
+      "longitude": 138.8619611
+    },
+    {
+      "id": "jp_niigata_station_3548915150",
+      "osm_id": 3548915150,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後湯沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Yuzawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9359414,
+      "longitude": 138.8090456
+    },
+    {
+      "id": "jp_niigata_station_3548915152",
+      "osm_id": 3548915152,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koide"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2337116,
+      "longitude": 138.953482
+    },
+    {
+      "id": "jp_niigata_station_3548915153",
+      "osm_id": 3548915153,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "六日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Muikamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0670998,
+      "longitude": 138.8759378
+    },
+    {
+      "id": "jp_niigata_station_3548915157",
+      "osm_id": 3548915157,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1672238,
+      "longitude": 138.9228409
+    },
+    {
+      "id": "jp_niigata_station_3955448947",
+      "osm_id": 3955448947,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "犀潟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saigata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2103694,
+      "longitude": 138.3052102
+    },
+    {
+      "id": "jp_niigata_station_3955448948",
+      "osm_id": 3955448948,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1840495,
+      "longitude": 138.2683484
+    },
+    {
+      "id": "jp_niigata_station_4042543915",
+      "osm_id": 4042543915,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北長岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Nagaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4681689,
+      "longitude": 138.8618215
+    },
+    {
+      "id": "jp_niigata_station_4087367885",
+      "osm_id": 4087367885,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "新潟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niigata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9122444,
+      "longitude": 139.0613294
+    },
+    {
+      "id": "jp_niigata_station_4087367886",
+      "osm_id": 4087367886,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "白山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakusan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9119638,
+      "longitude": 139.030323
+    },
+    {
+      "id": "jp_niigata_station_4087367887",
+      "osm_id": 4087367887,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "関屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9060049,
+      "longitude": 139.0151209
+    },
+    {
+      "id": "jp_niigata_station_4087716008",
+      "osm_id": 4087716008,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "jr",
+      "name": "越後石山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigo-Ishiyama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.896568,
+      "longitude": 139.095285
+    },
+    {
+      "id": "jp_niigata_station_4087788338",
+      "osm_id": 4087788338,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大形",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9155853,
+      "longitude": 139.1295069
+    },
+    {
+      "id": "jp_niigata_station_4087788339",
+      "osm_id": 4087788339,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東新潟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Niigata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9087908,
+      "longitude": 139.1087895
+    },
+    {
+      "id": "jp_niigata_station_4109188950",
+      "osm_id": 4109188950,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "虫川大杉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mushigawa-Ōsugi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1549847,
+      "longitude": 138.4410318
+    },
+    {
+      "id": "jp_niigata_station_4109702962",
+      "osm_id": 4109702962,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上越妙高",
+      "name_kana": "じょうえつみょうこう",
+      "name_translations": {
+        "en": "Joetsu-Myoko"
+      },
+      "operator": "東日本旅客鉄道;西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0812219,
+      "longitude": 138.2486852
+    },
+    {
+      "id": "jp_niigata_station_4358958785",
+      "osm_id": 4358958785,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "荻川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8333137,
+      "longitude": 139.1115522
+    },
+    {
+      "id": "jp_niigata_station_4358958787",
+      "osm_id": 4358958787,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "さつき野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Satsukino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8132978,
+      "longitude": 139.1172452
+    },
+    {
+      "id": "jp_niigata_station_4358958788",
+      "osm_id": 4358958788,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "田上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tagami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7192533,
+      "longitude": 139.074837
+    },
+    {
+      "id": "jp_niigata_station_4358959791",
+      "osm_id": 4358959791,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "古津",
+      "name_kana": "ふるつ",
+      "name_translations": {
+        "en": "Furutsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7728487,
+      "longitude": 139.1145295
+    },
+    {
+      "id": "jp_niigata_station_4358959793",
+      "osm_id": 4358959793,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽生田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanyuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6934437,
+      "longitude": 139.0606693
+    },
+    {
+      "id": "jp_niigata_station_4358959796",
+      "osm_id": 4358959796,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東三条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Sanjou"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6285961,
+      "longitude": 138.9744628
+    },
+    {
+      "id": "jp_niigata_station_4358959799",
+      "osm_id": 4358959799,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "見附",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsuke"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5401782,
+      "longitude": 138.9049476
+    },
+    {
+      "id": "jp_niigata_station_4358959890",
+      "osm_id": 4358959890,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢代田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashiroda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.74904,
+      "longitude": 139.0957077
+    },
+    {
+      "id": "jp_niigata_station_4500141823",
+      "osm_id": 4500141823,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "平林",
+      "name_kana": "ひらばやし",
+      "name_translations": {
+        "en": "Hirabayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1499749,
+      "longitude": 139.4590888
+    },
+    {
+      "id": "jp_niigata_station_4575781850",
+      "osm_id": 4575781850,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "妙高高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Myōkō-Kōgen"
+      },
+      "operator": "えちごトキめき鉄道;しなの鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8722009,
+      "longitude": 138.2121958
+    },
+    {
+      "id": "jp_niigata_station_4581723754",
+      "osm_id": 4581723754,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "二本木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nihongi"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.989713,
+      "longitude": 138.2326611
+    },
+    {
+      "id": "jp_niigata_bus_terminal_4585527256",
+      "osm_id": 4585527256,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "市役所前（BRT乗換拠点）",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiyakusyo-mae (BRT)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9154791,
+      "longitude": 139.0360897
+    },
+    {
+      "id": "jp_niigata_bus_terminal_4585527257",
+      "osm_id": 4585527257,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "青山（BRT乗換拠点）",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoyama (BRT)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8963413,
+      "longitude": 139.0059484
+    },
+    {
+      "id": "jp_niigata_bus_terminal_4595589961",
+      "osm_id": 4595589961,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "万代シテイ バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niigata Kotsu Bandai City Bus center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9163588,
+      "longitude": 139.0556451
+    },
+    {
+      "id": "jp_niigata_station_4621752486",
+      "osm_id": 4621752486,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊栄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyosaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9197443,
+      "longitude": 139.2156646
+    },
+    {
+      "id": "jp_niigata_bus_terminal_4625676193",
+      "osm_id": 4625676193,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松浜",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9511006,
+      "longitude": 139.1580686
+    },
+    {
+      "id": "jp_niigata_station_4660003130",
+      "osm_id": 4660003130,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "早通",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayadori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9210746,
+      "longitude": 139.1784476
+    },
+    {
+      "id": "jp_niigata_station_4660003135",
+      "osm_id": 4660003135,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9373837,
+      "longitude": 139.2415202
+    },
+    {
+      "id": "jp_niigata_station_4660003151",
+      "osm_id": 4660003151,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐々木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9500062,
+      "longitude": 139.2692896
+    },
+    {
+      "id": "jp_niigata_station_4660003178",
+      "osm_id": 4660003178,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "西新発田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Shibata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9414451,
+      "longitude": 139.3067996
+    },
+    {
+      "id": "jp_niigata_station_4660003217",
+      "osm_id": 4660003217,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "京ヶ瀬",
+      "name_kana": "きょうがせ",
+      "name_translations": {
+        "en": "Kyogase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8176353,
+      "longitude": 139.1783306
+    },
+    {
+      "id": "jp_niigata_station_4660003248",
+      "osm_id": 4660003248,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "水原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suibara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8365796,
+      "longitude": 139.2172379
+    },
+    {
+      "id": "jp_niigata_station_4660003250",
+      "osm_id": 4660003250,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "月岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8890407,
+      "longitude": 139.2719214
+    },
+    {
+      "id": "jp_niigata_bus_terminal_4664885830",
+      "osm_id": 4664885830,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新潟駅南口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9115987,
+      "longitude": 139.0624963
+    },
+    {
+      "id": "jp_niigata_station_5155605399",
+      "osm_id": 5155605399,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "燕",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsubame"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.667393,
+      "longitude": 138.9285442
+    },
+    {
+      "id": "jp_niigata_station_5574111714",
+      "osm_id": 5574111714,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "茨目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ibarame"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3570412,
+      "longitude": 138.5866512
+    },
+    {
+      "id": "jp_niigata_station_5574488950",
+      "osm_id": 5574488950,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyauchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4220724,
+      "longitude": 138.8400378
+    },
+    {
+      "id": "jp_niigata_station_5574679639",
+      "osm_id": 5574679639,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "長岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4478778,
+      "longitude": 138.8541667
+    },
+    {
+      "id": "jp_niigata_bus_terminal_5590245252",
+      "osm_id": 5590245252,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新潟交通観光バス 新発田営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9400093,
+      "longitude": 139.3344927
+    },
+    {
+      "id": "jp_niigata_bus_terminal_5590245253",
+      "osm_id": 5590245253,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "川東小学校",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9342204,
+      "longitude": 139.3851918
+    },
+    {
+      "id": "jp_niigata_station_5643028699",
+      "osm_id": 5643028699,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "加治",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9765659,
+      "longitude": 139.3585253
+    },
+    {
+      "id": "jp_niigata_station_5690634859",
+      "osm_id": 5690634859,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "金塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanazuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0198357,
+      "longitude": 139.3793526
+    },
+    {
+      "id": "jp_niigata_station_6125964344",
+      "osm_id": 6125964344,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後大島",
+      "name_kana": "えちごおおしま",
+      "name_translations": {
+        "en": "Echigo-Oshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0997358,
+      "longitude": 139.5181639
+    },
+    {
+      "id": "jp_niigata_station_6125964345",
+      "osm_id": 6125964345,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後下関",
+      "name_kana": "えちごしもせき",
+      "name_translations": {
+        "en": "Echigo-Shimoseki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0900996,
+      "longitude": 139.5600611
+    },
+    {
+      "id": "jp_niigata_station_6125964346",
+      "osm_id": 6125964346,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後片貝",
+      "name_kana": "えちごかたかい",
+      "name_translations": {
+        "en": "Echigo-Katakai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0706419,
+      "longitude": 139.6223903
+    },
+    {
+      "id": "jp_niigata_station_6125964347",
+      "osm_id": 6125964347,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後金丸",
+      "name_kana": "えちごかなまる",
+      "name_translations": {
+        "en": "Echigo-Kanamaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0664144,
+      "longitude": 139.6635246
+    },
+    {
+      "id": "jp_niigata_station_6138421923",
+      "osm_id": 6138421923,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "神山",
+      "name_kana": "かみやま",
+      "name_translations": {
+        "en": "Kamiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8626975,
+      "longitude": 139.2447352
+    },
+    {
+      "id": "jp_niigata_station_6138441705",
+      "osm_id": 6138441705,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "新発田",
+      "name_kana": "しばた",
+      "name_translations": {
+        "en": "Shibata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9439691,
+      "longitude": 139.3349158
+    },
+    {
+      "id": "jp_niigata_station_6138441734",
+      "osm_id": 6138441734,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "中浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakaura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.912254,
+      "longitude": 139.3026294
+    },
+    {
+      "id": "jp_niigata_station_6138457049",
+      "osm_id": 6138457049,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "村上",
+      "name_kana": "むらかみ",
+      "name_translations": {
+        "en": "Murakami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2202897,
+      "longitude": 139.4632776
+    },
+    {
+      "id": "jp_niigata_station_6141631489",
+      "osm_id": 6141631489,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "中条",
+      "name_kana": "なかじょう",
+      "name_translations": {
+        "en": "Nakajo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0500723,
+      "longitude": 139.3980637
+    },
+    {
+      "id": "jp_niigata_station_6141678713",
+      "osm_id": 6141678713,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "平木田",
+      "name_kana": "ひらきだ",
+      "name_translations": {
+        "en": "Hirakida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0947687,
+      "longitude": 139.4283681
+    },
+    {
+      "id": "jp_niigata_station_6141702702",
+      "osm_id": 6141702702,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩船町",
+      "name_kana": "いわふねまち",
+      "name_translations": {
+        "en": "Iwafunemachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1834183,
+      "longitude": 139.4593871
+    },
+    {
+      "id": "jp_niigata_station_6172475914",
+      "osm_id": 6172475914,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "土市",
+      "name_kana": "どいち",
+      "name_translations": {
+        "en": "Doichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0972316,
+      "longitude": 138.7293515
+    },
+    {
+      "id": "jp_niigata_station_6172475936",
+      "osm_id": 6172475936,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後水沢",
+      "name_kana": "えちごみずさわ",
+      "name_translations": {
+        "en": "Echigo-Mizusawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0742449,
+      "longitude": 138.7181338
+    },
+    {
+      "id": "jp_niigata_station_6172475945",
+      "osm_id": 6172475945,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後田沢",
+      "name_kana": "えちごたざわ",
+      "name_translations": {
+        "en": "Echigo-Tazawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0552681,
+      "longitude": 138.6947201
+    },
+    {
+      "id": "jp_niigata_station_6172644829",
+      "osm_id": 6172644829,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "津南",
+      "name_kana": "つなん",
+      "name_translations": {
+        "en": "Tsunan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0236841,
+      "longitude": 138.6394009
+    },
+    {
+      "id": "jp_niigata_station_6172644841",
+      "osm_id": 6172644841,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後鹿渡",
+      "name_kana": "えちごしかわたり",
+      "name_translations": {
+        "en": "Echigo-Shikawatari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0480723,
+      "longitude": 138.6714037
+    },
+    {
+      "id": "jp_niigata_station_6172661602",
+      "osm_id": 6172661602,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "越後田中",
+      "name_kana": "えちごたなか",
+      "name_translations": {
+        "en": "Echigo-Tanaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0050899,
+      "longitude": 138.6267275
+    },
+    {
+      "id": "jp_niigata_station_6176114783",
+      "osm_id": 6176114783,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "足滝",
+      "name_kana": "あしだき",
+      "name_translations": {
+        "en": "Ashidaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9990198,
+      "longitude": 138.603582
+    },
+    {
+      "id": "jp_niigata_station_6374726435",
+      "osm_id": 6374726435,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.68706,
+      "longitude": 138.8786948
+    },
+    {
+      "id": "jp_niigata_bus_terminal_6830929283",
+      "osm_id": 6830929283,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "村松駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.697625,
+      "longitude": 139.1777766
+    },
+    {
+      "id": "jp_niigata_bus_terminal_6833674446",
+      "osm_id": 6833674446,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新潟交通観光バス 五泉営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7342266,
+      "longitude": 139.1947067
+    },
+    {
+      "id": "jp_niigata_bus_terminal_6899544618",
+      "osm_id": 6899544618,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新潟交通観光バス 津川営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6702105,
+      "longitude": 139.4675705
+    },
+    {
+      "id": "jp_niigata_bus_terminal_6935084661",
+      "osm_id": 6935084661,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新潟交通 南部営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8713938,
+      "longitude": 139.0807235
+    },
+    {
+      "id": "jp_niigata_bus_terminal_6935179408",
+      "osm_id": 6935179408,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新潟交通 西部営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8741399,
+      "longitude": 139.0031889
+    },
+    {
+      "id": "jp_niigata_bus_terminal_6967077778",
+      "osm_id": 6967077778,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新潟交通観光バス 京ヶ瀬営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8194929,
+      "longitude": 139.1669512
+    },
+    {
+      "id": "jp_niigata_bus_terminal_7221084198",
+      "osm_id": 7221084198,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "栃尾車庫前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "越後交通",
+      "network": null,
+      "ref": "3",
+      "latitude": 37.4833367,
+      "longitude": 138.992672
+    },
+    {
+      "id": "jp_niigata_station_7255080073",
+      "osm_id": 7255080073,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "上下浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jogehama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2522757,
+      "longitude": 138.3615978
+    },
+    {
+      "id": "jp_niigata_bus_terminal_7968279639",
+      "osm_id": 7968279639,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "越後交通 寺泊車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6383278,
+      "longitude": 138.7631768
+    },
+    {
+      "id": "jp_niigata_station_8153724311",
+      "osm_id": 8153724311,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "市振",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichiburi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9804094,
+      "longitude": 137.6502143
+    },
+    {
+      "id": "jp_niigata_station_8186997799",
+      "osm_id": 8186997799,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiozawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.041563,
+      "longitude": 138.8484348
+    },
+    {
+      "id": "jp_niigata_station_9013930719",
+      "osm_id": 9013930719,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "ガーラ湯沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gala-Yuzawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9502508,
+      "longitude": 138.7995543
+    },
+    {
+      "id": "jp_niigata_station_9013930777",
+      "osm_id": 9013930777,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "石打",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishiuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9893095,
+      "longitude": 138.8040912
+    },
+    {
+      "id": "jp_niigata_station_9013930783",
+      "osm_id": 9013930783,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩原スキー場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwappara-Ski-jo-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9242628,
+      "longitude": 138.8397525
+    },
+    {
+      "id": "jp_niigata_station_9015341705",
+      "osm_id": 9015341705,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "燕三条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsubame-Sanjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6483698,
+      "longitude": 138.9390886
+    },
+    {
+      "id": "jp_niigata_bus_terminal_9591306665",
+      "osm_id": 9591306665,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高龍神社",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "越後交通",
+      "network": "43",
+      "ref": null,
+      "latitude": 37.3697576,
+      "longitude": 138.8967794
+    },
+    {
+      "id": "jp_niigata_bus_terminal_9633241693",
+      "osm_id": 9633241693,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "村松回転所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "クローバーバス",
+      "network": "村松線",
+      "ref": null,
+      "latitude": 37.3821812,
+      "longitude": 138.8601471
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_9719722500",
+      "osm_id": 9719722500,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "フェリーターミナル（粟島汽船株式会社）",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ferry Terminal (Awashima Kisen Co., Ltd.)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.467492,
+      "longitude": 139.2547406
+    },
+    {
+      "id": "jp_niigata_station_11730984988",
+      "osm_id": 11730984988,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanihama"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1623707,
+      "longitude": 138.1740417
+    },
+    {
+      "id": "jp_niigata_station_11733499095",
+      "osm_id": 11733499095,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "名立",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nadachi"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1556869,
+      "longitude": 138.0922685
+    },
+    {
+      "id": "jp_niigata_station_11733499096",
+      "osm_id": 11733499096,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "筒石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsutsuishi"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1274745,
+      "longitude": 138.0607076
+    },
+    {
+      "id": "jp_niigata_station_11733499097",
+      "osm_id": 11733499097,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "能生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nou"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0961041,
+      "longitude": 137.9885381
+    },
+    {
+      "id": "jp_niigata_station_11733499122",
+      "osm_id": 11733499122,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uramoto"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0737447,
+      "longitude": 137.9394013
+    },
+    {
+      "id": "jp_niigata_station_11733499158",
+      "osm_id": 11733499158,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "梶屋敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kajiyashiki"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0565799,
+      "longitude": 137.9063023
+    },
+    {
+      "id": "jp_niigata_station_11733603191",
+      "osm_id": 11733603191,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "えちご押上ひすい海岸",
+      "name_kana": "えちごおしあげひすいかいがん",
+      "name_translations": {
+        "en": "Echigo-Oshiage-Hisuikaigan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0481012,
+      "longitude": 137.8780505
+    },
+    {
+      "id": "jp_niigata_station_11733603194",
+      "osm_id": 11733603194,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "青海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmi"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0226177,
+      "longitude": 137.7949966
+    },
+    {
+      "id": "jp_niigata_station_11733603219",
+      "osm_id": 11733603219,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "親不知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oyashirazu"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0068013,
+      "longitude": 137.7382109
+    },
+    {
+      "id": "jp_niigata_station_11733607101",
+      "osm_id": 11733607101,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "有間川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arimagawa"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1635683,
+      "longitude": 138.1378788
+    },
+    {
+      "id": "jp_niigata_station_11769751445",
+      "osm_id": 11769751445,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "関山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekiyama"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.9330097,
+      "longitude": 138.2264339
+    },
+    {
+      "id": "jp_niigata_station_11769751456",
+      "osm_id": 11769751456,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "春日山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasugayama"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1480592,
+      "longitude": 138.2349318
+    },
+    {
+      "id": "jp_niigata_station_11769751464",
+      "osm_id": 11769751464,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Takada"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0969192,
+      "longitude": 138.2429704
+    },
+    {
+      "id": "jp_niigata_station_11769751465",
+      "osm_id": 11769751465,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北新井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Arai"
+      },
+      "operator": "えちごトキめき鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0531136,
+      "longitude": 138.2576562
+    },
+    {
+      "id": "jp_niigata_station_12528951672",
+      "osm_id": 12528951672,
+      "osm_type": "node",
+      "prefecture_id": "jp_niigata",
+      "type": "station",
+      "subtype": "private",
+      "name": "上所",
+      "name_kana": "かみところ",
+      "name_translations": {
+        "en": "Kamitokoro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9069596,
+      "longitude": 139.0452418
+    },
+    {
+      "id": "jp_niigata_airport_57007660",
+      "osm_id": 57007660,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "新潟空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niigata Airport"
+      },
+      "operator": "http://www.pa.kkr.mlit.go.jp/osakaport/index-2.html",
+      "network": null,
+      "ref": "KIJ",
+      "latitude": 37.9545153,
+      "longitude": 139.1093234
+    },
+    {
+      "id": "jp_niigata_airport_75860961",
+      "osm_id": 75860961,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "佐渡空港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "新潟県",
+      "network": null,
+      "ref": "SDS",
+      "latitude": 38.0610852,
+      "longitude": 138.4140765
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_378894326",
+      "osm_id": 378894326,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "直江津港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "佐渡汽船",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1825254,
+      "longitude": 138.2508387
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_381543591",
+      "osm_id": 381543591,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "佐渡汽船フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9297765,
+      "longitude": 139.0621893
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_525626795",
+      "osm_id": 525626795,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "新日本海フェリー 新潟フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9381477,
+      "longitude": 139.0687126
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_682931403",
+      "osm_id": 682931403,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小木港佐渡汽船ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8162628,
+      "longitude": 138.2822319
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_854449281",
+      "osm_id": 854449281,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "佐渡汽船ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6415207,
+      "longitude": 138.7644022
+    },
+    {
+      "id": "jp_niigata_bus_terminal_1062032139",
+      "osm_id": 1062032139,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "佐和田バスステーション",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0039948,
+      "longitude": 138.3137205
+    },
+    {
+      "id": "jp_niigata_bus_terminal_1062036567",
+      "osm_id": 1062036567,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "両津港佐渡汽船",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ryotsu Port Bus Station"
+      },
+      "operator": "新潟交通佐渡株式会社",
+      "network": "新潟交通佐渡バス",
+      "ref": null,
+      "latitude": 38.0810769,
+      "longitude": 138.437698
+    },
+    {
+      "id": "jp_niigata_bus_terminal_1275625941",
+      "osm_id": 1275625941,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "米坂線代行バス乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1204194,
+      "longitude": 139.447455
+    },
+    {
+      "id": "jp_niigata_ferry_terminal_1367993983",
+      "osm_id": 1367993983,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "粟島汽船フェリー",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awashima Kisen Ferry"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1881551,
+      "longitude": 139.4321863
+    },
+    {
+      "id": "jp_niigata_bus_terminal_1389677572",
+      "osm_id": 1389677572,
+      "osm_type": "way",
+      "prefecture_id": "jp_niigata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "見附バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "越後交通",
+      "network": null,
+      "ref": null,
+      "latitude": 37.5232482,
+      "longitude": 138.92168
+    }
+  ]
+}

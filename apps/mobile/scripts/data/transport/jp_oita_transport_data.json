@@ -1,0 +1,2148 @@
+{
+  "fetchedAt": "2025-12-24T05:58:18.318Z",
+  "prefecture_id": "jp_oita",
+  "prefecture_name": "大分県",
+  "stats": {
+    "station": 86,
+    "airport": 4,
+    "ferry_terminal": 17,
+    "bus_terminal": 14,
+    "total": 121
+  },
+  "data": [
+    {
+      "id": "jp_oita_station_265839008",
+      "osm_id": 265839008,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "幸崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōzaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.2333543,
+      "longitude": 131.7954093
+    },
+    {
+      "id": "jp_oita_station_265839360",
+      "osm_id": 265839360,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "暘谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokoku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.3701775,
+      "longitude": 131.5304211
+    },
+    {
+      "id": "jp_oita_station_265839380",
+      "osm_id": 265839380,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "別府大学",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beppu Daigaku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.3129131,
+      "longitude": 131.4993918
+    },
+    {
+      "id": "jp_oita_station_265839401",
+      "osm_id": 265839401,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東別府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Beppu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.2677425,
+      "longitude": 131.5105748
+    },
+    {
+      "id": "jp_oita_station_265839409",
+      "osm_id": 265839409,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東中津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Nakatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5874449,
+      "longitude": 131.2392548
+    },
+    {
+      "id": "jp_oita_station_265839663",
+      "osm_id": 265839663,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西屋敷",
+      "name_kana": "にしやしき",
+      "name_translations": {
+        "en": "Nishiyashiki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5041614,
+      "longitude": 131.4296929
+    },
+    {
+      "id": "jp_oita_station_265839665",
+      "osm_id": 265839665,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōga"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.3835617,
+      "longitude": 131.5752631
+    },
+    {
+      "id": "jp_oita_station_265839715",
+      "osm_id": 265839715,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5991951,
+      "longitude": 131.1908891
+    },
+    {
+      "id": "jp_oita_station_265839812",
+      "osm_id": 265839812,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後豊岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Toyooka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.3619628,
+      "longitude": 131.5015479
+    },
+    {
+      "id": "jp_oita_station_265839893",
+      "osm_id": 265839893,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "天津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5646153,
+      "longitude": 131.2924084
+    },
+    {
+      "id": "jp_oita_station_265840113",
+      "osm_id": 265840113,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊前善光寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Buzen-Zenkōji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5664233,
+      "longitude": 131.3231626
+    },
+    {
+      "id": "jp_oita_station_265840117",
+      "osm_id": 265840117,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中山香",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka-Yamaga"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.4486757,
+      "longitude": 131.5057609
+    },
+    {
+      "id": "jp_oita_station_265840383",
+      "osm_id": 265840383,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "杵築",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitsuki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.4111118,
+      "longitude": 131.5755063
+    },
+    {
+      "id": "jp_oita_station_265840415",
+      "osm_id": 265840415,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.3691967,
+      "longitude": 131.5424626
+    },
+    {
+      "id": "jp_oita_station_265840673",
+      "osm_id": 265840673,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊前長洲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Buzen-Nagasu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5647911,
+      "longitude": 131.3831447
+    },
+    {
+      "id": "jp_oita_station_265841186",
+      "osm_id": 265841186,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "今津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imazu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5719398,
+      "longitude": 131.2671258
+    },
+    {
+      "id": "jp_oita_station_265841260",
+      "osm_id": 265841260,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "柳ヶ浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanagigaura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5650359,
+      "longitude": 131.3625999
+    },
+    {
+      "id": "jp_oita_station_265841523",
+      "osm_id": 265841523,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Usa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.5321878,
+      "longitude": 131.4120019
+    },
+    {
+      "id": "jp_oita_station_265844784",
+      "osm_id": 265844784,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浅海井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Azamui"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.0434766,
+      "longitude": 131.9192001
+    },
+    {
+      "id": "jp_oita_station_265844824",
+      "osm_id": 265844824,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "直見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naomi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.9277635,
+      "longitude": 131.8074068
+    },
+    {
+      "id": "jp_oita_station_265845245",
+      "osm_id": 265845245,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "狩生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kariu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.0149632,
+      "longitude": 131.9043458
+    },
+    {
+      "id": "jp_oita_station_265845566",
+      "osm_id": 265845566,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "直川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naokawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.8985989,
+      "longitude": 131.7794331
+    },
+    {
+      "id": "jp_oita_station_265846787",
+      "osm_id": 265846787,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hishiro"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.0660414,
+      "longitude": 131.9183656
+    },
+    {
+      "id": "jp_oita_station_265847097",
+      "osm_id": 265847097,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "重岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shigeoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.8404292,
+      "longitude": 131.7156632
+    },
+    {
+      "id": "jp_oita_station_265854747",
+      "osm_id": 265854747,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "敷戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikido"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.187831,
+      "longitude": 131.615276
+    },
+    {
+      "id": "jp_oita_station_265855237",
+      "osm_id": 265855237,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大分大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōita-Daigaku-mae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.1769154,
+      "longitude": 131.6191141
+    },
+    {
+      "id": "jp_oita_station_265855482",
+      "osm_id": 265855482,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後清川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Kiyokawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9728125,
+      "longitude": 131.5233734
+    },
+    {
+      "id": "jp_oita_station_265855619",
+      "osm_id": 265855619,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "緒方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9710592,
+      "longitude": 131.4767689
+    },
+    {
+      "id": "jp_oita_station_265855627",
+      "osm_id": 265855627,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "朝地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asaji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.0042533,
+      "longitude": 131.4323065
+    },
+    {
+      "id": "jp_oita_station_265857590",
+      "osm_id": 265857590,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "玉来",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamarai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9479505,
+      "longitude": 131.3764367
+    },
+    {
+      "id": "jp_oita_station_265861911",
+      "osm_id": 265861911,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後竹田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Taketa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9710455,
+      "longitude": 131.3900138
+    },
+    {
+      "id": "jp_oita_station_265861917",
+      "osm_id": 265861917,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後荻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Ogi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9267761,
+      "longitude": 131.2978915
+    },
+    {
+      "id": "jp_oita_station_265879549",
+      "osm_id": 265879549,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後中村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Nakamura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2259082,
+      "longitude": 131.2076595
+    },
+    {
+      "id": "jp_oita_station_265879882",
+      "osm_id": 265879882,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南由布",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Yufu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2422195,
+      "longitude": 131.3334572
+    },
+    {
+      "id": "jp_oita_station_265879937",
+      "osm_id": 265879937,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "引治",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hijiki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2292736,
+      "longitude": 131.1837895
+    },
+    {
+      "id": "jp_oita_station_265880006",
+      "osm_id": 265880006,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "天神山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenjinyama"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.1872851,
+      "longitude": 131.438453
+    },
+    {
+      "id": "jp_oita_station_265880142",
+      "osm_id": 265880142,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "野矢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Noya"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2404842,
+      "longitude": 131.2518509
+    },
+    {
+      "id": "jp_oita_station_265880224",
+      "osm_id": 265880224,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "恵良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Era"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2550479,
+      "longitude": 131.1743422
+    },
+    {
+      "id": "jp_oita_station_265880299",
+      "osm_id": 265880299,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Mori"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2828411,
+      "longitude": 131.1551397
+    },
+    {
+      "id": "jp_oita_station_265882060",
+      "osm_id": 265882060,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "湯平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunohira"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.1974758,
+      "longitude": 131.3539481
+    },
+    {
+      "id": "jp_oita_station_265882492",
+      "osm_id": 265882492,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "庄内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shōnai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.1850947,
+      "longitude": 131.4018344
+    },
+    {
+      "id": "jp_oita_station_265883552",
+      "osm_id": 265883552,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3172406,
+      "longitude": 130.9386819
+    },
+    {
+      "id": "jp_oita_station_265884025",
+      "osm_id": 265884025,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "夜明",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoake"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3199378,
+      "longitude": 130.866061
+    },
+    {
+      "id": "jp_oita_station_265884550",
+      "osm_id": 265884550,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北山田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Yamada"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.282078,
+      "longitude": 131.101329
+    },
+    {
+      "id": "jp_oita_station_265884552",
+      "osm_id": 265884552,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "光岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Teruoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.3276225,
+      "longitude": 130.9194994
+    },
+    {
+      "id": "jp_oita_station_265884579",
+      "osm_id": 265884579,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後三芳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Miyoshi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.305623,
+      "longitude": 130.951884
+    },
+    {
+      "id": "jp_oita_station_265884782",
+      "osm_id": 265884782,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "杉河内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sugikawachi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2644093,
+      "longitude": 131.0657798
+    },
+    {
+      "id": "jp_oita_station_265887997",
+      "osm_id": 265887997,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "天ヶ瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amagase"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2549423,
+      "longitude": 131.0238456
+    },
+    {
+      "id": "jp_oita_station_265887999",
+      "osm_id": 265887999,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後中川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Nakagawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.284763,
+      "longitude": 131.005677
+    },
+    {
+      "id": "jp_oita_ferry_terminal_622781498",
+      "osm_id": 622781498,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大分ホーバーターミナル 跡",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.254874,
+      "longitude": 131.6204121
+    },
+    {
+      "id": "jp_oita_airport_711608508",
+      "osm_id": 711608508,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "大分県央空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oita-Kenou Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.0265695,
+      "longitude": 131.5054495
+    },
+    {
+      "id": "jp_oita_ferry_terminal_929957135",
+      "osm_id": 929957135,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "国道九四フェリー",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2499489,
+      "longitude": 131.8652583
+    },
+    {
+      "id": "jp_oita_station_1058466623",
+      "osm_id": 1058466623,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "private",
+      "name": "乙原",
+      "name_kana": "おとばる",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2746865,
+      "longitude": 131.4830977
+    },
+    {
+      "id": "jp_oita_station_1058466677",
+      "osm_id": 1058466677,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "private",
+      "name": "雲泉寺",
+      "name_kana": "うんせんじ",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2748884,
+      "longitude": 131.4856133
+    },
+    {
+      "id": "jp_oita_ferry_terminal_1441444630",
+      "osm_id": 1441444630,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "別府港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beppu Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.30014,
+      "longitude": 131.5035995
+    },
+    {
+      "id": "jp_oita_ferry_terminal_1891313095",
+      "osm_id": 1891313095,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "臼杵港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Usuki Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.1264865,
+      "longitude": 131.8105296
+    },
+    {
+      "id": "jp_oita_bus_terminal_2518355698",
+      "osm_id": 2518355698,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "別府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beppu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2797476,
+      "longitude": 131.4999612
+    },
+    {
+      "id": "jp_oita_ferry_terminal_3804552957",
+      "osm_id": 3804552957,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "竹田津港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6787434,
+      "longitude": 131.5654431
+    },
+    {
+      "id": "jp_oita_ferry_terminal_4148611529",
+      "osm_id": 4148611529,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "西大分港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oita Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2461578,
+      "longitude": 131.5885865
+    },
+    {
+      "id": "jp_oita_bus_terminal_4370542889",
+      "osm_id": 4370542889,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Bugotakada Bus Station",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5565395,
+      "longitude": 131.4376412
+    },
+    {
+      "id": "jp_oita_bus_terminal_4646487189",
+      "osm_id": 4646487189,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "由布院駅前バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yufuin Bus Center"
+      },
+      "operator": "亀の井バス",
+      "network": null,
+      "ref": null,
+      "latitude": 33.262957,
+      "longitude": 131.3555458
+    },
+    {
+      "id": "jp_oita_ferry_terminal_5704353121",
+      "osm_id": 5704353121,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "姫島港フェリー乗り場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Himeshima Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7217697,
+      "longitude": 131.6489599
+    },
+    {
+      "id": "jp_oita_bus_terminal_5720891321",
+      "osm_id": 5720891321,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "日田バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hita Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3163097,
+      "longitude": 130.9380027
+    },
+    {
+      "id": "jp_oita_station_6063546666",
+      "osm_id": 6063546666,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2326262,
+      "longitude": 131.6060258
+    },
+    {
+      "id": "jp_oita_station_6374733138",
+      "osm_id": 6374733138,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "立石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tateishi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.4817913,
+      "longitude": 131.4781536
+    },
+    {
+      "id": "jp_oita_ferry_terminal_6616474269",
+      "osm_id": 6616474269,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "姫島港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.722032,
+      "longitude": 131.6485945
+    },
+    {
+      "id": "jp_oita_ferry_terminal_6616474271",
+      "osm_id": 6616474271,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "伊美港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6871865,
+      "longitude": 131.6001413
+    },
+    {
+      "id": "jp_oita_station_6844928678",
+      "osm_id": 6844928678,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西大分",
+      "name_kana": "にしおおいた",
+      "name_translations": {
+        "en": "Nishi-Ōita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.2448196,
+      "longitude": 131.5830897
+    },
+    {
+      "id": "jp_oita_station_6848959287",
+      "osm_id": 6848959287,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takajō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.2428669,
+      "longitude": 131.6558164
+    },
+    {
+      "id": "jp_oita_station_6851303346",
+      "osm_id": 6851303346,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "津久見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukumi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.0728567,
+      "longitude": 131.8634127
+    },
+    {
+      "id": "jp_oita_station_6868349274",
+      "osm_id": 6868349274,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "亀川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamegawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.3314568,
+      "longitude": 131.4929667
+    },
+    {
+      "id": "jp_oita_station_7005135171",
+      "osm_id": 7005135171,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "臼杵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Usuki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.1186021,
+      "longitude": 131.807899
+    },
+    {
+      "id": "jp_oita_station_7005170517",
+      "osm_id": 7005170517,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "熊崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumasaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.1360879,
+      "longitude": 131.7875907
+    },
+    {
+      "id": "jp_oita_station_7005172286",
+      "osm_id": 7005172286,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "坂ノ市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakanoichi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2367537,
+      "longitude": 131.7519522
+    },
+    {
+      "id": "jp_oita_bus_terminal_7076591294",
+      "osm_id": 7076591294,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "亀の井 北浜バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamenoi Kitahama Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2803089,
+      "longitude": 131.5063187
+    },
+    {
+      "id": "jp_oita_station_7089994866",
+      "osm_id": 7089994866,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上臼杵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Usuki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1125465,
+      "longitude": 131.7929256
+    },
+    {
+      "id": "jp_oita_station_7094116654",
+      "osm_id": 7094116654,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "牧",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.2370756,
+      "longitude": 131.6377169
+    },
+    {
+      "id": "jp_oita_station_7096755047",
+      "osm_id": 7096755047,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鶴崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsurusaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.2427592,
+      "longitude": 131.6869622
+    },
+    {
+      "id": "jp_oita_station_7678419561",
+      "osm_id": 7678419561,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大在",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōzai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.2439896,
+      "longitude": 131.7203075
+    },
+    {
+      "id": "jp_oita_airport_7875569714",
+      "osm_id": 7875569714,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "久住滑空場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "特定非営利活動法人九州グライダースポーツ連盟",
+      "network": null,
+      "ref": null,
+      "latitude": 33.0345084,
+      "longitude": 131.2336315
+    },
+    {
+      "id": "jp_oita_station_8079817410",
+      "osm_id": 8079817410,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小野屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onoya"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.1852181,
+      "longitude": 131.4524125
+    },
+    {
+      "id": "jp_oita_station_8079939850",
+      "osm_id": 8079939850,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊後国分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bungo-Kobuku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.1947847,
+      "longitude": 131.5509582
+    },
+    {
+      "id": "jp_oita_station_8079939858",
+      "osm_id": 8079939858,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "向之原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukainoharu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.1966802,
+      "longitude": 131.5140831
+    },
+    {
+      "id": "jp_oita_station_8079939863",
+      "osm_id": 8079939863,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鬼瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onigase"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.1953862,
+      "longitude": 131.4858824
+    },
+    {
+      "id": "jp_oita_station_8079987242",
+      "osm_id": 8079987242,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "賀来",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.212969,
+      "longitude": 131.5622885
+    },
+    {
+      "id": "jp_oita_station_8079987243",
+      "osm_id": 8079987243,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "古国府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furugō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2207414,
+      "longitude": 131.6079048
+    },
+    {
+      "id": "jp_oita_station_8079991983",
+      "osm_id": 8079991983,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南大分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Ōita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR久大線",
+      "ref": null,
+      "latitude": 33.2141572,
+      "longitude": 131.5858537
+    },
+    {
+      "id": "jp_oita_station_8140164730",
+      "osm_id": 8140164730,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "犬飼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inukai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.0781457,
+      "longitude": 131.636591
+    },
+    {
+      "id": "jp_oita_station_8140164735",
+      "osm_id": 8140164735,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "竹中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takenaka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.1213023,
+      "longitude": 131.6494676
+    },
+    {
+      "id": "jp_oita_station_8140164740",
+      "osm_id": 8140164740,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中判田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakahanda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.1641047,
+      "longitude": 131.6388139
+    },
+    {
+      "id": "jp_oita_station_8140164747",
+      "osm_id": 8140164747,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "滝尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takio"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.209292,
+      "longitude": 131.6231605
+    },
+    {
+      "id": "jp_oita_station_8141291222",
+      "osm_id": 8141291222,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三重町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miemachi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9837808,
+      "longitude": 131.5842766
+    },
+    {
+      "id": "jp_oita_station_8141291225",
+      "osm_id": 8141291225,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "菅尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sugao"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 33.0148465,
+      "longitude": 131.6167688
+    },
+    {
+      "id": "jp_oita_station_8269550065",
+      "osm_id": 8269550065,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宗太郎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sotaro"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.7860056,
+      "longitude": 131.7068807
+    },
+    {
+      "id": "jp_oita_station_8269550070",
+      "osm_id": 8269550070,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "別府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beppu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2796163,
+      "longitude": 131.5003073
+    },
+    {
+      "id": "jp_oita_station_8840387819",
+      "osm_id": 8840387819,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐志生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sashiu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 33.1747647,
+      "longitude": 131.817677
+    },
+    {
+      "id": "jp_oita_station_9342179151",
+      "osm_id": 9342179151,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐伯",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saiki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.9724755,
+      "longitude": 131.9018836
+    },
+    {
+      "id": "jp_oita_station_9364617572",
+      "osm_id": 9364617572,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamioka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.95646,
+      "longitude": 131.8621769
+    },
+    {
+      "id": "jp_oita_station_9382924618",
+      "osm_id": 9382924618,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "海崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaizaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.995921,
+      "longitude": 131.8879938
+    },
+    {
+      "id": "jp_oita_bus_terminal_9712922217",
+      "osm_id": 9712922217,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "鉄輪",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3157316,
+      "longitude": 131.4757741
+    },
+    {
+      "id": "jp_oita_airport_10295240024",
+      "osm_id": 10295240024,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "日出生台飛行場跡地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hijudai Airfield (historical)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2913905,
+      "longitude": 131.3364325
+    },
+    {
+      "id": "jp_oita_station_11889150036",
+      "osm_id": 11889150036,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "由布院",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yufuin"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2624524,
+      "longitude": 131.3550013
+    },
+    {
+      "id": "jp_oita_ferry_terminal_12593107855",
+      "osm_id": 12593107855,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "さんふらわあターミナル（別府）",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beppu Port Sunflower Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3053086,
+      "longitude": 131.5039498
+    },
+    {
+      "id": "jp_oita_ferry_terminal_12593107879",
+      "osm_id": 12593107879,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "別府国際観光港第4埠頭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beppu Port Pier4"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3086335,
+      "longitude": 131.5038505
+    },
+    {
+      "id": "jp_oita_bus_terminal_12607091711",
+      "osm_id": 12607091711,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "佐賀関",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saganoseki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2490289,
+      "longitude": 131.8736929
+    },
+    {
+      "id": "jp_oita_ferry_terminal_13047569761",
+      "osm_id": 13047569761,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ホーバーターミナルおおいた（大分空港）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4706337,
+      "longitude": 131.7341587
+    },
+    {
+      "id": "jp_oita_station_13196884407",
+      "osm_id": 13196884407,
+      "osm_type": "node",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下ノ江",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊本線",
+      "ref": null,
+      "latitude": 33.1584879,
+      "longitude": 131.8111324
+    },
+    {
+      "id": "jp_oita_bus_terminal_92569815",
+      "osm_id": 92569815,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "杵築バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4187109,
+      "longitude": 131.622739
+    },
+    {
+      "id": "jp_oita_ferry_terminal_156276742",
+      "osm_id": 156276742,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "別府港 第2フェリーターミナル (Beppu Port Ferry Terminal 2)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Beppu Port Ferry Terminal 2"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2996327,
+      "longitude": 131.5037911
+    },
+    {
+      "id": "jp_oita_bus_terminal_364659166",
+      "osm_id": 364659166,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "亀の井バス待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3157864,
+      "longitude": 131.4758255
+    },
+    {
+      "id": "jp_oita_ferry_terminal_566375496",
+      "osm_id": 566375496,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "国道九四フェリー 佐賀関港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.249969,
+      "longitude": 131.864958
+    },
+    {
+      "id": "jp_oita_ferry_terminal_744390540",
+      "osm_id": 744390540,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "臼杵港フェリーセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Usuki Port Ferry Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.1261447,
+      "longitude": 131.8104424
+    },
+    {
+      "id": "jp_oita_bus_terminal_753525971",
+      "osm_id": 753525971,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宇佐駅前バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5318172,
+      "longitude": 131.4114994
+    },
+    {
+      "id": "jp_oita_airport_866690235",
+      "osm_id": 866690235,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "大分空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oita Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "OIT",
+      "latitude": 33.4801199,
+      "longitude": 131.7352182
+    },
+    {
+      "id": "jp_oita_bus_terminal_914939814",
+      "osm_id": 914939814,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大手前",
+      "name_kana": "おおてまえ",
+      "name_translations": {
+        "en": "Ôtemae Bus Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.9559122,
+      "longitude": 131.8933473
+    },
+    {
+      "id": "jp_oita_bus_terminal_920638594",
+      "osm_id": 920638594,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "梶寄",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "佐伯市",
+      "network": "佐伯市コミュニティバス",
+      "ref": null,
+      "latitude": 32.9448,
+      "longitude": 132.0673074
+    },
+    {
+      "id": "jp_oita_bus_terminal_932432923",
+      "osm_id": 932432923,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "佐伯駅前停留所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "大分バス",
+      "network": "大分バス;佐伯市コミュニティバス",
+      "ref": null,
+      "latitude": 32.9727356,
+      "longitude": 131.9025469
+    },
+    {
+      "id": "jp_oita_bus_terminal_958575702",
+      "osm_id": 958575702,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大分交通新川バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "大分交通株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2458849,
+      "longitude": 131.6056205
+    },
+    {
+      "id": "jp_oita_station_1112169627",
+      "osm_id": 1112169627,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大分大学前駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "JR",
+      "network": null,
+      "ref": null,
+      "latitude": 33.177217,
+      "longitude": 131.6185558
+    },
+    {
+      "id": "jp_oita_ferry_terminal_1247957877",
+      "osm_id": 1247957877,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ホーバーターミナルおおいた（西大分）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.248675,
+      "longitude": 131.593593
+    },
+    {
+      "id": "jp_oita_ferry_terminal_1456412626",
+      "osm_id": 1456412626,
+      "osm_type": "way",
+      "prefecture_id": "jp_oita",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "竹田津港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6790785,
+      "longitude": 131.56522
+    }
+  ]
+}

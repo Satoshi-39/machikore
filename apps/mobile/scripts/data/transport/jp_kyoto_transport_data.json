@@ -1,0 +1,4670 @@
+{
+  "fetchedAt": "2025-12-24T05:54:14.542Z",
+  "prefecture_id": "jp_kyoto",
+  "prefecture_name": "京都府",
+  "stats": {
+    "station": 224,
+    "airport": 0,
+    "ferry_terminal": 12,
+    "bus_terminal": 26,
+    "total": 262
+  },
+  "data": [
+    {
+      "id": "jp_kyoto_station_265959999",
+      "osm_id": 265959999,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "上川口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamikawaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3295008,
+      "longitude": 135.0730967
+    },
+    {
+      "id": "jp_kyoto_station_265960103",
+      "osm_id": 265960103,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "立木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tachiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2742299,
+      "longitude": 135.337472
+    },
+    {
+      "id": "jp_kyoto_station_265961022",
+      "osm_id": 265961022,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "船岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Funaoka"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1336917,
+      "longitude": 135.4920117
+    },
+    {
+      "id": "jp_kyoto_station_265961188",
+      "osm_id": 265961188,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "胡麻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Goma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1953739,
+      "longitude": 135.4682631
+    },
+    {
+      "id": "jp_kyoto_station_265961219",
+      "osm_id": 265961219,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "鍼灸大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinkyū-Daigaku-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1793964,
+      "longitude": 135.4895458
+    },
+    {
+      "id": "jp_kyoto_station_265961252",
+      "osm_id": 265961252,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "安栖里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aseri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2661033,
+      "longitude": 135.3849568
+    },
+    {
+      "id": "jp_kyoto_station_265961544",
+      "osm_id": 265961544,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "高津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3050925,
+      "longitude": 135.207701
+    },
+    {
+      "id": "jp_kyoto_station_265961913",
+      "osm_id": 265961913,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "石原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3011336,
+      "longitude": 135.1807397
+    },
+    {
+      "id": "jp_kyoto_station_265962639",
+      "osm_id": 265962639,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "山家",
+      "name_kana": "やまが",
+      "name_translations": {
+        "en": "Yamaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2942546,
+      "longitude": 135.3194846
+    },
+    {
+      "id": "jp_kyoto_station_265962645",
+      "osm_id": 265962645,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬堀",
+      "name_kana": "うまほり",
+      "name_translations": {
+        "en": "Umahori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0106898,
+      "longitude": 135.6022349
+    },
+    {
+      "id": "jp_kyoto_station_265962648",
+      "osm_id": 265962648,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "下夜久野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Yakuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3199199,
+      "longitude": 134.9985002
+    },
+    {
+      "id": "jp_kyoto_station_265963108",
+      "osm_id": 265963108,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "園部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sonobe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1024868,
+      "longitude": 135.483138
+    },
+    {
+      "id": "jp_kyoto_station_265963398",
+      "osm_id": 265963398,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "亀岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kameoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0167548,
+      "longitude": 135.5824693
+    },
+    {
+      "id": "jp_kyoto_station_265964071",
+      "osm_id": 265964071,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "上夜久野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Yakuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3417446,
+      "longitude": 134.931314
+    },
+    {
+      "id": "jp_kyoto_station_265964289",
+      "osm_id": 265964289,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "下山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2124712,
+      "longitude": 135.4225002
+    },
+    {
+      "id": "jp_kyoto_station_265964291",
+      "osm_id": 265964291,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "保津峡",
+      "name_kana": "ほずきょう",
+      "name_translations": {
+        "en": "Hozukyo"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-E09",
+      "latitude": 35.0230685,
+      "longitude": 135.640152
+    },
+    {
+      "id": "jp_kyoto_station_265964619",
+      "osm_id": 265964619,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "日吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiyoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1623339,
+      "longitude": 135.5034502
+    },
+    {
+      "id": "jp_kyoto_station_265966853",
+      "osm_id": 265966853,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "和知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.261162,
+      "longitude": 135.3988326
+    },
+    {
+      "id": "jp_kyoto_station_267316272",
+      "osm_id": 267316272,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "京都",
+      "name_kana": "きょうと",
+      "name_translations": {
+        "en": "Kyoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9853497,
+      "longitude": 135.758766
+    },
+    {
+      "id": "jp_kyoto_station_267316775",
+      "osm_id": 267316775,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "木津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D19;H18;Q38",
+      "latitude": 34.7358877,
+      "longitude": 135.8249246
+    },
+    {
+      "id": "jp_kyoto_station_267442986",
+      "osm_id": 267442986,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠置",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7590881,
+      "longitude": 135.9342931
+    },
+    {
+      "id": "jp_kyoto_station_267445366",
+      "osm_id": 267445366,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "月ケ瀬口",
+      "name_kana": "つきがせぐち",
+      "name_translations": {
+        "en": "Tsukigase guchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7627771,
+      "longitude": 136.0236925
+    },
+    {
+      "id": "jp_kyoto_station_267446150",
+      "osm_id": 267446150,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "大河原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.771677,
+      "longitude": 135.9876573
+    },
+    {
+      "id": "jp_kyoto_station_335670492",
+      "osm_id": 335670492,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "上桂",
+      "name_kana": "かみかつら",
+      "name_translations": {
+        "en": "Kamikatsura"
+      },
+      "operator": "阪急電鉄",
+      "network": "嵐山線",
+      "ref": null,
+      "latitude": 34.990296,
+      "longitude": 135.695931
+    },
+    {
+      "id": "jp_kyoto_station_335671739",
+      "osm_id": 335671739,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "八瀬比叡山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yase-Hieizanguchi"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄叡山本線",
+      "ref": null,
+      "latitude": 35.0652216,
+      "longitude": 135.8084891
+    },
+    {
+      "id": "jp_kyoto_station_335671845",
+      "osm_id": 335671845,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "出町柳",
+      "name_kana": "でまちやなぎ",
+      "name_translations": {
+        "en": "Demachiyanagi"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄叡山本線",
+      "ref": null,
+      "latitude": 35.0304955,
+      "longitude": 135.7732355
+    },
+    {
+      "id": "jp_kyoto_station_335672890",
+      "osm_id": 335672890,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "八幡前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachiman-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E09",
+      "latitude": 35.0664403,
+      "longitude": 135.7923886
+    },
+    {
+      "id": "jp_kyoto_station_335672937",
+      "osm_id": 335672937,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "京都精華大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyoto Seikadai-mae"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.0731087,
+      "longitude": 135.7688924
+    },
+    {
+      "id": "jp_kyoto_station_335672948",
+      "osm_id": 335672948,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwakura"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.0712344,
+      "longitude": 135.7865917
+    },
+    {
+      "id": "jp_kyoto_station_335673116",
+      "osm_id": 335673116,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "二軒茶屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nikenchaya"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.0778279,
+      "longitude": 135.7658902
+    },
+    {
+      "id": "jp_kyoto_station_335673178",
+      "osm_id": 335673178,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "木野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kino"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.0710865,
+      "longitude": 135.7764306
+    },
+    {
+      "id": "jp_kyoto_station_335826517",
+      "osm_id": 335826517,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "龍谷大前深草",
+      "name_kana": "りゅうこくだいまえふかくさ",
+      "name_translations": {
+        "en": "Ryukokudai-mae-Fukakusa"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪線",
+      "ref": "KH33",
+      "latitude": 34.9643394,
+      "longitude": 135.7701014
+    },
+    {
+      "id": "jp_kyoto_station_335827589",
+      "osm_id": 335827589,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "石清水八幡宮",
+      "name_kana": "いわしみずはちまんぐう",
+      "name_translations": {
+        "en": "Iwashimizu-Hachimangu"
+      },
+      "operator": "京阪電気鉄道",
+      "network": null,
+      "ref": "KH26",
+      "latitude": 34.8846298,
+      "longitude": 135.7000757
+    },
+    {
+      "id": "jp_kyoto_station_335828807",
+      "osm_id": 335828807,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "桃山御陵前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Momoyamagoryōmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B08",
+      "latitude": 34.9334482,
+      "longitude": 135.7655343
+    },
+    {
+      "id": "jp_kyoto_station_335828810",
+      "osm_id": 335828810,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "向島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukaijima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B09",
+      "latitude": 34.9149489,
+      "longitude": 135.7695061
+    },
+    {
+      "id": "jp_kyoto_station_335828939",
+      "osm_id": 335828939,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iseda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B11",
+      "latitude": 34.8818711,
+      "longitude": 135.7788976
+    },
+    {
+      "id": "jp_kyoto_station_335828959",
+      "osm_id": 335828959,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "大久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōkubo"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "近畿日本鉄道京都線",
+      "ref": "B12",
+      "latitude": 34.874657,
+      "longitude": 135.7770294
+    },
+    {
+      "id": "jp_kyoto_station_335828968",
+      "osm_id": 335828968,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "富野荘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tonoshō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B15",
+      "latitude": 34.8402006,
+      "longitude": 135.7729154
+    },
+    {
+      "id": "jp_kyoto_station_335829029",
+      "osm_id": 335829029,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "寺田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Terada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B14",
+      "latitude": 34.8532549,
+      "longitude": 135.7720501
+    },
+    {
+      "id": "jp_kyoto_station_335829088",
+      "osm_id": 335829088,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "小倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B10",
+      "latitude": 34.8928046,
+      "longitude": 135.7818183
+    },
+    {
+      "id": "jp_kyoto_station_335829091",
+      "osm_id": 335829091,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "新田辺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Tanabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B16",
+      "latitude": 34.8209001,
+      "longitude": 135.7729191
+    },
+    {
+      "id": "jp_kyoto_station_335829127",
+      "osm_id": 335829127,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "興戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōdo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B17",
+      "latitude": 34.808558,
+      "longitude": 135.7784624
+    },
+    {
+      "id": "jp_kyoto_station_335829200",
+      "osm_id": 335829200,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "久津川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kutsukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B13",
+      "latitude": 34.8648954,
+      "longitude": 135.7747985
+    },
+    {
+      "id": "jp_kyoto_station_339087564",
+      "osm_id": 339087564,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "四宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinomiya"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪電気鉄道大津線",
+      "ref": null,
+      "latitude": 34.991871,
+      "longitude": 135.8239103
+    },
+    {
+      "id": "jp_kyoto_station_359860640",
+      "osm_id": 359860640,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "牧",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maki"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3379828,
+      "longitude": 135.1016772
+    },
+    {
+      "id": "jp_kyoto_station_359860734",
+      "osm_id": 359860734,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒河かしの木台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Araga-Kashinokidai"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3188753,
+      "longitude": 135.1056596
+    },
+    {
+      "id": "jp_kyoto_station_359860793",
+      "osm_id": 359860793,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "福知山市民病院口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuchiyama-shimin-byōin-guchi"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3066878,
+      "longitude": 135.1085535
+    },
+    {
+      "id": "jp_kyoto_station_359861080",
+      "osm_id": 359861080,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "大江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōe"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3887751,
+      "longitude": 135.147541
+    },
+    {
+      "id": "jp_kyoto_station_359861823",
+      "osm_id": 359861823,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyazu"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": "14",
+      "latitude": 35.5342195,
+      "longitude": 135.1997729
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_1304282915",
+      "osm_id": 1304282915,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西賀茂車庫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishigamo Bus Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0644182,
+      "longitude": 135.7450525
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_2174964597",
+      "osm_id": 2174964597,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "桂駅西口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9795263,
+      "longitude": 135.7021869
+    },
+    {
+      "id": "jp_kyoto_station_2473122666",
+      "osm_id": 2473122666,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "上鳥羽口",
+      "name_kana": "かみとばぐち",
+      "name_translations": {
+        "en": "Kamitobaguti"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "京都線",
+      "ref": "B04",
+      "latitude": 34.9655004,
+      "longitude": 135.7524075
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_2504826646",
+      "osm_id": 2504826646,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "北大路バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitaoji Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0446085,
+      "longitude": 135.7584045
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_2771085349",
+      "osm_id": 2771085349,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "桧山",
+      "name_kana": "ひのきやま",
+      "name_translations": {
+        "en": "Hinokiyama"
+      },
+      "operator": "西日本JRバス",
+      "network": "園福線",
+      "ref": null,
+      "latitude": 35.1788334,
+      "longitude": 135.3755054
+    },
+    {
+      "id": "jp_kyoto_station_3340028686",
+      "osm_id": 3340028686,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄京都",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu Kyoto"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "近鉄京都線",
+      "ref": "B01",
+      "latitude": 34.9848768,
+      "longitude": 135.7562641
+    },
+    {
+      "id": "jp_kyoto_station_3389173105",
+      "osm_id": 3389173105,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長岡京",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagaokakyo"
+      },
+      "operator": "JR西日本",
+      "network": "東海道線",
+      "ref": null,
+      "latitude": 34.9234951,
+      "longitude": 135.700797
+    },
+    {
+      "id": "jp_kyoto_station_3560105522",
+      "osm_id": 3560105522,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "黄檗",
+      "name_kana": "おうばく",
+      "name_translations": {
+        "en": "Obaku"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR奈良線",
+      "ref": "JR-D08",
+      "latitude": 34.9127055,
+      "longitude": 135.8036633
+    },
+    {
+      "id": "jp_kyoto_station_3577959128",
+      "osm_id": 3577959128,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "二条",
+      "name_kana": "にじょう",
+      "name_translations": {
+        "en": "Nijo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0110278,
+      "longitude": 135.7417298
+    },
+    {
+      "id": "jp_kyoto_station_3627458386",
+      "osm_id": 3627458386,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山科",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamashina"
+      },
+      "operator": "JR西日本",
+      "network": "東海道本線;湖西線",
+      "ref": "JR-A30;JR-B30",
+      "latitude": 34.9926363,
+      "longitude": 135.8172365
+    },
+    {
+      "id": "jp_kyoto_station_3644796526",
+      "osm_id": 3644796526,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東福寺",
+      "name_kana": "とうふくじ",
+      "name_translations": {
+        "en": "Tofukuji"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D02",
+      "latitude": 34.9809945,
+      "longitude": 135.7699358
+    },
+    {
+      "id": "jp_kyoto_station_3644796532",
+      "osm_id": 3644796532,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "稲荷",
+      "name_kana": "いなり",
+      "name_translations": {
+        "en": "Inari"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D03",
+      "latitude": 34.9668055,
+      "longitude": 135.77067
+    },
+    {
+      "id": "jp_kyoto_station_3644796554",
+      "osm_id": 3644796554,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "六地蔵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokujizo"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D06",
+      "latitude": 34.9332242,
+      "longitude": 135.7965555
+    },
+    {
+      "id": "jp_kyoto_station_3644796555",
+      "osm_id": 3644796555,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "桃山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Momoyama"
+      },
+      "operator": "JR西日本",
+      "network": "JR奈良線",
+      "ref": "JR-D05",
+      "latitude": 34.9327438,
+      "longitude": 135.7711521
+    },
+    {
+      "id": "jp_kyoto_station_3644796570",
+      "osm_id": 3644796570,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木幡",
+      "name_kana": "こはた",
+      "name_translations": {
+        "en": "Kohata"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR奈良線",
+      "ref": "JR-D07",
+      "latitude": 34.9249323,
+      "longitude": 135.7989655
+    },
+    {
+      "id": "jp_kyoto_station_3646582027",
+      "osm_id": 3646582027,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇治",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uji"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D09",
+      "latitude": 34.8904111,
+      "longitude": 135.8007079
+    },
+    {
+      "id": "jp_kyoto_station_3671722998",
+      "osm_id": 3671722998,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "松尾大社",
+      "name_kana": "まつおたいしゃ",
+      "name_translations": {
+        "en": "Matsuo-taisha"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄嵐山線",
+      "ref": null,
+      "latitude": 35.0003191,
+      "longitude": 135.6882431
+    },
+    {
+      "id": "jp_kyoto_station_3671722999",
+      "osm_id": 3671722999,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "桂",
+      "name_kana": "かつら",
+      "name_translations": {
+        "en": "Katsura"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": null,
+      "latitude": 34.9794666,
+      "longitude": 135.7032603
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_3731241860",
+      "osm_id": 3731241860,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR長岡京駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JR Nagaokakyo station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9232752,
+      "longitude": 135.7002937
+    },
+    {
+      "id": "jp_kyoto_station_3889014813",
+      "osm_id": 3889014813,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "三室戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimurodo"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪電気鉄道宇治線",
+      "ref": "KH76",
+      "latitude": 34.8988619,
+      "longitude": 135.8063415
+    },
+    {
+      "id": "jp_kyoto_station_3964246745",
+      "osm_id": 3964246745,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "三宅八幡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyake-Hachiman"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山本線",
+      "ref": "E07",
+      "latitude": 35.0624413,
+      "longitude": 135.7961889
+    },
+    {
+      "id": "jp_kyoto_station_3964246748",
+      "osm_id": 3964246748,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝ヶ池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takaragaike"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄叡山本線",
+      "ref": "E06",
+      "latitude": 35.0581761,
+      "longitude": 135.7923442
+    },
+    {
+      "id": "jp_kyoto_station_3964246752",
+      "osm_id": 3964246752,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "修学院",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shugakuin"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄叡山本線",
+      "ref": "E05",
+      "latitude": 35.0502462,
+      "longitude": 135.7904061
+    },
+    {
+      "id": "jp_kyoto_station_3964247076",
+      "osm_id": 3964247076,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "一乗寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichijoji"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山本線",
+      "ref": "E04",
+      "latitude": 35.0442096,
+      "longitude": 135.7874156
+    },
+    {
+      "id": "jp_kyoto_station_3964247080",
+      "osm_id": 3964247080,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "茶山・京都芸術大学",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chayama"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山本線",
+      "ref": "E03",
+      "latitude": 35.0382632,
+      "longitude": 135.7845296
+    },
+    {
+      "id": "jp_kyoto_station_3964247083",
+      "osm_id": 3964247083,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "元田中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mototanaka"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄叡山本線",
+      "ref": "E02",
+      "latitude": 35.0348449,
+      "longitude": 135.7806879
+    },
+    {
+      "id": "jp_kyoto_station_3980001309",
+      "osm_id": 3980001309,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "京阪山科",
+      "name_kana": "けいはんやましな",
+      "name_translations": {
+        "en": "Keihan-Yamashina"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪京津線",
+      "ref": null,
+      "latitude": 34.9920613,
+      "longitude": 135.8166265
+    },
+    {
+      "id": "jp_kyoto_station_4037703302",
+      "osm_id": 4037703302,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "御陵",
+      "name_kana": "みささぎ",
+      "name_translations": {
+        "en": "Misasagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T08",
+      "latitude": 34.9960599,
+      "longitude": 135.8017675
+    },
+    {
+      "id": "jp_kyoto_station_4050640513",
+      "osm_id": 4050640513,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "洛西口",
+      "name_kana": "らくさいぐち",
+      "name_translations": {
+        "en": "Rakusaiguchi"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": null,
+      "latitude": 34.9638528,
+      "longitude": 135.7031916
+    },
+    {
+      "id": "jp_kyoto_station_4095203264",
+      "osm_id": 4095203264,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "帷子ノ辻",
+      "name_kana": "かたびらのつじ",
+      "name_translations": {
+        "en": "Katabiranotsuji"
+      },
+      "operator": "京福電気鉄道",
+      "network": "京福電気鉄道北野線",
+      "ref": "A8",
+      "latitude": 35.0152505,
+      "longitude": 135.7003976
+    },
+    {
+      "id": "jp_kyoto_station_4095203265",
+      "osm_id": 4095203265,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "嵐山",
+      "name_kana": "あらしやま",
+      "name_translations": {
+        "en": "Arashiyama"
+      },
+      "operator": "京福電気鉄道",
+      "network": "京福電気鉄道嵐山本線",
+      "ref": "A13",
+      "latitude": 35.0152866,
+      "longitude": 135.677996
+    },
+    {
+      "id": "jp_kyoto_station_4095203270",
+      "osm_id": 4095203270,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "嵐電嵯峨",
+      "name_kana": "らんでんさが",
+      "name_translations": {
+        "en": "Randen-Saga"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A12",
+      "latitude": 35.0164451,
+      "longitude": 135.6814425
+    },
+    {
+      "id": "jp_kyoto_station_4095203730",
+      "osm_id": 4095203730,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "北野白梅町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitano-Hakubaichō"
+      },
+      "operator": "京福電気鉄道",
+      "network": "京福電気鉄道北野線",
+      "ref": "B9",
+      "latitude": 35.0274161,
+      "longitude": 135.7308729
+    },
+    {
+      "id": "jp_kyoto_station_4095203733",
+      "osm_id": 4095203733,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "四条大宮",
+      "name_kana": "しじょうおおみや",
+      "name_translations": {
+        "en": "Shijo-Omiya"
+      },
+      "operator": "京福電気鉄道",
+      "network": "京福電気鉄道嵐山本線",
+      "ref": "A1",
+      "latitude": 35.0032482,
+      "longitude": 135.7484901
+    },
+    {
+      "id": "jp_kyoto_station_4307273710",
+      "osm_id": 4307273710,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福知山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuchiyama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2960352,
+      "longitude": 135.1188702
+    },
+    {
+      "id": "jp_kyoto_station_4426468460",
+      "osm_id": 4426468460,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "淀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yodo"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪電気鉄道京阪本線",
+      "ref": "KH27",
+      "latitude": 34.9065468,
+      "longitude": 135.7211367
+    },
+    {
+      "id": "jp_kyoto_station_4426566845",
+      "osm_id": 4426566845,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "丹波橋",
+      "name_kana": "たんばばし",
+      "name_translations": {
+        "en": "Tambabashi"
+      },
+      "operator": "京阪電気鉄道",
+      "network": null,
+      "ref": "KH30",
+      "latitude": 34.9389062,
+      "longitude": 135.7653991
+    },
+    {
+      "id": "jp_kyoto_station_4426716034",
+      "osm_id": 4426716034,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "竹田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takeda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K15;B05",
+      "latitude": 34.9564389,
+      "longitude": 135.7561241
+    },
+    {
+      "id": "jp_kyoto_station_4426733134",
+      "osm_id": 4426733134,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "十条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jujo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B03",
+      "latitude": 34.9737279,
+      "longitude": 135.752433
+    },
+    {
+      "id": "jp_kyoto_station_4426733135",
+      "osm_id": 4426733135,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "東寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B02",
+      "latitude": 34.9798508,
+      "longitude": 135.7525817
+    },
+    {
+      "id": "jp_kyoto_station_4426785860",
+      "osm_id": 4426785860,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "伏見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fushimi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B06",
+      "latitude": 34.9460491,
+      "longitude": 135.7614402
+    },
+    {
+      "id": "jp_kyoto_station_4426785861",
+      "osm_id": 4426785861,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄丹波橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu-Tambabashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B07",
+      "latitude": 34.9384679,
+      "longitude": 135.7663829
+    },
+    {
+      "id": "jp_kyoto_station_4610080372",
+      "osm_id": 4610080372,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "桃山南口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Momoyama-minamiguchi"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪線",
+      "ref": "KH72",
+      "latitude": 34.9310485,
+      "longitude": 135.7837241
+    },
+    {
+      "id": "jp_kyoto_station_4610080373",
+      "osm_id": 4610080373,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "観月橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kangetsukyo"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "宇治線",
+      "ref": "KH71",
+      "latitude": 34.9280616,
+      "longitude": 135.7685877
+    },
+    {
+      "id": "jp_kyoto_station_4610080376",
+      "osm_id": 4610080376,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "中書島",
+      "name_kana": "ちゅうしょじま",
+      "name_translations": {
+        "en": "Chushojima"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪線",
+      "ref": "KH28",
+      "latitude": 34.9267228,
+      "longitude": 135.7601659
+    },
+    {
+      "id": "jp_kyoto_station_4893246656",
+      "osm_id": 4893246656,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "嵐電天神川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Randen-Tenjingawa"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A5",
+      "latitude": 35.0102352,
+      "longitude": 135.7150576
+    },
+    {
+      "id": "jp_kyoto_station_4918216766",
+      "osm_id": 4918216766,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "伏見稲荷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fushimi-Inari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KH34",
+      "latitude": 34.9689499,
+      "longitude": 135.7692576
+    },
+    {
+      "id": "jp_kyoto_station_4918229712",
+      "osm_id": 4918229712,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "JR藤森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JR Fujinomori"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D04",
+      "latitude": 34.9482703,
+      "longitude": 135.7757127
+    },
+    {
+      "id": "jp_kyoto_station_4921402785",
+      "osm_id": 4921402785,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "綾部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ayabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3021149,
+      "longitude": 135.2523458
+    },
+    {
+      "id": "jp_kyoto_station_4957723348",
+      "osm_id": 4957723348,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "松井山手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuiyamate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H26",
+      "latitude": 34.8330942,
+      "longitude": 135.7275639
+    },
+    {
+      "id": "jp_kyoto_station_5219651003",
+      "osm_id": 5219651003,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "くいな橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuinabashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K14",
+      "latitude": 34.9622813,
+      "longitude": 135.7570459
+    },
+    {
+      "id": "jp_kyoto_station_5707708875",
+      "osm_id": 5707708875,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "梅小路京都西",
+      "name_kana": "うめこうじきょうとにし",
+      "name_translations": {
+        "en": "Umekoji-Kyotonishi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-F02",
+      "latitude": 34.9886528,
+      "longitude": 135.7431949
+    },
+    {
+      "id": "jp_kyoto_station_6054864573",
+      "osm_id": 6054864573,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "桂川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katsuragawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9645355,
+      "longitude": 135.7104072
+    },
+    {
+      "id": "jp_kyoto_station_6063546663",
+      "osm_id": 6063546663,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西舞鶴",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Maizuru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4416731,
+      "longitude": 135.3305865
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_6402091361",
+      "osm_id": 6402091361,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "パノラマ展望所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6011298,
+      "longitude": 135.1877107
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_6402098348",
+      "osm_id": 6402098348,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "成相寺",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5943039,
+      "longitude": 135.1877359
+    },
+    {
+      "id": "jp_kyoto_station_6409210211",
+      "osm_id": 6409210211,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "真倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Magura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4070099,
+      "longitude": 135.3260297
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_6409384178",
+      "osm_id": 6409384178,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "山科",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamashina"
+      },
+      "operator": "びわ湖疏水船受付事務局",
+      "network": "びわ湖疏水船",
+      "ref": null,
+      "latitude": 34.9946023,
+      "longitude": 135.8263501
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_6409384180",
+      "osm_id": 6409384180,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "蹴上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Keage"
+      },
+      "operator": "びわ湖疏水船受付事務局",
+      "network": "びわ湖疏水船",
+      "ref": null,
+      "latitude": 35.0064392,
+      "longitude": 135.7916227
+    },
+    {
+      "id": "jp_kyoto_station_6565091981",
+      "osm_id": 6565091981,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "烏丸御池",
+      "name_kana": "からすまおいけ",
+      "name_translations": {
+        "en": "Karasuma Oike"
+      },
+      "operator": null,
+      "network": "京都市営地下鉄",
+      "ref": "T13;K08",
+      "latitude": 35.0108236,
+      "longitude": 135.7596456
+    },
+    {
+      "id": "jp_kyoto_station_6875238450",
+      "osm_id": 6875238450,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "東舞鶴",
+      "name_kana": "ひがしまいづる",
+      "name_translations": {
+        "en": "Higashi-Maizuru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4686275,
+      "longitude": 135.3948317
+    },
+    {
+      "id": "jp_kyoto_station_6877587460",
+      "osm_id": 6877587460,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "嵯峨嵐山",
+      "name_kana": "さがあらしやま",
+      "name_translations": {
+        "en": "Saga-Arashiyama"
+      },
+      "operator": "JR西日本",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0187788,
+      "longitude": 135.6814128
+    },
+    {
+      "id": "jp_kyoto_station_6877587461",
+      "osm_id": 6877587461,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "円町",
+      "name_kana": "えんまち",
+      "name_translations": {
+        "en": "Emmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0181847,
+      "longitude": 135.7303521
+    },
+    {
+      "id": "jp_kyoto_station_6877587462",
+      "osm_id": 6877587462,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "花園",
+      "name_kana": "はなぞの",
+      "name_translations": {
+        "en": "Hanazono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0185944,
+      "longitude": 135.7177109
+    },
+    {
+      "id": "jp_kyoto_station_6877587465",
+      "osm_id": 6877587465,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "太秦",
+      "name_kana": "うずまさ",
+      "name_translations": {
+        "en": "Uzumasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0169974,
+      "longitude": 135.7010879
+    },
+    {
+      "id": "jp_kyoto_station_6877587476",
+      "osm_id": 6877587476,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "丹波口",
+      "name_kana": "たんばぐち",
+      "name_translations": {
+        "en": "Tambaguchi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR山陰線",
+      "ref": null,
+      "latitude": 34.9957017,
+      "longitude": 135.7423944
+    },
+    {
+      "id": "jp_kyoto_station_6877765328",
+      "osm_id": 6877765328,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉富",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshitomi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0920719,
+      "longitude": 135.4984725
+    },
+    {
+      "id": "jp_kyoto_station_6877765358",
+      "osm_id": 6877765358,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0690587,
+      "longitude": 135.5318686
+    },
+    {
+      "id": "jp_kyoto_station_6877765363",
+      "osm_id": 6877765363,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千代川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chiyokawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0485571,
+      "longitude": 135.5483494
+    },
+    {
+      "id": "jp_kyoto_station_6877765372",
+      "osm_id": 6877765372,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "並河",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namikawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0322673,
+      "longitude": 135.5550724
+    },
+    {
+      "id": "jp_kyoto_station_6878790227",
+      "osm_id": 6878790227,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄宮津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu Miyazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B19",
+      "latitude": 34.7916106,
+      "longitude": 135.7874443
+    },
+    {
+      "id": "jp_kyoto_station_6878903313",
+      "osm_id": 6878903313,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "木津川台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kizugawadai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B22",
+      "latitude": 34.7467417,
+      "longitude": 135.7960367
+    },
+    {
+      "id": "jp_kyoto_station_6878903314",
+      "osm_id": 6878903314,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "山田川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamadagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B23",
+      "latitude": 34.7373971,
+      "longitude": 135.7936516
+    },
+    {
+      "id": "jp_kyoto_station_6878903315",
+      "osm_id": 6878903315,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "新祝園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Hōsono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B21",
+      "latitude": 34.7603052,
+      "longitude": 135.7927061
+    },
+    {
+      "id": "jp_kyoto_station_6878903316",
+      "osm_id": 6878903316,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "狛田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B20",
+      "latitude": 34.7803022,
+      "longitude": 135.7894995
+    },
+    {
+      "id": "jp_kyoto_station_6878903317",
+      "osm_id": 6878903317,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "三山木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyamaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B18",
+      "latitude": 34.7981778,
+      "longitude": 135.7860502
+    },
+    {
+      "id": "jp_kyoto_station_6883622225",
+      "osm_id": 6883622225,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "祇園四条",
+      "name_kana": "ぎおんしじょう",
+      "name_translations": {
+        "en": "Gion-shijo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KH39",
+      "latitude": 35.0032326,
+      "longitude": 135.7719309
+    },
+    {
+      "id": "jp_kyoto_station_6883622226",
+      "osm_id": 6883622226,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "三条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0090175,
+      "longitude": 135.7723336
+    },
+    {
+      "id": "jp_kyoto_station_6908743891",
+      "osm_id": 6908743891,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "加茂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamo"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR関西本線",
+      "ref": "JR-Q39",
+      "latitude": 34.7527151,
+      "longitude": 135.8698504
+    },
+    {
+      "id": "jp_kyoto_station_6944607675",
+      "osm_id": 6944607675,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "京都河原町",
+      "name_kana": "きょうと かわらまち",
+      "name_translations": {
+        "en": "Kyoto Kawaramachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0037119,
+      "longitude": 135.76876
+    },
+    {
+      "id": "jp_kyoto_station_6944607676",
+      "osm_id": 6944607676,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "烏丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karasuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0036825,
+      "longitude": 135.7604172
+    },
+    {
+      "id": "jp_kyoto_station_6944607677",
+      "osm_id": 6944607677,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "大宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omiya"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": "HK84",
+      "latitude": 35.0036455,
+      "longitude": 135.748589
+    },
+    {
+      "id": "jp_kyoto_station_6944607678",
+      "osm_id": 6944607678,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西院",
+      "name_kana": "さいいん",
+      "name_translations": {
+        "en": "Saiin"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": null,
+      "latitude": 35.0035661,
+      "longitude": 135.7317797
+    },
+    {
+      "id": "jp_kyoto_station_7126853825",
+      "osm_id": 7126853825,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "常盤",
+      "name_kana": "ときわ",
+      "name_translations": {
+        "en": "Tokiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0205969,
+      "longitude": 135.7048859
+    },
+    {
+      "id": "jp_kyoto_station_7126862306",
+      "osm_id": 7126862306,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "太秦広隆寺",
+      "name_kana": "うずまさこうりゅうじ",
+      "name_translations": {
+        "en": "Uzumasa-Koryuji"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A7",
+      "latitude": 35.0134271,
+      "longitude": 135.7083199
+    },
+    {
+      "id": "jp_kyoto_station_7126885956",
+      "osm_id": 7126885956,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳴滝",
+      "name_kana": "なるたき",
+      "name_translations": {
+        "en": "Narutaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0236048,
+      "longitude": 135.7057886
+    },
+    {
+      "id": "jp_kyoto_station_7126885959",
+      "osm_id": 7126885959,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "御室仁和寺",
+      "name_kana": "おむろにんなじ",
+      "name_translations": {
+        "en": "Omuro-Ninnaji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0264523,
+      "longitude": 135.7139574
+    },
+    {
+      "id": "jp_kyoto_station_7126885961",
+      "osm_id": 7126885961,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "龍安寺",
+      "name_kana": "りょうあんじ",
+      "name_translations": {
+        "en": "Ryōanji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0278873,
+      "longitude": 135.7211904
+    },
+    {
+      "id": "jp_kyoto_station_7126885963",
+      "osm_id": 7126885963,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "等持院・立命館大学衣笠キャンパス前",
+      "name_kana": "とうじいん",
+      "name_translations": {
+        "en": "Tōjiin・Ritsumeikan University"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0278433,
+      "longitude": 135.7239073
+    },
+    {
+      "id": "jp_kyoto_station_7731538422",
+      "osm_id": 7731538422,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山城青谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamashiro-Aodani"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D14",
+      "latitude": 34.8280228,
+      "longitude": 135.800231
+    },
+    {
+      "id": "jp_kyoto_station_7744316244",
+      "osm_id": 7744316244,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "西大路御池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishioji-oike"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T16",
+      "latitude": 35.0109446,
+      "longitude": 135.7306343
+    },
+    {
+      "id": "jp_kyoto_station_7774767272",
+      "osm_id": 7774767272,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "城陽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jōyō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D12",
+      "latitude": 34.8560656,
+      "longitude": 135.7808145
+    },
+    {
+      "id": "jp_kyoto_station_7774989562",
+      "osm_id": 7774989562,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山城多賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamashiro-Taga"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D15",
+      "latitude": 34.8173811,
+      "longitude": 135.8063048
+    },
+    {
+      "id": "jp_kyoto_station_7774989563",
+      "osm_id": 7774989563,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "JR小倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JR-Ogura"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D10",
+      "latitude": 34.8891475,
+      "longitude": 135.786292
+    },
+    {
+      "id": "jp_kyoto_station_7774989564",
+      "osm_id": 7774989564,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinden"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D11",
+      "latitude": 34.8740737,
+      "longitude": 135.780661
+    },
+    {
+      "id": "jp_kyoto_station_7774989565",
+      "osm_id": 7774989565,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagaike"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D13",
+      "latitude": 34.8424155,
+      "longitude": 135.7898509
+    },
+    {
+      "id": "jp_kyoto_station_7775105756",
+      "osm_id": 7775105756,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上狛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamikoma"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D18",
+      "latitude": 34.7504339,
+      "longitude": 135.8212435
+    },
+    {
+      "id": "jp_kyoto_station_7775105757",
+      "osm_id": 7775105757,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "棚倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanakura"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D17",
+      "latitude": 34.7747251,
+      "longitude": 135.816107
+    },
+    {
+      "id": "jp_kyoto_station_7775111680",
+      "osm_id": 7775111680,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "玉水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamamizu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D16",
+      "latitude": 34.800257,
+      "longitude": 135.8070307
+    },
+    {
+      "id": "jp_kyoto_station_7780381705",
+      "osm_id": 7780381705,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "今出川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imadegawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K06",
+      "latitude": 35.029394,
+      "longitude": 135.7593689
+    },
+    {
+      "id": "jp_kyoto_station_7780381706",
+      "osm_id": 7780381706,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "鞍馬口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuramaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K05",
+      "latitude": 35.0371824,
+      "longitude": 135.7593026
+    },
+    {
+      "id": "jp_kyoto_station_7780381707",
+      "osm_id": 7780381707,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "北大路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitaōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K04",
+      "latitude": 35.0445726,
+      "longitude": 135.7587094
+    },
+    {
+      "id": "jp_kyoto_station_7780381708",
+      "osm_id": 7780381708,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "北山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K03",
+      "latitude": 35.0512426,
+      "longitude": 135.7652088
+    },
+    {
+      "id": "jp_kyoto_station_7780381709",
+      "osm_id": 7780381709,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "松ヶ崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsugasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K02",
+      "latitude": 35.0516054,
+      "longitude": 135.7760697
+    },
+    {
+      "id": "jp_kyoto_station_7780381710",
+      "osm_id": 7780381710,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "国際会館",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokusaikaikan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K01",
+      "latitude": 35.062913,
+      "longitude": 135.7851715
+    },
+    {
+      "id": "jp_kyoto_station_7780637509",
+      "osm_id": 7780637509,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "九条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kujo"
+      },
+      "operator": "京都市営地下鉄",
+      "network": "京都市営地下鉄烏丸線",
+      "ref": "K12",
+      "latitude": 34.9791727,
+      "longitude": 135.7597227
+    },
+    {
+      "id": "jp_kyoto_station_7780637511",
+      "osm_id": 7780637511,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "五条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gojō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K10",
+      "latitude": 34.9949404,
+      "longitude": 135.7597142
+    },
+    {
+      "id": "jp_kyoto_station_7780637512",
+      "osm_id": 7780637512,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "四条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shijō"
+      },
+      "operator": "京都市交通局",
+      "network": null,
+      "ref": "K09",
+      "latitude": 35.002469,
+      "longitude": 135.7596526
+    },
+    {
+      "id": "jp_kyoto_station_7780637513",
+      "osm_id": 7780637513,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "丸太町",
+      "name_kana": "まるたまち",
+      "name_translations": {
+        "en": "Marutamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K07",
+      "latitude": 35.0162879,
+      "longitude": 135.7595533
+    },
+    {
+      "id": "jp_kyoto_station_7783352308",
+      "osm_id": 7783352308,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "太秦天神川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzumasa-Tenjingawa"
+      },
+      "operator": "京都市交通局",
+      "network": "京都市営地下鉄",
+      "ref": "T17",
+      "latitude": 35.010813,
+      "longitude": 135.715634
+    },
+    {
+      "id": "jp_kyoto_station_7783352310",
+      "osm_id": 7783352310,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "二条城前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nijojo-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T14",
+      "latitude": 35.0118902,
+      "longitude": 135.7502806
+    },
+    {
+      "id": "jp_kyoto_station_7783352311",
+      "osm_id": 7783352311,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "京都市役所前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyoto Shiyakusho-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T12",
+      "latitude": 35.0108986,
+      "longitude": 135.7688702
+    },
+    {
+      "id": "jp_kyoto_station_7783352312",
+      "osm_id": 7783352312,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "三条京阪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanjo Keihan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T11",
+      "latitude": 35.0092912,
+      "longitude": 135.7739848
+    },
+    {
+      "id": "jp_kyoto_station_7783352313",
+      "osm_id": 7783352313,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "東山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashiyama"
+      },
+      "operator": "京都市交通局;京都市",
+      "network": null,
+      "ref": "T10",
+      "latitude": 35.0094336,
+      "longitude": 135.7797778
+    },
+    {
+      "id": "jp_kyoto_station_7783352314",
+      "osm_id": 7783352314,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "蹴上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Keage"
+      },
+      "operator": "京都市",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0075969,
+      "longitude": 135.7905569
+    },
+    {
+      "id": "jp_kyoto_station_7783352316",
+      "osm_id": 7783352316,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "東野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T06",
+      "latitude": 34.9819568,
+      "longitude": 135.8166753
+    },
+    {
+      "id": "jp_kyoto_station_7783352317",
+      "osm_id": 7783352317,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "椥辻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagitsuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T05",
+      "latitude": 34.9727085,
+      "longitude": 135.8149008
+    },
+    {
+      "id": "jp_kyoto_station_7783352318",
+      "osm_id": 7783352318,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "小野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T04",
+      "latitude": 34.9611448,
+      "longitude": 135.8126889
+    },
+    {
+      "id": "jp_kyoto_station_7783352319",
+      "osm_id": 7783352319,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "醍醐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daigo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T03",
+      "latitude": 34.9506686,
+      "longitude": 135.8106505
+    },
+    {
+      "id": "jp_kyoto_station_7783352320",
+      "osm_id": 7783352320,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "subway",
+      "name": "石田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T02",
+      "latitude": 34.9406255,
+      "longitude": 135.8040057
+    },
+    {
+      "id": "jp_kyoto_station_7795996213",
+      "osm_id": 7795996213,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西山天王山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishiyama-Tennōzan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9131846,
+      "longitude": 135.6885828
+    },
+    {
+      "id": "jp_kyoto_station_7812621706",
+      "osm_id": 7812621706,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "山崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamazaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8924725,
+      "longitude": 135.6797811
+    },
+    {
+      "id": "jp_kyoto_station_7824789137",
+      "osm_id": 7824789137,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishioji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9811387,
+      "longitude": 135.7320962
+    },
+    {
+      "id": "jp_kyoto_station_7828956538",
+      "osm_id": 7828956538,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "向日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9548556,
+      "longitude": 135.7098265
+    },
+    {
+      "id": "jp_kyoto_station_7829098369",
+      "osm_id": 7829098369,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "京田辺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyōtanabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H24",
+      "latitude": 34.8208212,
+      "longitude": 135.7687043
+    },
+    {
+      "id": "jp_kyoto_station_7829098372",
+      "osm_id": 7829098372,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "大住",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōsumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H25",
+      "latitude": 34.8307899,
+      "longitude": 135.7495514
+    },
+    {
+      "id": "jp_kyoto_station_7831762281",
+      "osm_id": 7831762281,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "ケーブル八瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Cable Yase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0669237,
+      "longitude": 135.8086639
+    },
+    {
+      "id": "jp_kyoto_station_7831762282",
+      "osm_id": 7831762282,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "ケーブル比叡",
+      "name_kana": "けーぶるひえい",
+      "name_translations": {
+        "en": "Cable Hiei"
+      },
+      "operator": "京福電気鉄道",
+      "network": "鋼索線",
+      "ref": null,
+      "latitude": 35.0642207,
+      "longitude": 135.8223559
+    },
+    {
+      "id": "jp_kyoto_station_7831866342",
+      "osm_id": 7831866342,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西向日",
+      "name_kana": "にしむこう",
+      "name_translations": {
+        "en": "Nishi-Mukō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9404964,
+      "longitude": 135.7031954
+    },
+    {
+      "id": "jp_kyoto_station_7831866345",
+      "osm_id": 7831866345,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "東向日",
+      "name_kana": "ひがしむこう",
+      "name_translations": {
+        "en": "Higashimuko"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": null,
+      "latitude": 34.9532339,
+      "longitude": 135.7046283
+    },
+    {
+      "id": "jp_kyoto_station_7831866347",
+      "osm_id": 7831866347,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西京極",
+      "name_kana": "にしきょうごく",
+      "name_translations": {
+        "en": "Nishikyogoku"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": null,
+      "latitude": 34.9924634,
+      "longitude": 135.7183338
+    },
+    {
+      "id": "jp_kyoto_station_7831866349",
+      "osm_id": 7831866349,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "長岡天神",
+      "name_kana": "ながおかてんじん",
+      "name_translations": {
+        "en": "Nagaokatenjin"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": null,
+      "latitude": 34.9253081,
+      "longitude": 135.6926827
+    },
+    {
+      "id": "jp_kyoto_station_7831889971",
+      "osm_id": 7831889971,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "大山崎",
+      "name_kana": "おおやまざき",
+      "name_translations": {
+        "en": "Oyamazaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8914312,
+      "longitude": 135.6816211
+    },
+    {
+      "id": "jp_kyoto_station_7877004829",
+      "osm_id": 7877004829,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "神宮丸太町",
+      "name_kana": "じんぐうまるたまち",
+      "name_translations": {
+        "en": "Jingu-marutamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KH41",
+      "latitude": 35.018668,
+      "longitude": 135.7722442
+    },
+    {
+      "id": "jp_kyoto_station_7886699754",
+      "osm_id": 7886699754,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "鞍馬",
+      "name_kana": "くらま",
+      "name_translations": {
+        "en": "Kurama"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.112896,
+      "longitude": 135.772269
+    },
+    {
+      "id": "jp_kyoto_station_7943618716",
+      "osm_id": 7943618716,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "市原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichihara"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.0883246,
+      "longitude": 135.7630815
+    },
+    {
+      "id": "jp_kyoto_station_7943618717",
+      "osm_id": 7943618717,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "二ノ瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ninose"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.0978535,
+      "longitude": 135.7630053
+    },
+    {
+      "id": "jp_kyoto_station_7944965634",
+      "osm_id": 7944965634,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳥羽街道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobakaido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9734916,
+      "longitude": 135.7700361
+    },
+    {
+      "id": "jp_kyoto_station_7944965635",
+      "osm_id": 7944965635,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "七条",
+      "name_kana": "しちじょう",
+      "name_translations": {
+        "en": "Shichijō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KH37",
+      "latitude": 34.9900914,
+      "longitude": 135.7676281
+    },
+    {
+      "id": "jp_kyoto_station_7944965637",
+      "osm_id": 7944965637,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "清水五条",
+      "name_kana": "きよみずごじょう",
+      "name_translations": {
+        "en": "Kiyomizu-gojo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KH38",
+      "latitude": 34.9965097,
+      "longitude": 135.7686795
+    },
+    {
+      "id": "jp_kyoto_station_7944965639",
+      "osm_id": 7944965639,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "墨染",
+      "name_kana": "すみぞめ",
+      "name_translations": {
+        "en": "Sumizome"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪線",
+      "ref": null,
+      "latitude": 34.9480382,
+      "longitude": 135.7690202
+    },
+    {
+      "id": "jp_kyoto_station_7946386296",
+      "osm_id": 7946386296,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "橋本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashimoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KH25",
+      "latitude": 34.8817714,
+      "longitude": 135.6840572
+    },
+    {
+      "id": "jp_kyoto_station_7946386303",
+      "osm_id": 7946386303,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "伏見桃山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fushimi-momoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KH29",
+      "latitude": 34.9328114,
+      "longitude": 135.7643679
+    },
+    {
+      "id": "jp_kyoto_station_7946386305",
+      "osm_id": 7946386305,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤森",
+      "name_kana": "ふじのもり",
+      "name_translations": {
+        "en": "Fujinomori"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京阪電気鉄道京阪本線",
+      "ref": "KH32",
+      "latitude": 34.9568313,
+      "longitude": 135.770203
+    },
+    {
+      "id": "jp_kyoto_station_7968094920",
+      "osm_id": 7968094920,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "貴船口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kibuneguchi"
+      },
+      "operator": "叡山電鉄",
+      "network": "叡山電鉄鞍馬線",
+      "ref": null,
+      "latitude": 35.1060095,
+      "longitude": 135.7638321
+    },
+    {
+      "id": "jp_kyoto_station_7983447585",
+      "osm_id": 7983447585,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "撮影所前",
+      "name_kana": "さつえいしょまえ",
+      "name_translations": {
+        "en": "Satsueisho-mae"
+      },
+      "operator": "京福電気鉄道",
+      "network": "京福電気鉄道北野線",
+      "ref": null,
+      "latitude": 35.0158305,
+      "longitude": 135.7029131
+    },
+    {
+      "id": "jp_kyoto_station_7983447586",
+      "osm_id": 7983447586,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇多野",
+      "name_kana": "うたの",
+      "name_translations": {
+        "en": "Utano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0271636,
+      "longitude": 135.710094
+    },
+    {
+      "id": "jp_kyoto_station_7983447587",
+      "osm_id": 7983447587,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "妙心寺",
+      "name_kana": "みょうしんじ",
+      "name_translations": {
+        "en": "Myoshinji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0264706,
+      "longitude": 135.7181554
+    },
+    {
+      "id": "jp_kyoto_station_8227179667",
+      "osm_id": 8227179667,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "かぶと山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kabutoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T23",
+      "latitude": 35.6068023,
+      "longitude": 134.9197544
+    },
+    {
+      "id": "jp_kyoto_station_8227779903",
+      "osm_id": 8227779903,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "東雲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinonome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M10",
+      "latitude": 35.4749029,
+      "longitude": 135.2849938
+    },
+    {
+      "id": "jp_kyoto_station_8227779904",
+      "osm_id": 8227779904,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "四所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shisho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M9",
+      "latitude": 35.4462963,
+      "longitude": 135.2902694
+    },
+    {
+      "id": "jp_kyoto_station_8230693321",
+      "osm_id": 8230693321,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyamura"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5233286,
+      "longitude": 135.1920984
+    },
+    {
+      "id": "jp_kyoto_station_8230734437",
+      "osm_id": 8230734437,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "大江山口内宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōeyamaguchi-Naiku"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4320885,
+      "longitude": 135.1582593
+    },
+    {
+      "id": "jp_kyoto_station_8230991505",
+      "osm_id": 8230991505,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "栗田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kunda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M13",
+      "latitude": 35.5437927,
+      "longitude": 135.2352769
+    },
+    {
+      "id": "jp_kyoto_station_8230991510",
+      "osm_id": 8230991510,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "丹後由良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tango-Yura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M12",
+      "latitude": 35.5158765,
+      "longitude": 135.2794119
+    },
+    {
+      "id": "jp_kyoto_station_8233956606",
+      "osm_id": 8233956606,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "天橋立",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amanohashidate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T15",
+      "latitude": 35.5575846,
+      "longitude": 135.1824258
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_8484357630",
+      "osm_id": 8484357630,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京田辺バスストップ",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8336012,
+      "longitude": 135.7239747
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_8562804882",
+      "osm_id": 8562804882,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "十石舟乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9232916,
+      "longitude": 135.7561274
+    },
+    {
+      "id": "jp_kyoto_station_9689187641",
+      "osm_id": 9689187641,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿王院",
+      "name_kana": "ろくおういん",
+      "name_translations": {
+        "en": "Rokuoin"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A11",
+      "latitude": 35.0169898,
+      "longitude": 135.6856833
+    },
+    {
+      "id": "jp_kyoto_station_9988825933",
+      "osm_id": 9988825933,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "傘松",
+      "name_kana": "カサマツ",
+      "name_translations": {
+        "en": "Kasamatsu"
+      },
+      "operator": "丹後海陸交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5864928,
+      "longitude": 135.1959049
+    },
+    {
+      "id": "jp_kyoto_station_10575982880",
+      "osm_id": 10575982880,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "山ノ内",
+      "name_kana": "やまのうち",
+      "name_translations": {
+        "en": "Yamanouchi"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A4",
+      "latitude": 35.0083176,
+      "longitude": 135.7231517
+    },
+    {
+      "id": "jp_kyoto_station_10575982881",
+      "osm_id": 10575982881,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大路三条",
+      "name_kana": "にしおおじさんじょう",
+      "name_translations": {
+        "en": "Nishioji-Sanjo"
+      },
+      "operator": "京福電気鉄道",
+      "network": "嵐山本線",
+      "ref": "A3",
+      "latitude": 35.008372,
+      "longitude": 135.7316619
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_10591862893",
+      "osm_id": 10591862893,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "第2ふ頭旅客ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4539801,
+      "longitude": 135.3217464
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_10601438928",
+      "osm_id": 10601438928,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "祝園駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7605905,
+      "longitude": 135.7916786
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_10605668736",
+      "osm_id": 10605668736,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大江駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3890695,
+      "longitude": 135.1470192
+    },
+    {
+      "id": "jp_kyoto_station_10945815537",
+      "osm_id": 10945815537,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "車折神社",
+      "name_kana": "くるまざきじんじゃ",
+      "name_translations": {
+        "en": "Kurumazaki-jinja"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A10",
+      "latitude": 35.0167468,
+      "longitude": 135.6890317
+    },
+    {
+      "id": "jp_kyoto_station_10948631584",
+      "osm_id": 10948631584,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "有栖川",
+      "name_kana": "ありすがわ",
+      "name_translations": {
+        "en": "Arisugawa"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A9",
+      "latitude": 35.0152108,
+      "longitude": 135.6946149
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_11377433290",
+      "osm_id": 11377433290,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "木津駅東口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7365188,
+      "longitude": 135.8253358
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_11377433291",
+      "osm_id": 11377433291,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "木津駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7365618,
+      "longitude": 135.8244695
+    },
+    {
+      "id": "jp_kyoto_station_11377440579",
+      "osm_id": 11377440579,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "西木津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H19",
+      "latitude": 34.7377823,
+      "longitude": 135.8034812
+    },
+    {
+      "id": "jp_kyoto_station_11377440591",
+      "osm_id": 11377440591,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "祝園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōsono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H20",
+      "latitude": 34.7600749,
+      "longitude": 135.7920496
+    },
+    {
+      "id": "jp_kyoto_station_11377440602",
+      "osm_id": 11377440602,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "下狛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimokoma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H21",
+      "latitude": 34.7805919,
+      "longitude": 135.7884561
+    },
+    {
+      "id": "jp_kyoto_station_11377440605",
+      "osm_id": 11377440605,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "JR三山木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JR Miyamaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H22",
+      "latitude": 34.7981288,
+      "longitude": 135.7846615
+    },
+    {
+      "id": "jp_kyoto_station_11377440610",
+      "osm_id": 11377440610,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "同志社前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dōshishamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-H23",
+      "latitude": 34.8056672,
+      "longitude": 135.7781564
+    },
+    {
+      "id": "jp_kyoto_station_11453821875",
+      "osm_id": 11453821875,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "府中",
+      "name_kana": "フチュウ",
+      "name_translations": {
+        "en": "Fuchū"
+      },
+      "operator": "丹後海陸交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5832471,
+      "longitude": 135.1952916
+    },
+    {
+      "id": "jp_kyoto_station_11893490661",
+      "osm_id": 11893490661,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "蚕ノ社",
+      "name_kana": "かいこのやしろ",
+      "name_translations": {
+        "en": "Kaikonoyashiro"
+      },
+      "operator": "京福電気鉄道",
+      "network": null,
+      "ref": "A6",
+      "latitude": 35.0119059,
+      "longitude": 135.7129989
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_12245820171",
+      "osm_id": 12245820171,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "伏見船着場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9224613,
+      "longitude": 135.7559216
+    },
+    {
+      "id": "jp_kyoto_station_12804949614",
+      "osm_id": 12804949614,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩滝口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwatakiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T16",
+      "latitude": 35.5504049,
+      "longitude": 135.1511425
+    },
+    {
+      "id": "jp_kyoto_station_12804949615",
+      "osm_id": 12804949615,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "与謝野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yosano"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": "T17",
+      "latitude": 35.5433299,
+      "longitude": 135.1262845
+    },
+    {
+      "id": "jp_kyoto_station_12804949618",
+      "osm_id": 12804949618,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "京丹後大宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyōtango-Ōmiya"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": "T18",
+      "latitude": 35.5793305,
+      "longitude": 135.0941224
+    },
+    {
+      "id": "jp_kyoto_station_12804949620",
+      "osm_id": 12804949620,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "峰山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mineyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T19",
+      "latitude": 35.6256998,
+      "longitude": 135.0722153
+    },
+    {
+      "id": "jp_kyoto_station_12804949621",
+      "osm_id": 12804949621,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "網野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amino"
+      },
+      "operator": "京都丹後鉄道",
+      "network": null,
+      "ref": "T20",
+      "latitude": 35.6673605,
+      "longitude": 135.0254384
+    },
+    {
+      "id": "jp_kyoto_station_12804949622",
+      "osm_id": 12804949622,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "夕日ヶ浦木津温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yūhigaura-Kitsu-onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6499885,
+      "longitude": 134.9724546
+    },
+    {
+      "id": "jp_kyoto_station_12804949624",
+      "osm_id": 12804949624,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "小天橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shōtenkyō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T22",
+      "latitude": 35.6305674,
+      "longitude": 134.9288046
+    },
+    {
+      "id": "jp_kyoto_station_12804949625",
+      "osm_id": 12804949625,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "久美浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumihama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T24",
+      "latitude": 35.6023396,
+      "longitude": 134.8949617
+    },
+    {
+      "id": "jp_kyoto_station_12810515615",
+      "osm_id": 12810515615,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "淵垣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fuchigaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3282195,
+      "longitude": 135.2944962
+    },
+    {
+      "id": "jp_kyoto_station_12810515625",
+      "osm_id": 12810515625,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅迫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umezako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3485468,
+      "longitude": 135.3112042
+    },
+    {
+      "id": "jp_kyoto_station_12821280664",
+      "osm_id": 12821280664,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "松尾寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuoodera"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4859981,
+      "longitude": 135.4510718
+    },
+    {
+      "id": "jp_kyoto_station_12997335828",
+      "osm_id": 12997335828,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "トロッコ嵯峨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Torokko Saga"
+      },
+      "operator": "嵯峨野観光鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0185888,
+      "longitude": 135.6807067
+    },
+    {
+      "id": "jp_kyoto_station_13377627425",
+      "osm_id": 13377627425,
+      "osm_type": "node",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "トロッコ嵐山",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0171449,
+      "longitude": 135.6702405
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_98595490",
+      "osm_id": 98595490,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "舞鶴フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maizuru Ferry Terminal"
+      },
+      "operator": "新日本海フェリー",
+      "network": null,
+      "ref": null,
+      "latitude": 35.481639,
+      "longitude": 135.3919238
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_120374262",
+      "osm_id": 120374262,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "定期観光バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9866597,
+      "longitude": 135.7579942
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_140831208",
+      "osm_id": 140831208,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京都市交通局 衣笠操車場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0345977,
+      "longitude": 135.7260967
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_153622096",
+      "osm_id": 153622096,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "国際会館駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0639153,
+      "longitude": 135.7851973
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_160717936",
+      "osm_id": 160717936,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京都バス",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0430654,
+      "longitude": 135.7804962
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_218599693",
+      "osm_id": 218599693,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京阪バス",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.81156,
+      "longitude": 135.7557499
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_250294715",
+      "osm_id": 250294715,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "保津川下り",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hozu-gawa River Boat Ride"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0172121,
+      "longitude": 135.5869279
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_279712074",
+      "osm_id": 279712074,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大原",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "京都バス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1197776,
+      "longitude": 135.8289718
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_386787033",
+      "osm_id": 386787033,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "苔寺",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9919877,
+      "longitude": 135.6859361
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_491217082",
+      "osm_id": 491217082,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "観光船のりば 天橋立桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5585434,
+      "longitude": 135.1847388
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_491218792",
+      "osm_id": 491218792,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "一の宮駅(一の宮桟橋)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5808619,
+      "longitude": 135.1960144
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_491735209",
+      "osm_id": 491735209,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "桂坂中央",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9840153,
+      "longitude": 135.6662271
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_516084204",
+      "osm_id": 516084204,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京都駅前",
+      "name_kana": "きょうとえきまえ",
+      "name_translations": {
+        "en": "Kyoto Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9867654,
+      "longitude": 135.75847
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_558543621",
+      "osm_id": 558543621,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宮津桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.539829,
+      "longitude": 135.1938824
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_606903206",
+      "osm_id": 606903206,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "南春日町バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9575112,
+      "longitude": 135.6610566
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_762538783",
+      "osm_id": 762538783,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "近鉄大久保",
+      "name_kana": "きんてつおおくぼ",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8747284,
+      "longitude": 135.7774569
+    },
+    {
+      "id": "jp_kyoto_station_844431435",
+      "osm_id": 844431435,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "山門駅",
+      "name_kana": "さんもんえき",
+      "name_translations": {
+        "en": "Sanmon Station"
+      },
+      "operator": "鞍馬寺",
+      "network": "鞍馬寺ケーブル",
+      "ref": null,
+      "latitude": 35.1147596,
+      "longitude": 135.7727719
+    },
+    {
+      "id": "jp_kyoto_station_844431436",
+      "osm_id": 844431436,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "多宝塔駅",
+      "name_kana": "たほうとうえき",
+      "name_translations": {
+        "en": "Tahōtō Station"
+      },
+      "operator": "鞍馬寺",
+      "network": "鞍馬寺ケーブル",
+      "ref": null,
+      "latitude": 35.1163483,
+      "longitude": 135.7727613
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_958880672",
+      "osm_id": 958880672,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "伊根航路乗船場　伊根（鳥屋）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.674071,
+      "longitude": 135.290534
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_1083560082",
+      "osm_id": 1083560082,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バス停「毛原」待合室",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4424376,
+      "longitude": 135.1593361
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_1209457873",
+      "osm_id": 1209457873,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "京都文教 スクールバス乗降場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9161814,
+      "longitude": 135.7693604
+    },
+    {
+      "id": "jp_kyoto_ferry_terminal_1231011575",
+      "osm_id": 1231011575,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "背割堤船着場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8909411,
+      "longitude": 135.6981919
+    },
+    {
+      "id": "jp_kyoto_bus_terminal_1386678135",
+      "osm_id": 1386678135,
+      "osm_type": "way",
+      "prefecture_id": "jp_kyoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "周山",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "西日本JRバス;きょうと京北ふるさと公社;南丹市",
+      "network": "JRバス;京北ふるさとバス:南丹市営バス",
+      "ref": null,
+      "latitude": 35.15557,
+      "longitude": 135.6317429
+    }
+  ]
+}

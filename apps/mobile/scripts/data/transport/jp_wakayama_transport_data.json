@@ -1,0 +1,2442 @@
+{
+  "fetchedAt": "2025-12-24T05:54:59.374Z",
+  "prefecture_id": "jp_wakayama",
+  "prefecture_name": "和歌山県",
+  "stats": {
+    "station": 123,
+    "airport": 1,
+    "ferry_terminal": 4,
+    "bus_terminal": 8,
+    "total": 136
+  },
+  "data": [
+    {
+      "id": "jp_wakayama_station_267317594",
+      "osm_id": 267317594,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊佐野",
+      "name_kana": "きいさの",
+      "name_translations": {
+        "en": "Kii-Sano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6797315,
+      "longitude": 135.9703859
+    },
+    {
+      "id": "jp_wakayama_station_267317610",
+      "osm_id": 267317610,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊天満",
+      "name_kana": "きいてんま",
+      "name_translations": {
+        "en": "Kii-Tenma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6364693,
+      "longitude": 135.9348611
+    },
+    {
+      "id": "jp_wakayama_station_267317617",
+      "osm_id": 267317617,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "江住",
+      "name_kana": "えすみ",
+      "name_translations": {
+        "en": "Esumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5097869,
+      "longitude": 135.6033361
+    },
+    {
+      "id": "jp_wakayama_station_267317633",
+      "osm_id": 267317633,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和深",
+      "name_kana": "わぶか",
+      "name_translations": {
+        "en": "Wabuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5010952,
+      "longitude": 135.6549855
+    },
+    {
+      "id": "jp_wakayama_station_267317652",
+      "osm_id": 267317652,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊姫",
+      "name_kana": "きいひめ",
+      "name_translations": {
+        "en": "Kii-Hime"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4978567,
+      "longitude": 135.7964094
+    },
+    {
+      "id": "jp_wakayama_station_267317655",
+      "osm_id": 267317655,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇久井",
+      "name_kana": "うくい",
+      "name_translations": {
+        "en": "Ukui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6624622,
+      "longitude": 135.9722565
+    },
+    {
+      "id": "jp_wakayama_station_267317802",
+      "osm_id": 267317802,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊浦神",
+      "name_kana": "きいうらがみ",
+      "name_translations": {
+        "en": "Kii-Uragami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5603906,
+      "longitude": 135.8938568
+    },
+    {
+      "id": "jp_wakayama_station_267317818",
+      "osm_id": 267317818,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "三輪崎",
+      "name_kana": "みわさき",
+      "name_translations": {
+        "en": "Miwasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6894155,
+      "longitude": 135.9847756
+    },
+    {
+      "id": "jp_wakayama_station_267318070",
+      "osm_id": 267318070,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "田並",
+      "name_kana": "たなみ",
+      "name_translations": {
+        "en": "Tanami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4880094,
+      "longitude": 135.7187281
+    },
+    {
+      "id": "jp_wakayama_station_267319834",
+      "osm_id": 267319834,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "田子",
+      "name_kana": "たこ",
+      "name_translations": {
+        "en": "Tako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4902816,
+      "longitude": 135.6779393
+    },
+    {
+      "id": "jp_wakayama_station_267320472",
+      "osm_id": 267320472,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊新庄",
+      "name_kana": "きいしんじょう",
+      "name_translations": {
+        "en": "Kii-Shinjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.720943,
+      "longitude": 135.402396
+    },
+    {
+      "id": "jp_wakayama_station_267320473",
+      "osm_id": 267320473,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝来",
+      "name_kana": "あっそ",
+      "name_translations": {
+        "en": "Asso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6964224,
+      "longitude": 135.417487
+    },
+    {
+      "id": "jp_wakayama_station_267320717",
+      "osm_id": 267320717,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊日置",
+      "name_kana": "きいひき",
+      "name_translations": {
+        "en": "Kii-Hiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5853555,
+      "longitude": 135.4577943
+    },
+    {
+      "id": "jp_wakayama_station_267320730",
+      "osm_id": 267320730,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "椿",
+      "name_kana": "つばき",
+      "name_translations": {
+        "en": "Tsubaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6098979,
+      "longitude": 135.403898
+    },
+    {
+      "id": "jp_wakayama_station_267320836",
+      "osm_id": 267320836,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "芳養",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.746941,
+      "longitude": 135.35555
+    },
+    {
+      "id": "jp_wakayama_station_267320905",
+      "osm_id": 267320905,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊田辺",
+      "name_kana": "きいたなべ",
+      "name_translations": {
+        "en": "Kii-Tanabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7328792,
+      "longitude": 135.3845422
+    },
+    {
+      "id": "jp_wakayama_station_267320906",
+      "osm_id": 267320906,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "紀伊富田",
+      "name_kana": "きいとんだ",
+      "name_translations": {
+        "en": "Kii-Tonda"
+      },
+      "operator": "JR",
+      "network": "紀勢本線(きのくに線)",
+      "ref": null,
+      "latitude": 33.6526661,
+      "longitude": 135.3933958
+    },
+    {
+      "id": "jp_wakayama_station_267321227",
+      "osm_id": 267321227,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "白浜",
+      "name_kana": "しらはま",
+      "name_translations": {
+        "en": "Shirahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.67588,
+      "longitude": 135.387313
+    },
+    {
+      "id": "jp_wakayama_station_267321590",
+      "osm_id": 267321590,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "見老津",
+      "name_kana": "みろづ",
+      "name_translations": {
+        "en": "Mirozu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.51528,
+      "longitude": 135.575713
+    },
+    {
+      "id": "jp_wakayama_station_267321891",
+      "osm_id": 267321891,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "周参見",
+      "name_kana": "すさみ",
+      "name_translations": {
+        "en": "Susami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5467621,
+      "longitude": 135.4957487
+    },
+    {
+      "id": "jp_wakayama_station_267322359",
+      "osm_id": 267322359,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8973972,
+      "longitude": 135.2072466
+    },
+    {
+      "id": "jp_wakayama_station_267322390",
+      "osm_id": 267322390,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "道成寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dōjōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9111395,
+      "longitude": 135.1759676
+    },
+    {
+      "id": "jp_wakayama_station_267322498",
+      "osm_id": 267322498,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯浅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yuasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.032036,
+      "longitude": 135.1796999
+    },
+    {
+      "id": "jp_wakayama_station_267322903",
+      "osm_id": 267322903,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊内原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Uchihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9261503,
+      "longitude": 135.1451867
+    },
+    {
+      "id": "jp_wakayama_station_267323005",
+      "osm_id": 267323005,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimotsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1086917,
+      "longitude": 135.1452054
+    },
+    {
+      "id": "jp_wakayama_station_267323039",
+      "osm_id": 267323039,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "南部",
+      "name_kana": "みなべ",
+      "name_translations": {
+        "en": "Minabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7674776,
+      "longitude": 135.3243949
+    },
+    {
+      "id": "jp_wakayama_station_267323203",
+      "osm_id": 267323203,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "広川ビーチ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirokawa Beach"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0130757,
+      "longitude": 135.1635921
+    },
+    {
+      "id": "jp_wakayama_station_267323616",
+      "osm_id": 267323616,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊宮原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Miyahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0779058,
+      "longitude": 135.1707162
+    },
+    {
+      "id": "jp_wakayama_station_267323748",
+      "osm_id": 267323748,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8524254,
+      "longitude": 135.2290857
+    },
+    {
+      "id": "jp_wakayama_station_267323767",
+      "osm_id": 267323767,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀三井寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kimiidera"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1880057,
+      "longitude": 135.1876099
+    },
+    {
+      "id": "jp_wakayama_station_267323779",
+      "osm_id": 267323779,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "切目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kirime"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7971183,
+      "longitude": 135.2410195
+    },
+    {
+      "id": "jp_wakayama_station_267323801",
+      "osm_id": 267323801,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "御坊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gobō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.907868,
+      "longitude": 135.1591382
+    },
+    {
+      "id": "jp_wakayama_station_267323823",
+      "osm_id": 267323823,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "印南",
+      "name_kana": "いなみ",
+      "name_translations": {
+        "en": "Inami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8180411,
+      "longitude": 135.2198737
+    },
+    {
+      "id": "jp_wakayama_station_267323843",
+      "osm_id": 267323843,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "箕島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minoshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0861023,
+      "longitude": 135.1246277
+    },
+    {
+      "id": "jp_wakayama_station_267323852",
+      "osm_id": 267323852,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "海南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kainan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1542935,
+      "longitude": 135.2144039
+    },
+    {
+      "id": "jp_wakayama_station_267323853",
+      "osm_id": 267323853,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "冷水浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimizuura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1418596,
+      "longitude": 135.1941732
+    },
+    {
+      "id": "jp_wakayama_station_267324062",
+      "osm_id": 267324062,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "加茂郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamogō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1256474,
+      "longitude": 135.1598889
+    },
+    {
+      "id": "jp_wakayama_station_267324123",
+      "osm_id": 267324123,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1701732,
+      "longitude": 135.2102698
+    },
+    {
+      "id": "jp_wakayama_station_267324207",
+      "osm_id": 267324207,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7804911,
+      "longitude": 135.279296
+    },
+    {
+      "id": "jp_wakayama_station_267327549",
+      "osm_id": 267327549,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊由良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Yura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9689596,
+      "longitude": 135.1278778
+    },
+    {
+      "id": "jp_wakayama_station_267332906",
+      "osm_id": 267332906,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下兵庫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Hyogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3226895,
+      "longitude": 135.6348319
+    },
+    {
+      "id": "jp_wakayama_station_267333241",
+      "osm_id": 267333241,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "隅田",
+      "name_kana": "すだ",
+      "name_translations": {
+        "en": "Suda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3280733,
+      "longitude": 135.6555901
+    },
+    {
+      "id": "jp_wakayama_station_267333258",
+      "osm_id": 267333258,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "橋本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashimoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3182105,
+      "longitude": 135.6147953
+    },
+    {
+      "id": "jp_wakayama_station_267333875",
+      "osm_id": 267333875,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "高野口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōyaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3076633,
+      "longitude": 135.5572561
+    },
+    {
+      "id": "jp_wakayama_station_267333889",
+      "osm_id": 267333889,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊山田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Yamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3129748,
+      "longitude": 135.5839401
+    },
+    {
+      "id": "jp_wakayama_station_267334273",
+      "osm_id": 267334273,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "船戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Funato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2483674,
+      "longitude": 135.3111961
+    },
+    {
+      "id": "jp_wakayama_station_267336295",
+      "osm_id": 267336295,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "R51",
+      "latitude": 34.2692946,
+      "longitude": 135.246368
+    },
+    {
+      "id": "jp_wakayama_station_267336452",
+      "osm_id": 267336452,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "六十谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Musota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "R52",
+      "latitude": 34.26242,
+      "longitude": 135.2072124
+    },
+    {
+      "id": "jp_wakayama_station_280489365",
+      "osm_id": 280489365,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和歌山大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakayamadaigakumae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK43",
+      "latitude": 34.2763573,
+      "longitude": 135.1470827
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_313229450",
+      "osm_id": 313229450,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高野山駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koya-san Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2274465,
+      "longitude": 135.5770557
+    },
+    {
+      "id": "jp_wakayama_station_360076791",
+      "osm_id": 360076791,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "極楽橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gokurakubashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2336955,
+      "longitude": 135.5819168
+    },
+    {
+      "id": "jp_wakayama_station_360076795",
+      "osm_id": 360076795,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "高野山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koyasan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2276,
+      "longitude": 135.577305
+    },
+    {
+      "id": "jp_wakayama_station_2277099389",
+      "osm_id": 2277099389,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和歌山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "R54",
+      "latitude": 34.2322107,
+      "longitude": 135.19158
+    },
+    {
+      "id": "jp_wakayama_station_3523110985",
+      "osm_id": 3523110985,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西御坊",
+      "name_kana": "にしごぼう",
+      "name_translations": {
+        "en": "Nishi-Gobō"
+      },
+      "operator": "紀州鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.8867947,
+      "longitude": 135.1530092
+    },
+    {
+      "id": "jp_wakayama_ferry_terminal_4095088611",
+      "osm_id": 4095088611,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Dorokyo boat terminal",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8146057,
+      "longitude": 135.8581934
+    },
+    {
+      "id": "jp_wakayama_station_4355134041",
+      "osm_id": 4355134041,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "新宮",
+      "name_kana": "しんぐ",
+      "name_translations": {
+        "en": "Shingu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7250784,
+      "longitude": 135.9940846
+    },
+    {
+      "id": "jp_wakayama_station_4457649790",
+      "osm_id": 4457649790,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊中ノ島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-nakanoshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "R53",
+      "latitude": 34.2430012,
+      "longitude": 135.1902613
+    },
+    {
+      "id": "jp_wakayama_station_4457784167",
+      "osm_id": 4457784167,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2132217,
+      "longitude": 135.1887578
+    },
+    {
+      "id": "jp_wakayama_station_4457804655",
+      "osm_id": 4457804655,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "田井ノ瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tainose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2422268,
+      "longitude": 135.2296931
+    },
+    {
+      "id": "jp_wakayama_station_4693693926",
+      "osm_id": 4693693926,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和歌山市",
+      "name_kana": "わかやまし",
+      "name_translations": {
+        "en": "Wakayamashi"
+      },
+      "operator": "南海電気鉄道",
+      "network": null,
+      "ref": "NK45",
+      "latitude": 34.2367159,
+      "longitude": 135.1665895
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_4781085257",
+      "osm_id": 4781085257,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "地蔵の辻",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "和歌山バス那賀",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2438342,
+      "longitude": 135.1848351
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_4781085273",
+      "osm_id": 4781085273,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "阪和駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "和歌山バス那賀",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2440116,
+      "longitude": 135.1887337
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_4891979257",
+      "osm_id": 4891979257,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "医大病院",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "和歌山バス",
+      "network": null,
+      "ref": null,
+      "latitude": 34.1877812,
+      "longitude": 135.1807152
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_4891979263",
+      "osm_id": 4891979263,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "医大病院前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "和歌山バス",
+      "network": null,
+      "ref": null,
+      "latitude": 34.1869725,
+      "longitude": 135.180809
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_5106724414",
+      "osm_id": 5106724414,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Kii-Tanabe",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7326278,
+      "longitude": 135.3843019
+    },
+    {
+      "id": "jp_wakayama_station_5694806014",
+      "osm_id": 5694806014,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "初島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatsushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.100055,
+      "longitude": 135.1156126
+    },
+    {
+      "id": "jp_wakayama_station_6050991104",
+      "osm_id": 6050991104,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "串本",
+      "name_kana": "くしもと",
+      "name_translations": {
+        "en": "Kushimoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4755656,
+      "longitude": 135.7816979
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_6843760992",
+      "osm_id": 6843760992,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三重交通 南紀特急バス 勝浦バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6279776,
+      "longitude": 135.9442489
+    },
+    {
+      "id": "jp_wakayama_ferry_terminal_7967970787",
+      "osm_id": 7967970787,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "那智勝浦港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nachikatsuura-town Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6625177,
+      "longitude": 135.986783
+    },
+    {
+      "id": "jp_wakayama_station_8157702930",
+      "osm_id": 8157702930,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀ノ川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK44",
+      "latitude": 34.2552799,
+      "longitude": 135.1654273
+    },
+    {
+      "id": "jp_wakayama_station_8163291230",
+      "osm_id": 8163291230,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下古沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Kosawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2665086,
+      "longitude": 135.553091
+    },
+    {
+      "id": "jp_wakayama_station_8163291241",
+      "osm_id": 8163291241,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "上古沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Kosawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2575002,
+      "longitude": 135.5479954
+    },
+    {
+      "id": "jp_wakayama_station_8163291242",
+      "osm_id": 8163291242,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊細川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Hosokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2358697,
+      "longitude": 135.5537617
+    },
+    {
+      "id": "jp_wakayama_station_8163291249",
+      "osm_id": 8163291249,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊神谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Kamiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2427221,
+      "longitude": 135.5711613
+    },
+    {
+      "id": "jp_wakayama_station_8185667040",
+      "osm_id": 8185667040,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "高野下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōyashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2716971,
+      "longitude": 135.5663685
+    },
+    {
+      "id": "jp_wakayama_station_8185667051",
+      "osm_id": 8185667051,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "学文路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamuro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2965572,
+      "longitude": 135.5800628
+    },
+    {
+      "id": "jp_wakayama_station_8185667060",
+      "osm_id": 8185667060,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊清水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Shimizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3074429,
+      "longitude": 135.6046161
+    },
+    {
+      "id": "jp_wakayama_station_8185667070",
+      "osm_id": 8185667070,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "御幸辻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyukitsuji"
+      },
+      "operator": "南海鉄道",
+      "network": "高野線",
+      "ref": null,
+      "latitude": 34.3378833,
+      "longitude": 135.6020976
+    },
+    {
+      "id": "jp_wakayama_station_8185667071",
+      "osm_id": 8185667071,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "林間田園都市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rinkanden-Entoshi"
+      },
+      "operator": "南海鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3555065,
+      "longitude": 135.6033421
+    },
+    {
+      "id": "jp_wakayama_station_8185667074",
+      "osm_id": 8185667074,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀見峠",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kimitōge"
+      },
+      "operator": "南海鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3661019,
+      "longitude": 135.6001349
+    },
+    {
+      "id": "jp_wakayama_station_8187169371",
+      "osm_id": 8187169371,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "九度山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kudoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.288069,
+      "longitude": 135.564599
+    },
+    {
+      "id": "jp_wakayama_station_8198307116",
+      "osm_id": 8198307116,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "東松江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Matsue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK44-1",
+      "latitude": 34.2478213,
+      "longitude": 135.1407255
+    },
+    {
+      "id": "jp_wakayama_station_8198307122",
+      "osm_id": 8198307122,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "中松江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakamatsue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK44-2",
+      "latitude": 34.2486859,
+      "longitude": 135.1330905
+    },
+    {
+      "id": "jp_wakayama_station_8198307131",
+      "osm_id": 8198307131,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "八幡前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachimanmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK44-3",
+      "latitude": 34.2526245,
+      "longitude": 135.1217977
+    },
+    {
+      "id": "jp_wakayama_station_8198307134",
+      "osm_id": 8198307134,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西ノ庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishinoshō"
+      },
+      "operator": "南海電気鉄道",
+      "network": "南海電気鉄道加太線",
+      "ref": "NK44-4",
+      "latitude": 34.2555986,
+      "longitude": 135.1105144
+    },
+    {
+      "id": "jp_wakayama_station_8198307135",
+      "osm_id": 8198307135,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "二里ヶ浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nirigahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK44-5",
+      "latitude": 34.257595,
+      "longitude": 135.1041274
+    },
+    {
+      "id": "jp_wakayama_station_8198307143",
+      "osm_id": 8198307143,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "加太",
+      "name_kana": "かだ",
+      "name_translations": {
+        "en": "Kada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK44-7",
+      "latitude": 34.2751138,
+      "longitude": 135.080825
+    },
+    {
+      "id": "jp_wakayama_station_8199212401",
+      "osm_id": 8199212401,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "磯ノ浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isonoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK44-6",
+      "latitude": 34.2604951,
+      "longitude": 135.0947932
+    },
+    {
+      "id": "jp_wakayama_station_8212600713",
+      "osm_id": 8212600713,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "和歌山港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakayamakō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "NK45-1",
+      "latitude": 34.2170732,
+      "longitude": 135.1462622
+    },
+    {
+      "id": "jp_wakayama_station_8213216123",
+      "osm_id": 8213216123,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "学門",
+      "name_kana": "がくもん",
+      "name_translations": {
+        "en": "Gakumon"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8965742,
+      "longitude": 135.1568965
+    },
+    {
+      "id": "jp_wakayama_station_8213216125",
+      "osm_id": 8213216125,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊御坊",
+      "name_kana": "きいごぼう",
+      "name_translations": {
+        "en": "Kii-Gobo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8943607,
+      "longitude": 135.1548372
+    },
+    {
+      "id": "jp_wakayama_station_8213216126",
+      "osm_id": 8213216126,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "市役所前",
+      "name_kana": "しやくしょまえ",
+      "name_translations": {
+        "en": "Shiyakusho-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8900134,
+      "longitude": 135.1530287
+    },
+    {
+      "id": "jp_wakayama_station_9089458062",
+      "osm_id": 9089458062,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤並",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujinami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.05718,
+      "longitude": 135.1966032
+    },
+    {
+      "id": "jp_wakayama_station_9676586441",
+      "osm_id": 9676586441,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下里",
+      "name_kana": "しもさと",
+      "name_translations": {
+        "en": "Shimosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5823961,
+      "longitude": 135.9223635
+    },
+    {
+      "id": "jp_wakayama_station_9677252168",
+      "osm_id": 9677252168,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "太地",
+      "name_kana": "たいじ",
+      "name_translations": {
+        "en": "Taiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5909463,
+      "longitude": 135.9274862
+    },
+    {
+      "id": "jp_wakayama_station_9678979777",
+      "osm_id": 9678979777,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯川",
+      "name_kana": "ゆかわ",
+      "name_translations": {
+        "en": "Yukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6094766,
+      "longitude": 135.9248818
+    },
+    {
+      "id": "jp_wakayama_station_9678998637",
+      "osm_id": 9678998637,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊勝浦",
+      "name_kana": "きいかつうら",
+      "name_translations": {
+        "en": "Kii-Katsuura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.628068,
+      "longitude": 135.9415587
+    },
+    {
+      "id": "jp_wakayama_station_9678998668",
+      "osm_id": 9678998668,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "jr",
+      "name": "那智",
+      "name_kana": "なち",
+      "name_translations": {
+        "en": "Nachi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6440079,
+      "longitude": 135.9365521
+    },
+    {
+      "id": "jp_wakayama_station_9680123127",
+      "osm_id": 9680123127,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊田原",
+      "name_kana": "きいたはら",
+      "name_translations": {
+        "en": "Kii-Tahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5365012,
+      "longitude": 135.8682853
+    },
+    {
+      "id": "jp_wakayama_station_9680123204",
+      "osm_id": 9680123204,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "古座",
+      "name_kana": "こざ",
+      "name_translations": {
+        "en": "Koza"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5193114,
+      "longitude": 135.820911
+    },
+    {
+      "id": "jp_wakayama_station_9855329052",
+      "osm_id": 9855329052,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊有田",
+      "name_kana": "きいありた",
+      "name_translations": {
+        "en": "Kii-Arita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4908417,
+      "longitude": 135.7357177
+    },
+    {
+      "id": "jp_wakayama_station_9941280727",
+      "osm_id": 9941280727,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀三井寺ケーブル山麓",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.184283,
+      "longitude": 135.1889142
+    },
+    {
+      "id": "jp_wakayama_station_11851380803",
+      "osm_id": 11851380803,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "貴志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "14",
+      "latitude": 34.2093678,
+      "longitude": 135.3120093
+    },
+    {
+      "id": "jp_wakayama_station_11851380804",
+      "osm_id": 11851380804,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "甘露寺前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanroji-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "13",
+      "latitude": 34.2133432,
+      "longitude": 135.3014595
+    },
+    {
+      "id": "jp_wakayama_station_11851380812",
+      "osm_id": 11851380812,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Yamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "12",
+      "latitude": 34.209767,
+      "longitude": 135.2912577
+    },
+    {
+      "id": "jp_wakayama_station_11851380818",
+      "osm_id": 11851380818,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大池遊園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōike-Yūen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "11",
+      "latitude": 34.2047433,
+      "longitude": 135.2855808
+    },
+    {
+      "id": "jp_wakayama_station_11851380833",
+      "osm_id": 11851380833,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "山東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sandō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "10",
+      "latitude": 34.2058375,
+      "longitude": 135.2625118
+    },
+    {
+      "id": "jp_wakayama_station_11851380839",
+      "osm_id": 11851380839,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉礼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kire"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "08",
+      "latitude": 34.203393,
+      "longitude": 135.2361269
+    },
+    {
+      "id": "jp_wakayama_station_11851380852",
+      "osm_id": 11851380852,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡崎前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okazaki-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "07",
+      "latitude": 34.2034606,
+      "longitude": 135.2249958
+    },
+    {
+      "id": "jp_wakayama_station_11851380862",
+      "osm_id": 11851380862,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "交通センター前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōtsū-Center-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "06",
+      "latitude": 34.2038239,
+      "longitude": 135.2181729
+    },
+    {
+      "id": "jp_wakayama_station_11851380867",
+      "osm_id": 11851380867,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "竈山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "05",
+      "latitude": 34.2072439,
+      "longitude": 135.2072214
+    },
+    {
+      "id": "jp_wakayama_station_11851380868",
+      "osm_id": 11851380868,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "神前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "04",
+      "latitude": 34.2131524,
+      "longitude": 135.2051635
+    },
+    {
+      "id": "jp_wakayama_station_11851400973",
+      "osm_id": 11851400973,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "日前宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nichizengū"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "03",
+      "latitude": 34.2264669,
+      "longitude": 135.2018537
+    },
+    {
+      "id": "jp_wakayama_station_11851400981",
+      "osm_id": 11851400981,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "田中口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanakaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "02",
+      "latitude": 34.2270169,
+      "longitude": 135.1931338
+    },
+    {
+      "id": "jp_wakayama_station_11860393925",
+      "osm_id": 11860393925,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀和",
+      "name_kana": "きわ",
+      "name_translations": {
+        "en": "Kiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2420205,
+      "longitude": 135.1806736
+    },
+    {
+      "id": "jp_wakayama_ferry_terminal_12039419288",
+      "osm_id": 12039419288,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "和歌山港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakayama Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2175246,
+      "longitude": 135.1438495
+    },
+    {
+      "id": "jp_wakayama_station_12860675055",
+      "osm_id": 12860675055,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "打田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2652479,
+      "longitude": 135.3642467
+    },
+    {
+      "id": "jp_wakayama_station_12860703876",
+      "osm_id": 12860703876,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "下井阪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoisaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2620536,
+      "longitude": 135.340544
+    },
+    {
+      "id": "jp_wakayama_station_12860724620",
+      "osm_id": 12860724620,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊長田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Nagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2682293,
+      "longitude": 135.3912163
+    },
+    {
+      "id": "jp_wakayama_station_12860725020",
+      "osm_id": 12860725020,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwade"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2548621,
+      "longitude": 135.321047
+    },
+    {
+      "id": "jp_wakayama_station_12860748975",
+      "osm_id": 12860748975,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊小倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Ogura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2463585,
+      "longitude": 135.2875556
+    },
+    {
+      "id": "jp_wakayama_station_12860897181",
+      "osm_id": 12860897181,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "布施屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hoshiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2445437,
+      "longitude": 135.261966
+    },
+    {
+      "id": "jp_wakayama_station_12862466250",
+      "osm_id": 12862466250,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "千旦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Senda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2417333,
+      "longitude": 135.2458929
+    },
+    {
+      "id": "jp_wakayama_station_12864364027",
+      "osm_id": 12864364027,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "粉河",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2707839,
+      "longitude": 135.4043189
+    },
+    {
+      "id": "jp_wakayama_station_12864396813",
+      "osm_id": 12864396813,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "名手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2730591,
+      "longitude": 135.4339063
+    },
+    {
+      "id": "jp_wakayama_station_12866427967",
+      "osm_id": 12866427967,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "西笠田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kaseda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2801493,
+      "longitude": 135.4530593
+    },
+    {
+      "id": "jp_wakayama_station_12866449879",
+      "osm_id": 12866449879,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaseda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2922394,
+      "longitude": 135.4801851
+    },
+    {
+      "id": "jp_wakayama_station_12870004147",
+      "osm_id": 12870004147,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "大谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōtani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2987537,
+      "longitude": 135.4942521
+    },
+    {
+      "id": "jp_wakayama_station_12870016435",
+      "osm_id": 12870016435,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "妙寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Myōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2986145,
+      "longitude": 135.5174134
+    },
+    {
+      "id": "jp_wakayama_station_12870030851",
+      "osm_id": 12870030851,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "中飯降",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakaiburi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3042678,
+      "longitude": 135.532081
+    },
+    {
+      "id": "jp_wakayama_station_13123297565",
+      "osm_id": 13123297565,
+      "osm_type": "node",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊太祈曽",
+      "name_kana": "いだきそ",
+      "name_translations": {
+        "en": "Idakiso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "09",
+      "latitude": 34.2042098,
+      "longitude": 135.2513407
+    },
+    {
+      "id": "jp_wakayama_airport_57009588",
+      "osm_id": 57009588,
+      "osm_type": "way",
+      "prefecture_id": "jp_wakayama",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "南紀白浜空港",
+      "name_kana": "南紀伊白浜空港",
+      "name_translations": {
+        "en": "Nanki-Shirahama Airport"
+      },
+      "operator": "和歌山県",
+      "network": null,
+      "ref": "SHM",
+      "latitude": 33.6624235,
+      "longitude": 135.3648751
+    },
+    {
+      "id": "jp_wakayama_ferry_terminal_597359284",
+      "osm_id": 597359284,
+      "osm_type": "way",
+      "prefecture_id": "jp_wakayama",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "和歌山港のりば",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakayama Port Terminal"
+      },
+      "operator": "南海フェリー",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2174857,
+      "longitude": 135.1460817
+    },
+    {
+      "id": "jp_wakayama_bus_terminal_734431084",
+      "osm_id": 734431084,
+      "osm_type": "way",
+      "prefecture_id": "jp_wakayama",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "和歌山バス那賀株式会社 本社",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "和歌山バス那賀株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2719628,
+      "longitude": 135.4279998
+    },
+    {
+      "id": "jp_wakayama_station_1075242356",
+      "osm_id": 1075242356,
+      "osm_type": "way",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀三井寺ケーブル山上駅",
+      "name_kana": "きみいでら ケーブル やまのうええき",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1839298,
+      "longitude": 135.1897431
+    },
+    {
+      "id": "jp_wakayama_station_1103853224",
+      "osm_id": 1103853224,
+      "osm_type": "way",
+      "prefecture_id": "jp_wakayama",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊新庄駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Shinjō Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7210674,
+      "longitude": 135.4020759
+    }
+  ]
+}

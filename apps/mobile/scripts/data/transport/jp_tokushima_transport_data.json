@@ -1,0 +1,1638 @@
+{
+  "fetchedAt": "2025-12-24T05:56:04.874Z",
+  "prefecture_id": "jp_tokushima",
+  "prefecture_name": "徳島県",
+  "stats": {
+    "station": 72,
+    "airport": 1,
+    "ferry_terminal": 9,
+    "bus_terminal": 10,
+    "total": 92
+  },
+  "data": [
+    {
+      "id": "jp_tokushima_station_265016752",
+      "osm_id": 265016752,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishibara"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9483192,
+      "longitude": 134.644836
+    },
+    {
+      "id": "jp_tokushima_station_265016753",
+      "osm_id": 265016753,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波中島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awa-Nakashima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9411958,
+      "longitude": 134.6649863
+    },
+    {
+      "id": "jp_tokushima_station_265016774",
+      "osm_id": 265016774,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "立江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsue"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9701856,
+      "longitude": 134.6087294
+    },
+    {
+      "id": "jp_tokushima_station_265016779",
+      "osm_id": 265016779,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波福井",
+      "name_kana": "あわふくい",
+      "name_translations": {
+        "en": "Awa-Fukui"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.8240623,
+      "longitude": 134.6053659
+    },
+    {
+      "id": "jp_tokushima_station_265016821",
+      "osm_id": 265016821,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波赤石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awa-Akaishi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.982114,
+      "longitude": 134.6057394
+    },
+    {
+      "id": "jp_tokushima_station_265016884",
+      "osm_id": 265016884,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "見能林",
+      "name_kana": "みのばやし",
+      "name_translations": {
+        "en": "Minobayashi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9033645,
+      "longitude": 134.6672263
+    },
+    {
+      "id": "jp_tokushima_station_265017159",
+      "osm_id": 265017159,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田井ノ浜",
+      "name_kana": "たいのはま",
+      "name_translations": {
+        "en": "Tainohama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.7727706,
+      "longitude": 134.5838377
+    },
+    {
+      "id": "jp_tokushima_station_265017851",
+      "osm_id": 265017851,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木岐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.7665162,
+      "longitude": 134.5694466
+    },
+    {
+      "id": "jp_tokushima_station_265017870",
+      "osm_id": 265017870,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "地蔵橋",
+      "name_kana": "じぞうばし",
+      "name_translations": {
+        "en": "Jizōbashi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "M04",
+      "latitude": 34.0267401,
+      "longitude": 134.5470403
+    },
+    {
+      "id": "jp_tokushima_station_265018746",
+      "osm_id": 265018746,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "文化の森",
+      "name_kana": "ぶんかのもり",
+      "name_translations": {
+        "en": "Bunkanomori"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "M03",
+      "latitude": 34.0440493,
+      "longitude": 134.5431985
+    },
+    {
+      "id": "jp_tokushima_station_265018777",
+      "osm_id": 265018777,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "二軒屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nikenya"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0545653,
+      "longitude": 134.5467037
+    },
+    {
+      "id": "jp_tokushima_station_265018891",
+      "osm_id": 265018891,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "海部",
+      "name_kana": "かいふ",
+      "name_translations": {
+        "en": "Kaifu"
+      },
+      "operator": "阿佐海岸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5937727,
+      "longitude": 134.3520863
+    },
+    {
+      "id": "jp_tokushima_station_300337455",
+      "osm_id": 300337455,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chūden"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0103853,
+      "longitude": 134.569601
+    },
+    {
+      "id": "jp_tokushima_station_369987265",
+      "osm_id": 369987265,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北河内",
+      "name_kana": "きたがわち",
+      "name_translations": {
+        "en": "Kitagawachi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.7433137,
+      "longitude": 134.535385
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_389352039",
+      "osm_id": 389352039,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "商業高校前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0741166,
+      "longitude": 134.5741274
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_704413551",
+      "osm_id": 704413551,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "徳島港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokushima Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0566053,
+      "longitude": 134.5833223
+    },
+    {
+      "id": "jp_tokushima_station_822932927",
+      "osm_id": 822932927,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "宍喰",
+      "name_kana": "ししくい",
+      "name_translations": {
+        "en": "Shishikui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.566853,
+      "longitude": 134.3007168
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_2222486665",
+      "osm_id": 2222486665,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "徳島バス南部 川口本社",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8017455,
+      "longitude": 134.468657
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_2621733175",
+      "osm_id": 2621733175,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "阿波池田バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0272283,
+      "longitude": 133.8074623
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_2993380255",
+      "osm_id": 2993380255,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ひょうたん島周遊船のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0692339,
+      "longitude": 134.5507845
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_3159480663",
+      "osm_id": 3159480663,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "徳島駅前バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.074044,
+      "longitude": 134.5507847
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_3184482239",
+      "osm_id": 3184482239,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "紺屋町",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "徳島バス",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0672694,
+      "longitude": 134.5484929
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_3281570324",
+      "osm_id": 3281570324,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "徳島駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0737688,
+      "longitude": 134.5511051
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_5274579741",
+      "osm_id": 5274579741,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "黒崎渡船乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1974546,
+      "longitude": 134.5977475
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_5314381725",
+      "osm_id": 5314381725,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "徳島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0538709,
+      "longitude": 134.595873
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_7874584642",
+      "osm_id": 7874584642,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "牟岐港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6675253,
+      "longitude": 134.4216168
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_7874584681",
+      "osm_id": 7874584681,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "出羽島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6363945,
+      "longitude": 134.4243816
+    },
+    {
+      "id": "jp_tokushima_station_8119625805",
+      "osm_id": 8119625805,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "板野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T07",
+      "latitude": 34.1420587,
+      "longitude": 134.4657683
+    },
+    {
+      "id": "jp_tokushima_station_8316082328",
+      "osm_id": 8316082328,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "教会前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyokaimae"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "N07",
+      "latitude": 34.1675662,
+      "longitude": 134.5772363
+    },
+    {
+      "id": "jp_tokushima_station_8316082393",
+      "osm_id": 8316082393,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐古",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sako"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T01;B01",
+      "latitude": 34.0805638,
+      "longitude": 134.5386755
+    },
+    {
+      "id": "jp_tokushima_station_8383600961",
+      "osm_id": 8383600961,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "坪尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsubojiri"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D19",
+      "latitude": 34.0539617,
+      "longitude": 133.8237226
+    },
+    {
+      "id": "jp_tokushima_station_8383601414",
+      "osm_id": 8383601414,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三縄",
+      "name_kana": "みなわ",
+      "name_translations": {
+        "en": "Minawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0069906,
+      "longitude": 133.7873679
+    },
+    {
+      "id": "jp_tokushima_station_8674455794",
+      "osm_id": 8674455794,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "池谷",
+      "name_kana": "いけのたに",
+      "name_translations": {
+        "en": "Ikenotani"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T04;N04",
+      "latitude": 34.1526648,
+      "longitude": 134.5290215
+    },
+    {
+      "id": "jp_tokushima_station_8701075528",
+      "osm_id": 8701075528,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "石井",
+      "name_kana": "いしい",
+      "name_translations": {
+        "en": "Ishii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B05",
+      "latitude": 34.070253,
+      "longitude": 134.4441605
+    },
+    {
+      "id": "jp_tokushima_station_8706560152",
+      "osm_id": 8706560152,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "府中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0742194,
+      "longitude": 134.4829358
+    },
+    {
+      "id": "jp_tokushima_station_8707630256",
+      "osm_id": 8707630256,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "蔵本",
+      "name_kana": "くらもと",
+      "name_translations": {
+        "en": "Kuramoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B02",
+      "latitude": 34.0793919,
+      "longitude": 134.5186716
+    },
+    {
+      "id": "jp_tokushima_station_8711082703",
+      "osm_id": 8711082703,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉成",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshinari"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T02",
+      "latitude": 34.1185148,
+      "longitude": 134.5308407
+    },
+    {
+      "id": "jp_tokushima_station_8713393444",
+      "osm_id": 8713393444,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波大谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awa-Ōtani"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "N05",
+      "latitude": 34.1580198,
+      "longitude": 134.5404531
+    },
+    {
+      "id": "jp_tokushima_station_8713393624",
+      "osm_id": 8713393624,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "勝瑞",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shōzui"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T03",
+      "latitude": 34.1284617,
+      "longitude": 134.5281015
+    },
+    {
+      "id": "jp_tokushima_station_8723123078",
+      "osm_id": 8723123078,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "立道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsumichi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "N06",
+      "latitude": 34.1619929,
+      "longitude": 134.5576122
+    },
+    {
+      "id": "jp_tokushima_station_8726429967",
+      "osm_id": 8726429967,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "金比羅前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konpiramae"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "N08",
+      "latitude": 34.1698986,
+      "longitude": 134.5854177
+    },
+    {
+      "id": "jp_tokushima_station_8736172802",
+      "osm_id": 8736172802,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "撫養",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Muya"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "N09",
+      "latitude": 34.1732348,
+      "longitude": 134.6008048
+    },
+    {
+      "id": "jp_tokushima_station_8739460410",
+      "osm_id": 8739460410,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鳴門",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naruto"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "N10",
+      "latitude": 34.1788965,
+      "longitude": 134.6084176
+    },
+    {
+      "id": "jp_tokushima_station_8744063083",
+      "osm_id": 8744063083,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "山瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B13",
+      "latitude": 34.0601315,
+      "longitude": 134.2562918
+    },
+    {
+      "id": "jp_tokushima_station_8749850716",
+      "osm_id": 8749850716,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "学",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gaku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B12",
+      "latitude": 34.0576711,
+      "longitude": 134.2862903
+    },
+    {
+      "id": "jp_tokushima_station_8755033466",
+      "osm_id": 8755033466,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿波川島",
+      "name_kana": "あわかわしま",
+      "name_translations": {
+        "en": "Awa-Kawashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B11",
+      "latitude": 34.0617772,
+      "longitude": 134.3208991
+    },
+    {
+      "id": "jp_tokushima_station_8762605018",
+      "osm_id": 8762605018,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "鴨島",
+      "name_kana": "かもじま",
+      "name_translations": {
+        "en": "Kamojima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B09",
+      "latitude": 34.0737051,
+      "longitude": 134.35653
+    },
+    {
+      "id": "jp_tokushima_station_8766369590",
+      "osm_id": 8766369590,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "牛島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushinoshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B07",
+      "latitude": 34.0767888,
+      "longitude": 134.397374
+    },
+    {
+      "id": "jp_tokushima_station_8766399779",
+      "osm_id": 8766399779,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波池田",
+      "name_kana": "あわいけだ",
+      "name_translations": {
+        "en": "Awa-Ikeda"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "B25;D22",
+      "latitude": 34.0269238,
+      "longitude": 133.8045871
+    },
+    {
+      "id": "jp_tokushima_station_8809844003",
+      "osm_id": 8809844003,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "佃",
+      "name_kana": "つくだ",
+      "name_translations": {
+        "en": "Tsukuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B24;D21",
+      "latitude": 34.0324404,
+      "longitude": 133.8572408
+    },
+    {
+      "id": "jp_tokushima_station_8818154992",
+      "osm_id": 8818154992,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "辻",
+      "name_kana": "つじ",
+      "name_translations": {
+        "en": "Tsuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B23",
+      "latitude": 34.0291645,
+      "longitude": 133.8737911
+    },
+    {
+      "id": "jp_tokushima_station_8819100616",
+      "osm_id": 8819100616,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿波加茂",
+      "name_kana": "あわかも",
+      "name_translations": {
+        "en": "Awakamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B22",
+      "latitude": 34.036842,
+      "longitude": 133.9269058
+    },
+    {
+      "id": "jp_tokushima_station_8829683025",
+      "osm_id": 8829683025,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "三加茂",
+      "name_kana": "みかも",
+      "name_translations": {
+        "en": "Mikamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B21",
+      "latitude": 34.0358418,
+      "longitude": 133.9487011
+    },
+    {
+      "id": "jp_tokushima_station_8830750045",
+      "osm_id": 8830750045,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "貞光",
+      "name_kana": "さがみつ",
+      "name_translations": {
+        "en": "Sadamitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B18",
+      "latitude": 34.0394803,
+      "longitude": 134.0589108
+    },
+    {
+      "id": "jp_tokushima_station_8830766458",
+      "osm_id": 8830766458,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "江口",
+      "name_kana": "えぐち",
+      "name_translations": {
+        "en": "Eguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B20",
+      "latitude": 34.0371904,
+      "longitude": 133.9737379
+    },
+    {
+      "id": "jp_tokushima_station_8830767872",
+      "osm_id": 8830767872,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "小島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B17",
+      "latitude": 34.0503771,
+      "longitude": 134.1068271
+    },
+    {
+      "id": "jp_tokushima_station_8833668761",
+      "osm_id": 8833668761,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴吹",
+      "name_kana": "あなぶき",
+      "name_translations": {
+        "en": "Anabuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B16",
+      "latitude": 34.0560105,
+      "longitude": 134.163482
+    },
+    {
+      "id": "jp_tokushima_station_8837132923",
+      "osm_id": 8837132923,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawata"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0613981,
+      "longitude": 134.204202
+    },
+    {
+      "id": "jp_tokushima_station_8873488621",
+      "osm_id": 8873488621,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大歩危",
+      "name_kana": "おおぼけ",
+      "name_translations": {
+        "en": "Oboke"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D27",
+      "latitude": 33.8765063,
+      "longitude": 133.767185
+    },
+    {
+      "id": "jp_tokushima_station_8873501919",
+      "osm_id": 8873501919,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小歩危",
+      "name_kana": "こぼけ",
+      "name_translations": {
+        "en": "Koboke"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D26",
+      "latitude": 33.9234499,
+      "longitude": 133.7588232
+    },
+    {
+      "id": "jp_tokushima_station_8878542749",
+      "osm_id": 8878542749,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "祖谷口",
+      "name_kana": "いやぐち",
+      "name_translations": {
+        "en": "Iyaguchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D24",
+      "latitude": 33.9725028,
+      "longitude": 133.7803536
+    },
+    {
+      "id": "jp_tokushima_station_8878551220",
+      "osm_id": 8878551220,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波川口",
+      "name_kana": "あわかわぐち",
+      "name_translations": {
+        "en": "Awakawaguchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D25",
+      "latitude": 33.9637236,
+      "longitude": 133.7547154
+    },
+    {
+      "id": "jp_tokushima_station_8935793410",
+      "osm_id": 8935793410,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "箸蔵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashikura"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "JR土讃線",
+      "ref": "D20",
+      "latitude": 34.0404944,
+      "longitude": 133.8488958
+    },
+    {
+      "id": "jp_tokushima_station_9430424224",
+      "osm_id": 9430424224,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山河内",
+      "name_kana": "やまがわち",
+      "name_translations": {
+        "en": "Yamagawachi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.7150588,
+      "longitude": 134.4850963
+    },
+    {
+      "id": "jp_tokushima_station_9430424226",
+      "osm_id": 9430424226,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "辺川",
+      "name_kana": "へがわ",
+      "name_translations": {
+        "en": "Hegawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6949617,
+      "longitude": 134.4349021
+    },
+    {
+      "id": "jp_tokushima_station_9430425124",
+      "osm_id": 9430425124,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波海南",
+      "name_kana": "あわかいなん",
+      "name_translations": {
+        "en": "Awa-Kainan"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "M27",
+      "latitude": 33.606753,
+      "longitude": 134.3510181
+    },
+    {
+      "id": "jp_tokushima_station_9430425125",
+      "osm_id": 9430425125,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日和佐",
+      "name_kana": "ひわさ",
+      "name_translations": {
+        "en": "Hiwasa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.7290455,
+      "longitude": 134.5306322
+    },
+    {
+      "id": "jp_tokushima_station_9430425126",
+      "osm_id": 9430425126,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿南",
+      "name_kana": "あなん",
+      "name_translations": {
+        "en": "Anan"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9188254,
+      "longitude": 134.662387
+    },
+    {
+      "id": "jp_tokushima_station_9430425129",
+      "osm_id": 9430425129,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波富田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awa-Tomida"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0641328,
+      "longitude": 134.5557317
+    },
+    {
+      "id": "jp_tokushima_station_9430425130",
+      "osm_id": 9430425130,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波橘",
+      "name_kana": "あわたちばな",
+      "name_translations": {
+        "en": "Awa-Tachibana"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.8886046,
+      "longitude": 134.6515683
+    },
+    {
+      "id": "jp_tokushima_station_9430425131",
+      "osm_id": 9430425131,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浅川",
+      "name_kana": "あさかわ",
+      "name_translations": {
+        "en": "Asakawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6265374,
+      "longitude": 134.3586597
+    },
+    {
+      "id": "jp_tokushima_station_9430425132",
+      "osm_id": 9430425132,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鯖瀬",
+      "name_kana": "さばせ",
+      "name_translations": {
+        "en": "Sabase"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6459534,
+      "longitude": 134.3852592
+    },
+    {
+      "id": "jp_tokushima_station_9430425133",
+      "osm_id": 9430425133,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "牟岐",
+      "name_kana": "むぎ",
+      "name_translations": {
+        "en": "Mugi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6719468,
+      "longitude": 134.4180639
+    },
+    {
+      "id": "jp_tokushima_station_9430425134",
+      "osm_id": 9430425134,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新野",
+      "name_kana": "あらたの",
+      "name_translations": {
+        "en": "Aratano"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.846813,
+      "longitude": 134.6001549
+    },
+    {
+      "id": "jp_tokushima_station_9430425135",
+      "osm_id": 9430425135,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "桑野",
+      "name_kana": "くわの",
+      "name_translations": {
+        "en": "Kuwano"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.8747092,
+      "longitude": 134.6131825
+    },
+    {
+      "id": "jp_tokushima_station_9430425136",
+      "osm_id": 9430425136,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "羽ノ浦",
+      "name_kana": "はのうら",
+      "name_translations": {
+        "en": "Hanoura"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.9578922,
+      "longitude": 134.6254161
+    },
+    {
+      "id": "jp_tokushima_station_9430425138",
+      "osm_id": 9430425138,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南小松島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Komatsushima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0057309,
+      "longitude": 134.5869304
+    },
+    {
+      "id": "jp_tokushima_station_9430425139",
+      "osm_id": 9430425139,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "由岐",
+      "name_kana": "ゆき",
+      "name_translations": {
+        "en": "Yuki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.7758043,
+      "longitude": 134.5916364
+    },
+    {
+      "id": "jp_tokushima_station_9502180752",
+      "osm_id": 9502180752,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "徳島",
+      "name_kana": "とくしま",
+      "name_translations": {
+        "en": "Tokushima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T00;M00",
+      "latitude": 34.0746743,
+      "longitude": 134.5513898
+    },
+    {
+      "id": "jp_tokushima_station_9907757205",
+      "osm_id": 9907757205,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿波山川",
+      "name_kana": "あわやまかわ",
+      "name_translations": {
+        "en": "Awa-Yamakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B14",
+      "latitude": 34.0551911,
+      "longitude": 134.2340178
+    },
+    {
+      "id": "jp_tokushima_station_9909402271",
+      "osm_id": 9909402271,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿波半田",
+      "name_kana": "あわはんだ",
+      "name_translations": {
+        "en": "Awa-handa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B19",
+      "latitude": 34.0409967,
+      "longitude": 134.0363681
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_11960928329",
+      "osm_id": 11960928329,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "答島港",
+      "name_kana": "こたじまこう",
+      "name_translations": {
+        "en": "Kotajima Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8846251,
+      "longitude": 134.6544852
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_11960939902",
+      "osm_id": 11960939902,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "橘営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8772139,
+      "longitude": 134.6480271
+    },
+    {
+      "id": "jp_tokushima_station_12338374070",
+      "osm_id": 12338374070,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿波大宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awa-Ōmiya"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "T08",
+      "latitude": 34.178563,
+      "longitude": 134.4487946
+    },
+    {
+      "id": "jp_tokushima_station_12338374093",
+      "osm_id": 12338374093,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿波川端",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awa-Kawabata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T06",
+      "latitude": 34.1488775,
+      "longitude": 134.4837411
+    },
+    {
+      "id": "jp_tokushima_station_12338374094",
+      "osm_id": 12338374094,
+      "osm_type": "node",
+      "prefecture_id": "jp_tokushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "板東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bando"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T05",
+      "latitude": 34.155322,
+      "longitude": 134.5070405
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_295377949",
+      "osm_id": 295377949,
+      "osm_type": "way",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "海部観光",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0725676,
+      "longitude": 134.552244
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_314631063",
+      "osm_id": 314631063,
+      "osm_type": "way",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "徳島とくとくターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1425845,
+      "longitude": 134.5772706
+    },
+    {
+      "id": "jp_tokushima_bus_terminal_317296195",
+      "osm_id": 317296195,
+      "osm_type": "way",
+      "prefecture_id": "jp_tokushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高速バス乗り場 (JRバス,徳島バス等)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0736678,
+      "longitude": 134.5516505
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_757735682",
+      "osm_id": 757735682,
+      "osm_type": "way",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "オーシャン東九フェリー",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0539605,
+      "longitude": 134.5967309
+    },
+    {
+      "id": "jp_tokushima_ferry_terminal_1299710252",
+      "osm_id": 1299710252,
+      "osm_type": "way",
+      "prefecture_id": "jp_tokushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "徳島港のりば",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokushima Port Terminal"
+      },
+      "operator": "南海フェリー",
+      "network": null,
+      "ref": null,
+      "latitude": 34.0564289,
+      "longitude": 134.5842627
+    },
+    {
+      "id": "jp_tokushima_airport_2069301",
+      "osm_id": 2069301,
+      "osm_type": "relation",
+      "prefecture_id": "jp_tokushima",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "徳島阿波おどり空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokushima Airport"
+      },
+      "operator": "海上自衛隊",
+      "network": null,
+      "ref": "TKS",
+      "latitude": 34.1329249,
+      "longitude": 134.6063975
+    }
+  ]
+}

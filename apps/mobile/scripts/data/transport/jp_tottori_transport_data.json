@@ -1,0 +1,1498 @@
+{
+  "fetchedAt": "2025-12-24T05:55:07.295Z",
+  "prefecture_id": "jp_tottori",
+  "prefecture_name": "鳥取県",
+  "stats": {
+    "station": 73,
+    "airport": 3,
+    "ferry_terminal": 2,
+    "bus_terminal": 5,
+    "total": 83
+  },
+  "data": [
+    {
+      "id": "jp_tottori_station_265966955",
+      "osm_id": 265966955,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩美",
+      "name_kana": "いわみ",
+      "name_translations": {
+        "en": "Iwami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5743474,
+      "longitude": 134.3356145
+    },
+    {
+      "id": "jp_tottori_station_265967311",
+      "osm_id": 265967311,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamamura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5094493,
+      "longitude": 134.0507709
+    },
+    {
+      "id": "jp_tottori_station_265967497",
+      "osm_id": 265967497,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "福部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukube"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5453668,
+      "longitude": 134.2875606
+    },
+    {
+      "id": "jp_tottori_station_265967530",
+      "osm_id": 265967530,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "泊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5093299,
+      "longitude": 133.9364151
+    },
+    {
+      "id": "jp_tottori_station_265967534",
+      "osm_id": 265967534,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "東浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashihama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5996524,
+      "longitude": 134.3626707
+    },
+    {
+      "id": "jp_tottori_station_265967740",
+      "osm_id": 265967740,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōgi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5140421,
+      "longitude": 134.0822813
+    },
+    {
+      "id": "jp_tottori_station_265967742",
+      "osm_id": 265967742,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "末恒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suetsune"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5240896,
+      "longitude": 134.1361024
+    },
+    {
+      "id": "jp_tottori_station_265968081",
+      "osm_id": 265968081,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "青谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5160847,
+      "longitude": 133.9957574
+    },
+    {
+      "id": "jp_tottori_station_265968236",
+      "osm_id": 265968236,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "湖山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5135786,
+      "longitude": 134.1861452
+    },
+    {
+      "id": "jp_tottori_station_265968790",
+      "osm_id": 265968790,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤碕",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5123671,
+      "longitude": 133.6346038
+    },
+    {
+      "id": "jp_tottori_station_265968978",
+      "osm_id": 265968978,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大岩",
+      "name_kana": "おおいわえき",
+      "name_translations": {
+        "en": "Ōiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5669231,
+      "longitude": 134.3084831
+    },
+    {
+      "id": "jp_tottori_station_265969686",
+      "osm_id": 265969686,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "淀江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yodoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4569568,
+      "longitude": 133.4297461
+    },
+    {
+      "id": "jp_tottori_station_265969759",
+      "osm_id": 265969759,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "八橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yabase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5031458,
+      "longitude": 133.6734517
+    },
+    {
+      "id": "jp_tottori_station_265969834",
+      "osm_id": 265969834,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "松崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4687232,
+      "longitude": 133.9020574
+    },
+    {
+      "id": "jp_tottori_station_265969837",
+      "osm_id": 265969837,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "下北条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimohōjō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4820266,
+      "longitude": 133.8087031
+    },
+    {
+      "id": "jp_tottori_station_265970068",
+      "osm_id": 265970068,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daisenguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4849974,
+      "longitude": 133.4567678
+    },
+    {
+      "id": "jp_tottori_station_265970070",
+      "osm_id": 265970070,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "下市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5187494,
+      "longitude": 133.5662895
+    },
+    {
+      "id": "jp_tottori_station_265970072",
+      "osm_id": 265970072,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "名和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5074264,
+      "longitude": 133.4918969
+    },
+    {
+      "id": "jp_tottori_station_265970074",
+      "osm_id": 265970074,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦安",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urayasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4996863,
+      "longitude": 133.6933811
+    },
+    {
+      "id": "jp_tottori_station_265970075",
+      "osm_id": 265970075,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "中山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakayamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5207061,
+      "longitude": 133.5902338
+    },
+    {
+      "id": "jp_tottori_station_265970097",
+      "osm_id": 265970097,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "由良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.490244,
+      "longitude": 133.7544842
+    },
+    {
+      "id": "jp_tottori_station_265970099",
+      "osm_id": 265970099,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "東山公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashiyamakōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4308297,
+      "longitude": 133.3516092
+    },
+    {
+      "id": "jp_tottori_station_265970164",
+      "osm_id": 265970164,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "御来屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikuriya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5121754,
+      "longitude": 133.5029816
+    },
+    {
+      "id": "jp_tottori_station_266088570",
+      "osm_id": 266088570,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "岸本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kishimoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3874629,
+      "longitude": 133.4096642
+    },
+    {
+      "id": "jp_tottori_station_266088913",
+      "osm_id": 266088913,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "上菅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamisuge"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1937828,
+      "longitude": 133.3415741
+    },
+    {
+      "id": "jp_tottori_station_266088938",
+      "osm_id": 266088938,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "根雨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Neu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.24162,
+      "longitude": 133.4420322
+    },
+    {
+      "id": "jp_tottori_station_266089170",
+      "osm_id": 266089170,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "武庫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Muko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.267501,
+      "longitude": 133.4764904
+    },
+    {
+      "id": "jp_tottori_station_266090534",
+      "osm_id": 266090534,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "生山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shōyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1710725,
+      "longitude": 133.3220379
+    },
+    {
+      "id": "jp_tottori_station_266090810",
+      "osm_id": 266090810,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "江尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2832987,
+      "longitude": 133.4849214
+    },
+    {
+      "id": "jp_tottori_station_266108267",
+      "osm_id": 266108267,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurosaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2069959,
+      "longitude": 133.3837022
+    },
+    {
+      "id": "jp_tottori_station_266108977",
+      "osm_id": 266108977,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "伯耆溝口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hoki-Mizoguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3482021,
+      "longitude": 133.4354226
+    },
+    {
+      "id": "jp_tottori_station_266110961",
+      "osm_id": 266110961,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "上石見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamiiwami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1125466,
+      "longitude": 133.3512379
+    },
+    {
+      "id": "jp_tottori_station_266921280",
+      "osm_id": 266921280,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "米子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yonago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4233042,
+      "longitude": 133.3367834
+    },
+    {
+      "id": "jp_tottori_station_266921295",
+      "osm_id": 266921295,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "中浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5068911,
+      "longitude": 133.2447123
+    },
+    {
+      "id": "jp_tottori_station_266921300",
+      "osm_id": 266921300,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士見町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujimichō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4348286,
+      "longitude": 133.3363951
+    },
+    {
+      "id": "jp_tottori_station_266921378",
+      "osm_id": 266921378,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大篠津町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōshinozuchō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4895238,
+      "longitude": 133.2556718
+    },
+    {
+      "id": "jp_tottori_station_266921404",
+      "osm_id": 266921404,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "弓ヶ浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yumigahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4670082,
+      "longitude": 133.2883828
+    },
+    {
+      "id": "jp_tottori_station_266921426",
+      "osm_id": 266921426,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "河崎口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawasakiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4567486,
+      "longitude": 133.3054878
+    },
+    {
+      "id": "jp_tottori_station_266921485",
+      "osm_id": 266921485,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "高松町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamatsuchō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5150417,
+      "longitude": 133.2400617
+    },
+    {
+      "id": "jp_tottori_station_266921487",
+      "osm_id": 266921487,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "和田浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wadahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4807071,
+      "longitude": 133.2656653
+    },
+    {
+      "id": "jp_tottori_station_266921489",
+      "osm_id": 266921489,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "余子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amariko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5210938,
+      "longitude": 133.2366182
+    },
+    {
+      "id": "jp_tottori_station_266921493",
+      "osm_id": 266921493,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "三本松口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sambommatsuguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.44626,
+      "longitude": 133.3228353
+    },
+    {
+      "id": "jp_tottori_station_266921557",
+      "osm_id": 266921557,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Agarimichi"
+      },
+      "operator": "JR 西日本旅客鉄道",
+      "network": "境線",
+      "ref": null,
+      "latitude": 35.5314686,
+      "longitude": 133.2305889
+    },
+    {
+      "id": "jp_tottori_station_266921558",
+      "osm_id": 266921558,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬場崎町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Babasakichō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5385539,
+      "longitude": 133.2264952
+    },
+    {
+      "id": "jp_tottori_station_266921574",
+      "osm_id": 266921574,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "境港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaiminato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5451501,
+      "longitude": 133.2226806
+    },
+    {
+      "id": "jp_tottori_station_267059422",
+      "osm_id": 267059422,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "因幡社",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inaba-Yashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3124649,
+      "longitude": 134.1966116
+    },
+    {
+      "id": "jp_tottori_station_267059424",
+      "osm_id": 267059424,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津ノ井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsunoi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4612754,
+      "longitude": 134.2486406
+    },
+    {
+      "id": "jp_tottori_station_267059427",
+      "osm_id": 267059427,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鷹狩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takagari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3542425,
+      "longitude": 134.206226
+    },
+    {
+      "id": "jp_tottori_station_267059656",
+      "osm_id": 267059656,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "土師",
+      "name_kana": "はじ",
+      "name_translations": {
+        "en": "Haji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2328134,
+      "longitude": 134.2257895
+    },
+    {
+      "id": "jp_tottori_station_267059657",
+      "osm_id": 267059657,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "河原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3975949,
+      "longitude": 134.2230178
+    },
+    {
+      "id": "jp_tottori_station_267059727",
+      "osm_id": 267059727,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "用瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mochigase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3434833,
+      "longitude": 134.2048976
+    },
+    {
+      "id": "jp_tottori_station_267059958",
+      "osm_id": 267059958,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "東郡家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Koge"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.428834,
+      "longitude": 134.2600124
+    },
+    {
+      "id": "jp_tottori_station_267060087",
+      "osm_id": 267060087,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "那岐",
+      "name_kana": "なぎ",
+      "name_translations": {
+        "en": "Nagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2138216,
+      "longitude": 134.2103877
+    },
+    {
+      "id": "jp_tottori_station_267060736",
+      "osm_id": 267060736,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "国英",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kunifusa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3730124,
+      "longitude": 134.217782
+    },
+    {
+      "id": "jp_tottori_ferry_terminal_1012053060",
+      "osm_id": 1012053060,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "境港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaiminato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5453849,
+      "longitude": 133.222883
+    },
+    {
+      "id": "jp_tottori_station_1562495004",
+      "osm_id": 1562495004,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "米子空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yonago Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5019301,
+      "longitude": 133.2478187
+    },
+    {
+      "id": "jp_tottori_station_1575760121",
+      "osm_id": 1575760121,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "博労町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bakurōmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4310576,
+      "longitude": 133.3401619
+    },
+    {
+      "id": "jp_tottori_station_1575760258",
+      "osm_id": 1575760258,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "後藤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gotō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4395558,
+      "longitude": 133.3315467
+    },
+    {
+      "id": "jp_tottori_bus_terminal_1954333297",
+      "osm_id": 1954333297,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "江府町営バス小原駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3012658,
+      "longitude": 133.5303317
+    },
+    {
+      "id": "jp_tottori_bus_terminal_1956073408",
+      "osm_id": 1956073408,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バス停",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.415912,
+      "longitude": 133.476895
+    },
+    {
+      "id": "jp_tottori_bus_terminal_2411869110",
+      "osm_id": 2411869110,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "市ノ瀬橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2907593,
+      "longitude": 134.2232086
+    },
+    {
+      "id": "jp_tottori_station_2565897659",
+      "osm_id": 2565897659,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "倉吉",
+      "name_kana": "くらよし",
+      "name_translations": {
+        "en": "Kurayoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4547913,
+      "longitude": 133.849401
+    },
+    {
+      "id": "jp_tottori_station_3791318501",
+      "osm_id": 3791318501,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "智頭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2650948,
+      "longitude": 134.2255826
+    },
+    {
+      "id": "jp_tottori_station_3792537971",
+      "osm_id": 3792537971,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "恋山形",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koi-Yamagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2560005,
+      "longitude": 134.2789796
+    },
+    {
+      "id": "jp_tottori_station_3801798988",
+      "osm_id": 3801798988,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "山郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamasato"
+      },
+      "operator": "智頭急行",
+      "network": "智頭急行智頭線",
+      "ref": null,
+      "latitude": 35.2323406,
+      "longitude": 134.2891718
+    },
+    {
+      "id": "jp_tottori_bus_terminal_4425251083",
+      "osm_id": 4425251083,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高速バス停",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3558436,
+      "longitude": 134.197616
+    },
+    {
+      "id": "jp_tottori_station_6054838547",
+      "osm_id": 6054838547,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳥取",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tottori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4939974,
+      "longitude": 134.2259403
+    },
+    {
+      "id": "jp_tottori_station_6375884470",
+      "osm_id": 6375884470,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "伯耆大山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōki-Daisen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4297178,
+      "longitude": 133.3835506
+    },
+    {
+      "id": "jp_tottori_station_8224874596",
+      "osm_id": 8224874596,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "郡家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōge"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4132408,
+      "longitude": 134.2511143
+    },
+    {
+      "id": "jp_tottori_station_8244384953",
+      "osm_id": 8244384953,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "丹比",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tampi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3608285,
+      "longitude": 134.3562145
+    },
+    {
+      "id": "jp_tottori_station_8244384954",
+      "osm_id": 8244384954,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokumaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3645152,
+      "longitude": 134.3354817
+    },
+    {
+      "id": "jp_tottori_station_8244384956",
+      "osm_id": 8244384956,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "安部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Abe"
+      },
+      "operator": "若桜鉄道",
+      "network": "若桜線",
+      "ref": null,
+      "latitude": 35.3747004,
+      "longitude": 134.2913462
+    },
+    {
+      "id": "jp_tottori_station_8244384957",
+      "osm_id": 8244384957,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "隼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayabusa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3887486,
+      "longitude": 134.2699343
+    },
+    {
+      "id": "jp_tottori_station_8244384958",
+      "osm_id": 8244384958,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "因幡船岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inaba-Funaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.395103,
+      "longitude": 134.2493269
+    },
+    {
+      "id": "jp_tottori_station_8244384959",
+      "osm_id": 8244384959,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "八頭高校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yazu Kōkō-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4054864,
+      "longitude": 134.2463154
+    },
+    {
+      "id": "jp_tottori_station_8244384960",
+      "osm_id": 8244384960,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "若桜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3451861,
+      "longitude": 134.398414
+    },
+    {
+      "id": "jp_tottori_station_8244384961",
+      "osm_id": 8244384961,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "八東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hattō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3636297,
+      "longitude": 134.3171504
+    },
+    {
+      "id": "jp_tottori_station_12903211842",
+      "osm_id": 12903211842,
+      "osm_type": "node",
+      "prefecture_id": "jp_tottori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳥取大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tottoridaigaku-Mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5181173,
+      "longitude": 134.1742907
+    },
+    {
+      "id": "jp_tottori_airport_57010868",
+      "osm_id": 57010868,
+      "osm_type": "way",
+      "prefecture_id": "jp_tottori",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "米子鬼太郎空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miho Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "YGJ",
+      "latitude": 35.493345,
+      "longitude": 133.2389089
+    },
+    {
+      "id": "jp_tottori_airport_57010905",
+      "osm_id": 57010905,
+      "osm_type": "way",
+      "prefecture_id": "jp_tottori",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "鳥取砂丘コナン空港",
+      "name_kana": "とっとりさきゅうこなんくうこう",
+      "name_translations": {
+        "en": "Tottori Airport"
+      },
+      "operator": "鳥取空港管理事務所",
+      "network": null,
+      "ref": "TTJ",
+      "latitude": 35.5287419,
+      "longitude": 134.1659216
+    },
+    {
+      "id": "jp_tottori_bus_terminal_413733206",
+      "osm_id": 413733206,
+      "osm_type": "way",
+      "prefecture_id": "jp_tottori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "鳥取駅バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4949419,
+      "longitude": 134.2245459
+    },
+    {
+      "id": "jp_tottori_airport_901855529",
+      "osm_id": 901855529,
+      "osm_type": "way",
+      "prefecture_id": "jp_tottori",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "すいか空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suika Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4396479,
+      "longitude": 133.7044692
+    },
+    {
+      "id": "jp_tottori_ferry_terminal_1037006716",
+      "osm_id": 1037006716,
+      "osm_type": "way",
+      "prefecture_id": "jp_tottori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "境港国際旅客ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaiminato Port International Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5472704,
+      "longitude": 133.252771
+    }
+  ]
+}

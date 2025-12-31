@@ -1,0 +1,2642 @@
+{
+  "fetchedAt": "2025-12-24T05:55:21.943Z",
+  "prefecture_id": "jp_shimane",
+  "prefecture_name": "島根県",
+  "stats": {
+    "station": 118,
+    "airport": 3,
+    "ferry_terminal": 18,
+    "bus_terminal": 10,
+    "total": 149
+  },
+  "data": [
+    {
+      "id": "jp_shimane_station_265968755",
+      "osm_id": 265968755,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "安来",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasugi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4280643,
+      "longitude": 133.259255
+    },
+    {
+      "id": "jp_shimane_station_265970277",
+      "osm_id": 265970277,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲神西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo-Jinzai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3249535,
+      "longitude": 132.7020052
+    },
+    {
+      "id": "jp_shimane_station_265970361",
+      "osm_id": 265970361,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "西出雲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Izumo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3348391,
+      "longitude": 132.7216853
+    },
+    {
+      "id": "jp_shimane_station_265970366",
+      "osm_id": 265970366,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "jr",
+      "name": "荘原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shōbara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR山陰線",
+      "ref": null,
+      "latitude": 35.3935659,
+      "longitude": 132.8682039
+    },
+    {
+      "id": "jp_shimane_station_265970368",
+      "osm_id": 265970368,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "乃木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4459064,
+      "longitude": 133.0485881
+    },
+    {
+      "id": "jp_shimane_station_265970626",
+      "osm_id": 265970626,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "松江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4640129,
+      "longitude": 133.06387
+    },
+    {
+      "id": "jp_shimane_station_265970986",
+      "osm_id": 265970986,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "江南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōnan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3152617,
+      "longitude": 132.6832073
+    },
+    {
+      "id": "jp_shimane_station_265970989",
+      "osm_id": 265970989,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "宍道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.406757,
+      "longitude": 132.9088655
+    },
+    {
+      "id": "jp_shimane_station_265971146",
+      "osm_id": 265971146,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "小田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2845919,
+      "longitude": 132.6301142
+    },
+    {
+      "id": "jp_shimane_station_265971350",
+      "osm_id": 265971350,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4317977,
+      "longitude": 133.2073805
+    },
+    {
+      "id": "jp_shimane_station_265971426",
+      "osm_id": 265971426,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "来待",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kimachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4206764,
+      "longitude": 132.9517228
+    },
+    {
+      "id": "jp_shimane_station_265971516",
+      "osm_id": 265971516,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "東松江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Matsue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.445491,
+      "longitude": 133.128456
+    },
+    {
+      "id": "jp_shimane_station_265971759",
+      "osm_id": 265971759,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "田儀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2751757,
+      "longitude": 132.5897571
+    },
+    {
+      "id": "jp_shimane_station_265971856",
+      "osm_id": 265971856,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "直江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3836887,
+      "longitude": 132.8076789
+    },
+    {
+      "id": "jp_shimane_station_265972058",
+      "osm_id": 265972058,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuromatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0565276,
+      "longitude": 132.3133153
+    },
+    {
+      "id": "jp_shimane_station_265995256",
+      "osm_id": 265995256,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "揖屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4279397,
+      "longitude": 133.1494152
+    },
+    {
+      "id": "jp_shimane_station_265995650",
+      "osm_id": 265995650,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "波根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2401325,
+      "longitude": 132.5260182
+    },
+    {
+      "id": "jp_shimane_station_265996520",
+      "osm_id": 265996520,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "久手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kute"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2294547,
+      "longitude": 132.5082435
+    },
+    {
+      "id": "jp_shimane_station_265996531",
+      "osm_id": 265996531,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁万",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1510621,
+      "longitude": 132.4035483
+    },
+    {
+      "id": "jp_shimane_station_265996543",
+      "osm_id": 265996543,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "五十猛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isotake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1926455,
+      "longitude": 132.4401876
+    },
+    {
+      "id": "jp_shimane_station_265996760",
+      "osm_id": 265996760,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見津田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Tsuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7227048,
+      "longitude": 131.8647786
+    },
+    {
+      "id": "jp_shimane_station_265996923",
+      "osm_id": 265996923,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡見",
+      "name_kana": "おかみ",
+      "name_translations": {
+        "en": "Okami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7718592,
+      "longitude": 131.9126844
+    },
+    {
+      "id": "jp_shimane_station_265997159",
+      "osm_id": 265997159,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "周布",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sufu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8583757,
+      "longitude": 132.0174234
+    },
+    {
+      "id": "jp_shimane_station_265997276",
+      "osm_id": 265997276,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "大田市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōdashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2010087,
+      "longitude": 132.4995041
+    },
+    {
+      "id": "jp_shimane_station_266026234",
+      "osm_id": 266026234,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "浅利",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0370219,
+      "longitude": 132.2748845
+    },
+    {
+      "id": "jp_shimane_station_266026376",
+      "osm_id": 266026376,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "久代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kushiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9496285,
+      "longitude": 132.1392853
+    },
+    {
+      "id": "jp_shimane_station_266026708",
+      "osm_id": 266026708,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "静間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shizuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1954073,
+      "longitude": 132.4680319
+    },
+    {
+      "id": "jp_shimane_station_266027365",
+      "osm_id": 266027365,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "折居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Orii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8264137,
+      "longitude": 131.9868236
+    },
+    {
+      "id": "jp_shimane_station_266027372",
+      "osm_id": 266027372,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見福光",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Fukumitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0766789,
+      "longitude": 132.3291448
+    },
+    {
+      "id": "jp_shimane_station_266027386",
+      "osm_id": 266027386,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸田小浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Todakohama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6731016,
+      "longitude": 131.7383649
+    },
+    {
+      "id": "jp_shimane_station_266027978",
+      "osm_id": 266027978,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "鎌手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7517803,
+      "longitude": 131.8784934
+    },
+    {
+      "id": "jp_shimane_station_266029757",
+      "osm_id": 266029757,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "都野津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsunozu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9896909,
+      "longitude": 132.1875155
+    },
+    {
+      "id": "jp_shimane_station_266029815",
+      "osm_id": 266029815,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yusato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1064397,
+      "longitude": 132.3755506
+    },
+    {
+      "id": "jp_shimane_station_266029820",
+      "osm_id": 266029820,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1285664,
+      "longitude": 132.3881677
+    },
+    {
+      "id": "jp_shimane_station_266031564",
+      "osm_id": 266031564,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iinoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6688193,
+      "longitude": 131.7021649
+    },
+    {
+      "id": "jp_shimane_station_266063809",
+      "osm_id": 266063809,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "本俣賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Honmataga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6525586,
+      "longitude": 131.8269928
+    },
+    {
+      "id": "jp_shimane_station_266063999",
+      "osm_id": 266063999,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "青野山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aonoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.481042,
+      "longitude": 131.802836
+    },
+    {
+      "id": "jp_shimane_station_266064370",
+      "osm_id": 266064370,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "津和野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuwano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4731443,
+      "longitude": 131.774024
+    },
+    {
+      "id": "jp_shimane_station_266064887",
+      "osm_id": 266064887,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "青原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5602093,
+      "longitude": 131.8007579
+    },
+    {
+      "id": "jp_shimane_station_266078129",
+      "osm_id": 266078129,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見松原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Matsubara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9931893,
+      "longitude": 132.6150966
+    },
+    {
+      "id": "jp_shimane_station_266078134",
+      "osm_id": 266078134,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見簗瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Yanaze"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0424097,
+      "longitude": 132.5658669
+    },
+    {
+      "id": "jp_shimane_station_266078140",
+      "osm_id": 266078140,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見都賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Tsuga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9566074,
+      "longitude": 132.6427262
+    },
+    {
+      "id": "jp_shimane_station_266078144",
+      "osm_id": 266078144,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "明塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akatsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0492512,
+      "longitude": 132.583902
+    },
+    {
+      "id": "jp_shimane_station_266078477",
+      "osm_id": 266078477,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "沢谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sawadani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0578234,
+      "longitude": 132.6350442
+    },
+    {
+      "id": "jp_shimane_station_266078479",
+      "osm_id": 266078479,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "潮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0156311,
+      "longitude": 132.6323353
+    },
+    {
+      "id": "jp_shimane_station_266079048",
+      "osm_id": 266079048,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0598737,
+      "longitude": 132.5994329
+    },
+    {
+      "id": "jp_shimane_station_266079050",
+      "osm_id": 266079050,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "粕淵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasubuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.072514,
+      "longitude": 132.593449
+    },
+    {
+      "id": "jp_shimane_station_266079313",
+      "osm_id": 266079313,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "江平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gobira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.875702,
+      "longitude": 132.702179
+    },
+    {
+      "id": "jp_shimane_station_266079340",
+      "osm_id": 266079340,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "作木口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakugiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.860656,
+      "longitude": 132.706725
+    },
+    {
+      "id": "jp_shimane_station_266079582",
+      "osm_id": 266079582,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇都井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.906668,
+      "longitude": 132.629625
+    },
+    {
+      "id": "jp_shimane_station_266081128",
+      "osm_id": 266081128,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9630679,
+      "longitude": 132.4456067
+    },
+    {
+      "id": "jp_shimane_station_266081256",
+      "osm_id": 266081256,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "千金",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chigane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0017784,
+      "longitude": 132.2497367
+    },
+    {
+      "id": "jp_shimane_station_266081268",
+      "osm_id": 266081268,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "木路原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kirohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9970918,
+      "longitude": 132.5082627
+    },
+    {
+      "id": "jp_shimane_station_266083948",
+      "osm_id": 266083948,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見川本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Kawamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9914164,
+      "longitude": 132.4926553
+    },
+    {
+      "id": "jp_shimane_station_266084053",
+      "osm_id": 266084053,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "竹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Take"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0129863,
+      "longitude": 132.5300466
+    },
+    {
+      "id": "jp_shimane_station_266084377",
+      "osm_id": 266084377,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見川越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Kawagoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9498247,
+      "longitude": 132.4150967
+    },
+    {
+      "id": "jp_shimane_station_266084437",
+      "osm_id": 266084437,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "川戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9598687,
+      "longitude": 132.3334492
+    },
+    {
+      "id": "jp_shimane_station_266084664",
+      "osm_id": 266084664,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "川平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawahira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9968834,
+      "longitude": 132.2849596
+    },
+    {
+      "id": "jp_shimane_station_266084761",
+      "osm_id": 266084761,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "乙原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ombara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.026529,
+      "longitude": 132.54764
+    },
+    {
+      "id": "jp_shimane_station_266085113",
+      "osm_id": 266085113,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "江津本町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gotsuhommachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.006865,
+      "longitude": 132.23051
+    },
+    {
+      "id": "jp_shimane_station_266085118",
+      "osm_id": 266085118,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "田津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9517089,
+      "longitude": 132.3854045
+    },
+    {
+      "id": "jp_shimane_station_266913453",
+      "osm_id": 266913453,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲三成",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo-Minari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1964823,
+      "longitude": 133.00992
+    },
+    {
+      "id": "jp_shimane_station_266914070",
+      "osm_id": 266914070,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "下久野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimokuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2648144,
+      "longitude": 132.9922714
+    },
+    {
+      "id": "jp_shimane_station_266914178",
+      "osm_id": 266914178,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲八代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo-Yashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2272687,
+      "longitude": 133.0014627
+    },
+    {
+      "id": "jp_shimane_station_266914180",
+      "osm_id": 266914180,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲横田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo-Yokota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.177469,
+      "longitude": 133.0921583
+    },
+    {
+      "id": "jp_shimane_station_266914183",
+      "osm_id": 266914183,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "幡屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hataya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3348104,
+      "longitude": 132.9393875
+    },
+    {
+      "id": "jp_shimane_station_266914403",
+      "osm_id": 266914403,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "亀嵩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamedake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.206545,
+      "longitude": 133.05331
+    },
+    {
+      "id": "jp_shimane_station_266914465",
+      "osm_id": 266914465,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "南宍道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Shinji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.380054,
+      "longitude": 132.917843
+    },
+    {
+      "id": "jp_shimane_station_266914468",
+      "osm_id": 266914468,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "日登",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hinobori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2764078,
+      "longitude": 132.931235
+    },
+    {
+      "id": "jp_shimane_station_266915272",
+      "osm_id": 266915272,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "南大東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Daitō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3079602,
+      "longitude": 132.9283746
+    },
+    {
+      "id": "jp_shimane_station_266915398",
+      "osm_id": 266915398,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "三井野原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miinohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0912688,
+      "longitude": 133.1162723
+    },
+    {
+      "id": "jp_shimane_station_266915701",
+      "osm_id": 266915701,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲坂根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo-Sakane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1024693,
+      "longitude": 133.1205013
+    },
+    {
+      "id": "jp_shimane_station_266915846",
+      "osm_id": 266915846,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "八川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.149251,
+      "longitude": 133.089616
+    },
+    {
+      "id": "jp_shimane_station_335653116",
+      "osm_id": 335653116,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲大社前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo Taisha-mae"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車大社線",
+      "ref": null,
+      "latitude": 35.3934708,
+      "longitude": 132.6872506
+    },
+    {
+      "id": "jp_shimane_station_335653434",
+      "osm_id": 335653434,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "電鉄出雲市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dentetsu-Izumoshi"
+      },
+      "operator": "一畑電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3611716,
+      "longitude": 132.7583731
+    },
+    {
+      "id": "jp_shimane_station_335654931",
+      "osm_id": 335654931,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "松江しんじ湖温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsue-Shinjiko-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4672774,
+      "longitude": 133.0458458
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_1562515522",
+      "osm_id": 1562515522,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "堀川遊覧船 大手前広場乗船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4737806,
+      "longitude": 133.0527431
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_4311266780",
+      "osm_id": 4311266780,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "内航船いそかぜ乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "隠岐観光",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1073082,
+      "longitude": 133.0421124
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_4311266781",
+      "osm_id": 4311266781,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "高速船レインボージェット乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "隠岐汽船",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1072822,
+      "longitude": 133.043269
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_4311266782",
+      "osm_id": 4311266782,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "隠岐汽船フェリー乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1078165,
+      "longitude": 133.0417934
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_4311266783",
+      "osm_id": 4311266783,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "内航船フェリーどうぜん乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1088267,
+      "longitude": 133.0411866
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_4759071529",
+      "osm_id": 4759071529,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "堀川遊覧船 ふれあい広場乗船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4782566,
+      "longitude": 133.0456147
+    },
+    {
+      "id": "jp_shimane_bus_terminal_5434608684",
+      "osm_id": 5434608684,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "津和野バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4679577,
+      "longitude": 131.7724587
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_5657047377",
+      "osm_id": 5657047377,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "フェリーどうぜん乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1054527,
+      "longitude": 133.0764842
+    },
+    {
+      "id": "jp_shimane_station_5729648683",
+      "osm_id": 5729648683,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲大東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo-Daitō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3254768,
+      "longitude": 132.9579806
+    },
+    {
+      "id": "jp_shimane_station_6007414238",
+      "osm_id": 6007414238,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉造温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamatsukuri-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.43084,
+      "longitude": 133.0121881
+    },
+    {
+      "id": "jp_shimane_station_6050807473",
+      "osm_id": 6050807473,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "下府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimokō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9272248,
+      "longitude": 132.1105635
+    },
+    {
+      "id": "jp_shimane_station_6373837978",
+      "osm_id": 6373837978,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "一畑口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichibataguchi"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4644876,
+      "longitude": 132.8827393
+    },
+    {
+      "id": "jp_shimane_station_6379761110",
+      "osm_id": 6379761110,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "益田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6782113,
+      "longitude": 131.8392389
+    },
+    {
+      "id": "jp_shimane_station_6379763068",
+      "osm_id": 6379763068,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "口羽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuchiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8847846,
+      "longitude": 132.6709601
+    },
+    {
+      "id": "jp_shimane_station_7255210721",
+      "osm_id": 7255210721,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "西浜田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Hamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8693794,
+      "longitude": 132.0508374
+    },
+    {
+      "id": "jp_shimane_station_7276273488",
+      "osm_id": 7276273488,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "敬川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uyagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9778608,
+      "longitude": 132.1740527
+    },
+    {
+      "id": "jp_shimane_station_8202335920",
+      "osm_id": 8202335920,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊野灘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inonada"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4612773,
+      "longitude": 132.9007718
+    },
+    {
+      "id": "jp_shimane_station_8207630290",
+      "osm_id": 8207630290,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜山公園北口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamayamakoen-Kitaguchi"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車大社線",
+      "ref": null,
+      "latitude": 35.3891773,
+      "longitude": 132.7080698
+    },
+    {
+      "id": "jp_shimane_station_8207630291",
+      "osm_id": 8207630291,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "遥堪",
+      "name_kana": "ようかん",
+      "name_translations": {
+        "en": "Youkan"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車大社線",
+      "ref": null,
+      "latitude": 35.3892905,
+      "longitude": 132.7258529
+    },
+    {
+      "id": "jp_shimane_station_8207630292",
+      "osm_id": 8207630292,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "高浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takahama"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車大社線",
+      "ref": null,
+      "latitude": 35.390814,
+      "longitude": 132.7466447
+    },
+    {
+      "id": "jp_shimane_station_8207630293",
+      "osm_id": 8207630293,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "川跡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawato"
+      },
+      "operator": "一畑電車",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3950685,
+      "longitude": 132.7762744
+    },
+    {
+      "id": "jp_shimane_station_8207956840",
+      "osm_id": 8207956840,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "大津町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ozu"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.3692038,
+      "longitude": 132.7744129
+    },
+    {
+      "id": "jp_shimane_station_8208100507",
+      "osm_id": 8208100507,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "布崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nunozaki"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4502281,
+      "longitude": 132.8548302
+    },
+    {
+      "id": "jp_shimane_station_8208100508",
+      "osm_id": 8208100508,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "雲州平田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unshu-Hirata"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4321765,
+      "longitude": 132.823728
+    },
+    {
+      "id": "jp_shimane_station_8208110426",
+      "osm_id": 8208110426,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝日ヶ丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahigaoka"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4809028,
+      "longitude": 132.9877742
+    },
+    {
+      "id": "jp_shimane_station_8208110427",
+      "osm_id": 8208110427,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "長江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagae"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4800339,
+      "longitude": 132.9739773
+    },
+    {
+      "id": "jp_shimane_station_8208110428",
+      "osm_id": 8208110428,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "松江フォーゲルパーク",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsue Vogel Park"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.47495,
+      "longitude": 132.943726
+    },
+    {
+      "id": "jp_shimane_station_8208110429",
+      "osm_id": 8208110429,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "高ノ宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takanomiya"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4718996,
+      "longitude": 132.9305121
+    },
+    {
+      "id": "jp_shimane_station_8208110430",
+      "osm_id": 8208110430,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sono"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4564086,
+      "longitude": 132.8683425
+    },
+    {
+      "id": "jp_shimane_station_8208110431",
+      "osm_id": 8208110431,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "湖遊館新駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koyukanshin-Eki"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4524589,
+      "longitude": 132.8618362
+    },
+    {
+      "id": "jp_shimane_station_8208111828",
+      "osm_id": 8208111828,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "旅伏",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tabushi"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4213806,
+      "longitude": 132.8071728
+    },
+    {
+      "id": "jp_shimane_station_8208111829",
+      "osm_id": 8208111829,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "美談",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midami"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4126371,
+      "longitude": 132.7981914
+    },
+    {
+      "id": "jp_shimane_station_8208111830",
+      "osm_id": 8208111830,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "大寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otera"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.404302,
+      "longitude": 132.7871346
+    },
+    {
+      "id": "jp_shimane_station_8208111831",
+      "osm_id": 8208111831,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "武志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takeshi"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.3881392,
+      "longitude": 132.7732502
+    },
+    {
+      "id": "jp_shimane_station_8208111832",
+      "osm_id": 8208111832,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲科学館パークタウン前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo Science Center-Parktown"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.362853,
+      "longitude": 132.7661202
+    },
+    {
+      "id": "jp_shimane_station_8208111836",
+      "osm_id": 8208111836,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "松江イングリッシュガーデン前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsue English Garden-Mae"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4774418,
+      "longitude": 133.0038431
+    },
+    {
+      "id": "jp_shimane_station_8208111838",
+      "osm_id": 8208111838,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "秋鹿町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aikamachi"
+      },
+      "operator": "北松江線",
+      "network": "北松江線",
+      "ref": null,
+      "latitude": 35.4771387,
+      "longitude": 132.9565188
+    },
+    {
+      "id": "jp_shimane_station_8208111843",
+      "osm_id": 8208111843,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "津ノ森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsunomori"
+      },
+      "operator": "一畑電車",
+      "network": "一畑電車北松江線",
+      "ref": null,
+      "latitude": 35.4663674,
+      "longitude": 132.9187158
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_9895110216",
+      "osm_id": 9895110216,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "堀川遊覧船 カラコロ広場乗船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.46993,
+      "longitude": 133.0543661
+    },
+    {
+      "id": "jp_shimane_station_9897487807",
+      "osm_id": 9897487807,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "旧出雲広瀬駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3632323,
+      "longitude": 133.1738072
+    },
+    {
+      "id": "jp_shimane_station_9925791508",
+      "osm_id": 9925791508,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "東青原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Aohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5850882,
+      "longitude": 131.7973982
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_10064368684",
+      "osm_id": 10064368684,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "七類港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5711733,
+      "longitude": 133.2291744
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_10083311517",
+      "osm_id": 10083311517,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "潜戸観光遊覧船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5649999,
+      "longitude": 133.0576407
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_10104446438",
+      "osm_id": 10104446438,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宍道湖観光遊覧船 第2乗船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4670347,
+      "longitude": 133.0613908
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_10104446439",
+      "osm_id": 10104446439,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宍道湖観光遊覧船 第1乗船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4649533,
+      "longitude": 133.0716689
+    },
+    {
+      "id": "jp_shimane_station_11964351860",
+      "osm_id": 11964351860,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "加茂中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamonaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3446436,
+      "longitude": 132.9109254
+    },
+    {
+      "id": "jp_shimane_station_12903211876",
+      "osm_id": 12903211876,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "出雲市",
+      "name_kana": "いずもし",
+      "name_translations": {
+        "en": "Izumoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3607587,
+      "longitude": 132.7566624
+    },
+    {
+      "id": "jp_shimane_station_12903211889",
+      "osm_id": 12903211889,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "温泉津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunotsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0913125,
+      "longitude": 132.3507151
+    },
+    {
+      "id": "jp_shimane_station_12903211891",
+      "osm_id": 12903211891,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "江津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gotsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.012803,
+      "longitude": 132.2231899
+    },
+    {
+      "id": "jp_shimane_station_12903211892",
+      "osm_id": 12903211892,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "波子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9644156,
+      "longitude": 132.1512855
+    },
+    {
+      "id": "jp_shimane_station_12903211895",
+      "osm_id": 12903211895,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9027291,
+      "longitude": 132.0887323
+    },
+    {
+      "id": "jp_shimane_station_12903211898",
+      "osm_id": 12903211898,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "三保三隅",
+      "name_kana": "みほみすみ",
+      "name_translations": {
+        "en": "Miho-Misumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7958838,
+      "longitude": 131.9561286
+    },
+    {
+      "id": "jp_shimane_station_12903226313",
+      "osm_id": 12903226313,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見横田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami-Yokota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6185332,
+      "longitude": 131.8050505
+    },
+    {
+      "id": "jp_shimane_station_12903226323",
+      "osm_id": 12903226323,
+      "osm_type": "node",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "private",
+      "name": "日原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nichihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5327796,
+      "longitude": 131.8318404
+    },
+    {
+      "id": "jp_shimane_airport_57010769",
+      "osm_id": 57010769,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "隠岐空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oki Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "OKI",
+      "latitude": 36.1787124,
+      "longitude": 133.3232425
+    },
+    {
+      "id": "jp_shimane_airport_57010831",
+      "osm_id": 57010831,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "石見空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "IWJ",
+      "latitude": 34.6764077,
+      "longitude": 131.7909755
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_431893262",
+      "osm_id": 431893262,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "別府港第1ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "島根県",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1076766,
+      "longitude": 133.0415553
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_431893264",
+      "osm_id": 431893264,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "別府港第2ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "島根県",
+      "network": null,
+      "ref": null,
+      "latitude": 36.107411,
+      "longitude": 133.0418933
+    },
+    {
+      "id": "jp_shimane_bus_terminal_647119177",
+      "osm_id": 647119177,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八雲バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4125154,
+      "longitude": 133.0970328
+    },
+    {
+      "id": "jp_shimane_bus_terminal_666072463",
+      "osm_id": 666072463,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "一畑 山の駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4930799,
+      "longitude": 132.8740989
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_670996075",
+      "osm_id": 670996075,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "西郷港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saigo Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2034607,
+      "longitude": 133.3350804
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_789152252",
+      "osm_id": 789152252,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "来居港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurii Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0249446,
+      "longitude": 133.0393975
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_789153345",
+      "osm_id": 789153345,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "内航船待合室",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0243478,
+      "longitude": 133.0400338
+    },
+    {
+      "id": "jp_shimane_bus_terminal_1078951549",
+      "osm_id": 1078951549,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "一畑バス　玉造案内所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4141805,
+      "longitude": 133.0099203
+    },
+    {
+      "id": "jp_shimane_bus_terminal_1079769987",
+      "osm_id": 1079769987,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "広瀬バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3632417,
+      "longitude": 133.1736978
+    },
+    {
+      "id": "jp_shimane_bus_terminal_1095612226",
+      "osm_id": 1095612226,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "平成町車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.429712,
+      "longitude": 133.058516
+    },
+    {
+      "id": "jp_shimane_bus_terminal_1097546612",
+      "osm_id": 1097546612,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松江しんじ湖温泉駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4675835,
+      "longitude": 133.0463444
+    },
+    {
+      "id": "jp_shimane_bus_terminal_1097547308",
+      "osm_id": 1097547308,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松江駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4641791,
+      "longitude": 133.0628502
+    },
+    {
+      "id": "jp_shimane_bus_terminal_1097706697",
+      "osm_id": 1097706697,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "一畑バス本社",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4702038,
+      "longitude": 133.0716098
+    },
+    {
+      "id": "jp_shimane_ferry_terminal_1101504860",
+      "osm_id": 1101504860,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大橋川観光遊覧船 矢田の渡し",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4533913,
+      "longitude": 133.1031364
+    },
+    {
+      "id": "jp_shimane_bus_terminal_1104199175",
+      "osm_id": 1104199175,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "美保関(万原)バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5350556,
+      "longitude": 133.1645093
+    },
+    {
+      "id": "jp_shimane_station_1365521454",
+      "osm_id": 1365521454,
+      "osm_type": "way",
+      "prefecture_id": "jp_shimane",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木次駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kisuki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR木次線",
+      "ref": null,
+      "latitude": 35.2946507,
+      "longitude": 132.9018607
+    },
+    {
+      "id": "jp_shimane_airport_6121880",
+      "osm_id": 6121880,
+      "osm_type": "relation",
+      "prefecture_id": "jp_shimane",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "出雲空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumo Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "IZO",
+      "latitude": 35.413325,
+      "longitude": 132.8891997
+    }
+  ]
+}

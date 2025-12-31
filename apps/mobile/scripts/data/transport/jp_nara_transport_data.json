@@ -1,0 +1,2434 @@
+{
+  "fetchedAt": "2025-12-24T05:54:53.039Z",
+  "prefecture_id": "jp_nara",
+  "prefecture_name": "奈良県",
+  "stats": {
+    "station": 127,
+    "airport": 0,
+    "ferry_terminal": 0,
+    "bus_terminal": 8,
+    "total": 135
+  },
+  "data": [
+    {
+      "id": "jp_nara_station_267336809",
+      "osm_id": 267336809,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "jr",
+      "name": "奈良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D21;JR-Q36",
+      "latitude": 34.6808117,
+      "longitude": 135.8189414
+    },
+    {
+      "id": "jp_nara_station_267442901",
+      "osm_id": 267442901,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "jr",
+      "name": "王寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oji"
+      },
+      "operator": "JR西日本",
+      "network": "JR関西線",
+      "ref": "JR-Q31",
+      "latitude": 34.5973636,
+      "longitude": 135.7035805
+    },
+    {
+      "id": "jp_nara_station_267442992",
+      "osm_id": 267442992,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "jr",
+      "name": "平城山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Narayama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-D20;JR-Q37",
+      "latitude": 34.7107152,
+      "longitude": 135.8104826
+    },
+    {
+      "id": "jp_nara_station_267443743",
+      "osm_id": 267443743,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "法隆寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Horyuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-Q32",
+      "latitude": 34.6016824,
+      "longitude": 135.7391165
+    },
+    {
+      "id": "jp_nara_station_335847608",
+      "osm_id": 335847608,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "生駒山上",
+      "name_kana": "いこまさんじょう",
+      "name_translations": {
+        "en": "Ikoma-Sanjō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6794517,
+      "longitude": 135.680478
+    },
+    {
+      "id": "jp_nara_station_335847620",
+      "osm_id": 335847620,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅屋敷",
+      "name_kana": "うめやしきえき",
+      "name_translations": {
+        "en": "Umeyashiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6833483,
+      "longitude": 135.6870451
+    },
+    {
+      "id": "jp_nara_station_335847700",
+      "osm_id": 335847700,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "霞ヶ丘",
+      "name_kana": "かすみがおか",
+      "name_translations": {
+        "en": "Kasumigaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6812936,
+      "longitude": 135.6835755
+    },
+    {
+      "id": "jp_nara_station_335847703",
+      "osm_id": 335847703,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳥居前",
+      "name_kana": "とりいまえ",
+      "name_translations": {
+        "en": "Toriimae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.692305,
+      "longitude": 135.696183
+    },
+    {
+      "id": "jp_nara_station_413336888",
+      "osm_id": 413336888,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "二上山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nijōzan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5388695,
+      "longitude": 135.6863241
+    },
+    {
+      "id": "jp_nara_station_413337680",
+      "osm_id": 413337680,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "二上神社口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nijō-Jinjaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5318614,
+      "longitude": 135.6943402
+    },
+    {
+      "id": "jp_nara_station_413347595",
+      "osm_id": 413347595,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "壺阪山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsubosakayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4495924,
+      "longitude": 135.7948182
+    },
+    {
+      "id": "jp_nara_station_413347652",
+      "osm_id": 413347652,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "六田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Muda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3901389,
+      "longitude": 135.8232053
+    },
+    {
+      "id": "jp_nara_station_413347892",
+      "osm_id": 413347892,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和上市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamato-Kamiichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3956342,
+      "longitude": 135.8455706
+    },
+    {
+      "id": "jp_nara_station_413348089",
+      "osm_id": 413348089,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "越部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koshibe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.386061,
+      "longitude": 135.8025328
+    },
+    {
+      "id": "jp_nara_station_413348192",
+      "osm_id": 413348192,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡寺",
+      "name_kana": "おかでら",
+      "name_translations": {
+        "en": "Okadera"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4741467,
+      "longitude": 135.795981
+    },
+    {
+      "id": "jp_nara_station_413348200",
+      "osm_id": 413348200,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "市尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4416936,
+      "longitude": 135.7761563
+    },
+    {
+      "id": "jp_nara_station_413348248",
+      "osm_id": 413348248,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉野神宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshino-jingū"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3904998,
+      "longitude": 135.8480548
+    },
+    {
+      "id": "jp_nara_station_413348301",
+      "osm_id": 413348301,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "薬水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusurimizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.407338,
+      "longitude": 135.7430488
+    },
+    {
+      "id": "jp_nara_station_413348490",
+      "osm_id": 413348490,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "福神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukugami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3952773,
+      "longitude": 135.7507341
+    },
+    {
+      "id": "jp_nara_station_413348804",
+      "osm_id": 413348804,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛鳥",
+      "name_kana": "あすか",
+      "name_translations": {
+        "en": "Asuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4648968,
+      "longitude": 135.7981414
+    },
+    {
+      "id": "jp_nara_station_413348866",
+      "osm_id": 413348866,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "葛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuzu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.431385,
+      "longitude": 135.759834
+    },
+    {
+      "id": "jp_nara_station_413348877",
+      "osm_id": 413348877,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大阿太",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3882844,
+      "longitude": 135.766378
+    },
+    {
+      "id": "jp_nara_bus_terminal_890356923",
+      "osm_id": 890356923,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "奈良交通 榛原営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.521694,
+      "longitude": 135.9389707
+    },
+    {
+      "id": "jp_nara_bus_terminal_1707260812",
+      "osm_id": 1707260812,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "十津川バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9415971,
+      "longitude": 135.7679113
+    },
+    {
+      "id": "jp_nara_bus_terminal_2524031641",
+      "osm_id": 2524031641,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高畑町 (Takabatake-chō)",
+      "name_kana": "たかばたけちょう",
+      "name_translations": {
+        "en": "Takabatake-cho"
+      },
+      "operator": "Nara Kotsu Bus Lines Co., Ltd.",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6747719,
+      "longitude": 135.8397408
+    },
+    {
+      "id": "jp_nara_station_2591253777",
+      "osm_id": 2591253777,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜井",
+      "name_kana": "さくらい",
+      "name_translations": {
+        "en": "Sakurai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5132193,
+      "longitude": 135.8466795
+    },
+    {
+      "id": "jp_nara_station_2865865081",
+      "osm_id": 2865865081,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝山寺",
+      "name_kana": "ほうざんじ",
+      "name_translations": {
+        "en": "Hōzanji"
+      },
+      "operator": "Kintetsu Corporation",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6861028,
+      "longitude": 135.6892136
+    },
+    {
+      "id": "jp_nara_station_3266452178",
+      "osm_id": 3266452178,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "当麻寺",
+      "name_kana": "たいまでら",
+      "name_translations": {
+        "en": "Taimadera"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "南大阪線",
+      "ref": null,
+      "latitude": 34.5162043,
+      "longitude": 135.7059736
+    },
+    {
+      "id": "jp_nara_bus_terminal_3399021679",
+      "osm_id": 3399021679,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "王寺駅北口（JRバス・奈良交通）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5981125,
+      "longitude": 135.7034238
+    },
+    {
+      "id": "jp_nara_bus_terminal_3399021680",
+      "osm_id": 3399021680,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "王寺駅（奈良交通）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5964024,
+      "longitude": 135.7047694
+    },
+    {
+      "id": "jp_nara_station_4053369440",
+      "osm_id": 4053369440,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "天理",
+      "name_kana": "てんり",
+      "name_translations": {
+        "en": "Tenri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6001921,
+      "longitude": 135.8305562
+    },
+    {
+      "id": "jp_nara_station_4053979277",
+      "osm_id": 4053979277,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "尺土",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shakudo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5085608,
+      "longitude": 135.7209208
+    },
+    {
+      "id": "jp_nara_station_4053979279",
+      "osm_id": 4053979279,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "橿原神宮前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashiharajingū-Mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B42;F42",
+      "latitude": 34.483448,
+      "longitude": 135.7937113
+    },
+    {
+      "id": "jp_nara_station_4053979280",
+      "osm_id": 4053979280,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "橿原神宮西口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashiharajingū-Nishiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4861041,
+      "longitude": 135.7816302
+    },
+    {
+      "id": "jp_nara_station_4053979282",
+      "osm_id": 4053979282,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5113689,
+      "longitude": 135.7108183
+    },
+    {
+      "id": "jp_nara_station_4451876475",
+      "osm_id": 4451876475,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "東生駒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Ikoma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "A18",
+      "latitude": 34.6919607,
+      "longitude": 135.7097208
+    },
+    {
+      "id": "jp_nara_station_4451876476",
+      "osm_id": 4451876476,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "生駒",
+      "name_kana": "いこま",
+      "name_translations": {
+        "en": "Ikoma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "C27",
+      "latitude": 34.6932355,
+      "longitude": 135.6979211
+    },
+    {
+      "id": "jp_nara_station_4451970053",
+      "osm_id": 4451970053,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "学研北生駒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gakken-Kita-Ikoma"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "C29",
+      "latitude": 34.7248476,
+      "longitude": 135.7232042
+    },
+    {
+      "id": "jp_nara_station_4451970054",
+      "osm_id": 4451970054,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "学研奈良登美ヶ丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gakken-Nara-Tomigaoka"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "近畿日本鉄道けいはんな線",
+      "ref": "C30",
+      "latitude": 34.7265585,
+      "longitude": 135.752194
+    },
+    {
+      "id": "jp_nara_station_4452228928",
+      "osm_id": 4452228928,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和西大寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamatosaidaiji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6937801,
+      "longitude": 135.7827229
+    },
+    {
+      "id": "jp_nara_station_4452228929",
+      "osm_id": 4452228929,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "尼ヶ辻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amagatsuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B27",
+      "latitude": 34.6811878,
+      "longitude": 135.7835812
+    },
+    {
+      "id": "jp_nara_station_4452353500",
+      "osm_id": 4452353500,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "新大宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "A27",
+      "latitude": 34.6853702,
+      "longitude": 135.8116431
+    },
+    {
+      "id": "jp_nara_station_4452353501",
+      "osm_id": 4452353501,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄奈良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu Nara"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "近鉄奈良線;近鉄京都線",
+      "ref": "A28",
+      "latitude": 34.6841376,
+      "longitude": 135.8285414
+    },
+    {
+      "id": "jp_nara_station_4761608825",
+      "osm_id": 4761608825,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "平端",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirahata"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "B32;H32",
+      "latitude": 34.6066623,
+      "longitude": 135.7830124
+    },
+    {
+      "id": "jp_nara_station_4829926246",
+      "osm_id": 4829926246,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大福",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daifuku"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D41",
+      "latitude": 34.5128832,
+      "longitude": 135.8299055
+    },
+    {
+      "id": "jp_nara_bus_terminal_4979681521",
+      "osm_id": 4979681521,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "春日大社本殿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasuga Taisha Honden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6816136,
+      "longitude": 135.8461646
+    },
+    {
+      "id": "jp_nara_station_6631028988",
+      "osm_id": 6631028988,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和八木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamato-Yagi"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "B39;D39",
+      "latitude": 34.5132315,
+      "longitude": 135.7915373
+    },
+    {
+      "id": "jp_nara_station_6878796459",
+      "osm_id": 6878796459,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "高の原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takanohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B24",
+      "latitude": 34.7237986,
+      "longitude": 135.7918538
+    },
+    {
+      "id": "jp_nara_station_6878903339",
+      "osm_id": 6878903339,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "平城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Heijo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B25",
+      "latitude": 34.7016687,
+      "longitude": 135.7850015
+    },
+    {
+      "id": "jp_nara_station_6946372935",
+      "osm_id": 6946372935,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "白庭台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiraniwadai"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "C28",
+      "latitude": 34.720896,
+      "longitude": 135.7165542
+    },
+    {
+      "id": "jp_nara_station_7835222976",
+      "osm_id": 7835222976,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "下市口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoichiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3840535,
+      "longitude": 135.7870164
+    },
+    {
+      "id": "jp_nara_station_7836351937",
+      "osm_id": 7836351937,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "京終",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyōbate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6699233,
+      "longitude": 135.8286658
+    },
+    {
+      "id": "jp_nara_station_7836351938",
+      "osm_id": 7836351938,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "帯解",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obitoke"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6434293,
+      "longitude": 135.8262867
+    },
+    {
+      "id": "jp_nara_station_7836351940",
+      "osm_id": 7836351940,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "櫟本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichinomoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6210435,
+      "longitude": 135.8262344
+    },
+    {
+      "id": "jp_nara_station_7836351948",
+      "osm_id": 7836351948,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "長柄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5737245,
+      "longitude": 135.835083
+    },
+    {
+      "id": "jp_nara_station_7836351949",
+      "osm_id": 7836351949,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanagimoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5593143,
+      "longitude": 135.8385987
+    },
+    {
+      "id": "jp_nara_station_7836351951",
+      "osm_id": 7836351951,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "巻向",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Makimuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5452882,
+      "longitude": 135.8408846
+    },
+    {
+      "id": "jp_nara_station_7836351952",
+      "osm_id": 7836351952,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "三輪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5268994,
+      "longitude": 135.8486442
+    },
+    {
+      "id": "jp_nara_station_7836351954",
+      "osm_id": 7836351954,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "香久山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaguyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5104682,
+      "longitude": 135.8243226
+    },
+    {
+      "id": "jp_nara_station_7836351955",
+      "osm_id": 7836351955,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "畝傍",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unebi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5082165,
+      "longitude": 135.7936737
+    },
+    {
+      "id": "jp_nara_station_7836351957",
+      "osm_id": 7836351957,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "金橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanahashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5096123,
+      "longitude": 135.765302
+    },
+    {
+      "id": "jp_nara_station_7836351958",
+      "osm_id": 7836351958,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.516288,
+      "longitude": 135.7448226
+    },
+    {
+      "id": "jp_nara_station_7855766995",
+      "osm_id": 7855766995,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "東山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6486385,
+      "longitude": 135.7085257
+    },
+    {
+      "id": "jp_nara_station_7858449448",
+      "osm_id": 7858449448,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "南生駒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Ikoma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6655416,
+      "longitude": 135.7087214
+    },
+    {
+      "id": "jp_nara_station_7858458618",
+      "osm_id": 7858458618,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "一分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichibu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.675907,
+      "longitude": 135.7079104
+    },
+    {
+      "id": "jp_nara_station_7859453682",
+      "osm_id": 7859453682,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "菜畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nabata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6856167,
+      "longitude": 135.7067695
+    },
+    {
+      "id": "jp_nara_station_7890328232",
+      "osm_id": 7890328232,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和朝倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamato-Asakura"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D30",
+      "latitude": 34.5161062,
+      "longitude": 135.8690786
+    },
+    {
+      "id": "jp_nara_station_7890328236",
+      "osm_id": 7890328236,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "関屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekiya"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5536617,
+      "longitude": 135.6676313
+    },
+    {
+      "id": "jp_nara_station_7890466588",
+      "osm_id": 7890466588,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "二上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nijō"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D21",
+      "latitude": 34.5465281,
+      "longitude": 135.6881972
+    },
+    {
+      "id": "jp_nara_station_7890642613",
+      "osm_id": 7890642613,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "長谷寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hasedera"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D31",
+      "latitude": 34.5267033,
+      "longitude": 135.9060857
+    },
+    {
+      "id": "jp_nara_station_7890642618",
+      "osm_id": 7890642618,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "五位堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Goidō"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D23",
+      "latitude": 34.5348056,
+      "longitude": 135.7180662
+    },
+    {
+      "id": "jp_nara_station_7890642622",
+      "osm_id": 7890642622,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄下田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu-Shimoda"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D22",
+      "latitude": 34.5414909,
+      "longitude": 135.7040966
+    },
+    {
+      "id": "jp_nara_station_7890758859",
+      "osm_id": 7890758859,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "松塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuzuka"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D26",
+      "latitude": 34.5205776,
+      "longitude": 135.7615455
+    },
+    {
+      "id": "jp_nara_station_7890798808",
+      "osm_id": 7890798808,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "耳成",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miminashi"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D40",
+      "latitude": 34.5123994,
+      "longitude": 135.8147478
+    },
+    {
+      "id": "jp_nara_station_7891813585",
+      "osm_id": 7891813585,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "真菅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masuga"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D27",
+      "latitude": 34.5195865,
+      "longitude": 135.7729442
+    },
+    {
+      "id": "jp_nara_station_7891898727",
+      "osm_id": 7891898727,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamato-Takada"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D25",
+      "latitude": 34.5197997,
+      "longitude": 135.7424254
+    },
+    {
+      "id": "jp_nara_station_7891898728",
+      "osm_id": 7891898728,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "三本松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sambommatsu"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5787051,
+      "longitude": 136.0363137
+    },
+    {
+      "id": "jp_nara_station_7891898729",
+      "osm_id": 7891898729,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "築山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukiyama"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D24",
+      "latitude": 34.5261907,
+      "longitude": 135.7330799
+    },
+    {
+      "id": "jp_nara_station_7891898735",
+      "osm_id": 7891898735,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "室生口大野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Murōguchi-Ōno"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5661527,
+      "longitude": 136.0153502
+    },
+    {
+      "id": "jp_nara_station_7891898736",
+      "osm_id": 7891898736,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "榛原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haibara"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5297903,
+      "longitude": 135.954319
+    },
+    {
+      "id": "jp_nara_station_8021696818",
+      "osm_id": 8021696818,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "御所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4651956,
+      "longitude": 135.7338458
+    },
+    {
+      "id": "jp_nara_station_8021696826",
+      "osm_id": 8021696826,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和新庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamato-Shinjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.489184,
+      "longitude": 135.7361269
+    },
+    {
+      "id": "jp_nara_station_8021696835",
+      "osm_id": 8021696835,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "JR五位堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JR Goidō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5277508,
+      "longitude": 135.7183935
+    },
+    {
+      "id": "jp_nara_station_8021696839",
+      "osm_id": 8021696839,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "香芝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5436075,
+      "longitude": 135.7055886
+    },
+    {
+      "id": "jp_nara_station_8021696851",
+      "osm_id": 8021696851,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "志都美",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5618324,
+      "longitude": 135.701916
+    },
+    {
+      "id": "jp_nara_station_8021696853",
+      "osm_id": 8021696853,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "畠田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hatakeda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5784301,
+      "longitude": 135.7038646
+    },
+    {
+      "id": "jp_nara_station_8022421611",
+      "osm_id": 8022421611,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "掖上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakigami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4523114,
+      "longitude": 135.7631099
+    },
+    {
+      "id": "jp_nara_station_8022421619",
+      "osm_id": 8022421619,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamade"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4583028,
+      "longitude": 135.7483926
+    },
+    {
+      "id": "jp_nara_station_8024753023",
+      "osm_id": 8024753023,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "北宇智",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Uchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3818288,
+      "longitude": 135.7145217
+    },
+    {
+      "id": "jp_nara_station_8024753024",
+      "osm_id": 8024753024,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉野口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshinoguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4206399,
+      "longitude": 135.7505853
+    },
+    {
+      "id": "jp_nara_station_8024753029",
+      "osm_id": 8024753029,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "五条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gojo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3558348,
+      "longitude": 135.6988469
+    },
+    {
+      "id": "jp_nara_station_8024787174",
+      "osm_id": 8024787174,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和二見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamato-Futami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.346304,
+      "longitude": 135.6848082
+    },
+    {
+      "id": "jp_nara_station_8069839147",
+      "osm_id": 8069839147,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和小泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamato-Koizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-Q33",
+      "latitude": 34.6224108,
+      "longitude": 135.7636549
+    },
+    {
+      "id": "jp_nara_station_8069861050",
+      "osm_id": 8069861050,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "三郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sango"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5891411,
+      "longitude": 135.6874549
+    },
+    {
+      "id": "jp_nara_station_8069917763",
+      "osm_id": 8069917763,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "jr",
+      "name": "郡山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koriyama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-Q34",
+      "latitude": 34.6480872,
+      "longitude": 135.7903341
+    },
+    {
+      "id": "jp_nara_station_8164014181",
+      "osm_id": 8164014181,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉野",
+      "name_kana": "よしの",
+      "name_translations": {
+        "en": "Yoshino"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "近畿日本鉄道吉野線",
+      "ref": null,
+      "latitude": 34.3769776,
+      "longitude": 135.853556
+    },
+    {
+      "id": "jp_nara_station_8164014210",
+      "osm_id": 8164014210,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "坊城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bōjō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4934611,
+      "longitude": 135.765141
+    },
+    {
+      "id": "jp_nara_station_8164014215",
+      "osm_id": 8164014215,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "浮孔",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ukiana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4981762,
+      "longitude": 135.7545721
+    },
+    {
+      "id": "jp_nara_station_8167624573",
+      "osm_id": 8167624573,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "忍海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oshimi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4762921,
+      "longitude": 135.7320084
+    },
+    {
+      "id": "jp_nara_station_8167624574",
+      "osm_id": 8167624574,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄新庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu-Shinjō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4891395,
+      "longitude": 135.7273532
+    },
+    {
+      "id": "jp_nara_station_8167624580",
+      "osm_id": 8167624580,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄御所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu Gose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4646121,
+      "longitude": 135.7324374
+    },
+    {
+      "id": "jp_nara_station_8175421797",
+      "osm_id": 8175421797,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "菖蒲池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ayameike"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "A21",
+      "latitude": 34.6979701,
+      "longitude": 135.7612216
+    },
+    {
+      "id": "jp_nara_station_8175421799",
+      "osm_id": 8175421799,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "学園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gakuemmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "A20",
+      "latitude": 34.6971288,
+      "longitude": 135.7508663
+    },
+    {
+      "id": "jp_nara_station_8175421800",
+      "osm_id": 8175421800,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "富雄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "A19",
+      "latitude": 34.6942349,
+      "longitude": 135.7347281
+    },
+    {
+      "id": "jp_nara_station_8176399930",
+      "osm_id": 8176399930,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "筒井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsutsui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B31",
+      "latitude": 34.6202477,
+      "longitude": 135.7806376
+    },
+    {
+      "id": "jp_nara_station_8178545304",
+      "osm_id": 8178545304,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "竜田川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsutagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6175123,
+      "longitude": 135.7046076
+    },
+    {
+      "id": "jp_nara_station_8178545305",
+      "osm_id": 8178545305,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "勢野北口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seyakitaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6060288,
+      "longitude": 135.7008116
+    },
+    {
+      "id": "jp_nara_station_8178545306",
+      "osm_id": 8178545306,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "元山上口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motosanjōguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6403355,
+      "longitude": 135.7007962
+    },
+    {
+      "id": "jp_nara_station_8178545308",
+      "osm_id": 8178545308,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "平群",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Heguri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6293733,
+      "longitude": 135.704387
+    },
+    {
+      "id": "jp_nara_station_8178545313",
+      "osm_id": 8178545313,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "萩の台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haginodai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6569953,
+      "longitude": 135.7090507
+    },
+    {
+      "id": "jp_nara_station_8178556318",
+      "osm_id": 8178556318,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "信貴山下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shigisanshita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6009892,
+      "longitude": 135.6951937
+    },
+    {
+      "id": "jp_nara_station_8182433138",
+      "osm_id": 8182433138,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "前栽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Senzai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "H34",
+      "latitude": 34.6011078,
+      "longitude": 135.8164537
+    },
+    {
+      "id": "jp_nara_station_8182433139",
+      "osm_id": 8182433139,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "二階堂",
+      "name_kana": "にかいどう",
+      "name_translations": {
+        "en": "Nikaidō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "H33",
+      "latitude": 34.6021124,
+      "longitude": 135.7958677
+    },
+    {
+      "id": "jp_nara_station_8182542871",
+      "osm_id": 8182542871,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "新王寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Oji"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "近鉄田原本線",
+      "ref": null,
+      "latitude": 34.5976741,
+      "longitude": 135.7047377
+    },
+    {
+      "id": "jp_nara_station_8182542872",
+      "osm_id": 8182542872,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐味田川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Samitagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5852461,
+      "longitude": 135.7310387
+    },
+    {
+      "id": "jp_nara_station_8182542873",
+      "osm_id": 8182542873,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "池部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikebe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5786344,
+      "longitude": 135.7375297
+    },
+    {
+      "id": "jp_nara_station_8182542875",
+      "osm_id": 8182542875,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "但馬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5693802,
+      "longitude": 135.7680847
+    },
+    {
+      "id": "jp_nara_station_8182542876",
+      "osm_id": 8182542876,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5685056,
+      "longitude": 135.7774819
+    },
+    {
+      "id": "jp_nara_station_8182542878",
+      "osm_id": 8182542878,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "箸尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5702355,
+      "longitude": 135.751441
+    },
+    {
+      "id": "jp_nara_station_8182542881",
+      "osm_id": 8182542881,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "大輪田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Owada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5892042,
+      "longitude": 135.7201275
+    },
+    {
+      "id": "jp_nara_station_8182542884",
+      "osm_id": 8182542884,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "西田原本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Tawaramoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5538901,
+      "longitude": 135.7895927
+    },
+    {
+      "id": "jp_nara_station_10048234245",
+      "osm_id": 10048234245,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "西ノ京",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishinokyō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B28",
+      "latitude": 34.6704924,
+      "longitude": 135.7831964
+    },
+    {
+      "id": "jp_nara_station_10048234246",
+      "osm_id": 10048234246,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "九条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kujō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B29",
+      "latitude": 34.6598447,
+      "longitude": 135.7830243
+    },
+    {
+      "id": "jp_nara_station_10048234248",
+      "osm_id": 10048234248,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄郡山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintetsu-Koriyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B30",
+      "latitude": 34.6466987,
+      "longitude": 135.7808678
+    },
+    {
+      "id": "jp_nara_station_10048234250",
+      "osm_id": 10048234250,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "ファミリー公園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Family-Kōenmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B33",
+      "latitude": 34.598406,
+      "longitude": 135.785037
+    },
+    {
+      "id": "jp_nara_station_10048234254",
+      "osm_id": 10048234254,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "結崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yūzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B34",
+      "latitude": 34.5843661,
+      "longitude": 135.7847922
+    },
+    {
+      "id": "jp_nara_station_10048234256",
+      "osm_id": 10048234256,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "石見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B35",
+      "latitude": 34.5715396,
+      "longitude": 135.7858115
+    },
+    {
+      "id": "jp_nara_station_10048234258",
+      "osm_id": 10048234258,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "田原本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tawaramoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B36",
+      "latitude": 34.5535798,
+      "longitude": 135.7906889
+    },
+    {
+      "id": "jp_nara_station_10048234260",
+      "osm_id": 10048234260,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠縫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasanui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B37",
+      "latitude": 34.5414716,
+      "longitude": 135.7941122
+    },
+    {
+      "id": "jp_nara_station_10048234261",
+      "osm_id": 10048234261,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "新ノ口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ninokuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B38",
+      "latitude": 34.5253852,
+      "longitude": 135.7947278
+    },
+    {
+      "id": "jp_nara_station_10048234262",
+      "osm_id": 10048234262,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "八木西口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagi-Nishiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B40",
+      "latitude": 34.5096256,
+      "longitude": 135.7907447
+    },
+    {
+      "id": "jp_nara_station_10048234264",
+      "osm_id": 10048234264,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "畝傍御陵前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unebigoryōmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "B41",
+      "latitude": 34.4930351,
+      "longitude": 135.7942725
+    },
+    {
+      "id": "jp_nara_station_12701768434",
+      "osm_id": 12701768434,
+      "osm_type": "node",
+      "prefecture_id": "jp_nara",
+      "type": "station",
+      "subtype": "private",
+      "name": "高田市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takadashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5068047,
+      "longitude": 135.7427241
+    },
+    {
+      "id": "jp_nara_bus_terminal_74004744",
+      "osm_id": 74004744,
+      "osm_type": "way",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "榛原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haibara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5295247,
+      "longitude": 135.9550397
+    },
+    {
+      "id": "jp_nara_bus_terminal_293176793",
+      "osm_id": 293176793,
+      "osm_type": "way",
+      "prefecture_id": "jp_nara",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "五條バスセンター (Gojō Bus center)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3533692,
+      "longitude": 135.7011954
+    }
+  ]
+}

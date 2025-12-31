@@ -1,0 +1,1698 @@
+{
+  "fetchedAt": "2025-12-24T05:58:34.350Z",
+  "prefecture_id": "jp_miyazaki",
+  "prefecture_name": "宮崎県",
+  "stats": {
+    "station": 77,
+    "airport": 2,
+    "ferry_terminal": 1,
+    "bus_terminal": 15,
+    "total": 95
+  },
+  "data": [
+    {
+      "id": "jp_miyazaki_station_265840163",
+      "osm_id": 265840163,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitagō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.6781426,
+      "longitude": 131.3736336
+    },
+    {
+      "id": "jp_miyazaki_station_265840173",
+      "osm_id": 265840173,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊比井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ibii"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.7110111,
+      "longitude": 131.4561455
+    },
+    {
+      "id": "jp_miyazaki_station_265840178",
+      "osm_id": 265840178,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福島今町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukushima-Imamachi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.4569028,
+      "longitude": 131.2033174
+    },
+    {
+      "id": "jp_miyazaki_station_265840182",
+      "osm_id": 265840182,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大堂津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōdōtsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.5570545,
+      "longitude": 131.3823226
+    },
+    {
+      "id": "jp_miyazaki_station_265840237",
+      "osm_id": 265840237,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "private",
+      "name": "木花",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kibana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.8314754,
+      "longitude": 131.4367719
+    },
+    {
+      "id": "jp_miyazaki_station_265840399",
+      "osm_id": 265840399,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "子供の国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kodomonokuni"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.8072738,
+      "longitude": 131.4570693
+    },
+    {
+      "id": "jp_miyazaki_station_265840403",
+      "osm_id": 265840403,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "内之田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchinoda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.64257,
+      "longitude": 131.372654
+    },
+    {
+      "id": "jp_miyazaki_station_265840406",
+      "osm_id": 265840406,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "谷之口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taninokuchi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.5337292,
+      "longitude": 131.3446722
+    },
+    {
+      "id": "jp_miyazaki_station_265840453",
+      "osm_id": 265840453,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向北方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyūga-Kitakata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.4833201,
+      "longitude": 131.2433335
+    },
+    {
+      "id": "jp_miyazaki_station_265840465",
+      "osm_id": 265840465,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "飫肥",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.6273825,
+      "longitude": 131.3619584
+    },
+    {
+      "id": "jp_miyazaki_station_265840695",
+      "osm_id": 265840695,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nichinan"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.6031361,
+      "longitude": 131.3812045
+    },
+    {
+      "id": "jp_miyazaki_station_265840829",
+      "osm_id": 265840829,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小内海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kouchiumi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.7377864,
+      "longitude": 131.4658756
+    },
+    {
+      "id": "jp_miyazaki_station_265841028",
+      "osm_id": 265841028,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamikata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.8592747,
+      "longitude": 131.4345818
+    },
+    {
+      "id": "jp_miyazaki_station_265841035",
+      "osm_id": 265841035,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "青島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoshima"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.7997348,
+      "longitude": 131.4670192
+    },
+    {
+      "id": "jp_miyazaki_station_265841049",
+      "osm_id": 265841049,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "串間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kushima"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.4628354,
+      "longitude": 131.2305132
+    },
+    {
+      "id": "jp_miyazaki_station_265841051",
+      "osm_id": 265841051,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "油津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aburatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.5867567,
+      "longitude": 131.3962637
+    },
+    {
+      "id": "jp_miyazaki_station_265841065",
+      "osm_id": 265841065,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nangō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.5360072,
+      "longitude": 131.3726464
+    },
+    {
+      "id": "jp_miyazaki_station_265841069",
+      "osm_id": 265841069,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "折生迫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oryūzako"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.7895063,
+      "longitude": 131.4675091
+    },
+    {
+      "id": "jp_miyazaki_station_265841081",
+      "osm_id": 265841081,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "榎原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yowara"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.5347974,
+      "longitude": 131.3064175
+    },
+    {
+      "id": "jp_miyazaki_station_265841135",
+      "osm_id": 265841135,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "曽山寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sosanji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.8133583,
+      "longitude": 131.4483391
+    },
+    {
+      "id": "jp_miyazaki_station_265841271",
+      "osm_id": 265841271,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向大束",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyūga-Ōtsuka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.5106775,
+      "longitude": 131.248623
+    },
+    {
+      "id": "jp_miyazaki_station_265842809",
+      "osm_id": 265842809,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "内海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchiumi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.7586564,
+      "longitude": 131.4672973
+    },
+    {
+      "id": "jp_miyazaki_station_265842911",
+      "osm_id": 265842911,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "運動公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Undōkōen"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.8197182,
+      "longitude": 131.4425394
+    },
+    {
+      "id": "jp_miyazaki_station_265843712",
+      "osm_id": 265843712,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福島高松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukushima-Takamatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日南線",
+      "ref": null,
+      "latitude": 31.4585974,
+      "longitude": 131.1783161
+    },
+    {
+      "id": "jp_miyazaki_station_265844831",
+      "osm_id": 265844831,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向長井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyuga-Nagai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.6640664,
+      "longitude": 131.6998459
+    },
+    {
+      "id": "jp_miyazaki_station_265845102",
+      "osm_id": 265845102,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitagawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.6903504,
+      "longitude": 131.6977206
+    },
+    {
+      "id": "jp_miyazaki_station_265845309",
+      "osm_id": 265845309,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市棚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichitana"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.7280323,
+      "longitude": 131.7101607
+    },
+    {
+      "id": "jp_miyazaki_station_265845469",
+      "osm_id": 265845469,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北延岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Nobeoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.6306797,
+      "longitude": 131.6900421
+    },
+    {
+      "id": "jp_miyazaki_station_265848022",
+      "osm_id": 265848022,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "青井岳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoidake"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.8276588,
+      "longitude": 131.2184348
+    },
+    {
+      "id": "jp_miyazaki_station_265848024",
+      "osm_id": 265848024,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "加納",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kano"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.8759623,
+      "longitude": 131.4061056
+    },
+    {
+      "id": "jp_miyazaki_station_265848070",
+      "osm_id": 265848070,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西都城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Miyakonojō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.723521,
+      "longitude": 131.0569811
+    },
+    {
+      "id": "jp_miyazaki_station_265848359",
+      "osm_id": 265848359,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "五十市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isoichi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.7185779,
+      "longitude": 131.0335635
+    },
+    {
+      "id": "jp_miyazaki_station_265848402",
+      "osm_id": 265848402,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "清武",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiyotake"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.8593828,
+      "longitude": 131.3892315
+    },
+    {
+      "id": "jp_miyazaki_station_265848751",
+      "osm_id": 265848751,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tano"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.8378604,
+      "longitude": 131.3049544
+    },
+    {
+      "id": "jp_miyazaki_station_265849089",
+      "osm_id": 265849089,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向沓掛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyūga-Kutsukake"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.8421733,
+      "longitude": 131.3448481
+    },
+    {
+      "id": "jp_miyazaki_station_265849275",
+      "osm_id": 265849275,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三股",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.7338903,
+      "longitude": 131.1199481
+    },
+    {
+      "id": "jp_miyazaki_station_265849385",
+      "osm_id": 265849385,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山之口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamanokuchi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.7831214,
+      "longitude": 131.1529956
+    },
+    {
+      "id": "jp_miyazaki_station_265851170",
+      "osm_id": 265851170,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "餅原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mochibaru"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.7570049,
+      "longitude": 131.132678
+    },
+    {
+      "id": "jp_miyazaki_station_265852656",
+      "osm_id": 265852656,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "えびの",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebino"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.0422993,
+      "longitude": 130.8159272
+    },
+    {
+      "id": "jp_miyazaki_station_265852665",
+      "osm_id": 265852665,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "えびの飯野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebino Iino"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.0304524,
+      "longitude": 130.8706681
+    },
+    {
+      "id": "jp_miyazaki_station_265852672",
+      "osm_id": 265852672,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "えびの上江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebino Uwae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.0356098,
+      "longitude": 130.8500084
+    },
+    {
+      "id": "jp_miyazaki_station_265852821",
+      "osm_id": 265852821,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takaharu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.9268539,
+      "longitude": 130.9988134
+    },
+    {
+      "id": "jp_miyazaki_station_265852825",
+      "osm_id": 265852825,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西小林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Kobayashi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 32.0095409,
+      "longitude": 130.9217282
+    },
+    {
+      "id": "jp_miyazaki_station_265852835",
+      "osm_id": 265852835,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "京町温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyomachi-Onsen"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 32.0453249,
+      "longitude": 130.7676343
+    },
+    {
+      "id": "jp_miyazaki_station_265852840",
+      "osm_id": 265852840,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "広原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirowara"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.958065,
+      "longitude": 130.984816
+    },
+    {
+      "id": "jp_miyazaki_station_265853640",
+      "osm_id": 265853640,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東高崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi Takasaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.8408469,
+      "longitude": 131.0651592
+    },
+    {
+      "id": "jp_miyazaki_station_265853664",
+      "osm_id": 265853664,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高崎新田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takasaki Shinden"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.8762741,
+      "longitude": 131.062472
+    },
+    {
+      "id": "jp_miyazaki_station_265853669",
+      "osm_id": 265853669,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "private",
+      "name": "小林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.9909634,
+      "longitude": 130.9756879
+    },
+    {
+      "id": "jp_miyazaki_station_265853919",
+      "osm_id": 265853919,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向前田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyuga-Maeda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.908543,
+      "longitude": 131.040666
+    },
+    {
+      "id": "jp_miyazaki_station_265854033",
+      "osm_id": 265854033,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "万ヶ塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mangatsuka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.8173891,
+      "longitude": 131.0640691
+    },
+    {
+      "id": "jp_miyazaki_station_265854049",
+      "osm_id": 265854049,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "谷頭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanigashira"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.7887804,
+      "longitude": 131.0541646
+    },
+    {
+      "id": "jp_miyazaki_station_265854233",
+      "osm_id": 265854233,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "都城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyakonojō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 31.7365393,
+      "longitude": 131.0744458
+    },
+    {
+      "id": "jp_miyazaki_station_265889650",
+      "osm_id": 265889650,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮崎空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyazaki Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.8724607,
+      "longitude": 131.4401622
+    },
+    {
+      "id": "jp_miyazaki_station_265913448",
+      "osm_id": 265913448,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "真幸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.0746702,
+      "longitude": 130.7294089
+    },
+    {
+      "id": "jp_miyazaki_station_270048203",
+      "osm_id": 270048203,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "private",
+      "name": "高千穂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takachiho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.714733,
+      "longitude": 131.3066171
+    },
+    {
+      "id": "jp_miyazaki_airport_2758280631",
+      "osm_id": 2758280631,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "airport",
+      "subtype": "military",
+      "name": "新田原基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nyutabaru Airbase"
+      },
+      "operator": "JASDF",
+      "network": null,
+      "ref": "RJFN",
+      "latitude": 32.0841222,
+      "longitude": 131.4543682
+    },
+    {
+      "id": "jp_miyazaki_station_3959369748",
+      "osm_id": 3959369748,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向新富",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyūga-Shintomi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.0722942,
+      "longitude": 131.5015379
+    },
+    {
+      "id": "jp_miyazaki_station_4008342859",
+      "osm_id": 4008342859,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南宮崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Miyazaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 31.8951321,
+      "longitude": 131.4226735
+    },
+    {
+      "id": "jp_miyazaki_station_5694796635",
+      "osm_id": 5694796635,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "private",
+      "name": "南延岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Nobeoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.5595357,
+      "longitude": 131.6768649
+    },
+    {
+      "id": "jp_miyazaki_station_5726627473",
+      "osm_id": 5726627473,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宮崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyazaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 31.9157538,
+      "longitude": 131.4319526
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_5812476308",
+      "osm_id": 5812476308,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西都城駅前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishimiyakonojo-eki mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.7232662,
+      "longitude": 131.0573665
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_5919599376",
+      "osm_id": 5919599376,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "油津バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.5873775,
+      "longitude": 131.3964813
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_5919682789",
+      "osm_id": 5919682789,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "飫肥待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.6244543,
+      "longitude": 131.3509771
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_5923238291",
+      "osm_id": 5923238291,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮崎駅バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.9162505,
+      "longitude": 131.4316604
+    },
+    {
+      "id": "jp_miyazaki_station_6022131030",
+      "osm_id": 6022131030,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向庄内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyuga-Shounai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR吉都線",
+      "ref": null,
+      "latitude": 31.7622233,
+      "longitude": 131.0615539
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_6865443355",
+      "osm_id": 6865443355,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "国富BS",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.9814508,
+      "longitude": 131.3675389
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_7232235141",
+      "osm_id": 7232235141,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Bus Station",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.5873861,
+      "longitude": 131.4014644
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_7232247850",
+      "osm_id": 7232247850,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Bus Stop",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.6129605,
+      "longitude": 131.4216068
+    },
+    {
+      "id": "jp_miyazaki_station_8149015847",
+      "osm_id": 8149015847,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "延岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nobeoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.5898056,
+      "longitude": 131.6722583
+    },
+    {
+      "id": "jp_miyazaki_station_8286305611",
+      "osm_id": 8286305611,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土々呂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Totoro"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.5077977,
+      "longitude": 131.6749657
+    },
+    {
+      "id": "jp_miyazaki_station_8286371151",
+      "osm_id": 8286371151,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "旭ヶ丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahigaoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.5281525,
+      "longitude": 131.6813733
+    },
+    {
+      "id": "jp_miyazaki_station_8287672880",
+      "osm_id": 8287672880,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "門川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kadogawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.4773491,
+      "longitude": 131.6539272
+    },
+    {
+      "id": "jp_miyazaki_station_8288025724",
+      "osm_id": 8288025724,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "財光寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zaikoji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.4055287,
+      "longitude": 131.6276573
+    },
+    {
+      "id": "jp_miyazaki_station_8288025764",
+      "osm_id": 8288025764,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyugashi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.4257662,
+      "longitude": 131.6279925
+    },
+    {
+      "id": "jp_miyazaki_station_8289383195",
+      "osm_id": 8289383195,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南日向",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Hyuga"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.369681,
+      "longitude": 131.6276854
+    },
+    {
+      "id": "jp_miyazaki_station_8289746110",
+      "osm_id": 8289746110,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "美々津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimitsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.3259681,
+      "longitude": 131.6022507
+    },
+    {
+      "id": "jp_miyazaki_station_8291924411",
+      "osm_id": 8291924411,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "都農",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuno"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.2509827,
+      "longitude": 131.5682475
+    },
+    {
+      "id": "jp_miyazaki_station_8292115036",
+      "osm_id": 8292115036,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaminami"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.192188,
+      "longitude": 131.5531931
+    },
+    {
+      "id": "jp_miyazaki_station_8292203746",
+      "osm_id": 8292203746,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高鍋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takanabe"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.122192,
+      "longitude": 131.5334675
+    },
+    {
+      "id": "jp_miyazaki_station_8293385039",
+      "osm_id": 8293385039,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田吉",
+      "name_kana": "たよし",
+      "name_translations": {
+        "en": "Tayoshi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 31.8792032,
+      "longitude": 131.4303808
+    },
+    {
+      "id": "jp_miyazaki_station_8295253832",
+      "osm_id": 8295253832,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐土原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sadowara"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.0223663,
+      "longitude": 131.4771156
+    },
+    {
+      "id": "jp_miyazaki_station_8295592571",
+      "osm_id": 8295592571,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宮崎神宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyazaki-Jingu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.9384255,
+      "longitude": 131.430539
+    },
+    {
+      "id": "jp_miyazaki_station_8295592585",
+      "osm_id": 8295592585,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "蓮ヶ池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hasugaike"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.960183,
+      "longitude": 131.442837
+    },
+    {
+      "id": "jp_miyazaki_station_8295592598",
+      "osm_id": 8295592598,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日向住吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyuga-Sumiyoshi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 31.9907692,
+      "longitude": 131.4576213
+    },
+    {
+      "id": "jp_miyazaki_station_8404097085",
+      "osm_id": 8404097085,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyazaki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東都農",
+      "name_kana": "ひがしつの",
+      "name_translations": {
+        "en": "Higashi-Tsuno"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR日豊線",
+      "ref": null,
+      "latitude": 32.2904225,
+      "longitude": 131.5820648
+    },
+    {
+      "id": "jp_miyazaki_airport_57013248",
+      "osm_id": 57013248,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "宮崎空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyazaki Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KMI",
+      "latitude": 31.8760552,
+      "longitude": 131.447944
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_706664430",
+      "osm_id": 706664430,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮崎駅 西1",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.9154742,
+      "longitude": 131.4314008
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_706664661",
+      "osm_id": 706664661,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮崎駅 西2",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.9154742,
+      "longitude": 131.4317072
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_706665118",
+      "osm_id": 706665118,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮崎駅 西3",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.9158846,
+      "longitude": 131.4314364
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_753539653",
+      "osm_id": 753539653,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮崎交通 上椎葉車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.4658288,
+      "longitude": 131.1556437
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_754636309",
+      "osm_id": 754636309,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高千穂バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takachiho Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.7096837,
+      "longitude": 131.3091372
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_757070348",
+      "osm_id": 757070348,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮崎交通 塚原車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.5104567,
+      "longitude": 131.3258002
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_1267292007",
+      "osm_id": 1267292007,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西都バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "宮崎交通株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 32.106666,
+      "longitude": 131.4053103
+    },
+    {
+      "id": "jp_miyazaki_bus_terminal_1271951421",
+      "osm_id": 1271951421,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高鍋バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.1312551,
+      "longitude": 131.5073721
+    },
+    {
+      "id": "jp_miyazaki_ferry_terminal_1355350626",
+      "osm_id": 1355350626,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyazaki",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宮崎港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyazaki Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 31.9108934,
+      "longitude": 131.4577615
+    }
+  ]
+}

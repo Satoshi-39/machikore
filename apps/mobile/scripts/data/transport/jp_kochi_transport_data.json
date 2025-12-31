@@ -1,0 +1,2128 @@
+{
+  "fetchedAt": "2025-12-24T05:56:49.291Z",
+  "prefecture_id": "jp_kochi",
+  "prefecture_name": "高知県",
+  "stats": {
+    "station": 94,
+    "airport": 1,
+    "ferry_terminal": 18,
+    "bus_terminal": 7,
+    "total": 120
+  },
+  "data": [
+    {
+      "id": "jp_kochi_station_265002975",
+      "osm_id": 265002975,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "若井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakai"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK27",
+      "latitude": 33.1880575,
+      "longitude": 133.1059971
+    },
+    {
+      "id": "jp_kochi_station_265003515",
+      "osm_id": 265003515,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "十川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōkawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2347403,
+      "longitude": 132.8557833
+    },
+    {
+      "id": "jp_kochi_station_265004152",
+      "osm_id": 265004152,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "半家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hage"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2015364,
+      "longitude": 132.7915311
+    },
+    {
+      "id": "jp_kochi_station_265004228",
+      "osm_id": 265004228,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西ヶ方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishigahō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1872335,
+      "longitude": 132.7672444
+    },
+    {
+      "id": "jp_kochi_station_265005008",
+      "osm_id": 265005008,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐昭和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Shōwa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.220106,
+      "longitude": 132.8971802
+    },
+    {
+      "id": "jp_kochi_station_265019964",
+      "osm_id": 265019964,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宿毛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sukumo"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK47",
+      "latitude": 32.9325416,
+      "longitude": 132.713119
+    },
+    {
+      "id": "jp_kochi_station_265020404",
+      "osm_id": 265020404,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "唐浜",
+      "name_kana": "とうのはま",
+      "name_translations": {
+        "en": "Tōnohama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN24",
+      "latitude": 33.4460634,
+      "longitude": 133.9657079
+    },
+    {
+      "id": "jp_kochi_station_265020421",
+      "osm_id": 265020421,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "奈半利",
+      "name_kana": "なはり",
+      "name_translations": {
+        "en": "Nahari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN21",
+      "latitude": 33.4250589,
+      "longitude": 134.0181116
+    },
+    {
+      "id": "jp_kochi_station_265020423",
+      "osm_id": 265020423,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "安田",
+      "name_kana": "やすだ",
+      "name_translations": {
+        "en": "Yasuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN23",
+      "latitude": 33.4433864,
+      "longitude": 133.9841267
+    },
+    {
+      "id": "jp_kochi_station_265020465",
+      "osm_id": 265020465,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "田野",
+      "name_kana": "たの",
+      "name_translations": {
+        "en": "Tano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN22",
+      "latitude": 33.4302838,
+      "longitude": 134.0081722
+    },
+    {
+      "id": "jp_kochi_station_265020572",
+      "osm_id": 265020572,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "夜須",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN33",
+      "latitude": 33.5344491,
+      "longitude": 133.7542596
+    },
+    {
+      "id": "jp_kochi_station_265020573",
+      "osm_id": 265020573,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴内",
+      "name_kana": "あなない",
+      "name_translations": {
+        "en": "Ananai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN29",
+      "latitude": 33.5061809,
+      "longitude": 133.8639131
+    },
+    {
+      "id": "jp_kochi_station_265020583",
+      "osm_id": 265020583,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "立田",
+      "name_kana": "たてだ",
+      "name_translations": {
+        "en": "Tateda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN38",
+      "latitude": 33.5707451,
+      "longitude": 133.6705406
+    },
+    {
+      "id": "jp_kochi_station_265020708",
+      "osm_id": 265020708,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "安芸",
+      "name_kana": "あき",
+      "name_translations": {
+        "en": "Aki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN27",
+      "latitude": 33.5046582,
+      "longitude": 133.9064534
+    },
+    {
+      "id": "jp_kochi_station_265020711",
+      "osm_id": 265020711,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "和食",
+      "name_kana": "わじき",
+      "name_translations": {
+        "en": "Wajiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN31",
+      "latitude": 33.5178986,
+      "longitude": 133.8092126
+    },
+    {
+      "id": "jp_kochi_station_265020714",
+      "osm_id": 265020714,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "後免町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gomenmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN39",
+      "latitude": 33.5745988,
+      "longitude": 133.6514074
+    },
+    {
+      "id": "jp_kochi_station_265020809",
+      "osm_id": 265020809,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤野",
+      "name_kana": "あかの",
+      "name_translations": {
+        "en": "Akano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN30",
+      "latitude": 33.5160147,
+      "longitude": 133.825034
+    },
+    {
+      "id": "jp_kochi_station_265020811",
+      "osm_id": 265020811,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西分",
+      "name_kana": "にしぶん",
+      "name_translations": {
+        "en": "Nishibun"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN32",
+      "latitude": 33.5177184,
+      "longitude": 133.790302
+    },
+    {
+      "id": "jp_kochi_station_265020826",
+      "osm_id": 265020826,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊尾木",
+      "name_kana": "いおき",
+      "name_translations": {
+        "en": "Ioki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN26",
+      "latitude": 33.4909458,
+      "longitude": 133.929092
+    },
+    {
+      "id": "jp_kochi_station_265020971",
+      "osm_id": 265020971,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "球場前",
+      "name_kana": "きゅうじょうまえ",
+      "name_translations": {
+        "en": "Kyūjōmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN28",
+      "latitude": 33.5026276,
+      "longitude": 133.8912761
+    },
+    {
+      "id": "jp_kochi_station_265021149",
+      "osm_id": 265021149,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "のいち",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Noichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN37",
+      "latitude": 33.5619089,
+      "longitude": 133.6979873
+    },
+    {
+      "id": "jp_kochi_station_265021209",
+      "osm_id": 265021209,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下山",
+      "name_kana": "しもやま",
+      "name_translations": {
+        "en": "Shimoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN25",
+      "latitude": 33.4582931,
+      "longitude": 133.9481018
+    },
+    {
+      "id": "jp_kochi_station_265021250",
+      "osm_id": 265021250,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "あかおか",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN35",
+      "latitude": 33.5398659,
+      "longitude": 133.7221029
+    },
+    {
+      "id": "jp_kochi_station_265021294",
+      "osm_id": 265021294,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "よしかわ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN36",
+      "latitude": 33.5461153,
+      "longitude": 133.7101274
+    },
+    {
+      "id": "jp_kochi_station_265021295",
+      "osm_id": 265021295,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "香我美",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kagami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "GN34",
+      "latitude": 33.5393136,
+      "longitude": 133.7374319
+    },
+    {
+      "id": "jp_kochi_bus_terminal_599799648",
+      "osm_id": 599799648,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高知駅バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōchi Station Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5675624,
+      "longitude": 133.544397
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_1441655209",
+      "osm_id": 1441655209,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "須ノ浦",
+      "name_kana": "すのうら",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4181272,
+      "longitude": 133.3801379
+    },
+    {
+      "id": "jp_kochi_station_3915866253",
+      "osm_id": 3915866253,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K13",
+      "latitude": 33.5001983,
+      "longitude": 133.2925174
+    },
+    {
+      "id": "jp_kochi_station_3915866254",
+      "osm_id": 3915866254,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西佐川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Sakawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K12",
+      "latitude": 33.5126227,
+      "longitude": 133.2867657
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3928406903",
+      "osm_id": 3928406903,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宿毛定期船乗場(沖の島鵜来島)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.9206771,
+      "longitude": 132.6976262
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3928430403",
+      "osm_id": 3928430403,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宿毛フェリー 宿毛港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.9211613,
+      "longitude": 132.6966074
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029079",
+      "osm_id": 3957029079,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "坂内",
+      "name_kana": "さかうち",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4087494,
+      "longitude": 133.3594562
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029799",
+      "osm_id": 3957029799,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "下中山",
+      "name_kana": "しもなかやま",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4338279,
+      "longitude": 133.4226532
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029802",
+      "osm_id": 3957029802,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "今川内",
+      "name_kana": "こんがうち",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4259854,
+      "longitude": 133.4086118
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029806",
+      "osm_id": 3957029806,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "埋立",
+      "name_kana": "うめたて",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.437497,
+      "longitude": 133.4300828
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029808",
+      "osm_id": 3957029808,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "塩間",
+      "name_kana": "しわい",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4473832,
+      "longitude": 133.4054129
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029816",
+      "osm_id": 3957029816,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "松ヶ崎",
+      "name_kana": "まつがさき",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4300798,
+      "longitude": 133.4291181
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029817",
+      "osm_id": 3957029817,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "横浪",
+      "name_kana": "よこなみ",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4282418,
+      "longitude": 133.3651667
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029820",
+      "osm_id": 3957029820,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "深浦",
+      "name_kana": "ふかうら",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4437447,
+      "longitude": 133.4139381
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029825",
+      "osm_id": 3957029825,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "福良",
+      "name_kana": "ふくら",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4177131,
+      "longitude": 133.4035147
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029838",
+      "osm_id": 3957029838,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "長崎",
+      "name_kana": "ながさき",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4342437,
+      "longitude": 133.411043
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3957029839",
+      "osm_id": 3957029839,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鳴無",
+      "name_kana": "おとなし",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4144069,
+      "longitude": 133.3686472
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3968917094",
+      "osm_id": 3968917094,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "梶ヶ浦渡船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.501383,
+      "longitude": 133.5580152
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_3968917095",
+      "osm_id": 3968917095,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "種崎渡船場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5043836,
+      "longitude": 133.5630001
+    },
+    {
+      "id": "jp_kochi_station_3976328248",
+      "osm_id": 3976328248,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊野",
+      "name_kana": "いの",
+      "name_translations": {
+        "en": "Ino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K07",
+      "latitude": 33.5474113,
+      "longitude": 133.4304885
+    },
+    {
+      "id": "jp_kochi_station_3976328251",
+      "osm_id": 3976328251,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝倉",
+      "name_kana": "あさくら",
+      "name_translations": {
+        "en": "Asakura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K05",
+      "latitude": 33.551573,
+      "longitude": 133.4853416
+    },
+    {
+      "id": "jp_kochi_station_5151491154",
+      "osm_id": 5151491154,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "江川崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ekawasaki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "JR予土線",
+      "ref": "G34",
+      "latitude": 33.178334,
+      "longitude": 132.7830794
+    },
+    {
+      "id": "jp_kochi_bus_terminal_5963332688",
+      "osm_id": 5963332688,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "とさでん交通一宮バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "とさでん交通",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5813045,
+      "longitude": 133.5661138
+    },
+    {
+      "id": "jp_kochi_station_8383580472",
+      "osm_id": 8383580472,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐大正",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Taishō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.194622,
+      "longitude": 132.9753774
+    },
+    {
+      "id": "jp_kochi_station_8383580473",
+      "osm_id": 8383580473,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "打井川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Utsuigawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1755516,
+      "longitude": 133.0294588
+    },
+    {
+      "id": "jp_kochi_station_8383580475",
+      "osm_id": 8383580475,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "家地川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iejigawa"
+      },
+      "operator": null,
+      "network": "JR予土線",
+      "ref": null,
+      "latitude": 33.161476,
+      "longitude": 133.074695
+    },
+    {
+      "id": "jp_kochi_station_8383580480",
+      "osm_id": 8383580480,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐北川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Kitagawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D33",
+      "latitude": 33.714746,
+      "longitude": 133.6862887
+    },
+    {
+      "id": "jp_kochi_station_8383580481",
+      "osm_id": 8383580481,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "角茂谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kakumodani"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D34",
+      "latitude": 33.6961327,
+      "longitude": 133.6925438
+    },
+    {
+      "id": "jp_kochi_station_8383580482",
+      "osm_id": 8383580482,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "繁藤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shigetō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D35",
+      "latitude": 33.6805103,
+      "longitude": 133.6899233
+    },
+    {
+      "id": "jp_kochi_station_8383580483",
+      "osm_id": 8383580483,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新改",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shingai"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "JR土讃線",
+      "ref": "D36",
+      "latitude": 33.6495806,
+      "longitude": 133.6956793
+    },
+    {
+      "id": "jp_kochi_station_8383580484",
+      "osm_id": 8383580484,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山田西町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamada-Nishimachi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D38",
+      "latitude": 33.6048084,
+      "longitude": 133.6775127
+    },
+    {
+      "id": "jp_kochi_station_8383580485",
+      "osm_id": 8383580485,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐長岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Nagaoka"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D39",
+      "latitude": 33.591521,
+      "longitude": 133.6619787
+    },
+    {
+      "id": "jp_kochi_station_8383580486",
+      "osm_id": 8383580486,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐大津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Ōtsu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D41",
+      "latitude": 33.5765694,
+      "longitude": 133.6116719
+    },
+    {
+      "id": "jp_kochi_station_8383580487",
+      "osm_id": 8383580487,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "布師田",
+      "name_kana": "ぬのしだ",
+      "name_translations": {
+        "en": "Nunoshida"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D42",
+      "latitude": 33.5757656,
+      "longitude": 133.5902189
+    },
+    {
+      "id": "jp_kochi_station_8383580488",
+      "osm_id": 8383580488,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐一宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Ikku"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D43",
+      "latitude": 33.5791745,
+      "longitude": 133.5769433
+    },
+    {
+      "id": "jp_kochi_station_8383580489",
+      "osm_id": 8383580489,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "薊野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Azōno"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D44",
+      "latitude": 33.5785352,
+      "longitude": 133.5606697
+    },
+    {
+      "id": "jp_kochi_station_8383580490",
+      "osm_id": 8383580490,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "入明",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iriake"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K01",
+      "latitude": 33.567223,
+      "longitude": 133.5300985
+    },
+    {
+      "id": "jp_kochi_station_8383580491",
+      "osm_id": 8383580491,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "円行寺口",
+      "name_kana": "えんぎょうじぐち",
+      "name_translations": {
+        "en": "Engyōjiguchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K02",
+      "latitude": 33.5657913,
+      "longitude": 133.5208742
+    },
+    {
+      "id": "jp_kochi_station_8383580492",
+      "osm_id": 8383580492,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "旭",
+      "name_kana": "あさひ",
+      "name_translations": {
+        "en": "Asahi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K03",
+      "latitude": 33.5588048,
+      "longitude": 133.5085872
+    },
+    {
+      "id": "jp_kochi_station_8383580493",
+      "osm_id": 8383580493,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高知商業前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōchi-Shōgyō-Mae"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K04",
+      "latitude": 33.5584007,
+      "longitude": 133.49723
+    },
+    {
+      "id": "jp_kochi_station_8383580495",
+      "osm_id": 8383580495,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "枝川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Edagawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K06",
+      "latitude": 33.5507288,
+      "longitude": 133.4484069
+    },
+    {
+      "id": "jp_kochi_station_8383580496",
+      "osm_id": 8383580496,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "波川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K08",
+      "latitude": 33.5437062,
+      "longitude": 133.414215
+    },
+    {
+      "id": "jp_kochi_station_8383580497",
+      "osm_id": 8383580497,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小村神社前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omurajinjamae"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "JR土讃線",
+      "ref": "K08-1",
+      "latitude": 33.540069,
+      "longitude": 133.392874
+    },
+    {
+      "id": "jp_kochi_station_8383580498",
+      "osm_id": 8383580498,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "日下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K09",
+      "latitude": 33.5335049,
+      "longitude": 133.3713225
+    },
+    {
+      "id": "jp_kochi_station_8383580499",
+      "osm_id": 8383580499,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡花",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okabana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K10",
+      "latitude": 33.5298739,
+      "longitude": 133.3508921
+    },
+    {
+      "id": "jp_kochi_station_8383580500",
+      "osm_id": 8383580500,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "土佐加茂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Kamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K11",
+      "latitude": 33.5236825,
+      "longitude": 133.3217016
+    },
+    {
+      "id": "jp_kochi_station_8383580502",
+      "osm_id": 8383580502,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "襟野々",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Erinono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K14",
+      "latitude": 33.4885695,
+      "longitude": 133.3004826
+    },
+    {
+      "id": "jp_kochi_station_8383580504",
+      "osm_id": 8383580504,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "斗賀野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Togano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K15",
+      "latitude": 33.4755338,
+      "longitude": 133.2862455
+    },
+    {
+      "id": "jp_kochi_station_8383580505",
+      "osm_id": 8383580505,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吾桑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K16",
+      "latitude": 33.4300871,
+      "longitude": 133.2957888
+    },
+    {
+      "id": "jp_kochi_station_8383580506",
+      "osm_id": 8383580506,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "多ノ郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōnogō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K17",
+      "latitude": 33.4108319,
+      "longitude": 133.2948607
+    },
+    {
+      "id": "jp_kochi_station_8383580507",
+      "osm_id": 8383580507,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōma"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K18",
+      "latitude": 33.4068342,
+      "longitude": 133.2875919
+    },
+    {
+      "id": "jp_kochi_station_8383580508",
+      "osm_id": 8383580508,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "須崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Susaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K19",
+      "latitude": 33.3926318,
+      "longitude": 133.2931682
+    },
+    {
+      "id": "jp_kochi_station_8383580509",
+      "osm_id": 8383580509,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐新荘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Shinjō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K20",
+      "latitude": 33.3864776,
+      "longitude": 133.2780902
+    },
+    {
+      "id": "jp_kochi_station_8383580510",
+      "osm_id": 8383580510,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "工業団地",
+      "name_kana": "こうぎょうだんち",
+      "name_translations": {
+        "en": "Kogyo-danchi"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK44",
+      "latitude": 32.9564743,
+      "longitude": 132.8016569
+    },
+    {
+      "id": "jp_kochi_station_8383580511",
+      "osm_id": 8383580511,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "有岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arioka"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK43",
+      "latitude": 32.9613779,
+      "longitude": 132.8330514
+    },
+    {
+      "id": "jp_kochi_station_8383580512",
+      "osm_id": 8383580512,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "安和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K21",
+      "latitude": 33.3669866,
+      "longitude": 133.2588387
+    },
+    {
+      "id": "jp_kochi_station_8383580513",
+      "osm_id": 8383580513,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐久礼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Kure"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K22",
+      "latitude": 33.3290402,
+      "longitude": 133.2266924
+    },
+    {
+      "id": "jp_kochi_station_8383580514",
+      "osm_id": 8383580514,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "影野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kageno"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K23",
+      "latitude": 33.2764983,
+      "longitude": 133.1741264
+    },
+    {
+      "id": "jp_kochi_station_8383580515",
+      "osm_id": 8383580515,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "六反地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokutanji"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "K24",
+      "latitude": 33.2618631,
+      "longitude": 133.1694648
+    },
+    {
+      "id": "jp_kochi_station_8383580516",
+      "osm_id": 8383580516,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁井田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K25",
+      "latitude": 33.2448791,
+      "longitude": 133.1613028
+    },
+    {
+      "id": "jp_kochi_station_8383599017",
+      "osm_id": 8383599017,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "窪川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kubokawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "K26;TK26",
+      "latitude": 33.2124259,
+      "longitude": 133.1373574
+    },
+    {
+      "id": "jp_kochi_station_8383599018",
+      "osm_id": 8383599018,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "荷稲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaina"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK28",
+      "latitude": 33.1331153,
+      "longitude": 133.1162041
+    },
+    {
+      "id": "jp_kochi_station_8383599019",
+      "osm_id": 8383599019,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊与喜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyoki"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK29",
+      "latitude": 33.1051358,
+      "longitude": 133.0986196
+    },
+    {
+      "id": "jp_kochi_station_8383599020",
+      "osm_id": 8383599020,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "土佐佐賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Saga"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK30",
+      "latitude": 33.0809006,
+      "longitude": 133.1014976
+    },
+    {
+      "id": "jp_kochi_station_8383599021",
+      "osm_id": 8383599021,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐賀公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saga-Kōen"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK31",
+      "latitude": 33.0641186,
+      "longitude": 133.1063692
+    },
+    {
+      "id": "jp_kochi_station_8383599022",
+      "osm_id": 8383599022,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "土佐白浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Shirahama"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK32",
+      "latitude": 33.0566465,
+      "longitude": 133.0975185
+    },
+    {
+      "id": "jp_kochi_station_8383599023",
+      "osm_id": 8383599023,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "有井川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ariigawa"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": null,
+      "latitude": 33.0390414,
+      "longitude": 133.0710304
+    },
+    {
+      "id": "jp_kochi_station_8383599024",
+      "osm_id": 8383599024,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "土佐上川口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Kamikawaguchi"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK34",
+      "latitude": 33.0429964,
+      "longitude": 133.0560945
+    },
+    {
+      "id": "jp_kochi_station_8383599025",
+      "osm_id": 8383599025,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "海の王迎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uminoōmukae"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK35",
+      "latitude": 33.0406693,
+      "longitude": 133.0474216
+    },
+    {
+      "id": "jp_kochi_station_8383599026",
+      "osm_id": 8383599026,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "浮鞭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ukibuchi"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK36",
+      "latitude": 33.0394686,
+      "longitude": 133.030006
+    },
+    {
+      "id": "jp_kochi_station_8383599027",
+      "osm_id": 8383599027,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "中村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakamura"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK40",
+      "latitude": 32.9843748,
+      "longitude": 132.9440278
+    },
+    {
+      "id": "jp_kochi_station_8383599028",
+      "osm_id": 8383599028,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "土佐入野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Irino"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK37",
+      "latitude": 33.023883,
+      "longitude": 133.011606
+    },
+    {
+      "id": "jp_kochi_station_8383599029",
+      "osm_id": 8383599029,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Ōgata"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK38",
+      "latitude": 33.0089514,
+      "longitude": 132.9869378
+    },
+    {
+      "id": "jp_kochi_station_8383599030",
+      "osm_id": 8383599030,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "古津賀",
+      "name_kana": "こつか",
+      "name_translations": {
+        "en": "Kotsuka"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": "土佐くろしお鉄道中村線",
+      "ref": "TK39",
+      "latitude": 32.9862287,
+      "longitude": 132.9623741
+    },
+    {
+      "id": "jp_kochi_station_8383599031",
+      "osm_id": 8383599031,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "具同",
+      "name_kana": "ぐどう",
+      "name_translations": {
+        "en": "Gudō"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK41",
+      "latitude": 32.9793957,
+      "longitude": 132.9152477
+    },
+    {
+      "id": "jp_kochi_station_8383599032",
+      "osm_id": 8383599032,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "国見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kunimi"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK42",
+      "latitude": 32.9789524,
+      "longitude": 132.8837371
+    },
+    {
+      "id": "jp_kochi_station_8383599033",
+      "osm_id": 8383599033,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東宿毛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Sukumo"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK46",
+      "latitude": 32.9337243,
+      "longitude": 132.7284721
+    },
+    {
+      "id": "jp_kochi_station_8383599814",
+      "osm_id": 8383599814,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "後免",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gomen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D40",
+      "latitude": 33.5792327,
+      "longitude": 133.6453255
+    },
+    {
+      "id": "jp_kochi_station_8383599815",
+      "osm_id": 8383599815,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "土佐山田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosa-Yamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "D37",
+      "latitude": 33.6071484,
+      "longitude": 133.6850108
+    },
+    {
+      "id": "jp_kochi_station_8543216547",
+      "osm_id": 8543216547,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "あき総合病院前",
+      "name_kana": "あきそうごうびょういんまえ",
+      "name_translations": {
+        "en": "Aki General Hospital"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5043533,
+      "longitude": 133.8976596
+    },
+    {
+      "id": "jp_kochi_station_8861427375",
+      "osm_id": 8861427375,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大杉",
+      "name_kana": "おおすぎ",
+      "name_translations": {
+        "en": "Osugi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D32",
+      "latitude": 33.7612526,
+      "longitude": 133.6643562
+    },
+    {
+      "id": "jp_kochi_station_8862848035",
+      "osm_id": 8862848035,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐穴内",
+      "name_kana": "とさあなない",
+      "name_translations": {
+        "en": "Tosaananai"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D31",
+      "latitude": 33.7792786,
+      "longitude": 133.6957688
+    },
+    {
+      "id": "jp_kochi_station_8864403330",
+      "osm_id": 8864403330,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大田口",
+      "name_kana": "おおたぐち",
+      "name_translations": {
+        "en": "Otaguchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D30",
+      "latitude": 33.7863363,
+      "longitude": 133.7249818
+    },
+    {
+      "id": "jp_kochi_station_8867301429",
+      "osm_id": 8867301429,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "豊永",
+      "name_kana": "とよなが",
+      "name_translations": {
+        "en": "Toyonaga"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D29",
+      "latitude": 33.7967507,
+      "longitude": 133.759196
+    },
+    {
+      "id": "jp_kochi_station_8869236376",
+      "osm_id": 8869236376,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "土佐岩原",
+      "name_kana": "とさいわはら",
+      "name_translations": {
+        "en": "Tosaiwahara"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D28",
+      "latitude": 33.8221746,
+      "longitude": 133.787412
+    },
+    {
+      "id": "jp_kochi_station_9960792085",
+      "osm_id": 9960792085,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "private",
+      "name": "平田",
+      "name_kana": "ひらた",
+      "name_translations": {
+        "en": "Hirata"
+      },
+      "operator": "土佐くろしお鉄道",
+      "network": null,
+      "ref": "TK45",
+      "latitude": 32.9556305,
+      "longitude": 132.7951756
+    },
+    {
+      "id": "jp_kochi_bus_terminal_10043990218",
+      "osm_id": 10043990218,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "安芸駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5043488,
+      "longitude": 133.9070824
+    },
+    {
+      "id": "jp_kochi_station_11576325257",
+      "osm_id": 11576325257,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高知",
+      "name_kana": "こうち",
+      "name_translations": {
+        "en": "Kōchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "D45;K00",
+      "latitude": 33.5672072,
+      "longitude": 133.5434889
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_13045035602",
+      "osm_id": 13045035602,
+      "osm_type": "node",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Shimoda Fishing Port",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.9391186,
+      "longitude": 132.9927797
+    },
+    {
+      "id": "jp_kochi_bus_terminal_120080490",
+      "osm_id": 120080490,
+      "osm_type": "way",
+      "prefecture_id": "jp_kochi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "アンパンマンバスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.607045,
+      "longitude": 133.6853081
+    },
+    {
+      "id": "jp_kochi_bus_terminal_120374467",
+      "osm_id": 120374467,
+      "osm_type": "way",
+      "prefecture_id": "jp_kochi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "東エントランス",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6208268,
+      "longitude": 133.7216558
+    },
+    {
+      "id": "jp_kochi_bus_terminal_148364540",
+      "osm_id": 148364540,
+      "osm_type": "way",
+      "prefecture_id": "jp_kochi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR 美良布駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6483037,
+      "longitude": 133.7806854
+    },
+    {
+      "id": "jp_kochi_bus_terminal_500634416",
+      "osm_id": 500634416,
+      "osm_type": "way",
+      "prefecture_id": "jp_kochi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "はりまや橋観光バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.559165,
+      "longitude": 133.5458589
+    },
+    {
+      "id": "jp_kochi_ferry_terminal_1372694859",
+      "osm_id": 1372694859,
+      "osm_type": "way",
+      "prefecture_id": "jp_kochi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "高知新港客船ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kochi Cruise Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5116116,
+      "longitude": 133.58984
+    },
+    {
+      "id": "jp_kochi_airport_12028679",
+      "osm_id": 12028679,
+      "osm_type": "relation",
+      "prefecture_id": "jp_kochi",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "高知龍馬空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kochi Ryoma Airport"
+      },
+      "operator": "Kochi Airport",
+      "network": null,
+      "ref": "KCZ",
+      "latitude": 33.5463462,
+      "longitude": 133.668988
+    }
+  ]
+}

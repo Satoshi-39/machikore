@@ -1,0 +1,1670 @@
+{
+  "fetchedAt": "2025-12-24T05:57:08.093Z",
+  "prefecture_id": "jp_saga",
+  "prefecture_name": "佐賀県",
+  "stats": {
+    "station": 79,
+    "airport": 2,
+    "ferry_terminal": 6,
+    "bus_terminal": 6,
+    "total": 93
+  },
+  "data": [
+    {
+      "id": "jp_saga_station_265852127",
+      "osm_id": 265852127,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三間坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mimasaka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR佐世保線",
+      "ref": null,
+      "latitude": 33.194725,
+      "longitude": 129.9476933
+    },
+    {
+      "id": "jp_saga_station_265852448",
+      "osm_id": 265852448,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上有田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Arita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR佐世保線",
+      "ref": null,
+      "latitude": 33.1902799,
+      "longitude": 129.9053775
+    },
+    {
+      "id": "jp_saga_station_270856398",
+      "osm_id": 270856398,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳴石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naruishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2996385,
+      "longitude": 129.816694
+    },
+    {
+      "id": "jp_saga_station_270856463",
+      "osm_id": 270856463,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "金武",
+      "name_kana": "かなたけ",
+      "name_translations": {
+        "en": "Kanatake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2518039,
+      "longitude": 129.8544789
+    },
+    {
+      "id": "jp_saga_station_270856548",
+      "osm_id": 270856548,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "夫婦石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Meotoishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2372543,
+      "longitude": 129.8506151
+    },
+    {
+      "id": "jp_saga_station_270856725",
+      "osm_id": 270856725,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "川東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawahigashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.267624,
+      "longitude": 129.864123
+    },
+    {
+      "id": "jp_saga_station_270856748",
+      "osm_id": 270856748,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "山谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamadani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2290695,
+      "longitude": 129.8491014
+    },
+    {
+      "id": "jp_saga_station_270857013",
+      "osm_id": 270857013,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "久原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kubara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3148676,
+      "longitude": 129.81155
+    },
+    {
+      "id": "jp_saga_station_270857161",
+      "osm_id": 270857161,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "西有田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "NIshi-Arita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2099976,
+      "longitude": 129.8500521
+    },
+    {
+      "id": "jp_saga_station_270857171",
+      "osm_id": 270857171,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "三代橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midaibashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.1891592,
+      "longitude": 129.8656598
+    },
+    {
+      "id": "jp_saga_station_270857585",
+      "osm_id": 270857585,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊万里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.271839,
+      "longitude": 129.8772734
+    },
+    {
+      "id": "jp_saga_station_270857738",
+      "osm_id": 270857738,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "福島口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukushimaguchi"
+      },
+      "operator": "松浦鉄道",
+      "network": "松浦鉄道西九州線",
+      "ref": null,
+      "latitude": 33.3379647,
+      "longitude": 129.7903672
+    },
+    {
+      "id": "jp_saga_station_270857764",
+      "osm_id": 270857764,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurogou"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.1949099,
+      "longitude": 129.8555416
+    },
+    {
+      "id": "jp_saga_station_270857953",
+      "osm_id": 270857953,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2848731,
+      "longitude": 129.8354635
+    },
+    {
+      "id": "jp_saga_station_270858225",
+      "osm_id": 270858225,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "大木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2218071,
+      "longitude": 129.8499674
+    },
+    {
+      "id": "jp_saga_station_270858664",
+      "osm_id": 270858664,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "楠久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2914152,
+      "longitude": 129.82674
+    },
+    {
+      "id": "jp_saga_station_270858875",
+      "osm_id": 270858875,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦ノ崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uranosaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3349804,
+      "longitude": 129.7929124
+    },
+    {
+      "id": "jp_saga_station_270858881",
+      "osm_id": 270858881,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "東山代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Yamashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2781443,
+      "longitude": 129.84574
+    },
+    {
+      "id": "jp_saga_station_270859690",
+      "osm_id": 270859690,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "波瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haze"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3230012,
+      "longitude": 129.807266
+    },
+    {
+      "id": "jp_saga_station_270859700",
+      "osm_id": 270859700,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "蔵宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zoushuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2020578,
+      "longitude": 129.8505109
+    },
+    {
+      "id": "jp_saga_ferry_terminal_778175254",
+      "osm_id": 778175254,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "唐津フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4696439,
+      "longitude": 129.9636169
+    },
+    {
+      "id": "jp_saga_station_778185118",
+      "osm_id": 778185118,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "唐津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4462729,
+      "longitude": 129.9677507
+    },
+    {
+      "id": "jp_saga_airport_1042055897",
+      "osm_id": 1042055897,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "airport",
+      "subtype": "military",
+      "name": "目達原飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Metabaru Air Base"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RJDM",
+      "latitude": 33.3256992,
+      "longitude": 130.4130539
+    },
+    {
+      "id": "jp_saga_station_2011577951",
+      "osm_id": 2011577951,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新鳥栖",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Tosu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3697912,
+      "longitude": 130.4914166
+    },
+    {
+      "id": "jp_saga_bus_terminal_3396954905",
+      "osm_id": 3396954905,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "小城バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2934578,
+      "longitude": 130.1990481
+    },
+    {
+      "id": "jp_saga_station_4026759506",
+      "osm_id": 4026759506,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "けやき台",
+      "name_kana": "けやきだい",
+      "name_translations": {
+        "en": "Keyaki-dai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4343882,
+      "longitude": 130.5333383
+    },
+    {
+      "id": "jp_saga_station_4026759507",
+      "osm_id": 4026759507,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "基山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiyama"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB12",
+      "latitude": 33.4209927,
+      "longitude": 130.5324138
+    },
+    {
+      "id": "jp_saga_station_4837980299",
+      "osm_id": 4837980299,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "弥生が丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yayoigaoka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4025169,
+      "longitude": 130.5286097
+    },
+    {
+      "id": "jp_saga_station_4837983624",
+      "osm_id": 4837983624,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tashiro"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3841138,
+      "longitude": 130.5247036
+    },
+    {
+      "id": "jp_saga_station_4837988927",
+      "osm_id": 4837988927,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "武雄温泉",
+      "name_kana": "タケオオンセン",
+      "name_translations": {
+        "en": "Takeo Onsen"
+      },
+      "operator": null,
+      "network": "JR佐世保線",
+      "ref": null,
+      "latitude": 33.1964792,
+      "longitude": 130.0230661
+    },
+    {
+      "id": "jp_saga_station_4837990009",
+      "osm_id": 4837990009,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鍋島",
+      "name_kana": "なべしま",
+      "name_translations": {
+        "en": "Nabeshima"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2590622,
+      "longitude": 130.2657589
+    },
+    {
+      "id": "jp_saga_station_5875685172",
+      "osm_id": 5875685172,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前旭",
+      "name_kana": "ひぜんあさひ",
+      "name_translations": {
+        "en": "Hizen Asahi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB16",
+      "latitude": 33.3501001,
+      "longitude": 130.4961203
+    },
+    {
+      "id": "jp_saga_station_6050997375",
+      "osm_id": 6050997375,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takahashi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR佐世保線",
+      "ref": null,
+      "latitude": 33.2078889,
+      "longitude": 130.0418069
+    },
+    {
+      "id": "jp_saga_station_6060489258",
+      "osm_id": 6060489258,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊賀屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Igaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JH07",
+      "latitude": 33.2904495,
+      "longitude": 130.3369686
+    },
+    {
+      "id": "jp_saga_station_6244705890",
+      "osm_id": 6244705890,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西唐津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Karatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4616571,
+      "longitude": 129.9576107
+    },
+    {
+      "id": "jp_saga_station_6374755514",
+      "osm_id": 6374755514,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "有田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arita"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1835918,
+      "longitude": 129.8819711
+    },
+    {
+      "id": "jp_saga_bus_terminal_6382747785",
+      "osm_id": 6382747785,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "嬉野バスセンター",
+      "name_kana": "うれしのばすせんたー",
+      "name_translations": {
+        "en": "Ureshino Bus Centre"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.0961464,
+      "longitude": 129.9816613
+    },
+    {
+      "id": "jp_saga_station_7222666256",
+      "osm_id": 7222666256,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "永尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagao"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR佐世保線",
+      "ref": null,
+      "latitude": 33.1931925,
+      "longitude": 129.9806314
+    },
+    {
+      "id": "jp_saga_station_7816717075",
+      "osm_id": 7816717075,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上伊万里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Imari"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.2701263,
+      "longitude": 129.8921064
+    },
+    {
+      "id": "jp_saga_station_7816717076",
+      "osm_id": 7816717076,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "金石原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanaishihara"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.2652054,
+      "longitude": 129.9347549
+    },
+    {
+      "id": "jp_saga_station_7816717077",
+      "osm_id": 7816717077,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "桃川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Momonokawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.2718525,
+      "longitude": 129.9568409
+    },
+    {
+      "id": "jp_saga_station_7816717078",
+      "osm_id": 7816717078,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前長野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Nagano"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.2955662,
+      "longitude": 129.970927
+    },
+    {
+      "id": "jp_saga_station_7816717079",
+      "osm_id": 7816717079,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大川野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ookawano"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.3071349,
+      "longitude": 129.9764496
+    },
+    {
+      "id": "jp_saga_station_7816717080",
+      "osm_id": 7816717080,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "駒鳴",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konamaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.3194995,
+      "longitude": 129.9724084
+    },
+    {
+      "id": "jp_saga_station_7816717081",
+      "osm_id": 7816717081,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sari"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.3379614,
+      "longitude": 129.9789329
+    },
+    {
+      "id": "jp_saga_station_7816717082",
+      "osm_id": 7816717082,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西相知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Ouchi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.3475457,
+      "longitude": 129.9904892
+    },
+    {
+      "id": "jp_saga_station_7816717084",
+      "osm_id": 7816717084,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "鬼塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onizuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4214663,
+      "longitude": 129.9871901
+    },
+    {
+      "id": "jp_saga_station_7816772394",
+      "osm_id": 7816772394,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Kubo"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.3555122,
+      "longitude": 129.9998467
+    },
+    {
+      "id": "jp_saga_station_7816772436",
+      "osm_id": 7816772436,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "虹ノ松原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nijinomatsubura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4410618,
+      "longitude": 130.0162027
+    },
+    {
+      "id": "jp_saga_station_7816772438",
+      "osm_id": 7816772438,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "和多田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Watada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4369348,
+      "longitude": 129.9807718
+    },
+    {
+      "id": "jp_saga_station_7816772450",
+      "osm_id": 7816772450,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4467721,
+      "longitude": 130.0364636
+    },
+    {
+      "id": "jp_saga_station_7816772454",
+      "osm_id": 7816772454,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東唐津",
+      "name_kana": "ひがしからつ",
+      "name_translations": {
+        "en": "Higashi-Karatsu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR筑肥線",
+      "ref": null,
+      "latitude": 33.4394053,
+      "longitude": 129.9968487
+    },
+    {
+      "id": "jp_saga_station_7839126316",
+      "osm_id": 7839126316,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳥栖",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tosu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JB15;JH01",
+      "latitude": 33.3739136,
+      "longitude": 130.5198828
+    },
+    {
+      "id": "jp_saga_station_7844799627",
+      "osm_id": 7844799627,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "立野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tateno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4126046,
+      "longitude": 130.5393201
+    },
+    {
+      "id": "jp_saga_station_7887121336",
+      "osm_id": 7887121336,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前大浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Ōura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.9748201,
+      "longitude": 130.2068723
+    },
+    {
+      "id": "jp_saga_station_7887163343",
+      "osm_id": 7887163343,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前飯田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Iida"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.0555213,
+      "longitude": 130.1588112
+    },
+    {
+      "id": "jp_saga_station_7887175871",
+      "osm_id": 7887175871,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "多良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tara"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.0249287,
+      "longitude": 130.17609
+    },
+    {
+      "id": "jp_saga_station_7887210248",
+      "osm_id": 7887210248,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Hama"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.0958948,
+      "longitude": 130.1164655
+    },
+    {
+      "id": "jp_saga_station_7887212077",
+      "osm_id": 7887212077,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前七浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Nanaura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.0703866,
+      "longitude": 130.1454511
+    },
+    {
+      "id": "jp_saga_station_7887286260",
+      "osm_id": 7887286260,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前鹿島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Kashima"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1143937,
+      "longitude": 130.0977528
+    },
+    {
+      "id": "jp_saga_station_7887323718",
+      "osm_id": 7887323718,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前竜王",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Ryūō"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1466599,
+      "longitude": 130.1204416
+    },
+    {
+      "id": "jp_saga_station_7887750905",
+      "osm_id": 7887750905,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前白石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Shiroishi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1868892,
+      "longitude": 130.1358578
+    },
+    {
+      "id": "jp_saga_station_7887750916",
+      "osm_id": 7887750916,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉野ヶ里公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshinogarikoen"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JH05",
+      "latitude": 33.3248016,
+      "longitude": 130.3991951
+    },
+    {
+      "id": "jp_saga_station_7887750918",
+      "osm_id": 7887750918,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "江北",
+      "name_kana": "こうほく",
+      "name_translations": {
+        "en": "Kohoku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2192643,
+      "longitude": 130.1609895
+    },
+    {
+      "id": "jp_saga_station_7887750924",
+      "osm_id": 7887750924,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "久保田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kubota"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2556027,
+      "longitude": 130.2288699
+    },
+    {
+      "id": "jp_saga_station_7887750930",
+      "osm_id": 7887750930,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥前麓",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hizen-Fumoto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JH03",
+      "latitude": 33.3658702,
+      "longitude": 130.4780504
+    },
+    {
+      "id": "jp_saga_station_7887750938",
+      "osm_id": 7887750938,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "牛津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushizu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2478244,
+      "longitude": 130.2011558
+    },
+    {
+      "id": "jp_saga_station_7888509419",
+      "osm_id": 7888509419,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中原",
+      "name_kana": "なかばる",
+      "name_translations": {
+        "en": "Nakabaru"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JH04",
+      "latitude": 33.3464862,
+      "longitude": 130.4405342
+    },
+    {
+      "id": "jp_saga_station_8078384320",
+      "osm_id": 8078384320,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中多久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka-Taku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.2832982,
+      "longitude": 130.1123688
+    },
+    {
+      "id": "jp_saga_station_8078384321",
+      "osm_id": 8078384321,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "厳木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyuragi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.3233466,
+      "longitude": 130.0606712
+    },
+    {
+      "id": "jp_saga_station_8078384322",
+      "osm_id": 8078384322,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwaya"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.3314685,
+      "longitude": 130.0384158
+    },
+    {
+      "id": "jp_saga_station_8078384323",
+      "osm_id": 8078384323,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "相知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ouchi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.3469265,
+      "longitude": 130.0199157
+    },
+    {
+      "id": "jp_saga_station_8078384329",
+      "osm_id": 8078384329,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本牟田部",
+      "name_kana": "ほんむたべ",
+      "name_translations": {
+        "en": "Honmutabe"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.3724013,
+      "longitude": 129.9963746
+    },
+    {
+      "id": "jp_saga_station_8078384332",
+      "osm_id": 8078384332,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamamoto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.393373,
+      "longitude": 129.9811041
+    },
+    {
+      "id": "jp_saga_station_8078384345",
+      "osm_id": 8078384345,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東多久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Taku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.2854199,
+      "longitude": 130.1424692
+    },
+    {
+      "id": "jp_saga_station_8078384350",
+      "osm_id": 8078384350,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "多久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taku"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.2880886,
+      "longitude": 130.0961414
+    },
+    {
+      "id": "jp_saga_station_8137244445",
+      "osm_id": 8137244445,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "神埼",
+      "name_kana": "かんざき",
+      "name_translations": {
+        "en": "Kanzaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JH06",
+      "latitude": 33.3158443,
+      "longitude": 130.3745998
+    },
+    {
+      "id": "jp_saga_station_8168035527",
+      "osm_id": 8168035527,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "嬉野温泉",
+      "name_kana": "うれしのおんせん",
+      "name_translations": {
+        "en": "Ureshino-Onsen"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.1066719,
+      "longitude": 129.9989438
+    },
+    {
+      "id": "jp_saga_station_8654562870",
+      "osm_id": 8654562870,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "KItagata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR佐世保線",
+      "ref": null,
+      "latitude": 33.2161375,
+      "longitude": 130.0830616
+    },
+    {
+      "id": "jp_saga_station_8657034811",
+      "osm_id": 8657034811,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oomachi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR佐世保線",
+      "ref": null,
+      "latitude": 33.2124357,
+      "longitude": 130.1074704
+    },
+    {
+      "id": "jp_saga_ferry_terminal_9008323918",
+      "osm_id": 9008323918,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小川島航路乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "川口汽船有限会社",
+      "network": null,
+      "ref": null,
+      "latitude": 33.539298,
+      "longitude": 129.8946113
+    },
+    {
+      "id": "jp_saga_ferry_terminal_9008323958",
+      "osm_id": 9008323958,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "松島航路のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": "株式会社新栄",
+      "ref": null,
+      "latitude": 33.5397566,
+      "longitude": 129.8945377
+    },
+    {
+      "id": "jp_saga_ferry_terminal_9008324006",
+      "osm_id": 9008324006,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "馬渡島航路のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5417057,
+      "longitude": 129.8933049
+    },
+    {
+      "id": "jp_saga_ferry_terminal_9008324007",
+      "osm_id": 9008324007,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "加唐島航路のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5415909,
+      "longitude": 129.893367
+    },
+    {
+      "id": "jp_saga_ferry_terminal_9009216149",
+      "osm_id": 9009216149,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "向島航路のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "株式会社向島汽船",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4496295,
+      "longitude": 129.7898237
+    },
+    {
+      "id": "jp_saga_station_9524354389",
+      "osm_id": 9524354389,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR唐津線",
+      "ref": null,
+      "latitude": 33.2856312,
+      "longitude": 130.1986527
+    },
+    {
+      "id": "jp_saga_bus_terminal_10804663093",
+      "osm_id": 10804663093,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "唐津大手口バスセンター",
+      "name_kana": "からつおおてぐちばすせんたー",
+      "name_translations": {
+        "en": "Karatsu Oteguchi Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4493491,
+      "longitude": 129.9695103
+    },
+    {
+      "id": "jp_saga_station_13005891619",
+      "osm_id": 13005891619,
+      "osm_type": "node",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "private",
+      "name": "バルーンさが",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Balloon Saga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2575818,
+      "longitude": 130.2463612
+    },
+    {
+      "id": "jp_saga_bus_terminal_552985981",
+      "osm_id": 552985981,
+      "osm_type": "way",
+      "prefecture_id": "jp_saga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "佐賀駅バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saga Station Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2644774,
+      "longitude": 130.2993075
+    },
+    {
+      "id": "jp_saga_bus_terminal_753612738",
+      "osm_id": 753612738,
+      "osm_type": "way",
+      "prefecture_id": "jp_saga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "祐徳稲荷神社バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.0781092,
+      "longitude": 130.1090496
+    },
+    {
+      "id": "jp_saga_station_1167993847",
+      "osm_id": 1167993847,
+      "osm_type": "way",
+      "prefecture_id": "jp_saga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saga"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JH08",
+      "latitude": 33.2641541,
+      "longitude": 130.297418
+    },
+    {
+      "id": "jp_saga_bus_terminal_1322961289",
+      "osm_id": 1322961289,
+      "osm_type": "way",
+      "prefecture_id": "jp_saga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "呼子バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "昭和自動車",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5373047,
+      "longitude": 129.8939518
+    },
+    {
+      "id": "jp_saga_airport_5601357",
+      "osm_id": 5601357,
+      "osm_type": "relation",
+      "prefecture_id": "jp_saga",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "九州佐賀国際空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saga Airport (Kyushu Saga International Airport)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HSG",
+      "latitude": 33.1494164,
+      "longitude": 130.3044964
+    }
+  ]
+}

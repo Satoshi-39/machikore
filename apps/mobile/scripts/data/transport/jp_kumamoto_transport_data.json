@@ -1,0 +1,2650 @@
+{
+  "fetchedAt": "2025-12-24T05:57:59.731Z",
+  "prefecture_id": "jp_kumamoto",
+  "prefecture_name": "熊本県",
+  "stats": {
+    "station": 124,
+    "airport": 4,
+    "ferry_terminal": 13,
+    "bus_terminal": 8,
+    "total": 149
+  },
+  "data": [
+    {
+      "id": "jp_kumamoto_station_265855422",
+      "osm_id": 265855422,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "瀬田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seta"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8726723,
+      "longitude": 130.9136156
+    },
+    {
+      "id": "jp_kumamoto_station_265855797",
+      "osm_id": 265855797,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "内牧",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchinomaki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9422172,
+      "longitude": 131.0436601
+    },
+    {
+      "id": "jp_kumamoto_station_265857288",
+      "osm_id": 265857288,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宮地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyaji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9370943,
+      "longitude": 131.1177775
+    },
+    {
+      "id": "jp_kumamoto_station_265857448",
+      "osm_id": 265857448,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "波野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namino"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9386458,
+      "longitude": 131.1949259
+    },
+    {
+      "id": "jp_kumamoto_station_265859609",
+      "osm_id": 265859609,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "赤水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akamizu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.913399,
+      "longitude": 130.9929146
+    },
+    {
+      "id": "jp_kumamoto_station_265861854",
+      "osm_id": 265861854,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "いこいの村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikoi no mura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.936673,
+      "longitude": 131.094941
+    },
+    {
+      "id": "jp_kumamoto_station_265861860",
+      "osm_id": 265861860,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市ノ川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichinokawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.928226,
+      "longitude": 131.007968
+    },
+    {
+      "id": "jp_kumamoto_station_265861913",
+      "osm_id": 265861913,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "滝水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takimizu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9333815,
+      "longitude": 131.2428285
+    },
+    {
+      "id": "jp_kumamoto_station_265861915",
+      "osm_id": 265861915,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "阿蘇",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aso"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.9374013,
+      "longitude": 131.0800572
+    },
+    {
+      "id": "jp_kumamoto_station_265863392",
+      "osm_id": 265863392,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "立野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tateno"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.877493,
+      "longitude": 130.9655332
+    },
+    {
+      "id": "jp_kumamoto_station_265878522",
+      "osm_id": 265878522,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "波多浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hataura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.6156344,
+      "longitude": 130.488224
+    },
+    {
+      "id": "jp_kumamoto_station_265878570",
+      "osm_id": 265878570,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥後長浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higo-Nagahama"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.6908277,
+      "longitude": 130.5605608
+    },
+    {
+      "id": "jp_kumamoto_station_265878579",
+      "osm_id": 265878579,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "赤瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akase"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.6532077,
+      "longitude": 130.5100629
+    },
+    {
+      "id": "jp_kumamoto_station_265878883",
+      "osm_id": 265878883,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三角",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misumi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.6077458,
+      "longitude": 130.4696756
+    },
+    {
+      "id": "jp_kumamoto_station_265908658",
+      "osm_id": 265908658,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okoba"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.1648294,
+      "longitude": 130.7875085
+    },
+    {
+      "id": "jp_kumamoto_station_265909358",
+      "osm_id": 265909358,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "瀬戸石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Setoishi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.3716467,
+      "longitude": 130.6463705
+    },
+    {
+      "id": "jp_kumamoto_station_265909633",
+      "osm_id": 265909633,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "那良口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naraguchi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.2436585,
+      "longitude": 130.6674754
+    },
+    {
+      "id": "jp_kumamoto_station_265909635",
+      "osm_id": 265909635,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西人吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishihitoyoshi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.2285306,
+      "longitude": 130.7253963
+    },
+    {
+      "id": "jp_kumamoto_station_265909639",
+      "osm_id": 265909639,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "渡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Watari"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.2369141,
+      "longitude": 130.6947569
+    },
+    {
+      "id": "jp_kumamoto_station_265909710",
+      "osm_id": 265909710,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "一勝地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isshochi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.2501406,
+      "longitude": 130.6521695
+    },
+    {
+      "id": "jp_kumamoto_station_265909878",
+      "osm_id": 265909878,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshio"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.3305625,
+      "longitude": 130.6001248
+    },
+    {
+      "id": "jp_kumamoto_station_265909899",
+      "osm_id": 265909899,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "海路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaiji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.3492095,
+      "longitude": 130.6190892
+    },
+    {
+      "id": "jp_kumamoto_station_265912818",
+      "osm_id": 265912818,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "球泉洞",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyusendo"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.2679909,
+      "longitude": 130.6081653
+    },
+    {
+      "id": "jp_kumamoto_station_265912885",
+      "osm_id": 265912885,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "葉木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.4106196,
+      "longitude": 130.6451645
+    },
+    {
+      "id": "jp_kumamoto_station_265913515",
+      "osm_id": 265913515,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "白石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiroishi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.305994,
+      "longitude": 130.608664
+    },
+    {
+      "id": "jp_kumamoto_station_265913620",
+      "osm_id": 265913620,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "段",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dan"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.4678697,
+      "longitude": 130.6458441
+    },
+    {
+      "id": "jp_kumamoto_station_265915756",
+      "osm_id": 265915756,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鎌瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamase"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.3909067,
+      "longitude": 130.6547004
+    },
+    {
+      "id": "jp_kumamoto_station_265915961",
+      "osm_id": 265915961,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "矢岳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yatake"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.1043058,
+      "longitude": 130.7698091
+    },
+    {
+      "id": "jp_kumamoto_station_265915964",
+      "osm_id": 265915964,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "坂本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakamoto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR肥薩線",
+      "ref": null,
+      "latitude": 32.4348828,
+      "longitude": 130.6579493
+    },
+    {
+      "id": "jp_kumamoto_station_265926986",
+      "osm_id": 265926986,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunomae"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.281475,
+      "longitude": 130.979927
+    },
+    {
+      "id": "jp_kumamoto_station_265926992",
+      "osm_id": 265926992,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "一武",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichibu"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2145539,
+      "longitude": 130.8399247
+    },
+    {
+      "id": "jp_kumamoto_station_265927179",
+      "osm_id": 265927179,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "多良木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taragi"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2629818,
+      "longitude": 130.9336057
+    },
+    {
+      "id": "jp_kumamoto_station_265927185",
+      "osm_id": 265927185,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "木上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinoe"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2241381,
+      "longitude": 130.8586812
+    },
+    {
+      "id": "jp_kumamoto_station_265927188",
+      "osm_id": 265927188,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "公立病院前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōritsubyōinmae"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.255852,
+      "longitude": 130.921579
+    },
+    {
+      "id": "jp_kumamoto_station_265927239",
+      "osm_id": 265927239,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "あさぎり",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asagiri"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2363192,
+      "longitude": 130.8939365
+    },
+    {
+      "id": "jp_kumamoto_station_265927760",
+      "osm_id": 265927760,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "東多良木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Taragi"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2721553,
+      "longitude": 130.9504449
+    },
+    {
+      "id": "jp_kumamoto_station_265927763",
+      "osm_id": 265927763,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "川村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawamura"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2072475,
+      "longitude": 130.7957172
+    },
+    {
+      "id": "jp_kumamoto_station_265928336",
+      "osm_id": 265928336,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "おかどめ幸福",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okadome-Kōfuku"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.231476,
+      "longitude": 130.8751642
+    },
+    {
+      "id": "jp_kumamoto_station_265928341",
+      "osm_id": 265928341,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "新鶴羽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Tsuruba"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2754172,
+      "longitude": 130.9659264
+    },
+    {
+      "id": "jp_kumamoto_station_265928422",
+      "osm_id": 265928422,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "肥後西村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higo-Nishinomura"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.2023276,
+      "longitude": 130.808893
+    },
+    {
+      "id": "jp_kumamoto_station_265928642",
+      "osm_id": 265928642,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "東免田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Menda"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.250454,
+      "longitude": 130.913356
+    },
+    {
+      "id": "jp_kumamoto_station_265928862",
+      "osm_id": 265928862,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "相良藩願成寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sagarahanganjoji"
+      },
+      "operator": "くま川鉄道",
+      "network": "くま川鉄道湯前線",
+      "ref": null,
+      "latitude": 32.218354,
+      "longitude": 130.7695692
+    },
+    {
+      "id": "jp_kumamoto_station_270882948",
+      "osm_id": 270882948,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "須屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suya"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8578544,
+      "longitude": 130.7364825
+    },
+    {
+      "id": "jp_kumamoto_station_270882963",
+      "osm_id": 270882963,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroishi"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.87037,
+      "longitude": 130.7421145
+    },
+    {
+      "id": "jp_kumamoto_station_270882968",
+      "osm_id": 270882968,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "熊本高専前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumamotokosen-mae"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8780629,
+      "longitude": 130.7462118
+    },
+    {
+      "id": "jp_kumamoto_station_270882995",
+      "osm_id": 270882995,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "堀川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Horikawa"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8491817,
+      "longitude": 130.7253738
+    },
+    {
+      "id": "jp_kumamoto_station_270882996",
+      "osm_id": 270882996,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "韓々坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kankanzaka"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8241696,
+      "longitude": 130.7018919
+    },
+    {
+      "id": "jp_kumamoto_station_270882998",
+      "osm_id": 270882998,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "三ツ石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsuishi"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8640617,
+      "longitude": 130.738365
+    },
+    {
+      "id": "jp_kumamoto_station_270883013",
+      "osm_id": 270883013,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "打越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchigoshi"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.823725,
+      "longitude": 130.7138201
+    },
+    {
+      "id": "jp_kumamoto_station_270883019",
+      "osm_id": 270883019,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "池田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikeda"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8270635,
+      "longitude": 130.7074969
+    },
+    {
+      "id": "jp_kumamoto_station_270883066",
+      "osm_id": 270883066,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "亀井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamei"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8374676,
+      "longitude": 130.7222167
+    },
+    {
+      "id": "jp_kumamoto_station_270883077",
+      "osm_id": 270883077,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "八景水谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakenomiya"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.841456,
+      "longitude": 130.7228019
+    },
+    {
+      "id": "jp_kumamoto_station_270883421",
+      "osm_id": 270883421,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "坪井川公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuboigawa-koen"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8214305,
+      "longitude": 130.7187315
+    },
+    {
+      "id": "jp_kumamoto_station_270902069",
+      "osm_id": 270902069,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒髪町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurokamimachi"
+      },
+      "operator": "熊本電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.8183497,
+      "longitude": 130.7172317
+    },
+    {
+      "id": "jp_kumamoto_station_270902071",
+      "osm_id": 270902071,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤崎宮前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujisakigu-mae"
+      },
+      "operator": "熊本電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.808672,
+      "longitude": 130.713214
+    },
+    {
+      "id": "jp_kumamoto_station_360077659",
+      "osm_id": 360077659,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "南阿蘇水の生まれる里白水高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamiaso Mizu-no-Umareru-Sato Hakusui-Kōgen"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.8341732,
+      "longitude": 131.0401642
+    },
+    {
+      "id": "jp_kumamoto_station_360077663",
+      "osm_id": 360077663,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "長陽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chōyō"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.8541971,
+      "longitude": 131.0039609
+    },
+    {
+      "id": "jp_kumamoto_station_360077825",
+      "osm_id": 360077825,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿蘇下田城ふれあい温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aso-Shimodajō-Fureai-Onsen"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.844346,
+      "longitude": 131.024594
+    },
+    {
+      "id": "jp_kumamoto_station_360077848",
+      "osm_id": 360077848,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿蘇白川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aso-Shirakawa"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.8223464,
+      "longitude": 131.0841912
+    },
+    {
+      "id": "jp_kumamoto_station_360077902",
+      "osm_id": 360077902,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "中松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakamatsu"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.8274526,
+      "longitude": 131.0535291
+    },
+    {
+      "id": "jp_kumamoto_station_360077913",
+      "osm_id": 360077913,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "加勢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kase"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.847476,
+      "longitude": 131.010223
+    },
+    {
+      "id": "jp_kumamoto_station_360077969",
+      "osm_id": 360077969,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "高森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamori"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.8193294,
+      "longitude": 131.1225347
+    },
+    {
+      "id": "jp_kumamoto_station_360077976",
+      "osm_id": 360077976,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "見晴台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miharashidai"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.8175191,
+      "longitude": 131.1097956
+    },
+    {
+      "id": "jp_kumamoto_station_835388256",
+      "osm_id": 835388256,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新八代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Yatsushiro"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.5180397,
+      "longitude": 130.6348392
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_1121649857",
+      "osm_id": 1121649857,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Kumamoto Ferry Terminal",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.7636661,
+      "longitude": 130.5895594
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_1802695648",
+      "osm_id": 1802695648,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "有明フェリー長洲営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.9268833,
+      "longitude": 130.442879
+    },
+    {
+      "id": "jp_kumamoto_station_2011577947",
+      "osm_id": 2011577947,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新水俣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Minamata"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.2105785,
+      "longitude": 130.4286671
+    },
+    {
+      "id": "jp_kumamoto_station_2012814989",
+      "osm_id": 2012814989,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "日奈久温泉",
+      "name_kana": "ひなぐおんせん",
+      "name_translations": {
+        "en": "Hingau Onsen"
+      },
+      "operator": "肥薩おれんじ鉄道",
+      "network": "肥薩おれんじ鉄道線",
+      "ref": null,
+      "latitude": 32.4361683,
+      "longitude": 130.5816491
+    },
+    {
+      "id": "jp_kumamoto_station_2012956900",
+      "osm_id": 2012956900,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "海浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uminoura"
+      },
+      "operator": "肥薩おれんじ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.327975,
+      "longitude": 130.488626
+    },
+    {
+      "id": "jp_kumamoto_station_2012956942",
+      "osm_id": 2012956942,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "肥後田浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higo Tanoura"
+      },
+      "operator": "肥薩おれんじ鉄道線",
+      "network": null,
+      "ref": null,
+      "latitude": 32.3505892,
+      "longitude": 130.5047265
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_2405685099",
+      "osm_id": 2405685099,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "熊本桜町バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakura Machi Bus Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.800295,
+      "longitude": 130.7032868
+    },
+    {
+      "id": "jp_kumamoto_station_2754945429",
+      "osm_id": 2754945429,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川尻",
+      "name_kana": "かわしり",
+      "name_translations": {
+        "en": "Kawashiri"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.7437652,
+      "longitude": 130.6799144
+    },
+    {
+      "id": "jp_kumamoto_station_2760698272",
+      "osm_id": 2760698272,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "新須屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinsuya"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8538993,
+      "longitude": 130.7325073
+    },
+    {
+      "id": "jp_kumamoto_station_2766718275",
+      "osm_id": 2766718275,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "崇城大学前",
+      "name_kana": "そうじょうだいがくまえ",
+      "name_translations": {
+        "en": "Sōjōdaigakumae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.8311203,
+      "longitude": 130.6948183
+    },
+    {
+      "id": "jp_kumamoto_station_2766770115",
+      "osm_id": 2766770115,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西里",
+      "name_kana": "にしさと",
+      "name_translations": {
+        "en": "Nishisato"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.8545648,
+      "longitude": 130.700083
+    },
+    {
+      "id": "jp_kumamoto_station_2766817142",
+      "osm_id": 2766817142,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "植木",
+      "name_kana": "うえき",
+      "name_translations": {
+        "en": "Ueki"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.8801279,
+      "longitude": 130.6813653
+    },
+    {
+      "id": "jp_kumamoto_station_2767089439",
+      "osm_id": 2767089439,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田原坂",
+      "name_kana": "たばるざか",
+      "name_translations": {
+        "en": "Tabarazaka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.8993475,
+      "longitude": 130.6532427
+    },
+    {
+      "id": "jp_kumamoto_station_2767162836",
+      "osm_id": 2767162836,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木葉",
+      "name_kana": "このは",
+      "name_translations": {
+        "en": "Konoha"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.9162863,
+      "longitude": 130.6264811
+    },
+    {
+      "id": "jp_kumamoto_station_2768444740",
+      "osm_id": 2768444740,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥後伊倉",
+      "name_kana": "ひごいくら",
+      "name_translations": {
+        "en": "Higo-Ikura"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.9133764,
+      "longitude": 130.5865616
+    },
+    {
+      "id": "jp_kumamoto_station_2892653295",
+      "osm_id": 2892653295,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "水俣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.2048194,
+      "longitude": 130.3956011
+    },
+    {
+      "id": "jp_kumamoto_station_2932373435",
+      "osm_id": 2932373435,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "南阿蘇白川水源",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamiaso-Shirakawasuigen"
+      },
+      "operator": "南阿蘇鉄道",
+      "network": "南阿蘇鉄道高森線",
+      "ref": null,
+      "latitude": 32.8222018,
+      "longitude": 131.0916152
+    },
+    {
+      "id": "jp_kumamoto_station_3437583836",
+      "osm_id": 3437583836,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sashiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.3024975,
+      "longitude": 130.4972264
+    },
+    {
+      "id": "jp_kumamoto_station_3667500999",
+      "osm_id": 3667500999,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "熊本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumamoto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.7903174,
+      "longitude": 130.6889738
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_4355034165",
+      "osm_id": 4355034165,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三角港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.6069562,
+      "longitude": 130.4715686
+    },
+    {
+      "id": "jp_kumamoto_station_4838027623",
+      "osm_id": 4838027623,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長洲",
+      "name_kana": "ながす",
+      "name_translations": {
+        "en": "Nagasu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.9355038,
+      "longitude": 130.4545132
+    },
+    {
+      "id": "jp_kumamoto_station_5302773490",
+      "osm_id": 5302773490,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西熊本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kumamoto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.7624025,
+      "longitude": 130.6830522
+    },
+    {
+      "id": "jp_kumamoto_station_5746757921",
+      "osm_id": 5746757921,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "袋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuro"
+      },
+      "operator": "肥薩おれんじ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.1652899,
+      "longitude": 130.3741886
+    },
+    {
+      "id": "jp_kumamoto_station_5746757923",
+      "osm_id": 5746757923,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "津奈木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsunagi"
+      },
+      "operator": "肥薩おれんじ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.2325038,
+      "longitude": 130.4500646
+    },
+    {
+      "id": "jp_kumamoto_station_5746757924",
+      "osm_id": 5746757924,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunoura"
+      },
+      "operator": "肥薩おれんじ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.2712942,
+      "longitude": 130.5046796
+    },
+    {
+      "id": "jp_kumamoto_station_5875755790",
+      "osm_id": 5875755790,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "荒尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arao"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": "JB28",
+      "latitude": 32.9947486,
+      "longitude": 130.4347314
+    },
+    {
+      "id": "jp_kumamoto_station_6491281100",
+      "osm_id": 6491281100,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松橋",
+      "name_kana": "まつばせ",
+      "name_translations": {
+        "en": "Matsubase"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.6523019,
+      "longitude": 130.6705417
+    },
+    {
+      "id": "jp_kumamoto_station_6491281101",
+      "osm_id": 6491281101,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "富合",
+      "name_kana": "とみあい",
+      "name_translations": {
+        "en": "Tomiai"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.7135111,
+      "longitude": 130.6727497
+    },
+    {
+      "id": "jp_kumamoto_station_6491281102",
+      "osm_id": 6491281102,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南荒尾",
+      "name_kana": "みなみあらお",
+      "name_translations": {
+        "en": "Minami-Arao"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.9658842,
+      "longitude": 130.4331038
+    },
+    {
+      "id": "jp_kumamoto_station_6491281103",
+      "osm_id": 6491281103,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大野下",
+      "name_kana": "おおのしも",
+      "name_translations": {
+        "en": "Ono-shimo"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.9216237,
+      "longitude": 130.5026164
+    },
+    {
+      "id": "jp_kumamoto_station_6832831937",
+      "osm_id": 6832831937,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上熊本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Kumamoto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.8178099,
+      "longitude": 130.6992391
+    },
+    {
+      "id": "jp_kumamoto_station_7104122321",
+      "osm_id": 7104122321,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "有佐",
+      "name_kana": "ありさ",
+      "name_translations": {
+        "en": "Arisa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.5627813,
+      "longitude": 130.670281
+    },
+    {
+      "id": "jp_kumamoto_station_7157635897",
+      "osm_id": 7157635897,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千丁",
+      "name_kana": "せんちょう",
+      "name_translations": {
+        "en": "Sencho"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.5327457,
+      "longitude": 130.6457971
+    },
+    {
+      "id": "jp_kumamoto_station_7811215242",
+      "osm_id": 7811215242,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "人吉温泉",
+      "name_kana": "ひとよしおんせん",
+      "name_translations": {
+        "en": "Hitoyoshionsen"
+      },
+      "operator": "くま川鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.216332,
+      "longitude": 130.7538443
+    },
+    {
+      "id": "jp_kumamoto_station_7811215243",
+      "osm_id": 7811215243,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "人吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hitoyoshi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.2159006,
+      "longitude": 130.7532196
+    },
+    {
+      "id": "jp_kumamoto_station_7839902388",
+      "osm_id": 7839902388,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "北熊本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitakumamoto"
+      },
+      "operator": "熊本電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.8275289,
+      "longitude": 130.721892
+    },
+    {
+      "id": "jp_kumamoto_airport_7875571909",
+      "osm_id": 7875571909,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "阿蘇場外離着陸場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.0082755,
+      "longitude": 131.0973196
+    },
+    {
+      "id": "jp_kumamoto_station_8150221863",
+      "osm_id": 8150221863,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "八代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yatsushiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.504005,
+      "longitude": 130.6217417
+    },
+    {
+      "id": "jp_kumamoto_station_8221561452",
+      "osm_id": 8221561452,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "玉名",
+      "name_kana": "たまな",
+      "name_translations": {
+        "en": "Tamana"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR鹿児島本線",
+      "ref": null,
+      "latitude": 32.9260351,
+      "longitude": 130.5493301
+    },
+    {
+      "id": "jp_kumamoto_station_8223345778",
+      "osm_id": 8223345778,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小川",
+      "name_kana": "おがわ",
+      "name_translations": {
+        "en": "Ogawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.6009798,
+      "longitude": 130.6942101
+    },
+    {
+      "id": "jp_kumamoto_station_8223485260",
+      "osm_id": 8223485260,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇土",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.6941301,
+      "longitude": 130.6690344
+    },
+    {
+      "id": "jp_kumamoto_station_8253797034",
+      "osm_id": 8253797034,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "肥後高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higokoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.475489,
+      "longitude": 130.6126812
+    },
+    {
+      "id": "jp_kumamoto_station_8254355263",
+      "osm_id": 8254355263,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "肥後二見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higo-Futami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.4199939,
+      "longitude": 130.549719
+    },
+    {
+      "id": "jp_kumamoto_station_8258828971",
+      "osm_id": 8258828971,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "上田浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Tanoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.3929139,
+      "longitude": 130.5184914
+    },
+    {
+      "id": "jp_kumamoto_station_8259015642",
+      "osm_id": 8259015642,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "たのうら御立岬公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanoura-otachimisakikoen"
+      },
+      "operator": "肥薩おれんじ鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 32.363325,
+      "longitude": 130.5067086
+    },
+    {
+      "id": "jp_kumamoto_station_8423867176",
+      "osm_id": 8423867176,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "園内モノレールのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.7735647,
+      "longitude": 130.749594
+    },
+    {
+      "id": "jp_kumamoto_station_8423867177",
+      "osm_id": 8423867177,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "子ども列車のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.7741072,
+      "longitude": 130.7489933
+    },
+    {
+      "id": "jp_kumamoto_station_8447296025",
+      "osm_id": 8447296025,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "新玉名",
+      "name_kana": "しんたまな",
+      "name_translations": {
+        "en": "New Tamana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.9423867,
+      "longitude": 130.5737758
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_8785686371",
+      "osm_id": 8785686371,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "前島（松島）港乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.52719,
+      "longitude": 130.4260331
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_8814203859",
+      "osm_id": 8814203859,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "湯島連絡船待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.6000985,
+      "longitude": 130.3366343
+    },
+    {
+      "id": "jp_kumamoto_station_10090917077",
+      "osm_id": 10090917077,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "再春医療センター前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "SaishunIryoCenter-mae"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8802858,
+      "longitude": 130.7479436
+    },
+    {
+      "id": "jp_kumamoto_station_10090917104",
+      "osm_id": 10090917104,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "private",
+      "name": "御代志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyoshi"
+      },
+      "operator": "熊本電気鉄道",
+      "network": "熊本電気鉄道菊池線",
+      "ref": null,
+      "latitude": 32.8831578,
+      "longitude": 130.7498792
+    },
+    {
+      "id": "jp_kumamoto_station_11758716722",
+      "osm_id": 11758716722,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "水前寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suizenji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.7970358,
+      "longitude": 130.72991
+    },
+    {
+      "id": "jp_kumamoto_station_12504059294",
+      "osm_id": 12504059294,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "肥後大津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higo-Ozu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8774776,
+      "longitude": 130.866219
+    },
+    {
+      "id": "jp_kumamoto_station_12504078501",
+      "osm_id": 12504078501,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "原水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haramizu"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8706193,
+      "longitude": 130.8290416
+    },
+    {
+      "id": "jp_kumamoto_station_12504078502",
+      "osm_id": 12504078502,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三里木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanrigi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8618003,
+      "longitude": 130.7966003
+    },
+    {
+      "id": "jp_kumamoto_station_12504078504",
+      "osm_id": 12504078504,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "光の森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hikarinomori"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8578789,
+      "longitude": 130.7869028
+    },
+    {
+      "id": "jp_kumamoto_station_12504078505",
+      "osm_id": 12504078505,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "武蔵塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Musashizuka"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8497989,
+      "longitude": 130.7699767
+    },
+    {
+      "id": "jp_kumamoto_station_12504078506",
+      "osm_id": 12504078506,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "竜田口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsutaguchi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8205371,
+      "longitude": 130.7469486
+    },
+    {
+      "id": "jp_kumamoto_station_12504078507",
+      "osm_id": 12504078507,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東海学園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōkai-Gakuen-mae"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.8114571,
+      "longitude": 130.7427813
+    },
+    {
+      "id": "jp_kumamoto_station_12504078508",
+      "osm_id": 12504078508,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新水前寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Suizenji"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.793643,
+      "longitude": 130.7260874
+    },
+    {
+      "id": "jp_kumamoto_station_12504078509",
+      "osm_id": 12504078509,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南熊本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kumamoto"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.7850279,
+      "longitude": 130.7116307
+    },
+    {
+      "id": "jp_kumamoto_station_12504078510",
+      "osm_id": 12504078510,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "平成",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Heisei"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR豊肥本線",
+      "ref": null,
+      "latitude": 32.7814411,
+      "longitude": 130.7031506
+    },
+    {
+      "id": "jp_kumamoto_station_12513003036",
+      "osm_id": 12513003036,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石打ダム",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishiuchi Dam"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.6422993,
+      "longitude": 130.5065921
+    },
+    {
+      "id": "jp_kumamoto_station_12513003037",
+      "osm_id": 12513003037,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "網田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōda"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.6676004,
+      "longitude": 130.5468031
+    },
+    {
+      "id": "jp_kumamoto_station_12513003039",
+      "osm_id": 12513003039,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "住吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sumiyoshi"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.7019953,
+      "longitude": 130.5985267
+    },
+    {
+      "id": "jp_kumamoto_station_12513003041",
+      "osm_id": 12513003041,
+      "osm_type": "node",
+      "prefecture_id": "jp_kumamoto",
+      "type": "station",
+      "subtype": "jr",
+      "name": "緑川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midorikawa"
+      },
+      "operator": "九州旅客鉄道",
+      "network": "JR三角線",
+      "ref": null,
+      "latitude": 32.6940826,
+      "longitude": 130.6312154
+    },
+    {
+      "id": "jp_kumamoto_airport_57014851",
+      "osm_id": 57014851,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "熊本空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumamoto Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KMJ",
+      "latitude": 32.8362524,
+      "longitude": 130.8523864
+    },
+    {
+      "id": "jp_kumamoto_airport_57014870",
+      "osm_id": 57014870,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "天草空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amakusa Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AXJ",
+      "latitude": 32.482191,
+      "longitude": 130.1586552
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_411009794",
+      "osm_id": 411009794,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "島鉄フェリー鬼池港のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.5468694,
+      "longitude": 130.1869842
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_464822126",
+      "osm_id": 464822126,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "産交バス（株） 人吉営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "産交バス株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 32.2123765,
+      "longitude": 130.7494017
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_543208536",
+      "osm_id": 543208536,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "熊本電鉄菊池プラザ",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.9805958,
+      "longitude": 130.8049617
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_792754005",
+      "osm_id": 792754005,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "九州産交バス(株)松橋営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.651972,
+      "longitude": 130.6773104
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_899316050",
+      "osm_id": 899316050,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "杖立",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.1835749,
+      "longitude": 131.0341062
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_919609429",
+      "osm_id": 919609429,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "天長フェリー 中田港乗船券売場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.3303404,
+      "longitude": 130.1642615
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_919610628",
+      "osm_id": 919610628,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "水俣港船客待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.1950453,
+      "longitude": 130.3789542
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_919616157",
+      "osm_id": 919616157,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "倉岳棚底港旅客待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.4065577,
+      "longitude": 130.3416863
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_919622829",
+      "osm_id": 919622829,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "しおさい館（御所浦港船客待合所）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.3379033,
+      "longitude": 130.3377749
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_931695576",
+      "osm_id": 931695576,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "富岡港船客待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.5229372,
+      "longitude": 130.0349319
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_933388571",
+      "osm_id": 933388571,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "本渡港ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.4559288,
+      "longitude": 130.200079
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_934117801",
+      "osm_id": 934117801,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "九州産交 本渡バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.4539659,
+      "longitude": 130.1941597
+    },
+    {
+      "id": "jp_kumamoto_ferry_terminal_949646852",
+      "osm_id": 949646852,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "江樋戸港待合室",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.5819859,
+      "longitude": 130.4157271
+    },
+    {
+      "id": "jp_kumamoto_airport_1107909784",
+      "osm_id": 1107909784,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "白川滑空場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirakawa Gliderport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.7761144,
+      "longitude": 130.6283653
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_1123310143",
+      "osm_id": 1123310143,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "産交バス（株） 天草営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.4679097,
+      "longitude": 130.2030801
+    },
+    {
+      "id": "jp_kumamoto_bus_terminal_1426203560",
+      "osm_id": 1426203560,
+      "osm_type": "way",
+      "prefecture_id": "jp_kumamoto",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "阿蘇山上ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 32.8799876,
+      "longitude": 131.0744909
+    }
+  ]
+}

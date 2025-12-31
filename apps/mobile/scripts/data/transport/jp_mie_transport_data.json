@@ -1,0 +1,4626 @@
+{
+  "fetchedAt": "2025-12-24T05:53:58.708Z",
+  "prefecture_id": "jp_mie",
+  "prefecture_name": "三重県",
+  "stats": {
+    "station": 230,
+    "airport": 2,
+    "ferry_terminal": 16,
+    "bus_terminal": 11,
+    "total": 259
+  },
+  "data": [
+    {
+      "id": "jp_mie_station_265041427",
+      "osm_id": 265041427,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8261238,
+      "longitude": 136.5439505
+    },
+    {
+      "id": "jp_mie_station_265041452",
+      "osm_id": 265041452,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "河芸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawage"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7812792,
+      "longitude": 136.5311534
+    },
+    {
+      "id": "jp_mie_station_265041454",
+      "osm_id": 265041454,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "中瀬古",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakaseko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.81247,
+      "longitude": 136.5430633
+    },
+    {
+      "id": "jp_mie_station_265041552",
+      "osm_id": 265041552,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢上野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Ueno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8003917,
+      "longitude": 136.5424613
+    },
+    {
+      "id": "jp_mie_station_265041589",
+      "osm_id": 265041589,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "鈴鹿サーキット稲生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzuka Circuit Inō"
+      },
+      "operator": "伊勢鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8409091,
+      "longitude": 136.5548732
+    },
+    {
+      "id": "jp_mie_station_265041640",
+      "osm_id": 265041640,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉垣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamagaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8553366,
+      "longitude": 136.5701318
+    },
+    {
+      "id": "jp_mie_station_265041674",
+      "osm_id": 265041674,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "東一身田",
+      "name_kana": "ひがしいしんでん",
+      "name_translations": {
+        "en": "Higashi-Ishinden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7586349,
+      "longitude": 136.5121073
+    },
+    {
+      "id": "jp_mie_station_265044835",
+      "osm_id": 265044835,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "上ノ庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaminoshō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.597869,
+      "longitude": 136.4994964
+    },
+    {
+      "id": "jp_mie_station_265044898",
+      "osm_id": 265044898,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "家城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ieki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6256819,
+      "longitude": 136.3188325
+    },
+    {
+      "id": "jp_mie_station_265044903",
+      "osm_id": 265044903,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "一志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6548699,
+      "longitude": 136.4363266
+    },
+    {
+      "id": "jp_mie_station_265044908",
+      "osm_id": 265044908,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "井関",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isegi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.642862,
+      "longitude": 136.4132821
+    },
+    {
+      "id": "jp_mie_station_265045041",
+      "osm_id": 265045041,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "比津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.531986,
+      "longitude": 136.270702
+    },
+    {
+      "id": "jp_mie_station_265045108",
+      "osm_id": 265045108,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢鎌倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Kamakura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5738503,
+      "longitude": 136.2781422
+    },
+    {
+      "id": "jp_mie_station_265045130",
+      "osm_id": 265045130,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "権現前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gongemmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6174747,
+      "longitude": 136.4823254
+    },
+    {
+      "id": "jp_mie_station_265045134",
+      "osm_id": 265045134,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢大井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Ōi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.649883,
+      "longitude": 136.385452
+    },
+    {
+      "id": "jp_mie_station_265045162",
+      "osm_id": 265045162,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "関ノ宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6373929,
+      "longitude": 136.3394555
+    },
+    {
+      "id": "jp_mie_station_265045164",
+      "osm_id": 265045164,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢奥津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Okitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5120306,
+      "longitude": 136.2595867
+    },
+    {
+      "id": "jp_mie_station_265045280",
+      "osm_id": 265045280,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢八知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Yachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5547755,
+      "longitude": 136.2635706
+    },
+    {
+      "id": "jp_mie_station_265045335",
+      "osm_id": 265045335,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢竹原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Takehara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5996647,
+      "longitude": 136.3089875
+    },
+    {
+      "id": "jp_mie_station_265045336",
+      "osm_id": 265045336,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢川口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Kawaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6474987,
+      "longitude": 136.3563458
+    },
+    {
+      "id": "jp_mie_station_265045398",
+      "osm_id": 265045398,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢八太",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Hata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6471465,
+      "longitude": 136.4473198
+    },
+    {
+      "id": "jp_mie_station_265822680",
+      "osm_id": 265822680,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "松下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsushita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4959702,
+      "longitude": 136.7995458
+    },
+    {
+      "id": "jp_mie_station_265822735",
+      "osm_id": 265822735,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iseshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4911349,
+      "longitude": 136.7098291
+    },
+    {
+      "id": "jp_mie_station_265822738",
+      "osm_id": 265822738,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "五十鈴ヶ丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isuzugaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4960045,
+      "longitude": 136.7402194
+    },
+    {
+      "id": "jp_mie_station_265822775",
+      "osm_id": 265822775,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5031803,
+      "longitude": 136.6725085
+    },
+    {
+      "id": "jp_mie_station_265822781",
+      "osm_id": 265822781,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "山田上口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamada-Kamiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4958367,
+      "longitude": 136.6939703
+    },
+    {
+      "id": "jp_mie_station_265822784",
+      "osm_id": 265822784,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "二見浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Futaminoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.503708,
+      "longitude": 136.777735
+    },
+    {
+      "id": "jp_mie_station_265822795",
+      "osm_id": 265822795,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鳥羽",
+      "name_kana": "とば",
+      "name_translations": {
+        "en": "Toba"
+      },
+      "operator": "JR東海",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4864552,
+      "longitude": 136.8427403
+    },
+    {
+      "id": "jp_mie_station_265823071",
+      "osm_id": 265823071,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "田丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4884616,
+      "longitude": 136.6340983
+    },
+    {
+      "id": "jp_mie_station_265823093",
+      "osm_id": 265823093,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "外城田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4976602,
+      "longitude": 136.5969238
+    },
+    {
+      "id": "jp_mie_station_265823976",
+      "osm_id": 265823976,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "三木里",
+      "name_kana": "みきさと",
+      "name_translations": {
+        "en": "Mikisato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.001594,
+      "longitude": 136.2030503
+    },
+    {
+      "id": "jp_mie_station_265823994",
+      "osm_id": 265823994,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊長島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kii-Nagashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2092584,
+      "longitude": 136.3398073
+    },
+    {
+      "id": "jp_mie_station_265824048",
+      "osm_id": 265824048,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大泊",
+      "name_kana": "おおどまり",
+      "name_translations": {
+        "en": "Odomari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9021966,
+      "longitude": 136.118073
+    },
+    {
+      "id": "jp_mie_station_265824173",
+      "osm_id": 265824173,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "亀山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kameyama"
+      },
+      "operator": "東海旅客鉄道",
+      "network": "JR関西本線;JR紀勢本線",
+      "ref": null,
+      "latitude": 34.8502999,
+      "longitude": 136.4503325
+    },
+    {
+      "id": "jp_mie_station_265824176",
+      "osm_id": 265824176,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "波田須",
+      "name_kana": "はだす",
+      "name_translations": {
+        "en": "Hadasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.909951,
+      "longitude": 136.137623
+    },
+    {
+      "id": "jp_mie_station_265824184",
+      "osm_id": 265824184,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "相可",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5032518,
+      "longitude": 136.5461319
+    },
+    {
+      "id": "jp_mie_station_265824187",
+      "osm_id": 265824187,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾鷲",
+      "name_kana": "おわせ",
+      "name_translations": {
+        "en": "Owase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0747359,
+      "longitude": 136.1901497
+    },
+    {
+      "id": "jp_mie_station_265825048",
+      "osm_id": 265825048,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿曽",
+      "name_kana": "あそ",
+      "name_translations": {
+        "en": "Aso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3306758,
+      "longitude": 136.4109061
+    },
+    {
+      "id": "jp_mie_station_265825442",
+      "osm_id": 265825442,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "二木島",
+      "name_kana": "にぎしま",
+      "name_translations": {
+        "en": "Nigishima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.939124,
+      "longitude": 136.180603
+    },
+    {
+      "id": "jp_mie_station_265825519",
+      "osm_id": 265825519,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿田和",
+      "name_kana": "あたわ",
+      "name_translations": {
+        "en": "Atawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8048076,
+      "longitude": 136.0423644
+    },
+    {
+      "id": "jp_mie_station_265825960",
+      "osm_id": 265825960,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵜殿",
+      "name_kana": "うどの",
+      "name_translations": {
+        "en": "Udono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7370321,
+      "longitude": 136.015952
+    },
+    {
+      "id": "jp_mie_station_265825962",
+      "osm_id": 265825962,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "川添",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawazoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4195398,
+      "longitude": 136.4727607
+    },
+    {
+      "id": "jp_mie_station_265825968",
+      "osm_id": 265825968,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "熊野市",
+      "name_kana": "くまのし",
+      "name_translations": {
+        "en": "Kumanoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8896761,
+      "longitude": 136.098724
+    },
+    {
+      "id": "jp_mie_station_265826009",
+      "osm_id": 265826009,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢柏崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Kashiwazaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2995872,
+      "longitude": 136.3957609
+    },
+    {
+      "id": "jp_mie_station_265826014",
+      "osm_id": 265826014,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊井田",
+      "name_kana": "きいいだ",
+      "name_translations": {
+        "en": "Kii-Ida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7601927,
+      "longitude": 136.0239144
+    },
+    {
+      "id": "jp_mie_station_265826095",
+      "osm_id": 265826095,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "栃原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tochihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4447966,
+      "longitude": 136.5092118
+    },
+    {
+      "id": "jp_mie_station_265826099",
+      "osm_id": 265826099,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "神志山",
+      "name_kana": "こうしやま",
+      "name_translations": {
+        "en": "Koshiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8400935,
+      "longitude": 136.0624832
+    },
+    {
+      "id": "jp_mie_station_265826345",
+      "osm_id": 265826345,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "相賀",
+      "name_kana": "あいが",
+      "name_translations": {
+        "en": "Aiga"
+      },
+      "operator": "JR  東海旅客鉄道",
+      "network": "紀勢本線",
+      "ref": null,
+      "latitude": 34.1119898,
+      "longitude": 136.2271276
+    },
+    {
+      "id": "jp_mie_station_265826352",
+      "osm_id": 265826352,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "三野瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.16746,
+      "longitude": 136.2821048
+    },
+    {
+      "id": "jp_mie_station_265826362",
+      "osm_id": 265826362,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "賀田",
+      "name_kana": "かた",
+      "name_translations": {
+        "en": "Kata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9719007,
+      "longitude": 136.1894849
+    },
+    {
+      "id": "jp_mie_station_265826523",
+      "osm_id": 265826523,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3601244,
+      "longitude": 136.4119766
+    },
+    {
+      "id": "jp_mie_station_265826526",
+      "osm_id": 265826526,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大内山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōuchiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2784442,
+      "longitude": 136.3596682
+    },
+    {
+      "id": "jp_mie_station_265826741",
+      "osm_id": 265826741,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐奈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4788281,
+      "longitude": 136.5397952
+    },
+    {
+      "id": "jp_mie_station_265826835",
+      "osm_id": 265826835,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "船津",
+      "name_kana": "ふなつ",
+      "name_translations": {
+        "en": "Funatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1421787,
+      "longitude": 136.2286006
+    },
+    {
+      "id": "jp_mie_station_265826973",
+      "osm_id": 265826973,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅ヶ谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umegadani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2579881,
+      "longitude": 136.3565555
+    },
+    {
+      "id": "jp_mie_station_265826975",
+      "osm_id": 265826975,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "紀伊市木",
+      "name_kana": "きいいちぎ",
+      "name_translations": {
+        "en": "Kii-Ichigi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8277102,
+      "longitude": 136.0551798
+    },
+    {
+      "id": "jp_mie_station_265826976",
+      "osm_id": 265826976,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "有井",
+      "name_kana": "ありい",
+      "name_translations": {
+        "en": "Arii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8762185,
+      "longitude": 136.0855869
+    },
+    {
+      "id": "jp_mie_station_265827291",
+      "osm_id": 265827291,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "三瀬谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misedani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3946767,
+      "longitude": 136.4086847
+    },
+    {
+      "id": "jp_mie_station_265827569",
+      "osm_id": 265827569,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大曽根浦",
+      "name_kana": "おおそねうら",
+      "name_translations": {
+        "en": "Osoneura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0619453,
+      "longitude": 136.2229972
+    },
+    {
+      "id": "jp_mie_station_265829374",
+      "osm_id": 265829374,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "新鹿",
+      "name_kana": "あたしか",
+      "name_translations": {
+        "en": "Atashika"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9281224,
+      "longitude": 136.1440969
+    },
+    {
+      "id": "jp_mie_station_265829378",
+      "osm_id": 265829378,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "下庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimonoshō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8145769,
+      "longitude": 136.479641
+    },
+    {
+      "id": "jp_mie_station_265835396",
+      "osm_id": 265835396,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "富田浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomidahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9972064,
+      "longitude": 136.6503457
+    },
+    {
+      "id": "jp_mie_station_265836044",
+      "osm_id": 265836044,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "南四日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Yokkaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9414238,
+      "longitude": 136.6094959
+    },
+    {
+      "id": "jp_mie_station_265836150",
+      "osm_id": 265836150,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "河原田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawarada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9108158,
+      "longitude": 136.5986239
+    },
+    {
+      "id": "jp_mie_station_265836235",
+      "osm_id": 265836235,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "四日市",
+      "name_kana": "よっかいち",
+      "name_translations": {
+        "en": "Yokkaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9630151,
+      "longitude": 136.6302658
+    },
+    {
+      "id": "jp_mie_station_265836405",
+      "osm_id": 265836405,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "河曲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8977726,
+      "longitude": 136.5676301
+    },
+    {
+      "id": "jp_mie_station_265836465",
+      "osm_id": 265836465,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "井田川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Idagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8683434,
+      "longitude": 136.492566
+    },
+    {
+      "id": "jp_mie_station_265836703",
+      "osm_id": 265836703,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "加佐登",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8905281,
+      "longitude": 136.5302959
+    },
+    {
+      "id": "jp_mie_station_265837850",
+      "osm_id": 265837850,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿倉川",
+      "name_kana": "あくらがわ",
+      "name_translations": {
+        "en": "Akuragawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E19",
+      "latitude": 34.9850756,
+      "longitude": 136.6292562
+    },
+    {
+      "id": "jp_mie_station_265837898",
+      "osm_id": 265837898,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "北楠",
+      "name_kana": "きたくす",
+      "name_translations": {
+        "en": "Kitakusu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E25",
+      "latitude": 34.9160396,
+      "longitude": 136.6248881
+    },
+    {
+      "id": "jp_mie_station_265838027",
+      "osm_id": 265838027,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩浜",
+      "name_kana": "しおはま",
+      "name_translations": {
+        "en": "Shiohama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E24",
+      "latitude": 34.9327505,
+      "longitude": 136.622168
+    },
+    {
+      "id": "jp_mie_station_265838090",
+      "osm_id": 265838090,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "新正",
+      "name_kana": "しんしょう",
+      "name_translations": {
+        "en": "Shinshyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E22",
+      "latitude": 34.9562066,
+      "longitude": 136.6185216
+    },
+    {
+      "id": "jp_mie_station_265838125",
+      "osm_id": 265838125,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "川原町",
+      "name_kana": "かわらまち",
+      "name_translations": {
+        "en": "Kawaramachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E20",
+      "latitude": 34.9769522,
+      "longitude": 136.6230443
+    },
+    {
+      "id": "jp_mie_station_265838162",
+      "osm_id": 265838162,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "霞ヶ浦",
+      "name_kana": "かすみがうら",
+      "name_translations": {
+        "en": "Kasumigaura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E18",
+      "latitude": 34.9930719,
+      "longitude": 136.6365415
+    },
+    {
+      "id": "jp_mie_station_265838177",
+      "osm_id": 265838177,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "海山道",
+      "name_kana": "みやまど",
+      "name_translations": {
+        "en": "Miyamado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E23",
+      "latitude": 34.9431481,
+      "longitude": 136.6229932
+    },
+    {
+      "id": "jp_mie_station_265838293",
+      "osm_id": 265838293,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "千代崎",
+      "name_kana": "ちよざき",
+      "name_translations": {
+        "en": "Chiyozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E30",
+      "latitude": 34.8548546,
+      "longitude": 136.6083726
+    },
+    {
+      "id": "jp_mie_station_265838606",
+      "osm_id": 265838606,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊津上野",
+      "name_kana": "とよつうえの",
+      "name_translations": {
+        "en": "Toyotsuueno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E35",
+      "latitude": 34.7854843,
+      "longitude": 136.543391
+    },
+    {
+      "id": "jp_mie_station_265838680",
+      "osm_id": 265838680,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "白子",
+      "name_kana": "しろこ",
+      "name_translations": {
+        "en": "Shiroko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E31",
+      "latitude": 34.8340915,
+      "longitude": 136.5896304
+    },
+    {
+      "id": "jp_mie_station_265838700",
+      "osm_id": 265838700,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "鼓ヶ浦",
+      "name_kana": "つづみがうら",
+      "name_translations": {
+        "en": "Tsuzumigaura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E32",
+      "latitude": 34.8261649,
+      "longitude": 136.5811896
+    },
+    {
+      "id": "jp_mie_station_265838702",
+      "osm_id": 265838702,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "磯山",
+      "name_kana": "いそやま",
+      "name_translations": {
+        "en": "Isoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E33",
+      "latitude": 34.8125475,
+      "longitude": 136.5687679
+    },
+    {
+      "id": "jp_mie_station_265838741",
+      "osm_id": 265838741,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "箕田",
+      "name_kana": "みだ",
+      "name_translations": {
+        "en": "Mida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E28",
+      "latitude": 34.8797417,
+      "longitude": 136.6221279
+    },
+    {
+      "id": "jp_mie_station_265838790",
+      "osm_id": 265838790,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "長太ノ浦",
+      "name_kana": "なごのうら",
+      "name_translations": {
+        "en": "Nagonoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E27",
+      "latitude": 34.891806,
+      "longitude": 136.6264384
+    },
+    {
+      "id": "jp_mie_station_265838808",
+      "osm_id": 265838808,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "楠",
+      "name_kana": "くす",
+      "name_translations": {
+        "en": "Kusu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E26",
+      "latitude": 34.9046568,
+      "longitude": 136.6310496
+    },
+    {
+      "id": "jp_mie_station_265838828",
+      "osm_id": 265838828,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "千里",
+      "name_kana": "ちさと",
+      "name_translations": {
+        "en": "Chisato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E34",
+      "latitude": 34.7990234,
+      "longitude": 136.5566424
+    },
+    {
+      "id": "jp_mie_station_265838920",
+      "osm_id": 265838920,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "津新町",
+      "name_kana": "つしんまち",
+      "name_translations": {
+        "en": "Tsu-Shinmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E40",
+      "latitude": 34.7157738,
+      "longitude": 136.5000733
+    },
+    {
+      "id": "jp_mie_station_267303490",
+      "osm_id": 267303490,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "柘植",
+      "name_kana": "つげ",
+      "name_translations": {
+        "en": "Tsuge"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR草津線;JR関西本線",
+      "ref": null,
+      "latitude": 34.8468814,
+      "longitude": 136.2557754
+    },
+    {
+      "id": "jp_mie_station_267443013",
+      "osm_id": 267443013,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "加太",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kabuto"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR関西本線",
+      "ref": null,
+      "latitude": 34.8424694,
+      "longitude": 136.3402515
+    },
+    {
+      "id": "jp_mie_station_267443342",
+      "osm_id": 267443342,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "関",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR関西本線",
+      "ref": null,
+      "latitude": 34.8490885,
+      "longitude": 136.3947946
+    },
+    {
+      "id": "jp_mie_station_267443390",
+      "osm_id": 267443390,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shindō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR関西本線",
+      "ref": null,
+      "latitude": 34.8210883,
+      "longitude": 136.2066992
+    },
+    {
+      "id": "jp_mie_station_267445370",
+      "osm_id": 267445370,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊賀上野",
+      "name_kana": "いがうえの",
+      "name_translations": {
+        "en": "Iga-Ueno"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR関西本線;伊賀鉄道伊賀線",
+      "ref": null,
+      "latitude": 34.7889966,
+      "longitude": 136.1235104
+    },
+    {
+      "id": "jp_mie_station_267445399",
+      "osm_id": 267445399,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐那具",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanagu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR関西本線",
+      "ref": null,
+      "latitude": 34.8044207,
+      "longitude": 136.1639374
+    },
+    {
+      "id": "jp_mie_station_267445771",
+      "osm_id": 267445771,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "jr",
+      "name": "島ヶ原",
+      "name_kana": "しまがはら",
+      "name_translations": {
+        "en": "Shimagahara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR関西本線",
+      "ref": null,
+      "latitude": 34.7676752,
+      "longitude": 136.0541825
+    },
+    {
+      "id": "jp_mie_station_282401945",
+      "osm_id": 282401945,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "蓮花寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rengeji"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0596029,
+      "longitude": 136.6510969
+    },
+    {
+      "id": "jp_mie_station_282402021",
+      "osm_id": 282402021,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "西別所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Bessho"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0596774,
+      "longitude": 136.6656437
+    },
+    {
+      "id": "jp_mie_station_282402053",
+      "osm_id": 282402053,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umamichi"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0607161,
+      "longitude": 136.6766739
+    },
+    {
+      "id": "jp_mie_station_282402080",
+      "osm_id": 282402080,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "楚原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sohara"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.1108955,
+      "longitude": 136.5603013
+    },
+    {
+      "id": "jp_mie_station_282402102",
+      "osm_id": 282402102,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "在良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ariyoshi"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.060563,
+      "longitude": 136.6439893
+    },
+    {
+      "id": "jp_mie_station_282402213",
+      "osm_id": 282402213,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "七和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanawa"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0690049,
+      "longitude": 136.6157655
+    },
+    {
+      "id": "jp_mie_station_282402280",
+      "osm_id": 282402280,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴太",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Anō"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0728574,
+      "longitude": 136.6052931
+    },
+    {
+      "id": "jp_mie_station_282402289",
+      "osm_id": 282402289,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōizumi"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0954814,
+      "longitude": 136.5700975
+    },
+    {
+      "id": "jp_mie_station_282402598",
+      "osm_id": 282402598,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "麻生田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōda"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.1337445,
+      "longitude": 136.5355986
+    },
+    {
+      "id": "jp_mie_station_282402723",
+      "osm_id": 282402723,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "星川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hoshikawa"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0643078,
+      "longitude": 136.6300679
+    },
+    {
+      "id": "jp_mie_station_289284179",
+      "osm_id": 289284179,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "追分",
+      "name_kana": "おいわけ",
+      "name_translations": {
+        "en": "Oiwake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9341166,
+      "longitude": 136.5960869
+    },
+    {
+      "id": "jp_mie_station_289284228",
+      "osm_id": 289284228,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤堀",
+      "name_kana": "あかほり",
+      "name_translations": {
+        "en": "Akahori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9594971,
+      "longitude": 136.6107334
+    },
+    {
+      "id": "jp_mie_station_332394873",
+      "osm_id": 332394873,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "松ヶ崎",
+      "name_kana": "まつがさき",
+      "name_translations": {
+        "en": "Matsugasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5966876,
+      "longitude": 136.5186614
+    },
+    {
+      "id": "jp_mie_station_332395019",
+      "osm_id": 332395019,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "松阪",
+      "name_kana": "まつさか",
+      "name_translations": {
+        "en": "Matsusaka"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5770222,
+      "longitude": 136.5364468
+    },
+    {
+      "id": "jp_mie_station_332395158",
+      "osm_id": 332395158,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "東松阪",
+      "name_kana": "ひがしまつさか",
+      "name_translations": {
+        "en": "Higashi-Matsusaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5652733,
+      "longitude": 136.5462958
+    },
+    {
+      "id": "jp_mie_station_332395327",
+      "osm_id": 332395327,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "櫛田",
+      "name_kana": "くしだ",
+      "name_translations": {
+        "en": "Kushida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5489041,
+      "longitude": 136.5828722
+    },
+    {
+      "id": "jp_mie_station_332395362",
+      "osm_id": 332395362,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "漕代",
+      "name_kana": "こいしろ",
+      "name_translations": {
+        "en": "Koishiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5409169,
+      "longitude": 136.6011669
+    },
+    {
+      "id": "jp_mie_station_332395446",
+      "osm_id": 332395446,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "明星",
+      "name_kana": "みょうじょう",
+      "name_translations": {
+        "en": "Myojo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M69",
+      "latitude": 34.5314588,
+      "longitude": 136.6423693
+    },
+    {
+      "id": "jp_mie_station_332395518",
+      "osm_id": 332395518,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "明野",
+      "name_kana": "あけの",
+      "name_translations": {
+        "en": "Akeno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M70",
+      "latitude": 34.5214652,
+      "longitude": 136.6689264
+    },
+    {
+      "id": "jp_mie_station_332395565",
+      "osm_id": 332395565,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "小俣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M71",
+      "latitude": 34.5127983,
+      "longitude": 136.6849623
+    },
+    {
+      "id": "jp_mie_station_332395641",
+      "osm_id": 332395641,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M72",
+      "latitude": 34.4978133,
+      "longitude": 136.6985555
+    },
+    {
+      "id": "jp_mie_station_332577724",
+      "osm_id": 332577724,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "五十鈴川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isuzugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M75",
+      "latitude": 34.4764885,
+      "longitude": 136.7271655
+    },
+    {
+      "id": "jp_mie_station_413334481",
+      "osm_id": 413334481,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "市部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichibe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7264773,
+      "longitude": 136.1485129
+    },
+    {
+      "id": "jp_mie_station_413334491",
+      "osm_id": 413334491,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "依那古",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7155312,
+      "longitude": 136.1530783
+    },
+    {
+      "id": "jp_mie_station_413334493",
+      "osm_id": 413334493,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "桑町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuwamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7544045,
+      "longitude": 136.136526
+    },
+    {
+      "id": "jp_mie_station_413334534",
+      "osm_id": 413334534,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "丸山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maruyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7046527,
+      "longitude": 136.1574129
+    },
+    {
+      "id": "jp_mie_station_413334540",
+      "osm_id": 413334540,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Ōte"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.766844,
+      "longitude": 136.1237329
+    },
+    {
+      "id": "jp_mie_station_413334646",
+      "osm_id": 413334646,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "比土",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6763944,
+      "longitude": 136.1607372
+    },
+    {
+      "id": "jp_mie_station_413334652",
+      "osm_id": 413334652,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "広小路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirokōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7669585,
+      "longitude": 136.1343985
+    },
+    {
+      "id": "jp_mie_station_413334705",
+      "osm_id": 413334705,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "上林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uebayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6955285,
+      "longitude": 136.1608853
+    },
+    {
+      "id": "jp_mie_station_413334737",
+      "osm_id": 413334737,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "猪田道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Idamichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7354885,
+      "longitude": 136.140285
+    },
+    {
+      "id": "jp_mie_station_413334743",
+      "osm_id": 413334743,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "茅町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kayamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7615678,
+      "longitude": 136.1357438
+    },
+    {
+      "id": "jp_mie_station_413334787",
+      "osm_id": 413334787,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "上野市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uenoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7677008,
+      "longitude": 136.1297647
+    },
+    {
+      "id": "jp_mie_station_413334799",
+      "osm_id": 413334799,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "新居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7867197,
+      "longitude": 136.1160458
+    },
+    {
+      "id": "jp_mie_station_448110207",
+      "osm_id": 448110207,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "播磨",
+      "name_kana": "はりま",
+      "name_translations": {
+        "en": "Harima"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0781729,
+      "longitude": 136.674788
+    },
+    {
+      "id": "jp_mie_station_448112063",
+      "osm_id": 448112063,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "多度",
+      "name_kana": "たど",
+      "name_translations": {
+        "en": "Tado"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1335399,
+      "longitude": 136.6406941
+    },
+    {
+      "id": "jp_mie_station_448112333",
+      "osm_id": 448112333,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "下深谷",
+      "name_kana": "しもふかや",
+      "name_translations": {
+        "en": "Shimo-Fukaya"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0964536,
+      "longitude": 136.6614883
+    },
+    {
+      "id": "jp_mie_station_448116985",
+      "osm_id": 448116985,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "下野代",
+      "name_kana": "しものしろ",
+      "name_translations": {
+        "en": "Shimo-Noshiro"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1159224,
+      "longitude": 136.6471675
+    },
+    {
+      "id": "jp_mie_station_726936656",
+      "osm_id": 726936656,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "六軒",
+      "name_kana": "ろっけん",
+      "name_translations": {
+        "en": "Rokken"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6174497,
+      "longitude": 136.5074786
+    },
+    {
+      "id": "jp_mie_ferry_terminal_1443063871",
+      "osm_id": 1443063871,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "渡鹿野島対岸",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3559302,
+      "longitude": 136.8793303
+    },
+    {
+      "id": "jp_mie_station_2155508872",
+      "osm_id": 2155508872,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "志摩神明",
+      "name_kana": "しましんめい",
+      "name_translations": {
+        "en": "Shima-Shimmei"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3160038,
+      "longitude": 136.8298436
+    },
+    {
+      "id": "jp_mie_station_2155508875",
+      "osm_id": 2155508875,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "賢島",
+      "name_kana": "かしこじま",
+      "name_translations": {
+        "en": "Kashikojima"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3085811,
+      "longitude": 136.8191726
+    },
+    {
+      "id": "jp_mie_station_2249940363",
+      "osm_id": 2249940363,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "多気",
+      "name_kana": "たき",
+      "name_translations": {
+        "en": "Taki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5163957,
+      "longitude": 136.5727698
+    },
+    {
+      "id": "jp_mie_station_2250816095",
+      "osm_id": 2250816095,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳和",
+      "name_kana": "とくわ",
+      "name_translations": {
+        "en": "Tokuwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5542744,
+      "longitude": 136.553493
+    },
+    {
+      "id": "jp_mie_station_2251310682",
+      "osm_id": 2251310682,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "高茶屋",
+      "name_kana": "たかちゃや",
+      "name_translations": {
+        "en": "Takachaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6674339,
+      "longitude": 136.5125474
+    },
+    {
+      "id": "jp_mie_station_2251310683",
+      "osm_id": 2251310683,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿漕",
+      "name_kana": "あこぎ",
+      "name_translations": {
+        "en": "Akogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7035256,
+      "longitude": 136.5043119
+    },
+    {
+      "id": "jp_mie_station_2261281266",
+      "osm_id": 2261281266,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "一身田",
+      "name_kana": "いしんでん",
+      "name_translations": {
+        "en": "Ishinden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7627725,
+      "longitude": 136.4995209
+    },
+    {
+      "id": "jp_mie_station_2324990638",
+      "osm_id": 2324990638,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄四日市",
+      "name_kana": "きんてつよっかいち",
+      "name_translations": {
+        "en": "Kintetsu-Yokkaichi"
+      },
+      "operator": "近畿日本鉄道",
+      "network": "名古屋線;湯の山線",
+      "ref": "E21;K21",
+      "latitude": 34.9670382,
+      "longitude": 136.6186048
+    },
+    {
+      "id": "jp_mie_station_4052873132",
+      "osm_id": 4052873132,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢中原",
+      "name_kana": "いせなかはら",
+      "name_translations": {
+        "en": "Ise-Nakahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6146895,
+      "longitude": 136.4975819
+    },
+    {
+      "id": "jp_mie_station_4054155494",
+      "osm_id": 4054155494,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢若松",
+      "name_kana": "いせわかまつ",
+      "name_translations": {
+        "en": "Ise-Wakamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E29;L29",
+      "latitude": 34.8696267,
+      "longitude": 136.6168268
+    },
+    {
+      "id": "jp_mie_station_4129213154",
+      "osm_id": 4129213154,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "泊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9401272,
+      "longitude": 136.5984599
+    },
+    {
+      "id": "jp_mie_station_4129213637",
+      "osm_id": 4129213637,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "日永",
+      "name_kana": "ひなが",
+      "name_translations": {
+        "en": "Hinaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9557339,
+      "longitude": 136.6043227
+    },
+    {
+      "id": "jp_mie_station_4129213672",
+      "osm_id": 4129213672,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "あすなろう四日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asunarou Yokkaichi"
+      },
+      "operator": "四日市あすなろう鉄道",
+      "network": "内部線;八王子線",
+      "ref": null,
+      "latitude": 34.9657512,
+      "longitude": 136.618275
+    },
+    {
+      "id": "jp_mie_station_4239196151",
+      "osm_id": 4239196151,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "上之郷",
+      "name_kana": "かみのごう",
+      "name_translations": {
+        "en": "Kaminogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3796151,
+      "longitude": 136.8114592
+    },
+    {
+      "id": "jp_mie_ferry_terminal_5139047362",
+      "osm_id": 5139047362,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "川の駅　河崎",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4966241,
+      "longitude": 136.7180222
+    },
+    {
+      "id": "jp_mie_station_5214047208",
+      "osm_id": 5214047208,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "津",
+      "name_kana": "つ",
+      "name_translations": {
+        "en": "Tsu"
+      },
+      "operator": "Kintetsu Corporation",
+      "network": null,
+      "ref": "E39",
+      "latitude": 34.733994,
+      "longitude": 136.5102642
+    },
+    {
+      "id": "jp_mie_station_5214065549",
+      "osm_id": 5214065549,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "西桑名",
+      "name_kana": "にしくわな",
+      "name_translations": {
+        "en": "Nishi-Kuwana"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0661301,
+      "longitude": 136.6841175
+    },
+    {
+      "id": "jp_mie_station_5214065550",
+      "osm_id": 5214065550,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "桑名",
+      "name_kana": "くわな",
+      "name_translations": {
+        "en": "Kuwana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0671696,
+      "longitude": 136.6837701
+    },
+    {
+      "id": "jp_mie_station_5214065551",
+      "osm_id": 5214065551,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿下喜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ageki"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.1463296,
+      "longitude": 136.5192001
+    },
+    {
+      "id": "jp_mie_station_5297857230",
+      "osm_id": 5297857230,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "富田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.007986,
+      "longitude": 136.6532437
+    },
+    {
+      "id": "jp_mie_ferry_terminal_5316280211",
+      "osm_id": 5316280211,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "津なぎさまち",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "津エアポートライン",
+      "network": "津エアポートライン",
+      "ref": null,
+      "latitude": 34.7112027,
+      "longitude": 136.5251459
+    },
+    {
+      "id": "jp_mie_bus_terminal_5477696123",
+      "osm_id": 5477696123,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR四日市駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9629528,
+      "longitude": 136.6291482
+    },
+    {
+      "id": "jp_mie_station_5480560399",
+      "osm_id": 5480560399,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "四十九",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shijuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7483611,
+      "longitude": 136.1369823
+    },
+    {
+      "id": "jp_mie_bus_terminal_5780935153",
+      "osm_id": 5780935153,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "近鉄四日市",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9658891,
+      "longitude": 136.6185752
+    },
+    {
+      "id": "jp_mie_ferry_terminal_5860163640",
+      "osm_id": 5860163640,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "的矢",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.367944,
+      "longitude": 136.8661382
+    },
+    {
+      "id": "jp_mie_ferry_terminal_5860176181",
+      "osm_id": 5860176181,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三ケ所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3638881,
+      "longitude": 136.8646415
+    },
+    {
+      "id": "jp_mie_station_6060489254",
+      "osm_id": 6060489254,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "宇治山田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ujiyamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M74",
+      "latitude": 34.48825,
+      "longitude": 136.7139235
+    },
+    {
+      "id": "jp_mie_bus_terminal_6155470790",
+      "osm_id": 6155470790,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "名張駅西口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6211952,
+      "longitude": 136.0952213
+    },
+    {
+      "id": "jp_mie_ferry_terminal_6447116113",
+      "osm_id": 6447116113,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鳥羽湾めぐりとイルカ島観光船のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4840048,
+      "longitude": 136.845262
+    },
+    {
+      "id": "jp_mie_station_6634220245",
+      "osm_id": 6634220245,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄富田",
+      "name_kana": "きんてつ とみだ",
+      "name_translations": {
+        "en": "Kintetsu Tomida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E17",
+      "latitude": 35.0063972,
+      "longitude": 136.6492749
+    },
+    {
+      "id": "jp_mie_station_6634224213",
+      "osm_id": 6634224213,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝日",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0338012,
+      "longitude": 136.658026
+    },
+    {
+      "id": "jp_mie_station_6634226484",
+      "osm_id": 6634226484,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "川越富洲原",
+      "name_kana": "とみすはら",
+      "name_translations": {
+        "en": "Kawagoe Tomisuhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E16",
+      "latitude": 35.0164038,
+      "longitude": 136.6598797
+    },
+    {
+      "id": "jp_mie_station_6634230985",
+      "osm_id": 6634230985,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢朝日",
+      "name_kana": "いせ あさひ",
+      "name_translations": {
+        "en": "Iseasahi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E15",
+      "latitude": 35.0384336,
+      "longitude": 136.6688973
+    },
+    {
+      "id": "jp_mie_station_6634230986",
+      "osm_id": 6634230986,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "近鉄長島",
+      "name_kana": "きんてつ ながしま",
+      "name_translations": {
+        "en": "Kintetsu Nagashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E12",
+      "latitude": 35.0978793,
+      "longitude": 136.6966105
+    },
+    {
+      "id": "jp_mie_station_6634230987",
+      "osm_id": 6634230987,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "長島",
+      "name_kana": "ながしま",
+      "name_translations": {
+        "en": "Nagashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.098172,
+      "longitude": 136.69567
+    },
+    {
+      "id": "jp_mie_station_6634266484",
+      "osm_id": 6634266484,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "益生",
+      "name_kana": "ますお",
+      "name_translations": {
+        "en": "Masuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E14",
+      "latitude": 35.0580958,
+      "longitude": 136.6786605
+    },
+    {
+      "id": "jp_mie_station_7166184938",
+      "osm_id": 7166184938,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "東員",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōin"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道北勢線",
+      "ref": null,
+      "latitude": 35.0779414,
+      "longitude": 136.587562
+    },
+    {
+      "id": "jp_mie_station_7194564373",
+      "osm_id": 7194564373,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "九鬼",
+      "name_kana": "くき",
+      "name_translations": {
+        "en": "Kuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0160785,
+      "longitude": 136.2426381
+    },
+    {
+      "id": "jp_mie_station_7890069680",
+      "osm_id": 7890069680,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢中川",
+      "name_kana": "いせ なかがわ",
+      "name_translations": {
+        "en": "Ise-Nakagawa"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": "D61;E61;M61",
+      "latitude": 34.6352912,
+      "longitude": 136.4780997
+    },
+    {
+      "id": "jp_mie_station_7890071986",
+      "osm_id": 7890071986,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "西青山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Aoyama"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6764659,
+      "longitude": 136.2380272
+    },
+    {
+      "id": "jp_mie_station_7890328231",
+      "osm_id": 7890328231,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢石橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Ishibashi"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6568574,
+      "longitude": 136.4084025
+    },
+    {
+      "id": "jp_mie_station_7890642611",
+      "osm_id": 7890642611,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊賀上津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Igakouzu"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6826783,
+      "longitude": 136.2047571
+    },
+    {
+      "id": "jp_mie_station_7890642615",
+      "osm_id": 7890642615,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "青山町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoyamachou"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6730629,
+      "longitude": 136.1777614
+    },
+    {
+      "id": "jp_mie_station_7890758853",
+      "osm_id": 7890758853,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "川合高岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaitakaoka"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6565701,
+      "longitude": 136.4364215
+    },
+    {
+      "id": "jp_mie_station_7890758855",
+      "osm_id": 7890758855,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "東青山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Aoyama"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6756156,
+      "longitude": 136.3217946
+    },
+    {
+      "id": "jp_mie_station_7890758857",
+      "osm_id": 7890758857,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "榊原温泉口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakakibara-Onsenguchi"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6748275,
+      "longitude": 136.3486975
+    },
+    {
+      "id": "jp_mie_station_7890758858",
+      "osm_id": 7890758858,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊賀神戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iga-Kambe"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6736981,
+      "longitude": 136.1525546
+    },
+    {
+      "id": "jp_mie_station_7890758861",
+      "osm_id": 7890758861,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大三",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omitsu"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6641313,
+      "longitude": 136.3687487
+    },
+    {
+      "id": "jp_mie_station_7891898725",
+      "osm_id": 7891898725,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤目口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akameguchi"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5999217,
+      "longitude": 136.0744286
+    },
+    {
+      "id": "jp_mie_station_7891898730",
+      "osm_id": 7891898730,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "美旗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mihata"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6634231,
+      "longitude": 136.1333439
+    },
+    {
+      "id": "jp_mie_station_7891898731",
+      "osm_id": 7891898731,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "名張",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nabari"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6217895,
+      "longitude": 136.0956898
+    },
+    {
+      "id": "jp_mie_station_7891898737",
+      "osm_id": 7891898737,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "桔梗が丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kikyōgaoka"
+      },
+      "operator": "近畿日本鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6412918,
+      "longitude": 136.1126784
+    },
+    {
+      "id": "jp_mie_ferry_terminal_7930645749",
+      "osm_id": 7930645749,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鳥羽市営定期船菅島桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4990762,
+      "longitude": 136.8989459
+    },
+    {
+      "id": "jp_mie_ferry_terminal_7930645756",
+      "osm_id": 7930645756,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鳥羽市営定期船神島桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5503452,
+      "longitude": 136.9805146
+    },
+    {
+      "id": "jp_mie_station_7992136574",
+      "osm_id": 7992136574,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "久居",
+      "name_kana": "ひさい",
+      "name_translations": {
+        "en": "Hisai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E42",
+      "latitude": 34.6758202,
+      "longitude": 136.4778911
+    },
+    {
+      "id": "jp_mie_station_7992136576",
+      "osm_id": 7992136576,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "桃園",
+      "name_kana": "ももぞの",
+      "name_translations": {
+        "en": "Momozono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E43",
+      "latitude": 34.6635246,
+      "longitude": 136.477413
+    },
+    {
+      "id": "jp_mie_ferry_terminal_8041577373",
+      "osm_id": 8041577373,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "賢島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashikojima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3074208,
+      "longitude": 136.8189119
+    },
+    {
+      "id": "jp_mie_ferry_terminal_8041604824",
+      "osm_id": 8041604824,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "間崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2872256,
+      "longitude": 136.8098085
+    },
+    {
+      "id": "jp_mie_ferry_terminal_8041604825",
+      "osm_id": 8041604825,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "和具",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wagu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2632163,
+      "longitude": 136.8119301
+    },
+    {
+      "id": "jp_mie_ferry_terminal_8041604842",
+      "osm_id": 8041604842,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "御座",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Goza"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2781225,
+      "longitude": 136.7696384
+    },
+    {
+      "id": "jp_mie_ferry_terminal_8041604848",
+      "osm_id": 8041604848,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "浜島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2953838,
+      "longitude": 136.7623843
+    },
+    {
+      "id": "jp_mie_station_8129242387",
+      "osm_id": 8129242387,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "西日野",
+      "name_kana": "にしひの",
+      "name_translations": {
+        "en": "Nishihino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.952921,
+      "longitude": 136.5911548
+    },
+    {
+      "id": "jp_mie_station_8129242404",
+      "osm_id": 8129242404,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "南日永",
+      "name_kana": "みなみひなが",
+      "name_translations": {
+        "en": "Minami hinaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9501922,
+      "longitude": 136.6011219
+    },
+    {
+      "id": "jp_mie_station_8129247017",
+      "osm_id": 8129247017,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "小古曽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogoso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9286823,
+      "longitude": 136.5921888
+    },
+    {
+      "id": "jp_mie_station_8129247026",
+      "osm_id": 8129247026,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "内部",
+      "name_kana": "うつべ",
+      "name_translations": {
+        "en": "Utsube"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9255211,
+      "longitude": 136.5868613
+    },
+    {
+      "id": "jp_mie_station_8169016252",
+      "osm_id": 8169016252,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "斎宮",
+      "name_kana": "さいぐう",
+      "name_translations": {
+        "en": "Saigu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5378511,
+      "longitude": 136.6155568
+    },
+    {
+      "id": "jp_mie_station_8171977095",
+      "osm_id": 8171977095,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝熊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4772489,
+      "longitude": 136.7580244
+    },
+    {
+      "id": "jp_mie_station_8171977096",
+      "osm_id": 8171977096,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "池の浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikenoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4792156,
+      "longitude": 136.8186604
+    },
+    {
+      "id": "jp_mie_station_8172239898",
+      "osm_id": 8172239898,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "中之郷",
+      "name_kana": "なかのごう",
+      "name_translations": {
+        "en": "Nakanogou"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4797055,
+      "longitude": 136.8455507
+    },
+    {
+      "id": "jp_mie_station_8172239903",
+      "osm_id": 8172239903,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "加茂",
+      "name_kana": "かも",
+      "name_translations": {
+        "en": "Kamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4440619,
+      "longitude": 136.8464913
+    },
+    {
+      "id": "jp_mie_station_8172239911",
+      "osm_id": 8172239911,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵜方",
+      "name_kana": "うがた",
+      "name_translations": {
+        "en": "Ugata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3293698,
+      "longitude": 136.825969
+    },
+    {
+      "id": "jp_mie_station_8172239913",
+      "osm_id": 8172239913,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "志摩横山",
+      "name_kana": "しまよこやま",
+      "name_translations": {
+        "en": "Shima-Yokoyama"
+      },
+      "operator": "Kintetsu Corporation",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3341381,
+      "longitude": 136.818188
+    },
+    {
+      "id": "jp_mie_station_8172239915",
+      "osm_id": 8172239915,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴川",
+      "name_kana": "あながわ",
+      "name_translations": {
+        "en": "Anagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3589863,
+      "longitude": 136.8159816
+    },
+    {
+      "id": "jp_mie_station_8172239916",
+      "osm_id": 8172239916,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "志摩磯部",
+      "name_kana": "しまいそべ",
+      "name_translations": {
+        "en": "Shima-isobe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3699647,
+      "longitude": 136.8055484
+    },
+    {
+      "id": "jp_mie_station_8172244621",
+      "osm_id": 8172244621,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "沓掛",
+      "name_kana": "くつかけ",
+      "name_translations": {
+        "en": "Kutsukake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3942694,
+      "longitude": 136.8142459
+    },
+    {
+      "id": "jp_mie_station_8172244622",
+      "osm_id": 8172244622,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "五知",
+      "name_kana": "ごち",
+      "name_translations": {
+        "en": "Gochi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4068578,
+      "longitude": 136.8100507
+    },
+    {
+      "id": "jp_mie_station_8172244626",
+      "osm_id": 8172244626,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "白木",
+      "name_kana": "しらき",
+      "name_translations": {
+        "en": "Shiraki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4290167,
+      "longitude": 136.8307256
+    },
+    {
+      "id": "jp_mie_station_8172244630",
+      "osm_id": 8172244630,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "松尾",
+      "name_kana": "まつお",
+      "name_translations": {
+        "en": "Matsuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4327458,
+      "longitude": 136.8401364
+    },
+    {
+      "id": "jp_mie_station_8172244632",
+      "osm_id": 8172244632,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "志摩赤崎",
+      "name_kana": "しまあかさき",
+      "name_translations": {
+        "en": "Shima-akasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4701206,
+      "longitude": 136.8420942
+    },
+    {
+      "id": "jp_mie_station_8172711078",
+      "osm_id": 8172711078,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢川島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Kawashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9776086,
+      "longitude": 136.5667365
+    },
+    {
+      "id": "jp_mie_station_8172711081",
+      "osm_id": 8172711081,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "高角",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takatsuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9836912,
+      "longitude": 136.554176
+    },
+    {
+      "id": "jp_mie_station_8172711085",
+      "osm_id": 8172711085,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9965611,
+      "longitude": 136.5416352
+    },
+    {
+      "id": "jp_mie_station_8172711089",
+      "osm_id": 8172711089,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "中菰野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka-Komono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0122695,
+      "longitude": 136.5043209
+    },
+    {
+      "id": "jp_mie_station_8172711105",
+      "osm_id": 8172711105,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "菰野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0086122,
+      "longitude": 136.5177445
+    },
+    {
+      "id": "jp_mie_station_8172711108",
+      "osm_id": 8172711108,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大羽根園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obaneen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0126139,
+      "longitude": 136.4944437
+    },
+    {
+      "id": "jp_mie_station_8172711109",
+      "osm_id": 8172711109,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯の山温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunoyama-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0118439,
+      "longitude": 136.4740053
+    },
+    {
+      "id": "jp_mie_station_8172711110",
+      "osm_id": 8172711110,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢松本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ise-Matsumoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9697925,
+      "longitude": 136.5905754
+    },
+    {
+      "id": "jp_mie_station_8172711113",
+      "osm_id": 8172711113,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "中川原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakagawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9693506,
+      "longitude": 136.6032269
+    },
+    {
+      "id": "jp_mie_station_8175919300",
+      "osm_id": 8175919300,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "平田町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiratacho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8749182,
+      "longitude": 136.5419134
+    },
+    {
+      "id": "jp_mie_station_8175919301",
+      "osm_id": 8175919301,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "三日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikkaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8801965,
+      "longitude": 136.5620307
+    },
+    {
+      "id": "jp_mie_station_8175919302",
+      "osm_id": 8175919302,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8716411,
+      "longitude": 136.5958586
+    },
+    {
+      "id": "jp_mie_station_8175919304",
+      "osm_id": 8175919304,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "鈴鹿市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzukashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.884129,
+      "longitude": 136.5825167
+    },
+    {
+      "id": "jp_mie_station_8176047390",
+      "osm_id": 8176047390,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "江戸橋",
+      "name_kana": "えどばし",
+      "name_translations": {
+        "en": "Edobashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E38",
+      "latitude": 34.7439129,
+      "longitude": 136.5138743
+    },
+    {
+      "id": "jp_mie_station_8176047392",
+      "osm_id": 8176047392,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "南が丘",
+      "name_kana": "みなみがおか",
+      "name_translations": {
+        "en": "Minamigaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E41",
+      "latitude": 34.692469,
+      "longitude": 136.4969489
+    },
+    {
+      "id": "jp_mie_station_8177700007",
+      "osm_id": 8177700007,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "白塚",
+      "name_kana": "しらつか",
+      "name_translations": {
+        "en": "Shiratsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E36",
+      "latitude": 34.7706034,
+      "longitude": 136.5323755
+    },
+    {
+      "id": "jp_mie_station_8177700009",
+      "osm_id": 8177700009,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "高田本山",
+      "name_kana": "たかだほんざん",
+      "name_translations": {
+        "en": "Takadahonzan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "E37",
+      "latitude": 34.7554368,
+      "longitude": 136.5165485
+    },
+    {
+      "id": "jp_mie_station_8179518310",
+      "osm_id": 8179518310,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "保々",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hobo"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.0465848,
+      "longitude": 136.5662654
+    },
+    {
+      "id": "jp_mie_station_8179518315",
+      "osm_id": 8179518315,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "山城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamajō"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.0352981,
+      "longitude": 136.5883666
+    },
+    {
+      "id": "jp_mie_station_8179541821",
+      "osm_id": 8179541821,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "平津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Heizu"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.0283096,
+      "longitude": 136.61874
+    },
+    {
+      "id": "jp_mie_station_8179541826",
+      "osm_id": 8179541826,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "暁学園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akatsukigakuenmae"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.032641,
+      "longitude": 136.6063
+    },
+    {
+      "id": "jp_mie_station_8179780147",
+      "osm_id": 8179780147,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "西藤原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishifujiwara"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.1699835,
+      "longitude": 136.4784524
+    },
+    {
+      "id": "jp_mie_station_8179780152",
+      "osm_id": 8179780152,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "西野尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishinojiri"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.1638326,
+      "longitude": 136.4883886
+    },
+    {
+      "id": "jp_mie_station_8179780153",
+      "osm_id": 8179780153,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "東藤原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashifujiwara"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.1474693,
+      "longitude": 136.4988331
+    },
+    {
+      "id": "jp_mie_station_8179780155",
+      "osm_id": 8179780155,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊勢治田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isehatta"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.1328209,
+      "longitude": 136.5147346
+    },
+    {
+      "id": "jp_mie_station_8179780162",
+      "osm_id": 8179780162,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "丹生川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nyūgawa"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.1226164,
+      "longitude": 136.5196665
+    },
+    {
+      "id": "jp_mie_station_8179780167",
+      "osm_id": 8179780167,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "三里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misato"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.1069876,
+      "longitude": 136.5385325
+    },
+    {
+      "id": "jp_mie_station_8179780171",
+      "osm_id": 8179780171,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大安",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daian"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.0919665,
+      "longitude": 136.5455679
+    },
+    {
+      "id": "jp_mie_station_8179780172",
+      "osm_id": 8179780172,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅戸井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umedoi"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.0750329,
+      "longitude": 136.5571672
+    },
+    {
+      "id": "jp_mie_station_8179780173",
+      "osm_id": 8179780173,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "北勢中央公園口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hokusei Chūō Kōenguchi"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.0602815,
+      "longitude": 136.5661519
+    },
+    {
+      "id": "jp_mie_station_8179780177",
+      "osm_id": 8179780177,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "大矢知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōyachi"
+      },
+      "operator": "三岐鉄道",
+      "network": "三岐鉄道三岐線",
+      "ref": null,
+      "latitude": 35.0223165,
+      "longitude": 136.632961
+    },
+    {
+      "id": "jp_mie_station_9085699539",
+      "osm_id": 9085699539,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "瀞流荘",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8706308,
+      "longitude": 135.9003366
+    },
+    {
+      "id": "jp_mie_station_9085699540",
+      "osm_id": 9085699540,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯ノ口温泉",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8642028,
+      "longitude": 135.8902967
+    },
+    {
+      "id": "jp_mie_ferry_terminal_9533804987",
+      "osm_id": 9533804987,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "渡鹿野島和田",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3602563,
+      "longitude": 136.875797
+    },
+    {
+      "id": "jp_mie_station_9851877838",
+      "osm_id": 9851877838,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "鈴鹿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8784912,
+      "longitude": 136.5888447
+    },
+    {
+      "id": "jp_mie_bus_terminal_10246723568",
+      "osm_id": 10246723568,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "小森南",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "三重交通",
+      "network": "津市コミュニティバス",
+      "ref": null,
+      "latitude": 34.6616715,
+      "longitude": 136.5048681
+    },
+    {
+      "id": "jp_mie_bus_terminal_10654199525",
+      "osm_id": 10654199525,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "阿下喜",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "三重交通",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1461533,
+      "longitude": 136.5182962
+    },
+    {
+      "id": "jp_mie_bus_terminal_10910818881",
+      "osm_id": 10910818881,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宇治山田駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4881796,
+      "longitude": 136.7134075
+    },
+    {
+      "id": "jp_mie_bus_terminal_10913605793",
+      "osm_id": 10913605793,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊勢市駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4910956,
+      "longitude": 136.7090776
+    },
+    {
+      "id": "jp_mie_bus_terminal_12010739002",
+      "osm_id": 12010739002,
+      "osm_type": "node",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "片田団地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katada danchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7002003,
+      "longitude": 136.4413234
+    },
+    {
+      "id": "jp_mie_ferry_terminal_183719455",
+      "osm_id": 183719455,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鳥羽マリンターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4903095,
+      "longitude": 136.84494
+    },
+    {
+      "id": "jp_mie_bus_terminal_320769181",
+      "osm_id": 320769181,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三重交通バスプール",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6586281,
+      "longitude": 136.1974646
+    },
+    {
+      "id": "jp_mie_ferry_terminal_464480779",
+      "osm_id": 464480779,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鳥羽市営定期船中之郷桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4771523,
+      "longitude": 136.8463295
+    },
+    {
+      "id": "jp_mie_airport_846889170",
+      "osm_id": 846889170,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "明野飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akeno Air Field"
+      },
+      "operator": "JGSDF",
+      "network": null,
+      "ref": "RJOE",
+      "latitude": 34.5329135,
+      "longitude": 136.671839
+    },
+    {
+      "id": "jp_mie_bus_terminal_1120334041",
+      "osm_id": 1120334041,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "津駅前バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "三重交通",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7340499,
+      "longitude": 136.5110937
+    },
+    {
+      "id": "jp_mie_airport_1136964759",
+      "osm_id": 1136964759,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "津市伊勢湾ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "津市",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6735015,
+      "longitude": 136.5549831
+    },
+    {
+      "id": "jp_mie_station_1279930749",
+      "osm_id": 1279930749,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾鷲駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0747226,
+      "longitude": 136.1903456
+    },
+    {
+      "id": "jp_mie_bus_terminal_1349286105",
+      "osm_id": 1349286105,
+      "osm_type": "way",
+      "prefecture_id": "jp_mie",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "鵜方駅前",
+      "name_kana": "うがたえきまえ",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3290024,
+      "longitude": 136.8263432
+    }
+  ]
+}

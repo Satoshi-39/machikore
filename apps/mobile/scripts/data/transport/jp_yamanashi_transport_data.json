@@ -1,0 +1,1492 @@
+{
+  "fetchedAt": "2025-12-24T05:51:55.966Z",
+  "prefecture_id": "jp_yamanashi",
+  "prefecture_name": "山梨県",
+  "stats": {
+    "station": 74,
+    "airport": 1,
+    "ferry_terminal": 1,
+    "bus_terminal": 7,
+    "total": 83
+  },
+  "data": [
+    {
+      "id": "jp_yamanashi_station_243818949",
+      "osm_id": 243818949,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士山",
+      "name_kana": "ふじさん",
+      "name_translations": {
+        "en": "Mt Fuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4835487,
+      "longitude": 138.7954457
+    },
+    {
+      "id": "jp_yamanashi_station_243887757",
+      "osm_id": 243887757,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "梁川",
+      "name_kana": "やながわ",
+      "name_translations": {
+        "en": "Yanagawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JC29",
+      "latitude": 35.606018,
+      "longitude": 139.0376821
+    },
+    {
+      "id": "jp_yamanashi_station_243887820",
+      "osm_id": 243887820,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "猿橋",
+      "name_kana": "さるはし",
+      "name_translations": {
+        "en": "Saruhashi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JC31",
+      "latitude": 35.6128739,
+      "longitude": 138.9680239
+    },
+    {
+      "id": "jp_yamanashi_station_264806317",
+      "osm_id": 264806317,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐大泉",
+      "name_kana": "かいおおいずみ",
+      "name_translations": {
+        "en": "Kai-Oizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8962348,
+      "longitude": 138.4094028
+    },
+    {
+      "id": "jp_yamanashi_station_264808478",
+      "osm_id": 264808478,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐小泉",
+      "name_kana": "かいこいずみ",
+      "name_translations": {
+        "en": "Kai-Koizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8795415,
+      "longitude": 138.3595942
+    },
+    {
+      "id": "jp_yamanashi_station_264808510",
+      "osm_id": 264808510,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "清里",
+      "name_kana": "きよさと",
+      "name_translations": {
+        "en": "Kiyasato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9192642,
+      "longitude": 138.4369571
+    },
+    {
+      "id": "jp_yamanashi_station_264817302",
+      "osm_id": 264817302,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小淵沢",
+      "name_kana": "こぶちざわ",
+      "name_translations": {
+        "en": "Kobuchizawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO51",
+      "latitude": 35.8639177,
+      "longitude": 138.3159619
+    },
+    {
+      "id": "jp_yamanashi_station_264818386",
+      "osm_id": 264818386,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "竜王",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ryuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6688016,
+      "longitude": 138.5195034
+    },
+    {
+      "id": "jp_yamanashi_station_264818395",
+      "osm_id": 264818395,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6878479,
+      "longitude": 138.4874941
+    },
+    {
+      "id": "jp_yamanashi_station_264818413",
+      "osm_id": 264818413,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimpu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7371514,
+      "longitude": 138.4332556
+    },
+    {
+      "id": "jp_yamanashi_station_264818853",
+      "osm_id": 264818853,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "長坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8275272,
+      "longitude": 138.3667944
+    },
+    {
+      "id": "jp_yamanashi_station_264820798",
+      "osm_id": 264820798,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "笹子",
+      "name_kana": "ささご",
+      "name_translations": {
+        "en": "Sasago"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "CO34",
+      "latitude": 35.6039397,
+      "longitude": 138.8253537
+    },
+    {
+      "id": "jp_yamanashi_station_265832025",
+      "osm_id": 265832025,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐上野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kai-Ueno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5697368,
+      "longitude": 138.5202408
+    },
+    {
+      "id": "jp_yamanashi_bus_terminal_1142046045",
+      "osm_id": 1142046045,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "河口湖駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaguchiko Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4985288,
+      "longitude": 138.7686416
+    },
+    {
+      "id": "jp_yamanashi_station_3064377903",
+      "osm_id": 3064377903,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "石和温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isawa-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO41",
+      "latitude": 35.657604,
+      "longitude": 138.6353509
+    },
+    {
+      "id": "jp_yamanashi_bus_terminal_3114434453",
+      "osm_id": 3114434453,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "塩山駅南口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7051349,
+      "longitude": 138.7344393
+    },
+    {
+      "id": "jp_yamanashi_bus_terminal_3132197906",
+      "osm_id": 3132197906,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "上野原駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "富士急バス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6184046,
+      "longitude": 139.1166168
+    },
+    {
+      "id": "jp_yamanashi_station_3730397974",
+      "osm_id": 3730397974,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大月",
+      "name_kana": "おおつき",
+      "name_translations": {
+        "en": "Otsuki"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": "FJ01",
+      "latitude": 35.6129342,
+      "longitude": 138.942183
+    },
+    {
+      "id": "jp_yamanashi_station_3730397976",
+      "osm_id": 3730397976,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "山梨市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamanashishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO39",
+      "latitude": 35.6849247,
+      "longitude": 138.6830069
+    },
+    {
+      "id": "jp_yamanashi_bus_terminal_4111996490",
+      "osm_id": 4111996490,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "高速バスステーション",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6683595,
+      "longitude": 138.5211792
+    },
+    {
+      "id": "jp_yamanashi_station_5589913332",
+      "osm_id": 5589913332,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "酒折",
+      "name_kana": "さかおり",
+      "name_translations": {
+        "en": "Sakaori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "C042",
+      "latitude": 35.6596417,
+      "longitude": 138.5992422
+    },
+    {
+      "id": "jp_yamanashi_station_5589913354",
+      "osm_id": 5589913354,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "善光寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zenkoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6598766,
+      "longitude": 138.5893576
+    },
+    {
+      "id": "jp_yamanashi_station_5589913392",
+      "osm_id": 5589913392,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "金手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanente"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6621751,
+      "longitude": 138.5791437
+    },
+    {
+      "id": "jp_yamanashi_station_5589913394",
+      "osm_id": 5589913394,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "甲府",
+      "name_kana": "こうふ",
+      "name_translations": {
+        "en": "Kofu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "CO43",
+      "latitude": 35.6670815,
+      "longitude": 138.5693937
+    },
+    {
+      "id": "jp_yamanashi_station_5969088998",
+      "osm_id": 5969088998,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "日野春",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hinoharu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.790032,
+      "longitude": 138.39477
+    },
+    {
+      "id": "jp_yamanashi_station_5972592424",
+      "osm_id": 5972592424,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "韮崎",
+      "name_kana": "にらさき",
+      "name_translations": {
+        "en": "Nirasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7104219,
+      "longitude": 138.4508872
+    },
+    {
+      "id": "jp_yamanashi_station_5980724948",
+      "osm_id": 5980724948,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐岩間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kai-Iwama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4921431,
+      "longitude": 138.4627326
+    },
+    {
+      "id": "jp_yamanashi_station_5980724949",
+      "osm_id": 5980724949,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "落居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ochii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5038625,
+      "longitude": 138.4714429
+    },
+    {
+      "id": "jp_yamanashi_station_5980724958",
+      "osm_id": 5980724958,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "市川大門",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichikawa-Daimon"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.560444,
+      "longitude": 138.4929475
+    },
+    {
+      "id": "jp_yamanashi_station_5980724959",
+      "osm_id": 5980724959,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "市川本町",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5607312,
+      "longitude": 138.5022368
+    },
+    {
+      "id": "jp_yamanashi_station_5980724960",
+      "osm_id": 5980724960,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashigawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5628946,
+      "longitude": 138.5109365
+    },
+    {
+      "id": "jp_yamanashi_station_5980724967",
+      "osm_id": 5980724967,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東花輪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Hanawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5945354,
+      "longitude": 138.5269006
+    },
+    {
+      "id": "jp_yamanashi_station_5980724969",
+      "osm_id": 5980724969,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小井川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6048909,
+      "longitude": 138.5285653
+    },
+    {
+      "id": "jp_yamanashi_station_5980724983",
+      "osm_id": 5980724983,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鰍沢口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5413802,
+      "longitude": 138.4708053
+    },
+    {
+      "id": "jp_yamanashi_station_5980725186",
+      "osm_id": 5980725186,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "常永",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joei"
+      },
+      "operator": null,
+      "network": "JR東海 身延線",
+      "ref": null,
+      "latitude": 35.6167698,
+      "longitude": 138.5327643
+    },
+    {
+      "id": "jp_yamanashi_station_5980725195",
+      "osm_id": 5980725195,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "国母",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6303991,
+      "longitude": 138.5513882
+    },
+    {
+      "id": "jp_yamanashi_station_5980725199",
+      "osm_id": 5980725199,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐住吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kai-Sumiyoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6369838,
+      "longitude": 138.5703183
+    },
+    {
+      "id": "jp_yamanashi_station_5980725226",
+      "osm_id": 5980725226,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南甲府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kofu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.643445,
+      "longitude": 138.5777369
+    },
+    {
+      "id": "jp_yamanashi_station_5980951958",
+      "osm_id": 5980951958,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "勝沼ぶどう郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katsunumabudokyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO36",
+      "latitude": 35.6723574,
+      "longitude": 138.7432213
+    },
+    {
+      "id": "jp_yamanashi_station_5980952096",
+      "osm_id": 5980952096,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩山",
+      "name_kana": "えんざん",
+      "name_translations": {
+        "en": "Enzan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO37",
+      "latitude": 35.7054703,
+      "longitude": 138.7341835
+    },
+    {
+      "id": "jp_yamanashi_station_5980952103",
+      "osm_id": 5980952103,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東山梨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Yamanashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO38",
+      "latitude": 35.6941802,
+      "longitude": 138.7027841
+    },
+    {
+      "id": "jp_yamanashi_station_5980952160",
+      "osm_id": 5980952160,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "春日居町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasugaicho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO40",
+      "latitude": 35.673473,
+      "longitude": 138.6590816
+    },
+    {
+      "id": "jp_yamanashi_station_5982846425",
+      "osm_id": 5982846425,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐大和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kai-Yamato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO35",
+      "latitude": 35.6395719,
+      "longitude": 138.7810054
+    },
+    {
+      "id": "jp_yamanashi_station_5991086524",
+      "osm_id": 5991086524,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "初狩",
+      "name_kana": "はつかり",
+      "name_translations": {
+        "en": "Hatsukari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO33",
+      "latitude": 35.5942257,
+      "longitude": 138.8843295
+    },
+    {
+      "id": "jp_yamanashi_station_6000923728",
+      "osm_id": 6000923728,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鳥沢",
+      "name_kana": "とりさわ",
+      "name_translations": {
+        "en": "Torisawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JC30",
+      "latitude": 35.60815,
+      "longitude": 139.0031178
+    },
+    {
+      "id": "jp_yamanashi_station_6002079057",
+      "osm_id": 6002079057,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上野原",
+      "name_kana": "うえのはら",
+      "name_translations": {
+        "en": "Uenohara"
+      },
+      "operator": "JR東日本",
+      "network": null,
+      "ref": "JC27",
+      "latitude": 35.6188935,
+      "longitude": 139.1160455
+    },
+    {
+      "id": "jp_yamanashi_station_6002079147",
+      "osm_id": 6002079147,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "四方津",
+      "name_kana": "しおつ",
+      "name_translations": {
+        "en": "Shiotsu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "JC28",
+      "latitude": 35.6141608,
+      "longitude": 139.0731591
+    },
+    {
+      "id": "jp_yamanashi_station_6036084477",
+      "osm_id": 6036084477,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "市ノ瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichinose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4621992,
+      "longitude": 138.4821403
+    },
+    {
+      "id": "jp_yamanashi_station_6036084478",
+      "osm_id": 6036084478,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "久那土",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kunado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4813913,
+      "longitude": 138.4677637
+    },
+    {
+      "id": "jp_yamanashi_station_6036422952",
+      "osm_id": 6036422952,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "身延",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minobu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3614072,
+      "longitude": 138.4531094
+    },
+    {
+      "id": "jp_yamanashi_station_6036621596",
+      "osm_id": 6036621596,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩之沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shionosawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3799355,
+      "longitude": 138.4541877
+    },
+    {
+      "id": "jp_yamanashi_station_6036621619",
+      "osm_id": 6036621619,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "波高島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hadakajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4184801,
+      "longitude": 138.4595802
+    },
+    {
+      "id": "jp_yamanashi_station_6036621631",
+      "osm_id": 6036621631,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下部温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimobe-onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4255804,
+      "longitude": 138.4722161
+    },
+    {
+      "id": "jp_yamanashi_station_6070965450",
+      "osm_id": 6070965450,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐常葉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kai-Tokiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4449702,
+      "longitude": 138.4769006
+    },
+    {
+      "id": "jp_yamanashi_station_6074126215",
+      "osm_id": 6074126215,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "井出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ide"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2473649,
+      "longitude": 138.4908923
+    },
+    {
+      "id": "jp_yamanashi_station_6074126216",
+      "osm_id": 6074126216,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "寄畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yorhihata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2644893,
+      "longitude": 138.4750888
+    },
+    {
+      "id": "jp_yamanashi_station_6074126217",
+      "osm_id": 6074126217,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "内船",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Utsubuna"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2819671,
+      "longitude": 138.4649795
+    },
+    {
+      "id": "jp_yamanashi_station_6074126222",
+      "osm_id": 6074126222,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲斐大島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kai-Oshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.328396,
+      "longitude": 138.4520808
+    },
+    {
+      "id": "jp_yamanashi_station_6083859795",
+      "osm_id": 6083859795,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "十島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2301734,
+      "longitude": 138.5158302
+    },
+    {
+      "id": "jp_yamanashi_bus_terminal_7686135952",
+      "osm_id": 7686135952,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "山梨交通",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamanashi Transportation Co., Transport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6412136,
+      "longitude": 138.571178
+    },
+    {
+      "id": "jp_yamanashi_station_8228782082",
+      "osm_id": 8228782082,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "禾生",
+      "name_kana": "かせい",
+      "name_translations": {
+        "en": "Kasei"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.575108,
+      "longitude": 138.929062
+    },
+    {
+      "id": "jp_yamanashi_station_8228791734",
+      "osm_id": 8228791734,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東桂",
+      "name_kana": "ひがしかつら",
+      "name_translations": {
+        "en": "Higashikatsura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5364296,
+      "longitude": 138.8708959
+    },
+    {
+      "id": "jp_yamanashi_station_8237778233",
+      "osm_id": 8237778233,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷村町",
+      "name_kana": "やむらまち",
+      "name_translations": {
+        "en": "Yamuramachi"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5505912,
+      "longitude": 138.9046798
+    },
+    {
+      "id": "jp_yamanashi_station_8239591992",
+      "osm_id": 8239591992,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上大月",
+      "name_kana": "かみおおつき",
+      "name_translations": {
+        "en": "Kamiotsuki"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": "FJ02",
+      "latitude": 35.6093303,
+      "longitude": 138.9379864
+    },
+    {
+      "id": "jp_yamanashi_station_8239606540",
+      "osm_id": 8239606540,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤坂",
+      "name_kana": "あかさか",
+      "name_translations": {
+        "en": "Akasaka"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5661434,
+      "longitude": 138.9161572
+    },
+    {
+      "id": "jp_yamanashi_station_8239606541",
+      "osm_id": 8239606541,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "田野倉",
+      "name_kana": "たのくら",
+      "name_translations": {
+        "en": "Tanokura"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": "FJ03",
+      "latitude": 35.5932147,
+      "longitude": 138.9312956
+    },
+    {
+      "id": "jp_yamanashi_station_8241759516",
+      "osm_id": 8241759516,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "都留市",
+      "name_kana": "つるし",
+      "name_translations": {
+        "en": "Tsurushi"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5570571,
+      "longitude": 138.9075261
+    },
+    {
+      "id": "jp_yamanashi_station_8241789860",
+      "osm_id": 8241789860,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "葭池温泉前",
+      "name_kana": "よしいけおんせんまえ",
+      "name_translations": {
+        "en": "Yoshiikeonsenmae"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5019506,
+      "longitude": 138.8119668
+    },
+    {
+      "id": "jp_yamanashi_station_8241789861",
+      "osm_id": 8241789861,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下吉田",
+      "name_kana": "しもよしだ",
+      "name_translations": {
+        "en": "Shimoyoshida"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4979775,
+      "longitude": 138.8036172
+    },
+    {
+      "id": "jp_yamanashi_station_8241789864",
+      "osm_id": 8241789864,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "月江寺",
+      "name_kana": "げっこうじ",
+      "name_translations": {
+        "en": "Gekkoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4932001,
+      "longitude": 138.7981097
+    },
+    {
+      "id": "jp_yamanashi_station_8241789865",
+      "osm_id": 8241789865,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士急ハイランド",
+      "name_kana": "ふじきゅうはいらんど",
+      "name_translations": {
+        "en": "Fujikyu Highland"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4893684,
+      "longitude": 138.7819442
+    },
+    {
+      "id": "jp_yamanashi_station_8241789866",
+      "osm_id": 8241789866,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "河口湖",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaguchiko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "FJ18",
+      "latitude": 35.4980327,
+      "longitude": 138.7689798
+    },
+    {
+      "id": "jp_yamanashi_station_8241802218",
+      "osm_id": 8241802218,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "都留文科大学前",
+      "name_kana": "つるぶんかだいがくまえ",
+      "name_translations": {
+        "en": "Tsurubunkadaigakumae"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5425045,
+      "longitude": 138.8965302
+    },
+    {
+      "id": "jp_yamanashi_station_8241802219",
+      "osm_id": 8241802219,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "十日市場",
+      "name_kana": "とおかいちば",
+      "name_translations": {
+        "en": "Tokaichiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5388986,
+      "longitude": 138.8875113
+    },
+    {
+      "id": "jp_yamanashi_station_8241802220",
+      "osm_id": 8241802220,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "三つ峠",
+      "name_kana": "みつとうげ",
+      "name_translations": {
+        "en": "Mitsutouge"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5241802,
+      "longitude": 138.8453597
+    },
+    {
+      "id": "jp_yamanashi_station_8241802222",
+      "osm_id": 8241802222,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "寿",
+      "name_kana": "ことぶき",
+      "name_translations": {
+        "en": "Kotobuki"
+      },
+      "operator": "富士山麓電気鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5082238,
+      "longitude": 138.8252867
+    },
+    {
+      "id": "jp_yamanashi_station_9198462043",
+      "osm_id": 9198462043,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "山梨県駅、仮称",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamanashi Prefecture station (TBD)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6055264,
+      "longitude": 138.5624302
+    },
+    {
+      "id": "jp_yamanashi_station_9938276625",
+      "osm_id": 9938276625,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "穴山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Anayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7511531,
+      "longitude": 138.414278
+    },
+    {
+      "id": "jp_yamanashi_ferry_terminal_12107540388",
+      "osm_id": 12107540388,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Swan Boat House",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.408175,
+      "longitude": 138.8765251
+    },
+    {
+      "id": "jp_yamanashi_bus_terminal_13066531081",
+      "osm_id": 13066531081,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamanashi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "富士山駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mount Fuji Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.483725,
+      "longitude": 138.7951353
+    },
+    {
+      "id": "jp_yamanashi_bus_terminal_205019699",
+      "osm_id": 205019699,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamanashi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "富士急旭日丘バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujikyu Asahigaoka Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4069304,
+      "longitude": 138.8758433
+    },
+    {
+      "id": "jp_yamanashi_station_691052457",
+      "osm_id": 691052457,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamanashi",
+      "type": "station",
+      "subtype": "private",
+      "name": "市川大門駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.560622,
+      "longitude": 138.4926969
+    },
+    {
+      "id": "jp_yamanashi_airport_1305844890",
+      "osm_id": 1305844890,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamanashi",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "Futaba",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6819409,
+      "longitude": 138.4831838
+    }
+  ]
+}

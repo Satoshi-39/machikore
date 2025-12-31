@@ -1,0 +1,2420 @@
+{
+  "fetchedAt": "2025-12-24T05:47:54.356Z",
+  "prefecture_id": "jp_yamagata",
+  "prefecture_name": "山形県",
+  "stats": {
+    "station": 118,
+    "airport": 3,
+    "ferry_terminal": 1,
+    "bus_terminal": 13,
+    "total": 135
+  },
+  "data": [
+    {
+      "id": "jp_yamagata_station_263224072",
+      "osm_id": 263224072,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "天童",
+      "name_kana": "てんどう",
+      "name_translations": {
+        "en": "Tendo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3599623,
+      "longitude": 140.3695642
+    },
+    {
+      "id": "jp_yamagata_station_263229121",
+      "osm_id": 263229121,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "かみのやま温泉",
+      "name_kana": "かみのやまおんせん",
+      "name_translations": {
+        "en": "Kaminoyama-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1520989,
+      "longitude": 140.2785301
+    },
+    {
+      "id": "jp_yamagata_station_264400959",
+      "osm_id": 264400959,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤倉温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akakura-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7305706,
+      "longitude": 140.5537397
+    },
+    {
+      "id": "jp_yamagata_station_264401245",
+      "osm_id": 264401245,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "堺田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7352699,
+      "longitude": 140.6134414
+    },
+    {
+      "id": "jp_yamagata_station_264401562",
+      "osm_id": 264401562,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵜杉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Usugi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7649613,
+      "longitude": 140.4542354
+    },
+    {
+      "id": "jp_yamagata_station_264401569",
+      "osm_id": 264401569,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "立小路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tachikoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7420882,
+      "longitude": 140.5427453
+    },
+    {
+      "id": "jp_yamagata_station_264401575",
+      "osm_id": 264401575,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "最上",
+      "name_kana": "もがみ",
+      "name_translations": {
+        "en": "Mogami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7561662,
+      "longitude": 140.5173539
+    },
+    {
+      "id": "jp_yamagata_station_264401913",
+      "osm_id": 264401913,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東長沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Nagasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.718747,
+      "longitude": 140.3820899
+    },
+    {
+      "id": "jp_yamagata_station_264402016",
+      "osm_id": 264402016,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "長沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7097377,
+      "longitude": 140.3660094
+    },
+    {
+      "id": "jp_yamagata_station_264402018",
+      "osm_id": 264402018,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "瀬見温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Semi-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7550211,
+      "longitude": 140.4203867
+    },
+    {
+      "id": "jp_yamagata_station_264402336",
+      "osm_id": 264402336,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "新庄",
+      "name_kana": "しんじょう",
+      "name_translations": {
+        "en": "Shinjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.762785,
+      "longitude": 140.3056333
+    },
+    {
+      "id": "jp_yamagata_station_264402338",
+      "osm_id": 264402338,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "狩川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7934544,
+      "longitude": 139.9773788
+    },
+    {
+      "id": "jp_yamagata_station_264402472",
+      "osm_id": 264402472,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8180991,
+      "longitude": 139.9450573
+    },
+    {
+      "id": "jp_yamagata_station_264402482",
+      "osm_id": 264402482,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "古口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furukuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7371616,
+      "longitude": 140.1453493
+    },
+    {
+      "id": "jp_yamagata_station_264402581",
+      "osm_id": 264402581,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "津谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7373047,
+      "longitude": 140.1860921
+    },
+    {
+      "id": "jp_yamagata_station_264402590",
+      "osm_id": 264402590,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "高屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7527396,
+      "longitude": 140.0706497
+    },
+    {
+      "id": "jp_yamagata_station_264402593",
+      "osm_id": 264402593,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "升形",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masukata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7515272,
+      "longitude": 140.2439332
+    },
+    {
+      "id": "jp_yamagata_station_264402684",
+      "osm_id": 264402684,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前前波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzen-Zennami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.747638,
+      "longitude": 140.208988
+    },
+    {
+      "id": "jp_yamagata_station_264402724",
+      "osm_id": 264402724,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "清川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiyokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7901968,
+      "longitude": 140.0207611
+    },
+    {
+      "id": "jp_yamagata_station_264408897",
+      "osm_id": 264408897,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "今泉",
+      "name_kana": "いまいずみ",
+      "name_translations": {
+        "en": "Imaizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0570157,
+      "longitude": 140.0442391
+    },
+    {
+      "id": "jp_yamagata_station_264409710",
+      "osm_id": 264409710,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "犬川",
+      "name_kana": "いぬかわ",
+      "name_translations": {
+        "en": "Inukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0257779,
+      "longitude": 140.0521094
+    },
+    {
+      "id": "jp_yamagata_station_264409732",
+      "osm_id": 264409732,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前小松",
+      "name_kana": "うぜんこまつ",
+      "name_translations": {
+        "en": "Uzen-Komatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0045995,
+      "longitude": 140.0484104
+    },
+    {
+      "id": "jp_yamagata_station_264410783",
+      "osm_id": 264410783,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前松岡",
+      "name_kana": "うぜんまつおか",
+      "name_translations": {
+        "en": "Uzen-Matsuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0453777,
+      "longitude": 139.7803316
+    },
+    {
+      "id": "jp_yamagata_station_267600466",
+      "osm_id": 267600466,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前成田",
+      "name_kana": "うぜんなりた",
+      "name_translations": {
+        "en": "Uzen-Narita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1309784,
+      "longitude": 140.0351477
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_1715942026",
+      "osm_id": 1715942026,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "天童バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3596314,
+      "longitude": 140.3702965
+    },
+    {
+      "id": "jp_yamagata_station_3585108732",
+      "osm_id": 3585108732,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "高瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3014954,
+      "longitude": 140.39607
+    },
+    {
+      "id": "jp_yamagata_station_3585108734",
+      "osm_id": 3585108734,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "楯山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tateyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3016195,
+      "longitude": 140.370593
+    },
+    {
+      "id": "jp_yamagata_station_3585108739",
+      "osm_id": 3585108739,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前千歳",
+      "name_kana": "うぜんちとせ",
+      "name_translations": {
+        "en": "Uzen-Chitose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2872691,
+      "longitude": 140.3422441
+    },
+    {
+      "id": "jp_yamagata_station_3585108742",
+      "osm_id": 3585108742,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "山寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamadera"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3095946,
+      "longitude": 140.434729
+    },
+    {
+      "id": "jp_yamagata_station_3585108748",
+      "osm_id": 3585108748,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "山形",
+      "name_kana": "やまがた",
+      "name_translations": {
+        "en": "Yamagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2484701,
+      "longitude": 140.3278031
+    },
+    {
+      "id": "jp_yamagata_station_3585108879",
+      "osm_id": 3585108879,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北山形",
+      "name_kana": "きたやまがた",
+      "name_translations": {
+        "en": "Kita-Yamagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2655514,
+      "longitude": 140.3324675
+    },
+    {
+      "id": "jp_yamagata_station_3585109693",
+      "osm_id": 3585109693,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "面白山高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omoshiroyama-Kōgen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.333017,
+      "longitude": 140.4969262
+    },
+    {
+      "id": "jp_yamagata_station_3585199035",
+      "osm_id": 3585199035,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "左沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aterazawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3820316,
+      "longitude": 140.2080979
+    },
+    {
+      "id": "jp_yamagata_station_3585199036",
+      "osm_id": 3585199036,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東金井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Kanai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.277119,
+      "longitude": 140.3024865
+    },
+    {
+      "id": "jp_yamagata_station_3585199037",
+      "osm_id": 3585199037,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南寒河江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Sagae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3560091,
+      "longitude": 140.2776524
+    },
+    {
+      "id": "jp_yamagata_station_3585199038",
+      "osm_id": 3585199038,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "西寒河江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Sagae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3797874,
+      "longitude": 140.266581
+    },
+    {
+      "id": "jp_yamagata_station_3585199039",
+      "osm_id": 3585199039,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "寒河江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sagae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3716369,
+      "longitude": 140.2751598
+    },
+    {
+      "id": "jp_yamagata_station_3585199040",
+      "osm_id": 3585199040,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "柴橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shibahashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3803834,
+      "longitude": 140.2275068
+    },
+    {
+      "id": "jp_yamagata_station_3585199041",
+      "osm_id": 3585199041,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前金沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzen-Kanezawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3207171,
+      "longitude": 140.270377
+    },
+    {
+      "id": "jp_yamagata_station_3585199042",
+      "osm_id": 3585199042,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前長崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzen-Nagasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3334872,
+      "longitude": 140.2732632
+    },
+    {
+      "id": "jp_yamagata_station_3585199043",
+      "osm_id": 3585199043,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前高松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzen-Takamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3974626,
+      "longitude": 140.2484915
+    },
+    {
+      "id": "jp_yamagata_station_3585199045",
+      "osm_id": 3585199045,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前山辺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzen-Yamabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2946123,
+      "longitude": 140.2715936
+    },
+    {
+      "id": "jp_yamagata_station_3647437874",
+      "osm_id": 3647437874,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "板谷",
+      "name_kana": "いたや",
+      "name_translations": {
+        "en": "Itaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8116595,
+      "longitude": 140.2689365
+    },
+    {
+      "id": "jp_yamagata_station_3647437879",
+      "osm_id": 3647437879,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "置賜",
+      "name_kana": "おいたま",
+      "name_translations": {
+        "en": "Oitama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9542048,
+      "longitude": 140.1426729
+    },
+    {
+      "id": "jp_yamagata_station_3647437880",
+      "osm_id": 3647437880,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大沢",
+      "name_kana": "おおさわ",
+      "name_translations": {
+        "en": "Osawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.837243,
+      "longitude": 140.2004877
+    },
+    {
+      "id": "jp_yamagata_station_3647437882",
+      "osm_id": 3647437882,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "関根",
+      "name_kana": "せきね",
+      "name_translations": {
+        "en": "Sekine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8645587,
+      "longitude": 140.1464009
+    },
+    {
+      "id": "jp_yamagata_station_3647437883",
+      "osm_id": 3647437883,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "高畠",
+      "name_kana": "たかはた",
+      "name_translations": {
+        "en": "Takahata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.992415,
+      "longitude": 140.1531311
+    },
+    {
+      "id": "jp_yamagata_station_3647437885",
+      "osm_id": 3647437885,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "峠",
+      "name_kana": "とうげ",
+      "name_translations": {
+        "en": "Toge"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8123789,
+      "longitude": 140.2355137
+    },
+    {
+      "id": "jp_yamagata_station_3647437886",
+      "osm_id": 3647437886,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "米沢",
+      "name_kana": "よねざわ",
+      "name_translations": {
+        "en": "Yonezawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9094986,
+      "longitude": 140.1283425
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_5016234250",
+      "osm_id": 5016234250,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "山交バス 新庄営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7595797,
+      "longitude": 140.3055438
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_5027816821",
+      "osm_id": 5027816821,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "庄交バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9238128,
+      "longitude": 139.8432225
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_5142568736",
+      "osm_id": 5142568736,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "山交バス 米沢営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamako Bus Yonezawa Office"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9094063,
+      "longitude": 140.1238633
+    },
+    {
+      "id": "jp_yamagata_station_5316014957",
+      "osm_id": 5316014957,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶴岡",
+      "name_kana": "つるおか",
+      "name_translations": {
+        "en": "Tsuruoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7400487,
+      "longitude": 139.8359746
+    },
+    {
+      "id": "jp_yamagata_station_5599651461",
+      "osm_id": 5599651461,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "酒田",
+      "name_kana": "さかた",
+      "name_translations": {
+        "en": "Sakata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9219999,
+      "longitude": 139.8460919
+    },
+    {
+      "id": "jp_yamagata_station_5599756028",
+      "osm_id": 5599756028,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "余目",
+      "name_kana": "あまるめ",
+      "name_translations": {
+        "en": "Amarume"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8442243,
+      "longitude": 139.9115083
+    },
+    {
+      "id": "jp_yamagata_station_5599756067",
+      "osm_id": 5599756067,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北余目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Amarume"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.867623,
+      "longitude": 139.9083527
+    },
+    {
+      "id": "jp_yamagata_station_5599756112",
+      "osm_id": 5599756112,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "砂越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sagoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.894158,
+      "longitude": 139.908067
+    },
+    {
+      "id": "jp_yamagata_station_5599757441",
+      "osm_id": 5599757441,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東酒田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Sakata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9076843,
+      "longitude": 139.8754594
+    },
+    {
+      "id": "jp_yamagata_station_5599762502",
+      "osm_id": 5599762502,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南鳥海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamichōkai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9876503,
+      "longitude": 139.8989206
+    },
+    {
+      "id": "jp_yamagata_station_5600266463",
+      "osm_id": 5600266463,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "西袋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishibukuro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8118999,
+      "longitude": 139.9079751
+    },
+    {
+      "id": "jp_yamagata_station_5600266488",
+      "osm_id": 5600266488,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujishima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7689066,
+      "longitude": 139.8945165
+    },
+    {
+      "id": "jp_yamagata_station_5600527524",
+      "osm_id": 5600527524,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "本楯",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mototate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9688145,
+      "longitude": 139.8823285
+    },
+    {
+      "id": "jp_yamagata_station_5602768990",
+      "osm_id": 5602768990,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "女鹿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mega"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.0989771,
+      "longitude": 139.8809418
+    },
+    {
+      "id": "jp_yamagata_station_5643114266",
+      "osm_id": 5643114266,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "鼠ヶ関",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nezugaseki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5556283,
+      "longitude": 139.548666
+    },
+    {
+      "id": "jp_yamagata_station_5643401407",
+      "osm_id": 5643401407,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小波渡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6922051,
+      "longitude": 139.649559
+    },
+    {
+      "id": "jp_yamagata_station_5643401854",
+      "osm_id": 5643401854,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前水沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzen-Mizusawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7139303,
+      "longitude": 139.7323085
+    },
+    {
+      "id": "jp_yamagata_station_5643401960",
+      "osm_id": 5643401960,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前大山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uzen-Oyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7421011,
+      "longitude": 139.7673838
+    },
+    {
+      "id": "jp_yamagata_station_5643402055",
+      "osm_id": 5643402055,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "jr",
+      "name": "あつみ温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Atsumi Onsen"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "JR羽越線",
+      "ref": null,
+      "latitude": 38.6243926,
+      "longitude": 139.58794
+    },
+    {
+      "id": "jp_yamagata_station_5643765888",
+      "osm_id": 5643765888,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小岩川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koiwagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5906138,
+      "longitude": 139.5662516
+    },
+    {
+      "id": "jp_yamagata_station_5690634860",
+      "osm_id": 5690634860,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "五十川",
+      "name_kana": "いらがわ",
+      "name_translations": {
+        "en": "Iragawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6705752,
+      "longitude": 139.6163171
+    },
+    {
+      "id": "jp_yamagata_station_5698959732",
+      "osm_id": 5698959732,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "遊佐",
+      "name_kana": "ゆざ",
+      "name_translations": {
+        "en": "Yuza"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.0157418,
+      "longitude": 139.9050489
+    },
+    {
+      "id": "jp_yamagata_station_5698999022",
+      "osm_id": 5698999022,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "吹浦",
+      "name_kana": "ふくら",
+      "name_translations": {
+        "en": "Fukura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.0695979,
+      "longitude": 139.8789577
+    },
+    {
+      "id": "jp_yamagata_station_5874358662",
+      "osm_id": 5874358662,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南米沢",
+      "name_kana": "みなみよねざわ",
+      "name_translations": {
+        "en": "Minami-Yonezawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8960733,
+      "longitude": 140.1081558
+    },
+    {
+      "id": "jp_yamagata_station_5882155432",
+      "osm_id": 5882155432,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "成島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Narushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.943216,
+      "longitude": 140.0755388
+    },
+    {
+      "id": "jp_yamagata_ferry_terminal_5923150199",
+      "osm_id": 5923150199,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "定期船とびしま",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9138338,
+      "longitude": 139.8297448
+    },
+    {
+      "id": "jp_yamagata_station_6122074672",
+      "osm_id": 6122074672,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "真室川",
+      "name_kana": "まむろがわ",
+      "name_translations": {
+        "en": "Mamurogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8582665,
+      "longitude": 140.2546016
+    },
+    {
+      "id": "jp_yamagata_station_6122174914",
+      "osm_id": 6122174914,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前豊里",
+      "name_kana": "うぜんとよさと",
+      "name_translations": {
+        "en": "Uzen-Toyosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8364589,
+      "longitude": 140.2422407
+    },
+    {
+      "id": "jp_yamagata_station_6125249153",
+      "osm_id": 6125249153,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "中郡",
+      "name_kana": "ちゅうぐん",
+      "name_translations": {
+        "en": "Chugun"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9690403,
+      "longitude": 140.0671656
+    },
+    {
+      "id": "jp_yamagata_station_6125953735",
+      "osm_id": 6125953735,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前沼沢",
+      "name_kana": "うぜんぬまざわ",
+      "name_translations": {
+        "en": "Uzen-Numazawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0285567,
+      "longitude": 139.872584
+    },
+    {
+      "id": "jp_yamagata_station_6125953736",
+      "osm_id": 6125953736,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "手ノ子",
+      "name_kana": "てのこ",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.012035,
+      "longitude": 139.9615663
+    },
+    {
+      "id": "jp_yamagata_station_6125953739",
+      "osm_id": 6125953739,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前椿",
+      "name_kana": "うぜんつばき",
+      "name_translations": {
+        "en": "Uzen-Tsubaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0386277,
+      "longitude": 139.9941739
+    },
+    {
+      "id": "jp_yamagata_station_6125953741",
+      "osm_id": 6125953741,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "萩生",
+      "name_kana": "はぎゅう",
+      "name_translations": {
+        "en": "Hagyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0621577,
+      "longitude": 140.0044857
+    },
+    {
+      "id": "jp_yamagata_station_6125964348",
+      "osm_id": 6125964348,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "小国",
+      "name_kana": "おぐに",
+      "name_translations": {
+        "en": "Oguni"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.061418,
+      "longitude": 139.7502082
+    },
+    {
+      "id": "jp_yamagata_station_6125964349",
+      "osm_id": 6125964349,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊佐領",
+      "name_kana": "いさりょう",
+      "name_translations": {
+        "en": "Isaryo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0509974,
+      "longitude": 139.8228747
+    },
+    {
+      "id": "jp_yamagata_station_6126052051",
+      "osm_id": 6126052051,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒砥",
+      "name_kana": "あらと",
+      "name_translations": {
+        "en": "Arato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1879827,
+      "longitude": 140.0975825
+    },
+    {
+      "id": "jp_yamagata_station_6126052055",
+      "osm_id": 6126052055,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "四季の郷",
+      "name_kana": "しきのさと",
+      "name_translations": {
+        "en": "Shikinosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1858218,
+      "longitude": 140.0776309
+    },
+    {
+      "id": "jp_yamagata_station_6126052056",
+      "osm_id": 6126052056,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "鮎貝",
+      "name_kana": "あゆかい",
+      "name_translations": {
+        "en": "Ayukai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1826087,
+      "longitude": 140.0710219
+    },
+    {
+      "id": "jp_yamagata_station_6126052068",
+      "osm_id": 6126052068,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "蚕桑",
+      "name_kana": "こぐわ",
+      "name_translations": {
+        "en": "Koguwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1613789,
+      "longitude": 140.0468579
+    },
+    {
+      "id": "jp_yamagata_station_6126052071",
+      "osm_id": 6126052071,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "白兎",
+      "name_kana": "しろうさぎ",
+      "name_translations": {
+        "en": "Shirousagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1501321,
+      "longitude": 140.0410764
+    },
+    {
+      "id": "jp_yamagata_station_6126052079",
+      "osm_id": 6126052079,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "長井",
+      "name_kana": "ながい",
+      "name_translations": {
+        "en": "Nagai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1065942,
+      "longitude": 140.0336548
+    },
+    {
+      "id": "jp_yamagata_station_6126052084",
+      "osm_id": 6126052084,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "あやめ公園",
+      "name_kana": "あやめこうえん",
+      "name_translations": {
+        "en": "Ayame-Koen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1140176,
+      "longitude": 140.0326945
+    },
+    {
+      "id": "jp_yamagata_station_6126052393",
+      "osm_id": 6126052393,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南長井",
+      "name_kana": "みなみながい",
+      "name_translations": {
+        "en": "Minami-Nagai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0974434,
+      "longitude": 140.0346592
+    },
+    {
+      "id": "jp_yamagata_station_6126052397",
+      "osm_id": 6126052397,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "時庭",
+      "name_kana": "ときにわ",
+      "name_translations": {
+        "en": "Tokiniwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0768771,
+      "longitude": 140.0297508
+    },
+    {
+      "id": "jp_yamagata_station_6126052403",
+      "osm_id": 6126052403,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤湯",
+      "name_kana": "あかゆ",
+      "name_translations": {
+        "en": "Akayu"
+      },
+      "operator": "山形鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 38.0477732,
+      "longitude": 140.1489173
+    },
+    {
+      "id": "jp_yamagata_station_6126052408",
+      "osm_id": 6126052408,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南陽市役所",
+      "name_kana": "なんようしやくしょ",
+      "name_translations": {
+        "en": "Nanyo-Shiyakusho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0553737,
+      "longitude": 140.1491345
+    },
+    {
+      "id": "jp_yamagata_station_6126052419",
+      "osm_id": 6126052419,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮内",
+      "name_kana": "みやうち",
+      "name_translations": {
+        "en": "Miyauchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0709227,
+      "longitude": 140.1350999
+    },
+    {
+      "id": "jp_yamagata_station_6126052425",
+      "osm_id": 6126052425,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "おりはた",
+      "name_kana": "おりはた",
+      "name_translations": {
+        "en": "Orihata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0664757,
+      "longitude": 140.1225351
+    },
+    {
+      "id": "jp_yamagata_station_6126052430",
+      "osm_id": 6126052430,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "梨郷",
+      "name_kana": "りんごう",
+      "name_translations": {
+        "en": "Ringo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0573441,
+      "longitude": 140.0985199
+    },
+    {
+      "id": "jp_yamagata_station_6126052442",
+      "osm_id": 6126052442,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大塚",
+      "name_kana": "にしおおつか",
+      "name_translations": {
+        "en": "Nishi-Otsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0553858,
+      "longitude": 140.0643104
+    },
+    {
+      "id": "jp_yamagata_station_6126413670",
+      "osm_id": 6126413670,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "茂吉記念館前",
+      "name_kana": "もきちきねんかんまえ",
+      "name_translations": {
+        "en": "Mokichi-Kinenkan-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1717247,
+      "longitude": 140.2983928
+    },
+    {
+      "id": "jp_yamagata_station_6126413680",
+      "osm_id": 6126413680,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽前中山",
+      "name_kana": "うぜんなかやま",
+      "name_translations": {
+        "en": "Uzen-Nakayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1245199,
+      "longitude": 140.2182537
+    },
+    {
+      "id": "jp_yamagata_station_6126413702",
+      "osm_id": 6126413702,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "中川",
+      "name_kana": "なかがわ",
+      "name_translations": {
+        "en": "Nakagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0934708,
+      "longitude": 140.2038087
+    },
+    {
+      "id": "jp_yamagata_station_6126470641",
+      "osm_id": 6126470641,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "蔵王",
+      "name_kana": "ざおう",
+      "name_translations": {
+        "en": "Zao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2059569,
+      "longitude": 140.3036231
+    },
+    {
+      "id": "jp_yamagata_station_6126729158",
+      "osm_id": 6126729158,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "漆山",
+      "name_kana": "うるしやま",
+      "name_translations": {
+        "en": "Urushiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.314412,
+      "longitude": 140.3476006
+    },
+    {
+      "id": "jp_yamagata_station_6126729159",
+      "osm_id": 6126729159,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南出羽",
+      "name_kana": "みなみでわ",
+      "name_translations": {
+        "en": "Minami-Dewa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3028258,
+      "longitude": 140.3448164
+    },
+    {
+      "id": "jp_yamagata_station_6126772553",
+      "osm_id": 6126772553,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "さくらんぼ東根",
+      "name_kana": "さくらんぼひがしね",
+      "name_translations": {
+        "en": "Sakurambo-Higashine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4285068,
+      "longitude": 140.3810129
+    },
+    {
+      "id": "jp_yamagata_station_6126772557",
+      "osm_id": 6126772557,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "神町",
+      "name_kana": "じんまち",
+      "name_translations": {
+        "en": "Jimmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4127335,
+      "longitude": 140.3786525
+    },
+    {
+      "id": "jp_yamagata_station_6126772559",
+      "osm_id": 6126772559,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "乱川",
+      "name_kana": "みだれがわ",
+      "name_translations": {
+        "en": "Midaregawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3871854,
+      "longitude": 140.3748813
+    },
+    {
+      "id": "jp_yamagata_station_6126772566",
+      "osm_id": 6126772566,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "高擶",
+      "name_kana": "たかたま",
+      "name_translations": {
+        "en": "Takatama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3310513,
+      "longitude": 140.3590053
+    },
+    {
+      "id": "jp_yamagata_station_6126793988",
+      "osm_id": 6126793988,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "東根",
+      "name_kana": "ひがしね",
+      "name_translations": {
+        "en": "Higashine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4510996,
+      "longitude": 140.3840505
+    },
+    {
+      "id": "jp_yamagata_station_6128684291",
+      "osm_id": 6128684291,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "村山",
+      "name_kana": "むらやま",
+      "name_translations": {
+        "en": "Murayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4770786,
+      "longitude": 140.3864953
+    },
+    {
+      "id": "jp_yamagata_station_6128684299",
+      "osm_id": 6128684299,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "南新庄",
+      "name_kana": "みなみしんじょう",
+      "name_translations": {
+        "en": "Minami-Shinjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7214098,
+      "longitude": 140.3163502
+    },
+    {
+      "id": "jp_yamagata_station_6130861596",
+      "osm_id": 6130861596,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "袖崎",
+      "name_kana": "そでさき",
+      "name_translations": {
+        "en": "Sodesaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5488744,
+      "longitude": 140.3915888
+    },
+    {
+      "id": "jp_yamagata_station_6138275416",
+      "osm_id": 6138275416,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "北大石田",
+      "name_kana": "きたおおいしだ",
+      "name_translations": {
+        "en": "Kita-Ooishida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6299884,
+      "longitude": 140.3711396
+    },
+    {
+      "id": "jp_yamagata_station_6138275424",
+      "osm_id": 6138275424,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大石田",
+      "name_kana": "おおいしだ",
+      "name_translations": {
+        "en": "Oishida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5956294,
+      "longitude": 140.3753132
+    },
+    {
+      "id": "jp_yamagata_station_6138282005",
+      "osm_id": 6138282005,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦沢",
+      "name_kana": "あしさわ",
+      "name_translations": {
+        "en": "Ashisawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6557877,
+      "longitude": 140.3611109
+    },
+    {
+      "id": "jp_yamagata_station_6138282008",
+      "osm_id": 6138282008,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "舟形",
+      "name_kana": "ふながた",
+      "name_translations": {
+        "en": "Funagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6917508,
+      "longitude": 140.3162764
+    },
+    {
+      "id": "jp_yamagata_station_6204970551",
+      "osm_id": 6204970551,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大堀",
+      "name_kana": "おおほり",
+      "name_translations": {
+        "en": "Ohori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7659809,
+      "longitude": 140.4758947
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_6731853697",
+      "osm_id": 6731853697,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "山交ビルバスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.246334,
+      "longitude": 140.3314224
+    },
+    {
+      "id": "jp_yamagata_station_8652905535",
+      "osm_id": 8652905535,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "及位",
+      "name_kana": "のぞき",
+      "name_translations": {
+        "en": "Nozoki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9928091,
+      "longitude": 140.3611404
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_9185343463",
+      "osm_id": 9185343463,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスのりば　八幡総合市役所前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9705908,
+      "longitude": 139.9425974
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_9186264361",
+      "osm_id": 9186264361,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスのりば　八幡昭和通り",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9698969,
+      "longitude": 139.9410233
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_9409403606",
+      "osm_id": 9409403606,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "左沢駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3822129,
+      "longitude": 140.208341
+    },
+    {
+      "id": "jp_yamagata_station_11013108882",
+      "osm_id": 11013108882,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "大滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9714963,
+      "longitude": 140.3198531
+    },
+    {
+      "id": "jp_yamagata_station_11013108883",
+      "osm_id": 11013108883,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "釜淵",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamabuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9327407,
+      "longitude": 140.2641524
+    },
+    {
+      "id": "jp_yamagata_station_11013108890",
+      "osm_id": 11013108890,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "泉田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8117771,
+      "longitude": 140.3101904
+    },
+    {
+      "id": "jp_yamagata_station_11219422099",
+      "osm_id": 11219422099,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "station",
+      "subtype": "private",
+      "name": "天童南",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3415464,
+      "longitude": 140.3655963
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_13349031758",
+      "osm_id": 13349031758,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "山交バス(株) 上山営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamako Bus Kaminoyama Office"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1496784,
+      "longitude": 140.2652256
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_13349049203",
+      "osm_id": 13349049203,
+      "osm_type": "node",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "山交バス米沢営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamako Yonezawa Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9099427,
+      "longitude": 140.1234816
+    },
+    {
+      "id": "jp_yamagata_airport_57008614",
+      "osm_id": 57008614,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamagata",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "山形空港",
+      "name_kana": "やまがたくうこう",
+      "name_translations": {
+        "en": "Yamagata Airport"
+      },
+      "operator": "山形空港ビル",
+      "network": null,
+      "ref": "GAJ",
+      "latitude": 38.4116767,
+      "longitude": 140.3699987
+    },
+    {
+      "id": "jp_yamagata_airport_57008649",
+      "osm_id": 57008649,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamagata",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "庄内空港",
+      "name_kana": "しょうないくうこう",
+      "name_translations": {
+        "en": "Shonai Airport"
+      },
+      "operator": "庄内空港ビル",
+      "network": null,
+      "ref": "SYO",
+      "latitude": 38.8127805,
+      "longitude": 139.7842109
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_310732755",
+      "osm_id": 310732755,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "蔵王温泉バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zao Onsen bus terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1674321,
+      "longitude": 140.3937006
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_386891237",
+      "osm_id": 386891237,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "エスモールバスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "S-MALL Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7395075,
+      "longitude": 139.8323593
+    },
+    {
+      "id": "jp_yamagata_bus_terminal_387287452",
+      "osm_id": 387287452,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamagata",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "観光物産館",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7389126,
+      "longitude": 139.7983665
+    },
+    {
+      "id": "jp_yamagata_airport_1136928550",
+      "osm_id": 1136928550,
+      "osm_type": "way",
+      "prefecture_id": "jp_yamagata",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "米沢ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "山形県",
+      "network": null,
+      "ref": null,
+      "latitude": 37.9130148,
+      "longitude": 140.1664404
+    }
+  ]
+}

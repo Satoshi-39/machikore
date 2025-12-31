@@ -1,0 +1,4934 @@
+{
+  "fetchedAt": "2025-12-24T05:55:57.150Z",
+  "prefecture_id": "jp_hiroshima",
+  "prefecture_name": "広島県",
+  "stats": {
+    "station": 182,
+    "airport": 4,
+    "ferry_terminal": 75,
+    "bus_terminal": 18,
+    "total": 279
+  },
+  "data": [
+    {
+      "id": "jp_hiroshima_station_265919209",
+      "osm_id": 265919209,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saijō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "G10",
+      "latitude": 34.4313263,
+      "longitude": 132.7436714
+    },
+    {
+      "id": "jp_hiroshima_station_265920711",
+      "osm_id": 265920711,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "入野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nyūno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "G13",
+      "latitude": 34.460749,
+      "longitude": 132.8516883
+    },
+    {
+      "id": "jp_hiroshima_station_265921657",
+      "osm_id": 265921657,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "白市",
+      "name_kana": "しらいち",
+      "name_translations": {
+        "en": "Shiraichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "G12",
+      "latitude": 34.4431218,
+      "longitude": 132.8324451
+    },
+    {
+      "id": "jp_hiroshima_station_265925941",
+      "osm_id": 265925941,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "玖波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2556877,
+      "longitude": 132.2282089
+    },
+    {
+      "id": "jp_hiroshima_station_266045431",
+      "osm_id": 266045431,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōjō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9015307,
+      "longitude": 133.273792
+    },
+    {
+      "id": "jp_hiroshima_station_266045818",
+      "osm_id": 266045818,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後八幡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bingo-Yawata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9381373,
+      "longitude": 133.2318641
+    },
+    {
+      "id": "jp_hiroshima_station_266046184",
+      "osm_id": 266046184,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "内名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9649835,
+      "longitude": 133.2317751
+    },
+    {
+      "id": "jp_hiroshima_station_266046226",
+      "osm_id": 266046226,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "小奴可",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9940543,
+      "longitude": 133.2109654
+    },
+    {
+      "id": "jp_hiroshima_station_266046237",
+      "osm_id": 266046237,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後西城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bingo-Saijo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9402345,
+      "longitude": 133.1196386
+    },
+    {
+      "id": "jp_hiroshima_station_266046296",
+      "osm_id": 266046296,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "比婆山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hibayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9659636,
+      "longitude": 133.1232051
+    },
+    {
+      "id": "jp_hiroshima_station_266047285",
+      "osm_id": 266047285,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "道後山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dogoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0109318,
+      "longitude": 133.1782422
+    },
+    {
+      "id": "jp_hiroshima_station_266047752",
+      "osm_id": 266047752,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三次",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyoshi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8026373,
+      "longitude": 132.856097
+    },
+    {
+      "id": "jp_hiroshima_station_266047826",
+      "osm_id": 266047826,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "井原市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ibaraichi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5853031,
+      "longitude": 132.6755286
+    },
+    {
+      "id": "jp_hiroshima_station_266047843",
+      "osm_id": 266047843,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉田口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshidaguchi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6647261,
+      "longitude": 132.7458973
+    },
+    {
+      "id": "jp_hiroshima_station_266047845",
+      "osm_id": 266047845,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "白木山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirakiyama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5008676,
+      "longitude": 132.5879924
+    },
+    {
+      "id": "jp_hiroshima_station_266047996",
+      "osm_id": 266047996,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中三田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka-Mita"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5131232,
+      "longitude": 132.6087379
+    },
+    {
+      "id": "jp_hiroshima_station_266048002",
+      "osm_id": 266048002,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "神杉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamisugi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7807852,
+      "longitude": 132.9027381
+    },
+    {
+      "id": "jp_hiroshima_station_266048287",
+      "osm_id": 266048287,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "高",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8778813,
+      "longitude": 133.0706189
+    },
+    {
+      "id": "jp_hiroshima_station_266048326",
+      "osm_id": 266048326,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西三次",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Miyoshi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.798543,
+      "longitude": 132.8407227
+    },
+    {
+      "id": "jp_hiroshima_station_266048328",
+      "osm_id": 266048328,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上川立",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamikawatachi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7250223,
+      "longitude": 132.7847259
+    },
+    {
+      "id": "jp_hiroshima_station_266048424",
+      "osm_id": 266048424,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "平子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.91274,
+      "longitude": 133.1000317
+    },
+    {
+      "id": "jp_hiroshima_station_266048432",
+      "osm_id": 266048432,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上三田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Mita"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5387658,
+      "longitude": 132.6434908
+    },
+    {
+      "id": "jp_hiroshima_station_266048434",
+      "osm_id": 266048434,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "七塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanatsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8446151,
+      "longitude": 132.9860591
+    },
+    {
+      "id": "jp_hiroshima_station_266048576",
+      "osm_id": 266048576,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "向原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukaihara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6153151,
+      "longitude": 132.7201431
+    },
+    {
+      "id": "jp_hiroshima_station_266048584",
+      "osm_id": 266048584,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "山ノ内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamanouchi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8295825,
+      "longitude": 132.9577307
+    },
+    {
+      "id": "jp_hiroshima_station_266048801",
+      "osm_id": 266048801,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "志和地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiwachi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.740586,
+      "longitude": 132.8040929
+    },
+    {
+      "id": "jp_hiroshima_station_266049928",
+      "osm_id": 266049928,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "志和口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiwaguchi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5544661,
+      "longitude": 132.6582186
+    },
+    {
+      "id": "jp_hiroshima_station_266050015",
+      "osm_id": 266050015,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下和知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Wachi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7980562,
+      "longitude": 132.9255274
+    },
+    {
+      "id": "jp_hiroshima_station_266050019",
+      "osm_id": 266050019,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後三日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bingo-Mikkaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8547921,
+      "longitude": 132.9983029
+    },
+    {
+      "id": "jp_hiroshima_station_266050614",
+      "osm_id": 266050614,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八次",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yatsugi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8023168,
+      "longitude": 132.8788883
+    },
+    {
+      "id": "jp_hiroshima_station_266050658",
+      "osm_id": 266050658,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後庄原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bingo-Shobara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8623737,
+      "longitude": 133.0164899
+    },
+    {
+      "id": "jp_hiroshima_station_266050737",
+      "osm_id": 266050737,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "甲立",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotachi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.692752,
+      "longitude": 132.760184
+    },
+    {
+      "id": "jp_hiroshima_station_266051179",
+      "osm_id": 266051179,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "草津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M22",
+      "latitude": 34.381602,
+      "longitude": 132.4039841
+    },
+    {
+      "id": "jp_hiroshima_station_266051643",
+      "osm_id": 266051643,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "井口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inokuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M25",
+      "latitude": 34.3718279,
+      "longitude": 132.3860135
+    },
+    {
+      "id": "jp_hiroshima_station_266079438",
+      "osm_id": 266079438,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊賀和志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikawashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.895317,
+      "longitude": 132.660913
+    },
+    {
+      "id": "jp_hiroshima_station_266079585",
+      "osm_id": 266079585,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "香淀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koyodo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8271568,
+      "longitude": 132.7130003
+    },
+    {
+      "id": "jp_hiroshima_station_266079680",
+      "osm_id": 266079680,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "式敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikijiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8158532,
+      "longitude": 132.7130169
+    },
+    {
+      "id": "jp_hiroshima_station_266079787",
+      "osm_id": 266079787,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "船佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Funasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8079664,
+      "longitude": 132.7657747
+    },
+    {
+      "id": "jp_hiroshima_station_266079926",
+      "osm_id": 266079926,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "長谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagatani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8032182,
+      "longitude": 132.7881533
+    },
+    {
+      "id": "jp_hiroshima_station_266079992",
+      "osm_id": 266079992,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾関山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ozekiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8131224,
+      "longitude": 132.8415256
+    },
+    {
+      "id": "jp_hiroshima_station_266080049",
+      "osm_id": 266080049,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "所木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokorogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.810104,
+      "longitude": 132.750379
+    },
+    {
+      "id": "jp_hiroshima_station_266080053",
+      "osm_id": 266080053,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "粟屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.809864,
+      "longitude": 132.812543
+    },
+    {
+      "id": "jp_hiroshima_station_266080169",
+      "osm_id": 266080169,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "信木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nobuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.812812,
+      "longitude": 132.731121
+    },
+    {
+      "id": "jp_hiroshima_station_266913450",
+      "osm_id": 266913450,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後落合",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bingo-Ochiai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0011382,
+      "longitude": 133.1482601
+    },
+    {
+      "id": "jp_hiroshima_station_266913794",
+      "osm_id": 266913794,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "油木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0446775,
+      "longitude": 133.1192858
+    },
+    {
+      "id": "jp_hiroshima_station_266917675",
+      "osm_id": 266917675,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tode"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.546754,
+      "longitude": 133.299884
+    },
+    {
+      "id": "jp_hiroshima_station_266917678",
+      "osm_id": 266917678,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵜飼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ukai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5678672,
+      "longitude": 133.2445861
+    },
+    {
+      "id": "jp_hiroshima_station_266917681",
+      "osm_id": 266917681,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新市",
+      "name_kana": "しんいち",
+      "name_translations": {
+        "en": "Shin-ichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5543508,
+      "longitude": 133.2694533
+    },
+    {
+      "id": "jp_hiroshima_station_266917744",
+      "osm_id": 266917744,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "道上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Michinoue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5535097,
+      "longitude": 133.3613836
+    },
+    {
+      "id": "jp_hiroshima_station_266917748",
+      "osm_id": 266917748,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯田村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yudamura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5519716,
+      "longitude": 133.3710077
+    },
+    {
+      "id": "jp_hiroshima_station_266917753",
+      "osm_id": 266917753,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "府中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fuchu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.571538,
+      "longitude": 133.2362383
+    },
+    {
+      "id": "jp_hiroshima_station_266917778",
+      "osm_id": 266917778,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "高木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5628176,
+      "longitude": 133.2536043
+    },
+    {
+      "id": "jp_hiroshima_station_266917956",
+      "osm_id": 266917956,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "駅家",
+      "name_kana": "えきや",
+      "name_translations": {
+        "en": "Ekiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5489892,
+      "longitude": 133.3259223
+    },
+    {
+      "id": "jp_hiroshima_station_266917957",
+      "osm_id": 266917957,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "横尾",
+      "name_kana": "よこお",
+      "name_translations": {
+        "en": "Yokoo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.521376,
+      "longitude": 133.36333
+    },
+    {
+      "id": "jp_hiroshima_station_266917967",
+      "osm_id": 266917967,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "神辺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kannabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5371406,
+      "longitude": 133.3787131
+    },
+    {
+      "id": "jp_hiroshima_station_266917973",
+      "osm_id": 266917973,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "万能倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Managura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5509873,
+      "longitude": 133.3381302
+    },
+    {
+      "id": "jp_hiroshima_station_266917975",
+      "osm_id": 266917975,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "近田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5462221,
+      "longitude": 133.3105806
+    },
+    {
+      "id": "jp_hiroshima_station_266918030",
+      "osm_id": 266918030,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "上戸手",
+      "name_kana": "かみとで",
+      "name_translations": {
+        "en": "Kami-Tode"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5514516,
+      "longitude": 133.282431
+    },
+    {
+      "id": "jp_hiroshima_station_266918126",
+      "osm_id": 266918126,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "備後本庄",
+      "name_kana": "びんごほんじょう",
+      "name_translations": {
+        "en": "Bingo-Honjō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR福塩線",
+      "ref": null,
+      "latitude": 34.4933882,
+      "longitude": 133.3451945
+    },
+    {
+      "id": "jp_hiroshima_station_266918474",
+      "osm_id": 266918474,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "下川辺",
+      "name_kana": "しもかわべ",
+      "name_translations": {
+        "en": "Shimokawabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.554579,
+      "longitude": 133.2049806
+    },
+    {
+      "id": "jp_hiroshima_station_266918500",
+      "osm_id": 266918500,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後三川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bingo-Mikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6305922,
+      "longitude": 133.1100424
+    },
+    {
+      "id": "jp_hiroshima_station_266918823",
+      "osm_id": 266918823,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後矢野",
+      "name_kana": "びんごやの",
+      "name_translations": {
+        "en": "Bingo-Yano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.664408,
+      "longitude": 133.125969
+    },
+    {
+      "id": "jp_hiroshima_station_266919143",
+      "osm_id": 266919143,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "河佐",
+      "name_kana": "かわさ",
+      "name_translations": {
+        "en": "Kawasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5899839,
+      "longitude": 133.166295
+    },
+    {
+      "id": "jp_hiroshima_station_266919146",
+      "osm_id": 266919146,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉舎",
+      "name_kana": "きさ",
+      "name_translations": {
+        "en": "Kisa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7276542,
+      "longitude": 132.9908831
+    },
+    {
+      "id": "jp_hiroshima_station_266919204",
+      "osm_id": 266919204,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲奴",
+      "name_kana": "こぬ",
+      "name_translations": {
+        "en": "Konu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7037412,
+      "longitude": 133.0816582
+    },
+    {
+      "id": "jp_hiroshima_station_266919206",
+      "osm_id": 266919206,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "三良坂",
+      "name_kana": "みらさか",
+      "name_translations": {
+        "en": "Mirasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.766254,
+      "longitude": 132.9575902
+    },
+    {
+      "id": "jp_hiroshima_station_266919494",
+      "osm_id": 266919494,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後安田",
+      "name_kana": "びんごやすだ",
+      "name_translations": {
+        "en": "Bingo-Yasuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7410333,
+      "longitude": 133.0339178
+    },
+    {
+      "id": "jp_hiroshima_station_266919671",
+      "osm_id": 266919671,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "梶田",
+      "name_kana": "かじた",
+      "name_translations": {
+        "en": "Kajita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.710845,
+      "longitude": 133.0592048
+    },
+    {
+      "id": "jp_hiroshima_station_266919673",
+      "osm_id": 266919673,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "上下",
+      "name_kana": "じょうげ",
+      "name_translations": {
+        "en": "Joge"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6948618,
+      "longitude": 133.1175879
+    },
+    {
+      "id": "jp_hiroshima_station_266920155",
+      "osm_id": 266920155,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "中畑",
+      "name_kana": "なかはた",
+      "name_translations": {
+        "en": "Nakahata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5826342,
+      "longitude": 133.1932492
+    },
+    {
+      "id": "jp_hiroshima_station_339081096",
+      "osm_id": 339081096,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯野",
+      "name_kana": "ゆお",
+      "name_translations": {
+        "en": "Yuno"
+      },
+      "operator": "井原鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.552927,
+      "longitude": 133.3869653
+    },
+    {
+      "id": "jp_hiroshima_station_339081216",
+      "osm_id": 339081216,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "御領",
+      "name_kana": "ごりょう",
+      "name_translations": {
+        "en": "Goryo"
+      },
+      "operator": "井原鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5647926,
+      "longitude": 133.4023921
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_401372233",
+      "osm_id": 401372233,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小用",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2476982,
+      "longitude": 132.4930093
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_409653072",
+      "osm_id": 409653072,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "忠海港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tadanoumi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3368563,
+      "longitude": 132.9938005
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_538786605",
+      "osm_id": 538786605,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "明石港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akashi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2062694,
+      "longitude": 132.8758992
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_540521872",
+      "osm_id": 540521872,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "木江港(天満港)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinoe Tenma Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.233214,
+      "longitude": 132.9174343
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_540530629",
+      "osm_id": 540530629,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "州江港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2850257,
+      "longitude": 133.1439988
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_540700446",
+      "osm_id": 540700446,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "土生港(長崎桟橋)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2811931,
+      "longitude": 133.180085
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_562871802",
+      "osm_id": 562871802,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "赤崎港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2989273,
+      "longitude": 133.1492413
+    },
+    {
+      "id": "jp_hiroshima_station_1641483863",
+      "osm_id": 1641483863,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "あき亀山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aki-Kameyama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.5171925,
+      "longitude": 132.4960128
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_1741870455",
+      "osm_id": 1741870455,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "広島港宇品旅客ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3524545,
+      "longitude": 132.4550554
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_1859663033",
+      "osm_id": 1859663033,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "駅前桟橋(向島運航)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yuki Mukaijima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4034381,
+      "longitude": 133.1937456
+    },
+    {
+      "id": "jp_hiroshima_station_1868197950",
+      "osm_id": 1868197950,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "古江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M21",
+      "latitude": 34.3857158,
+      "longitude": 132.4105704
+    },
+    {
+      "id": "jp_hiroshima_station_1868197956",
+      "osm_id": 1868197956,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東高須",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-takasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M19",
+      "latitude": 34.3915286,
+      "longitude": 132.4197179
+    },
+    {
+      "id": "jp_hiroshima_station_1868197963",
+      "osm_id": 1868197963,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "高須",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M20",
+      "latitude": 34.3893935,
+      "longitude": 132.4164532
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_2027254827",
+      "osm_id": 2027254827,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "土堂桟橋(福本渡船)",
+      "name_kana": "つちどうさんばし",
+      "name_translations": {
+        "en": "Tsuchido Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4050521,
+      "longitude": 133.1966074
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_3401928930",
+      "osm_id": 3401928930,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "切串",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2848659,
+      "longitude": 132.4751219
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_3405204183",
+      "osm_id": 3405204183,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "家老渡港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2792735,
+      "longitude": 133.1988003
+    },
+    {
+      "id": "jp_hiroshima_station_3578461922",
+      "osm_id": 3578461922,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新白島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Hakushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4083596,
+      "longitude": 132.4616898
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_3833602592",
+      "osm_id": 3833602592,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "戸崎港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3986129,
+      "longitude": 133.2433493
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_3887506726",
+      "osm_id": 3887506726,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三高〜宇品",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2599512,
+      "longitude": 132.4076624
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_3951347966",
+      "osm_id": 3951347966,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "高田",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2372684,
+      "longitude": 132.4351556
+    },
+    {
+      "id": "jp_hiroshima_station_3977338027",
+      "osm_id": 3977338027,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "海田市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaitaichi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3719648,
+      "longitude": 132.5304932
+    },
+    {
+      "id": "jp_hiroshima_station_3977338028",
+      "osm_id": 3977338028,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "糸崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3919202,
+      "longitude": 133.1049867
+    },
+    {
+      "id": "jp_hiroshima_station_4085934391",
+      "osm_id": 4085934391,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三原",
+      "name_kana": "みはら",
+      "name_translations": {
+        "en": "Mihara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4005041,
+      "longitude": 133.0832863
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_4165679934",
+      "osm_id": 4165679934,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "プリンスホテル前桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.34287,
+      "longitude": 132.4653291
+    },
+    {
+      "id": "jp_hiroshima_station_4440375001",
+      "osm_id": 4440375001,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "大門",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daimon"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4981696,
+      "longitude": 133.4409018
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_4511588091",
+      "osm_id": 4511588091,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "瀬戸田港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Setoda Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3047017,
+      "longitude": 133.0842854
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_4605645864",
+      "osm_id": 4605645864,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "能美ロッジ",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2269356,
+      "longitude": 132.449415
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_4605645877",
+      "osm_id": 4605645877,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "中町",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2245356,
+      "longitude": 132.4447552
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_4615119890",
+      "osm_id": 4615119890,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中筋駅",
+      "name_kana": "なかすじえき",
+      "name_translations": {
+        "en": "Nakasuji Station"
+      },
+      "operator": "広電バス;広島交通;備北交通;中国ジェイアールバス;中国バス;本四バス開発;因の島運輸",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4510531,
+      "longitude": 132.4772807
+    },
+    {
+      "id": "jp_hiroshima_station_4716446469",
+      "osm_id": 4716446469,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "寺家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jike"
+      },
+      "operator": "西日本旅客鉄道株式会社",
+      "network": "JR山陽本線",
+      "ref": "G09",
+      "latitude": 34.4392241,
+      "longitude": 132.7227767
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_4940185667",
+      "osm_id": 4940185667,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三角島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1906567,
+      "longitude": 132.8189126
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_4945412415",
+      "osm_id": 4945412415,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "斎島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1196117,
+      "longitude": 132.7936031
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_4975231027",
+      "osm_id": 4975231027,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "福浦港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2844539,
+      "longitude": 132.9131843
+    },
+    {
+      "id": "jp_hiroshima_station_5001702755",
+      "osm_id": 5001702755,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "西高屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishitakaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "G11",
+      "latitude": 34.4462933,
+      "longitude": 132.7881641
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_5156132324",
+      "osm_id": 5156132324,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中山通り入口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4745165,
+      "longitude": 132.8914556
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_5156142921",
+      "osm_id": 5156142921,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "河内市役所前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4717377,
+      "longitude": 132.8890266
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5158998493",
+      "osm_id": 5158998493,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鞆港(県営桟橋)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3813596,
+      "longitude": 133.3817799
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5201949149",
+      "osm_id": 5201949149,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "常石港",
+      "name_kana": "つねいしこう",
+      "name_translations": {
+        "en": "Tsuneishi port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3840013,
+      "longitude": 133.2964758
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5201949150",
+      "osm_id": 5201949150,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "福田港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuda Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3802465,
+      "longitude": 133.2729101
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5201949156",
+      "osm_id": 5201949156,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "満越港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Michigoe Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3938032,
+      "longitude": 133.2616336
+    },
+    {
+      "id": "jp_hiroshima_station_5205871575",
+      "osm_id": 5205871575,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "不動院前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fudōin-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4265677,
+      "longitude": 132.4689107
+    },
+    {
+      "id": "jp_hiroshima_station_5205871577",
+      "osm_id": 5205871577,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "牛田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4175234,
+      "longitude": 132.4647868
+    },
+    {
+      "id": "jp_hiroshima_station_5205871579",
+      "osm_id": 5205871579,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "大町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4616748,
+      "longitude": 132.4705368
+    },
+    {
+      "id": "jp_hiroshima_station_5205871580",
+      "osm_id": 5205871580,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "大塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōzuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4415716,
+      "longitude": 132.402817
+    },
+    {
+      "id": "jp_hiroshima_station_5205871581",
+      "osm_id": 5205871581,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "広域公園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōiki-kōen-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4354023,
+      "longitude": 132.4001446
+    },
+    {
+      "id": "jp_hiroshima_station_5205871583",
+      "osm_id": 5205871583,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "白島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4109218,
+      "longitude": 132.4627488
+    },
+    {
+      "id": "jp_hiroshima_station_5205959964",
+      "osm_id": 5205959964,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "伴中央",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomo-chūō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.45598,
+      "longitude": 132.4052287
+    },
+    {
+      "id": "jp_hiroshima_station_5205959966",
+      "osm_id": 5205959966,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "大原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōbara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4632256,
+      "longitude": 132.4127184
+    },
+    {
+      "id": "jp_hiroshima_station_5205959968",
+      "osm_id": 5205959968,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "伴",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4699078,
+      "longitude": 132.4191041
+    },
+    {
+      "id": "jp_hiroshima_station_5205959970",
+      "osm_id": 5205959970,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "長楽寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chōrakuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4729632,
+      "longitude": 132.4310097
+    },
+    {
+      "id": "jp_hiroshima_station_5205959972",
+      "osm_id": 5205959972,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "高取",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takatori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4751622,
+      "longitude": 132.438136
+    },
+    {
+      "id": "jp_hiroshima_station_5205959974",
+      "osm_id": 5205959974,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "上安",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamiyasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4757349,
+      "longitude": 132.4447292
+    },
+    {
+      "id": "jp_hiroshima_station_5205959976",
+      "osm_id": 5205959976,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasuhigashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4749944,
+      "longitude": 132.4533465
+    },
+    {
+      "id": "jp_hiroshima_station_5205959978",
+      "osm_id": 5205959978,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "毘沙門台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bishamondai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4696015,
+      "longitude": 132.4626873
+    },
+    {
+      "id": "jp_hiroshima_station_5205959980",
+      "osm_id": 5205959980,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "古市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furuichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4577195,
+      "longitude": 132.4752085
+    },
+    {
+      "id": "jp_hiroshima_station_5205959982",
+      "osm_id": 5205959982,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "中筋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakasuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.451686,
+      "longitude": 132.4769955
+    },
+    {
+      "id": "jp_hiroshima_station_5205959984",
+      "osm_id": 5205959984,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "西原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4433627,
+      "longitude": 132.4748216
+    },
+    {
+      "id": "jp_hiroshima_station_5205959986",
+      "osm_id": 5205959986,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "subway",
+      "name": "祗園新橋北",
+      "name_kana": "ぎおんしんばしきた",
+      "name_translations": {
+        "en": "Gion-shinbashi-kita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4352184,
+      "longitude": 132.4708622
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5211739476",
+      "osm_id": 5211739476,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "佐木港鷺桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3576383,
+      "longitude": 133.1182909
+    },
+    {
+      "id": "jp_hiroshima_station_5370470724",
+      "osm_id": 5370470724,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "中野東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakanohigashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4039247,
+      "longitude": 132.5789306
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5428521045",
+      "osm_id": 5428521045,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "金山港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2992507,
+      "longitude": 133.1554586
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5489867927",
+      "osm_id": 5489867927,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大久野島第二桟橋",
+      "name_kana": "おおくのしま だい に さんばし",
+      "name_translations": {
+        "en": "Okunoshima Pier 2"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3085301,
+      "longitude": 132.9991615
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_5597924453",
+      "osm_id": 5597924453,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大久野島第一桟橋",
+      "name_kana": "おおくのしま だいいち さんばし",
+      "name_translations": {
+        "en": "Okunoshima Pier 1"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3048199,
+      "longitude": 132.9955527
+    },
+    {
+      "id": "jp_hiroshima_station_5704627727",
+      "osm_id": 5704627727,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大竹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otake"
+      },
+      "operator": "JR西日本，JR貨物",
+      "network": null,
+      "ref": null,
+      "latitude": 34.217857,
+      "longitude": 132.223345
+    },
+    {
+      "id": "jp_hiroshima_station_6060489252",
+      "osm_id": 6060489252,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "天神川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenjingawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3897155,
+      "longitude": 132.4979979
+    },
+    {
+      "id": "jp_hiroshima_station_6060489253",
+      "osm_id": 6060489253,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "前空",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maezora"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3010098,
+      "longitude": 132.2894109
+    },
+    {
+      "id": "jp_hiroshima_station_6060489255",
+      "osm_id": 6060489255,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "瀬野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seno"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "G07",
+      "latitude": 34.4219353,
+      "longitude": 132.5966274
+    },
+    {
+      "id": "jp_hiroshima_station_6060489256",
+      "osm_id": 6060489256,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八本松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachihommatsu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR山陽本線",
+      "ref": "G08",
+      "latitude": 34.4457568,
+      "longitude": 132.6888622
+    },
+    {
+      "id": "jp_hiroshima_station_6063546662",
+      "osm_id": 6063546662,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿品",
+      "name_kana": "あじな",
+      "name_translations": {
+        "en": "Ajina"
+      },
+      "operator": "ジェイアール西日本メンテック",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3230984,
+      "longitude": 132.3143115
+    },
+    {
+      "id": "jp_hiroshima_station_6063546665",
+      "osm_id": 6063546665,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮島口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyajimaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "R10",
+      "latitude": 34.3123127,
+      "longitude": 132.3029382
+    },
+    {
+      "id": "jp_hiroshima_station_6063546667",
+      "osm_id": 6063546667,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "廿日市",
+      "name_kana": "はつかいち",
+      "name_translations": {
+        "en": "Hatsukaichi"
+      },
+      "operator": "West Japan Railway Company",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3580272,
+      "longitude": 132.335674
+    },
+    {
+      "id": "jp_hiroshima_station_6063546668",
+      "osm_id": 6063546668,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西広島",
+      "name_kana": "にしひろしま",
+      "name_translations": {
+        "en": "Nishi-Hiroshima"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "R04",
+      "latitude": 34.3979966,
+      "longitude": 132.4279158
+    },
+    {
+      "id": "jp_hiroshima_station_6063656348",
+      "osm_id": 6063656348,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新井口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Inokuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "R05",
+      "latitude": 34.3752076,
+      "longitude": 132.3914421
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_6191415254",
+      "osm_id": 6191415254,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "兼吉桟橋(尾道渡船)",
+      "name_kana": "かねよしさんばし",
+      "name_translations": {
+        "en": "Kaneyoshi Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4051731,
+      "longitude": 133.2026754
+    },
+    {
+      "id": "jp_hiroshima_station_6376925259",
+      "osm_id": 6376925259,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "塩町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiomachi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7742547,
+      "longitude": 132.913354
+    },
+    {
+      "id": "jp_hiroshima_station_6624627158",
+      "osm_id": 6624627158,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "福山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4892799,
+      "longitude": 133.3618898
+    },
+    {
+      "id": "jp_hiroshima_station_6624627173",
+      "osm_id": 6624627173,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "広島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiroshima"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3981963,
+      "longitude": 132.4758529
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_6712485979",
+      "osm_id": 6712485979,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "須波港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sunami Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3597842,
+      "longitude": 133.0840287
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_6742263417",
+      "osm_id": 6742263417,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "可部駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.512456,
+      "longitude": 132.5101688
+    },
+    {
+      "id": "jp_hiroshima_station_6821250105",
+      "osm_id": 6821250105,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安芸中野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aki-Nakano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3909495,
+      "longitude": 132.5634075
+    },
+    {
+      "id": "jp_hiroshima_station_7106693876",
+      "osm_id": 7106693876,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "河内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4691853,
+      "longitude": 132.8899558
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_7120465779",
+      "osm_id": 7120465779,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大町駅",
+      "name_kana": "おおまちえき",
+      "name_translations": {
+        "en": "Omachi Station"
+      },
+      "operator": "広島交通",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4613292,
+      "longitude": 132.4704544
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_7176317308",
+      "osm_id": 7176317308,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中筋バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "NAKASUJI BUS TERMINAL"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4512737,
+      "longitude": 132.4773247
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_7475369027",
+      "osm_id": 7475369027,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "広島電鉄安佐営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5513458,
+      "longitude": 132.444893
+    },
+    {
+      "id": "jp_hiroshima_station_7818218707",
+      "osm_id": 7818218707,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "草津南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusatsu-minami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M24",
+      "latitude": 34.3781486,
+      "longitude": 132.3986379
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7914178578",
+      "osm_id": 7914178578,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "土生港（中央桟橋）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2834658,
+      "longitude": 133.1780053
+    },
+    {
+      "id": "jp_hiroshima_station_7948577995",
+      "osm_id": 7948577995,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "横川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokogawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4104222,
+      "longitude": 132.4509916
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7970221447",
+      "osm_id": 7970221447,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大長港",
+      "name_kana": "おおちょうこう",
+      "name_translations": {
+        "en": "Oocyo Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1847278,
+      "longitude": 132.8583812
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7970221542",
+      "osm_id": 7970221542,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "沖浦港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okiura Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2113916,
+      "longitude": 132.8922524
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7992744076",
+      "osm_id": 7992744076,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "木江港(一貫目港)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2366223,
+      "longitude": 132.9200063
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7992765950",
+      "osm_id": 7992765950,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鮴崎港(めばる港)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mebaru Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2783323,
+      "longitude": 132.9402728
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7992766011",
+      "osm_id": 7992766011,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "垂水港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tarumi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2799025,
+      "longitude": 132.9242285
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7992766175",
+      "osm_id": 7992766175,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "白水港",
+      "name_kana": "しろみずこう",
+      "name_translations": {
+        "en": "Shiromizu Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2694607,
+      "longitude": 132.9140617
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7995045117",
+      "osm_id": 7995045117,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "安芸津港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akitsu Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3169771,
+      "longitude": 132.8180552
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7995045170",
+      "osm_id": 7995045170,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大西港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onishi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2488636,
+      "longitude": 132.8774446
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7997830085",
+      "osm_id": 7997830085,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "久比港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kubi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1876943,
+      "longitude": 132.8321167
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7997830101",
+      "osm_id": 7997830101,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "立花港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tachibana Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1774911,
+      "longitude": 132.8070074
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7999483471",
+      "osm_id": 7999483471,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大浜港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.164095,
+      "longitude": 132.8064879
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_7999483525",
+      "osm_id": 7999483525,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "豊島港",
+      "name_kana": "とよしまこう",
+      "name_translations": {
+        "en": "Toyoshima Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1789739,
+      "longitude": 132.7978021
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8010856055",
+      "osm_id": 8010856055,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "瀬戸田港 沢桟橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Setoda-Sawa Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3130492,
+      "longitude": 133.0902812
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8016346188",
+      "osm_id": 8016346188,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "向田港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3294586,
+      "longitude": 133.0994436
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8016346421",
+      "osm_id": 8016346421,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "重井西港",
+      "name_kana": "しげいにしこう",
+      "name_translations": {
+        "en": "Shigei-Nishi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3407487,
+      "longitude": 133.1398705
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8016346449",
+      "osm_id": 8016346449,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "細島港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hosojima Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3607302,
+      "longitude": 133.1371422
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8016346509",
+      "osm_id": 8016346509,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "因島モール桟橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Innoshima-Mall Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2954766,
+      "longitude": 133.1638751
+    },
+    {
+      "id": "jp_hiroshima_station_8050304222",
+      "osm_id": 8050304222,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "中島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5005256,
+      "longitude": 132.513031
+    },
+    {
+      "id": "jp_hiroshima_station_8050304225",
+      "osm_id": 8050304225,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "可部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kabe"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR可部線",
+      "ref": null,
+      "latitude": 34.5123673,
+      "longitude": 132.51067
+    },
+    {
+      "id": "jp_hiroshima_station_8050304931",
+      "osm_id": 8050304931,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "古市橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furuichibashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4507923,
+      "longitude": 132.4681971
+    },
+    {
+      "id": "jp_hiroshima_station_8050304934",
+      "osm_id": 8050304934,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "河戸帆待川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōdo-Homachigawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.516709,
+      "longitude": 132.5052063
+    },
+    {
+      "id": "jp_hiroshima_station_8050317477",
+      "osm_id": 8050317477,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上八木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Yagi"
+      },
+      "operator": null,
+      "network": "JR可部線",
+      "ref": null,
+      "latitude": 34.490065,
+      "longitude": 132.5060908
+    },
+    {
+      "id": "jp_hiroshima_station_8050324803",
+      "osm_id": 8050324803,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "緑井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midorii"
+      },
+      "operator": null,
+      "network": "JR可部線",
+      "ref": null,
+      "latitude": 34.4674649,
+      "longitude": 132.4758482
+    },
+    {
+      "id": "jp_hiroshima_station_8050324804",
+      "osm_id": 8050324804,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "七軒茶屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shichikenjaya"
+      },
+      "operator": null,
+      "network": "JR可部線",
+      "ref": null,
+      "latitude": 34.4723474,
+      "longitude": 132.4807996
+    },
+    {
+      "id": "jp_hiroshima_station_8050324805",
+      "osm_id": 8050324805,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bairin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4808645,
+      "longitude": 132.4942334
+    },
+    {
+      "id": "jp_hiroshima_station_8050328702",
+      "osm_id": 8050328702,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三滝",
+      "name_kana": "みたき",
+      "name_translations": {
+        "en": "Mitaki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4172255,
+      "longitude": 132.4473512
+    },
+    {
+      "id": "jp_hiroshima_station_8050328704",
+      "osm_id": 8050328704,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安芸長束",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aki-Nagatsuka"
+      },
+      "operator": null,
+      "network": "JR可部線",
+      "ref": null,
+      "latitude": 34.428274,
+      "longitude": 132.4560454
+    },
+    {
+      "id": "jp_hiroshima_station_8050328705",
+      "osm_id": 8050328705,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下祗園",
+      "name_kana": "しもぎおん",
+      "name_translations": {
+        "en": "Shimo-Gion"
+      },
+      "operator": null,
+      "network": "JR可部線",
+      "ref": null,
+      "latitude": 34.4393739,
+      "longitude": 132.4623889
+    },
+    {
+      "id": "jp_hiroshima_station_8058237581",
+      "osm_id": 8058237581,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "五日市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itsukaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "R06",
+      "latitude": 34.3668746,
+      "longitude": 132.3680502
+    },
+    {
+      "id": "jp_hiroshima_station_8060577845",
+      "osm_id": 8060577845,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "狩留家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karuga"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4865968,
+      "longitude": 132.579073
+    },
+    {
+      "id": "jp_hiroshima_station_8061953973",
+      "osm_id": 8061953973,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上深川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Fukawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4759333,
+      "longitude": 132.5623856
+    },
+    {
+      "id": "jp_hiroshima_station_8061953974",
+      "osm_id": 8061953974,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中深川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka-Fukawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4809822,
+      "longitude": 132.5341058
+    },
+    {
+      "id": "jp_hiroshima_station_8061953975",
+      "osm_id": 8061953975,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "玖村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumura"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR芸備線",
+      "ref": null,
+      "latitude": 34.4823,
+      "longitude": 132.5082828
+    },
+    {
+      "id": "jp_hiroshima_station_8061953976",
+      "osm_id": 8061953976,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "戸坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hesaka"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR芸備線",
+      "ref": null,
+      "latitude": 34.4381672,
+      "longitude": 132.4912722
+    },
+    {
+      "id": "jp_hiroshima_station_8061953977",
+      "osm_id": 8061953977,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "矢賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yaga"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR芸備線",
+      "ref": null,
+      "latitude": 34.3988542,
+      "longitude": 132.497389
+    },
+    {
+      "id": "jp_hiroshima_station_8061953979",
+      "osm_id": 8061953979,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安芸矢口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aki-Yaguchi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR芸備線",
+      "ref": null,
+      "latitude": 34.4631489,
+      "longitude": 132.4949935
+    },
+    {
+      "id": "jp_hiroshima_station_8061953984",
+      "osm_id": 8061953984,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下深川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Fukawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR芸備線",
+      "ref": null,
+      "latitude": 34.4887408,
+      "longitude": 132.5244015
+    },
+    {
+      "id": "jp_hiroshima_station_8065576823",
+      "osm_id": 8065576823,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "向洋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukainada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3767822,
+      "longitude": 132.5060465
+    },
+    {
+      "id": "jp_hiroshima_station_8065774508",
+      "osm_id": 8065774508,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "本郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hongō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4099452,
+      "longitude": 132.9866581
+    },
+    {
+      "id": "jp_hiroshima_station_8070710791",
+      "osm_id": 8070710791,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "水尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizushiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3202757,
+      "longitude": 132.4992169
+    },
+    {
+      "id": "jp_hiroshima_station_8070710793",
+      "osm_id": 8070710793,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Saka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3387542,
+      "longitude": 132.5107666
+    },
+    {
+      "id": "jp_hiroshima_station_8070710796",
+      "osm_id": 8070710796,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3521114,
+      "longitude": 132.5319178
+    },
+    {
+      "id": "jp_hiroshima_station_8070729291",
+      "osm_id": 8070729291,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "かるが浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karugahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2641368,
+      "longitude": 132.5171401
+    },
+    {
+      "id": "jp_hiroshima_station_8070729293",
+      "osm_id": 8070729293,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "呉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kure"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2446363,
+      "longitude": 132.5574725
+    },
+    {
+      "id": "jp_hiroshima_station_8070729294",
+      "osm_id": 8070729294,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "大乗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3407275,
+      "longitude": 132.9453327
+    },
+    {
+      "id": "jp_hiroshima_station_8070729296",
+      "osm_id": 8070729296,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安芸長浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aki-Nagahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3379202,
+      "longitude": 132.9619567
+    },
+    {
+      "id": "jp_hiroshima_station_8070729297",
+      "osm_id": 8070729297,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "忠海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tadanoumi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3367942,
+      "longitude": 132.9912789
+    },
+    {
+      "id": "jp_hiroshima_station_8070729298",
+      "osm_id": 8070729298,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安芸幸崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akisaizaki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR呉線",
+      "ref": null,
+      "latitude": 34.3380593,
+      "longitude": 133.0399503
+    },
+    {
+      "id": "jp_hiroshima_station_8070729299",
+      "osm_id": 8070729299,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "須波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sunami"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR呉線",
+      "ref": null,
+      "latitude": 34.3702143,
+      "longitude": 133.0838252
+    },
+    {
+      "id": "jp_hiroshima_station_8070729303",
+      "osm_id": 8070729303,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "天応",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2821246,
+      "longitude": 132.5194975
+    },
+    {
+      "id": "jp_hiroshima_station_8070729304",
+      "osm_id": 8070729304,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "呉ポートピア",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kure-Portopia"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2918799,
+      "longitude": 132.5126836
+    },
+    {
+      "id": "jp_hiroshima_station_8070729305",
+      "osm_id": 8070729305,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "小屋浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koyaura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3025266,
+      "longitude": 132.506211
+    },
+    {
+      "id": "jp_hiroshima_station_8073804709",
+      "osm_id": 8073804709,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "広",
+      "name_kana": "ひろ",
+      "name_translations": {
+        "en": "Hiro"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2284501,
+      "longitude": 132.6283311
+    },
+    {
+      "id": "jp_hiroshima_station_8073804711",
+      "osm_id": 8073804711,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新広",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Hiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2322353,
+      "longitude": 132.6140953
+    },
+    {
+      "id": "jp_hiroshima_station_8073827394",
+      "osm_id": 8073827394,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nigata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-Y18",
+      "latitude": 34.2217043,
+      "longitude": 132.6553148
+    },
+    {
+      "id": "jp_hiroshima_station_8076274676",
+      "osm_id": 8076274676,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安芸川尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aki-Kawajiri"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2326849,
+      "longitude": 132.6914509
+    },
+    {
+      "id": "jp_hiroshima_station_8076274678",
+      "osm_id": 8076274678,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安登",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ato"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.2542313,
+      "longitude": 132.7226248
+    },
+    {
+      "id": "jp_hiroshima_station_8076274680",
+      "osm_id": 8076274680,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yasuura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2839081,
+      "longitude": 132.744798
+    },
+    {
+      "id": "jp_hiroshima_station_8076286208",
+      "osm_id": 8076286208,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "風早",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazahaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3030682,
+      "longitude": 132.7957848
+    },
+    {
+      "id": "jp_hiroshima_station_8076286210",
+      "osm_id": 8076286210,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安芸津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akitsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3181817,
+      "longitude": 132.8180873
+    },
+    {
+      "id": "jp_hiroshima_station_8076288871",
+      "osm_id": 8076288871,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3206074,
+      "longitude": 132.8657864
+    },
+    {
+      "id": "jp_hiroshima_station_8076288872",
+      "osm_id": 8076288872,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "竹原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takehara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.339309,
+      "longitude": 132.9100006
+    },
+    {
+      "id": "jp_hiroshima_station_8076288874",
+      "osm_id": 8076288874,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoshiura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2578132,
+      "longitude": 132.5270989
+    },
+    {
+      "id": "jp_hiroshima_station_8076288875",
+      "osm_id": 8076288875,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "川原石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaraishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2486771,
+      "longitude": 132.541764
+    },
+    {
+      "id": "jp_hiroshima_station_8076308189",
+      "osm_id": 8076308189,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安芸阿賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aki-Aga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2356695,
+      "longitude": 132.6000304
+    },
+    {
+      "id": "jp_hiroshima_station_8117359988",
+      "osm_id": 8117359988,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東福山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Fukuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.495207,
+      "longitude": 133.4053644
+    },
+    {
+      "id": "jp_hiroshima_station_8122138840",
+      "osm_id": 8122138840,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onomichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4048206,
+      "longitude": 133.1931084
+    },
+    {
+      "id": "jp_hiroshima_station_8122138841",
+      "osm_id": 8122138841,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東尾道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Onomichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4350685,
+      "longitude": 133.2333215
+    },
+    {
+      "id": "jp_hiroshima_station_8122138843",
+      "osm_id": 8122138843,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "松永",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsunaga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4508041,
+      "longitude": 133.2585825
+    },
+    {
+      "id": "jp_hiroshima_station_8122138845",
+      "osm_id": 8122138845,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "備後赤坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bingo-Akasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4720886,
+      "longitude": 133.3058135
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8240588814",
+      "osm_id": 8240588814,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "須ノ上港",
+      "name_kana": "すのうえこう",
+      "name_translations": {
+        "en": "Sunoue Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3367724,
+      "longitude": 133.1269996
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8240588881",
+      "osm_id": 8240588881,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "重井東港",
+      "name_kana": "しげいひがしこう",
+      "name_translations": {
+        "en": "Shigei-Higashi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3520507,
+      "longitude": 133.1491986
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8240588908",
+      "osm_id": 8240588908,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "尾道港 新浜桟橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onomichi-Shinhama Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3988014,
+      "longitude": 133.1774516
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8240589037",
+      "osm_id": 8240589037,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "尾道駅前桟橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onomichi-Ekimae Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4031007,
+      "longitude": 133.1931262
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8244855466",
+      "osm_id": 8244855466,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "歌港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3984857,
+      "longitude": 133.2396295
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8244858339",
+      "osm_id": 8244858339,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "十四日元町桟橋",
+      "name_kana": "とよひもとまちさんばし",
+      "name_translations": {
+        "en": "Toyohi Motomachi Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4081596,
+      "longitude": 133.2043383
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8255559990",
+      "osm_id": 8255559990,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小歌島桟橋(福本渡船)",
+      "name_kana": "おかじまさんばし",
+      "name_translations": {
+        "en": "Okajima Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.402661,
+      "longitude": 133.1964379
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8255588724",
+      "osm_id": 8255588724,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "富浜桟橋(向島運航)",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomihama Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4002147,
+      "longitude": 133.1972341
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8255588836",
+      "osm_id": 8255588836,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "土堂桟橋(尾道渡船)",
+      "name_kana": "つちどうさんばし",
+      "name_translations": {
+        "en": "Tsuchido Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4066499,
+      "longitude": 133.2007826
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8273486120",
+      "osm_id": 8273486120,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "中央桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4074264,
+      "longitude": 133.2025532
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_8543617349",
+      "osm_id": 8543617349,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "呉駅前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kure Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2451799,
+      "longitude": 132.5583274
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_8543655112",
+      "osm_id": 8543655112,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "情島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1590325,
+      "longitude": 132.5700095
+    },
+    {
+      "id": "jp_hiroshima_station_8558341520",
+      "osm_id": 8558341520,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東広島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Hiroshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3888993,
+      "longitude": 132.7588789
+    },
+    {
+      "id": "jp_hiroshima_station_8558459806",
+      "osm_id": 8558459806,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新尾道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Onomichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4300627,
+      "longitude": 133.1903283
+    },
+    {
+      "id": "jp_hiroshima_station_8989606762",
+      "osm_id": 8989606762,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "商工センター入口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shoko Center-iriguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "M25",
+      "latitude": 34.3755547,
+      "longitude": 132.3921927
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_9123369138",
+      "osm_id": 9123369138,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中国バス　府中営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.5698326,
+      "longitude": 133.2205587
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_9213212248",
+      "osm_id": 9213212248,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "道の駅びんご府中",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.570127,
+      "longitude": 133.2361414
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_9241549175",
+      "osm_id": 9241549175,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "元安桟橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motoyasu Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3937904,
+      "longitude": 132.4541825
+    },
+    {
+      "id": "jp_hiroshima_station_9623798507",
+      "osm_id": 9623798507,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "本通",
+      "name_kana": "ほんどおり",
+      "name_translations": {
+        "en": "Hondōri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3931587,
+      "longitude": 132.4569775
+    },
+    {
+      "id": "jp_hiroshima_station_9628301778",
+      "osm_id": 9628301778,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "県庁前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kenchō-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3966808,
+      "longitude": 132.458162
+    },
+    {
+      "id": "jp_hiroshima_station_9630963635",
+      "osm_id": 9630963635,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "城北",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jōhoku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4053714,
+      "longitude": 132.4588291
+    },
+    {
+      "id": "jp_hiroshima_station_9978550067",
+      "osm_id": 9978550067,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "広電宮島口",
+      "name_kana": "ひろでんみやじまぐち",
+      "name_translations": {
+        "en": "Hiroden-Miyajima-guchi"
+      },
+      "operator": "広島電鉄",
+      "network": null,
+      "ref": "M38",
+      "latitude": 34.3117771,
+      "longitude": 132.3049223
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_10129324232",
+      "osm_id": 10129324232,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "猿飛渡船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6194866,
+      "longitude": 132.1794641
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_10896059357",
+      "osm_id": 10896059357,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "熊野営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3316385,
+      "longitude": 132.5648231
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_11332919520",
+      "osm_id": 11332919520,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Bus Station Hiroshima Sta. North",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4007014,
+      "longitude": 132.4753137
+    },
+    {
+      "id": "jp_hiroshima_station_12072029870",
+      "osm_id": 12072029870,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "大野浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōnoura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2846505,
+      "longitude": 132.2658192
+    },
+    {
+      "id": "jp_hiroshima_station_12444477403",
+      "osm_id": 12444477403,
+      "osm_type": "node",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮島ボートレース場",
+      "name_kana": "みやじまぼーとれーすじょう",
+      "name_translations": null,
+      "operator": "広島電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3143211,
+      "longitude": 132.304935
+    },
+    {
+      "id": "jp_hiroshima_airport_57010613",
+      "osm_id": 57010613,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "広島空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiroshima Airport"
+      },
+      "operator": "広島県",
+      "network": null,
+      "ref": "HIJ",
+      "latitude": 34.4374722,
+      "longitude": 132.9214166
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_93107543",
+      "osm_id": 93107543,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宮島桟橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyajima Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3020991,
+      "longitude": 132.3222525
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_111530563",
+      "osm_id": 111530563,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "廿日市市役所前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3524331,
+      "longitude": 132.3296045
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_111530569",
+      "osm_id": 111530569,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮内串戸駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3480654,
+      "longitude": 132.3235424
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_149562664",
+      "osm_id": 149562664,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "呉中央桟橋ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kure Central Pier Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2406703,
+      "longitude": 132.5564127
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_179573568",
+      "osm_id": 179573568,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "広島バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiroshima Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3962117,
+      "longitude": 132.4567002
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_186847726",
+      "osm_id": 186847726,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "切串港旅客上屋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2843425,
+      "longitude": 132.4756934
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_237839380",
+      "osm_id": 237839380,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小長港",
+      "name_kana": "おちょうこう",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1883951,
+      "longitude": 132.8533459
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_332802224",
+      "osm_id": 332802224,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三原港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.398085,
+      "longitude": 133.0821805
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_343135263",
+      "osm_id": 343135263,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三高桟橋",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2589998,
+      "longitude": 132.4076318
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_391873038",
+      "osm_id": 391873038,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "中町港旅客ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2238404,
+      "longitude": 132.4442676
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_391873041",
+      "osm_id": 391873041,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "高田港待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2368107,
+      "longitude": 132.4352874
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_565269145",
+      "osm_id": 565269145,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "上安バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4761349,
+      "longitude": 132.444796
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_723379712",
+      "osm_id": 723379712,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "市営渡船乗り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3827544,
+      "longitude": 133.3838201
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_768791502",
+      "osm_id": 768791502,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "福山駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.4883342,
+      "longitude": 133.3629148
+    },
+    {
+      "id": "jp_hiroshima_airport_901855527",
+      "osm_id": 901855527,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "豊栄フライングクラブ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyosaka Flying Club Airstrip"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6240395,
+      "longitude": 132.7957933
+    },
+    {
+      "id": "jp_hiroshima_airport_910821169",
+      "osm_id": 910821169,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "オノミチフローティングポート",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onomichi Floating Port"
+      },
+      "operator": "せとうちSEAPLANES",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3908078,
+      "longitude": 133.2830351
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_917870309",
+      "osm_id": 917870309,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "秋月港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2294993,
+      "longitude": 132.492274
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_930335425",
+      "osm_id": 930335425,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "広島国際フェリーポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3506497,
+      "longitude": 132.4496543
+    },
+    {
+      "id": "jp_hiroshima_ferry_terminal_930789199",
+      "osm_id": 930789199,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宮島口フェリーのりば旅客ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyajimaguchi Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3110993,
+      "longitude": 132.3052316
+    },
+    {
+      "id": "jp_hiroshima_airport_1029364557",
+      "osm_id": 1029364557,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "広島ヘリポート",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "広島県",
+      "network": null,
+      "ref": null,
+      "latitude": 34.3720816,
+      "longitude": 132.4183806
+    },
+    {
+      "id": "jp_hiroshima_bus_terminal_1037716660",
+      "osm_id": 1037716660,
+      "osm_type": "way",
+      "prefecture_id": "jp_hiroshima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "鞆鉄道 松永切符売り場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "株式会社 鞆鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.4519727,
+      "longitude": 133.2553691
+    },
+    {
+      "id": "jp_hiroshima_station_7670134",
+      "osm_id": 7670134,
+      "osm_type": "relation",
+      "prefecture_id": "jp_hiroshima",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮内串戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyauchi-Kushido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3479209,
+      "longitude": 132.3237094
+    }
+  ]
+}

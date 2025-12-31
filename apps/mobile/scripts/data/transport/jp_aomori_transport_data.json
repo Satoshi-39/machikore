@@ -1,0 +1,3316 @@
+{
+  "fetchedAt": "2025-12-24T05:46:40.512Z",
+  "prefecture_id": "jp_aomori",
+  "prefecture_name": "青森県",
+  "stats": {
+    "station": 150,
+    "airport": 6,
+    "ferry_terminal": 10,
+    "bus_terminal": 20,
+    "total": 186
+  },
+  "data": [
+    {
+      "id": "jp_aomori_station_263176471",
+      "osm_id": 263176471,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大釈迦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daishaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.756701,
+      "longitude": 140.5876854
+    },
+    {
+      "id": "jp_aomori_station_263176826",
+      "osm_id": 263176826,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽新城",
+      "name_kana": "つがるしんじょう",
+      "name_translations": {
+        "en": "Tsugaru-Shinjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8280508,
+      "longitude": 140.6720593
+    },
+    {
+      "id": "jp_aomori_station_263177498",
+      "osm_id": 263177498,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "石川",
+      "name_kana": "いしかわ",
+      "name_translations": {
+        "en": "Ishikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5558946,
+      "longitude": 140.5311758
+    },
+    {
+      "id": "jp_aomori_station_264186812",
+      "osm_id": 264186812,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "小川原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kogawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7100437,
+      "longitude": 141.2995492
+    },
+    {
+      "id": "jp_aomori_station_264186817",
+      "osm_id": 264186817,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "西平内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Hiranai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.917998,
+      "longitude": 140.9131142
+    },
+    {
+      "id": "jp_aomori_station_264186859",
+      "osm_id": 264186859,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "小湊",
+      "name_kana": "こみなと",
+      "name_translations": {
+        "en": "Kominato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9298991,
+      "longitude": 140.9551558
+    },
+    {
+      "id": "jp_aomori_station_264187311",
+      "osm_id": 264187311,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "向山",
+      "name_kana": "むかいやま",
+      "name_translations": {
+        "en": "Mukaiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6298319,
+      "longitude": 141.3705724
+    },
+    {
+      "id": "jp_aomori_station_264187661",
+      "osm_id": 264187661,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "清水川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimizugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9218213,
+      "longitude": 141.0245353
+    },
+    {
+      "id": "jp_aomori_station_264187734",
+      "osm_id": 264187734,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "乙供",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ottomo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7798846,
+      "longitude": 141.213254
+    },
+    {
+      "id": "jp_aomori_station_264188105",
+      "osm_id": 264188105,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "上北町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamikitacho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7329536,
+      "longitude": 141.2646972
+    },
+    {
+      "id": "jp_aomori_station_264188264",
+      "osm_id": 264188264,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "千曳",
+      "name_kana": "ちびき",
+      "name_translations": {
+        "en": "Chibiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8044125,
+      "longitude": 141.1532015
+    },
+    {
+      "id": "jp_aomori_station_264188538",
+      "osm_id": 264188538,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢田前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yadamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8340044,
+      "longitude": 140.8072786
+    },
+    {
+      "id": "jp_aomori_station_264219303",
+      "osm_id": 264219303,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "奥内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okunai"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.9031582,
+      "longitude": 140.6722426
+    },
+    {
+      "id": "jp_aomori_station_264219305",
+      "osm_id": 264219305,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "瀬辺地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seheji"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 41.0081542,
+      "longitude": 140.6482762
+    },
+    {
+      "id": "jp_aomori_station_264219307",
+      "osm_id": 264219307,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "左堰",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hidariseki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.916939,
+      "longitude": 140.665996
+    },
+    {
+      "id": "jp_aomori_station_264219321",
+      "osm_id": 264219321,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakasawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.9494006,
+      "longitude": 140.656176
+    },
+    {
+      "id": "jp_aomori_station_264219903",
+      "osm_id": 264219903,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "後潟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushirogata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.931769,
+      "longitude": 140.662389
+    },
+    {
+      "id": "jp_aomori_station_264220540",
+      "osm_id": 264220540,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "郷沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gōsawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.98817,
+      "longitude": 140.652278
+    },
+    {
+      "id": "jp_aomori_station_264220685",
+      "osm_id": 264220685,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "蓬田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yomogita"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.9696082,
+      "longitude": 140.6545737
+    },
+    {
+      "id": "jp_aomori_station_264220977",
+      "osm_id": 264220977,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "油川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aburakawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "JR 津軽線",
+      "ref": null,
+      "latitude": 40.857101,
+      "longitude": 140.6901901
+    },
+    {
+      "id": "jp_aomori_station_264221039",
+      "osm_id": 264221039,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "津軽宮田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsugaru-Miyata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.8869529,
+      "longitude": 140.6744297
+    },
+    {
+      "id": "jp_aomori_station_264222011",
+      "osm_id": 264222011,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "有戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arito"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9139798,
+      "longitude": 141.1893847
+    },
+    {
+      "id": "jp_aomori_station_264222084",
+      "osm_id": 264222084,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤川",
+      "name_kana": "あかがわ",
+      "name_translations": {
+        "en": "Akagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.2679458,
+      "longitude": 141.2092635
+    },
+    {
+      "id": "jp_aomori_station_264222152",
+      "osm_id": 264222152,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "近川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.1916065,
+      "longitude": 141.2791747
+    },
+    {
+      "id": "jp_aomori_station_264222627",
+      "osm_id": 264222627,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "吹越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukkoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.0221752,
+      "longitude": 141.2465754
+    },
+    {
+      "id": "jp_aomori_station_264222828",
+      "osm_id": 264222828,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "有畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arihata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.132216,
+      "longitude": 141.276828
+    },
+    {
+      "id": "jp_aomori_station_264222966",
+      "osm_id": 264222966,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "金谷沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanayasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.229304,
+      "longitude": 141.248172
+    },
+    {
+      "id": "jp_aomori_station_264224666",
+      "osm_id": 264224666,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鮫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Same"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5306459,
+      "longitude": 141.5553941
+    },
+    {
+      "id": "jp_aomori_station_264224668",
+      "osm_id": 264224668,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大久喜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4947811,
+      "longitude": 141.623437
+    },
+    {
+      "id": "jp_aomori_station_264224956",
+      "osm_id": 264224956,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥白浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Shirahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5165172,
+      "longitude": 141.5926763
+    },
+    {
+      "id": "jp_aomori_station_264225049",
+      "osm_id": 264225049,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "長苗代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naganawashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5214187,
+      "longitude": 141.4658712
+    },
+    {
+      "id": "jp_aomori_station_264225103",
+      "osm_id": 264225103,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "階上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashikami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4564163,
+      "longitude": 141.6654833
+    },
+    {
+      "id": "jp_aomori_station_264225107",
+      "osm_id": 264225107,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "本八戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hon-Hachinohe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5162548,
+      "longitude": 141.4888217
+    },
+    {
+      "id": "jp_aomori_station_264225152",
+      "osm_id": 264225152,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "小中野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konakano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5187266,
+      "longitude": 141.5102394
+    },
+    {
+      "id": "jp_aomori_station_264225154",
+      "osm_id": 264225154,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "白銀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirogane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5220565,
+      "longitude": 141.541828
+    },
+    {
+      "id": "jp_aomori_station_264225268",
+      "osm_id": 264225268,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "金浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanehama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.476223,
+      "longitude": 141.6370382
+    },
+    {
+      "id": "jp_aomori_station_264225270",
+      "osm_id": 264225270,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥湊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Minato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5230771,
+      "longitude": 141.5273194
+    },
+    {
+      "id": "jp_aomori_station_264225488",
+      "osm_id": 264225488,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "追良瀬",
+      "name_kana": "おいらせ",
+      "name_translations": {
+        "en": "Oirase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6861241,
+      "longitude": 139.9704062
+    },
+    {
+      "id": "jp_aomori_station_264225492",
+      "osm_id": 264225492,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大戸瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōdose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7597811,
+      "longitude": 140.0340443
+    },
+    {
+      "id": "jp_aomori_station_264225687",
+      "osm_id": 264225687,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鰺ヶ沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ajigasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.775478,
+      "longitude": 140.2208595
+    },
+    {
+      "id": "jp_aomori_station_264225713",
+      "osm_id": 264225713,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥赤石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Akaishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.762164,
+      "longitude": 140.162814
+    },
+    {
+      "id": "jp_aomori_station_264225728",
+      "osm_id": 264225728,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "板柳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itayanagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6974388,
+      "longitude": 140.4616109
+    },
+    {
+      "id": "jp_aomori_station_264225883",
+      "osm_id": 264225883,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤崎",
+      "name_kana": "ふじさき",
+      "name_translations": {
+        "en": "Fujisaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6540867,
+      "longitude": 140.4998012
+    },
+    {
+      "id": "jp_aomori_station_264225886",
+      "osm_id": 264225886,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "五所川原",
+      "name_kana": "ごしょがわら",
+      "name_translations": {
+        "en": "Goshogawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8089316,
+      "longitude": 140.4480325
+    },
+    {
+      "id": "jp_aomori_station_264226195",
+      "osm_id": 264226195,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "種差海岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanesashi-Kaigan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5070498,
+      "longitude": 141.6072643
+    },
+    {
+      "id": "jp_aomori_station_264226240",
+      "osm_id": 264226240,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "中田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7872729,
+      "longitude": 140.364149
+    },
+    {
+      "id": "jp_aomori_station_264226244",
+      "osm_id": 264226244,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "越水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koshimizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7873575,
+      "longitude": 140.2978654
+    },
+    {
+      "id": "jp_aomori_station_264226395",
+      "osm_id": 264226395,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "木造",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kizukuri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.802565,
+      "longitude": 140.388475
+    },
+    {
+      "id": "jp_aomori_station_264226424",
+      "osm_id": 264226424,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "風合瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7318298,
+      "longitude": 139.9945608
+    },
+    {
+      "id": "jp_aomori_station_264226488",
+      "osm_id": 264226488,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "北金ヶ沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Kanegasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7458106,
+      "longitude": 140.0955488
+    },
+    {
+      "id": "jp_aomori_station_264226665",
+      "osm_id": 264226665,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶴泊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsurudomari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7365993,
+      "longitude": 140.4373796
+    },
+    {
+      "id": "jp_aomori_station_264226725",
+      "osm_id": 264226725,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "千畳敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Senjōjiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7679416,
+      "longitude": 140.0551245
+    },
+    {
+      "id": "jp_aomori_station_264227159",
+      "osm_id": 264227159,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "林崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayashzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6751643,
+      "longitude": 140.4806331
+    },
+    {
+      "id": "jp_aomori_station_264227349",
+      "osm_id": 264227349,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥森田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Morita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7817786,
+      "longitude": 140.3384754
+    },
+    {
+      "id": "jp_aomori_station_264227357",
+      "osm_id": 264227357,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥柳田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Yanagita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7411591,
+      "longitude": 140.1250127
+    },
+    {
+      "id": "jp_aomori_station_264227359",
+      "osm_id": 264227359,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "驫木",
+      "name_kana": "とどろき",
+      "name_translations": {
+        "en": "Todoroki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7073745,
+      "longitude": 139.9832248
+    },
+    {
+      "id": "jp_aomori_station_264227484",
+      "osm_id": 264227484,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "白神岳登山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirakamidaketozanguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.512981,
+      "longitude": 139.9503412
+    },
+    {
+      "id": "jp_aomori_station_264227559",
+      "osm_id": 264227559,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "十二湖",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jūniko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5515624,
+      "longitude": 139.9422281
+    },
+    {
+      "id": "jp_aomori_station_264227563",
+      "osm_id": 264227563,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "艫作",
+      "name_kana": "へなし",
+      "name_translations": {
+        "en": "Henashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6082019,
+      "longitude": 139.8645962
+    },
+    {
+      "id": "jp_aomori_station_264227648",
+      "osm_id": 264227648,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "ウェスパ椿山",
+      "name_kana": "ウェスパつばきやま",
+      "name_translations": {
+        "en": "WeSPa-Tsubakiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5933058,
+      "longitude": 139.871245
+    },
+    {
+      "id": "jp_aomori_station_264227686",
+      "osm_id": 264227686,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大間越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmagoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4924738,
+      "longitude": 139.9501457
+    },
+    {
+      "id": "jp_aomori_station_264227688",
+      "osm_id": 264227688,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "松神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsukami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5347511,
+      "longitude": 139.946761
+    },
+    {
+      "id": "jp_aomori_station_264227789",
+      "osm_id": 264227789,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "横磯",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokoiso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6300899,
+      "longitude": 139.8913309
+    },
+    {
+      "id": "jp_aomori_station_264227791",
+      "osm_id": 264227791,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥沢辺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Sawabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.586154,
+      "longitude": 139.8954495
+    },
+    {
+      "id": "jp_aomori_station_264228069",
+      "osm_id": 264228069,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥岩崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Iwasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5831185,
+      "longitude": 139.9244996
+    },
+    {
+      "id": "jp_aomori_station_264461805",
+      "osm_id": 264461805,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "小栗山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koguriyama"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5643684,
+      "longitude": 140.4863414
+    },
+    {
+      "id": "jp_aomori_station_264461817",
+      "osm_id": 264461817,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "義塾高校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gijukukōkōmae"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5557908,
+      "longitude": 140.5276294
+    },
+    {
+      "id": "jp_aomori_station_264461875",
+      "osm_id": 264461875,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鯖石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sabaishi"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5356712,
+      "longitude": 140.552748
+    },
+    {
+      "id": "jp_aomori_station_264461890",
+      "osm_id": 264461890,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "宿川原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shukugawara"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.525061,
+      "longitude": 140.5576756
+    },
+    {
+      "id": "jp_aomori_station_264461931",
+      "osm_id": 264461931,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽大沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsugaru-Ōsawa"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5579188,
+      "longitude": 140.5163177
+    },
+    {
+      "id": "jp_aomori_station_264461933",
+      "osm_id": 264461933,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "聖愛中高前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seiaichūkōmae"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.576923,
+      "longitude": 140.472782
+    },
+    {
+      "id": "jp_aomori_station_264461969",
+      "osm_id": 264461969,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "石川プール前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishikawapūrumae"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5431741,
+      "longitude": 140.5504352
+    },
+    {
+      "id": "jp_aomori_station_264462137",
+      "osm_id": 264462137,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "境松",
+      "name_kana": "さかいまつ",
+      "name_translations": {
+        "en": "Sakaimatsu"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.6491481,
+      "longitude": 140.5760103
+    },
+    {
+      "id": "jp_aomori_station_264462140",
+      "osm_id": 264462140,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏農高校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakunōkōkōmae"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.602194,
+      "longitude": 140.564712
+    },
+    {
+      "id": "jp_aomori_station_264462141",
+      "osm_id": 264462141,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "運動公園前",
+      "name_kana": "うんどうこうえんまえ",
+      "name_translations": {
+        "en": "Undōkōenmae"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.5894754,
+      "longitude": 140.5033572
+    },
+    {
+      "id": "jp_aomori_station_264462177",
+      "osm_id": 264462177,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "平賀",
+      "name_kana": "ひらか",
+      "name_translations": {
+        "en": "Hiraka"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.5850906,
+      "longitude": 140.5610626
+    },
+    {
+      "id": "jp_aomori_station_264462216",
+      "osm_id": 264462216,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "新里",
+      "name_kana": "にさと",
+      "name_translations": {
+        "en": "Nisato"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.5873575,
+      "longitude": 140.5203011
+    },
+    {
+      "id": "jp_aomori_station_264462219",
+      "osm_id": 264462219,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "館田",
+      "name_kana": "たちた",
+      "name_translations": {
+        "en": "Tachita"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.58517,
+      "longitude": 140.5382608
+    },
+    {
+      "id": "jp_aomori_station_264462237",
+      "osm_id": 264462237,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "田舎館",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inakadate"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.6371912,
+      "longitude": 140.5710997
+    },
+    {
+      "id": "jp_aomori_station_264462275",
+      "osm_id": 264462275,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾上高校前",
+      "name_kana": "おのえこうこうまえ",
+      "name_translations": {
+        "en": "Onoekōkōmae"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.625486,
+      "longitude": 140.5774322
+    },
+    {
+      "id": "jp_aomori_station_264462308",
+      "osm_id": 264462308,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "弘前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirosaki"
+      },
+      "operator": "弘南鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.5985978,
+      "longitude": 140.4857687
+    },
+    {
+      "id": "jp_aomori_station_264462320",
+      "osm_id": 264462320,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽尾上",
+      "name_kana": "つがるおのえ",
+      "name_translations": {
+        "en": "Tsugaru-Onoe"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.614302,
+      "longitude": 140.5764866
+    },
+    {
+      "id": "jp_aomori_station_264877435",
+      "osm_id": 264877435,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大沢内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōzawanai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9396439,
+      "longitude": 140.4373349
+    },
+    {
+      "id": "jp_aomori_station_264877466",
+      "osm_id": 264877466,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "深郷田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukōda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.951035,
+      "longitude": 140.4409287
+    },
+    {
+      "id": "jp_aomori_station_264877467",
+      "osm_id": 264877467,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "川倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawakura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.925997,
+      "longitude": 140.443775
+    },
+    {
+      "id": "jp_aomori_station_264877488",
+      "osm_id": 264877488,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽中里",
+      "name_kana": "つがるなかさと",
+      "name_translations": {
+        "en": "Tsugaru-Nakasato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9646016,
+      "longitude": 140.4410935
+    },
+    {
+      "id": "jp_aomori_station_264877504",
+      "osm_id": 264877504,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "毘沙門",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bishamon"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8579612,
+      "longitude": 140.4777669
+    },
+    {
+      "id": "jp_aomori_station_264877518",
+      "osm_id": 264877518,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "十川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Togawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.817456,
+      "longitude": 140.4566692
+    },
+    {
+      "id": "jp_aomori_station_264877531",
+      "osm_id": 264877531,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽飯詰",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsugaru-Iizume"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.829504,
+      "longitude": 140.479389
+    },
+    {
+      "id": "jp_aomori_station_264877533",
+      "osm_id": 264877533,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦野公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashino-Kōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9123303,
+      "longitude": 140.4513781
+    },
+    {
+      "id": "jp_aomori_station_264877535",
+      "osm_id": 264877535,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽五所川原",
+      "name_kana": "つがるごしょがわら",
+      "name_translations": {
+        "en": "Tsugaru Goshogawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.809895,
+      "longitude": 140.4485834
+    },
+    {
+      "id": "jp_aomori_station_264877568",
+      "osm_id": 264877568,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "嘉瀬",
+      "name_kana": "かせ",
+      "name_translations": {
+        "en": "Kase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8813162,
+      "longitude": 140.4691368
+    },
+    {
+      "id": "jp_aomori_station_265838037",
+      "osm_id": 265838037,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "諏訪ノ平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suwanotaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4150219,
+      "longitude": 141.3048002
+    },
+    {
+      "id": "jp_aomori_station_265838210",
+      "osm_id": 265838210,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "剣吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kenyoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4487365,
+      "longitude": 141.3463976
+    },
+    {
+      "id": "jp_aomori_station_265838230",
+      "osm_id": 265838230,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "苫米地",
+      "name_kana": "とまべち",
+      "name_translations": {
+        "en": "Tomabechi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4669488,
+      "longitude": 141.3750713
+    },
+    {
+      "id": "jp_aomori_airport_415168449",
+      "osm_id": 415168449,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "青森空港",
+      "name_kana": "あおもりくうこう",
+      "name_translations": {
+        "en": "Aomori Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AOJ",
+      "latitude": 40.7340525,
+      "longitude": 140.689686
+    },
+    {
+      "id": "jp_aomori_airport_1042056016",
+      "osm_id": 1042056016,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "airport",
+      "subtype": "military",
+      "name": "八戸航空基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachinohe Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HHE",
+      "latitude": 40.5541994,
+      "longitude": 141.468868
+    },
+    {
+      "id": "jp_aomori_station_1504476443",
+      "osm_id": 1504476443,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "野内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nonai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8461439,
+      "longitude": 140.8169874
+    },
+    {
+      "id": "jp_aomori_station_2388548335",
+      "osm_id": 2388548335,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "体験坑道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Experience Tunnel"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.256716,
+      "longitude": 140.347691
+    },
+    {
+      "id": "jp_aomori_station_2388548343",
+      "osm_id": 2388548343,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "青函トンネル記念館",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seikan Tunnel Museum"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.2540359,
+      "longitude": 140.3471709
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_2418982638",
+      "osm_id": 2418982638,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "子ノ口港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Towadako Ferries"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4786341,
+      "longitude": 140.9398392
+    },
+    {
+      "id": "jp_aomori_bus_terminal_2418982718",
+      "osm_id": 2418982718,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ＪＲバス子ノ口駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4788296,
+      "longitude": 140.9407621
+    },
+    {
+      "id": "jp_aomori_station_2621455092",
+      "osm_id": 2621455092,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "浅虫温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asamushi-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.891134,
+      "longitude": 140.8624683
+    },
+    {
+      "id": "jp_aomori_station_2987233557",
+      "osm_id": 2987233557,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "田んぼアート",
+      "name_kana": "たんぼあーと",
+      "name_translations": {
+        "en": "Tamboāto"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.6325032,
+      "longitude": 140.5738861
+    },
+    {
+      "id": "jp_aomori_station_3665957894",
+      "osm_id": 3665957894,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "七戸十和田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shichinohe-Towada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7199949,
+      "longitude": 141.1534608
+    },
+    {
+      "id": "jp_aomori_station_3906277085",
+      "osm_id": 3906277085,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中小国",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakaoguni"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 41.0514769,
+      "longitude": 140.5971212
+    },
+    {
+      "id": "jp_aomori_station_3906277087",
+      "osm_id": 3906277087,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥津軽いまべつ",
+      "name_kana": "おくつがるいまべつ",
+      "name_translations": {
+        "en": "Okutsugaru-imabetsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.1449446,
+      "longitude": 140.5157284
+    },
+    {
+      "id": "jp_aomori_station_3906277088",
+      "osm_id": 3906277088,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "蟹田",
+      "name_kana": "かにた",
+      "name_translations": {
+        "en": "Kanita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.0383689,
+      "longitude": 140.6425216
+    },
+    {
+      "id": "jp_aomori_station_3920556721",
+      "osm_id": 3920556721,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "八戸",
+      "name_kana": "はちのへ",
+      "name_translations": {
+        "en": "Hachinohe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5093889,
+      "longitude": 141.4311833
+    },
+    {
+      "id": "jp_aomori_station_3920556724",
+      "osm_id": 3920556724,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "三沢",
+      "name_kana": "みさわ",
+      "name_translations": {
+        "en": "Misawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6693545,
+      "longitude": 141.3536492
+    },
+    {
+      "id": "jp_aomori_station_3920556726",
+      "osm_id": 3920556726,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "野辺地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Noheji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8554611,
+      "longitude": 141.1197284
+    },
+    {
+      "id": "jp_aomori_station_3921351174",
+      "osm_id": 3921351174,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "青森",
+      "name_kana": "あおもり",
+      "name_translations": {
+        "en": "Aomori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8299247,
+      "longitude": 140.7341384
+    },
+    {
+      "id": "jp_aomori_station_3921351175",
+      "osm_id": 3921351175,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "東青森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Aomori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8101734,
+      "longitude": 140.7826596
+    },
+    {
+      "id": "jp_aomori_station_3921351176",
+      "osm_id": 3921351176,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "小柳",
+      "name_kana": "こやなぎ",
+      "name_translations": {
+        "en": "Koyanagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8179921,
+      "longitude": 140.7979124
+    },
+    {
+      "id": "jp_aomori_station_3921351177",
+      "osm_id": 3921351177,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "筒井",
+      "name_kana": "つつい",
+      "name_translations": {
+        "en": "Tsutsui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8057042,
+      "longitude": 140.7694475
+    },
+    {
+      "id": "jp_aomori_station_3921354047",
+      "osm_id": 3921354047,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "新青森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Aomori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8282447,
+      "longitude": 140.6934733
+    },
+    {
+      "id": "jp_aomori_station_4032225420",
+      "osm_id": 4032225420,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥横浜",
+      "name_kana": "むつよこはま",
+      "name_translations": {
+        "en": "Mutsu-Yokohama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.0863776,
+      "longitude": 141.2498185
+    },
+    {
+      "id": "jp_aomori_station_4143883343",
+      "osm_id": 4143883343,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "弘前東高前",
+      "name_kana": "ひろさきひがしこうまえ",
+      "name_translations": {
+        "en": "Hirosaki-Higashikōmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5923016,
+      "longitude": 140.4884227
+    },
+    {
+      "id": "jp_aomori_bus_terminal_4830429653",
+      "osm_id": 4830429653,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "下北交通 大畑出張所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "下北交通",
+      "network": null,
+      "ref": null,
+      "latitude": 41.402265,
+      "longitude": 141.163671
+    },
+    {
+      "id": "jp_aomori_station_4837881282",
+      "osm_id": 4837881282,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "下北",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimokita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.2829772,
+      "longitude": 141.1897987
+    },
+    {
+      "id": "jp_aomori_station_4837881283",
+      "osm_id": 4837881283,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大湊",
+      "name_kana": "おおみなと",
+      "name_translations": {
+        "en": "Ominato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.2804269,
+      "longitude": 141.1615289
+    },
+    {
+      "id": "jp_aomori_station_4837932838",
+      "osm_id": 4837932838,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "三厩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minmaya"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 41.1854265,
+      "longitude": 140.4444712
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_5341050988",
+      "osm_id": 5341050988,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "八戸港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.54875,
+      "longitude": 141.5069649
+    },
+    {
+      "id": "jp_aomori_station_5357100607",
+      "osm_id": 5357100607,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥市川",
+      "name_kana": "むついちかわ",
+      "name_translations": {
+        "en": "Mutsu-Ichikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5628103,
+      "longitude": 141.4393199
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_5388769310",
+      "osm_id": 5388769310,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "八戸港観光遊覧船 はやぶさⅡ",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5357246,
+      "longitude": 141.5573512
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_5478278681",
+      "osm_id": 5478278681,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "脇野沢港フェリーターミナル",
+      "name_kana": "わきのさわふぇりーたーみなろ",
+      "name_translations": {
+        "en": "Wanikosawa Ferry Terminal"
+      },
+      "operator": "むつ湾フェリー株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 41.1447712,
+      "longitude": 140.8267211
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_5478278682",
+      "osm_id": 5478278682,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "蟹田港フェリーターミナル",
+      "name_kana": "かにたふぇりーたーみなる",
+      "name_translations": {
+        "en": "Kanita Ferry Terminal"
+      },
+      "operator": "むつ湾フェリー株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 41.0492005,
+      "longitude": 140.6466261
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_5604775723",
+      "osm_id": 5604775723,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "休屋港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4267979,
+      "longitude": 140.8915419
+    },
+    {
+      "id": "jp_aomori_bus_terminal_5850325373",
+      "osm_id": 5850325373,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八戸ラピアバスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5214764,
+      "longitude": 141.5029733
+    },
+    {
+      "id": "jp_aomori_station_5994202571",
+      "osm_id": 5994202571,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "北野辺地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Noheji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8711076,
+      "longitude": 141.1342547
+    },
+    {
+      "id": "jp_aomori_station_6067523339",
+      "osm_id": 6067523339,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "撫牛子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naijoshi"
+      },
+      "operator": "JR東日本",
+      "network": null,
+      "ref": null,
+      "latitude": 40.6218286,
+      "longitude": 140.4980715
+    },
+    {
+      "id": "jp_aomori_station_6110900832",
+      "osm_id": 6110900832,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大鰐温泉",
+      "name_kana": "おおわにおんせん",
+      "name_translations": {
+        "en": "Owani-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.521471,
+      "longitude": 140.5670401
+    },
+    {
+      "id": "jp_aomori_station_6110900862",
+      "osm_id": 6110900862,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "長峰",
+      "name_kana": "ながみね",
+      "name_translations": {
+        "en": "Nagamine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5158944,
+      "longitude": 140.6031226
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6209385475",
+      "osm_id": 6209385475,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大杉平バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4995065,
+      "longitude": 141.4815163
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6209413816",
+      "osm_id": 6209413816,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西高校前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5114504,
+      "longitude": 141.4245675
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6212108508",
+      "osm_id": 6212108508,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ラピアバスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5223444,
+      "longitude": 141.5061134
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6212108511",
+      "osm_id": 6212108511,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八戸営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "十和田観光電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 40.5247185,
+      "longitude": 141.5135012
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6215324772",
+      "osm_id": 6215324772,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "旭ヶ丘団地",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4979881,
+      "longitude": 141.5354953
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6215519495",
+      "osm_id": 6215519495,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "是川団地",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4697698,
+      "longitude": 141.4973639
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6217832129",
+      "osm_id": 6217832129,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "平庭",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5028486,
+      "longitude": 141.5637002
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6359218497",
+      "osm_id": 6359218497,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "県立郷土館前(ねぶたん号)バス停",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8271097,
+      "longitude": 140.7485093
+    },
+    {
+      "id": "jp_aomori_station_6374717354",
+      "osm_id": 6374717354,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大鰐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōwani"
+      },
+      "operator": "弘南鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 40.5218329,
+      "longitude": 140.5670254
+    },
+    {
+      "id": "jp_aomori_bus_terminal_6725229486",
+      "osm_id": 6725229486,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "下北交通 むつバスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.2962573,
+      "longitude": 141.214204
+    },
+    {
+      "id": "jp_aomori_station_7029984731",
+      "osm_id": 7029984731,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大蛇",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oja"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4671517,
+      "longitude": 141.6509651
+    },
+    {
+      "id": "jp_aomori_bus_terminal_7611904361",
+      "osm_id": 7611904361,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岬台団地",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5184401,
+      "longitude": 141.5660986
+    },
+    {
+      "id": "jp_aomori_station_7668030814",
+      "osm_id": 7668030814,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "下田",
+      "name_kana": "しもだ",
+      "name_translations": {
+        "en": "Shimoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5920089,
+      "longitude": 141.4077142
+    },
+    {
+      "id": "jp_aomori_station_7996111597",
+      "osm_id": 7996111597,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroishi"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道弘南線",
+      "ref": null,
+      "latitude": 40.6482601,
+      "longitude": 140.5917659
+    },
+    {
+      "id": "jp_aomori_station_8111211131",
+      "osm_id": 8111211131,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "松木平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsukitai"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5605678,
+      "longitude": 140.4972778
+    },
+    {
+      "id": "jp_aomori_station_8120213658",
+      "osm_id": 8120213658,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸奥鶴田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mutsu-Tsuruda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7579873,
+      "longitude": 140.4354121
+    },
+    {
+      "id": "jp_aomori_station_8549548463",
+      "osm_id": 8549548463,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "目時",
+      "name_kana": "めとき",
+      "name_translations": {
+        "en": "Metoki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.3516361,
+      "longitude": 141.2894931
+    },
+    {
+      "id": "jp_aomori_station_8556047792",
+      "osm_id": 8556047792,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大川平",
+      "name_kana": "おおかわだい",
+      "name_translations": {
+        "en": "Okawadai"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 41.1631519,
+      "longitude": 140.507479
+    },
+    {
+      "id": "jp_aomori_station_8556047793",
+      "osm_id": 8556047793,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "今別",
+      "name_kana": "いまべつ",
+      "name_translations": {
+        "en": "Imabetsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.1796735,
+      "longitude": 140.4905047
+    },
+    {
+      "id": "jp_aomori_station_8556047794",
+      "osm_id": 8556047794,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽浜名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsugaru-Hamana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.1806243,
+      "longitude": 140.4716366
+    },
+    {
+      "id": "jp_aomori_station_8556065059",
+      "osm_id": 8556065059,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "jr",
+      "name": "津軽二股",
+      "name_kana": "つがるふたまた",
+      "name_translations": {
+        "en": "Tsugaru-futamata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 41.145593,
+      "longitude": 140.5144112
+    },
+    {
+      "id": "jp_aomori_station_8558472727",
+      "osm_id": 8558472727,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "大平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōdai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.0657912,
+      "longitude": 140.5594227
+    },
+    {
+      "id": "jp_aomori_station_8648840815",
+      "osm_id": 8648840815,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "浪岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7105259,
+      "longitude": 140.5809152
+    },
+    {
+      "id": "jp_aomori_station_8649219868",
+      "osm_id": 8649219868,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽湯の沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsugaru-Yunosawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.441701,
+      "longitude": 140.6324042
+    },
+    {
+      "id": "jp_aomori_station_8649219943",
+      "osm_id": 8649219943,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "碇ヶ関",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikarigaseki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4793766,
+      "longitude": 140.6223178
+    },
+    {
+      "id": "jp_aomori_station_8651588732",
+      "osm_id": 8651588732,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "川部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6469983,
+      "longitude": 140.5215325
+    },
+    {
+      "id": "jp_aomori_station_9122714690",
+      "osm_id": 9122714690,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "深浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukaura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6504406,
+      "longitude": 139.9294496
+    },
+    {
+      "id": "jp_aomori_station_9561831167",
+      "osm_id": 9561831167,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": ":五農校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gonoko-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8212196,
+      "longitude": 140.4786852
+    },
+    {
+      "id": "jp_aomori_station_9764394383",
+      "osm_id": 9764394383,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "千年",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chitose"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5671119,
+      "longitude": 140.4806278
+    },
+    {
+      "id": "jp_aomori_station_9818579462",
+      "osm_id": 9818579462,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "金木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9031521,
+      "longitude": 140.4598913
+    },
+    {
+      "id": "jp_aomori_station_9834642569",
+      "osm_id": 9834642569,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "中央弘前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chūō-Hirosaki"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5994019,
+      "longitude": 140.4724581
+    },
+    {
+      "id": "jp_aomori_station_9834717804",
+      "osm_id": 9834717804,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "弘高下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirokōshita"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.592987,
+      "longitude": 140.4681793
+    },
+    {
+      "id": "jp_aomori_station_9838910129",
+      "osm_id": 9838910129,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "弘前学院大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirosaki Gaukuin Dai Mae"
+      },
+      "operator": "弘南鉄道",
+      "network": "弘南鉄道大鰐線",
+      "ref": null,
+      "latitude": 40.5835007,
+      "longitude": 140.4705437
+    },
+    {
+      "id": "jp_aomori_station_9840075731",
+      "osm_id": 9840075731,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "狩場沢",
+      "name_kana": "かりばさわ",
+      "name_translations": {
+        "en": "Karibasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.9005085,
+      "longitude": 141.0711989
+    },
+    {
+      "id": "jp_aomori_station_11053583218",
+      "osm_id": 11053583218,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "北常盤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Tokiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.6704293,
+      "longitude": 140.5436808
+    },
+    {
+      "id": "jp_aomori_station_11053583220",
+      "osm_id": 11053583220,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶴ヶ坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsurugasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.7914725,
+      "longitude": 140.6349161
+    },
+    {
+      "id": "jp_aomori_station_12796004250",
+      "osm_id": 12796004250,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "三戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sannohe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.395603,
+      "longitude": 141.2732658
+    },
+    {
+      "id": "jp_aomori_station_12796042925",
+      "osm_id": 12796042925,
+      "osm_type": "node",
+      "prefecture_id": "jp_aomori",
+      "type": "station",
+      "subtype": "private",
+      "name": "北高岩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitatakaiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4755165,
+      "longitude": 141.4064945
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_26618394",
+      "osm_id": 26618394,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "津軽海峡フェリー青森ターミナル",
+      "name_kana": "つがるかいきょうふぇりーあおもりたーみなる",
+      "name_translations": {
+        "en": "Tsugaru Kaikyō Ferry Aomori Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8461679,
+      "longitude": 140.7161207
+    },
+    {
+      "id": "jp_aomori_airport_57008923",
+      "osm_id": 57008923,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "三沢空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misawa Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "MSJ",
+      "latitude": 40.7013585,
+      "longitude": 141.3688222
+    },
+    {
+      "id": "jp_aomori_bus_terminal_233523108",
+      "osm_id": 233523108,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "十和田湖駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JRHouse Towada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4265697,
+      "longitude": 140.894271
+    },
+    {
+      "id": "jp_aomori_airport_245451491",
+      "osm_id": 245451491,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "airport",
+      "subtype": "military",
+      "name": "海上自衛隊 八戸航空基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JMSDF Hachinohe Air Base"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HHE",
+      "latitude": 40.551525,
+      "longitude": 141.4672316
+    },
+    {
+      "id": "jp_aomori_bus_terminal_350272623",
+      "osm_id": 350272623,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "旭ヶ丘営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "八戸市交通部",
+      "network": null,
+      "ref": null,
+      "latitude": 40.5028164,
+      "longitude": 141.5380981
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_352634083",
+      "osm_id": 352634083,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "青函フェリー青森ターミナル",
+      "name_kana": "せいかんふぇりーあおもりたーみなる",
+      "name_translations": {
+        "en": "Seikan Ferry Aomori Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8438885,
+      "longitude": 140.7158261
+    },
+    {
+      "id": "jp_aomori_airport_421590433",
+      "osm_id": 421590433,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "大湊航空基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ominato Airbase"
+      },
+      "operator": "JMSDF",
+      "network": null,
+      "ref": "RJSO",
+      "latitude": 41.2342211,
+      "longitude": 141.1357465
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_546943118",
+      "osm_id": 546943118,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "津軽海峡フェリー 大間ターミナル",
+      "name_kana": "つがるかいきょうふぇりーおおまたーみなる",
+      "name_translations": {
+        "en": "Tsugaru Kaikyō Ferry Ōma Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 41.5261676,
+      "longitude": 140.8988507
+    },
+    {
+      "id": "jp_aomori_bus_terminal_561954771",
+      "osm_id": 561954771,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八戸市交通部旭ヶ丘営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5023753,
+      "longitude": 141.5374666
+    },
+    {
+      "id": "jp_aomori_bus_terminal_589480820",
+      "osm_id": 589480820,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "弘南バス　五所川原駅前案内所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "弘南バス",
+      "network": null,
+      "ref": null,
+      "latitude": 40.8095078,
+      "longitude": 140.4473822
+    },
+    {
+      "id": "jp_aomori_bus_terminal_805981137",
+      "osm_id": 805981137,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "南部バス 三戸営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.3717876,
+      "longitude": 141.2442322
+    },
+    {
+      "id": "jp_aomori_bus_terminal_1041851892",
+      "osm_id": 1041851892,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "南部バス 五戸駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.5239799,
+      "longitude": 141.3076876
+    },
+    {
+      "id": "jp_aomori_bus_terminal_1041851899",
+      "osm_id": 1041851899,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "南部バス 八戸営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4849548,
+      "longitude": 141.4792124
+    },
+    {
+      "id": "jp_aomori_ferry_terminal_1177158419",
+      "osm_id": 1177158419,
+      "osm_type": "way",
+      "prefecture_id": "jp_aomori",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "クルーズターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.8326585,
+      "longitude": 140.7461828
+    },
+    {
+      "id": "jp_aomori_airport_6723874",
+      "osm_id": 6723874,
+      "osm_type": "relation",
+      "prefecture_id": "jp_aomori",
+      "type": "airport",
+      "subtype": "military",
+      "name": "Misawa Air Base - 三沢飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misawa Air Base"
+      },
+      "operator": "Japan Air Self-Defense Force;US Air Force;US Navy;US Army",
+      "network": null,
+      "ref": "MSJ",
+      "latitude": 40.7079796,
+      "longitude": 141.3544758
+    }
+  ]
+}

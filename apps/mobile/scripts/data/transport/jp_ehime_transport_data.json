@@ -1,0 +1,3600 @@
+{
+  "fetchedAt": "2025-12-24T05:56:41.061Z",
+  "prefecture_id": "jp_ehime",
+  "prefecture_name": "愛媛県",
+  "stats": {
+    "station": 124,
+    "airport": 1,
+    "ferry_terminal": 64,
+    "bus_terminal": 16,
+    "total": 205
+  },
+  "data": [
+    {
+      "id": "jp_ehime_station_265003238",
+      "osm_id": 265003238,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "真土",
+      "name_kana": "まつち",
+      "name_translations": {
+        "en": "Matsuchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2240858,
+      "longitude": 132.7453372
+    },
+    {
+      "id": "jp_ehime_station_265005223",
+      "osm_id": 265005223,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "吉野生",
+      "name_kana": "よしのぶ",
+      "name_translations": {
+        "en": "Yoshinobu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2245719,
+      "longitude": 132.7290605
+    },
+    {
+      "id": "jp_ehime_station_265005437",
+      "osm_id": 265005437,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "関川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekigawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y27",
+      "latitude": 33.9556979,
+      "longitude": 133.3932199
+    },
+    {
+      "id": "jp_ehime_station_265005439",
+      "osm_id": 265005439,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "赤星",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akaboshi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y25",
+      "latitude": 33.9667245,
+      "longitude": 133.4561713
+    },
+    {
+      "id": "jp_ehime_station_265005657",
+      "osm_id": 265005657,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "深田",
+      "name_kana": "ふかた",
+      "name_translations": {
+        "en": "Fukata"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2676636,
+      "longitude": 132.6603709
+    },
+    {
+      "id": "jp_ehime_station_265005713",
+      "osm_id": 265005713,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊予宮野下",
+      "name_kana": "いよみやのした",
+      "name_translations": {
+        "en": "Iyo-Miyanoshita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2888721,
+      "longitude": 132.6057654
+    },
+    {
+      "id": "jp_ehime_station_265005779",
+      "osm_id": 265005779,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "務田",
+      "name_kana": "むでん",
+      "name_translations": {
+        "en": "Muden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2828238,
+      "longitude": 132.6002142
+    },
+    {
+      "id": "jp_ehime_station_265005938",
+      "osm_id": 265005938,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "近永",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chikanaga"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2556258,
+      "longitude": 132.676551
+    },
+    {
+      "id": "jp_ehime_station_265005942",
+      "osm_id": 265005942,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "二名",
+      "name_kana": "ふたな",
+      "name_translations": {
+        "en": "Futana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2915304,
+      "longitude": 132.6290749
+    },
+    {
+      "id": "jp_ehime_station_265006131",
+      "osm_id": 265006131,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大内",
+      "name_kana": "おおうち",
+      "name_translations": {
+        "en": "Ōuchi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2869174,
+      "longitude": 132.642351
+    },
+    {
+      "id": "jp_ehime_station_265006881",
+      "osm_id": 265006881,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "玉之江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamanoe"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y35",
+      "latitude": 33.9125628,
+      "longitude": 133.0990325
+    },
+    {
+      "id": "jp_ehime_station_265007014",
+      "osm_id": 265007014,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予小松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Komatsu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y34",
+      "latitude": 33.897657,
+      "longitude": 133.1167046
+    },
+    {
+      "id": "jp_ehime_station_265007238",
+      "osm_id": 265007238,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予三芳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Miyoshi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y37",
+      "latitude": 33.9543536,
+      "longitude": 133.0643307
+    },
+    {
+      "id": "jp_ehime_station_265007647",
+      "osm_id": 265007647,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予桜井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Sakurai"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y38",
+      "latitude": 34.0119793,
+      "longitude": 133.0358368
+    },
+    {
+      "id": "jp_ehime_station_265009422",
+      "osm_id": 265009422,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予氷見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Himi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y33",
+      "latitude": 33.8967955,
+      "longitude": 133.1307552
+    },
+    {
+      "id": "jp_ehime_station_265040980",
+      "osm_id": 265040980,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "牛渕",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushibuchi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY20",
+      "latitude": 33.7952114,
+      "longitude": 132.8561079
+    },
+    {
+      "id": "jp_ehime_station_265041001",
+      "osm_id": 265041001,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "田窪",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanokubo"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY21",
+      "latitude": 33.7929531,
+      "longitude": 132.8654144
+    },
+    {
+      "id": "jp_ehime_station_265041162",
+      "osm_id": 265041162,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "土橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dobashi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY25",
+      "latitude": 33.8327068,
+      "longitude": 132.7562758
+    },
+    {
+      "id": "jp_ehime_station_265041175",
+      "osm_id": 265041175,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "新川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinkawa"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY33",
+      "latitude": 33.7718784,
+      "longitude": 132.7041423
+    },
+    {
+      "id": "jp_ehime_station_265041184",
+      "osm_id": 265041184,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "松前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masaki"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY31",
+      "latitude": 33.7861048,
+      "longitude": 132.7050016
+    },
+    {
+      "id": "jp_ehime_station_265041210",
+      "osm_id": 265041210,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "地蔵町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jizomachi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY32",
+      "latitude": 33.779555,
+      "longitude": 132.7041954
+    },
+    {
+      "id": "jp_ehime_station_265041261",
+      "osm_id": 265041261,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "大手町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otemachi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY09",
+      "latitude": 33.8399141,
+      "longitude": 132.7553103
+    },
+    {
+      "id": "jp_ehime_station_265041263",
+      "osm_id": 265041263,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "港山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minatoyama"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY03",
+      "latitude": 33.8695183,
+      "longitude": 132.7132546
+    },
+    {
+      "id": "jp_ehime_station_265041360",
+      "osm_id": 265041360,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "高浜",
+      "name_kana": "たかはま",
+      "name_translations": {
+        "en": "Takahama"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY01",
+      "latitude": 33.8834303,
+      "longitude": 132.702036
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_538722602",
+      "osm_id": 538722602,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "岡村港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okamura Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1844812,
+      "longitude": 132.8839061
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_538722789",
+      "osm_id": 538722789,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大下港",
+      "name_kana": "おおげこう",
+      "name_translations": {
+        "en": "Ohge Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1888011,
+      "longitude": 132.9221852
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_538722808",
+      "osm_id": 538722808,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小大下港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1903785,
+      "longitude": 132.8995807
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_540525959",
+      "osm_id": 540525959,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小漕港 (Okogi)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2788986,
+      "longitude": 133.1449203
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_540530609",
+      "osm_id": 540530609,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "下田水港 (Shitadami)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1277266,
+      "longitude": 133.0198975
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_541637897",
+      "osm_id": 541637897,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "上弓削港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2772634,
+      "longitude": 133.2097472
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_562871663",
+      "osm_id": 562871663,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "生名港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2665548,
+      "longitude": 133.1855753
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_929957121",
+      "osm_id": 929957121,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三崎港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misaki Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.3903867,
+      "longitude": 132.117568
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_1199540497",
+      "osm_id": 1199540497,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "今治港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imabari Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0699838,
+      "longitude": 133.0048984
+    },
+    {
+      "id": "jp_ehime_bus_terminal_3152610045",
+      "osm_id": 3152610045,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西条駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.912837,
+      "longitude": 133.1873332
+    },
+    {
+      "id": "jp_ehime_bus_terminal_3170654038",
+      "osm_id": 3170654038,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄バス 北条バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9796167,
+      "longitude": 132.7766807
+    },
+    {
+      "id": "jp_ehime_station_3598694803",
+      "osm_id": 3598694803,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "松山市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuyama City"
+      },
+      "operator": "伊予鉄道",
+      "network": "伊予鉄",
+      "ref": "IY10",
+      "latitude": 33.8356333,
+      "longitude": 132.7615666
+    },
+    {
+      "id": "jp_ehime_station_3631894947",
+      "osm_id": 3631894947,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "道後温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dogo Onsen"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "24",
+      "latitude": 33.8504258,
+      "longitude": 132.7850817
+    },
+    {
+      "id": "jp_ehime_station_3634551862",
+      "osm_id": 3634551862,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "いよ立花",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Tachibana"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY12",
+      "latitude": 33.8275199,
+      "longitude": 132.7734245
+    },
+    {
+      "id": "jp_ehime_station_3634554436",
+      "osm_id": 3634554436,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "三津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsu"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY04",
+      "latitude": 33.8638379,
+      "longitude": 132.7197282
+    },
+    {
+      "id": "jp_ehime_station_3634554437",
+      "osm_id": 3634554437,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "久米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kume"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY15",
+      "latitude": 33.8160825,
+      "longitude": 132.8045267
+    },
+    {
+      "id": "jp_ehime_station_3634554438",
+      "osm_id": 3634554438,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "北久米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Kume"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY14",
+      "latitude": 33.8192662,
+      "longitude": 132.7987052
+    },
+    {
+      "id": "jp_ehime_station_3634554439",
+      "osm_id": 3634554439,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "古町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komachi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY08;07",
+      "latitude": 33.847224,
+      "longitude": 132.755097
+    },
+    {
+      "id": "jp_ehime_station_3634554440",
+      "osm_id": 3634554440,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "山西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamanishi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY05",
+      "latitude": 33.855332,
+      "longitude": 132.7243161
+    },
+    {
+      "id": "jp_ehime_station_3634554441",
+      "osm_id": 3634554441,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "平井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirai"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY17",
+      "latitude": 33.8085405,
+      "longitude": 132.8289599
+    },
+    {
+      "id": "jp_ehime_station_3634554442",
+      "osm_id": 3634554442,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "愛大医学部南口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ehime Univ. Hospital"
+      },
+      "operator": "伊予鉄道",
+      "network": "横河原線",
+      "ref": "IY23",
+      "latitude": 33.7983407,
+      "longitude": 132.8791635
+    },
+    {
+      "id": "jp_ehime_station_3634554443",
+      "osm_id": 3634554443,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umenomoto"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY18",
+      "latitude": 33.8013391,
+      "longitude": 132.8387599
+    },
+    {
+      "id": "jp_ehime_station_3634554444",
+      "osm_id": 3634554444,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅津寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Baishinji"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY02",
+      "latitude": 33.8749701,
+      "longitude": 132.7074802
+    },
+    {
+      "id": "jp_ehime_station_3634554445",
+      "osm_id": 3634554445,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "横河原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokogawara"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY24",
+      "latitude": 33.8033319,
+      "longitude": 132.8842865
+    },
+    {
+      "id": "jp_ehime_station_3634554446",
+      "osm_id": 3634554446,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "牛渕団地前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushibuchi-Danchi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY19",
+      "latitude": 33.7977433,
+      "longitude": 132.846049
+    },
+    {
+      "id": "jp_ehime_station_3634554447",
+      "osm_id": 3634554447,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "石手川公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishitegawa Park"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY11",
+      "latitude": 33.8309855,
+      "longitude": 132.7695935
+    },
+    {
+      "id": "jp_ehime_station_3634554448",
+      "osm_id": 3634554448,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "福音寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuonji"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY13",
+      "latitude": 33.8227261,
+      "longitude": 132.7882293
+    },
+    {
+      "id": "jp_ehime_station_3634554449",
+      "osm_id": 3634554449,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "衣山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinuyama"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY07",
+      "latitude": 33.8522426,
+      "longitude": 132.7441944
+    },
+    {
+      "id": "jp_ehime_station_3634554450",
+      "osm_id": 3634554450,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "西衣山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Kinuyama"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY06",
+      "latitude": 33.8501712,
+      "longitude": 132.7340067
+    },
+    {
+      "id": "jp_ehime_station_3634554451",
+      "osm_id": 3634554451,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "見奈良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minara"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY22",
+      "latitude": 33.7927396,
+      "longitude": 132.8733774
+    },
+    {
+      "id": "jp_ehime_station_3634554452",
+      "osm_id": 3634554452,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "鷹ノ子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takanoko"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY16",
+      "latitude": 33.8126501,
+      "longitude": 132.8149172
+    },
+    {
+      "id": "jp_ehime_station_3637536523",
+      "osm_id": 3637536523,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "余戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yogo"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY27",
+      "latitude": 33.8160352,
+      "longitude": 132.7336634
+    },
+    {
+      "id": "jp_ehime_station_3637536524",
+      "osm_id": 3637536524,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "古泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koizumi"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY30",
+      "latitude": 33.7926256,
+      "longitude": 132.7172912
+    },
+    {
+      "id": "jp_ehime_station_3637536525",
+      "osm_id": 3637536525,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "土居田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Doida"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY26",
+      "latitude": 33.8241385,
+      "longitude": 132.7441374
+    },
+    {
+      "id": "jp_ehime_station_3637536526",
+      "osm_id": 3637536526,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okada"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY29",
+      "latitude": 33.7991278,
+      "longitude": 132.7241135
+    },
+    {
+      "id": "jp_ehime_station_3637536527",
+      "osm_id": 3637536527,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "郡中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gunchu"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY34",
+      "latitude": 33.7606162,
+      "longitude": 132.7039005
+    },
+    {
+      "id": "jp_ehime_station_3637536528",
+      "osm_id": 3637536528,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "郡中港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gunchu Port"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY35",
+      "latitude": 33.756067,
+      "longitude": 132.7021151
+    },
+    {
+      "id": "jp_ehime_station_3637536529",
+      "osm_id": 3637536529,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "鎌田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamata"
+      },
+      "operator": "伊予鉄道",
+      "network": null,
+      "ref": "IY28",
+      "latitude": 33.8104328,
+      "longitude": 132.729925
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_3732787121",
+      "osm_id": 3732787121,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宗方港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Munakata Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2031092,
+      "longitude": 132.9428741
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_3769922205",
+      "osm_id": 3769922205,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "生名立石港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2776919,
+      "longitude": 133.1776752
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_3770398179",
+      "osm_id": 3770398179,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "長江港",
+      "name_kana": "ながえこう",
+      "name_translations": {
+        "en": "Nagae Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2712287,
+      "longitude": 133.158693
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_4072844948",
+      "osm_id": 4072844948,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "八幡浜港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yawatahama"
+      },
+      "operator": null,
+      "network": "宇和島運輸・オレンジフェリー",
+      "ref": null,
+      "latitude": 33.4584579,
+      "longitude": 132.4147345
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_4099487638",
+      "osm_id": 4099487638,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Honkushima",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2218397,
+      "longitude": 132.5229106
+    },
+    {
+      "id": "jp_ehime_bus_terminal_4163618046",
+      "osm_id": 4163618046,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR宇和島駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JR Uwajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2256775,
+      "longitude": 132.5679682
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_4375179489",
+      "osm_id": 4375179489,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三津浜港FT",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8657525,
+      "longitude": 132.7094867
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_4722052343",
+      "osm_id": 4722052343,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "魚島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1790033,
+      "longitude": 133.3222006
+    },
+    {
+      "id": "jp_ehime_station_4917630471",
+      "osm_id": 4917630471,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "うちよけ",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8991134,
+      "longitude": 133.3082159
+    },
+    {
+      "id": "jp_ehime_station_4917630474",
+      "osm_id": 4917630474,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "端出場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9017047,
+      "longitude": 133.3093058
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_4988048814",
+      "osm_id": 4988048814,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "津島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1539936,
+      "longitude": 133.0059617
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_4988054118",
+      "osm_id": 4988054118,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "幸港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1502054,
+      "longitude": 133.0397987
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_5001159823",
+      "osm_id": 5001159823,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1228666,
+      "longitude": 132.9765278
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_5456663930",
+      "osm_id": 5456663930,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "来島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1169595,
+      "longitude": 132.9702359
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_5456692612",
+      "osm_id": 5456692612,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宮窪港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1756478,
+      "longitude": 133.0775353
+    },
+    {
+      "id": "jp_ehime_bus_terminal_6230975698",
+      "osm_id": 6230975698,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄南予バス 久万営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "伊予鉄南予バス",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6599691,
+      "longitude": 132.9000422
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_6237423763",
+      "osm_id": 6237423763,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "盛港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakari Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2940428,
+      "longitude": 133.028125
+    },
+    {
+      "id": "jp_ehime_bus_terminal_6376107787",
+      "osm_id": 6376107787,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR四国バス 久万高原駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6550647,
+      "longitude": 132.9016978
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_6719062131",
+      "osm_id": 6719062131,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "尾浦港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oura Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1991832,
+      "longitude": 133.1035728
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_6982128561",
+      "osm_id": 6982128561,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鵜島港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushima Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1831449,
+      "longitude": 133.0879353
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_6982128577",
+      "osm_id": 6982128577,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "木浦港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinoura Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2052641,
+      "longitude": 133.1187262
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_6996341330",
+      "osm_id": 6996341330,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "友浦港",
+      "name_kana": "ともうらこう",
+      "name_translations": {
+        "en": "Tomoura Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1522952,
+      "longitude": 133.0826774
+    },
+    {
+      "id": "jp_ehime_station_7733520879",
+      "osm_id": 7733520879,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "光洋台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōyōdai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y51",
+      "latitude": 33.9269781,
+      "longitude": 132.761095
+    },
+    {
+      "id": "jp_ehime_station_7733520880",
+      "osm_id": 7733520880,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊予和気",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Wake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y53",
+      "latitude": 33.8896309,
+      "longitude": 132.7407149
+    },
+    {
+      "id": "jp_ehime_station_7795593133",
+      "osm_id": 7795593133,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予横田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Yokota"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U03",
+      "latitude": 33.7727704,
+      "longitude": 132.726801
+    },
+    {
+      "id": "jp_ehime_station_7795593134",
+      "osm_id": 7795593134,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuyama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y55;U00",
+      "latitude": 33.8399303,
+      "longitude": 132.7507395
+    },
+    {
+      "id": "jp_ehime_station_7795593135",
+      "osm_id": 7795593135,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南伊予",
+      "name_kana": "みなみいよ",
+      "name_translations": {
+        "en": "Minami-Iyo"
+      },
+      "operator": "四国旅客鉄道株式会社",
+      "network": "JR",
+      "ref": "U02-1",
+      "latitude": 33.7776893,
+      "longitude": 132.7387684
+    },
+    {
+      "id": "jp_ehime_station_7795593136",
+      "osm_id": 7795593136,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北伊予",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Iyo"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U02",
+      "latitude": 33.7877056,
+      "longitude": 132.7489528
+    },
+    {
+      "id": "jp_ehime_station_7795593137",
+      "osm_id": 7795593137,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予市",
+      "name_kana": "いよし",
+      "name_translations": {
+        "en": "Iyoshi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U05",
+      "latitude": 33.7554599,
+      "longitude": 132.7023293
+    },
+    {
+      "id": "jp_ehime_station_7795593138",
+      "osm_id": 7795593138,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "三津浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsuhama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y54",
+      "latitude": 33.8624691,
+      "longitude": 132.7287751
+    },
+    {
+      "id": "jp_ehime_station_7795593139",
+      "osm_id": 7795593139,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鳥ノ木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Torinoki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U04",
+      "latitude": 33.7638599,
+      "longitude": 132.7114843
+    },
+    {
+      "id": "jp_ehime_station_7795593140",
+      "osm_id": 7795593140,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市坪",
+      "name_kana": "いちつぼ",
+      "name_translations": {
+        "en": "Ichitsubo"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U01",
+      "latitude": 33.8095121,
+      "longitude": 132.7492846
+    },
+    {
+      "id": "jp_ehime_station_7825993156",
+      "osm_id": 7825993156,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予富田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Tomita"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y39",
+      "latitude": 34.0364431,
+      "longitude": 133.0091196
+    },
+    {
+      "id": "jp_ehime_station_7826015588",
+      "osm_id": 7826015588,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "今治",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imabari"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y40",
+      "latitude": 34.0641845,
+      "longitude": 132.9936721
+    },
+    {
+      "id": "jp_ehime_station_7826015589",
+      "osm_id": 7826015589,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊予大平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Ōhira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7160026,
+      "longitude": 132.7085634
+    },
+    {
+      "id": "jp_ehime_station_7826453326",
+      "osm_id": 7826453326,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "柳原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanagihara"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y49",
+      "latitude": 33.953534,
+      "longitude": 132.7735252
+    },
+    {
+      "id": "jp_ehime_station_7826453327",
+      "osm_id": 7826453327,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "粟井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y50",
+      "latitude": 33.9427301,
+      "longitude": 132.7705353
+    },
+    {
+      "id": "jp_ehime_station_7826453328",
+      "osm_id": 7826453328,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "堀江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Horie"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y52",
+      "latitude": 33.9058337,
+      "longitude": 132.7534287
+    },
+    {
+      "id": "jp_ehime_station_7832077479",
+      "osm_id": 7832077479,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "菊間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kikuma"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y45",
+      "latitude": 34.0333295,
+      "longitude": 132.8408433
+    },
+    {
+      "id": "jp_ehime_station_7832077480",
+      "osm_id": 7832077480,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予亀岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Kameoka"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y44",
+      "latitude": 34.0538303,
+      "longitude": 132.8741686
+    },
+    {
+      "id": "jp_ehime_station_7832077481",
+      "osm_id": 7832077481,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōnishi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y43",
+      "latitude": 34.0661031,
+      "longitude": 132.9291502
+    },
+    {
+      "id": "jp_ehime_station_7832077482",
+      "osm_id": 7832077482,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "波方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namikata"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y42",
+      "latitude": 34.0951639,
+      "longitude": 132.9420119
+    },
+    {
+      "id": "jp_ehime_station_7832077483",
+      "osm_id": 7832077483,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "波止浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hashihama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y41",
+      "latitude": 34.0979811,
+      "longitude": 132.9687349
+    },
+    {
+      "id": "jp_ehime_station_7832095785",
+      "osm_id": 7832095785,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "喜多山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitayama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.533273,
+      "longitude": 132.6110999
+    },
+    {
+      "id": "jp_ehime_station_7832095786",
+      "osm_id": 7832095786,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "五十崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikazaki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.538314,
+      "longitude": 132.6366654
+    },
+    {
+      "id": "jp_ehime_station_7832095789",
+      "osm_id": 7832095789,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "宇和島",
+      "name_kana": "うわじま",
+      "name_translations": {
+        "en": "Uwajima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2260474,
+      "longitude": 132.5675039
+    },
+    {
+      "id": "jp_ehime_station_7832236440",
+      "osm_id": 7832236440,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "向井原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukaibara"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "S06",
+      "latitude": 33.7362119,
+      "longitude": 132.695784
+    },
+    {
+      "id": "jp_ehime_station_7832285057",
+      "osm_id": 7832285057,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niiya"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U13",
+      "latitude": 33.5341434,
+      "longitude": 132.5990215
+    },
+    {
+      "id": "jp_ehime_station_7832331461",
+      "osm_id": 7832331461,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予大洲",
+      "name_kana": "いよおおず",
+      "name_translations": {
+        "en": "Iyo-Ōzu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U14;S18",
+      "latitude": 33.5186432,
+      "longitude": 132.5447545
+    },
+    {
+      "id": "jp_ehime_station_7832535469",
+      "osm_id": 7832535469,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西大洲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Ōzu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5082231,
+      "longitude": 132.5269903
+    },
+    {
+      "id": "jp_ehime_station_7832571907",
+      "osm_id": 7832571907,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予石城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Iwaki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3914382,
+      "longitude": 132.4733036
+    },
+    {
+      "id": "jp_ehime_station_7832571908",
+      "osm_id": 7832571908,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "双岩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Futaiwa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4246469,
+      "longitude": 132.4578076
+    },
+    {
+      "id": "jp_ehime_station_7832571909",
+      "osm_id": 7832571909,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八幡浜",
+      "name_kana": "やわたはま",
+      "name_translations": {
+        "en": "Yawatahama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U18",
+      "latitude": 33.45817,
+      "longitude": 132.4359975
+    },
+    {
+      "id": "jp_ehime_station_7832583488",
+      "osm_id": 7832583488,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千丈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Senjō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4652781,
+      "longitude": 132.4569708
+    },
+    {
+      "id": "jp_ehime_station_7832583489",
+      "osm_id": 7832583489,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予平野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Hirano"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U16",
+      "latitude": 33.4957105,
+      "longitude": 132.5181252
+    },
+    {
+      "id": "jp_ehime_station_7832690122",
+      "osm_id": 7832690122,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北宇和島",
+      "name_kana": "きたうわじま",
+      "name_translations": {
+        "en": "Kita-Uwajima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2386242,
+      "longitude": 132.5697879
+    },
+    {
+      "id": "jp_ehime_station_7832690123",
+      "osm_id": 7832690123,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高光",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takamitsu"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2561769,
+      "longitude": 132.5734692
+    },
+    {
+      "id": "jp_ehime_station_7832690124",
+      "osm_id": 7832690124,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予吉田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Yoshida"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2732675,
+      "longitude": 132.5443029
+    },
+    {
+      "id": "jp_ehime_station_7832690125",
+      "osm_id": 7832690125,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "立間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tachima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": "JR予讃線",
+      "ref": null,
+      "latitude": 33.2966643,
+      "longitude": 132.5395628
+    },
+    {
+      "id": "jp_ehime_station_7832690126",
+      "osm_id": 7832690126,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下宇和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Uwa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3494645,
+      "longitude": 132.5312137
+    },
+    {
+      "id": "jp_ehime_station_7832690127",
+      "osm_id": 7832690127,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "卯之町",
+      "name_kana": "うのまち",
+      "name_translations": {
+        "en": "Unomachi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3630507,
+      "longitude": 132.5099277
+    },
+    {
+      "id": "jp_ehime_station_7832690128",
+      "osm_id": 7832690128,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上宇和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Uwa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.3799692,
+      "longitude": 132.5014264
+    },
+    {
+      "id": "jp_ehime_station_7834237023",
+      "osm_id": 7834237023,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "五郎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gorō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5416886,
+      "longitude": 132.5704269
+    },
+    {
+      "id": "jp_ehime_station_7834237024",
+      "osm_id": 7834237024,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "春賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haruka"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5558823,
+      "longitude": 132.5550967
+    },
+    {
+      "id": "jp_ehime_station_7834237025",
+      "osm_id": 7834237025,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八多喜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hataki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5627709,
+      "longitude": 132.5406973
+    },
+    {
+      "id": "jp_ehime_station_7834237026",
+      "osm_id": 7834237026,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予白滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Shirataki"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5785477,
+      "longitude": 132.5265829
+    },
+    {
+      "id": "jp_ehime_station_7834237027",
+      "osm_id": 7834237027,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予出石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Izushi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.5963609,
+      "longitude": 132.4990151
+    },
+    {
+      "id": "jp_ehime_station_7834237028",
+      "osm_id": 7834237028,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予長浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Nagahama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6152965,
+      "longitude": 132.4869563
+    },
+    {
+      "id": "jp_ehime_station_7834237029",
+      "osm_id": 7834237029,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "喜多灘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitanada"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6372107,
+      "longitude": 132.531439
+    },
+    {
+      "id": "jp_ehime_station_7834237030",
+      "osm_id": 7834237030,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "串",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kushi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6472702,
+      "longitude": 132.5634035
+    },
+    {
+      "id": "jp_ehime_station_7834237031",
+      "osm_id": 7834237031,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下灘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimonada"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.6554175,
+      "longitude": 132.5894116
+    },
+    {
+      "id": "jp_ehime_station_7834237032",
+      "osm_id": 7834237032,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高野川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōnokawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "S07",
+      "latitude": 33.7018799,
+      "longitude": 132.6590484
+    },
+    {
+      "id": "jp_ehime_station_7834237033",
+      "osm_id": 7834237033,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予上灘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Kaminada"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "S08",
+      "latitude": 33.6837856,
+      "longitude": 132.6332617
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_7914178545",
+      "osm_id": 7914178545,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "岩城港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwagi Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.245344,
+      "longitude": 133.1472514
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_7914178556",
+      "osm_id": 7914178556,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "佐島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2538874,
+      "longitude": 133.1876175
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_7931651996",
+      "osm_id": 7931651996,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "波止浜港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1095599,
+      "longitude": 132.9690865
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_7931652051",
+      "osm_id": 7931652051,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "馬島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1165698,
+      "longitude": 132.9908126
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_8004532582",
+      "osm_id": 8004532582,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "高井神港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takaikami Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1936413,
+      "longitude": 133.2731565
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_8007308065",
+      "osm_id": 8007308065,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "弓削港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2586382,
+      "longitude": 133.2003688
+    },
+    {
+      "id": "jp_ehime_bus_terminal_8361099970",
+      "osm_id": 8361099970,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伯方島バスストップ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakatajima Bus stop"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2046263,
+      "longitude": 133.0758022
+    },
+    {
+      "id": "jp_ehime_station_8383580474",
+      "osm_id": 8383580474,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "松丸",
+      "name_kana": "まつまる",
+      "name_translations": {
+        "en": "Matsumaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2284358,
+      "longitude": 132.7085741
+    },
+    {
+      "id": "jp_ehime_bus_terminal_8439249732",
+      "osm_id": 8439249732,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大三島バスストップ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omishima Bus Stop"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2523562,
+      "longitude": 133.053056
+    },
+    {
+      "id": "jp_ehime_station_8583968612",
+      "osm_id": 8583968612,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "大浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9993042,
+      "longitude": 132.7754507
+    },
+    {
+      "id": "jp_ehime_station_8583968615",
+      "osm_id": 8583968615,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "浅海",
+      "name_kana": "あさなみ",
+      "name_translations": {
+        "en": "Asanami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0099253,
+      "longitude": 132.8027642
+    },
+    {
+      "id": "jp_ehime_station_8586983259",
+      "osm_id": 8586983259,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊予北条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Hōjō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9725556,
+      "longitude": 132.7752133
+    },
+    {
+      "id": "jp_ehime_station_8599386258",
+      "osm_id": 8599386258,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新居浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niihama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y29",
+      "latitude": 33.9479803,
+      "longitude": 133.2943345
+    },
+    {
+      "id": "jp_ehime_station_8599386260",
+      "osm_id": 8599386260,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "壬生川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nyūgawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "Y36",
+      "latitude": 33.9294333,
+      "longitude": 133.0856764
+    },
+    {
+      "id": "jp_ehime_station_8599386263",
+      "osm_id": 8599386263,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予西条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Saijō"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y31",
+      "latitude": 33.9124158,
+      "longitude": 133.1875765
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_8625686804",
+      "osm_id": 8625686804,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "戸島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.1977846,
+      "longitude": 132.3598687
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_8625705452",
+      "osm_id": 8625705452,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小内浦港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2039545,
+      "longitude": 132.3684541
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_8625707292",
+      "osm_id": 8625707292,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "嘉島港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2287201,
+      "longitude": 132.364022
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_8627513389",
+      "osm_id": 8627513389,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "矢ヶ浜港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.2016306,
+      "longitude": 132.3934474
+    },
+    {
+      "id": "jp_ehime_station_8677679126",
+      "osm_id": 8677679126,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊予立川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Tachikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "U09",
+      "latitude": 33.6015551,
+      "longitude": 132.6781679
+    },
+    {
+      "id": "jp_ehime_station_8677685275",
+      "osm_id": 8677685275,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊予中山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Nakayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6497866,
+      "longitude": 132.711726
+    },
+    {
+      "id": "jp_ehime_station_8677689823",
+      "osm_id": 8677689823,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予三島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Mishima"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y23",
+      "latitude": 33.9795874,
+      "longitude": 133.5423253
+    },
+    {
+      "id": "jp_ehime_station_8687376854",
+      "osm_id": 8687376854,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川之江",
+      "name_kana": "かわのえ",
+      "name_translations": {
+        "en": "Kawanoe"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y22",
+      "latitude": 34.0143555,
+      "longitude": 133.5760642
+    },
+    {
+      "id": "jp_ehime_station_8687385146",
+      "osm_id": 8687385146,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "内子",
+      "name_kana": "うちこ",
+      "name_translations": {
+        "en": "Uchiko"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "U10",
+      "latitude": 33.5492071,
+      "longitude": 132.6462757
+    },
+    {
+      "id": "jp_ehime_station_8949781056",
+      "osm_id": 8949781056,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予寒川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Sangawa"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y24",
+      "latitude": 33.967913,
+      "longitude": 133.5001208
+    },
+    {
+      "id": "jp_ehime_station_9000004606",
+      "osm_id": 9000004606,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "多喜浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takihama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y28",
+      "latitude": 33.9704694,
+      "longitude": 133.3244294
+    },
+    {
+      "id": "jp_ehime_station_9000033924",
+      "osm_id": 9000033924,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "伊予土居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iyo-Doi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y26",
+      "latitude": 33.9591402,
+      "longitude": 133.4281893
+    },
+    {
+      "id": "jp_ehime_station_9000675447",
+      "osm_id": 9000675447,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中萩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakahagi"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y30",
+      "latitude": 33.926164,
+      "longitude": 133.2533917
+    },
+    {
+      "id": "jp_ehime_station_9002659764",
+      "osm_id": 9002659764,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石鎚山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishizuchiyama"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": "Y32",
+      "latitude": 33.8958625,
+      "longitude": 133.1572446
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9130493096",
+      "osm_id": 9130493096,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "釣島港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsurushima Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8943174,
+      "longitude": 132.6399131
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9130493153",
+      "osm_id": 9130493153,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "神浦港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kounoura Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9496612,
+      "longitude": 132.6039774
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9132388572",
+      "osm_id": 9132388572,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "津和地港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuwaji Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9831164,
+      "longitude": 132.5162696
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9132388601",
+      "osm_id": 9132388601,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "元怒和港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motonuwa Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9747749,
+      "longitude": 132.5405515
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9132388674",
+      "osm_id": 9132388674,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "上怒和港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaminuwa Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9866332,
+      "longitude": 132.5574798
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9132388745",
+      "osm_id": 9132388745,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "西中港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishinaka Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9843074,
+      "longitude": 132.6047861
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9138570175",
+      "osm_id": 9138570175,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "睦月港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Muzuki Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9564423,
+      "longitude": 132.6655152
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_9138574873",
+      "osm_id": 9138574873,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "野忽那港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nogutsuna Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9754243,
+      "longitude": 132.6882468
+    },
+    {
+      "id": "jp_ehime_station_10594574788",
+      "osm_id": 10594574788,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "冒険ステーション",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7589139,
+      "longitude": 132.7939767
+    },
+    {
+      "id": "jp_ehime_station_10594575218",
+      "osm_id": 10594575218,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "private",
+      "name": "てっぺんとりで",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7588938,
+      "longitude": 132.7971336
+    },
+    {
+      "id": "jp_ehime_station_12326877638",
+      "osm_id": 12326877638,
+      "osm_type": "node",
+      "prefecture_id": "jp_ehime",
+      "type": "station",
+      "subtype": "jr",
+      "name": "出目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izume"
+      },
+      "operator": "四国旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 33.2519589,
+      "longitude": 132.691701
+    },
+    {
+      "id": "jp_ehime_airport_50557531",
+      "osm_id": 50557531,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "松山空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsuyama Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "MYJ",
+      "latitude": 33.8273404,
+      "longitude": 132.6999473
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_184883613",
+      "osm_id": 184883613,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "旧八幡浜港旅客ターミナル（移転・廃止）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4576082,
+      "longitude": 132.4175549
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_216700494",
+      "osm_id": 216700494,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "松山観光港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tourist Ferry Terminal Matsuyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8886603,
+      "longitude": 132.7043266
+    },
+    {
+      "id": "jp_ehime_bus_terminal_290820832",
+      "osm_id": 290820832,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄バス 川内バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7983705,
+      "longitude": 132.9122406
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_310257995",
+      "osm_id": 310257995,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "松山港三津浜旅客待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.865058,
+      "longitude": 132.7094932
+    },
+    {
+      "id": "jp_ehime_bus_terminal_311140488",
+      "osm_id": 311140488,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄バス 森松営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.7903984,
+      "longitude": 132.7889253
+    },
+    {
+      "id": "jp_ehime_bus_terminal_311424984",
+      "osm_id": 311424984,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄バス 大街道バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8415029,
+      "longitude": 132.7709271
+    },
+    {
+      "id": "jp_ehime_bus_terminal_317987226",
+      "osm_id": 317987226,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄南予バス 八幡浜本社営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.4583092,
+      "longitude": 132.4347124
+    },
+    {
+      "id": "jp_ehime_bus_terminal_317987228",
+      "osm_id": 317987228,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄南予バス 大洲営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.5043393,
+      "longitude": 132.5244168
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_409296333",
+      "osm_id": 409296333,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宇和島新内港駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uwajima Port"
+      },
+      "operator": "盛運汽船",
+      "network": "日振島、戸島、嘉島方面",
+      "ref": null,
+      "latitude": 33.2212012,
+      "longitude": 132.5579103
+    },
+    {
+      "id": "jp_ehime_bus_terminal_415726141",
+      "osm_id": 415726141,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三島川之江ICバス停",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9815198,
+      "longitude": 133.576356
+    },
+    {
+      "id": "jp_ehime_bus_terminal_558713355",
+      "osm_id": 558713355,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宇和島バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uwajima Bus Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.220001,
+      "longitude": 132.5663206
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_585247703",
+      "osm_id": 585247703,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鹿島渡船待合所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9747253,
+      "longitude": 132.7698668
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_618245644",
+      "osm_id": 618245644,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "東予港フェリーターミナルビル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyo Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9298916,
+      "longitude": 133.1183522
+    },
+    {
+      "id": "jp_ehime_bus_terminal_669192526",
+      "osm_id": 669192526,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊予鉄南予バス 長浜営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.6161594,
+      "longitude": 132.4809169
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_699204393",
+      "osm_id": 699204393,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "井ノ口港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2658956,
+      "longitude": 133.0429894
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_699347530",
+      "osm_id": 699347530,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宮浦港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2490441,
+      "longitude": 132.9947035
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_699488569",
+      "osm_id": 699488569,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宗方港務所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2035648,
+      "longitude": 132.9435059
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_699930637",
+      "osm_id": 699930637,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "盛港務所(フェリー待合所)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2935048,
+      "longitude": 133.0278906
+    },
+    {
+      "id": "jp_ehime_bus_terminal_881733361",
+      "osm_id": 881733361,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "今治駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.0645859,
+      "longitude": 132.9943727
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_987595379",
+      "osm_id": 987595379,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "高浜港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8835388,
+      "longitude": 132.7016223
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_987595387",
+      "osm_id": 987595387,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "泊港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomari Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.8821317,
+      "longitude": 132.680514
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_987595406",
+      "osm_id": 987595406,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "由良港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yura Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.902807,
+      "longitude": 132.6816449
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_988027602",
+      "osm_id": 988027602,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "二神港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9334189,
+      "longitude": 132.5371554
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_988708911",
+      "osm_id": 988708911,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "中島港(大浦港)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9730659,
+      "longitude": 132.63013
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_1040718749",
+      "osm_id": 1040718749,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "八幡浜港フェリーセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.458518,
+      "longitude": 132.4152661
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_1057790643",
+      "osm_id": 1057790643,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大島行き定期船乗り場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oshima-bound liner terminal"
+      },
+      "operator": "田中輸送有限会社",
+      "network": null,
+      "ref": null,
+      "latitude": 33.4595239,
+      "longitude": 132.4181183
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_1141560374",
+      "osm_id": 1141560374,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "黒島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "新居浜市",
+      "network": "新居浜市営渡海船（大島 ～ 黒島）",
+      "ref": null,
+      "latitude": 33.9838652,
+      "longitude": 133.3465777
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_1141560377",
+      "osm_id": 1141560377,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "新居浜市",
+      "network": "新居浜市営渡海船（大島 ～ 黒島）",
+      "ref": null,
+      "latitude": 33.993625,
+      "longitude": 133.3643993
+    },
+    {
+      "id": "jp_ehime_ferry_terminal_1141572797",
+      "osm_id": 1141572797,
+      "osm_type": "way",
+      "prefecture_id": "jp_ehime",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "新居浜東港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 33.9873553,
+      "longitude": 133.3322515
+    }
+  ]
+}

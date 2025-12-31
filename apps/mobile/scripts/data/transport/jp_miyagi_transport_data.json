@@ -1,0 +1,3714 @@
+{
+  "fetchedAt": "2025-12-24T05:47:09.239Z",
+  "prefecture_id": "jp_miyagi",
+  "prefecture_name": "宮城県",
+  "stats": {
+    "station": 181,
+    "airport": 4,
+    "ferry_terminal": 8,
+    "bus_terminal": 14,
+    "total": 207
+  },
+  "data": [
+    {
+      "id": "jp_miyagi_station_244879012",
+      "osm_id": 244879012,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新利府",
+      "name_kana": "しんりふ",
+      "name_translations": {
+        "en": "Shin-Rifu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3169889,
+      "longitude": 140.9728144
+    },
+    {
+      "id": "jp_miyagi_station_263242985",
+      "osm_id": 263242985,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "あぶくま",
+      "name_kana": "あぶくま",
+      "name_translations": {
+        "en": "Abukuma"
+      },
+      "operator": "阿武隈急行線",
+      "network": "阿武隈急行",
+      "ref": null,
+      "latitude": 37.913718,
+      "longitude": 140.686133
+    },
+    {
+      "id": "jp_miyagi_station_263245073",
+      "osm_id": 263245073,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "丸森",
+      "name_kana": "まるもり",
+      "name_translations": {
+        "en": "Marumori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9305042,
+      "longitude": 140.7615591
+    },
+    {
+      "id": "jp_miyagi_station_263246566",
+      "osm_id": 263246566,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡",
+      "name_kana": "おか",
+      "name_translations": {
+        "en": "Oka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0191386,
+      "longitude": 140.7805741
+    },
+    {
+      "id": "jp_miyagi_station_264170299",
+      "osm_id": 264170299,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "田尻",
+      "name_kana": "たじり",
+      "name_translations": {
+        "en": "Tajiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5961483,
+      "longitude": 141.0588401
+    },
+    {
+      "id": "jp_miyagi_station_264170585",
+      "osm_id": 264170585,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "新田",
+      "name_kana": "にった",
+      "name_translations": {
+        "en": "Nitta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7118149,
+      "longitude": 141.1199073
+    },
+    {
+      "id": "jp_miyagi_station_264172881",
+      "osm_id": 264172881,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "品井沼",
+      "name_kana": "しないぬま",
+      "name_translations": {
+        "en": "Shinainuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4315961,
+      "longitude": 141.0822902
+    },
+    {
+      "id": "jp_miyagi_station_264173718",
+      "osm_id": 264173718,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅ヶ沢",
+      "name_kana": "うめがさわ",
+      "name_translations": {
+        "en": "Umegasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6816912,
+      "longitude": 141.0855599
+    },
+    {
+      "id": "jp_miyagi_station_264173827",
+      "osm_id": 264173827,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "松山町",
+      "name_kana": "まつやままち",
+      "name_translations": {
+        "en": "Matsuyamamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.512263,
+      "longitude": 141.0751387
+    },
+    {
+      "id": "jp_miyagi_station_264174370",
+      "osm_id": 264174370,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "有壁",
+      "name_kana": "ありかべ",
+      "name_translations": {
+        "en": "Arikabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8673725,
+      "longitude": 141.1211596
+    },
+    {
+      "id": "jp_miyagi_station_264175299",
+      "osm_id": 264175299,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "船岡",
+      "name_kana": "ふなおか",
+      "name_translations": {
+        "en": "Funaoka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.0594138,
+      "longitude": 140.7680113
+    },
+    {
+      "id": "jp_miyagi_station_264176370",
+      "osm_id": 264176370,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "大河原",
+      "name_kana": "おおがわら",
+      "name_translations": {
+        "en": "Ogawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0474645,
+      "longitude": 140.740428
+    },
+    {
+      "id": "jp_miyagi_station_264270539",
+      "osm_id": 264270539,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前戸倉",
+      "name_kana": "りくぜんとぐら",
+      "name_translations": {
+        "en": "Rikuzen-Togura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.647832,
+      "longitude": 141.4333712
+    },
+    {
+      "id": "jp_miyagi_station_264270557",
+      "osm_id": 264270557,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前階上",
+      "name_kana": "りくぜんはしかみ",
+      "name_translations": {
+        "en": "Rikuzen-Hashikami"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8375413,
+      "longitude": 141.580537
+    },
+    {
+      "id": "jp_miyagi_station_264270721",
+      "osm_id": 264270721,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前横山",
+      "name_kana": "りくぜんよこやま",
+      "name_translations": {
+        "en": "Rikuzen-Yokoyama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.6308879,
+      "longitude": 141.3537995
+    },
+    {
+      "id": "jp_miyagi_station_264270743",
+      "osm_id": 264270743,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "最知",
+      "name_kana": "さいち",
+      "name_translations": {
+        "en": "Saichi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8534361,
+      "longitude": 141.5813908
+    },
+    {
+      "id": "jp_miyagi_station_264270822",
+      "osm_id": 264270822,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "本吉",
+      "name_kana": "もとよし",
+      "name_translations": {
+        "en": "Motoyoshi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.786442,
+      "longitude": 141.5026524
+    },
+    {
+      "id": "jp_miyagi_station_264270829",
+      "osm_id": 264270829,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前小泉",
+      "name_kana": "りくぜんこいずみ",
+      "name_translations": {
+        "en": "Rikuzen-Koizumi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.7666937,
+      "longitude": 141.5093315
+    },
+    {
+      "id": "jp_miyagi_station_264271162",
+      "osm_id": 264271162,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南気仙沼",
+      "name_kana": "みなみけせんぬま",
+      "name_translations": {
+        "en": "Minami-Kesennuma"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8952748,
+      "longitude": 141.5760589
+    },
+    {
+      "id": "jp_miyagi_station_264271436",
+      "osm_id": 264271436,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "清水浜",
+      "name_kana": "しずはま",
+      "name_translations": {
+        "en": "Shizuhama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.6918748,
+      "longitude": 141.4896089
+    },
+    {
+      "id": "jp_miyagi_station_264271438",
+      "osm_id": 264271438,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "のの岳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nonodake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5531667,
+      "longitude": 141.2257896
+    },
+    {
+      "id": "jp_miyagi_station_264271485",
+      "osm_id": 264271485,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanaizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6116887,
+      "longitude": 141.3059037
+    },
+    {
+      "id": "jp_miyagi_station_264271486",
+      "osm_id": 264271486,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前港",
+      "name_kana": "りくぜんみなと",
+      "name_translations": {
+        "en": "Rikuzen-Minato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.7391817,
+      "longitude": 141.5310138
+    },
+    {
+      "id": "jp_miyagi_station_264271501",
+      "osm_id": 264271501,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "蔵内",
+      "name_kana": "くらうち",
+      "name_translations": {
+        "en": "Kurauchi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.7536612,
+      "longitude": 141.5246606
+    },
+    {
+      "id": "jp_miyagi_station_264271502",
+      "osm_id": 264271502,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "御岳堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitakedo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6056937,
+      "longitude": 141.2648016
+    },
+    {
+      "id": "jp_miyagi_station_264271522",
+      "osm_id": 264271522,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "不動の沢",
+      "name_kana": "ふどうのさわ",
+      "name_translations": {
+        "en": "Fudōnosawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8984556,
+      "longitude": 141.5626248
+    },
+    {
+      "id": "jp_miyagi_station_264271912",
+      "osm_id": 264271912,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前豊里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Toyosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5825764,
+      "longitude": 141.2444137
+    },
+    {
+      "id": "jp_miyagi_station_264272322",
+      "osm_id": 264272322,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "和渕",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wabuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5262126,
+      "longitude": 141.2207116
+    },
+    {
+      "id": "jp_miyagi_station_264400447",
+      "osm_id": 264400447,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩出山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwadeyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6523452,
+      "longitude": 140.8717017
+    },
+    {
+      "id": "jp_miyagi_station_264400488",
+      "osm_id": 264400488,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前谷地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Yachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5650268,
+      "longitude": 141.0000733
+    },
+    {
+      "id": "jp_miyagi_station_264400676",
+      "osm_id": 264400676,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "池月",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikezuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7091634,
+      "longitude": 140.8355215
+    },
+    {
+      "id": "jp_miyagi_station_264400678",
+      "osm_id": 264400678,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "塚目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukanome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5725298,
+      "longitude": 140.9369507
+    },
+    {
+      "id": "jp_miyagi_station_264400764",
+      "osm_id": 264400764,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上野目",
+      "name_kana": "かみのめ",
+      "name_translations": {
+        "en": "Kaminome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6803172,
+      "longitude": 140.8593878
+    },
+    {
+      "id": "jp_miyagi_station_264400765",
+      "osm_id": 264400765,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東大崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Osaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6059529,
+      "longitude": 140.897232
+    },
+    {
+      "id": "jp_miyagi_station_264400820",
+      "osm_id": 264400820,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳴子温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naruko-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.743466,
+      "longitude": 140.716093
+    },
+    {
+      "id": "jp_miyagi_station_264400823",
+      "osm_id": 264400823,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北浦",
+      "name_kana": "きたうら",
+      "name_translations": {
+        "en": "Kitaura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.559972,
+      "longitude": 141.0226175
+    },
+    {
+      "id": "jp_miyagi_station_264400864",
+      "osm_id": 264400864,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "有備館",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yubikan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6582256,
+      "longitude": 140.8638948
+    },
+    {
+      "id": "jp_miyagi_station_264400919",
+      "osm_id": 264400919,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "川渡温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawatabi-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7367402,
+      "longitude": 140.7801528
+    },
+    {
+      "id": "jp_miyagi_station_264400962",
+      "osm_id": 264400962,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Osaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6303048,
+      "longitude": 140.8896365
+    },
+    {
+      "id": "jp_miyagi_station_264400966",
+      "osm_id": 264400966,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳴子御殿湯",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naruko-Gotenyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7445129,
+      "longitude": 140.7373203
+    },
+    {
+      "id": "jp_miyagi_station_264400968",
+      "osm_id": 264400968,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西古川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Furukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5783466,
+      "longitude": 140.8952747
+    },
+    {
+      "id": "jp_miyagi_station_264403020",
+      "osm_id": 264403020,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "浜吉田",
+      "name_kana": "はまよしだ",
+      "name_translations": {
+        "en": "Hamayoshida"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.0023133,
+      "longitude": 140.8898789
+    },
+    {
+      "id": "jp_miyagi_station_264404856",
+      "osm_id": 264404856,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "女川",
+      "name_kana": "おながわ",
+      "name_translations": {
+        "en": "Onagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4468109,
+      "longitude": 141.4435933
+    },
+    {
+      "id": "jp_miyagi_station_264404860",
+      "osm_id": 264404860,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "渡波",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Watanoha"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.419843,
+      "longitude": 141.3650127
+    },
+    {
+      "id": "jp_miyagi_station_264404868",
+      "osm_id": 264404868,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "万石浦",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mangoku-Ura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4290947,
+      "longitude": 141.3690561
+    },
+    {
+      "id": "jp_miyagi_station_264404870",
+      "osm_id": 264404870,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "沢田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sawada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4323145,
+      "longitude": 141.382387
+    },
+    {
+      "id": "jp_miyagi_station_264404931",
+      "osm_id": 264404931,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前稲井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Inai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4454259,
+      "longitude": 141.3350339
+    },
+    {
+      "id": "jp_miyagi_station_264404950",
+      "osm_id": 264404950,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Urashuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.436569,
+      "longitude": 141.4214896
+    },
+    {
+      "id": "jp_miyagi_station_264405147",
+      "osm_id": 264405147,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "曽波神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sobanokami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4657712,
+      "longitude": 141.287946
+    },
+    {
+      "id": "jp_miyagi_station_264405596",
+      "osm_id": 264405596,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿又",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanomata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4858262,
+      "longitude": 141.2828856
+    },
+    {
+      "id": "jp_miyagi_station_264405714",
+      "osm_id": 264405714,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "涌谷",
+      "name_kana": "わくや",
+      "name_translations": {
+        "en": "Wakuya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5377483,
+      "longitude": 141.1278028
+    },
+    {
+      "id": "jp_miyagi_station_264405758",
+      "osm_id": 264405758,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "前谷地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maeyachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5123152,
+      "longitude": 141.1938703
+    },
+    {
+      "id": "jp_miyagi_station_264405825",
+      "osm_id": 264405825,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上涌谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Wakuya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5492627,
+      "longitude": 141.0993993
+    },
+    {
+      "id": "jp_miyagi_station_264415884",
+      "osm_id": 264415884,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "仙台",
+      "name_kana": "せんだい",
+      "name_translations": {
+        "en": "Sendai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "N10;T07",
+      "latitude": 38.2597526,
+      "longitude": 140.8800249
+    },
+    {
+      "id": "jp_miyagi_station_265031015",
+      "osm_id": 265031015,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "くりこま高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurikoma-Kogen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7487399,
+      "longitude": 141.0716092
+    },
+    {
+      "id": "jp_miyagi_station_265031031",
+      "osm_id": 265031031,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "古川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5705529,
+      "longitude": 140.9679338
+    },
+    {
+      "id": "jp_miyagi_airport_1042056033",
+      "osm_id": 1042056033,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "airport",
+      "subtype": "military",
+      "name": "航空自衛隊 松島基地",
+      "name_kana": "こうくうじえいたい まつしまきち",
+      "name_translations": {
+        "en": "JASDF Matsushima Airbase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RJST",
+      "latitude": 38.4048996,
+      "longitude": 141.2200012
+    },
+    {
+      "id": "jp_miyagi_station_2194720290",
+      "osm_id": 2194720290,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "佳景山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kakeyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4979581,
+      "longitude": 141.2395823
+    },
+    {
+      "id": "jp_miyagi_station_2493411817",
+      "osm_id": 2493411817,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "志津川",
+      "name_kana": "しづがわ",
+      "name_translations": {
+        "en": "Shizugawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.6796396,
+      "longitude": 141.4468945
+    },
+    {
+      "id": "jp_miyagi_station_2512630999",
+      "osm_id": 2512630999,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南三陸町役場・病院前",
+      "name_kana": "みなみさんりくちょうやくば・びょういんまえ",
+      "name_translations": {
+        "en": "Minami-Sanriku Town Office・Hospital"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.6791846,
+      "longitude": 141.4627181
+    },
+    {
+      "id": "jp_miyagi_station_2552963359",
+      "osm_id": 2552963359,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前高砂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Takasago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2735609,
+      "longitude": 140.9680029
+    },
+    {
+      "id": "jp_miyagi_station_2729956033",
+      "osm_id": 2729956033,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "気仙沼",
+      "name_kana": "けせんぬま",
+      "name_translations": {
+        "en": "Kesennuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.909879,
+      "longitude": 141.5592196
+    },
+    {
+      "id": "jp_miyagi_station_2748877938",
+      "osm_id": 2748877938,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "八木山動物公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagiyama Zoological Park"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T01",
+      "latitude": 38.2433949,
+      "longitude": 140.8440117
+    },
+    {
+      "id": "jp_miyagi_station_2748877942",
+      "osm_id": 2748877942,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "青葉山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aobayama"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T02",
+      "latitude": 38.2552501,
+      "longitude": 140.8353433
+    },
+    {
+      "id": "jp_miyagi_station_2982468643",
+      "osm_id": 2982468643,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松岩",
+      "name_kana": "まついわ",
+      "name_translations": {
+        "en": "Matsuiwa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8738703,
+      "longitude": 141.5836271
+    },
+    {
+      "id": "jp_miyagi_station_3160545768",
+      "osm_id": 3160545768,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大谷海岸",
+      "name_kana": "おおやかいがん",
+      "name_translations": {
+        "en": "Ōyakaigan"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8147111,
+      "longitude": 141.562549
+    },
+    {
+      "id": "jp_miyagi_station_3570916493",
+      "osm_id": 3570916493,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "石巻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishinomaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4352418,
+      "longitude": 141.3038047
+    },
+    {
+      "id": "jp_miyagi_station_3570916494",
+      "osm_id": 3570916494,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "松島",
+      "name_kana": "まつしま",
+      "name_translations": {
+        "en": "Matsushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3799813,
+      "longitude": 141.0659166
+    },
+    {
+      "id": "jp_miyagi_station_3570916495",
+      "osm_id": 3570916495,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松島海岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsushima-Kaigan"
+      },
+      "operator": "JR East",
+      "network": null,
+      "ref": null,
+      "latitude": 38.3678491,
+      "longitude": 141.0589956
+    },
+    {
+      "id": "jp_miyagi_station_3570916496",
+      "osm_id": 3570916496,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長町",
+      "name_kana": "ながまち",
+      "name_translations": {
+        "en": "Nagamachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.2268046,
+      "longitude": 140.8855577
+    },
+    {
+      "id": "jp_miyagi_station_3570916497",
+      "osm_id": 3570916497,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前山下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Yamashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4374889,
+      "longitude": 141.2879979
+    },
+    {
+      "id": "jp_miyagi_station_3585108727",
+      "osm_id": 3585108727,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前白沢",
+      "name_kana": "りくぜんしらさわ",
+      "name_translations": {
+        "en": "Rikuzen-Shirasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2781762,
+      "longitude": 140.7022141
+    },
+    {
+      "id": "jp_miyagi_station_3585108730",
+      "osm_id": 3585108730,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "作並",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakunami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3178791,
+      "longitude": 140.6324489
+    },
+    {
+      "id": "jp_miyagi_station_3585108736",
+      "osm_id": 3585108736,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東北福祉大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tohoku Fukushi University"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2803707,
+      "longitude": 140.842515
+    },
+    {
+      "id": "jp_miyagi_station_3585108737",
+      "osm_id": 3585108737,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東照宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toshogu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2773598,
+      "longitude": 140.8863968
+    },
+    {
+      "id": "jp_miyagi_station_3585108873",
+      "osm_id": 3585108873,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "愛子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2727717,
+      "longitude": 140.761571
+    },
+    {
+      "id": "jp_miyagi_station_3585108876",
+      "osm_id": 3585108876,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北仙台",
+      "name_kana": "きたせんだい",
+      "name_translations": {
+        "en": "Kita-Sendai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2817626,
+      "longitude": 140.8696768
+    },
+    {
+      "id": "jp_miyagi_station_3585108884",
+      "osm_id": 3585108884,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北山",
+      "name_kana": "きたやま",
+      "name_translations": {
+        "en": "Kitayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2850866,
+      "longitude": 140.8513927
+    },
+    {
+      "id": "jp_miyagi_station_3585108886",
+      "osm_id": 3585108886,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "熊ヶ根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumagane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2980518,
+      "longitude": 140.6806585
+    },
+    {
+      "id": "jp_miyagi_station_3585108888",
+      "osm_id": 3585108888,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "国見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kunimi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2748298,
+      "longitude": 140.8339779
+    },
+    {
+      "id": "jp_miyagi_station_3585108890",
+      "osm_id": 3585108890,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "葛岡",
+      "name_kana": "くずおか",
+      "name_translations": {
+        "en": "Kuzuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2689104,
+      "longitude": 140.8186299
+    },
+    {
+      "id": "jp_miyagi_station_3585108892",
+      "osm_id": 3585108892,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥新川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okunikkawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3260087,
+      "longitude": 140.594073
+    },
+    {
+      "id": "jp_miyagi_station_3585109695",
+      "osm_id": 3585109695,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前落合",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Ochiai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2733989,
+      "longitude": 140.7903422
+    },
+    {
+      "id": "jp_miyagi_station_3594254135",
+      "osm_id": 3594254135,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "国際センター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "International Center"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T04",
+      "latitude": 38.2602515,
+      "longitude": 140.8567785
+    },
+    {
+      "id": "jp_miyagi_station_3651059967",
+      "osm_id": 3651059967,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "大町西公園",
+      "name_kana": "おおまちにしこうえん",
+      "name_translations": {
+        "en": "Omachi Nishi-koen"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T05",
+      "latitude": 38.2589973,
+      "longitude": 140.8644629
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_3671174616",
+      "osm_id": 3671174616,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "柳津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanaizu"
+      },
+      "operator": "JR東日本",
+      "network": null,
+      "ref": null,
+      "latitude": 38.6116624,
+      "longitude": 141.3056339
+    },
+    {
+      "id": "jp_miyagi_station_3791321430",
+      "osm_id": 3791321430,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "あおば通",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoba-dōri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2606881,
+      "longitude": 140.8786913
+    },
+    {
+      "id": "jp_miyagi_station_3791321432",
+      "osm_id": 3791321432,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "下馬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Geba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3056276,
+      "longitude": 141.0151519
+    },
+    {
+      "id": "jp_miyagi_station_3791321433",
+      "osm_id": 3791321433,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "蛇田",
+      "name_kana": "へびた",
+      "name_translations": {
+        "en": "Hebita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4384215,
+      "longitude": 141.2774621
+    },
+    {
+      "id": "jp_miyagi_station_3791321435",
+      "osm_id": 3791321435,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東仙台",
+      "name_kana": "ひがしせんだい",
+      "name_translations": {
+        "en": "Higashi-Sendai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2764881,
+      "longitude": 140.9201836
+    },
+    {
+      "id": "jp_miyagi_station_3791321436",
+      "osm_id": 3791321436,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東塩釜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Shiogama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.325502,
+      "longitude": 141.0317915
+    },
+    {
+      "id": "jp_miyagi_station_3791321437",
+      "osm_id": 3791321437,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東矢本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Yamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.42814,
+      "longitude": 141.2228836
+    },
+    {
+      "id": "jp_miyagi_station_3791321438",
+      "osm_id": 3791321438,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "本塩釜",
+      "name_kana": "ほんしおがま",
+      "name_translations": {
+        "en": "Hon-Shiogama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3178146,
+      "longitude": 141.0228114
+    },
+    {
+      "id": "jp_miyagi_station_3791321444",
+      "osm_id": 3791321444,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩切",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwakiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3008721,
+      "longitude": 140.9552302
+    },
+    {
+      "id": "jp_miyagi_station_3791321447",
+      "osm_id": 3791321447,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿妻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kazuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4032417,
+      "longitude": 141.19014
+    },
+    {
+      "id": "jp_miyagi_station_3791321448",
+      "osm_id": 3791321448,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "国府多賀城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokufu-Tagajo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3009098,
+      "longitude": 140.9941986
+    },
+    {
+      "id": "jp_miyagi_station_3791321449",
+      "osm_id": 3791321449,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小鶴新田",
+      "name_kana": "こづるしんでん",
+      "name_translations": {
+        "en": "Kozurushinden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2734014,
+      "longitude": 140.935357
+    },
+    {
+      "id": "jp_miyagi_station_3791321510",
+      "osm_id": 3791321510,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮城野原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyaginohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2608253,
+      "longitude": 140.9048201
+    },
+    {
+      "id": "jp_miyagi_station_3791321511",
+      "osm_id": 3791321511,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "中野栄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakanosakae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2804972,
+      "longitude": 140.9848017
+    },
+    {
+      "id": "jp_miyagi_station_3791321512",
+      "osm_id": 3791321512,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "苦竹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nigatake"
+      },
+      "operator": "JR東日本",
+      "network": null,
+      "ref": null,
+      "latitude": 38.2686318,
+      "longitude": 140.9189804
+    },
+    {
+      "id": "jp_miyagi_station_3791321514",
+      "osm_id": 3791321514,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "野蒜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nobiru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3791351,
+      "longitude": 141.1570646
+    },
+    {
+      "id": "jp_miyagi_station_3791321515",
+      "osm_id": 3791321515,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "利府",
+      "name_kana": "りふ",
+      "name_translations": {
+        "en": "Rifu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3292781,
+      "longitude": 140.9847624
+    },
+    {
+      "id": "jp_miyagi_station_3791321516",
+      "osm_id": 3791321516,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前赤井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Akai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4324287,
+      "longitude": 141.2387668
+    },
+    {
+      "id": "jp_miyagi_station_3791321517",
+      "osm_id": 3791321517,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前浜田",
+      "name_kana": "りくぜんはまだ",
+      "name_translations": {
+        "en": "Rikuzen-Hamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3507746,
+      "longitude": 141.0419928
+    },
+    {
+      "id": "jp_miyagi_station_3791321518",
+      "osm_id": 3791321518,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前原ノ町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Haranomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2662062,
+      "longitude": 140.9110021
+    },
+    {
+      "id": "jp_miyagi_station_3791321519",
+      "osm_id": 3791321519,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前小野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Ono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3959842,
+      "longitude": 141.1743801
+    },
+    {
+      "id": "jp_miyagi_station_3791321521",
+      "osm_id": 3791321521,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前山王",
+      "name_kana": "りくぜんさんのう",
+      "name_translations": {
+        "en": "Rikuzen-Sannō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2995007,
+      "longitude": 140.9792044
+    },
+    {
+      "id": "jp_miyagi_station_3791321523",
+      "osm_id": 3791321523,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前富山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Tomiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3862845,
+      "longitude": 141.1073267
+    },
+    {
+      "id": "jp_miyagi_station_3791321524",
+      "osm_id": 3791321524,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前大塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuzen-Ōtsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3791229,
+      "longitude": 141.1290892
+    },
+    {
+      "id": "jp_miyagi_station_3791321533",
+      "osm_id": 3791321533,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩釜",
+      "name_kana": "しおがま",
+      "name_translations": {
+        "en": "Shiogama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.309546,
+      "longitude": 141.0095991
+    },
+    {
+      "id": "jp_miyagi_station_3791321534",
+      "osm_id": 3791321534,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "多賀城",
+      "name_kana": "たがじょう",
+      "name_translations": {
+        "en": "Tagajo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.291696,
+      "longitude": 141.0060171
+    },
+    {
+      "id": "jp_miyagi_station_3791321535",
+      "osm_id": 3791321535,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "高城町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takagimachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3826611,
+      "longitude": 141.0732011
+    },
+    {
+      "id": "jp_miyagi_station_3791321536",
+      "osm_id": 3791321536,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "手樽",
+      "name_kana": "てたる",
+      "name_translations": {
+        "en": "Tetaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3870035,
+      "longitude": 141.0927405
+    },
+    {
+      "id": "jp_miyagi_station_3791321537",
+      "osm_id": 3791321537,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "榴ヶ岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsutsujigaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2587711,
+      "longitude": 140.8942638
+    },
+    {
+      "id": "jp_miyagi_station_3791321538",
+      "osm_id": 3791321538,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tōna"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3753285,
+      "longitude": 141.1440162
+    },
+    {
+      "id": "jp_miyagi_station_3791321539",
+      "osm_id": 3791321539,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4205282,
+      "longitude": 141.2096652
+    },
+    {
+      "id": "jp_miyagi_station_3792749081",
+      "osm_id": 3792749081,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩沼",
+      "name_kana": "いわぬま",
+      "name_translations": {
+        "en": "Iwanuma"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.1121315,
+      "longitude": 140.8639243
+    },
+    {
+      "id": "jp_miyagi_station_3792749084",
+      "osm_id": 3792749084,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南仙台",
+      "name_kana": "みなみせんだい",
+      "name_translations": {
+        "en": "Minami-Sendai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.197257,
+      "longitude": 140.8833873
+    },
+    {
+      "id": "jp_miyagi_station_3792749088",
+      "osm_id": 3792749088,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "美田園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitazono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1596683,
+      "longitude": 140.9174637
+    },
+    {
+      "id": "jp_miyagi_station_3792749091",
+      "osm_id": 3792749091,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "杜せきのした",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Morisekinoshita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1653873,
+      "longitude": 140.8960128
+    },
+    {
+      "id": "jp_miyagi_station_3792749097",
+      "osm_id": 3792749097,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "名取",
+      "name_kana": "なとり",
+      "name_translations": {
+        "en": "Natori"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.1733422,
+      "longitude": 140.8827769
+    },
+    {
+      "id": "jp_miyagi_station_3792749099",
+      "osm_id": 3792749099,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "仙台空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sendai Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.1371602,
+      "longitude": 140.9290141
+    },
+    {
+      "id": "jp_miyagi_station_3792749100",
+      "osm_id": 3792749100,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "太子堂",
+      "name_kana": "たいしどう",
+      "name_translations": {
+        "en": "Taishido"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.2178195,
+      "longitude": 140.8834227
+    },
+    {
+      "id": "jp_miyagi_station_3792749102",
+      "osm_id": 3792749102,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "館腰",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatekoshi"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.1431219,
+      "longitude": 140.8803223
+    },
+    {
+      "id": "jp_miyagi_station_3880060317",
+      "osm_id": 3880060317,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "青葉通一番町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoba-dori Ichibancho"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T06",
+      "latitude": 38.2596981,
+      "longitude": 140.8719207
+    },
+    {
+      "id": "jp_miyagi_station_3880060318",
+      "osm_id": 3880060318,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "荒井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arai"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T13",
+      "latitude": 38.2448857,
+      "longitude": 140.9484215
+    },
+    {
+      "id": "jp_miyagi_station_3880061718",
+      "osm_id": 3880061718,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "連坊",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rembo"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T09",
+      "latitude": 38.2511739,
+      "longitude": 140.8932704
+    },
+    {
+      "id": "jp_miyagi_station_3880061721",
+      "osm_id": 3880061721,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "卸町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oroshimachi"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T11",
+      "latitude": 38.2515983,
+      "longitude": 140.9208595
+    },
+    {
+      "id": "jp_miyagi_station_3880061722",
+      "osm_id": 3880061722,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "六丁の目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokuchonome"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T12",
+      "latitude": 38.2509885,
+      "longitude": 140.9356293
+    },
+    {
+      "id": "jp_miyagi_station_3880061736",
+      "osm_id": 3880061736,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "宮城野通",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyagino-dori"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T08",
+      "latitude": 38.2579376,
+      "longitude": 140.8858661
+    },
+    {
+      "id": "jp_miyagi_station_3880061738",
+      "osm_id": 3880061738,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "川内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawauchi"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "T03",
+      "latitude": 38.2608821,
+      "longitude": 140.8503638
+    },
+    {
+      "id": "jp_miyagi_station_3906691755",
+      "osm_id": 3906691755,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "小牛田",
+      "name_kana": "こごた",
+      "name_translations": {
+        "en": "Kogota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.5414704,
+      "longitude": 141.0642558
+    },
+    {
+      "id": "jp_miyagi_station_3908803392",
+      "osm_id": 3908803392,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "白石蔵王",
+      "name_kana": "しろいしざおう",
+      "name_translations": {
+        "en": "Shiroishi-Zao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9954269,
+      "longitude": 140.6331751
+    },
+    {
+      "id": "jp_miyagi_station_4057942478",
+      "osm_id": 4057942478,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "坂元",
+      "name_kana": "さかもと",
+      "name_translations": {
+        "en": "Sakamoto"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.9242343,
+      "longitude": 140.901033
+    },
+    {
+      "id": "jp_miyagi_station_4057942479",
+      "osm_id": 4057942479,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "山下",
+      "name_kana": "やました",
+      "name_translations": {
+        "en": "Yamashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9662549,
+      "longitude": 140.8890163
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_4240945489",
+      "osm_id": 4240945489,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "仙台港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2735698,
+      "longitude": 141.0055201
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_4593922689",
+      "osm_id": 4593922689,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "仙台市営バス霞目車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2407451,
+      "longitude": 140.9216029
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_4759336257",
+      "osm_id": 4759336257,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "仙台市交通局長町営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2287617,
+      "longitude": 140.8824077
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_5114987235",
+      "osm_id": 5114987235,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ミヤコーバス 白石営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0020406,
+      "longitude": 140.6051471
+    },
+    {
+      "id": "jp_miyagi_station_5214080988",
+      "osm_id": 5214080988,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "泉中央",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Izumi-Chuo"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N01",
+      "latitude": 38.3232105,
+      "longitude": 140.8806932
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_5221012367",
+      "osm_id": 5221012367,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "宮城交通 泉営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3493334,
+      "longitude": 140.8626463
+    },
+    {
+      "id": "jp_miyagi_station_5784163244",
+      "osm_id": 5784163244,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "石越",
+      "name_kana": "いしこし",
+      "name_translations": {
+        "en": "Ishikoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7686881,
+      "longitude": 141.1591458
+    },
+    {
+      "id": "jp_miyagi_station_5784245062",
+      "osm_id": 5784245062,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "瀬峰",
+      "name_kana": "せみね",
+      "name_translations": {
+        "en": "Semine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6551991,
+      "longitude": 141.0737336
+    },
+    {
+      "id": "jp_miyagi_station_5784392840",
+      "osm_id": 5784392840,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "愛宕",
+      "name_kana": "あたご",
+      "name_translations": {
+        "en": "Atago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3973372,
+      "longitude": 141.0651465
+    },
+    {
+      "id": "jp_miyagi_station_5784714881",
+      "osm_id": 5784714881,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "槻木",
+      "name_kana": "つきのき",
+      "name_translations": {
+        "en": "Tsukinoki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0786802,
+      "longitude": 140.8100456
+    },
+    {
+      "id": "jp_miyagi_station_5808212465",
+      "osm_id": 5808212465,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鹿折唐桑",
+      "name_kana": "ししおりからくわ",
+      "name_translations": {
+        "en": "Shishiorikarakuwa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.9159426,
+      "longitude": 141.5796721
+    },
+    {
+      "id": "jp_miyagi_station_5817830567",
+      "osm_id": 5817830567,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿島台",
+      "name_kana": "かしまだい",
+      "name_translations": {
+        "en": "Kashimadai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4746891,
+      "longitude": 141.0979244
+    },
+    {
+      "id": "jp_miyagi_station_5821062476",
+      "osm_id": 5821062476,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北白川",
+      "name_kana": "北白川",
+      "name_translations": {
+        "en": "Kita-Shirakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0324231,
+      "longitude": 140.6925192
+    },
+    {
+      "id": "jp_miyagi_station_5822682261",
+      "osm_id": 5822682261,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "白石",
+      "name_kana": "しろいし",
+      "name_translations": {
+        "en": "Shiroishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0030467,
+      "longitude": 140.6263277
+    },
+    {
+      "id": "jp_miyagi_station_5822785227",
+      "osm_id": 5822785227,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "越河",
+      "name_kana": "こすごう",
+      "name_translations": {
+        "en": "Kosugo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9341752,
+      "longitude": 140.6044232
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_5969480592",
+      "osm_id": 5969480592,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "マリンゲート塩釜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Marine Gate Shiogama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.319642,
+      "longitude": 141.0296218
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_5969491231",
+      "osm_id": 5969491231,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Matsushima Ferry",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3688177,
+      "longitude": 141.063224
+    },
+    {
+      "id": "jp_miyagi_station_6069828085",
+      "osm_id": 6069828085,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "逢隈",
+      "name_kana": "おおくま",
+      "name_translations": {
+        "en": "Okuma"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.0672169,
+      "longitude": 140.8548076
+    },
+    {
+      "id": "jp_miyagi_station_6069856846",
+      "osm_id": 6069856846,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "亘理",
+      "name_kana": "わたり",
+      "name_translations": {
+        "en": "Watari"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.0396312,
+      "longitude": 140.8613
+    },
+    {
+      "id": "jp_miyagi_station_6089873698",
+      "osm_id": 6089873698,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東白石",
+      "name_kana": "ひがししろいし",
+      "name_translations": {
+        "en": "Higashi-Shiroishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0351052,
+      "longitude": 140.6511486
+    },
+    {
+      "id": "jp_miyagi_station_6150086709",
+      "osm_id": 6150086709,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "東船岡",
+      "name_kana": "ひがしふなおか",
+      "name_translations": {
+        "en": "Higashi-Funaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.0502645,
+      "longitude": 140.7898633
+    },
+    {
+      "id": "jp_miyagi_station_6151870802",
+      "osm_id": 6151870802,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "北丸森",
+      "name_kana": "きたまるもり",
+      "name_translations": {
+        "en": "Kita-Marumori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9429017,
+      "longitude": 140.7719315
+    },
+    {
+      "id": "jp_miyagi_station_6151870833",
+      "osm_id": 6151870833,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "南角田",
+      "name_kana": "みなみかくだ",
+      "name_translations": {
+        "en": "Minami-Kakuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9649195,
+      "longitude": 140.7697213
+    },
+    {
+      "id": "jp_miyagi_station_6151870849",
+      "osm_id": 6151870849,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "角田",
+      "name_kana": "かくだ",
+      "name_translations": {
+        "en": "Kakuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9791833,
+      "longitude": 140.7727039
+    },
+    {
+      "id": "jp_miyagi_station_6151870856",
+      "osm_id": 6151870856,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "横倉",
+      "name_kana": "よこくら",
+      "name_translations": {
+        "en": "Yokokura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9967165,
+      "longitude": 140.7759319
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_6818636690",
+      "osm_id": 6818636690,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "仙台営業所 山田自由ヶ丘車庫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyagi Kōtsū"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2300422,
+      "longitude": 140.8076447
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_6842625016",
+      "osm_id": 6842625016,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "旭ヶ丘バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahigaoka Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2956122,
+      "longitude": 140.8840694
+    },
+    {
+      "id": "jp_miyagi_station_7117374801",
+      "osm_id": 7117374801,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "気仙沼市立病院",
+      "name_kana": "けせんぬましりつびょういん",
+      "name_translations": {
+        "en": "Kesennuma City Hospital"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8874972,
+      "longitude": 141.5654245
+    },
+    {
+      "id": "jp_miyagi_station_7235298223",
+      "osm_id": 7235298223,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "福田町",
+      "name_kana": "ふくだまち",
+      "name_translations": {
+        "en": "Fukudamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2749367,
+      "longitude": 140.9587542
+    },
+    {
+      "id": "jp_miyagi_station_7294102409",
+      "osm_id": 7294102409,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "赤岩港",
+      "name_kana": "あかいわみなと",
+      "name_translations": {
+        "en": "Akaiwaminato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8849441,
+      "longitude": 141.5824988
+    },
+    {
+      "id": "jp_miyagi_station_7296320570",
+      "osm_id": 7296320570,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "歌津",
+      "name_kana": "うたつ",
+      "name_translations": {
+        "en": "Utatsu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.7181991,
+      "longitude": 141.5196807
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_7590709270",
+      "osm_id": 7590709270,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "網地島ライン中央発着所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ajishima Line Chuo"
+      },
+      "operator": null,
+      "network": "網地島ライン",
+      "ref": null,
+      "latitude": 38.4289715,
+      "longitude": 141.308712
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_7746162599",
+      "osm_id": 7746162599,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ミヤコーバス 築館営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "MiyakoBus Tsukidate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7314895,
+      "longitude": 141.0259226
+    },
+    {
+      "id": "jp_miyagi_station_7770490131",
+      "osm_id": 7770490131,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "西塩釜",
+      "name_kana": "にししおがま",
+      "name_translations": {
+        "en": "Nishi-Shiogama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.311995,
+      "longitude": 141.0185015
+    },
+    {
+      "id": "jp_miyagi_station_7794874665",
+      "osm_id": 7794874665,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "薬師堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakushido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "T10",
+      "latitude": 38.2497493,
+      "longitude": 140.9057414
+    },
+    {
+      "id": "jp_miyagi_station_8035287736",
+      "osm_id": 8035287736,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "長町南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagamachi-Minami"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N16",
+      "latitude": 38.2246978,
+      "longitude": 140.87708
+    },
+    {
+      "id": "jp_miyagi_station_8035287738",
+      "osm_id": 8035287738,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "長町一丁目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagamachi-Itchome"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N14",
+      "latitude": 38.2343373,
+      "longitude": 140.8875708
+    },
+    {
+      "id": "jp_miyagi_station_8035287739",
+      "osm_id": 8035287739,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "河原町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaramachi"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N13",
+      "latitude": 38.2407203,
+      "longitude": 140.8878578
+    },
+    {
+      "id": "jp_miyagi_station_8035287740",
+      "osm_id": 8035287740,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "愛宕橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Atagobashi"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N12",
+      "latitude": 38.2474191,
+      "longitude": 140.8816855
+    },
+    {
+      "id": "jp_miyagi_station_8035287741",
+      "osm_id": 8035287741,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "五橋",
+      "name_kana": "いつつばし",
+      "name_translations": {
+        "en": "Itsutsubashi"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N11",
+      "latitude": 38.2518641,
+      "longitude": 140.8810785
+    },
+    {
+      "id": "jp_miyagi_station_8035287742",
+      "osm_id": 8035287742,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "広瀬通",
+      "name_kana": "ひろせどおり",
+      "name_translations": {
+        "en": "Hirose-dori"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N09",
+      "latitude": 38.2628605,
+      "longitude": 140.8754851
+    },
+    {
+      "id": "jp_miyagi_station_8035287743",
+      "osm_id": 8035287743,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "勾当台公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotodai-Koen"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N08",
+      "latitude": 38.2667929,
+      "longitude": 140.8711687
+    },
+    {
+      "id": "jp_miyagi_station_8035287744",
+      "osm_id": 8035287744,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "北四番丁",
+      "name_kana": "きたよばんちょう",
+      "name_translations": {
+        "en": "Kita-Yobancho"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N07",
+      "latitude": 38.272036,
+      "longitude": 140.8691304
+    },
+    {
+      "id": "jp_miyagi_station_8035287746",
+      "osm_id": 8035287746,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "旭ヶ丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahigaoka"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N04",
+      "latitude": 38.2958475,
+      "longitude": 140.8837038
+    },
+    {
+      "id": "jp_miyagi_station_8035287748",
+      "osm_id": 8035287748,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "台原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dainohara"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N05",
+      "latitude": 38.2883182,
+      "longitude": 140.8783518
+    },
+    {
+      "id": "jp_miyagi_station_8035287749",
+      "osm_id": 8035287749,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "黒松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuromatsu"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N03",
+      "latitude": 38.3031116,
+      "longitude": 140.8864206
+    },
+    {
+      "id": "jp_miyagi_station_8035287750",
+      "osm_id": 8035287750,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "八乙女",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yaotome"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N02",
+      "latitude": 38.3132059,
+      "longitude": 140.8837798
+    },
+    {
+      "id": "jp_miyagi_station_8035287752",
+      "osm_id": 8035287752,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "subway",
+      "name": "富沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomizawa"
+      },
+      "operator": "仙台市交通局",
+      "network": null,
+      "ref": "N17",
+      "latitude": 38.2144503,
+      "longitude": 140.870681
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_8163812218",
+      "osm_id": 8163812218,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "仙台市交通局 実沢営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.3234451,
+      "longitude": 140.8184126
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_8186550896",
+      "osm_id": 8186550896,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三本木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanbongi PA"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.515206,
+      "longitude": 140.930356
+    },
+    {
+      "id": "jp_miyagi_station_8200260418",
+      "osm_id": 8200260418,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石巻あゆみ野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishinomakiayumino"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.4360541,
+      "longitude": 141.259292
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_8226600217",
+      "osm_id": 8226600217,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大和町バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taiwacho Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4381457,
+      "longitude": 140.8861948
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_8226600720",
+      "osm_id": 8226600720,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ミヤコーバス 吉岡営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4425859,
+      "longitude": 140.8841159
+    },
+    {
+      "id": "jp_miyagi_station_8663670921",
+      "osm_id": 8663670921,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "上鹿折",
+      "name_kana": "かみししおり",
+      "name_translations": {
+        "en": "Kami-Shishiori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9602586,
+      "longitude": 141.5668496
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_8756931218",
+      "osm_id": 8756931218,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "仙台市営バス 白沢出張所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.275321,
+      "longitude": 140.7141274
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_8895963086",
+      "osm_id": 8895963086,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "離島航路ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.4426529,
+      "longitude": 141.447546
+    },
+    {
+      "id": "jp_miyagi_station_9319673478",
+      "osm_id": 9319673478,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東新城",
+      "name_kana": "ひがししんじょう",
+      "name_translations": {
+        "en": "Higashishinjō"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.9047799,
+      "longitude": 141.5490551
+    },
+    {
+      "id": "jp_miyagi_station_9319675879",
+      "osm_id": 9319675879,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大谷まち",
+      "name_kana": "おおやまち",
+      "name_translations": {
+        "en": "Ōyamachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8191507,
+      "longitude": 141.5737808
+    },
+    {
+      "id": "jp_miyagi_station_9319685068",
+      "osm_id": 9319685068,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "内湾入口（八日町）",
+      "name_kana": "ないわんいりぐち（ようかまち）",
+      "name_translations": {
+        "en": "Naiwan-Iriguchi (Yōkamachi)"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.9087468,
+      "longitude": 141.5701398
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_10731859284",
+      "osm_id": 10731859284,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "桂島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "塩竈市営汽船",
+      "network": null,
+      "ref": null,
+      "latitude": 38.3367413,
+      "longitude": 141.0910053
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_10731859285",
+      "osm_id": 10731859285,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "石浜",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "塩竈市営汽船",
+      "network": null,
+      "ref": null,
+      "latitude": 38.3331568,
+      "longitude": 141.1027099
+    },
+    {
+      "id": "jp_miyagi_station_11282257041",
+      "osm_id": 11282257041,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "private",
+      "name": "中山平温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakayamadaira-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7265345,
+      "longitude": 140.6678724
+    },
+    {
+      "id": "jp_miyagi_station_13308218177",
+      "osm_id": 13308218177,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "志津川中央団地",
+      "name_kana": "しづがわちゅうおうだんち",
+      "name_translations": {
+        "en": "Shizugawa-Chūōdanchi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.6839012,
+      "longitude": 141.4503313
+    },
+    {
+      "id": "jp_miyagi_station_13308681531",
+      "osm_id": 13308681531,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小金沢",
+      "name_kana": "こがねざわ",
+      "name_translations": {
+        "en": "Koganezawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.7991063,
+      "longitude": 141.5373551
+    },
+    {
+      "id": "jp_miyagi_station_13308681540",
+      "osm_id": 13308681540,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "岩月",
+      "name_kana": "いわつき",
+      "name_translations": {
+        "en": "Iwatsuki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.8620424,
+      "longitude": 141.5840295
+    },
+    {
+      "id": "jp_miyagi_station_13310175987",
+      "osm_id": 13310175987,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "唐桑大沢",
+      "name_kana": "からくわおおさわ",
+      "name_translations": {
+        "en": "Karakuwaōsawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.9601601,
+      "longitude": 141.6315495
+    },
+    {
+      "id": "jp_miyagi_station_13310205942",
+      "osm_id": 13310205942,
+      "osm_type": "node",
+      "prefecture_id": "jp_miyagi",
+      "type": "station",
+      "subtype": "jr",
+      "name": "八幡大橋（東陵高校）",
+      "name_kana": "はちまんおおはし（とうりょうこうこう）",
+      "name_translations": {
+        "en": "Hachiman-Ōhashi（Tōryō High School)"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.9209071,
+      "longitude": 141.5852444
+    },
+    {
+      "id": "jp_miyagi_airport_57008836",
+      "osm_id": 57008836,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyagi",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "仙台空港",
+      "name_kana": "せんだいくうこう",
+      "name_translations": {
+        "en": "Sendai Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "SDJ",
+      "latitude": 38.1377873,
+      "longitude": 140.9144251
+    },
+    {
+      "id": "jp_miyagi_airport_79514556",
+      "osm_id": 79514556,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyagi",
+      "type": "airport",
+      "subtype": "military",
+      "name": "霞目飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasuminome Airfield"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RJSU",
+      "latitude": 38.2346807,
+      "longitude": 140.9205816
+    },
+    {
+      "id": "jp_miyagi_bus_terminal_421576774",
+      "osm_id": 421576774,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyagi",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ミヤコーバス佐沼営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.6899842,
+      "longitude": 141.1901737
+    },
+    {
+      "id": "jp_miyagi_ferry_terminal_424708960",
+      "osm_id": 424708960,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyagi",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "仙台港フェリーターミナルビル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sendai Port Ferry Terminal Building"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.2743596,
+      "longitude": 141.0054313
+    },
+    {
+      "id": "jp_miyagi_airport_1078163947",
+      "osm_id": 1078163947,
+      "osm_type": "way",
+      "prefecture_id": "jp_miyagi",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "瀬峰場外離着陸場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Semine Airfield"
+      },
+      "operator": "村上商会",
+      "network": null,
+      "ref": null,
+      "latitude": 38.6800803,
+      "longitude": 141.0217558
+    }
+  ]
+}

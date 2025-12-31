@@ -1,0 +1,1556 @@
+{
+  "fetchedAt": "2025-12-24T05:58:58.377Z",
+  "prefecture_id": "jp_okinawa",
+  "prefecture_name": "沖縄県",
+  "stats": {
+    "station": 19,
+    "airport": 17,
+    "ferry_terminal": 35,
+    "bus_terminal": 17,
+    "total": 88
+  },
+  "data": [
+    {
+      "id": "jp_okinawa_airport_407674577",
+      "osm_id": 407674577,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "military",
+      "name": "嘉手納飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kadena Air Base"
+      },
+      "operator": "United States Air Force",
+      "network": null,
+      "ref": "DNA",
+      "latitude": 26.3555999,
+      "longitude": 127.7675
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_605513348",
+      "osm_id": 605513348,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "上原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uehara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.4181811,
+      "longitude": 123.8001905
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_715842502",
+      "osm_id": 715842502,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "竹富",
+      "name_kana": "たけとみ",
+      "name_translations": {
+        "en": "Taketomi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.3364623,
+      "longitude": 124.0935676
+    },
+    {
+      "id": "jp_okinawa_airport_1042056568",
+      "osm_id": 1042056568,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "military",
+      "name": "米軍伊江島補助飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ie Shima Auxiliary Air Base"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "RODE",
+      "latitude": 26.7257576,
+      "longitude": 127.7649002
+    },
+    {
+      "id": "jp_okinawa_airport_1042056580",
+      "osm_id": 1042056580,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "military",
+      "name": "普天間飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Futenma Marine Corps Air Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2731265,
+      "longitude": 127.7557072
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_1441685365",
+      "osm_id": 1441685365,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "与那国島",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.4507867,
+      "longitude": 122.9420342
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_1441788609",
+      "osm_id": 1441788609,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "那覇（泊）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2241107,
+      "longitude": 127.6834483
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_1441839667",
+      "osm_id": 1441839667,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "渡名喜",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.3720985,
+      "longitude": 127.1403328
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_1668722931",
+      "osm_id": 1668722931,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "小浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kohama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.3444369,
+      "longitude": 123.9916745
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_1668727098",
+      "osm_id": 1668727098,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "黒島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.2534441,
+      "longitude": 124.0014719
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_2205769162",
+      "osm_id": 2205769162,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大原港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.2718945,
+      "longitude": 123.8841042
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_3090451166",
+      "osm_id": 3090451166,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "名護バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nago bus terminal"
+      },
+      "operator": "琉球バス交通;沖縄バス;那覇バス;東陽バス",
+      "network": null,
+      "ref": null,
+      "latitude": 26.5964868,
+      "longitude": 127.965459
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4233866136",
+      "osm_id": 4233866136,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "本部港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motobu Harbor"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.6412519,
+      "longitude": 127.8801271
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4262125475",
+      "osm_id": 4262125475,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "伊江港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ie Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.7073063,
+      "longitude": 127.8008307
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4456840767",
+      "osm_id": 4456840767,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "白浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.3591267,
+      "longitude": 123.7465576
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4456840774",
+      "osm_id": 4456840774,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "船浮",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.3364764,
+      "longitude": 123.7292136
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4472693653",
+      "osm_id": 4472693653,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "鳩間",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.4678624,
+      "longitude": 123.8205066
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4472713875",
+      "osm_id": 4472713875,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "波照間島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hateruma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.0673131,
+      "longitude": 123.7657696
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4474747381",
+      "osm_id": 4474747381,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "多良間",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.6443826,
+      "longitude": 124.721586
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4474747388",
+      "osm_id": 4474747388,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "平良",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.8065933,
+      "longitude": 125.2744671
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4557893580",
+      "osm_id": 4557893580,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "座間味",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zamami"
+      },
+      "operator": "座間味村",
+      "network": null,
+      "ref": null,
+      "latitude": 26.2266681,
+      "longitude": 127.3024972
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4566075989",
+      "osm_id": 4566075989,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "運天港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unten Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.6774673,
+      "longitude": 127.9976133
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4576268680",
+      "osm_id": 4576268680,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "長山",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.8042496,
+      "longitude": 125.2015983
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4589136386",
+      "osm_id": 4589136386,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "那覇新港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naha New Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2390578,
+      "longitude": 127.6770825
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4591948565",
+      "osm_id": 4591948565,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "平敷屋",
+      "name_kana": "へしきや",
+      "name_translations": {
+        "en": "Heshikiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.3071897,
+      "longitude": 127.9227065
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_4591949018",
+      "osm_id": 4591949018,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "津堅港",
+      "name_kana": "つけんこう",
+      "name_translations": {
+        "en": "Tsuken Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2446137,
+      "longitude": 127.9353416
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_4784437321",
+      "osm_id": 4784437321,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "屋嘉田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.4798464,
+      "longitude": 127.8438401
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_4792423623",
+      "osm_id": 4792423623,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "古島駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furujima Station (upper level)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2321479,
+      "longitude": 127.7039703
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_5332281792",
+      "osm_id": 5332281792,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "兼城港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.3414118,
+      "longitude": 126.7531649
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_5336868916",
+      "osm_id": 5336868916,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "上原港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uehara Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.4179552,
+      "longitude": 123.7997899
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_5614944671",
+      "osm_id": 5614944671,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Itoman Bus Terminal",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1287604,
+      "longitude": 127.6634248
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_5885023002",
+      "osm_id": 5885023002,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "安座真港カーフェリー乗場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Azama Port Car ferry stand"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1795876,
+      "longitude": 127.8269652
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_6222450341",
+      "osm_id": 6222450341,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "屋慶名バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.3274192,
+      "longitude": 127.9057721
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_6390608785",
+      "osm_id": 6390608785,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "Naha Cruise Terminal",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "Naha Port Authority",
+      "network": null,
+      "ref": null,
+      "latitude": 26.2253266,
+      "longitude": 127.6742915
+    },
+    {
+      "id": "jp_okinawa_station_6540547644",
+      "osm_id": 6540547644,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "壺川",
+      "name_kana": "つぼがわ",
+      "name_translations": {
+        "en": "Tsubogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2057971,
+      "longitude": 127.678392
+    },
+    {
+      "id": "jp_okinawa_station_6540547645",
+      "osm_id": 6540547645,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "旭橋",
+      "name_kana": "あさひばし",
+      "name_translations": {
+        "en": "Asahibashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2118503,
+      "longitude": 127.675463
+    },
+    {
+      "id": "jp_okinawa_station_6540547646",
+      "osm_id": 6540547646,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "県庁前",
+      "name_kana": "けんちょうまえ",
+      "name_translations": {
+        "en": "Prefectural Office"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "7",
+      "latitude": 26.2143841,
+      "longitude": 127.6793341
+    },
+    {
+      "id": "jp_okinawa_station_6540547649",
+      "osm_id": 6540547649,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "美栄橋",
+      "name_kana": "みえばし",
+      "name_translations": {
+        "en": "Miebashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "8",
+      "latitude": 26.219218,
+      "longitude": 127.6843885
+    },
+    {
+      "id": "jp_okinawa_station_6540547650",
+      "osm_id": 6540547650,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "牧志",
+      "name_kana": "まきし",
+      "name_translations": {
+        "en": "Makishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2171925,
+      "longitude": 127.6925906
+    },
+    {
+      "id": "jp_okinawa_station_6540583667",
+      "osm_id": 6540583667,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "安里",
+      "name_kana": "あさと",
+      "name_translations": {
+        "en": "Asato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2168041,
+      "longitude": 127.6957599
+    },
+    {
+      "id": "jp_okinawa_station_6540583670",
+      "osm_id": 6540583670,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "おもろまち",
+      "name_kana": "おもろまち",
+      "name_translations": {
+        "en": "Omoromachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2227746,
+      "longitude": 127.6984101
+    },
+    {
+      "id": "jp_okinawa_station_6540583673",
+      "osm_id": 6540583673,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "古島",
+      "name_kana": "ふるじま",
+      "name_translations": {
+        "en": "Furujima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2308633,
+      "longitude": 127.7030539
+    },
+    {
+      "id": "jp_okinawa_station_6540583675",
+      "osm_id": 6540583675,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "儀保",
+      "name_kana": "ぎぼ",
+      "name_translations": {
+        "en": "Gibo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2245946,
+      "longitude": 127.7190848
+    },
+    {
+      "id": "jp_okinawa_station_6540583676",
+      "osm_id": 6540583676,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "首里",
+      "name_kana": "しゅり",
+      "name_translations": {
+        "en": "Shuri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2191726,
+      "longitude": 127.7255525
+    },
+    {
+      "id": "jp_okinawa_station_6540630176",
+      "osm_id": 6540630176,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "小禄",
+      "name_kana": "おろく",
+      "name_translations": {
+        "en": "Oroku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1965305,
+      "longitude": 127.6670333
+    },
+    {
+      "id": "jp_okinawa_station_6540630177",
+      "osm_id": 6540630177,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤嶺",
+      "name_kana": "あかみね",
+      "name_translations": {
+        "en": "Akamine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1932392,
+      "longitude": 127.6604863
+    },
+    {
+      "id": "jp_okinawa_station_6540630178",
+      "osm_id": 6540630178,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "那覇空港",
+      "name_kana": "なはくうこう",
+      "name_translations": {
+        "en": "Naha Airport"
+      },
+      "operator": "沖縄都市モノレール",
+      "network": "沖縄都市モノレール線 (ゆいレール)",
+      "ref": "1",
+      "latitude": 26.2064858,
+      "longitude": 127.6522133
+    },
+    {
+      "id": "jp_okinawa_station_6842842194",
+      "osm_id": 6842842194,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "石嶺",
+      "name_kana": "いしみね",
+      "name_translations": {
+        "en": "Ishimine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2270073,
+      "longitude": 127.7290119
+    },
+    {
+      "id": "jp_okinawa_station_6844601159",
+      "osm_id": 6844601159,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "経塚",
+      "name_kana": "きょうづか",
+      "name_translations": {
+        "en": "Kyozuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2367191,
+      "longitude": 127.7285226
+    },
+    {
+      "id": "jp_okinawa_station_6844601160",
+      "osm_id": 6844601160,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "浦添前田",
+      "name_kana": "うらそえまえだ",
+      "name_translations": {
+        "en": "Urasoe-Maeda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2438455,
+      "longitude": 127.7322674
+    },
+    {
+      "id": "jp_okinawa_station_6901207713",
+      "osm_id": 6901207713,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "てだこ浦西",
+      "name_kana": "てだこうらにし",
+      "name_translations": {
+        "en": "Tedako-Uranishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2417482,
+      "longitude": 127.7419169
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_7667530585",
+      "osm_id": 7667530585,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "石垣",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.3364757,
+      "longitude": 124.1555104
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_7667530586",
+      "osm_id": 7667530586,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "石垣島離島ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.3368548,
+      "longitude": 124.1554568
+    },
+    {
+      "id": "jp_okinawa_station_7746899672",
+      "osm_id": 7746899672,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥武山公園",
+      "name_kana": "おうのやまこうえん",
+      "name_translations": {
+        "en": "Onoyama Park"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2007505,
+      "longitude": 127.6753296
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_7820421363",
+      "osm_id": 7820421363,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "佐良浜",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.8383445,
+      "longitude": 125.2143209
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_9839953553",
+      "osm_id": 9839953553,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "渡久地港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.6592346,
+      "longitude": 127.8899352
+    },
+    {
+      "id": "jp_okinawa_station_10915647317",
+      "osm_id": 10915647317,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "station",
+      "subtype": "private",
+      "name": "市立病院前",
+      "name_kana": "しりつびょういんまえ",
+      "name_translations": {
+        "en": "Naha City Hospital"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2275267,
+      "longitude": 127.7100529
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_11275453582",
+      "osm_id": 11275453582,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "具志川バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.3724629,
+      "longitude": 127.8593343
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_12293569413",
+      "osm_id": 12293569413,
+      "osm_type": "node",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "北谷ゲートウェイ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chatan Gateway"
+      },
+      "operator": null,
+      "network": "143",
+      "ref": null,
+      "latitude": 26.3142432,
+      "longitude": 127.7583464
+    },
+    {
+      "id": "jp_okinawa_airport_57015307",
+      "osm_id": 57015307,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "与那国空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yonaguni Airport"
+      },
+      "operator": "沖縄県",
+      "network": null,
+      "ref": "OGN",
+      "latitude": 24.4673042,
+      "longitude": 122.9793643
+    },
+    {
+      "id": "jp_okinawa_airport_57015332",
+      "osm_id": 57015332,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "波照間空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hateruma Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HTR",
+      "latitude": 24.0597121,
+      "longitude": 123.8056552
+    },
+    {
+      "id": "jp_okinawa_airport_57015536",
+      "osm_id": 57015536,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "北大東空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitadaito Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KTD",
+      "latitude": 25.9446378,
+      "longitude": 131.3267154
+    },
+    {
+      "id": "jp_okinawa_airport_57015551",
+      "osm_id": 57015551,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "南大東空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamidaito Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "MMD",
+      "latitude": 25.8465026,
+      "longitude": 131.2635281
+    },
+    {
+      "id": "jp_okinawa_airport_57015602",
+      "osm_id": 57015602,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "粟国空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aguni Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AGJ",
+      "latitude": 26.5927547,
+      "longitude": 127.2400049
+    },
+    {
+      "id": "jp_okinawa_airport_57015689",
+      "osm_id": 57015689,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "伊江島空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iejima Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "IEJ",
+      "latitude": 26.7226236,
+      "longitude": 127.7869276
+    },
+    {
+      "id": "jp_okinawa_airport_57015909",
+      "osm_id": 57015909,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "下地島空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimojishima Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "SHI",
+      "latitude": 24.8241764,
+      "longitude": 125.1457672
+    },
+    {
+      "id": "jp_okinawa_airport_57015910",
+      "osm_id": 57015910,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "宮古空港",
+      "name_kana": "みやこ くうこう",
+      "name_translations": {
+        "en": "Miyako Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "MMY",
+      "latitude": 24.7823798,
+      "longitude": 125.2948127
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_92889193",
+      "osm_id": 92889193,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "那覇港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naha Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2107626,
+      "longitude": 127.6701992
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_93259723",
+      "osm_id": 93259723,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "座間味港フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zamami Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2265965,
+      "longitude": 127.3019844
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_104324004",
+      "osm_id": 104324004,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "糸満バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itoman Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1289942,
+      "longitude": 127.6635002
+    },
+    {
+      "id": "jp_okinawa_airport_142146685",
+      "osm_id": 142146685,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "military",
+      "name": "航空自衛隊 那覇基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JASDF Naha Air Base"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1909141,
+      "longitude": 127.6540658
+    },
+    {
+      "id": "jp_okinawa_airport_214850676",
+      "osm_id": 214850676,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "石垣空港",
+      "name_kana": "いしがきくうこう",
+      "name_translations": {
+        "en": "Ishigaki Airport"
+      },
+      "operator": "石垣空港ターミナル",
+      "network": null,
+      "ref": "ROIG",
+      "latitude": 24.396716,
+      "longitude": 124.2453112
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_215189967",
+      "osm_id": 215189967,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bus Terminal"
+      },
+      "operator": "東運輸",
+      "network": null,
+      "ref": null,
+      "latitude": 24.3383352,
+      "longitude": 124.1569638
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_244676748",
+      "osm_id": 244676748,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "上原港フェリターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uehara Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.4182876,
+      "longitude": 123.7999238
+    },
+    {
+      "id": "jp_okinawa_airport_324129153",
+      "osm_id": 324129153,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "那覇空港",
+      "name_kana": "なはくうこう",
+      "name_translations": {
+        "en": "Naha Airport"
+      },
+      "operator": "国土交通大臣",
+      "network": null,
+      "ref": "OKA",
+      "latitude": 26.1966506,
+      "longitude": 127.6442731
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_533600880",
+      "osm_id": 533600880,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "那覇バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naha Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2112101,
+      "longitude": 127.6767629
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_554170935",
+      "osm_id": 554170935,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新川バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arakawa Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.203701,
+      "longitude": 127.7258615
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_587847423",
+      "osm_id": 587847423,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "那覇バス 糸満営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1187682,
+      "longitude": 127.6687228
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_712398528",
+      "osm_id": 712398528,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "石垣港新港地区旅客船ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishigaki new port Cruise ship Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 24.3271732,
+      "longitude": 124.1415799
+    },
+    {
+      "id": "jp_okinawa_airport_728246481",
+      "osm_id": 728246481,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "久米島空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kumejima Airport"
+      },
+      "operator": "久米島空港ターミナルビル株式会社",
+      "network": null,
+      "ref": "UEO",
+      "latitude": 26.3639745,
+      "longitude": 126.7142869
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_730772150",
+      "osm_id": 730772150,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "おもろまち駅バス停",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2233718,
+      "longitude": 127.6978493
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_837276492",
+      "osm_id": 837276492,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "真泊ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.3496713,
+      "longitude": 126.8219028
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_930324057",
+      "osm_id": 930324057,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "那覇バス 具志営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": "那覇バス",
+      "ref": null,
+      "latitude": 26.1772659,
+      "longitude": 127.6526371
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_962910342",
+      "osm_id": 962910342,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "琉球バス豊見城営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ryukyu Bus Tomigusuku Office"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1548906,
+      "longitude": 127.6685102
+    },
+    {
+      "id": "jp_okinawa_ferry_terminal_1204156454",
+      "osm_id": 1204156454,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "津堅港フェリー乗り場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuken Port Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.2448888,
+      "longitude": 127.9357325
+    },
+    {
+      "id": "jp_okinawa_bus_terminal_1319241532",
+      "osm_id": 1319241532,
+      "osm_type": "way",
+      "prefecture_id": "jp_okinawa",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "百名バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyakuna Bus terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 26.1398788,
+      "longitude": 127.7894018
+    },
+    {
+      "id": "jp_okinawa_airport_2360780",
+      "osm_id": 2360780,
+      "osm_type": "relation",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "多良間空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tarama Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TRA",
+      "latitude": 24.6537564,
+      "longitude": 124.6759017
+    },
+    {
+      "id": "jp_okinawa_airport_6987441",
+      "osm_id": 6987441,
+      "osm_type": "relation",
+      "prefecture_id": "jp_okinawa",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "慶良間空港",
+      "name_kana": "けらまくうこう",
+      "name_translations": {
+        "en": "Kerama Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KJP",
+      "latitude": 26.1678834,
+      "longitude": 127.2933428
+    }
+  ]
+}

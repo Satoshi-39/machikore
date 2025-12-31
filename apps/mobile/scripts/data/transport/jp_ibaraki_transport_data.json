@@ -1,0 +1,2792 @@
+{
+  "fetchedAt": "2025-12-24T05:48:30.346Z",
+  "prefecture_id": "jp_ibaraki",
+  "prefecture_name": "茨城県",
+  "stats": {
+    "station": 132,
+    "airport": 9,
+    "ferry_terminal": 2,
+    "bus_terminal": 13,
+    "total": 156
+  },
+  "data": [
+    {
+      "id": "jp_ibaraki_station_240509491",
+      "osm_id": 240509491,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "水戸",
+      "name_kana": "みと",
+      "name_translations": {
+        "en": "Mito"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.370781,
+      "longitude": 140.4762395
+    },
+    {
+      "id": "jp_ibaraki_station_263168557",
+      "osm_id": 263168557,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "下野宮",
+      "name_kana": "しものみや",
+      "name_translations": {
+        "en": "Shimonomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8157926,
+      "longitude": 140.3752434
+    },
+    {
+      "id": "jp_ibaraki_station_263168723",
+      "osm_id": 263168723,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常陸大子",
+      "name_kana": "ひたちだいご",
+      "name_translations": {
+        "en": "Hitachi-Daigo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7708676,
+      "longitude": 140.3506722
+    },
+    {
+      "id": "jp_ibaraki_station_263171062",
+      "osm_id": 263171062,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉川村",
+      "name_kana": "たまがわむら",
+      "name_translations": {
+        "en": "Tamagawamura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.579092,
+      "longitude": 140.3744964
+    },
+    {
+      "id": "jp_ibaraki_station_263173754",
+      "osm_id": 263173754,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "袋田",
+      "name_kana": "ふくろだ",
+      "name_translations": {
+        "en": "Fukuroda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7544103,
+      "longitude": 140.3795927
+    },
+    {
+      "id": "jp_ibaraki_station_264406055",
+      "osm_id": 264406055,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常陸多賀",
+      "name_kana": "ひたちたが",
+      "name_translations": {
+        "en": "Hitachi-Taga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5520331,
+      "longitude": 140.6325218
+    },
+    {
+      "id": "jp_ibaraki_station_264412594",
+      "osm_id": 264412594,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3733104,
+      "longitude": 140.2460444
+    },
+    {
+      "id": "jp_ibaraki_station_264412596",
+      "osm_id": 264412596,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3686231,
+      "longitude": 140.2145322
+    },
+    {
+      "id": "jp_ibaraki_station_264412753",
+      "osm_id": 264412753,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩瀬",
+      "name_kana": "いわせ",
+      "name_translations": {
+        "en": "Iwase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3595968,
+      "longitude": 140.1082972
+    },
+    {
+      "id": "jp_ibaraki_station_264412876",
+      "osm_id": 264412876,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "新治",
+      "name_kana": "にいはり",
+      "name_translations": {
+        "en": "Niihari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3282947,
+      "longitude": 140.0396924
+    },
+    {
+      "id": "jp_ibaraki_station_264413093",
+      "osm_id": 264413093,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "福原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3514905,
+      "longitude": 140.1871949
+    },
+    {
+      "id": "jp_ibaraki_station_264413239",
+      "osm_id": 264413239,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "大和",
+      "name_kana": "やまと",
+      "name_translations": {
+        "en": "Yamato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3454853,
+      "longitude": 140.0730363
+    },
+    {
+      "id": "jp_ibaraki_station_264413243",
+      "osm_id": 264413243,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "宍戸",
+      "name_kana": "ししど",
+      "name_translations": {
+        "en": "Shishido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3447069,
+      "longitude": 140.288646
+    },
+    {
+      "id": "jp_ibaraki_station_264413551",
+      "osm_id": 264413551,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2986752,
+      "longitude": 139.9390867
+    },
+    {
+      "id": "jp_ibaraki_station_264413560",
+      "osm_id": 264413560,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "結城",
+      "name_kana": "ゆうき",
+      "name_translations": {
+        "en": "Yuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2981402,
+      "longitude": 139.8724513
+    },
+    {
+      "id": "jp_ibaraki_station_264413561",
+      "osm_id": 264413561,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "小田林",
+      "name_kana": "おだばやし",
+      "name_translations": {
+        "en": "Otabayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3007515,
+      "longitude": 139.8538126
+    },
+    {
+      "id": "jp_ibaraki_station_264413610",
+      "osm_id": 264413610,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "川島",
+      "name_kana": "かわしま",
+      "name_translations": {
+        "en": "Kawashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2959569,
+      "longitude": 139.9158226
+    },
+    {
+      "id": "jp_ibaraki_station_264413611",
+      "osm_id": 264413611,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "東結城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Yuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2966605,
+      "longitude": 139.8912361
+    },
+    {
+      "id": "jp_ibaraki_station_270010636",
+      "osm_id": 270010636,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿島灘",
+      "name_kana": "かしまなだ",
+      "name_translations": {
+        "en": "Kashimanada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0754357,
+      "longitude": 140.5968525
+    },
+    {
+      "id": "jp_ibaraki_station_389738571",
+      "osm_id": 389738571,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "筑波山頂",
+      "name_kana": "つくばさんちょう",
+      "name_translations": {
+        "en": "Tsukubasancho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2258428,
+      "longitude": 140.1008194
+    },
+    {
+      "id": "jp_ibaraki_station_389743340",
+      "osm_id": 389743340,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮脇",
+      "name_kana": "みやわき",
+      "name_translations": {
+        "en": "Miyawaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2146042,
+      "longitude": 140.1001185
+    },
+    {
+      "id": "jp_ibaraki_station_452827440",
+      "osm_id": 452827440,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "竜ヶ崎",
+      "name_kana": "りゅうがさき",
+      "name_translations": {
+        "en": "Ryugasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9084135,
+      "longitude": 140.1793295
+    },
+    {
+      "id": "jp_ibaraki_station_452827512",
+      "osm_id": 452827512,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "入地",
+      "name_kana": "いれじ",
+      "name_translations": {
+        "en": "Ireji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9191689,
+      "longitude": 140.157004
+    },
+    {
+      "id": "jp_ibaraki_station_823274682",
+      "osm_id": 823274682,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "下館二高前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimodate-Nikomae"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3193341,
+      "longitude": 139.9720269
+    },
+    {
+      "id": "jp_ibaraki_station_823277290",
+      "osm_id": 823277290,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "ひぐち",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higuchi"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3584812,
+      "longitude": 139.9704471
+    },
+    {
+      "id": "jp_ibaraki_station_823277434",
+      "osm_id": 823277434,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "折本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Orimoto"
+      },
+      "operator": "真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3406151,
+      "longitude": 139.9712357
+    },
+    {
+      "id": "jp_ibaraki_airport_1042055838",
+      "osm_id": 1042055838,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "military",
+      "name": "霞ヶ浦飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasumigaura Airport"
+      },
+      "operator": "Japan Ground Self-Defense Force",
+      "network": null,
+      "ref": "RJAK",
+      "latitude": 36.0348716,
+      "longitude": 140.192832
+    },
+    {
+      "id": "jp_ibaraki_station_1668409338",
+      "osm_id": 1668409338,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "ゆめみ野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yumemino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9210552,
+      "longitude": 140.0352172
+    },
+    {
+      "id": "jp_ibaraki_station_2398353601",
+      "osm_id": 2398353601,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "内原",
+      "name_kana": "うちはら",
+      "name_translations": {
+        "en": "Uchihara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3704036,
+      "longitude": 140.3533152
+    },
+    {
+      "id": "jp_ibaraki_station_2398353606",
+      "osm_id": 2398353606,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "赤塚",
+      "name_kana": "あかつか",
+      "name_translations": {
+        "en": "Akatsuka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3819368,
+      "longitude": 140.4152492
+    },
+    {
+      "id": "jp_ibaraki_station_2398353607",
+      "osm_id": 2398353607,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "高浜",
+      "name_kana": "たかはま",
+      "name_translations": {
+        "en": "Takahama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1638097,
+      "longitude": 140.2946609
+    },
+    {
+      "id": "jp_ibaraki_station_2447142753",
+      "osm_id": 2447142753,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "北浦湖畔",
+      "name_kana": "きたうらこはん",
+      "name_translations": {
+        "en": "Kitaurakohan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1204749,
+      "longitude": 140.5368768
+    },
+    {
+      "id": "jp_ibaraki_station_2493510748",
+      "osm_id": 2493510748,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "偕楽園",
+      "name_kana": "かいらくえん",
+      "name_translations": {
+        "en": "Kairakuen"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "常磐線",
+      "ref": null,
+      "latitude": 36.3730982,
+      "longitude": 140.4562281
+    },
+    {
+      "id": "jp_ibaraki_station_2609141491",
+      "osm_id": 2609141491,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "神立",
+      "name_kana": "かんだつ",
+      "name_translations": {
+        "en": "Kandatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.120317,
+      "longitude": 140.2484767
+    },
+    {
+      "id": "jp_ibaraki_station_3012068698",
+      "osm_id": 3012068698,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "取手",
+      "name_kana": "とりで",
+      "name_translations": {
+        "en": "Toride"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JJ10;JL32",
+      "latitude": 35.8963803,
+      "longitude": 140.0632184
+    },
+    {
+      "id": "jp_ibaraki_station_3349564686",
+      "osm_id": 3349564686,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "万博記念公園",
+      "name_kana": "ばんぱくきねんこうえん",
+      "name_translations": {
+        "en": "Bampaku-kinenkoen"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "18",
+      "latitude": 36.0583204,
+      "longitude": 140.0594905
+    },
+    {
+      "id": "jp_ibaraki_station_3349564689",
+      "osm_id": 3349564689,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "研究学園",
+      "name_kana": "けんきゅうがくえん",
+      "name_translations": {
+        "en": "Kenkyū-gakuen"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "19",
+      "latitude": 36.0821337,
+      "longitude": 140.0824131
+    },
+    {
+      "id": "jp_ibaraki_station_3349564690",
+      "osm_id": 3349564690,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "みどりの",
+      "name_kana": "みどりの",
+      "name_translations": {
+        "en": "Midorino"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "17",
+      "latitude": 36.0298606,
+      "longitude": 140.0563392
+    },
+    {
+      "id": "jp_ibaraki_station_3349564691",
+      "osm_id": 3349564691,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "みらい平",
+      "name_kana": "みらいだいら",
+      "name_translations": {
+        "en": "Miraidaira"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "16",
+      "latitude": 35.9944506,
+      "longitude": 140.038253
+    },
+    {
+      "id": "jp_ibaraki_station_3349564692",
+      "osm_id": 3349564692,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "守谷",
+      "name_kana": "もりや",
+      "name_translations": {
+        "en": "Moriya"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "15",
+      "latitude": 35.9501173,
+      "longitude": 139.9919302
+    },
+    {
+      "id": "jp_ibaraki_station_3349564794",
+      "osm_id": 3349564794,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "つくば",
+      "name_kana": "つくば",
+      "name_translations": {
+        "en": "Tsukuba"
+      },
+      "operator": "首都圏新都市鉄道",
+      "network": null,
+      "ref": "20",
+      "latitude": 36.0826496,
+      "longitude": 140.1111943
+    },
+    {
+      "id": "jp_ibaraki_station_3730492328",
+      "osm_id": 3730492328,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "羽黒",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haguro"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.355239,
+      "longitude": 140.1434163
+    },
+    {
+      "id": "jp_ibaraki_station_3730492329",
+      "osm_id": 3730492329,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "友部",
+      "name_kana": "ともべ",
+      "name_translations": {
+        "en": "Tomobe"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3507978,
+      "longitude": 140.3062895
+    },
+    {
+      "id": "jp_ibaraki_station_3730494267",
+      "osm_id": 3730494267,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下館",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimodate"
+      },
+      "operator": "東日本旅客鉄道;関東鉄道;真岡鐵道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3041716,
+      "longitude": 139.9787036
+    },
+    {
+      "id": "jp_ibaraki_station_3799418501",
+      "osm_id": 3799418501,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "潮来",
+      "name_kana": "いたこ",
+      "name_translations": {
+        "en": "Itako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9370775,
+      "longitude": 140.5495746
+    },
+    {
+      "id": "jp_ibaraki_station_3799418504",
+      "osm_id": 3799418504,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿島サッカースタジアム",
+      "name_kana": "かしまさっかーすたじあむ",
+      "name_translations": {
+        "en": "Kashima Soccer Stadium"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9922557,
+      "longitude": 140.6362934
+    },
+    {
+      "id": "jp_ibaraki_station_3799418506",
+      "osm_id": 3799418506,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿島神宮",
+      "name_kana": "かしまじんぐう",
+      "name_translations": {
+        "en": "Kashima-Jingu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9706555,
+      "longitude": 140.6260511
+    },
+    {
+      "id": "jp_ibaraki_station_3799418511",
+      "osm_id": 3799418511,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "延方",
+      "name_kana": "のぶかた",
+      "name_translations": {
+        "en": "Nobukata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9581045,
+      "longitude": 140.5888585
+    },
+    {
+      "id": "jp_ibaraki_station_3799563057",
+      "osm_id": 3799563057,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "勝田",
+      "name_kana": "かつた",
+      "name_translations": {
+        "en": "Katsuta"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3944346,
+      "longitude": 140.5242433
+    },
+    {
+      "id": "jp_ibaraki_station_3800602941",
+      "osm_id": 3800602941,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "龍ケ崎市",
+      "name_kana": "りゅうがさきし",
+      "name_translations": {
+        "en": "Ryugasakishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9300777,
+      "longitude": 140.1382428
+    },
+    {
+      "id": "jp_ibaraki_station_4512979080",
+      "osm_id": 4512979080,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "磯原",
+      "name_kana": "いそはら",
+      "name_translations": {
+        "en": "Isohara"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7904431,
+      "longitude": 140.7459525
+    },
+    {
+      "id": "jp_ibaraki_ferry_terminal_5135331007",
+      "osm_id": 5135331007,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "遊覧船乗場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0797549,
+      "longitude": 140.2112451
+    },
+    {
+      "id": "jp_ibaraki_station_5604726300",
+      "osm_id": 5604726300,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常陸鴻巣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hitachi-Konosu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.472522,
+      "longitude": 140.4675919
+    },
+    {
+      "id": "jp_ibaraki_station_5604726675",
+      "osm_id": 5604726675,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "上菅谷",
+      "name_kana": "かみすがや",
+      "name_translations": {
+        "en": "Kami-Sugaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4554063,
+      "longitude": 140.4924412
+    },
+    {
+      "id": "jp_ibaraki_station_5604726708",
+      "osm_id": 5604726708,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "中菅谷",
+      "name_kana": "なかすがや",
+      "name_translations": {
+        "en": "Naka-Sugaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4458648,
+      "longitude": 140.4926363
+    },
+    {
+      "id": "jp_ibaraki_station_5604726727",
+      "osm_id": 5604726727,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "下菅谷",
+      "name_kana": "しもすがや",
+      "name_translations": {
+        "en": "Shimo-Sugaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.435349,
+      "longitude": 140.4940613
+    },
+    {
+      "id": "jp_ibaraki_station_5604930900",
+      "osm_id": 5604930900,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "瓜連",
+      "name_kana": "うりづら",
+      "name_translations": {
+        "en": "Urizura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4981274,
+      "longitude": 140.449723
+    },
+    {
+      "id": "jp_ibaraki_station_5604934663",
+      "osm_id": 5604934663,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "南酒出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Sakaide"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4773699,
+      "longitude": 140.4984936
+    },
+    {
+      "id": "jp_ibaraki_station_5604941424",
+      "osm_id": 5604941424,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "額田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nukada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4857123,
+      "longitude": 140.5034141
+    },
+    {
+      "id": "jp_ibaraki_station_5609791263",
+      "osm_id": 5609791263,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常陸太田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hitachi-Ota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.530947,
+      "longitude": 140.5281012
+    },
+    {
+      "id": "jp_ibaraki_station_5609791274",
+      "osm_id": 5609791274,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷河原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagawara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5198585,
+      "longitude": 140.5250904
+    },
+    {
+      "id": "jp_ibaraki_station_5609791293",
+      "osm_id": 5609791293,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "河合",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5082505,
+      "longitude": 140.5171357
+    },
+    {
+      "id": "jp_ibaraki_station_5648101311",
+      "osm_id": 5648101311,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "東水戸",
+      "name_kana": "ひがしみと",
+      "name_translations": {
+        "en": "Higashi-Mito"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3618876,
+      "longitude": 140.5157087
+    },
+    {
+      "id": "jp_ibaraki_station_5648122487",
+      "osm_id": 5648122487,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常澄",
+      "name_kana": "つねずみ",
+      "name_translations": {
+        "en": "Tsunezumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3408219,
+      "longitude": 140.558805
+    },
+    {
+      "id": "jp_ibaraki_station_5649515784",
+      "osm_id": 5649515784,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "牛久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ushiku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9755208,
+      "longitude": 140.1409404
+    },
+    {
+      "id": "jp_ibaraki_station_5649515788",
+      "osm_id": 5649515788,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤代",
+      "name_kana": "ふじしろ",
+      "name_translations": {
+        "en": "Fujishiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9206534,
+      "longitude": 140.1182086
+    },
+    {
+      "id": "jp_ibaraki_station_5653967901",
+      "osm_id": 5653967901,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "南守谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Moriya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9342845,
+      "longitude": 140.0024794
+    },
+    {
+      "id": "jp_ibaraki_station_5653967902",
+      "osm_id": 5653967902,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸頭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Togashira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9293333,
+      "longitude": 140.014095
+    },
+    {
+      "id": "jp_ibaraki_station_5653967903",
+      "osm_id": 5653967903,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲戸井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inatoi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9263843,
+      "longitude": 140.0224565
+    },
+    {
+      "id": "jp_ibaraki_station_5653972252",
+      "osm_id": 5653972252,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "新取手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Toride"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9174631,
+      "longitude": 140.0428185
+    },
+    {
+      "id": "jp_ibaraki_station_5653972253",
+      "osm_id": 5653972253,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "寺原",
+      "name_kana": "てらはら",
+      "name_translations": {
+        "en": "Terahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9119595,
+      "longitude": 140.0545417
+    },
+    {
+      "id": "jp_ibaraki_station_5653972257",
+      "osm_id": 5653972257,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "西取手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Toride"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9090894,
+      "longitude": 140.0589506
+    },
+    {
+      "id": "jp_ibaraki_station_5654211209",
+      "osm_id": 5654211209,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "小絹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokinu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.981199,
+      "longitude": 139.9832171
+    },
+    {
+      "id": "jp_ibaraki_station_5654211258",
+      "osm_id": 5654211258,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "新守谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Moriya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9665144,
+      "longitude": 139.9856512
+    },
+    {
+      "id": "jp_ibaraki_station_5657577879",
+      "osm_id": 5657577879,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "水海道",
+      "name_kana": "みつかいどう",
+      "name_translations": {
+        "en": "Mitsukaido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0180569,
+      "longitude": 139.9916513
+    },
+    {
+      "id": "jp_ibaraki_station_5657777926",
+      "osm_id": 5657777926,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamamura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1356647,
+      "longitude": 139.9698611
+    },
+    {
+      "id": "jp_ibaraki_station_5657777938",
+      "osm_id": 5657777938,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "宗道",
+      "name_kana": "そうどう",
+      "name_translations": {
+        "en": "Sodo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1541048,
+      "longitude": 139.9705218
+    },
+    {
+      "id": "jp_ibaraki_station_5657777969",
+      "osm_id": 5657777969,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "下妻",
+      "name_kana": "しもつま",
+      "name_translations": {
+        "en": "Shimotsuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1819925,
+      "longitude": 139.964444
+    },
+    {
+      "id": "jp_ibaraki_station_5657927765",
+      "osm_id": 5657927765,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "石下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishige"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1172237,
+      "longitude": 139.9742525
+    },
+    {
+      "id": "jp_ibaraki_station_5658505811",
+      "osm_id": 5658505811,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "三妻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0735656,
+      "longitude": 139.983024
+    },
+    {
+      "id": "jp_ibaraki_station_5658507935",
+      "osm_id": 5658507935,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "南石下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Ishige"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1023895,
+      "longitude": 139.9738622
+    },
+    {
+      "id": "jp_ibaraki_station_5658792637",
+      "osm_id": 5658792637,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "中妻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakatsuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0472177,
+      "longitude": 139.9906053
+    },
+    {
+      "id": "jp_ibaraki_station_5658792638",
+      "osm_id": 5658792638,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "北水海道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Mitsukaido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0320855,
+      "longitude": 139.992861
+    },
+    {
+      "id": "jp_ibaraki_station_5659757930",
+      "osm_id": 5659757930,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2473114,
+      "longitude": 139.9749928
+    },
+    {
+      "id": "jp_ibaraki_station_5659757948",
+      "osm_id": 5659757948,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "騰波ノ江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tobanoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2232561,
+      "longitude": 139.9764351
+    },
+    {
+      "id": "jp_ibaraki_station_5659757964",
+      "osm_id": 5659757964,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "大宝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daiho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.20309,
+      "longitude": 139.9702981
+    },
+    {
+      "id": "jp_ibaraki_station_5659797236",
+      "osm_id": 5659797236,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "大田郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2782142,
+      "longitude": 139.9596405
+    },
+    {
+      "id": "jp_ibaraki_station_5660663159",
+      "osm_id": 5660663159,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "佐和",
+      "name_kana": "さわ",
+      "name_translations": {
+        "en": "Sawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4298353,
+      "longitude": 140.5403025
+    },
+    {
+      "id": "jp_ibaraki_station_5660978302",
+      "osm_id": 5660978302,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "大津港",
+      "name_kana": "おおつこう",
+      "name_translations": {
+        "en": "Otsuko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8467929,
+      "longitude": 140.7780777
+    },
+    {
+      "id": "jp_ibaraki_station_5660978631",
+      "osm_id": 5660978631,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大甕",
+      "name_kana": "おおみか",
+      "name_translations": {
+        "en": "Omika"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5129887,
+      "longitude": 140.6197463
+    },
+    {
+      "id": "jp_ibaraki_station_5660978832",
+      "osm_id": 5660978832,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東海",
+      "name_kana": "とうかい",
+      "name_translations": {
+        "en": "Tokai"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.465474,
+      "longitude": 140.5657393
+    },
+    {
+      "id": "jp_ibaraki_station_5667111032",
+      "osm_id": 5667111032,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "日立",
+      "name_kana": "ひたち",
+      "name_translations": {
+        "en": "Hitachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.5908428,
+      "longitude": 140.6620685
+    },
+    {
+      "id": "jp_ibaraki_station_5669561695",
+      "osm_id": 5669561695,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "十王",
+      "name_kana": "じゅうおう",
+      "name_translations": {
+        "en": "Juo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6713814,
+      "longitude": 140.6859881
+    },
+    {
+      "id": "jp_ibaraki_station_5669643173",
+      "osm_id": 5669643173,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高萩",
+      "name_kana": "たかはぎ",
+      "name_translations": {
+        "en": "Takahagi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7145894,
+      "longitude": 140.7170568
+    },
+    {
+      "id": "jp_ibaraki_station_5669845198",
+      "osm_id": 5669845198,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "南中郷",
+      "name_kana": "みなみなかごう",
+      "name_translations": {
+        "en": "Minami-Nakago"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7532765,
+      "longitude": 140.7289959
+    },
+    {
+      "id": "jp_ibaraki_station_5677061633",
+      "osm_id": 5677061633,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿島旭",
+      "name_kana": "かしまあさひ",
+      "name_translations": {
+        "en": "Kashima-Asahi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2246136,
+      "longitude": 140.5126322
+    },
+    {
+      "id": "jp_ibaraki_station_5677061656",
+      "osm_id": 5677061656,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "涸沼",
+      "name_kana": "ひぬま",
+      "name_translations": {
+        "en": "Hinuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2658612,
+      "longitude": 140.5271718
+    },
+    {
+      "id": "jp_ibaraki_station_5677061684",
+      "osm_id": 5677061684,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "大洗",
+      "name_kana": "おおあらい",
+      "name_translations": {
+        "en": "Oarai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3150733,
+      "longitude": 140.5629126
+    },
+    {
+      "id": "jp_ibaraki_station_5685127415",
+      "osm_id": 5685127415,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "金上",
+      "name_kana": "かねあげ",
+      "name_translations": {
+        "en": "Kaneage"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3825755,
+      "longitude": 140.5337861
+    },
+    {
+      "id": "jp_ibaraki_station_5685127419",
+      "osm_id": 5685127419,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "工機前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3879522,
+      "longitude": 140.524735
+    },
+    {
+      "id": "jp_ibaraki_station_5688144253",
+      "osm_id": 5688144253,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "中根",
+      "name_kana": "なかね",
+      "name_translations": {
+        "en": "Nakane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3673904,
+      "longitude": 140.5623744
+    },
+    {
+      "id": "jp_ibaraki_station_5690791083",
+      "osm_id": 5690791083,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "高田の鉄橋",
+      "name_kana": "たかだのてっきょう",
+      "name_translations": {
+        "en": "Takadano-Tekkyo"
+      },
+      "operator": "ひたちなか海浜鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3523179,
+      "longitude": 140.5803579
+    },
+    {
+      "id": "jp_ibaraki_station_5699916938",
+      "osm_id": 5699916938,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "ひたち野うしく",
+      "name_kana": "ひたちのうしく",
+      "name_translations": {
+        "en": "Hitachino-Ushiku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0074123,
+      "longitude": 140.1583406
+    },
+    {
+      "id": "jp_ibaraki_station_5699955540",
+      "osm_id": 5699955540,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒川沖",
+      "name_kana": "あらかわおき",
+      "name_translations": {
+        "en": "Arakawaoki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0308144,
+      "longitude": 140.1660499
+    },
+    {
+      "id": "jp_ibaraki_station_5746264664",
+      "osm_id": 5746264664,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩間",
+      "name_kana": "いわま",
+      "name_translations": {
+        "en": "Iwama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2952877,
+      "longitude": 140.2764539
+    },
+    {
+      "id": "jp_ibaraki_station_5746342744",
+      "osm_id": 5746342744,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "羽鳥",
+      "name_kana": "はとり",
+      "name_translations": {
+        "en": "Hatori"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.2472941,
+      "longitude": 140.2867882
+    },
+    {
+      "id": "jp_ibaraki_station_5834930110",
+      "osm_id": 5834930110,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "古河",
+      "name_kana": "こが",
+      "name_translations": {
+        "en": "Koga"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1945874,
+      "longitude": 139.7095071
+    },
+    {
+      "id": "jp_ibaraki_station_6050594487",
+      "osm_id": 6050594487,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常陸津田",
+      "name_kana": "ひたちつだ",
+      "name_translations": {
+        "en": "Hitachi-Tsuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4043824,
+      "longitude": 140.4829687
+    },
+    {
+      "id": "jp_ibaraki_station_6050595329",
+      "osm_id": 6050595329,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "静",
+      "name_kana": "しず",
+      "name_translations": {
+        "en": "Shizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5060366,
+      "longitude": 140.4381637
+    },
+    {
+      "id": "jp_ibaraki_station_6050595988",
+      "osm_id": 6050595988,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "後台",
+      "name_kana": "ごだい",
+      "name_translations": {
+        "en": "Godai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4238012,
+      "longitude": 140.4899709
+    },
+    {
+      "id": "jp_ibaraki_station_6050596751",
+      "osm_id": 6050596751,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常陸青柳",
+      "name_kana": "ひたちあおやぎ",
+      "name_translations": {
+        "en": "Hitachi-Aoyagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.384134,
+      "longitude": 140.484499
+    },
+    {
+      "id": "jp_ibaraki_station_6054788671",
+      "osm_id": 6054788671,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐貫",
+      "name_kana": "さぬき",
+      "name_translations": {
+        "en": "Sanuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9296034,
+      "longitude": 140.1384174
+    },
+    {
+      "id": "jp_ibaraki_station_6060517712",
+      "osm_id": 6060517712,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石岡",
+      "name_kana": "いしおか",
+      "name_translations": {
+        "en": "Ishioka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1910839,
+      "longitude": 140.2800498
+    },
+    {
+      "id": "jp_ibaraki_station_6069784405",
+      "osm_id": 6069784405,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "土浦",
+      "name_kana": "つちうら",
+      "name_translations": {
+        "en": "Tsuchiura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0779952,
+      "longitude": 140.2060155
+    },
+    {
+      "id": "jp_ibaraki_station_6101775679",
+      "osm_id": 6101775679,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "野上原",
+      "name_kana": "のがみはら",
+      "name_translations": {
+        "en": "Nogamihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6058813,
+      "longitude": 140.3902541
+    },
+    {
+      "id": "jp_ibaraki_station_6101830031",
+      "osm_id": 6101830031,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿字ヶ浦",
+      "name_kana": "あじがうら",
+      "name_translations": {
+        "en": "Ajigaura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3836175,
+      "longitude": 140.6123681
+    },
+    {
+      "id": "jp_ibaraki_station_6101830032",
+      "osm_id": 6101830032,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "磯崎",
+      "name_kana": "いそざき",
+      "name_translations": {
+        "en": "Isozaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3780105,
+      "longitude": 140.6179632
+    },
+    {
+      "id": "jp_ibaraki_station_6101830033",
+      "osm_id": 6101830033,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "平磯",
+      "name_kana": "ひらいそ",
+      "name_translations": {
+        "en": "Hiraiso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3577657,
+      "longitude": 140.6076676
+    },
+    {
+      "id": "jp_ibaraki_station_6101830034",
+      "osm_id": 6101830034,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "殿山",
+      "name_kana": "とのやま",
+      "name_translations": {
+        "en": "Tonoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3499562,
+      "longitude": 140.601984
+    },
+    {
+      "id": "jp_ibaraki_station_6102881535",
+      "osm_id": 6102881535,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "那珂湊",
+      "name_kana": "なかみなと",
+      "name_translations": {
+        "en": "Nakaminato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3450819,
+      "longitude": 140.5881169
+    },
+    {
+      "id": "jp_ibaraki_station_6104557870",
+      "osm_id": 6104557870,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "常陸大宮",
+      "name_kana": "ひたちおおみや",
+      "name_translations": {
+        "en": "Hitachi-Omiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5475245,
+      "longitude": 140.412451
+    },
+    {
+      "id": "jp_ibaraki_station_6104559359",
+      "osm_id": 6104559359,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "西金",
+      "name_kana": "さいがね",
+      "name_translations": {
+        "en": "Saigane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6952875,
+      "longitude": 140.3866294
+    },
+    {
+      "id": "jp_ibaraki_station_6104559360",
+      "osm_id": 6104559360,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "下小川",
+      "name_kana": "しもおがわ",
+      "name_translations": {
+        "en": "Shimo-Ogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6690357,
+      "longitude": 140.3870248
+    },
+    {
+      "id": "jp_ibaraki_station_6104559361",
+      "osm_id": 6104559361,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "中舟生",
+      "name_kana": "なかふにゅう",
+      "name_translations": {
+        "en": "Naka-Funyu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6456412,
+      "longitude": 140.3923216
+    },
+    {
+      "id": "jp_ibaraki_station_6104559362",
+      "osm_id": 6104559362,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "山方宿",
+      "name_kana": "やまがたじゅく",
+      "name_translations": {
+        "en": "Yamagatajuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6246422,
+      "longitude": 140.4012536
+    },
+    {
+      "id": "jp_ibaraki_station_6104573691",
+      "osm_id": 6104573691,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "上小川",
+      "name_kana": "かみおがわ",
+      "name_translations": {
+        "en": "Kami-Ogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7190466,
+      "longitude": 140.3790589
+    },
+    {
+      "id": "jp_ibaraki_station_6104661385",
+      "osm_id": 6104661385,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒野台",
+      "name_kana": "こうやだい",
+      "name_translations": {
+        "en": "Koyadai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.016637,
+      "longitude": 140.6253567
+    },
+    {
+      "id": "jp_ibaraki_station_6104661386",
+      "osm_id": 6104661386,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "長者ヶ浜潮騒はまなす公園前",
+      "name_kana": "ちょうじゃがはましおさいはまなすこうえんまえ",
+      "name_translations": {
+        "en": "Chojagahama-Shiosai-Hamanasu-Koenmae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0315682,
+      "longitude": 140.6186539
+    },
+    {
+      "id": "jp_ibaraki_station_6104661387",
+      "osm_id": 6104661387,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "鹿島大野",
+      "name_kana": "かしまおおの",
+      "name_translations": {
+        "en": "Kashima-Ono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0507731,
+      "longitude": 140.6097771
+    },
+    {
+      "id": "jp_ibaraki_station_6104661388",
+      "osm_id": 6104661388,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "大洋",
+      "name_kana": "たいよう",
+      "name_translations": {
+        "en": "Taiyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1083532,
+      "longitude": 140.5763715
+    },
+    {
+      "id": "jp_ibaraki_station_6104661389",
+      "osm_id": 6104661389,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "新鉾田",
+      "name_kana": "しんほこた",
+      "name_translations": {
+        "en": "Shin-Hokota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1523844,
+      "longitude": 140.5203536
+    },
+    {
+      "id": "jp_ibaraki_station_6104661390",
+      "osm_id": 6104661390,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳宿",
+      "name_kana": "とくしゅく",
+      "name_translations": {
+        "en": "Tokushuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.190546,
+      "longitude": 140.5145326
+    },
+    {
+      "id": "jp_ibaraki_station_7899197761",
+      "osm_id": 7899197761,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小木津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogitsu"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6367899,
+      "longitude": 140.675282
+    },
+    {
+      "id": "jp_ibaraki_station_8512897973",
+      "osm_id": 8512897973,
+      "osm_type": "node",
+      "prefecture_id": "jp_ibaraki",
+      "type": "station",
+      "subtype": "private",
+      "name": "美乃浜学園",
+      "name_kana": "みのはまがくえん",
+      "name_translations": {
+        "en": "Minohamagakuen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.372657,
+      "longitude": 140.6170081
+    },
+    {
+      "id": "jp_ibaraki_airport_92832772",
+      "osm_id": 92832772,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "龍ヶ崎飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ryugasaki Airport"
+      },
+      "operator": "川田工業",
+      "network": null,
+      "ref": null,
+      "latitude": 35.9053459,
+      "longitude": 140.2421403
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_183361675",
+      "osm_id": 183361675,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "つくばセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukuba center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0823337,
+      "longitude": 140.1123694
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_272083112",
+      "osm_id": 272083112,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "水戸駅南口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3696364,
+      "longitude": 140.4763776
+    },
+    {
+      "id": "jp_ibaraki_airport_356582794",
+      "osm_id": 356582794,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "茨城空港",
+      "name_kana": "いばらきくうこう",
+      "name_translations": {
+        "en": "Ibaraki Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "IBR",
+      "latitude": 36.1825502,
+      "longitude": 140.4168241
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_380544514",
+      "osm_id": 380544514,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "江戸崎駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9603339,
+      "longitude": 140.3218116
+    },
+    {
+      "id": "jp_ibaraki_ferry_terminal_414582988",
+      "osm_id": 414582988,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "大洗カーフェリーポート",
+      "name_kana": "おおあらいかーふぇりーぽーと",
+      "name_translations": {
+        "en": "Ooarai Car Ferry Port"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3087644,
+      "longitude": 140.5736005
+    },
+    {
+      "id": "jp_ibaraki_airport_463253703",
+      "osm_id": 463253703,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "大利根飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otone Airfield"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8591703,
+      "longitude": 140.2414208
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_472266830",
+      "osm_id": 472266830,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岩井バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0519025,
+      "longitude": 139.8788358
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_649723844",
+      "osm_id": 649723844,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "日立南営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "茨城交通",
+      "network": null,
+      "ref": null,
+      "latitude": 36.4945431,
+      "longitude": 140.6032219
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_793235023",
+      "osm_id": 793235023,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "朝日自動車バス回転場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1139637,
+      "longitude": 139.7455344
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_804620652",
+      "osm_id": 804620652,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "常陸太田市高速バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5445371,
+      "longitude": 140.5288526
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_839774466",
+      "osm_id": 839774466,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "猿島バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.117131,
+      "longitude": 139.8856488
+    },
+    {
+      "id": "jp_ibaraki_airport_947806075",
+      "osm_id": 947806075,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "城里場外離着陸場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirosato Auxiliary Airfield"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5312727,
+      "longitude": 140.3583957
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_1091532985",
+      "osm_id": 1091532985,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "境古河バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1231952,
+      "longitude": 139.8187504
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_1091532990",
+      "osm_id": 1091532990,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "境町高速バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.120887,
+      "longitude": 139.8100503
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_1097426850",
+      "osm_id": 1097426850,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "石岡駅バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1905679,
+      "longitude": 140.2809416
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_1097601803",
+      "osm_id": 1097601803,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "小川駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1665347,
+      "longitude": 140.3499596
+    },
+    {
+      "id": "jp_ibaraki_airport_1136987587",
+      "osm_id": 1136987587,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "w",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maeyama Shimotsuma Heliport"
+      },
+      "operator": "前山倉庫",
+      "network": null,
+      "ref": "Maeyama",
+      "latitude": 36.2018144,
+      "longitude": 139.9984767
+    },
+    {
+      "id": "jp_ibaraki_airport_1137555316",
+      "osm_id": 1137555316,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "ラジコン飛行場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4345487,
+      "longitude": 140.4238087
+    },
+    {
+      "id": "jp_ibaraki_airport_1155367150",
+      "osm_id": 1155367150,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "つくばヘリポート",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukuba Heliport"
+      },
+      "operator": "つくば航空",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1172917,
+      "longitude": 140.130918
+    },
+    {
+      "id": "jp_ibaraki_bus_terminal_1231872570",
+      "osm_id": 1231872570,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "玉造駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1115038,
+      "longitude": 140.4136406
+    },
+    {
+      "id": "jp_ibaraki_airport_1265412224",
+      "osm_id": 1265412224,
+      "osm_type": "way",
+      "prefecture_id": "jp_ibaraki",
+      "type": "airport",
+      "subtype": "heliport",
+      "name": "結城ヘリポート",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yuki Heliport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2861433,
+      "longitude": 139.9025874
+    }
+  ]
+}

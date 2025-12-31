@@ -1,0 +1,3624 @@
+{
+  "fetchedAt": "2025-12-24T05:46:54.540Z",
+  "prefecture_id": "jp_iwate",
+  "prefecture_name": "岩手県",
+  "stats": {
+    "station": 187,
+    "airport": 1,
+    "ferry_terminal": 0,
+    "bus_terminal": 14,
+    "total": 202
+  },
+  "data": [
+    {
+      "id": "jp_iwate_station_263306056",
+      "osm_id": 263306056,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "島越",
+      "name_kana": "しまのこし",
+      "name_translations": {
+        "en": "Shimanokoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.916067,
+      "longitude": 141.939579
+    },
+    {
+      "id": "jp_iwate_station_263306071",
+      "osm_id": 263306071,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "摂待",
+      "name_kana": "せったい",
+      "name_translations": {
+        "en": "Settai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.8095699,
+      "longitude": 141.9621696
+    },
+    {
+      "id": "jp_iwate_station_263306090",
+      "osm_id": 263306090,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "一の渡",
+      "name_kana": "いちのわたり",
+      "name_translations": {
+        "en": "Ichinowatari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.686553,
+      "longitude": 141.942534
+    },
+    {
+      "id": "jp_iwate_station_263306175",
+      "osm_id": 263306175,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "新田老",
+      "name_kana": "しんたろう",
+      "name_translations": {
+        "en": "Shin-Taro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7355245,
+      "longitude": 141.967244
+    },
+    {
+      "id": "jp_iwate_station_263306558",
+      "osm_id": 263306558,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "白井海岸",
+      "name_kana": "しらいかいがん",
+      "name_translations": {
+        "en": "Shirai-Kaigan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0328525,
+      "longitude": 141.8829478
+    },
+    {
+      "id": "jp_iwate_station_263307225",
+      "osm_id": 263307225,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐羽根",
+      "name_kana": "さばね",
+      "name_translations": {
+        "en": "Sabane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.711118,
+      "longitude": 141.93588
+    },
+    {
+      "id": "jp_iwate_station_263307354",
+      "osm_id": 263307354,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中宇部",
+      "name_kana": "りくちゅううべ",
+      "name_translations": {
+        "en": "Rikuchuube"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.1324765,
+      "longitude": 141.7858819
+    },
+    {
+      "id": "jp_iwate_station_263307451",
+      "osm_id": 263307451,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "十府ヶ浦海岸",
+      "name_kana": "とふがうらかいがん",
+      "name_translations": {
+        "en": "Tofugaurakaigan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0966886,
+      "longitude": 141.8241876
+    },
+    {
+      "id": "jp_iwate_station_263307753",
+      "osm_id": 263307753,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "普代",
+      "name_kana": "ふだい",
+      "name_translations": {
+        "en": "Fudai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0027981,
+      "longitude": 141.8862732
+    },
+    {
+      "id": "jp_iwate_station_263308003",
+      "osm_id": 263308003,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩泉小本",
+      "name_kana": "いわいずみおもと",
+      "name_translations": {
+        "en": "Iwaizumiomoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.8425519,
+      "longitude": 141.9584901
+    },
+    {
+      "id": "jp_iwate_station_263308639",
+      "osm_id": 263308639,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "田老",
+      "name_kana": "たろう",
+      "name_translations": {
+        "en": "Tarou"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.731517,
+      "longitude": 141.964384
+    },
+    {
+      "id": "jp_iwate_station_263309450",
+      "osm_id": 263309450,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "堀内",
+      "name_kana": "ほりない",
+      "name_translations": {
+        "en": "Horinai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0517534,
+      "longitude": 141.8594586
+    },
+    {
+      "id": "jp_iwate_station_263315557",
+      "osm_id": 263315557,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "野田玉川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nodatamagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.082598,
+      "longitude": 141.8289195
+    },
+    {
+      "id": "jp_iwate_station_263315613",
+      "osm_id": 263315613,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "田野畑",
+      "name_kana": "たのはた",
+      "name_translations": {
+        "en": "Tanohata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.9339742,
+      "longitude": 141.9340522
+    },
+    {
+      "id": "jp_iwate_station_264167727",
+      "osm_id": 264167727,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "三陸",
+      "name_kana": "さんりく",
+      "name_translations": {
+        "en": "Sanriku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.1172003,
+      "longitude": 141.8099869
+    },
+    {
+      "id": "jp_iwate_station_264167729",
+      "osm_id": 264167729,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸前赤崎",
+      "name_kana": "りくぜんあかさき",
+      "name_translations": {
+        "en": "Rikuzen-Akasaki"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0682084,
+      "longitude": 141.7421022
+    },
+    {
+      "id": "jp_iwate_station_264167730",
+      "osm_id": 264167730,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "甫嶺",
+      "name_kana": "ほれい",
+      "name_translations": {
+        "en": "Horei"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.093452,
+      "longitude": 141.8065792
+    },
+    {
+      "id": "jp_iwate_station_264167812",
+      "osm_id": 264167812,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉浜",
+      "name_kana": "よしはま",
+      "name_translations": {
+        "en": "Yoshihama"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.1510917,
+      "longitude": 141.8360118
+    },
+    {
+      "id": "jp_iwate_station_264167813",
+      "osm_id": 264167813,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "恋し浜",
+      "name_kana": "こいしはま",
+      "name_translations": {
+        "en": "Koishihama"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0744002,
+      "longitude": 141.8163943
+    },
+    {
+      "id": "jp_iwate_station_264167895",
+      "osm_id": 264167895,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "平田",
+      "name_kana": "へいた",
+      "name_translations": {
+        "en": "Heita"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.2460523,
+      "longitude": 141.8860497
+    },
+    {
+      "id": "jp_iwate_station_264167942",
+      "osm_id": 264167942,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "綾里",
+      "name_kana": "りょうり",
+      "name_translations": {
+        "en": "Ryori"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0542007,
+      "longitude": 141.7989788
+    },
+    {
+      "id": "jp_iwate_station_264170285",
+      "osm_id": 264170285,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "山ノ目",
+      "name_kana": "やまのめ",
+      "name_translations": {
+        "en": "Yamanome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9513097,
+      "longitude": 141.1317803
+    },
+    {
+      "id": "jp_iwate_station_264170614",
+      "osm_id": 264170614,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "平泉",
+      "name_kana": "ひらいずみ",
+      "name_translations": {
+        "en": "Hiraizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9880865,
+      "longitude": 141.1176428
+    },
+    {
+      "id": "jp_iwate_station_264171726",
+      "osm_id": 264171726,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "清水原",
+      "name_kana": "しみずはら",
+      "name_translations": {
+        "en": "Shimizuhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8547504,
+      "longitude": 141.1568388
+    },
+    {
+      "id": "jp_iwate_station_264172570",
+      "osm_id": 264172570,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中折居",
+      "name_kana": "りくちゅうおりい",
+      "name_translations": {
+        "en": "Rikuchu-Orii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.0941607,
+      "longitude": 141.1408269
+    },
+    {
+      "id": "jp_iwate_station_264173247",
+      "osm_id": 264173247,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "前沢",
+      "name_kana": "まえさわ",
+      "name_translations": {
+        "en": "Maesawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.0484618,
+      "longitude": 141.1263144
+    },
+    {
+      "id": "jp_iwate_station_264224311",
+      "osm_id": 264224311,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "角の浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kadonohama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.444143,
+      "longitude": 141.682057
+    },
+    {
+      "id": "jp_iwate_station_264225102",
+      "osm_id": 264225102,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中中野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuchu-Nakano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.304668,
+      "longitude": 141.78789
+    },
+    {
+      "id": "jp_iwate_station_264225108",
+      "osm_id": 264225108,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "種市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taneichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4111121,
+      "longitude": 141.7150656
+    },
+    {
+      "id": "jp_iwate_station_264225149",
+      "osm_id": 264225149,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "平内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiranai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.4252835,
+      "longitude": 141.6995578
+    },
+    {
+      "id": "jp_iwate_station_264225578",
+      "osm_id": 264225578,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "玉川",
+      "name_kana": "たまがわ",
+      "name_translations": {
+        "en": "Tamagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.3807319,
+      "longitude": 141.7348277
+    },
+    {
+      "id": "jp_iwate_station_264225852",
+      "osm_id": 264225852,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "有家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uge"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.3238582,
+      "longitude": 141.7729792
+    },
+    {
+      "id": "jp_iwate_station_264225996",
+      "osm_id": 264225996,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "宿戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shukunohe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.3659898,
+      "longitude": 141.7469664
+    },
+    {
+      "id": "jp_iwate_station_264226040",
+      "osm_id": 264226040,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "侍浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Samuraihama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.2614344,
+      "longitude": 141.7606305
+    },
+    {
+      "id": "jp_iwate_station_264226044",
+      "osm_id": 264226044,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中八木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuchu-Yagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.3454421,
+      "longitude": 141.7665421
+    },
+    {
+      "id": "jp_iwate_station_264226191",
+      "osm_id": 264226191,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "久慈",
+      "name_kana": "くじ",
+      "name_translations": {
+        "en": "Kuji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.1902903,
+      "longitude": 141.7708835
+    },
+    {
+      "id": "jp_iwate_station_264226400",
+      "osm_id": 264226400,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中夏井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuchu-Natsui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.2074065,
+      "longitude": 141.7922251
+    },
+    {
+      "id": "jp_iwate_station_264227583",
+      "osm_id": 264227583,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "平館",
+      "name_kana": "たいらだて",
+      "name_translations": {
+        "en": "Tairadate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.950774,
+      "longitude": 141.0855698
+    },
+    {
+      "id": "jp_iwate_station_264227768",
+      "osm_id": 264227768,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤坂田",
+      "name_kana": "あかさかた",
+      "name_translations": {
+        "en": "Akasakata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.048762,
+      "longitude": 141.004289
+    },
+    {
+      "id": "jp_iwate_station_264227824",
+      "osm_id": 264227824,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "小屋の畑",
+      "name_kana": "こやのはた",
+      "name_translations": {
+        "en": "Koyanohata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0766715,
+      "longitude": 141.02066
+    },
+    {
+      "id": "jp_iwate_station_264228020",
+      "osm_id": 264228020,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒屋新町",
+      "name_kana": "あらやしんまち",
+      "name_translations": {
+        "en": "Araya-Shinmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0973548,
+      "longitude": 141.0491912
+    },
+    {
+      "id": "jp_iwate_station_264228915",
+      "osm_id": 264228915,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "田山",
+      "name_kana": "たやま",
+      "name_translations": {
+        "en": "Tayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.1396379,
+      "longitude": 140.9442521
+    },
+    {
+      "id": "jp_iwate_station_264230256",
+      "osm_id": 264230256,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "横間",
+      "name_kana": "よこま",
+      "name_translations": {
+        "en": "Yokoma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.1074805,
+      "longitude": 141.0275678
+    },
+    {
+      "id": "jp_iwate_station_264230264",
+      "osm_id": 264230264,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "兄畑",
+      "name_kana": "あにはた",
+      "name_translations": {
+        "en": "Anihata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.1162368,
+      "longitude": 140.8822362
+    },
+    {
+      "id": "jp_iwate_station_264231287",
+      "osm_id": 264231287,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "春木場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harukiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6934072,
+      "longitude": 140.9439562
+    },
+    {
+      "id": "jp_iwate_station_264231502",
+      "osm_id": 264231502,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮古",
+      "name_kana": "みやこ",
+      "name_translations": {
+        "en": "Miyako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6398721,
+      "longitude": 141.9475248
+    },
+    {
+      "id": "jp_iwate_station_264231542",
+      "osm_id": 264231542,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "山岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamagishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7160339,
+      "longitude": 141.1713191
+    },
+    {
+      "id": "jp_iwate_station_264231685",
+      "osm_id": 264231685,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "上盛岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Morioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7114956,
+      "longitude": 141.148516
+    },
+    {
+      "id": "jp_iwate_station_264231693",
+      "osm_id": 264231693,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "千徳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sentoku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6323145,
+      "longitude": 141.9123209
+    },
+    {
+      "id": "jp_iwate_station_264231696",
+      "osm_id": 264231696,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "磯鶏",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sokei"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6299529,
+      "longitude": 141.9608947
+    },
+    {
+      "id": "jp_iwate_station_264231873",
+      "osm_id": 264231873,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "区界",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuzakai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6517598,
+      "longitude": 141.351454
+    },
+    {
+      "id": "jp_iwate_station_264232849",
+      "osm_id": 264232849,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "上米内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Yonai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7439231,
+      "longitude": 141.2038353
+    },
+    {
+      "id": "jp_iwate_station_264233451",
+      "osm_id": 264233451,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "川内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawauchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.640706,
+      "longitude": 141.5977644
+    },
+    {
+      "id": "jp_iwate_station_264233470",
+      "osm_id": 264233470,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "蟇目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hikime"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6296697,
+      "longitude": 141.8388039
+    },
+    {
+      "id": "jp_iwate_station_264233895",
+      "osm_id": 264233895,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤渕",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akabuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6850376,
+      "longitude": 140.9064553
+    },
+    {
+      "id": "jp_iwate_station_264233946",
+      "osm_id": 264233946,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "花原市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kebaraichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6305018,
+      "longitude": 141.8613492
+    },
+    {
+      "id": "jp_iwate_station_264234167",
+      "osm_id": 264234167,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "雫石",
+      "name_kana": "しずくいし",
+      "name_translations": {
+        "en": "Shizukuishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6892709,
+      "longitude": 140.9744464
+    },
+    {
+      "id": "jp_iwate_station_264234639",
+      "osm_id": 264234639,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "松草",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsukusa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6357249,
+      "longitude": 141.4376987
+    },
+    {
+      "id": "jp_iwate_station_264234867",
+      "osm_id": 264234867,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中山田",
+      "name_kana": "りくちゅうやまだ",
+      "name_translations": {
+        "en": "Rikuchu-Yamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.4639054,
+      "longitude": 141.9507652
+    },
+    {
+      "id": "jp_iwate_station_264235043",
+      "osm_id": 264235043,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "腹帯",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haratai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6045202,
+      "longitude": 141.7677045
+    },
+    {
+      "id": "jp_iwate_station_264235479",
+      "osm_id": 264235479,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中川井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuchu-Kawai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.5972217,
+      "longitude": 141.6813108
+    },
+    {
+      "id": "jp_iwate_station_264235800",
+      "osm_id": 264235800,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "箱石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakoishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6173956,
+      "longitude": 141.6255534
+    },
+    {
+      "id": "jp_iwate_station_264236579",
+      "osm_id": 264236579,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "払川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haraigawa"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.5643549,
+      "longitude": 141.9328947
+    },
+    {
+      "id": "jp_iwate_station_264236583",
+      "osm_id": 264236583,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩手船越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwate-Funakoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.4312024,
+      "longitude": 141.9739513
+    },
+    {
+      "id": "jp_iwate_station_264236708",
+      "osm_id": 264236708,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "津軽石",
+      "name_kana": "つがるいし",
+      "name_translations": {
+        "en": "Tsugaruishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.5814432,
+      "longitude": 141.937742
+    },
+    {
+      "id": "jp_iwate_station_264236801",
+      "osm_id": 264236801,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵜住居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unosumai"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.3268633,
+      "longitude": 141.8880137
+    },
+    {
+      "id": "jp_iwate_station_264236808",
+      "osm_id": 264236808,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊間根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyomane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.5343425,
+      "longitude": 141.9246671
+    },
+    {
+      "id": "jp_iwate_station_264236847",
+      "osm_id": 264236847,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "八木沢・宮古短大",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagisawa Miyakotandai"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.619315,
+      "longitude": 141.9464052
+    },
+    {
+      "id": "jp_iwate_station_264237036",
+      "osm_id": 264237036,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "両石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ryoishi"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.3082279,
+      "longitude": 141.8889773
+    },
+    {
+      "id": "jp_iwate_station_264237096",
+      "osm_id": 264237096,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "浪板海岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namiita-Kaigan"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.3836466,
+      "longitude": 141.9351291
+    },
+    {
+      "id": "jp_iwate_station_264238326",
+      "osm_id": 264238326,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "吉里吉里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kirikiri"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.3698457,
+      "longitude": 141.938865
+    },
+    {
+      "id": "jp_iwate_station_264238639",
+      "osm_id": 264238639,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "大槌",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otsuchi"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.3566039,
+      "longitude": 141.9022324
+    },
+    {
+      "id": "jp_iwate_station_264239387",
+      "osm_id": 264239387,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "平津戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiratsuto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6235214,
+      "longitude": 141.5118007
+    },
+    {
+      "id": "jp_iwate_station_264240774",
+      "osm_id": 264240774,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "織笠",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Orikasa"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.4540258,
+      "longitude": 141.9552778
+    },
+    {
+      "id": "jp_iwate_station_264253708",
+      "osm_id": 264253708,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "平倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirakura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2645937,
+      "longitude": 141.5960024
+    },
+    {
+      "id": "jp_iwate_station_264253716",
+      "osm_id": 264253716,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "似内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nitanai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.4068589,
+      "longitude": 141.1417419
+    },
+    {
+      "id": "jp_iwate_station_264253719",
+      "osm_id": 264253719,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩根橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwanebashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3552437,
+      "longitude": 141.3189494
+    },
+    {
+      "id": "jp_iwate_station_264253817",
+      "osm_id": 264253817,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "綾織",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ayaori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3284639,
+      "longitude": 141.4769877
+    },
+    {
+      "id": "jp_iwate_station_264253849",
+      "osm_id": 264253849,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "足ヶ瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashigase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2546152,
+      "longitude": 141.6458846
+    },
+    {
+      "id": "jp_iwate_station_264253933",
+      "osm_id": 264253933,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "青笹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aozasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3115139,
+      "longitude": 141.5688962
+    },
+    {
+      "id": "jp_iwate_station_264254004",
+      "osm_id": 264254004,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "小山田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oyamada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.408508,
+      "longitude": 141.194199
+    },
+    {
+      "id": "jp_iwate_station_264254043",
+      "osm_id": 264254043,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "洞泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dosen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2507071,
+      "longitude": 141.7604816
+    },
+    {
+      "id": "jp_iwate_station_264254095",
+      "osm_id": 264254095,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "小佐野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kosano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2645683,
+      "longitude": 141.8365965
+    },
+    {
+      "id": "jp_iwate_station_264254176",
+      "osm_id": 264254176,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "遠野",
+      "name_kana": "とおの",
+      "name_translations": {
+        "en": "Tono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3324341,
+      "longitude": 141.5311486
+    },
+    {
+      "id": "jp_iwate_station_264254357",
+      "osm_id": 264254357,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒谷前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arayamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.309908,
+      "longitude": 141.4286063
+    },
+    {
+      "id": "jp_iwate_station_264254358",
+      "osm_id": 264254358,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏木平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashiwagidaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3058024,
+      "longitude": 141.379667
+    },
+    {
+      "id": "jp_iwate_station_264254680",
+      "osm_id": 264254680,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "鱒沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Masuzawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3002089,
+      "longitude": 141.3995977
+    },
+    {
+      "id": "jp_iwate_station_264254809",
+      "osm_id": 264254809,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "土沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuchizawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3831005,
+      "longitude": 141.232926
+    },
+    {
+      "id": "jp_iwate_station_264254824",
+      "osm_id": 264254824,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "上有住",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Arisu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.242168,
+      "longitude": 141.681916
+    },
+    {
+      "id": "jp_iwate_station_264254841",
+      "osm_id": 264254841,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "松倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsukura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2563991,
+      "longitude": 141.8015862
+    },
+    {
+      "id": "jp_iwate_station_264254842",
+      "osm_id": 264254842,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩手二日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwate-Futsukamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3236742,
+      "longitude": 141.4562853
+    },
+    {
+      "id": "jp_iwate_station_264254950",
+      "osm_id": 264254950,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮守",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyamori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3504373,
+      "longitude": 141.3503073
+    },
+    {
+      "id": "jp_iwate_station_264255136",
+      "osm_id": 264255136,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "晴山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haruyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3664942,
+      "longitude": 141.2580683
+    },
+    {
+      "id": "jp_iwate_station_264255486",
+      "osm_id": 264255486,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中大橋",
+      "name_kana": "りくちゅうおおはし",
+      "name_translations": {
+        "en": "Rikuchu-Ohashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2807739,
+      "longitude": 141.7184277
+    },
+    {
+      "id": "jp_iwate_station_264255519",
+      "osm_id": 264255519,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩手上郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwate-Kamigo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2842716,
+      "longitude": 141.5861367
+    },
+    {
+      "id": "jp_iwate_station_264256562",
+      "osm_id": 264256562,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "立川目",
+      "name_kana": "たてかわめ",
+      "name_translations": {
+        "en": "Tatekawame"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3077084,
+      "longitude": 140.9976417
+    },
+    {
+      "id": "jp_iwate_station_264256598",
+      "osm_id": 264256598,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤根",
+      "name_kana": "ふじね",
+      "name_translations": {
+        "en": "Fujine"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3010205,
+      "longitude": 141.040073
+    },
+    {
+      "id": "jp_iwate_station_264257161",
+      "osm_id": 264257161,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "ゆだ錦秋湖",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.295263,
+      "longitude": 140.8356048
+    },
+    {
+      "id": "jp_iwate_station_264257261",
+      "osm_id": 264257261,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "ゆだ高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yuda-Kōgen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3008533,
+      "longitude": 140.7367001
+    },
+    {
+      "id": "jp_iwate_station_264257398",
+      "osm_id": 264257398,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3011127,
+      "longitude": 140.9318093
+    },
+    {
+      "id": "jp_iwate_station_264257504",
+      "osm_id": 264257504,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "和賀仙人",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakasennin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.30844,
+      "longitude": 140.909233
+    },
+    {
+      "id": "jp_iwate_station_264257695",
+      "osm_id": 264257695,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "ほっとゆだ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hottoyuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.31485,
+      "longitude": 140.7760961
+    },
+    {
+      "id": "jp_iwate_station_264265148",
+      "osm_id": 264265148,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩ノ下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwanoshita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.947444,
+      "longitude": 141.2450701
+    },
+    {
+      "id": "jp_iwate_station_264265150",
+      "osm_id": 264265150,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "折壁",
+      "name_kana": "おりかべ",
+      "name_translations": {
+        "en": "Orikabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9395086,
+      "longitude": 141.4523978
+    },
+    {
+      "id": "jp_iwate_station_264265153",
+      "osm_id": 264265153,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "摺沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Surisawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9959683,
+      "longitude": 141.3214278
+    },
+    {
+      "id": "jp_iwate_station_264265353",
+      "osm_id": 264265353,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "千厩",
+      "name_kana": "せんまや",
+      "name_translations": {
+        "en": "Senmaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.924595,
+      "longitude": 141.3457671
+    },
+    {
+      "id": "jp_iwate_station_264265945",
+      "osm_id": 264265945,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中門崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuchu-Kanzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9170742,
+      "longitude": 141.2512569
+    },
+    {
+      "id": "jp_iwate_station_264266939",
+      "osm_id": 264266939,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中松川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rikuchu-Matsukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9763985,
+      "longitude": 141.2375962
+    },
+    {
+      "id": "jp_iwate_station_264266941",
+      "osm_id": 264266941,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "新月",
+      "name_kana": "にいつき",
+      "name_translations": {
+        "en": "Niitsuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.915438,
+      "longitude": 141.489317
+    },
+    {
+      "id": "jp_iwate_station_264268159",
+      "osm_id": 264268159,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前矢作",
+      "name_kana": "りくぜんやはぎ",
+      "name_translations": {
+        "en": "Rikuzen-Yahagi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0228099,
+      "longitude": 141.5799988
+    },
+    {
+      "id": "jp_iwate_station_264268636",
+      "osm_id": 264268636,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢越",
+      "name_kana": "やごし",
+      "name_translations": {
+        "en": "Yagoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9352621,
+      "longitude": 141.429451
+    },
+    {
+      "id": "jp_iwate_station_264269176",
+      "osm_id": 264269176,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "柴宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shibajyuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9968015,
+      "longitude": 141.2724368
+    },
+    {
+      "id": "jp_iwate_station_264269517",
+      "osm_id": 264269517,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "小梨",
+      "name_kana": "こなし",
+      "name_translations": {
+        "en": "Konashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9325448,
+      "longitude": 141.3844211
+    },
+    {
+      "id": "jp_iwate_station_264269846",
+      "osm_id": 264269846,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "真滝",
+      "name_kana": "またき",
+      "name_translations": {
+        "en": "Mataki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9084404,
+      "longitude": 141.1779262
+    },
+    {
+      "id": "jp_iwate_station_264458184",
+      "osm_id": 264458184,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "斗米",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.2853003,
+      "longitude": 141.2910403
+    },
+    {
+      "id": "jp_iwate_station_264458270",
+      "osm_id": 264458270,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "金田一温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kintaichi-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.323397,
+      "longitude": 141.3037952
+    },
+    {
+      "id": "jp_iwate_station_264458414",
+      "osm_id": 264458414,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "御堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mido"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0045952,
+      "longitude": 141.2373084
+    },
+    {
+      "id": "jp_iwate_station_264458521",
+      "osm_id": 264458521,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "奥中山高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okunakayama-Kogen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0657832,
+      "longitude": 141.228548
+    },
+    {
+      "id": "jp_iwate_station_264458527",
+      "osm_id": 264458527,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "小繋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kotsunagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.1235849,
+      "longitude": 141.2607146
+    },
+    {
+      "id": "jp_iwate_station_264458873",
+      "osm_id": 264458873,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "厨川",
+      "name_kana": "くりやがわ",
+      "name_translations": {
+        "en": "Kuriyagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7447239,
+      "longitude": 141.1291875
+    },
+    {
+      "id": "jp_iwate_station_264458997",
+      "osm_id": 264458997,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "一戸",
+      "name_kana": "いちのへ",
+      "name_translations": {
+        "en": "Ichinohe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.2103856,
+      "longitude": 141.297461
+    },
+    {
+      "id": "jp_iwate_station_264459126",
+      "osm_id": 264459126,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩手川口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwate-Kawaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.9194282,
+      "longitude": 141.1993377
+    },
+    {
+      "id": "jp_iwate_station_264459808",
+      "osm_id": 264459808,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "青山",
+      "name_kana": "あおやま",
+      "name_translations": {
+        "en": "Aoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7248279,
+      "longitude": 141.1183818
+    },
+    {
+      "id": "jp_iwate_station_471357248",
+      "osm_id": 471357248,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝沢",
+      "name_kana": "たきざわ",
+      "name_translations": {
+        "en": "Takizawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7989537,
+      "longitude": 141.1494343
+    },
+    {
+      "id": "jp_iwate_bus_terminal_653960562",
+      "osm_id": 653960562,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "盛岡駅東口バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7021603,
+      "longitude": 141.1366786
+    },
+    {
+      "id": "jp_iwate_bus_terminal_656180758",
+      "osm_id": 656180758,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松園バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7493252,
+      "longitude": 141.1543343
+    },
+    {
+      "id": "jp_iwate_bus_terminal_662878343",
+      "osm_id": 662878343,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "盛岡駅西口バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7018727,
+      "longitude": 141.134465
+    },
+    {
+      "id": "jp_iwate_bus_terminal_778215354",
+      "osm_id": 778215354,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "雫石駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6893791,
+      "longitude": 140.9755098
+    },
+    {
+      "id": "jp_iwate_bus_terminal_1201351881",
+      "osm_id": 1201351881,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岩手県北バス宮古営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6408045,
+      "longitude": 141.937701
+    },
+    {
+      "id": "jp_iwate_station_1852318030",
+      "osm_id": 1852318030,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "安比高原",
+      "name_kana": "あっぴこうげん",
+      "name_translations": {
+        "en": "Appi-Kōgen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.0123954,
+      "longitude": 140.9976755
+    },
+    {
+      "id": "jp_iwate_station_1903884603",
+      "osm_id": 1903884603,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "栃ヶ沢公園",
+      "name_kana": "とちがさわこうえん",
+      "name_translations": {
+        "en": "Tochigasawa-Kōen Park"
+      },
+      "operator": "JR東日本",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0271126,
+      "longitude": 141.6254342
+    },
+    {
+      "id": "jp_iwate_bus_terminal_2481179329",
+      "osm_id": 2481179329,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9259126,
+      "longitude": 141.1368842
+    },
+    {
+      "id": "jp_iwate_bus_terminal_2832411501",
+      "osm_id": 2832411501,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "奇跡の一本松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiseki no Ippon Matsu"
+      },
+      "operator": null,
+      "network": "大船渡線BRT",
+      "ref": null,
+      "latitude": 39.0076553,
+      "longitude": 141.6273076
+    },
+    {
+      "id": "jp_iwate_station_3647437876",
+      "osm_id": 3647437876,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "盛岡",
+      "name_kana": "もりおか",
+      "name_translations": {
+        "en": "Morioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7005875,
+      "longitude": 141.136689
+    },
+    {
+      "id": "jp_iwate_station_3838451239",
+      "osm_id": 3838451239,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "猊鼻渓",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Geibikei"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9887792,
+      "longitude": 141.2532381
+    },
+    {
+      "id": "jp_iwate_station_3906691754",
+      "osm_id": 3906691754,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "北上",
+      "name_kana": "きたかみ",
+      "name_translations": {
+        "en": "Kitakami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2818212,
+      "longitude": 141.1217172
+    },
+    {
+      "id": "jp_iwate_station_3907992152",
+      "osm_id": 3907992152,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "盛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.0857647,
+      "longitude": 141.7106981
+    },
+    {
+      "id": "jp_iwate_station_3908803388",
+      "osm_id": 3908803388,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩手飯岡",
+      "name_kana": "いわていいおか",
+      "name_translations": {
+        "en": "Iwate-Iioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6537584,
+      "longitude": 141.1466881
+    },
+    {
+      "id": "jp_iwate_station_3908803389",
+      "osm_id": 3908803389,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "仙北町",
+      "name_kana": "せんぼくちょう",
+      "name_translations": {
+        "en": "Senbokucho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6875649,
+      "longitude": 141.148809
+    },
+    {
+      "id": "jp_iwate_station_3910699182",
+      "osm_id": 3910699182,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "釜石",
+      "name_kana": "かまいし",
+      "name_translations": {
+        "en": "Kamaishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2734923,
+      "longitude": 141.8724537
+    },
+    {
+      "id": "jp_iwate_station_3910699183",
+      "osm_id": 3910699183,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "唐丹",
+      "name_kana": "とうに",
+      "name_translations": {
+        "en": "Toni"
+      },
+      "operator": "三陸鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.2017921,
+      "longitude": 141.8613539
+    },
+    {
+      "id": "jp_iwate_station_3910699184",
+      "osm_id": 3910699184,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "山口団地",
+      "name_kana": "やまぐちだんち",
+      "name_translations": {
+        "en": "Yamaguchi-Danchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.646277,
+      "longitude": 141.9332485
+    },
+    {
+      "id": "jp_iwate_station_3920556722",
+      "osm_id": 3920556722,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "いわて沼宮内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwate-Numakunai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.960584,
+      "longitude": 141.2172841
+    },
+    {
+      "id": "jp_iwate_station_3920556723",
+      "osm_id": 3920556723,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "好摩",
+      "name_kana": "こうま",
+      "name_translations": {
+        "en": "Koma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.8739996,
+      "longitude": 141.1735507
+    },
+    {
+      "id": "jp_iwate_station_3920556725",
+      "osm_id": 3920556725,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "二戸",
+      "name_kana": "にのへ",
+      "name_translations": {
+        "en": "Ninohe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.260138,
+      "longitude": 141.286006
+    },
+    {
+      "id": "jp_iwate_station_3920556727",
+      "osm_id": 3920556727,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "新花巻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Hanamaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.4058826,
+      "longitude": 141.1735809
+    },
+    {
+      "id": "jp_iwate_station_3920556728",
+      "osm_id": 3920556728,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "巣子",
+      "name_kana": "すご",
+      "name_translations": {
+        "en": "Sugo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7836465,
+      "longitude": 141.1488576
+    },
+    {
+      "id": "jp_iwate_station_4636882514",
+      "osm_id": 4636882514,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "一ノ関",
+      "name_kana": "いちのせき",
+      "name_translations": {
+        "en": "Ichinoseki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.9268807,
+      "longitude": 141.1389019
+    },
+    {
+      "id": "jp_iwate_station_4831901164",
+      "osm_id": 4831901164,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前高田",
+      "name_kana": "りくぜんたかた",
+      "name_translations": {
+        "en": "Rikuzentakata"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0146757,
+      "longitude": 141.6298249
+    },
+    {
+      "id": "jp_iwate_station_4832349373",
+      "osm_id": 4832349373,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大船渡魚市場前",
+      "name_kana": "おおふなとうおいちばまえ",
+      "name_translations": {
+        "en": "Ōfunato Fish Market"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0510571,
+      "longitude": 141.7208136
+    },
+    {
+      "id": "jp_iwate_station_4837881280",
+      "osm_id": 4837881280,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "小鳥谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kozuya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.170871,
+      "longitude": 141.3077808
+    },
+    {
+      "id": "jp_iwate_station_4837893135",
+      "osm_id": 4837893135,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "江釣子",
+      "name_kana": "えずりこ",
+      "name_translations": {
+        "en": "Ezuriko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.29839,
+      "longitude": 141.0758365
+    },
+    {
+      "id": "jp_iwate_station_4837893136",
+      "osm_id": 4837893136,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "横川目",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokokawame"
+      },
+      "operator": "JR東日本",
+      "network": "北上線",
+      "ref": null,
+      "latitude": 39.3092376,
+      "longitude": 140.9724789
+    },
+    {
+      "id": "jp_iwate_bus_terminal_5730157623",
+      "osm_id": 5730157623,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "二戸駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ninohe station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.2601909,
+      "longitude": 141.2856309
+    },
+    {
+      "id": "jp_iwate_station_5775217220",
+      "osm_id": 5775217220,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "花巻空港",
+      "name_kana": "はなまきくうこう",
+      "name_translations": {
+        "en": "Hanamaki Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.4426715,
+      "longitude": 141.1276567
+    },
+    {
+      "id": "jp_iwate_station_5775217270",
+      "osm_id": 5775217270,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "石鳥谷",
+      "name_kana": "いしどりや",
+      "name_translations": {
+        "en": "Ishidoriya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.4912736,
+      "longitude": 141.1471067
+    },
+    {
+      "id": "jp_iwate_station_5775217305",
+      "osm_id": 5775217305,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "日詰",
+      "name_kana": "ひづめ",
+      "name_translations": {
+        "en": "Hizume"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.5387361,
+      "longitude": 141.1606076
+    },
+    {
+      "id": "jp_iwate_station_5775217383",
+      "osm_id": 5775217383,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "紫波中央",
+      "name_kana": "しわちゅうおう",
+      "name_translations": {
+        "en": "Shiwa-chuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.5547549,
+      "longitude": 141.160039
+    },
+    {
+      "id": "jp_iwate_station_5775217390",
+      "osm_id": 5775217390,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "古館",
+      "name_kana": "ふるだて",
+      "name_translations": {
+        "en": "Furudate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.5809218,
+      "longitude": 141.1547497
+    },
+    {
+      "id": "jp_iwate_station_5775217456",
+      "osm_id": 5775217456,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢幅",
+      "name_kana": "やはば",
+      "name_translations": {
+        "en": "Yahaba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6132574,
+      "longitude": 141.1481729
+    },
+    {
+      "id": "jp_iwate_station_5775510857",
+      "osm_id": 5775510857,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "花巻",
+      "name_kana": "はなまき",
+      "name_translations": {
+        "en": "Hanamaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3931976,
+      "longitude": 141.1107252
+    },
+    {
+      "id": "jp_iwate_station_5776452057",
+      "osm_id": 5776452057,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "六原",
+      "name_kana": "ろくはら",
+      "name_translations": {
+        "en": "Rokuhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2278505,
+      "longitude": 141.0975114
+    },
+    {
+      "id": "jp_iwate_station_5776453037",
+      "osm_id": 5776453037,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "村崎野",
+      "name_kana": "むらさきの",
+      "name_translations": {
+        "en": "Murasakino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3230025,
+      "longitude": 141.1205113
+    },
+    {
+      "id": "jp_iwate_station_5779298462",
+      "osm_id": 5779298462,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "水沢",
+      "name_kana": "みずさわ",
+      "name_translations": {
+        "en": "Mizusawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.1389814,
+      "longitude": 141.1464938
+    },
+    {
+      "id": "jp_iwate_station_5779298723",
+      "osm_id": 5779298723,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "金ヶ崎",
+      "name_kana": "かねがさき",
+      "name_translations": {
+        "en": "Kanegasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.1999638,
+      "longitude": 141.1129823
+    },
+    {
+      "id": "jp_iwate_station_5783615451",
+      "osm_id": 5783615451,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "茂市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Moichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6206297,
+      "longitude": 141.7990032
+    },
+    {
+      "id": "jp_iwate_station_5784163163",
+      "osm_id": 5784163163,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "花泉",
+      "name_kana": "はないずみ",
+      "name_translations": {
+        "en": "Hanaizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.8334586,
+      "longitude": 141.180118
+    },
+    {
+      "id": "jp_iwate_station_5784163216",
+      "osm_id": 5784163216,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "油島",
+      "name_kana": "ゆしま",
+      "name_translations": {
+        "en": "Yushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 38.7970599,
+      "longitude": 141.1755985
+    },
+    {
+      "id": "jp_iwate_station_5793711143",
+      "osm_id": 5793711143,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "松尾八幡平",
+      "name_kana": "まつおはちまんたい",
+      "name_translations": {
+        "en": "Matsuo-Hachimantai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.9693431,
+      "longitude": 141.0435064
+    },
+    {
+      "id": "jp_iwate_station_5793768751",
+      "osm_id": 5793768751,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "東大更",
+      "name_kana": "ひがしおおぶけ",
+      "name_translations": {
+        "en": "Higashi-Obuke"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.902609,
+      "longitude": 141.1424772
+    },
+    {
+      "id": "jp_iwate_station_5793769186",
+      "osm_id": 5793769186,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "大更",
+      "name_kana": "おおぶけ",
+      "name_translations": {
+        "en": "Obuke"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.9137501,
+      "longitude": 141.1008494
+    },
+    {
+      "id": "jp_iwate_station_5798862890",
+      "osm_id": 5798862890,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "渋民",
+      "name_kana": "しぶたみ",
+      "name_translations": {
+        "en": "Shibutami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.8350179,
+      "longitude": 141.1545995
+    },
+    {
+      "id": "jp_iwate_station_5803762436",
+      "osm_id": 5803762436,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小友",
+      "name_kana": "おとも",
+      "name_translations": {
+        "en": "Otomo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.989099,
+      "longitude": 141.699764
+    },
+    {
+      "id": "jp_iwate_station_5803762437",
+      "osm_id": 5803762437,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "細浦",
+      "name_kana": "ほそうら",
+      "name_translations": {
+        "en": "Hosoura"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0153157,
+      "longitude": 141.7138938
+    },
+    {
+      "id": "jp_iwate_station_5803762439",
+      "osm_id": 5803762439,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "碁石海岸口",
+      "name_kana": "ごいしかいがんぐち",
+      "name_translations": {
+        "en": "Goishikaiganguchi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0027975,
+      "longitude": 141.7110902
+    },
+    {
+      "id": "jp_iwate_station_5805643678",
+      "osm_id": 5805643678,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下船渡",
+      "name_kana": "しもふなと",
+      "name_translations": {
+        "en": "Shimofunato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0384422,
+      "longitude": 141.7211966
+    },
+    {
+      "id": "jp_iwate_station_5805643682",
+      "osm_id": 5805643682,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大船渡",
+      "name_kana": "おおふなと",
+      "name_translations": {
+        "en": "Ōfunato"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0629,
+      "longitude": 141.7207424
+    },
+    {
+      "id": "jp_iwate_station_6111888835",
+      "osm_id": 6111888835,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "大釜",
+      "name_kana": "おおかま",
+      "name_translations": {
+        "en": "Okama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.711558,
+      "longitude": 141.0720532
+    },
+    {
+      "id": "jp_iwate_station_6119242306",
+      "osm_id": 6119242306,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "小岩井",
+      "name_kana": "こいわい",
+      "name_translations": {
+        "en": "Koiwai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7098774,
+      "longitude": 141.0248423
+    },
+    {
+      "id": "jp_iwate_station_6260704559",
+      "osm_id": 6260704559,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "水沢江刺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mizusawa-Esashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.1451474,
+      "longitude": 141.1887494
+    },
+    {
+      "id": "jp_iwate_station_7164913253",
+      "osm_id": 7164913253,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "北森",
+      "name_kana": "きたもり",
+      "name_translations": {
+        "en": "Kitamori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.9566198,
+      "longitude": 141.0718748
+    },
+    {
+      "id": "jp_iwate_station_7291354131",
+      "osm_id": 7291354131,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大船渡丸森",
+      "name_kana": "おおふなとまるもり",
+      "name_translations": {
+        "en": "Ōfunatomarumori"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0288853,
+      "longitude": 141.7127132
+    },
+    {
+      "id": "jp_iwate_station_7294155763",
+      "osm_id": 7294155763,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "竹駒",
+      "name_kana": "たけこま",
+      "name_translations": {
+        "en": "Takekoma"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0336601,
+      "longitude": 141.6096027
+    },
+    {
+      "id": "jp_iwate_station_8490963870",
+      "osm_id": 8490963870,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanagihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.2945921,
+      "longitude": 141.1117438
+    },
+    {
+      "id": "jp_iwate_station_10742638637",
+      "osm_id": 10742638637,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "前潟",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maegata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.7129346,
+      "longitude": 141.1008483
+    },
+    {
+      "id": "jp_iwate_station_11447514085",
+      "osm_id": 11447514085,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "private",
+      "name": "陸中野田",
+      "name_kana": "りくちゅうのだ",
+      "name_translations": {
+        "en": "Rikuchunoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.116184,
+      "longitude": 141.8189927
+    },
+    {
+      "id": "jp_iwate_bus_terminal_13124153001",
+      "osm_id": 13124153001,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "都南営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6592509,
+      "longitude": 141.1789721
+    },
+    {
+      "id": "jp_iwate_station_13307683232",
+      "osm_id": 13307683232,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "奇跡の一本松",
+      "name_kana": "きせきのいっぽんまつ",
+      "name_translations": {
+        "en": "Kiseki-no-Ippon-Matsu (Miracle Pine)"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0076443,
+      "longitude": 141.6272589
+    },
+    {
+      "id": "jp_iwate_station_13310175988",
+      "osm_id": 13310175988,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長部",
+      "name_kana": "おさべ",
+      "name_translations": {
+        "en": "Osabe"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 38.9861091,
+      "longitude": 141.618884
+    },
+    {
+      "id": "jp_iwate_station_13310235463",
+      "osm_id": 13310235463,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "陸前今泉",
+      "name_kana": "りくぜんいまいずみ",
+      "name_translations": {
+        "en": "Rikuzen-Imaizumi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0042903,
+      "longitude": 141.6133777
+    },
+    {
+      "id": "jp_iwate_station_13312753432",
+      "osm_id": 13312753432,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高田高校前",
+      "name_kana": "たかたこうこうまえ",
+      "name_translations": {
+        "en": "Takatakōkōmae"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0178305,
+      "longitude": 141.639987
+    },
+    {
+      "id": "jp_iwate_station_13313262146",
+      "osm_id": 13313262146,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "高田病院",
+      "name_kana": "たかたびょういん",
+      "name_translations": {
+        "en": "Takata Hospital"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0254554,
+      "longitude": 141.6417388
+    },
+    {
+      "id": "jp_iwate_station_13313608430",
+      "osm_id": 13313608430,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "脇ノ沢",
+      "name_kana": "わきのさわ",
+      "name_translations": {
+        "en": "Wakinosawa"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0113453,
+      "longitude": 141.6730944
+    },
+    {
+      "id": "jp_iwate_station_13313608432",
+      "osm_id": 13313608432,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "西下",
+      "name_kana": "にしした",
+      "name_translations": {
+        "en": "Nishishita"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0009923,
+      "longitude": 141.6890608
+    },
+    {
+      "id": "jp_iwate_station_13313608449",
+      "osm_id": 13313608449,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "地ノ森",
+      "name_kana": "じのもり",
+      "name_translations": {
+        "en": "Jinomori"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0716655,
+      "longitude": 141.7181203
+    },
+    {
+      "id": "jp_iwate_station_13313608450",
+      "osm_id": 13313608450,
+      "osm_type": "node",
+      "prefecture_id": "jp_iwate",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田茂山",
+      "name_kana": "たもやま",
+      "name_translations": {
+        "en": "Tamoyama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0798731,
+      "longitude": 141.7135297
+    },
+    {
+      "id": "jp_iwate_airport_35994591",
+      "osm_id": 35994591,
+      "osm_type": "way",
+      "prefecture_id": "jp_iwate",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "いわて花巻空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanamaki Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HNA",
+      "latitude": 39.4271694,
+      "longitude": 141.1353103
+    },
+    {
+      "id": "jp_iwate_bus_terminal_52867284",
+      "osm_id": 52867284,
+      "osm_type": "way",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "イトーヨーカドー",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.3927264,
+      "longitude": 141.1190663
+    },
+    {
+      "id": "jp_iwate_bus_terminal_430734280",
+      "osm_id": 430734280,
+      "osm_type": "way",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岩手県北自動車株式会社一戸営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 40.2158759,
+      "longitude": 141.3063894
+    },
+    {
+      "id": "jp_iwate_bus_terminal_613671159",
+      "osm_id": 613671159,
+      "osm_type": "way",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "陸前高田駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "JR東日本",
+      "network": null,
+      "ref": null,
+      "latitude": 39.0148513,
+      "longitude": 141.6294804
+    },
+    {
+      "id": "jp_iwate_bus_terminal_698800984",
+      "osm_id": 698800984,
+      "osm_type": "way",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大東バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.0168577,
+      "longitude": 141.3964989
+    },
+    {
+      "id": "jp_iwate_bus_terminal_953884322",
+      "osm_id": 953884322,
+      "osm_type": "way",
+      "prefecture_id": "jp_iwate",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "盛岡バスセンター仮乗降場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 39.6999323,
+      "longitude": 141.1581834
+    }
+  ]
+}

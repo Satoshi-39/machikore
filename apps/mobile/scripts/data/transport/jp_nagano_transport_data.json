@@ -1,0 +1,4936 @@
+{
+  "fetchedAt": "2025-12-24T05:53:08.934Z",
+  "prefecture_id": "jp_nagano",
+  "prefecture_name": "長野県",
+  "stats": {
+    "station": 257,
+    "airport": 1,
+    "ferry_terminal": 1,
+    "bus_terminal": 16,
+    "total": 275
+  },
+  "data": [
+    {
+      "id": "jp_nagano_station_241788100",
+      "osm_id": 241788100,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "冠着",
+      "name_kana": "かむりき",
+      "name_translations": {
+        "en": "Kamuriki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4573451,
+      "longitude": 138.0794358
+    },
+    {
+      "id": "jp_nagano_station_264804048",
+      "osm_id": 264804048,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "乙女",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otome"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3112208,
+      "longitude": 138.4408651
+    },
+    {
+      "id": "jp_nagano_station_264804148",
+      "osm_id": 264804148,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "三岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitsuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.30409,
+      "longitude": 138.4486327
+    },
+    {
+      "id": "jp_nagano_station_264804242",
+      "osm_id": 264804242,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "美里",
+      "name_kana": "みさと",
+      "name_translations": {
+        "en": "Misato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.291825,
+      "longitude": 138.4500658
+    },
+    {
+      "id": "jp_nagano_station_264804269",
+      "osm_id": 264804269,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "海瀬",
+      "name_kana": "かいぜ",
+      "name_translations": {
+        "en": "Kaize"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1556417,
+      "longitude": 138.485835
+    },
+    {
+      "id": "jp_nagano_station_264804607",
+      "osm_id": 264804607,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "松原湖",
+      "name_kana": "まつばらこ",
+      "name_translations": {
+        "en": "Matsubarako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.061116,
+      "longitude": 138.4704765
+    },
+    {
+      "id": "jp_nagano_station_264804610",
+      "osm_id": 264804610,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "小海",
+      "name_kana": "こうみ",
+      "name_translations": {
+        "en": "Koumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0887317,
+      "longitude": 138.4827549
+    },
+    {
+      "id": "jp_nagano_station_264804801",
+      "osm_id": 264804801,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "八千穂",
+      "name_kana": "やちほ",
+      "name_translations": {
+        "en": "Yachiho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1334719,
+      "longitude": 138.4773016
+    },
+    {
+      "id": "jp_nagano_station_264805813",
+      "osm_id": 264805813,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "青沼",
+      "name_kana": "あおぬま",
+      "name_translations": {
+        "en": "Aonuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1810906,
+      "longitude": 138.4891308
+    },
+    {
+      "id": "jp_nagano_station_264805826",
+      "osm_id": 264805826,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "海尻",
+      "name_kana": "うみじり",
+      "name_translations": {
+        "en": "Umijiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0408627,
+      "longitude": 138.4735154
+    },
+    {
+      "id": "jp_nagano_station_264806216",
+      "osm_id": 264806216,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "古間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furuma"
+      },
+      "operator": "しなの鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7919257,
+      "longitude": 138.2304432
+    },
+    {
+      "id": "jp_nagano_station_264806247",
+      "osm_id": 264806247,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "滑津",
+      "name_kana": "なめづ",
+      "name_translations": {
+        "en": "Namezu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2387947,
+      "longitude": 138.4749024
+    },
+    {
+      "id": "jp_nagano_station_264806253",
+      "osm_id": 264806253,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "龍岡城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsuokajō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2044643,
+      "longitude": 138.4907944
+    },
+    {
+      "id": "jp_nagano_station_264806256",
+      "osm_id": 264806256,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩村田",
+      "name_kana": "いわむらだ",
+      "name_translations": {
+        "en": "Iwamurada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2746144,
+      "longitude": 138.4723522
+    },
+    {
+      "id": "jp_nagano_station_264806412",
+      "osm_id": 264806412,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "馬流",
+      "name_kana": "まながし",
+      "name_translations": {
+        "en": "Managashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.101761,
+      "longitude": 138.4858821
+    },
+    {
+      "id": "jp_nagano_station_264806670",
+      "osm_id": 264806670,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北中込",
+      "name_kana": "きたなかごみ",
+      "name_translations": {
+        "en": "Kita-Nakagomi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2549328,
+      "longitude": 138.4766109
+    },
+    {
+      "id": "jp_nagano_station_264806734",
+      "osm_id": 264806734,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中込",
+      "name_kana": "なかごみ",
+      "name_translations": {
+        "en": "Nakagomi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2305821,
+      "longitude": 138.4792663
+    },
+    {
+      "id": "jp_nagano_station_264806737",
+      "osm_id": 264806737,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "高岩",
+      "name_kana": "たかいわ",
+      "name_translations": {
+        "en": "Takaiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1160488,
+      "longitude": 138.477378
+    },
+    {
+      "id": "jp_nagano_station_264806795",
+      "osm_id": 264806795,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "臼田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Usuda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1939596,
+      "longitude": 138.4880894
+    },
+    {
+      "id": "jp_nagano_station_264806836",
+      "osm_id": 264806836,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽黒下",
+      "name_kana": "はぐろした",
+      "name_translations": {
+        "en": "Haguroshita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1664129,
+      "longitude": 138.4894681
+    },
+    {
+      "id": "jp_nagano_station_264806842",
+      "osm_id": 264806842,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃川上",
+      "name_kana": "しなのかわかみ",
+      "name_translations": {
+        "en": "Shinano-Kawakami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9759463,
+      "longitude": 138.5273516
+    },
+    {
+      "id": "jp_nagano_station_264807148",
+      "osm_id": 264807148,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐久海ノ口",
+      "name_kana": "さくうみのくち",
+      "name_translations": {
+        "en": "Saku-Uminokuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0212546,
+      "longitude": 138.4908253
+    },
+    {
+      "id": "jp_nagano_station_264807151",
+      "osm_id": 264807151,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐久広瀬",
+      "name_kana": "さくひろせ",
+      "name_translations": {
+        "en": "Saku-Hirose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0035397,
+      "longitude": 138.5193546
+    },
+    {
+      "id": "jp_nagano_station_264807176",
+      "osm_id": 264807176,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中佐都",
+      "name_kana": "なかさと",
+      "name_translations": {
+        "en": "Nakasato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2809948,
+      "longitude": 138.4533535
+    },
+    {
+      "id": "jp_nagano_station_264807182",
+      "osm_id": 264807182,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐久平",
+      "name_kana": "さくだいら",
+      "name_translations": {
+        "en": "Sakudaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2776131,
+      "longitude": 138.4635231
+    },
+    {
+      "id": "jp_nagano_station_264807679",
+      "osm_id": 264807679,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "太田部",
+      "name_kana": "おおたべ",
+      "name_translations": {
+        "en": "Ōtabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.220537,
+      "longitude": 138.4875543
+    },
+    {
+      "id": "jp_nagano_station_264808506",
+      "osm_id": 264808506,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "野辺山",
+      "name_kana": "のべやま",
+      "name_translations": {
+        "en": "Nobeyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9553038,
+      "longitude": 138.4746495
+    },
+    {
+      "id": "jp_nagano_station_264810669",
+      "osm_id": 264810669,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "三才",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sansai"
+      },
+      "operator": "しなの鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6861723,
+      "longitude": 138.2435174
+    },
+    {
+      "id": "jp_nagano_station_264816550",
+      "osm_id": 264816550,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "すずらんの里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzurannosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9303274,
+      "longitude": 138.211947
+    },
+    {
+      "id": "jp_nagano_station_264822834",
+      "osm_id": 264822834,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "川岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawagishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0331283,
+      "longitude": 138.0219493
+    },
+    {
+      "id": "jp_nagano_station_264864245",
+      "osm_id": 264864245,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Haba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9533693,
+      "longitude": 137.9851732
+    },
+    {
+      "id": "jp_nagano_station_264864262",
+      "osm_id": 264864262,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那新町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inashinmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9685878,
+      "longitude": 137.9838811
+    },
+    {
+      "id": "jp_nagano_station_264864917",
+      "osm_id": 264864917,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那福岡",
+      "name_kana": "いなふくおか",
+      "name_translations": {
+        "en": "Ina-Fukuoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7125535,
+      "longitude": 137.9339571
+    },
+    {
+      "id": "jp_nagano_station_264864920",
+      "osm_id": 264864920,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakuramachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.522167,
+      "longitude": 137.8295109
+    },
+    {
+      "id": "jp_nagano_station_264864952",
+      "osm_id": 264864952,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "平岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiraoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.273846,
+      "longitude": 137.8538052
+    },
+    {
+      "id": "jp_nagano_station_264864962",
+      "osm_id": 264864962,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "千代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chiyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4294632,
+      "longitude": 137.8167188
+    },
+    {
+      "id": "jp_nagano_station_264864966",
+      "osm_id": 264864966,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5196646,
+      "longitude": 137.8211924
+    },
+    {
+      "id": "jp_nagano_station_264865143",
+      "osm_id": 264865143,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "時又",
+      "name_kana": "ときまた",
+      "name_translations": {
+        "en": "Tokimata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4638449,
+      "longitude": 137.8277122
+    },
+    {
+      "id": "jp_nagano_station_264865189",
+      "osm_id": 264865189,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7675805,
+      "longitude": 137.9388746
+    },
+    {
+      "id": "jp_nagano_station_264865192",
+      "osm_id": 264865192,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那北",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inakita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8449589,
+      "longitude": 137.9641332
+    },
+    {
+      "id": "jp_nagano_station_264865204",
+      "osm_id": 264865204,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "元善光寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motozenkōji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5340249,
+      "longitude": 137.8616919
+    },
+    {
+      "id": "jp_nagano_station_264865208",
+      "osm_id": 264865208,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7775536,
+      "longitude": 137.9437275
+    },
+    {
+      "id": "jp_nagano_station_264865225",
+      "osm_id": 264865225,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北殿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitatono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8794427,
+      "longitude": 137.9840703
+    },
+    {
+      "id": "jp_nagano_station_264868591",
+      "osm_id": 264868591,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9361255,
+      "longitude": 137.9855173
+    },
+    {
+      "id": "jp_nagano_station_264868598",
+      "osm_id": 264868598,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "下山村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoyamamura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5043297,
+      "longitude": 137.8393793
+    },
+    {
+      "id": "jp_nagano_station_264869196",
+      "osm_id": 264869196,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中井侍",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakaisamurai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2358605,
+      "longitude": 137.8348073
+    },
+    {
+      "id": "jp_nagano_station_264869530",
+      "osm_id": 264869530,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "上片桐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Katagiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6175411,
+      "longitude": 137.9040579
+    },
+    {
+      "id": "jp_nagano_station_264869588",
+      "osm_id": 264869588,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "金野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.419034,
+      "longitude": 137.8169679
+    },
+    {
+      "id": "jp_nagano_station_264869626",
+      "osm_id": 264869626,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "山吹",
+      "name_kana": "やまぶき",
+      "name_translations": {
+        "en": "Yamabuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.577882,
+      "longitude": 137.9036708
+    },
+    {
+      "id": "jp_nagano_station_264869658",
+      "osm_id": 264869658,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "切石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiriishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5126482,
+      "longitude": 137.8091975
+    },
+    {
+      "id": "jp_nagano_station_264869714",
+      "osm_id": 264869714,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "駄科",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dashina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4750221,
+      "longitude": 137.839487
+    },
+    {
+      "id": "jp_nagano_station_264869723",
+      "osm_id": 264869723,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "鼎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5066136,
+      "longitude": 137.827967
+    },
+    {
+      "id": "jp_nagano_station_264869743",
+      "osm_id": 264869743,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那大島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ina-Ōshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5955415,
+      "longitude": 137.913167
+    },
+    {
+      "id": "jp_nagano_station_264870114",
+      "osm_id": 264870114,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "川路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawaji"
+      },
+      "operator": null,
+      "network": "JR",
+      "ref": null,
+      "latitude": 35.4528025,
+      "longitude": 137.8156754
+    },
+    {
+      "id": "jp_nagano_station_264870118",
+      "osm_id": 264870118,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iijima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6780743,
+      "longitude": 137.928859
+    },
+    {
+      "id": "jp_nagano_station_264870210",
+      "osm_id": 264870210,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "高遠原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takatōbara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6446428,
+      "longitude": 137.9005792
+    },
+    {
+      "id": "jp_nagano_station_264870821",
+      "osm_id": 264870821,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那上郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ina-Kamisato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5201589,
+      "longitude": 137.839066
+    },
+    {
+      "id": "jp_nagano_station_264870900",
+      "osm_id": 264870900,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那本郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ina-Hongō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6653829,
+      "longitude": 137.9325117
+    },
+    {
+      "id": "jp_nagano_station_264870972",
+      "osm_id": 264870972,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "木ノ下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinoshita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9005505,
+      "longitude": 137.988022
+    },
+    {
+      "id": "jp_nagano_station_264870975",
+      "osm_id": 264870975,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "沢渡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sawando"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8040369,
+      "longitude": 137.9440137
+    },
+    {
+      "id": "jp_nagano_station_264870976",
+      "osm_id": 264870976,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "下平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimodaira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5723582,
+      "longitude": 137.8958263
+    },
+    {
+      "id": "jp_nagano_station_264871376",
+      "osm_id": 264871376,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "小町屋",
+      "name_kana": "こまちや",
+      "name_translations": {
+        "en": "Komachiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7264286,
+      "longitude": 137.9351192
+    },
+    {
+      "id": "jp_nagano_station_264871389",
+      "osm_id": 264871389,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "田畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tabata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8605625,
+      "longitude": 137.9775775
+    },
+    {
+      "id": "jp_nagano_station_264871391",
+      "osm_id": 264871391,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "駒ヶ根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komagane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7363892,
+      "longitude": 137.9368872
+    },
+    {
+      "id": "jp_nagano_station_264871540",
+      "osm_id": 264871540,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "七久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanakubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6547232,
+      "longitude": 137.9113712
+    },
+    {
+      "id": "jp_nagano_station_264871763",
+      "osm_id": 264871763,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那小沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inakozawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.25404,
+      "longitude": 137.8348349
+    },
+    {
+      "id": "jp_nagano_station_264871818",
+      "osm_id": 264871818,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "毛賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kega"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4876401,
+      "longitude": 137.8394961
+    },
+    {
+      "id": "jp_nagano_station_264871888",
+      "osm_id": 264871888,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "下島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimojima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8128248,
+      "longitude": 137.9400987
+    },
+    {
+      "id": "jp_nagano_station_264871993",
+      "osm_id": 264871993,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "温田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nukuta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3365501,
+      "longitude": 137.8415351
+    },
+    {
+      "id": "jp_nagano_station_264872888",
+      "osm_id": 264872888,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "唐笠",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karakasa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4023084,
+      "longitude": 137.8100679
+    },
+    {
+      "id": "jp_nagano_station_264873500",
+      "osm_id": 264873500,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那八幡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ina-Yawata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4966629,
+      "longitude": 137.8414816
+    },
+    {
+      "id": "jp_nagano_station_264873521",
+      "osm_id": 264873521,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "鶯巣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ugusu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2674026,
+      "longitude": 137.8324935
+    },
+    {
+      "id": "jp_nagano_station_264874011",
+      "osm_id": 264874011,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "田本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3489572,
+      "longitude": 137.8379058
+    },
+    {
+      "id": "jp_nagano_station_264874031",
+      "osm_id": 264874031,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "下市田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Ichida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5441049,
+      "longitude": 137.8762812
+    },
+    {
+      "id": "jp_nagano_station_264874601",
+      "osm_id": 264874601,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "大田切",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Otagiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7482166,
+      "longitude": 137.9400951
+    },
+    {
+      "id": "jp_nagano_station_264874605",
+      "osm_id": 264874605,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "為栗",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiteguri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3117984,
+      "longitude": 137.8485784
+    },
+    {
+      "id": "jp_nagano_station_264874612",
+      "osm_id": 264874612,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "門島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kadoshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3751473,
+      "longitude": 137.8141659
+    },
+    {
+      "id": "jp_nagano_station_264874703",
+      "osm_id": 264874703,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那田島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ina-Tajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6272091,
+      "longitude": 137.9103913
+    },
+    {
+      "id": "jp_nagano_station_264877844",
+      "osm_id": 264877844,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "贄川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niekawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0140897,
+      "longitude": 137.8607633
+    },
+    {
+      "id": "jp_nagano_station_265001538",
+      "osm_id": 265001538,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中軽井沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka-Karuizawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3475773,
+      "longitude": 138.5925266
+    },
+    {
+      "id": "jp_nagano_station_265001619",
+      "osm_id": 265001619,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃追分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Oiwake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3357398,
+      "longitude": 138.5589825
+    },
+    {
+      "id": "jp_nagano_station_265002425",
+      "osm_id": 265002425,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Togura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4922064,
+      "longitude": 138.1530858
+    },
+    {
+      "id": "jp_nagano_station_265029386",
+      "osm_id": 265029386,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "有明",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ariake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "31",
+      "latitude": 36.3594344,
+      "longitude": 137.8784072
+    },
+    {
+      "id": "jp_nagano_station_267454013",
+      "osm_id": 267454013,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中土",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakatsuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.805379,
+      "longitude": 137.908148
+    },
+    {
+      "id": "jp_nagano_station_267454457",
+      "osm_id": 267454457,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北小谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Otari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8421213,
+      "longitude": 137.9063382
+    },
+    {
+      "id": "jp_nagano_station_271269398",
+      "osm_id": 271269398,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "八木沢",
+      "name_kana": "やぎさわ",
+      "name_translations": {
+        "en": "Yagisawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE14",
+      "latitude": 36.3584964,
+      "longitude": 138.1753968
+    },
+    {
+      "id": "jp_nagano_station_271269399",
+      "osm_id": 271269399,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "舞田",
+      "name_kana": "まいた",
+      "name_translations": {
+        "en": "Maita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE13",
+      "latitude": 36.3597708,
+      "longitude": 138.1831619
+    },
+    {
+      "id": "jp_nagano_station_271269400",
+      "osm_id": 271269400,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中野",
+      "name_kana": "なかの",
+      "name_translations": {
+        "en": "Nakano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE12",
+      "latitude": 36.3606596,
+      "longitude": 138.1933468
+    },
+    {
+      "id": "jp_nagano_station_271269436",
+      "osm_id": 271269436,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "下之郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimonogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE09",
+      "latitude": 36.363197,
+      "longitude": 138.2171836
+    },
+    {
+      "id": "jp_nagano_station_271269464",
+      "osm_id": 271269464,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中塩田",
+      "name_kana": "なかしおだ",
+      "name_translations": {
+        "en": "Naka-Shioda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE10",
+      "latitude": 36.3631117,
+      "longitude": 138.2047187
+    },
+    {
+      "id": "jp_nagano_station_271269474",
+      "osm_id": 271269474,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩田町",
+      "name_kana": "しおだまち",
+      "name_translations": {
+        "en": "Shioda-machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE11",
+      "latitude": 36.3610079,
+      "longitude": 138.1986047
+    },
+    {
+      "id": "jp_nagano_station_271269495",
+      "osm_id": 271269495,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "三好町",
+      "name_kana": "みよしちょう",
+      "name_translations": {
+        "en": "Miyoshicho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE03",
+      "latitude": 36.391748,
+      "longitude": 138.2353744
+    },
+    {
+      "id": "jp_nagano_station_452818397",
+      "osm_id": 452818397,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝陽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6663686,
+      "longitude": 138.2408823
+    },
+    {
+      "id": "jp_nagano_station_1095669084",
+      "osm_id": 1095669084,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "立ヶ花",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tategahana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7314344,
+      "longitude": 138.3071473
+    },
+    {
+      "id": "jp_nagano_station_1095669274",
+      "osm_id": 1095669274,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "上今井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamiimai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7537475,
+      "longitude": 138.3194456
+    },
+    {
+      "id": "jp_nagano_station_1095674291",
+      "osm_id": 1095674291,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "替佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaesa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7690628,
+      "longitude": 138.3236384
+    },
+    {
+      "id": "jp_nagano_station_1095684792",
+      "osm_id": 1095684792,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "蓮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hachisu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8088052,
+      "longitude": 138.3490558
+    },
+    {
+      "id": "jp_nagano_station_1095684842",
+      "osm_id": 1095684842,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "飯山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iiyama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8462882,
+      "longitude": 138.3587871
+    },
+    {
+      "id": "jp_nagano_station_1095690198",
+      "osm_id": 1095690198,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北飯山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Iiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8588134,
+      "longitude": 138.3637797
+    },
+    {
+      "id": "jp_nagano_station_1095690216",
+      "osm_id": 1095690216,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃平",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Taira"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8849169,
+      "longitude": 138.3785259
+    },
+    {
+      "id": "jp_nagano_station_1095690230",
+      "osm_id": 1095690230,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "戸狩野沢温泉",
+      "name_kana": "とがりのざわおんせん",
+      "name_translations": {
+        "en": "Togarinozawa-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9171309,
+      "longitude": 138.3933788
+    },
+    {
+      "id": "jp_nagano_station_1095690282",
+      "osm_id": 1095690282,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "上境",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Sakai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9380083,
+      "longitude": 138.4190544
+    },
+    {
+      "id": "jp_nagano_station_1095694895",
+      "osm_id": 1095694895,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "上桑名川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Kuwanagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9625284,
+      "longitude": 138.4413142
+    },
+    {
+      "id": "jp_nagano_station_1095708694",
+      "osm_id": 1095708694,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃白鳥",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Shiratori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.983586,
+      "longitude": 138.5030265
+    },
+    {
+      "id": "jp_nagano_station_1095709098",
+      "osm_id": 1095709098,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "桑名川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuwanagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9757866,
+      "longitude": 138.4577692
+    },
+    {
+      "id": "jp_nagano_station_1095709134",
+      "osm_id": 1095709134,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Ōtaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9792194,
+      "longitude": 138.4809219
+    },
+    {
+      "id": "jp_nagano_station_1095750140",
+      "osm_id": 1095750140,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "平滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirataki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9860336,
+      "longitude": 138.5335568
+    },
+    {
+      "id": "jp_nagano_station_1445190892",
+      "osm_id": 1445190892,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "森宮野原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Morimiyanohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.98926,
+      "longitude": 138.57798
+    },
+    {
+      "id": "jp_nagano_station_1445190893",
+      "osm_id": 1445190893,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "横倉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokokura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.98003,
+      "longitude": 138.55074
+    },
+    {
+      "id": "jp_nagano_station_1674241891",
+      "osm_id": 1674241891,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "丸山渡",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7250452,
+      "longitude": 137.6282268
+    },
+    {
+      "id": "jp_nagano_station_2120473762",
+      "osm_id": 2120473762,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "田切",
+      "name_kana": "たぎり",
+      "name_translations": {
+        "en": "Tagiri"
+      },
+      "operator": "JR東海",
+      "network": null,
+      "ref": null,
+      "latitude": 35.6948917,
+      "longitude": 137.9327955
+    },
+    {
+      "id": "jp_nagano_station_2620998956",
+      "osm_id": 2620998956,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "軽井沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karuizawa"
+      },
+      "operator": "東日本旅客鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3425512,
+      "longitude": 138.6351092
+    },
+    {
+      "id": "jp_nagano_station_2638613340",
+      "osm_id": 2638613340,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ueda"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3965984,
+      "longitude": 138.2495851
+    },
+    {
+      "id": "jp_nagano_bus_terminal_3147446337",
+      "osm_id": 3147446337,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "中央バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chuo Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9223003,
+      "longitude": 138.4460667
+    },
+    {
+      "id": "jp_nagano_station_3343644754",
+      "osm_id": 3343644754,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那松島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inamatsushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9138685,
+      "longitude": 137.9886828
+    },
+    {
+      "id": "jp_nagano_station_3647437877",
+      "osm_id": 3647437877,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長野",
+      "name_kana": "ながの",
+      "name_translations": {
+        "en": "Nagano"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "SE13",
+      "latitude": 36.6431239,
+      "longitude": 138.1885153
+    },
+    {
+      "id": "jp_nagano_station_4058389350",
+      "osm_id": 4058389350,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "塩尻",
+      "name_kana": "しおじり",
+      "name_translations": {
+        "en": "Shiojiri"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "CO61;SN01",
+      "latitude": 36.1143838,
+      "longitude": 137.9477924
+    },
+    {
+      "id": "jp_nagano_station_4058433595",
+      "osm_id": 4058433595,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "広丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirooka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1481698,
+      "longitude": 137.9495428
+    },
+    {
+      "id": "jp_nagano_station_4058909982",
+      "osm_id": 4058909982,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北松本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Matsumoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "41",
+      "latitude": 36.2372268,
+      "longitude": 137.9608288
+    },
+    {
+      "id": "jp_nagano_station_4058909983",
+      "osm_id": 4058909983,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "南松本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Matsumoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2096622,
+      "longitude": 137.9692402
+    },
+    {
+      "id": "jp_nagano_station_4059003533",
+      "osm_id": 4059003533,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "篠ノ井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinonoi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "SE09;SN15",
+      "latitude": 36.5774147,
+      "longitude": 138.1381842
+    },
+    {
+      "id": "jp_nagano_station_4059620980",
+      "osm_id": 4059620980,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "今井",
+      "name_kana": "いまい",
+      "name_translations": {
+        "en": "Imai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "SE10",
+      "latitude": 36.5950297,
+      "longitude": 138.1451062
+    },
+    {
+      "id": "jp_nagano_station_4059620981",
+      "osm_id": 4059620981,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "安茂里",
+      "name_kana": "あもり",
+      "name_translations": {
+        "en": "Amori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "SE12",
+      "latitude": 36.6302229,
+      "longitude": 138.1618403
+    },
+    {
+      "id": "jp_nagano_station_4059620982",
+      "osm_id": 4059620982,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "川中島",
+      "name_kana": "かわなかじま",
+      "name_translations": {
+        "en": "Kawanakajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "SE11",
+      "latitude": 36.6141007,
+      "longitude": 138.1507012
+    },
+    {
+      "id": "jp_nagano_station_4059994912",
+      "osm_id": 4059994912,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北長野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitanagano"
+      },
+      "operator": "しなの鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.6654778,
+      "longitude": 138.2230135
+    },
+    {
+      "id": "jp_nagano_station_4162376860",
+      "osm_id": 4162376860,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "屋代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5319864,
+      "longitude": 138.1281001
+    },
+    {
+      "id": "jp_nagano_station_4162376862",
+      "osm_id": 4162376862,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "屋代高校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashiro Koko Mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5478198,
+      "longitude": 138.132448
+    },
+    {
+      "id": "jp_nagano_station_4165727194",
+      "osm_id": 4165727194,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "千曲",
+      "name_kana": "ちくま",
+      "name_translations": {
+        "en": "Chikuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5092242,
+      "longitude": 138.1414571
+    },
+    {
+      "id": "jp_nagano_station_4354961923",
+      "osm_id": 4354961923,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "辰野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.984723,
+      "longitude": 137.9977643
+    },
+    {
+      "id": "jp_nagano_bus_terminal_4385635806",
+      "osm_id": 4385635806,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "木曽福島駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8440374,
+      "longitude": 137.6931498
+    },
+    {
+      "id": "jp_nagano_ferry_terminal_4395636483",
+      "osm_id": 4395636483,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "諏訪湖遊覧船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0504399,
+      "longitude": 138.1123024
+    },
+    {
+      "id": "jp_nagano_bus_terminal_4424589693",
+      "osm_id": 4424589693,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "長野 東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagano East Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6427727,
+      "longitude": 138.1894904
+    },
+    {
+      "id": "jp_nagano_station_4575781989",
+      "osm_id": 4575781989,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒姫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurohime"
+      },
+      "operator": "しなの鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8077377,
+      "longitude": 138.1965075
+    },
+    {
+      "id": "jp_nagano_station_4575782401",
+      "osm_id": 4575782401,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "牟礼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mure"
+      },
+      "operator": "しなの鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7531467,
+      "longitude": 138.247602
+    },
+    {
+      "id": "jp_nagano_station_4919758543",
+      "osm_id": 4919758543,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊那市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8386267,
+      "longitude": 137.9593558
+    },
+    {
+      "id": "jp_nagano_station_5359046735",
+      "osm_id": 5359046735,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9765926,
+      "longitude": 137.9907846
+    },
+    {
+      "id": "jp_nagano_station_5966364123",
+      "osm_id": 5966364123,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "日出塩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hideshio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0491743,
+      "longitude": 137.8948311
+    },
+    {
+      "id": "jp_nagano_station_5966364184",
+      "osm_id": 5966364184,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "洗馬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0869666,
+      "longitude": 137.9165375
+    },
+    {
+      "id": "jp_nagano_station_5966575425",
+      "osm_id": 5966575425,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "みどり湖",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midoriko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO60",
+      "latitude": 36.0940401,
+      "longitude": 137.9821162
+    },
+    {
+      "id": "jp_nagano_station_5981425925",
+      "osm_id": 5981425925,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "富士見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujimi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO53",
+      "latitude": 35.9120403,
+      "longitude": 138.2384268
+    },
+    {
+      "id": "jp_nagano_station_5981439229",
+      "osm_id": 5981439229,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃境",
+      "name_kana": "しなのさかい",
+      "name_translations": {
+        "en": "Shinano-Sakai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO52",
+      "latitude": 35.8847391,
+      "longitude": 138.2758202
+    },
+    {
+      "id": "jp_nagano_station_5982438120",
+      "osm_id": 5982438120,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "青柳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aoyagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9423707,
+      "longitude": 138.197806
+    },
+    {
+      "id": "jp_nagano_station_5982506134",
+      "osm_id": 5982506134,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "茅野",
+      "name_kana": "ちの",
+      "name_translations": {
+        "en": "Chino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO56",
+      "latitude": 35.994339,
+      "longitude": 138.1523145
+    },
+    {
+      "id": "jp_nagano_station_5982703134",
+      "osm_id": 5982703134,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "下諏訪",
+      "name_kana": "しもすわ",
+      "name_translations": {
+        "en": "Shimo-Suwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO58",
+      "latitude": 36.0720188,
+      "longitude": 138.0848582
+    },
+    {
+      "id": "jp_nagano_station_5982703164",
+      "osm_id": 5982703164,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上諏訪",
+      "name_kana": "かみすわ",
+      "name_translations": {
+        "en": "Kami-Suwa"
+      },
+      "operator": "JR東日本",
+      "network": "中央線",
+      "ref": "CO57",
+      "latitude": 36.0466419,
+      "longitude": 138.1162602
+    },
+    {
+      "id": "jp_nagano_station_6019110095",
+      "osm_id": 6019110095,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "木曽平沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiso-Hirasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9786368,
+      "longitude": 137.8312098
+    },
+    {
+      "id": "jp_nagano_station_6019287061",
+      "osm_id": 6019287061,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "奈良井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Narai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9691167,
+      "longitude": 137.8155168
+    },
+    {
+      "id": "jp_nagano_station_6019690478",
+      "osm_id": 6019690478,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "宮ノ越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyanokoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8876572,
+      "longitude": 137.7632251
+    },
+    {
+      "id": "jp_nagano_station_6019690704",
+      "osm_id": 6019690704,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "藪原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yabuhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9308519,
+      "longitude": 137.784782
+    },
+    {
+      "id": "jp_nagano_station_6022884037",
+      "osm_id": 6022884037,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "原野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8712077,
+      "longitude": 137.7415985
+    },
+    {
+      "id": "jp_nagano_station_6025282798",
+      "osm_id": 6025282798,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "木曽福島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiso-Fukushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8439371,
+      "longitude": 137.693597
+    },
+    {
+      "id": "jp_nagano_station_6033821064",
+      "osm_id": 6033821064,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "上松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Agematsu"
+      },
+      "operator": "東海旅客鉄道",
+      "network": "CF 中央本線",
+      "ref": null,
+      "latitude": 35.7840442,
+      "longitude": 137.6932571
+    },
+    {
+      "id": "jp_nagano_station_6033934363",
+      "osm_id": 6033934363,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "大桑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okuwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6843918,
+      "longitude": 137.6643026
+    },
+    {
+      "id": "jp_nagano_station_6033934364",
+      "osm_id": 6033934364,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "野尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nojiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6733831,
+      "longitude": 137.6364304
+    },
+    {
+      "id": "jp_nagano_station_6033934369",
+      "osm_id": 6033934369,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "須原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suhara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.697532,
+      "longitude": 137.694346
+    },
+    {
+      "id": "jp_nagano_station_6033943472",
+      "osm_id": 6033943472,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "倉本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuramoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7330676,
+      "longitude": 137.7142695
+    },
+    {
+      "id": "jp_nagano_station_6034012555",
+      "osm_id": 6034012555,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "田立",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tadachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5881746,
+      "longitude": 137.5491768
+    },
+    {
+      "id": "jp_nagano_station_6034012565",
+      "osm_id": 6034012565,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "南木曽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagiso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5988145,
+      "longitude": 137.608646
+    },
+    {
+      "id": "jp_nagano_station_6034012584",
+      "osm_id": 6034012584,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "十二兼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Junikane"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6450376,
+      "longitude": 137.6173961
+    },
+    {
+      "id": "jp_nagano_station_6036834287",
+      "osm_id": 6036834287,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "松本",
+      "name_kana": "まつもと",
+      "name_translations": {
+        "en": "Matsumoto"
+      },
+      "operator": "東日本旅客鉄道;アルピコ交通",
+      "network": null,
+      "ref": "42;AK01",
+      "latitude": 36.2307332,
+      "longitude": 137.9644409
+    },
+    {
+      "id": "jp_nagano_station_6039289000",
+      "osm_id": 6039289000,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "渚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagisa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK03",
+      "latitude": 36.2271235,
+      "longitude": 137.9562771
+    },
+    {
+      "id": "jp_nagano_station_6039289003",
+      "osm_id": 6039289003,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "西松本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Matsumoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK02",
+      "latitude": 36.227103,
+      "longitude": 137.9633313
+    },
+    {
+      "id": "jp_nagano_station_6039888940",
+      "osm_id": 6039888940,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "新島々",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Shimashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK14",
+      "latitude": 36.1897531,
+      "longitude": 137.8216229
+    },
+    {
+      "id": "jp_nagano_station_6039888941",
+      "osm_id": 6039888941,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "波田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK12",
+      "latitude": 36.2003628,
+      "longitude": 137.8564427
+    },
+    {
+      "id": "jp_nagano_station_6039888943",
+      "osm_id": 6039888943,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "森口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Moriguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK10",
+      "latitude": 36.2080829,
+      "longitude": 137.8813536
+    },
+    {
+      "id": "jp_nagano_station_6039888944",
+      "osm_id": 6039888944,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "三溝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Samizo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK09",
+      "latitude": 36.2128419,
+      "longitude": 137.8914214
+    },
+    {
+      "id": "jp_nagano_station_6039888945",
+      "osm_id": 6039888945,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "新村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niimura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK08",
+      "latitude": 36.2165326,
+      "longitude": 137.9053487
+    },
+    {
+      "id": "jp_nagano_station_6039888946",
+      "osm_id": 6039888946,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北新・松本大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitanii / Matsumoto Univ."
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK07",
+      "latitude": 36.2197114,
+      "longitude": 137.9138842
+    },
+    {
+      "id": "jp_nagano_station_6039904927",
+      "osm_id": 6039904927,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "下新",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimonii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK06",
+      "latitude": 36.2251053,
+      "longitude": 137.9222513
+    },
+    {
+      "id": "jp_nagano_station_6039904932",
+      "osm_id": 6039904932,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "大庭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oniwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK05",
+      "latitude": 36.2270191,
+      "longitude": 137.9416738
+    },
+    {
+      "id": "jp_nagano_station_6039904940",
+      "osm_id": 6039904940,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃荒井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Arai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK04",
+      "latitude": 36.2290622,
+      "longitude": 137.9492216
+    },
+    {
+      "id": "jp_nagano_station_6050322533",
+      "osm_id": 6050322533,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "渕東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Endo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "AK13",
+      "latitude": 36.1953022,
+      "longitude": 137.8403467
+    },
+    {
+      "id": "jp_nagano_station_6063546669",
+      "osm_id": 6063546669,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "須坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6567509,
+      "longitude": 138.3044761
+    },
+    {
+      "id": "jp_nagano_station_6068008409",
+      "osm_id": 6068008409,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0468761,
+      "longitude": 137.970643
+    },
+    {
+      "id": "jp_nagano_station_6068008415",
+      "osm_id": 6068008415,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃川島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Kawashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0127318,
+      "longitude": 137.9726735
+    },
+    {
+      "id": "jp_nagano_station_6110354080",
+      "osm_id": 6110354080,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "島内",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimauchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "40",
+      "latitude": 36.2469252,
+      "longitude": 137.9449153
+    },
+    {
+      "id": "jp_nagano_station_6110366066",
+      "osm_id": 6110366066,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "島高松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimatakamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "39",
+      "latitude": 36.2463693,
+      "longitude": 137.9316008
+    },
+    {
+      "id": "jp_nagano_station_6110464588",
+      "osm_id": 6110464588,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "梓橋",
+      "name_kana": "あずさばし",
+      "name_translations": {
+        "en": "Azusabashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "38",
+      "latitude": 36.250318,
+      "longitude": 137.9180932
+    },
+    {
+      "id": "jp_nagano_station_6110464611",
+      "osm_id": 6110464611,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "一日市場",
+      "name_kana": "ひといちば",
+      "name_translations": {
+        "en": "Hitoichiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "37",
+      "latitude": 36.2597548,
+      "longitude": 137.9042034
+    },
+    {
+      "id": "jp_nagano_station_6110464629",
+      "osm_id": 6110464629,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "南小谷",
+      "name_kana": "みなみおたり",
+      "name_translations": {
+        "en": "Minami-Otari"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "9",
+      "latitude": 36.7747757,
+      "longitude": 137.9083742
+    },
+    {
+      "id": "jp_nagano_station_6110464635",
+      "osm_id": 6110464635,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "千国",
+      "name_kana": "ちくに",
+      "name_translations": {
+        "en": "Chikuni"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "10",
+      "latitude": 36.7635493,
+      "longitude": 137.9008761
+    },
+    {
+      "id": "jp_nagano_station_6110498863",
+      "osm_id": 6110498863,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊科",
+      "name_kana": "とよしな",
+      "name_translations": {
+        "en": "Toyoshina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "34",
+      "latitude": 36.300236,
+      "longitude": 137.900805
+    },
+    {
+      "id": "jp_nagano_station_6110498882",
+      "osm_id": 6110498882,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "南豊科",
+      "name_kana": "みなみとよしな",
+      "name_translations": {
+        "en": "Minami-Toyoshina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "35",
+      "latitude": 36.2915817,
+      "longitude": 137.9034132
+    },
+    {
+      "id": "jp_nagano_station_6110499796",
+      "osm_id": 6110499796,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中萱",
+      "name_kana": "なかがや",
+      "name_translations": {
+        "en": "Nakagaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "36",
+      "latitude": 36.2733565,
+      "longitude": 137.9032901
+    },
+    {
+      "id": "jp_nagano_station_6176114722",
+      "osm_id": 6176114722,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊野",
+      "name_kana": "とよの",
+      "name_translations": {
+        "en": "Toyono"
+      },
+      "operator": "しなの鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.7109116,
+      "longitude": 138.2750389
+    },
+    {
+      "id": "jp_nagano_station_6176114764",
+      "osm_id": 6176114764,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃浅野",
+      "name_kana": "しなのあさの",
+      "name_translations": {
+        "en": "Shinano-Asano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7219135,
+      "longitude": 138.2945614
+    },
+    {
+      "id": "jp_nagano_station_6283686957",
+      "osm_id": 6283686957,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "聖高原",
+      "name_kana": "ひじりこうげん",
+      "name_translations": {
+        "en": "Hijiri-Kōgen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4549991,
+      "longitude": 138.0472101
+    },
+    {
+      "id": "jp_nagano_station_6514512139",
+      "osm_id": 6514512139,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "大学前",
+      "name_kana": "だいがくまえ",
+      "name_translations": {
+        "en": "Daigakumae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE08",
+      "latitude": 36.3710069,
+      "longitude": 138.2151733
+    },
+    {
+      "id": "jp_nagano_station_6514512150",
+      "osm_id": 6514512150,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "神畑",
+      "name_kana": "かばたけ",
+      "name_translations": {
+        "en": "Kabatake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE07",
+      "latitude": 36.3777157,
+      "longitude": 138.216857
+    },
+    {
+      "id": "jp_nagano_station_6514608260",
+      "osm_id": 6514608260,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "寺下",
+      "name_kana": "てらした",
+      "name_translations": {
+        "en": "Terashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE06",
+      "latitude": 36.3836546,
+      "longitude": 138.2163391
+    },
+    {
+      "id": "jp_nagano_station_6630958249",
+      "osm_id": 6630958249,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤坂上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akasakaue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE04",
+      "latitude": 36.391444,
+      "longitude": 138.2275418
+    },
+    {
+      "id": "jp_nagano_station_7054262349",
+      "osm_id": 7054262349,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "穂高",
+      "name_kana": "ほたか",
+      "name_translations": {
+        "en": "Hotaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "32",
+      "latitude": 36.339565,
+      "longitude": 137.8817573
+    },
+    {
+      "id": "jp_nagano_station_7196381325",
+      "osm_id": 7196381325,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4623522,
+      "longitude": 138.1810228
+    },
+    {
+      "id": "jp_nagano_station_7196388299",
+      "osm_id": 7196388299,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "御代田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miyota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3189786,
+      "longitude": 138.5064425
+    },
+    {
+      "id": "jp_nagano_station_7196416115",
+      "osm_id": 7196416115,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "西上田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Ueda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4170456,
+      "longitude": 138.2087038
+    },
+    {
+      "id": "jp_nagano_station_7196421332",
+      "osm_id": 7196421332,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃国分寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-kokubunji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3786799,
+      "longitude": 138.2732116
+    },
+    {
+      "id": "jp_nagano_station_7196424124",
+      "osm_id": 7196424124,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "大屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3697262,
+      "longitude": 138.2968251
+    },
+    {
+      "id": "jp_nagano_station_7196424987",
+      "osm_id": 7196424987,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "小諸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komoro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.32701,
+      "longitude": 138.4217128
+    },
+    {
+      "id": "jp_nagano_station_7556219109",
+      "osm_id": 7556219109,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "村井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Murai"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.1751334,
+      "longitude": 137.9563918
+    },
+    {
+      "id": "jp_nagano_station_7559504849",
+      "osm_id": 7559504849,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "上田原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uedahara"
+      },
+      "operator": "上田電鉄",
+      "network": "別所線",
+      "ref": "BE05",
+      "latitude": 36.3904995,
+      "longitude": 138.2216757
+    },
+    {
+      "id": "jp_nagano_station_7567642312",
+      "osm_id": 7567642312,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "城下",
+      "name_kana": "しろした",
+      "name_translations": {
+        "en": "Shiroshita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3924646,
+      "longitude": 138.242555
+    },
+    {
+      "id": "jp_nagano_station_7569595971",
+      "osm_id": 7569595971,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "別所温泉",
+      "name_kana": "べっしょおんせん",
+      "name_translations": {
+        "en": "Bessho-onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "BE15",
+      "latitude": 36.3530124,
+      "longitude": 138.1617357
+    },
+    {
+      "id": "jp_nagano_station_7983047351",
+      "osm_id": 7983047351,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "権堂",
+      "name_kana": "ごんどう",
+      "name_translations": {
+        "en": "Gondo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6532364,
+      "longitude": 138.1919729
+    },
+    {
+      "id": "jp_nagano_station_7983063559",
+      "osm_id": 7983063559,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "市役所前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiyakushomae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6483078,
+      "longitude": 138.1912011
+    },
+    {
+      "id": "jp_nagano_station_7983085370",
+      "osm_id": 7983085370,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "本郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hongo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6625341,
+      "longitude": 138.2035816
+    },
+    {
+      "id": "jp_nagano_station_7983085371",
+      "osm_id": 7983085371,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "桐原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kirihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6657523,
+      "longitude": 138.2131411
+    },
+    {
+      "id": "jp_nagano_station_7983122664",
+      "osm_id": 7983122664,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "善光寺下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zenkojishita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6583468,
+      "longitude": 138.1934869
+    },
+    {
+      "id": "jp_nagano_station_7983122665",
+      "osm_id": 7983122665,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃吉田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinanoyoshida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6674937,
+      "longitude": 138.220983
+    },
+    {
+      "id": "jp_nagano_station_8010387840",
+      "osm_id": 8010387840,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "田沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tazawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.300698,
+      "longitude": 137.9411696
+    },
+    {
+      "id": "jp_nagano_station_8010418068",
+      "osm_id": 8010418068,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "明科",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akashina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3542879,
+      "longitude": 137.9305413
+    },
+    {
+      "id": "jp_nagano_station_8250220894",
+      "osm_id": 8250220894,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃竹原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinanotakehara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7610739,
+      "longitude": 138.3935845
+    },
+    {
+      "id": "jp_nagano_station_8250220896",
+      "osm_id": 8250220896,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信州中野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinshunakano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7444778,
+      "longitude": 138.364905
+    },
+    {
+      "id": "jp_nagano_station_8250220899",
+      "osm_id": 8250220899,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "中野松川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakanomatsukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7505281,
+      "longitude": 138.3742979
+    },
+    {
+      "id": "jp_nagano_station_8250220900",
+      "osm_id": 8250220900,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "夜間瀬",
+      "name_kana": "よませ",
+      "name_translations": {
+        "en": "Yomase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7599683,
+      "longitude": 138.4032901
+    },
+    {
+      "id": "jp_nagano_station_8250220901",
+      "osm_id": 8250220901,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "上条",
+      "name_kana": "かみじょう",
+      "name_translations": {
+        "en": "Kamijo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7494722,
+      "longitude": 138.4075341
+    },
+    {
+      "id": "jp_nagano_station_8250220902",
+      "osm_id": 8250220902,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯田中",
+      "name_kana": "ゆだなか",
+      "name_translations": {
+        "en": "Yudanaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7417299,
+      "longitude": 138.4146144
+    },
+    {
+      "id": "jp_nagano_station_8250238299",
+      "osm_id": 8250238299,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "小布施",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obuse"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6992135,
+      "longitude": 138.3130351
+    },
+    {
+      "id": "jp_nagano_station_8250238309",
+      "osm_id": 8250238309,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "延徳",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Entoku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7267523,
+      "longitude": 138.362373
+    },
+    {
+      "id": "jp_nagano_station_8250250006",
+      "osm_id": 8250250006,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "村山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Murayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6592673,
+      "longitude": 138.2799916
+    },
+    {
+      "id": "jp_nagano_station_8250250010",
+      "osm_id": 8250250010,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanagihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6634883,
+      "longitude": 138.2587739
+    },
+    {
+      "id": "jp_nagano_station_8250250012",
+      "osm_id": 8250250012,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "附属中学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fuzokuchugakumae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6628482,
+      "longitude": 138.2478762
+    },
+    {
+      "id": "jp_nagano_station_8250300992",
+      "osm_id": 8250300992,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北須坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitasuzaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.678033,
+      "longitude": 138.3086657
+    },
+    {
+      "id": "jp_nagano_station_8250300993",
+      "osm_id": 8250300993,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "都住",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsusumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7040193,
+      "longitude": 138.3219621
+    },
+    {
+      "id": "jp_nagano_station_8250308151",
+      "osm_id": 8250308151,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakurasawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7123103,
+      "longitude": 138.3494595
+    },
+    {
+      "id": "jp_nagano_station_8250330849",
+      "osm_id": 8250330849,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "日野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6560236,
+      "longitude": 138.28834
+    },
+    {
+      "id": "jp_nagano_station_9009479925",
+      "osm_id": 9009479925,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "市田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5494051,
+      "longitude": 137.8865571
+    },
+    {
+      "id": "jp_nagano_station_9011875314",
+      "osm_id": 9011875314,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "平田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1915815,
+      "longitude": 137.9625257
+    },
+    {
+      "id": "jp_nagano_station_9198419007",
+      "osm_id": 9198419007,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "長野県駅（仮称）",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagano Prefecture Station (TBD)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5270866,
+      "longitude": 137.852073
+    },
+    {
+      "id": "jp_nagano_station_9525636103",
+      "osm_id": 9525636103,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "天竜峡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenryūkyō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4409649,
+      "longitude": 137.8173682
+    },
+    {
+      "id": "jp_nagano_station_9569854717",
+      "osm_id": 9569854717,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "テクノさかき",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.44118,
+      "longitude": 138.1880991
+    },
+    {
+      "id": "jp_nagano_station_9610378631",
+      "osm_id": 9610378631,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡谷",
+      "name_kana": "おかや",
+      "name_translations": {
+        "en": "Okaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CO59",
+      "latitude": 36.056577,
+      "longitude": 138.0447578
+    },
+    {
+      "id": "jp_nagano_station_9779036894",
+      "osm_id": 9779036894,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "安曇追分",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Azumi-Oiwake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "30",
+      "latitude": 36.3714275,
+      "longitude": 137.8731033
+    },
+    {
+      "id": "jp_nagano_station_9950710478",
+      "osm_id": 9950710478,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "滋野",
+      "name_kana": "しげの",
+      "name_translations": {
+        "en": "Shigeno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3424412,
+      "longitude": 138.3636192
+    },
+    {
+      "id": "jp_nagano_station_9950715676",
+      "osm_id": 9950715676,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "東小諸",
+      "name_kana": "ひがしこもろ",
+      "name_translations": {
+        "en": "Higashi-Komoro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3169542,
+      "longitude": 138.4322921
+    },
+    {
+      "id": "jp_nagano_station_9950736255",
+      "osm_id": 9950736255,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "平原",
+      "name_kana": "ひらはら",
+      "name_translations": {
+        "en": "Hirahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3086281,
+      "longitude": 138.4538196
+    },
+    {
+      "id": "jp_nagano_station_10914058158",
+      "osm_id": 10914058158,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂北",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakakita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4310967,
+      "longitude": 138.0165564
+    },
+    {
+      "id": "jp_nagano_station_10914061511",
+      "osm_id": 10914061511,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "西条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishijo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4003365,
+      "longitude": 138.0122374
+    },
+    {
+      "id": "jp_nagano_station_10942933656",
+      "osm_id": 10942933656,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏矢町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakuyachō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "33",
+      "latitude": 36.3230992,
+      "longitude": 137.8882536
+    },
+    {
+      "id": "jp_nagano_station_10942933675",
+      "osm_id": 10942933675,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "細野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hosono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "29",
+      "latitude": 36.3970063,
+      "longitude": 137.8656351
+    },
+    {
+      "id": "jp_nagano_station_10942933676",
+      "osm_id": 10942933676,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北細野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Hosono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "28",
+      "latitude": 36.406168,
+      "longitude": 137.8628424
+    },
+    {
+      "id": "jp_nagano_station_10942933677",
+      "osm_id": 10942933677,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃松川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Matsukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "27",
+      "latitude": 36.4252515,
+      "longitude": 137.8584757
+    },
+    {
+      "id": "jp_nagano_station_10942933679",
+      "osm_id": 10942933679,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "安曇沓掛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Azumi-Kutsukake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "26",
+      "latitude": 36.4478962,
+      "longitude": 137.8547072
+    },
+    {
+      "id": "jp_nagano_station_10942933680",
+      "osm_id": 10942933680,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃常盤",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Tokiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "25",
+      "latitude": 36.4671986,
+      "longitude": 137.8471729
+    },
+    {
+      "id": "jp_nagano_station_10942933682",
+      "osm_id": 10942933682,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "南大町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Ōmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "24",
+      "latitude": 36.4914786,
+      "longitude": 137.8562891
+    },
+    {
+      "id": "jp_nagano_station_10942933690",
+      "osm_id": 10942933690,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃大町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Ōmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "23",
+      "latitude": 36.5000485,
+      "longitude": 137.8615603
+    },
+    {
+      "id": "jp_nagano_station_10942947042",
+      "osm_id": 10942947042,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "北大町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Ōmachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "22",
+      "latitude": 36.5175965,
+      "longitude": 137.8579739
+    },
+    {
+      "id": "jp_nagano_station_10942947043",
+      "osm_id": 10942947043,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃木崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Kizaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "21",
+      "latitude": 36.5357273,
+      "longitude": 137.8459689
+    },
+    {
+      "id": "jp_nagano_station_10942947054",
+      "osm_id": 10942947054,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "20",
+      "latitude": 36.554287,
+      "longitude": 137.8426393
+    },
+    {
+      "id": "jp_nagano_station_10942947055",
+      "osm_id": 10942947055,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "海ノ口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uminokuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "19",
+      "latitude": 36.5656042,
+      "longitude": 137.8419319
+    },
+    {
+      "id": "jp_nagano_station_10942947056",
+      "osm_id": 10942947056,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "簗場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanaba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "18",
+      "latitude": 36.5946794,
+      "longitude": 137.8446315
+    },
+    {
+      "id": "jp_nagano_station_10942947057",
+      "osm_id": 10942947057,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "南神城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kamishiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "16",
+      "latitude": 36.6369373,
+      "longitude": 137.8413579
+    },
+    {
+      "id": "jp_nagano_station_10942947058",
+      "osm_id": 10942947058,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "神城",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamishiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "15",
+      "latitude": 36.6578773,
+      "longitude": 137.8465252
+    },
+    {
+      "id": "jp_nagano_station_10942947059",
+      "osm_id": 10942947059,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "飯森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iimori"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": "14",
+      "latitude": 36.6706633,
+      "longitude": 137.8500449
+    },
+    {
+      "id": "jp_nagano_station_10942947060",
+      "osm_id": 10942947060,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "白馬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakuba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "13",
+      "latitude": 36.6957897,
+      "longitude": 137.8637087
+    },
+    {
+      "id": "jp_nagano_station_10942947062",
+      "osm_id": 10942947062,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "信濃森上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinano-Moriue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "12",
+      "latitude": 36.7109825,
+      "longitude": 137.8715797
+    },
+    {
+      "id": "jp_nagano_station_10942947063",
+      "osm_id": 10942947063,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "白馬大池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakubaōike"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "11",
+      "latitude": 36.7406069,
+      "longitude": 137.8854413
+    },
+    {
+      "id": "jp_nagano_station_11292277597",
+      "osm_id": 11292277597,
+      "osm_type": "node",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲荷山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inariyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5527523,
+      "longitude": 138.1081693
+    },
+    {
+      "id": "jp_nagano_airport_57007466",
+      "osm_id": 57007466,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "信州まつもと空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinshu-Matsumoto Airport"
+      },
+      "operator": "長野県",
+      "network": null,
+      "ref": "MMJ",
+      "latitude": 36.1662893,
+      "longitude": 137.9237696
+    },
+    {
+      "id": "jp_nagano_bus_terminal_131930033",
+      "osm_id": 131930033,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "軽井沢駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "西武観光バス;ジェイアールバス関東;草軽交通;長電バス;千曲バス;近鉄バス;京浜急行バス",
+      "network": null,
+      "ref": null,
+      "latitude": 36.3431488,
+      "longitude": 138.6367824
+    },
+    {
+      "id": "jp_nagano_bus_terminal_220539747",
+      "osm_id": 220539747,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "長野ターミナル会館",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.6440502,
+      "longitude": 138.1822638
+    },
+    {
+      "id": "jp_nagano_bus_terminal_233959485",
+      "osm_id": 233959485,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "駒ヶ根バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7365747,
+      "longitude": 137.9336633
+    },
+    {
+      "id": "jp_nagano_bus_terminal_234495724",
+      "osm_id": 234495724,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "伊那バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8383054,
+      "longitude": 137.957806
+    },
+    {
+      "id": "jp_nagano_bus_terminal_241027970",
+      "osm_id": 241027970,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "扇沢駅",
+      "name_kana": "おうぎざわえき",
+      "name_translations": {
+        "en": "Ōgizawa Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5587235,
+      "longitude": 137.7207109
+    },
+    {
+      "id": "jp_nagano_bus_terminal_244363938",
+      "osm_id": 244363938,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Ogizawa Station",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5588459,
+      "longitude": 137.7210487
+    },
+    {
+      "id": "jp_nagano_station_266064415",
+      "osm_id": 266064415,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "田切駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6948747,
+      "longitude": 137.9328231
+    },
+    {
+      "id": "jp_nagano_bus_terminal_311115368",
+      "osm_id": 311115368,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "蓮池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hasuike"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7176843,
+      "longitude": 138.4918825
+    },
+    {
+      "id": "jp_nagano_bus_terminal_347255615",
+      "osm_id": 347255615,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "松本バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsumoto Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2301123,
+      "longitude": 137.9666671
+    },
+    {
+      "id": "jp_nagano_bus_terminal_359007068",
+      "osm_id": 359007068,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR高遠駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8375581,
+      "longitude": 138.0547753
+    },
+    {
+      "id": "jp_nagano_bus_terminal_460134921",
+      "osm_id": 460134921,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "新島々バスターミナル",
+      "name_kana": "しんしましまバスターミナル",
+      "name_translations": {
+        "en": "Shinshimashima Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1898528,
+      "longitude": 137.8214416
+    },
+    {
+      "id": "jp_nagano_station_601174730",
+      "osm_id": 601174730,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "姨捨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obasute"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.5025886,
+      "longitude": 138.0933212
+    },
+    {
+      "id": "jp_nagano_station_760218482",
+      "osm_id": 760218482,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "private",
+      "name": "田中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3544836,
+      "longitude": 138.3294123
+    },
+    {
+      "id": "jp_nagano_bus_terminal_771658638",
+      "osm_id": 771658638,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "白馬八方バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakuba-Happo Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.7015446,
+      "longitude": 137.8457319
+    },
+    {
+      "id": "jp_nagano_bus_terminal_885871673",
+      "osm_id": 885871673,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "鹿教湯車庫",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2965327,
+      "longitude": 138.1312822
+    },
+    {
+      "id": "jp_nagano_bus_terminal_1006727542",
+      "osm_id": 1006727542,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "青木バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3696393,
+      "longitude": 138.1302117
+    },
+    {
+      "id": "jp_nagano_station_1368795079",
+      "osm_id": 1368795079,
+      "osm_type": "way",
+      "prefecture_id": "jp_nagano",
+      "type": "station",
+      "subtype": "jr",
+      "name": "有明駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "JR東日本",
+      "network": "大糸線",
+      "ref": null,
+      "latitude": 36.3591955,
+      "longitude": 137.8786877
+    }
+  ]
+}

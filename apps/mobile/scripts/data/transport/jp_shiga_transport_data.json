@@ -1,0 +1,1982 @@
+{
+  "fetchedAt": "2025-12-24T05:54:05.444Z",
+  "prefecture_id": "jp_shiga",
+  "prefecture_name": "滋賀県",
+  "stats": {
+    "station": 93,
+    "airport": 1,
+    "ferry_terminal": 5,
+    "bus_terminal": 12,
+    "total": 111
+  },
+  "data": [
+    {
+      "id": "jp_shiga_station_267302251",
+      "osm_id": 267302251,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "近江今津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmi-Imazu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B14",
+      "latitude": 35.3985126,
+      "longitude": 136.0323864
+    },
+    {
+      "id": "jp_shiga_station_267303049",
+      "osm_id": 267303049,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōnan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9311631,
+      "longitude": 136.1693865
+    },
+    {
+      "id": "jp_shiga_station_267303051",
+      "osm_id": 267303051,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "三雲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikumo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9831773,
+      "longitude": 136.1178406
+    },
+    {
+      "id": "jp_shiga_station_267303140",
+      "osm_id": 267303140,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "手原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tehara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR草津線",
+      "ref": null,
+      "latitude": 35.0273101,
+      "longitude": 135.9993215
+    },
+    {
+      "id": "jp_shiga_station_267303636",
+      "osm_id": 267303636,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9013453,
+      "longitude": 136.2126848
+    },
+    {
+      "id": "jp_shiga_station_267308832",
+      "osm_id": 267308832,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "高月",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takatsuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A06",
+      "latitude": 35.4711634,
+      "longitude": 136.2374239
+    },
+    {
+      "id": "jp_shiga_station_267459659",
+      "osm_id": 267459659,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōtsu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR琵琶湖線",
+      "ref": null,
+      "latitude": 35.0030494,
+      "longitude": 135.8648951
+    },
+    {
+      "id": "jp_shiga_station_267459763",
+      "osm_id": 267459763,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "石山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9799397,
+      "longitude": 135.9000031
+    },
+    {
+      "id": "jp_shiga_station_339087543",
+      "osm_id": 339087543,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "追分",
+      "name_kana": "おいわけ",
+      "name_translations": {
+        "en": "Oiwake"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "京津線",
+      "ref": "OT33",
+      "latitude": 34.9915859,
+      "longitude": 135.8371682
+    },
+    {
+      "id": "jp_shiga_ferry_terminal_416778355",
+      "osm_id": 416778355,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "長浜港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3731339,
+      "longitude": 136.2641139
+    },
+    {
+      "id": "jp_shiga_station_1351659258",
+      "osm_id": 1351659258,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "篠原",
+      "name_kana": "しのはら",
+      "name_translations": {
+        "en": "Shinohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0991244,
+      "longitude": 136.0713313
+    },
+    {
+      "id": "jp_shiga_station_1351659261",
+      "osm_id": 1351659261,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "近江八幡",
+      "name_kana": "おうみはちまん",
+      "name_translations": {
+        "en": "Ōmihachiman"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1223816,
+      "longitude": 136.1027652
+    },
+    {
+      "id": "jp_shiga_station_1351659278",
+      "osm_id": 1351659278,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "長谷野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagatanino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0956064,
+      "longitude": 136.1876387
+    },
+    {
+      "id": "jp_shiga_station_2674697441",
+      "osm_id": 2674697441,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "石部",
+      "name_kana": "いしべ",
+      "name_translations": {
+        "en": "Ishibe"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR草津線",
+      "ref": null,
+      "latitude": 35.0176482,
+      "longitude": 136.052946
+    },
+    {
+      "id": "jp_shiga_bus_terminal_2966865364",
+      "osm_id": 2966865364,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "草津駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "近江鉄道大津営業所",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0222599,
+      "longitude": 135.9623283
+    },
+    {
+      "id": "jp_shiga_station_3544611598",
+      "osm_id": 3544611598,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "五箇荘",
+      "name_kana": "ごかしょう",
+      "name_translations": {
+        "en": "Gokashou"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1547658,
+      "longitude": 136.1972302
+    },
+    {
+      "id": "jp_shiga_station_3544611599",
+      "osm_id": 3544611599,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "八日市",
+      "name_kana": "ようかいち",
+      "name_translations": {
+        "en": "Yōkaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1144354,
+      "longitude": 136.1946367
+    },
+    {
+      "id": "jp_shiga_station_3544611600",
+      "osm_id": 3544611600,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "日野",
+      "name_kana": "ひの",
+      "name_translations": {
+        "en": "Hino"
+      },
+      "operator": "近江鉄道",
+      "network": "近江鉄道本線",
+      "ref": null,
+      "latitude": 35.0122637,
+      "longitude": 136.2194474
+    },
+    {
+      "id": "jp_shiga_station_3544611601",
+      "osm_id": 3544611601,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "水口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minakuchi"
+      },
+      "operator": "近江鉄道",
+      "network": "近江鉄道本線",
+      "ref": "OR34",
+      "latitude": 34.9743172,
+      "longitude": 136.176836
+    },
+    {
+      "id": "jp_shiga_station_3544611602",
+      "osm_id": 3544611602,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "貴生川",
+      "name_kana": "きぶかわ",
+      "name_translations": {
+        "en": "Kibukawa"
+      },
+      "operator": "JR西日本;近江鉄道;信楽高原鐵道",
+      "network": "近江鉄道本線;草津線;信楽高原鐵道信楽線",
+      "ref": null,
+      "latitude": 34.9522655,
+      "longitude": 136.153886
+    },
+    {
+      "id": "jp_shiga_station_3630162090",
+      "osm_id": 3630162090,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "彦根",
+      "name_kana": "ひこね",
+      "name_translations": {
+        "en": "Hikone"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A13",
+      "latitude": 35.2722017,
+      "longitude": 136.2633658
+    },
+    {
+      "id": "jp_shiga_station_3664970241",
+      "osm_id": 3664970241,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳥居本",
+      "name_kana": "とりいもと",
+      "name_translations": {
+        "en": "Toriimoto"
+      },
+      "operator": "近江鉄道",
+      "network": "近江鉄道本線",
+      "ref": null,
+      "latitude": 35.2845592,
+      "longitude": 136.2829991
+    },
+    {
+      "id": "jp_shiga_station_3664970245",
+      "osm_id": 3664970245,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "多賀大社前",
+      "name_kana": "たがたいしゃまえ",
+      "name_translations": {
+        "en": "Taga Taisha-mae"
+      },
+      "operator": "近江鉄道",
+      "network": "多賀線",
+      "ref": null,
+      "latitude": 35.2264448,
+      "longitude": 136.2843767
+    },
+    {
+      "id": "jp_shiga_station_3664970246",
+      "osm_id": 3664970246,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "高宮",
+      "name_kana": "たかみや",
+      "name_translations": {
+        "en": "Takamiya"
+      },
+      "operator": "近江鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2362814,
+      "longitude": 136.2605969
+    },
+    {
+      "id": "jp_shiga_station_3999594681",
+      "osm_id": 3999594681,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashiwabara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3447896,
+      "longitude": 136.4028328
+    },
+    {
+      "id": "jp_shiga_station_3999594682",
+      "osm_id": 3999594682,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "米原",
+      "name_kana": "まいばら",
+      "name_translations": {
+        "en": "Maibara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-A12;CA83",
+      "latitude": 35.3149074,
+      "longitude": 136.2901179
+    },
+    {
+      "id": "jp_shiga_station_3999594683",
+      "osm_id": 3999594683,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "醒ヶ井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Samegai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3277421,
+      "longitude": 136.345277
+    },
+    {
+      "id": "jp_shiga_station_3999594687",
+      "osm_id": 3999594687,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "近江長岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmi-Nagoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3591769,
+      "longitude": 136.3740107
+    },
+    {
+      "id": "jp_shiga_station_3999683414",
+      "osm_id": 3999683414,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "河瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.225197,
+      "longitude": 136.2249796
+    },
+    {
+      "id": "jp_shiga_station_3999683418",
+      "osm_id": 3999683418,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "南彦根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Hikone"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2460755,
+      "longitude": 136.2479316
+    },
+    {
+      "id": "jp_shiga_station_3999683419",
+      "osm_id": 3999683419,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "南草津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kusatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0037567,
+      "longitude": 135.9472641
+    },
+    {
+      "id": "jp_shiga_station_4022185756",
+      "osm_id": 4022185756,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "栗東",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rittō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0373583,
+      "longitude": 135.9798785
+    },
+    {
+      "id": "jp_shiga_bus_terminal_4193835531",
+      "osm_id": 4193835531,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西塔（釈迦堂）",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0718136,
+      "longitude": 135.833477
+    },
+    {
+      "id": "jp_shiga_station_4289438388",
+      "osm_id": 4289438388,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "膳所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Zeze"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9993301,
+      "longitude": 135.8806158
+    },
+    {
+      "id": "jp_shiga_station_4289542225",
+      "osm_id": 4289542225,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "瀬田",
+      "name_kana": "せた",
+      "name_translations": {
+        "en": "Seta"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9870804,
+      "longitude": 135.9254689
+    },
+    {
+      "id": "jp_shiga_station_4289542226",
+      "osm_id": 4289542226,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "草津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusatsu"
+      },
+      "operator": "西日本旅客鉄道株式会社",
+      "network": "東海道本線;草津線",
+      "ref": null,
+      "latitude": 35.022551,
+      "longitude": 135.9618263
+    },
+    {
+      "id": "jp_shiga_station_4329204809",
+      "osm_id": 4329204809,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "京阪石山",
+      "name_kana": "けいはんいしやま",
+      "name_translations": {
+        "en": "Keihan-ishiyama"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "石山坂本線",
+      "ref": "OT03",
+      "latitude": 34.9796496,
+      "longitude": 135.8994102
+    },
+    {
+      "id": "jp_shiga_bus_terminal_4619794123",
+      "osm_id": 4619794123,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "瀬田駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9866084,
+      "longitude": 135.9252347
+    },
+    {
+      "id": "jp_shiga_station_4999665154",
+      "osm_id": 4999665154,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "信楽",
+      "name_kana": "しがらき",
+      "name_translations": {
+        "en": "Shigaraki"
+      },
+      "operator": "信楽高原鐵道",
+      "network": "信楽高原鐵道信楽線",
+      "ref": null,
+      "latitude": 34.8768864,
+      "longitude": 136.0610175
+    },
+    {
+      "id": "jp_shiga_station_5004344385",
+      "osm_id": 5004344385,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長浜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagahama"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "北陸本線",
+      "ref": "JR-A09",
+      "latitude": 35.3784578,
+      "longitude": 136.2651919
+    },
+    {
+      "id": "jp_shiga_station_5176041264",
+      "osm_id": 5176041264,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "太郎坊宮前",
+      "name_kana": "たろぼうぐうまえ",
+      "name_translations": {
+        "en": "Tarobougumae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1085344,
+      "longitude": 136.1837802
+    },
+    {
+      "id": "jp_shiga_station_5176041281",
+      "osm_id": 5176041281,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "市辺",
+      "name_kana": "いちのべ",
+      "name_translations": {
+        "en": "Ichinobe"
+      },
+      "operator": "近江鉄道",
+      "network": "近江鉄道八日市線",
+      "ref": null,
+      "latitude": 35.1040143,
+      "longitude": 136.1658808
+    },
+    {
+      "id": "jp_shiga_station_5176041422",
+      "osm_id": 5176041422,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "平田",
+      "name_kana": "ひらた",
+      "name_translations": {
+        "en": "Hirata"
+      },
+      "operator": "近江鉄道",
+      "network": "近江鉄道八日市線",
+      "ref": null,
+      "latitude": 35.1102189,
+      "longitude": 136.1465368
+    },
+    {
+      "id": "jp_shiga_station_5176041523",
+      "osm_id": 5176041523,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "武佐",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Musa"
+      },
+      "operator": "近江鉄道",
+      "network": "近江鉄道八日市線",
+      "ref": null,
+      "latitude": 35.1149219,
+      "longitude": 136.1304353
+    },
+    {
+      "id": "jp_shiga_bus_terminal_5276997921",
+      "osm_id": 5276997921,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "トンネル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3665419,
+      "longitude": 136.3596793
+    },
+    {
+      "id": "jp_shiga_station_5403468046",
+      "osm_id": 5403468046,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "能登川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Notogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1799912,
+      "longitude": 136.1658863
+    },
+    {
+      "id": "jp_shiga_station_5450840149",
+      "osm_id": 5450840149,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "寺庄",
+      "name_kana": "てらしょう",
+      "name_translations": {
+        "en": "Terasho"
+      },
+      "operator": "JR西日本",
+      "network": "JR草津線",
+      "ref": null,
+      "latitude": 34.9190254,
+      "longitude": 136.1858704
+    },
+    {
+      "id": "jp_shiga_ferry_terminal_5588287888",
+      "osm_id": 5588287888,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "近江八幡和船観光協同組合",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1462292,
+      "longitude": 136.0935614
+    },
+    {
+      "id": "jp_shiga_station_5729650523",
+      "osm_id": 5729650523,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "安土",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Azuchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1425367,
+      "longitude": 136.1336732
+    },
+    {
+      "id": "jp_shiga_ferry_terminal_6407874841",
+      "osm_id": 6407874841,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "三井寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midera"
+      },
+      "operator": "びわ湖疏水船受付事務局",
+      "network": "びわ湖疏水船",
+      "ref": null,
+      "latitude": 35.0116614,
+      "longitude": 135.8566361
+    },
+    {
+      "id": "jp_shiga_station_6408028891",
+      "osm_id": 6408028891,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂本比叡山口",
+      "name_kana": "さかもとひえいざんぐち",
+      "name_translations": {
+        "en": "Sakamoto-hieizanguchi"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "大津線",
+      "ref": "OT21",
+      "latitude": 35.070502,
+      "longitude": 135.8713317
+    },
+    {
+      "id": "jp_shiga_station_6408967094",
+      "osm_id": 6408967094,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "びわ湖浜大津",
+      "name_kana": "びわこはまおおつ",
+      "name_translations": {
+        "en": "Biwako-hamaotsu"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "大津線",
+      "ref": "OT12",
+      "latitude": 35.0111848,
+      "longitude": 135.8642775
+    },
+    {
+      "id": "jp_shiga_station_6410606743",
+      "osm_id": 6410606743,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "京阪膳所",
+      "name_kana": "けいはんぜぜ",
+      "name_translations": {
+        "en": "Keihan-zeze"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "石山坂本線",
+      "ref": "OT09",
+      "latitude": 34.9997533,
+      "longitude": 135.8809783
+    },
+    {
+      "id": "jp_shiga_station_6412610754",
+      "osm_id": 6412610754,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "石山寺",
+      "name_kana": "いしやまでら",
+      "name_translations": {
+        "en": "Ishiyamadera"
+      },
+      "operator": "京阪電気鉄道",
+      "network": "石山坂本線",
+      "ref": "OT01",
+      "latitude": 34.967233,
+      "longitude": 135.9033881
+    },
+    {
+      "id": "jp_shiga_station_7097140175",
+      "osm_id": 7097140175,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "彦根口",
+      "name_kana": "ひこねぐち",
+      "name_translations": {
+        "en": "Hikoneguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2548213,
+      "longitude": 136.2584183
+    },
+    {
+      "id": "jp_shiga_station_7828873696",
+      "osm_id": 7828873696,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "志賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiga"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-B21",
+      "latitude": 35.2017984,
+      "longitude": 135.9246375
+    },
+    {
+      "id": "jp_shiga_station_7828937595",
+      "osm_id": 7828937595,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "和邇",
+      "name_kana": "わに",
+      "name_translations": {
+        "en": "Wani"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-B23",
+      "latitude": 35.1621022,
+      "longitude": 135.9220643
+    },
+    {
+      "id": "jp_shiga_station_7828937596",
+      "osm_id": 7828937596,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B24",
+      "latitude": 35.1388611,
+      "longitude": 135.922626
+    },
+    {
+      "id": "jp_shiga_station_7828937597",
+      "osm_id": 7828937597,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大津京",
+      "name_kana": "おおつきょう",
+      "name_translations": {
+        "en": "Otsukyo"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "湖西線",
+      "ref": "JR-B29",
+      "latitude": 35.0245014,
+      "longitude": 135.8573599
+    },
+    {
+      "id": "jp_shiga_station_7828937600",
+      "osm_id": 7828937600,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "おごと温泉",
+      "name_kana": "おごとおんせん",
+      "name_translations": {
+        "en": "Ogotoonsen"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "湖西線",
+      "ref": "JR-B26",
+      "latitude": 35.0972099,
+      "longitude": 135.8948908
+    },
+    {
+      "id": "jp_shiga_station_7828937601",
+      "osm_id": 7828937601,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "比叡山坂本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hieizan-Sakamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B27",
+      "latitude": 35.070665,
+      "longitude": 135.8783509
+    },
+    {
+      "id": "jp_shiga_station_7828937602",
+      "osm_id": 7828937602,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "堅田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Katata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B25",
+      "latitude": 35.1208877,
+      "longitude": 135.9149669
+    },
+    {
+      "id": "jp_shiga_station_7828937605",
+      "osm_id": 7828937605,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "蓬莱",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōrai"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-B22",
+      "latitude": 35.1823594,
+      "longitude": 135.914977
+    },
+    {
+      "id": "jp_shiga_station_7828937606",
+      "osm_id": 7828937606,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "唐崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karasaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B28",
+      "latitude": 35.0497601,
+      "longitude": 135.866836
+    },
+    {
+      "id": "jp_shiga_station_7831593077",
+      "osm_id": 7831593077,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "ほうらい丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōraioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0681004,
+      "longitude": 135.8609247
+    },
+    {
+      "id": "jp_shiga_station_7831593078",
+      "osm_id": 7831593078,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "もたて山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motate Yama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0675637,
+      "longitude": 135.8488628
+    },
+    {
+      "id": "jp_shiga_station_7831593079",
+      "osm_id": 7831593079,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "ケーブル延暦寺",
+      "name_kana": "けーぶるえんりゃくじ",
+      "name_translations": {
+        "en": "Cable Enryakuji"
+      },
+      "operator": "比叡山鉄道",
+      "network": "比叡山鉄道",
+      "ref": null,
+      "latitude": 35.0664945,
+      "longitude": 135.8438766
+    },
+    {
+      "id": "jp_shiga_station_7831593080",
+      "osm_id": 7831593080,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "ケーブル坂本",
+      "name_kana": "けーぶるさかもと",
+      "name_translations": {
+        "en": "Cable Sakamoto"
+      },
+      "operator": "京福電気鉄道",
+      "network": "鋼索線",
+      "ref": null,
+      "latitude": 35.0696684,
+      "longitude": 135.8638503
+    },
+    {
+      "id": "jp_shiga_station_8063979630",
+      "osm_id": 8063979630,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "近江塩津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmi-Shiotsu"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-A03;JR-B10",
+      "latitude": 35.5391188,
+      "longitude": 136.1514847
+    },
+    {
+      "id": "jp_shiga_station_8070007866",
+      "osm_id": 8070007866,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "比良",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hira"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-B20",
+      "latitude": 35.2198695,
+      "longitude": 135.9442182
+    },
+    {
+      "id": "jp_shiga_station_8070010582",
+      "osm_id": 8070010582,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "近江舞子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmi-Maiko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B19",
+      "latitude": 35.2358219,
+      "longitude": 135.9590299
+    },
+    {
+      "id": "jp_shiga_station_8070020124",
+      "osm_id": 8070020124,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "近江高島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Omi-Takashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B17",
+      "latitude": 35.2926397,
+      "longitude": 136.0103068
+    },
+    {
+      "id": "jp_shiga_station_8070020629",
+      "osm_id": 8070020629,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "北小松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Komatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B18",
+      "latitude": 35.2537381,
+      "longitude": 135.9705823
+    },
+    {
+      "id": "jp_shiga_station_8070032814",
+      "osm_id": 8070032814,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "新旭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Asahi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B15",
+      "latitude": 35.3552951,
+      "longitude": 136.035532
+    },
+    {
+      "id": "jp_shiga_station_8070050609",
+      "osm_id": 8070050609,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "近江中庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmi-Nakashō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-B13",
+      "latitude": 35.4413694,
+      "longitude": 136.0385474
+    },
+    {
+      "id": "jp_shiga_station_8070057805",
+      "osm_id": 8070057805,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "マキノ",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Makino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B12",
+      "latitude": 35.4613743,
+      "longitude": 136.0598008
+    },
+    {
+      "id": "jp_shiga_station_8070064523",
+      "osm_id": 8070064523,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "永原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-B11",
+      "latitude": 35.4990028,
+      "longitude": 136.1226675
+    },
+    {
+      "id": "jp_shiga_station_8115207266",
+      "osm_id": 8115207266,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安曇川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Adogawa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "湖西線",
+      "ref": "JR-B16",
+      "latitude": 35.328438,
+      "longitude": 136.0199755
+    },
+    {
+      "id": "jp_shiga_station_8128136605",
+      "osm_id": 8128136605,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "田村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A10",
+      "latitude": 35.356318,
+      "longitude": 136.2818055
+    },
+    {
+      "id": "jp_shiga_station_8128136607",
+      "osm_id": 8128136607,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "jr",
+      "name": "坂田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakata"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-A11",
+      "latitude": 35.3359644,
+      "longitude": 136.2877594
+    },
+    {
+      "id": "jp_shiga_station_8128136609",
+      "osm_id": 8128136609,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲枝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2033146,
+      "longitude": 136.1943595
+    },
+    {
+      "id": "jp_shiga_station_8128136616",
+      "osm_id": 8128136616,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "野洲",
+      "name_kana": "やす",
+      "name_translations": {
+        "en": "Yasu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0686932,
+      "longitude": 136.0225922
+    },
+    {
+      "id": "jp_shiga_station_8128179618",
+      "osm_id": 8128179618,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "守山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Moriyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0504054,
+      "longitude": 135.9956883
+    },
+    {
+      "id": "jp_shiga_station_8214061514",
+      "osm_id": 8214061514,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "尼子",
+      "name_kana": "あまご",
+      "name_translations": {
+        "en": "Amago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2140929,
+      "longitude": 136.2462482
+    },
+    {
+      "id": "jp_shiga_station_8214134219",
+      "osm_id": 8214134219,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "ひこね芹川",
+      "name_kana": "ひこねせりかわ",
+      "name_translations": {
+        "en": "Hikoneserikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2622511,
+      "longitude": 136.2609702
+    },
+    {
+      "id": "jp_shiga_station_8214134221",
+      "osm_id": 8214134221,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "フジテック前",
+      "name_kana": "ふじてっくまえ",
+      "name_translations": {
+        "en": "Fujitec-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.2943107,
+      "longitude": 136.2854969
+    },
+    {
+      "id": "jp_shiga_station_8215530240",
+      "osm_id": 8215530240,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "大学前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daigaku-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0878086,
+      "longitude": 136.1847069
+    },
+    {
+      "id": "jp_shiga_station_8215530241",
+      "osm_id": 8215530241,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "京セラ前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyocera-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0748781,
+      "longitude": 136.1803289
+    },
+    {
+      "id": "jp_shiga_station_8215530242",
+      "osm_id": 8215530242,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝日大塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahi Ōtsuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0509582,
+      "longitude": 136.1935468
+    },
+    {
+      "id": "jp_shiga_station_8215530243",
+      "osm_id": 8215530243,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "朝日野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asahino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0315558,
+      "longitude": 136.2057039
+    },
+    {
+      "id": "jp_shiga_station_8215530244",
+      "osm_id": 8215530244,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "河辺の森",
+      "name_kana": "かわべのもり",
+      "name_translations": {
+        "en": "Kawabenomori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1353183,
+      "longitude": 136.196172
+    },
+    {
+      "id": "jp_shiga_station_8215530245",
+      "osm_id": 8215530245,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "愛知川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Echigawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1761389,
+      "longitude": 136.2135158
+    },
+    {
+      "id": "jp_shiga_station_8215530250",
+      "osm_id": 8215530250,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊郷",
+      "name_kana": "とよさと",
+      "name_translations": {
+        "en": "Toyosato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1977267,
+      "longitude": 136.2307893
+    },
+    {
+      "id": "jp_shiga_station_8218908694",
+      "osm_id": 8218908694,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakuragawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0649891,
+      "longitude": 136.187538
+    },
+    {
+      "id": "jp_shiga_station_8219056322",
+      "osm_id": 8219056322,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "スクリーン",
+      "name_kana": "すくりーん",
+      "name_translations": {
+        "en": "Screen"
+      },
+      "operator": "近江鉄道",
+      "network": "近江鉄道多賀線",
+      "ref": null,
+      "latitude": 35.2331749,
+      "longitude": 136.267278
+    },
+    {
+      "id": "jp_shiga_station_8219350669",
+      "osm_id": 8219350669,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "新八日市",
+      "name_kana": "しんようかいち",
+      "name_translations": {
+        "en": "Shin-Yokaichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "OR16",
+      "latitude": 35.1102399,
+      "longitude": 136.1910767
+    },
+    {
+      "id": "jp_shiga_bus_terminal_11774805306",
+      "osm_id": 11774805306,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "木ノ本バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5045562,
+      "longitude": 136.2217945
+    },
+    {
+      "id": "jp_shiga_ferry_terminal_12169863437",
+      "osm_id": 12169863437,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "竹生島",
+      "name_kana": "ちくぶしま",
+      "name_translations": {
+        "en": "Chikubu Island"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4200558,
+      "longitude": 136.1434507
+    },
+    {
+      "id": "jp_shiga_station_12838453008",
+      "osm_id": 12838453008,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "木ノ本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinomoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A05",
+      "latitude": 35.5062451,
+      "longitude": 136.2215196
+    },
+    {
+      "id": "jp_shiga_station_12838453041",
+      "osm_id": 12838453041,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "河毛",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawake"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A07",
+      "latitude": 35.4484112,
+      "longitude": 136.2495313
+    },
+    {
+      "id": "jp_shiga_station_12838453079",
+      "osm_id": 12838453079,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "虎姫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Torahime"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A08",
+      "latitude": 35.4246514,
+      "longitude": 136.2572779
+    },
+    {
+      "id": "jp_shiga_station_12838457723",
+      "osm_id": 12838457723,
+      "osm_type": "node",
+      "prefecture_id": "jp_shiga",
+      "type": "station",
+      "subtype": "private",
+      "name": "余呉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A04",
+      "latitude": 35.5339582,
+      "longitude": 136.1989783
+    },
+    {
+      "id": "jp_shiga_ferry_terminal_183552654",
+      "osm_id": 183552654,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "観光船のりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3972279,
+      "longitude": 136.0350739
+    },
+    {
+      "id": "jp_shiga_bus_terminal_304353737",
+      "osm_id": 304353737,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "近江八幡駅バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1229488,
+      "longitude": 136.102008
+    },
+    {
+      "id": "jp_shiga_bus_terminal_375790134",
+      "osm_id": 375790134,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "本水口",
+      "name_kana": "ほんみなくち",
+      "name_translations": null,
+      "operator": "甲賀市",
+      "network": "甲賀市コミュニティバス",
+      "ref": null,
+      "latitude": 34.9677725,
+      "longitude": 136.1778688
+    },
+    {
+      "id": "jp_shiga_bus_terminal_467338755",
+      "osm_id": 467338755,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "龍谷大学行直通バス停留所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9847497,
+      "longitude": 135.9254348
+    },
+    {
+      "id": "jp_shiga_bus_terminal_571298132",
+      "osm_id": 571298132,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "びわ湖浜大津;浜大津",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": "江若バス;近江鉄道バス;京阪バス",
+      "ref": null,
+      "latitude": 35.0116001,
+      "longitude": 135.8639559
+    },
+    {
+      "id": "jp_shiga_bus_terminal_572208723",
+      "osm_id": 572208723,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "大津駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0037616,
+      "longitude": 135.8641096
+    },
+    {
+      "id": "jp_shiga_airport_902792647",
+      "osm_id": 902792647,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "びわ湖ＭPPG パラグライダー飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Lake Biwa MPPG Paraglider Airfield"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0848262,
+      "longitude": 135.9484959
+    },
+    {
+      "id": "jp_shiga_bus_terminal_1417557965",
+      "osm_id": 1417557965,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "下田",
+      "name_kana": "しもだ",
+      "name_translations": null,
+      "operator": null,
+      "network": "甲賀市コミュニティバス",
+      "ref": null,
+      "latitude": 35.024296,
+      "longitude": 136.1303808
+    },
+    {
+      "id": "jp_shiga_bus_terminal_1421993345",
+      "osm_id": 1421993345,
+      "osm_type": "way",
+      "prefecture_id": "jp_shiga",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "近江土山駅",
+      "name_kana": "おうみつちやまえき",
+      "name_translations": null,
+      "operator": null,
+      "network": "甲賀市コミュニティバス",
+      "ref": null,
+      "latitude": 34.9364857,
+      "longitude": 136.2839773
+    }
+  ]
+}

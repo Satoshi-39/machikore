@@ -1,0 +1,7128 @@
+{
+  "fetchedAt": "2025-12-24T05:54:44.049Z",
+  "prefecture_id": "jp_hyogo",
+  "prefecture_name": "兵庫県",
+  "stats": {
+    "station": 356,
+    "airport": 3,
+    "ferry_terminal": 17,
+    "bus_terminal": 22,
+    "total": 398
+  },
+  "data": [
+    {
+      "id": "jp_hyogo_station_265895565",
+      "osm_id": 265895565,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "姫路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Himeji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8264048,
+      "longitude": 134.6907972
+    },
+    {
+      "id": "jp_hyogo_station_265910727",
+      "osm_id": 265910727,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西明石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Akashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A74",
+      "latitude": 34.6658868,
+      "longitude": 134.9602417
+    },
+    {
+      "id": "jp_hyogo_station_265910879",
+      "osm_id": 265910879,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "明石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akashi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-A73",
+      "latitude": 34.6491038,
+      "longitude": 134.9927483
+    },
+    {
+      "id": "jp_hyogo_station_265960658",
+      "osm_id": 265960658,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "香住",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6354933,
+      "longitude": 134.6231388
+    },
+    {
+      "id": "jp_hyogo_station_265960661",
+      "osm_id": 265960661,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "江原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4695106,
+      "longitude": 134.7758144
+    },
+    {
+      "id": "jp_hyogo_station_265960886",
+      "osm_id": 265960886,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "養父",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yabu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3710145,
+      "longitude": 134.8117204
+    },
+    {
+      "id": "jp_hyogo_station_265960889",
+      "osm_id": 265960889,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "国府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokufu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4963023,
+      "longitude": 134.8000012
+    },
+    {
+      "id": "jp_hyogo_station_265961024",
+      "osm_id": 265961024,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "玄武洞",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Genbudo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.58863,
+      "longitude": 134.7992171
+    },
+    {
+      "id": "jp_hyogo_station_265961246",
+      "osm_id": 265961246,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "梁瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanase"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3222852,
+      "longitude": 134.8810215
+    },
+    {
+      "id": "jp_hyogo_station_265961255",
+      "osm_id": 265961255,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Satsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6531158,
+      "longitude": 134.6856879
+    },
+    {
+      "id": "jp_hyogo_station_265963234",
+      "osm_id": 265963234,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "柴山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shibayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6464791,
+      "longitude": 134.6637555
+    },
+    {
+      "id": "jp_hyogo_station_265963441",
+      "osm_id": 265963441,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "竹野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takeno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6499609,
+      "longitude": 134.7563763
+    },
+    {
+      "id": "jp_hyogo_station_265966891",
+      "osm_id": 265966891,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "鎧",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoroi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6516349,
+      "longitude": 134.5754602
+    },
+    {
+      "id": "jp_hyogo_station_265967312",
+      "osm_id": 265967312,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "餘部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amarube"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6487624,
+      "longitude": 134.5570701
+    },
+    {
+      "id": "jp_hyogo_station_265967803",
+      "osm_id": 265967803,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "諸寄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Moroyose"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6195566,
+      "longitude": 134.4343476
+    },
+    {
+      "id": "jp_hyogo_station_265968202",
+      "osm_id": 265968202,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6208056,
+      "longitude": 134.4523087
+    },
+    {
+      "id": "jp_hyogo_station_265969026",
+      "osm_id": 265969026,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "居組",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Igumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6068993,
+      "longitude": 134.3935415
+    },
+    {
+      "id": "jp_hyogo_station_266921888",
+      "osm_id": 266921888,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "播磨高岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harima-Takaoka"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8420109,
+      "longitude": 134.6587105
+    },
+    {
+      "id": "jp_hyogo_station_266921972",
+      "osm_id": 266921972,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "太市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōichi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8640236,
+      "longitude": 134.6071434
+    },
+    {
+      "id": "jp_hyogo_station_266922052",
+      "osm_id": 266922052,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "千本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sembon"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9424722,
+      "longitude": 134.4943513
+    },
+    {
+      "id": "jp_hyogo_station_266922630",
+      "osm_id": 266922630,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "上月",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kozuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9836369,
+      "longitude": 134.3226039
+    },
+    {
+      "id": "jp_hyogo_station_266922708",
+      "osm_id": 266922708,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西栗栖",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Kurisu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9524131,
+      "longitude": 134.4704009
+    },
+    {
+      "id": "jp_hyogo_station_266922713",
+      "osm_id": 266922713,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "播磨徳久",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harima-Tokusa"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.990524,
+      "longitude": 134.3860046
+    },
+    {
+      "id": "jp_hyogo_station_266923818",
+      "osm_id": 266923818,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "東觜崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Hashisaki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8879681,
+      "longitude": 134.5578852
+    },
+    {
+      "id": "jp_hyogo_station_266924834",
+      "osm_id": 266924834,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "三日月",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikazuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.985006,
+      "longitude": 134.4353888
+    },
+    {
+      "id": "jp_hyogo_station_266924921",
+      "osm_id": 266924921,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "播磨新宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harima-Shingū"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9210847,
+      "longitude": 134.5465177
+    },
+    {
+      "id": "jp_hyogo_station_266925698",
+      "osm_id": 266925698,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "本竜野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hon-Tatsuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8619028,
+      "longitude": 134.5555323
+    },
+    {
+      "id": "jp_hyogo_station_267062368",
+      "osm_id": 267062368,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nii"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2370627,
+      "longitude": 134.7951345
+    },
+    {
+      "id": "jp_hyogo_station_267062582",
+      "osm_id": 267062582,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "長谷",
+      "name_kana": "はせ",
+      "name_translations": {
+        "en": "Hase"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1168355,
+      "longitude": 134.7480051
+    },
+    {
+      "id": "jp_hyogo_station_267063319",
+      "osm_id": 267063319,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "青倉",
+      "name_kana": "あおくら",
+      "name_translations": {
+        "en": "Aokura"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2671129,
+      "longitude": 134.8114283
+    },
+    {
+      "id": "jp_hyogo_station_267063450",
+      "osm_id": 267063450,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁豊野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nibuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8850884,
+      "longitude": 134.7282033
+    },
+    {
+      "id": "jp_hyogo_station_267063477",
+      "osm_id": 267063477,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "砥堀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tohori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8662556,
+      "longitude": 134.7245136
+    },
+    {
+      "id": "jp_hyogo_station_267063488",
+      "osm_id": 267063488,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "京口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyōguchi"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8340316,
+      "longitude": 134.7051426
+    },
+    {
+      "id": "jp_hyogo_station_267064937",
+      "osm_id": 267064937,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西脇市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishiwakishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.972016,
+      "longitude": 134.9691057
+    },
+    {
+      "id": "jp_hyogo_station_267064939",
+      "osm_id": 267064939,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9412041,
+      "longitude": 134.9554044
+    },
+    {
+      "id": "jp_hyogo_station_267064941",
+      "osm_id": 267064941,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "比延",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hie"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9891,
+      "longitude": 134.995816
+    },
+    {
+      "id": "jp_hyogo_station_267064988",
+      "osm_id": 267064988,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "新西脇",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Nishiwaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.978038,
+      "longitude": 134.977966
+    },
+    {
+      "id": "jp_hyogo_station_267065019",
+      "osm_id": 267065019,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒田庄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kurodashō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0225486,
+      "longitude": 134.9924538
+    },
+    {
+      "id": "jp_hyogo_station_267065085",
+      "osm_id": 267065085,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "船町口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Funamachiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.063125,
+      "longitude": 135.009646
+    },
+    {
+      "id": "jp_hyogo_station_267065222",
+      "osm_id": 267065222,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "日本へそ公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nihonhesokōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0023377,
+      "longitude": 134.9977005
+    },
+    {
+      "id": "jp_hyogo_station_267065337",
+      "osm_id": 267065337,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "本黒田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hon-Kuroda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0529112,
+      "longitude": 134.9959899
+    },
+    {
+      "id": "jp_hyogo_station_267065496",
+      "osm_id": 267065496,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9487252,
+      "longitude": 134.9623912
+    },
+    {
+      "id": "jp_hyogo_station_267071537",
+      "osm_id": 267071537,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "久下村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kugemura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0755103,
+      "longitude": 135.0303859
+    },
+    {
+      "id": "jp_hyogo_station_267071646",
+      "osm_id": 267071646,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "神野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7910573,
+      "longitude": 134.8789714
+    },
+    {
+      "id": "jp_hyogo_station_267071649",
+      "osm_id": 267071649,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "河合西",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawainishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8791376,
+      "longitude": 134.91955
+    },
+    {
+      "id": "jp_hyogo_station_267071662",
+      "osm_id": 267071662,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "青野ヶ原",
+      "name_kana": "あおのがはら",
+      "name_translations": {
+        "en": "Aonogahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8973121,
+      "longitude": 134.9280878
+    },
+    {
+      "id": "jp_hyogo_station_267071677",
+      "osm_id": 267071677,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8338489,
+      "longitude": 134.9181795
+    },
+    {
+      "id": "jp_hyogo_station_267071737",
+      "osm_id": 267071737,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "厄神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yakujin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7945532,
+      "longitude": 134.9065433
+    },
+    {
+      "id": "jp_hyogo_station_267071748",
+      "osm_id": 267071748,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "市場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichiba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8192242,
+      "longitude": 134.9324618
+    },
+    {
+      "id": "jp_hyogo_station_267460771",
+      "osm_id": 267460771,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "立花",
+      "name_kana": "たちばな",
+      "name_translations": {
+        "en": "Tachibana"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7379561,
+      "longitude": 135.3990209
+    },
+    {
+      "id": "jp_hyogo_station_346121695",
+      "osm_id": 346121695,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "中山観音",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakayama-kannon"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8196261,
+      "longitude": 135.3692889
+    },
+    {
+      "id": "jp_hyogo_station_346121934",
+      "osm_id": 346121934,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "売布神社",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mefu-jinja"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8157929,
+      "longitude": 135.3613299
+    },
+    {
+      "id": "jp_hyogo_station_346121951",
+      "osm_id": 346121951,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8220433,
+      "longitude": 135.3886222
+    },
+    {
+      "id": "jp_hyogo_station_346122037",
+      "osm_id": 346122037,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "清荒神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiyoshikōjin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.811261,
+      "longitude": 135.353308
+    },
+    {
+      "id": "jp_hyogo_station_346122422",
+      "osm_id": 346122422,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "雲雀丘花屋敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hibarigaoka-Hanayashiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8272086,
+      "longitude": 135.4027325
+    },
+    {
+      "id": "jp_hyogo_station_346486696",
+      "osm_id": 346486696,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "武庫之荘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukonoso"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": "HK-07",
+      "latitude": 34.7515492,
+      "longitude": 135.3933358
+    },
+    {
+      "id": "jp_hyogo_station_346486938",
+      "osm_id": 346486938,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "園田",
+      "name_kana": "そのだ",
+      "name_translations": {
+        "en": "Sonoda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7519904,
+      "longitude": 135.4480934
+    },
+    {
+      "id": "jp_hyogo_station_346487068",
+      "osm_id": 346487068,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "塚口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukaguchi"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急神戸線;阪急伊丹線",
+      "ref": null,
+      "latitude": 34.7527774,
+      "longitude": 135.4159169
+    },
+    {
+      "id": "jp_hyogo_station_346648359",
+      "osm_id": 346648359,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "門戸厄神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mondo-Yakujin"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄今津線",
+      "ref": null,
+      "latitude": 34.7575817,
+      "longitude": 135.3582866
+    },
+    {
+      "id": "jp_hyogo_station_346648538",
+      "osm_id": 346648538,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "小林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Obayashi"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄今津線",
+      "ref": null,
+      "latitude": 34.7891636,
+      "longitude": 135.3524275
+    },
+    {
+      "id": "jp_hyogo_station_346648675",
+      "osm_id": 346648675,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝塚南口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takarazuka-Minamiguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8041687,
+      "longitude": 135.3458387
+    },
+    {
+      "id": "jp_hyogo_station_346649198",
+      "osm_id": 346649198,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "仁川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nigawa"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄今津線",
+      "ref": null,
+      "latitude": 34.7747939,
+      "longitude": 135.3569799
+    },
+    {
+      "id": "jp_hyogo_station_355838072",
+      "osm_id": 355838072,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "久崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuzaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9609827,
+      "longitude": 134.3442701
+    },
+    {
+      "id": "jp_hyogo_station_355838114",
+      "osm_id": 355838114,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "河野原円心",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōnohara-Enshin"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9188868,
+      "longitude": 134.3526652
+    },
+    {
+      "id": "jp_hyogo_station_355838570",
+      "osm_id": 355838570,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "平福",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0437169,
+      "longitude": 134.3718449
+    },
+    {
+      "id": "jp_hyogo_station_359791943",
+      "osm_id": 359791943,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "北条町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōjōmachi"
+      },
+      "operator": "北条鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9294625,
+      "longitude": 134.8323158
+    },
+    {
+      "id": "jp_hyogo_station_359792136",
+      "osm_id": 359792136,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "法華口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hokkeguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8755134,
+      "longitude": 134.8562206
+    },
+    {
+      "id": "jp_hyogo_station_359792145",
+      "osm_id": 359792145,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "網引",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Abiki"
+      },
+      "operator": "北条鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8621055,
+      "longitude": 134.8779303
+    },
+    {
+      "id": "jp_hyogo_station_359792261",
+      "osm_id": 359792261,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "播磨下里",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harima-Shimosato"
+      },
+      "operator": "北条鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8864812,
+      "longitude": 134.8401474
+    },
+    {
+      "id": "jp_hyogo_station_359792288",
+      "osm_id": 359792288,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "田原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tahara"
+      },
+      "operator": "北条鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8655875,
+      "longitude": 134.8666742
+    },
+    {
+      "id": "jp_hyogo_station_359792515",
+      "osm_id": 359792515,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "長",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Osa"
+      },
+      "operator": "北条鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8965929,
+      "longitude": 134.8255815
+    },
+    {
+      "id": "jp_hyogo_station_359798283",
+      "osm_id": 359798283,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "新神戸",
+      "name_kana": "しんこうべ",
+      "name_translations": {
+        "en": "Shin-Kobe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S02",
+      "latitude": 34.7047051,
+      "longitude": 135.1956697
+    },
+    {
+      "id": "jp_hyogo_station_359808109",
+      "osm_id": 359808109,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "豊岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Toyooka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5447858,
+      "longitude": 134.8133194
+    },
+    {
+      "id": "jp_hyogo_station_443057009",
+      "osm_id": 443057009,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "中公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka Koen"
+      },
+      "operator": "神戸新交通",
+      "network": "ポートライナー",
+      "ref": "P04",
+      "latitude": 34.6733088,
+      "longitude": 135.2074848
+    },
+    {
+      "id": "jp_hyogo_station_505242242",
+      "osm_id": 505242242,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "はりま勝原",
+      "name_kana": "はりまかつはら",
+      "name_translations": {
+        "en": "Harima-Katsuhara"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR山陽本線",
+      "ref": null,
+      "latitude": 34.8101481,
+      "longitude": 134.6140705
+    },
+    {
+      "id": "jp_hyogo_station_516137301",
+      "osm_id": 516137301,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "新伊丹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinitami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7726357,
+      "longitude": 135.4155927
+    },
+    {
+      "id": "jp_hyogo_station_516137427",
+      "osm_id": 516137427,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "稲野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7648674,
+      "longitude": 135.4156535
+    },
+    {
+      "id": "jp_hyogo_station_516180759",
+      "osm_id": 516180759,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲陽園",
+      "name_kana": "こうようえん",
+      "name_translations": {
+        "en": "Koyoen"
+      },
+      "operator": "阪急電鉄",
+      "network": null,
+      "ref": "HK30",
+      "latitude": 34.7608785,
+      "longitude": 135.3301337
+    },
+    {
+      "id": "jp_hyogo_station_516180817",
+      "osm_id": 516180817,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "苦楽園口",
+      "name_kana": "くらくえんぐち",
+      "name_translations": {
+        "en": "Kurakuenguchi"
+      },
+      "operator": "阪急電鉄",
+      "network": null,
+      "ref": "HK29",
+      "latitude": 34.7502404,
+      "longitude": 135.3288957
+    },
+    {
+      "id": "jp_hyogo_station_517815393",
+      "osm_id": 517815393,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷上",
+      "name_kana": "たにがみ",
+      "name_translations": {
+        "en": "Tanigami"
+      },
+      "operator": "神戸市交通局",
+      "network": "神戸電鉄有馬線",
+      "ref": null,
+      "latitude": 34.7618497,
+      "longitude": 135.1713884
+    },
+    {
+      "id": "jp_hyogo_station_517816421",
+      "osm_id": 517816421,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "花山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7697058,
+      "longitude": 135.1872768
+    },
+    {
+      "id": "jp_hyogo_station_517817004",
+      "osm_id": 517817004,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ooike"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7810659,
+      "longitude": 135.198828
+    },
+    {
+      "id": "jp_hyogo_station_517817365",
+      "osm_id": 517817365,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "神鉄六甲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shintetsu-Rokko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7854092,
+      "longitude": 135.2063002
+    },
+    {
+      "id": "jp_hyogo_station_517817650",
+      "osm_id": 517817650,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "唐櫃台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karatodai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7903203,
+      "longitude": 135.2114797
+    },
+    {
+      "id": "jp_hyogo_station_517820275",
+      "osm_id": 517820275,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "有馬温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arima Onsen"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄有馬線",
+      "ref": "KB16",
+      "latitude": 34.7992564,
+      "longitude": 135.2462748
+    },
+    {
+      "id": "jp_hyogo_station_519550645",
+      "osm_id": 519550645,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "南ウッディタウン",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami Woody Town"
+      },
+      "operator": "神戸電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9016603,
+      "longitude": 135.1896709
+    },
+    {
+      "id": "jp_hyogo_station_519550655",
+      "osm_id": 519550655,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "ウッディタウン中央",
+      "name_kana": "うっでぃたうんちゅうおう",
+      "name_translations": {
+        "en": "Woody Town Chūō"
+      },
+      "operator": "神戸電鉄",
+      "network": null,
+      "ref": "KB33",
+      "latitude": 34.909716,
+      "longitude": 135.1836684
+    },
+    {
+      "id": "jp_hyogo_station_519693912",
+      "osm_id": 519693912,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "妙法寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Myohoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S11",
+      "latitude": 34.675049,
+      "longitude": 135.1101441
+    },
+    {
+      "id": "jp_hyogo_station_823215106",
+      "osm_id": 823215106,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "フラワータウン",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Flower Town"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄公園都市線",
+      "ref": null,
+      "latitude": 34.8855795,
+      "longitude": 135.2022631
+    },
+    {
+      "id": "jp_hyogo_station_823218395",
+      "osm_id": 823218395,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "新開地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinkaichi"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "神戸高速線",
+      "ref": "KB01",
+      "latitude": 34.6763214,
+      "longitude": 135.1699022
+    },
+    {
+      "id": "jp_hyogo_station_823224152",
+      "osm_id": 823224152,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "恵比須",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ebisu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7977491,
+      "longitude": 134.9986769
+    },
+    {
+      "id": "jp_hyogo_station_823224727",
+      "osm_id": 823224727,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "押部谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oshibedani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7566824,
+      "longitude": 135.0392453
+    },
+    {
+      "id": "jp_hyogo_station_823226628",
+      "osm_id": 823226628,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "鈴蘭台西口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzurandai Nishi-guchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7263275,
+      "longitude": 135.140439
+    },
+    {
+      "id": "jp_hyogo_station_823226771",
+      "osm_id": 823226771,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "三木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7997742,
+      "longitude": 134.9817843
+    },
+    {
+      "id": "jp_hyogo_station_823227994",
+      "osm_id": 823227994,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "志染",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shijimi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.782411,
+      "longitude": 135.0077769
+    },
+    {
+      "id": "jp_hyogo_station_823230461",
+      "osm_id": 823230461,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "栄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7552424,
+      "longitude": 135.0566637
+    },
+    {
+      "id": "jp_hyogo_station_823230555",
+      "osm_id": 823230555,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "広野ゴルフ場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirono Golf-jō-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7704745,
+      "longitude": 135.0231495
+    },
+    {
+      "id": "jp_hyogo_station_823233064",
+      "osm_id": 823233064,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "緑が丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midorigaoka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7649923,
+      "longitude": 135.025844
+    },
+    {
+      "id": "jp_hyogo_station_823233342",
+      "osm_id": 823233342,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "木幡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.748642,
+      "longitude": 135.0708798
+    },
+    {
+      "id": "jp_hyogo_station_823235192",
+      "osm_id": 823235192,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "葉多",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8500852,
+      "longitude": 134.9202113
+    },
+    {
+      "id": "jp_hyogo_station_823235438",
+      "osm_id": 823235438,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西鈴蘭台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Suzurandai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7257569,
+      "longitude": 135.1354302
+    },
+    {
+      "id": "jp_hyogo_station_823235637",
+      "osm_id": 823235637,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "木津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7441814,
+      "longitude": 135.0883511
+    },
+    {
+      "id": "jp_hyogo_station_823236497",
+      "osm_id": 823236497,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "三木上の丸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miki Uenomaru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.80013,
+      "longitude": 134.9886604
+    },
+    {
+      "id": "jp_hyogo_station_823241937",
+      "osm_id": 823241937,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōmura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8086641,
+      "longitude": 134.9714322
+    },
+    {
+      "id": "jp_hyogo_station_823243814",
+      "osm_id": 823243814,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "樫山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kashiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8205652,
+      "longitude": 134.9496928
+    },
+    {
+      "id": "jp_hyogo_station_823246187",
+      "osm_id": 823246187,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ono"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8430827,
+      "longitude": 134.9343913
+    },
+    {
+      "id": "jp_hyogo_station_1424100626",
+      "osm_id": 1424100626,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "みなとじま",
+      "name_kana": "みなとじま",
+      "name_translations": {
+        "en": "Minatojima (Campus Mae)"
+      },
+      "operator": "神戸新交通",
+      "network": "ポートアイランド線",
+      "ref": "P05",
+      "latitude": 34.6689656,
+      "longitude": 135.2101149
+    },
+    {
+      "id": "jp_hyogo_station_2822263911",
+      "osm_id": 2822263911,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "社町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yashirochō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9203254,
+      "longitude": 134.9346987
+    },
+    {
+      "id": "jp_hyogo_station_2837065868",
+      "osm_id": 2837065868,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "播磨横田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harima-Yokota"
+      },
+      "operator": "北条鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9101911,
+      "longitude": 134.8251219
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_3030969737",
+      "osm_id": 3030969737,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "三宮バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sannomiya Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6943947,
+      "longitude": 135.195996
+    },
+    {
+      "id": "jp_hyogo_station_3163215065",
+      "osm_id": 3163215065,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "三田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanda"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄三田線",
+      "ref": "KB29",
+      "latitude": 34.8883577,
+      "longitude": 135.2302716
+    },
+    {
+      "id": "jp_hyogo_station_3203267292",
+      "osm_id": 3203267292,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "夙川",
+      "name_kana": "しゅくがわ",
+      "name_translations": {
+        "en": "Shukugawa"
+      },
+      "operator": "阪急電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7422128,
+      "longitude": 135.3279801
+    },
+    {
+      "id": "jp_hyogo_station_3629375864",
+      "osm_id": 3629375864,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "六甲",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokkō"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄",
+      "ref": null,
+      "latitude": 34.719614,
+      "longitude": 135.2341591
+    },
+    {
+      "id": "jp_hyogo_station_3629375866",
+      "osm_id": 3629375866,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "春日野道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasuganomichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7030816,
+      "longitude": 135.2054685
+    },
+    {
+      "id": "jp_hyogo_station_3629375867",
+      "osm_id": 3629375867,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "王子公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ojikoen"
+      },
+      "operator": "阪急電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7102106,
+      "longitude": 135.2184074
+    },
+    {
+      "id": "jp_hyogo_station_3629375868",
+      "osm_id": 3629375868,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "神戸三宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōbe Sannomiya"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急神戸線;阪急神戸高速線",
+      "ref": "HK-16",
+      "latitude": 34.6931389,
+      "longitude": 135.1928979
+    },
+    {
+      "id": "jp_hyogo_station_3632635131",
+      "osm_id": 3632635131,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "尼崎",
+      "name_kana": "あまがさき",
+      "name_translations": {
+        "en": "Amagasaki"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道本線;阪神電気鉄道なんば線",
+      "ref": "HS09",
+      "latitude": 34.7185885,
+      "longitude": 135.4173249
+    },
+    {
+      "id": "jp_hyogo_station_3632635132",
+      "osm_id": 3632635132,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "杭瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuise"
+      },
+      "operator": null,
+      "network": "阪神電気鉄道本線",
+      "ref": "HS07",
+      "latitude": 34.718316,
+      "longitude": 135.4388162
+    },
+    {
+      "id": "jp_hyogo_station_3632717537",
+      "osm_id": 3632717537,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大物",
+      "name_kana": "だいもつ",
+      "name_translations": {
+        "en": "Daimotsu"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道本線;阪神電気鉄道なんば線",
+      "ref": null,
+      "latitude": 34.7164614,
+      "longitude": 135.4259953
+    },
+    {
+      "id": "jp_hyogo_station_3632717539",
+      "osm_id": 3632717539,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲子園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koshien"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道本線",
+      "ref": "HS14",
+      "latitude": 34.7240751,
+      "longitude": 135.3629
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_3672724944",
+      "osm_id": 3672724944,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "山陽高砂駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "高砂市コミュニティーバス",
+      "network": "じょうとんバス",
+      "ref": "2",
+      "latitude": 34.7521636,
+      "longitude": 134.8029301
+    },
+    {
+      "id": "jp_hyogo_station_3721652685",
+      "osm_id": 3721652685,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "名谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Myōdani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S12",
+      "latitude": 34.6793087,
+      "longitude": 135.094304
+    },
+    {
+      "id": "jp_hyogo_station_3721936227",
+      "osm_id": 3721936227,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "西神中央",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seishin Chuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7194162,
+      "longitude": 135.0174576
+    },
+    {
+      "id": "jp_hyogo_station_3771528222",
+      "osm_id": 3771528222,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "溝口",
+      "name_kana": "みぞぐち",
+      "name_translations": {
+        "en": "Mizoguchi"
+      },
+      "operator": null,
+      "network": "播但線",
+      "ref": null,
+      "latitude": 34.9281492,
+      "longitude": 134.7425876
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_3790019268",
+      "osm_id": 3790019268,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "垂水駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6297125,
+      "longitude": 135.0526854
+    },
+    {
+      "id": "jp_hyogo_station_3791136194",
+      "osm_id": 3791136194,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "上郡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamigōri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8660983,
+      "longitude": 134.3533789
+    },
+    {
+      "id": "jp_hyogo_station_3843268141",
+      "osm_id": 3843268141,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "三田本町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanda Hommachi"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄三田線;神戸電鉄公園都市線",
+      "ref": "KB28",
+      "latitude": 34.8817187,
+      "longitude": 135.2296112
+    },
+    {
+      "id": "jp_hyogo_station_3854376787",
+      "osm_id": 3854376787,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "市民広場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimin Hiroba (Convention Center)"
+      },
+      "operator": "神戸新交通",
+      "network": "ポートアイランド線",
+      "ref": "P06",
+      "latitude": 34.6648095,
+      "longitude": 135.212611
+    },
+    {
+      "id": "jp_hyogo_station_3854376789",
+      "osm_id": 3854376789,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "南公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami Koen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "PL07",
+      "latitude": 34.6646582,
+      "longitude": 135.2170214
+    },
+    {
+      "id": "jp_hyogo_station_3854376847",
+      "osm_id": 3854376847,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "ポートターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Port Terminal"
+      },
+      "operator": "神戸新交通",
+      "network": null,
+      "ref": "P03",
+      "latitude": 34.6813803,
+      "longitude": 135.2022901
+    },
+    {
+      "id": "jp_hyogo_station_3854376854",
+      "osm_id": 3854376854,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "貿易センター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Boeki Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "P02",
+      "latitude": 34.6894187,
+      "longitude": 135.1994596
+    },
+    {
+      "id": "jp_hyogo_station_3901148445",
+      "osm_id": 3901148445,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "舞子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maiko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6335091,
+      "longitude": 135.0338177
+    },
+    {
+      "id": "jp_hyogo_station_3902067722",
+      "osm_id": 3902067722,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "兵庫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hyōgo"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6677915,
+      "longitude": 135.1641816
+    },
+    {
+      "id": "jp_hyogo_station_3902067724",
+      "osm_id": 3902067724,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shioya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6336988,
+      "longitude": 135.0834508
+    },
+    {
+      "id": "jp_hyogo_station_3902067725",
+      "osm_id": 3902067725,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大蔵谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōkuradani"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6466225,
+      "longitude": 135.0080926
+    },
+    {
+      "id": "jp_hyogo_station_3902067726",
+      "osm_id": 3902067726,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新長田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Nagata"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6578402,
+      "longitude": 135.145746
+    },
+    {
+      "id": "jp_hyogo_station_3902067727",
+      "osm_id": 3902067727,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "神戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6792884,
+      "longitude": 135.1782824
+    },
+    {
+      "id": "jp_hyogo_station_3902067728",
+      "osm_id": 3902067728,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西舞子",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Maiko"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6388445,
+      "longitude": 135.0278568
+    },
+    {
+      "id": "jp_hyogo_station_3902067729",
+      "osm_id": 3902067729,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "須磨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.642239,
+      "longitude": 135.1125557
+    },
+    {
+      "id": "jp_hyogo_station_3902067730",
+      "osm_id": 3902067730,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "須磨海浜公園",
+      "name_kana": "すまかいひんこうえん",
+      "name_translations": {
+        "en": "Sumakaihinkōen"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR山陽本線",
+      "ref": null,
+      "latitude": 34.6471532,
+      "longitude": 135.1266465
+    },
+    {
+      "id": "jp_hyogo_station_3902067731",
+      "osm_id": 3902067731,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鷹取",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takatori"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.651688,
+      "longitude": 135.1354427
+    },
+    {
+      "id": "jp_hyogo_station_3903196857",
+      "osm_id": 3903196857,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "伊川谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikawadani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6878591,
+      "longitude": 135.0413139
+    },
+    {
+      "id": "jp_hyogo_station_3903196858",
+      "osm_id": 3903196858,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "学園都市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gakuentoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6815117,
+      "longitude": 135.0575136
+    },
+    {
+      "id": "jp_hyogo_station_3903196859",
+      "osm_id": 3903196859,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "総合運動公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sogo Undo Koen"
+      },
+      "operator": "神戸市交通局",
+      "network": "神戸市営地下鉄",
+      "ref": null,
+      "latitude": 34.6816415,
+      "longitude": 135.0758026
+    },
+    {
+      "id": "jp_hyogo_station_3903196860",
+      "osm_id": 3903196860,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "西神南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seishin-Minami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6995602,
+      "longitude": 135.0300386
+    },
+    {
+      "id": "jp_hyogo_station_3905050879",
+      "osm_id": 3905050879,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "住吉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sumiyoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7195349,
+      "longitude": 135.2618791
+    },
+    {
+      "id": "jp_hyogo_station_3905050880",
+      "osm_id": 3905050880,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "六甲道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokkōmichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.714606,
+      "longitude": 135.2380894
+    },
+    {
+      "id": "jp_hyogo_station_3905339975",
+      "osm_id": 3905339975,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "さくら夙川",
+      "name_kana": "さくらしゅくがわ",
+      "name_translations": {
+        "en": "Sakurashukugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7390395,
+      "longitude": 135.3312945
+    },
+    {
+      "id": "jp_hyogo_station_3905340857",
+      "osm_id": 3905340857,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "摂津本山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Settsu-Motoyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7266504,
+      "longitude": 135.2769776
+    },
+    {
+      "id": "jp_hyogo_station_3905340858",
+      "osm_id": 3905340858,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲南山手",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōnan-Yamate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7305409,
+      "longitude": 135.2923056
+    },
+    {
+      "id": "jp_hyogo_station_3905340859",
+      "osm_id": 3905340859,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲子園口",
+      "name_kana": "こうしえんぐち",
+      "name_translations": {
+        "en": "Kōshienguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7390274,
+      "longitude": 135.3745218
+    },
+    {
+      "id": "jp_hyogo_station_3905340860",
+      "osm_id": 3905340860,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "芦屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashiya"
+      },
+      "operator": "西日本旅客鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7342386,
+      "longitude": 135.3070122
+    },
+    {
+      "id": "jp_hyogo_station_3905340861",
+      "osm_id": 3905340861,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西宮",
+      "name_kana": "にしのみや",
+      "name_translations": {
+        "en": "Nishinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7390225,
+      "longitude": 135.3481483
+    },
+    {
+      "id": "jp_hyogo_station_3968865506",
+      "osm_id": 3968865506,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "横山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokoyama"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄三田線;神戸電鉄公園都市線",
+      "ref": "KB27",
+      "latitude": 34.8768576,
+      "longitude": 135.2200057
+    },
+    {
+      "id": "jp_hyogo_station_3968865678",
+      "osm_id": 3968865678,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "道場南口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dōjō Minamiguchi"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄三田線",
+      "ref": "KB25",
+      "latitude": 34.8561003,
+      "longitude": 135.2231212
+    },
+    {
+      "id": "jp_hyogo_station_3978693964",
+      "osm_id": 3978693964,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "有馬口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arimaguchi"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄有馬線;神戸電鉄三田線",
+      "ref": "KB15",
+      "latitude": 34.7964499,
+      "longitude": 135.2207699
+    },
+    {
+      "id": "jp_hyogo_station_3978693980",
+      "osm_id": 3978693980,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "五社",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gosha"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄三田線",
+      "ref": "KB21",
+      "latitude": 34.8060531,
+      "longitude": 135.2161655
+    },
+    {
+      "id": "jp_hyogo_station_3978694003",
+      "osm_id": 3978694003,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okaba"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄三田線",
+      "ref": "KB22",
+      "latitude": 34.8216947,
+      "longitude": 135.222511
+    },
+    {
+      "id": "jp_hyogo_station_3978694163",
+      "osm_id": 3978694163,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "田尾寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Taoji"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄三田線",
+      "ref": "KB23",
+      "latitude": 34.8353997,
+      "longitude": 135.2259506
+    },
+    {
+      "id": "jp_hyogo_station_3999683420",
+      "osm_id": 3999683420,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "元町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Motomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6895717,
+      "longitude": 135.1871543
+    },
+    {
+      "id": "jp_hyogo_station_3999683421",
+      "osm_id": 3999683421,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "灘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7058437,
+      "longitude": 135.2161807
+    },
+    {
+      "id": "jp_hyogo_station_3999683422",
+      "osm_id": 3999683422,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "三ノ宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sannomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6948605,
+      "longitude": 135.1950871
+    },
+    {
+      "id": "jp_hyogo_station_4004558686",
+      "osm_id": 4004558686,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "箕谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minotani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7569996,
+      "longitude": 135.155777
+    },
+    {
+      "id": "jp_hyogo_station_4004558705",
+      "osm_id": 4004558705,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山の街",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamanomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7463668,
+      "longitude": 135.1531297
+    },
+    {
+      "id": "jp_hyogo_station_4004558708",
+      "osm_id": 4004558708,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "北鈴蘭台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitasuzurandai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.739182,
+      "longitude": 135.1519517
+    },
+    {
+      "id": "jp_hyogo_station_4004558724",
+      "osm_id": 4004558724,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "鈴蘭台",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzurandai"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄有馬線;神戸電鉄粟生線",
+      "ref": "KB06",
+      "latitude": 34.7238379,
+      "longitude": 135.1458758
+    },
+    {
+      "id": "jp_hyogo_station_4044961638",
+      "osm_id": 4044961638,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "花隈",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanakuma"
+      },
+      "operator": "阪急電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6861019,
+      "longitude": 135.181132
+    },
+    {
+      "id": "jp_hyogo_station_4044961649",
+      "osm_id": 4044961649,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "高速神戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōsoku Kōbe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6799933,
+      "longitude": 135.1755908
+    },
+    {
+      "id": "jp_hyogo_station_4044961656",
+      "osm_id": 4044961656,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西新町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Shimmachi"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道本線",
+      "ref": "SY18",
+      "latitude": 34.6496284,
+      "longitude": 134.9807844
+    },
+    {
+      "id": "jp_hyogo_station_4044961663",
+      "osm_id": 4044961663,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽明石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo-Akashi"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": "SY17",
+      "latitude": 34.6486827,
+      "longitude": 134.9933087
+    },
+    {
+      "id": "jp_hyogo_station_4044964906",
+      "osm_id": 4044964906,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "医療センター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iryo Center (Shimin Byoin Mae)"
+      },
+      "operator": "神戸新交通",
+      "network": "ポートアイランド線",
+      "ref": "P07",
+      "latitude": 34.6585308,
+      "longitude": 135.2164053
+    },
+    {
+      "id": "jp_hyogo_station_4044964907",
+      "osm_id": 4044964907,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "計算科学センター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Keisan Kagaku Center"
+      },
+      "operator": "神戸新交通",
+      "network": "ポートライナー",
+      "ref": "P08",
+      "latitude": 34.6547964,
+      "longitude": 135.2215133
+    },
+    {
+      "id": "jp_hyogo_station_4044964908",
+      "osm_id": 4044964908,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "北埠頭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita Futo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "PL09",
+      "latitude": 34.6736415,
+      "longitude": 135.2146321
+    },
+    {
+      "id": "jp_hyogo_station_4044964909",
+      "osm_id": 4044964909,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "神戸空港",
+      "name_kana": "こうべくうこう",
+      "name_translations": {
+        "en": "Kobe Airport"
+      },
+      "operator": "神戸新交通",
+      "network": "ポートライナー",
+      "ref": "P09",
+      "latitude": 34.6372668,
+      "longitude": 135.2291094
+    },
+    {
+      "id": "jp_hyogo_station_4044964913",
+      "osm_id": 4044964913,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "中埠頭",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka Futo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "PL08",
+      "latitude": 34.6694622,
+      "longitude": 135.2171403
+    },
+    {
+      "id": "jp_hyogo_station_4044964915",
+      "osm_id": 4044964915,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "三宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sannomiya"
+      },
+      "operator": "神戸市交通局",
+      "network": "地下鉄西神・山手線",
+      "ref": "S03",
+      "latitude": 34.6938976,
+      "longitude": 135.1924441
+    },
+    {
+      "id": "jp_hyogo_station_4044964918",
+      "osm_id": 4044964918,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "三宮・花時計前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sannomiya-Hanadokeimae"
+      },
+      "operator": "神戸市交通局",
+      "network": "地下鉄海岸線",
+      "ref": "K01",
+      "latitude": 34.691763,
+      "longitude": 135.1959069
+    },
+    {
+      "id": "jp_hyogo_station_4045703017",
+      "osm_id": 4045703017,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊丹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itami"
+      },
+      "operator": "阪急電鉄",
+      "network": "伊丹線",
+      "ref": null,
+      "latitude": 34.7798931,
+      "longitude": 135.4138327
+    },
+    {
+      "id": "jp_hyogo_station_4079537209",
+      "osm_id": 4079537209,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "摩耶",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7086165,
+      "longitude": 135.2249935
+    },
+    {
+      "id": "jp_hyogo_station_4079538416",
+      "osm_id": 4079538416,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "東姫路",
+      "name_kana": "ひがしひめじ",
+      "name_translations": {
+        "en": "Higashi-Himeji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8243643,
+      "longitude": 134.7106573
+    },
+    {
+      "id": "jp_hyogo_station_4162495931",
+      "osm_id": 4162495931,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "余部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yobe"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8564797,
+      "longitude": 134.6426708
+    },
+    {
+      "id": "jp_hyogo_station_4196498618",
+      "osm_id": 4196498618,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽網干",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo-Aboshi"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道網干線",
+      "ref": null,
+      "latitude": 34.7871577,
+      "longitude": 134.5883518
+    },
+    {
+      "id": "jp_hyogo_station_4307991460",
+      "osm_id": 4307991460,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "魚住",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uozumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6964243,
+      "longitude": 134.9060342
+    },
+    {
+      "id": "jp_hyogo_station_4334857768",
+      "osm_id": 4334857768,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "平松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiramatsu"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道網干線",
+      "ref": null,
+      "latitude": 34.7907012,
+      "longitude": 134.6008379
+    },
+    {
+      "id": "jp_hyogo_station_4424276494",
+      "osm_id": 4424276494,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大石",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS28",
+      "latitude": 34.7077018,
+      "longitude": 135.2310396
+    },
+    {
+      "id": "jp_hyogo_station_4463275392",
+      "osm_id": 4463275392,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamashita"
+      },
+      "operator": "能勢電鉄",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8931851,
+      "longitude": 135.4124922
+    },
+    {
+      "id": "jp_hyogo_station_4481776862",
+      "osm_id": 4481776862,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "阪神国道",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanshin-Kokudō"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急今津線",
+      "ref": null,
+      "latitude": 34.7373734,
+      "longitude": 135.3548295
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_4615855562",
+      "osm_id": 4615855562,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "奈座港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "坊勢汽船",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6529364,
+      "longitude": 134.5105133
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_4615856111",
+      "osm_id": 4615856111,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "真浦港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6774585,
+      "longitude": 134.5280597
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_4615856112",
+      "osm_id": 4615856112,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "宮港",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6783395,
+      "longitude": 134.5339092
+    },
+    {
+      "id": "jp_hyogo_station_4803550962",
+      "osm_id": 4803550962,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "岡本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7291795,
+      "longitude": 135.2759564
+    },
+    {
+      "id": "jp_hyogo_station_5053068926",
+      "osm_id": 5053068926,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "長田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagata"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄有馬線",
+      "ref": "KB03",
+      "latitude": 34.6816297,
+      "longitude": 135.1496371
+    },
+    {
+      "id": "jp_hyogo_station_5053069122",
+      "osm_id": 5053069122,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "丸山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maruyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KB04",
+      "latitude": 34.6857985,
+      "longitude": 135.1441559
+    },
+    {
+      "id": "jp_hyogo_station_5053069179",
+      "osm_id": 5053069179,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵯越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hiyodorigoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KB05",
+      "latitude": 34.6928686,
+      "longitude": 135.1424877
+    },
+    {
+      "id": "jp_hyogo_station_5160355789",
+      "osm_id": 5160355789,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "東加古川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi Kakogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7458299,
+      "longitude": 134.8691572
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_5164285759",
+      "osm_id": 5164285759,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "中突堤旅客ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka Pier Passenser Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6800855,
+      "longitude": 135.1885378
+    },
+    {
+      "id": "jp_hyogo_station_5202121059",
+      "osm_id": 5202121059,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "日岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hioka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7786003,
+      "longitude": 134.8571737
+    },
+    {
+      "id": "jp_hyogo_station_5214161150",
+      "osm_id": 5214161150,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "魚崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uozaki"
+      },
+      "operator": "神戸新交通",
+      "network": "神戸新交通",
+      "ref": null,
+      "latitude": 34.7137574,
+      "longitude": 135.2686004
+    },
+    {
+      "id": "jp_hyogo_station_5214161165",
+      "osm_id": 5214161165,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "南魚崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami Uozaki"
+      },
+      "operator": "神戸新交通",
+      "network": "神戸新交通",
+      "ref": "R03",
+      "latitude": 34.7068275,
+      "longitude": 135.2677382
+    },
+    {
+      "id": "jp_hyogo_station_5214161167",
+      "osm_id": 5214161167,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "アイランド北口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Island Kitaguchi"
+      },
+      "operator": "神戸新交通",
+      "network": "神戸新交通",
+      "ref": "R04",
+      "latitude": 34.6931885,
+      "longitude": 135.2687071
+    },
+    {
+      "id": "jp_hyogo_station_5214161169",
+      "osm_id": 5214161169,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "マリンパーク",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Marine Park"
+      },
+      "operator": "神戸新交通",
+      "network": "神戸新交通",
+      "ref": "R06",
+      "latitude": 34.6842889,
+      "longitude": 135.2701132
+    },
+    {
+      "id": "jp_hyogo_station_5214161172",
+      "osm_id": 5214161172,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "アイランドセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Island Center"
+      },
+      "operator": "神戸新交通",
+      "network": "神戸新交通",
+      "ref": "R05",
+      "latitude": 34.6892331,
+      "longitude": 135.2693072
+    },
+    {
+      "id": "jp_hyogo_station_5325062379",
+      "osm_id": 5325062379,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "網干",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aboshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.814308,
+      "longitude": 134.5844888
+    },
+    {
+      "id": "jp_hyogo_station_5364146900",
+      "osm_id": 5364146900,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "野里",
+      "name_kana": "のざと",
+      "name_translations": {
+        "en": "Nozato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.856087,
+      "longitude": 134.7112045
+    },
+    {
+      "id": "jp_hyogo_station_5405054258",
+      "osm_id": 5405054258,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "久谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kutani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6275995,
+      "longitude": 134.5170027
+    },
+    {
+      "id": "jp_hyogo_station_5424528190",
+      "osm_id": 5424528190,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "広畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirohata"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道網干線",
+      "ref": null,
+      "latitude": 34.7978865,
+      "longitude": 134.6277087
+    },
+    {
+      "id": "jp_hyogo_station_5539979417",
+      "osm_id": 5539979417,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "板宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itayado"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道本線",
+      "ref": null,
+      "latitude": 34.6601602,
+      "longitude": 135.1332776
+    },
+    {
+      "id": "jp_hyogo_station_5539982233",
+      "osm_id": 5539982233,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "月見山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsukimiyama"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6499641,
+      "longitude": 135.1218528
+    },
+    {
+      "id": "jp_hyogo_station_5703142264",
+      "osm_id": 5703142264,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "御着",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gochaku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8170591,
+      "longitude": 134.7351238
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_5788854657",
+      "osm_id": 5788854657,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "神姫バス 西脇案内所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9845393,
+      "longitude": 134.9683711
+    },
+    {
+      "id": "jp_hyogo_station_5803698781",
+      "osm_id": 5803698781,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "湊川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minatogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "KB02",
+      "latitude": 34.6792856,
+      "longitude": 135.166104
+    },
+    {
+      "id": "jp_hyogo_station_5803699061",
+      "osm_id": 5803699061,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "藍那",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aina"
+      },
+      "operator": "神戸電鉄",
+      "network": "神戸電鉄粟生線",
+      "ref": null,
+      "latitude": 34.7324824,
+      "longitude": 135.118134
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_6038515701",
+      "osm_id": 6038515701,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "桜森町バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7424773,
+      "longitude": 135.1710804
+    },
+    {
+      "id": "jp_hyogo_station_6054922137",
+      "osm_id": 6054922137,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝塚",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takarazuka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8108711,
+      "longitude": 135.3399311
+    },
+    {
+      "id": "jp_hyogo_station_6055006691",
+      "osm_id": 6055006691,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "市島",
+      "name_kana": "いちじま",
+      "name_translations": {
+        "en": "Ichijima"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.207859,
+      "longitude": 135.1300328
+    },
+    {
+      "id": "jp_hyogo_station_6055024505",
+      "osm_id": 6055024505,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "粟生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8572532,
+      "longitude": 134.9094873
+    },
+    {
+      "id": "jp_hyogo_station_6057309186",
+      "osm_id": 6057309186,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "逆瀬川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sasegawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7976904,
+      "longitude": 135.3504209
+    },
+    {
+      "id": "jp_hyogo_station_6060340456",
+      "osm_id": 6060340456,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "川西能勢口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "阪急電鉄;能勢電鉄",
+      "network": "阪急電鉄宝塚線;能勢電鉄妙見線",
+      "ref": null,
+      "latitude": 34.827561,
+      "longitude": 135.4142685
+    },
+    {
+      "id": "jp_hyogo_station_6124550318",
+      "osm_id": 6124550318,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大阪空港",
+      "name_kana": "おおさかくうこう",
+      "name_translations": {
+        "en": "Osaka Airport"
+      },
+      "operator": "大阪高速鉄道",
+      "network": "大阪モノレール線",
+      "ref": null,
+      "latitude": 34.7913771,
+      "longitude": 135.4420026
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_6222486114",
+      "osm_id": 6222486114,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "神姫バス 前之庄出張所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9732015,
+      "longitude": 134.6858034
+    },
+    {
+      "id": "jp_hyogo_station_6295276714",
+      "osm_id": 6295276714,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "須磨寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sumadera"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.646312,
+      "longitude": 135.1163312
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_6307475047",
+      "osm_id": 6307475047,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "筑紫が丘西",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "みなと観光バス株式会社",
+      "network": "21系統",
+      "ref": null,
+      "latitude": 34.7469643,
+      "longitude": 135.1672054
+    },
+    {
+      "id": "jp_hyogo_station_6375709652",
+      "osm_id": 6375709652,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "加古川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kakogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A79",
+      "latitude": 34.7678031,
+      "longitude": 134.8394705
+    },
+    {
+      "id": "jp_hyogo_station_6417343668",
+      "osm_id": 6417343668,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "星",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7336169,
+      "longitude": 135.2059648
+    },
+    {
+      "id": "jp_hyogo_station_6417343692",
+      "osm_id": 6417343692,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "虹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7274723,
+      "longitude": 135.2112709
+    },
+    {
+      "id": "jp_hyogo_station_6624542006",
+      "osm_id": 6624542006,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "相生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aioi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8182702,
+      "longitude": 134.4739893
+    },
+    {
+      "id": "jp_hyogo_station_6785165713",
+      "osm_id": 6785165713,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西宮北口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishinomiya-Kitaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7459621,
+      "longitude": 135.3568008
+    },
+    {
+      "id": "jp_hyogo_station_6791607264",
+      "osm_id": 6791607264,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "今津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Imazu"
+      },
+      "operator": "阪急電鉄",
+      "network": "今津線",
+      "ref": null,
+      "latitude": 34.7320232,
+      "longitude": 135.3516272
+    },
+    {
+      "id": "jp_hyogo_station_7097087795",
+      "osm_id": 7097087795,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishidai"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6624401,
+      "longitude": 135.1441617
+    },
+    {
+      "id": "jp_hyogo_station_7097095556",
+      "osm_id": 7097095556,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "御影",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mikage"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.724682,
+      "longitude": 135.2525917
+    },
+    {
+      "id": "jp_hyogo_station_7196403091",
+      "osm_id": 7196403091,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "甲東園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōtōen"
+      },
+      "operator": "阪急電鉄",
+      "network": "阪急電鉄今津線",
+      "ref": null,
+      "latitude": 34.7668776,
+      "longitude": 135.3597694
+    },
+    {
+      "id": "jp_hyogo_station_7443792102",
+      "osm_id": 7443792102,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "絹延橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kinunobebashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8346974,
+      "longitude": 135.4230424
+    },
+    {
+      "id": "jp_hyogo_station_7732405759",
+      "osm_id": 7732405759,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "県庁前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kenchomae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S04",
+      "latitude": 34.6910109,
+      "longitude": 135.1839936
+    },
+    {
+      "id": "jp_hyogo_station_7733269978",
+      "osm_id": 7733269978,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "上沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamisawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "S07",
+      "latitude": 34.6735156,
+      "longitude": 135.1587903
+    },
+    {
+      "id": "jp_hyogo_station_7733269979",
+      "osm_id": 7733269979,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "湊川公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minatogawa Kōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6787502,
+      "longitude": 135.1665452
+    },
+    {
+      "id": "jp_hyogo_station_7733269980",
+      "osm_id": 7733269980,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "大倉山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okurayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6846766,
+      "longitude": 135.1746514
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_7737448885",
+      "osm_id": 7737448885,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "福崎駅前バスのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9606005,
+      "longitude": 134.7508913
+    },
+    {
+      "id": "jp_hyogo_station_7746743056",
+      "osm_id": 7746743056,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "中央市場前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chūōichibamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K05",
+      "latitude": 34.6661531,
+      "longitude": 135.1758811
+    },
+    {
+      "id": "jp_hyogo_station_7746743057",
+      "osm_id": 7746743057,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "和田岬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wadamisaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K06",
+      "latitude": 34.658725,
+      "longitude": 135.1768126
+    },
+    {
+      "id": "jp_hyogo_station_7746771914",
+      "osm_id": 7746771914,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "旧居留地・大丸前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kyukyoryuchi-Daimarumae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K02",
+      "latitude": 34.6895883,
+      "longitude": 135.1905789
+    },
+    {
+      "id": "jp_hyogo_station_7746781968",
+      "osm_id": 7746781968,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "御崎公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Misakikōen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K07",
+      "latitude": 34.6548849,
+      "longitude": 135.1662916
+    },
+    {
+      "id": "jp_hyogo_station_7746781969",
+      "osm_id": 7746781969,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "苅藻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Karumo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K08",
+      "latitude": 34.6540074,
+      "longitude": 135.157555
+    },
+    {
+      "id": "jp_hyogo_station_7746781970",
+      "osm_id": 7746781970,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "駒ヶ林",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Komagabayashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K09",
+      "latitude": 34.6517099,
+      "longitude": 135.1499556
+    },
+    {
+      "id": "jp_hyogo_station_7746786804",
+      "osm_id": 7746786804,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "みなと元町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minato Motomachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K03",
+      "latitude": 34.6856332,
+      "longitude": 135.1835416
+    },
+    {
+      "id": "jp_hyogo_station_7746786805",
+      "osm_id": 7746786805,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "subway",
+      "name": "ハーバーランド",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harborland"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "K04",
+      "latitude": 34.6790031,
+      "longitude": 135.1788926
+    },
+    {
+      "id": "jp_hyogo_station_7761683478",
+      "osm_id": 7761683478,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "高速長田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōsoku Nagata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6669868,
+      "longitude": 135.1508412
+    },
+    {
+      "id": "jp_hyogo_station_7761778534",
+      "osm_id": 7761778534,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大開",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Daikai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6717553,
+      "longitude": 135.1624202
+    },
+    {
+      "id": "jp_hyogo_station_7761874386",
+      "osm_id": 7761874386,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西元町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Motomachi"
+      },
+      "operator": "神戸高速鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6841801,
+      "longitude": 135.1798487
+    },
+    {
+      "id": "jp_hyogo_station_7802397555",
+      "osm_id": 7802397555,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "土山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuchiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7205545,
+      "longitude": 134.8888472
+    },
+    {
+      "id": "jp_hyogo_station_7802402176",
+      "osm_id": 7802402176,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "宝殿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hōden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7846894,
+      "longitude": 134.812535
+    },
+    {
+      "id": "jp_hyogo_station_7805233143",
+      "osm_id": 7805233143,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "ひめじ別所",
+      "name_kana": "ひめじべっしょ",
+      "name_translations": {
+        "en": "Himeji-Bessho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "A82",
+      "latitude": 34.8054557,
+      "longitude": 134.7531576
+    },
+    {
+      "id": "jp_hyogo_station_7810135428",
+      "osm_id": 7810135428,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大久保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōkubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-A75",
+      "latitude": 34.6823028,
+      "longitude": 134.9387281
+    },
+    {
+      "id": "jp_hyogo_station_7828849659",
+      "osm_id": 7828849659,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "多田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8602558,
+      "longitude": 135.416871
+    },
+    {
+      "id": "jp_hyogo_station_7829100834",
+      "osm_id": 7829100834,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒川",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9217396,
+      "longitude": 135.450877
+    },
+    {
+      "id": "jp_hyogo_station_7829132212",
+      "osm_id": 7829132212,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "鴬の森",
+      "name_kana": "うぐいすのもり",
+      "name_translations": {
+        "en": "Uguisunomori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8480269,
+      "longitude": 135.4187754
+    },
+    {
+      "id": "jp_hyogo_station_7829132213",
+      "osm_id": 7829132213,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "日生中央",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nissei-chuo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9065689,
+      "longitude": 135.3930797
+    },
+    {
+      "id": "jp_hyogo_station_7829132215",
+      "osm_id": 7829132215,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "一の鳥居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ichinotorii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8793663,
+      "longitude": 135.4201166
+    },
+    {
+      "id": "jp_hyogo_station_7829148558",
+      "osm_id": 7829148558,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takiyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8429399,
+      "longitude": 135.4211651
+    },
+    {
+      "id": "jp_hyogo_station_7829148559",
+      "osm_id": 7829148559,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "鼓滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsuzumigataki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8547131,
+      "longitude": 135.4183743
+    },
+    {
+      "id": "jp_hyogo_station_7829148561",
+      "osm_id": 7829148561,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "平野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirano"
+      },
+      "operator": "能勢電鉄",
+      "network": "能勢電鉄妙見線",
+      "ref": null,
+      "latitude": 34.8688085,
+      "longitude": 135.4173498
+    },
+    {
+      "id": "jp_hyogo_station_7829148562",
+      "osm_id": 7829148562,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "笹部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sasabe"
+      },
+      "operator": "能勢電鉄",
+      "network": "能勢電鉄妙見線",
+      "ref": "NS11",
+      "latitude": 34.8937627,
+      "longitude": 135.4160669
+    },
+    {
+      "id": "jp_hyogo_station_7829228209",
+      "osm_id": 7829228209,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "摩耶ケーブル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maya Cable"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7199256,
+      "longitude": 135.2161002
+    },
+    {
+      "id": "jp_hyogo_station_7829228211",
+      "osm_id": 7829228211,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "畦野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uneno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8851458,
+      "longitude": 135.4155504
+    },
+    {
+      "id": "jp_hyogo_station_7829228214",
+      "osm_id": 7829228214,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "ケーブル山上",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9238068,
+      "longitude": 135.4570525
+    },
+    {
+      "id": "jp_hyogo_station_7835222973",
+      "osm_id": 7835222973,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "広野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirono"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-G63",
+      "latitude": 34.9284226,
+      "longitude": 135.1914034
+    },
+    {
+      "id": "jp_hyogo_station_7884493774",
+      "osm_id": 7884493774,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "篠山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sasayamaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G69",
+      "latitude": 35.0562789,
+      "longitude": 135.1774536
+    },
+    {
+      "id": "jp_hyogo_station_7884493777",
+      "osm_id": 7884493777,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "草野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G66",
+      "latitude": 34.9970415,
+      "longitude": 135.1523695
+    },
+    {
+      "id": "jp_hyogo_station_7902348121",
+      "osm_id": 7902348121,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "朝霧",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Asagiri"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6441448,
+      "longitude": 135.0172547
+    },
+    {
+      "id": "jp_hyogo_station_7933036760",
+      "osm_id": 7933036760,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西灘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishinada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS29",
+      "latitude": 34.7058376,
+      "longitude": 135.2246729
+    },
+    {
+      "id": "jp_hyogo_station_7933036764",
+      "osm_id": 7933036764,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "出屋敷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Deyashiki"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道本線",
+      "ref": "HS10",
+      "latitude": 34.7182062,
+      "longitude": 135.4045446
+    },
+    {
+      "id": "jp_hyogo_station_7933036765",
+      "osm_id": 7933036765,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS30",
+      "latitude": 34.7041902,
+      "longitude": 135.2183036
+    },
+    {
+      "id": "jp_hyogo_station_7933036767",
+      "osm_id": 7933036767,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "鳴尾・武庫川女子大前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naruo / Mukogawajoshidai-Mae"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道本線",
+      "ref": "HS13",
+      "latitude": 34.7195801,
+      "longitude": 135.3706404
+    },
+    {
+      "id": "jp_hyogo_station_7934319299",
+      "osm_id": 7934319299,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "尼崎センタープール前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amagasaki-Centerpool-Mae"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道本線",
+      "ref": "HS11",
+      "latitude": 34.7179045,
+      "longitude": 135.3954327
+    },
+    {
+      "id": "jp_hyogo_station_7934319304",
+      "osm_id": 7934319304,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "石屋川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ishiyagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS26",
+      "latitude": 34.7134883,
+      "longitude": 135.2500515
+    },
+    {
+      "id": "jp_hyogo_station_7934319307",
+      "osm_id": 7934319307,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "新在家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinzaike"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS27",
+      "latitude": 34.710675,
+      "longitude": 135.240739
+    },
+    {
+      "id": "jp_hyogo_station_7934875093",
+      "osm_id": 7934875093,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "久寿川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kusugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS15",
+      "latitude": 34.7270303,
+      "longitude": 135.3568223
+    },
+    {
+      "id": "jp_hyogo_station_7934875100",
+      "osm_id": 7934875100,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "武庫川",
+      "name_kana": "むこがわ",
+      "name_translations": {
+        "en": "Mukogawa"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道本線",
+      "ref": "HS12",
+      "latitude": 34.7188487,
+      "longitude": 135.381728
+    },
+    {
+      "id": "jp_hyogo_station_7934894046",
+      "osm_id": 7934894046,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "香櫨園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koroen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS18",
+      "latitude": 34.7343785,
+      "longitude": 135.3290521
+    },
+    {
+      "id": "jp_hyogo_station_7935762918",
+      "osm_id": 7935762918,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "青木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS22",
+      "latitude": 34.7172564,
+      "longitude": 135.280954
+    },
+    {
+      "id": "jp_hyogo_station_7935762922",
+      "osm_id": 7935762922,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "深江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS21",
+      "latitude": 34.7226961,
+      "longitude": 135.2916099
+    },
+    {
+      "id": "jp_hyogo_station_7935762925",
+      "osm_id": 7935762925,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "打出",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Uchide"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "HS19",
+      "latitude": 34.731633,
+      "longitude": 135.3155109
+    },
+    {
+      "id": "jp_hyogo_station_8018044636",
+      "osm_id": 8018044636,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "下滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimotaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.087793,
+      "longitude": 135.0942983
+    },
+    {
+      "id": "jp_hyogo_station_8018048731",
+      "osm_id": 8018048731,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0826691,
+      "longitude": 135.0497871
+    },
+    {
+      "id": "jp_hyogo_station_8018060095",
+      "osm_id": 8018060095,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "中山寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakayamadera"
+      },
+      "operator": "JR西日本",
+      "network": "福知山線（JR宝塚線）",
+      "ref": "JR-G55",
+      "latitude": 34.8166649,
+      "longitude": 135.3738711
+    },
+    {
+      "id": "jp_hyogo_station_8018075195",
+      "osm_id": 8018075195,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "道場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dōjō"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-G60",
+      "latitude": 34.8673289,
+      "longitude": 135.2558412
+    },
+    {
+      "id": "jp_hyogo_station_8018075196",
+      "osm_id": 8018075196,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "武田尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takedao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G59",
+      "latitude": 34.8552396,
+      "longitude": 135.305863
+    },
+    {
+      "id": "jp_hyogo_station_8018075197",
+      "osm_id": 8018075197,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西宮名塩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishinomiya-Najio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G58",
+      "latitude": 34.8269749,
+      "longitude": 135.308926
+    },
+    {
+      "id": "jp_hyogo_station_8018075198",
+      "osm_id": 8018075198,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "生瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namaze"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G57",
+      "latitude": 34.819257,
+      "longitude": 135.32499
+    },
+    {
+      "id": "jp_hyogo_station_8018075203",
+      "osm_id": 8018075203,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "川西池田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawanishi-Ikeda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G54",
+      "latitude": 34.8247472,
+      "longitude": 135.4104377
+    },
+    {
+      "id": "jp_hyogo_station_8018075207",
+      "osm_id": 8018075207,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "北伊丹",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kita-Itami"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-G53",
+      "latitude": 34.8012563,
+      "longitude": 135.4193506
+    },
+    {
+      "id": "jp_hyogo_station_8018075209",
+      "osm_id": 8018075209,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "猪名寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inadera"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": "JR-G51",
+      "latitude": 34.7641167,
+      "longitude": 135.4225773
+    },
+    {
+      "id": "jp_hyogo_station_8018126428",
+      "osm_id": 8018126428,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "丹波竹田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamba-Takeda"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2436682,
+      "longitude": 135.1340224
+    },
+    {
+      "id": "jp_hyogo_station_8018126436",
+      "osm_id": 8018126436,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "黒井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kuroi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1685707,
+      "longitude": 135.0971467
+    },
+    {
+      "id": "jp_hyogo_station_8018126443",
+      "osm_id": 8018126443,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "石生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Isō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1527255,
+      "longitude": 135.0637594
+    },
+    {
+      "id": "jp_hyogo_station_8018126454",
+      "osm_id": 8018126454,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "柏原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kaibara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.1271309,
+      "longitude": 135.0771515
+    },
+    {
+      "id": "jp_hyogo_station_8018126459",
+      "osm_id": 8018126459,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "丹波大山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tamba-Ōyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0721357,
+      "longitude": 135.1688493
+    },
+    {
+      "id": "jp_hyogo_station_8018126460",
+      "osm_id": 8018126460,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "南矢代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minamiyashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G68",
+      "latitude": 35.0376867,
+      "longitude": 135.1749271
+    },
+    {
+      "id": "jp_hyogo_station_8018126463",
+      "osm_id": 8018126463,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "古市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Furuichi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G67",
+      "latitude": 35.0219486,
+      "longitude": 135.1550558
+    },
+    {
+      "id": "jp_hyogo_station_8018126464",
+      "osm_id": 8018126464,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "藍本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aimoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G65",
+      "latitude": 34.9770809,
+      "longitude": 135.1554916
+    },
+    {
+      "id": "jp_hyogo_station_8018126465",
+      "osm_id": 8018126465,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "相野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G64",
+      "latitude": 34.9476459,
+      "longitude": 135.1559245
+    },
+    {
+      "id": "jp_hyogo_station_8018126467",
+      "osm_id": 8018126467,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "新三田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Sanda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "JR-G62",
+      "latitude": 34.9101806,
+      "longitude": 135.2086084
+    },
+    {
+      "id": "jp_hyogo_station_8018662088",
+      "osm_id": 8018662088,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "八鹿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yōka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4143012,
+      "longitude": 134.7815059
+    },
+    {
+      "id": "jp_hyogo_station_8018662090",
+      "osm_id": 8018662090,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "和田山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wadayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.34141,
+      "longitude": 134.8517363
+    },
+    {
+      "id": "jp_hyogo_station_8018662107",
+      "osm_id": 8018662107,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "城崎温泉",
+      "name_kana": "きのさきおんせん",
+      "name_translations": {
+        "en": "Kinosaki-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6237033,
+      "longitude": 134.8136569
+    },
+    {
+      "id": "jp_hyogo_station_8069351365",
+      "osm_id": 8069351365,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "曽根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sone"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7930355,
+      "longitude": 134.7701052
+    },
+    {
+      "id": "jp_hyogo_station_8090848459",
+      "osm_id": 8090848459,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "垂水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tarumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6292817,
+      "longitude": 135.053848
+    },
+    {
+      "id": "jp_hyogo_station_8118655883",
+      "osm_id": 8118655883,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "天和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tenwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.749402,
+      "longitude": 134.3518713
+    },
+    {
+      "id": "jp_hyogo_station_8118655884",
+      "osm_id": 8118655884,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "播州赤穂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Banshu-Ako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7566491,
+      "longitude": 134.3931736
+    },
+    {
+      "id": "jp_hyogo_station_8120093006",
+      "osm_id": 8120093006,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "備前福河",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bizen-Fukukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.746739,
+      "longitude": 134.3316177
+    },
+    {
+      "id": "jp_hyogo_station_8120833976",
+      "osm_id": 8120833976,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "英賀保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Agaho"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": "JR山陽本線",
+      "ref": null,
+      "latitude": 34.8132944,
+      "longitude": 134.6446738
+    },
+    {
+      "id": "jp_hyogo_station_8120834746",
+      "osm_id": 8120834746,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "有年",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Une"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.8292444,
+      "longitude": 134.3961058
+    },
+    {
+      "id": "jp_hyogo_station_8121067964",
+      "osm_id": 8121067964,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "竜野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsuno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8255882,
+      "longitude": 134.5224649
+    },
+    {
+      "id": "jp_hyogo_station_8123635783",
+      "osm_id": 8123635783,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西相生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Aioi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8015663,
+      "longitude": 134.4509652
+    },
+    {
+      "id": "jp_hyogo_station_8123635784",
+      "osm_id": 8123635784,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakoshi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7688666,
+      "longitude": 134.4174108
+    },
+    {
+      "id": "jp_hyogo_station_8184303009",
+      "osm_id": 8184303009,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦屋川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashiyagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7363843,
+      "longitude": 135.3006703
+    },
+    {
+      "id": "jp_hyogo_station_8185942741",
+      "osm_id": 8185942741,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "東鳴尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Naruo"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道武庫川線",
+      "ref": "HS 53",
+      "latitude": 34.7126346,
+      "longitude": 135.3791155
+    },
+    {
+      "id": "jp_hyogo_station_8185942743",
+      "osm_id": 8185942743,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "洲先",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suzaki"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道武庫川線",
+      "ref": null,
+      "latitude": 34.7090693,
+      "longitude": 135.3780191
+    },
+    {
+      "id": "jp_hyogo_station_8185942744",
+      "osm_id": 8185942744,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "武庫川団地前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mukogawadanchi-Mae"
+      },
+      "operator": "阪神電気鉄道",
+      "network": "阪神電気鉄道武庫川線",
+      "ref": null,
+      "latitude": 34.7049719,
+      "longitude": 135.3747475
+    },
+    {
+      "id": "jp_hyogo_station_8186417355",
+      "osm_id": 8186417355,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "中八木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakayagi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6708194,
+      "longitude": 134.9361473
+    },
+    {
+      "id": "jp_hyogo_station_8186488764",
+      "osm_id": 8186488764,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "舞子公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maiko-kōen"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6341089,
+      "longitude": 135.034225
+    },
+    {
+      "id": "jp_hyogo_station_8186548423",
+      "osm_id": 8186548423,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "亀山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kameyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8106625,
+      "longitude": 134.6766597
+    },
+    {
+      "id": "jp_hyogo_station_8186548424",
+      "osm_id": 8186548424,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "手柄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tegara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8198589,
+      "longitude": 134.6812818
+    },
+    {
+      "id": "jp_hyogo_station_8186548426",
+      "osm_id": 8186548426,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽姫路",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo Himeji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8288513,
+      "longitude": 134.6893813
+    },
+    {
+      "id": "jp_hyogo_station_8186781333",
+      "osm_id": 8186781333,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西江井ヶ島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Eigashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6856727,
+      "longitude": 134.9081937
+    },
+    {
+      "id": "jp_hyogo_station_8186781334",
+      "osm_id": 8186781334,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽魚住",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo-Uozumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6891413,
+      "longitude": 134.9021366
+    },
+    {
+      "id": "jp_hyogo_station_8186781335",
+      "osm_id": 8186781335,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "東二見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Futami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7003545,
+      "longitude": 134.8877951
+    },
+    {
+      "id": "jp_hyogo_station_8186781339",
+      "osm_id": 8186781339,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西二見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Futami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7071098,
+      "longitude": 134.877093
+    },
+    {
+      "id": "jp_hyogo_station_8186781340",
+      "osm_id": 8186781340,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "播磨町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Harimachō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7165093,
+      "longitude": 134.8682277
+    },
+    {
+      "id": "jp_hyogo_station_8186781341",
+      "osm_id": 8186781341,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "別府",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Befu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7302506,
+      "longitude": 134.8506754
+    },
+    {
+      "id": "jp_hyogo_station_8186781342",
+      "osm_id": 8186781342,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "浜の宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hamanomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7409083,
+      "longitude": 134.8338405
+    },
+    {
+      "id": "jp_hyogo_station_8186781343",
+      "osm_id": 8186781343,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾上の松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onoenomatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7486231,
+      "longitude": 134.8209521
+    },
+    {
+      "id": "jp_hyogo_station_8186781344",
+      "osm_id": 8186781344,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "高砂",
+      "name_kana": "たかさご",
+      "name_translations": {
+        "en": "Takasago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7519989,
+      "longitude": 134.8023507
+    },
+    {
+      "id": "jp_hyogo_station_8186781347",
+      "osm_id": 8186781347,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "SY32",
+      "latitude": 34.7578437,
+      "longitude": 134.7936014
+    },
+    {
+      "id": "jp_hyogo_station_8186781349",
+      "osm_id": 8186781349,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊保",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iho"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7670956,
+      "longitude": 134.7869506
+    },
+    {
+      "id": "jp_hyogo_station_8186781350",
+      "osm_id": 8186781350,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽曽根",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo-Sone"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7754474,
+      "longitude": 134.7731436
+    },
+    {
+      "id": "jp_hyogo_station_8186781351",
+      "osm_id": 8186781351,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "大塩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōshio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7793284,
+      "longitude": 134.7575773
+    },
+    {
+      "id": "jp_hyogo_station_8186781355",
+      "osm_id": 8186781355,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "的形",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matogata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7799836,
+      "longitude": 134.741899
+    },
+    {
+      "id": "jp_hyogo_station_8186781356",
+      "osm_id": 8186781356,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "八家",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yaka"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7840293,
+      "longitude": 134.722518
+    },
+    {
+      "id": "jp_hyogo_station_8186781357",
+      "osm_id": 8186781357,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "白浜の宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirahamanomiya"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7868443,
+      "longitude": 134.7072029
+    },
+    {
+      "id": "jp_hyogo_station_8186781359",
+      "osm_id": 8186781359,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "妻鹿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mega"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7921817,
+      "longitude": 134.6933021
+    },
+    {
+      "id": "jp_hyogo_station_8186781361",
+      "osm_id": 8186781361,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "飾磨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikama"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.7997349,
+      "longitude": 134.6753702
+    },
+    {
+      "id": "jp_hyogo_station_8187000476",
+      "osm_id": 8187000476,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "東須磨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Suma"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6553141,
+      "longitude": 135.1277576
+    },
+    {
+      "id": "jp_hyogo_station_8187000493",
+      "osm_id": 8187000493,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽須磨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo Suma"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6435677,
+      "longitude": 135.1124436
+    },
+    {
+      "id": "jp_hyogo_station_8187000497",
+      "osm_id": 8187000497,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "須磨浦公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sumaura-kōen"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.637958,
+      "longitude": 135.1002735
+    },
+    {
+      "id": "jp_hyogo_station_8187000498",
+      "osm_id": 8187000498,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽塩屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo Shioya"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6336336,
+      "longitude": 135.0824677
+    },
+    {
+      "id": "jp_hyogo_station_8187000499",
+      "osm_id": 8187000499,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝の茶屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takinochaya"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6310118,
+      "longitude": 135.0724404
+    },
+    {
+      "id": "jp_hyogo_station_8187000500",
+      "osm_id": 8187000500,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "東垂水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Tarumi"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6292608,
+      "longitude": 135.0636465
+    },
+    {
+      "id": "jp_hyogo_station_8187000501",
+      "osm_id": 8187000501,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽垂水",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo Tarumi"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6295136,
+      "longitude": 135.0538268
+    },
+    {
+      "id": "jp_hyogo_station_8187000502",
+      "osm_id": 8187000502,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "霞ヶ丘",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasumigaoka"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.630451,
+      "longitude": 135.04254
+    },
+    {
+      "id": "jp_hyogo_station_8187038820",
+      "osm_id": 8187038820,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "人丸前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hitomarumae"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6475676,
+      "longitude": 135.0019015
+    },
+    {
+      "id": "jp_hyogo_station_8187038821",
+      "osm_id": 8187038821,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "林崎松江海岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayashizaki-Matsuekaigan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6521786,
+      "longitude": 134.9652267
+    },
+    {
+      "id": "jp_hyogo_station_8187038823",
+      "osm_id": 8187038823,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fujie"
+      },
+      "operator": "山陽電気鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6632012,
+      "longitude": 134.9479071
+    },
+    {
+      "id": "jp_hyogo_station_8187038824",
+      "osm_id": 8187038824,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "江井ヶ島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Eigashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6791277,
+      "longitude": 134.9197034
+    },
+    {
+      "id": "jp_hyogo_station_8187157631",
+      "osm_id": 8187157631,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "山陽天満",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sanyo-Temma"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道網干線",
+      "ref": null,
+      "latitude": 34.7963523,
+      "longitude": 134.6173903
+    },
+    {
+      "id": "jp_hyogo_station_8187157638",
+      "osm_id": 8187157638,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "夢前川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yumesakigawa"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道網干線",
+      "ref": null,
+      "latitude": 34.798467,
+      "longitude": 134.6393944
+    },
+    {
+      "id": "jp_hyogo_station_8187157642",
+      "osm_id": 8187157642,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "西飾磨",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Shikama"
+      },
+      "operator": "山陽電気鉄道",
+      "network": "山陽電気鉄道網干線",
+      "ref": null,
+      "latitude": 34.8030657,
+      "longitude": 134.6512099
+    },
+    {
+      "id": "jp_hyogo_station_8262788297",
+      "osm_id": 8262788297,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "寺前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Teramae"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0650994,
+      "longitude": 134.7429907
+    },
+    {
+      "id": "jp_hyogo_station_8263192756",
+      "osm_id": 8263192756,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "新野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niino"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0499652,
+      "longitude": 134.7527727
+    },
+    {
+      "id": "jp_hyogo_station_8264348178",
+      "osm_id": 8264348178,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鶴居",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tsurui"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.0229964,
+      "longitude": 134.7546369
+    },
+    {
+      "id": "jp_hyogo_station_8264408647",
+      "osm_id": 8264408647,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "甘地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amaji"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9879397,
+      "longitude": 134.7588228
+    },
+    {
+      "id": "jp_hyogo_station_8265673516",
+      "osm_id": 8265673516,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "福崎",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukusaki"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 34.9607563,
+      "longitude": 134.7506967
+    },
+    {
+      "id": "jp_hyogo_station_8265907317",
+      "osm_id": 8265907317,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "香呂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9113668,
+      "longitude": 134.735907
+    },
+    {
+      "id": "jp_hyogo_station_8296338340",
+      "osm_id": 8296338340,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "佐用",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sayo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.0040655,
+      "longitude": 134.3568369
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_9280840099",
+      "osm_id": 9280840099,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "日生中央駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9055849,
+      "longitude": 135.3935179
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_9331755962",
+      "osm_id": 9331755962,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八鹿駅(全但バス八鹿営業所)",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "全但バス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4142508,
+      "longitude": 134.7809287
+    },
+    {
+      "id": "jp_hyogo_station_12117279800",
+      "osm_id": 12117279800,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "生野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ikuno"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1633013,
+      "longitude": 134.7892075
+    },
+    {
+      "id": "jp_hyogo_station_12204945471",
+      "osm_id": 12204945471,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "苔縄",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokenawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.896394,
+      "longitude": 134.3538641
+    },
+    {
+      "id": "jp_hyogo_station_12282624104",
+      "osm_id": 12282624104,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "六甲ケーブル下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokko Cable Shita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7372806,
+      "longitude": 135.2335118
+    },
+    {
+      "id": "jp_hyogo_station_12282624109",
+      "osm_id": 12282624109,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "private",
+      "name": "六甲山上",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Rokko Sanjo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.7519632,
+      "longitude": 135.2368944
+    },
+    {
+      "id": "jp_hyogo_station_12357120985",
+      "osm_id": 12357120985,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "station",
+      "subtype": "jr",
+      "name": "竹田",
+      "name_kana": "たけだ",
+      "name_translations": {
+        "en": "Takeda"
+      },
+      "operator": "西日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2993862,
+      "longitude": 134.8358926
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_12495435570",
+      "osm_id": 12495435570,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岡場駅",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okaba Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8218847,
+      "longitude": 135.2220346
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_12541373624",
+      "osm_id": 12541373624,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "六甲アイランドフェリーターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.696384,
+      "longitude": 135.2841639
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_12752236806",
+      "osm_id": 12752236806,
+      "osm_type": "node",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "尼崎万博P&R駐車場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6826597,
+      "longitude": 135.3898902
+    },
+    {
+      "id": "jp_hyogo_airport_57009635",
+      "osm_id": 57009635,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "但馬飛行場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tajima Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "TJH",
+      "latitude": 35.512712,
+      "longitude": 134.7870355
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_98893139",
+      "osm_id": 98893139,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "フェリーさんふらわあターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ferry Sunflower Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6970483,
+      "longitude": 135.2825225
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_182495496",
+      "osm_id": 182495496,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "神戸ポートターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobe Port Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6804578,
+      "longitude": 135.2028947
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_289325537",
+      "osm_id": 289325537,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "沼島ターミナルセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nushima Terminal Center"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.1711566,
+      "longitude": 134.8190447
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_289737589",
+      "osm_id": 289737589,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "神姫バス三宮ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shinki Bus Sannomiya Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6957508,
+      "longitude": 135.1960921
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_292388152",
+      "osm_id": 292388152,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "四国オレンジフェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shikoku Orenge Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6959787,
+      "longitude": 135.2857304
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_298018269",
+      "osm_id": 298018269,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "神戸空港海上アクセスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobe Airport Kaijo Access Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6397529,
+      "longitude": 135.2287923
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_441087447",
+      "osm_id": 441087447,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "洲本バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3455398,
+      "longitude": 134.8963962
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_502810247",
+      "osm_id": 502810247,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "洲本 高速バスセンター",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sumoto highway bus terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3454986,
+      "longitude": 134.897002
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_531231351",
+      "osm_id": 531231351,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "神戸駅前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobe Station Bus Terminus"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6793687,
+      "longitude": 135.1771246
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_532113421",
+      "osm_id": 532113421,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "中突堤中央ターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamomeria"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6825256,
+      "longitude": 135.1850056
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_562411727",
+      "osm_id": 562411727,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "ポートピア洲本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sumoto Port Pier"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.3464677,
+      "longitude": 134.8996063
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_569365036",
+      "osm_id": 569365036,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "神姫バス 三田営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9170364,
+      "longitude": 135.1752327
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_655858574",
+      "osm_id": 655858574,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "灘ターミナルセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2015466,
+      "longitude": 134.801226
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_693537253",
+      "osm_id": 693537253,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "岩屋港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwaya"
+      },
+      "operator": "株式会社淡路ジェノバライン",
+      "network": "淡路ジェノバライン",
+      "ref": null,
+      "latitude": 34.590395,
+      "longitude": 135.0207118
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_742784915",
+      "osm_id": 742784915,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "淡路ジェノバライン 明石営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Awaji-Jenova Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6453293,
+      "longitude": 134.9902122
+    },
+    {
+      "id": "jp_hyogo_airport_772669000",
+      "osm_id": 772669000,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "神戸空港",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobe Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "UKB",
+      "latitude": 34.6340995,
+      "longitude": 135.224672
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_886593365",
+      "osm_id": 886593365,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "全但バス（株） 湯村温泉営業所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yumura-onsen Terminal"
+      },
+      "operator": "全但バス",
+      "network": null,
+      "ref": null,
+      "latitude": 35.5558992,
+      "longitude": 134.4900252
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_922800646",
+      "osm_id": 922800646,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "神姫バス 龍野バス停",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.8679164,
+      "longitude": 134.5489949
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_935454429",
+      "osm_id": 935454429,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "阪九フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hankyu Ferry Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.6967019,
+      "longitude": 135.2850029
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_1122793836",
+      "osm_id": 1122793836,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "出合ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "全但バス",
+      "network": "鉢伏線",
+      "ref": null,
+      "latitude": 35.362482,
+      "longitude": 134.5959476
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_1192528775",
+      "osm_id": 1192528775,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "福良バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.2563696,
+      "longitude": 134.7206681
+    },
+    {
+      "id": "jp_hyogo_bus_terminal_1232727501",
+      "osm_id": 1232727501,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "加東バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 34.9135463,
+      "longitude": 134.9610323
+    },
+    {
+      "id": "jp_hyogo_ferry_terminal_1281957445",
+      "osm_id": 1281957445,
+      "osm_type": "way",
+      "prefecture_id": "jp_hyogo",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "神戸三宮フェリーターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobe Sannomiya Ferry Terminal"
+      },
+      "operator": "神戸フェリーセンター",
+      "network": null,
+      "ref": null,
+      "latitude": 34.6824778,
+      "longitude": 135.198921
+    },
+    {
+      "id": "jp_hyogo_airport_18159861",
+      "osm_id": 18159861,
+      "osm_type": "relation",
+      "prefecture_id": "jp_hyogo",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "大阪国際空港",
+      "name_kana": "いたみくうこう",
+      "name_translations": {
+        "en": "Osaka Itami Airport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "ITM",
+      "latitude": 34.7841935,
+      "longitude": 135.4403567
+    }
+  ]
+}

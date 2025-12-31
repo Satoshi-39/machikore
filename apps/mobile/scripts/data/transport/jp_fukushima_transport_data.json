@@ -1,0 +1,3716 @@
+{
+  "fetchedAt": "2025-12-24T05:48:14.830Z",
+  "prefecture_id": "jp_fukushima",
+  "prefecture_name": "福島県",
+  "stats": {
+    "station": 187,
+    "airport": 2,
+    "ferry_terminal": 3,
+    "bus_terminal": 16,
+    "total": 208
+  },
+  "data": [
+    {
+      "id": "jp_fukushima_station_206431759",
+      "osm_id": 206431759,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "福島",
+      "name_kana": "ふくしま",
+      "name_translations": {
+        "en": "Fukushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.75454,
+      "longitude": 140.4592144
+    },
+    {
+      "id": "jp_fukushima_station_263062682",
+      "osm_id": 263062682,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津本郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Hongo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4635707,
+      "longitude": 139.8930093
+    },
+    {
+      "id": "jp_fukushima_station_263062685",
+      "osm_id": 263062685,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "若宮",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Wakamiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5355611,
+      "longitude": 139.8283535
+    },
+    {
+      "id": "jp_fukushima_station_263062814",
+      "osm_id": 263062814,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津西方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Nishikata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4809743,
+      "longitude": 139.6619638
+    },
+    {
+      "id": "jp_fukushima_station_263062815",
+      "osm_id": 263062815,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津桧原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Hinohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.491996,
+      "longitude": 139.679831
+    },
+    {
+      "id": "jp_fukushima_station_263062831",
+      "osm_id": 263062831,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新鶴",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Niitsuru"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.517126,
+      "longitude": 139.8285141
+    },
+    {
+      "id": "jp_fukushima_station_263062929",
+      "osm_id": 263062929,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津高田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Takada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.470659,
+      "longitude": 139.841939
+    },
+    {
+      "id": "jp_fukushima_station_263062951",
+      "osm_id": 263062951,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津川口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Kawaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4551669,
+      "longitude": 139.5239282
+    },
+    {
+      "id": "jp_fukushima_station_263063079",
+      "osm_id": 263063079,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津越川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Kosugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3985423,
+      "longitude": 139.4690323
+    },
+    {
+      "id": "jp_fukushima_station_263063318",
+      "osm_id": 263063318,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津横田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Yokota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.392224,
+      "longitude": 139.4357281
+    },
+    {
+      "id": "jp_fukushima_station_263063319",
+      "osm_id": 263063319,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "七日町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanukamachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5014696,
+      "longitude": 139.9191494
+    },
+    {
+      "id": "jp_fukushima_station_263063388",
+      "osm_id": 263063388,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "根岸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Negishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5018238,
+      "longitude": 139.8286901
+    },
+    {
+      "id": "jp_fukushima_station_263063544",
+      "osm_id": 263063544,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "郷戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Godo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5164289,
+      "longitude": 139.7099208
+    },
+    {
+      "id": "jp_fukushima_station_263063594",
+      "osm_id": 263063594,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "早戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hayato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4702287,
+      "longitude": 139.5935867
+    },
+    {
+      "id": "jp_fukushima_station_263063605",
+      "osm_id": 263063605,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津坂下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Bange"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5569104,
+      "longitude": 139.8210081
+    },
+    {
+      "id": "jp_fukushima_station_263063734",
+      "osm_id": 263063734,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "塔寺",
+      "name_kana": "とうでら",
+      "name_translations": {
+        "en": "Todera"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5697253,
+      "longitude": 139.7854902
+    },
+    {
+      "id": "jp_fukushima_station_263063765",
+      "osm_id": 263063765,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津水沼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Mizunuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4831489,
+      "longitude": 139.5605062
+    },
+    {
+      "id": "jp_fukushima_station_263063841",
+      "osm_id": 263063841,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "本名",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Honna"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4449849,
+      "longitude": 139.4990402
+    },
+    {
+      "id": "jp_fukushima_station_263063882",
+      "osm_id": 263063882,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津中川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Nakagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4734442,
+      "longitude": 139.5319984
+    },
+    {
+      "id": "jp_fukushima_station_263063972",
+      "osm_id": 263063972,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津宮下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Miyashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4712145,
+      "longitude": 139.6475532
+    },
+    {
+      "id": "jp_fukushima_station_263064129",
+      "osm_id": 263064129,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "滝谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4947494,
+      "longitude": 139.6986446
+    },
+    {
+      "id": "jp_fukushima_station_263064336",
+      "osm_id": 263064336,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津柳津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Yanaizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5390794,
+      "longitude": 139.7238157
+    },
+    {
+      "id": "jp_fukushima_station_263064566",
+      "osm_id": 263064566,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津大塩",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Oshio"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3927414,
+      "longitude": 139.4134817
+    },
+    {
+      "id": "jp_fukushima_station_263064820",
+      "osm_id": 263064820,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津坂本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Sakamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5533464,
+      "longitude": 139.75652
+    },
+    {
+      "id": "jp_fukushima_station_263065570",
+      "osm_id": 263065570,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津塩沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Shiozawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3936494,
+      "longitude": 139.3554577
+    },
+    {
+      "id": "jp_fukushima_station_263065974",
+      "osm_id": 263065974,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津蒲生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Gamo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3816379,
+      "longitude": 139.3332882
+    },
+    {
+      "id": "jp_fukushima_station_263066252",
+      "osm_id": 263066252,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "只見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tadami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3506308,
+      "longitude": 139.3151856
+    },
+    {
+      "id": "jp_fukushima_station_263066791",
+      "osm_id": 263066791,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0803894,
+      "longitude": 140.866415
+    },
+    {
+      "id": "jp_fukushima_station_263066793",
+      "osm_id": 263066793,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "神俣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanmata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3251568,
+      "longitude": 140.6596858
+    },
+    {
+      "id": "jp_fukushima_station_263066873",
+      "osm_id": 263066873,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "菅谷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sugaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3500679,
+      "longitude": 140.6452671
+    },
+    {
+      "id": "jp_fukushima_station_263067006",
+      "osm_id": 263067006,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "船引",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Funehiki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4431638,
+      "longitude": 140.5746202
+    },
+    {
+      "id": "jp_fukushima_station_263067009",
+      "osm_id": 263067009,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "夏井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Natsui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.252955,
+      "longitude": 140.66275
+    },
+    {
+      "id": "jp_fukushima_station_263067188",
+      "osm_id": 263067188,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城常葉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwaki-Tokiwa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.420623,
+      "longitude": 140.6057158
+    },
+    {
+      "id": "jp_fukushima_station_263067231",
+      "osm_id": 263067231,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "小川郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogawago"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1265509,
+      "longitude": 140.862624
+    },
+    {
+      "id": "jp_fukushima_station_263067234",
+      "osm_id": 263067234,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "三春",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Miharu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4496368,
+      "longitude": 140.4793865
+    },
+    {
+      "id": "jp_fukushima_station_263067316",
+      "osm_id": 263067316,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "要田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanameta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4544261,
+      "longitude": 140.5210595
+    },
+    {
+      "id": "jp_fukushima_station_263068365",
+      "osm_id": 263068365,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "小野新町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ononii-machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2754992,
+      "longitude": 140.6367624
+    },
+    {
+      "id": "jp_fukushima_station_263068451",
+      "osm_id": 263068451,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "舞木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4167025,
+      "longitude": 140.4349979
+    },
+    {
+      "id": "jp_fukushima_station_263068500",
+      "osm_id": 263068500,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "大越",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3873922,
+      "longitude": 140.6305779
+    },
+    {
+      "id": "jp_fukushima_station_263070191",
+      "osm_id": 263070191,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐梯熱海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bandai-Atami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4807488,
+      "longitude": 140.270822
+    },
+    {
+      "id": "jp_fukushima_station_263070211",
+      "osm_id": 263070211,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "上戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Joko"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.488246,
+      "longitude": 140.162763
+    },
+    {
+      "id": "jp_fukushima_station_263070214",
+      "osm_id": 263070214,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安子ヶ島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akogashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4720105,
+      "longitude": 140.3101404
+    },
+    {
+      "id": "jp_fukushima_station_263070226",
+      "osm_id": 263070226,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "中山宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakayamajuku"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4957047,
+      "longitude": 140.2194585
+    },
+    {
+      "id": "jp_fukushima_station_263070231",
+      "osm_id": 263070231,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "喜久田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kikuta"
+      },
+      "operator": "JR東日本仙台支社",
+      "network": "磐越西線",
+      "ref": null,
+      "latitude": 37.4517848,
+      "longitude": 140.3419825
+    },
+    {
+      "id": "jp_fukushima_station_263070857",
+      "osm_id": 263070857,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東長原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Nagahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5665056,
+      "longitude": 139.9482932
+    },
+    {
+      "id": "jp_fukushima_station_263071312",
+      "osm_id": 263071312,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "荻野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6173933,
+      "longitude": 139.7228911
+    },
+    {
+      "id": "jp_fukushima_station_263071314",
+      "osm_id": 263071314,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "関都",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekito"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.515604,
+      "longitude": 140.1435941
+    },
+    {
+      "id": "jp_fukushima_station_263071317",
+      "osm_id": 263071317,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "猪苗代湖畔",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inawashirokohan"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5004562,
+      "longitude": 140.147506
+    },
+    {
+      "id": "jp_fukushima_station_263071441",
+      "osm_id": 263071441,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津豊川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Toyokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6333782,
+      "longitude": 139.8768542
+    },
+    {
+      "id": "jp_fukushima_station_263071444",
+      "osm_id": 263071444,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "喜多方",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kitakata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6439547,
+      "longitude": 139.8678239
+    },
+    {
+      "id": "jp_fukushima_station_263071559",
+      "osm_id": 263071559,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "川桁",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawageta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5358412,
+      "longitude": 140.1366292
+    },
+    {
+      "id": "jp_fukushima_station_263071561",
+      "osm_id": 263071561,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "山都",
+      "name_kana": "やまと",
+      "name_translations": {
+        "en": "Yamato"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6392341,
+      "longitude": 139.7665818
+    },
+    {
+      "id": "jp_fukushima_station_263072140",
+      "osm_id": 263072140,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "堂島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Dojima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5545985,
+      "longitude": 139.9119261
+    },
+    {
+      "id": "jp_fukushima_station_263072424",
+      "osm_id": 263072424,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "姥堂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ubado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6160875,
+      "longitude": 139.8810081
+    },
+    {
+      "id": "jp_fukushima_station_263072427",
+      "osm_id": 263072427,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "広田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hirota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5493904,
+      "longitude": 139.933468
+    },
+    {
+      "id": "jp_fukushima_station_263072479",
+      "osm_id": 263072479,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "塩川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shiokawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5940511,
+      "longitude": 139.8872138
+    },
+    {
+      "id": "jp_fukushima_station_263072488",
+      "osm_id": 263072488,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "翁島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okinashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.552752,
+      "longitude": 140.0540915
+    },
+    {
+      "id": "jp_fukushima_station_263073117",
+      "osm_id": 263073117,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "上野尻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Nojiri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6248328,
+      "longitude": 139.63409
+    },
+    {
+      "id": "jp_fukushima_station_263074656",
+      "osm_id": 263074656,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokusawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6670088,
+      "longitude": 139.6030075
+    },
+    {
+      "id": "jp_fukushima_station_263081540",
+      "osm_id": 263081540,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "笈川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5788054,
+      "longitude": 139.8957431
+    },
+    {
+      "id": "jp_fukushima_station_263081994",
+      "osm_id": 263081994,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "尾登",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Onobori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6088517,
+      "longitude": 139.6913211
+    },
+    {
+      "id": "jp_fukushima_station_263081995",
+      "osm_id": 263081995,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津若松",
+      "name_kana": "あいづわかまつ",
+      "name_translations": {
+        "en": "Aizu-Wakamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5085622,
+      "longitude": 139.9301344
+    },
+    {
+      "id": "jp_fukushima_station_263082260",
+      "osm_id": 263082260,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐梯町",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bandai-machi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5576538,
+      "longitude": 139.9935795
+    },
+    {
+      "id": "jp_fukushima_station_263083428",
+      "osm_id": 263083428,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "猪苗代",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Inawashiro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5463239,
+      "longitude": 140.1032381
+    },
+    {
+      "id": "jp_fukushima_station_263083953",
+      "osm_id": 263083953,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "野沢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nozawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5910368,
+      "longitude": 139.6442042
+    },
+    {
+      "id": "jp_fukushima_station_263168169",
+      "osm_id": 263168169,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "里白石",
+      "name_kana": "さとしらいし",
+      "name_translations": {
+        "en": "Satoshiraishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1044048,
+      "longitude": 140.4164958
+    },
+    {
+      "id": "jp_fukushima_station_263168977",
+      "osm_id": 263168977,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東館",
+      "name_kana": "ひがしだて",
+      "name_translations": {
+        "en": "Higashidate"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8701962,
+      "longitude": 140.4234185
+    },
+    {
+      "id": "jp_fukushima_station_263239925",
+      "osm_id": 263239925,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "平野",
+      "name_kana": "ひらの",
+      "name_translations": {
+        "en": "Hirano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8054388,
+      "longitude": 140.4428112
+    },
+    {
+      "id": "jp_fukushima_station_263243929",
+      "osm_id": 263243929,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "やながわ希望の森公園前",
+      "name_kana": "やながわきぼうのもりこうえんまえ",
+      "name_translations": {
+        "en": "Yanagawa Kibonomori Koen-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8574948,
+      "longitude": 140.6155192
+    },
+    {
+      "id": "jp_fukushima_station_263244900",
+      "osm_id": 263244900,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "富野",
+      "name_kana": "とみの",
+      "name_translations": {
+        "en": "Tomino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.874438,
+      "longitude": 140.6272908
+    },
+    {
+      "id": "jp_fukushima_station_263246581",
+      "osm_id": 263246581,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "兜",
+      "name_kana": "かぶと",
+      "name_translations": {
+        "en": "Kabuto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8954216,
+      "longitude": 140.6466114
+    },
+    {
+      "id": "jp_fukushima_station_263250474",
+      "osm_id": 263250474,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "中荒井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakaarai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1802773,
+      "longitude": 139.7509855
+    },
+    {
+      "id": "jp_fukushima_station_263250475",
+      "osm_id": 263250475,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津長野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Nagano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2152818,
+      "longitude": 139.8238294
+    },
+    {
+      "id": "jp_fukushima_station_263250746",
+      "osm_id": 263250746,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津山村道場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Sanson-Dojo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1446142,
+      "longitude": 139.7318281
+    },
+    {
+      "id": "jp_fukushima_station_263250750",
+      "osm_id": 263250750,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "大川ダム公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Okawadamukoen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.347152,
+      "longitude": 139.920871
+    },
+    {
+      "id": "jp_fukushima_station_263250954",
+      "osm_id": 263250954,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦ノ牧温泉南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashinomaki-Onsen-Minami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3346097,
+      "longitude": 139.9187333
+    },
+    {
+      "id": "jp_fukushima_station_263251250",
+      "osm_id": 263251250,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "あまや",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Amaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.417247,
+      "longitude": 139.917589
+    },
+    {
+      "id": "jp_fukushima_station_263251253",
+      "osm_id": 263251253,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "塔のへつり",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tonohetsuri"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2748194,
+      "longitude": 139.9018387
+    },
+    {
+      "id": "jp_fukushima_station_263251755",
+      "osm_id": 263251755,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "門田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Monden"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4424716,
+      "longitude": 139.9137133
+    },
+    {
+      "id": "jp_fukushima_station_263251760",
+      "osm_id": 263251760,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津下郷",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Shimogo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2551385,
+      "longitude": 139.864949
+    },
+    {
+      "id": "jp_fukushima_station_263251764",
+      "osm_id": 263251764,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "養鱒公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yoson-Koen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2245209,
+      "longitude": 139.8418182
+    },
+    {
+      "id": "jp_fukushima_station_263251955",
+      "osm_id": 263251955,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "ふるさと公園",
+      "name_kana": "ふるさとこうえん",
+      "name_translations": {
+        "en": "Furusato-Koen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2429516,
+      "longitude": 139.8588084
+    },
+    {
+      "id": "jp_fukushima_station_263252162",
+      "osm_id": 263252162,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "芦ノ牧温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ashinomaki-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3955469,
+      "longitude": 139.9322392
+    },
+    {
+      "id": "jp_fukushima_station_263252259",
+      "osm_id": 263252259,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津荒海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Arakai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.153567,
+      "longitude": 139.7338499
+    },
+    {
+      "id": "jp_fukushima_station_263252396",
+      "osm_id": 263252396,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "田島高校前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tajimakoko-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2095771,
+      "longitude": 139.8007145
+    },
+    {
+      "id": "jp_fukushima_station_263252735",
+      "osm_id": 263252735,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "南若松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Wakamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4591041,
+      "longitude": 139.9144772
+    },
+    {
+      "id": "jp_fukushima_station_263252928",
+      "osm_id": 263252928,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯野上温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yunokami-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3035478,
+      "longitude": 139.8954093
+    },
+    {
+      "id": "jp_fukushima_station_263253108",
+      "osm_id": 263253108,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "弥五島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yagoshima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.266454,
+      "longitude": 139.8900844
+    },
+    {
+      "id": "jp_fukushima_station_263253724",
+      "osm_id": 263253724,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "七ヶ岳登山口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nanatsugatake-Tozanguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1241101,
+      "longitude": 139.7172976
+    },
+    {
+      "id": "jp_fukushima_station_264176799",
+      "osm_id": 264176799,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "金谷川",
+      "name_kana": "かなやがわ",
+      "name_translations": {
+        "en": "Kanayagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6807621,
+      "longitude": 140.4519528
+    },
+    {
+      "id": "jp_fukushima_station_264177037",
+      "osm_id": 264177037,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "松川",
+      "name_kana": "まつかわ",
+      "name_translations": {
+        "en": "Matsukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6537618,
+      "longitude": 140.4842295
+    },
+    {
+      "id": "jp_fukushima_station_264177181",
+      "osm_id": 264177181,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "安達",
+      "name_kana": "あだち",
+      "name_translations": {
+        "en": "Adachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "JR 東北本線",
+      "ref": null,
+      "latitude": 37.6122242,
+      "longitude": 140.4664518
+    },
+    {
+      "id": "jp_fukushima_station_264177195",
+      "osm_id": 264177195,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "日和田",
+      "name_kana": "ひわだ",
+      "name_translations": {
+        "en": "Hiwada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4464083,
+      "longitude": 140.3883896
+    },
+    {
+      "id": "jp_fukushima_station_264177271",
+      "osm_id": 264177271,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "五百川",
+      "name_kana": "ごひゃくがわ",
+      "name_translations": {
+        "en": "Gohyakugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4828489,
+      "longitude": 140.3879072
+    },
+    {
+      "id": "jp_fukushima_station_264177536",
+      "osm_id": 264177536,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "久田野",
+      "name_kana": "くたの",
+      "name_translations": {
+        "en": "Kutano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1373864,
+      "longitude": 140.2597808
+    },
+    {
+      "id": "jp_fukushima_station_264177583",
+      "osm_id": 264177583,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "白河",
+      "name_kana": "しらかわ",
+      "name_translations": {
+        "en": "Shirakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1301635,
+      "longitude": 140.2129901
+    },
+    {
+      "id": "jp_fukushima_station_264178068",
+      "osm_id": 264178068,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "二本松",
+      "name_kana": "にほんまつ",
+      "name_translations": {
+        "en": "Nihonmatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5894592,
+      "longitude": 140.4355421
+    },
+    {
+      "id": "jp_fukushima_station_264178071",
+      "osm_id": 264178071,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "泉崎",
+      "name_kana": "いずみざき",
+      "name_translations": {
+        "en": "Izumizaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1583899,
+      "longitude": 140.2986949
+    },
+    {
+      "id": "jp_fukushima_station_264180767",
+      "osm_id": 264180767,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "杉田",
+      "name_kana": "すぎた",
+      "name_translations": {
+        "en": "Sugita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.563211,
+      "longitude": 140.4136675
+    },
+    {
+      "id": "jp_fukushima_station_264403278",
+      "osm_id": 264403278,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "日立木",
+      "name_kana": "にったき",
+      "name_translations": {
+        "en": "Nittaki"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.7560558,
+      "longitude": 140.934889
+    },
+    {
+      "id": "jp_fukushima_station_264403655",
+      "osm_id": 264403655,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "相馬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Soma"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.8028828,
+      "longitude": 140.9254798
+    },
+    {
+      "id": "jp_fukushima_station_264404000",
+      "osm_id": 264404000,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "桃内",
+      "name_kana": "桃内",
+      "name_translations": {
+        "en": "Momouchi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.5288032,
+      "longitude": 140.9846199
+    },
+    {
+      "id": "jp_fukushima_station_264404008",
+      "osm_id": 264404008,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "浪江",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Namie"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.4920359,
+      "longitude": 140.9899695
+    },
+    {
+      "id": "jp_fukushima_station_264404030",
+      "osm_id": 264404030,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城太田",
+      "name_kana": "いわきおおた",
+      "name_translations": {
+        "en": "Iwaki-Ota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6048339,
+      "longitude": 140.9918363
+    },
+    {
+      "id": "jp_fukushima_station_264405047",
+      "osm_id": 264405047,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小高",
+      "name_kana": "おだか",
+      "name_translations": {
+        "en": "Odaka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.5628963,
+      "longitude": 140.9961748
+    },
+    {
+      "id": "jp_fukushima_station_264405316",
+      "osm_id": 264405316,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "原ノ町",
+      "name_kana": "はらのまち",
+      "name_translations": {
+        "en": "Haranomachi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.637698,
+      "longitude": 140.9711699
+    },
+    {
+      "id": "jp_fukushima_station_264406680",
+      "osm_id": 264406680,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "勿来",
+      "name_kana": "なこそ",
+      "name_translations": {
+        "en": "Nakoso"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.8839897,
+      "longitude": 140.7868497
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_1723628043",
+      "osm_id": 1723628043,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "郷花",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.408546,
+      "longitude": 140.402153
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_1741481452",
+      "osm_id": 1741481452,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "いわき駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0577907,
+      "longitude": 140.8930329
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_1996639257",
+      "osm_id": 1996639257,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "会津バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "会津乗合自動車株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 37.5076203,
+      "longitude": 139.9318318
+    },
+    {
+      "id": "jp_fukushima_ferry_terminal_2926986212",
+      "osm_id": 2926986212,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "桧原湖遊覧船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6531118,
+      "longitude": 140.063261
+    },
+    {
+      "id": "jp_fukushima_ferry_terminal_3017898196",
+      "osm_id": 3017898196,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "田子倉湖遊覧船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3110084,
+      "longitude": 139.2848774
+    },
+    {
+      "id": "jp_fukushima_station_3647437878",
+      "osm_id": 3647437878,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "庭坂",
+      "name_kana": "にわさか",
+      "name_translations": {
+        "en": "Niwasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7716676,
+      "longitude": 140.390059
+    },
+    {
+      "id": "jp_fukushima_station_3647437881",
+      "osm_id": 3647437881,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "笹木野",
+      "name_kana": "ささのき",
+      "name_translations": {
+        "en": "Sasakino"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7660596,
+      "longitude": 140.4252667
+    },
+    {
+      "id": "jp_fukushima_station_3699236825",
+      "osm_id": 3699236825,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "鹿島",
+      "name_kana": "かしま",
+      "name_translations": {
+        "en": "Kashima"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.7025019,
+      "longitude": 140.9702057
+    },
+    {
+      "id": "jp_fukushima_station_3721569613",
+      "osm_id": 3721569613,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新白河",
+      "name_kana": "しんしらかわ",
+      "name_translations": {
+        "en": "Shin-Shirakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1230906,
+      "longitude": 140.1884461
+    },
+    {
+      "id": "jp_fukushima_station_3736313340",
+      "osm_id": 3736313340,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津田島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizu-Tajima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2033259,
+      "longitude": 139.7737611
+    },
+    {
+      "id": "jp_fukushima_station_3736313344",
+      "osm_id": 3736313344,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "西若松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Wakamatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4859472,
+      "longitude": 139.9142245
+    },
+    {
+      "id": "jp_fukushima_station_3799581869",
+      "osm_id": 3799581869,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "泉",
+      "name_kana": "いずみ",
+      "name_translations": {
+        "en": "Izumi"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.9556185,
+      "longitude": 140.85409
+    },
+    {
+      "id": "jp_fukushima_station_3800631016",
+      "osm_id": 3800631016,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "郡山",
+      "name_kana": "こおりやま",
+      "name_translations": {
+        "en": "Koriyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.398488,
+      "longitude": 140.388798
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_4335214373",
+      "osm_id": 4335214373,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "福島交通 相馬営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8036474,
+      "longitude": 140.9244033
+    },
+    {
+      "id": "jp_fukushima_station_4707675980",
+      "osm_id": 4707675980,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "郡山富田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōriyamatomita"
+      },
+      "operator": "JR東日本仙台支社",
+      "network": "JR磐越西線",
+      "ref": null,
+      "latitude": 37.4205168,
+      "longitude": 140.3693902
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_5051577248",
+      "osm_id": 5051577248,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "ラパークいわき",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "新常磐交通",
+      "network": "路線バス",
+      "ref": null,
+      "latitude": 37.0132631,
+      "longitude": 140.9180329
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_5598624908",
+      "osm_id": 5598624908,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "雄国萩平駐車場シャトルバス乗降場",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.624101,
+      "longitude": 139.9560598
+    },
+    {
+      "id": "jp_fukushima_station_5614956746",
+      "osm_id": 5614956746,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "川東",
+      "name_kana": "かわひがし",
+      "name_translations": {
+        "en": "Kawahigashi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2697802,
+      "longitude": 140.4059849
+    },
+    {
+      "id": "jp_fukushima_station_5614956807",
+      "osm_id": 5614956807,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "泉郷",
+      "name_kana": "いずみごう",
+      "name_translations": {
+        "en": "Izumigo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2144368,
+      "longitude": 140.4056503
+    },
+    {
+      "id": "jp_fukushima_station_5614956820",
+      "osm_id": 5614956820,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城守山",
+      "name_kana": "いわきもりやま",
+      "name_translations": {
+        "en": "Iwaki-Moriyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3307905,
+      "longitude": 140.4066159
+    },
+    {
+      "id": "jp_fukushima_station_5614956892",
+      "osm_id": 5614956892,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "安積永盛",
+      "name_kana": "あさかながもり",
+      "name_translations": {
+        "en": "Asaka-Nagamori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3570454,
+      "longitude": 140.3691401
+    },
+    {
+      "id": "jp_fukushima_station_5615095656",
+      "osm_id": 5615095656,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "小塩江",
+      "name_kana": "おしおえ",
+      "name_translations": {
+        "en": "Oshioe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2954857,
+      "longitude": 140.4300262
+    },
+    {
+      "id": "jp_fukushima_station_5615160085",
+      "osm_id": 5615160085,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷田川",
+      "name_kana": "やたがわ",
+      "name_translations": {
+        "en": "Yatagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3136439,
+      "longitude": 140.4311843
+    },
+    {
+      "id": "jp_fukushima_station_5670290234",
+      "osm_id": 5670290234,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "植田",
+      "name_kana": "うえだ",
+      "name_translations": {
+        "en": "Ueda"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 36.920468,
+      "longitude": 140.7965884
+    },
+    {
+      "id": "jp_fukushima_station_5672601232",
+      "osm_id": 5672601232,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "内郷",
+      "name_kana": "うちごう",
+      "name_translations": {
+        "en": "Uchigo"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0357154,
+      "longitude": 140.8547969
+    },
+    {
+      "id": "jp_fukushima_station_5672601276",
+      "osm_id": 5672601276,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯本",
+      "name_kana": "ゆもと",
+      "name_translations": {
+        "en": "Yumoto"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0064993,
+      "longitude": 140.8499756
+    },
+    {
+      "id": "jp_fukushima_station_5676651330",
+      "osm_id": 5676651330,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "草野",
+      "name_kana": "くさの",
+      "name_translations": {
+        "en": "Kusano"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0739843,
+      "longitude": 140.9475225
+    },
+    {
+      "id": "jp_fukushima_station_5676680267",
+      "osm_id": 5676680267,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "四ツ倉",
+      "name_kana": "よつくら",
+      "name_translations": {
+        "en": "Yotsukura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.102651,
+      "longitude": 140.9813945
+    },
+    {
+      "id": "jp_fukushima_station_5705167989",
+      "osm_id": 5705167989,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "広野",
+      "name_kana": "ひろの",
+      "name_translations": {
+        "en": "Hirono"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.2120753,
+      "longitude": 140.999258
+    },
+    {
+      "id": "jp_fukushima_station_5705228488",
+      "osm_id": 5705228488,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "木戸",
+      "name_kana": "きど",
+      "name_translations": {
+        "en": "Kido"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.2579151,
+      "longitude": 141.002533
+    },
+    {
+      "id": "jp_fukushima_station_5705351206",
+      "osm_id": 5705351206,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "久ノ浜",
+      "name_kana": "ひさのはま",
+      "name_translations": {
+        "en": "Hisanohama"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1422967,
+      "longitude": 140.9959388
+    },
+    {
+      "id": "jp_fukushima_station_5729357318",
+      "osm_id": 5729357318,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "会津高原尾瀬口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aizukogen-Ozeguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0897835,
+      "longitude": 139.7050278
+    },
+    {
+      "id": "jp_fukushima_station_5776775841",
+      "osm_id": 5776775841,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "須賀川",
+      "name_kana": "すかがわ",
+      "name_translations": {
+        "en": "Sukagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3004758,
+      "longitude": 140.3719175
+    },
+    {
+      "id": "jp_fukushima_station_5777600138",
+      "osm_id": 5777600138,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "美術館図書館前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Bijutsukan-Toshokan-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7670403,
+      "longitude": 140.4553275
+    },
+    {
+      "id": "jp_fukushima_station_5779102810",
+      "osm_id": 5779102810,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "曽根田",
+      "name_kana": "そねだ",
+      "name_translations": {
+        "en": "Soneda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7603335,
+      "longitude": 140.4594125
+    },
+    {
+      "id": "jp_fukushima_station_5793100367",
+      "osm_id": 5793100367,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "東福島",
+      "name_kana": "ひがしふくしま",
+      "name_translations": {
+        "en": "Higashi-Fukushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7999635,
+      "longitude": 140.4775375
+    },
+    {
+      "id": "jp_fukushima_station_5793100368",
+      "osm_id": 5793100368,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "南福島",
+      "name_kana": "みなみふくしま",
+      "name_translations": {
+        "en": "Minami-Fukushima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.72367,
+      "longitude": 140.4557566
+    },
+    {
+      "id": "jp_fukushima_station_5793614299",
+      "osm_id": 5793614299,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "藤田",
+      "name_kana": "ふじた",
+      "name_translations": {
+        "en": "Fujita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8791618,
+      "longitude": 140.5396454
+    },
+    {
+      "id": "jp_fukushima_station_5793614325",
+      "osm_id": 5793614325,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "貝田",
+      "name_kana": "かいだ",
+      "name_translations": {
+        "en": "Kaida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.9083104,
+      "longitude": 140.5811338
+    },
+    {
+      "id": "jp_fukushima_station_5822896401",
+      "osm_id": 5822896401,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "桑折",
+      "name_kana": "こおり",
+      "name_translations": {
+        "en": "Kori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8554275,
+      "longitude": 140.5174327
+    },
+    {
+      "id": "jp_fukushima_station_5822896423",
+      "osm_id": 5822896423,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "伊達",
+      "name_kana": "だて",
+      "name_translations": {
+        "en": "Date"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.824098,
+      "longitude": 140.4933532
+    },
+    {
+      "id": "jp_fukushima_station_5824612463",
+      "osm_id": 5824612463,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "本宮",
+      "name_kana": "もとみや",
+      "name_translations": {
+        "en": "Motomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5141768,
+      "longitude": 140.3994933
+    },
+    {
+      "id": "jp_fukushima_station_5824659272",
+      "osm_id": 5824659272,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "鏡石",
+      "name_kana": "かがみいし",
+      "name_translations": {
+        "en": "Kagamiishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2507164,
+      "longitude": 140.3469461
+    },
+    {
+      "id": "jp_fukushima_station_5825603320",
+      "osm_id": 5825603320,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "白坂",
+      "name_kana": "しらさか",
+      "name_translations": {
+        "en": "Shirasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0947862,
+      "longitude": 140.1843077
+    },
+    {
+      "id": "jp_fukushima_station_5825648000",
+      "osm_id": 5825648000,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢吹",
+      "name_kana": "やぶき",
+      "name_translations": {
+        "en": "Yabuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2052214,
+      "longitude": 140.3280154
+    },
+    {
+      "id": "jp_fukushima_station_6068580601",
+      "osm_id": 6068580601,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "竜田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tatsuta"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.28245,
+      "longitude": 141.0026483
+    },
+    {
+      "id": "jp_fukushima_station_6068580640",
+      "osm_id": 6068580640,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "富岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tomioka"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.335186,
+      "longitude": 141.0226227
+    },
+    {
+      "id": "jp_fukushima_station_6069746075",
+      "osm_id": 6069746075,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "末続",
+      "name_kana": "すえつぎ",
+      "name_translations": {
+        "en": "Suetsugi"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.1724464,
+      "longitude": 140.9954184
+    },
+    {
+      "id": "jp_fukushima_station_6069856847",
+      "osm_id": 6069856847,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新地",
+      "name_kana": "しんち",
+      "name_translations": {
+        "en": "Shinchi"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.8794447,
+      "longitude": 140.9255626
+    },
+    {
+      "id": "jp_fukushima_station_6069856868",
+      "osm_id": 6069856868,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "駒ヶ嶺",
+      "name_kana": "こまがみね",
+      "name_translations": {
+        "en": "Komagamine"
+      },
+      "operator": "東日本旅客鉃道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.8422221,
+      "longitude": 140.9248951
+    },
+    {
+      "id": "jp_fukushima_station_6101775670",
+      "osm_id": 6101775670,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城石川",
+      "name_kana": "いわきいしかわ",
+      "name_translations": {
+        "en": "Iwaki-Ishikawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1407225,
+      "longitude": 140.4441576
+    },
+    {
+      "id": "jp_fukushima_station_6101775671",
+      "osm_id": 6101775671,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "野木沢",
+      "name_kana": "のぎさわ",
+      "name_translations": {
+        "en": "Nogisawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1749437,
+      "longitude": 140.4210019
+    },
+    {
+      "id": "jp_fukushima_station_6101775672",
+      "osm_id": 6101775672,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "川辺沖",
+      "name_kana": "かわべおき",
+      "name_translations": {
+        "en": "Kawabeoki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1924312,
+      "longitude": 140.4059722
+    },
+    {
+      "id": "jp_fukushima_station_6101791368",
+      "osm_id": 6101791368,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城塙",
+      "name_kana": "いわきはなわ",
+      "name_translations": {
+        "en": "Iwaki-Hanawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9586545,
+      "longitude": 140.4121319
+    },
+    {
+      "id": "jp_fukushima_station_6101791369",
+      "osm_id": 6101791369,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "近津",
+      "name_kana": "ちかつ",
+      "name_translations": {
+        "en": "Chikatsu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0003185,
+      "longitude": 140.393695
+    },
+    {
+      "id": "jp_fukushima_station_6101791371",
+      "osm_id": 6101791371,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "中豊",
+      "name_kana": "なかとよ",
+      "name_translations": {
+        "en": "Nakatoyo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0223633,
+      "longitude": 140.3933899
+    },
+    {
+      "id": "jp_fukushima_station_6101791372",
+      "osm_id": 6101791372,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城棚倉",
+      "name_kana": "いわきたなくら",
+      "name_translations": {
+        "en": "Iwaki-Tanakura"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0351357,
+      "longitude": 140.3844729
+    },
+    {
+      "id": "jp_fukushima_station_6101791374",
+      "osm_id": 6101791374,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城浅川",
+      "name_kana": "いわきあさかわ",
+      "name_translations": {
+        "en": "Iwaki-Asakawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0797264,
+      "longitude": 140.4144559
+    },
+    {
+      "id": "jp_fukushima_station_6104573688",
+      "osm_id": 6104573688,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "矢祭山",
+      "name_kana": "やまつりやま",
+      "name_translations": {
+        "en": "Yamatsuriyama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8500049,
+      "longitude": 140.3956255
+    },
+    {
+      "id": "jp_fukushima_station_6104573689",
+      "osm_id": 6104573689,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "南石井",
+      "name_kana": "みなみいしい",
+      "name_translations": {
+        "en": "Minami-Ishii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.8947539,
+      "longitude": 140.4168667
+    },
+    {
+      "id": "jp_fukushima_station_6104573690",
+      "osm_id": 6104573690,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "磐城石井",
+      "name_kana": "いわきいしい",
+      "name_translations": {
+        "en": "Iwaki-Ishii"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.9047863,
+      "longitude": 140.4153189
+    },
+    {
+      "id": "jp_fukushima_station_6110166944",
+      "osm_id": 6110166944,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "医王寺前",
+      "name_kana": "いおうじまえ",
+      "name_translations": {
+        "en": "Iohji-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8163518,
+      "longitude": 140.4461771
+    },
+    {
+      "id": "jp_fukushima_station_6110166957",
+      "osm_id": 6110166957,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "花水坂",
+      "name_kana": "はなみずざか",
+      "name_translations": {
+        "en": "Hanamizuzaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8275005,
+      "longitude": 140.4507644
+    },
+    {
+      "id": "jp_fukushima_station_6110166969",
+      "osm_id": 6110166969,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯坂温泉",
+      "name_kana": "いいざかおんせん",
+      "name_translations": {
+        "en": "Iizaka-Onsen"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8298669,
+      "longitude": 140.4542848
+    },
+    {
+      "id": "jp_fukushima_station_6110183676",
+      "osm_id": 6110183676,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩代清水",
+      "name_kana": "いわしろしみず",
+      "name_translations": {
+        "en": "Iwashiro-Shimizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7760161,
+      "longitude": 140.4478924
+    },
+    {
+      "id": "jp_fukushima_station_6110184487",
+      "osm_id": 6110184487,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "上松川",
+      "name_kana": "かみまつかわ",
+      "name_translations": {
+        "en": "Kami-Matsukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7836256,
+      "longitude": 140.4409589
+    },
+    {
+      "id": "jp_fukushima_station_6110184497",
+      "osm_id": 6110184497,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "笹谷",
+      "name_kana": "ささや",
+      "name_translations": {
+        "en": "Sasaya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7874445,
+      "longitude": 140.4396862
+    },
+    {
+      "id": "jp_fukushima_station_6110184508",
+      "osm_id": 6110184508,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "桜水",
+      "name_kana": "さくらみず",
+      "name_translations": {
+        "en": "Sakuramizu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7959376,
+      "longitude": 140.441093
+    },
+    {
+      "id": "jp_fukushima_station_6142837789",
+      "osm_id": 6142837789,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "保原",
+      "name_kana": "ほばら",
+      "name_translations": {
+        "en": "Hobara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8145581,
+      "longitude": 140.5564964
+    },
+    {
+      "id": "jp_fukushima_station_6142837790",
+      "osm_id": 6142837790,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "新田",
+      "name_kana": "にった",
+      "name_translations": {
+        "en": "Nitta"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8377992,
+      "longitude": 140.5929892
+    },
+    {
+      "id": "jp_fukushima_station_6142837804",
+      "osm_id": 6142837804,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "二井田",
+      "name_kana": "にいだ",
+      "name_translations": {
+        "en": "Niida"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8279814,
+      "longitude": 140.5804807
+    },
+    {
+      "id": "jp_fukushima_station_6142837815",
+      "osm_id": 6142837815,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "大泉",
+      "name_kana": "おおいずみ",
+      "name_translations": {
+        "en": "Oizumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8200587,
+      "longitude": 140.5668899
+    },
+    {
+      "id": "jp_fukushima_station_6143048328",
+      "osm_id": 6143048328,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "梁川",
+      "name_kana": "やながわ",
+      "name_translations": {
+        "en": "Yanagawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8459563,
+      "longitude": 140.6031668
+    },
+    {
+      "id": "jp_fukushima_station_6143048349",
+      "osm_id": 6143048349,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "福島学院前",
+      "name_kana": "ふくしまがくいんまえ",
+      "name_translations": {
+        "en": "Fukushima Gakuin-mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7989917,
+      "longitude": 140.4891099
+    },
+    {
+      "id": "jp_fukushima_station_6143048351",
+      "osm_id": 6143048351,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "卸町",
+      "name_kana": "おろしまち",
+      "name_translations": {
+        "en": "Oroshimachi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7955106,
+      "longitude": 140.4796256
+    },
+    {
+      "id": "jp_fukushima_station_6143048366",
+      "osm_id": 6143048366,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "瀬上",
+      "name_kana": "せのうえ",
+      "name_translations": {
+        "en": "Senoue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8022704,
+      "longitude": 140.4984534
+    },
+    {
+      "id": "jp_fukushima_station_6143048370",
+      "osm_id": 6143048370,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "向瀬上",
+      "name_kana": "むかいせのうえ",
+      "name_translations": {
+        "en": "Mukai-Senoue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8065459,
+      "longitude": 140.510302
+    },
+    {
+      "id": "jp_fukushima_station_6143048376",
+      "osm_id": 6143048376,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "高子",
+      "name_kana": "たかこ",
+      "name_translations": {
+        "en": "Takako"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8084373,
+      "longitude": 140.5272751
+    },
+    {
+      "id": "jp_fukushima_station_6143049186",
+      "osm_id": 6143049186,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "上保原",
+      "name_kana": "かみほばら",
+      "name_translations": {
+        "en": "Kami-Hobara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8097055,
+      "longitude": 140.5431712
+    },
+    {
+      "id": "jp_fukushima_station_6339841644",
+      "osm_id": 6339841644,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "Ｊヴィレッジ",
+      "name_kana": "じぇいびれっじ",
+      "name_translations": {
+        "en": "J-village"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": "JR常磐線",
+      "ref": null,
+      "latitude": 37.2419456,
+      "longitude": 141.0075299
+    },
+    {
+      "id": "jp_fukushima_station_6354643794",
+      "osm_id": 6354643794,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "江田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Eda"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1795672,
+      "longitude": 140.8258144
+    },
+    {
+      "id": "jp_fukushima_station_6373821438",
+      "osm_id": 6373821438,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "川前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kawamae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2056977,
+      "longitude": 140.7503115
+    },
+    {
+      "id": "jp_fukushima_ferry_terminal_6483561671",
+      "osm_id": 6483561671,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "柳津観洸船",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.5299593,
+      "longitude": 139.7235873
+    },
+    {
+      "id": "jp_fukushima_station_6549784706",
+      "osm_id": 6549784706,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "郡山貨物ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": "日本貨物鉄道株式会社",
+      "network": null,
+      "ref": null,
+      "latitude": 37.3695415,
+      "longitude": 140.3762576
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_6639766834",
+      "osm_id": 6639766834,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "相馬市バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7843106,
+      "longitude": 140.8996801
+    },
+    {
+      "id": "jp_fukushima_station_6872437560",
+      "osm_id": 6872437560,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "夜ノ森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yonomori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3659659,
+      "longitude": 140.9920718
+    },
+    {
+      "id": "jp_fukushima_station_7794196855",
+      "osm_id": 7794196855,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "双葉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Futaba"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.4535935,
+      "longitude": 141.0056081
+    },
+    {
+      "id": "jp_fukushima_station_7794196856",
+      "osm_id": 7794196856,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "大野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ono"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.4092247,
+      "longitude": 140.9841652
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_7878469683",
+      "osm_id": 7878469683,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "南相馬バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.6611632,
+      "longitude": 140.9224039
+    },
+    {
+      "id": "jp_fukushima_station_7899197762",
+      "osm_id": 7899197762,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "jr",
+      "name": "いわき",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwaki"
+      },
+      "operator": "東日本旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 37.0582102,
+      "longitude": 140.8921829
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_8175507511",
+      "osm_id": 8175507511,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "西郷BS",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1242296,
+      "longitude": 140.175803
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_8178808692",
+      "osm_id": 8178808692,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "矢吹泉崎BS",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.1881101,
+      "longitude": 140.2921917
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_10042529805",
+      "osm_id": 10042529805,
+      "osm_type": "node",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "内郷駅入口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.0346586,
+      "longitude": 140.8559673
+    },
+    {
+      "id": "jp_fukushima_airport_268403284",
+      "osm_id": 268403284,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "福島スカイパーク",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukushima Sky Park"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8230332,
+      "longitude": 140.3879986
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_276151654",
+      "osm_id": 276151654,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "福島交通 ターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.2996514,
+      "longitude": 140.3685219
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_276151960",
+      "osm_id": 276151960,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "福島交通 須賀川バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.3000766,
+      "longitude": 140.3688452
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_560416007",
+      "osm_id": 560416007,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "福島高速バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.7985946,
+      "longitude": 140.4627582
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_905870803",
+      "osm_id": 905870803,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "保原バスセンター",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8209103,
+      "longitude": 140.5525253
+    },
+    {
+      "id": "jp_fukushima_bus_terminal_905870804",
+      "osm_id": 905870804,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "掛田駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.785456,
+      "longitude": 140.5932762
+    },
+    {
+      "id": "jp_fukushima_airport_1037339151",
+      "osm_id": 1037339151,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "福島空港",
+      "name_kana": "ふくしまくうこう",
+      "name_translations": {
+        "en": "Fukushima Airport"
+      },
+      "operator": "福島県",
+      "network": null,
+      "ref": "FKS",
+      "latitude": 37.2280223,
+      "longitude": 140.4294441
+    },
+    {
+      "id": "jp_fukushima_station_1442777628",
+      "osm_id": 1442777628,
+      "osm_type": "way",
+      "prefecture_id": "jp_fukushima",
+      "type": "station",
+      "subtype": "private",
+      "name": "大泉駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 37.8199316,
+      "longitude": 140.5667211
+    }
+  ]
+}

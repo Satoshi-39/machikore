@@ -1,0 +1,3616 @@
+{
+  "fetchedAt": "2025-12-24T05:53:18.128Z",
+  "prefecture_id": "jp_gifu",
+  "prefecture_name": "岐阜県",
+  "stats": {
+    "station": 186,
+    "airport": 3,
+    "ferry_terminal": 1,
+    "bus_terminal": 11,
+    "total": 201
+  },
+  "data": [
+    {
+      "id": "jp_gifu_station_265828119",
+      "osm_id": 265828119,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "久々野",
+      "name_kana": "くぐの",
+      "name_translations": {
+        "en": "Kuguno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0517102,
+      "longitude": 137.2774545
+    },
+    {
+      "id": "jp_gifu_station_265828438",
+      "osm_id": 265828438,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "渚",
+      "name_kana": "なぎさ",
+      "name_translations": {
+        "en": "Nagisa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0016254,
+      "longitude": 137.2883607
+    },
+    {
+      "id": "jp_gifu_station_265828618",
+      "osm_id": 265828618,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "杉崎",
+      "name_kana": "すぎさき",
+      "name_translations": {
+        "en": "Sugisaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2500894,
+      "longitude": 137.1687478
+    },
+    {
+      "id": "jp_gifu_station_265828691",
+      "osm_id": 265828691,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "打保",
+      "name_kana": "うつぼ",
+      "name_translations": {
+        "en": "Utsubo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3836931,
+      "longitude": 137.1820057
+    },
+    {
+      "id": "jp_gifu_station_265828894",
+      "osm_id": 265828894,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛驒細江",
+      "name_kana": "ひだほそえ",
+      "name_translations": {
+        "en": "Hida-Hosoe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.260943,
+      "longitude": 137.1462726
+    },
+    {
+      "id": "jp_gifu_station_265829488",
+      "osm_id": 265829488,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂上",
+      "name_kana": "さかかみ",
+      "name_translations": {
+        "en": "Sakakami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3276219,
+      "longitude": 137.1409188
+    },
+    {
+      "id": "jp_gifu_station_265829533",
+      "osm_id": 265829533,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "角川",
+      "name_kana": "つのがわ",
+      "name_translations": {
+        "en": "Tsunogawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3002347,
+      "longitude": 137.1132936
+    },
+    {
+      "id": "jp_gifu_station_265829538",
+      "osm_id": 265829538,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "上枝",
+      "name_kana": "ほずえ",
+      "name_translations": {
+        "en": "Hozue"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1805946,
+      "longitude": 137.2457363
+    },
+    {
+      "id": "jp_gifu_station_265829727",
+      "osm_id": 265829727,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "杉原",
+      "name_kana": "すぎはら",
+      "name_translations": {
+        "en": "Sugihara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.4159464,
+      "longitude": 137.1923894
+    },
+    {
+      "id": "jp_gifu_station_265830186",
+      "osm_id": 265830186,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "高山",
+      "name_kana": "たかやま",
+      "name_translations": {
+        "en": "Takayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1411162,
+      "longitude": 137.2514373
+    },
+    {
+      "id": "jp_gifu_station_265830187",
+      "osm_id": 265830187,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛驒国府",
+      "name_kana": "ひだこくふ",
+      "name_translations": {
+        "en": "Hida-Kokufu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2109635,
+      "longitude": 137.2162437
+    },
+    {
+      "id": "jp_gifu_station_265830339",
+      "osm_id": 265830339,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "下油井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimo-Yui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6330505,
+      "longitude": 137.1830446
+    },
+    {
+      "id": "jp_gifu_station_265830341",
+      "osm_id": 265830341,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "白川口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirakawaguchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5797475,
+      "longitude": 137.1842549
+    },
+    {
+      "id": "jp_gifu_station_265830360",
+      "osm_id": 265830360,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "上呂",
+      "name_kana": "じょうろ",
+      "name_translations": {
+        "en": "Joro"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9108124,
+      "longitude": 137.2046758
+    },
+    {
+      "id": "jp_gifu_station_265831246",
+      "osm_id": 265831246,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛騨小坂",
+      "name_kana": "ひだあさか",
+      "name_translations": {
+        "en": "Hida-Osaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9501663,
+      "longitude": 137.2563114
+    },
+    {
+      "id": "jp_gifu_station_265831250",
+      "osm_id": 265831250,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "焼石",
+      "name_kana": "やけいし",
+      "name_translations": {
+        "en": "Yakeishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.7256027,
+      "longitude": 137.2006878
+    },
+    {
+      "id": "jp_gifu_station_265831264",
+      "osm_id": 265831264,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "古井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kobi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4577297,
+      "longitude": 137.0480891
+    },
+    {
+      "id": "jp_gifu_station_265831278",
+      "osm_id": 265831278,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "下麻生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimoasō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.514927,
+      "longitude": 137.087028
+    },
+    {
+      "id": "jp_gifu_station_265831286",
+      "osm_id": 265831286,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛騨金山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hida-Kanayama"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6621881,
+      "longitude": 137.1644041
+    },
+    {
+      "id": "jp_gifu_station_265831722",
+      "osm_id": 265831722,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛驒萩原",
+      "name_kana": "ひだはぎわら",
+      "name_translations": {
+        "en": "Hida-Hagiwara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8739057,
+      "longitude": 137.2142082
+    },
+    {
+      "id": "jp_gifu_station_265832445",
+      "osm_id": 265832445,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "下呂",
+      "name_kana": "げろ",
+      "name_translations": {
+        "en": "Gero"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8057842,
+      "longitude": 137.2396173
+    },
+    {
+      "id": "jp_gifu_station_265832653",
+      "osm_id": 265832653,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "上麻生",
+      "name_kana": "かみあそう",
+      "name_translations": {
+        "en": "Kamiaso"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5413896,
+      "longitude": 137.1191003
+    },
+    {
+      "id": "jp_gifu_station_265832820",
+      "osm_id": 265832820,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "中川辺",
+      "name_kana": "なかかわべ",
+      "name_translations": {
+        "en": "Nakakawabe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4870526,
+      "longitude": 137.0651236
+    },
+    {
+      "id": "jp_gifu_station_265832827",
+      "osm_id": 265832827,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛驒宮田",
+      "name_kana": "ひだみやだ",
+      "name_translations": {
+        "en": "Hida-Miyada"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.9284357,
+      "longitude": 137.2355569
+    },
+    {
+      "id": "jp_gifu_station_265834376",
+      "osm_id": 265834376,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "禅昌寺",
+      "name_kana": "ぜんしょうじ",
+      "name_translations": {
+        "en": "Zenshoji"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.8491894,
+      "longitude": 137.2252177
+    },
+    {
+      "id": "jp_gifu_station_266043526",
+      "osm_id": 266043526,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "岐南",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ginan"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "NH57",
+      "latitude": 35.3898505,
+      "longitude": 136.7692028
+    },
+    {
+      "id": "jp_gifu_station_270865273",
+      "osm_id": 270865273,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "十九条",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Jūkujō"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3958908,
+      "longitude": 136.6609576
+    },
+    {
+      "id": "jp_gifu_station_270865274",
+      "osm_id": 270865274,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "本巣",
+      "name_kana": "もとす",
+      "name_translations": {
+        "en": "Motosu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4877573,
+      "longitude": 136.6698472
+    },
+    {
+      "id": "jp_gifu_station_270865277",
+      "osm_id": 270865277,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "木知原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kochibora"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5177643,
+      "longitude": 136.6500756
+    },
+    {
+      "id": "jp_gifu_station_270865330",
+      "osm_id": 270865330,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美江寺",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mieji"
+      },
+      "operator": "樽見鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4134526,
+      "longitude": 136.6614287
+    },
+    {
+      "id": "jp_gifu_station_270865353",
+      "osm_id": 270865353,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "東大垣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashi-Ōgaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3751889,
+      "longitude": 136.6463467
+    },
+    {
+      "id": "jp_gifu_station_270865354",
+      "osm_id": 270865354,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "織部",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Oribe"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.498881,
+      "longitude": 136.6673199
+    },
+    {
+      "id": "jp_gifu_station_270865476",
+      "osm_id": 270865476,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "横屋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yokoya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3872545,
+      "longitude": 136.6595332
+    },
+    {
+      "id": "jp_gifu_station_270865477",
+      "osm_id": 270865477,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "糸貫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Itonuki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.462828,
+      "longitude": 136.6697386
+    },
+    {
+      "id": "jp_gifu_station_270865520",
+      "osm_id": 270865520,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "北方真桑",
+      "name_kana": "きたがたまくわ",
+      "name_translations": {
+        "en": "Kitagata-Makuwa"
+      },
+      "operator": "樽見鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4396143,
+      "longitude": 136.6741034
+    },
+    {
+      "id": "jp_gifu_station_270865550",
+      "osm_id": 270865550,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "鍋原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nabera"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5658209,
+      "longitude": 136.6365623
+    },
+    {
+      "id": "jp_gifu_station_270865554",
+      "osm_id": 270865554,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "谷汲口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tanigumi-guchi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5270669,
+      "longitude": 136.6422181
+    },
+    {
+      "id": "jp_gifu_station_270865556",
+      "osm_id": 270865556,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "樽見",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tarumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6355039,
+      "longitude": 136.615428
+    },
+    {
+      "id": "jp_gifu_station_270865558",
+      "osm_id": 270865558,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "高尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6010272,
+      "longitude": 136.6257677
+    },
+    {
+      "id": "jp_gifu_station_270865670",
+      "osm_id": 270865670,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "神海",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kōmi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5425424,
+      "longitude": 136.6415315
+    },
+    {
+      "id": "jp_gifu_station_270865673",
+      "osm_id": 270865673,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "高科",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takashina"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.555457,
+      "longitude": 136.6401978
+    },
+    {
+      "id": "jp_gifu_station_270865693",
+      "osm_id": 270865693,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "日当",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hinata"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5824958,
+      "longitude": 136.6314276
+    },
+    {
+      "id": "jp_gifu_station_270865878",
+      "osm_id": 270865878,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "水鳥",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Midori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.6178004,
+      "longitude": 136.6207462
+    },
+    {
+      "id": "jp_gifu_station_294483184",
+      "osm_id": 294483184,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛驒古川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hida-Furukawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2368469,
+      "longitude": 137.1895961
+    },
+    {
+      "id": "jp_gifu_station_448109443",
+      "osm_id": 448109443,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "烏江",
+      "name_kana": "からすえ",
+      "name_translations": {
+        "en": "Karasue"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3055599,
+      "longitude": 136.5915173
+    },
+    {
+      "id": "jp_gifu_station_448109807",
+      "osm_id": 448109807,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "石津",
+      "name_kana": "いしづ",
+      "name_translations": {
+        "en": "Ishizu"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1807896,
+      "longitude": 136.6275383
+    },
+    {
+      "id": "jp_gifu_station_448110169",
+      "osm_id": 448110169,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "池野",
+      "name_kana": "いけの",
+      "name_translations": {
+        "en": "Ikeno"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4365779,
+      "longitude": 136.5785423
+    },
+    {
+      "id": "jp_gifu_station_448110770",
+      "osm_id": 448110770,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "駒野",
+      "name_kana": "こまの",
+      "name_translations": {
+        "en": "Komano"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2238134,
+      "longitude": 136.6032939
+    },
+    {
+      "id": "jp_gifu_station_448111478",
+      "osm_id": 448111478,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "北神戸",
+      "name_kana": "きたごうど",
+      "name_translations": {
+        "en": "Kita-Godo"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4299706,
+      "longitude": 136.5945546
+    },
+    {
+      "id": "jp_gifu_station_448111483",
+      "osm_id": 448111483,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "室",
+      "name_kana": "むろ",
+      "name_translations": {
+        "en": "Muro"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3672567,
+      "longitude": 136.6066467
+    },
+    {
+      "id": "jp_gifu_station_448111565",
+      "osm_id": 448111565,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "北池野",
+      "name_kana": "きたいけの",
+      "name_translations": {
+        "en": "Kita-Ikeno"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4431365,
+      "longitude": 136.5738413
+    },
+    {
+      "id": "jp_gifu_station_448112045",
+      "osm_id": 448112045,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "揖斐",
+      "name_kana": "いび",
+      "name_translations": {
+        "en": "Ibi"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4703264,
+      "longitude": 136.572435
+    },
+    {
+      "id": "jp_gifu_station_448112051",
+      "osm_id": 448112051,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "北大垣",
+      "name_kana": "きたおおがき",
+      "name_translations": {
+        "en": "Kita-Ōgaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3755004,
+      "longitude": 136.6020405
+    },
+    {
+      "id": "jp_gifu_station_448112072",
+      "osm_id": 448112072,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "養老",
+      "name_kana": "ようろう",
+      "name_translations": {
+        "en": "Yoro"
+      },
+      "operator": "養老鉄道",
+      "network": "養老線",
+      "ref": null,
+      "latitude": 35.2868893,
+      "longitude": 136.556809
+    },
+    {
+      "id": "jp_gifu_station_448112098",
+      "osm_id": 448112098,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "大外羽",
+      "name_kana": "おおとば",
+      "name_translations": {
+        "en": "Otoba"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3153435,
+      "longitude": 136.5973783
+    },
+    {
+      "id": "jp_gifu_station_448112600",
+      "osm_id": 448112600,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "西大垣",
+      "name_kana": "にしおおがき",
+      "name_translations": {
+        "en": "Nishi-Ogaki"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3602833,
+      "longitude": 136.6033135
+    },
+    {
+      "id": "jp_gifu_station_448112612",
+      "osm_id": 448112612,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃山崎",
+      "name_kana": "みのやまざき",
+      "name_translations": {
+        "en": "Mino-Yamazaki"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.198843,
+      "longitude": 136.6215188
+    },
+    {
+      "id": "jp_gifu_station_448113817",
+      "osm_id": 448113817,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃松山",
+      "name_kana": "みのまつやま",
+      "name_translations": {
+        "en": "Mino-Matsuyama"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.1608635,
+      "longitude": 136.632688
+    },
+    {
+      "id": "jp_gifu_station_448114121",
+      "osm_id": 448114121,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "広神戸",
+      "name_kana": "ひろごうど",
+      "name_translations": {
+        "en": "Hiro-Godo"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4196841,
+      "longitude": 136.6020539
+    },
+    {
+      "id": "jp_gifu_station_448114284",
+      "osm_id": 448114284,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "友江",
+      "name_kana": "ともえ",
+      "name_translations": {
+        "en": "Tomoe"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3265404,
+      "longitude": 136.6007687
+    },
+    {
+      "id": "jp_gifu_station_448114471",
+      "osm_id": 448114471,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃津屋",
+      "name_kana": "みのつや",
+      "name_translations": {
+        "en": "Mino-Tsuya"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.2513864,
+      "longitude": 136.5667322
+    },
+    {
+      "id": "jp_gifu_station_448115217",
+      "osm_id": 448115217,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃本郷",
+      "name_kana": "みのほんごう",
+      "name_translations": {
+        "en": "Mino-Hongo"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4499757,
+      "longitude": 136.5718481
+    },
+    {
+      "id": "jp_gifu_station_448115227",
+      "osm_id": 448115227,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃青柳",
+      "name_kana": "みのやなぎ",
+      "name_translations": {
+        "en": "Mino-Yanagi"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3437973,
+      "longitude": 136.6038394
+    },
+    {
+      "id": "jp_gifu_station_448116619",
+      "osm_id": 448116619,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃高田",
+      "name_kana": "みのたかだ",
+      "name_translations": {
+        "en": "Mino-Takada"
+      },
+      "operator": "養老鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3090638,
+      "longitude": 136.5635438
+    },
+    {
+      "id": "jp_gifu_station_452815205",
+      "osm_id": 452815205,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "深戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukado"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.6865137,
+      "longitude": 136.9623819
+    },
+    {
+      "id": "jp_gifu_station_452815261",
+      "osm_id": 452815261,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃市",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minoshi"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.5394706,
+      "longitude": 136.9153413
+    },
+    {
+      "id": "jp_gifu_station_452815262",
+      "osm_id": 452815262,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "加茂野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamono"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.4606205,
+      "longitude": 136.9853939
+    },
+    {
+      "id": "jp_gifu_station_452815292",
+      "osm_id": 452815292,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "福野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fukuno"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.646046,
+      "longitude": 136.951462
+    },
+    {
+      "id": "jp_gifu_station_452815294",
+      "osm_id": 452815294,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "関口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seki-guchi"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.479923,
+      "longitude": 136.92928
+    },
+    {
+      "id": "jp_gifu_station_452815299",
+      "osm_id": 452815299,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "木尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Konno"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.6061879,
+      "longitude": 136.9381678
+    },
+    {
+      "id": "jp_gifu_station_452815300",
+      "osm_id": 452815300,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "関市役所前",
+      "name_kana": "せきしやくしょまえ",
+      "name_translations": {
+        "en": "Seki-Shiyakusho-mae"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.499322,
+      "longitude": 136.912877
+    },
+    {
+      "id": "jp_gifu_station_452815302",
+      "osm_id": 452815302,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "北濃",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hokunō"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.9304277,
+      "longitude": 136.8298041
+    },
+    {
+      "id": "jp_gifu_station_452815345",
+      "osm_id": 452815345,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "大矢",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōya"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.638089,
+      "longitude": 136.950003
+    },
+    {
+      "id": "jp_gifu_station_452815354",
+      "osm_id": 452815354,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "富加",
+      "name_kana": "とみか",
+      "name_translations": {
+        "en": "Tomika"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.4752456,
+      "longitude": 136.9691834
+    },
+    {
+      "id": "jp_gifu_station_452815371",
+      "osm_id": 452815371,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "郡上大和",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gujō-Yamato"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.8150787,
+      "longitude": 136.8950107
+    },
+    {
+      "id": "jp_gifu_station_452815420",
+      "osm_id": 452815420,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "八坂",
+      "name_kana": "やさか",
+      "name_translations": {
+        "en": "Yasaka"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.620247,
+      "longitude": 136.945466
+    },
+    {
+      "id": "jp_gifu_station_452815422",
+      "osm_id": 452815422,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "関",
+      "name_kana": "せき",
+      "name_translations": {
+        "en": "Seki"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.4897741,
+      "longitude": 136.9127756
+    },
+    {
+      "id": "jp_gifu_station_452815752",
+      "osm_id": 452815752,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "松森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Matsumori"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.5265535,
+      "longitude": 136.9155718
+    },
+    {
+      "id": "jp_gifu_station_452815760",
+      "osm_id": 452815760,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "万場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Manba"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.8336096,
+      "longitude": 136.8832317
+    },
+    {
+      "id": "jp_gifu_station_452815825",
+      "osm_id": 452815825,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "みなみ子宝温泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kodakara-Onsen"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.627986,
+      "longitude": 136.950658
+    },
+    {
+      "id": "jp_gifu_station_452815839",
+      "osm_id": 452815839,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "せきてらす前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekiterasu-mae"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.4833334,
+      "longitude": 136.9142209
+    },
+    {
+      "id": "jp_gifu_station_452815866",
+      "osm_id": 452815866,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "赤池",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akaike"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.672097,
+      "longitude": 136.961369
+    },
+    {
+      "id": "jp_gifu_station_452815904",
+      "osm_id": 452815904,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃白鳥",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mino-Shirotori"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.884948,
+      "longitude": 136.860729
+    },
+    {
+      "id": "jp_gifu_station_452815908",
+      "osm_id": 452815908,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "母野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hanno"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.5985875,
+      "longitude": 136.9421298
+    },
+    {
+      "id": "jp_gifu_station_452816029",
+      "osm_id": 452816029,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "郡上八幡",
+      "name_kana": "ぐじょうはちまん",
+      "name_translations": {
+        "en": "Gujō-Hachiman"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.7418904,
+      "longitude": 136.9473551
+    },
+    {
+      "id": "jp_gifu_station_452816045",
+      "osm_id": 452816045,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "湯の洞温泉口",
+      "name_kana": "ゆのほらおんせんぐち",
+      "name_translations": {
+        "en": "Yunohora-Onsen-guchi"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.5712307,
+      "longitude": 136.9312948
+    },
+    {
+      "id": "jp_gifu_station_452816066",
+      "osm_id": 452816066,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "山田",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamada"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.788171,
+      "longitude": 136.911822
+    },
+    {
+      "id": "jp_gifu_station_452816069",
+      "osm_id": 452816069,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "前平公園",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Maehira-Kōen"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.4498526,
+      "longitude": 137.00146
+    },
+    {
+      "id": "jp_gifu_station_452816077",
+      "osm_id": 452816077,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "相生",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Aioi"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.7151807,
+      "longitude": 136.9504392
+    },
+    {
+      "id": "jp_gifu_station_452816293",
+      "osm_id": 452816293,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "梅山",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Umeyama"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.5493431,
+      "longitude": 136.9178691
+    },
+    {
+      "id": "jp_gifu_station_452816334",
+      "osm_id": 452816334,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "関下有知",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seki-Shimouchi"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.5136636,
+      "longitude": 136.914643
+    },
+    {
+      "id": "jp_gifu_station_452816337",
+      "osm_id": 452816337,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "白鳥高原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirotori-Kōgen"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.9126108,
+      "longitude": 136.8430605
+    },
+    {
+      "id": "jp_gifu_station_452816403",
+      "osm_id": 452816403,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "上万場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kami-Manba"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.8444404,
+      "longitude": 136.8767728
+    },
+    {
+      "id": "jp_gifu_station_452816409",
+      "osm_id": 452816409,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "大中",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōnaka"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.8537689,
+      "longitude": 136.8683192
+    },
+    {
+      "id": "jp_gifu_station_452816446",
+      "osm_id": 452816446,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美並苅安",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Kariyasu"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.660451,
+      "longitude": 136.955079
+    },
+    {
+      "id": "jp_gifu_station_452816508",
+      "osm_id": 452816508,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "徳永",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tokunaga"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.8045536,
+      "longitude": 136.9038159
+    },
+    {
+      "id": "jp_gifu_station_452816647",
+      "osm_id": 452816647,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "自然園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shizen'en-mae"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.7700885,
+      "longitude": 136.9316791
+    },
+    {
+      "id": "jp_gifu_station_452816946",
+      "osm_id": 452816946,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "関富岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Seki-Tomioka"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.4785816,
+      "longitude": 136.9450889
+    },
+    {
+      "id": "jp_gifu_station_452816957",
+      "osm_id": 452816957,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "洲原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suhara"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.5887121,
+      "longitude": 136.9447294
+    },
+    {
+      "id": "jp_gifu_station_452817229",
+      "osm_id": 452817229,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "白山長滝",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hakusan-Nagataki"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.9196455,
+      "longitude": 136.8324904
+    },
+    {
+      "id": "jp_gifu_station_513182492",
+      "osm_id": 513182492,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "荒尾",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Arao"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3734058,
+      "longitude": 136.5834752
+    },
+    {
+      "id": "jp_gifu_station_722149281",
+      "osm_id": 722149281,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "野志",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Noshi"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.322302,
+      "longitude": 137.3891563
+    },
+    {
+      "id": "jp_gifu_station_722149364",
+      "osm_id": 722149364,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "岩村",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iwamura"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.3689033,
+      "longitude": 137.434364
+    },
+    {
+      "id": "jp_gifu_station_722149377",
+      "osm_id": 722149377,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯羽間",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iibama"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.3869284,
+      "longitude": 137.4373163
+    },
+    {
+      "id": "jp_gifu_station_722149463",
+      "osm_id": 722149463,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "明智",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Akechi"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.3061728,
+      "longitude": 137.3874775
+    },
+    {
+      "id": "jp_gifu_station_722149636",
+      "osm_id": 722149636,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "山岡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yamaoka"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.3499523,
+      "longitude": 137.395676
+    },
+    {
+      "id": "jp_gifu_station_722149649",
+      "osm_id": 722149649,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "花白温泉",
+      "name_kana": "はなしろおんせん",
+      "name_translations": {
+        "en": "Hanashiro Onsen"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.3550878,
+      "longitude": 137.4067318
+    },
+    {
+      "id": "jp_gifu_station_722149752",
+      "osm_id": 722149752,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "東野",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Higashino"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.4461812,
+      "longitude": 137.4289568
+    },
+    {
+      "id": "jp_gifu_station_722149894",
+      "osm_id": 722149894,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "阿木",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Agi"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.4000446,
+      "longitude": 137.4589243
+    },
+    {
+      "id": "jp_gifu_station_722149909",
+      "osm_id": 722149909,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飯沼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Iinuma"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.4184022,
+      "longitude": 137.4611046
+    },
+    {
+      "id": "jp_gifu_airport_1042055948",
+      "osm_id": 1042055948,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "airport",
+      "subtype": "military",
+      "name": "航空自衛隊 岐阜基地",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gifu Airbase"
+      },
+      "operator": "Japan Air Self-Defense Force",
+      "network": null,
+      "ref": "QGU",
+      "latitude": 35.3941002,
+      "longitude": 136.8699951
+    },
+    {
+      "id": "jp_gifu_bus_terminal_1676970862",
+      "osm_id": 1676970862,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "多治見駅北口",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3358559,
+      "longitude": 137.1216148
+    },
+    {
+      "id": "jp_gifu_bus_terminal_1676970865",
+      "osm_id": 1676970865,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "多治見駅前",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3352701,
+      "longitude": 137.1222734
+    },
+    {
+      "id": "jp_gifu_ferry_terminal_2418715375",
+      "osm_id": 2418715375,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "ferry_terminal",
+      "subtype": null,
+      "name": "うかいのりば",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4383552,
+      "longitude": 136.7727273
+    },
+    {
+      "id": "jp_gifu_station_2461544044",
+      "osm_id": 2461544044,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵜沼",
+      "name_kana": "うぬま",
+      "name_translations": {
+        "en": "Unuma"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3977631,
+      "longitude": 136.9451635
+    },
+    {
+      "id": "jp_gifu_station_3786132121",
+      "osm_id": 3786132121,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "モレラ岐阜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Morera-Gifu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4552697,
+      "longitude": 136.6697017
+    },
+    {
+      "id": "jp_gifu_bus_terminal_3794385975",
+      "osm_id": 3794385975,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "平湯",
+      "name_kana": "ひらゆさんちょくいちば",
+      "name_translations": {
+        "en": "Hirayu Bus Station"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1909518,
+      "longitude": 137.5519345
+    },
+    {
+      "id": "jp_gifu_bus_terminal_3894889095",
+      "osm_id": 3894889095,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "JR岐阜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "JR Gifu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4100078,
+      "longitude": 136.7577
+    },
+    {
+      "id": "jp_gifu_station_3999572951",
+      "osm_id": 3999572951,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "穂積",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hozumi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3962216,
+      "longitude": 136.6934324
+    },
+    {
+      "id": "jp_gifu_station_3999572952",
+      "osm_id": 3999572952,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "西岐阜",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi-Gifu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4047349,
+      "longitude": 136.7235207
+    },
+    {
+      "id": "jp_gifu_station_3999594684",
+      "osm_id": 3999594684,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "関ヶ原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sekigahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3638665,
+      "longitude": 136.470574
+    },
+    {
+      "id": "jp_gifu_station_3999594685",
+      "osm_id": 3999594685,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "垂井",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tarui"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3696804,
+      "longitude": 136.5314079
+    },
+    {
+      "id": "jp_gifu_station_3999594686",
+      "osm_id": 3999594686,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "大垣",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōgaki"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3670837,
+      "longitude": 136.6178001
+    },
+    {
+      "id": "jp_gifu_station_4079317249",
+      "osm_id": 4079317249,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "岐阜",
+      "name_kana": "ぎふ",
+      "name_translations": {
+        "en": "Gifu"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4094858,
+      "longitude": 136.7569769
+    },
+    {
+      "id": "jp_gifu_station_4079317260",
+      "osm_id": 4079317260,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "名鉄岐阜",
+      "name_kana": "めいてつぎふ",
+      "name_translations": {
+        "en": "Meitetsu Gifu"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "NH60",
+      "latitude": 35.4115819,
+      "longitude": 136.7600559
+    },
+    {
+      "id": "jp_gifu_bus_terminal_4485247589",
+      "osm_id": 4485247589,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "Takayama Nohi Bus Terminal",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takayama Nohi Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.141889,
+      "longitude": 137.2514447
+    },
+    {
+      "id": "jp_gifu_station_4550178498",
+      "osm_id": 4550178498,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃太田",
+      "name_kana": "みのおおた",
+      "name_translations": {
+        "en": "Mino-Ota"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4456359,
+      "longitude": 137.0195403
+    },
+    {
+      "id": "jp_gifu_station_4586525900",
+      "osm_id": 4586525900,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "東赤坂",
+      "name_kana": "ひがしあかさか",
+      "name_translations": {
+        "en": "Higashi-Akasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3942763,
+      "longitude": 136.6010214
+    },
+    {
+      "id": "jp_gifu_station_4586525924",
+      "osm_id": 4586525924,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃赤坂",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mino-Akasaka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3870914,
+      "longitude": 136.5820542
+    },
+    {
+      "id": "jp_gifu_station_4716458901",
+      "osm_id": 4716458901,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "極楽",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gokuraku"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": null,
+      "latitude": 35.3797876,
+      "longitude": 137.4324532
+    },
+    {
+      "id": "jp_gifu_station_5926164485",
+      "osm_id": 5926164485,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "飛驒一ノ宮",
+      "name_kana": "ひだいちのみや",
+      "name_translations": {
+        "en": "Hida-Ichinomiya"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.0882769,
+      "longitude": 137.2473505
+    },
+    {
+      "id": "jp_gifu_bus_terminal_6001917185",
+      "osm_id": 6001917185,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "八百津町FC前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yaotsu Cho Family Center Mae"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4755968,
+      "longitude": 137.1445213
+    },
+    {
+      "id": "jp_gifu_station_6035931680",
+      "osm_id": 6035931680,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂下",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sakashita"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5746826,
+      "longitude": 137.5310907
+    },
+    {
+      "id": "jp_gifu_station_6035939550",
+      "osm_id": 6035939550,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "落合川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ochiaigawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5248111,
+      "longitude": 137.529763
+    },
+    {
+      "id": "jp_gifu_station_6036031705",
+      "osm_id": 6036031705,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "中津川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nakatsugawa"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF19",
+      "latitude": 35.500617,
+      "longitude": 137.502847
+    },
+    {
+      "id": "jp_gifu_station_6036032332",
+      "osm_id": 6036032332,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美乃坂本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minosakamoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF18",
+      "latitude": 35.479371,
+      "longitude": 137.4498358
+    },
+    {
+      "id": "jp_gifu_station_6050449426",
+      "osm_id": 6050449426,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "恵那",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ena"
+      },
+      "operator": "明知鉄道",
+      "network": "明知線",
+      "ref": "CF17",
+      "latitude": 35.4552746,
+      "longitude": 137.4084816
+    },
+    {
+      "id": "jp_gifu_station_6050596385",
+      "osm_id": 6050596385,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "釜戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kamado"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF15",
+      "latitude": 35.4113845,
+      "longitude": 137.3053251
+    },
+    {
+      "id": "jp_gifu_station_6050596391",
+      "osm_id": 6050596391,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "武並",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takenami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF16",
+      "latitude": 35.437688,
+      "longitude": 137.3538483
+    },
+    {
+      "id": "jp_gifu_station_6050615307",
+      "osm_id": 6050615307,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "瑞浪",
+      "name_kana": "みずなみ",
+      "name_translations": {
+        "en": "Mizunami"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF14",
+      "latitude": 35.3689238,
+      "longitude": 137.2523797
+    },
+    {
+      "id": "jp_gifu_station_6050671456",
+      "osm_id": 6050671456,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "土岐市",
+      "name_kana": "ときし",
+      "name_translations": {
+        "en": "Tokishi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF13",
+      "latitude": 35.3599721,
+      "longitude": 137.1824371
+    },
+    {
+      "id": "jp_gifu_station_6050711108",
+      "osm_id": 6050711108,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "多治見",
+      "name_kana": "たじみ",
+      "name_translations": {
+        "en": "Tajimi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF12",
+      "latitude": 35.3351999,
+      "longitude": 137.1208133
+    },
+    {
+      "id": "jp_gifu_station_6050795048",
+      "osm_id": 6050795048,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "古虎渓",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kokokei"
+      },
+      "operator": null,
+      "network": null,
+      "ref": "CF118",
+      "latitude": 35.3031502,
+      "longitude": 137.1010038
+    },
+    {
+      "id": "jp_gifu_station_6051795335",
+      "osm_id": 6051795335,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "笠松",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kasamatsu"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "NH56",
+      "latitude": 35.3743074,
+      "longitude": 136.7644054
+    },
+    {
+      "id": "jp_gifu_bus_terminal_6062734779",
+      "osm_id": 6062734779,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岐阜乗合自動車(株) 岐阜バス美濃営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.5307157,
+      "longitude": 136.8980885
+    },
+    {
+      "id": "jp_gifu_station_6620847229",
+      "osm_id": 6620847229,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "岐阜羽島",
+      "name_kana": "ぎふはしま",
+      "name_translations": {
+        "en": "Gifu-Hashima"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3155126,
+      "longitude": 136.6860366
+    },
+    {
+      "id": "jp_gifu_station_7099151476",
+      "osm_id": 7099151476,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "大島",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ōshima"
+      },
+      "operator": "長良川鉄道",
+      "network": "長良川鉄道越美南線",
+      "ref": null,
+      "latitude": 35.8685609,
+      "longitude": 136.8590102
+    },
+    {
+      "id": "jp_gifu_station_7132082899",
+      "osm_id": 7132082899,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "各務原市役所前",
+      "name_kana": "かかみがはらしやくしょまえ",
+      "name_translations": {
+        "en": "Kakamigahara-Shiyakusho-mae"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4007881,
+      "longitude": 136.8472658
+    },
+    {
+      "id": "jp_gifu_station_7934476327",
+      "osm_id": 7934476327,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "切通",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kiridōshi"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道各務原線",
+      "ref": null,
+      "latitude": 35.400186,
+      "longitude": 136.7959788
+    },
+    {
+      "id": "jp_gifu_station_7972388205",
+      "osm_id": 7972388205,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "六軒",
+      "name_kana": "ろっけん",
+      "name_translations": {
+        "en": "Rokken"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4010628,
+      "longitude": 136.8619399
+    },
+    {
+      "id": "jp_gifu_station_7981443164",
+      "osm_id": 7981443164,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "新鵜沼",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Unuma"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "IY17",
+      "latitude": 35.3967078,
+      "longitude": 136.9443353
+    },
+    {
+      "id": "jp_gifu_station_8097614447",
+      "osm_id": 8097614447,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "新羽島",
+      "name_kana": "しんはしま",
+      "name_translations": {
+        "en": "Shin Hashima"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3153791,
+      "longitude": 136.6867807
+    },
+    {
+      "id": "jp_gifu_station_8097728719",
+      "osm_id": 8097728719,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "西可児",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nishi Kani"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道広見線",
+      "ref": "HM03",
+      "latitude": 35.4049014,
+      "longitude": 137.0108525
+    },
+    {
+      "id": "jp_gifu_station_8097741973",
+      "osm_id": 8097741973,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "可児川",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanigawa"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "HM04",
+      "latitude": 35.4184622,
+      "longitude": 137.0181433
+    },
+    {
+      "id": "jp_gifu_station_8097750023",
+      "osm_id": 8097750023,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "日本ライン今渡",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nihonrain-Imawatari"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "HM05",
+      "latitude": 35.4324708,
+      "longitude": 137.0368164
+    },
+    {
+      "id": "jp_gifu_station_8099827855",
+      "osm_id": 8099827855,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "加納",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kanō"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "NH59",
+      "latitude": 35.405142,
+      "longitude": 136.7662366
+    },
+    {
+      "id": "jp_gifu_station_8099827857",
+      "osm_id": 8099827857,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "茶所",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Chajo"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": "NH58",
+      "latitude": 35.402289,
+      "longitude": 136.768886
+    },
+    {
+      "id": "jp_gifu_station_8107473994",
+      "osm_id": 8107473994,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "高田橋",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takadabashi"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道各務原線",
+      "ref": null,
+      "latitude": 35.3984093,
+      "longitude": 136.8116116
+    },
+    {
+      "id": "jp_gifu_station_8107473996",
+      "osm_id": 8107473996,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "手力",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tejikara"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道各務原線",
+      "ref": null,
+      "latitude": 35.3982918,
+      "longitude": 136.8043133
+    },
+    {
+      "id": "jp_gifu_station_8107474000",
+      "osm_id": 8107474000,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "細畑",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hosobata"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道各務原線",
+      "ref": null,
+      "latitude": 35.4015708,
+      "longitude": 136.7854574
+    },
+    {
+      "id": "jp_gifu_station_8107474002",
+      "osm_id": 8107474002,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "田神",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Tagami"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道各務原線",
+      "ref": null,
+      "latitude": 35.4113019,
+      "longitude": 136.7721046
+    },
+    {
+      "id": "jp_gifu_station_8107474004",
+      "osm_id": 8107474004,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "鵜沼宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Unumajuku"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4001322,
+      "longitude": 136.9320206
+    },
+    {
+      "id": "jp_gifu_station_8107474006",
+      "osm_id": 8107474006,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽場",
+      "name_kana": "はば",
+      "name_translations": {
+        "en": "Haba"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4011937,
+      "longitude": 136.9216606
+    },
+    {
+      "id": "jp_gifu_station_8107474008",
+      "osm_id": 8107474008,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "苧ヶ瀬",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ogase"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4034843,
+      "longitude": 136.9116741
+    },
+    {
+      "id": "jp_gifu_station_8107474010",
+      "osm_id": 8107474010,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "名電各務原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Meiden Kakamigahara"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4026016,
+      "longitude": 136.9009271
+    },
+    {
+      "id": "jp_gifu_station_8107474012",
+      "osm_id": 8107474012,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "二十軒",
+      "name_kana": "にじっけん",
+      "name_translations": {
+        "en": "Nijikken"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4001814,
+      "longitude": 136.888829
+    },
+    {
+      "id": "jp_gifu_station_8107474014",
+      "osm_id": 8107474014,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "三柿野",
+      "name_kana": "みかきの",
+      "name_translations": {
+        "en": "Mikakino"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4001437,
+      "longitude": 136.8757888
+    },
+    {
+      "id": "jp_gifu_station_8107516817",
+      "osm_id": 8107516817,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "市民公園前",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimin-Kōen-mae"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4006137,
+      "longitude": 136.8423665
+    },
+    {
+      "id": "jp_gifu_station_8107516819",
+      "osm_id": 8107516819,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "新那加",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Naka"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.4001081,
+      "longitude": 136.8335782
+    },
+    {
+      "id": "jp_gifu_station_8107516821",
+      "osm_id": 8107516821,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "新加納",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shin-Kanō"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道各務原線",
+      "ref": null,
+      "latitude": 35.3994112,
+      "longitude": 136.8244902
+    },
+    {
+      "id": "jp_gifu_station_8111665880",
+      "osm_id": 8111665880,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "顔戸",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gōdo"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道広見線",
+      "ref": "HM08",
+      "latitude": 35.4344996,
+      "longitude": 137.1050915
+    },
+    {
+      "id": "jp_gifu_station_8111665881",
+      "osm_id": 8111665881,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "御嵩口",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mitakeguchi"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道広見線",
+      "ref": "HM09",
+      "latitude": 35.4314837,
+      "longitude": 137.1217668
+    },
+    {
+      "id": "jp_gifu_station_8111665882",
+      "osm_id": 8111665882,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "御嵩",
+      "name_kana": "みたけ",
+      "name_translations": {
+        "en": "Mitake"
+      },
+      "operator": "名古屋鉄道",
+      "network": "名古屋鉄道広見線",
+      "ref": "HM10",
+      "latitude": 35.4297516,
+      "longitude": 137.1279399
+    },
+    {
+      "id": "jp_gifu_station_8111665883",
+      "osm_id": 8111665883,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "新可児",
+      "name_kana": "しんかに",
+      "name_translations": {
+        "en": "Shin-Kani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4230942,
+      "longitude": 137.0555618
+    },
+    {
+      "id": "jp_gifu_station_8113965935",
+      "osm_id": 8113965935,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "南宿",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Minami-Juku"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3476802,
+      "longitude": 136.7285644
+    },
+    {
+      "id": "jp_gifu_station_8113965942",
+      "osm_id": 8113965942,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "西笠松",
+      "name_kana": "にしかさまつ",
+      "name_translations": {
+        "en": "Nishi-Kasamatsu"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3691196,
+      "longitude": 136.7578983
+    },
+    {
+      "id": "jp_gifu_station_8113965948",
+      "osm_id": 8113965948,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "江吉良",
+      "name_kana": "えぎら",
+      "name_translations": {
+        "en": "Egira"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3156357,
+      "longitude": 136.6997038
+    },
+    {
+      "id": "jp_gifu_station_8113965949",
+      "osm_id": 8113965949,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "羽島市役所前",
+      "name_kana": "はしましやくしょまえ",
+      "name_translations": {
+        "en": "Hashima-Shiyakusho-Mae"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3222801,
+      "longitude": 136.7000008
+    },
+    {
+      "id": "jp_gifu_station_8113965950",
+      "osm_id": 8113965950,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "竹鼻",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Takehana"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.326868,
+      "longitude": 136.7068787
+    },
+    {
+      "id": "jp_gifu_station_8113965951",
+      "osm_id": 8113965951,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "不破一色",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Fuwa-Ishiki"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3332265,
+      "longitude": 136.7220258
+    },
+    {
+      "id": "jp_gifu_station_8113965952",
+      "osm_id": 8113965952,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "須賀",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Suka"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3396397,
+      "longitude": 136.7264454
+    },
+    {
+      "id": "jp_gifu_station_8113965953",
+      "osm_id": 8113965953,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "柳津",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Yanaizu"
+      },
+      "operator": "名古屋鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3651257,
+      "longitude": 136.7395413
+    },
+    {
+      "id": "jp_gifu_station_8237401203",
+      "osm_id": 8237401203,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "美濃川合",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Mino-Kawai"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4441847,
+      "longitude": 137.0453735
+    },
+    {
+      "id": "jp_gifu_station_8237401204",
+      "osm_id": 8237401204,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "可児",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Kani"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4225467,
+      "longitude": 137.0553687
+    },
+    {
+      "id": "jp_gifu_station_8237401206",
+      "osm_id": 8237401206,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "jr",
+      "name": "姫",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hime"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3820994,
+      "longitude": 137.0720856
+    },
+    {
+      "id": "jp_gifu_station_8237401215",
+      "osm_id": 8237401215,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "根本",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nemoto"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3615477,
+      "longitude": 137.089986
+    },
+    {
+      "id": "jp_gifu_station_8237401216",
+      "osm_id": 8237401216,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "jr",
+      "name": "小泉",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Koizumi"
+      },
+      "operator": "東海旅客鉄道",
+      "network": "JR太多線",
+      "ref": null,
+      "latitude": 35.3491033,
+      "longitude": 137.100403
+    },
+    {
+      "id": "jp_gifu_station_8237414523",
+      "osm_id": 8237414523,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "jr",
+      "name": "下切",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shimogiri"
+      },
+      "operator": "東海旅客鉄道",
+      "network": null,
+      "ref": null,
+      "latitude": 35.3934384,
+      "longitude": 137.0637962
+    },
+    {
+      "id": "jp_gifu_station_8239736745",
+      "osm_id": 8239736745,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "長森",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Nagamori"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4021469,
+      "longitude": 136.8027087
+    },
+    {
+      "id": "jp_gifu_station_8239748837",
+      "osm_id": 8239748837,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "各務ケ原",
+      "name_kana": "かがみがはら",
+      "name_translations": {
+        "en": "Kagamigahara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4039812,
+      "longitude": 136.9011497
+    },
+    {
+      "id": "jp_gifu_station_8239902224",
+      "osm_id": 8239902224,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "那加",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Naka"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4005695,
+      "longitude": 136.8353283
+    },
+    {
+      "id": "jp_gifu_station_8239984966",
+      "osm_id": 8239984966,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "坂祝",
+      "name_kana": "さかほぎ",
+      "name_translations": {
+        "en": "Sakahogi"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4264174,
+      "longitude": 136.9767996
+    },
+    {
+      "id": "jp_gifu_station_8239984968",
+      "osm_id": 8239984968,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "蘇原",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Sohara"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4031733,
+      "longitude": 136.8711513
+    },
+    {
+      "id": "jp_gifu_station_9198462022",
+      "osm_id": 9198462022,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "岐阜県駅、仮称",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Gifu Prefecture station(TBD)"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4804924,
+      "longitude": 137.4487048
+    },
+    {
+      "id": "jp_gifu_bus_terminal_12984727101",
+      "osm_id": 12984727101,
+      "osm_type": "node",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "神岡営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.3369478,
+      "longitude": 137.2952935
+    },
+    {
+      "id": "jp_gifu_bus_terminal_549307916",
+      "osm_id": 549307916,
+      "osm_type": "way",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "多治見駅前バスターミナル",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.3351559,
+      "longitude": 137.1221536
+    },
+    {
+      "id": "jp_gifu_bus_terminal_671938230",
+      "osm_id": 671938230,
+      "osm_type": "way",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "白川郷バスターミナル",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Shirakawa-go Bus Terminal"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.2619949,
+      "longitude": 136.906877
+    },
+    {
+      "id": "jp_gifu_bus_terminal_687009215",
+      "osm_id": 687009215,
+      "osm_type": "way",
+      "prefecture_id": "jp_gifu",
+      "type": "bus_terminal",
+      "subtype": null,
+      "name": "岐阜バス関営業所",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4885636,
+      "longitude": 136.9403798
+    },
+    {
+      "id": "jp_gifu_airport_902787183",
+      "osm_id": 902787183,
+      "osm_type": "way",
+      "prefecture_id": "jp_gifu",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "大野滑空場",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Ono Gliderport"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4496804,
+      "longitude": 136.6026948
+    },
+    {
+      "id": "jp_gifu_airport_902802375",
+      "osm_id": 902802375,
+      "osm_type": "way",
+      "prefecture_id": "jp_gifu",
+      "type": "airport",
+      "subtype": "domestic",
+      "name": "飛騨エアパーク",
+      "name_kana": "",
+      "name_translations": {
+        "en": "Hida Airpark"
+      },
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 36.1790372,
+      "longitude": 137.3138371
+    },
+    {
+      "id": "jp_gifu_station_1262389048",
+      "osm_id": 1262389048,
+      "osm_type": "way",
+      "prefecture_id": "jp_gifu",
+      "type": "station",
+      "subtype": "private",
+      "name": "関駅",
+      "name_kana": "",
+      "name_translations": null,
+      "operator": null,
+      "network": null,
+      "ref": null,
+      "latitude": 35.4900925,
+      "longitude": 136.9128437
+    }
+  ]
+}

@@ -2,10 +2,13 @@
 
 # dependencies
 node_modules/
+**/node_modules/
 
 # Expo
 .expo/
+**/.expo/
 dist/
+**/dist/
 web-build/
 expo-env.d.ts
 
@@ -30,6 +33,9 @@ yarn-error.*
 .DS_Store
 *.pem
 
+# VSCode workspace
+*.code-workspace
+
 # local env files
 .env
 .env*.local
@@ -42,6 +48,8 @@ app-example
 # generated native folders
 /ios
 /android
+**/ios/
+**/android/
 
 # SQLite database files
 *.db
@@ -55,3 +63,8 @@ scripts/data/admin_boundaries/
 scripts/data/admin_boundaries_old/
 scripts/data/city-code-mapping.json
 scripts/data/prefectures_data.json
+**/scripts/data/machi/
+**/scripts/data/transport/
+**/scripts/data/admin_boundaries/
+**/scripts/data/admin_boundaries_old/
+**/scripts/old/
