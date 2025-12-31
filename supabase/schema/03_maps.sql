@@ -124,11 +124,24 @@ ALTER TABLE public.maps ENABLE ROW LEVEL SECURITY;
 CREATE POLICY maps_select_public_or_own ON public.maps
     FOR SELECT USING (((is_public = true) OR ((auth.uid() IS NOT NULL) AND (user_id = auth.uid()))));
 CREATE POLICY maps_insert_own ON public.maps
-    FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+    FOR INSERT TO authenticated
+    WITH CHECK (
+        (user_id = auth.uid())
+        AND EXISTS (SELECT 1 FROM public.users WHERE id = auth.uid() AND status = 'active')
+    );
 CREATE POLICY maps_delete_own ON public.maps
-    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+    FOR DELETE TO authenticated
+    USING (
+        (user_id = auth.uid())
+        AND EXISTS (SELECT 1 FROM public.users WHERE id = auth.uid() AND status = 'active')
+    );
 CREATE POLICY maps_update_own ON public.maps
-    FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
+    FOR UPDATE TO authenticated
+    USING ((user_id = auth.uid()))
+    WITH CHECK (
+        (user_id = auth.uid())
+        AND EXISTS (SELECT 1 FROM public.users WHERE id = auth.uid() AND status = 'active')
+    );
 
 -- ============================================================
 -- map_tags（マップとタグの中間テーブル）

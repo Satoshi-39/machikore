@@ -155,6 +155,20 @@ async function createDeletionRequest(
     );
   }
 
+  // usersテーブルのstatusをdeletion_pendingに設定
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({
+      status: "deletion_pending",
+      deletion_requested_at: new Date().toISOString(),
+    })
+    .eq("id", userId);
+
+  if (updateError) {
+    console.error("[account-deletion] ユーザーステータス更新エラー:", updateError);
+    // リクエストは作成済みなので、エラーログのみ
+  }
+
   console.log(`[account-deletion] リクエスト作成成功: id=${data.id}`);
 
   return new Response(
@@ -211,6 +225,20 @@ async function cancelDeletionRequest(
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
     );
+  }
+
+  // usersテーブルのstatusをactiveに戻す
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({
+      status: "active",
+      deletion_requested_at: null,
+    })
+    .eq("id", userId);
+
+  if (updateError) {
+    console.error("[account-deletion] ユーザーステータス更新エラー:", updateError);
+    // キャンセルは成功しているので、エラーログのみ
   }
 
   console.log(`[account-deletion] キャンセル成功: id=${data.id}`);
@@ -308,10 +336,25 @@ async function processExpiredRequests(
 
   for (const request of expiredRequests) {
     try {
-      // 1. ユーザーの関連データを削除（CASCADE設定があれば自動削除される）
-      // 明示的に削除が必要な場合はここに追加
+      // 1. リクエストを完了にマーク + 個人情報を匿名化
+      // （ユーザー削除前に実行し、履歴として残す）
+      const { error: updateError } = await supabase
+        .from("deletion_requests")
+        .update({
+          email: null, // 匿名化
+          status: "completed",
+          completed_at: new Date().toISOString(),
+        })
+        .eq("id", request.id);
 
-      // 2. Auth userを削除
+      if (updateError) {
+        console.error(
+          `[account-deletion] リクエスト更新エラー: userId=${request.user_id}`,
+          updateError
+        );
+      }
+
+      // 2. Auth userを削除（これによりuser_id = NULLになる - ON DELETE SET NULL）
       const { error: deleteAuthError } = await supabase.auth.admin.deleteUser(
         request.user_id
       );
@@ -324,15 +367,6 @@ async function processExpiredRequests(
         errors.push(`${request.user_id}: ${deleteAuthError.message}`);
         continue;
       }
-
-      // 3. リクエストを完了にマーク
-      await supabase
-        .from("deletion_requests")
-        .update({
-          status: "completed",
-          completed_at: new Date().toISOString(),
-        })
-        .eq("id", request.id);
 
       console.log(`[account-deletion] 削除完了: userId=${request.user_id}`);
       processed++;

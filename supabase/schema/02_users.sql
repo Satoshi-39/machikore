@@ -26,7 +26,12 @@ CREATE TABLE public.users (
     gender text,
     age_group text,
     country text,
-    prefecture text
+    prefecture text,
+    -- ステータス管理（排他的な状態 + タイムスタンプ）
+    status text DEFAULT 'active' NOT NULL,
+    deletion_requested_at timestamp with time zone,
+    suspended_at timestamp with time zone,
+    suspended_reason text
 );
 
 COMMENT ON COLUMN public.users.username IS 'ユーザー名（@で表示される識別子）';
@@ -35,6 +40,10 @@ COMMENT ON COLUMN public.users.gender IS '性別: male, female, other（任意�
 COMMENT ON COLUMN public.users.age_group IS '年代: 10s, 20s, 30s, 40s, 50s, 60s+（任意）';
 COMMENT ON COLUMN public.users.country IS '居住国（ISO 3166-1 alpha-2）: jp, us, kr, etc.';
 COMMENT ON COLUMN public.users.prefecture IS '居住地域（日本の場合は都道府県、他国の場合は州など）';
+COMMENT ON COLUMN public.users.status IS 'ユーザーステータス: active=通常, deletion_pending=退会手続き中, suspended=一時停止, banned=永久BAN';
+COMMENT ON COLUMN public.users.deletion_requested_at IS '退会リクエスト日時';
+COMMENT ON COLUMN public.users.suspended_at IS '一時停止日時';
+COMMENT ON COLUMN public.users.suspended_reason IS '一時停止理由（管理者メモ）';
 
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_email_key UNIQUE (email);
@@ -43,9 +52,12 @@ ALTER TABLE ONLY public.users ADD CONSTRAINT users_gender_check
     CHECK (gender IS NULL OR gender IN ('male', 'female', 'other'));
 ALTER TABLE ONLY public.users ADD CONSTRAINT users_age_group_check
     CHECK (age_group IS NULL OR age_group IN ('10s', '20s', '30s', '40s', '50s', '60s+'));
+ALTER TABLE ONLY public.users ADD CONSTRAINT users_status_check
+    CHECK (status IN ('active', 'deletion_pending', 'suspended', 'banned'));
 
 CREATE INDEX idx_users_is_premium ON public.users USING btree (is_premium);
 CREATE INDEX idx_users_push_token ON public.users USING btree (push_token) WHERE (push_token IS NOT NULL);
+CREATE INDEX idx_users_status ON public.users USING btree (status) WHERE (status != 'active');
 
 CREATE TRIGGER update_users_updated_at
     BEFORE UPDATE ON public.users
@@ -57,7 +69,9 @@ CREATE POLICY users_select_all ON public.users FOR SELECT USING (true);
 CREATE POLICY users_insert_own ON public.users
     FOR INSERT TO authenticated WITH CHECK ((auth.uid() = id));
 CREATE POLICY users_update_own ON public.users
-    FOR UPDATE TO authenticated USING ((auth.uid() = id)) WITH CHECK ((auth.uid() = id));
+    FOR UPDATE TO authenticated
+    USING ((auth.uid() = id) AND (status = 'active'))
+    WITH CHECK ((auth.uid() = id) AND (status = 'active'));
 
 -- ============================================================
 -- follows（フォロー関係）

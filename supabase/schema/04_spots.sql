@@ -165,12 +165,22 @@ CREATE POLICY user_spots_select_public_or_own ON public.user_spots
 CREATE POLICY user_spots_insert_own_with_limit ON public.user_spots
     FOR INSERT TO authenticated WITH CHECK ((
         (EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid()))))
+        AND (EXISTS ( SELECT 1 FROM public.users WHERE ((id = auth.uid()) AND (status = 'active'))))
         AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))
     ));
 CREATE POLICY user_spots_delete_own ON public.user_spots
-    FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+    FOR DELETE TO authenticated
+    USING (
+        (user_id = auth.uid())
+        AND EXISTS (SELECT 1 FROM public.users WHERE id = auth.uid() AND status = 'active')
+    );
 CREATE POLICY user_spots_update_own ON public.user_spots
-    FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
+    FOR UPDATE TO authenticated
+    USING ((user_id = auth.uid()))
+    WITH CHECK (
+        (user_id = auth.uid())
+        AND EXISTS (SELECT 1 FROM public.users WHERE id = auth.uid() AND status = 'active')
+    );
 
 -- ============================================================
 -- images（スポット画像）
