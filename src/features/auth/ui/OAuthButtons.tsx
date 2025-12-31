@@ -12,10 +12,11 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface OAuthButtonsProps {
   onSuccess?: () => void;
+  mode: 'signup' | 'signin';
 }
 
-export function OAuthButtons({ onSuccess }: OAuthButtonsProps) {
-  const { signInWithOAuth, loadingProvider, error } = useOAuthSignIn();
+export function OAuthButtons({ onSuccess, mode }: OAuthButtonsProps) {
+  const { signInWithOAuth, loadingProvider, error } = useOAuthSignIn({ mode });
   const isDarkMode = useIsDarkMode();
   const appleIconColor = isDarkMode ? '#FFFFFF' : '#000000';
 

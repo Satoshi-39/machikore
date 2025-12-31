@@ -21,6 +21,7 @@ import { verifyOtpCode, sendOtpCode } from '@/shared/api/supabase/auth';
 import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface VerifyCodePageProps {
   email: string;
@@ -31,6 +32,7 @@ interface VerifyCodePageProps {
 export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps) {
   const { t } = useI18n();
   const insets = useSafeAreaInsets();
+  const isDarkMode = useIsDarkMode();
   const [code, setCode] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [isResending, setIsResending] = useState(false);
@@ -122,15 +124,16 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
     >
       {/* ヘッダー */}
       <View
-        className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light"
+        className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light"
         style={{ paddingTop: insets.top + 12 }}
       >
-        <TouchableOpacity onPress={onBack} className="p-2 -ml-2">
-          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
+        <TouchableOpacity onPress={onBack} className="w-10 -ml-1 p-1">
+          <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark.foreground : '#007AFF'} />
         </TouchableOpacity>
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground ml-2">
+        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
           {t('auth.verify')}
         </Text>
+        <View className="w-10" />
       </View>
 
       <View className="flex-1 px-6 pt-8">

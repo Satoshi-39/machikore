@@ -11,15 +11,23 @@ import {
   signInWithApple,
   handleOAuthCallback,
 } from '@/shared/api/supabase/auth';
+import { supabase } from '@/shared/api/supabase/client';
+import { checkEmailExists } from '@/shared/api/supabase/users';
+import { useI18n } from '@/shared/lib/i18n';
 
 // WebBrowserのセッションを適切に管理
 WebBrowser.maybeCompleteAuthSession();
 
 type OAuthProvider = 'google' | 'apple';
+type AuthMode = 'signup' | 'signin';
 
 interface OAuthResult {
   status: 'success' | 'cancel' | 'error';
   error?: string;
+}
+
+interface UseOAuthSignInProps {
+  mode: AuthMode;
 }
 
 interface UseOAuthSignInReturn {
@@ -31,7 +39,8 @@ interface UseOAuthSignInReturn {
 /**
  * OAuth サインイン機能のフック
  */
-export function useOAuthSignIn(): UseOAuthSignInReturn {
+export function useOAuthSignIn({ mode }: UseOAuthSignInProps): UseOAuthSignInReturn {
+  const { t } = useI18n();
   const [loadingProvider, setLoadingProvider] = useState<OAuthProvider | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -63,6 +72,31 @@ export function useOAuthSignIn(): UseOAuthSignInReturn {
 
         if (!callbackResult.success) {
           throw callbackResult.error;
+        }
+
+        // 4. セッションからユーザー情報を取得して存在チェック
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user?.email) {
+          const email = session.user.email;
+          // OAuth認証成功後、public.usersにこのメールが既に登録されていたかをチェック
+          // 注意: この時点でauth.usersには登録されているが、public.usersはupsert前なのでチェック可能
+          const emailExistsInPublicUsers = await checkEmailExists(email);
+
+          if (mode === 'signup' && emailExistsInPublicUsers) {
+            // アカウント作成モードで既存ユーザー → サインアウトしてエラー
+            await supabase.auth.signOut();
+            const errorMessage = t('auth.emailAlreadyRegistered');
+            setError(errorMessage);
+            return { status: 'error', error: errorMessage };
+          }
+
+          if (mode === 'signin' && !emailExistsInPublicUsers) {
+            // ログインモードで新規ユーザー → サインアウトしてエラー
+            await supabase.auth.signOut();
+            const errorMessage = t('auth.emailNotRegistered');
+            setError(errorMessage);
+            return { status: 'error', error: errorMessage };
+          }
         }
 
         // AuthProviderのonAuthStateChangeで自動的にユーザー情報が設定される

@@ -24,7 +24,7 @@ export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
       <PageHeader title="ログイン" />
       <ScrollView className="flex-1" contentContainerStyle={{ paddingVertical: 24 }}>
       {/* OAuth認証ボタン */}
-      <OAuthButtons onSuccess={onSuccess} />
+      <OAuthButtons onSuccess={onSuccess} mode="signin" />
 
       {/* 区切り線 */}
       <View className="flex-row items-center my-6 px-6">

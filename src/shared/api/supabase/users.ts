@@ -149,6 +149,39 @@ export async function clearPushToken(): Promise<void> {
 }
 
 // ===============================
+// メールアドレス関連
+// ===============================
+
+/**
+ * メールアドレスが既に登録されているかチェック
+ * @param email - チェックするメールアドレス
+ * @returns true: 既に登録されている, false: 未登録
+ */
+export async function checkEmailExists(email: string): Promise<boolean> {
+  if (!email) return false;
+
+  const normalizedEmail = email.toLowerCase().trim();
+
+  const { data, error } = await supabase
+    .from('users')
+    .select('id')
+    .eq('email', normalizedEmail)
+    .single();
+
+  if (error && error.code === 'PGRST116') {
+    // Not found = not registered
+    return false;
+  }
+
+  // その他のエラーの場合もfalseを返す（安全側に倒す）
+  if (error) {
+    return false;
+  }
+
+  return !!data;
+}
+
+// ===============================
 // ユーザー名関連
 // ===============================
 

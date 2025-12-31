@@ -5,9 +5,11 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface MapLabel {
   id: string;
@@ -30,21 +32,34 @@ export function LabelPicker({
   selectedLabelId,
   onLabelChange,
   isLoading = false,
-  placeholder = 'ラベルを選択（任意）',
+  placeholder,
   zIndex = 3000,
   zIndexInverse = 1000,
 }: LabelPickerProps) {
   const [open, setOpen] = useState(false);
+  const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
+
+  // テーマに応じた色を取得
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   // ラベルをドロップダウン用のアイテムに変換
   const items = [
     {
-      label: 'ラベルなし',
+      label: t('label.noLabel'),
       value: '__none__',
-      // 斜線付き丸アイコン
       icon: () => (
-        <View style={styles.noLabelIcon}>
-          <View style={styles.noLabelLine} />
+        <View
+          className="w-3 h-3 rounded-full border-[1.5px] mr-2 justify-center items-center overflow-hidden"
+          style={{ borderColor: themeColors.foregroundMuted }}
+        >
+          <View
+            className="w-4 h-[1.5px]"
+            style={{
+              backgroundColor: themeColors.foregroundMuted,
+              transform: [{ rotate: '45deg' }],
+            }}
+          />
         </View>
       ),
     },
@@ -53,7 +68,8 @@ export function LabelPicker({
       value: label.id,
       icon: () => (
         <View
-          style={[styles.colorDot, { backgroundColor: label.color }]}
+          className="w-3 h-3 rounded-full mr-2"
+          style={{ backgroundColor: label.color }}
         />
       ),
     })),
@@ -70,9 +86,22 @@ export function LabelPicker({
 
   if (labels.length === 0) {
     return (
-      <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>ラベルがありません</Text>
-        <Text style={styles.emptySubText}>マップ設定でラベルを追加できます</Text>
+      <View
+        className="rounded-lg px-4 py-3"
+        style={{ backgroundColor: themeColors.surfaceSecondary }}
+      >
+        <Text
+          className="text-sm text-center"
+          style={{ color: themeColors.foregroundMuted }}
+        >
+          {t('label.noLabels')}
+        </Text>
+        <Text
+          className="text-xs text-center mt-1"
+          style={{ color: themeColors.foregroundSecondary }}
+        >
+          {t('label.addFromMapSettings')}
+        </Text>
       </View>
     );
   }
@@ -84,86 +113,37 @@ export function LabelPicker({
       items={items}
       setOpen={setOpen}
       setValue={handleChange}
-      placeholder={placeholder}
+      placeholder={placeholder || t('label.selectLabel')}
       listMode="SCROLLVIEW"
       scrollViewProps={{
         nestedScrollEnabled: true,
       }}
       zIndex={zIndex}
       zIndexInverse={zIndexInverse}
-      style={styles.dropdown}
-      dropDownContainerStyle={styles.dropdownContainer}
-      textStyle={styles.text}
-      placeholderStyle={styles.placeholder}
-      listItemContainerStyle={styles.listItem}
-      selectedItemContainerStyle={styles.selectedItem}
+      style={{
+        backgroundColor: themeColors.surface,
+        borderColor: themeColors.border,
+        borderRadius: 8,
+        minHeight: 48,
+      }}
+      dropDownContainerStyle={{
+        backgroundColor: themeColors.surface,
+        borderColor: themeColors.border,
+        borderRadius: 8,
+      }}
+      textStyle={{
+        fontSize: 16,
+        color: themeColors.foreground,
+      }}
+      placeholderStyle={{
+        color: themeColors.foregroundMuted,
+      }}
+      listItemContainerStyle={{
+        height: 48,
+      }}
+      selectedItemContainerStyle={{
+        backgroundColor: `${colors.primary.DEFAULT}15`,
+      }}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  colorDot: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    marginRight: 8,
-  },
-  noLabelIcon: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    borderWidth: 1.5,
-    borderColor: '#9CA3AF',
-    marginRight: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  noLabelLine: {
-    width: 16,
-    height: 1.5,
-    backgroundColor: '#9CA3AF',
-    transform: [{ rotate: '45deg' }],
-  },
-  emptyContainer: {
-    backgroundColor: '#F3F4F6',
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  emptyText: {
-    fontSize: 14,
-    color: '#9CA3AF',
-    textAlign: 'center',
-  },
-  emptySubText: {
-    fontSize: 12,
-    color: '#6B7280',
-    textAlign: 'center',
-    marginTop: 4,
-  },
-  dropdown: {
-    backgroundColor: '#FFFFFF',
-    borderColor: '#E5E7EB',
-    borderRadius: 8,
-    minHeight: 48,
-  },
-  dropdownContainer: {
-    backgroundColor: '#FFFFFF',
-    borderColor: '#E5E7EB',
-    borderRadius: 8,
-  },
-  text: {
-    fontSize: 16,
-    color: '#1F2937',
-  },
-  placeholder: {
-    color: '#9CA3AF',
-  },
-  listItem: {
-    height: 48,
-  },
-  selectedItem: {
-    backgroundColor: '#EFF6FF',
-  },
-});

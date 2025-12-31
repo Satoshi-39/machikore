@@ -625,7 +625,7 @@ export type Database = {
           scheduled_at: string
           status: string
           updated_at: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           cancelled_at?: string | null
@@ -638,7 +638,7 @@ export type Database = {
           scheduled_at?: string
           status?: string
           updated_at?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           cancelled_at?: string | null
@@ -651,7 +651,7 @@ export type Database = {
           scheduled_at?: string
           status?: string
           updated_at?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -1951,6 +1951,7 @@ export type Database = {
           content_languages: string[] | null
           created_at: string
           locale: string
+          preferred_categories: string[] | null
           theme: string
           updated_at: string
           user_id: string
@@ -1959,6 +1960,7 @@ export type Database = {
           content_languages?: string[] | null
           created_at?: string
           locale?: string
+          preferred_categories?: string[] | null
           theme?: string
           updated_at?: string
           user_id: string
@@ -1967,6 +1969,7 @@ export type Database = {
           content_languages?: string[] | null
           created_at?: string
           locale?: string
+          preferred_categories?: string[] | null
           theme?: string
           updated_at?: string
           user_id?: string
@@ -2131,6 +2134,7 @@ export type Database = {
           bio: string | null
           country: string | null
           created_at: string
+          deletion_requested_at: string | null
           display_name: string
           email: string
           gender: string | null
@@ -2141,6 +2145,9 @@ export type Database = {
           premium_started_at: string | null
           push_token: string | null
           push_token_updated_at: string | null
+          status: string
+          suspended_at: string | null
+          suspended_reason: string | null
           updated_at: string
           username: string
         }
@@ -2150,6 +2157,7 @@ export type Database = {
           bio?: string | null
           country?: string | null
           created_at?: string
+          deletion_requested_at?: string | null
           display_name: string
           email: string
           gender?: string | null
@@ -2160,6 +2168,9 @@ export type Database = {
           premium_started_at?: string | null
           push_token?: string | null
           push_token_updated_at?: string | null
+          status?: string
+          suspended_at?: string | null
+          suspended_reason?: string | null
           updated_at?: string
           username: string
         }
@@ -2169,6 +2180,7 @@ export type Database = {
           bio?: string | null
           country?: string | null
           created_at?: string
+          deletion_requested_at?: string | null
           display_name?: string
           email?: string
           gender?: string | null
@@ -2179,6 +2191,9 @@ export type Database = {
           premium_started_at?: string | null
           push_token?: string | null
           push_token_updated_at?: string | null
+          status?: string
+          suspended_at?: string | null
+          suspended_reason?: string | null
           updated_at?: string
           username?: string
         }

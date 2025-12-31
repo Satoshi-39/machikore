@@ -74,6 +74,13 @@ function RootNavigator() {
             }}
           />
           <Stack.Screen
+            name="auth/verify"
+            options={{
+              presentation: 'card',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
             name="auth/auth-required"
             options={{
               presentation: 'transparentModal',

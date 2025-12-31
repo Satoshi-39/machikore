@@ -62,6 +62,8 @@ export async function upsertUserToSupabase(authUser: {
   }
 
   const now = new Date().toISOString();
+  // メールアドレスを正規化（小文字+trim）
+  const normalizedEmail = (authUser.email || '').toLowerCase().trim();
 
   if (isNewUser) {
     // 新規ユーザー: OAuthのmetadataからプロフィール情報を設定
@@ -80,7 +82,7 @@ export async function upsertUserToSupabase(authUser: {
       .from('users')
       .insert({
         id: authUser.id,
-        email: authUser.email || '',
+        email: normalizedEmail,
         username,
         display_name: displayName,
         avatar_url: avatarUrl,
@@ -96,7 +98,7 @@ export async function upsertUserToSupabase(authUser: {
     const { error } = await supabase
       .from('users')
       .update({
-        email: authUser.email || '',
+        email: normalizedEmail,
         updated_at: now,
       })
       .eq('id', authUser.id);
