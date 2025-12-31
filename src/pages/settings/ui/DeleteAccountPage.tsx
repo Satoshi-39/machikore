@@ -40,8 +40,8 @@ export function DeleteAccountPage() {
               if (response.success) {
                 // 即座にサインアウト
                 await signOut();
-                // ログイン画面に遷移
-                router.replace('/auth/sign-in');
+                // ホーム画面（ゲスト状態）に遷移
+                router.replace('/');
               } else {
                 Alert.alert(t('common.error'), response.error ?? t('common.error'));
                 setIsSubmitting(false);
