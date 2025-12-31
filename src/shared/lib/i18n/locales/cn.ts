@@ -82,6 +82,7 @@ export default {
     steps: {
       profile: '个人资料设置',
       demographics: '基本信息',
+      categories: '分类',
     },
     profile: {
       title: '个人资料设置',
@@ -109,6 +110,16 @@ export default {
       prefecture: '省份',
       region: '州/地区',
       continue: '继续',
+    },
+    categories: {
+      title: '喜欢的分类',
+      description: '选择您感兴趣的分类（可选）',
+      maxSelection: '最多可选择{{max}}个',
+    },
+    completion: {
+      title: '设置完成！',
+      subtitle: '欢迎来到街コレ！\n发现您喜欢的地点，创建属于自己的地图。',
+      start: '开始使用',
     },
   },
 

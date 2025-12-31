@@ -1,12 +1,13 @@
 /**
  * オンボーディング進捗インジケーター
  *
- * ハイブリッド形式：ドット + 接続線 + ステップ番号/タイトル
+ * ドット + 接続線 + 各ステップ名ラベル
  */
 
 import React from 'react';
 import { View, Text } from 'react-native';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 export interface OnboardingStep {
   key: string;
@@ -19,36 +20,60 @@ interface OnboardingProgressProps {
 }
 
 export function OnboardingProgress({ steps, currentStep }: OnboardingProgressProps) {
-  const totalSteps = steps.length;
-  const currentStepData = steps[currentStep];
+  const { t } = useI18n();
+
+  // 最終ステップ「完了」を追加
+  const displaySteps = [
+    ...steps,
+    { key: 'complete', title: t('common.done') },
+  ];
 
   return (
-    <View className="items-center py-6">
-      {/* ドット + 接続線 */}
-      <View className="flex-row items-center mb-4">
-        {steps.map((step, index) => {
+    <View className="items-center py-4">
+      {/* ドット + 接続線 + ラベル */}
+      <View className="flex-row items-start justify-center">
+        {displaySteps.map((step, index) => {
           const isCompleted = index < currentStep;
           const isCurrent = index === currentStep;
-          const isLast = index === totalSteps - 1;
+          const isLast = index === displaySteps.length - 1;
 
           return (
-            <View key={step.key} className="flex-row items-center">
-              {/* ドット */}
-              <View
-                className="w-3 h-3 rounded-full"
-                style={{
-                  backgroundColor: isCompleted || isCurrent
-                    ? colors.primary.DEFAULT
-                    : colors.gray[300],
-                }}
-              />
+            <View key={step.key} className="flex-row items-start">
+              {/* ドットとラベルのコンテナ */}
+              <View className="items-center" style={{ width: 70 }}>
+                {/* ドット */}
+                <View
+                  className="w-3 h-3 rounded-full"
+                  style={{
+                    backgroundColor: isCompleted || isCurrent
+                      ? colors.primary.DEFAULT
+                      : colors.gray[300],
+                  }}
+                />
+                {/* ラベル */}
+                <Text
+                  className="text-xs mt-2 text-center"
+                  style={{
+                    color: isCurrent
+                      ? colors.primary.DEFAULT
+                      : isCompleted
+                        ? colors.gray[500]
+                        : colors.gray[400],
+                    fontWeight: isCurrent ? '600' : '400',
+                  }}
+                  numberOfLines={1}
+                >
+                  {step.title}
+                </Text>
+              </View>
 
               {/* 接続線 */}
               {!isLast && (
                 <View
-                  className="h-0.5 mx-1"
+                  className="h-0.5 mt-1.5"
                   style={{
-                    width: 40,
+                    width: 24,
+                    marginHorizontal: -12,
                     backgroundColor: isCompleted
                       ? colors.primary.DEFAULT
                       : colors.gray[300],
@@ -59,14 +84,6 @@ export function OnboardingProgress({ steps, currentStep }: OnboardingProgressPro
           );
         })}
       </View>
-
-      {/* ステップ番号とタイトル */}
-      <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
-        {currentStep + 1} / {totalSteps}
-      </Text>
-      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mt-1">
-        {currentStepData?.title}
-      </Text>
     </View>
   );
 }

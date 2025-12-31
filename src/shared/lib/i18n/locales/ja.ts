@@ -82,6 +82,7 @@ export default {
     steps: {
       profile: 'プロフィール設定',
       demographics: '属性情報',
+      categories: 'カテゴリ',
     },
     profile: {
       title: 'プロフィール設定',
@@ -109,6 +110,11 @@ export default {
       prefecture: '都道府県',
       region: '州・地域',
       continue: '次へ',
+    },
+    categories: {
+      title: '好きなカテゴリ',
+      description: '興味のあるカテゴリを選んでください（任意）',
+      maxSelection: '最大{{max}}つまで選択できます',
     },
     completion: {
       title: '設定完了！',

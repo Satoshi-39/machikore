@@ -289,16 +289,19 @@ CREATE TABLE public.user_preferences (
     theme text DEFAULT 'system' NOT NULL,
     locale text DEFAULT 'system' NOT NULL,
     content_languages text[] DEFAULT ARRAY[]::text[],
+    preferred_categories text[] DEFAULT ARRAY[]::text[],
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     CONSTRAINT user_preferences_theme_check CHECK ((theme = ANY (ARRAY['light'::text, 'dark'::text, 'system'::text]))),
-    CONSTRAINT user_preferences_locale_check CHECK ((locale = ANY (ARRAY['ja'::text, 'en'::text, 'cn'::text, 'tw'::text, 'system'::text])))
+    CONSTRAINT user_preferences_locale_check CHECK ((locale = ANY (ARRAY['ja'::text, 'en'::text, 'cn'::text, 'tw'::text, 'system'::text]))),
+    CONSTRAINT user_preferences_preferred_categories_max_3 CHECK ((array_length(preferred_categories, 1) IS NULL OR array_length(preferred_categories, 1) <= 3))
 );
 
 COMMENT ON TABLE public.user_preferences IS 'ユーザーのアプリ設定（テーマ、言語など）';
 COMMENT ON COLUMN public.user_preferences.theme IS 'テーマ設定: light, dark, system（デフォルト: system）';
 COMMENT ON COLUMN public.user_preferences.locale IS 'UI言語設定: ja, en, cn, tw, system（デフォルト: system）';
 COMMENT ON COLUMN public.user_preferences.content_languages IS 'コンテンツ言語フィルター: 見たい言語コードの配列（空配列=全言語表示）';
+COMMENT ON COLUMN public.user_preferences.preferred_categories IS '好みのカテゴリID（最大3つ、オンボーディングで収集）';
 
 ALTER TABLE ONLY public.user_preferences ADD CONSTRAINT user_preferences_pkey PRIMARY KEY (user_id);
 ALTER TABLE ONLY public.user_preferences ADD CONSTRAINT user_preferences_user_id_fkey

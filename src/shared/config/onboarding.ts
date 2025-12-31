@@ -12,6 +12,7 @@ import type { OnboardingStep } from '@/shared/ui';
 export const ONBOARDING_STEP_KEYS = {
   PROFILE: 'profile',
   DEMOGRAPHICS: 'demographics',
+  CATEGORIES: 'categories',
 } as const;
 
 export type OnboardingStepKey =
@@ -29,6 +30,10 @@ export function getOnboardingSteps(
     {
       key: ONBOARDING_STEP_KEYS.DEMOGRAPHICS,
       title: t('onboarding.steps.demographics'),
+    },
+    {
+      key: ONBOARDING_STEP_KEYS.CATEGORIES,
+      title: t('onboarding.steps.categories'),
     },
   ];
 }

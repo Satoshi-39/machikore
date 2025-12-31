@@ -82,6 +82,7 @@ export default {
     steps: {
       profile: 'Profile Setup',
       demographics: 'About You',
+      categories: 'Categories',
     },
     profile: {
       title: 'Profile Setup',
@@ -109,6 +110,11 @@ export default {
       prefecture: 'Prefecture',
       region: 'State / Region',
       continue: 'Continue',
+    },
+    categories: {
+      title: 'Favorite Categories',
+      description: 'Select the categories you are interested in (optional)',
+      maxSelection: 'You can select up to {{max}}',
     },
     completion: {
       title: 'All Set!',

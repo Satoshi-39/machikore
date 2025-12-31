@@ -38,7 +38,7 @@ import { useSubscriptionStore } from '@/entities/subscription';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { syncLocalPreferencesToServer } from '@/entities/user/api/use-user-preferences';
 import { getCurrentLocale } from '@/shared/lib/i18n';
-import { ProfileSetupStep, DemographicsStep } from '@/pages/onboarding';
+import { ProfileSetupStep, DemographicsStep, CategoryPreferenceStep, CompletionStep } from '@/pages/onboarding';
 import type { User } from '@/entities/user/model';
 
 interface AuthProviderProps {
@@ -153,6 +153,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [isInitializing, setIsInitializing] = useState(true);
   const [showProfileSetup, setShowProfileSetup] = useState(false);
   const [showDemographics, setShowDemographics] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
+  const [showCompletion, setShowCompletion] = useState(false);
   const { setUser, setAuthState } = useUserStore();
   const { setSubscriptionStatus, reset: resetSubscription } = useSubscriptionStore();
 
@@ -172,6 +174,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const handleDemographicsComplete = useCallback(() => {
     log.debug('[AuthProvider] デモグラフィック入力完了');
     setShowDemographics(false);
+    setShowCategories(true);
+  }, []);
+
+  // カテゴリ選択完了時のハンドラ
+  const handleCategoriesComplete = useCallback(() => {
+    log.debug('[AuthProvider] カテゴリ選択完了');
+    setShowCategories(false);
+    setShowCompletion(true);
+  }, []);
+
+  // 完了画面のハンドラ
+  const handleCompletionComplete = useCallback(() => {
+    log.debug('[AuthProvider] オンボーディング完了');
+    setShowCompletion(false);
   }, []);
 
   useEffect(() => {
@@ -351,6 +367,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // デモグラフィック入力画面（初回サインアップ時）
   if (showDemographics) {
     return <DemographicsStep onComplete={handleDemographicsComplete} />;
+  }
+
+  // カテゴリ選択画面（初回サインアップ時）
+  if (showCategories) {
+    return <CategoryPreferenceStep onComplete={handleCategoriesComplete} />;
+  }
+
+  // 完了画面（初回サインアップ時）
+  if (showCompletion) {
+    return <CompletionStep onComplete={handleCompletionComplete} />;
   }
 
   return <>{children}</>;

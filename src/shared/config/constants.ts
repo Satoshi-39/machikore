@@ -585,3 +585,12 @@ export const EXTERNAL_LINKS = {
   /** ヘルプ（Notion） */
   HELP: 'https://cobalt-aurora-096.notion.site/2d6b92c6afac80fc8004fa756426ed7f?pvs=74',
 } as const;
+
+// ===============================
+// ユーザー設定
+// ===============================
+
+export const USER_PREFERENCES = {
+  /** 好みのカテゴリの最大選択数 */
+  MAX_PREFERRED_CATEGORIES: 3,
+} as const;

@@ -24,6 +24,7 @@ export interface UserPreferences {
   theme: ThemePreference;
   locale: LocalePreference;
   content_languages: ContentLanguage[];
+  preferred_categories: string[];
   created_at: string;
   updated_at: string;
 }
@@ -32,6 +33,7 @@ export interface UpdateUserPreferencesParams {
   theme?: ThemePreference;
   locale?: LocalePreference;
   content_languages?: ContentLanguage[];
+  preferred_categories?: string[];
 }
 
 /**
@@ -116,4 +118,11 @@ export async function updateLocalePreference(locale: LocalePreference): Promise<
  */
 export async function updateContentLanguages(content_languages: ContentLanguage[]): Promise<UserPreferences> {
   return upsertUserPreferences({ content_languages });
+}
+
+/**
+ * 好みのカテゴリ設定のみ更新
+ */
+export async function updatePreferredCategories(preferred_categories: string[]): Promise<UserPreferences> {
+  return upsertUserPreferences({ preferred_categories });
 }
