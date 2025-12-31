@@ -32,7 +32,9 @@ Deno.serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { action } = await req.json();
+    // リクエストボディを一度だけパース
+    const body = await req.json();
+    const { action, reason } = body;
 
     // processアクションはcronからの呼び出し（認証不要、シークレットキーで認証）
     if (action === "process") {
@@ -67,8 +69,6 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-
-    const { reason } = await req.clone().json().catch(() => ({}));
 
     switch (action) {
       case "create":
