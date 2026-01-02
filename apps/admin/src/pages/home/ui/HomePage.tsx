@@ -1,18 +1,39 @@
 import { Users, MapPin, Building2, Map } from "lucide-react";
+import { createServerClient } from "@/shared/api";
 
-const stats = [
-  { name: "総ユーザー数", value: "1,234", icon: Users },
-  { name: "総スポット数", value: "5,678", icon: MapPin },
-  { name: "総街数", value: "123", icon: Building2 },
-  { name: "総マップ数", value: "456", icon: Map },
-];
+async function getStats() {
+  const supabase = await createServerClient();
 
-export function HomePage() {
+  const [usersResult, spotsResult, machiResult, mapsResult] = await Promise.all([
+    supabase.from("users").select("*", { count: "exact", head: true }),
+    supabase.from("user_spots").select("*", { count: "exact", head: true }),
+    supabase.from("machi").select("*", { count: "exact", head: true }),
+    supabase.from("maps").select("*", { count: "exact", head: true }),
+  ]);
+
+  return {
+    users: usersResult.count ?? 0,
+    spots: spotsResult.count ?? 0,
+    machi: machiResult.count ?? 0,
+    maps: mapsResult.count ?? 0,
+  };
+}
+
+export async function HomePage() {
+  const stats = await getStats();
+
+  const statItems = [
+    { name: "総ユーザー数", value: stats.users.toLocaleString(), icon: Users },
+    { name: "総スポット数", value: stats.spots.toLocaleString(), icon: MapPin },
+    { name: "総街数", value: stats.machi.toLocaleString(), icon: Building2 },
+    { name: "総マップ数", value: stats.maps.toLocaleString(), icon: Map },
+  ];
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900">ダッシュボード</h1>
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
+        {statItems.map((stat) => (
           <div
             key={stat.name}
             className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"

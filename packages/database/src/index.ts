@@ -5,6 +5,7 @@
  */
 
 export * from './types';
+export * from './client';
 
 // 共通の型エイリアス
 export type { Database, Json } from './types';

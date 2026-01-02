@@ -21,11 +21,15 @@ const navigation = [
   { name: "設定", href: "/settings", icon: Settings },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  onNavigate?: () => void;
+}
+
+export function Sidebar({ onNavigate }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
+    <aside className="fixed inset-y-0 z-50 flex w-64 flex-col">
       <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
         <div className="flex h-16 shrink-0 items-center">
           <span className="text-xl font-bold text-gray-900">街コレ管理</span>
@@ -40,6 +44,7 @@ export function Sidebar() {
                     <li key={item.name}>
                       <Link
                         href={item.href}
+                        onClick={onNavigate}
                         className={cn(
                           isActive
                             ? "bg-gray-100 text-gray-900"

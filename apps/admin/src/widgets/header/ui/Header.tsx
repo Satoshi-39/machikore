@@ -1,6 +1,8 @@
 "use client";
 
-import { Menu, Bell } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Menu, Bell, LogOut } from "lucide-react";
+import { createBrowserClient } from "@/shared/api/supabase/client";
 import { Button } from "@/shared/ui/button";
 import {
   DropdownMenu,
@@ -17,6 +19,15 @@ interface HeaderProps {
 }
 
 export function Header({ onMenuClick }: HeaderProps) {
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    const supabase = createBrowserClient();
+    await supabase.auth.signOut();
+    router.push("/login");
+    router.refresh();
+  };
+
   return (
     <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
       <Button
@@ -56,7 +67,10 @@ export function Header({ onMenuClick }: HeaderProps) {
               <DropdownMenuItem>プロフィール</DropdownMenuItem>
               <DropdownMenuItem>設定</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>ログアウト</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleSignOut} className="text-red-600">
+                <LogOut className="mr-2 h-4 w-4" />
+                ログアウト
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
