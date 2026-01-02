@@ -49,15 +49,11 @@ export async function updateSession(request: NextRequest) {
   }
 
   // 管理者かどうかをチェック
-  const { data: adminData, error: adminError } = await supabase
+  const { data: adminData } = await supabase
     .from("admin_users")
     .select("user_id, role")
     .eq("user_id", user.id)
     .single();
-
-  console.log("Logged in user:", user.id, user.email);
-  console.log("Admin data:", adminData);
-  console.log("Admin error:", adminError);
 
   const adminUser: AdminUser | null = adminData
     ? { userId: adminData.user_id, role: adminData.role as AdminRoleType }
