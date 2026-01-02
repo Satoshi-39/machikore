@@ -5,25 +5,25 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert, ActivityIndicator, Keyboard } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, LOCATION_ICONS, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
-import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync, shareSpot } from '@/shared/lib';
+import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync, shareSpot, useSpotColor } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
-import { useSpotComments, useAddSpotComment, useAddReplyComment, CommentItem } from '@/entities/comment';
+import { useSpotComments, CommentItem } from '@/entities/comment';
+import { useSpotCommentInput } from '../model';
 import { useUser } from '@/entities/user';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
-import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface SpotDetailCardProps {
   spot: SpotWithDetails;
@@ -92,14 +92,20 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // コメント関連
   const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 50, 0, currentUserId);
   const { data: currentUser } = useUser(currentUserId ?? null);
-  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
-  const [inputText, setInputText] = useState('');
-  const [replyingTo, setReplyingTo] = useState<CommentWithUser | null>(null);
 
-  // コメント投稿
-  const { mutate: addComment, isPending: isAddingComment } = useAddSpotComment();
-  const { mutate: addReply, isPending: isAddingReply } = useAddReplyComment();
-  const isSubmitting = isAddingComment || isAddingReply;
+  // コメント入力管理フック
+  const {
+    isCommentModalVisible,
+    inputText,
+    setInputText,
+    isSubmitting,
+    replyTarget,
+    openCommentModal,
+    closeCommentModal,
+    handleReply,
+    cancelReply,
+    handleCommentSubmit,
+  } = useSpotCommentInput({ spotId: spot.id, currentUserId });
 
   // コメント操作フック（編集・削除・いいね用）
   const {
@@ -114,67 +120,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     isUpdatingComment,
   } = useCommentActions({ spotId: spot.id, currentUserId });
 
-  // コメントモーダルを開く
-  const openCommentModal = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('コメント');
-      return;
-    }
-    setIsCommentModalVisible(true);
-  }, [currentUserId]);
-
-  // コメントモーダルを閉じる
-  const closeCommentModal = useCallback(() => {
-    setIsCommentModalVisible(false);
-    setReplyingTo(null);
-  }, []);
-
-  // 返信ハンドラー
-  const handleReply = useCallback((comment: CommentWithUser) => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('返信');
-      return;
-    }
-    setReplyingTo(comment);
-    setIsCommentModalVisible(true);
-  }, [currentUserId]);
-
-  // 返信キャンセル
-  const cancelReply = useCallback(() => {
-    setReplyingTo(null);
-  }, []);
-
-  // コメント送信
-  const handleCommentSubmit = useCallback(() => {
-    if (!currentUserId || !inputText.trim() || isSubmitting) return;
-
-    const content = inputText.trim();
-
-    const onSuccess = () => {
-      setInputText('');
-      setReplyingTo(null);
-      setIsCommentModalVisible(false);
-      Keyboard.dismiss();
-    };
-
-    if (replyingTo) {
-      addReply(
-        { userId: currentUserId, parentComment: replyingTo, content },
-        { onSuccess }
-      );
-    } else {
-      addComment(
-        { userId: currentUserId, spotId: spot.id, content },
-        { onSuccess }
-      );
-    }
-  }, [currentUserId, inputText, replyingTo, spot.id, addReply, addComment, isSubmitting]);
-
-  // 返信先の表示名
-  const replyTarget = replyingTo
-    ? { displayName: replyingTo.user?.display_name || replyingTo.user?.username || '' }
-    : null;
-
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
 
@@ -186,20 +131,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const spotAddress = spot.master_spot?.google_short_address || spot.google_short_address;
 
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
-  const spotColor = useMemo((): SpotColor => {
-    // ラベルが設定されている場合はラベル色を優先
-    if (spot.map_label?.color) {
-      const labelColorKey = SPOT_COLOR_LIST.find((c) => c.color === spot.map_label?.color)?.key;
-      if (labelColorKey) return labelColorKey;
-    }
-    // スポット色が設定されている場合
-    if (spot.spot_color) {
-      return spot.spot_color as SpotColor;
-    }
-    return DEFAULT_SPOT_COLOR;
-  }, [spot.map_label?.color, spot.spot_color]);
-  const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
-  const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
+  const { colorValue: spotColorValue, strokeColor: spotColorStroke } = useSpotColor(spot, isDarkMode);
 
   // スポットの画像を取得
   const { data: images = [] } = useSpotImages(spot.id);

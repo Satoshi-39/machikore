@@ -2,7 +2,7 @@
  * デフォルトマップビューWidget - マスターデータのmachi表示
  */
 
-import React, { useRef, useImperativeHandle, forwardRef, useMemo, useCallback, useState } from 'react';
+import React, { useRef, useImperativeHandle, forwardRef, useCallback, useState } from 'react';
 import { View, Dimensions } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useFocusEffect } from 'expo-router';
@@ -24,13 +24,12 @@ import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, MachiSpotTrans
 import { CountryLabels } from './layers/country-labels';
 import { useRegions, useRegionsGeoJson } from '@/entities/region';
 import { useCountries, useCountriesGeoJson } from '@/entities/country';
-import { useBoundsManagement, useCenterLocationName } from '../model';
+import { useBoundsManagement, useCenterLocationName, useMapData, useSelectedLocation } from '../model';
 import { DefaultMapHeader } from './default-map-header';
 import { CountryDetailCard } from './country-detail-card';
 import { RegionDetailCard } from './region-detail-card';
 import { PrefectureDetailCard } from './prefecture-detail-card';
 import type { MachiRow, CityRow, PrefectureRow, RegionRow, CountryRow } from '@/shared/types/database.types';
-import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { QuickSearchButtons, type VisitFilter } from '@/features/quick-search-buttons';
 import { MasterSpotDetailCard } from './master-spot-detail-card';
@@ -173,70 +172,28 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       onSpotDetailSnapChange?.(snapIndex);
     };
 
-    // 訪問済みmachiのIDセットを作成
-    const visitedMachiIds = useMemo(
-      () => new Set(visits.map((visit) => visit.machi_id)),
-      [visits]
-    );
-
-    // お気に入りマスタースポットIDセットを作成
-    const favoriteMasterSpotIdSet = useMemo(
-      () => new Set(favoriteMasterSpotIds),
-      [favoriteMasterSpotIds]
-    );
-
-    // MachiRowのマップを作成（IDからMachiRowへの変換用）
-    const machiMap = useMemo(() => {
-      if (!machiData) return new Map<string, MachiRow>();
-      return new Map(machiData.map((machi) => [machi.id, machi]));
-    }, [machiData]);
-
-    // CityRowのマップを作成（IDからCityRowへの変換用）
-    const cityMap = useMemo(() => {
-      return new Map(cities.map((city) => [city.id, city]));
-    }, [cities]);
-
-    // PrefectureRowのマップを作成（IDからPrefectureRowへの変換用）
-    const prefectureMap = useMemo(() => {
-      return new Map(prefectures.map((prefecture) => [prefecture.id, prefecture]));
-    }, [prefectures]);
-
-    // RegionRowのマップを作成（IDからRegionRowへの変換用）
-    const regionMap = useMemo(() => {
-      return new Map(regions.map((region) => [region.id, region]));
-    }, [regions]);
-
-    // CountryRowのマップを作成（IDからCountryRowへの変換用）
-    const countryMap = useMemo(() => {
-      return new Map(countries.map((country) => [country.id, country]));
-    }, [countries]);
-
-    // MasterSpotDisplayのマップを作成（IDからMasterSpotDisplayへの変換用）
-    const masterSpotMap = useMemo(() => {
-      if (!masterSpots) return new Map<string, MasterSpotDisplay>();
-      return new Map(masterSpots.map((spot) => [spot.id, spot]));
-    }, [masterSpots]);
-
-    // フィルタリングされたmachiDataを生成
-    const filteredMachiData = useMemo(() => {
-      if (!machiData) return null;
-      if (visitFilter === 'all' || visitFilter === 'favorite') return machiData;
-      if (visitFilter === 'visited') {
-        return machiData.filter((machi) => visitedMachiIds.has(machi.id));
-      }
-      if (visitFilter === 'not_visited') {
-        return machiData.filter((machi) => !visitedMachiIds.has(machi.id));
-      }
-      return machiData;
-    }, [machiData, visitFilter, visitedMachiIds]);
-
-    // フィルタリングされたmasterSpotsを生成
-    const filteredMasterSpots = useMemo(() => {
-      if (visitFilter === 'favorite') {
-        return masterSpots.filter((spot) => favoriteMasterSpotIdSet.has(spot.id));
-      }
-      return masterSpots;
-    }, [masterSpots, visitFilter, favoriteMasterSpotIdSet]);
+    // データマップとフィルタリングを管理
+    const {
+      visitedMachiIds,
+      machiMap,
+      cityMap,
+      prefectureMap,
+      regionMap,
+      countryMap,
+      masterSpotMap,
+      filteredMachiData,
+      filteredMasterSpots,
+    } = useMapData({
+      machiData,
+      cities,
+      prefectures,
+      regions,
+      countries,
+      masterSpots,
+      visits,
+      favoriteMasterSpotIds,
+      visitFilter,
+    });
 
     // GeoJSON データ生成
     const machiGeoJson = useMachiGeoJson(filteredMachiData ?? undefined, visitedMachiIds);
@@ -303,40 +260,16 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
       }
     }, [centerLocation, handleMachiSelect, handleCitySelect, handlePrefectureSelect, handleRegionSelect, handleCountrySelect]);
 
-    // 選択中アイテムの座標を取得
-    const selectedLocation = useMemo(() => {
-      if (selectedSpot) {
-        return { lng: selectedSpot.longitude, lat: selectedSpot.latitude, zoom: MAP_ZOOM.SPOT };
-      }
-      // machiはNULL許容なのでnullチェックが必要
-      if (selectedMachi && selectedMachi.longitude != null && selectedMachi.latitude != null) {
-        return { lng: selectedMachi.longitude, lat: selectedMachi.latitude, zoom: MAP_ZOOM.MACHI };
-      }
-      // citiesはNULL許容なのでnullチェックが必要
-      if (selectedCity && selectedCity.longitude != null && selectedCity.latitude != null) {
-        return { lng: selectedCity.longitude, lat: selectedCity.latitude, zoom: MAP_ZOOM.CITY };
-      }
-      // prefecturesはNOT NULLなので直接参照可能
-      if (selectedPrefecture) {
-        return { lng: selectedPrefecture.longitude, lat: selectedPrefecture.latitude, zoom: MAP_ZOOM.PREFECTURE };
-      }
-      // regionsはNOT NULLなので直接参照可能
-      if (selectedRegion) {
-        return { lng: selectedRegion.longitude, lat: selectedRegion.latitude, zoom: MAP_ZOOM.REGION };
-      }
-      // countriesはNOT NULLなので直接参照可能
-      if (selectedCountry) {
-        return { lng: selectedCountry.longitude, lat: selectedCountry.latitude, zoom: MAP_ZOOM.COUNTRY };
-      }
-      return null;
-    }, [selectedSpot, selectedMachi, selectedCity, selectedPrefecture, selectedRegion, selectedCountry]);
-
-    // 選択中アイテムの位置に戻るハンドラー
-    const handleSelectedLocationPress = useCallback(() => {
-      if (selectedLocation) {
-        flyToLocation(selectedLocation.lng, selectedLocation.lat, selectedLocation.zoom);
-      }
-    }, [selectedLocation, flyToLocation]);
+    // 選択位置の管理
+    const { selectedLocation, handleSelectedLocationPress } = useSelectedLocation({
+      selectedSpot,
+      selectedMachi,
+      selectedCity,
+      selectedPrefecture,
+      selectedRegion,
+      selectedCountry,
+      flyToLocation,
+    });
 
     // 初期カメラ位置を計算
     const initialCenter = currentLocation

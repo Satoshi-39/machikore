@@ -15,3 +15,5 @@ export * from './tile.utils';
 export * from './theme.utils';
 export * from './json.utils';
 export * from './share.utils';
+export * from './spot-color.utils';
+export * from './article.utils';

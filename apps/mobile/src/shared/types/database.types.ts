@@ -8,7 +8,7 @@
  */
 
 import type { MergeDeep } from 'type-fest';
-import type { Database as DatabaseGenerated } from './supabase.generated';
+import type { Database as DatabaseGenerated } from '@machikore/database';
 import type { ProseMirrorDoc } from './composite.types';
 
 // ===============================

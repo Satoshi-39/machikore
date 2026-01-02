@@ -5,9 +5,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getSpotImages } from '@/shared/api/supabase/images';
-import type { Database } from '@/shared/types/supabase.generated';
-
-type ImageRow = Database['public']['Tables']['images']['Row'];
+import type { ImageRow } from '@/shared/types';
 
 /**
  * スポットの画像一覧を取得（Supabase）

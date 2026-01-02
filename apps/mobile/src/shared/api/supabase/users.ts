@@ -4,10 +4,9 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
-import type { Database } from '@/shared/types/supabase.generated';
+import type { UserRow, UserUpdate } from '@/shared/types';
 
-type User = Database['public']['Tables']['users']['Row'];
-type UserUpdate = Database['public']['Tables']['users']['Update'];
+type User = UserRow;
 
 /** プロフィール更新用の型 */
 export interface ProfileUpdateData {

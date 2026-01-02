@@ -18,6 +18,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker } from '@/shared/ui';
+import { isEmptyArticle } from '@/shared/lib';
 import {
   type SpotLocationInput,
   isPlaceSearchResult,
@@ -30,23 +31,6 @@ import type { MapWithUser } from '@/shared/types';
 import { useCreateSpotFormValidation } from '../model';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n } from '@/shared/lib/i18n';
-
-// 記事コンテンツが空かどうかを判定
-function isEmptyArticle(doc: ProseMirrorDoc | null): boolean {
-  if (!doc) return true;
-  if (!doc.content || doc.content.length === 0) return true;
-  if (doc.content.length === 1) {
-    const firstNode = doc.content[0];
-    if (!firstNode) return true;
-    if (
-      firstNode.type === 'paragraph' &&
-      (!firstNode.content || firstNode.content.length === 0)
-    ) {
-      return true;
-    }
-  }
-  return false;
-}
 
 interface UploadProgress {
   current: number;

@@ -4,12 +4,6 @@
  * FSDの原則：Widget層は複合的なUIコンポーネント
  */
 
-import { useMap } from '@/entities/map';
-import { useMapLabels } from '@/entities/map-label';
-import { useSpots } from '@/entities/user-spot';
-import { useTransportHubsSimple, useTransportHubsGeoJson } from '@/entities/transport-hub';
-import { useCitiesSimple, useCitiesGeoJson } from '@/entities/city';
-import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
@@ -18,7 +12,7 @@ import { useMapControlsVisibility } from '@/features/map-controls';
 import { LabelChipsBar } from '@/features/filter-by-label';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ENV, LABEL_ZOOM_USER_MAP } from '@/shared/config';
+import { ENV } from '@/shared/config';
 import { LocationButton, FitAllButton } from '@/shared/ui';
 import { SpotDetailCard } from './spot-detail-card';
 import { UserMapLabels } from './layers';
@@ -29,14 +23,13 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 import { View, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
-import { useSpotCamera, useUserSpotsGeoJson, usePinDropAutoCancel } from '../model';
+import { useSpotCamera, usePinDropAutoCancel, useUserMapData } from '../model';
 
 // 画面サイズと現在地ボタンの位置計算用定数
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -84,58 +77,24 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const cameraRef = useRef<Mapbox.Camera>(null);
     const isDarkMode = useIsDarkMode();
     const insets = useSafeAreaInsets();
-    // マップ情報を取得（テーマカラー用）
-    const { data: mapData } = useMap(mapId);
-    // currentUserId を渡していいね状態も含めて取得
-    const { data: spots = [] } = useSpots(mapId ?? '', currentUserId);
-    // ラベルデータを取得（ラベルチップ表示用）
-    const { data: mapLabels = [] } = useMapLabels(mapId);
     const [isMapReady, setIsMapReady] = useState(false);
 
-    // ラベルフィルタリング状態
-    const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
-
-    // フィルタリングされたスポット
-    const filteredSpots = useMemo(() => {
-      if (selectedLabelId === null) {
-        return spots;
-      }
-      return spots.filter((spot) => spot.label_id === selectedLabelId);
-    }, [spots, selectedLabelId]);
-
-    // スポットをGeoJSON形式に変換（フィルタ済みスポットを使用）
-    const spotsGeoJson = useUserSpotsGeoJson(filteredSpots);
-
-    // ズームレベル（交通データ・都市データ取得用）
-    const [zoomLevel, setZoomLevel] = useState(12);
-    // マップ境界（交通データ・都市データ取得用、デバウンスで更新）
-    const [mapBounds, setMapBounds] = useState<{
-      minLat: number;
-      maxLat: number;
-      minLng: number;
-      maxLng: number;
-    } | null>(null);
-    const boundsUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    // 交通データをboundsベースで取得（デバウンス済み）
-    const { data: transportHubs = [] } = useTransportHubsSimple({
-      bounds: mapBounds,
-      zoom: zoomLevel,
-      minZoomToFetch: LABEL_ZOOM_USER_MAP.TRANSPORT.station.min,
-    });
-    const transportHubsGeoJson = useTransportHubsGeoJson(transportHubs);
-
-    // 都市データをboundsベースで取得（デバウンス済み）
-    const { data: cities = [] } = useCitiesSimple({
-      bounds: mapBounds,
-      zoom: zoomLevel,
-      minZoomToFetch: LABEL_ZOOM_USER_MAP.CITY.min,
-    });
-    const citiesGeoJson = useCitiesGeoJson(cities);
-
-    // 都道府県データを取得（47件と少ないので全件取得）
-    const { data: prefectures = [] } = usePrefectures();
-    const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
+    // マップデータ取得（スポット、交通データ、都市データ、都道府県データ）
+    const {
+      mapData,
+      spots,
+      filteredSpots,
+      mapLabels,
+      selectedLabelId,
+      setSelectedLabelId,
+      resetLabelFilter,
+      spotsGeoJson,
+      transportHubsGeoJson,
+      citiesGeoJson,
+      prefecturesGeoJson,
+      handleCameraChanged,
+      centerCoords,
+    } = useUserMapData({ mapId, currentUserId });
 
     // スポットカメラ操作用フック
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
@@ -186,15 +145,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     // 初回カメラ移動済みフラグ（マップごとにリセット）
     const hasInitialCameraMoved = useRef(false);
-
-    // マップの中心座標を保持（ピン刺し機能で使用）
-    const [centerCoords, setCenterCoords] = useState<{
-      latitude: number;
-      longitude: number;
-    }>({
-      latitude: 35.6812,
-      longitude: 139.7671,
-    });
 
     // ピン刺しモードのストア
     const isPinDropMode = usePinDropStore((state) => state.isActive);
@@ -273,8 +223,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     useEffect(() => {
       resetSelection();
       hasInitialCameraMoved.current = false;
-      setSelectedLabelId(null);
-    }, [mapId, resetSelection]);
+      resetLabelFilter();
+    }, [mapId, resetSelection, resetLabelFilter]);
 
     // 新規登録したスポット or 発見タブからのジャンプ
     useEffect(() => {
@@ -309,43 +259,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         hasInitialCameraMoved.current = true;
       }, 100);
     }, [spots, isMapReady, jumpToSpotId, moveCameraToSingleSpot, fitCameraToAllSpots]);
-
-    // カメラ変更時に中心座標とビューポート範囲を更新
-    const handleCameraChanged = useCallback((state: any) => {
-      // 中心座標を即座に更新（ピン刺し機能用）
-      if (state?.properties?.center) {
-        const [longitude, latitude] = state.properties.center;
-        setCenterCoords({ latitude, longitude });
-      }
-
-      // ズームレベルを即座に更新
-      if (state?.properties?.zoom != null) {
-        setZoomLevel(state.properties.zoom);
-      }
-
-      // boundsの更新はデバウンス（交通データ取得の最適化）
-      const cameraBounds = state?.properties?.bounds;
-      if (cameraBounds?.ne && cameraBounds?.sw) {
-        // 前のタイマーをクリア
-        if (boundsUpdateTimerRef.current) {
-          clearTimeout(boundsUpdateTimerRef.current);
-        }
-
-        const [neLng, neLat] = cameraBounds.ne;
-        const [swLng, swLat] = cameraBounds.sw;
-        const newBounds = {
-          minLat: swLat,
-          maxLat: neLat,
-          minLng: swLng,
-          maxLng: neLng,
-        };
-
-        // カメラ移動が止まってから300ms後にboundsを更新
-        boundsUpdateTimerRef.current = setTimeout(() => {
-          setMapBounds(newBounds);
-        }, 300);
-      }
-    }, []);
 
     // 外部から呼び出せるメソッドを公開
     useImperativeHandle(ref, () => ({

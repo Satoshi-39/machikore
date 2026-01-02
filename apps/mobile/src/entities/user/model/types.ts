@@ -2,15 +2,15 @@
  * ユーザーエンティティ型定義
  */
 
-import type { Database } from '@/shared/types/supabase.generated';
+import type { UserRow, UserInsert as UserInsertType, UserUpdate as UserUpdateType } from '@/shared/types';
 
 // ===============================
 // Supabase型からUser型を抽出
 // ===============================
 
-export type User = Database['public']['Tables']['users']['Row'];
-export type UserInsert = Database['public']['Tables']['users']['Insert'];
-export type UserUpdate = Database['public']['Tables']['users']['Update'];
+export type User = UserRow;
+export type UserInsert = UserInsertType;
+export type UserUpdate = UserUpdateType;
 
 // ===============================
 // 認証ユーザー型

@@ -4,11 +4,8 @@
  */
 
 import { supabase } from './client';
-import type { Database } from '@/shared/types/supabase.generated';
+import type { ImageRow, ImageInsert } from '@/shared/types';
 import { log } from '@/shared/config/logger';
-
-type ImageInsert = Database['public']['Tables']['images']['Insert'];
-type ImageRow = Database['public']['Tables']['images']['Row'];
 
 /**
  * スポット画像をimagesテーブルに保存

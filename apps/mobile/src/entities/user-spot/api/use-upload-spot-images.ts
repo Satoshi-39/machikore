@@ -6,10 +6,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
-import type { Database } from '@/shared/types/supabase.generated';
+import type { ImageRow } from '@/shared/types';
 import { log } from '@/shared/config/logger';
-
-type ImageRow = Database['public']['Tables']['images']['Row'];
 
 interface UploadSpotImagesParams {
   spotId: string;

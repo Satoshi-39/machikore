@@ -20,13 +20,10 @@ import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shar
 import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
-import type { Database } from '@/shared/types/supabase.generated';
-import type { MapWithUser } from '@/shared/types';
+import type { MapWithUser, ImageRow } from '@/shared/types';
 import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n } from '@/shared/lib/i18n';
-
-type ImageRow = Database['public']['Tables']['images']['Row'];
 
 interface UploadProgress {
   current: number;

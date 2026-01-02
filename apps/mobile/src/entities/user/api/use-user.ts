@@ -7,9 +7,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getUserById } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import type { Database } from '@/shared/types/supabase.generated';
-
-type UserRow = Database['public']['Tables']['users']['Row'];
+import type { UserRow } from '@/shared/types';
 
 /**
  * ユーザー情報を取得（Supabaseから）

@@ -5,10 +5,7 @@
  */
 
 import { supabase, handleSupabaseError } from './client';
-import type { Database } from '@/shared/types/supabase.generated';
-
-type LikeRow = Database['public']['Tables']['likes']['Row'];
-type LikeInsert = Database['public']['Tables']['likes']['Insert'];
+import type { LikeRow, LikeInsert } from '@/shared/types';
 
 // ===============================
 // スポットいいね
