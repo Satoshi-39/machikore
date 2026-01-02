@@ -3,7 +3,7 @@
  */
 
 import { useMemo } from 'react';
-import { SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config/constants';
 
 interface SpotColorSource {
   map_label?: { color?: string | null } | null;
