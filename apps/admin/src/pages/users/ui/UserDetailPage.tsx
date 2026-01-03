@@ -270,7 +270,7 @@ export async function UserDetailPage({ userId }: UserDetailPageProps) {
           <TableBody>
             {spots.map((spot) => (
               <TableRow key={spot.id}>
-                <TableCell className="font-medium">{spot.custom_name}</TableCell>
+                <TableCell className="font-medium">{spot.description}</TableCell>
                 <TableCell className="text-gray-600">
                   {formatDateShort(spot.created_at)}
                 </TableCell>

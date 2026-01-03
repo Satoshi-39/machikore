@@ -55,7 +55,7 @@ export async function SpotDetailPage({ spotId }: SpotDetailPageProps) {
             <MapPin className="h-6 w-6 text-gray-600" />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold">{spot.custom_name}</h2>
+            <h2 className="text-xl font-bold">{spot.description}</h2>
             {spot.description && (
               <p className="mt-2 text-gray-600">{spot.description}</p>
             )}

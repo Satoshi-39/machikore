@@ -2,8 +2,7 @@ import { createServerClient } from "@/shared/api";
 
 export type SpotDetail = {
   id: string;
-  custom_name: string;
-  description: string | null;
+  description: string;
   prefecture_name: string | null;
   city_name: string | null;
   machi_name: string | null;
@@ -34,7 +33,6 @@ export async function getSpotDetail(spotId: string): Promise<SpotDetail | null> 
     .from("user_spots")
     .select(`
       id,
-      custom_name,
       description,
       prefecture_name,
       city_name,

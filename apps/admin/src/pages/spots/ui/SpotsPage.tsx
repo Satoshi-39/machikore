@@ -48,7 +48,7 @@ export async function SpotsPage() {
                     className="flex items-center gap-2 hover:underline"
                   >
                     <MapPin className="h-4 w-4 text-gray-400" />
-                    <span className="font-medium">{spot.custom_name}</span>
+                    <span className="font-medium">{spot.description}</span>
                   </Link>
                 </TableCell>
                 <TableCell className="text-gray-600">

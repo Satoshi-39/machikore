@@ -98,7 +98,7 @@ export function SpotSingleForm() {
         body: JSON.stringify({
           google_place_id: selectedPlace.place_id,
           map_id: selectedMapId,
-          custom_name: selectedPlace.name,
+          description: selectedPlace.name,
           latitude: selectedPlace.geometry.location.lat,
           longitude: selectedPlace.geometry.location.lng,
           formatted_address: selectedPlace.formatted_address,

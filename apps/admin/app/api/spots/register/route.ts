@@ -233,11 +233,11 @@ async function findMachiForSpot(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, address, map_id, custom_name } = body;
+    const { name, address, map_id, description } = body;
 
-    if (!name || !address || !map_id || !custom_name) {
+    if (!name || !address || !map_id || !description) {
       return NextResponse.json(
-        { error: "name, address, map_id, and custom_name are required" },
+        { error: "name, address, map_id, and description are required" },
         { status: 400 }
       );
     }
@@ -301,7 +301,7 @@ export async function POST(request: NextRequest) {
         prefecture_id: machiInfo?.prefectureId ?? null,
         latitude: placeDetails.latitude,
         longitude: placeDetails.longitude,
-        custom_name: custom_name,
+        description: description,
         language: mapData.language,
       })
       .select("id")

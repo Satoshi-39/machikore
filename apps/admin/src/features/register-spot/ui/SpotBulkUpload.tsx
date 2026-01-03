@@ -30,7 +30,7 @@ type CsvRow = {
   row_number: number;
   name: string;
   address: string;
-  custom_name?: string;
+  description: string;
   status: "pending" | "processing" | "success" | "error";
   error?: string;
   resolved_name?: string;
@@ -83,8 +83,8 @@ export function SpotBulkUpload() {
     const addressIndex = headers.findIndex(
       (h) => h === "address" || h === "住所" || h === "エリア"
     );
-    const customNameIndex = headers.findIndex(
-      (h) => h === "custom_name" || h === "一言" || h === "キャッチコピー"
+    const descriptionIndex = headers.findIndex(
+      (h) => h === "description" || h === "説明" || h === "一言" || h === "キャッチコピー"
     );
 
     if (nameIndex === -1) {
@@ -93,8 +93,8 @@ export function SpotBulkUpload() {
     if (addressIndex === -1) {
       throw new Error("CSVにaddress列が見つかりません");
     }
-    if (customNameIndex === -1) {
-      throw new Error("CSVにcustom_name列が見つかりません");
+    if (descriptionIndex === -1) {
+      throw new Error("CSVにdescription列が見つかりません");
     }
 
     const rows: CsvRow[] = [];
@@ -102,14 +102,14 @@ export function SpotBulkUpload() {
       const values = lines[i].split(",").map((v) => v.trim().replace(/^"|"$/g, ""));
       const name = values[nameIndex];
       const address = values[addressIndex];
-      const customName = values[customNameIndex];
-      if (!name || !address || !customName) continue;
+      const description = values[descriptionIndex];
+      if (!name || !address || !description) continue;
 
       rows.push({
         row_number: i + 1,
         name,
         address,
-        custom_name: customName,
+        description,
         status: "pending",
       });
     }
@@ -191,7 +191,7 @@ export function SpotBulkUpload() {
                 name: row.name,
                 address: row.address,
                 map_id: selectedMapId,
-                custom_name: row.custom_name,
+                description: row.description,
               }),
             });
 
@@ -296,7 +296,7 @@ export function SpotBulkUpload() {
                 1行目にヘッダー、2行目以降にデータを記述してください
               </p>
               <code className="mt-2 block rounded bg-blue-100 p-2 text-xs text-blue-800">
-                name,address,custom_name
+                name,address,description
                 <br />
                 スターバックス,渋谷区道玄坂,おしゃれなカフェ
                 <br />
@@ -305,7 +305,7 @@ export function SpotBulkUpload() {
               <p className="mt-2 text-xs text-blue-600">
                 ※ 店舗名と住所/エリアからGoogle Placesで自動検索されます
                 <br />
-                ※ custom_nameは必須（スポットを一言で表すキャッチコピー）
+                ※ descriptionは必須（スポットを一言で表すキャッチコピー）
               </p>
             </div>
           </div>
