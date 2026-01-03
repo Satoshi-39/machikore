@@ -1,4 +1,2 @@
-// Machi entity slice
-// export * from "./ui";
-// export * from "./api";
-// export * from "./model";
+// Machi entity slice - 街
+export * from "./api";

@@ -27,8 +27,13 @@ ALTER TABLE ONLY public.admin_users ADD CONSTRAINT admin_users_pkey PRIMARY KEY 
 ALTER TABLE ONLY public.admin_users ADD CONSTRAINT admin_users_user_id_key UNIQUE (user_id);
 ALTER TABLE ONLY public.admin_users ADD CONSTRAINT admin_users_user_id_fkey
     FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.admin_users ADD CONSTRAINT admin_users_user_id_public_users_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 ALTER TABLE ONLY public.admin_users ADD CONSTRAINT admin_users_created_by_fkey
     FOREIGN KEY (created_by) REFERENCES auth.users(id) ON DELETE SET NULL;
+
+COMMENT ON CONSTRAINT admin_users_user_id_public_users_fkey ON public.admin_users
+    IS 'public.usersへの外部キー（JOINクエリ用）';
 
 CREATE INDEX idx_admin_users_user_id ON public.admin_users USING btree (user_id);
 CREATE INDEX idx_admin_users_role ON public.admin_users USING btree (role);

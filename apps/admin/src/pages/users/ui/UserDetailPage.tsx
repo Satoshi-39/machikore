@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { getUserDetail, getUserMaps, getUserSpots } from "@/entities/user";
+import { UserModerationPanel } from "@/features/manage-user";
 
 type UserDetailPageProps = {
   userId: string;
@@ -98,6 +99,15 @@ export async function UserDetailPage({ userId }: UserDetailPageProps) {
             {user.bio && (
               <p className="mt-2 text-gray-600">{user.bio}</p>
             )}
+
+            {/* User Actions */}
+            <div className="mt-4">
+              <UserModerationPanel
+                userId={user.id}
+                userStatus={user.status}
+                displayName={user.display_name}
+              />
+            </div>
           </div>
         </div>
 

@@ -1,5 +1,10 @@
 import { UsersPage } from "@/pages/users";
 
-export default async function Page() {
-  return <UsersPage />;
+type Props = {
+  searchParams: Promise<{ q?: string; status?: string }>;
+};
+
+export default async function Page({ searchParams }: Props) {
+  const params = await searchParams;
+  return <UsersPage searchParams={params} />;
 }

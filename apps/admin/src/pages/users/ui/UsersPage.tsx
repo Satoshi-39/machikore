@@ -10,6 +10,15 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { getUsers } from "@/entities/user";
+import { SearchForm } from "@/features/search";
+import { StatusFilter } from "./StatusFilter";
+
+type UsersPageProps = {
+  searchParams?: {
+    q?: string;
+    status?: string;
+  };
+};
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -32,8 +41,11 @@ function formatDate(dateString: string) {
   });
 }
 
-export async function UsersPage() {
-  const users = await getUsers();
+export async function UsersPage({ searchParams }: UsersPageProps) {
+  const query = searchParams?.q;
+  const status = searchParams?.status;
+
+  const users = await getUsers({ query, status });
 
   return (
     <div>
@@ -41,6 +53,33 @@ export async function UsersPage() {
         <h1 className="text-2xl font-bold text-gray-900">ユーザー管理</h1>
         <p className="text-sm text-gray-500">{users.length}件表示</p>
       </div>
+
+      {/* Search and Filter */}
+      <div className="mt-6 flex flex-col sm:flex-row gap-4">
+        <div className="flex-1">
+          <SearchForm
+            placeholder="ユーザー名、表示名、メールで検索..."
+            basePath="/users"
+          />
+        </div>
+        <StatusFilter basePath="/users" currentQuery={query} currentStatus={status} />
+      </div>
+
+      {/* Active Filters */}
+      {(query || status) && (
+        <div className="mt-4 flex items-center gap-2 text-sm">
+          <span className="text-gray-500">フィルター:</span>
+          {query && (
+            <Badge variant="secondary">検索: {query}</Badge>
+          )}
+          {status && (
+            <Badge variant="secondary">ステータス: {getStatusLabel(status)}</Badge>
+          )}
+          <Link href="/users" className="text-blue-600 hover:underline">
+            クリア
+          </Link>
+        </div>
+      )}
 
       <div className="mt-6 rounded-lg border bg-white">
         <Table>
@@ -96,4 +135,13 @@ export async function UsersPage() {
       </div>
     </div>
   );
+}
+
+function getStatusLabel(status: string): string {
+  const labels: Record<string, string> = {
+    active: "アクティブ",
+    suspended: "停止中",
+    deleted: "削除済み",
+  };
+  return labels[status] || status;
 }

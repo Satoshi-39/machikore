@@ -1,4 +1,2 @@
-// Search feature slice
-// export * from "./ui";
-// export * from "./api";
-// export * from "./model";
+// Search feature slice - 検索機能
+export * from "./ui";
