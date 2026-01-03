@@ -10,7 +10,6 @@ import type { SelectedImage } from '@/features/pick-images';
 import { DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 
 interface EditSpotFormCurrentValues {
-  customName: string;
   description: string;
   tags: string[];
   newImages: SelectedImage[];
@@ -29,13 +28,9 @@ export function useEditSpotFormChanges(
   currentValues: EditSpotFormCurrentValues
 ) {
   const hasChanges = useMemo(() => {
-    const spotName = spot.custom_name || spot.master_spot?.name || '';
-
-    // 名前の変更
-    if (currentValues.customName.trim() !== spotName) return true;
-
-    // 説明の変更
     const originalDescription = spot.description || '';
+
+    // descriptionの変更
     if (currentValues.description.trim() !== originalDescription) return true;
 
     // タグの変更
@@ -62,7 +57,6 @@ export function useEditSpotFormChanges(
   }, [
     spot,
     initialTags,
-    currentValues.customName,
     currentValues.description,
     currentValues.tags,
     currentValues.newImages,
@@ -72,11 +66,11 @@ export function useEditSpotFormChanges(
     currentValues.labelId,
   ]);
 
-  // フォームのバリデーション（スポット名は必須、概要は任意）
+  // フォームのバリデーション（descriptionは必須）
   const isFormValid = useMemo(() => {
-    // スポット名が空でないことを確認（custom_nameはNOT NULL制約があるため必須）
-    return !!currentValues.customName.trim();
-  }, [currentValues.customName]);
+    // descriptionが空でないことを確認（NOT NULL制約があるため必須）
+    return !!currentValues.description.trim();
+  }, [currentValues.description]);
 
   return {
     hasChanges,

@@ -136,8 +136,7 @@ export function useSpotForm() {
   };
 
   const handleSubmit = async (data: {
-    customName: string;
-    description?: string;
+    description: string;
     articleContent?: ProseMirrorDoc | null;
     tags: string[];
     images: SelectedImage[];
@@ -200,7 +199,7 @@ export function useSpotForm() {
         mapId: data.mapId,
         machiId,
         prefectureId,
-        name: selectedPlace.name ?? data.customName,
+        name: selectedPlace.name ?? data.description,
         latitude: selectedPlace.latitude,
         longitude: selectedPlace.longitude,
         googlePlaceId: isGooglePlace ? selectedPlace.googleData.placeId : null,
@@ -211,7 +210,6 @@ export function useSpotForm() {
         googleWebsiteUri: isGooglePlace ? selectedPlace.googleData.websiteUri : null,
         googleRating: isGooglePlace ? selectedPlace.googleData.rating : null,
         googleUserRatingCount: isGooglePlace ? selectedPlace.googleData.userRatingCount : null,
-        customName: data.customName,
         description: data.description,
         articleContent: data.articleContent,
         spotColor: data.spotColor,

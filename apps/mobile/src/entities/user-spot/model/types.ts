@@ -29,8 +29,7 @@ export interface CreateSpotParams {
   address?: string | null;
   latitude: number;
   longitude: number;
-  description?: string | null; // 旧memo
-  customName: string; // ユーザー独自の名前（必須）
+  description: string; // スポットの一言説明（必須）
   images?: string[]; // 画像URI配列
   // Google Placesデータ（検索から選択した場合）
   googlePlaceId?: string | null;
@@ -48,8 +47,7 @@ export interface CreateSpotParams {
  */
 export interface UpdateSpotParams {
   spotId: string;
-  customName?: string; // NOT NULL制約があるためnullは不可
-  description?: string | null; // ひとこと
+  description?: string; // スポットの一言説明（NOT NULL制約があるためnullは不可）
   articleContent?: ProseMirrorDoc | null; // 記事（ProseMirror JSON形式）
   orderIndex?: number;
   mapId?: string;

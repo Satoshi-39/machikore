@@ -127,7 +127,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // マスタースポットの正式名称（メイン表示）
   const masterSpotName = spot.master_spot?.name || t('spot.unknownSpot');
   // ユーザーの一言（サブ表示）
-  const oneWord = spot.custom_name;
+  const oneWord = spot.description;
   const spotAddress = spot.master_spot?.google_short_address || spot.google_short_address;
 
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
@@ -289,7 +289,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </View>
             {/* ユーザーの一言（サブ） */}
             {oneWord && (
-              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-lg text-foreground-secondary dark:text-dark-foreground-secondary">
                 {oneWord}
               </Text>
             )}
@@ -349,13 +349,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <View className="flex-row items-center mb-3">
             <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
-          </View>
-        )}
-
-        {/* 概要（ラベルなし） */}
-        {spot.description && (
-          <View className="mb-3">
-            <Text className="text-sm text-foreground dark:text-dark-foreground">{spot.description}</Text>
           </View>
         )}
 

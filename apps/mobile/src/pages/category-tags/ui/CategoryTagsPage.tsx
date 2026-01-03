@@ -74,7 +74,7 @@ function TagChip({ tag, isSelected, onPress }: TagChipProps) {
 export function CategoryTagsPage() {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { categoryId } = useLocalSearchParams<{ categoryId: string }>();
   const { data: categories = [] } = useCategories();
   const { data: tags, isLoading: isTagsLoading } = useCategoryTags(categoryId ?? '', 30);
@@ -86,7 +86,7 @@ export function CategoryTagsPage() {
 
   const category = categories.find((c) => c.id === categoryId);
   const categoryName = category
-    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null)
+    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null, locale)
     : '';
 
   const handleTagPress = useCallback((tag: Tag) => {

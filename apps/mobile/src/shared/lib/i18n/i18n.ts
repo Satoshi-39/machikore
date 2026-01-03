@@ -10,10 +10,14 @@
 import { I18n } from 'i18n-js';
 import { getLocales } from 'expo-localization';
 import { ja, en, cn, tw } from './locales';
+import {
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+  type SupportedLocale,
+} from '@/shared/config/constants';
 
-// サポートする言語
-export const SUPPORTED_LOCALES = ['ja', 'en', 'cn', 'tw'] as const;
-export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+// Re-export from config for convenience
+export { SUPPORTED_LOCALES, DEFAULT_LOCALE, type SupportedLocale };
 
 // 言語の表示名
 export const LOCALE_NAMES: Record<SupportedLocale, string> = {
@@ -22,9 +26,6 @@ export const LOCALE_NAMES: Record<SupportedLocale, string> = {
   cn: '简体中文',
   tw: '繁體中文',
 };
-
-// デフォルト言語
-export const DEFAULT_LOCALE: SupportedLocale = 'ja';
 
 // i18nインスタンスを作成
 const i18n = new I18n({

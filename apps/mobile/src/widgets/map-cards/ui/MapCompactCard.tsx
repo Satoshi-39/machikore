@@ -52,7 +52,7 @@ export function MapCompactCard({
   onArticlePress,
   onUserPress,
 }: MapCompactCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   // 記事公開状態
   const isArticlePublic = map.is_article_public === true;
 
@@ -146,7 +146,7 @@ export function MapCompactCard({
 
             {/* 作成日時 */}
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {formatRelativeTime(map.created_at)}
+              {formatRelativeTime(map.created_at, locale)}
             </Text>
           </View>
         </View>

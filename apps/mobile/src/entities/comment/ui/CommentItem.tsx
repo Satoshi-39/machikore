@@ -40,7 +40,7 @@ export function CommentItem({
   isReply = false,
   isRepliesExpanded = false,
 }: CommentItemProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const isOwner = currentUserId === comment.user_id;
   const hasReplies = comment.replies_count > 0;
 
@@ -85,7 +85,7 @@ export function CommentItem({
             </Text>
           </Pressable>
           <View className="flex-row items-center">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{formatRelativeTime(comment.created_at)}</Text>
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{formatRelativeTime(comment.created_at, locale)}</Text>
             {isOwner && (
               <PopupMenu
                 items={menuItems}

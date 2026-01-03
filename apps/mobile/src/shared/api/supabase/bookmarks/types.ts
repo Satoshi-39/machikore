@@ -13,8 +13,7 @@ export type Bookmark = Database['public']['Tables']['bookmarks']['Row'];
 export interface BookmarkWithDetails extends Bookmark {
   spot?: {
     id: string;
-    custom_name: string | null;
-    description: string | null;
+    description: string;
     likes_count: number;
     /** ピン刺し・現在地登録の場合の短縮住所（表示用） */
     google_short_address: string | null;

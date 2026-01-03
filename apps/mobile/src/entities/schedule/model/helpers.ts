@@ -69,11 +69,16 @@ export function validateCreateScheduleParams(
 // ===============================
 
 /**
- * 予定日時を日本語フォーマットで取得
+ * 予定日時をフォーマットで取得
+ * @param scheduledAt - ISO 8601形式の日時文字列
+ * @param locale - ロケール（デフォルト: 'ja-JP'）
  */
-export function formatScheduleDate(scheduledAt: string): string {
+export function formatScheduleDate(
+  scheduledAt: string,
+  locale: string = 'ja-JP'
+): string {
   const date = new Date(scheduledAt);
-  return new Intl.DateTimeFormat('ja-JP', {
+  return new Intl.DateTimeFormat(locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -84,10 +89,15 @@ export function formatScheduleDate(scheduledAt: string): string {
 
 /**
  * 予定日時を短縮フォーマットで取得
+ * @param scheduledAt - ISO 8601形式の日時文字列
+ * @param locale - ロケール（デフォルト: 'ja-JP'）
  */
-export function formatScheduleDateShort(scheduledAt: string): string {
+export function formatScheduleDateShort(
+  scheduledAt: string,
+  locale: string = 'ja-JP'
+): string {
   const date = new Date(scheduledAt);
-  return new Intl.DateTimeFormat('ja-JP', {
+  return new Intl.DateTimeFormat(locale, {
     month: 'short',
     day: 'numeric',
     hour: '2-digit',

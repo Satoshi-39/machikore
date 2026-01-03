@@ -49,10 +49,9 @@ export async function detectLanguage(
 
 /**
  * スポットまたはマップのテキストから言語を検出
- * custom_name, description, article_contentを結合して検出
+ * description, article_contentを結合して検出
  */
 export async function detectContentLanguage(content: {
-  customName?: string | null;
   name?: string | null;
   description?: string | null;
   articleContent?: unknown | null;
@@ -60,9 +59,6 @@ export async function detectContentLanguage(content: {
   // テキストを結合
   const texts: string[] = [];
 
-  if (content.customName) {
-    texts.push(content.customName);
-  }
   if (content.name) {
     texts.push(content.name);
   }

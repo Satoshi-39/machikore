@@ -2,7 +2,7 @@
  * テーマ関連ユーティリティ
  */
 
-import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config/constants';
 
 /**
  * スポットカラーのカラーコードを取得

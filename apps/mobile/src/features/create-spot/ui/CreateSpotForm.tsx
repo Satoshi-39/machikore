@@ -41,8 +41,7 @@ interface UploadProgress {
 interface CreateSpotFormProps {
   placeData: SpotLocationInput; // Google Places検索結果 または 手動登録
   onSubmit: (data: {
-    customName: string;
-    description?: string;
+    description: string;
     articleContent?: ProseMirrorDoc | null;
     tags: string[];
     images: SelectedImage[];
@@ -76,7 +75,6 @@ export function CreateSpotForm({
   const isGooglePlace = isPlaceSearchResult(placeData);
 
   // 「このスポットを一言で」は常に空から開始
-  const [customName, setCustomName] = useState('');
   const [description, setDescription] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [images, setImages] = useState<SelectedImage[]>([]);
@@ -94,7 +92,6 @@ export function CreateSpotForm({
 
   // バリデーション
   const { isFormValid } = useCreateSpotFormValidation({
-    customName,
     description,
     selectedMapId: selectedMapId ?? null,
   });
@@ -103,7 +100,7 @@ export function CreateSpotForm({
   const isButtonDisabled = isLoading || !isFormValid;
 
   const handleSubmit = () => {
-    if (!customName.trim()) {
+    if (!description.trim()) {
       Alert.alert(t('common.error'), t('spot.oneWordRequired'));
       return;
     }
@@ -114,8 +111,7 @@ export function CreateSpotForm({
     }
 
     onSubmit({
-      customName: customName.trim(),
-      description: description.trim() || undefined,
+      description: description.trim(),
       articleContent: draftArticleContent,
       tags,
       images,
@@ -229,37 +225,15 @@ export function CreateSpotForm({
             {t('spot.oneWordRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
-            value={customName}
-            onChangeText={setCustomName}
+            value={description}
+            onChangeText={setDescription}
             placeholder={t('spot.oneWordPlaceholder')}
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
           <View className="flex-row justify-end mt-1">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {customName.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
-            </Text>
-          </View>
-        </View>
-
-        {/* スポットの概要（任意） */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            {t('spot.spotSummary')}
-          </Text>
-          <StyledTextInput
-            value={description}
-            onChangeText={setDescription}
-            placeholder={t('spot.summaryPlaceholder')}
-            multiline
-            numberOfLines={2}
-            maxLength={INPUT_LIMITS.SPOT_SUMMARY}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
-            textAlignVertical="top"
-          />
-          <View className="flex-row justify-end mt-1">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {description.length}/{INPUT_LIMITS.SPOT_SUMMARY}
+              {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
             </Text>
           </View>
         </View>

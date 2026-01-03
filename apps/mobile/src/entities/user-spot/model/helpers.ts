@@ -43,8 +43,7 @@ export function createSpotData(params: CreateSpotParams): {
       machi_id: params.machiId,
       machi_name: null,
       master_spot_id: masterSpotId, // 後で insertOrGetMasterSpot で置き換えられる
-      custom_name: params.customName,
-      description: params.description || null,
+      description: params.description,
       article_content: null,
       // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
       images_count: 0,

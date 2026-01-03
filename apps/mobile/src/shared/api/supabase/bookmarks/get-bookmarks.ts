@@ -54,7 +54,6 @@ export async function getUserBookmarks(
       created_at,
       user_spots (
         id,
-        custom_name,
         description,
         likes_count,
         google_short_address,
@@ -116,7 +115,6 @@ export async function getUserBookmarks(
     spot: bookmark.user_spots
       ? {
           id: bookmark.user_spots.id,
-          custom_name: bookmark.user_spots.custom_name,
           description: bookmark.user_spots.description,
           likes_count: bookmark.user_spots.likes_count,
           google_short_address: bookmark.user_spots.google_short_address,

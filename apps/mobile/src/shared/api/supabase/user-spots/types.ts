@@ -30,8 +30,7 @@ export interface CreateSpotInput {
   googleRating?: number | null;
   googleUserRatingCount?: number | null;
   // user_spot情報
-  customName?: string | null;
-  description?: string | null;
+  description: string;
   articleContent?: ProseMirrorDoc | null;
   spotColor?: string | null;
   labelId?: string | null;
@@ -39,8 +38,7 @@ export interface CreateSpotInput {
 
 export interface UpdateSpotInput {
   id: string;
-  custom_name?: string;
-  description?: string | null;
+  description?: string;
   article_content?: ProseMirrorDoc | null;
   order_index?: number;
   map_id?: string;
@@ -68,8 +66,7 @@ export interface UserSpotSearchResult {
   map_id: string;
   master_spot_id: string | null;
   machi_id: string | null;
-  custom_name: string | null;
-  description: string | null;
+  description: string;
   tags: string[] | null;
   spot_color?: string | null;
   label_id?: string | null;

@@ -45,7 +45,7 @@ export function CreateMapForm({
   onSubmit,
   isLoading = false,
 }: CreateMapFormProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { data: categories = [] } = useCategories();
 
   const [mapName, setMapName] = useState('');
@@ -182,7 +182,7 @@ export function CreateMapForm({
                         : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
-                    {getTranslatedName(category.name, category.name_translations)}
+                    {getTranslatedName(category.name, category.name_translations, locale)}
                   </Text>
                 </TouchableOpacity>
               );

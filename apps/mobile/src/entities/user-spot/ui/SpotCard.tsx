@@ -78,7 +78,7 @@ export function SpotCard({
   embeddedMasterSpot,
   noBorder = false,
 }: SpotCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
 
   // embeddedUserがあればuseUserをスキップ
@@ -130,7 +130,7 @@ export function SpotCard({
 
   // スポット名の取得（SpotWithDetailsとSpotWithMasterSpotで構造が異なる）
   const getSpotName = (): string => {
-    if (spot.custom_name) return spot.custom_name;
+    if (spot.description) return spot.description;
     // SpotWithDetails型の場合
     if ('master_spot' in spot && spot.master_spot?.name) {
       return spot.master_spot.name;
@@ -271,7 +271,7 @@ export function SpotCard({
             </Text>
           </Pressable>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-            {formatRelativeTime(spot.created_at)}
+            {formatRelativeTime(spot.created_at, locale)}
           </Text>
         </View>
 

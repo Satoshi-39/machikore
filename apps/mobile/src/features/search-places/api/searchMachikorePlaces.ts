@@ -213,13 +213,13 @@ function searchUserSpots(
       s.id,
       s.user_id,
       s.map_id,
-      COALESCE(s.custom_name, ms.name) as name,
+      COALESCE(s.description, ms.name) as name,
       ms.latitude,
       ms.longitude,
       ms.google_short_address as address
     FROM user_spots s
     JOIN master_spots ms ON s.master_spot_id = ms.id
-    WHERE (COALESCE(s.custom_name, ms.name) LIKE ? OR ms.google_short_address LIKE ?)
+    WHERE (COALESCE(s.description, ms.name) LIKE ? OR ms.google_short_address LIKE ?)
       AND s.user_id = ?
     ORDER BY name
     LIMIT ?;

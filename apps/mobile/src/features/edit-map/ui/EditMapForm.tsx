@@ -66,7 +66,7 @@ export function EditMapForm({
   onSubmit,
   isLoading = false,
 }: EditMapFormProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { data: categories = [] } = useCategories();
 
   // ラベルデータ取得
@@ -269,7 +269,7 @@ export function EditMapForm({
                         : 'text-foreground-secondary dark:text-dark-foreground-secondary'
                     }`}
                   >
-                    {getTranslatedName(category.name, category.name_translations)}
+                    {getTranslatedName(category.name, category.name_translations, locale)}
                   </Text>
                 </TouchableOpacity>
               );

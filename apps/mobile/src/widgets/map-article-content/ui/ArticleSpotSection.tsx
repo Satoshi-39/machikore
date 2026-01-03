@@ -21,8 +21,8 @@ interface ArticleSpotSectionProps {
 
 export function ArticleSpotSection({ spot, index, onPress, onImagePress }: ArticleSpotSectionProps) {
   const { t } = useI18n();
-  const spotName = spot.master_spot?.name || spot.custom_name || t('article.unknownSpot');
-  const customName = spot.custom_name;
+  const spotName = spot.master_spot?.name || spot.description || t('article.unknownSpot');
+  const oneWordDescription = spot.description;
   const address = spot.master_spot?.google_short_address || spot.google_short_address;
 
   return (
@@ -34,10 +34,10 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
         <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
       </Pressable>
 
-      {/* カスタム名（スポット名と異なる場合のみ表示） */}
-      {customName && customName !== spotName && (
+      {/* ユーザーの一言（マスタースポット名と異なる場合のみ表示） */}
+      {oneWordDescription && spot.master_spot?.name && oneWordDescription !== spot.master_spot.name && (
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-          {customName}
+          {oneWordDescription}
         </Text>
       )}
 

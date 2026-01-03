@@ -4,7 +4,7 @@
  * 日付操作に関する汎用的な関数
  */
 
-import { i18n } from '../i18n/i18n';
+import { type SupportedLocale, DEFAULT_LOCALE } from '@/shared/config/constants';
 
 /**
  * 日付を YYYY-MM-DD 形式の文字列に変換（UTC）
@@ -63,14 +63,57 @@ export function formatJapaneseDate(dateString: string): string {
 }
 
 /**
+ * 相対時間のテキストを取得（ロケール別）
+ */
+function getRelativeTimeText(
+  key: 'justNow' | 'minutesAgo' | 'hoursAgo' | 'daysAgo',
+  count: number,
+  locale: SupportedLocale
+): string {
+  const texts: Record<SupportedLocale, Record<string, string>> = {
+    ja: {
+      justNow: 'たった今',
+      minutesAgo: `${count}分前`,
+      hoursAgo: `${count}時間前`,
+      daysAgo: `${count}日前`,
+    },
+    en: {
+      justNow: 'Just now',
+      minutesAgo: count === 1 ? '1 minute ago' : `${count} minutes ago`,
+      hoursAgo: count === 1 ? '1 hour ago' : `${count} hours ago`,
+      daysAgo: count === 1 ? '1 day ago' : `${count} days ago`,
+    },
+    cn: {
+      justNow: '刚刚',
+      minutesAgo: `${count}分钟前`,
+      hoursAgo: `${count}小时前`,
+      daysAgo: `${count}天前`,
+    },
+    tw: {
+      justNow: '剛剛',
+      minutesAgo: `${count}分鐘前`,
+      hoursAgo: `${count}小時前`,
+      daysAgo: `${count}天前`,
+    },
+  };
+  return texts[locale][key] || texts.ja[key];
+}
+
+/**
  * 日付を相対時間形式で表示
  * - 1分未満: たった今
  * - 1時間未満: X分前
  * - 24時間未満: X時間前
  * - 7日未満: X日前
  * - 7日以上: 日付表示（例: 2025年1月1日）
+ *
+ * @param dateString - ISO 8601形式の日時文字列
+ * @param locale - ロケール（デフォルト: 'ja'）
  */
-export function formatRelativeTime(dateString: string): string {
+export function formatRelativeTime(
+  dateString: string,
+  locale: SupportedLocale = DEFAULT_LOCALE
+): string {
   const date = new Date(dateString);
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
@@ -78,13 +121,13 @@ export function formatRelativeTime(dateString: string): string {
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-  if (diffMins < 1) return i18n.t('time.justNow');
-  if (diffMins < 60) return i18n.t('time.minutesAgo', { count: diffMins });
-  if (diffHours < 24) return i18n.t('time.hoursAgo', { count: diffHours });
-  if (diffDays < 7) return i18n.t('time.daysAgo', { count: diffDays });
+  if (diffMins < 1) return getRelativeTimeText('justNow', 0, locale);
+  if (diffMins < 60) return getRelativeTimeText('minutesAgo', diffMins, locale);
+  if (diffHours < 24) return getRelativeTimeText('hoursAgo', diffHours, locale);
+  if (diffDays < 7) return getRelativeTimeText('daysAgo', diffDays, locale);
 
   // 7日以上は日付表示（ロケールに応じたフォーマット）
-  return formatLocalizedDate(date);
+  return formatLocalizedDate(date, locale);
 }
 
 /**
@@ -92,10 +135,14 @@ export function formatRelativeTime(dateString: string): string {
  * - ja: 2025年1月1日
  * - en: Jan 1, 2025
  * - cn/tw: 2025年1月1日
+ *
+ * @param date - Date オブジェクト
+ * @param locale - ロケール（デフォルト: 'ja'）
  */
-export function formatLocalizedDate(date: Date): string {
-  const locale = i18n.locale;
-
+export function formatLocalizedDate(
+  date: Date,
+  locale: SupportedLocale = DEFAULT_LOCALE
+): string {
   if (locale === 'en') {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',

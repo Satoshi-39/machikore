@@ -10,7 +10,7 @@ import { type SpotColor, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST } from '@/shared/co
 
 interface UserSpotWithMasterSpot {
   id: string;
-  custom_name: string | null;
+  description: string;
   spot_color?: string | null;
   // ラベル情報（ラベルが設定されている場合、その色が優先される）
   map_label?: {
@@ -52,8 +52,8 @@ export function useUserSpotsGeoJson(
         // 座標: master_spotがあればそこから、なければuser_spotから取得
         const latitude = spot.master_spot?.latitude ?? spot.latitude!;
         const longitude = spot.master_spot?.longitude ?? spot.longitude!;
-        // 名前: custom_nameを優先、なければmaster_spotの名前
-        const name = spot.custom_name || spot.master_spot?.name || '';
+        // 名前: descriptionを優先、なければmaster_spotの名前
+        const name = spot.description || spot.master_spot?.name || '';
         // カテゴリ: master_spotがあればgoogle_typesから判定、なければ'other'
         const category = spot.master_spot
           ? determineSpotCategory(spot.master_spot.google_types)

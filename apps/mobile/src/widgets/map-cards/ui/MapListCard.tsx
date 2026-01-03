@@ -66,7 +66,7 @@ export function MapListCard({
   onArticlePress,
   rank,
 }: MapListCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
@@ -226,7 +226,7 @@ export function MapListCard({
           />
           {/* 作成日時 */}
           <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-            {formatRelativeTime(map.created_at)}
+            {formatRelativeTime(map.created_at, locale)}
           </Text>
         </View>
       </View>

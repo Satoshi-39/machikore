@@ -135,8 +135,7 @@ export interface SpotWithDetails {
   map_id: string;
   master_spot_id: string | null;
   machi_id: string | null;
-  custom_name: string | null;
-  description: string | null;
+  description: string;
   /** スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white） */
   spot_color: string | null;
   /** ラベルID（ラベルが設定されている場合、その色が優先される） */

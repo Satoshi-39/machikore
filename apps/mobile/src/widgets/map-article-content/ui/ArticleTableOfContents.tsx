@@ -25,7 +25,7 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
         {t('article.tableOfContents')}
       </Text>
       {spots.map((spot, index) => {
-        const spotName = spot.master_spot?.name || spot.custom_name || t('article.unknownSpot');
+        const spotName = spot.master_spot?.name || spot.description || t('article.unknownSpot');
         return (
           <Pressable
             key={spot.id}

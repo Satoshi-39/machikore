@@ -264,11 +264,11 @@ export function insertSpot(params: {
     `
     INSERT INTO user_spots (
       id, map_id, user_id, machi_id, master_spot_id,
-      custom_name, description, images_count,
+      description, images_count,
       likes_count, comments_count, order_index,
       created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       spot.id,
@@ -276,8 +276,7 @@ export function insertSpot(params: {
       spot.user_id,
       spot.machi_id,
       masterSpotId,
-      spot.custom_name ?? null,
-      spot.description ?? null,
+      spot.description,
       spot.images_count,
       spot.likes_count,
       spot.comments_count,
@@ -296,18 +295,12 @@ export function insertSpot(params: {
 export function updateSpot(
   spotId: UUID,
   updates: {
-    custom_name?: string | null;
-    description?: string | null;
+    description?: string;
     order_index?: number;
   }
 ): void {
   const fields: string[] = [];
   const values: any[] = [];
-
-  if (updates.custom_name !== undefined) {
-    fields.push('custom_name = ?');
-    values.push(updates.custom_name);
-  }
 
   if (updates.description !== undefined) {
     fields.push('description = ?');
@@ -533,10 +526,10 @@ export function searchSpots(query: string, limit: number = 30): SpotWithMasterSp
     JOIN master_spots ms ON s.master_spot_id = ms.id
     JOIN maps m ON s.map_id = m.id
     WHERE m.is_public = 1
-      AND (ms.name LIKE ? OR s.custom_name LIKE ? OR s.description LIKE ?)
+      AND (ms.name LIKE ? OR s.description LIKE ?)
     ORDER BY s.created_at DESC
     LIMIT ?;
     `,
-    [searchPattern, searchPattern, searchPattern, limit]
+    [searchPattern, searchPattern, limit]
   );
 }

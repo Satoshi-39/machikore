@@ -83,7 +83,7 @@ export function logSpots(mapId?: string, limit: number = 10) {
     console.log(`Found ${spots.length} spots:`);
     spots.forEach((spot: any, index: number) => {
       console.log(`\n[${index + 1}] Spot ID: ${spot.id}`);
-      console.log(`  Name: ${spot.custom_name || spot.name}`);
+      console.log(`  Name: ${spot.description || spot.name}`);
       console.log(`  Address: ${spot.address || 'None'}`);
       console.log(`  Map ID: ${spot.map_id}`);
       console.log(`  Master Spot ID: ${spot.master_spot_id}`);

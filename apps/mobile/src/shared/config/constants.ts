@@ -539,6 +539,26 @@ export const FEATURED_CAROUSEL = {
 } as const;
 
 // ===============================
+// サポートロケール（UI言語）
+// ===============================
+
+/**
+ * アプリがサポートするUIロケール
+ * translate.ts, date.utils.ts などで使用
+ */
+export const SUPPORTED_LOCALES = ['ja', 'en', 'cn', 'tw'] as const;
+
+/**
+ * サポートされるロケールの型
+ */
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+
+/**
+ * デフォルトロケール
+ */
+export const DEFAULT_LOCALE: SupportedLocale = 'ja';
+
+// ===============================
 // コンテンツ言語
 // ===============================
 

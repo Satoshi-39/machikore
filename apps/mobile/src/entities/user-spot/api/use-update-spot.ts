@@ -19,7 +19,6 @@ export function useUpdateSpot() {
     mutationFn: async (params: UpdateSpotParams) => {
       await updateSpot({
         id: params.spotId,
-        custom_name: params.customName,
         description: params.description,
         article_content: params.articleContent,
         order_index: params.orderIndex,

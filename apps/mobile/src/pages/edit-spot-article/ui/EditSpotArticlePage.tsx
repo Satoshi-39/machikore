@@ -64,7 +64,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     );
   }
 
-  const spotName = spot?.master_spot?.name || spot?.custom_name || t('editArticle.title');
+  const spotName = spot?.master_spot?.name || spot?.description || t('editArticle.title');
 
   return (
     <ArticleEditor

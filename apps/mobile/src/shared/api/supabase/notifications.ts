@@ -38,7 +38,7 @@ export interface NotificationWithDetails extends NotificationRow {
   } | null;
   spot?: {
     id: string;
-    custom_name: string | null;
+    description: string;
     master_spot?: {
       name: string;
     } | null;
@@ -95,7 +95,7 @@ export async function getUserNotifications(
       ),
       spot:user_spots (
         id,
-        custom_name,
+        description,
         master_spot:master_spots (
           name
         )

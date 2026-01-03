@@ -57,7 +57,6 @@ export async function getMapArticle(
       map_id: spot.map_id,
       master_spot_id: spot.master_spot_id,
       machi_id: spot.machi_id,
-      custom_name: spot.custom_name,
       description: spot.description,
       tags: spot.tags,
       spot_color: spot.spot_color || null,

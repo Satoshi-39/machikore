@@ -41,7 +41,7 @@ interface SectionData {
 }
 
 export function CountriesPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const { goBack } = useSafeBack();
 
@@ -110,7 +110,7 @@ export function CountriesPage() {
               <View key={section.continent.id} className="mt-4">
                 {/* 大陸名ヘッダー */}
                 <Text className="text-lg font-bold text-foreground dark:text-dark-foreground px-4 mb-3">
-                  {getTranslatedName(section.continent.name, section.continent.name_translations)}
+                  {getTranslatedName(section.continent.name, section.continent.name_translations, locale)}
                 </Text>
 
                 {/* 2列グリッド */}
@@ -125,7 +125,7 @@ export function CountriesPage() {
                           {getCountryFlagEmoji(country.id)}
                         </Text>
                         <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3 flex-1" numberOfLines={1}>
-                          {getTranslatedName(country.name, country.name_translations)}
+                          {getTranslatedName(country.name, country.name_translations, locale)}
                         </Text>
                       </Pressable>
                     </View>

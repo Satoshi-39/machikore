@@ -36,7 +36,7 @@ export function LikeSpotList({
 
   const renderItem = useCallback(
     ({ item }: { item: LikedSpotItem }) => {
-      const spotName = item.spot.custom_name || item.spot.master_spot?.name || t('favorite.unknownSpot');
+      const spotName = item.spot.description || item.spot.master_spot?.name || t('favorite.unknownSpot');
       const address = item.spot.master_spot?.google_short_address || item.spot.google_short_address;
       const user = item.spot.user;
 

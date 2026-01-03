@@ -53,7 +53,6 @@ export async function getMapSpots(
       map_id: spot.map_id,
       master_spot_id: spot.master_spot_id,
       machi_id: spot.machi_id,
-      custom_name: spot.custom_name,
       description: spot.description,
       article_content: spot.article_content,
       tags: spot.tags,

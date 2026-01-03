@@ -96,7 +96,7 @@ export function MapDisplayCard({
   size = 'small',
   rank,
 }: MapDisplayCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
@@ -255,7 +255,7 @@ export function MapDisplayCard({
             />
             {/* 作成日時 */}
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {formatRelativeTime(map.created_at)}
+              {formatRelativeTime(map.created_at, locale)}
             </Text>
           </View>
 

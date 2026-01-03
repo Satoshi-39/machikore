@@ -143,7 +143,8 @@ export function filterMachiByPrefecture(
 // ===============================
 
 /**
- * 街名（五十音順）でソート
+ * 街名でソート（localeCompare使用）
+ * 注意: 漢字は読みがな順（五十音順）ではなく、ロケールに基づく照合順序でソートされる
  */
 export function sortMachiByName(machiList: MachiRow[]): MachiRow[] {
   return [...machiList].sort((a, b) => a.name.localeCompare(b.name, 'ja'));

@@ -82,7 +82,7 @@ export function LikesTab({ userId }: LikesTabProps) {
             data={likedSpots}
             keyExtractor={(item) => item.likeId}
             renderItem={({ item }) => {
-              const spotName = item.spot.custom_name || item.spot.master_spot?.name || t('favorite.unknownSpot');
+              const spotName = item.spot.description || item.spot.master_spot?.name || t('favorite.unknownSpot');
               const address = item.spot.master_spot?.google_short_address || item.spot.google_short_address;
 
               return (

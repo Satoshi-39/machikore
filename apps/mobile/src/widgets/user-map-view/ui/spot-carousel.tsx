@@ -31,7 +31,7 @@ import {
 } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
-import type { SpotWithDetails, UUID } from '@/shared/types';
+import { extractPlainText, type SpotWithDetails, type UUID } from '@/shared/types';
 
 // レイアウト定数
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -65,8 +65,14 @@ function SpotCard({
 }: SpotCardProps) {
   const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
-  const spotName = spot.custom_name || spot.master_spot?.name || t('spot.unknownSpot');
-  const description = spot.description;
+  // マスタースポットの正式名称（メイン表示）
+  const masterSpotName = spot.master_spot?.name || t('spot.unknownSpot');
+  // ユーザーの一言（サブ表示）
+  const oneWord = spot.description;
+  // 住所
+  const address = spot.master_spot?.google_short_address || spot.google_short_address;
+  // 記事プレビュー（プレーンテキスト抽出）
+  const articlePreview = extractPlainText(spot.article_content);
   // スポットのカラーを取得（共通ユーティリティ使用）
   const { colorValue: spotColorValue, strokeColor: spotColorStroke } = useSpotColor(spot, isDarkMode);
 
@@ -135,7 +141,7 @@ function SpotCard({
               className="text-xl font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
               numberOfLines={2}
             >
-              {spotName}
+              {masterSpotName}
             </Text>
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
@@ -151,26 +157,36 @@ function SpotCard({
             </Pressable>
           </View>
 
+          {/* ユーザーの一言 */}
+          {oneWord && (
+            <Text
+              className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
+              numberOfLines={1}
+            >
+              {oneWord}
+            </Text>
+          )}
+
           {/* 住所 */}
-          {(spot.master_spot?.google_short_address || spot.google_short_address) && (
-            <View className="flex-row items-center mt-2">
+          {address && (
+            <View className="flex-row items-center mt-1">
               <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
               <Text
                 className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 flex-1"
                 numberOfLines={1}
               >
-                {spot.master_spot?.google_short_address || spot.google_short_address}
+                {address}
               </Text>
             </View>
           )}
 
-          {/* 説明文 */}
-          {description && (
+          {/* 記事プレビュー */}
+          {articlePreview && (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-3"
-              numberOfLines={3}
+              className="text-sm text-foreground dark:text-dark-foreground mt-2"
+              numberOfLines={2}
             >
-              {description}
+              {articlePreview}
             </Text>
           )}
 

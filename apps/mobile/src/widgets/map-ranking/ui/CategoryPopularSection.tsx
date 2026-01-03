@@ -17,14 +17,14 @@ interface CategoryPopularSectionProps {
 }
 
 export function CategoryPopularSection({ categoryId }: CategoryPopularSectionProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
   const { data: maps, isLoading, error } = useCategoryPopularMaps(categoryId, 10, currentUserId);
 
   const category = categories.find((c) => c.id === categoryId);
   const categoryName = category
-    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null)
+    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null, locale)
     : '';
 
   // マップがない場合は何も表示しない

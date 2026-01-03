@@ -189,7 +189,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           {articleData.spots.length > 0 ? (
             <View>
               {articleData.spots.map((spot, index) => {
-                const spotName = spot.custom_name || spot.master_spot?.name || '不明なスポット';
+                const spotName = spot.description || spot.master_spot?.name || '不明なスポット';
                 const firstImage = spot.images?.[0]?.cloud_path;
                 const articleText = extractPlainText(spot.article_content);
                 const hasArticle = articleText.length > 0;

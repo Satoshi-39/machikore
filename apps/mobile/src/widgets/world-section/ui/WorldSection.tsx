@@ -31,7 +31,7 @@ function getCountryFlagEmoji(countryCode: string): string {
 const MAX_DISPLAY_COUNTRIES = 6;
 
 export function WorldSection() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
 
@@ -90,7 +90,7 @@ export function WorldSection() {
             >
               <Text style={{ fontSize: 24 }}>{getCountryFlagEmoji(country.id)}</Text>
               <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
-                {getTranslatedName(country.name, country.name_translations)}
+                {getTranslatedName(country.name, country.name_translations, locale)}
               </Text>
             </Pressable>
           </View>

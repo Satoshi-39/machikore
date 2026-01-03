@@ -27,7 +27,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
   const isDarkMode = useIsDarkMode();
   const selectedColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
   const { data: categories = [], isLoading } = useCategories();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   // 「すべて」を先頭に追加したカテゴリリスト
   const displayCategories = useMemo(() => {
@@ -66,7 +66,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
                   : 'text-foreground-muted dark:text-dark-foreground-muted'
               }`}
             >
-              {getTranslatedName(category.name, category.name_translations)}
+              {getTranslatedName(category.name, category.name_translations, locale)}
             </Text>
             {isSelected && (
               <View

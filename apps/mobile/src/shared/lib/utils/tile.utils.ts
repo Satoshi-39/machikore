@@ -4,7 +4,7 @@
  * 座標をタイルIDに変換し、画面表示範囲から必要なタイルを計算
  */
 
-import { MAP_TILE } from '@/shared/config';
+import { MAP_TILE } from '@/shared/config/constants';
 
 /**
  * マップの境界（バウンディングボックス）
@@ -36,8 +36,8 @@ export function getTileId(latitude: number, longitude: number): string {
  */
 export function getTileBounds(tileId: string): MapBounds {
   const parts = tileId.split('_').map(Number);
-  const tileX = parts[0] ?? 0;
-  const tileY = parts[1] ?? 0;
+  const tileX = Number.isNaN(parts[0]) ? 0 : (parts[0] ?? 0);
+  const tileY = Number.isNaN(parts[1]) ? 0 : (parts[1] ?? 0);
   return {
     west: tileX * MAP_TILE.SIZE - 180,
     east: (tileX + 1) * MAP_TILE.SIZE - 180,

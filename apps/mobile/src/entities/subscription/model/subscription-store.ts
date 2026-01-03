@@ -11,7 +11,7 @@ import {
   isPremiumActive,
   type CustomerInfo,
 } from '@/shared/api/revenuecat';
-import { SUBSCRIPTION } from '@/shared/config';
+import { SUBSCRIPTION } from '@/shared/config/constants';
 import { log } from '@/shared/config/logger';
 
 // ===============================

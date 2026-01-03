@@ -15,7 +15,7 @@ import { useMemo } from 'react';
 import type { CameraState } from './use-bounds-management';
 import type { MachiRow, CityRow, PrefectureRow, RegionRow, CountryRow } from '@/shared/types/database.types';
 import { MAP_ZOOM, MAP_DISTANCE_THRESHOLD } from '@/shared/config';
-import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
+import { getTranslatedName, type TranslationsData, type SupportedLocale } from '@/shared/lib/i18n/translate';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface UseCenterLocationNameParams {
@@ -98,10 +98,13 @@ function findNearest<T extends { latitude: number; longitude: number; name: stri
 /**
  * エンティティから翻訳済み名前を取得
  */
-function getEntityName(entity: MachiRow | CityRow | PrefectureRow | RegionRow | CountryRow): string {
+function getEntityName(
+  entity: MachiRow | CityRow | PrefectureRow | RegionRow | CountryRow,
+  locale: SupportedLocale
+): string {
   // name_translationsがあれば翻訳を取得
   const translations = (entity as { name_translations?: TranslationsData }).name_translations;
-  return getTranslatedName(entity.name, translations ?? null);
+  return getTranslatedName(entity.name, translations ?? null, locale);
 }
 
 export function useCenterLocationName({
@@ -112,7 +115,7 @@ export function useCenterLocationName({
   regions = [],
   countries = [],
 }: UseCenterLocationNameParams): LocationInfo {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return useMemo(() => {
     const { center, zoom } = cameraState;
@@ -128,7 +131,7 @@ export function useCenterLocationName({
       );
       const result = findNearest(validMachi, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.MACHI) {
-        return { name: getEntityName(result.item), type: 'machi', entity: result.item };
+        return { name: getEntityName(result.item, locale), type: 'machi', entity: result.item };
       }
       // 距離しきい値を超えた場合は次のレベル（市区）にフォールスルー
     }
@@ -142,7 +145,7 @@ export function useCenterLocationName({
       );
       const result = findNearest(validCities, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.CITY) {
-        return { name: getEntityName(result.item), type: 'city', entity: result.item };
+        return { name: getEntityName(result.item, locale), type: 'city', entity: result.item };
       }
       // 距離しきい値を超えた場合は次のレベル（都道府県）にフォールスルー
     }
@@ -152,7 +155,7 @@ export function useCenterLocationName({
       // prefecturesはNOT NULLなので直接渡せる
       const result = findNearest(prefectures, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.PREFECTURE) {
-        return { name: getEntityName(result.item), type: 'prefecture', entity: result.item };
+        return { name: getEntityName(result.item, locale), type: 'prefecture', entity: result.item };
       }
       // 距離しきい値を超えた場合は次のレベル（地方）にフォールスルー
     }
@@ -162,7 +165,7 @@ export function useCenterLocationName({
       // regionsはNOT NULLなので直接渡せる
       const result = findNearest(regions, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.REGION) {
-        return { name: getEntityName(result.item), type: 'region', entity: result.item };
+        return { name: getEntityName(result.item, locale), type: 'region', entity: result.item };
       }
       // 距離しきい値を超えた場合は次のレベル（国）にフォールスルー
     }
@@ -172,11 +175,11 @@ export function useCenterLocationName({
       // countriesはNOT NULLなので直接渡せる
       const result = findNearest(countries, center);
       if (result && result.distance <= MAP_DISTANCE_THRESHOLD.COUNTRY) {
-        return { name: getEntityName(result.item), type: 'country', entity: result.item };
+        return { name: getEntityName(result.item, locale), type: 'country', entity: result.item };
       }
     }
 
     // どの距離しきい値も満たさない場合、またはズーム3未満は地球
     return { name: t('location.earth'), type: 'earth', entity: null };
-  }, [cameraState, machiData, cities, prefectures, regions, countries, t]);
+  }, [cameraState, machiData, cities, prefectures, regions, countries, t, locale]);
 }

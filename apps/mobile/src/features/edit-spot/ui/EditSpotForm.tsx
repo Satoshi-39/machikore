@@ -37,8 +37,7 @@ interface EditSpotFormProps {
   /** 中間テーブルから取得したタグ名の配列 */
   initialTags: string[];
   onSubmit: (data: {
-    customName: string;
-    description?: string;
+    description: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -69,13 +68,12 @@ export function EditSpotForm({
 }: EditSpotFormProps) {
   const { t } = useI18n();
   const router = useRouter();
-  const spotName = spot.custom_name || spot.master_spot?.name || '';
+  const initialDescription = spot.description || '';
 
   // 選択中のマップを取得
   const selectedMap = userMaps.find(m => m.id === selectedMapId);
 
-  const [customName, setCustomName] = useState(spotName);
-  const [description, setDescription] = useState(spot.description || '');
+  const [description, setDescription] = useState(initialDescription);
   const articleContent = spot.article_content || '';
   const [tags, setTags] = useState<string[]>(initialTags);
   const [spotColor, setSpotColor] = useState<SpotColor>(
@@ -104,7 +102,6 @@ export function EditSpotForm({
 
   // 変更検出とバリデーション
   const { hasChanges, isFormValid } = useEditSpotFormChanges(spot, initialTags, {
-    customName,
     description,
     tags,
     newImages,
@@ -119,8 +116,7 @@ export function EditSpotForm({
 
   const handleSubmit = () => {
     onSubmit({
-      customName: customName.trim(),
-      description: description.trim() || undefined,
+      description: description.trim(),
       tags,
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
@@ -230,37 +226,15 @@ export function EditSpotForm({
             {t('spot.oneWordRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <StyledTextInput
-            value={customName}
-            onChangeText={setCustomName}
+            value={description}
+            onChangeText={setDescription}
             placeholder={t('spot.oneWordPlaceholder')}
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
             className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
           <View className="flex-row justify-end mt-1">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {customName.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
-            </Text>
-          </View>
-        </View>
-
-        {/* スポットの概要（任意） */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            {t('spot.spotSummary')}
-          </Text>
-          <StyledTextInput
-            value={description}
-            onChangeText={setDescription}
-            placeholder={t('spot.summaryPlaceholder')}
-            multiline
-            numberOfLines={2}
-            maxLength={INPUT_LIMITS.SPOT_SUMMARY}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
-            textAlignVertical="top"
-          />
-          <View className="flex-row justify-end mt-1">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {description.length}/{INPUT_LIMITS.SPOT_SUMMARY}
+              {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
             </Text>
           </View>
         </View>

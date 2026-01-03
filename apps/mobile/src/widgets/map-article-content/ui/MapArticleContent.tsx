@@ -51,7 +51,7 @@ export function MapArticleContent({
   onCommentsPress,
   onMapPress,
 }: MapArticleContentProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { map, spots } = articleData;
 
   // 画像ビューアー
@@ -190,7 +190,7 @@ export function MapArticleContent({
               user={map.user}
               userId={map.user_id}
               size="small"
-              createdAt={formatRelativeTime(map.created_at)}
+              createdAt={formatRelativeTime(map.created_at, locale)}
               onUserPress={onUserPress}
             />
           </View>

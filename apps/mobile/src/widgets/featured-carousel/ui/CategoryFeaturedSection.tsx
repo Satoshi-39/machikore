@@ -26,14 +26,14 @@ interface CategoryFeaturedSectionProps {
 export function CategoryFeaturedSection({ categoryId }: CategoryFeaturedSectionProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
   const { data: maps, isLoading, error } = useCategoryFeaturedMaps(categoryId, currentUserId);
 
   const category = categories.find((c) => c.id === categoryId);
   const categoryName = category
-    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null)
+    ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null, locale)
     : '';
 
   const handleMapPress = useCallback(

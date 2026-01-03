@@ -7,7 +7,6 @@
 import { useMemo } from 'react';
 
 interface CreateSpotFormValues {
-  customName: string;
   description: string;
   selectedMapId: string | null;
 }
@@ -17,12 +16,12 @@ interface CreateSpotFormValues {
  */
 export function useCreateSpotFormValidation(currentValues: CreateSpotFormValues) {
   const isFormValid = useMemo(() => {
-    // スポット名とマップ選択は必須（概要は任意）
+    // 一言説明とマップ選択は必須
     return !!(
-      currentValues.customName.trim() &&
+      currentValues.description.trim() &&
       currentValues.selectedMapId
     );
-  }, [currentValues.customName, currentValues.selectedMapId]);
+  }, [currentValues.description, currentValues.selectedMapId]);
 
   return {
     isFormValid,

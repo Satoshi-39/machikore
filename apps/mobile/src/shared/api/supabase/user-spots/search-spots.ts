@@ -10,14 +10,14 @@ import type { UserSpotSearchResult, MapSpotSearchResult } from './types';
  * 発見タブの検索で使用
  *
  * 検索対象:
- * 1. user_spots.custom_name, user_spots.description
+ * 1. user_spots.description
  * 2. master_spots.name（スポット名）
  */
 export async function searchPublicUserSpots(
   query: string,
   limit: number = 30
 ): Promise<UserSpotSearchResult[]> {
-  // 1. user_spotsのcustom_name, descriptionで検索
+  // 1. user_spotsのdescriptionで検索
   const { data: userSpotResults } = await supabase
     .from('user_spots')
     .select(`
@@ -41,7 +41,7 @@ export async function searchPublicUserSpots(
       )
     `)
     .eq('maps.is_public', true)
-    .or(`custom_name.ilike.%${query}%,description.ilike.%${query}%`)
+    .ilike('description', `%${query}%`)
     .order('created_at', { ascending: false })
     .limit(limit);
 
@@ -89,7 +89,6 @@ export async function searchPublicUserSpots(
       map_id: spot.map_id,
       master_spot_id: spot.master_spot_id,
       machi_id: spot.machi_id,
-      custom_name: spot.custom_name,
       description: spot.description,
       tags: spot.tags,
       spot_color: spot.spot_color || null,
@@ -119,7 +118,6 @@ export async function searchPublicUserSpots(
           map_id: spot.map_id,
           master_spot_id: spot.master_spot_id,
           machi_id: spot.machi_id,
-          custom_name: spot.custom_name,
           description: spot.description,
           tags: spot.tags,
           spot_color: spot.spot_color || null,
@@ -163,12 +161,12 @@ export async function searchSpotsByMapId(
   query: string,
   limit: number = 30
 ): Promise<MapSpotSearchResult[]> {
-  // 1. user_spotsのcustom_nameで検索
-  const { data: customNameResults } = await supabase
+  // 1. user_spotsのdescriptionで検索
+  const { data: descriptionResults } = await supabase
     .from('user_spots')
     .select(`
       id,
-      custom_name,
+      description,
       master_spots (
         name,
         latitude,
@@ -177,7 +175,7 @@ export async function searchSpotsByMapId(
       )
     `)
     .eq('map_id', mapId)
-    .ilike('custom_name', `%${query}%`)
+    .ilike('description', `%${query}%`)
     .limit(limit);
 
   // 2. master_spotsの名前で検索
@@ -185,7 +183,7 @@ export async function searchSpotsByMapId(
     .from('user_spots')
     .select(`
       id,
-      custom_name,
+      description,
       master_spots!inner (
         name,
         latitude,
@@ -205,7 +203,7 @@ export async function searchSpotsByMapId(
     if (masterSpot && !resultMap.has(spot.id)) {
       resultMap.set(spot.id, {
         id: spot.id,
-        name: spot.custom_name || masterSpot.name,
+        name: spot.description || masterSpot.name,
         address: masterSpot.google_short_address,
         latitude: masterSpot.latitude,
         longitude: masterSpot.longitude,
@@ -213,7 +211,7 @@ export async function searchSpotsByMapId(
     }
   };
 
-  (customNameResults || []).forEach(processSpot);
+  (descriptionResults || []).forEach(processSpot);
   (masterNameResults || []).forEach(processSpot);
 
   return Array.from(resultMap.values()).slice(0, limit);

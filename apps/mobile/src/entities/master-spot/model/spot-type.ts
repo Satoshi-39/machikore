@@ -16,7 +16,12 @@ export function determineSpotCategory(googleTypes: string[] | string | null): Sp
   let types: string[];
   if (typeof googleTypes === 'string') {
     try {
-      types = JSON.parse(googleTypes) as string[];
+      const parsed = JSON.parse(googleTypes);
+      // 配列でない場合は無効
+      if (!Array.isArray(parsed)) {
+        return 'other';
+      }
+      types = parsed as string[];
     } catch {
       return 'other';
     }

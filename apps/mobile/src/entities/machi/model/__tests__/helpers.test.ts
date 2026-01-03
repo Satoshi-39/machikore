@@ -129,8 +129,9 @@ describe('machi/helpers', () => {
         createMockMachi('3', '秋葉原'),
       ];
       const result = sortMachiByName(mockMachiList);
-      // localeCompare('ja')でソート: 漢字のUnicodeコードポイント順
-      // 実際の結果に合わせる
+      // localeCompare('ja')を使用。漢字は読みがな順ではなく、
+      // ロケールに基づく照合順序（部首・画数等）でソートされる。
+      // 注意: 五十音順（あきはばら→いけぶくろ→しぶや）にはならない
       expect(result.map((m) => m.name)).toEqual(['秋葉原', '渋谷', '池袋']);
     });
 

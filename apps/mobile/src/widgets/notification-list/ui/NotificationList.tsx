@@ -17,7 +17,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useI18n } from '@/shared/lib/i18n';
+import { useI18n, type SupportedLocale } from '@/shared/lib/i18n';
 import { formatRelativeTime } from '@/shared/lib/utils';
 import { useUserStore } from '@/entities/user';
 import {
@@ -47,7 +47,7 @@ function getNotificationMessage(
 ): string {
   const actorName = notification.actor?.display_name || notification.actor?.username || t('mypage.defaultUser');
   const spotName =
-    notification.spot?.custom_name ||
+    notification.spot?.description ||
     notification.spot?.master_spot?.name ||
     t('spot.spotName');
   const mapName = notification.map?.name || t('map.mapName');
@@ -75,9 +75,10 @@ interface NotificationItemProps {
   onAvatarPress: () => void;
   onContentPress: () => void;
   t: (key: string, params?: Record<string, string | number>) => string;
+  locale: SupportedLocale;
 }
 
-function NotificationItem({ notification, onAvatarPress, onContentPress, t }: NotificationItemProps) {
+function NotificationItem({ notification, onAvatarPress, onContentPress, t, locale }: NotificationItemProps) {
   const config = NOTIFICATION_TYPE_CONFIG[notification.type];
   const message = getNotificationMessage(notification, t);
 
@@ -133,7 +134,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t }: No
 
         {/* 時間 */}
         <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
-          {formatRelativeTime(notification.created_at)}
+          {formatRelativeTime(notification.created_at, locale)}
         </Text>
       </Pressable>
 
@@ -147,7 +148,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t }: No
 
 export function NotificationList() {
   const router = useRouter();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const user = useUserStore((state) => state.user);
   const { data: notifications = [], isLoading, refetch, isRefetching } = useNotifications(user?.id);
   const { mutate: markAsRead } = useMarkNotificationAsRead();
@@ -239,6 +240,7 @@ export function NotificationList() {
             onAvatarPress={() => handleAvatarPress(item)}
             onContentPress={() => handleContentPress(item)}
             t={t}
+            locale={locale}
           />
         )}
         refreshControl={

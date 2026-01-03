@@ -22,7 +22,7 @@ import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import type { SpotWithDetails } from '@/shared/types';
 
 export function PrefectureSpotsPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const { prefectureId, categoryId } = useLocalSearchParams<{
@@ -54,8 +54,8 @@ export function PrefectureSpotsPage() {
 
   const prefecture = prefectures.find((p) => p.id === prefectureId);
   const category = categories.find((c) => c.id === categoryId);
-  const prefectureName = prefecture ? getTranslatedName(prefecture.name, prefecture.name_translations) : '';
-  const categoryName = category ? getTranslatedName(category.name, category.name_translations) : '';
+  const prefectureName = prefecture ? getTranslatedName(prefecture.name, prefecture.name_translations, locale) : '';
+  const categoryName = category ? getTranslatedName(category.name, category.name_translations, locale) : '';
 
   const handleSpotPress = useCallback(
     (spotId: string) => {

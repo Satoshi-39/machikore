@@ -64,11 +64,16 @@ export function validateCreateVisitParams(
 // ===============================
 
 /**
- * 訪問日時を日本語フォーマットで取得
+ * 訪問日時をフォーマットで取得
+ * @param visitedAt - ISO 8601形式の日時文字列
+ * @param locale - ロケール（デフォルト: 'ja-JP'）
  */
-export function formatVisitDate(visitedAt: string): string {
+export function formatVisitDate(
+  visitedAt: string,
+  locale: string = 'ja-JP'
+): string {
   const date = new Date(visitedAt);
-  return new Intl.DateTimeFormat('ja-JP', {
+  return new Intl.DateTimeFormat(locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

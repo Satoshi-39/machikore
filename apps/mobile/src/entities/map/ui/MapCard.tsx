@@ -35,7 +35,7 @@ interface MapCardProps {
 
 export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress, noBorder = false }: MapCardProps) {
   const router = useRouter();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
@@ -141,7 +141,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
             </Text>
           </Pressable>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-            {formatRelativeTime(map.created_at)}
+            {formatRelativeTime(map.created_at, locale)}
           </Text>
         </View>
 
