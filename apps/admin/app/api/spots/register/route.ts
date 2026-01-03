@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServerClient } from "@/shared/api";
-
-const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
+import { createAdminClient } from "@/shared/api";
+import { getServerEnv } from "@/shared/config";
 
 type PlaceDetails = {
+  placeId: string;
   name: string;
   formattedAddress: string;
   latitude: number;
@@ -16,47 +16,69 @@ type PlaceDetails = {
 };
 
 /**
- * Google Places API (New) でPlace詳細を取得
+ * Google Places Text Search API で場所を検索
  */
-async function getPlaceDetails(placeId: string): Promise<PlaceDetails | null> {
+async function searchPlace(
+  name: string,
+  address: string
+): Promise<PlaceDetails | null> {
+  const { GOOGLE_PLACES_API_KEY } = getServerEnv();
+
   if (!GOOGLE_PLACES_API_KEY) {
     console.error("Google Places API key is not configured");
     return null;
   }
 
   try {
-    const response = await fetch(
-      `https://places.googleapis.com/v1/places/${placeId}`,
+    // Text Search で検索
+    const searchResponse = await fetch(
+      "https://places.googleapis.com/v1/places:searchText",
       {
+        method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "X-Goog-Api-Key": GOOGLE_PLACES_API_KEY,
           "X-Goog-FieldMask":
-            "displayName,formattedAddress,location,types,internationalPhoneNumber,websiteUri,rating,userRatingCount",
+            "places.id,places.displayName,places.formattedAddress,places.location,places.types,places.internationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount",
         },
+        body: JSON.stringify({
+          textQuery: `${name} ${address}`,
+          languageCode: "ja",
+          regionCode: "JP",
+        }),
       }
     );
 
-    if (!response.ok) {
-      const error = await response.text();
-      console.error("Google Places API error:", error);
+    if (!searchResponse.ok) {
+      const error = await searchResponse.text();
+      console.error("Google Places Text Search error:", error);
       return null;
     }
 
-    const data = await response.json();
+    const searchData = await searchResponse.json();
+
+    if (!searchData.places || searchData.places.length === 0) {
+      console.error("No places found for:", name, address);
+      return null;
+    }
+
+    // 最初の結果を使用
+    const place = searchData.places[0];
 
     return {
-      name: data.displayName?.text || "",
-      formattedAddress: data.formattedAddress || "",
-      latitude: data.location?.latitude || 0,
-      longitude: data.location?.longitude || 0,
-      types: data.types || [],
-      phoneNumber: data.internationalPhoneNumber,
-      websiteUri: data.websiteUri,
-      rating: data.rating,
-      userRatingCount: data.userRatingCount,
+      placeId: place.id,
+      name: place.displayName?.text || "",
+      formattedAddress: place.formattedAddress || "",
+      latitude: place.location?.latitude || 0,
+      longitude: place.location?.longitude || 0,
+      types: place.types || [],
+      phoneNumber: place.internationalPhoneNumber,
+      websiteUri: place.websiteUri,
+      rating: place.rating,
+      userRatingCount: place.userRatingCount,
     };
   } catch (error) {
-    console.error("Failed to get place details:", error);
+    console.error("Failed to search place:", error);
     return null;
   }
 }
@@ -65,7 +87,7 @@ async function getPlaceDetails(placeId: string): Promise<PlaceDetails | null> {
  * master_spotを取得または作成
  */
 async function getOrCreateMasterSpot(
-  supabase: Awaited<ReturnType<typeof createServerClient>>,
+  supabase: ReturnType<typeof createAdminClient>,
   input: {
     googlePlaceId: string;
     name: string;
@@ -129,7 +151,7 @@ async function getOrCreateMasterSpot(
  * 座標から行政区画を判定し、最寄りの街を検索
  */
 async function findMachiForSpot(
-  supabase: Awaited<ReturnType<typeof createServerClient>>,
+  supabase: ReturnType<typeof createAdminClient>,
   latitude: number,
   longitude: number,
   formattedAddress?: string
@@ -211,25 +233,25 @@ async function findMachiForSpot(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { google_place_id, map_id, custom_name } = body;
+    const { name, address, map_id, custom_name } = body;
 
-    if (!google_place_id || !map_id) {
+    if (!name || !address || !map_id || !custom_name) {
       return NextResponse.json(
-        { error: "google_place_id and map_id are required" },
+        { error: "name, address, map_id, and custom_name are required" },
         { status: 400 }
       );
     }
 
-    // Google Places APIで詳細を取得
-    const placeDetails = await getPlaceDetails(google_place_id);
+    // Google Places Text Search APIで場所を検索
+    const placeDetails = await searchPlace(name, address);
     if (!placeDetails) {
       return NextResponse.json(
-        { error: "Failed to get place details from Google" },
+        { error: "Failed to find place from Google" },
         { status: 500 }
       );
     }
 
-    const supabase = await createServerClient();
+    const supabase = createAdminClient();
 
     // マップ情報を取得（オーナーとlanguage）
     const { data: mapData, error: mapError } = await supabase
@@ -255,7 +277,7 @@ export async function POST(request: NextRequest) {
 
     // master_spotを取得または作成
     const masterSpotId = await getOrCreateMasterSpot(supabase, {
-      googlePlaceId: google_place_id,
+      googlePlaceId: placeDetails.placeId,
       name: placeDetails.name,
       latitude: placeDetails.latitude,
       longitude: placeDetails.longitude,
@@ -279,7 +301,7 @@ export async function POST(request: NextRequest) {
         prefecture_id: machiInfo?.prefectureId ?? null,
         latitude: placeDetails.latitude,
         longitude: placeDetails.longitude,
-        custom_name: custom_name || placeDetails.name,
+        custom_name: custom_name,
         language: mapData.language,
       })
       .select("id")
@@ -297,6 +319,7 @@ export async function POST(request: NextRequest) {
       id: spotData.id,
       name: placeDetails.name,
       address: placeDetails.formattedAddress,
+      place_id: placeDetails.placeId,
     });
   } catch (error) {
     console.error("API error:", error);

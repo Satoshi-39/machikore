@@ -114,7 +114,7 @@ export function MapBulkUpload() {
     setIsDragging(false);
 
     const file = e.dataTransfer.files[0];
-    if (!file || !file.name.endsWith(".csv")) {
+    if (!file || (!file.name.toLowerCase().endsWith(".csv") && file.type !== "text/csv")) {
       alert("CSVファイルをアップロードしてください");
       return;
     }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServerClient } from "@/shared/api";
+import { createAdminClient } from "@/shared/api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createServerClient();
+    const supabase = createAdminClient();
 
     // ユーザーが存在するか確認
     const { data: user, error: userError } = await supabase

@@ -1,0 +1,6 @@
+name,description,category_id,is_public,is_official,language
+東京カフェ巡り,都内のおすすめカフェを厳選,gourmet,true,true,ja
+京都の神社仏閣,京都の歴史ある神社仏閣を紹介,tourism,true,true,ja
+大阪グルメスポット,大阪で食べるべきグルメスポット,gourmet,true,true,ja
+渋谷ショッピングガイド,渋谷のおすすめショップを紹介,shopping,true,true,ja
+日本の文化遺産,日本各地の文化遺産を巡る,culture,true,true,ja

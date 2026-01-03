@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServerClient } from "@/shared/api";
+import { createAdminClient } from "@/shared/api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createServerClient();
+    const supabase = createAdminClient();
 
     // 都道府県が存在するか確認
     const { data: prefecture, error: prefError } = await supabase

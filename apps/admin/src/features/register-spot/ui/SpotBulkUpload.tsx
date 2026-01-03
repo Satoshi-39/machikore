@@ -28,12 +28,14 @@ type MapOption = {
 
 type CsvRow = {
   row_number: number;
-  google_place_id: string;
+  name: string;
+  address: string;
   custom_name?: string;
   status: "pending" | "processing" | "success" | "error";
   error?: string;
   resolved_name?: string;
   resolved_address?: string;
+  resolved_place_id?: string;
 };
 
 type ImportProgress = {
@@ -75,27 +77,39 @@ export function SpotBulkUpload() {
     if (lines.length < 2) return [];
 
     const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
-    const placeIdIndex = headers.findIndex(
-      (h) => h === "google_place_id" || h === "place_id" || h === "placeid"
-    );
     const nameIndex = headers.findIndex(
-      (h) => h === "custom_name" || h === "name" || h === "spot_name"
+      (h) => h === "name" || h === "店舗名" || h === "スポット名"
+    );
+    const addressIndex = headers.findIndex(
+      (h) => h === "address" || h === "住所" || h === "エリア"
+    );
+    const customNameIndex = headers.findIndex(
+      (h) => h === "custom_name" || h === "一言" || h === "キャッチコピー"
     );
 
-    if (placeIdIndex === -1) {
-      throw new Error("CSVにgoogle_place_id列が見つかりません");
+    if (nameIndex === -1) {
+      throw new Error("CSVにname列が見つかりません");
+    }
+    if (addressIndex === -1) {
+      throw new Error("CSVにaddress列が見つかりません");
+    }
+    if (customNameIndex === -1) {
+      throw new Error("CSVにcustom_name列が見つかりません");
     }
 
     const rows: CsvRow[] = [];
     for (let i = 1; i < lines.length; i++) {
       const values = lines[i].split(",").map((v) => v.trim().replace(/^"|"$/g, ""));
-      const placeId = values[placeIdIndex];
-      if (!placeId) continue;
+      const name = values[nameIndex];
+      const address = values[addressIndex];
+      const customName = values[customNameIndex];
+      if (!name || !address || !customName) continue;
 
       rows.push({
         row_number: i + 1,
-        google_place_id: placeId,
-        custom_name: nameIndex !== -1 ? values[nameIndex] : undefined,
+        name,
+        address,
+        custom_name: customName,
         status: "pending",
       });
     }
@@ -109,7 +123,7 @@ export function SpotBulkUpload() {
     setIsDragging(false);
 
     const file = e.dataTransfer.files[0];
-    if (!file || !file.name.endsWith(".csv")) {
+    if (!file || (!file.name.toLowerCase().endsWith(".csv") && file.type !== "text/csv")) {
       alert("CSVファイルをアップロードしてください");
       return;
     }
@@ -174,7 +188,8 @@ export function SpotBulkUpload() {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                google_place_id: row.google_place_id,
+                name: row.name,
+                address: row.address,
                 map_id: selectedMapId,
                 custom_name: row.custom_name,
               }),
@@ -281,14 +296,16 @@ export function SpotBulkUpload() {
                 1行目にヘッダー、2行目以降にデータを記述してください
               </p>
               <code className="mt-2 block rounded bg-blue-100 p-2 text-xs text-blue-800">
-                google_place_id,custom_name
+                name,address,custom_name
                 <br />
-                ChIJ...abc,渋谷スクランブル交差点
+                スターバックス,渋谷区道玄坂,おしゃれなカフェ
                 <br />
-                ChIJ...def,東京タワー
+                東京タワー,港区芝公園,東京のシンボル
               </code>
               <p className="mt-2 text-xs text-blue-600">
-                ※ custom_nameは省略可（Google Placesの名前が使用されます）
+                ※ 店舗名と住所/エリアからGoogle Placesで自動検索されます
+                <br />
+                ※ custom_nameは必須（スポットを一言で表すキャッチコピー）
               </p>
             </div>
           </div>
@@ -344,8 +361,8 @@ export function SpotBulkUpload() {
                   <TableRow>
                     <TableHead className="w-12">状態</TableHead>
                     <TableHead className="w-16">行</TableHead>
-                    <TableHead>Google Place ID</TableHead>
-                    <TableHead>カスタム名</TableHead>
+                    <TableHead>店舗名</TableHead>
+                    <TableHead>住所/エリア</TableHead>
                     <TableHead>結果</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -354,10 +371,8 @@ export function SpotBulkUpload() {
                     <TableRow key={index}>
                       <TableCell>{getStatusIcon(row.status)}</TableCell>
                       <TableCell className="text-gray-500">{row.row_number}</TableCell>
-                      <TableCell className="font-mono text-xs">
-                        {row.google_place_id.slice(0, 20)}...
-                      </TableCell>
-                      <TableCell>{row.custom_name || "-"}</TableCell>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell className="text-gray-500">{row.address}</TableCell>
                       <TableCell>
                         {row.status === "success" && (
                           <span className="text-green-600">{row.resolved_name}</span>

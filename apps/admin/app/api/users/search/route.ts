@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServerClient } from "@/shared/api";
+import { createAdminClient } from "@/shared/api";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const supabase = await createServerClient();
+    const supabase = createAdminClient();
 
     const { data, error } = await supabase
       .from("users")
