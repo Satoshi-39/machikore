@@ -2028,8 +2028,7 @@ export type Database = {
           color: string | null
           comments_count: number
           created_at: string
-          custom_name: string
-          description: string | null
+          description: string
           google_formatted_address: string | null
           google_short_address: string | null
           id: string
@@ -2058,8 +2057,7 @@ export type Database = {
           color?: string | null
           comments_count?: number
           created_at?: string
-          custom_name: string
-          description?: string | null
+          description: string
           google_formatted_address?: string | null
           google_short_address?: string | null
           id?: string
@@ -2088,8 +2086,7 @@ export type Database = {
           color?: string | null
           comments_count?: number
           created_at?: string
-          custom_name?: string
-          description?: string | null
+          description?: string
           google_formatted_address?: string | null
           google_short_address?: string | null
           id?: string

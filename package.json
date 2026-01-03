@@ -11,5 +11,8 @@
     "admin": "npm run --workspace=apps/admin",
     "dev:mobile": "npm run dev --workspace=apps/mobile",
     "dev:admin": "npm run dev --workspace=apps/admin"
+  },
+  "overrides": {
+    "react-test-renderer": "19.1.2"
   }
 }
