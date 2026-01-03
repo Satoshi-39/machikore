@@ -9,6 +9,7 @@ import {
   Map,
   Settings,
   Building2,
+  Upload,
 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 
@@ -18,6 +19,7 @@ const navigation = [
   { name: "スポット管理", href: "/spots", icon: MapPin },
   { name: "街管理", href: "/machi", icon: Building2 },
   { name: "マップ管理", href: "/maps", icon: Map },
+  { name: "登録", href: "/register", icon: Upload },
   { name: "設定", href: "/settings", icon: Settings },
 ];
 
