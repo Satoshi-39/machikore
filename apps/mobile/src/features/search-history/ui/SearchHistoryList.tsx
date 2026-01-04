@@ -8,7 +8,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import type { SearchHistoryItem } from '../api/search-history-storage';
+import type { SearchHistoryItem } from '../model/types';
 
 const INITIAL_DISPLAY_COUNT = 8; // 初期表示件数
 const MAX_DISPLAY_COUNT = 20; // 最大表示件数

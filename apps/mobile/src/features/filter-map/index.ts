@@ -1,1 +1,2 @@
-export { MapFilterButtons, type MapFilter } from './ui/MapFilterButtons';
+export { MapFilterButtons } from './ui/MapFilterButtons';
+export type { MapFilter, MapFilterButtonsProps } from './model';

@@ -2,7 +2,7 @@
  * User Spots API 型定義
  */
 
-import type { Database } from '@/shared/types/database.types';
+import type { Database, Json } from '@/shared/types/database.types';
 import type { ProseMirrorDoc, MapLabelBasicInfo } from '@/shared/types';
 
 // MergeDeepで拡張されたDatabase型を使用
@@ -16,7 +16,7 @@ export interface CreateSpotInput {
   userId: string;
   mapId: string;
   machiId?: string | null;
-  prefectureId?: string | null;
+  // prefecture_id, city_id, prefecture_name, city_name, machi_name は machi テーブルから JOIN で取得
   // master_spot情報
   name: string;
   latitude: number;
@@ -44,11 +44,6 @@ export interface UpdateSpotInput {
   map_id?: string;
   spot_color?: string | null;
   label_id?: string | null;
-}
-
-export interface UserSpotWithMasterSpot extends UserSpotRow {
-  master_spot: MasterSpotRow | null;
-  map_label?: MapLabelBasicInfo | null;
 }
 
 export interface UserSpotImage {
@@ -83,8 +78,8 @@ export interface UserSpotSearchResult {
     latitude: number;
     longitude: number;
     google_place_id: string | null;
-    google_formatted_address: string | null;
-    google_short_address: string | null;
+    google_formatted_address: Json | null;
+    google_short_address: Json | null;
     google_types: string[] | null;
   } | null;
   user: {
@@ -105,7 +100,7 @@ export interface UserSpotSearchResult {
 export interface MapSpotSearchResult {
   id: string;
   name: string;
-  address: string | null;
+  address: Json | null; // JSONB型（多言語対応）
   latitude: number;
   longitude: number;
 }

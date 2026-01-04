@@ -9,17 +9,8 @@ import {
   addSearchHistoryToDB,
   removeSearchHistoryFromDB,
   clearSearchHistoryFromDB,
-  type SearchHistoryItem,
 } from '../api/search-history-supabase';
-
-interface UseDiscoverSearchHistoryReturn {
-  history: SearchHistoryItem[];
-  isLoading: boolean;
-  addHistory: (query: string) => Promise<void>;
-  removeHistory: (id: string) => Promise<void>;
-  clearHistory: () => Promise<void>;
-  refresh: () => Promise<void>;
-}
+import type { SearchHistoryItem, UseDiscoverSearchHistoryReturn } from './types';
 
 export function useDiscoverSearchHistory(): UseDiscoverSearchHistoryReturn {
   const user = useCurrentUser();

@@ -28,12 +28,7 @@ import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
 import type { SpotColor } from '@/shared/config';
 import type { ProseMirrorDoc } from '@/shared/types';
-
-export interface UploadProgress {
-  current: number;
-  total: number;
-  status: 'idle' | 'creating' | 'uploading' | 'done';
-}
+import type { UploadProgress } from './types';
 
 export function useSpotForm() {
   const router = useRouter();
@@ -172,8 +167,8 @@ export function useSpotForm() {
     }
 
     // スポットに紐づけるmachiを特定（見つからない場合はnull）
+    // prefecture_id等は machi テーブルから JOIN で取得するため、machiId のみ保存
     let machiId: string | null = null;
-    let prefectureId: string | null = null;
     try {
       const machi = await findMachiForSpot(
         selectedPlace.latitude,
@@ -181,7 +176,6 @@ export function useSpotForm() {
         selectedPlace.formattedAddress ?? undefined
       );
       machiId = machi?.id ?? null;
-      prefectureId = machi?.prefecture_id ?? null;
       if (!machiId) {
         log.info('[useSpotForm] 最寄りの街が見つかりませんでした。machi_idなしで登録します');
       }
@@ -198,7 +192,6 @@ export function useSpotForm() {
         userId: user.id,
         mapId: data.mapId,
         machiId,
-        prefectureId,
         name: selectedPlace.name ?? data.description,
         latitude: selectedPlace.latitude,
         longitude: selectedPlace.longitude,

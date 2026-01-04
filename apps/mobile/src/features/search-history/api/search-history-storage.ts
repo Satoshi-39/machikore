@@ -4,6 +4,8 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { log } from '@/shared/config/logger';
+import { SEARCH_HISTORY } from '@/shared/config';
+import type { SearchHistoryType, SearchHistoryItem, SearchResultType } from '../model/types';
 
 // 保存キー（デフォルトマップとユーザーマップで分ける）
 const STORAGE_KEYS = {
@@ -11,17 +13,6 @@ const STORAGE_KEYS = {
   userMap: 'search_history_user_map',
   discover: 'search_history_discover',
 } as const;
-
-export type SearchHistoryType = 'defaultMap' | 'userMap' | 'discover';
-
-export interface SearchHistoryItem {
-  id: string;
-  query: string;
-  timestamp: number;
-  resultType?: 'machi' | 'spot' | 'place' | 'city' | 'prefecture' | 'region' | 'country'; // 検索結果のタイプ
-}
-
-const MAX_HISTORY_COUNT = 20; // 最大履歴数
 
 /**
  * 検索履歴を取得
@@ -43,7 +34,7 @@ export async function getSearchHistory(type: SearchHistoryType): Promise<SearchH
 export async function addSearchHistory(
   type: SearchHistoryType,
   query: string,
-  resultType?: 'machi' | 'spot' | 'place' | 'city' | 'prefecture' | 'region' | 'country'
+  resultType?: SearchResultType
 ): Promise<void> {
   try {
     const key = STORAGE_KEYS[type];
@@ -60,7 +51,7 @@ export async function addSearchHistory(
       resultType,
     };
 
-    const newHistory = [newItem, ...filteredHistory].slice(0, MAX_HISTORY_COUNT);
+    const newHistory = [newItem, ...filteredHistory].slice(0, SEARCH_HISTORY.MAX_COUNT);
     await AsyncStorage.setItem(key, JSON.stringify(newHistory));
   } catch (error) {
     log.error('[SearchHistory] Failed to add search history:', error);

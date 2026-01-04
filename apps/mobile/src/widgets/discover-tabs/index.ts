@@ -1,1 +1,2 @@
-export { DiscoverTabs, type DiscoverTabMode } from './ui/DiscoverTabs';
+export { DiscoverTabs } from './ui/DiscoverTabs';
+export type { DiscoverTabMode } from './model';

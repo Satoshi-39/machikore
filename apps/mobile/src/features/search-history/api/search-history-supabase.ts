@@ -5,21 +5,7 @@
 
 import { supabase } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
-
-export interface SearchHistoryRecord {
-  id: string;
-  user_id: string;
-  query: string;
-  search_type: string;
-  searched_at: string;
-  created_at: string;
-}
-
-export interface SearchHistoryItem {
-  id: string;
-  query: string;
-  timestamp: number;
-}
+import type { SearchHistoryItem } from '../model/types';
 
 /**
  * 検索履歴を取得

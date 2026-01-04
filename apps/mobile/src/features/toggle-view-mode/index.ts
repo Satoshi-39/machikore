@@ -1,7 +1,7 @@
-export {
-  ViewModeToggle,
-  mapHierarchyConfig,
-  mapListConfig,
-  type MapHierarchyViewMode,
-  type MapListViewMode,
-} from './ui/ViewModeToggle';
+export { ViewModeToggle, mapHierarchyConfig, mapListConfig } from './ui/ViewModeToggle';
+export type {
+  ViewModeConfig,
+  ViewModeToggleProps,
+  MapHierarchyViewMode,
+  MapListViewMode,
+} from './model';

@@ -5,25 +5,15 @@
  */
 
 import { useMemo } from 'react';
-import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
-import type { SelectedImage } from '@/features/pick-images';
 import { DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
-
-interface EditSpotFormCurrentValues {
-  description: string;
-  tags: string[];
-  newImages: SelectedImage[];
-  deletedImageIds: string[];
-  selectedMapId: string | null;
-  spotColor: SpotColor;
-  labelId: string | null;
-}
+import type { SpotWithDetails } from '@/shared/types';
+import type { EditSpotFormCurrentValues } from './types';
 
 /**
  * フォームの変更検出hook
  */
 export function useEditSpotFormChanges(
-  spot: UserSpotWithMasterSpot,
+  spot: SpotWithDetails,
   initialTags: string[],
   currentValues: EditSpotFormCurrentValues
 ) {

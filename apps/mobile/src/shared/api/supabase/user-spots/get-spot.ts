@@ -1,36 +1,12 @@
 /**
  * 単一スポット取得
+ *
+ * API層は生データ（JSONB型）をそのまま返す
+ * 住所の言語抽出は表示層（entities/widgets）で行う
  */
 
 import { supabase, handleSupabaseError } from '../client';
 import type { SpotWithDetails } from '@/shared/types';
-import type { UserSpotWithMasterSpot } from './types';
-
-/**
- * IDでスポットを取得（master_spotを結合）
- */
-export async function getSpotById(spotId: string): Promise<UserSpotWithMasterSpot | null> {
-  const { data, error } = await supabase
-    .from('user_spots')
-    .select(`
-      *,
-      master_spots (*)
-    `)
-    .eq('id', spotId)
-    .single();
-
-  if (error) {
-    if (error.code === 'PGRST116') {
-      return null;
-    }
-    handleSupabaseError('getSpotById', error);
-  }
-
-  return {
-    ...data,
-    master_spot: (data as any).master_spots || null,
-  };
-}
 
 /**
  * IDでスポットを詳細情報付きで取得（user, master_spot, is_liked含む）
@@ -100,7 +76,16 @@ export async function getSpotWithDetails(
     longitude: spot.longitude,
     google_formatted_address: spot.google_formatted_address,
     google_short_address: spot.google_short_address,
-    master_spot: spot.master_spots || null,
+    master_spot: spot.master_spots ? {
+      id: spot.master_spots.id,
+      name: spot.master_spots.name,
+      latitude: spot.master_spots.latitude,
+      longitude: spot.master_spots.longitude,
+      google_place_id: spot.master_spots.google_place_id,
+      google_formatted_address: spot.master_spots.google_formatted_address,
+      google_short_address: spot.master_spots.google_short_address,
+      google_types: spot.master_spots.google_types,
+    } : null,
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
     is_liked: isLiked,

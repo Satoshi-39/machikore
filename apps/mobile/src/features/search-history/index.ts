@@ -2,13 +2,18 @@
  * Search History Feature エクスポート
  */
 
-// AsyncStorage版（defaultMap, userMap用）
-export { useSearchHistory } from './model/use-search-history';
-export type { SearchHistoryItem, SearchHistoryType } from './api/search-history-storage';
+// Hooks
+export { useSearchHistory, useDiscoverSearchHistory } from './model';
 
-// Supabase版（discover用、クラウド同期対応）
-export { useDiscoverSearchHistory } from './model/use-discover-search-history';
-export type { SearchHistoryItem as DiscoverSearchHistoryItem } from './api/search-history-supabase';
+// Types
+export type {
+  SearchHistoryType,
+  SearchResultType,
+  SearchHistoryItem,
+  UseSearchHistoryOptions,
+  UseSearchHistoryReturn,
+  UseDiscoverSearchHistoryReturn,
+} from './model';
 
-// 共通UI
+// UI
 export { SearchHistoryList } from './ui/SearchHistoryList';

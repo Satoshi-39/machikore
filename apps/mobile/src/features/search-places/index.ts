@@ -11,6 +11,9 @@ export type {
   PlaceSearchResult,
   ManualLocationInput,
   SpotLocationInput,
+  MachikorePlaceType,
+  MachikorePlaceSearchResult,
+  MachikorePlaceSearchOptions,
 } from './model/types';
 export { isPlaceSearchResult, isManualLocationInput } from './model/types';
 
@@ -21,12 +24,6 @@ export type {
   GooglePlaceDetails,
   GooglePlacesAutocompleteResponse,
 } from './api/google-places.types';
-
-// 街コレデータ検索Types
-export type {
-  MachikorePlaceSearchResult,
-  MachikorePlaceSearchOptions,
-} from './api/searchMachikorePlaces';
 
 // Reverse Geocoding
 export { reverseGeocode, reverseGeocodeDetailed } from './api/google-reverse-geocode';

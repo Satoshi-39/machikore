@@ -8,18 +8,10 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { LocationPinIcon } from '@/shared/ui';
-
-interface PinDropOverlayProps {
-  /** 確定ボタン押下時 */
-  onConfirm: () => void;
-  /** キャンセルボタン押下時 */
-  onCancel: () => void;
-  /** スポットの色（オプション、デフォルトは青） */
-  spotColor?: SpotColor;
-}
+import type { PinDropOverlayProps } from '../model/types';
 
 export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_COLOR }: PinDropOverlayProps) {
   const insets = useSafeAreaInsets();

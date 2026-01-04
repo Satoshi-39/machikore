@@ -12,17 +12,8 @@ import { useRouter } from 'expo-router';
 import { useCreateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
-import type { ThumbnailImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
-
-export interface CreateMapFormData {
-  name: string;
-  description?: string;
-  categoryId: string;
-  tags: string[];
-  isPublic: boolean;
-  thumbnailImage?: ThumbnailImage;
-}
+import type { CreateMapFormData } from './types';
 
 /**
  * マップ作成フォームのhook

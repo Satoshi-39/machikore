@@ -1,1 +1,2 @@
-export { CategoryChips, type CategoryId } from './ui/CategoryChips';
+export { CategoryChips } from './ui/CategoryChips';
+export type { CategoryId } from './model';

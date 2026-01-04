@@ -9,8 +9,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
-
-export type DiscoverTabMode = 'recommend' | 'following';
+import type { DiscoverTabMode } from '../model/types';
 
 interface DiscoverTabsProps {
   tabMode: DiscoverTabMode;

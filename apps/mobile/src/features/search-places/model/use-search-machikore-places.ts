@@ -4,7 +4,8 @@
  */
 
 import { useState, useCallback, useRef } from 'react';
-import { searchMachikorePlaces, type MachikorePlaceSearchResult, type MachikorePlaceSearchOptions } from '../api/searchMachikorePlaces';
+import { searchMachikorePlaces } from '../api/searchMachikorePlaces';
+import type { MachikorePlaceSearchResult, MachikorePlaceSearchOptions } from './types';
 import { log } from '@/shared/config/logger';
 
 interface UseSearchMachikorePlacesOptions {

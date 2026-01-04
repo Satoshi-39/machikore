@@ -614,3 +614,12 @@ export const USER_PREFERENCES = {
   /** 好みのカテゴリの最大選択数 */
   MAX_PREFERRED_CATEGORIES: 3,
 } as const;
+
+// ===============================
+// 検索履歴
+// ===============================
+
+export const SEARCH_HISTORY = {
+  /** 最大保存件数 */
+  MAX_COUNT: 20,
+} as const;

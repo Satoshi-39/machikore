@@ -12,11 +12,10 @@ import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { useCategories } from '@/entities/category';
+import type { CategoryId } from '../model/types';
 
 // 「すべて」カテゴリのID
 const ALL_CATEGORY_ID = 'all';
-
-export type CategoryId = string;
 
 interface CategoryChipsProps {
   selectedCategory: CategoryId;

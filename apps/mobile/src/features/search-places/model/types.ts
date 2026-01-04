@@ -6,6 +6,45 @@
 
 import type { GooglePlaceDetails } from '../api/google-places.types';
 
+// ===============================
+// 街コレ内検索用型
+// ===============================
+
+/**
+ * 街コレ内検索結果の種類
+ */
+export type MachikorePlaceType = 'machi' | 'spot' | 'city' | 'prefecture' | 'region' | 'country';
+
+/**
+ * 街コレ内検索結果
+ */
+export interface MachikorePlaceSearchResult {
+  id: string;
+  name: string;
+  address: string | null;
+  latitude: number;
+  longitude: number;
+  type: MachikorePlaceType;
+  // spotの場合の追加情報
+  userId?: string;
+  mapId?: string;
+  googleTypes?: string[] | null;
+}
+
+/**
+ * 街コレ内検索オプション
+ */
+export interface MachikorePlaceSearchOptions {
+  query: string;
+  userId?: string | null; // 指定した場合、そのユーザーのspotsのみ検索
+  includeAllSpots?: boolean; // trueの場合、全ユーザーのspotsを検索（デフォルトマップ用）
+  limit?: number;
+}
+
+// ===============================
+// Google Places検索用型
+// ===============================
+
 /**
  * アプリ内で使用する場所データ（統一インターフェース）
  * Google Places APIから取得した場所

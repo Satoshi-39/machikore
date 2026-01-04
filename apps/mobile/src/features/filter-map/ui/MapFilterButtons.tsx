@@ -8,8 +8,7 @@ import React from 'react';
 import { View, Pressable, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-
-export type MapFilter = 'nearby' | 'visited' | 'favorite' | 'recommended';
+import type { MapFilter, MapFilterButtonsProps } from '../model/types';
 
 const FILTER_OPTIONS = [
   { id: 'nearby' as const, label: '現在地周辺', icon: 'location' as const },
@@ -17,11 +16,6 @@ const FILTER_OPTIONS = [
   { id: 'favorite' as const, label: 'お気に入り', icon: 'star' as const },
   { id: 'recommended' as const, label: '他ユーザのおすすめ', icon: 'people' as const },
 ];
-
-interface MapFilterButtonsProps {
-  selectedFilters?: MapFilter[];
-  onFilterToggle?: (filter: MapFilter) => void;
-}
 
 export function MapFilterButtons({
   selectedFilters = [],

@@ -19,11 +19,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
-import type { UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
-import type { MapWithUser, ImageRow } from '@/shared/types';
+import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
 import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
-import { useI18n } from '@/shared/lib/i18n';
+import { useI18n, getCurrentLocale } from '@/shared/lib/i18n';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
 interface UploadProgress {
   current: number;
@@ -32,7 +32,7 @@ interface UploadProgress {
 }
 
 interface EditSpotFormProps {
-  spot: UserSpotWithMasterSpot;
+  spot: SpotWithDetails;
   existingImages?: ImageRow[];
   /** 中間テーブルから取得したタグ名の配列 */
   initialTags: string[];
@@ -79,7 +79,7 @@ export function EditSpotForm({
   const [spotColor, setSpotColor] = useState<SpotColor>(
     (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR
   );
-  const [selectedLabelId, setSelectedLabelId] = useState<string | null>(spot.label_id);
+  const [selectedLabelId, setSelectedLabelId] = useState<string | null>(spot.label_id ?? null);
 
   // マップのラベル一覧を取得
   const { data: mapLabels = [], isLoading: isLabelsLoading } = useMapLabels(selectedMapId);
@@ -179,24 +179,35 @@ export function EditSpotForm({
           </View>
 
           {/* スポット名 */}
-          {spot.master_spot?.name && (
-            <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.spotName')}</Text>
-              <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
-                {spot.master_spot.name}
-              </Text>
-            </View>
-          )}
+          {spot.master_spot?.name && (() => {
+            const uiLanguage = getCurrentLocale();
+            const spotName = extractName(spot.master_spot.name, uiLanguage);
+            if (!spotName) return null;
+            return (
+              <View className="mb-3">
+                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.spotName')}</Text>
+                <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+                  {spotName}
+                </Text>
+              </View>
+            );
+          })()}
 
           {/* 住所 */}
-          {(spot.master_spot?.google_short_address || spot.google_short_address) && (
-            <View className="flex-row items-center">
-              <AddressPinIcon size={16} color={colors.gray[500]} />
-              <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">
-                {spot.master_spot?.google_short_address || spot.google_short_address}
-              </Text>
-            </View>
-          )}
+          {(() => {
+            const uiLanguage = getCurrentLocale();
+            const address = extractAddress(spot.master_spot?.google_short_address, uiLanguage)
+              || extractAddress(spot.google_short_address, uiLanguage);
+            if (!address) return null;
+            return (
+              <View className="flex-row items-center">
+                <AddressPinIcon size={16} color={colors.gray[500]} />
+                <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">
+                  {address}
+                </Text>
+              </View>
+            );
+          })()}
         </View>
 
         {/* マップ（表示のみ） */}

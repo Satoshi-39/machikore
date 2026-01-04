@@ -22,12 +22,7 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
 import type { SpotColor } from '@/shared/config';
-
-export interface UploadProgress {
-  current: number;
-  total: number;
-  status: 'idle' | 'updating' | 'uploading' | 'deleting' | 'done';
-}
+import type { UploadProgress } from './types';
 
 export function useEditSpotForm() {
   const router = useRouter();

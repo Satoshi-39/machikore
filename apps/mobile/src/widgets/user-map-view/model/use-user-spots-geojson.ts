@@ -7,28 +7,7 @@ import type { FeatureCollection, Point } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
 import { determineSpotCategory } from '@/entities/master-spot';
 import { type SpotColor, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST } from '@/shared/config';
-
-interface UserSpotWithMasterSpot {
-  id: string;
-  description: string;
-  spot_color?: string | null;
-  // ラベル情報（ラベルが設定されている場合、その色が優先される）
-  map_label?: {
-    id: string;
-    name: string;
-    color: string;
-  } | null;
-  // ピン刺し・現在地登録の場合はuser_spotに直接座標がある
-  latitude?: number | null;
-  longitude?: number | null;
-  master_spot: {
-    id: string;
-    name: string;
-    latitude: number;
-    longitude: number;
-    google_types: string[] | string | null;
-  } | null;
-}
+import type { SpotWithDetails } from '@/shared/types';
 
 interface UserSpotGeoJsonProperties {
   id: string;
@@ -38,7 +17,7 @@ interface UserSpotGeoJsonProperties {
 }
 
 export function useUserSpotsGeoJson(
-  spots: UserSpotWithMasterSpot[]
+  spots: SpotWithDetails[]
 ): FeatureCollection<Point, UserSpotGeoJsonProperties> {
   return useMemo(() => {
     const features = spots
@@ -52,8 +31,7 @@ export function useUserSpotsGeoJson(
         // 座標: master_spotがあればそこから、なければuser_spotから取得
         const latitude = spot.master_spot?.latitude ?? spot.latitude!;
         const longitude = spot.master_spot?.longitude ?? spot.longitude!;
-        // 名前: descriptionを優先、なければmaster_spotの名前
-        const name = spot.description || spot.master_spot?.name || '';
+        const description = spot.description;
         // カテゴリ: master_spotがあればgoogle_typesから判定、なければ'other'
         const category = spot.master_spot
           ? determineSpotCategory(spot.master_spot.google_types)
@@ -79,7 +57,7 @@ export function useUserSpotsGeoJson(
           },
           properties: {
             id: spot.id,
-            name,
+            name: description,
             category,
             spot_color: spotColor,
           },

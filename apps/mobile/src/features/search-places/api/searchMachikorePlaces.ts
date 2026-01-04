@@ -10,26 +10,9 @@ import { supabase } from '@/shared/api/supabase/client';
 import { getRegionsData } from '@/shared/lib/utils/regions.utils';
 import { getCountriesData } from '@/shared/lib/utils/countries.utils';
 import { log } from '@/shared/config/logger';
-
-export interface MachikorePlaceSearchResult {
-  id: string;
-  name: string;
-  address: string | null;
-  latitude: number;
-  longitude: number;
-  type: 'machi' | 'spot' | 'city' | 'prefecture' | 'region' | 'country';
-  // spotの場合の追加情報
-  userId?: string;
-  mapId?: string;
-  googleTypes?: string[] | null;
-}
-
-export interface MachikorePlaceSearchOptions {
-  query: string;
-  userId?: string | null; // 指定した場合、そのユーザーのspotsのみ検索
-  includeAllSpots?: boolean; // trueの場合、全ユーザーのspotsを検索（デフォルトマップ用）
-  limit?: number;
-}
+import { getCurrentLocale } from '@/shared/lib/i18n';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
+import type { MachikorePlaceSearchResult, MachikorePlaceSearchOptions } from '../model/types';
 
 /**
  * countriesを検索（ローカルJSONから検索）
@@ -168,27 +151,37 @@ async function searchMachis(query: string, limit: number): Promise<MachikorePlac
 
 /**
  * master_spots を Supabase から検索（デフォルトマップ用）
+ * UI言語で住所を取得
  */
 async function searchMasterSpots(query: string, limit: number): Promise<MachikorePlaceSearchResult[]> {
   const { data: spots, error } = await supabase
     .from('master_spots')
     .select('id, name, latitude, longitude, google_short_address, google_types')
-    .or(`name.ilike.%${query}%,google_short_address.ilike.%${query}%`)
+    .ilike('name', `%${query}%`)
     .limit(limit);
 
   if (error) {
     return [];
   }
 
-  return (spots ?? []).map((spot) => ({
-    id: spot.id,
-    name: spot.name,
-    address: spot.google_short_address,
-    latitude: spot.latitude,
-    longitude: spot.longitude,
-    type: 'spot' as const,
-    googleTypes: spot.google_types,
-  }));
+  // UI言語で住所・名前を抽出（名前が抽出できないものは除外）
+  const uiLanguage = getCurrentLocale();
+
+  return (spots ?? [])
+    .map((spot) => {
+      const name = extractName(spot.name, uiLanguage);
+      if (!name) return null;
+      return {
+        id: spot.id,
+        name,
+        address: extractAddress(spot.google_short_address, uiLanguage),
+        latitude: spot.latitude,
+        longitude: spot.longitude,
+        type: 'spot' as const,
+        googleTypes: spot.google_types,
+      };
+    })
+    .filter((spot): spot is NonNullable<typeof spot> => spot !== null);
 }
 
 /**

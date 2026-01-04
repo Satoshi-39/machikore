@@ -4,17 +4,18 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { getSpotById, type UserSpotWithMasterSpot } from '@/shared/api/supabase/user-spots';
+import { getSpotWithDetails } from '@/shared/api/supabase/user-spots';
+import type { SpotWithDetails } from '@/shared/types';
 
 /**
- * IDでスポットを取得（master_spotsと結合）
+ * IDでスポットを取得（master_spots, user, map_label等と結合）
  */
-export function useSpotById(spotId: string | null) {
-  return useQuery<UserSpotWithMasterSpot | null, Error>({
+export function useSpotById(spotId: string | null, currentUserId?: string | null) {
+  return useQuery<SpotWithDetails | null, Error>({
     queryKey: QUERY_KEYS.spotsDetail(spotId || ''),
     queryFn: () => {
       if (!spotId) return null;
-      return getSpotById(spotId);
+      return getSpotWithDetails(spotId, currentUserId);
     },
     enabled: !!spotId,
   });

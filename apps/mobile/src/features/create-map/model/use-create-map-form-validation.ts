@@ -5,12 +5,7 @@
  */
 
 import { useMemo } from 'react';
-
-interface CreateMapFormValues {
-  name: string;
-  description: string;
-  selectedCategoryId: string | null;
-}
+import type { CreateMapFormValues } from './types';
 
 /**
  * フォームのバリデーションhook

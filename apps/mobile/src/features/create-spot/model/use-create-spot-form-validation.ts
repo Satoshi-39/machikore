@@ -5,11 +5,7 @@
  */
 
 import { useMemo } from 'react';
-
-interface CreateSpotFormValues {
-  description: string;
-  selectedMapId: string | null;
-}
+import type { CreateSpotFormValues } from './types';
 
 /**
  * フォームのバリデーションhook

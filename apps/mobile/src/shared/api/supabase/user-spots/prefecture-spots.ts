@@ -1,5 +1,8 @@
 /**
  * 都道府県別スポット検索
+ *
+ * API層は生データ（JSONB型）をそのまま返す
+ * 住所の言語抽出は表示層（entities/widgets）で行う
  */
 
 import { supabase, handleSupabaseError } from '../client';
@@ -71,7 +74,16 @@ export async function getPublicSpotsByPrefecture(
       longitude: spot.longitude,
       google_formatted_address: spot.google_formatted_address,
       google_short_address: spot.google_short_address,
-      master_spot: spot.master_spots || null,
+      master_spot: spot.master_spots ? {
+        id: spot.master_spots.id,
+        name: spot.master_spots.name,
+        latitude: spot.master_spots.latitude,
+        longitude: spot.master_spots.longitude,
+        google_place_id: spot.master_spots.google_place_id,
+        google_formatted_address: spot.master_spots.google_formatted_address,
+        google_short_address: spot.master_spots.google_short_address,
+        google_types: spot.master_spots.google_types,
+      } : null,
       user: spot.users || null,
       map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
       is_liked: isLiked,
@@ -149,7 +161,16 @@ export async function getPublicSpotsByPrefectureAndCategory(
       longitude: spot.longitude,
       google_formatted_address: spot.google_formatted_address,
       google_short_address: spot.google_short_address,
-      master_spot: spot.master_spots || null,
+      master_spot: spot.master_spots ? {
+        id: spot.master_spots.id,
+        name: spot.master_spots.name,
+        latitude: spot.master_spots.latitude,
+        longitude: spot.master_spots.longitude,
+        google_place_id: spot.master_spots.google_place_id,
+        google_formatted_address: spot.master_spots.google_formatted_address,
+        google_short_address: spot.master_spots.google_short_address,
+        google_types: spot.master_spots.google_types,
+      } : null,
       user: spot.users || null,
       map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
       is_liked: isLiked,

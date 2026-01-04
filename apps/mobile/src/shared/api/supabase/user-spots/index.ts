@@ -7,7 +7,6 @@
 export {
   type CreateSpotInput,
   type UpdateSpotInput,
-  type UserSpotWithMasterSpot,
   type UserSpotImage,
   type UserSpotSearchResult,
   type MapSpotSearchResult,
@@ -21,7 +20,7 @@ export {
 export { createSpot } from './create-spot';
 
 // 単一スポット取得
-export { getSpotById, getSpotWithDetails } from './get-spot';
+export { getSpotWithDetails } from './get-spot';
 
 // スポット一覧取得
 export { getSpotsByMapId, getPublicSpots } from './get-spots';

@@ -10,7 +10,6 @@ import {
   convertToPlaceResult,
   type PlaceSearchResult,
   type ManualLocationInput,
-  type SpotLocationInput,
 } from '../types';
 import type { GooglePlaceDetails } from '../../api/google-places.types';
 
@@ -115,9 +114,9 @@ describe('search-places types', () => {
         location: { latitude: 35.6580, longitude: 139.7016 },
         types: ['train_station', 'transit_station'],
         addressComponents: [
-          { longText: '東京都', shortText: '東京都', types: ['administrative_area_level_1'] },
-          { longText: '渋谷区', shortText: '渋谷区', types: ['locality'] },
-          { longText: '道玄坂', shortText: '道玄坂', types: ['sublocality_level_2'] },
+          { longText: '東京都', shortText: '東京都', types: ['administrative_area_level_1'], languageCode: 'ja' },
+          { longText: '渋谷区', shortText: '渋谷区', types: ['locality'], languageCode: 'ja' },
+          { longText: '道玄坂', shortText: '道玄坂', types: ['sublocality_level_2'], languageCode: 'ja' },
         ],
       };
 
@@ -177,9 +176,9 @@ describe('search-places types', () => {
         location: { latitude: 35.6580, longitude: 139.7016 },
         types: [],
         addressComponents: [
-          { longText: '東京都', shortText: '東京都', types: ['administrative_area_level_1'] },
-          { longText: '渋谷区', shortText: '渋谷区', types: ['locality'] },
-          { longText: '神南', shortText: '神南', types: ['sublocality_level_1'] },
+          { longText: '東京都', shortText: '東京都', types: ['administrative_area_level_1'], languageCode: 'ja' },
+          { longText: '渋谷区', shortText: '渋谷区', types: ['locality'], languageCode: 'ja' },
+          { longText: '神南', shortText: '神南', types: ['sublocality_level_1'], languageCode: 'ja' },
         ],
       };
 
@@ -196,8 +195,8 @@ describe('search-places types', () => {
         location: { latitude: 43.0618, longitude: 141.3545 },
         types: [],
         addressComponents: [
-          { longText: '北海道', shortText: '北海道', types: ['administrative_area_level_1'] },
-          { longText: '札幌市', shortText: '札幌市', types: ['administrative_area_level_2'] },
+          { longText: '北海道', shortText: '北海道', types: ['administrative_area_level_1'], languageCode: 'ja' },
+          { longText: '札幌市', shortText: '札幌市', types: ['administrative_area_level_2'], languageCode: 'ja' },
         ],
       };
 
