@@ -5,11 +5,14 @@
 import { useMemo } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import { determineSpotCategory, type SpotCategory } from './spot-type';
+import { extractName } from '@/shared/lib/utils/multilang.utils';
+import { getCurrentLocale } from '@/shared/lib/i18n';
+import type { Json } from '@/shared/types/database.types';
 
 // GeoJSON変換に必要な最小限のフィールド
-interface MasterSpotForGeoJson {
+export interface MasterSpotForGeoJson {
   id: string;
-  name: string;
+  name: Json; // JSONB型（多言語対応）
   latitude: number;
   longitude: number;
   google_types: string[] | null;
@@ -32,6 +35,8 @@ export function useMasterSpotsGeoJson(
       return { type: 'FeatureCollection', features: [] };
     }
 
+    const locale = getCurrentLocale();
+
     return {
       type: 'FeatureCollection',
       features: masterSpots.map((spot) => ({
@@ -43,7 +48,7 @@ export function useMasterSpotsGeoJson(
         },
         properties: {
           id: spot.id,
-          name: spot.name,
+          name: extractName(spot.name, locale) || '',
           category: determineSpotCategory(spot.google_types),
         },
       })),

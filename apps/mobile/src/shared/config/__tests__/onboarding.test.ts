@@ -48,24 +48,24 @@ describe('onboarding', () => {
 
     it('最初のステップはprofile', () => {
       const steps = getOnboardingSteps(mockTranslate);
-      expect(steps[0].key).toBe('profile');
+      expect(steps[0]?.key).toBe('profile');
     });
 
     it('2番目のステップはdemographics', () => {
       const steps = getOnboardingSteps(mockTranslate);
-      expect(steps[1].key).toBe('demographics');
+      expect(steps[1]?.key).toBe('demographics');
     });
 
     it('3番目のステップはcategories', () => {
       const steps = getOnboardingSteps(mockTranslate);
-      expect(steps[2].key).toBe('categories');
+      expect(steps[2]?.key).toBe('categories');
     });
 
     it('翻訳関数が正しく適用される', () => {
       const steps = getOnboardingSteps(mockTranslate);
-      expect(steps[0].title).toBe('translated:onboarding.steps.profile');
-      expect(steps[1].title).toBe('translated:onboarding.steps.demographics');
-      expect(steps[2].title).toBe('translated:onboarding.steps.categories');
+      expect(steps[0]?.title).toBe('translated:onboarding.steps.profile');
+      expect(steps[1]?.title).toBe('translated:onboarding.steps.demographics');
+      expect(steps[2]?.title).toBe('translated:onboarding.steps.categories');
     });
 
     it('異なる翻訳関数でも動作する', () => {
@@ -79,9 +79,9 @@ describe('onboarding', () => {
       };
 
       const steps = getOnboardingSteps(japaneseTranslate);
-      expect(steps[0].title).toBe('プロフィール');
-      expect(steps[1].title).toBe('属性情報');
-      expect(steps[2].title).toBe('カテゴリ');
+      expect(steps[0]?.title).toBe('プロフィール');
+      expect(steps[1]?.title).toBe('属性情報');
+      expect(steps[2]?.title).toBe('カテゴリ');
     });
   });
 

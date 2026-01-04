@@ -17,25 +17,8 @@ import { useMapTags, useUpdateMapTags } from '@/entities/tag';
 import { createMapLabel, updateMapLabel, deleteMapLabel } from '@/entities/map-label';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import type { ThumbnailImage } from '@/features/pick-images';
-import type { LocalMapLabel } from '@/features/manage-map-labels';
 import { log } from '@/shared/config/logger';
-
-export interface EditMapFormData {
-  name: string;
-  description: string;
-  categoryId: string;
-  tags: string[];
-  isPublic: boolean;
-  showLabelChips: boolean;
-  thumbnailImage?: ThumbnailImage;
-  removeThumbnail?: boolean;
-  labels?: LocalMapLabel[];
-}
-
-interface UseEditMapFormOptions {
-  mapId: string;
-}
+import type { EditMapFormData, UseEditMapFormOptions } from './types';
 
 /**
  * マップ編集フォームのhook

@@ -2,7 +2,7 @@
  * spot-type.ts のテスト
  */
 
-import { determineSpotCategory, type SpotCategory } from '../spot-type';
+import { determineSpotCategory } from '../spot-type';
 
 describe('master-spot/spot-type', () => {
   describe('determineSpotCategory', () => {

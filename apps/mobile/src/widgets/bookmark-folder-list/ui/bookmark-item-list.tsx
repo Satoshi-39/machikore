@@ -18,6 +18,8 @@ import { log } from '@/shared/config/logger';
 import type { BookmarkWithDetails } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import { SwipeableRow } from '@/shared/ui';
+import { extractAddress } from '@/shared/lib/utils/multilang.utils';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface BookmarkItemListProps {
   userId: string;
@@ -33,6 +35,7 @@ export function BookmarkItemList({
   const router = useRouter();
   const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
+  const { locale } = useI18n();
 
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
 
@@ -109,7 +112,7 @@ export function BookmarkItemList({
                 </Text>
                 {(item.spot.master_spot?.google_short_address || item.spot.google_short_address) && (
                   <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
-                    {item.spot.master_spot?.google_short_address || item.spot.google_short_address}
+                    {extractAddress(item.spot.master_spot?.google_short_address, locale) || extractAddress(item.spot.google_short_address, locale)}
                   </Text>
                 )}
                 {user && (

@@ -32,6 +32,7 @@ import {
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import { extractPlainText, type SpotWithDetails, type UUID } from '@/shared/types';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
 // レイアウト定数
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -63,14 +64,15 @@ function SpotCard({
   onPress,
   onCameraMove,
 }: SpotCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
-  // マスタースポットの正式名称（メイン表示）
-  const masterSpotName = spot.master_spot?.name || t('spot.unknownSpot');
-  // ユーザーの一言（サブ表示）
-  const oneWord = spot.description;
-  // 住所
-  const address = spot.master_spot?.google_short_address || spot.google_short_address;
+  // マスタースポット名（JSONB型を現在のlocaleで抽出）
+  const masterSpotName = spot.master_spot?.name
+    ? extractName(spot.master_spot.name, locale) || t('spot.unknownSpot')
+    : t('spot.unknownSpot');
+  // 住所（JSONB型を現在のlocaleで抽出）
+  const address = extractAddress(spot.master_spot?.google_short_address, locale)
+    || extractAddress(spot.google_short_address, locale);
   // 記事プレビュー（プレーンテキスト抽出）
   const articlePreview = extractPlainText(spot.article_content);
   // スポットのカラーを取得（共通ユーティリティ使用）
@@ -158,12 +160,12 @@ function SpotCard({
           </View>
 
           {/* ユーザーの一言 */}
-          {oneWord && (
+          {spot.description && (
             <Text
               className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
               numberOfLines={1}
             >
-              {oneWord}
+              {spot.description}
             </Text>
           )}
 

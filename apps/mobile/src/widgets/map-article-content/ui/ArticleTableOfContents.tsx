@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import type { SpotWithImages } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
+import { extractName } from '@/shared/lib/utils/multilang.utils';
 
 interface ArticleTableOfContentsProps {
   spots: SpotWithImages[];
@@ -15,7 +16,7 @@ interface ArticleTableOfContentsProps {
 }
 
 export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfContentsProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   if (spots.length === 0) return null;
 
@@ -25,7 +26,10 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
         {t('article.tableOfContents')}
       </Text>
       {spots.map((spot, index) => {
-        const spotName = spot.master_spot?.name || spot.description || t('article.unknownSpot');
+        // マスタースポット名（JSONB型を現在のlocaleで抽出）
+        const masterSpotName = spot.master_spot?.name
+          ? extractName(spot.master_spot.name, locale) || t('article.unknownSpot')
+          : t('article.unknownSpot');
         return (
           <Pressable
             key={spot.id}
@@ -36,7 +40,7 @@ export function ArticleTableOfContents({ spots, onSpotPress }: ArticleTableOfCon
               {index + 1}.
             </Text>
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1" numberOfLines={1}>
-              {spotName}
+              {masterSpotName}
             </Text>
           </Pressable>
         );

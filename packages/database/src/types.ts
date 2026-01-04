@@ -1148,11 +1148,11 @@ export type Database = {
         Row: {
           created_at: string
           favorites_count: number
-          google_formatted_address: string | null
+          google_formatted_address: Json | null
           google_phone_number: string | null
           google_place_id: string | null
           google_rating: number | null
-          google_short_address: string | null
+          google_short_address: Json | null
           google_types: string[] | null
           google_user_rating_count: number | null
           google_website_uri: string | null
@@ -1160,17 +1160,17 @@ export type Database = {
           latitude: number
           longitude: number
           machi_id: string | null
-          name: string
+          name: Json
           updated_at: string
         }
         Insert: {
           created_at?: string
           favorites_count?: number
-          google_formatted_address?: string | null
+          google_formatted_address?: Json | null
           google_phone_number?: string | null
           google_place_id?: string | null
           google_rating?: number | null
-          google_short_address?: string | null
+          google_short_address?: Json | null
           google_types?: string[] | null
           google_user_rating_count?: number | null
           google_website_uri?: string | null
@@ -1178,17 +1178,17 @@ export type Database = {
           latitude: number
           longitude: number
           machi_id?: string | null
-          name: string
+          name: Json
           updated_at?: string
         }
         Update: {
           created_at?: string
           favorites_count?: number
-          google_formatted_address?: string | null
+          google_formatted_address?: Json | null
           google_phone_number?: string | null
           google_place_id?: string | null
           google_rating?: number | null
-          google_short_address?: string | null
+          google_short_address?: Json | null
           google_types?: string[] | null
           google_user_rating_count?: number | null
           google_website_uri?: string | null
@@ -1196,7 +1196,7 @@ export type Database = {
           latitude?: number
           longitude?: number
           machi_id?: string | null
-          name?: string
+          name?: Json
           updated_at?: string
         }
         Relationships: [
@@ -2023,14 +2023,11 @@ export type Database = {
         Row: {
           article_content: Json | null
           bookmarks_count: number
-          city_id: string | null
-          city_name: string | null
-          color: string | null
           comments_count: number
           created_at: string
           description: string
-          google_formatted_address: string | null
-          google_short_address: string | null
+          google_formatted_address: Json | null
+          google_short_address: Json | null
           id: string
           images_count: number
           label_id: string | null
@@ -2039,12 +2036,9 @@ export type Database = {
           likes_count: number
           longitude: number
           machi_id: string | null
-          machi_name: string | null
           map_id: string
           master_spot_id: string | null
           order_index: number
-          prefecture_id: string | null
-          prefecture_name: string | null
           spot_color: string | null
           updated_at: string
           user_id: string
@@ -2052,14 +2046,11 @@ export type Database = {
         Insert: {
           article_content?: Json | null
           bookmarks_count?: number
-          city_id?: string | null
-          city_name?: string | null
-          color?: string | null
           comments_count?: number
           created_at?: string
           description: string
-          google_formatted_address?: string | null
-          google_short_address?: string | null
+          google_formatted_address?: Json | null
+          google_short_address?: Json | null
           id?: string
           images_count?: number
           label_id?: string | null
@@ -2068,12 +2059,9 @@ export type Database = {
           likes_count?: number
           longitude: number
           machi_id?: string | null
-          machi_name?: string | null
           map_id: string
           master_spot_id?: string | null
           order_index?: number
-          prefecture_id?: string | null
-          prefecture_name?: string | null
           spot_color?: string | null
           updated_at?: string
           user_id: string
@@ -2081,14 +2069,11 @@ export type Database = {
         Update: {
           article_content?: Json | null
           bookmarks_count?: number
-          city_id?: string | null
-          city_name?: string | null
-          color?: string | null
           comments_count?: number
           created_at?: string
           description?: string
-          google_formatted_address?: string | null
-          google_short_address?: string | null
+          google_formatted_address?: Json | null
+          google_short_address?: Json | null
           id?: string
           images_count?: number
           label_id?: string | null
@@ -2097,24 +2082,14 @@ export type Database = {
           likes_count?: number
           longitude?: number
           machi_id?: string | null
-          machi_name?: string | null
           map_id?: string
           master_spot_id?: string | null
           order_index?: number
-          prefecture_id?: string | null
-          prefecture_name?: string | null
           spot_color?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "user_spots_city_id_fkey"
-            columns: ["city_id"]
-            isOneToOne: false
-            referencedRelation: "cities"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "user_spots_label_id_fkey"
             columns: ["label_id"]
@@ -2141,13 +2116,6 @@ export type Database = {
             columns: ["master_spot_id"]
             isOneToOne: false
             referencedRelation: "master_spots"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "user_spots_prefecture_id_fkey"
-            columns: ["prefecture_id"]
-            isOneToOne: false
-            referencedRelation: "prefectures"
             referencedColumns: ["id"]
           },
           {

@@ -21,6 +21,8 @@ import {
 import { useMachiWikipediaSummary } from '@/shared/api/wikipedia/use-wikipedia-summary';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
+import { extractName } from '@/shared/lib/utils/multilang.utils';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface MachiDetailCardProps {
   machi: MachiRow;
@@ -62,6 +64,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
+  const { locale } = useI18n();
 
   // 訪問状態
   const { data: isVisited, isLoading: isCheckingVisit } = useCheckMachiVisited(currentUserId, machi.id);
@@ -280,7 +283,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                 {/* スポット情報 */}
                 <View className="flex-1">
                   <Text className="text-base text-foreground dark:text-dark-foreground font-medium" numberOfLines={1}>
-                    {spot.name}
+                    {extractName(spot.name, locale) || ''}
                   </Text>
                   <View className="flex-row items-center mt-0.5">
                     {spot.google_rating && (

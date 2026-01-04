@@ -65,12 +65,14 @@ export function formatJapaneseDate(dateString: string): string {
 /**
  * 相対時間のテキストを取得（ロケール別）
  */
+type RelativeTimeKey = 'justNow' | 'minutesAgo' | 'hoursAgo' | 'daysAgo';
+
 function getRelativeTimeText(
-  key: 'justNow' | 'minutesAgo' | 'hoursAgo' | 'daysAgo',
+  key: RelativeTimeKey,
   count: number,
   locale: SupportedLocale
 ): string {
-  const texts: Record<SupportedLocale, Record<string, string>> = {
+  const texts: Record<SupportedLocale, Record<RelativeTimeKey, string>> = {
     ja: {
       justNow: 'たった今',
       minutesAgo: `${count}分前`,
@@ -96,7 +98,7 @@ function getRelativeTimeText(
       daysAgo: `${count}天前`,
     },
   };
-  return texts[locale][key] || texts.ja[key];
+  return texts[locale][key];
 }
 
 /**

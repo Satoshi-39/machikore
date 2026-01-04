@@ -1,16 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type AdminUser = {
-  id: string;
-  user_id: string;
-  role: string;
-  created_at: string;
-  user: {
-    email: string;
-    display_name: string;
-    avatar_url: string | null;
-  } | null;
-};
+import type { AdminUser } from "../model/types";
 
 export async function getAdminUsers(): Promise<AdminUser[]> {
   const supabase = await createServerClient();

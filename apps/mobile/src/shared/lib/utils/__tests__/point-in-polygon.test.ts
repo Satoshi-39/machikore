@@ -2,13 +2,13 @@
  * point-in-polygon.ts のテスト
  */
 
-import { pointInGeometry } from '../point-in-polygon';
+import { pointInGeometry, type Geometry } from '../point-in-polygon';
 
 describe('point-in-polygon', () => {
   describe('pointInGeometry - Polygon', () => {
     // 東京駅周辺の四角形ポリゴン
-    const tokyoSquare = {
-      type: 'Polygon' as const,
+    const tokyoSquare: Geometry = {
+      type: 'Polygon',
       coordinates: [
         [
           [139.76, 35.68], // 左下
@@ -39,8 +39,8 @@ describe('point-in-polygon', () => {
 
   describe('pointInGeometry - Polygon with hole', () => {
     // 穴（ドーナツ型）のあるポリゴン
-    const donutPolygon = {
-      type: 'Polygon' as const,
+    const donutPolygon: Geometry = {
+      type: 'Polygon',
       coordinates: [
         // 外側のリング
         [
@@ -76,8 +76,8 @@ describe('point-in-polygon', () => {
 
   describe('pointInGeometry - MultiPolygon', () => {
     // 2つの離れた四角形
-    const multiPolygon = {
-      type: 'MultiPolygon' as const,
+    const multiPolygon: Geometry = {
+      type: 'MultiPolygon',
       coordinates: [
         // 1つ目のポリゴン（左側）
         [
@@ -116,8 +116,8 @@ describe('point-in-polygon', () => {
   });
 
   describe('エッジケース', () => {
-    const triangle = {
-      type: 'Polygon' as const,
+    const triangle: Geometry = {
+      type: 'Polygon',
       coordinates: [
         [
           [0, 0],
@@ -137,8 +137,8 @@ describe('point-in-polygon', () => {
     });
 
     it('負の座標でも動作する', () => {
-      const negativePolygon = {
-        type: 'Polygon' as const,
+      const negativePolygon: Geometry = {
+        type: 'Polygon',
         coordinates: [
           [
             [-10, -10],

@@ -7,17 +7,7 @@
 import { useMemo } from 'react';
 import type { MapWithUser } from '@/shared/types';
 import type { LocalMapLabel } from '@/features/manage-map-labels';
-
-interface EditMapFormCurrentValues {
-  name: string;
-  description: string;
-  selectedCategoryId: string | null;
-  isPublic: boolean;
-  showLabelChips: boolean;
-  thumbnailUri: string | null;
-  tags: string[];
-  labels: LocalMapLabel[];
-}
+import type { EditMapFormCurrentValues } from './types';
 
 /**
  * ラベルの変更をチェック

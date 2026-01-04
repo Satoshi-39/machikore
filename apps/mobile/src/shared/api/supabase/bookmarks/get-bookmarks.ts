@@ -1,5 +1,8 @@
 /**
  * ブックマーク取得
+ *
+ * API層は生データ（JSONB型）をそのまま返す
+ * 住所の言語抽出は表示層（entities/widgets）で行う
  */
 
 import { supabase, handleSupabaseError } from '../client';
@@ -57,6 +60,7 @@ export async function getUserBookmarks(
         description,
         likes_count,
         google_short_address,
+        map_id,
         master_spots (
           id,
           name,
@@ -69,6 +73,9 @@ export async function getUserBookmarks(
           username,
           display_name,
           avatar_url
+        ),
+        maps (
+          language
         )
       ),
       maps (
@@ -118,7 +125,13 @@ export async function getUserBookmarks(
           description: bookmark.user_spots.description,
           likes_count: bookmark.user_spots.likes_count,
           google_short_address: bookmark.user_spots.google_short_address,
-          master_spot: bookmark.user_spots.master_spots || null,
+          master_spot: bookmark.user_spots.master_spots ? {
+            id: bookmark.user_spots.master_spots.id,
+            name: bookmark.user_spots.master_spots.name,
+            google_short_address: bookmark.user_spots.master_spots.google_short_address,
+            latitude: bookmark.user_spots.master_spots.latitude,
+            longitude: bookmark.user_spots.master_spots.longitude,
+          } : null,
           user: bookmark.user_spots.users || null,
         }
       : null,

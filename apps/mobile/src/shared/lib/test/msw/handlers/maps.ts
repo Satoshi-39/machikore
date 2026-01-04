@@ -58,7 +58,7 @@ export const mapHandlers = [
 
   // マップ作成
   http.post(`${SUPABASE_URL}/rest/v1/maps`, async ({ request }) => {
-    const body = await request.json();
+    const body = (await request.json()) as Record<string, unknown>;
     const newMap = {
       id: `map-${Date.now()}`,
       created_at: new Date().toISOString(),
@@ -73,7 +73,7 @@ export const mapHandlers = [
     const url = new URL(request.url);
     const idParam = url.searchParams.get('id');
     const id = idParam?.replace('eq.', '');
-    const body = await request.json();
+    const body = (await request.json()) as Record<string, unknown>;
 
     const map = mockMaps.find((m) => m.id === id);
     if (!map) {

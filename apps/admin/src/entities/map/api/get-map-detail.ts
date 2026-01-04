@@ -1,44 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type MapDetail = {
-  id: string;
-  name: string;
-  description: string | null;
-  is_public: boolean;
-  is_official: boolean;
-  is_article_public: boolean;
-  thumbnail_url: string | null;
-  spots_count: number;
-  likes_count: number;
-  comments_count: number;
-  bookmarks_count: number;
-  category_id: string | null;
-  language: string | null;
-  show_label_chips: boolean | null;
-  created_at: string;
-  updated_at: string;
-  user: {
-    id: string;
-    display_name: string;
-    username: string;
-    avatar_url: string | null;
-  } | null;
-  category: {
-    id: string;
-    name: string;
-  } | null;
-  tags: {
-    id: string;
-    name: string;
-    slug: string;
-  }[];
-  labels: {
-    id: string;
-    name: string;
-    color: string;
-    sort_order: number;
-  }[];
-};
+import type { MapDetail } from "../model/types";
 
 export async function getMapDetail(id: string): Promise<MapDetail | null> {
   const supabase = await createServerClient();

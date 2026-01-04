@@ -2,7 +2,7 @@
  * Bookmarks API 型定義
  */
 
-import type { Database } from '@/shared/types/database.types';
+import type { Database, Json } from '@/shared/types/database.types';
 
 export type BookmarkFolderType = 'spots' | 'maps';
 
@@ -15,12 +15,12 @@ export interface BookmarkWithDetails extends Bookmark {
     id: string;
     description: string;
     likes_count: number;
-    /** ピン刺し・現在地登録の場合の短縮住所（表示用） */
-    google_short_address: string | null;
+    /** ピン刺し・現在地登録の場合の短縮住所（JSONB型） */
+    google_short_address: Json | null;
     master_spot: {
       id: string;
       name: string;
-      google_short_address: string | null;
+      google_short_address: Json | null; // JSONB型
       latitude: number;
       longitude: number;
     } | null;

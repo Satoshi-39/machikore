@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { RichTextRenderer, AddressPinIcon } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import type { SpotWithImages } from '@/shared/types';
 
 interface ArticleSpotSectionProps {
@@ -20,24 +21,28 @@ interface ArticleSpotSectionProps {
 }
 
 export function ArticleSpotSection({ spot, index, onPress, onImagePress }: ArticleSpotSectionProps) {
-  const { t } = useI18n();
-  const spotName = spot.master_spot?.name || spot.description || t('article.unknownSpot');
-  const oneWordDescription = spot.description;
-  const address = spot.master_spot?.google_short_address || spot.google_short_address;
+  const { t, locale } = useI18n();
+  // マスタースポット名（JSONB型を現在のlocaleで抽出）
+  const masterSpotName = spot.master_spot?.name
+    ? extractName(spot.master_spot.name, locale) || t('article.unknownSpot')
+    : t('article.unknownSpot');
+  // JSONB型の住所を現在のlocaleで抽出
+  const address = extractAddress(spot.master_spot?.google_short_address, locale)
+    || extractAddress(spot.google_short_address, locale);
 
   return (
     <View className="mb-10">
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-center mb-1">
         <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">{index}.</Text>
-        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">{spotName}</Text>
+        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">{masterSpotName}</Text>
         <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
       </Pressable>
 
-      {/* ユーザーの一言（マスタースポット名と異なる場合のみ表示） */}
-      {oneWordDescription && spot.master_spot?.name && oneWordDescription !== spot.master_spot.name && (
+      {/* ユーザーの一言 */}
+      {spot.description && (
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-          {oneWordDescription}
+          {spot.description}
         </Text>
       )}
 

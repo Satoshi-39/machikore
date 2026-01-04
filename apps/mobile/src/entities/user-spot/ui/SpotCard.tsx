@@ -15,10 +15,10 @@ import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, Locati
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
-import type { SpotWithMasterSpot } from '@/shared/types/database.types';
-import type { SpotWithDetails, UUID } from '@/shared/types';
+import type { SpotWithMasterSpot, SpotWithDetails, UUID, Json } from '@/shared/types';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import { formatRelativeTime } from '@/shared/lib/utils';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useUser } from '@/entities/user';
@@ -35,13 +35,14 @@ interface EmbeddedUser {
 }
 
 // Supabase JOINで取得済みのmaster_spot情報
+// name・住所フィールドはJSONB型（多言語対応）
 interface EmbeddedMasterSpot {
   id: string;
-  name: string;
+  name: Json; // JSONB型（多言語対応）
   latitude: number;
   longitude: number;
   google_place_id: string | null;
-  google_short_address: string | null;
+  google_short_address: Json | null; // JSONB型
   google_types: string[] | null;
 }
 
@@ -131,32 +132,47 @@ export function SpotCard({
   // スポット名の取得（SpotWithDetailsとSpotWithMasterSpotで構造が異なる）
   const getSpotName = (): string => {
     if (spot.description) return spot.description;
-    // SpotWithDetails型の場合
+    // SpotWithDetails型の場合（master_spot.nameはJSONB）
     if ('master_spot' in spot && spot.master_spot?.name) {
-      return spot.master_spot.name;
+      const name = extractName(spot.master_spot.name, locale);
+      if (name) return name;
     }
-    // SpotWithMasterSpot型の場合
+    // SpotWithMasterSpot型の場合（nameはJSONB）
     if ('name' in spot && spot.name) {
-      return spot.name;
+      const name = extractName(spot.name as Json, locale);
+      if (name) return name;
     }
-    // embeddedMasterSpotがある場合
+    // embeddedMasterSpotがある場合（nameはJSONB）
     if (embeddedMasterSpot?.name) {
-      return embeddedMasterSpot.name;
+      const name = extractName(embeddedMasterSpot.name, locale);
+      if (name) return name;
     }
     return t('spotCard.unknownSpot');
   };
 
   // 住所の取得（表示用は短縮住所）
   const getAddress = (): string | null => {
+    // SpotWithDetailsやUserSpotSearchResultはmaster_spotを持つ
     if ('master_spot' in spot && spot.master_spot?.google_short_address) {
-      return spot.master_spot.google_short_address;
+      // UserSpotSearchResultはJSONB、SpotWithDetailsは変換済みstring
+      const addr = spot.master_spot.google_short_address;
+      if (typeof addr === 'string') {
+        return addr;
+      }
+      // JSONB型の場合はlocaleで抽出
+      return extractAddress(addr, locale);
     }
+    // embeddedMasterSpotはJSONB型
     if (embeddedMasterSpot?.google_short_address) {
-      return embeddedMasterSpot.google_short_address;
+      return extractAddress(embeddedMasterSpot.google_short_address, locale);
     }
-    // ピン刺し・現在地登録の場合はuser_spotの住所を使用
+    // ピン刺し・現在地登録の場合はuser_spotの住所を使用（SpotWithMasterSpotは変換済み）
     if ('google_short_address' in spot && spot.google_short_address) {
-      return spot.google_short_address;
+      const addr = spot.google_short_address;
+      if (typeof addr === 'string') {
+        return addr;
+      }
+      return extractAddress(addr, locale);
     }
     return null;
   };

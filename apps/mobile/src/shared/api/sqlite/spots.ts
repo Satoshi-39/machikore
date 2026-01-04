@@ -3,8 +3,42 @@
  */
 
 import { queryOne, queryAll, execute, executeBatch } from './client';
-import type { SpotRow, SpotWithMasterSpot, ImageRow } from '@/shared/types/database.types';
-import type { UUID } from '@/shared/types';
+import type { SpotRow, ImageRow } from '@/shared/types/database.types';
+import type { SpotWithMasterSpot, UUID } from '@/shared/types';
+import { getCurrentLocale } from '@/shared/lib/i18n';
+import {
+  extractAddressFromString,
+  transformRawSpotFromSQLite,
+  type RawSpotFromSQLite,
+} from '@/shared/lib/utils/multilang.utils';
+
+// ===============================
+// ヘルパー関数
+// ===============================
+
+/** SQLiteから取得した生データをSpotWithMasterSpot型に変換（現在の言語を使用） */
+function transformRawSpot(raw: RawSpotFromSQLite): SpotWithMasterSpot {
+  return transformRawSpotFromSQLite(raw, getCurrentLocale());
+}
+
+/** スポット取得用の共通SELECT句 */
+const SPOT_SELECT_QUERY = `
+  SELECT
+    s.*,
+    ms.name,
+    ms.latitude as ms_latitude,
+    ms.longitude as ms_longitude,
+    ms.google_formatted_address as ms_google_formatted_address,
+    ms.google_short_address as ms_google_short_address,
+    ms.google_place_id,
+    ms.google_types,
+    ms.google_phone_number,
+    ms.google_website_uri,
+    ms.google_rating,
+    ms.google_user_rating_count
+  FROM user_spots s
+  JOIN master_spots ms ON s.master_spot_id = ms.id
+`;
 
 // ===============================
 // スポット取得
@@ -14,112 +48,66 @@ import type { UUID } from '@/shared/types';
  * IDでスポットを取得（master_spotsと結合）
  */
 export function getSpotById(spotId: UUID): SpotWithMasterSpot | null {
-  return queryOne<SpotWithMasterSpot>(
-    `
-    SELECT
-      s.*,
-      ms.name,
-      ms.latitude,
-      ms.longitude,
-      ms.google_formatted_address as address,
-      ms.google_place_id,
-      ms.google_types,
-      ms.google_phone_number,
-      ms.google_website_uri,
-      ms.google_rating,
-      ms.google_user_rating_count
-    FROM user_spots s
-    JOIN master_spots ms ON s.master_spot_id = ms.id
-    WHERE s.id = ?;
-    `,
+  const raw = queryOne<RawSpotFromSQLite>(
+    `${SPOT_SELECT_QUERY} WHERE s.id = ?;`,
     [spotId]
   );
+  if (!raw) return null;
+  return transformRawSpot(raw);
 }
 
 /**
  * マップIDからスポット一覧を取得（master_spotsと結合）
  */
 export function getSpotsByMapId(mapId: UUID): SpotWithMasterSpot[] {
-  return queryAll<SpotWithMasterSpot>(
-    `
-    SELECT
-      s.*,
-      ms.name,
-      ms.latitude,
-      ms.longitude,
-      ms.google_formatted_address as address,
-      ms.google_place_id,
-      ms.google_types,
-      ms.google_phone_number,
-      ms.google_website_uri,
-      ms.google_rating,
-      ms.google_user_rating_count
-    FROM user_spots s
-    JOIN master_spots ms ON s.master_spot_id = ms.id
-    WHERE s.map_id = ?
-    ORDER BY s.order_index ASC, s.created_at DESC;
-    `,
+  const rawList = queryAll<RawSpotFromSQLite>(
+    `${SPOT_SELECT_QUERY} WHERE s.map_id = ? ORDER BY s.order_index ASC, s.created_at DESC;`,
     [mapId]
   );
+  return rawList.map(transformRawSpot);
 }
 
 /**
  * ユーザーの全スポットを取得（master_spotsと結合）
  */
 export function getSpotsByUserId(userId: UUID): SpotWithMasterSpot[] {
-  return queryAll<SpotWithMasterSpot>(
-    `
-    SELECT
-      s.*,
-      ms.name,
-      ms.latitude,
-      ms.longitude,
-      ms.google_formatted_address as address,
-      ms.google_place_id,
-      ms.google_types,
-      ms.google_phone_number,
-      ms.google_website_uri,
-      ms.google_rating,
-      ms.google_user_rating_count
-    FROM user_spots s
-    JOIN master_spots ms ON s.master_spot_id = ms.id
-    WHERE s.user_id = ?
-    ORDER BY s.created_at DESC;
-    `,
+  const rawList = queryAll<RawSpotFromSQLite>(
+    `${SPOT_SELECT_QUERY} WHERE s.user_id = ? ORDER BY s.created_at DESC;`,
     [userId]
   );
+  return rawList.map(transformRawSpot);
 }
 
 /**
  * 街IDからスポット一覧を取得（master_spotsと結合）
  */
 export function getSpotsByMachiId(machiId: string): SpotWithMasterSpot[] {
-  return queryAll<SpotWithMasterSpot>(
-    `
-    SELECT
-      s.*,
-      ms.name,
-      ms.latitude,
-      ms.longitude,
-      ms.google_formatted_address as address,
-      ms.google_place_id,
-      ms.google_types,
-      ms.google_phone_number,
-      ms.google_website_uri,
-      ms.google_rating,
-      ms.google_user_rating_count
-    FROM user_spots s
-    JOIN master_spots ms ON s.master_spot_id = ms.id
-    WHERE s.machi_id = ?
-    ORDER BY s.created_at DESC;
-    `,
+  const rawList = queryAll<RawSpotFromSQLite>(
+    `${SPOT_SELECT_QUERY} WHERE s.machi_id = ? ORDER BY s.created_at DESC;`,
     [machiId]
   );
+  return rawList.map(transformRawSpot);
 }
 
 // ===============================
 // マスタースポット操作
 // ===============================
+
+/** SQLiteマスタースポットの型 */
+interface MasterSpotFromSQLite {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  google_place_id: string | null;
+  google_formatted_address: string | null;
+  google_short_address: string | null;
+  google_types: string | null;
+  google_phone_number: string | null;
+  google_website_uri: string | null;
+  google_rating: number | null;
+  google_user_rating_count: number | null;
+}
 
 /**
  * ビューポート範囲内のマスタースポットを取得
@@ -130,24 +118,13 @@ export function getMasterSpotsByBounds(
   minLng: number,
   maxLng: number,
   limit: number = 1000
-) {
-  return queryAll<{
-    id: string;
-    name: string;
-    latitude: number;
-    longitude: number;
-    google_place_id: string | null;
-    google_formatted_address: string | null;
-    google_types: string | null;
-    google_phone_number: string | null;
-    google_website_uri: string | null;
-    google_rating: number | null;
-    google_user_rating_count: number | null;
-  }>(
+): MasterSpotFromSQLite[] {
+  const language = getCurrentLocale();
+  const rawList = queryAll<any>(
     `
     SELECT
       id, name, latitude, longitude,
-      google_place_id, google_formatted_address, google_types,
+      google_place_id, google_formatted_address, google_short_address, google_types,
       google_phone_number, google_website_uri,
       google_rating, google_user_rating_count
     FROM master_spots
@@ -157,6 +134,20 @@ export function getMasterSpotsByBounds(
     `,
     [minLat, maxLat, minLng, maxLng, limit]
   );
+  return rawList.map((raw) => ({
+    id: raw.id,
+    name: raw.name,
+    latitude: raw.latitude,
+    longitude: raw.longitude,
+    google_place_id: raw.google_place_id,
+    google_formatted_address: extractAddressFromString(raw.google_formatted_address, language),
+    google_short_address: extractAddressFromString(raw.google_short_address, language),
+    google_types: raw.google_types,
+    google_phone_number: raw.google_phone_number,
+    google_website_uri: raw.google_website_uri,
+    google_rating: raw.google_rating,
+    google_user_rating_count: raw.google_user_rating_count,
+  }));
 }
 
 /**
@@ -170,6 +161,7 @@ export function insertOrGetMasterSpot(masterSpot: {
   longitude: number;
   google_place_id?: string | null;
   google_formatted_address?: string | null;
+  google_short_address?: string | null;
   google_types?: string | null;
   google_phone_number?: string | null;
   google_website_uri?: string | null;
@@ -197,12 +189,12 @@ export function insertOrGetMasterSpot(masterSpot: {
     `
     INSERT INTO master_spots (
       id, name, latitude, longitude,
-      google_place_id, google_formatted_address, google_types,
+      google_place_id, google_formatted_address, google_short_address, google_types,
       google_phone_number, google_website_uri,
       google_rating, google_user_rating_count,
       created_at, updated_at
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `,
     [
       masterSpot.id,
@@ -211,6 +203,7 @@ export function insertOrGetMasterSpot(masterSpot: {
       masterSpot.longitude,
       masterSpot.google_place_id ?? null,
       masterSpot.google_formatted_address ?? null,
+      masterSpot.google_short_address ?? null,
       masterSpot.google_types ?? null,
       masterSpot.google_phone_number ?? null,
       masterSpot.google_website_uri ?? null,
@@ -241,6 +234,7 @@ export function insertSpot(params: {
     longitude: number;
     google_place_id?: string | null;
     google_formatted_address?: string | null;
+    google_short_address?: string | null;
     google_types?: string | null;
     google_phone_number?: string | null;
     google_website_uri?: string | null;
@@ -477,29 +471,15 @@ export function updateMapSpotCount(mapId: UUID): void {
  * 全公開スポットを取得（新着順）
  */
 export function getAllPublicSpots(limit: number = 50): SpotWithMasterSpot[] {
-  return queryAll<SpotWithMasterSpot>(
-    `
-    SELECT
-      s.*,
-      ms.name,
-      ms.latitude,
-      ms.longitude,
-      ms.google_formatted_address as address,
-      ms.google_place_id,
-      ms.google_types,
-      ms.google_phone_number,
-      ms.google_website_uri,
-      ms.google_rating,
-      ms.google_user_rating_count
-    FROM user_spots s
-    JOIN master_spots ms ON s.master_spot_id = ms.id
+  const rawList = queryAll<RawSpotFromSQLite>(
+    `${SPOT_SELECT_QUERY}
     JOIN maps m ON s.map_id = m.id
     WHERE m.is_public = 1
     ORDER BY s.created_at DESC
-    LIMIT ?;
-    `,
+    LIMIT ?;`,
     [limit]
   );
+  return rawList.map(transformRawSpot);
 }
 
 /**
@@ -508,28 +488,14 @@ export function getAllPublicSpots(limit: number = 50): SpotWithMasterSpot[] {
 export function searchSpots(query: string, limit: number = 30): SpotWithMasterSpot[] {
   if (!query.trim()) return [];
   const searchPattern = `%${query}%`;
-  return queryAll<SpotWithMasterSpot>(
-    `
-    SELECT
-      s.*,
-      ms.name,
-      ms.latitude,
-      ms.longitude,
-      ms.google_formatted_address as address,
-      ms.google_place_id,
-      ms.google_types,
-      ms.google_phone_number,
-      ms.google_website_uri,
-      ms.google_rating,
-      ms.google_user_rating_count
-    FROM user_spots s
-    JOIN master_spots ms ON s.master_spot_id = ms.id
+  const rawList = queryAll<RawSpotFromSQLite>(
+    `${SPOT_SELECT_QUERY}
     JOIN maps m ON s.map_id = m.id
     WHERE m.is_public = 1
       AND (ms.name LIKE ? OR s.description LIKE ?)
     ORDER BY s.created_at DESC
-    LIMIT ?;
-    `,
+    LIMIT ?;`,
     [searchPattern, searchPattern, limit]
   );
+  return rawList.map(transformRawSpot);
 }

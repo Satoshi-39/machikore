@@ -24,6 +24,7 @@ import { useMapArticle, useUpdateMap } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { extractPlainText } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
+import { extractAddress } from '@/shared/lib/utils/multilang.utils';
 
 interface EditArticlePageProps {
   mapId: string;
@@ -31,7 +32,7 @@ interface EditArticlePageProps {
 
 export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const router = useRouter();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
   const { mutate: updateMap, isPending: isUpdatingMap } = useUpdateMap();
@@ -189,11 +190,12 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           {articleData.spots.length > 0 ? (
             <View>
               {articleData.spots.map((spot, index) => {
-                const spotName = spot.description || spot.master_spot?.name || '不明なスポット';
                 const firstImage = spot.images?.[0]?.cloud_path;
                 const articleText = extractPlainText(spot.article_content);
                 const hasArticle = articleText.length > 0;
-                const address = spot.master_spot?.google_short_address || spot.google_short_address;
+                // JSONB型の住所を現在のlocaleで抽出
+                const address = extractAddress(spot.master_spot?.google_short_address, locale)
+                  || extractAddress(spot.google_short_address, locale);
 
                 return (
                   <Pressable
@@ -201,23 +203,16 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     onPress={() => handleEditSpot(spot.id)}
                     className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
                   >
-                    {/* セクション番号とスポット名 */}
+                    {/* セクション番号と一言メモ */}
                     <View className="flex-row items-center mb-2">
                       <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">
                         {index + 1}.
                       </Text>
                       <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">
-                        {spotName}
+                        {spot.description}
                       </Text>
                       <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
                     </View>
-
-                    {/* 一言メモ */}
-                    {spot.description && (
-                      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
-                        {spot.description}
-                      </Text>
-                    )}
 
                     {/* スポット画像 */}
                     {firstImage && (

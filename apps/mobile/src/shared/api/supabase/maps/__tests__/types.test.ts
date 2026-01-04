@@ -23,8 +23,8 @@ describe('mapResponseToMapWithUser', () => {
     created_at: '2024-01-01T00:00:00Z',
     updated_at: '2024-01-02T00:00:00Z',
     is_article_public: true,
-    article_intro: 'イントロ',
-    article_outro: 'アウトロ',
+    article_intro: null,
+    article_outro: null,
     show_label_chips: true,
     language: 'ja',
     users: {
@@ -70,8 +70,8 @@ describe('mapResponseToMapWithUser', () => {
       const result = mapResponseToMapWithUser(baseResponse);
 
       expect(result.is_article_public).toBe(true);
-      expect(result.article_intro).toBe('イントロ');
-      expect(result.article_outro).toBe('アウトロ');
+      expect(result.article_intro).toBeNull();
+      expect(result.article_outro).toBeNull();
     });
 
     it('その他のフィールドを正しく変換する', () => {

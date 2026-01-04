@@ -3,6 +3,7 @@
  */
 
 import type { UserRow, UserInsert as UserInsertType, UserUpdate as UserUpdateType } from '@/shared/types';
+import type { ThemePreference, LocalePreference } from '@/shared/api/supabase/user-preferences';
 
 // ===============================
 // Supabase型からUser型を抽出
@@ -27,3 +28,13 @@ export interface AuthUser {
 // ===============================
 
 export type AuthState = 'loading' | 'authenticated' | 'unauthenticated';
+
+// ===============================
+// ユーザー設定型
+// ===============================
+
+/** ローカル用の設定型（user_idなし） */
+export interface LocalPreferences {
+  theme: ThemePreference;
+  locale: LocalePreference;
+}

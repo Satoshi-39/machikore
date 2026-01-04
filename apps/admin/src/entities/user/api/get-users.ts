@@ -1,21 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type User = {
-  id: string;
-  username: string;
-  display_name: string;
-  email: string;
-  avatar_url: string | null;
-  status: string;
-  is_premium: boolean | null;
-  created_at: string;
-};
-
-export type GetUsersParams = {
-  query?: string;
-  status?: string;
-  limit?: number;
-};
+import type { User, GetUsersParams } from "../model/types";
 
 export async function getUsers(params: GetUsersParams = {}): Promise<User[]> {
   const { query, status, limit = 50 } = params;

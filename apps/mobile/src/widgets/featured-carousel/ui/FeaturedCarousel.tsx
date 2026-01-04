@@ -21,7 +21,8 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
-import { useFeaturedCarouselItems, type FeaturedCarouselItem } from '@/entities/featured-carousel';
+import { useFeaturedCarouselItems } from '@/entities/featured-carousel';
+import type { FeaturedCarouselItem } from '@/entities/featured-carousel/model';
 import { colors, FEATURED_CAROUSEL } from '@/shared/config';
 
 // レイアウト定数

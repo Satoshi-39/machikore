@@ -25,7 +25,7 @@ describe('images.utils', () => {
       // タイムスタンプが妥当な範囲にあることを確認
       const match = filename.match(/post_test-post_(\d+)\.jpg/);
       expect(match).not.toBeNull();
-      const ts = parseInt(match![1], 10);
+      const ts = parseInt(match?.[1] ?? '0', 10);
       expect(ts).toBeGreaterThanOrEqual(before);
       expect(ts).toBeLessThanOrEqual(after);
     });

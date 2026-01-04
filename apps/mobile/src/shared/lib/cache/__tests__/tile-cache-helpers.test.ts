@@ -12,7 +12,7 @@ const jsonify = (value: unknown): string | null =>
   value ? JSON.stringify(value) : null;
 
 // toSQLiteMachi関数の再定義
-function toSQLiteMachi(machi: Record<string, unknown>) {
+function toSQLiteMachi<T extends Record<string, unknown>>(machi: T) {
   const now = new Date().toISOString();
   return {
     ...machi,
@@ -27,7 +27,7 @@ function toSQLiteMachi(machi: Record<string, unknown>) {
 }
 
 // fromSQLiteMachi関数の再定義
-function fromSQLiteMachi(row: Record<string, unknown>) {
+function fromSQLiteMachi<T extends Record<string, unknown>>(row: T) {
   return {
     ...row,
     name_translations: parseJsonField(row.name_translations as string | null),
@@ -37,7 +37,7 @@ function fromSQLiteMachi(row: Record<string, unknown>) {
 }
 
 // toSQLiteCity関数の再定義
-function toSQLiteCity(city: Record<string, unknown>) {
+function toSQLiteCity<T extends Record<string, unknown>>(city: T) {
   const now = new Date().toISOString();
   return {
     ...city,
@@ -49,7 +49,7 @@ function toSQLiteCity(city: Record<string, unknown>) {
 }
 
 // fromSQLiteCity関数の再定義
-function fromSQLiteCity(row: Record<string, unknown>) {
+function fromSQLiteCity<T extends Record<string, unknown>>(row: T) {
   return {
     ...row,
     name_translations: parseJsonField(row.name_translations as string | null),
@@ -57,7 +57,7 @@ function fromSQLiteCity(row: Record<string, unknown>) {
 }
 
 // fromSQLiteTransportHub関数の再定義
-function fromSQLiteTransportHub(row: Record<string, unknown>) {
+function fromSQLiteTransportHub<T extends Record<string, unknown>>(row: T) {
   return {
     ...row,
     name_translations: parseJsonField(row.name_translations as string | null),

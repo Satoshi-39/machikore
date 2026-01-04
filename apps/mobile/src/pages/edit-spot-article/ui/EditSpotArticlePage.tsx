@@ -64,11 +64,9 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     );
   }
 
-  const spotName = spot?.master_spot?.name || spot?.description || t('editArticle.title');
-
   return (
     <ArticleEditor
-      title={spotName}
+      title={spot?.description || t('editArticle.title')}
       initialArticleContent={spot?.article_content || null}
       onSave={handleSave}
       isSaving={isSaving}

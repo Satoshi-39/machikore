@@ -71,7 +71,7 @@ export const spotHandlers = [
 
   // スポット作成
   http.post(`${SUPABASE_URL}/rest/v1/user_spots`, async ({ request }) => {
-    const body = await request.json();
+    const body = (await request.json()) as Record<string, unknown>;
     const newSpot = {
       id: `spot-${Date.now()}`,
       created_at: new Date().toISOString(),
@@ -91,7 +91,7 @@ export const spotHandlers = [
     const url = new URL(request.url);
     const idParam = url.searchParams.get('id');
     const id = idParam?.replace('eq.', '');
-    const body = await request.json();
+    const body = (await request.json()) as Record<string, unknown>;
 
     const spot = mockSpots.find((s) => s.id === id);
     if (!spot) {

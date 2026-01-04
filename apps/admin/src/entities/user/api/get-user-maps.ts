@@ -1,11 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type UserMap = {
-  id: string;
-  name: string;
-  is_public: boolean;
-  created_at: string;
-};
+import type { UserMap } from "../model/types";
 
 export async function getUserMaps(userId: string): Promise<UserMap[]> {
   const supabase = await createServerClient();

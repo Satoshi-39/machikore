@@ -11,6 +11,8 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { searchSpotsByMapId, type MapSpotSearchResult } from '@/shared/api/supabase/user-spots';
 import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
+import { useI18n } from '@/shared/lib/i18n';
+import { extractAddress } from '@/shared/lib/utils/multilang.utils';
 
 interface OtherMapSearchProps {
   mapId: string | null;
@@ -28,6 +30,7 @@ export function OtherMapSearch({
   onSpotSelect,
 }: OtherMapSearchProps) {
   const isDarkMode = useIsDarkMode();
+  const { locale } = useI18n();
   const [results, setResults] = useState<MapSpotSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -150,7 +153,7 @@ export function OtherMapSearch({
                       <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{spot.name}</Text>
                       {spot.address && (
                         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
-                          {spot.address}
+                          {extractAddress(spot.address, locale)}
                         </Text>
                       )}
                     </View>

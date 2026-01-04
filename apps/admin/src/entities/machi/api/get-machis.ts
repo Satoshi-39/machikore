@@ -1,18 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type Machi = {
-  id: string;
-  name: string;
-  name_kana: string | null;
-  latitude: number | null;
-  longitude: number | null;
-  prefecture_id: string;
-  prefecture_name: string;
-  city_id: string | null;
-  city_name: string | null;
-  place_type: string | null;
-  created_at: string;
-};
+import type { Machi } from "../model/types";
 
 export async function getMachis(): Promise<Machi[]> {
   const supabase = await createServerClient();

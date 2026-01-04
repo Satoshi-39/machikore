@@ -1,19 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type Spot = {
-  id: string;
-  description: string;
-  prefecture_name: string | null;
-  machi_name: string | null;
-  likes_count: number;
-  comments_count: number;
-  bookmarks_count: number;
-  created_at: string;
-  user: {
-    display_name: string;
-    username: string;
-  } | null;
-};
+import type { Spot } from "../model/types";
 
 export async function getSpots(): Promise<Spot[]> {
   const supabase = await createServerClient();
@@ -23,13 +9,12 @@ export async function getSpots(): Promise<Spot[]> {
     .select(`
       id,
       description,
-      prefecture_name,
-      machi_name,
       likes_count,
       comments_count,
       bookmarks_count,
       created_at,
-      user:users!user_spots_user_id_fkey(display_name, username)
+      user:users!user_spots_user_id_fkey(display_name, username),
+      machi:machi!user_spots_machi_id_fkey(name, prefecture_name)
     `)
     .order("created_at", { ascending: false })
     .limit(50);
@@ -39,5 +24,16 @@ export async function getSpots(): Promise<Spot[]> {
     return [];
   }
 
-  return (data ?? []) as Spot[];
+  // machiテーブルからのJOIN結果を元の型に変換
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    description: row.description,
+    prefecture_name: row.machi?.prefecture_name ?? null,
+    machi_name: row.machi?.name ?? null,
+    likes_count: row.likes_count,
+    comments_count: row.comments_count,
+    bookmarks_count: row.bookmarks_count,
+    created_at: row.created_at,
+    user: row.user,
+  }));
 }

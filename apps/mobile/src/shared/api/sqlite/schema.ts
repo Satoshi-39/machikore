@@ -293,6 +293,7 @@ export function initializeDatabase(): void {
         longitude REAL NOT NULL,
         google_place_id TEXT,
         google_formatted_address TEXT,
+        google_short_address TEXT,
         google_types TEXT,
         google_phone_number TEXT,
         google_website_uri TEXT,
@@ -311,17 +312,21 @@ export function initializeDatabase(): void {
     // ========================================
     // 12. ユーザースポットテーブル
     // ========================================
+    // 注: prefecture_id等の非正規化カラムはmachiテーブルとのJOINで取得
     db.execSync(`
       CREATE TABLE user_spots (
         id TEXT PRIMARY KEY,
         user_id TEXT NOT NULL,
         map_id TEXT NOT NULL,
         master_spot_id TEXT NOT NULL,
-        machi_id TEXT NOT NULL,
-        prefecture_id TEXT,
+        machi_id TEXT,
         description TEXT NOT NULL,
         spot_color TEXT DEFAULT 'blue',
         label_id TEXT,
+        latitude REAL,
+        longitude REAL,
+        google_formatted_address TEXT,
+        google_short_address TEXT,
         images_count INTEGER DEFAULT 0,
         likes_count INTEGER DEFAULT 0,
         comments_count INTEGER DEFAULT 0,
@@ -333,7 +338,6 @@ export function initializeDatabase(): void {
         FOREIGN KEY (map_id) REFERENCES maps(id) ON DELETE CASCADE,
         FOREIGN KEY (master_spot_id) REFERENCES master_spots(id) ON DELETE CASCADE,
         FOREIGN KEY (machi_id) REFERENCES machi(id),
-        FOREIGN KEY (prefecture_id) REFERENCES prefectures(id),
         FOREIGN KEY (label_id) REFERENCES map_labels(id) ON DELETE SET NULL,
         UNIQUE(user_id, map_id, master_spot_id)
       );
@@ -342,7 +346,6 @@ export function initializeDatabase(): void {
     db.execSync('CREATE INDEX idx_user_spots_map_id ON user_spots(map_id);');
     db.execSync('CREATE INDEX idx_user_spots_master_spot_id ON user_spots(master_spot_id);');
     db.execSync('CREATE INDEX idx_user_spots_machi_id ON user_spots(machi_id);');
-    db.execSync('CREATE INDEX idx_user_spots_prefecture_id ON user_spots(prefecture_id);');
     db.execSync('CREATE INDEX idx_user_spots_created_at ON user_spots(created_at DESC);');
     db.execSync('CREATE INDEX idx_user_spots_is_synced ON user_spots(is_synced);');
     db.execSync('CREATE INDEX idx_user_spots_label_id ON user_spots(label_id);');

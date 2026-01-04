@@ -24,6 +24,7 @@ import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
 interface SpotDetailCardProps {
   spot: SpotWithDetails;
@@ -70,7 +71,7 @@ function SpotDetailCardContent({
 const SEARCH_BAR_BOTTOM_Y = 180;
 
 export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -123,12 +124,13 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
 
-  // SpotWithDetailsから表示用データを抽出
-  // マスタースポットの正式名称（メイン表示）
-  const masterSpotName = spot.master_spot?.name || t('spot.unknownSpot');
-  // ユーザーの一言（サブ表示）
-  const oneWord = spot.description;
-  const spotAddress = spot.master_spot?.google_short_address || spot.google_short_address;
+  // マスタースポット名（JSONB型を現在のlocaleで抽出）
+  const masterSpotName = spot.master_spot?.name
+    ? extractName(spot.master_spot.name, locale) || t('spot.unknownSpot')
+    : t('spot.unknownSpot');
+  // 住所（JSONB型を現在のlocaleで抽出）
+  const spotAddress = extractAddress(spot.master_spot?.google_short_address, locale)
+    || extractAddress(spot.google_short_address, locale);
 
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
   const { colorValue: spotColorValue, strokeColor: spotColorStroke } = useSpotColor(spot, isDarkMode);
@@ -288,9 +290,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               </Text>
             </View>
             {/* ユーザーの一言（サブ） */}
-            {oneWord && (
+            {spot.description && (
               <Text className="text-lg text-foreground-secondary dark:text-dark-foreground-secondary">
-                {oneWord}
+                {spot.description}
               </Text>
             )}
           </View>

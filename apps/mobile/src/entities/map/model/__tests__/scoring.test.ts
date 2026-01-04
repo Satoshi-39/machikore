@@ -7,7 +7,6 @@ import {
   calculatePopularityScore,
   countByMapId,
   getTopMapIds,
-  SCORING_WEIGHTS,
 } from '../scoring';
 
 describe('map/scoring', () => {

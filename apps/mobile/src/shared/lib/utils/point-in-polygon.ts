@@ -5,12 +5,12 @@
  * 点がポリゴン内にあるかどうかを判定
  */
 
-type Coordinate = [number, number]; // [lng, lat]
-type Ring = Coordinate[];
-type PolygonCoordinates = Ring[];
-type MultiPolygonCoordinates = Ring[][];
+export type Coordinate = [number, number]; // [lng, lat]
+export type Ring = Coordinate[];
+export type PolygonCoordinates = Ring[];
+export type MultiPolygonCoordinates = Ring[][];
 
-interface Geometry {
+export interface Geometry {
   type: 'Polygon' | 'MultiPolygon';
   coordinates: PolygonCoordinates | MultiPolygonCoordinates;
 }

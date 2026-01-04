@@ -12,6 +12,7 @@ import {
   getMapBookmarkInfo,
   type BookmarkWithDetails,
 } from '@/shared/api/supabase/bookmarks';
+import type { BookmarkInfo } from '../model/types';
 
 /**
  * ユーザーのブックマーク一覧を取得
@@ -64,9 +65,6 @@ export function useCheckMapBookmarked(
     enabled: !!userId && !!mapId,
   });
 }
-
-/** ブックマーク情報の型（複数フォルダ対応） */
-export type BookmarkInfo = { id: string; folder_id: string | null }[];
 
 /**
  * スポットのブックマーク情報を取得（どのフォルダに入っているか含む、複数フォルダ対応）

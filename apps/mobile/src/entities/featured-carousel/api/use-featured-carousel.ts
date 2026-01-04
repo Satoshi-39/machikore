@@ -6,17 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { supabase } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
-import type { Database } from '@/shared/types/database.types';
-
-/**
- * リンク種別
- */
-export type FeaturedCarouselLinkType = 'tag' | 'map' | 'url';
-
-/**
- * 特集カルーセルアイテムの型（Database型から取得）
- */
-export type FeaturedCarouselItem = Database['public']['Tables']['featured_carousel_items']['Row'];
+import type { FeaturedCarouselItem } from '../model/types';
 
 /**
  * 有効な特集カルーセルアイテムを取得

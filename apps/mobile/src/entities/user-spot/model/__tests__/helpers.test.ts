@@ -97,18 +97,12 @@ describe('user-spot/helpers', () => {
       expect(result.valid).toBe(true);
     });
 
-    it('descriptionがnullや未定義はOK', () => {
-      const result1 = validateCreateSpotParams({
+    it('descriptionが空文字はOK（バリデーションはフォーム側で行う）', () => {
+      const result = validateCreateSpotParams({
         ...validParams,
-        description: null,
+        description: '',
       });
-      expect(result1.valid).toBe(true);
-
-      const result2 = validateCreateSpotParams({
-        ...validParams,
-        description: undefined,
-      });
-      expect(result2.valid).toBe(true);
+      expect(result.valid).toBe(true);
     });
 
     it('imagesが10枚を超えるとエラー', () => {
@@ -213,7 +207,6 @@ function createMockSpot(id: string, createdAt: string): SpotRow {
     map_id: 'map-123',
     user_id: 'user-123',
     machi_id: 'sta_tokyo',
-    machi_name: null,
     master_spot_id: 'master-123',
     description: 'テストスポット',
     article_content: null,
@@ -222,15 +215,11 @@ function createMockSpot(id: string, createdAt: string): SpotRow {
     bookmarks_count: 0,
     comments_count: 0,
     order_index: 0,
-    color: null,
     spot_color: null,
     label_id: null,
     latitude: 35.6812,
     longitude: 139.7671,
-    prefecture_id: null,
-    prefecture_name: null,
-    city_id: null,
-    city_name: null,
+    // prefecture_id, city_id, prefecture_name, city_name, machi_name は machi テーブルから JOIN で取得
     google_formatted_address: null,
     google_short_address: null,
     language: null,

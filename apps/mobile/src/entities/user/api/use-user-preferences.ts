@@ -18,6 +18,7 @@ import {
   type ContentLanguage,
 } from '@/shared/api/supabase/user-preferences';
 import { useUserStore } from '@/entities/user/model';
+import type { LocalPreferences } from '@/entities/user/model/types';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { STORAGE_KEYS } from '@/shared/config/constants';
 import { i18n, useI18n, type SupportedLocale } from '@/shared/lib/i18n';
@@ -27,16 +28,6 @@ const DEFAULT_PREFERENCES: LocalPreferences = {
   theme: 'system',
   locale: 'system',
 };
-
-// ===============================
-// Types
-// ===============================
-
-/** ローカル用の設定型（user_idなし） */
-export interface LocalPreferences {
-  theme: ThemePreference;
-  locale: LocalePreference;
-}
 
 // ===============================
 // Local Storage Helpers

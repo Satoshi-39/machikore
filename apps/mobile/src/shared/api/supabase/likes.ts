@@ -2,6 +2,9 @@
  * Supabase Likes API
  * いいね機能（スポット・マップ）
  * カウンターはトリガーで自動更新される
+ *
+ * API層は生データ（JSONB型）をそのまま返す
+ * 住所の言語抽出は表示層（entities/widgets）で行う
  */
 
 import { supabase, handleSupabaseError } from './client';
@@ -241,6 +244,9 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
           username,
           display_name,
           avatar_url
+        ),
+        maps (
+          language
         )
       )
     `)
@@ -277,7 +283,16 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         longitude: like.user_spots.longitude,
         google_formatted_address: like.user_spots.google_formatted_address,
         google_short_address: like.user_spots.google_short_address,
-        master_spot: like.user_spots.master_spots,
+        master_spot: like.user_spots.master_spots ? {
+          id: like.user_spots.master_spots.id,
+          name: like.user_spots.master_spots.name,
+          latitude: like.user_spots.master_spots.latitude,
+          longitude: like.user_spots.master_spots.longitude,
+          google_place_id: like.user_spots.master_spots.google_place_id,
+          google_formatted_address: like.user_spots.master_spots.google_formatted_address,
+          google_short_address: like.user_spots.master_spots.google_short_address,
+          google_types: like.user_spots.master_spots.google_types,
+        } : null,
         user: like.user_spots.users,
         is_liked: true, // いいね一覧なので必ずtrue
       },

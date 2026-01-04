@@ -1,25 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type Map = {
-  id: string;
-  name: string;
-  description: string | null;
-  is_public: boolean;
-  is_official: boolean;
-  spots_count: number;
-  likes_count: number;
-  comments_count: number;
-  bookmarks_count: number;
-  category_id: string | null;
-  created_at: string;
-  user: {
-    display_name: string;
-    username: string;
-  } | null;
-  category: {
-    name: string;
-  } | null;
-};
+import type { Map } from "../model/types";
 
 export async function getMaps(): Promise<Map[]> {
   const supabase = await createServerClient();

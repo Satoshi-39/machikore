@@ -20,6 +20,8 @@ import {
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
+import { useI18n } from '@/shared/lib/i18n';
 import { useSpotsByMasterSpot, SpotCard } from '@/entities/user-spot';
 import { determineSpotCategory } from '@/entities/master-spot';
 import { useCurrentUserId } from '@/entities/user';
@@ -68,6 +70,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
+  const { locale } = useI18n();
   const screenWidth = Dimensions.get('window').width;
   // SpotCard用のコンテナ幅計算: 画面幅 - BottomSheetのpx-4(32px) - カードのp-4(32px) - border(2px)
   const spotCardContainerWidth = screenWidth - 32 - 32 - 2;
@@ -159,20 +162,24 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
     // マップIDを設定
     setSelectedMapId(mapId);
     // MasterSpotDisplayからPlaceSearchResultを作成
+    // JSONB型の住所・名前を現在のlocaleで抽出
+    const shortAddress = extractAddress(spot.google_short_address, locale);
+    const formattedAddress = extractAddress(spot.google_formatted_address, locale);
+    const name = extractName(spot.name, locale) || '';
     setSelectedPlace({
       id: spot.google_place_id || spot.id,
-      name: spot.name,
-      shortAddress: spot.google_short_address,
-      formattedAddress: spot.google_formatted_address,
+      name,
+      shortAddress,
+      formattedAddress,
       latitude: spot.latitude,
       longitude: spot.longitude,
       category: spot.google_types || [],
       googleData: {
         placeId: spot.google_place_id || spot.id,
-        placeName: spot.name,
+        placeName: name,
         category: spot.google_types || [],
-        shortAddress: spot.google_short_address,
-        formattedAddress: spot.google_formatted_address,
+        shortAddress,
+        formattedAddress,
         internationalPhoneNumber: spot.google_phone_number || undefined,
         websiteUri: spot.google_website_uri || undefined,
         rating: spot.google_rating || undefined,
@@ -182,7 +189,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
     setShowMapSelectSheet(false);
     onClose();
     router.push('/create-spot');
-  }, [spot, setSelectedMapId, setSelectedPlace, onClose, router, userSpots, currentUserId]);
+  }, [spot, setSelectedMapId, setSelectedPlace, onClose, router, userSpots, currentUserId, locale]);
 
   // 新規マップ作成
   const handleCreateNewMap = useCallback(() => {
@@ -251,13 +258,13 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             <View className="flex-row items-center mb-1">
               <LocationPinIcon size={24} color={SPOT_TYPE_COLORS[determineSpotCategory(spot.google_types)]} />
               <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
-                {spot.name}
+                {extractName(spot.name, locale)}
               </Text>
             </View>
             {spot.google_short_address && (
               <View className="flex-row items-center">
                 <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spot.google_short_address}</Text>
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{extractAddress(spot.google_short_address, locale)}</Text>
               </View>
             )}
           </View>

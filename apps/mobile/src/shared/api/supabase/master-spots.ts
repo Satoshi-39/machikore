@@ -1,10 +1,14 @@
 /**
  * Supabase Master Spots API
  * マスタースポットの取得・検索
+ *
+ * API層は生データ（JSONB型）をそのまま返す
+ * 住所の言語抽出は表示層（entities/widgets）で行う
  */
 
 import { supabase, handleSupabaseError } from './client';
 import { log } from '@/shared/config/logger';
+import type { Json } from '@/shared/types/database.types';
 
 // ===============================
 // 型定義
@@ -12,12 +16,12 @@ import { log } from '@/shared/config/logger';
 
 export interface MasterSpotDisplay {
   id: string;
-  name: string;
+  name: Json; // JSONB型（多言語対応）
   latitude: number;
   longitude: number;
   google_place_id: string | null;
-  google_formatted_address: string | null; // 完全住所（コピー用）
-  google_short_address: string | null; // 短縮住所（表示用）
+  google_formatted_address: Json | null; // JSONB型（多言語対応）
+  google_short_address: Json | null; // JSONB型（多言語対応）
   google_types: string[] | null;
   google_phone_number: string | null;
   google_website_uri: string | null;

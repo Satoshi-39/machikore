@@ -19,45 +19,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
-import {
-  type SpotLocationInput,
-  isPlaceSearchResult,
-  useSelectedPlaceStore,
-} from '@/features/search-places';
+import { isPlaceSearchResult, useSelectedPlaceStore } from '@/features/search-places';
 import { useRouter } from 'expo-router';
-import type { ProseMirrorDoc } from '@/shared/types';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
-import type { MapWithUser } from '@/shared/types';
 import { useCreateSpotFormValidation } from '../model';
+import type { CreateSpotFormProps } from '../model/types';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n } from '@/shared/lib/i18n';
-
-interface UploadProgress {
-  current: number;
-  total: number;
-  status: 'idle' | 'creating' | 'uploading' | 'done';
-}
-
-interface CreateSpotFormProps {
-  placeData: SpotLocationInput; // Google Places検索結果 または 手動登録
-  onSubmit: (data: {
-    description: string;
-    articleContent?: ProseMirrorDoc | null;
-    tags: string[];
-    images: SelectedImage[];
-    mapId: string;
-    spotColor: SpotColor;
-    labelId?: string | null;
-  }) => void;
-  isLoading?: boolean;
-  uploadProgress?: UploadProgress;
-  /** ユーザーのマップ一覧 */
-  userMaps?: MapWithUser[];
-  /** マップ読み込み中 */
-  isMapsLoading?: boolean;
-  /** 選択されたマップID */
-  selectedMapId?: string | null;
-}
 
 export function CreateSpotForm({
   placeData,

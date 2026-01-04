@@ -39,7 +39,7 @@ export const userHandlers = [
     const url = new URL(request.url);
     const idParam = url.searchParams.get('id');
     const id = idParam?.replace('eq.', '');
-    const body = await request.json();
+    const body = (await request.json()) as Record<string, unknown>;
 
     const user = mockUsers.find((u) => u.id === id);
     if (!user) {

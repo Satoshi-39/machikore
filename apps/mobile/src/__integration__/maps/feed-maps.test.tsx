@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor, act } from '@testing-library/react-native';
+import { renderHook, waitFor } from '@testing-library/react-native';
 import { nockSupabase } from '@/shared/lib/test/nock';
 import { mockMaps, mockUsers } from '@/shared/lib/test/msw/fixtures/index';
 import { useFeedMaps } from '@/entities/map/api/use-feed-maps';
@@ -59,7 +59,7 @@ describe('useFeedMaps 結合テスト', () => {
     });
 
     // 公開マップが取得されている
-    expect(result.current.data?.pages[0].length).toBe(publicMaps.length);
+    expect(result.current.data?.pages[0]?.length).toBe(publicMaps.length);
   });
 
   it('APIエラー時にエラー状態になる', async () => {

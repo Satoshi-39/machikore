@@ -5,7 +5,7 @@
  * FSD: shared/types に配置（複数entityにまたがるため）
  */
 
-import type { Database } from './database.types';
+import type { Database, Json } from './database.types';
 
 // ===============================
 // ProseMirror/TipTap JSON型
@@ -90,15 +90,16 @@ export interface MapWithUser extends MapRow {
 
 /**
  * JOINで取得するマスタースポット基本情報
+ * name・住所フィールドはJSONB型（多言語対応）
  */
 export interface MasterSpotBasicInfo {
   id: string;
-  name: string;
+  name: Json; // スポット名（JSONB: {"ja": "...", "en": "..."}）
   latitude: number;
   longitude: number;
   google_place_id: string | null;
-  google_formatted_address: string | null; // 完全住所（コピー用）
-  google_short_address: string | null; // 短縮住所（表示用）
+  google_formatted_address: Json | null; // 完全住所（JSONB: {"ja": "...", "en": "..."}）
+  google_short_address: Json | null; // 短縮住所（JSONB: {"ja": "...", "en": "..."}）
   google_types: string[] | null;
 }
 
@@ -152,9 +153,9 @@ export interface SpotWithDetails {
   /** ピン刺し・現在地登録の場合の座標（master_spotがない場合に使用） */
   latitude?: number | null;
   longitude?: number | null;
-  /** ピン刺し・現在地登録の場合の住所（master_spotがない場合に使用） */
-  google_formatted_address?: string | null; // 完全住所（コピー用）
-  google_short_address?: string | null; // 短縮住所（表示用）
+  /** ピン刺し・現在地登録の場合の住所（master_spotがない場合に使用、JSONB型） */
+  google_formatted_address?: Json | null; // 完全住所（JSONB: {"ja": "...", "en": "..."}）
+  google_short_address?: Json | null; // 短縮住所（JSONB: {"ja": "...", "en": "..."}）
   master_spot: MasterSpotBasicInfo | null;
   user: UserBasicInfo | null;
   /** 所属するマップの情報 */
@@ -186,4 +187,43 @@ export interface SpotWithImages extends SpotWithDetails {
 export interface MapArticleData {
   map: MapWithUser;
   spots: SpotWithImages[];
+}
+
+// ===============================
+// SQLite/Supabase共通型
+// ===============================
+
+/**
+ * user_spots + master_spots を結合した型
+ * SQLiteとSupabase両方で使用
+ * 住所フィールドは変換済み（string | null）
+ */
+export interface SpotWithMasterSpot {
+  id: string;
+  user_id: string;
+  map_id: string;
+  master_spot_id: string;
+  machi_id: string;
+  description: string;
+  spot_color: string | null;
+  label_id: string | null;
+  images_count: number;
+  likes_count: number;
+  bookmarks_count: number;
+  comments_count: number;
+  order_index: number;
+  created_at: string;
+  updated_at: string;
+  // master_spotsからの結合フィールド
+  name: string;
+  latitude: number;
+  longitude: number;
+  address: string | null; // google_formatted_address（完全住所）
+  google_short_address: string | null; // 短縮住所（表示用）
+  google_place_id: string | null;
+  google_types: string | null;
+  google_phone_number: string | null;
+  google_website_uri: string | null;
+  google_rating: number | null;
+  google_user_rating_count: number | null;
 }

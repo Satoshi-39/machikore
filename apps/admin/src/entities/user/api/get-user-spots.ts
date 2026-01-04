@@ -1,10 +1,5 @@
 import { createServerClient } from "@/shared/api";
-
-export type UserSpotSummary = {
-  id: string;
-  description: string;
-  created_at: string;
-};
+import type { UserSpotSummary } from "../model/types";
 
 export async function getUserSpots(userId: string): Promise<UserSpotSummary[]> {
   const supabase = await createServerClient();

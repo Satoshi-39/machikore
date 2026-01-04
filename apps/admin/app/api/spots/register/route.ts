@@ -2,10 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/shared/api";
 import { getServerEnv } from "@/shared/config";
 
+type AddressComponent = {
+  longText: string;
+  shortText: string;
+  types: string[];
+};
+
 type PlaceDetails = {
   placeId: string;
   name: string;
   formattedAddress: string;
+  shortAddress: string | null;
   latitude: number;
   longitude: number;
   types?: string[];
@@ -16,11 +23,36 @@ type PlaceDetails = {
 };
 
 /**
+ * addressComponentsから短縮住所を生成（mobileと同じロジック）
+ */
+function buildShortAddress(addressComponents: AddressComponent[]): string | null {
+  const getComponent = (type: string) =>
+    addressComponents.find((c) => c.types?.includes(type))?.longText || "";
+
+  // 都道府県 + 市区町村 + 地域名 の短縮住所を構築
+  const prefecture = getComponent("administrative_area_level_1");
+  const city =
+    getComponent("locality") || getComponent("administrative_area_level_2");
+  // sublocality_level_2（大字・町名）を優先、なければsublocality_level_1、最後にsublocality
+  const sublocality =
+    getComponent("sublocality_level_2") ||
+    getComponent("sublocality_level_1") ||
+    getComponent("sublocality");
+
+  // 短い住所: "東京都渋谷区神南" のような形式
+  const shortAddress = [prefecture, city, sublocality].filter(Boolean).join("");
+
+  return shortAddress || null;
+}
+
+/**
  * Google Places Text Search API で場所を検索
+ * @param languageCode 住所の言語コード（マップの言語を継承）
  */
 async function searchPlace(
   name: string,
-  address: string
+  address: string,
+  languageCode: string = "ja"
 ): Promise<PlaceDetails | null> {
   const { GOOGLE_PLACES_API_KEY } = getServerEnv();
 
@@ -39,12 +71,11 @@ async function searchPlace(
           "Content-Type": "application/json",
           "X-Goog-Api-Key": GOOGLE_PLACES_API_KEY,
           "X-Goog-FieldMask":
-            "places.id,places.displayName,places.formattedAddress,places.location,places.types,places.internationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount",
+            "places.id,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.types,places.internationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount",
         },
         body: JSON.stringify({
           textQuery: `${name} ${address}`,
-          languageCode: "ja",
-          regionCode: "JP",
+          languageCode,
         }),
       }
     );
@@ -65,10 +96,16 @@ async function searchPlace(
     // 最初の結果を使用
     const place = searchData.places[0];
 
+    // addressComponentsから短縮住所を生成
+    const shortAddress = place.addressComponents
+      ? buildShortAddress(place.addressComponents)
+      : null;
+
     return {
       placeId: place.id,
       name: place.displayName?.text || "",
       formattedAddress: place.formattedAddress || "",
+      shortAddress,
       latitude: place.location?.latitude || 0,
       longitude: place.location?.longitude || 0,
       types: place.types || [],
@@ -85,6 +122,7 @@ async function searchPlace(
 
 /**
  * master_spotを取得または作成
+ * 住所はJSONB形式で多言語対応: { "ja": "日本語住所", "en": "English address" }
  */
 async function getOrCreateMasterSpot(
   supabase: ReturnType<typeof createAdminClient>,
@@ -94,6 +132,8 @@ async function getOrCreateMasterSpot(
     latitude: number;
     longitude: number;
     formattedAddress?: string;
+    shortAddress?: string | null;
+    languageCode: string;
     types?: string[];
     phoneNumber?: string;
     websiteUri?: string;
@@ -105,22 +145,48 @@ async function getOrCreateMasterSpot(
   // 既存のmaster_spotを検索
   const { data: existing } = await supabase
     .from("master_spots")
-    .select("id, machi_id")
+    .select("id, machi_id, google_formatted_address, google_short_address")
     .eq("google_place_id", input.googlePlaceId)
     .single();
 
   if (existing) {
+    const updates: Record<string, unknown> = {};
+
     // 既存のmaster_spotにmachi_idがない場合は更新
     if (!existing.machi_id && input.machiId) {
+      updates.machi_id = input.machiId;
+    }
+
+    // 現在の言語の住所がない場合は追加（遅延追加）
+    const currentFormattedAddress = (existing.google_formatted_address as Record<string, string>) || {};
+    const currentShortAddress = (existing.google_short_address as Record<string, string>) || {};
+
+    if (!currentFormattedAddress[input.languageCode] && input.formattedAddress) {
+      updates.google_formatted_address = {
+        ...currentFormattedAddress,
+        [input.languageCode]: input.formattedAddress,
+      };
+    }
+
+    if (!currentShortAddress[input.languageCode] && input.shortAddress) {
+      updates.google_short_address = {
+        ...currentShortAddress,
+        [input.languageCode]: input.shortAddress,
+      };
+    }
+
+    // 更新が必要な場合のみ実行
+    if (Object.keys(updates).length > 0) {
       await supabase
         .from("master_spots")
-        .update({ machi_id: input.machiId })
+        .update(updates)
         .eq("id", existing.id);
     }
+
     return existing.id;
   }
 
-  // 新規作成
+  // 新規作成（JSONB形式で住所を保存）
   const { data, error } = await supabase
     .from("master_spots")
     .insert({
@@ -128,7 +194,12 @@ async function getOrCreateMasterSpot(
       latitude: input.latitude,
       longitude: input.longitude,
       google_place_id: input.googlePlaceId,
-      google_formatted_address: input.formattedAddress ?? null,
+      google_formatted_address: input.formattedAddress
+        ? { [input.languageCode]: input.formattedAddress }
+        : null,
+      google_short_address: input.shortAddress
+        ? { [input.languageCode]: input.shortAddress }
+        : null,
       google_types: input.types ?? null,
       google_phone_number: input.phoneNumber ?? null,
       google_website_uri: input.websiteUri ?? null,
@@ -242,18 +313,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Google Places Text Search APIで場所を検索
-    const placeDetails = await searchPlace(name, address);
-    if (!placeDetails) {
-      return NextResponse.json(
-        { error: "Failed to find place from Google" },
-        { status: 500 }
-      );
-    }
-
     const supabase = createAdminClient();
 
-    // マップ情報を取得（オーナーとlanguage）
+    // マップ情報を先に取得（オーナーとlanguage）
     const { data: mapData, error: mapError } = await supabase
       .from("maps")
       .select("user_id, language")
@@ -264,6 +326,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Map not found" },
         { status: 404 }
+      );
+    }
+
+    // マップの言語を使用してGoogle Places APIを呼び出す（デフォルトは日本語）
+    const languageCode = mapData.language || "ja";
+
+    // Google Places Text Search APIで場所を検索
+    const placeDetails = await searchPlace(name, address, languageCode);
+    if (!placeDetails) {
+      return NextResponse.json(
+        { error: "Failed to find place from Google" },
+        { status: 500 }
       );
     }
 
@@ -282,6 +356,8 @@ export async function POST(request: NextRequest) {
       latitude: placeDetails.latitude,
       longitude: placeDetails.longitude,
       formattedAddress: placeDetails.formattedAddress,
+      shortAddress: placeDetails.shortAddress,
+      languageCode,
       types: placeDetails.types,
       phoneNumber: placeDetails.phoneNumber,
       websiteUri: placeDetails.websiteUri,

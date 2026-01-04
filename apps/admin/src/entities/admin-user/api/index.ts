@@ -1,2 +1,2 @@
-export { getCurrentAdmin, type CurrentAdmin } from "./get-current-admin";
-export { getAdminUsers, type AdminUser } from "./get-admin-users";
+export { getCurrentAdmin } from "./get-current-admin";
+export { getAdminUsers } from "./get-admin-users";

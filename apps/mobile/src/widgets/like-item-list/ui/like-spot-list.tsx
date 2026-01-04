@@ -10,6 +10,7 @@ import { colors } from '@/shared/config';
 import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
 export interface LikedSpotItem {
   likeId: string;
@@ -32,12 +33,16 @@ export function LikeSpotList({
   onUserPress,
   onDeleteSpotLike,
 }: LikeSpotListProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   const renderItem = useCallback(
     ({ item }: { item: LikedSpotItem }) => {
-      const spotName = item.spot.description || item.spot.master_spot?.name || t('favorite.unknownSpot');
-      const address = item.spot.master_spot?.google_short_address || item.spot.google_short_address;
+      // マスタースポット名（JSONB型を現在のlocaleで抽出）
+      const masterSpotName = item.spot.master_spot?.name
+        ? extractName(item.spot.master_spot.name, locale) || t('favorite.unknownSpot')
+        : t('favorite.unknownSpot');
+      const address = extractAddress(item.spot.master_spot?.google_short_address, locale)
+        || extractAddress(item.spot.google_short_address, locale);
       const user = item.spot.user;
 
       const content = (
@@ -69,8 +74,13 @@ export function LikeSpotList({
             </Pressable>
             <View className="flex-1">
               <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-                {spotName}
+                {masterSpotName}
               </Text>
+              {item.spot.description && (
+                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                  {item.spot.description}
+                </Text>
+              )}
               {address && (
                 <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
                   {address}

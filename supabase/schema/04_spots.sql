@@ -2,7 +2,7 @@
 -- スポット（master_spots, user_spots, images, spot_tags, master_spot_favorites）
 -- ============================================================
 -- マスタースポット（場所情報）とユーザースポット（ユーザーの保存情報）
--- 最終更新: 2025-12-23
+-- 最終更新: 2026-01-04
 
 -- ============================================================
 -- master_spots（マスタースポット）
@@ -10,11 +10,11 @@
 
 CREATE TABLE public.master_spots (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    name text NOT NULL,
+    name jsonb NOT NULL,
     latitude double precision NOT NULL,
     longitude double precision NOT NULL,
     google_place_id text,
-    google_formatted_address text,
+    google_formatted_address jsonb,
     google_types text[],
     google_phone_number text,
     google_website_uri text,
@@ -23,9 +23,13 @@ CREATE TABLE public.master_spots (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     machi_id text,
-    google_short_address text,
+    google_short_address jsonb,
     favorites_count integer DEFAULT 0 NOT NULL
 );
+
+COMMENT ON COLUMN public.master_spots.name IS '多言語スポット名: {"ja": "日本語名", "en": "English name"}';
+COMMENT ON COLUMN public.master_spots.google_formatted_address IS '多言語住所（完全形式）: {"ja": "日本語", "en": "English"}';
+COMMENT ON COLUMN public.master_spots.google_short_address IS '多言語住所（短縮形式）: {"ja": "日本語", "en": "English"}';
 
 ALTER TABLE ONLY public.master_spots ADD CONSTRAINT master_spots_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.master_spots ADD CONSTRAINT master_spots_google_place_id_key UNIQUE (google_place_id);
@@ -35,7 +39,7 @@ ALTER TABLE ONLY public.master_spots ADD CONSTRAINT master_spots_machi_id_fkey
 CREATE INDEX idx_master_spots_google_place_id ON public.master_spots USING btree (google_place_id);
 CREATE INDEX idx_master_spots_location ON public.master_spots USING btree (latitude, longitude);
 CREATE INDEX idx_master_spots_machi_id ON public.master_spots USING btree (machi_id);
-CREATE INDEX idx_master_spots_name ON public.master_spots USING btree (name);
+CREATE INDEX idx_master_spots_name ON public.master_spots USING gin (name);
 
 CREATE TRIGGER update_master_spots_updated_at
     BEFORE UPDATE ON public.master_spots
@@ -88,8 +92,7 @@ CREATE TABLE public.user_spots (
     map_id uuid NOT NULL,
     master_spot_id uuid,
     machi_id text,
-    custom_name text NOT NULL,
-    description text,
+    description text NOT NULL,
     images_count integer DEFAULT 0 NOT NULL,
     likes_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
@@ -99,11 +102,10 @@ CREATE TABLE public.user_spots (
     article_content jsonb,
     latitude double precision NOT NULL,
     longitude double precision NOT NULL,
-    google_formatted_address text,
-    google_short_address text,
+    google_formatted_address jsonb,
+    google_short_address jsonb,
     bookmarks_count integer DEFAULT 0 NOT NULL,
     prefecture_id text,
-    color text,
     spot_color text DEFAULT 'blue'::text,
     label_id uuid,
     city_id text,
@@ -113,14 +115,16 @@ CREATE TABLE public.user_spots (
     language character varying(10)
 );
 
+COMMENT ON COLUMN public.user_spots.description IS 'スポットの説明（一言キャッチコピー）';
 COMMENT ON COLUMN public.user_spots.images_count IS '画像数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.likes_count IS 'いいね数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.comments_count IS 'コメント数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.order_index IS '表示順序（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.article_content IS 'マップ記事用のスポット紹介文（ProseMirror JSON形式）';
+COMMENT ON COLUMN public.user_spots.google_formatted_address IS '多言語住所（完全形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
+COMMENT ON COLUMN public.user_spots.google_short_address IS '多言語住所（短縮形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
 COMMENT ON COLUMN public.user_spots.bookmarks_count IS 'ブックマーク数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.prefecture_id IS '都道府県ID（prefectures.id）。都道府県別検索の高速化のため非正規化';
-COMMENT ON COLUMN public.user_spots.color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
 COMMENT ON COLUMN public.user_spots.spot_color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
 COMMENT ON COLUMN public.user_spots.label_id IS 'スポットのラベル（map_labelsへの外部キー）';
 COMMENT ON COLUMN public.user_spots.language IS '言語コード（親マップから継承、ISO 639-1）';

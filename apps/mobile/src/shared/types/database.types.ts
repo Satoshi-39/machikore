@@ -8,12 +8,15 @@
  */
 
 import type { MergeDeep } from 'type-fest';
-import type { Database as DatabaseGenerated } from '@machikore/database';
+import type { Database as DatabaseGenerated, Json as JsonGenerated } from '@machikore/database';
 import type { ProseMirrorDoc } from './composite.types';
 
 // ===============================
 // JSON カラム用の型定義
 // ===============================
+
+/** Supabase JSON型（再エクスポート） */
+export type Json = JsonGenerated;
 
 /** 多言語翻訳用の型 */
 type NameTranslations = { [key: string]: string } | null;
@@ -207,18 +210,5 @@ export type ScheduleUpdate = Database['public']['Tables']['schedules']['Update']
 // 複合型（JOINなど）
 // ===============================
 
-/**
- * user_spots + master_spots を結合した型
- */
-export type SpotWithMasterSpot = UserSpotRow & {
-  name: string;
-  latitude: number;
-  longitude: number;
-  address: string | null;
-  google_place_id: string | null;
-  google_types: string | null;
-  google_phone_number: string | null;
-  google_website_uri: string | null;
-  google_rating: number | null;
-  google_user_rating_count: number | null;
-};
+// SpotWithMasterSpot は composite.types.ts に移動しました
+// import { SpotWithMasterSpot } from './composite.types' を使用してください
