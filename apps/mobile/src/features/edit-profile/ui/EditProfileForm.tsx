@@ -119,9 +119,12 @@ export function EditProfileForm({
 
       {/* フォーム */}
       <View className="bg-surface dark:bg-dark-surface mt-2 px-4 py-4 border-t border-border-light dark:border-dark-border">
-        <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-4">
-          {t('profile.basicInfo')}
-        </Text>
+        {/* セクションタイトル（fullモードのみ） */}
+        {isFullMode && (
+          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-4">
+            {t('profile.basicInfo')}
+          </Text>
+        )}
 
         {/* 表示名 */}
         <View className="mb-4">
