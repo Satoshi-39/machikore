@@ -370,6 +370,7 @@ export default {
     usernameTooLong: 'Username must be 20 characters or less',
     usernameInvalid: 'Only letters, numbers and underscores (_) allowed',
     usernameTaken: 'This username is already taken',
+    basicInfo: 'Basic Info',
     demographicInfo: 'Demographics',
     gender: 'Gender',
     ageGroup: 'Age Group',

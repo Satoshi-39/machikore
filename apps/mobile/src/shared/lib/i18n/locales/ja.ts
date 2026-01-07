@@ -372,6 +372,7 @@ export default {
     usernameTooLong: 'ユーザー名は20文字以内で入力してください',
     usernameInvalid: '半角英数字とアンダースコア(_)のみ使用可能です',
     usernameTaken: 'このユーザー名は既に使用されています',
+    basicInfo: '基本情報',
     demographicInfo: '属性情報',
     gender: '性別',
     ageGroup: '年代',

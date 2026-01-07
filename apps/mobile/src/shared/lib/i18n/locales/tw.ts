@@ -370,6 +370,7 @@ export default {
     usernameTooLong: '使用者名稱不能超過20個字元',
     usernameInvalid: '只能使用字母、數字和下劃線(_)',
     usernameTaken: '該使用者名稱已被使用',
+    basicInfo: '基本資訊',
     demographicInfo: '屬性資訊',
     gender: '性別',
     ageGroup: '年齡層',
