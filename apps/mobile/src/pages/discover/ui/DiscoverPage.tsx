@@ -8,7 +8,7 @@
 import React, { useState, useCallback } from 'react';
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+// import { useRouter } from 'expo-router'; // デフォルトマップ機能用（将来リリース予定）
 import { DiscoverSearch } from '@/widgets/discover-search';
 import { CategoryChips, type CategoryId } from '@/widgets/category-chips';
 import { FeaturedCarousel, CategoryFeaturedSection } from '@/widgets/featured-carousel';
@@ -24,7 +24,7 @@ import { AreaSection } from '@/widgets/area-section';
 import { WorldSection } from '@/widgets/world-section';
 
 export function DiscoverPage() {
-  const router = useRouter();
+  // const router = useRouter(); // デフォルトマップ機能用（将来リリース予定）
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<CategoryId>('all');
 
@@ -39,9 +39,10 @@ export function DiscoverPage() {
     setIsSearchFocused(false);
   };
 
-  const handleMapPress = () => {
-    router.push('/(tabs)/discover/default-map');
-  };
+  // デフォルトマップ機能（将来リリース予定）
+  // const handleMapPress = () => {
+  //   router.push('/(tabs)/discover/default-map');
+  // };
 
   const handleCategorySelect = useCallback((categoryId: CategoryId) => {
     setSelectedCategory(categoryId);
@@ -54,7 +55,7 @@ export function DiscoverPage() {
         onFocus={handleSearchFocus}
         onClose={handleSearchClose}
         isSearchFocused={isSearchFocused}
-        onMapPress={handleMapPress}
+        // onMapPress={handleMapPress} // デフォルトマップ機能は将来リリース予定
       />
 
       {/* 検索がフォーカスされていない時のコンテンツ */}

@@ -23,13 +23,9 @@ interface DiscoverSearchProps {
   onFocus: () => void;
   onClose: () => void;
   isSearchFocused: boolean;
-  /** 左側のコンポーネント（オプション） */
-  leftComponent?: React.ReactNode;
-  /** マップアイコン押下時 */
-  onMapPress?: () => void;
 }
 
-export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponent, onMapPress }: DiscoverSearchProps) {
+export function DiscoverSearch({ onFocus, onClose, isSearchFocused }: DiscoverSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [submittedQuery, setSubmittedQuery] = useState('');
   const inputRef = useRef<TextInput>(null);
@@ -92,16 +88,7 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
   // 通常時: タップでオーバーレイを開くダミー検索バー
   if (!isSearchFocused) {
     return (
-      <View className="flex-row items-center px-4 py-2 bg-surface dark:bg-dark-surface gap-3">
-        {/* 左側: オプションコンポーネント（または仮アイコン） */}
-        {leftComponent ? (
-          <View>{leftComponent}</View>
-        ) : onMapPress ? (
-          <Pressable className="p-1">
-            <Ionicons name="menu" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
-          </Pressable>
-        ) : null}
-
+      <View className="flex-row items-center px-4 py-2 bg-surface dark:bg-dark-surface">
         {/* 検索バー */}
         <Pressable
           onPress={onFocus}
@@ -112,13 +99,6 @@ export function DiscoverSearch({ onFocus, onClose, isSearchFocused, leftComponen
             {t('discover.searchPlaceholder')}
           </Text>
         </Pressable>
-
-        {/* 右側: スポットアイコン */}
-        {onMapPress && (
-          <Pressable onPress={onMapPress} className="p-1">
-            <Ionicons name="location-outline" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
-          </Pressable>
-        )}
       </View>
     );
   }

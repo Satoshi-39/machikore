@@ -12,10 +12,10 @@ import { useI18n } from '@/shared/lib/i18n';
 
 interface MyPageHeaderProps {
   onSettingsPress: () => void;
-  onSchedulePress: () => void;
+  onSchedulePress?: () => void; // 将来リリース予定
 }
 
-export function MyPageHeader({ onSettingsPress, onSchedulePress }: MyPageHeaderProps) {
+export function MyPageHeader({ onSettingsPress, onSchedulePress: _onSchedulePress }: MyPageHeaderProps) {
   const { t } = useI18n();
 
   return (
@@ -24,13 +24,14 @@ export function MyPageHeader({ onSettingsPress, onSchedulePress }: MyPageHeaderP
 
       {/* 右側アイコングループ */}
       <View className="absolute right-4 flex-row gap-2">
-        {/* スケジュールアイコン */}
+        {/* スケジュールアイコン（将来リリース予定）
         <Pressable
           onPress={onSchedulePress}
           className="w-10 h-10 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
         >
           <Ionicons name="calendar-outline" size={24} color={colors.text.secondary} />
         </Pressable>
+        */}
 
         {/* 設定アイコン */}
         <Pressable
