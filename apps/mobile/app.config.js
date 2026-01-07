@@ -24,6 +24,7 @@ module.exports = {
     },
     android: {
       package: 'com.tyatsushi.machikore',
+      minSdkVersion: 24, // Android 7.0 以降
       adaptiveIcon: {
         backgroundColor: '#E6F4FE',
         foregroundImage: './assets/images/android-icon-foreground.png',
@@ -72,6 +73,7 @@ module.exports = {
       ],
       '@rnmapbox/maps',
       'expo-localization',
+      'react-native-legal',
     ],
     experiments: {
       typedRoutes: true,

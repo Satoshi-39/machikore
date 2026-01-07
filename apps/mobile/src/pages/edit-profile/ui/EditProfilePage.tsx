@@ -7,12 +7,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, Pressable, Alert, ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader } from '@/shared/ui';
 import { colors, type Gender, type AgeGroup } from '@/shared/config';
 import { useCurrentUserId, validateUsername } from '@/entities/user';
 import { useUser, useUpdateProfileWithAvatar, useServerPreferences } from '@/entities/user/api';
 import { checkUsernameAvailability, updateUserDemographics } from '@/shared/api/supabase/users';
 import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getCategories, type Category } from '@/shared/api/supabase/categories';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
@@ -38,6 +40,7 @@ interface EditProfilePageProps {
 export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfilePageProps) {
   const isFullMode = mode === 'full';
   const { t } = useI18n();
+  const queryClient = useQueryClient();
   const currentUserId = useCurrentUserId();
   const { data: user, isLoading: isLoadingUser } = useUser(currentUserId);
   const { data: userPreferences } = useServerPreferences();
@@ -143,8 +146,14 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   // ユーザー名変更ハンドラー
   const handleUsernameChange = useCallback((value: string) => {
     setUsername(value);
-    setUsernameError(null);
-  }, []);
+    // リアルタイムバリデーション（文字種のみチェック）
+    const validationError = validateUsername(value);
+    if (validationError === 'usernameInvalid') {
+      setUsernameError(t('profile.usernameInvalid'));
+    } else {
+      setUsernameError(null);
+    }
+  }, [t]);
 
   // アバター変更ハンドラー
   const handleAvatarChange = useCallback((uri: string, file: AvatarFile) => {
@@ -230,6 +239,8 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
             country: selectedCountry,
             prefecture: selectedPrefecture,
           });
+          // デモグラフィック更新後にユーザーキャッシュを無効化
+          queryClient.invalidateQueries({ queryKey: QUERY_KEYS.usersDetail(currentUserId) });
         }
 
         // カテゴリを保存
@@ -238,6 +249,8 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
 
         if (categoriesChanged && selectedCategories.length > 0) {
           await updatePreferredCategories(selectedCategories);
+          // カテゴリ更新後にプリファレンスキャッシュを無効化
+          queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userPreferences });
         }
       }
 
@@ -272,6 +285,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
     initialCountry,
     initialPrefecture,
     initialCategories,
+    queryClient,
   ]);
 
   if (isLoadingUser || !isInitialized) {

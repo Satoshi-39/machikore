@@ -11,7 +11,6 @@ import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native';
 import { StyledTextInput } from '@/shared/ui';
 import { colors, INPUT_LIMITS } from '@/shared/config';
-import { sanitizeUsername } from '@/entities/user';
 import { useI18n } from '@/shared/lib/i18n';
 
 export interface AvatarFile {
@@ -86,8 +85,8 @@ export function EditProfileForm({
 
   // ユーザー名入力ハンドラー
   const handleUsernameChange = useCallback((text: string) => {
-    const sanitized = sanitizeUsername(text);
-    onUsernameChange(sanitized);
+    // 小文字に変換して親コンポーネントに渡す（バリデーションは親で行う）
+    onUsernameChange(text.toLowerCase());
   }, [onUsernameChange]);
 
   return (
