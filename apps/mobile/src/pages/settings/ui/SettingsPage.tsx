@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, ScrollView, Pressable, Switch, Alert, Linking } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { ReactNativeLegal } from 'react-native-legal';
 import { useSignOut } from '@/features/auth';
 import { PageHeader } from '@/shared/ui';
 import { colors, EXTERNAL_LINKS } from '@/shared/config';
@@ -160,7 +161,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="person-outline"
             label={t('settings.editProfile')}
-            onPress={() => router.push('/edit-profile')}
+            onPress={() => router.push('/edit-profile?mode=full')}
           />
           <SettingsItem
             icon="mail-outline"
@@ -222,13 +223,8 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           />
         </SettingsSection>
 
-        {/* その他 */}
-        <SettingsSection title={t('settings.other')}>
-          <SettingsItem
-            icon="help-circle-outline"
-            label={t('settings.help')}
-            onPress={() => Linking.openURL(EXTERNAL_LINKS.HELP)}
-          />
+        {/* 法的情報 */}
+        <SettingsSection title={t('settings.legal')}>
           <SettingsItem
             icon="document-text-outline"
             label={t('settings.termsOfService')}
@@ -238,6 +234,25 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             icon="shield-outline"
             label={t('settings.privacyPolicy')}
             onPress={() => router.push('/settings/privacy')}
+          />
+          <SettingsItem
+            icon="code-slash-outline"
+            label={t('settings.openSourceLicenses')}
+            onPress={() => ReactNativeLegal.launchLicenseListScreen(t('settings.openSourceLicenses'))}
+          />
+          <SettingsItem
+            icon="layers-outline"
+            label={t('settings.dataSources')}
+            onPress={() => router.push('/settings/attributions')}
+          />
+        </SettingsSection>
+
+        {/* その他 */}
+        <SettingsSection title={t('settings.other')}>
+          <SettingsItem
+            icon="help-circle-outline"
+            label={t('settings.help')}
+            onPress={() => Linking.openURL(EXTERNAL_LINKS.HELP)}
           />
           <SettingsItem
             icon="information-circle-outline"

@@ -365,6 +365,22 @@ export default {
     profileSaved: '保存完了',
     profileSavedMessage: 'プロフィールを更新しました。',
     profileSaveError: 'プロフィールの保存に失敗しました。',
+    usernamePlaceholder: 'ユーザー名を入力',
+    usernameHint: '半角英数字とアンダースコア(_)のみ使用可能です',
+    usernameRequired: 'ユーザー名を入力してください',
+    usernameTooShort: 'ユーザー名は3文字以上で入力してください',
+    usernameTooLong: 'ユーザー名は20文字以内で入力してください',
+    usernameInvalid: '半角英数字とアンダースコア(_)のみ使用可能です',
+    usernameTaken: 'このユーザー名は既に使用されています',
+    demographicInfo: '属性情報',
+    gender: '性別',
+    ageGroup: '年代',
+    country: '居住国',
+    prefecture: '都道府県',
+    region: '地域',
+    interests: '興味・関心',
+    interestsDescription: '興味のあるカテゴリを最大{{max}}つまで選択できます',
+    usernameChangeWarning: '※ユーザー名を変更すると、共有リンクが無効になります',
   },
 
   // 設定
@@ -430,6 +446,18 @@ export default {
     effectiveDate: '%{date} 施行',
     termsLoadError: '規約の読み込みに失敗しました。インターネット接続を確認してください。',
     termsNotFound: '規約が見つかりませんでした',
+    // 法的情報
+    legal: '法的情報',
+    dataSources: 'データソースについて',
+    openSourceLicenses: 'オープンソースライセンス',
+    searchLicenses: 'ライブラリを検索',
+    openSourceLicensesDescription: '本アプリは以下のオープンソースソフトウェアを使用しています。タップするとリポジトリを開きます。',
+    // 帰属表示
+    attributions: 'データソースについて',
+    attributionsDescription: '本サービスは以下のデータソースを利用しています。各項目をタップすると詳細情報をご覧いただけます。',
+    mapData: '地図データ',
+    statisticalData: '統計データ',
+    externalApi: '外部API',
   },
 
   // 検索

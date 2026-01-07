@@ -4,118 +4,242 @@
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
  */
 
-import React, { useState, useCallback } from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  Image,
-  Alert,
-  ActivityIndicator,
-} from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { View, Text, Pressable, Alert, ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Ionicons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import { PageHeader, StyledTextInput } from '@/shared/ui';
-import { colors, INPUT_LIMITS } from '@/shared/config';
-import { useCurrentUserId } from '@/entities/user';
-import { useUser, useUpdateProfileWithAvatar } from '@/entities/user/api';
+import { PageHeader } from '@/shared/ui';
+import { colors, type Gender, type AgeGroup } from '@/shared/config';
+import { useCurrentUserId, validateUsername } from '@/entities/user';
+import { useUser, useUpdateProfileWithAvatar, useServerPreferences } from '@/entities/user/api';
+import { checkUsernameAvailability, updateUserDemographics } from '@/shared/api/supabase/users';
+import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
+import { getCategories, type Category } from '@/shared/api/supabase/categories';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import {
+  EditProfileForm,
+  DemographicsSection,
+  InterestsSection,
+  type AvatarFile,
+} from '@/features/edit-profile';
+
+type EditMode = 'simple' | 'full';
 
 interface EditProfilePageProps {
+  /**
+   * 編集モード
+   * - simple: アイコン、表示名、自己紹介のみ（マイページから）
+   * - full: 全項目（設定から）
+   */
+  mode?: EditMode;
   onSaveSuccess?: () => void;
 }
 
-export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
+export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfilePageProps) {
+  const isFullMode = mode === 'full';
   const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: user, isLoading: isLoadingUser } = useUser(currentUserId);
+  const { data: userPreferences } = useServerPreferences();
   const { updateProfile, isLoading: isSaving } = useUpdateProfileWithAvatar();
 
   // フォーム状態
+  const [username, setUsername] = useState<string>('');
+  const [usernameError, setUsernameError] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>('');
   const [bio, setBio] = useState<string>('');
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
-  const [newAvatarFile, setNewAvatarFile] = useState<{
-    uri: string;
-    type: string;
-    name: string;
-  } | null>(null);
+  const [newAvatarFile, setNewAvatarFile] = useState<AvatarFile | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // デモグラフィック状態
+  const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
+
+  // カテゴリ状態
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
+
   // 初期値を保持（変更検出用）
+  const [initialUsername, setInitialUsername] = useState<string>('');
   const [initialDisplayName, setInitialDisplayName] = useState<string>('');
   const [initialBio, setInitialBio] = useState<string>('');
+  const [initialGender, setInitialGender] = useState<Gender | null>(null);
+  const [initialAgeGroup, setInitialAgeGroup] = useState<AgeGroup | null>(null);
+  const [initialCountry, setInitialCountry] = useState<string | null>(null);
+  const [initialPrefecture, setInitialPrefecture] = useState<string | null>(null);
+  const [initialCategories, setInitialCategories] = useState<string[]>([]);
+
+  // カテゴリを取得
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (err) {
+        log.error('[EditProfilePage] カテゴリ取得エラー:', err);
+      } finally {
+        setIsCategoriesLoading(false);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   // ユーザーデータが取得できたら初期値を設定
-  React.useEffect(() => {
+  useEffect(() => {
     if (user && !isInitialized) {
+      const userUsername = user.username || '';
       const name = user.display_name || '';
       const userBio = user.bio || '';
 
+      setUsername(userUsername);
       setDisplayName(name);
       setBio(userBio);
       setAvatarUri(user.avatar_url);
 
+      // デモグラフィック情報
+      const gender = (user.gender as Gender) || null;
+      const ageGroup = (user.age_group as AgeGroup) || null;
+      const country = user.country || null;
+      const prefecture = user.prefecture || null;
+
+      setSelectedGender(gender);
+      setSelectedAgeGroup(ageGroup);
+      setSelectedCountry(country);
+      setSelectedPrefecture(prefecture);
+
       // 初期値を保存
+      setInitialUsername(userUsername);
       setInitialDisplayName(name);
       setInitialBio(userBio);
+      setInitialGender(gender);
+      setInitialAgeGroup(ageGroup);
+      setInitialCountry(country);
+      setInitialPrefecture(prefecture);
 
       setIsInitialized(true);
     }
   }, [user, isInitialized]);
 
+  // user_preferencesからpreferred_categoriesを取得
+  useEffect(() => {
+    if (userPreferences?.preferred_categories && isInitialized) {
+      const cats = userPreferences.preferred_categories;
+      setSelectedCategories(cats);
+      setInitialCategories(cats);
+    }
+  }, [userPreferences, isInitialized]);
+
+  // 国が変更されたら都道府県をリセット（初期化時は除く）
+  useEffect(() => {
+    if (isInitialized && selectedCountry !== initialCountry) {
+      setSelectedPrefecture(null);
+    }
+  }, [selectedCountry, isInitialized, initialCountry]);
+
+  // ユーザー名変更ハンドラー
+  const handleUsernameChange = useCallback((value: string) => {
+    setUsername(value);
+    setUsernameError(null);
+  }, []);
+
+  // アバター変更ハンドラー
+  const handleAvatarChange = useCallback((uri: string, file: AvatarFile) => {
+    setAvatarUri(uri);
+    setNewAvatarFile(file);
+  }, []);
+
+  // カテゴリ選択/解除
+  const toggleCategory = useCallback((categoryId: string) => {
+    setSelectedCategories((prev) => {
+      if (prev.includes(categoryId)) {
+        return prev.filter((id) => id !== categoryId);
+      } else if (prev.length < 5) {
+        return [...prev, categoryId];
+      }
+      return prev;
+    });
+  }, []);
+
   // 変更があるかどうかを判定
   const hasChanges =
+    username !== initialUsername ||
     displayName !== initialDisplayName ||
     bio !== initialBio ||
-    newAvatarFile !== null;
+    newAvatarFile !== null ||
+    selectedGender !== initialGender ||
+    selectedAgeGroup !== initialAgeGroup ||
+    selectedCountry !== initialCountry ||
+    selectedPrefecture !== initialPrefecture ||
+    JSON.stringify(selectedCategories.sort()) !== JSON.stringify(initialCategories.sort());
 
-  // 保存可能かどうかを判定（表示名は必須）
-  const canSave = hasChanges && displayName.trim().length > 0;
-
-  // 画像選択
-  const handlePickImage = useCallback(async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (!permissionResult.granted) {
-      Alert.alert(t('profile.photoPermissionRequired'), t('profile.photoPermissionMessage'));
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 0.8,
-    });
-
-    if (!result.canceled && result.assets[0]) {
-      const asset = result.assets[0];
-      setAvatarUri(asset.uri);
-      setNewAvatarFile({
-        uri: asset.uri,
-        type: asset.mimeType || 'image/jpeg',
-        name: asset.fileName || `avatar_${Date.now()}.jpg`,
-      });
-    }
-  }, []);
+  // 保存可能かどうかを判定
+  const canSave = isFullMode
+    ? hasChanges && username.trim().length > 0 && displayName.trim().length > 0 && !usernameError
+    : hasChanges && displayName.trim().length > 0;
 
   // 保存処理
   const handleSave = useCallback(async () => {
     if (!currentUserId) return;
 
     try {
+      // fullモードの場合のみユーザー名のバリデーション
+      if (isFullMode) {
+        const usernameValidationError = validateUsername(username);
+        if (usernameValidationError) {
+          setUsernameError(t(`profile.${usernameValidationError}`));
+          return;
+        }
+
+        // ユーザー名が変更された場合は重複チェック
+        if (username !== initialUsername) {
+          const isAvailable = await checkUsernameAvailability(username, currentUserId);
+          if (!isAvailable) {
+            setUsernameError(t('profile.usernameTaken'));
+            return;
+          }
+        }
+      }
+
+      // プロフィール基本情報を保存
       await updateProfile(
         currentUserId,
         {
+          username: isFullMode && username !== initialUsername ? username : undefined,
           display_name: displayName.trim() || undefined,
           bio: bio.trim() || null,
         },
         newAvatarFile || undefined
       );
+
+      // デモグラフィック情報を保存（fullモードのみ）
+      if (isFullMode) {
+        const demographicsChanged =
+          selectedGender !== initialGender ||
+          selectedAgeGroup !== initialAgeGroup ||
+          selectedCountry !== initialCountry ||
+          selectedPrefecture !== initialPrefecture;
+
+        if (demographicsChanged) {
+          await updateUserDemographics(currentUserId, {
+            gender: selectedGender,
+            age_group: selectedAgeGroup,
+            country: selectedCountry,
+            prefecture: selectedPrefecture,
+          });
+        }
+
+        // カテゴリを保存
+        const categoriesChanged =
+          JSON.stringify(selectedCategories.sort()) !== JSON.stringify(initialCategories.sort());
+
+        if (categoriesChanged && selectedCategories.length > 0) {
+          await updatePreferredCategories(selectedCategories);
+        }
+      }
 
       Alert.alert(t('profile.profileSaved'), t('profile.profileSavedMessage'), [
         {
@@ -127,7 +251,28 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
       log.error('[EditProfilePage] Save error:', error);
       Alert.alert(t('common.error'), t('profile.profileSaveError'));
     }
-  }, [currentUserId, displayName, bio, newAvatarFile, updateProfile, onSaveSuccess, t]);
+  }, [
+    currentUserId,
+    isFullMode,
+    username,
+    initialUsername,
+    displayName,
+    bio,
+    newAvatarFile,
+    updateProfile,
+    onSaveSuccess,
+    t,
+    selectedGender,
+    selectedAgeGroup,
+    selectedCountry,
+    selectedPrefecture,
+    selectedCategories,
+    initialGender,
+    initialAgeGroup,
+    initialCountry,
+    initialPrefecture,
+    initialCategories,
+  ]);
 
   if (isLoadingUser || !isInitialized) {
     return (
@@ -173,84 +318,44 @@ export function EditProfilePage({ onSaveSuccess }: EditProfilePageProps) {
         enableOnAndroid
         extraScrollHeight={20}
       >
-          {/* アバター画像 */}
-          <View className="items-center py-6 bg-surface dark:bg-dark-surface">
-            <Pressable onPress={handlePickImage} className="relative">
-              {avatarUri ? (
-                <Image
-                  source={{ uri: avatarUri }}
-                  className="w-24 h-24 rounded-full"
-                />
-              ) : (
-                <View className="w-24 h-24 rounded-full bg-gray-200 items-center justify-center">
-                  <Ionicons name="person" size={40} color={colors.text.secondary} />
-                </View>
-              )}
-              <View
-                className="absolute bottom-0 right-0 w-8 h-8 rounded-full items-center justify-center"
-                style={{ backgroundColor: colors.primary.DEFAULT }}
-              >
-                <Ionicons name="camera" size={16} color="white" />
-              </View>
-            </Pressable>
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-              {t('profile.tapToChangePhoto')}
-            </Text>
-          </View>
+        {/* 基本情報フォーム */}
+        <EditProfileForm
+          isFullMode={isFullMode}
+          avatarUri={avatarUri}
+          onAvatarChange={handleAvatarChange}
+          displayName={displayName}
+          onDisplayNameChange={setDisplayName}
+          username={username}
+          onUsernameChange={handleUsernameChange}
+          usernameError={usernameError}
+          bio={bio}
+          onBioChange={setBio}
+        />
 
-          {/* フォーム */}
-          <View className="bg-surface dark:bg-dark-surface mt-4 px-4 py-4">
-            {/* 表示名 */}
-            <View className="mb-4">
-              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
-                {t('profile.displayName')}
-              </Text>
-              <StyledTextInput
-                value={displayName}
-                onChangeText={setDisplayName}
-                placeholder={t('profile.displayNamePlaceholder')}
-                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
-                maxLength={INPUT_LIMITS.USER_DISPLAY_NAME}
-              />
-              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
-                {displayName.length}/{INPUT_LIMITS.USER_DISPLAY_NAME}
-              </Text>
-            </View>
+        {/* デモグラフィック情報（fullモードのみ） */}
+        {isFullMode && (
+          <DemographicsSection
+            selectedGender={selectedGender}
+            onGenderChange={setSelectedGender}
+            selectedAgeGroup={selectedAgeGroup}
+            onAgeGroupChange={setSelectedAgeGroup}
+            selectedCountry={selectedCountry}
+            onCountryChange={setSelectedCountry}
+            selectedPrefecture={selectedPrefecture}
+            onPrefectureChange={setSelectedPrefecture}
+          />
+        )}
 
-            {/* ユーザー名（変更不可） */}
-            <View className="mb-4">
-              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
-                {t('profile.username')}
-              </Text>
-              <View className="border border-border dark:border-dark-border rounded-lg px-4 py-3 bg-background-secondary dark:bg-dark-background-secondary">
-                <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">@{user?.username}</Text>
-              </View>
-              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
-                {t('profile.usernameCannotChange')}
-              </Text>
-            </View>
+        {/* 興味・関心（fullモードのみ） */}
+        {isFullMode && (
+          <InterestsSection
+            categories={categories}
+            selectedCategories={selectedCategories}
+            onToggleCategory={toggleCategory}
+            isLoading={isCategoriesLoading}
+          />
+        )}
 
-            {/* 自己紹介 */}
-            <View>
-              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
-                {t('profile.bio')}
-              </Text>
-              <StyledTextInput
-                value={bio}
-                onChangeText={setBio}
-                placeholder={t('profile.bioPlaceholder')}
-                className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
-                multiline
-                numberOfLines={4}
-                textAlignVertical="top"
-                style={{ minHeight: 100 }}
-                maxLength={INPUT_LIMITS.USER_BIO}
-              />
-              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
-                {bio.length}/{INPUT_LIMITS.USER_BIO}
-              </Text>
-            </View>
-          </View>
         {/* 下部余白 */}
         <View className="h-16" />
       </KeyboardAwareScrollView>

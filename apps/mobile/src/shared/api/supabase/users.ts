@@ -10,6 +10,7 @@ type User = UserRow;
 
 /** プロフィール更新用の型 */
 export interface ProfileUpdateData {
+  username?: string;
   display_name?: string;
   bio?: string | null;
   avatar_url?: string | null;
