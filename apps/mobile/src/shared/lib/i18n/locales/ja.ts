@@ -839,4 +839,14 @@ export default {
     spotNotFound: 'スポットが見つかりません',
     mapNotFound: 'マップが見つかりません',
   },
+
+  // 許可関連
+  permissions: {
+    pushNotification: {
+      title: '通知を受け取りますか？',
+      message: 'あなたの投稿にいいねやコメントがついた時にお知らせします。',
+      accept: '許可する',
+      later: 'あとで',
+    },
+  },
 };

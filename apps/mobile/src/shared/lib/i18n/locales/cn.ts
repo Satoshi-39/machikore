@@ -838,4 +838,14 @@ export default {
     spotNotFound: '未找到地点',
     mapNotFound: '未找到地图',
   },
+
+  // 权限相关
+  permissions: {
+    pushNotification: {
+      title: '开启通知？',
+      message: '当有人点赞或评论您的帖子时，我们会通知您。',
+      accept: '允许',
+      later: '稍后',
+    },
+  },
 };

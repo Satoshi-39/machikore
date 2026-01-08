@@ -838,4 +838,14 @@ export default {
     spotNotFound: '找不到地點',
     mapNotFound: '找不到地圖',
   },
+
+  // 權限相關
+  permissions: {
+    pushNotification: {
+      title: '開啟通知？',
+      message: '當有人按讚或留言您的貼文時，我們會通知您。',
+      accept: '允許',
+      later: '稍後',
+    },
+  },
 };

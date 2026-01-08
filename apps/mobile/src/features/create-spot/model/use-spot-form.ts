@@ -29,6 +29,7 @@ import { log } from '@/shared/config/logger';
 import type { SpotColor } from '@/shared/config';
 import type { ProseMirrorDoc } from '@/shared/types';
 import type { UploadProgress } from './types';
+import { useFirstPostTriggers } from './use-first-post-triggers';
 
 export function useSpotForm() {
   const router = useRouter();
@@ -45,6 +46,14 @@ export function useSpotForm() {
     total: 0,
     status: 'idle',
   });
+
+  // 初投稿トリガー（プッシュ通知許可・レビュー依頼）
+  const {
+    triggerPostActions,
+    isPushPromptVisible,
+    onPushPromptAccept,
+    onPushPromptLater,
+  } = useFirstPostTriggers();
 
   // ユーザーのマップ一覧を取得
   const { data: userMaps = [], isLoading: isMapsLoading } = useUserMaps(user?.id ?? null, {
@@ -64,6 +73,10 @@ export function useSpotForm() {
     isMapsLoading: false,
     selectedMapId: null as string | null,
     setSelectedMapId: () => {},
+    // 初投稿トリガー関連
+    isPushPromptVisible: false,
+    onPushPromptAccept: () => {},
+    onPushPromptLater: () => {},
   };
 
   // データが存在しない場合は静かにnullを返す
@@ -240,10 +253,16 @@ export function useSpotForm() {
           Alert.alert('登録完了', 'スポットを登録しました', [
             {
               text: 'OK',
-              onPress: () => {
+              onPress: async () => {
                 log.debug('[useSpotForm] setJumpToSpotId呼び出し:', spotId);
                 setJumpToSpotId(spotId);
                 router.back();
+
+                // 初投稿トリガー（プッシュ通知許可・レビュー依頼）
+                // 画面遷移後に実行
+                setTimeout(() => {
+                  triggerPostActions();
+                }, 500);
               },
             },
           ]);
@@ -265,5 +284,9 @@ export function useSpotForm() {
     isMapsLoading,
     selectedMapId,
     setSelectedMapId,
+    // 初投稿トリガー関連
+    isPushPromptVisible,
+    onPushPromptAccept,
+    onPushPromptLater,
   };
 }

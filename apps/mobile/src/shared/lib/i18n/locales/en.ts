@@ -838,4 +838,14 @@ export default {
     spotNotFound: 'Spot not found',
     mapNotFound: 'Map not found',
   },
+
+  // Permissions
+  permissions: {
+    pushNotification: {
+      title: 'Enable Notifications?',
+      message: "We'll notify you when someone likes or comments on your posts.",
+      accept: 'Allow',
+      later: 'Later',
+    },
+  },
 };

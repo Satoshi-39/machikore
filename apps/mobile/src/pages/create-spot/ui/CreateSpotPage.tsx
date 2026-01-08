@@ -9,6 +9,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { CreateSpotForm, useSpotForm } from '@/features/create-spot';
+import { PushNotificationPrompt } from '@/features/system-permissions';
 import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -22,6 +23,10 @@ export function CreateSpotPage() {
     userMaps,
     isMapsLoading,
     selectedMapId,
+    // 初投稿トリガー関連
+    isPushPromptVisible,
+    onPushPromptAccept,
+    onPushPromptLater,
   } = useSpotForm();
 
   // データが存在しない場合はnull（エラーハンドリングはhook内で実施済み）
@@ -38,6 +43,13 @@ export function CreateSpotPage() {
         userMaps={userMaps}
         isMapsLoading={isMapsLoading}
         selectedMapId={selectedMapId}
+      />
+
+      {/* プッシュ通知許可の事前説明モーダル */}
+      <PushNotificationPrompt
+        visible={isPushPromptVisible}
+        onAccept={onPushPromptAccept}
+        onLater={onPushPromptLater}
       />
     </View>
   );
