@@ -5,12 +5,13 @@
  * - 2回目投稿: アプリレビュー依頼
  */
 
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { usePermissionPrompt } from '@/features/system-permissions';
 import { useAppReview } from '@/features/app-review';
 import { requestNotificationPermissions } from '@/features/push-notifications';
 import { log } from '@/shared/config/logger';
+import { usePostTriggerStore } from './post-trigger-store';
 
 const STORAGE_KEYS = {
   /** 投稿回数 */
@@ -36,7 +37,10 @@ interface UsePostTriggersReturn {
  * 投稿後のトリガーを管理するhook
  */
 export function useFirstPostTriggers(): UsePostTriggersReturn {
-  const [isPushPromptVisible, setIsPushPromptVisible] = useState(false);
+  // グローバルストアで状態管理（画面遷移後もモーダルを表示するため）
+  const isPushPromptVisible = usePostTriggerStore((state) => state.isPushPromptVisible);
+  const showPushPrompt = usePostTriggerStore((state) => state.showPushPrompt);
+  const hidePushPrompt = usePostTriggerStore((state) => state.hidePushPrompt);
   const { requestReviewIfEligible } = useAppReview();
 
   const permissionPrompt = usePermissionPrompt('pushNotification', async () => {
@@ -68,7 +72,7 @@ export function useFirstPostTriggers(): UsePostTriggersReturn {
         const alreadyPrompted = await AsyncStorage.getItem(STORAGE_KEYS.PUSH_PROMPTED);
         if (alreadyPrompted !== 'true') {
           log.debug('[PostTriggers] Showing push notification prompt');
-          setIsPushPromptVisible(true);
+          showPushPrompt();
           await AsyncStorage.setItem(STORAGE_KEYS.PUSH_PROMPTED, 'true');
         }
       } else if (postCount === 2) {
@@ -90,17 +94,17 @@ export function useFirstPostTriggers(): UsePostTriggersReturn {
    * プッシュ通知許可を承諾
    */
   const onPushPromptAccept = useCallback(() => {
-    setIsPushPromptVisible(false);
+    hidePushPrompt();
     permissionPrompt.onAccept();
-  }, [permissionPrompt]);
+  }, [hidePushPrompt, permissionPrompt]);
 
   /**
    * プッシュ通知許可を後回し
    */
   const onPushPromptLater = useCallback(() => {
-    setIsPushPromptVisible(false);
+    hidePushPrompt();
     permissionPrompt.onLater();
-  }, [permissionPrompt]);
+  }, [hidePushPrompt, permissionPrompt]);
 
   return {
     triggerPostActions,

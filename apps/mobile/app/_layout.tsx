@@ -11,6 +11,8 @@ import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat, initSentry, wrapWithSentry } from '@/shared/lib/init';
 import { AppToast } from '@/shared/ui';
 import { log } from '@/shared/config/logger';
+import { useFirstPostTriggers } from '@/features/create-spot';
+import { PushNotificationPrompt } from '@/features/system-permissions';
 
 // Sentry初期化（最初に実行）
 initSentry();
@@ -18,6 +20,13 @@ initSentry();
 // AppProvidersの内側で使うためのコンポーネント
 function RootNavigator() {
   const isDarkMode = useIsDarkMode();
+
+  // 投稿後トリガー（グローバルなプッシュ通知許可モーダル）
+  const {
+    isPushPromptVisible,
+    onPushPromptAccept,
+    onPushPromptLater,
+  } = useFirstPostTriggers();
 
   return (
     <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
@@ -240,6 +249,13 @@ function RootNavigator() {
         </Stack>
         <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         <AppToast />
+
+        {/* グローバルなプッシュ通知許可モーダル（スポット登録後に表示） */}
+        <PushNotificationPrompt
+          visible={isPushPromptVisible}
+          onAccept={onPushPromptAccept}
+          onLater={onPushPromptLater}
+        />
       </BottomSheetModalProvider>
       </ThemeProvider>
     );

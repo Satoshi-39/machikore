@@ -45,12 +45,11 @@ export async function cacheUserToSQLite(user?: any): Promise<void> {
     const metadata = supabaseUser.user_metadata || {};
 
     // OAuth provider別のusername取得ロジック
-    let username = metadata.username; // Email/Password認証
+    // OAuth (Google/Apple) の場合: preferred_username を使用
+    // メール認証の場合: メールアドレスは個人情報を含む可能性があるため使用しない
+    let username = metadata.username;
     if (!username) {
-      // Google: preferred_username, email
-      // Apple: email
       username = metadata.preferred_username
-        || metadata.email?.split('@')[0]
         || `user_${userId.slice(0, 8)}`;
     }
 

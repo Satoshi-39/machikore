@@ -9,161 +9,69 @@ import { supabase } from '../client';
 import type { UserSpotSearchResult, MapSpotSearchResult } from './types';
 
 /**
- * 公開スポットをキーワードで検索（Supabase版）
+ * 公開スポットをキーワードで検索（RPC版）
  * 発見タブの検索で使用
  *
  * 検索対象:
  * 1. user_spots.description
- * 2. master_spots.name（スポット名）
+ * 2. master_spots.name（Google検索経由のスポット名）
+ * 3. user_spots.name（現在地/ピン刺し登録のスポット名、JSONB形式）
  */
 export async function searchPublicUserSpots(
   query: string,
   limit: number = 30
 ): Promise<UserSpotSearchResult[]> {
-  // 1. user_spotsのdescriptionで検索
-  const { data: userSpotResults } = await supabase
-    .from('user_spots')
-    .select(`
-      *,
-      master_spots (*),
-      map_labels (
-        id,
-        name,
-        color
-      ),
-      users (
-        id,
-        username,
-        display_name,
-        avatar_url
-      ),
-      maps!inner (
-        id,
-        name,
-        is_public,
-        language
-      )
-    `)
-    .eq('maps.is_public', true)
-    .ilike('description', `%${query}%`)
-    .order('created_at', { ascending: false })
-    .limit(limit);
-
-  // 2. master_spotsの名前で検索し、紐づくuser_spotsを取得
-  const { data: masterSpotResults } = await supabase
-    .from('master_spots')
-    .select(`
-      id,
-      name,
-      latitude,
-      longitude,
-      google_formatted_address,
-      google_short_address,
-      user_spots (
-        *,
-        map_labels (
-          id,
-          name,
-          color
-        ),
-        users (
-          id,
-          username,
-          display_name,
-          avatar_url
-        ),
-        maps!inner (
-          id,
-          name,
-          is_public,
-          language
-        )
-      )
-    `)
-    .ilike('name', `%${query}%`)
-    .limit(limit);
-
-  // 結果をマージ（重複排除）
-  const resultMap = new Map<string, UserSpotSearchResult>();
-
-  // user_spotsの結果を追加
-  (userSpotResults || []).forEach((spot: any) => {
-    resultMap.set(spot.id, {
-      id: spot.id,
-      user_id: spot.user_id,
-      map_id: spot.map_id,
-      master_spot_id: spot.master_spot_id,
-      machi_id: spot.machi_id,
-      description: spot.description,
-      tags: spot.tags,
-      spot_color: spot.spot_color || null,
-      label_id: spot.label_id || null,
-      map_label: spot.map_labels || null,
-      images_count: spot.images_count,
-      likes_count: spot.likes_count,
-      comments_count: spot.comments_count,
-      order_index: spot.order_index,
-      created_at: spot.created_at,
-      updated_at: spot.updated_at,
-      master_spot: spot.master_spots ? {
-        id: spot.master_spots.id,
-        name: spot.master_spots.name,
-        latitude: spot.master_spots.latitude,
-        longitude: spot.master_spots.longitude,
-        google_place_id: spot.master_spots.google_place_id,
-        google_formatted_address: spot.master_spots.google_formatted_address,
-        google_short_address: spot.master_spots.google_short_address,
-        google_types: spot.master_spots.google_types,
-      } : null,
-      user: spot.users || null,
-      map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
-    });
+  const { data, error } = await supabase.rpc('search_public_spots', {
+    search_query: query,
+    result_limit: limit,
   });
 
-  // master_spotsからのuser_spotsを追加（公開マップのみ）
-  (masterSpotResults || []).forEach((masterSpot: any) => {
-    const userSpots = masterSpot.user_spots || [];
-    userSpots.forEach((spot: any) => {
-      // 公開マップのスポットのみ、かつ重複排除
-      if (spot.maps?.is_public && !resultMap.has(spot.id)) {
-        resultMap.set(spot.id, {
-          id: spot.id,
-          user_id: spot.user_id,
-          map_id: spot.map_id,
-          master_spot_id: spot.master_spot_id,
-          machi_id: spot.machi_id,
-          description: spot.description,
-          tags: spot.tags,
-          spot_color: spot.spot_color || null,
-          label_id: spot.label_id || null,
-          map_label: spot.map_labels || null,
-          images_count: spot.images_count,
-          likes_count: spot.likes_count,
-          comments_count: spot.comments_count,
-          order_index: spot.order_index,
-          created_at: spot.created_at,
-          updated_at: spot.updated_at,
-          master_spot: {
-            id: masterSpot.id,
-            name: masterSpot.name,
-            latitude: masterSpot.latitude,
-            longitude: masterSpot.longitude,
-            google_place_id: masterSpot.google_place_id,
-            google_formatted_address: masterSpot.google_formatted_address,
-            google_short_address: masterSpot.google_short_address,
-            google_types: masterSpot.google_types,
-          },
-          user: spot.users || null,
-          map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
-        });
-      }
-    });
-  });
+  if (error) {
+    console.error('searchPublicUserSpots error:', error);
+    return [];
+  }
 
-  // 新着順にソートしてlimit件まで返す
-  return Array.from(resultMap.values())
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-    .slice(0, limit);
+  // RPC結果をUserSpotSearchResult型に変換
+  return (data || []).map((row: any): UserSpotSearchResult => ({
+    id: row.id,
+    user_id: row.user_id,
+    map_id: row.map_id,
+    master_spot_id: row.master_spot_id,
+    machi_id: row.machi_id,
+    description: row.description,
+    tags: row.tags,
+    spot_color: row.spot_color || null,
+    label_id: row.label_id || null,
+    map_label: row.label_name ? {
+      id: row.label_id,
+      name: row.label_name,
+      color: row.label_color,
+    } : null,
+    name: row.name || null,
+    images_count: row.images_count,
+    likes_count: row.likes_count,
+    comments_count: row.comments_count,
+    order_index: row.order_index,
+    created_at: row.created_at,
+    updated_at: row.updated_at,
+    master_spot: row.master_spot_id ? {
+      id: row.master_spot_id,
+      name: row.master_spot_name,
+      latitude: row.master_spot_latitude,
+      longitude: row.master_spot_longitude,
+      google_place_id: row.master_spot_google_place_id,
+      google_formatted_address: row.master_spot_google_formatted_address,
+      google_short_address: row.master_spot_google_short_address,
+      google_types: row.master_spot_google_types,
+    } : null,
+    user: row.user_username ? {
+      id: row.user_id,
+      username: row.user_username,
+      display_name: row.user_display_name,
+      avatar_url: row.user_avatar_url,
+    } : null,
+    map: row.map_name ? { id: row.map_id, name: row.map_name } : null,
+  }));
 }
 
 /**

@@ -9,10 +9,15 @@
   "scripts": {
     "mobile": "npm run --workspace=apps/mobile",
     "admin": "npm run --workspace=apps/admin",
+    "web": "npm run --workspace=apps/web",
     "dev:mobile": "npm run dev --workspace=apps/mobile",
-    "dev:admin": "npm run dev --workspace=apps/admin"
+    "dev:admin": "npm run dev --workspace=apps/admin",
+    "dev:web": "npm run dev --workspace=apps/web"
   },
   "overrides": {
     "react-test-renderer": "19.1.2"
+  },
+  "devDependencies": {
+    "lightningcss-darwin-arm64": "^1.30.2"
   }
 }

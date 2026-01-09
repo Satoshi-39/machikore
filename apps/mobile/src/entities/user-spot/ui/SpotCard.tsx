@@ -129,17 +129,20 @@ export function SpotCard({
   const avatarUri = user?.avatar_url ?? undefined;
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
-  // スポット名の取得（SpotWithDetailsとSpotWithMasterSpotで構造が異なる）
+  // スポット名の取得
+  // 優先順位:
+  // 1. master_spot_idがnullの場合 → user_spots.name（ピン刺し・現在地登録用）
+  // 2. master_spot_idがある場合 → master_spot.name（Google Places）
   const getSpotName = (): string => {
-    if (spot.description) return spot.description;
-    // SpotWithDetails型の場合（master_spot.nameはJSONB）
-    if ('master_spot' in spot && spot.master_spot?.name) {
-      const name = extractName(spot.master_spot.name, locale);
+    // master_spot_idがnull = ピン刺し・現在地登録の場合
+    const hasMasterSpotId = 'master_spot_id' in spot && spot.master_spot_id != null;
+    if (!hasMasterSpotId && 'name' in spot && spot.name) {
+      const name = extractName(spot.name as Json, locale);
       if (name) return name;
     }
-    // SpotWithMasterSpot型の場合（nameはJSONB）
-    if ('name' in spot && spot.name) {
-      const name = extractName(spot.name as Json, locale);
+    // master_spot_idがある場合はmaster_spot.nameを使用
+    if ('master_spot' in spot && spot.master_spot?.name) {
+      const name = extractName(spot.master_spot.name, locale);
       if (name) return name;
     }
     // embeddedMasterSpotがある場合（nameはJSONB）

@@ -37,6 +37,7 @@ export interface CreateSpotFormProps {
     mapId: string;
     spotColor: SpotColor;
     labelId?: string | null;
+    spotName?: string; // 現在地/ピン刺し登録用のスポット名
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;

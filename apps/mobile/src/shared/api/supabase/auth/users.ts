@@ -53,11 +53,11 @@ export async function upsertUserToSupabase(authUser: {
   const isNewUser = !existingUser;
 
   // username取得ロジック
+  // OAuth (Google/Apple) の場合: preferred_username を使用
+  // メール認証の場合: メールアドレスは個人情報を含む可能性があるため使用しない
   let username = metadata.username;
   if (!username) {
     username = metadata.preferred_username
-      || metadata.email?.split('@')[0]
-      || authUser.email?.split('@')[0]
       || `user_${authUser.id.slice(0, 8)}`;
   }
 

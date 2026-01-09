@@ -66,10 +66,11 @@ function SpotCard({
 }: SpotCardProps) {
   const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
-  // マスタースポット名（JSONB型を現在のlocaleで抽出）
+  // スポット名（JSONB型を現在のlocaleで抽出）
+  // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
   const masterSpotName = spot.master_spot?.name
     ? extractName(spot.master_spot.name, locale) || t('spot.unknownSpot')
-    : t('spot.unknownSpot');
+    : (spot.name ? extractName(spot.name, locale) : null) || t('spot.unknownSpot');
   // 住所（JSONB型を現在のlocaleで抽出）
   const address = extractAddress(spot.master_spot?.google_short_address, locale)
     || extractAddress(spot.google_short_address, locale);

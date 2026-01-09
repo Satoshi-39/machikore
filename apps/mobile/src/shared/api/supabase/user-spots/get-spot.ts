@@ -65,6 +65,8 @@ export async function getSpotWithDetails(
     spot_color: spot.spot_color,
     label_id: spot.label_id || null,
     map_label: spot.map_labels || null,
+    // ピン刺し・現在地登録用のスポット名（JSONB形式）
+    name: spot.name || null,
     images_count: spot.images_count,
     likes_count: spot.likes_count,
     bookmarks_count: spot.bookmarks_count ?? 0,

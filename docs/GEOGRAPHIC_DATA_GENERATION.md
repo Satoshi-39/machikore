@@ -496,6 +496,196 @@ DETAIL: Key (city_id)=(jp_yamaguchi_waki) is not present in table "cities".
 
 ---
 
+## 9. 政令指定都市の区（Ward）対応
+
+### 9.1 背景
+
+日本の20政令指定都市（札幌市、仙台市、横浜市、京都市、大阪市など）は、内部に行政区（区）を持っています。国土数値情報のポリゴンデータは区単位で提供されているため、市単位のポリゴンは存在しません。
+
+**例: 京都市**
+- 国土数値情報には「京都市」のポリゴンは存在しない
+- 代わりに「北区」「上京区」「中京区」...「伏見区」の11区のポリゴンがある
+
+このため、政令指定都市ではスポットの`city_id`を判定できない問題がありました。
+
+### 9.2 解決方針
+
+区を独立した市区町村として`cities`テーブルに登録し、`admin_boundaries`にも区単位のポリゴンを登録します。
+
+**メリット:**
+- より細かい粒度での検索・絞り込みが可能
+- 「京都市北区のスポット」のような検索ができる
+- 国土数値情報のデータ構造と一致
+
+**city_idの形式:**
+```
+jp_{prefecture}_{city}_{ward}
+```
+
+例：
+- `jp_kyoto_kyoto_kita` （京都市北区）
+- `jp_osaka_osaka_chuo` （大阪市中央区）
+- `jp_tokyo_setagaya` （東京都世田谷区）※東京23区は特別区のため形式が異なる
+
+### 9.3 区マッピングの生成
+
+```bash
+# 区のマッピングを生成
+npx tsx scripts/supabase/generate-ward-mapping.ts
+```
+
+このスクリプトは以下を生成します：
+
+1. **`scripts/data/ward-code-mapping.json`**: 区コード→city_idのマッピング
+2. **`scripts/sql/insert-cities-wards.sql`**: citiesテーブルへのINSERT文
+
+**出力例（ward-code-mapping.json）:**
+```json
+[
+  {
+    "code": "26101",
+    "city_id": "jp_kyoto_kyoto_kita",
+    "name": "京都市北区",
+    "prefecture_id": "jp_kyoto"
+  },
+  {
+    "code": "26102",
+    "city_id": "jp_kyoto_kyoto_kamigyo",
+    "name": "京都市上京区",
+    "prefecture_id": "jp_kyoto"
+  }
+]
+```
+
+### 9.4 区の座標取得
+
+区の中心座標はOSM Nominatim APIから取得できます：
+
+```bash
+# 座標を取得してキャッシュ（API制限のため1.1秒間隔）
+npx tsx scripts/supabase/generate-ward-mapping.ts --fetch-coords
+```
+
+このオプションを使用すると：
+- Nominatim APIで各区の座標を取得
+- 結果を`scripts/data/ward-coordinates.json`にキャッシュ
+- `insert-cities-wards.sql`に正確な座標を含める
+
+**注意**: Nominatim APIは1秒に1リクエストの制限があるため、全196区の座標取得には約4分かかります。
+
+### 9.5 登録手順
+
+**Step 1: 区マッピングを生成**
+```bash
+npx tsx scripts/supabase/generate-ward-mapping.ts --fetch-coords
+```
+
+**Step 2: citiesテーブルに区を追加**
+```bash
+PGPASSWORD='YOUR_PASSWORD' psql \
+  -h db.YOUR_PROJECT.supabase.co \
+  -p 5432 \
+  -U postgres \
+  -d postgres \
+  -f scripts/sql/insert-cities-wards.sql
+```
+
+**Step 3: city-code-mappingにward-code-mappingをマージ**
+```bash
+# generate-ward-mapping.tsが自動でマージ
+npx tsx scripts/supabase/generate-city-code-mapping.ts
+npx tsx scripts/supabase/generate-ward-mapping.ts
+```
+
+**Step 4: admin_boundariesのSQLを再生成**
+```bash
+# 区を含むマッピングでポリゴンSQLを生成
+npx tsx scripts/supabase/generate-admin-boundaries-sql.ts
+```
+
+**Step 5: ポリゴンを登録**
+```bash
+# 区のポリゴンを含むSQLを実行
+for f in scripts/data/admin_boundaries/jp_*/jp_*_admin_boundaries.sql; do
+  echo "Processing: $f"
+  PGPASSWORD='YOUR_PASSWORD' psql \
+    -h db.YOUR_PROJECT.supabase.co \
+    -p 5432 \
+    -U postgres \
+    -d postgres \
+    -f "$f"
+done
+```
+
+**Step 6: machiのcity_idを更新**
+```sql
+-- 区のポリゴンでmachi.city_idを更新
+UPDATE machi m
+SET city_id = ab.city_id
+FROM admin_boundaries ab
+WHERE m.city_id IS NULL
+  AND ab.prefecture_id = m.prefecture_id
+  AND ST_Contains(ab.geom, ST_SetSRID(ST_Point(m.longitude, m.latitude), 4326));
+```
+
+### 9.6 政令指定都市一覧
+
+| 都道府県 | 政令指定都市 | 区数 | コード範囲 |
+|---------|------------|------|-----------|
+| 北海道 | 札幌市 | 10区 | 01101-01110 |
+| 宮城県 | 仙台市 | 5区 | 04101-04105 |
+| 埼玉県 | さいたま市 | 10区 | 11101-11110 |
+| 千葉県 | 千葉市 | 6区 | 12101-12106 |
+| 神奈川県 | 横浜市 | 18区 | 14101-14118 |
+| 神奈川県 | 川崎市 | 7区 | 14131-14137 |
+| 神奈川県 | 相模原市 | 3区 | 14151-14153 |
+| 新潟県 | 新潟市 | 8区 | 15101-15108 |
+| 静岡県 | 静岡市 | 3区 | 22101-22103 |
+| 静岡県 | 浜松市 | 7区 | 22131-22137 |
+| 愛知県 | 名古屋市 | 16区 | 23101-23116 |
+| 京都府 | 京都市 | 11区 | 26101-26111 |
+| 大阪府 | 大阪市 | 24区 | 27101-27128 |
+| 大阪府 | 堺市 | 7区 | 27141-27147 |
+| 兵庫県 | 神戸市 | 9区 | 28101-28111 |
+| 岡山県 | 岡山市 | 4区 | 33101-33104 |
+| 広島県 | 広島市 | 8区 | 34101-34108 |
+| 福岡県 | 北九州市 | 7区 | 40101-40107 |
+| 福岡県 | 福岡市 | 7区 | 40131-40137 |
+| 熊本県 | 熊本市 | 5区 | 43101-43105 |
+
+**合計**: 20市 175区
+
+**注意**: 東京23区は特別区であり、通常の市区町村と同様に扱われるため、このワード対応には含まれません（既にcity-code-mappingに登録済み）。
+
+### 9.7 確認クエリ
+
+```sql
+-- 区がcitiesテーブルに登録されているか確認
+SELECT COUNT(*) FROM cities WHERE type = '区';
+
+-- 京都市の区を確認
+SELECT id, name, latitude, longitude
+FROM cities
+WHERE prefecture_id = 'jp_kyoto' AND id LIKE 'jp_kyoto_kyoto_%';
+
+-- 区のポリゴンがadmin_boundariesに登録されているか確認
+SELECT ab.city_id, c.name
+FROM admin_boundaries ab
+JOIN cities c ON c.id = ab.city_id
+WHERE c.type = '区'
+ORDER BY ab.city_id;
+
+-- 京都市内のmachiがcity_idを持っているか確認
+SELECT m.id, m.name, m.city_id, c.name as city_name
+FROM machi m
+LEFT JOIN cities c ON c.id = m.city_id
+WHERE m.prefecture_id = 'jp_kyoto'
+  AND m.city_id LIKE 'jp_kyoto_kyoto_%'
+LIMIT 10;
+```
+
+---
+
 ## 付録A: admin_boundariesポリゴン生成時のマッピング
 
 国土数値情報のシードデータを新スキーマに変換する際、市区町村コード（5桁）から`city_id`へのマッピングが必要です。

@@ -124,10 +124,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
 
-  // マスタースポット名（JSONB型を現在のlocaleで抽出）
+  // スポット名（JSONB型を現在のlocaleで抽出）
+  // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
   const masterSpotName = spot.master_spot?.name
     ? extractName(spot.master_spot.name, locale) || t('spot.unknownSpot')
-    : t('spot.unknownSpot');
+    : (spot.name ? extractName(spot.name, locale) : null) || t('spot.unknownSpot');
   // 住所（JSONB型を現在のlocaleで抽出）
   const spotAddress = extractAddress(spot.master_spot?.google_short_address, locale)
     || extractAddress(spot.google_short_address, locale);

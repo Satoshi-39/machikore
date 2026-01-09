@@ -19,8 +19,6 @@ const { storageKeys, minIntervalDays } = APP_REVIEW_CONFIG;
 interface UseAppReviewReturn {
   /** レビュー依頼を表示（条件を満たす場合のみ） */
   requestReviewIfEligible: () => Promise<boolean>;
-  /** 強制的にレビュー依頼を表示（デバッグ用） */
-  forceRequestReview: () => Promise<boolean>;
   /** レビュー依頼が可能かチェック */
   canRequestReview: () => Promise<boolean>;
 }
@@ -103,29 +101,8 @@ export function useAppReview(): UseAppReviewReturn {
     }
   }, [canRequestReview]);
 
-  /**
-   * 強制的にレビュー依頼を表示（デバッグ用）
-   */
-  const forceRequestReview = useCallback(async (): Promise<boolean> => {
-    try {
-      const isAvailable = await StoreReview.isAvailableAsync();
-      if (!isAvailable) {
-        log.warn('[AppReview] StoreReview is not available');
-        return false;
-      }
-
-      await StoreReview.requestReview();
-      log.debug('[AppReview] Force review requested');
-      return true;
-    } catch (error) {
-      log.error('[AppReview] Error forcing review:', error);
-      return false;
-    }
-  }, []);
-
   return {
     requestReviewIfEligible,
-    forceRequestReview,
     canRequestReview,
   };
 }

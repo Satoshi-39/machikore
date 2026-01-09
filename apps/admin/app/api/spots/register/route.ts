@@ -374,7 +374,6 @@ export async function POST(request: NextRequest) {
         map_id: map_id,
         master_spot_id: masterSpotId,
         machi_id: machiInfo?.machiId ?? null,
-        prefecture_id: machiInfo?.prefectureId ?? null,
         latitude: placeDetails.latitude,
         longitude: placeDetails.longitude,
         description: description,

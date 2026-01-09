@@ -8,3 +8,4 @@ export { LegalDocumentPage } from './ui/LegalDocumentPage';
 export { LanguageSettingsPage } from './ui/LanguageSettingsPage';
 export { DeleteAccountPage } from './ui/DeleteAccountPage';
 export { AccountSettingsPage } from './ui/AccountSettingsPage';
+export { AttributionsPage } from './ui/AttributionsPage';

@@ -49,6 +49,9 @@ export function CreateSpotForm({
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
   const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
 
+  // 現在地/ピン刺し登録用のスポット名（Google Places以外の場合のみ使用）
+  const [spotName, setSpotName] = useState('');
+
   // 記事コンテンツはストアから取得
   const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
 
@@ -65,7 +68,9 @@ export function CreateSpotForm({
   });
 
   // ボタンを無効化する条件
-  const isButtonDisabled = isLoading || !isFormValid;
+  // 現在地/ピン刺し登録の場合はスポット名も必須
+  const isSpotNameValid = isGooglePlace || spotName.trim().length > 0;
+  const isButtonDisabled = isLoading || !isFormValid || !isSpotNameValid;
 
   const handleSubmit = () => {
     if (!description.trim()) {
@@ -78,6 +83,12 @@ export function CreateSpotForm({
       return;
     }
 
+    // 現在地/ピン刺し登録の場合はスポット名必須
+    if (!isGooglePlace && !spotName.trim()) {
+      Alert.alert(t('common.error'), t('spot.spotNameRequired'));
+      return;
+    }
+
     onSubmit({
       description: description.trim(),
       articleContent: draftArticleContent,
@@ -86,6 +97,8 @@ export function CreateSpotForm({
       mapId: selectedMapId,
       spotColor,
       labelId: selectedLabelId,
+      // 現在地/ピン刺し登録の場合のみスポット名を渡す
+      spotName: isGooglePlace ? undefined : spotName.trim(),
     });
   };
 
@@ -130,6 +143,27 @@ export function CreateSpotForm({
       </Modal>
 
       <View className="p-4">
+        {/* マップ（表示のみ） - 一番上 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            {t('map.targetMap')}
+          </Text>
+          <View className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center">
+            {isMapsLoading ? (
+              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            ) : selectedMap ? (
+              <View className="flex-row items-center flex-1">
+                <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
+                  <Ionicons name="map" size={12} color="#FFFFFF" />
+                </View>
+                <Text className="text-base text-foreground dark:text-dark-foreground">{selectedMap.name}</Text>
+              </View>
+            ) : (
+              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">{t('map.noMapSelected')}</Text>
+            )}
+          </View>
+        </View>
+
         {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
           <View className="flex-row items-center mb-3">
@@ -166,26 +200,24 @@ export function CreateSpotForm({
           )}
         </View>
 
-        {/* マップ（表示のみ） */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            {t('map.targetMap')}
-          </Text>
-          <View className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center">
-            {isMapsLoading ? (
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
-            ) : selectedMap ? (
-              <View className="flex-row items-center flex-1">
-                <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
-                  <Ionicons name="map" size={12} color="#FFFFFF" />
-                </View>
-                <Text className="text-base text-foreground dark:text-dark-foreground">{selectedMap.name}</Text>
-              </View>
-            ) : (
-              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">{t('map.noMapSelected')}</Text>
-            )}
+        {/* スポット名（現在地/ピン刺し登録の場合のみ） */}
+        {!isGooglePlace && (
+          <View className="mb-6">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+              {t('spot.spotName')} <Text className="text-red-500">*</Text>
+            </Text>
+            <StyledTextInput
+              value={spotName}
+              onChangeText={setSpotName}
+              placeholder={t('spot.spotNamePlaceholder')}
+              maxLength={INPUT_LIMITS.SPOT_NAME}
+              className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            />
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+              {t('spot.spotNameHint')}
+            </Text>
           </View>
-        </View>
+        )}
 
         {/* このスポットを一言で！（必須） */}
         <View className="mb-6">

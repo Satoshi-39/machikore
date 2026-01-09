@@ -73,6 +73,8 @@ export async function getMapSpots(
       spot_color: spot.spot_color || null,
       label_id: spot.label_id || null,
       map_label: spot.map_labels || null,
+      // ピン刺し・現在地登録用のスポット名（JSONB形式）
+      name: spot.name || null,
       master_spot: spot.master_spots ? {
         id: spot.master_spots.id,
         name: spot.master_spots.name,

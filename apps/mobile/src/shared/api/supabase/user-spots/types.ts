@@ -66,7 +66,6 @@ export interface UserSpotSearchResult {
   master_spot_id: string | null;
   machi_id: string | null;
   description: string;
-  tags: string[] | null;
   spot_color?: string | null;
   label_id?: string | null;
   map_label?: MapLabelBasicInfo | null;

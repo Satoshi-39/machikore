@@ -28,7 +28,7 @@ async function getOrCreateMasterSpot(input: {
   if (input.googlePlaceId) {
     const { data: existing } = await supabase
       .from('master_spots')
-      .select('id, machi_id, google_formatted_address, google_short_address')
+      .select('id, name, machi_id, google_formatted_address, google_short_address')
       .eq('google_place_id', input.googlePlaceId)
       .single();
 
@@ -38,6 +38,15 @@ async function getOrCreateMasterSpot(input: {
       // 既存のmaster_spotにmachi_idがない場合は更新（新しいmachiIdがある場合のみ）
       if (!existing.machi_id && input.machiId) {
         updates.machi_id = input.machiId;
+      }
+
+      // 現在の言語のスポット名がない場合は追加（遅延追加）
+      const currentName = (existing.name as Record<string, string>) || {};
+      if (!currentName[input.languageCode] && input.name) {
+        updates.name = {
+          ...currentName,
+          [input.languageCode]: input.name,
+        };
       }
 
       // 現在の言語の住所がない場合は追加（遅延追加）
@@ -70,9 +79,9 @@ async function getOrCreateMasterSpot(input: {
     }
   }
 
-  // 新規作成（JSONB形式で住所を保存）
+  // 新規作成（JSONB形式でスポット名と住所を保存）
   const insertData: MasterSpotInsert = {
-    name: input.name,
+    name: { [input.languageCode]: input.name },
     latitude: input.latitude,
     longitude: input.longitude,
     machi_id: input.machiId ?? null,
@@ -140,7 +149,14 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
   // ピン刺し・現在地登録の場合（googlePlaceIdがない）は座標と住所をuser_spotに直接保存（JSONB形式）
   // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
   // prefecture_id, city_id, prefecture_name, city_name, machi_name は machi テーブルから JOIN で取得するため設定しない
-  const userSpotInsert: UserSpotInsert & { label_id?: string | null; language?: string | null } = {
+
+  // ピン刺し・現在地登録用のスポット名（Google Places検索の場合はmaster_spotのnameを使うためnull）
+  const isManualRegistration = !input.googlePlaceId;
+  const userSpotName = isManualRegistration && input.spotName
+    ? { [languageCode]: input.spotName }
+    : null;
+
+  const userSpotInsert: UserSpotInsert & { label_id?: string | null; language?: string | null; name?: Record<string, string> | null } = {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
@@ -158,6 +174,9 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
       : input.googleShortAddress
         ? { [languageCode]: input.googleShortAddress }
         : null,
+    // 現在地/ピン刺し登録用のスポット名（JSONB形式で保存）
+    // google_place_idがある場合はmaster_spotのnameを使うためnull
+    name: userSpotName,
     description: input.description,
     article_content: input.articleContent ?? null,
     spot_color: input.spotColor ?? null,

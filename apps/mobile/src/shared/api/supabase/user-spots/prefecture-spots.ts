@@ -63,6 +63,8 @@ export async function getPublicSpotsByPrefecture(
       description: spot.description,
       tags: spot.tags,
       spot_color: spot.spot_color,
+      // ピン刺し・現在地登録用のスポット名（JSONB形式）
+      name: spot.name || null,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
       bookmarks_count: spot.bookmarks_count ?? 0,
@@ -150,6 +152,8 @@ export async function getPublicSpotsByPrefectureAndCategory(
       description: spot.description,
       tags: spot.tags,
       spot_color: spot.spot_color,
+      // ピン刺し・現在地登録用のスポット名（JSONB形式）
+      name: spot.name || null,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
       bookmarks_count: spot.bookmarks_count ?? 0,

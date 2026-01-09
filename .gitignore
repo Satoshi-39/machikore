@@ -68,3 +68,10 @@ scripts/data/prefectures_data.json
 **/scripts/data/admin_boundaries/
 **/scripts/data/admin_boundaries_old/
 **/scripts/old/
+scripts/data/area_master/
+scripts/data/census_boundaries/
+scripts/data/ward-code-mapping.json
+scripts/data/ward-coordinates.json
+
+# 一時フォルダ
+tmp/

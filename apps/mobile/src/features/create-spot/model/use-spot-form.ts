@@ -151,6 +151,7 @@ export function useSpotForm() {
     mapId: string;
     spotColor: SpotColor;
     labelId?: string | null;
+    spotName?: string; // 現在地/ピン刺し登録用のスポット名
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
@@ -220,6 +221,8 @@ export function useSpotForm() {
         articleContent: data.articleContent,
         spotColor: data.spotColor,
         labelId: data.labelId,
+        // 現在地/ピン刺し登録用のスポット名
+        spotName: data.spotName,
       },
       {
         onSuccess: async (spotId) => {
