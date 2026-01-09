@@ -2,7 +2,7 @@
 -- スポット（master_spots, user_spots, images, spot_tags, master_spot_favorites）
 -- ============================================================
 -- マスタースポット（場所情報）とユーザースポット（ユーザーの保存情報）
--- 最終更新: 2026-01-04
+-- 最終更新: 2026-01-09
 
 -- ============================================================
 -- master_spots（マスタースポット）
@@ -102,38 +102,33 @@ CREATE TABLE public.user_spots (
     article_content jsonb,
     latitude double precision NOT NULL,
     longitude double precision NOT NULL,
-    google_formatted_address jsonb,
-    google_short_address jsonb,
     bookmarks_count integer DEFAULT 0 NOT NULL,
-    prefecture_id text,
     spot_color text DEFAULT 'blue'::text,
     label_id uuid,
-    city_id text,
-    prefecture_name text,
-    city_name text,
-    machi_name text,
-    language character varying(10)
+    language character varying(10) DEFAULT NULL::character varying,
+    google_formatted_address jsonb,
+    google_short_address jsonb,
+    name jsonb
 );
 
+COMMENT ON COLUMN public.user_spots.machi_id IS '街ID。machi テーブルとの JOIN に使用。NULL の場合は街に紐づかないスポット（ピン刺し・現在地登録など）';
 COMMENT ON COLUMN public.user_spots.description IS 'スポットの説明（一言キャッチコピー）';
 COMMENT ON COLUMN public.user_spots.images_count IS '画像数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.likes_count IS 'いいね数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.comments_count IS 'コメント数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.order_index IS '表示順序（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.article_content IS 'マップ記事用のスポット紹介文（ProseMirror JSON形式）';
-COMMENT ON COLUMN public.user_spots.google_formatted_address IS '多言語住所（完全形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
-COMMENT ON COLUMN public.user_spots.google_short_address IS '多言語住所（短縮形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
 COMMENT ON COLUMN public.user_spots.bookmarks_count IS 'ブックマーク数（デフォルト: 0）';
-COMMENT ON COLUMN public.user_spots.prefecture_id IS '都道府県ID（prefectures.id）。都道府県別検索の高速化のため非正規化';
 COMMENT ON COLUMN public.user_spots.spot_color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
 COMMENT ON COLUMN public.user_spots.label_id IS 'スポットのラベル（map_labelsへの外部キー）';
 COMMENT ON COLUMN public.user_spots.language IS '言語コード（親マップから継承、ISO 639-1）';
+COMMENT ON COLUMN public.user_spots.google_formatted_address IS '多言語住所（完全形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
+COMMENT ON COLUMN public.user_spots.google_short_address IS '多言語住所（短縮形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
+COMMENT ON COLUMN public.user_spots.name IS '多言語スポット名（現在地/ピン刺し登録用）: {"ja": "日本語名", "en": "English name"}。master_spot_idがNULLの場合のみ使用';
 
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_map_id_master_spot_id_key
     UNIQUE (user_id, map_id, master_spot_id);
-ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_city_id_fkey
-    FOREIGN KEY (city_id) REFERENCES public.cities(id) ON DELETE SET NULL;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_label_id_fkey
     FOREIGN KEY (label_id) REFERENCES public.map_labels(id) ON DELETE SET NULL;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_machi_id_fkey
@@ -142,21 +137,17 @@ ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_map_id_fkey
     FOREIGN KEY (map_id) REFERENCES public.maps(id) ON DELETE CASCADE;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_master_spot_id_fkey
     FOREIGN KEY (master_spot_id) REFERENCES public.master_spots(id) ON DELETE CASCADE;
-ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_prefecture_id_fkey
-    FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id) ON DELETE SET NULL;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_fkey
     FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
 CREATE INDEX idx_user_spots_bookmarks_count ON public.user_spots USING btree (bookmarks_count DESC);
-CREATE INDEX idx_user_spots_city_id ON public.user_spots USING btree (city_id);
 CREATE INDEX idx_user_spots_created_at ON public.user_spots USING btree (created_at DESC);
 CREATE INDEX idx_user_spots_label_id ON public.user_spots USING btree (label_id);
+CREATE INDEX idx_user_spots_language ON public.user_spots USING btree (language);
 CREATE INDEX idx_user_spots_machi_id ON public.user_spots USING btree (machi_id);
 CREATE INDEX idx_user_spots_map_id ON public.user_spots USING btree (map_id);
 CREATE INDEX idx_user_spots_master_spot_id ON public.user_spots USING btree (master_spot_id);
-CREATE INDEX idx_user_spots_prefecture_id ON public.user_spots USING btree (prefecture_id);
 CREATE INDEX idx_user_spots_user_id ON public.user_spots USING btree (user_id);
-CREATE INDEX idx_user_spots_language ON public.user_spots USING btree (language);
 
 CREATE TRIGGER update_user_spots_updated_at
     BEFORE UPDATE ON public.user_spots

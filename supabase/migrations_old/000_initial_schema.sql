@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict p5jzjG7S1j57xJrAorczlFPJTx1c01L2IeXkXEdsLofd4NbvbhQbTTeEvCIxhjW
+\restrict tfed9doUnb87lRHt5Jha8YRA7UXzeFoTaKbahKEZ86mgExHRGUFBUdT6NXurIGx
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.7 (Homebrew)
@@ -72,42 +72,6 @@ CREATE TYPE public.report_target_type AS ENUM (
 
 
 --
--- Name: check_spots_limit(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.check_spots_limit() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  -- 現在のマップのスポット数をチェック
-  IF (SELECT COUNT(*) FROM user_spots WHERE map_id = NEW.map_id) >= 100 THEN
-    RAISE EXCEPTION 'マップあたりのスポット数上限（100）に達しています';
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
-
---
--- Name: check_spots_limit_on_update(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.check_spots_limit_on_update() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  -- map_idが変更された場合のみチェック
-  IF OLD.map_id IS DISTINCT FROM NEW.map_id THEN
-    IF (SELECT COUNT(*) FROM user_spots WHERE map_id = NEW.map_id) >= 100 THEN
-      RAISE EXCEPTION '移動先のマップはスポット数上限（100）に達しています';
-    END IF;
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
-
---
 -- Name: cleanup_old_view_history(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -160,6 +124,23 @@ BEGIN
   WHERE id = auth.uid();
 END;
 $$;
+
+
+--
+-- Name: count_images_in_spot(uuid); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.count_images_in_spot(p_user_spot_id uuid) RETURNS integer
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+  BEGIN
+    RETURN (
+      SELECT COUNT(*)::INTEGER
+      FROM images
+      WHERE user_spot_id = p_user_spot_id
+    );
+  END;
+  $$;
 
 
 --
@@ -309,175 +290,6 @@ $$;
 
 
 --
--- Name: decrement_comment_likes_count(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_comment_likes_count() RETURNS trigger
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE comments
-  SET likes_count = GREATEST(0, likes_count - 1)
-  WHERE id = OLD.comment_id;
-  RETURN OLD;
-END;
-$$;
-
-
---
--- Name: decrement_comment_replies_count(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_comment_replies_count() RETURNS trigger
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  IF OLD.parent_id IS NOT NULL THEN
-    UPDATE comments
-    SET replies_count = GREATEST(0, replies_count - 1)
-    WHERE id = OLD.parent_id;
-  END IF;
-  RETURN OLD;
-END;
-$$;
-
-
---
--- Name: decrement_map_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_bookmarks_count(p_map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET bookmarks_count = GREATEST(0, bookmarks_count - 1)
-  WHERE id = p_map_id;
-END;
-$$;
-
-
---
--- Name: decrement_map_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_comments_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET comments_count = GREATEST(COALESCE(comments_count, 0) - 1, 0)
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: decrement_map_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_likes_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET likes_count = GREATEST(0, likes_count - 1)
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: decrement_map_spots_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_map_spots_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET spots_count = GREATEST(0, spots_count - 1)
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: decrement_master_spot_favorites_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_master_spot_favorites_count(master_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE master_spots
-  SET favorites_count = GREATEST(0, favorites_count - 1)
-  WHERE id = master_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_bookmarks_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET bookmarks_count = GREATEST(0, bookmarks_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_comments_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET comments_count = GREATEST(0, comments_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_images_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_images_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET images_count = GREATEST(0, images_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: decrement_user_spot_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.decrement_user_spot_likes_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET likes_count = GREATEST(0, likes_count - 1)
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
 -- Name: expire_premium_subscriptions(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -500,6 +312,14 @@ BEGIN
   RETURN affected_rows;
 END;
 $$;
+
+
+--
+-- Name: FUNCTION expire_premium_subscriptions(); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.expire_premium_subscriptions() IS 'cronジョブで定期実行し、期限切れユーザーのプレミアムを解除。Service Role 
+  Keyで実行するため認証チェック不要。';
 
 
 --
@@ -617,201 +437,32 @@ $$;
 
 
 --
--- Name: get_popular_tags_by_category(uuid, integer); Type: FUNCTION; Schema: public; Owner: -
+-- Name: get_popular_tags_by_category(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.get_popular_tags_by_category(p_category_id uuid, p_limit integer DEFAULT 10) RETURNS TABLE(id uuid, name text, name_translations jsonb, is_official boolean, usage_count bigint, created_at timestamp with time zone, updated_at timestamp with time zone)
+CREATE FUNCTION public.get_popular_tags_by_category(p_category_id text, p_limit integer DEFAULT 10) RETURNS TABLE(id uuid, name text, name_translations jsonb, slug text, usage_count bigint, created_at timestamp with time zone, updated_at timestamp with time zone)
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
-BEGIN
-  RETURN QUERY
-  SELECT
-    t.id,
-    t.name,
-    t.name_translations,
-    t.is_official,
-    COUNT(mt.id) AS usage_count,
-    t.created_at,
-    t.updated_at
-  FROM tags t
-  INNER JOIN map_tags mt ON mt.tag_id = t.id
-  INNER JOIN maps m ON m.id = mt.map_id
-  WHERE m.category_id = p_category_id
-    AND m.is_public = true
-  GROUP BY t.id, t.name, t.name_translations, t.is_official, t.created_at, t.updated_at
-  ORDER BY usage_count DESC, t.name ASC
-  LIMIT p_limit;
-END;
-$$;
-
-
---
--- Name: increment_comment_likes_count(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_comment_likes_count() RETURNS trigger
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE comments
-  SET likes_count = likes_count + 1
-  WHERE id = NEW.comment_id;
-  RETURN NEW;
-END;
-$$;
-
-
---
--- Name: increment_comment_replies_count(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_comment_replies_count() RETURNS trigger
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  IF NEW.parent_id IS NOT NULL THEN
-    UPDATE comments
-    SET replies_count = replies_count + 1
-    WHERE id = NEW.parent_id;
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
-
---
--- Name: increment_map_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_bookmarks_count(p_map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET bookmarks_count = bookmarks_count + 1
-  WHERE id = p_map_id;
-END;
-$$;
-
-
---
--- Name: increment_map_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_comments_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET comments_count = COALESCE(comments_count, 0) + 1
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: increment_map_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_likes_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET likes_count = likes_count + 1
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: increment_map_spots_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_map_spots_count(map_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE maps
-  SET spots_count = spots_count + 1
-  WHERE id = map_id;
-END;
-$$;
-
-
---
--- Name: increment_master_spot_favorites_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_master_spot_favorites_count(master_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE master_spots
-  SET favorites_count = favorites_count + 1
-  WHERE id = master_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_bookmarks_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_bookmarks_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET bookmarks_count = bookmarks_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_comments_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_comments_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET comments_count = comments_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_images_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_images_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET images_count = images_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
-
-
---
--- Name: increment_user_spot_likes_count(uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.increment_user_spot_likes_count(user_spot_id uuid) RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER
-    AS $$
-BEGIN
-  UPDATE user_spots
-  SET likes_count = likes_count + 1
-  WHERE id = user_spot_id;
-END;
-$$;
+  BEGIN
+    RETURN QUERY
+    SELECT
+      t.id,
+      t.name,
+      t.name_translations,
+      t.slug,
+      COUNT(mt.id) AS usage_count,
+      t.created_at,
+      t.updated_at
+    FROM tags t
+    INNER JOIN map_tags mt ON mt.tag_id = t.id
+    INNER JOIN maps m ON m.id = mt.map_id
+    WHERE m.category_id = p_category_id
+      AND m.is_public = true
+    GROUP BY t.id, t.name, t.name_translations, t.slug, t.created_at, t.updated_at
+    ORDER BY usage_count DESC, t.name ASC
+    LIMIT p_limit;
+  END;
+  $$;
 
 
 --
@@ -832,90 +483,35 @@ $$;
 
 
 --
--- Name: migrate_maps_tags_to_table(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: FUNCTION is_user_premium(p_user_id uuid); Type: COMMENT; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.migrate_maps_tags_to_table() RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-  map_record RECORD;
-  tag_name TEXT;
-  tag_id UUID;
-BEGIN
-  -- 既存のmapsテーブルからtagsを持つレコードを取得
-  FOR map_record IN SELECT id, tags FROM maps WHERE tags IS NOT NULL AND jsonb_array_length(tags) > 0 LOOP
-    -- 各タグをループ
-    FOR tag_name IN SELECT jsonb_array_elements_text(map_record.tags) LOOP
-      -- タグが存在しなければ作成
-      INSERT INTO tags (name, slug)
-      VALUES (tag_name, lower(replace(tag_name, ' ', '-')))
-      ON CONFLICT (name) DO NOTHING;
-
-      -- タグIDを取得
-      SELECT id INTO tag_id FROM tags WHERE name = tag_name;
-
-      -- map_tagsに挿入
-      INSERT INTO map_tags (map_id, tag_id)
-      VALUES (map_record.id, tag_id)
-      ON CONFLICT (map_id, tag_id) DO NOTHING;
-    END LOOP;
-  END LOOP;
-END;
-$$;
+COMMENT ON FUNCTION public.is_user_premium(p_user_id uuid) IS 'RLSポリシー内でスポット数制限の判定に使用（user_spots_insert_with_limit）。サーバーサイドから呼び出
+  すため認証チェック不要。';
 
 
 --
--- Name: migrate_spots_tags_to_table(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: record_map_view(uuid); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.migrate_spots_tags_to_table() RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-  spot_record RECORD;
-  tag_name TEXT;
-  tag_uuid UUID;
-BEGIN
-  -- 既存のuser_spotsテーブルからtagsを持つレコードを取得
-  FOR spot_record IN SELECT id, tags FROM user_spots WHERE tags IS NOT NULL AND jsonb_array_length(tags) > 0 LOOP
-    -- 各タグをループ
-    FOR tag_name IN SELECT jsonb_array_elements_text(spot_record.tags) LOOP
-      -- タグが存在しなければ作成
-      INSERT INTO tags (name, slug)
-      VALUES (tag_name, lower(replace(tag_name, ' ', '-')))
-      ON CONFLICT (name) DO NOTHING;
-
-      -- タグIDを取得
-      SELECT id INTO tag_uuid FROM tags WHERE name = tag_name;
-
-      -- spot_tagsに挿入
-      INSERT INTO spot_tags (user_spot_id, tag_id)
-      VALUES (spot_record.id, tag_uuid)
-      ON CONFLICT (user_spot_id, tag_id) DO NOTHING;
-    END LOOP;
-  END LOOP;
-END;
-$$;
-
-
---
--- Name: record_map_view(uuid, uuid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.record_map_view(p_user_id uuid, p_map_id uuid) RETURNS void
+CREATE FUNCTION public.record_map_view(p_map_id uuid) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
-BEGIN
-  INSERT INTO public.view_history (user_id, map_id, viewed_at, view_count)
-  VALUES (p_user_id, p_map_id, now(), 1)
-  ON CONFLICT (user_id, map_id)
-  DO UPDATE SET
-    viewed_at = now(),
-    view_count = view_history.view_count + 1,
-    updated_at = now();
-END;
-$$;
+  BEGIN
+    -- 未認証ユーザーは拒否
+    IF auth.uid() IS NULL THEN
+      RAISE EXCEPTION 'Authentication required';
+    END IF;
+
+    INSERT INTO public.view_history (user_id, map_id, viewed_at, view_count)
+    VALUES (auth.uid(), p_map_id, now(), 1)
+    ON CONFLICT (user_id, map_id)
+    DO UPDATE SET
+      viewed_at = now(),
+      view_count = view_history.view_count + 1,
+      updated_at = now();
+  END;
+  $$;
 
 
 --
@@ -925,37 +521,65 @@ $$;
 CREATE FUNCTION public.send_push_notification() RETURNS trigger
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$
-DECLARE
-  supabase_url TEXT;
-  service_role_key TEXT;
+  DECLARE
+      supabase_url TEXT;
+      service_role_key TEXT;
+  BEGIN
+      -- 環境変数からSupabase URLとService Role Keyを取得
+      supabase_url := current_setting('app.settings.supabase_url', true);
+      service_role_key := current_setting('app.settings.service_role_key', true);
+
+      -- Edge Functionを非同期で呼び出し
+      PERFORM net.http_post(
+          url := supabase_url || '/functions/v1/send-notification',
+          headers := jsonb_build_object(
+              'Content-Type', 'application/json',
+              'Authorization', 'Bearer ' || service_role_key
+          ),
+          body := jsonb_build_object(
+              'notification_id', NEW.id,
+              'user_id', NEW.user_id,
+              'actor_id', NEW.actor_id,
+              'type', NEW.type,
+              'user_spot_id', NEW.user_spot_id,
+              'map_id', NEW.map_id
+          )
+      );
+
+      RETURN NEW;
+  EXCEPTION
+      WHEN OTHERS THEN
+          -- エラーが発生しても通知の作成は続行
+          RAISE WARNING 'Failed to send notification: %', SQLERRM;
+          RETURN NEW;
+  END;
+  $$;
+
+
+--
+-- Name: update_bookmarks_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_bookmarks_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
 BEGIN
-  -- 環境変数からSupabase URLとService Role Keyを取得
-  supabase_url := current_setting('app.settings.supabase_url', true);
-  service_role_key := current_setting('app.settings.service_role_key', true);
-
-  -- Edge Functionを非同期で呼び出し（名前を修正: send-notification）
-  PERFORM net.http_post(
-    url := supabase_url || '/functions/v1/send-notification',
-    headers := jsonb_build_object(
-      'Content-Type', 'application/json',
-      'Authorization', 'Bearer ' || service_role_key
-    ),
-    body := jsonb_build_object(
-      'notification_id', NEW.id,
-      'user_id', NEW.user_id,
-      'actor_id', NEW.actor_id,
-      'type', NEW.type,
-      'spot_id', NEW.spot_id,
-      'map_id', NEW.map_id
-    )
-  );
-
-  RETURN NEW;
-EXCEPTION
-  WHEN OTHERS THEN
-    -- エラーが発生しても通知の作成は続行
-    RAISE WARNING 'Failed to send notification: %', SQLERRM;
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.map_id IS NOT NULL THEN
+      UPDATE maps SET bookmarks_count = bookmarks_count + 1 WHERE id = NEW.map_id;
+    ELSIF NEW.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET bookmarks_count = bookmarks_count + 1 WHERE id = NEW.user_spot_id;
+    END IF;
     RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    IF OLD.map_id IS NOT NULL THEN
+      UPDATE maps SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = OLD.map_id;
+    ELSIF OLD.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET bookmarks_count = GREATEST(0, bookmarks_count - 1) WHERE id = OLD.user_spot_id;
+    END IF;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
 END;
 $$;
 
@@ -973,6 +597,171 @@ BEGIN
     RETURN NEW;
   ELSIF TG_OP = 'DELETE' THEN
     UPDATE collections SET maps_count = maps_count - 1, updated_at = NOW() WHERE id = OLD.collection_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_comment_likes_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_comment_likes_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+  BEGIN
+    IF TG_OP = 'INSERT' THEN
+      UPDATE comments SET likes_count = likes_count + 1 WHERE id = NEW.comment_id;
+      RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+      UPDATE comments SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.comment_id;
+      RETURN OLD;
+    END IF;
+    RETURN NULL;
+  END;
+  $$;
+
+
+--
+-- Name: update_comment_replies_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_comment_replies_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+  BEGIN
+    IF TG_OP = 'INSERT' THEN
+      IF NEW.parent_id IS NOT NULL THEN
+        UPDATE comments SET replies_count = replies_count + 1 WHERE id = NEW.parent_id;
+      END IF;
+      RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+      IF OLD.parent_id IS NOT NULL THEN
+        UPDATE comments SET replies_count = GREATEST(0, replies_count - 1) WHERE id = OLD.parent_id;
+      END IF;
+      RETURN OLD;
+    END IF;
+    RETURN NULL;
+  END;
+  $$;
+
+
+--
+-- Name: update_comments_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_comments_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  -- 返信コメント（parent_idがある）はカウントしない
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.parent_id IS NULL THEN
+      IF NEW.map_id IS NOT NULL THEN
+        UPDATE maps SET comments_count = comments_count + 1 WHERE id = NEW.map_id;
+      ELSIF NEW.user_spot_id IS NOT NULL THEN
+        UPDATE user_spots SET comments_count = comments_count + 1 WHERE id = NEW.user_spot_id;
+      END IF;
+    END IF;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    IF OLD.parent_id IS NULL THEN
+      IF OLD.map_id IS NOT NULL THEN
+        UPDATE maps SET comments_count = GREATEST(0, comments_count - 1) WHERE id = OLD.map_id;
+      ELSIF OLD.user_spot_id IS NOT NULL THEN
+        UPDATE user_spots SET comments_count = GREATEST(0, comments_count - 1) WHERE id = OLD.user_spot_id;
+      END IF;
+    END IF;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_images_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_images_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE user_spots SET images_count = images_count + 1 WHERE id = NEW.user_spot_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE user_spots SET images_count = GREATEST(0, images_count - 1) WHERE id = OLD.user_spot_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_likes_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_likes_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.map_id IS NOT NULL THEN
+      UPDATE maps SET likes_count = likes_count + 1 WHERE id = NEW.map_id;
+    ELSIF NEW.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET likes_count = likes_count + 1 WHERE id = NEW.user_spot_id;
+    END IF;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    IF OLD.map_id IS NOT NULL THEN
+      UPDATE maps SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.map_id;
+    ELSIF OLD.user_spot_id IS NOT NULL THEN
+      UPDATE user_spots SET likes_count = GREATEST(0, likes_count - 1) WHERE id = OLD.user_spot_id;
+    END IF;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_map_spots_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_map_spots_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE maps SET spots_count = spots_count + 1 WHERE id = NEW.map_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE maps SET spots_count = GREATEST(0, spots_count - 1) WHERE id = OLD.map_id;
+    RETURN OLD;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+
+
+--
+-- Name: update_master_spot_favorites_count(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.update_master_spot_favorites_count() RETURNS trigger
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    UPDATE master_spots SET favorites_count = favorites_count + 1 WHERE id = NEW.master_spot_id;
+    RETURN NEW;
+  ELSIF TG_OP = 'DELETE' THEN
+    UPDATE master_spots SET favorites_count = GREATEST(0, favorites_count - 1) WHERE id = OLD.master_spot_id;
     RETURN OLD;
   END IF;
   RETURN NULL;
@@ -1014,20 +803,6 @@ BEGIN
   RETURNING * INTO settings;
 
   RETURN settings;
-END;
-$$;
-
-
---
--- Name: update_notification_settings_updated_at(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.update_notification_settings_updated_at() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
 END;
 $$;
 
@@ -1127,17 +902,11 @@ $$;
 
 
 --
--- Name: update_view_history_updated_at(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: FUNCTION update_user_premium_status(p_user_id uuid, p_is_premium boolean, p_expires_at timestamp with time zone); Type: COMMENT; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.update_view_history_updated_at() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  NEW.updated_at = now();
-  RETURN NEW;
-END;
-$$;
+COMMENT ON FUNCTION public.update_user_premium_status(p_user_id uuid, p_is_premium boolean, p_expires_at timestamp with time zone) IS 'RevenueCat Webhook（Edge Function）から課金状態変更時に呼び出し。Service Role 
+  Keyで実行するため認証チェック不要。';
 
 
 --
@@ -1145,13 +914,13 @@ $$;
 --
 
 CREATE TABLE public.admin_boundaries (
-    id integer NOT NULL,
     geom public.geometry(MultiPolygon,4326),
     created_at timestamp with time zone DEFAULT now(),
     admin_level integer,
     country_id text,
     prefecture_id text,
-    city_id text
+    city_id text,
+    id uuid DEFAULT gen_random_uuid() NOT NULL
 );
 
 
@@ -1191,26 +960,6 @@ COMMENT ON COLUMN public.admin_boundaries.city_id IS '市区町村ID → cities.
 
 
 --
--- Name: admin_boundaries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.admin_boundaries_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: admin_boundaries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.admin_boundaries_id_seq OWNED BY public.admin_boundaries.id;
-
-
---
 -- Name: bookmark_folders; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1247,7 +996,6 @@ CREATE TABLE public.bookmarks (
 
 CREATE TABLE public.categories (
     id text NOT NULL,
-    slug text NOT NULL,
     name text NOT NULL,
     name_translations jsonb,
     display_order integer DEFAULT 0 NOT NULL,
@@ -1261,7 +1009,7 @@ CREATE TABLE public.categories (
 -- Name: TABLE categories; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON TABLE public.categories IS 'マップカテゴリ（グルメ、旅行など）';
+COMMENT ON TABLE public.categories IS 'マップカテゴリ（グルメ、旅行など）。idはURL用のslugとしても使用。';
 
 
 --
@@ -1861,7 +1609,6 @@ CREATE TABLE public.maps (
     name text NOT NULL,
     description text,
     is_public boolean DEFAULT false NOT NULL,
-    is_default boolean DEFAULT false NOT NULL,
     is_official boolean DEFAULT false NOT NULL,
     thumbnail_url text,
     spots_count integer DEFAULT 0 NOT NULL,
@@ -1883,13 +1630,6 @@ CREATE TABLE public.maps (
 --
 
 COMMENT ON COLUMN public.maps.is_public IS 'マップが公開されているかどうか（デフォルト: false）';
-
-
---
--- Name: COLUMN maps.is_default; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.maps.is_default IS 'デフォルトマップかどうか（デフォルト: false）';
 
 
 --
@@ -2531,6 +2271,44 @@ COMMENT ON VIEW public.user_latest_agreements IS 'ユーザーの最新の同意
 
 
 --
+-- Name: user_preferences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_preferences (
+    user_id uuid NOT NULL,
+    theme text DEFAULT 'system'::text NOT NULL,
+    locale text DEFAULT 'system'::text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT user_preferences_locale_check CHECK ((locale = ANY (ARRAY['ja'::text, 'en'::text, 'cn'::text, 'tw'::text, 'system'::text]))),
+    CONSTRAINT user_preferences_theme_check CHECK ((theme = ANY (ARRAY['light'::text, 'dark'::text, 'system'::text])))
+);
+
+
+--
+-- Name: TABLE user_preferences; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.user_preferences IS 'ユーザーのアプリ設定（テーマ、言語など）';
+
+
+--
+-- Name: COLUMN user_preferences.theme; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_preferences.theme IS 'テーマ設定: light, dark, 
+  system（デフォルト: system）';
+
+
+--
+-- Name: COLUMN user_preferences.locale; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_preferences.locale IS '言語設定: ja, en, cn, tw, 
+  system（デフォルト: system）';
+
+
+--
 -- Name: user_spots; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2756,13 +2534,6 @@ COMMENT ON COLUMN public.visits.visited_at IS '訪問した日時';
 
 
 --
--- Name: admin_boundaries id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.admin_boundaries ALTER COLUMN id SET DEFAULT nextval('public.admin_boundaries_id_seq'::regclass);
-
-
---
 -- Name: admin_boundaries admin_boundaries_city_id_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2800,14 +2571,6 @@ ALTER TABLE ONLY public.bookmarks
 
 ALTER TABLE ONLY public.categories
     ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
-
-
---
--- Name: categories categories_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.categories
-    ADD CONSTRAINT categories_slug_key UNIQUE (slug);
 
 
 --
@@ -3195,6 +2958,14 @@ ALTER TABLE ONLY public.user_notification_settings
 
 
 --
+-- Name: user_preferences user_preferences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_preferences
+    ADD CONSTRAINT user_preferences_pkey PRIMARY KEY (user_id);
+
+
+--
 -- Name: user_spots user_spots_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3407,6 +3178,13 @@ CREATE INDEX idx_category_featured_tags_category ON public.category_featured_tag
 
 
 --
+-- Name: idx_cities_name_translations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_cities_name_translations ON public.cities USING gin (name_translations);
+
+
+--
 -- Name: idx_cities_prefecture_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3512,6 +3290,20 @@ CREATE INDEX idx_comments_user_spot_id ON public.comments USING btree (user_spot
 
 
 --
+-- Name: idx_continents_name_translations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_continents_name_translations ON public.continents USING gin (name_translations);
+
+
+--
+-- Name: idx_countries_name_translations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_countries_name_translations ON public.countries USING gin (name_translations);
+
+
+--
 -- Name: idx_featured_carousel_items_active_order; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3579,6 +3371,13 @@ CREATE INDEX idx_machi_city_id ON public.machi USING btree (city_id);
 --
 
 CREATE INDEX idx_machi_name ON public.machi USING btree (name);
+
+
+--
+-- Name: idx_machi_name_translations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_machi_name_translations ON public.machi USING gin (name_translations);
 
 
 --
@@ -3757,6 +3556,20 @@ CREATE INDEX idx_notifications_user_spot_id ON public.notifications USING btree 
 
 
 --
+-- Name: idx_prefectures_name_translations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_prefectures_name_translations ON public.prefectures USING gin (name_translations);
+
+
+--
+-- Name: idx_regions_name_translations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_regions_name_translations ON public.regions USING gin (name_translations);
+
+
+--
 -- Name: idx_reports_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3904,20 +3717,6 @@ CREATE INDEX idx_terms_versions_type_effective ON public.terms_versions USING bt
 
 
 --
--- Name: idx_transport_hubs_location; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_transport_hubs_location ON public.transport_hubs USING btree (latitude, longitude);
-
-
---
--- Name: idx_transport_hubs_name; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_transport_hubs_name ON public.transport_hubs USING btree (name);
-
-
---
 -- Name: idx_transport_hubs_osm_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3925,31 +3724,10 @@ CREATE INDEX idx_transport_hubs_osm_id ON public.transport_hubs USING btree (osm
 
 
 --
--- Name: idx_transport_hubs_prefecture_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_transport_hubs_prefecture_id ON public.transport_hubs USING btree (prefecture_id);
-
-
---
 -- Name: idx_transport_hubs_tile_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX idx_transport_hubs_tile_id ON public.transport_hubs USING btree (tile_id);
-
-
---
--- Name: idx_transport_hubs_type; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_transport_hubs_type ON public.transport_hubs USING btree (type);
-
-
---
--- Name: idx_transport_hubs_type_subtype; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_transport_hubs_type_subtype ON public.transport_hubs USING btree (type, subtype);
 
 
 --
@@ -3978,6 +3756,13 @@ CREATE INDEX idx_user_notification_settings_user_id ON public.user_notification_
 --
 
 CREATE INDEX idx_user_spots_bookmarks_count ON public.user_spots USING btree (bookmarks_count DESC);
+
+
+--
+-- Name: idx_user_spots_city_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_spots_city_id ON public.user_spots USING btree (city_id);
 
 
 --
@@ -4023,24 +3808,10 @@ CREATE INDEX idx_user_spots_prefecture_id ON public.user_spots USING btree (pref
 
 
 --
--- Name: idx_user_spots_prefecture_map; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_user_spots_prefecture_map ON public.user_spots USING btree (prefecture_id, map_id);
-
-
---
 -- Name: idx_user_spots_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX idx_user_spots_user_id ON public.user_spots USING btree (user_id);
-
-
---
--- Name: idx_users_email; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_users_email ON public.users USING btree (email);
 
 
 --
@@ -4055,13 +3826,6 @@ CREATE INDEX idx_users_is_premium ON public.users USING btree (is_premium);
 --
 
 CREATE INDEX idx_users_push_token ON public.users USING btree (push_token) WHERE (push_token IS NOT NULL);
-
-
---
--- Name: idx_users_username; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_users_username ON public.users USING btree (username);
 
 
 --
@@ -4083,13 +3847,6 @@ CREATE INDEX idx_view_history_user_id ON public.view_history USING btree (user_i
 --
 
 CREATE INDEX idx_view_history_user_viewed ON public.view_history USING btree (user_id, viewed_at DESC);
-
-
---
--- Name: idx_view_history_viewed_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_view_history_viewed_at ON public.view_history USING btree (viewed_at DESC);
 
 
 --
@@ -4132,27 +3889,6 @@ CREATE UNIQUE INDEX likes_user_map_unique ON public.likes USING btree (user_id, 
 --
 
 CREATE UNIQUE INDEX likes_user_spot_unique ON public.likes USING btree (user_id, user_spot_id) WHERE (user_spot_id IS NOT NULL);
-
-
---
--- Name: users_username_idx; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX users_username_idx ON public.users USING btree (username);
-
-
---
--- Name: user_spots enforce_spots_limit; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER enforce_spots_limit BEFORE INSERT ON public.user_spots FOR EACH ROW EXECUTE FUNCTION public.check_spots_limit();
-
-
---
--- Name: user_spots enforce_spots_limit_on_update; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER enforce_spots_limit_on_update BEFORE UPDATE ON public.user_spots FOR EACH ROW EXECUTE FUNCTION public.check_spots_limit_on_update();
 
 
 --
@@ -4212,31 +3948,10 @@ CREATE TRIGGER trigger_create_default_notification_settings AFTER INSERT ON publ
 
 
 --
--- Name: comment_likes trigger_decrement_comment_likes; Type: TRIGGER; Schema: public; Owner: -
+-- Name: bookmarks trigger_update_bookmarks_count; Type: TRIGGER; Schema: public; Owner: -
 --
 
-CREATE TRIGGER trigger_decrement_comment_likes AFTER DELETE ON public.comment_likes FOR EACH ROW EXECUTE FUNCTION public.decrement_comment_likes_count();
-
-
---
--- Name: comments trigger_decrement_comment_replies; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER trigger_decrement_comment_replies AFTER DELETE ON public.comments FOR EACH ROW EXECUTE FUNCTION public.decrement_comment_replies_count();
-
-
---
--- Name: comment_likes trigger_increment_comment_likes; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER trigger_increment_comment_likes AFTER INSERT ON public.comment_likes FOR EACH ROW EXECUTE FUNCTION public.increment_comment_likes_count();
-
-
---
--- Name: comments trigger_increment_comment_replies; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER trigger_increment_comment_replies AFTER INSERT ON public.comments FOR EACH ROW EXECUTE FUNCTION public.increment_comment_replies_count();
+CREATE TRIGGER trigger_update_bookmarks_count AFTER INSERT OR DELETE ON public.bookmarks FOR EACH ROW EXECUTE FUNCTION public.update_bookmarks_count();
 
 
 --
@@ -4247,17 +3962,52 @@ CREATE TRIGGER trigger_update_collection_maps_count AFTER INSERT OR DELETE ON pu
 
 
 --
--- Name: user_notification_settings trigger_update_notification_settings_updated_at; Type: TRIGGER; Schema: public; Owner: -
+-- Name: comment_likes trigger_update_comment_likes_count; Type: TRIGGER; Schema: public; Owner: -
 --
 
-CREATE TRIGGER trigger_update_notification_settings_updated_at BEFORE UPDATE ON public.user_notification_settings FOR EACH ROW EXECUTE FUNCTION public.update_notification_settings_updated_at();
+CREATE TRIGGER trigger_update_comment_likes_count AFTER INSERT OR DELETE ON public.comment_likes FOR EACH ROW EXECUTE FUNCTION public.update_comment_likes_count();
 
 
 --
--- Name: view_history trigger_update_view_history_updated_at; Type: TRIGGER; Schema: public; Owner: -
+-- Name: comments trigger_update_comment_replies_count; Type: TRIGGER; Schema: public; Owner: -
 --
 
-CREATE TRIGGER trigger_update_view_history_updated_at BEFORE UPDATE ON public.view_history FOR EACH ROW EXECUTE FUNCTION public.update_view_history_updated_at();
+CREATE TRIGGER trigger_update_comment_replies_count AFTER INSERT OR DELETE ON public.comments FOR EACH ROW EXECUTE FUNCTION public.update_comment_replies_count();
+
+
+--
+-- Name: comments trigger_update_comments_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_comments_count AFTER INSERT OR DELETE ON public.comments FOR EACH ROW EXECUTE FUNCTION public.update_comments_count();
+
+
+--
+-- Name: images trigger_update_images_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_images_count AFTER INSERT OR DELETE ON public.images FOR EACH ROW EXECUTE FUNCTION public.update_images_count();
+
+
+--
+-- Name: likes trigger_update_likes_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_likes_count AFTER INSERT OR DELETE ON public.likes FOR EACH ROW EXECUTE FUNCTION public.update_likes_count();
+
+
+--
+-- Name: user_spots trigger_update_map_spots_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_map_spots_count AFTER INSERT OR DELETE ON public.user_spots FOR EACH ROW EXECUTE FUNCTION public.update_map_spots_count();
+
+
+--
+-- Name: master_spot_favorites trigger_update_master_spot_favorites_count; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_master_spot_favorites_count AFTER INSERT OR DELETE ON public.master_spot_favorites FOR EACH ROW EXECUTE FUNCTION public.update_master_spot_favorites_count();
 
 
 --
@@ -4394,6 +4144,20 @@ CREATE TRIGGER update_tags_updated_at BEFORE UPDATE ON public.tags FOR EACH ROW 
 
 
 --
+-- Name: user_notification_settings update_user_notification_settings_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER update_user_notification_settings_updated_at BEFORE UPDATE ON public.user_notification_settings FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+
+--
+-- Name: user_preferences update_user_preferences_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER update_user_preferences_updated_at BEFORE UPDATE ON public.user_preferences FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+
+--
 -- Name: user_spots update_user_spots_updated_at; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -4405,6 +4169,13 @@ CREATE TRIGGER update_user_spots_updated_at BEFORE UPDATE ON public.user_spots F
 --
 
 CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON public.users FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+
+--
+-- Name: view_history update_view_history_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER update_view_history_updated_at BEFORE UPDATE ON public.view_history FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
 
 --
@@ -4444,7 +4215,7 @@ ALTER TABLE ONLY public.bookmark_folders
 --
 
 ALTER TABLE ONLY public.bookmarks
-    ADD CONSTRAINT bookmarks_folder_id_fkey FOREIGN KEY (folder_id) REFERENCES public.bookmark_folders(id) ON DELETE SET NULL;
+    ADD CONSTRAINT bookmarks_folder_id_fkey FOREIGN KEY (folder_id) REFERENCES public.bookmark_folders(id) ON DELETE CASCADE;
 
 
 --
@@ -4912,6 +4683,22 @@ ALTER TABLE ONLY public.user_notification_settings
 
 
 --
+-- Name: user_preferences user_preferences_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_preferences
+    ADD CONSTRAINT user_preferences_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: user_spots user_spots_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_spots
+    ADD CONSTRAINT user_spots_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id) ON DELETE SET NULL;
+
+
+--
 -- Name: user_spots user_spots_label_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4992,489 +4779,16 @@ ALTER TABLE ONLY public.visits
 
 
 --
--- Name: system_announcements Anyone can view active announcements; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Anyone can view active announcements" ON public.system_announcements FOR SELECT USING (((is_active = true) AND ((expires_at IS NULL) OR (expires_at > now()))));
-
-
---
--- Name: cities Anyone can view cities; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Anyone can view cities" ON public.cities FOR SELECT USING (true);
-
-
---
--- Name: machi Anyone can view machi; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Anyone can view machi" ON public.machi FOR SELECT USING (true);
-
-
---
--- Name: master_spots Anyone can view master spots; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Anyone can view master spots" ON public.master_spots FOR SELECT USING (true);
-
-
---
--- Name: prefectures Anyone can view prefectures; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Anyone can view prefectures" ON public.prefectures FOR SELECT USING (true);
-
-
---
--- Name: users Anyone can view users; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Anyone can view users" ON public.users FOR SELECT USING (true);
-
-
---
--- Name: master_spots Authenticated users can create master spots; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Authenticated users can create master spots" ON public.master_spots FOR INSERT TO authenticated WITH CHECK (true);
-
-
---
--- Name: collection_maps Collection maps viewable if collection is viewable; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Collection maps viewable if collection is viewable" ON public.collection_maps FOR SELECT USING ((EXISTS ( SELECT 1
-   FROM public.collections
-  WHERE ((collections.id = collection_maps.collection_id) AND ((collections.is_public = true) OR (collections.user_id = auth.uid()))))));
-
-
---
--- Name: comments Comments are viewable by everyone; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Comments are viewable by everyone" ON public.comments FOR SELECT TO authenticated USING (true);
-
-
---
--- Name: follows Follows are viewable by everyone; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Follows are viewable by everyone" ON public.follows FOR SELECT USING (true);
-
-
---
--- Name: images Images are viewable if spot is public or own; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Images are viewable if spot is public or own" ON public.images FOR SELECT USING ((EXISTS ( SELECT 1
-   FROM (public.user_spots
-     JOIN public.maps ON ((maps.id = user_spots.map_id)))
-  WHERE ((user_spots.id = images.user_spot_id) AND ((maps.is_public = true) OR ((auth.uid() IS NOT NULL) AND (maps.user_id = auth.uid())))))));
-
-
---
--- Name: likes Likes are viewable by everyone; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Likes are viewable by everyone" ON public.likes FOR SELECT TO authenticated USING (true);
-
-
---
--- Name: map_labels Map labels are viewable if map is viewable; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Map labels are viewable if map is viewable" ON public.map_labels FOR SELECT TO authenticated USING ((EXISTS ( SELECT 1
-   FROM public.maps
-  WHERE ((maps.id = map_labels.map_id) AND ((maps.is_public = true) OR (maps.user_id = auth.uid()))))));
-
-
---
--- Name: collections Public collections are viewable by everyone; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Public collections are viewable by everyone" ON public.collections FOR SELECT USING (((is_public = true) OR (auth.uid() = user_id)));
-
-
---
--- Name: maps Public maps are viewable by anyone; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Public maps are viewable by anyone" ON public.maps FOR SELECT USING (((is_public = true) OR ((auth.uid() IS NOT NULL) AND (user_id = auth.uid()))));
-
-
---
--- Name: notifications System can insert notifications; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "System can insert notifications" ON public.notifications FOR INSERT WITH CHECK (true);
-
-
---
--- Name: user_spots User spots are viewable if map is public or own; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "User spots are viewable if map is public or own" ON public.user_spots FOR SELECT USING ((EXISTS ( SELECT 1
-   FROM public.maps
-  WHERE ((maps.id = user_spots.map_id) AND ((maps.is_public = true) OR ((auth.uid() IS NOT NULL) AND (maps.user_id = auth.uid())))))));
-
-
---
--- Name: comments Users can create comments; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create comments" ON public.comments FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-
-
---
--- Name: images Users can create images in their own spots; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create images in their own spots" ON public.images FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
-   FROM public.user_spots
-  WHERE ((user_spots.id = images.user_spot_id) AND (user_spots.user_id = auth.uid())))));
-
-
---
--- Name: map_labels Users can create labels in their own maps; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create labels in their own maps" ON public.map_labels FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
-   FROM public.maps
-  WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
-
-
---
--- Name: reports Users can create reports; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create reports" ON public.reports FOR INSERT TO authenticated WITH CHECK ((auth.uid() = reporter_id));
-
-
---
--- Name: user_spots Users can create spots in their own maps; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create spots in their own maps" ON public.user_spots FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
-   FROM public.maps
-  WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid())))));
-
-
---
--- Name: bookmark_folders Users can create their own bookmark folders; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create their own bookmark folders" ON public.bookmark_folders FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-
-
---
--- Name: bookmarks Users can create their own bookmarks; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create their own bookmarks" ON public.bookmarks FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-
-
---
--- Name: follows Users can create their own follows; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create their own follows" ON public.follows FOR INSERT TO authenticated WITH CHECK ((follower_id = auth.uid()));
-
-
---
--- Name: likes Users can create their own likes; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create their own likes" ON public.likes FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-
-
---
--- Name: maps Users can create their own maps; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can create their own maps" ON public.maps FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
-
-
---
--- Name: images Users can delete images in their own spots; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete images in their own spots" ON public.images FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
-   FROM public.user_spots
-  WHERE ((user_spots.id = images.user_spot_id) AND (user_spots.user_id = auth.uid())))));
-
-
---
--- Name: map_labels Users can delete labels in their own maps; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete labels in their own maps" ON public.map_labels FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
-   FROM public.maps
-  WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
-
-
---
--- Name: system_announcement_reads Users can delete own announcement reads; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete own announcement reads" ON public.system_announcement_reads FOR DELETE USING ((auth.uid() = user_id));
-
-
---
--- Name: master_spot_favorites Users can delete own favorites; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete own favorites" ON public.master_spot_favorites FOR DELETE USING ((auth.uid() = user_id));
-
-
---
--- Name: notifications Users can delete own notifications; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete own notifications" ON public.notifications FOR DELETE USING ((auth.uid() = user_id));
-
-
---
--- Name: bookmark_folders Users can delete their own bookmark folders; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own bookmark folders" ON public.bookmark_folders FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: bookmarks Users can delete their own bookmarks; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own bookmarks" ON public.bookmarks FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: comments Users can delete their own comments; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own comments" ON public.comments FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: follows Users can delete their own follows; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own follows" ON public.follows FOR DELETE TO authenticated USING ((follower_id = auth.uid()));
-
-
---
--- Name: view_history Users can delete their own history; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own history" ON public.view_history FOR DELETE USING ((auth.uid() = user_id));
-
-
---
--- Name: likes Users can delete their own likes; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own likes" ON public.likes FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: maps Users can delete their own maps; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own maps" ON public.maps FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: user_spots Users can delete their own spots; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can delete their own spots" ON public.user_spots FOR DELETE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: system_announcement_reads Users can insert own announcement reads; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can insert own announcement reads" ON public.system_announcement_reads FOR INSERT WITH CHECK ((auth.uid() = user_id));
-
-
---
--- Name: master_spot_favorites Users can insert own favorites; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can insert own favorites" ON public.master_spot_favorites FOR INSERT WITH CHECK ((auth.uid() = user_id));
-
-
---
--- Name: user_notification_settings Users can insert own notification settings; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can insert own notification settings" ON public.user_notification_settings FOR INSERT WITH CHECK ((auth.uid() = user_id));
-
-
---
--- Name: users Users can insert own profile; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can insert own profile" ON public.users FOR INSERT TO authenticated WITH CHECK ((auth.uid() = id));
-
-
---
--- Name: view_history Users can insert their own history; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can insert their own history" ON public.view_history FOR INSERT WITH CHECK ((auth.uid() = user_id));
-
-
---
--- Name: collection_maps Users can manage maps in own collections; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can manage maps in own collections" ON public.collection_maps USING ((EXISTS ( SELECT 1
-   FROM public.collections
-  WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid()))))) WITH CHECK ((EXISTS ( SELECT 1
-   FROM public.collections
-  WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
-
-
---
--- Name: collections Users can manage own collections; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can manage own collections" ON public.collections USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
-
-
---
--- Name: map_labels Users can update labels in their own maps; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update labels in their own maps" ON public.map_labels FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1
-   FROM public.maps
-  WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
-
-
---
--- Name: user_notification_settings Users can update own notification settings; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update own notification settings" ON public.user_notification_settings FOR UPDATE USING ((auth.uid() = user_id));
-
-
---
--- Name: notifications Users can update own notifications; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update own notifications" ON public.notifications FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
-
-
---
--- Name: bookmark_folders Users can update their own bookmark folders; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update their own bookmark folders" ON public.bookmark_folders FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: comments Users can update their own comments; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update their own comments" ON public.comments FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: view_history Users can update their own history; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update their own history" ON public.view_history FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
-
-
---
--- Name: maps Users can update their own maps; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update their own maps" ON public.maps FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: users Users can update their own profile; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update their own profile" ON public.users FOR UPDATE TO authenticated USING ((auth.uid() = id));
-
-
---
--- Name: user_spots Users can update their own spots; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can update their own spots" ON public.user_spots FOR UPDATE TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: system_announcement_reads Users can view own announcement reads; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view own announcement reads" ON public.system_announcement_reads FOR SELECT USING ((auth.uid() = user_id));
-
-
---
--- Name: master_spot_favorites Users can view own favorites; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view own favorites" ON public.master_spot_favorites FOR SELECT USING ((auth.uid() = user_id));
-
-
---
--- Name: user_notification_settings Users can view own notification settings; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view own notification settings" ON public.user_notification_settings FOR SELECT USING ((auth.uid() = user_id));
-
-
---
--- Name: notifications Users can view own notifications; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view own notifications" ON public.notifications FOR SELECT USING ((auth.uid() = user_id));
-
-
---
--- Name: reports Users can view own reports; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view own reports" ON public.reports FOR SELECT TO authenticated USING ((auth.uid() = reporter_id));
-
-
---
--- Name: bookmark_folders Users can view their own bookmark folders; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view their own bookmark folders" ON public.bookmark_folders FOR SELECT TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: bookmarks Users can view their own bookmarks; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view their own bookmarks" ON public.bookmarks FOR SELECT TO authenticated USING ((user_id = auth.uid()));
-
-
---
--- Name: view_history Users can view their own history; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Users can view their own history" ON public.view_history FOR SELECT USING ((auth.uid() = user_id));
-
-
---
 -- Name: admin_boundaries; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.admin_boundaries ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: admin_boundaries admin_boundaries_read; Type: POLICY; Schema: public; Owner: -
+-- Name: admin_boundaries admin_boundaries_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY admin_boundaries_read ON public.admin_boundaries FOR SELECT USING (true);
+CREATE POLICY admin_boundaries_select_all ON public.admin_boundaries FOR SELECT USING (true);
 
 
 --
@@ -5484,10 +4798,59 @@ CREATE POLICY admin_boundaries_read ON public.admin_boundaries FOR SELECT USING 
 ALTER TABLE public.bookmark_folders ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: bookmark_folders bookmark_folders_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY bookmark_folders_delete_own ON public.bookmark_folders FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+
+
+--
+-- Name: bookmark_folders bookmark_folders_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY bookmark_folders_insert_own ON public.bookmark_folders FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+
+
+--
+-- Name: bookmark_folders bookmark_folders_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY bookmark_folders_select_own ON public.bookmark_folders FOR SELECT TO authenticated USING ((user_id = auth.uid()));
+
+
+--
+-- Name: bookmark_folders bookmark_folders_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY bookmark_folders_update_own ON public.bookmark_folders FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
+
+
+--
 -- Name: bookmarks; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.bookmarks ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: bookmarks bookmarks_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY bookmarks_delete_own ON public.bookmarks FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+
+
+--
+-- Name: bookmarks bookmarks_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY bookmarks_insert_own ON public.bookmarks FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+
+
+--
+-- Name: bookmarks bookmarks_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY bookmarks_select_own ON public.bookmarks FOR SELECT TO authenticated USING ((user_id = auth.uid()));
+
 
 --
 -- Name: categories; Type: ROW SECURITY; Schema: public; Owner: -
@@ -5496,10 +4859,10 @@ ALTER TABLE public.bookmarks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: categories categories_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: categories categories_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY categories_select_policy ON public.categories FOR SELECT USING (true);
+CREATE POLICY categories_select_all ON public.categories FOR SELECT USING (true);
 
 
 --
@@ -5509,10 +4872,10 @@ CREATE POLICY categories_select_policy ON public.categories FOR SELECT USING (tr
 ALTER TABLE public.category_featured_maps ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: category_featured_maps category_featured_maps_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: category_featured_maps category_featured_maps_select_active; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY category_featured_maps_select_policy ON public.category_featured_maps FOR SELECT USING ((is_active = true));
+CREATE POLICY category_featured_maps_select_active ON public.category_featured_maps FOR SELECT USING ((is_active = true));
 
 
 --
@@ -5522,10 +4885,23 @@ CREATE POLICY category_featured_maps_select_policy ON public.category_featured_m
 ALTER TABLE public.category_featured_tags ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: category_featured_tags category_featured_tags_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: category_featured_tags category_featured_tags_select_active; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY category_featured_tags_select_policy ON public.category_featured_tags FOR SELECT USING ((is_active = true));
+CREATE POLICY category_featured_tags_select_active ON public.category_featured_tags FOR SELECT USING ((is_active = true));
+
+
+--
+-- Name: cities; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.cities ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: cities cities_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY cities_select_all ON public.cities FOR SELECT USING (true);
 
 
 --
@@ -5535,10 +4911,76 @@ CREATE POLICY category_featured_tags_select_policy ON public.category_featured_t
 ALTER TABLE public.collection_maps ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: collection_maps collection_maps_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collection_maps_delete_own ON public.collection_maps FOR DELETE USING ((EXISTS ( SELECT 1
+   FROM public.collections
+  WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
+
+
+--
+-- Name: collection_maps collection_maps_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collection_maps_insert_own ON public.collection_maps FOR INSERT WITH CHECK ((EXISTS ( SELECT 1
+   FROM public.collections
+  WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
+
+
+--
+-- Name: collection_maps collection_maps_select_public_or_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collection_maps_select_public_or_own ON public.collection_maps FOR SELECT USING ((EXISTS ( SELECT 1
+   FROM public.collections
+  WHERE ((collections.id = collection_maps.collection_id) AND ((collections.is_public = true) OR (collections.user_id = auth.uid()))))));
+
+
+--
+-- Name: collection_maps collection_maps_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collection_maps_update_own ON public.collection_maps FOR UPDATE USING ((EXISTS ( SELECT 1
+   FROM public.collections
+  WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid()))))) WITH CHECK ((EXISTS ( SELECT 1
+   FROM public.collections
+  WHERE ((collections.id = collection_maps.collection_id) AND (collections.user_id = auth.uid())))));
+
+
+--
 -- Name: collections; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.collections ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: collections collections_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collections_delete_own ON public.collections FOR DELETE USING ((auth.uid() = user_id));
+
+
+--
+-- Name: collections collections_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collections_insert_own ON public.collections FOR INSERT WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: collections collections_select_public_or_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collections_select_public_or_own ON public.collections FOR SELECT USING (((is_public = true) OR (auth.uid() = user_id)));
+
+
+--
+-- Name: collections collections_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY collections_update_own ON public.collections FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+
 
 --
 -- Name: comment_likes; Type: ROW SECURITY; Schema: public; Owner: -
@@ -5574,16 +5016,44 @@ CREATE POLICY comment_likes_select_all ON public.comment_likes FOR SELECT USING 
 ALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: comments comments_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY comments_delete_own ON public.comments FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+
+
+--
+-- Name: comments comments_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY comments_insert_own ON public.comments FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+
+
+--
+-- Name: comments comments_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY comments_select_all ON public.comments FOR SELECT TO authenticated USING (true);
+
+
+--
+-- Name: comments comments_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY comments_update_own ON public.comments FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
+
+
+--
 -- Name: continents; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.continents ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: continents continents_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: continents continents_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY continents_select_policy ON public.continents FOR SELECT USING (true);
+CREATE POLICY continents_select_all ON public.continents FOR SELECT USING (true);
 
 
 --
@@ -5593,10 +5063,10 @@ CREATE POLICY continents_select_policy ON public.continents FOR SELECT USING (tr
 ALTER TABLE public.countries ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: countries countries_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: countries countries_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY countries_select_policy ON public.countries FOR SELECT USING (true);
+CREATE POLICY countries_select_all ON public.countries FOR SELECT USING (true);
 
 
 --
@@ -5606,10 +5076,10 @@ CREATE POLICY countries_select_policy ON public.countries FOR SELECT USING (true
 ALTER TABLE public.featured_carousel_items ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: featured_carousel_items featured_carousel_items_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: featured_carousel_items featured_carousel_items_select_active; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY featured_carousel_items_select_policy ON public.featured_carousel_items FOR SELECT TO authenticated, anon USING (((is_active = true) AND ((starts_at IS NULL) OR (starts_at <= now())) AND ((ends_at IS NULL) OR (ends_at > now()))));
+CREATE POLICY featured_carousel_items_select_active ON public.featured_carousel_items FOR SELECT TO authenticated, anon USING (((is_active = true) AND ((starts_at IS NULL) OR (starts_at <= now())) AND ((ends_at IS NULL) OR (ends_at > now()))));
 
 
 --
@@ -5619,10 +5089,59 @@ CREATE POLICY featured_carousel_items_select_policy ON public.featured_carousel_
 ALTER TABLE public.follows ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: follows follows_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY follows_delete_own ON public.follows FOR DELETE TO authenticated USING ((follower_id = auth.uid()));
+
+
+--
+-- Name: follows follows_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY follows_insert_own ON public.follows FOR INSERT TO authenticated WITH CHECK ((follower_id = auth.uid()));
+
+
+--
+-- Name: follows follows_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY follows_select_all ON public.follows FOR SELECT USING (true);
+
+
+--
 -- Name: images; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.images ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: images images_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY images_delete_own ON public.images FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
+   FROM public.user_spots
+  WHERE ((user_spots.id = images.user_spot_id) AND (user_spots.user_id = auth.uid())))));
+
+
+--
+-- Name: images images_insert_own_with_limit; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY images_insert_own_with_limit ON public.images FOR INSERT TO authenticated WITH CHECK (((EXISTS ( SELECT 1
+   FROM public.user_spots us
+  WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid())))) AND (public.count_images_in_spot(user_spot_id) < 4)));
+
+
+--
+-- Name: images images_select_public_or_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY images_select_public_or_own ON public.images FOR SELECT USING ((EXISTS ( SELECT 1
+   FROM (public.user_spots
+     JOIN public.maps ON ((maps.id = user_spots.map_id)))
+  WHERE ((user_spots.id = images.user_spot_id) AND ((maps.is_public = true) OR ((auth.uid() IS NOT NULL) AND (maps.user_id = auth.uid())))))));
+
 
 --
 -- Name: likes; Type: ROW SECURITY; Schema: public; Owner: -
@@ -5631,24 +5150,37 @@ ALTER TABLE public.images ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.likes ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: likes likes_delete_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: likes likes_delete_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY likes_delete_policy ON public.likes FOR DELETE USING ((auth.uid() = user_id));
-
-
---
--- Name: likes likes_insert_policy; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY likes_insert_policy ON public.likes FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY likes_delete_own ON public.likes FOR DELETE TO authenticated USING ((user_id = auth.uid()));
 
 
 --
--- Name: likes likes_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: likes likes_insert_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY likes_select_policy ON public.likes FOR SELECT USING (true);
+CREATE POLICY likes_insert_own ON public.likes FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+
+
+--
+-- Name: likes likes_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY likes_select_all ON public.likes FOR SELECT USING (true);
+
+
+--
+-- Name: machi; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.machi ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: machi machi_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY machi_select_all ON public.machi FOR SELECT USING (true);
 
 
 --
@@ -5658,34 +5190,72 @@ CREATE POLICY likes_select_policy ON public.likes FOR SELECT USING (true);
 ALTER TABLE public.map_labels ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: map_labels map_labels_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY map_labels_delete_own ON public.map_labels FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
+   FROM public.maps
+  WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
+
+
+--
+-- Name: map_labels map_labels_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY map_labels_insert_own ON public.map_labels FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
+   FROM public.maps
+  WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
+
+
+--
+-- Name: map_labels map_labels_select_public_or_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY map_labels_select_public_or_own ON public.map_labels FOR SELECT TO authenticated USING ((EXISTS ( SELECT 1
+   FROM public.maps
+  WHERE ((maps.id = map_labels.map_id) AND ((maps.is_public = true) OR (maps.user_id = auth.uid()))))));
+
+
+--
+-- Name: map_labels map_labels_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY map_labels_update_own ON public.map_labels FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1
+   FROM public.maps
+  WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid()))))) WITH CHECK ((EXISTS ( SELECT 1
+   FROM public.maps
+  WHERE ((maps.id = map_labels.map_id) AND (maps.user_id = auth.uid())))));
+
+
+--
 -- Name: map_tags; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.map_tags ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: map_tags map_tags_delete_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: map_tags map_tags_delete_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY map_tags_delete_policy ON public.map_tags FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
+CREATE POLICY map_tags_delete_own ON public.map_tags FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
    FROM public.maps
   WHERE ((maps.id = map_tags.map_id) AND (maps.user_id = auth.uid())))));
 
 
 --
--- Name: map_tags map_tags_insert_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: map_tags map_tags_insert_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY map_tags_insert_policy ON public.map_tags FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
+CREATE POLICY map_tags_insert_own ON public.map_tags FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
    FROM public.maps
   WHERE ((maps.id = map_tags.map_id) AND (maps.user_id = auth.uid())))));
 
 
 --
--- Name: map_tags map_tags_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: map_tags map_tags_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY map_tags_select_policy ON public.map_tags FOR SELECT USING (true);
+CREATE POLICY map_tags_select_all ON public.map_tags FOR SELECT USING (true);
 
 
 --
@@ -5695,10 +5265,59 @@ CREATE POLICY map_tags_select_policy ON public.map_tags FOR SELECT USING (true);
 ALTER TABLE public.maps ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: maps maps_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY maps_delete_own ON public.maps FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+
+
+--
+-- Name: maps maps_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY maps_insert_own ON public.maps FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+
+
+--
+-- Name: maps maps_select_public_or_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY maps_select_public_or_own ON public.maps FOR SELECT USING (((is_public = true) OR ((auth.uid() IS NOT NULL) AND (user_id = auth.uid()))));
+
+
+--
+-- Name: maps maps_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY maps_update_own ON public.maps FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
+
+
+--
 -- Name: master_spot_favorites; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.master_spot_favorites ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: master_spot_favorites master_spot_favorites_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY master_spot_favorites_delete_own ON public.master_spot_favorites FOR DELETE USING ((auth.uid() = user_id));
+
+
+--
+-- Name: master_spot_favorites master_spot_favorites_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY master_spot_favorites_insert_own ON public.master_spot_favorites FOR INSERT WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: master_spot_favorites master_spot_favorites_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY master_spot_favorites_select_own ON public.master_spot_favorites FOR SELECT USING ((auth.uid() = user_id));
+
 
 --
 -- Name: master_spots; Type: ROW SECURITY; Schema: public; Owner: -
@@ -5707,16 +5326,98 @@ ALTER TABLE public.master_spot_favorites ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.master_spots ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: master_spots master_spots_insert_authenticated; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY master_spots_insert_authenticated ON public.master_spots FOR INSERT TO authenticated WITH CHECK (true);
+
+
+--
+-- Name: master_spots master_spots_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY master_spots_select_all ON public.master_spots FOR SELECT USING (true);
+
+
+--
 -- Name: notifications; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: notifications notifications_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY notifications_delete_own ON public.notifications FOR DELETE USING ((auth.uid() = user_id));
+
+
+--
+-- Name: notifications notifications_insert_system; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY notifications_insert_system ON public.notifications FOR INSERT WITH CHECK (true);
+
+
+--
+-- Name: notifications notifications_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY notifications_select_own ON public.notifications FOR SELECT USING ((auth.uid() = user_id));
+
+
+--
+-- Name: notifications notifications_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY notifications_update_own ON public.notifications FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: prefectures; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.prefectures ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: prefectures prefectures_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY prefectures_select_all ON public.prefectures FOR SELECT USING (true);
+
+
+--
+-- Name: regions; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.regions ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: regions regions_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY regions_select_all ON public.regions FOR SELECT USING (true);
+
+
+--
 -- Name: reports; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.reports ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: reports reports_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY reports_insert_own ON public.reports FOR INSERT TO authenticated WITH CHECK ((auth.uid() = reporter_id));
+
+
+--
+-- Name: reports reports_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY reports_select_own ON public.reports FOR SELECT TO authenticated USING ((auth.uid() = reporter_id));
+
 
 --
 -- Name: schedules; Type: ROW SECURITY; Schema: public; Owner: -
@@ -5749,7 +5450,7 @@ CREATE POLICY schedules_select_own ON public.schedules FOR SELECT USING ((auth.u
 -- Name: schedules schedules_update_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY schedules_update_own ON public.schedules FOR UPDATE USING ((auth.uid() = user_id));
+CREATE POLICY schedules_update_own ON public.schedules FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 
 
 --
@@ -5759,28 +5460,28 @@ CREATE POLICY schedules_update_own ON public.schedules FOR UPDATE USING ((auth.u
 ALTER TABLE public.spot_tags ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: spot_tags spot_tags_delete_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: spot_tags spot_tags_delete_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY spot_tags_delete_policy ON public.spot_tags FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
+CREATE POLICY spot_tags_delete_own ON public.spot_tags FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
    FROM public.user_spots
   WHERE ((user_spots.id = spot_tags.user_spot_id) AND (user_spots.user_id = auth.uid())))));
 
 
 --
--- Name: spot_tags spot_tags_insert_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: spot_tags spot_tags_insert_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY spot_tags_insert_policy ON public.spot_tags FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
+CREATE POLICY spot_tags_insert_own ON public.spot_tags FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
    FROM public.user_spots
   WHERE ((user_spots.id = spot_tags.user_spot_id) AND (user_spots.user_id = auth.uid())))));
 
 
 --
--- Name: spot_tags spot_tags_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: spot_tags spot_tags_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY spot_tags_select_policy ON public.spot_tags FOR SELECT USING (true);
+CREATE POLICY spot_tags_select_all ON public.spot_tags FOR SELECT USING (true);
 
 
 --
@@ -5790,10 +5491,38 @@ CREATE POLICY spot_tags_select_policy ON public.spot_tags FOR SELECT USING (true
 ALTER TABLE public.system_announcement_reads ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: system_announcement_reads system_announcement_reads_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY system_announcement_reads_delete_own ON public.system_announcement_reads FOR DELETE USING ((auth.uid() = user_id));
+
+
+--
+-- Name: system_announcement_reads system_announcement_reads_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY system_announcement_reads_insert_own ON public.system_announcement_reads FOR INSERT WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: system_announcement_reads system_announcement_reads_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY system_announcement_reads_select_own ON public.system_announcement_reads FOR SELECT USING ((auth.uid() = user_id));
+
+
+--
 -- Name: system_announcements; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.system_announcements ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: system_announcements system_announcements_select_active; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY system_announcements_select_active ON public.system_announcements FOR SELECT USING (((is_active = true) AND ((expires_at IS NULL) OR (expires_at > now()))));
+
 
 --
 -- Name: tags; Type: ROW SECURITY; Schema: public; Owner: -
@@ -5802,17 +5531,17 @@ ALTER TABLE public.system_announcements ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.tags ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: tags tags_insert_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: tags tags_insert_authenticated; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY tags_insert_policy ON public.tags FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY tags_insert_authenticated ON public.tags FOR INSERT TO authenticated WITH CHECK (true);
 
 
 --
--- Name: tags tags_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: tags tags_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY tags_select_policy ON public.tags FOR SELECT USING (true);
+CREATE POLICY tags_select_all ON public.tags FOR SELECT USING (true);
 
 
 --
@@ -5822,17 +5551,17 @@ CREATE POLICY tags_select_policy ON public.tags FOR SELECT USING (true);
 ALTER TABLE public.terms_agreements ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: terms_agreements terms_agreements_insert_own_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: terms_agreements terms_agreements_insert_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY terms_agreements_insert_own_policy ON public.terms_agreements FOR INSERT WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY terms_agreements_insert_own ON public.terms_agreements FOR INSERT WITH CHECK ((auth.uid() = user_id));
 
 
 --
--- Name: terms_agreements terms_agreements_select_own_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: terms_agreements terms_agreements_select_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY terms_agreements_select_own_policy ON public.terms_agreements FOR SELECT USING ((auth.uid() = user_id));
+CREATE POLICY terms_agreements_select_own ON public.terms_agreements FOR SELECT USING ((auth.uid() = user_id));
 
 
 --
@@ -5842,10 +5571,10 @@ CREATE POLICY terms_agreements_select_own_policy ON public.terms_agreements FOR 
 ALTER TABLE public.terms_versions ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: terms_versions terms_versions_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: terms_versions terms_versions_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY terms_versions_select_policy ON public.terms_versions FOR SELECT USING (true);
+CREATE POLICY terms_versions_select_all ON public.terms_versions FOR SELECT USING (true);
 
 
 --
@@ -5855,10 +5584,10 @@ CREATE POLICY terms_versions_select_policy ON public.terms_versions FOR SELECT U
 ALTER TABLE public.transport_hubs ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: transport_hubs transport_hubs_select_policy; Type: POLICY; Schema: public; Owner: -
+-- Name: transport_hubs transport_hubs_select_all; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY transport_hubs_select_policy ON public.transport_hubs FOR SELECT USING (true);
+CREATE POLICY transport_hubs_select_all ON public.transport_hubs FOR SELECT USING (true);
 
 
 --
@@ -5868,16 +5597,89 @@ CREATE POLICY transport_hubs_select_policy ON public.transport_hubs FOR SELECT U
 ALTER TABLE public.user_notification_settings ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: user_notification_settings user_notification_settings_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_notification_settings_insert_own ON public.user_notification_settings FOR INSERT WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: user_notification_settings user_notification_settings_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_notification_settings_select_own ON public.user_notification_settings FOR SELECT USING ((auth.uid() = user_id));
+
+
+--
+-- Name: user_notification_settings user_notification_settings_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_notification_settings_update_own ON public.user_notification_settings FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: user_preferences; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.user_preferences ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: user_preferences user_preferences_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_preferences_insert_own ON public.user_preferences FOR INSERT WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: user_preferences user_preferences_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_preferences_select_own ON public.user_preferences FOR SELECT USING ((auth.uid() = user_id));
+
+
+--
+-- Name: user_preferences user_preferences_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_preferences_update_own ON public.user_preferences FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+
+
+--
 -- Name: user_spots; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.user_spots ENABLE ROW LEVEL SECURITY;
 
 --
--- Name: user_spots user_spots_insert_with_limit; Type: POLICY; Schema: public; Owner: -
+-- Name: user_spots user_spots_delete_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY user_spots_insert_with_limit ON public.user_spots FOR INSERT WITH CHECK (((auth.uid() = user_id) AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))));
+CREATE POLICY user_spots_delete_own ON public.user_spots FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+
+
+--
+-- Name: user_spots user_spots_insert_own_with_limit; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_spots_insert_own_with_limit ON public.user_spots FOR INSERT TO authenticated WITH CHECK (((EXISTS ( SELECT 1
+   FROM public.maps
+  WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid())))) AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))));
+
+
+--
+-- Name: user_spots user_spots_select_public_or_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_spots_select_public_or_own ON public.user_spots FOR SELECT USING ((EXISTS ( SELECT 1
+   FROM public.maps
+  WHERE ((maps.id = user_spots.map_id) AND ((maps.is_public = true) OR (maps.user_id = auth.uid()))))));
+
+
+--
+-- Name: user_spots user_spots_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY user_spots_update_own ON public.user_spots FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
 
 
 --
@@ -5887,14 +5689,63 @@ CREATE POLICY user_spots_insert_with_limit ON public.user_spots FOR INSERT WITH 
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: users users_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY users_insert_own ON public.users FOR INSERT TO authenticated WITH CHECK ((auth.uid() = id));
+
+
+--
+-- Name: users users_select_all; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY users_select_all ON public.users FOR SELECT USING (true);
+
+
+--
+-- Name: users users_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY users_update_own ON public.users FOR UPDATE TO authenticated USING ((auth.uid() = id)) WITH CHECK ((auth.uid() = id));
+
+
+--
 -- Name: view_history; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
 ALTER TABLE public.view_history ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: view_history view_history_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY view_history_delete_own ON public.view_history FOR DELETE USING ((auth.uid() = user_id));
+
+
+--
+-- Name: view_history view_history_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY view_history_insert_own ON public.view_history FOR INSERT WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: view_history view_history_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY view_history_select_own ON public.view_history FOR SELECT USING ((auth.uid() = user_id));
+
+
+--
+-- Name: view_history view_history_update_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY view_history_update_own ON public.view_history FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+
+
+--
 -- PostgreSQL database dump complete
 --
 
-\unrestrict p5jzjG7S1j57xJrAorczlFPJTx1c01L2IeXkXEdsLofd4NbvbhQbTTeEvCIxhjW
+\unrestrict tfed9doUnb87lRHt5Jha8YRA7UXzeFoTaKbahKEZ86mgExHRGUFBUdT6NXurIGx
 

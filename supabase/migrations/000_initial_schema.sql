@@ -1,11 +1,14 @@
+-- Machikore Initial Schema
+-- Dumped from Supabase production database on 2026-01-09
+-- PostgreSQL database version 17.6
 --
--- PostgreSQL database dump
---
-
-\restrict tfed9doUnb87lRHt5Jha8YRA7UXzeFoTaKbahKEZ86mgExHRGUFBUdT6NXurIGx
-
--- Dumped from database version 17.6
--- Dumped by pg_dump version 17.7 (Homebrew)
+-- This file contains the complete schema for the Machikore application.
+-- It includes:
+--   - ENUM types
+--   - Tables with constraints
+--   - Indexes
+--   - Functions (RPC)
+--   - Triggers
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -72,6 +75,111 @@ CREATE TYPE public.report_target_type AS ENUM (
 
 
 --
+-- Name: add_search_history(text, text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.add_search_history(p_query text, p_search_type text DEFAULT 'discover'::text) RETURNS uuid
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+DECLARE
+    v_user_id uuid;
+    v_new_id uuid;
+    v_max_count integer := 20;
+    v_gender text;
+    v_age_group text;
+    v_prefecture text;
+    v_country text;
+BEGIN
+    -- 認証チェック
+    v_user_id := auth.uid();
+    IF v_user_id IS NULL THEN
+        RAISE EXCEPTION 'Authentication required';
+    END IF;
+
+    -- 空のクエリはスキップ
+    IF p_query IS NULL OR trim(p_query) = '' THEN
+        RETURN NULL;
+    END IF;
+
+    -- ユーザーのデモグラフィック情報を取得
+    SELECT gender, age_group, prefecture, country
+    INTO v_gender, v_age_group, v_prefecture, v_country
+    FROM public.users WHERE id = v_user_id;
+
+    -- 1. ユーザー用の検索履歴に追加
+    -- 同じクエリが既にあれば削除（重複防止）
+    DELETE FROM public.search_history
+    WHERE user_id = v_user_id
+      AND search_type = p_search_type
+      AND query = trim(p_query);
+
+    -- 新しい履歴を追加
+    INSERT INTO public.search_history (user_id, query, search_type, searched_at)
+    VALUES (v_user_id, trim(p_query), p_search_type, now())
+    RETURNING id INTO v_new_id;
+
+    -- 古い履歴を削除（最大件数を超えた分）
+    DELETE FROM public.search_history
+    WHERE id IN (
+        SELECT id FROM public.search_history
+        WHERE user_id = v_user_id
+          AND search_type = p_search_type
+        ORDER BY searched_at DESC
+        OFFSET v_max_count
+    );
+
+    -- 2. 分析用テーブルに追加（匿名、カウントアップ）
+    INSERT INTO public.search_analytics (
+        query, search_type, gender, age_group, prefecture, country,
+        search_count, first_searched_at, last_searched_at
+    )
+    VALUES (
+        trim(p_query), p_search_type, v_gender, v_age_group, v_prefecture, v_country,
+        1, now(), now()
+    )
+    ON CONFLICT (query, search_type, gender, age_group, prefecture, country)
+    DO UPDATE SET
+        search_count = search_analytics.search_count + 1,
+        last_searched_at = now(),
+        updated_at = now();
+
+    RETURN v_new_id;
+END;
+$$;
+
+
+--
+-- Name: FUNCTION add_search_history(p_query text, p_search_type text); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.add_search_history(p_query text, p_search_type text) IS '検索履歴を追加（ユーザー用 + 分析用の両方に記録、デモグラフィック対応）';
+
+
+--
+-- Name: check_email_has_pending_deletion(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.check_email_has_pending_deletion(check_email text) RETURNS boolean
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM users
+    WHERE LOWER(email) = LOWER(check_email)
+    AND status = 'deletion_pending'
+  );
+END;
+$$;
+
+
+--
+-- Name: FUNCTION check_email_has_pending_deletion(check_email text); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.check_email_has_pending_deletion(check_email text) IS 'メールアドレスが退会手続き中かチェック（users.statusを参照）';
+
+
+--
 -- Name: cleanup_old_view_history(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -124,6 +232,40 @@ BEGIN
   WHERE id = auth.uid();
 END;
 $$;
+
+
+--
+-- Name: clear_search_history(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.clear_search_history(p_search_type text DEFAULT 'discover'::text) RETURNS integer
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+DECLARE
+    v_user_id uuid;
+    v_deleted_count integer;
+BEGIN
+    -- 認証チェック
+    v_user_id := auth.uid();
+    IF v_user_id IS NULL THEN
+        RAISE EXCEPTION 'Authentication required';
+    END IF;
+
+    DELETE FROM public.search_history
+    WHERE user_id = v_user_id
+      AND search_type = p_search_type;
+
+    GET DIAGNOSTICS v_deleted_count = ROW_COUNT;
+    RETURN v_deleted_count;
+END;
+$$;
+
+
+--
+-- Name: FUNCTION clear_search_history(p_search_type text); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.clear_search_history(p_search_type text) IS '指定タイプの検索履歴を全削除';
 
 
 --
@@ -437,6 +579,67 @@ $$;
 
 
 --
+-- Name: get_popular_searches(text, integer, text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.get_popular_searches(p_search_type text DEFAULT 'discover'::text, p_limit integer DEFAULT 10, p_prefecture text DEFAULT NULL::text) RETURNS TABLE(query text, search_count integer, last_searched_at timestamp with time zone)
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        sa.query,
+        SUM(sa.search_count)::integer as search_count,
+        MAX(sa.last_searched_at) as last_searched_at
+    FROM public.search_analytics sa
+    WHERE sa.search_type = p_search_type
+      AND (p_prefecture IS NULL OR sa.prefecture = p_prefecture)
+    GROUP BY sa.query
+    ORDER BY search_count DESC
+    LIMIT p_limit;
+END;
+$$;
+
+
+--
+-- Name: FUNCTION get_popular_searches(p_search_type text, p_limit integer, p_prefecture text); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.get_popular_searches(p_search_type text, p_limit integer, p_prefecture text) IS '人気の検索ワードを取得（オプションで都道府県フィルター可）';
+
+
+--
+-- Name: get_popular_searches(text, integer, text, text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.get_popular_searches(p_search_type text DEFAULT 'discover'::text, p_limit integer DEFAULT 10, p_prefecture text DEFAULT NULL::text, p_country text DEFAULT NULL::text) RETURNS TABLE(query text, search_count integer, last_searched_at timestamp with time zone)
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        sa.query,
+        SUM(sa.search_count)::integer as search_count,
+        MAX(sa.last_searched_at) as last_searched_at
+    FROM public.search_analytics sa
+    WHERE sa.search_type = p_search_type
+      AND (p_prefecture IS NULL OR sa.prefecture = p_prefecture)
+      AND (p_country IS NULL OR sa.country = p_country)
+    GROUP BY sa.query
+    ORDER BY search_count DESC
+    LIMIT p_limit;
+END;
+$$;
+
+
+--
+-- Name: FUNCTION get_popular_searches(p_search_type text, p_limit integer, p_prefecture text, p_country text); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.get_popular_searches(p_search_type text, p_limit integer, p_prefecture text, p_country text) IS '人気の検索ワードを取得（オプションで都道府県・国フィルター可）';
+
+
+--
 -- Name: get_popular_tags_by_category(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -462,6 +665,21 @@ CREATE FUNCTION public.get_popular_tags_by_category(p_category_id text, p_limit 
     ORDER BY usage_count DESC, t.name ASC
     LIMIT p_limit;
   END;
+  $$;
+
+
+--
+-- Name: is_admin_user(uuid); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.is_admin_user(check_user_id uuid) RETURNS boolean
+    LANGUAGE sql SECURITY DEFINER
+    SET search_path TO 'public'
+    AS $$
+    SELECT EXISTS (
+      SELECT 1 FROM public.admin_users
+      WHERE user_id = check_user_id
+    );
   $$;
 
 
@@ -515,6 +733,64 @@ CREATE FUNCTION public.record_map_view(p_map_id uuid) RETURNS void
 
 
 --
+-- Name: search_public_spots(text, integer); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.search_public_spots(search_query text, result_limit integer DEFAULT 30) RETURNS TABLE(id uuid, user_id uuid, map_id uuid, master_spot_id uuid, machi_id text, name jsonb, description text, spot_color text, label_id uuid, images_count integer, likes_count integer, comments_count integer, order_index integer, created_at timestamp with time zone, updated_at timestamp with time zone, latitude double precision, longitude double precision, google_formatted_address jsonb, google_short_address jsonb, master_spot_name jsonb, master_spot_latitude double precision, master_spot_longitude double precision, master_spot_google_place_id text, master_spot_google_formatted_address jsonb, master_spot_google_short_address jsonb, master_spot_google_types text[], label_name text, label_color text, user_username text, user_display_name text, user_avatar_url text, map_name text)
+    LANGUAGE plpgsql SECURITY DEFINER
+    AS $$
+  BEGIN
+    RETURN QUERY
+    SELECT DISTINCT ON (us.id)
+      us.id,
+      us.user_id,
+      us.map_id,
+      us.master_spot_id,
+      us.machi_id,
+      us.name,
+      us.description,
+      us.spot_color,
+      us.label_id,
+      us.images_count,
+      us.likes_count,
+      us.comments_count,
+      us.order_index,
+      us.created_at,
+      us.updated_at,
+      us.latitude,
+      us.longitude,
+      us.google_formatted_address,
+      us.google_short_address,
+      ms.name AS master_spot_name,
+      ms.latitude AS master_spot_latitude,
+      ms.longitude AS master_spot_longitude,
+      ms.google_place_id AS master_spot_google_place_id,
+      ms.google_formatted_address AS master_spot_google_formatted_address,
+      ms.google_short_address AS master_spot_google_short_address,
+      ms.google_types AS master_spot_google_types,
+      ml.name AS label_name,
+      ml.color AS label_color,
+      u.username AS user_username,
+      u.display_name AS user_display_name,
+      u.avatar_url AS user_avatar_url,
+      m.name AS map_name
+    FROM user_spots us
+    INNER JOIN maps m ON m.id = us.map_id AND m.is_public = true
+    LEFT JOIN master_spots ms ON ms.id = us.master_spot_id
+    LEFT JOIN map_labels ml ON ml.id = us.label_id
+    LEFT JOIN users u ON u.id = us.user_id
+    WHERE
+      us.description ILIKE '%' || search_query || '%'
+      OR (ms.name IS NOT NULL AND ms.name::text ILIKE '%' || search_query || '%')
+      OR (us.master_spot_id IS NULL AND us.name IS NOT NULL AND us.name::text ILIKE '%' ||
+   search_query || '%')
+    ORDER BY us.id, us.created_at DESC
+    LIMIT result_limit;
+  END;
+  $$;
+
+
+--
 -- Name: send_push_notification(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -554,6 +830,24 @@ CREATE FUNCTION public.send_push_notification() RETURNS trigger
           RETURN NEW;
   END;
   $$;
+
+
+--
+-- Name: sync_spots_language(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.sync_spots_language() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  IF NEW.language IS DISTINCT FROM OLD.language THEN
+    UPDATE public.user_spots
+    SET language = NEW.language
+    WHERE map_id = NEW.id;
+  END IF;
+  RETURN NEW;
+END;
+$$;
 
 
 --
@@ -960,6 +1254,35 @@ COMMENT ON COLUMN public.admin_boundaries.city_id IS '市区町村ID → cities.
 
 
 --
+-- Name: admin_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.admin_users (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    role text DEFAULT 'admin'::text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_by uuid,
+    CONSTRAINT admin_users_role_check CHECK ((role = ANY (ARRAY['moderator'::text, 'admin'::text, 'owner'::text])))
+);
+
+
+--
+-- Name: TABLE admin_users; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.admin_users IS '管理画面にアクセス可能なユーザー一覧';
+
+
+--
+-- Name: COLUMN admin_users.role; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.admin_users.role IS 'moderator: コンテンツ管理, admin: システム設定変更, owner: 管理者の追加削除も可能';
+
+
+--
 -- Name: bookmark_folders; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1306,6 +1629,7 @@ CREATE TABLE public.terms_versions (
     effective_at timestamp with time zone NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     created_by uuid,
+    locale text DEFAULT 'ja'::text NOT NULL,
     CONSTRAINT terms_versions_type_check CHECK ((type = ANY (ARRAY['terms_of_service'::text, 'privacy_policy'::text])))
 );
 
@@ -1353,27 +1677,118 @@ COMMENT ON COLUMN public.terms_versions.effective_at IS '施行日時';
 
 
 --
+-- Name: COLUMN terms_versions.locale; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.terms_versions.locale IS '言語コード（ja, en, cn, tw）';
+
+
+--
 -- Name: current_terms_versions; Type: VIEW; Schema: public; Owner: -
 --
 
 CREATE VIEW public.current_terms_versions AS
- SELECT DISTINCT ON (type) id,
+ SELECT DISTINCT ON (type, locale) id,
     type,
     version,
     content,
     summary,
     effective_at,
-    created_at
+    created_at,
+    locale
    FROM public.terms_versions
   WHERE (effective_at <= now())
-  ORDER BY type, effective_at DESC;
+  ORDER BY type, locale, effective_at DESC;
 
 
 --
 -- Name: VIEW current_terms_versions; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON VIEW public.current_terms_versions IS '現在有効な利用規約・プライバシーポリシーの最新バージョン';
+COMMENT ON VIEW public.current_terms_versions IS '現在有効な利用規約・プライバシーポリシーの最新バージョン（言語別）';
+
+
+--
+-- Name: deletion_requests; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.deletion_requests (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid,
+    requested_at timestamp with time zone DEFAULT now() NOT NULL,
+    scheduled_at timestamp with time zone DEFAULT (now() + '30 days'::interval) NOT NULL,
+    status text DEFAULT 'pending'::text NOT NULL,
+    cancelled_at timestamp with time zone,
+    completed_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    email text,
+    reason text,
+    CONSTRAINT deletion_requests_status_check CHECK ((status = ANY (ARRAY['pending'::text, 'cancelled'::text, 'completed'::text])))
+);
+
+
+--
+-- Name: TABLE deletion_requests; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.deletion_requests IS 'アカウント削除リクエスト管理テーブル';
+
+
+--
+-- Name: COLUMN deletion_requests.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.user_id IS '削除対象のユーザーID（削除完了後はNULL）';
+
+
+--
+-- Name: COLUMN deletion_requests.requested_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.requested_at IS '削除リクエスト日時';
+
+
+--
+-- Name: COLUMN deletion_requests.scheduled_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.scheduled_at IS '削除予定日時（デフォルト: リクエストから30日後）';
+
+
+--
+-- Name: COLUMN deletion_requests.status; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.status IS 'ステータス: pending(保留中), cancelled(キャンセル), completed(完了)';
+
+
+--
+-- Name: COLUMN deletion_requests.cancelled_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.cancelled_at IS 'キャンセル日時';
+
+
+--
+-- Name: COLUMN deletion_requests.completed_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.completed_at IS '削除完了日時';
+
+
+--
+-- Name: COLUMN deletion_requests.email; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.email IS '削除対象ユーザーのメールアドレス（再登録防止用）';
+
+
+--
+-- Name: COLUMN deletion_requests.reason; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.deletion_requests.reason IS '退会理由（任意）';
 
 
 --
@@ -1545,6 +1960,13 @@ CREATE TABLE public.machi (
 
 
 --
+-- Name: TABLE machi; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.machi IS 'エリア（街）マスター。リリース後に需要のある市から段階的にデータを追加。ポリゴンデータは将来追加予定。';
+
+
+--
 -- Name: map_labels; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1621,7 +2043,8 @@ CREATE TABLE public.maps (
     category_id text,
     article_intro jsonb,
     article_outro jsonb,
-    show_label_chips boolean DEFAULT false
+    show_label_chips boolean DEFAULT false,
+    language character varying(10) DEFAULT NULL::character varying
 );
 
 
@@ -1703,6 +2126,13 @@ COMMENT ON COLUMN public.maps.show_label_chips IS 'ラベルチップをマッ�
 
 
 --
+-- Name: COLUMN maps.language; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.maps.language IS 'Detected language code (ISO 639-1) for content filtering';
+
+
+--
 -- Name: master_spot_favorites; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1720,11 +2150,9 @@ CREATE TABLE public.master_spot_favorites (
 
 CREATE TABLE public.master_spots (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    name text NOT NULL,
     latitude double precision NOT NULL,
     longitude double precision NOT NULL,
     google_place_id text,
-    google_formatted_address text,
     google_types text[],
     google_phone_number text,
     google_website_uri text,
@@ -1733,9 +2161,32 @@ CREATE TABLE public.master_spots (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     machi_id text,
-    google_short_address text,
-    favorites_count integer DEFAULT 0 NOT NULL
+    favorites_count integer DEFAULT 0 NOT NULL,
+    google_formatted_address jsonb,
+    google_short_address jsonb,
+    name jsonb NOT NULL
 );
+
+
+--
+-- Name: COLUMN master_spots.google_formatted_address; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.master_spots.google_formatted_address IS '多言語住所（完全形式）: {"ja": "日本語", "en": "English"}';
+
+
+--
+-- Name: COLUMN master_spots.google_short_address; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.master_spots.google_short_address IS '多言語住所（短縮形式）: {"ja": "日本語", "en": "English"}';
+
+
+--
+-- Name: COLUMN master_spots.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.master_spots.name IS '多言語スポット名: {"ja": "日本語名", "en": "English name"}';
 
 
 --
@@ -1976,6 +2427,149 @@ COMMENT ON COLUMN public.schedules.is_completed IS '完了済みかどうか';
 --
 
 COMMENT ON COLUMN public.schedules.completed_at IS '完了日時';
+
+
+--
+-- Name: search_analytics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.search_analytics (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    query text NOT NULL,
+    search_type text DEFAULT 'discover'::text NOT NULL,
+    search_count integer DEFAULT 1 NOT NULL,
+    gender text,
+    age_group text,
+    prefecture text,
+    first_searched_at timestamp with time zone DEFAULT now() NOT NULL,
+    last_searched_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    country text,
+    CONSTRAINT search_analytics_age_group_check CHECK (((age_group IS NULL) OR (age_group = ANY (ARRAY['10s'::text, '20s'::text, '30s'::text, '40s'::text, '50s'::text, '60s+'::text])))),
+    CONSTRAINT search_analytics_gender_check CHECK (((gender IS NULL) OR (gender = ANY (ARRAY['male'::text, 'female'::text, 'other'::text])))),
+    CONSTRAINT search_analytics_search_type_check CHECK ((search_type = ANY (ARRAY['discover'::text, 'defaultMap'::text, 'userMap'::text])))
+);
+
+
+--
+-- Name: TABLE search_analytics; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.search_analytics IS '検索分析用データ（匿名化、長期保存）';
+
+
+--
+-- Name: COLUMN search_analytics.query; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.query IS '検索クエリ';
+
+
+--
+-- Name: COLUMN search_analytics.search_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.search_type IS '検索タイプ: discover, defaultMap, userMap';
+
+
+--
+-- Name: COLUMN search_analytics.search_count; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.search_count IS '検索回数';
+
+
+--
+-- Name: COLUMN search_analytics.gender; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.gender IS '性別（匿名）: male, female, other';
+
+
+--
+-- Name: COLUMN search_analytics.age_group; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.age_group IS '年代（匿名）: 10s, 20s, 30s, 40s, 50s+';
+
+
+--
+-- Name: COLUMN search_analytics.prefecture; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.prefecture IS '居住都道府県（匿名）';
+
+
+--
+-- Name: COLUMN search_analytics.first_searched_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.first_searched_at IS '初回検索日時';
+
+
+--
+-- Name: COLUMN search_analytics.last_searched_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.last_searched_at IS '最終検索日時';
+
+
+--
+-- Name: COLUMN search_analytics.country; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_analytics.country IS '居住国（ISO 3166-1 alpha-2）: jp, us, etc.';
+
+
+--
+-- Name: search_history; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.search_history (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    query text NOT NULL,
+    search_type text DEFAULT 'discover'::text NOT NULL,
+    searched_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT search_history_search_type_check CHECK ((search_type = ANY (ARRAY['discover'::text, 'defaultMap'::text, 'userMap'::text])))
+);
+
+
+--
+-- Name: TABLE search_history; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.search_history IS 'ユーザーの検索履歴（クラウド同期対応）';
+
+
+--
+-- Name: COLUMN search_history.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_history.user_id IS '検索したユーザーID';
+
+
+--
+-- Name: COLUMN search_history.query; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_history.query IS '検索クエリ';
+
+
+--
+-- Name: COLUMN search_history.search_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_history.search_type IS '検索タイプ: discover, defaultMap, userMap';
+
+
+--
+-- Name: COLUMN search_history.searched_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.search_history.searched_at IS '検索日時';
 
 
 --
@@ -2280,7 +2874,10 @@ CREATE TABLE public.user_preferences (
     locale text DEFAULT 'system'::text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    content_languages text[] DEFAULT ARRAY[]::text[],
+    preferred_categories text[] DEFAULT ARRAY[]::text[],
     CONSTRAINT user_preferences_locale_check CHECK ((locale = ANY (ARRAY['ja'::text, 'en'::text, 'cn'::text, 'tw'::text, 'system'::text]))),
+    CONSTRAINT user_preferences_preferred_categories_max_3 CHECK (((array_length(preferred_categories, 1) IS NULL) OR (array_length(preferred_categories, 1) <= 3))),
     CONSTRAINT user_preferences_theme_check CHECK ((theme = ANY (ARRAY['light'::text, 'dark'::text, 'system'::text])))
 );
 
@@ -2309,6 +2906,20 @@ COMMENT ON COLUMN public.user_preferences.locale IS '言語設定: ja, en, cn, t
 
 
 --
+-- Name: COLUMN user_preferences.content_languages; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_preferences.content_languages IS 'コンテンツ言語フィルター: 見たい言語コードの配列（空配列=全言語表示）';
+
+
+--
+-- Name: COLUMN user_preferences.preferred_categories; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_preferences.preferred_categories IS '好みのカテゴリID（最大3つ、オンボーディングで収集）';
+
+
+--
 -- Name: user_spots; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2318,8 +2929,7 @@ CREATE TABLE public.user_spots (
     map_id uuid NOT NULL,
     master_spot_id uuid,
     machi_id text,
-    custom_name text NOT NULL,
-    description text,
+    description text NOT NULL,
     images_count integer DEFAULT 0 NOT NULL,
     likes_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
@@ -2329,18 +2939,28 @@ CREATE TABLE public.user_spots (
     article_content jsonb,
     latitude double precision NOT NULL,
     longitude double precision NOT NULL,
-    google_formatted_address text,
-    google_short_address text,
     bookmarks_count integer DEFAULT 0 NOT NULL,
-    prefecture_id text,
-    color text,
     spot_color text DEFAULT 'blue'::text,
     label_id uuid,
-    city_id text,
-    prefecture_name text,
-    city_name text,
-    machi_name text
+    language character varying(10) DEFAULT NULL::character varying,
+    google_formatted_address jsonb,
+    google_short_address jsonb,
+    name jsonb
 );
+
+
+--
+-- Name: COLUMN user_spots.machi_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_spots.machi_id IS '街ID。machi テーブルとの JOIN に使用。NULL の場合は街に紐づかないスポット（ピン刺し・現在地登録など）';
+
+
+--
+-- Name: COLUMN user_spots.description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_spots.description IS 'スポットの説明（一言キャッチコピー）';
 
 
 --
@@ -2386,20 +3006,6 @@ COMMENT ON COLUMN public.user_spots.bookmarks_count IS 'ブックマーク数（
 
 
 --
--- Name: COLUMN user_spots.prefecture_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.user_spots.prefecture_id IS '都道府県ID（prefectures.id）。都道府県別検索の高速化のため非正規化';
-
-
---
--- Name: COLUMN user_spots.color; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.user_spots.color IS 'スポットの色（pink, red, orange, yellow, green, blue, purple, gray, white）';
-
-
---
 -- Name: COLUMN user_spots.spot_color; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2411,6 +3017,34 @@ COMMENT ON COLUMN public.user_spots.spot_color IS 'スポットの色（pink, re
 --
 
 COMMENT ON COLUMN public.user_spots.label_id IS 'スポットのラベル（map_labelsへの外部キー）';
+
+
+--
+-- Name: COLUMN user_spots.language; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_spots.language IS 'Detected language code (ISO 639-1) for content filtering';
+
+
+--
+-- Name: COLUMN user_spots.google_formatted_address; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_spots.google_formatted_address IS '多言語住所（完全形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
+
+
+--
+-- Name: COLUMN user_spots.google_short_address; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_spots.google_short_address IS '多言語住所（短縮形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
+
+
+--
+-- Name: COLUMN user_spots.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.user_spots.name IS '多言語スポット名（現在地/ピン刺し登録用）: {"ja": "日本語名", "en": "English name"}。master_spot_idがNULLの場合のみ使用';
 
 
 --
@@ -2430,7 +3064,18 @@ CREATE TABLE public.users (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     push_token text,
-    push_token_updated_at timestamp with time zone
+    push_token_updated_at timestamp with time zone,
+    gender text,
+    age_group text,
+    prefecture text,
+    country text,
+    status text DEFAULT 'active'::text NOT NULL,
+    deletion_requested_at timestamp with time zone,
+    suspended_at timestamp with time zone,
+    suspended_reason text,
+    CONSTRAINT users_age_group_check CHECK (((age_group IS NULL) OR (age_group = ANY (ARRAY['10s'::text, '20s'::text, '30s'::text, '40s'::text, '50s'::text, '60s+'::text])))),
+    CONSTRAINT users_gender_check CHECK (((gender IS NULL) OR (gender = ANY (ARRAY['male'::text, 'female'::text, 'other'::text])))),
+    CONSTRAINT users_status_check CHECK ((status = ANY (ARRAY['active'::text, 'deletion_pending'::text, 'suspended'::text, 'banned'::text])))
 );
 
 
@@ -2446,6 +3091,62 @@ COMMENT ON COLUMN public.users.username IS 'ユーザー名（@で表示され�
 --
 
 COMMENT ON COLUMN public.users.display_name IS '表示名（自由に設定できる名前）';
+
+
+--
+-- Name: COLUMN users.gender; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.gender IS '性別: male, female, other（任意）';
+
+
+--
+-- Name: COLUMN users.age_group; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.age_group IS '年代: 10s, 20s, 30s, 40s, 50s, 60s+（任意）';
+
+
+--
+-- Name: COLUMN users.prefecture; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.prefecture IS '居住地域（日本の場合は都道府県、他国の場合は州など）';
+
+
+--
+-- Name: COLUMN users.country; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.country IS '居住国（ISO 3166-1 alpha-2）: jp, us, kr, etc.';
+
+
+--
+-- Name: COLUMN users.status; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.status IS 'ユーザーステータス: active=通常, deletion_pending=退会手続き中, suspended=一時停止, banned=永久BAN';
+
+
+--
+-- Name: COLUMN users.deletion_requested_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.deletion_requested_at IS '退会リクエスト日時';
+
+
+--
+-- Name: COLUMN users.suspended_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.suspended_at IS '一時停止日時';
+
+
+--
+-- Name: COLUMN users.suspended_reason; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.suspended_reason IS '一時停止理由（管理者メモ）';
 
 
 --
@@ -2547,6 +3248,22 @@ ALTER TABLE ONLY public.admin_boundaries
 
 ALTER TABLE ONLY public.admin_boundaries
     ADD CONSTRAINT admin_boundaries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: admin_users admin_users_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_user_id_key UNIQUE (user_id);
 
 
 --
@@ -2675,6 +3392,14 @@ ALTER TABLE ONLY public.continents
 
 ALTER TABLE ONLY public.countries
     ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: deletion_requests deletion_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.deletion_requests
+    ADD CONSTRAINT deletion_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -2846,6 +3571,30 @@ ALTER TABLE ONLY public.schedules
 
 
 --
+-- Name: search_analytics search_analytics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.search_analytics
+    ADD CONSTRAINT search_analytics_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: search_analytics search_analytics_unique; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.search_analytics
+    ADD CONSTRAINT search_analytics_unique UNIQUE NULLS NOT DISTINCT (query, search_type, gender, age_group, prefecture, country);
+
+
+--
+-- Name: search_history search_history_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.search_history
+    ADD CONSTRAINT search_history_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: spot_tags spot_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2910,11 +3659,11 @@ ALTER TABLE ONLY public.terms_versions
 
 
 --
--- Name: terms_versions terms_versions_type_version_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: terms_versions terms_versions_type_version_locale_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.terms_versions
-    ADD CONSTRAINT terms_versions_type_version_key UNIQUE (type, version);
+    ADD CONSTRAINT terms_versions_type_version_locale_unique UNIQUE (type, version, locale);
 
 
 --
@@ -3091,6 +3840,13 @@ CREATE INDEX idx_admin_boundaries_geom ON public.admin_boundaries USING gist (ge
 --
 
 CREATE INDEX idx_admin_boundaries_prefecture_id ON public.admin_boundaries USING btree (prefecture_id);
+
+
+--
+-- Name: idx_admin_users_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_admin_users_user_id ON public.admin_users USING btree (user_id);
 
 
 --
@@ -3304,6 +4060,34 @@ CREATE INDEX idx_countries_name_translations ON public.countries USING gin (name
 
 
 --
+-- Name: idx_deletion_requests_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_deletion_requests_email ON public.deletion_requests USING btree (email) WHERE (status = 'pending'::text);
+
+
+--
+-- Name: idx_deletion_requests_scheduled_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_deletion_requests_scheduled_at ON public.deletion_requests USING btree (scheduled_at) WHERE (status = 'pending'::text);
+
+
+--
+-- Name: idx_deletion_requests_status; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_deletion_requests_status ON public.deletion_requests USING btree (status);
+
+
+--
+-- Name: idx_deletion_requests_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_deletion_requests_user_id ON public.deletion_requests USING btree (user_id);
+
+
+--
 -- Name: idx_featured_carousel_items_active_order; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3465,6 +4249,13 @@ CREATE INDEX idx_maps_is_public ON public.maps USING btree (is_public);
 
 
 --
+-- Name: idx_maps_language; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_maps_language ON public.maps USING btree (language);
+
+
+--
 -- Name: idx_maps_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3510,7 +4301,7 @@ CREATE INDEX idx_master_spots_machi_id ON public.master_spots USING btree (machi
 -- Name: idx_master_spots_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_master_spots_name ON public.master_spots USING btree (name);
+CREATE INDEX idx_master_spots_name ON public.master_spots USING gin (name);
 
 
 --
@@ -3633,6 +4424,62 @@ CREATE INDEX idx_schedules_user_scheduled ON public.schedules USING btree (user_
 
 
 --
+-- Name: idx_search_analytics_country; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_analytics_country ON public.search_analytics USING btree (country) WHERE (country IS NOT NULL);
+
+
+--
+-- Name: idx_search_analytics_last_searched; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_analytics_last_searched ON public.search_analytics USING btree (last_searched_at DESC);
+
+
+--
+-- Name: idx_search_analytics_prefecture; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_analytics_prefecture ON public.search_analytics USING btree (prefecture) WHERE (prefecture IS NOT NULL);
+
+
+--
+-- Name: idx_search_analytics_query; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_analytics_query ON public.search_analytics USING btree (query);
+
+
+--
+-- Name: idx_search_analytics_search_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_analytics_search_count ON public.search_analytics USING btree (search_count DESC);
+
+
+--
+-- Name: idx_search_analytics_search_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_analytics_search_type ON public.search_analytics USING btree (search_type);
+
+
+--
+-- Name: idx_search_history_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_user_id ON public.search_history USING btree (user_id);
+
+
+--
+-- Name: idx_search_history_user_type_searched; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_search_history_user_type_searched ON public.search_history USING btree (user_id, search_type, searched_at DESC);
+
+
+--
 -- Name: idx_spot_tags_tag_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3703,6 +4550,13 @@ CREATE INDEX idx_terms_versions_effective_at ON public.terms_versions USING btre
 
 
 --
+-- Name: idx_terms_versions_locale; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_terms_versions_locale ON public.terms_versions USING btree (locale);
+
+
+--
 -- Name: idx_terms_versions_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3714,6 +4568,13 @@ CREATE INDEX idx_terms_versions_type ON public.terms_versions USING btree (type)
 --
 
 CREATE INDEX idx_terms_versions_type_effective ON public.terms_versions USING btree (type, effective_at DESC);
+
+
+--
+-- Name: idx_terms_versions_type_locale_effective; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_terms_versions_type_locale_effective ON public.terms_versions USING btree (type, locale, effective_at DESC);
 
 
 --
@@ -3759,13 +4620,6 @@ CREATE INDEX idx_user_spots_bookmarks_count ON public.user_spots USING btree (bo
 
 
 --
--- Name: idx_user_spots_city_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_user_spots_city_id ON public.user_spots USING btree (city_id);
-
-
---
 -- Name: idx_user_spots_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3777,6 +4631,13 @@ CREATE INDEX idx_user_spots_created_at ON public.user_spots USING btree (created
 --
 
 CREATE INDEX idx_user_spots_label_id ON public.user_spots USING btree (label_id);
+
+
+--
+-- Name: idx_user_spots_language; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_spots_language ON public.user_spots USING btree (language);
 
 
 --
@@ -3801,13 +4662,6 @@ CREATE INDEX idx_user_spots_master_spot_id ON public.user_spots USING btree (mas
 
 
 --
--- Name: idx_user_spots_prefecture_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_user_spots_prefecture_id ON public.user_spots USING btree (prefecture_id);
-
-
---
 -- Name: idx_user_spots_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3826,6 +4680,13 @@ CREATE INDEX idx_users_is_premium ON public.users USING btree (is_premium);
 --
 
 CREATE INDEX idx_users_push_token ON public.users USING btree (push_token) WHERE (push_token IS NOT NULL);
+
+
+--
+-- Name: idx_users_status; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_users_status ON public.users USING btree (status) WHERE (status <> 'active'::text);
 
 
 --
@@ -3948,6 +4809,20 @@ CREATE TRIGGER trigger_create_default_notification_settings AFTER INSERT ON publ
 
 
 --
+-- Name: maps trigger_sync_spots_language; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_sync_spots_language AFTER UPDATE OF language ON public.maps FOR EACH ROW EXECUTE FUNCTION public.sync_spots_language();
+
+
+--
+-- Name: admin_users trigger_update_admin_users_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER trigger_update_admin_users_updated_at BEFORE UPDATE ON public.admin_users FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+
+--
 -- Name: bookmarks trigger_update_bookmarks_count; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -4067,6 +4942,13 @@ CREATE TRIGGER update_countries_updated_at BEFORE UPDATE ON public.countries FOR
 
 
 --
+-- Name: deletion_requests update_deletion_requests_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER update_deletion_requests_updated_at BEFORE UPDATE ON public.deletion_requests FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+
+--
 -- Name: featured_carousel_items update_featured_carousel_items_updated_at; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -4120,6 +5002,13 @@ CREATE TRIGGER update_prefectures_updated_at BEFORE UPDATE ON public.prefectures
 --
 
 CREATE TRIGGER update_reports_updated_at BEFORE UPDATE ON public.reports FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+
+--
+-- Name: search_analytics update_search_analytics_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER update_search_analytics_updated_at BEFORE UPDATE ON public.search_analytics FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
 
 --
@@ -4200,6 +5089,37 @@ ALTER TABLE ONLY public.admin_boundaries
 
 ALTER TABLE ONLY public.admin_boundaries
     ADD CONSTRAINT admin_boundaries_prefecture_id_fkey FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id);
+
+
+--
+-- Name: admin_users admin_users_created_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_created_by_fkey FOREIGN KEY (created_by) REFERENCES auth.users(id);
+
+
+--
+-- Name: admin_users admin_users_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: admin_users admin_users_user_id_public_users_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_user_id_public_users_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: CONSTRAINT admin_users_user_id_public_users_fkey ON admin_users; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON CONSTRAINT admin_users_user_id_public_users_fkey ON public.admin_users IS 'public.usersへの外部キー（JOINクエリ用）';
 
 
 --
@@ -4368,6 +5288,14 @@ ALTER TABLE ONLY public.comments
 
 ALTER TABLE ONLY public.countries
     ADD CONSTRAINT countries_continent_id_fkey FOREIGN KEY (continent_id) REFERENCES public.continents(id) ON DELETE SET NULL;
+
+
+--
+-- Name: deletion_requests deletion_requests_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.deletion_requests
+    ADD CONSTRAINT deletion_requests_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE SET NULL;
 
 
 --
@@ -4595,6 +5523,14 @@ ALTER TABLE ONLY public.schedules
 
 
 --
+-- Name: search_history search_history_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.search_history
+    ADD CONSTRAINT search_history_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: spot_tags spot_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4691,14 +5627,6 @@ ALTER TABLE ONLY public.user_preferences
 
 
 --
--- Name: user_spots user_spots_city_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.user_spots
-    ADD CONSTRAINT user_spots_city_id_fkey FOREIGN KEY (city_id) REFERENCES public.cities(id) ON DELETE SET NULL;
-
-
---
 -- Name: user_spots user_spots_label_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4728,14 +5656,6 @@ ALTER TABLE ONLY public.user_spots
 
 ALTER TABLE ONLY public.user_spots
     ADD CONSTRAINT user_spots_master_spot_id_fkey FOREIGN KEY (master_spot_id) REFERENCES public.master_spots(id) ON DELETE CASCADE;
-
-
---
--- Name: user_spots user_spots_prefecture_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.user_spots
-    ADD CONSTRAINT user_spots_prefecture_id_fkey FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id) ON DELETE SET NULL;
 
 
 --
@@ -4789,6 +5709,48 @@ ALTER TABLE public.admin_boundaries ENABLE ROW LEVEL SECURITY;
 --
 
 CREATE POLICY admin_boundaries_select_all ON public.admin_boundaries FOR SELECT USING (true);
+
+
+--
+-- Name: admin_users; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.admin_users ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: admin_users admin_users_delete_owner; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY admin_users_delete_owner ON public.admin_users FOR DELETE TO authenticated USING ((EXISTS ( SELECT 1
+   FROM public.admin_users au
+  WHERE ((au.user_id = auth.uid()) AND (au.role = 'owner'::text)))));
+
+
+--
+-- Name: admin_users admin_users_insert_owner; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY admin_users_insert_owner ON public.admin_users FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
+   FROM public.admin_users au
+  WHERE ((au.user_id = auth.uid()) AND (au.role = 'owner'::text)))));
+
+
+--
+-- Name: admin_users admin_users_select_admin; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY admin_users_select_admin ON public.admin_users FOR SELECT TO authenticated USING (public.is_admin_user(auth.uid()));
+
+
+--
+-- Name: admin_users admin_users_update_owner; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY admin_users_update_owner ON public.admin_users FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1
+   FROM public.admin_users au
+  WHERE ((au.user_id = auth.uid()) AND (au.role = 'owner'::text))))) WITH CHECK ((EXISTS ( SELECT 1
+   FROM public.admin_users au
+  WHERE ((au.user_id = auth.uid()) AND (au.role = 'owner'::text)))));
 
 
 --
@@ -5070,6 +6032,12 @@ CREATE POLICY countries_select_all ON public.countries FOR SELECT USING (true);
 
 
 --
+-- Name: deletion_requests; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.deletion_requests ENABLE ROW LEVEL SECURITY;
+
+--
 -- Name: featured_carousel_items; Type: ROW SECURITY; Schema: public; Owner: -
 --
 
@@ -5268,14 +6236,18 @@ ALTER TABLE public.maps ENABLE ROW LEVEL SECURITY;
 -- Name: maps maps_delete_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY maps_delete_own ON public.maps FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY maps_delete_own ON public.maps FOR DELETE TO authenticated USING (((user_id = auth.uid()) AND (EXISTS ( SELECT 1
+   FROM public.users
+  WHERE ((users.id = auth.uid()) AND (users.status = 'active'::text))))));
 
 
 --
 -- Name: maps maps_insert_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY maps_insert_own ON public.maps FOR INSERT TO authenticated WITH CHECK ((user_id = auth.uid()));
+CREATE POLICY maps_insert_own ON public.maps FOR INSERT TO authenticated WITH CHECK (((user_id = auth.uid()) AND (EXISTS ( SELECT 1
+   FROM public.users
+  WHERE ((users.id = auth.uid()) AND (users.status = 'active'::text))))));
 
 
 --
@@ -5289,7 +6261,9 @@ CREATE POLICY maps_select_public_or_own ON public.maps FOR SELECT USING (((is_pu
 -- Name: maps maps_update_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY maps_update_own ON public.maps FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
+CREATE POLICY maps_update_own ON public.maps FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK (((user_id = auth.uid()) AND (EXISTS ( SELECT 1
+   FROM public.users
+  WHERE ((users.id = auth.uid()) AND (users.status = 'active'::text))))));
 
 
 --
@@ -5451,6 +6425,39 @@ CREATE POLICY schedules_select_own ON public.schedules FOR SELECT USING ((auth.u
 --
 
 CREATE POLICY schedules_update_own ON public.schedules FOR UPDATE USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: search_analytics; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.search_analytics ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: search_history; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.search_history ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: search_history search_history_delete_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY search_history_delete_own ON public.search_history FOR DELETE USING ((auth.uid() = user_id));
+
+
+--
+-- Name: search_history search_history_insert_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY search_history_insert_own ON public.search_history FOR INSERT WITH CHECK ((auth.uid() = user_id));
+
+
+--
+-- Name: search_history search_history_select_own; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY search_history_select_own ON public.search_history FOR SELECT USING ((auth.uid() = user_id));
 
 
 --
@@ -5654,7 +6661,9 @@ ALTER TABLE public.user_spots ENABLE ROW LEVEL SECURITY;
 -- Name: user_spots user_spots_delete_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY user_spots_delete_own ON public.user_spots FOR DELETE TO authenticated USING ((user_id = auth.uid()));
+CREATE POLICY user_spots_delete_own ON public.user_spots FOR DELETE TO authenticated USING (((user_id = auth.uid()) AND (EXISTS ( SELECT 1
+   FROM public.users
+  WHERE ((users.id = auth.uid()) AND (users.status = 'active'::text))))));
 
 
 --
@@ -5663,7 +6672,9 @@ CREATE POLICY user_spots_delete_own ON public.user_spots FOR DELETE TO authentic
 
 CREATE POLICY user_spots_insert_own_with_limit ON public.user_spots FOR INSERT TO authenticated WITH CHECK (((EXISTS ( SELECT 1
    FROM public.maps
-  WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid())))) AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))));
+  WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid())))) AND (EXISTS ( SELECT 1
+   FROM public.users
+  WHERE ((users.id = auth.uid()) AND (users.status = 'active'::text)))) AND ((public.is_user_premium(auth.uid()) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 100)) OR ((NOT public.is_user_premium(auth.uid())) AND (public.count_user_spots_in_map(auth.uid(), map_id) < 30)))));
 
 
 --
@@ -5679,7 +6690,9 @@ CREATE POLICY user_spots_select_public_or_own ON public.user_spots FOR SELECT US
 -- Name: user_spots user_spots_update_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY user_spots_update_own ON public.user_spots FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK ((user_id = auth.uid()));
+CREATE POLICY user_spots_update_own ON public.user_spots FOR UPDATE TO authenticated USING ((user_id = auth.uid())) WITH CHECK (((user_id = auth.uid()) AND (EXISTS ( SELECT 1
+   FROM public.users
+  WHERE ((users.id = auth.uid()) AND (users.status = 'active'::text))))));
 
 
 --
@@ -5706,7 +6719,7 @@ CREATE POLICY users_select_all ON public.users FOR SELECT USING (true);
 -- Name: users users_update_own; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY users_update_own ON public.users FOR UPDATE TO authenticated USING ((auth.uid() = id)) WITH CHECK ((auth.uid() = id));
+CREATE POLICY users_update_own ON public.users FOR UPDATE TO authenticated USING (((auth.uid() = id) AND (status = 'active'::text))) WITH CHECK (((auth.uid() = id) AND (status = 'active'::text)));
 
 
 --
@@ -5747,5 +6760,5 @@ CREATE POLICY view_history_update_own ON public.view_history FOR UPDATE USING ((
 -- PostgreSQL database dump complete
 --
 
-\unrestrict tfed9doUnb87lRHt5Jha8YRA7UXzeFoTaKbahKEZ86mgExHRGUFBUdT6NXurIGx
+\unrestrict msAnCJ8yKakMWFa2swNAHvsRB8bmVHDe9z6SppvRwyo01rLANlpeVgZRu1oHGeC
 
