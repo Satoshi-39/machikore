@@ -44,6 +44,8 @@ interface EditSpotFormProps {
     mapId?: string;
     spotColor?: SpotColor;
     labelId?: string | null;
+    /** 現在地/ピン刺し登録のスポット名（編集） */
+    spotName?: string;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
@@ -73,7 +75,16 @@ export function EditSpotForm({
   // 選択中のマップを取得
   const selectedMap = userMaps.find(m => m.id === selectedMapId);
 
+  // master_spotがない場合（現在地/ピン刺し登録）の判定
+  const isManualRegistration = !spot.master_spot_id;
+  // 現在のスポット名を取得（JSONB形式から現在のlocaleで抽出）
+  const uiLanguage = getCurrentLocale();
+  const initialSpotName = isManualRegistration && spot.name
+    ? extractName(spot.name, uiLanguage) || ''
+    : '';
+
   const [description, setDescription] = useState(initialDescription);
+  const [spotName, setSpotName] = useState(initialSpotName);
   const articleContent = spot.article_content || '';
   const [tags, setTags] = useState<string[]>(initialTags);
   const [spotColor, setSpotColor] = useState<SpotColor>(
@@ -109,6 +120,7 @@ export function EditSpotForm({
     selectedMapId: selectedMapId ?? null,
     spotColor,
     labelId: selectedLabelId,
+    spotName,
   });
 
   // ボタンを無効化する条件
@@ -123,6 +135,8 @@ export function EditSpotForm({
       mapId: selectedMapId || undefined,
       spotColor,
       labelId: selectedLabelId,
+      // 現在地/ピン刺し登録の場合のみスポット名を渡す
+      spotName: isManualRegistration ? spotName.trim() : undefined,
     });
   };
 
@@ -170,47 +184,7 @@ export function EditSpotForm({
       </Modal>
 
       <View className="p-4">
-        {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
-          <View className="mb-3">
-            <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
-              {t('spot.spotInfo')}
-            </Text>
-          </View>
-
-          {/* スポット名 */}
-          {spot.master_spot?.name && (() => {
-            const uiLanguage = getCurrentLocale();
-            const spotName = extractName(spot.master_spot.name, uiLanguage);
-            if (!spotName) return null;
-            return (
-              <View className="mb-3">
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.spotName')}</Text>
-                <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
-                  {spotName}
-                </Text>
-              </View>
-            );
-          })()}
-
-          {/* 住所 */}
-          {(() => {
-            const uiLanguage = getCurrentLocale();
-            const address = extractAddress(spot.master_spot?.google_short_address, uiLanguage)
-              || extractAddress(spot.google_short_address, uiLanguage);
-            if (!address) return null;
-            return (
-              <View className="flex-row items-center">
-                <AddressPinIcon size={16} color={colors.gray[500]} />
-                <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">
-                  {address}
-                </Text>
-              </View>
-            );
-          })()}
-        </View>
-
-        {/* マップ（表示のみ） */}
+        {/* マップ（表示のみ） - 一番上 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             {t('map.belongingMap')}
@@ -230,6 +204,63 @@ export function EditSpotForm({
             )}
           </View>
         </View>
+
+        {/* 位置情報（読み取り専用） */}
+        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+          <View className="mb-3">
+            <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
+              {t('spot.spotInfo')}
+            </Text>
+          </View>
+
+          {/* Google検索経由のスポット名（読み取り専用） */}
+          {!isManualRegistration && spot.master_spot?.name && (() => {
+            const displaySpotName = extractName(spot.master_spot.name, uiLanguage);
+            if (!displaySpotName) return null;
+            return (
+              <View className="mb-3">
+                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.spotName')}</Text>
+                <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+                  {displaySpotName}
+                </Text>
+              </View>
+            );
+          })()}
+
+          {/* 住所 */}
+          {(() => {
+            const address = extractAddress(spot.master_spot?.google_short_address, uiLanguage)
+              || extractAddress(spot.google_short_address, uiLanguage);
+            if (!address) return null;
+            return (
+              <View className="flex-row items-center">
+                <AddressPinIcon size={16} color={colors.gray[500]} />
+                <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">
+                  {address}
+                </Text>
+              </View>
+            );
+          })()}
+        </View>
+
+        {/* スポット名（現在地/ピン刺し登録の場合のみ編集可能） */}
+        {isManualRegistration && (
+          <View className="mb-6">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+              {t('spot.spotName')} <Text className="text-red-500">*</Text>
+            </Text>
+            <StyledTextInput
+              value={spotName}
+              onChangeText={setSpotName}
+              placeholder={t('spot.spotNamePlaceholder')}
+              maxLength={INPUT_LIMITS.SPOT_NAME}
+              className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
+            />
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+              {t('spot.spotNameHint')}
+            </Text>
+          </View>
+        )}
 
         {/* このスポットを一言で！（必須） */}
         <View className="mb-6">

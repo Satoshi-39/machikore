@@ -69,6 +69,8 @@ export function useEditSpotForm() {
     mapId?: string;
     spotColor?: SpotColor;
     labelId?: string | null;
+    /** 現在地/ピン刺し登録のスポット名（編集） */
+    spotName?: string;
   }) => {
     if (!id) {
       Alert.alert('エラー', 'スポットIDが見つかりません');
@@ -150,6 +152,8 @@ export function useEditSpotForm() {
           mapId: data.mapId,
           spotColor: data.spotColor,
           labelId: data.labelId,
+          // 現在地/ピン刺し登録の場合のみスポット名を更新
+          spotName: data.spotName,
         },
         {
           onSuccess: () => {

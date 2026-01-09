@@ -8,6 +8,8 @@ import { useMemo } from 'react';
 import { DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 import type { EditSpotFormCurrentValues } from './types';
+import { extractName } from '@/shared/lib/utils/multilang.utils';
+import { getCurrentLocale } from '@/shared/lib/i18n';
 
 /**
  * フォームの変更検出hook
@@ -43,6 +45,16 @@ export function useEditSpotFormChanges(
     // ラベルの変更
     if (currentValues.labelId !== spot.label_id) return true;
 
+    // スポット名の変更（現在地/ピン刺し登録の場合のみ）
+    if (currentValues.spotName !== undefined) {
+      const isManualRegistration = !spot.master_spot_id;
+      if (isManualRegistration) {
+        const uiLanguage = getCurrentLocale();
+        const originalSpotName = spot.name ? extractName(spot.name, uiLanguage) || '' : '';
+        if (currentValues.spotName.trim() !== originalSpotName) return true;
+      }
+    }
+
     return false;
   }, [
     spot,
@@ -54,6 +66,7 @@ export function useEditSpotFormChanges(
     currentValues.selectedMapId,
     currentValues.spotColor,
     currentValues.labelId,
+    currentValues.spotName,
   ]);
 
   // フォームのバリデーション（descriptionは必須）

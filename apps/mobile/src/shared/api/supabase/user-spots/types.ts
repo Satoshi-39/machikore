@@ -34,6 +34,8 @@ export interface CreateSpotInput {
   articleContent?: ProseMirrorDoc | null;
   spotColor?: string | null;
   labelId?: string | null;
+  // 現在地/ピン刺し登録用のスポット名（多言語対応JSONB形式で保存）
+  spotName?: string | null;
 }
 
 export interface UpdateSpotInput {
@@ -44,6 +46,8 @@ export interface UpdateSpotInput {
   map_id?: string;
   spot_color?: string | null;
   label_id?: string | null;
+  /** 現在地/ピン刺し登録用のスポット名（JSONB形式） */
+  name?: Record<string, string> | null;
 }
 
 export interface UserSpotImage {
@@ -66,6 +70,8 @@ export interface UserSpotSearchResult {
   spot_color?: string | null;
   label_id?: string | null;
   map_label?: MapLabelBasicInfo | null;
+  /** ピン刺し・現在地登録の場合のスポット名（master_spotがない場合に使用、JSONB型） */
+  name?: Json | null;
   images_count: number;
   likes_count: number;
   comments_count: number;

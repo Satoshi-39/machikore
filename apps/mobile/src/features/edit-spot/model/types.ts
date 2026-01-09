@@ -25,4 +25,6 @@ export interface EditSpotFormCurrentValues {
   selectedMapId: string | null;
   spotColor: SpotColor;
   labelId: string | null;
+  /** 現在地/ピン刺し登録の場合のスポット名 */
+  spotName?: string;
 }

@@ -53,6 +53,8 @@ export interface UpdateSpotParams {
   mapId?: string;
   spotColor?: SpotColor;
   labelId?: string | null;
+  /** 現在地/ピン刺し登録用のスポット名（入力時は文字列、保存時にJSONB形式に変換） */
+  spotName?: string;
 }
 
 /**
