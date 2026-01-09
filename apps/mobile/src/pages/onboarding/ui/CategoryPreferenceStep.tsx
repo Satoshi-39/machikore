@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, Pressable, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -146,48 +146,54 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
             <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
           </View>
         ) : (
-          <View className="flex-row flex-wrap justify-center gap-3 pb-8">
-            {categories.map((category) => {
+          <FlatList
+            data={categories}
+            numColumns={3}
+            scrollEnabled={false}
+            keyExtractor={(item) => item.id}
+            columnWrapperStyle={{
+              justifyContent: 'space-between',
+              marginBottom: 12,
+            }}
+            renderItem={({ item: category }) => {
               const isSelected = selectedCategories.includes(category.id);
               const isDisabled = !isSelected && selectedCategories.length >= MAX_CATEGORIES;
 
               return (
-                <Pressable
-                  key={category.id}
+                <TouchableOpacity
                   onPress={() => toggleCategory(category.id)}
                   disabled={isDisabled}
-                  className={`
-                    px-4 py-3 rounded-xl border-2 min-w-[100px] items-center
-                    ${isSelected
-                      ? 'border-primary bg-primary/10 dark:bg-primary/20'
-                      : 'border-border-light dark:border-dark-border-light bg-muted dark:bg-dark-muted'
-                    }
-                    ${isDisabled ? 'opacity-40' : ''}
-                  `}
+                  activeOpacity={0.7}
+                  className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
+                    isSelected
+                      ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
+                      : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
+                  } ${isDisabled ? 'opacity-40' : ''}`}
                 >
                   <Ionicons
                     name={getCategoryIcon(category.id)}
                     size={28}
-                    color={isSelected ? colors.primary.DEFAULT : '#9CA3AF'}
+                    color={isSelected ? '#3B82F6' : '#9CA3AF'}
                   />
                   <Text
-                    className={`mt-2 text-sm font-medium ${
+                    className={`text-xs font-medium mt-1.5 text-center px-1 ${
                       isSelected
-                        ? 'text-primary'
+                        ? 'text-blue-600 dark:text-blue-400'
                         : 'text-foreground dark:text-dark-foreground'
                     }`}
+                    numberOfLines={2}
                   >
                     {getCategoryName(category, locale)}
                   </Text>
                   {isSelected && (
                     <View className="absolute top-1 right-1">
-                      <Ionicons name="checkmark-circle" size={20} color={colors.primary.DEFAULT} />
+                      <Ionicons name="checkmark-circle" size={18} color="#3B82F6" />
                     </View>
                   )}
-                </Pressable>
+                </TouchableOpacity>
               );
-            })}
-          </View>
+            }}
+          />
         )}
 
         <View className="h-24" />
