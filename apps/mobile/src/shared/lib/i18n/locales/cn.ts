@@ -613,6 +613,10 @@ export default {
     systemNotification: '公告',
     systemNotificationDescription: '来自运营团队的公告',
     loadError: '加载设置失败',
+    // 需要系统权限
+    permissionRequired: '开启通知吗？',
+    permissionRequiredDescription: '要接收通知，请在iOS设置中允许通知。我们会通知您点赞、评论、关注等信息。',
+    openSettings: '打开设置',
   },
 
   // 相对时间
@@ -705,6 +709,7 @@ export default {
     labelLabel: '标签',
     showLabelChips: '显示标签芯片',
     showLabelChipsDescription: '在地图顶部显示标签，点击可筛选地点',
+    showLabelChipsNoLabels: '添加标签后可启用此功能',
     tagsLabel: '标签',
     tagsPlaceholder: '输入标签后按回车',
     thumbnailLabel: '缩略图',

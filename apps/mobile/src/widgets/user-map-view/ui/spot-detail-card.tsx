@@ -66,9 +66,10 @@ function SpotDetailCardContent({
   return null;
 }
 
-// ヘッダー・ラベルチップ領域の下端Y座標（固定値）
-// カードがこの位置より上に来たらヘッダー・ラベルチップを非表示にする
-const SEARCH_BAR_BOTTOM_Y = 180;
+// ヘッダー・ラベルチップ・拡大ボタン領域の下端Y座標（固定値）
+// カードがこの位置より上に来たらヘッダー・ラベルチップ・拡大ボタンを非表示にする
+// 拡大ボタンの追加に伴い、180→240に調整
+const SEARCH_BAR_BOTTOM_Y = 240;
 
 export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
   const { t, locale } = useI18n();

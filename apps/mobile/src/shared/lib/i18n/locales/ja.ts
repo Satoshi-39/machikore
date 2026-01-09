@@ -614,6 +614,10 @@ export default {
     systemNotification: 'お知らせ',
     systemNotificationDescription: '運営からのお知らせ',
     loadError: '設定の読み込みに失敗しました',
+    // OS許可が必要な場合
+    permissionRequired: '通知をオンにしますか？',
+    permissionRequiredDescription: '通知を受け取るには、iOSの設定で通知を許可してください。いいねやコメント、フォローなどの通知をお届けします。',
+    openSettings: '設定を開く',
   },
 
   // 相対時間
@@ -706,6 +710,7 @@ export default {
     labelLabel: 'ラベル',
     showLabelChips: 'ラベルチップを表示',
     showLabelChipsDescription: 'マップ上部にラベルを表示し、タップでスポットをフィルタリングできます',
+    showLabelChipsNoLabels: 'ラベルを追加すると有効になります',
     tagsLabel: 'タグ',
     tagsPlaceholder: 'タグを入力してEnter',
     thumbnailLabel: 'サムネイル',

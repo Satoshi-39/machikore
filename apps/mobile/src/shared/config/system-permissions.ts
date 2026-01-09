@@ -21,6 +21,8 @@ export const PUSH_NOTIFICATION_CONFIG = {
   showPrePrompt: true,
   /** トリガータイミング */
   trigger: 'after_first_post' as PermissionTrigger,
+  /** 「あとで」選択後、何回目の投稿で再表示するか */
+  retryAfterPostCount: 5,
   /** 事前説明UIのi18nキー */
   prePromptKeys: {
     title: 'permissions.pushNotification.title',

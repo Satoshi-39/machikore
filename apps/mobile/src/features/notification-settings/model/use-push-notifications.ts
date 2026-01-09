@@ -23,7 +23,7 @@ import {
   addNotificationReceivedListener,
   addNotificationResponseListener,
   setBadgeCount,
-} from '../lib/notifications';
+} from '@/shared/lib/notifications';
 import { log } from '@/shared/config/logger';
 
 interface NotificationData {

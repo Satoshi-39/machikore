@@ -16,11 +16,11 @@ export const colors = {
     dark: '#2563EB', // Blue-600
   },
 
-  // Secondary Colors
+  // Secondary Colors（薄い青）
   secondary: {
-    DEFAULT: '#10B981', // Green-500
-    light: '#34D399', // Green-400
-    dark: '#059669', // Green-600
+    DEFAULT: '#60A5FA', // Blue-400
+    light: '#93C5FD', // Blue-300
+    dark: '#3B82F6', // Blue-500
   },
 
   // Semantic Colors

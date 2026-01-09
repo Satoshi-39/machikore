@@ -5,10 +5,9 @@
  */
 
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface FitAllButtonProps {
   onPress: () => void;
@@ -16,14 +15,13 @@ interface FitAllButtonProps {
 }
 
 export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
-  const isDarkMode = useIsDarkMode();
-
   return (
     <Pressable
       onPress={onPress}
       testID={testID}
-      className="w-14 h-14 rounded-full bg-surface dark:bg-dark-muted shadow-lg active:opacity-80"
+      className="w-11 h-11 rounded-full items-center justify-center active:opacity-80"
       style={{
+        backgroundColor: colors.secondary.DEFAULT,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
@@ -31,13 +29,11 @@ export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
         elevation: 5,
       }}
     >
-      <View className="w-full h-full items-center justify-center">
-        <Ionicons
-          name="scan-outline"
-          size={24}
-          color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT}
-        />
-      </View>
+      <Ionicons
+        name="scan-outline"
+        size={24}
+        color="#FFFFFF"
+      />
     </Pressable>
   );
 }

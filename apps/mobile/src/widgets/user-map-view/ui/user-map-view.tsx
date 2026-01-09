@@ -4,19 +4,16 @@
  * FSDの原則：Widget層は複合的なUIコンポーネント
  */
 
-import type { MapListViewMode } from '@/features/toggle-view-mode';
+import { PinDropOverlay, usePinDropStore } from '@/features/drop-pin';
+import { LabelChipsBar } from '@/features/filter-by-label';
+import { useMapControlsVisibility } from '@/features/map-controls';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
-import { usePinDropStore, PinDropOverlay } from '@/features/drop-pin';
-import { useMapControlsVisibility } from '@/features/map-controls';
-import { LabelChipsBar } from '@/features/filter-by-label';
+import type { MapListViewMode } from '@/features/toggle-view-mode';
+import { ENV } from '@/shared/config';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { ENV } from '@/shared/config';
-import { LocationButton, FitAllButton } from '@/shared/ui';
-import { SpotDetailCard } from './spot-detail-card';
-import { UserMapLabels } from './layers';
-import { SpotCarousel } from './spot-carousel';
+import { FitAllButton, LocationButton } from '@/shared/ui';
 import Mapbox from '@rnmapbox/maps';
 import React, {
   forwardRef,
@@ -26,10 +23,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { View, Dimensions } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Dimensions, View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useSpotCamera, usePinDropAutoCancel, useUserMapData } from '../model';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { usePinDropAutoCancel, useSpotCamera, useUserMapData } from '../model';
+import { UserMapLabels } from './layers';
+import { SpotCarousel } from './spot-carousel';
+import { SpotDetailCard } from './spot-detail-card';
 
 // 画面サイズと現在地ボタンの位置計算用定数
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -52,7 +52,10 @@ interface UserMapViewProps {
   isSearchFocused?: boolean;
   onEditSpot?: (spotId: string) => void;
   /** ピン刺しモードで位置確定時のコールバック */
-  onPinDropConfirm?: (location: { latitude: number; longitude: number }) => void;
+  onPinDropConfirm?: (location: {
+    latitude: number;
+    longitude: number;
+  }) => void;
 }
 
 export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
@@ -141,7 +144,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     );
 
     const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
-    const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
+    const setJumpToSpotId = useSelectedPlaceStore(
+      (state) => state.setJumpToSpotId
+    );
 
     // 初回カメラ移動済みフラグ（マップごとにリセット）
     const hasInitialCameraMoved = useRef(false);
@@ -161,7 +166,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           baseHandleDetailCardClose();
         }
       }
-    }, [isPinDropMode, closeCarousel, isDetailCardOpen, baseHandleDetailCardClose]);
+    }, [
+      isPinDropMode,
+      closeCarousel,
+      isDetailCardOpen,
+      baseHandleDetailCardClose,
+    ]);
 
     // ピン刺し確定時のハンドラー
     const handlePinDropConfirm = useCallback(() => {
@@ -241,12 +251,24 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         }, 100);
         setJumpToSpotId(null);
       }
-    }, [jumpToSpotId, spots, isMapReady, moveCameraToSingleSpot, openSpotById, setJumpToSpotId]);
+    }, [
+      jumpToSpotId,
+      spots,
+      isMapReady,
+      moveCameraToSingleSpot,
+      openSpotById,
+      setJumpToSpotId,
+    ]);
 
     // 全スポット表示（マップごとに初回のみ、jumpToSpotIdがない場合）
     useEffect(() => {
       // jumpToSpotIdがある場合はジャンプ処理に任せる
-      if (spots.length === 0 || !isMapReady || hasInitialCameraMoved.current || jumpToSpotId) {
+      if (
+        spots.length === 0 ||
+        !isMapReady ||
+        hasInitialCameraMoved.current ||
+        jumpToSpotId
+      ) {
         return;
       }
 
@@ -258,7 +280,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         }
         hasInitialCameraMoved.current = true;
       }, 100);
-    }, [spots, isMapReady, jumpToSpotId, moveCameraToSingleSpot, fitCameraToAllSpots]);
+    }, [
+      spots,
+      isMapReady,
+      jumpToSpotId,
+      moveCameraToSingleSpot,
+      fitCameraToAllSpots,
+    ]);
 
     // 外部から呼び出せるメソッドを公開
     useImperativeHandle(ref, () => ({
@@ -270,7 +298,11 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         <Mapbox.MapView
           ref={mapViewRef}
           style={{ flex: 1 }}
-          styleURL={isDarkMode ? ENV.MAPBOX_USER_MAP_STYLE_URL_DARK : ENV.MAPBOX_USER_MAP_STYLE_URL}
+          styleURL={
+            isDarkMode
+              ? ENV.MAPBOX_USER_MAP_STYLE_URL_DARK
+              : ENV.MAPBOX_USER_MAP_STYLE_URL
+          }
           onCameraChanged={handleCameraChanged}
           onDidFinishLoadingMap={handleMapReady}
           scaleBarEnabled={false}
@@ -307,72 +339,104 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         {/* ラベルチップバー（show_label_chipsがtrueの場合のみ表示）
             ヘッダーの下に配置: insets.top + 8(mt-2) + 56(ヘッダー高さ) + 16(余白) = insets.top + 80
             検索中・カード最大時は非表示（ヘッダーと同じ条件） */}
-        {mapData?.show_label_chips && mapLabels.length > 0 && !isSearchFocused && !isDetailCardMaximized && (
-          <View className="absolute left-0 right-0" style={{ top: insets.top + 80 }}>
-            <LabelChipsBar
-              labels={mapLabels}
-              selectedLabelId={selectedLabelId}
-              onLabelSelect={setSelectedLabelId}
-            />
-          </View>
-        )}
+        {mapData?.show_label_chips &&
+          mapLabels.length > 0 &&
+          !isSearchFocused &&
+          !isDetailCardMaximized && (
+            <View
+              className="absolute left-0 right-0"
+              style={{ top: insets.top + 80 }}
+            >
+              <LabelChipsBar
+                labels={mapLabels}
+                selectedLabelId={selectedLabelId}
+                onLabelSelect={setSelectedLabelId}
+              />
+            </View>
+          )}
 
-        {/* マップコントロールボタン（現在地ボタン・全スポット表示ボタン）
+        {/* 全スポット表示ボタン（右上に配置）
+            ラベルチップがある場合はその下、ない場合はヘッダーの下に配置
+            ヘッダーと同じ条件で非表示（検索中・カード最大時） */}
+        {viewMode === 'map' &&
+          !isSearchFocused &&
+          !isDetailCardMaximized &&
+          filteredSpots.length > 0 && (
+            <View
+              className="absolute"
+              style={{
+                // ラベルチップがある場合はその下(+130)、ない場合はヘッダーの下(+80)
+                top:
+                  insets.top +
+                  (mapData?.show_label_chips && mapLabels.length > 0
+                    ? 120
+                    : 90),
+                right: 16,
+                zIndex: 50,
+              }}
+            >
+              <FitAllButton
+                onPress={() => {
+                  if (filteredSpots.length === 1) {
+                    moveCameraToSingleSpot(filteredSpots[0]!);
+                  } else {
+                    fitCameraToAllSpots(filteredSpots);
+                  }
+                  // カルーセルを再表示
+                  openCarousel();
+                }}
+                testID="fit-all-button"
+              />
+            </View>
+          )}
+
+        {/* 現在地ボタン（右下）
             - カルーセルが実際に表示されている時 → 非表示
             - カルーセル非表示または詳細カード表示中 → 表示
             - 詳細カード「小」→ カード上に表示、「中」「大」→ フェードアウト */}
-        {viewMode === 'map' && !isSearchFocused && !(isCarouselVisible && !isDetailCardOpen && spots.length > 0) && (
-          <Animated.View
-            style={[
-              {
-                position: 'absolute',
-                right: 24,
-                zIndex: 50,
-                bottom: isDetailCardOpen
-                  ? SCREEN_HEIGHT * 0.15 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」の上
-                  : LOCATION_BUTTON_DEFAULT_BOTTOM, // 通常位置
-              },
-              controlsVisibility.controlButtonsAnimatedStyle,
-            ]}
-            pointerEvents={controlsVisibility.isButtonsTouchable ? 'auto' : 'none'}
-          >
-            <LocationButton
-              onPress={handleLocationPress}
-              testID="location-button"
-            />
-            {/* 全スポット表示ボタン */}
-            {filteredSpots.length > 0 && (
-              <View className="mt-3">
-                <FitAllButton
-                  onPress={() => {
-                    if (filteredSpots.length === 1) {
-                      moveCameraToSingleSpot(filteredSpots[0]!);
-                    } else {
-                      fitCameraToAllSpots(filteredSpots);
-                    }
-                    // カルーセルを再表示
-                    openCarousel();
-                  }}
-                  testID="fit-all-button"
-                />
-              </View>
-            )}
-          </Animated.View>
-        )}
+        {viewMode === 'map' &&
+          !isSearchFocused &&
+          !(isCarouselVisible && !isDetailCardOpen && spots.length > 0) && (
+            <Animated.View
+              style={[
+                {
+                  position: 'absolute',
+                  right: 24,
+                  zIndex: 50,
+                  bottom: isDetailCardOpen
+                    ? SCREEN_HEIGHT * 0.15 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」の上
+                    : LOCATION_BUTTON_DEFAULT_BOTTOM, // 通常位置
+                },
+                controlsVisibility.controlButtonsAnimatedStyle,
+              ]}
+              pointerEvents={
+                controlsVisibility.isButtonsTouchable ? 'auto' : 'none'
+              }
+            >
+              <LocationButton
+                onPress={handleLocationPress}
+                testID="location-button"
+              />
+            </Animated.View>
+          )}
 
         {/* スポットカルーセル（詳細カードが開いていない時のみ表示） */}
-        {viewMode === 'map' && !isSearchFocused && !isDetailCardOpen && isCarouselVisible && filteredSpots.length > 0 && (
-          <SpotCarousel
-            spots={filteredSpots}
-            selectedSpotId={focusedSpotId}
-            currentUserId={currentUserId}
-            onSpotFocus={handleCarouselSpotFocus}
-            onSpotSelect={handleCarouselSpotFocus}
-            onSpotPress={handleCarouselSpotPress}
-            onCameraMove={handleCameraMove}
-            onClose={closeCarousel}
-          />
-        )}
+        {viewMode === 'map' &&
+          !isSearchFocused &&
+          !isDetailCardOpen &&
+          isCarouselVisible &&
+          filteredSpots.length > 0 && (
+            <SpotCarousel
+              spots={filteredSpots}
+              selectedSpotId={focusedSpotId}
+              currentUserId={currentUserId}
+              onSpotFocus={handleCarouselSpotFocus}
+              onSpotSelect={handleCarouselSpotFocus}
+              onSpotPress={handleCarouselSpotPress}
+              onCameraMove={handleCameraMove}
+              onClose={closeCarousel}
+            />
+          )}
 
         {/* 選択されたスポットの詳細カード */}
         {selectedSpot && isDetailCardOpen && (
@@ -385,7 +449,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onEdit={onEditSpot}
             onSearchBarVisibilityChange={onDetailCardMaximized}
             onBeforeClose={controlsVisibility.handleBeforeClose}
-            onLocationButtonVisibilityChange={controlsVisibility.handleControlButtonsVisibilityChange}
+            onLocationButtonVisibilityChange={
+              controlsVisibility.handleControlButtonsVisibilityChange
+            }
             onCameraMove={() => handleCameraMove(selectedSpot)}
           />
         )}
@@ -397,7 +463,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onCancel={handlePinDropCancel}
           />
         )}
-
       </View>
     );
   }

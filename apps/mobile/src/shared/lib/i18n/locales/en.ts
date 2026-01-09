@@ -613,6 +613,10 @@ export default {
     systemNotification: 'Announcements',
     systemNotificationDescription: 'Announcements from the team',
     loadError: 'Failed to load settings',
+    // OS permission required
+    permissionRequired: 'Turn on notifications?',
+    permissionRequiredDescription: 'To receive notifications, please allow notifications in iOS Settings. We\'ll notify you about likes, comments, follows and more.',
+    openSettings: 'Open Settings',
   },
 
   // Relative time
@@ -705,6 +709,7 @@ export default {
     labelLabel: 'Labels',
     showLabelChips: 'Show Label Chips',
     showLabelChipsDescription: 'Display labels at the top of the map for filtering spots',
+    showLabelChipsNoLabels: 'Add labels to enable this feature',
     tagsLabel: 'Tags',
     tagsPlaceholder: 'Enter tag and press Enter',
     thumbnailLabel: 'Thumbnail',

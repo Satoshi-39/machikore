@@ -48,12 +48,7 @@ export function useSpotForm() {
   });
 
   // 初投稿トリガー（プッシュ通知許可・レビュー依頼）
-  const {
-    triggerPostActions,
-    isPushPromptVisible,
-    onPushPromptAccept,
-    onPushPromptLater,
-  } = useFirstPostTriggers();
+  const { triggerPostActions } = useFirstPostTriggers();
 
   // ユーザーのマップ一覧を取得
   const { data: userMaps = [], isLoading: isMapsLoading } = useUserMaps(user?.id ?? null, {
@@ -73,10 +68,6 @@ export function useSpotForm() {
     isMapsLoading: false,
     selectedMapId: null as string | null,
     setSelectedMapId: () => {},
-    // 初投稿トリガー関連
-    isPushPromptVisible: false,
-    onPushPromptAccept: () => {},
-    onPushPromptLater: () => {},
   };
 
   // データが存在しない場合は静かにnullを返す
@@ -263,7 +254,9 @@ export function useSpotForm() {
 
                 // 初投稿トリガー（プッシュ通知許可・レビュー依頼）
                 // 画面遷移後に実行
+                log.info('[useSpotForm] Scheduling triggerPostActions after 500ms');
                 setTimeout(() => {
+                  log.info('[useSpotForm] Calling triggerPostActions now');
                   triggerPostActions();
                 }, 500);
               },
@@ -287,9 +280,5 @@ export function useSpotForm() {
     isMapsLoading,
     selectedMapId,
     setSelectedMapId,
-    // 初投稿トリガー関連
-    isPushPromptVisible,
-    onPushPromptAccept,
-    onPushPromptLater,
   };
 }

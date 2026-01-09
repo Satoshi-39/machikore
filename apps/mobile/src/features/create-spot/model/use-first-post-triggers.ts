@@ -3,21 +3,22 @@
  *
  * - 初投稿: プッシュ通知の許可リクエスト（事前説明UI付き）
  * - 2回目投稿: アプリレビュー依頼
+ * - 5回目投稿: プッシュ通知を「あとで」にした場合、再度プロンプト表示
  */
 
 import { useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { usePermissionPrompt } from '@/features/system-permissions';
 import { useAppReview } from '@/features/app-review';
-import { requestNotificationPermissions } from '@/features/push-notifications';
+import { getNotificationPermissionStatus } from '@/shared/lib/notifications';
+import { PUSH_NOTIFICATION_CONFIG } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { usePostTriggerStore } from './post-trigger-store';
 
 const STORAGE_KEYS = {
   /** 投稿回数 */
   POST_COUNT: 'user_post_count',
-  /** プッシュ通知のプロンプト表示済みフラグ */
-  PUSH_PROMPTED: 'push_notification_prompted',
+  /** プッシュ通知を「あとで」にしたフラグ */
+  PUSH_DECLINED: 'push_notification_declined',
   /** レビュー依頼表示済みフラグ（2回目投稿時） */
   REVIEW_PROMPTED_SECOND_POST: 'review_prompted_second_post',
 };
@@ -25,28 +26,19 @@ const STORAGE_KEYS = {
 interface UsePostTriggersReturn {
   /** 投稿完了後のトリガーを実行 */
   triggerPostActions: () => Promise<void>;
-  /** プッシュ通知の事前説明モーダルが表示中か */
-  isPushPromptVisible: boolean;
-  /** プッシュ通知許可を承諾 */
-  onPushPromptAccept: () => void;
-  /** プッシュ通知許可を後回し */
-  onPushPromptLater: () => void;
 }
 
 /**
  * 投稿後のトリガーを管理するhook
+ *
+ * triggerPostActionsを呼ぶと、投稿回数に応じて
+ * - 初投稿: プッシュ通知プロンプトを表示（Zustandストア経由）
+ * - 2回目: アプリレビュー依頼
+ * - 5回目: 「あとで」を選んだ場合、再度プッシュ通知プロンプトを表示
  */
 export function useFirstPostTriggers(): UsePostTriggersReturn {
-  // グローバルストアで状態管理（画面遷移後もモーダルを表示するため）
-  const isPushPromptVisible = usePostTriggerStore((state) => state.isPushPromptVisible);
   const showPushPrompt = usePostTriggerStore((state) => state.showPushPrompt);
-  const hidePushPrompt = usePostTriggerStore((state) => state.hidePushPrompt);
   const { requestReviewIfEligible } = useAppReview();
-
-  const permissionPrompt = usePermissionPrompt('pushNotification', async () => {
-    // 事前説明UIで「許可する」を押した後、OSの許可ダイアログを表示
-    await requestNotificationPermissions();
-  });
 
   /**
    * 投稿回数をインクリメントして返す
@@ -60,56 +52,65 @@ export function useFirstPostTriggers(): UsePostTriggersReturn {
   }, []);
 
   /**
+   * プッシュ通知プロンプトを表示すべきか判定
+   */
+  const shouldShowPushPrompt = useCallback(async (): Promise<boolean> => {
+    // 既にOSで許可されている場合は表示しない
+    const permissionStatus = await getNotificationPermissionStatus();
+    if (permissionStatus === 'granted') {
+      return false;
+    }
+    return true;
+  }, []);
+
+  /**
    * 投稿完了後のトリガーを実行
    */
   const triggerPostActions = useCallback(async () => {
+    log.info('[PostTriggers] triggerPostActions called');
     try {
       const postCount = await incrementPostCount();
-      log.debug('[PostTriggers] Post count:', postCount);
+      log.info('[PostTriggers] Post count:', postCount);
 
       if (postCount === 1) {
         // 初投稿: プッシュ通知の許可リクエスト
-        const alreadyPrompted = await AsyncStorage.getItem(STORAGE_KEYS.PUSH_PROMPTED);
-        if (alreadyPrompted !== 'true') {
-          log.debug('[PostTriggers] Showing push notification prompt');
+        const shouldShow = await shouldShowPushPrompt();
+        log.info('[PostTriggers] First post - shouldShowPushPrompt:', shouldShow);
+        if (shouldShow) {
+          log.info('[PostTriggers] Showing push notification prompt (first post)');
           showPushPrompt();
-          await AsyncStorage.setItem(STORAGE_KEYS.PUSH_PROMPTED, 'true');
         }
       } else if (postCount === 2) {
         // 2回目投稿: レビュー依頼
         const alreadyPrompted = await AsyncStorage.getItem(STORAGE_KEYS.REVIEW_PROMPTED_SECOND_POST);
+        log.info('[PostTriggers] Second post - alreadyPrompted:', alreadyPrompted);
         if (alreadyPrompted !== 'true') {
-          log.debug('[PostTriggers] Requesting app review');
-          await requestReviewIfEligible();
+          log.info('[PostTriggers] Requesting app review');
+          const reviewResult = await requestReviewIfEligible();
+          log.info('[PostTriggers] Review request result:', reviewResult);
           await AsyncStorage.setItem(STORAGE_KEYS.REVIEW_PROMPTED_SECOND_POST, 'true');
         }
+      } else if (postCount === PUSH_NOTIFICATION_CONFIG.retryAfterPostCount) {
+        // 5回目投稿: 「あとで」を選んだ場合、再度プッシュ通知プロンプトを表示
+        const declined = await AsyncStorage.getItem(STORAGE_KEYS.PUSH_DECLINED);
+        log.info('[PostTriggers] 5th post - declined flag:', declined);
+        if (declined === 'true') {
+          const shouldShow = await shouldShowPushPrompt();
+          log.info('[PostTriggers] 5th post - shouldShowPushPrompt:', shouldShow);
+          if (shouldShow) {
+            log.info('[PostTriggers] Showing push notification prompt (retry after decline)');
+            showPushPrompt();
+            // 再表示したらフラグをクリア（次回は表示しない）
+            await AsyncStorage.removeItem(STORAGE_KEYS.PUSH_DECLINED);
+          }
+        }
       }
-      // 3回目以降は何もしない（APP_REVIEW_CONFIGの間隔設定に従う）
     } catch (error) {
       log.error('[PostTriggers] Error:', error);
     }
-  }, [incrementPostCount, requestReviewIfEligible]);
-
-  /**
-   * プッシュ通知許可を承諾
-   */
-  const onPushPromptAccept = useCallback(() => {
-    hidePushPrompt();
-    permissionPrompt.onAccept();
-  }, [hidePushPrompt, permissionPrompt]);
-
-  /**
-   * プッシュ通知許可を後回し
-   */
-  const onPushPromptLater = useCallback(() => {
-    hidePushPrompt();
-    permissionPrompt.onLater();
-  }, [hidePushPrompt, permissionPrompt]);
+  }, [incrementPostCount, requestReviewIfEligible, shouldShowPushPrompt, showPushPrompt]);
 
   return {
     triggerPostActions,
-    isPushPromptVisible,
-    onPushPromptAccept,
-    onPushPromptLater,
   };
 }

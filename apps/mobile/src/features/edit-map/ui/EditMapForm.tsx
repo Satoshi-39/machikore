@@ -290,13 +290,13 @@ export function EditMapForm({
         )}
 
         {/* ラベルチップ表示設定 */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+        <View className={`mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border ${labels.length === 0 ? 'opacity-50' : ''}`}>
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center flex-1 mr-4">
               <Ionicons
                 name="pricetags-outline"
                 size={20}
-                color={showLabelChips ? colors.primary.DEFAULT : '#9CA3AF'}
+                color={showLabelChips && labels.length > 0 ? colors.primary.DEFAULT : '#9CA3AF'}
                 style={{ marginRight: 8 }}
               />
               <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
@@ -306,12 +306,15 @@ export function EditMapForm({
             <Switch
               value={showLabelChips}
               onValueChange={setShowLabelChips}
+              disabled={labels.length === 0}
               trackColor={{ false: '#D1D5DB', true: colors.primary.DEFAULT }}
               thumbColor="#fff"
             />
           </View>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-            {t('editMap.showLabelChipsDescription')}
+            {labels.length === 0
+              ? t('editMap.showLabelChipsNoLabels')
+              : t('editMap.showLabelChipsDescription')}
           </Text>
         </View>
 

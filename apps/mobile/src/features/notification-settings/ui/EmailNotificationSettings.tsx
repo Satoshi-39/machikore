@@ -1,0 +1,149 @@
+/**
+ * メール通知設定
+ *
+ * メール通知のマスター設定と各種通知タイプの設定
+ */
+
+import React from 'react';
+import { View, Text, Switch } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
+import type { NotificationSettings } from '@/shared/api/supabase/notification-settings';
+
+interface EmailNotificationSettingsProps {
+  settings: NotificationSettings;
+  onToggle: (key: 'email_enabled' | 'email_like_enabled' | 'email_comment_enabled' | 'email_follow_enabled' | 'email_system_enabled', value: boolean) => void;
+}
+
+// 設定セクションヘッダー
+interface SettingsSectionProps {
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+  isFirst?: boolean;
+}
+
+function SettingsSection({ title, description, children, isFirst = false }: SettingsSectionProps) {
+  return (
+    <View className="bg-surface dark:bg-dark-surface">
+      <View className={`px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
+        <Text className="text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase">
+          {title}
+        </Text>
+        {description && (
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+            {description}
+          </Text>
+        )}
+      </View>
+      {children}
+    </View>
+  );
+}
+
+// 設定トグルアイテム
+interface SettingsToggleProps {
+  icon: keyof typeof Ionicons.glyphMap;
+  label: string;
+  description?: string;
+  value: boolean;
+  onValueChange: (value: boolean) => void;
+  disabled?: boolean;
+}
+
+function SettingsToggle({
+  icon,
+  label,
+  description,
+  value,
+  onValueChange,
+  disabled = false,
+}: SettingsToggleProps) {
+  return (
+    <View
+      className={`flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light ${
+        disabled ? 'opacity-50' : ''
+      }`}
+    >
+      <Ionicons name={icon} size={22} color={colors.text.secondary} />
+      <View className="flex-1 ml-3">
+        <Text className="text-base text-foreground dark:text-dark-foreground">{label}</Text>
+        {description && (
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
+            {description}
+          </Text>
+        )}
+      </View>
+      <Switch
+        value={value}
+        onValueChange={onValueChange}
+        disabled={disabled}
+        trackColor={{ false: colors.gray[300], true: colors.primary.DEFAULT }}
+        thumbColor="white"
+      />
+    </View>
+  );
+}
+
+export function EmailNotificationSettings({ settings, onToggle }: EmailNotificationSettingsProps) {
+  const { t } = useI18n();
+  const isEmailDisabled = !settings.email_enabled;
+
+  return (
+    <>
+      {/* メール通知マスター設定 */}
+      <SettingsSection
+        title={t('notification.emailNotification')}
+        description={t('notification.emailDisabledDescription')}
+        isFirst
+      >
+        <SettingsToggle
+          icon="mail"
+          label={t('notification.receiveEmailNotifications')}
+          value={settings.email_enabled}
+          onValueChange={(value) => onToggle('email_enabled', value)}
+        />
+      </SettingsSection>
+
+      {/* メール通知タイプ別設定 */}
+      <SettingsSection
+        title={t('notification.notificationTypes')}
+        description={!settings.email_enabled ? t('notification.emailDisabledNotice') : undefined}
+      >
+        <SettingsToggle
+          icon="heart"
+          label={t('notification.likeNotification')}
+          description={t('notification.likeNotificationDescription')}
+          value={settings.email_like_enabled}
+          onValueChange={(value) => onToggle('email_like_enabled', value)}
+          disabled={isEmailDisabled}
+        />
+        <SettingsToggle
+          icon="chatbubble"
+          label={t('notification.commentNotification')}
+          description={t('notification.commentNotificationDescription')}
+          value={settings.email_comment_enabled}
+          onValueChange={(value) => onToggle('email_comment_enabled', value)}
+          disabled={isEmailDisabled}
+        />
+        <SettingsToggle
+          icon="person-add"
+          label={t('notification.followNotification')}
+          description={t('notification.followNotificationDescription')}
+          value={settings.email_follow_enabled}
+          onValueChange={(value) => onToggle('email_follow_enabled', value)}
+          disabled={isEmailDisabled}
+        />
+        <SettingsToggle
+          icon="megaphone"
+          label={t('notification.systemNotification')}
+          description={t('notification.systemNotificationDescription')}
+          value={settings.email_system_enabled}
+          onValueChange={(value) => onToggle('email_system_enabled', value)}
+          disabled={isEmailDisabled}
+        />
+      </SettingsSection>
+    </>
+  );
+}

@@ -54,7 +54,7 @@ export function CreateMapForm({
     null
   );
   const [tags, setTags] = useState<string[]>([]);
-  const [isPublic, setIsPublic] = useState(true);
+  const [isPublic, setIsPublic] = useState(false);
   const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
     null
   );

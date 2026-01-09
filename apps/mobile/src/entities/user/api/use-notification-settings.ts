@@ -10,7 +10,7 @@ import {
   type UpdateNotificationSettingsParams,
 } from '@/shared/api/supabase/notification-settings';
 import { updatePushToken, clearPushToken } from '@/shared/api/supabase/users';
-import { getExpoPushToken } from '@/features/push-notifications';
+import { getExpoPushToken } from '@/features/notification-settings';
 import { log } from '@/shared/config/logger';
 
 const QUERY_KEY = ['notification-settings'];

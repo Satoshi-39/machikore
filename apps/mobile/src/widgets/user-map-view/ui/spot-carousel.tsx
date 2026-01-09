@@ -388,7 +388,7 @@ export function SpotCarousel({
       className="absolute left-0 right-0"
       style={{ bottom: insets.bottom + 8 }}
     >
-      {/* 閉じるボタン */}
+      {/* 閉じるボタン（右側） */}
       <View className="flex-row justify-end px-4 mb-2">
         <Pressable
           onPress={onClose}

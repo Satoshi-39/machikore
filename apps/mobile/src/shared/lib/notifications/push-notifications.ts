@@ -5,7 +5,6 @@
  */
 
 import * as Notifications from 'expo-notifications';
-import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 import { log } from '@/shared/config/logger';
@@ -25,12 +24,6 @@ Notifications.setNotificationHandler({
  * プッシュ通知の権限を取得
  */
 export async function requestNotificationPermissions(): Promise<boolean> {
-  // 実機でのみ動作
-  if (!Device.isDevice) {
-    log.debug('[PushNotifications] Push notifications require a physical device');
-    return false;
-  }
-
   // 現在の権限状態を確認
   const { status: existingStatus } = await Notifications.getPermissionsAsync();
   let finalStatus = existingStatus;
@@ -51,18 +44,15 @@ export async function requestNotificationPermissions(): Promise<boolean> {
 
 /**
  * Expo Push Tokenを取得
+ * 注意: 既に許可されている場合のみトークンを取得する
+ * 許可されていない場合は許可をリクエストせずにnullを返す
  */
 export async function getExpoPushToken(): Promise<string | null> {
   try {
-    // 実機でのみ動作
-    if (!Device.isDevice) {
-      log.debug('[PushNotifications] Push notifications require a physical device');
-      return null;
-    }
-
-    // 権限を確認/取得
-    const hasPermission = await requestNotificationPermissions();
-    if (!hasPermission) {
+    // 現在の権限状態を確認（リクエストはしない）
+    const { status } = await Notifications.getPermissionsAsync();
+    if (status !== 'granted') {
+      log.debug('[PushNotifications] Notification permission not granted yet');
       return null;
     }
 
@@ -132,4 +122,13 @@ export async function setBadgeCount(count: number): Promise<void> {
  */
 export async function getBadgeCount(): Promise<number> {
   return Notifications.getBadgeCountAsync();
+}
+
+/**
+ * 通知の許可状態を取得
+ * @returns 'granted' | 'denied' | 'undetermined'
+ */
+export async function getNotificationPermissionStatus(): Promise<'granted' | 'denied' | 'undetermined'> {
+  const { status } = await Notifications.getPermissionsAsync();
+  return status;
 }

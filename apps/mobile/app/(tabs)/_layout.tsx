@@ -82,8 +82,8 @@ export default function TabLayout() {
             } else {
               // スポット作成後に戻るタブを記録
               setSourceTab(currentTab);
-              // ログイン済みの場合は作成モーダルを開く
-              router.push('/create-menu');
+              // ログイン済みの場合はマップ作成画面を開く
+              router.push('/create-map');
             }
           },
         }}

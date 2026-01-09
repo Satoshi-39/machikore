@@ -613,6 +613,10 @@ export default {
     systemNotification: '公告',
     systemNotificationDescription: '來自營運團隊的公告',
     loadError: '載入設定失敗',
+    // 需要系統權限
+    permissionRequired: '開啟通知嗎？',
+    permissionRequiredDescription: '要接收通知，請在iOS設定中允許通知。我們會通知您按讚、留言、追蹤等資訊。',
+    openSettings: '開啟設定',
   },
 
   // 相對時間
@@ -705,6 +709,7 @@ export default {
     labelLabel: '標籤',
     showLabelChips: '顯示標籤晶片',
     showLabelChipsDescription: '在地圖頂部顯示標籤，點擊可篩選地點',
+    showLabelChipsNoLabels: '添加標籤後可啟用此功能',
     tagsLabel: '標籤',
     tagsPlaceholder: '輸入標籤後按 Enter',
     thumbnailLabel: '縮圖',

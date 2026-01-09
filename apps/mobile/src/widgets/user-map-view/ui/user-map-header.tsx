@@ -5,19 +5,38 @@
  * FSDの原則：Widget層は複数の要素を組み合わせた複合コンポーネント
  */
 
-import type { MapWithUser } from '@/shared/types';
-import { Ionicons } from '@expo/vector-icons';
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Image, Pressable, ScrollView, Text, View, Modal, Animated, ActivityIndicator } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import {
+  useBookmarkMap,
+  useMapBookmarkInfo,
+  useUnbookmarkMapFromFolder,
+} from '@/entities/bookmark';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { showLoginRequiredAlert, shareMap } from '@/shared/lib';
-import { useIsDarkMode } from '@/shared/lib/providers';
-import { useI18n } from '@/shared/lib/i18n';
 import { colors } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal } from '@/shared/ui';
+import { shareMap, showLoginRequiredAlert } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import type { MapWithUser } from '@/shared/types';
+import { ImageViewerModal, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { Ionicons } from '@expo/vector-icons';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import {
+  ActivityIndicator,
+  Animated,
+  Image,
+  Modal,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface UserMapHeaderProps {
   isLoading?: boolean;
@@ -99,16 +118,22 @@ export function UserMapHeader({
   }, [userId]);
 
   // フォルダに追加
-  const handleAddToFolder = useCallback((folderId: string | null) => {
-    if (!userId || !mapId) return;
-    addBookmark({ userId, mapId, folderId });
-  }, [userId, mapId, addBookmark]);
+  const handleAddToFolder = useCallback(
+    (folderId: string | null) => {
+      if (!userId || !mapId) return;
+      addBookmark({ userId, mapId, folderId });
+    },
+    [userId, mapId, addBookmark]
+  );
 
   // フォルダから削除
-  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
-    if (!userId || !mapId) return;
-    removeFromFolder({ userId, mapId, folderId });
-  }, [userId, mapId, removeFromFolder]);
+  const handleRemoveFromFolder = useCallback(
+    (folderId: string | null) => {
+      if (!userId || !mapId) return;
+      removeFromFolder({ userId, mapId, folderId });
+    },
+    [userId, mapId, removeFromFolder]
+  );
 
   // 共有処理
   const handleSharePress = useCallback(async () => {
@@ -169,7 +194,18 @@ export function UserMapHeader({
     );
 
     return items;
-  }, [isOwnMap, isArticlePublic, isLiked, isBookmarked, handleLikePress, handleBookmarkPress, handleSharePress, onArticlePress, onEditPress, t]);
+  }, [
+    isOwnMap,
+    isArticlePublic,
+    isLiked,
+    isBookmarked,
+    handleLikePress,
+    handleBookmarkPress,
+    handleSharePress,
+    onArticlePress,
+    onEditPress,
+    t,
+  ]);
 
   // モーダルの開閉に応じてアニメーション
   useEffect(() => {
@@ -218,10 +254,23 @@ export function UserMapHeader({
           {/* 左側：戻るボタン + ローディング */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
             <Pressable onPress={onBack} className="mr-2.5">
-              <Ionicons name="arrow-back" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
+              <Ionicons
+                name="arrow-back"
+                size={23}
+                color={
+                  isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+                }
+              />
             </Pressable>
-            <ActivityIndicator size="small" color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">{t('common.loading')}</Text>
+            <ActivityIndicator
+              size="small"
+              color={
+                isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+              }
+            />
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">
+              {t('common.loading')}
+            </Text>
           </View>
         </View>
       </View>
@@ -245,7 +294,13 @@ export function UserMapHeader({
         <View className="flex-row items-center flex-1 mr-2">
           {/* 戻るボタン */}
           <Pressable onPress={onBack} className="mr-2.5">
-            <Ionicons name="arrow-back" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
+            <Ionicons
+              name="arrow-back"
+              size={23}
+              color={
+                isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+              }
+            />
           </Pressable>
 
           {/* ユーザーアイコン */}
@@ -294,16 +349,29 @@ export function UserMapHeader({
 
         {/* 右側：アクションボタン群 */}
         <View className="flex-row items-center gap-3">
-          {/* 検索ボタン */}
-          <Pressable onPress={onSearchPress} className="items-center justify-center">
-            <Ionicons name="search-outline" size={23} color={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT} />
-          </Pressable>
+          {/* スポット追加ボタン（自分のマップのみ表示） */}
+          {isOwnMap && (
+            <Pressable
+              onPress={onSearchPress}
+              className="items-center justify-center"
+            >
+              <Ionicons
+                name="search-outline"
+                size={25}
+                color={
+                  isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+                }
+              />
+            </Pressable>
+          )}
 
           {/* 三点リーダメニュー */}
           <PopupMenu
             items={menuItems}
             triggerSize={23}
-            triggerColor={isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT}
+            triggerColor={
+              isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+            }
           />
         </View>
       </View>
@@ -325,7 +393,9 @@ export function UserMapHeader({
             }}
           >
             <View className="flex-row items-center justify-between px-6 py-4 border-b border-border-light dark:border-dark-border-light">
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">{t('userMap.selectMap')}</Text>
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+                {t('userMap.selectMap')}
+              </Text>
               <Pressable onPress={() => setIsDropdownOpen(false)}>
                 <Ionicons name="close" size={28} color="#6B7280" />
               </Pressable>
@@ -337,14 +407,19 @@ export function UserMapHeader({
                   key={map.id}
                   onPress={() => handleMapItemPress(map.id)}
                   className={`py-4 active:bg-background-secondary dark:active:bg-dark-background-secondary ${
-                    index < userMaps.length - 1 ? 'border-b border-border-light dark:border-dark-border-light' : ''
+                    index < userMaps.length - 1
+                      ? 'border-b border-border-light dark:border-dark-border-light'
+                      : ''
                   }`}
                 >
                   <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
                     {map.name}
                   </Text>
                   {map.description && (
-                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1" numberOfLines={2}>
+                    <Text
+                      className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
+                      numberOfLines={2}
+                    >
                       {map.description}
                     </Text>
                   )}
