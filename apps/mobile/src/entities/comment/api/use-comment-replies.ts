@@ -44,14 +44,24 @@ export function useAddReplyComment() {
     mutationFn: ({ userId, parentComment, content }) =>
       addReplyComment(userId, parentComment, content),
     onSuccess: (_, { parentComment }) => {
-      // 返信一覧を再取得（プレフィックスで全てのcurrentUserIdパターンをinvalidate）
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsReplies(parentComment.id) });
-      // 親コメントの返信数を更新するためコメント一覧も再取得
+      // フラット表示: ルートコメントのIDを特定
+      const rootId = parentComment.parent_id === null ? parentComment.id : parentComment.root_id;
+
+      // ルートコメントの返信一覧を再取得（プレフィックスマッチ）
+      if (rootId) {
+        queryClient.invalidateQueries({ queryKey: ['comments', 'replies', rootId] });
+      }
+      // 元の親コメントの返信一覧も念のため再取得（従来の動作を維持）
+      if (parentComment.id !== rootId) {
+        queryClient.invalidateQueries({ queryKey: ['comments', 'replies', parentComment.id] });
+      }
+
+      // 親コメントの返信数を更新するためコメント一覧も再取得（プレフィックスマッチ）
       if (parentComment.user_spot_id) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsSpot(parentComment.user_spot_id) });
+        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', parentComment.user_spot_id] });
       }
       if (parentComment.map_id) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(parentComment.map_id) });
+        queryClient.invalidateQueries({ queryKey: ['comments', 'map', parentComment.map_id] });
       }
 
       Toast.show({

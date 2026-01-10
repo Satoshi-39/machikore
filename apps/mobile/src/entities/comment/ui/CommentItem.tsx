@@ -22,7 +22,7 @@ interface CommentItemProps {
   onLike?: (comment: CommentWithUser) => void;
   onReply?: (comment: CommentWithUser) => void;
   onShowReplies?: (comment: CommentWithUser) => void;
-  /** 返信コメントかどうか（インデント表示） */
+  /** 返信コメントかどうか */
   isReply?: boolean;
   /** 返信が展開中かどうか */
   isRepliesExpanded?: boolean;
@@ -61,25 +61,27 @@ export function CommentItem({
   ], [comment, onEdit, onDelete, t]);
 
   return (
-    <View className={`flex-row p-4 border-b border-border-light dark:border-dark-border-light ${isReply ? 'pl-12 bg-surface-secondary dark:bg-dark-surface-secondary' : ''}`}>
+    <View className="flex-row p-4">
       {/* アバター */}
       <Pressable onPress={() => onUserPress(comment.user_id)}>
         <UserAvatar
           url={comment.user?.avatar_url}
           alt={comment.user?.display_name || comment.user?.username || 'User'}
-          className={isReply ? 'w-8 h-8' : 'w-10 h-10'}
-          iconSize={isReply ? 16 : 20}
+          className="w-10 h-10"
+          iconSize={20}
         />
       </Pressable>
 
       {/* コメント内容 */}
       <View className="flex-1 ml-3">
         <View className="flex-row items-center justify-between">
-          <Pressable onPress={() => onUserPress(comment.user_id)}>
-            <Text className={`font-semibold text-foreground dark:text-dark-foreground ${isReply ? 'text-sm' : ''}`}>
-              {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
-            </Text>
-          </Pressable>
+          <View className="flex-row items-center flex-1 flex-wrap">
+            <Pressable onPress={() => onUserPress(comment.user_id)}>
+              <Text className="font-semibold text-foreground dark:text-dark-foreground">
+                {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
+              </Text>
+            </Pressable>
+          </View>
           <View className="flex-row items-center">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{formatRelativeTime(comment.created_at, locale)}</Text>
             {isOwner && (
@@ -91,7 +93,7 @@ export function CommentItem({
             )}
           </View>
         </View>
-        <Text className={`text-foreground-secondary dark:text-dark-foreground-secondary mt-1 ${isReply ? 'text-sm' : ''}`}>{comment.content}</Text>
+        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-1">{comment.content}</Text>
 
         {/* アクションボタン */}
         <View className="flex-row items-center mt-2 gap-4">
@@ -115,8 +117,8 @@ export function CommentItem({
             </Pressable>
           )}
 
-          {/* 返信ボタン（トップレベルコメントのみ） */}
-          {onReply && !isReply && (
+          {/* 返信ボタン（すべてのコメントで表示） */}
+          {onReply && (
             <Pressable
               onPress={() => onReply(comment)}
               className="flex-row items-center"

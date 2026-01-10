@@ -47,8 +47,8 @@ export function useAddSpotComment() {
     mutationFn: ({ userId, spotId, content }) =>
       addSpotComment(userId, spotId, content),
     onSuccess: (_newComment, { spotId }) => {
-      // コメント一覧を再取得
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsSpot(spotId) });
+      // コメント一覧を再取得（プレフィックスマッチで全関連キャッシュを無効化）
+      queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
       // スポットのコメント数を更新（一覧と個別詳細の両方）
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spots });
       // スポット詳細キャッシュも無効化
@@ -89,16 +89,16 @@ export function useUpdateComment() {
     mutationFn: ({ commentId, content }) =>
       updateComment(commentId, content),
     onSuccess: (_, { spotId, mapId, parentId }) => {
-      // コメント一覧を再取得
+      // コメント一覧を再取得（プレフィックスマッチ）
       if (spotId) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsSpot(spotId) });
+        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
       }
       if (mapId) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(mapId) });
+        queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
       }
       // 返信コメントの場合は親コメントの返信一覧も再取得
       if (parentId) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsReplies(parentId) });
+        queryClient.invalidateQueries({ queryKey: ['comments', 'replies', parentId] });
       }
 
       Toast.show({
@@ -134,9 +134,9 @@ export function useDeleteComment() {
   return useMutation<void, Error, DeleteCommentParams>({
     mutationFn: ({ commentId }) => deleteComment(commentId),
     onSuccess: (_, { spotId, mapId, parentId }) => {
-      // コメント一覧を再取得
+      // コメント一覧を再取得（プレフィックスマッチ）
       if (spotId) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsSpot(spotId) });
+        queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
         // トップレベルコメントの場合のみスポット一覧を更新（カウント更新のため）
         if (!parentId) {
           queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spots });
@@ -145,10 +145,9 @@ export function useDeleteComment() {
         }
       }
       if (mapId) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(mapId) });
-        // トップレベルコメントの場合のみマップ一覧とカウントを更新
+        queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
+        // トップレベルコメントの場合のみマップ一覧を更新
         if (!parentId) {
-          queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMapCount(mapId) });
           queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
           // マップ詳細キャッシュも無効化
           queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId) });
@@ -156,7 +155,7 @@ export function useDeleteComment() {
       }
       // 返信削除の場合は親コメントの返信一覧を再取得
       if (parentId) {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsReplies(parentId) });
+        queryClient.invalidateQueries({ queryKey: ['comments', 'replies', parentId] });
       }
 
       Toast.show({

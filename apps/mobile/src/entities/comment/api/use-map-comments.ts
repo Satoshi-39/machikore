@@ -57,10 +57,8 @@ export function useAddMapComment() {
     mutationFn: ({ userId, mapId, content }) =>
       addMapComment(userId, mapId, content),
     onSuccess: (_newComment, { mapId }) => {
-      // コメント一覧を再取得
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMap(mapId) });
-      // コメント総数を再取得
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.commentsMapCount(mapId) });
+      // コメント一覧を再取得（プレフィックスマッチで全関連キャッシュを無効化）
+      queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
       // マップのコメント数を更新（一覧と個別詳細の両方）
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId) });
