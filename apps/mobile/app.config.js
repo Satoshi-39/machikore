@@ -51,6 +51,13 @@ module.exports = {
           project: 'react-native',
         },
       ],
+      [
+        'react-native-google-mobile-ads',
+        {
+          androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID || 'ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy',
+          iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID || 'ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy',
+        },
+      ],
       'expo-router',
       [
         'expo-splash-screen',
@@ -73,7 +80,6 @@ module.exports = {
       ],
       '@rnmapbox/maps',
       'expo-localization',
-      'react-native-legal',
     ],
     experiments: {
       typedRoutes: true,
@@ -97,6 +103,12 @@ module.exports = {
       EXPO_PUBLIC_POSTHOG_API_KEY: process.env.EXPO_PUBLIC_POSTHOG_API_KEY,
       EXPO_PUBLIC_POSTHOG_HOST: process.env.EXPO_PUBLIC_POSTHOG_HOST,
       EXPO_PUBLIC_SENTRY_DSN: process.env.EXPO_PUBLIC_SENTRY_DSN,
+      EXPO_PUBLIC_ADMOB_IOS_APP_ID: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID,
+      EXPO_PUBLIC_ADMOB_ANDROID_APP_ID: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID,
+      EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS: process.env.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS,
+      EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID: process.env.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID,
+      EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS,
+      EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID,
     },
   },
 };

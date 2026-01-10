@@ -13,3 +13,4 @@ export * from './onboarding';
 export * from './attributions';
 export * from './system-permissions';
 export * from './app-review';
+export * from './admob';

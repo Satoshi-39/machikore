@@ -1,0 +1,92 @@
+import mobileAds, { MaxAdContentRating } from 'react-native-google-mobile-ads';
+import { Platform } from 'react-native';
+import Constants from 'expo-constants';
+
+export type AdUnitType = 'banner' | 'interstitial' | 'native';
+
+const TEST_AD_UNITS = {
+  banner: {
+    ios: 'ca-app-pub-3940256099942544/2934735716',
+    android: 'ca-app-pub-3940256099942544/6300978111',
+  },
+  interstitial: {
+    ios: 'ca-app-pub-3940256099942544/4411468910',
+    android: 'ca-app-pub-3940256099942544/1033173712',
+  },
+  native: {
+    ios: 'ca-app-pub-3940256099942544/3986624511',
+    android: 'ca-app-pub-3940256099942544/2247696110',
+  },
+};
+
+/**
+ * AdMobを初期化
+ * アプリ起動時に一度だけ呼び出す
+ */
+export async function initializeAdMob(): Promise<void> {
+  try {
+    await mobileAds().initialize();
+
+    // 広告のコンテンツレーティングを設定
+    await mobileAds().setRequestConfiguration({
+      maxAdContentRating: MaxAdContentRating.G,
+      tagForChildDirectedTreatment: false,
+      tagForUnderAgeOfConsent: false,
+    });
+
+    console.log('[AdMob] Initialized successfully');
+  } catch (error) {
+    console.error('[AdMob] Initialization failed:', error);
+  }
+}
+
+/**
+ * 広告ユニットIDを取得
+ * 開発環境ではテスト広告IDを返す
+ */
+export function getAdUnitId(type: AdUnitType): string {
+  const extra = Constants.expoConfig?.extra;
+  const isDev = extra?.EXPO_PUBLIC_ENV === 'development' || __DEV__;
+
+  // 開発環境ではテスト広告を使用
+  if (isDev) {
+    return Platform.select({
+      ios: TEST_AD_UNITS[type].ios,
+      android: TEST_AD_UNITS[type].android,
+      default: TEST_AD_UNITS[type].android,
+    });
+  }
+
+  // 本番環境では環境変数から取得（iOS/Android別）
+  if (type === 'banner') {
+    const unitId = Platform.select({
+      ios: extra?.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS,
+      android: extra?.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID,
+    });
+    if (unitId) return unitId;
+  }
+
+  if (type === 'interstitial') {
+    const unitId = Platform.select({
+      ios: extra?.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS,
+      android: extra?.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID,
+    });
+    if (unitId) return unitId;
+  }
+
+  if (type === 'native') {
+    const unitId = Platform.select({
+      ios: extra?.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS,
+      android: extra?.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID,
+    });
+    if (unitId) return unitId;
+  }
+
+  // フォールバックとしてテスト広告を返す
+  console.warn(`[AdMob] No production ad unit ID found for ${type}, using test ad`);
+  return Platform.select({
+    ios: TEST_AD_UNITS[type].ios,
+    android: TEST_AD_UNITS[type].android,
+    default: TEST_AD_UNITS[type].android,
+  });
+}

@@ -137,3 +137,7 @@ export { DropdownField, type DropdownOption } from './DropdownField';
 
 // 利用規約・プライバシーポリシー用マークダウンレンダラー
 export { TermsMarkdownRenderer } from './TermsMarkdownRenderer';
+
+// 広告
+export { AdBanner } from './AdBanner';
+export { NativeAdCard } from './NativeAdCard';

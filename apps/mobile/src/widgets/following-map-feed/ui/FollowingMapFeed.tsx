@@ -4,6 +4,7 @@
  * FSDの原則：Widget層 - 複数のFeature/Entityを組み合わせた複合コンポーネント
  * - フォロー中ユーザーのマップフィード表示
  * - 無限スクロール対応
+ * - 広告表示（5件ごと）
  * - 未ログイン時はログイン促進メッセージを表示
  */
 
@@ -14,7 +15,7 @@ import { getFollowingUsersMaps } from '@/shared/api/supabase';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import type { MapWithUser } from '@/shared/types';
-import { AsyncBoundary } from '@/shared/ui';
+import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import React, { useCallback, useMemo } from 'react';
@@ -27,6 +28,13 @@ import {
 } from 'react-native';
 
 const PAGE_SIZE = 10;
+
+/** 広告を挿入する間隔（マップ5件ごとに1広告） */
+const AD_INTERVAL = 5;
+
+type FeedItem =
+  | { type: 'map'; data: MapWithUser }
+  | { type: 'ad'; id: string };
 
 export function FollowingMapFeed() {
   const router = useRouter();
@@ -61,9 +69,21 @@ export function FollowingMapFeed() {
     enabled: !!userId, // ログイン時のみ有効
   });
 
-  // ページデータをフラット化
-  const maps = useMemo(() => {
-    return data?.pages.flatMap((page) => page) ?? [];
+  // ページデータをフラット化し、広告を挿入
+  const feedItems = useMemo((): FeedItem[] => {
+    const maps = data?.pages.flatMap((page) => page) ?? [];
+    const items: FeedItem[] = [];
+
+    maps.forEach((map, index) => {
+      items.push({ type: 'map', data: map });
+
+      // AD_INTERVAL件ごとに広告を挿入（最後のアイテムの後には挿入しない）
+      if ((index + 1) % AD_INTERVAL === 0 && index < maps.length - 1) {
+        items.push({ type: 'ad', id: `ad-${index}` });
+      }
+    });
+
+    return items;
   }, [data]);
 
   const handleMapPress = useCallback(
@@ -127,29 +147,45 @@ export function FollowingMapFeed() {
     );
   }
 
+  // フィードアイテムのレンダリング
+  const renderItem = useCallback(
+    ({ item }: { item: FeedItem }) => {
+      if (item.type === 'ad') {
+        return <NativeAdCard />;
+      }
+
+      return (
+        <MapCard
+          map={item.data}
+          currentUserId={currentUser?.id}
+          onPress={() => handleMapPress(item.data.id)}
+          onUserPress={handleUserPress}
+          onEdit={handleEditMap}
+          onCommentPress={handleCommentPress}
+          onArticlePress={handleArticlePress}
+        />
+      );
+    },
+    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleCommentPress, handleArticlePress]
+  );
+
+  const getItemKey = useCallback((item: FeedItem) => {
+    return item.type === 'ad' ? item.id : item.data.id;
+  }, []);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
       error={error}
-      data={maps.length > 0 ? maps : null}
+      data={feedItems.length > 0 ? feedItems : null}
       emptyMessage={t('empty.noFollowingMaps')}
       emptyIonIcon="people-outline"
     >
-      {(data) => (
+      {(items) => (
         <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <MapCard
-              map={item}
-              currentUserId={currentUser?.id}
-              onPress={() => handleMapPress(item.id)}
-              onUserPress={handleUserPress}
-              onEdit={handleEditMap}
-              onCommentPress={handleCommentPress}
-              onArticlePress={handleArticlePress}
-            />
-          )}
+          data={items}
+          keyExtractor={getItemKey}
+          renderItem={renderItem}
           refreshControl={
             <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
           }

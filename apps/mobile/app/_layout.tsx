@@ -9,7 +9,7 @@ import 'react-native-reanimated';
 import '../global.css';
 
 import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
-import { initDatabase, initMapbox, initRevenueCat, initSentry, wrapWithSentry } from '@/shared/lib/init';
+import { initDatabase, initMapbox, initRevenueCat, initSentry, initAdMob, wrapWithSentry } from '@/shared/lib/init';
 import { AppToast } from '@/shared/ui';
 import { log } from '@/shared/config/logger';
 import { PushNotificationPrompt } from '@/features/system-permissions';
@@ -262,6 +262,8 @@ function RootLayout() {
       .then(() => {
         // RevenueCat初期化（非同期、失敗してもアプリは動作継続）
         initRevenueCat();
+        // AdMob初期化（非同期、失敗してもアプリは動作継続）
+        initAdMob();
         setIsReady(true);
       })
       .catch((err) => {
