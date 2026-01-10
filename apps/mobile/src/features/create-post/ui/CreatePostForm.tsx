@@ -5,9 +5,10 @@
  */
 
 import React, { useState } from 'react';
-import { View, TextInput, Text, Pressable } from 'react-native';
+import { View, TextInput, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface CreatePostFormProps {
   onSubmit: (content: string, machiId?: string) => void;
@@ -40,19 +41,17 @@ export function CreatePostForm({
           <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
         </Pressable>
         <Text className="text-lg font-semibold">新規投稿</Text>
-        <Pressable
+        <Button
           onPress={handleSubmit}
           disabled={!isValid || isSubmitting}
-          className={`px-4 py-2 rounded-full ${
-            isValid && !isSubmitting ? 'bg-blue-500' : 'bg-gray-300'
-          }`}
+          size="sm"
         >
-          <Text className={`text-sm font-semibold ${
-            isValid && !isSubmitting ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
-          }`}>
-            {isSubmitting ? '投稿中...' : '投稿'}
-          </Text>
-        </Pressable>
+          {isSubmitting ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <ButtonText className={buttonTextVariants({ size: 'sm' })}>投稿</ButtonText>
+          )}
+        </Button>
       </View>
 
       {/* 本文入力 */}

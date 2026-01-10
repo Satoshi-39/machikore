@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface EditCommentModalProps {
   visible: boolean;
@@ -63,24 +64,24 @@ export function EditCommentModal({
             autoFocus
           />
           <View className="flex-row justify-end mt-4 gap-3">
-            <Pressable
+            <Button
               onPress={onCancel}
-              className="px-4 py-2 rounded-lg"
+              variant="ghost"
+              size="sm"
             >
-              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary font-semibold">{t('common.cancel')}</Text>
-            </Pressable>
-            <Pressable
+              <ButtonText className={buttonTextVariants({ variant: 'ghost', size: 'sm' })}>{t('common.cancel')}</ButtonText>
+            </Button>
+            <Button
               onPress={onSubmit}
               disabled={!editText.trim() || isUpdating}
-              className="bg-primary px-4 py-2 rounded-lg"
-              style={{ backgroundColor: colors.primary.DEFAULT }}
+              size="sm"
             >
               {isUpdating ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
-                <Text className="text-white font-semibold">{t('common.save')}</Text>
+                <ButtonText className={buttonTextVariants({ size: 'sm' })}>{t('common.save')}</ButtonText>
               )}
-            </Pressable>
+            </Button>
           </View>
         </Pressable>
       </Pressable>

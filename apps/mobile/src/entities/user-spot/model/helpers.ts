@@ -42,6 +42,7 @@ export function createSpotData(params: CreateSpotParams): {
       user_id: params.userId,
       machi_id: params.machiId,
       master_spot_id: masterSpotId, // 後で insertOrGetMasterSpot で置き換えられる
+      name: null,
       description: params.description,
       article_content: null,
       // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない

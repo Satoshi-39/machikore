@@ -2038,6 +2038,7 @@ export type Database = {
           machi_id: string | null
           map_id: string
           master_spot_id: string | null
+          name: Json | null
           order_index: number
           spot_color: string | null
           updated_at: string
@@ -2061,6 +2062,7 @@ export type Database = {
           machi_id?: string | null
           map_id: string
           master_spot_id?: string | null
+          name?: Json | null
           order_index?: number
           spot_color?: string | null
           updated_at?: string
@@ -2084,6 +2086,7 @@ export type Database = {
           machi_id?: string | null
           map_id?: string
           master_spot_id?: string | null
+          name?: Json | null
           order_index?: number
           spot_color?: string | null
           updated_at?: string
@@ -2790,6 +2793,43 @@ export type Database = {
       postgis_version: { Args: never; Returns: string }
       postgis_wagyu_version: { Args: never; Returns: string }
       record_map_view: { Args: { p_map_id: string }; Returns: undefined }
+      search_public_spots: {
+        Args: { result_limit?: number; search_query: string }
+        Returns: {
+          comments_count: number
+          created_at: string
+          description: string
+          google_formatted_address: Json
+          google_short_address: Json
+          id: string
+          images_count: number
+          label_color: string
+          label_id: string
+          label_name: string
+          latitude: number
+          likes_count: number
+          longitude: number
+          machi_id: string
+          map_id: string
+          map_name: string
+          master_spot_google_formatted_address: Json
+          master_spot_google_place_id: string
+          master_spot_google_short_address: Json
+          master_spot_google_types: string[]
+          master_spot_id: string
+          master_spot_latitude: number
+          master_spot_longitude: number
+          master_spot_name: Json
+          name: Json
+          order_index: number
+          spot_color: string
+          updated_at: string
+          user_avatar_url: string
+          user_display_name: string
+          user_id: string
+          user_username: string
+        }[]
+      }
       st_3dclosestpoint: {
         Args: { geom1: unknown; geom2: unknown }
         Returns: unknown

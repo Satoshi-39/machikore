@@ -12,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { colors } from '@/shared/config';
-import { Button } from '@/shared/ui';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface CompletionStepProps {
   onComplete: () => void;
@@ -53,10 +53,11 @@ export function CompletionStep({ onComplete }: CompletionStepProps) {
         className="px-4 pb-4 bg-surface dark:bg-dark-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
-        <Button
-          title={t('onboarding.completion.start')}
-          onPress={onComplete}
-        />
+        <Button onPress={onComplete}>
+          <ButtonText className={buttonTextVariants()}>
+            {t('onboarding.completion.start')}
+          </ButtonText>
+        </Button>
       </View>
     </View>
   );

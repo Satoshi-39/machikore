@@ -3,10 +3,11 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { View, Text, Pressable, TextInput, Modal } from 'react-native';
+import { View, Text, Pressable, TextInput, Modal, ActivityIndicator } from 'react-native';
 import { useCreateBookmarkFolder } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
 import { useI18n } from '@/shared/lib/i18n';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface CreateFolderModalProps {
   visible: boolean;
@@ -65,18 +66,20 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
             autoFocus
           />
           <View className="flex-row justify-end gap-3">
-            <Pressable onPress={handleClose} className="px-4 py-2">
-              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.cancel')}</Text>
-            </Pressable>
-            <Pressable
+            <Button onPress={handleClose} variant="ghost" size="sm">
+              <ButtonText className={buttonTextVariants({ variant: 'ghost', size: 'sm' })}>{t('common.cancel')}</ButtonText>
+            </Button>
+            <Button
               onPress={handleCreate}
               disabled={!folderName.trim() || isPending}
-              className={`px-4 py-2 rounded-lg ${
-                folderName.trim() && !isPending ? 'bg-blue-500' : 'bg-gray-300'
-              }`}
+              size="sm"
             >
-              <Text className="text-white font-medium">{t('bookmark.create')}</Text>
-            </Pressable>
+              {isPending ? (
+                <ActivityIndicator size="small" color="white" />
+              ) : (
+                <ButtonText className={buttonTextVariants({ size: 'sm' })}>{t('bookmark.create')}</ButtonText>
+              )}
+            </Button>
           </View>
         </Pressable>
       </Pressable>

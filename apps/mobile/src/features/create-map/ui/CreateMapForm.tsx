@@ -8,7 +8,7 @@
 
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { INPUT_LIMITS } from '@/shared/config';
-import { StyledTextInput, TagInput, PublicToggle } from '@/shared/ui';
+import { StyledTextInput, TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
@@ -17,6 +17,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useCategories } from '@/entities/category';
@@ -224,18 +225,17 @@ export function CreateMapForm({
         </View>
 
         {/* 作成ボタン */}
-        <TouchableOpacity
-          onPress={handleSubmit}
-          disabled={isButtonDisabled}
-          className={`py-4 rounded-lg items-center mb-4 ${
-            isButtonDisabled ? 'bg-blue-300' : 'bg-blue-500'
-          }`}
-          activeOpacity={0.8}
-        >
-          <Text className="text-white text-base font-semibold">
-            {isLoading ? t('map.creating') : t('map.createMap')}
-          </Text>
-        </TouchableOpacity>
+        <View className="mb-4">
+          <Button onPress={handleSubmit} disabled={isButtonDisabled}>
+            {isLoading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <ButtonText className={buttonTextVariants()}>
+                {t('map.createMap')}
+              </ButtonText>
+            )}
+          </Button>
+        </View>
       </View>
       {/* 下部余白 */}
       <View className="h-16" />

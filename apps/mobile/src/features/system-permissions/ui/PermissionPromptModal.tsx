@@ -6,10 +6,11 @@
  */
 
 import React from 'react';
-import { View, Text, Pressable, Modal } from 'react-native';
+import { View, Text, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface PermissionPromptModalProps {
   /** モーダルを表示するか */
@@ -78,25 +79,18 @@ export function PermissionPromptModal({
           {/* ボタン */}
           <View className="gap-3">
             {/* 許可するボタン */}
-            <Pressable
-              onPress={onAccept}
-              className="py-3 rounded-xl items-center"
-              style={{ backgroundColor: colors.primary.DEFAULT }}
-            >
-              <Text className="text-base font-semibold text-white">
+            <Button onPress={onAccept}>
+              <ButtonText className={buttonTextVariants()}>
                 {t(acceptButtonKey)}
-              </Text>
-            </Pressable>
+              </ButtonText>
+            </Button>
 
             {/* あとでボタン */}
-            <Pressable
-              onPress={onLater}
-              className="py-3 rounded-xl items-center bg-gray-100 dark:bg-gray-800"
-            >
-              <Text className="text-base font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+            <Button onPress={onLater} variant="secondary">
+              <ButtonText className={buttonTextVariants({ variant: 'secondary' })}>
                 {t(laterButtonKey)}
-              </Text>
-            </Pressable>
+              </ButtonText>
+            </Button>
           </View>
         </View>
       </View>

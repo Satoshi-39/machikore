@@ -6,11 +6,11 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
+import { View, Text, ScrollView, Alert, TextInput, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-import { PageHeader, Button } from '@/shared/ui';
+import { PageHeader, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { createDeletionRequest } from '@/shared/api/supabase';
 import { useSignOut } from '@/features/auth';
@@ -107,12 +107,15 @@ export function DeleteAccountPage() {
           />
         </View>
 
-        <Button
-          title={t('settings.deleteAccountPage.confirm')}
-          onPress={handleRequestDeletion}
-          loading={isSubmitting}
-          variant="destructive"
-        />
+        <Button onPress={handleRequestDeletion} disabled={isSubmitting} variant="destructive">
+          {isSubmitting ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <ButtonText className={buttonTextVariants({ variant: 'destructive' })}>
+              {t('settings.deleteAccountPage.confirm')}
+            </ButtonText>
+          )}
+        </Button>
 
         <View className="h-8" />
       </ScrollView>

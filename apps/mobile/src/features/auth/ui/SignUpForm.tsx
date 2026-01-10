@@ -20,6 +20,7 @@ import { sendOtpCode } from '@/shared/api/supabase/auth';
 import { checkEmailExists, checkEmailHasPendingDeletion } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 export function SignUpForm() {
   const { t } = useI18n();
@@ -124,21 +125,15 @@ export function SignUpForm() {
             />
           </View>
 
-          <TouchableOpacity
-            className={`w-full py-4 rounded-lg ${
-              isEmailValid && !isLoading ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
-            }`}
-            onPress={handleSendCode}
-            disabled={!isEmailValid || isLoading}
-          >
+          <Button onPress={handleSendCode} disabled={!isEmailValid || isLoading}>
             {isLoading ? (
               <ActivityIndicator color="white" />
             ) : (
-              <Text className="text-white text-center text-base font-semibold">
+              <ButtonText className={buttonTextVariants()}>
                 {t('auth.sendSignUpCode')}
-              </Text>
+              </ButtonText>
             )}
-          </TouchableOpacity>
+          </Button>
         </View>
       )}
     </View>

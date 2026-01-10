@@ -10,7 +10,7 @@ import { colors } from '@/shared/config';
 import { useEditorStyles } from '@/shared/lib/editor';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { ProseMirrorDoc } from '@/shared/types';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import {
   darkEditorTheme,
   RichText,
@@ -27,7 +27,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   Text,
   View,
 } from 'react-native';
@@ -207,17 +206,13 @@ export function ArticleEditor({
 
   // 保存ボタン
   const saveButton = (
-    <Pressable
-      onPress={handleSave}
-      disabled={isSaving}
-      className="bg-primary px-4 py-2 rounded-lg"
-    >
+    <Button onPress={handleSave} disabled={isSaving} size="sm">
       {isSaving ? (
         <ActivityIndicator size="small" color="white" />
       ) : (
-        <Text className="text-white font-semibold">{saveButtonText}</Text>
+        <ButtonText className={buttonTextVariants({ size: 'sm' })}>{saveButtonText}</ButtonText>
       )}
-    </Pressable>
+    </Button>
   );
 
   return (

@@ -2,6 +2,7 @@
  * Utility functions
  */
 
+export * from './cn.utils';
 export * from './date.utils';
 export * from './images.utils';
 export * from './regions.utils';

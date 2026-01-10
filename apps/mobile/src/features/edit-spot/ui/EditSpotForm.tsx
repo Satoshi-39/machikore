@@ -17,7 +17,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
-import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker } from '@/shared/ui';
+import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
 import { useEditSpotFormChanges } from '../model';
@@ -397,18 +397,17 @@ export function EditSpotForm({
         </View>
 
         {/* 更新ボタン */}
-        <TouchableOpacity
-          onPress={handleSubmit}
-          disabled={isButtonDisabled}
-          className={`py-4 rounded-lg items-center mb-4 ${
-            isButtonDisabled ? 'bg-blue-300' : 'bg-blue-500'
-          }`}
-          activeOpacity={0.8}
-        >
-          <Text className="text-white text-base font-semibold">
-            {isLoading ? t('spot.updating') : t('spot.saveChanges')}
-          </Text>
-        </TouchableOpacity>
+        <View className="mb-4">
+          <Button onPress={handleSubmit} disabled={isButtonDisabled}>
+            {isLoading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <ButtonText className={buttonTextVariants()}>
+                {t('spot.saveChanges')}
+              </ButtonText>
+            )}
+          </Button>
+        </View>
       </View>
       {/* 下部余白 */}
       <View className="h-16" />

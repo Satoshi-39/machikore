@@ -9,7 +9,7 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, ScrollView, Pressable } from 'react-native';
+import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Localization from 'expo-localization';
 
@@ -33,6 +33,8 @@ import {
   OnboardingProgress,
   DropdownField,
   Button,
+  Text as ButtonText,
+  buttonTextVariants,
   type DropdownOption,
 } from '@/shared/ui';
 
@@ -216,11 +218,15 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
         className="px-4 pb-4 bg-surface dark:bg-dark-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
-        <Button
-          title={t('common.next')}
-          onPress={handleSave}
-          loading={isSubmitting}
-        />
+        <Button onPress={handleSave} disabled={isSubmitting}>
+          {isSubmitting ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <ButtonText className={buttonTextVariants()}>
+              {t('common.next')}
+            </ButtonText>
+          )}
+        </Button>
       </View>
     </View>
   );

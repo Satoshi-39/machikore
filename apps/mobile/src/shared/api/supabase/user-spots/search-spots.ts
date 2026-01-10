@@ -39,7 +39,6 @@ export async function searchPublicUserSpots(
     master_spot_id: row.master_spot_id,
     machi_id: row.machi_id,
     description: row.description,
-    tags: row.tags,
     spot_color: row.spot_color || null,
     label_id: row.label_id || null,
     map_label: row.label_name ? {

@@ -14,7 +14,7 @@ import { colors, INPUT_LIMITS } from '@/shared/config';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { formatLocalizedDate } from '@/shared/lib/utils';
 import type { MapWithUser } from '@/shared/types';
-import { TagInput, PublicToggle } from '@/shared/ui';
+import { TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
 import {
@@ -354,18 +354,17 @@ export function EditMapForm({
         </View>
 
         {/* 更新ボタン */}
-        <TouchableOpacity
-          onPress={handleSubmit}
-          disabled={isButtonDisabled}
-          className={`py-4 rounded-lg items-center mb-4 ${
-            isButtonDisabled ? 'bg-blue-300' : 'bg-blue-500'
-          }`}
-          activeOpacity={0.8}
-        >
-          <Text className="text-white text-base font-semibold">
-            {isLoading ? t('editMap.updating') : t('editMap.saveChanges')}
-          </Text>
-        </TouchableOpacity>
+        <View className="mb-4">
+          <Button onPress={handleSubmit} disabled={isButtonDisabled}>
+            {isLoading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <ButtonText className={buttonTextVariants()}>
+                {t('editMap.saveChanges')}
+              </ButtonText>
+            )}
+          </Button>
+        </View>
       </View>
       {/* 下部余白 */}
       <View className="h-16" />

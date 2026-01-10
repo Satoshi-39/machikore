@@ -23,6 +23,7 @@ import {
   DEFAULT_SPOT_COLOR,
   type SpotColor,
 } from '@/shared/config';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 /** ラベルデータの型（ローカル管理用） */
 export interface LocalMapLabel {
@@ -259,15 +260,13 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               className="flex-1 bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground mr-2"
               placeholderTextColor="#9CA3AF"
             />
-            <TouchableOpacity
+            <Button
               onPress={handleAddLabel}
               disabled={!newLabelName.trim()}
-              className={`px-4 py-2 rounded-lg ${
-                !newLabelName.trim() ? 'bg-blue-300' : 'bg-blue-500'
-              }`}
+              size="sm"
             >
-              <Text className="text-white font-medium">追加</Text>
-            </TouchableOpacity>
+              <ButtonText className={buttonTextVariants({ size: 'sm' })}>追加</ButtonText>
+            </Button>
           </View>
 
           <ColorPicker selectedColor={selectedLabelColor} onColorChange={setSelectedLabelColor} />
@@ -320,21 +319,20 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               <ColorPicker selectedColor={editLabelColor} onColorChange={setEditLabelColor} />
 
               <View className="flex-row mt-6 gap-3">
-                <TouchableOpacity
+                <Button
                   onPress={() => editingLabel && handleDeleteLabel(editingLabel.id)}
-                  className="flex-1 py-3 rounded-lg border border-red-500 items-center"
+                  variant="outline"
+                  className="flex-1 border-red-500"
                 >
-                  <Text className="text-red-500 font-medium">削除</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                  <ButtonText className={buttonTextVariants({ variant: 'outline' })} style={{ color: '#EF4444' }}>削除</ButtonText>
+                </Button>
+                <Button
                   onPress={handleSaveEdit}
                   disabled={!editLabelName.trim()}
-                  className={`flex-1 py-3 rounded-lg items-center ${
-                    !editLabelName.trim() ? 'bg-blue-300' : 'bg-blue-500'
-                  }`}
+                  className="flex-1"
                 >
-                  <Text className="text-white font-medium">保存</Text>
-                </TouchableOpacity>
+                  <ButtonText className={buttonTextVariants()}>保存</ButtonText>
+                </Button>
               </View>
             </View>
           </TouchableOpacity>

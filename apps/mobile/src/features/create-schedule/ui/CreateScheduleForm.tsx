@@ -5,10 +5,11 @@
  */
 
 import React, { useState } from 'react';
-import { View, TextInput, Text, Pressable } from 'react-native';
+import { View, TextInput, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { formatLocalDateKey } from '@/shared/lib';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface CreateScheduleFormProps {
   onSubmit: (title: string, scheduledAt: string, memo?: string, machiId?: string) => void;
@@ -46,19 +47,17 @@ export function CreateScheduleForm({
           <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
         </Pressable>
         <Text className="text-lg font-semibold">新規予定</Text>
-        <Pressable
+        <Button
           onPress={handleSubmit}
           disabled={!isValid || isSubmitting}
-          className={`px-4 py-2 rounded-full ${
-            isValid && !isSubmitting ? 'bg-blue-500' : 'bg-gray-300'
-          }`}
+          size="sm"
         >
-          <Text className={`text-sm font-semibold ${
-            isValid && !isSubmitting ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
-          }`}>
-            {isSubmitting ? '作成中...' : '作成'}
-          </Text>
-        </Pressable>
+          {isSubmitting ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <ButtonText className={buttonTextVariants({ size: 'sm' })}>作成</ButtonText>
+          )}
+        </Button>
       </View>
 
       {/* フォーム */}

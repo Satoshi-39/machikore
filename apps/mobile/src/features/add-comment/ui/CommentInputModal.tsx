@@ -24,6 +24,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
+import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { useAddSpotComment, useAddMapComment, useAddReplyComment } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -182,32 +183,19 @@ export function CommentInputModal({
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
               {isReplyMode ? t('comment.reply') : t('comment.comment')}
             </Text>
-            <Pressable
+            <Button
               onPress={handleSubmit}
               disabled={!canSubmit}
-              style={{
-                backgroundColor: canSubmit ? colors.primary.DEFAULT : colors.gray[200],
-                paddingHorizontal: 16,
-                paddingVertical: 6,
-                borderRadius: 9999,
-                minWidth: 60,
-                alignItems: 'center',
-              }}
+              size="sm"
             >
               {isSubmitting ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: '600',
-                    color: canSubmit ? 'white' : colors.gray[400],
-                  }}
-                >
+                <ButtonText className={buttonTextVariants({ size: 'sm' })}>
                   {t('common.post')}
-                </Text>
+                </ButtonText>
               )}
-            </Pressable>
+            </Button>
           </View>
 
           {/* 返信先表示 */}

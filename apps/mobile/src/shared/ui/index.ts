@@ -51,10 +51,17 @@ export { OnboardingProgress, type OnboardingStep } from './OnboardingProgress';
 // ボタン
 export {
   Button,
+  buttonVariants,
+  buttonTextVariants,
   LocationButton,
   FitAllButton,
   SelectedLocationButton,
 } from './buttons';
+export type { ButtonProps, ButtonVariant, ButtonSize } from './buttons';
+
+// テキスト
+export { Text } from './text';
+export type { TextProps } from './text';
 
 // シート
 export {

@@ -208,6 +208,7 @@ function createMockSpot(id: string, createdAt: string): SpotRow {
     user_id: 'user-123',
     machi_id: 'sta_tokyo',
     master_spot_id: 'master-123',
+    name: null,
     description: 'テストスポット',
     article_content: null,
     images_count: 0,

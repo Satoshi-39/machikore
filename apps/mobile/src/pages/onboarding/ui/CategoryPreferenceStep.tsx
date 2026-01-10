@@ -20,7 +20,7 @@ import { getCategories, getCategoryName, type Category } from '@/shared/api/supa
 import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
-import { OnboardingProgress, Button } from '@/shared/ui';
+import { OnboardingProgress, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface CategoryPreferenceStepProps {
   onComplete: () => void;
@@ -204,11 +204,15 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
         className="px-4 pb-4 bg-surface dark:bg-dark-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
-        <Button
-          title={t('common.next')}
-          onPress={handleSave}
-          loading={isSubmitting}
-        />
+        <Button onPress={handleSave} disabled={isSubmitting}>
+          {isSubmitting ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <ButtonText className={buttonTextVariants()}>
+              {t('common.next')}
+            </ButtonText>
+          )}
+        </Button>
       </View>
     </View>
   );
