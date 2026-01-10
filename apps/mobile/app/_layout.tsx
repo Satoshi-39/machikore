@@ -4,6 +4,7 @@ import { DefaultTheme, DarkTheme, ThemeProvider } from '@react-navigation/native
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { PortalHost } from '@rn-primitives/portal';
 import 'react-native-reanimated';
 import '../global.css';
 
@@ -242,6 +243,7 @@ function RootNavigator() {
         <StatusBar style={isDarkMode ? 'light' : 'dark'} />
         <AppToast />
         <PushNotificationPrompt />
+        <PortalHost />
       </BottomSheetModalProvider>
       </ThemeProvider>
     );
