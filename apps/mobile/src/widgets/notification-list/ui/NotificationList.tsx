@@ -10,13 +10,13 @@ import {
   Text,
   FlatList,
   Pressable,
-  Image,
   ActivityIndicator,
   RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
+import { UserAvatar } from '@/shared/ui';
 import { useI18n, type SupportedLocale } from '@/shared/lib/i18n';
 import { formatRelativeTime } from '@/shared/lib/utils';
 import { useUserStore } from '@/entities/user';
@@ -92,9 +92,11 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
       <Pressable onPress={onAvatarPress} className="mr-3">
         {notification.actor?.avatar_url ? (
           <View className="relative">
-            <Image
-              source={{ uri: notification.actor.avatar_url }}
-              className="w-12 h-12 rounded-full"
+            <UserAvatar
+              url={notification.actor.avatar_url}
+              alt={notification.actor.display_name || notification.actor.username || 'User'}
+              className="w-12 h-12"
+              iconSize={24}
             />
             {/* 通知タイプのバッジ */}
             <View

@@ -5,7 +5,20 @@
 export { Loading } from './Loading';
 export { ErrorView } from './ErrorView';
 export { EmptyState } from './EmptyState';
-export { Skeleton, ProfileSkeleton } from './Skeleton';
+// Skeleton (react-native-reusables pattern)
+export { Skeleton, ProfileSkeleton, type SkeletonProps } from './skeleton';
+
+// Progress (react-native-reusables pattern)
+export { Progress, type ProgressProps } from './progress';
+
+// Avatar (react-native-reusables pattern)
+export {
+  Avatar,
+  AvatarFallback,
+  AvatarIcon,
+  AvatarImage,
+  UserAvatar,
+} from './avatar';
 export { AsyncBoundary } from './AsyncBoundary';
 export { SingleDataBoundary } from './SingleDataBoundary';
 export { FAB } from './FAB';
@@ -19,6 +32,53 @@ export { ImageViewerModal, useImageViewer, ImageGallery, ZoomableImage } from '.
 export { CommentInput, type CommentInputRef, CommentInputModal } from './comment-input';
 export { SwipeableRow } from './SwipeableRow';
 export { StyledTextInput, type StyledTextInputProps } from './styled-text-input';
+
+// Input (react-native-reusables pattern)
+export { Input, type InputProps } from './input';
+
+// Switch (react-native-reusables pattern)
+export { Switch, type SwitchProps } from './switch';
+
+// Separator (react-native-reusables pattern)
+export { Separator, type SeparatorProps } from './separator';
+
+// Card (react-native-reusables pattern)
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './card';
+
+// AlertDialog (react-native-reusables pattern)
+export {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './alert-dialog';
+
+// Select (react-native-reusables pattern)
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+  type Option as SelectOption,
+} from './select';
 export { TagInput } from './TagInput';
 export { LocationPinIcon, AddressPinIcon } from './icons';
 export { UserLocationPuck } from './UserLocationPuck';

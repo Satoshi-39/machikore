@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { PageHeader, StyledTextInput } from '@/shared/ui';
+import { PageHeader, Input } from '@/shared/ui';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { createReport, checkAlreadyReported, type ReportTargetType, type ReportReason } from '@/shared/api/supabase/reports';
@@ -206,14 +206,13 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             詳細（任意）
           </Text>
-          <StyledTextInput
+          <Input
             value={description}
             onChangeText={setDescription}
             placeholder="問題の詳細を入力してください"
             multiline
             numberOfLines={6}
             maxLength={INPUT_LIMITS.REPORT_DESCRIPTION}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             style={{ minHeight: 120 }}
             textAlignVertical="top"
           />

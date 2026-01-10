@@ -189,7 +189,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader title="プレミアム" />
-      <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 100 }}>
+      <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 180 }}>
         {/* ヘッダー */}
         <View className="items-center px-6 pt-6 pb-4">
           <View className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-blue-600 items-center justify-center mb-4 bg-primary">

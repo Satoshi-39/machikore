@@ -4,10 +4,10 @@
  */
 
 import React, { useCallback } from 'react';
-import { View, Text, Pressable, FlatList, Image } from 'react-native';
+import { View, Text, Pressable, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
+import { Loading, EmptyState, SwipeableRow, UserAvatar } from '@/shared/ui';
 import type { SpotWithDetails } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -61,16 +61,12 @@ export function LikeSpotList({
               }}
               disabled={!user?.id || !onUserPress}
             >
-              {user?.avatar_url ? (
-                <Image
-                  source={{ uri: user.avatar_url }}
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-              ) : (
-                <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-foreground-secondary items-center justify-center mr-3">
-                  <Ionicons name="person" size={20} color={colors.gray[500]} />
-                </View>
-              )}
+              <UserAvatar
+                url={user?.avatar_url}
+                alt={user?.display_name || user?.username || 'User'}
+                className="w-10 h-10 mr-3"
+                iconSize={20}
+              />
             </Pressable>
             <View className="flex-1">
               <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">

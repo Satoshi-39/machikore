@@ -9,7 +9,7 @@ import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native';
-import { StyledTextInput } from '@/shared/ui';
+import { Input } from '@/shared/ui';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -130,11 +130,10 @@ export function EditProfileForm({
           <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
             {t('profile.displayName')}
           </Text>
-          <StyledTextInput
+          <Input
             value={displayName}
             onChangeText={onDisplayNameChange}
             placeholder={t('profile.displayNamePlaceholder')}
-            className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             maxLength={INPUT_LIMITS.USER_DISPLAY_NAME}
           />
           <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
@@ -150,11 +149,11 @@ export function EditProfileForm({
             </Text>
             <View className="flex-row items-center border border-border dark:border-dark-border rounded-lg px-4 py-3">
               <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">@</Text>
-              <StyledTextInput
+              <Input
                 value={username}
                 onChangeText={handleUsernameChange}
                 placeholder={t('profile.usernamePlaceholder')}
-                className="flex-1 text-base ml-1"
+                className="flex-1 text-base ml-1 border-0 p-0"
                 autoCapitalize="none"
                 autoCorrect={false}
                 maxLength={20}
@@ -177,11 +176,10 @@ export function EditProfileForm({
           <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
             {t('profile.bio')}
           </Text>
-          <StyledTextInput
+          <Input
             value={bio}
             onChangeText={onBioChange}
             placeholder={t('profile.bioPlaceholder')}
-            className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             multiline
             numberOfLines={4}
             textAlignVertical="top"

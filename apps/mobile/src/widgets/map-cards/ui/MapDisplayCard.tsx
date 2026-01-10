@@ -10,7 +10,7 @@
  */
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
@@ -19,7 +19,7 @@ import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
-import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
@@ -203,18 +203,12 @@ export function MapDisplayCard({
             }}
             className="flex-row items-center mt-0.5"
           >
-            {map.user.avatar_url ? (
-              <Image
-                source={{ uri: map.user.avatar_url }}
-                className={`${avatarSizeClass} rounded-full mr-1`}
-              />
-            ) : (
-              <View
-                className={`${avatarSizeClass} rounded-full bg-gray-200 items-center justify-center mr-1`}
-              >
-                <Ionicons name="person" size={avatarIconSize} color={colors.gray[400]} />
-              </View>
-            )}
+            <UserAvatar
+              url={map.user.avatar_url}
+              alt={map.user.display_name || map.user.username || 'User'}
+              className={`${avatarSizeClass} mr-1`}
+              iconSize={avatarIconSize}
+            />
             <Text
               className={`${sizeConfig.userTextSize} text-foreground-muted dark:text-dark-foreground-muted`}
               numberOfLines={1}

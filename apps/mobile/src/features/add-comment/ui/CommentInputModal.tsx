@@ -16,7 +16,6 @@ import {
   Platform,
   Animated,
   Dimensions,
-  Image,
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import { Button, Text as ButtonText, buttonTextVariants, UserAvatar } from '@/shared/ui';
 import { useAddSpotComment, useAddMapComment, useAddReplyComment } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -203,16 +202,12 @@ export function CommentInputModal({
             <View className="px-4 py-3 border-b border-border-light dark:border-dark-border-light">
               <View className="flex-row">
                 {/* 返信先ユーザーアバター */}
-                {replyingTo.user?.avatar_url ? (
-                  <Image
-                    source={{ uri: replyingTo.user.avatar_url }}
-                    className="w-8 h-8 rounded-full"
-                  />
-                ) : (
-                  <View className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center">
-                    <Ionicons name="person" size={16} color={colors.gray[500]} />
-                  </View>
-                )}
+                <UserAvatar
+                  url={replyingTo.user?.avatar_url}
+                  alt={replyingTo.user?.display_name || replyingTo.user?.username || 'User'}
+                  className="w-8 h-8"
+                  iconSize={16}
+                />
                 <View className="flex-1 ml-3">
                   <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
                     {replyingTo.user?.display_name || replyingTo.user?.username || t('common.user')}
@@ -230,16 +225,12 @@ export function CommentInputModal({
           {/* 入力エリア */}
           <View className="flex-row px-4 pt-4">
             {/* 現在のユーザーアバター */}
-            {currentUser?.avatar_url ? (
-              <Image
-                source={{ uri: currentUser.avatar_url }}
-                className="w-10 h-10 rounded-full"
-              />
-            ) : (
-              <View className="w-10 h-10 rounded-full bg-gray-200 items-center justify-center">
-                <Ionicons name="person" size={20} color={colors.gray[500]} />
-              </View>
-            )}
+            <UserAvatar
+              url={currentUser?.avatar_url}
+              alt={currentUser?.display_name || currentUser?.username || 'User'}
+              className="w-10 h-10"
+              iconSize={20}
+            />
 
             {/* 入力欄 */}
             <View className="flex-1 ml-3">

@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { View, Text, Pressable } from 'react-native';
+import { UserAvatar } from '@/shared/ui';
 
 /**
  * UserListItemで必要な最小限のユーザー情報
@@ -26,24 +25,17 @@ interface UserListItemProps {
 }
 
 export function UserListItem({ user, onPress }: UserListItemProps) {
-  const avatarUri = (user.avatar_url as string | null | undefined) ?? undefined;
-
   return (
     <Pressable
       onPress={onPress}
       className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border p-4 flex-row items-center"
     >
       {/* アバター */}
-      {avatarUri ? (
-        <Image
-          source={{ uri: avatarUri }}
-          className="w-12 h-12 rounded-full mr-3"
-        />
-      ) : (
-        <View className="w-12 h-12 rounded-full bg-gray-200 justify-center items-center mr-3">
-          <Ionicons name="person" size={24} color={colors.gray[500]} />
-        </View>
-      )}
+      <UserAvatar
+        url={user.avatar_url}
+        alt={user.display_name || user.username || 'User'}
+        className="w-12 h-12 mr-3"
+      />
 
       {/* ユーザー情報 */}
       <View className="flex-1">

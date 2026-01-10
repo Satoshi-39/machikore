@@ -5,10 +5,10 @@
  */
 
 import React, { useMemo } from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
 import { formatRelativeTime } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -64,16 +64,12 @@ export function CommentItem({
     <View className={`flex-row p-4 border-b border-border-light dark:border-dark-border-light ${isReply ? 'pl-12 bg-surface-secondary dark:bg-dark-surface-secondary' : ''}`}>
       {/* アバター */}
       <Pressable onPress={() => onUserPress(comment.user_id)}>
-        {comment.user?.avatar_url ? (
-          <Image
-            source={{ uri: comment.user.avatar_url }}
-            className={isReply ? 'w-8 h-8 rounded-full' : 'w-10 h-10 rounded-full'}
-          />
-        ) : (
-          <View className={`rounded-full bg-gray-200 justify-center items-center ${isReply ? 'w-8 h-8' : 'w-10 h-10'}`}>
-            <Ionicons name="person" size={isReply ? 16 : 20} color={colors.gray[500]} />
-          </View>
-        )}
+        <UserAvatar
+          url={comment.user?.avatar_url}
+          alt={comment.user?.display_name || comment.user?.username || 'User'}
+          className={isReply ? 'w-8 h-8' : 'w-10 h-10'}
+          iconSize={isReply ? 16 : 20}
+        />
       </Pressable>
 
       {/* コメント内容 */}

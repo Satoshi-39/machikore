@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { View, Text, Pressable } from 'react-native';
+import { UserAvatar } from '@/shared/ui';
 import { FollowButton } from '@/features/follow-user';
 import type { UserBasicInfo } from '@/shared/types';
 
@@ -39,16 +38,12 @@ export function ArticleAuthorSection({
         onPress={() => onUserPress(userId)}
         className="flex-row items-center flex-1"
       >
-        {user?.avatar_url ? (
-          <Image
-            source={{ uri: user.avatar_url }}
-            className={`${avatarSize} rounded-full ${marginRight}`}
-          />
-        ) : (
-          <View className={`${avatarSize} rounded-full bg-gray-200 items-center justify-center ${marginRight}`}>
-            <Ionicons name="person" size={iconSize} color={colors.gray[500]} />
-          </View>
-        )}
+        <UserAvatar
+          url={user?.avatar_url}
+          alt={user?.display_name || user?.username || 'User'}
+          className={`${avatarSize} ${marginRight}`}
+          iconSize={iconSize}
+        />
         <Text className={`${textSize} text-foreground dark:text-dark-foreground`}>
           {user?.display_name || user?.username || 'ユーザー'}
         </Text>

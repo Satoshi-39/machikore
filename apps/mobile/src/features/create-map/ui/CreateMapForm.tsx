@@ -8,7 +8,7 @@
 
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { INPUT_LIMITS } from '@/shared/config';
-import { StyledTextInput, TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import { Input, TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
@@ -109,12 +109,11 @@ export function CreateMapForm({
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
             {t('map.mapNameRequired')} <Text className="text-red-500">*</Text>
           </Text>
-          <StyledTextInput
+          <Input
             value={mapName}
             onChangeText={setMapName}
             placeholder={t('map.mapNamePlaceholder')}
             maxLength={INPUT_LIMITS.MAP_NAME}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
           <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
             {mapName.length}/{INPUT_LIMITS.MAP_NAME}
@@ -126,14 +125,13 @@ export function CreateMapForm({
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             {t('map.descriptionRequired')} <Text className="text-red-500">*</Text>
           </Text>
-          <StyledTextInput
+          <Input
             value={description}
             onChangeText={setDescription}
             placeholder={t('map.descriptionPlaceholder')}
             multiline
             numberOfLines={4}
             maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             textAlignVertical="top"
           />
           <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">

@@ -9,9 +9,9 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { View, Text, Pressable, ScrollView, Linking, Alert, Platform, Switch } from 'react-native';
+import { View, Text, Pressable, ScrollView, Linking, Alert, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, Switch } from '@/shared/ui';
 import { colors, CONTENT_LANGUAGES, type ContentLanguageCode } from '@/shared/config';
 import { useI18n, LOCALE_NAMES, type SupportedLocale } from '@/shared/lib/i18n';
 import { useContentLanguagesPreference } from '@/entities/user/api';
@@ -44,10 +44,8 @@ function ContentLanguageItem({ label, isSelected, onToggle, isLast }: ContentLan
         {label}
       </Text>
       <Switch
-        value={isSelected}
-        onValueChange={onToggle}
-        trackColor={{ false: colors.border.DEFAULT, true: colors.primary.DEFAULT }}
-        thumbColor="#ffffff"
+        checked={isSelected}
+        onCheckedChange={onToggle}
       />
     </View>
   );

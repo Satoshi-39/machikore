@@ -5,10 +5,11 @@
  */
 
 import React from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { Switch } from '@/shared/ui';
 import type { NotificationSettings } from '@/shared/api/supabase/notification-settings';
 
 interface PushNotificationSettingsProps {
@@ -76,11 +77,9 @@ function SettingsToggle({
         )}
       </View>
       <Switch
-        value={value}
-        onValueChange={onValueChange}
+        checked={value}
+        onCheckedChange={onValueChange}
         disabled={disabled}
-        trackColor={{ false: colors.gray[300], true: colors.primary.DEFAULT }}
-        thumbColor="white"
       />
     </View>
   );

@@ -6,7 +6,7 @@
  */
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { View, Text, Pressable, Image, Dimensions } from 'react-native';
+import { View, Text, Pressable, Dimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
@@ -15,7 +15,7 @@ import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
-import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
@@ -114,16 +114,12 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
             }}
             className="flex-row items-center mt-0.5"
           >
-            {map.user.avatar_url ? (
-              <Image
-                source={{ uri: map.user.avatar_url }}
-                className="w-4 h-4 rounded-full mr-1"
-              />
-            ) : (
-              <View className="w-4 h-4 rounded-full bg-gray-200 items-center justify-center mr-1">
-                <Ionicons name="person" size={10} color={colors.gray[400]} />
-              </View>
-            )}
+            <UserAvatar
+              url={map.user.avatar_url}
+              alt={map.user.display_name || map.user.username || 'User'}
+              className="w-4 h-4 mr-1"
+              iconSize={10}
+            />
             <Text
               className="text-xs text-foreground-muted dark:text-dark-foreground-muted"
               numberOfLines={1}

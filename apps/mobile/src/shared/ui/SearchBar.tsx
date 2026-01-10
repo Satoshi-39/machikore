@@ -9,7 +9,7 @@ import { View, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { StyledTextInput } from './styled-text-input';
+import { Input } from './input';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -35,8 +35,8 @@ export function SearchBar({
       <View className="flex-row items-center gap-3">
         <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-3">
           <Ionicons name="search" size={20} color={colors.gray[400]} />
-          <StyledTextInput
-            className="flex-1 ml-2 text-base"
+          <Input
+            className="flex-1 ml-2 text-base border-0 bg-transparent p-0"
             placeholder={placeholder}
             value={value}
             onChangeText={onChangeText}

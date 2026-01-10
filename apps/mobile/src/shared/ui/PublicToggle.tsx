@@ -5,10 +5,11 @@
  */
 
 import React from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { Switch } from './switch';
 
 type ToggleVariant = 'default' | 'compact';
 
@@ -54,10 +55,8 @@ export function PublicToggle({
           {value ? t('publicToggle.publicStatus') : t('publicToggle.privateStatus')}
         </Text>
         <Switch
-          value={value}
-          onValueChange={onValueChange}
-          trackColor={{ false: colors.gray[300], true: colors.primary.DEFAULT }}
-          thumbColor="#fff"
+          checked={value}
+          onCheckedChange={onValueChange}
           disabled={disabled}
           style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
         />
@@ -81,10 +80,8 @@ export function PublicToggle({
           </Text>
         </View>
         <Switch
-          value={value}
-          onValueChange={onValueChange}
-          trackColor={{ false: colors.gray[300], true: colors.primary.DEFAULT }}
-          thumbColor="#fff"
+          checked={value}
+          onCheckedChange={onValueChange}
           disabled={disabled}
         />
       </View>

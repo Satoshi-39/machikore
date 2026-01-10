@@ -5,13 +5,14 @@
  */
 
 import React, { useRef, useCallback, useMemo } from 'react';
-import { View, Text, Pressable, Image, ActivityIndicator, Modal, StyleSheet } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator, Modal, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useMapLikers, useSpotLikers } from '@/entities/like';
+import { UserAvatar } from '@/shared/ui';
 
 interface LikersModalProps {
   visible: boolean;
@@ -37,16 +38,12 @@ function UserItem({ user, onPress }: UserItemProps) {
       onPress={onPress}
       className="flex-row items-center py-3 px-4 border-b border-border-light dark:border-dark-border-light"
     >
-      {user.avatar_url ? (
-        <Image
-          source={{ uri: user.avatar_url }}
-          className="w-10 h-10 rounded-full mr-3"
-        />
-      ) : (
-        <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mr-3">
-          <Ionicons name="person" size={20} color={colors.gray[500]} />
-        </View>
-      )}
+      <UserAvatar
+        url={user.avatar_url}
+        alt={user.display_name || user.username || 'User'}
+        className="w-10 h-10 mr-3"
+        iconSize={20}
+      />
       <View className="flex-1">
         <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
           {user.display_name || user.username}

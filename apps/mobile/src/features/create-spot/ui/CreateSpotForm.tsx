@@ -17,7 +17,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
-import { StyledTextInput, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
 import { isPlaceSearchResult, useSelectedPlaceStore } from '@/features/search-places';
 import { useRouter } from 'expo-router';
@@ -129,14 +129,11 @@ export function CreateSpotForm({
               {getLoadingText()}
             </Text>
             {uploadProgress && uploadProgress.status === 'uploading' && (
-              <View className="w-48 h-2 bg-gray-200 rounded-full mt-3 overflow-hidden">
-                <View
-                  className="h-full bg-primary rounded-full"
-                  style={{
-                    width: `${(uploadProgress.current / uploadProgress.total) * 100}%`,
-                  }}
-                />
-              </View>
+              <Progress
+                className="w-48 mt-3"
+                value={uploadProgress.current}
+                max={uploadProgress.total}
+              />
             )}
           </View>
         </View>
@@ -206,12 +203,11 @@ export function CreateSpotForm({
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
               {t('spot.spotName')} <Text className="text-red-500">*</Text>
             </Text>
-            <StyledTextInput
+            <Input
               value={spotName}
               onChangeText={setSpotName}
               placeholder={t('spot.spotNamePlaceholder')}
               maxLength={INPUT_LIMITS.SPOT_NAME}
-              className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
             />
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
               {t('spot.spotNameHint')}
@@ -224,12 +220,11 @@ export function CreateSpotForm({
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
             {t('spot.oneWordRequired')} <Text className="text-red-500">*</Text>
           </Text>
-          <StyledTextInput
+          <Input
             value={description}
             onChangeText={setDescription}
             placeholder={t('spot.oneWordPlaceholder')}
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base"
           />
           <View className="flex-row justify-end mt-1">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">

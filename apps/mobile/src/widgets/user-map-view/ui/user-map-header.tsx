@@ -17,7 +17,7 @@ import { shareMap, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MapWithUser } from '@/shared/types';
-import { ImageViewerModal, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { ImageViewerModal, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, {
   useCallback,
@@ -29,7 +29,6 @@ import React, {
 import {
   ActivityIndicator,
   Animated,
-  Image,
   Modal,
   Pressable,
   ScrollView,
@@ -309,18 +308,12 @@ export function UserMapHeader({
             onLongPress={() => userAvatarUrl && setIsAvatarModalVisible(true)}
             className="mr-2.5"
           >
-            {userAvatarUrl ? (
-              <Image
-                source={{ uri: userAvatarUrl }}
-                className="w-10 h-10 rounded-full"
-              />
-            ) : (
-              <View className="w-10 h-10 rounded-full bg-gray-300 items-center justify-center">
-                <Text className="text-sm font-bold text-foreground-secondary dark:text-dark-foreground-secondary">
-                  {userName?.[0]?.toUpperCase() || '?'}
-                </Text>
-              </View>
-            )}
+            <UserAvatar
+              url={userAvatarUrl}
+              alt={userName || 'User'}
+              className="w-10 h-10"
+              iconSize={20}
+            />
           </Pressable>
 
           {/* マップ名 - クリックでドロップダウン表示 */}

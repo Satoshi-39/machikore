@@ -5,12 +5,12 @@
  */
 
 import React from 'react';
-import { View, Text, ScrollView, Pressable, Switch, Alert, Linking } from 'react-native';
+import { View, Text, ScrollView, Pressable, Alert, Linking } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { ReactNativeLegal } from 'react-native-legal';
 import { useSignOut } from '@/features/auth';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, Switch } from '@/shared/ui';
 import { colors, EXTERNAL_LINKS } from '@/shared/config';
 import { useThemePreference } from '@/entities/user/api';
 import { useIsPremium } from '@/entities/subscription';
@@ -102,11 +102,9 @@ function SettingsToggle({
       <Ionicons name={icon} size={22} color={colors.text.secondary} />
       <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">{label}</Text>
       <Switch
-        value={value}
-        onValueChange={onValueChange}
+        checked={value}
+        onCheckedChange={onValueChange}
         disabled={disabled}
-        trackColor={{ false: colors.gray[300], true: colors.primary.DEFAULT }}
-        thumbColor="white"
       />
     </View>
   );

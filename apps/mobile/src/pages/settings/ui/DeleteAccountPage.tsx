@@ -10,7 +10,20 @@ import { View, Text, ScrollView, Alert, TextInput, ActivityIndicator } from 'rea
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-import { PageHeader, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import {
+  PageHeader,
+  Button,
+  Text as ButtonText,
+  buttonTextVariants,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { createDeletionRequest } from '@/shared/api/supabase';
 import { useSignOut } from '@/features/auth';
@@ -22,38 +35,27 @@ export function DeleteAccountPage() {
 
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // 削除リクエストを作成
-  const handleRequestDeletion = () => {
-    Alert.alert(
-      t('settings.deleteAccountPage.confirmTitle'),
-      t('settings.deleteAccountPage.confirmMessage'),
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('settings.deleteAccountPage.confirm'),
-          style: 'destructive',
-          onPress: async () => {
-            setIsSubmitting(true);
-            try {
-              const response = await createDeletionRequest(reason.trim() || undefined);
-              if (response.success) {
-                // 即座にサインアウト
-                await signOut();
-                // 認証ページに遷移
-                router.replace('/auth/auth-required');
-              } else {
-                Alert.alert(t('common.error'), response.error ?? t('common.error'));
-                setIsSubmitting(false);
-              }
-            } catch (err) {
-              Alert.alert(t('common.error'), t('common.error'));
-              setIsSubmitting(false);
-            }
-          },
-        },
-      ]
-    );
+  const handleConfirmDeletion = async () => {
+    setIsDialogOpen(false);
+    setIsSubmitting(true);
+    try {
+      const response = await createDeletionRequest(reason.trim() || undefined);
+      if (response.success) {
+        // 即座にサインアウト
+        await signOut();
+        // 認証ページに遷移
+        router.replace('/auth/auth-required');
+      } else {
+        Alert.alert(t('common.error'), response.error ?? t('common.error'));
+        setIsSubmitting(false);
+      }
+    } catch (err) {
+      Alert.alert(t('common.error'), t('common.error'));
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -107,7 +109,7 @@ export function DeleteAccountPage() {
           />
         </View>
 
-        <Button onPress={handleRequestDeletion} disabled={isSubmitting} variant="destructive">
+        <Button onPress={() => setIsDialogOpen(true)} disabled={isSubmitting} variant="destructive">
           {isSubmitting ? (
             <ActivityIndicator color="white" />
           ) : (
@@ -119,6 +121,32 @@ export function DeleteAccountPage() {
 
         <View className="h-8" />
       </ScrollView>
+
+      {/* 確認ダイアログ */}
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {t('settings.deleteAccountPage.confirmTitle')}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('settings.deleteAccountPage.confirmMessage')}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>
+              <Text className="text-base font-medium text-foreground dark:text-dark-foreground text-center">
+                {t('common.cancel')}
+              </Text>
+            </AlertDialogCancel>
+            <AlertDialogAction variant="destructive" onPress={handleConfirmDeletion}>
+              <Text className="text-base font-medium text-white text-center">
+                {t('settings.deleteAccountPage.confirm')}
+              </Text>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </View>
   );
 }

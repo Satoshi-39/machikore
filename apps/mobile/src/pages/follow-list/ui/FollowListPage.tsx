@@ -5,10 +5,9 @@
  */
 
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { PageHeader, EmptyState } from '@/shared/ui';
+import { PageHeader, EmptyState, UserAvatar } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
@@ -46,16 +45,12 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
       className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
     >
       {/* アバター */}
-      {item.user.avatar_url ? (
-        <Image
-          source={{ uri: item.user.avatar_url }}
-          className="w-12 h-12 rounded-full"
-        />
-      ) : (
-        <View className="w-12 h-12 rounded-full bg-gray-200 items-center justify-center">
-          <Ionicons name="person" size={24} color={colors.gray[400]} />
-        </View>
-      )}
+      <UserAvatar
+        url={item.user.avatar_url}
+        alt={item.user.display_name || item.user.username || 'User'}
+        className="w-12 h-12"
+        iconSize={24}
+      />
 
       {/* ユーザー情報 */}
       <View className="flex-1 ml-3">

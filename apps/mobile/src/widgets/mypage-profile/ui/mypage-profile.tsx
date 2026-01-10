@@ -5,12 +5,10 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
-import { ProfileSkeleton, ImageViewerModal } from '@/shared/ui';
+import { ProfileSkeleton, ImageViewerModal, UserAvatar } from '@/shared/ui';
 import { useUser, useUserStats, useCurrentUserId } from '@/entities/user';
 import { FollowButton } from '@/features/follow-user';
 import { EditProfileButton } from '@/features/edit-profile';
@@ -59,18 +57,17 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       {/* アバターとフォローボタン */}
       <View className="flex-row items-center justify-between mb-4">
         {/* アバター */}
-        {user?.avatar_url ? (
-          <Pressable onPress={() => setIsAvatarModalVisible(true)}>
-            <Image
-              source={{ uri: user.avatar_url }}
-              className="w-20 h-20 rounded-full"
-            />
-          </Pressable>
-        ) : (
-          <View className="w-20 h-20 rounded-full bg-gray-200 items-center justify-center">
-            <Ionicons name="person" size={40} color={colors.gray[400]} />
-          </View>
-        )}
+        <Pressable
+          onPress={() => user?.avatar_url && setIsAvatarModalVisible(true)}
+          disabled={!user?.avatar_url}
+        >
+          <UserAvatar
+            url={user?.avatar_url}
+            alt={user?.display_name || user?.username || 'User'}
+            className="w-20 h-20"
+            iconSize={40}
+          />
+        </Pressable>
 
         {/* プロフィール編集 or フォローボタン */}
         {isOwnProfile ? (

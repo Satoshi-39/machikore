@@ -5,7 +5,7 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, Pressable, FlatList, Image } from 'react-native';
+import { View, Text, Pressable, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,7 +17,7 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import type { BookmarkWithDetails } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
-import { SwipeableRow } from '@/shared/ui';
+import { SwipeableRow, UserAvatar } from '@/shared/ui';
 import { extractAddress } from '@/shared/lib/utils/multilang.utils';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -95,16 +95,12 @@ export function BookmarkItemList({
                 }}
                 disabled={!user?.id}
               >
-                {user?.avatar_url ? (
-                  <Image
-                    source={{ uri: user.avatar_url }}
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                ) : (
-                  <View className="w-10 h-10 rounded-full bg-gray-200 items-center justify-center mr-3">
-                    <Ionicons name="person" size={20} color={colors.gray[500]} />
-                  </View>
-                )}
+                <UserAvatar
+                  url={user?.avatar_url}
+                  alt={user?.display_name || user?.username || 'User'}
+                  className="w-10 h-10 mr-3"
+                  iconSize={20}
+                />
               </Pressable>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
@@ -151,16 +147,12 @@ export function BookmarkItemList({
                 }}
                 disabled={!user?.id}
               >
-                {user?.avatar_url ? (
-                  <Image
-                    source={{ uri: user.avatar_url }}
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                ) : (
-                  <View className="w-10 h-10 rounded-full bg-gray-200 items-center justify-center mr-3">
-                    <Ionicons name="person" size={20} color={colors.gray[500]} />
-                  </View>
-                )}
+                <UserAvatar
+                  url={user?.avatar_url}
+                  alt={user?.display_name || user?.username || 'User'}
+                  className="w-10 h-10 mr-3"
+                  iconSize={20}
+                />
               </Pressable>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
