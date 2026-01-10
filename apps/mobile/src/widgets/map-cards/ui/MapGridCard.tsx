@@ -129,7 +129,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
           </Pressable>
         )}
 
-        {/* いいね、ブックマーク、作成日時、記事アイコン、三点リーダ */}
+        {/* いいね、ブックマーク、記事アイコン、三点リーダ */}
         <View className="flex-row items-center justify-between mt-1">
           <View className="flex-row items-center gap-2">
             {/* いいね */}
@@ -154,9 +154,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
                 isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground
               }
             />
-          </View>
-          {/* 記事アイコン + 三点リーダ（自分のマップ以外） */}
-          <View className="flex-row items-center">
+            {/* 記事アイコン */}
             {(isOwner || map.is_article_public) && (
               <Pressable onPress={handleArticlePress}>
                 <Ionicons
@@ -166,10 +164,9 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
                 />
               </Pressable>
             )}
-            {!isOwner && (
-              <PopupMenu items={menuItems} triggerSize={14} triggerColor={colors.text.secondary} />
-            )}
           </View>
+          {/* 三点リーダ（右固定） */}
+          <PopupMenu items={menuItems} triggerSize={14} triggerColor={colors.text.secondary} />
         </View>
       </View>
 

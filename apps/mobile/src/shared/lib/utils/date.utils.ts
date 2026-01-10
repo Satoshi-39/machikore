@@ -102,6 +102,58 @@ function getRelativeTimeText(
 }
 
 /**
+ * コンパクト相対時間のテキストを取得（ロケール別）
+ * 月・年単位も含む
+ */
+type CompactRelativeTimeKey = 'justNow' | 'minutesAgo' | 'hoursAgo' | 'daysAgo' | 'weeksAgo' | 'monthsAgo' | 'yearsAgo';
+
+function getCompactRelativeTimeText(
+  key: CompactRelativeTimeKey,
+  count: number,
+  locale: SupportedLocale
+): string {
+  const texts: Record<SupportedLocale, Record<CompactRelativeTimeKey, string>> = {
+    ja: {
+      justNow: 'たった今',
+      minutesAgo: `${count}分前`,
+      hoursAgo: `${count}時間前`,
+      daysAgo: `${count}日前`,
+      weeksAgo: `${count}週間前`,
+      monthsAgo: `${count}ヶ月前`,
+      yearsAgo: `${count}年前`,
+    },
+    en: {
+      justNow: 'Just now',
+      minutesAgo: count === 1 ? '1m ago' : `${count}m ago`,
+      hoursAgo: count === 1 ? '1h ago' : `${count}h ago`,
+      daysAgo: count === 1 ? '1d ago' : `${count}d ago`,
+      weeksAgo: count === 1 ? '1w ago' : `${count}w ago`,
+      monthsAgo: count === 1 ? '1mo ago' : `${count}mo ago`,
+      yearsAgo: count === 1 ? '1y ago' : `${count}y ago`,
+    },
+    cn: {
+      justNow: '刚刚',
+      minutesAgo: `${count}分钟前`,
+      hoursAgo: `${count}小时前`,
+      daysAgo: `${count}天前`,
+      weeksAgo: `${count}周前`,
+      monthsAgo: `${count}个月前`,
+      yearsAgo: `${count}年前`,
+    },
+    tw: {
+      justNow: '剛剛',
+      minutesAgo: `${count}分鐘前`,
+      hoursAgo: `${count}小時前`,
+      daysAgo: `${count}天前`,
+      weeksAgo: `${count}週前`,
+      monthsAgo: `${count}個月前`,
+      yearsAgo: `${count}年前`,
+    },
+  };
+  return texts[locale][key];
+}
+
+/**
  * 日付を相対時間形式で表示
  * - 1分未満: たった今
  * - 1時間未満: X分前
@@ -159,4 +211,42 @@ export function formatLocalizedDate(
     month: 'long',
     day: 'numeric',
   });
+}
+
+/**
+ * 日付をコンパクトな相対時間形式で表示
+ * 常に相対表示（年月日形式にならない）
+ *
+ * - 1分未満: たった今
+ * - 1時間未満: X分前
+ * - 24時間未満: X時間前
+ * - 7日未満: X日前
+ * - 4週間未満: X週間前
+ * - 12ヶ月未満: Xヶ月前
+ * - 12ヶ月以上: X年前
+ *
+ * @param dateString - ISO 8601形式の日時文字列
+ * @param locale - ロケール（デフォルト: 'ja'）
+ */
+export function formatRelativeTimeCompact(
+  dateString: string,
+  locale: SupportedLocale = DEFAULT_LOCALE
+): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const diffWeeks = Math.floor(diffDays / 7);
+  const diffMonths = Math.floor(diffDays / 30);
+  const diffYears = Math.floor(diffDays / 365);
+
+  if (diffMins < 1) return getCompactRelativeTimeText('justNow', 0, locale);
+  if (diffMins < 60) return getCompactRelativeTimeText('minutesAgo', diffMins, locale);
+  if (diffHours < 24) return getCompactRelativeTimeText('hoursAgo', diffHours, locale);
+  if (diffDays < 7) return getCompactRelativeTimeText('daysAgo', diffDays, locale);
+  if (diffWeeks < 4) return getCompactRelativeTimeText('weeksAgo', diffWeeks, locale);
+  if (diffMonths < 12) return getCompactRelativeTimeText('monthsAgo', diffMonths, locale);
+  return getCompactRelativeTimeText('yearsAgo', diffYears, locale);
 }

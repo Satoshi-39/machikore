@@ -114,31 +114,34 @@ export function MapListCard({
       onPress={onPress}
       className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-gray-100 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-900"
     >
-      {/* ランキングバッジ */}
-      {rank !== undefined && (
-        <View
-          style={{
-            backgroundColor: getRankColor(rank),
-            borderRadius: 12,
-            width: 28,
-            height: 28,
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginRight: 12,
-          }}
-        >
-          <Text className="text-white text-sm font-bold">{rank}</Text>
-        </View>
-      )}
-
-      {/* サムネイル */}
-      <MapThumbnail
-        url={map.thumbnail_url}
-        width={80}
-        height={80}
-        borderRadius={8}
-        defaultImagePadding={0.15}
-      />
+      {/* サムネイル + ランキングバッジ */}
+      <View className="relative">
+        <MapThumbnail
+          url={map.thumbnail_url}
+          width={80}
+          height={80}
+          borderRadius={8}
+          defaultImagePadding={0.15}
+        />
+        {/* ランキングバッジ（サムネイル左上に重ねる） */}
+        {rank !== undefined && (
+          <View
+            style={{
+              position: 'absolute',
+              top: 4,
+              left: 4,
+              backgroundColor: getRankColor(rank),
+              borderRadius: 10,
+              width: 20,
+              height: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Text className="text-white text-xs font-bold">{rank}</Text>
+          </View>
+        )}
+      </View>
 
       {/* マップ情報 */}
       <View className="flex-1 ml-3">

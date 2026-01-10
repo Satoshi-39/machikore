@@ -16,7 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, formatRelativeTimeCompact } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
@@ -107,6 +107,9 @@ export function MapDisplayCard({
   // 自分のマップかどうか
   const isOwner = currentUserId && map.user_id === currentUserId;
 
+  // 記事が表示可能か
+  const canViewArticle = isOwner || map.is_article_public;
+
   // 記事ハンドラー
   const handleArticlePress = useCallback(
     (e: any) => {
@@ -116,10 +119,13 @@ export function MapDisplayCard({
     [router, map.id]
   );
 
-  // 三点リーダメニュー
+  // 三点リーダメニュー（通報のみ）
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    return [
-      {
+    const items: PopupMenuItem[] = [];
+
+    // 通報（自分のマップ以外）
+    if (!isOwner) {
+      items.push({
         id: 'report',
         label: t('menu.report'),
         icon: 'flag-outline',
@@ -130,9 +136,11 @@ export function MapDisplayCard({
           }
           router.push(`/report?targetType=map&targetId=${map.id}`);
         },
-      },
-    ];
-  }, [currentUserId, router, map.id, t]);
+      });
+    }
+
+    return items;
+  }, [currentUserId, router, map.id, t, isOwner]);
 
   // アバターサイズのクラス
   const avatarSizeClass = size === 'small' ? 'w-4 h-4' : 'w-5 h-5';
@@ -194,33 +202,40 @@ export function MapDisplayCard({
           </View>
         </View>
 
-        {/* ユーザー情報 */}
-        {map.user && (
-          <Pressable
-            onPress={(e) => {
-              e.stopPropagation();
-              router.push(`/(tabs)/discover/users/${map.user_id}` as Href);
-            }}
-            className="flex-row items-center mt-0.5"
-          >
-            <UserAvatar
-              url={map.user.avatar_url}
-              alt={map.user.display_name || map.user.username || 'User'}
-              className={`${avatarSizeClass} mr-1`}
-              iconSize={avatarIconSize}
-            />
-            <Text
-              className={`${sizeConfig.userTextSize} text-foreground-muted dark:text-dark-foreground-muted`}
-              numberOfLines={1}
-            >
-              {map.user.display_name || map.user.username}
-            </Text>
-          </Pressable>
-        )}
-
-        {/* いいね、ブックマーク、作成日時、記事アイコン、三点リーダ */}
+        {/* ユーザー情報 + 日付 */}
         <View className="flex-row items-center justify-between mt-1">
-          <View className="flex-row items-center gap-3">
+          {/* ユーザー情報 */}
+          {map.user && (
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation();
+                router.push(`/(tabs)/discover/users/${map.user_id}` as Href);
+              }}
+              className="flex-row items-center flex-1 mr-2"
+            >
+              <UserAvatar
+                url={map.user.avatar_url}
+                alt={map.user.display_name || map.user.username || 'User'}
+                className={`${avatarSizeClass} mr-1`}
+                iconSize={avatarIconSize}
+              />
+              <Text
+                className={`${sizeConfig.userTextSize} text-foreground-muted dark:text-dark-foreground-muted flex-1`}
+                numberOfLines={1}
+              >
+                {map.user.display_name || map.user.username}
+              </Text>
+            </Pressable>
+          )}
+          {/* 日付（右固定） */}
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted flex-shrink-0">
+            {formatRelativeTimeCompact(map.created_at)}
+          </Text>
+        </View>
+
+        {/* いいね + ブックマーク + 記事アイコン + 三点リーダ */}
+        <View className="flex-row items-center justify-between mt-1">
+          <View className="flex-row items-center gap-2">
             {/* いいね */}
             <MapLikeButton
               mapId={map.id}
@@ -247,31 +262,23 @@ export function MapDisplayCard({
                   : colors.light.foreground
               }
             />
-          </View>
-
-          {/* 記事アイコン + 三点リーダ（自分のマップ以外） */}
-          <View className="flex-row items-center">
-            {(isOwner || map.is_article_public) && (
+            {/* 記事アイコン */}
+            {canViewArticle && (
               <Pressable onPress={handleArticlePress}>
                 <Ionicons
                   name="document-text-outline"
                   size={sizeConfig.articleIconSize}
-                  color={
-                    isDarkMode
-                      ? colors.dark.foregroundSecondary
-                      : colors.text.secondary
-                  }
+                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
                 />
               </Pressable>
             )}
-            {!isOwner && (
-              <PopupMenu
-                items={menuItems}
-                triggerSize={sizeConfig.menuSize}
-                triggerColor={colors.text.secondary}
-              />
-            )}
           </View>
+          {/* 三点リーダ（右固定） */}
+          <PopupMenu
+            items={menuItems}
+            triggerSize={sizeConfig.menuSize}
+            triggerColor={colors.text.secondary}
+          />
         </View>
       </View>
 

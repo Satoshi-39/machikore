@@ -12,9 +12,12 @@ import {
   MenuOptions,
   MenuOption,
   MenuTrigger,
+  renderers,
 } from 'react-native-popup-menu';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+
+const { Popover } = renderers;
 
 export interface PopupMenuItem {
   id: string;
@@ -115,7 +118,7 @@ export function PopupMenu({
   };
 
   return (
-    <Menu>
+    <Menu renderer={Popover} rendererProps={{ preferredPlacement: 'bottom' }}>
       <MenuTrigger
         customStyles={{
           triggerWrapper: styles.triggerWrapper,
