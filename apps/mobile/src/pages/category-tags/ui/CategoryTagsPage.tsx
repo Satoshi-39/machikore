@@ -22,7 +22,7 @@ import { useCategories } from '@/entities/category';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PageHeader } from '@/shared/ui';
-import { MapGridCard, MAP_GRID_CONSTANTS } from '@/widgets/map-grid';
+import { MapGridCard, MAP_GRID_CONSTANTS } from '@/widgets/map-cards';
 import { useI18n } from '@/shared/lib/i18n';
 import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
 

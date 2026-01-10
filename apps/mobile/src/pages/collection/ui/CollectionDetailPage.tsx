@@ -48,8 +48,8 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
     router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
   }, [router, currentTab]);
 
-  const handleAddMaps = useCallback(() => {
-    router.push(`/add-maps-to-collection?id=${collectionId}` as any);
+  const handleEdit = useCallback(() => {
+    router.push(`/edit-collection/${collectionId}` as any);
   }, [router, collectionId]);
 
   // CollectionMapWithDetails.map を MapWithUser として扱うためのヘルパー
@@ -169,7 +169,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         title={t('collection.collection')}
         rightComponent={
           isOwner ? (
-            <Pressable onPress={handleAddMaps} className="py-2">
+            <Pressable onPress={handleEdit} className="py-2">
               <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">{t('collection.edit')}</Text>
             </Pressable>
           ) : undefined

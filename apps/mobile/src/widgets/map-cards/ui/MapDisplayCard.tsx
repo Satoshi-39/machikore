@@ -16,7 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
-import { showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
@@ -96,7 +96,7 @@ export function MapDisplayCard({
   size = 'small',
   rank,
 }: MapDisplayCardProps) {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
@@ -247,10 +247,6 @@ export function MapDisplayCard({
                   : colors.light.foreground
               }
             />
-            {/* 作成日時 */}
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {formatRelativeTime(map.created_at, locale)}
-            </Text>
           </View>
 
           {/* 記事アイコン + 三点リーダ（自分のマップ以外） */}
