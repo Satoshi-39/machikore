@@ -1,0 +1,25 @@
+/**
+ * マップコメントモーダル画面（ホームタブ内）
+ */
+
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { CommentModalScreen } from '@/pages/comment-modal';
+
+export default function MapCommentModalScreen() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const router = useRouter();
+
+  if (!id) return null;
+
+  return (
+    <CommentModalScreen
+      type="map"
+      targetId={id}
+      onClose={() => router.back()}
+      onUserPress={(userId) => {
+        router.dismiss();
+        router.push(`/(tabs)/home/users/${userId}`);
+      }}
+    />
+  );
+}

@@ -66,8 +66,8 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
   const likers = mapId ? mapLikers : spotLikers;
   const isLoading = mapId ? isLoadingMap : isLoadingSpot;
 
-  // 画面の60%の高さをスナップポイントとして設定
-  const snapPoints = useMemo(() => ['60%'], []);
+  // 画面の75%の高さをスナップポイントとして設定（コメントモーダルと統一）
+  const snapPoints = useMemo(() => ['75%'], []);
 
   // シート変更時のハンドラー（閉じた時）
   const handleSheetChanges = useCallback((index: number) => {
@@ -116,7 +116,6 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           onChange={handleSheetChanges}
           enablePanDownToClose={true}
           enableDynamicSizing={false}
-          animateOnMount={false}
           backdropComponent={renderBackdrop}
           backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
           handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}

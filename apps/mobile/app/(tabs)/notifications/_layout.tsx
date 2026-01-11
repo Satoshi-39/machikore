@@ -16,6 +16,13 @@ export default function NotificationsLayout() {
       <Stack.Screen name="articles/maps/[id]" />
       <Stack.Screen name="bookmarks/index" />
       <Stack.Screen name="bookmarks/[folderId]" />
+      <Stack.Screen
+        name="comment-modal"
+        options={{
+          presentation: 'transparentModal',
+          animation: 'fade',
+        }}
+      />
     </Stack>
   );
 }

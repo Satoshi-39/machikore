@@ -16,6 +16,13 @@ export default function MypageLayout() {
       <Stack.Screen name="comments/spots/[id]" />
       <Stack.Screen name="comments/maps/[id]" />
       <Stack.Screen name="articles/maps/[id]" />
+      <Stack.Screen
+        name="comment-modal"
+        options={{
+          presentation: 'transparentModal',
+          animation: 'fade',
+        }}
+      />
     </Stack>
   );
 }

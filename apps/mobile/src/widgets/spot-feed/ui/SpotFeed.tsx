@@ -6,20 +6,17 @@
  * - 無限スクロール対応
  */
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
 import { useRouter, type Href } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
 import { colors } from '@/shared/config';
-import { CommentModal } from '@/widgets/comment';
 
 export function SpotFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
-  // コメントモーダル用の状態
-  const [commentModalSpotId, setCommentModalSpotId] = useState<string | null>(null);
 
   // 無限スクロール対応のフック
   const {
@@ -55,8 +52,8 @@ export function SpotFeed() {
 
   // コメントモーダルを開く
   const handleCommentPress = useCallback((spotId: string) => {
-    setCommentModalSpotId(spotId);
-  }, []);
+    router.push(`/(tabs)/discover/comment-modal/spots/${spotId}`);
+  }, [router]);
 
   // マップ詳細ページへ遷移（発見タブ内スタック）
   const handleMapPress = useCallback((mapId: string) => {
@@ -114,16 +111,6 @@ export function SpotFeed() {
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}
             showsVerticalScrollIndicator={false}
-          />
-
-          {/* コメントモーダル */}
-          <CommentModal
-            visible={!!commentModalSpotId}
-            onClose={() => setCommentModalSpotId(null)}
-            type="spot"
-            targetId={commentModalSpotId ?? ''}
-            currentUserId={currentUser?.id}
-            onUserPress={handleUserPress}
           />
         </>
       )}

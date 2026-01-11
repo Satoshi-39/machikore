@@ -7,14 +7,13 @@
  * - 広告表示（5件ごと）
  */
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFeedMaps, MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors } from '@/shared/config';
-import { CommentModal } from '@/widgets/comment';
 
 /** 広告を挿入する間隔（マップ5件ごとに1広告） */
 const AD_INTERVAL = 5;
@@ -26,8 +25,6 @@ type FeedItem =
 export function MapFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
-  // コメントモーダル用の状態
-  const [commentModalMapId, setCommentModalMapId] = useState<string | null>(null);
 
   // 無限スクロール対応のフック
   const {
@@ -74,8 +71,8 @@ export function MapFeed() {
 
   // コメントモーダルを開く
   const handleCommentPress = useCallback((mapId: string) => {
-    setCommentModalMapId(mapId);
-  }, []);
+    router.push(`/(tabs)/discover/comment-modal/maps/${mapId}`);
+  }, [router]);
 
   // 記事ページへ遷移
   const handleArticlePress = useCallback((mapId: string) => {
@@ -146,16 +143,6 @@ export function MapFeed() {
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}
             showsVerticalScrollIndicator={false}
-          />
-
-          {/* コメントモーダル */}
-          <CommentModal
-            visible={!!commentModalMapId}
-            onClose={() => setCommentModalMapId(null)}
-            type="map"
-            targetId={commentModalMapId ?? ''}
-            currentUserId={currentUser?.id}
-            onUserPress={handleUserPress}
           />
         </>
       )}

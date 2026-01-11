@@ -9,15 +9,16 @@ import { View, Text, Pressable, Image, ScrollView, Alert, ActivityIndicator } fr
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { useRouter } from 'expo-router';
 import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton } from '@/shared/ui';
-import { useSearchBarSync, useLocationButtonSync, useSpotColor } from '@/shared/lib';
+import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
-import { CommentPreview, CommentModal } from '@/widgets/comment';
+import { CommentPreview } from '@/widgets/comment';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
@@ -70,6 +71,8 @@ const SEARCH_BAR_BOTTOM_Y = 240;
 
 export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
   const { t, locale } = useI18n();
+  const router = useRouter();
+  const currentTab = useCurrentTab();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -85,7 +88,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
-  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // コメント関連（プレビュー用に最初の1件だけ取得）
@@ -359,7 +361,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
           {/* コメント追加ボタン（タップでモーダル表示） */}
           <Pressable
-            onPress={() => setIsCommentModalVisible(true)}
+            onPress={() => router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}`)}
             className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
           >
             <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
@@ -378,7 +380,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               totalCount={spot.comments_count}
               currentUserId={currentUserId}
               onUserPress={handleUserPressInternal}
-              onViewAll={() => setIsCommentModalVisible(true)}
+              onViewAll={() => router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}`)}
             />
           )}
         </View>
@@ -397,16 +399,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         bookmarkedFolderIds={bookmarkedFolderIds}
       />
     )}
-
-    {/* コメントモーダル */}
-    <CommentModal
-      visible={isCommentModalVisible}
-      onClose={() => setIsCommentModalVisible(false)}
-      type="spot"
-      targetId={spot.id}
-      currentUserId={currentUserId}
-      onUserPress={handleUserPressInternal}
-    />
 
     {/* 画像拡大表示モーダル */}
     <ImageViewerModal
