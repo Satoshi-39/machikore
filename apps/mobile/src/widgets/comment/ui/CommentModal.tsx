@@ -1,27 +1,26 @@
 /**
  * コメントモーダル
  *
- * コメント一覧をモーダル形式で表示
+ * コメント一覧をボトムシート形式で表示（Instagram風ハーフモーダル）
  * スポット/マップのコメント表示に使用
  */
 
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useMemo } from 'react';
 import {
   View,
   Text,
-  Modal,
   Pressable,
-  KeyboardAvoidingView,
-  Platform,
   Keyboard,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
-import { CommentList } from './CommentList';
+import { CommentItem, useCommentReplies } from '@/entities/comment';
 import {
   useSpotComments,
   useMapComments,
@@ -45,6 +44,70 @@ interface CommentModalProps {
   onUserPress?: (userId: string) => void;
 }
 
+/**
+ * 返信表示コンポーネント（展開可能）
+ */
+function RepliesSection({
+  parentId,
+  currentUserId,
+  onUserPress,
+  onEdit,
+  onDelete,
+  onLike,
+}: {
+  parentId: string;
+  currentUserId?: string | null;
+  onUserPress: (userId: string) => void;
+  onEdit: (comment: CommentWithUser) => void;
+  onDelete: (comment: CommentWithUser) => void;
+  onLike: (comment: CommentWithUser) => void;
+}) {
+  const { t } = useI18n();
+  const { data: replies } = useCommentReplies(parentId, currentUserId);
+  const [expanded, setExpanded] = useState(false);
+
+  if (!replies || replies.length === 0) return null;
+
+  const visibleReplies = expanded ? replies : [];
+  const hasReplies = replies.length > 0;
+
+  return (
+    <View className="pl-12">
+      {/* 返信を表示/非表示トグル */}
+      {hasReplies && !expanded && (
+        <Pressable onPress={() => setExpanded(true)} className="py-2">
+          <Text className="text-sm text-primary font-medium">
+            {t('comment.showReplies', { count: replies.length })}
+          </Text>
+        </Pressable>
+      )}
+
+      {/* 返信一覧 */}
+      {visibleReplies.map((reply) => (
+        <CommentItem
+          key={reply.id}
+          comment={reply}
+          currentUserId={currentUserId}
+          onUserPress={onUserPress}
+          onEdit={() => onEdit(reply)}
+          onDelete={() => onDelete(reply)}
+          onLike={() => onLike(reply)}
+          isReply
+        />
+      ))}
+
+      {/* 返信を非表示 */}
+      {expanded && (
+        <Pressable onPress={() => setExpanded(false)} className="py-2">
+          <Text className="text-sm text-primary font-medium">
+            {t('comment.hideReplies')}
+          </Text>
+        </Pressable>
+      )}
+    </View>
+  );
+}
+
 export function CommentModal({
   visible,
   onClose,
@@ -55,7 +118,12 @@ export function CommentModal({
 }: CommentModalProps) {
   const { t } = useI18n();
   const insets = useSafeAreaInsets();
+  const isDarkMode = useIsDarkMode();
   const inputRef = useRef<CommentInputRef>(null);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  // スナップポイント: 60%と90%
+  const snapPoints = useMemo(() => ['60%', '90%'], []);
 
   // 入力状態
   const [inputText, setInputText] = useState('');
@@ -65,13 +133,13 @@ export function CommentModal({
   const { data: currentUser } = useUser(currentUserId ?? null);
 
   // データ取得（タイプに応じて切り替え）
-  const { data: spotComments, refetch: refetchSpot } = useSpotComments(
+  const { data: spotComments } = useSpotComments(
     type === 'spot' ? targetId : '',
     50,
     0,
     currentUserId
   );
-  const { data: mapComments, refetch: refetchMap } = useMapComments(
+  const { data: mapComments } = useMapComments(
     type === 'map' ? targetId : '',
     50,
     0,
@@ -79,7 +147,6 @@ export function CommentModal({
   );
 
   const comments = type === 'spot' ? spotComments : mapComments;
-  const refetch = type === 'spot' ? refetchSpot : refetchMap;
 
   // コメント投稿
   const { mutate: addSpotComment, isPending: isAddingSpotComment } = useAddSpotComment();
@@ -156,7 +223,16 @@ export function CommentModal({
   const handleClose = useCallback(() => {
     setInputText('');
     setReplyingTo(null);
-    onClose();
+    bottomSheetRef.current?.close();
+  }, []);
+
+  // BottomSheetの変更ハンドラー
+  const handleSheetChanges = useCallback((index: number) => {
+    if (index === -1) {
+      setInputText('');
+      setReplyingTo(null);
+      onClose();
+    }
   }, [onClose]);
 
   // 返信先の表示名を取得
@@ -164,74 +240,128 @@ export function CommentModal({
     ? { displayName: replyingTo.user?.display_name || replyingTo.user?.username || '' }
     : null;
 
-  return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      presentationStyle="pageSheet"
-      onRequestClose={handleClose}
-    >
-      <View
-        className="flex-1 bg-surface dark:bg-dark-surface"
-        style={{ paddingTop: insets.top }}
-      >
-        {/* ヘッダー */}
-        <View className="flex-row items-center justify-between px-4 py-3 border-b border-border dark:border-dark-border">
-          <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
-            {t('comment.comments')}
-          </Text>
-          <Pressable
-            onPress={handleClose}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
-          >
-            <Ionicons name="close" size={20} color={colors.text.secondary} />
-          </Pressable>
-        </View>
+  // バックドロップレンダラー
+  const renderBackdrop = useCallback(
+    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        opacity={0.5}
+      />
+    ),
+    []
+  );
 
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1"
-          keyboardVerticalOffset={0}
-        >
-          {/* コメント一覧 */}
-          <CommentList
-            comments={comments || []}
+  // コメントアイテムのレンダリング
+  const renderCommentItem = useCallback(
+    ({ item }: { item: CommentWithUser }) => (
+      <View>
+        <CommentItem
+          comment={item}
+          currentUserId={currentUserId}
+          onUserPress={handleUserPressInternal}
+          onEdit={() => handleEdit(item)}
+          onDelete={() => handleDeleteConfirm(item)}
+          onLike={() => handleLike(item)}
+          onReply={() => handleReply(item)}
+        />
+        {/* 返信セクション */}
+        {item.replies_count > 0 && (
+          <RepliesSection
+            parentId={item.id}
             currentUserId={currentUserId}
             onUserPress={handleUserPressInternal}
             onEdit={handleEdit}
-            onDeleteConfirm={handleDeleteConfirm}
+            onDelete={handleDeleteConfirm}
             onLike={handleLike}
-            onReply={handleReply}
-            onRefresh={refetch}
           />
+        )}
+      </View>
+    ),
+    [currentUserId, handleUserPressInternal, handleEdit, handleDeleteConfirm, handleLike, handleReply]
+  );
 
-          {/* 下部固定の入力エリア */}
-          <CommentInput
-            ref={inputRef}
-            avatarUrl={currentUser?.avatar_url}
-            inputText={inputText}
-            onChangeText={setInputText}
-            onSubmit={handleSubmit}
-            isSubmitting={isSubmitting}
-            replyingTo={replyTarget}
-            onCancelReply={cancelReply}
-            variant="fixed"
-          />
-        </KeyboardAvoidingView>
+  // 空の場合の表示
+  const renderEmptyComponent = useCallback(
+    () => (
+      <View className="flex-1 items-center justify-center py-12">
+        <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
+        <Text className="mt-4 text-foreground-muted dark:text-dark-foreground-muted">
+          {t('comment.noComments')}
+        </Text>
+      </View>
+    ),
+    [t]
+  );
 
-        {/* 編集モーダル */}
-        <CommentInputModal
-          visible={!!editingComment}
-          onClose={handleEditCancel}
+  if (!visible) return null;
+
+  return (
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={0}
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
+      enablePanDownToClose
+      backdropComponent={renderBackdrop}
+      handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
+      backgroundStyle={{
+        backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+      }}
+      keyboardBehavior="interactive"
+      keyboardBlurBehavior="restore"
+    >
+      {/* ヘッダー */}
+      <View className="flex-row items-center justify-between px-4 pb-3 border-b border-border dark:border-dark-border">
+        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+          {t('comment.comments')}
+        </Text>
+        <Pressable
+          onPress={handleClose}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+        >
+          <Ionicons name="close" size={20} color={colors.text.secondary} />
+        </Pressable>
+      </View>
+
+      {/* コメント一覧 */}
+      <BottomSheetFlatList
+        data={comments || []}
+        keyExtractor={(item: CommentWithUser) => item.id}
+        renderItem={renderCommentItem}
+        ListEmptyComponent={renderEmptyComponent}
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      />
+
+      {/* 下部固定の入力エリア */}
+      <View style={{ paddingBottom: insets.bottom }}>
+        <CommentInput
+          ref={inputRef}
           avatarUrl={currentUser?.avatar_url}
-          inputText={editText}
-          onChangeText={setEditText}
-          onSubmit={handleEditSubmit}
-          isSubmitting={isUpdatingComment}
-          isEditing
+          inputText={inputText}
+          onChangeText={setInputText}
+          onSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
+          replyingTo={replyTarget}
+          onCancelReply={cancelReply}
+          variant="fixed"
         />
       </View>
-    </Modal>
+
+      {/* 編集モーダル */}
+      <CommentInputModal
+        visible={!!editingComment}
+        onClose={handleEditCancel}
+        avatarUrl={currentUser?.avatar_url}
+        inputText={editText}
+        onChangeText={setEditText}
+        onSubmit={handleEditSubmit}
+        isSubmitting={isUpdatingComment}
+        isEditing
+      />
+    </BottomSheet>
   );
 }
