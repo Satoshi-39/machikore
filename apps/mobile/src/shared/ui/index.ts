@@ -141,3 +141,6 @@ export { TermsMarkdownRenderer } from './TermsMarkdownRenderer';
 // 広告
 export { AdBanner } from './AdBanner';
 export { NativeAdCard } from './NativeAdCard';
+
+// アクションボタン
+export { DirectionsButton, LikeButton, BookmarkButton, ShareButton } from './action-buttons';

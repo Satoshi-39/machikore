@@ -11,11 +11,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
-import { showLoginRequiredAlert, useSearchBarSync, useLocationButtonSync, shareSpot, useSpotColor } from '@/shared/lib';
+import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton } from '@/shared/ui';
+import { useSearchBarSync, useLocationButtonSync, useSpotColor } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
-import { useToggleSpotLike } from '@/entities/like';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
 import { CommentList } from '@/widgets/comment-list';
@@ -78,7 +77,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
   const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
   const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
   const isBookmarked = bookmarkInfo.length > 0;
   // ブックマーク済みフォルダIDのSetを作成
@@ -189,24 +187,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     onUserPress?.(userId);
   }, [onUserPress]);
 
-  // いいねトグル
-  const handleLikePress = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
-      return;
-    }
-    if (isTogglingLike) return;
-    toggleLike({ userId: currentUserId, spotId: spot.id });
-  }, [currentUserId, spot.id, toggleLike, isTogglingLike]);
-
-  // ブックマークボタン押下 → フォルダ選択モーダルを開く
-  const handleBookmarkPress = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('保存');
-      return;
-    }
+  // ブックマーク: フォルダ選択モーダルを開く
+  const openFolderModal = useCallback(() => {
     setIsFolderModalVisible(true);
-  }, [currentUserId]);
+  }, []);
 
   // フォルダに追加
   const handleAddToFolder = useCallback((folderId: string | null) => {
@@ -219,11 +203,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     if (!currentUserId) return;
     removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
   }, [currentUserId, spot.id, removeFromFolder]);
-
-  // 共有処理
-  const handleSharePress = useCallback(async () => {
-    await shareSpot(spot.id);
-  }, [spot.id]);
 
   // 削除確認ダイアログ
   const handleDeleteSpot = useCallback(() => {
@@ -357,78 +336,26 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
         )}
 
-        {/* 統計情報とアクション */}
+        {/* アクションボタン */}
         <View className="flex-row items-center justify-around pt-4 pb-1 border-t border-border dark:border-dark-border">
-          {/* コメント - タップでシートを拡大 */}
-          <Pressable
-            className="items-center"
-            onPress={() => bottomSheetRef.current?.snapToIndex(2)}
-          >
-            <View className="flex-row items-center h-6">
-              <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
-                {spot.comments_count}
-              </Text>
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.comment')}</Text>
-          </Pressable>
-
-          {/* いいねボタン（アイコン：トグル、数字：ユーザー一覧） */}
-          <View className="items-center">
-            <View className="flex-row items-center h-6">
-              <Pressable
-                onPress={handleLikePress}
-                disabled={isTogglingLike}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
-              >
-                <Ionicons
-                  name={isLiked ? 'heart' : 'heart-outline'}
-                  size={18}
-                  color={isLiked ? '#EF4444' : colors.text.secondary}
-                />
-              </Pressable>
-              <Pressable
-                onPress={() => setIsLikersModalVisible(true)}
-                hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
-              >
-                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
-                  {spot.likes_count}
-                </Text>
-              </Pressable>
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.like')}</Text>
-          </View>
-
-          {/* ブックマークボタン */}
-          <Pressable
-            className="items-center"
-            onPress={handleBookmarkPress}
-            disabled={isAddingBookmark || isRemovingFromFolder}
-          >
-            <View className="flex-row items-center justify-center h-6">
-              <Ionicons
-                name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-                size={18}
-                color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
-              />
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.save')}</Text>
-          </Pressable>
-
-          {/* 共有ボタン */}
-          <Pressable
-            className="items-center"
-            onPress={handleSharePress}
-          >
-            <View className="flex-row items-center justify-center h-6">
-              <Ionicons
-                name="share-outline"
-                size={18}
-                color={colors.text.secondary}
-              />
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.share')}</Text>
-          </Pressable>
+          <LikeButton
+            spotId={spot.id}
+            currentUserId={currentUserId}
+            isLiked={isLiked}
+            likesCount={spot.likes_count}
+            onCountPress={() => setIsLikersModalVisible(true)}
+          />
+          <BookmarkButton
+            isBookmarked={isBookmarked}
+            currentUserId={currentUserId}
+            onPress={openFolderModal}
+            isPending={isAddingBookmark || isRemovingFromFolder}
+          />
+          <DirectionsButton
+            latitude={spot.master_spot?.latitude ?? spot.latitude ?? 0}
+            longitude={spot.master_spot?.longitude ?? spot.longitude ?? 0}
+          />
+          <ShareButton type="spot" id={spot.id} />
         </View>
 
         {/* 記事セクション */}

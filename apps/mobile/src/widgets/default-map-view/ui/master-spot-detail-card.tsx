@@ -18,7 +18,7 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
+import { LocationPinIcon, AddressPinIcon, DirectionsButton } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import { useI18n } from '@/shared/lib/i18n';
@@ -127,12 +127,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
       addFavorite({ userId: currentUserId, masterSpotId: spot.id });
     }
   }, [currentUserId, isFavorited, spot.id, addFavorite, removeFavorite]);
-
-  // Google Mapsで経路を開く
-  const handleDirectionsPress = useCallback(() => {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`;
-    Linking.openURL(url);
-  }, [spot.latitude, spot.longitude]);
 
   // 投稿ボタン - マップ選択シートを表示
   const handlePostPress = useCallback(() => {
@@ -291,15 +285,11 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
           </Pressable>
 
           {/* 経路案内 */}
-          <Pressable
-            onPress={handleDirectionsPress}
-            className="flex-1 items-center py-2"
-          >
-            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
-              <Ionicons name="navigate" size={24} color={colors.text.secondary} />
-            </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">経路</Text>
-          </Pressable>
+          <DirectionsButton
+            latitude={spot.latitude}
+            longitude={spot.longitude}
+            variant="circle"
+          />
 
           {/* ウェブサイト（常に表示、ない場合はグレーアウト） */}
           <Pressable
