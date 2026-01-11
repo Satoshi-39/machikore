@@ -341,6 +341,7 @@ export function CommentModal({
           snapPoints={snapPoints}
           onChange={handleSheetChanges}
           enablePanDownToClose
+          enableDynamicSizing={false}
           backdropComponent={renderBackdrop}
           footerComponent={renderFooter}
           handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
