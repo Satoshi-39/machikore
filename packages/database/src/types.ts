@@ -497,6 +497,7 @@ export type Database = {
           map_id: string | null
           parent_id: string | null
           replies_count: number
+          reply_to_user_id: string | null
           root_id: string | null
           updated_at: string
           user_id: string
@@ -511,6 +512,7 @@ export type Database = {
           map_id?: string | null
           parent_id?: string | null
           replies_count?: number
+          reply_to_user_id?: string | null
           root_id?: string | null
           updated_at?: string
           user_id: string
@@ -525,6 +527,7 @@ export type Database = {
           map_id?: string | null
           parent_id?: string | null
           replies_count?: number
+          reply_to_user_id?: string | null
           root_id?: string | null
           updated_at?: string
           user_id?: string
@@ -543,6 +546,13 @@ export type Database = {
             columns: ["parent_id"]
             isOneToOne: false
             referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_reply_to_user_id_fkey"
+            columns: ["reply_to_user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
           {

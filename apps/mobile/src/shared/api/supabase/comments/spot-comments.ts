@@ -4,7 +4,7 @@
 
 import { supabase, handleSupabaseError } from '../client';
 import type { CommentWithUser } from './types';
-import { mapCommentWithReplyTo } from './helpers';
+import { mapComment } from './helpers';
 
 /**
  * スポットのコメント一覧を取得（トップレベルのみ）
@@ -38,7 +38,7 @@ export async function getSpotComments(
     handleSupabaseError('getSpotComments', error);
   }
 
-  return (data || []).map((comment: any) => mapCommentWithReplyTo(comment, currentUserId));
+  return (data || []).map((comment: any) => mapComment(comment, currentUserId));
 }
 
 /**
@@ -74,7 +74,7 @@ export async function addSpotComment(
 
   // comments_countはトリガーで自動更新される
 
-  return mapCommentWithReplyTo(data);
+  return mapComment(data);
 }
 
 /**

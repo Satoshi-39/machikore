@@ -3,8 +3,8 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
-import type { CommentWithUser, ReplyToComment } from './types';
-import { mapComment, mapCommentWithReplyTo } from './helpers';
+import type { CommentWithUser } from './types';
+import { mapComment } from './helpers';
 
 /**
  * コメントの返信一覧を取得
@@ -15,12 +15,18 @@ export async function getCommentReplies(
   offset: number = 0,
   currentUserId?: string | null
 ): Promise<CommentWithUser[]> {
-  // 返信コメントを取得
+  // 返信コメントを取得（reply_to_userも含む）
   const { data, error } = await supabase
     .from('comments')
     .select(`
       *,
       user:users!comments_user_id_fkey (
+        id,
+        username,
+        display_name,
+        avatar_url
+      ),
+      reply_to_user:users!comments_reply_to_user_id_fkey (
         id,
         username,
         display_name,
@@ -42,59 +48,40 @@ export async function getCommentReplies(
     return [];
   }
 
-  // 返信先コメントIDを収集（重複除去）
-  const replyToCommentIds = [...new Set(
-    data
-      .map((c: any) => c.reply_to_comment_id)
-      .filter((id: string | null): id is string => id !== null)
-  )];
-
-  // 返信先コメントを別クエリで取得
-  let replyToCommentsMap = new Map<string, ReplyToComment>();
-  if (replyToCommentIds.length > 0) {
-    const { data: replyToComments } = await supabase
-      .from('comments')
-      .select(`
-        id,
-        content,
-        user:users!comments_user_id_fkey (
-          id,
-          username,
-          display_name,
-          avatar_url
-        )
-      `)
-      .in('id', replyToCommentIds);
-
-    if (replyToComments) {
-      replyToComments.forEach((c: any) => {
-        replyToCommentsMap.set(c.id, {
-          id: c.id,
-          content: c.content,
-          user: c.user || null,
-        });
-      });
-    }
-  }
-
   // コメントデータをマッピング
   return data.map((comment: any) => {
-    const mapped = mapCommentWithReplyTo(comment, currentUserId);
-    if (comment.reply_to_comment_id) {
-      mapped.reply_to_comment = replyToCommentsMap.get(comment.reply_to_comment_id) || null;
-    }
-    return mapped;
+    const isLiked = currentUserId
+      ? (comment.comment_likes || []).some((like: any) => like.user_id === currentUserId)
+      : false;
+
+    return {
+      id: comment.id,
+      user_id: comment.user_id,
+      map_id: comment.map_id,
+      user_spot_id: comment.user_spot_id,
+      content: comment.content,
+      created_at: comment.created_at,
+      updated_at: comment.updated_at,
+      parent_id: comment.parent_id || null,
+      root_id: comment.root_id || null,
+      depth: comment.depth || 0,
+      likes_count: comment.likes_count || 0,
+      replies_count: comment.replies_count || 0,
+      user: comment.user || null,
+      reply_to_user: comment.reply_to_user || null,
+      is_liked: isLiked,
+    };
   });
 }
 
 /**
- * コメントに返信を追加（フラット表示対応）
+ * コメントに返信を追加（Instagram/Note方式）
  *
  * フラット表示のため、すべての返信はルートコメント直下に配置される
  * - parent_id: 常にルートコメントのID（replies_countのトリガー用）
  * - root_id: ルートコメントのID
  * - depth: 1（すべての返信は同じ深さ）
- * - reply_to_comment_id: 実際の返信先コメントのID（どのコメントへの返信かを追跡）
+ * - reply_to_user_id: 返信先のユーザーID（誰への返信かを示す）
  */
 export async function addReplyComment(
   userId: string,
@@ -105,9 +92,8 @@ export async function addReplyComment(
   const rootId = parentComment.parent_id === null ? parentComment.id : parentComment.root_id;
   // フラット表示: parent_idは常にルートコメントID
   const actualParentId = rootId;
-  // 返信先コメント情報を保持
-  // トップレベルコメントへの返信の場合はnull（同じスレッドの開始なので不要）
-  const replyToCommentId = parentComment.parent_id !== null ? parentComment.id : null;
+  // 返信先ユーザーID（常に返信先のユーザーIDを設定）
+  const replyToUserId = parentComment.user_id;
 
   const { data, error } = await supabase
     .from('comments')
@@ -118,12 +104,18 @@ export async function addReplyComment(
       parent_id: actualParentId,
       root_id: rootId,
       depth: 1, // フラット表示: すべての返信は深さ1
-      reply_to_comment_id: replyToCommentId,
+      reply_to_user_id: replyToUserId,
       content,
     })
     .select(`
       *,
       user:users!comments_user_id_fkey (
+        id,
+        username,
+        display_name,
+        avatar_url
+      ),
+      reply_to_user:users!comments_reply_to_user_id_fkey (
         id,
         username,
         display_name,
@@ -140,13 +132,6 @@ export async function addReplyComment(
   // 親コメントのreplies_countはDBトリガーで自動更新される
 
   const result = mapComment(data);
-  // 返信先コメント情報を追加（insert直後なのでparentCommentから取得）
-  if (replyToCommentId) {
-    result.reply_to_comment = {
-      id: parentComment.id,
-      content: parentComment.content,
-      user: parentComment.user,
-    };
-  }
+  result.reply_to_user = data.reply_to_user || null;
   return result;
 }

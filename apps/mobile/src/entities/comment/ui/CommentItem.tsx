@@ -81,6 +81,17 @@ export function CommentItem({
                 {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
               </Text>
             </Pressable>
+            {/* 返信先ユーザー名（他の返信への返信時のみ表示、Instagram方式） */}
+            {comment.reply_to_user && (
+              <Pressable
+                onPress={() => onUserPress(comment.reply_to_user!.id)}
+                className="flex-row items-center ml-1"
+              >
+                <Text className="text-primary">
+                  @{comment.reply_to_user.display_name || comment.reply_to_user.username}
+                </Text>
+              </Pressable>
+            )}
           </View>
           <View className="flex-row items-center">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{formatRelativeTime(comment.created_at, locale)}</Text>

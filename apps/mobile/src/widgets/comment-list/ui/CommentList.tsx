@@ -27,7 +27,7 @@ interface CommentListProps {
 }
 
 /**
- * 返信一覧コンポーネント
+ * 返信一覧コンポーネント（Instagram/Note方式：インデント表示）
  */
 function ReplyList({
   parentId,
@@ -36,6 +36,7 @@ function ReplyList({
   onEdit,
   onDelete,
   onLike,
+  onReply,
 }: {
   parentId: string;
   currentUserId?: string | null;
@@ -43,6 +44,7 @@ function ReplyList({
   onEdit: (comment: CommentWithUser) => void;
   onDelete: (comment: CommentWithUser) => void;
   onLike?: (comment: CommentWithUser) => void;
+  onReply?: (comment: CommentWithUser) => void;
 }) {
   const { data: replies, isLoading } = useCommentReplies(parentId, currentUserId);
 
@@ -61,16 +63,18 @@ function ReplyList({
   return (
     <>
       {replies.map((reply) => (
-        <CommentItem
-          key={reply.id}
-          comment={reply}
-          currentUserId={currentUserId}
-          onUserPress={onUserPress}
-          onEdit={onEdit}
-          onDelete={onDelete}
-          onLike={onLike}
-          isReply
-        />
+        <View key={reply.id} className="pl-12">
+          <CommentItem
+            comment={reply}
+            currentUserId={currentUserId}
+            onUserPress={onUserPress}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            onLike={onLike}
+            onReply={onReply}
+            isReply
+          />
+        </View>
       ))}
     </>
   );
@@ -123,9 +127,10 @@ export function CommentList({
 
   const renderComment = useCallback(({ item }: { item: CommentWithUser }) => {
     const isExpanded = expandedReplies.has(item.id);
+    const hasReplies = item.replies_count > 0;
 
     return (
-      <View>
+      <View className="border-b border-border-light dark:border-dark-border-light">
         <CommentItem
           comment={item}
           currentUserId={currentUserId}
@@ -134,10 +139,10 @@ export function CommentList({
           onDelete={handleDelete}
           onLike={onLike}
           onReply={onReply}
-          onShowReplies={item.replies_count > 0 ? handleShowReplies : undefined}
+          onShowReplies={hasReplies ? handleShowReplies : undefined}
           isRepliesExpanded={isExpanded}
         />
-        {/* 返信一覧 */}
+        {/* 返信一覧（インデント表示） */}
         {isExpanded && (
           <ReplyList
             parentId={item.id}
@@ -146,6 +151,7 @@ export function CommentList({
             onEdit={onEdit}
             onDelete={handleDelete}
             onLike={onLike}
+            onReply={onReply}
           />
         )}
       </View>

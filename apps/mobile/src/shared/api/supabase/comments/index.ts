@@ -4,10 +4,10 @@
  */
 
 // 型定義
-export type { CommentUser, ReplyToComment, CommentWithUser } from './types';
+export type { CommentUser, CommentWithUser } from './types';
 
 // ヘルパー関数
-export { mapComment, mapCommentWithReplyTo } from './helpers';
+export { mapComment } from './helpers';
 
 // スポットコメント
 export { getSpotComments, addSpotComment, getSpotCommentsCount } from './spot-comments';

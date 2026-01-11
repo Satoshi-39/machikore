@@ -4,7 +4,7 @@
 
 import { supabase, handleSupabaseError } from '../client';
 import type { CommentWithUser } from './types';
-import { mapCommentWithReplyTo } from './helpers';
+import { mapComment } from './helpers';
 
 /**
  * コメントを更新
@@ -29,7 +29,7 @@ export async function updateComment(commentId: string, content: string): Promise
     handleSupabaseError('updateComment', error);
   }
 
-  return mapCommentWithReplyTo(data);
+  return mapComment(data);
 }
 
 /**

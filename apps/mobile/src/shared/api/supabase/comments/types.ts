@@ -9,13 +9,6 @@ export interface CommentUser {
   avatar_url: string | null;
 }
 
-/** 返信先コメント情報（フラット表示用） */
-export interface ReplyToComment {
-  id: string;
-  content: string;
-  user: CommentUser | null;
-}
-
 export interface CommentWithUser {
   id: string;
   user_id: string;
@@ -32,8 +25,8 @@ export interface CommentWithUser {
   replies_count: number;
   // リレーション
   user: CommentUser | null;
-  // 返信先コメント情報（フラット表示用）
-  reply_to_comment?: ReplyToComment | null;
+  // 返信先ユーザー情報（Instagram方式：誰への返信か）
+  reply_to_user?: CommentUser | null;
   // いいね状態（ログインユーザー用）
   is_liked?: boolean;
   // 返信一覧（オプション）
