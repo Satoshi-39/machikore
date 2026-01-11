@@ -3,6 +3,7 @@
  *
  * コメント一覧をボトムシート形式で表示（Instagram風ハーフモーダル）
  * スポット/マップのコメント表示に使用
+ * Modalでラップして画面全体をカバー（タブバーやヘッダーもグレーアウト）
  */
 
 import React, { useCallback, useState, useRef, useMemo } from 'react';
@@ -11,9 +12,12 @@ import {
   Text,
   Pressable,
   Keyboard,
+  Modal,
+  StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -248,6 +252,7 @@ export function CommentModal({
         disappearsOnIndex={-1}
         appearsOnIndex={0}
         opacity={0.5}
+        pressBehavior="close"
       />
     ),
     []
@@ -295,73 +300,87 @@ export function CommentModal({
     [t]
   );
 
-  if (!visible) return null;
-
   return (
-    <BottomSheet
-      ref={bottomSheetRef}
-      index={0}
-      snapPoints={snapPoints}
-      onChange={handleSheetChanges}
-      enablePanDownToClose
-      backdropComponent={renderBackdrop}
-      handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
-      backgroundStyle={{
-        backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
-      }}
-      keyboardBehavior="interactive"
-      keyboardBlurBehavior="restore"
+    <Modal
+      visible={visible}
+      transparent
+      animationType="none"
+      statusBarTranslucent
+      onRequestClose={handleClose}
     >
-      {/* ヘッダー */}
-      <View className="flex-row items-center justify-between px-4 pb-3 border-b border-border dark:border-dark-border">
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
-          {t('comment.comments')}
-        </Text>
-        <Pressable
-          onPress={handleClose}
-          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-          className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+      <GestureHandlerRootView style={styles.container}>
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={0}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+          enablePanDownToClose
+          backdropComponent={renderBackdrop}
+          handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
+          backgroundStyle={{
+            backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+          }}
+          keyboardBehavior="interactive"
+          keyboardBlurBehavior="restore"
         >
-          <Ionicons name="close" size={20} color={colors.text.secondary} />
-        </Pressable>
-      </View>
+          {/* ヘッダー */}
+          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-border dark:border-dark-border">
+            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+              {t('comment.comments')}
+            </Text>
+            <Pressable
+              onPress={handleClose}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+            >
+              <Ionicons name="close" size={20} color={colors.text.secondary} />
+            </Pressable>
+          </View>
 
-      {/* コメント一覧 */}
-      <BottomSheetFlatList
-        data={comments || []}
-        keyExtractor={(item: CommentWithUser) => item.id}
-        renderItem={renderCommentItem}
-        ListEmptyComponent={renderEmptyComponent}
-        contentContainerStyle={{ flexGrow: 1 }}
-        showsVerticalScrollIndicator={false}
-      />
+          {/* コメント一覧 */}
+          <BottomSheetFlatList
+            data={comments || []}
+            keyExtractor={(item: CommentWithUser) => item.id}
+            renderItem={renderCommentItem}
+            ListEmptyComponent={renderEmptyComponent}
+            contentContainerStyle={{ flexGrow: 1 }}
+            showsVerticalScrollIndicator={false}
+          />
 
-      {/* 下部固定の入力エリア */}
-      <View style={{ paddingBottom: insets.bottom }}>
-        <CommentInput
-          ref={inputRef}
-          avatarUrl={currentUser?.avatar_url}
-          inputText={inputText}
-          onChangeText={setInputText}
-          onSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-          replyingTo={replyTarget}
-          onCancelReply={cancelReply}
-          variant="fixed"
-        />
-      </View>
+          {/* 下部固定の入力エリア */}
+          <View style={{ paddingBottom: insets.bottom }}>
+            <CommentInput
+              ref={inputRef}
+              avatarUrl={currentUser?.avatar_url}
+              inputText={inputText}
+              onChangeText={setInputText}
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              replyingTo={replyTarget}
+              onCancelReply={cancelReply}
+              variant="fixed"
+            />
+          </View>
 
-      {/* 編集モーダル */}
-      <CommentInputModal
-        visible={!!editingComment}
-        onClose={handleEditCancel}
-        avatarUrl={currentUser?.avatar_url}
-        inputText={editText}
-        onChangeText={setEditText}
-        onSubmit={handleEditSubmit}
-        isSubmitting={isUpdatingComment}
-        isEditing
-      />
-    </BottomSheet>
+          {/* 編集モーダル */}
+          <CommentInputModal
+            visible={!!editingComment}
+            onClose={handleEditCancel}
+            avatarUrl={currentUser?.avatar_url}
+            inputText={editText}
+            onChangeText={setEditText}
+            onSubmit={handleEditSubmit}
+            isSubmitting={isUpdatingComment}
+            isEditing
+          />
+        </BottomSheet>
+      </GestureHandlerRootView>
+    </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
