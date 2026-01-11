@@ -335,6 +335,7 @@ export default {
     replyingTo: '回复%{name}',
     composingReply: '正在撰写回复',
     editComment: '编辑评论',
+    viewAllComments: '查看全部%{count}条评论',
   },
 
   // 浏览历史

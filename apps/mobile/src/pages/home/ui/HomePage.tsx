@@ -9,8 +9,7 @@ import React, { useState } from 'react';
 import { View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DiscoverTabs, type DiscoverTabMode } from '@/widgets/discover-tabs';
-import { RecommendMapFeed } from '@/widgets/recommend-map-feed';
-import { FollowingMapFeed } from '@/widgets/following-map-feed';
+import { RecommendMapFeed, FollowingMapFeed } from '@/widgets/map-feed';
 
 export function HomePage() {
   const [tabMode, setTabMode] = useState<DiscoverTabMode>('recommend');

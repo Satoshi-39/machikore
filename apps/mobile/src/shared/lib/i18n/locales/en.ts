@@ -335,6 +335,7 @@ export default {
     replyingTo: 'Replying to %{name}',
     composingReply: 'Composing reply',
     editComment: 'Edit comment',
+    viewAllComments: 'View all %{count} comments',
   },
 
   // View History

@@ -337,6 +337,7 @@ export default {
     replyingTo: '%{name}さんに返信',
     composingReply: '返信を作成中',
     editComment: 'コメントを編集',
+    viewAllComments: 'コメント%{count}件すべてを見る',
   },
 
   // 閲覧履歴

@@ -335,6 +335,7 @@ export default {
     replyingTo: '回覆%{name}',
     composingReply: '正在撰寫回覆',
     editComment: '編輯留言',
+    viewAllComments: '查看全部%{count}則留言',
   },
 
   // 瀏覽歷史
