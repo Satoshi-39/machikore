@@ -16,9 +16,10 @@ import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import type { MapWithUser } from '@/shared/types';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
+import { CommentModal } from '@/widgets/comment-modal';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -41,6 +42,8 @@ export function FollowingMapFeed() {
   const currentUser = useUserStore((state) => state.user);
   const userId = currentUser?.id;
   const { t } = useI18n();
+  // コメントモーダル用の状態
+  const [commentModalMapId, setCommentModalMapId] = useState<string | null>(null);
 
   // フォロー中ユーザーのマップ取得
   const {
@@ -107,12 +110,10 @@ export function FollowingMapFeed() {
     [router]
   );
 
-  const handleCommentPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/home/comments/maps/${mapId}`);
-    },
-    [router]
-  );
+  // コメントモーダルを開く
+  const handleCommentPress = useCallback((mapId: string) => {
+    setCommentModalMapId(mapId);
+  }, []);
 
   const handleArticlePress = useCallback(
     (mapId: string) => {
@@ -182,18 +183,30 @@ export function FollowingMapFeed() {
       emptyIonIcon="people-outline"
     >
       {(items) => (
-        <FlatList
-          data={items}
-          keyExtractor={getItemKey}
-          renderItem={renderItem}
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-          }
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={renderFooter}
-          showsVerticalScrollIndicator={false}
-        />
+        <>
+          <FlatList
+            data={items}
+            keyExtractor={getItemKey}
+            renderItem={renderItem}
+            refreshControl={
+              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+            }
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={renderFooter}
+            showsVerticalScrollIndicator={false}
+          />
+
+          {/* コメントモーダル */}
+          <CommentModal
+            visible={!!commentModalMapId}
+            onClose={() => setCommentModalMapId(null)}
+            type="map"
+            targetId={commentModalMapId ?? ''}
+            currentUserId={currentUser?.id}
+            onUserPress={handleUserPress}
+          />
+        </>
       )}
     </AsyncBoundary>
   );

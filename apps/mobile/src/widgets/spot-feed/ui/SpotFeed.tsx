@@ -6,17 +6,21 @@
  * - 無限スクロール対応
  */
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
 import { useRouter, type Href } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { CommentModal } from '@/widgets/comment-modal';
 
 export function SpotFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
+  // コメントモーダル用の状態
+  const [commentModalSpotId, setCommentModalSpotId] = useState<string | null>(null);
+
   // 無限スクロール対応のフック
   const {
     data,
@@ -49,10 +53,10 @@ export function SpotFeed() {
     router.push(`/edit-spot/${spotId}` as Href);
   }, [router]);
 
-  // コメント詳細ページへ遷移（発見タブ内スタック）
+  // コメントモーダルを開く
   const handleCommentPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/discover/comments/spots/${spotId}`);
-  }, [router]);
+    setCommentModalSpotId(spotId);
+  }, []);
 
   // マップ詳細ページへ遷移（発見タブ内スタック）
   const handleMapPress = useCallback((mapId: string) => {
@@ -85,31 +89,43 @@ export function SpotFeed() {
       emptyIonIcon="location-outline"
     >
       {(data) => (
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <SpotCard
-              spot={item}
-              currentUserId={currentUser?.id}
-              onPress={() => handleSpotPress(item.map_id, item.id)}
-              onUserPress={handleUserPress}
-              onMapPress={handleMapPress}
-              onEdit={handleEditSpot}
-              onCommentPress={handleCommentPress}
-              // Supabase JOINで取得済みのデータを渡す
-              embeddedUser={item.user}
-              embeddedMasterSpot={item.master_spot}
-            />
-          )}
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-          }
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={renderFooter}
-          showsVerticalScrollIndicator={false}
-        />
+        <>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <SpotCard
+                spot={item}
+                currentUserId={currentUser?.id}
+                onPress={() => handleSpotPress(item.map_id, item.id)}
+                onUserPress={handleUserPress}
+                onMapPress={handleMapPress}
+                onEdit={handleEditSpot}
+                onCommentPress={handleCommentPress}
+                // Supabase JOINで取得済みのデータを渡す
+                embeddedUser={item.user}
+                embeddedMasterSpot={item.master_spot}
+              />
+            )}
+            refreshControl={
+              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+            }
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={renderFooter}
+            showsVerticalScrollIndicator={false}
+          />
+
+          {/* コメントモーダル */}
+          <CommentModal
+            visible={!!commentModalSpotId}
+            onClose={() => setCommentModalSpotId(null)}
+            type="spot"
+            targetId={commentModalSpotId ?? ''}
+            currentUserId={currentUser?.id}
+            onUserPress={handleUserPress}
+          />
+        </>
       )}
     </AsyncBoundary>
   );

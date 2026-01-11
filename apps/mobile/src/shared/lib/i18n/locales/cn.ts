@@ -29,6 +29,7 @@ export default {
     comment: '评论',
     like: '点赞',
     share: '分享',
+    directions: '路线',
     post: '发布',
     user: '用户',
     skip: '跳过',

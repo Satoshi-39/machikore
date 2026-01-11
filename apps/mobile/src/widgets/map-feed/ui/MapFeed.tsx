@@ -7,13 +7,14 @@
  * - 広告表示（5件ごと）
  */
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFeedMaps, MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { CommentModal } from '@/widgets/comment-modal';
 
 /** 広告を挿入する間隔（マップ5件ごとに1広告） */
 const AD_INTERVAL = 5;
@@ -25,6 +26,9 @@ type FeedItem =
 export function MapFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
+  // コメントモーダル用の状態
+  const [commentModalMapId, setCommentModalMapId] = useState<string | null>(null);
+
   // 無限スクロール対応のフック
   const {
     data,
@@ -68,10 +72,10 @@ export function MapFeed() {
     router.push(`/edit-map/${mapId}`);
   }, [router]);
 
-  // コメント詳細ページへ遷移（発見タブ内スタック）
+  // コメントモーダルを開く
   const handleCommentPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/comments/maps/${mapId}`);
-  }, [router]);
+    setCommentModalMapId(mapId);
+  }, []);
 
   // 記事ページへ遷移
   const handleArticlePress = useCallback((mapId: string) => {
@@ -130,18 +134,30 @@ export function MapFeed() {
       emptyIonIcon="map-outline"
     >
       {(items) => (
-        <FlatList
-          data={items}
-          keyExtractor={getItemKey}
-          renderItem={renderItem}
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-          }
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={renderFooter}
-          showsVerticalScrollIndicator={false}
-        />
+        <>
+          <FlatList
+            data={items}
+            keyExtractor={getItemKey}
+            renderItem={renderItem}
+            refreshControl={
+              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+            }
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={renderFooter}
+            showsVerticalScrollIndicator={false}
+          />
+
+          {/* コメントモーダル */}
+          <CommentModal
+            visible={!!commentModalMapId}
+            onClose={() => setCommentModalMapId(null)}
+            type="map"
+            targetId={commentModalMapId ?? ''}
+            currentUserId={currentUser?.id}
+            onUserPress={handleUserPress}
+          />
+        </>
       )}
     </AsyncBoundary>
   );

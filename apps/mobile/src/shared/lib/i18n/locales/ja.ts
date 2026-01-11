@@ -29,6 +29,7 @@ export default {
     comment: 'コメント',
     like: 'いいね',
     share: '共有',
+    directions: '経路',
     post: '投稿',
     user: 'ユーザー',
     skip: 'スキップ',

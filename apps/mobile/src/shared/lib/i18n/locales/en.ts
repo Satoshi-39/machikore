@@ -29,6 +29,7 @@ export default {
     comment: 'Comment',
     like: 'Like',
     share: 'Share',
+    directions: 'Directions',
     post: 'Post',
     user: 'User',
     skip: 'Skip',

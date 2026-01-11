@@ -29,6 +29,7 @@ export default {
     comment: '留言',
     like: '按讚',
     share: '分享',
+    directions: '路線',
     post: '發布',
     user: '用戶',
     skip: '跳過',

@@ -8,7 +8,7 @@
  * - 将来的にはレコメンドロジック、人気順などに拡張可能
  */
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -20,6 +20,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getPublicMaps } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
+import { CommentModal } from '@/widgets/comment-modal';
 
 const PAGE_SIZE = 10;
 
@@ -34,6 +35,8 @@ export function RecommendMapFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
   const { t } = useI18n();
+  // コメントモーダル用の状態
+  const [commentModalMapId, setCommentModalMapId] = useState<string | null>(null);
 
   // おすすめマップ取得（公開マップ一覧）
   const {
@@ -87,9 +90,10 @@ export function RecommendMapFeed() {
     router.push(`/edit-map/${mapId}`);
   }, [router]);
 
+  // コメントモーダルを開く
   const handleCommentPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/home/comments/maps/${mapId}`);
-  }, [router]);
+    setCommentModalMapId(mapId);
+  }, []);
 
   const handleArticlePress = useCallback((mapId: string) => {
     router.push(`/(tabs)/home/articles/maps/${mapId}`);
@@ -145,18 +149,30 @@ export function RecommendMapFeed() {
       emptyIonIcon="map-outline"
     >
       {(items) => (
-        <FlatList
-          data={items}
-          keyExtractor={getItemKey}
-          renderItem={renderItem}
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-          }
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={renderFooter}
-          showsVerticalScrollIndicator={false}
-        />
+        <>
+          <FlatList
+            data={items}
+            keyExtractor={getItemKey}
+            renderItem={renderItem}
+            refreshControl={
+              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+            }
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={renderFooter}
+            showsVerticalScrollIndicator={false}
+          />
+
+          {/* コメントモーダル */}
+          <CommentModal
+            visible={!!commentModalMapId}
+            onClose={() => setCommentModalMapId(null)}
+            type="map"
+            targetId={commentModalMapId ?? ''}
+            currentUserId={currentUser?.id}
+            onUserPress={handleUserPress}
+          />
+        </>
       )}
     </AsyncBoundary>
   );

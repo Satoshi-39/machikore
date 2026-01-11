@@ -11,18 +11,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, CommentInputModal, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
-import { CommentList } from '@/widgets/comment-list';
-import { useSpotCommentInput } from '../model';
-import { useUser } from '@/entities/user';
+import { CommentPreview } from '@/widgets/comment-preview';
+import { CommentModal } from '@/widgets/comment-modal';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
-import { useCommentActions } from '@/features/comment-actions';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
@@ -88,38 +86,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
+  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
-  // コメント関連
-  const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 50, 0, currentUserId);
-  const { data: currentUser } = useUser(currentUserId ?? null);
-
-  // コメント入力管理フック
-  const {
-    isCommentModalVisible,
-    inputText,
-    setInputText,
-    isSubmitting,
-    replyTarget,
-    openCommentModal,
-    closeCommentModal,
-    handleReply,
-    cancelReply,
-    handleCommentSubmit,
-  } = useSpotCommentInput({ spotId: spot.id, currentUserId });
-
-  // コメント操作フック（編集・削除・いいね用）
-  const {
-    editingComment,
-    editText,
-    setEditText,
-    handleEdit,
-    handleEditSubmit,
-    handleEditCancel,
-    handleDelete,
-    handleLike: handleCommentLike,
-    isUpdatingComment,
-  } = useCommentActions({ spotId: spot.id, currentUserId });
+  // コメント関連（プレビュー用に最初の1件だけ取得）
+  const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 1, 0, currentUserId);
 
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
@@ -389,7 +360,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
           {/* コメント追加ボタン（タップでモーダル表示） */}
           <Pressable
-            onPress={openCommentModal}
+            onPress={() => setIsCommentModalVisible(true)}
             className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
           >
             <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
@@ -397,30 +368,19 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </Text>
           </Pressable>
 
-          {/* コメント一覧 */}
+          {/* コメントプレビュー */}
           {isLoadingComments ? (
             <View className="py-4 items-center">
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             </View>
-          ) : comments.length === 0 ? (
-            <View className="py-4 items-center">
-              <Ionicons name="chatbubble-outline" size={24} color={colors.gray[400]} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
-                {t('comment.noComments')}
-              </Text>
-            </View>
           ) : (
-            <View className="-mx-4">
-              <CommentList
-                comments={comments}
-                currentUserId={currentUserId}
-                onUserPress={handleUserPressInternal}
-                onEdit={handleEdit}
-                onDeleteConfirm={handleDelete}
-                onLike={handleCommentLike}
-                onReply={handleReply}
-              />
-            </View>
+            <CommentPreview
+              comments={comments}
+              totalCount={spot.comments_count}
+              currentUserId={currentUserId}
+              onUserPress={handleUserPressInternal}
+              onViewAll={() => setIsCommentModalVisible(true)}
+            />
           )}
         </View>
       </BottomSheetScrollView>
@@ -439,29 +399,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       />
     )}
 
-    {/* コメント入力モーダル */}
-    <CommentInputModal
+    {/* コメントモーダル */}
+    <CommentModal
       visible={isCommentModalVisible}
-      onClose={closeCommentModal}
-      avatarUrl={currentUser?.avatar_url}
-      inputText={inputText}
-      onChangeText={setInputText}
-      onSubmit={handleCommentSubmit}
-      isSubmitting={isSubmitting}
-      replyingTo={replyTarget}
-      onCancelReply={cancelReply}
-    />
-
-    {/* コメント編集モーダル */}
-    <CommentInputModal
-      visible={!!editingComment}
-      onClose={handleEditCancel}
-      avatarUrl={currentUser?.avatar_url}
-      inputText={editText}
-      onChangeText={setEditText}
-      onSubmit={handleEditSubmit}
-      isSubmitting={isUpdatingComment}
-      isEditing
+      onClose={() => setIsCommentModalVisible(false)}
+      type="spot"
+      targetId={spot.id}
+      currentUserId={currentUserId}
+      onUserPress={handleUserPressInternal}
     />
 
     {/* 画像拡大表示モーダル */}
