@@ -16,7 +16,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList, BottomSheetFooter } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
@@ -258,6 +258,32 @@ export function CommentModal({
     []
   );
 
+  // フッター（入力エリア）レンダラー
+  const renderFooter = useCallback(
+    (props: React.ComponentProps<typeof BottomSheetFooter>) => (
+      <BottomSheetFooter {...props} bottomInset={insets.bottom}>
+        <View
+          style={{
+            backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+          }}
+        >
+          <CommentInput
+            ref={inputRef}
+            avatarUrl={currentUser?.avatar_url}
+            inputText={inputText}
+            onChangeText={setInputText}
+            onSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
+            replyingTo={replyTarget}
+            onCancelReply={cancelReply}
+            variant="fixed"
+          />
+        </View>
+      </BottomSheetFooter>
+    ),
+    [insets.bottom, isDarkMode, currentUser?.avatar_url, inputText, setInputText, handleSubmit, isSubmitting, replyTarget, cancelReply]
+  );
+
   // コメントアイテムのレンダリング
   const renderCommentItem = useCallback(
     ({ item }: { item: CommentWithUser }) => (
@@ -316,6 +342,7 @@ export function CommentModal({
           onChange={handleSheetChanges}
           enablePanDownToClose
           backdropComponent={renderBackdrop}
+          footerComponent={renderFooter}
           handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
           backgroundStyle={{
             backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
@@ -343,24 +370,9 @@ export function CommentModal({
             keyExtractor={(item: CommentWithUser) => item.id}
             renderItem={renderCommentItem}
             ListEmptyComponent={renderEmptyComponent}
-            contentContainerStyle={{ flexGrow: 1 }}
+            contentContainerStyle={{ flexGrow: 1, paddingBottom: 80 }}
             showsVerticalScrollIndicator={false}
           />
-
-          {/* 下部固定の入力エリア */}
-          <View style={{ paddingBottom: insets.bottom }}>
-            <CommentInput
-              ref={inputRef}
-              avatarUrl={currentUser?.avatar_url}
-              inputText={inputText}
-              onChangeText={setInputText}
-              onSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-              replyingTo={replyTarget}
-              onCancelReply={cancelReply}
-              variant="fixed"
-            />
-          </View>
 
           {/* 編集モーダル */}
           <CommentInputModal
