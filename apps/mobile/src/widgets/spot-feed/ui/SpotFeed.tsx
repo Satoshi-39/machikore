@@ -13,7 +13,7 @@ import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary } from '@/shared/ui';
 import { colors } from '@/shared/config';
-import { CommentModal } from '@/widgets/comment-modal';
+import { CommentModal } from '@/widgets/comment';
 
 export function SpotFeed() {
   const router = useRouter();

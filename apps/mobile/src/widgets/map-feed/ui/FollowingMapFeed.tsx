@@ -16,7 +16,7 @@ import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import type { MapWithUser } from '@/shared/types';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
-import { CommentModal } from '@/widgets/comment-modal';
+import { CommentModal } from '@/widgets/comment';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import React, { useCallback, useMemo, useState } from 'react';

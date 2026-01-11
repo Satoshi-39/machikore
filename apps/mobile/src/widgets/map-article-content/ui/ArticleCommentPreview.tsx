@@ -12,7 +12,7 @@ import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { CommentInputModal } from '@/shared/ui';
 import { useAddMapComment, useAddReplyComment, useMapCommentsCount } from '@/entities/comment';
-import { CommentList } from '@/widgets/comment-list';
+import { CommentList } from '@/widgets/comment';
 import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 import { useI18n } from '@/shared/lib/i18n';

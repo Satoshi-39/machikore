@@ -21,7 +21,7 @@ import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
-import { CommentList } from '@/widgets/comment-list';
+import { CommentList } from './CommentList';
 import {
   useSpotComments,
   useMapComments,

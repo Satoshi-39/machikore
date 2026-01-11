@@ -20,7 +20,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getPublicMaps } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
-import { CommentModal } from '@/widgets/comment-modal';
+import { CommentModal } from '@/widgets/comment';
 
 const PAGE_SIZE = 10;
 

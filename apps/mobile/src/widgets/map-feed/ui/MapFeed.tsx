@@ -14,7 +14,7 @@ import { useFeedMaps, MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors } from '@/shared/config';
-import { CommentModal } from '@/widgets/comment-modal';
+import { CommentModal } from '@/widgets/comment';
 
 /** 広告を挿入する間隔（マップ5件ごとに1広告） */
 const AD_INTERVAL = 5;

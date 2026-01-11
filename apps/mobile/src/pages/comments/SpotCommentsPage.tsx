@@ -20,7 +20,7 @@ import { useSpotComments, useAddSpotComment, useAddReplyComment } from '@/entiti
 import { useCurrentUserId, useUser } from '@/entities/user';
 import { useSpotWithDetails, SpotCard } from '@/entities/user-spot';
 import { useCommentActions } from '@/features/comment-actions';
-import { CommentList } from '@/widgets/comment-list';
+import { CommentList } from '@/widgets/comment';
 import { PageHeader, CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useCurrentTab, showLoginRequiredAlert } from '@/shared/lib';
