@@ -17,7 +17,8 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
-import { useSpotComments, CommentItem } from '@/entities/comment';
+import { useSpotComments } from '@/entities/comment';
+import { CommentList } from '@/widgets/comment-list';
 import { useSpotCommentInput } from '../model';
 import { useUser } from '@/entities/user';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -483,18 +484,15 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </View>
           ) : (
             <View className="-mx-4">
-              {comments.map((comment) => (
-                <CommentItem
-                  key={comment.id}
-                  comment={comment}
-                  currentUserId={currentUserId}
-                  onUserPress={handleUserPressInternal}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                  onLike={handleCommentLike}
-                  onReply={handleReply}
-                />
-              ))}
+              <CommentList
+                comments={comments}
+                currentUserId={currentUserId}
+                onUserPress={handleUserPressInternal}
+                onEdit={handleEdit}
+                onDeleteConfirm={handleDelete}
+                onLike={handleCommentLike}
+                onReply={handleReply}
+              />
             </View>
           )}
         </View>

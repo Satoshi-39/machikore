@@ -11,7 +11,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { CommentInputModal } from '@/shared/ui';
-import { CommentItem, useAddMapComment, useAddReplyComment, useMapCommentsCount } from '@/entities/comment';
+import { useAddMapComment, useAddReplyComment, useMapCommentsCount } from '@/entities/comment';
+import { CommentList } from '@/widgets/comment-list';
 import { useUser } from '@/entities/user';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 import { useI18n } from '@/shared/lib/i18n';
@@ -135,18 +136,15 @@ export function ArticleCommentPreview({
         <>
           {/* コメント一覧 */}
           <View className="-mx-4">
-            {comments.map((comment) => (
-              <CommentItem
-                key={comment.id}
-                comment={comment}
-                currentUserId={currentUserId}
-                onUserPress={onUserPress}
-                onEdit={onEdit}
-                onDelete={onDelete}
-                onLike={onLike}
-                onReply={handleReply}
-              />
-            ))}
+            <CommentList
+              comments={comments}
+              currentUserId={currentUserId}
+              onUserPress={onUserPress}
+              onEdit={onEdit}
+              onDeleteConfirm={onDelete}
+              onLike={onLike}
+              onReply={handleReply}
+            />
           </View>
 
           {/* もっと見る */}
