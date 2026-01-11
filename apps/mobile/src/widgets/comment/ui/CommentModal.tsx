@@ -126,8 +126,8 @@ export function CommentModal({
   const inputRef = useRef<CommentInputRef>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  // スナップポイント: 60%と90%
-  const snapPoints = useMemo(() => ['60%', '90%'], []);
+  // スナップポイント: 55%のみ（画面中央付近で固定）
+  const snapPoints = useMemo(() => ['55%'], []);
 
   // 入力状態
   const [inputText, setInputText] = useState('');
