@@ -6,17 +6,19 @@
  * Modalでラップして画面全体をカバー（タブバーやヘッダーもグレーアウト）
  */
 
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useCallback, useState, useRef, useMemo, useEffect } from 'react';
 import {
   View,
   Text,
   Pressable,
   Keyboard,
   Modal,
-  StyleSheet,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList, BottomSheetFooter } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
@@ -126,8 +128,19 @@ export function CommentModal({
   const inputRef = useRef<CommentInputRef>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  // スナップポイント: 70%のみ（画面中央より少し上で固定）
-  const snapPoints = useMemo(() => ['70%'], []);
+  // スナップポイント: 65%と90%（手動で広げられる、キーボード表示時は自動で90%へ）
+  const snapPoints = useMemo(() => ['65%', '90%'], []);
+
+  // キーボード表示時にシートを拡大
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      bottomSheetRef.current?.snapToIndex(1); // 90%に拡大
+    });
+
+    return () => {
+      showSubscription.remove();
+    };
+  }, []);
 
   // 入力状態
   const [inputText, setInputText] = useState('');
@@ -258,31 +271,6 @@ export function CommentModal({
     []
   );
 
-  // フッター（入力エリア）レンダラー
-  const renderFooter = useCallback(
-    (props: React.ComponentProps<typeof BottomSheetFooter>) => (
-      <BottomSheetFooter {...props} bottomInset={insets.bottom}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
-          }}
-        >
-          <CommentInput
-            ref={inputRef}
-            avatarUrl={currentUser?.avatar_url}
-            inputText={inputText}
-            onChangeText={setInputText}
-            onSubmit={handleSubmit}
-            isSubmitting={isSubmitting}
-            replyingTo={replyTarget}
-            onCancelReply={cancelReply}
-            variant="fixed"
-          />
-        </View>
-      </BottomSheetFooter>
-    ),
-    [insets.bottom, isDarkMode, currentUser?.avatar_url, inputText, setInputText, handleSubmit, isSubmitting, replyTarget, cancelReply]
-  );
 
   // コメントアイテムのレンダリング
   const renderCommentItem = useCallback(
@@ -334,7 +322,7 @@ export function CommentModal({
       statusBarTranslucent
       onRequestClose={handleClose}
     >
-      <GestureHandlerRootView style={styles.container}>
+      <GestureHandlerRootView className="flex-1">
         <BottomSheet
           ref={bottomSheetRef}
           index={0}
@@ -343,13 +331,10 @@ export function CommentModal({
           enablePanDownToClose
           enableDynamicSizing={false}
           backdropComponent={renderBackdrop}
-          footerComponent={renderFooter}
           handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
           backgroundStyle={{
             backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
           }}
-          keyboardBehavior="interactive"
-          keyboardBlurBehavior="restore"
         >
           {/* ヘッダー */}
           <View className="flex-row items-center justify-between px-4 pb-3 border-b border-border dark:border-dark-border">
@@ -366,13 +351,14 @@ export function CommentModal({
           </View>
 
           {/* コメント一覧 */}
-          <BottomSheetFlatList
+          <FlatList
             data={comments || []}
             keyExtractor={(item: CommentWithUser) => item.id}
             renderItem={renderCommentItem}
             ListEmptyComponent={renderEmptyComponent}
             contentContainerStyle={{ flexGrow: 1, paddingBottom: 80 }}
             showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
           />
 
           {/* 編集モーダル */}
@@ -387,13 +373,31 @@ export function CommentModal({
             isEditing
           />
         </BottomSheet>
+
+        {/* 入力エリア（画面下部に固定、シートの外側） */}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          className="absolute bottom-0 left-0 right-0"
+        >
+          <View
+            className="border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface"
+            style={{ paddingBottom: insets.bottom }}
+          >
+            <CommentInput
+              ref={inputRef}
+              avatarUrl={currentUser?.avatar_url}
+              inputText={inputText}
+              onChangeText={setInputText}
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              replyingTo={replyTarget}
+              onCancelReply={cancelReply}
+              variant="fixed"
+            />
+          </View>
+        </KeyboardAvoidingView>
       </GestureHandlerRootView>
     </Modal>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
