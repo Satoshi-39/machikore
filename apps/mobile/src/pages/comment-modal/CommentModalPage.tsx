@@ -11,12 +11,10 @@ import {
   Text,
   Pressable,
   Keyboard,
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
@@ -63,9 +61,6 @@ export function CommentModalPage({
   const bottomSheetRef = useRef<BottomSheet>(null);
   const currentUserId = useCurrentUserId();
 
-  // 入力欄の高さ（CommentInput + safeArea）
-  const inputAreaHeight = 70 + insets.bottom;
-
   // スナップポイント: 75%のみ
   const snapPoints = useMemo(() => ['75%'], []);
 
@@ -81,6 +76,12 @@ export function CommentModalPage({
 
   // ユーザータップ時の遷移用（アニメーション完了後に遷移）
   const pendingUserPressRef = useRef<string | null>(null);
+
+  // 入力エリアの表示制御（閉じるアニメーション時に隠す）
+  const inputOpacity = useSharedValue(1);
+  const inputAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: inputOpacity.value,
+  }));
 
   // autoFocusが指定されている場合、モーダル表示後にフォーカス
   useEffect(() => {
@@ -234,6 +235,17 @@ export function CommentModalPage({
     bottomSheetRef.current?.close();
   }, []);
 
+  // BottomSheetのアニメーション開始ハンドラー（閉じる時に入力エリアを隠す）
+  const handleAnimate = useCallback((fromIndex: number, toIndex: number) => {
+    if (toIndex === -1) {
+      // 閉じるアニメーション開始時に入力エリアを即座に隠す
+      inputOpacity.value = withTiming(0, { duration: 150 });
+    } else if (fromIndex === -1) {
+      // 開くアニメーション時に入力エリアを表示
+      inputOpacity.value = withTiming(1, { duration: 150 });
+    }
+  }, [inputOpacity]);
+
   // BottomSheetの変更ハンドラー
   const handleSheetChanges = useCallback((index: number) => {
     if (index === -1) {
@@ -315,6 +327,7 @@ export function CommentModalPage({
         index={0}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
+        onAnimate={handleAnimate}
         enablePanDownToClose
         enableDynamicSizing={false}
         backdropComponent={renderBackdrop}
@@ -322,7 +335,9 @@ export function CommentModalPage({
         backgroundStyle={{
           backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
         }}
-        bottomInset={inputAreaHeight}
+        keyboardBehavior="interactive"
+        keyboardBlurBehavior="restore"
+        android_keyboardInputMode="adjustResize"
       >
         {/* ヘッダー */}
         <View className="flex-row items-center px-4 pb-3 border-b border-border dark:border-dark-border">
@@ -355,12 +370,12 @@ export function CommentModalPage({
         <SlideContainer
           showDetail={!!focusedParentComment}
           mainView={
-            <FlatList
+            <BottomSheetFlatList
               data={comments || []}
               keyExtractor={(item: CommentWithUser) => item.id}
               renderItem={renderCommentItem}
               ListEmptyComponent={renderEmptyComponent}
-              contentContainerStyle={{ flexGrow: 1 }}
+              contentContainerStyle={{ flexGrow: 1, paddingBottom: 70 + insets.bottom }}
               showsVerticalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"
             />
@@ -393,28 +408,23 @@ export function CommentModalPage({
         />
       </BottomSheet>
 
-      {/* 入力エリア */}
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        className="absolute bottom-0 left-0 right-0"
+      {/* 入力エリア（BottomSheetの外だが閉じる時に一緒にフェードアウト） */}
+      <Animated.View
+        className="absolute bottom-0 left-0 right-0 border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface"
+        style={[{ paddingBottom: insets.bottom }, inputAnimatedStyle]}
       >
-        <View
-          className="border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface"
-          style={{ paddingBottom: insets.bottom }}
-        >
-          <CommentInput
-            ref={inputRef}
-            avatarUrl={currentUser?.avatar_url}
-            inputText={inputText}
-            onChangeText={setInputText}
-            onSubmit={handleSubmit}
-            isSubmitting={isSubmitting}
-            replyingTo={replyTarget}
-            onCancelReply={cancelReply}
-            variant="fixed"
-          />
-        </View>
-      </KeyboardAvoidingView>
+        <CommentInput
+          ref={inputRef}
+          avatarUrl={currentUser?.avatar_url}
+          inputText={inputText}
+          onChangeText={setInputText}
+          onSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
+          replyingTo={replyTarget}
+          onCancelReply={cancelReply}
+          variant="fixed"
+        />
+      </Animated.View>
     </View>
   );
 }
