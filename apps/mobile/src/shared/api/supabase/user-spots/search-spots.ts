@@ -6,7 +6,8 @@
  */
 
 import { supabase } from '../client';
-import type { UserSpotSearchResult, MapSpotSearchResult } from './types';
+import type { UserSpotSearchResult, MapSpotSearchResult, SearchPublicSpotsRpcRow } from './types';
+import { rpcSpotResponseToUserSpotSearchResult } from './types';
 
 /**
  * 公開スポットをキーワードで検索（RPC版）
@@ -31,46 +32,10 @@ export async function searchPublicUserSpots(
     return [];
   }
 
-  // RPC結果をUserSpotSearchResult型に変換
-  return (data || []).map((row: any): UserSpotSearchResult => ({
-    id: row.id,
-    user_id: row.user_id,
-    map_id: row.map_id,
-    master_spot_id: row.master_spot_id,
-    machi_id: row.machi_id,
-    description: row.description,
-    spot_color: row.spot_color || null,
-    label_id: row.label_id || null,
-    map_label: row.label_name ? {
-      id: row.label_id,
-      name: row.label_name,
-      color: row.label_color,
-    } : null,
-    name: row.name || null,
-    images_count: row.images_count,
-    likes_count: row.likes_count,
-    comments_count: row.comments_count,
-    order_index: row.order_index,
-    created_at: row.created_at,
-    updated_at: row.updated_at,
-    master_spot: row.master_spot_id ? {
-      id: row.master_spot_id,
-      name: row.master_spot_name,
-      latitude: row.master_spot_latitude,
-      longitude: row.master_spot_longitude,
-      google_place_id: row.master_spot_google_place_id,
-      google_formatted_address: row.master_spot_google_formatted_address,
-      google_short_address: row.master_spot_google_short_address,
-      google_types: row.master_spot_google_types,
-    } : null,
-    user: row.user_username ? {
-      id: row.user_id,
-      username: row.user_username,
-      display_name: row.user_display_name,
-      avatar_url: row.user_avatar_url,
-    } : null,
-    map: row.map_name ? { id: row.map_id, name: row.map_name } : null,
-  }));
+  // RPC結果をUserSpotSearchResult型に変換（中間型を経由）
+  return (data || []).map((row) =>
+    rpcSpotResponseToUserSpotSearchResult(row as SearchPublicSpotsRpcRow)
+  );
 }
 
 /**
@@ -170,7 +135,7 @@ export async function searchPublicSpotsByTag(
 
   const spotIds = spotTagsData.map((st) => st.user_spot_id);
 
-  // 3. スポット詳細を取得（公開マップのスポットのみ）
+  // 3. スポット詳細を取得（公開マップのスポットのみ、タグ情報も含む）
   const { data, error } = await supabase
     .from('user_spots')
     .select(`
@@ -214,6 +179,13 @@ export async function searchPublicSpotsByTag(
         id,
         name,
         color
+      ),
+      spot_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .in('id', spotIds)
@@ -265,5 +237,8 @@ export async function searchPublicSpotsByTag(
       avatar_url: spot.users.avatar_url,
     } : null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    tags: (spot.spot_tags || [])
+      .map((st: any) => st.tags)
+      .filter(Boolean),
   }));
 }

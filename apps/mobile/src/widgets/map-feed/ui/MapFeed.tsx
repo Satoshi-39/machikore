@@ -1,20 +1,24 @@
 /**
- * マップフィードWidget
+ * 汎用マップフィードWidget
  *
  * FSDの原則：Widget層 - 複数のFeature/Entityを組み合わせた複合コンポーネント
- * - 公開マップのフィード表示
+ * - 様々なデータソースに対応（おすすめ、フォロー中、発見など）
  * - 無限スクロール対応
  * - 広告表示（5件ごと）
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
+import { FlatList, RefreshControl, ActivityIndicator, View, Text } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useFeedMaps, MapCard } from '@/entities/map';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import type { MapWithUser } from '@/shared/types';
+
+const PAGE_SIZE = 10;
 
 /** 広告を挿入する間隔（マップ5件ごとに1広告） */
 const AD_INTERVAL = 5;
@@ -23,11 +27,40 @@ type FeedItem =
   | { type: 'map'; data: MapWithUser }
   | { type: 'ad'; id: string };
 
-export function MapFeed() {
+type TabName = 'home' | 'discover' | 'mypage' | 'notifications';
+
+interface MapFeedProps {
+  /** データ取得関数 */
+  fetchMaps: (limit: number, offset: number) => Promise<MapWithUser[]>;
+  /** Query Key */
+  queryKey: readonly unknown[];
+  /** ルーティング先のタブ名 */
+  tabName: TabName;
+  /** 空の場合のメッセージ */
+  emptyMessage: string;
+  /** 空の場合のアイコン */
+  emptyIcon?: string;
+  /** ログイン必須かどうか */
+  requireAuth?: boolean;
+  /** 未ログイン時のメッセージ */
+  unauthMessage?: string;
+}
+
+export function MapFeed({
+  fetchMaps,
+  queryKey,
+  tabName,
+  emptyMessage,
+  emptyIcon = 'map-outline',
+  requireAuth = false,
+  unauthMessage,
+}: MapFeedProps) {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
+  const userId = currentUser?.id;
+  const { t } = useI18n();
 
-  // 無限スクロール対応のフック
+  // 無限スクロール対応のマップ取得
   const {
     data,
     isLoading,
@@ -37,7 +70,19 @@ export function MapFeed() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useFeedMaps();
+  } = useInfiniteQuery<MapWithUser[], Error>({
+    queryKey,
+    queryFn: ({ pageParam = 0 }) => fetchMaps(PAGE_SIZE, pageParam as number),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length < PAGE_SIZE) {
+        return undefined;
+      }
+      return allPages.length * PAGE_SIZE;
+    },
+    staleTime: 1000 * 60 * 5, // 5分間キャッシュ
+    enabled: !requireAuth || !!userId, // 認証必須の場合はログイン時のみ有効
+  });
 
   // ページデータをフラット化し、広告を挿入
   const feedItems = useMemo((): FeedItem[] => {
@@ -57,42 +102,35 @@ export function MapFeed() {
   }, [data]);
 
   const handleMapPress = useCallback((mapId: string) => {
-    // 発見タブ内スタックに遷移（タブバーを維持）
-    router.push(`/(tabs)/discover/maps/${mapId}`);
-  }, [router]);
+    router.push(`/(tabs)/${tabName}/maps/${mapId}`);
+  }, [router, tabName]);
 
   const handleUserPress = useCallback((userId: string) => {
-    // 発見タブ内スタックに遷移（タブバーを維持）
-    router.push(`/(tabs)/discover/users/${userId}`);
-  }, [router]);
+    router.push(`/(tabs)/${tabName}/users/${userId}`);
+  }, [router, tabName]);
 
   const handleEditMap = useCallback((mapId: string) => {
     router.push(`/edit-map/${mapId}`);
   }, [router]);
 
-  // コメントモーダルを開く
   const handleCommentPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/comment-modal/maps/${mapId}`);
-  }, [router]);
+    router.push(`/(tabs)/${tabName}/comment-modal/maps/${mapId}`);
+  }, [router, tabName]);
 
-  // 記事ページへ遷移
   const handleArticlePress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/articles/maps/${mapId}`);
-  }, [router]);
+    router.push(`/(tabs)/${tabName}/articles/maps/${mapId}`);
+  }, [router, tabName]);
 
-  // タグタップで検索画面に遷移
   const handleTagPress = useCallback((tagName: string) => {
-    router.push(`/(tabs)/discover/search?tag=${encodeURIComponent(tagName)}`);
-  }, [router]);
+    router.push(`/(tabs)/${tabName}/search?tag=${encodeURIComponent(tagName)}`);
+  }, [router, tabName]);
 
-  // 下端に近づいたら次のページを取得
   const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  // ローディングフッター
   const renderFooter = useCallback(() => {
     if (!isFetchingNextPage) return null;
     return (
@@ -101,6 +139,17 @@ export function MapFeed() {
       </View>
     );
   }, [isFetchingNextPage]);
+
+  // 未ログイン時の表示（認証必須の場合）
+  if (requireAuth && !userId) {
+    return (
+      <View className="flex-1 items-center justify-center px-6">
+        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          {unauthMessage || t('empty.noFollowingUsers')}
+        </Text>
+      </View>
+    );
+  }
 
   // フィードアイテムのレンダリング
   const renderItem = useCallback(
@@ -134,24 +183,22 @@ export function MapFeed() {
       isLoading={isLoading}
       error={error}
       data={feedItems.length > 0 ? feedItems : null}
-      emptyMessage="マップがまだありません"
-      emptyIonIcon="map-outline"
+      emptyMessage={emptyMessage}
+      emptyIonIcon={emptyIcon}
     >
       {(items) => (
-        <>
-          <FlatList
-            data={items}
-            keyExtractor={getItemKey}
-            renderItem={renderItem}
-            refreshControl={
-              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-            }
-            onEndReached={handleEndReached}
-            onEndReachedThreshold={0.5}
-            ListFooterComponent={renderFooter}
-            showsVerticalScrollIndicator={false}
-          />
-        </>
+        <FlatList
+          data={items}
+          keyExtractor={getItemKey}
+          renderItem={renderItem}
+          refreshControl={
+            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+          }
+          onEndReached={handleEndReached}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={renderFooter}
+          showsVerticalScrollIndicator={false}
+        />
       )}
     </AsyncBoundary>
   );

@@ -3,7 +3,7 @@
  */
 
 import type { Database, Json } from '@/shared/types/database.types';
-import type { ProseMirrorDoc, MapLabelBasicInfo } from '@/shared/types';
+import type { ProseMirrorDoc, MapLabelBasicInfo, TagBasicInfo } from '@/shared/types';
 
 // MergeDeepで拡張されたDatabase型を使用
 // article_contentがProseMirrorDoc型として正しく認識される
@@ -79,7 +79,7 @@ export interface UserSpotSearchResult {
   updated_at: string;
   master_spot: {
     id: string;
-    name: string;
+    name: Json | null; // JSONB型（多言語対応: {"ja": "...", "en": "..."}）
     latitude: number;
     longitude: number;
     google_place_id: string | null;
@@ -97,6 +97,8 @@ export interface UserSpotSearchResult {
     id: string;
     name: string;
   } | null;
+  /** スポットに紐づくタグ */
+  tags?: TagBasicInfo[];
 }
 
 /**
@@ -108,4 +110,99 @@ export interface MapSpotSearchResult {
   address: Json | null; // JSONB型（多言語対応）
   latitude: number;
   longitude: number;
+}
+
+// ===============================
+// RPC用型定義
+// ===============================
+
+/**
+ * search_public_spots RPCのレスポンス型
+ * Supabaseが返すJSONB型のフィールドを具体的な型で定義
+ */
+export interface SearchPublicSpotsRpcRow {
+  id: string;
+  user_id: string;
+  map_id: string;
+  master_spot_id: string | null;
+  machi_id: string | null;
+  description: string;
+  spot_color: string | null;
+  label_id: string | null;
+  label_name: string | null;
+  label_color: string | null;
+  /** ピン刺し・現在地登録の場合のスポット名（JSONB） */
+  name: Json | null;
+  images_count: number;
+  likes_count: number;
+  comments_count: number;
+  order_index: number;
+  created_at: string;
+  updated_at: string;
+  latitude: number | null;
+  longitude: number | null;
+  google_formatted_address: Json | null;
+  google_short_address: Json | null;
+  // master_spot fields
+  master_spot_name: Json | null;
+  master_spot_latitude: number | null;
+  master_spot_longitude: number | null;
+  master_spot_google_place_id: string | null;
+  master_spot_google_formatted_address: Json | null;
+  master_spot_google_short_address: Json | null;
+  master_spot_google_types: string[] | null;
+  // user fields
+  user_username: string | null;
+  user_display_name: string | null;
+  user_avatar_url: string | null;
+  // map fields
+  map_name: string | null;
+  // tags (JSONB → 具体的な型で定義)
+  tags: TagBasicInfo[] | null;
+}
+
+/**
+ * search_public_spots RPCレスポンスをUserSpotSearchResultに変換するヘルパー
+ */
+export function rpcSpotResponseToUserSpotSearchResult(row: SearchPublicSpotsRpcRow): UserSpotSearchResult {
+  return {
+    id: row.id,
+    user_id: row.user_id,
+    map_id: row.map_id,
+    master_spot_id: row.master_spot_id,
+    machi_id: row.machi_id,
+    description: row.description,
+    spot_color: row.spot_color,
+    label_id: row.label_id,
+    map_label: row.label_name ? {
+      id: row.label_id!,
+      name: row.label_name,
+      color: row.label_color!,
+    } : null,
+    name: row.name,
+    images_count: row.images_count,
+    likes_count: row.likes_count,
+    comments_count: row.comments_count,
+    order_index: row.order_index,
+    created_at: row.created_at,
+    updated_at: row.updated_at,
+    master_spot: row.master_spot_id ? {
+      id: row.master_spot_id,
+      name: row.master_spot_name,
+      latitude: row.master_spot_latitude!,
+      longitude: row.master_spot_longitude!,
+      google_place_id: row.master_spot_google_place_id,
+      google_formatted_address: row.master_spot_google_formatted_address,
+      google_short_address: row.master_spot_google_short_address,
+      google_types: row.master_spot_google_types,
+    } : null,
+    user: row.user_username ? {
+      id: row.user_id,
+      username: row.user_username,
+      display_name: row.user_display_name,
+      avatar_url: row.user_avatar_url,
+    } : null,
+    map: row.map_name ? { id: row.map_id, name: row.map_name } : null,
+    tags: row.tags && row.tags.length > 0 ? row.tags : undefined,
+  };
 }

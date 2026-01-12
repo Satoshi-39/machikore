@@ -49,6 +49,24 @@ export function extractPlainText(doc: ProseMirrorDoc | null | undefined): string
     .trim();
 }
 
+/**
+ * JSON文字列をProseMirrorDocにパース（安全に）
+ * RPC結果などの文字列形式のJSONをオブジェクトに変換する際に使用
+ */
+export function parseProseMirrorDoc(jsonString: string | null | undefined): ProseMirrorDoc | null {
+  if (!jsonString) return null;
+  try {
+    const parsed = JSON.parse(jsonString);
+    // 基本的な構造チェック
+    if (parsed && parsed.type === 'doc' && Array.isArray(parsed.content)) {
+      return parsed;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 // ===============================
 // ユーザー情報（共通）
 // ===============================

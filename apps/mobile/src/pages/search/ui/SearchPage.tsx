@@ -235,6 +235,7 @@ export function SearchPage() {
                 onPress={() => handleSpotPress(item.item.id)}
                 onUserPress={handleUserPress}
                 onCommentPress={handleSpotCommentPress}
+                onTagPress={handleTagPress}
               />
             );
           }
@@ -287,6 +288,7 @@ export function SearchPage() {
                 onPress={() => handleSpotPress(item.item.id)}
                 onUserPress={handleUserPress}
                 onCommentPress={handleSpotCommentPress}
+                onTagPress={handleTagPress}
               />
             );
           }
@@ -345,6 +347,7 @@ export function SearchPage() {
               onPress={() => handleSpotPress(item.id)}
               onUserPress={handleUserPress}
               onCommentPress={handleSpotCommentPress}
+              onTagPress={handleTagPress}
             />
           )}
           showsVerticalScrollIndicator={false}

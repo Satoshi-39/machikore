@@ -2803,6 +2803,34 @@ export type Database = {
       postgis_version: { Args: never; Returns: string }
       postgis_wagyu_version: { Args: never; Returns: string }
       record_map_view: { Args: { p_map_id: string }; Returns: undefined }
+      search_public_maps: {
+        Args: { result_limit?: number; search_query: string }
+        Returns: {
+          article_intro: string
+          article_outro: string
+          bookmarks_count: number
+          category_id: string
+          comments_count: number
+          created_at: string
+          description: string
+          id: string
+          is_article_public: boolean
+          is_official: boolean
+          is_public: boolean
+          language: string
+          likes_count: number
+          name: string
+          show_label_chips: boolean
+          spots_count: number
+          tags: Json
+          thumbnail_url: string
+          updated_at: string
+          user_avatar_url: string
+          user_display_name: string
+          user_id: string
+          user_username: string
+        }[]
+      }
       search_public_spots: {
         Args: { result_limit?: number; search_query: string }
         Returns: {
@@ -2833,6 +2861,7 @@ export type Database = {
           name: Json
           order_index: number
           spot_color: string
+          tags: Json
           updated_at: string
           user_avatar_url: string
           user_display_name: string

@@ -4,39 +4,35 @@
 
 import { supabase } from '../client';
 import type { MapWithUser } from '@/shared/types';
-import { mapResponseToMapWithUser, type SupabaseMapResponse } from './types';
+import {
+  mapResponseToMapWithUser,
+  rpcMapResponseToMapWithUser,
+  type SearchPublicMapsRpcRow,
+} from './types';
 import { log } from '@/shared/config/logger';
 
 /**
- * 公開マップをキーワードで検索（Supabase版）
+ * 公開マップをキーワードで検索（RPC版）
  * 発見タブの検索で使用
  */
 export async function searchPublicMaps(
   query: string,
   limit: number = 30
 ): Promise<MapWithUser[]> {
-  const { data, error } = await supabase
-    .from('maps')
-    .select(`
-      *,
-      users (
-        id,
-        username,
-        display_name,
-        avatar_url
-      )
-    `)
-    .eq('is_public', true)
-    .or(`name.ilike.%${query}%,description.ilike.%${query}%`)
-    .order('created_at', { ascending: false })
-    .limit(limit);
+  const { data, error } = await supabase.rpc('search_public_maps', {
+    search_query: query,
+    result_limit: limit,
+  });
 
   if (error) {
-    log.error('[Maps] Error:', error);
+    log.error('[Maps] searchPublicMaps error:', error);
     return [];
   }
 
-  return (data || []).map((map: SupabaseMapResponse) => mapResponseToMapWithUser(map));
+  // RPC結果をMapWithUser型に変換（中間型を経由）
+  return (data || []).map((row) =>
+    rpcMapResponseToMapWithUser(row as SearchPublicMapsRpcRow)
+  );
 }
 
 /**
@@ -71,7 +67,7 @@ export async function searchPublicMapsByTag(
 
   const mapIds = mapTagsData.map((mt) => mt.map_id);
 
-  // 3. マップ詳細を取得
+  // 3. マップ詳細を取得（タグ情報も含む）
   const { data, error } = await supabase
     .from('maps')
     .select(`
@@ -81,6 +77,13 @@ export async function searchPublicMapsByTag(
         username,
         display_name,
         avatar_url
+      ),
+      map_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('is_public', true)
@@ -93,8 +96,9 @@ export async function searchPublicMapsByTag(
     return [];
   }
 
-  return (data || []).map((map: SupabaseMapResponse) => mapResponseToMapWithUser(map));
+  return (data || []).map((map) => mapResponseToMapWithUser(map));
 }
+
 
 /**
  * カテゴリIDで公開マップを検索
@@ -125,5 +129,5 @@ export async function searchPublicMapsByCategoryId(
     return [];
   }
 
-  return (data || []).map((map: SupabaseMapResponse) => mapResponseToMapWithUser(map));
+  return (data || []).map((map) => mapResponseToMapWithUser(map));
 }

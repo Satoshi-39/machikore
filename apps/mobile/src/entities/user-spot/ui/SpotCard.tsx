@@ -15,7 +15,7 @@ import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, Locati
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
-import type { SpotWithMasterSpot, SpotWithDetails, UUID, Json } from '@/shared/types';
+import type { SpotWithMasterSpot, SpotWithDetails, UUID, Json, TagBasicInfo } from '@/shared/types';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import { formatRelativeTime } from '@/shared/lib/utils';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -58,6 +58,7 @@ interface SpotCardProps {
   onMapPress?: (mapId: string) => void;
   onEdit?: (spotId: string) => void;
   onCommentPress?: (spotId: string) => void;
+  onTagPress?: (tagName: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
@@ -75,6 +76,7 @@ export function SpotCard({
   onMapPress,
   onEdit,
   onCommentPress,
+  onTagPress,
   embeddedUser,
   embeddedMasterSpot,
   noBorder = false,
@@ -88,6 +90,9 @@ export function SpotCard({
 
   // いいね状態は spot.is_liked を使用（SpotWithDetails の場合）
   const isLiked = 'is_liked' in spot ? (spot.is_liked ?? false) : false;
+
+  // タグ情報を取得（UserSpotSearchResult の場合のみ）
+  const tags: TagBasicInfo[] | undefined = 'tags' in spot ? spot.tags : undefined;
 
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
   const spotColor = useMemo((): SpotColor => {
@@ -404,6 +409,27 @@ export function SpotCard({
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
             {address || machiName}
           </Text>
+        </View>
+      )}
+
+      {/* タグ */}
+      {tags && tags.length > 0 && (
+        <View className="flex-row flex-wrap mb-2">
+          {tags.slice(0, 5).map((tag) => (
+            <Pressable
+              key={tag.id}
+              onPress={(e) => {
+                e.stopPropagation();
+                onTagPress?.(tag.name);
+              }}
+              className="mr-2 mb-1"
+              hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
+            >
+              <Text className="text-sm text-primary">
+                #{tag.name}
+              </Text>
+            </Pressable>
+          ))}
         </View>
       )}
 
