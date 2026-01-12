@@ -18,7 +18,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
-import { CommentPreview } from '@/widgets/comment';
+import { ReadOnlyCommentList, CommentModal } from '@/widgets/comment';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
@@ -88,10 +88,12 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
+  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
+  const [focusCommentId, setFocusCommentId] = useState<string | null>(null);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
-  // コメント関連（プレビュー用に最初の1件だけ取得）
-  const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 1, 0, currentUserId);
+  // コメント関連（全件取得して表示）
+  const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 50, 0, currentUserId);
 
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
@@ -355,13 +357,16 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <View className="flex-row items-center mb-3">
             <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-              {t('common.comment')}
+              {t('common.comment')} ({spot.comments_count})
             </Text>
           </View>
 
           {/* コメント追加ボタン（タップでモーダル表示） */}
           <Pressable
-            onPress={() => router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}`)}
+            onPress={() => {
+              setFocusCommentId(null);
+              setIsCommentModalVisible(true);
+            }}
             className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
           >
             <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
@@ -369,18 +374,20 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </Text>
           </Pressable>
 
-          {/* コメントプレビュー */}
+          {/* コメント一覧（読み取り専用） */}
           {isLoadingComments ? (
             <View className="py-4 items-center">
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             </View>
           ) : (
-            <CommentPreview
+            <ReadOnlyCommentList
               comments={comments}
               totalCount={spot.comments_count}
-              currentUserId={currentUserId}
               onUserPress={handleUserPressInternal}
-              onViewAll={() => router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}`)}
+              onOpenCommentModal={(commentId) => {
+                setFocusCommentId(commentId ?? null);
+                setIsCommentModalVisible(true);
+              }}
             />
           )}
         </View>
@@ -414,6 +421,17 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       spotId={spot.id}
       onClose={() => setIsLikersModalVisible(false)}
       onUserPress={handleUserPressInternal}
+    />
+
+    {/* コメントモーダル */}
+    <CommentModal
+      visible={isCommentModalVisible}
+      onClose={() => setIsCommentModalVisible(false)}
+      type="spot"
+      targetId={spot.id}
+      currentUserId={currentUserId}
+      onUserPress={handleUserPressInternal}
+      focusCommentId={focusCommentId}
     />
     </>
   );

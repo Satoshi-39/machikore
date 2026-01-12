@@ -32,6 +32,8 @@ interface AddReplyParams {
   userId: UUID;
   parentComment: CommentWithUser;
   content: string;
+  /** 返信先のユーザーID（明示的に返信ボタンを押した場合のみ指定） */
+  replyToUserId?: string;
 }
 
 /**
@@ -41,8 +43,8 @@ export function useAddReplyComment() {
   const queryClient = useQueryClient();
 
   return useMutation<CommentWithUser, Error, AddReplyParams>({
-    mutationFn: ({ userId, parentComment, content }) =>
-      addReplyComment(userId, parentComment, content),
+    mutationFn: ({ userId, parentComment, content, replyToUserId }) =>
+      addReplyComment(userId, parentComment, content, replyToUserId),
     onSuccess: (_, { parentComment }) => {
       // フラット表示: ルートコメントのIDを特定
       const rootId = parentComment.parent_id === null ? parentComment.id : parentComment.root_id;

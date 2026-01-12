@@ -328,6 +328,7 @@ export default {
     reply: '回覆',
     showReplies: '顯示%{count}則回覆',
     hideReplies: '隱藏回覆',
+    backToComments: '返回評論列表',
     defaultUser: '使用者',
     enterComment: '輸入留言...',
     enterReply: '輸入回覆...',

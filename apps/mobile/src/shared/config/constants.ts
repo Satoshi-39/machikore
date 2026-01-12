@@ -624,3 +624,14 @@ export const SEARCH_HISTORY = {
   /** 最大保存件数 */
   MAX_COUNT: 20,
 } as const;
+
+// ===============================
+// コメント表示
+// ===============================
+
+export const COMMENT_DISPLAY = {
+  /** スポット詳細カード等でのプレビュー表示件数 */
+  PREVIEW_COUNT: 3,
+  /** プレビュー表示時のコメント最大文字数 */
+  MAX_TEXT_LENGTH: 100,
+} as const;

@@ -3,7 +3,7 @@
  */
 
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { CommentModalScreen } from '@/pages/comment-modal';
+import { CommentModalPage } from '@/pages/comment-modal';
 
 export default function MapCommentModalScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -12,7 +12,7 @@ export default function MapCommentModalScreen() {
   if (!id) return null;
 
   return (
-    <CommentModalScreen
+    <CommentModalPage
       type="map"
       targetId={id}
       onClose={() => router.back()}

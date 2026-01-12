@@ -1,1 +1,1 @@
-export { CommentModalScreen } from './CommentModalScreen';
+export { CommentModalPage } from './CommentModalPage';

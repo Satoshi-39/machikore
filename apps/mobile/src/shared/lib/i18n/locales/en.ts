@@ -328,6 +328,7 @@ export default {
     reply: 'Reply',
     showReplies: 'Show %{count} replies',
     hideReplies: 'Hide replies',
+    backToComments: 'Back to comments',
     defaultUser: 'User',
     enterComment: 'Enter comment...',
     enterReply: 'Enter reply...',

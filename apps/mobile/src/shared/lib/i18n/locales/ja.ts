@@ -330,6 +330,7 @@ export default {
     reply: '返信',
     showReplies: '%{count}件の返信を表示',
     hideReplies: '返信を非表示',
+    backToComments: 'コメント一覧に戻る',
     defaultUser: 'ユーザー',
     enterComment: 'コメントを入力...',
     enterReply: '返信を入力...',

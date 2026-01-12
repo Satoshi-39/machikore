@@ -81,19 +81,20 @@ export async function getCommentReplies(
  * - parent_id: 常にルートコメントのID（replies_countのトリガー用）
  * - root_id: ルートコメントのID
  * - depth: 1（すべての返信は同じ深さ）
- * - reply_to_user_id: 返信先のユーザーID（誰への返信かを示す）
+ * - reply_to_user_id: 返信先のユーザーID（誰への返信かを示す、オプション）
+ *
+ * @param replyToUserId 返信先のユーザーID（明示的に返信ボタンを押した場合のみ指定）
  */
 export async function addReplyComment(
   userId: string,
   parentComment: CommentWithUser,
-  content: string
+  content: string,
+  replyToUserId?: string | null
 ): Promise<CommentWithUser> {
   // ルートコメントのIDを特定
   const rootId = parentComment.parent_id === null ? parentComment.id : parentComment.root_id;
   // フラット表示: parent_idは常にルートコメントID
   const actualParentId = rootId;
-  // 返信先ユーザーID（常に返信先のユーザーIDを設定）
-  const replyToUserId = parentComment.user_id;
 
   const { data, error } = await supabase
     .from('comments')

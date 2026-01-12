@@ -328,6 +328,7 @@ export default {
     reply: '回复',
     showReplies: '显示%{count}条回复',
     hideReplies: '隐藏回复',
+    backToComments: '返回评论列表',
     defaultUser: '用户',
     enterComment: '输入评论...',
     enterReply: '输入回复...',

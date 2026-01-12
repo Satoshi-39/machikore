@@ -6,7 +6,7 @@
  * Modalでラップして画面全体をカバー（タブバーやヘッダーもグレーアウト）
  */
 
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useCallback, useState, useRef, useMemo, useEffect } from 'react';
 import {
   View,
   Text,
@@ -26,7 +26,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
-import { CommentItem, useCommentReplies } from '@/entities/comment';
+import { CommentItem } from '@/entities/comment';
 import {
   useSpotComments,
   useMapComments,
@@ -36,6 +36,9 @@ import {
 } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import { useCommentActions } from '@/features/comment-actions';
+import { RepliesLink } from './RepliesLink';
+import { ReplyDetailView } from './ReplyDetailView';
+import { SlideContainer } from './SlideContainer';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface CommentModalProps {
@@ -48,70 +51,8 @@ interface CommentModalProps {
   currentUserId?: string | null;
   /** ユーザータップ時のコールバック */
   onUserPress?: (userId: string) => void;
-}
-
-/**
- * 返信表示コンポーネント（展開可能）
- */
-function RepliesSection({
-  parentId,
-  currentUserId,
-  onUserPress,
-  onEdit,
-  onDelete,
-  onLike,
-}: {
-  parentId: string;
-  currentUserId?: string | null;
-  onUserPress: (userId: string) => void;
-  onEdit: (comment: CommentWithUser) => void;
-  onDelete: (comment: CommentWithUser) => void;
-  onLike: (comment: CommentWithUser) => void;
-}) {
-  const { t } = useI18n();
-  const { data: replies } = useCommentReplies(parentId, currentUserId);
-  const [expanded, setExpanded] = useState(false);
-
-  if (!replies || replies.length === 0) return null;
-
-  const visibleReplies = expanded ? replies : [];
-  const hasReplies = replies.length > 0;
-
-  return (
-    <View className="pl-12">
-      {/* 返信を表示/非表示トグル */}
-      {hasReplies && !expanded && (
-        <Pressable onPress={() => setExpanded(true)} className="py-2">
-          <Text className="text-sm text-primary font-medium">
-            {t('comment.showReplies', { count: replies.length })}
-          </Text>
-        </Pressable>
-      )}
-
-      {/* 返信一覧 */}
-      {visibleReplies.map((reply) => (
-        <CommentItem
-          key={reply.id}
-          comment={reply}
-          currentUserId={currentUserId}
-          onUserPress={onUserPress}
-          onEdit={() => onEdit(reply)}
-          onDelete={() => onDelete(reply)}
-          onLike={() => onLike(reply)}
-          isReply
-        />
-      ))}
-
-      {/* 返信を非表示 */}
-      {expanded && (
-        <Pressable onPress={() => setExpanded(false)} className="py-2">
-          <Text className="text-sm text-primary font-medium">
-            {t('comment.hideReplies')}
-          </Text>
-        </Pressable>
-      )}
-    </View>
-  );
+  /** 特定のコメントの返信詳細を開く */
+  focusCommentId?: string | null;
 }
 
 export function CommentModal({
@@ -121,6 +62,7 @@ export function CommentModal({
   targetId,
   currentUserId,
   onUserPress,
+  focusCommentId,
 }: CommentModalProps) {
   const { t } = useI18n();
   const insets = useSafeAreaInsets();
@@ -138,6 +80,22 @@ export function CommentModal({
   // 入力状態
   const [inputText, setInputText] = useState('');
   const [replyingTo, setReplyingTo] = useState<CommentWithUser | null>(null);
+
+  // 返信詳細モード（親コメントを表示）
+  const [focusedParentComment, setFocusedParentComment] = useState<CommentWithUser | null>(null);
+
+  // focusCommentIdによる自動遷移を無効化するフラグ（手動で戻った場合）
+  const hasManuallyClosedRef = useRef(false);
+
+  // モーダルが閉じられたときに状態をリセット
+  useEffect(() => {
+    if (!visible) {
+      setFocusedParentComment(null);
+      setReplyingTo(null);
+      setInputText('');
+      hasManuallyClosedRef.current = false;
+    }
+  }, [visible]);
 
   // 現在のユーザー情報
   const { data: currentUser } = useUser(currentUserId ?? null);
@@ -157,6 +115,27 @@ export function CommentModal({
   );
 
   const comments = type === 'spot' ? spotComments : mapComments;
+
+  // focusCommentIdが指定されている場合、モーダルが開いてから返信詳細モードに遷移
+  useEffect(() => {
+    if (
+      visible &&
+      focusCommentId &&
+      comments &&
+      comments.length > 0 &&
+      !focusedParentComment &&
+      !hasManuallyClosedRef.current
+    ) {
+      const targetComment = comments.find((c) => c.id === focusCommentId);
+      if (targetComment) {
+        // モーダルが開くアニメーション後に遷移（一瞬コメント一覧が見える）
+        const timer = setTimeout(() => {
+          setFocusedParentComment(targetComment);
+        }, 600);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [visible, focusCommentId, comments, focusedParentComment]);
 
   // コメント投稿
   const { mutate: addSpotComment, isPending: isAddingSpotComment } = useAddSpotComment();
@@ -179,6 +158,17 @@ export function CommentModal({
     type === 'spot' ? { spotId: targetId, currentUserId } : { mapId: targetId, currentUserId }
   );
 
+  // 返信詳細モードへ遷移
+  const handleShowReplies = useCallback((comment: CommentWithUser) => {
+    setFocusedParentComment(comment);
+  }, []);
+
+  // 返信詳細モードから戻る
+  const handleBackFromReplies = useCallback(() => {
+    hasManuallyClosedRef.current = true; // 手動で戻ったことを記録
+    setFocusedParentComment(null);
+  }, []);
+
   // 返信ハンドラー
   const handleReply = useCallback((comment: CommentWithUser) => {
     setReplyingTo(comment);
@@ -191,9 +181,13 @@ export function CommentModal({
   }, []);
 
   // 送信ハンドラー
+  // 返信詳細モード中は、replyingToがなくても親コメントへの返信として扱う
   const handleSubmit = useCallback(() => {
+    // 返信詳細モード中かつreplyingToがない場合は、親コメントへの返信
+    const effectiveReplyTarget = replyingTo || focusedParentComment;
+
     if (!currentUserId) {
-      showLoginRequiredAlert(replyingTo ? t('comment.reply') : t('comment.comment'));
+      showLoginRequiredAlert(effectiveReplyTarget ? t('comment.reply') : t('comment.comment'));
       return;
     }
     if (!inputText.trim() || isSubmitting) return;
@@ -206,9 +200,15 @@ export function CommentModal({
       Keyboard.dismiss();
     };
 
-    if (replyingTo) {
+    if (effectiveReplyTarget) {
+      // replyingToがある場合のみ（明示的に返信ボタンを押した場合）replyToUserIdを指定
       addReply(
-        { userId: currentUserId, parentComment: replyingTo, content },
+        {
+          userId: currentUserId,
+          parentComment: effectiveReplyTarget,
+          content,
+          replyToUserId: replyingTo?.user_id,
+        },
         { onSuccess }
       );
     } else if (type === 'spot') {
@@ -222,7 +222,7 @@ export function CommentModal({
         { onSuccess }
       );
     }
-  }, [currentUserId, inputText, replyingTo, type, targetId, addReply, addSpotComment, addMapComment, isSubmitting, t]);
+  }, [currentUserId, inputText, replyingTo, focusedParentComment, type, targetId, addReply, addSpotComment, addMapComment, isSubmitting, t]);
 
   // ユーザープレスハンドラー
   const handleUserPressInternal = useCallback((userId: string) => {
@@ -279,20 +279,16 @@ export function CommentModal({
           onLike={() => handleLike(item)}
           onReply={() => handleReply(item)}
         />
-        {/* 返信セクション */}
+        {/* 返信リンク */}
         {item.replies_count > 0 && (
-          <RepliesSection
-            parentId={item.id}
-            currentUserId={currentUserId}
-            onUserPress={handleUserPressInternal}
-            onEdit={handleEdit}
-            onDelete={handleDeleteConfirm}
-            onLike={handleLike}
+          <RepliesLink
+            comment={item}
+            onShowReplies={handleShowReplies}
           />
         )}
       </View>
     ),
-    [currentUserId, handleUserPressInternal, handleEdit, handleDeleteConfirm, handleLike, handleReply]
+    [currentUserId, handleUserPressInternal, handleEdit, handleDeleteConfirm, handleLike, handleReply, handleShowReplies]
   );
 
   // 空の場合の表示
@@ -332,10 +328,23 @@ export function CommentModal({
           bottomInset={inputAreaHeight}
         >
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-border dark:border-dark-border">
-            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+          <View className="flex-row items-center px-4 pb-3 border-b border-border dark:border-dark-border">
+            {/* 左側：戻るボタン（または空スペース） */}
+            <View className="w-8 h-8 items-center justify-center">
+              {focusedParentComment && (
+                <Pressable
+                  onPress={handleBackFromReplies}
+                  hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                >
+                  <Ionicons name="chevron-back" size={24} color={colors.text.primary} />
+                </Pressable>
+              )}
+            </View>
+            {/* 中央：タイトル */}
+            <Text className="flex-1 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
               {t('comment.comments')}
             </Text>
+            {/* 右側：閉じるボタン */}
             <Pressable
               onPress={handleClose}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
@@ -345,15 +354,33 @@ export function CommentModal({
             </Pressable>
           </View>
 
-          {/* コメント一覧 */}
-          <FlatList
-            data={comments || []}
-            keyExtractor={(item: CommentWithUser) => item.id}
-            renderItem={renderCommentItem}
-            ListEmptyComponent={renderEmptyComponent}
-            contentContainerStyle={{ flexGrow: 1 }}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
+          {/* コメント一覧 ⇔ 返信詳細（横スライド） */}
+          <SlideContainer
+            showDetail={!!focusedParentComment}
+            mainView={
+              <FlatList
+                data={comments || []}
+                keyExtractor={(item: CommentWithUser) => item.id}
+                renderItem={renderCommentItem}
+                ListEmptyComponent={renderEmptyComponent}
+                contentContainerStyle={{ flexGrow: 1 }}
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
+              />
+            }
+            detailView={
+              focusedParentComment ? (
+                <ReplyDetailView
+                  parentComment={focusedParentComment}
+                  currentUserId={currentUserId}
+                  onUserPress={handleUserPressInternal}
+                  onEdit={handleEdit}
+                  onDelete={handleDeleteConfirm}
+                  onLike={handleLike}
+                  onReply={handleReply}
+                />
+              ) : null
+            }
           />
 
           {/* 編集モーダル */}

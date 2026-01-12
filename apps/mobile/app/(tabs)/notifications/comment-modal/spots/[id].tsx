@@ -3,16 +3,20 @@
  */
 
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { CommentModalScreen } from '@/pages/comment-modal';
+import { CommentModalPage } from '@/pages/comment-modal';
 
 export default function SpotCommentModalScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, autoFocus, focusCommentId } = useLocalSearchParams<{
+    id: string;
+    autoFocus?: string;
+    focusCommentId?: string;
+  }>();
   const router = useRouter();
 
   if (!id) return null;
 
   return (
-    <CommentModalScreen
+    <CommentModalPage
       type="spot"
       targetId={id}
       onClose={() => router.back()}
@@ -20,6 +24,8 @@ export default function SpotCommentModalScreen() {
         router.dismiss();
         router.push(`/(tabs)/notifications/users/${userId}`);
       }}
+      autoFocus={autoFocus === 'true'}
+      focusCommentId={focusCommentId}
     />
   );
 }

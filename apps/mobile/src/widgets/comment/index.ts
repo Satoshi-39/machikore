@@ -1,1 +1,9 @@
-export { CommentList, CommentModal, CommentPreview } from './ui';
+export {
+  CommentList,
+  CommentModal,
+  CommentPreview,
+  ReadOnlyCommentList,
+  RepliesLink,
+  ReplyDetailView,
+  SlideContainer,
+} from './ui';
