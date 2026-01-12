@@ -107,9 +107,16 @@ export function MapInfoModal({
               {mapTitle}
             </Text>
 
+            {/* マップの概要 */}
+            {mapDescription && (
+              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-3 leading-6">
+                {mapDescription}
+              </Text>
+            )}
+
             {/* タグ */}
             {mapTags.length > 0 && (
-              <View className="flex-row flex-wrap gap-2 mt-3">
+              <View className="flex-row flex-wrap gap-2 mt-4">
                 {mapTags.map((tag) => (
                   <View
                     key={tag.id}
@@ -121,13 +128,6 @@ export function MapInfoModal({
                   </View>
                 ))}
               </View>
-            )}
-
-            {/* マップの概要 */}
-            {mapDescription && (
-              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-4 leading-6">
-                {mapDescription}
-              </Text>
             )}
 
             {/* スポット一覧 */}
