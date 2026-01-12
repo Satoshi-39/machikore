@@ -122,8 +122,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   }, [images, imageViewer]);
 
   // タブバーの高さを考慮したスナップポイント（3段階固定）
-  // 縮小: 15%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
-  const snapPoints = useMemo(() => ['15%', '45%', '90%'], []);
+  // 縮小: 18%（現在地ボタンのみ表示）、デフォルト: 45%、拡大: 90%（検索バー非表示）
+  const snapPoints = useMemo(() => ['17%', '45%', '90%'], []);
 
   // 初回マウント時に初期状態（デフォルト状態）を通知
   // Bottom Sheetの初期index=1の場合、onChangeは呼ばれないため手動で通知
@@ -231,8 +231,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         onLocationButtonVisibilityChange={onLocationButtonVisibilityChange}
       />
 
-      <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
-        {/* ヘッダー */}
+      {/* 固定ヘッダー（スクロールしても固定） */}
+      <View className="px-4">
         <View className="flex-row items-start justify-between mb-3">
           <View className="flex-1">
             {/* マスタースポット正式名称（メイン） */}
@@ -274,6 +274,17 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
         </View>
 
+        {/* 住所 */}
+        {spotAddress && (
+          <View className="flex-row items-center mb-3">
+            <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
+          </View>
+        )}
+      </View>
+
+      {/* スクロール可能なコンテンツ */}
+      <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* 画像（画像がある場合のみ表示） */}
         {images.length > 0 ? (
           <View className="mb-3">
@@ -298,14 +309,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </ScrollView>
           </View>
         ) : null}
-
-        {/* 住所 */}
-        {spotAddress && (
-          <View className="flex-row items-center mb-3">
-            <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
-          </View>
-        )}
 
         {/* アクションボタン */}
         <View className="flex-row items-center justify-around pt-4 pb-1 border-t border-border dark:border-dark-border">

@@ -13,7 +13,9 @@ export const SEARCH_BAR_BOTTOM_Y = 180;
 
 /** 現在地ボタンを非表示にする閾値（カード上端がこのY座標より上に来たら非表示） */
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-export const LOCATION_BUTTON_HIDE_THRESHOLD_Y = SCREEN_HEIGHT * 0.75;
+// 小(18%: position=0.82)で表示、中(45%: position=0.55)以上で非表示
+// 閾値を0.70に設定（小と中の間）
+export const LOCATION_BUTTON_HIDE_THRESHOLD_Y = SCREEN_HEIGHT * 0.70;
 
 interface UseSearchBarSyncOptions {
   /** 検索バー領域の下端Y座標（この位置より上にカードが来たら検索バーを非表示） */
