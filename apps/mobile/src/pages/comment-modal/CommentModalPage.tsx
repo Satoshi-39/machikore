@@ -390,6 +390,7 @@ export function CommentModalPage({
                 onDelete={handleDeleteConfirm}
                 onLike={handleLike}
                 onReply={handleReply}
+                contentPaddingBottom={70 + insets.bottom}
               />
             ) : null
           }

@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View } from 'react-native';
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { CommentItem, useCommentReplies } from '@/entities/comment';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
@@ -25,6 +26,8 @@ interface ReplyDetailViewProps {
   onLike: (comment: CommentWithUser) => void;
   /** 返信時 */
   onReply: (comment: CommentWithUser) => void;
+  /** コンテンツの下部パディング（入力エリアの高さ分） */
+  contentPaddingBottom?: number;
 }
 
 export function ReplyDetailView({
@@ -35,15 +38,16 @@ export function ReplyDetailView({
   onDelete,
   onLike,
   onReply,
+  contentPaddingBottom = 0,
 }: ReplyDetailViewProps) {
   const { data: replies } = useCommentReplies(parentComment.id, currentUserId);
 
   return (
     <View className="flex-1">
-      <FlatList
+      <BottomSheetFlatList<CommentWithUser>
         data={[parentComment, ...(replies || [])]}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => {
+        keyExtractor={(item: CommentWithUser) => item.id}
+        renderItem={({ item, index }: { item: CommentWithUser; index: number }) => {
           const isReply = index > 0;
           return (
             <View className={isReply ? 'pl-10' : ''}>
@@ -60,7 +64,7 @@ export function ReplyDetailView({
             </View>
           );
         }}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingBottom: contentPaddingBottom }}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       />
