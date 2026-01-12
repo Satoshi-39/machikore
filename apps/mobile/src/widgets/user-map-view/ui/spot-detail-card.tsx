@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -18,8 +18,8 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
-import { ReadOnlyCommentList } from '@/widgets/comment';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { SpotCommentPreview } from './SpotCommentPreview';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -353,43 +353,24 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         </View>
 
         {/* コメントセクション */}
-        <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
-          <View className="flex-row items-center mb-3">
-            <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
-              {t('common.comment')} ({spot.comments_count})
-            </Text>
-          </View>
-
-          {/* コメント追加ボタン（タップでモーダル表示） */}
-          <Pressable
-            onPress={() => {
-              router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}?autoFocus=true`);
-            }}
-            className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
-          >
-            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
-              {t('comment.addPlaceholder')}
-            </Text>
-          </Pressable>
-
-          {/* コメント一覧（読み取り専用） */}
-          {isLoadingComments ? (
-            <View className="py-4 items-center">
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
-            </View>
-          ) : (
-            <ReadOnlyCommentList
-              comments={comments}
-              totalCount={spot.comments_count}
-              onUserPress={handleUserPressInternal}
-              onOpenCommentModal={(commentId) => {
-                const params = commentId ? `?focusCommentId=${commentId}` : '';
-                router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}${params}`);
-              }}
-            />
-          )}
-        </View>
+        <SpotCommentPreview
+          spotId={spot.id}
+          commentsCount={spot.comments_count}
+          comments={comments}
+          isLoading={isLoadingComments}
+          onUserPress={handleUserPressInternal}
+          onOpenCommentModal={(options) => {
+            const params = new URLSearchParams();
+            if (options?.focusCommentId) {
+              params.set('focusCommentId', options.focusCommentId);
+            }
+            if (options?.autoFocus) {
+              params.set('autoFocus', 'true');
+            }
+            const queryString = params.toString();
+            router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}${queryString ? `?${queryString}` : ''}`);
+          }}
+        />
       </BottomSheetScrollView>
     </BottomSheet>
 
