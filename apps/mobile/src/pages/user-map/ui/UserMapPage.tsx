@@ -12,6 +12,7 @@ import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { useRecordView } from '@/entities/view-history';
+import { useSpots } from '@/entities/user-spot';
 import { UserMapView } from '@/widgets/user-map-view';
 import { UserMapList } from '@/widgets/user-map-list';
 import { OwnMapSearch } from '@/widgets/own-map-search';
@@ -52,12 +53,11 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   const { data: selectedMap, isLoading: isMapLoading } = useMap(mapId);
   const mapOwner = selectedMap?.user ?? null;
 
+  // マップ内のスポット一覧を取得
+  const { data: spots = [] } = useSpots(mapId, user?.id);
+
   // ログインユーザー自身のマップ一覧（デフォルトマップIDの取得用）
   const { data: myMaps } = useUserMaps(user?.id ?? null, { currentUserId: user?.id });
-
-  // マップ所有者のマップ一覧を取得（ヘッダーのドロップダウン用）
-  const mapOwnerId = selectedMap?.user_id ?? null;
-  const { data: ownerMaps } = useUserMaps(mapOwnerId, { currentUserId: user?.id });
 
   const [viewMode, setViewMode] = useState<MapListViewMode>('map');
   const [searchQuery, setSearchQuery] = useState('');
@@ -115,11 +115,6 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     router.push('/create-spot');
   };
 
-  const handleMapSelect = (newMapId: string) => {
-    setSelectedMapId(newMapId);
-    router.replace(`/(tabs)/${currentTab}/maps/${newMapId}` as any);
-  };
-
   const handleUserPress = () => {
     if (selectedMap?.user_id) {
       router.push(`/(tabs)/${currentTab}/users/${selectedMap.user_id}` as any);
@@ -173,6 +168,11 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   // マップ編集画面へ遷移
   const handleEditMap = () => {
     router.push(`/edit-map/${mapId}` as Href);
+  };
+
+  // マップ情報モーダルからスポットタップ時
+  const handleSpotPress = (spotId: string) => {
+    setJumpToSpotId(spotId);
   };
 
   return (
@@ -248,19 +248,21 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               isLoading={isMapLoading}
               mapId={mapId}
               mapTitle={selectedMap?.name}
+              mapDescription={selectedMap?.description}
+              mapTags={selectedMap?.tags}
+              spots={spots}
               userId={user?.id}
               currentUserId={user?.id}
               mapOwnerId={selectedMap?.user_id}
               isArticlePublic={selectedMap?.is_article_public ?? false}
               userName={mapOwner?.display_name || undefined}
               userAvatarUrl={mapOwner?.avatar_url || undefined}
-              userMaps={ownerMaps}
               onBack={handleBack}
-              onMapSelect={handleMapSelect}
               onUserPress={handleUserPress}
               onSearchPress={handleSearchFocus}
               onArticlePress={handleArticlePress}
               onEditPress={handleEditMap}
+              onSpotPress={handleSpotPress}
             />
           </View>
         </View>

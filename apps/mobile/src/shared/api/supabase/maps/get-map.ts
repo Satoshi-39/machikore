@@ -19,6 +19,13 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
         username,
         display_name,
         avatar_url
+      ),
+      map_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('id', mapId)

@@ -824,6 +824,8 @@ export default {
   userMap: {
     usersMap: '%{name}的地图',
     selectMap: '选择地图',
+    mapInfo: '地图信息',
+    spotList: '景点列表',
   },
 
   // 编辑文章

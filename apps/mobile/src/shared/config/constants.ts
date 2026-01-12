@@ -481,7 +481,7 @@ export const INPUT_LIMITS = {
 
   // マップ
   MAP_NAME: 50,
-  MAP_DESCRIPTION: 200,
+  MAP_DESCRIPTION: 500,
   MAX_SPOTS_PER_MAP: 100,
 
   // スポット

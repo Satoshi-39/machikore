@@ -824,6 +824,8 @@ export default {
   userMap: {
     usersMap: '%{name}的地圖',
     selectMap: '選擇地圖',
+    mapInfo: '地圖資訊',
+    spotList: '景點列表',
   },
 
   // 編輯文章

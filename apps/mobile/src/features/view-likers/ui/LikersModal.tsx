@@ -117,7 +117,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           enablePanDownToClose={true}
           enableDynamicSizing={false}
           backdropComponent={renderBackdrop}
-          backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
+          backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surfaceSecondary : colors.light.surface }}
           handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
         >
           {/* ヘッダー */}

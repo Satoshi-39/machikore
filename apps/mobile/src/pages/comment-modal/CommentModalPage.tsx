@@ -333,7 +333,7 @@ export function CommentModalPage({
         backdropComponent={renderBackdrop}
         handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
         backgroundStyle={{
-          backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+          backgroundColor: isDarkMode ? colors.dark.surfaceSecondary : colors.light.surface,
         }}
         keyboardBehavior="interactive"
         keyboardBlurBehavior="restore"
@@ -411,7 +411,7 @@ export function CommentModalPage({
 
       {/* 入力エリア（BottomSheetの外だが閉じる時に一緒にフェードアウト） */}
       <Animated.View
-        className="absolute bottom-0 left-0 right-0 border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface"
+        className="absolute bottom-0 left-0 right-0 border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface-secondary"
         style={[{ paddingBottom: insets.bottom }, inputAnimatedStyle]}
       >
         <CommentInput

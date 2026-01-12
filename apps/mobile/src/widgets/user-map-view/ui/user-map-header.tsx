@@ -16,31 +16,32 @@ import { colors } from '@/shared/config';
 import { shareMap, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import type { MapWithUser } from '@/shared/types';
+import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
 import { ImageViewerModal, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, {
   useCallback,
-  useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import {
   ActivityIndicator,
-  Animated,
-  Modal,
   Pressable,
-  ScrollView,
   Text,
   View,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { MapInfoModal } from './MapInfoModal';
 
 interface UserMapHeaderProps {
   isLoading?: boolean;
   mapId?: string | null;
   mapTitle?: string;
+  /** マップの概要 */
+  mapDescription?: string | null;
+  /** マップのタグ */
+  mapTags?: TagBasicInfo[];
+  /** マップ内のスポット一覧 */
+  spots?: SpotWithDetails[];
   userId?: string | null;
   /** 現在ログイン中のユーザーID（自分のマップ判定用） */
   currentUserId?: string | null;
@@ -50,35 +51,36 @@ interface UserMapHeaderProps {
   isArticlePublic?: boolean;
   userName?: string;
   userAvatarUrl?: string;
-  userMaps?: MapWithUser[];
   onBack?: () => void;
-  onMapSelect?: (mapId: string) => void;
   onUserPress?: () => void;
   onSearchPress?: () => void;
   onArticlePress?: () => void;
   onEditPress?: () => void;
+  /** スポットタップ時のコールバック */
+  onSpotPress?: (spotId: string) => void;
 }
 
 export function UserMapHeader({
   isLoading = false,
   mapId,
   mapTitle,
+  mapDescription,
+  mapTags = [],
+  spots = [],
   userId,
   currentUserId,
   mapOwnerId,
   isArticlePublic = false,
   userName,
   userAvatarUrl,
-  userMaps = [],
   onBack,
-  onMapSelect,
   onUserPress,
   onSearchPress,
   onArticlePress,
   onEditPress,
+  onSpotPress,
 }: UserMapHeaderProps) {
   const { t } = useI18n();
-  const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
@@ -87,7 +89,6 @@ export function UserMapHeader({
   // いいね状態を取得
   const { data: isLiked = false } = useCheckMapLiked(userId, mapId);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
-  const slideAnim = useRef(new Animated.Value(-500)).current; // 初期位置: 画面上部の外側
 
   // マップブックマーク状態を取得
   const { data: bookmarkInfo = [] } = useMapBookmarkInfo(userId, mapId);
@@ -206,34 +207,11 @@ export function UserMapHeader({
     t,
   ]);
 
-  // モーダルの開閉に応じてアニメーション
-  useEffect(() => {
-    if (isDropdownOpen) {
-      // 上からスライドダウン
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      // 上にスライドアップして消える
-      Animated.timing(slideAnim, {
-        toValue: -500,
-        duration: 250,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [isDropdownOpen, slideAnim]);
-
   const handleMapTitlePress = () => {
-    if (userMaps.length > 0) {
+    // マップ詳細情報がある場合はドロップダウンを開く
+    if (mapTitle || mapDescription || mapTags.length > 0) {
       setIsDropdownOpen(!isDropdownOpen);
     }
-  };
-
-  const handleMapItemPress = (selectedMapId: string) => {
-    onMapSelect?.(selectedMapId);
-    setIsDropdownOpen(false);
   };
 
   // ローディング時の表示
@@ -328,14 +306,12 @@ export function UserMapHeader({
               >
                 {mapTitle || t('userMap.usersMap', { name: userName || '' })}
               </Text>
-              {userMaps.length > 0 && (
-                <Ionicons
-                  name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
-                  size={19}
-                  color="#6B7280"
-                  style={{ marginLeft: 4 }}
-                />
-              )}
+              <Ionicons
+                name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
+                size={19}
+                color="#6B7280"
+                style={{ marginLeft: 4 }}
+              />
             </Pressable>
           </View>
         </View>
@@ -369,64 +345,16 @@ export function UserMapHeader({
         </View>
       </View>
 
-      {/* マップ選択モーダル */}
-      <Modal
+      {/* マップ情報モーダル */}
+      <MapInfoModal
         visible={isDropdownOpen}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={() => setIsDropdownOpen(false)}
-      >
-        <View className="flex-1 bg-black/50">
-          <Animated.View
-            className="bg-surface dark:bg-dark-surface rounded-b-3xl shadow-2xl"
-            style={{
-              maxHeight: '70%',
-              paddingTop: insets.top,
-              transform: [{ translateY: slideAnim }],
-            }}
-          >
-            <View className="flex-row items-center justify-between px-6 py-4 border-b border-border-light dark:border-dark-border-light">
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
-                {t('userMap.selectMap')}
-              </Text>
-              <Pressable onPress={() => setIsDropdownOpen(false)}>
-                <Ionicons name="close" size={28} color="#6B7280" />
-              </Pressable>
-            </View>
-
-            <ScrollView className="px-6">
-              {userMaps.map((map, index) => (
-                <Pressable
-                  key={map.id}
-                  onPress={() => handleMapItemPress(map.id)}
-                  className={`py-4 active:bg-background-secondary dark:active:bg-dark-background-secondary ${
-                    index < userMaps.length - 1
-                      ? 'border-b border-border-light dark:border-dark-border-light'
-                      : ''
-                  }`}
-                >
-                  <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
-                    {map.name}
-                  </Text>
-                  {map.description && (
-                    <Text
-                      className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
-                      numberOfLines={2}
-                    >
-                      {map.description}
-                    </Text>
-                  )}
-                </Pressable>
-              ))}
-            </ScrollView>
-          </Animated.View>
-
-          <Pressable
-            className="flex-1"
-            onPress={() => setIsDropdownOpen(false)}
-          />
-        </View>
-      </Modal>
+        onClose={() => setIsDropdownOpen(false)}
+        mapTitle={mapTitle}
+        mapDescription={mapDescription}
+        mapTags={mapTags}
+        spots={spots}
+        onSpotPress={onSpotPress}
+      />
 
       {/* フォルダ選択モーダル */}
       {userId && (

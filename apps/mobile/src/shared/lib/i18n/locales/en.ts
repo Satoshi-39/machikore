@@ -824,6 +824,8 @@ export default {
   userMap: {
     usersMap: "%{name}'s Map",
     selectMap: 'Select Map',
+    mapInfo: 'Map Info',
+    spotList: 'Spots',
   },
 
   // Edit Article

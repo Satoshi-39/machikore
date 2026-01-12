@@ -825,6 +825,8 @@ export default {
   userMap: {
     usersMap: '%{name}のマップ',
     selectMap: 'マップを選択',
+    mapInfo: 'マップ情報',
+    spotList: 'スポット一覧',
   },
 
   // 記事編集
