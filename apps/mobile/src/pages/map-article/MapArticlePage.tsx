@@ -5,8 +5,8 @@
  * マップの説明と各スポットをブログ形式で紹介
  */
 
-import React, { useCallback, useMemo, useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, Modal } from 'react-native';
+import React, { useCallback, useMemo, useEffect } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,7 +18,6 @@ import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
 import { MapArticleContent } from '@/widgets/map-article-content';
-import { CommentModalPage } from '@/pages/comment-modal';
 
 interface MapArticlePageProps {
   mapId: string;
@@ -31,10 +30,6 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
   const { mutate: recordView } = useRecordView();
-
-  // コメントモーダル状態
-  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
-  const [focusCommentId, setFocusCommentId] = useState<string | undefined>(undefined);
 
   // 自分のマップかどうか
   const isOwner = currentUserId === articleData?.map.user_id;
@@ -76,17 +71,18 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/(tabs)/${currentTab}/spots/${spotId}`);
   }, [router, currentTab]);
 
-  // コメントモーダルを開く
-  const handleOpenCommentModal = useCallback((commentId?: string) => {
-    setFocusCommentId(commentId);
-    setIsCommentModalVisible(true);
-  }, []);
-
-  // コメントモーダルを閉じる
-  const handleCloseCommentModal = useCallback(() => {
-    setIsCommentModalVisible(false);
-    setFocusCommentId(undefined);
-  }, []);
+  // コメントモーダルを開く（ルーティング経由）
+  const handleOpenCommentModal = useCallback((options?: { focusCommentId?: string; autoFocus?: boolean }) => {
+    const params = new URLSearchParams();
+    if (options?.focusCommentId) {
+      params.set('focusCommentId', options.focusCommentId);
+    }
+    if (options?.autoFocus) {
+      params.set('autoFocus', 'true');
+    }
+    const queryString = params.toString();
+    router.push(`/(tabs)/${currentTab}/comment-modal/maps/${mapId}${queryString ? `?${queryString}` : ''}`);
+  }, [router, currentTab, mapId]);
 
   // 他のマップ詳細へ遷移
   const handleMapPress = useCallback((targetMapId: string) => {
@@ -180,21 +176,6 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         onOpenCommentModal={handleOpenCommentModal}
         onMapPress={handleMapPress}
       />
-
-      {/* コメントモーダル */}
-      <Modal
-        visible={isCommentModalVisible}
-        animationType="none"
-        transparent
-        onRequestClose={handleCloseCommentModal}
-      >
-        <CommentModalPage
-          type="map"
-          targetId={mapId}
-          onClose={handleCloseCommentModal}
-          focusCommentId={focusCommentId}
-        />
-      </Modal>
     </SafeAreaView>
   );
 }

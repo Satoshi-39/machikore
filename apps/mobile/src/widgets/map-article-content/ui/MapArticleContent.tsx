@@ -37,8 +37,8 @@ interface MapArticleContentProps {
   currentUserId: string | null;
   onUserPress: (userId: string) => void;
   onSpotPress: (spotId: string) => void;
-  /** コメントモーダルを開く（focusCommentId: 特定のコメントにフォーカス） */
-  onOpenCommentModal: (focusCommentId?: string) => void;
+  /** コメントモーダルを開く */
+  onOpenCommentModal: (options?: { focusCommentId?: string; autoFocus?: boolean }) => void;
   onMapPress: (mapId: string) => void;
 }
 

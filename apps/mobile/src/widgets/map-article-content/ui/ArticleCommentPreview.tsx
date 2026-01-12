@@ -16,8 +16,8 @@ interface ArticleCommentPreviewProps {
   /** コメント総数 */
   totalCount: number;
   onUserPress: (userId: string) => void;
-  /** コメントモーダルを開く（focusCommentId: 特定のコメントにフォーカス） */
-  onOpenCommentModal: (focusCommentId?: string) => void;
+  /** コメントモーダルを開く */
+  onOpenCommentModal: (options?: { focusCommentId?: string; autoFocus?: boolean }) => void;
 }
 
 export function ArticleCommentPreview({
@@ -34,9 +34,9 @@ export function ArticleCommentPreview({
         {t('article.comment')}
       </Text>
 
-      {/* コメント追加ボタン（タップでモーダル表示） */}
+      {/* コメント追加ボタン（タップでモーダル表示 + キーボード自動表示） */}
       <Pressable
-        onPress={() => onOpenCommentModal()}
+        onPress={() => onOpenCommentModal({ autoFocus: true })}
         className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
       >
         <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
@@ -50,7 +50,9 @@ export function ArticleCommentPreview({
           comments={comments}
           totalCount={totalCount}
           onUserPress={onUserPress}
-          onOpenCommentModal={onOpenCommentModal}
+          onOpenCommentModal={(focusCommentId) => {
+            onOpenCommentModal(focusCommentId ? { focusCommentId } : undefined);
+          }}
         />
       </View>
     </View>
