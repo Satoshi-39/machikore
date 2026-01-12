@@ -6,7 +6,11 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { CommentModalPage } from '@/pages/comment-modal';
 
 export default function MapCommentModalScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, autoFocus, focusCommentId } = useLocalSearchParams<{
+    id: string;
+    autoFocus?: string;
+    focusCommentId?: string;
+  }>();
   const router = useRouter();
 
   if (!id) return null;
@@ -16,6 +20,8 @@ export default function MapCommentModalScreen() {
       type="map"
       targetId={id}
       onClose={() => router.back()}
+      autoFocus={autoFocus === 'true'}
+      focusCommentId={focusCommentId}
     />
   );
 }
