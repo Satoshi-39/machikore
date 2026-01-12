@@ -311,7 +311,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         ) : null}
 
         {/* アクションボタン */}
-        <View className="flex-row items-center justify-around pt-4 pb-1 border-t border-border dark:border-dark-border">
+        <View className="flex-row items-center justify-around pt-4 pb-1">
           <LikeButton
             spotId={spot.id}
             currentUserId={currentUserId}

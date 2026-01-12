@@ -422,7 +422,7 @@ export function CommentModalPage({
 
       {/* 入力エリア（BottomSheetの外だが閉じる時に一緒にフェードアウト） */}
       <Animated.View
-        className="absolute bottom-0 left-0 right-0"
+        className="absolute bottom-0 left-0 right-0 bg-surface dark:bg-dark-surface-secondary"
         style={inputAnimatedStyle}
       >
         <CommentInput
