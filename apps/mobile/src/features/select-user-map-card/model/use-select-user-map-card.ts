@@ -4,7 +4,7 @@
  * FSDの原則：Feature層はユーザーアクション・インタラクションを担当
  */
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { SpotWithDetails } from '@/shared/types';
 
 interface UseSelectUserMapCardOptions {
@@ -69,6 +69,22 @@ export function useSelectUserMapCard({
   const [isCarouselVisible, setIsCarouselVisible] = useState(!initialSpotId);
   // カルーセルで現在フォーカスされているスポットID
   const [focusedSpotId, setFocusedSpotId] = useState<string | null>(null);
+
+  // initialSpotIdによる初期化が完了したかどうか
+  const hasInitializedRef = useRef(false);
+
+  // initialSpotIdがある場合、スポット読み込み後にカメラを移動して詳細カードを開く
+  useEffect(() => {
+    if (initialSpotId && spots.length > 0 && !hasInitializedRef.current) {
+      const targetSpot = spots.find((s) => s.id === initialSpotId);
+      if (targetSpot) {
+        hasInitializedRef.current = true;
+        setSelectedSpotId(targetSpot.id);
+        setFocusedSpotId(targetSpot.id);
+        moveCameraToSpot(targetSpot);
+      }
+    }
+  }, [initialSpotId, spots, moveCameraToSpot]);
 
   // マーカータップ時：カルーセルを表示してそのスポットにフォーカス（カメラ移動なし）
   const handleSpotSelect = useCallback(

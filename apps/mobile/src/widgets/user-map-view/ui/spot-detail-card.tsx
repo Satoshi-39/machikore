@@ -32,7 +32,6 @@ interface SpotDetailCardProps {
   /** 拡大状態（ヘッダー非表示）への遷移通知 - snapIndex=2で拡大状態 */
   onExpandedChange?: (isExpanded: boolean) => void;
   onEdit?: (spotId: string) => void;
-  onUserPress?: (userId: string) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
   /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
   onBeforeClose?: () => void;
@@ -69,7 +68,7 @@ function SpotDetailCardContent({
 // 拡大ボタンの追加に伴い、180→240に調整
 const SEARCH_BAR_BOTTOM_Y = 240;
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onUserPress, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
   const { t, locale } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
@@ -156,8 +155,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
   // ユーザープレスハンドラー
   const handleUserPressInternal = useCallback((userId: string) => {
-    onUserPress?.(userId);
-  }, [onUserPress]);
+    router.push(`/(tabs)/${currentTab}/users/${userId}`);
+  }, [router, currentTab]);
 
   // ブックマーク: フォルダ選択モーダルを開く
   const openFolderModal = useCallback(() => {

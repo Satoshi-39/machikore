@@ -20,10 +20,6 @@ export default function SpotCommentModalScreen() {
       type="spot"
       targetId={id}
       onClose={() => router.back()}
-      onUserPress={(userId) => {
-        router.dismiss();
-        router.push(`/(tabs)/mypage/users/${userId}`);
-      }}
       autoFocus={autoFocus === 'true'}
       focusCommentId={focusCommentId}
     />

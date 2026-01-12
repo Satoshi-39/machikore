@@ -18,9 +18,10 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { showLoginRequiredAlert } from '@/shared/lib';
+import { showLoginRequiredAlert, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
 import { CommentItem } from '@/entities/comment';
@@ -40,7 +41,6 @@ interface CommentModalScreenProps {
   type: 'spot' | 'map';
   targetId: string;
   onClose: () => void;
-  onUserPress: (userId: string) => void;
   /** 開いた時に自動でキーボードを表示 */
   autoFocus?: boolean;
   /** 特定のコメントの返信詳細を開く */
@@ -51,13 +51,14 @@ export function CommentModalPage({
   type,
   targetId,
   onClose,
-  onUserPress,
   autoFocus = false,
   focusCommentId,
 }: CommentModalScreenProps) {
   const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+  const router = useRouter();
+  const currentTab = useCurrentTab();
   const inputRef = useRef<CommentInputRef>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const currentUserId = useCurrentUserId();
@@ -227,8 +228,8 @@ export function CommentModalPage({
     bottomSheetRef.current?.close();
   }, []);
 
-  // ユーザータップ時：スライドで閉じてから遷移
-  const handleUserPressWithAnimation = useCallback((userId: string) => {
+  // ユーザータップ時：閉じてから遷移
+  const handleUserPress = useCallback((userId: string) => {
     pendingUserPressRef.current = userId;
     bottomSheetRef.current?.close();
   }, []);
@@ -242,12 +243,14 @@ export function CommentModalPage({
       if (pendingUserPressRef.current) {
         const userId = pendingUserPressRef.current;
         pendingUserPressRef.current = null;
-        onUserPress(userId);
+        // モーダルを閉じてからプロフィールに遷移
+        router.dismiss();
+        router.push(`/(tabs)/${currentTab}/users/${userId}`);
       } else {
         onClose();
       }
     }
-  }, [onClose, onUserPress]);
+  }, [onClose, router, currentTab]);
 
   // 返信先の表示名を取得
   const replyTarget = replyingTo
@@ -275,7 +278,7 @@ export function CommentModalPage({
         <CommentItem
           comment={item}
           currentUserId={currentUserId}
-          onUserPress={handleUserPressWithAnimation}
+          onUserPress={handleUserPress}
           onEdit={() => handleEdit(item)}
           onDelete={() => handleDeleteConfirm(item)}
           onLike={() => handleLike(item)}
@@ -289,7 +292,7 @@ export function CommentModalPage({
         )}
       </View>
     ),
-    [currentUserId, handleUserPressWithAnimation, handleEdit, handleDeleteConfirm, handleLike, handleReply, handleShowReplies]
+    [currentUserId, handleUserPress, handleEdit, handleDeleteConfirm, handleLike, handleReply, handleShowReplies]
   );
 
   // 空の場合の表示
@@ -330,7 +333,7 @@ export function CommentModalPage({
                 onPress={handleBackFromReplies}
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               >
-                <Ionicons name="chevron-back" size={24} color={colors.text.primary} />
+                <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
               </Pressable>
             )}
           </View>
@@ -367,7 +370,7 @@ export function CommentModalPage({
               <ReplyDetailView
                 parentComment={focusedParentComment}
                 currentUserId={currentUserId}
-                onUserPress={handleUserPressWithAnimation}
+                onUserPress={handleUserPress}
                 onEdit={handleEdit}
                 onDelete={handleDeleteConfirm}
                 onLike={handleLike}

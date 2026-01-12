@@ -16,10 +16,6 @@ export default function MapCommentModalScreen() {
       type="map"
       targetId={id}
       onClose={() => router.back()}
-      onUserPress={(userId) => {
-        router.dismiss();
-        router.push(`/(tabs)/notifications/users/${userId}`);
-      }}
     />
   );
 }
