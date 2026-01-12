@@ -1,6 +1,5 @@
 export {
   CommentList,
-  CommentModal,
   CommentPreview,
   ReadOnlyCommentList,
   RepliesLink,

@@ -11,6 +11,7 @@ export default function CommentModalLayout() {
     <Stack
       screenOptions={{
         headerShown: false,
+        presentation: 'transparentModal',
         contentStyle: { backgroundColor: 'transparent' },
       }}
     >

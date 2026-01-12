@@ -18,7 +18,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
-import { ReadOnlyCommentList, CommentModal } from '@/widgets/comment';
+import { ReadOnlyCommentList } from '@/widgets/comment';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
@@ -88,8 +88,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
-  const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
-  const [focusCommentId, setFocusCommentId] = useState<string | null>(null);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // コメント関連（全件取得して表示）
@@ -364,8 +362,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           {/* コメント追加ボタン（タップでモーダル表示） */}
           <Pressable
             onPress={() => {
-              setFocusCommentId(null);
-              setIsCommentModalVisible(true);
+              router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}?autoFocus=true`);
             }}
             className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
           >
@@ -385,8 +382,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               totalCount={spot.comments_count}
               onUserPress={handleUserPressInternal}
               onOpenCommentModal={(commentId) => {
-                setFocusCommentId(commentId ?? null);
-                setIsCommentModalVisible(true);
+                const params = commentId ? `?focusCommentId=${commentId}` : '';
+                router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}${params}`);
               }}
             />
           )}
@@ -421,17 +418,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       spotId={spot.id}
       onClose={() => setIsLikersModalVisible(false)}
       onUserPress={handleUserPressInternal}
-    />
-
-    {/* コメントモーダル */}
-    <CommentModal
-      visible={isCommentModalVisible}
-      onClose={() => setIsCommentModalVisible(false)}
-      type="spot"
-      targetId={spot.id}
-      currentUserId={currentUserId}
-      onUserPress={handleUserPressInternal}
-      focusCommentId={focusCommentId}
     />
     </>
   );
