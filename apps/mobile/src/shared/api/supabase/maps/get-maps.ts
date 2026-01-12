@@ -8,7 +8,7 @@ import { mapResponseToMapWithUser, type SupabaseMapResponse } from './types';
 
 /**
  * 公開マップ一覧を取得（フィード用）
- * ユーザー情報も含めて取得
+ * ユーザー情報とタグも含めて取得
  */
 export async function getPublicMaps(
   limit: number = 50,
@@ -23,6 +23,13 @@ export async function getPublicMaps(
         username,
         display_name,
         avatar_url
+      ),
+      map_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('is_public', true)
@@ -49,6 +56,13 @@ export async function getUserPublicMaps(userId: string): Promise<MapWithUser[]> 
         username,
         display_name,
         avatar_url
+      ),
+      map_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('user_id', userId)
@@ -75,6 +89,13 @@ export async function getUserMaps(userId: string): Promise<MapWithUser[]> {
         username,
         display_name,
         avatar_url
+      ),
+      map_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('user_id', userId)

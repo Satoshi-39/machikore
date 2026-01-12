@@ -32,7 +32,7 @@ export { updateSpot } from './update-spot';
 export { deleteSpot } from './delete-spot';
 
 // スポット検索
-export { searchPublicUserSpots, searchSpotsByMapId } from './search-spots';
+export { searchPublicUserSpots, searchSpotsByMapId, searchPublicSpotsByTag } from './search-spots';
 
 // 都道府県別スポット
 export {

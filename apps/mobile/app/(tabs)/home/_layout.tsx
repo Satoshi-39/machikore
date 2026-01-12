@@ -18,6 +18,7 @@ export default function HomeLayout() {
       <Stack.Screen name="articles/maps/[id]" />
       <Stack.Screen name="bookmarks/index" />
       <Stack.Screen name="bookmarks/[folderId]" />
+      <Stack.Screen name="search" />
       <Stack.Screen
         name="comment-modal"
         options={{

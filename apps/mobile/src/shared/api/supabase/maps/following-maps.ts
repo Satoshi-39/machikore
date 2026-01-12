@@ -32,7 +32,7 @@ export async function getFollowingUsersMaps(
     return [];
   }
 
-  // 2. フォロー中ユーザーの公開マップを取得
+  // 2. フォロー中ユーザーの公開マップを取得（タグも含む）
   const { data, error } = await supabase
     .from('maps')
     .select(`
@@ -42,6 +42,13 @@ export async function getFollowingUsersMaps(
         username,
         display_name,
         avatar_url
+      ),
+      map_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('is_public', true)

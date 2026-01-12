@@ -119,6 +119,11 @@ export function FollowingMapFeed() {
     [router]
   );
 
+  // タグタップで検索画面に遷移
+  const handleTagPress = useCallback((tagName: string) => {
+    router.push(`/(tabs)/home/search?tag=${encodeURIComponent(tagName)}`);
+  }, [router]);
+
   const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -161,10 +166,11 @@ export function FollowingMapFeed() {
           onEdit={handleEditMap}
           onCommentPress={handleCommentPress}
           onArticlePress={handleArticlePress}
+          onTagPress={handleTagPress}
         />
       );
     },
-    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleCommentPress, handleArticlePress]
+    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleCommentPress, handleArticlePress, handleTagPress]
   );
 
   const getItemKey = useCallback((item: FeedItem) => {

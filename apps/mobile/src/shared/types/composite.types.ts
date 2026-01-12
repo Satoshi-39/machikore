@@ -64,6 +64,19 @@ export interface UserBasicInfo {
 }
 
 // ===============================
+// タグ情報（共通）
+// ===============================
+
+/**
+ * JOINで取得するタグ基本情報
+ */
+export interface TagBasicInfo {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+// ===============================
 // マップ複合型
 // ===============================
 
@@ -82,6 +95,8 @@ export interface MapWithUser extends MapRow {
   is_liked?: boolean;
   /** 現在のユーザーがこのマップをブックマークしているか */
   is_bookmarked?: boolean;
+  /** マップに関連付けられたタグ */
+  tags?: TagBasicInfo[];
 }
 
 // ===============================

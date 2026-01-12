@@ -24,8 +24,6 @@ interface CommentListProps {
   onRefresh?: () => void;
   isRefreshing?: boolean;
   ListHeaderComponent?: React.ComponentType<any> | React.ReactElement | null;
-  /** ScrollView内で使用する場合にtrueを設定（FlatListの代わりにViewでレンダリング） */
-  nestedInScrollView?: boolean;
 }
 
 /**
@@ -93,7 +91,6 @@ export function CommentList({
   onRefresh,
   isRefreshing = false,
   ListHeaderComponent,
-  nestedInScrollView = false,
 }: CommentListProps) {
   const { t } = useI18n();
   // 展開中の返信スレッド

@@ -6,10 +6,10 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, Pressable, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-// import { useRouter } from 'expo-router'; // デフォルトマップ機能用（将来リリース予定）
-import { DiscoverSearch } from '@/widgets/discover-search';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { CategoryChips, type CategoryId } from '@/widgets/category-chips';
 import { FeaturedCarousel, CategoryFeaturedSection } from '@/widgets/featured-carousel';
 import { useFeaturedCarouselItems } from '@/entities/featured-carousel';
@@ -22,27 +22,21 @@ import {
 } from '@/widgets/map-ranking';
 import { AreaSection } from '@/widgets/area-section';
 import { WorldSection } from '@/widgets/world-section';
+import { colors } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 export function DiscoverPage() {
-  // const router = useRouter(); // デフォルトマップ機能用（将来リリース予定）
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const router = useRouter();
+  const { t } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState<CategoryId>('all');
 
   // カテゴリ別の特集カルーセルアイテムを取得
   const { data: featuredItems } = useFeaturedCarouselItems(selectedCategory);
 
-  const handleSearchFocus = () => {
-    setIsSearchFocused(true);
-  };
-
-  const handleSearchClose = () => {
-    setIsSearchFocused(false);
-  };
-
-  // デフォルトマップ機能（将来リリース予定）
-  // const handleMapPress = () => {
-  //   router.push('/(tabs)/discover/default-map');
-  // };
+  // 検索バータップで検索画面に遷移
+  const handleSearchPress = useCallback(() => {
+    router.push('/(tabs)/discover/search');
+  }, [router]);
 
   const handleCategorySelect = useCallback((categoryId: CategoryId) => {
     setSelectedCategory(categoryId);
@@ -50,17 +44,21 @@ export function DiscoverPage() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
-      {/* 検索バー */}
-      <DiscoverSearch
-        onFocus={handleSearchFocus}
-        onClose={handleSearchClose}
-        isSearchFocused={isSearchFocused}
-        // onMapPress={handleMapPress} // デフォルトマップ機能は将来リリース予定
-      />
+      {/* 検索バー（タップで検索画面に遷移） */}
+      <View className="flex-row items-center px-4 py-2 bg-surface dark:bg-dark-surface">
+        <Pressable
+          onPress={handleSearchPress}
+          className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-3"
+        >
+          <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
+          <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground-muted">
+            {t('discover.searchPlaceholder')}
+          </Text>
+        </Pressable>
+      </View>
 
-      {/* 検索がフォーカスされていない時のコンテンツ */}
-      {!isSearchFocused && (
-        <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+      {/* コンテンツ */}
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
           {/* カテゴリタブ */}
           <CategoryChips
             selectedCategory={selectedCategory}
@@ -109,7 +107,6 @@ export function DiscoverPage() {
             </>
           )}
         </ScrollView>
-      )}
     </SafeAreaView>
   );
 }

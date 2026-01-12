@@ -14,12 +14,13 @@ import { useFeedMaps, MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import type { MapWithUser } from '@/shared/types';
 
 /** 広告を挿入する間隔（マップ5件ごとに1広告） */
 const AD_INTERVAL = 5;
 
 type FeedItem =
-  | { type: 'map'; data: ReturnType<typeof useFeedMaps>['data']['pages'][0][0] }
+  | { type: 'map'; data: MapWithUser }
   | { type: 'ad'; id: string };
 
 export function MapFeed() {
@@ -79,6 +80,11 @@ export function MapFeed() {
     router.push(`/(tabs)/discover/articles/maps/${mapId}`);
   }, [router]);
 
+  // タグタップで検索画面に遷移
+  const handleTagPress = useCallback((tagName: string) => {
+    router.push(`/(tabs)/discover/search?tag=${encodeURIComponent(tagName)}`);
+  }, [router]);
+
   // 下端に近づいたら次のページを取得
   const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -112,10 +118,11 @@ export function MapFeed() {
           onEdit={handleEditMap}
           onCommentPress={handleCommentPress}
           onArticlePress={handleArticlePress}
+          onTagPress={handleTagPress}
         />
       );
     },
-    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleCommentPress, handleArticlePress]
+    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleCommentPress, handleArticlePress, handleTagPress]
   );
 
   const getItemKey = useCallback((item: FeedItem) => {

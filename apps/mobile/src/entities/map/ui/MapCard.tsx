@@ -29,15 +29,18 @@ interface MapCardProps {
   onEdit?: (mapId: string) => void;
   onCommentPress?: (mapId: string) => void;
   onArticlePress?: (mapId: string) => void;
+  onTagPress?: (tagName: string) => void;
   /** 下部ボーダーを非表示にする */
   noBorder?: boolean;
 }
 
-export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress, noBorder = false }: MapCardProps) {
+export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
   const router = useRouter();
   const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
+  // タグ情報を取得（MapWithUserの場合のみ）
+  const tags = 'tags' in map ? map.tags : undefined;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
   const user = embeddedUser || fetchedUser;
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
@@ -196,6 +199,27 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
           {map.description}
         </Text>
+      )}
+
+      {/* タグ */}
+      {tags && tags.length > 0 && (
+        <View className="flex-row flex-wrap mb-2">
+          {tags.slice(0, 5).map((tag) => (
+            <Pressable
+              key={tag.id}
+              onPress={(e) => {
+                e.stopPropagation();
+                onTagPress?.(tag.name);
+              }}
+              className="mr-2 mb-1"
+              hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
+            >
+              <Text className="text-sm text-primary">
+                #{tag.name}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
       )}
 
       {/* フッター情報 - 均等配置 */}

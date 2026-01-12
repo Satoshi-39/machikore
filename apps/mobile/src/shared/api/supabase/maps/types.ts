@@ -3,12 +3,24 @@
  */
 
 import type { Database } from '@/shared/types/database.types';
+import type { TagBasicInfo } from '@/shared/types';
 
 // MergeDeepで拡張されたDatabase型からマップのRow型を取得
 type MapRow = Database['public']['Tables']['maps']['Row'];
 
 /**
- * Supabaseからのマップレスポンス型（JOINでusersを含む）
+ * JOINで取得したタグ情報（map_tags経由）
+ */
+interface MapTagWithTag {
+  tags: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+}
+
+/**
+ * Supabaseからのマップレスポンス型（JOINでusersとtagsを含む）
  */
 export interface SupabaseMapResponse extends MapRow {
   users?: {
@@ -17,12 +29,18 @@ export interface SupabaseMapResponse extends MapRow {
     display_name: string | null;
     avatar_url: string | null;
   };
+  map_tags?: MapTagWithTag[];
 }
 
 /**
  * SupabaseMapResponseをMapWithUserに変換するヘルパー
  */
 export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
+  // map_tagsからタグ情報を抽出
+  const tags: TagBasicInfo[] = (map.map_tags || [])
+    .map((mt) => mt.tags)
+    .filter(Boolean);
+
   return {
     id: map.id,
     user_id: map.user_id,
@@ -44,5 +62,6 @@ export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
     article_outro: map.article_outro ?? null,
     show_label_chips: map.show_label_chips ?? false,
     language: map.language ?? null,
+    tags: tags.length > 0 ? tags : undefined,
   };
 }
