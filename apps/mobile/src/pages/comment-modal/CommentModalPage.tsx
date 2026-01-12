@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, useAnimatedKeyboard } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
@@ -79,9 +79,19 @@ export function CommentModalPage({
 
   // 入力エリアの表示制御（閉じるアニメーション時に隠す）
   const inputOpacity = useSharedValue(1);
-  const inputAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: inputOpacity.value,
-  }));
+
+  // キーボードの高さを取得してアニメーション
+  const keyboard = useAnimatedKeyboard();
+
+  const inputAnimatedStyle = useAnimatedStyle(() => {
+    // キーボードが表示されている時はpaddingBottomを0に、閉じている時はinsets.bottomに
+    const paddingBottom = keyboard.height.value > 0 ? 0 : insets.bottom;
+    return {
+      opacity: inputOpacity.value,
+      transform: [{ translateY: -keyboard.height.value }],
+      paddingBottom,
+    };
+  });
 
   // autoFocusが指定されている場合、モーダル表示後にフォーカス
   useEffect(() => {
@@ -238,7 +248,8 @@ export function CommentModalPage({
   // BottomSheetのアニメーション開始ハンドラー（閉じる時に入力エリアを隠す）
   const handleAnimate = useCallback((fromIndex: number, toIndex: number) => {
     if (toIndex === -1) {
-      // 閉じるアニメーション開始時に入力エリアを即座に隠す
+      // 閉じるアニメーション開始時にキーボードと入力エリアを即座に隠す
+      Keyboard.dismiss();
       inputOpacity.value = withTiming(0, { duration: 150 });
     } else if (fromIndex === -1) {
       // 開くアニメーション時に入力エリアを表示
@@ -411,8 +422,8 @@ export function CommentModalPage({
 
       {/* 入力エリア（BottomSheetの外だが閉じる時に一緒にフェードアウト） */}
       <Animated.View
-        className="absolute bottom-0 left-0 right-0 border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface-secondary"
-        style={[{ paddingBottom: insets.bottom }, inputAnimatedStyle]}
+        className="absolute bottom-0 left-0 right-0"
+        style={inputAnimatedStyle}
       >
         <CommentInput
           ref={inputRef}

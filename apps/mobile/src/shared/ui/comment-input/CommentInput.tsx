@@ -75,7 +75,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
     const isInline = variant === 'inline';
 
     return (
-      <View className={isInline ? '' : 'border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface'}>
+      <View className={isInline ? '' : 'border-t border-border dark:border-dark-border bg-surface dark:bg-dark-surface-secondary'}>
         {/* 返信先表示 */}
         {replyingTo && (
           <View
