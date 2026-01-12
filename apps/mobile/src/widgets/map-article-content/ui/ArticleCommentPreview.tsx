@@ -2,119 +2,31 @@
  * 記事コメントプレビュー
  *
  * コメントを数件プレビュー表示し、全件表示へのリンクを提供
- * note風：「コメントを追加...」タップでキーボード一体化モーダルが表示
+ * コメント追加・全件表示・編集・削除はすべてモーダルで行う
  */
 
-import React, { useState, useCallback } from 'react';
-import { View, Text, Pressable, Keyboard } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
-import { showLoginRequiredAlert } from '@/shared/lib';
-import { CommentInputModal } from '@/shared/ui';
-import { useAddMapComment, useAddReplyComment, useMapCommentsCount } from '@/entities/comment';
-import { CommentList } from '@/widgets/comment';
-import { useUser } from '@/entities/user';
-import type { CommentWithUser } from '@/shared/api/supabase/comments';
+import React from 'react';
+import { View, Text, Pressable } from 'react-native';
+import { ReadOnlyCommentList } from '@/widgets/comment';
 import { useI18n } from '@/shared/lib/i18n';
+import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface ArticleCommentPreviewProps {
   comments: CommentWithUser[];
-  mapId: string;
-  currentUserId?: string | null;
-  onViewAllPress: () => void;
+  /** コメント総数 */
+  totalCount: number;
   onUserPress: (userId: string) => void;
-  onEdit: (comment: CommentWithUser) => void;
-  onDelete: (comment: CommentWithUser) => void;
-  onLike: (comment: CommentWithUser) => void;
+  /** コメントモーダルを開く（focusCommentId: 特定のコメントにフォーカス） */
+  onOpenCommentModal: (focusCommentId?: string) => void;
 }
 
 export function ArticleCommentPreview({
   comments,
-  mapId,
-  currentUserId,
-  onViewAllPress,
+  totalCount,
   onUserPress,
-  onEdit,
-  onDelete,
-  onLike,
+  onOpenCommentModal,
 }: ArticleCommentPreviewProps) {
   const { t } = useI18n();
-  // トップレベルコメントの総数を取得
-  const { data: totalCount = 0 } = useMapCommentsCount(mapId);
-
-  // モーダル状態
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [inputText, setInputText] = useState('');
-  const [replyingTo, setReplyingTo] = useState<CommentWithUser | null>(null);
-
-  // 現在のユーザー情報
-  const { data: currentUser } = useUser(currentUserId ?? null);
-
-  // コメント投稿
-  const { mutate: addComment, isPending: isAddingComment } = useAddMapComment();
-  const { mutate: addReply, isPending: isAddingReply } = useAddReplyComment();
-  const isSubmitting = isAddingComment || isAddingReply;
-
-  // モーダルを開く
-  const openModal = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('コメント');
-      return;
-    }
-    setIsModalVisible(true);
-  }, [currentUserId]);
-
-  // モーダルを閉じる
-  const closeModal = useCallback(() => {
-    setIsModalVisible(false);
-    setReplyingTo(null);
-  }, []);
-
-  // 返信ボタン押下
-  const handleReply = useCallback((comment: CommentWithUser) => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('返信');
-      return;
-    }
-    setReplyingTo(comment);
-    setIsModalVisible(true);
-  }, [currentUserId]);
-
-  // 返信キャンセル
-  const cancelReply = useCallback(() => {
-    setReplyingTo(null);
-  }, []);
-
-  // 送信ハンドラー
-  const handleSubmit = useCallback(() => {
-    if (!currentUserId || !inputText.trim() || isSubmitting) return;
-
-    const content = inputText.trim();
-
-    const onSuccess = () => {
-      setInputText('');
-      setReplyingTo(null);
-      setIsModalVisible(false);
-      Keyboard.dismiss();
-    };
-
-    if (replyingTo) {
-      addReply(
-        { userId: currentUserId, parentComment: replyingTo, content },
-        { onSuccess }
-      );
-    } else {
-      addComment(
-        { userId: currentUserId, mapId, content },
-        { onSuccess }
-      );
-    }
-  }, [currentUserId, inputText, replyingTo, mapId, addReply, addComment, isSubmitting]);
-
-  // 返信先の表示名
-  const replyTarget = replyingTo
-    ? { displayName: replyingTo.user?.display_name || replyingTo.user?.username || '' }
-    : null;
 
   return (
     <View className="mt-6">
@@ -124,7 +36,7 @@ export function ArticleCommentPreview({
 
       {/* コメント追加ボタン（タップでモーダル表示） */}
       <Pressable
-        onPress={openModal}
+        onPress={() => onOpenCommentModal()}
         className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
       >
         <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
@@ -132,51 +44,15 @@ export function ArticleCommentPreview({
         </Text>
       </Pressable>
 
-      {comments.length > 0 ? (
-        <>
-          {/* コメント一覧 */}
-          <View className="-mx-4">
-            <CommentList
-              comments={comments}
-              currentUserId={currentUserId}
-              onUserPress={onUserPress}
-              onEdit={onEdit}
-              onDeleteConfirm={onDelete}
-              onLike={onLike}
-              onReply={handleReply}
-            />
-          </View>
-
-          {/* もっと見る */}
-          {totalCount > comments.length && (
-            <Pressable onPress={onViewAllPress} className="mt-2">
-              <Text className="text-sm text-blue-500">
-                {t('article.viewAllComments', { count: totalCount })}
-              </Text>
-            </Pressable>
-          )}
-        </>
-      ) : (
-        <View className="py-4 items-center">
-          <Ionicons name="chatbubble-outline" size={32} color={colors.gray[300]} />
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mt-2">
-            {t('article.noComments')}
-          </Text>
-        </View>
-      )}
-
-      {/* コメント入力モーダル */}
-      <CommentInputModal
-        visible={isModalVisible}
-        onClose={closeModal}
-        avatarUrl={currentUser?.avatar_url}
-        inputText={inputText}
-        onChangeText={setInputText}
-        onSubmit={handleSubmit}
-        isSubmitting={isSubmitting}
-        replyingTo={replyTarget}
-        onCancelReply={cancelReply}
-      />
+      {/* コメント一覧（読み取り専用） */}
+      <View className="-mx-4">
+        <ReadOnlyCommentList
+          comments={comments}
+          totalCount={totalCount}
+          onUserPress={onUserPress}
+          onOpenCommentModal={onOpenCommentModal}
+        />
+      </View>
     </View>
   );
 }

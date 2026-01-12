@@ -16,16 +16,14 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert, shareMap } from '@/shared/lib';
-import { ImageViewerModal, useImageViewer, CommentInputModal, RichTextRenderer, LocationPinIcon } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
 import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { useUserMaps } from '@/entities/map';
-import { useUser } from '@/entities/user';
 import { useMapTags } from '@/entities/tag';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { useCommentActions } from '@/features/comment-actions';
 import type { MapArticleData } from '@/shared/types';
 import { ArticleSpotSection } from './ArticleSpotSection';
 import { ArticleTableOfContents } from './ArticleTableOfContents';
@@ -39,7 +37,8 @@ interface MapArticleContentProps {
   currentUserId: string | null;
   onUserPress: (userId: string) => void;
   onSpotPress: (spotId: string) => void;
-  onCommentsPress: () => void;
+  /** コメントモーダルを開く（focusCommentId: 特定のコメントにフォーカス） */
+  onOpenCommentModal: (focusCommentId?: string) => void;
   onMapPress: (mapId: string) => void;
 }
 
@@ -48,7 +47,7 @@ export function MapArticleContent({
   currentUserId,
   onUserPress,
   onSpotPress,
-  onCommentsPress,
+  onOpenCommentModal,
   onMapPress,
 }: MapArticleContentProps) {
   const { t, locale } = useI18n();
@@ -77,22 +76,6 @@ export function MapArticleContent({
 
   // タグを中間テーブルから取得
   const { data: mapTags = [] } = useMapTags(map.id);
-
-  // 現在のユーザー情報（編集モーダル用）
-  const { data: currentUser } = useUser(currentUserId ?? null);
-
-  // コメント操作フック（編集・削除・いいね用）
-  const {
-    editingComment,
-    editText,
-    setEditText,
-    handleEdit,
-    handleEditSubmit,
-    handleEditCancel,
-    handleDelete,
-    handleLike: handleCommentLike,
-    isUpdatingComment,
-  } = useCommentActions({ mapId: map.id, currentUserId });
 
   // 記事投稿者の他のマップ（現在のマップ以外を最大4件）
   const { data: authorMaps = [] } = useUserMaps(map.user_id);
@@ -312,7 +295,7 @@ export function MapArticleContent({
                 commentsCount={map.comments_count}
                 isTogglingLike={isTogglingLike}
                 onLikePress={handleLikePress}
-                onCommentPress={onCommentsPress}
+                onCommentPress={() => onOpenCommentModal()}
                 onBookmarkPress={handleBookmarkPress}
                 onSharePress={handleSharePress}
               />
@@ -335,13 +318,9 @@ export function MapArticleContent({
             {/* コメントセクション */}
             <ArticleCommentPreview
               comments={comments}
-              mapId={map.id}
-              currentUserId={currentUserId}
-              onViewAllPress={onCommentsPress}
+              totalCount={map.comments_count}
               onUserPress={onUserPress}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onLike={handleCommentLike}
+              onOpenCommentModal={onOpenCommentModal}
             />
           </View>
         </View>
@@ -359,18 +338,6 @@ export function MapArticleContent({
           bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
-
-      {/* コメント編集モーダル */}
-      <CommentInputModal
-        visible={!!editingComment}
-        onClose={handleEditCancel}
-        avatarUrl={currentUser?.avatar_url}
-        inputText={editText}
-        onChangeText={setEditText}
-        onSubmit={handleEditSubmit}
-        isSubmitting={isUpdatingComment}
-        isEditing
-      />
 
       {/* 画像ビューアーモーダル */}
       <ImageViewerModal
