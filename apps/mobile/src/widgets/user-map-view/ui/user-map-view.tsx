@@ -404,7 +404,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                   right: 24,
                   zIndex: 50,
                   bottom: isDetailCardOpen
-                    ? SCREEN_HEIGHT * 0.15 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」の上
+                    ? SCREEN_HEIGHT * 0.11 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」(12%)の上
                     : LOCATION_BUTTON_DEFAULT_BOTTOM, // 通常位置
                 },
                 controlsVisibility.controlButtonsAnimatedStyle,

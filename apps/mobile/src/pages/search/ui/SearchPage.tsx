@@ -49,14 +49,6 @@ export function SearchPage() {
     [router, currentTab]
   );
 
-  const handleArticlePress = useCallback(
-    (spotId: string) => {
-      // 記事タップ時もスポット詳細へ遷移（記事全文が表示される）
-      router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
-    },
-    [router, currentTab]
-  );
-
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
@@ -146,7 +138,6 @@ export function SearchPage() {
           onSpotCommentPress={handleSpotCommentPress}
           onMapCommentPress={handleMapCommentPress}
           onTagPress={handleTagPress}
-          onArticlePress={handleArticlePress}
         />
       ) : searchQuery.trim().length > 0 ? (
         // 入力中: ユーザーサジェスト表示

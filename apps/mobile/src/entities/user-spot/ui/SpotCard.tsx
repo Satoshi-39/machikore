@@ -9,6 +9,7 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions } from 'react-native';
+import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
@@ -61,8 +62,6 @@ interface SpotCardProps {
   onEdit?: (spotId: string) => void;
   onCommentPress?: (spotId: string) => void;
   onTagPress?: (tagName: string) => void;
-  /** 記事プレビュータップ時のハンドラ（全文表示用） */
-  onArticlePress?: (spotId: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
@@ -81,7 +80,6 @@ export function SpotCard({
   onEdit,
   onCommentPress,
   onTagPress,
-  onArticlePress,
   embeddedUser,
   embeddedMasterSpot,
   noBorder = false,
@@ -134,6 +132,7 @@ export function SpotCard({
   const { mutate: addBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+
 
   // 画像拡大表示用
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImages, closeImage } = useImageViewer();
@@ -409,21 +408,19 @@ export function SpotCard({
         </View>
       )}
 
-      {/* 記事プレビュー */}
+      {/* 記事プレビュー / 展開表示 */}
       {hasArticle && articlePreview && (
-        <Pressable
-          onPress={(e) => {
-            e.stopPropagation();
-            onArticlePress?.(spot.id);
-          }}
+        <ReadMore
+          numberOfLines={3}
+          seeMoreText={t('common.more')}
+          seeLessText={t('common.less')}
+          seeMoreStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
+          seeLessStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
+          style={{ marginBottom: 8 }}
+          className="text-sm text-foreground dark:text-dark-foreground"
         >
-          <Text
-            className="text-sm text-foreground dark:text-dark-foreground mb-2"
-            numberOfLines={3}
-          >
-            {articlePreview}
-          </Text>
-        </Pressable>
+          {articlePreview}
+        </ReadMore>
       )}
 
       {/* タグ */}
