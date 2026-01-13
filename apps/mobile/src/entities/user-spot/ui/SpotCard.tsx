@@ -61,7 +61,7 @@ interface SpotCardProps {
   onEdit?: (spotId: string) => void;
   onCommentPress?: (spotId: string) => void;
   onTagPress?: (tagName: string) => void;
-  /** 記事プレビュータップ時のハンドラ */
+  /** 記事プレビュータップ時のハンドラ（全文表示用） */
   onArticlePress?: (spotId: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
@@ -416,17 +416,10 @@ export function SpotCard({
             e.stopPropagation();
             onArticlePress?.(spot.id);
           }}
-          className="mb-2 p-3 bg-muted dark:bg-dark-muted rounded-lg"
         >
-          <View className="flex-row items-center mb-1">
-            <Ionicons name="document-text-outline" size={14} color={colors.primary.DEFAULT} />
-            <Text className="text-xs font-medium ml-1" style={{ color: colors.primary.DEFAULT }}>
-              {t('spotCard.article')}
-            </Text>
-          </View>
           <Text
-            className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
-            numberOfLines={2}
+            className="text-sm text-foreground dark:text-dark-foreground mb-2"
+            numberOfLines={3}
           >
             {articlePreview}
           </Text>
