@@ -2,7 +2,7 @@
  * SpotCard コンポーネント
  *
  * スポットを表示するカード型コンポーネント
- * ローカルSQLiteデータとSupabase JOINデータの両方に対応
+ * SpotWithDetails（詳細画面用）とUserSpotSearchResult（検索/フィード用）に対応
  *
  * いいね状態は spot.is_liked を使用（取得時にJOINで取得）
  */
@@ -15,9 +15,11 @@ import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, Locati
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
-import type { SpotWithMasterSpot, SpotWithDetails, UUID, Json, TagBasicInfo } from '@/shared/types';
+import type { SpotWithDetails, UUID, Json, TagBasicInfo } from '@/shared/types';
+import { extractPlainText } from '@/shared/types';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import { formatRelativeTime } from '@/shared/lib/utils';
+import { isEmptyArticle } from '@/shared/lib/utils/article.utils';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
@@ -47,8 +49,8 @@ interface EmbeddedMasterSpot {
 }
 
 interface SpotCardProps {
-  // ローカルSQLiteデータまたはSupabase SpotWithDetails/UserSpotSearchResultデータ
-  spot: SpotWithMasterSpot | SpotWithDetails | UserSpotSearchResult;
+  // Supabase SpotWithDetails（詳細用）またはUserSpotSearchResult（検索/フィード用）
+  spot: SpotWithDetails | UserSpotSearchResult;
   currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用、いいね機能にも使用）
   machiName?: string;
   /** コンテナの幅（画像サイズ計算用）。省略時はscreenWidth - 32 */
@@ -59,6 +61,8 @@ interface SpotCardProps {
   onEdit?: (spotId: string) => void;
   onCommentPress?: (spotId: string) => void;
   onTagPress?: (tagName: string) => void;
+  /** 記事プレビュータップ時のハンドラ */
+  onArticlePress?: (spotId: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
   embeddedUser?: EmbeddedUser | null;
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
@@ -77,6 +81,7 @@ export function SpotCard({
   onEdit,
   onCommentPress,
   onTagPress,
+  onArticlePress,
   embeddedUser,
   embeddedMasterSpot,
   noBorder = false,
@@ -93,6 +98,11 @@ export function SpotCard({
 
   // タグ情報を取得（UserSpotSearchResult の場合のみ）
   const tags: TagBasicInfo[] | undefined = 'tags' in spot ? spot.tags : undefined;
+
+  // 記事コンテンツを取得（SpotWithDetails または UserSpotSearchResult の場合）
+  const articleContent = 'article_content' in spot ? spot.article_content : undefined;
+  const hasArticle = !isEmptyArticle(articleContent ?? null);
+  const articlePreview = hasArticle ? extractPlainText(articleContent ?? null) : '';
 
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
   const spotColor = useMemo((): SpotColor => {
@@ -174,7 +184,7 @@ export function SpotCard({
     if (embeddedMasterSpot?.google_short_address) {
       return extractAddress(embeddedMasterSpot.google_short_address, locale);
     }
-    // ピン刺し・現在地登録の場合はuser_spotの住所を使用（SpotWithMasterSpotは変換済み）
+    // ピン刺し・現在地登録の場合はuser_spotの住所を使用
     if ('google_short_address' in spot && spot.google_short_address) {
       const addr = spot.google_short_address;
       if (typeof addr === 'string') {
@@ -320,27 +330,6 @@ export function SpotCard({
         </Text>
       )}
 
-      {/* タグ */}
-      {tags && tags.length > 0 && (
-        <View className="flex-row flex-wrap mb-2">
-          {tags.slice(0, 5).map((tag) => (
-            <Pressable
-              key={tag.id}
-              onPress={(e) => {
-                e.stopPropagation();
-                onTagPress?.(tag.name);
-              }}
-              className="mr-2 mb-1"
-              hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
-            >
-              <Text className="text-sm text-primary">
-                #{tag.name}
-              </Text>
-            </Pressable>
-          ))}
-        </View>
-      )}
-
       {/* 画像（2x2グリッド、最大4枚表示） */}
       {/* 画像がない場合は何も表示しない、ローディング中はプレースホルダー表示 */}
       {(images.length > 0 || imagesLoading) && (
@@ -417,6 +406,51 @@ export function SpotCard({
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
             {address || machiName}
           </Text>
+        </View>
+      )}
+
+      {/* 記事プレビュー */}
+      {hasArticle && articlePreview && (
+        <Pressable
+          onPress={(e) => {
+            e.stopPropagation();
+            onArticlePress?.(spot.id);
+          }}
+          className="mb-2 p-3 bg-muted dark:bg-dark-muted rounded-lg"
+        >
+          <View className="flex-row items-center mb-1">
+            <Ionicons name="document-text-outline" size={14} color={colors.primary.DEFAULT} />
+            <Text className="text-xs font-medium ml-1" style={{ color: colors.primary.DEFAULT }}>
+              {t('spotCard.article')}
+            </Text>
+          </View>
+          <Text
+            className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
+            numberOfLines={2}
+          >
+            {articlePreview}
+          </Text>
+        </Pressable>
+      )}
+
+      {/* タグ */}
+      {tags && tags.length > 0 && (
+        <View className="flex-row flex-wrap mb-2">
+          {tags.slice(0, 5).map((tag) => (
+            <Pressable
+              key={tag.id}
+              onPress={(e) => {
+                e.stopPropagation();
+                onTagPress?.(tag.name);
+              }}
+              className="mr-2 mb-1"
+              hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
+            >
+              <Text className="text-sm text-primary">
+                #{tag.name}
+              </Text>
+            </Pressable>
+          ))}
         </View>
       )}
 

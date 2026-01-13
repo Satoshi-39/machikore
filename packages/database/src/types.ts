@@ -2834,6 +2834,7 @@ export type Database = {
       search_public_spots: {
         Args: { result_limit?: number; search_query: string }
         Returns: {
+          article_content: Json
           comments_count: number
           created_at: string
           description: string

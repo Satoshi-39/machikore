@@ -209,6 +209,3 @@ export type ScheduleUpdate = Database['public']['Tables']['schedules']['Update']
 // ===============================
 // 複合型（JOINなど）
 // ===============================
-
-// SpotWithMasterSpot は composite.types.ts に移動しました
-// import { SpotWithMasterSpot } from './composite.types' を使用してください

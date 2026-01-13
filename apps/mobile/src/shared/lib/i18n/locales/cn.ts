@@ -784,6 +784,7 @@ export default {
     deleteMessage: '删除此地点？此操作无法撤销。',
     unknownSpot: '未知地点',
     defaultUser: '用户',
+    article: '文章',
   },
 
   // 公开/私密切换

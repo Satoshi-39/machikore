@@ -784,6 +784,7 @@ export default {
     deleteMessage: '刪除此地點？此操作無法復原。',
     unknownSpot: '未知地點',
     defaultUser: '用戶',
+    article: '文章',
   },
 
   // 公開/私人切換

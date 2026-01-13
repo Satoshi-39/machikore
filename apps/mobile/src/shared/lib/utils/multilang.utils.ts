@@ -6,7 +6,6 @@
  */
 
 import type { Json } from '@/shared/types/database.types';
-import type { SpotWithMasterSpot } from '@/shared/types/composite.types';
 
 /**
  * JSONB形式の住所から指定言語の住所を抽出（Supabase用）
@@ -128,80 +127,3 @@ export function extractMasterSpotAddresses(
   };
 }
 
-// ===============================
-// SQLite用変換関数
-// ===============================
-
-/** SQLiteから取得したスポット生データの型 */
-export interface RawSpotFromSQLite {
-  id: string;
-  user_id: string;
-  map_id: string;
-  master_spot_id: string;
-  machi_id: string;
-  description: string;
-  spot_color: string | null;
-  label_id: string | null;
-  latitude: number | null;
-  longitude: number | null;
-  google_formatted_address: string | null;
-  google_short_address: string | null;
-  images_count: number;
-  likes_count: number;
-  bookmarks_count?: number;
-  comments_count: number;
-  order_index: number;
-  created_at: string;
-  updated_at: string;
-  // master_spotsからの結合フィールド
-  name: string;
-  ms_latitude: number;
-  ms_longitude: number;
-  ms_google_formatted_address: string | null;
-  ms_google_short_address: string | null;
-  google_place_id: string | null;
-  google_types: string | null;
-  google_phone_number: string | null;
-  google_website_uri: string | null;
-  google_rating: number | null;
-  google_user_rating_count: number | null;
-}
-
-/**
- * SQLiteから取得した生データをSpotWithMasterSpot型に変換
- * @param raw SQLiteから取得した生データ
- * @param language 抽出する言語コード
- */
-export function transformRawSpotFromSQLite(
-  raw: RawSpotFromSQLite,
-  language: string
-): SpotWithMasterSpot {
-  return {
-    id: raw.id,
-    user_id: raw.user_id,
-    map_id: raw.map_id,
-    master_spot_id: raw.master_spot_id,
-    machi_id: raw.machi_id,
-    description: raw.description,
-    spot_color: raw.spot_color,
-    label_id: raw.label_id,
-    images_count: raw.images_count,
-    likes_count: raw.likes_count,
-    bookmarks_count: raw.bookmarks_count ?? 0,
-    comments_count: raw.comments_count,
-    order_index: raw.order_index,
-    created_at: raw.created_at,
-    updated_at: raw.updated_at,
-    name: raw.name,
-    latitude: raw.ms_latitude ?? raw.latitude ?? 0,
-    longitude: raw.ms_longitude ?? raw.longitude ?? 0,
-    address: extractAddressFromString(raw.ms_google_formatted_address, language),
-    google_short_address: extractAddressFromString(raw.ms_google_short_address, language),
-    google_place_id: raw.google_place_id,
-    google_types: raw.google_types,
-    google_phone_number: raw.google_phone_number,
-    google_website_uri: raw.google_website_uri,
-    google_rating: raw.google_rating,
-    google_user_rating_count: raw.google_user_rating_count,
-  };
-}

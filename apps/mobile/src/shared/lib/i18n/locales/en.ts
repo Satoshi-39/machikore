@@ -784,6 +784,7 @@ export default {
     deleteMessage: 'Delete this spot? This cannot be undone.',
     unknownSpot: 'Unknown Spot',
     defaultUser: 'User',
+    article: 'Article',
   },
 
   // Public/Private Toggle

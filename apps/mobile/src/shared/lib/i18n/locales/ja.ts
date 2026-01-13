@@ -785,6 +785,7 @@ export default {
     deleteMessage: 'このスポットを削除しますか？この操作は取り消せません。',
     unknownSpot: '不明なスポット',
     defaultUser: 'ユーザー',
+    article: '記事',
   },
 
   // 公開/非公開トグル

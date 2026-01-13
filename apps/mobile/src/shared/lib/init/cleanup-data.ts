@@ -3,7 +3,6 @@
  */
 
 import {
-  deleteAllSpotsByUser,
   deleteAllSchedulesByUser,
   deleteAllVisitsByUser,
   deleteUser,
@@ -15,6 +14,7 @@ import { log } from '@/shared/config/logger';
 /**
  * サンプルデータをクリーンアップ（開発用）
  * 再起動時に古いサンプルデータを削除
+ * 注: スポットはSupabaseで管理しているためローカルクリーンアップ不要
  */
 export function cleanupSampleData(): void {
   log.debug('[Cleanup] サンプルデータをクリーンアップ中...');
@@ -24,11 +24,6 @@ export function cleanupSampleData(): void {
   if (!userId) {
     log.warn('[Cleanup] ユーザーIDが取得できません。クリーンアップをスキップします。');
     return;
-  }
-
-  // 各テーブルが存在する場合のみ削除
-  if (checkTableExists('spots')) {
-    deleteAllSpotsByUser(userId);
   }
 
   if (checkTableExists('schedules')) {

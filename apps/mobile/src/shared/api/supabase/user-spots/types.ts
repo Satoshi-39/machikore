@@ -99,6 +99,8 @@ export interface UserSpotSearchResult {
   } | null;
   /** スポットに紐づくタグ */
   tags?: TagBasicInfo[];
+  /** スポットの記事コンテンツ（ProseMirror JSON形式） */
+  article_content?: ProseMirrorDoc | null;
 }
 
 /**
@@ -159,6 +161,8 @@ export interface SearchPublicSpotsRpcRow {
   map_name: string | null;
   // tags (JSONB → 具体的な型で定義)
   tags: TagBasicInfo[] | null;
+  // article content (JSONB → ProseMirror形式)
+  article_content: ProseMirrorDoc | null;
 }
 
 /**
@@ -204,5 +208,6 @@ export function rpcSpotResponseToUserSpotSearchResult(row: SearchPublicSpotsRpcR
     } : null,
     map: row.map_name ? { id: row.map_id, name: row.map_name } : null,
     tags: row.tags && row.tags.length > 0 ? row.tags : undefined,
+    article_content: row.article_content,
   };
 }
