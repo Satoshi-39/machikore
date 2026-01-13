@@ -154,6 +154,7 @@ export async function searchPublicSpotsByTag(
       order_index,
       created_at,
       updated_at,
+      article_content,
       master_spots (
         id,
         name,
@@ -240,5 +241,6 @@ export async function searchPublicSpotsByTag(
     tags: (spot.spot_tags || [])
       .map((st: any) => st.tags)
       .filter(Boolean),
+    article_content: spot.article_content || null,
   }));
 }
