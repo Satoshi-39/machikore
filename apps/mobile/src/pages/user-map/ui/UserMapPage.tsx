@@ -12,7 +12,7 @@ import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { useRecordView } from '@/entities/view-history';
-import { useSpots } from '@/entities/user-spot';
+import { useSpots, useDeleteSpot } from '@/entities/user-spot';
 import { UserMapView } from '@/widgets/user-map-view';
 import { UserMapList } from '@/widgets/user-map-list';
 import { OwnMapSearch } from '@/widgets/own-map-search';
@@ -160,6 +160,12 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     router.push(`/edit-spot/${spotId}` as Href);
   };
 
+  // スポット削除
+  const { mutate: deleteSpot } = useDeleteSpot();
+  const handleDeleteSpot = (spotId: string) => {
+    deleteSpot(spotId);
+  };
+
   // 記事ページへ遷移
   const handleArticlePress = () => {
     router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
@@ -191,6 +197,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
           isSearchFocused={isSearchFocused}
           isDetailCardMaximized={isDetailCardMaximized}
           onEditSpot={handleEditSpot}
+          onDeleteSpot={handleDeleteSpot}
           onDetailCardMaximized={setIsDetailCardMaximized}
           onPinDropConfirm={handlePinDropConfirm}
         />

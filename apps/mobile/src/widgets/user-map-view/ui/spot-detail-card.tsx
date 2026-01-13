@@ -15,7 +15,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
+import { useSpotImages } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
 import { useSpotTags } from '@/entities/tag';
@@ -33,6 +33,7 @@ interface SpotDetailCardProps {
   /** 拡大状態（ヘッダー非表示）への遷移通知 - snapIndex=2で拡大状態 */
   onExpandedChange?: (isExpanded: boolean) => void;
   onEdit?: (spotId: string) => void;
+  onDelete?: (spotId: string) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
   /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
   onBeforeClose?: () => void;
@@ -69,14 +70,13 @@ function SpotDetailCardContent({
 // 拡大ボタンの追加に伴い、180→240に調整
 const SEARCH_BAR_BOTTOM_Y = 240;
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onDelete, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
   const { t, locale } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
-  const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
   const isBookmarked = bookmarkInfo.length > 0;
   // ブックマーク済みフォルダIDのSetを作成
@@ -195,13 +195,12 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           text: t('common.delete'),
           style: 'destructive',
           onPress: () => {
-            deleteSpot(spot.id);
-            onClose();
+            onDelete?.(spot.id);
           },
         },
       ]
     );
-  }, [spot.id, deleteSpot, onClose, t]);
+  }, [spot.id, onDelete, t]);
 
   // 三点リーダーメニュー項目（オーナー用）
   const ownerMenuItems: PopupMenuItem[] = useMemo(() => [
@@ -278,7 +277,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               <Ionicons name="eye-outline" size={22} color={colors.text.secondary} />
             </Pressable>
             {/* 三点リーダーメニュー */}
-            {isOwner && !isDeleting ? (
+            {isOwner ? (
               <View className="mr-2">
                 <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
               </View>

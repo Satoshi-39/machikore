@@ -51,6 +51,7 @@ interface UserMapViewProps {
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
   onEditSpot?: (spotId: string) => void;
+  onDeleteSpot?: (spotId: string) => void;
   /** ピン刺しモードで位置確定時のコールバック */
   onPinDropConfirm?: (location: {
     latitude: number;
@@ -72,6 +73,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       viewMode = 'map',
       isSearchFocused = false,
       onEditSpot,
+      onDeleteSpot,
       onPinDropConfirm,
     },
     ref
@@ -434,6 +436,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
               onSpotSelect={handleCarouselSpotFocus}
               onSpotPress={handleCarouselSpotPress}
               onCameraMove={handleCameraMove}
+              onEdit={onEditSpot}
+              onDelete={onDeleteSpot}
               onClose={closeCarousel}
             />
           )}
@@ -447,6 +451,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onSnapChange={handleSnapChange}
             onExpandedChange={onDetailCardMaximized}
             onEdit={onEditSpot}
+            onDelete={onDeleteSpot}
             onSearchBarVisibilityChange={onDetailCardMaximized}
             onBeforeClose={controlsVisibility.handleBeforeClose}
             onLocationButtonVisibilityChange={
