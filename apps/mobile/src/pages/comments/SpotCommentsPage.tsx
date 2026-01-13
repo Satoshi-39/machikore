@@ -14,12 +14,13 @@ import {
   Platform,
   Keyboard,
 } from 'react-native';
-import { useRouter, type Href } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSpotComments, useAddSpotComment, useAddReplyComment } from '@/entities/comment';
 import { useCurrentUserId, useUser } from '@/entities/user';
 import { useSpotWithDetails, SpotCard } from '@/entities/user-spot';
 import { useCommentActions } from '@/features/comment-actions';
+import { useSpotActions } from '@/features/spot-actions';
 import { CommentList } from '@/widgets/comment';
 import { PageHeader, CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
 import { colors } from '@/shared/config';
@@ -37,6 +38,13 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const inputRef = useRef<CommentInputRef>(null);
+
+  // スポット操作フック
+  const {
+    handleEdit: handleSpotEdit,
+    handleDelete: handleDeleteSpot,
+    handleReport: handleReportSpot,
+  } = useSpotActions({ currentUserId });
 
   // 入力状態
   const [inputText, setInputText] = useState('');
@@ -122,10 +130,6 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
     router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
   }, [router, currentTab]);
 
-  const handleSpotEdit = useCallback((id: string) => {
-    router.push(`/edit-spot/${id}` as Href);
-  }, [router]);
-
   // スポットヘッダー
   const renderSpotHeader = useCallback(() => {
     if (!spot) return null;
@@ -138,6 +142,8 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
           onUserPress={handleUserPress}
           onMapPress={handleMapPress}
           onEdit={handleSpotEdit}
+          onDelete={handleDeleteSpot}
+          onReport={handleReportSpot}
           embeddedUser={spot.user}
           embeddedMasterSpot={spot.master_spot}
           noBorder
@@ -147,7 +153,7 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
         </View>
       </View>
     );
-  }, [spot, currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleSpotEdit, t]);
+  }, [spot, currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleSpotEdit, handleDeleteSpot, handleReportSpot, t]);
 
   // 返信先の表示名を取得
   const replyTarget = replyingTo

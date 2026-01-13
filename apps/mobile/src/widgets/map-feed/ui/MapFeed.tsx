@@ -13,6 +13,7 @@ import { useRouter } from 'expo-router';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
+import { useMapActions } from '@/features/map-actions';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -59,6 +60,13 @@ export function MapFeed({
   const currentUser = useUserStore((state) => state.user);
   const userId = currentUser?.id;
   const { t } = useI18n();
+
+  // マップ操作フック
+  const {
+    handleEdit: handleEditMap,
+    handleDelete: handleDeleteMap,
+    handleReport: handleReportMap,
+  } = useMapActions({ currentUserId: userId });
 
   // 無限スクロール対応のマップ取得
   const {
@@ -108,10 +116,6 @@ export function MapFeed({
   const handleUserPress = useCallback((userId: string) => {
     router.push(`/(tabs)/${tabName}/users/${userId}`);
   }, [router, tabName]);
-
-  const handleEditMap = useCallback((mapId: string) => {
-    router.push(`/edit-map/${mapId}`);
-  }, [router]);
 
   const handleCommentPress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${tabName}/comment-modal/maps/${mapId}`);
@@ -165,13 +169,15 @@ export function MapFeed({
           onPress={() => handleMapPress(item.data.id)}
           onUserPress={handleUserPress}
           onEdit={handleEditMap}
+          onDelete={handleDeleteMap}
+          onReport={handleReportMap}
           onCommentPress={handleCommentPress}
           onArticlePress={handleArticlePress}
           onTagPress={handleTagPress}
         />
       );
     },
-    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleCommentPress, handleArticlePress, handleTagPress]
+    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleDeleteMap, handleReportMap, handleCommentPress, handleArticlePress, handleTagPress]
   );
 
   const getItemKey = useCallback((item: FeedItem) => {

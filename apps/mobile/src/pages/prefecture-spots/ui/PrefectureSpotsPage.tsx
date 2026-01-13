@@ -10,12 +10,12 @@ import { View, FlatList, Text, RefreshControl } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
-import { usePrefectureSpots, usePrefectureCategorySpots } from '@/entities/user-spot';
+import { usePrefectureSpots, usePrefectureCategorySpots, SpotCard } from '@/entities/user-spot';
 import { usePrefectures } from '@/entities/prefecture';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
+import { useSpotActions } from '@/features/spot-actions';
 import { PageHeader } from '@/shared/ui';
-import { SpotCard } from '@/entities/user-spot';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
@@ -32,6 +32,13 @@ export function PrefectureSpotsPage() {
   const currentUserId = useCurrentUserId();
   const { data: prefectures = [] } = usePrefectures();
   const { data: categories = [] } = useCategories();
+
+  // スポット操作フック
+  const {
+    handleEdit: handleEditSpot,
+    handleDelete: handleDeleteSpot,
+    handleReport: handleReportSpot,
+  } = useSpotActions({ currentUserId });
 
   // categoryIdがあればカテゴリ+都道府県検索、なければ都道府県のみ
   const prefectureOnlyQuery = usePrefectureSpots(
@@ -105,6 +112,9 @@ export function PrefectureSpotsPage() {
       onPress={() => handleSpotPress(item.id)}
       onUserPress={handleUserPress}
       onMapPress={handleMapPress}
+      onEdit={handleEditSpot}
+      onDelete={handleDeleteSpot}
+      onReport={handleReportSpot}
       onCommentPress={handleCommentPress}
       embeddedUser={item.user}
       embeddedMasterSpot={item.master_spot}

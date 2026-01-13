@@ -3,7 +3,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Linking, ActivityIndicator, Dimensions } from 'react-native';
+import { View, Text, Pressable, Linking, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
@@ -27,6 +27,7 @@ import { determineSpotCategory } from '@/entities/master-spot';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMasterSpotFavorited, useAddMasterSpotFavorite, useRemoveMasterSpotFavorite } from '@/entities/master-spot';
 import { useSelectedPlaceStore } from '@/features/search-places';
+import { useSpotActions } from '@/features/spot-actions';
 import { useMapStore } from '@/entities/map';
 import { MapSelectSheet } from '@/widgets/map-select-sheet';
 
@@ -71,12 +72,16 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
   const { locale } = useI18n();
-  const screenWidth = Dimensions.get('window').width;
-  // SpotCard用のコンテナ幅計算: 画面幅 - BottomSheetのpx-4(32px) - カードのp-4(32px) - border(2px)
-  const spotCardContainerWidth = screenWidth - 32 - 32 - 2;
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const [showMapSelectSheet, setShowMapSelectSheet] = useState(false);
+
+  // スポット操作フック
+  const {
+    handleEdit: handleEditSpot,
+    handleDelete: handleDeleteSpot,
+    handleReport: handleReportSpot,
+  } = useSpotActions({ currentUserId });
 
   // お気に入り状態
   const { data: isFavorited = false } = useCheckMasterSpotFavorited(currentUserId, spot.id);
@@ -353,10 +358,12 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                   <SpotCard
                     spot={userSpot}
                     currentUserId={currentUserId}
-                    containerWidth={spotCardContainerWidth}
                     onPress={() => handleSpotPress(userSpot.id)}
                     onUserPress={handleUserPress}
                     onMapPress={handleMapPress}
+                    onEdit={handleEditSpot}
+                    onDelete={handleDeleteSpot}
+                    onReport={handleReportSpot}
                     onCommentPress={handleCommentPress}
                   />
                 </View>

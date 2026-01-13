@@ -7,14 +7,12 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
-import { showLoginRequiredAlert, shareMap } from '@/shared/lib';
+import { shareMap } from '@/shared/lib';
 import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
-import { useDeleteMap } from '@/entities/map/api';
 import { formatRelativeTime } from '@/shared/lib/utils';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
@@ -27,6 +25,8 @@ interface MapCardProps {
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
   onEdit?: (mapId: string) => void;
+  onDelete?: (mapId: string) => void;
+  onReport?: (mapId: string) => void;
   onCommentPress?: (mapId: string) => void;
   onArticlePress?: (mapId: string) => void;
   onTagPress?: (tagName: string) => void;
@@ -34,8 +34,7 @@ interface MapCardProps {
   noBorder?: boolean;
 }
 
-export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
-  const router = useRouter();
+export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDelete, onReport, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
   const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = 'user' in map ? map.user : null;
@@ -47,7 +46,6 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
 
   const screenWidth = Dimensions.get('window').width;
 
-  const { mutate: deleteMap } = useDeleteMap();
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const isOwner = currentUserId && map.user_id === currentUserId;
@@ -61,7 +59,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
     await shareMap(map.id);
   }, [map.id]);
 
-  const handleDelete = () => {
+  // 削除確認ダイアログ
+  const handleDelete = useCallback(() => {
     Alert.alert(
       t('mapCard.deleteTitle'),
       t('mapCard.deleteMessage'),
@@ -70,50 +69,38 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         {
           text: t('common.delete'),
           style: 'destructive',
-          onPress: () => deleteMap(map.id),
+          onPress: () => onDelete?.(map.id),
         },
       ]
     );
-  };
+  }, [t, onDelete, map.id]);
 
-  const menuItems: PopupMenuItem[] = useMemo(() => {
-    const items: PopupMenuItem[] = [];
+  // オーナー用メニュー（編集・削除）
+  const ownerMenuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'edit',
+      label: t('menu.edit'),
+      icon: 'create-outline',
+      onPress: () => onEdit?.(map.id),
+    },
+    {
+      id: 'delete',
+      label: t('menu.delete'),
+      icon: 'trash-outline',
+      destructive: true,
+      onPress: handleDelete,
+    },
+  ], [map.id, onEdit, handleDelete, t]);
 
-    // オーナーの場合: 編集・削除
-    if (isOwner) {
-      items.push(
-        {
-          id: 'edit',
-          label: t('menu.edit'),
-          icon: 'create-outline',
-          onPress: () => onEdit?.(map.id),
-        },
-        {
-          id: 'delete',
-          label: t('menu.delete'),
-          icon: 'trash-outline',
-          destructive: true,
-          onPress: handleDelete,
-        }
-      );
-    } else {
-      // 他ユーザーの場合: 報告する
-      items.push({
-        id: 'report',
-        label: t('menu.report'),
-        icon: 'flag-outline',
-        onPress: () => {
-          if (!currentUserId) {
-            showLoginRequiredAlert(t('menu.report'));
-            return;
-          }
-          router.push(`/report?targetType=map&targetId=${map.id}`);
-        },
-      });
-    }
-
-    return items;
-  }, [map.id, onEdit, isOwner, currentUserId, router, t]);
+  // ゲスト用メニュー（通報）
+  const guestMenuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'report',
+      label: t('menu.report'),
+      icon: 'flag-outline',
+      onPress: () => onReport?.(map.id),
+    },
+  ], [map.id, onReport, t]);
 
   return (
     <Pressable
@@ -163,7 +150,11 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onCo
         )}
 
         {/* 三点リーダーメニュー */}
-        <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+        {isOwner ? (
+          <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
+        ) : currentUserId && !isOwner ? (
+          <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
+        ) : null}
       </View>
 
       {/* サムネイル画像 */}

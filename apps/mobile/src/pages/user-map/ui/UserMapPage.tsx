@@ -12,7 +12,7 @@ import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { useRecordView } from '@/entities/view-history';
-import { useSpots, useDeleteSpot } from '@/entities/user-spot';
+import { useSpots } from '@/entities/user-spot';
 import { UserMapView } from '@/widgets/user-map-view';
 import { UserMapList } from '@/widgets/user-map-list';
 import { OwnMapSearch } from '@/widgets/own-map-search';
@@ -28,6 +28,7 @@ import {
   reverseGeocode,
 } from '@/features/search-places';
 import { usePinDropStore } from '@/features/drop-pin';
+import { useSpotDelete } from '@/features/spot-actions';
 import * as Crypto from 'expo-crypto';
 import { log } from '@/shared/config/logger';
 
@@ -160,11 +161,8 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     router.push(`/edit-spot/${spotId}` as Href);
   };
 
-  // スポット削除
-  const { mutate: deleteSpot } = useDeleteSpot();
-  const handleDeleteSpot = (spotId: string) => {
-    deleteSpot(spotId);
-  };
+  // スポット削除（確認ダイアログ付き）
+  const { handleDelete: handleDeleteSpot } = useSpotDelete();
 
   // 記事ページへ遷移
   const handleArticlePress = () => {

@@ -8,15 +8,23 @@
 
 import React, { useCallback, useMemo } from 'react';
 import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
-import { useRouter, type Href } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
+import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary } from '@/shared/ui';
 import { colors } from '@/shared/config';
 
 export function SpotFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
+
+  // スポット操作フック
+  const {
+    handleEdit: handleEditSpot,
+    handleDelete: handleDeleteSpot,
+    handleReport: handleReportSpot,
+  } = useSpotActions({ currentUserId: currentUser?.id });
 
   // 無限スクロール対応のフック
   const {
@@ -43,11 +51,6 @@ export function SpotFeed() {
   // ユーザーアイコンタップ時: ユーザープロフィールページに遷移（発見タブ内スタック）
   const handleUserPress = useCallback((userId: string) => {
     router.push(`/(tabs)/discover/users/${userId}`);
-  }, [router]);
-
-  // スポット編集
-  const handleEditSpot = useCallback((spotId: string) => {
-    router.push(`/edit-spot/${spotId}` as Href);
   }, [router]);
 
   // コメントモーダルを開く
@@ -98,6 +101,8 @@ export function SpotFeed() {
                 onUserPress={handleUserPress}
                 onMapPress={handleMapPress}
                 onEdit={handleEditSpot}
+                onDelete={handleDeleteSpot}
+                onReport={handleReportSpot}
                 onCommentPress={handleCommentPress}
                 // Supabase JOINで取得済みのデータを渡す
                 embeddedUser={item.user}

@@ -14,6 +14,8 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotSearch, useSpotTagSearch, SpotCard } from '@/entities/user-spot';
 import { useMapSearch, useMapTagSearch, MapCard } from '@/entities/map';
 import { useUserSearch, UserListItem, useUserStore } from '@/entities/user';
+import { useSpotActions } from '@/features/spot-actions';
+import { useMapActions } from '@/features/map-actions';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
 
@@ -41,6 +43,19 @@ export function SearchResults({
   const { t } = useI18n();
   const [resultTab, setResultTab] = useState<SearchResultTab>('latest');
   const currentUser = useUserStore((state) => state.user);
+
+  // スポット・マップ操作フック
+  const {
+    handleEdit: handleEditSpot,
+    handleDelete: handleDeleteSpot,
+    handleReport: handleReportSpot,
+  } = useSpotActions({ currentUserId: currentUser?.id });
+
+  const {
+    handleEdit: handleEditMap,
+    handleDelete: handleDeleteMap,
+    handleReport: handleReportMap,
+  } = useMapActions({ currentUserId: currentUser?.id });
 
   // タグ検索かどうかを判定（#で始まる場合）
   const isTagSearch = query.startsWith('#');
@@ -135,9 +150,12 @@ export function SearchResults({
                 onPress={() => onSpotPress(item.item.id)}
                 onUserPress={onUserPress}
                 onMapPress={onMapPress}
+                onEdit={handleEditSpot}
+                onDelete={handleDeleteSpot}
+                onReport={handleReportSpot}
                 onCommentPress={onSpotCommentPress}
                 onTagPress={onTagPress}
-                              />
+              />
             );
           }
           return (
@@ -146,6 +164,9 @@ export function SearchResults({
               currentUserId={currentUser?.id}
               onPress={() => onMapPress(item.item.id)}
               onUserPress={onUserPress}
+              onEdit={handleEditMap}
+              onDelete={handleDeleteMap}
+              onReport={handleReportMap}
               onCommentPress={onMapCommentPress}
               onTagPress={onTagPress}
             />
@@ -154,7 +175,7 @@ export function SearchResults({
         showsVerticalScrollIndicator={false}
       />
     );
-  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t]);
+  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t, handleEditSpot, handleDeleteSpot, handleReportSpot, handleEditMap, handleDeleteMap, handleReportMap]);
 
   // 話題タブ: いいね数でソート
   const renderTrendingResults = useCallback(() => {
@@ -187,9 +208,12 @@ export function SearchResults({
                 onPress={() => onSpotPress(item.item.id)}
                 onUserPress={onUserPress}
                 onMapPress={onMapPress}
+                onEdit={handleEditSpot}
+                onDelete={handleDeleteSpot}
+                onReport={handleReportSpot}
                 onCommentPress={onSpotCommentPress}
                 onTagPress={onTagPress}
-                              />
+              />
             );
           }
           return (
@@ -198,6 +222,9 @@ export function SearchResults({
               currentUserId={currentUser?.id}
               onPress={() => onMapPress(item.item.id)}
               onUserPress={onUserPress}
+              onEdit={handleEditMap}
+              onDelete={handleDeleteMap}
+              onReport={handleReportMap}
               onCommentPress={onMapCommentPress}
               onTagPress={onTagPress}
             />
@@ -206,7 +233,7 @@ export function SearchResults({
         showsVerticalScrollIndicator={false}
       />
     );
-  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t]);
+  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t, handleEditSpot, handleDeleteSpot, handleReportSpot, handleEditMap, handleDeleteMap, handleReportMap]);
 
   const renderSearchResults = () => {
     if (isLoading) {
@@ -247,9 +274,12 @@ export function SearchResults({
               onPress={() => onSpotPress(item.id)}
               onUserPress={onUserPress}
               onMapPress={onMapPress}
+              onEdit={handleEditSpot}
+              onDelete={handleDeleteSpot}
+              onReport={handleReportSpot}
               onCommentPress={onSpotCommentPress}
               onTagPress={onTagPress}
-                          />
+            />
           )}
           showsVerticalScrollIndicator={false}
         />
@@ -277,6 +307,9 @@ export function SearchResults({
               currentUserId={currentUser?.id}
               onPress={() => onMapPress(item.id)}
               onUserPress={onUserPress}
+              onEdit={handleEditMap}
+              onDelete={handleDeleteMap}
+              onReport={handleReportMap}
               onCommentPress={onMapCommentPress}
               onTagPress={onTagPress}
             />

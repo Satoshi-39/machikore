@@ -22,7 +22,7 @@ import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import { formatRelativeTime } from '@/shared/lib/utils';
 import { isEmptyArticle } from '@/shared/lib/utils/article.utils';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
-import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
+import { useSpotImages } from '@/entities/user-spot/api';
 import { useToggleSpotLike } from '@/entities/like';
 import { useUser } from '@/entities/user';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
@@ -59,6 +59,8 @@ interface SpotCardProps {
   onUserPress?: (userId: string) => void;
   onMapPress?: (mapId: string) => void;
   onEdit?: (spotId: string) => void;
+  onDelete?: (spotId: string) => void;
+  onReport?: (spotId: string) => void;
   onCommentPress?: (spotId: string) => void;
   onTagPress?: (tagName: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
@@ -76,6 +78,8 @@ export function SpotCard({
   onUserPress,
   onMapPress,
   onEdit,
+  onDelete,
+  onReport,
   onCommentPress,
   onTagPress,
   embeddedUser,
@@ -116,7 +120,6 @@ export function SpotCard({
   const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
   const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
-  const { mutate: deleteSpot, isPending: isDeleting } = useDeleteSpot();
   const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
 
   // ブックマーク状態
@@ -243,7 +246,7 @@ export function SpotCard({
     await shareSpot(spot.id);
   }, [spot.id]);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     Alert.alert(
       t('spotCard.deleteTitle'),
       t('spotCard.deleteMessage'),
@@ -252,13 +255,14 @@ export function SpotCard({
         {
           text: t('common.delete'),
           style: 'destructive',
-          onPress: () => deleteSpot(spot.id),
+          onPress: () => onDelete?.(spot.id),
         },
       ]
     );
-  };
+  }, [spot.id, onDelete, t]);
 
-  const menuItems: PopupMenuItem[] = useMemo(() => [
+  // 三点リーダーメニュー項目（オーナー用）
+  const ownerMenuItems: PopupMenuItem[] = useMemo(() => [
     {
       id: 'edit',
       label: t('common.edit'),
@@ -272,7 +276,17 @@ export function SpotCard({
       destructive: true,
       onPress: handleDelete,
     },
-  ], [spot.id, onEdit, t]);
+  ], [spot.id, onEdit, handleDelete, t]);
+
+  // 三点リーダーメニュー項目（オーナー以外用）
+  const guestMenuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'report',
+      label: t('common.report'),
+      icon: 'flag-outline',
+      onPress: () => onReport?.(spot.id),
+    },
+  ], [spot.id, onReport, t]);
 
   return (
     <Pressable
@@ -307,10 +321,12 @@ export function SpotCard({
           </Text>
         </View>
 
-        {/* 三点リーダーメニュー（自分のスポットのみ） */}
-        {isOwner && !isDeleting && (
-          <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
-        )}
+        {/* 三点リーダーメニュー */}
+        {isOwner ? (
+          <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
+        ) : currentUserId && !isOwner ? (
+          <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
+        ) : null}
       </View>
 
       {/* スポット名 */}

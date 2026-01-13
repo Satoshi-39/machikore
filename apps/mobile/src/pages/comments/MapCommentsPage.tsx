@@ -20,6 +20,7 @@ import { useMapComments, useAddMapComment, useAddReplyComment } from '@/entities
 import { useMap, MapCard } from '@/entities/map';
 import { useCurrentUserId, useUser } from '@/entities/user';
 import { useCommentActions } from '@/features/comment-actions';
+import { useMapActions } from '@/features/map-actions';
 import { CommentList } from '@/widgets/comment';
 import { PageHeader, CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
 import { colors } from '@/shared/config';
@@ -37,6 +38,13 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const inputRef = useRef<CommentInputRef>(null);
+
+  // マップ操作フック
+  const {
+    handleEdit: handleMapEdit,
+    handleDelete: handleDeleteMap,
+    handleReport: handleReportMap,
+  } = useMapActions({ currentUserId });
 
   // 入力状態
   const [inputText, setInputText] = useState('');
@@ -118,10 +126,6 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
     router.push(`/(tabs)/${currentTab}/maps/${mapId}`);
   }, [router, mapId, currentTab]);
 
-  const handleMapEdit = useCallback((id: string) => {
-    router.push(`/edit-map/${id}`);
-  }, [router]);
-
   const handleArticlePress = useCallback((id: string) => {
     router.push(`/(tabs)/${currentTab}/articles/maps/${id}`);
   }, [router, currentTab]);
@@ -137,6 +141,8 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
           onPress={handleMapPress}
           onUserPress={handleUserPress}
           onEdit={handleMapEdit}
+          onDelete={handleDeleteMap}
+          onReport={handleReportMap}
           onArticlePress={handleArticlePress}
           noBorder
         />
@@ -145,7 +151,7 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
         </View>
       </View>
     );
-  }, [map, currentUserId, handleMapPress, handleUserPress, handleMapEdit, handleArticlePress, t]);
+  }, [map, currentUserId, handleMapPress, handleUserPress, handleMapEdit, handleDeleteMap, handleReportMap, handleArticlePress, t]);
 
   // 返信先の表示名を取得
   const replyTarget = replyingTo
