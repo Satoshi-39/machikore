@@ -253,7 +253,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </View>
             {/* ユーザーの一言（サブ） */}
             {spot.description && (
-              <Text className="text-lg text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
                 {spot.description}
               </Text>
             )}
