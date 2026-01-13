@@ -10,7 +10,7 @@ import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR } from '@/s
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { searchSpotsByMapId, type MapSpotSearchResult } from '@/shared/api/supabase/user-spots';
-import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
+import { useSearchHistory, SearchHistoryList } from '@/features/search';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress } from '@/shared/lib/utils/multilang.utils';
 
@@ -42,7 +42,7 @@ export function OtherMapSearch({
     addHistory,
     removeHistory,
     clearHistory,
-  } = useSearchHistory({ type: 'userMap' });
+  } = useSearchHistory('userMap');
 
   // 検索実行
   const search = useCallback(async (query: string) => {
@@ -71,7 +71,7 @@ export function OtherMapSearch({
 
   // 検索結果選択時
   const handleSpotSelect = (spot: MapSpotSearchResult) => {
-    addHistory(searchQuery, 'spot');
+    addHistory(searchQuery);
     onSpotSelect?.(spot);
     onClose();
   };

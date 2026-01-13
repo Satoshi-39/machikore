@@ -18,7 +18,7 @@ import {
   reverseGeocode,
 } from '@/features/search-places';
 import { usePlaceSelectHandler } from '../model';
-import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
+import { useSearchHistory, SearchHistoryList } from '@/features/search';
 import { useRouter, type Href } from 'expo-router';
 import * as Crypto from 'expo-crypto';
 import { log } from '@/shared/config/logger';
@@ -59,7 +59,7 @@ export function OwnMapSearch({
     addHistory,
     removeHistory,
     clearHistory,
-  } = useSearchHistory({ type: 'userMap' });
+  } = useSearchHistory('userMap');
 
   // 既存スポット編集へ遷移
   const handleExistingSpotEdit = (spotId: string) => {
@@ -77,7 +77,7 @@ export function OwnMapSearch({
 
   // 検索結果選択時に履歴も追加
   const handlePlaceSelect = (place: PlaceSearchResult) => {
-    addHistory(searchQuery, 'place');
+    addHistory(searchQuery);
     basePlaceSelect(place);
   };
 

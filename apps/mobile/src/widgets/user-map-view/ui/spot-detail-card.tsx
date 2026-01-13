@@ -274,13 +274,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
         </View>
 
-        {/* 住所 */}
-        {spotAddress && (
-          <View className="flex-row items-center mb-3">
-            <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
-          </View>
-        )}
       </View>
 
       {/* スクロール可能なコンテンツ */}
@@ -309,6 +302,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </ScrollView>
           </View>
         ) : null}
+
+        {/* 住所 */}
+        {spotAddress && (
+          <View className="flex-row items-center mb-3">
+            <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
+          </View>
+        )}
 
         {/* アクションボタン */}
         <View className="flex-row items-center justify-around pt-4 pb-1">

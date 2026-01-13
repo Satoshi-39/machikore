@@ -320,17 +320,25 @@ export function SpotCard({
         </Text>
       )}
 
-      {/* マップ名 */}
-      {mapName && (
-        <Pressable
-          onPress={() => onMapPress?.(spot.map_id)}
-          className="flex-row items-center mb-2 self-start"
-        >
-          <Ionicons name="map-outline" size={14} color={colors.primary.DEFAULT} />
-          <Text className="text-xs ml-1" style={{ color: colors.primary.DEFAULT }}>
-            {mapName}
-          </Text>
-        </Pressable>
+      {/* タグ */}
+      {tags && tags.length > 0 && (
+        <View className="flex-row flex-wrap mb-2">
+          {tags.slice(0, 5).map((tag) => (
+            <Pressable
+              key={tag.id}
+              onPress={(e) => {
+                e.stopPropagation();
+                onTagPress?.(tag.name);
+              }}
+              className="mr-2 mb-1"
+              hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
+            >
+              <Text className="text-sm text-primary">
+                #{tag.name}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
       )}
 
       {/* 画像（2x2グリッド、最大4枚表示） */}
@@ -412,25 +420,21 @@ export function SpotCard({
         </View>
       )}
 
-      {/* タグ */}
-      {tags && tags.length > 0 && (
-        <View className="flex-row flex-wrap mb-2">
-          {tags.slice(0, 5).map((tag) => (
-            <Pressable
-              key={tag.id}
-              onPress={(e) => {
-                e.stopPropagation();
-                onTagPress?.(tag.name);
-              }}
-              className="mr-2 mb-1"
-              hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
-            >
-              <Text className="text-sm text-primary">
-                #{tag.name}
-              </Text>
-            </Pressable>
-          ))}
-        </View>
+      {/* マップ名 */}
+      {mapName && (
+        <Pressable
+          onPress={(e) => {
+            e.stopPropagation();
+            onMapPress?.(spot.map_id);
+          }}
+          className="flex-row items-center mb-2 self-start"
+          hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
+        >
+          <Ionicons name="map-outline" size={14} color={colors.primary.DEFAULT} />
+          <Text className="text-xs ml-1" style={{ color: colors.primary.DEFAULT }}>
+            {mapName}
+          </Text>
+        </Pressable>
       )}
 
       {/* フッター情報 - 均等配置 */}

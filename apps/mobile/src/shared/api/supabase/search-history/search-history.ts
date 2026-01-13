@@ -1,17 +1,16 @@
 /**
  * 検索履歴のSupabase操作
- * Discover検索用（クラウド同期対応）
  */
 
-import { supabase } from '@/shared/api/supabase';
+import { supabase } from '../client';
 import { log } from '@/shared/config/logger';
-import type { SearchHistoryItem } from '../model/types';
+import type { SearchHistoryItem, SearchHistoryType } from './types';
 
 /**
  * 検索履歴を取得
  */
-export async function getSearchHistoryFromDB(
-  searchType: string = 'discover',
+export async function getSearchHistory(
+  searchType: SearchHistoryType = 'discover',
   limit: number = 50
 ): Promise<SearchHistoryItem[]> {
   try {
@@ -23,7 +22,7 @@ export async function getSearchHistoryFromDB(
       .limit(limit);
 
     if (error) {
-      log.error('[SearchHistory] Failed to get search history from DB:', error);
+      log.error('[SearchHistory] Failed to get search history:', error);
       return [];
     }
 
@@ -33,7 +32,7 @@ export async function getSearchHistoryFromDB(
       timestamp: new Date(item.searched_at).getTime(),
     }));
   } catch (error) {
-    log.error('[SearchHistory] Failed to get search history from DB:', error);
+    log.error('[SearchHistory] Failed to get search history:', error);
     return [];
   }
 }
@@ -41,9 +40,9 @@ export async function getSearchHistoryFromDB(
 /**
  * 検索履歴を追加（RPC関数を使用）
  */
-export async function addSearchHistoryToDB(
+export async function addSearchHistory(
   query: string,
-  searchType: string = 'discover'
+  searchType: SearchHistoryType = 'discover'
 ): Promise<string | null> {
   try {
     const { data, error } = await supabase.rpc('add_search_history', {
@@ -52,13 +51,13 @@ export async function addSearchHistoryToDB(
     });
 
     if (error) {
-      log.error('[SearchHistory] Failed to add search history to DB:', error);
+      log.error('[SearchHistory] Failed to add search history:', error);
       return null;
     }
 
     return data;
   } catch (error) {
-    log.error('[SearchHistory] Failed to add search history to DB:', error);
+    log.error('[SearchHistory] Failed to add search history:', error);
     return null;
   }
 }
@@ -66,7 +65,7 @@ export async function addSearchHistoryToDB(
 /**
  * 検索履歴を1件削除
  */
-export async function removeSearchHistoryFromDB(id: string): Promise<boolean> {
+export async function removeSearchHistory(id: string): Promise<boolean> {
   try {
     const { error } = await supabase
       .from('search_history')
@@ -74,13 +73,13 @@ export async function removeSearchHistoryFromDB(id: string): Promise<boolean> {
       .eq('id', id);
 
     if (error) {
-      log.error('[SearchHistory] Failed to remove search history from DB:', error);
+      log.error('[SearchHistory] Failed to remove search history:', error);
       return false;
     }
 
     return true;
   } catch (error) {
-    log.error('[SearchHistory] Failed to remove search history from DB:', error);
+    log.error('[SearchHistory] Failed to remove search history:', error);
     return false;
   }
 }
@@ -88,8 +87,8 @@ export async function removeSearchHistoryFromDB(id: string): Promise<boolean> {
 /**
  * 検索履歴を全削除（RPC関数を使用）
  */
-export async function clearSearchHistoryFromDB(
-  searchType: string = 'discover'
+export async function clearSearchHistory(
+  searchType: SearchHistoryType = 'discover'
 ): Promise<number> {
   try {
     const { data, error } = await supabase.rpc('clear_search_history', {
@@ -97,13 +96,13 @@ export async function clearSearchHistoryFromDB(
     });
 
     if (error) {
-      log.error('[SearchHistory] Failed to clear search history from DB:', error);
+      log.error('[SearchHistory] Failed to clear search history:', error);
       return 0;
     }
 
     return data || 0;
   } catch (error) {
-    log.error('[SearchHistory] Failed to clear search history from DB:', error);
+    log.error('[SearchHistory] Failed to clear search history:', error);
     return 0;
   }
 }

@@ -10,7 +10,7 @@ import { colors, SPOT_TYPE_COLORS, LOCATION_ICONS } from '@/shared/config';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
 import { determineSpotCategory } from '@/entities/master-spot';
-import { useSearchHistory, SearchHistoryList } from '@/features/search-history';
+import { useSearchHistory, SearchHistoryList } from '@/features/search';
 
 interface DefaultMapSearchProps {
   searchQuery: string;
@@ -37,7 +37,7 @@ export function DefaultMapSearch({
     addHistory,
     removeHistory,
     clearHistory,
-  } = useSearchHistory({ type: 'defaultMap' });
+  } = useSearchHistory('defaultMap');
 
   // 検索クエリが変更されたら検索を実行（デバウンス付き）
   useEffect(() => {
@@ -50,7 +50,7 @@ export function DefaultMapSearch({
 
   const handlePlaceSelect = (place: MachikorePlaceSearchResult) => {
     // 検索履歴に追加
-    addHistory(searchQuery, place.type);
+    addHistory(searchQuery);
     onPlaceSelect?.(place);
     onClose();
   };

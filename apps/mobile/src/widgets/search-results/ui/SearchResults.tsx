@@ -1,88 +1,112 @@
 /**
- * 発見検索結果Widget
+ * 検索結果Widget
  *
  * FSDの原則：Widget層 - 複数のEntityを組み合わせた複合コンポーネント
  * - タブ切り替え（最新/話題/スポット/マップ/ユーザー）
  * - 検索結果リスト表示
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useSpotSearch, SpotCard } from '@/entities/user-spot';
-import { useMapSearch, MapCard } from '@/entities/map';
-import { useUserSearch, UserListItem, useUserStore } from '@/entities/user';
 import { useI18n } from '@/shared/lib/i18n';
+import { useSpotSearch, useSpotTagSearch, SpotCard } from '@/entities/user-spot';
+import { useMapSearch, useMapTagSearch, MapCard } from '@/entities/map';
+import { useUserSearch, UserListItem, useUserStore } from '@/entities/user';
+import type { UserSpotSearchResult } from '@/shared/api/supabase';
+import type { MapWithUser } from '@/shared/types';
 
 type SearchResultTab = 'latest' | 'trending' | 'spots' | 'maps' | 'users';
 
-interface DiscoverSearchResultsProps {
+interface SearchResultsProps {
   query: string;
+  onSpotPress: (spotId: string) => void;
+  onMapPress: (mapId: string) => void;
+  onUserPress: (userId: string) => void;
+  onSpotCommentPress: (spotId: string) => void;
+  onMapCommentPress: (mapId: string) => void;
+  onTagPress: (tagName: string) => void;
 }
 
-export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
+export function SearchResults({
+  query,
+  onSpotPress,
+  onMapPress,
+  onUserPress,
+  onSpotCommentPress,
+  onMapCommentPress,
+  onTagPress,
+}: SearchResultsProps) {
   const { t } = useI18n();
-  const router = useRouter();
   const [resultTab, setResultTab] = useState<SearchResultTab>('latest');
   const currentUser = useUserStore((state) => state.user);
 
-  const searchResultTabs = useMemo(() => [
-    { key: 'latest' as SearchResultTab, label: t('discover.latest') },
-    { key: 'trending' as SearchResultTab, label: t('discover.trending') },
-    { key: 'spots' as SearchResultTab, label: t('discover.spots') },
-    { key: 'maps' as SearchResultTab, label: t('discover.maps') },
-    { key: 'users' as SearchResultTab, label: t('discover.users') },
-  ], [t]);
+  // タグ検索かどうかを判定（#で始まる場合）
+  const isTagSearch = query.startsWith('#');
+  const tagName = isTagSearch ? query.slice(1) : '';
+  const keywordQuery = isTagSearch ? '' : query;
 
-  // 検索実行
-  const { data: spots, isLoading: spotsLoading } = useSpotSearch(
-    query && (resultTab === 'spots' || resultTab === 'latest' || resultTab === 'trending')
-      ? query
+  // キーワードでスポット検索
+  const { data: keywordSpots, isLoading: keywordSpotsLoading } = useSpotSearch(
+    keywordQuery && (resultTab === 'spots' || resultTab === 'latest' || resultTab === 'trending')
+      ? keywordQuery
       : ''
   );
-  const { data: maps, isLoading: mapsLoading } = useMapSearch(
-    query && (resultTab === 'maps' || resultTab === 'latest' || resultTab === 'trending')
-      ? query
+
+  // タグでスポット検索
+  const { data: tagSpots, isLoading: tagSpotsLoading } = useSpotTagSearch(
+    isTagSearch && (resultTab === 'spots' || resultTab === 'latest' || resultTab === 'trending')
+      ? tagName
       : ''
   );
-  const { data: users, isLoading: usersLoading } = useUserSearch(
-    query && resultTab === 'users' ? query : ''
+
+  // タグ検索かキーワード検索かでスポット結果を切り替え
+  const spots = isTagSearch ? tagSpots : keywordSpots;
+  const spotsLoading = isTagSearch ? tagSpotsLoading : keywordSpotsLoading;
+
+  // キーワード検索
+  const { data: keywordMaps, isLoading: keywordMapsLoading } = useMapSearch(
+    keywordQuery && (resultTab === 'maps' || resultTab === 'latest' || resultTab === 'trending')
+      ? keywordQuery
+      : ''
+  );
+
+  // タグ検索
+  const { data: tagMaps, isLoading: tagMapsLoading } = useMapTagSearch(
+    isTagSearch && (resultTab === 'maps' || resultTab === 'latest' || resultTab === 'trending')
+      ? tagName
+      : ''
+  );
+
+  // タグ検索かキーワード検索かで結果を切り替え
+  const maps = isTagSearch ? tagMaps : keywordMaps;
+  const mapsLoading = isTagSearch ? tagMapsLoading : keywordMapsLoading;
+
+  const { data: users, isLoading: usersSearchLoading } = useUserSearch(
+    keywordQuery && resultTab === 'users' ? keywordQuery : ''
   );
 
   const isLoading =
     (resultTab === 'spots' && spotsLoading) ||
     (resultTab === 'maps' && mapsLoading) ||
-    (resultTab === 'users' && usersLoading) ||
+    (resultTab === 'users' && usersSearchLoading) ||
     ((resultTab === 'latest' || resultTab === 'trending') && (spotsLoading || mapsLoading));
 
-  const handleSpotPress = (spotId: string) => {
-    // 発見タブ内スタックに遷移（タブバーを維持）
-    router.push(`/(tabs)/discover/spots/${spotId}`);
-  };
-
-  const handleMapPress = (mapId: string) => {
-    // 発見タブ内スタックに遷移（タブバーを維持）
-    router.push(`/(tabs)/discover/maps/${mapId}`);
-  };
-
-  const handleUserPress = (userId: string) => {
-    // 発見タブ内スタックに遷移（タブバーを維持）
-    router.push(`/(tabs)/discover/users/${userId}`);
-  };
-
-  const handleSpotCommentPress = (spotId: string) => {
-    router.push(`/(tabs)/discover/comments/spots/${spotId}`);
-  };
-
-  const handleMapCommentPress = (mapId: string) => {
-    router.push(`/(tabs)/discover/comments/maps/${mapId}`);
-  };
+  const searchResultTabs = useMemo(
+    () => [
+      { key: 'latest' as SearchResultTab, label: t('discover.latest') },
+      { key: 'trending' as SearchResultTab, label: t('discover.trending') },
+      { key: 'spots' as SearchResultTab, label: t('discover.spots') },
+      { key: 'maps' as SearchResultTab, label: t('discover.maps') },
+      { key: 'users' as SearchResultTab, label: t('discover.users') },
+    ],
+    [t]
+  );
 
   // 最新タブ: スポットとマップを混合して新着順
-  const renderLatestResults = () => {
-    const allItems: Array<{ type: 'spot' | 'map'; item: any; createdAt: string }> = [
+  const renderLatestResults = useCallback(() => {
+    const allItems: Array<{ type: 'spot' | 'map'; item: UserSpotSearchResult | MapWithUser; createdAt: string }> = [
       ...(spots?.map((s) => ({ type: 'spot' as const, item: s, createdAt: s.created_at })) || []),
       ...(maps?.map((m) => ({ type: 'map' as const, item: m, createdAt: m.created_at })) || []),
     ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -91,7 +115,9 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="search-outline" size={48} color={colors.text.tertiary} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noSearchResults')}</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+            {t('discover.noSearchResults')}
+          </Text>
         </View>
       );
     }
@@ -104,32 +130,35 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
           if (item.type === 'spot') {
             return (
               <SpotCard
-                spot={item.item}
+                spot={item.item as UserSpotSearchResult}
                 currentUserId={currentUser?.id}
-                onPress={() => handleSpotPress(item.item.id)}
-                onUserPress={handleUserPress}
-                onCommentPress={handleSpotCommentPress}
+                onPress={() => onSpotPress(item.item.id)}
+                onUserPress={onUserPress}
+                onMapPress={onMapPress}
+                onCommentPress={onSpotCommentPress}
+                onTagPress={onTagPress}
               />
             );
           }
           return (
             <MapCard
-              map={item.item}
+              map={item.item as MapWithUser}
               currentUserId={currentUser?.id}
-              onPress={() => handleMapPress(item.item.id)}
-              onUserPress={handleUserPress}
-              onCommentPress={handleMapCommentPress}
+              onPress={() => onMapPress(item.item.id)}
+              onUserPress={onUserPress}
+              onCommentPress={onMapCommentPress}
+              onTagPress={onTagPress}
             />
           );
         }}
         showsVerticalScrollIndicator={false}
       />
     );
-  };
+  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t]);
 
   // 話題タブ: いいね数でソート
-  const renderTrendingResults = () => {
-    const allItems: Array<{ type: 'spot' | 'map'; item: any; likesCount: number }> = [
+  const renderTrendingResults = useCallback(() => {
+    const allItems: Array<{ type: 'spot' | 'map'; item: UserSpotSearchResult | MapWithUser; likesCount: number }> = [
       ...(spots?.map((s) => ({ type: 'spot' as const, item: s, likesCount: s.likes_count || 0 })) || []),
       ...(maps?.map((m) => ({ type: 'map' as const, item: m, likesCount: m.likes_count || 0 })) || []),
     ].sort((a, b) => b.likesCount - a.likesCount);
@@ -138,7 +167,9 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="trending-up-outline" size={48} color={colors.text.tertiary} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noTrendingPosts')}</Text>
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+            {t('discover.noTrendingPosts')}
+          </Text>
         </View>
       );
     }
@@ -151,28 +182,31 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
           if (item.type === 'spot') {
             return (
               <SpotCard
-                spot={item.item}
+                spot={item.item as UserSpotSearchResult}
                 currentUserId={currentUser?.id}
-                onPress={() => handleSpotPress(item.item.id)}
-                onUserPress={handleUserPress}
-                onCommentPress={handleSpotCommentPress}
+                onPress={() => onSpotPress(item.item.id)}
+                onUserPress={onUserPress}
+                onMapPress={onMapPress}
+                onCommentPress={onSpotCommentPress}
+                onTagPress={onTagPress}
               />
             );
           }
           return (
             <MapCard
-              map={item.item}
+              map={item.item as MapWithUser}
               currentUserId={currentUser?.id}
-              onPress={() => handleMapPress(item.item.id)}
-              onUserPress={handleUserPress}
-              onCommentPress={handleMapCommentPress}
+              onPress={() => onMapPress(item.item.id)}
+              onUserPress={onUserPress}
+              onCommentPress={onMapCommentPress}
+              onTagPress={onTagPress}
             />
           );
         }}
         showsVerticalScrollIndicator={false}
       />
     );
-  };
+  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t]);
 
   const renderSearchResults = () => {
     if (isLoading) {
@@ -196,7 +230,9 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="location-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noSpotsFound')}</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+              {t('discover.noSpotsFound')}
+            </Text>
           </View>
         );
       }
@@ -208,9 +244,11 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
             <SpotCard
               spot={item}
               currentUserId={currentUser?.id}
-              onPress={() => handleSpotPress(item.id)}
-              onUserPress={handleUserPress}
-              onCommentPress={handleSpotCommentPress}
+              onPress={() => onSpotPress(item.id)}
+              onUserPress={onUserPress}
+              onMapPress={onMapPress}
+              onCommentPress={onSpotCommentPress}
+              onTagPress={onTagPress}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -223,7 +261,9 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="map-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noMapsFound')}</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+              {t('discover.noMapsFound')}
+            </Text>
           </View>
         );
       }
@@ -235,9 +275,10 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
             <MapCard
               map={item}
               currentUserId={currentUser?.id}
-              onPress={() => handleMapPress(item.id)}
-              onUserPress={handleUserPress}
-              onCommentPress={handleMapCommentPress}
+              onPress={() => onMapPress(item.id)}
+              onUserPress={onUserPress}
+              onCommentPress={onMapCommentPress}
+              onTagPress={onTagPress}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -250,7 +291,9 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         return (
           <View className="flex-1 justify-center items-center py-12">
             <Ionicons name="people-outline" size={48} color={colors.text.tertiary} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('discover.noUsersFound')}</Text>
+            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+              {t('discover.noUsersFound')}
+            </Text>
           </View>
         );
       }
@@ -259,7 +302,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
           data={users}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <UserListItem user={item} onPress={() => handleUserPress(item.id)} />
+            <UserListItem user={item} onPress={() => onUserPress(item.id)} />
           )}
           showsVerticalScrollIndicator={false}
         />
@@ -276,7 +319,12 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 16, paddingVertical: 8, flexDirection: 'row', alignItems: 'center' }}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            paddingVertical: 8,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
         >
           {searchResultTabs.map((tab) => {
             const isActive = resultTab === tab.key;
@@ -308,9 +356,7 @@ export function DiscoverSearchResults({ query }: DiscoverSearchResultsProps) {
       </View>
 
       {/* 検索結果 */}
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
-        {renderSearchResults()}
-      </View>
+      <View className="flex-1 bg-surface dark:bg-dark-surface">{renderSearchResults()}</View>
     </View>
   );
 }
