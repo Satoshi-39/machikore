@@ -12,7 +12,7 @@ import { View, Text, Pressable, Image, Alert, Dimensions } from 'react-native';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
@@ -132,6 +132,9 @@ export function SpotCard({
   const { mutate: addBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+
+  // 記事展開状態
+  const [isArticleExpanded, setIsArticleExpanded] = useState(false);
 
 
   // 画像拡大表示用
@@ -409,18 +412,42 @@ export function SpotCard({
       )}
 
       {/* 記事プレビュー / 展開表示 */}
-      {hasArticle && articlePreview && (
-        <ReadMore
-          numberOfLines={3}
-          seeMoreText={t('common.more')}
-          seeLessText={t('common.less')}
-          seeMoreStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
-          seeLessStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
-          style={{ marginBottom: 8 }}
-          className="text-sm text-foreground dark:text-dark-foreground"
-        >
-          {articlePreview}
-        </ReadMore>
+      {hasArticle && articleContent && (
+        <View className="mb-2">
+          {isArticleExpanded ? (
+            // 展開時: RichTextRendererでフォーマット付き表示
+            <>
+              <RichTextRenderer content={articleContent} />
+              <Pressable
+                onPress={(e) => {
+                  e.stopPropagation();
+                  setIsArticleExpanded(false);
+                }}
+                hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
+              >
+                <Text
+                  className="text-sm"
+                  style={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
+                >
+                  {t('common.less')}
+                </Text>
+              </Pressable>
+            </>
+          ) : (
+            // 折りたたみ時: ReadMoreで2行表示
+            <ReadMore
+              numberOfLines={2}
+              seeMoreText={t('common.more')}
+              seeLessText=""
+              seeMoreStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
+              allowFontScaling={false}
+              onSeeMore={() => setIsArticleExpanded(true)}
+              className="text-sm text-foreground dark:text-dark-foreground"
+            >
+              {articlePreview}
+            </ReadMore>
+          )}
+        </View>
       )}
 
       {/* タグ */}

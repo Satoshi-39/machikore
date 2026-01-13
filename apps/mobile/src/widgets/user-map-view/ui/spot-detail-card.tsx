@@ -18,6 +18,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages, useDeleteSpot } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
+import { useSpotTags } from '@/entities/tag';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { SpotCommentPreview } from './SpotCommentPreview';
 import { LikersModal } from '@/features/view-likers';
@@ -92,6 +93,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // コメント関連（全件取得して表示）
   const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 50, 0, currentUserId);
 
+  // タグ取得
+  const { data: tags = [] } = useSpotTags(spot.id);
+
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
 
@@ -156,6 +160,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // ユーザープレスハンドラー
   const handleUserPressInternal = useCallback((userId: string) => {
     router.push(`/(tabs)/${currentTab}/users/${userId}`);
+  }, [router, currentTab]);
+
+  // タグプレスハンドラー
+  const handleTagPress = useCallback((tagName: string) => {
+    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}`);
   }, [router, currentTab]);
 
   // ブックマーク: フォルダ選択モーダルを開く
@@ -308,6 +317,24 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           <View className="flex-row items-center mb-3">
             <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
+          </View>
+        )}
+
+        {/* タグ */}
+        {tags.length > 0 && (
+          <View className="flex-row flex-wrap mb-3">
+            {tags.map((tag) => (
+              <Pressable
+                key={tag.id}
+                onPress={() => handleTagPress(tag.name)}
+                className="mr-2 mb-1"
+                hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
+              >
+                <Text className="text-sm text-primary">
+                  #{tag.name}
+                </Text>
+              </Pressable>
+            ))}
           </View>
         )}
 

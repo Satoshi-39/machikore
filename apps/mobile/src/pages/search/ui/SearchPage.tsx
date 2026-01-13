@@ -79,12 +79,10 @@ export function SearchPage() {
 
   const handleTagPress = useCallback(
     (tagName: string) => {
-      const query = `#${tagName}`;
-      setSearchQuery(query);
-      setSubmittedQuery(query);
-      addHistory(query);
+      // タグ検索を新しい画面としてスタックにpush
+      router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as Href);
     },
-    [addHistory]
+    [router, currentTab]
   );
 
   const handleSubmit = useCallback(() => {
