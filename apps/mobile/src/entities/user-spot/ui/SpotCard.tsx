@@ -54,8 +54,6 @@ interface SpotCardProps {
   spot: SpotWithDetails | UserSpotSearchResult;
   currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用、いいね機能にも使用）
   machiName?: string;
-  /** コンテナの幅（画像サイズ計算用）。省略時はscreenWidth - 32 */
-  containerWidth?: number;
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
   onMapPress?: (mapId: string) => void;
@@ -73,7 +71,6 @@ export function SpotCard({
   spot,
   currentUserId,
   machiName,
-  containerWidth: containerWidthProp,
   onPress,
   onUserPress,
   onMapPress,
@@ -140,8 +137,6 @@ export function SpotCard({
   // 画像拡大表示用
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImages, closeImage } = useImageViewer();
   const screenWidth = Dimensions.get('window').width;
-  // コンテナ幅：指定があればそれを使用、なければscreenWidth - 32（デフォルトのパディング分）
-  const containerWidth = containerWidthProp ?? (screenWidth - 32);
 
   const avatarUri = user?.avatar_url ?? undefined;
   const isOwner = currentUserId && spot.user_id === currentUserId;
@@ -333,19 +328,19 @@ export function SpotCard({
       )}
 
       {/* 画像（2x2グリッド、最大4枚表示） */}
-      {/* 画像がない場合は何も表示しない、ローディング中はプレースホルダー表示 */}
       {(images.length > 0 || imagesLoading) && (
         <View className="mb-2">
           {imagesLoading ? (
             // ローディング中はプレースホルダーを表示（高さを確保してちらつき防止）
             <View
               className="bg-muted dark:bg-dark-muted rounded-lg"
-              style={{ width: containerWidth, height: containerWidth * 0.6 }}
+              style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.6 }}
             />
           ) : (
             <View className="flex-row flex-wrap" style={{ gap: 4 }}>
               {images.slice(0, 4).map((image, index) => {
                 const isLastWithMore = index === 3 && images.length > 4;
+                const containerWidth = screenWidth - 32;
                 const halfSize = (containerWidth - 4) / 2; // 2列用サイズ（gapの4pxを引く）
 
                 // 1枚の場合は横幅いっぱい、3枚の場合の3枚目も横幅いっぱい
@@ -440,9 +435,9 @@ export function SpotCard({
               seeMoreText={t('common.more')}
               seeLessText=""
               seeMoreStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
+              style={{ color: isDarkMode ? '#F3F4F6' : '#1F2937', fontSize: 14 }}
               allowFontScaling={false}
               onSeeMore={() => setIsArticleExpanded(true)}
-              className="text-sm text-foreground dark:text-dark-foreground"
             >
               {articlePreview}
             </ReadMore>
