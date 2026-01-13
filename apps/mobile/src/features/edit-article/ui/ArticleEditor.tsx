@@ -42,8 +42,8 @@ interface ArticleEditorProps {
   title: string;
   /** 初期コンテンツ（ストアまたはAPIから取得） */
   initialArticleContent: ProseMirrorDoc | null;
-  /** 保存時のコールバック */
-  onSave: (content: ProseMirrorDoc | null) => void;
+  /** 保存時のコールバック（成功時にtrueを返すPromise） */
+  onSave: (content: ProseMirrorDoc | null) => Promise<boolean>;
   /** 保存中かどうか */
   isSaving?: boolean;
   /** ローディング中かどうか */
@@ -142,7 +142,11 @@ export function ArticleEditor({
         ? null
         : (json as ProseMirrorDoc);
 
-      onSave(content);
+      const success = await onSave(content);
+      if (success) {
+        // 保存成功後、現在の内容を初期値として更新（変更検知用）
+        setInitialContent(json as ProseMirrorDoc);
+      }
     } catch (error) {
       Alert.alert('エラー', '保存に失敗しました');
     }

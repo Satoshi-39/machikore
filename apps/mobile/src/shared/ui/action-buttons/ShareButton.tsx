@@ -17,9 +17,13 @@ interface ShareButtonProps {
   /** 共有対象のID */
   id: string;
   /** ボタンのバリアント */
-  variant?: 'icon-only' | 'with-label';
+  variant?: 'icon-only' | 'with-label' | 'inline';
   /** アイコンサイズ */
   iconSize?: number;
+  /** アイコンの色（inline用） */
+  iconColor?: string;
+  /** ラベルのクラス名（inline用） */
+  labelClassName?: string;
 }
 
 export function ShareButton({
@@ -27,6 +31,8 @@ export function ShareButton({
   id,
   variant = 'with-label',
   iconSize = 18,
+  iconColor,
+  labelClassName,
 }: ShareButtonProps) {
   const { t } = useI18n();
 
@@ -44,10 +50,24 @@ export function ShareButton({
     }
   }, [type, id]);
 
+  const finalIconColor = iconColor ?? colors.text.secondary;
+
   if (variant === 'icon-only') {
     return (
       <Pressable onPress={handlePress} hitSlop={8}>
-        <Ionicons name="share-outline" size={iconSize} color={colors.text.secondary} />
+        <Ionicons name="share-outline" size={iconSize} color={finalIconColor} />
+      </Pressable>
+    );
+  }
+
+  // inline（カルーセル等で横並び配置）
+  if (variant === 'inline') {
+    return (
+      <Pressable onPress={handlePress} className="flex-row items-center active:opacity-70">
+        <Ionicons name="share-outline" size={iconSize} color={finalIconColor} />
+        <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"}>
+          {t('common.share')}
+        </Text>
       </Pressable>
     );
   }
@@ -56,7 +76,7 @@ export function ShareButton({
   return (
     <Pressable onPress={handlePress} className="items-center">
       <View className="flex-row items-center justify-center h-6">
-        <Ionicons name="share-outline" size={iconSize} color={colors.text.secondary} />
+        <Ionicons name="share-outline" size={iconSize} color={finalIconColor} />
       </View>
       <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
         {t('common.share')}

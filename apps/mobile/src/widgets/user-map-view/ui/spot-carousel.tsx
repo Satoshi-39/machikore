@@ -19,11 +19,17 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { showLoginRequiredAlert, shareSpot, useSpotColor } from '@/shared/lib';
+import { useSpotColor } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
+import {
+  LocationPinIcon,
+  AddressPinIcon,
+  DirectionsButton,
+  LikeButton,
+  BookmarkButton,
+  ShareButton,
+} from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
-import { useToggleSpotLike } from '@/entities/like';
 import {
   useSpotBookmarkInfo,
   useBookmarkSpot,
@@ -82,7 +88,6 @@ function SpotCard({
   // いいね
   const isLiked = spot.is_liked ?? false;
   const likeCount = spot.likes_count ?? 0;
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
 
   // ブックマーク
   const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
@@ -93,26 +98,13 @@ function SpotCard({
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
-  const handleLike = () => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
-      return;
-    }
-    if (isTogglingLike) return;
-    toggleLike({ spotId: spot.id, userId: currentUserId });
-  };
-
-  const handleBookmark = () => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('保存');
-      return;
-    }
+  const handleOpenFolderModal = () => {
     setIsFolderModalVisible(true);
   };
 
-  const handleShare = async () => {
-    await shareSpot(spot.id);
-  };
+  // 経路用の座標
+  const directionsLat = spot.master_spot?.latitude ?? spot.latitude ?? 0;
+  const directionsLng = spot.master_spot?.longitude ?? spot.longitude ?? 0;
 
   return (
     <Pressable
@@ -136,25 +128,25 @@ function SpotCard({
           elevation: 8,
         }}
       >
-        <View className="flex-1 p-4">
+        <View className="flex-1 p-3">
           {/* タイトル + カメラ移動ボタン */}
           <View className="flex-row items-center">
-            <LocationPinIcon size={20} color={spotColorValue} strokeColor={spotColorStroke} />
+            <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
             <Text
-              className="text-xl font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
-              numberOfLines={2}
+              className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
+              numberOfLines={1}
             >
               {masterSpotName}
             </Text>
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
               onPress={onCameraMove}
-              className="ml-2 p-1.5 rounded-full active:bg-gray-100 dark:active:bg-gray-700"
+              className="ml-2 p-1 rounded-full active:bg-gray-100 dark:active:bg-gray-700"
               hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
             >
               <Ionicons
                 name="eye-outline"
-                size={22}
+                size={20}
                 color={isDarkMode ? '#9CA3AF' : '#6B7280'}
               />
             </Pressable>
@@ -163,7 +155,7 @@ function SpotCard({
           {/* ユーザーの一言 */}
           {spot.description && (
             <Text
-              className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
               numberOfLines={1}
             >
               {spot.description}
@@ -173,9 +165,9 @@ function SpotCard({
           {/* 住所 */}
           {address && (
             <View className="flex-row items-center mt-1">
-              <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+              <AddressPinIcon size={13} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
               <Text
-                className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 flex-1"
+                className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1 flex-1"
                 numberOfLines={1}
               >
                 {address}
@@ -184,66 +176,69 @@ function SpotCard({
           )}
 
           {/* 記事プレビュー */}
-          {articlePreview && (
-            <Text
-              className="text-sm text-foreground dark:text-dark-foreground mt-2"
-              numberOfLines={2}
-            >
-              {articlePreview}
-            </Text>
+          {articlePreview ? (
+            <>
+              <Text
+                className="text-sm text-foreground dark:text-dark-foreground mt-1.5"
+                numberOfLines={2}
+              >
+                {articlePreview}
+              </Text>
+              <View className="flex-1" />
+            </>
+          ) : (
+            <View className="flex-1 justify-center">
+              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted italic text-center">
+                {t('spot.noArticle')}
+              </Text>
+            </View>
           )}
 
-          <View className="flex-1" />
+          {/* アクションボタン: いいね → 保存 → 経路 → 共有 */}
+          <View className="flex-row items-center justify-between pt-2 border-t border-border-light dark:border-dark-border-light">
+            {/* いいね */}
+            <LikeButton
+              spotId={spot.id}
+              currentUserId={currentUserId}
+              isLiked={isLiked}
+              likesCount={likeCount}
+              onCountPress={() => setIsLikersModalVisible(true)}
+              variant="inline"
+              iconSize={20}
+              iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary"
+            />
 
-          {/* アクションボタン */}
-          <View className="flex-row items-center justify-between pt-3 border-t border-border-light dark:border-dark-border-light">
-            <Pressable onPress={onPress} className="flex-row items-center active:opacity-70">
-              <Ionicons
-                name="chatbubble-outline"
-                size={22}
-                color={isDarkMode ? '#9CA3AF' : '#6B7280'}
-              />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                {t('common.comment')}
-              </Text>
-            </Pressable>
+            {/* 保存 */}
+            <BookmarkButton
+              isBookmarked={isBookmarked}
+              currentUserId={currentUserId}
+              onPress={handleOpenFolderModal}
+              variant="inline"
+              iconSize={20}
+              iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+            />
 
-            <View className="flex-row items-center">
-              <Pressable onPress={handleLike} className="active:opacity-70">
-                <Ionicons
-                  name={isLiked ? 'heart' : 'heart-outline'}
-                  size={22}
-                  color={isLiked ? '#EF4444' : isDarkMode ? '#9CA3AF' : '#6B7280'}
-                />
-              </Pressable>
-              <Pressable onPress={() => setIsLikersModalVisible(true)} className="active:opacity-70 ml-1">
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                  {likeCount > 0 ? likeCount : t('common.like')}
-                </Text>
-              </Pressable>
-            </View>
+            {/* 経路 */}
+            <DirectionsButton
+              latitude={directionsLat}
+              longitude={directionsLng}
+              variant="inline"
+              iconSize={20}
+              iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+            />
 
-            <Pressable onPress={handleBookmark} className="flex-row items-center active:opacity-70">
-              <Ionicons
-                name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-                size={22}
-                color={isBookmarked ? '#007AFF' : isDarkMode ? '#9CA3AF' : '#6B7280'}
-              />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                {t('common.save')}
-              </Text>
-            </Pressable>
-
-            <Pressable onPress={handleShare} className="flex-row items-center active:opacity-70">
-              <Ionicons
-                name="share-outline"
-                size={22}
-                color={isDarkMode ? '#9CA3AF' : '#6B7280'}
-              />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                {t('common.share')}
-              </Text>
-            </Pressable>
+            {/* 共有 */}
+            <ShareButton
+              type="spot"
+              id={spot.id}
+              variant="inline"
+              iconSize={20}
+              iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+            />
           </View>
         </View>
       </View>

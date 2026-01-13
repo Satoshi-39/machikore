@@ -25,24 +25,28 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   const { data: spot, isLoading } = useSpotWithDetails(spotId, currentUserId);
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
 
-  const handleSave = useCallback((content: ProseMirrorDoc | null) => {
-    if (!spot) return;
+  const handleSave = useCallback(async (content: ProseMirrorDoc | null): Promise<boolean> => {
+    if (!spot) return false;
 
-    updateSpot(
-      {
-        spotId: spot.id,
-        articleContent: content,
-        mapId: spot.map_id,
-      },
-      {
-        onSuccess: () => {
-          Alert.alert(t('editArticle.saved'));
+    return new Promise((resolve) => {
+      updateSpot(
+        {
+          spotId: spot.id,
+          articleContent: content,
+          mapId: spot.map_id,
         },
-        onError: () => {
-          Alert.alert(t('common.error'), t('editArticle.saveError'));
-        },
-      }
-    );
+        {
+          onSuccess: () => {
+            Alert.alert(t('editArticle.saved'));
+            resolve(true);
+          },
+          onError: () => {
+            Alert.alert(t('common.error'), t('editArticle.saveError'));
+            resolve(false);
+          },
+        }
+      );
+    });
   }, [spot, updateSpot, t]);
 
   // スポットが見つからない or 権限なし

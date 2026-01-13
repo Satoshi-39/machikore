@@ -15,11 +15,15 @@ interface DirectionsButtonProps {
   latitude: number;
   longitude: number;
   /** ボタンのバリアント */
-  variant?: 'icon-only' | 'with-label' | 'circle';
+  variant?: 'icon-only' | 'with-label' | 'circle' | 'inline';
   /** アイコンサイズ */
   iconSize?: number;
-  /** ラベルを表示するか（variant='with-label'時のみ有効） */
+  /** ラベルを表示するか */
   label?: string;
+  /** アイコンの色（inline用） */
+  iconColor?: string;
+  /** ラベルのクラス名（inline用） */
+  labelClassName?: string;
 }
 
 export function DirectionsButton({
@@ -28,6 +32,8 @@ export function DirectionsButton({
   variant = 'with-label',
   iconSize = 18,
   label,
+  iconColor,
+  labelClassName,
 }: DirectionsButtonProps) {
   const { t } = useI18n();
 
@@ -73,6 +79,22 @@ export function DirectionsButton({
           <Ionicons name="navigate" size={24} color={colors.text.secondary} />
         </View>
         <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+          {displayLabel}
+        </Text>
+      </Pressable>
+    );
+  }
+
+  // inline（カルーセル等で使用）
+  if (variant === 'inline') {
+    return (
+      <Pressable onPress={handlePress} className="flex-row items-center active:opacity-70">
+        <Ionicons
+          name="navigate-outline"
+          size={iconSize}
+          color={iconColor ?? colors.text.secondary}
+        />
+        <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"}>
           {displayLabel}
         </Text>
       </Pressable>

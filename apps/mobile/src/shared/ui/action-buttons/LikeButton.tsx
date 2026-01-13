@@ -20,9 +20,13 @@ interface LikeButtonProps {
   /** いいね数タップ時のコールバック（ユーザー一覧表示など） */
   onCountPress?: () => void;
   /** ボタンのバリアント */
-  variant?: 'icon-only' | 'with-label' | 'with-count';
+  variant?: 'icon-only' | 'with-label' | 'with-count' | 'inline';
   /** アイコンサイズ */
   iconSize?: number;
+  /** アイコンの色（inline用、未指定時はデフォルト色） */
+  iconColor?: string;
+  /** ラベルのクラス名（inline用） */
+  labelClassName?: string;
 }
 
 export function LikeButton({
@@ -33,6 +37,8 @@ export function LikeButton({
   onCountPress,
   variant = 'with-count',
   iconSize = 18,
+  iconColor,
+  labelClassName,
 }: LikeButtonProps) {
   const { t } = useI18n();
   const { mutate: toggleLike, isPending } = useToggleSpotLike();
@@ -46,7 +52,8 @@ export function LikeButton({
     toggleLike({ userId: currentUserId, spotId });
   }, [currentUserId, spotId, toggleLike, isPending]);
 
-  const iconColor = isLiked ? colors.danger : colors.text.secondary;
+  const defaultIconColor = isLiked ? colors.danger : colors.text.secondary;
+  const finalIconColor = iconColor ?? defaultIconColor;
 
   if (variant === 'icon-only') {
     return (
@@ -54,7 +61,7 @@ export function LikeButton({
         <Ionicons
           name={isLiked ? 'heart' : 'heart-outline'}
           size={iconSize}
-          color={iconColor}
+          color={finalIconColor}
         />
       </Pressable>
     );
@@ -67,13 +74,33 @@ export function LikeButton({
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}
             size={iconSize}
-            color={iconColor}
+            color={finalIconColor}
           />
         </View>
         <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
           {t('common.like')}
         </Text>
       </Pressable>
+    );
+  }
+
+  // inline（カルーセル等で横並び配置）
+  if (variant === 'inline') {
+    return (
+      <View className="flex-row items-center">
+        <Pressable onPress={handleLikePress} disabled={isPending} className="active:opacity-70">
+          <Ionicons
+            name={isLiked ? 'heart' : 'heart-outline'}
+            size={iconSize}
+            color={isLiked ? colors.danger : (iconColor ?? colors.text.secondary)}
+          />
+        </Pressable>
+        <Pressable onPress={onCountPress} className="active:opacity-70 ml-1">
+          <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary"}>
+            {likesCount > 0 ? likesCount : t('common.like')}
+          </Text>
+        </Pressable>
+      </View>
     );
   }
 
@@ -89,7 +116,7 @@ export function LikeButton({
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}
             size={iconSize}
-            color={iconColor}
+            color={finalIconColor}
           />
         </Pressable>
         <Pressable

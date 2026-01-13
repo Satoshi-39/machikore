@@ -142,7 +142,8 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
         },
         {
           onSuccess: () => {
-            setInitialContent(content || EMPTY_DOC);
+            // 保存成功後、正規化されたJSONを初期値として更新（変更検知用）
+            setInitialContent(json as ProseMirrorDoc);
             Alert.alert(t('editArticle.saved'));
           },
           onError: () => {

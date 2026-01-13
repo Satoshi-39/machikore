@@ -19,9 +19,13 @@ interface BookmarkButtonProps {
   /** 処理中かどうか */
   isPending?: boolean;
   /** ボタンのバリアント */
-  variant?: 'icon-only' | 'with-label';
+  variant?: 'icon-only' | 'with-label' | 'inline';
   /** アイコンサイズ */
   iconSize?: number;
+  /** アイコンの色（inline用、未指定時はデフォルト色） */
+  iconColor?: string;
+  /** ラベルのクラス名（inline用） */
+  labelClassName?: string;
 }
 
 export function BookmarkButton({
@@ -31,6 +35,8 @@ export function BookmarkButton({
   isPending = false,
   variant = 'with-label',
   iconSize = 18,
+  iconColor,
+  labelClassName,
 }: BookmarkButtonProps) {
   const { t } = useI18n();
 
@@ -42,7 +48,8 @@ export function BookmarkButton({
     onPress();
   }, [currentUserId, onPress]);
 
-  const iconColor = isBookmarked ? colors.primary.DEFAULT : colors.text.secondary;
+  const defaultIconColor = isBookmarked ? colors.primary.DEFAULT : colors.text.secondary;
+  const finalIconColor = iconColor ?? defaultIconColor;
 
   if (variant === 'icon-only') {
     return (
@@ -50,8 +57,24 @@ export function BookmarkButton({
         <Ionicons
           name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
           size={iconSize}
-          color={iconColor}
+          color={isBookmarked ? colors.primary.DEFAULT : finalIconColor}
         />
+      </Pressable>
+    );
+  }
+
+  // inline（カルーセル等で横並び配置）
+  if (variant === 'inline') {
+    return (
+      <Pressable onPress={handlePress} disabled={isPending} className="flex-row items-center active:opacity-70">
+        <Ionicons
+          name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+          size={iconSize}
+          color={isBookmarked ? colors.primary.DEFAULT : (iconColor ?? colors.text.secondary)}
+        />
+        <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"}>
+          {t('common.save')}
+        </Text>
       </Pressable>
     );
   }
@@ -67,7 +90,7 @@ export function BookmarkButton({
         <Ionicons
           name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
           size={iconSize}
-          color={iconColor}
+          color={isBookmarked ? colors.primary.DEFAULT : finalIconColor}
         />
       </View>
       <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">

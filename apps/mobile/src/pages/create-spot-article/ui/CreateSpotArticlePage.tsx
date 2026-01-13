@@ -16,9 +16,10 @@ export function CreateSpotArticlePage() {
   const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
   const setDraftArticleContent = useSelectedPlaceStore((state) => state.setDraftArticleContent);
 
-  const handleSave = useCallback((content: ProseMirrorDoc | null) => {
+  const handleSave = useCallback(async (content: ProseMirrorDoc | null): Promise<boolean> => {
     setDraftArticleContent(content);
     router.back();
+    return true;
   }, [setDraftArticleContent, router]);
 
   return (

@@ -529,10 +529,11 @@ export function UserMapLabels({
             textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            iconTextFit: 'none',
-            textAnchor: 'left',
-            iconAnchor: 'right',
-            textOffset: [0.3, 0],
+            // 画面端でラベルが見切れる場合に自動的に配置を調整
+            // 優先順位: 右側 → 左側 → 上 → 下
+            textVariableAnchor: ['left', 'right', 'top', 'bottom'],
+            textRadialOffset: 0.5,
+            textJustify: 'auto',
             textAllowOverlap: false,
             iconAllowOverlap: false,
           }}

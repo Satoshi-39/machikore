@@ -27,6 +27,7 @@ interface SearchResultsProps {
   onSpotCommentPress: (spotId: string) => void;
   onMapCommentPress: (mapId: string) => void;
   onTagPress: (tagName: string) => void;
+  onArticlePress?: (spotId: string) => void;
 }
 
 export function SearchResults({
@@ -37,6 +38,7 @@ export function SearchResults({
   onSpotCommentPress,
   onMapCommentPress,
   onTagPress,
+  onArticlePress,
 }: SearchResultsProps) {
   const { t } = useI18n();
   const [resultTab, setResultTab] = useState<SearchResultTab>('latest');
@@ -137,6 +139,7 @@ export function SearchResults({
                 onMapPress={onMapPress}
                 onCommentPress={onSpotCommentPress}
                 onTagPress={onTagPress}
+                onArticlePress={onArticlePress}
               />
             );
           }
@@ -154,7 +157,7 @@ export function SearchResults({
         showsVerticalScrollIndicator={false}
       />
     );
-  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t]);
+  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, onArticlePress, t]);
 
   // 話題タブ: いいね数でソート
   const renderTrendingResults = useCallback(() => {
@@ -189,6 +192,7 @@ export function SearchResults({
                 onMapPress={onMapPress}
                 onCommentPress={onSpotCommentPress}
                 onTagPress={onTagPress}
+                onArticlePress={onArticlePress}
               />
             );
           }
@@ -206,7 +210,7 @@ export function SearchResults({
         showsVerticalScrollIndicator={false}
       />
     );
-  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, t]);
+  }, [spots, maps, currentUser?.id, onSpotPress, onMapPress, onUserPress, onSpotCommentPress, onMapCommentPress, onTagPress, onArticlePress, t]);
 
   const renderSearchResults = () => {
     if (isLoading) {
@@ -249,6 +253,7 @@ export function SearchResults({
               onMapPress={onMapPress}
               onCommentPress={onSpotCommentPress}
               onTagPress={onTagPress}
+              onArticlePress={onArticlePress}
             />
           )}
           showsVerticalScrollIndicator={false}
