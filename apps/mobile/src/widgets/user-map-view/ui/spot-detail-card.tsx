@@ -203,8 +203,8 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     );
   }, [spot.id, deleteSpot, onClose, t]);
 
-  // 三点リーダーメニュー項目
-  const menuItems: PopupMenuItem[] = useMemo(() => [
+  // 三点リーダーメニュー項目（オーナー用）
+  const ownerMenuItems: PopupMenuItem[] = useMemo(() => [
     {
       id: 'edit',
       label: t('common.edit'),
@@ -219,6 +219,16 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       onPress: handleDeleteSpot,
     },
   ], [spot.id, onEdit, handleDeleteSpot, t]);
+
+  // 三点リーダーメニュー項目（オーナー以外用）
+  const guestMenuItems: PopupMenuItem[] = useMemo(() => [
+    {
+      id: 'report',
+      label: t('common.report'),
+      icon: 'flag-outline',
+      onPress: () => router.push(`/report?targetType=spot&targetId=${spot.id}`),
+    },
+  ], [spot.id, router, t]);
 
   return (
     <>
@@ -267,12 +277,16 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             >
               <Ionicons name="eye-outline" size={22} color={colors.text.secondary} />
             </Pressable>
-            {/* 三点リーダーメニュー（自分のスポットのみ） */}
-            {isOwner && !isDeleting && (
+            {/* 三点リーダーメニュー */}
+            {isOwner && !isDeleting ? (
               <View className="mr-2">
-                <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+                <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
               </View>
-            )}
+            ) : currentUserId && !isOwner ? (
+              <View className="mr-2">
+                <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
+              </View>
+            ) : null}
             <Pressable
               onPress={handleClose}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}

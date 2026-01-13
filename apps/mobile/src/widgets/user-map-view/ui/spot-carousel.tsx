@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useSpotColor } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
@@ -28,6 +29,8 @@ import {
   LikeButton,
   BookmarkButton,
   ShareButton,
+  PopupMenu,
+  type PopupMenuItem,
 } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import {
@@ -59,6 +62,8 @@ interface SpotCardProps {
   currentUserId?: UUID | null;
   onPress: () => void;
   onCameraMove?: () => void;
+  onEdit?: (spotId: string) => void;
+  onDelete?: (spotId: string) => void;
 }
 
 function SpotCard({
@@ -69,9 +74,13 @@ function SpotCard({
   currentUserId,
   onPress,
   onCameraMove,
+  onEdit,
+  onDelete,
 }: SpotCardProps) {
   const { t, locale } = useI18n();
+  const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const isOwner = currentUserId && spot.user_id === currentUserId;
   // スポット名（JSONB型を現在のlocaleで抽出）
   // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
   const masterSpotName = spot.master_spot?.name
@@ -101,6 +110,33 @@ function SpotCard({
   const handleOpenFolderModal = () => {
     setIsFolderModalVisible(true);
   };
+
+  // 三点リーダーメニュー項目（オーナー用）
+  const ownerMenuItems: PopupMenuItem[] = [
+    {
+      id: 'edit',
+      label: t('common.edit'),
+      icon: 'create-outline',
+      onPress: () => onEdit?.(spot.id),
+    },
+    {
+      id: 'delete',
+      label: t('common.delete'),
+      icon: 'trash-outline',
+      destructive: true,
+      onPress: () => onDelete?.(spot.id),
+    },
+  ];
+
+  // 三点リーダーメニュー項目（オーナー以外用）
+  const guestMenuItems: PopupMenuItem[] = [
+    {
+      id: 'report',
+      label: t('common.report'),
+      icon: 'flag-outline',
+      onPress: () => router.push(`/report?targetType=spot&targetId=${spot.id}`),
+    },
+  ];
 
   // 経路用の座標
   const directionsLat = spot.master_spot?.latitude ?? spot.latitude ?? 0;
@@ -150,6 +186,12 @@ function SpotCard({
                 color={isDarkMode ? '#9CA3AF' : '#6B7280'}
               />
             </Pressable>
+            {/* 三点リーダーメニュー */}
+            {isOwner ? (
+              <PopupMenu items={ownerMenuItems} triggerColor={isDarkMode ? '#9CA3AF' : '#6B7280'} />
+            ) : currentUserId ? (
+              <PopupMenu items={guestMenuItems} triggerColor={isDarkMode ? '#9CA3AF' : '#6B7280'} />
+            ) : null}
           </View>
 
           {/* ユーザーの一言 */}
@@ -283,6 +325,10 @@ interface SpotCarouselProps {
   onSpotPress: (spot: SpotWithDetails) => void;
   /** カメラ移動（目のアイコンタップ時） */
   onCameraMove?: (spot: SpotWithDetails) => void;
+  /** 編集（三点メニューから） */
+  onEdit?: (spotId: string) => void;
+  /** 削除（三点メニューから） */
+  onDelete?: (spotId: string) => void;
   onClose: () => void;
 }
 
@@ -294,6 +340,8 @@ export function SpotCarousel({
   onSpotSelect,
   onSpotPress,
   onCameraMove,
+  onEdit,
+  onDelete,
   onClose,
 }: SpotCarouselProps) {
   const isDarkMode = useIsDarkMode();
@@ -352,9 +400,11 @@ export function SpotCarousel({
         currentUserId={currentUserId}
         onPress={() => handleCardPress(item)}
         onCameraMove={() => onCameraMove?.(item)}
+        onEdit={onEdit}
+        onDelete={onDelete}
       />
     ),
-    [selectedSpotId, currentUserId, handleCardPress, onCameraMove, spots.length]
+    [selectedSpotId, currentUserId, handleCardPress, onCameraMove, onEdit, onDelete, spots.length]
   );
 
   // キー抽出
