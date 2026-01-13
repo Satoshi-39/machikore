@@ -442,8 +442,8 @@ export function SpotCard({
           className="flex-row items-center mb-2 self-start"
           hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
         >
-          <Ionicons name="map-outline" size={14} color={colors.primary.DEFAULT} />
-          <Text className="text-xs ml-1" style={{ color: colors.primary.DEFAULT }}>
+          <Ionicons name="map-outline" size={14} color={colors.text.secondary} />
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {mapName}
           </Text>
         </Pressable>
