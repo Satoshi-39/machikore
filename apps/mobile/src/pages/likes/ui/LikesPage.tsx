@@ -8,14 +8,13 @@ import { useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentUserId } from '@/entities/user';
 import { LikeTabFilter, type LikeTabMode } from '@/features/filter-like-tab';
-import { LikeSpotList, LikeMapList } from '@/widgets/like-item-list';
+import { LikeSpotList, LikeMapList } from '@/widgets/mypage-tab-content';
 import { useUserLikedSpots, useUserLikedMaps } from '@/entities/like/api/use-user-likes';
 import { removeSpotLike, removeMapLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { PageHeader } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import type { SpotWithDetails } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
 interface LikesPageProps {
@@ -29,14 +28,14 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   const queryClient = useQueryClient();
   const currentUserId = useCurrentUserId();
   const userId = propUserId || currentUserId;
-  const [activeTab, setActiveTab] = useState<LikeTabMode>('spots');
+  const [activeTab, setActiveTab] = useState<LikeTabMode>('maps');
 
   const { data: likedSpots = [], isLoading: spotsLoading } = useUserLikedSpots(userId);
   const { data: likedMaps = [], isLoading: mapsLoading } = useUserLikedMaps(userId);
 
   // スポットタップ: スポット詳細画面に遷移（戻るでいいね一覧に戻れる）
-  const handleSpotPress = useCallback((spot: SpotWithDetails) => {
-    router.push(`/(tabs)/${currentTab}/spots/${spot.id}` as any);
+  const handleSpotPress = useCallback((spotId: string) => {
+    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as any);
   }, [router, currentTab]);
 
   // ユーザータップ: プロフィール画面に遷移
@@ -47,6 +46,11 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   // マップタップ: マップ詳細画面に遷移（戻るでいいね一覧に戻れる）
   const handleMapPress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+  }, [router, currentTab]);
+
+  // 記事タップ: 記事画面に遷移
+  const handleArticlePress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
   }, [router, currentTab]);
 
   // スポットいいね削除
@@ -82,6 +86,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
         <LikeSpotList
           data={likedSpots}
           isLoading={spotsLoading}
+          currentUserId={userId}
           onSpotPress={handleSpotPress}
           onUserPress={handleUserPress}
           onDeleteSpotLike={handleDeleteSpotLike}
@@ -90,8 +95,10 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
         <LikeMapList
           data={likedMaps}
           isLoading={mapsLoading}
+          currentUserId={userId}
           onMapPress={handleMapPress}
           onUserPress={handleUserPress}
+          onArticlePress={handleArticlePress}
           onDeleteMapLike={handleDeleteMapLike}
         />
       )}

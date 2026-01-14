@@ -88,32 +88,23 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
         !notification.is_read ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-surface dark:bg-dark-surface'
       }`}
     >
-      {/* アイコンまたはアバター（タップでユーザープロフィールへ） */}
+      {/* アバター + 通知タイプバッジ（タップでユーザープロフィールへ） */}
       <Pressable onPress={onAvatarPress} className="mr-3">
-        {notification.actor?.avatar_url ? (
-          <View className="relative">
-            <UserAvatar
-              url={notification.actor.avatar_url}
-              alt={notification.actor.display_name || notification.actor.username || 'User'}
-              className="w-12 h-12"
-              iconSize={24}
-            />
-            {/* 通知タイプのバッジ */}
-            <View
-              className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full items-center justify-center"
-              style={{ backgroundColor: config.color }}
-            >
-              <Ionicons name={config.icon} size={12} color="white" />
-            </View>
-          </View>
-        ) : (
+        <View className="relative">
+          <UserAvatar
+            url={notification.actor?.avatar_url}
+            alt={notification.actor?.display_name || notification.actor?.username || 'User'}
+            className="w-12 h-12"
+            iconSize={24}
+          />
+          {/* 通知タイプのバッジ */}
           <View
-            className="w-12 h-12 rounded-full items-center justify-center"
+            className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full items-center justify-center"
             style={{ backgroundColor: config.color }}
           >
-            <Ionicons name={config.icon} size={24} color="white" />
+            <Ionicons name={config.icon} size={12} color="white" />
           </View>
-        )}
+        </View>
       </Pressable>
 
       {/* 通知内容（タップでスポット/マップ詳細へ） */}

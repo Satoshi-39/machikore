@@ -5,8 +5,9 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, Pressable, FlatList } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
+import type { Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
@@ -17,8 +18,10 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import type { BookmarkWithDetails } from '@/shared/api/supabase/bookmarks';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
-import { SwipeableRow, UserAvatar } from '@/shared/ui';
-import { extractAddress } from '@/shared/lib/utils/multilang.utils';
+import type { MapWithUser } from '@/shared/types';
+import { SwipeableRow } from '@/shared/ui';
+import { MapListCard } from '@/widgets/map-cards';
+import { SpotListCard, type SpotListCardSpot } from '@/widgets/spot-cards';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface BookmarkItemListProps {
@@ -35,7 +38,7 @@ export function BookmarkItemList({
   const router = useRouter();
   const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
-  const { locale } = useI18n();
+  const { t } = useI18n();
 
   const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
 
@@ -62,7 +65,12 @@ export function BookmarkItemList({
 
   // ユーザープロフィールへの遷移
   const navigateToUser = useCallback((navUserId: string) => {
-    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as any);
+    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
+  }, [router, currentTab]);
+
+  // 記事への遷移
+  const navigateToArticle = useCallback((mapId: string) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
   }, [router, currentTab]);
 
   // ブックマーク削除
@@ -78,110 +86,52 @@ export function BookmarkItemList({
   const renderBookmarkItem = useCallback(
     ({ item }: { item: BookmarkWithDetails }) => {
       if (item.spot) {
-        const user = item.spot.user;
-        const content = (
-          <Pressable
-            onPress={() => navigateToSpot(item.spot!.id)}
-            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
-          >
-            <View className="flex-row items-center">
-              {/* ユーザーアバター（タップでプロフィールへ） */}
-              <Pressable
-                onPress={(e) => {
-                  e.stopPropagation();
-                  if (user?.id) {
-                    navigateToUser(user.id);
-                  }
-                }}
-                disabled={!user?.id}
-              >
-                <UserAvatar
-                  url={user?.avatar_url}
-                  alt={user?.display_name || user?.username || 'User'}
-                  className="w-10 h-10 mr-3"
-                  iconSize={20}
-                />
-              </Pressable>
-              <View className="flex-1">
-                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-                  {item.spot.description || item.spot.master_spot?.name || '不明なスポット'}
-                </Text>
-                {(item.spot.master_spot?.google_short_address || item.spot.google_short_address) && (
-                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={1}>
-                    {extractAddress(item.spot.master_spot?.google_short_address, locale) || extractAddress(item.spot.google_short_address, locale)}
-                  </Text>
-                )}
-                {user && (
-                  <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
-                    {user.display_name || user.username || 'ユーザー'}の投稿
-                  </Text>
-                )}
-              </View>
-              <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
-            </View>
-          </Pressable>
-        );
+        // SpotListCardSpot形式に変換
+        const spotData: SpotListCardSpot = {
+          id: item.spot.id,
+          user_id: item.spot.user_id,
+          map_id: item.spot.map_id,
+          description: item.spot.description,
+          likes_count: item.spot.likes_count,
+          bookmarks_count: item.spot.bookmarks_count,
+          comments_count: item.spot.comments_count,
+          created_at: item.spot.created_at,
+          google_short_address: item.spot.google_short_address,
+          master_spot: item.spot.master_spot,
+          user: item.spot.user,
+          thumbnail_image: item.spot.thumbnail_image,
+        };
 
         return (
           <SwipeableRow onDelete={() => handleDeleteBookmark(item.id)}>
-            {content}
+            <SpotListCard
+              spot={spotData}
+              currentUserId={userId}
+              onPress={() => navigateToSpot(item.spot!.id)}
+              onUserPress={navigateToUser}
+            />
           </SwipeableRow>
         );
       }
 
       if (item.map) {
-        const user = item.map.user;
-        const content = (
-          <Pressable
-            onPress={() => navigateToMap(item.map!.id)}
-            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light"
-          >
-            <View className="flex-row items-center">
-              {/* ユーザーアバター（タップでプロフィールへ） */}
-              <Pressable
-                onPress={(e) => {
-                  e.stopPropagation();
-                  if (user?.id) {
-                    navigateToUser(user.id);
-                  }
-                }}
-                disabled={!user?.id}
-              >
-                <UserAvatar
-                  url={user?.avatar_url}
-                  alt={user?.display_name || user?.username || 'User'}
-                  className="w-10 h-10 mr-3"
-                  iconSize={20}
-                />
-              </Pressable>
-              <View className="flex-1">
-                <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-                  {item.map.name}
-                </Text>
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                  {item.map.spots_count}スポット
-                </Text>
-                {user && (
-                  <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
-                    {user.display_name || user.username || 'ユーザー'}のマップ
-                  </Text>
-                )}
-              </View>
-              <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
-            </View>
-          </Pressable>
-        );
-
         return (
           <SwipeableRow onDelete={() => handleDeleteBookmark(item.id)}>
-            {content}
+            <MapListCard
+              map={item.map as MapWithUser}
+              currentUserId={userId}
+              isOwner={item.map.user?.id === userId}
+              onPress={() => navigateToMap(item.map!.id)}
+              onUserPress={navigateToUser}
+              onArticlePress={navigateToArticle}
+            />
           </SwipeableRow>
         );
       }
 
       return null;
     },
-    [navigateToSpot, navigateToMap, navigateToUser, handleDeleteBookmark]
+    [navigateToSpot, navigateToMap, navigateToUser, navigateToArticle, handleDeleteBookmark, userId]
   );
 
   if (bookmarks.length === 0) {
@@ -189,7 +139,7 @@ export function BookmarkItemList({
       <View className="flex-1 items-center justify-center py-12">
         <Ionicons name="bookmark-outline" size={48} color={colors.text.secondary} />
         <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
-          {activeTab === 'spots' ? 'スポット' : 'マップ'}のブックマークがありません
+          {activeTab === 'spots' ? t('bookmark.noSpotBookmarks') : t('bookmark.noMapBookmarks')}
         </Text>
       </View>
     );

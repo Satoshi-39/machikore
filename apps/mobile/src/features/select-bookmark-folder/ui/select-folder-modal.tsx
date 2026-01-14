@@ -163,16 +163,16 @@ export function SelectFolderModal({
                   {isInFolder ? (
                     <Pressable
                       onPress={() => handleRemoveFromFolder(item.id)}
-                      className="bg-blue-500 px-4 py-1.5 rounded-full active:bg-blue-600"
+                      className="bg-foreground-secondary dark:bg-dark-foreground-secondary px-4 py-1.5 rounded-full active:opacity-80"
                     >
                       <Text className="text-sm text-white font-medium">{t('bookmark.added')}</Text>
                     </Pressable>
                   ) : (
                     <Pressable
                       onPress={() => handleAddToFolder(item.id)}
-                      className="bg-surface dark:bg-dark-surface-elevated border border-foreground dark:border-dark-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
+                      className="bg-surface dark:bg-dark-surface-elevated border border-foreground-secondary dark:border-dark-foreground-secondary px-4 py-1.5 rounded-full active:opacity-80"
                     >
-                      <Text className="text-sm text-foreground dark:text-dark-foreground font-medium">{t('bookmark.add')}</Text>
+                      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary font-medium">{t('bookmark.add')}</Text>
                     </Pressable>
                   )}
                 </View>

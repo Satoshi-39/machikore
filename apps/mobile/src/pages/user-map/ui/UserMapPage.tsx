@@ -254,6 +254,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               mapId={mapId}
               mapTitle={selectedMap?.name}
               mapDescription={selectedMap?.description}
+              mapThumbnailUrl={selectedMap?.thumbnail_url}
               mapTags={selectedMap?.tags}
               spots={spots}
               userId={user?.id}

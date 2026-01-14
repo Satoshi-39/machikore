@@ -347,14 +347,13 @@ export function SearchResults({
 
   return (
     <View className="flex-1">
-      {/* タブ */}
-      <View className="bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light">
+      {/* タブ（X風の下線スタイル） */}
+      <View className="bg-surface dark:bg-dark-surface">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
-            paddingHorizontal: 16,
-            paddingVertical: 8,
+            paddingHorizontal: 8,
             flexDirection: 'row',
             alignItems: 'center',
           }}
@@ -365,20 +364,18 @@ export function SearchResults({
               <TouchableOpacity
                 key={tab.key}
                 onPress={() => setResultTab(tab.key)}
-                className="mr-2"
+                className="px-4 py-3"
                 style={{
-                  paddingHorizontal: 16,
-                  paddingVertical: 8,
-                  borderRadius: 9999,
-                  backgroundColor: isActive ? '#3B82F6' : '#F3F4F6',
+                  borderBottomWidth: isActive ? 2 : 0,
+                  borderBottomColor: isActive ? colors.primary.DEFAULT : 'transparent',
                 }}
               >
                 <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: '500',
-                    color: isActive ? '#FFFFFF' : '#4B5563',
-                  }}
+                  className={`text-sm font-medium ${
+                    isActive
+                      ? 'text-foreground dark:text-dark-foreground'
+                      : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                  }`}
                 >
                   {tab.label}
                 </Text>
@@ -386,6 +383,7 @@ export function SearchResults({
             );
           })}
         </ScrollView>
+        <View className="h-px bg-border-light dark:bg-dark-border-light" />
       </View>
 
       {/* 検索結果 */}

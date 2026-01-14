@@ -65,7 +65,10 @@ export default function TabLayout() {
           title: '',
           tabBarIcon: () => (
             <View style={{ marginTop: 2 }}>
-              <View className="w-9 h-9 rounded-full bg-blue-500 items-center justify-center">
+              <View
+                  className="w-9 h-9 rounded-full items-center justify-center"
+                  style={{ backgroundColor: colors.primary.DEFAULT }}
+                >
                 <Ionicons name="add" size={22} color="#FFFFFF" />
               </View>
             </View>

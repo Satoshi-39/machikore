@@ -6,6 +6,7 @@ export default {
   // Common
   common: {
     save: 'Save',
+    saved: 'Saved',
     cancel: 'Cancel',
     delete: 'Delete',
     edit: 'Edit',
@@ -290,6 +291,8 @@ export default {
     bookmarks: 'Bookmarks',
     loginRequired: 'Please log in',
     noBookmarks: 'No bookmarks',
+    noSpotBookmarks: 'No spot bookmarks',
+    noMapBookmarks: 'No map bookmarks',
     spots: 'Spots',
     maps: 'Maps',
     createFolder: 'Create new folder',

@@ -18,6 +18,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
+import { getThumbnailHeight } from '@/shared/config';
+import { MapThumbnail } from '@/shared/ui';
 import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
 
 interface MapInfoModalProps {
@@ -25,6 +27,7 @@ interface MapInfoModalProps {
   onClose: () => void;
   mapTitle?: string;
   mapDescription?: string | null;
+  mapThumbnailUrl?: string | null;
   mapTags?: TagBasicInfo[];
   spots?: SpotWithDetails[];
   onSpotPress?: (spotId: string) => void;
@@ -35,6 +38,7 @@ export function MapInfoModal({
   onClose,
   mapTitle,
   mapDescription,
+  mapThumbnailUrl,
   mapTags = [],
   spots = [],
   onSpotPress,
@@ -83,7 +87,7 @@ export function MapInfoModal({
     >
       <View className="flex-1 bg-black/50">
         <Animated.View
-          className="bg-surface dark:bg-dark-surface-secondary rounded-b-3xl shadow-2xl"
+          className="bg-surface-secondary dark:bg-dark-surface-secondary rounded-b-3xl shadow-2xl"
           style={{
             maxHeight: '70%',
             paddingTop: insets.top,
@@ -102,33 +106,45 @@ export function MapInfoModal({
 
           {/* コンテンツ */}
           <ScrollView className="px-6 py-4">
-            {/* マップ名 */}
-            <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
-              {mapTitle}
-            </Text>
+            {/* マップ情報 + サムネイル */}
+            <View className="flex-row">
+              {/* 左側: マップ名・概要・タグ */}
+              <View className="flex-1 mr-3">
+                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+                  {mapTitle}
+                </Text>
 
-            {/* マップの概要 */}
-            {mapDescription && (
-              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-3 leading-6">
-                {mapDescription}
-              </Text>
-            )}
+                {/* マップの概要 */}
+                {mapDescription && (
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-2 leading-5">
+                    {mapDescription}
+                  </Text>
+                )}
 
-            {/* タグ */}
-            {mapTags.length > 0 && (
-              <View className="flex-row flex-wrap gap-2 mt-4">
-                {mapTags.map((tag) => (
-                  <View
-                    key={tag.id}
-                    className="px-3 py-1 rounded-full bg-primary/10 dark:bg-primary/20"
-                  >
-                    <Text className="text-sm text-primary dark:text-primary-light">
-                      #{tag.name}
-                    </Text>
+                {/* タグ */}
+                {mapTags.length > 0 && (
+                  <View className="flex-row flex-wrap gap-x-3 gap-y-1 mt-2">
+                    {mapTags.map((tag) => (
+                      <Text
+                        key={tag.id}
+                        className="text-sm text-primary dark:text-primary-light"
+                      >
+                        #{tag.name}
+                      </Text>
+                    ))}
                   </View>
-                ))}
+                )}
               </View>
-            )}
+
+              {/* 右側: サムネイル */}
+              <MapThumbnail
+                url={mapThumbnailUrl}
+                width={112}
+                height={getThumbnailHeight(112)}
+                borderRadius={6}
+                defaultImagePadding={0.1}
+              />
+            </View>
 
             {/* スポット一覧 */}
             {spots.length > 0 && (
@@ -144,7 +160,7 @@ export function MapInfoModal({
                         onSpotPress?.(spot.id);
                         onClose();
                       }}
-                      className="flex-row items-center py-2 px-3 rounded-lg bg-background dark:bg-dark-surface-secondary active:opacity-70"
+                      className="flex-row items-center py-2 px-3 rounded-lg active:opacity-70"
                     >
                       <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mr-2">
                         {index + 1}.

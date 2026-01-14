@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';
+import { getThumbnailHeight } from '@/shared/config';
 import { MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
@@ -40,7 +41,7 @@ export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
             <MapThumbnail
               url={map.thumbnail_url}
               width={160}
-              height={96}
+              height={getThumbnailHeight(160)}
               className="mb-2"
             />
             <Text className="text-sm font-medium text-foreground dark:text-dark-foreground" numberOfLines={2}>

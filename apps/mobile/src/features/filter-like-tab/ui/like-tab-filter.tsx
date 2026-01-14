@@ -24,21 +24,6 @@ export function LikeTabFilter({
   return (
     <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border flex-row">
       <Pressable
-        onPress={() => onTabModeChange('spots')}
-        className="flex-1 py-3 items-center"
-      >
-        <Text
-          className={`text-base font-medium ${
-            tabMode === 'spots' ? 'text-blue-500' : 'text-foreground dark:text-dark-foreground'
-          }`}
-        >
-          {t('favorite.spot')}
-        </Text>
-        {tabMode === 'spots' && (
-          <View className="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-500 rounded-full" />
-        )}
-      </Pressable>
-      <Pressable
         onPress={() => onTabModeChange('maps')}
         className="flex-1 py-3 items-center"
       >
@@ -50,6 +35,21 @@ export function LikeTabFilter({
           {t('favorite.map')}
         </Text>
         {tabMode === 'maps' && (
+          <View className="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-500 rounded-full" />
+        )}
+      </Pressable>
+      <Pressable
+        onPress={() => onTabModeChange('spots')}
+        className="flex-1 py-3 items-center"
+      >
+        <Text
+          className={`text-base font-medium ${
+            tabMode === 'spots' ? 'text-blue-500' : 'text-foreground dark:text-dark-foreground'
+          }`}
+        >
+          {t('favorite.spot')}
+        </Text>
+        {tabMode === 'spots' && (
           <View className="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-500 rounded-full" />
         )}
       </Pressable>

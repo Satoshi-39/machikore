@@ -6,6 +6,7 @@ export default {
   // 通用
   common: {
     save: '保存',
+    saved: '已保存',
     cancel: '取消',
     delete: '删除',
     edit: '编辑',
@@ -290,6 +291,8 @@ export default {
     bookmarks: '书签',
     loginRequired: '请登录',
     noBookmarks: '没有书签',
+    noSpotBookmarks: '没有地点书签',
+    noMapBookmarks: '没有地图书签',
     spots: '地点',
     maps: '地图',
     createFolder: '创建新文件夹',

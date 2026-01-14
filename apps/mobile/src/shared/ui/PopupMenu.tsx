@@ -14,6 +14,7 @@ import {
   MenuTrigger,
   renderers,
 } from 'react-native-popup-menu';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -35,6 +36,8 @@ interface PopupMenuProps {
   triggerIcon?: keyof typeof Ionicons.glyphMap;
   triggerSize?: number;
   triggerColor?: string;
+  /** 画面上部に配置される場合にSafeAreaを考慮する */
+  respectSafeArea?: boolean;
 }
 
 export function PopupMenu({
@@ -42,14 +45,17 @@ export function PopupMenu({
   triggerIcon = 'ellipsis-horizontal',
   triggerSize = 20,
   triggerColor = colors.gray[600],
+  respectSafeArea = false,
 }: PopupMenuProps) {
   const isDarkMode = useIsDarkMode();
+  const insets = useSafeAreaInsets();
 
   // ダークモード対応のスタイル（光沢のある黒テーマに合わせた色）
   const dynamicStyles = {
     optionsContainer: {
       ...styles.optionsContainer,
       backgroundColor: isDarkMode ? '#1A1A1A' : 'white', // 暗めの背景
+      ...(respectSafeArea && { marginTop: insets.top }), // SafeAreaを考慮（オプション）
     },
     menuItemBorder: {
       ...styles.menuItemBorder,
@@ -59,7 +65,7 @@ export function PopupMenu({
       ...styles.menuLabel,
       color: isDarkMode ? '#FFFFFF' : colors.gray[800], // 純白テキスト
     },
-    iconColor: isDarkMode ? '#A0A0A0' : colors.gray[700], // グレーアイコン
+    iconColor: isDarkMode ? '#A0A0A0' : colors.text.secondary, // グレーアイコン（#6B7280）
   };
 
   const renderMenuItem = (item: PopupMenuItem, index: number) => {
@@ -148,7 +154,6 @@ const styles = StyleSheet.create({
   },
   optionsContainer: {
     borderRadius: 12,
-    paddingVertical: 4,
     backgroundColor: 'white',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

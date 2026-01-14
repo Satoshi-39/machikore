@@ -164,7 +164,7 @@ function SpotCard({
           elevation: 8,
         }}
       >
-        <View className="flex-1 p-3">
+        <View className="flex-1 px-4 py-3">
           {/* タイトル + カメラ移動ボタン */}
           <View className="flex-row items-center">
             <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
@@ -197,7 +197,7 @@ function SpotCard({
           {/* ユーザーの一言 */}
           {spot.description && (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
               numberOfLines={1}
             >
               {spot.description}

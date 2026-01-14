@@ -4,4 +4,5 @@
 
 export { MapsTab } from './ui/MapsTab';
 export { CollectionsTab } from './ui/CollectionsTab';
-export { LikesTab } from './ui/LikesTab';
+export { LikeMapList } from './ui/LikeMapList';
+export { LikeSpotList, type LikedSpotItem } from './ui/LikeSpotList';

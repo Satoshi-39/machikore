@@ -38,6 +38,8 @@ interface UserMapHeaderProps {
   mapTitle?: string;
   /** マップの概要 */
   mapDescription?: string | null;
+  /** マップのサムネイルURL */
+  mapThumbnailUrl?: string | null;
   /** マップのタグ */
   mapTags?: TagBasicInfo[];
   /** マップ内のスポット一覧 */
@@ -65,6 +67,7 @@ export function UserMapHeader({
   mapId,
   mapTitle,
   mapDescription,
+  mapThumbnailUrl,
   mapTags = [],
   spots = [],
   userId,
@@ -170,18 +173,10 @@ export function UserMapHeader({
 
     items.push(
       {
-        id: 'like',
-        label: isLiked ? t('favorite.liked') : t('common.like'),
-        icon: isLiked ? 'heart' : 'heart-outline',
-        iconColor: isLiked ? '#EF4444' : undefined,
-        closeOnSelect: false,
-        onPress: handleLikePress,
-      },
-      {
         id: 'bookmark',
         label: isBookmarked ? t('bookmark.saved') : t('bookmark.save'),
         icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
-        iconColor: isBookmarked ? '#007AFF' : undefined,
+        iconColor: undefined, // デフォルト色を使用
         closeOnSelect: false,
         onPress: handleBookmarkPress,
       },
@@ -197,9 +192,7 @@ export function UserMapHeader({
   }, [
     isOwnMap,
     isArticlePublic,
-    isLiked,
     isBookmarked,
-    handleLikePress,
     handleBookmarkPress,
     handleSharePress,
     onArticlePress,
@@ -235,14 +228,14 @@ export function UserMapHeader({
                 name="arrow-back"
                 size={23}
                 color={
-                  isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+                  isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary
                 }
               />
             </Pressable>
             <ActivityIndicator
               size="small"
               color={
-                isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+                isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary
               }
             />
             <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">
@@ -275,7 +268,7 @@ export function UserMapHeader({
               name="arrow-back"
               size={23}
               color={
-                isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+                isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary
               }
             />
           </Pressable>
@@ -317,8 +310,8 @@ export function UserMapHeader({
         </View>
 
         {/* 右側：アクションボタン群 */}
-        <View className="flex-row items-center gap-3">
-          {/* スポット追加ボタン（自分のマップのみ表示） */}
+        <View className="flex-row items-center gap-1.5">
+          {/* スポット検索ボタン（自分のマップのみ表示） */}
           {isOwnMap && (
             <Pressable
               onPress={onSearchPress}
@@ -328,8 +321,23 @@ export function UserMapHeader({
                 name="search-outline"
                 size={25}
                 color={
-                  isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+                  isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary
                 }
+              />
+            </Pressable>
+          )}
+
+          {/* いいねボタン（他人のマップのみ表示） */}
+          {!isOwnMap && (
+            <Pressable
+              onPress={handleLikePress}
+              disabled={isTogglingLike}
+              className="items-center justify-center"
+            >
+              <Ionicons
+                name={isLiked ? 'heart' : 'heart-outline'}
+                size={25}
+                color={isLiked ? colors.danger : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
               />
             </Pressable>
           )}
@@ -339,8 +347,9 @@ export function UserMapHeader({
             items={menuItems}
             triggerSize={23}
             triggerColor={
-              isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT
+              isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary
             }
+            respectSafeArea
           />
         </View>
       </View>
@@ -351,6 +360,7 @@ export function UserMapHeader({
         onClose={() => setIsDropdownOpen(false)}
         mapTitle={mapTitle}
         mapDescription={mapDescription}
+        mapThumbnailUrl={mapThumbnailUrl}
         mapTags={mapTags}
         spots={spots}
         onSpotPress={onSpotPress}

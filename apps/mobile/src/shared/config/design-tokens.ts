@@ -11,7 +11,7 @@
 export const colors = {
   // Primary Colors
   primary: {
-    DEFAULT: '#007AFF', // iOS Blue
+    DEFAULT: '#0787E1', // Machikore Blue (アイコンと統一)
     light: '#3B82F6', // Blue-500
     dark: '#2563EB', // Blue-600
   },
@@ -75,7 +75,7 @@ export const colors = {
     background: '#FFFFFF', // white
     backgroundSecondary: '#F9FAFB', // gray-50
     surface: '#FFFFFF', // white
-    surfaceSecondary: '#F9FAFB', // gray-50
+    surfaceSecondary: '#FAF9F7', // warm gray (少し暖かみのあるオフホワイト)
     border: '#E5E7EB', // gray-200
     borderLight: '#F3F4F6', // gray-100
     foreground: '#111827', // gray-900

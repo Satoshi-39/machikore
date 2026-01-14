@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import { useMapTagSearch } from '@/entities/map';
+import { getThumbnailHeight } from '@/shared/config';
 import { PageHeader, AsyncBoundary, MapThumbnail } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
 import type { MapWithUser } from '@/shared/types';
@@ -30,8 +31,8 @@ function CompactMapCard({ map, onPress }: CompactMapCardProps) {
       {/* サムネイル（小さめ） */}
       <MapThumbnail
         url={map.thumbnail_url}
-        width={64}
-        height={64}
+        width={128}
+        height={getThumbnailHeight(128)}
         borderRadius={8}
         defaultImagePadding={0.15}
       />

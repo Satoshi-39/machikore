@@ -12,6 +12,7 @@ import { colors } from '@/shared/config';
 import { useCollection, useCollectionMaps, useAddMapToCollection, useRemoveMapFromCollection } from '@/entities/collection';
 import { useUserMaps } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
+import { getThumbnailHeight } from '@/shared/config';
 import { PageHeader, MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
@@ -55,8 +56,8 @@ export function AddMapsToCollectionPage() {
         {/* サムネイル */}
         <MapThumbnail
           url={item.thumbnail_url}
-          width={56}
-          height={56}
+          width={120}
+          height={getThumbnailHeight(120)}
           className="mr-3"
         />
 

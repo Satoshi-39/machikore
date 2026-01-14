@@ -635,3 +635,20 @@ export const COMMENT_DISPLAY = {
   /** プレビュー表示時のコメント最大文字数 */
   MAX_TEXT_LENGTH: 100,
 } as const;
+
+// ===============================
+// サムネイル
+// ===============================
+
+/**
+ * サムネイル画像のアスペクト比
+ * OGP/SNSシェア推奨の1.91:1を採用（note/X/Facebook準拠）
+ */
+export const THUMBNAIL_ASPECT_RATIO = 1.91;
+
+/**
+ * 幅からサムネイルの高さを計算するヘルパー関数
+ */
+export function getThumbnailHeight(width: number): number {
+  return Math.round(width / THUMBNAIL_ASPECT_RATIO);
+}

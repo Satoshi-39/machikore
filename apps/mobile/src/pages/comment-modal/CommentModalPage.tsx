@@ -359,7 +359,7 @@ export function CommentModalPage({
                 onPress={handleBackFromReplies}
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               >
-                <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
+                <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary} />
               </Pressable>
             )}
           </View>

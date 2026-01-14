@@ -48,8 +48,8 @@ export function BookmarkButton({
     onPress();
   }, [currentUserId, onPress]);
 
-  const defaultIconColor = isBookmarked ? colors.primary.DEFAULT : colors.text.secondary;
-  const finalIconColor = iconColor ?? defaultIconColor;
+  // アイコン色：渡された色があればそれを使い、なければデフォルトのグレー
+  const finalIconColor = iconColor ?? colors.text.secondary;
 
   if (variant === 'icon-only') {
     return (
@@ -57,7 +57,7 @@ export function BookmarkButton({
         <Ionicons
           name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
           size={iconSize}
-          color={isBookmarked ? colors.primary.DEFAULT : finalIconColor}
+          color={finalIconColor}
         />
       </Pressable>
     );
@@ -70,7 +70,7 @@ export function BookmarkButton({
         <Ionicons
           name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
           size={iconSize}
-          color={isBookmarked ? colors.primary.DEFAULT : (iconColor ?? colors.text.secondary)}
+          color={finalIconColor}
         />
         <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"}>
           {t('common.save')}
@@ -90,7 +90,7 @@ export function BookmarkButton({
         <Ionicons
           name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
           size={iconSize}
-          color={isBookmarked ? colors.primary.DEFAULT : finalIconColor}
+          color={finalIconColor}
         />
       </View>
       <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">

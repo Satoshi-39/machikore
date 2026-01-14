@@ -15,9 +15,8 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
 import { showLoginRequiredAlert, formatRelativeTimeCompact } from '@/shared/lib';
-import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
@@ -34,7 +33,7 @@ type CardSize = 'small' | 'medium';
 const CARD_SIZES = {
   small: {
     width: 160,
-    height: 100,
+    height: getThumbnailHeight(160),
     titleSize: 'text-sm' as const,
     userAvatarSize: 16, // w-4 h-4
     userTextSize: 'text-xs' as const,
@@ -45,7 +44,7 @@ const CARD_SIZES = {
   },
   medium: {
     width: 250,
-    height: 160,
+    height: getThumbnailHeight(250),
     titleSize: 'text-base' as const,
     userAvatarSize: 20, // w-5 h-5
     userTextSize: 'text-sm' as const,
@@ -98,7 +97,6 @@ export function MapDisplayCard({
 }: MapDisplayCardProps) {
   const { t } = useI18n();
   const router = useRouter();
-  const isDarkMode = useIsDarkMode();
   const currentUserId = useCurrentUserId();
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
@@ -242,11 +240,7 @@ export function MapDisplayCard({
               currentUserId={currentUserId}
               likesCount={map.likes_count}
               size={sizeConfig.iconSize}
-              inactiveColor={
-                isDarkMode
-                  ? colors.dark.foregroundSecondary
-                  : colors.light.foreground
-              }
+              inactiveColor={colors.text.secondary}
               onCountPress={() => setIsLikersModalVisible(true)}
             />
             {/* ブックマーク */}
@@ -256,11 +250,7 @@ export function MapDisplayCard({
               bookmarksCount={map.bookmarks_count ?? 0}
               size={sizeConfig.iconSize}
               showCount
-              inactiveColor={
-                isDarkMode
-                  ? colors.dark.foregroundSecondary
-                  : colors.light.foreground
-              }
+              inactiveColor={colors.text.secondary}
             />
             {/* 記事アイコン */}
             {canViewArticle && (
@@ -268,7 +258,7 @@ export function MapDisplayCard({
                 <Ionicons
                   name="document-text-outline"
                   size={sizeConfig.articleIconSize}
-                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                  color={colors.text.secondary}
                 />
               </Pressable>
             )}

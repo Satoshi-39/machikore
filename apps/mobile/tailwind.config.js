@@ -8,7 +8,7 @@ const semanticColors = {
     background: '#FFFFFF', // white
     backgroundSecondary: '#F9FAFB', // gray-50
     surface: '#FFFFFF', // white
-    surfaceSecondary: '#F9FAFB', // gray-50
+    surfaceSecondary: '#FAF9F7', // warm gray (少し暖かみのあるオフホワイト)
     border: '#E5E7EB', // gray-200
     borderLight: '#F3F4F6', // gray-100
     foreground: '#111827', // gray-900

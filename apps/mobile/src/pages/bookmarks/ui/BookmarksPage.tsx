@@ -19,7 +19,7 @@ import { useI18n } from '@/shared/lib/i18n';
 export function BookmarksPage() {
   const { t } = useI18n();
   const userId = useCurrentUserId();
-  const [activeTab, setActiveTab] = useState<BookmarkTabMode>('spots');
+  const [activeTab, setActiveTab] = useState<BookmarkTabMode>('maps');
   const [isCreateFolderModalVisible, setIsCreateFolderModalVisible] = useState(false);
 
   // データ取得（ローディング状態用）

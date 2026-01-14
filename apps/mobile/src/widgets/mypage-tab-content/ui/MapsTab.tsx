@@ -12,7 +12,7 @@ import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
 import { EmptyState, ErrorView } from '@/shared/ui';
-import { MapCompactCard } from '@/widgets/map-cards';
+import { MapListCard } from '@/widgets/map-cards';
 import { colors } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 
@@ -90,7 +90,7 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
       data={maps ?? []}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <MapCompactCard
+        <MapListCard
           map={item}
           currentUserId={currentUserId}
           isOwner={isOwner}

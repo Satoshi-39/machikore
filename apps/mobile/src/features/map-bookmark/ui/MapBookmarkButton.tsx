@@ -86,7 +86,7 @@ export function MapBookmarkButton({
           <Ionicons
             name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
             size={size}
-            color={isBookmarked ? colors.primary.DEFAULT : inactiveColor}
+            color={inactiveColor}
           />
         </Pressable>
         {showCount && (

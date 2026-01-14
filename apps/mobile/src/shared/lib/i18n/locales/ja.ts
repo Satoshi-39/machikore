@@ -6,6 +6,7 @@ export default {
   // 共通
   common: {
     save: '保存',
+    saved: '保存済み',
     cancel: 'キャンセル',
     delete: '削除',
     edit: '編集',
@@ -292,6 +293,8 @@ export default {
     bookmarks: 'ブックマーク',
     loginRequired: 'ログインしてください',
     noBookmarks: 'ブックマークがありません',
+    noSpotBookmarks: 'スポットのブックマークがありません',
+    noMapBookmarks: 'マップのブックマークがありません',
     spots: 'スポット',
     maps: 'マップ',
     createFolder: '新しいフォルダを作成',

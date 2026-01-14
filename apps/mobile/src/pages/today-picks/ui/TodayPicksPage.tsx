@@ -73,9 +73,11 @@ export function TodayPicksPage() {
             renderItem={({ item }) => (
               <MapListCard
                 map={item}
+                currentUserId={currentUserId}
+                isOwner={item.user_id === currentUserId}
                 onPress={() => handleMapPress(item.id)}
-                onUserPress={() => handleUserPress(item.user_id)}
-                onArticlePress={() => handleArticlePress(item.id)}
+                onUserPress={handleUserPress}
+                onArticlePress={handleArticlePress}
               />
             )}
             refreshControl={

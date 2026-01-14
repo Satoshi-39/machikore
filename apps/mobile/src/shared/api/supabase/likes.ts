@@ -247,6 +247,11 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
         ),
         maps (
           language
+        ),
+        images (
+          id,
+          cloud_path,
+          order_index
         )
       )
     `)
@@ -261,42 +266,54 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
 
   return (data || [])
     .filter((like: any) => like.user_spots !== null)
-    .map((like: any) => ({
-      likeId: like.id,
-      likedAt: like.created_at,
-      spot: {
-        id: like.user_spots.id,
-        user_id: like.user_spots.user_id,
-        map_id: like.user_spots.map_id,
-        master_spot_id: like.user_spots.master_spot_id,
-        machi_id: like.user_spots.machi_id || '',
-        description: like.user_spots.description,
-        spot_color: like.user_spots.spot_color || null,
-        images_count: like.user_spots.images_count,
-        likes_count: like.user_spots.likes_count,
-        bookmarks_count: like.user_spots.bookmarks_count ?? 0,
-        comments_count: like.user_spots.comments_count,
-        order_index: like.user_spots.order_index || 0,
-        created_at: like.user_spots.created_at,
-        updated_at: like.user_spots.updated_at,
-        latitude: like.user_spots.latitude,
-        longitude: like.user_spots.longitude,
-        google_formatted_address: like.user_spots.google_formatted_address,
-        google_short_address: like.user_spots.google_short_address,
-        master_spot: like.user_spots.master_spots ? {
-          id: like.user_spots.master_spots.id,
-          name: like.user_spots.master_spots.name,
-          latitude: like.user_spots.master_spots.latitude,
-          longitude: like.user_spots.master_spots.longitude,
-          google_place_id: like.user_spots.master_spots.google_place_id,
-          google_formatted_address: like.user_spots.master_spots.google_formatted_address,
-          google_short_address: like.user_spots.master_spots.google_short_address,
-          google_types: like.user_spots.master_spots.google_types,
-        } : null,
-        user: like.user_spots.users,
-        is_liked: true, // いいね一覧なので必ずtrue
-      },
-    }));
+    .map((like: any) => {
+      // 画像を order_index でソートして最初の1枚を取得
+      const images = like.user_spots.images || [];
+      const sortedImages = [...images].sort((a: any, b: any) => a.order_index - b.order_index);
+      const firstImage = sortedImages[0] || null;
+
+      return {
+        likeId: like.id,
+        likedAt: like.created_at,
+        spot: {
+          id: like.user_spots.id,
+          user_id: like.user_spots.user_id,
+          map_id: like.user_spots.map_id,
+          master_spot_id: like.user_spots.master_spot_id,
+          machi_id: like.user_spots.machi_id || '',
+          description: like.user_spots.description,
+          spot_color: like.user_spots.spot_color || null,
+          images_count: like.user_spots.images_count,
+          likes_count: like.user_spots.likes_count,
+          bookmarks_count: like.user_spots.bookmarks_count ?? 0,
+          comments_count: like.user_spots.comments_count,
+          order_index: like.user_spots.order_index || 0,
+          created_at: like.user_spots.created_at,
+          updated_at: like.user_spots.updated_at,
+          latitude: like.user_spots.latitude,
+          longitude: like.user_spots.longitude,
+          google_formatted_address: like.user_spots.google_formatted_address,
+          google_short_address: like.user_spots.google_short_address,
+          master_spot: like.user_spots.master_spots ? {
+            id: like.user_spots.master_spots.id,
+            name: like.user_spots.master_spots.name,
+            latitude: like.user_spots.master_spots.latitude,
+            longitude: like.user_spots.master_spots.longitude,
+            google_place_id: like.user_spots.master_spots.google_place_id,
+            google_formatted_address: like.user_spots.master_spots.google_formatted_address,
+            google_short_address: like.user_spots.master_spots.google_short_address,
+            google_types: like.user_spots.master_spots.google_types,
+          } : null,
+          user: like.user_spots.users,
+          is_liked: true, // いいね一覧なので必ずtrue
+          // サムネイル用の最初の画像
+          thumbnail_image: firstImage ? {
+            id: firstImage.id,
+            cloud_path: firstImage.cloud_path,
+          } : null,
+        },
+      };
+    });
 }
 
 /**

@@ -6,6 +6,7 @@
 
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -27,6 +28,11 @@ export function MyPageTabFilter({
 }: MyPageTabFilterProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
+  const isDarkMode = useIsDarkMode();
+
+  // アクティブ/非アクティブのアイコン色
+  const activeColor = colors.primary.DEFAULT;
+  const inactiveColor = colors.text.secondary;
 
   // userIdがある場合は他ユーザーのプロフィール画面からの遷移
   const basePath = userId
@@ -45,16 +51,12 @@ export function MyPageTabFilter({
           <Ionicons
             name="map"
             size={24}
-            color={
-              tabMode === 'maps'
-                ? colors.primary.DEFAULT
-                : colors.text.secondary
-            }
+            color={tabMode === 'maps' ? activeColor : inactiveColor}
           />
           {tabMode === 'maps' && (
             <View
               className="absolute bottom-0 left-0 right-0 h-1 rounded-t-full"
-              style={{ backgroundColor: colors.primary.DEFAULT }}
+              style={{ backgroundColor: activeColor }}
             />
           )}
         </Pressable>
@@ -63,21 +65,21 @@ export function MyPageTabFilter({
           onPress={() => router.push(`${basePath}/collections` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons name="grid" size={24} color={colors.text.secondary} />
+          <Ionicons name="grid" size={24} color={inactiveColor} />
         </Pressable>
         {/* いいねボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push(`${basePath}/likes` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons name="heart" size={24} color={colors.text.secondary} />
+          <Ionicons name="heart" size={24} color={inactiveColor} />
         </Pressable>
         {/* ブックマークボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push(`/(tabs)/${currentTab}/bookmarks` as any)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons name="bookmark" size={24} color={colors.text.secondary} />
+          <Ionicons name="bookmark" size={24} color={inactiveColor} />
         </Pressable>
       </View>
     </View>

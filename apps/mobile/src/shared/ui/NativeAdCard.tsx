@@ -9,7 +9,7 @@ import {
 import { useState, useEffect, useCallback } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
-import { colors } from '@/shared/config';
+import { colors, getThumbnailHeight } from '@/shared/config';
 
 /**
  * ネイティブ広告コンポーネント
@@ -23,7 +23,7 @@ export function NativeAdCard() {
   // MapCardと同じサイズ計算（padding 16 * 2 = 32）
   const screenWidth = Dimensions.get('window').width;
   const mediaWidth = screenWidth - 32;
-  const mediaHeight = 160;
+  const mediaHeight = getThumbnailHeight(mediaWidth);
 
   const loadAd = useCallback(async () => {
     try {

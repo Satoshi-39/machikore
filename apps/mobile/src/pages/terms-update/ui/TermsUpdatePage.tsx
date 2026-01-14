@@ -216,7 +216,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         </View>
 
         {/* 規約リンク */}
-        <View className="mb-6 bg-surface-secondary dark:bg-dark-surface-secondary rounded-xl">
+        <View className="mb-6 bg-surface dark:bg-dark-surface-secondary rounded-xl">
           {/* 利用規約 */}
           <Pressable
             onPress={() => setViewingDocument('terms')}

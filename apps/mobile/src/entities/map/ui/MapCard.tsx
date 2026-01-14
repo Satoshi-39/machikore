@@ -7,7 +7,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Image, Alert, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
 import { shareMap } from '@/shared/lib';
 import type { MapRow } from '@/shared/types/database.types';
@@ -45,6 +45,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
 
   const screenWidth = Dimensions.get('window').width;
+  const thumbnailWidth = screenWidth - 32;
+  const thumbnailHeight = getThumbnailHeight(thumbnailWidth);
 
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
@@ -160,8 +162,8 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
       {/* サムネイル画像 */}
       <MapThumbnail
         url={map.thumbnail_url}
-        width={screenWidth - 32}
-        height={160}
+        width={thumbnailWidth}
+        height={thumbnailHeight}
         defaultImagePadding={0.1}
         className="mb-3"
       />

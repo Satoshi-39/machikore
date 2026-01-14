@@ -6,6 +6,7 @@ export default {
   // 通用
   common: {
     save: '儲存',
+    saved: '已儲存',
     cancel: '取消',
     delete: '刪除',
     edit: '編輯',
@@ -290,6 +291,8 @@ export default {
     bookmarks: '書籤',
     loginRequired: '請登入',
     noBookmarks: '沒有書籤',
+    noSpotBookmarks: '沒有地點書籤',
+    noMapBookmarks: '沒有地圖書籤',
     spots: '地點',
     maps: '地圖',
     createFolder: '建立新資料夾',

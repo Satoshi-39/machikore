@@ -4,6 +4,7 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
+import { log } from '@/shared/config/logger';
 import type { Bookmark } from './types';
 
 /**
@@ -14,6 +15,13 @@ export async function bookmarkMap(
   mapId: string,
   folderId?: string | null
 ): Promise<Bookmark> {
+  // デバッグ: セッションのユーザーIDと渡されたユーザーIDを比較
+  const { data: { session } } = await supabase.auth.getSession();
+  const authUserId = session?.user?.id;
+  if (authUserId !== userId) {
+    log.warn('[Bookmark] User ID mismatch:', { authUserId, userId });
+  }
+
   const { data, error } = await supabase
     .from('bookmarks')
     .insert({

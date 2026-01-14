@@ -13,6 +13,7 @@ import { useCurrentUserId } from '@/entities/user';
 import { useRecentViewHistory } from '@/entities/view-history';
 import { MapListCard } from '@/widgets/map-cards';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
+import type { MapWithUser } from '@/shared/types';
 import { useSafeBack, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -89,10 +90,12 @@ export function ViewHistoryPage() {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <MapListCard
-                map={item.map}
+                map={item.map as MapWithUser}
+                currentUserId={currentUserId}
+                isOwner={item.map.user_id === currentUserId}
                 onPress={() => handleMapPress(item.map.id)}
-                onUserPress={() => handleUserPress(item.map.user_id)}
-                onArticlePress={() => handleArticlePress(item.map.id)}
+                onUserPress={handleUserPress}
+                onArticlePress={handleArticlePress}
               />
             )}
             refreshControl={

@@ -1,29 +1,30 @@
 /**
  * MapListCard コンポーネント
  *
- * 縦リスト表示用のマップカード
- * 左にサムネイル、右に情報のレイアウト
+ * リスト表示用マップカード（サムネイル + 右側に情報）
  *
  * 使用箇所:
- * - 最近見たマップ一覧（ViewHistoryPage）
- * - 本日のピックアップ一覧（TodayPicksPage）
- * - 人気マップランキング一覧（PopularMapsPage）
+ * - マイページ マップタブ（MapsTab）
+ * - ユーザープロフィール マップタブ
+ * - コレクション詳細ページ
+ * - いいね一覧
+ * - ブックマーク一覧
+ * - 最近見たマップ一覧
+ * - 本日のピックアップ一覧
+ * - 人気マップランキング一覧
  */
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import type { MapWithUser } from '@/shared/types';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR } from '@/shared/config';
-import { showLoginRequiredAlert, formatRelativeTime } from '@/shared/lib';
-import { useIsDarkMode } from '@/shared/lib/providers';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
+import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
-import { useCurrentUserId } from '@/entities/user';
-import { MapLikeButton } from '@/features/map-like';
-import { MapBookmarkButton } from '@/features/map-bookmark';
-import { LikersModal } from '@/features/view-likers';
+import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, UserAvatar } from '@/shared/ui';
+import type { MapWithUser } from '@/shared/types';
 
 // ===============================
 // ランキングバッジカラー
@@ -48,11 +49,16 @@ function getRankColor(rank: number): string {
 
 export interface MapListCardProps {
   map: MapWithUser;
-  onPress: () => void;
-  onUserPress: () => void;
-  onArticlePress: () => void;
+  currentUserId?: string | null;
+  /** オーナーかどうか（編集・削除メニュー表示用） */
+  isOwner?: boolean;
   /** ランキング番号（指定時にバッジ表示） */
   rank?: number;
+  onPress?: () => void;
+  onEdit?: (mapId: string) => void;
+  onDelete?: (mapId: string) => void;
+  onArticlePress?: (mapId: string) => void;
+  onUserPress?: (userId: string) => void;
 }
 
 // ===============================
@@ -61,23 +67,82 @@ export interface MapListCardProps {
 
 export function MapListCard({
   map,
-  onPress,
-  onUserPress,
-  onArticlePress,
+  currentUserId,
+  isOwner,
   rank,
+  onPress,
+  onEdit,
+  onDelete,
+  onArticlePress,
+  onUserPress,
 }: MapListCardProps) {
   const { t, locale } = useI18n();
   const router = useRouter();
-  const isDarkMode = useIsDarkMode();
-  const currentUserId = useCurrentUserId();
-  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
+  // 記事公開状態
+  const isArticlePublic = map.is_article_public === true;
 
-  // 自分のマップかどうか
-  const isOwner = currentUserId && map.user_id === currentUserId;
+  // ブックマーク機能
+  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
+  const isBookmarked = bookmarkInfo.length > 0;
+  const bookmarkedFolderIds = useMemo(
+    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
+    [bookmarkInfo]
+  );
+  const { mutate: addBookmark } = useBookmarkMap();
+  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
 
-  // 三点リーダーメニュー
+  const handleAddToFolder = useCallback(
+    (folderId: string | null) => {
+      if (!currentUserId) return;
+      addBookmark({ userId: currentUserId, mapId: map.id, folderId });
+    },
+    [currentUserId, map.id, addBookmark]
+  );
+
+  const handleRemoveFromFolder = useCallback(
+    (folderId: string | null) => {
+      if (!currentUserId) return;
+      removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
+    },
+    [currentUserId, map.id, removeFromFolder]
+  );
+
+  // メニューアイテム（オーナー: 編集・削除、非オーナー: 保存・通報）
   const menuItems: PopupMenuItem[] = useMemo(() => {
+    if (isOwner) {
+      return [
+        {
+          id: 'edit',
+          label: t('common.edit'),
+          icon: 'create-outline',
+          onPress: () => onEdit?.(map.id),
+        },
+        {
+          id: 'delete',
+          label: t('common.delete'),
+          icon: 'trash-outline',
+          destructive: true,
+          onPress: () => onDelete?.(map.id),
+        },
+      ];
+    }
+    // 非オーナーの場合は保存・通報メニュー
     return [
+      {
+        id: 'save',
+        label: isBookmarked ? t('common.saved') : t('common.save'),
+        icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
+        // 保存済みでもデフォルト色を使用（青色にしない）
+        iconColor: undefined,
+        onPress: () => {
+          if (!currentUserId) {
+            showLoginRequiredAlert(t('common.save'));
+            return;
+          }
+          setIsFolderModalVisible(true);
+        },
+      },
       {
         id: 'report',
         label: t('menu.report'),
@@ -91,151 +156,137 @@ export function MapListCard({
         },
       },
     ];
-  }, [currentUserId, router, map.id, t]);
-
-  const handleArticlePress = useCallback(
-    (e: any) => {
-      e.stopPropagation();
-      onArticlePress();
-    },
-    [onArticlePress]
-  );
-
-  const handleUserPress = useCallback(
-    (e: any) => {
-      e.stopPropagation();
-      onUserPress();
-    },
-    [onUserPress]
-  );
+  }, [map.id, onEdit, onDelete, isOwner, currentUserId, router, t, isBookmarked]);
 
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-gray-100 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-900"
+      className="px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
     >
-      {/* サムネイル + ランキングバッジ */}
-      <View className="relative">
-        <MapThumbnail
-          url={map.thumbnail_url}
-          width={80}
-          height={80}
-          borderRadius={8}
-          defaultImagePadding={0.15}
-        />
-        {/* ランキングバッジ（サムネイル左上に重ねる） */}
-        {rank !== undefined && (
-          <View
-            style={{
-              position: 'absolute',
-              top: 4,
-              left: 4,
-              backgroundColor: getRankColor(rank),
-              borderRadius: 10,
-              width: 20,
-              height: 20,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Text className="text-white text-xs font-bold">{rank}</Text>
-          </View>
-        )}
-      </View>
-
-      {/* マップ情報 */}
-      <View className="flex-1 ml-3">
-        {/* 1行目: マップ名 + スポット数 | 記事アイコン + 三点リーダー */}
-        <View className="flex-row items-center justify-between">
-          <View className="flex-row items-center flex-1 mr-2">
-            <Text
-              className="text-base font-semibold text-foreground dark:text-dark-foreground flex-shrink"
-              numberOfLines={1}
+      <View className="flex-row items-start">
+        {/* 左: サムネイル + ランキングバッジ */}
+        <View className="relative">
+          <MapThumbnail
+            url={map.thumbnail_url}
+            width={128}
+            height={getThumbnailHeight(128)}
+          />
+          {/* ランキングバッジ（サムネイル左上に重ねる） */}
+          {rank !== undefined && (
+            <View
+              style={{
+                position: 'absolute',
+                top: 4,
+                left: 4,
+                backgroundColor: getRankColor(rank),
+                borderRadius: 10,
+                width: 20,
+                height: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
-              {map.name}
-            </Text>
-            <View className="flex-row items-center ml-1 flex-shrink-0">
-              <LocationPinIcon
-                size={12}
-                color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
-              />
-              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
-                {map.spots_count}
-              </Text>
+              <Text className="text-white text-xs font-bold">{rank}</Text>
             </View>
-          </View>
-          {/* 記事アイコン + 三点リーダー（右上） */}
-          <View className="flex-row items-center">
-            {(isOwner || map.is_article_public) && (
-              <Pressable onPress={handleArticlePress} className="flex-row items-center">
-                <Ionicons
-                  name="document-text-outline"
-                  size={16}
-                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground}
-                />
-              </Pressable>
-            )}
-            {!isOwner && (
+          )}
+        </View>
+
+        {/* 右: マップ情報 */}
+        <View className="flex-1 ml-3 justify-between">
+          {/* 上部: マップ名 + スポット数 + 三点リーダ */}
+          <View className="flex-row">
+            <View className="flex-1">
+              <View className="flex-row items-center">
+                <Text
+                  className="text-sm font-semibold text-foreground dark:text-dark-foreground flex-shrink"
+                  numberOfLines={1}
+                >
+                  {map.name}
+                </Text>
+                <View className="flex-row items-center ml-1.5 flex-shrink-0">
+                  <LocationPinIcon
+                    size={12}
+                    color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
+                  />
+                  <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
+                    {map.spots_count}
+                  </Text>
+                </View>
+              </View>
+              {/* ユーザー情報 */}
+              {map.user && (
+                <Pressable
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    onUserPress?.(map.user!.id);
+                  }}
+                  className="flex-row items-center mt-1 self-start"
+                >
+                  <UserAvatar
+                    url={map.user.avatar_url}
+                    alt={map.user.display_name || map.user.username || 'User'}
+                    className="w-4 h-4 mr-1"
+                    iconSize={10}
+                  />
+                  <Text
+                    className="text-xs text-foreground-muted dark:text-dark-foreground-muted"
+                    numberOfLines={1}
+                  >
+                    {map.user.display_name || map.user.username}
+                  </Text>
+                </Pressable>
+              )}
+            </View>
+            {/* 右上: 三点リーダメニュー（オーナー: 編集・削除、非オーナー: 通報） */}
+            <View style={{ marginRight: -8 }}>
               <PopupMenu
                 items={menuItems}
-                triggerSize={16}
-                triggerColor={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                triggerColor={colors.text.secondary}
+                triggerIcon="ellipsis-vertical"
               />
-            )}
+            </View>
           </View>
-        </View>
 
-        {/* 2行目: ユーザー情報 */}
-        {map.user && (
-          <Pressable onPress={handleUserPress} className="flex-row items-center mt-1">
-            <UserAvatar
-              url={map.user.avatar_url}
-              alt={map.user.display_name || map.user.username || 'User'}
-              className="w-4 h-4 mr-1"
-              iconSize={10}
-            />
-            <Text
-              className="text-xs text-foreground-muted dark:text-dark-foreground-muted"
-              numberOfLines={1}
-            >
-              {map.user.display_name || map.user.username}
+          {/* 下部: 日付・アイコン群 */}
+          <View className="flex-row items-center justify-between mt-1">
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+              {formatRelativeTime(map.created_at, locale)}
             </Text>
-          </Pressable>
-        )}
-
-        {/* 3行目: いいね・ブックマーク・作成日時 */}
-        <View className="flex-row items-center mt-1.5 gap-3">
-          {/* いいね */}
-          <MapLikeButton
-            mapId={map.id}
-            currentUserId={currentUserId}
-            likesCount={map.likes_count}
-            size={14}
-            inactiveColor={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground}
-            onCountPress={() => setIsLikersModalVisible(true)}
-          />
-          {/* ブックマーク */}
-          <MapBookmarkButton
-            mapId={map.id}
-            currentUserId={currentUserId}
-            bookmarksCount={map.bookmarks_count ?? 0}
-            size={14}
-            showCount
-            inactiveColor={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground}
-          />
-          {/* 作成日時 */}
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-            {formatRelativeTime(map.created_at, locale)}
-          </Text>
+            <View className="flex-row items-center">
+              {!map.is_public && (
+                <View className="mr-2">
+                  <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
+                </View>
+              )}
+              {(isOwner || isArticlePublic) && (
+                <Pressable
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    onArticlePress?.(map.id);
+                  }}
+                  className="p-1 mr-1"
+                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                >
+                  <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
+                </Pressable>
+              )}
+            </View>
+          </View>
         </View>
       </View>
 
-      {/* いいねユーザー一覧モーダル */}
-      <LikersModal
-        visible={isLikersModalVisible}
-        mapId={map.id}
-        onClose={() => setIsLikersModalVisible(false)}
-      />
+      {/* ブックマークフォルダ選択モーダル */}
+      {currentUserId && (
+        <SelectFolderModal
+          visible={isFolderModalVisible}
+          userId={currentUserId}
+          folderType="maps"
+          onClose={() => setIsFolderModalVisible(false)}
+          onAddToFolder={handleAddToFolder}
+          onRemoveFromFolder={handleRemoveFromFolder}
+          bookmarkedFolderIds={bookmarkedFolderIds}
+        />
+      )}
     </Pressable>
   );
 }

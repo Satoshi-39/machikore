@@ -14,7 +14,7 @@ import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { useCurrentTab } from '@/shared/lib/navigation';
 import { PageHeader, Loading, ErrorView } from '@/shared/ui';
-import { MapCompactCard } from '@/widgets/map-cards';
+import { MapListCard } from '@/widgets/map-cards';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
 import type { MapWithUser } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
@@ -184,7 +184,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
           const map = toMapWithUser(item);
           if (!map) return null;
           return (
-            <MapCompactCard
+            <MapListCard
               map={map}
               currentUserId={currentUserId}
               isOwner={false}

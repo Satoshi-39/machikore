@@ -78,7 +78,7 @@ export function SearchBar({
             <Ionicons
               name="arrow-back"
               size={24}
-              color={isDarkMode ? colors.dark.foreground : colors.light.foreground}
+              color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
             />
           </TouchableOpacity>
           <Pressable
@@ -106,7 +106,7 @@ export function SearchBar({
           <Ionicons
             name="arrow-back"
             size={24}
-            color={isDarkMode ? colors.dark.foreground : colors.light.foreground}
+            color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
           />
         </TouchableOpacity>
         <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">

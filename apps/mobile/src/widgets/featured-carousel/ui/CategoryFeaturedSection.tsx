@@ -11,7 +11,6 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import { colors } from '@/shared/config';
-import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
 import { useCategoryFeaturedMaps } from '@/entities/featured-carousel';
@@ -25,7 +24,6 @@ interface CategoryFeaturedSectionProps {
 
 export function CategoryFeaturedSection({ categoryId }: CategoryFeaturedSectionProps) {
   const router = useRouter();
-  const isDarkMode = useIsDarkMode();
   const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
@@ -55,27 +53,17 @@ export function CategoryFeaturedSection({ categoryId }: CategoryFeaturedSectionP
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
           {t('article.featuredInCategory', { category: categoryName })}
         </Text>
-        {/* タグページへの遷移ボタン */}
+        {/* タグページへの遷移 */}
         <Pressable
           onPress={() => router.push(`/(tabs)/discover/category-tags/${categoryId}` as Href)}
-          className="flex-row items-center px-3 py-1.5 rounded-full active:opacity-70"
-          style={{
-            backgroundColor: isDarkMode ? 'rgba(59, 130, 246, 0.15)' : colors.gray[100],
-            borderWidth: 1,
-            borderColor: isDarkMode ? colors.primary.light : colors.primary.DEFAULT,
-          }}
+          className="flex-row items-center active:opacity-70"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons
-            name="pricetag-outline"
-            size={14}
-            color={isDarkMode ? colors.primary.light : colors.primary.DEFAULT}
+            name="chevron-forward"
+            size={20}
+            color={colors.text.secondary}
           />
-          <Text
-            className="text-sm font-medium ml-1"
-            style={{ color: isDarkMode ? colors.primary.light : colors.primary.DEFAULT }}
-          >
-            {t('article.searchByTag')}
-          </Text>
         </Pressable>
       </View>
 

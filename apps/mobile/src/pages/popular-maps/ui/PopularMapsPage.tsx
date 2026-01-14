@@ -74,10 +74,12 @@ export function PopularMapsPage() {
             renderItem={({ item, index }) => (
               <MapListCard
                 map={item}
+                currentUserId={currentUserId}
+                isOwner={item.user_id === currentUserId}
                 rank={index + 1}
                 onPress={() => handleMapPress(item.id)}
-                onUserPress={() => handleUserPress(item.user_id)}
-                onArticlePress={() => handleArticlePress(item.id)}
+                onUserPress={handleUserPress}
+                onArticlePress={handleArticlePress}
               />
             )}
             refreshControl={
