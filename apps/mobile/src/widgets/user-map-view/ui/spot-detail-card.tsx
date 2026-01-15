@@ -254,9 +254,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         <View className="flex-row items-start justify-between mb-3">
           <View className="flex-1">
             {/* マスタースポット正式名称（メイン） */}
-            <View className="flex-row items-center mb-1">
-              <LocationPinIcon size={24} color={spotColorValue} strokeColor={spotColorStroke} />
-              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
+            <View className="flex-row mb-1">
+              <View className="mt-1">
+                <LocationPinIcon size={20} color={spotColorValue} strokeColor={spotColorStroke} />
+              </View>
+              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
                 {masterSpotName}
               </Text>
             </View>
@@ -272,17 +274,17 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Pressable
               onPress={onCameraMove}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              className="w-8 h-8 items-center justify-center rounded-full mr-2 active:bg-gray-100 dark:active:bg-gray-700"
+              className="w-8 h-8 items-center justify-center rounded-full active:bg-gray-100 dark:active:bg-gray-700"
             >
               <Ionicons name="eye-outline" size={22} color={colors.text.secondary} />
             </Pressable>
             {/* 三点リーダーメニュー */}
             {isOwner ? (
-              <View className="mr-2">
+              <View className="mr-1">
                 <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
               </View>
             ) : currentUserId && !isOwner ? (
-              <View className="mr-2">
+              <View className="mr-1">
                 <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
               </View>
             ) : null}
