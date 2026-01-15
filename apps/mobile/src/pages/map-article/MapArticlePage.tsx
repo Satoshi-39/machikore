@@ -46,11 +46,6 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     }
   }, [currentUserId, articleData?.map, mapId, recordView]);
 
-  // マップ編集へ遷移
-  const handleEditMapPress = useCallback(() => {
-    router.push(`/edit-map/${mapId}`);
-  }, [router, mapId]);
-
   // 記事編集へ遷移
   const handleEditArticlePress = useCallback(() => {
     router.push(`/edit-article/${mapId}`);
@@ -91,34 +86,28 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // ヘッダーメニュー項目
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    const items: PopupMenuItem[] = [
-      {
-        id: 'map',
-        label: t('article.viewMap'),
-        icon: 'map-outline',
-        onPress: handleGoToMapPress,
-      },
-    ];
+    const items: PopupMenuItem[] = [];
 
+    // オーナーの場合は記事編集を先頭に追加
     if (isOwner) {
-      items.push(
-        {
-          id: 'edit-article',
-          label: t('article.editArticle'),
-          icon: 'document-text-outline',
-          onPress: handleEditArticlePress,
-        },
-        {
-          id: 'edit-map',
-          label: t('article.editMap'),
-          icon: 'create-outline',
-          onPress: handleEditMapPress,
-        }
-      );
+      items.push({
+        id: 'edit-article',
+        label: t('article.editArticle'),
+        icon: 'document-text-outline',
+        onPress: handleEditArticlePress,
+      });
     }
 
+    // マップを見るは常に表示
+    items.push({
+      id: 'map',
+      label: t('article.viewMap'),
+      icon: 'map-outline',
+      onPress: handleGoToMapPress,
+    });
+
     return items;
-  }, [isOwner, handleGoToMapPress, handleEditArticlePress, handleEditMapPress, t]);
+  }, [isOwner, handleGoToMapPress, handleEditArticlePress, t]);
 
   // ローディング状態
   if (isLoading) {
@@ -164,7 +153,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       <PageHeader
         title={t('article.article')}
         rightComponent={
-          <PopupMenu items={menuItems} triggerSize={22} triggerColor={colors.gray[600]} />
+          <PopupMenu items={menuItems} triggerSize={22} triggerColor={colors.gray[600]} respectSafeArea />
         }
       />
 

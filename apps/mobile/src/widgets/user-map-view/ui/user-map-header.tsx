@@ -155,7 +155,7 @@ export function UserMapHeader({
     if (isOwnMap && onEditPress) {
       items.push({
         id: 'edit',
-        label: t('common.edit'),
+        label: t('map.editMap'),
         icon: 'create-outline',
         onPress: onEditPress,
       });
