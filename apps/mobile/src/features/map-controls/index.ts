@@ -1,1 +1,1 @@
-export { useMapControlsVisibility } from './model';
+export { useMapControlsVisibility, useMapUIMode, type MapUIMode } from './model';

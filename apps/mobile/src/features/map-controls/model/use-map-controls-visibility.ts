@@ -1,5 +1,10 @@
 /**
  * マップコントロール（現在地ボタンなど）の表示制御フック
+ *
+ * 注意: このフックはDefaultMapView（発見タブなど）で使用されています。
+ * UserMapViewでは、より高度な状態管理を行う useMapUIMode を使用しています。
+ * useMapUIMode はカルーセル・詳細カード・通常状態を一元管理し、
+ * 現在地ボタンの位置とopacityを状態に応じて制御します。
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';

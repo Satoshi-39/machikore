@@ -2,20 +2,29 @@
  * ユーザーマップのカード選択状態を管理するフック
  *
  * FSDの原則：Feature層はユーザーアクション・インタラクションを担当
+ *
+ * スポット選択の2つの経路を統合管理：
+ * 1. initialSpotId（props経由）: ページ遷移時に使用（記事→スポット詳細など）
+ * 2. jumpToSpotId（グローバルストア経由）: 同じページ内でのジャンプに使用
  */
 
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useSelectedPlaceStore } from '@/features/search-places';
 import type { SpotWithDetails } from '@/shared/types';
 
 interface UseSelectUserMapCardOptions {
   /** スポット一覧 */
   spots: SpotWithDetails[];
-  /** 初期表示するスポットID */
+  /** 初期表示するスポットID（ページ遷移時に使用） */
   initialSpotId?: string | null;
+  /** マップが準備できているか */
+  isMapReady: boolean;
   /** カメラをスポットに移動する関数 */
   moveCameraToSpot: (spot: SpotWithDetails) => void;
   /** ヘッダー最大化コールバック */
   onDetailCardMaximized?: (isMaximized: boolean) => void;
+  /** カード表示前に呼ばれるコールバック（現在地ボタンのちらつき防止用） */
+  onBeforeCardOpen?: () => void;
 }
 
 interface UseSelectUserMapCardReturn {
@@ -45,46 +54,87 @@ interface UseSelectUserMapCardReturn {
   openCarousel: () => void;
   /** 選択状態をリセット（mapId変更時など） */
   resetSelection: () => void;
-  /** 特定のスポットIDで詳細カードを開く（ジャンプ時用） */
-  openSpotById: (spotId: string) => void;
+  /** 初回カメラ移動済みフラグをリセット */
+  resetInitialCameraFlag: () => void;
+  /** 初回カメラ移動が完了したか */
+  hasInitialCameraMoved: boolean;
 }
 
 export function useSelectUserMapCard({
   spots,
   initialSpotId = null,
+  isMapReady,
   moveCameraToSpot,
   onDetailCardMaximized,
+  onBeforeCardOpen,
 }: UseSelectUserMapCardOptions): UseSelectUserMapCardReturn {
+  // グローバルストアからjumpToSpotIdを取得
+  const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
+  const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
+
   // selectedSpotId を管理し、selectedSpot は spots から導出
-  // これによりキャッシュの楽観的更新が自動的に反映される
   const [selectedSpotId, setSelectedSpotId] = useState<string | null>(null);
   const selectedSpot = useMemo(
     () => spots.find((s) => s.id === selectedSpotId) ?? null,
     [spots, selectedSpotId]
   );
 
-  // initialSpotIdがある場合は最初から詳細カードを開く
+  // initialSpotIdがある場合は最初から詳細カードを開く状態で初期化
   const [isDetailCardOpen, setIsDetailCardOpen] = useState(!!initialSpotId);
   // カルーセルの表示状態（initialSpotIdがある場合は非表示）
   const [isCarouselVisible, setIsCarouselVisible] = useState(!initialSpotId);
   // カルーセルで現在フォーカスされているスポットID
   const [focusedSpotId, setFocusedSpotId] = useState<string | null>(null);
+  // 初回カメラ移動済みフラグ
+  const [hasInitialCameraMoved, setHasInitialCameraMoved] = useState(false);
 
-  // initialSpotIdによる初期化が完了したかどうか
-  const hasInitializedRef = useRef(false);
+  // 処理済みのスポットIDを追跡（二重処理防止）
+  const processedSpotIdRef = useRef<string | null>(null);
 
-  // initialSpotIdがある場合、スポット読み込み後にカメラを移動して詳細カードを開く
+  // initialSpotIdまたはjumpToSpotIdでスポットを開く（統合処理）
   useEffect(() => {
-    if (initialSpotId && spots.length > 0 && !hasInitializedRef.current) {
-      const targetSpot = spots.find((s) => s.id === initialSpotId);
-      if (targetSpot) {
-        hasInitializedRef.current = true;
-        setSelectedSpotId(targetSpot.id);
-        setFocusedSpotId(targetSpot.id);
-        moveCameraToSpot(targetSpot);
+    // マップの準備ができていない、またはスポットがない場合は待機
+    if (!isMapReady || spots.length === 0) return;
+
+    // 処理するスポットID（initialSpotIdを優先）
+    const targetSpotId = initialSpotId || jumpToSpotId;
+    if (!targetSpotId) return;
+
+    // 既に処理済みの場合はスキップ
+    if (processedSpotIdRef.current === targetSpotId) return;
+
+    const targetSpot = spots.find((s) => s.id === targetSpotId);
+    if (!targetSpot) return;
+
+    // 処理済みとしてマーク
+    processedSpotIdRef.current = targetSpotId;
+
+    // カード表示前のコールバック（現在地ボタンのちらつき防止）
+    onBeforeCardOpen?.();
+
+    // 少し遅延させてカードを開く（アニメーションのため）
+    setTimeout(() => {
+      setSelectedSpotId(targetSpot.id);
+      setFocusedSpotId(targetSpot.id);
+      setIsDetailCardOpen(true);
+      setIsCarouselVisible(false);
+      moveCameraToSpot(targetSpot);
+      setHasInitialCameraMoved(true);
+
+      // jumpToSpotIdの場合はクリア
+      if (jumpToSpotId) {
+        setJumpToSpotId(null);
       }
-    }
-  }, [initialSpotId, spots, moveCameraToSpot]);
+    }, 100);
+  }, [
+    initialSpotId,
+    jumpToSpotId,
+    spots,
+    isMapReady,
+    moveCameraToSpot,
+    setJumpToSpotId,
+    onBeforeCardOpen,
+  ]);
 
   // マーカータップ時：カルーセルを表示してそのスポットにフォーカス（カメラ移動なし）
   const handleSpotSelect = useCallback(
@@ -93,7 +143,6 @@ export function useSelectUserMapCard({
         setFocusedSpotId(spot.id);
         setIsCarouselVisible(true);
         setIsDetailCardOpen(false);
-        // カメラ移動は目のアイコンタップ時のみ
       } else {
         setFocusedSpotId(null);
       }
@@ -102,13 +151,9 @@ export function useSelectUserMapCard({
   );
 
   // カルーセルでスワイプしてスポットにフォーカス（カメラ移動なし）
-  const handleCarouselSpotFocus = useCallback(
-    (spot: SpotWithDetails) => {
-      setFocusedSpotId(spot.id);
-      // カメラ移動はしない
-    },
-    []
-  );
+  const handleCarouselSpotFocus = useCallback((spot: SpotWithDetails) => {
+    setFocusedSpotId(spot.id);
+  }, []);
 
   // カメラをスポットに移動（目のアイコンタップ時）
   const handleCameraMove = useCallback(
@@ -120,23 +165,22 @@ export function useSelectUserMapCard({
   );
 
   // カルーセルでスポットカードをタップ（詳細カードを開く）
-  // カメラ移動は行わない（目のアイコンタップ時のみ移動）
   const handleCarouselSpotPress = useCallback(
     (spot: SpotWithDetails) => {
+      onBeforeCardOpen?.();
       setSelectedSpotId(spot.id);
       setFocusedSpotId(spot.id);
       setIsDetailCardOpen(true);
-      setIsCarouselVisible(false); // カルーセルを非表示にしてボタン表示を有効にする
+      setIsCarouselVisible(false);
     },
-    []
+    [onBeforeCardOpen]
   );
 
   // 詳細カードを閉じる → カルーセルに戻る
   const handleDetailCardClose = useCallback(() => {
     setSelectedSpotId(null);
     setIsDetailCardOpen(false);
-    setIsCarouselVisible(true); // カルーセルに戻る
-    // ヘッダーを表示状態に戻す
+    setIsCarouselVisible(true);
     onDetailCardMaximized?.(false);
   }, [onDetailCardMaximized]);
 
@@ -147,7 +191,6 @@ export function useSelectUserMapCard({
   }, []);
 
   // カルーセルを開く
-  // 詳細カードから戻る場合はフォーカスを維持したいので、focusedSpotIdはリセットしない
   const openCarousel = useCallback(() => {
     setIsCarouselVisible(true);
   }, []);
@@ -155,14 +198,16 @@ export function useSelectUserMapCard({
   // 選択状態をリセット（mapId変更時など）
   const resetSelection = useCallback(() => {
     setSelectedSpotId(null);
+    setIsDetailCardOpen(false);
     setIsCarouselVisible(true);
+    setFocusedSpotId(null);
+    processedSpotIdRef.current = null;
   }, []);
 
-  // 特定のスポットIDで詳細カードを開く（ジャンプ時用）
-  const openSpotById = useCallback((spotId: string) => {
-    setSelectedSpotId(spotId);
-    setIsDetailCardOpen(true);
-    setIsCarouselVisible(false);
+  // 初回カメラ移動済みフラグをリセット
+  const resetInitialCameraFlag = useCallback(() => {
+    setHasInitialCameraMoved(false);
+    processedSpotIdRef.current = null;
   }, []);
 
   return {
@@ -179,6 +224,7 @@ export function useSelectUserMapCard({
     closeCarousel,
     openCarousel,
     resetSelection,
-    openSpotById,
+    resetInitialCameraFlag,
+    hasInitialCameraMoved,
   };
 }

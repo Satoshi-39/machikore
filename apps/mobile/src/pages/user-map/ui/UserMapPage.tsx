@@ -88,13 +88,6 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     }
   }, [user?.id, selectedMap?.id, selectedMap?.user_id, selectedMap?.is_public, mapId, recordView]);
 
-  // スポットIDがある場合はスポットにジャンプ
-  useEffect(() => {
-    if (effectiveSpotId) {
-      setJumpToSpotId(effectiveSpotId);
-    }
-  }, [effectiveSpotId, setJumpToSpotId]);
-
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
   };

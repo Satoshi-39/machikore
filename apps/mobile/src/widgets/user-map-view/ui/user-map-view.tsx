@@ -6,8 +6,7 @@
 
 import { PinDropOverlay, usePinDropStore } from '@/features/drop-pin';
 import { LabelChipsBar } from '@/features/filter-by-label';
-import { useMapControlsVisibility } from '@/features/map-controls';
-import { useSelectedPlaceStore } from '@/features/search-places';
+import { useMapUIMode } from '@/features/map-controls';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 import { ENV } from '@/shared/config';
@@ -23,7 +22,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePinDropAutoCancel, useSpotCamera, useUserMapData } from '../model';
@@ -31,17 +30,12 @@ import { UserMapLabels } from './layers';
 import { SpotCarousel } from './spot-carousel';
 import { SpotDetailCard } from './spot-detail-card';
 
-// 画面サイズと現在地ボタンの位置計算用定数
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-const LOCATION_BUTTON_DEFAULT_BOTTOM = 48;
-const LOCATION_BUTTON_CAROUSEL_OFFSET = 16; // カード上端からのオフセット
-
 interface UserMapViewProps {
   mapId: string | null;
   userId?: string | null;
   currentUserId?: string | null;
   defaultMapId?: string | null;
-  /** 初期表示するスポットID（指定時はカルーセルを非表示にして詳細カードを開く） */
+  /** 初期表示するスポットID（ページ遷移時に使用、カルーセルを非表示にして詳細カードを開く） */
   initialSpotId?: string | null;
   /** 詳細カードが最大化されている時に呼ばれる（ヘッダー非表示用） */
   onDetailCardMaximized?: (isMaximized: boolean) => void;
@@ -106,7 +100,15 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       cameraRef,
     });
 
-    // カード選択状態の管理
+    // マップUIモード管理（現在地ボタンの位置とopacityを一元管理）
+    // useSelectUserMapCardより先に定義（onBeforeCardOpenで使用するため）
+    const mapUIMode = useMapUIMode({
+      isDetailCardOpen: false, // 初期値、後で更新される
+      isCarouselVisible: true,
+      hasSpots: spots.length > 0,
+    });
+
+    // カード選択状態の管理（スポット選択ロジックを一元管理）
     const {
       selectedSpot,
       isDetailCardOpen,
@@ -115,43 +117,30 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       handleSpotSelect,
       handleCarouselSpotFocus,
       handleCameraMove,
-      handleCarouselSpotPress: baseHandleCarouselSpotPress,
-      handleDetailCardClose: baseHandleDetailCardClose,
+      handleCarouselSpotPress,
+      handleDetailCardClose,
       closeCarousel,
       openCarousel,
       resetSelection,
-      openSpotById,
+      resetInitialCameraFlag,
+      hasInitialCameraMoved,
     } = useSelectUserMapCard({
       spots,
       initialSpotId,
+      isMapReady,
       moveCameraToSpot: moveCameraToSingleSpot,
       onDetailCardMaximized,
+      onBeforeCardOpen: mapUIMode.handleCardOpen,
     });
 
-    // マップコントロールの表示制御（現在地ボタン・全スポットボタン）
-    // user-map-viewではカルーセル表示中はボタンを隠すので、autoShowOnCardCloseはfalse
-    const controlsVisibility = useMapControlsVisibility({
-      hasCard: isDetailCardOpen,
-      autoShowOnCardClose: false,
+    // マップUIモードを実際の状態で更新
+    // initialSpotIdがある場合は最初から現在地ボタンを非表示にする（ちらつき防止）
+    const actualMapUIMode = useMapUIMode({
+      isDetailCardOpen,
+      isCarouselVisible,
+      hasSpots: spots.length > 0,
+      initiallyHidden: !!initialSpotId,
     });
-
-    // カルーセルからカード表示時のラッパー（初回ちらつき防止）
-    const handleCarouselSpotPress = useCallback(
-      (spot: Parameters<typeof baseHandleCarouselSpotPress>[0]) => {
-        // カード表示前にopacityを0にして、カード表示後にフェードインさせる
-        controlsVisibility.handleCardOpen();
-        baseHandleCarouselSpotPress(spot);
-      },
-      [baseHandleCarouselSpotPress, controlsVisibility]
-    );
-
-    const jumpToSpotId = useSelectedPlaceStore((state) => state.jumpToSpotId);
-    const setJumpToSpotId = useSelectedPlaceStore(
-      (state) => state.setJumpToSpotId
-    );
-
-    // 初回カメラ移動済みフラグ（マップごとにリセット）
-    const hasInitialCameraMoved = useRef(false);
 
     // ピン刺しモードのストア
     const isPinDropMode = usePinDropStore((state) => state.isActive);
@@ -165,15 +154,10 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       if (isPinDropMode) {
         closeCarousel();
         if (isDetailCardOpen) {
-          baseHandleDetailCardClose();
+          handleDetailCardClose();
         }
       }
-    }, [
-      isPinDropMode,
-      closeCarousel,
-      isDetailCardOpen,
-      baseHandleDetailCardClose,
-    ]);
+    }, [isPinDropMode, closeCarousel, isDetailCardOpen, handleDetailCardClose]);
 
     // ピン刺し確定時のハンドラー
     const handlePinDropConfirm = useCallback(() => {
@@ -192,25 +176,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       currentLocation,
     });
 
-    // 詳細カードを閉じる → カルーセルに戻る（閉じるフラグのリセットを追加）
-    const handleDetailCardClose = useCallback(() => {
-      controlsVisibility.resetClosingState();
-      baseHandleDetailCardClose();
-    }, [baseHandleDetailCardClose, controlsVisibility]);
-
-    // カルーセルも詳細カードも閉じた時にボタンを表示
-    // autoShowOnCardClose=falseなので手動で制御
-    useEffect(() => {
-      if (!isCarouselVisible && !isDetailCardOpen) {
-        controlsVisibility.setControlButtonsVisible(true);
-      }
-    }, [isCarouselVisible, isDetailCardOpen, controlsVisibility]);
-
-    // スナップ変更時のハンドラー（snapIndex=2で最大化）
-    // snapIndex: 0=小(15%), 1=中(45%), 2=大(90%)
-    const handleSnapChange = (snapIndex: number) => {
-      onDetailCardMaximized?.(snapIndex === 2);
-    };
+    // スナップ変更時のハンドラー（useMapUIModeに委譲 + 親への通知）
+    const handleSnapChange = useCallback(
+      (snapIndex: number) => {
+        actualMapUIMode.handleSnapChange(snapIndex);
+        onDetailCardMaximized?.(snapIndex === 2);
+      },
+      [actualMapUIMode, onDetailCardMaximized]
+    );
 
     // マップのロード完了ハンドラー
     const handleMapReady = () => {
@@ -231,45 +204,22 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       }
     };
 
-    // mapIdが変更されたらスポット詳細カードを閉じる + カメラ移動フラグをリセット + カルーセル表示をリセット + ラベルフィルタをリセット
+    // mapIdが変更されたらリセット
     useEffect(() => {
-      resetSelection();
-      hasInitialCameraMoved.current = false;
-      resetLabelFilter();
-    }, [mapId, resetSelection, resetLabelFilter]);
-
-    // 新規登録したスポット or 発見タブからのジャンプ
-    useEffect(() => {
-      if (!jumpToSpotId || !isMapReady) return;
-
-      const spot = spots.find((s) => s.id === jumpToSpotId);
-      if (spot) {
-        // 初回カメラ移動済みフラグを立てて全スポット表示をスキップ
-        hasInitialCameraMoved.current = true;
-        setTimeout(() => {
-          moveCameraToSingleSpot(spot);
-          // 詳細カードを開く（カルーセルは非表示）
-          openSpotById(spot.id);
-        }, 100);
-        setJumpToSpotId(null);
+      if (!initialSpotId) {
+        resetSelection();
       }
-    }, [
-      jumpToSpotId,
-      spots,
-      isMapReady,
-      moveCameraToSingleSpot,
-      openSpotById,
-      setJumpToSpotId,
-    ]);
+      resetInitialCameraFlag();
+      resetLabelFilter();
+    }, [mapId, initialSpotId, resetSelection, resetInitialCameraFlag, resetLabelFilter]);
 
-    // 全スポット表示（マップごとに初回のみ、jumpToSpotIdがない場合）
+    // 全スポット表示（マップごとに初回のみ、initialSpotIdやjumpToSpotIdがない場合）
     useEffect(() => {
-      // jumpToSpotIdがある場合はジャンプ処理に任せる
       if (
         spots.length === 0 ||
         !isMapReady ||
-        hasInitialCameraMoved.current ||
-        jumpToSpotId
+        hasInitialCameraMoved ||
+        initialSpotId
       ) {
         return;
       }
@@ -280,12 +230,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         } else {
           fitCameraToAllSpots(spots);
         }
-        hasInitialCameraMoved.current = true;
       }, 100);
     }, [
       spots,
       isMapReady,
-      jumpToSpotId,
+      hasInitialCameraMoved,
+      initialSpotId,
       moveCameraToSingleSpot,
       fitCameraToAllSpots,
     ]);
@@ -323,10 +273,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             animated={true}
           />
 
-          {/* ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ+地名）
-              同じShapeSourceにまとめることで、symbolSortKeyでスポットを優先表示 */}
-          {/* selectedSpotIdは詳細カード表示中のスポット（常に最前面表示）
-              focusedSpotIdはカルーセルでフォーカス中のスポット（アイコン拡大表示） */}
+          {/* ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ+地名） */}
           <UserMapLabels
             spotsGeoJson={spotsGeoJson}
             transportGeoJson={transportHubsGeoJson}
@@ -338,9 +285,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           />
         </Mapbox.MapView>
 
-        {/* ラベルチップバー（show_label_chipsがtrueの場合のみ表示）
-            ヘッダーの下に配置: insets.top + 8(mt-2) + 56(ヘッダー高さ) + 16(余白) = insets.top + 80
-            検索中・カード最大時は非表示（ヘッダーと同じ条件） */}
+        {/* ラベルチップバー */}
         {mapData?.show_label_chips &&
           mapLabels.length > 0 &&
           !isSearchFocused &&
@@ -357,9 +302,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             </View>
           )}
 
-        {/* 全スポット表示ボタン（右上に配置）
-            ラベルチップがある場合はその下、ない場合はヘッダーの下に配置
-            ヘッダーと同じ条件で非表示（検索中・カード最大時） */}
+        {/* 全スポット表示ボタン */}
         {viewMode === 'map' &&
           !isSearchFocused &&
           !isDetailCardMaximized &&
@@ -367,7 +310,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             <View
               className="absolute"
               style={{
-                // ラベルチップがある場合はその下(+130)、ない場合はヘッダーの下(+80)
                 top:
                   insets.top +
                   (mapData?.show_label_chips && mapLabels.length > 0
@@ -384,7 +326,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                   } else {
                     fitCameraToAllSpots(filteredSpots);
                   }
-                  // カルーセルを再表示
                   openCarousel();
                 }}
                 testID="fit-all-button"
@@ -392,27 +333,22 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             </View>
           )}
 
-        {/* 現在地ボタン（右下）
-            - カルーセルが実際に表示されている時 → 非表示
-            - カルーセル非表示または詳細カード表示中 → 表示
-            - 詳細カード「小」→ カード上に表示、「中」「大」→ フェードアウト */}
+        {/* 現在地ボタン */}
         {viewMode === 'map' &&
           !isSearchFocused &&
-          !(isCarouselVisible && !isDetailCardOpen && spots.length > 0) && (
+          actualMapUIMode.shouldShowLocationButton && (
             <Animated.View
               style={[
                 {
                   position: 'absolute',
                   right: 24,
                   zIndex: 50,
-                  bottom: isDetailCardOpen
-                    ? SCREEN_HEIGHT * 0.11 + LOCATION_BUTTON_CAROUSEL_OFFSET // 詳細カード「小」(12%)の上
-                    : LOCATION_BUTTON_DEFAULT_BOTTOM, // 通常位置
+                  bottom: actualMapUIMode.locationButtonBottom,
                 },
-                controlsVisibility.controlButtonsAnimatedStyle,
+                actualMapUIMode.locationButtonAnimatedStyle,
               ]}
               pointerEvents={
-                controlsVisibility.isButtonsTouchable ? 'auto' : 'none'
+                actualMapUIMode.isLocationButtonTouchable ? 'auto' : 'none'
               }
             >
               <LocationButton
@@ -422,7 +358,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             </Animated.View>
           )}
 
-        {/* スポットカルーセル（詳細カードが開いていない時のみ表示） */}
+        {/* スポットカルーセル */}
         {viewMode === 'map' &&
           !isSearchFocused &&
           !isDetailCardOpen &&
@@ -453,9 +389,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             onEdit={onEditSpot}
             onDelete={onDeleteSpot}
             onSearchBarVisibilityChange={onDetailCardMaximized}
-            onBeforeClose={controlsVisibility.handleBeforeClose}
+            onBeforeClose={actualMapUIMode.handleBeforeCardClose}
             onLocationButtonVisibilityChange={
-              controlsVisibility.handleControlButtonsVisibilityChange
+              actualMapUIMode.handleLocationButtonVisibilityChange
             }
             onCameraMove={() => handleCameraMove(selectedSpot)}
           />
