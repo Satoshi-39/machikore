@@ -17,7 +17,8 @@ export {
   clearAllTileCache,
 } from './tile-cache-service';
 export {
-  setupQueryPersister,
+  setupStaticQueryPersister,
+  setupDynamicQueryPersister,
   clearPersistedCache,
   getPersistedCacheSize,
 } from './query-persister';

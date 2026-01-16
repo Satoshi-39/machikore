@@ -63,11 +63,40 @@ export const DYNAMIC_DATA_CACHE_CONFIG = {
 export const PERSISTER_STORAGE_KEY = 'MACHIKORE_QUERY_CACHE';
 
 /**
- * 永続化対象のクエリキープレフィックス
+ * 動的データ永続化のストレージキー
+ */
+export const DYNAMIC_PERSISTER_STORAGE_KEY = 'MACHIKORE_DYNAMIC_CACHE';
+
+/**
+ * 永続化対象のクエリキープレフィックス（静的データ - 30日保持）
  *
  * これらのプレフィックスを持つクエリのみAsyncStorageに永続化
  *
  * Note:
  * - machi/cities/transport_hubsはSQLiteでタイル単位にキャッシュするため対象外
  */
-export const PERSISTED_QUERY_PREFIXES = ['prefectures'] as const;
+export const PERSISTED_QUERY_PREFIXES = ['prefectures', 'categories'] as const;
+
+/**
+ * 動的データ永続化対象のクエリキープレフィックス（1日保持）
+ *
+ * オフライン時に前回のデータを表示するため、フィード系データを永続化
+ */
+export const DYNAMIC_PERSISTED_QUERY_PREFIXES = [
+  'maps',           // マップ一覧・詳細
+  'spots',          // スポット一覧・詳細
+  'popular-maps',   // 人気マップ
+  'today-picks-maps', // 今日のおすすめ
+  'user',           // ユーザー情報
+  'featured-items', // 特集
+  'magazines',      // マガジン
+  'magazine',       // マガジン詳細
+] as const;
+
+/**
+ * 動的データの永続化設定
+ */
+export const DYNAMIC_PERSISTER_CONFIG = {
+  /** 永続化の保存期限（1日） */
+  maxAge: 24 * 60 * 60 * 1000,
+} as const;

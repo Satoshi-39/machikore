@@ -144,3 +144,6 @@ export { NativeAdCard } from './NativeAdCard';
 
 // アクションボタン
 export { DirectionsButton, LikeButton, BookmarkButton, ShareButton } from './action-buttons';
+
+// 写真グリッド
+export { PhotoGrid } from './PhotoGrid';

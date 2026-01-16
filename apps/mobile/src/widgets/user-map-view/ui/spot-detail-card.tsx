@@ -5,14 +5,14 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, Alert } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useRouter } from 'expo-router';
 import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton, PhotoGrid } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotImages } from '@/entities/user-spot/api';
@@ -302,28 +302,13 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
       {/* スクロール可能なコンテンツ */}
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
-        {/* 画像（画像がある場合のみ表示） */}
+        {/* 画像（Google Maps風 横スクロール：大→小小→大→小小...） */}
         {images.length > 0 ? (
-          <View className="mb-3">
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              className="-mx-4 px-4"
-            >
-              {images.map((image, index) => (
-                <Pressable
-                  key={image.id}
-                  onPress={() => handleImagePress(index)}
-                  className="active:opacity-80"
-                >
-                  <Image
-                    source={{ uri: image.cloud_path || '' }}
-                    className="w-32 h-32 rounded-lg mr-2"
-                    resizeMode="cover"
-                  />
-                </Pressable>
-              ))}
-            </ScrollView>
+          <View className="mb-3 -mx-4 px-4">
+            <PhotoGrid
+              images={images.map((img) => img.cloud_path || '').filter(Boolean)}
+              onImagePress={handleImagePress}
+            />
           </View>
         ) : null}
 

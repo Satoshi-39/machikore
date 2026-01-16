@@ -50,15 +50,22 @@ src/
 - データの作成・更新はSupabaseに直接書き込む
 - 認証時に `public.users` テーブルにupsert（外部キー制約を満たすため）
 
-### SQLite = キャッシュ/オフライン対応用
-- Supabaseから取得したデータをローカルにキャッシュ
-- オフライン時の読み取り用
-- 将来的に同期キューでオフライン書き込みに対応予定
+### TanStack Query = APIキャッシュ（メモリ + 永続化）
+- Supabaseからのデータ取得は全てTanStack Query経由
+- `staleTime`/`gcTime`でキャッシュ戦略を制御
+- 楽観的更新（Optimistic Updates）でUX向上
+- 将来的にMMKVで永続化し、オフライン時も直近データを表示
+
+### SQLite = マスタデータのローカルキャッシュ
+- 変化しないデータ（都道府県、市区町村、カテゴリマスタなど）をローカルに保存
+- オフラインでも確実に利用可能
+- 認証時のユーザー情報キャッシュ
 
 ### データフロー
 1. **認証時**: Supabase Auth → `public.users` にupsert → SQLiteにキャッシュ
-2. **データ取得**: Supabaseから取得 → SQLiteにキャッシュ
-3. **データ作成/更新**: Supabaseに保存 → 成功したらSQLiteにも保存
+2. **動的データ取得**: Supabaseから取得 → TanStack Queryでキャッシュ
+3. **マスタデータ取得**: Supabaseから取得 → SQLiteにキャッシュ
+4. **データ作成/更新**: Supabaseに保存 → TanStack Queryのキャッシュを更新（楽観的更新）
 
 ## Supabase マイグレーション
 

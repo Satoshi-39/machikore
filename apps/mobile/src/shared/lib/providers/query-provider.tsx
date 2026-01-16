@@ -7,7 +7,7 @@
 import React, { useEffect } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/shared/api/query-client';
-import { setupQueryPersister } from '@/shared/lib/cache';
+import { setupStaticQueryPersister, setupDynamicQueryPersister } from '@/shared/lib/cache';
 import { log } from '@/shared/config/logger';
 
 interface QueryProviderProps {
@@ -17,22 +17,27 @@ interface QueryProviderProps {
 /**
  * React Query Provider
  *
- * - 永続化: AsyncStorageにキャッシュを保存し、アプリ再起動後も復元
- * - メモリキャッシュはgcTimeで自動解放
- * - タイルベースデータはSQLiteでLRU管理
+ * 2つの永続化戦略:
+ * - 静的データ（マスタデータ）: 30日保持
+ * - 動的データ（フィード、マップ等）: 1日保持（オフライン対応）
  */
 export function QueryProvider({ children }: QueryProviderProps) {
   useEffect(() => {
-    // 永続化をセットアップ
-    let unsubscribePersister: (() => void) | undefined;
+    let unsubscribeStatic: (() => void) | undefined;
+    let unsubscribeDynamic: (() => void) | undefined;
+
     try {
-      unsubscribePersister = setupQueryPersister(queryClient);
+      // 静的データの永続化（30日保持）
+      unsubscribeStatic = setupStaticQueryPersister(queryClient);
+      // 動的データの永続化（1日保持）
+      unsubscribeDynamic = setupDynamicQueryPersister(queryClient);
     } catch (error) {
       log.warn('[QueryProvider] Persisterのセットアップに失敗:', error);
     }
 
     return () => {
-      unsubscribePersister?.();
+      unsubscribeStatic?.();
+      unsubscribeDynamic?.();
     };
   }, []);
 
