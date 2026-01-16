@@ -7,6 +7,8 @@
 
 import * as AvatarPrimitive from '@rn-primitives/avatar';
 import * as React from 'react';
+import { View } from 'react-native';
+import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { cn } from '@/shared/lib/utils';
 import { colors } from '@/shared/config';
@@ -96,15 +98,23 @@ function UserAvatar({
   const preset = isLarge ? IMAGE_PRESETS.avatarLarge : IMAGE_PRESETS.avatar;
   const optimizedUrl = getOptimizedImageUrl(url, preset);
 
+  // expo-imageを直接使用（@rn-primitives/avatarのImageは最適化URLと相性が悪い）
   return (
-    <Avatar alt={alt} className={className}>
+    <View className={cn('relative flex shrink-0 overflow-hidden rounded-full', className)}>
       {optimizedUrl ? (
-        <AvatarImage source={{ uri: optimizedUrl }} />
-      ) : null}
-      <AvatarFallback>
-        <AvatarIcon size={defaultIconSize} />
-      </AvatarFallback>
-    </Avatar>
+        <Image
+          source={{ uri: optimizedUrl }}
+          style={{ width: '100%', height: '100%' }}
+          contentFit="cover"
+          transition={200}
+          cachePolicy="memory-disk"
+        />
+      ) : (
+        <View className="flex h-full w-full items-center justify-center rounded-full bg-muted dark:bg-dark-muted">
+          <AvatarIcon size={defaultIconSize} />
+        </View>
+      )}
+    </View>
   );
 }
 

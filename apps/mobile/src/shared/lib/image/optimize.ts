@@ -78,7 +78,10 @@ export function getOptimizedImageUrl(
   if (width) params.append('width', String(width));
   if (height) params.append('height', String(height));
   params.append('quality', String(quality));
-  params.append('resize', resize);
+  // widthとheightの両方が指定されている場合のみresizeを適用
+  if (width && height) {
+    params.append('resize', resize);
+  }
 
   return `${transformedUrl}?${params.toString()}`;
 }
@@ -99,19 +102,19 @@ export function getOptimalWidth(displayWidth: number): number {
 // ===============================
 
 export const IMAGE_PRESETS = {
-  /** アバター（40-48px表示用） */
-  avatar: { width: 96, quality: 80 },
-  /** アバター大（96px表示用） */
-  avatarLarge: { width: 192, quality: 80 },
-  /** マップサムネイル（フィード用、328px表示） */
-  mapThumbnail: { width: 656, quality: 75 },
-  /** マップサムネイル（グリッド用、小さめ） */
-  mapThumbnailSmall: { width: 400, quality: 75 },
-  /** スポット画像（グリッド用、162px表示） */
-  spotGrid: { width: 324, quality: 75 },
-  /** スポット画像（1枚表示、328px表示） */
-  spotSingle: { width: 656, quality: 80 },
-  /** フルスクリーン表示用 */
+  /** アバター（40-48px表示用、正方形） */
+  avatar: { width: 96, height: 96, quality: 80 },
+  /** アバター大（96px表示用、正方形） */
+  avatarLarge: { width: 192, height: 192, quality: 80 },
+  /** マップサムネイル（フィード用、1.91:1アスペクト比） */
+  mapThumbnail: { width: 656, height: 344, quality: 75 },
+  /** マップサムネイル（グリッド用、小さめ、1.91:1） */
+  mapThumbnailSmall: { width: 400, height: 210, quality: 75 },
+  /** スポット画像（グリッド用、正方形） */
+  spotGrid: { width: 324, height: 324, quality: 75 },
+  /** スポット画像（1枚表示、正方形） */
+  spotSingle: { width: 656, height: 656, quality: 80 },
+  /** フルスクリーン表示用（高さは指定なし、アスペクト比維持） */
   fullscreen: { width: 1200, quality: 85 },
 } as const;
 

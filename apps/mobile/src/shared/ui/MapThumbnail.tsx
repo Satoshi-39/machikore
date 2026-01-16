@@ -40,9 +40,10 @@ export function MapThumbnail({
 }: MapThumbnailProps) {
   const isDarkMode = useIsDarkMode();
 
-  // 表示サイズに応じた最適化URLを生成
+  // 表示サイズに応じた最適化URLを生成（width, height両方指定でresize=cover適用）
   const optimizedUrl = getOptimizedImageUrl(url, {
     width: getOptimalWidth(width),
+    height: getOptimalWidth(height),
     quality: 75,
   });
 

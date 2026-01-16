@@ -56,11 +56,13 @@ export function PhotoGrid({
           const nextImageUrl = images[index + 1];
           const optimizedUrl = getOptimizedImageUrl(imageUrl, {
             width: getOptimalWidth(smallWidth),
+            height: getOptimalWidth(smallHeight),
             quality: 75,
           });
           const nextOptimizedUrl = nextImageUrl
             ? getOptimizedImageUrl(nextImageUrl, {
                 width: getOptimalWidth(smallWidth),
+                height: getOptimalWidth(smallHeight),
                 quality: 75,
               })
             : null;
@@ -101,10 +103,11 @@ export function PhotoGrid({
           return null;
         }
 
-        // 大サイズの画像
+        // 大サイズの画像（正方形）
         if (isLarge) {
           const optimizedUrl = getOptimizedImageUrl(imageUrl, {
             width: getOptimalWidth(largeSize),
+            height: getOptimalWidth(largeSize),
             quality: 75,
           });
           return (

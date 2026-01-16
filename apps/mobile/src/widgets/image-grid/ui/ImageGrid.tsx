@@ -53,9 +53,10 @@ export function ImageGrid({
         const imageWidth = isFullWidth ? containerWidth : halfSize;
         const imageHeight = isSingleImage ? containerWidth * 0.6 : halfSize;
 
-        // 表示サイズに応じた最適化URLを生成
+        // 表示サイズに応じた最適化URLを生成（width, height両方指定でresize=cover適用）
         const optimizedUrl = getOptimizedImageUrl(imageUri, {
           width: getOptimalWidth(imageWidth),
+          height: getOptimalWidth(imageHeight),
           quality: 75,
         });
 
