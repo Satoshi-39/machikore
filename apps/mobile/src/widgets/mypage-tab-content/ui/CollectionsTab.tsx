@@ -14,7 +14,8 @@ import { ErrorView, Loading, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useCallback, useMemo } from 'react';
-import { Alert, FlatList, Image, Pressable, Text, View } from 'react-native';
+import { Alert, FlatList, Pressable, Text, View } from 'react-native';
+import { Image } from 'expo-image';
 
 interface CollectionsTabProps {
   userId: string | null;
@@ -70,8 +71,10 @@ function CollectionCard({
         {collection.thumbnail_url ? (
           <Image
             source={{ uri: collection.thumbnail_url }}
-            className="w-16 h-16 rounded-lg mr-3"
-            resizeMode="cover"
+            style={{ width: 64, height: 64, borderRadius: 8, marginRight: 12 }}
+            contentFit="cover"
+            transition={200}
+            cachePolicy="memory-disk"
           />
         ) : (
           <View

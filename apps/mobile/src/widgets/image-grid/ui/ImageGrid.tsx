@@ -9,7 +9,8 @@
  */
 
 import React from 'react';
-import { View, Image, Pressable, Text, Dimensions } from 'react-native';
+import { View, Pressable, Text, Dimensions } from 'react-native';
+import { Image } from 'expo-image';
 
 interface ImageGridProps {
   /** 画像URL配列 */
@@ -63,7 +64,9 @@ export function ImageGrid({
               <Image
                 source={{ uri: imageUri }}
                 style={{ width: imageWidth, height: imageHeight, borderRadius }}
-                resizeMode="cover"
+                contentFit="cover"
+                transition={200}
+                cachePolicy="memory-disk"
               />
               {isLastWithMore && (
                 <View

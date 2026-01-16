@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-import { View, Text, ScrollView, Image, Pressable } from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { RichTextRenderer, AddressPinIcon } from '@/shared/ui';
@@ -62,8 +63,10 @@ export function ArticleSpotSection({ spot, index, onPress, onImagePress }: Artic
               >
                 <Image
                   source={{ uri: image.cloud_path || '' }}
-                  className="w-48 h-36 rounded-lg mr-2"
-                  resizeMode="cover"
+                  style={{ width: 192, height: 144, borderRadius: 8, marginRight: 8 }}
+                  contentFit="cover"
+                  transition={200}
+                  cachePolicy="memory-disk"
                 />
               </Pressable>
             );

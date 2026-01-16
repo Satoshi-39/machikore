@@ -5,7 +5,8 @@
  */
 
 import React, { useCallback } from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native';
@@ -97,7 +98,10 @@ export function EditProfileForm({
           {avatarUri ? (
             <Image
               source={{ uri: avatarUri }}
-              className="w-24 h-24 rounded-full"
+              style={{ width: 96, height: 96, borderRadius: 48 }}
+              contentFit="cover"
+              transition={200}
+              cachePolicy="memory-disk"
             />
           ) : (
             <View className="w-24 h-24 rounded-full bg-gray-200 items-center justify-center">

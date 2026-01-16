@@ -8,7 +8,8 @@
  */
 
 import React, { useCallback } from 'react';
-import { View, Text, Image, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -34,7 +35,9 @@ function HeaderContent({ imageUrl, title, description }: HeaderContentProps) {
           <Image
             source={{ uri: imageUrl }}
             style={{ width: '100%', height: '100%' }}
-            resizeMode="cover"
+            contentFit="cover"
+            transition={200}
+            cachePolicy="memory-disk"
           />
         </View>
       )}

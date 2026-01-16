@@ -5,8 +5,9 @@
  * ない場合はデフォルトのサムネイル画像を表示
  */
 
-import React, { useState } from 'react';
-import { Image, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
+import { Image } from 'expo-image';
 import { ASSETS, colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -36,14 +37,13 @@ export function MapThumbnail({
   className = '',
   backgroundColor,
 }: MapThumbnailProps) {
-  const [isLoading, setIsLoading] = useState(!!url);
   const isDarkMode = useIsDarkMode();
 
   const source = url
     ? { uri: url }
     : ASSETS.images.defaultMapThumbnail;
 
-  const resizeMode = url ? 'cover' : 'contain';
+  const contentFit = url ? 'cover' : 'contain';
 
   // デフォルト画像の場合はパディングを追加して小さく表示
   const padding = url ? 0 : Math.min(width, height) * paddingRate;
@@ -64,13 +64,6 @@ export function MapThumbnail({
         borderColor: isDarkMode && !backgroundColor ? colors.dark.border : 'transparent',
       }}
     >
-      {/* URLがある場合のみローディングプレースホルダー表示 */}
-      {isLoading && url && (
-        <View
-          className="absolute inset-0 bg-muted dark:bg-dark-muted"
-          style={{ width, height }}
-        />
-      )}
       <Image
         source={source}
         style={{
@@ -78,8 +71,9 @@ export function MapThumbnail({
           height,
           padding,
         }}
-        resizeMode={resizeMode}
-        onLoad={() => setIsLoading(false)}
+        contentFit={contentFit}
+        transition={200}
+        cachePolicy="memory-disk"
       />
     </View>
   );

@@ -5,7 +5,8 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, Alert, ActionSheetIOS, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'react-native';
+import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { colors } from '@/shared/config';
@@ -127,8 +128,9 @@ export function ThumbnailPicker({
         <View className="relative">
           <Image
             source={{ uri: image.uri }}
-            className="w-full h-40 rounded-lg"
-            resizeMode="cover"
+            style={{ width: '100%', height: 160, borderRadius: 8 }}
+            contentFit="cover"
+            transition={200}
           />
           <TouchableOpacity
             onPress={removeImage}

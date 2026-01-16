@@ -5,7 +5,8 @@
  */
 
 import React, { useCallback } from 'react';
-import { View, Text, FlatList, Image, Pressable } from 'react-native';
+import { View, Text, FlatList, Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -69,8 +70,10 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             {collection.thumbnail_url ? (
               <Image
                 source={{ uri: collection.thumbnail_url }}
-                className="w-20 h-20 rounded-xl mr-4"
-                resizeMode="cover"
+                style={{ width: 80, height: 80, borderRadius: 12, marginRight: 16 }}
+                contentFit="cover"
+                transition={200}
+                cachePolicy="memory-disk"
               />
             ) : (
               <View
@@ -121,7 +124,10 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
               {collection.user.avatar_url ? (
                 <Image
                   source={{ uri: collection.user.avatar_url }}
-                  className="w-8 h-8 rounded-full mr-2"
+                  style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8 }}
+                  contentFit="cover"
+                  transition={200}
+                  cachePolicy="memory-disk"
                 />
               ) : (
                 <View className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center mr-2">

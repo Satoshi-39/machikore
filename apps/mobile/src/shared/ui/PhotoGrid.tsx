@@ -7,7 +7,8 @@
  */
 
 import React from 'react';
-import { View, Image, Pressable, ScrollView } from 'react-native';
+import { View, Pressable, ScrollView } from 'react-native';
+import { Image } from 'expo-image';
 
 interface PhotoGridProps {
   /** 画像URL配列 */
@@ -60,9 +61,10 @@ export function PhotoGrid({
               >
                 <Image
                   source={{ uri: imageUrl }}
-                  style={{ width: smallWidth, height: smallHeight }}
-                  className="rounded-lg"
-                  resizeMode="cover"
+                  style={{ width: smallWidth, height: smallHeight, borderRadius: 8 }}
+                  contentFit="cover"
+                  transition={200}
+                  cachePolicy="memory-disk"
                 />
               </Pressable>
               {nextImageUrl && (
@@ -72,9 +74,10 @@ export function PhotoGrid({
                 >
                   <Image
                     source={{ uri: nextImageUrl }}
-                    style={{ width: smallWidth, height: smallHeight }}
-                    className="rounded-lg"
-                    resizeMode="cover"
+                    style={{ width: smallWidth, height: smallHeight, borderRadius: 8 }}
+                    contentFit="cover"
+                    transition={200}
+                    cachePolicy="memory-disk"
                   />
                 </Pressable>
               )}
@@ -97,9 +100,10 @@ export function PhotoGrid({
             >
               <Image
                 source={{ uri: imageUrl }}
-                style={{ width: largeSize, height: largeSize }}
-                className="rounded-lg"
-                resizeMode="cover"
+                style={{ width: largeSize, height: largeSize, borderRadius: 8 }}
+                contentFit="cover"
+                transition={200}
+                cachePolicy="memory-disk"
               />
             </Pressable>
           );

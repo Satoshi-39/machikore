@@ -5,7 +5,8 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, Alert, ActionSheetIOS, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'react-native';
+import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
@@ -191,8 +192,9 @@ export function ImagePickerButton({
             <View key={index} className="relative">
               <Image
                 source={{ uri: image.uri }}
-                className="w-20 h-20 rounded-lg"
-                resizeMode="cover"
+                style={{ width: 80, height: 80, borderRadius: 8 }}
+                contentFit="cover"
+                transition={200}
               />
               <TouchableOpacity
                 onPress={() => removeImage(index)}

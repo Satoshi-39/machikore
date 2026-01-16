@@ -8,7 +8,8 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Image, Alert, Dimensions } from 'react-native';
+import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
+import { Image } from 'expo-image';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
@@ -297,7 +298,10 @@ export function SpotCard({
           {avatarUri ? (
             <Image
               source={{ uri: avatarUri }}
-              className="w-10 h-10 rounded-full mr-3"
+              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12 }}
+              contentFit="cover"
+              transition={200}
+              cachePolicy="memory-disk"
             />
           ) : (
             <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-muted justify-center items-center mr-3">
