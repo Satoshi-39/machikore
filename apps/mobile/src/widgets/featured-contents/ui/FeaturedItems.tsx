@@ -9,7 +9,6 @@ import React, { useRef, useCallback, useState } from 'react';
 import {
   View,
   Text,
-  Image,
   Pressable,
   ScrollView,
   Dimensions,
@@ -18,6 +17,8 @@ import {
   type NativeScrollEvent,
   Linking,
 } from 'react-native';
+import { Image } from 'expo-image';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
@@ -91,9 +92,11 @@ function CarouselCard({ item, onPress }: CarouselCardProps) {
       >
         {/* バナー画像 */}
         <Image
-          source={{ uri: item.image_url }}
+          source={{ uri: getOptimizedImageUrl(item.image_url, IMAGE_PRESETS.mapThumbnail) || item.image_url }}
           style={{ width: '100%', height: '100%' }}
-          resizeMode="cover"
+          contentFit="cover"
+          transition={200}
+          cachePolicy="memory-disk"
         />
 
         {/* グラデーションオーバーレイ + テキスト */}

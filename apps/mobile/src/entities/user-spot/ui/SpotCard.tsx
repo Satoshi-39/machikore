@@ -13,6 +13,7 @@ import { Image } from 'expo-image';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -297,7 +298,7 @@ export function SpotCard({
         <Pressable onPress={() => onUserPress?.(spot.user_id)}>
           {avatarUri ? (
             <Image
-              source={{ uri: avatarUri }}
+              source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
               style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12 }}
               contentFit="cover"
               transition={200}

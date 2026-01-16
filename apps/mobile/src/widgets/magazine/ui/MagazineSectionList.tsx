@@ -10,12 +10,13 @@ import React, { useCallback, useMemo } from 'react';
 import {
   View,
   Text,
-  Image,
   ScrollView,
   Pressable,
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
+import { Image } from 'expo-image';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { Ionicons } from '@expo/vector-icons';
 import {
   useMagazineSections,
@@ -46,9 +47,11 @@ function SectionCard({ section, mapCount, onPress }: SectionCardProps) {
       <View className="absolute inset-0">
         {section.thumbnail_url ? (
           <Image
-            source={{ uri: section.thumbnail_url }}
-            className="w-full h-full"
-            resizeMode="cover"
+            source={{ uri: getOptimizedImageUrl(section.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || section.thumbnail_url }}
+            style={{ width: '100%', height: '100%' }}
+            contentFit="cover"
+            transition={200}
+            cachePolicy="memory-disk"
           />
         ) : (
           <View className="w-full h-full bg-muted dark:bg-dark-muted" />

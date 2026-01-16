@@ -11,6 +11,7 @@ import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { useCurrentTab } from '@/shared/lib/navigation';
@@ -69,7 +70,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             {/* サムネイル */}
             {collection.thumbnail_url ? (
               <Image
-                source={{ uri: collection.thumbnail_url }}
+                source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
                 style={{ width: 80, height: 80, borderRadius: 12, marginRight: 16 }}
                 contentFit="cover"
                 transition={200}
@@ -123,7 +124,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             >
               {collection.user.avatar_url ? (
                 <Image
-                  source={{ uri: collection.user.avatar_url }}
+                  source={{ uri: getOptimizedImageUrl(collection.user.avatar_url, IMAGE_PRESETS.avatar) || collection.user.avatar_url }}
                   style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8 }}
                   contentFit="cover"
                   transition={200}

@@ -11,6 +11,7 @@
 import React from 'react';
 import { View, Pressable, Text, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
+import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
 
 interface ImageGridProps {
   /** 画像URL配列 */
@@ -52,6 +53,12 @@ export function ImageGrid({
         const imageWidth = isFullWidth ? containerWidth : halfSize;
         const imageHeight = isSingleImage ? containerWidth * 0.6 : halfSize;
 
+        // 表示サイズに応じた最適化URLを生成
+        const optimizedUrl = getOptimizedImageUrl(imageUri, {
+          width: getOptimalWidth(imageWidth),
+          quality: 75,
+        });
+
         return (
           <Pressable
             key={`${imageUri}-${index}`}
@@ -62,7 +69,7 @@ export function ImageGrid({
           >
             <View style={{ width: imageWidth, height: imageHeight, position: 'relative' }}>
               <Image
-                source={{ uri: imageUri }}
+                source={{ uri: optimizedUrl || imageUri }}
                 style={{ width: imageWidth, height: imageHeight, borderRadius }}
                 contentFit="cover"
                 transition={200}

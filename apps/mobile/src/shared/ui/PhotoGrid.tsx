@@ -9,6 +9,7 @@
 import React from 'react';
 import { View, Pressable, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
+import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
 
 interface PhotoGridProps {
   /** 画像URL配列 */
@@ -53,6 +54,16 @@ export function PhotoGrid({
         // 小サイズペアの最初の画像の場合、次の画像と一緒に縦積みで表示
         if (isFirstOfSmallPair) {
           const nextImageUrl = images[index + 1];
+          const optimizedUrl = getOptimizedImageUrl(imageUrl, {
+            width: getOptimalWidth(smallWidth),
+            quality: 75,
+          });
+          const nextOptimizedUrl = nextImageUrl
+            ? getOptimizedImageUrl(nextImageUrl, {
+                width: getOptimalWidth(smallWidth),
+                quality: 75,
+              })
+            : null;
           return (
             <View key={`pair-${index}`} className="flex-col" style={{ gap }}>
               <Pressable
@@ -60,7 +71,7 @@ export function PhotoGrid({
                 className="active:opacity-80"
               >
                 <Image
-                  source={{ uri: imageUrl }}
+                  source={{ uri: optimizedUrl || imageUrl }}
                   style={{ width: smallWidth, height: smallHeight, borderRadius: 8 }}
                   contentFit="cover"
                   transition={200}
@@ -73,7 +84,7 @@ export function PhotoGrid({
                   className="active:opacity-80"
                 >
                   <Image
-                    source={{ uri: nextImageUrl }}
+                    source={{ uri: nextOptimizedUrl || nextImageUrl }}
                     style={{ width: smallWidth, height: smallHeight, borderRadius: 8 }}
                     contentFit="cover"
                     transition={200}
@@ -92,6 +103,10 @@ export function PhotoGrid({
 
         // 大サイズの画像
         if (isLarge) {
+          const optimizedUrl = getOptimizedImageUrl(imageUrl, {
+            width: getOptimalWidth(largeSize),
+            quality: 75,
+          });
           return (
             <Pressable
               key={`large-${index}`}
@@ -99,7 +114,7 @@ export function PhotoGrid({
               className="active:opacity-80"
             >
               <Image
-                source={{ uri: imageUrl }}
+                source={{ uri: optimizedUrl || imageUrl }}
                 style={{ width: largeSize, height: largeSize, borderRadius: 8 }}
                 contentFit="cover"
                 transition={200}

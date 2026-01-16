@@ -10,6 +10,7 @@ import type { Collection } from '@/shared/api/supabase/collections';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { ErrorView, Loading, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -70,7 +71,7 @@ function CollectionCard({
         {/* サムネイル or アイコン */}
         {collection.thumbnail_url ? (
           <Image
-            source={{ uri: collection.thumbnail_url }}
+            source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
             style={{ width: 64, height: 64, borderRadius: 8, marginRight: 12 }}
             contentFit="cover"
             transition={200}

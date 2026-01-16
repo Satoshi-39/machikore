@@ -9,6 +9,7 @@ import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
 import { shareMap } from '@/shared/lib';
 import type { MapRow } from '@/shared/types/database.types';
@@ -116,7 +117,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
         <Pressable onPress={() => onUserPress?.(map.user_id)}>
           {avatarUri ? (
             <Image
-              source={{ uri: avatarUri }}
+              source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
               style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12 }}
               contentFit="cover"
               transition={200}

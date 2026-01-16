@@ -10,6 +10,7 @@ import { View } from 'react-native';
 import { Image } from 'expo-image';
 import { ASSETS, colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
 
 interface MapThumbnailProps {
   /** サムネイルURL（nullの場合はデフォルト画像） */
@@ -39,14 +40,20 @@ export function MapThumbnail({
 }: MapThumbnailProps) {
   const isDarkMode = useIsDarkMode();
 
-  const source = url
-    ? { uri: url }
+  // 表示サイズに応じた最適化URLを生成
+  const optimizedUrl = getOptimizedImageUrl(url, {
+    width: getOptimalWidth(width),
+    quality: 75,
+  });
+
+  const source = optimizedUrl
+    ? { uri: optimizedUrl }
     : ASSETS.images.defaultMapThumbnail;
 
-  const contentFit = url ? 'cover' : 'contain';
+  const contentFit = optimizedUrl ? 'cover' : 'contain';
 
   // デフォルト画像の場合はパディングを追加して小さく表示
-  const padding = url ? 0 : Math.min(width, height) * paddingRate;
+  const padding = optimizedUrl ? 0 : Math.min(width, height) * paddingRate;
 
   // 背景色の決定: 指定があればそれを使用、なければダークモード対応のデフォルト
   const bgColor = backgroundColor ?? (isDarkMode ? colors.dark.muted : colors.light.muted);

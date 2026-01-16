@@ -10,6 +10,7 @@ import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { cn } from '@/shared/lib/utils';
 import { colors } from '@/shared/config';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -90,10 +91,15 @@ function UserAvatar({
   // classNameからサイズを推測してアイコンサイズを決定
   const defaultIconSize = iconSize ?? (className?.includes('w-12') ? 24 : className?.includes('w-16') ? 32 : className?.includes('w-20') ? 40 : 20);
 
+  // 表示サイズに応じた最適化プリセットを選択
+  const isLarge = className?.includes('w-16') || className?.includes('w-20') || className?.includes('w-24');
+  const preset = isLarge ? IMAGE_PRESETS.avatarLarge : IMAGE_PRESETS.avatar;
+  const optimizedUrl = getOptimizedImageUrl(url, preset);
+
   return (
     <Avatar alt={alt} className={className}>
-      {url ? (
-        <AvatarImage source={{ uri: url }} />
+      {optimizedUrl ? (
+        <AvatarImage source={{ uri: optimizedUrl }} />
       ) : null}
       <AvatarFallback>
         <AvatarIcon size={defaultIconSize} />
