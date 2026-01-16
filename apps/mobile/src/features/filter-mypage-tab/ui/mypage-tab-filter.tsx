@@ -6,7 +6,6 @@
 
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
-import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -28,7 +27,6 @@ export function MyPageTabFilter({
 }: MyPageTabFilterProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
-  const isDarkMode = useIsDarkMode();
 
   // アクティブ/非アクティブのアイコン色
   const activeColor = colors.primary.DEFAULT;

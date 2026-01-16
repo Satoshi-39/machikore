@@ -35,6 +35,7 @@ export default {
     user: '用户',
     skip: '跳过',
     select: '请选择',
+    report: '举报',
   },
 
   // 标签栏
@@ -190,7 +191,7 @@ export default {
     currentLocationInfo: '从当前位置注册',
     mapPinInfo: '在地图上选择的位置',
     originalSpotName: '原地点名称',
-    oneWordRequired: '用一句话描述这个地点！',
+    oneWordRequired: '简要描述这个地点的特点',
     oneWordPlaceholder: '例：最棒的拉面店',
     spotSummary: '地点概要',
     summaryPlaceholder: '简要描述这个地点的魅力',

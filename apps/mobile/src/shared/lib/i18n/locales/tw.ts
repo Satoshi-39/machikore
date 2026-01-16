@@ -35,6 +35,7 @@ export default {
     user: '用戶',
     skip: '跳過',
     select: '請選擇',
+    report: '檢舉',
   },
 
   // 標籤欄
@@ -190,7 +191,7 @@ export default {
     currentLocationInfo: '從目前位置註冊',
     mapPinInfo: '在地圖上選擇的位置',
     originalSpotName: '原地點名稱',
-    oneWordRequired: '用一句話描述這個地點！',
+    oneWordRequired: '簡要描述這個地點的特點',
     oneWordPlaceholder: '例：最棒的拉麵店',
     spotSummary: '地點概要',
     summaryPlaceholder: '簡要描述這個地點的魅力',

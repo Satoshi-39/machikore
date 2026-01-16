@@ -24,7 +24,7 @@ import { useMapArticle, useUpdateMap } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { extractPlainText } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
-import { extractAddress } from '@/shared/lib/utils/multilang.utils';
+import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
 interface EditArticlePageProps {
   mapId: string;
@@ -196,6 +196,10 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                 // JSONB型の住所を現在のlocaleで抽出
                 const address = extractAddress(spot.master_spot?.google_short_address, locale)
                   || extractAddress(spot.google_short_address, locale);
+                // スポット名を取得（master_spotがあればmaster_spot.name、なければspot.name）
+                const spotName = extractName(spot.master_spot?.name, locale)
+                  || extractName(spot.name, locale)
+                  || spot.description;
 
                 return (
                   <Pressable
@@ -203,13 +207,13 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     onPress={() => handleEditSpot(spot.id)}
                     className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
                   >
-                    {/* セクション番号と一言メモ */}
+                    {/* セクション番号とスポット名 */}
                     <View className="flex-row items-center mb-2">
                       <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">
                         {index + 1}.
                       </Text>
                       <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">
-                        {spot.description}
+                        {spotName}
                       </Text>
                       <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
                     </View>

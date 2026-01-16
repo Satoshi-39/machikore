@@ -215,11 +215,15 @@ export function CreateSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で！（必須） */}
+        {/* このスポットの特徴を簡潔に（必須） */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            {t('spot.oneWordRequired')} <Text className="text-red-500">*</Text>
-          </Text>
+          <View className="flex-row items-center mb-2">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+              {t('spot.oneWordRequired')}
+            </Text>
+            <Ionicons name="pencil" size={14} color={colors.gray[400]} style={{ marginLeft: 6 }} />
+            <Text className="text-red-500 ml-1">*</Text>
+          </View>
           <Input
             value={description}
             onChangeText={setDescription}
@@ -231,6 +235,16 @@ export function CreateSpotForm({
               {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
             </Text>
           </View>
+        </View>
+
+        {/* 写真 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
+          <ImagePickerButton
+            images={images}
+            onImagesChange={setImages}
+            maxImages={INPUT_LIMITS.MAX_IMAGES_PER_SPOT}
+          />
         </View>
 
         {/* 記事 */}
@@ -313,16 +327,6 @@ export function CreateSpotForm({
               {t('spot.labelColorNotice')}
             </Text>
           )}
-        </View>
-
-        {/* 写真 */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
-          <ImagePickerButton
-            images={images}
-            onImagesChange={setImages}
-            maxImages={INPUT_LIMITS.MAX_IMAGES_PER_SPOT}
-          />
         </View>
 
         {/* 登録ボタン */}

@@ -225,96 +225,6 @@ export type Database = {
         }
         Relationships: []
       }
-      category_featured_maps: {
-        Row: {
-          category_id: string
-          created_at: string
-          display_order: number
-          id: string
-          is_active: boolean
-          map_id: string
-          updated_at: string
-        }
-        Insert: {
-          category_id: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          is_active?: boolean
-          map_id: string
-          updated_at?: string
-        }
-        Update: {
-          category_id?: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          is_active?: boolean
-          map_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "category_featured_maps_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "category_featured_maps_map_id_fkey"
-            columns: ["map_id"]
-            isOneToOne: false
-            referencedRelation: "maps"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      category_featured_tags: {
-        Row: {
-          category_id: string
-          created_at: string
-          display_order: number
-          id: string
-          is_active: boolean
-          tag_id: string
-          updated_at: string
-        }
-        Insert: {
-          category_id: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          is_active?: boolean
-          tag_id: string
-          updated_at?: string
-        }
-        Update: {
-          category_id?: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          is_active?: boolean
-          tag_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "category_featured_tags_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "category_featured_tags_tag_id_fkey"
-            columns: ["tag_id"]
-            isOneToOne: false
-            referencedRelation: "tags"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       cities: {
         Row: {
           created_at: string
@@ -700,10 +610,54 @@ export type Database = {
         }
         Relationships: []
       }
-      featured_carousel_items: {
+      featured_category_maps: {
+        Row: {
+          category_id: string
+          created_at: string
+          display_order: number
+          id: string
+          is_active: boolean
+          map_id: string
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          map_id: string
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          map_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "featured_category_maps_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "featured_category_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      featured_items: {
         Row: {
           category_id: string | null
-          content: string | null
           created_at: string
           description: string | null
           display_order: number
@@ -711,15 +665,15 @@ export type Database = {
           id: string
           image_url: string
           is_active: boolean
-          link_type: string
+          link_type: Database["public"]["Enums"]["featured_link_type"]
           link_value: string | null
+          magazine_id: string | null
           starts_at: string | null
           title: string
           updated_at: string
         }
         Insert: {
           category_id?: string | null
-          content?: string | null
           created_at?: string
           description?: string | null
           display_order?: number
@@ -727,15 +681,15 @@ export type Database = {
           id?: string
           image_url: string
           is_active?: boolean
-          link_type?: string
+          link_type?: Database["public"]["Enums"]["featured_link_type"]
           link_value?: string | null
+          magazine_id?: string | null
           starts_at?: string | null
           title: string
           updated_at?: string
         }
         Update: {
           category_id?: string | null
-          content?: string | null
           created_at?: string
           description?: string | null
           display_order?: number
@@ -743,18 +697,26 @@ export type Database = {
           id?: string
           image_url?: string
           is_active?: boolean
-          link_type?: string
+          link_type?: Database["public"]["Enums"]["featured_link_type"]
           link_value?: string | null
+          magazine_id?: string | null
           starts_at?: string | null
           title?: string
           updated_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "featured_carousel_items_category_id_fkey"
+            foreignKeyName: "featured_items_category_id_fkey"
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "featured_items_magazine_id_fkey"
+            columns: ["magazine_id"]
+            isOneToOne: false
+            referencedRelation: "magazines"
             referencedColumns: ["id"]
           },
         ]
@@ -962,6 +924,150 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      magazine_maps: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          is_active: boolean
+          magazine_id: string
+          map_id: string
+          section_id: string | null
+          source_tag: string | null
+          source_type: Database["public"]["Enums"]["featured_source_type"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          magazine_id: string
+          map_id: string
+          section_id?: string | null
+          source_tag?: string | null
+          source_type?: Database["public"]["Enums"]["featured_source_type"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          magazine_id?: string
+          map_id?: string
+          section_id?: string | null
+          source_tag?: string | null
+          source_type?: Database["public"]["Enums"]["featured_source_type"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "magazine_maps_magazine_id_fkey"
+            columns: ["magazine_id"]
+            isOneToOne: false
+            referencedRelation: "magazines"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "magazine_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "magazine_maps_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "magazine_sections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      magazine_sections: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          is_active: boolean
+          magazine_id: string
+          name: string
+          thumbnail_url: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          magazine_id: string
+          name: string
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          magazine_id?: string
+          name?: string
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "magazine_sections_magazine_id_fkey"
+            columns: ["magazine_id"]
+            isOneToOne: false
+            referencedRelation: "magazines"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      magazines: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          published_at: string | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          published_at?: string | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          published_at?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       map_labels: {
         Row: {
@@ -2746,18 +2852,6 @@ export type Database = {
               search_count: number
             }[]
           }
-      get_popular_tags_by_category: {
-        Args: { p_category_id: string; p_limit?: number }
-        Returns: {
-          created_at: string
-          id: string
-          name: string
-          name_translations: Json
-          slug: string
-          updated_at: string
-          usage_count: number
-        }[]
-      }
       gettransactionid: { Args: never; Returns: unknown }
       is_admin_user: { Args: { check_user_id: string }; Returns: boolean }
       is_user_premium: { Args: { p_user_id: string }; Returns: boolean }
@@ -2806,8 +2900,8 @@ export type Database = {
       search_public_maps: {
         Args: { result_limit?: number; search_query: string }
         Returns: {
-          article_intro: string
-          article_outro: string
+          article_intro: Json
+          article_outro: Json
           bookmarks_count: number
           category_id: string
           comments_count: number
@@ -3509,6 +3603,8 @@ export type Database = {
       }
     }
     Enums: {
+      featured_link_type: "url" | "magazine"
+      featured_source_type: "tag" | "manual"
       report_reason:
         | "spam"
         | "inappropriate"
@@ -3653,6 +3749,8 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      featured_link_type: ["url", "magazine"],
+      featured_source_type: ["tag", "manual"],
       report_reason: [
         "spam",
         "inappropriate",

@@ -12,18 +12,34 @@ import { useSpotWithDetails, useUpdateSpot } from '@/entities/user-spot/api';
 import { ArticleEditor } from '@/features/edit-article';
 import { colors } from '@/shared/config';
 import type { ProseMirrorDoc } from '@/shared/types';
+import type { Json } from '@/shared/types/database.types';
 import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
+import { extractName } from '@/shared/lib/utils/multilang.utils';
 
 interface EditSpotArticlePageProps {
   spotId: string;
 }
 
 export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: spot, isLoading } = useSpotWithDetails(spotId, currentUserId);
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
+
+  // スポット名を取得（マスタースポットがあればmaster_spot.name、なければspot.name）
+  const getSpotName = (): string => {
+    if (!spot) return t('editArticle.title');
+    // master_spotがある場合
+    if (spot.master_spot?.name) {
+      return extractName(spot.master_spot.name, locale) || t('editArticle.title');
+    }
+    // ピン刺し・現在地登録の場合（master_spot_idがnull）
+    if (spot.name) {
+      return extractName(spot.name as Json, locale) || t('editArticle.title');
+    }
+    return t('editArticle.title');
+  };
 
   const handleSave = useCallback(async (content: ProseMirrorDoc | null): Promise<boolean> => {
     if (!spot) return false;
@@ -70,7 +86,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
 
   return (
     <ArticleEditor
-      title={spot?.description || t('editArticle.title')}
+      title={getSpotName()}
       initialArticleContent={spot?.article_content || null}
       onSave={handleSave}
       isSaving={isSaving}

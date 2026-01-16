@@ -35,6 +35,7 @@ export default {
     user: 'User',
     skip: 'Skip',
     select: 'Select',
+    report: 'Report',
   },
 
   // Tabs
@@ -190,7 +191,7 @@ export default {
     currentLocationInfo: 'Register from current location',
     mapPinInfo: 'Selected location on map',
     originalSpotName: 'Original Spot Name',
-    oneWordRequired: 'Describe this spot in one word!',
+    oneWordRequired: 'Briefly describe this spot',
     oneWordPlaceholder: 'e.g. Best ramen shop',
     spotSummary: 'Spot Summary',
     summaryPlaceholder: 'Brief description of this spot',

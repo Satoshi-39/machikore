@@ -54,7 +54,6 @@ interface SpotCardProps {
   // Supabase SpotWithDetails（詳細用）またはUserSpotSearchResult（検索/フィード用）
   spot: SpotWithDetails | UserSpotSearchResult;
   currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用、いいね機能にも使用）
-  machiName?: string;
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
   onMapPress?: (mapId: string) => void;
@@ -73,7 +72,6 @@ interface SpotCardProps {
 export function SpotCard({
   spot,
   currentUserId,
-  machiName,
   onPress,
   onUserPress,
   onMapPress,
@@ -136,7 +134,6 @@ export function SpotCard({
 
   // 記事展開状態
   const [isArticleExpanded, setIsArticleExpanded] = useState(false);
-
 
   // 画像拡大表示用
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImages, closeImage } = useImageViewer();
@@ -337,7 +334,7 @@ export function SpotCard({
         </Text>
       </View>
 
-      {/* 説明 */}
+      {/* 一言（description） */}
       {spot.description && (
         <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
           {spot.description}
@@ -374,8 +371,8 @@ export function SpotCard({
         onClose={closeImage}
       />
 
-      {/* 住所または街情報 */}
-      {(address || machiName) && (
+      {/* 住所 */}
+      {address && (
         <View className="flex-row items-center mb-2">
           <AddressPinIcon
             size={14}
@@ -383,7 +380,7 @@ export function SpotCard({
             holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight}
           />
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
-            {address || machiName}
+            {address}
           </Text>
         </View>
       )}

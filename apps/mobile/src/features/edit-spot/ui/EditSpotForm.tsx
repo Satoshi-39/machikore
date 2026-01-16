@@ -258,11 +258,15 @@ export function EditSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で！（必須） */}
+        {/* このスポットの特徴を簡潔に（必須） */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            {t('spot.oneWordRequired')} <Text className="text-red-500">*</Text>
-          </Text>
+          <View className="flex-row items-center mb-2">
+            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+              {t('spot.oneWordRequired')}
+            </Text>
+            <Ionicons name="pencil" size={14} color={colors.gray[400]} style={{ marginLeft: 6 }} />
+            <Text className="text-red-500 ml-1">*</Text>
+          </View>
           <Input
             value={description}
             onChangeText={setDescription}
@@ -274,6 +278,54 @@ export function EditSpotForm({
               {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
             </Text>
           </View>
+        </View>
+
+        {/* 写真 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
+
+          {/* 既存の画像 */}
+          {displayedExistingImages.length > 0 && (
+            <View className="mb-3">
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.existingPhotos')}</Text>
+              <View className="flex-row flex-wrap gap-2">
+                {displayedExistingImages.map((image) => (
+                  <View key={image.id} className="relative">
+                    <Image
+                      source={{ uri: image.cloud_path || '' }}
+                      className="w-20 h-20 rounded-lg"
+                      resizeMode="cover"
+                    />
+                    <TouchableOpacity
+                      onPress={() => handleDeleteExistingImage(image.id)}
+                      className="absolute -top-2 -right-2 bg-red-500 rounded-full w-6 h-6 items-center justify-center"
+                    >
+                      <Ionicons name="close" size={16} color="white" />
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/* 新しい画像の追加 */}
+          {maxNewImages > 0 && (
+            <View>
+              {newImages.length > 0 && (
+                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.newPhotos')}</Text>
+              )}
+              <ImagePickerButton
+                images={newImages}
+                onImagesChange={setNewImages}
+                maxImages={maxNewImages}
+                hideCount
+              />
+            </View>
+          )}
+
+          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+            {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: INPUT_LIMITS.MAX_IMAGES_PER_SPOT })}
+          </Text>
         </View>
 
         {/* 記事 */}
@@ -341,54 +393,6 @@ export function EditSpotForm({
               {t('spot.labelColorNotice')}
             </Text>
           )}
-        </View>
-
-        {/* 写真 */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
-
-          {/* 既存の画像 */}
-          {displayedExistingImages.length > 0 && (
-            <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.existingPhotos')}</Text>
-              <View className="flex-row flex-wrap gap-2">
-                {displayedExistingImages.map((image) => (
-                  <View key={image.id} className="relative">
-                    <Image
-                      source={{ uri: image.cloud_path || '' }}
-                      className="w-20 h-20 rounded-lg"
-                      resizeMode="cover"
-                    />
-                    <TouchableOpacity
-                      onPress={() => handleDeleteExistingImage(image.id)}
-                      className="absolute -top-2 -right-2 bg-red-500 rounded-full w-6 h-6 items-center justify-center"
-                    >
-                      <Ionicons name="close" size={16} color="white" />
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </View>
-            </View>
-          )}
-
-          {/* 新しい画像の追加 */}
-          {maxNewImages > 0 && (
-            <View>
-              {newImages.length > 0 && (
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.newPhotos')}</Text>
-              )}
-              <ImagePickerButton
-                images={newImages}
-                onImagesChange={setNewImages}
-                maxImages={maxNewImages}
-                hideCount
-              />
-            </View>
-          )}
-
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
-            {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: INPUT_LIMITS.MAX_IMAGES_PER_SPOT })}
-          </Text>
         </View>
 
         {/* 更新ボタン */}

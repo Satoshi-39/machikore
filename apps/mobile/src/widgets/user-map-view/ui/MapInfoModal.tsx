@@ -17,8 +17,9 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
-import { getThumbnailHeight } from '@/shared/config';
+import { getThumbnailHeight, colors } from '@/shared/config';
 import { MapThumbnail } from '@/shared/ui';
 import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
 
@@ -45,6 +46,7 @@ export function MapInfoModal({
 }: MapInfoModalProps) {
   const { t, locale } = useI18n();
   const insets = useSafeAreaInsets();
+  const isDarkMode = useIsDarkMode();
 
   // スポット名を取得するヘルパー
   const getSpotName = useCallback(
@@ -143,6 +145,7 @@ export function MapInfoModal({
                 height={getThumbnailHeight(112)}
                 borderRadius={6}
                 defaultImagePadding={0.1}
+                backgroundColor={isDarkMode ? colors.black : undefined}
               />
             </View>
 

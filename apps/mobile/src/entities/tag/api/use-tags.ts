@@ -10,7 +10,6 @@ import {
   getTagsBySpotId,
   setMapTags,
   setSpotTags,
-  getCategoryTags,
   type Tag,
 } from '@/shared/api/supabase/tags';
 
@@ -20,7 +19,6 @@ const TAG_QUERY_KEYS = {
   search: (query: string) => [...TAG_QUERY_KEYS.all, 'search', query] as const,
   byMap: (mapId: string) => [...TAG_QUERY_KEYS.all, 'map', mapId] as const,
   bySpot: (spotId: string) => [...TAG_QUERY_KEYS.all, 'spot', spotId] as const,
-  byCategory: (categoryId: string) => [...TAG_QUERY_KEYS.all, 'category', categoryId] as const,
 };
 
 /**
@@ -102,14 +100,3 @@ export function useUpdateSpotTags() {
   });
 }
 
-/**
- * カテゴリ別タグを取得（ハイブリッド: 運営選定 + 人気）
- */
-export function useCategoryTags(categoryId: string, limit: number = 10) {
-  return useQuery<Tag[], Error>({
-    queryKey: TAG_QUERY_KEYS.byCategory(categoryId),
-    queryFn: () => getCategoryTags(categoryId, limit),
-    enabled: !!categoryId,
-    staleTime: 1000 * 60 * 5, // 5分キャッシュ
-  });
-}

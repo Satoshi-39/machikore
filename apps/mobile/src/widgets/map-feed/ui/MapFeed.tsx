@@ -15,14 +15,11 @@ import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useMapActions } from '@/features/map-actions';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import type { MapWithUser } from '@/shared/types';
 
 const PAGE_SIZE = 10;
-
-/** 広告を挿入する間隔（マップ5件ごとに1広告） */
-const AD_INTERVAL = 5;
 
 type FeedItem =
   | { type: 'map'; data: MapWithUser }
@@ -100,8 +97,8 @@ export function MapFeed({
     maps.forEach((map, index) => {
       items.push({ type: 'map', data: map });
 
-      // AD_INTERVAL件ごとに広告を挿入（最後のアイテムの後には挿入しない）
-      if ((index + 1) % AD_INTERVAL === 0 && index < maps.length - 1) {
+      // FEED_AD_INTERVAL件ごとに広告を挿入（最後のアイテムの後には挿入しない）
+      if ((index + 1) % AD_CONFIG.FEED_AD_INTERVAL === 0 && index < maps.length - 1) {
         items.push({ type: 'ad', id: `ad-${index}` });
       }
     });

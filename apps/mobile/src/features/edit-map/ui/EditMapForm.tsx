@@ -277,6 +277,17 @@ export function EditMapForm({
           />
         </View>
 
+        {/* サムネイル */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            {t('editMap.thumbnailLabel')}
+          </Text>
+          <ThumbnailPicker
+            image={thumbnailImage}
+            onImageChange={setThumbnailImage}
+          />
+        </View>
+
         {/* ラベル管理 */}
         {isLabelsLoading ? (
           <View className="mb-6">
@@ -328,17 +339,6 @@ export function EditMapForm({
             onTagsChange={setTags}
             placeholder={t('editMap.tagsPlaceholder')}
             maxTags={10}
-          />
-        </View>
-
-        {/* サムネイル */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            {t('editMap.thumbnailLabel')}
-          </Text>
-          <ThumbnailPicker
-            image={thumbnailImage}
-            onImageChange={setThumbnailImage}
           />
         </View>
 

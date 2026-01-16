@@ -205,7 +205,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
   if (isLoading) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title={t('editArticle.editOutro')} />
+        <PageHeader title={t('editArticle.outro')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -232,7 +232,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
   if (!map || map.user_id !== currentUserId) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title={t('editArticle.editOutro')} />
+        <PageHeader title={t('editArticle.outro')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
@@ -250,7 +250,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader
-        title={t('editArticle.editOutro')}
+        title={t('editArticle.outro')}
         onBack={handleBack}
         rightComponent={saveButton}
       />

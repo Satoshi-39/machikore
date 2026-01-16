@@ -11,8 +11,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { CategoryChips, type CategoryId } from '@/widgets/category-chips';
-import { FeaturedCarousel, CategoryFeaturedSection } from '@/widgets/featured-carousel';
-import { useFeaturedCarouselItems } from '@/entities/featured-carousel';
+import { FeaturedItems, FeaturedCategoryMaps } from '@/widgets/featured-contents';
+import { useFeaturedItems } from '@/entities/featured-contents';
 import { RecentlyViewedSection } from '@/widgets/recently-viewed';
 import {
   TodayRankingSection,
@@ -30,8 +30,8 @@ export function DiscoverPage() {
   const { t } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState<CategoryId>('all');
 
-  // カテゴリ別の特集カルーセルアイテムを取得
-  const { data: featuredItems } = useFeaturedCarouselItems(selectedCategory);
+  // カテゴリ別の特集アイテムを取得
+  const { data: featuredItems } = useFeaturedItems(selectedCategory);
 
   // 検索バータップで検索画面に遷移
   const handleSearchPress = useCallback(() => {
@@ -68,8 +68,8 @@ export function DiscoverPage() {
           {selectedCategory === 'all' ? (
             /* すべて選択時: 通常のコンテンツ表示 */
             <>
-              {/* 特集カルーセル */}
-              <FeaturedCarousel />
+              {/* 特集アイテムカルーセル */}
+              <FeaturedItems />
 
               {/* 最近見たマップ（ログイン時のみ表示） */}
               <RecentlyViewedSection />
@@ -91,9 +91,9 @@ export function DiscoverPage() {
             <>
               {/* 特集がある場合はカルーセル、なければ運営選定のおすすめマップ */}
               {featuredItems && featuredItems.length > 0 ? (
-                <FeaturedCarousel categoryId={selectedCategory} />
+                <FeaturedItems categoryId={selectedCategory} />
               ) : (
-                <CategoryFeaturedSection categoryId={selectedCategory} />
+                <FeaturedCategoryMaps categoryId={selectedCategory} />
               )}
 
               {/* 新着マップ */}

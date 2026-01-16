@@ -205,7 +205,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   if (isLoading) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title={t('editArticle.editIntro')} />
+        <PageHeader title={t('editArticle.intro')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
         </View>
@@ -232,7 +232,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   if (!map || map.user_id !== currentUserId) {
     return (
       <View className="flex-1 bg-surface dark:bg-dark-surface">
-        <PageHeader title={t('editArticle.editIntro')} />
+        <PageHeader title={t('editArticle.intro')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
@@ -250,7 +250,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader
-        title={t('editArticle.editIntro')}
+        title={t('editArticle.intro')}
         onBack={handleBack}
         rightComponent={saveButton}
       />

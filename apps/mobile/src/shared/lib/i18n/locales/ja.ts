@@ -35,6 +35,7 @@ export default {
     user: 'ユーザー',
     skip: 'スキップ',
     select: '選択してください',
+    report: '通報',
   },
 
   // タブ
@@ -188,7 +189,7 @@ export default {
     currentLocationInfo: '現在地から登録',
     mapPinInfo: '地図上で選択した位置',
     originalSpotName: 'スポット名（元）',
-    oneWordRequired: 'このスポットを一言で！',
+    oneWordRequired: 'このスポットの特徴を簡潔に',
     oneWordPlaceholder: '例：最高のラーメン屋',
     spotSummary: 'スポットの概要',
     summaryPlaceholder: 'このスポットの魅力を簡潔に',

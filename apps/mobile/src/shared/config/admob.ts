@@ -4,6 +4,16 @@ import Constants from 'expo-constants';
 
 export type AdUnitType = 'banner' | 'interstitial' | 'native';
 
+/**
+ * 広告表示設定
+ */
+export const AD_CONFIG = {
+  /** フィード内で広告を表示する間隔（何件ごとに1広告） */
+  FEED_AD_INTERVAL: 5,
+  /** 検索結果内で広告を表示する間隔（何件ごとに1広告） */
+  SEARCH_AD_INTERVAL: 5,
+} as const;
+
 const TEST_AD_UNITS = {
   banner: {
     ios: 'ca-app-pub-3940256099942544/2934735716',

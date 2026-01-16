@@ -7,7 +7,8 @@
 
 import React, { useState } from 'react';
 import { Image, View } from 'react-native';
-import { ASSETS } from '@/shared/config';
+import { ASSETS, colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface MapThumbnailProps {
   /** サムネイルURL（nullの場合はデフォルト画像） */
@@ -22,6 +23,8 @@ interface MapThumbnailProps {
   defaultImagePadding?: number;
   /** 追加のクラス名 */
   className?: string;
+  /** 背景色（指定時はデフォルトの背景色を上書き） */
+  backgroundColor?: string;
 }
 
 export function MapThumbnail({
@@ -31,8 +34,10 @@ export function MapThumbnail({
   borderRadius = 8,
   defaultImagePadding: paddingRate = 0.2,
   className = '',
+  backgroundColor,
 }: MapThumbnailProps) {
   const [isLoading, setIsLoading] = useState(!!url);
+  const isDarkMode = useIsDarkMode();
 
   const source = url
     ? { uri: url }
@@ -43,10 +48,21 @@ export function MapThumbnail({
   // デフォルト画像の場合はパディングを追加して小さく表示
   const padding = url ? 0 : Math.min(width, height) * paddingRate;
 
+  // 背景色の決定: 指定があればそれを使用、なければダークモード対応のデフォルト
+  const bgColor = backgroundColor ?? (isDarkMode ? colors.dark.muted : colors.light.muted);
+
   return (
     <View
-      className={`overflow-hidden bg-muted dark:bg-dark-muted ${className}`}
-      style={{ width, height, borderRadius }}
+      className={`overflow-hidden ${className}`}
+      style={{
+        width,
+        height,
+        borderRadius,
+        backgroundColor: bgColor,
+        // ダークモード時かつ背景色未指定の場合はボーダーを追加して境界を明確にする
+        borderWidth: isDarkMode && !backgroundColor ? 1 : 0,
+        borderColor: isDarkMode && !backgroundColor ? colors.dark.border : 'transparent',
+      }}
     >
       {/* URLがある場合のみローディングプレースホルダー表示 */}
       {isLoading && url && (

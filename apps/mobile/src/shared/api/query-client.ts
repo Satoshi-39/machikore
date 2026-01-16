@@ -207,15 +207,23 @@ export const QUERY_KEYS = {
   tags: () => ['tags'] as const,
 
   // ===============================
-  // フィーチャー
+  // 特集
   // ===============================
-  featuredCarousel: ['featured-carousel-items'] as const,
-  featuredCarouselByCategory: (categoryId?: string) =>
-    [...QUERY_KEYS.featuredCarousel, categoryId ?? 'all'] as const,
-  featuredCarouselDetail: (id: string) =>
-    ['featured-carousel-item', id] as const,
-  categoryFeaturedMaps: (categoryId: string) =>
-    ['category-featured-maps', categoryId] as const,
+  featuredItems: ['featured-items'] as const,
+  featuredItemsByCategory: (categoryId?: string) =>
+    [...QUERY_KEYS.featuredItems, categoryId ?? 'all'] as const,
+  featuredItemDetail: (id: string) =>
+    ['featured-item', id] as const,
+  featuredCategoryMaps: (categoryId: string) =>
+    ['featured-category-maps', categoryId] as const,
+
+  // ===============================
+  // マガジン
+  // ===============================
+  magazines: () => ['magazines'] as const,
+  magazineDetail: (id: string) => ['magazine', id] as const,
+  magazineMaps: (magazineId: string) => ['magazine-maps', magazineId] as const,
+  magazineSections: (magazineId: string) => ['magazine-sections', magazineId] as const,
 
   // ===============================
   // 予定

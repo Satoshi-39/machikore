@@ -189,6 +189,17 @@ export function CreateMapForm({
           />
         </View>
 
+        {/* サムネイル画像 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            {t('map.thumbnail')}
+          </Text>
+          <ThumbnailPicker
+            image={thumbnailImage}
+            onImageChange={setThumbnailImage}
+          />
+        </View>
+
         {/* タグ */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
@@ -199,17 +210,6 @@ export function CreateMapForm({
             onTagsChange={setTags}
             placeholder={t('map.tagsPlaceholder')}
             maxTags={10}
-          />
-        </View>
-
-        {/* サムネイル画像 */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
-            {t('map.thumbnail')}
-          </Text>
-          <ThumbnailPicker
-            image={thumbnailImage}
-            onImageChange={setThumbnailImage}
           />
         </View>
 

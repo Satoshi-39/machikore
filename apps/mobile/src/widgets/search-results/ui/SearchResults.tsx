@@ -9,8 +9,9 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { NativeAdCard } from '@/shared/ui';
 import { useSpotSearch, useSpotTagSearch, SpotCard } from '@/entities/user-spot';
 import { useMapSearch, useMapTagSearch, MapCard } from '@/entities/map';
 import { useUserSearch, UserListItem, useUserStore } from '@/entities/user';
@@ -20,6 +21,24 @@ import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
 
 type SearchResultTab = 'latest' | 'trending' | 'spots' | 'maps' | 'users';
+
+/** 広告付きアイテムの型 */
+type FeedItem<T> =
+  | { type: 'content'; data: T }
+  | { type: 'ad'; id: string };
+
+/** アイテム配列に広告を挿入するヘルパー関数 */
+function insertAdsIntoList<T>(items: T[], interval: number): FeedItem<T>[] {
+  const result: FeedItem<T>[] = [];
+  items.forEach((item, index) => {
+    result.push({ type: 'content', data: item });
+    // interval件ごとに広告を挿入（最後のアイテムの後には挿入しない）
+    if ((index + 1) % interval === 0 && index < items.length - 1) {
+      result.push({ type: 'ad', id: `ad-${index}` });
+    }
+  });
+  return result;
+}
 
 interface SearchResultsProps {
   query: string;
@@ -121,12 +140,12 @@ export function SearchResults({
 
   // 最新タブ: スポットとマップを混合して新着順
   const renderLatestResults = useCallback(() => {
-    const allItems: Array<{ type: 'spot' | 'map'; item: UserSpotSearchResult | MapWithUser; createdAt: string }> = [
+    const sortedItems: Array<{ type: 'spot' | 'map'; item: UserSpotSearchResult | MapWithUser; createdAt: string }> = [
       ...(spots?.map((s) => ({ type: 'spot' as const, item: s, createdAt: s.created_at })) || []),
       ...(maps?.map((m) => ({ type: 'map' as const, item: m, createdAt: m.created_at })) || []),
     ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
-    if (allItems.length === 0) {
+    if (sortedItems.length === 0) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="search-outline" size={48} color={colors.text.tertiary} />
@@ -137,11 +156,20 @@ export function SearchResults({
       );
     }
 
+    // 広告を挿入
+    const feedItems = insertAdsIntoList(sortedItems, AD_CONFIG.SEARCH_AD_INTERVAL);
+
     return (
       <FlatList
-        data={allItems}
-        keyExtractor={(item) => `${item.type}-${item.item.id}`}
-        renderItem={({ item }) => {
+        data={feedItems}
+        keyExtractor={(feedItem) =>
+          feedItem.type === 'ad' ? feedItem.id : `${feedItem.data.type}-${feedItem.data.item.id}`
+        }
+        renderItem={({ item: feedItem }) => {
+          if (feedItem.type === 'ad') {
+            return <NativeAdCard />;
+          }
+          const item = feedItem.data;
           if (item.type === 'spot') {
             return (
               <SpotCard
@@ -179,12 +207,12 @@ export function SearchResults({
 
   // 話題タブ: いいね数でソート
   const renderTrendingResults = useCallback(() => {
-    const allItems: Array<{ type: 'spot' | 'map'; item: UserSpotSearchResult | MapWithUser; likesCount: number }> = [
+    const sortedItems: Array<{ type: 'spot' | 'map'; item: UserSpotSearchResult | MapWithUser; likesCount: number }> = [
       ...(spots?.map((s) => ({ type: 'spot' as const, item: s, likesCount: s.likes_count || 0 })) || []),
       ...(maps?.map((m) => ({ type: 'map' as const, item: m, likesCount: m.likes_count || 0 })) || []),
     ].sort((a, b) => b.likesCount - a.likesCount);
 
-    if (allItems.length === 0) {
+    if (sortedItems.length === 0) {
       return (
         <View className="flex-1 justify-center items-center py-12">
           <Ionicons name="trending-up-outline" size={48} color={colors.text.tertiary} />
@@ -195,11 +223,20 @@ export function SearchResults({
       );
     }
 
+    // 広告を挿入
+    const feedItems = insertAdsIntoList(sortedItems, AD_CONFIG.SEARCH_AD_INTERVAL);
+
     return (
       <FlatList
-        data={allItems}
-        keyExtractor={(item) => `${item.type}-${item.item.id}`}
-        renderItem={({ item }) => {
+        data={feedItems}
+        keyExtractor={(feedItem) =>
+          feedItem.type === 'ad' ? feedItem.id : `${feedItem.data.type}-${feedItem.data.item.id}`
+        }
+        renderItem={({ item: feedItem }) => {
+          if (feedItem.type === 'ad') {
+            return <NativeAdCard />;
+          }
+          const item = feedItem.data;
           if (item.type === 'spot') {
             return (
               <SpotCard
@@ -263,24 +300,31 @@ export function SearchResults({
           </View>
         );
       }
+      // 広告を挿入
+      const feedItems = insertAdsIntoList(spots, AD_CONFIG.SEARCH_AD_INTERVAL);
       return (
         <FlatList
-          data={spots}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <SpotCard
-              spot={item}
-              currentUserId={currentUser?.id}
-              onPress={() => onSpotPress(item.id)}
-              onUserPress={onUserPress}
-              onMapPress={onMapPress}
-              onEdit={handleEditSpot}
-              onDelete={handleDeleteSpot}
-              onReport={handleReportSpot}
-              onCommentPress={onSpotCommentPress}
-              onTagPress={onTagPress}
-            />
-          )}
+          data={feedItems}
+          keyExtractor={(feedItem) => (feedItem.type === 'ad' ? feedItem.id : feedItem.data.id)}
+          renderItem={({ item: feedItem }) => {
+            if (feedItem.type === 'ad') {
+              return <NativeAdCard />;
+            }
+            return (
+              <SpotCard
+                spot={feedItem.data}
+                currentUserId={currentUser?.id}
+                onPress={() => onSpotPress(feedItem.data.id)}
+                onUserPress={onUserPress}
+                onMapPress={onMapPress}
+                onEdit={handleEditSpot}
+                onDelete={handleDeleteSpot}
+                onReport={handleReportSpot}
+                onCommentPress={onSpotCommentPress}
+                onTagPress={onTagPress}
+              />
+            );
+          }}
           showsVerticalScrollIndicator={false}
         />
       );
@@ -297,23 +341,30 @@ export function SearchResults({
           </View>
         );
       }
+      // 広告を挿入
+      const feedItems = insertAdsIntoList(maps, AD_CONFIG.SEARCH_AD_INTERVAL);
       return (
         <FlatList
-          data={maps}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <MapCard
-              map={item}
-              currentUserId={currentUser?.id}
-              onPress={() => onMapPress(item.id)}
-              onUserPress={onUserPress}
-              onEdit={handleEditMap}
-              onDelete={handleDeleteMap}
-              onReport={handleReportMap}
-              onCommentPress={onMapCommentPress}
-              onTagPress={onTagPress}
-            />
-          )}
+          data={feedItems}
+          keyExtractor={(feedItem) => (feedItem.type === 'ad' ? feedItem.id : feedItem.data.id)}
+          renderItem={({ item: feedItem }) => {
+            if (feedItem.type === 'ad') {
+              return <NativeAdCard />;
+            }
+            return (
+              <MapCard
+                map={feedItem.data}
+                currentUserId={currentUser?.id}
+                onPress={() => onMapPress(feedItem.data.id)}
+                onUserPress={onUserPress}
+                onEdit={handleEditMap}
+                onDelete={handleDeleteMap}
+                onReport={handleReportMap}
+                onCommentPress={onMapCommentPress}
+                onTagPress={onTagPress}
+              />
+            );
+          }}
           showsVerticalScrollIndicator={false}
         />
       );
@@ -330,13 +381,20 @@ export function SearchResults({
           </View>
         );
       }
+      // 広告を挿入
+      const feedItems = insertAdsIntoList(users, AD_CONFIG.SEARCH_AD_INTERVAL);
       return (
         <FlatList
-          data={users}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <UserListItem user={item} onPress={() => onUserPress(item.id)} />
-          )}
+          data={feedItems}
+          keyExtractor={(feedItem) => (feedItem.type === 'ad' ? feedItem.id : feedItem.data.id)}
+          renderItem={({ item: feedItem }) => {
+            if (feedItem.type === 'ad') {
+              return <NativeAdCard />;
+            }
+            return (
+              <UserListItem user={feedItem.data} onPress={() => onUserPress(feedItem.data.id)} />
+            );
+          }}
           showsVerticalScrollIndicator={false}
         />
       );

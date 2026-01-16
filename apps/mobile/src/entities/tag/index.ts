@@ -9,7 +9,6 @@ export {
   useSpotTags,
   useUpdateMapTags,
   useUpdateSpotTags,
-  useCategoryTags,
 } from './api/use-tags';
 
 export type { Tag } from '@/shared/api/supabase/tags';

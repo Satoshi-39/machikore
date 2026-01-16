@@ -5,84 +5,21 @@
  */
 
 import React, { useCallback } from 'react';
-import { View, FlatList, RefreshControl, Text, Pressable } from 'react-native';
+import { View, FlatList, RefreshControl, Text } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import { useMapTagSearch } from '@/entities/map';
-import { getThumbnailHeight } from '@/shared/config';
-import { PageHeader, AsyncBoundary, MapThumbnail } from '@/shared/ui';
+import { useCurrentUserId } from '@/entities/user';
+import { MapListCard } from '@/widgets/map-cards';
+import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
-import type { MapWithUser } from '@/shared/types';
-
-// コンパクトなマップカード
-interface CompactMapCardProps {
-  map: MapWithUser;
-  onPress: () => void;
-}
-
-function CompactMapCard({ map, onPress }: CompactMapCardProps) {
-  return (
-    <Pressable
-      onPress={onPress}
-      className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-gray-100 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-900"
-    >
-      {/* サムネイル（小さめ） */}
-      <MapThumbnail
-        url={map.thumbnail_url}
-        width={128}
-        height={getThumbnailHeight(128)}
-        borderRadius={8}
-        defaultImagePadding={0.15}
-      />
-
-      {/* マップ情報 */}
-      <View className="flex-1 ml-3">
-        <Text
-          className="text-base font-semibold text-text dark:text-dark-text"
-          numberOfLines={1}
-        >
-          {map.name}
-        </Text>
-
-        {/* ユーザー名 */}
-        {map.user && (
-          <Text
-            className="text-sm text-text-secondary dark:text-dark-text-secondary mt-0.5"
-            numberOfLines={1}
-          >
-            @{map.user.username}
-          </Text>
-        )}
-
-        {/* スポット数・いいね数 */}
-        <View className="flex-row items-center mt-1 gap-3">
-          <View className="flex-row items-center">
-            <Ionicons name="location-outline" size={14} color="#9CA3AF" />
-            <Text className="text-xs text-text-secondary dark:text-dark-text-secondary ml-1">
-              {map.spots_count}
-            </Text>
-          </View>
-          <View className="flex-row items-center">
-            <Ionicons name="heart-outline" size={14} color="#9CA3AF" />
-            <Text className="text-xs text-text-secondary dark:text-dark-text-secondary ml-1">
-              {map.likes_count}
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      {/* 矢印 */}
-      <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
-    </Pressable>
-  );
-}
 
 export function TagResultsPage() {
   const router = useRouter();
   const { goBack } = useSafeBack();
   const { tag } = useLocalSearchParams<{ tag: string }>();
+  const currentUserId = useCurrentUserId();
 
   const { data: maps, isLoading, error, refetch, isRefetching } = useMapTagSearch(tag || '');
 
@@ -98,7 +35,7 @@ export function TagResultsPage() {
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
         <PageHeader title="タグ検索" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-text-secondary dark:text-dark-text-secondary">
+          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">
             タグが指定されていません
           </Text>
         </View>
@@ -122,8 +59,9 @@ export function TagResultsPage() {
             data={data}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <CompactMapCard
+              <MapListCard
                 map={item}
+                currentUserId={currentUserId}
                 onPress={() => handleMapPress(item.id)}
               />
             )}
