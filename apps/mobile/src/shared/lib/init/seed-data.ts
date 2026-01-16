@@ -92,7 +92,7 @@ async function createSampleUser(userId: string): Promise<void> {
     // アバター画像をコピー（まだ設定されていない場合）
     if (!existingUser.avatar_url) {
       try {
-        const assetModule = require('../../../../assets/images/tyatsushi.png');
+        const assetModule = require('@assets/images/tyatsushi.png');
         const avatarUri = await copyAssetToFileSystem(assetModule, 'tyatsushi.png');
         log.debug('[SeedData] アバター画像をコピー:', avatarUri);
 
@@ -114,7 +114,7 @@ async function createSampleUser(userId: string): Promise<void> {
   // 新規ユーザーを作成
   let avatarUri: string | null = null;
   try {
-    const assetModule = require('../../../../assets/images/tyatsushi.png');
+    const assetModule = require('@assets/images/tyatsushi.png');
     avatarUri = await copyAssetToFileSystem(assetModule, 'tyatsushi.png');
     log.debug('[SeedData] アバター画像をコピー:', avatarUri);
   } catch (error) {
