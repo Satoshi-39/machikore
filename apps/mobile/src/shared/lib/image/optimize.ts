@@ -9,6 +9,13 @@
  */
 
 /**
+ * Image Transformationが有効かどうか
+ * Supabase Pro Plan以上で有効にする
+ * 環境変数 EXPO_PUBLIC_ENABLE_IMAGE_TRANSFORM=true で有効化
+ */
+const isImageTransformEnabled = process.env.EXPO_PUBLIC_ENABLE_IMAGE_TRANSFORM === 'true';
+
+/**
  * 画像変換オプション
  */
 export interface ImageTransformOptions {
@@ -25,6 +32,9 @@ export interface ImageTransformOptions {
 /**
  * 最適化された画像URLを取得
  *
+ * 注意: Supabase Image TransformationはPro Plan以上で利用可能
+ * Free Planの場合は環境変数を設定せず、元URLをそのまま返す
+ *
  * @example
  * ```typescript
  * // 基本的な使用
@@ -39,6 +49,11 @@ export function getOptimizedImageUrl(
   options: ImageTransformOptions = {}
 ): string | null {
   if (!url) return null;
+
+  // Image Transformationが無効の場合は元URLを返す（Free Plan対応）
+  if (!isImageTransformEnabled) {
+    return url;
+  }
 
   // Supabase Storage URLでない場合はそのまま返す
   const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
