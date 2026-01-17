@@ -101,6 +101,8 @@ export interface UserSpotSearchResult {
   tags?: TagBasicInfo[];
   /** スポットの記事コンテンツ（ProseMirror JSON形式） */
   article_content?: ProseMirrorDoc | null;
+  /** スポット画像のURL配列（JOINで取得） */
+  image_urls?: string[];
 }
 
 /**
@@ -163,6 +165,8 @@ export interface SearchPublicSpotsRpcRow {
   tags: TagBasicInfo[] | null;
   // article content (JSONB → ProseMirror形式)
   article_content: ProseMirrorDoc | null;
+  // 画像URL（配列、RPCで取得）
+  image_urls: string[] | null;
 }
 
 /**
@@ -209,5 +213,6 @@ export function rpcSpotResponseToUserSpotSearchResult(row: SearchPublicSpotsRpcR
     map: row.map_name ? { id: row.map_id, name: row.map_name } : null,
     tags: row.tags && row.tags.length > 0 ? row.tags : undefined,
     article_content: row.article_content,
+    image_urls: row.image_urls && row.image_urls.length > 0 ? row.image_urls : undefined,
   };
 }

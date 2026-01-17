@@ -15,7 +15,6 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton, PhotoGrid } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { useSpotImages } from '@/entities/user-spot/api';
 import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
 import { useSpotTags } from '@/entities/tag';
@@ -111,17 +110,16 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
   const { colorValue: spotColorValue, strokeColor: spotColorStroke } = useSpotColor(spot, isDarkMode);
 
-  // スポットの画像を取得
-  const { data: images = [] } = useSpotImages(spot.id);
+  // スポットの画像（JOINで取得済みのimage_urlsを使用 - N+1問題回避）
+  const images = spot.image_urls || [];
 
   // 画像ビューアー
   const imageViewer = useImageViewer();
 
   // 画像タップハンドラー
   const handleImagePress = useCallback((index: number) => {
-    const imageUrls = images.map((img) => img.cloud_path || '').filter(Boolean);
-    if (imageUrls.length > 0) {
-      imageViewer.openImages(imageUrls, index);
+    if (images.length > 0) {
+      imageViewer.openImages(images, index);
     }
   }, [images, imageViewer]);
 
@@ -303,14 +301,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       {/* スクロール可能なコンテンツ */}
       <BottomSheetScrollView className="px-4" contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}>
         {/* 画像（Google Maps風 横スクロール：大→小小→大→小小...） */}
-        {images.length > 0 ? (
+        {images.length > 0 && (
           <View className="mb-3 -mx-4 px-4">
             <PhotoGrid
-              images={images.map((img) => img.cloud_path || '').filter(Boolean)}
+              images={images}
               onImagePress={handleImagePress}
             />
           </View>
-        ) : null}
+        )}
 
         {/* 住所 */}
         {spotAddress && (

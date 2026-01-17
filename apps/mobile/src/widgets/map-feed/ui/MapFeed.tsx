@@ -8,7 +8,8 @@
  */
 
 import React, { useCallback, useMemo, useRef } from 'react';
-import { FlatList, RefreshControl, ActivityIndicator, View, Text, type ViewToken } from 'react-native';
+import { RefreshControl, ActivityIndicator, View, Text, type ViewToken } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { MapCard } from '@/entities/map';
@@ -230,7 +231,7 @@ export function MapFeed({
       emptyIonIcon={emptyIcon}
     >
       {(items) => (
-        <FlatList
+        <FlashList
           data={items}
           keyExtractor={getItemKey}
           renderItem={renderItem}

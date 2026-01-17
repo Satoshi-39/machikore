@@ -187,6 +187,11 @@ export async function searchPublicSpotsByTag(
           name,
           slug
         )
+      ),
+      spot_images (
+        id,
+        cloud_path,
+        order_index
       )
     `)
     .in('id', spotIds)
@@ -242,5 +247,10 @@ export async function searchPublicSpotsByTag(
       .map((st: any) => st.tags)
       .filter(Boolean),
     article_content: spot.article_content || null,
+    // 画像URLの配列（spot_imagesをorder_indexでソートしてcloud_pathを抽出）
+    image_urls: (spot.spot_images || [])
+      .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0))
+      .map((img: any) => img.cloud_path)
+      .filter(Boolean),
   }));
 }

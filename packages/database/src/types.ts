@@ -2935,7 +2935,9 @@ export type Database = {
           google_formatted_address: Json
           google_short_address: Json
           id: string
+          image_urls: string[]
           images_count: number
+          is_public: boolean
           label_color: string
           label_id: string
           label_name: string

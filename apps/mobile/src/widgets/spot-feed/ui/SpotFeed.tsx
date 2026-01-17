@@ -7,7 +7,8 @@
  */
 
 import React, { useCallback, useMemo, useRef } from 'react';
-import { FlatList, RefreshControl, ActivityIndicator, View, type ViewToken } from 'react-native';
+import { RefreshControl, ActivityIndicator, View, type ViewToken } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
@@ -127,37 +128,35 @@ export function SpotFeed() {
       emptyIonIcon="location-outline"
     >
       {(data) => (
-        <>
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <SpotCard
-                spot={item}
-                currentUserId={currentUser?.id}
-                onPress={() => handleSpotPress(item.map_id, item.id)}
-                onUserPress={handleUserPress}
-                onMapPress={handleMapPress}
-                onEdit={handleEditSpot}
-                onDelete={handleDeleteSpot}
-                onReport={handleReportSpot}
-                onCommentPress={handleCommentPress}
-                // Supabase JOINで取得済みのデータを渡す
-                embeddedUser={item.user}
-                embeddedMasterSpot={item.master_spot}
-              />
-            )}
-            refreshControl={
-              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-            }
-            onEndReached={handleEndReached}
-            onEndReachedThreshold={0.5}
-            ListFooterComponent={renderFooter}
-            showsVerticalScrollIndicator={false}
-            onViewableItemsChanged={handleViewableItemsChanged}
-            viewabilityConfig={viewabilityConfig}
-          />
-        </>
+        <FlashList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <SpotCard
+              spot={item}
+              currentUserId={currentUser?.id}
+              onPress={() => handleSpotPress(item.map_id, item.id)}
+              onUserPress={handleUserPress}
+              onMapPress={handleMapPress}
+              onEdit={handleEditSpot}
+              onDelete={handleDeleteSpot}
+              onReport={handleReportSpot}
+              onCommentPress={handleCommentPress}
+              // Supabase JOINで取得済みのデータを渡す
+              embeddedUser={item.user}
+              embeddedMasterSpot={item.master_spot}
+            />
+          )}
+          refreshControl={
+            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+          }
+          onEndReached={handleEndReached}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={renderFooter}
+          showsVerticalScrollIndicator={false}
+          onViewableItemsChanged={handleViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
+        />
       )}
     </AsyncBoundary>
   );

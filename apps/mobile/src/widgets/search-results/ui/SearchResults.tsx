@@ -7,7 +7,8 @@
  */
 
 import React, { useState, useMemo, useCallback } from 'react';
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -160,7 +161,7 @@ export function SearchResults({
     const feedItems = insertAdsIntoList(sortedItems, AD_CONFIG.SEARCH_AD_INTERVAL);
 
     return (
-      <FlatList
+      <FlashList
         data={feedItems}
         keyExtractor={(feedItem) =>
           feedItem.type === 'ad' ? feedItem.id : `${feedItem.data.type}-${feedItem.data.item.id}`
@@ -227,7 +228,7 @@ export function SearchResults({
     const feedItems = insertAdsIntoList(sortedItems, AD_CONFIG.SEARCH_AD_INTERVAL);
 
     return (
-      <FlatList
+      <FlashList
         data={feedItems}
         keyExtractor={(feedItem) =>
           feedItem.type === 'ad' ? feedItem.id : `${feedItem.data.type}-${feedItem.data.item.id}`
@@ -303,7 +304,7 @@ export function SearchResults({
       // 広告を挿入
       const feedItems = insertAdsIntoList(spots, AD_CONFIG.SEARCH_AD_INTERVAL);
       return (
-        <FlatList
+        <FlashList
           data={feedItems}
           keyExtractor={(feedItem) => (feedItem.type === 'ad' ? feedItem.id : feedItem.data.id)}
           renderItem={({ item: feedItem }) => {
@@ -344,7 +345,7 @@ export function SearchResults({
       // 広告を挿入
       const feedItems = insertAdsIntoList(maps, AD_CONFIG.SEARCH_AD_INTERVAL);
       return (
-        <FlatList
+        <FlashList
           data={feedItems}
           keyExtractor={(feedItem) => (feedItem.type === 'ad' ? feedItem.id : feedItem.data.id)}
           renderItem={({ item: feedItem }) => {
@@ -384,7 +385,7 @@ export function SearchResults({
       // 広告を挿入
       const feedItems = insertAdsIntoList(users, AD_CONFIG.SEARCH_AD_INTERVAL);
       return (
-        <FlatList
+        <FlashList
           data={feedItems}
           keyExtractor={(feedItem) => (feedItem.type === 'ad' ? feedItem.id : feedItem.data.id)}
           renderItem={({ item: feedItem }) => {

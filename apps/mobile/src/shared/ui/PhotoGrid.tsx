@@ -3,7 +3,10 @@
  *
  * FSD: shared/ui - 汎用的な写真表示UI
  *
- * パターン: 大 → 小小（縦積み） → 大 → 小小... の繰り返し横スクロール
+ * レイアウトパターン:
+ * - 1枚: 大サイズ1枚
+ * - 2枚: 同サイズ横並び
+ * - 3枚以上: 大 → 小小（縦積み） → 大 → 小小... の繰り返し横スクロール
  */
 
 import React from 'react';
@@ -38,6 +41,41 @@ export function PhotoGrid({
     return null;
   }
 
+  // 2枚の場合: 同サイズ横並び
+  if (images.length === 2) {
+    return (
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ gap }}
+      >
+        {images.map((imageUrl, index) => {
+          const optimizedUrl = getOptimizedImageUrl(imageUrl, {
+            width: getOptimalWidth(largeSize),
+            height: getOptimalWidth(largeSize),
+            quality: 75,
+          });
+          return (
+            <Pressable
+              key={`equal-${index}`}
+              onPress={() => onImagePress?.(index)}
+              className="active:opacity-80"
+            >
+              <Image
+                source={{ uri: optimizedUrl || imageUrl }}
+                style={{ width: largeSize, height: largeSize, borderRadius: 8 }}
+                contentFit="cover"
+                transition={200}
+                cachePolicy="memory-disk"
+              />
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+    );
+  }
+
+  // 1枚または3枚以上: 大→小小パターン
   return (
     <ScrollView
       horizontal

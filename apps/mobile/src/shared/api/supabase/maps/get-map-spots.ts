@@ -35,6 +35,11 @@ export async function getMapSpots(
       likes (
         id,
         user_id
+      ),
+      images (
+        id,
+        cloud_path,
+        order_index
       )
     `)
     .eq('map_id', mapId)
@@ -87,6 +92,11 @@ export async function getMapSpots(
       } : null,
       user: spot.users || null,
       is_liked: isLiked,
+      // 画像URLの配列（imagesをorder_indexでソートしてcloud_pathを抽出）
+      image_urls: (spot.images || [])
+        .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0))
+        .map((img: any) => img.cloud_path)
+        .filter(Boolean),
     };
   });
 }
