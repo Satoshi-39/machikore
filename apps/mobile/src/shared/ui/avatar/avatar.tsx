@@ -86,7 +86,7 @@ interface UserAvatarProps {
 
 function UserAvatar({
   url,
-  alt = 'User avatar',
+  alt: _alt = 'User avatar',
   className,
   iconSize,
 }: UserAvatarProps) {

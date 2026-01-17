@@ -9,3 +9,12 @@ export {
   type ImageTransformOptions,
   type ImagePresetKey,
 } from './optimize';
+
+export {
+  prefetchImage,
+  prefetchImages,
+  prefetchMapCard,
+  prefetchMapCards,
+  prefetchSpotImages,
+  prefetchFullscreenImages,
+} from './prefetch';

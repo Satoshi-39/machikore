@@ -6,14 +6,15 @@
  * - 無限スクロール対応
  */
 
-import React, { useCallback, useMemo } from 'react';
-import { FlatList, RefreshControl, ActivityIndicator, View } from 'react-native';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { FlatList, RefreshControl, ActivityIndicator, View, type ViewToken } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { prefetchImage, prefetchSpotImages, IMAGE_PRESETS } from '@/shared/lib/image';
 
 export function SpotFeed() {
   const router = useRouter();
@@ -70,6 +71,43 @@ export function SpotFeed() {
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  // 画像プリフェッチ: 表示中のアイテムから先の画像を先読み
+  const prefetchedIndices = useRef<Set<number>>(new Set());
+  const PREFETCH_AHEAD = 5;
+
+  const handleViewableItemsChanged = useCallback(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems.length === 0) return;
+
+      const lastVisibleIndex = Math.max(
+        ...viewableItems.map((item) => item.index ?? 0)
+      );
+
+      for (let i = lastVisibleIndex + 1; i <= lastVisibleIndex + PREFETCH_AHEAD; i++) {
+        if (i < spots.length && !prefetchedIndices.current.has(i)) {
+          const spot = spots[i];
+          if (spot) {
+            prefetchedIndices.current.add(i);
+            // ユーザーアバターをプリフェッチ
+            if (spot.user?.avatar_url) {
+              prefetchImage(spot.user.avatar_url, IMAGE_PRESETS.avatar);
+            }
+            // スポット画像をプリフェッチ（JOINで取得済みのimage_urlsを使用）
+            if (spot.image_urls && spot.image_urls.length > 0) {
+              prefetchSpotImages(spot.image_urls.slice(0, 4)); // 最初の4枚のみ
+            }
+          }
+        }
+      }
+    },
+    [spots]
+  );
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+    minimumViewTime: 100,
+  }).current;
+
   // ローディングフッター
   const renderFooter = useCallback(() => {
     if (!isFetchingNextPage) return null;
@@ -116,6 +154,8 @@ export function SpotFeed() {
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}
             showsVerticalScrollIndicator={false}
+            onViewableItemsChanged={handleViewableItemsChanged}
+            viewabilityConfig={viewabilityConfig}
           />
         </>
       )}

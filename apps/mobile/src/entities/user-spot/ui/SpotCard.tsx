@@ -120,7 +120,16 @@ export function SpotCard({
   const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
   const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
-  const { data: images = [], isLoading: imagesLoading } = useSpotImages(spot.id);
+
+  // image_urlsがJOINで取得済みならuseSpotImagesをスキップ（N+1クエリ回避）
+  const embeddedImageUrls = 'image_urls' in spot ? spot.image_urls : undefined;
+  const { data: fetchedImages = [], isLoading: imagesLoading } = useSpotImages(
+    embeddedImageUrls ? null : spot.id // image_urlsがあればnullを渡してスキップ
+  );
+  // JOINで取得済みの場合はそれを使い、なければfetchした結果を使う
+  const images = embeddedImageUrls
+    ? embeddedImageUrls.map((url, idx) => ({ id: `embedded-${idx}`, cloud_path: url, local_path: null }))
+    : fetchedImages;
 
   // ブックマーク状態
   const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);

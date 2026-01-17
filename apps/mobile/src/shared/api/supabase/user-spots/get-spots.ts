@@ -41,6 +41,11 @@ const SPOTS_SELECT = `
   likes (
     id,
     user_id
+  ),
+  spot_images (
+    id,
+    cloud_path,
+    order_index
   )
 `;
 
@@ -89,6 +94,11 @@ function toSpotWithDetails(spot: any, currentUserId?: string | null): SpotWithDe
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
     is_liked: isLiked,
     article_content: spot.article_content || null,
+    // 画像URLの配列（spot_imagesをorder_indexでソートしてcloud_pathを抽出）
+    image_urls: (spot.spot_images || [])
+      .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0))
+      .map((img: any) => img.cloud_path)
+      .filter(Boolean),
   };
 }
 

@@ -199,6 +199,8 @@ export interface SpotWithDetails {
   is_liked?: boolean;
   /** マップ記事用の紹介文（ProseMirror JSON形式） */
   article_content?: ProseMirrorDoc | null;
+  /** スポット画像のURL配列（フィード表示用、JOINで取得） */
+  image_urls?: string[];
 }
 
 // ===============================

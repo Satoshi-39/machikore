@@ -7,8 +7,8 @@
  * - 広告表示（5件ごと）
  */
 
-import React, { useCallback, useMemo } from 'react';
-import { FlatList, RefreshControl, ActivityIndicator, View, Text } from 'react-native';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { FlatList, RefreshControl, ActivityIndicator, View, Text, type ViewToken } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { MapCard } from '@/entities/map';
@@ -17,6 +17,7 @@ import { useMapActions } from '@/features/map-actions';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { prefetchMapCards } from '@/shared/lib/image';
 import type { MapWithUser } from '@/shared/types';
 
 const PAGE_SIZE = 10;
@@ -132,6 +133,45 @@ export function MapFeed({
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  // 画像プリフェッチ: 表示中のアイテムから先の画像を先読み
+  const prefetchedIndices = useRef<Set<number>>(new Set());
+  const PREFETCH_AHEAD = 5; // 5件先まで先読み
+
+  const handleViewableItemsChanged = useCallback(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems.length === 0) return;
+
+      // 最後に表示されているアイテムのインデックスを取得
+      const lastVisibleIndex = Math.max(
+        ...viewableItems.map((item) => item.index ?? 0)
+      );
+
+      // 先読み対象のマップを収集
+      const mapsToPrefetch: MapWithUser[] = [];
+
+      for (let i = lastVisibleIndex + 1; i <= lastVisibleIndex + PREFETCH_AHEAD; i++) {
+        if (i < feedItems.length && !prefetchedIndices.current.has(i)) {
+          const item = feedItems[i];
+          if (item?.type === 'map') {
+            mapsToPrefetch.push(item.data);
+            prefetchedIndices.current.add(i);
+          }
+        }
+      }
+
+      // バックグラウンドでプリフェッチ
+      if (mapsToPrefetch.length > 0) {
+        prefetchMapCards(mapsToPrefetch);
+      }
+    },
+    [feedItems]
+  );
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+    minimumViewTime: 100,
+  }).current;
+
   const renderFooter = useCallback(() => {
     if (!isFetchingNextPage) return null;
     return (
@@ -201,6 +241,8 @@ export function MapFeed({
           onEndReachedThreshold={0.5}
           ListFooterComponent={renderFooter}
           showsVerticalScrollIndicator={false}
+          onViewableItemsChanged={handleViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
         />
       )}
     </AsyncBoundary>
