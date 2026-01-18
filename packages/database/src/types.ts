@@ -180,6 +180,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "bookmarks_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "bookmarks_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -310,6 +317,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
             referencedColumns: ["id"]
           },
         ]
@@ -449,6 +463,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
             referencedColumns: ["id"]
           },
           {
@@ -653,6 +674,13 @@ export type Database = {
             referencedRelation: "maps"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "featured_category_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       featured_items: {
@@ -835,6 +863,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "likes_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "likes_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -978,6 +1013,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "magazine_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "magazine_maps_section_id_fkey"
             columns: ["section_id"]
             isOneToOne: false
@@ -1105,6 +1147,13 @@ export type Database = {
             referencedRelation: "maps"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "map_labels_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       map_tags: {
@@ -1132,6 +1181,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "map_tags_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
             referencedColumns: ["id"]
           },
           {
@@ -1382,6 +1438,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
             referencedColumns: ["id"]
           },
           {
@@ -2139,6 +2202,7 @@ export type Database = {
         Row: {
           article_content: Json | null
           bookmarks_count: number
+          city_id: string | null
           comments_count: number
           created_at: string
           description: string
@@ -2146,6 +2210,7 @@ export type Database = {
           google_short_address: Json | null
           id: string
           images_count: number
+          is_public: boolean
           label_id: string | null
           language: string | null
           latitude: number
@@ -2156,6 +2221,7 @@ export type Database = {
           master_spot_id: string | null
           name: Json | null
           order_index: number
+          prefecture_id: string | null
           spot_color: string | null
           updated_at: string
           user_id: string
@@ -2163,6 +2229,7 @@ export type Database = {
         Insert: {
           article_content?: Json | null
           bookmarks_count?: number
+          city_id?: string | null
           comments_count?: number
           created_at?: string
           description: string
@@ -2170,6 +2237,7 @@ export type Database = {
           google_short_address?: Json | null
           id?: string
           images_count?: number
+          is_public?: boolean
           label_id?: string | null
           language?: string | null
           latitude: number
@@ -2180,6 +2248,7 @@ export type Database = {
           master_spot_id?: string | null
           name?: Json | null
           order_index?: number
+          prefecture_id?: string | null
           spot_color?: string | null
           updated_at?: string
           user_id: string
@@ -2187,6 +2256,7 @@ export type Database = {
         Update: {
           article_content?: Json | null
           bookmarks_count?: number
+          city_id?: string | null
           comments_count?: number
           created_at?: string
           description?: string
@@ -2194,6 +2264,7 @@ export type Database = {
           google_short_address?: Json | null
           id?: string
           images_count?: number
+          is_public?: boolean
           label_id?: string | null
           language?: string | null
           latitude?: number
@@ -2204,11 +2275,19 @@ export type Database = {
           master_spot_id?: string | null
           name?: Json | null
           order_index?: number
+          prefecture_id?: string | null
           spot_color?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "user_spots_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "user_spots_label_id_fkey"
             columns: ["label_id"]
@@ -2231,10 +2310,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "user_spots_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "user_spots_master_spot_id_fkey"
             columns: ["master_spot_id"]
             isOneToOne: false
             referencedRelation: "master_spots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_spots_prefecture_id_fkey"
+            columns: ["prefecture_id"]
+            isOneToOne: false
+            referencedRelation: "prefectures"
             referencedColumns: ["id"]
           },
           {
@@ -2355,6 +2448,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "view_history_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "maps_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "view_history_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -2461,6 +2561,87 @@ export type Database = {
           type?: string | null
         }
         Relationships: []
+      }
+      maps_public: {
+        Row: {
+          article_intro: Json | null
+          article_outro: Json | null
+          bookmarks_count: number | null
+          category_id: string | null
+          comments_count: number | null
+          created_at: string | null
+          description: string | null
+          id: string | null
+          is_article_public: boolean | null
+          is_official: boolean | null
+          is_public: boolean | null
+          language: string | null
+          likes_count: number | null
+          name: string | null
+          show_label_chips: boolean | null
+          spots_count: number | null
+          thumbnail_url: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          article_intro?: Json | null
+          article_outro?: Json | null
+          bookmarks_count?: number | null
+          category_id?: string | null
+          comments_count?: number | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          is_article_public?: boolean | null
+          is_official?: boolean | null
+          is_public?: boolean | null
+          language?: string | null
+          likes_count?: number | null
+          name?: string | null
+          show_label_chips?: boolean | null
+          spots_count?: never
+          thumbnail_url?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          article_intro?: Json | null
+          article_outro?: Json | null
+          bookmarks_count?: number | null
+          category_id?: string | null
+          comments_count?: number | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          is_article_public?: boolean | null
+          is_official?: boolean | null
+          is_public?: boolean | null
+          language?: string | null
+          likes_count?: number | null
+          name?: string | null
+          show_label_chips?: boolean | null
+          spots_count?: never
+          thumbnail_url?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "maps_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "maps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_latest_agreements: {
         Row: {
@@ -2801,6 +2982,30 @@ export type Database = {
           prefecture_id: string
         }[]
       }
+      get_following_mixed_feed: {
+        Args: { p_cursor?: string; p_limit?: number; p_user_id: string }
+        Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+        SetofOptions: {
+          from: "*"
+          to: "mixed_feed_item"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_mixed_feed: {
+        Args: {
+          p_current_user_id?: string
+          p_cursor?: string
+          p_limit?: number
+        }
+        Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+        SetofOptions: {
+          from: "*"
+          to: "mixed_feed_item"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_notification_settings: {
         Args: never
         Returns: {
@@ -2928,14 +3133,12 @@ export type Database = {
       search_public_spots: {
         Args: { result_limit?: number; search_query: string }
         Returns: {
-          article_content: Json
           comments_count: number
           created_at: string
           description: string
           google_formatted_address: Json
           google_short_address: Json
           id: string
-          image_urls: string[]
           images_count: number
           is_public: boolean
           label_color: string
@@ -2958,7 +3161,6 @@ export type Database = {
           name: Json
           order_index: number
           spot_color: string
-          tags: Json
           updated_at: string
           user_avatar_url: string
           user_display_name: string
@@ -3621,6 +3823,62 @@ export type Database = {
       geometry_dump: {
         path: number[] | null
         geom: unknown
+      }
+      mixed_feed_item: {
+        item_type: string | null
+        item_id: string | null
+        created_at: string | null
+        map_id: string | null
+        map_name: string | null
+        map_description: string | null
+        map_thumbnail_url: string | null
+        map_is_public: boolean | null
+        map_is_article_public: boolean | null
+        map_spots_count: number | null
+        map_likes_count: number | null
+        map_bookmarks_count: number | null
+        map_comments_count: number | null
+        map_category_id: string | null
+        map_language: string | null
+        map_user_id: string | null
+        map_user_username: string | null
+        map_user_display_name: string | null
+        map_user_avatar_url: string | null
+        map_tags: Json | null
+        spot_id: string | null
+        spot_user_id: string | null
+        spot_map_id: string | null
+        spot_master_spot_id: string | null
+        spot_machi_id: string | null
+        spot_description: string | null
+        spot_spot_color: string | null
+        spot_label_id: string | null
+        spot_name: Json | null
+        spot_images_count: number | null
+        spot_likes_count: number | null
+        spot_bookmarks_count: number | null
+        spot_comments_count: number | null
+        spot_order_index: number | null
+        spot_latitude: number | null
+        spot_longitude: number | null
+        spot_google_formatted_address: Json | null
+        spot_google_short_address: Json | null
+        spot_is_public: boolean | null
+        spot_article_content: Json | null
+        spot_master_spot_name: Json | null
+        spot_master_spot_latitude: number | null
+        spot_master_spot_longitude: number | null
+        spot_master_spot_google_place_id: string | null
+        spot_master_spot_google_formatted_address: Json | null
+        spot_master_spot_google_short_address: Json | null
+        spot_master_spot_google_types: string[] | null
+        spot_user_username: string | null
+        spot_user_display_name: string | null
+        spot_user_avatar_url: string | null
+        spot_map_name: string | null
+        spot_map_is_public: boolean | null
+        spot_image_urls: Json | null
+        spot_tags: Json | null
       }
       valid_detail: {
         valid: boolean | null

@@ -205,6 +205,8 @@ export default {
     label: '标签',
     spotColor: '地点颜色',
     labelColorNotice: '※设置标签后，标签颜色优先',
+    visibilitySettings: '公开设置',
+    visibilityDescription: '设为非公开后，其他用户将看不到此地点',
     photos: '照片',
     registering: '注册中...',
     registerSpotButton: '注册地点',
@@ -456,6 +458,11 @@ export default {
     mapData: '地图数据',
     statisticalData: '统计数据',
     externalApi: '外部API',
+    // 缓存
+    clearCache: '清除缓存',
+    clearCacheConfirm: '清除缓存？',
+    clearCacheDescription: '将删除临时存储的数据。清除后，数据将重新获取。',
+    clearCacheSuccess: '缓存已清除',
     // 语言设置
     displayLanguage: '显示语言',
     displayLanguageDescription: '在设备设置中更改',

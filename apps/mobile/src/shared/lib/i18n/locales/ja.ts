@@ -189,7 +189,7 @@ export default {
     currentLocationInfo: '現在地から登録',
     mapPinInfo: '地図上で選択した位置',
     originalSpotName: 'スポット名（元）',
-    oneWordRequired: 'このスポットの特徴を簡潔に',
+    oneWordRequired: 'このスポットを一言で',
     oneWordPlaceholder: '例：最高のラーメン屋',
     spotSummary: 'スポットの概要',
     summaryPlaceholder: 'このスポットの魅力を簡潔に',
@@ -203,6 +203,8 @@ export default {
     label: 'ラベル',
     spotColor: 'スポットの色',
     labelColorNotice: '※ラベルが設定されている場合、ラベルの色が優先されます',
+    visibilitySettings: '公開設定',
+    visibilityDescription: '非公開にすると、他のユーザーからこのスポットが見えなくなります',
     photos: '写真',
     registering: '登録中...',
     registerSpotButton: 'スポットを登録',
@@ -469,6 +471,11 @@ export default {
     mapData: '地図データ',
     statisticalData: '統計データ',
     externalApi: '外部API',
+    // キャッシュ
+    clearCache: 'キャッシュをクリア',
+    clearCacheConfirm: 'キャッシュをクリアしますか？',
+    clearCacheDescription: '一時的に保存されたデータを削除します。削除後、データは再度取得されます。',
+    clearCacheSuccess: 'キャッシュをクリアしました',
   },
 
   // 検索

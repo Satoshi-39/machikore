@@ -205,6 +205,8 @@ export default {
     label: '標籤',
     spotColor: '地點顏色',
     labelColorNotice: '※設定標籤後，標籤顏色優先',
+    visibilitySettings: '公開設定',
+    visibilityDescription: '設為非公開後，其他用戶將看不到此地點',
     photos: '照片',
     registering: '註冊中...',
     registerSpotButton: '註冊地點',
@@ -456,6 +458,11 @@ export default {
     mapData: '地圖資料',
     statisticalData: '統計資料',
     externalApi: '外部API',
+    // 快取
+    clearCache: '清除快取',
+    clearCacheConfirm: '清除快取？',
+    clearCacheDescription: '將刪除暫時儲存的資料。清除後，資料將重新取得。',
+    clearCacheSuccess: '快取已清除',
     // 語言設定
     displayLanguage: '顯示語言',
     displayLanguageDescription: '在裝置設定中更改',

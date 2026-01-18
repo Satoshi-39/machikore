@@ -205,6 +205,8 @@ export default {
     label: 'Label',
     spotColor: 'Spot Color',
     labelColorNotice: '*Label color takes priority when a label is set',
+    visibilitySettings: 'Visibility',
+    visibilityDescription: 'When set to private, other users cannot see this spot',
     photos: 'Photos',
     registering: 'Registering...',
     registerSpotButton: 'Register Spot',
@@ -456,6 +458,11 @@ export default {
     mapData: 'Map Data',
     statisticalData: 'Statistical Data',
     externalApi: 'External APIs',
+    // Cache
+    clearCache: 'Clear Cache',
+    clearCacheConfirm: 'Clear cache?',
+    clearCacheDescription: 'This will delete temporarily stored data. Data will be fetched again after clearing.',
+    clearCacheSuccess: 'Cache cleared',
     // Language settings
     displayLanguage: 'Display Language',
     displayLanguageDescription: 'Change in device settings',

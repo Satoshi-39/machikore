@@ -3,9 +3,11 @@
  *
  * API層は生データ（JSONB型）をそのまま返す
  * 住所の言語抽出は表示層（entities/widgets）で行う
+ * cursor方式のページネーション対応
  */
 
 import { supabase, handleSupabaseError } from '../client';
+import { FEED_PAGE_SIZE } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 
 /** 共通のスポット取得オプション */
@@ -13,7 +15,7 @@ interface FetchSpotsOptions {
   mapId?: string;
   publicOnly?: boolean;
   limit?: number;
-  offset?: number;
+  cursor?: string;
   currentUserId?: string | null;
   orderBy?: 'order_index' | 'created_at';
 }
@@ -46,6 +48,13 @@ const SPOTS_SELECT = `
     id,
     cloud_path,
     order_index
+  ),
+  spot_tags (
+    tags (
+      id,
+      name,
+      slug
+    )
   )
 `;
 
@@ -55,6 +64,9 @@ const SPOTS_SELECT = `
 function toSpotWithDetails(spot: any, currentUserId?: string | null): SpotWithDetails {
   const isLiked = currentUserId
     ? (spot.likes || []).some((like: any) => like.user_id === currentUserId)
+    : false;
+  const isBookmarked = currentUserId
+    ? (spot.bookmarks || []).some((bookmark: any) => bookmark.user_id === currentUserId)
     : false;
 
   return {
@@ -93,24 +105,30 @@ function toSpotWithDetails(spot: any, currentUserId?: string | null): SpotWithDe
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
     is_liked: isLiked,
+    is_bookmarked: isBookmarked,
+    is_public: spot.is_public,
     article_content: spot.article_content || null,
     // 画像URLの配列（imagesをorder_indexでソートしてcloud_pathを抽出）
     image_urls: (spot.images || [])
       .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0))
       .map((img: any) => img.cloud_path)
       .filter(Boolean),
+    // タグ情報（spot_tagsからタグを抽出）
+    tags: (spot.spot_tags || [])
+      .map((st: any) => st.tags)
+      .filter(Boolean),
   };
 }
 
 /**
- * 内部共通関数：スポット一覧を取得
+ * 内部共通関数：スポット一覧を取得（cursor方式ページネーション対応）
  */
 async function fetchSpots(options: FetchSpotsOptions): Promise<SpotWithDetails[]> {
   const {
     mapId,
     publicOnly = false,
     limit,
-    offset,
+    cursor,
     currentUserId,
     orderBy = 'order_index',
   } = options;
@@ -124,13 +142,19 @@ async function fetchSpots(options: FetchSpotsOptions): Promise<SpotWithDetails[]
   }
 
   if (publicOnly) {
-    query = query.eq('maps.is_public', true);
+    // 公開マップの公開スポットのみ
+    query = query.eq('is_public', true).eq('maps.is_public', true);
   }
 
   query = query.order(orderBy, { ascending: orderBy === 'order_index' });
 
-  if (limit !== undefined && offset !== undefined) {
-    query = query.range(offset, offset + limit - 1);
+  if (limit !== undefined) {
+    query = query.limit(limit);
+  }
+
+  // cursorが指定されている場合、その時刻より古いものを取得
+  if (cursor && orderBy === 'created_at') {
+    query = query.lt('created_at', cursor);
   }
 
   const { data, error } = await query;
@@ -153,12 +177,15 @@ export async function getSpotsByMapId(
 }
 
 /**
- * 公開スポット一覧を取得
+ * 公開スポット一覧を取得（cursor方式ページネーション対応）
+ * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（created_at、この値より古いものを取得）
+ * @param currentUserId 現在のユーザーID（いいね状態取得用）
  */
 export async function getPublicSpots(
-  limit: number = 50,
-  offset: number = 0,
+  limit: number = FEED_PAGE_SIZE,
+  cursor?: string,
   currentUserId?: string | null
 ): Promise<SpotWithDetails[]> {
-  return fetchSpots({ publicOnly: true, limit, offset, currentUserId, orderBy: 'created_at' });
+  return fetchSpots({ publicOnly: true, limit, cursor, currentUserId, orderBy: 'created_at' });
 }

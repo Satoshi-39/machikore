@@ -4,7 +4,7 @@
  * スポットを表示するカード型コンポーネント
  * SpotWithDetails（詳細画面用）とUserSpotSearchResult（検索/フィード用）に対応
  *
- * いいね状態は spot.is_liked を使用（取得時にJOINで取得）
+ * いいね状態はuseCheckSpotLikedでDBから直接取得
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
@@ -14,7 +14,7 @@ import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, SpotThumbnail } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
@@ -25,10 +25,11 @@ import { formatRelativeTime } from '@/shared/lib/utils';
 import { isEmptyArticle } from '@/shared/lib/utils/article.utils';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import { useSpotImages } from '@/entities/user-spot/api';
-import { useToggleSpotLike } from '@/entities/like';
+import { useToggleSpotLike, useCheckSpotLiked } from '@/entities/like';
 import { useUser } from '@/entities/user';
-import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
+import { useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { LikersModal } from '@/features/view-likers';
 import { ImageGrid } from '@/widgets/image-grid';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -93,10 +94,10 @@ export function SpotCard({
   const { data: fetchedUser } = useUser(embeddedUser ? null : spot.user_id);
   const user = embeddedUser || fetchedUser;
 
-  // いいね状態は spot.is_liked を使用（SpotWithDetails の場合）
-  const isLiked = 'is_liked' in spot ? (spot.is_liked ?? false) : false;
+  // いいね状態はDBから直接取得（MapLikeButtonと同じパターン）
+  const { data: isLiked = false } = useCheckSpotLiked(currentUserId, spot.id);
 
-  // タグ情報を取得（UserSpotSearchResult の場合のみ）
+  // タグ情報を取得（SpotWithDetails または UserSpotSearchResult の場合）
   const tags: TagBasicInfo[] | undefined = 'tags' in spot ? spot.tags : undefined;
 
   // 記事コンテンツを取得（SpotWithDetails または UserSpotSearchResult の場合）
@@ -131,17 +132,12 @@ export function SpotCard({
     ? embeddedImageUrls.map((url, idx) => ({ id: `embedded-${idx}`, cloud_path: url, local_path: null }))
     : fetchedImages;
 
-  // ブックマーク状態
-  const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
-  const isBookmarked = bookmarkInfo.length > 0;
-  // ブックマーク済みフォルダIDのSetを作成
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
+  // ブックマーク状態（JOINで取得済みのデータを使用）
+  const isBookmarked = spot.is_bookmarked ?? false;
   const { mutate: addBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   // 記事展開状態
   const [isArticleExpanded, setIsArticleExpanded] = useState(false);
@@ -224,6 +220,11 @@ export function SpotCard({
     }
     if (isTogglingLike) return;
     toggleLike({ userId: currentUserId, spotId: spot.id });
+  };
+
+  const handleLikesCountPress = (e: any) => {
+    e.stopPropagation();
+    setIsLikersModalVisible(true);
   };
 
   // ブックマーク処理（フォルダ選択モーダルを開く）
@@ -346,6 +347,15 @@ export function SpotCard({
         <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-1">
           {spotName}
         </Text>
+        {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
+        {isOwner && 'is_public' in spot && spot.is_public === false && (
+          <View className="ml-2 flex-row items-center bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
+            <Ionicons name="lock-closed" size={12} color={colors.gray[500]} />
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
+              {t('publicToggle.privateStatus')}
+            </Text>
+          </View>
+        )}
       </View>
 
       {/* 一言（description） */}
@@ -355,27 +365,34 @@ export function SpotCard({
         </Text>
       )}
 
-      {/* 画像グリッド（X風2x2グリッド、最大4枚表示） */}
-      {(images.length > 0 || imagesLoading) && (
-        <View className="mb-2">
-          {imagesLoading ? (
-            // ローディング中はプレースホルダーを表示
-            <View
-              className="bg-muted dark:bg-dark-muted rounded-lg"
-              style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.6 }}
-            />
-          ) : (
-            <ImageGrid
-              images={images.map(img => img.cloud_path || img.local_path || '').filter(Boolean)}
-              containerWidth={screenWidth - 32}
-              onImagePress={(index) => {
-                const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
-                openImages(imageUrls, index);
-              }}
-            />
-          )}
-        </View>
-      )}
+      {/* 画像グリッド（X風2x2グリッド、最大4枚表示）または デフォルトサムネイル */}
+      <View className="mb-2">
+        {imagesLoading ? (
+          // ローディング中はプレースホルダーを表示
+          <View
+            className="bg-muted dark:bg-dark-muted rounded-lg"
+            style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.6 }}
+          />
+        ) : images.length > 0 ? (
+          <ImageGrid
+            images={images.map(img => img.cloud_path || img.local_path || '').filter(Boolean)}
+            containerWidth={screenWidth - 32}
+            onImagePress={(index) => {
+              const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
+              openImages(imageUrls, index);
+            }}
+          />
+        ) : (
+          // 画像がない場合はデフォルトサムネイルを表示
+          <SpotThumbnail
+            url={null}
+            width={screenWidth - 32}
+            height={(screenWidth - 32) * 0.5}
+            borderRadius={12}
+            defaultIconSize={96}
+          />
+        )}
+      </View>
 
       {/* 画像拡大モーダル */}
       <ImageViewerModal
@@ -494,21 +511,27 @@ export function SpotCard({
         </Pressable>
 
         {/* いいね */}
-        <Pressable
-          onPress={handleLikePress}
-          className="flex-row items-center py-2 px-3"
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          disabled={isTogglingLike}
-        >
-          <Ionicons
-            name={isLiked ? 'heart' : 'heart-outline'}
-            size={18}
-            color={isLiked ? '#EF4444' : colors.text.secondary}
-          />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-            {spot.likes_count}
-          </Text>
-        </Pressable>
+        <View className="flex-row items-center py-2 px-3">
+          <Pressable
+            onPress={handleLikePress}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
+            disabled={isTogglingLike}
+          >
+            <Ionicons
+              name={isLiked ? 'heart' : 'heart-outline'}
+              size={18}
+              color={isLiked ? '#EF4444' : colors.text.secondary}
+            />
+          </Pressable>
+          <Pressable
+            onPress={handleLikesCountPress}
+            hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+          >
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+              {spot.likes_count}
+            </Text>
+          </Pressable>
+        </View>
 
         {/* ブックマーク */}
         <Pressable
@@ -519,7 +542,7 @@ export function SpotCard({
           <Ionicons
             name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
             size={18}
-            color={isBookmarked ? colors.primary.DEFAULT : colors.text.secondary}
+            color={colors.text.secondary}
           />
         </Pressable>
 
@@ -543,12 +566,20 @@ export function SpotCard({
           visible={isFolderModalVisible}
           userId={currentUserId}
           folderType="spots"
+          spotId={spot.id}
           onClose={() => setIsFolderModalVisible(false)}
           onAddToFolder={handleAddToFolder}
           onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
+
+      {/* いいねユーザー一覧モーダル */}
+      <LikersModal
+        visible={isLikersModalVisible}
+        spotId={spot.id}
+        onClose={() => setIsLikersModalVisible(false)}
+        onUserPress={onUserPress}
+      />
     </Pressable>
   );
 }

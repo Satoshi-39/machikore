@@ -10,6 +10,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { ReactNativeLegal } from 'react-native-legal';
 import { useSignOut } from '@/features/auth';
+import { ClearCacheButton } from '@/features/clear-cache';
 import { PageHeader, Switch } from '@/shared/ui';
 import { colors, EXTERNAL_LINKS } from '@/shared/config';
 import { useThemePreference } from '@/entities/user/api';
@@ -258,6 +259,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             value="v1.0.0"
             onPress={showComingSoon}
           />
+          <ClearCacheButton />
         </SettingsSection>
 
         {/* アカウント操作 */}
