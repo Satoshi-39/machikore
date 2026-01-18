@@ -201,6 +201,7 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
           onReply={handleReply}
           onRefresh={refetch}
           isRefreshing={isLoading}
+          isLoading={isLoadingComments}
           ListHeaderComponent={renderSpotHeader}
           onEndReached={() => {
             if (hasNextPage && !isFetchingNextPage) {

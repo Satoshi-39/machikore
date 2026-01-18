@@ -199,6 +199,7 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
           onReply={handleReply}
           onRefresh={refetch}
           isRefreshing={isLoading}
+          isLoading={isLoadingComments}
           ListHeaderComponent={renderMapHeader}
           onEndReached={() => {
             if (hasNextPage && !isFetchingNextPage) {

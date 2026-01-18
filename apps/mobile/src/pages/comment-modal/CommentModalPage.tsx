@@ -11,6 +11,7 @@ import {
   Text,
   Pressable,
   Keyboard,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
@@ -119,6 +120,7 @@ export function CommentModalPage({
 
   const commentsQuery = type === 'spot' ? spotCommentsQuery : mapCommentsQuery;
   const comments = commentsQuery.data?.pages.flat() ?? [];
+  const isLoadingComments = commentsQuery.isLoading;
 
   // focusCommentIdが指定されている場合、モーダルが開いてから返信詳細モードに遷移
   // 一瞬コメント一覧を見せてから遷移するため、遅延を入れる
@@ -315,17 +317,23 @@ export function CommentModalPage({
     [currentUserId, handleUserPress, handleEdit, handleDeleteConfirm, handleLike, handleReply, handleShowReplies]
   );
 
-  // 空の場合の表示
+  // 空の場合の表示（ローディング中はスピナー、読み込み完了後は「コメントがありません」）
   const renderEmptyComponent = useCallback(
     () => (
       <View className="flex-1 items-center justify-center py-12">
-        <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
-        <Text className="mt-4 text-foreground-muted dark:text-dark-foreground-muted">
-          {t('comment.noComments')}
-        </Text>
+        {isLoadingComments ? (
+          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        ) : (
+          <>
+            <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
+            <Text className="mt-4 text-foreground-muted dark:text-dark-foreground-muted">
+              {t('comment.noComments')}
+            </Text>
+          </>
+        )}
       </View>
     ),
-    [t]
+    [t, isLoadingComments]
   );
 
   return (

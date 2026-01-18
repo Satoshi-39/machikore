@@ -24,6 +24,8 @@ interface CommentListProps {
   onReply?: (comment: CommentWithUser) => void;
   onRefresh?: () => void;
   isRefreshing?: boolean;
+  /** 初回ローディング中フラグ */
+  isLoading?: boolean;
   ListHeaderComponent?: React.ComponentType<any> | React.ReactElement | null;
   /** 無限スクロール: 末端到達時のコールバック */
   onEndReached?: () => void;
@@ -119,6 +121,7 @@ export function CommentList({
   onReply,
   onRefresh,
   isRefreshing = false,
+  isLoading = false,
   ListHeaderComponent,
   onEndReached,
   isFetchingNextPage = false,
@@ -191,10 +194,16 @@ export function CommentList({
 
   const renderEmpty = useCallback(() => (
     <View className="flex-1 justify-center items-center py-20">
-      <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
-      <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('comment.noComments')}</Text>
+      {isLoading ? (
+        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+      ) : (
+        <>
+          <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
+          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('comment.noComments')}</Text>
+        </>
+      )}
     </View>
-  ), [t]);
+  ), [t, isLoading]);
 
   // 次ページ読み込み中のローディング表示
   const renderFooter = useCallback(() => {
